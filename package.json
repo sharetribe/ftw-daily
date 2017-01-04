@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "0.8.4"
+    "react-scripts": "file:../create-react-app/packages/react-scripts"
   },
   "dependencies": {
     "react": "^15.4.1",
