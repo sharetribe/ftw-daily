@@ -11,6 +11,8 @@ if (typeof window !== 'undefined') {
   );
 }
 
-export default function render() {
+export default function render(url, serverContext) {
+  // TODO: Use ServerRouter from react-router
+  console.log(`src/index.js: render() url: ${url}, serverContext: ${serverContext}`);
   return renderToString(<App />);
 }
