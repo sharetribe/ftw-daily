@@ -14,16 +14,32 @@ const mainJsPath = path.join(buildPath, manifest['main.js']);
 const renderApp = require(mainJsPath).default;
 
 const indexHtml = fs.readFileSync(path.join(buildPath, 'index.html'), 'utf-8');
+const reNoMatch = /($^)/;
 
 const template = _.template(indexHtml, {
-  // Escape variables with syntax: %-variableName%
-  escape: /%-([\s\S]+?)%/g,
 
-  // Interpolate variables without escaping with syntax: %=variableName%
-  interpolate: /%=([\s\S]+?)%/g,
+  // Interpolate variables in the HTML template with the following
+  // syntax: <!--!variableName-->
+  //
+  // This syntax is very intentional: it works as a HTML comment and
+  // doesn't render anything visual in the dev mode, and in the
+  // production mode, HtmlWebpackPlugin strips out comments using
+  // HTMLMinifier except those that aren't explicitly marked as custom
+  // comments. By default, custom comments are those that begin with a
+  // ! character.
+  //
+  // Note that the variables are _not_ escaped since we only inject
+  // HTML content.
+  //
+  // See:
+  // - https://github.com/ampedandwired/html-webpack-plugin
+  // - https://github.com/kangax/html-minifier
+  // - Plugin options in the production Webpack configuration file
+  interpolate: /<!--!([\s\S]+?)-->/g,
 
-  // Disable evaluation in the template by not matching anything
-  evaluate: /($^)/
+  // Disable evaluated and escaped variables in the template
+  evaluate: reNoMatch,
+  escape: reNoMatch,
 });
 
 function render(url, context) {
