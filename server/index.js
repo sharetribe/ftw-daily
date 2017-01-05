@@ -1,3 +1,5 @@
+require('source-map-support').install();
+
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -24,10 +26,11 @@ const template = _.template(indexHtml, {
   evaluate: /($^)/
 });
 
-function render(url, context, title) {
+function render(url, context) {
+  const { head, body } = renderApp(url, context)
   return template({
-    title,
-    body: renderApp(url, context)
+    title: head.title.toString(),
+    body
   });
 }
 
@@ -37,12 +40,8 @@ const app = express();
 app.use('/static', express.static(path.join(buildPath, 'static')));
 
 app.get('*', (req, res) => {
-
-  // TODO: use react-helmet for metadata handling
-  const title = 'Sharetribe Starter <b>App</b>';
-
   const context = createServerRenderContext();
-  const html = render(req.url, context, title);
+  const html = render(req.url, context);
   const result = context.getResult();
 
   if (result.redirect) {
