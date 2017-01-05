@@ -12,11 +12,14 @@ const ClientApp = () => (
   </BrowserRouter>
 );
 
-const ServerApp = (props) => (
-  <ServerRouter { ...props } >
-    <Routes />
-  </ServerRouter>
-);
+const ServerApp = (props) => {
+  const { url, context } = props;
+  return (
+    <ServerRouter location={ url } context={ context } >
+      <Routes />
+    </ServerRouter>
+  );
+};
 
 if (typeof window !== 'undefined') {
   ReactDOM.render(<ClientApp />, document.getElementById('root'));
