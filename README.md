@@ -8,9 +8,8 @@
 
 ## Development
 
-    npm start
+    npm run dev
 
 ## Server
 
-    npm run build
-    node server/index.js
+    npm start
