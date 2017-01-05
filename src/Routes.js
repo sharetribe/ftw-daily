@@ -1,6 +1,6 @@
 import React from 'react';
 import { Match, Miss, Redirect } from 'react-router';
-import * as pages from './pages';
+import { HomePage, SearchPage, NotFoundPage } from './containers';
 
 const RedirectTestPage = () => (
   <Redirect to="/" />
@@ -8,10 +8,10 @@ const RedirectTestPage = () => (
 
 const Routes = () => (
   <div>
-    <Match exactly pattern="/" component={ pages.Home } />
-    <Match exactly pattern="/search" component={ pages.Search } />
+    <Match exactly pattern="/" component={ HomePage } />
+    <Match exactly pattern="/search" component={ SearchPage } />
     <Match exactly pattern="/home" component={ RedirectTestPage } />
-    <Miss component={ pages.NotFound } />
+    <Miss component={ NotFoundPage } />
   </div>
 );
 
