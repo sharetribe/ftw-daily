@@ -21,6 +21,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "start": "node server/index.js",
-    "dev-server": "npm run build&&nodemon --watch server server/index.js"
+    "dev-server": "yarn run build&&nodemon --watch server server/index.js"
   }
 }

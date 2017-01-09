@@ -23,13 +23,13 @@ Clone this repository and install dependencies:
 To develop the application and to see changes live, start the frontend
 development server:
 
-    npm run dev
+    yarn run dev
 
 ## Development Server
 
 To develop the server setup, run:
 
-    npm run dev-server
+    yarn run dev-server
 
 This runs the frontend production build and starts the Express.js
 server in `server/index.js` that renders the application routes in the
@@ -41,5 +41,5 @@ application code.
 
 ## Production Server
 
-    npm run build
-    npm start
+    yarn run build
+    yarn start
