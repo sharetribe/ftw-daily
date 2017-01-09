@@ -3,16 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "0.8.4"
+    "react-scripts": "file:../create-react-app/packages/react-scripts"
   },
   "dependencies": {
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "express": "^4.14.0",
+    "lodash": "^4.17.4",
+    "nodemon": "^1.11.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-helmet": "^3.3.0",
+    "react-router": "4.0.0-alpha.6"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "clean": "rm -rf build/*",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "node server/index.js",
+    "dev-server": "npm run build&&nodemon --watch server server/index.js"
   }
 }
