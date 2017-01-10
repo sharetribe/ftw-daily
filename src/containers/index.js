@@ -18,6 +18,7 @@ import SalesConversationPage from './SalesConversationPage/SalesConversationPage
 import SearchPage from './SearchPage/SearchPage';
 import SecurityPage from './SecurityPage/SecurityPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
+import Topbar from './Topbar/Topbar';
 
 export {
   AuthenticationPage,
@@ -40,4 +41,5 @@ export {
   SearchPage,
   SecurityPage,
   NotFoundPage,
+  Topbar,
 };
