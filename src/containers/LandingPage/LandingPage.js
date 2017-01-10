@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { Page } from '../../components';
 
 export default () => (
-  <Page title="Index page">
-    <Link to="/search">search page</Link>
+  <Page title="Landing page">
+    <Link to="/s?location=helsinki">Find studios</Link>
   </Page>
 );
