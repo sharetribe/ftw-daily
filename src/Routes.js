@@ -6,6 +6,7 @@ import {
   LandingPage,
   ListingPage,
   ProfilePage,
+  EditProfilePage,
   SearchPage,
   NotFoundPage,
 } from './containers';
@@ -63,6 +64,10 @@ class Routes extends React.Component {
 
         {/* profile / storefront view */}
         <Match exactly pattern="/u/:displayName" component={ ProfilePage } />
+        <MatchWhenAuthorized
+          exactly
+          pattern="/u/:displayName/edit"
+          component={ EditProfilePage } />
         <Match exactly pattern="/u" component={ RedirectLandingPage } />
 
         {/* checkout */}
