@@ -1,6 +1,11 @@
 import React from 'react';
 import { Match, Miss, Redirect } from 'react-router';
-import { LandingPage, SearchPage, NotFoundPage } from './containers';
+import {
+  LandingPage,
+  ListingPage,
+  SearchPage,
+  NotFoundPage,
+} from './containers';
 
 // This is only used for testing that redirects work correct in the
 // client and when rendering in the server.
@@ -12,6 +17,10 @@ const Routes = () => (
 
     {/* Search view */}
     <Match exactly pattern="/s" component={ SearchPage } />
+
+    {/* Listing view */}
+    <Match exactly pattern="/l/:slug" component={ ListingPage } />
+    <Match exactly pattern="/l" component={ RedirectLandingPage } />
     <Miss component={ NotFoundPage } />
   </div>
 );
