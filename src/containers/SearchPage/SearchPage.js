@@ -4,7 +4,6 @@ import { Page } from '../../components';
 
 export default () => (
   <Page title="Search page">
-    <Link to="/">index page</Link><br />
-    <Link to="/home">home page</Link>
+    <Link to="/l/Nice+studio-in-Helsinki-345">Nice studio in Helsinki</Link>
   </Page>
 );

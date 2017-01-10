@@ -8,8 +8,10 @@ const RedirectLandingPage = () => <Redirect to="/" />;
 
 const Routes = () => (
   <div>
-    <Match exactly pattern="/search" component={ SearchPage } />
     <Match exactly pattern="/" component={ LandingPage } />
+
+    {/* Search view */}
+    <Match exactly pattern="/s" component={ SearchPage } />
     <Miss component={ NotFoundPage } />
   </div>
 );
