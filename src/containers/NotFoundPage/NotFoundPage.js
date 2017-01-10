@@ -4,6 +4,6 @@ import { Page } from '../../components';
 
 export default () => (
   <Page title="Page not found">
-    <Link to="/">index page</Link>
+    <Link to="/">Index page</Link>
   </Page>
 );
