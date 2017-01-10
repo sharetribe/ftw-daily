@@ -3,6 +3,7 @@ import { Match, Miss, Redirect } from 'react-router';
 import {
   LandingPage,
   ListingPage,
+  ProfilePage,
   SearchPage,
   NotFoundPage,
 } from './containers';
@@ -21,6 +22,10 @@ const Routes = () => (
     {/* Listing view */}
     <Match exactly pattern="/l/:slug" component={ ListingPage } />
     <Match exactly pattern="/l" component={ RedirectLandingPage } />
+
+    {/* profile / storefront view */}
+    <Match exactly pattern="/u/:displayName" component={ ProfilePage } />
+    <Match exactly pattern="/u" component={ RedirectLandingPage } />
     <Miss component={ NotFoundPage } />
   </div>
 );
