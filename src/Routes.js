@@ -3,11 +3,14 @@ import { Match, Miss, Redirect } from 'react-router';
 import {
   AuthenticationPage,
   CheckoutPage,
+  ConversationPage,
   InboxPage,
   LandingPage,
   ListingPage,
+  OrderPage,
   ProfilePage,
   EditProfilePage,
+  SalesConversationPage,
   SearchPage,
   NotFoundPage,
 } from './containers';
@@ -101,6 +104,36 @@ class Routes extends React.Component {
           exactly
           pattern="/sales"
           component={ (props) => <InboxPage { ...props } filter="sales" /> } />
+
+        {/* Order/Conversation and mobile views */}
+        <MatchWhenAuthorized
+          exactly
+          pattern="/conversation/:id"
+          component={ ConversationPage } />
+        <MatchWhenAuthorized
+          exactly
+          pattern="/order/:id"
+          component={ (props) => <OrderPage { ...props } tab="discussion" /> } />
+        <MatchWhenAuthorized
+          exactly
+          pattern="/order/:id/discussion"
+          component={ (props) => <OrderPage { ...props } tab="discussion" /> } />
+        <MatchWhenAuthorized
+          exactly
+          pattern="/order/:id/details"
+          component={ (props) => <OrderPage { ...props } tab="details" /> } />
+        <MatchWhenAuthorized
+          exactly
+          pattern="/sale/:id"
+          component={ (props) => <SalesConversationPage { ...props } tab="discussion" /> } />
+        <MatchWhenAuthorized
+          exactly
+          pattern="/sale/:id/discussion"
+          component={ (props) => <SalesConversationPage { ...props } tab="discussion" /> } />
+        <MatchWhenAuthorized
+          exactly
+          pattern="/sale/:id/details"
+          component={ (props) => <SalesConversationPage { ...props } tab="details" /> } />
 
         <Miss component={ NotFoundPage } />
 
