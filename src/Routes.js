@@ -1,6 +1,7 @@
 import React from 'react';
 import { Match, Miss, Redirect } from 'react-router';
 import {
+  CheckoutPage,
   LandingPage,
   ListingPage,
   ProfilePage,
@@ -26,6 +27,9 @@ const Routes = () => (
     {/* profile / storefront view */}
     <Match exactly pattern="/u/:displayName" component={ ProfilePage } />
     <Match exactly pattern="/u" component={ RedirectLandingPage } />
+
+    {/* checkout */}
+    <Match exactly pattern="/checkout/:listingId" component={ CheckoutPage } />
     <Miss component={ NotFoundPage } />
   </div>
 );
