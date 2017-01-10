@@ -8,6 +8,7 @@ import {
   LandingPage,
   ListingPage,
   OrderPage,
+  PasswordChangePage,
   PasswordForgottenPage,
   ProfilePage,
   EditProfilePage,
@@ -97,6 +98,12 @@ class Routes extends React.Component {
           exactly
           pattern="/password/forgotten"
           component={ PasswordForgottenPage } />
+
+        {/* Change password */}
+        <Match
+          exactly
+          pattern="/password/change"
+          component={ PasswordChangePage } />
 
         {/* Inbox and filtered views */}
         <MatchWhenAuthorized

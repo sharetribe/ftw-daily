@@ -6,6 +6,7 @@ import InboxPage from './InboxPage/InboxPage';
 import LandingPage from './LandingPage/LandingPage';
 import ListingPage from './ListingPage/ListingPage';
 import OrderPage from './OrderPage/OrderPage';
+import PasswordChangePage from './PasswordChangePage/PasswordChangePage';
 import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage';
 import ProfilePage from './ProfilePage/ProfilePage';
 import SalesConversationPage from './SalesConversationPage/SalesConversationPage';
@@ -21,6 +22,7 @@ export {
   LandingPage,
   ListingPage,
   OrderPage,
+  PasswordChangePage,
   PasswordForgottenPage,
   ProfilePage,
   SalesConversationPage,
