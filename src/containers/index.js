@@ -7,6 +7,7 @@ import InboxPage from './InboxPage/InboxPage';
 import LandingPage from './LandingPage/LandingPage';
 import ListingPage from './ListingPage/ListingPage';
 import ManageListingsPage from './ManageListingsPage/ManageListingsPage';
+import NotificationSettingsPage from './NotificationSettingsPage/NotificationSettingsPage';
 import OrderPage from './OrderPage/OrderPage';
 import PasswordChangePage from './PasswordChangePage/PasswordChangePage';
 import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage';
@@ -26,6 +27,7 @@ export {
   LandingPage,
   ListingPage,
   ManageListingsPage,
+  NotificationSettingsPage,
   OrderPage,
   PasswordChangePage,
   PasswordForgottenPage,

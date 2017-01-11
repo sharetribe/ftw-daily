@@ -9,6 +9,7 @@ import {
   LandingPage,
   ListingPage,
   ManageListingsPage,
+  NotificationSettingsPage,
   OrderPage,
   PasswordChangePage,
   PasswordForgottenPage,
@@ -163,6 +164,10 @@ class Routes extends React.Component {
           exactly
           pattern="/account/contact-details"
           component={ ContactDetailsPage } />
+        <MatchWhenAuthorized
+          exactly
+          pattern="/account/notifications"
+          component={ NotificationSettingsPage } />
         <MatchWhenAuthorized
           exactly
           pattern="/account/security"
