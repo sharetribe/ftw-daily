@@ -12,6 +12,7 @@ import OrderPage from './OrderPage/OrderPage';
 import PasswordChangePage from './PasswordChangePage/PasswordChangePage';
 import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage';
 import PaymentMethodsPage from './PaymentMethodsPage/PaymentMethodsPage';
+import PayoutPreferencesPage from './PayoutPreferencesPage/PayoutPreferencesPage';
 import ProfilePage from './ProfilePage/ProfilePage';
 import SalesConversationPage from './SalesConversationPage/SalesConversationPage';
 import SearchPage from './SearchPage/SearchPage';
@@ -33,6 +34,7 @@ export {
   PasswordChangePage,
   PasswordForgottenPage,
   PaymentMethodsPage,
+  PayoutPreferencesPage,
   ProfilePage,
   SalesConversationPage,
   SearchPage,

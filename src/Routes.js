@@ -14,6 +14,7 @@ import {
   PasswordChangePage,
   PasswordForgottenPage,
   PaymentMethodsPage,
+  PayoutPreferencesPage,
   ProfilePage,
   EditProfilePage,
   SalesConversationPage,
@@ -173,6 +174,10 @@ class Routes extends React.Component {
           exactly
           pattern="/account/payment-methods"
           component={ PaymentMethodsPage } />
+        <MatchWhenAuthorized
+          exactly
+          pattern="/account/payout-preferences"
+          component={ PayoutPreferencesPage } />
         <MatchWhenAuthorized
           exactly
           pattern="/account/security"
