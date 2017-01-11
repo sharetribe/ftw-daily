@@ -164,6 +164,10 @@ class Routes extends React.Component {
         {/* Account settings */}
         <MatchWhenAuthorized
           exactly
+          pattern="/account"
+          component={ () => <Redirect to="/account/contact-details" /> } />
+        <MatchWhenAuthorized
+          exactly
           pattern="/account/contact-details"
           component={ ContactDetailsPage } />
         <MatchWhenAuthorized
