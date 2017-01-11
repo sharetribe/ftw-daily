@@ -5,6 +5,7 @@ import EditProfilePage from './EditProfilePage/EditProfilePage';
 import InboxPage from './InboxPage/InboxPage';
 import LandingPage from './LandingPage/LandingPage';
 import ListingPage from './ListingPage/ListingPage';
+import ManageListingsPage from './ManageListingsPage/ManageListingsPage';
 import OrderPage from './OrderPage/OrderPage';
 import PasswordChangePage from './PasswordChangePage/PasswordChangePage';
 import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage';
@@ -21,6 +22,7 @@ export {
   InboxPage,
   LandingPage,
   ListingPage,
+  ManageListingsPage,
   OrderPage,
   PasswordChangePage,
   PasswordForgottenPage,
