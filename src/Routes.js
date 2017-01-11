@@ -16,6 +16,7 @@ import {
   EditProfilePage,
   SalesConversationPage,
   SearchPage,
+  SecurityPage,
   NotFoundPage,
 } from './containers';
 
@@ -161,9 +162,12 @@ class Routes extends React.Component {
         <MatchWhenAuthorized
           exactly
           pattern="/account/contact-details"
-          component={
-            (props) => <ContactDetailsPage { ...props } router={router} />
-          } />
+          component={ ContactDetailsPage } />
+        <MatchWhenAuthorized
+          exactly
+          pattern="/account/security"
+          component={ SecurityPage } />
+
 
         <Miss component={ NotFoundPage } />
 

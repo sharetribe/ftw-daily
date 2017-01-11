@@ -13,6 +13,7 @@ import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage
 import ProfilePage from './ProfilePage/ProfilePage';
 import SalesConversationPage from './SalesConversationPage/SalesConversationPage';
 import SearchPage from './SearchPage/SearchPage';
+import SecurityPage from './SecurityPage/SecurityPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 
 export {
@@ -31,5 +32,6 @@ export {
   ProfilePage,
   SalesConversationPage,
   SearchPage,
+  SecurityPage,
   NotFoundPage,
 };
