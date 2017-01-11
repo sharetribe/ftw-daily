@@ -4,6 +4,7 @@ import {
   AuthenticationPage,
   CheckoutPage,
   ConversationPage,
+  ContactDetailsPage,
   InboxPage,
   LandingPage,
   ListingPage,
@@ -150,12 +151,21 @@ class Routes extends React.Component {
           pattern="/sale/:id/details"
           component={ (props) => <SalesConversationPage { ...props } tab="details" /> } />
 
-        <Miss component={ NotFoundPage } />
-
+        {/* Manage listings */}
         <MatchWhenAuthorized
           exactly
           pattern="/listings"
           component={ ManageListingsPage } />
+
+        {/* Account settings */}
+        <MatchWhenAuthorized
+          exactly
+          pattern="/account/contact-details"
+          component={
+            (props) => <ContactDetailsPage { ...props } router={router} />
+          } />
+
+        <Miss component={ NotFoundPage } />
 
       </div>
     );

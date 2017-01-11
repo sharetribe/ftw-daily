@@ -1,6 +1,7 @@
 import AuthenticationPage from './AuthenticationPage/AuthenticationPage';
 import CheckoutPage from './CheckoutPage/CheckoutPage';
 import ConversationPage from './ConversationPage/ConversationPage';
+import ContactDetailsPage from './ContactDetailsPage/ContactDetailsPage';
 import EditProfilePage from './EditProfilePage/EditProfilePage';
 import InboxPage from './InboxPage/InboxPage';
 import LandingPage from './LandingPage/LandingPage';
@@ -18,6 +19,7 @@ export {
   AuthenticationPage,
   CheckoutPage,
   ConversationPage,
+  ContactDetailsPage,
   EditProfilePage,
   InboxPage,
   LandingPage,
