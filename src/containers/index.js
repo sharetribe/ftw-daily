@@ -11,6 +11,7 @@ import NotificationSettingsPage from './NotificationSettingsPage/NotificationSet
 import OrderPage from './OrderPage/OrderPage';
 import PasswordChangePage from './PasswordChangePage/PasswordChangePage';
 import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage';
+import PaymentMethodsPage from './PaymentMethodsPage/PaymentMethodsPage';
 import ProfilePage from './ProfilePage/ProfilePage';
 import SalesConversationPage from './SalesConversationPage/SalesConversationPage';
 import SearchPage from './SearchPage/SearchPage';
@@ -31,6 +32,7 @@ export {
   OrderPage,
   PasswordChangePage,
   PasswordForgottenPage,
+  PaymentMethodsPage,
   ProfilePage,
   SalesConversationPage,
   SearchPage,

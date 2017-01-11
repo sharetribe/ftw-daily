@@ -13,6 +13,7 @@ import {
   OrderPage,
   PasswordChangePage,
   PasswordForgottenPage,
+  PaymentMethodsPage,
   ProfilePage,
   EditProfilePage,
   SalesConversationPage,
@@ -168,6 +169,10 @@ class Routes extends React.Component {
           exactly
           pattern="/account/notifications"
           component={ NotificationSettingsPage } />
+        <MatchWhenAuthorized
+          exactly
+          pattern="/account/payment-methods"
+          component={ PaymentMethodsPage } />
         <MatchWhenAuthorized
           exactly
           pattern="/account/security"
