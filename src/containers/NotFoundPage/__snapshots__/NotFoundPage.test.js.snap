@@ -1,0 +1,15 @@
+exports[`NotFoundPage matches snapshot 1`] = `
+<div
+  className={undefined}>
+  <h1>
+    Page not found
+  </h1>
+  <a
+    className=""
+    href="/"
+    onClick={[Function]}
+    style={Object {}}>
+    index page
+  </a>
+</div>
+`;

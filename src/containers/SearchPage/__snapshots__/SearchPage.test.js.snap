@@ -1,0 +1,23 @@
+exports[`SearchPage matches snapshot 1`] = `
+<div
+  className={undefined}>
+  <h1>
+    Search page
+  </h1>
+  <a
+    className=""
+    href="/"
+    onClick={[Function]}
+    style={Object {}}>
+    index page
+  </a>
+  <br />
+  <a
+    className=""
+    href="/home"
+    onClick={[Function]}
+    style={Object {}}>
+    home page
+  </a>
+</div>
+`;
