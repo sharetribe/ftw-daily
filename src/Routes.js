@@ -29,16 +29,17 @@ const RedirectLandingPage = () => <Redirect to="/" />;
 
 // Fake authentication module
 // An example from react-router v4 repository
+// This will be replaced once we have redux store and sdk
 export const fakeAuth = {
   isAuthenticated: false,
   authenticate(cb) {
     this.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
+    window.setTimeout(cb, 100); // fake async
   },
   signout(cb) {
     this.isAuthenticated = false;
     cb();
-    setTimeout(cb, 100); // weird bug if async?
+    window.setTimeout(cb, 100); // weird bug if async?
   }
 };
 
