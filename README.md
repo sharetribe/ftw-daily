@@ -52,5 +52,9 @@ See more in the [testing documentation](docs/testing.md).
 
 ## Production Server
 
+Ensure that the `NODE_ENV` environment variable is set to `production`
+and run:
+
+    yarn install
     yarn run build
     yarn start
