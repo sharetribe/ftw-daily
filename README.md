@@ -38,6 +38,10 @@ in the `server/` directory.
 Not that this server does **not** pick up changes in the frontend
 application code.
 
+## Tests
+
+    yarn test
+
 ## Production Server
 
     npm run build
