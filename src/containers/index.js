@@ -30,6 +30,7 @@ export {
   LandingPage,
   ListingPage,
   ManageListingsPage,
+  NotFoundPage,
   NotificationSettingsPage,
   OrderPage,
   PasswordChangePage,
@@ -40,6 +41,5 @@ export {
   SalesConversationPage,
   SearchPage,
   SecurityPage,
-  NotFoundPage,
   Topbar,
 };

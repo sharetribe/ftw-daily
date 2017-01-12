@@ -5,10 +5,12 @@ import {
   CheckoutPage,
   ConversationPage,
   ContactDetailsPage,
+  EditProfilePage,
   InboxPage,
   LandingPage,
   ListingPage,
   ManageListingsPage,
+  NotFoundPage,
   NotificationSettingsPage,
   OrderPage,
   PasswordChangePage,
@@ -16,11 +18,9 @@ import {
   PaymentMethodsPage,
   PayoutPreferencesPage,
   ProfilePage,
-  EditProfilePage,
   SalesConversationPage,
   SearchPage,
   SecurityPage,
-  NotFoundPage,
 } from './containers';
 
 // This is only used for testing that redirects work correct in the
