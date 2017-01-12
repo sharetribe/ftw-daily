@@ -12,7 +12,8 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-helmet": "^3.3.0",
-    "react-router": "4.0.0-alpha.6"
+    "react-router": "4.0.0-alpha.6",
+    "react-test-renderer": "^15.4.2"
   },
   "scripts": {
     "clean": "rm -rf build/*",
