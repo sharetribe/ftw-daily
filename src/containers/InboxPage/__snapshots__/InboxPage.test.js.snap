@@ -1,4 +1,4 @@
-exports[`NotFoundPage matches snapshot 1`] = `
+exports[`InboxPage matches snapshot 1`] = `
 <div
   className={undefined}>
   <div
@@ -135,14 +135,18 @@ exports[`NotFoundPage matches snapshot 1`] = `
     </button>
   </div>
   <h1>
-    Page not found
+    undefined page
   </h1>
-  <a
-    className=""
-    href="/"
-    onClick={[Function]}
-    style={Object {}}>
-    Index page
-  </a>
+  <ul>
+    <li>
+      <a
+        className=""
+        href="/conversation/1234"
+        onClick={[Function]}
+        style={Object {}}>
+        Single thread
+      </a>
+    </li>
+  </ul>
 </div>
 `;

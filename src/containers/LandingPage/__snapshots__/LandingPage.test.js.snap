@@ -1,4 +1,4 @@
-exports[`NotFoundPage matches snapshot 1`] = `
+exports[`LandingPage matches snapshot 1`] = `
 <div
   className={undefined}>
   <div
@@ -135,14 +135,14 @@ exports[`NotFoundPage matches snapshot 1`] = `
     </button>
   </div>
   <h1>
-    Page not found
+    Landing page
   </h1>
   <a
     className=""
-    href="/"
+    href="/s?location=helsinki"
     onClick={[Function]}
     style={Object {}}>
-    Index page
+    Find studios
   </a>
 </div>
 `;
