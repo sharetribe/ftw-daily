@@ -65,7 +65,7 @@ const template = _.template(indexHtml, {
 });
 
 function render(url, context) {
-  const { head, body } = renderApp(url, context)
+  const { head, body } = renderApp(url, context);
   return template({
     title: head.title.toString(),
     body
