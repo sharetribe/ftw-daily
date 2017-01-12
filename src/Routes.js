@@ -3,6 +3,7 @@ import { Match, Miss, Redirect } from 'react-router';
 import {
   AuthenticationPage,
   CheckoutPage,
+  InboxPage,
   LandingPage,
   ListingPage,
   ProfilePage,
@@ -87,6 +88,19 @@ class Routes extends React.Component {
             (props) => <AuthenticationPage { ...props } tab='signup' />
           } />
 
+        {/* Inbox and filtered views */}
+        <MatchWhenAuthorized
+          exactly
+          pattern="/inbox"
+          component={ (props) => <InboxPage { ...props } filter="inbox" /> } />
+        <MatchWhenAuthorized
+          exactly
+          pattern="/orders"
+          component={ (props) => <InboxPage { ...props } filter="orders" /> } />
+        <MatchWhenAuthorized
+          exactly
+          pattern="/sales"
+          component={ (props) => <InboxPage { ...props } filter="sales" /> } />
 
         <Miss component={ NotFoundPage } />
 
