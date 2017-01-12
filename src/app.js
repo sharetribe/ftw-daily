@@ -4,9 +4,11 @@ import Helmet from 'react-helmet';
 import { BrowserRouter, ServerRouter } from 'react-router';
 import Routes from './Routes';
 
+const RoutesWithRouterProp = ({ router }) => <Routes router={router} />
+
 export const ClientApp = () => (
   <BrowserRouter>
-    <Routes />
+    { RoutesWithRouterProp }
   </BrowserRouter>
 );
 
@@ -14,7 +16,7 @@ export const ServerApp = (props) => {
   const { url, context } = props;
   return (
     <ServerRouter location={ url } context={ context } >
-      <Routes />
+      { RoutesWithRouterProp }
     </ServerRouter>
   );
 };
