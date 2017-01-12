@@ -6,6 +6,10 @@ with
 [create-react-app](https://github.com/facebookincubator/create-react-app) with
 some additions, namely server side rendering and a custom CSS setup.
 
+## Documentation
+
+Documentation can be found in the [docs directory](docs/).
+
 ## Getting started
 
 Install required tools:
@@ -40,7 +44,11 @@ application code.
 
 ## Tests
 
+To start the test watcher, run
+
     yarn test
+
+See more in the [testing documentation](docs/testing.md).
 
 ## Production Server
 
