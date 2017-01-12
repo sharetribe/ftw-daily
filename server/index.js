@@ -17,6 +17,7 @@
 require('source-map-support').install();
 
 const express = require('express');
+const helmet = require('helmet');
 const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
@@ -75,6 +76,10 @@ function render(url, context) {
 const PORT = process.env.port || 4000;
 const app = express();
 
+// The helmet middleware sets various HTTP headers to improve security.
+// See: https://www.npmjs.com/package/helmet
+app.use(helmet());
+
 app.use('/static', express.static(path.join(buildPath, 'static')));
 
 app.get('*', (req, res) => {
@@ -95,5 +100,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+  console.log(`Listening to port ${PORT} in ${process.env.NODE_ENV} mode`);
 });
