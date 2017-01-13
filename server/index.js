@@ -18,6 +18,7 @@ require('source-map-support').install();
 
 const express = require('express');
 const helmet = require('helmet');
+const compression = require('compression');
 const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
@@ -82,6 +83,7 @@ const app = express();
 // See: https://www.npmjs.com/package/helmet
 app.use(helmet());
 
+app.use(compression());
 app.use('/static', express.static(path.join(buildPath, 'static')));
 
 app.get('*', (req, res) => {

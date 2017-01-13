@@ -6,6 +6,7 @@
     "sharetribe-scripts": "0.8.4"
   },
   "dependencies": {
+    "compression": "^1.6.2",
     "express": "^4.14.0",
     "helmet": "^3.3.0",
     "lodash": "^4.17.4",
