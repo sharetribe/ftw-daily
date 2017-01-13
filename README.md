@@ -58,3 +58,5 @@ and run:
     yarn install
     yarn run build
     yarn start
+
+TODO: Heroku
