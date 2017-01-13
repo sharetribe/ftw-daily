@@ -1,4 +1,4 @@
-exports[`NotFoundPage matches snapshot 1`] = `
+exports[`OrderPage matches snapshot 1`] = `
 <div
   className={undefined}>
   <div
@@ -135,14 +135,36 @@ exports[`NotFoundPage matches snapshot 1`] = `
     </button>
   </div>
   <h1>
-    Page not found
+    Order page
   </h1>
+  <p>
+    Order id: 
+    1234
+  </p>
   <a
     className=""
-    href="/"
+    href="/order/1234/discussion"
     onClick={[Function]}
     style={Object {}}>
-    Index page
+    Discussion tab
   </a>
+  <br />
+  <a
+    className=""
+    href="/order/1234/details"
+    onClick={[Function]}
+    style={Object {}}>
+    Details tab
+  </a>
+  <p>
+    Mobile layout needs different views for discussion and details.
+  </p>
+  <p>
+    Discussion view is the default if route doesn\'t specify mobile tab (e.g. 
+    <i>
+      /order/1234
+    </i>
+    )
+  </p>
 </div>
 `;

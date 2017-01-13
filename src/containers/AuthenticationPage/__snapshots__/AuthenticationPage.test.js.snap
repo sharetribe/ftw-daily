@@ -1,4 +1,4 @@
-exports[`NotFoundPage matches snapshot 1`] = `
+exports[`AuthenticationPage matches snapshot 1`] = `
 <div
   className={undefined}>
   <div
@@ -135,14 +135,25 @@ exports[`NotFoundPage matches snapshot 1`] = `
     </button>
   </div>
   <h1>
-    Page not found
+    Authentication page: undefined tab
   </h1>
-  <a
-    className=""
-    href="/"
-    onClick={[Function]}
-    style={Object {}}>
-    Index page
-  </a>
+  <p>
+    You must log in to view the page at
+    <code />
+  </p>
+  <button
+    onClick={[Function]}>
+    Sign up
+  </button>
+  <p>
+    or 
+    <a
+      className=""
+      href="/login"
+      onClick={[Function]}
+      style={Object {}}>
+      Log in
+    </a>
+  </p>
 </div>
 `;

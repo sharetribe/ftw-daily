@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  background-color: #f9f9f9;
+  flex-direction: row;
+  width: 100vw;
+  height: 80px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.link {
+  margin: 0 10px;
+}
