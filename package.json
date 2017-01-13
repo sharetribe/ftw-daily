@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "express": "^4.14.0",
+    "helmet": "^3.3.0",
     "lodash": "^4.17.4",
     "nodemon": "^1.11.0",
     "react": "^15.4.2",
@@ -23,6 +24,6 @@
     "test-ci": "sharetribe-scripts test --env=jsdom --runInBand",
     "eject": "sharetribe-scripts eject",
     "start": "node server/index.js",
-    "dev-server": "npm run build&&nodemon --watch server server/index.js"
+    "dev-server": "yarn run build&&nodemon --watch server server/index.js"
   }
 }

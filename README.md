@@ -19,20 +19,20 @@ Install required tools:
 
 Clone this repository and install dependencies:
 
-    yarn
+    yarn install
 
 ## Development
 
 To develop the application and to see changes live, start the frontend
 development server:
 
-    npm run dev
+    yarn run dev
 
 ## Development Server
 
 To develop the server setup, run:
 
-    npm run dev-server
+    yarn run dev-server
 
 This runs the frontend production build and starts the Express.js
 server in `server/index.js` that renders the application routes in the
@@ -52,5 +52,9 @@ See more in the [testing documentation](docs/testing.md).
 
 ## Production Server
 
-    npm run build
-    npm start
+Ensure that the `NODE_ENV` environment variable is set to `production`
+and run:
+
+    yarn install
+    yarn run build
+    yarn start
