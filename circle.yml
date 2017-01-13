@@ -24,4 +24,4 @@ test:
   pre:
     - yarn run build
   override:
-    - yarn test
+    - yarn run test-ci
