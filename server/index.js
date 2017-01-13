@@ -73,6 +73,8 @@ function render(url, context) {
   });
 }
 
+const env = process.env.NODE_ENV;
+const dev = env !== 'production';
 const PORT = process.env.port || 4000;
 const app = express();
 
@@ -100,5 +102,8 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Listening to port ${PORT} in ${process.env.NODE_ENV} mode`);
+  console.log(`Listening to port ${PORT} in ${env} mode`);
+  if (dev) {
+    console.log(`Open http://localhost:${PORT}/ and start hacking!`);
+  }
 });
