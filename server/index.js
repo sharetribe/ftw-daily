@@ -18,8 +18,10 @@ require('source-map-support').install();
 
 const express = require('express');
 const helmet = require('helmet');
+const compression = require('compression');
 const path = require('path');
 const fs = require('fs');
+const auth = require('./auth');
 const _ = require('lodash');
 const React = require('react');
 const { createServerRenderContext } = require('react-router');
@@ -75,13 +77,21 @@ function render(url, context) {
 
 const env = process.env.NODE_ENV;
 const dev = env !== 'production';
-const PORT = process.env.port || 4000;
+const PORT = process.env.PORT || 4000;
 const app = express();
 
 // The helmet middleware sets various HTTP headers to improve security.
 // See: https://www.npmjs.com/package/helmet
 app.use(helmet());
 
+// Use basic authentication when not in dev mode.
+if (!dev) {
+  const USERNAME = process.env.BASIC_AUTH_USERNAME;
+  const PASSWORD = process.env.BASIC_AUTH_PASSWORD;
+  app.use(auth.basicAuth(USERNAME, PASSWORD));
+}
+
+app.use(compression());
 app.use('/static', express.static(path.join(buildPath, 'static')));
 
 app.get('*', (req, res) => {

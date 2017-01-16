@@ -1,20 +1,23 @@
 {
   "name": "app",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "devDependencies": {
-    "sharetribe-scripts": "0.8.4"
-  },
   "dependencies": {
+    "basic-auth": "^1.1.0",
+    "compression": "^1.6.2",
     "express": "^4.14.0",
     "helmet": "^3.3.0",
     "lodash": "^4.17.4",
-    "nodemon": "^1.11.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-helmet": "^3.3.0",
     "react-router": "4.0.0-alpha.6",
-    "react-test-renderer": "^15.4.2"
+    "react-test-renderer": "^15.4.2",
+    "sharetribe-scripts": "0.8.4",
+    "source-map-support": "^0.4.8"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   },
   "scripts": {
     "clean": "rm -rf build/*",
@@ -24,6 +27,10 @@
     "test-ci": "sharetribe-scripts test --env=jsdom --runInBand",
     "eject": "sharetribe-scripts eject",
     "start": "node server/index.js",
-    "dev-server": "yarn run build&&nodemon --watch server server/index.js"
+    "dev-server": "yarn run build&&nodemon --watch server server/index.js",
+    "heroku-postbuild": "yarn run build"
+  },
+  "engines": {
+    "node": "6.9.4"
   }
 }
