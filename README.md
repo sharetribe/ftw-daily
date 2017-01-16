@@ -50,13 +50,10 @@ To start the test watcher, run
 
 See more in the [testing documentation](docs/testing.md).
 
-## Production Server
+## Deployment
 
-Ensure that the `NODE_ENV` environment variable is set to `production`
-and run:
+The `master` branch is automatically deployed to Heroku. If you want
+to deploy a feature branch, setup the `sharetribe-starter-app` Heroku
+app and push the feature branch:
 
-    yarn install
-    yarn run build
-    yarn start
-
-TODO: Heroku
+    git push heroku my-feature-branch:master
