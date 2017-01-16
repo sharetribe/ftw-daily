@@ -76,7 +76,7 @@ function render(url, context) {
 
 const env = process.env.NODE_ENV;
 const dev = env !== 'production';
-const PORT = process.env.port || 4000;
+const PORT = process.env.PORT || 4000;
 const app = express();
 
 // The helmet middleware sets various HTTP headers to improve security.
