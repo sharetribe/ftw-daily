@@ -1,5 +1,7 @@
 # Sharetribe Starter App
 
+[![CircleCI](https://circleci.com/gh/sharetribe/sharetribe-starter-app.svg?style=shield&circle-token=198451e83e5cecb0d662949260dbc3273ac44a67)](https://circleci.com/gh/sharetribe/sharetribe-starter-app)
+
 This is a template application for a Sharetribe marketplace that can
 be extended and customised. It is based on an application bootstrapped
 with
