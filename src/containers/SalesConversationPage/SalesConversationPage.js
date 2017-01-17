@@ -11,7 +11,7 @@ export default (props) => {
       <br />
       <Link to={ `/sale/${params.id}/details` }>Details tab</Link>
       <p>Mobile layout needs different views for discussion and details.</p>
-      <p>Discussion view is the default if route doesn't specify mobile tab (e.g. <i>/order/1234</i>)</p>
+      <p>Discussion view is the default if route doesn&#39;t specify mobile tab (e.g. <i>/order/1234</i>)</p>
     </Page>
   );
 };
