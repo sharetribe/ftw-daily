@@ -37,6 +37,6 @@ PageLayout.defaultProps = { className: '', children: null };
 
 const { string, any } = PropTypes;
 
-Page.propTypes = { className: string, title: string.isRequired, children: any };
+PageLayout.propTypes = { className: string, title: string.isRequired, children: any };
 
-export default Page;
+export default PageLayout;
