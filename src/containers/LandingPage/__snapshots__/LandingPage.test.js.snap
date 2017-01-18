@@ -1,6 +1,6 @@
 exports[`LandingPage matches snapshot 1`] = `
 <div
-  className={undefined}>
+  className="">
   <div
     className={undefined}>
     <a
