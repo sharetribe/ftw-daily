@@ -2,30 +2,45 @@ import React, { PropTypes } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { BrowserRouter, ServerRouter } from 'react-router';
+import { Provider } from 'react-redux';
+import configureStore from './store';
 import Routes from './Routes';
 
-const RoutesWithRouterProp = ({ router }) => <Routes router={router} />;
+export const ClientApp = props => {
+  const { store } = props;
+  return (
+    <BrowserRouter>
+      {
+        ({router}) => (
+          <Provider store={store}>
+            <Routes router={router} />
+          </Provider>
+        )
+      }
+    </BrowserRouter>
+  );
+};
 
 const { any, string } = PropTypes;
 
-RoutesWithRouterProp.propTypes = { router: any.isRequired };
-
-export const ClientApp = () => (
-  <BrowserRouter>
-    {RoutesWithRouterProp}
-  </BrowserRouter>
-);
+ClientApp.propTypes = { store: any.isRequired };
 
 export const ServerApp = props => {
   const { url, context } = props;
   return (
     <ServerRouter location={url} context={context}>
-      {RoutesWithRouterProp}
+      {
+        ({router}) => (
+          <Provider store={store}>
+            <Routes router={router} />
+          </Provider>
+        )
+      }
     </ServerRouter>
   );
 };
 
-ServerApp.propTypes = { url: string.isRequired, context: any.isRequired };
+ServerApp.propTypes = { url: string.isRequired, context: any.isRequired, store: any.isRequired };
 
 /**
  * Render the given route.
