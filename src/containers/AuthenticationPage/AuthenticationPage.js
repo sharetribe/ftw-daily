@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link, Redirect } from 'react-router';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 import { fakeAuth } from '../../Routes';
 
 class AuthenticationPage extends Component {
@@ -30,30 +30,28 @@ class AuthenticationPage extends Component {
     const alternativeMethod = this.props.tab === 'login' ? toSignup : toLogin;
     const currentMethod = this.props.tab === 'login' ? 'Log in' : 'Sign up';
 
-    const fromLoginMsg = from ? (
-        <p>
-          You must log in to view the page at
-          <code>{from.pathname}</code>
-        </p>
-      ) : null;
+    const fromLoginMsg = from ? <p>
+        You must log in to view the page at
+        <code>{from.pathname}</code>
+      </p> : null;
 
     return (
-      <Page title={`Authentication page: ${this.props.tab} tab`}>
+      <PageLayout title={`Authentication page: ${this.props.tab} tab`}>
         {redirectToReferrer ? <Redirect to={from || '/'} /> : null}
         {fromLoginMsg}
         <button onClick={this.login}>{currentMethod}</button>
         <p>or {alternativeMethod}</p>
-      </Page>
+      </PageLayout>
     );
   }
 }
 
 AuthenticationPage.defaultProps = { location: {}, tab: 'signup' };
 
-const { shape, string, oneOf } = PropTypes;
+const { shape, string, object, oneOf, oneOfType } = PropTypes;
 
 AuthenticationPage.propTypes = {
-  location: shape({ state: shape({ from: string }) }),
+  location: shape({ state: shape({ from: oneOfType([object, string]) }) }),
   tab: oneOf([ 'login', 'signup' ]),
 };
 

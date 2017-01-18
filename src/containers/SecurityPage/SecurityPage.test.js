@@ -6,11 +6,9 @@ import SecurityPage from './SecurityPage';
 describe('SecurityPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <BrowserRouter>
-          <SecurityPage />
-        </BrowserRouter>
-      ),
+      <BrowserRouter>
+        <SecurityPage />
+      </BrowserRouter>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

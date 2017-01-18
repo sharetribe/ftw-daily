@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 
 const CheckoutPage = ({ params }) => (
-  <Page title={`Checkout page: ${params.listingId}`}>
+  <PageLayout title={`Checkout page: ${params.listingId}`}>
     <Link to={`/order/12345`}><button>Pay</button></Link>
-  </Page>
+  </PageLayout>
 );
 
 const { shape, string } = PropTypes;

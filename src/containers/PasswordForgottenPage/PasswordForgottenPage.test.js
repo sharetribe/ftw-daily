@@ -6,11 +6,9 @@ import PasswordForgottenPage from './PasswordForgottenPage';
 describe('PasswordForgottenPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <BrowserRouter>
-          <PasswordForgottenPage />
-        </BrowserRouter>
-      ),
+      <BrowserRouter>
+        <PasswordForgottenPage />
+      </BrowserRouter>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

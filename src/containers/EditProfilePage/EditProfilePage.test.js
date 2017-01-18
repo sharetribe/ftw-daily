@@ -6,11 +6,9 @@ import EditProfilePage from './EditProfilePage';
 describe('EditProfilePage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <BrowserRouter>
-          <EditProfilePage params={{ displayName: 'my-shop' }} />
-        </BrowserRouter>
-      ),
+      <BrowserRouter>
+        <EditProfilePage params={{ displayName: 'my-shop' }} />
+      </BrowserRouter>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

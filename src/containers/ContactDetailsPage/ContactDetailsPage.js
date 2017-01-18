@@ -1,4 +1,4 @@
 import React from 'react';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 
-export default () => <Page title="Contact details" />
+export default () => <PageLayout title="Contact details" />;

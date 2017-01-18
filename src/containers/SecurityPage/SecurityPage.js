@@ -1,8 +1,8 @@
 import React from 'react';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 
 export default () => (
-  <Page title="Security">
+  <PageLayout title="Security">
     <p>Change password, delete account</p>
-  </Page>
-)
+  </PageLayout>
+);

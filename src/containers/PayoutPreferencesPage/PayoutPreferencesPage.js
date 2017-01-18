@@ -1,4 +1,4 @@
 import React from 'react';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 
-export default () => <Page title="Payout preferences" />
+export default () => <PageLayout title="Payout preferences" />;

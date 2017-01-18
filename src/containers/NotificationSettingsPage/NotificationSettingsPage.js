@@ -1,4 +1,4 @@
 import React from 'react';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 
-export default () => <Page title="Notification settings" />
+export default () => <PageLayout title="Notification settings" />;

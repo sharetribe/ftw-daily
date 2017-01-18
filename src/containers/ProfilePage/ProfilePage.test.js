@@ -6,11 +6,9 @@ import ProfilePage from './ProfilePage';
 describe('ProfilePage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <BrowserRouter>
-          <ProfilePage params={{ displayName: 'most-awesome-shop' }} />
-        </BrowserRouter>
-      ),
+      <BrowserRouter>
+        <ProfilePage params={{ displayName: 'most-awesome-shop' }} />
+      </BrowserRouter>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

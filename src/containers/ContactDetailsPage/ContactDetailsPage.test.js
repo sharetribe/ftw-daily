@@ -6,11 +6,9 @@ import ContactDetailsPage from './ContactDetailsPage';
 describe('ContactDetailsPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <BrowserRouter>
-          <ContactDetailsPage params={{ displayName: 'my-shop' }} />
-        </BrowserRouter>
-      ),
+      <BrowserRouter>
+        <ContactDetailsPage params={{ displayName: 'my-shop' }} />
+      </BrowserRouter>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
