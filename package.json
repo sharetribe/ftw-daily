@@ -10,14 +10,15 @@
     "lodash": "^4.17.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-helmet": "^3.3.0",
+    "react-helmet": "^4.0.0",
     "react-router": "4.0.0-alpha.6",
     "react-test-renderer": "^15.4.2",
-    "sharetribe-scripts": "0.8.4",
-    "source-map-support": "^0.4.8"
+    "sharetribe-scripts": "0.8.5",
+    "source-map-support": "^0.4.10"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "prettier": "^0.0.8"
   },
   "scripts": {
     "clean": "rm -rf build/*",
