@@ -21,8 +21,8 @@ const SalesConversationPage = props => {
   );
 };
 
-const { shape, string } = PropTypes;
+const { shape, number } = PropTypes;
 
-SalesConversationPage.propTypes = { params: shape({ id: string.isRequired }).isRequired };
+SalesConversationPage.propTypes = { params: shape({ id: number.isRequired }).isRequired };
 
 export default SalesConversationPage;

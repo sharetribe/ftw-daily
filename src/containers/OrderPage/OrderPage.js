@@ -21,8 +21,8 @@ const OrderPage = props => {
   );
 };
 
-const { shape, string } = PropTypes;
+const { shape, number } = PropTypes;
 
-OrderPage.propTypes = { params: shape({ id: string.isRequired }).isRequired };
+OrderPage.propTypes = { params: shape({ id: number.isRequired }).isRequired };
 
 export default OrderPage;

@@ -8,7 +8,7 @@ describe('CheckoutPage', () => {
     const component = renderer.create(
       (
         <BrowserRouter>
-          <CheckoutPage params={{ displayName: 'my-shop' }} />
+          <CheckoutPage params={{ listingId: 'some-listing-id' }} />
         </BrowserRouter>
       ),
     );

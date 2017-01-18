@@ -24,9 +24,10 @@ const InboxPage = props => {
   );
 };
 
-const { string } = PropTypes;
+InboxPage.defaultProps = { filter: 'conversation' };
 
-// TODO: should the filter an enum?
-InboxPage.propTypes = { filter: string.isRequired };
+const { string, oneOf } = PropTypes;
+
+InboxPage.propTypes = { filter: oneOf([ 'orders', 'sales', 'conversation' ]) };
 
 export default InboxPage;

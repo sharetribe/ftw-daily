@@ -135,7 +135,7 @@ exports[`AuthenticationPage matches snapshot 1`] = `
     </button>
   </div>
   <h1>
-    Authentication page: undefined tab
+    Authentication page: signup tab
   </h1>
   <p>
     You must log in to view the page at

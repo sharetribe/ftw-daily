@@ -135,7 +135,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
     </button>
   </div>
   <h1>
-    Checkout page: undefined
+    Checkout page: some-listing-id
   </h1>
   <a
     className=""

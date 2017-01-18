@@ -18,7 +18,9 @@ class AuthenticationPage extends Component {
   }
 
   render() {
-    const { from } = this.props.location.state || '/';
+    const from = this.props.location.state && this.props.location.state.from
+      ? this.props.location.state.from
+      : '/';
     const { redirectToReferrer } = this.state;
 
     const toLogin = <Link to={{ pathname: '/login', state: { from: from || '/' } }}>Log in</Link>;
@@ -46,11 +48,13 @@ class AuthenticationPage extends Component {
   }
 }
 
+AuthenticationPage.defaultProps = { location: {}, tab: 'signup' };
+
 const { shape, string, oneOf } = PropTypes;
 
 AuthenticationPage.propTypes = {
-  location: shape({ state: string }).isRequired,
-  tab: oneOf([ 'login', 'signup' ]).isRequired,
+  location: shape({ state: shape({ from: string }) }),
+  tab: oneOf([ 'login', 'signup' ]),
 };
 
 export default AuthenticationPage;
