@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Page } from '../../components';
 
-export default props => {
+const SalesConversationPage = props => {
   const { params } = props;
   return (
     <Page title="Sales conversation page">
@@ -19,4 +19,10 @@ export default props => {
       </p>
     </Page>
   );
-}
+};
+
+const { shape, string } = PropTypes;
+
+SalesConversationPage.propTypes = { params: shape({ id: string.isRequired }).isRequired };
+
+export default SalesConversationPage;

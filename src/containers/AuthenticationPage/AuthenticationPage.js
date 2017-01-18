@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link, Redirect } from 'react-router';
 import { Page } from '../../components';
 import { fakeAuth } from '../../Routes';
@@ -45,5 +45,12 @@ class AuthenticationPage extends Component {
     );
   }
 }
+
+const { shape, string, oneOf } = PropTypes;
+
+AuthenticationPage.propTypes = {
+  location: shape({ state: string }).isRequired,
+  tab: oneOf([ 'login', 'signup' ]).isRequired,
+};
 
 export default AuthenticationPage;

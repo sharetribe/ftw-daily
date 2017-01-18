@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Match, Miss, Redirect } from 'react-router';
 import {
   AuthenticationPage,
@@ -43,6 +43,7 @@ export const fakeAuth = {
   },
 };
 
+/* eslint-disable react/prop-types, arrow-body-style */
 // User must be authenticated before he can see certain pages
 export const MatchWhenAuthorized = ({ component: Component, ...rest }) => (
   <Match
@@ -54,6 +55,7 @@ export const MatchWhenAuthorized = ({ component: Component, ...rest }) => (
       }}
   />
 );
+/* eslint-enable react/prop-types, arrow-body-style */
 
 class Routes extends React.Component {
   getChildContext() {
@@ -184,6 +186,9 @@ class Routes extends React.Component {
   }
 }
 
+const { any } = PropTypes;
+
+Routes.propTypes = { router: any.isRequired };
 Routes.childContextTypes = { router: React.PropTypes.object };
 
 export default Routes;

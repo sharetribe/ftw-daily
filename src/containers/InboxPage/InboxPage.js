@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Page } from '../../components';
 
@@ -13,7 +13,7 @@ const toPath = (filter, id) => {
   }
 };
 
-export default props => {
+const InboxPage = props => {
   const { filter } = props;
   return (
     <Page title={`${filter} page`}>
@@ -22,4 +22,11 @@ export default props => {
       </ul>
     </Page>
   );
-}
+};
+
+const { string } = PropTypes;
+
+// TODO: should the filter an enum?
+InboxPage.propTypes = { filter: string.isRequired };
+
+export default InboxPage;

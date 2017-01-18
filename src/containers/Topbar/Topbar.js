@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { fakeAuth } from '../../Routes';
 import css from './Topbar.css';
@@ -12,6 +12,10 @@ const SignoutButton = props => {
   };
   return <button onClick={handleClick}>Sign out</button>;
 };
+
+const { any } = PropTypes;
+
+SignoutButton.propTypes = { router: any.isRequired };
 
 const Topbar = (props, context) => {
   const linkProps = { className: css.link };

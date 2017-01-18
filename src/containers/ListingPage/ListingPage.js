@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Page } from '../../components';
 
-export default ({ params }) => {
+const ListingPage = ({ params }) => {
   // Listing id should be located either in the end of slug
   // - https://example.com/l/listing-title-as-slug-12345
   // - https://example.com/l/12345
@@ -16,4 +16,10 @@ export default ({ params }) => {
       <Link to={`/checkout/${id}`}><button>Book</button></Link>
     </Page>
   );
-}
+};
+
+const { shape, string } = PropTypes;
+
+ListingPage.propTypes = { params: shape({ slug: string.isRequired }).isRequired };
+
+export default ListingPage;
