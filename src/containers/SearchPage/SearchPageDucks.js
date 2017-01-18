@@ -13,14 +13,14 @@ export default function reducer(state = {}, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case ADD_FILTER:
-      const stateFilters = state.filters || [];
-      return Object.assign({}, state, { filters: unionBy(stateFilters, [ payload ]) });
+      {
+        const stateFilters = state.filters || [];
+        return Object.assign({}, state, { filters: unionBy(stateFilters, [ payload ]) });
+      }
     default:
       return state;
   }
 }
 
 // Action Creators
-export const addFilter = (key, value) => {
-  return { type: ADD_FILTER, payload: { [key]: value } };
-};
+export const addFilter = (key, value) => ({ type: ADD_FILTER, payload: { [key]: value } });

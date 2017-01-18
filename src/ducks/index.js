@@ -6,4 +6,4 @@
 
 import FlashNotification from './FlashNotification';
 
-export { FlashNotification };
+export { FlashNotification }; // eslint-disable-line import/prefer-default-export

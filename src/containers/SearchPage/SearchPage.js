@@ -5,7 +5,7 @@ import { Page } from '../../components';
 import { addFlashNotification } from '../../ducks/FlashNotification';
 import { addFilter } from './SearchPageDucks';
 
-export const SearchPage = props => (
+export const SearchPageComponent = () => (
   <PageLayout title="Search page">
     <Link to="/l/Nice+studio-in-Helsinki-345">Nice studio in Helsinki</Link>
   </PageLayout>
@@ -25,4 +25,4 @@ const mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPageComponent)
