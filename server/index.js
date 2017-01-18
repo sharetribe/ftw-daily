@@ -42,7 +42,6 @@ const indexHtml = fs.readFileSync(path.join(buildPath, 'index.html'), 'utf-8');
 
 const reNoMatch = /($^)/;
 const template = _.template(indexHtml, {
-
   // Interpolate variables in the HTML template with the following
   // syntax: <!--!variableName-->
   //
@@ -61,7 +60,6 @@ const template = _.template(indexHtml, {
   // - https://github.com/kangax/html-minifier
   // - Plugin options in the production Webpack configuration file
   interpolate: /<!--!([\s\S]+?)-->/g,
-
   // Disable evaluated and escaped variables in the template
   evaluate: reNoMatch,
   escape: reNoMatch,
@@ -69,10 +67,7 @@ const template = _.template(indexHtml, {
 
 function render(url, context) {
   const { head, body } = renderApp(url, context);
-  return template({
-    title: head.title.toString(),
-    body
-  });
+  return template({ title: head.title.toString(), body });
 }
 
 const env = process.env.NODE_ENV;

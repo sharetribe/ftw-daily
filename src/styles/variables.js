@@ -32,6 +32,4 @@
  * Note that this file is required for the build process.
  */
 
-module.exports = {
-
-};
+module.exports = {};
