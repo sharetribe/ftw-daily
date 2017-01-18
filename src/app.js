@@ -26,7 +26,7 @@ const { any, string } = PropTypes;
 ClientApp.propTypes = { store: any.isRequired };
 
 export const ServerApp = props => {
-  const { url, context } = props;
+  const { url, context, store } = props;
   return (
     <ServerRouter location={url} context={context}>
       {
@@ -52,8 +52,11 @@ ServerApp.propTypes = { url: string.isRequired, context: any.isRequired, store: 
  *  - {String} body: Rendered application body of the given route
  *  - {Object} head: Application head metadata from react-helmet
  */
-export const renderApp = (url, serverContext) => {
-  const body = ReactDOMServer.renderToString(<ServerApp url={url} context={serverContext} />);
+export const renderApp = (url, serverContext, preloadedState) => {
+  const store = configureStore(preloadedState);
+  const body = ReactDOMServer.renderToString(
+    <ServerApp url={url} context={serverContext} store={store} />,
+  );
   const head = Helmet.rewind();
   return { head, body };
 };
