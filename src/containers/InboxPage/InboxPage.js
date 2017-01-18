@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { Page } from '../../components';
 
 const toPath = (filter, id) => {
-  switch(filter) {
+  switch (filter) {
     case 'orders':
       return `/order/${id}`;
     case 'sales':
@@ -11,15 +11,15 @@ const toPath = (filter, id) => {
     default:
       return `/conversation/${id}`;
   }
-}
+};
 
-export default (props) => {
+export default props => {
   const { filter } = props;
   return (
-    <Page title={ `${filter} page`}>
+    <Page title={`${filter} page`}>
       <ul>
-        <li><Link to={ toPath(filter, 1234) }>Single thread</Link></li>
+        <li><Link to={toPath(filter, 1234)}>Single thread</Link></li>
       </ul>
     </Page>
   );
-};
+}

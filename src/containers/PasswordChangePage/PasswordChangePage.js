@@ -4,4 +4,4 @@ import { Page } from '../../components';
 export default () => (
   <Page title="Type new password">
   </Page>
-);
+)

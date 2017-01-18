@@ -6,9 +6,11 @@ import PayoutPreferencesPage from './PayoutPreferencesPage';
 describe('PayoutPreferencesPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      <BrowserRouter>
-        <PayoutPreferencesPage />
-      </BrowserRouter>
+      (
+        <BrowserRouter>
+          <PayoutPreferencesPage />
+        </BrowserRouter>
+      ),
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

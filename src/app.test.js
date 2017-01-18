@@ -5,11 +5,8 @@ import { forEach } from 'lodash';
 import { createServerRenderContext } from 'react-router';
 import { ClientApp, ServerApp } from './app';
 
-const render = (url, context) => (
-  ReactDOMServer.renderToString(
-    <ServerApp url={ url } context={ context }/>
-  )
-);
+const render = (url, context) =>
+  ReactDOMServer.renderToString(<ServerApp url={url} context={context} />);
 
 describe('Application', () => {
   it('renders in the client without crashing', () => {
@@ -65,6 +62,5 @@ describe('Application', () => {
       const result = context.getResult();
       expect(result.redirect.pathname).toEqual(redirectPath);
     });
-
   });
 });
