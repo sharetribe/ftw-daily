@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
 
 // Action Creators
 let nextMessageId = 1;

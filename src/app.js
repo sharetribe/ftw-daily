@@ -10,13 +10,11 @@ export const ClientApp = props => {
   const { store } = props;
   return (
     <BrowserRouter>
-      {
-        ({router}) => (
+      {({ router }) => (
           <Provider store={store}>
             <Routes router={router} />
           </Provider>
-        )
-      }
+        )}
     </BrowserRouter>
   );
 };
@@ -29,13 +27,11 @@ export const ServerApp = props => {
   const { url, context, store } = props;
   return (
     <ServerRouter location={url} context={context}>
-      {
-        ({router}) => (
+      {({ router }) => (
           <Provider store={store}>
             <Routes router={router} />
           </Provider>
-        )
-      }
+        )}
     </ServerRouter>
   );
 };

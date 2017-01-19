@@ -41,16 +41,16 @@ describe('SearchPageDucs', () => {
       const addFilter1 = { type: ADD_FILTER, payload: filter1 };
       const addFilter2 = { type: ADD_FILTER, payload: filter2 };
       const reduced = reducer([], addFilter1);
-      const reducedWithInitialContent = reducer({ filters: [filter1] }, addFilter2);
-      expect(reduced).toEqual({ filters: [filter1] });
-      expect(reducedWithInitialContent).toEqual({ filters: [filter1, filter2] });
+      const reducedWithInitialContent = reducer({ filters: [ filter1 ] }, addFilter2);
+      expect(reduced).toEqual({ filters: [ filter1 ] });
+      expect(reducedWithInitialContent).toEqual({ filters: [ filter1, filter2 ] });
     });
 
     it('should handle duplicates ADD_FILTER', () => {
       const filter = { location: 'helsinki' };
       const addFilter = { type: ADD_FILTER, payload: filter };
-      const reducedWithInitialContent = reducer({ filters: [filter] }, addFilter);
-      expect(reducedWithInitialContent).toEqual({ filters: [filter] });
+      const reducedWithInitialContent = reducer({ filters: [ filter ] }, addFilter);
+      expect(reducedWithInitialContent).toEqual({ filters: [ filter ] });
     });
   });
 });

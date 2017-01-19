@@ -8,4 +8,4 @@ export default () => (
       <li><Link to="/l/1234">Listing 1234</Link></li>
     </ul>
   </PageLayout>
-);
+)

@@ -8,7 +8,7 @@ describe('InboxPage', () => {
     const component = renderer.create(
       (
         <BrowserRouter>
-          <InboxPage filter='inbox' />
+          <InboxPage filter="inbox" />
         </BrowserRouter>
       ),
     );

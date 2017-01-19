@@ -6,9 +6,11 @@ import AuthenticationPage from './AuthenticationPage';
 describe('AuthenticationPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      <BrowserRouter>
-        <AuthenticationPage location={{ state: { from: '/protected' } }} />
-      </BrowserRouter>,
+      (
+        <BrowserRouter>
+          <AuthenticationPage location={{ state: { from: '/protected' } }} />
+        </BrowserRouter>
+      ),
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

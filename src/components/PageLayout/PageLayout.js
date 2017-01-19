@@ -5,10 +5,9 @@ import { Topbar } from '../../containers';
 const scrollToTop = () => {
   // Todo: this might need fine tuning later
   window.scrollTo(0, 0);
-}
+};
 
 class PageLayout extends Component {
-
   componentDidMount() {
     this.historyUnlisten = this.context.history.listen(() => scrollToTop());
   }
@@ -16,7 +15,6 @@ class PageLayout extends Component {
   componentWillUnmount() {
     this.historyUnlisten();
   }
-
 
   render() {
     const { className, title, children } = this.props;

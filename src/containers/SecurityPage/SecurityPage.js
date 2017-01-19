@@ -5,4 +5,4 @@ export default () => (
   <PageLayout title="Security">
     <p>Change password, delete account</p>
   </PageLayout>
-);
+)

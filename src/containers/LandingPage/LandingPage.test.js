@@ -6,9 +6,11 @@ import LandingPage from './LandingPage';
 describe('LandingPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      <BrowserRouter>
-        <LandingPage />
-      </BrowserRouter>,
+      (
+        <BrowserRouter>
+          <LandingPage />
+        </BrowserRouter>
+      ),
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

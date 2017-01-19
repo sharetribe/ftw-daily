@@ -6,9 +6,11 @@ import PaymentMethodsPage from './PaymentMethodsPage';
 describe('PaymentMethodsPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      <BrowserRouter>
-        <PaymentMethodsPage />
-      </BrowserRouter>,
+      (
+        <BrowserRouter>
+          <PaymentMethodsPage />
+        </BrowserRouter>
+      ),
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

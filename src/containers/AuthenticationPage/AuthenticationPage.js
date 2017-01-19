@@ -30,10 +30,12 @@ class AuthenticationPage extends Component {
     const alternativeMethod = this.props.tab === 'login' ? toSignup : toLogin;
     const currentMethod = this.props.tab === 'login' ? 'Log in' : 'Sign up';
 
-    const fromLoginMsg = from ? <p>
-        You must log in to view the page at
-        <code>{from.pathname}</code>
-      </p> : null;
+    const fromLoginMsg = from ? (
+        <p>
+          You must log in to view the page at
+          <code>{from.pathname}</code>
+        </p>
+      ) : null;
 
     return (
       <PageLayout title={`Authentication page: ${this.props.tab} tab`}>
@@ -51,7 +53,7 @@ AuthenticationPage.defaultProps = { location: {}, tab: 'signup' };
 const { shape, string, object, oneOf, oneOfType } = PropTypes;
 
 AuthenticationPage.propTypes = {
-  location: shape({ state: shape({ from: oneOfType([object, string]) }) }),
+  location: shape({ state: shape({ from: oneOfType([ object, string ]) }) }),
   tab: oneOf([ 'login', 'signup' ]),
 };
 

@@ -6,4 +6,4 @@ export default () => (
   <PageLayout title="Landing page">
     <Link to="/s?location=helsinki">Find studios</Link>
   </PageLayout>
-);
+)

@@ -13,7 +13,9 @@ const OrderPage = props => {
       <Link to={`/order/${params.id}/details`}>Details tab</Link>
       <p>Mobile layout needs different views for discussion and details.</p>
       <p>
-        Discussion view is the default if route doesn't specify mobile tab (e.g. <i>/order/1234</i>)
+         Discussion view is the default if route doesn't specify mobile tab (e.g. <i>
+          /order/1234
+        </i>)
       </p>
     </PageLayout>
   );
@@ -21,6 +23,8 @@ const OrderPage = props => {
 
 const { number, oneOfType, shape, string } = PropTypes;
 
-OrderPage.propTypes = { params: shape({ id: oneOfType([number, string]).isRequired }).isRequired };
+OrderPage.propTypes = {
+  params: shape({ id: oneOfType([ number, string ]).isRequired }).isRequired,
+};
 
 export default OrderPage;
