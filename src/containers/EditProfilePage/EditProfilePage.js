@@ -3,10 +3,7 @@ import { Page } from '../../components';
 
 const EditProfilePage = (props, context) => {
   const { params } = props;
-  return (
-    <Page title={`Edit profile page with display name: ${params.displayName}`}>
-    </Page>
-  );
+  return <Page title={`Edit profile page with display name: ${params.displayName}`} />;
 };
 
 const { shape, string } = PropTypes;
