@@ -6,9 +6,11 @@ import PasswordChangePage from './PasswordChangePage';
 describe('PasswordChangePage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      <BrowserRouter>
-        <PasswordChangePage />
-      </BrowserRouter>
+      (
+        <BrowserRouter>
+          <PasswordChangePage />
+        </BrowserRouter>
+      ),
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

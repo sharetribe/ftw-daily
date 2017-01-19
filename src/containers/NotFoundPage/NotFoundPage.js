@@ -6,4 +6,4 @@ export default () => (
   <Page title="Page not found">
     <Link to="/">Index page</Link>
   </Page>
-);
+)

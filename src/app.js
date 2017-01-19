@@ -4,19 +4,19 @@ import Helmet from 'react-helmet';
 import { BrowserRouter, ServerRouter } from 'react-router';
 import Routes from './Routes';
 
-const RoutesWithRouterProp = ({ router }) => <Routes router={router} />
+const RoutesWithRouterProp = ({ router }) => <Routes router={router} />;
 
 export const ClientApp = () => (
   <BrowserRouter>
-    { RoutesWithRouterProp }
+    {RoutesWithRouterProp}
   </BrowserRouter>
 );
 
-export const ServerApp = (props) => {
+export const ServerApp = props => {
   const { url, context } = props;
   return (
-    <ServerRouter location={ url } context={ context } >
-      { RoutesWithRouterProp }
+    <ServerRouter location={url} context={context}>
+      {RoutesWithRouterProp}
     </ServerRouter>
   );
 };
@@ -32,9 +32,7 @@ export const ServerApp = (props) => {
  *  - {Object} head: Application head metadata from react-helmet
  */
 export const renderApp = (url, serverContext) => {
-  const body = ReactDOMServer.renderToString(
-    <ServerApp url={ url } context={ serverContext }/>
-  );
+  const body = ReactDOMServer.renderToString(<ServerApp url={url} context={serverContext} />);
   const head = Helmet.rewind();
   return { head, body };
 };

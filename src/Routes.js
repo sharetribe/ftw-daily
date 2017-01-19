@@ -40,22 +40,19 @@ export const fakeAuth = {
     this.isAuthenticated = false;
     cb();
     window.setTimeout(cb, 100); // weird bug if async?
-  }
+  },
 };
 
 // User must be authenticated before he can see certain pages
 export const MatchWhenAuthorized = ({ component: Component, ...rest }) => (
-  <Match {...rest} render={
-    (props) => (
-      fakeAuth.isAuthenticated ?
-      ( <Component { ...props } /> ) :
-      ( <Redirect to={{
-          pathname: '/login',
-          state: { from: props.location }
-        }}/>
-      )
-    )
-  }/>
+  <Match
+    {...rest}
+    render={props => {
+        return fakeAuth.isAuthenticated
+          ? <Component {...props} />
+          : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
+      }}
+  />
 );
 
 class Routes extends React.Component {
@@ -66,138 +63,127 @@ class Routes extends React.Component {
   render() {
     return (
       <div>
-        <Match exactly pattern="/" component={ LandingPage } />
+        <Match exactly pattern="/" component={LandingPage} />
 
         {/* Search view */}
-        <Match exactly pattern="/s" component={ SearchPage } />
+        <Match exactly pattern="/s" component={SearchPage} />
 
         {/* Listing view */}
-        <Match exactly pattern="/l/:slug" component={ ListingPage } />
-        <Match exactly pattern="/l" component={ RedirectLandingPage } />
+        <Match exactly pattern="/l/:slug" component={ListingPage} />
+        <Match exactly pattern="/l" component={RedirectLandingPage} />
 
         {/* profile / storefront view */}
-        <Match exactly pattern="/u/:displayName" component={ ProfilePage } />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/u/:displayName/edit"
-          component={ EditProfilePage } />
-        <Match exactly pattern="/u" component={ RedirectLandingPage } />
+        <Match exactly pattern="/u/:displayName" component={ProfilePage} />
+        <MatchWhenAuthorized exactly pattern="/u/:displayName/edit" component={EditProfilePage} />
+        <Match exactly pattern="/u" component={RedirectLandingPage} />
 
         {/* checkout */}
-        <Match exactly pattern="/checkout/:listingId" component={ CheckoutPage } />
+        <Match exactly pattern="/checkout/:listingId" component={CheckoutPage} />
 
         {/* Login and signup */}
         <Match
           exactly
           pattern="/login"
-          component={
-            (props) => <AuthenticationPage { ...props } tab='login' />
-          } />
+          component={props => <AuthenticationPage {...props} tab="login" />}
+        />
         <Match
           exactly
           pattern="/signup"
-          component={
-            (props) => <AuthenticationPage { ...props } tab='signup' />
-          } />
+          component={props => <AuthenticationPage {...props} tab="signup" />}
+        />
 
         {/* Password forgotten */}
-        <Match
-          exactly
-          pattern="/password/forgotten"
-          component={ PasswordForgottenPage } />
+        <Match exactly pattern="/password/forgotten" component={PasswordForgottenPage} />
 
         {/* Change password */}
-        <Match
-          exactly
-          pattern="/password/change"
-          component={ PasswordChangePage } />
+        <Match exactly pattern="/password/change" component={PasswordChangePage} />
 
         {/* Inbox and filtered views */}
         <MatchWhenAuthorized
           exactly
           pattern="/inbox"
-          component={ (props) => <InboxPage { ...props } filter="inbox" /> } />
+          component={props => <InboxPage {...props} filter="inbox" />}
+        />
         <MatchWhenAuthorized
           exactly
           pattern="/orders"
-          component={ (props) => <InboxPage { ...props } filter="orders" /> } />
+          component={props => <InboxPage {...props} filter="orders" />}
+        />
         <MatchWhenAuthorized
           exactly
           pattern="/sales"
-          component={ (props) => <InboxPage { ...props } filter="sales" /> } />
+          component={props => <InboxPage {...props} filter="sales" />}
+        />
 
         {/* Order/Conversation and mobile views */}
-        <MatchWhenAuthorized
-          exactly
-          pattern="/conversation/:id"
-          component={ ConversationPage } />
+        <MatchWhenAuthorized exactly pattern="/conversation/:id" component={ConversationPage} />
         <MatchWhenAuthorized
           exactly
           pattern="/order/:id"
-          component={ (props) => <OrderPage { ...props } tab="discussion" /> } />
+          component={props => <OrderPage {...props} tab="discussion" />}
+        />
         <MatchWhenAuthorized
           exactly
           pattern="/order/:id/discussion"
-          component={ (props) => <OrderPage { ...props } tab="discussion" /> } />
+          component={props => <OrderPage {...props} tab="discussion" />}
+        />
         <MatchWhenAuthorized
           exactly
           pattern="/order/:id/details"
-          component={ (props) => <OrderPage { ...props } tab="details" /> } />
+          component={props => <OrderPage {...props} tab="details" />}
+        />
         <MatchWhenAuthorized
           exactly
           pattern="/sale/:id"
-          component={ (props) => <SalesConversationPage { ...props } tab="discussion" /> } />
+          component={props => <SalesConversationPage {...props} tab="discussion" />}
+        />
         <MatchWhenAuthorized
           exactly
           pattern="/sale/:id/discussion"
-          component={ (props) => <SalesConversationPage { ...props } tab="discussion" /> } />
+          component={props => <SalesConversationPage {...props} tab="discussion" />}
+        />
         <MatchWhenAuthorized
           exactly
           pattern="/sale/:id/details"
-          component={ (props) => <SalesConversationPage { ...props } tab="details" /> } />
+          component={props => <SalesConversationPage {...props} tab="details" />}
+        />
 
         {/* Manage listings */}
-        <MatchWhenAuthorized
-          exactly
-          pattern="/listings"
-          component={ ManageListingsPage } />
+        <MatchWhenAuthorized exactly pattern="/listings" component={ManageListingsPage} />
 
         {/* Account settings */}
         <MatchWhenAuthorized
           exactly
           pattern="/account"
-          component={ () => <Redirect to="/account/contact-details" /> } />
+          component={() => <Redirect to="/account/contact-details" />}
+        />
         <MatchWhenAuthorized
           exactly
           pattern="/account/contact-details"
-          component={ ContactDetailsPage } />
+          component={ContactDetailsPage}
+        />
         <MatchWhenAuthorized
           exactly
           pattern="/account/notifications"
-          component={ NotificationSettingsPage } />
+          component={NotificationSettingsPage}
+        />
         <MatchWhenAuthorized
           exactly
           pattern="/account/payment-methods"
-          component={ PaymentMethodsPage } />
+          component={PaymentMethodsPage}
+        />
         <MatchWhenAuthorized
           exactly
           pattern="/account/payout-preferences"
-          component={ PayoutPreferencesPage } />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/account/security"
-          component={ SecurityPage } />
-
-
-        <Miss component={ NotFoundPage } />
-
+          component={PayoutPreferencesPage}
+        />
+        <MatchWhenAuthorized exactly pattern="/account/security" component={SecurityPage} />
+        <Miss component={NotFoundPage} />
       </div>
     );
   }
 }
 
-Routes.childContextTypes = {
-  router: React.PropTypes.object
-};
+Routes.childContextTypes = { router: React.PropTypes.object };
 
 export default Routes;

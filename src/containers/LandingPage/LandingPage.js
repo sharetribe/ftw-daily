@@ -6,4 +6,4 @@ export default () => (
   <Page title="Landing page">
     <Link to="/s?location=helsinki">Find studios</Link>
   </Page>
-);
+)
