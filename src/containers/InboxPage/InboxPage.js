@@ -26,7 +26,7 @@ const InboxPage = props => {
 
 InboxPage.defaultProps = { filter: 'conversation' };
 
-const { string, oneOf } = PropTypes;
+const { oneOf } = PropTypes;
 
 InboxPage.propTypes = { filter: oneOf([ 'orders', 'sales', 'conversation' ]) };
 

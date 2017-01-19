@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Page } from '../../components';
 
-const EditProfilePage = (props, context) => {
+const EditProfilePage = props => {
   const { params } = props;
   return <Page title={`Edit profile page with display name: ${params.displayName}`} />;
 };
