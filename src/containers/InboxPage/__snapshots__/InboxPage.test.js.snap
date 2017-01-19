@@ -1,6 +1,6 @@
 exports[`InboxPage matches snapshot 1`] = `
 <div
-  className={undefined}>
+  className="">
   <div
     className={undefined}>
     <a
@@ -135,7 +135,7 @@ exports[`InboxPage matches snapshot 1`] = `
     </button>
   </div>
   <h1>
-    undefined page
+    conversation page
   </h1>
   <ul>
     <li>

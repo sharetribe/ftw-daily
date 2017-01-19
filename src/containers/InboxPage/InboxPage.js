@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Page } from '../../components';
 
@@ -13,7 +13,7 @@ const toPath = (filter, id) => {
   }
 };
 
-export default props => {
+const InboxPage = props => {
   const { filter } = props;
   return (
     <Page title={`${filter} page`}>
@@ -22,4 +22,12 @@ export default props => {
       </ul>
     </Page>
   );
-}
+};
+
+InboxPage.defaultProps = { filter: 'conversation' };
+
+const { oneOf } = PropTypes;
+
+InboxPage.propTypes = { filter: oneOf([ 'orders', 'sales', 'conversation' ]) };
+
+export default InboxPage;

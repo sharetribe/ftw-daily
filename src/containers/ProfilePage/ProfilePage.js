@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Page } from '../../components';
 
-export default ({ params }) => (
-  <Page title={`Profile page with display name: ${params.displayName}`}>
-  </Page>
-)
+const ProfilePage = ({ params }) => (
+  <Page title={`Profile page with display name: ${params.displayName}`} />
+);
+
+const { shape, string } = PropTypes;
+
+ProfilePage.propTypes = { params: shape({ displayName: string.isRequired }).isRequired };
+
+export default ProfilePage;

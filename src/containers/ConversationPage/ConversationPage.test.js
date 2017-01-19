@@ -8,7 +8,7 @@ describe('ConversationPage', () => {
     const component = renderer.create(
       (
         <BrowserRouter>
-          <ConversationPage params={{ displayName: 'my-shop' }} />
+          <ConversationPage params={{ id: 'some-conversation-id' }} />
         </BrowserRouter>
       ),
     );

@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { BrowserRouter, ServerRouter } from 'react-router';
 import Routes from './Routes';
 
 const RoutesWithRouterProp = ({ router }) => <Routes router={router} />;
+
+const { any, string } = PropTypes;
+
+RoutesWithRouterProp.propTypes = { router: any.isRequired };
 
 export const ClientApp = () => (
   <BrowserRouter>
@@ -20,6 +24,8 @@ export const ServerApp = props => {
     </ServerRouter>
   );
 };
+
+ServerApp.propTypes = { url: string.isRequired, context: any.isRequired };
 
 /**
  * Render the given route.

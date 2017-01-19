@@ -1,6 +1,6 @@
 exports[`ConversationPage matches snapshot 1`] = `
 <div
-  className={undefined}>
+  className="">
   <div
     className={undefined}>
     <a
@@ -139,6 +139,7 @@ exports[`ConversationPage matches snapshot 1`] = `
   </h1>
   <p>
     Conversation id: 
+    some-conversation-id
   </p>
 </div>
 `;

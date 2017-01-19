@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Page } from '../../components';
 
-export default props => {
+const OrderPage = props => {
   const { params } = props;
   return (
     <Page title="Order page">
@@ -19,4 +19,10 @@ export default props => {
       </p>
     </Page>
   );
-}
+};
+
+const { shape, number } = PropTypes;
+
+OrderPage.propTypes = { params: shape({ id: number.isRequired }).isRequired };
+
+export default OrderPage;
