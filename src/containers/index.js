@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import AuthenticationPage from './AuthenticationPage/AuthenticationPage';
 import CheckoutPage from './CheckoutPage/CheckoutPage';
 import ConversationPage from './ConversationPage/ConversationPage';

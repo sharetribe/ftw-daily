@@ -4,6 +4,7 @@
  * https://github.com/erikras/ducks-modular-redux
  */
 
+/* eslint-disable import/prefer-default-export */
 import SearchPage from './SearchPage/SearchPageDucks';
 
 export { SearchPage };
