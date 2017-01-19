@@ -10,19 +10,21 @@
     "lodash": "^4.17.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-helmet": "^3.3.0",
+    "react-helmet": "^4.0.0",
     "react-router": "4.0.0-alpha.6",
     "react-test-renderer": "^15.4.2",
-    "sharetribe-scripts": "0.8.4",
-    "source-map-support": "^0.4.8"
+    "sharetribe-scripts": "0.8.5",
+    "source-map-support": "^0.4.10"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "prettier": "^0.0.8"
   },
   "scripts": {
     "clean": "rm -rf build/*",
     "dev": "sharetribe-scripts start",
     "build": "sharetribe-scripts build",
+    "prettier": "prettier --write --print-width 100 --single-quote --trailing-comma src/**/*.js server/*.js",
     "test": "sharetribe-scripts test --env=jsdom",
     "test-ci": "sharetribe-scripts test --env=jsdom --runInBand",
     "eject": "sharetribe-scripts eject",
@@ -31,6 +33,7 @@
     "heroku-postbuild": "yarn run build"
   },
   "engines": {
-    "node": "6.9.4"
+    "node": "6.9.4",
+    "yarn": "0.19.1"
   }
 }
