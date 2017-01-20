@@ -13,7 +13,7 @@
     "react-helmet": "^4.0.0",
     "react-router": "4.0.0-alpha.6",
     "react-test-renderer": "^15.4.2",
-    "sharetribe-scripts": "0.8.5",
+    "sharetribe-scripts": "0.8.6",
     "source-map-support": "^0.4.10"
   },
   "devDependencies": {
