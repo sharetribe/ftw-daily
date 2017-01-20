@@ -29,11 +29,11 @@ class PageLayout extends Component {
   }
 }
 
-PageLayout.contextTypes = { history: React.PropTypes.object };
+const { any, object, string } = PropTypes;
+
+PageLayout.contextTypes = { history: object };
 
 PageLayout.defaultProps = { className: '', children: null };
-
-const { string, any } = PropTypes;
 
 PageLayout.propTypes = { className: string, title: string.isRequired, children: any };
 

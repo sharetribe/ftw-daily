@@ -50,10 +50,10 @@ class AuthenticationPage extends Component {
 
 AuthenticationPage.defaultProps = { location: {}, tab: 'signup' };
 
-const { shape, string, object, oneOf, oneOfType } = PropTypes;
+const { any, oneOf, shape } = PropTypes;
 
 AuthenticationPage.propTypes = {
-  location: shape({ state: shape({ from: oneOfType([ object, string ]) }) }),
+  location: shape({ state: shape({ from: any }) }),
   tab: oneOf([ 'login', 'signup' ]),
 };
 

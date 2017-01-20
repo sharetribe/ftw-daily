@@ -70,10 +70,11 @@ function render(url, context, preloadedState) {
   const { head, body } = renderApp(url, context, preloadedState);
 
   // Preloaded state needs to be passed for client side too.
+  // For security reasons we ensure that preloaded state is considered as a string
+  // by replacing '<' character with its unicode equivalent.
+  // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
   const preloadedStateScript = `
-    <script>
-      window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\x3c')};
-    </script>
+      window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')};
   `;
 
   return template({ title: head.title.toString(), preloadedStateScript, body });

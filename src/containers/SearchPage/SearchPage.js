@@ -13,6 +13,8 @@ export const SearchPageComponent = () => (
 
 /**
  * Container functions.
+ * Since we add this to global store state with combineReducers, this will only get partial state
+ * which is page specific.
  */
 const mapStateToProps = function mapStateToProps(state) {
   return state;
