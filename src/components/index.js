@@ -1,4 +1,4 @@
 /* eslint-disable import/prefer-default-export */
-import Page from './Page/Page';
+import PageLayout from './PageLayout/PageLayout';
 
-export { Page };
+export { PageLayout };

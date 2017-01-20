@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 
 const ListingPage = ({ params }) => {
   // Listing id should be located either in the end of slug
@@ -11,10 +11,10 @@ const ListingPage = ({ params }) => {
 
   // TODO: Fetch data from SDK if no data is passed through props
   return (
-    <Page title={`Listing page with listing id: #${id}`}>
+    <PageLayout title={`Listing page with listing id: #${id}`}>
       <p>Slug: {params.slug}</p>
       <Link to={`/checkout/${id}`}><button>Book</button></Link>
-    </Page>
+    </PageLayout>
   );
 };
 

@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 
 const ConversationPage = props => {
   const { params } = props;
   return (
-    <Page title="Conversation page">
+    <PageLayout title="Conversation page">
       <p>Conversation id: {params.id}</p>
-    </Page>
+    </PageLayout>
   );
 };
 

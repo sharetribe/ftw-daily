@@ -1,4 +1,4 @@
 import React from 'react';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 
-export default () => <Page title="Request new password" />
+export default () => <PageLayout title="Request new password" />

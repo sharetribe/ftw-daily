@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 
 const EditProfilePage = props => {
   const { params } = props;
-  return <Page title={`Edit profile page with display name: ${params.displayName}`} />;
+  return <PageLayout title={`Edit profile page with display name: ${params.displayName}`} />;
 };
 
 const { shape, string } = PropTypes;

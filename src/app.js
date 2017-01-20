@@ -2,30 +2,41 @@ import React, { PropTypes } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { BrowserRouter, ServerRouter } from 'react-router';
+import { Provider } from 'react-redux';
+import configureStore from './store';
 import Routes from './Routes';
 
-const RoutesWithRouterProp = ({ router }) => <Routes router={router} />;
+export const ClientApp = props => {
+  const { store } = props;
+  return (
+    <BrowserRouter>
+      {({ router }) => (
+          <Provider store={store}>
+            <Routes router={router} />
+          </Provider>
+        )}
+    </BrowserRouter>
+  );
+};
 
 const { any, string } = PropTypes;
 
-RoutesWithRouterProp.propTypes = { router: any.isRequired };
-
-export const ClientApp = () => (
-  <BrowserRouter>
-    {RoutesWithRouterProp}
-  </BrowserRouter>
-);
+ClientApp.propTypes = { store: any.isRequired };
 
 export const ServerApp = props => {
-  const { url, context } = props;
+  const { url, context, store } = props;
   return (
     <ServerRouter location={url} context={context}>
-      {RoutesWithRouterProp}
+      {({ router }) => (
+          <Provider store={store}>
+            <Routes router={router} />
+          </Provider>
+        )}
     </ServerRouter>
   );
 };
 
-ServerApp.propTypes = { url: string.isRequired, context: any.isRequired };
+ServerApp.propTypes = { url: string.isRequired, context: any.isRequired, store: any.isRequired };
 
 /**
  * Render the given route.
@@ -37,8 +48,11 @@ ServerApp.propTypes = { url: string.isRequired, context: any.isRequired };
  *  - {String} body: Rendered application body of the given route
  *  - {Object} head: Application head metadata from react-helmet
  */
-export const renderApp = (url, serverContext) => {
-  const body = ReactDOMServer.renderToString(<ServerApp url={url} context={serverContext} />);
+export const renderApp = (url, serverContext, preloadedState) => {
+  const store = configureStore(preloadedState);
+  const body = ReactDOMServer.renderToString(
+    <ServerApp url={url} context={serverContext} store={store} />,
+  );
   const head = Helmet.rewind();
   return { head, body };
 };

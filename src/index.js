@@ -14,12 +14,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ClientApp, renderApp } from './app';
+import configureStore from './store';
 
 import './index.css';
 
 // If we're in a browser already, render the client application.
 if (typeof window !== 'undefined') {
-  ReactDOM.render(<ClientApp />, document.getElementById('root'));
+  const preloadedState = window.__PRELOADED_STATE__ || {}; // eslint-disable-line no-underscore-dangle
+  const store = configureStore(preloadedState);
+
+  ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
 }
 
 // Export the function for server side rendering.

@@ -21,12 +21,13 @@ const helmet = require('helmet');
 const compression = require('compression');
 const path = require('path');
 const fs = require('fs');
-const auth = require('./auth');
+const qs = require('qs');
 const _ = require('lodash');
 const React = require('react');
 const { createServerRenderContext } = require('react-router');
+const auth = require('./auth');
 
-// Construct the bundle path where the server side renering function
+// Construct the bundle path where the server side rendering function
 // can be imported.
 const buildPath = path.resolve(__dirname, '..', 'build');
 const manifestPath = path.join(buildPath, 'asset-manifest.json');
@@ -65,9 +66,18 @@ const template = _.template(indexHtml, {
   escape: reNoMatch,
 });
 
-function render(url, context) {
-  const { head, body } = renderApp(url, context);
-  return template({ title: head.title.toString(), body });
+function render(url, context, preloadedState) {
+  const { head, body } = renderApp(url, context, preloadedState);
+
+  // Preloaded state needs to be passed for client side too.
+  // For security reasons we ensure that preloaded state is considered as a string
+  // by replacing '<' character with its unicode equivalent.
+  // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
+  const preloadedStateScript = `
+      window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')};
+  `;
+
+  return template({ title: head.title.toString(), preloadedStateScript, body });
 }
 
 const env = process.env.NODE_ENV;
@@ -91,7 +101,12 @@ app.use('/static', express.static(path.join(buildPath, 'static')));
 
 app.get('*', (req, res) => {
   const context = createServerRenderContext();
-  const html = render(req.url, context);
+  const filters = qs.parse(req.query);
+
+  // TODO fetch this asynchronously
+  const preloadedState = { search: { filters } };
+
+  const html = render(req.url, context, preloadedState);
   const result = context.getResult();
 
   if (result.redirect) {
@@ -100,7 +115,7 @@ app.get('*', (req, res) => {
     // Do a second render pass with the context to clue <Miss>
     // components into rendering this time.
     // See: https://react-router.now.sh/ServerRouter
-    res.status(404).send(render(req.url, context));
+    res.status(404).send(render(req.url, context, preloadedState));
   } else {
     res.send(html);
   }

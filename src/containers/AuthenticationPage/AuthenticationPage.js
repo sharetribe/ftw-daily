@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link, Redirect } from 'react-router';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 import { fakeAuth } from '../../Routes';
 
 class AuthenticationPage extends Component {
@@ -38,22 +38,22 @@ class AuthenticationPage extends Component {
       ) : null;
 
     return (
-      <Page title={`Authentication page: ${this.props.tab} tab`}>
+      <PageLayout title={`Authentication page: ${this.props.tab} tab`}>
         {redirectToReferrer ? <Redirect to={from || '/'} /> : null}
         {fromLoginMsg}
         <button onClick={this.login}>{currentMethod}</button>
         <p>or {alternativeMethod}</p>
-      </Page>
+      </PageLayout>
     );
   }
 }
 
 AuthenticationPage.defaultProps = { location: {}, tab: 'signup' };
 
-const { shape, string, oneOf } = PropTypes;
+const { any, oneOf, shape } = PropTypes;
 
 AuthenticationPage.propTypes = {
-  location: shape({ state: shape({ from: string }) }),
+  location: shape({ state: shape({ from: any }) }),
   tab: oneOf([ 'login', 'signup' ]),
 };
 

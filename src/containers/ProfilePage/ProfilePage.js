@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 
 const ProfilePage = ({ params }) => (
-  <Page title={`Profile page with display name: ${params.displayName}`} />
+  <PageLayout title={`Profile page with display name: ${params.displayName}`} />
 );
 
 const { shape, string } = PropTypes;

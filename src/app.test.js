@@ -4,14 +4,17 @@ import ReactDOMServer from 'react-dom/server';
 import { forEach } from 'lodash';
 import { createServerRenderContext } from 'react-router';
 import { ClientApp, ServerApp } from './app';
+import configureStore from './store';
+
+const store = configureStore({});
 
 const render = (url, context) =>
-  ReactDOMServer.renderToString(<ServerApp url={url} context={context} />);
+  ReactDOMServer.renderToString(<ServerApp url={url} context={context} store={store} />);
 
 describe('Application', () => {
   it('renders in the client without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<ClientApp />, div);
+    ReactDOM.render(<ClientApp store={store} />, div);
   });
 
   it('renders in the server without crashing', () => {

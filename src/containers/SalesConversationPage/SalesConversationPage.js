@@ -1,12 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 
 const SalesConversationPage = props => {
   const { params } = props;
   return (
-    <Page title="Sales conversation page">
+    <PageLayout title="Sales conversation page">
       <p>Sale id: {params.id}</p>
       <Link to={`/sale/${params.id}/discussion`}>Discussion tab</Link>
       <br />
@@ -17,7 +17,7 @@ const SalesConversationPage = props => {
           /order/1234
         </i>)
       </p>
-    </Page>
+    </PageLayout>
   );
 };
 

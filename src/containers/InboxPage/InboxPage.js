@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Page } from '../../components';
+import { PageLayout } from '../../components';
 
 const toPath = (filter, id) => {
   switch (filter) {
@@ -16,11 +16,11 @@ const toPath = (filter, id) => {
 const InboxPage = props => {
   const { filter } = props;
   return (
-    <Page title={`${filter} page`}>
+    <PageLayout title={`${filter} page`}>
       <ul>
         <li><Link to={toPath(filter, 1234)}>Single thread</Link></li>
       </ul>
-    </Page>
+    </PageLayout>
   );
 };
 
@@ -28,6 +28,6 @@ InboxPage.defaultProps = { filter: 'conversation' };
 
 const { oneOf } = PropTypes;
 
-InboxPage.propTypes = { filter: oneOf([ 'orders', 'sales', 'conversation' ]) };
+InboxPage.propTypes = { filter: oneOf([ 'orders', 'sales', 'inbox' ]) };
 
 export default InboxPage;

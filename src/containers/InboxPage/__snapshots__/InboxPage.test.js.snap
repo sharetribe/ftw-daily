@@ -135,7 +135,7 @@ exports[`InboxPage matches snapshot 1`] = `
     </button>
   </div>
   <h1>
-    conversation page
+    inbox page
   </h1>
   <ul>
     <li>
