@@ -1,9 +1,11 @@
-import reducer, { addFlashNotification, removeFlashNotification } from './FlashNotification';
+import reducer, {
+  ADD_FLASH_NOTIFICATION,
+  REMOVE_FLASH_NOTIFICATION,
+  addFlashNotification,
+  removeFlashNotification,
+} from './FlashNotification.ducks';
 
 describe('FlashNotification', () => {
-  const ADD_FLASH_NOTIFICATION = 'FLASH::ADD_NOTIFICATION';
-  const REMOVE_FLASH_NOTIFICATION = 'FLASH::REMOVE_NOTIFICATION';
-
   describe('actions', () => {
     it('should create an action to add a filter', () => {
       const content = 'Error message';
@@ -12,9 +14,8 @@ describe('FlashNotification', () => {
         type: ADD_FLASH_NOTIFICATION,
         payload: { id: 'note_1', type, content, isRead: false },
       };
-      const serializedExpectations = JSON.stringify(expectedAction);
-      const received = JSON.stringify(addFlashNotification(type, content));
-      expect(received).toEqual(serializedExpectations);
+      const received = addFlashNotification(type, content);
+      expect(received).toEqual(expectedAction);
     });
 
     it('should create an action to remove a notification', () => {
@@ -31,21 +32,18 @@ describe('FlashNotification', () => {
     });
 
     it('should handle ADD_FLASH_NOTIFICATION', () => {
-      const flashNote1 = { id: 0, type: 'error', content: 'Run the tests', isRead: false };
-      const flashNote2 = { id: 0, type: 'error', content: 'Run the tests again', isRead: false };
-      const addFlashNote1 = { type: ADD_FLASH_NOTIFICATION, payload: flashNote1 };
-      const addFlashNote2 = { type: ADD_FLASH_NOTIFICATION, payload: flashNote2 };
+      const addFlashNote1 = addFlashNotification('error', 'Run the tests');
+      const addFlashNote2 = addFlashNotification('error', 'Run the tests again');
       const reduced = reducer([], addFlashNote1);
-      const reducedWithInitialContent = reducer([ flashNote1 ], addFlashNote2);
-      expect(reduced).toEqual([ flashNote1 ]);
-      expect(reducedWithInitialContent).toEqual([ flashNote1, flashNote2 ]);
+      const reducedWithInitialContent = reducer([ addFlashNote1.payload ], addFlashNote2);
+      expect(reduced).toEqual([ addFlashNote1.payload ]);
+      expect(reducedWithInitialContent).toEqual([ addFlashNote1.payload, addFlashNote2.payload ]);
     });
 
     it('should handle duplicates ADD_FILTER', () => {
-      const flashNote = { id: 0, type: 'error', content: 'Run the tests', isRead: false };
-      const addFlashNote = { type: ADD_FLASH_NOTIFICATION, payload: flashNote };
-      const reducedWithInitialContent = reducer([ flashNote ], addFlashNote);
-      expect(reducedWithInitialContent).toEqual([ flashNote ]);
+      const addFlashNote = addFlashNotification('error', 'Run the tests');
+      const reducedWithInitialContent = reducer([ addFlashNote.payload ], addFlashNote);
+      expect(reducedWithInitialContent).toEqual([ addFlashNote.payload ]);
     });
   });
 });

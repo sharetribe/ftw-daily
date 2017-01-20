@@ -3,20 +3,19 @@
  * container. We are following Ducks module proposition:
  * https://github.com/erikras/ducks-modular-redux
  */
-import unionBy from 'lodash/unionBy';
+import { unionWith, isEqual } from 'lodash';
 
 // Actions
-const ADD_FILTER = 'ADD_FILTER';
+export const ADD_FILTER = 'app/SearchPage/ADD_FILTER';
 
 // Reducer
 export default function reducer(state = {}, action = {}) {
   const { type, payload } = action;
   switch (type) {
-    case ADD_FILTER:
-      {
-        const stateFilters = state.filters || [];
-        return Object.assign({}, state, { filters: unionBy(stateFilters, [ payload ]) });
-      }
+    case ADD_FILTER: {
+      const stateFilters = state.filters || [];
+      return { ...state, ...{ filters: unionWith(stateFilters, [ payload ], isEqual) } };
+    }
     default:
       return state;
   }

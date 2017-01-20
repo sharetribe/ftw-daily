@@ -4,6 +4,6 @@
  * https://github.com/erikras/ducks-modular-redux
  */
 
-import FlashNotification from './FlashNotification';
+import FlashNotification from './FlashNotification.ducks';
 
 export { FlashNotification }; // eslint-disable-line import/prefer-default-export

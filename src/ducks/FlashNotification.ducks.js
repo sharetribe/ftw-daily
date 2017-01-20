@@ -5,12 +5,11 @@
  * https://github.com/erikras/ducks-modular-redux
  */
 
-import find from 'lodash/find';
-import findIndex from 'lodash/findIndex';
+import { find, findIndex } from 'lodash';
 
 // Actions: system notifications
-const ADD_FLASH_NOTIFICATION = 'FLASH::ADD_NOTIFICATION';
-const REMOVE_FLASH_NOTIFICATION = 'FLASH::REMOVE_NOTIFICATION';
+export const ADD_FLASH_NOTIFICATION = 'app/FlashNotification/ADD_NOTIFICATION';
+export const REMOVE_FLASH_NOTIFICATION = 'app/FlashNotification/REMOVE_NOTIFICATION';
 
 const initialState = [];
 

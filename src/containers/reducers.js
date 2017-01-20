@@ -5,6 +5,6 @@
  */
 
 /* eslint-disable import/prefer-default-export */
-import SearchPage from './SearchPage/SearchPageDucks';
+import SearchPage from './SearchPage/SearchPage.ducks';
 
 export { SearchPage };

@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { PageLayout } from '../../components';
-import { addFlashNotification } from '../../ducks/FlashNotification';
-import { addFilter } from './SearchPageDucks';
+import { addFlashNotification } from '../../ducks/FlashNotification.ducks';
+import { addFilter } from './SearchPage.ducks';
 
 export const SearchPageComponent = () => (
   <PageLayout title="Search page">
