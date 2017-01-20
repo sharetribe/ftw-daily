@@ -1935,9 +1935,9 @@ eslint-config-airbnb@14.0.0:
   dependencies:
     eslint-config-airbnb-base "^11.0.1"
 
-eslint-config-sharetribe@0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-sharetribe/-/eslint-config-sharetribe-0.1.0.tgz#190193d36f02dcb1231e5c6ec3717188be81f37c"
+eslint-config-sharetribe@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-sharetribe/-/eslint-config-sharetribe-0.2.0.tgz#e0b91ae2ad2f5775c853698a8d5b339adcc22837"
   dependencies:
     eslint-config-airbnb "14.0.0"
 
@@ -5294,9 +5294,9 @@ shallowequal@^0.2.2:
   dependencies:
     lodash.keys "^3.1.2"
 
-sharetribe-scripts@0.8.5:
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/sharetribe-scripts/-/sharetribe-scripts-0.8.5.tgz#b27c45984ae95cc9587341be56bb1ca7f3876c65"
+sharetribe-scripts@0.8.6:
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/sharetribe-scripts/-/sharetribe-scripts-0.8.6.tgz#3749867edce79e5ac824911c5536c7983ccae945"
   dependencies:
     autoprefixer "6.5.1"
     babel-core "6.17.0"
@@ -5312,7 +5312,7 @@ sharetribe-scripts@0.8.5:
     detect-port "1.0.1"
     dotenv "2.0.0"
     eslint "^3.13.0"
-    eslint-config-sharetribe "0.1.0"
+    eslint-config-sharetribe "0.2.0"
     eslint-loader "1.6.0"
     eslint-plugin-import "^2.2.0"
     eslint-plugin-jsx-a11y "^3.0.2"
