@@ -41,10 +41,8 @@ describe('Application', () => {
     });
 
     const urlRedirects = {
-      '/inbox': '/login',
       '/orders': '/login',
       '/sales': '/login',
-      '/conversation/1234': '/login',
       '/order/1234': '/login',
       '/order/1234/discussion': '/login',
       '/order/1234/details': '/login',
@@ -54,8 +52,6 @@ describe('Application', () => {
       '/listings': '/login',
       '/account': '/login',
       '/account/contact-details': '/login',
-      '/account/notifications': '/login',
-      '/account/payment-methods': '/login',
       '/account/payout-preferences': '/login',
       '/account/security': '/login',
     };
