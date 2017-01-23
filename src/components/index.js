@@ -1,4 +1,7 @@
 /* eslint-disable import/prefer-default-export */
+import NamedLink from './NamedLink/NamedLink';
 import PageLayout from './PageLayout/PageLayout';
+import RouterProvider from './RouterProvider/RouterProvider';
+import RoutesProvider from './RoutesProvider/RoutesProvider';
 
-export { PageLayout };
+export { NamedLink, PageLayout, RouterProvider, RoutesProvider };
