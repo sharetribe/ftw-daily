@@ -3,13 +3,17 @@ import { BrowserRouter } from 'react-router';
 import renderer from 'react-test-renderer';
 import { SearchPageComponent } from './SearchPage';
 import reducer, { ADD_FILTER, addFilter } from './SearchPage.ducks';
+import { RoutesProvider } from '../../components';
+import routesConfiguration from '../../routesConfiguration';
 
 describe('SearchPageComponent', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
       (
         <BrowserRouter>
-          <SearchPageComponent />
+          <RoutesProvider routes={routesConfiguration}>
+            <SearchPageComponent />
+          </RoutesProvider>
         </BrowserRouter>
       ),
     );
@@ -38,7 +42,9 @@ describe('SearchPageDucs', () => {
       const reduced = reducer([], addFilter1);
       const reducedWithInitialContent = reducer({ filters: [ addFilter1.payload ] }, addFilter2);
       expect(reduced).toEqual({ filters: [ addFilter1.payload ] });
-      expect(reducedWithInitialContent).toEqual({ filters: [ addFilter1.payload, addFilter2.payload ] });
+      expect(
+        reducedWithInitialContent,
+      ).toEqual({ filters: [ addFilter1.payload, addFilter2.payload ] });
     });
 
     it('should handle duplicates ADD_FILTER', () => {
