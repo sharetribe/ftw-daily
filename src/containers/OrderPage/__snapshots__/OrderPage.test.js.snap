@@ -19,7 +19,7 @@ exports[`OrderPage matches snapshot 1`] = `
     </a>
     <a
       className=""
-      href="/l/Bike-Pelago-12345"
+      href="/l/Bike-Pelago/12345"
       onClick={[Function]}
       style={Object {}}>
       Listing page

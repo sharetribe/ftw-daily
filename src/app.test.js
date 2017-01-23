@@ -25,7 +25,7 @@ describe('Application', () => {
     const urlTitles = {
       '/': 'Landing page',
       '/s': 'Search page',
-      '/l/1234': 'Listing page with listing id: #1234',
+      '/l/listing-title-slug/1234': 'Listing page with listing id: #1234',
       '/u/1234': 'Profile page with display name: 1234',
       '/checkout/1234': 'Checkout page: 1234',
       '/login': 'Authentication page: login tab',

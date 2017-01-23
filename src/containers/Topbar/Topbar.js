@@ -24,7 +24,7 @@ const Topbar = (props, context) => {
     <div className={css.container}>
       <Link to="/" {...linkProps}>Home</Link>
       <Link to="/s" {...linkProps}>Search</Link>
-      <Link to="/l/Bike-Pelago-12345" {...linkProps}>Listing page</Link>
+      <Link to="/l/Bike-Pelago/12345" {...linkProps}>Listing page</Link>
       <Link to="/u/Bikerrs" {...linkProps}>Profile</Link>
       <Link to="/u/Bikerrs/edit" {...linkProps}>Edit profile</Link>
       <Link to="/checkout/lid1234" {...linkProps}>Checkout</Link>
