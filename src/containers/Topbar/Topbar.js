@@ -36,8 +36,6 @@ const Topbar = (props, context) => {
       <Link to="/listings" {...linkProps}>Manage listings</Link>
       <Link to="/account" {...linkProps}>Account settings</Link>
       <Link to="/account/contact-details" {...linkProps}>Contact details</Link>
-      <Link to="/account/notifications" {...linkProps}>Notification settings</Link>
-      <Link to="/account/payment-methods" {...linkProps}>Payment methods</Link>
       <Link to="/account/payout-preferences" {...linkProps}>Payout preferences</Link>
       <Link to="/account/security" {...linkProps}>Security</Link>
       <SignoutButton router={context.router} />
