@@ -20,7 +20,8 @@ import './index.css';
 
 // If we're in a browser already, render the client application.
 if (typeof window !== 'undefined') {
-  const preloadedState = window.__PRELOADED_STATE__ || {}; // eslint-disable-line no-underscore-dangle
+  // eslint-disable-next-line no-underscore-dangle
+  const preloadedState = window.__PRELOADED_STATE__ || {};
   const store = configureStore(preloadedState);
 
   ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));

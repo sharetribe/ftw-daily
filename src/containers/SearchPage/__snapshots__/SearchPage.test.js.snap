@@ -19,7 +19,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
     </a>
     <a
       className=""
-      href="/l/Bike-Pelago-12345"
+      href="/l/Bike-Pelago/12345"
       onClick={[Function]}
       style={Object {}}>
       Listing page
@@ -103,20 +103,6 @@ exports[`SearchPageComponent matches snapshot 1`] = `
     </a>
     <a
       className=""
-      href="/account/notifications"
-      onClick={[Function]}
-      style={Object {}}>
-      Notification settings
-    </a>
-    <a
-      className=""
-      href="/account/payment-methods"
-      onClick={[Function]}
-      style={Object {}}>
-      Payment methods
-    </a>
-    <a
-      className=""
       href="/account/payout-preferences"
       onClick={[Function]}
       style={Object {}}>
@@ -139,10 +125,18 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   </h1>
   <a
     className=""
-    href="/l/Nice+studio-in-Helsinki-345"
+    href="/l/Nice-studio-in-Helsinki/345"
     onClick={[Function]}
     style={Object {}}>
     Nice studio in Helsinki
+  </a>
+  <br />
+  <a
+    className=""
+    href="/"
+    onClick={[Function]}
+    style={Object {}}>
+    LandingPage
   </a>
 </div>
 `;

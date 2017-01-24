@@ -1,31 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Match, Miss, Redirect } from 'react-router';
-import {
-  AuthenticationPage,
-  CheckoutPage,
-  ConversationPage,
-  ContactDetailsPage,
-  EditProfilePage,
-  InboxPage,
-  LandingPage,
-  ListingPage,
-  ManageListingsPage,
-  NotFoundPage,
-  NotificationSettingsPage,
-  OrderPage,
-  PasswordChangePage,
-  PasswordForgottenPage,
-  PaymentMethodsPage,
-  PayoutPreferencesPage,
-  ProfilePage,
-  SalesConversationPage,
-  SearchPage,
-  SecurityPage,
-} from './containers';
-
-// This is only used for testing that redirects work correct in the
-// client and when rendering in the server.
-const RedirectLandingPage = () => <Redirect to="/" />;
+import { RouterProvider, RoutesProvider } from './components';
+import { NotFoundPage } from './containers';
+import routesConfiguration, { flattenRoutes, pathByRouteName } from './routesConfiguration';
 
 // Fake authentication module
 // An example from react-router v4 repository
@@ -43,152 +20,63 @@ export const fakeAuth = {
   },
 };
 
-/* eslint-disable react/prop-types, arrow-body-style */
-// User must be authenticated before he can see certain pages
-export const MatchWhenAuthorized = ({ component: Component, ...rest }) => (
-  <Match
-    {...rest}
-    render={props => {
-        return fakeAuth.isAuthenticated
-          ? <Component {...props} />
-          : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
-      }}
-  />
-);
-/* eslint-enable react/prop-types, arrow-body-style */
+// wrap `Match` and use this everywhere instead, then when
+// sub routes are added to any route it'll work
+// This will also check if route needs authentication.
+/* eslint-disable arrow-body-style */
+const MatchWithSubRoutes = props => {
+  const { auth, component: Component, ...rest } = props;
+  const canShowComponent = !auth || (auth && fakeAuth.isAuthenticated);
+  return (
+    <Match
+      {...rest}
+      render={matchProps => {
+          return canShowComponent
+            ? <Component {...matchProps} />
+            : (
+              <Redirect
+                to={
+                  {
+                    pathname: pathByRouteName('LogInPage', routesConfiguration, {}),
+                    state: { from: matchProps.location },
+                  }
+                }
+              />
+            );
+        }}
+    />
+  );
+};
+/* eslint-enable arrow-body-style */
 
-class Routes extends React.Component {
-  getChildContext() {
-    return { router: this.props.router };
-  }
+MatchWithSubRoutes.defaultProps = { auth: false, exactly: false };
 
-  render() {
-    return (
-      <div>
-        <Match exactly pattern="/" component={LandingPage} />
+const { any, array, bool, func, node, oneOfType, string } = PropTypes;
 
-        {/* Search view */}
-        <Match exactly pattern="/s" component={SearchPage} />
+MatchWithSubRoutes.propTypes = {
+  pattern: string.isRequired,
+  auth: bool,
+  exactly: bool,
+  name: string.isRequired,
+  component: oneOfType([ func, node ]).isRequired,
+};
 
-        {/* Listing view */}
-        <Match exactly pattern="/l/:slug" component={ListingPage} />
-        <Match exactly pattern="/l" component={RedirectLandingPage} />
+const Routes = props => {
+  const flattenedRoutes = flattenRoutes(props.routes);
+  const matches = flattenedRoutes.map(route => <MatchWithSubRoutes key={route.name} {...route} />);
 
-        {/* profile / storefront view */}
-        <Match exactly pattern="/u/:displayName" component={ProfilePage} />
-        <MatchWhenAuthorized exactly pattern="/u/:displayName/edit" component={EditProfilePage} />
-        <Match exactly pattern="/u" component={RedirectLandingPage} />
+  return (
+    <RouterProvider router={props.router}>
+      <RoutesProvider routes={props.routes}>
+        <div>
+          {matches}
+          <Miss component={NotFoundPage} />
+        </div>
+      </RoutesProvider>
+    </RouterProvider>
+  );
+};
 
-        {/* checkout */}
-        <Match exactly pattern="/checkout/:listingId" component={CheckoutPage} />
-
-        {/* Login and signup */}
-        <Match
-          exactly
-          pattern="/login"
-          component={props => <AuthenticationPage {...props} tab="login" />}
-        />
-        <Match
-          exactly
-          pattern="/signup"
-          component={props => <AuthenticationPage {...props} tab="signup" />}
-        />
-
-        {/* Password forgotten */}
-        <Match exactly pattern="/password/forgotten" component={PasswordForgottenPage} />
-
-        {/* Change password */}
-        <Match exactly pattern="/password/change" component={PasswordChangePage} />
-
-        {/* Inbox and filtered views */}
-        <MatchWhenAuthorized
-          exactly
-          pattern="/inbox"
-          component={props => <InboxPage {...props} filter="inbox" />}
-        />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/orders"
-          component={props => <InboxPage {...props} filter="orders" />}
-        />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/sales"
-          component={props => <InboxPage {...props} filter="sales" />}
-        />
-
-        {/* Order/Conversation and mobile views */}
-        <MatchWhenAuthorized exactly pattern="/conversation/:id" component={ConversationPage} />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/order/:id"
-          component={props => <OrderPage {...props} tab="discussion" />}
-        />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/order/:id/discussion"
-          component={props => <OrderPage {...props} tab="discussion" />}
-        />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/order/:id/details"
-          component={props => <OrderPage {...props} tab="details" />}
-        />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/sale/:id"
-          component={props => <SalesConversationPage {...props} tab="discussion" />}
-        />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/sale/:id/discussion"
-          component={props => <SalesConversationPage {...props} tab="discussion" />}
-        />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/sale/:id/details"
-          component={props => <SalesConversationPage {...props} tab="details" />}
-        />
-
-        {/* Manage listings */}
-        <MatchWhenAuthorized exactly pattern="/listings" component={ManageListingsPage} />
-
-        {/* Account settings */}
-        <MatchWhenAuthorized
-          exactly
-          pattern="/account"
-          component={() => <Redirect to="/account/contact-details" />}
-        />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/account/contact-details"
-          component={ContactDetailsPage}
-        />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/account/notifications"
-          component={NotificationSettingsPage}
-        />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/account/payment-methods"
-          component={PaymentMethodsPage}
-        />
-        <MatchWhenAuthorized
-          exactly
-          pattern="/account/payout-preferences"
-          component={PayoutPreferencesPage}
-        />
-        <MatchWhenAuthorized exactly pattern="/account/security" component={SecurityPage} />
-        <Miss component={NotFoundPage} />
-      </div>
-    );
-  }
-}
-
-const { any } = PropTypes;
-
-Routes.propTypes = { router: any.isRequired };
-Routes.childContextTypes = { router: React.PropTypes.object };
+Routes.propTypes = { router: any.isRequired, routes: array.isRequired };
 
 export default Routes;

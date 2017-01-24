@@ -8,7 +8,7 @@ describe('ListingPage', () => {
     const component = renderer.create(
       (
         <BrowserRouter>
-          <ListingPage params={{ slug: 'really-nice-house-1234' }} />
+          <ListingPage params={{ slug: 'really-nice-house-1234', id: 1234 }} />
         </BrowserRouter>
       ),
     );

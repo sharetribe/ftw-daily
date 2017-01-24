@@ -19,7 +19,7 @@ exports[`InboxPage matches snapshot 1`] = `
     </a>
     <a
       className=""
-      href="/l/Bike-Pelago-12345"
+      href="/l/Bike-Pelago/12345"
       onClick={[Function]}
       style={Object {}}>
       Listing page
@@ -100,20 +100,6 @@ exports[`InboxPage matches snapshot 1`] = `
       onClick={[Function]}
       style={Object {}}>
       Contact details
-    </a>
-    <a
-      className=""
-      href="/account/notifications"
-      onClick={[Function]}
-      style={Object {}}>
-      Notification settings
-    </a>
-    <a
-      className=""
-      href="/account/payment-methods"
-      onClick={[Function]}
-      style={Object {}}>
-      Payment methods
     </a>
     <a
       className=""

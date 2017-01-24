@@ -1,13 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { PageLayout } from '../../components';
+import { NamedLink, PageLayout } from '../../components';
 import { addFlashNotification } from '../../ducks/FlashNotification.ducks';
 import { addFilter } from './SearchPage.ducks';
 
 export const SearchPageComponent = () => (
   <PageLayout title="Search page">
-    <Link to="/l/Nice+studio-in-Helsinki-345">Nice studio in Helsinki</Link>
+    <NamedLink name="ListingPage" params={{ slug: 'Nice-studio-in-Helsinki', id: 345 }}>
+      Nice studio in Helsinki
+    </NamedLink>
+    <br />
+    <NamedLink name="LandingPage">LandingPage</NamedLink>
   </PageLayout>
 );
 

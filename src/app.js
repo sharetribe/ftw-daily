@@ -5,6 +5,7 @@ import { BrowserRouter, ServerRouter } from 'react-router';
 import { Provider } from 'react-redux';
 import configureStore from './store';
 import Routes from './Routes';
+import routesConfiguration from './routesConfiguration';
 
 export const ClientApp = props => {
   const { store } = props;
@@ -12,7 +13,7 @@ export const ClientApp = props => {
     <BrowserRouter>
       {({ router }) => (
           <Provider store={store}>
-            <Routes router={router} />
+            <Routes router={router} routes={routesConfiguration} />
           </Provider>
         )}
     </BrowserRouter>
@@ -29,7 +30,7 @@ export const ServerApp = props => {
     <ServerRouter location={url} context={context}>
       {({ router }) => (
           <Provider store={store}>
-            <Routes router={router} />
+            <Routes router={router} routes={routesConfiguration} />
           </Provider>
         )}
     </ServerRouter>

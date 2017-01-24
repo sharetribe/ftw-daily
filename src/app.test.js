@@ -25,7 +25,7 @@ describe('Application', () => {
     const urlTitles = {
       '/': 'Landing page',
       '/s': 'Search page',
-      '/l/1234': 'Listing page with listing id: #1234',
+      '/l/listing-title-slug/1234': 'Listing page with listing id: #1234',
       '/u/1234': 'Profile page with display name: 1234',
       '/checkout/1234': 'Checkout page: 1234',
       '/login': 'Authentication page: login tab',
@@ -41,10 +41,8 @@ describe('Application', () => {
     });
 
     const urlRedirects = {
-      '/inbox': '/login',
       '/orders': '/login',
       '/sales': '/login',
-      '/conversation/1234': '/login',
       '/order/1234': '/login',
       '/order/1234/discussion': '/login',
       '/order/1234/details': '/login',
@@ -54,8 +52,6 @@ describe('Application', () => {
       '/listings': '/login',
       '/account': '/login',
       '/account/contact-details': '/login',
-      '/account/notifications': '/login',
-      '/account/payment-methods': '/login',
       '/account/payout-preferences': '/login',
       '/account/security': '/login',
     };

@@ -9,6 +9,7 @@
     "helmet": "^3.3.0",
     "lodash": "^4.17.4",
     "qs": "^6.3.0",
+    "path-to-regexp": "^1.5.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-helmet": "^4.0.0",
