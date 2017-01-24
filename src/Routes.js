@@ -48,7 +48,6 @@ const MatchWithSubRoutes = props => {
   );
 };
 /* eslint-enable arrow-body-style */
-
 MatchWithSubRoutes.defaultProps = { auth: false, exactly: false };
 
 const { any, array, bool, func, node, oneOfType, string } = PropTypes;

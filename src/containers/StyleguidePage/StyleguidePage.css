@@ -1,4 +1,6 @@
 .root {
+  padding: 1rem;
+
   & ul {
     list-style: none;
     padding: 0;

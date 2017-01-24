@@ -1,5 +1,72 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.6rem;
+}
+h3 {
+  font-size: 1.2rem;
+}
+h4,
+h5,
+h6 {
+  font-size: 1rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+input {
+  display: block;
+  width: 100%;
+  font-size: 1.4rem;
+}
+
+button {
+  display: block;
+  width: 100%;
+  font-size: 1.4rem;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ddd;
+  }
+  &:active {
+    background-color: #ccc;
+  }
+  &:disabled {
+    cursor: auto;
+
+    &:hover,
+    &:active {
+      background-color: #eee;
+    }
+  }
 }
