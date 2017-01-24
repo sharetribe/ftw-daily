@@ -3,20 +3,26 @@ import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { BrowserRouter, ServerRouter } from 'react-router';
 import { Provider } from 'react-redux';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import en from 'react-intl/locale-data/en';
 import configureStore from './store';
 import Routes from './Routes';
 import routesConfiguration from './routesConfiguration';
+import localeData from './translations/en.json';
 
 export const ClientApp = props => {
   const { store } = props;
+  addLocaleData([ ...en ]);
   return (
-    <BrowserRouter>
-      {({ router }) => (
-          <Provider store={store}>
-            <Routes router={router} routes={routesConfiguration} />
-          </Provider>
-        )}
-    </BrowserRouter>
+    <IntlProvider locale="en" messages={localeData}>
+      <BrowserRouter>
+        {({ router }) => (
+            <Provider store={store}>
+              <Routes router={router} routes={routesConfiguration} />
+            </Provider>
+          )}
+      </BrowserRouter>
+    </IntlProvider>
   );
 };
 
@@ -26,14 +32,17 @@ ClientApp.propTypes = { store: any.isRequired };
 
 export const ServerApp = props => {
   const { url, context, store } = props;
+  addLocaleData([ ...en ]);
   return (
-    <ServerRouter location={url} context={context}>
-      {({ router }) => (
-          <Provider store={store}>
-            <Routes router={router} routes={routesConfiguration} />
-          </Provider>
-        )}
-    </ServerRouter>
+    <IntlProvider locale="en" messages={localeData}>
+      <ServerRouter location={url} context={context}>
+        {({ router }) => (
+            <Provider store={store}>
+              <Routes router={router} routes={routesConfiguration} />
+            </Provider>
+          )}
+      </ServerRouter>
+    </IntlProvider>
   );
 };
 

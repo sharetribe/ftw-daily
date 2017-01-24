@@ -128,7 +128,9 @@ exports[`LandingPage matches snapshot 1`] = `
     href="/s?location=helsinki"
     onClick={[Function]}
     style={Object {}}>
-    Find studios
+    <span>
+      Show nice studios! (default)
+    </span>
   </a>
 </div>
 `;
