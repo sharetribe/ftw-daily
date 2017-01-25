@@ -1,15 +1,15 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router';
 import renderer from 'react-test-renderer';
+import { TestProvider } from '../../util/test-helpers';
 import SecurityPage from './SecurityPage';
 
 describe('SecurityPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
       (
-        <BrowserRouter>
+        <TestProvider>
           <SecurityPage />
-        </BrowserRouter>
+        </TestProvider>
       ),
     );
     const tree = component.toJSON();

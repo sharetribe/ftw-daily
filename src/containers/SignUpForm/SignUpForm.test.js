@@ -1,17 +1,15 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { Provider } from 'react-redux';
-import configureStore from '../../store';
+import { TestProvider } from '../../util/test-helpers';
 import SignUpForm from './SignUpForm';
 
 describe('SignUpForm', () => {
   it('matches snapshot', () => {
-    const store = configureStore();
     const component = renderer.create(
       (
-        <Provider store={store}>
+        <TestProvider>
           <SignUpForm />
-        </Provider>
+        </TestProvider>
       ),
     );
     const tree = component.toJSON();

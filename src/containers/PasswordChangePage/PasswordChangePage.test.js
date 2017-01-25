@@ -1,15 +1,15 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router';
 import renderer from 'react-test-renderer';
+import { TestProvider } from '../../util/test-helpers';
 import PasswordChangePage from './PasswordChangePage';
 
 describe('PasswordChangePage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
       (
-        <BrowserRouter>
+        <TestProvider>
           <PasswordChangePage />
-        </BrowserRouter>
+        </TestProvider>
       ),
     );
     const tree = component.toJSON();

@@ -10,10 +10,14 @@ import routesConfiguration, { flattenRoutes, pathByRouteName } from './routesCon
 export const fakeAuth = {
   isAuthenticated: false,
   authenticate(cb) {
+    // eslint-disable-next-line no-console
+    console.log('fakeAuth: authenticate');
     this.isAuthenticated = true;
     window.setTimeout(cb, 100); // fake async
   },
   signout(cb) {
+    // eslint-disable-next-line no-console
+    console.log('fakeAuth: signout');
     this.isAuthenticated = false;
     cb();
     window.setTimeout(cb, 100); // weird bug if async?

@@ -115,10 +115,6 @@ exports[`InboxPage matches snapshot 1`] = `
       style={Object {}}>
       Security
     </a>
-    <button
-      onClick={[Function]}>
-      Sign out
-    </button>
   </div>
   <h1>
     inbox page

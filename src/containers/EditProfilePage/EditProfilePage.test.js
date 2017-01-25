@@ -1,15 +1,15 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router';
 import renderer from 'react-test-renderer';
+import { TestProvider } from '../../util/test-helpers';
 import EditProfilePage from './EditProfilePage';
 
 describe('EditProfilePage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
       (
-        <BrowserRouter>
+        <TestProvider>
           <EditProfilePage params={{ displayName: 'my-shop' }} />
-        </BrowserRouter>
+        </TestProvider>
       ),
     );
     const tree = component.toJSON();

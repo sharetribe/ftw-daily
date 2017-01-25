@@ -115,10 +115,6 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       style={Object {}}>
       Security
     </a>
-    <button
-      onClick={[Function]}>
-      Sign out
-    </button>
   </div>
   <h1>
     Search page

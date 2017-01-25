@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link, Redirect } from 'react-router';
 import { PageLayout } from '../../components';
+import { LoginForm, SignUpForm } from '../../containers';
 import { fakeAuth } from '../../Routes';
 
 class AuthenticationPage extends Component {
@@ -8,10 +9,21 @@ class AuthenticationPage extends Component {
     super(props);
     this.state = { redirectToReferrer: false };
 
-    this.login = this.login.bind(this);
+    this.handleLogIn = this.handleLogIn.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
   }
 
-  login() {
+  handleLogIn(values) {
+    // eslint-disable-next-line no-console
+    console.log('log in with values:', values);
+    fakeAuth.authenticate(() => {
+      this.setState({ redirectToReferrer: true });
+    });
+  }
+
+  handleSignUp(values) {
+    // eslint-disable-next-line no-console
+    console.log('sign up with values:', values);
     fakeAuth.authenticate(() => {
       this.setState({ redirectToReferrer: true });
     });
@@ -20,7 +32,7 @@ class AuthenticationPage extends Component {
   render() {
     const from = this.props.location.state && this.props.location.state.from
       ? this.props.location.state.from
-      : '/';
+      : null;
     const { redirectToReferrer } = this.state;
 
     const toLogin = <Link to={{ pathname: '/login', state: { from: from || '/' } }}>Log in</Link>;
@@ -28,9 +40,12 @@ class AuthenticationPage extends Component {
       <Link to={{ pathname: '/signup', state: { from: from || '/' } }}>Sign up</Link>
     );
     const alternativeMethod = this.props.tab === 'login' ? toSignup : toLogin;
-    const currentMethod = this.props.tab === 'login' ? 'Log in' : 'Sign up';
 
-    const fromLoginMsg = from ? (
+    const form = this.props.tab === 'login'
+      ? <LoginForm onSubmit={this.handleLogIn} />
+      : <SignUpForm onSubmit={this.handleSignUp} />;
+
+    const fromLoginMsg = from && from.pathname ? (
         <p>
           You must log in to view the page at
           <code>{from.pathname}</code>
@@ -41,8 +56,8 @@ class AuthenticationPage extends Component {
       <PageLayout title={`Authentication page: ${this.props.tab} tab`}>
         {redirectToReferrer ? <Redirect to={from || '/'} /> : null}
         {fromLoginMsg}
-        <button onClick={this.login}>{currentMethod}</button>
-        <p>or {alternativeMethod}</p>
+        {form}
+        {alternativeMethod}
       </PageLayout>
     );
   }

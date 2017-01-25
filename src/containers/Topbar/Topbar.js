@@ -38,7 +38,7 @@ const Topbar = (props, context) => {
       <Link to="/account/contact-details" {...linkProps}>Contact details</Link>
       <Link to="/account/payout-preferences" {...linkProps}>Payout preferences</Link>
       <Link to="/account/security" {...linkProps}>Security</Link>
-      <SignoutButton router={context.router} />
+      {fakeAuth.isAuthenticated ? <SignoutButton router={context.router} /> : null}
     </div>
   );
 };

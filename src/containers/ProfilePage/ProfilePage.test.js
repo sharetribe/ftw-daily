@@ -1,15 +1,15 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router';
 import renderer from 'react-test-renderer';
+import { TestProvider } from '../../util/test-helpers';
 import ProfilePage from './ProfilePage';
 
 describe('ProfilePage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
       (
-        <BrowserRouter>
+        <TestProvider>
           <ProfilePage params={{ displayName: 'most-awesome-shop' }} />
-        </BrowserRouter>
+        </TestProvider>
       ),
     );
     const tree = component.toJSON();
