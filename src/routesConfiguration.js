@@ -19,6 +19,7 @@ import {
   SalesConversationPage,
   SearchPage,
   SecurityPage,
+  StyleguidePage,
 } from './containers';
 
 // This is only used for testing that redirects work correct in the
@@ -195,6 +196,30 @@ const routesConfiguration = [
         component: SecurityPage,
       },
     ],
+  },
+  {
+    pattern: '/styleguide',
+    exactly: true,
+    name: 'Styleguide',
+    component: StyleguidePage,
+  },
+  {
+    pattern: '/styleguide/:component',
+    exactly: true,
+    name: 'StyleguideComponent',
+    component: StyleguidePage,
+  },
+  {
+    pattern: '/styleguide/:component/:example',
+    exactly: true,
+    name: 'StyleguideComponentExample',
+    component: StyleguidePage,
+  },
+  {
+    pattern: '/styleguide/:component/:example/:type',
+    exactly: true,
+    name: 'StyleguideComponentExampleRaw',
+    component: StyleguidePage,
   },
 ];
 

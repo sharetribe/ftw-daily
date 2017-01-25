@@ -6,6 +6,7 @@ import InboxPage from './InboxPage/InboxPage';
 import LandingPage from './LandingPage/LandingPage';
 import ListingPage from './ListingPage/ListingPage';
 import ManageListingsPage from './ManageListingsPage/ManageListingsPage';
+import NotFoundPage from './NotFoundPage/NotFoundPage';
 import OrderPage from './OrderPage/OrderPage';
 import PasswordChangePage from './PasswordChangePage/PasswordChangePage';
 import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage';
@@ -14,7 +15,7 @@ import ProfilePage from './ProfilePage/ProfilePage';
 import SalesConversationPage from './SalesConversationPage/SalesConversationPage';
 import SearchPage from './SearchPage/SearchPage';
 import SecurityPage from './SecurityPage/SecurityPage';
-import NotFoundPage from './NotFoundPage/NotFoundPage';
+import StyleguidePage from './StyleguidePage/StyleguidePage';
 import Topbar from './Topbar/Topbar';
 
 export {
@@ -35,5 +36,6 @@ export {
   SalesConversationPage,
   SearchPage,
   SecurityPage,
+  StyleguidePage,
   Topbar,
 };
