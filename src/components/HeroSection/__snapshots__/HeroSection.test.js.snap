@@ -1,0 +1,27 @@
+exports[`HeroSection matches snapshot 1`] = `
+<section
+  className={undefined}>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <div
+        className={undefined}>
+        <span>
+          Book Studiotime anywhere
+        </span>
+      </div>
+      <div
+        className={undefined}>
+        <span>
+          The largest online community to rent music studios
+        </span>
+      </div>
+    </div>
+    <div
+      className={undefined}>
+      test
+    </div>
+  </div>
+</section>
+`;
