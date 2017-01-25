@@ -18,6 +18,8 @@
     "react-router": "4.0.0-alpha.6",
     "react-test-renderer": "^15.4.2",
     "redux": "^3.6.0",
+    "redux-form": "^6.4.3",
+    "sanitize.css": "^4.1.0",
     "sharetribe-scripts": "0.8.6",
     "source-map-support": "^0.4.10"
   },

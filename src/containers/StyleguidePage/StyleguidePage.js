@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { map, size } from 'lodash';
-import * as allExamples from '../../components/examples';
+import * as allExamples from '../../examples';
 
 import css from './StyleguidePage.css';
 

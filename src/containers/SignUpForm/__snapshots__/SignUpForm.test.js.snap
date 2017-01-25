@@ -1,0 +1,63 @@
+exports[`SignUpForm matches snapshot 1`] = `
+<form
+  onSubmit={[Function]}>
+  <label
+    htmlFor="email">
+    Email
+  </label>
+  <input
+    name="email"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onDragStart={[Function]}
+    onDrop={[Function]}
+    onFocus={[Function]}
+    type="email"
+    value="" />
+  <label
+    htmlFor="firstName">
+    First name
+  </label>
+  <input
+    name="firstName"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onDragStart={[Function]}
+    onDrop={[Function]}
+    onFocus={[Function]}
+    value="" />
+  <label
+    htmlFor="lastName">
+    Last name
+  </label>
+  <input
+    name="lastName"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onDragStart={[Function]}
+    onDrop={[Function]}
+    onFocus={[Function]}
+    value="" />
+  <label
+    htmlFor="password">
+    Password
+  </label>
+  <input
+    name="password"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onDragStart={[Function]}
+    onDrop={[Function]}
+    onFocus={[Function]}
+    type="password"
+    value="" />
+  <p>
+    By confirming I accept the booking terms and conditions.
+  </p>
+  <button
+    disabled={true}
+    type="submit">
+    Sign up
+  </button>
+</form>
+`;

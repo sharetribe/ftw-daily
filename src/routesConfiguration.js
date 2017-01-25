@@ -197,12 +197,7 @@ const routesConfiguration = [
       },
     ],
   },
-  {
-    pattern: '/styleguide',
-    exactly: true,
-    name: 'Styleguide',
-    component: StyleguidePage,
-  },
+  { pattern: '/styleguide', exactly: true, name: 'Styleguide', component: StyleguidePage },
   {
     pattern: '/styleguide/:component',
     exactly: true,

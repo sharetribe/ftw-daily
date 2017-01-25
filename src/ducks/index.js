@@ -4,6 +4,7 @@
  * https://github.com/erikras/ducks-modular-redux
  */
 
+import { reducer as formReducer } from 'redux-form';
 import FlashNotification from './FlashNotification.ducks';
 
-export { FlashNotification }; // eslint-disable-line import/prefer-default-export
+export { formReducer as form, FlashNotification };
