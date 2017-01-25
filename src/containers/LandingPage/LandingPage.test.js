@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { TestProvider } from '../../util/test-helpers';
-import LandingPage from './LandingPage';
+import { LandingPageComponent } from './LandingPage';
 import { RoutesProvider } from '../../components';
 import routesConfiguration from '../../routesConfiguration';
 
@@ -11,7 +11,7 @@ describe('LandingPage', () => {
       (
         <TestProvider>
           <RoutesProvider routes={routesConfiguration}>
-            <LandingPage />
+            <LandingPageComponent onLocationChanged={v => v} />
           </RoutesProvider>
         </TestProvider>
       ),
