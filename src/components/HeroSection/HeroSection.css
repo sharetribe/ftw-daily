@@ -1,0 +1,37 @@
+.section {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  background-image: url('http://placehold.it/700x300');
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titleWrapper {
+  text-align: center;
+}
+
+.title {
+  font-size: 2em;
+}
+.subTitle {
+  font-size: 1em;
+}
+
+.ctaWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  width: 90vw;
+}
+
