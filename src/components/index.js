@@ -5,6 +5,7 @@ import ListingCardSmall from './ListingCardSmall/ListingCardSmall';
 import MapPanel from './MapPanel/MapPanel';
 import Menu from './Menu/Menu';
 import NamedLink from './NamedLink/NamedLink';
+import NamedRedirect from './NamedRedirect/NamedRedirect';
 import PageLayout from './PageLayout/PageLayout';
 import RouterProvider from './RouterProvider/RouterProvider';
 import RoutesProvider from './RoutesProvider/RoutesProvider';
