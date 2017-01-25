@@ -4,6 +4,7 @@ import ChangePasswordForm from './ChangePasswordForm/ChangePasswordForm';
 import CheckoutPage from './CheckoutPage/CheckoutPage';
 import ContactDetailsPage from './ContactDetailsPage/ContactDetailsPage';
 import EditProfilePage from './EditProfilePage/EditProfilePage';
+import HeroSearchForm from './HeroSearchForm/HeroSearchForm';
 import InboxPage from './InboxPage/InboxPage';
 import LandingPage from './LandingPage/LandingPage';
 import ListingPage from './ListingPage/ListingPage';
@@ -30,6 +31,7 @@ export {
   CheckoutPage,
   ContactDetailsPage,
   EditProfilePage,
+  HeroSearchForm,
   InboxPage,
   LandingPage,
   ListingPage,
