@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { TestProvider } from '../../util/test-helpers';
-import LandingPage from './LandingPage';
 import { RoutesProvider } from '../../components';
 import routesConfiguration from '../../routesConfiguration';
+import LandingPage from './LandingPage';
 
 describe('LandingPage', () => {
   it('matches snapshot', () => {
@@ -11,7 +11,7 @@ describe('LandingPage', () => {
       (
         <TestProvider>
           <RoutesProvider routes={routesConfiguration}>
-            <LandingPage />
+            <LandingPage changeLocationFilter={(v) => v} />
           </RoutesProvider>
         </TestProvider>
       ),
