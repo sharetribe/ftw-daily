@@ -1,32 +1,4 @@
-html {
-  box-sizing: border-box;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  line-height: 1.4;
-}
-
-h1 {
-  font-size: 2rem;
-}
-h2 {
-  font-size: 1.6rem;
-}
-h3 {
-  font-size: 1.2rem;
-}
-h4,
-h5,
-h6 {
-  font-size: 1rem;
-}
+@import "sanitize.css";
 
 ul {
   list-style: none;
@@ -43,6 +15,7 @@ input {
   display: block;
   width: 100%;
   font-size: 1.4rem;
+  border: 1px solid #ddd;
 }
 
 button {
@@ -63,6 +36,7 @@ button {
   }
   &:disabled {
     cursor: auto;
+    color: #aaa;
 
     &:hover,
     &:active {
