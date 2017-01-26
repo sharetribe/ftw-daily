@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { find } from 'lodash';
+import { includes } from 'lodash';
 import { addFlashNotification } from '../../ducks/FlashNotification.ducks';
 import { addFilter } from './SearchPage.ducks';
 import css from './SearchPage.css';
@@ -13,31 +13,6 @@ import {
   PageLayout,
   SearchResultsPanel,
 } from '../../components';
-
-const tabClasses = [
-  { name: 'filters', css: css.filters },
-  { name: 'listings', css: css.listings },
-  { name: 'map', css: css.map },
-];
-
-const findTab = forTabType => {
-  const foundTab = find(tabClasses, c => c.name === forTabType);
-  if (!foundTab) {
-    return find(tabClasses, c => c.name === 'listings');
-  }
-  return foundTab;
-};
-
-const combinedClasses = (forTabType, currentTab) => {
-  const foundTab = findTab(forTabType);
-  const shouldOpenDefault = !currentTab && foundTab.name === 'listings';
-
-  if (foundTab.name === currentTab || shouldOpenDefault) {
-    return classNames(foundTab.css, css.open);
-  }
-
-  return foundTab.css;
-};
 
 const fakeListings = [
   {
@@ -66,18 +41,32 @@ const fakeListings = [
 
 export const SearchPageComponent = props => {
   const { tab } = props;
+  const selectedTab = includes(['filters','listings', 'map'], tab)
+    ? tab
+    : 'listings';
+
+  const filtersClassName = classNames(css.filters, {
+    [css.open]: selectedTab === 'filters',
+  });
+  const listingsClassName = classNames(css.filters, {
+    [css.open]: selectedTab === 'listings',
+  });
+  const mapClassName = classNames(css.filters, {
+    [css.open]: selectedTab === 'map',
+  });
+
   return (
     <PageLayout title="Search page">
       <div className={css.container}>
-        <div className={combinedClasses('filters', tab)}>
+        <div className={filtersClassName}>
           <FilterPanel />
         </div>
-        <div className={combinedClasses('listings', tab)}>
+        <div className={listingsClassName}>
           <SearchResultsPanel>
             {fakeListings.map(l => <ListingCard key={l.id} {...l} />)}
           </SearchResultsPanel>
         </div>
-        <div className={combinedClasses('map', tab)}>
+        <div className={mapClassName}>
           <MapPanel>
             {fakeListings.map(l => <ListingCardSmall key={l.id} {...l} />)}
           </MapPanel>
