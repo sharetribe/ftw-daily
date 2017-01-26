@@ -122,7 +122,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   <div
     className={undefined}>
     <div
-      className={undefined}>
+      className="">
       <div>
         <h1
           className={undefined}>
@@ -145,7 +145,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       </div>
     </div>
     <div
-      className="">
+      className="undefined">
       <div>
         <div
           className={undefined}>
@@ -343,7 +343,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       </div>
     </div>
     <div
-      className={undefined}>
+      className="">
       <div>
         <div
           className={undefined}>
