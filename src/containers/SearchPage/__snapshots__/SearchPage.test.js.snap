@@ -119,20 +119,339 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   <h1>
     Search page
   </h1>
-  <a
-    className=""
-    href="/l/Nice-studio-in-Helsinki/345"
-    onClick={[Function]}
-    style={Object {}}>
-    Nice studio in Helsinki
-  </a>
-  <br />
-  <a
-    className=""
-    href="/"
-    onClick={[Function]}
-    style={Object {}}>
-    LandingPage
-  </a>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <div>
+        <h1
+          className={undefined}>
+          Filters
+        </h1>
+        <a
+          className=""
+          href="/s/listings"
+          onClick={[Function]}
+          style={Object {}}>
+          See studios
+        </a>
+        <a
+          className=""
+          href="/s/listings"
+          onClick={[Function]}
+          style={Object {}}>
+          X
+        </a>
+      </div>
+    </div>
+    <div
+      className="">
+      <div>
+        <div
+          className={undefined}>
+          New York, Jan 2nd – Jan 4th 
+          <span
+            className={undefined}>
+            ▼
+          </span>
+        </div>
+        <div
+          className={undefined}>
+          <div
+            className={undefined}>
+            <div
+              className={undefined}>
+              <img
+                alt="Listing Title"
+                className={undefined}
+                src="http://placehold.it/400x300" />
+            </div>
+          </div>
+          <div
+            className={undefined}>
+            <div
+              className={undefined}>
+              <a
+                className=""
+                href="/l/Banyan-Studios/123"
+                onClick={[Function]}
+                style={Object {}}>
+                Banyan Studios
+              </a>
+              <div
+                className={undefined}>
+                55€ / day
+              </div>
+            </div>
+            <div
+              className={undefined}>
+              Organic Music Production in a Sustainable, Ethical and Professional Studio.
+            </div>
+            <div
+              className={undefined}>
+              <div
+                className={undefined}>
+                New York, NY • 40mi away
+              </div>
+              <div
+                className={undefined}>
+                (
+                <span>
+                  4
+                </span>
+                <span>
+                  /5
+                </span>
+                )
+                 
+                <span>
+                  8 reviews
+                </span>
+              </div>
+            </div>
+            <hr />
+            <div
+              className={undefined}>
+              <div
+                className={undefined}>
+                <img
+                  alt="The Stardust Collective"
+                  className={undefined}
+                  src="http://placehold.it/44x44" />
+              </div>
+              <div
+                className={undefined}>
+                <span
+                  className={undefined}>
+                  The Stardust Collective
+                </span>
+                <div
+                  className={undefined}>
+                  review: 
+                  <span>
+                    4
+                  </span>
+                  <span>
+                    /5
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className={undefined}>
+          <div
+            className={undefined}>
+            <div
+              className={undefined}>
+              <img
+                alt="Listing Title"
+                className={undefined}
+                src="http://placehold.it/400x300" />
+            </div>
+          </div>
+          <div
+            className={undefined}>
+            <div
+              className={undefined}>
+              <a
+                className=""
+                href="/l/Pienix-Studio/1234"
+                onClick={[Function]}
+                style={Object {}}>
+                Pienix Studio
+              </a>
+              <div
+                className={undefined}>
+                80€ day
+              </div>
+            </div>
+            <div
+              className={undefined}>
+              Pienix Studio specializes in music mixing and mastering production.
+            </div>
+            <div
+              className={undefined}>
+              <div
+                className={undefined}>
+                New York, NY • 6mi away
+              </div>
+              <div
+                className={undefined}>
+                (
+                <span>
+                  4
+                </span>
+                <span>
+                  /5
+                </span>
+                )
+                 
+                <span>
+                  7 reviews
+                </span>
+              </div>
+            </div>
+            <hr />
+            <div
+              className={undefined}>
+              <div
+                className={undefined}>
+                <img
+                  alt="Juhan"
+                  className={undefined}
+                  src="http://placehold.it/44x44" />
+              </div>
+              <div
+                className={undefined}>
+                <span
+                  className={undefined}>
+                  Juhan
+                </span>
+                <div
+                  className={undefined}>
+                  review: 
+                  <span>
+                    4
+                  </span>
+                  <span>
+                    /5
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className={undefined}>
+          <a
+            className=""
+            href="/s/filters"
+            onClick={[Function]}
+            style={Object {}}>
+            Filters
+          </a>
+          <a
+            className=""
+            href="/s/map"
+            onClick={[Function]}
+            style={Object {}}>
+            Map
+          </a>
+        </div>
+      </div>
+    </div>
+    <div
+      className={undefined}>
+      <div>
+        <div
+          className={undefined}>
+          Map
+        </div>
+        <div
+          className={undefined}>
+          <div
+            className={undefined}>
+            <div
+              className={undefined}>
+              <div
+                className={undefined}>
+                <img
+                  alt="Listing Title"
+                  className={undefined}
+                  src="http://placehold.it/200x150" />
+              </div>
+            </div>
+            <div
+              className={undefined}>
+              <a
+                className=""
+                href="/l/Banyan-Studios/123"
+                onClick={[Function]}
+                style={Object {}}>
+                Banyan Studios
+              </a>
+              <div
+                className={undefined}>
+                (
+                <span>
+                  4
+                </span>
+                <span>
+                  /5
+                </span>
+                )
+                 
+                <span>
+                  8 reviews
+                </span>
+              </div>
+              <div
+                className={undefined}>
+                55€ / day
+              </div>
+            </div>
+          </div>
+          <div
+            className={undefined}>
+            <div
+              className={undefined}>
+              <div
+                className={undefined}>
+                <img
+                  alt="Listing Title"
+                  className={undefined}
+                  src="http://placehold.it/200x150" />
+              </div>
+            </div>
+            <div
+              className={undefined}>
+              <a
+                className=""
+                href="/l/Pienix-Studio/1234"
+                onClick={[Function]}
+                style={Object {}}>
+                Pienix Studio
+              </a>
+              <div
+                className={undefined}>
+                (
+                <span>
+                  4
+                </span>
+                <span>
+                  /5
+                </span>
+                )
+                 
+                <span>
+                  7 reviews
+                </span>
+              </div>
+              <div
+                className={undefined}>
+                80€ day
+              </div>
+            </div>
+          </div>
+        </div>
+        <a
+          className=""
+          href="/s/filters"
+          onClick={[Function]}
+          style={Object {}}>
+          Filters
+        </a>
+        <a
+          className=""
+          href="/s/listings"
+          onClick={[Function]}
+          style={Object {}}>
+          X
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 `;
