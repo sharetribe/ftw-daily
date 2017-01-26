@@ -1,6 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { TestProvider } from '../../util/test-helpers';
+import { RoutesProvider } from '../../components';
+import routesConfiguration from '../../routesConfiguration';
 import ListingPage from './ListingPage';
 
 describe('ListingPage', () => {
@@ -8,7 +10,9 @@ describe('ListingPage', () => {
     const component = renderer.create(
       (
         <TestProvider>
-          <ListingPage params={{ slug: 'really-nice-house-1234', id: 1234 }} />
+          <RoutesProvider routes={routesConfiguration}>
+            <ListingPage params={{ slug: 'banyan-studios', id: 1234 }} />
+          </RoutesProvider>
         </TestProvider>
       ),
     );
