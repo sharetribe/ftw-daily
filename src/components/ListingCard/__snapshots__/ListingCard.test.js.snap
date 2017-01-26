@@ -1,0 +1,86 @@
+exports[`ListingCard matches snapshot 1`] = `
+<div
+  className={undefined}>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <img
+        alt="Listing Title"
+        className={undefined}
+        src="http://placehold.it/400x300" />
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <a
+        className=""
+        href="/l/Banyan-Studios/123"
+        onClick={[Function]}
+        style={Object {}}>
+        Banyan Studios
+      </a>
+      <div
+        className={undefined}>
+        55€ / day
+      </div>
+    </div>
+    <div
+      className={undefined}>
+      Organic Music Production in a Sustainable, Ethical and Professional Studio.
+    </div>
+    <div
+      className={undefined}>
+      <div
+        className={undefined}>
+        New York, NY • 40mi away
+      </div>
+      <div
+        className={undefined}>
+        (
+        <span>
+          4
+        </span>
+        <span>
+          /5
+        </span>
+        )
+         
+        <span>
+          8 reviews
+        </span>
+      </div>
+    </div>
+    <hr />
+    <div
+      className={undefined}>
+      <div
+        className={undefined}>
+        <img
+          alt="The Stardust Collective"
+          className={undefined}
+          src="http://placehold.it/44x44" />
+      </div>
+      <div
+        className={undefined}>
+        <span
+          className={undefined}>
+          The Stardust Collective
+        </span>
+        <div
+          className={undefined}>
+          review: 
+          <span>
+            4
+          </span>
+          <span>
+            /5
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

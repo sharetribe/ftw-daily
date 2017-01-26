@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "basic-auth": "^1.1.0",
+    "classnames": "^2.2.5",
     "compression": "^1.6.2",
     "express": "^4.14.0",
     "helmet": "^3.3.0",

@@ -1,0 +1,10 @@
+exports[`Menu matches snapshot 1`] = `
+<div
+  className={undefined}>
+  New York, Jan 2nd – Jan 4th 
+  <span
+    className={undefined}>
+    ▼
+  </span>
+</div>
+`;

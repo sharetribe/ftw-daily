@@ -1,17 +1,17 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { TestProvider } from '../../util/test-helpers';
-import { LandingPageComponent } from './LandingPage';
 import { RoutesProvider } from '../../components';
 import routesConfiguration from '../../routesConfiguration';
+import SearchResultsPanel from './SearchResultsPanel';
 
-describe('LandingPage', () => {
+describe('SearchResultsPanel', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
       (
         <TestProvider>
           <RoutesProvider routes={routesConfiguration}>
-            <LandingPageComponent onLocationChanged={v => v} />
+            <SearchResultsPanel />
           </RoutesProvider>
         </TestProvider>
       ),
