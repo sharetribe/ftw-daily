@@ -1,0 +1,52 @@
+.messageDate {
+  color: #bbb;
+  display: block;
+  text-align: center;
+  margin-right: 1rem;
+  font-size: 0.8rem;
+}
+
+.messageText {
+  background-color: #eee;
+  padding: 1rem;
+  margin: 0 1rem;
+}
+
+.messageAuthor {
+  color: #666;
+  display: block;
+  text-align: right;
+  margin-right: 1rem;
+}
+
+.sendMessageForm {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #eee;
+  padding: 1rem;
+}
+
+.sendMessageInput {
+  display: inline-block;
+  width: calc(100% - 6rem);
+  font-family: sans-serif;
+  padding: 0.5rem;
+  border-right: none;
+  background-color: #fff;
+}
+
+.sendMessageButton {
+  display: inline-block;
+  width: 6rem;
+  margin: 0;
+  background-color: #aaa;
+  color: #fff;
+  border: 1px solid #aaa;
+
+  &:hover,
+  &:active {
+    background-color: #999;
+    border-color: #999;
+  }
+}

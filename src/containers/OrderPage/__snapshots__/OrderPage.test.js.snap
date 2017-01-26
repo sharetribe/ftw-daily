@@ -117,36 +117,121 @@ exports[`OrderPage matches snapshot 1`] = `
     </a>
   </div>
   <h1>
-    Order page
+    Your Banyan Studios booking is confirmed!
   </h1>
-  <p>
-    Order id: 
-    1234
-  </p>
+  <a
+    className=""
+    href="/order/1234/details"
+    onClick={[Function]}
+    style={
+      Object {
+        "marginRight": "2rem",
+      }
+    }>
+    Booking details
+  </a>
   <a
     className=""
     href="/order/1234/discussion"
     onClick={[Function]}
     style={Object {}}>
-    Discussion tab
+    Discussion
   </a>
-  <br />
-  <a
-    className=""
-    href="/order/1234/details"
-    onClick={[Function]}
-    style={Object {}}>
-    Details tab
-  </a>
-  <p>
-    Mobile layout needs different views for discussion and details.
-  </p>
-  <p>
-    Discussion view is the default if route doesn\'t specify mobile tab (e.g. 
-    <i>
-      /order/1234
-    </i>
-    )
-  </p>
+  <div
+    className="undefined">
+    <img
+      alt="Banyan Studios"
+      src="http://placehold.it/750x470"
+      style={
+        Object {
+          "width": "100%",
+        }
+      } />
+    <h3>
+      Banyan Studios
+    </h3>
+    <div>
+      <p>
+        350 5th Avenue
+      </p>
+      <p>
+        New York, NY 10118
+      </p>
+      <p>
+        +1 432 43184910
+      </p>
+      <p>
+        Get directions
+      </p>
+    </div>
+    <p>
+      Confirmation code 
+      X2587X
+    </p>
+    <dl>
+      <dt>
+        Price per day:
+      </dt>
+      <dd>
+        55€
+      </dd>
+      <dt>
+        Booking period:
+      </dt>
+      <dd>
+        Jan 2nd - Jan 4th, 3 days
+      </dd>
+      <dt>
+        Total
+      </dt>
+      <dd>
+        165€
+      </dd>
+    </dl>
+    <p>
+      Cancel booking
+    </p>
+    <a
+      className=""
+      href="/order/1234/discussion"
+      onClick={[Function]}
+      style={Object {}}>
+      You have a new message!
+    </a>
+  </div>
+  <div
+    className="">
+    <ul>
+      <li>
+        <span
+          className={undefined}>
+          2017-02-26T00:00:00.000Z
+        </span>
+        <div
+          className={undefined}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac tellus ornare, tempor lacus quis, imperdiet lectus. Morbi suscipit semper nisl at lacinia. Vestibulum malesuada mattis nisl, et venenatis enim volutpat sit amet. Nulla laoreet feugiat gravida. Fusce ultricies nisl quis aliquet ullamcorper. Nulla congue risus metus.
+        </div>
+        <span
+          className={undefined}>
+          John
+        </span>
+      </li>
+    </ul>
+    <form
+      className={undefined}
+      onSubmit={[Function]}>
+      <input
+        autoFocus={true}
+        className={undefined}
+        onChange={[Function]}
+        type="text"
+        value="" />
+      <button
+        className={undefined}
+        type="submit">
+        Send
+      </button>
+    </form>
+  </div>
 </div>
 `;

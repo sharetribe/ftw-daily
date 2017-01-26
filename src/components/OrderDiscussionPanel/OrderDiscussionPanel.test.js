@@ -1,17 +1,17 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { TestProvider } from '../../util/test-helpers';
-import OrderPage from './OrderPage';
+import OrderDiscussionPanel from './OrderDiscussionPanel.js';
 import { RoutesProvider } from '../../components';
 import routesConfiguration from '../../routesConfiguration';
 
-describe('OrderPage', () => {
+describe('OrderDiscussionPanel', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
       (
         <TestProvider>
           <RoutesProvider routes={routesConfiguration}>
-            <OrderPage params={{ id: 1234 }} tab="details" />
+            <OrderDiscussionPanel />
           </RoutesProvider>
         </TestProvider>
       ),

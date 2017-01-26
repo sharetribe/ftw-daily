@@ -1,30 +1,65 @@
-/* eslint-disable react/no-unescaped-entities */
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import { PageLayout } from '../../components';
+import classNames from 'classnames';
+import { OrderDetailsPanel, OrderDiscussionPanel, NamedLink, PageLayout } from '../../components';
+
+import css from './OrderPage.css';
 
 const OrderPage = props => {
   const { params } = props;
+  const orderId = params.id;
+
+  const title = 'Banyan Studios';
+
+  const detailsProps = {
+    title,
+    orderId,
+    imageUrl: 'http://placehold.it/750x470',
+    info: {
+      pricePerDay: '55\u20AC',
+      bookingPeriod: 'Jan 2nd - Jan 4th',
+      bookingDuration: '3 days',
+      total: '165\u20AC',
+    },
+    contact: {
+      addressLine1: '350 5th Avenue',
+      addressLine2: 'New York, NY 10118',
+      phoneNumber: '+1 432 43184910',
+    },
+    confirmationCode: 'X2587X',
+  };
+
+  const activeStyle = { fontWeight: 'bold' };
+  const detailsClassName = classNames(css.tabContent, {
+    [css.tabContentVisible]: props.tab === 'details',
+  });
+  const discussionClassName = classNames(css.tabContent, {
+    [css.tabContentVisible]: props.tab === 'discussion',
+  });
+
   return (
-    <PageLayout title="Order page">
-      <p>Order id: {params.id}</p>
-      <Link to={`/order/${params.id}/discussion`}>Discussion tab</Link>
-      <br />
-      <Link to={`/order/${params.id}/details`}>Details tab</Link>
-      <p>Mobile layout needs different views for discussion and details.</p>
-      <p>
-         Discussion view is the default if route doesn't specify mobile tab (e.g. <i>
-          /order/1234
-        </i>)
-      </p>
+    <PageLayout title={`Your ${title} booking is confirmed!`}>
+      <NamedLink
+        name="OrderDetailsPage"
+        params={{ id: orderId }}
+        style={{ marginRight: '2rem' }}
+        activeStyle={activeStyle}
+      >
+        Booking details
+      </NamedLink>
+      <NamedLink name="OrderDiscussionPage" params={{ id: orderId }} activeStyle={activeStyle}>
+        Discussion
+      </NamedLink>
+      <OrderDetailsPanel className={detailsClassName} {...detailsProps} />
+      <OrderDiscussionPanel className={discussionClassName} />
     </PageLayout>
   );
 };
 
-const { number, oneOfType, shape, string } = PropTypes;
+const { string, shape, oneOfType, number, oneOf } = PropTypes;
 
 OrderPage.propTypes = {
   params: shape({ id: oneOfType([ number, string ]).isRequired }).isRequired,
+  tab: oneOf([ 'details', 'discussion' ]).isRequired,
 };
 
 export default OrderPage;
