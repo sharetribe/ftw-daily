@@ -1,0 +1,29 @@
+exports[`SearchResultsPanel matches snapshot 1`] = `
+<div>
+  <div
+    className={undefined}>
+    New York, Jan 2nd – Jan 4th 
+    <span
+      className={undefined}>
+      ▼
+    </span>
+  </div>
+  <div
+    className={undefined}>
+    <a
+      className=""
+      href="/s/filters"
+      onClick={[Function]}
+      style={Object {}}>
+      Filters
+    </a>
+    <a
+      className=""
+      href="/s/map"
+      onClick={[Function]}
+      style={Object {}}>
+      Map
+    </a>
+  </div>
+</div>
+`;

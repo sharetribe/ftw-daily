@@ -1,0 +1,24 @@
+exports[`MapPanel matches snapshot 1`] = `
+<div>
+  <div
+    className={undefined}>
+    Map
+  </div>
+  <div
+    className={undefined} />
+  <a
+    className=""
+    href="/s/filters"
+    onClick={[Function]}
+    style={Object {}}>
+    Filters
+  </a>
+  <a
+    className=""
+    href="/s/listings"
+    onClick={[Function]}
+    style={Object {}}>
+    X
+  </a>
+</div>
+`;
