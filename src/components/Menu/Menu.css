@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  border-top: solid 1px #f7f7f7;
+}
+.container:hover {
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+.openIndicator {
+  margin-left: auto;
+  margin-right: 1em;
+}
