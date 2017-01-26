@@ -1,6 +1,10 @@
 import React from 'react';
-import { find } from 'lodash';
+import { find, trimEnd, trimStart } from 'lodash';
 import { Redirect } from 'react-router';
+
+// This will change to `matchPath` soonish
+import matchPattern from 'react-router/matchPattern'
+
 import pathToRegexp from 'path-to-regexp';
 import {
   AuthenticationPage,
@@ -269,7 +273,41 @@ const toPathByRouteName = (nameToFind, routes) => {
 const pathByRouteName = (nameToFind, routes, params = {}) =>
   toPathByRouteName(nameToFind, routes)(params);
 
+const patternJoin = (a, b) => `${trimEnd(a, '/')}/${trimStart(b, '/')}`;
+
+// This is based on routes addon, which was not very active repository at the time of writing.
+const matchRoutesToLocation = (routes, location, matchedRoutes=[], params={}, parentPattern='') => {
+  const parameters = { ...params };
+  routes.forEach((route) => {
+    const { exactly = false } = route;
+
+    const nestedPattern = patternJoin(parentPattern, route.pattern || '');
+    const match = !route.pattern ? true : matchPattern(nestedPattern, location, exactly);
+
+    if (match) {
+      matchedRoutes.push(route);
+
+      if (match.params) {
+        Object.keys(match.params).forEach(key => { parameters[key] = match.params[key];  });
+      }
+
+      if (route.routes) {
+        matchRoutesToLocation(route.routes, location, matchedRoutes, parameters, nestedPattern);
+      }
+    }
+  })
+
+  return { matchedRoutes, params: parameters }
+}
+
+const matchLocationCreator = routes => (
+  (location, matchedRoutes=[], params={}, parentPattern='') =>
+    matchRoutesToLocation(routes, { pathname: location }, matchedRoutes, params, parentPattern)
+);
+
+const matchLocation = matchLocationCreator(routesConfiguration);
+
 // Exported helpers
-export { findRouteByName, flattenRoutes, toPathByRouteName, pathByRouteName };
+export { findRouteByName, flattenRoutes, matchLocation, toPathByRouteName, pathByRouteName };
 
 export default routesConfiguration;

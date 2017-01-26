@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { includes } from 'lodash';
@@ -39,41 +39,53 @@ const fakeListings = [
   },
 ];
 
-export const SearchPageComponent = props => {
-  const { tab } = props;
-  const selectedTab = includes(['filters','listings', 'map'], tab)
-    ? tab
-    : 'listings';
+export class SearchPageComponent extends Component {
 
-  const filtersClassName = classNames(css.filters, {
-    [css.open]: selectedTab === 'filters',
-  });
-  const listingsClassName = classNames(css.filters, {
-    [css.open]: selectedTab === 'listings',
-  });
-  const mapClassName = classNames(css.filters, {
-    [css.open]: selectedTab === 'map',
-  });
+  componentWillMount() {
+    /* eslint-disable no-console */
+    console.log('Client loads data');
+    SearchPageComponent.loadData().then((val) => {
+      console.log('Client fetched data', val);
+    });
+    /* eslint-enable no-console */
+  }
 
-  return (
-    <PageLayout title="Search page">
-      <div className={css.container}>
-        <div className={filtersClassName}>
-          <FilterPanel />
+  render() {
+    const { tab } = this.props;
+    const selectedTab = includes(['filters','listings', 'map'], tab)
+      ? tab
+      : 'listings';
+
+    const filtersClassName = classNames(css.filters, {
+      [css.open]: selectedTab === 'filters',
+    });
+    const listingsClassName = classNames(css.filters, {
+      [css.open]: selectedTab === 'listings',
+    });
+    const mapClassName = classNames(css.filters, {
+      [css.open]: selectedTab === 'map',
+    });
+
+    return (
+      <PageLayout title="Search page">
+        <div className={css.container}>
+          <div className={filtersClassName}>
+            <FilterPanel />
+          </div>
+          <div className={listingsClassName}>
+            <SearchResultsPanel>
+              {fakeListings.map(l => <ListingCard key={l.id} {...l} />)}
+            </SearchResultsPanel>
+          </div>
+          <div className={mapClassName}>
+            <MapPanel>
+              {fakeListings.map(l => <ListingCardSmall key={l.id} {...l} />)}
+            </MapPanel>
+          </div>
         </div>
-        <div className={listingsClassName}>
-          <SearchResultsPanel>
-            {fakeListings.map(l => <ListingCard key={l.id} {...l} />)}
-          </SearchResultsPanel>
-        </div>
-        <div className={mapClassName}>
-          <MapPanel>
-            {fakeListings.map(l => <ListingCardSmall key={l.id} {...l} />)}
-          </MapPanel>
-        </div>
-      </div>
-    </PageLayout>
-  );
+      </PageLayout>
+    );
+  }
 };
 
 SearchPageComponent.defaultProps = { tab: 'listings' };
@@ -81,6 +93,15 @@ SearchPageComponent.defaultProps = { tab: 'listings' };
 const { string } = PropTypes;
 
 SearchPageComponent.propTypes = { tab: string };
+
+SearchPageComponent.loadData = () => (
+  new Promise((resolve) => (
+    // also node has a 'setTimeout' -> it's good for testing async call.
+    setTimeout(() => {
+      resolve(fakeListings);
+    }, (Math.random() * 2000) + 1000)
+  ))
+);
 
 /**
  * Container functions.
