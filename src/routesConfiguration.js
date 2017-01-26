@@ -28,7 +28,32 @@ const RedirectLandingPage = () => <Redirect to="/" />;
 
 const routesConfiguration = [
   { pattern: '/', exactly: true, name: 'LandingPage', component: LandingPage },
-  { pattern: '/s', exactly: true, name: 'SearchPage', component: SearchPage },
+  {
+    pattern: '/s',
+    exactly: true,
+    name: 'SearchPage',
+    component: SearchPage,
+    routes: [
+      {
+        pattern: '/s/filters',
+        exactly: true,
+        name: 'SearchFiltersPage',
+        component: props => <SearchPage {...props} tab="filters" />,
+      },
+      {
+        pattern: '/s/listings',
+        exactly: true,
+        name: 'SearchListingsPage',
+        component: props => <SearchPage {...props} tab="listings" />,
+      },
+      {
+        pattern: '/s/map',
+        exactly: true,
+        name: 'SearchMapPage',
+        component: props => <SearchPage {...props} tab="map" />,
+      },
+    ],
+  },
   {
     pattern: '/l',
     exactly: true,
