@@ -27,7 +27,7 @@ describe('Application', () => {
       '/s': 'Search page',
       '/l/listing-title-slug/1234': 'Listing page with listing id: #1234',
       '/u/1234': 'Profile page with display name: 1234',
-      '/checkout/1234': 'Checkout page: 1234',
+      '/checkout/1234': 'Book Banyan Studios (1234)',
       '/login': 'Authentication page: login tab',
       '/signup': 'Authentication page: signup tab',
       '/password/forgotten': 'Request new password',
@@ -37,7 +37,7 @@ describe('Application', () => {
     forEach(urlTitles, (title, url) => {
       const context = createServerRenderContext();
       const body = render(url, context);
-      expect(body.includes(`>${title}</h1>`)).toEqual(true);
+      expect(body).toMatch(`>${title}</h1>`);
     });
 
     const urlRedirects = {

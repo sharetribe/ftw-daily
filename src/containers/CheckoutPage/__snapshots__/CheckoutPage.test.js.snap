@@ -117,16 +117,45 @@ exports[`CheckoutPage matches snapshot 1`] = `
     </a>
   </div>
   <h1>
-    Checkout page: some-listing-id
+    Book Banyan Studios (some-listing-id)
   </h1>
+  <img
+    alt="Banyan Studios"
+    src="http://placehold.it/750x470"
+    style={
+      Object {
+        "width": "100%",
+      }
+    } />
+  <dl>
+    <dt>
+      Price per day:
+    </dt>
+    <dd>
+      55€
+    </dd>
+    <dt>
+      Booking period:
+    </dt>
+    <dd>
+      Jan 2nd - Jan 4th, 3 days
+    </dd>
+    <dt>
+      Total
+    </dt>
+    <dd>
+      165€
+    </dd>
+  </dl>
+  <p>
+    By confirming I accept the booking terms and conditions.
+  </p>
   <a
     className=""
-    href="/order/12345"
+    href="/order/12345/details"
     onClick={[Function]}
     style={Object {}}>
-    <button>
-      Pay
-    </button>
+    Confirm & Pay
   </a>
 </div>
 `;
