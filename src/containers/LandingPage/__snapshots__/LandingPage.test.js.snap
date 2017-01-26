@@ -119,14 +119,51 @@ exports[`LandingPage matches snapshot 1`] = `
   <h1>
     Landing page
   </h1>
-  <a
-    className=""
-    href="/s?location=helsinki"
-    onClick={[Function]}
-    style={Object {}}>
-    <span>
-      Show nice studios! (default)
-    </span>
-  </a>
+  <section
+    className={undefined}>
+    <div
+      className={undefined}>
+      <div
+        className={undefined}>
+        <div
+          className={undefined}>
+          <span>
+            Book Studiotime anywhere
+          </span>
+        </div>
+        <div
+          className={undefined}>
+          <span>
+            The largest online community to rent music studios
+          </span>
+        </div>
+      </div>
+      <div
+        className={undefined}>
+        <form
+          onSubmit={[Function]}>
+          <input
+            className={undefined}
+            name="location"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            placeholder="Location search (soon)"
+            type="text"
+            value="" />
+          <button
+            className={undefined}
+            disabled={true}
+            type="submit">
+            <span>
+              Search
+            </span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
 </div>
 `;
