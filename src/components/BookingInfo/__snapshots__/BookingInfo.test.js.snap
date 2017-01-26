@@ -1,0 +1,22 @@
+exports[`BookingInfo matches snapshot 1`] = `
+<dl>
+  <dt>
+    Price per day:
+  </dt>
+  <dd>
+    55\\\\u20AC
+  </dd>
+  <dt>
+    Booking period:
+  </dt>
+  <dd>
+    Jan 2nd - Jan 4th, 3 days
+  </dd>
+  <dt>
+    Total
+  </dt>
+  <dd>
+    165\\u20AC
+  </dd>
+</dl>
+`;

@@ -1,3 +1,4 @@
+import BookingInfo from './BookingInfo/BookingInfo';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
 import ListingCard from './ListingCard/ListingCard';
@@ -12,6 +13,7 @@ import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 
 export {
+  BookingInfo,
   FilterPanel,
   HeroSection,
   ListingCard,
