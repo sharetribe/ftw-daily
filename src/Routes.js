@@ -30,7 +30,8 @@ export const fakeAuth = {
 /* eslint-disable arrow-body-style */
 const MatchWithSubRoutes = props => {
   const { auth, component: Component, ...rest } = props;
-  const canShowComponent = !auth || (auth && fakeAuth.isAuthenticated);
+  const isAuthenticated = auth && fakeAuth.isAuthenticated;
+  const canShowComponent = !auth || isAuthenticated;
   return (
     <Match
       {...rest}
