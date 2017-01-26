@@ -1,0 +1,24 @@
+.navigation {
+  display: flex;
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  margin-left: -100px;
+}
+
+.button {
+  display: block;
+  width: 100px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.4rem;
+  padding: 0.5rem;
+  margin: 1rem 0.1rem;
+  color: #fff;
+  background-color: #9B9B9B;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #888;
+  }
+}
