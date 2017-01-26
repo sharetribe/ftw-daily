@@ -22,7 +22,8 @@
     "redux-form": "^6.4.3",
     "sanitize.css": "^4.1.0",
     "sharetribe-scripts": "0.8.6",
-    "source-map-support": "^0.4.10"
+    "source-map-support": "^0.4.10",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
