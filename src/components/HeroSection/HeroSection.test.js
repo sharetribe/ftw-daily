@@ -12,7 +12,7 @@ describe('HeroSection', () => {
             test
           </HeroSection>
         </IntlProvider>
-      )
+      ),
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

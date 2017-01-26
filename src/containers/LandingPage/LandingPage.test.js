@@ -11,7 +11,7 @@ describe('LandingPage', () => {
       (
         <TestProvider>
           <RoutesProvider routes={routesConfiguration}>
-            <LandingPage changeLocationFilter={(v) => v} />
+            <LandingPage changeLocationFilter={v => v} />
           </RoutesProvider>
         </TestProvider>
       ),
