@@ -1,36 +1,7 @@
 import React, { PropTypes } from 'react';
-import { PageLayout, NamedLink } from '../../components';
+import { BookingInfo, PageLayout, NamedLink } from '../../components';
 
 import css from './CheckoutPage.css';
-
-const BookingInfo = props => {
-  const { pricePerDay, bookingPeriod, bookingDuration, total } = props;
-  return (
-    <dl>
-      <dt>
-        Price per day:
-      </dt>
-      <dd>{pricePerDay}</dd>
-      <dt>
-        Booking period:
-      </dt>
-      <dd>{`${bookingPeriod}, ${bookingDuration}`}</dd>
-      <dt>
-        Total
-      </dt>
-      <dd>{total}</dd>
-    </dl>
-  );
-};
-
-const { string, shape } = PropTypes;
-
-BookingInfo.propTypes = {
-  pricePerDay: string.isRequired,
-  bookingPeriod: string.isRequired,
-  bookingDuration: string.isRequired,
-  total: string.isRequired,
-};
 
 const CheckoutPage = props => {
   const { params } = props;
@@ -56,6 +27,8 @@ const CheckoutPage = props => {
     </PageLayout>
   );
 };
+
+const { shape, string } = PropTypes;
 
 CheckoutPage.propTypes = { params: shape({ listingId: string.isRequired }).isRequired };
 

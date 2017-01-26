@@ -144,7 +144,7 @@ const routesConfiguration = [
     auth: true,
     exactly: true,
     name: 'OrderPage',
-    component: props => <OrderPage {...props} tab="discussion" />,
+    component: () => <Redirect to="/" />,
     routes: [
       {
         pattern: '/order/:id/details',

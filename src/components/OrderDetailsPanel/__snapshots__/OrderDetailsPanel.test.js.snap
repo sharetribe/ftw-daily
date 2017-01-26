@@ -1,0 +1,64 @@
+exports[`OrderDetailsPanel matches snapshot 1`] = `
+<div
+  className={null}>
+  <img
+    alt="Test order"
+    src="http://example.com/img"
+    style={
+      Object {
+        "width": "100%",
+      }
+    } />
+  <h3>
+    Test order
+  </h3>
+  <div>
+    <p>
+      Some road 1
+    </p>
+    <p>
+      Some city, somewhere
+    </p>
+    <p>
+      Some phone number
+    </p>
+    <p>
+      Get directions
+    </p>
+  </div>
+  <p>
+    Confirmation code 
+    some-test-confirmation-code
+  </p>
+  <dl>
+    <dt>
+      Price per day:
+    </dt>
+    <dd>
+      10$
+    </dd>
+    <dt>
+      Booking period:
+    </dt>
+    <dd>
+      some booking period, some booking duration
+    </dd>
+    <dt>
+      Total
+    </dt>
+    <dd>
+      100$
+    </dd>
+  </dl>
+  <p>
+    Cancel booking
+  </p>
+  <a
+    className=""
+    href="/order/some-test-order-id/discussion"
+    onClick={[Function]}
+    style={Object {}}>
+    You have a new message!
+  </a>
+</div>
+`;
