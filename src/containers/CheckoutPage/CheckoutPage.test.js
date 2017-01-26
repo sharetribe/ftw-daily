@@ -2,13 +2,17 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { TestProvider } from '../../util/test-helpers';
 import CheckoutPage from './CheckoutPage';
+import { RoutesProvider } from '../../components';
+import routesConfiguration from '../../routesConfiguration';
 
 describe('CheckoutPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
       (
         <TestProvider>
-          <CheckoutPage params={{ listingId: 'some-listing-id' }} />
+          <RoutesProvider routes={routesConfiguration}>
+            <CheckoutPage params={{ listingId: 'some-listing-id' }} />
+          </RoutesProvider>
         </TestProvider>
       ),
     );

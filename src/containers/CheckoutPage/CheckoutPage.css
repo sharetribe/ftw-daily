@@ -1,0 +1,21 @@
+.buttonLink {
+  display: block;
+  width: 100%;
+  font-size: 1.4rem;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  cursor: pointer;
+
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+
+  &:hover {
+    background-color: #ddd;
+  }
+  &:active {
+    background-color: #ccc;
+  }
+}

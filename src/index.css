@@ -1,5 +1,9 @@
 @import "sanitize.css";
 
+html {
+  font-family: sans-serif;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -27,6 +31,7 @@ button {
   background-color: #eee;
   border: 1px solid #ddd;
   cursor: pointer;
+  font-family: sans-serif;
 
   &:hover {
     background-color: #ddd;
