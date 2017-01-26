@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+}
+
+.tab {
+  display: none;
+}
+
+.filters {
+  composes: tab;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.listings{
+  composes: tab;
+}
+
+.map {
+  composes: tab;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+
+
+.open {
+  display: block;
+}
