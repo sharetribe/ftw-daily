@@ -1,0 +1,44 @@
+exports[`ListingCardSmall matches snapshot 1`] = `
+<div
+  className={undefined}>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <img
+        alt="Listing Title"
+        className={undefined}
+        src="http://placehold.it/200x150" />
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <a
+      className=""
+      href="/l/Banyan-Studios/123"
+      onClick={[Function]}
+      style={Object {}}>
+      Banyan Studios
+    </a>
+    <div
+      className={undefined}>
+      (
+      <span>
+        4
+      </span>
+      <span>
+        /5
+      </span>
+      )
+       
+      <span>
+        8 reviews
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      55€ / day
+    </div>
+  </div>
+</div>
+`;
