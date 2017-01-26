@@ -115,16 +115,59 @@ exports[`SecurityPage matches snapshot 1`] = `
       style={Object {}}>
       Security
     </a>
-    <button
-      onClick={[Function]}>
-      Sign out
-    </button>
   </div>
   <h1>
     Security
   </h1>
-  <p>
-    Change password, delete account
-  </p>
+  <form
+    onSubmit={[Function]}>
+    <label
+      htmlFor="newPassword1">
+      New password
+    </label>
+    <input
+      name="newPassword1"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onDragStart={[Function]}
+      onDrop={[Function]}
+      onFocus={[Function]}
+      type="password"
+      value="" />
+    <label
+      htmlFor="newPassword2">
+      New password, again
+    </label>
+    <input
+      name="newPassword2"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onDragStart={[Function]}
+      onDrop={[Function]}
+      onFocus={[Function]}
+      type="password"
+      value="" />
+    <label
+      htmlFor="password">
+      Current password
+    </label>
+    <input
+      name="password"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onDragStart={[Function]}
+      onDrop={[Function]}
+      onFocus={[Function]}
+      type="password"
+      value="" />
+    <p>
+      Delete account (module)
+    </p>
+    <button
+      disabled={true}
+      type="submit">
+      Save changes
+    </button>
+  </form>
 </div>
 `;

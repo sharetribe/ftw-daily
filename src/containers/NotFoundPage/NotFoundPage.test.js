@@ -1,15 +1,15 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router';
 import renderer from 'react-test-renderer';
+import { TestProvider } from '../../util/test-helpers';
 import NotFoundPage from './NotFoundPage';
 
 describe('NotFoundPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
       (
-        <BrowserRouter>
+        <TestProvider>
           <NotFoundPage />
-        </BrowserRouter>
+        </TestProvider>
       ),
     );
     const tree = component.toJSON();

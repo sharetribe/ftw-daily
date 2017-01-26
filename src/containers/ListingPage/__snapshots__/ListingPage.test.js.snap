@@ -115,10 +115,6 @@ exports[`ListingPage matches snapshot 1`] = `
       style={Object {}}>
       Security
     </a>
-    <button
-      onClick={[Function]}>
-      Sign out
-    </button>
   </div>
   <h1>
     Listing page with listing id: #1234

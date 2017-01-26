@@ -115,10 +115,6 @@ exports[`EditProfilePage matches snapshot 1`] = `
       style={Object {}}>
       Security
     </a>
-    <button
-      onClick={[Function]}>
-      Sign out
-    </button>
   </div>
   <h1>
     Edit profile page with display name: my-shop

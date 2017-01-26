@@ -1,15 +1,15 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router';
 import renderer from 'react-test-renderer';
+import { TestProvider } from '../../util/test-helpers';
 import OrderPage from './OrderPage';
 
 describe('OrderPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
       (
-        <BrowserRouter>
+        <TestProvider>
           <OrderPage params={{ id: 1234 }} />
-        </BrowserRouter>
+        </TestProvider>
       ),
     );
     const tree = component.toJSON();

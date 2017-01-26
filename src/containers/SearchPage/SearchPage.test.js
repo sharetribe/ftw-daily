@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router';
 import renderer from 'react-test-renderer';
+import { TestProvider } from '../../util/test-helpers';
 import { SearchPageComponent } from './SearchPage';
 import reducer, { ADD_FILTER, addFilter } from './SearchPage.ducks';
 import { RoutesProvider } from '../../components';
@@ -10,11 +10,11 @@ describe('SearchPageComponent', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
       (
-        <BrowserRouter>
+        <TestProvider>
           <RoutesProvider routes={routesConfiguration}>
             <SearchPageComponent />
           </RoutesProvider>
-        </BrowserRouter>
+        </TestProvider>
       ),
     );
     const tree = component.toJSON();
