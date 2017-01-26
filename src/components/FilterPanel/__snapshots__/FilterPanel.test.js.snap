@@ -1,0 +1,22 @@
+exports[`FilterPanel matches snapshot 1`] = `
+<div>
+  <h1
+    className={undefined}>
+    Filters
+  </h1>
+  <a
+    className=""
+    href="/s/listings"
+    onClick={[Function]}
+    style={Object {}}>
+    See studios
+  </a>
+  <a
+    className=""
+    href="/s/listings"
+    onClick={[Function]}
+    style={Object {}}>
+    X
+  </a>
+</div>
+`;
