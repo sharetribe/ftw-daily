@@ -15,6 +15,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ClientApp, renderApp } from './app';
 import configureStore from './store';
+import { matchLocation } from './routesConfiguration';
 
 import './index.css';
 
@@ -29,3 +30,5 @@ if (typeof window !== 'undefined') {
 
 // Export the function for server side rendering.
 export default renderApp;
+
+export { matchLocation };

@@ -22,6 +22,7 @@ const compression = require('compression');
 const path = require('path');
 const fs = require('fs');
 const qs = require('qs');
+const url = require('url');
 const _ = require('lodash');
 const React = require('react');
 const { createServerRenderContext } = require('react-router');
@@ -33,7 +34,9 @@ const buildPath = path.resolve(__dirname, '..', 'build');
 const manifestPath = path.join(buildPath, 'asset-manifest.json');
 const manifest = require(manifestPath);
 const mainJsPath = path.join(buildPath, manifest['main.js']);
-const renderApp = require(mainJsPath).default;
+const mainJs = require(mainJsPath);
+const renderApp = mainJs.default;
+const matchPathname = mainJs.matchPathname;
 
 // The HTML build file is generated from the `public/index.html` file
 // and used as a template for server side rendering. The application
@@ -66,8 +69,21 @@ const template = _.template(indexHtml, {
   escape: reNoMatch,
 });
 
-function render(url, context, preloadedState) {
-  const { head, body } = renderApp(url, context, preloadedState);
+function render(requestUrl, context, preloadedState) {
+  const { head, body } = renderApp(requestUrl, context, preloadedState);
+
+  const pathname = url.parse(requestUrl).pathname;
+  const { matchedRoutes, params } = matchPathname(pathname);
+  const component = matchedRoutes[0].component;
+
+  if (component.loadData) {
+    component
+      .loadData()
+      .then((val) => {
+        console.log('Data fetch resolved', val);
+      });
+  }
+
 
   // Preloaded state needs to be passed for client side too.
   // For security reasons we ensure that preloaded state is considered as a string

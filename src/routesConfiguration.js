@@ -1,6 +1,10 @@
 import React from 'react';
 import { find } from 'lodash';
 import { Redirect } from 'react-router';
+
+// This will change to `matchPath` soonish
+import matchPattern from 'react-router/matchPattern'
+
 import pathToRegexp from 'path-to-regexp';
 import {
   AuthenticationPage,
@@ -269,7 +273,42 @@ const toPathByRouteName = (nameToFind, routes) => {
 const pathByRouteName = (nameToFind, routes, params = {}) =>
   toPathByRouteName(nameToFind, routes)(params);
 
+/**
+ * matchRoutesToLocation helps to figure out which routes are related to given location.
+ */
+const matchRoutesToLocation = (routes, location, matchedRoutes=[], params={}) => {
+  const parameters = { ...params };
+  routes.forEach((route) => {
+    const { exactly = false } = route;
+    const match = !route.pattern ? true : matchPattern(route.pattern, location, exactly);
+
+    if (match) {
+      matchedRoutes.push(route);
+
+      if (match.params) {
+        Object.keys(match.params).forEach(key => { parameters[key] = match.params[key];  });
+      }
+    }
+
+    if (route.routes) {
+      matchRoutesToLocation(route.routes, location, matchedRoutes, parameters);
+    }
+  });
+
+  return { matchedRoutes, params: parameters };
+}
+
+const matchPathnameCreator = routes => (
+  (location, matchedRoutes=[], params={}) =>
+    matchRoutesToLocation(routes, { pathname: location }, matchedRoutes, params)
+);
+
+/**
+ * matchRoutesToLocation helps to figure out which routes are related to given location.
+ */
+const matchPathname = matchPathnameCreator(routesConfiguration);
+
 // Exported helpers
-export { findRouteByName, flattenRoutes, toPathByRouteName, pathByRouteName };
+export { findRouteByName, flattenRoutes, matchPathname, toPathByRouteName, pathByRouteName };
 
 export default routesConfiguration;
