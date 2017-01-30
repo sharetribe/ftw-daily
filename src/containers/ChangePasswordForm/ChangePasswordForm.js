@@ -16,4 +16,4 @@ const ChangePasswordForm = props => {
 
 ChangePasswordForm.propTypes = { ...formPropTypes };
 
-export default reduxForm({ form: 'changePassword' })(ChangePasswordForm)
+export default reduxForm({ form: 'changePassword' })(ChangePasswordForm);

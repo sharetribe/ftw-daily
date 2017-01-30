@@ -17,4 +17,4 @@ const LoginForm = props => {
 
 LoginForm.propTypes = { ...formPropTypes };
 
-export default reduxForm({ form: 'login' })(LoginForm)
+export default reduxForm({ form: 'login' })(LoginForm);

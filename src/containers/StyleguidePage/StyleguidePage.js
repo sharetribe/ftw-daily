@@ -38,7 +38,7 @@ Example.defaultProps = { description: null, props: {} };
 Example.propTypes = {
   componentName: string.isRequired,
   exampleName: string.isRequired,
-  component: oneOfType([ func, node ]).isRequired,
+  component: oneOfType([func, node]).isRequired,
   description: string,
   props: object,
 };
@@ -48,11 +48,9 @@ const Examples = props => {
   const toExamples = (exmpls, name) => (
     <li key={name}>
       <ul>
-        {
-          map(exmpls, (exmpl, exampleName) => (
-            <Example key={exampleName} componentName={name} exampleName={exampleName} {...exmpl} />
-          ))
-        }
+        {map(exmpls, (exmpl, exampleName) => (
+          <Example key={exampleName} componentName={name} exampleName={exampleName} {...exmpl} />
+        ))}
       </ul>
     </li>
   );

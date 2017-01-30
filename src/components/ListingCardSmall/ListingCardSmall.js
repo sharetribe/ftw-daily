@@ -18,7 +18,7 @@ const ListingCardSmall = props => {
           {title}
         </NamedLink>
         <div className={css.reviews}>
-           (<span>{review.rating}</span><span>/5</span>){' '}
+          (<span>{review.rating}</span><span>/5</span>){' '}
           <span>{review.count}</span>
         </div>
         <div className={css.price}>

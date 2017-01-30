@@ -6,11 +6,9 @@ import LoginForm from './LoginForm';
 describe('LoginForm', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <LoginForm />
-        </TestProvider>
-      ),
+      <TestProvider>
+        <LoginForm />
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

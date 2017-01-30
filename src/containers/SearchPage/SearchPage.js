@@ -109,4 +109,4 @@ const mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchPageComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPageComponent);

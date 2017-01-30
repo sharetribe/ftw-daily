@@ -8,13 +8,11 @@ import routesConfiguration from '../../routesConfiguration';
 describe('LandingPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <RoutesProvider routes={routesConfiguration}>
-            <LandingPageComponent onLocationChanged={v => v} />
-          </RoutesProvider>
-        </TestProvider>
-      ),
+      <TestProvider>
+        <RoutesProvider routes={routesConfiguration}>
+          <LandingPageComponent onLocationChanged={v => v} />
+        </RoutesProvider>
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

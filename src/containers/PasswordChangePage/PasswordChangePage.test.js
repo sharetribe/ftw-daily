@@ -6,11 +6,9 @@ import PasswordChangePage from './PasswordChangePage';
 describe('PasswordChangePage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <PasswordChangePage />
-        </TestProvider>
-      ),
+      <TestProvider>
+        <PasswordChangePage />
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

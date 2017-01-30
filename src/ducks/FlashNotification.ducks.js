@@ -26,15 +26,13 @@ export default (state = initialState, action) => {
       return state;
 
     case REMOVE_FLASH_NOTIFICATION:
-      return state.map(
-        findIndex(state, msg => msg.id === payload.id),
-        msg => msg.set('isRead', true),
-      );
+      return state.map(findIndex(state, msg => msg.id === payload.id), msg =>
+        msg.set('isRead', true));
 
     default:
       return state;
   }
-}
+};
 
 // Action Creators
 let nextMessageId = 1;

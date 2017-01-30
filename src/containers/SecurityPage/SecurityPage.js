@@ -11,4 +11,4 @@ export default () => (
   <PageLayout title="Security">
     <ChangeAccountPasswordForm onSubmit={changePassword} />
   </PageLayout>
-)
+);

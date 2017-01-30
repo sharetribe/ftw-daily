@@ -13,13 +13,11 @@ export const LandingPageComponent = props => {
   const handleSubmit = createSubmitHandler(props.onLocationChanged);
   const componentOrRedirect = props.LocationFilter && props.LocationFilter.length > 0
     ? <NamedRedirect name="SearchPage" query={{ location: props.LocationFilter }} />
-    : (
-      <PageLayout title="Landing page">
+    : <PageLayout title="Landing page">
         <HeroSection>
           <HeroSearchForm className={css.form} onSubmit={handleSubmit} />
         </HeroSection>
-      </PageLayout>
-    );
+      </PageLayout>;
 
   return componentOrRedirect;
 };
@@ -43,4 +41,4 @@ const mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return { onLocationChanged: v => dispatch(changeLocationFilter(v)) };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LandingPageComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPageComponent);

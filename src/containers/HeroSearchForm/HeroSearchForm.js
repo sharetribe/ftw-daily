@@ -29,4 +29,4 @@ const HeroSearchForm = props => {
 
 HeroSearchForm.propTypes = { ...formPropTypes, intl: intlShape.isRequired };
 
-export default reduxForm({ form: 'herosearchform' })(injectIntl(HeroSearchForm))
+export default reduxForm({ form: 'herosearchform' })(injectIntl(HeroSearchForm));

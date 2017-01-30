@@ -45,12 +45,12 @@ class AuthenticationPage extends Component {
       ? <LoginForm onSubmit={this.handleLogIn} />
       : <SignUpForm onSubmit={this.handleSignUp} />;
 
-    const fromLoginMsg = from && from.pathname ? (
-        <p>
+    const fromLoginMsg = from && from.pathname
+      ? <p>
           You must log in to view the page at
           <code>{from.pathname}</code>
         </p>
-      ) : null;
+      : null;
 
     return (
       <PageLayout title={`Authentication page: ${this.props.tab} tab`}>
@@ -69,7 +69,7 @@ const { any, oneOf, shape } = PropTypes;
 
 AuthenticationPage.propTypes = {
   location: shape({ state: shape({ from: any }) }),
-  tab: oneOf([ 'login', 'signup' ]),
+  tab: oneOf(['login', 'signup']),
 };
 
 export default AuthenticationPage;

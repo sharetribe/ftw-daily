@@ -28,6 +28,6 @@ InboxPage.defaultProps = { filter: 'conversation' };
 
 const { oneOf } = PropTypes;
 
-InboxPage.propTypes = { filter: oneOf([ 'orders', 'sales', 'inbox' ]) };
+InboxPage.propTypes = { filter: oneOf(['orders', 'sales', 'inbox']) };
 
 export default InboxPage;

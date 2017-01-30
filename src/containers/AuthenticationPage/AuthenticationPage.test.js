@@ -6,11 +6,9 @@ import AuthenticationPage from './AuthenticationPage';
 describe('AuthenticationPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <AuthenticationPage location={{ state: { from: '/protected' } }} />
-        </TestProvider>
-      ),
+      <TestProvider>
+        <AuthenticationPage location={{ state: { from: '/protected' } }} />
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

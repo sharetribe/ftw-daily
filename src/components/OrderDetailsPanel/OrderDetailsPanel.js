@@ -44,7 +44,7 @@ OrderDetailsPanel.defaultProps = { className: null };
 
 OrderDetailsPanel.propTypes = {
   className: string,
-  orderId: oneOfType([ string, number ]).isRequired,
+  orderId: oneOfType([string, number]).isRequired,
   title: string.isRequired,
   imageUrl: string.isRequired,
   info: object.isRequired,

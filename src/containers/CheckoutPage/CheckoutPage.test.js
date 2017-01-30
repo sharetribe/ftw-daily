@@ -8,13 +8,11 @@ import routesConfiguration from '../../routesConfiguration';
 describe('CheckoutPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <RoutesProvider routes={routesConfiguration}>
-            <CheckoutPage params={{ listingId: 'some-listing-id' }} />
-          </RoutesProvider>
-        </TestProvider>
-      ),
+      <TestProvider>
+        <RoutesProvider routes={routesConfiguration}>
+          <CheckoutPage params={{ listingId: 'some-listing-id' }} />
+        </RoutesProvider>
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

@@ -9,13 +9,11 @@ import routesConfiguration from '../../routesConfiguration';
 describe('SearchPageComponent', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <RoutesProvider routes={routesConfiguration}>
-            <SearchPageComponent />
-          </RoutesProvider>
-        </TestProvider>
-      ),
+      <TestProvider>
+        <RoutesProvider routes={routesConfiguration}>
+          <SearchPageComponent />
+        </RoutesProvider>
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
@@ -40,18 +38,18 @@ describe('SearchPageDucs', () => {
       const addFilter1 = addFilter('location', 'helsinki');
       const addFilter2 = addFilter('gears', 3);
       const reduced = reducer([], addFilter1);
-      const reducedWithInitialContent = reducer({ filters: [ addFilter1.payload ] }, addFilter2);
-      expect(reduced).toEqual({ filters: [ addFilter1.payload ] });
-      expect(
-        reducedWithInitialContent,
-      ).toEqual({ filters: [ addFilter1.payload, addFilter2.payload ] });
+      const reducedWithInitialContent = reducer({ filters: [addFilter1.payload] }, addFilter2);
+      expect(reduced).toEqual({ filters: [addFilter1.payload] });
+      expect(reducedWithInitialContent).toEqual({
+        filters: [addFilter1.payload, addFilter2.payload],
+      });
     });
 
     it('should handle duplicates ADD_FILTER', () => {
       const filter = { location: 'helsinki' };
       const addFilter = { type: ADD_FILTER, payload: filter };
-      const reducedWithInitialContent = reducer({ filters: [ filter ] }, addFilter);
-      expect(reducedWithInitialContent).toEqual({ filters: [ filter ] });
+      const reducedWithInitialContent = reducer({ filters: [filter] }, addFilter);
+      expect(reducedWithInitialContent).toEqual({ filters: [filter] });
     });
   });
 });

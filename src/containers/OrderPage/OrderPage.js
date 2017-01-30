@@ -58,8 +58,8 @@ const OrderPage = props => {
 const { string, shape, oneOfType, number, oneOf } = PropTypes;
 
 OrderPage.propTypes = {
-  params: shape({ id: oneOfType([ number, string ]).isRequired }).isRequired,
-  tab: oneOf([ 'details', 'discussion' ]).isRequired,
+  params: shape({ id: oneOfType([number, string]).isRequired }).isRequired,
+  tab: oneOf(['details', 'discussion']).isRequired,
 };
 
 export default OrderPage;

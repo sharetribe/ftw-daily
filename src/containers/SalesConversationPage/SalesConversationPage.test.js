@@ -6,11 +6,9 @@ import SalesConversationPage from './SalesConversationPage';
 describe('SalesConversationPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <SalesConversationPage params={{ id: 12345 }} />
-        </TestProvider>
-      ),
+      <TestProvider>
+        <SalesConversationPage params={{ id: 12345 }} />
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

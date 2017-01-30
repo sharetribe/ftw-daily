@@ -10,11 +10,9 @@ describe('HeroSearchForm', () => {
   it('matches snapshot', () => {
     const store = configureStore();
     const component = renderer.create(
-      (
-        <TestProvider>
-          <HeroSearchForm />
-        </TestProvider>
-      ),
+      <TestProvider>
+        <HeroSearchForm />
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

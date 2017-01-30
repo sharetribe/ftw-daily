@@ -36,19 +36,15 @@ const MatchWithSubRoutes = props => {
     <Match
       {...rest}
       render={matchProps => {
-          return canShowComponent
-            ? <Component {...matchProps} />
-            : (
-              <Redirect
-                to={
-                  {
-                    pathname: pathByRouteName('LogInPage', routesConfiguration, {}),
-                    state: { from: matchProps.location },
-                  }
-                }
-              />
-            );
-        }}
+        return canShowComponent
+          ? <Component {...matchProps} />
+          : <Redirect
+              to={{
+                pathname: pathByRouteName('LogInPage', routesConfiguration, {}),
+                state: { from: matchProps.location },
+              }}
+            />;
+      }}
     />
   );
 };
@@ -62,7 +58,7 @@ MatchWithSubRoutes.propTypes = {
   auth: bool,
   exactly: bool,
   name: string.isRequired,
-  component: oneOfType([ func, node ]).isRequired,
+  component: oneOfType([func, node]).isRequired,
 };
 
 const Routes = props => {

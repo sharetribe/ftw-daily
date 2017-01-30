@@ -12,15 +12,15 @@ import localeData from './translations/en.json';
 
 export const ClientApp = props => {
   const { store } = props;
-  addLocaleData([ ...en ]);
+  addLocaleData([...en]);
   return (
     <IntlProvider locale="en" messages={localeData}>
       <BrowserRouter>
         {({ router }) => (
-            <Provider store={store}>
-              <Routes router={router} routes={routesConfiguration} />
-            </Provider>
-          )}
+          <Provider store={store}>
+            <Routes router={router} routes={routesConfiguration} />
+          </Provider>
+        )}
       </BrowserRouter>
     </IntlProvider>
   );
@@ -32,15 +32,15 @@ ClientApp.propTypes = { store: any.isRequired };
 
 export const ServerApp = props => {
   const { url, context, store } = props;
-  addLocaleData([ ...en ]);
+  addLocaleData([...en]);
   return (
     <IntlProvider locale="en" messages={localeData}>
       <ServerRouter location={url} context={context}>
         {({ router }) => (
-            <Provider store={store}>
-              <Routes router={router} routes={routesConfiguration} />
-            </Provider>
-          )}
+          <Provider store={store}>
+            <Routes router={router} routes={routesConfiguration} />
+          </Provider>
+        )}
       </ServerRouter>
     </IntlProvider>
   );
