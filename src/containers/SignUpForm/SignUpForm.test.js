@@ -6,11 +6,9 @@ import SignUpForm from './SignUpForm';
 describe('SignUpForm', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <SignUpForm />
-        </TestProvider>
-      ),
+      <TestProvider>
+        <SignUpForm />
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

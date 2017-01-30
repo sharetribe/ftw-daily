@@ -6,13 +6,11 @@ import HeroSection from './HeroSection';
 describe('HeroSection', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <HeroSection params={{ displayName: 'most-awesome-shop' }}>
-            test
-          </HeroSection>
-        </TestProvider>
-      ),
+      <TestProvider>
+        <HeroSection params={{ displayName: 'most-awesome-shop' }}>
+          test
+        </HeroSection>
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

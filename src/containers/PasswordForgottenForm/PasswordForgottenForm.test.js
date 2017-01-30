@@ -8,11 +8,9 @@ describe('PasswordForgottenForm', () => {
   it('matches snapshot', () => {
     const store = configureStore();
     const component = renderer.create(
-      (
-        <Provider store={store}>
-          <PasswordForgottenForm />
-        </Provider>
-      ),
+      <Provider store={store}>
+        <PasswordForgottenForm />
+      </Provider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

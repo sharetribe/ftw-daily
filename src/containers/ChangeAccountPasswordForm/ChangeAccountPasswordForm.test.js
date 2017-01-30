@@ -6,11 +6,9 @@ import ChangeAccountPasswordForm from './ChangeAccountPasswordForm';
 describe('ChangeAccountPasswordForm', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <ChangeAccountPasswordForm />
-        </TestProvider>
-      ),
+      <TestProvider>
+        <ChangeAccountPasswordForm />
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

@@ -14,7 +14,7 @@ export default function reducer(state = {}, action = {}) {
   switch (type) {
     case ADD_FILTER: {
       const stateFilters = state.filters || [];
-      return { ...state, ...{ filters: unionWith(stateFilters, [ payload ], isEqual) } };
+      return { ...state, ...{ filters: unionWith(stateFilters, [payload], isEqual) } };
     }
     default:
       return state;

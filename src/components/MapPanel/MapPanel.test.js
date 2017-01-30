@@ -8,13 +8,11 @@ import MapPanel from './MapPanel';
 describe('MapPanel', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <RoutesProvider routes={routesConfiguration}>
-            <MapPanel />
-          </RoutesProvider>
-        </TestProvider>
-      ),
+      <TestProvider>
+        <RoutesProvider routes={routesConfiguration}>
+          <MapPanel />
+        </RoutesProvider>
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

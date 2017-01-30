@@ -35,15 +35,15 @@ describe('FlashNotification', () => {
       const addFlashNote1 = addFlashNotification('error', 'Run the tests');
       const addFlashNote2 = addFlashNotification('error', 'Run the tests again');
       const reduced = reducer([], addFlashNote1);
-      const reducedWithInitialContent = reducer([ addFlashNote1.payload ], addFlashNote2);
-      expect(reduced).toEqual([ addFlashNote1.payload ]);
-      expect(reducedWithInitialContent).toEqual([ addFlashNote1.payload, addFlashNote2.payload ]);
+      const reducedWithInitialContent = reducer([addFlashNote1.payload], addFlashNote2);
+      expect(reduced).toEqual([addFlashNote1.payload]);
+      expect(reducedWithInitialContent).toEqual([addFlashNote1.payload, addFlashNote2.payload]);
     });
 
     it('should handle duplicates ADD_FILTER', () => {
       const addFlashNote = addFlashNotification('error', 'Run the tests');
-      const reducedWithInitialContent = reducer([ addFlashNote.payload ], addFlashNote);
-      expect(reducedWithInitialContent).toEqual([ addFlashNote.payload ]);
+      const reducedWithInitialContent = reducer([addFlashNote.payload], addFlashNote);
+      expect(reducedWithInitialContent).toEqual([addFlashNote.payload]);
     });
   });
 });

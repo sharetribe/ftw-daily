@@ -6,11 +6,9 @@ import SecurityPage from './SecurityPage';
 describe('SecurityPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <SecurityPage />
-        </TestProvider>
-      ),
+      <TestProvider>
+        <SecurityPage />
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

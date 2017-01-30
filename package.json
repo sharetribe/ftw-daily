@@ -6,7 +6,7 @@
     "basic-auth": "^1.1.0",
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
-    "express": "^4.14.0",
+    "express": "^4.14.1",
     "helmet": "^3.3.0",
     "lodash": "^4.17.4",
     "path-to-regexp": "^1.5.3",
@@ -19,20 +19,20 @@
     "react-router": "4.0.0-alpha.6",
     "react-test-renderer": "^15.4.2",
     "redux": "^3.6.0",
-    "redux-form": "^6.4.3",
+    "redux-form": "^6.5.0",
     "sanitize.css": "^4.1.0",
     "sharetribe-scripts": "0.8.6",
-    "source-map-support": "^0.4.10"
+    "source-map-support": "^0.4.11"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
-    "prettier": "^0.0.8"
+    "prettier": "^0.13.1"
   },
   "scripts": {
     "clean": "rm -rf build/*",
     "dev": "sharetribe-scripts start",
     "build": "sharetribe-scripts build",
-    "prettier": "prettier --write --print-width 100 --single-quote --trailing-comma server/*.js src/*.js src/**/*.js src/**/**/*.js",
+    "format": "prettier --write --print-width 100 --single-quote --trailing-comma 'server/**/*.js' 'src/**/*.js'",
     "test": "sharetribe-scripts test --env=jsdom",
     "test-ci": "sharetribe-scripts test --env=jsdom --runInBand",
     "eject": "sharetribe-scripts eject",

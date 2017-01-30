@@ -29,7 +29,7 @@ const ListingCard = props => {
             {location}
           </div>
           <div className={css.reviews}>
-             (<span>{review.rating}</span><span>/5</span>){' '}
+            (<span>{review.rating}</span><span>/5</span>){' '}
             <span>{review.count}</span>
           </div>
         </div>
@@ -41,7 +41,7 @@ const ListingCard = props => {
           <div className={css.authorDetails}>
             <span className={css.authorName}>{author.name}</span>
             <div className={css.authorReview}>
-               review: <span>{author.review.rating}</span><span>/5</span>
+              review: <span>{author.review.rating}</span><span>/5</span>
             </div>
           </div>
         </div>

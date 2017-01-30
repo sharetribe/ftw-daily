@@ -6,11 +6,9 @@ import NotFoundPage from './NotFoundPage';
 describe('NotFoundPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <NotFoundPage />
-        </TestProvider>
-      ),
+      <TestProvider>
+        <NotFoundPage />
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

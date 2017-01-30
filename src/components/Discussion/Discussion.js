@@ -50,8 +50,8 @@ class Discussion extends Component {
             autoFocus
             type="text"
             ref={input => {
-                this.input = input;
-              }}
+              this.input = input;
+            }}
             value={this.state.message}
             onChange={this.handleOnChange}
           />

@@ -8,13 +8,11 @@ import FilterPanel from './FilterPanel';
 describe('FilterPanel', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <RoutesProvider routes={routesConfiguration}>
-            <FilterPanel />
-          </RoutesProvider>
-        </TestProvider>
-      ),
+      <TestProvider>
+        <RoutesProvider routes={routesConfiguration}>
+          <FilterPanel />
+        </RoutesProvider>
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

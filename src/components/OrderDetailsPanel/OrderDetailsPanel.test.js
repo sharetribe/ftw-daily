@@ -25,13 +25,11 @@ describe('OrderDetailsPanel', () => {
       confirmationCode: 'some-test-confirmation-code',
     };
     const component = renderer.create(
-      (
-        <TestProvider>
-          <RoutesProvider routes={routesConfiguration}>
-            <OrderDetailsPanel {...props} />
-          </RoutesProvider>
-        </TestProvider>
-      ),
+      <TestProvider>
+        <RoutesProvider routes={routesConfiguration}>
+          <OrderDetailsPanel {...props} />
+        </RoutesProvider>
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

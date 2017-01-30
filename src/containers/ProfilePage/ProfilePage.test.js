@@ -6,11 +6,9 @@ import ProfilePage from './ProfilePage';
 describe('ProfilePage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <ProfilePage params={{ displayName: 'most-awesome-shop' }} />
-        </TestProvider>
-      ),
+      <TestProvider>
+        <ProfilePage params={{ displayName: 'most-awesome-shop' }} />
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

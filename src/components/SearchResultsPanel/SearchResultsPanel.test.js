@@ -8,13 +8,11 @@ import SearchResultsPanel from './SearchResultsPanel';
 describe('SearchResultsPanel', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <RoutesProvider routes={routesConfiguration}>
-            <SearchResultsPanel />
-          </RoutesProvider>
-        </TestProvider>
-      ),
+      <TestProvider>
+        <RoutesProvider routes={routesConfiguration}>
+          <SearchResultsPanel />
+        </RoutesProvider>
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

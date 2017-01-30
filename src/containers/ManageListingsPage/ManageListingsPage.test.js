@@ -6,11 +6,9 @@ import ManageListingsPage from './ManageListingsPage';
 describe('ManageListingsPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <ManageListingsPage />
-        </TestProvider>
-      ),
+      <TestProvider>
+        <ManageListingsPage />
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

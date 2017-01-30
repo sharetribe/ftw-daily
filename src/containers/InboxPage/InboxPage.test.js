@@ -6,11 +6,9 @@ import InboxPage from './InboxPage';
 describe('InboxPage', () => {
   it('matches snapshot', () => {
     const component = renderer.create(
-      (
-        <TestProvider>
-          <InboxPage filter="inbox" />
-        </TestProvider>
-      ),
+      <TestProvider>
+        <InboxPage filter="inbox" />
+      </TestProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

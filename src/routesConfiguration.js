@@ -244,7 +244,7 @@ const routesConfiguration = [
 ];
 
 const flattenRoutes = routesArray =>
-  routesArray.reduce((a, b) => a.concat(b.routes ? [ b ].concat(flattenRoutes(b.routes)) : b), []);
+  routesArray.reduce((a, b) => a.concat(b.routes ? [b].concat(flattenRoutes(b.routes)) : b), []);
 
 const findRouteByName = (nameToFind, routes) => {
   const flattenedRoutes = flattenRoutes(routes);
