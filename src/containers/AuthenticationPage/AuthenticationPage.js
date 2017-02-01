@@ -1,75 +1,50 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router';
 import { PageLayout } from '../../components';
 import { LoginForm, SignUpForm } from '../../containers';
-import { fakeAuth } from '../../Routes';
+import { login } from '../../ducks/Auth.ducks';
 
-class AuthenticationPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { redirectToReferrer: false };
+const AuthenticationPage = props => {
+  const { location, tab, isAuthenticated, onLoginSubmit, onSignUpSubmit } = props;
+  const isLogin = tab === 'login';
+  const from = location.state && location.state.from ? location.state.from : null;
+  const pathname = from ? from.pathname : null;
 
-    this.handleLogIn = this.handleLogIn.bind(this);
-    this.handleSignUp = this.handleSignUp.bind(this);
-  }
-
-  handleLogIn(values) {
-    // eslint-disable-next-line no-console
-    console.log('log in with values:', values);
-    fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true });
-    });
-  }
-
-  handleSignUp(values) {
-    // eslint-disable-next-line no-console
-    console.log('sign up with values:', values);
-    fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true });
-    });
-  }
-
-  render() {
-    const from = this.props.location.state && this.props.location.state.from
-      ? this.props.location.state.from
-      : null;
-    const { redirectToReferrer } = this.state;
-
-    const toLogin = <Link to={{ pathname: '/login', state: { from: from || '/' } }}>Log in</Link>;
-    const toSignup = (
-      <Link to={{ pathname: '/signup', state: { from: from || '/' } }}>Sign up</Link>
-    );
-    const alternativeMethod = this.props.tab === 'login' ? toSignup : toLogin;
-
-    const form = this.props.tab === 'login'
-      ? <LoginForm onSubmit={this.handleLogIn} />
-      : <SignUpForm onSubmit={this.handleSignUp} />;
-
-    const fromLoginMsg = from && from.pathname
-      ? <p>
-          You must log in to view the page at
-          <code>{from.pathname}</code>
-        </p>
-      : null;
-
-    return (
-      <PageLayout title={`Authentication page: ${this.props.tab} tab`}>
-        {redirectToReferrer ? <Redirect to={from || '/'} /> : null}
-        {fromLoginMsg}
-        {form}
-        {alternativeMethod}
-      </PageLayout>
-    );
-  }
-}
+  return (
+    <PageLayout title={`Authentication page: ${tab} tab`}>
+      {isAuthenticated ? <Redirect to={from || '/'} /> : null}
+      {pathname
+        ? <p>
+            You must log in to view the page at
+            <code>{pathname}</code>
+          </p>
+        : null}
+      {isLogin ? <LoginForm onSubmit={onLoginSubmit} /> : <SignUpForm onSubmit={onSignUpSubmit} />}
+      {isLogin
+        ? <Link to={{ pathname: '/signup', state: { from: from || '/' } }}>Sign up</Link>
+        : <Link to={{ pathname: '/login', state: { from: from || '/' } }}>Log in</Link>}
+    </PageLayout>
+  );
+};
 
 AuthenticationPage.defaultProps = { location: {}, tab: 'signup' };
 
-const { any, oneOf, shape } = PropTypes;
+const { any, oneOf, shape, bool, func } = PropTypes;
 
 AuthenticationPage.propTypes = {
   location: shape({ state: shape({ from: any }) }),
   tab: oneOf(['login', 'signup']),
+  isAuthenticated: bool.isRequired,
+  onLoginSubmit: func.isRequired,
+  onSignUpSubmit: func.isRequired,
 };
 
-export default AuthenticationPage;
+const mapStateToProps = state => ({ isAuthenticated: state.Auth.isAuthenticated });
+
+const mapDispatchToProps = dispatch => ({
+  onLoginSubmit: ({ email, password }) => dispatch(login(email, password)),
+  onSignUpSubmit: ({ email, password }) => dispatch(login(email, password)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthenticationPage);
