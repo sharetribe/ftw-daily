@@ -1,18 +1,29 @@
 /* eslint-disable no-underscore-dangle */
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
+import rootSaga from './sagas';
 
 /**
- * configureStore creates a new store with initial state and possible enhancers
- * (like redux-saga or redux-thunk middleware)
+ * Create a new store with the given initial state. Adds Redux
+ * middleware and enhancers.
  */
-export default function configureStore(initialState) {
-  const useReduxDevTools = process.env.NODE_ENV !== 'production' &&
-    typeof window !== 'undefined' &&
-    window.__REDUX_DEVTOOLS_EXTENSION__;
+export default function configureStore(initialState = {}) {
+  const sagaMiddleware = createSagaMiddleware();
 
-  if (useReduxDevTools) {
-    return createStore(createReducer(), initialState, window.__REDUX_DEVTOOLS_EXTENSION__());
-  }
-  return createStore(createReducer(), initialState);
+  const middlewares = [sagaMiddleware];
+
+  // Enable Redux Devtools in client side dev mode.
+  const composeEnhancers = process.env.NODE_ENV !== 'production' &&
+    typeof window === 'object' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : compose;
+
+  const enhancer = composeEnhancers(applyMiddleware(...middlewares));
+  const store = createStore(createReducer(), initialState, enhancer);
+
+  sagaMiddleware.run(rootSaga);
+
+  return store;
 }
