@@ -4,9 +4,9 @@
  * https://github.com/erikras/ducks-modular-redux
  */
 
-import { reducer as formReducer } from 'redux-form';
+import { reducer as form } from 'redux-form';
 import Auth from './Auth.ducks';
 import FlashNotification from './FlashNotification.ducks';
 import LocationFilter from './LocationFilter.ducks';
 
-export { formReducer as form, Auth, FlashNotification, LocationFilter };
+export { form, Auth, FlashNotification, LocationFilter };
