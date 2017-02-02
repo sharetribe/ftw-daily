@@ -90,7 +90,7 @@ function render(requestUrl, context, preloadedState) {
   // by replacing '<' character with its unicode equivalent.
   // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
   const preloadedStateScript = `
-      window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')};
+      <script>window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')};</script>
   `;
 
   return template({ title: head.title.toString(), preloadedStateScript, body });
