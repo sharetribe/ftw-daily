@@ -30,13 +30,26 @@ export default function reducer(state = initialState, action = {}) {
     case LOGIN:
       return { ...state, loginInProgress: true };
     case LOGIN_SUCCESS:
-      return { ...state, loginInProgress: false, isAuthenticated: true, user: payload };
+      return {
+        ...state,
+        loginInProgress: false,
+        isAuthenticated: true,
+        user: payload,
+        loginError: null,
+        logoutError: null,
+      };
     case LOGIN_FAILURE:
-      return { ...state, loginInProgress: false, loginError: payload };
+      return { ...state, loginInProgress: false, loginError: payload.message };
     case LOGOUT:
       return { ...state, logoutInProgress: true };
     case LOGOUT_SUCCESS:
-      return { ...state, logoutInProgress: false, isAuthenticated: false, user: null };
+      return {
+        ...state,
+        logoutInProgress: false,
+        isAuthenticated: false,
+        user: null,
+        logoutError: null,
+      };
     case LOGOUT_FAILURE:
       return { ...state, logoutInProgress: false, logoutError: payload };
     default:
@@ -59,7 +72,11 @@ export const logoutFailure = error => ({ type: LOGOUT_FAILURE, payload: error, e
 function* callLogin(action) {
   const { payload } = action;
   yield call(delay, 1000);
-  yield put(loginSuccess(payload));
+  if (payload.email === 'me@example.com' && payload.password) {
+    yield put(loginSuccess(payload));
+  } else {
+    yield put(loginFailure(new Error('Invalid credentials')));
+  }
 }
 
 function* callLogout() {
