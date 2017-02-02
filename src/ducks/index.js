@@ -5,7 +5,8 @@
  */
 
 import { reducer as formReducer } from 'redux-form';
+import Auth from './Auth.ducks';
 import FlashNotification from './FlashNotification.ducks';
 import LocationFilter from './LocationFilter.ducks';
 
-export { formReducer as form, FlashNotification, LocationFilter };
+export { formReducer as form, Auth, FlashNotification, LocationFilter };
