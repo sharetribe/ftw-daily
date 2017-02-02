@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { TestProvider } from '../../util/test-helpers';
 import { SearchPageComponent } from './SearchPage';
-import reducer, { ADD_FILTER, addFilter } from './SearchPage.ducks';
+import reducer, { ADD_FILTER, addFilter, initialState } from './SearchPage.ducks';
 import { RoutesProvider } from '../../components';
 import routesConfiguration from '../../routesConfiguration';
 
@@ -11,7 +11,7 @@ describe('SearchPageComponent', () => {
     const component = renderer.create(
       <TestProvider>
         <RoutesProvider routes={routesConfiguration}>
-          <SearchPageComponent />
+          <SearchPageComponent onLoadListings={v => v} />
         </RoutesProvider>
       </TestProvider>,
     );
@@ -31,7 +31,7 @@ describe('SearchPageDucs', () => {
   describe('reducer', () => {
     it('should return the initial state', () => {
       const initial = reducer(undefined, {});
-      expect(initial).toEqual({});
+      expect(initial).toEqual(initialState);
     });
 
     it('should handle ADD_FILTER', () => {

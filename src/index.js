@@ -15,7 +15,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ClientApp, renderApp } from './app';
 import configureStore from './store';
-import { matchLocation } from './routesConfiguration';
+import { matchPathname } from './routesConfiguration';
+import rootSaga from './sagas';
 
 import './index.css';
 
@@ -24,6 +25,7 @@ if (typeof window !== 'undefined') {
   // eslint-disable-next-line no-underscore-dangle
   const preloadedState = window.__PRELOADED_STATE__ || {};
   const store = configureStore(preloadedState);
+  store.runSaga(rootSaga);
 
   ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
 }
@@ -31,4 +33,4 @@ if (typeof window !== 'undefined') {
 // Export the function for server side rendering.
 export default renderApp;
 
-export { matchLocation };
+export { matchPathname, configureStore };

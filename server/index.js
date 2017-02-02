@@ -27,6 +27,7 @@ const _ = require('lodash');
 const React = require('react');
 const { createServerRenderContext } = require('react-router');
 const auth = require('./auth');
+const sagaEffects = require('redux-saga/effects');
 
 // Construct the bundle path where the server side rendering function
 // can be imported.
@@ -37,6 +38,7 @@ const mainJsPath = path.join(buildPath, manifest['main.js']);
 const mainJs = require(mainJsPath);
 const renderApp = mainJs.default;
 const matchPathname = mainJs.matchPathname;
+const configureStore = mainJs.configureStore;
 
 // The HTML build file is generated from the `public/index.html` file
 // and used as a template for server side rendering. The application
@@ -69,28 +71,46 @@ const template = _.template(indexHtml, {
   escape: reNoMatch,
 });
 
-function render(requestUrl, context, preloadedState) {
-  const { head, body } = renderApp(requestUrl, context, preloadedState);
-
+function fetchInitialState(requestUrl) {
   const pathname = url.parse(requestUrl).pathname;
   const { matchedRoutes, params } = matchPathname(pathname);
-  const component = matchedRoutes[0].component;
+  const initialFetches = _
+    .chain(matchedRoutes)
+    .filter(r => r.loadData && r.loadData.fetchData)
+    .map(r => sagaEffects.fork(r.loadData.fetchData))
+    .value();
 
-  if (component.loadData) {
-    component
-      .loadData()
-      .then((val) => {
-        console.log('Data fetch resolved', val);
-      });
+  const fetchInitialData = function* fetchInitialData() {
+    yield initialFetches;
+  };
+
+  if (initialFetches.length > 0) {
+    const fetchPromise = new Promise((resolve, reject) => {
+      const store = configureStore({});
+      store.runSaga(fetchInitialData).done
+        .then(() => {
+          resolve(store.getState());
+        })
+        .catch(e => {
+          reject(e);
+        });
+      store.close();
+    });
+    return fetchPromise;
   }
+  return Promise.resolve({});
+}
 
+function render(requestUrl, context, preloadedState) {
+  const { head, body } = renderApp(requestUrl, context, preloadedState);
 
   // Preloaded state needs to be passed for client side too.
   // For security reasons we ensure that preloaded state is considered as a string
   // by replacing '<' character with its unicode equivalent.
   // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
+  const serializedState = JSON.stringify(preloadedState).replace(/</g, '\\u003c');
   const preloadedStateScript = `
-      <script>window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')};</script>
+      <script>window.__PRELOADED_STATE__ = ${serializedState};</script>
   `;
 
   return template({ title: head.title.toString(), preloadedStateScript, body });
@@ -120,21 +140,26 @@ app.get('*', (req, res) => {
   const filters = qs.parse(req.query);
 
   // TODO fetch this asynchronously
-  const preloadedState = { search: { filters } };
+  fetchInitialState(req.url)
+    .then(preloadedState => {
+      const html = render(req.url, context, preloadedState);
+      const result = context.getResult();
 
-  const html = render(req.url, context, preloadedState);
-  const result = context.getResult();
-
-  if (result.redirect) {
-    res.redirect(result.redirect.pathname);
-  } else if (result.missed) {
-    // Do a second render pass with the context to clue <Miss>
-    // components into rendering this time.
-    // See: https://react-router.now.sh/ServerRouter
-    res.status(404).send(render(req.url, context, preloadedState));
-  } else {
-    res.send(html);
-  }
+      if (result.redirect) {
+        res.redirect(result.redirect.pathname);
+      } else if (result.missed) {
+        // Do a second render pass with the context to clue <Miss>
+        // components into rendering this time.
+        // See: https://react-router.now.sh/ServerRouter
+        res.status(404).send(render(req.url, context, preloadedState));
+      } else {
+        res.send(html);
+      }
+    })
+    .catch(e => {
+      console.error(e.message);
+      res.status(500).send(e.message);
+    });
 });
 
 app.listen(PORT, () => {

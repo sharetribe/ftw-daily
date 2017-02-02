@@ -1,8 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { createStore, applyMiddleware, compose } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import createSagaMiddleware, { END } from 'redux-saga';
 import createReducer from './reducers';
-import rootSaga from './sagas';
 
 /**
  * Create a new store with the given initial state. Adds Redux
@@ -21,9 +20,10 @@ export default function configureStore(initialState = {}) {
     : compose;
 
   const enhancer = composeEnhancers(applyMiddleware(...middlewares));
-  const store = createStore(createReducer(), initialState, enhancer);
 
-  sagaMiddleware.run(rootSaga);
+  const store = createStore(createReducer(), initialState, enhancer);
+  store.runSaga = sagaMiddleware.run;
+  store.close = () => store.dispatch(END);
 
   return store;
 }
