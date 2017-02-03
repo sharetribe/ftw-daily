@@ -18,13 +18,12 @@ class PageLayout extends Component {
   }
 
   render() {
-    const { className, title, children, loginError, logoutError } = this.props;
-    // TODO: use FlashMessages for loginError/logoutError
+    const { className, title, children, authError } = this.props;
+    // TODO: use FlashMessages for authError
     return (
       <div className={className}>
         <Helmet title={title} />
-        {loginError ? <p style={{ color: 'red' }}>Error in login: {loginError}</p> : null}
-        {logoutError ? <p style={{ color: 'red' }}>Error in logout: {logoutError}</p> : null}
+        {authError ? <p style={{ color: 'red' }}>Error in auth: {authError.message}</p> : null}
         <Topbar />
         <h1>{title}</h1>
         {children}
@@ -33,23 +32,19 @@ class PageLayout extends Component {
   }
 }
 
-const { any, object, string } = PropTypes;
+const { any, object, string, instanceOf } = PropTypes;
 
 PageLayout.contextTypes = { history: object };
 
-PageLayout.defaultProps = { className: '', children: null, loginError: '', logoutError: '' };
+PageLayout.defaultProps = { className: '', children: null, authError: null };
 
 PageLayout.propTypes = {
   className: string,
   title: string.isRequired,
   children: any,
-  loginError: string,
-  logoutError: string,
+  authError: instanceOf(Error),
 };
 
-const mapStateToProps = state => ({
-  loginError: state.Auth.loginError,
-  logoutError: state.Auth.logoutError,
-});
+const mapStateToProps = state => ({ authError: state.Auth.error });
 
 export default connect(mapStateToProps)(PageLayout);

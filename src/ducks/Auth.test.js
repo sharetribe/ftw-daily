@@ -3,6 +3,9 @@ import { createMockTask } from 'redux-saga/utils';
 import reducer, {
   LOGIN_REQUEST,
   LOGOUT_REQUEST,
+  NOTHING_IN_PROGRESS,
+  LOGIN_IN_PROGRESS,
+  LOGOUT_IN_PROGRESS,
   login,
   loginSuccess,
   loginError,
@@ -19,10 +22,8 @@ describe('Auth duck', () => {
       const state = reducer();
       expect(state.isAuthenticated).toEqual(false);
       expect(state.user).toBeNull();
-      expect(state.loginError).toBeNull();
-      expect(state.logoutError).toBeNull();
-      expect(state.loginInProgress).toEqual(false);
-      expect(state.logoutInProgress).toEqual(false);
+      expect(state.error).toBeNull();
+      expect(state.inProgressState).toEqual(NOTHING_IN_PROGRESS);
     });
 
     it('should login successfully', () => {
@@ -33,14 +34,14 @@ describe('Auth duck', () => {
       state = reducer(state, login(email, password));
       expect(state.isAuthenticated).toEqual(false);
       expect(state.user).toBeNull();
-      expect(state.loginInProgress).toEqual(true);
-      expect(state.loginError).toBeNull();
+      expect(state.inProgressState).toEqual(LOGIN_IN_PROGRESS);
+      expect(state.error).toBeNull();
 
       state = reducer(state, loginSuccess({ email, password }));
       expect(state.isAuthenticated).toEqual(true);
       expect(state.user).toEqual({ email, password });
-      expect(state.loginInProgress).toEqual(false);
-      expect(state.loginError).toBeNull();
+      expect(state.inProgressState).toEqual(NOTHING_IN_PROGRESS);
+      expect(state.error).toBeNull();
     });
 
     it('should handle failed login', () => {
@@ -48,15 +49,15 @@ describe('Auth duck', () => {
       state = reducer(state, login('email', 'pass'));
       expect(state.isAuthenticated).toEqual(false);
       expect(state.user).toBeNull();
-      expect(state.loginInProgress).toEqual(true);
-      expect(state.loginError).toBeNull();
+      expect(state.inProgressState).toEqual(LOGIN_IN_PROGRESS);
+      expect(state.error).toBeNull();
 
       const error = new Error('test error');
       state = reducer(state, loginError(error));
       expect(state.isAuthenticated).toEqual(false);
       expect(state.user).toBeNull();
-      expect(state.loginInProgress).toEqual(false);
-      expect(state.loginError).toEqual(error.message);
+      expect(state.inProgressState).toEqual(NOTHING_IN_PROGRESS);
+      expect(state.error).toEqual(error);
     });
   });
 

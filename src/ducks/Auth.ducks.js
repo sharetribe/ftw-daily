@@ -16,45 +16,37 @@ export const LOGOUT_ERROR = 'app/Auth/LOGOUT_ERROR';
 
 // ================ Reducer ================ //
 
+export const NOTHING_IN_PROGRESS = 'NOTHING_IN_PROGRESS';
+export const LOGIN_IN_PROGRESS = 'LOGIN_IN_PROGRESS';
+export const LOGOUT_IN_PROGRESS = 'LOGOUT_IN_PROGRESS';
+
 const initialState = {
   isAuthenticated: false,
   user: null,
-  loginInProgress: false,
-  logoutInProgress: false,
-  loginError: null,
-  logoutError: null,
+  inProgressState: NOTHING_IN_PROGRESS,
+  error: null,
 };
 
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case LOGIN_REQUEST:
-      // TODO: clear logout state since it can be cancelled
-      return { ...state, loginInProgress: true };
+      return { ...state, inProgressState: LOGIN_IN_PROGRESS, error: null };
     case LOGIN_SUCCESS:
       return {
         ...state,
-        loginInProgress: false,
+        inProgressState: NOTHING_IN_PROGRESS,
         isAuthenticated: true,
         user: payload,
-        loginError: null,
-        logoutError: null,
       };
     case LOGIN_ERROR:
-      return { ...state, loginInProgress: false, loginError: payload.message };
+      return { ...state, inProgressState: NOTHING_IN_PROGRESS, error: payload };
     case LOGOUT_REQUEST:
-      // TODO: clear login state since it can be cancelled
-      return { ...state, logoutInProgress: true };
+      return { ...state, inProgressState: LOGOUT_IN_PROGRESS, error: null };
     case LOGOUT_SUCCESS:
-      return {
-        ...state,
-        logoutInProgress: false,
-        isAuthenticated: false,
-        user: null,
-        logoutError: null,
-      };
+      return { ...state, inProgressState: NOTHING_IN_PROGRESS, isAuthenticated: false, user: null };
     case LOGOUT_ERROR:
-      return { ...state, logoutInProgress: false, logoutError: payload };
+      return { ...state, inProgressState: NOTHING_IN_PROGRESS, error: payload };
     default:
       return state;
   }
