@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/prefer-default-export, no-unused-vars */
 export const fakeListings = [
   {
     id: 123,
@@ -24,3 +24,22 @@ export const fakeListings = [
   },
 ];
 /* eslint-enable import/prefer-default-export */
+
+const fakeSDK = {
+  fetchListings: () => {
+    const randomTime = Math.random() * 2000;
+    const fakeResponseTime = 1000 + randomTime;
+
+    const fakeFetch = new Promise((resolve, reject) => {
+      setTimeout(
+        () => {
+          resolve({ response: fakeListings });
+          // or reject({ error: new Error('FetchListings errored') );
+        },
+        fakeResponseTime,
+      );
+    });
+    return fakeFetch;
+  },
+};
+export default fakeSDK;

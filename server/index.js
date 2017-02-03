@@ -26,8 +26,9 @@ const url = require('url');
 const _ = require('lodash');
 const React = require('react');
 const { createServerRenderContext } = require('react-router');
-const auth = require('./auth');
 const sagaEffects = require('redux-saga/effects');
+const auth = require('./auth');
+const sdk = require('./fakeSDK');
 
 // Construct the bundle path where the server side rendering function
 // can be imported.
@@ -74,16 +75,21 @@ const template = _.template(indexHtml, {
 function fetchInitialState(requestUrl) {
   const pathname = url.parse(requestUrl).pathname;
   const { matchedRoutes, params } = matchPathname(pathname);
+
+  // pathname may match with several routes (if they don't have exactly=true)
+  // We filter all the components form matched routes that have `loadData`
   const initialFetches = _
     .chain(matchedRoutes)
     .filter(r => r.loadData && r.loadData.fetchData)
-    .map(r => sagaEffects.fork(r.loadData.fetchData))
+    .map(r => sagaEffects.fork(r.loadData.fetchData, sdk))
     .value();
 
+  // We need to combine different onload sagas under one yield
   const fetchInitialData = function* fetchInitialData() {
     yield initialFetches;
   };
 
+  // runSaga (if necessary) and return initial store state after loadData fetches.
   if (initialFetches.length > 0) {
     const fetchPromise = new Promise((resolve, reject) => {
       const store = configureStore({});
@@ -94,6 +100,7 @@ function fetchInitialState(requestUrl) {
         .catch(e => {
           reject(e);
         });
+      // Close temporary store (which was used only for fetching initial store state)
       store.close();
     });
     return fetchPromise;

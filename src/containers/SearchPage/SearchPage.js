@@ -17,7 +17,10 @@ import {
 export class SearchPageComponent extends Component {
   componentDidMount() {
     // TODO: This should be moved to Router
-    this.props.onLoadListings();
+    const { SearchPage } = this.props;
+    if (!SearchPage.initialListingsLoaded) {
+      this.props.onLoadListings();
+    }
   }
 
   render() {
@@ -90,7 +93,7 @@ const mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     onAddNotice: msg => dispatch(addFlashNotification('notice', msg)),
     onAddFilter: (k, v) => dispatch(addFilter(k, v)),
-    onLoadListings: () => dispatch(loadListings()),
+    onLoadListings: () => dispatch(loadListings.request()),
   };
 };
 

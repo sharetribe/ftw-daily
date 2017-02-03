@@ -4,16 +4,15 @@
  * https://github.com/erikras/ducks-modular-redux
  */
 import { unionWith, isEqual } from 'lodash';
-import { delay } from 'redux-saga';
 import { call, take, put } from 'redux-saga/effects';
-import { fakeListings } from './fakeData';
+import { createRequestTypes } from '../../util/sagaHelpers';
 
 // ================ Action types ================ //
 
 export const ADD_FILTER = 'app/SearchPage/ADD_FILTER';
-export const LOAD_LISTINGS = 'app/SearchPage/LOAD_LISTINGS';
-export const LOAD_LISTINGS_SUCCESS = 'app/SearchPage/LOAD_LISTINGS_SUCCESS';
-export const LOAD_LISTINGS_FAILURE = 'app/SearchPage/LOAD_LISTINGS_FAILURE';
+
+// async actions use request - success / failure pattern
+export const LOAD_LISTINGS = createRequestTypes('app/SearchPage/LOAD_LISTINGS');
 
 // ================ Reducer ================ //
 
@@ -26,17 +25,16 @@ export const initialState = {
 
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
+
   switch (type) {
     case ADD_FILTER: {
       const stateFilters = state.filters || [];
       return { ...state, ...{ filters: unionWith(stateFilters, [payload], isEqual) } };
     }
-    case LOAD_LISTINGS:
-      return { ...state, loadingListings: true, initialListingsLoaded: false };
-    case LOAD_LISTINGS_SUCCESS:
-      return { ...state, loadingListings: false, initialListingsLoaded: true, listings: payload };
-    case LOAD_LISTINGS_FAILURE:
-      return { ...state, loadingListings: false, loadListingError: payload };
+    case LOAD_LISTINGS.REQUEST:
+    case LOAD_LISTINGS.SUCCESS:
+    case LOAD_LISTINGS.FAILURE:
+      return { ...state, ...payload };
     default:
       return state;
   }
@@ -45,37 +43,42 @@ export default function reducer(state = initialState, action = {}) {
 // ================ Action creators ================ //
 
 export const addFilter = (key, value) => ({ type: ADD_FILTER, payload: { [key]: value } });
-export const loadListings = () => ({ type: LOAD_LISTINGS, payload: {} });
-export const loadListingsSuccess = listings => ({ type: LOAD_LISTINGS_SUCCESS, payload: listings });
-export const loadListingsFailure = error => ({
-  type: LOAD_LISTINGS_FAILURE,
-  payload: error,
-  error: true,
-});
+
+// async actions use request - success - failure pattern
+const action = (type, payload = {}) => ({ type, ...payload });
+
+export const loadListings = {
+  request: () =>
+    action(LOAD_LISTINGS.REQUEST, {
+      payload: { loadingListings: true, initialListingsLoaded: false },
+    }),
+  success: listings =>
+    action(LOAD_LISTINGS.SUCCESS, {
+      payload: { loadingListings: false, initialListingsLoaded: true, listings },
+    }),
+  failure: error =>
+    action(LOAD_LISTINGS.FAILURE, {
+      payload: { loadingListings: false, loadListingError: error, error: true },
+    }),
+};
 
 // ================ Worker sagas ================ //
 
-export function fetchListings() {
-  const randomTime = Math.random() * 2000;
-  const fakeResponseTime = 1000 + randomTime;
-  return delay(fakeResponseTime, { response: fakeListings });
-}
-
-export function* callFetchListings() {
-  const { response, error } = yield call(fetchListings);
+export function* callFetchListings(sdk) {
+  const { response, error } = yield call(sdk.fetchListings);
   if (response) {
-    yield put(loadListingsSuccess(response));
+    yield put(loadListings.success(response));
   } else {
-    yield put(loadListingsFailure(error));
+    yield put(loadListings.failure(error));
   }
 }
 
 // ================ Watcher sagas ================ //
 
-export function* watchLoadListings() {
+export function* watchLoadListings(sdk) {
   // eslint-disable-next-line no-constant-condition
   while (true) {
-    yield take(LOAD_LISTINGS);
-    yield call(callFetchListings);
+    yield take(LOAD_LISTINGS.REQUEST);
+    yield call(callFetchListings, sdk);
   }
 }
