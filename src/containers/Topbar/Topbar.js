@@ -7,12 +7,19 @@ import css from './Topbar.css';
 
 const Topbar = (props, context) => {
   const { isAuthenticated, onLogout, user } = props;
+  const { router } = context;
   const house = { dangerouslySetInnerHTML: { __html: '&#127968;' } };
   const hamburger = { dangerouslySetInnerHTML: { __html: '&#127828;' } };
 
   const handleChange = e => {
     const value = e.target.value;
-    context.router.transitionTo(value);
+    router.transitionTo(value);
+  };
+
+  const handleLogout = () => {
+    // Router is passed to the action to enable redirect to home when
+    // logout succeeds.
+    onLogout(router);
   };
 
   return (
@@ -43,7 +50,7 @@ const Topbar = (props, context) => {
           ? <div>
               Logged in as{' '}
               {user.email}
-              <button className={css.logoutButton} onClick={onLogout}>Logout</button>
+              <button className={css.logoutButton} onClick={handleLogout}>Logout</button>
             </div>
           : <Link to="/login">Login</Link>}
       </div>
@@ -64,6 +71,6 @@ const mapStateToProps = state => ({
   user: state.Auth.user,
 });
 
-const mapDispatchToProps = dispatch => ({ onLogout: () => dispatch(logout()) });
+const mapDispatchToProps = dispatch => ({ onLogout: router => dispatch(logout(router)) });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Topbar);

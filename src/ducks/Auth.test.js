@@ -12,6 +12,7 @@ import reducer, {
   callLogin,
   logout,
   logoutSuccess,
+  logoutError,
   callLogout,
   watchAuth,
 } from './Auth.ducks';
@@ -67,7 +68,8 @@ describe('Auth duck', () => {
       const password = 'pass';
       const payload = { email, password };
       const sdk = { login: jest.fn() };
-      const worker = callLogin({ payload }, sdk);
+      const loginAction = login(email, password);
+      const worker = callLogin(loginAction, sdk);
       expect(worker.next()).toEqual({ done: false, value: call(sdk.login, email, password) });
       expect(worker.next(payload)).toEqual({ done: false, value: put(loginSuccess(payload)) });
       expect(worker.next().done).toEqual(true);
@@ -77,14 +79,42 @@ describe('Auth duck', () => {
     it('should fail when API call rejects', () => {
       const email = 'email';
       const password = 'pass';
-      const payload = { email, password };
       const sdk = { login: jest.fn() };
-      const worker = callLogin({ payload }, sdk);
+      const loginAction = login(email, password);
+      const worker = callLogin(loginAction, sdk);
       expect(worker.next()).toEqual({ done: false, value: call(sdk.login, email, password) });
       const error = new Error('Test login failed');
       expect(worker.throw(error)).toEqual({ done: false, value: put(loginError(error)) });
       expect(worker.next().done).toEqual(true);
       expect(sdk.login).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('logout worker', () => {
+    it('should redirect to root after logout', () => {
+      const sdk = { logout: jest.fn() };
+      const router = { transitionTo: jest.fn() };
+      const action = logout(router);
+      const worker = callLogout(action, sdk);
+      expect(worker.next()).toEqual({ done: false, value: call(sdk.logout) });
+      expect(worker.next()).toEqual({ done: false, value: put(logoutSuccess()) });
+      expect(worker.next()).toEqual({ done: false, value: call(router.transitionTo, '/') });
+      expect(worker.next().done).toEqual(true);
+      expect(sdk.logout).not.toHaveBeenCalled();
+      expect(router.transitionTo).not.toHaveBeenCalled();
+    });
+
+    it('should not redirect if logout fails', () => {
+      const sdk = { logout: jest.fn() };
+      const router = { transitionTo: jest.fn() };
+      const action = logout(router);
+      const worker = callLogout(action, sdk);
+      expect(worker.next()).toEqual({ done: false, value: call(sdk.logout) });
+      const error = new Error('Test logout error');
+      expect(worker.throw(error)).toEqual({ done: false, value: put(logoutError(error)) });
+      expect(worker.next().done).toEqual(true);
+      expect(sdk.logout).not.toHaveBeenCalled();
+      expect(router.transitionTo).not.toHaveBeenCalled();
     });
   });
 
@@ -110,8 +140,9 @@ describe('Auth duck', () => {
 
     it('calls logout', () => {
       const sdk = { logout: jest.fn() };
+      const router = { transitionTo: jest.fn() };
       const watcher = watchAuth(sdk);
-      const logoutAction = logout();
+      const logoutAction = logout(router);
       const takeLoginOrLogout = take([LOGIN_REQUEST, LOGOUT_REQUEST]);
       const forkLogout = fork(callLogout, logoutAction, sdk);
 
@@ -125,6 +156,7 @@ describe('Auth duck', () => {
       expect(watcher.next().value).toEqual(takeLoginOrLogout);
 
       expect(sdk.logout).not.toHaveBeenCalled();
+      expect(router.transitionTo).not.toHaveBeenCalled();
     });
 
     it('should cancel login if another login comes', () => {
@@ -163,9 +195,10 @@ describe('Auth duck', () => {
 
     it('should cancel login if a logout comes', () => {
       const sdk = { login: jest.fn(), logout: jest.fn() };
+      const router = { transitionTo: jest.fn() };
       const watcher = watchAuth(sdk);
       const loginAction = login('email', 'password');
-      const logoutAction = logout();
+      const logoutAction = logout(router);
       const task = createMockTask();
       const takeLoginOrLogout = take([LOGIN_REQUEST, LOGOUT_REQUEST]);
       const forkLogin = fork(callLogin, loginAction, sdk);
@@ -193,6 +226,7 @@ describe('Auth duck', () => {
 
       expect(sdk.login).not.toHaveBeenCalled();
       expect(sdk.logout).not.toHaveBeenCalled();
+      expect(router.transitionTo).not.toHaveBeenCalled();
     });
   });
 });

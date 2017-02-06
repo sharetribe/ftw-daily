@@ -58,7 +58,7 @@ export const login = (email, password) => ({ type: LOGIN_REQUEST, payload: { ema
 export const loginSuccess = user => ({ type: LOGIN_SUCCESS, payload: user });
 export const loginError = error => ({ type: LOGIN_ERROR, payload: error, error: true });
 
-export const logout = () => ({ type: LOGOUT_REQUEST });
+export const logout = router => ({ type: LOGOUT_REQUEST, payload: { router } });
 export const logoutSuccess = () => ({ type: LOGOUT_SUCCESS });
 export const logoutError = error => ({ type: LOGOUT_ERROR, payload: error, error: true });
 
@@ -76,9 +76,12 @@ export function* callLogin(action, sdk) {
 }
 
 export function* callLogout(action, sdk) {
+  const { payload } = action;
+  const { router } = payload;
   try {
     yield call(sdk.logout);
     yield put(logoutSuccess());
+    yield call(router.transitionTo, '/');
   } catch (e) {
     yield put(logoutError(e));
   }
