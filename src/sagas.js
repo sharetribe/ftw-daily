@@ -9,7 +9,7 @@ const mockLogin = (email, password) => new Promise((resolve, reject) => {
         // any non-empty email and password is ok
         resolve({ email, password });
       } else {
-        reject(new Error('Invalid credentials'));
+        reject(new Error('Invalid credentials, try a valid email and a non-empty password'));
       }
     },
     1000,
