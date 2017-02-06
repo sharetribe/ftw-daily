@@ -1,6 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { TestProvider } from '../../util/test-helpers';
+import { renderTree } from '../../util/test-helpers';
 import { SearchPageComponent } from './SearchPage';
 import reducer, { ADD_FILTER, addFilter, initialState } from './SearchPage.ducks';
 import { RoutesProvider } from '../../components';
@@ -8,14 +7,11 @@ import routesConfiguration from '../../routesConfiguration';
 
 describe('SearchPageComponent', () => {
   it('matches snapshot', () => {
-    const component = renderer.create(
-      <TestProvider>
-        <RoutesProvider routes={routesConfiguration}>
-          <SearchPageComponent onLoadListings={v => v} />
-        </RoutesProvider>
-      </TestProvider>,
+    const tree = renderTree(
+      <RoutesProvider routes={routesConfiguration}>
+        <SearchPageComponent onLoadListings={v => v} />
+      </RoutesProvider>,
     );
-    const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

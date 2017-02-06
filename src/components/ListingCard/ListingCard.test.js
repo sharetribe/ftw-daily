@@ -1,6 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { TestProvider } from '../../util/test-helpers';
+import { renderTree } from '../../util/test-helpers';
 import { RoutesProvider } from '../../components';
 import routesConfiguration from '../../routesConfiguration';
 import ListingCard from './ListingCard';
@@ -20,14 +19,11 @@ describe('ListingCard', () => {
         review: { rating: '4' },
       },
     };
-    const component = renderer.create(
-      <TestProvider>
-        <RoutesProvider routes={routesConfiguration}>
-          <ListingCard {...listing} />
-        </RoutesProvider>
-      </TestProvider>,
+    const tree = renderTree(
+      <RoutesProvider routes={routesConfiguration}>
+        <ListingCard {...listing} />
+      </RoutesProvider>,
     );
-    const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

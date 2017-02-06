@@ -1,16 +1,10 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { TestProvider } from '../../util/test-helpers';
+import { renderTree } from '../../util/test-helpers';
 import NotFoundPage from './NotFoundPage';
 
 describe('NotFoundPage', () => {
   it('matches snapshot', () => {
-    const component = renderer.create(
-      <TestProvider>
-        <NotFoundPage />
-      </TestProvider>,
-    );
-    const tree = component.toJSON();
+    const tree = renderTree(<NotFoundPage />);
     expect(tree).toMatchSnapshot();
   });
 });

@@ -1,4 +1,5 @@
 import React from 'react';
+import renderer from 'react-test-renderer';
 import { IntlProvider } from 'react-intl';
 import { BrowserRouter } from 'react-router';
 import { Provider } from 'react-redux';
@@ -15,4 +16,13 @@ export const TestProvider = props => {
       </BrowserRouter>
     </IntlProvider>
   );
+};
+
+export const renderTree = children => {
+  const comp = renderer.create(
+    <TestProvider>
+      {children}
+    </TestProvider>,
+  );
+  return comp.toJSON();
 };
