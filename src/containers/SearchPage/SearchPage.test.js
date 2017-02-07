@@ -1,7 +1,16 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
+import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import { SearchPageComponent } from './SearchPage';
-import reducer, { ADD_FILTER, addFilter, initialState } from './SearchPage.ducks';
+import reducer, {
+  ADD_FILTER,
+  LOAD_LISTINGS,
+  addFilter,
+  callFetchListings,
+  initialState,
+  loadListings,
+  watchLoadListings,
+} from './SearchPage.ducks';
 
 describe('SearchPageComponent', () => {
   it('matches snapshot', () => {
@@ -40,6 +49,46 @@ describe('SearchPageDucs', () => {
       const addFilter = { type: ADD_FILTER, payload: filter };
       const reducedWithInitialContent = reducer({ filters: [filter] }, addFilter);
       expect(reducedWithInitialContent).toEqual({ filters: [filter] });
+    });
+  });
+
+  describe('callFetchListings worker', () => {
+    it('should succeed when API call fulfills', () => {
+      const payload = {};
+      const sdk = { fetchListings: jest.fn() };
+      const worker = callFetchListings(sdk);
+
+      expect(worker.next()).toEqual({ value: call(sdk.fetchListings), done: false });
+      expect(worker.next(payload)).toEqual({
+        value: put(loadListings.success(payload)),
+        done: false,
+      });
+      expect(worker.next().done).toEqual(true);
+      expect(sdk.fetchListings).not.toHaveBeenCalled();
+    });
+
+    it('should fail when API call rejects', () => {
+      const payload = {};
+      const sdk = { fetchListings: jest.fn() };
+      const worker = callFetchListings(sdk);
+      const error = new Error('Test listing fetch failed');
+
+      expect(worker.next()).toEqual({ value: call(sdk.fetchListings), done: false });
+      expect(worker.throw(error)).toEqual({ value: put(loadListings.failure(error)), done: false });
+      expect(worker.next().done).toEqual(true);
+      expect(sdk.fetchListings).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('auth watcher', () => {
+    it('creates takeEvery helper for listening LOAD_LISTINGS.REQUEST actions', () => {
+      const sdk = { fetchListings: jest.fn() };
+      const watcher = watchLoadListings(sdk);
+      const takeLoadListingsRequest = takeEvery(LOAD_LISTINGS.REQUEST, callFetchListings, sdk);
+
+      // The watcher should use takeEvery (a wrapper for forking saga's internal takeEveryHelper)
+      expect(watcher.next().value).toEqual(takeLoadListingsRequest);
+      expect(sdk.fetchListings).not.toHaveBeenCalled();
     });
   });
 });
