@@ -1,10 +1,10 @@
 import React from 'react';
-import { renderTree } from '../../util/test-helpers';
+import { renderShallow } from '../../util/test-helpers';
 import PasswordChangePage from './PasswordChangePage';
 
 describe('PasswordChangePage', () => {
   it('matches snapshot', () => {
-    const tree = renderTree(<PasswordChangePage />);
+    const tree = renderShallow(<PasswordChangePage />);
     expect(tree).toMatchSnapshot();
   });
 });

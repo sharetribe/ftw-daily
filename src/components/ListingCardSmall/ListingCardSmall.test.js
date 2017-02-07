@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderTree } from '../../util/test-helpers';
+import { renderDeep } from '../../util/test-helpers';
 import { RoutesProvider } from '../../components';
 import routesConfiguration from '../../routesConfiguration';
 import ListingCardSmall from './ListingCardSmall';
@@ -19,7 +19,7 @@ describe('ListingCardSmall', () => {
         review: { rating: '4' },
       },
     };
-    const tree = renderTree(
+    const tree = renderDeep(
       <RoutesProvider routes={routesConfiguration}>
         <ListingCardSmall {...listing} />
       </RoutesProvider>,

@@ -1,10 +1,10 @@
 import React from 'react';
-import { renderTree } from '../../util/test-helpers';
+import { renderDeep } from '../../util/test-helpers';
 import HeroSection from './HeroSection';
 
 describe('HeroSection', () => {
   it('matches snapshot', () => {
-    const tree = renderTree(
+    const tree = renderDeep(
       <HeroSection params={{ displayName: 'most-awesome-shop' }}>
         test
       </HeroSection>,

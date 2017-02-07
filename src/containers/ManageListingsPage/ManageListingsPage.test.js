@@ -1,10 +1,10 @@
 import React from 'react';
-import { renderTree } from '../../util/test-helpers';
+import { renderShallow } from '../../util/test-helpers';
 import ManageListingsPage from './ManageListingsPage';
 
 describe('ManageListingsPage', () => {
   it('matches snapshot', () => {
-    const tree = renderTree(<ManageListingsPage />);
+    const tree = renderShallow(<ManageListingsPage />);
     expect(tree).toMatchSnapshot();
   });
 });

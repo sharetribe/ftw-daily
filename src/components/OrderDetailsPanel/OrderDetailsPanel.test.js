@@ -1,8 +1,6 @@
 import React from 'react';
-import { renderTree } from '../../util/test-helpers';
+import { renderShallow } from '../../util/test-helpers';
 import OrderDetailsPanel from './OrderDetailsPanel.js';
-import { RoutesProvider } from '../../components';
-import routesConfiguration from '../../routesConfiguration';
 
 describe('OrderDetailsPanel', () => {
   it('matches snapshot', () => {
@@ -23,11 +21,7 @@ describe('OrderDetailsPanel', () => {
       },
       confirmationCode: 'some-test-confirmation-code',
     };
-    const tree = renderTree(
-      <RoutesProvider routes={routesConfiguration}>
-        <OrderDetailsPanel {...props} />
-      </RoutesProvider>,
-    );
+    const tree = renderShallow(<OrderDetailsPanel {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });

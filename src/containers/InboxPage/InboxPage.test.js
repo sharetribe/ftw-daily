@@ -1,10 +1,10 @@
 import React from 'react';
-import { renderTree } from '../../util/test-helpers';
+import { renderShallow } from '../../util/test-helpers';
 import InboxPage from './InboxPage';
 
 describe('InboxPage', () => {
   it('matches snapshot', () => {
-    const tree = renderTree(<InboxPage filter="inbox" />);
+    const tree = renderShallow(<InboxPage filter="inbox" />);
     expect(tree).toMatchSnapshot();
   });
 });

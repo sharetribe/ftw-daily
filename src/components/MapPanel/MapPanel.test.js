@@ -1,16 +1,10 @@
 import React from 'react';
-import { renderTree } from '../../util/test-helpers';
-import { RoutesProvider } from '../../components';
-import routesConfiguration from '../../routesConfiguration';
+import { renderShallow } from '../../util/test-helpers';
 import MapPanel from './MapPanel';
 
 describe('MapPanel', () => {
   it('matches snapshot', () => {
-    const tree = renderTree(
-      <RoutesProvider routes={routesConfiguration}>
-        <MapPanel />
-      </RoutesProvider>,
-    );
+    const tree = renderShallow(<MapPanel />);
     expect(tree).toMatchSnapshot();
   });
 });

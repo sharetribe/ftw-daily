@@ -1,10 +1,10 @@
 import React from 'react';
-import { renderTree } from '../../util/test-helpers';
+import { renderDeep } from '../../util/test-helpers';
 import BookingInfo from './BookingInfo';
 
 describe('BookingInfo', () => {
   it('matches snapshot', () => {
-    const tree = renderTree(
+    const tree = renderDeep(
       <BookingInfo
         pricePerDay="55\\u20AC"
         bookingPeriod="Jan 2nd - Jan 4th"

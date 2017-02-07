@@ -1,7 +1,5 @@
 import React from 'react';
-import { renderTree } from '../../util/test-helpers';
-import { RoutesProvider } from '../../components';
-import routesConfiguration from '../../routesConfiguration';
+import { renderShallow } from '../../util/test-helpers';
 import ListingCard from './ListingCard';
 
 describe('ListingCard', () => {
@@ -19,11 +17,7 @@ describe('ListingCard', () => {
         review: { rating: '4' },
       },
     };
-    const tree = renderTree(
-      <RoutesProvider routes={routesConfiguration}>
-        <ListingCard {...listing} />
-      </RoutesProvider>,
-    );
+    const tree = renderShallow(<ListingCard {...listing} />);
     expect(tree).toMatchSnapshot();
   });
 });

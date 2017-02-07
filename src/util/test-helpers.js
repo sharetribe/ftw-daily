@@ -1,5 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import { IntlProvider } from 'react-intl';
 import { BrowserRouter } from 'react-router';
 import { Provider } from 'react-redux';
@@ -18,10 +20,14 @@ export const TestProvider = props => {
   );
 };
 
-export const renderTree = children => {
+export const renderShallow = component => {
+  return toJson(shallow(component));
+};
+
+export const renderDeep = component => {
   const comp = renderer.create(
     <TestProvider>
-      {children}
+      {component}
     </TestProvider>,
   );
   return comp.toJSON();
