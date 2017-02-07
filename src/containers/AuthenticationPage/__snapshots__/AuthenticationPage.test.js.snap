@@ -1,173 +1,25 @@
-exports[`AuthenticationPage matches snapshot 1`] = `
-<div
-  className="">
-  <div
-    className={undefined}>
-    <div>
-      <a
-        className=""
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "&#127968;",
-          }
-        }
-        href="/"
-        onClick={[Function]}
-        style={Object {}} />
-      <select
-        className={undefined}
-        onChange={[Function]}
-        value="default">
-        <option
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#127828;",
-            }
-          }
-          value="default" />
-        <option
-          value="/s">
-          Search
-        </option>
-        <option
-          value="/l/Bike-Pelago/12345">
-          Listing page
-        </option>
-        <option
-          value="/u/Bikerrs">
-          Profile
-        </option>
-        <option
-          value="/u/Bikerrs/edit">
-          Edit profile
-        </option>
-        <option
-          value="/checkout/lid1234">
-          Checkout
-        </option>
-        <option
-          value="/inbox">
-          Inbox
-        </option>
-        <option
-          value="/orders">
-          Orders
-        </option>
-        <option
-          value="/sales">
-          Sales
-        </option>
-        <option
-          value="/password/forgotten">
-          Request password
-        </option>
-        <option
-          value="/password/change">
-          Change password
-        </option>
-        <option
-          value="/listings">
-          Manage listings
-        </option>
-        <option
-          value="/account">
-          Account settings
-        </option>
-        <option
-          value="/account/contact-details">
-          Contact details
-        </option>
-        <option
-          value="/account/payout-preferences">
-          Payout preferences
-        </option>
-        <option
-          value="/account/security">
-          Security
-        </option>
-      </select>
-    </div>
-    <div
-      className={undefined}>
-      <a
-        className=""
-        href="/login"
-        onClick={[Function]}
-        style={Object {}}>
-        Login
-      </a>
-    </div>
-  </div>
-  <h1>
-    Authentication page: signup tab
-  </h1>
-  <form
-    onSubmit={[Function]}>
-    <label
-      htmlFor="email">
-      Email
-    </label>
-    <input
-      name="email"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onDragStart={[Function]}
-      onDrop={[Function]}
-      onFocus={[Function]}
-      type="email"
-      value="" />
-    <label
-      htmlFor="firstName">
-      First name
-    </label>
-    <input
-      name="firstName"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onDragStart={[Function]}
-      onDrop={[Function]}
-      onFocus={[Function]}
-      value="" />
-    <label
-      htmlFor="lastName">
-      Last name
-    </label>
-    <input
-      name="lastName"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onDragStart={[Function]}
-      onDrop={[Function]}
-      onFocus={[Function]}
-      value="" />
-    <label
-      htmlFor="password">
-      Password
-    </label>
-    <input
-      name="password"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onDragStart={[Function]}
-      onDrop={[Function]}
-      onFocus={[Function]}
-      type="password"
-      value="" />
-    <p>
-      By confirming I accept the booking terms and conditions.
-    </p>
-    <button
-      disabled={true}
-      type="submit">
-      Sign up
-    </button>
-  </form>
-  <a
+exports[`AuthenticationPageComponent matches snapshot 1`] = `
+<Connect(PageLayout)
+  title="Authentication page: signup tab">
+  <ReduxForm
+    onSubmit={[Function]} />
+  <Link
+    activeClassName=""
+    activeOnlyWhenExact={false}
+    activeStyle={Object {}}
     className=""
-    href="/login"
-    onClick={[Function]}
-    style={Object {}}>
+    isActive={[Function]}
+    replace={false}
+    style={Object {}}
+    to={
+      Object {
+        "pathname": "/login",
+        "state": Object {
+          "from": "/protected",
+        },
+      }
+    }>
     Log in
-  </a>
-</div>
+  </Link>
+</Connect(PageLayout)>
 `;

@@ -1,22 +1,23 @@
 exports[`FilterPanel matches snapshot 1`] = `
 <div>
-  <h1
-    className={undefined}>
+  <h1>
     Filters
   </h1>
-  <a
-    className=""
-    href="/s/listings"
-    onClick={[Function]}
-    style={Object {}}>
+  <NamedLink
+    hash=""
+    name="SearchListingsPage"
+    params={Object {}}
+    query={Object {}}
+    state={Object {}}>
     See studios
-  </a>
-  <a
-    className=""
-    href="/s/listings"
-    onClick={[Function]}
-    style={Object {}}>
+  </NamedLink>
+  <NamedLink
+    hash=""
+    name="SearchListingsPage"
+    params={Object {}}
+    query={Object {}}
+    state={Object {}}>
     X
-  </a>
+  </NamedLink>
 </div>
 `;

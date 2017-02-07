@@ -1,6 +1,6 @@
 import React from 'react';
+import { renderDeep } from '../../util/test-helpers';
 import RoutesProvider from './RoutesProvider';
-import renderer from 'react-test-renderer';
 
 describe('RoutesProvider', () => {
   it('should contain routes from context', () => {
@@ -10,9 +10,7 @@ describe('RoutesProvider', () => {
     };
     Child.contextTypes = { routes: React.PropTypes.array };
 
-    const rendered = renderer
-      .create(<RoutesProvider routes={routesConf}><Child /></RoutesProvider>)
-      .toJSON();
-    expect(rendered.children).toContain('SomePage');
+    const tree = renderDeep(<RoutesProvider routes={routesConf}><Child /></RoutesProvider>);
+    expect(tree.children).toContain('SomePage');
   });
 });

@@ -1,8 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { TestProvider } from '../../util/test-helpers';
-import { RoutesProvider } from '../../components';
-import routesConfiguration from '../../routesConfiguration';
+import { renderShallow } from '../../util/test-helpers';
 import ListingCard from './ListingCard';
 
 describe('ListingCard', () => {
@@ -20,14 +17,7 @@ describe('ListingCard', () => {
         review: { rating: '4' },
       },
     };
-    const component = renderer.create(
-      <TestProvider>
-        <RoutesProvider routes={routesConfiguration}>
-          <ListingCard {...listing} />
-        </RoutesProvider>
-      </TestProvider>,
-    );
-    const tree = component.toJSON();
+    const tree = renderShallow(<ListingCard {...listing} />);
     expect(tree).toMatchSnapshot();
   });
 });

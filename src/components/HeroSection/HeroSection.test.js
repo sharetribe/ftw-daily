@@ -1,18 +1,14 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { TestProvider } from '../../util/test-helpers';
+import { renderDeep } from '../../util/test-helpers';
 import HeroSection from './HeroSection';
 
 describe('HeroSection', () => {
   it('matches snapshot', () => {
-    const component = renderer.create(
-      <TestProvider>
-        <HeroSection params={{ displayName: 'most-awesome-shop' }}>
-          test
-        </HeroSection>
-      </TestProvider>,
+    const tree = renderDeep(
+      <HeroSection params={{ displayName: 'most-awesome-shop' }}>
+        test
+      </HeroSection>,
     );
-    const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

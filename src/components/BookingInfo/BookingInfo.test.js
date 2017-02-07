@@ -1,10 +1,10 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { renderDeep } from '../../util/test-helpers';
 import BookingInfo from './BookingInfo';
 
 describe('BookingInfo', () => {
   it('matches snapshot', () => {
-    const component = renderer.create(
+    const tree = renderDeep(
       <BookingInfo
         pricePerDay="55\\u20AC"
         bookingPeriod="Jan 2nd - Jan 4th"
@@ -12,7 +12,6 @@ describe('BookingInfo', () => {
         total="165\u20AC"
       />,
     );
-    const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

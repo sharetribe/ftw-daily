@@ -1,16 +1,16 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { TestProvider } from '../../util/test-helpers';
-import AuthenticationPage from './AuthenticationPage';
+import { renderShallow } from '../../util/test-helpers';
+import { AuthenticationPageComponent } from './AuthenticationPage';
 
-describe('AuthenticationPage', () => {
+describe('AuthenticationPageComponent', () => {
   it('matches snapshot', () => {
-    const component = renderer.create(
-      <TestProvider>
-        <AuthenticationPage location={{ state: { from: '/protected' } }} />
-      </TestProvider>,
-    );
-    const tree = component.toJSON();
+    const props = {
+      location: { state: { from: '/protected' } },
+      isAuthenticated: false,
+      onLoginSubmit: () => null,
+      onSignUpSubmit: () => null,
+    };
+    const tree = renderShallow(<AuthenticationPageComponent {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });

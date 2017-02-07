@@ -1,158 +1,42 @@
 exports[`ListingPage matches snapshot 1`] = `
-<div
-  className="">
-  <div
-    className={undefined}>
-    <div>
-      <a
-        className=""
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "&#127968;",
-          }
-        }
-        href="/"
-        onClick={[Function]}
-        style={Object {}} />
-      <select
-        className={undefined}
-        onChange={[Function]}
-        value="default">
-        <option
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#127828;",
-            }
-          }
-          value="default" />
-        <option
-          value="/s">
-          Search
-        </option>
-        <option
-          value="/l/Bike-Pelago/12345">
-          Listing page
-        </option>
-        <option
-          value="/u/Bikerrs">
-          Profile
-        </option>
-        <option
-          value="/u/Bikerrs/edit">
-          Edit profile
-        </option>
-        <option
-          value="/checkout/lid1234">
-          Checkout
-        </option>
-        <option
-          value="/inbox">
-          Inbox
-        </option>
-        <option
-          value="/orders">
-          Orders
-        </option>
-        <option
-          value="/sales">
-          Sales
-        </option>
-        <option
-          value="/password/forgotten">
-          Request password
-        </option>
-        <option
-          value="/password/change">
-          Change password
-        </option>
-        <option
-          value="/listings">
-          Manage listings
-        </option>
-        <option
-          value="/account">
-          Account settings
-        </option>
-        <option
-          value="/account/contact-details">
-          Contact details
-        </option>
-        <option
-          value="/account/payout-preferences">
-          Payout preferences
-        </option>
-        <option
-          value="/account/security">
-          Security
-        </option>
-      </select>
-    </div>
-    <div
-      className={undefined}>
-      <a
-        className=""
-        href="/login"
-        onClick={[Function]}
-        style={Object {}}>
-        Login
-      </a>
-    </div>
-  </div>
-  <h1>
-    Banyan Studios 55€ / day
-  </h1>
-  <div
-    className={undefined}>
+<Connect(PageLayout)
+  title="Banyan Studios 55€ / day">
+  <div>
     <img
       alt="img1"
-      className={undefined}
       src="http://placehold.it/750x470" />
-    <div
-      className={undefined}>
-      <div
-        className={undefined}>
-        <div
-          className={undefined}>
+    <div>
+      <div>
+        <div>
           <img
             alt="img2"
-            className={undefined}
             src="http://placehold.it/750x470" />
         </div>
       </div>
-      <div
-        className={undefined}>
-        <div
-          className={undefined}>
+      <div>
+        <div>
           <img
             alt="img3"
-            className={undefined}
             src="http://placehold.it/750x470" />
         </div>
       </div>
-      <div
-        className={undefined}>
-        <div
-          className={undefined}>
+      <div>
+        <div>
           <img
             alt="img4"
-            className={undefined}
             src="http://placehold.it/750x470" />
         </div>
       </div>
-      <div
-        className={undefined}>
-        <div
-          className={undefined}>
+      <div>
+        <div>
           <img
             alt="img5"
-            className={undefined}
             src="http://placehold.it/750x470" />
         </div>
       </div>
     </div>
   </div>
   <div
-    className={undefined}
     dangerouslySetInnerHTML={
       Object {
         "__html": "
@@ -169,8 +53,7 @@ exports[`ListingPage matches snapshot 1`] = `
         ",
       }
     } />
-  <div
-    className={undefined}>
+  <div>
     <h1>
       Here will be filters (or dragons)
     </h1>
@@ -190,24 +73,25 @@ exports[`ListingPage matches snapshot 1`] = `
        10am - 6pm
     </p>
   </div>
-  <a
+  <Link
+    activeClassName=""
+    activeOnlyWhenExact={false}
+    activeStyle={Object {}}
     className=""
-    href="mailto:studio.dude@mystudio.com"
-    onClick={[Function]}
-    style={Object {}}>
+    isActive={[Function]}
+    replace={false}
+    style={Object {}}
+    to="mailto:studio.dude@mystudio.com">
     <h2>
       Contact studio
     </h2>
-  </a>
-  <div
-    className={undefined}>
+  </Link>
+  <div>
     <h2>
       Studio reviews (1)
     </h2>
-    <div
-      className={undefined}>
-      <div
-        className={undefined}>
+    <div>
+      <div>
         <p>
           
                   Great studio in the New York for music professionals. Everything you need
@@ -215,28 +99,21 @@ exports[`ListingPage matches snapshot 1`] = `
                   we even got some tips for our songs! :)
                   
         </p>
-        <div
-          className={undefined}>
-          <div
-            className={undefined}>
+        <div>
+          <div>
             <img
               alt="Vesa L."
-              className={undefined}
               src="http://placehold.it/44x44" />
           </div>
-          <div
-            className={undefined}>
-            <span
-              className={undefined}>
+          <div>
+            <span>
               Vesa L.
             </span>
-            <span
-              className={undefined}>
+            <span>
               January 2017
             </span>
           </div>
-          <div
-            className={undefined}>
+          <div>
             review: 
             <span>
               4
@@ -249,16 +126,20 @@ exports[`ListingPage matches snapshot 1`] = `
       </div>
     </div>
   </div>
-  <div
-    className={undefined}>
+  <div>
     Map
   </div>
-  <a
-    className=""
-    href="/order/12345/details"
-    onClick={[Function]}
-    style={Object {}}>
+  <NamedLink
+    hash=""
+    name="OrderDetailsPage"
+    params={
+      Object {
+        "id": 12345,
+      }
+    }
+    query={Object {}}
+    state={Object {}}>
     Book Banyan Studios
-  </a>
-</div>
+  </NamedLink>
+</Connect(PageLayout)>
 `;

@@ -17,7 +17,6 @@
     "react-intl": "^2.2.3",
     "react-redux": "^5.0.2",
     "react-router": "4.0.0-alpha.6",
-    "react-test-renderer": "^15.4.2",
     "redux": "^3.6.0",
     "redux-form": "^6.5.0",
     "redux-saga": "^0.14.3",
@@ -27,8 +26,12 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "enzyme": "^2.7.1",
+    "enzyme-to-json": "^1.4.5",
     "nodemon": "^1.11.0",
-    "prettier": "^0.13.1"
+    "prettier": "^0.13.1",
+    "react-addons-test-utils": "^15.4.2",
+    "react-test-renderer": "^15.4.2"
   },
   "scripts": {
     "clean": "rm -rf build/*",

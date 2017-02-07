@@ -1,44 +1,39 @@
 exports[`ListingCard matches snapshot 1`] = `
-<div
-  className={undefined}>
-  <div
-    className={undefined}>
-    <div
-      className={undefined}>
+<div>
+  <div>
+    <div>
       <img
         alt="Listing Title"
-        className={undefined}
         src="http://placehold.it/400x300" />
     </div>
   </div>
-  <div
-    className={undefined}>
-    <div
-      className={undefined}>
-      <a
-        className=""
-        href="/l/Banyan-Studios/123"
-        onClick={[Function]}
-        style={Object {}}>
+  <div>
+    <div>
+      <NamedLink
+        hash=""
+        name="ListingPage"
+        params={
+          Object {
+            "id": 123,
+            "slug": "Banyan-Studios",
+          }
+        }
+        query={Object {}}
+        state={Object {}}>
         Banyan Studios
-      </a>
-      <div
-        className={undefined}>
+      </NamedLink>
+      <div>
         55€ / day
       </div>
     </div>
-    <div
-      className={undefined}>
+    <div>
       Organic Music Production in a Sustainable, Ethical and Professional Studio.
     </div>
-    <div
-      className={undefined}>
-      <div
-        className={undefined}>
+    <div>
+      <div>
         New York, NY • 40mi away
       </div>
-      <div
-        className={undefined}>
+      <div>
         (
         <span>
           4
@@ -54,23 +49,17 @@ exports[`ListingCard matches snapshot 1`] = `
       </div>
     </div>
     <hr />
-    <div
-      className={undefined}>
-      <div
-        className={undefined}>
+    <div>
+      <div>
         <img
           alt="The Stardust Collective"
-          className={undefined}
           src="http://placehold.it/44x44" />
       </div>
-      <div
-        className={undefined}>
-        <span
-          className={undefined}>
+      <div>
+        <span>
           The Stardust Collective
         </span>
-        <div
-          className={undefined}>
+        <div>
           review: 
           <span>
             4

@@ -12,53 +12,33 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
   <h3>
     Test order
   </h3>
-  <div>
-    <p>
-      Some road 1
-    </p>
-    <p>
-      Some city, somewhere
-    </p>
-    <p>
-      Some phone number
-    </p>
-    <p>
-      Get directions
-    </p>
-  </div>
+  <ContactInfo
+    addressLine1="Some road 1"
+    addressLine2="Some city, somewhere"
+    phoneNumber="Some phone number" />
   <p>
     Confirmation code 
     some-test-confirmation-code
   </p>
-  <dl>
-    <dt>
-      Price per day:
-    </dt>
-    <dd>
-      10$
-    </dd>
-    <dt>
-      Booking period:
-    </dt>
-    <dd>
-      some booking period, some booking duration
-    </dd>
-    <dt>
-      Total
-    </dt>
-    <dd>
-      100$
-    </dd>
-  </dl>
+  <BookingInfo
+    bookingDuration="some booking duration"
+    bookingPeriod="some booking period"
+    pricePerDay="10$"
+    total="100$" />
   <p>
     Cancel booking
   </p>
-  <a
-    className=""
-    href="/order/some-test-order-id/discussion"
-    onClick={[Function]}
-    style={Object {}}>
+  <NamedLink
+    hash=""
+    name="OrderDiscussionPage"
+    params={
+      Object {
+        "id": "some-test-order-id",
+      }
+    }
+    query={Object {}}
+    state={Object {}}>
     You have a new message!
-  </a>
+  </NamedLink>
 </div>
 `;

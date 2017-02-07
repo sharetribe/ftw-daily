@@ -1,20 +1,10 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { TestProvider } from '../../util/test-helpers';
+import { renderShallow } from '../../util/test-helpers';
 import CheckoutPage from './CheckoutPage';
-import { RoutesProvider } from '../../components';
-import routesConfiguration from '../../routesConfiguration';
 
 describe('CheckoutPage', () => {
   it('matches snapshot', () => {
-    const component = renderer.create(
-      <TestProvider>
-        <RoutesProvider routes={routesConfiguration}>
-          <CheckoutPage params={{ listingId: 'some-listing-id' }} />
-        </RoutesProvider>
-      </TestProvider>,
-    );
-    const tree = component.toJSON();
+    const tree = renderShallow(<CheckoutPage params={{ listingId: 'some-listing-id' }} />);
     expect(tree).toMatchSnapshot();
   });
 });
