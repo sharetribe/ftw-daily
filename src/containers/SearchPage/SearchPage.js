@@ -27,19 +27,11 @@ export class SearchPageComponent extends Component {
     const { tab, SearchPage } = this.props;
     const { listings } = SearchPage;
     const fakeListings = listings || [];
-    const selectedTab = includes(['filters','listings', 'map'], tab)
-      ? tab
-      : 'listings';
+    const selectedTab = includes(['filters', 'listings', 'map'], tab) ? tab : 'listings';
 
-    const filtersClassName = classNames(css.filters, {
-      [css.open]: selectedTab === 'filters',
-    });
-    const listingsClassName = classNames(css.listings, {
-      [css.open]: selectedTab === 'listings',
-    });
-    const mapClassName = classNames(css.map, {
-      [css.open]: selectedTab === 'map',
-    });
+    const filtersClassName = classNames(css.filters, { [css.open]: selectedTab === 'filters' });
+    const listingsClassName = classNames(css.listings, { [css.open]: selectedTab === 'listings' });
+    const mapClassName = classNames(css.map, { [css.open]: selectedTab === 'map' });
 
     return (
       <PageLayout title="Search page">
