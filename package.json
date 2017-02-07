@@ -23,7 +23,8 @@
     "redux-saga": "^0.14.3",
     "sanitize.css": "^4.1.0",
     "sharetribe-scripts": "0.8.6",
-    "source-map-support": "^0.4.11"
+    "source-map-support": "^0.4.11",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",

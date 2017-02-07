@@ -1,6 +1,10 @@
 import React from 'react';
 import { find } from 'lodash';
 import { Redirect } from 'react-router';
+
+// This will change to `matchPath` soonish
+import matchPattern from 'react-router/matchPattern';
+
 import pathToRegexp from 'path-to-regexp';
 import {
   AuthenticationPage,
@@ -33,24 +37,28 @@ const routesConfiguration = [
     exactly: true,
     name: 'SearchPage',
     component: SearchPage,
+    loadData: SearchPage ? SearchPage.loadData : null,
     routes: [
       {
         pattern: '/s/filters',
         exactly: true,
         name: 'SearchFiltersPage',
         component: props => <SearchPage {...props} tab="filters" />,
+        loadData: SearchPage ? SearchPage.loadData : null,
       },
       {
         pattern: '/s/listings',
         exactly: true,
         name: 'SearchListingsPage',
         component: props => <SearchPage {...props} tab="listings" />,
+        loadData: SearchPage ? SearchPage.loadData : null,
       },
       {
         pattern: '/s/map',
         exactly: true,
         name: 'SearchMapPage',
         component: props => <SearchPage {...props} tab="map" />,
+        loadData: SearchPage ? SearchPage.loadData : null,
       },
     ],
   },
@@ -269,7 +277,45 @@ const toPathByRouteName = (nameToFind, routes) => {
 const pathByRouteName = (nameToFind, routes, params = {}) =>
   toPathByRouteName(nameToFind, routes)(params);
 
+/**
+ * matchRoutesToLocation helps to figure out which routes are related to given location.
+ */
+const matchRoutesToLocation = (routes, location, matchedRoutes = [], params = {}) => {
+  let parameters = { ...params };
+  let matched = [...matchedRoutes];
+
+  routes.forEach(route => {
+    const { exactly = false } = route;
+    const match = !route.pattern ? true : matchPattern(route.pattern, location, exactly);
+
+    if (match) {
+      matched.push(route);
+
+      if (match.params) {
+        parameters = { ...parameters, ...match.params };
+      }
+    }
+
+    if (route.routes) {
+      const { matchedRoutes: subRouteMatches, params: subRouteParams } = matchRoutesToLocation(route.routes, location, matched, parameters);
+      matched = matched.concat(subRouteMatches);
+      parameters = { ...parameters, ...subRouteParams };
+    }
+  });
+
+  return { matchedRoutes: matched, params: parameters };
+};
+
+const matchPathnameCreator = routes =>
+  (location, matchedRoutes = [], params = {}) =>
+    matchRoutesToLocation(routes, { pathname: location }, matchedRoutes, params);
+
+/**
+ * matchRoutesToLocation helps to figure out which routes are related to given location.
+ */
+const matchPathname = matchPathnameCreator(routesConfiguration);
+
 // Exported helpers
-export { findRouteByName, flattenRoutes, toPathByRouteName, pathByRouteName };
+export { findRouteByName, flattenRoutes, matchPathname, toPathByRouteName, pathByRouteName };
 
 export default routesConfiguration;

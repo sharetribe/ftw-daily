@@ -22,10 +22,13 @@ const compression = require('compression');
 const path = require('path');
 const fs = require('fs');
 const qs = require('qs');
+const url = require('url');
 const _ = require('lodash');
 const React = require('react');
 const { createServerRenderContext } = require('react-router');
+const sagaEffects = require('redux-saga/effects');
 const auth = require('./auth');
+const sdk = require('./fakeSDK');
 
 // Construct the bundle path where the server side rendering function
 // can be imported.
@@ -33,7 +36,10 @@ const buildPath = path.resolve(__dirname, '..', 'build');
 const manifestPath = path.join(buildPath, 'asset-manifest.json');
 const manifest = require(manifestPath);
 const mainJsPath = path.join(buildPath, manifest['main.js']);
-const renderApp = require(mainJsPath).default;
+const mainJs = require(mainJsPath);
+const renderApp = mainJs.default;
+const matchPathname = mainJs.matchPathname;
+const configureStore = mainJs.configureStore;
 
 // The HTML build file is generated from the `public/index.html` file
 // and used as a template for server side rendering. The application
@@ -66,15 +72,52 @@ const template = _.template(indexHtml, {
   escape: reNoMatch,
 });
 
-function render(url, context, preloadedState) {
-  const { head, body } = renderApp(url, context, preloadedState);
+function fetchInitialState(requestUrl) {
+  const pathname = url.parse(requestUrl).pathname;
+  const { matchedRoutes, params } = matchPathname(pathname);
+
+  // pathname may match with several routes (if they don't have exactly=true)
+  // We filter all the components form matched routes that have `loadData`
+  const initialFetches = _
+    .chain(matchedRoutes)
+    .filter(r => r.loadData)
+    .map(r => sagaEffects.fork(r.loadData, sdk))
+    .value();
+
+  // We need to combine different onload sagas under one yield
+  const fetchInitialData = function* fetchInitialData() {
+    yield initialFetches;
+  };
+
+  // runSaga (if necessary) and return initial store state after loadData fetches.
+  if (initialFetches.length > 0) {
+    const fetchPromise = new Promise((resolve, reject) => {
+      const store = configureStore({});
+      store.runSaga(fetchInitialData).done
+        .then(() => {
+          resolve(store.getState());
+        })
+        .catch(e => {
+          reject(e);
+        });
+      // Close temporary store's saga middleware (which was used only for fetching initial store state)
+      store.closeSagaMiddleware();
+    });
+    return fetchPromise;
+  }
+  return Promise.resolve({});
+}
+
+function render(requestUrl, context, preloadedState) {
+  const { head, body } = renderApp(requestUrl, context, preloadedState);
 
   // Preloaded state needs to be passed for client side too.
   // For security reasons we ensure that preloaded state is considered as a string
   // by replacing '<' character with its unicode equivalent.
   // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
+  const serializedState = JSON.stringify(preloadedState).replace(/</g, '\\u003c');
   const preloadedStateScript = `
-      window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')};
+      <script>window.__PRELOADED_STATE__ = ${serializedState};</script>
   `;
 
   return template({ title: head.title.toString(), preloadedStateScript, body });
@@ -104,21 +147,26 @@ app.get('*', (req, res) => {
   const filters = qs.parse(req.query);
 
   // TODO fetch this asynchronously
-  const preloadedState = { search: { filters } };
+  fetchInitialState(req.url)
+    .then(preloadedState => {
+      const html = render(req.url, context, preloadedState);
+      const result = context.getResult();
 
-  const html = render(req.url, context, preloadedState);
-  const result = context.getResult();
-
-  if (result.redirect) {
-    res.redirect(result.redirect.pathname);
-  } else if (result.missed) {
-    // Do a second render pass with the context to clue <Miss>
-    // components into rendering this time.
-    // See: https://react-router.now.sh/ServerRouter
-    res.status(404).send(render(req.url, context, preloadedState));
-  } else {
-    res.send(html);
-  }
+      if (result.redirect) {
+        res.redirect(result.redirect.pathname);
+      } else if (result.missed) {
+        // Do a second render pass with the context to clue <Miss>
+        // components into rendering this time.
+        // See: https://react-router.now.sh/ServerRouter
+        res.status(404).send(render(req.url, context, preloadedState));
+      } else {
+        res.send(html);
+      }
+    })
+    .catch(e => {
+      console.error(e.message);
+      res.status(500).send(e.message);
+    });
 });
 
 app.listen(PORT, () => {
