@@ -1,29 +1,23 @@
 exports[`SearchResultsPanel matches snapshot 1`] = `
 <div>
-  <div
-    className={undefined}>
-    New York, Jan 2nd – Jan 4th 
-    <span
-      className={undefined}>
-      ▼
-    </span>
-  </div>
-  <div
-    className={undefined}>
-    <a
-      className=""
-      href="/s/filters"
-      onClick={[Function]}
-      style={Object {}}>
+  <Menu />
+  <div>
+    <NamedLink
+      hash=""
+      name="SearchFiltersPage"
+      params={Object {}}
+      query={Object {}}
+      state={Object {}}>
       Filters
-    </a>
-    <a
-      className=""
-      href="/s/map"
-      onClick={[Function]}
-      style={Object {}}>
+    </NamedLink>
+    <NamedLink
+      hash=""
+      name="SearchMapPage"
+      params={Object {}}
+      query={Object {}}
+      state={Object {}}>
       Map
-    </a>
+    </NamedLink>
   </div>
 </div>
 `;

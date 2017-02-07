@@ -1,219 +1,67 @@
 exports[`OrderPage matches snapshot 1`] = `
-<div
-  className="">
-  <div
-    className={undefined}>
-    <div>
-      <a
-        className=""
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "&#127968;",
-          }
-        }
-        href="/"
-        onClick={[Function]}
-        style={Object {}} />
-      <select
-        className={undefined}
-        onChange={[Function]}
-        value="default">
-        <option
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#127828;",
-            }
-          }
-          value="default" />
-        <option
-          value="/s">
-          Search
-        </option>
-        <option
-          value="/l/Bike-Pelago/12345">
-          Listing page
-        </option>
-        <option
-          value="/u/Bikerrs">
-          Profile
-        </option>
-        <option
-          value="/u/Bikerrs/edit">
-          Edit profile
-        </option>
-        <option
-          value="/checkout/lid1234">
-          Checkout
-        </option>
-        <option
-          value="/inbox">
-          Inbox
-        </option>
-        <option
-          value="/orders">
-          Orders
-        </option>
-        <option
-          value="/sales">
-          Sales
-        </option>
-        <option
-          value="/password/forgotten">
-          Request password
-        </option>
-        <option
-          value="/password/change">
-          Change password
-        </option>
-        <option
-          value="/listings">
-          Manage listings
-        </option>
-        <option
-          value="/account">
-          Account settings
-        </option>
-        <option
-          value="/account/contact-details">
-          Contact details
-        </option>
-        <option
-          value="/account/payout-preferences">
-          Payout preferences
-        </option>
-        <option
-          value="/account/security">
-          Security
-        </option>
-      </select>
-    </div>
-    <div
-      className={undefined}>
-      <a
-        className=""
-        href="/login"
-        onClick={[Function]}
-        style={Object {}}>
-        Login
-      </a>
-    </div>
-  </div>
-  <h1>
-    Your Banyan Studios booking is confirmed!
-  </h1>
-  <a
-    className=""
-    href="/order/1234/details"
-    onClick={[Function]}
+<Connect(PageLayout)
+  title="Your Banyan Studios booking is confirmed!">
+  <NamedLink
+    activeStyle={
+      Object {
+        "fontWeight": "bold",
+      }
+    }
+    hash=""
+    name="OrderDetailsPage"
+    params={
+      Object {
+        "id": 1234,
+      }
+    }
+    query={Object {}}
+    state={Object {}}
     style={
       Object {
         "marginRight": "2rem",
       }
     }>
     Booking details
-  </a>
-  <a
-    className=""
-    href="/order/1234/discussion"
-    onClick={[Function]}
-    style={Object {}}>
+  </NamedLink>
+  <NamedLink
+    activeStyle={
+      Object {
+        "fontWeight": "bold",
+      }
+    }
+    hash=""
+    name="OrderDiscussionPage"
+    params={
+      Object {
+        "id": 1234,
+      }
+    }
+    query={Object {}}
+    state={Object {}}>
     Discussion
-  </a>
-  <div
-    className="undefined">
-    <img
-      alt="Banyan Studios"
-      src="http://placehold.it/750x470"
-      style={
-        Object {
-          "width": "100%",
-        }
-      } />
-    <h3>
-      Banyan Studios
-    </h3>
-    <div>
-      <p>
-        350 5th Avenue
-      </p>
-      <p>
-        New York, NY 10118
-      </p>
-      <p>
-        +1 432 43184910
-      </p>
-      <p>
-        Get directions
-      </p>
-    </div>
-    <p>
-      Confirmation code 
-      X2587X
-    </p>
-    <dl>
-      <dt>
-        Price per day:
-      </dt>
-      <dd>
-        55€
-      </dd>
-      <dt>
-        Booking period:
-      </dt>
-      <dd>
-        Jan 2nd - Jan 4th, 3 days
-      </dd>
-      <dt>
-        Total
-      </dt>
-      <dd>
-        165€
-      </dd>
-    </dl>
-    <p>
-      Cancel booking
-    </p>
-    <a
-      className=""
-      href="/order/1234/discussion"
-      onClick={[Function]}
-      style={Object {}}>
-      You have a new message!
-    </a>
-  </div>
-  <div
-    className="">
-    <ul>
-      <li>
-        <span
-          className={undefined}>
-          2017-02-26T00:00:00.000Z
-        </span>
-        <div
-          className={undefined}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac tellus ornare, tempor lacus quis, imperdiet lectus. Morbi suscipit semper nisl at lacinia. Vestibulum malesuada mattis nisl, et venenatis enim volutpat sit amet. Nulla laoreet feugiat gravida. Fusce ultricies nisl quis aliquet ullamcorper. Nulla congue risus metus.
-        </div>
-        <span
-          className={undefined}>
-          John
-        </span>
-      </li>
-    </ul>
-    <form
-      className={undefined}
-      onSubmit={[Function]}>
-      <input
-        autoFocus={true}
-        className={undefined}
-        onChange={[Function]}
-        type="text"
-        value="" />
-      <button
-        className={undefined}
-        type="submit">
-        Send
-      </button>
-    </form>
-  </div>
-</div>
+  </NamedLink>
+  <OrderDetailsPanel
+    className="undefined"
+    confirmationCode="X2587X"
+    contact={
+      Object {
+        "addressLine1": "350 5th Avenue",
+        "addressLine2": "New York, NY 10118",
+        "phoneNumber": "+1 432 43184910",
+      }
+    }
+    imageUrl="http://placehold.it/750x470"
+    info={
+      Object {
+        "bookingDuration": "3 days",
+        "bookingPeriod": "Jan 2nd - Jan 4th",
+        "pricePerDay": "55€",
+        "total": "165€",
+      }
+    }
+    orderId={1234}
+    title="Banyan Studios" />
+  <OrderDiscussionPanel
+    className="" />
+</Connect(PageLayout)>
 `;

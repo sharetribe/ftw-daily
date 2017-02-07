@@ -1,24 +1,24 @@
 exports[`MapPanel matches snapshot 1`] = `
 <div>
-  <div
-    className={undefined}>
+  <div>
     Map
   </div>
-  <div
-    className={undefined} />
-  <a
-    className=""
-    href="/s/filters"
-    onClick={[Function]}
-    style={Object {}}>
+  <div />
+  <NamedLink
+    hash=""
+    name="SearchFiltersPage"
+    params={Object {}}
+    query={Object {}}
+    state={Object {}}>
     Filters
-  </a>
-  <a
-    className=""
-    href="/s/listings"
-    onClick={[Function]}
-    style={Object {}}>
+  </NamedLink>
+  <NamedLink
+    hash=""
+    name="SearchListingsPage"
+    params={Object {}}
+    query={Object {}}
+    state={Object {}}>
     X
-  </a>
+  </NamedLink>
 </div>
 `;
