@@ -2,12 +2,31 @@
   display: flex;
   background-color: #f9f9f9;
   flex-direction: row;
+  padding: 0 1rem;
   width: 100vw;
   height: 80px;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 }
 
-.link {
-  margin: 0 10px;
+.home {
+  font-size: 2rem;
+}
+
+.navDropDown {
+  height: 60px;
+  font-size: 2rem;
+  border-radius: 0;
+  appearance: none;
+  margin-left: 1rem;
+  outline: none;
+}
+
+.user {
+  min-width: 15rem;
+  text-align: right;
+}
+
+.logoutButton {
+  margin: 0;
 }

@@ -3,118 +3,100 @@ exports[`ManageListingsPage matches snapshot 1`] = `
   className="">
   <div
     className={undefined}>
-    <a
-      className=""
-      href="/"
-      onClick={[Function]}
-      style={Object {}}>
-      Home
-    </a>
-    <a
-      className=""
-      href="/s"
-      onClick={[Function]}
-      style={Object {}}>
-      Search
-    </a>
-    <a
-      className=""
-      href="/l/Bike-Pelago/12345"
-      onClick={[Function]}
-      style={Object {}}>
-      Listing page
-    </a>
-    <a
-      className=""
-      href="/u/Bikerrs"
-      onClick={[Function]}
-      style={Object {}}>
-      Profile
-    </a>
-    <a
-      className=""
-      href="/u/Bikerrs/edit"
-      onClick={[Function]}
-      style={Object {}}>
-      Edit profile
-    </a>
-    <a
-      className=""
-      href="/checkout/lid1234"
-      onClick={[Function]}
-      style={Object {}}>
-      Checkout
-    </a>
-    <a
-      className=""
-      href="/inbox"
-      onClick={[Function]}
-      style={Object {}}>
-      Inbox
-    </a>
-    <a
-      className=""
-      href="/orders"
-      onClick={[Function]}
-      style={Object {}}>
-      Orders
-    </a>
-    <a
-      className=""
-      href="/sales"
-      onClick={[Function]}
-      style={Object {}}>
-      Sales
-    </a>
-    <a
-      className=""
-      href="/password/forgotten"
-      onClick={[Function]}
-      style={Object {}}>
-      Request password
-    </a>
-    <a
-      className=""
-      href="/password/change"
-      onClick={[Function]}
-      style={Object {}}>
-      Change password
-    </a>
-    <a
-      className=""
-      href="/listings"
-      onClick={[Function]}
-      style={Object {}}>
-      Manage listings
-    </a>
-    <a
-      className=""
-      href="/account"
-      onClick={[Function]}
-      style={Object {}}>
-      Account settings
-    </a>
-    <a
-      className=""
-      href="/account/contact-details"
-      onClick={[Function]}
-      style={Object {}}>
-      Contact details
-    </a>
-    <a
-      className=""
-      href="/account/payout-preferences"
-      onClick={[Function]}
-      style={Object {}}>
-      Payout preferences
-    </a>
-    <a
-      className=""
-      href="/account/security"
-      onClick={[Function]}
-      style={Object {}}>
-      Security
-    </a>
+    <div>
+      <a
+        className=""
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "&#127968;",
+          }
+        }
+        href="/"
+        onClick={[Function]}
+        style={Object {}} />
+      <select
+        className={undefined}
+        onChange={[Function]}
+        value="default">
+        <option
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "&#127828;",
+            }
+          }
+          value="default" />
+        <option
+          value="/s">
+          Search
+        </option>
+        <option
+          value="/l/Bike-Pelago/12345">
+          Listing page
+        </option>
+        <option
+          value="/u/Bikerrs">
+          Profile
+        </option>
+        <option
+          value="/u/Bikerrs/edit">
+          Edit profile
+        </option>
+        <option
+          value="/checkout/lid1234">
+          Checkout
+        </option>
+        <option
+          value="/inbox">
+          Inbox
+        </option>
+        <option
+          value="/orders">
+          Orders
+        </option>
+        <option
+          value="/sales">
+          Sales
+        </option>
+        <option
+          value="/password/forgotten">
+          Request password
+        </option>
+        <option
+          value="/password/change">
+          Change password
+        </option>
+        <option
+          value="/listings">
+          Manage listings
+        </option>
+        <option
+          value="/account">
+          Account settings
+        </option>
+        <option
+          value="/account/contact-details">
+          Contact details
+        </option>
+        <option
+          value="/account/payout-preferences">
+          Payout preferences
+        </option>
+        <option
+          value="/account/security">
+          Security
+        </option>
+      </select>
+    </div>
+    <div
+      className={undefined}>
+      <a
+        className=""
+        href="/login"
+        onClick={[Function]}
+        style={Object {}}>
+        Login
+      </a>
+    </div>
   </div>
   <h1>
     Manage listings

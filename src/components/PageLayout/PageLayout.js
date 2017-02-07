@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Topbar } from '../../containers';
 
@@ -17,10 +18,12 @@ class PageLayout extends Component {
   }
 
   render() {
-    const { className, title, children } = this.props;
+    const { className, title, children, authError } = this.props;
+    // TODO: use FlashMessages for authError
     return (
       <div className={className}>
         <Helmet title={title} />
+        {authError ? <p style={{ color: 'red' }}>Error in auth: {authError.message}</p> : null}
         <Topbar />
         <h1>{title}</h1>
         {children}
@@ -29,12 +32,19 @@ class PageLayout extends Component {
   }
 }
 
-const { any, object, string } = PropTypes;
+const { any, object, string, instanceOf } = PropTypes;
 
 PageLayout.contextTypes = { history: object };
 
-PageLayout.defaultProps = { className: '', children: null };
+PageLayout.defaultProps = { className: '', children: null, authError: null };
 
-PageLayout.propTypes = { className: string, title: string.isRequired, children: any };
+PageLayout.propTypes = {
+  className: string,
+  title: string.isRequired,
+  children: any,
+  authError: instanceOf(Error),
+};
 
-export default PageLayout;
+const mapStateToProps = state => ({ authError: state.Auth.error });
+
+export default connect(mapStateToProps)(PageLayout);
