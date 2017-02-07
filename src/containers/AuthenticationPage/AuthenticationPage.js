@@ -5,7 +5,7 @@ import { PageLayout } from '../../components';
 import { LoginForm, SignUpForm } from '../../containers';
 import { login } from '../../ducks/Auth.ducks';
 
-const AuthenticationPage = props => {
+export const AuthenticationPageComponent = props => {
   const { location, tab, isAuthenticated, onLoginSubmit, onSignUpSubmit } = props;
   const isLogin = tab === 'login';
   const from = location.state && location.state.from ? location.state.from : null;
@@ -28,11 +28,11 @@ const AuthenticationPage = props => {
   );
 };
 
-AuthenticationPage.defaultProps = { location: {}, tab: 'signup' };
+AuthenticationPageComponent.defaultProps = { location: {}, tab: 'signup' };
 
 const { any, oneOf, shape, bool, func } = PropTypes;
 
-AuthenticationPage.propTypes = {
+AuthenticationPageComponent.propTypes = {
   location: shape({ state: shape({ from: any }) }),
   tab: oneOf(['login', 'signup']),
   isAuthenticated: bool.isRequired,
@@ -47,4 +47,8 @@ const mapDispatchToProps = dispatch => ({
   onSignUpSubmit: ({ email, password }) => dispatch(login(email, password)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthenticationPage);
+const AuthenticationPage = connect(mapStateToProps, mapDispatchToProps)(
+  AuthenticationPageComponent,
+);
+
+export default AuthenticationPage;
