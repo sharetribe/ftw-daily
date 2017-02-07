@@ -4,7 +4,7 @@
  * https://github.com/erikras/ducks-modular-redux
  */
 import { unionWith, isEqual } from 'lodash';
-import { call, take, put } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { createRequestTypes } from '../../util/sagaHelpers';
 
 // ================ Action types ================ //
@@ -65,10 +65,10 @@ export const loadListings = {
 // ================ Worker sagas ================ //
 
 export function* callFetchListings(sdk) {
-  const { response, error } = yield call(sdk.fetchListings);
-  if (response) {
+  try {
+    const response = yield call(sdk.fetchListings);
     yield put(loadListings.success(response));
-  } else {
+  } catch(error) {
     yield put(loadListings.failure(error));
   }
 }
@@ -77,8 +77,5 @@ export function* callFetchListings(sdk) {
 
 export function* watchLoadListings(sdk) {
   // eslint-disable-next-line no-constant-condition
-  while (true) {
-    yield take(LOAD_LISTINGS.REQUEST);
-    yield call(callFetchListings, sdk);
-  }
+  yield takeEvery(LOAD_LISTINGS.REQUEST, callFetchListings, sdk);
 }

@@ -23,7 +23,7 @@ export default function configureStore(initialState = {}) {
 
   const store = createStore(createReducer(), initialState, enhancer);
   store.runSaga = sagaMiddleware.run;
-  store.close = () => store.dispatch(END);
+  store.closeSagaMiddleware = () => store.dispatch(END);
 
   return store;
 }

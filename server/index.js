@@ -80,8 +80,8 @@ function fetchInitialState(requestUrl) {
   // We filter all the components form matched routes that have `loadData`
   const initialFetches = _
     .chain(matchedRoutes)
-    .filter(r => r.loadData && r.loadData.fetchData)
-    .map(r => sagaEffects.fork(r.loadData.fetchData, sdk))
+    .filter(r => r.loadData)
+    .map(r => sagaEffects.fork(r.loadData, sdk))
     .value();
 
   // We need to combine different onload sagas under one yield
@@ -100,8 +100,8 @@ function fetchInitialState(requestUrl) {
         .catch(e => {
           reject(e);
         });
-      // Close temporary store (which was used only for fetching initial store state)
-      store.close();
+      // Close temporary store's saga middleware (which was used only for fetching initial store state)
+      store.closeSagaMiddleware();
     });
     return fetchPromise;
   }

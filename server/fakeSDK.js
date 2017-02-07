@@ -29,14 +29,7 @@ exports.fetchListings = () => {
   const randomTime = Math.random() * 2000;
   const fakeResponseTime = 1000 + randomTime;
 
-  const fakeFetch = new Promise((resolve, reject) => {
-    setTimeout(
-      () => {
-        resolve({ response: fakeListings });
-        // or reject({ error: new Error('FetchListings errored') );
-      },
-      fakeResponseTime,
-    );
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(fakeListings), fakeResponseTime);
   });
-  return fakeFetch;
 };

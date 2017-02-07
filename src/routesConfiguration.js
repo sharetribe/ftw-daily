@@ -281,27 +281,29 @@ const pathByRouteName = (nameToFind, routes, params = {}) =>
  * matchRoutesToLocation helps to figure out which routes are related to given location.
  */
 const matchRoutesToLocation = (routes, location, matchedRoutes = [], params = {}) => {
-  const parameters = { ...params };
+  let parameters = { ...params };
+  let matched = [...matchedRoutes];
+
   routes.forEach(route => {
     const { exactly = false } = route;
     const match = !route.pattern ? true : matchPattern(route.pattern, location, exactly);
 
     if (match) {
-      matchedRoutes.push(route);
+      matched.push(route);
 
       if (match.params) {
-        Object.keys(match.params).forEach(key => {
-          parameters[key] = match.params[key];
-        });
+        parameters = { ...parameters, ...match.params };
       }
     }
 
     if (route.routes) {
-      matchRoutesToLocation(route.routes, location, matchedRoutes, parameters);
+      const { matchedRoutes: subRouteMatches, params: subRouteParams } = matchRoutesToLocation(route.routes, location, matched, parameters);
+      matched = matched.concat(subRouteMatches);
+      parameters = { ...parameters, ...subRouteParams };
     }
   });
 
-  return { matchedRoutes, params: parameters };
+  return { matchedRoutes: matched, params: parameters };
 };
 
 const matchPathnameCreator = routes =>

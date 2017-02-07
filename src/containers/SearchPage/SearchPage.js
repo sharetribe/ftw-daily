@@ -34,10 +34,10 @@ export class SearchPageComponent extends Component {
     const filtersClassName = classNames(css.filters, {
       [css.open]: selectedTab === 'filters',
     });
-    const listingsClassName = classNames(css.filters, {
+    const listingsClassName = classNames(css.listings, {
       [css.open]: selectedTab === 'listings',
     });
-    const mapClassName = classNames(css.filters, {
+    const mapClassName = classNames(css.map, {
       [css.open]: selectedTab === 'map',
     });
 
@@ -63,7 +63,7 @@ export class SearchPageComponent extends Component {
   }
 }
 
-SearchPageComponent.loadData = { fetchData: callFetchListings, fetchDataAction: loadListings };
+SearchPageComponent.loadData = callFetchListings;
 
 SearchPageComponent.defaultProps = { SearchPage: {}, tab: 'listings' };
 
