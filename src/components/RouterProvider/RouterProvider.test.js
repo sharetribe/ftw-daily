@@ -1,6 +1,6 @@
 import React from 'react';
+import { renderDeep } from '../../util/test-helpers';
 import RouterProvider from './RouterProvider';
-import renderer from 'react-test-renderer';
 
 describe('RouterProvider', () => {
   it('should contain routes from context', () => {
@@ -10,9 +10,7 @@ describe('RouterProvider', () => {
     };
     Child.contextTypes = { router: React.PropTypes.object };
 
-    const rendered = renderer
-      .create(<RouterProvider router={router}><Child /></RouterProvider>)
-      .toJSON();
-    expect(rendered.children).toContain('router in context');
+    const tree = renderDeep(<RouterProvider router={router}><Child /></RouterProvider>);
+    expect(tree.children).toContain('router in context');
   });
 });
