@@ -1,9 +1,6 @@
 import React from 'react';
 import { find } from 'lodash';
-import { Redirect } from 'react-router';
-
-// This will change to `matchPath` soonish
-import matchPattern from 'react-router/matchPattern';
+import { Redirect, matchPath } from 'react-router';
 
 import pathToRegexp from 'path-to-regexp';
 import {
@@ -286,7 +283,7 @@ const matchRoutesToLocation = (routes, location, matchedRoutes = [], params = {}
 
   routes.forEach(route => {
     const { exactly = false } = route;
-    const match = !route.pattern ? true : matchPattern(route.pattern, location, exactly);
+    const match = !route.pattern ? true : matchPath(location, route.pattern, { exact: exactly });
 
     if (match) {
       matched.push(route);
@@ -297,7 +294,12 @@ const matchRoutesToLocation = (routes, location, matchedRoutes = [], params = {}
     }
 
     if (route.routes) {
-      const { matchedRoutes: subRouteMatches, params: subRouteParams } = matchRoutesToLocation(route.routes, location, matched, parameters);
+      const { matchedRoutes: subRouteMatches, params: subRouteParams } = matchRoutesToLocation(
+        route.routes,
+        location,
+        matched,
+        parameters,
+      );
       matched = matched.concat(subRouteMatches);
       parameters = { ...parameters, ...subRouteParams };
     }
