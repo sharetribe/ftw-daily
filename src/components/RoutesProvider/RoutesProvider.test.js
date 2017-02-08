@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderDeep } from '../../util/test-helpers';
+import { renderDeepNoProvider } from '../../util/test-helpers';
 import RoutesProvider from './RoutesProvider';
 
 describe('RoutesProvider', () => {
@@ -10,7 +10,9 @@ describe('RoutesProvider', () => {
     };
     Child.contextTypes = { routes: React.PropTypes.array };
 
-    const tree = renderDeep(<RoutesProvider routes={routesConf}><Child /></RoutesProvider>);
+    const tree = renderDeepNoProvider(
+      <RoutesProvider routes={routesConf}><Child /></RoutesProvider>,
+    );
     expect(tree.children).toContain('SomePage');
   });
 });

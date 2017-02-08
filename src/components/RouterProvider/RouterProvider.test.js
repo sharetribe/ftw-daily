@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderDeep } from '../../util/test-helpers';
+import { renderDeepNoProvider } from '../../util/test-helpers';
 import RouterProvider from './RouterProvider';
 
 describe('RouterProvider', () => {
@@ -10,7 +10,7 @@ describe('RouterProvider', () => {
     };
     Child.contextTypes = { router: React.PropTypes.object };
 
-    const tree = renderDeep(<RouterProvider router={router}><Child /></RouterProvider>);
+    const tree = renderDeepNoProvider(<RouterProvider router={router}><Child /></RouterProvider>);
     expect(tree.children).toContain('router in context');
   });
 });
