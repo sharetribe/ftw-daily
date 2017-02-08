@@ -5,7 +5,7 @@ exports[`NotFoundPage matches snapshot 1`] = `
     hash=""
     name="LandingPage"
     params={Object {}}
-    query={Object {}}
+    search=""
     state={Object {}}>
     Index page
   </NamedLink>

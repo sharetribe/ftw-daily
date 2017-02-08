@@ -11,7 +11,7 @@ exports[`InboxPage matches snapshot 1`] = `
             "id": 1234,
           }
         }
-        query={Object {}}
+        search=""
         state={Object {}}>
         Single thread
       </NamedLink>

@@ -12,7 +12,7 @@ exports[`ManageListingsPage matches snapshot 1`] = `
             "slug": "some-listing",
           }
         }
-        query={Object {}}
+        search=""
         state={Object {}}>
         Listing 1234
       </NamedLink>

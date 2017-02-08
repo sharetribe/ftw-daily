@@ -130,7 +130,7 @@ exports[`ListingPage matches snapshot 1`] = `
         "id": 12345,
       }
     }
-    query={Object {}}
+    search=""
     state={Object {}}>
     Book Banyan Studios
   </NamedLink>

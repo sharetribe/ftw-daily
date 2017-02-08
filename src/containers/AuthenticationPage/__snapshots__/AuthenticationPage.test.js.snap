@@ -13,7 +13,7 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
         },
       }
     }
-    query={Object {}}
+    search=""
     state={Object {}}>
     Log in
   </NamedLink>

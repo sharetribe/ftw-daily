@@ -13,7 +13,7 @@ exports[`SalesConversationPage matches snapshot 1`] = `
         "id": 12345,
       }
     }
-    query={Object {}}
+    search=""
     state={Object {}}>
     Discussion tab
   </NamedLink>
@@ -26,7 +26,7 @@ exports[`SalesConversationPage matches snapshot 1`] = `
         "id": 12345,
       }
     }
-    query={Object {}}
+    search=""
     state={Object {}}>
     Details tab
   </NamedLink>
