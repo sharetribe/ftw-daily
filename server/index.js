@@ -27,8 +27,11 @@ const _ = require('lodash');
 const React = require('react');
 const { createServerRenderContext } = require('react-router');
 const sagaEffects = require('redux-saga/effects');
+const realSdk = require('sharetribe-sdk');
 const auth = require('./auth');
 const sdk = require('./fakeSDK');
+
+const { LatLng } = realSdk.types;
 
 // Construct the bundle path where the server side rendering function
 // can be imported.
@@ -72,9 +75,74 @@ const template = _.template(indexHtml, {
   escape: reNoMatch,
 });
 
+/**
+   Take `included` values from the JSON API response
+   and transforms it to a map which provide easy and fast lookup.
+
+   Example:
+
+   ```
+   const included = [
+     { id: new UUID(123), type: 'user', attributes: { name: "John" }},
+     { id: new UUID(234), type: 'user', attributes: { name: "Jane" }},
+   ];
+
+   const map = lookupMap(included)
+   #=> returns
+   # {
+   #   user: {
+   #     123: { id: 123, type: 'user', attributes: { name: "John" }},
+   #     234: { id: 234, type: 'user', attributes: { name: "Jane" }},
+   #   }
+   # }
+
+   map.user.123
+   #=> returns
+   # { id: 123, type: 'user', attributes: { name: "John" }},
+
+   ```
+ */
+const lookupMap = included => included.reduce((memo, resource) => {
+  const { type, id } = resource;
+
+  memo[type] = memo[type] || {};
+  memo[type][id.uuid] = resource;
+
+  return memo;
+}, {});
+
 function fetchInitialState(requestUrl) {
   const pathname = url.parse(requestUrl).pathname;
   const { matchedRoutes, params } = matchPathname(pathname);
+
+  const realSdkInstance = realSdk.createInstance({
+    baseUrl: 'http://localhost:8088',
+    clientId: '08ec69f6-d37e-414d-83eb-324e94afddf0',
+  });
+
+  realSdkInstance.listings
+    .search({ origin: new LatLng(40.00, -70.00), include: ['author'] })
+    .then(res => {
+      const includedMap = lookupMap(res.data.included);
+      console.log('***');
+      console.log(`*** Fetched ${res.data.data.length} listings`);
+      console.log('***');
+      res.data.data.forEach(listing => {
+        const l = listing.attributes;
+        const authorLink = listing.relationships.author.data;
+        const author = includedMap[authorLink.type][authorLink.id.uuid];
+        const a = author.attributes;
+
+        console.log('');
+        console.log(`# ${l.title}`);
+        console.log('');
+        console.log(l.description);
+        console.log('');
+        console.log(`Address: ${l.address} (${l.geolocation.lat}, ${l.geolocation.lng})`);
+        console.log('');
+        console.log(`Author: ${a.profile.firstName} ${a.profile.lastName} (${a.email})`);
+      });
+    });
 
   // pathname may match with several routes (if they don't have exactly=true)
   // We filter all the components form matched routes that have `loadData`
