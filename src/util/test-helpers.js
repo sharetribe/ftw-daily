@@ -46,3 +46,7 @@ export const renderDeep = component => {
   );
   return comp.toJSON();
 };
+
+export const renderDeepNoProvider = component => {
+  return renderer.create(component).toJSON();
+};
