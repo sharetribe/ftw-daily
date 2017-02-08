@@ -1,24 +1,20 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import { PageLayout } from '../../components';
+import { PageLayout, NamedLink } from '../../components';
 
-const toPath = (filter, id) => {
-  switch (filter) {
-    case 'orders':
-      return `/order/${id}`;
-    case 'sales':
-      return `/sale/${id}`;
-    default:
-      return `/conversation/${id}`;
-  }
+/* eslint-disable arrow-body-style */
+const filterLink = (filter, id, text) => {
+  return filter === 'orders'
+    ? <NamedLink name="OrderPage" params={{ id }}>{text}</NamedLink>
+    : <NamedLink name="SalePage" params={{ id }}>{text}</NamedLink>;
 };
+/* eslint-enable arrow-body-style */
 
 const InboxPage = props => {
   const { filter } = props;
   return (
     <PageLayout title={`${filter} page`}>
       <ul>
-        <li><Link to={toPath(filter, 1234)}>Single thread</Link></li>
+        <li>{filterLink(filter, 1234, 'Single thread')}</li>
       </ul>
     </PageLayout>
   );
@@ -28,6 +24,6 @@ InboxPage.defaultProps = { filter: 'conversation' };
 
 const { oneOf } = PropTypes;
 
-InboxPage.propTypes = { filter: oneOf(['orders', 'sales', 'inbox']) };
+InboxPage.propTypes = { filter: oneOf(['orders', 'sales']) };
 
 export default InboxPage;

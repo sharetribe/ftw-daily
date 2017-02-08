@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { NamedLink } from '../../components';
 import { logout } from '../../ducks/Auth.ducks';
 
 import css from './Topbar.css';
@@ -25,7 +25,7 @@ const Topbar = (props, context) => {
   return (
     <div className={css.container}>
       <div>
-        <Link className={css.home} to="/" {...house} />
+        <NamedLink name="LandingPage" className={css.home} {...house} />
         <select value="default" className={css.navDropDown} onChange={handleChange}>
           <option value="default" {...hamburger} />
           <option value="/s">Search</option>
@@ -52,7 +52,7 @@ const Topbar = (props, context) => {
               {user.email}
               <button className={css.logoutButton} onClick={handleLogout}>Logout</button>
             </div>
-          : <Link to="/login">Login</Link>}
+          : <NamedLink name="LogInPage">Login</NamedLink>}
       </div>
     </div>
   );

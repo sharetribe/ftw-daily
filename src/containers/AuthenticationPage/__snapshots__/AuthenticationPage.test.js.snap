@@ -3,23 +3,19 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
   title="Authentication page: signup tab">
   <ReduxForm
     onSubmit={[Function]} />
-  <Link
-    activeClassName=""
-    activeOnlyWhenExact={false}
-    activeStyle={Object {}}
-    className=""
-    isActive={[Function]}
-    replace={false}
-    style={Object {}}
-    to={
+  <NamedLink
+    hash=""
+    name="LogInPage"
+    params={
       Object {
-        "pathname": "/login",
         "state": Object {
           "from": "/protected",
         },
       }
-    }>
+    }
+    query={Object {}}
+    state={Object {}}>
     Log in
-  </Link>
+  </NamedLink>
 </Connect(PageLayout)>
 `;

@@ -1,16 +1,13 @@
 exports[`NotFoundPage matches snapshot 1`] = `
 <Connect(PageLayout)
   title="Page not found">
-  <Link
-    activeClassName=""
-    activeOnlyWhenExact={false}
-    activeStyle={Object {}}
-    className=""
-    isActive={[Function]}
-    replace={false}
-    style={Object {}}
-    to="/">
+  <NamedLink
+    hash=""
+    name="LandingPage"
+    params={Object {}}
+    query={Object {}}
+    state={Object {}}>
     Index page
-  </Link>
+  </NamedLink>
 </Connect(PageLayout)>
 `;
