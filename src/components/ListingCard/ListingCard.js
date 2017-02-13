@@ -52,10 +52,10 @@ const ListingCard = props => {
 
 ListingCard.defaultProps = { location: null, review: {}, author: {} };
 
-const { number, shape, string } = PropTypes;
+const { shape, string } = PropTypes;
 
 ListingCard.propTypes = {
-  id: number.isRequired,
+  id: string.isRequired,
   title: string.isRequired,
   price: string.isRequired,
   description: string.isRequired,
