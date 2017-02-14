@@ -27,33 +27,38 @@ import {
 const RedirectLandingPage = () => <Redirect to="/" />;
 
 const routesConfiguration = [
-  { pattern: '/', exactly: true, name: 'LandingPage', component: LandingPage },
+  {
+    pattern: '/',
+    exactly: true,
+    name: 'LandingPage',
+    component: match => <LandingPage {...match} />,
+  },
   {
     pattern: '/s',
     exactly: true,
     name: 'SearchPage',
-    component: SearchPage,
+    component: match => <SearchPage {...match} />,
     loadData: SearchPage ? SearchPage.loadData : null,
     routes: [
       {
         pattern: '/s/filters',
         exactly: true,
         name: 'SearchFiltersPage',
-        component: props => <SearchPage {...props} tab="filters" />,
+        component: match => <SearchPage {...match} tab="filters" />,
         loadData: SearchPage ? SearchPage.loadData : null,
       },
       {
         pattern: '/s/listings',
         exactly: true,
         name: 'SearchListingsPage',
-        component: props => <SearchPage {...props} tab="listings" />,
+        component: match => <SearchPage {...match} tab="listings" />,
         loadData: SearchPage ? SearchPage.loadData : null,
       },
       {
         pattern: '/s/map',
         exactly: true,
         name: 'SearchMapPage',
-        component: props => <SearchPage {...props} tab="map" />,
+        component: match => <SearchPage {...match} tab="map" />,
         loadData: SearchPage ? SearchPage.loadData : null,
       },
     ],
@@ -64,7 +69,12 @@ const routesConfiguration = [
     name: 'ListingBasePage',
     component: RedirectLandingPage,
     routes: [
-      { pattern: '/l/:slug/:id', exactly: true, name: 'ListingPage', component: ListingPage },
+      {
+        pattern: '/l/:slug/:id',
+        exactly: true,
+        name: 'ListingPage',
+        component: match => <ListingPage {...match} />,
+      },
     ],
   },
   {
@@ -77,14 +87,14 @@ const routesConfiguration = [
         pattern: '/u/:displayName',
         exactly: true,
         name: 'ProfilePage',
-        component: ProfilePage,
+        component: match => <ProfilePage {...match} />,
         routes: [
           {
             pattern: '/u/:displayName/edit',
             auth: true,
             exactly: true,
             name: 'EditProfilePage',
-            component: EditProfilePage,
+            component: match => <EditProfilePage {...match} />,
           },
         ],
       },
@@ -100,7 +110,7 @@ const routesConfiguration = [
         pattern: '/checkout/:listingId',
         exactly: true,
         name: 'CheckoutPage',
-        component: CheckoutPage,
+        component: match => <CheckoutPage {...match} />,
       },
     ],
   },
@@ -108,61 +118,66 @@ const routesConfiguration = [
     pattern: '/login',
     exactly: true,
     name: 'LogInPage',
-    component: props => <AuthenticationPage {...props} tab="login" />,
+    component: match => <AuthenticationPage {...match} tab="login" />,
   },
   {
     pattern: '/signup',
     exactly: true,
     name: 'SignUpPage',
-    component: props => <AuthenticationPage {...props} tab="signup" />,
+    component: match => <AuthenticationPage {...match} tab="signup" />,
   },
-  { pattern: '/password', exactly: true, name: 'PasswordPage', component: PasswordForgottenPage },
+  {
+    pattern: '/password',
+    exactly: true,
+    name: 'PasswordPage',
+    component: match => <PasswordForgottenPage {...match} />,
+  },
   {
     pattern: '/password/forgotten',
     exactly: true,
     name: 'PasswordForgottenPage',
-    component: PasswordForgottenPage,
+    component: match => <PasswordForgottenPage {...match} />,
   },
   {
     pattern: '/password/change',
     exactly: true,
     name: 'PasswordChangePage',
-    component: PasswordChangePage,
+    component: match => <PasswordChangePage {...match} />,
   },
   {
     pattern: '/orders',
     auth: true,
     exactly: true,
     name: 'OrdersPage',
-    component: props => <InboxPage {...props} filter="orders" />,
+    component: match => <InboxPage {...match} filter="orders" />,
   },
   {
     pattern: '/sales',
     auth: true,
     exactly: true,
     name: 'SalesPage',
-    component: props => <InboxPage {...props} filter="sales" />,
+    component: match => <InboxPage {...match} filter="sales" />,
   },
   {
     pattern: '/order/:id',
     auth: true,
     exactly: true,
     name: 'OrderPage',
-    component: () => <Redirect to="/" />,
+    component: RedirectLandingPage,
     routes: [
       {
         pattern: '/order/:id/details',
         auth: true,
         exactly: true,
         name: 'OrderDetailsPage',
-        component: props => <OrderPage {...props} tab="details" />,
+        component: match => <OrderPage {...match} tab="details" />,
       },
       {
         pattern: '/order/:id/discussion',
         auth: true,
         exactly: true,
         name: 'OrderDiscussionPage',
-        component: props => <OrderPage {...props} tab="discussion" />,
+        component: match => <OrderPage {...match} tab="discussion" />,
       },
     ],
   },
@@ -171,21 +186,21 @@ const routesConfiguration = [
     auth: true,
     exactly: true,
     name: 'SalePage',
-    component: props => <SalesConversationPage {...props} tab="discussion" />,
+    component: match => <SalesConversationPage {...match} tab="discussion" />,
     routes: [
       {
         pattern: '/sale/:id/details',
         auth: true,
         exactly: true,
         name: 'SaleDetailsPage',
-        component: props => <SalesConversationPage {...props} tab="discussion" />,
+        component: match => <SalesConversationPage {...match} tab="discussion" />,
       },
       {
         pattern: '/sale/:id/discussion',
         auth: true,
         exactly: true,
         name: 'SaleDiscussionPage',
-        component: props => <SalesConversationPage {...props} tab="discussion" />,
+        component: match => <SalesConversationPage {...match} tab="discussion" />,
       },
     ],
   },
@@ -194,7 +209,7 @@ const routesConfiguration = [
     auth: true,
     exactly: true,
     name: 'ManageListingsPage',
-    component: ManageListingsPage,
+    component: match => <ManageListingsPage {...match} />,
   },
   {
     pattern: '/account',
@@ -208,42 +223,47 @@ const routesConfiguration = [
         auth: true,
         exactly: true,
         name: 'ContactDetailsPage',
-        component: ContactDetailsPage,
+        component: match => <ContactDetailsPage {...match} />,
       },
       {
         pattern: '/account/payout-preferences',
         auth: true,
         exactly: true,
         name: 'PayoutPreferencesPage',
-        component: PayoutPreferencesPage,
+        component: match => <PayoutPreferencesPage {...match} />,
       },
       {
         pattern: '/account/security',
         auth: true,
         exactly: true,
         name: 'SecurityPage',
-        component: SecurityPage,
+        component: match => <SecurityPage {...match} />,
       },
     ],
   },
-  { pattern: '/styleguide', exactly: true, name: 'Styleguide', component: StyleguidePage },
+  {
+    pattern: '/styleguide',
+    exactly: true,
+    name: 'Styleguide',
+    component: match => <StyleguidePage {...match} />,
+  },
   {
     pattern: '/styleguide/:component',
     exactly: true,
     name: 'StyleguideComponent',
-    component: StyleguidePage,
+    component: match => <StyleguidePage {...match} />,
   },
   {
     pattern: '/styleguide/:component/:example',
     exactly: true,
     name: 'StyleguideComponentExample',
-    component: StyleguidePage,
+    component: match => <StyleguidePage {...match} />,
   },
   {
     pattern: '/styleguide/:component/:example/:type',
     exactly: true,
     name: 'StyleguideComponentExampleRaw',
-    component: StyleguidePage,
+    component: match => <StyleguidePage {...match} />,
   },
 ];
 
@@ -293,7 +313,12 @@ const matchRoutesToLocation = (routes, location, matchedRoutes = [], params = {}
     }
 
     if (route.routes) {
-      const { matchedRoutes: subRouteMatches, params: subRouteParams } = matchRoutesToLocation(route.routes, location, matched, parameters);
+      const { matchedRoutes: subRouteMatches, params: subRouteParams } = matchRoutesToLocation(
+        route.routes,
+        location,
+        matched,
+        parameters,
+      );
       matched = matched.concat(subRouteMatches);
       parameters = { ...parameters, ...subRouteParams };
     }
