@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
-import { BrowserRouter, ServerRouter } from 'react-router';
+import { BrowserRouter, ServerRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router';
+import { Link, Redirect } from 'react-router-dom';
 import { PageLayout } from '../../components';
 import { LoginForm, SignUpForm } from '../../containers';
 import { login } from '../../ducks/Auth.ducks';

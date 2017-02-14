@@ -1,9 +1,9 @@
 import React from 'react';
 import { find } from 'lodash';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 
 // This will change to `matchPath` soonish
-import matchPattern from 'react-router/matchPattern';
+import matchPattern from 'react-router-dom/matchPattern';
 
 import pathToRegexp from 'path-to-regexp';
 import {

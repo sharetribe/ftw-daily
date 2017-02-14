@@ -4,7 +4,7 @@
  * (Helps to narrow down the scope of possible format changes to routes.)
  */
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { pathByRouteName } from '../../routesConfiguration';
 
 const NamedLink = (props, context) => {

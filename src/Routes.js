@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Miss } from 'react-router';
+import { Miss } from 'react-router-dom';
 import { RouterProvider, RoutesProvider } from './components';
 import { NotFoundPage, MatchWithSubRoutes } from './containers';
 import { flattenRoutes } from './routesConfiguration';

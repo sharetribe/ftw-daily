@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 import { forEach } from 'lodash';
-import { createServerRenderContext } from 'react-router';
+import { createServerRenderContext } from 'react-router-dom';
 import { ClientApp, ServerApp } from './app';
 import configureStore from './store';
 
