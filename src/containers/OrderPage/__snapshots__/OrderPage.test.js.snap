@@ -2,11 +2,6 @@ exports[`OrderPage matches snapshot 1`] = `
 <Connect(PageLayout)
   title="Your Banyan Studios booking is confirmed!">
   <NamedLink
-    activeStyle={
-      Object {
-        "fontWeight": "bold",
-      }
-    }
     hash=""
     name="OrderDetailsPage"
     params={
@@ -24,11 +19,6 @@ exports[`OrderPage matches snapshot 1`] = `
     Booking details
   </NamedLink>
   <NamedLink
-    activeStyle={
-      Object {
-        "fontWeight": "bold",
-      }
-    }
     hash=""
     name="OrderDiscussionPage"
     params={

@@ -28,7 +28,6 @@ const OrderPage = props => {
     confirmationCode: 'X2587X',
   };
 
-  const activeStyle = { fontWeight: 'bold' };
   const detailsClassName = classNames(css.tabContent, {
     [css.tabContentVisible]: props.tab === 'details',
   });
@@ -38,15 +37,10 @@ const OrderPage = props => {
 
   return (
     <PageLayout title={`Your ${title} booking is confirmed!`}>
-      <NamedLink
-        name="OrderDetailsPage"
-        params={{ id: orderId }}
-        style={{ marginRight: '2rem' }}
-        activeStyle={activeStyle}
-      >
+      <NamedLink name="OrderDetailsPage" params={{ id: orderId }} style={{ marginRight: '2rem' }}>
         Booking details
       </NamedLink>
-      <NamedLink name="OrderDiscussionPage" params={{ id: orderId }} activeStyle={activeStyle}>
+      <NamedLink name="OrderDiscussionPage" params={{ id: orderId }}>
         Discussion
       </NamedLink>
       <OrderDetailsPanel className={detailsClassName} {...detailsProps} />
