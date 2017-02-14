@@ -1,10 +1,6 @@
 import React from 'react';
 import { find } from 'lodash';
-import { Redirect } from 'react-router-dom';
-
-// This will change to `matchPath` soonish
-import matchPattern from 'react-router-dom/matchPattern';
-
+import { Redirect, matchPath } from 'react-router-dom';
 import pathToRegexp from 'path-to-regexp';
 import {
   AuthenticationPage,
@@ -286,7 +282,7 @@ const matchRoutesToLocation = (routes, location, matchedRoutes = [], params = {}
 
   routes.forEach(route => {
     const { exactly = false } = route;
-    const match = !route.pattern ? true : matchPattern(route.pattern, location, exactly);
+    const match = !route.pattern || matchPath(location.pathname, route.pattern, { exact: exactly });
 
     if (match) {
       matched.push(route);
