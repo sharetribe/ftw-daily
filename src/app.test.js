@@ -21,8 +21,7 @@ describe('Application', () => {
     render('/', {});
   });
 
-  // TODO: enable this test when routing works
-  xit('renders correct routes in the server', () => {
+  it('server renders pages that do not require authentication', () => {
     const urlTitles = {
       '/': 'Landing page',
       '/s': 'Search page',
@@ -40,7 +39,9 @@ describe('Application', () => {
       const body = render(url, context);
       expect(body).toMatch(`>${title}</h1>`);
     });
+  });
 
+  it('server renders redirects for pages that require authentication', () => {
     const urlRedirects = {
       '/orders': '/login',
       '/sales': '/login',
