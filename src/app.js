@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
-import { BrowserRouter, ServerRouter } from 'react-router-dom';
+import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
@@ -16,11 +16,9 @@ export const ClientApp = props => {
   return (
     <IntlProvider locale="en" messages={localeData}>
       <BrowserRouter>
-        {({ router }) => (
-          <Provider store={store}>
-            <Routes router={router} routes={routesConfiguration} />
-          </Provider>
-        )}
+        <Provider store={store}>
+          <Routes routes={routesConfiguration} />
+        </Provider>
       </BrowserRouter>
     </IntlProvider>
   );
@@ -35,13 +33,11 @@ export const ServerApp = props => {
   addLocaleData([...en]);
   return (
     <IntlProvider locale="en" messages={localeData}>
-      <ServerRouter location={url} context={context}>
-        {({ router }) => (
-          <Provider store={store}>
-            <Routes router={router} routes={routesConfiguration} />
-          </Provider>
-        )}
-      </ServerRouter>
+      <StaticRouter location={url} context={context}>
+        <Provider store={store}>
+          <Routes routes={routesConfiguration} />
+        </Provider>
+      </StaticRouter>
     </IntlProvider>
   );
 };
