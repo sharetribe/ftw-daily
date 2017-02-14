@@ -6,7 +6,7 @@ exports[`SearchResultsPanel matches snapshot 1`] = `
       hash=""
       name="SearchFiltersPage"
       params={Object {}}
-      query={Object {}}
+      search=""
       state={Object {}}>
       Filters
     </NamedLink>
@@ -14,7 +14,7 @@ exports[`SearchResultsPanel matches snapshot 1`] = `
       hash=""
       name="SearchMapPage"
       params={Object {}}
-      query={Object {}}
+      search=""
       state={Object {}}>
       Map
     </NamedLink>

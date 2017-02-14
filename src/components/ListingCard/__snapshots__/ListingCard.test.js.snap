@@ -18,7 +18,7 @@ exports[`ListingCard matches snapshot 1`] = `
             "slug": "Banyan-Studios",
           }
         }
-        query={Object {}}
+        search=""
         state={Object {}}>
         Banyan Studios
       </NamedLink>

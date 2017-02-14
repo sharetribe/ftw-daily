@@ -6,25 +6,13 @@ exports[`SalesConversationPage matches snapshot 1`] = `
     12345
   </p>
   <Link
-    activeClassName=""
-    activeOnlyWhenExact={false}
-    activeStyle={Object {}}
-    className=""
-    isActive={[Function]}
     replace={false}
-    style={Object {}}
     to="/sale/12345/discussion">
     Discussion tab
   </Link>
   <br />
   <Link
-    activeClassName=""
-    activeOnlyWhenExact={false}
-    activeStyle={Object {}}
-    className=""
-    isActive={[Function]}
     replace={false}
-    style={Object {}}
     to="/sale/12345/details">
     Details tab
   </Link>

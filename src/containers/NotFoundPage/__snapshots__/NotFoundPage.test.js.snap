@@ -2,13 +2,7 @@ exports[`NotFoundPage matches snapshot 1`] = `
 <Connect(PageLayout)
   title="Page not found">
   <Link
-    activeClassName=""
-    activeOnlyWhenExact={false}
-    activeStyle={Object {}}
-    className=""
-    isActive={[Function]}
     replace={false}
-    style={Object {}}
     to="/">
     Index page
   </Link>
