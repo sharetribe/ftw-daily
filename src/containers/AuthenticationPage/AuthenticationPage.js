@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router';
-import { PageLayout } from '../../components';
+import { Redirect } from 'react-router-dom';
+import { PageLayout, NamedLink } from '../../components';
 import { LoginForm, SignUpForm } from '../../containers';
 import { login } from '../../ducks/Auth.ducks';
 
@@ -10,6 +10,7 @@ export const AuthenticationPageComponent = props => {
   const isLogin = tab === 'login';
   const from = location.state && location.state.from ? location.state.from : null;
   const pathname = from ? from.pathname : null;
+  const linkParams = { state: { from: from || '/' } };
 
   return (
     <PageLayout title={`Authentication page: ${tab} tab`}>
@@ -22,8 +23,8 @@ export const AuthenticationPageComponent = props => {
         : null}
       {isLogin ? <LoginForm onSubmit={onLoginSubmit} /> : <SignUpForm onSubmit={onSignUpSubmit} />}
       {isLogin
-        ? <Link to={{ pathname: '/signup', state: { from: from || '/' } }}>Sign up</Link>
-        : <Link to={{ pathname: '/login', state: { from: from || '/' } }}>Log in</Link>}
+        ? <NamedLink name="SignUpPage" params={linkParams}>Sign up</NamedLink>
+        : <NamedLink name="LogInPage" params={linkParams}>Log in</NamedLink>}
     </PageLayout>
   );
 };

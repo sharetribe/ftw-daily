@@ -3,17 +3,19 @@ exports[`ManageListingsPage matches snapshot 1`] = `
   title="Manage listings">
   <ul>
     <li>
-      <Link
-        activeClassName=""
-        activeOnlyWhenExact={false}
-        activeStyle={Object {}}
-        className=""
-        isActive={[Function]}
-        replace={false}
-        style={Object {}}
-        to="/l/1234">
+      <NamedLink
+        hash=""
+        name="ListingPage"
+        params={
+          Object {
+            "id": "1234",
+            "slug": "some-listing",
+          }
+        }
+        search=""
+        state={Object {}}>
         Listing 1234
-      </Link>
+      </NamedLink>
     </li>
   </ul>
 </Connect(PageLayout)>

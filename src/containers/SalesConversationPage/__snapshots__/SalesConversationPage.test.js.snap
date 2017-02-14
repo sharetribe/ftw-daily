@@ -5,29 +5,31 @@ exports[`SalesConversationPage matches snapshot 1`] = `
     Sale id: 
     12345
   </p>
-  <Link
-    activeClassName=""
-    activeOnlyWhenExact={false}
-    activeStyle={Object {}}
-    className=""
-    isActive={[Function]}
-    replace={false}
-    style={Object {}}
-    to="/sale/12345/discussion">
+  <NamedLink
+    hash=""
+    name="SaleDiscussionPage"
+    params={
+      Object {
+        "id": 12345,
+      }
+    }
+    search=""
+    state={Object {}}>
     Discussion tab
-  </Link>
+  </NamedLink>
   <br />
-  <Link
-    activeClassName=""
-    activeOnlyWhenExact={false}
-    activeStyle={Object {}}
-    className=""
-    isActive={[Function]}
-    replace={false}
-    style={Object {}}
-    to="/sale/12345/details">
+  <NamedLink
+    hash=""
+    name="SaleDetailsPage"
+    params={
+      Object {
+        "id": 12345,
+      }
+    }
+    search=""
+    state={Object {}}>
     Details tab
-  </Link>
+  </NamedLink>
   <p>
     Mobile layout needs different views for discussion and details.
   </p>

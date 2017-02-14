@@ -4,13 +4,13 @@
  * (Helps to narrow down the scope of possible format changes to routes.)
  */
 import React, { PropTypes } from 'react';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import { pathByRouteName } from '../../routesConfiguration';
 
 const NamedRedirect = (props, context) => {
-  const { name, params, query, hash, state, ...rest } = props;
+  const { name, params, search, state, ...rest } = props;
   const pathname = pathByRouteName(name, context.routes, params);
-  const locationDescriptor = { pathname, query, hash, state };
+  const locationDescriptor = { pathname, search, state };
   return <Redirect to={locationDescriptor} {...rest} />;
 };
 
@@ -18,13 +18,12 @@ const { array, object, string } = PropTypes;
 
 NamedRedirect.contextTypes = { routes: array };
 
-NamedRedirect.defaultProps = { hash: '', params: {}, query: {}, state: {} };
+NamedRedirect.defaultProps = { params: {}, search: {}, state: {} };
 
 NamedRedirect.propTypes = {
-  hash: string,
   name: string.isRequired,
   params: object,
-  query: object,
+  search: string,
   state: object,
 };
 

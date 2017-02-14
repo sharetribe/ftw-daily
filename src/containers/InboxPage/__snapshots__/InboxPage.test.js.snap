@@ -1,19 +1,20 @@
 exports[`InboxPage matches snapshot 1`] = `
 <Connect(PageLayout)
-  title="inbox page">
+  title="sales page">
   <ul>
     <li>
-      <Link
-        activeClassName=""
-        activeOnlyWhenExact={false}
-        activeStyle={Object {}}
-        className=""
-        isActive={[Function]}
-        replace={false}
-        style={Object {}}
-        to="/conversation/1234">
+      <NamedLink
+        hash=""
+        name="SalePage"
+        params={
+          Object {
+            "id": 1234,
+          }
+        }
+        search=""
+        state={Object {}}>
         Single thread
-      </Link>
+      </NamedLink>
     </li>
   </ul>
 </Connect(PageLayout)>
