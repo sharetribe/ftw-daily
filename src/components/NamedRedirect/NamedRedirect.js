@@ -8,24 +8,23 @@ import { Redirect } from 'react-router-dom';
 import { pathByRouteName } from '../../routesConfiguration';
 
 const NamedRedirect = (props, context) => {
-  const { name, params, query, hash, state, ...rest } = props;
+  const { name, search, state, params, ...rest } = props;
   const pathname = pathByRouteName(name, context.routes, params);
-  const locationDescriptor = { pathname, query, hash, state };
+  const locationDescriptor = { pathname, search, state };
   return <Redirect to={locationDescriptor} {...rest} />;
 };
 
 const { array, object, string } = PropTypes;
 
-NamedRedirect.contextTypes = { routes: array };
+NamedRedirect.contextTypes = { routes: array.isRequired };
 
-NamedRedirect.defaultProps = { hash: '', params: {}, query: {}, state: {} };
+NamedRedirect.defaultProps = { search: '', state: {}, params: {} };
 
 NamedRedirect.propTypes = {
-  hash: string,
   name: string.isRequired,
-  params: object,
-  query: object,
+  search: string,
   state: object,
+  params: object,
 };
 
 export default NamedRedirect;
