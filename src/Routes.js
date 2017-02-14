@@ -7,12 +7,13 @@ import { NamedRedirect } from './components';
 const Routes = props => {
   const { isAuthenticated, routes } = props;
 
-  const renderComponent = (route, match) => {
+  const renderComponent = (route, matchProps) => {
     const { auth, component: Component } = route;
+    const { match, location } = matchProps;
     const canShowComponent = !auth || isAuthenticated;
     return canShowComponent
-      ? <Component {...match} />
-      : <NamedRedirect name="LogInPage" state={{ from: match.location }} />;
+      ? <Component params={match.params} location={location} />
+      : <NamedRedirect name="LogInPage" state={{ from: match.url }} />;
   };
 
   const toRouteComponent = route => (
@@ -20,7 +21,7 @@ const Routes = props => {
       key={route.name}
       path={route.pattern}
       exact={route.exactly}
-      render={matchProps => renderComponent(route, matchProps.match)}
+      render={matchProps => renderComponent(route, matchProps)}
     />
   );
 

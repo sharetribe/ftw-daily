@@ -1,6 +1,12 @@
 exports[`AuthenticationPageComponent matches snapshot 1`] = `
 <Connect(PageLayout)
   title="Authentication page: signup tab">
+  <p>
+    You must log in to view the page at
+    <code>
+      /protected
+    </code>
+  </p>
   <ReduxForm
     onSubmit={[Function]} />
   <Link
