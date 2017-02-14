@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Match, Redirect } from 'react-router';
+import { Match, Redirect } from 'react-router-dom';
 import routesConfiguration, { pathByRouteName } from '../../routesConfiguration';
 
 // wrap `Match` and use this everywhere instead, then when
@@ -14,6 +14,7 @@ const MatchWithSubRoutes = props => {
     <Match
       {...rest}
       render={matchProps => {
+        // TODO: use NamedRedirect
         return canShowComponent
           ? <Component {...matchProps} />
           : <Redirect

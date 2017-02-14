@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { NamedLink } from '../../components';
 import { logout } from '../../ducks/Auth.ducks';
 
 import css from './Topbar.css';
 
-const Topbar = (props, context) => {
-  const { isAuthenticated, onLogout, user } = props;
-  const { router } = context;
+const Topbar = props => {
+  const { isAuthenticated, onLogout, user, router } = props;
   const house = { dangerouslySetInnerHTML: { __html: '&#127968;' } };
   const hamburger = { dangerouslySetInnerHTML: { __html: '&#127828;' } };
 
@@ -62,9 +62,7 @@ Topbar.defaultProps = { user: null };
 
 const { bool, object, func, any } = PropTypes;
 
-Topbar.propTypes = { isAuthenticated: bool.isRequired, user: object, onLogout: func.isRequired };
-
-Topbar.contextTypes = { router: any };
+Topbar.propTypes = { isAuthenticated: bool.isRequired, user: object, onLogout: func.isRequired, router: any.isRequired };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.Auth.isAuthenticated,
@@ -73,4 +71,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({ onLogout: router => dispatch(logout(router)) });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Topbar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Topbar));
