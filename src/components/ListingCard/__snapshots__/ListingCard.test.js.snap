@@ -14,7 +14,7 @@ exports[`ListingCard matches snapshot 1`] = `
         name="ListingPage"
         params={
           Object {
-            "id": 123,
+            "id": "some-id",
             "slug": "Banyan-Studios",
           }
         }
