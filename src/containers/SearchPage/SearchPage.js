@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { includes } from 'lodash';
 import { addFlashNotification } from '../../ducks/FlashNotification.ducks';
 import { addFilter, callFetchListings, loadListings } from './SearchPage.ducks';
 import css from './SearchPage.css';
@@ -17,21 +16,18 @@ import {
 export class SearchPageComponent extends Component {
   componentDidMount() {
     // TODO: This should be moved to Router
-    const { SearchPage } = this.props;
-    if (!SearchPage.initialListingsLoaded) {
+    const { initialListingsLoaded } = this.props;
+    if (!initialListingsLoaded) {
       this.props.onLoadListings();
     }
   }
 
   render() {
-    const { tab, SearchPage } = this.props;
-    const { listings } = SearchPage;
-    const fakeListings = listings || [];
-    const selectedTab = includes(['filters', 'listings', 'map'], tab) ? tab : 'listings';
+    const { tab, listings } = this.props;
 
-    const filtersClassName = classNames(css.filters, { [css.open]: selectedTab === 'filters' });
-    const listingsClassName = classNames(css.listings, { [css.open]: selectedTab === 'listings' });
-    const mapClassName = classNames(css.map, { [css.open]: selectedTab === 'map' });
+    const filtersClassName = classNames(css.filters, { [css.open]: tab === 'filters' });
+    const listingsClassName = classNames(css.listings, { [css.open]: tab === 'listings' });
+    const mapClassName = classNames(css.map, { [css.open]: tab === 'map' });
 
     return (
       <PageLayout title="Search page">
@@ -41,12 +37,12 @@ export class SearchPageComponent extends Component {
           </div>
           <div className={listingsClassName}>
             <SearchResultsPanel>
-              {fakeListings.map(l => <ListingCard key={l.id} {...l} />)}
+              {listings.map(l => <ListingCard key={l.id} {...l} />)}
             </SearchResultsPanel>
           </div>
           <div className={mapClassName}>
             <MapPanel>
-              {fakeListings.map(l => <ListingCardSmall key={l.id} {...l} />)}
+              {listings.map(l => <ListingCardSmall key={l.id} {...l} />)}
             </MapPanel>
           </div>
         </div>
@@ -57,29 +53,21 @@ export class SearchPageComponent extends Component {
 
 SearchPageComponent.loadData = callFetchListings;
 
-SearchPageComponent.defaultProps = { SearchPage: {}, tab: 'listings' };
+SearchPageComponent.defaultProps = { initialListingsLoaded: false, listings: [], tab: 'listings' };
 
-const { array, bool, func, shape, string } = PropTypes;
+const { array, bool, func, oneOf } = PropTypes;
 
 SearchPageComponent.propTypes = {
   onLoadListings: func.isRequired,
-  SearchPage: shape({
-    filters: array,
-    initialListingsLoaded: bool,
-    listings: array,
-    loadingListings: bool,
-  }),
-  tab: string,
+  initialListingsLoaded: bool,
+  listings: array,
+  tab: oneOf(['filters', 'listings', 'map']).isRequired,
 };
 
-/**
- * Container functions.
- * Since we add this to global store state with combineReducers, this will only get partial state
- * which is page specific.
- */
-const mapStateToProps = function mapStateToProps(state) {
-  return state;
-};
+const mapStateToProps = state => ({
+  initialListingsLoaded: state.SearchPage.initialListingsLoaded,
+  listings: state.SearchPage.listings,
+});
 
 const mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {

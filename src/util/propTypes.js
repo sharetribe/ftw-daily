@@ -1,0 +1,48 @@
+/**
+ * This module defines custom PropTypes shared within the application.
+ *
+ * To learn about validating React component props with PropTypes, see:
+ *
+ *     https://facebook.github.io/react/docs/typechecking-with-proptypes.html
+ *
+ * For component specific PropTypes, it's perfectly ok to inline them
+ * to the component itself. If the type is shared or external (SDK or
+ * API), however, it should be in this file for sharing with other
+ * components.
+ *
+ * PropTypes should usually be validated only at the lowest level
+ * where the props are used, not along the way in parents that pass
+ * along the props to their children. Those parents should usually
+ * just validate the presense of the prop key and that the value is
+ * defined. This way we get the validation errors only in the most
+ * specific place and avoid duplicate errros.
+ */
+import { PropTypes } from 'react';
+import { types as sdkTypes } from 'sharetribe-sdk';
+
+const { UUID, LatLng, LatLngBounds } = sdkTypes;
+const { oneOf, string, bool, func, shape, instanceOf } = PropTypes;
+
+// Fixed value
+export const value = val => oneOf([val]);
+
+// SDK type instances
+export const uuid = instanceOf(UUID);
+export const latlng = instanceOf(LatLng);
+export const latlngBounds = instanceOf(LatLngBounds);
+
+// Configuration for a single route
+export const route = shape({
+  name: string.isRequired,
+  pattern: string.isRequired,
+  exactly: bool,
+  strict: bool,
+  component: func.isRequired,
+  loadData: func,
+});
+
+// User object from the API
+export const user = shape({ id: uuid.isRequired, type: value('user').isRequired });
+
+// Listing object from the API
+export const listing = shape({ id: uuid.isRequired, type: value('listing').isRequired });

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { NotFoundPage } from './containers';
 import { NamedRedirect } from './components';
+import * as propTypes from './util/propTypes';
 
 const Routes = props => {
   const { isAuthenticated, routes } = props;
@@ -33,20 +34,11 @@ const Routes = props => {
   );
 };
 
-const { bool, arrayOf, shape, string, func } = PropTypes;
+const { bool, arrayOf } = PropTypes;
 
 Routes.propTypes = {
   isAuthenticated: bool.isRequired,
-  routes: arrayOf(
-    shape({
-      name: string.isRequired,
-      pattern: string.isRequired,
-      exactly: bool,
-      strict: bool,
-      component: func.isRequired,
-      loadData: func,
-    }),
-  ).isRequired,
+  routes: arrayOf(propTypes.route).isRequired,
 };
 
 const mapStateToProps = state => ({ isAuthenticated: state.Auth.isAuthenticated });

@@ -10,32 +10,25 @@ const createSubmitHandler = onLocationChanged => formData => {
 };
 
 export const LandingPageComponent = props => {
-  const handleSubmit = createSubmitHandler(props.onLocationChanged);
-  const componentOrRedirect = props.LocationFilter && props.LocationFilter.length > 0
-    ? <NamedRedirect name="SearchPage" query={{ location: props.LocationFilter }} />
+  const { onLocationChanged, filter } = props;
+  const handleSubmit = createSubmitHandler(onLocationChanged);
+
+  return filter.length > 0
+    ? <NamedRedirect name="SearchPage" search={`location=${filter}`} />
     : <PageLayout title="Landing page">
         <HeroSection>
           <HeroSearchForm className={css.form} onSubmit={handleSubmit} />
         </HeroSection>
       </PageLayout>;
-
-  return componentOrRedirect;
 };
 
 const { func, string } = PropTypes;
 
-LandingPageComponent.defaultProps = { LocationFilter: '' };
+LandingPageComponent.defaultProps = { filter: '' };
 
-LandingPageComponent.propTypes = { onLocationChanged: func.isRequired, LocationFilter: string };
+LandingPageComponent.propTypes = { onLocationChanged: func.isRequired, filter: string };
 
-/**
- * Container functions.
- * Since we add this to global store state with combineReducers, this will only get partial state
- * which is page specific.
- */
-const mapStateToProps = function mapStateToProps(state) {
-  return state;
-};
+const mapStateToProps = state => ({ filter: state.LocationFilter });
 
 const mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return { onLocationChanged: v => dispatch(changeLocationFilter(v)) };
