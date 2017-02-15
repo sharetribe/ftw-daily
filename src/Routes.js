@@ -20,7 +20,7 @@ const Routes = props => {
   const toRouteComponent = route => (
     <Route
       key={route.name}
-      path={route.pattern}
+      path={route.path}
       exact={route.exact}
       render={matchProps => renderComponent(route, matchProps)}
     />

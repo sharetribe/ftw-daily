@@ -7,7 +7,7 @@ describe('NamedLink', () => {
   it('should contain correct link', () => {
     const id = 12;
     const routesConf = [
-      { pattern: '/somepage/:id', name: 'SomePage', component: () => <div>blaa</div> },
+      { path: '/somepage/:id', name: 'SomePage', component: () => <div>blaa</div> },
     ];
     const tree = renderDeep(
       <RoutesProvider routes={routesConf}>

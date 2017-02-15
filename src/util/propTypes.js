@@ -34,7 +34,7 @@ export const latlngBounds = instanceOf(LatLngBounds);
 // Configuration for a single route
 export const route = shape({
   name: string.isRequired,
-  pattern: string.isRequired,
+  path: string.isRequired,
   exact: bool,
   strict: bool,
   component: func.isRequired,
