@@ -8,7 +8,8 @@ import en from 'react-intl/locale-data/en';
 import configureStore from './store';
 import Routes from './Routes';
 import { RoutesProvider } from './components';
-import routesConfiguration, { flattenRoutes } from './routesConfiguration';
+import routesConfiguration from './routesConfiguration';
+import { flattenRoutes } from './util/routes';
 import localeData from './translations/en.json';
 
 export const ClientApp = props => {

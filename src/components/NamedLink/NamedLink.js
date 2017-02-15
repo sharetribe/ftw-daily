@@ -5,7 +5,7 @@
  */
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
-import { pathByRouteName } from '../../routesConfiguration';
+import { pathByRouteName } from '../../util/routes';
 
 const NamedLink = (props, context) => {
   const { name, search, hash, state, params, ...rest } = props;

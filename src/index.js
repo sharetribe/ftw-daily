@@ -15,7 +15,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ClientApp, renderApp } from './app';
 import configureStore from './store';
-import { matchPathname } from './routesConfiguration';
+import { matchPathname } from './util/routes';
 import rootSaga from './sagas';
 
 import './index.css';

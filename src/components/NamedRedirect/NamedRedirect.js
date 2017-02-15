@@ -5,7 +5,7 @@
  */
 import React, { PropTypes } from 'react';
 import { Redirect } from 'react-router-dom';
-import { pathByRouteName } from '../../routesConfiguration';
+import { pathByRouteName } from '../../util/routes';
 
 const NamedRedirect = (props, context) => {
   const { name, search, state, params, ...rest } = props;
