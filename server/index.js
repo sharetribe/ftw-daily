@@ -75,7 +75,7 @@ function fetchInitialState(requestUrl) {
   const pathname = url.parse(requestUrl).pathname;
   const { matchedRoutes, params } = matchPathname(pathname);
 
-  // pathname may match with several routes (if they don't have exactly=true)
+  // pathname may match with several routes (if they don't have exact=true)
   // We filter all the components form matched routes that have `loadData`
   const initialFetches = _
     .chain(matchedRoutes)

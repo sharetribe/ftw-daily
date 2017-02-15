@@ -21,7 +21,7 @@ const Routes = props => {
     <Route
       key={route.name}
       path={route.pattern}
-      exact={route.exactly}
+      exact={route.exact}
       render={matchProps => renderComponent(route, matchProps)}
     />
   );

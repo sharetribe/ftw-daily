@@ -29,34 +29,34 @@ const RedirectLandingPage = () => <Redirect to="/" />;
 const routesConfiguration = [
   {
     pattern: '/',
-    exactly: true,
+    exact: true,
     name: 'LandingPage',
     component: props => <LandingPage {...props} />,
   },
   {
     pattern: '/s',
-    exactly: true,
+    exact: true,
     name: 'SearchPage',
     component: props => <SearchPage {...props} />,
     loadData: SearchPage ? SearchPage.loadData : null,
     routes: [
       {
         pattern: '/s/filters',
-        exactly: true,
+        exact: true,
         name: 'SearchFiltersPage',
         component: props => <SearchPage {...props} tab="filters" />,
         loadData: SearchPage ? SearchPage.loadData : null,
       },
       {
         pattern: '/s/listings',
-        exactly: true,
+        exact: true,
         name: 'SearchListingsPage',
         component: props => <SearchPage {...props} tab="listings" />,
         loadData: SearchPage ? SearchPage.loadData : null,
       },
       {
         pattern: '/s/map',
-        exactly: true,
+        exact: true,
         name: 'SearchMapPage',
         component: props => <SearchPage {...props} tab="map" />,
         loadData: SearchPage ? SearchPage.loadData : null,
@@ -65,13 +65,13 @@ const routesConfiguration = [
   },
   {
     pattern: '/l',
-    exactly: true,
+    exact: true,
     name: 'ListingBasePage',
     component: RedirectLandingPage,
     routes: [
       {
         pattern: '/l/:slug/:id',
-        exactly: true,
+        exact: true,
         name: 'ListingPage',
         component: props => <ListingPage {...props} />,
       },
@@ -79,20 +79,20 @@ const routesConfiguration = [
   },
   {
     pattern: '/u',
-    exactly: true,
+    exact: true,
     name: 'ProfileBasePage',
     component: RedirectLandingPage,
     routes: [
       {
         pattern: '/u/:displayName',
-        exactly: true,
+        exact: true,
         name: 'ProfilePage',
         component: props => <ProfilePage {...props} />,
         routes: [
           {
             pattern: '/u/:displayName/edit',
             auth: true,
-            exactly: true,
+            exact: true,
             name: 'EditProfilePage',
             component: props => <EditProfilePage {...props} />,
           },
@@ -102,13 +102,13 @@ const routesConfiguration = [
   },
   {
     pattern: '/checkout',
-    exactly: true,
+    exact: true,
     name: 'CheckoutBasePage',
     component: RedirectLandingPage,
     routes: [
       {
         pattern: '/checkout/:listingId',
-        exactly: true,
+        exact: true,
         name: 'CheckoutPage',
         component: props => <CheckoutPage {...props} />,
       },
@@ -116,66 +116,66 @@ const routesConfiguration = [
   },
   {
     pattern: '/login',
-    exactly: true,
+    exact: true,
     name: 'LogInPage',
     component: props => <AuthenticationPage {...props} tab="login" />,
   },
   {
     pattern: '/signup',
-    exactly: true,
+    exact: true,
     name: 'SignUpPage',
     component: props => <AuthenticationPage {...props} tab="signup" />,
   },
   {
     pattern: '/password',
-    exactly: true,
+    exact: true,
     name: 'PasswordPage',
     component: props => <PasswordForgottenPage {...props} />,
   },
   {
     pattern: '/password/forgotten',
-    exactly: true,
+    exact: true,
     name: 'PasswordForgottenPage',
     component: props => <PasswordForgottenPage {...props} />,
   },
   {
     pattern: '/password/change',
-    exactly: true,
+    exact: true,
     name: 'PasswordChangePage',
     component: props => <PasswordChangePage {...props} />,
   },
   {
     pattern: '/orders',
     auth: true,
-    exactly: true,
+    exact: true,
     name: 'OrdersPage',
     component: props => <InboxPage {...props} filter="orders" />,
   },
   {
     pattern: '/sales',
     auth: true,
-    exactly: true,
+    exact: true,
     name: 'SalesPage',
     component: props => <InboxPage {...props} filter="sales" />,
   },
   {
     pattern: '/order/:id',
     auth: true,
-    exactly: true,
+    exact: true,
     name: 'OrderPage',
     component: RedirectLandingPage,
     routes: [
       {
         pattern: '/order/:id/details',
         auth: true,
-        exactly: true,
+        exact: true,
         name: 'OrderDetailsPage',
         component: props => <OrderPage {...props} tab="details" />,
       },
       {
         pattern: '/order/:id/discussion',
         auth: true,
-        exactly: true,
+        exact: true,
         name: 'OrderDiscussionPage',
         component: props => <OrderPage {...props} tab="discussion" />,
       },
@@ -184,21 +184,21 @@ const routesConfiguration = [
   {
     pattern: '/sale/:id',
     auth: true,
-    exactly: true,
+    exact: true,
     name: 'SalePage',
     component: props => <SalesConversationPage {...props} tab="discussion" />,
     routes: [
       {
         pattern: '/sale/:id/details',
         auth: true,
-        exactly: true,
+        exact: true,
         name: 'SaleDetailsPage',
         component: props => <SalesConversationPage {...props} tab="discussion" />,
       },
       {
         pattern: '/sale/:id/discussion',
         auth: true,
-        exactly: true,
+        exact: true,
         name: 'SaleDiscussionPage',
         component: props => <SalesConversationPage {...props} tab="discussion" />,
       },
@@ -207,35 +207,35 @@ const routesConfiguration = [
   {
     pattern: '/listings',
     auth: true,
-    exactly: true,
+    exact: true,
     name: 'ManageListingsPage',
     component: props => <ManageListingsPage {...props} />,
   },
   {
     pattern: '/account',
     auth: true,
-    exactly: true,
+    exact: true,
     name: 'AccountPage',
     component: () => <Redirect to="/account/contact-details" />,
     routes: [
       {
         pattern: '/account/contact-details',
         auth: true,
-        exactly: true,
+        exact: true,
         name: 'ContactDetailsPage',
         component: props => <ContactDetailsPage {...props} />,
       },
       {
         pattern: '/account/payout-preferences',
         auth: true,
-        exactly: true,
+        exact: true,
         name: 'PayoutPreferencesPage',
         component: props => <PayoutPreferencesPage {...props} />,
       },
       {
         pattern: '/account/security',
         auth: true,
-        exactly: true,
+        exact: true,
         name: 'SecurityPage',
         component: props => <SecurityPage {...props} />,
       },
@@ -243,25 +243,25 @@ const routesConfiguration = [
   },
   {
     pattern: '/styleguide',
-    exactly: true,
+    exact: true,
     name: 'Styleguide',
     component: props => <StyleguidePage {...props} />,
   },
   {
     pattern: '/styleguide/:component',
-    exactly: true,
+    exact: true,
     name: 'StyleguideComponent',
     component: props => <StyleguidePage {...props} />,
   },
   {
     pattern: '/styleguide/:component/:example',
-    exactly: true,
+    exact: true,
     name: 'StyleguideComponentExample',
     component: props => <StyleguidePage {...props} />,
   },
   {
     pattern: '/styleguide/:component/:example/:type',
-    exactly: true,
+    exact: true,
     name: 'StyleguideComponentExampleRaw',
     component: props => <StyleguidePage {...props} />,
   },
@@ -301,8 +301,8 @@ const matchRoutesToLocation = (routes, location, matchedRoutes = [], params = {}
   let matched = [...matchedRoutes];
 
   routes.forEach(route => {
-    const { exactly = false } = route;
-    const match = !route.pattern || matchPath(location.pathname, route.pattern, { exact: exactly });
+    const { exact = false } = route;
+    const match = !route.pattern || matchPath(location.pathname, route.pattern, { exact });
 
     if (match) {
       matched.push(route);
