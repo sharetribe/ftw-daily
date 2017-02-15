@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
+import { types } from 'sharetribe-sdk';
 import { SearchPageComponent } from './SearchPage';
 import reducer, {
   ADD_FILTER,
@@ -11,6 +12,8 @@ import reducer, {
   loadListings,
   watchLoadListings,
 } from './SearchPage.ducks';
+
+const { LatLng } = types;
 
 describe('SearchPageComponent', () => {
   it('matches snapshot', () => {
@@ -54,33 +57,36 @@ describe('SearchPageDucs', () => {
 
   describe('callFetchListings worker', () => {
     it('should succeed when API call fulfills', () => {
-      const payload = {};
-      const sdk = { fetchListings: jest.fn() };
+      const payload = { data: { data: [], included: [] } };
+      const sdk = { listings: { search: jest.fn() } };
       const worker = callFetchListings(sdk);
 
-      expect(worker.next()).toEqual({ value: call(sdk.fetchListings), done: false });
-      expect(worker.next(payload)).toEqual({
-        value: put(loadListings.success(payload)),
+      expect(worker.next()).toEqual({
+        value: call(sdk.listings.search, { origin: new LatLng(40, 70), include: ['author'] }),
         done: false,
       });
+      expect(worker.next(payload)).toEqual({ value: put(loadListings.success([])), done: false });
       expect(worker.next().done).toEqual(true);
-      expect(sdk.fetchListings).not.toHaveBeenCalled();
+      expect(sdk.listings.search).not.toHaveBeenCalled();
     });
 
     it('should fail when API call rejects', () => {
       const payload = {};
-      const sdk = { fetchListings: jest.fn() };
+      const sdk = { listings: { search: jest.fn() } };
       const worker = callFetchListings(sdk);
       const error = new Error('Test listing fetch failed');
 
-      expect(worker.next()).toEqual({ value: call(sdk.fetchListings), done: false });
+      expect(worker.next()).toEqual({
+        value: call(sdk.listings.search, { origin: new LatLng(40, 70), include: ['author'] }),
+        done: false,
+      });
       expect(worker.throw(error)).toEqual({ value: put(loadListings.failure(error)), done: false });
       expect(worker.next().done).toEqual(true);
-      expect(sdk.fetchListings).not.toHaveBeenCalled();
+      expect(sdk.listings.search).not.toHaveBeenCalled();
     });
   });
 
-  describe('auth watcher', () => {
+  describe('load listings watcher', () => {
     it('creates takeEvery helper for listening LOAD_LISTINGS.REQUEST actions', () => {
       const sdk = { fetchListings: jest.fn() };
       const watcher = watchLoadListings(sdk);
