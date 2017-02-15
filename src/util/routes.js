@@ -3,10 +3,10 @@ import { matchPath } from 'react-router-dom';
 import pathToRegexp from 'path-to-regexp';
 import routesConfiguration from '../routesConfiguration';
 
-const flattenRoutes = routesArray =>
+export const flattenRoutes = routesArray =>
   routesArray.reduce((a, b) => a.concat(b.routes ? [b].concat(flattenRoutes(b.routes)) : b), []);
 
-const findRouteByName = (nameToFind, routes) => {
+export const findRouteByName = (nameToFind, routes) => {
   const flattenedRoutes = flattenRoutes(routes);
   return find(flattenedRoutes, route => route.name === nameToFind);
 };
@@ -15,7 +15,7 @@ const findRouteByName = (nameToFind, routes) => {
  * E.g. ```const toListingPath = toPathByRouteName('ListingPage', routes);```
  * Then we can generate listing paths with given params (```toListingPath({ id: uuidX })```)
  */
-const toPathByRouteName = (nameToFind, routes) => {
+export const toPathByRouteName = (nameToFind, routes) => {
   const route = findRouteByName(nameToFind, routes);
   if (!route) {
     throw new Error(`Path "${nameToFind}" was not found.`);
@@ -26,7 +26,7 @@ const toPathByRouteName = (nameToFind, routes) => {
 /**
  * Shorthand for single path call. (```pathByRouteName('ListingPage', routes, { id: uuidX });```)
  */
-const pathByRouteName = (nameToFind, routes, params = {}) =>
+export const pathByRouteName = (nameToFind, routes, params = {}) =>
   toPathByRouteName(nameToFind, routes)(params);
 
 /**
@@ -70,7 +70,4 @@ const matchPathnameCreator = routes =>
 /**
  * matchRoutesToLocation helps to figure out which routes are related to given location.
  */
-const matchPathname = matchPathnameCreator(routesConfiguration);
-
-// Exported helpers
-export { findRouteByName, flattenRoutes, matchPathname, toPathByRouteName, pathByRouteName };
+export const matchPathname = matchPathnameCreator(routesConfiguration);
