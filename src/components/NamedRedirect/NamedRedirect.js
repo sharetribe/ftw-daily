@@ -5,11 +5,12 @@
  */
 import React, { PropTypes } from 'react';
 import { Redirect } from 'react-router-dom';
-import { pathByRouteName } from '../../util/routes';
+import { flattenRoutes, pathByRouteName } from '../../util/routes';
 
 const NamedRedirect = (props, context) => {
   const { name, search, state, params, ...rest } = props;
-  const pathname = pathByRouteName(name, context.routes, params);
+  const flattenedRoutes = flattenRoutes(context.routes);
+  const pathname = pathByRouteName(name, flattenedRoutes, params);
   const locationDescriptor = { pathname, search, state };
   return <Redirect to={locationDescriptor} {...rest} />;
 };

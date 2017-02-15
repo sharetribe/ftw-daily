@@ -6,17 +6,15 @@ import routesConfiguration from '../routesConfiguration';
 export const flattenRoutes = routesArray =>
   routesArray.reduce((a, b) => a.concat(b.routes ? [b].concat(flattenRoutes(b.routes)) : b), []);
 
-export const findRouteByName = (nameToFind, routes) => {
-  const flattenedRoutes = flattenRoutes(routes);
-  return find(flattenedRoutes, route => route.name === nameToFind);
-};
+const findRouteByName = (nameToFind, flattenedRoutes) =>
+  find(flattenedRoutes, route => route.name === nameToFind);
 
 /**
  * E.g. ```const toListingPath = toPathByRouteName('ListingPage', routes);```
  * Then we can generate listing paths with given params (```toListingPath({ id: uuidX })```)
  */
-export const toPathByRouteName = (nameToFind, routes) => {
-  const route = findRouteByName(nameToFind, routes);
+const toPathByRouteName = (nameToFind, flattenedRoutes) => {
+  const route = findRouteByName(nameToFind, flattenedRoutes);
   if (!route) {
     throw new Error(`Path "${nameToFind}" was not found.`);
   }
@@ -26,8 +24,8 @@ export const toPathByRouteName = (nameToFind, routes) => {
 /**
  * Shorthand for single path call. (```pathByRouteName('ListingPage', routes, { id: uuidX });```)
  */
-export const pathByRouteName = (nameToFind, routes, params = {}) =>
-  toPathByRouteName(nameToFind, routes)(params);
+export const pathByRouteName = (nameToFind, flattenedRoutes, params = {}) =>
+  toPathByRouteName(nameToFind, flattenedRoutes)(params);
 
 /**
  * matchRoutesToLocation helps to figure out which routes are related to given location.
