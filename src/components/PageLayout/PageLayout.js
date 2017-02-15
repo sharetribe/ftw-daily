@@ -10,11 +10,15 @@ const scrollToTop = () => {
 
 class PageLayout extends Component {
   componentDidMount() {
-    this.historyUnlisten = this.context.history.listen(() => scrollToTop());
+    if (this.context && this.context.history && this.context.history.listen) {
+      this.historyUnlisten = this.context.history.listen(() => scrollToTop());
+    }
   }
 
   componentWillUnmount() {
-    this.historyUnlisten();
+    if (this.historyUnlisten) {
+      this.historyUnlisten();
+    }
   }
 
   render() {

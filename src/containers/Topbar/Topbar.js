@@ -1,25 +1,24 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router-dom';
 import { logout } from '../../ducks/Auth.ducks';
 
 import css from './Topbar.css';
 
-const Topbar = (props, context) => {
-  const { isAuthenticated, onLogout, user } = props;
-  const { router } = context;
+const Topbar = props => {
+  const { isAuthenticated, onLogout, user, push: historyPush } = props;
   const house = { dangerouslySetInnerHTML: { __html: '&#127968;' } };
   const hamburger = { dangerouslySetInnerHTML: { __html: '&#127828;' } };
 
   const handleChange = e => {
     const value = e.target.value;
-    router.transitionTo(value);
+    historyPush(value);
   };
 
   const handleLogout = () => {
-    // Router is passed to the action to enable redirect to home when
-    // logout succeeds.
-    onLogout(router);
+    // History push function is passed to the action to enable
+    // redirect to home when logout succeeds.
+    onLogout(historyPush);
   };
 
   return (
@@ -60,17 +59,21 @@ const Topbar = (props, context) => {
 
 Topbar.defaultProps = { user: null };
 
-const { bool, object, func, any } = PropTypes;
+const { bool, object, func } = PropTypes;
 
-Topbar.propTypes = { isAuthenticated: bool.isRequired, user: object, onLogout: func.isRequired };
-
-Topbar.contextTypes = { router: any };
+Topbar.propTypes = {
+  isAuthenticated: bool.isRequired,
+  user: object,
+  onLogout: func.isRequired,
+  // history.push prop from withRouter
+  push: func.isRequired,
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: state.Auth.isAuthenticated,
   user: state.Auth.user,
 });
 
-const mapDispatchToProps = dispatch => ({ onLogout: router => dispatch(logout(router)) });
+const mapDispatchToProps = dispatch => ({ onLogout: historyPush => dispatch(logout(historyPush)) });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Topbar);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Topbar));

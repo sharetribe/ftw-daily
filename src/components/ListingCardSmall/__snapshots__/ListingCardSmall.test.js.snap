@@ -14,10 +14,9 @@ exports[`ListingCardSmall matches snapshot 1`] = `
   <div
     className={undefined}>
     <a
-      className=""
+      className={undefined}
       href="/l/Banyan-Studios/123"
-      onClick={[Function]}
-      style={Object {}}>
+      onClick={[Function]}>
       Banyan Studios
     </a>
     <div

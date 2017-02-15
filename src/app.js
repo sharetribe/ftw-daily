@@ -1,27 +1,29 @@
 import React, { PropTypes } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
-import { BrowserRouter, ServerRouter } from 'react-router';
+import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import configureStore from './store';
 import Routes from './Routes';
-import routesConfiguration from './routesConfiguration';
+import { RoutesProvider } from './components';
+import routesConfiguration, { flattenRoutes } from './routesConfiguration';
 import localeData from './translations/en.json';
 
 export const ClientApp = props => {
   const { store } = props;
   addLocaleData([...en]);
+  const flattenedRoutes = flattenRoutes(routesConfiguration);
   return (
     <IntlProvider locale="en" messages={localeData}>
-      <BrowserRouter>
-        {({ router }) => (
-          <Provider store={store}>
-            <Routes router={router} routes={routesConfiguration} />
-          </Provider>
-        )}
-      </BrowserRouter>
+      <Provider store={store}>
+        <RoutesProvider routes={routesConfiguration}>
+          <BrowserRouter>
+            <Routes routes={flattenedRoutes} />
+          </BrowserRouter>
+        </RoutesProvider>
+      </Provider>
     </IntlProvider>
   );
 };
@@ -33,15 +35,16 @@ ClientApp.propTypes = { store: any.isRequired };
 export const ServerApp = props => {
   const { url, context, store } = props;
   addLocaleData([...en]);
+  const flattenedRoutes = flattenRoutes(routesConfiguration);
   return (
     <IntlProvider locale="en" messages={localeData}>
-      <ServerRouter location={url} context={context}>
-        {({ router }) => (
-          <Provider store={store}>
-            <Routes router={router} routes={routesConfiguration} />
-          </Provider>
-        )}
-      </ServerRouter>
+      <Provider store={store}>
+        <RoutesProvider routes={routesConfiguration}>
+          <StaticRouter location={url} context={context}>
+            <Routes routes={flattenedRoutes} />
+          </StaticRouter>
+        </RoutesProvider>
+      </Provider>
     </IntlProvider>
   );
 };

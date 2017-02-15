@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { map, size } from 'lodash';
 import * as allExamples from '../../examples';
 

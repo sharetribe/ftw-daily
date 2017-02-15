@@ -74,13 +74,7 @@ exports[`ListingPage matches snapshot 1`] = `
     </p>
   </div>
   <Link
-    activeClassName=""
-    activeOnlyWhenExact={false}
-    activeStyle={Object {}}
-    className=""
-    isActive={[Function]}
     replace={false}
-    style={Object {}}
     to="mailto:studio.dude@mystudio.com">
     <h2>
       Contact studio
@@ -137,7 +131,7 @@ exports[`ListingPage matches snapshot 1`] = `
         "id": 12345,
       }
     }
-    query={Object {}}
+    search=""
     state={Object {}}>
     Book Banyan Studios
   </NamedLink>

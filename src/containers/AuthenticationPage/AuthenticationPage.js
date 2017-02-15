@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router';
+import { Link, Redirect } from 'react-router-dom';
 import { PageLayout } from '../../components';
 import { LoginForm, SignUpForm } from '../../containers';
 import { login } from '../../ducks/Auth.ducks';
@@ -9,15 +9,14 @@ export const AuthenticationPageComponent = props => {
   const { location, tab, isAuthenticated, onLoginSubmit, onSignUpSubmit } = props;
   const isLogin = tab === 'login';
   const from = location.state && location.state.from ? location.state.from : null;
-  const pathname = from ? from.pathname : null;
 
   return (
     <PageLayout title={`Authentication page: ${tab} tab`}>
       {isAuthenticated ? <Redirect to={from || '/'} /> : null}
-      {pathname
+      {from
         ? <p>
             You must log in to view the page at
-            <code>{pathname}</code>
+            <code>{from}</code>
           </p>
         : null}
       {isLogin ? <LoginForm onSubmit={onLoginSubmit} /> : <SignUpForm onSubmit={onSignUpSubmit} />}
@@ -28,12 +27,12 @@ export const AuthenticationPageComponent = props => {
   );
 };
 
-AuthenticationPageComponent.defaultProps = { location: {}, tab: 'signup' };
+AuthenticationPageComponent.defaultProps = { tab: 'signup' };
 
-const { any, oneOf, shape, bool, func } = PropTypes;
+const { object, oneOf, shape, bool, func } = PropTypes;
 
 AuthenticationPageComponent.propTypes = {
-  location: shape({ state: shape({ from: any }) }),
+  location: shape({ state: object }).isRequired,
   tab: oneOf(['login', 'signup']),
   isAuthenticated: bool.isRequired,
   onLoginSubmit: func.isRequired,

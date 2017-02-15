@@ -27,7 +27,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
         "id": 12345,
       }
     }
-    query={Object {}}
+    search=""
     state={Object {}}>
     Confirm & Pay
   </NamedLink>

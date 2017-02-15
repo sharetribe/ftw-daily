@@ -4,28 +4,28 @@
  * (Helps to narrow down the scope of possible format changes to routes.)
  */
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { pathByRouteName } from '../../routesConfiguration';
 
 const NamedLink = (props, context) => {
-  const { name, params, query, hash, state, ...rest } = props;
+  const { name, search, hash, state, params, ...rest } = props;
   const pathname = pathByRouteName(name, context.routes, params);
-  const locationDescriptor = { pathname, query, hash, state };
+  const locationDescriptor = { pathname, search, hash, state };
   return <Link to={locationDescriptor} {...rest} />;
 };
 
 const { array, object, string } = PropTypes;
 
-NamedLink.contextTypes = { routes: array };
+NamedLink.contextTypes = { routes: array.isRequired };
 
-NamedLink.defaultProps = { hash: '', params: {}, query: {}, state: {} };
+NamedLink.defaultProps = { search: '', hash: '', state: {}, params: {} };
 
 NamedLink.propTypes = {
-  hash: string,
   name: string.isRequired,
-  params: object,
-  query: object,
+  search: string,
+  hash: string,
   state: object,
+  params: object,
 };
 
 export default NamedLink;

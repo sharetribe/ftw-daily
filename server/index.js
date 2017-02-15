@@ -25,7 +25,6 @@ const qs = require('qs');
 const url = require('url');
 const _ = require('lodash');
 const React = require('react');
-const { createServerRenderContext } = require('react-router');
 const sagaEffects = require('redux-saga/effects');
 const auth = require('./auth');
 const sdk = require('./fakeSDK');
@@ -143,22 +142,16 @@ app.use(compression());
 app.use('/static', express.static(path.join(buildPath, 'static')));
 
 app.get('*', (req, res) => {
-  const context = createServerRenderContext();
+  const context = {};
   const filters = qs.parse(req.query);
 
   // TODO fetch this asynchronously
   fetchInitialState(req.url)
     .then(preloadedState => {
       const html = render(req.url, context, preloadedState);
-      const result = context.getResult();
 
-      if (result.redirect) {
-        res.redirect(result.redirect.pathname);
-      } else if (result.missed) {
-        // Do a second render pass with the context to clue <Miss>
-        // components into rendering this time.
-        // See: https://react-router.now.sh/ServerRouter
-        res.status(404).send(render(req.url, context, preloadedState));
+      if (context.url) {
+        res.redirect(context.url);
       } else {
         res.send(html);
       }

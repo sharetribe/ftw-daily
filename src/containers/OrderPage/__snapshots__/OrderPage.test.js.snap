@@ -2,11 +2,6 @@ exports[`OrderPage matches snapshot 1`] = `
 <Connect(PageLayout)
   title="Your Banyan Studios booking is confirmed!">
   <NamedLink
-    activeStyle={
-      Object {
-        "fontWeight": "bold",
-      }
-    }
     hash=""
     name="OrderDetailsPage"
     params={
@@ -14,7 +9,7 @@ exports[`OrderPage matches snapshot 1`] = `
         "id": 1234,
       }
     }
-    query={Object {}}
+    search=""
     state={Object {}}
     style={
       Object {
@@ -24,11 +19,6 @@ exports[`OrderPage matches snapshot 1`] = `
     Booking details
   </NamedLink>
   <NamedLink
-    activeStyle={
-      Object {
-        "fontWeight": "bold",
-      }
-    }
     hash=""
     name="OrderDiscussionPage"
     params={
@@ -36,7 +26,7 @@ exports[`OrderPage matches snapshot 1`] = `
         "id": 1234,
       }
     }
-    query={Object {}}
+    search=""
     state={Object {}}>
     Discussion
   </NamedLink>
