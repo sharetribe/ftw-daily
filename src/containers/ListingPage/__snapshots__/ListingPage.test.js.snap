@@ -1,5 +1,5 @@
 exports[`ListingPage matches snapshot 1`] = `
-<Connect(PageLayout)
+<Connect(withRouter(PageLayout))
   title="Banyan Studios 55€ / day">
   <div>
     <img
@@ -135,5 +135,5 @@ exports[`ListingPage matches snapshot 1`] = `
     state={Object {}}>
     Book Banyan Studios
   </NamedLink>
-</Connect(PageLayout)>
+</Connect(withRouter(PageLayout))>
 `;

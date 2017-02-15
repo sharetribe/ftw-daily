@@ -1,5 +1,5 @@
 exports[`SalesConversationPage matches snapshot 1`] = `
-<Connect(PageLayout)
+<Connect(withRouter(PageLayout))
   title="Sales conversation page">
   <p>
     Sale id: 
@@ -26,5 +26,5 @@ exports[`SalesConversationPage matches snapshot 1`] = `
     </i>
     )
   </p>
-</Connect(PageLayout)>
+</Connect(withRouter(PageLayout))>
 `;

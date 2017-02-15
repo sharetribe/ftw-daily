@@ -1,7 +1,7 @@
 exports[`SecurityPage matches snapshot 1`] = `
-<Connect(PageLayout)
+<Connect(withRouter(PageLayout))
   title="Security">
   <ReduxForm
     onSubmit={[Function]} />
-</Connect(PageLayout)>
+</Connect(withRouter(PageLayout))>
 `;

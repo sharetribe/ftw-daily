@@ -1,5 +1,5 @@
 exports[`AuthenticationPageComponent matches snapshot 1`] = `
-<Connect(PageLayout)
+<Connect(withRouter(PageLayout))
   title="Authentication page: signup tab">
   <p>
     You must log in to view the page at
@@ -21,5 +21,5 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
     }>
     Log in
   </Link>
-</Connect(PageLayout)>
+</Connect(withRouter(PageLayout))>
 `;

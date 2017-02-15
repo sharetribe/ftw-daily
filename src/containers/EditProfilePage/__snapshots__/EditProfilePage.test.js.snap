@@ -1,4 +1,4 @@
 exports[`EditProfilePage matches snapshot 1`] = `
-<Connect(PageLayout)
+<Connect(withRouter(PageLayout))
   title="Edit profile page with display name: my-shop" />
 `;

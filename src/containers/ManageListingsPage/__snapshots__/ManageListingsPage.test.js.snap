@@ -1,5 +1,5 @@
 exports[`ManageListingsPage matches snapshot 1`] = `
-<Connect(PageLayout)
+<Connect(withRouter(PageLayout))
   title="Manage listings">
   <ul>
     <li>
@@ -10,5 +10,5 @@ exports[`ManageListingsPage matches snapshot 1`] = `
       </Link>
     </li>
   </ul>
-</Connect(PageLayout)>
+</Connect(withRouter(PageLayout))>
 `;

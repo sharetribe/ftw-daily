@@ -1,5 +1,5 @@
 exports[`OrderPage matches snapshot 1`] = `
-<Connect(PageLayout)
+<Connect(withRouter(PageLayout))
   title="Your Banyan Studios booking is confirmed!">
   <NamedLink
     hash=""
@@ -53,5 +53,5 @@ exports[`OrderPage matches snapshot 1`] = `
     title="Banyan Studios" />
   <OrderDiscussionPanel
     className="" />
-</Connect(PageLayout)>
+</Connect(withRouter(PageLayout))>
 `;
