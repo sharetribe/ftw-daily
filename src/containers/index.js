@@ -10,7 +10,6 @@ import LandingPage from './LandingPage/LandingPage';
 import ListingPage from './ListingPage/ListingPage';
 import LoginForm from './LoginForm/LoginForm';
 import ManageListingsPage from './ManageListingsPage/ManageListingsPage';
-import MatchWithSubRoutes from './MatchWithSubRoutes/MatchWithSubRoutes';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import OrderPage from './OrderPage/OrderPage';
 import PasswordChangePage from './PasswordChangePage/PasswordChangePage';
@@ -38,7 +37,6 @@ export {
   ListingPage,
   LoginForm,
   ManageListingsPage,
-  MatchWithSubRoutes,
   NotFoundPage,
   OrderPage,
   PasswordChangePage,
