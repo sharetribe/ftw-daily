@@ -6,7 +6,7 @@ import { NamedRedirect } from './components';
 import * as propTypes from './util/propTypes';
 
 const Routes = props => {
-  const { isAuthenticated, routes } = props;
+  const { isAuthenticated, flattenedRoutes } = props;
 
   const renderComponent = (route, matchProps) => {
     const { auth, component: Component } = route;
@@ -28,7 +28,7 @@ const Routes = props => {
 
   return (
     <Switch>
-      {routes.map(toRouteComponent)}
+      {flattenedRoutes.map(toRouteComponent)}
       <Route component={NotFoundPage} />
     </Switch>
   );
@@ -38,7 +38,7 @@ const { bool, arrayOf } = PropTypes;
 
 Routes.propTypes = {
   isAuthenticated: bool.isRequired,
-  routes: arrayOf(propTypes.route).isRequired,
+  flattenedRoutes: arrayOf(propTypes.route).isRequired,
 };
 
 const mapStateToProps = state => ({ isAuthenticated: state.Auth.isAuthenticated });
