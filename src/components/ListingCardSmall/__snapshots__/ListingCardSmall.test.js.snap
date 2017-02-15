@@ -1,26 +1,27 @@
 exports[`ListingCardSmall matches snapshot 1`] = `
-<div
-  className={undefined}>
-  <div
-    className={undefined}>
-    <div
-      className={undefined}>
+<div>
+  <div>
+    <div>
       <img
         alt="Listing Title"
-        className={undefined}
         src="http://placehold.it/200x150" />
     </div>
   </div>
-  <div
-    className={undefined}>
-    <a
-      className={undefined}
-      href="/l/Banyan-Studios/123"
-      onClick={[Function]}>
+  <div>
+    <NamedLink
+      hash=""
+      name="ListingPage"
+      params={
+        Object {
+          "id": 123,
+          "slug": "Banyan-Studios",
+        }
+      }
+      search=""
+      state={Object {}}>
       Banyan Studios
-    </a>
-    <div
-      className={undefined}>
+    </NamedLink>
+    <div>
       (
       <span>
         4
@@ -34,8 +35,7 @@ exports[`ListingCardSmall matches snapshot 1`] = `
         8 reviews
       </span>
     </div>
-    <div
-      className={undefined}>
+    <div>
       55€ / day
     </div>
   </div>

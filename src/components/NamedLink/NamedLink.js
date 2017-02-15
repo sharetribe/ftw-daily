@@ -5,19 +5,20 @@
  */
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
-import { flattenRoutes, pathByRouteName } from '../../util/routes';
+import { pathByRouteName } from '../../util/routes';
+import * as propTypes from '../../util/propTypes';
 
 const NamedLink = (props, context) => {
   const { name, search, hash, state, params, ...rest } = props;
-  const flattenedRoutes = flattenRoutes(context.routes);
+  const { flattenedRoutes } = context;
   const pathname = pathByRouteName(name, flattenedRoutes, params);
   const locationDescriptor = { pathname, search, hash, state };
   return <Link to={locationDescriptor} {...rest} />;
 };
 
-const { array, object, string } = PropTypes;
+const { arrayOf, object, string } = PropTypes;
 
-NamedLink.contextTypes = { routes: array.isRequired };
+NamedLink.contextTypes = { flattenedRoutes: arrayOf(propTypes.route).isRequired };
 
 NamedLink.defaultProps = { search: '', hash: '', state: {}, params: {} };
 

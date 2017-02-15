@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import * as propTypes from '../../util/propTypes';
 
 class RoutesProvider extends Component {
   getChildContext() {
-    return { routes: this.props.routes };
+    return { flattenedRoutes: this.props.flattenedRoutes };
   }
 
   render() {
@@ -10,12 +11,12 @@ class RoutesProvider extends Component {
   }
 }
 
-const { array, node } = PropTypes;
+const { arrayOf, node } = PropTypes;
 
-RoutesProvider.childContextTypes = { routes: array };
+RoutesProvider.childContextTypes = { flattenedRoutes: arrayOf(propTypes.route).isRequired };
 
 RoutesProvider.defaultProps = { children: {} };
 
-RoutesProvider.propTypes = { routes: array.isRequired, children: node };
+RoutesProvider.propTypes = { flattenedRoutes: arrayOf(propTypes.route).isRequired, children: node };
 
 export default RoutesProvider;

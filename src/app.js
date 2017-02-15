@@ -19,7 +19,7 @@ export const ClientApp = props => {
   return (
     <IntlProvider locale="en" messages={localeData}>
       <Provider store={store}>
-        <RoutesProvider routes={routesConfiguration}>
+        <RoutesProvider flattenedRoutes={flattenedRoutes}>
           <BrowserRouter>
             <Routes flattenedRoutes={flattenedRoutes} />
           </BrowserRouter>
@@ -40,7 +40,7 @@ export const ServerApp = props => {
   return (
     <IntlProvider locale="en" messages={localeData}>
       <Provider store={store}>
-        <RoutesProvider routes={routesConfiguration}>
+        <RoutesProvider flattenedRoutes={flattenedRoutes}>
           <StaticRouter location={url} context={context}>
             <Routes flattenedRoutes={flattenedRoutes} />
           </StaticRouter>

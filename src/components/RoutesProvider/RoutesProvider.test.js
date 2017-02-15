@@ -4,13 +4,15 @@ import RoutesProvider from './RoutesProvider';
 
 describe('RoutesProvider', () => {
   it('should contain routes from context', () => {
-    const routesConf = [{ name: 'SomePage' }];
+    const routesConf = [{ name: 'SomePage', path: 'some-page', component: () => null }];
     const Child = (props, context) => {
-      return <div>{context.routes[0].name}</div>;
+      return <div>{context.flattenedRoutes[0].name}</div>;
     };
-    Child.contextTypes = { routes: React.PropTypes.array };
+    Child.contextTypes = { flattenedRoutes: React.PropTypes.array };
 
-    const tree = renderDeep(<RoutesProvider routes={routesConf}><Child /></RoutesProvider>);
+    const tree = renderDeep(
+      <RoutesProvider flattenedRoutes={routesConf}><Child /></RoutesProvider>,
+    );
     expect(tree.children).toContain('SomePage');
   });
 });

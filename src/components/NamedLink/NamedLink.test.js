@@ -10,7 +10,7 @@ describe('NamedLink', () => {
       { path: '/somepage/:id', name: 'SomePage', component: () => <div>blaa</div> },
     ];
     const tree = renderDeep(
-      <RoutesProvider routes={routesConf}>
+      <RoutesProvider flattenedRoutes={routesConf}>
         <NamedLink name="SomePage" params={{ id }}>to SomePage</NamedLink>
       </RoutesProvider>,
     );

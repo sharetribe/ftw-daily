@@ -9,11 +9,11 @@ const Routes = props => {
   const { isAuthenticated, flattenedRoutes } = props;
 
   const renderComponent = (route, matchProps) => {
-    const { auth, component: Component } = route;
+    const { auth, component: RouteComponent } = route;
     const { match, location } = matchProps;
     const canShowComponent = !auth || isAuthenticated;
     return canShowComponent
-      ? <Component params={match.params} location={location} />
+      ? <RouteComponent params={match.params} location={location} />
       : <NamedRedirect name="LogInPage" state={{ from: match.url }} />;
   };
 
