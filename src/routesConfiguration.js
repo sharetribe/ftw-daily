@@ -1,7 +1,8 @@
 import React from 'react';
 import { find } from 'lodash';
-import { Redirect, matchPath } from 'react-router-dom';
+import { matchPath } from 'react-router-dom';
 import pathToRegexp from 'path-to-regexp';
+import { NamedRedirect } from './components';
 import {
   AuthenticationPage,
   CheckoutPage,
@@ -22,9 +23,7 @@ import {
   StyleguidePage,
 } from './containers';
 
-// This is only used for testing that redirects work correct in the
-// client and when rendering in the server.
-const RedirectLandingPage = () => <Redirect to="/" />;
+const RedirectToLandingPage = () => <NamedRedirect name="LandingPage" />;
 
 const routesConfiguration = [
   { path: '/', exact: true, name: 'LandingPage', component: props => <LandingPage {...props} /> },
@@ -62,7 +61,7 @@ const routesConfiguration = [
     path: '/l',
     exact: true,
     name: 'ListingBasePage',
-    component: RedirectLandingPage,
+    component: RedirectToLandingPage,
     routes: [
       {
         path: '/l/:slug/:id',
@@ -76,7 +75,7 @@ const routesConfiguration = [
     path: '/u',
     exact: true,
     name: 'ProfileBasePage',
-    component: RedirectLandingPage,
+    component: RedirectToLandingPage,
     routes: [
       {
         path: '/u/:displayName',
@@ -99,7 +98,7 @@ const routesConfiguration = [
     path: '/checkout',
     exact: true,
     name: 'CheckoutBasePage',
-    component: RedirectLandingPage,
+    component: RedirectToLandingPage,
     routes: [
       {
         path: '/checkout/:listingId',
@@ -158,7 +157,7 @@ const routesConfiguration = [
     auth: true,
     exact: true,
     name: 'OrderPage',
-    component: RedirectLandingPage,
+    component: RedirectToLandingPage,
     routes: [
       {
         path: '/order/:id/details',
@@ -211,7 +210,7 @@ const routesConfiguration = [
     auth: true,
     exact: true,
     name: 'AccountPage',
-    component: () => <Redirect to="/account/contact-details" />,
+    component: () => <NamedRedirect name="ContactDetailsPage" />,
     routes: [
       {
         path: '/account/contact-details',
