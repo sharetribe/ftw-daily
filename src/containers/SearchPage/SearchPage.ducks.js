@@ -35,9 +35,11 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, ...{ filters: unionWith(stateFilters, [payload], isEqual) } };
     }
     case LOAD_LISTINGS.REQUEST:
+      return { ...state, loadingListings: true, initialListingsLoaded: false };
     case LOAD_LISTINGS.SUCCESS:
+      return { ...state, loadingListings: false, initialListingsLoaded: true, listings: payload };
     case LOAD_LISTINGS.FAILURE:
-      return { ...state, ...payload };
+      return { ...state, loadingListings: false, error: true, loadListingError: payload };
     default:
       return state;
   }
@@ -47,22 +49,11 @@ export default function reducer(state = initialState, action = {}) {
 
 export const addFilter = (key, value) => ({ type: ADD_FILTER, payload: { [key]: value } });
 
-// async actions use request - success - failure pattern
-const action = (type, payload = {}) => ({ type, ...payload });
-
+// async actions use request - success / failure pattern
 export const loadListings = {
-  request: () =>
-    action(LOAD_LISTINGS.REQUEST, {
-      payload: { loadingListings: true, initialListingsLoaded: false },
-    }),
-  success: listings =>
-    action(LOAD_LISTINGS.SUCCESS, {
-      payload: { loadingListings: false, initialListingsLoaded: true, listings },
-    }),
-  failure: error =>
-    action(LOAD_LISTINGS.FAILURE, {
-      payload: { loadingListings: false, loadListingError: error, error: true },
-    }),
+  request: () => ({ type: LOAD_LISTINGS.REQUEST, payload: {} }),
+  success: listings => ({ type: LOAD_LISTINGS.SUCCESS, payload: listings }),
+  failure: error => ({ type: LOAD_LISTINGS.FAILURE, payload: error }),
 };
 
 // ================ Worker sagas ================ //

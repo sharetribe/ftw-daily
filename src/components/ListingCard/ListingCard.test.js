@@ -5,7 +5,7 @@ import ListingCard from './ListingCard';
 describe('ListingCard', () => {
   it('matches snapshot', () => {
     const listing = {
-      id: 123,
+      id: 'some-id',
       title: 'Banyan Studios',
       price: '55\u20AC / day',
       description: 'Organic Music Production in a Sustainable, Ethical and Professional Studio.',
