@@ -150,7 +150,15 @@ app.get('*', (req, res) => {
     .then(preloadedState => {
       const html = render(req.url, context, preloadedState);
 
-      if (context.url) {
+      if (context.forbidden) {
+        // Routes component injects the context.forbidden when the
+        // user isn't logged in to view the page that requires
+        // authentication.
+        //
+        // TODO: separate 401 and 403 cases when authorization is done
+        // as well.
+        res.status(403).send(html);
+      } else if (context.url) {
         // React Router injects the context.url if a redirect was rendered
         res.redirect(context.url);
       } else if (context.notfound) {

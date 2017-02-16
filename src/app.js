@@ -21,7 +21,7 @@ export const ClientApp = props => {
       <Provider store={store}>
         <RoutesProvider flattenedRoutes={flattenedRoutes}>
           <BrowserRouter>
-            <Routes flattenedRoutes={flattenedRoutes} />
+            <Routes />
           </BrowserRouter>
         </RoutesProvider>
       </Provider>
@@ -42,7 +42,7 @@ export const ServerApp = props => {
       <Provider store={store}>
         <RoutesProvider flattenedRoutes={flattenedRoutes}>
           <StaticRouter location={url} context={context}>
-            <Routes flattenedRoutes={flattenedRoutes} />
+            <Routes />
           </StaticRouter>
         </RoutesProvider>
       </Provider>
