@@ -8,20 +8,20 @@ import { pathByRouteName, withFlattenedRoutes } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 
 const NamedRedirect = props => {
-  const { name, search, state, params, flattenedRoutes, ...rest } = props;
+  const { name, search, state, params, flattenedRoutes, push } = props;
   const pathname = pathByRouteName(name, flattenedRoutes, params);
-  const locationDescriptor = { pathname, search, state };
-  return <Redirect to={locationDescriptor} {...rest} />;
+  return <Redirect to={{ pathname, search, state }} push={push} />;
 };
 
-const { arrayOf, object, string } = PropTypes;
+const { arrayOf, object, string, bool } = PropTypes;
 
-NamedRedirect.defaultProps = { search: '', state: {}, params: {} };
+NamedRedirect.defaultProps = { search: '', state: {}, push: false, params: {} };
 
 NamedRedirect.propTypes = {
   name: string.isRequired,
   search: string,
   state: object,
+  push: bool,
   params: object,
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
 };
