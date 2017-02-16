@@ -151,7 +151,12 @@ app.get('*', (req, res) => {
       const html = render(req.url, context, preloadedState);
 
       if (context.url) {
+        // React Router injects the context.url if a redirect was rendered
         res.redirect(context.url);
+      } else if (context.notfound) {
+        // NotFoundPage component injects the context.notfound when a
+        // 404 should be returned
+        res.status(404).send(html);
       } else {
         res.send(html);
       }
