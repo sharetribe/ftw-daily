@@ -123,7 +123,7 @@ exports[`ListingPage matches snapshot 1`] = `
   <div>
     Map
   </div>
-  <withFlattenedRoutes(NamedLink)
+  <withFlattenedRoutes(withRouter(NamedLink))
     name="OrderDetailsPage"
     params={
       Object {
@@ -131,6 +131,6 @@ exports[`ListingPage matches snapshot 1`] = `
       }
     }>
     Book Banyan Studios
-  </withFlattenedRoutes(NamedLink)>
+  </withFlattenedRoutes(withRouter(NamedLink))>
 </Connect(withRouter(PageLayout))>
 `;

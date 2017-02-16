@@ -9,7 +9,7 @@ exports[`ListingCard matches snapshot 1`] = `
   </div>
   <div>
     <div>
-      <withFlattenedRoutes(NamedLink)
+      <withFlattenedRoutes(withRouter(NamedLink))
         name="ListingPage"
         params={
           Object {
@@ -18,7 +18,7 @@ exports[`ListingCard matches snapshot 1`] = `
           }
         }>
         Banyan Studios
-      </withFlattenedRoutes(NamedLink)>
+      </withFlattenedRoutes(withRouter(NamedLink))>
       <div>
         55€ / day
       </div>

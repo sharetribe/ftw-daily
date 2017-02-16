@@ -19,7 +19,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
   <p>
     By confirming I accept the booking terms and conditions.
   </p>
-  <withFlattenedRoutes(NamedLink)
+  <withFlattenedRoutes(withRouter(NamedLink))
     name="OrderDetailsPage"
     params={
       Object {
@@ -27,6 +27,6 @@ exports[`CheckoutPage matches snapshot 1`] = `
       }
     }>
     Confirm & Pay
-  </withFlattenedRoutes(NamedLink)>
+  </withFlattenedRoutes(withRouter(NamedLink))>
 </Connect(withRouter(PageLayout))>
 `;

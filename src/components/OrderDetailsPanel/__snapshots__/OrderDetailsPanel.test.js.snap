@@ -28,7 +28,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
   <p>
     Cancel booking
   </p>
-  <withFlattenedRoutes(NamedLink)
+  <withFlattenedRoutes(withRouter(NamedLink))
     name="OrderDiscussionPage"
     params={
       Object {
@@ -36,6 +36,6 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
       }
     }>
     You have a new message!
-  </withFlattenedRoutes(NamedLink)>
+  </withFlattenedRoutes(withRouter(NamedLink))>
 </div>
 `;

@@ -1,9 +1,9 @@
 exports[`NotFoundPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   title="Page not found">
-  <withFlattenedRoutes(NamedLink)
+  <withFlattenedRoutes(withRouter(NamedLink))
     name="LandingPage">
     Home
-  </withFlattenedRoutes(NamedLink)>
+  </withFlattenedRoutes(withRouter(NamedLink))>
 </Connect(withRouter(PageLayout))>
 `;

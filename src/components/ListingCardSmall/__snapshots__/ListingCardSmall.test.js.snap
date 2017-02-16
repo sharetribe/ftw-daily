@@ -8,7 +8,7 @@ exports[`ListingCardSmall matches snapshot 1`] = `
     </div>
   </div>
   <div>
-    <withFlattenedRoutes(NamedLink)
+    <withFlattenedRoutes(withRouter(NamedLink))
       name="ListingPage"
       params={
         Object {
@@ -17,7 +17,7 @@ exports[`ListingCardSmall matches snapshot 1`] = `
         }
       }>
       Banyan Studios
-    </withFlattenedRoutes(NamedLink)>
+    </withFlattenedRoutes(withRouter(NamedLink))>
     <div>
       (
       <span>

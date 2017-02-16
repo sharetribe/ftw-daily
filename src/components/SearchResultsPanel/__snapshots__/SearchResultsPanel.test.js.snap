@@ -2,14 +2,14 @@ exports[`SearchResultsPanel matches snapshot 1`] = `
 <div>
   <Menu />
   <div>
-    <withFlattenedRoutes(NamedLink)
+    <withFlattenedRoutes(withRouter(NamedLink))
       name="SearchFiltersPage">
       Filters
-    </withFlattenedRoutes(NamedLink)>
-    <withFlattenedRoutes(NamedLink)
+    </withFlattenedRoutes(withRouter(NamedLink))>
+    <withFlattenedRoutes(withRouter(NamedLink))
       name="SearchMapPage">
       Map
-    </withFlattenedRoutes(NamedLink)>
+    </withFlattenedRoutes(withRouter(NamedLink))>
   </div>
 </div>
 `;

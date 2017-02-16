@@ -3,13 +3,13 @@ exports[`FilterPanel matches snapshot 1`] = `
   <h1>
     Filters
   </h1>
-  <withFlattenedRoutes(NamedLink)
+  <withFlattenedRoutes(withRouter(NamedLink))
     name="SearchListingsPage">
     See studios
-  </withFlattenedRoutes(NamedLink)>
-  <withFlattenedRoutes(NamedLink)
+  </withFlattenedRoutes(withRouter(NamedLink))>
+  <withFlattenedRoutes(withRouter(NamedLink))
     name="SearchListingsPage">
     X
-  </withFlattenedRoutes(NamedLink)>
+  </withFlattenedRoutes(withRouter(NamedLink))>
 </div>
 `;
