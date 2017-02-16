@@ -123,17 +123,14 @@ exports[`ListingPage matches snapshot 1`] = `
   <div>
     Map
   </div>
-  <NamedLink
-    hash=""
+  <withFlattenedRoutes(NamedLink)
     name="OrderDetailsPage"
     params={
       Object {
         "id": 12345,
       }
-    }
-    search=""
-    state={Object {}}>
+    }>
     Book Banyan Studios
-  </NamedLink>
+  </withFlattenedRoutes(NamedLink)>
 </Connect(withRouter(PageLayout))>
 `;

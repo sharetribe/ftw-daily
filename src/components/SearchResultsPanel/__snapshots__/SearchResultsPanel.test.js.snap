@@ -2,22 +2,14 @@ exports[`SearchResultsPanel matches snapshot 1`] = `
 <div>
   <Menu />
   <div>
-    <NamedLink
-      hash=""
-      name="SearchFiltersPage"
-      params={Object {}}
-      search=""
-      state={Object {}}>
+    <withFlattenedRoutes(NamedLink)
+      name="SearchFiltersPage">
       Filters
-    </NamedLink>
-    <NamedLink
-      hash=""
-      name="SearchMapPage"
-      params={Object {}}
-      search=""
-      state={Object {}}>
+    </withFlattenedRoutes(NamedLink)>
+    <withFlattenedRoutes(NamedLink)
+      name="SearchMapPage">
       Map
-    </NamedLink>
+    </withFlattenedRoutes(NamedLink)>
   </div>
 </div>
 `;

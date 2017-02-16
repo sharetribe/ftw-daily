@@ -8,19 +8,16 @@ exports[`ListingCardSmall matches snapshot 1`] = `
     </div>
   </div>
   <div>
-    <NamedLink
-      hash=""
+    <withFlattenedRoutes(NamedLink)
       name="ListingPage"
       params={
         Object {
           "id": 123,
           "slug": "Banyan-Studios",
         }
-      }
-      search=""
-      state={Object {}}>
+      }>
       Banyan Studios
-    </NamedLink>
+    </withFlattenedRoutes(NamedLink)>
     <div>
       (
       <span>

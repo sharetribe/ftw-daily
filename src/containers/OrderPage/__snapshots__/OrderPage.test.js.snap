@@ -1,35 +1,29 @@
 exports[`OrderPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   title="Your Banyan Studios booking is confirmed!">
-  <NamedLink
-    hash=""
+  <withFlattenedRoutes(NamedLink)
     name="OrderDetailsPage"
     params={
       Object {
         "id": 1234,
       }
     }
-    search=""
-    state={Object {}}
     style={
       Object {
         "marginRight": "2rem",
       }
     }>
     Booking details
-  </NamedLink>
-  <NamedLink
-    hash=""
+  </withFlattenedRoutes(NamedLink)>
+  <withFlattenedRoutes(NamedLink)
     name="OrderDiscussionPage"
     params={
       Object {
         "id": 1234,
       }
-    }
-    search=""
-    state={Object {}}>
+    }>
     Discussion
-  </NamedLink>
+  </withFlattenedRoutes(NamedLink)>
   <OrderDetailsPanel
     className="undefined"
     confirmationCode="X2587X"

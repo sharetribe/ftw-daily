@@ -19,17 +19,14 @@ exports[`CheckoutPage matches snapshot 1`] = `
   <p>
     By confirming I accept the booking terms and conditions.
   </p>
-  <NamedLink
-    hash=""
+  <withFlattenedRoutes(NamedLink)
     name="OrderDetailsPage"
     params={
       Object {
         "id": 12345,
       }
-    }
-    search=""
-    state={Object {}}>
+    }>
     Confirm & Pay
-  </NamedLink>
+  </withFlattenedRoutes(NamedLink)>
 </Connect(withRouter(PageLayout))>
 `;
