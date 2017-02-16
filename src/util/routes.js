@@ -1,7 +1,9 @@
+import React, { PropTypes } from 'react';
 import { find } from 'lodash';
 import { matchPath } from 'react-router-dom';
 import pathToRegexp from 'path-to-regexp';
 import routesConfiguration from '../routesConfiguration';
+import * as propTypes from './propTypes';
 
 export const flattenRoutes = routesArray =>
   routesArray.reduce((a, b) => a.concat(b.routes ? [b].concat(flattenRoutes(b.routes)) : b), []);
@@ -69,3 +71,27 @@ const matchPathnameCreator = routes =>
  * matchRoutesToLocation helps to figure out which routes are related to given location.
  */
 export const matchPathname = matchPathnameCreator(routesConfiguration);
+
+/**
+ * A higher order component (HOC) to take the flattened routes from
+ * the context that the RoutesProvider component has provided.
+ *
+ * Injects the routes as the `flattenedRoutes` prop in the given
+ * component. Works similarly as `withRouter` in React Router.
+ */
+export const withFlattenedRoutes = Component => {
+  const WithFlattenedRoutesComponent = (props, context) => (
+    <Component flattenedRoutes={context.flattenedRoutes} {...props} />
+  );
+
+  WithFlattenedRoutesComponent.displayName = `withFlattenedRoutes(${Component.displayName ||
+    Component.name})`;
+
+  const { arrayOf } = PropTypes;
+
+  WithFlattenedRoutesComponent.contextTypes = {
+    flattenedRoutes: arrayOf(propTypes.route).isRequired,
+  };
+
+  return WithFlattenedRoutesComponent;
+};
