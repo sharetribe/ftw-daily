@@ -73,13 +73,12 @@ exports[`ListingPage matches snapshot 1`] = `
        10am - 6pm
     </p>
   </div>
-  <Link
-    replace={false}
-    to="mailto:studio.dude@mystudio.com">
+  <a
+    href="mailto:studio.dude@mystudio.com">
     <h2>
       Contact studio
     </h2>
-  </Link>
+  </a>
   <div>
     <h2>
       Studio reviews (1)

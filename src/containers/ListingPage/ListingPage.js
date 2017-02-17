@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { NamedLink, PageLayout } from '../../components';
 import css from './ListingPage.css';
 
@@ -68,9 +67,9 @@ const ListingPage = () => (
       <h2>Additional Services Available</h2>
       <p><strong>Studio hours:</strong> 10am - 6pm</p>
     </div>
-    <Link className={css.contact} to="mailto:studio.dude@mystudio.com">
+    <a className={css.contact} href="mailto:studio.dude@mystudio.com">
       <h2>Contact studio</h2>
-    </Link>
+    </a>
     <div className={css.reviewSection}>
       <h2>Studio reviews (1)</h2>
       <div className={css.reviews}>
