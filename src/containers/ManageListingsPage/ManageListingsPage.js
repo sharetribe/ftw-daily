@@ -1,11 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { PageLayout } from '../../components';
+import { PageLayout, NamedLink } from '../../components';
 
 export default () => (
   <PageLayout title="Manage listings">
     <ul>
-      <li><Link to="/l/1234">Listing 1234</Link></li>
+      <li>
+        <NamedLink name="ListingPage" params={{ id: 'some-id', slug: 'some-slug' }}>
+          Listing some-id
+        </NamedLink>
+      </li>
     </ul>
   </PageLayout>
 );

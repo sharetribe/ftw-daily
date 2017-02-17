@@ -1,13 +1,30 @@
 exports[`InboxPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
-  title="inbox page">
+  title="orders page">
   <ul>
     <li>
-      <Link
-        replace={false}
-        to="/conversation/1234">
-        Single thread
-      </Link>
+      <withFlattenedRoutes(withRouter(NamedLink))
+        name="OrderDetailsPage"
+        params={
+          Object {
+            "id": "some-id-1",
+          }
+        }>
+        some-id-1
+         order details
+      </withFlattenedRoutes(withRouter(NamedLink))>
+    </li>
+    <li>
+      <withFlattenedRoutes(withRouter(NamedLink))
+        name="OrderDetailsPage"
+        params={
+          Object {
+            "id": "some-id-2",
+          }
+        }>
+        some-id-2
+         order details
+      </withFlattenedRoutes(withRouter(NamedLink))>
     </li>
   </ul>
 </Connect(withRouter(PageLayout))>

@@ -37,10 +37,19 @@ const OrderPage = props => {
 
   return (
     <PageLayout title={`Your ${title} booking is confirmed!`}>
-      <NamedLink name="OrderDetailsPage" params={{ id: orderId }} activeClassName={css.activeTab} style={{ marginRight: '2rem' }}>
+      <NamedLink
+        name="OrderDetailsPage"
+        params={{ id: orderId }}
+        activeClassName={css.activeTab}
+        style={{ marginRight: '2rem' }}
+      >
         Booking details
       </NamedLink>
-      <NamedLink name="OrderDiscussionPage" activeClassName={css.activeTab} params={{ id: orderId }}>
+      <NamedLink
+        name="OrderDiscussionPage"
+        activeClassName={css.activeTab}
+        params={{ id: orderId }}
+      >
         Discussion
       </NamedLink>
       <OrderDetailsPanel className={detailsClassName} {...detailsProps} />

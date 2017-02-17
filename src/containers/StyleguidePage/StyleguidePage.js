@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router-dom';
 import { map, size } from 'lodash';
+import { NamedLink } from '../../components';
 import * as allExamples from '../../examples';
 
 import css from './StyleguidePage.css';
@@ -19,10 +19,26 @@ const Example = props => {
   return (
     <li>
       <h2>
-        <Link to={`/styleguide/${componentName}`}>{componentName}</Link>/
-        <Link to={`/styleguide/${componentName}/${exampleName}`}>{exampleName}</Link>
+        <NamedLink name="StyleguideComponent" params={{ component: componentName }}>
+          {componentName}
+        </NamedLink>
+        /
+
+        <NamedLink
+          name="StyleguideComponentExample"
+          params={{ component: componentName, example: exampleName }}
+        >
+          {exampleName}
+        </NamedLink>
       </h2>
-      <span><Link to={`/styleguide/${componentName}/${exampleName}/raw`}>raw</Link></span>
+      <span>
+        <NamedLink
+          name="StyleguideComponentExampleRaw"
+          params={{ component: componentName, example: exampleName, type: 'raw' }}
+        >
+          raw
+        </NamedLink>
+      </span>
       {desc}
       <div>
         <ExampleComponent {...exampleProps} />
@@ -101,7 +117,9 @@ const StyleguidePage = props => {
 
   return (
     <section className={css.root}>
-      <h1><Link to="/styleguide">Styleguide</Link></h1>
+      <h1>
+        <NamedLink name="Styleguide">Styleguide</NamedLink>
+      </h1>
       {html}
     </section>
   );

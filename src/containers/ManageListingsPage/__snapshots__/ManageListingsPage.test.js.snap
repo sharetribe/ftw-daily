@@ -3,11 +3,16 @@ exports[`ManageListingsPage matches snapshot 1`] = `
   title="Manage listings">
   <ul>
     <li>
-      <Link
-        replace={false}
-        to="/l/1234">
-        Listing 1234
-      </Link>
+      <withFlattenedRoutes(withRouter(NamedLink))
+        name="ListingPage"
+        params={
+          Object {
+            "id": "some-id",
+            "slug": "some-slug",
+          }
+        }>
+        Listing some-id
+      </withFlattenedRoutes(withRouter(NamedLink))>
     </li>
   </ul>
 </Connect(withRouter(PageLayout))>

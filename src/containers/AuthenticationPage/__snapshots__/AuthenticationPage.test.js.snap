@@ -9,17 +9,16 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
   </p>
   <ReduxForm
     onSubmit={[Function]} />
-  <Link
-    replace={false}
+  <withFlattenedRoutes(withRouter(NamedLink))
+    name="LogInPage"
     to={
       Object {
-        "pathname": "/login",
         "state": Object {
           "from": "/protected",
         },
       }
     }>
     Log in
-  </Link>
+  </withFlattenedRoutes(withRouter(NamedLink))>
 </Connect(withRouter(PageLayout))>
 `;
