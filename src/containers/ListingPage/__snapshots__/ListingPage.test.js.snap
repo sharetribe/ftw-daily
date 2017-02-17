@@ -1,5 +1,5 @@
 exports[`ListingPage matches snapshot 1`] = `
-<Connect(PageLayout)
+<Connect(withRouter(PageLayout))
   title="Banyan Studios 55€ / day">
   <div>
     <img
@@ -73,13 +73,12 @@ exports[`ListingPage matches snapshot 1`] = `
        10am - 6pm
     </p>
   </div>
-  <Link
-    replace={false}
-    to="mailto:studio.dude@mystudio.com">
+  <a
+    href="mailto:studio.dude@mystudio.com">
     <h2>
       Contact studio
     </h2>
-  </Link>
+  </a>
   <div>
     <h2>
       Studio reviews (1)
@@ -123,17 +122,14 @@ exports[`ListingPage matches snapshot 1`] = `
   <div>
     Map
   </div>
-  <NamedLink
-    hash=""
+  <withFlattenedRoutes(withRouter(NamedLink))
     name="OrderDetailsPage"
     params={
       Object {
         "id": 12345,
       }
-    }
-    search=""
-    state={Object {}}>
+    }>
     Book Banyan Studios
-  </NamedLink>
-</Connect(PageLayout)>
+  </withFlattenedRoutes(withRouter(NamedLink))>
+</Connect(withRouter(PageLayout))>
 `;

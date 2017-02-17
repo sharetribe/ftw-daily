@@ -63,4 +63,13 @@ describe('Application', () => {
       expect(context.url).toEqual(redirectPath);
     });
   });
+
+  it('redirects to correct URLs', () => {
+    const urlRedirects = { '/l': '/', '/u': '/', '/checkout': '/' };
+    forEach(urlRedirects, (redirectPath, url) => {
+      const context = {};
+      const body = render(url, context);
+      expect(context.url).toEqual(redirectPath);
+    });
+  });
 });

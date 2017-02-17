@@ -1,33 +1,28 @@
+/* eslint-disable arrow-body-style */
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router-dom';
-import { PageLayout } from '../../components';
-
-const toPath = (filter, id) => {
-  switch (filter) {
-    case 'orders':
-      return `/order/${id}`;
-    case 'sales':
-      return `/sale/${id}`;
-    default:
-      return `/conversation/${id}`;
-  }
-};
+import { PageLayout, NamedLink } from '../../components';
 
 const InboxPage = props => {
   const { filter } = props;
+  const ids = ['some-id-1', 'some-id-2'];
+
+  const toLink = id => {
+    return filter === 'orders'
+      ? <NamedLink name="OrderDetailsPage" params={{ id }}>{id} order details</NamedLink>
+      : <NamedLink name="SaleDetailsPage" params={{ id }}>{id} sale details</NamedLink>;
+  };
+
   return (
     <PageLayout title={`${filter} page`}>
       <ul>
-        <li><Link to={toPath(filter, 1234)}>Single thread</Link></li>
+        {ids.map(id => <li key={id}>{toLink(id)}</li>)}
       </ul>
     </PageLayout>
   );
 };
 
-InboxPage.defaultProps = { filter: 'conversation' };
-
 const { oneOf } = PropTypes;
 
-InboxPage.propTypes = { filter: oneOf(['orders', 'sales', 'inbox']) };
+InboxPage.propTypes = { filter: oneOf(['orders', 'sales']).isRequired };
 
 export default InboxPage;

@@ -1,16 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router-dom';
-import { PageLayout } from '../../components';
+import { PageLayout, NamedLink } from '../../components';
 
 const SalesConversationPage = props => {
   const { params } = props;
   return (
     <PageLayout title="Sales conversation page">
       <p>Sale id: {params.id}</p>
-      <Link to={`/sale/${params.id}/discussion`}>Discussion tab</Link>
+      <NamedLink name="SaleDiscussionPage" params={{ id: params.id }}>Discussion tab</NamedLink>
       <br />
-      <Link to={`/sale/${params.id}/details`}>Details tab</Link>
+      <NamedLink name="SaleDetailsPage" params={{ id: params.id }}>Details tab</NamedLink>
       <p>Mobile layout needs different views for discussion and details.</p>
       <p>
         Discussion view is the default if route doesn't specify mobile tab (e.g. <i>

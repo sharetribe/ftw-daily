@@ -4,7 +4,7 @@ import InboxPage from './InboxPage';
 
 describe('InboxPage', () => {
   it('matches snapshot', () => {
-    const tree = renderShallow(<InboxPage filter="inbox" />);
+    const tree = renderShallow(<InboxPage filter="orders" />);
     expect(tree).toMatchSnapshot();
   });
 });

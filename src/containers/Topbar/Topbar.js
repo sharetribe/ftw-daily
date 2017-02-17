@@ -1,13 +1,17 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { logout } from '../../ducks/Auth.ducks';
+import { NamedLink } from '../../components';
 
 import css from './Topbar.css';
 
+/* eslint-disable react/no-danger */
+const House = () => <span dangerouslySetInnerHTML={{ __html: '&#127968;' }} />;
+/* eslint-enable react/no-danger */
+
 const Topbar = props => {
   const { isAuthenticated, onLogout, user, push: historyPush } = props;
-  const house = { dangerouslySetInnerHTML: { __html: '&#127968;' } };
   const hamburger = { dangerouslySetInnerHTML: { __html: '&#127828;' } };
 
   const handleChange = e => {
@@ -24,7 +28,9 @@ const Topbar = props => {
   return (
     <div className={css.container}>
       <div>
-        <Link className={css.home} to="/" {...house} />
+        <NamedLink className={css.home} name="LandingPage">
+          <House />
+        </NamedLink>
         <select value="default" className={css.navDropDown} onChange={handleChange}>
           <option value="default" {...hamburger} />
           <option value="/s">Search</option>
@@ -51,7 +57,7 @@ const Topbar = props => {
               {user.email}
               <button className={css.logoutButton} onClick={handleLogout}>Logout</button>
             </div>
-          : <Link to="/login">Login</Link>}
+          : <NamedLink name="LogInPage">Login</NamedLink>}
       </div>
     </div>
   );

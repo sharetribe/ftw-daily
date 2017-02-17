@@ -1,35 +1,29 @@
 exports[`OrderPage matches snapshot 1`] = `
-<Connect(PageLayout)
+<Connect(withRouter(PageLayout))
   title="Your Banyan Studios booking is confirmed!">
-  <NamedLink
-    hash=""
+  <withFlattenedRoutes(withRouter(NamedLink))
     name="OrderDetailsPage"
     params={
       Object {
         "id": 1234,
       }
     }
-    search=""
-    state={Object {}}
     style={
       Object {
         "marginRight": "2rem",
       }
     }>
     Booking details
-  </NamedLink>
-  <NamedLink
-    hash=""
+  </withFlattenedRoutes(withRouter(NamedLink))>
+  <withFlattenedRoutes(withRouter(NamedLink))
     name="OrderDiscussionPage"
     params={
       Object {
         "id": 1234,
       }
-    }
-    search=""
-    state={Object {}}>
+    }>
     Discussion
-  </NamedLink>
+  </withFlattenedRoutes(withRouter(NamedLink))>
   <OrderDetailsPanel
     className="undefined"
     confirmationCode="X2587X"
@@ -53,5 +47,5 @@ exports[`OrderPage matches snapshot 1`] = `
     title="Banyan Studios" />
   <OrderDiscussionPanel
     className="" />
-</Connect(PageLayout)>
+</Connect(withRouter(PageLayout))>
 `;

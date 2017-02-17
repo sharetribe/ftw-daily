@@ -1,5 +1,5 @@
 exports[`CheckoutPage matches snapshot 1`] = `
-<Connect(PageLayout)
+<Connect(withRouter(PageLayout))
   title="Book Banyan Studios (some-listing-id)">
   <img
     alt="Banyan Studios"
@@ -19,17 +19,14 @@ exports[`CheckoutPage matches snapshot 1`] = `
   <p>
     By confirming I accept the booking terms and conditions.
   </p>
-  <NamedLink
-    hash=""
+  <withFlattenedRoutes(withRouter(NamedLink))
     name="OrderDetailsPage"
     params={
       Object {
         "id": 12345,
       }
-    }
-    search=""
-    state={Object {}}>
+    }>
     Confirm & Pay
-  </NamedLink>
-</Connect(PageLayout)>
+  </withFlattenedRoutes(withRouter(NamedLink))>
+</Connect(withRouter(PageLayout))>
 `;

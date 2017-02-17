@@ -75,7 +75,7 @@ function fetchInitialState(requestUrl) {
   const pathname = url.parse(requestUrl).pathname;
   const { matchedRoutes, params } = matchPathname(pathname);
 
-  // pathname may match with several routes (if they don't have exactly=true)
+  // pathname may match with several routes (if they don't have exact=true)
   // We filter all the components form matched routes that have `loadData`
   const initialFetches = _
     .chain(matchedRoutes)
@@ -150,8 +150,21 @@ app.get('*', (req, res) => {
     .then(preloadedState => {
       const html = render(req.url, context, preloadedState);
 
-      if (context.url) {
+      if (context.forbidden) {
+        // Routes component injects the context.forbidden when the
+        // user isn't logged in to view the page that requires
+        // authentication.
+        //
+        // TODO: separate 401 and 403 cases when authorization is done
+        // as well.
+        res.status(403).send(html);
+      } else if (context.url) {
+        // React Router injects the context.url if a redirect was rendered
         res.redirect(context.url);
+      } else if (context.notfound) {
+        // NotFoundPage component injects the context.notfound when a
+        // 404 should be returned
+        res.status(404).send(html);
       } else {
         res.send(html);
       }

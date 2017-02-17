@@ -28,17 +28,14 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
   <p>
     Cancel booking
   </p>
-  <NamedLink
-    hash=""
+  <withFlattenedRoutes(withRouter(NamedLink))
     name="OrderDiscussionPage"
     params={
       Object {
         "id": "some-test-order-id",
       }
-    }
-    search=""
-    state={Object {}}>
+    }>
     You have a new message!
-  </NamedLink>
+  </withFlattenedRoutes(withRouter(NamedLink))>
 </div>
 `;

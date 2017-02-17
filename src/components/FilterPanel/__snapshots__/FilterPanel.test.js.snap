@@ -3,21 +3,13 @@ exports[`FilterPanel matches snapshot 1`] = `
   <h1>
     Filters
   </h1>
-  <NamedLink
-    hash=""
-    name="SearchListingsPage"
-    params={Object {}}
-    search=""
-    state={Object {}}>
+  <withFlattenedRoutes(withRouter(NamedLink))
+    name="SearchListingsPage">
     See studios
-  </NamedLink>
-  <NamedLink
-    hash=""
-    name="SearchListingsPage"
-    params={Object {}}
-    search=""
-    state={Object {}}>
+  </withFlattenedRoutes(withRouter(NamedLink))>
+  <withFlattenedRoutes(withRouter(NamedLink))
+    name="SearchListingsPage">
     X
-  </NamedLink>
+  </withFlattenedRoutes(withRouter(NamedLink))>
 </div>
 `;

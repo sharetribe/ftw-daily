@@ -1,30 +1,29 @@
 /**
  * This component wraps React-Router's Redirect by providing name-based routing.
- * This is also special component that gets routes from context.
  * (Helps to narrow down the scope of possible format changes to routes.)
  */
 import React, { PropTypes } from 'react';
 import { Redirect } from 'react-router-dom';
-import { pathByRouteName } from '../../routesConfiguration';
+import { pathByRouteName, withFlattenedRoutes } from '../../util/routes';
+import * as propTypes from '../../util/propTypes';
 
-const NamedRedirect = (props, context) => {
-  const { name, search, state, params, ...rest } = props;
-  const pathname = pathByRouteName(name, context.routes, params);
-  const locationDescriptor = { pathname, search, state };
-  return <Redirect to={locationDescriptor} {...rest} />;
+const NamedRedirect = props => {
+  const { name, search, state, params, flattenedRoutes, push } = props;
+  const pathname = pathByRouteName(name, flattenedRoutes, params);
+  return <Redirect to={{ pathname, search, state }} push={push} />;
 };
 
-const { array, object, string } = PropTypes;
+const { arrayOf, object, string, bool } = PropTypes;
 
-NamedRedirect.contextTypes = { routes: array.isRequired };
-
-NamedRedirect.defaultProps = { search: '', state: {}, params: {} };
+NamedRedirect.defaultProps = { search: '', state: {}, push: false, params: {} };
 
 NamedRedirect.propTypes = {
   name: string.isRequired,
   search: string,
   state: object,
+  push: bool,
   params: object,
+  flattenedRoutes: arrayOf(propTypes.route).isRequired,
 };
 
-export default NamedRedirect;
+export default withFlattenedRoutes(NamedRedirect);

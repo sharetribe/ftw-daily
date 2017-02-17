@@ -1,21 +1,29 @@
 exports[`SalesConversationPage matches snapshot 1`] = `
-<Connect(PageLayout)
+<Connect(withRouter(PageLayout))
   title="Sales conversation page">
   <p>
     Sale id: 
     12345
   </p>
-  <Link
-    replace={false}
-    to="/sale/12345/discussion">
+  <withFlattenedRoutes(withRouter(NamedLink))
+    name="SaleDiscussionPage"
+    params={
+      Object {
+        "id": 12345,
+      }
+    }>
     Discussion tab
-  </Link>
+  </withFlattenedRoutes(withRouter(NamedLink))>
   <br />
-  <Link
-    replace={false}
-    to="/sale/12345/details">
+  <withFlattenedRoutes(withRouter(NamedLink))
+    name="SaleDetailsPage"
+    params={
+      Object {
+        "id": 12345,
+      }
+    }>
     Details tab
-  </Link>
+  </withFlattenedRoutes(withRouter(NamedLink))>
   <p>
     Mobile layout needs different views for discussion and details.
   </p>
@@ -26,5 +34,5 @@ exports[`SalesConversationPage matches snapshot 1`] = `
     </i>
     )
   </p>
-</Connect(PageLayout)>
+</Connect(withRouter(PageLayout))>
 `;

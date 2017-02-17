@@ -1,9 +1,9 @@
 exports[`LandingPage matches snapshot 1`] = `
-<Connect(PageLayout)
+<Connect(withRouter(PageLayout))
   title="Landing page">
   <HeroSection>
     <ReduxForm
       onSubmit={[Function]} />
   </HeroSection>
-</Connect(PageLayout)>
+</Connect(withRouter(PageLayout))>
 `;

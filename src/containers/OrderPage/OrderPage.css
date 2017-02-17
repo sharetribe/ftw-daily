@@ -5,3 +5,7 @@
 .tabContentVisible {
   display: block;
 }
+
+.activeTab {
+  font-weight: bold;
+}
