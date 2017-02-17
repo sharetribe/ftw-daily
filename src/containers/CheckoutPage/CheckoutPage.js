@@ -32,4 +32,4 @@ const { shape, string } = PropTypes;
 
 CheckoutPage.propTypes = { params: shape({ listingId: string.isRequired }).isRequired };
 
-export default CheckoutPage;
+export { CheckoutPage };

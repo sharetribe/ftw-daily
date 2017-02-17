@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 
-const ChangePasswordForm = props => {
+const ChangePasswordFormComponent = props => {
   const { handleSubmit, pristine, submitting } = props;
   return (
     <form onSubmit={handleSubmit}>
@@ -14,6 +14,6 @@ const ChangePasswordForm = props => {
   );
 };
 
-ChangePasswordForm.propTypes = { ...formPropTypes };
+ChangePasswordFormComponent.propTypes = { ...formPropTypes };
 
-export default reduxForm({ form: 'changePassword' })(ChangePasswordForm);
+export const ChangePasswordForm = reduxForm({ form: 'changePassword' })(ChangePasswordFormComponent);

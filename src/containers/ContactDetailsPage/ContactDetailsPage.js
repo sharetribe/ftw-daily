@@ -1,4 +1,4 @@
 import React from 'react';
 import { PageLayout } from '../../components';
 
-export default () => <PageLayout title="Contact details" />;
+export const ContactDetailsPage = () => <PageLayout title="Contact details" />;

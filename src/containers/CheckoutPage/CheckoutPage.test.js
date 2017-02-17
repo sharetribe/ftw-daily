@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
-import CheckoutPage from './CheckoutPage';
+import { CheckoutPage } from './CheckoutPage';
 
 describe('CheckoutPage', () => {
   it('matches snapshot', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderDeep } from '../../util/test-helpers';
-import ChangeAccountPasswordForm from './ChangeAccountPasswordForm';
+import { ChangeAccountPasswordForm } from './ChangeAccountPasswordForm';
 
 describe('ChangeAccountPasswordForm', () => {
   it('matches snapshot', () => {
