@@ -22,67 +22,63 @@ describe('Auth duck', () => {
     it('should be logged out by default', () => {
       const state = reducer();
       expect(state.isAuthenticated).toEqual(false);
-      expect(state.user).toBeNull();
       expect(state.error).toBeNull();
-      expect(state.inProgressState).toEqual(NOTHING_IN_PROGRESS);
     });
 
     it('should login successfully', () => {
-      const email = 'x@x.x';
+      const username = 'x@x.x';
       const password = 'pass';
 
       let state = reducer();
-      state = reducer(state, login(email, password));
+      state = reducer(state, login(username, password));
       expect(state.isAuthenticated).toEqual(false);
-      expect(state.user).toBeNull();
-      expect(state.inProgressState).toEqual(LOGIN_IN_PROGRESS);
       expect(state.error).toBeNull();
 
-      state = reducer(state, loginSuccess({ email, password }));
+      state = reducer(state, loginSuccess());
       expect(state.isAuthenticated).toEqual(true);
-      expect(state.user).toEqual({ email, password });
-      expect(state.inProgressState).toEqual(NOTHING_IN_PROGRESS);
       expect(state.error).toBeNull();
     });
 
     it('should handle failed login', () => {
       let state = reducer();
-      state = reducer(state, login('email', 'pass'));
+      state = reducer(state, login('username', 'pass'));
       expect(state.isAuthenticated).toEqual(false);
-      expect(state.user).toBeNull();
-      expect(state.inProgressState).toEqual(LOGIN_IN_PROGRESS);
       expect(state.error).toBeNull();
 
       const error = new Error('test error');
       state = reducer(state, loginError(error));
       expect(state.isAuthenticated).toEqual(false);
-      expect(state.user).toBeNull();
-      expect(state.inProgressState).toEqual(NOTHING_IN_PROGRESS);
       expect(state.error).toEqual(error);
     });
   });
 
   describe('login worker', () => {
     it('should succeed when API call fulfills', () => {
-      const email = 'email';
+      const username = 'username';
       const password = 'pass';
-      const payload = { email, password };
+      const payload = { username, password };
       const sdk = { login: jest.fn() };
-      const loginAction = login(email, password);
+      const loginAction = login(username, password);
       const worker = callLogin(loginAction, sdk);
-      expect(worker.next()).toEqual({ done: false, value: call(sdk.login, email, password) });
-      expect(worker.next(payload)).toEqual({ done: false, value: put(loginSuccess(payload)) });
+      expect(worker.next()).toEqual({
+        done: false,
+        value: call(sdk.login, { username, password }),
+      });
+      expect(worker.next(payload)).toEqual({ done: false, value: put(loginSuccess()) });
       expect(worker.next().done).toEqual(true);
       expect(sdk.login).not.toHaveBeenCalled();
     });
 
     it('should fail when API call rejects', () => {
-      const email = 'email';
+      const username = 'username';
       const password = 'pass';
       const sdk = { login: jest.fn() };
-      const loginAction = login(email, password);
+      const loginAction = login(username, password);
       const worker = callLogin(loginAction, sdk);
-      expect(worker.next()).toEqual({ done: false, value: call(sdk.login, email, password) });
+      expect(worker.next()).toEqual({
+        done: false,
+        value: call(sdk.login, { username, password }),
+      });
       const error = new Error('Test login failed');
       expect(worker.throw(error)).toEqual({ done: false, value: put(loginError(error)) });
       expect(worker.next().done).toEqual(true);
@@ -122,7 +118,7 @@ describe('Auth duck', () => {
     it('calls login', () => {
       const sdk = { login: jest.fn() };
       const watcher = watchAuth(sdk);
-      const loginAction = login('email', 'password');
+      const loginAction = login('username', 'password');
       const takeLoginOrLogout = take([LOGIN_REQUEST, LOGOUT_REQUEST]);
       const forkLogin = fork(callLogin, loginAction, sdk);
 
@@ -162,8 +158,8 @@ describe('Auth duck', () => {
     it('should cancel login if another login comes', () => {
       const sdk = { login: jest.fn(), logout: jest.fn() };
       const watcher = watchAuth(sdk);
-      const loginAction1 = login('email1', 'password1');
-      const loginAction2 = login('email2', 'password2');
+      const loginAction1 = login('username1', 'password1');
+      const loginAction2 = login('username2', 'password2');
       const task = createMockTask();
       const takeLoginOrLogout = take([LOGIN_REQUEST, LOGOUT_REQUEST]);
       const forkLogin1 = fork(callLogin, loginAction1, sdk);
@@ -197,7 +193,7 @@ describe('Auth duck', () => {
       const sdk = { login: jest.fn(), logout: jest.fn() };
       const historyPush = jest.fn();
       const watcher = watchAuth(sdk);
-      const loginAction = login('email', 'password');
+      const loginAction = login('username', 'password');
       const logoutAction = logout(historyPush);
       const task = createMockTask();
       const takeLoginOrLogout = take([LOGIN_REQUEST, LOGOUT_REQUEST]);

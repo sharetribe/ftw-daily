@@ -16,37 +16,23 @@ export const LOGOUT_ERROR = 'app/Auth/LOGOUT_ERROR';
 
 // ================ Reducer ================ //
 
-export const NOTHING_IN_PROGRESS = 'NOTHING_IN_PROGRESS';
-export const LOGIN_IN_PROGRESS = 'LOGIN_IN_PROGRESS';
-export const LOGOUT_IN_PROGRESS = 'LOGOUT_IN_PROGRESS';
-
-const initialState = {
-  isAuthenticated: false,
-  user: null,
-  inProgressState: NOTHING_IN_PROGRESS,
-  error: null,
-};
+const initialState = { isAuthenticated: false, error: null };
 
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case LOGIN_REQUEST:
-      return { ...state, inProgressState: LOGIN_IN_PROGRESS, error: null };
+      return { ...state, error: null };
     case LOGIN_SUCCESS:
-      return {
-        ...state,
-        inProgressState: NOTHING_IN_PROGRESS,
-        isAuthenticated: true,
-        user: payload,
-      };
+      return { ...state, isAuthenticated: true };
     case LOGIN_ERROR:
-      return { ...state, inProgressState: NOTHING_IN_PROGRESS, error: payload };
+      return { ...state, error: payload };
     case LOGOUT_REQUEST:
-      return { ...state, inProgressState: LOGOUT_IN_PROGRESS, error: null };
+      return { ...state, error: null };
     case LOGOUT_SUCCESS:
-      return { ...state, inProgressState: NOTHING_IN_PROGRESS, isAuthenticated: false, user: null };
+      return { ...state, isAuthenticated: false };
     case LOGOUT_ERROR:
-      return { ...state, inProgressState: NOTHING_IN_PROGRESS, error: payload };
+      return { ...state, error: payload };
     default:
       return state;
   }
@@ -54,8 +40,11 @@ export default function reducer(state = initialState, action = {}) {
 
 // ================ Action creators ================ //
 
-export const login = (email, password) => ({ type: LOGIN_REQUEST, payload: { email, password } });
-export const loginSuccess = user => ({ type: LOGIN_SUCCESS, payload: user });
+export const login = (username, password) => ({
+  type: LOGIN_REQUEST,
+  payload: { username, password },
+});
+export const loginSuccess = () => ({ type: LOGIN_SUCCESS });
 export const loginError = error => ({ type: LOGIN_ERROR, payload: error, error: true });
 
 export const logout = historyPush => ({ type: LOGOUT_REQUEST, payload: { historyPush } });
@@ -66,10 +55,10 @@ export const logoutError = error => ({ type: LOGOUT_ERROR, payload: error, error
 
 export function* callLogin(action, sdk) {
   const { payload } = action;
-  const { email, password } = payload;
+  const { username, password } = payload;
   try {
-    yield call(sdk.login, email, password);
-    yield put(loginSuccess(payload));
+    yield call(sdk.login, { username, password });
+    yield put(loginSuccess());
   } catch (e) {
     yield put(loginError(e));
   }
