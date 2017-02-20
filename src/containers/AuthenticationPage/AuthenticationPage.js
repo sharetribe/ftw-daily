@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { PageLayout, NamedLink, NamedRedirect } from '../../components';
 import { LoginForm, SignUpForm } from '../../containers';
-import { login } from '../../ducks/Auth.ducks';
+import { login } from '../../ducks/Auth.duck';
 
 export const AuthenticationPageComponent = props => {
   const { location, tab, isAuthenticated, onLoginSubmit, onSignUpSubmit } = props;

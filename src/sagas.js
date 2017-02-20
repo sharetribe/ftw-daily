@@ -1,7 +1,7 @@
 import { createInstance } from 'sharetribe-sdk';
 
-import { watchAuth } from './ducks/Auth.ducks';
-import { watchLoadListings } from './containers/SearchPage/SearchPage.ducks';
+import { watchAuth } from './ducks/Auth.duck';
+import { watchLoadListings } from './containers/SearchPage/SearchPage.duck';
 // eslint-disable-next-line no-unused-vars
 import fakeSdk from './util/fakeSDK';
 

@@ -15,7 +15,7 @@ import reducer, {
   logoutError,
   callLogout,
   watchAuth,
-} from './Auth.ducks';
+} from './Auth.duck';
 
 describe('Auth duck', () => {
   describe('reducer', () => {

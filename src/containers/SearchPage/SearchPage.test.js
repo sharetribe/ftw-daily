@@ -11,7 +11,7 @@ import reducer, {
   initialState,
   loadListings,
   watchLoadListings,
-} from './SearchPage.ducks';
+} from './SearchPage.duck';
 
 const { LatLng } = types;
 

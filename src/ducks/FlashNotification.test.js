@@ -3,7 +3,7 @@ import reducer, {
   REMOVE_FLASH_NOTIFICATION,
   addFlashNotification,
   removeFlashNotification,
-} from './FlashNotification.ducks';
+} from './FlashNotification.duck';
 
 describe('FlashNotification', () => {
   describe('actions', () => {

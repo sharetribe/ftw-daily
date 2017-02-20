@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { logout } from '../../ducks/Auth.ducks';
+import { logout } from '../../ducks/Auth.duck';
 import { NamedLink } from '../../components';
 
 import css from './Topbar.css';

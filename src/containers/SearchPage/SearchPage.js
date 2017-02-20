@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { addFlashNotification } from '../../ducks/FlashNotification.ducks';
-import { addFilter, callFetchListings, loadListings } from './SearchPage.ducks';
+import { addFlashNotification } from '../../ducks/FlashNotification.duck';
+import { addFilter, callFetchListings, loadListings } from './SearchPage.duck';
 import css from './SearchPage.css';
 import {
   FilterPanel,
