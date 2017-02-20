@@ -13,10 +13,12 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createInstance, types } from 'sharetribe-sdk';
 import { ClientApp, renderApp } from './app';
 import configureStore from './store';
 import { matchPathname } from './util/routes';
-import rootSaga from './sagas';
+import createRootSaga from './sagas';
+import config from './config';
 
 import './index.css';
 
@@ -25,9 +27,16 @@ if (typeof window !== 'undefined') {
   // eslint-disable-next-line no-underscore-dangle
   const preloadedState = window.__PRELOADED_STATE__ || {};
   const store = configureStore(preloadedState);
-  store.runSaga(rootSaga);
+  const sdk = createInstance({ clientId: config.sdk.clientId, baseUrl: config.sdk.baseUrl });
+
+  store.runSaga(createRootSaga(sdk));
 
   ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
+
+  // Expose stuff for the browser REPL
+  if (config.dev) {
+    window.app = { config, sdk, sdkTypes: types };
+  }
 }
 
 // Export the function for server side rendering.
