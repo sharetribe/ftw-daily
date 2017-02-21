@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { logout } from '../../ducks/Auth.ducks';
+import { logout } from '../../ducks/Auth.duck';
 import { NamedLink } from '../../components';
 
 import css from './Topbar.css';
@@ -11,7 +11,7 @@ const House = () => <span dangerouslySetInnerHTML={{ __html: '&#127968;' }} />;
 /* eslint-enable react/no-danger */
 
 const Topbar = props => {
-  const { isAuthenticated, onLogout, user, push: historyPush } = props;
+  const { isAuthenticated, onLogout, push: historyPush } = props;
   const hamburger = { dangerouslySetInnerHTML: { __html: '&#127828;' } };
 
   const handleChange = e => {
@@ -52,11 +52,7 @@ const Topbar = props => {
       </div>
       <div className={css.user}>
         {isAuthenticated
-          ? <div>
-              Logged in as{' '}
-              {user.email}
-              <button className={css.logoutButton} onClick={handleLogout}>Logout</button>
-            </div>
+          ? <button className={css.logoutButton} onClick={handleLogout}>Logout</button>
           : <NamedLink name="LogInPage">Login</NamedLink>}
       </div>
     </div>
@@ -65,20 +61,16 @@ const Topbar = props => {
 
 Topbar.defaultProps = { user: null };
 
-const { bool, object, func } = PropTypes;
+const { bool, func } = PropTypes;
 
 Topbar.propTypes = {
   isAuthenticated: bool.isRequired,
-  user: object,
   onLogout: func.isRequired,
   // history.push prop from withRouter
   push: func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.Auth.isAuthenticated,
-  user: state.Auth.user,
-});
+const mapStateToProps = state => ({ isAuthenticated: state.Auth.isAuthenticated });
 
 const mapDispatchToProps = dispatch => ({ onLogout: historyPush => dispatch(logout(historyPush)) });
 

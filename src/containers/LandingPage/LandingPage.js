@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { HeroSection, NamedRedirect, PageLayout } from '../../components';
 import { HeroSearchForm } from '../../containers';
-import { changeLocationFilter } from '../../ducks/LocationFilter.ducks';
+import { changeLocationFilter } from '../../ducks/LocationFilter.duck';
 import css from './LandingPage.css';
 
 const createSubmitHandler = onLocationChanged => formData => {
