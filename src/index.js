@@ -13,12 +13,21 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { bindActionCreators } from 'redux';
 import { createInstance, types } from 'sharetribe-sdk';
 import { ClientApp, renderApp } from './app';
 import configureStore from './store';
 import { matchPathname } from './util/routes';
+import * as sample from './util/sample';
 import createRootSaga from './sagas';
 import config from './config';
+import {
+  showListings,
+  queryListings,
+  searchListings,
+  showMarketplace,
+  showUsers,
+} from './ducks/sdk.duck';
 
 import './index.css';
 
@@ -35,7 +44,11 @@ if (typeof window !== 'undefined') {
 
   // Expose stuff for the browser REPL
   if (config.dev) {
-    window.app = { config, sdk, sdkTypes: types };
+    const actions = bindActionCreators(
+      { showListings, queryListings, searchListings, showMarketplace, showUsers },
+      store.dispatch,
+    );
+    window.app = { config, sdk, sdkTypes: types, actions, store, sample };
   }
 }
 
