@@ -21,6 +21,7 @@ import { matchPathname } from './util/routes';
 import * as sample from './util/sample';
 import createRootSaga from './sagas';
 import config from './config';
+import { authInfo } from './ducks/Auth.duck';
 import {
   showListings,
   queryListings,
@@ -31,6 +32,23 @@ import {
 
 import './index.css';
 
+const renderWithAuthInfo = store => {
+  ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
+};
+
+// Wait for the store to have the Auth.authInfoLoaded flag, render the
+// application when the auth information is present.
+const renderWhenAuthInfoLoaded = store => {
+  const unsubscribe = store.subscribe(() => {
+    const authInfoLoaded = store.getState().Auth.authInfoLoaded;
+    if (authInfoLoaded) {
+      unsubscribe();
+      renderWithAuthInfo(store);
+    }
+  });
+  store.dispatch(authInfo());
+};
+
 // If we're in a browser already, render the client application.
 if (typeof window !== 'undefined') {
   // eslint-disable-next-line no-underscore-dangle
@@ -40,7 +58,16 @@ if (typeof window !== 'undefined') {
 
   store.runSaga(createRootSaga(sdk));
 
-  ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
+  const authInfoLoaded = store.getState().Auth.authInfoLoaded;
+
+  // If the server already loaded the auth information, render the app
+  // immediately. Otherwise wait for the flag to be loaded and render
+  // when auth information is present.
+  if (authInfoLoaded) {
+    renderWithAuthInfo(store);
+  } else {
+    renderWhenAuthInfoLoaded(store);
+  }
 
   // Expose stuff for the browser REPL
   if (config.dev) {
