@@ -1,12 +1,12 @@
 import { types } from 'sharetribe-sdk';
-import { mergeRelationships, mergeResourceObjects, mergeEntities } from './data';
+import { combinedRelationships, combinedResourceObjects, updatedEntities } from './data';
 
 const { UUID } = types;
 
 describe('data utils', () => {
-  describe('mergeRelationships()', () => {
+  describe('combinedRelationships()', () => {
     it('handles no rels', () => {
-      expect(mergeRelationships(undefined, undefined)).toEqual(null);
+      expect(combinedRelationships(undefined, undefined)).toEqual(null);
     });
 
     it('takes existings rels if no new rels are given', () => {
@@ -19,7 +19,7 @@ describe('data utils', () => {
           ],
         },
       };
-      expect(mergeRelationships(listingRels, undefined)).toEqual(listingRels);
+      expect(combinedRelationships(listingRels, undefined)).toEqual(listingRels);
     });
 
     it('takes new rels if no existing rels are given', () => {
@@ -27,7 +27,7 @@ describe('data utils', () => {
         author: { data: { id: new UUID('author-id'), type: 'author' } },
         images: { data: { id: new UUID('image1'), type: 'image' } },
       };
-      expect(mergeRelationships(undefined, listingRels)).toEqual(listingRels);
+      expect(combinedRelationships(undefined, listingRels)).toEqual(listingRels);
     });
 
     it('merges two nonempty rels', () => {
@@ -48,7 +48,7 @@ describe('data utils', () => {
 
       const oldListingRels = { author: authorRel, images: imagesRel };
       const newListingRels = { images: newImagesRel, reviews: reviewsRel };
-      expect(mergeRelationships(oldListingRels, newListingRels)).toEqual({
+      expect(combinedRelationships(oldListingRels, newListingRels)).toEqual({
         author: authorRel,
         images: newImagesRel,
         reviews: reviewsRel,
@@ -56,11 +56,11 @@ describe('data utils', () => {
     });
   });
 
-  describe('mergeResourceObjects()', () => {
+  describe('combinedResourceObjects()', () => {
     it("throws if ids don't match", () => {
       const listing1 = { id: new UUID('listing1'), type: 'listing' };
       const listing2 = { id: new UUID('listing2'), type: 'listing' };
-      expect(() => mergeResourceObjects(listing1, listing2)).toThrow(
+      expect(() => combinedResourceObjects(listing1, listing2)).toThrow(
         'Cannot merge resource objects with different ids or types',
       );
     });
@@ -68,7 +68,7 @@ describe('data utils', () => {
     it("throws if types don't match", () => {
       const listing1 = { id: new UUID('listing1'), type: 'listing' };
       const author1 = { id: new UUID('author1'), type: 'author' };
-      expect(() => mergeResourceObjects(listing1, author1)).toThrow(
+      expect(() => combinedResourceObjects(listing1, author1)).toThrow(
         'Cannot merge resource objects with different ids or types',
       );
     });
@@ -76,7 +76,7 @@ describe('data utils', () => {
     it("doesn't add attributes or relationships keys unnecessarily", () => {
       const res1 = { id: new UUID('listing1'), type: 'listing' };
       const res2 = { id: new UUID('listing1'), type: 'listing' };
-      const merged = mergeResourceObjects(res1, res2);
+      const merged = combinedResourceObjects(res1, res2);
       expect(merged).toEqual(res1);
       const keys = Object.keys(merged).sort();
       expect(keys).toEqual(['id', 'type']);
@@ -93,7 +93,7 @@ describe('data utils', () => {
         type: 'listing',
         attributes: { title: 'Changed title', description: 'Some description' },
       };
-      expect(mergeResourceObjects(res1, res2)).toEqual(res2);
+      expect(combinedResourceObjects(res1, res2)).toEqual(res2);
     });
 
     it("keeps old attributes if new does't have any", () => {
@@ -102,7 +102,7 @@ describe('data utils', () => {
 
       const res1 = { id: new UUID('listing1'), type: 'listing', attributes: res1Attributes };
       const res2 = { id: new UUID('listing1'), type: 'listing', relationships: res2Relationships };
-      expect(mergeResourceObjects(res1, res2)).toEqual({
+      expect(combinedResourceObjects(res1, res2)).toEqual({
         id: new UUID('listing1'),
         type: 'listing',
         attributes: res1Attributes,
@@ -111,11 +111,11 @@ describe('data utils', () => {
     });
   });
 
-  describe('mergeEntities()', () => {
+  describe('updatedEntities()', () => {
     it('adds a single entity', () => {
       const listing1 = { id: new UUID('listing1'), type: 'listing' };
       const response = { data: listing1 };
-      const entities = mergeEntities({}, response);
+      const entities = updatedEntities({}, response);
       expect(entities).toEqual({ listing: { listing1 } });
     });
 
@@ -123,7 +123,7 @@ describe('data utils', () => {
       const listing1 = { id: new UUID('listing1'), type: 'listing' };
       const listing2 = { id: new UUID('listing2'), type: 'listing' };
       const response = { data: [listing1, listing2] };
-      const entities = mergeEntities({}, response);
+      const entities = updatedEntities({}, response);
       expect(entities).toEqual({ listing: { listing1, listing2 } });
     });
 
@@ -139,7 +139,7 @@ describe('data utils', () => {
         attributes: { title: 'Listing 2 title', description: 'Listing 2 description' },
       };
       const initialResponse = { data: [listing1, listing2] };
-      const initialEntities = mergeEntities({}, initialResponse);
+      const initialEntities = updatedEntities({}, initialResponse);
       expect(initialEntities).toEqual({ listing: { listing1, listing2 } });
       const author1 = { id: new UUID('author1'), type: 'author' };
       const author1WithAttributes = {
@@ -155,7 +155,7 @@ describe('data utils', () => {
       };
       const included = [author1WithAttributes];
       const response = { data: [listing2Updated], included };
-      const entities = mergeEntities(initialEntities, response, true);
+      const entities = updatedEntities(initialEntities, response, true);
       expect(entities).toEqual({
         listing: { listing1, listing2: listing2Updated },
         author: { author1: author1WithAttributes },

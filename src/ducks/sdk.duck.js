@@ -1,6 +1,6 @@
 /* eslint-disable no-constant-condition, no-console */
 import { call, put, take, fork } from 'redux-saga/effects';
-import { mergeEntities } from '../util/data';
+import { updatedEntities } from '../util/data';
 
 const requestAction = actionType => params => ({ type: actionType, payload: { params } });
 
@@ -44,7 +44,7 @@ const initialState = {
 };
 
 const merge = (state, payload) => {
-  const entities = mergeEntities(state.entities, payload.data);
+  const entities = updatedEntities(state.entities, payload.data);
   return { ...state, entities };
 };
 
