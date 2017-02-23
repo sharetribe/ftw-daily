@@ -1,3 +1,5 @@
+import { reduce } from 'lodash';
+
 /**
  * Combine the given relationships objects
  *
@@ -51,4 +53,50 @@ export const updatedEntities = (oldEntities, apiResponse) => {
   /* eslint-enable no-param-reassign */
 
   return newEntities;
+};
+
+/**
+ * Denormalise the entities with the given IDs from the entities object
+ *
+ * This function calculates the dernormalised tree structure from the
+ * normalised entities object with all the relationships joined in.
+ *
+ * @param {Object} entities entities object in the SDK Redux store
+ * @param {String} type entity type of the given IDs
+ * @param {Array<UUID>} ids IDs to pick from the entities
+ */
+export const denormalisedEntities = (entities, type, ids) => {
+  if (!entities[type] && ids.length > 0) {
+    throw new Error(`No entities of type ${type}`);
+  }
+  return ids.map(id => {
+    const entity = entities[type][id.uuid];
+    if (!entity) {
+      throw new Error(`Entity ${type} with id ${id.uuid} not found`);
+    }
+    const { relationships, ...entityData } = entity;
+
+    if (relationships) {
+      // Recursively join in all the relationship entities
+      return reduce(
+        relationships,
+        (ent, relRef, relName) => {
+          // A relationship reference can be either a single object or
+          // an array of objects. We want to keep that form in the final
+          // result.
+          const hasMultipleRefs = Array.isArray(relRef);
+          const refs = hasMultipleRefs ? relRef : [relRef];
+          const relIds = refs.map(ref => ref.data.id);
+          const relType = refs[0].data.type;
+          const rels = denormalisedEntities(entities, relType, relIds);
+
+          // eslint-disable-next-line no-param-reassign
+          ent[relName] = hasMultipleRefs ? rels : rels[0];
+          return ent;
+        },
+        entityData,
+      );
+    }
+    return entityData;
+  });
 };
