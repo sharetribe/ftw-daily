@@ -6,9 +6,11 @@ import css from './ListingCard.css';
 const ListingCard = props => {
   const { listing } = props;
   const id = listing.id.uuid;
-  const { title, description, address } = listing.attributes;
+  const { title = '', description = '', address = '' } = listing.attributes || {};
   const slug = encodeURIComponent(title.split(' ').join('-'));
-  const authorName = `${listing.author.attributes.profile.firstName} ${listing.author.attributes.profile.lastName}`;
+  const authorName = listing.author && listing.author.attributes
+    ? `${listing.author.attributes.profile.firstName} ${listing.author.attributes.profile.lastName}`
+    : '';
 
   // TODO: these are not yet present in the API data, figure out what
   // to do with them

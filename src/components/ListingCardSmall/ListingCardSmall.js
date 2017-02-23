@@ -5,7 +5,7 @@ import css from './ListingCardSmall.css';
 
 const ListingCardSmall = props => {
   const { listing } = props;
-  const title = listing.attributes.title;
+  const { title = '' } = listing.attributes || {};
   const id = listing.id.uuid;
   const slug = encodeURIComponent(title.split(' ').join('-'));
 
