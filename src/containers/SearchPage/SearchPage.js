@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { addFlashNotification } from '../../ducks/FlashNotification.duck';
-import { addFilter, callFetchListings, loadListings } from './SearchPage.duck';
-import css from './SearchPage.css';
+import { types } from 'sharetribe-sdk';
+import { searchListings, getListingsById } from '../../ducks/sdk.duck';
 import {
   FilterPanel,
   ListingCard,
@@ -13,13 +12,13 @@ import {
   SearchResultsPanel,
 } from '../../components';
 
+import css from './SearchPage.css';
+
+const { LatLng } = types;
+
 export class SearchPageComponent extends Component {
   componentDidMount() {
-    // TODO: This should be moved to Router
-    const { initialListingsLoaded } = this.props;
-    if (!initialListingsLoaded) {
-      this.props.onLoadListings();
-    }
+    SearchPageComponent.loadData(this.props.dispatch);
   }
 
   render() {
@@ -37,12 +36,12 @@ export class SearchPageComponent extends Component {
           </div>
           <div className={listingsClassName}>
             <SearchResultsPanel>
-              {listings.map(l => <ListingCard key={l.id} {...l} />)}
+              {listings.map(l => <ListingCard key={l.id.uuid} listing={l} />)}
             </SearchResultsPanel>
           </div>
           <div className={mapClassName}>
             <MapPanel>
-              {listings.map(l => <ListingCardSmall key={l.id} {...l} />)}
+              {listings.map(l => <ListingCardSmall key={l.id.uuid} listing={l} />)}
             </MapPanel>
           </div>
         </div>
@@ -51,30 +50,23 @@ export class SearchPageComponent extends Component {
   }
 }
 
-SearchPageComponent.loadData = callFetchListings;
+SearchPageComponent.loadData = dispatch => {
+  dispatch(searchListings({ origin: new LatLng(40, 70), include: ['author'] }));
+};
 
 SearchPageComponent.defaultProps = { initialListingsLoaded: false, listings: [], tab: 'listings' };
 
-const { array, bool, func, oneOf } = PropTypes;
+const { array, func, oneOf } = PropTypes;
 
 SearchPageComponent.propTypes = {
-  onLoadListings: func.isRequired,
-  initialListingsLoaded: bool,
   listings: array,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
+  dispatch: func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  initialListingsLoaded: state.SearchPage.initialListingsLoaded,
-  listings: state.SearchPage.listings,
-});
-
-const mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    onAddNotice: msg => dispatch(addFlashNotification('notice', msg)),
-    onAddFilter: (k, v) => dispatch(addFilter(k, v)),
-    onLoadListings: () => dispatch(loadListings.request()),
-  };
+const mapStateToProps = state => {
+  const listingIds = state.data.searchPageResults;
+  return { listings: getListingsById(state.data, listingIds) };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchPageComponent);
+export default connect(mapStateToProps)(SearchPageComponent);
