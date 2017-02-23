@@ -41,12 +41,15 @@ const initialState = {
   showUsersError: null,
   // Database of all the fetched entities.
   entities: {},
+  searchPageResults: [],
 };
 
 const merge = (state, payload) => {
   const entities = updatedEntities(state.entities, payload.data);
   return { ...state, entities };
 };
+
+const searchResults = payload => payload.data.data.map(listing => listing.id);
 
 export default function sdkReducer(state = initialState, action = {}) {
   const { type, payload } = action;
@@ -70,7 +73,7 @@ export default function sdkReducer(state = initialState, action = {}) {
     case SEARCH_LISTINGS_REQUEST:
       return { ...state, searchListingsError: null };
     case SEARCH_LISTINGS_SUCCESS:
-      return merge(state, payload);
+      return { ...merge(state, payload), searchPageResults: searchResults(payload) };
     case SEARCH_LISTINGS_ERROR:
       console.error(payload);
       return { ...state, searchListingsError: payload };
