@@ -24,7 +24,7 @@
     "sharetribe-scripts": "0.8.6",
     "source-map-support": "^0.4.11",
     "url": "^0.11.0",
-    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js.git"
+    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#eab535d1e489e262c72c9fb822a8aac36f22e514"
   },
   "devDependencies": {
     "enzyme": "^2.7.1",

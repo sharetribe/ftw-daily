@@ -6,6 +6,9 @@ import reducer, {
   NOTHING_IN_PROGRESS,
   LOGIN_IN_PROGRESS,
   LOGOUT_IN_PROGRESS,
+  authInfo,
+  authInfoSuccess,
+  authInfoError,
   login,
   loginSuccess,
   loginError,
@@ -21,6 +24,7 @@ describe('Auth duck', () => {
   describe('reducer', () => {
     it('should be logged out by default', () => {
       const state = reducer();
+      expect(state.authInfoLoaded).toEqual(false);
       expect(state.isAuthenticated).toEqual(false);
       expect(state.error).toBeNull();
     });
@@ -49,6 +53,36 @@ describe('Auth duck', () => {
       state = reducer(state, loginError(error));
       expect(state.isAuthenticated).toEqual(false);
       expect(state.error).toEqual(error);
+    });
+
+    it('should set initial state for unauthenticated users', () => {
+      const authInfoLoggedOut = {};
+      const initialState = reducer();
+      expect(initialState.authInfoLoaded).toEqual(false);
+      const state = reducer(initialState, authInfoSuccess(authInfoLoggedOut));
+      expect(state.authInfoLoaded).toEqual(true);
+      expect(state.isAuthenticated).toEqual(false);
+      expect(state.error).toBeNull();
+    });
+
+    it('should set initial state for anonymous users', () => {
+      const authInfoAnonymous = { grantType: 'client_credentials' };
+      const initialState = reducer();
+      expect(initialState.authInfoLoaded).toEqual(false);
+      const state = reducer(initialState, authInfoSuccess(authInfoAnonymous));
+      expect(state.authInfoLoaded).toEqual(true);
+      expect(state.isAuthenticated).toEqual(false);
+      expect(state.error).toBeNull();
+    });
+
+    it('should set initial state for unauthenticated users', () => {
+      const authInfoLoggedIn = { grantType: 'refresh_token' };
+      const initialState = reducer();
+      expect(initialState.authInfoLoaded).toEqual(false);
+      const state = reducer(initialState, authInfoSuccess(authInfoLoggedIn));
+      expect(state.authInfoLoaded).toEqual(true);
+      expect(state.isAuthenticated).toEqual(true);
+      expect(state.error).toBeNull();
     });
   });
 

@@ -2,9 +2,15 @@
 /**
  * Authentication duck.
  */
-import { call, put, take, cancel, fork } from 'redux-saga/effects';
+import { call, put, take, cancel, fork, takeLatest } from 'redux-saga/effects';
+
+const authenticated = authInfo => authInfo.grantType === 'refresh_token';
 
 // ================ Action types ================ //
+
+export const AUTH_INFO_REQUEST = 'app/Auth/AUTH_INFO_REQUEST';
+export const AUTH_INFO_SUCCESS = 'app/Auth/AUTH_INFO_SUCCESS';
+export const AUTH_INFO_ERROR = 'app/Auth/AUTH_INFO_ERROR';
 
 export const LOGIN_REQUEST = 'app/Auth/LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'app/Auth/LOGIN_SUCCESS';
@@ -16,17 +22,25 @@ export const LOGOUT_ERROR = 'app/Auth/LOGOUT_ERROR';
 
 // ================ Reducer ================ //
 
-const initialState = { isAuthenticated: false, error: null };
+const initialState = { authInfoLoaded: false, isAuthenticated: false, error: null };
 
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
+    case AUTH_INFO_REQUEST:
+      return { ...state, error: null };
+    case AUTH_INFO_SUCCESS:
+      return { ...state, authInfoLoaded: true, isAuthenticated: authenticated(payload) };
+    case AUTH_INFO_ERROR:
+      return { ...state, error: payload };
+
     case LOGIN_REQUEST:
       return { ...state, error: null };
     case LOGIN_SUCCESS:
       return { ...state, isAuthenticated: true };
     case LOGIN_ERROR:
       return { ...state, error: payload };
+
     case LOGOUT_REQUEST:
       return { ...state, error: null };
     case LOGOUT_SUCCESS:
@@ -40,6 +54,10 @@ export default function reducer(state = initialState, action = {}) {
 
 // ================ Action creators ================ //
 
+export const authInfo = () => ({ type: AUTH_INFO_REQUEST });
+export const authInfoSuccess = info => ({ type: AUTH_INFO_SUCCESS, payload: info });
+export const authInfoError = error => ({ type: AUTH_INFO_ERROR, payload: error, error: true });
+
 export const login = (username, password) => ({
   type: LOGIN_REQUEST,
   payload: { username, password },
@@ -52,6 +70,15 @@ export const logoutSuccess = () => ({ type: LOGOUT_SUCCESS });
 export const logoutError = error => ({ type: LOGOUT_ERROR, payload: error, error: true });
 
 // ================ Worker sagas ================ //
+
+export function* callAuthInfo(sdk) {
+  try {
+    const info = yield call(sdk.authInfo);
+    yield put(authInfoSuccess(info));
+  } catch (e) {
+    yield put(authInfoError(e));
+  }
+}
 
 export function* callLogin(action, sdk) {
   const { payload } = action;
@@ -77,6 +104,10 @@ export function* callLogout(action, sdk) {
 }
 
 // ================ Watcher sagas ================ //
+
+export function* watchAuthInfo(sdk) {
+  yield takeLatest(AUTH_INFO_REQUEST, callAuthInfo, sdk);
+}
 
 export function* watchAuth(sdk) {
   let task;
