@@ -1,11 +1,19 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { NamedLink } from '../../components';
+import * as propTypes from '../../util/propTypes';
 import css from './ListingCardSmall.css';
 
-// <NamedLink name="SearchListingsPage">X</NamedLink>
 const ListingCardSmall = props => {
-  const { id, title, price, review } = props;
+  const { listing } = props;
+  const title = listing.attributes.title;
+  const id = listing.id.uuid;
   const slug = encodeURIComponent(title.split(' ').join('-'));
+
+  // TODO: these are not yet present in the API data, figure out what
+  // to do with them
+  const price = '55\u20AC / day';
+  const review = { rating: 3, count: 10 };
+
   return (
     <div className={css.listing}>
       <div className={css.squareWrapper}>
@@ -29,15 +37,6 @@ const ListingCardSmall = props => {
   );
 };
 
-ListingCardSmall.defaultProps = { review: {} };
-
-const { number, shape, string } = PropTypes;
-
-ListingCardSmall.propTypes = {
-  id: number.isRequired,
-  title: string.isRequired,
-  price: string.isRequired,
-  review: shape({ rating: string.isRequired, count: string.isRequired }),
-};
+ListingCardSmall.propTypes = { listing: propTypes.listing.isRequired };
 
 export default ListingCardSmall;

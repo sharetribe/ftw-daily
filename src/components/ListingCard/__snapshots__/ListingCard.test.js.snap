@@ -13,27 +13,27 @@ exports[`ListingCard matches snapshot 1`] = `
         name="ListingPage"
         params={
           Object {
-            "id": "some-id",
-            "slug": "Banyan-Studios",
+            "id": "listing1",
+            "slug": "listing1-title",
           }
         }>
-        Banyan Studios
+        listing1 title
       </withFlattenedRoutes(withRouter(NamedLink))>
       <div>
         55€ / day
       </div>
     </div>
     <div>
-      Organic Music Production in a Sustainable, Ethical and Professional Studio.
+      listing1 description
     </div>
     <div>
       <div>
-        New York, NY • 40mi away
+        listing1 address
       </div>
       <div>
         (
         <span>
-          4
+          3
         </span>
         <span>
           /5
@@ -41,7 +41,8 @@ exports[`ListingCard matches snapshot 1`] = `
         )
          
         <span>
-          8 reviews
+          10
+           reviews
         </span>
       </div>
     </div>
@@ -49,12 +50,12 @@ exports[`ListingCard matches snapshot 1`] = `
     <div>
       <div>
         <img
-          alt="The Stardust Collective"
+          alt="user1 first name user1 last name"
           src="http://placehold.it/44x44" />
       </div>
       <div>
         <span>
-          The Stardust Collective
+          user1 first name user1 last name
         </span>
         <div>
           review: 
