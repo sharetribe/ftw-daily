@@ -44,10 +44,11 @@
     "eject": "sharetribe-scripts eject",
     "start": "node server/index.js",
     "dev-server": "yarn run build&&nodemon --watch server server/index.js",
+    "heroku-prebuild": "./heroku-copy-ssh-key-from-env.sh",
     "heroku-postbuild": "yarn run build"
   },
   "engines": {
     "node": "6.9.4",
-    "yarn": "0.19.1"
+    "yarn": "0.20.3"
   }
 }
