@@ -29,6 +29,7 @@ import {
   showMarketplace,
   showUsers,
 } from './ducks/sdk.duck';
+import routeConfiguration from './routesConfiguration';
 
 import './index.css';
 
@@ -75,7 +76,7 @@ if (typeof window !== 'undefined') {
       { showListings, queryListings, searchListings, showMarketplace, showUsers },
       store.dispatch,
     );
-    window.app = { config, sdk, sdkTypes: types, actions, store, sample };
+    window.app = { config, sdk, sdkTypes: types, actions, store, sample, routeConfiguration };
   }
 }
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-constant-condition, no-console */
 import { call, put, take, fork } from 'redux-saga/effects';
-import { updatedEntities } from '../util/data';
+import { updatedEntities, denormalisedEntities } from '../util/data';
 
 const requestAction = actionType => params => ({ type: actionType, payload: { params } });
 
@@ -41,12 +41,15 @@ const initialState = {
   showUsersError: null,
   // Database of all the fetched entities.
   entities: {},
+  searchPageResults: [],
 };
 
 const merge = (state, payload) => {
   const entities = updatedEntities(state.entities, payload.data);
   return { ...state, entities };
 };
+
+const searchResults = payload => payload.data.data.map(listing => listing.id);
 
 export default function sdkReducer(state = initialState, action = {}) {
   const { type, payload } = action;
@@ -70,7 +73,7 @@ export default function sdkReducer(state = initialState, action = {}) {
     case SEARCH_LISTINGS_REQUEST:
       return { ...state, searchListingsError: null };
     case SEARCH_LISTINGS_SUCCESS:
-      return merge(state, payload);
+      return { ...merge(state, payload), searchPageResults: searchResults(payload) };
     case SEARCH_LISTINGS_ERROR:
       console.error(payload);
       return { ...state, searchListingsError: payload };
@@ -96,24 +99,44 @@ export default function sdkReducer(state = initialState, action = {}) {
   }
 }
 
+// ================ Selectors ================ //
+
+/**
+ * Get the denormalised listing entities with the given IDs
+ *
+ * @param {Object} data the state part of the Redux store for this SDK reducer
+ * @param {Array<UUID>} listingIds listing IDs to select from the store
+ */
+export const getListingsById = (data, listingIds) =>
+  denormalisedEntities(data.entities, 'listing', listingIds);
+
 // ================ Action creators ================ //
 
+// All the action creators that don't have the {Success, Error} suffix
+// take the params object that the corresponding SDK endpoint method
+// expects.
+
+// SDK method: listings.show
 export const showListings = requestAction(SHOW_LISTINGS_REQUEST);
 export const showListingsSuccess = successAction(SHOW_LISTINGS_SUCCESS);
 export const showListingsError = errorAction(SHOW_LISTINGS_ERROR);
 
+// SDK method: listings.query
 export const queryListings = requestAction(QUERY_LISTINGS_REQUEST);
 export const queryListingsSuccess = successAction(QUERY_LISTINGS_SUCCESS);
 export const queryListingsError = errorAction(QUERY_LISTINGS_ERROR);
 
+// SDK method: listings.search
 export const searchListings = requestAction(SEARCH_LISTINGS_REQUEST);
 export const searchListingsSuccess = successAction(SEARCH_LISTINGS_SUCCESS);
 export const searchListingsError = errorAction(SEARCH_LISTINGS_ERROR);
 
+// SDK method: marketplace.show
 export const showMarketplace = requestAction(SHOW_MARKETPLACE_REQUEST);
 export const showMarketplaceSuccess = successAction(SHOW_MARKETPLACE_SUCCESS);
 export const showMarketplaceError = errorAction(SHOW_MARKETPLACE_ERROR);
 
+// SDK method: users.show
 export const showUsers = requestAction(SHOW_USERS_REQUEST);
 export const showUsersSuccess = successAction(SHOW_USERS_SUCCESS);
 export const showUsersError = errorAction(SHOW_USERS_ERROR);

@@ -41,8 +41,29 @@ export const route = shape({
   loadData: func,
 });
 
-// User object from the API
-export const user = shape({ id: uuid.isRequired, type: value('user').isRequired });
+// Denormalised user object
+export const user = shape({
+  id: uuid.isRequired,
+  type: value('user').isRequired,
+  attributes: shape({
+    email: string.isRequired,
+    profile: shape({
+      firstName: string.isRequired,
+      lastName: string.isRequired,
+      slug: string.isRequired,
+    }).isRequired,
+  }),
+});
 
-// Listing object from the API
-export const listing = shape({ id: uuid.isRequired, type: value('listing').isRequired });
+// Denormalised listing object
+export const listing = shape({
+  id: uuid.isRequired,
+  type: value('listing').isRequired,
+  attributes: shape({
+    title: string.isRequired,
+    description: string.isRequired,
+    address: string.isRequired,
+    geolocation: latlng.isRequired,
+  }),
+  author: user,
+});

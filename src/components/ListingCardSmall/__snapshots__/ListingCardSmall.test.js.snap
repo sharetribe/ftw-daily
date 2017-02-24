@@ -12,16 +12,16 @@ exports[`ListingCardSmall matches snapshot 1`] = `
       name="ListingPage"
       params={
         Object {
-          "id": 123,
-          "slug": "Banyan-Studios",
+          "id": "listing1",
+          "slug": "listing1-title",
         }
       }>
-      Banyan Studios
+      listing1 title
     </withFlattenedRoutes(withRouter(NamedLink))>
     <div>
       (
       <span>
-        4
+        3
       </span>
       <span>
         /5
@@ -29,7 +29,7 @@ exports[`ListingCardSmall matches snapshot 1`] = `
       )
        
       <span>
-        8 reviews
+        10
       </span>
     </div>
     <div>
