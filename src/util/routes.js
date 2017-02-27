@@ -84,8 +84,7 @@ export const withFlattenedRoutes = Component => {
     <Component flattenedRoutes={context.flattenedRoutes} {...props} />
   );
 
-  WithFlattenedRoutesComponent.displayName = `withFlattenedRoutes(${Component.displayName ||
-    Component.name})`;
+  WithFlattenedRoutesComponent.displayName = `withFlattenedRoutes(${Component.displayName || Component.name})`;
 
   const { arrayOf } = PropTypes;
 

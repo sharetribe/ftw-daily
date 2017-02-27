@@ -12,8 +12,7 @@ const info = {
     { id: 4, title: 'img4', imageUrl: 'http://placehold.it/750x470' },
     { id: 5, title: 'img5', imageUrl: 'http://placehold.it/750x470' },
   ],
-  description: (
-    `
+  description: `
   <p>
   Organic Music Production in a Sustainable, Ethical and Professional Studio.
   </p>
@@ -24,20 +23,17 @@ const info = {
   Banyan Studios is a comfortable, conscious, inspiring and creative retreat for musicians trying to convey their message through state of the art Audio & Video.
   </p>
   <a href="https://vimeo.com/168106603" alt="video">https://vimeo.com/168106603</a>
-  `
-  ),
+  `,
   reviews: [
     {
       id: 1,
       reviewer: { avatar: 'http://placehold.it/44x44', name: 'Vesa L.', date: 'January 2017' },
       rating: 4,
-      review: (
-        `
+      review: `
         Great studio in the New York for music professionals. Everything you need
         can be found from here and John was helpful with the right settings -
         we even got some tips for our songs! :)
-        `
-      ),
+        `,
     },
   ],
 };
