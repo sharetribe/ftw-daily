@@ -80,16 +80,19 @@ export const loadListings = {
    # { id: 123, type: 'user', attributes: { name: "John" }},
    ```
   */
-const lookupMap = included => included.reduce((memo, resource) => {
-  const { type, id } = resource;
+const lookupMap = included => included.reduce(
+  (memo, resource) => {
+    const { type, id } = resource;
 
-  // eslint-disable-next-line no-param-reassign
-  memo[type] = memo[type] || {};
-  // eslint-disable-next-line no-param-reassign
-  memo[type][id.uuid] = resource;
+    // eslint-disable-next-line no-param-reassign
+    memo[type] = memo[type] || {};
+    // eslint-disable-next-line no-param-reassign
+    memo[type][id.uuid] = resource;
 
-  return memo;
-}, {});
+    return memo;
+  },
+  {},
+);
 
 // Format the data as ListingCard component expects it and
 // add some fake data

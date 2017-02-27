@@ -77,8 +77,7 @@ function fetchInitialState(requestUrl) {
 
   // pathname may match with several routes (if they don't have exact=true)
   // We filter all the components form matched routes that have `loadData`
-  const initialFetches = _
-    .chain(matchedRoutes)
+  const initialFetches = _.chain(matchedRoutes)
     .filter(r => r.loadData)
     .map(r => sagaEffects.fork(r.loadData, sdk))
     .value();
@@ -92,8 +91,9 @@ function fetchInitialState(requestUrl) {
   if (initialFetches.length > 0) {
     const fetchPromise = new Promise((resolve, reject) => {
       const store = configureStore({});
-      store.runSaga(fetchInitialData).done
-        .then(() => {
+      store
+        .runSaga(fetchInitialData)
+        .done.then(() => {
           resolve(store.getState());
         })
         .catch(e => {
