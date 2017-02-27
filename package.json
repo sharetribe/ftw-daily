@@ -21,8 +21,8 @@
     "redux-form": "^6.5.0",
     "redux-saga": "^0.14.3",
     "sanitize.css": "^4.1.0",
-    "sharetribe-scripts": "0.8.6",
-    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#458cf2f94a78156aadb0ab1a325176f568992e21",
+    "sharetribe-scripts": "0.9.2",
+    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#fd1232a18f86cdef3335b465b53fc4721048091f",
     "source-map-support": "^0.4.11",
     "url": "^0.11.0"
   },
@@ -48,7 +48,7 @@
     "heroku-postbuild": "yarn run build"
   },
   "engines": {
-    "node": "6.9.4",
+    "node": "6.9.5",
     "yarn": "0.20.3"
   }
 }
