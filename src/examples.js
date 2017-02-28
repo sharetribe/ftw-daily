@@ -1,5 +1,8 @@
+// components
 import * as BookingInfo from './components/BookingInfo/BookingInfo.example';
+import * as NamedLink from './components/NamedLink/NamedLink.example';
 
+// containers
 import * as ChangeAccountPasswordForm
   from './containers/ChangeAccountPasswordForm/ChangeAccountPasswordForm.example';
 import * as ChangePasswordForm from './containers/ChangePasswordForm/ChangePasswordForm.example';
@@ -15,6 +18,7 @@ export {
   ChangePasswordForm,
   HeroSearchForm,
   LoginForm,
+  NamedLink,
   PasswordForgottenForm,
   SignUpForm,
 };
