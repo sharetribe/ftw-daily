@@ -1,5 +1,6 @@
 import React from 'react';
-import { renderShallow, createUser, createListing } from '../../util/test-helpers';
+import { renderShallow } from '../../util/test-helpers';
+import { createUser, createListing } from '../../util/test-data';
 import ListingCard from './ListingCard';
 
 describe('ListingCard', () => {
