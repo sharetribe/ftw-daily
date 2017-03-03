@@ -58,20 +58,32 @@ export class ListingPageComponent extends Component {
     const title = currentListing ? currentListing.attributes.title : '';
     const description = currentListing ? currentListing.attributes.description : '';
 
+    // TODO Responsive image-objects need to be thought through when final image sizes are know
+    const images = currentListing && currentListing.images
+      ? currentListing.images.map(i => ({ id: i.id, sizes: i.attributes.sizes }))
+      : [];
+
+    // TODO componentize
+    const imageCarousel =  images.length > 0
+      ? (
+          <div className={css.imageContainer}>
+            <img className={css.mainImage} alt={title} src={images[0].sizes[0].url} />
+            <div className={css.thumbnailContainer}>
+              {images.slice(1).map(image => (
+                <div key={image.id.uuid} className={css.squareWrapper}>
+                  <div className={css.aspectWrapper}>
+                    <img className={css.thumbnail} alt={`${title} thumbnail`} src={image.sizes[0].url} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          )
+      : null;
+
     const pageContent = (
       <PageLayout title={`${title} ${info.price}`}>
-        <div className={css.imageContainer}>
-          <img className={css.mainImage} alt={info.images[0].title} src={info.images[0].imageUrl} />
-          <div className={css.thumbnailContainer}>
-            {info.images.slice(1).map(image => (
-              <div key={image.id} className={css.squareWrapper}>
-                <div className={css.aspectWrapper}>
-                  <img className={css.thumbnail} alt={image.title} src={image.imageUrl} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        { imageCarousel }
         {/* eslint-disable react/no-danger */}
         <div className={css.description} dangerouslySetInnerHTML={{ __html: description }} />
         {/* eslint-enable react/no-danger */}
@@ -157,7 +169,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLoadListing: id => dispatch(showListings({ id, include: ['author'] })),
+    onLoadListing: id => dispatch(showListings({ id, include: ['author', 'images'] })),
   };
 };
 
