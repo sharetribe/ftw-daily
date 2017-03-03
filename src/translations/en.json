@@ -3,5 +3,6 @@
   "HeroSearchForm.placeholder": "Location search (soon)",
   "HeroSearchForm.search": "Search",
   "HeroSection.title": "Book Studiotime anywhere",
-  "HeroSection.subTitle": "The largest online community to rent music studios"
+  "HeroSection.subTitle": "The largest online community to rent music studios",
+  "ListingPage.loadingListingData": "Loading listing data"
 }

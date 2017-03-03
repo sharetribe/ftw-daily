@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { types } from 'sharetribe-sdk';
 import { NamedLink, PageLayout } from '../../components';
@@ -44,21 +45,21 @@ const info = {
 
 // N.B. All the presentational content needs to be extracted to their own components
 export class ListingPageComponent extends Component {
-
   componentDidMount() {
     ListingPageComponent.loadData(this.props.params.id, this.props.onLoadListing);
   }
 
   render() {
-    const { entitiesData, params } = this.props;
+    const { entitiesData, intl, params } = this.props;
     const id = new types.UUID(params.id);
-    const currentListing = entitiesData.entities.listing ? getListingsById(entitiesData, [id])[0] : null;
+    const currentListing = entitiesData.entities.listing
+      ? getListingsById(entitiesData, [id])[0]
+      : null;
 
     const title = currentListing ? currentListing.attributes.title : '';
     const description = currentListing ? currentListing.attributes.description : '';
 
-    // TODO render "loading" or blank page, if currentListing is null.
-    return (
+    const pageContent = (
       <PageLayout title={`${title} ${info.price}`}>
         <div className={css.imageContainer}>
           <img className={css.mainImage} alt={info.images[0].title} src={info.images[0].imageUrl} />
@@ -120,8 +121,17 @@ export class ListingPageComponent extends Component {
         </NamedLink>
       </PageLayout>
     );
+
+    const loadingPageMsg = {
+      id: 'ListingPage.loadingListingData',
+      defaultMessage: 'Loading listing data',
+    };
+
+    const loadingContent = <PageLayout title={intl.formatMessage(loadingPageMsg)} />;
+
+    return currentListing ? pageContent : loadingContent;
   }
-};
+}
 
 ListingPageComponent.loadData = (id, onLoadListing) => {
   onLoadListing(id);
@@ -133,6 +143,7 @@ const { func, object, shape, string } = PropTypes;
 
 ListingPageComponent.propTypes = {
   entitiesData: object.isRequired,
+  intl: intlShape.isRequired,
   onLoadListing: func.isRequired,
   params: shape({
     id: string.isRequired,
@@ -142,14 +153,14 @@ ListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { data, ListingPage } = state;
-  const entitiesData = data ? data : {};
+  const entitiesData = data || {};
   return { ListingPage, entitiesData };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onLoadListing: (id) => dispatch(showListings({ id, include: ['author'] })),
+    onLoadListing: id => dispatch(showListings({ id, include: ['author'] })),
   };
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListingPageComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(ListingPageComponent));
