@@ -125,7 +125,6 @@ export class ListingPageComponent extends Component {
       id: 'ListingPage.loadingListingData',
       defaultMessage: 'Loading listing data',
     };
-
     const loadingContent = <PageLayout title={intl.formatMessage(loadingPageMsg)} />;
 
     return currentListing ? pageContent : loadingContent;
