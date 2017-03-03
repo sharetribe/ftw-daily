@@ -25,7 +25,7 @@ describe('Application', () => {
     const urlTitles = {
       '/': 'Landing page',
       '/s': 'Search page',
-      '/l/listing-title-slug/1234': 'Banyan Studios 55€ / day',
+      '/l/listing-title-slug/1234': 'Loading listing data',
       '/u/1234': 'Profile page with display name: 1234',
       '/checkout/1234': 'Book Banyan Studios (1234)',
       '/login': 'Authentication page: login tab',
