@@ -84,10 +84,10 @@ export const denormalisedEntities = (entities, type, ids) => {
           // A relationship reference can be either a single object or
           // an array of objects. We want to keep that form in the final
           // result.
-          const hasMultipleRefs = Array.isArray(relRef);
-          const refs = hasMultipleRefs ? relRef : [relRef];
-          const relIds = refs.map(ref => ref.data.id);
-          const relType = refs[0].data.type;
+          const hasMultipleRefs = Array.isArray(relRef.data);
+          const refs = hasMultipleRefs ? relRef.data : [relRef.data];
+          const relIds = refs.map(ref => ref.id);
+          const relType = refs[0].type;
           const rels = denormalisedEntities(entities, relType, relIds);
 
           // eslint-disable-next-line no-param-reassign
