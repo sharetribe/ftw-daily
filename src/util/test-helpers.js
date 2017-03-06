@@ -46,3 +46,15 @@ export const renderDeep = component => {
   );
   return comp.toJSON();
 };
+
+// Create fake Internalization object to help with shallow rendering.
+export const fakeIntl = {
+  formatDate: d => d,
+  formatHTMLMessage: d => d,
+  formatMessage: msg => msg.defaultMessage,
+  formatNumber: d => d,
+  formatPlural: d => d,
+  formatRelative: d => d,
+  formatTime: d => d,
+  now: d => d,
+};

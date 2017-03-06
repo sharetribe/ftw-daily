@@ -1,6 +1,6 @@
 exports[`ListingPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
-  title="Banyan Studios 55€ / day">
+  title="listing1 title 55€ / day">
   <div>
     <img
       alt="img1"
@@ -39,18 +39,7 @@ exports[`ListingPage matches snapshot 1`] = `
   <div
     dangerouslySetInnerHTML={
       Object {
-        "__html": "
-        <p>
-        Organic Music Production in a Sustainable, Ethical and Professional Studio.
-        </p>
-        <p>
-        Social Permaculture focuses on nourishing our environment with abundance instead of depleting it.
-        </p>
-        <p>
-        Banyan Studios is a comfortable, conscious, inspiring and creative retreat for musicians trying to convey their message through state of the art Audio & Video.
-        </p>
-        <a href=\"https://vimeo.com/168106603\" alt=\"video\">https://vimeo.com/168106603</a>
-        ",
+        "__html": "listing1 description",
       }
     } />
   <div>
@@ -129,7 +118,7 @@ exports[`ListingPage matches snapshot 1`] = `
         "id": 12345,
       }
     }>
-    Book Banyan Studios
+    Book listing1 title
   </withFlattenedRoutes(withRouter(NamedLink))>
 </Connect(withRouter(PageLayout))>
 `;
