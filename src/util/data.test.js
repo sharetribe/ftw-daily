@@ -255,7 +255,7 @@ describe('data utils', () => {
       const listing1 = createListing('listing1');
       const listing1Relationships = {
         author: { data: user1 },
-        images: [{ data: image1 }, { data: image2 }],
+        images: { data: [image1, image2] },
       };
       const listing1WithRelationships = { ...listing1, relationships: listing1Relationships };
       const listing2 = createListing('listing2');

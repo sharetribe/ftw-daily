@@ -1,41 +1,6 @@
 exports[`ListingPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   title="listing1 title 55€ / day">
-  <div>
-    <img
-      alt="img1"
-      src="http://placehold.it/750x470" />
-    <div>
-      <div>
-        <div>
-          <img
-            alt="img2"
-            src="http://placehold.it/750x470" />
-        </div>
-      </div>
-      <div>
-        <div>
-          <img
-            alt="img3"
-            src="http://placehold.it/750x470" />
-        </div>
-      </div>
-      <div>
-        <div>
-          <img
-            alt="img4"
-            src="http://placehold.it/750x470" />
-        </div>
-      </div>
-      <div>
-        <div>
-          <img
-            alt="img5"
-            src="http://placehold.it/750x470" />
-        </div>
-      </div>
-    </div>
-  </div>
   <div
     dangerouslySetInnerHTML={
       Object {
