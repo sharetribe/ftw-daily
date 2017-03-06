@@ -111,7 +111,6 @@ export const getListingsById = (data, listingIds) => {
   try {
     return denormalisedEntities(data.entities, 'listing', listingIds);
   } catch (e) {
-    console.error(`Could not denormalise entities with given ids (${listingIds.map(id => id.uuid)}). Error: ${e}`);
     return [];
   }
 };
