@@ -7,13 +7,10 @@ const HeroSection = props => (
     <div className={css.content}>
       <div className={css.titleWrapper}>
         <div className={css.title}>
-          <FormattedMessage id={'HeroSection.title'} defaultMessage={'Book Studiotime anywhere'} />
+          <FormattedMessage id="HeroSection.title" />
         </div>
         <div className={css.subTitle}>
-          <FormattedMessage
-            id={'HeroSection.subTitle'}
-            defaultMessage={'The largest online community to rent music studios'}
-          />
+          <FormattedMessage id="HeroSection.subTitle" />
         </div>
       </div>
       <div className={css.ctaWrapper}>
