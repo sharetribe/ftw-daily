@@ -52,9 +52,8 @@ export class ListingPageComponent extends Component {
   render() {
     const { entitiesData, intl, params } = this.props;
     const id = new types.UUID(params.id);
-    const currentListing = entitiesData.entities.listing
-      ? getListingsById(entitiesData, [id])[0]
-      : null;
+    const listingsById = getListingsById(entitiesData, [id]);
+    const currentListing = listingsById.length > 0 ? listingsById[0] : null;
 
     const title = currentListing ? currentListing.attributes.title : '';
     const description = currentListing ? currentListing.attributes.description : '';
