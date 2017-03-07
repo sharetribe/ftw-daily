@@ -6,6 +6,7 @@
   "HeroSection.subTitle": "The largest online community to rent music studios",
   "HeroSection.title": "Book Studiotime anywhere",
   "ListingPage.loadingListingData": "Loading listing data",
+  "ListingPage.noListingData": "Could not find listing data",
   "PageLayout.authInfoFailed": "Could not get authentication information.",
   "PageLayout.logoutFailed": "Logout failed. Please try again."
 }

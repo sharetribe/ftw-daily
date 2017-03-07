@@ -133,13 +133,14 @@ export class ListingPageComponent extends Component {
       </PageLayout>
     );
 
-    const loadingPageMsg = {
-      id: 'ListingPage.loadingListingData',
-      defaultMessage: 'Loading listing data',
-    };
+    const loadingPageMsg = { id: 'ListingPage.loadingListingData' };
     const loadingContent = <PageLayout title={intl.formatMessage(loadingPageMsg)} />;
 
-    return currentListing ? pageContent : loadingContent;
+    const noDataMsg = { id: 'ListingPage.noListingData' };
+    const noDataError = <PageLayout title={intl.formatMessage(noDataMsg)} />;
+    const loadingOrError = entitiesData.showListingsError ? noDataError : loadingContent;
+
+    return currentListing ? pageContent : loadingOrError;
   }
 }
 
