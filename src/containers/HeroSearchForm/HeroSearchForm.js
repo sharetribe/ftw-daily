@@ -6,10 +6,7 @@ import css from './HeroSearchForm.css';
 const HeroSearchForm = props => {
   const { className, intl, handleSubmit, pristine, submitting } = props;
   const addClassName = className ? { className } : {};
-  const placeholderMsg = {
-    id: 'HeroSearchForm.placeholder',
-    defaultMessage: 'Location search (soon)',
-  };
+  const placeholderMsg = { id: 'HeroSearchForm.placeholder' };
 
   return (
     <form {...addClassName} onSubmit={handleSubmit}>
@@ -21,7 +18,7 @@ const HeroSearchForm = props => {
         placeholder={intl.formatMessage(placeholderMsg)}
       />
       <button className={css.locationButton} type="submit" disabled={pristine || submitting}>
-        <FormattedMessage id="HeroSearchForm.search" defaultMessage="Search" />
+        <FormattedMessage id="HeroSearchForm.search" />
       </button>
     </form>
   );

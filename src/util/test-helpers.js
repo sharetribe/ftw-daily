@@ -2,17 +2,20 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import en from 'react-intl/locale-data/en';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from '../store';
+import localeData from '../translations/en.json';
 
 // Provide all the context for components that connect to the Redux
 // store, i18n, router, etc.
 export const TestProvider = props => {
   const store = configureStore();
+  addLocaleData([...en]);
   return (
-    <IntlProvider locale="en">
+    <IntlProvider locale="en" messages={localeData}>
       <BrowserRouter>
         <Provider store={store}>
           {props.children}

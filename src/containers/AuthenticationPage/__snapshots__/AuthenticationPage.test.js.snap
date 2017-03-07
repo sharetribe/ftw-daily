@@ -2,7 +2,9 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   title="Authentication page: signup tab">
   <p>
-    You must log in to view the page at
+    <FormattedMessage
+      id="AuthenticationPage.loginRequiredFor"
+      values={Object {}} />
     <code>
       /protected
     </code>

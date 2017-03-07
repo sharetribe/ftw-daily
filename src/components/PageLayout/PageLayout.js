@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import { Topbar } from '../../containers';
 
 const scrollToTop = () => {
@@ -21,12 +22,32 @@ class PageLayout extends Component {
   }
 
   render() {
-    const { className, title, children, authError } = this.props;
-    // TODO: use FlashMessages for authError
+    const { className, title, children, authInfoError, logoutError } = this.props;
+
+    // TODO: use FlashMessages for auth errors
+
+    /* eslint-disable no-console */
+    if (authInfoError && console && console.error) {
+      console.error(authInfoError);
+    }
+    if (logoutError && console && console.error) {
+      console.error(logoutError);
+    }
+    /* eslint-enable no-console */
+
     return (
       <div className={className}>
         <Helmet title={title} />
-        {authError ? <p style={{ color: 'red' }}>Error in auth: {authError.message}</p> : null}
+        {authInfoError
+          ? <div style={{ color: 'red' }}>
+              <FormattedMessage id="PageLayout.authInfoFailed" />
+            </div>
+          : null}
+        {logoutError
+          ? <div style={{ color: 'red' }}>
+              <FormattedMessage id="PageLayout.logoutFailed" />
+            </div>
+          : null}
         <Topbar />
         <h1>{title}</h1>
         {children}
@@ -37,17 +58,21 @@ class PageLayout extends Component {
 
 const { any, string, instanceOf, func } = PropTypes;
 
-PageLayout.defaultProps = { className: '', children: null, authError: null };
+PageLayout.defaultProps = { className: '', children: null, authInfoError: null, logoutError: null };
 
 PageLayout.propTypes = {
   className: string,
   title: string.isRequired,
   children: any,
-  authError: instanceOf(Error),
+  authInfoError: instanceOf(Error),
+  logoutError: instanceOf(Error),
   // history.listen function from withRouter
   listen: func.isRequired,
 };
 
-const mapStateToProps = state => ({ authError: state.Auth.error });
+const mapStateToProps = state => ({
+  authInfoError: state.Auth.authInfoError,
+  logoutError: state.Auth.logoutError,
+});
 
 export default connect(mapStateToProps)(withRouter(PageLayout));
