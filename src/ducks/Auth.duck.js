@@ -22,31 +22,37 @@ export const LOGOUT_ERROR = 'app/Auth/LOGOUT_ERROR';
 
 // ================ Reducer ================ //
 
-const initialState = { authInfoLoaded: false, isAuthenticated: false, error: null };
+const initialState = {
+  authInfoLoaded: false,
+  isAuthenticated: false,
+  authInfoError: null,
+  loginError: null,
+  logoutError: null,
+};
 
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case AUTH_INFO_REQUEST:
-      return { ...state, error: null };
+      return { ...state, authInfoError: null };
     case AUTH_INFO_SUCCESS:
       return { ...state, authInfoLoaded: true, isAuthenticated: authenticated(payload) };
     case AUTH_INFO_ERROR:
-      return { ...state, error: payload };
+      return { ...state, authInfoError: payload };
 
     case LOGIN_REQUEST:
-      return { ...state, error: null };
+      return { ...state, loginError: null, logoutError: null };
     case LOGIN_SUCCESS:
       return { ...state, isAuthenticated: true };
     case LOGIN_ERROR:
-      return { ...state, error: payload };
+      return { ...state, loginError: payload };
 
     case LOGOUT_REQUEST:
-      return { ...state, error: null };
+      return { ...state, loginError: null, logoutError: null };
     case LOGOUT_SUCCESS:
       return { ...state, isAuthenticated: false };
     case LOGOUT_ERROR:
-      return { ...state, error: payload };
+      return { ...state, logoutError: payload };
     default:
       return state;
   }

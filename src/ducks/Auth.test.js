@@ -26,7 +26,9 @@ describe('Auth duck', () => {
       const state = reducer();
       expect(state.authInfoLoaded).toEqual(false);
       expect(state.isAuthenticated).toEqual(false);
-      expect(state.error).toBeNull();
+      expect(state.authInfoError).toBeNull();
+      expect(state.loginError).toBeNull();
+      expect(state.logoutError).toBeNull();
     });
 
     it('should login successfully', () => {
@@ -36,23 +38,23 @@ describe('Auth duck', () => {
       let state = reducer();
       state = reducer(state, login(username, password));
       expect(state.isAuthenticated).toEqual(false);
-      expect(state.error).toBeNull();
+      expect(state.loginError).toBeNull();
 
       state = reducer(state, loginSuccess());
       expect(state.isAuthenticated).toEqual(true);
-      expect(state.error).toBeNull();
+      expect(state.loginError).toBeNull();
     });
 
     it('should handle failed login', () => {
       let state = reducer();
       state = reducer(state, login('username', 'pass'));
       expect(state.isAuthenticated).toEqual(false);
-      expect(state.error).toBeNull();
+      expect(state.loginError).toBeNull();
 
       const error = new Error('test error');
       state = reducer(state, loginError(error));
       expect(state.isAuthenticated).toEqual(false);
-      expect(state.error).toEqual(error);
+      expect(state.loginError).toEqual(error);
     });
 
     it('should set initial state for unauthenticated users', () => {
@@ -62,7 +64,7 @@ describe('Auth duck', () => {
       const state = reducer(initialState, authInfoSuccess(authInfoLoggedOut));
       expect(state.authInfoLoaded).toEqual(true);
       expect(state.isAuthenticated).toEqual(false);
-      expect(state.error).toBeNull();
+      expect(state.authInfoError).toBeNull();
     });
 
     it('should set initial state for anonymous users', () => {
@@ -72,7 +74,7 @@ describe('Auth duck', () => {
       const state = reducer(initialState, authInfoSuccess(authInfoAnonymous));
       expect(state.authInfoLoaded).toEqual(true);
       expect(state.isAuthenticated).toEqual(false);
-      expect(state.error).toBeNull();
+      expect(state.authInfoError).toBeNull();
     });
 
     it('should set initial state for unauthenticated users', () => {
@@ -82,7 +84,7 @@ describe('Auth duck', () => {
       const state = reducer(initialState, authInfoSuccess(authInfoLoggedIn));
       expect(state.authInfoLoaded).toEqual(true);
       expect(state.isAuthenticated).toEqual(true);
-      expect(state.error).toBeNull();
+      expect(state.authInfoError).toBeNull();
     });
   });
 
