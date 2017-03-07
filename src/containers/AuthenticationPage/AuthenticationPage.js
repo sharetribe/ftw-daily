@@ -78,8 +78,6 @@ const mapDispatchToProps = dispatch => ({
   onSignUpSubmit: ({ email, password }) => dispatch(login(email, password)),
 });
 
-const AuthenticationPage = connect(mapStateToProps, mapDispatchToProps)(
+export const AuthenticationPage = connect(mapStateToProps, mapDispatchToProps)(
   AuthenticationPageComponent,
 );
-
-export default AuthenticationPage;
