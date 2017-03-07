@@ -5561,6 +5561,10 @@ redux-saga@^0.14.3:
   version "0.14.3"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.14.3.tgz#28cd2c5b49cf780a1de25875765724150c630513"
 
+redux-thunk@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
+
 redux@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.6.0.tgz#887c2b3d0b9bd86eca2be70571c27654c19e188d"
@@ -5919,9 +5923,9 @@ sharetribe-scripts@0.9.2:
   optionalDependencies:
     fsevents "1.0.17"
 
-"sharetribe-sdk@git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#fd1232a18f86cdef3335b465b53fc4721048091f":
+"sharetribe-sdk@git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#d8f2e3f153e22db075b7423090fa06d13b9ca314":
   version "0.0.1"
-  resolved "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#fd1232a18f86cdef3335b465b53fc4721048091f"
+  resolved "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#d8f2e3f153e22db075b7423090fa06d13b9ca314"
   dependencies:
     axios "^0.15.3"
     js-cookie "^2.1.3"
