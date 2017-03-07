@@ -1,8 +1,11 @@
 {
-  "landingpage.examplelink": "Show nice studios! (from json)",
+  "AuthenticationPage.loginFailed": "The email and password you entered did not match our records. Please double-check and try again.",
+  "AuthenticationPage.loginRequiredFor": "You must log in to view the page at",
   "HeroSearchForm.placeholder": "Location search (soon)",
   "HeroSearchForm.search": "Search",
-  "HeroSection.title": "Book Studiotime anywhere",
   "HeroSection.subTitle": "The largest online community to rent music studios",
-  "ListingPage.loadingListingData": "Loading listing data"
+  "HeroSection.title": "Book Studiotime anywhere",
+  "ListingPage.loadingListingData": "Loading listing data",
+  "PageLayout.authInfoFailed": "Could not get authentication information.",
+  "PageLayout.logoutFailed": "Logout failed. Please try again."
 }

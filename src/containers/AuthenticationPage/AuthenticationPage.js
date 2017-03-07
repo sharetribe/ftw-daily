@@ -1,23 +1,44 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import { PageLayout, NamedLink, NamedRedirect } from '../../components';
 import { LoginForm, SignUpForm } from '../../containers';
 import { login } from '../../ducks/Auth.duck';
 
 export const AuthenticationPageComponent = props => {
-  const { location, tab, isAuthenticated, onLoginSubmit, onSignUpSubmit } = props;
+  const {
+    location,
+    tab,
+    isAuthenticated,
+    loginError,
+    onLoginSubmit,
+    onSignUpSubmit,
+  } = props;
   const isLogin = tab === 'login';
   const from = location.state && location.state.from ? location.state.from : null;
 
   const authRedirect = from ? <Redirect to={from} /> : <NamedRedirect name="LandingPage" />;
 
+  // TODO: use FlashMessages for auth errors
+
+  /* eslint-disable no-console */
+  if (loginError && console && console.error) {
+    console.error(loginError);
+  }
+  /* eslint-enable no-console */
+
   return (
     <PageLayout title={`Authentication page: ${tab} tab`}>
       {isAuthenticated ? authRedirect : null}
+      {loginError
+        ? <div style={{ color: 'red' }}>
+            <FormattedMessage id="AuthenticationPage.loginFailed" />
+          </div>
+        : null}
       {from
         ? <p>
-            You must log in to view the page at
+            <FormattedMessage id="AuthenticationPage.loginRequiredFor" />
             <code>{from}</code>
           </p>
         : null}
@@ -29,19 +50,28 @@ export const AuthenticationPageComponent = props => {
   );
 };
 
-AuthenticationPageComponent.defaultProps = { tab: 'signup' };
+AuthenticationPageComponent.defaultProps = {
+  tab: 'signup',
+  authInfoError: null,
+  loginError: null,
+  logoutError: null,
+};
 
-const { object, oneOf, shape, bool, func } = PropTypes;
+const { object, oneOf, shape, bool, func, instanceOf } = PropTypes;
 
 AuthenticationPageComponent.propTypes = {
   location: shape({ state: object }).isRequired,
   tab: oneOf(['login', 'signup']),
   isAuthenticated: bool.isRequired,
+  loginError: instanceOf(Error),
   onLoginSubmit: func.isRequired,
   onSignUpSubmit: func.isRequired,
 };
 
-const mapStateToProps = state => ({ isAuthenticated: state.Auth.isAuthenticated });
+const mapStateToProps = state => ({
+  isAuthenticated: state.Auth.isAuthenticated,
+  loginError: state.Auth.loginError,
+});
 
 const mapDispatchToProps = dispatch => ({
   onLoginSubmit: ({ email, password }) => dispatch(login(email, password)),
