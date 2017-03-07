@@ -64,26 +64,28 @@ export class ListingPageComponent extends Component {
       : [];
 
     // TODO componentize
-    const imageCarousel =  images.length > 0
-      ? (
-          <div className={css.imageContainer}>
-            <img className={css.mainImage} alt={title} src={images[0].sizes[0].url} />
-            <div className={css.thumbnailContainer}>
-              {images.slice(1).map(image => (
-                <div key={image.id.uuid} className={css.squareWrapper}>
-                  <div className={css.aspectWrapper}>
-                    <img className={css.thumbnail} alt={`${title} thumbnail`} src={image.sizes[0].url} />
-                  </div>
+    const imageCarousel = images.length > 0
+      ? <div className={css.imageContainer}>
+          <img className={css.mainImage} alt={title} src={images[0].sizes[0].url} />
+          <div className={css.thumbnailContainer}>
+            {images.slice(1).map(image => (
+              <div key={image.id.uuid} className={css.squareWrapper}>
+                <div className={css.aspectWrapper}>
+                  <img
+                    className={css.thumbnail}
+                    alt={`${title} thumbnail`}
+                    src={image.sizes[0].url}
+                  />
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-          )
+        </div>
       : null;
 
     const pageContent = (
       <PageLayout title={`${title} ${info.price}`}>
-        { imageCarousel }
+        {imageCarousel}
         {/* eslint-disable react/no-danger */}
         <div className={css.description} dangerouslySetInnerHTML={{ __html: description }} />
         {/* eslint-enable react/no-danger */}
