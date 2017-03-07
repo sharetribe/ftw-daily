@@ -1,16 +1,17 @@
 /* eslint-disable no-underscore-dangle */
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware, { END } from 'redux-saga';
+import thunk from 'redux-thunk';
 import createReducer from './reducers';
 
 /**
  * Create a new store with the given initial state. Adds Redux
  * middleware and enhancers.
  */
-export default function configureStore(initialState = {}) {
+export default function configureStore(sdk, initialState = {}) {
   const sagaMiddleware = createSagaMiddleware();
 
-  const middlewares = [sagaMiddleware];
+  const middlewares = [thunk.withExtraArgument(sdk), sagaMiddleware];
 
   // Enable Redux Devtools in client side dev mode.
   const composeEnhancers = process.env.NODE_ENV !== 'production' &&
