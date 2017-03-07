@@ -41,6 +41,13 @@ export const route = shape({
   loadData: func,
 });
 
+// Place object from LocationAutocompleteInput
+export const place = shape({
+  address: string.isRequired,
+  origin: latlng.isRequired,
+  bounds: latlngBounds, // optional viewport bounds
+});
+
 // Denormalised user object
 export const user = shape({
   id: uuid.isRequired,
