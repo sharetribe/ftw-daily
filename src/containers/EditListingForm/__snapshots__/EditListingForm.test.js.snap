@@ -1,0 +1,45 @@
+exports[`EditListingForm matches snapshot 1`] = `
+<form
+  onSubmit={[Function]}>
+  <div>
+    <label
+      htmlFor="title">
+      Title
+    </label>
+    <div>
+      <input
+        name="title"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        onFocus={[Function]}
+        placeholder="Title"
+        type="text"
+        value="" />
+    </div>
+  </div>
+  <div>
+    <label
+      htmlFor="description">
+      Description
+    </label>
+    <div>
+      <textarea
+        name="description"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        onFocus={[Function]}
+        placeholder="Description"
+        value="" />
+    </div>
+  </div>
+  <button
+    disabled={true}
+    type="submit">
+    Save listing
+  </button>
+</form>
+`;

@@ -7,6 +7,7 @@ import * as NamedLink from './components/NamedLink/NamedLink.example';
 import * as ChangeAccountPasswordForm
   from './containers/ChangeAccountPasswordForm/ChangeAccountPasswordForm.example';
 import * as ChangePasswordForm from './containers/ChangePasswordForm/ChangePasswordForm.example';
+import * as EditListingForm from './containers/EditListingForm/EditListingForm.example';
 import * as HeroSearchForm from './containers/HeroSearchForm/HeroSearchForm.example';
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
 import * as PasswordForgottenForm
@@ -17,6 +18,7 @@ export {
   BookingInfo,
   ChangeAccountPasswordForm,
   ChangePasswordForm,
+  EditListingForm,
   HeroSearchForm,
   ListingCard,
   LoginForm,

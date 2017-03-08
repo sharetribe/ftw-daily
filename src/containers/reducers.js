@@ -5,6 +5,7 @@
  */
 
 /* eslint-disable import/prefer-default-export */
+import EditListingPage from './EditListingPage/EditListingPage.duck';
 import SearchPage from './SearchPage/SearchPage.duck';
 
-export { SearchPage };
+export { EditListingPage, SearchPage };

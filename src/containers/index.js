@@ -3,6 +3,8 @@ import ChangeAccountPasswordForm from './ChangeAccountPasswordForm/ChangeAccount
 import ChangePasswordForm from './ChangePasswordForm/ChangePasswordForm';
 import CheckoutPage from './CheckoutPage/CheckoutPage';
 import ContactDetailsPage from './ContactDetailsPage/ContactDetailsPage';
+import EditListingForm from './EditListingForm/EditListingForm';
+import EditListingPage from './EditListingPage/EditListingPage';
 import EditProfilePage from './EditProfilePage/EditProfilePage';
 import HeroSearchForm from './HeroSearchForm/HeroSearchForm';
 import InboxPage from './InboxPage/InboxPage';
@@ -30,6 +32,8 @@ export {
   ChangePasswordForm,
   CheckoutPage,
   ContactDetailsPage,
+  EditListingForm,
+  EditListingPage,
   EditProfilePage,
   HeroSearchForm,
   InboxPage,
