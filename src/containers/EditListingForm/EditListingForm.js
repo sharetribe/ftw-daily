@@ -2,9 +2,36 @@ import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import { maxLength, required } from '../../util/validators';
+import css from './EditListingForm.css';
 
 const MAX_LENGTH = 60;
-const maxLength60 = maxLength(`Must be ${MAX_LENGTH} characters or less`, MAX_LENGTH);
+
+const RenderField = ({ input, label, type, meta: { touched, error } }) => {
+  const component = type === 'textarea'
+    ? <textarea {...input} placeholder={label} />
+    : <input {...input} placeholder={label} type={type} />;
+  return (
+    <div>
+      <label htmlFor={input.name}>{label}</label>
+      <div>
+        {component}
+        {touched && (error && <span className={css.error}>{error}</span>)}
+      </div>
+    </div>
+  )
+};
+
+const { any, bool, shape, string } = PropTypes;
+
+RenderField.propTypes = {
+  input: any.isRequired,
+  label: string.isRequired,
+  type: string.isRequired,
+  meta: shape({
+    touched: bool,
+    error: string,
+  }).isRequired,
+};
 
 class EditListingForm extends Component {
   componentDidMount() {
@@ -20,21 +47,34 @@ class EditListingForm extends Component {
     const {
       disabled,
       handleSubmit,
+      intl,
       pristine,
       saveActionMsg = 'Save listing',
       submitting,
     } = this.props;
+    const requiredStr = intl.formatMessage({ id: 'EditListingForm.required' });
+    const maxLengthStr = intl.formatMessage({ id: 'EditListingForm.maxLength' }, {
+      maxLength: MAX_LENGTH,
+    });
+    const maxLength60 = maxLength(maxLengthStr, MAX_LENGTH);
+
     return (
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title</label>
         <Field
           name="title"
-          component="input"
+          label="Title"
+          component={RenderField}
           type="text"
-          validate={[required('Required'), maxLength60]}
+          validate={[required(requiredStr), maxLength60]}
         />
-        <label htmlFor="description">Description</label>
-        <Field name="description" component="input" type="textarea" />
+
+        <Field
+          name="description"
+          label="Description"
+          component={RenderField}
+          type="textarea"
+          validate={[required(requiredStr)]}
+        />
         <button type="submit" disabled={pristine || submitting || disabled}>{saveActionMsg}</button>
       </form>
     );
@@ -42,8 +82,6 @@ class EditListingForm extends Component {
 }
 
 EditListingForm.defaultProps = { initData: {} };
-
-const { shape, string } = PropTypes;
 
 EditListingForm.propTypes = {
   ...formPropTypes,
