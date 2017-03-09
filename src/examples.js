@@ -2,6 +2,8 @@
 import * as BookingInfo from './components/BookingInfo/BookingInfo.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
+import * as LocationAutocompleteInput
+  from './components/LocationAutocompleteInput/LocationAutocompleteInput.example';
 
 // containers
 import * as ChangeAccountPasswordForm
@@ -25,4 +27,5 @@ export {
   NamedLink,
   PasswordForgottenForm,
   SignUpForm,
+  LocationAutocompleteInput,
 };
