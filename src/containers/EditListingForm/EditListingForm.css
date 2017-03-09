@@ -1,3 +1,61 @@
 .error {
   color: red;
 }
+
+.imagesContainer {
+  width: 100%;
+  min-height: 150px;
+}
+
+.addImageWrapper {
+  float: left;
+  width: 110px;
+  height: 110px;
+  margin: 5px;
+
+  &::after {
+    content: ".";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}
+
+.addImage {
+  width: 110px;
+  height: 110px;
+  background-color: lightgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 0;
+}
+
+.thumbnail {
+  float: left;
+  position: relative;
+  width: 110px;
+  height: 110px;
+  margin: 5px;
+  overflow: hidden;
+}
+
+.thumbnailImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnailLoading {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(211, 211, 211, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

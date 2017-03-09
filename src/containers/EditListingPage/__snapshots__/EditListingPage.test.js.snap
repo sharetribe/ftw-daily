@@ -1,0 +1,11 @@
+exports[`EditListingPageComponent matches snapshot 1`] = `
+<Connect(withRouter(PageLayout))
+  title="Edit listing">
+  <ReduxForm
+    images={Array []}
+    initData={Object {}}
+    onImageUpload={[Function]}
+    onSubmit={[Function]}
+    saveActionMsg="Create listing" />
+</Connect(withRouter(PageLayout))>
+`;

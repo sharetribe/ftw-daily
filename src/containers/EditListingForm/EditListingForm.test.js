@@ -4,7 +4,7 @@ import EditListingForm from './EditListingForm';
 
 describe('EditListingForm', () => {
   it('matches snapshot', () => {
-    const tree = renderDeep(<EditListingForm />);
+    const tree = renderDeep(<EditListingForm images={[]} />);
     expect(tree).toMatchSnapshot();
   });
 });

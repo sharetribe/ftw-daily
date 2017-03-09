@@ -6,27 +6,24 @@ import { NamedRedirect, PageLayout } from '../../components';
 import { EditListingForm } from '../../containers';
 import { getListingsById } from '../../ducks/sdk.duck';
 import { createSlug } from '../../util/urlHelpers';
-import { requestCreateListing, requestShowListing } from './EditListingPage.duck';
+import {
+  requestCreateListing,
+  requestShowListing,
+  requestImageUpload,
+} from './EditListingPage.duck';
 
 const formatRequestData = values => {
-  const { title, description } = values;
+  const { description, images, title } = values;
   return {
-    title,
-    description,
     address: 'Bulevardi 14, 00200 Helsinki, Finland',
+    description,
     geolocation: {
       lat: 40.6,
       lng: 73.9,
     },
+    images,
+    title,
   };
-};
-
-const onSubmit = (submitListing, onLoadListing) => {
-  return values =>
-    submitListing(values).then(resp => onLoadListing(resp.payload.data.id.uuid)).catch(e => {
-      // eslint-disable-next-line no-console
-      console.error(e);
-    });
 };
 
 // N.B. All the presentational content needs to be extracted to their own components
@@ -37,10 +34,19 @@ export class EditListingPageComponent extends Component {
     }
   }
 
+  onSubmit(submitListing) {
+    const { page } = this.props;
+    const images = page.imageOrder.map(i => page.images[i].imageId);
+
+    // When form is submitted we include images in correct order along with submitted values
+    // TODO figure out a way to attach images to form (e.g. into some hidden input)
+    return values => submitListing({ ...values, images });
+  }
+
   render() {
-    const { data, intl, onCreateListing, onLoadListing, page, params, type } = this.props;
+    const { data, intl, onCreateListing, onImageUpload, page, params, type } = this.props;
     const isNew = type === 'new';
-    const id = page.submittedListingId || new types.UUID(params.id);
+    const id = page.submittedListingId || (params && new types.UUID(params.id));
     const listingsById = getListingsById(data, [id]);
     const currentListing = listingsById.length > 0 ? listingsById[0] : null;
 
@@ -48,9 +54,12 @@ export class EditListingPageComponent extends Component {
     const showForm = isNew || currentListing;
 
     if (shouldRedirect) {
+      // If page has already listingId (after submit) and current listings exist
+      // redirect to listing page
       const slug = currentListing ? createSlug(currentListing.attributes.title) : null;
       return <NamedRedirect name="ListingPage" params={{ id: id.uuid, slug }} />;
     } else if (showForm) {
+      // Show form if user is posting a new listing or editing existing one
       const saveActionMsg = page.redirectToListing ? 'Redirecting to listing' : 'Create listing';
       const disableForm = page.redirectToListing && !page.showListingsError;
 
@@ -62,17 +71,24 @@ export class EditListingPageComponent extends Component {
           }
         : {};
 
+      // Images are passed to EditListingForm so that it can generate thumbnails out of them
+      const images = page.imageOrder.map(i => page.images[i]);
+
       return (
         <PageLayout title={'Edit listing'}>
           <EditListingForm
-            onSubmit={onSubmit(onCreateListing, onLoadListing)}
-            saveActionMsg={saveActionMsg}
             disabled={disableForm}
+            images={images}
             initData={initData}
+            onImageUpload={onImageUpload}
+            onSubmit={this.onSubmit(onCreateListing)}
+            saveActionMsg={saveActionMsg}
           />
         </PageLayout>
       );
     } else {
+      // If user has come to this page through a direct linkto edit existing listing,
+      // we need to load it first.
       const loadingPageMsg = {
         id: 'ListingPage.loadingListingData',
       };
@@ -92,6 +108,7 @@ const { func, object, shape, string } = PropTypes;
 EditListingPageComponent.propTypes = {
   data: object.isRequired,
   intl: intlShape.isRequired,
+  onImageUpload: func.isRequired,
   onLoadListing: func.isRequired,
   onCreateListing: func.isRequired,
   page: object.isRequired,
@@ -111,6 +128,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onLoadListing: id => dispatch(requestShowListing({ id, include: ['author', 'images'] })),
     onCreateListing: values => dispatch(requestCreateListing(formatRequestData(values))),
+    onImageUpload: data => dispatch(requestImageUpload(data)),
   };
 };
 
