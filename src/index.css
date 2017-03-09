@@ -30,7 +30,6 @@ button {
   margin: 1rem 0;
   background-color: #eee;
   border: 1px solid #ddd;
-  cursor: pointer;
   font-family: sans-serif;
 
   &:hover {
