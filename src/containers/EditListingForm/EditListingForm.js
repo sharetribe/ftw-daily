@@ -18,7 +18,7 @@ const RenderField = ({ input, label, type, meta: { touched, error } }) => {
         {touched && (error && <span className={css.error}>{error}</span>)}
       </div>
     </div>
-  )
+  );
 };
 
 const { any, bool, shape, string } = PropTypes;
