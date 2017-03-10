@@ -46,6 +46,15 @@ exports[`EditListingForm matches snapshot 1`] = `
       </div>
     </div>
   </div>
+  <input
+    name="images"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onDragStart={[Function]}
+    onDrop={[Function]}
+    onFocus={[Function]}
+    type="hidden"
+    value="" />
   <div>
     <label
       htmlFor="description">

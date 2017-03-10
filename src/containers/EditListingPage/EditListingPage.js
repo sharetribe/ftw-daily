@@ -21,9 +21,13 @@ const formatRequestData = values => {
       lat: 40.6,
       lng: 73.9,
     },
-    images,
+    images: images.map(i => i.imageId),
     title,
   };
+};
+
+const onSubmit = submitListing => {
+  return values => submitListing(values);
 };
 
 // N.B. All the presentational content needs to be extracted to their own components
@@ -35,12 +39,7 @@ export class EditListingPageComponent extends Component {
   }
 
   onSubmit(submitListing) {
-    const { page } = this.props;
-    const images = page.imageOrder.map(i => page.images[i].imageId);
-
-    // When form is submitted we include images in correct order along with submitted values
-    // TODO figure out a way to attach images to form (e.g. into some hidden input)
-    return values => submitListing({ ...values, images });
+    return values => submitListing(values);
   }
 
   render() {

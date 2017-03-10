@@ -78,7 +78,7 @@ export default function reducer(state = initialState, action = {}) {
       const { file } = state.images[id];
       const images = {
         ...state.images,
-        [id]: { id, file, error, imageId: null, uploadImageError: true },
+        [id]: { id, file, imageId: null, uploadImageError: error },
       };
       return { ...state, images };
     }

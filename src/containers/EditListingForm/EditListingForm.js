@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
+import { isEqual } from 'lodash';
 import { maxLength, required } from '../../util/validators';
 import { Promised } from '../../components';
 import css from './EditListingForm.css';
@@ -17,9 +18,9 @@ const readImage = file => new Promise((resolve, reject) => {
   reader.readAsDataURL(file);
 });
 
-
 // Custom inputs with validator messages
-const RenderField = ({ input, label, type, meta: { touched, error } }) => {
+const RenderField = ({ input, label, type, meta }) => {
+  const { touched, error } = meta;
   const component = type === 'textarea'
     ? <textarea {...input} placeholder={label} />
     : <input {...input} placeholder={label} type={type} />;
@@ -28,16 +29,19 @@ const RenderField = ({ input, label, type, meta: { touched, error } }) => {
       <label htmlFor={input.name}>{label}</label>
       <div>
         {component}
-        {touched && (error && <span className={css.error}>{error}</span>)}
+        {touched && error ? <span className={css.error}>{error}</span> : null}
       </div>
     </div>
   );
 };
 
-const { any, bool, shape, string } = PropTypes;
+const { bool, func, object, shape, string } = PropTypes;
 
 RenderField.propTypes = {
-  input: any.isRequired,
+  input: shape({
+    onChange: func.isRequired,
+    name: string.isRequired,
+  }).isRequired,
   label: string.isRequired,
   type: string.isRequired,
   meta: shape({
@@ -48,17 +52,16 @@ RenderField.propTypes = {
 
 // Add image wrapper. Label is the only visible element, file input is hidden.
 const RenderAddImage = props => {
-  const { accept, input: {name, onChange}, label, type, meta: { touched, warning } } = props;
+  const { accept, input, label, type, meta } = props;
+  const { name, onChange } = input;
+  const { touched, warning } = meta;
   const inputProps = { accept, id: name, name, onChange, type };
   return (
     <div className={css.addImageWrapper}>
-      <input
-        {...inputProps}
-        style={{ display: 'none' }}
-      />
+      <input {...inputProps} style={{ display: 'none' }} />
       <div>
         <label htmlFor={name} className={css.addImage}>{label}</label>
-        {touched && (warning && <span className={css.warning}>{warning}</span>)}
+        {touched && warning ? <span className={css.warning}>{warning}</span> : null}
       </div>
     </div>
   );
@@ -66,7 +69,11 @@ const RenderAddImage = props => {
 
 RenderAddImage.propTypes = {
   accept: string.isRequired,
-  input: any.isRequired,
+  input: shape({
+    value: object,
+    onChange: func.isRequired,
+    name: string.isRequired,
+  }).isRequired,
   label: string.isRequired,
   type: string.isRequired,
   meta: shape({
@@ -80,6 +87,12 @@ class EditListingForm extends Component {
     super(props);
     this.handleInitialize = this.handleInitialize.bind(this);
     this.onImageUploadHandler = this.onImageUploadHandler.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!isEqual(this.props.images, nextProps.images)) {
+      nextProps.change('images', nextProps.images);
+    }
   }
 
   componentDidMount() {
@@ -155,6 +168,15 @@ class EditListingForm extends Component {
             type="file"
           />
         </div>
+
+        <Field
+          component={props => {
+            const { input, type } = props;
+            return <input {...input} type={type} />;
+          }}
+          name="images"
+          type="hidden"
+        />
 
         <Field
           name="description"
