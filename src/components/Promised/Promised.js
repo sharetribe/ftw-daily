@@ -3,7 +3,7 @@
  * depends on resolution of a Promise.
  *
  * How to use:
- * <Promised promise={givenPromise} onSuccess={v => <div>{v}</div>} />
+ * <Promised promise={givenPromise} renderFulfilled={v => <b>{v}</b>} renderRejected={v => <b>v</b>} />
  */
 
 import { Component, PropTypes } from 'react';
@@ -30,19 +30,21 @@ class Promised extends Component {
   }
 
   render() {
-    const { onError, onSuccess } = this.props;
-    return this.state.error ? onError(this.state.error) : onSuccess(this.state.value);
+    const { renderFulfilled, renderRejected } = this.props;
+    return this.state.error ? renderRejected(this.state.error) : renderFulfilled(this.state.value);
   }
 }
 
-Promised.defaultProps = { onError: e => e };
+Promised.defaultProps = { renderRejected: e => e };
 
-const { func, object } = PropTypes;
+const { func, shape } = PropTypes;
 
 Promised.propTypes = {
-  promise: object.isRequired,
-  onSuccess: func.isRequired,
-  onError: func,
+  promise: shape({
+    then: func.isRequired, // usually promises are detected from this single function alone
+  }).isRequired,
+  renderFulfilled: func.isRequired,
+  renderRejected: func.isRequired,
 };
 
 export default Promised;

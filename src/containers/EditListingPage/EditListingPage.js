@@ -38,10 +38,6 @@ export class EditListingPageComponent extends Component {
     }
   }
 
-  onSubmit(submitListing) {
-    return values => submitListing(values);
-  }
-
   render() {
     const { data, intl, onCreateListing, onImageUpload, page, params, type } = this.props;
     const isNew = type === 'new';
@@ -80,7 +76,7 @@ export class EditListingPageComponent extends Component {
             images={images}
             initData={initData}
             onImageUpload={onImageUpload}
-            onSubmit={this.onSubmit(onCreateListing)}
+            onSubmit={onSubmit(onCreateListing)}
             saveActionMsg={saveActionMsg}
           />
         </PageLayout>

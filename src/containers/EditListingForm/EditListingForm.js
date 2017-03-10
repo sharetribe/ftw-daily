@@ -14,7 +14,11 @@ const TITLE_MAX_LENGTH = 60;
 const readImage = file => new Promise((resolve, reject) => {
   const reader = new FileReader();
   reader.onload = e => resolve(e.target.result);
-  reader.onerror = e => reject(new Error(`Error reading ${file.name}: ${e.target.result}`));
+  reader.onerror = e => {
+    // eslint-disable-next-line
+    console.error(`Error ${e} happened while reading ${file.name}: ${e.target.result}`);
+    reject(new Error(`Error reading ${file.name}: ${e.target.result}`));
+  };
   reader.readAsDataURL(file);
 });
 
@@ -89,14 +93,14 @@ class EditListingForm extends Component {
     this.onImageUploadHandler = this.onImageUploadHandler.bind(this);
   }
 
+  componentDidMount() {
+    this.handleInitialize();
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!isEqual(this.props.images, nextProps.images)) {
       nextProps.change('images', nextProps.images);
     }
-  }
-
-  componentDidMount() {
-    this.handleInitialize();
   }
 
   onImageUploadHandler(event) {
@@ -148,7 +152,7 @@ class EditListingForm extends Component {
               <Promised
                 key={i.id}
                 promise={readImage(i.file)}
-                onSuccess={dataURL => {
+                renderFulfilled={dataURL => {
                   return (
                     <div className={css.thumbnail}>
                       <img src={dataURL} alt={encodeURIComponent(i.file.name)} className={css.thumbnailImage} />
@@ -156,6 +160,7 @@ class EditListingForm extends Component {
                     </div>
                   );
                 }}
+                renderRejected={() => <div className={css.thumbnail}>Could not read file</div>}
               />
             );
           })}
