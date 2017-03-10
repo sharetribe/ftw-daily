@@ -17,6 +17,10 @@ export const SHOW_LISTINGS_REQUEST = 'app/EditListingPage/SHOW_LISTINGS_REQUEST'
 export const SHOW_LISTINGS_SUCCESS = 'app/EditListingPage/SHOW_LISTINGS_SUCCESS';
 export const SHOW_LISTINGS_ERROR = 'app/EditListingPage/SHOW_LISTINGS_ERROR';
 
+export const UPLOAD_IMAGE_REQUEST = 'app/EditListingPage/UPLOAD_IMAGE_REQUEST';
+export const UPLOAD_IMAGE_SUCCESS = 'app/EditListingPage/UPLOAD_IMAGE_SUCCESS';
+export const UPLOAD_IMAGE_ERROR = 'app/EditListingPage/UPLOAD_IMAGE_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -25,6 +29,8 @@ const initialState = {
   showListingsError: null,
   submittedListingId: null,
   redirectToListing: false,
+  images: {},
+  imageOrder: [],
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -51,6 +57,32 @@ export default function reducer(state = initialState, action = {}) {
       console.error(payload);
       return { ...state, showListingsError: payload, redirectToListing: false };
 
+    case UPLOAD_IMAGE_REQUEST: {
+      // payload.params: { id: 'tempId', file }
+      const images = {
+        ...state.images,
+        [payload.params.id]: { ...payload.params, uploadImageError: false },
+      };
+      return { ...state, images, imageOrder: state.imageOrder.concat([payload.params.id]) };
+    }
+    case UPLOAD_IMAGE_SUCCESS: {
+      // payload.params: { id: 'tempId', imageId: 'some-real-id'}
+      const { id, imageId } = payload;
+      const file = state.images[id].file;
+      const images = { ...state.images, [id]: { id, imageId, file, uploadImageError: false } };
+      return { ...state, images };
+    }
+    case UPLOAD_IMAGE_ERROR: {
+      console.error(payload);
+      const { id, error } = payload;
+      const { file } = state.images[id];
+      const images = {
+        ...state.images,
+        [id]: { id, file, imageId: null, uploadImageError: error },
+      };
+      return { ...state, images };
+    }
+
     default:
       return state;
   }
@@ -74,58 +106,54 @@ export const showListings = requestAction(SHOW_LISTINGS_REQUEST);
 export const showListingsSuccess = successAction(SHOW_LISTINGS_SUCCESS);
 export const showListingsError = errorAction(SHOW_LISTINGS_ERROR);
 
+// SDK method: listings.uploadImage
+export const uploadImage = requestAction(UPLOAD_IMAGE_REQUEST);
+export const uploadImageSuccess = successAction(UPLOAD_IMAGE_SUCCESS);
+export const uploadImageError = errorAction(UPLOAD_IMAGE_ERROR);
+
 // ================ Thunk ================ //
 
-const endpoints = {
-  [CREATE_LISTING_REQUEST]: {
-    method: sdk => sdk.listings.create,
-    success: createListingSuccess,
-    error: createListingError,
-  },
-  [SHOW_LISTINGS_REQUEST]: {
-    method: sdk => sdk.listings.show,
-    success: showListingsSuccess,
-    error: showListingsError,
-  },
-};
-
-function callEndpoint(sdkMethod, dispatchSuccess, dispatchError, action) {
-  const params = action.payload.params;
-  return sdkMethod(params).then(resp => dispatchSuccess(resp)).catch(e => dispatchError(e));
+export function requestShowListing(actionPayload) {
+  return (dispatch, getState, sdk) => {
+    dispatch(showListings(actionPayload));
+    return sdk.listings
+      .show(actionPayload)
+      .then(response => {
+        // EditListingPage fetches new listing data, which also needs to be added to global data
+        dispatch(globalShowListingsSuccess(response));
+        // In case of success, we'll clear state.EditListingPage (user will be redirected away)
+        dispatch(showListingsSuccess(response));
+        return response;
+      })
+      .catch(e => dispatch(showListingsError(e)));
+  };
 }
 
 export function requestCreateListing(actionPayload) {
   return (dispatch, getState, sdk) => {
-    // Create request action
-    const action = createListing(actionPayload);
-    // Notify store that we are sending a request
-    dispatch(action);
-    // Select SDK endpoint and call it
-    const { method, success, error } = endpoints[action.type];
-    return callEndpoint(
-      method(sdk),
-      response => dispatch(success(response)),
-      e => dispatch(error(e)),
-      action,
-    );
+    dispatch(createListing(actionPayload));
+    return sdk.listings
+      .create(actionPayload)
+      .then(response => {
+        const id = response.data.data.id.uuid;
+        // Modify store to understand that we have created listing and can redirect away
+        dispatch(createListingSuccess(response));
+        // Fetch listing data so that redirection is smooth
+        dispatch(requestShowListing({ id, include: ['author', 'images'] }));
+        return response;
+      })
+      .catch(e => dispatch(createListingError(e)));
   };
 }
 
-export function requestShowListing(actionPayload) {
+// Images return imageId which we need to map with previously generated temporary id
+export function requestImageUpload(actionPayload) {
   return (dispatch, getState, sdk) => {
-    const action = showListings(actionPayload);
-    dispatch(action);
-    const { method, success, error } = endpoints[action.type];
-    return callEndpoint(
-      method(sdk),
-      response => {
-        // EditListingPage fetches new listing data, which also needs to be added to global data
-        dispatch(globalShowListingsSuccess(response));
-        // In case of success, we'll clear state.EditListingPage (user will be redirected away)
-        dispatch(success(response));
-      },
-      e => dispatch(error(e)),
-      action,
-    );
+    const id = actionPayload.id;
+    dispatch(uploadImage(actionPayload));
+    return sdk.listings
+      .uploadImage({ image: actionPayload.file })
+      .then(resp => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } })))
+      .catch(e => dispatch(uploadImageError({ data: { id, error: e } })));
   };
 }

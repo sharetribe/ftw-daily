@@ -4,8 +4,12 @@ import EditListingForm from './EditListingForm';
 export const Empty = {
   component: EditListingForm,
   props: {
+    images: [],
+    onImageUpload(values) {
+      console.log(`onImageUpload with id (${values.id}) and file name (${values.file.name})`);
+    },
     onSubmit(values) {
-      console.log('submit new password form values:', values);
+      console.log('Submit EditListingForm with (unformatted) values:', values);
     },
   },
 };

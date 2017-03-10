@@ -11,6 +11,7 @@ import NamedRedirect from './NamedRedirect/NamedRedirect';
 import OrderDetailsPanel from './OrderDetailsPanel/OrderDetailsPanel';
 import OrderDiscussionPanel from './OrderDiscussionPanel/OrderDiscussionPanel';
 import PageLayout from './PageLayout/PageLayout';
+import Promised from './Promised/Promised';
 import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 
@@ -28,6 +29,7 @@ export {
   OrderDetailsPanel,
   OrderDiscussionPanel,
   PageLayout,
+  Promised,
   RoutesProvider,
   SearchResultsPanel,
 };

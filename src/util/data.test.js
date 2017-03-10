@@ -272,6 +272,7 @@ describe('data utils', () => {
         listing2,
       ]);
     });
+
     it('denormalises multiple relationships when relationship data is empty', () => {
       const user1 = createUser('user1');
       const listing1 = createListing('listing1');
