@@ -272,5 +272,26 @@ describe('data utils', () => {
         listing2,
       ]);
     });
+    it('denormalises multiple relationships when relationship data is empty', () => {
+      const user1 = createUser('user1');
+      const listing1 = createListing('listing1');
+      const listing1Relationships = {
+        author: { data: null },
+        images: { data: [] },
+      };
+      const listing1WithRelationships = { ...listing1, relationships: listing1Relationships };
+      const listing2 = createListing('listing2');
+      const listing3 = createListing('listing3');
+      const entities = {
+        listing: { listing1: listing1WithRelationships, listing2, listing3 },
+        user: { user1 },
+      };
+      const ids = [listing1.id, listing2.id];
+
+      expect(denormalisedEntities(entities, 'listing', ids)).toEqual([
+        { ...listing1, author: null, images: [] },
+        listing2,
+      ]);
+    });
   });
 });

@@ -85,13 +85,19 @@ export const denormalisedEntities = (entities, type, ids) => {
           // an array of objects. We want to keep that form in the final
           // result.
           const hasMultipleRefs = Array.isArray(relRef.data);
-          const refs = hasMultipleRefs ? relRef.data : [relRef.data];
-          const relIds = refs.map(ref => ref.id);
-          const relType = refs[0].type;
-          const rels = denormalisedEntities(entities, relType, relIds);
+          const multipleRefsEmpty = hasMultipleRefs && relRef.data.length === 0;
+          if (!relRef.data || multipleRefsEmpty) {
+            // eslint-disable-next-line no-param-reassign
+            ent[relName] = hasMultipleRefs ? [] : null;
+          } else {
+            const refs = hasMultipleRefs ? relRef.data : [relRef.data];
+            const relIds = refs.map(ref => ref.id);
+            const relType = refs[0].type;
+            const rels = denormalisedEntities(entities, relType, relIds);
 
-          // eslint-disable-next-line no-param-reassign
-          ent[relName] = hasMultipleRefs ? rels : rels[0];
+            // eslint-disable-next-line no-param-reassign
+            ent[relName] = hasMultipleRefs ? rels : rels[0];
+          }
           return ent;
         },
         entityData,
