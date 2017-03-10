@@ -1,0 +1,30 @@
+.root {
+  position: relative;
+}
+
+.input {
+  height: 30px;
+}
+
+.predictions {
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-top: none;
+
+  & li {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #eee;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover,
+    &.highlighted {
+      background-color: #eee;
+    }
+  }
+}
