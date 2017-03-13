@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
+import { arrayMove } from 'react-sortable-hoc';
 import { noEmptyArray, maxLength, required } from '../../util/validators';
 import { AddImages } from '../../components';
 import css from './EditListingForm.css';
@@ -70,6 +71,7 @@ class EditListingForm extends Component {
     super(props);
     this.handleInitialize = this.handleInitialize.bind(this);
     this.onImageUploadHandler = this.onImageUploadHandler.bind(this);
+    this.onSortEnd = this.onSortEnd.bind(this);
   }
 
   componentDidMount() {
@@ -87,6 +89,11 @@ class EditListingForm extends Component {
     if (file) {
       this.props.onImageUpload({ id: `${file.name}_${Date.now()}`, file });
     }
+  }
+
+  onSortEnd({ oldIndex, newIndex }) {
+    const images = arrayMove(this.props.images, oldIndex, newIndex);
+    this.props.onUpdateImageOrder(images.map(i => i.id));
   }
 
   handleInitialize() {
@@ -122,7 +129,7 @@ class EditListingForm extends Component {
         />
 
         <h3>Images</h3>
-        <AddImages images={images}>
+        <AddImages images={images} onSortEnd={this.onSortEnd}>
           <Field
             accept={ACCEPT_IMAGES}
             component={RenderAddImage}
@@ -169,6 +176,9 @@ EditListingForm.propTypes = {
   ...formPropTypes,
   initData: shape({ title: string, description: string }),
   intl: intlShape.isRequired,
+  onImageUpload: func.isRequired,
+  onUpdateImageOrder: func.isRequired,
+  onSubmit: func.isRequired,
 };
 
 export default reduxForm({ form: 'EditListingForm' })(injectIntl(EditListingForm));

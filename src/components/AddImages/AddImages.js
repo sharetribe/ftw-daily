@@ -8,6 +8,7 @@
  * </AddImages>
  */
 import React, { PropTypes } from 'react';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { Promised } from '../../components';
 import css from './AddImages.css';
 
@@ -24,47 +25,54 @@ const readImage = file => new Promise((resolve, reject) => {
   reader.readAsDataURL(file);
 });
 
-const AddImages = props => {
+// Create sortable elments out of given thumbnail file
+const SortableImage = SortableElement(props => {
+  const { file, id, imageId } = props;
+  // While image is uploading we show overlay on top of thumbnail
+  const uploadingOverlay = !imageId ? <div className={css.thumbnailLoading}>Uploading</div> : null;
+  return (
+    <Promised
+      key={id}
+      promise={readImage(file)}
+      renderFulfilled={dataURL => {
+        return (
+          <li className={css.thumbnail}>
+            <img src={dataURL} alt={encodeURIComponent(file.name)} className={css.thumbnailImage} />
+            {uploadingOverlay}
+          </li>
+        );
+      }}
+      renderRejected={() => <li className={css.thumbnail}>Could not read file</li>}
+    />
+  );
+});
+
+// Create container where there are sortable images and passed children like "Add image" input etc.
+const SortableImages = SortableContainer(props => {
   const { children, images } = props;
   return (
-    <div className={css.imagesContainer}>
-      {images.map(i => {
-        // While image is uploading we show overlay on top of thumbnail
-        const uploadingOverlay = !i.imageId
-          ? <div className={css.thumbnailLoading}>Uploading</div>
-          : null;
-        return (
-          <Promised
-            key={i.id}
-            promise={readImage(i.file)}
-            renderFulfilled={dataURL => {
-              return (
-                <div className={css.thumbnail}>
-                  <img
-                    src={dataURL}
-                    alt={encodeURIComponent(i.file.name)}
-                    className={css.thumbnailImage}
-                  />
-                  {uploadingOverlay}
-                </div>
-              );
-            }}
-            renderRejected={() => <div className={css.thumbnail}>Could not read file</div>}
-          />
-        );
-      })}
+    <ol className={css.imagesContainer}>
+      {images.map((image, index) => <SortableImage {...image} index={index} key={image.id} />)}
       {children}
-    </div>
+    </ol>
   );
+});
+
+// Configure sortable container see. https://github.com/clauderic/react-sortable-hoc
+// Items can be sorted horizontally, vertically or in a grid.
+// axis="xy" means grid like sorting
+const AddImages = props => {
+  return <SortableImages axis="xy" {...props} />;
 };
 
 AddImages.defaultProps = { images: [] };
 
-const { array, node } = PropTypes;
+const { array, func, node } = PropTypes;
 
 AddImages.propTypes = {
   images: array,
   children: node.isRequired,
+  onSortEnd: func.isRequired,
 };
 
 export default AddImages;

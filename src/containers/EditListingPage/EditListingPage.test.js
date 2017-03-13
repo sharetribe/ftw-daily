@@ -12,6 +12,7 @@ describe('EditListingPageComponent', () => {
         onCreateListing={v => v}
         onLoadListing={v => v}
         onImageUpload={v => v}
+        onUpdateImageOrder={v => v}
         page={{ imageOrder: [], images: {} }}
         type="new"
       />,
