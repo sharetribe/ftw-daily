@@ -1,3 +1,4 @@
+import AddImages from './AddImages/AddImages';
 import BookingInfo from './BookingInfo/BookingInfo';
 import Discussion from './Discussion/Discussion';
 import FilterPanel from './FilterPanel/FilterPanel';
@@ -16,6 +17,7 @@ import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 
 export {
+  AddImages,
   BookingInfo,
   Discussion,
   FilterPanel,

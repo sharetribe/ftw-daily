@@ -1,4 +1,5 @@
 // components
+import * as AddImages from './components/AddImages/AddImages.example';
 import * as BookingInfo from './components/BookingInfo/BookingInfo.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
@@ -17,6 +18,7 @@ import * as PasswordForgottenForm
 import * as SignUpForm from './containers/SignUpForm/SignUpForm.example';
 
 export {
+  AddImages,
   BookingInfo,
   ChangeAccountPasswordForm,
   ChangePasswordForm,
