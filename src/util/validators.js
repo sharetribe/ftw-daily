@@ -14,3 +14,7 @@ export const maxLength = (message, maximumLength) =>
   value => {
     return !value || value.length <= maximumLength ? VALID : message;
   };
+
+export const noEmptyArray = message => value => {
+  return value && Array.isArray(value) && value.length > 0 ? VALID : message;
+};

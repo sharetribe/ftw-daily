@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
-import { maxLength, required } from '../../util/validators';
+import { noEmptyArray, maxLength, required } from '../../util/validators';
 import { Promised } from '../../components';
 import css from './EditListingForm.css';
 
@@ -57,17 +57,13 @@ RenderField.propTypes = {
 
 // Add image wrapper. Label is the only visible element, file input is hidden.
 const RenderAddImage = props => {
-  const { accept, input, label, type, meta } = props;
+  const { accept, input, label, type } = props;
   const { name, onChange } = input;
-  const { touched, warning } = meta;
   const inputProps = { accept, id: name, name, onChange, type };
   return (
     <div className={css.addImageWrapper}>
       <input {...inputProps} style={{ display: 'none' }} />
-      <div>
-        <label htmlFor={name} className={css.addImage}>{label}</label>
-        {touched && warning ? <span className={css.warning}>{warning}</span> : null}
-      </div>
+      <label htmlFor={name} className={css.addImage}>{label}</label>
     </div>
   );
 };
@@ -81,10 +77,6 @@ RenderAddImage.propTypes = {
   }).isRequired,
   label: string.isRequired,
   type: string.isRequired,
-  meta: shape({
-    touched: bool,
-    warning: string,
-  }).isRequired,
 };
 
 class EditListingForm extends Component {
@@ -134,6 +126,7 @@ class EditListingForm extends Component {
       },
     );
     const maxLength60 = maxLength(maxLengthStr, TITLE_MAX_LENGTH);
+    const imageRequiredStr = intl.formatMessage({ id: 'EditListingForm.imageRequired' });
 
     return (
       <form onSubmit={handleSubmit}>
@@ -159,11 +152,7 @@ class EditListingForm extends Component {
                 renderFulfilled={dataURL => {
                   return (
                     <div className={css.thumbnail}>
-                      <img
-                        src={dataURL}
-                        alt={encodeURIComponent(i.file.name)}
-                        className={css.thumbnailImage}
-                      />
+                      <img src={dataURL} alt={i.file.name} className={css.thumbnailImage} />
                       {uploadingOverlay}
                     </div>
                   );
@@ -180,16 +169,24 @@ class EditListingForm extends Component {
             onChange={this.onImageUploadHandler}
             type="file"
           />
-        </div>
 
-        <Field
-          component={props => {
-            const { input, type } = props;
-            return <input {...input} type={type} />;
-          }}
-          name="images"
-          type="hidden"
-        />
+          <Field
+            component={props => {
+              const { input, type, meta: { error, touched } } = props;
+              return (
+                <div className={css.imageRequiredWrapper}>
+                  <input {...input} type={type} />
+                  {touched && error
+                    ? <span className={css.imageRequiredError}>{error}</span>
+                    : null}
+                </div>
+              );
+            }}
+            name="images"
+            type="hidden"
+            validate={[noEmptyArray(imageRequiredStr)]}
+          />
+        </div>
 
         <Field
           name="description"

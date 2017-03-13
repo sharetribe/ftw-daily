@@ -6,6 +6,7 @@
   "HeroSection.subTitle": "The largest online community to rent music studios",
   "HeroSection.title": "Book Studiotime anywhere",
   "EditListingForm.required": "Required",
+  "EditListingForm.imageRequired": "You need to add at least one image.",
   "EditListingForm.maxLength": "Must be {maxLength} characters or less",
   "ListingPage.loadingListingData": "Loading listing data",
   "ListingPage.noListingData": "Could not find listing data",

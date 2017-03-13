@@ -37,24 +37,25 @@ exports[`EditListingForm matches snapshot 1`] = `
           }
         }
         type="file" />
-      <div>
-        <label
-          className={undefined}
-          htmlFor="addImage">
-          + Add image
-        </label>
-      </div>
+      <label
+        className={undefined}
+        htmlFor="addImage">
+        + Add image
+      </label>
+    </div>
+    <div
+      className={undefined}>
+      <input
+        name="images"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        onFocus={[Function]}
+        type="hidden"
+        value="" />
     </div>
   </div>
-  <input
-    name="images"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onDragStart={[Function]}
-    onDrop={[Function]}
-    onFocus={[Function]}
-    type="hidden"
-    value="" />
   <div>
     <label
       htmlFor="description">
