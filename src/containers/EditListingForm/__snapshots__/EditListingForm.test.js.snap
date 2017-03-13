@@ -1,82 +1,19 @@
 exports[`EditListingForm matches snapshot 1`] = `
-<form
-  onSubmit={[Function]}>
-  <div>
-    <label
-      htmlFor="title">
-      Title
-    </label>
-    <div>
-      <input
-        name="title"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onDragStart={[Function]}
-        onDrop={[Function]}
-        onFocus={[Function]}
-        placeholder="Title"
-        type="text"
-        value="" />
-    </div>
-  </div>
-  <h3>
-    Images
-  </h3>
-  <div
-    className={undefined}>
-    <div
-      className={undefined}>
-      <input
-        accept="image/*"
-        id="addImage"
-        name="addImage"
-        onChange={[Function]}
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-        type="file" />
-      <label
-        className={undefined}
-        htmlFor="addImage">
-        + Add image
-      </label>
-    </div>
-    <div
-      className={undefined}>
-      <input
-        name="images"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onDragStart={[Function]}
-        onDrop={[Function]}
-        onFocus={[Function]}
-        type="hidden"
-        value="" />
-    </div>
-  </div>
-  <div>
-    <label
-      htmlFor="description">
-      Description
-    </label>
-    <div>
-      <textarea
-        name="description"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onDragStart={[Function]}
-        onDrop={[Function]}
-        onFocus={[Function]}
-        placeholder="Description"
-        value="" />
-    </div>
-  </div>
-  <button
-    disabled={true}
-    type="submit">
-    Save listing
-  </button>
-</form>
+<Connect(Form(InjectIntl(EditListingForm)))
+  destroyOnUnmount={true}
+  enableReinitialize={false}
+  forceUnregisterOnUnmount={false}
+  form="EditListingForm"
+  getFormState={[Function]}
+  images={Array []}
+  keepDirtyOnReinitialize={false}
+  onImageUpload={[Function]}
+  onSubmit={[Function]}
+  onUpdateImageOrder={[Function]}
+  persistentSubmitErrors={false}
+  pure={true}
+  shouldAsyncValidate={[Function]}
+  shouldValidate={[Function]}
+  touchOnBlur={true}
+  touchOnChange={false} />
 `;
