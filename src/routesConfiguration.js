@@ -64,12 +64,14 @@ const routesConfiguration = [
         component: props => <ListingPage {...props} />,
       },
       {
+        auth: true,
         path: '/l/new',
         exact: true,
         name: 'NewListingPage',
         component: props => <EditListingPage {...props} type={'new'} />,
       },
       {
+        auth: true,
         path: '/l/:slug/:id/edit',
         exact: true,
         name: 'EditListingPage',
