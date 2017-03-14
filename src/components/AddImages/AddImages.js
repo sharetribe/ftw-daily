@@ -7,7 +7,7 @@
  *   <input type="file" accept="images/*" onChange={handleChange} />
  * </AddImages>
  */
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { Promised } from '../../components';
 import css from './AddImages.css';
@@ -19,33 +19,54 @@ const readImage = file => new Promise((resolve, reject) => {
   reader.onload = e => resolve(e.target.result);
   reader.onerror = e => {
     // eslint-disable-next-line
-    console.error(`Error ${e} happened while reading ${file.name}: ${e.target.result}`);
+    console.error('Error (', e, `) happened while reading ${file.name}: ${e.target.result}`);
     reject(new Error(`Error reading ${file.name}: ${e.target.result}`));
   };
   reader.readAsDataURL(file);
 });
 
 // Create sortable elments out of given thumbnail file
-const SortableImage = SortableElement(props => {
-  const { file, id, imageId } = props;
-  // While image is uploading we show overlay on top of thumbnail
-  const uploadingOverlay = !imageId ? <div className={css.thumbnailLoading}>Uploading</div> : null;
-  return (
-    <Promised
-      key={id}
-      promise={readImage(file)}
-      renderFulfilled={dataURL => {
-        return (
-          <li className={css.thumbnail}>
-            <img src={dataURL} alt={encodeURIComponent(file.name)} className={css.thumbnailImage} />
-            {uploadingOverlay}
-          </li>
-        );
-      }}
-      renderRejected={() => <li className={css.thumbnail}>Could not read file</li>}
-    />
-  );
-});
+class Thumbnail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      promisedImage: readImage(this.props.file),
+    };
+  }
+
+  render() {
+    const { file, id, imageId } = this.props;
+    // While image is uploading we show overlay on top of thumbnail
+    const uploadingOverlay = !imageId ? <div className={css.thumbnailLoading}>Uploading</div> : null;
+    return (
+      <Promised
+        key={id}
+        promise={this.state.promisedImage}
+        renderFulfilled={dataURL => {
+          return (
+            <li className={css.thumbnail}>
+              <img src={dataURL} alt={file.name} className={css.thumbnailImage} />
+              {uploadingOverlay}
+            </li>
+          );
+        }}
+        renderRejected={() => <li className={css.thumbnail}>Could not read file</li>}
+      />
+    );
+  }
+};
+
+Thumbnail.defaultProps = { imageId: null };
+
+const { any, array, func, node, string } = PropTypes;
+
+Thumbnail.propTypes = {
+  file: any.isRequired,
+  id: string.isRequired,
+  imageId: string,
+};
+
+const SortableImage = SortableElement(Thumbnail);
 
 // Create container where there are sortable images and passed children like "Add image" input etc.
 const SortableImages = SortableContainer(props => {
@@ -66,8 +87,6 @@ const AddImages = props => {
 };
 
 AddImages.defaultProps = { images: [] };
-
-const { array, func, node } = PropTypes;
 
 AddImages.propTypes = {
   images: array,

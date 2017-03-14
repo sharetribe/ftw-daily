@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { findIndex } from 'lodash';
+import { findIndex, uniqueId } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import AddImages from './AddImages';
 import css from './AddImages.example.css';
 
-let id = 0;
 const getId = () => {
-  id += 1;
-  return id;
+  return uniqueId();
 };
 
 class AddImagesTest extends Component {
@@ -34,7 +32,7 @@ class AddImagesTest extends Component {
     setTimeout(
       () => {
 
-        this.setState((prevState, props) => {
+        this.setState((prevState) => {
           const images = prevState.images;
           const imageIndex = findIndex(images, i => i.id === fileId);
           const updatedImage = { ...imageData, imageId: fileId };
