@@ -11,17 +11,16 @@ const TITLE_MAX_LENGTH = 60;
 
 // readImage returns a promise which is resolved
 // when FileReader has loaded given file as dataURL
-const readImage = file =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = e => resolve(e.target.result);
-    reader.onerror = e => {
-      // eslint-disable-next-line
-      console.error(`Error ${e} happened while reading ${file.name}: ${e.target.result}`);
-      reject(new Error(`Error reading ${file.name}: ${e.target.result}`));
-    };
-    reader.readAsDataURL(file);
-  });
+const readImage = file => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.onload = e => resolve(e.target.result);
+  reader.onerror = e => {
+    // eslint-disable-next-line
+    console.error(`Error ${e} happened while reading ${file.name}: ${e.target.result}`);
+    reject(new Error(`Error reading ${file.name}: ${e.target.result}`));
+  };
+  reader.readAsDataURL(file);
+});
 
 // Custom inputs with validator messages
 const RenderField = ({ input, label, type, meta }) => {
@@ -119,12 +118,9 @@ class EditListingForm extends Component {
       submitting,
     } = this.props;
     const requiredStr = intl.formatMessage({ id: 'EditListingForm.required' });
-    const maxLengthStr = intl.formatMessage(
-      { id: 'EditListingForm.maxLength' },
-      {
-        maxLength: TITLE_MAX_LENGTH,
-      },
-    );
+    const maxLengthStr = intl.formatMessage({ id: 'EditListingForm.maxLength' }, {
+      maxLength: TITLE_MAX_LENGTH,
+    });
     const maxLength60 = maxLength(maxLengthStr, TITLE_MAX_LENGTH);
     const imageRequiredStr = intl.formatMessage({ id: 'EditListingForm.imageRequired' });
 

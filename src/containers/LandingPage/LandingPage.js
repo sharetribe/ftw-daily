@@ -5,10 +5,9 @@ import { HeroSearchForm } from '../../containers';
 import { changeLocationFilter } from '../../ducks/LocationFilter.duck';
 import css from './LandingPage.css';
 
-const createSubmitHandler = onLocationChanged =>
-  formData => {
-    onLocationChanged(formData.location);
-  };
+const createSubmitHandler = onLocationChanged => formData => {
+  onLocationChanged(formData.location);
+};
 
 export const LandingPageComponent = props => {
   const { onLocationChanged, filter } = props;
