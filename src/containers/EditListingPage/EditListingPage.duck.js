@@ -21,6 +21,8 @@ export const UPLOAD_IMAGE_REQUEST = 'app/EditListingPage/UPLOAD_IMAGE_REQUEST';
 export const UPLOAD_IMAGE_SUCCESS = 'app/EditListingPage/UPLOAD_IMAGE_SUCCESS';
 export const UPLOAD_IMAGE_ERROR = 'app/EditListingPage/UPLOAD_IMAGE_ERROR';
 
+export const UPDATE_IMAGE_ORDER = 'app/EditListingPage/UPDATE_IMAGE_ORDER';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -82,6 +84,8 @@ export default function reducer(state = initialState, action = {}) {
       };
       return { ...state, images };
     }
+    case UPDATE_IMAGE_ORDER:
+      return { ...state, imageOrder: payload.imageOrder };
 
     default:
       return state;
@@ -91,6 +95,11 @@ export default function reducer(state = initialState, action = {}) {
 // ================ Selectors ================ //
 
 // ================ Action creators ================ //
+
+export const updateImageOrder = imageOrder => ({
+  type: UPDATE_IMAGE_ORDER,
+  payload: { imageOrder },
+});
 
 // All the action creators that don't have the {Success, Error} suffix
 // take the params object that the corresponding SDK endpoint method

@@ -6,6 +6,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     initData={Object {}}
     onImageUpload={[Function]}
     onSubmit={[Function]}
+    onUpdateImageOrder={[Function]}
     saveActionMsg="Create listing" />
 </Connect(withRouter(PageLayout))>
 `;

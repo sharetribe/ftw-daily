@@ -2,25 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
+import { arrayMove } from 'react-sortable-hoc';
 import { noEmptyArray, maxLength, required } from '../../util/validators';
-import { Promised } from '../../components';
+import { AddImages } from '../../components';
 import css from './EditListingForm.css';
 
 const ACCEPT_IMAGES = 'image/*';
 const TITLE_MAX_LENGTH = 60;
-
-// readImage returns a promise which is resolved
-// when FileReader has loaded given file as dataURL
-const readImage = file => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.onload = e => resolve(e.target.result);
-  reader.onerror = e => {
-    // eslint-disable-next-line
-    console.error(`Error ${e} happened while reading ${file.name}: ${e.target.result}`);
-    reject(new Error(`Error reading ${file.name}: ${e.target.result}`));
-  };
-  reader.readAsDataURL(file);
-});
 
 // Custom inputs with validator messages
 const RenderField = ({ input, label, type, meta }) => {
@@ -61,7 +49,7 @@ const RenderAddImage = props => {
   const inputProps = { accept, id: name, name, onChange, type };
   return (
     <div className={css.addImageWrapper}>
-      <input {...inputProps} style={{ display: 'none' }} />
+      <input {...inputProps} className={css.addImageInput} />
       <label htmlFor={name} className={css.addImage}>{label}</label>
     </div>
   );
@@ -83,6 +71,7 @@ class EditListingForm extends Component {
     super(props);
     this.handleInitialize = this.handleInitialize.bind(this);
     this.onImageUploadHandler = this.onImageUploadHandler.bind(this);
+    this.onSortEnd = this.onSortEnd.bind(this);
   }
 
   componentDidMount() {
@@ -100,6 +89,11 @@ class EditListingForm extends Component {
     if (file) {
       this.props.onImageUpload({ id: `${file.name}_${Date.now()}`, file });
     }
+  }
+
+  onSortEnd({ oldIndex, newIndex }) {
+    const images = arrayMove(this.props.images, oldIndex, newIndex);
+    this.props.onUpdateImageOrder(images.map(i => i.id));
   }
 
   handleInitialize() {
@@ -135,28 +129,7 @@ class EditListingForm extends Component {
         />
 
         <h3>Images</h3>
-        <div className={css.imagesContainer}>
-          {images.map(i => {
-            // While image is uploading we show overlay on top of thumbnail
-            const uploadingOverlay = !i.imageId
-              ? <div className={css.thumbnailLoading}>Uploading</div>
-              : null;
-            return (
-              <Promised
-                key={i.id}
-                promise={readImage(i.file)}
-                renderFulfilled={dataURL => {
-                  return (
-                    <div className={css.thumbnail}>
-                      <img src={dataURL} alt={i.file.name} className={css.thumbnailImage} />
-                      {uploadingOverlay}
-                    </div>
-                  );
-                }}
-                renderRejected={() => <div className={css.thumbnail}>Could not read file</div>}
-              />
-            );
-          })}
+        <AddImages images={images} onSortEnd={this.onSortEnd}>
           <Field
             accept={ACCEPT_IMAGES}
             component={RenderAddImage}
@@ -182,7 +155,7 @@ class EditListingForm extends Component {
             type="hidden"
             validate={[noEmptyArray(imageRequiredStr)]}
           />
-        </div>
+        </AddImages>
 
         <Field
           name="description"
@@ -203,6 +176,9 @@ EditListingForm.propTypes = {
   ...formPropTypes,
   initData: shape({ title: string, description: string }),
   intl: intlShape.isRequired,
+  onImageUpload: func.isRequired,
+  onUpdateImageOrder: func.isRequired,
+  onSubmit: func.isRequired,
 };
 
 export default reduxForm({ form: 'EditListingForm' })(injectIntl(EditListingForm));

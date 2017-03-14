@@ -5,11 +5,14 @@ export const Empty = {
   component: EditListingForm,
   props: {
     images: [],
-    onImageUpload(values) {
+    onImageUpload: values => {
       console.log(`onImageUpload with id (${values.id}) and file name (${values.file.name})`);
     },
-    onSubmit(values) {
+    onSubmit: values => {
       console.log('Submit EditListingForm with (unformatted) values:', values);
+    },
+    onUpdateImageOrder: imageOrder => {
+      console.log('onUpdateImageOrder with new imageOrder:', imageOrder);
     },
   },
 };

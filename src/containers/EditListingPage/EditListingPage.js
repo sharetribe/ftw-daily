@@ -10,6 +10,7 @@ import {
   requestCreateListing,
   requestShowListing,
   requestImageUpload,
+  updateImageOrder,
 } from './EditListingPage.duck';
 
 const formatRequestData = values => {
@@ -39,7 +40,16 @@ export class EditListingPageComponent extends Component {
   }
 
   render() {
-    const { data, intl, onCreateListing, onImageUpload, page, params, type } = this.props;
+    const {
+      data,
+      intl,
+      onCreateListing,
+      onImageUpload,
+      onUpdateImageOrder,
+      page,
+      params,
+      type,
+    } = this.props;
     const isNew = type === 'new';
     const id = page.submittedListingId || (params && new types.UUID(params.id));
     const listingsById = getListingsById(data, [id]);
@@ -77,6 +87,7 @@ export class EditListingPageComponent extends Component {
             initData={initData}
             onImageUpload={onImageUpload}
             onSubmit={onSubmit(onCreateListing)}
+            onUpdateImageOrder={onUpdateImageOrder}
             saveActionMsg={saveActionMsg}
           />
         </PageLayout>
@@ -103,9 +114,10 @@ const { func, object, shape, string } = PropTypes;
 EditListingPageComponent.propTypes = {
   data: object.isRequired,
   intl: intlShape.isRequired,
-  onImageUpload: func.isRequired,
-  onLoadListing: func.isRequired,
   onCreateListing: func.isRequired,
+  onLoadListing: func.isRequired,
+  onImageUpload: func.isRequired,
+  onUpdateImageOrder: func.isRequired,
   page: object.isRequired,
   params: shape({
     id: string,
@@ -124,6 +136,7 @@ const mapDispatchToProps = dispatch => {
     onLoadListing: id => dispatch(requestShowListing({ id, include: ['author', 'images'] })),
     onCreateListing: values => dispatch(requestCreateListing(formatRequestData(values))),
     onImageUpload: data => dispatch(requestImageUpload(data)),
+    onUpdateImageOrder: imageOrder => dispatch(updateImageOrder(imageOrder)),
   };
 };
 
