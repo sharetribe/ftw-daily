@@ -3,9 +3,8 @@
  * We are following Ducks module proposition:
  * https://github.com/erikras/ducks-modular-redux
  */
-
-/* eslint-disable import/prefer-default-export */
 import EditListingPage from './EditListingPage/EditListingPage.duck';
+import ListingPage from './ListingPage/ListingPage.duck';
 import SearchPage from './SearchPage/SearchPage.duck';
 
-export { EditListingPage, SearchPage };
+export { EditListingPage, ListingPage, SearchPage };
