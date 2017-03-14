@@ -4,7 +4,7 @@
 
 .imagesContainer {
   width: 100%;
-  min-height: 150px;
+  min-height: 110px;
 }
 
 .addImageWrapper {
@@ -58,4 +58,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.imageRequiredWrapper {
+  width: 100%;
+  clear: both;
+}
+.imageRequiredError {
+  composes: error;
+
 }
