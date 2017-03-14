@@ -6,11 +6,11 @@
     "basic-auth": "^1.1.0",
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
-    "express": "^4.14.1",
-    "helmet": "^3.4.1",
+    "express": "^4.15.2",
+    "helmet": "^3.5.0",
     "lodash": "^4.17.4",
     "path-to-regexp": "^1.5.3",
-    "qs": "^6.3.1",
+    "qs": "^6.4.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-helmet": "^4.0.0",
@@ -21,17 +21,17 @@
     "redux-form": "^6.5.0",
     "redux-saga": "^0.14.3",
     "redux-thunk": "^2.2.0",
-    "sanitize.css": "^4.1.0",
+    "sanitize.css": "^5.0.0",
     "sharetribe-scripts": "0.9.2",
-    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#d8f2e3f153e22db075b7423090fa06d13b9ca314",
-    "source-map-support": "^0.4.11",
+    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#ef8b6d5643df72832f47208f5056b2d606ad19b0",
+    "source-map-support": "^0.4.12",
     "url": "^0.11.0"
   },
   "devDependencies": {
     "enzyme": "^2.7.1",
     "enzyme-to-json": "^1.5.0",
     "nodemon": "^1.11.0",
-    "prettier": "^0.19.0",
+    "prettier": "^0.22.0",
     "react-addons-test-utils": "^15.4.2",
     "react-test-renderer": "^15.4.2"
   },
@@ -49,7 +49,7 @@
     "heroku-postbuild": "yarn run build"
   },
   "engines": {
-    "node": "6.9.5",
-    "yarn": "0.20.3"
+    "node": "6.10.0",
+    "yarn": "0.21.3"
   }
 }

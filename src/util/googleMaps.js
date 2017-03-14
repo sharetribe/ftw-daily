@@ -30,25 +30,28 @@ const placeBounds = place => {
  * @return {Promise<util.propTypes.place>} Promise that
  * resolves to the detailed place, rejects if the request failed
  */
-export const getPlaceDetails = placeId => new Promise((resolve, reject) => {
-  const serviceStatus = window.google.maps.places.PlacesServiceStatus;
-  const el = document.createElement('div');
-  const service = new window.google.maps.places.PlacesService(el);
+export const getPlaceDetails = placeId =>
+  new Promise((resolve, reject) => {
+    const serviceStatus = window.google.maps.places.PlacesServiceStatus;
+    const el = document.createElement('div');
+    const service = new window.google.maps.places.PlacesService(el);
 
-  service.getDetails({ placeId }, (place, status) => {
-    if (status !== serviceStatus.OK) {
-      reject(
-        new Error(`Could not get details for place id "${placeId}", error status was "${status}"`),
-      );
-    } else {
-      resolve({
-        address: place.formatted_address,
-        origin: placeOrigin(place),
-        bounds: placeBounds(place),
-      });
-    }
+    service.getDetails({ placeId }, (place, status) => {
+      if (status !== serviceStatus.OK) {
+        reject(
+          new Error(
+            `Could not get details for place id "${placeId}", error status was "${status}"`,
+          ),
+        );
+      } else {
+        resolve({
+          address: place.formatted_address,
+          origin: placeOrigin(place),
+          bounds: placeBounds(place),
+        });
+      }
+    });
   });
-});
 
 const predictionSuccessful = status => {
   const { OK, ZERO_RESULTS } = window.google.maps.places.PlacesServiceStatus;
@@ -64,18 +67,19 @@ const predictionSuccessful = status => {
  * with the original search query and an array of
  * `google.maps.places.AutocompletePrediction` objects
  */
-export const getPlacePredictions = search => new Promise((resolve, reject) => {
-  const service = new window.google.maps.places.AutocompleteService();
+export const getPlacePredictions = search =>
+  new Promise((resolve, reject) => {
+    const service = new window.google.maps.places.AutocompleteService();
 
-  service.getPlacePredictions({ input: search }, (predictions, status) => {
-    if (!predictionSuccessful(status)) {
-      reject(new Error(`Prediction service status not OK: ${status}`));
-    } else {
-      const results = {
-        search,
-        predictions: predictions || [],
-      };
-      resolve(results);
-    }
+    service.getPlacePredictions({ input: search }, (predictions, status) => {
+      if (!predictionSuccessful(status)) {
+        reject(new Error(`Prediction service status not OK: ${status}`));
+      } else {
+        const results = {
+          search,
+          predictions: predictions || [],
+        };
+        resolve(results);
+      }
+    });
   });
-});
