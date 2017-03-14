@@ -8,7 +8,14 @@ import EditListingForm from './EditListingForm';
 
 describe('EditListingForm', () => {
   it('matches snapshot', () => {
-    const tree = renderShallow(<EditListingForm images={[]} onImageUpload={v => v} onSubmit={v => v} onUpdateImageOrder={v => v} />);
+    const tree = renderShallow(
+      <EditListingForm
+        images={[]}
+        onImageUpload={v => v}
+        onSubmit={v => v}
+        onUpdateImageOrder={v => v}
+      />,
+    );
     expect(tree).toMatchSnapshot();
   });
 });

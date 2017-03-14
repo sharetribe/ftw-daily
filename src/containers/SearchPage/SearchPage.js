@@ -51,7 +51,7 @@ export class SearchPageComponent extends Component {
 }
 
 SearchPageComponent.loadData = dispatch => {
-  dispatch(searchListings({ origin: new LatLng(40, 70), include: ['author'] }));
+  dispatch(searchListings({ origin: new LatLng(40, 70), include: ['author', 'images'] }));
 };
 
 SearchPageComponent.defaultProps = { initialListingsLoaded: false, listings: [], tab: 'listings' };

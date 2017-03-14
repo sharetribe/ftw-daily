@@ -37,7 +37,9 @@ class Thumbnail extends Component {
   render() {
     const { file, id, imageId } = this.props;
     // While image is uploading we show overlay on top of thumbnail
-    const uploadingOverlay = !imageId ? <div className={css.thumbnailLoading}>Uploading</div> : null;
+    const uploadingOverlay = !imageId
+      ? <div className={css.thumbnailLoading}>Uploading</div>
+      : null;
     return (
       <Promised
         key={id}
@@ -54,7 +56,7 @@ class Thumbnail extends Component {
       />
     );
   }
-};
+}
 
 Thumbnail.defaultProps = { imageId: null };
 

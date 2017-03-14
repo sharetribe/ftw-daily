@@ -31,8 +31,7 @@ class AddImagesTest extends Component {
     // Fake image uploaded state: show image thumbnail
     setTimeout(
       () => {
-
-        this.setState((prevState) => {
+        this.setState(prevState => {
           const images = prevState.images;
           const imageIndex = findIndex(images, i => i.id === fileId);
           const updatedImage = { ...imageData, imageId: fileId };
@@ -44,9 +43,10 @@ class AddImagesTest extends Component {
           return {
             images: updatedImages,
           };
-      });
-    },
-    1000);
+        });
+      },
+      1000,
+    );
   }
 
   onSortEnd({ oldIndex, newIndex }) {
