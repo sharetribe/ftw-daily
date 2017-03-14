@@ -2,9 +2,16 @@ exports[`ListingCard matches snapshot 1`] = `
 <div>
   <div>
     <div>
-      <img
-        alt="Listing Title"
-        src="http://placehold.it/400x300" />
+      <div>
+        <div>
+          <img
+            alt="No image"
+            src="noImageIcon.svg" />
+          <div>
+            No image
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div>

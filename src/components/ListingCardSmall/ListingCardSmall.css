@@ -4,6 +4,8 @@
   flex-direction: column;
   border-radius: 4px;
   margin-right: 1rem;
+  flex-basis: 130px;
+  flex-shrink: 0;
 }
 
 .squareWrapper {
@@ -14,9 +16,10 @@
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
-  padding-bottom: 75%; /* 4:3 Aspect Ratio */
+  padding-bottom: 100%; /* 4:3 Aspect Ratio */
 }
 
+.noImageContainer,
 .thumbnail {
   position: absolute;
   top: 0;
@@ -25,6 +28,18 @@
   right: 0;
   width: 100%;
   height: 100%;
+}
+.noImageContainer,
+.noImageWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+}
+
+.noImageText {
+  color: #666;
 }
 
 .info {

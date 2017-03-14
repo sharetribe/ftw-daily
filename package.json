@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "private": true,
   "dependencies": {
+    "array.prototype.find": "^2.0.1",
     "basic-auth": "^1.1.0",
     "classnames": "^2.2.5",
     "compression": "^1.6.2",

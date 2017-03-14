@@ -21,7 +21,7 @@ import { PropTypes } from 'react';
 import { types as sdkTypes } from 'sharetribe-sdk';
 
 const { UUID, LatLng, LatLngBounds } = sdkTypes;
-const { oneOf, string, bool, func, shape, instanceOf } = PropTypes;
+const { arrayOf, bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
 
 // Fixed value
 export const value = val => oneOf([val]);
@@ -62,6 +62,20 @@ export const user = shape({
   }),
 });
 
+// Denormalised image object
+export const image = shape({
+  id: uuid.isRequired,
+  type: value('image').isRequired,
+  attributes: shape({
+    sizes: arrayOf(shape({
+      width: number.isRequired,
+      height: number.isRequired,
+      name: string.isRequired,
+      url: string.isRequired,
+    })).isRequired,
+  }),
+});
+
 // Denormalised listing object
 export const listing = shape({
   id: uuid.isRequired,
@@ -73,4 +87,5 @@ export const listing = shape({
     geolocation: latlng.isRequired,
   }),
   author: user,
+  images: arrayOf(image),
 });

@@ -2,6 +2,7 @@ import React from 'react';
 import { NamedLink } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import css from './ListingCard.css';
+import noImageIcon from './images/noImageIcon.svg';
 
 const ListingCard = props => {
   const { listing } = props;
@@ -18,12 +19,39 @@ const ListingCard = props => {
   const review = { rating: 3, count: 10 };
   const authorAvatar = 'http://placehold.it/44x44';
   const authorReview = { rating: 4 };
+  const images = listing.images
+    ? listing.images.map(i => ({ id: i.id, sizes: i.attributes.sizes }))
+    : [];
+  const mainImage = images.length > 0 ? images[0] : null;
+  const squareImageURL = mainImage ? mainImage.sizes.find(i => i.name === 'square').url : null;
+  const square2XImageURL = mainImage
+    ? mainImage.sizes.find(i => i.name === 'square2x').url
+    : null;
+  const higherRes = square2XImageURL ? { srcSet: `${square2XImageURL} 2x` } : null;
+
+  // TODO: svg should have own loading strategy
+  // Now noImageIcon is imported with default configuration (gives url)
+  /* eslint-disable jsx-a11y/img-redundant-alt */
+  const noListingImage = (
+    <div className={css.noImageContainer}>
+      <div className={css.noImageWrapper}>
+        <img className={css.noImageIcon} src={noImageIcon} alt="No image" />
+        <div className={css.noImageText}>No image</div>
+      </div>
+    </div>
+  );
+  /* eslint-enable jsx-a11y/img-redundant-alt */
+  const listingImage = (
+    <img className={css.thumbnail} src={squareImageURL} alt="Listing Title" {...higherRes} />
+  );
+
+  const imageOrPlaceholder = squareImageURL ? listingImage : noListingImage;
 
   return (
     <div className={css.listing}>
       <div className={css.squareWrapper}>
         <div className={css.aspectWrapper}>
-          <img className={css.thumbnail} src="http://placehold.it/400x300" alt="Listing Title" />
+          {imageOrPlaceholder}
         </div>
       </div>
       <div className={css.info}>
