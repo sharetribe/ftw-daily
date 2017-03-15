@@ -24,9 +24,7 @@ const ListingCard = props => {
     : [];
   const mainImage = images.length > 0 ? images[0] : null;
   const squareImageURL = mainImage ? mainImage.sizes.find(i => i.name === 'square').url : null;
-  const square2XImageURL = mainImage
-    ? mainImage.sizes.find(i => i.name === 'square2x').url
-    : null;
+  const square2XImageURL = mainImage ? mainImage.sizes.find(i => i.name === 'square2x').url : null;
   const higherRes = square2XImageURL ? { srcSet: `${square2XImageURL} 2x` } : null;
 
   // TODO: svg should have own loading strategy

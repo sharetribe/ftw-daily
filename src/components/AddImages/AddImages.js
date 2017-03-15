@@ -14,16 +14,17 @@ import css from './AddImages.css';
 
 // readImage returns a promise which is resolved
 // when FileReader has loaded given file as dataURL
-const readImage = file => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.onload = e => resolve(e.target.result);
-  reader.onerror = e => {
-    // eslint-disable-next-line
-    console.error('Error (', e, `) happened while reading ${file.name}: ${e.target.result}`);
-    reject(new Error(`Error reading ${file.name}: ${e.target.result}`));
-  };
-  reader.readAsDataURL(file);
-});
+const readImage = file =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => resolve(e.target.result);
+    reader.onerror = e => {
+      // eslint-disable-next-line
+      console.error('Error (', e, `) happened while reading ${file.name}: ${e.target.result}`);
+      reject(new Error(`Error reading ${file.name}: ${e.target.result}`));
+    };
+    reader.readAsDataURL(file);
+  });
 
 // Create sortable elments out of given thumbnail file
 class Thumbnail extends Component {
