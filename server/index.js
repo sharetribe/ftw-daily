@@ -20,108 +20,12 @@ const express = require('express');
 const helmet = require('helmet');
 const compression = require('compression');
 const path = require('path');
-const fs = require('fs');
 const qs = require('qs');
-const url = require('url');
-const _ = require('lodash');
-const React = require('react');
-const sagaEffects = require('redux-saga/effects');
 const auth = require('./auth');
-const sdk = require('./fakeSDK');
+const renderer = require('./renderer');
+const dataLoader = require('./dataLoader');
 
-// Construct the bundle path where the server side rendering function
-// can be imported.
 const buildPath = path.resolve(__dirname, '..', 'build');
-const manifestPath = path.join(buildPath, 'asset-manifest.json');
-const manifest = require(manifestPath);
-const mainJsPath = path.join(buildPath, manifest['main.js']);
-const mainJs = require(mainJsPath);
-const renderApp = mainJs.default;
-const matchPathname = mainJs.matchPathname;
-const configureStore = mainJs.configureStore;
-
-// The HTML build file is generated from the `public/index.html` file
-// and used as a template for server side rendering. The application
-// head and body are injected to the template from the results of
-// calling the `renderApp` function imported from the bundle above.
-const indexHtml = fs.readFileSync(path.join(buildPath, 'index.html'), 'utf-8');
-
-const reNoMatch = /($^)/;
-const template = _.template(indexHtml, {
-  // Interpolate variables in the HTML template with the following
-  // syntax: <!--!variableName-->
-  //
-  // This syntax is very intentional: it works as a HTML comment and
-  // doesn't render anything visual in the dev mode, and in the
-  // production mode, HtmlWebpackPlugin strips out comments using
-  // HTMLMinifier except those that aren't explicitly marked as custom
-  // comments. By default, custom comments are those that begin with a
-  // ! character.
-  //
-  // Note that the variables are _not_ escaped since we only inject
-  // HTML content.
-  //
-  // See:
-  // - https://github.com/ampedandwired/html-webpack-plugin
-  // - https://github.com/kangax/html-minifier
-  // - Plugin options in the production Webpack configuration file
-  interpolate: /<!--!([\s\S]+?)-->/g,
-  // Disable evaluated and escaped variables in the template
-  evaluate: reNoMatch,
-  escape: reNoMatch,
-});
-
-function fetchInitialState(requestUrl) {
-  const pathname = url.parse(requestUrl).pathname;
-  const { matchedRoutes, params } = matchPathname(pathname);
-
-  // pathname may match with several routes (if they don't have exact=true)
-  // We filter all the components form matched routes that have `loadData`
-  const initialFetches = _.chain(matchedRoutes)
-    .filter(r => r.loadData)
-    .map(r => sagaEffects.fork(r.loadData, sdk))
-    .value();
-
-  // We need to combine different onload sagas under one yield
-  const fetchInitialData = function* fetchInitialData() {
-    yield initialFetches;
-  };
-
-  // runSaga (if necessary) and return initial store state after loadData fetches.
-  if (initialFetches.length > 0) {
-    const fetchPromise = new Promise((resolve, reject) => {
-      const store = configureStore({});
-      store
-        .runSaga(fetchInitialData)
-        .done.then(() => {
-          resolve(store.getState());
-        })
-        .catch(e => {
-          reject(e);
-        });
-      // Close temporary store's saga middleware (which was used only for fetching initial store state)
-      store.closeSagaMiddleware();
-    });
-    return fetchPromise;
-  }
-  return Promise.resolve({});
-}
-
-function render(requestUrl, context, preloadedState) {
-  const { head, body } = renderApp(requestUrl, context, preloadedState);
-
-  // Preloaded state needs to be passed for client side too.
-  // For security reasons we ensure that preloaded state is considered as a string
-  // by replacing '<' character with its unicode equivalent.
-  // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
-  const serializedState = JSON.stringify(preloadedState).replace(/</g, '\\u003c');
-  const preloadedStateScript = `
-      <script>window.__PRELOADED_STATE__ = ${serializedState};</script>
-  `;
-
-  return template({ title: head.title.toString(), preloadedStateScript, body });
-}
-
 const env = process.env.NODE_ENV;
 const dev = env !== 'production';
 const PORT = process.env.PORT || 4000;
@@ -145,10 +49,18 @@ app.get('*', (req, res) => {
   const context = {};
   const filters = qs.parse(req.query);
 
-  // TODO fetch this asynchronously
-  fetchInitialState(req.url)
+  dataLoader
+    .loadData(req.url)
     .then(preloadedState => {
-      const html = render(req.url, context, preloadedState);
+      const html = renderer.render(req.url, context, preloadedState);
+
+      const debugData = {
+        url: req.url,
+        preloadedState,
+        context,
+      };
+
+      console.log(`\nRender info:\n${JSON.stringify(debugData, null, '  ')}`);
 
       if (context.forbidden) {
         // Routes component injects the context.forbidden when the
@@ -170,7 +82,7 @@ app.get('*', (req, res) => {
       }
     })
     .catch(e => {
-      console.error(e.message);
+      console.error(e);
       res.status(500).send(e.message);
     });
 });
