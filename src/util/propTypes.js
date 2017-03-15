@@ -67,12 +67,14 @@ export const image = shape({
   id: uuid.isRequired,
   type: value('image').isRequired,
   attributes: shape({
-    sizes: arrayOf(shape({
-      width: number.isRequired,
-      height: number.isRequired,
-      name: string.isRequired,
-      url: string.isRequired,
-    })).isRequired,
+    sizes: arrayOf(
+      shape({
+        width: number.isRequired,
+        height: number.isRequired,
+        name: string.isRequired,
+        url: string.isRequired,
+      }),
+    ).isRequired,
   }),
 });
 

@@ -112,9 +112,12 @@ class EditListingForm extends Component {
       submitting,
     } = this.props;
     const requiredStr = intl.formatMessage({ id: 'EditListingForm.required' });
-    const maxLengthStr = intl.formatMessage({ id: 'EditListingForm.maxLength' }, {
-      maxLength: TITLE_MAX_LENGTH,
-    });
+    const maxLengthStr = intl.formatMessage(
+      { id: 'EditListingForm.maxLength' },
+      {
+        maxLength: TITLE_MAX_LENGTH,
+      },
+    );
     const maxLength60 = maxLength(maxLengthStr, TITLE_MAX_LENGTH);
     const imageRequiredStr = intl.formatMessage({ id: 'EditListingForm.imageRequired' });
 
