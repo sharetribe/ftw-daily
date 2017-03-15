@@ -66,7 +66,7 @@ describe('data utils', () => {
       const listing1 = { id: new UUID('listing1'), type: 'listing' };
       const listing2 = { id: new UUID('listing2'), type: 'listing' };
       expect(() => combinedResourceObjects(listing1, listing2)).toThrow(
-        'Cannot merge resource objects with different ids or types',
+        'Cannot merge resource objects with different ids or types'
       );
     });
 
@@ -74,7 +74,7 @@ describe('data utils', () => {
       const listing1 = { id: new UUID('listing1'), type: 'listing' };
       const author1 = { id: new UUID('author1'), type: 'author' };
       expect(() => combinedResourceObjects(listing1, author1)).toThrow(
-        'Cannot merge resource objects with different ids or types',
+        'Cannot merge resource objects with different ids or types'
       );
     });
 
@@ -200,7 +200,7 @@ describe('data utils', () => {
     it('throws when selecting a nonexistent type', () => {
       const entities = { listing: { listing1: createListing('listing1') } };
       expect(() => denormalisedEntities(entities, 'user', [new UUID('user1')])).toThrow(
-        'No entities of type user',
+        'No entities of type user'
       );
     });
 
@@ -208,7 +208,7 @@ describe('data utils', () => {
       const entities = { listing: { listing1: createListing('listing1') } };
       const ids = [new UUID('listing2')];
       expect(() => denormalisedEntities(entities, 'listing', ids)).toThrow(
-        'Entity listing with id listing2 not found',
+        'Entity listing with id listing2 not found'
       );
     });
 
@@ -218,7 +218,7 @@ describe('data utils', () => {
       const entities = { listing: { listing1 } };
       const ids = [listing1.id];
       expect(() => denormalisedEntities(entities, 'listing', ids)).toThrow(
-        'No entities of type user',
+        'No entities of type user'
       );
     });
 

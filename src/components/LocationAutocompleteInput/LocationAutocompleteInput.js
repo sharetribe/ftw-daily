@@ -53,7 +53,7 @@ LocationPredictionsList.propTypes = {
       id: string.isRequired,
       description: string.isRequired,
       place_id: string.isRequired,
-    }),
+    })
   ).isRequired,
   highlightedIndex: number,
   onSelectItem: func.isRequired,

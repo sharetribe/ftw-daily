@@ -10,7 +10,7 @@ describe('BookingInfo', () => {
         bookingPeriod="Jan 2nd - Jan 4th"
         bookingDuration="3 days"
         total="165\u20AC"
-      />,
+      />
     );
     expect(tree).toMatchSnapshot();
   });

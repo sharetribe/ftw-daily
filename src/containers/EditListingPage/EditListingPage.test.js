@@ -15,7 +15,7 @@ describe('EditListingPageComponent', () => {
         onUpdateImageOrder={v => v}
         page={{ imageOrder: [], images: {} }}
         type="new"
-      />,
+      />
     );
     expect(tree).toMatchSnapshot();
   });

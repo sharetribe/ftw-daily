@@ -14,7 +14,7 @@ describe('EditListingForm', () => {
         onImageUpload={v => v}
         onSubmit={v => v}
         onUpdateImageOrder={v => v}
-      />,
+      />
     );
     expect(tree).toMatchSnapshot();
   });

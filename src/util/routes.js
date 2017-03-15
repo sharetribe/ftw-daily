@@ -18,7 +18,7 @@ export const flattenRoutes = routes =>
       }
       return flatRoutes;
     },
-    [],
+    []
   );
 
 const findRouteByName = (nameToFind, flattenedRoutes) =>
@@ -66,7 +66,7 @@ export const matchPathname = pathname => {
       }
       return matches;
     },
-    [],
+    []
   );
 };
 

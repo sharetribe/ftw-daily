@@ -45,7 +45,7 @@ class AddImagesTest extends Component {
           };
         });
       },
-      1000,
+      1000
     );
   }
 

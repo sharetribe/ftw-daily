@@ -7,7 +7,7 @@ describe('HeroSection', () => {
     const tree = renderDeep(
       <HeroSection params={{ displayName: 'most-awesome-shop' }}>
         test
-      </HeroSection>,
+      </HeroSection>
     );
     expect(tree).toMatchSnapshot();
   });

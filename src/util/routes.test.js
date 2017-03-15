@@ -15,13 +15,13 @@ describe('withFlattenedRoutes', () => {
     const shallowTree = renderShallow(
       <RoutesProvider flattenedRoutes={routes}>
         <Comp />
-      </RoutesProvider>,
+      </RoutesProvider>
     );
     expect(shallowTree).toMatchSnapshot();
     const deepTree = renderDeep(
       <RoutesProvider flattenedRoutes={routes}>
         <Comp />
-      </RoutesProvider>,
+      </RoutesProvider>
     );
     expect(deepTree).toMatchSnapshot();
   });

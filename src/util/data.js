@@ -48,7 +48,7 @@ export const updatedEntities = (oldEntities, apiResponse) => {
       entities[type][id.uuid] = entity ? combinedResourceObjects(entity, curr) : curr;
       return entities;
     },
-    oldEntities,
+    oldEntities
   );
   /* eslint-enable no-param-reassign */
 
@@ -100,7 +100,7 @@ export const denormalisedEntities = (entities, type, ids) => {
           }
           return ent;
         },
-        entityData,
+        entityData
       );
     }
     return entityData;

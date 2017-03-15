@@ -18,7 +18,7 @@ const { LatLng } = types;
 describe('SearchPageComponent', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
-      <SearchPageComponent onLoadListings={v => v} dispatch={() => null} />,
+      <SearchPageComponent onLoadListings={v => v} dispatch={() => null} />
     );
     expect(tree).toMatchSnapshot();
   });

@@ -13,6 +13,6 @@ export const createRequestTypes = base =>
       acc[type] = `${base}.${type}`;
       return acc;
     },
-    {},
+    {}
   );
 /* eslint-enable import/prefer-default-export */

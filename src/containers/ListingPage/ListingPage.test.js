@@ -17,7 +17,7 @@ describe('ListingPage', () => {
         marketplaceData={marketplaceData}
         intl={fakeIntl}
         onLoadListing={l => l}
-      />,
+      />
     );
     expect(tree).toMatchSnapshot();
   });
@@ -57,7 +57,7 @@ describe('ListingPage', () => {
           expect(e).toEqual(error);
           expect(show.mock.calls).toEqual([[{ id, include: ['author', 'images'] }]]);
           expect(dispatch.mock.calls).toEqual([[showListingRequest(id)], [showListingError(e)]]);
-        },
+        }
       );
     });
   });

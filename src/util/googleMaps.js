@@ -15,7 +15,7 @@ const placeBounds = place => {
     const sw = place.geometry.viewport.getSouthWest();
     return new SDKLatLngBounds(
       new SDKLatLng(ne.lat(), ne.lng()),
-      new SDKLatLng(sw.lat(), sw.lng()),
+      new SDKLatLng(sw.lat(), sw.lng())
     );
   }
   return null;
@@ -39,9 +39,7 @@ export const getPlaceDetails = placeId =>
     service.getDetails({ placeId }, (place, status) => {
       if (status !== serviceStatus.OK) {
         reject(
-          new Error(
-            `Could not get details for place id "${placeId}", error status was "${status}"`,
-          ),
+          new Error(`Could not get details for place id "${placeId}", error status was "${status}"`)
         );
       } else {
         resolve({
