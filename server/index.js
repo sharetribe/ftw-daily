@@ -19,8 +19,10 @@ require('source-map-support').install();
 const express = require('express');
 const helmet = require('helmet');
 const compression = require('compression');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 const qs = require('qs');
+const sharetribeSdk = require('sharetribe-sdk');
 const auth = require('./auth');
 const renderer = require('./renderer');
 const dataLoader = require('./dataLoader');
@@ -29,6 +31,8 @@ const buildPath = path.resolve(__dirname, '..', 'build');
 const env = process.env.NODE_ENV;
 const dev = env !== 'production';
 const PORT = process.env.PORT || 4000;
+const CLIENT_ID = '08ec69f6-d37e-414d-83eb-324e94afddf0';
+const BASE_URL = 'http://localhost:8088';
 const app = express();
 
 // The helmet middleware sets various HTTP headers to improve security.
@@ -44,13 +48,24 @@ if (!dev) {
 
 app.use(compression());
 app.use('/static', express.static(path.join(buildPath, 'static')));
+app.use(cookieParser());
 
 app.get('*', (req, res) => {
   const context = {};
   const filters = qs.parse(req.query);
 
+  const sdk = sharetribeSdk.createInstance({
+    clientId: CLIENT_ID,
+    baseUrl: BASE_URL,
+    tokenStore: sharetribeSdk.tokenStore.expressCookieStore({
+      clientId: CLIENT_ID,
+      req,
+      res,
+    }),
+  });
+
   dataLoader
-    .loadData(req.url)
+    .loadData(req.url, sdk)
     .then(preloadedState => {
       const html = renderer.render(req.url, context, preloadedState);
 
