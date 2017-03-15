@@ -71,39 +71,7 @@ const template = _.template(indexHtml, {
   escape: reNoMatch,
 });
 
-function fetchInitialState(requestUrl) {
-  const pathname = url.parse(requestUrl).pathname;
-  const { matchedRoutes, params } = matchPathname(pathname);
-
-  // pathname may match with several routes (if they don't have exact=true)
-  // We filter all the components form matched routes that have `loadData`
-  const initialFetches = _.chain(matchedRoutes)
-    .filter(r => r.loadData)
-    .map(r => sagaEffects.fork(r.loadData, sdk))
-    .value();
-
-  // We need to combine different onload sagas under one yield
-  const fetchInitialData = function* fetchInitialData() {
-    yield initialFetches;
-  };
-
-  // runSaga (if necessary) and return initial store state after loadData fetches.
-  if (initialFetches.length > 0) {
-    const fetchPromise = new Promise((resolve, reject) => {
-      const store = configureStore({});
-      store
-        .runSaga(fetchInitialData)
-        .done.then(() => {
-          resolve(store.getState());
-        })
-        .catch(e => {
-          reject(e);
-        });
-      // Close temporary store's saga middleware (which was used only for fetching initial store state)
-      store.closeSagaMiddleware();
-    });
-    return fetchPromise;
-  }
+function loadData(url) {
   return Promise.resolve({});
 }
 
@@ -145,8 +113,7 @@ app.get('*', (req, res) => {
   const context = {};
   const filters = qs.parse(req.query);
 
-  // TODO fetch this asynchronously
-  fetchInitialState(req.url)
+  loadData(req.url)
     .then(preloadedState => {
       const html = render(req.url, context, preloadedState);
 
