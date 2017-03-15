@@ -71,7 +71,6 @@ app.get('*', (req, res) => {
 
       const debugData = {
         url: req.url,
-        preloadedState,
         context,
       };
 

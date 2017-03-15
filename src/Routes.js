@@ -2,12 +2,25 @@ import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import { types } from 'sharetribe-sdk';
 import { NotFoundPage } from './containers';
 import { NamedRedirect } from './components';
 import { withFlattenedRoutes } from './util/routes';
 import * as propTypes from './util/propTypes';
 
 const { bool, arrayOf, object, func, shape, string, any } = PropTypes;
+
+// Currently the SDK serialisation doesn't work with mixed types from
+// client bundle and server imports. To fix this temporarily, we wrap
+// the id param here for the client side instead of doing the same in
+// the loadData handler.
+// TODO: remove this once the SDK serialisation works
+const fixParams = params => {
+  if (params.id) {
+    return { ...params, id: new types.UUID(params.id) };
+  }
+  return params;
+};
 
 class RouteComponentRenderer extends Component {
   constructor(props) {
@@ -20,7 +33,7 @@ class RouteComponentRenderer extends Component {
     const shouldLoadData = typeof loadData === 'function' && this.canShowComponent();
 
     if (shouldLoadData) {
-      dispatch(loadData(match.params, {}))
+      dispatch(loadData(fixParams(match.params), {}))
         .then(() => {
           // eslint-disable-next-line no-console
           console.log(`loadData success for ${name} route`);
