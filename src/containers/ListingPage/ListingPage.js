@@ -3,8 +3,11 @@ import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { types } from 'sharetribe-sdk';
 import { NamedLink, PageLayout } from '../../components';
-import { showListings, getListingsById } from '../../ducks/sdk.duck';
+import { getListingsById } from '../../ducks/sdk.duck';
+import { showListing } from './ListingPage.duck';
 import css from './ListingPage.css';
+
+const { UUID } = types;
 
 // TODO this hard coded info needs to be removed when API supports these features
 const info = {
@@ -45,14 +48,10 @@ const info = {
 
 // N.B. All the presentational content needs to be extracted to their own components
 export class ListingPageComponent extends Component {
-  componentDidMount() {
-    ListingPageComponent.loadData(this.props.params.id, this.props.onLoadListing);
-  }
-
   render() {
-    const { entitiesData, intl, params } = this.props;
-    const id = new types.UUID(params.id);
-    const listingsById = getListingsById(entitiesData, [id]);
+    const { params, marketplaceData, showListingError, intl } = this.props;
+    const id = new UUID(params.id);
+    const listingsById = getListingsById(marketplaceData, [id]);
     const currentListing = listingsById.length > 0 ? listingsById[0] : null;
 
     const title = currentListing ? currentListing.attributes.title : '';
@@ -140,40 +139,35 @@ export class ListingPageComponent extends Component {
 
     const noDataMsg = { id: 'ListingPage.noListingData' };
     const noDataError = <PageLayout title={intl.formatMessage(noDataMsg)} />;
-    const loadingOrError = entitiesData.showListingsError ? noDataError : loadingContent;
+    const loadingOrError = showListingError ? noDataError : loadingContent;
 
     return currentListing ? pageContent : loadingOrError;
   }
 }
 
-ListingPageComponent.loadData = (id, onLoadListing) => {
-  onLoadListing(id);
-};
+ListingPageComponent.defaultProps = { showListingError: null };
 
-ListingPageComponent.defaultProps = { listing: null };
-
-const { func, object, shape, string } = PropTypes;
+const { shape, string, object, instanceOf } = PropTypes;
 
 ListingPageComponent.propTypes = {
-  entitiesData: object.isRequired,
-  intl: intlShape.isRequired,
-  onLoadListing: func.isRequired,
   params: shape({
     id: string.isRequired,
     slug: string.isRequired,
   }).isRequired,
+  marketplaceData: object.isRequired,
+  showListingError: instanceOf(Error),
+  intl: intlShape.isRequired,
 };
 
-const mapStateToProps = state => {
-  const { data, ListingPage } = state;
-  const entitiesData = data || {};
-  return { ListingPage, entitiesData };
+const mapStateToProps = state => ({
+  marketplaceData: state.data,
+  showListingError: state.ListingPage.showListingError,
+});
+
+const ListingPage = connect(mapStateToProps)(injectIntl(ListingPageComponent));
+
+ListingPage.loadData = params => {
+  return showListing(new UUID(params.id));
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onLoadListing: id => dispatch(showListings({ id, include: ['author', 'images'] })),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(ListingPageComponent));
+export default ListingPage;

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
@@ -7,29 +7,80 @@ import { NamedRedirect } from './components';
 import { withFlattenedRoutes } from './util/routes';
 import * as propTypes from './util/propTypes';
 
-const Routes = props => {
-  const { isAuthenticated, flattenedRoutes, staticContext } = props;
+const { bool, arrayOf, object, func, shape, string, any } = PropTypes;
 
-  const renderComponent = (route, matchProps) => {
-    const { auth, component: RouteComponent } = route;
-    const { match, location } = matchProps;
-    const canShowComponent = !auth || isAuthenticated;
-    if (!canShowComponent) {
+class RouteComponentRenderer extends Component {
+  constructor(props) {
+    super(props);
+    this.canShowComponent = this.canShowComponent.bind(this);
+  }
+  componentDidMount() {
+    const { match, route, dispatch } = this.props;
+    const { loadData, name } = route;
+    const shouldLoadData = typeof loadData === 'function' && this.canShowComponent();
+
+    if (shouldLoadData) {
+      dispatch(loadData(match.params, {}))
+        .then(() => {
+          // eslint-disable-next-line no-console
+          console.log(`loadData success for ${name} route`);
+        })
+        .catch(e => {
+          // eslint-disable-next-line no-console
+          console.error(`loadData error for ${name} route`, e);
+        });
+    }
+  }
+  canShowComponent() {
+    const { isAuthenticated, route } = this.props;
+    const { auth } = route;
+    return !auth || isAuthenticated;
+  }
+  render() {
+    const { route, match, location, staticContext } = this.props;
+    const { component: RouteComponent } = route;
+    const canShow = this.canShowComponent();
+    if (!canShow) {
       staticContext.forbidden = true;
     }
-    return canShowComponent
+    return canShow
       ? <RouteComponent params={match.params} location={location} />
       : <NamedRedirect name="LogInPage" state={{ from: match.url }} />;
-  };
+  }
+}
 
-  const toRouteComponent = route => (
-    <Route
-      key={route.name}
-      path={route.path}
-      exact={route.exact}
-      render={matchProps => renderComponent(route, matchProps)}
-    />
-  );
+RouteComponentRenderer.propTypes = {
+  isAuthenticated: bool.isRequired,
+  route: propTypes.route.isRequired,
+  match: shape({
+    params: object.isRequired,
+    url: string.isRequired,
+  }).isRequired,
+  location: any.isRequired,
+  staticContext: object.isRequired,
+  dispatch: func.isRequired,
+};
+
+const Routes = props => {
+  const { isAuthenticated, flattenedRoutes, staticContext, dispatch } = props;
+
+  const toRouteComponent = route => {
+    const renderProps = { isAuthenticated, route, staticContext, dispatch };
+    return (
+      <Route
+        key={route.name}
+        path={route.path}
+        exact={route.exact}
+        render={matchProps => (
+          <RouteComponentRenderer
+            {...renderProps}
+            match={matchProps.match}
+            location={matchProps.location}
+          />
+        )}
+      />
+    );
+  };
 
   return (
     <Switch>
@@ -41,12 +92,11 @@ const Routes = props => {
 
 Routes.defaultProps = { staticContext: {} };
 
-const { bool, arrayOf, object } = PropTypes;
-
 Routes.propTypes = {
   isAuthenticated: bool.isRequired,
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
   staticContext: object,
+  dispatch: func.isRequired,
 };
 
 const mapStateToProps = state => ({ isAuthenticated: state.Auth.isAuthenticated });
