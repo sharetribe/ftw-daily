@@ -3,43 +3,66 @@ import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
-import { noEmptyArray, maxLength, required } from '../../util/validators';
-import { AddImages } from '../../components';
+import {
+  noEmptyArray,
+  maxLength,
+  required,
+  autocompleteSearchRequired,
+  autocompletePlaceSelected,
+} from '../../util/validators';
+import { AddImages, LocationAutocompleteInput } from '../../components';
 import css from './EditListingForm.css';
 
 const ACCEPT_IMAGES = 'image/*';
 const TITLE_MAX_LENGTH = 60;
 
-// Custom inputs with validator messages
-const RenderField = ({ input, label, type, meta }) => {
-  const { touched, error } = meta;
-  const component = type === 'textarea'
-    ? <textarea {...input} placeholder={label} />
-    : <input {...input} placeholder={label} type={type} />;
-  return (
-    <div>
-      <label htmlFor={input.name}>{label}</label>
+const { bool, func, object, shape, string } = PropTypes;
+
+/**
+ * Hoc to convert a component used within a Field to one that renders
+ * a label and possible errors.
+ *
+ * @param {Component|String} Comp component or a String that is used
+ * to create an input element
+ *
+ * @return {Component} new component that wraps the given one with a
+ * label and possible errors
+ */
+const enhancedField = Comp => {
+  const EnhancedField = props => {
+    const { input, label, meta } = props;
+    const { touched, error } = meta;
+    let component = null;
+    if (typeof Comp !== 'string') {
+      component = <Comp {...props} />;
+    } else if (Comp === 'textarea') {
+      component = <textarea {...input} placeholder={label} />;
+    } else {
+      component = <input {...input} placeholder={label} type={Comp} />;
+    }
+    return (
       <div>
+        <label htmlFor={input.name}>{label}</label>
         {component}
         {touched && error ? <span className={css.error}>{error}</span> : null}
       </div>
-    </div>
-  );
-};
+    );
+  };
+  EnhancedField.displayName = `EnhancedField(${Comp.displayName || Comp.name})`;
 
-const { bool, func, object, shape, string } = PropTypes;
+  EnhancedField.propTypes = {
+    input: shape({
+      onChange: func.isRequired,
+      name: string.isRequired,
+    }).isRequired,
+    label: string.isRequired,
+    meta: shape({
+      touched: bool,
+      error: string,
+    }).isRequired,
+  };
 
-RenderField.propTypes = {
-  input: shape({
-    onChange: func.isRequired,
-    name: string.isRequired,
-  }).isRequired,
-  label: string.isRequired,
-  type: string.isRequired,
-  meta: shape({
-    touched: bool,
-    error: string,
-  }).isRequired,
+  return EnhancedField;
 };
 
 // Add image wrapper. Label is the only visible element, file input is hidden.
@@ -120,14 +143,19 @@ class EditListingForm extends Component {
     );
     const maxLength60 = maxLength(maxLengthStr, TITLE_MAX_LENGTH);
     const imageRequiredStr = intl.formatMessage({ id: 'EditListingForm.imageRequired' });
+    const locationRequiredMessage = intl.formatMessage({
+      id: 'EditListingForm.locationRequired',
+    });
+    const locationNotRecognizedMessage = intl.formatMessage({
+      id: 'EditListingForm.locationNotRecognized',
+    });
 
     return (
       <form onSubmit={handleSubmit}>
         <Field
           name="title"
           label="Title"
-          component={RenderField}
-          type="text"
+          component={enhancedField('text')}
           validate={[required(requiredStr), maxLength60]}
         />
 
@@ -161,10 +189,20 @@ class EditListingForm extends Component {
         </AddImages>
 
         <Field
+          name="location"
+          label="Location"
+          format={null}
+          component={enhancedField(LocationAutocompleteInput)}
+          validate={[
+            autocompleteSearchRequired(locationRequiredMessage),
+            autocompletePlaceSelected(locationNotRecognizedMessage),
+          ]}
+        />
+
+        <Field
           name="description"
           label="Description"
-          component={RenderField}
-          type="textarea"
+          component={enhancedField('textarea')}
           validate={[required(requiredStr)]}
         />
         <button type="submit" disabled={pristine || submitting || disabled}>{saveActionMsg}</button>
