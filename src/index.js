@@ -14,7 +14,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
-import { createInstance, types } from 'sharetribe-sdk';
+import { createInstance, types } from './util/sdkLoader';
 import { ClientApp, renderApp } from './app';
 import configureStore from './store';
 import { matchPathname } from './util/routes';

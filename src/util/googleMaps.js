@@ -1,4 +1,4 @@
-import { types } from 'sharetribe-sdk';
+import { types } from '../util/sdkLoader';
 
 const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = types;
 

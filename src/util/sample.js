@@ -1,4 +1,4 @@
-import { types } from 'sharetribe-sdk';
+import { types } from './sdkLoader';
 
 export const marketplaceId = new types.UUID('16c6a4b8-88ee-429b-835a-6725206cd08c');
 export const userJoeId = new types.UUID('3c073fae-6172-4e75-8b92-f560d58cd47c');

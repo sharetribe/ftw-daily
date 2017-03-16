@@ -1,4 +1,4 @@
-import { types } from 'sharetribe-sdk';
+import { types } from './sdkLoader';
 import {
   combinedRelationships,
   combinedResourceObjects,

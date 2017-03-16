@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { types } from 'sharetribe-sdk';
+import { types } from '../../util/sdkLoader';
 import { SearchPageComponent } from './SearchPage';
 import reducer, {
   ADD_FILTER,
