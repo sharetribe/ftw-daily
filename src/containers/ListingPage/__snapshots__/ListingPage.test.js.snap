@@ -8,6 +8,11 @@ exports[`ListingPage matches snapshot 1`] = `
       }
     } />
   <div>
+    listing1 address
+     
+    (40, 60)
+  </div>
+  <div>
     <h1>
       Here will be filters (or dragons)
     </h1>

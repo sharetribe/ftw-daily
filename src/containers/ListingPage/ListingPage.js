@@ -56,6 +56,8 @@ export class ListingPageComponent extends Component {
 
     const title = currentListing ? currentListing.attributes.title : '';
     const description = currentListing ? currentListing.attributes.description : '';
+    const address = currentListing ? currentListing.attributes.address : '';
+    const geolocation = currentListing ? currentListing.attributes.geolocation : null;
 
     // TODO Responsive image-objects need to be thought through when final image sizes are know
     const images = currentListing && currentListing.images
@@ -88,6 +90,9 @@ export class ListingPageComponent extends Component {
         {/* eslint-disable react/no-danger */}
         <div className={css.description} dangerouslySetInnerHTML={{ __html: description }} />
         {/* eslint-enable react/no-danger */}
+        <div className={css.address}>
+          {address} {geolocation ? `(${geolocation.lat}, ${geolocation.lng})` : null}
+        </div>
         <div className={css.filterSection}>
           <h1>Here will be filters (or dragons)</h1>
           <h2>Studio type</h2>
