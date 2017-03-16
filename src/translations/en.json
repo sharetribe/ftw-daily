@@ -8,6 +8,8 @@
   "EditListingForm.required": "Required",
   "EditListingForm.imageRequired": "You need to add at least one image.",
   "EditListingForm.maxLength": "Must be {maxLength} characters or less",
+  "EditListingForm.locationRequired": "You need to provide a location",
+  "EditListingForm.locationNotRecognized": "We didn't recognize this location. Please try another location.",
   "ListingPage.loadingListingData": "Loading listing data",
   "ListingPage.noListingData": "Could not find listing data",
   "PageLayout.authInfoFailed": "Could not get authentication information.",
