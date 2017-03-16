@@ -65,7 +65,7 @@ ServerApp.propTypes = { url: string.isRequired, context: any.isRequired, store: 
 export const renderApp = (url, serverContext, preloadedState) => {
   const store = configureStore(preloadedState);
   const body = ReactDOMServer.renderToString(
-    <ServerApp url={url} context={serverContext} store={store} />,
+    <ServerApp url={url} context={serverContext} store={store} />
   );
   const head = Helmet.rewind();
   return { head, body };

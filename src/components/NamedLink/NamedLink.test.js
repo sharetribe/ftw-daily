@@ -26,7 +26,7 @@ describe('NamedLinkComponent', () => {
       <div>
         <NamedLinkComponent {...aProps}>link to a</NamedLinkComponent>
         <NamedLinkComponent {...bProps}>link to b</NamedLinkComponent>
-      </div>,
+      </div>
     );
     const aLink = tree.children[0];
     const bLink = tree.children[1];
@@ -46,7 +46,7 @@ describe('NamedLink', () => {
     const tree = renderDeep(
       <RoutesProvider flattenedRoutes={routesConf}>
         <NamedLink name="SomePage" params={{ id }}>to SomePage</NamedLink>
-      </RoutesProvider>,
+      </RoutesProvider>
     );
     expect(tree.type).toEqual('a');
     expect(tree.props.href).toEqual(`/somepage/${id}`);

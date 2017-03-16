@@ -92,7 +92,7 @@ const lookupMap = included =>
 
       return memo;
     },
-    {},
+    {}
   );
 
 // Format the data as ListingCard component expects it and

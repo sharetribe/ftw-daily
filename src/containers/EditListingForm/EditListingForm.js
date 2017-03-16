@@ -116,7 +116,7 @@ class EditListingForm extends Component {
       { id: 'EditListingForm.maxLength' },
       {
         maxLength: TITLE_MAX_LENGTH,
-      },
+      }
     );
     const maxLength60 = maxLength(maxLengthStr, TITLE_MAX_LENGTH);
     const imageRequiredStr = intl.formatMessage({ id: 'EditListingForm.imageRequired' });

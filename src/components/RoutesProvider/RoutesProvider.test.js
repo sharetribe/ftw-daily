@@ -11,7 +11,7 @@ describe('RoutesProvider', () => {
     Child.contextTypes = { flattenedRoutes: React.PropTypes.array };
 
     const tree = renderDeep(
-      <RoutesProvider flattenedRoutes={routesConf}><Child /></RoutesProvider>,
+      <RoutesProvider flattenedRoutes={routesConf}><Child /></RoutesProvider>
     );
     expect(tree.children).toContain('SomePage');
   });

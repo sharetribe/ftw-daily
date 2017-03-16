@@ -74,7 +74,7 @@ if (typeof window !== 'undefined') {
   if (config.dev) {
     const actions = bindActionCreators(
       { showListings, queryListings, searchListings, showMarketplace, showUsers },
-      store.dispatch,
+      store.dispatch
     );
     window.app = { config, sdk, sdkTypes: types, actions, store, sample, routeConfiguration };
   }

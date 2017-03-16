@@ -45,7 +45,7 @@ export const renderDeep = component => {
   const comp = renderer.create(
     <TestProvider>
       {component}
-    </TestProvider>,
+    </TestProvider>
   );
   return comp.toJSON();
 };

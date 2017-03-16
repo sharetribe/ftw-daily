@@ -167,7 +167,11 @@ const mapStateToProps = state => ({
 const ListingPage = connect(mapStateToProps)(injectIntl(ListingPageComponent));
 
 ListingPage.loadData = params => {
-  return showListing(new UUID(params.id));
+  // TODO: wrap with UUID when the universal serialisation works with
+  // SDK and types from the client bundle and the server import don't
+  // differ
+  const id = params.id;
+  return showListing(id);
 };
 
 export default ListingPage;

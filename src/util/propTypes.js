@@ -73,7 +73,7 @@ export const image = shape({
         height: number.isRequired,
         name: string.isRequired,
         url: string.isRequired,
-      }),
+      })
     ).isRequired,
   }),
 });

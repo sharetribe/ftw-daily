@@ -79,7 +79,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const AuthenticationPage = connect(mapStateToProps, mapDispatchToProps)(
-  AuthenticationPageComponent,
+  AuthenticationPageComponent
 );
 
 export default AuthenticationPage;

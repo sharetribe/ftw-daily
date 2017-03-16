@@ -5,8 +5,21 @@ import pathToRegexp from 'path-to-regexp';
 import routesConfiguration from '../routesConfiguration';
 import * as propTypes from './propTypes';
 
-export const flattenRoutes = routesArray =>
-  routesArray.reduce((a, b) => a.concat(b.routes ? [b].concat(flattenRoutes(b.routes)) : b), []);
+// Flatten the routes config.
+// TODO: flatten the original config and remove this function
+export const flattenRoutes = routes =>
+  routes.reduce(
+    (flatRoutes, route) => {
+      const r = { ...route };
+      delete r.routes;
+      flatRoutes.push(r);
+      if (route.routes) {
+        return flatRoutes.concat(flattenRoutes(route.routes));
+      }
+      return flatRoutes;
+    },
+    []
+  );
 
 const findRouteByName = (nameToFind, flattenedRoutes) =>
   find(flattenedRoutes, route => route.name === nameToFind);
@@ -30,47 +43,32 @@ export const pathByRouteName = (nameToFind, flattenedRoutes, params = {}) =>
   toPathByRouteName(nameToFind, flattenedRoutes)(params);
 
 /**
- * matchRoutesToLocation helps to figure out which routes are related to given location.
+ * Find the matching routes and their params for the given pathname
+ *
+ * @param {String} pathname - Full URL path from root with possible
+ * search params and hash included
+ *
+ * @return {Array<{ route, params }>} - All matches as { route, params } objects
  */
-const matchRoutesToLocation = (routes, location, matchedRoutes = [], params = {}) => {
-  let parameters = { ...params };
-  let matched = [...matchedRoutes];
+export const matchPathname = pathname => {
+  // TODO: remove flattening when routesConfiguration is flat
+  const flattenedRoutes = flattenRoutes(routesConfiguration);
 
-  routes.forEach(route => {
-    const { exact = false } = route;
-    const match = !route.path || matchPath(location.pathname, route.path, { exact });
-
-    if (match) {
-      matched.push(route);
-
-      if (match.params) {
-        parameters = { ...parameters, ...match.params };
+  return flattenedRoutes.reduce(
+    (matches, route) => {
+      const { exact = false } = route;
+      const match = !route.path || matchPath(pathname, route.path, { exact });
+      if (match) {
+        matches.push({
+          route,
+          params: match.params || {},
+        });
       }
-    }
-
-    if (route.routes) {
-      const { matchedRoutes: subRouteMatches, params: subRouteParams } = matchRoutesToLocation(
-        route.routes,
-        location,
-        matched,
-        parameters,
-      );
-      matched = matched.concat(subRouteMatches);
-      parameters = { ...parameters, ...subRouteParams };
-    }
-  });
-
-  return { matchedRoutes: matched, params: parameters };
+      return matches;
+    },
+    []
+  );
 };
-
-const matchPathnameCreator = routes =>
-  (location, matchedRoutes = [], params = {}) =>
-    matchRoutesToLocation(routes, { pathname: location }, matchedRoutes, params);
-
-/**
- * matchRoutesToLocation helps to figure out which routes are related to given location.
- */
-export const matchPathname = matchPathnameCreator(routesConfiguration);
 
 /**
  * A higher order component (HOC) to take the flattened routes from
