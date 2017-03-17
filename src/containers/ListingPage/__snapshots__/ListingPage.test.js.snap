@@ -7,10 +7,22 @@ exports[`ListingPage matches snapshot 1`] = `
         "__html": "listing1 description",
       }
     } />
-  <div>
-    listing1 address
-     
-    (40, 60)
+  <div
+    style={
+      Object {
+        "height": 300,
+      }
+    }>
+    <Map
+      address="listing1 address"
+      center={
+        LatLng {
+          "lat": 40,
+          "lng": 60,
+        }
+      }
+      className=""
+      zoom={11} />
   </div>
   <div>
     <h1>

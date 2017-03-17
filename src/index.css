@@ -22,6 +22,10 @@ input {
   border: 1px solid #ddd;
 }
 
+select {
+  border: none;
+}
+
 button {
   display: block;
   width: 100%;
