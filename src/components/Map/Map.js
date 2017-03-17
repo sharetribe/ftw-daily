@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import * as propTypes from '../../util/propTypes';
 
+import css from './Map.css';
+
 class Map extends Component {
   componentDidMount() {
     const mapsLibLoaded = window.google && window.google.maps;
@@ -25,12 +27,10 @@ class Map extends Component {
     });
   }
   render() {
-    const { className, width, height } = this.props;
-    const style = { width, height };
+    const { className } = this.props;
     return (
       <div
-        className={className}
-        style={style}
+        className={`${className} ${css.root}`}
         ref={el => {
           this.el = el;
         }}
@@ -39,14 +39,12 @@ class Map extends Component {
   }
 }
 
-Map.defaultProps = { className: '', width: '100%', height: 300, zoom: 11 };
+Map.defaultProps = { className: '', zoom: 11 };
 
-const { string, oneOfType, number } = PropTypes;
+const { string, number } = PropTypes;
 
 Map.propTypes = {
   className: string,
-  width: oneOfType([number, string]),
-  height: oneOfType([number, string]),
   center: propTypes.latlng.isRequired,
   address: string.isRequired,
   zoom: number,

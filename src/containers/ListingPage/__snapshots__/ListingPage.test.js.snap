@@ -7,18 +7,23 @@ exports[`ListingPage matches snapshot 1`] = `
         "__html": "listing1 description",
       }
     } />
-  <Map
-    address="listing1 address"
-    center={
-      LatLng {
-        "lat": 40,
-        "lng": 60,
+  <div
+    style={
+      Object {
+        "height": 300,
       }
-    }
-    className=""
-    height={300}
-    width="100%"
-    zoom={11} />
+    }>
+    <Map
+      address="listing1 address"
+      center={
+        LatLng {
+          "lat": 40,
+          "lng": 60,
+        }
+      }
+      className=""
+      zoom={11} />
+  </div>
   <div>
     <h1>
       Here will be filters (or dragons)

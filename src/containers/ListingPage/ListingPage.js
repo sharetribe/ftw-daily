@@ -91,7 +91,7 @@ export class ListingPageComponent extends Component {
         {/* eslint-disable react/no-danger */}
         <div className={css.description} dangerouslySetInnerHTML={{ __html: description }} />
         {/* eslint-enable react/no-danger */}
-        {map}
+        {map ? <div style={{ height: 300 }}>{map}</div> : null}
         <div className={css.filterSection}>
           <h1>Here will be filters (or dragons)</h1>
           <h2>Studio type</h2>
