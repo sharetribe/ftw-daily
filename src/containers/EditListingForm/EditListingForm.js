@@ -30,7 +30,7 @@ const { bool, func, object, shape, string } = PropTypes;
  */
 const enhancedField = Comp => {
   const EnhancedField = props => {
-    const { input, label, meta } = props;
+    const { input, type, label, meta } = props;
     const { touched, error } = meta;
     let component = null;
     if (typeof Comp !== 'string') {
@@ -38,7 +38,7 @@ const enhancedField = Comp => {
     } else if (Comp === 'textarea') {
       component = <textarea {...input} placeholder={label} />;
     } else {
-      component = <input {...input} placeholder={label} type={Comp} />;
+      component = <input {...input} placeholder={label} type={type} />;
     }
     return (
       <div>
@@ -50,11 +50,14 @@ const enhancedField = Comp => {
   };
   EnhancedField.displayName = `EnhancedField(${Comp.displayName || Comp.name})`;
 
+  EnhancedField.defaultProps = { type: null };
+
   EnhancedField.propTypes = {
     input: shape({
       onChange: func.isRequired,
       name: string.isRequired,
     }).isRequired,
+    type: string,
     label: string.isRequired,
     meta: shape({
       touched: bool,
@@ -155,7 +158,8 @@ class EditListingForm extends Component {
         <Field
           name="title"
           label="Title"
-          component={enhancedField('text')}
+          component={enhancedField('input')}
+          type="text"
           validate={[required(requiredStr), maxLength60]}
         />
 
