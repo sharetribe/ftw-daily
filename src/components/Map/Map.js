@@ -7,7 +7,7 @@ class Map extends Component {
     if (!mapsLibLoaded) {
       throw new Error('Google Maps API must be loaded for the Map component');
     }
-    const { center, zoom } = this.props;
+    const { center, zoom, address } = this.props;
     const centerLocation = { lat: center.lat, lng: center.lng };
     const mapOptions = {
       center: centerLocation,
@@ -16,7 +16,13 @@ class Map extends Component {
       // Disable zooming by scrolling
       scrollwheel: false,
     };
-    this.map = new window.google.maps.Map(this.el, mapOptions);
+    const map = new window.google.maps.Map(this.el, mapOptions);
+    // eslint-disable-next-line no-new
+    new window.google.maps.Marker({
+      position: centerLocation,
+      map,
+      title: address,
+    });
   }
   render() {
     const { className, width, height } = this.props;
@@ -42,6 +48,7 @@ Map.propTypes = {
   width: oneOfType([number, string]),
   height: oneOfType([number, string]),
   center: propTypes.latlng.isRequired,
+  address: string.isRequired,
   zoom: number,
 };
 

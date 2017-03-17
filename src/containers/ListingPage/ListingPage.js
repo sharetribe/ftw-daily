@@ -56,9 +56,9 @@ export class ListingPageComponent extends Component {
 
     const title = currentListing ? currentListing.attributes.title : '';
     const description = currentListing ? currentListing.attributes.description : '';
+    const address = currentListing ? currentListing.attributes.address : '';
     const geolocation = currentListing ? currentListing.attributes.geolocation : null;
-
-    const map = geolocation ? <Map center={geolocation} /> : null;
+    const map = geolocation ? <Map center={geolocation} address={address} /> : null;
 
     // TODO Responsive image-objects need to be thought through when final image sizes are know
     const images = currentListing && currentListing.images
