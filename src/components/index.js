@@ -6,6 +6,7 @@ import HeroSection from './HeroSection/HeroSection';
 import ListingCard from './ListingCard/ListingCard';
 import ListingCardSmall from './ListingCardSmall/ListingCardSmall';
 import LocationAutocompleteInput from './LocationAutocompleteInput/LocationAutocompleteInput';
+import Map from './Map/Map';
 import MapPanel from './MapPanel/MapPanel';
 import Menu from './Menu/Menu';
 import NamedLink from './NamedLink/NamedLink';
@@ -26,6 +27,7 @@ export {
   ListingCard,
   ListingCardSmall,
   LocationAutocompleteInput,
+  Map,
   MapPanel,
   Menu,
   NamedLink,

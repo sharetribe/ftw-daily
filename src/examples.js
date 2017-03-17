@@ -2,6 +2,7 @@
 import * as AddImages from './components/AddImages/AddImages.example';
 import * as BookingInfo from './components/BookingInfo/BookingInfo.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
+import * as Map from './components/Map/Map.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
 import * as LocationAutocompleteInput
   from './components/LocationAutocompleteInput/LocationAutocompleteInput.example';
@@ -26,6 +27,7 @@ export {
   HeroSearchForm,
   ListingCard,
   LoginForm,
+  Map,
   NamedLink,
   PasswordForgottenForm,
   SignUpForm,
