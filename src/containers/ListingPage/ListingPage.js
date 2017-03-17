@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { types } from '../../util/sdkLoader';
-import { NamedLink, PageLayout } from '../../components';
+import { NamedLink, PageLayout, Map } from '../../components';
 import { getListingsById } from '../../ducks/sdk.duck';
 import { showListing } from './ListingPage.duck';
 import css from './ListingPage.css';
@@ -56,8 +56,9 @@ export class ListingPageComponent extends Component {
 
     const title = currentListing ? currentListing.attributes.title : '';
     const description = currentListing ? currentListing.attributes.description : '';
-    const address = currentListing ? currentListing.attributes.address : '';
     const geolocation = currentListing ? currentListing.attributes.geolocation : null;
+
+    const map = geolocation ? <Map center={geolocation} /> : null;
 
     // TODO Responsive image-objects need to be thought through when final image sizes are know
     const images = currentListing && currentListing.images
@@ -90,9 +91,7 @@ export class ListingPageComponent extends Component {
         {/* eslint-disable react/no-danger */}
         <div className={css.description} dangerouslySetInnerHTML={{ __html: description }} />
         {/* eslint-enable react/no-danger */}
-        <div className={css.address}>
-          {address} {geolocation ? `(${geolocation.lat}, ${geolocation.lng})` : null}
-        </div>
+        {map}
         <div className={css.filterSection}>
           <h1>Here will be filters (or dragons)</h1>
           <h2>Studio type</h2>
