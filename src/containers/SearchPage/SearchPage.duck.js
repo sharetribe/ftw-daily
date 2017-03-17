@@ -5,7 +5,7 @@
  */
 import { unionWith, isEqual } from 'lodash';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { types } from 'sharetribe-sdk';
+import { types } from '../../util/sdkLoader';
 import { createRequestTypes } from '../../util/sagaHelpers';
 
 const { LatLng } = types;

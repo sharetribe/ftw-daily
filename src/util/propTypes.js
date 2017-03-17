@@ -18,7 +18,7 @@
  * specific place and avoid duplicate errros.
  */
 import { PropTypes } from 'react';
-import { types as sdkTypes } from 'sharetribe-sdk';
+import { types as sdkTypes } from './sdkLoader';
 
 const { UUID, LatLng, LatLngBounds } = sdkTypes;
 const { arrayOf, bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;

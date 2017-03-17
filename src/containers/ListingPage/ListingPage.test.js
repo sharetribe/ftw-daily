@@ -1,5 +1,5 @@
 import React from 'react';
-import { types } from 'sharetribe-sdk';
+import { types } from '../../util/sdkLoader';
 import { createListing } from '../../util/test-data';
 import { fakeIntl, renderShallow } from '../../util/test-helpers';
 import { ListingPageComponent } from './ListingPage';

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { types } from 'sharetribe-sdk';
+import { types } from '../../util/sdkLoader';
 import { NamedLink, PageLayout } from '../../components';
 import { getListingsById } from '../../ducks/sdk.duck';
 import { showListing } from './ListingPage.duck';
@@ -167,10 +167,7 @@ const mapStateToProps = state => ({
 const ListingPage = connect(mapStateToProps)(injectIntl(ListingPageComponent));
 
 ListingPage.loadData = params => {
-  // TODO: wrap with UUID when the universal serialisation works with
-  // SDK and types from the client bundle and the server import don't
-  // differ
-  const id = params.id;
+  const id = new UUID(params.id);
   return showListing(id);
 };
 

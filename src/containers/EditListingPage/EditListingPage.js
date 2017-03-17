@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { types } from 'sharetribe-sdk';
+import { types } from '../../util/sdkLoader';
 import { NamedRedirect, PageLayout } from '../../components';
 import { EditListingForm } from '../../containers';
 import { getListingsById } from '../../ducks/sdk.duck';

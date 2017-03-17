@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { types } from 'sharetribe-sdk';
+import { types } from '../../util/sdkLoader';
 import { searchListings, getListingsById } from '../../ducks/sdk.duck';
 import {
   FilterPanel,
