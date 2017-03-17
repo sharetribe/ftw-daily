@@ -14,14 +14,13 @@ import {
 } from './EditListingPage.duck';
 
 const formatRequestData = values => {
-  const { description, images, title } = values;
+  const { description, images, title, location } = values;
+  const { selectedPlace: { address, origin } } = location;
+
   return {
-    address: 'Bulevardi 14, 00200 Helsinki, Finland',
+    address,
     description,
-    geolocation: {
-      lat: 40.6,
-      lng: 73.9,
-    },
+    geolocation: origin,
     images: images.map(i => i.imageId),
     title,
   };
