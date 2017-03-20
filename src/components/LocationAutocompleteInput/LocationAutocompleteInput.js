@@ -8,7 +8,6 @@ import css from './LocationAutocompleteInput.css';
 const DEBOUNCE_WAIT_TIME = 200;
 const KEY_CODE_ARROW_UP = 38;
 const KEY_CODE_ARROW_DOWN = 40;
-const KEY_CODE_ESC = 27;
 const KEY_CODE_ENTER = 13;
 const DIRECTION_UP = 'up';
 const DIRECTION_DOWN = 'down';
@@ -94,6 +93,7 @@ class LocationAutocompleteInput extends Component {
 
     this.changeHighlight = this.changeHighlight.bind(this);
     this.selectItem = this.selectItem.bind(this);
+    this.selectItemIfNoneSelected = this.selectItemIfNoneSelected.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.onChange = this.onChange.bind(this);
 
@@ -119,26 +119,19 @@ class LocationAutocompleteInput extends Component {
       e.preventDefault();
       this.changeHighlight(DIRECTION_DOWN);
     } else if (e.keyCode === KEY_CODE_ENTER) {
-      this.selectItem(this.state.highlightedIndex);
-    } else if (e.keyCode === KEY_CODE_ESC) {
-      // Somehow by default pressing the ESC key clears the
-      // focused input value. Preventing the default seems to
-      // fix this.
-      e.preventDefault();
+      const { search, selectedPlace } = currentValue(this.props);
 
-      // Trigger input blur to hide predictions dropdown
-      this.input.blur();
+      if (search && !selectedPlace) {
+        // Prevent form submit, try to select value instead.
+        e.preventDefault();
+        e.stopPropagation();
+        this.selectItemIfNoneSelected();
+      }
     }
   }
 
   // Handle input text change, fetch predictions if the value isn't empty
-  onChange(e) {
-    // We want to fully control how changes propagate up the tree, and
-    // therefore prevent default action and stop propagating the event
-    // through the (virtual) DOM.
-    e.preventDefault();
-    e.stopPropagation();
-
+  onChange() {
     const onChange = this.props.input.onChange;
     const { predictions } = currentValue(this.props);
     const newValue = this.input.value;
@@ -218,6 +211,13 @@ class LocationAutocompleteInput extends Component {
         });
       });
   }
+  selectItemIfNoneSelected() {
+    const { search, selectedPlace } = currentValue(this.props);
+    if (search && !selectedPlace) {
+      const index = this.state.highlightedIndex !== -1 ? this.state.highlightedIndex : 0;
+      this.selectItem(index);
+    }
+  }
   predict(search) {
     const onChange = this.props.input.onChange;
     getPlacePredictions(search)
@@ -251,7 +251,19 @@ class LocationAutocompleteInput extends Component {
       });
   }
   render() {
+    const { onFocus, onBlur } = this.props.input;
     const { search, predictions } = currentValue(this.props);
+
+    const handleOnFocus = e => {
+      this.setState({ inputHasFocus: true });
+      onFocus(e);
+    };
+
+    const handleOnBlur = () => {
+      this.setState({ inputHasFocus: false, highlightedIndex: -1 });
+      this.selectItemIfNoneSelected();
+      onBlur(currentValue(this.props));
+    };
 
     // Only render predictions when the input has focus. For
     // development and easier workflow with the browser devtools, you
@@ -265,8 +277,8 @@ class LocationAutocompleteInput extends Component {
           className={css.input}
           type="search"
           value={search}
-          onFocus={() => this.setState({ inputHasFocus: true })}
-          onBlur={() => this.setState({ inputHasFocus: false, highlightedIndex: -1 })}
+          onFocus={handleOnFocus}
+          onBlur={handleOnBlur}
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
           ref={i => {
@@ -298,6 +310,8 @@ LocationAutocompleteInput.propTypes = {
       selectedPlace: propTypes.place,
     }),
     onChange: func.isRequired,
+    onFocus: func.isRequired,
+    onBlur: func.isRequired,
   }).isRequired,
 };
 
