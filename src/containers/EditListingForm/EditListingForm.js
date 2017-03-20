@@ -137,20 +137,23 @@ class EditListingForm extends Component {
       saveActionMsg = 'Save listing',
       submitting,
     } = this.props;
-    const requiredStr = intl.formatMessage({ id: 'EditListingForm.required' });
-    const maxLengthStr = intl.formatMessage(
+    const titleRequiredMessage = intl.formatMessage({ id: 'EditListingForm.titleRequired' });
+    const maxLengthMessage = intl.formatMessage(
       { id: 'EditListingForm.maxLength' },
       {
         maxLength: TITLE_MAX_LENGTH,
       }
     );
-    const maxLength60 = maxLength(maxLengthStr, TITLE_MAX_LENGTH);
-    const imageRequiredStr = intl.formatMessage({ id: 'EditListingForm.imageRequired' });
+    const maxLength60Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
+    const imageRequiredMessage = intl.formatMessage({ id: 'EditListingForm.imageRequired' });
     const locationRequiredMessage = intl.formatMessage({
       id: 'EditListingForm.locationRequired',
     });
     const locationNotRecognizedMessage = intl.formatMessage({
       id: 'EditListingForm.locationNotRecognized',
+    });
+    const descriptionRequiredMessage = intl.formatMessage({
+      id: 'EditListingForm.descriptionRequired',
     });
 
     return (
@@ -160,7 +163,7 @@ class EditListingForm extends Component {
           label="Title"
           component={enhancedField('input')}
           type="text"
-          validate={[required(requiredStr), maxLength60]}
+          validate={[required(titleRequiredMessage), maxLength60Message]}
         />
 
         <h3>Images</h3>
@@ -188,7 +191,7 @@ class EditListingForm extends Component {
             }}
             name="images"
             type="hidden"
-            validate={[noEmptyArray(imageRequiredStr)]}
+            validate={[noEmptyArray(imageRequiredMessage)]}
           />
         </AddImages>
 
@@ -207,7 +210,7 @@ class EditListingForm extends Component {
           name="description"
           label="Description"
           component={enhancedField('textarea')}
-          validate={[required(requiredStr)]}
+          validate={[required(descriptionRequiredMessage)]}
         />
         <button type="submit" disabled={pristine || submitting || disabled}>{saveActionMsg}</button>
       </form>
