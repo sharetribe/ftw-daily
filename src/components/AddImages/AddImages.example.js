@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { findIndex, uniqueId } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
+import { types } from '../../util/sdkLoader';
 import AddImages from './AddImages';
 import css from './AddImages.example.css';
 
@@ -32,9 +33,10 @@ class AddImagesTest extends Component {
     setTimeout(
       () => {
         this.setState(prevState => {
+          const { UUID } = types;
           const images = prevState.images;
           const imageIndex = findIndex(images, i => i.id === fileId);
-          const updatedImage = { ...imageData, imageId: fileId };
+          const updatedImage = { ...imageData, imageId: new UUID(fileId) };
           const updatedImages = [
             ...images.slice(0, imageIndex),
             updatedImage,

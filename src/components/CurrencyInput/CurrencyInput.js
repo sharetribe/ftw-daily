@@ -5,7 +5,7 @@
  */
 import React, { Component, PropTypes } from 'react';
 import { intlShape, injectIntl } from 'react-intl';
-import { types } from 'sharetribe-sdk';
+import { types } from '../../util/sdkLoader';
 import {
   convertUnitToSubUnit,
   currencyDefaultConfig,
