@@ -1,6 +1,7 @@
 // components
 import * as AddImages from './components/AddImages/AddImages.example';
 import * as BookingInfo from './components/BookingInfo/BookingInfo.example';
+import * as CurrencyInput from './components/CurrencyInput/CurrencyInput.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as Map from './components/Map/Map.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
@@ -23,6 +24,7 @@ export {
   BookingInfo,
   ChangeAccountPasswordForm,
   ChangePasswordForm,
+  CurrencyInput,
   EditListingForm,
   HeroSearchForm,
   ListingCard,
