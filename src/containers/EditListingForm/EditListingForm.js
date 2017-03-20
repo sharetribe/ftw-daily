@@ -48,7 +48,11 @@ const enhancedField = Comp => {
       </div>
     );
   };
-  EnhancedField.displayName = `EnhancedField(${Comp.displayName || Comp.name})`;
+  let displayName = Comp;
+  if (Comp && typeof Comp !== 'string') {
+    displayName = Comp.displayName || Comp.name;
+  }
+  EnhancedField.displayName = `EnhancedField(${displayName})`;
 
   EnhancedField.defaultProps = { type: null };
 
@@ -67,6 +71,13 @@ const enhancedField = Comp => {
 
   return EnhancedField;
 };
+
+// We must create the enhanced components outside the render function
+// to avoid losing focus.
+// See: https://github.com/erikras/redux-form/releases/tag/v6.0.0-alpha.14
+const EnhancedInput = enhancedField('input');
+const EnhancedTextArea = enhancedField('textarea');
+const EnhancedLocationAutocompleteInput = enhancedField(LocationAutocompleteInput);
 
 // Add image wrapper. Label is the only visible element, file input is hidden.
 const RenderAddImage = props => {
@@ -161,7 +172,7 @@ class EditListingForm extends Component {
         <Field
           name="title"
           label="Title"
-          component={enhancedField('input')}
+          component={EnhancedInput}
           type="text"
           validate={[required(titleRequiredMessage), maxLength60Message]}
         />
@@ -199,7 +210,7 @@ class EditListingForm extends Component {
           name="location"
           label="Location"
           format={null}
-          component={enhancedField(LocationAutocompleteInput)}
+          component={EnhancedLocationAutocompleteInput}
           validate={[
             autocompleteSearchRequired(locationRequiredMessage),
             autocompletePlaceSelected(locationNotRecognizedMessage),
@@ -209,7 +220,7 @@ class EditListingForm extends Component {
         <Field
           name="description"
           label="Description"
-          component={enhancedField('textarea')}
+          component={EnhancedTextArea}
           validate={[required(descriptionRequiredMessage)]}
         />
         <button type="submit" disabled={pristine || submitting || disabled}>{saveActionMsg}</button>
