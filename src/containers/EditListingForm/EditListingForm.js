@@ -10,7 +10,7 @@ import {
   autocompleteSearchRequired,
   autocompletePlaceSelected,
 } from '../../util/validators';
-import { AddImages, LocationAutocompleteInput } from '../../components';
+import { AddImages, CurrencyInput, LocationAutocompleteInput } from '../../components';
 import css from './EditListingForm.css';
 
 const ACCEPT_IMAGES = 'image/*';
@@ -77,6 +77,7 @@ const enhancedField = Comp => {
 // See: https://github.com/erikras/redux-form/releases/tag/v6.0.0-alpha.14
 const EnhancedInput = enhancedField('input');
 const EnhancedTextArea = enhancedField('textarea');
+const EnhancedCurrencyInput = enhancedField(CurrencyInput);
 const EnhancedLocationAutocompleteInput = enhancedField(LocationAutocompleteInput);
 
 // Add image wrapper. Label is the only visible element, file input is hidden.
@@ -156,6 +157,7 @@ class EditListingForm extends Component {
       }
     );
     const maxLength60Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
+    const priceRequiredMessage = intl.formatMessage({ id: 'EditListingForm.priceRequired' });
     const imageRequiredMessage = intl.formatMessage({ id: 'EditListingForm.imageRequired' });
     const locationRequiredMessage = intl.formatMessage({
       id: 'EditListingForm.locationRequired',
@@ -175,6 +177,13 @@ class EditListingForm extends Component {
           component={EnhancedInput}
           type="text"
           validate={[required(titleRequiredMessage), maxLength60Message]}
+        />
+        <Field
+          name="price"
+          label="Price"
+          component={EnhancedCurrencyInput}
+          validate={[required(priceRequiredMessage)]}
+          placeholder="10.0"
         />
 
         <h3>Images</h3>
