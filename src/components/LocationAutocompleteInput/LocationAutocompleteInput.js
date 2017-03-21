@@ -251,7 +251,7 @@ class LocationAutocompleteInput extends Component {
       });
   }
   render() {
-    const { onFocus, onBlur } = this.props.input;
+    const { name, onFocus, onBlur } = this.props.input;
     const { search, predictions } = currentValue(this.props);
 
     const handleOnFocus = e => {
@@ -276,6 +276,7 @@ class LocationAutocompleteInput extends Component {
         <input
           className={css.input}
           type="search"
+          name={name}
           value={search}
           onFocus={handleOnFocus}
           onBlur={handleOnBlur}
@@ -304,6 +305,7 @@ class LocationAutocompleteInput extends Component {
 
 LocationAutocompleteInput.propTypes = {
   input: shape({
+    name: string.isRequired,
     value: shape({
       search: string,
       predictions: any,
