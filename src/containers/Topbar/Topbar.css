@@ -15,6 +15,7 @@
 
 .navDropDown {
   height: 60px;
+  width: 60px;
   font-size: 2rem;
   border-radius: 0;
   appearance: none;
