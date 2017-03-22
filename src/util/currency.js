@@ -1,5 +1,6 @@
 import { trimEnd } from 'lodash';
 import Decimal from 'decimal.js';
+import { types } from './sdkLoader';
 
 ////////// Currency manipulation in string format //////////
 
@@ -147,4 +148,23 @@ export const convertUnitToSubUnit = (value, subUnitDivisor, useComma = false) =>
   } else {
     throw new Error(`value must divisible by ${subUnitDivisor}`);
   }
+};
+
+/**
+ * Convert Money to a number
+ *
+ * @param {Money} value
+ *
+ * @param {Decimal|Number|String} subUnitDivisor - a ratio between currency's
+ * main unit and sub units
+ *
+ * @return {number} converted value
+ */
+export const convertMoneyToNumber = (value, subUnitDivisor) => {
+  if (!(value instanceof types.Money)) {
+    throw new Error('Value must be a Money type');
+  }
+  const subUnitDivisorAsDecimal = convertDivisorToDecimal(subUnitDivisor);
+  const amount = new Decimal(value.amount);
+  return amount.dividedBy(subUnitDivisorAsDecimal).toNumber();
 };
