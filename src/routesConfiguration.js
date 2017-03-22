@@ -30,24 +30,28 @@ const routesConfiguration = [
     exact: true,
     name: 'SearchPage',
     component: props => <SearchPage {...props} />,
+    loadData: (params, search) => SearchPage.loadData(params, search),
     routes: [
       {
         path: '/s/filters',
         exact: true,
         name: 'SearchFiltersPage',
         component: props => <SearchPage {...props} tab="filters" />,
+        loadData: (params, search) => SearchPage.loadData(params, search),
       },
       {
         path: '/s/listings',
         exact: true,
         name: 'SearchListingsPage',
         component: props => <SearchPage {...props} tab="listings" />,
+        loadData: (params, search) => SearchPage.loadData(params, search),
       },
       {
         path: '/s/map',
         exact: true,
         name: 'SearchMapPage',
         component: props => <SearchPage {...props} tab="map" />,
+        loadData: (params, search) => SearchPage.loadData(params, search),
       },
     ],
   },
