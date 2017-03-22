@@ -8,7 +8,6 @@ import { intlShape, injectIntl } from 'react-intl';
 import { types } from '../../util/sdkLoader';
 import {
   convertUnitToSubUnit,
-  currencyDefaultConfig,
   ensureDotSeparator,
   ensureSeparator,
   truncateToSubUnitPrecision,
@@ -19,7 +18,7 @@ const allowedInputProps = allProps => {
   // Strip away props that are not passed to input element (or are overwritten)
   // eslint-disable-next-line no-unused-vars
   const { currencyConfig, defaultValue, intl, input, meta, ...inputProps } = allProps;
-  return inputProps || {};
+  return inputProps;
 };
 
 // Convert unformatted value (e.g. 10,00) to Money (or null)
@@ -38,19 +37,19 @@ class CurrencyInput extends Component {
     super(props);
     const { currencyConfig, defaultValue, intl } = props;
 
-    // We need to handle number format - some locales use dots and some points as decimal separator
+    // We need to handle number format - some locales use dots and some commas as decimal separator
     // TODO Figure out if this could be digged from React-Intl directly somehow
     const testSubUnitFormat = intl.formatNumber('1.1', currencyConfig);
-    const usesPoint = testSubUnitFormat.indexOf(',') >= 0;
+    const usesComma = testSubUnitFormat.indexOf(',') >= 0;
 
     try {
       // whatever is passed as a default value, will be converted to currency string
       // Unformatted value is digits + localized sub unit separator ("9,99")
       const unformattedValue = defaultValue
         ? truncateToSubUnitPrecision(
-            ensureSeparator(defaultValue.toString(), usesPoint),
+            ensureSeparator(defaultValue.toString(), usesComma),
             currencyConfig.subUnitDivisor,
-            usesPoint
+            usesComma
           )
         : '';
       // Formatted value fully localized currency string ("$1,000.99")
@@ -62,7 +61,7 @@ class CurrencyInput extends Component {
         formattedValue,
         unformattedValue,
         value: formattedValue,
-        usesPoint,
+        usesComma,
       };
     } catch (e) {
       // Print error, if default value isn't supported (see specs: truncateToSubUnitPrecision).
@@ -134,7 +133,7 @@ class CurrencyInput extends Component {
       const truncatedValueString = truncateToSubUnitPrecision(
         valueOrZero,
         currencyConfig.subUnitDivisor,
-        this.state.usesPoint
+        this.state.usesComma
       );
       const unformattedValue = !isEmptyString ? truncatedValueString : '';
       const formattedValue = !isEmptyString
@@ -177,7 +176,7 @@ class CurrencyInput extends Component {
 }
 
 CurrencyInput.defaultProps = {
-  currencyConfig: currencyDefaultConfig,
+  currencyConfig: null,
   defaultValue: 0,
   input: null,
   placeholder: null,

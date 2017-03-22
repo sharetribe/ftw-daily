@@ -1,53 +1,64 @@
 import { trimEnd } from 'lodash';
 import Decimal from 'decimal.js';
 
-// Default config for currency formatting (for React-Intl).
-export const currencyDefaultConfig = {
-  style: 'currency',
-  currency: 'USD',
-  currencyDisplay: 'symbol',
-  useGrouping: true,
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-  subUnitDivisor: 100,
-};
-
 ////////// Currency manipulation in string format //////////
 
-// Ensures that the given string uses only dots or points
-// ensureSeparator('9999999,99', false) // => '9999999.99'
-export const ensureSeparator = (str, usePoint = false) => {
+/**
+ * Ensures that the given string uses only dots or commas
+ * e.g. ensureSeparator('9999999,99', false) // => '9999999.99'
+ *
+ * @param {String} str - string to be formatted
+ *
+ * @return {String} converted string
+ */
+export const ensureSeparator = (str, useComma = false) => {
   if (typeof str !== 'string') {
-    throw new Error('Parameter must be a string');
+    throw new TypeError('Parameter must be a string');
   }
-  return usePoint ? str.split('.').join(',') : str.split(',').join('.');
+  return useComma ? str.replace(/\./g, ',') : str.replace(/,/g, '.');
 };
 
-// Ensures that the given string uses only dots (e.g. JavaScript floats use dots)
+/**
+ * Ensures that the given string uses only dots
+ * (e.g. JavaScript floats use dots)
+ *
+ * @param {String} str - string to be formatted
+ *
+ * @return {String} converted string
+ */
 export const ensureDotSeparator = str => {
   return ensureSeparator(str, false);
 };
 
-// Convert string to Decimal object (from Decimal.js math library)
+/**
+ * Convert string to Decimal object (from Decimal.js math library)
+ * Handles both dots and commas as decimal separators
+ *
+ * @param {String} str - string to be converted
+ *
+ * @return {Decimal} numeral value
+ */
 export const convertToDecimal = str => {
   const dotFormattedStr = ensureDotSeparator(str);
-  try {
-    return new Decimal(dotFormattedStr);
-  } catch (e) {
-    throw e;
-  }
+  return new Decimal(dotFormattedStr);
 };
 
-// Converts Decimal object to string
-export const convertDecimalToString = (decimalValue, usePoint = false) => {
-  try {
-    const d = new Decimal(decimalValue);
-    return ensureSeparator(d.toString(), usePoint);
-  } catch (e) {
-    throw e;
-  }
+/**
+ * Converts Decimal value to a string (from Decimal.js math library)
+ *
+ * @param {Decimal|Number|String} decimalValue
+ *
+ * @param {boolean} useComma - optional.
+ * Specify if return value should use comma as separator
+ *
+ * @return {String} converted value
+ */
+export const convertDecimalToString = (decimalValue, useComma = false) => {
+  const d = new Decimal(decimalValue);
+  return ensureSeparator(d.toString(), useComma);
 };
 
+// Divisor can be positive value given as Decimal, Number, or String
 const convertDivisorToDecimal = divisor => {
   try {
     const divisorAsDecimal = new Decimal(divisor);
@@ -60,15 +71,27 @@ const convertDivisorToDecimal = divisor => {
   }
 };
 
-// Limits value to sub-unit precision: "1.4567" -> "1.45"
-// Useful in input fields so this doesn't use rounding.
-export const truncateToSubUnitPrecision = (inputString, subUnitDivisor, usePoint = false) => {
+/**
+ * Limits value to sub-unit precision: "1.4567" -> "1.45"
+ * Useful in input fields so this doesn't use rounding.
+ *
+ * @param {String} inputString - positive number presentation.
+ *
+ * @param {Decimal|Number|String} subUnitDivisor - a ratio between currency's
+ * main unit and sub units
+ *
+ * @param {boolean} useComma - optional.
+ * Specify if return value should use comma as separator
+ *
+ * @return {String} truncated value
+ */
+export const truncateToSubUnitPrecision = (inputString, subUnitDivisor, useComma = false) => {
   const subUnitDivisorAsDecimal = convertDivisorToDecimal(subUnitDivisor);
 
   // '10,' should be passed through, but that format is not supported as valid number
-  const trimmed = trimEnd(inputString, usePoint ? ',' : '.');
+  const trimmed = trimEnd(inputString, useComma ? ',' : '.');
   // create another instance and check if value is convertable
-  const value = convertToDecimal(trimmed, usePoint);
+  const value = convertToDecimal(trimmed, useComma);
 
   if (value.isNegative()) {
     throw new Error(`Parameter (${inputString}) must be a positive number.`);
@@ -86,25 +109,37 @@ export const truncateToSubUnitPrecision = (inputString, subUnitDivisor, usePoint
     const decimalPrecisionMax2 = decimalCount2.length >= inputString.length
       ? inputString
       : value.toFixed(2);
-    return ensureSeparator(decimalPrecisionMax2, usePoint);
+    return ensureSeparator(decimalPrecisionMax2, useComma);
   } else {
     // truncate strings ('9.999' => '9.99')
     const truncated = amount.truncated().dividedBy(subUnitDivisorAsDecimal);
-    return convertDecimalToString(truncated, usePoint);
+    return convertDecimalToString(truncated, useComma);
   }
 };
 
 ////////// Currency - Money helpers //////////
 
-// Converts given value to sub unit value and returns it as a number
-export const convertUnitToSubUnit = (value, subUnitDivisor, usePoint = false) => {
+/**
+ * Converts given value to sub unit value and returns it as a number
+ *
+ * @param {Number|String} value
+ *
+ * @param {Decimal|Number|String} subUnitDivisor - a ratio between currency's
+ * main unit and sub units
+ *
+ * @param {boolean} useComma - optional.
+ * Specify if return value should use comma as separator
+ *
+ * @return {number} converted value
+ */
+export const convertUnitToSubUnit = (value, subUnitDivisor, useComma = false) => {
   const subUnitDivisorAsDecimal = convertDivisorToDecimal(subUnitDivisor);
 
   if (!(typeof value === 'string' || typeof value === 'number')) {
-    throw new Error('Value must be either number or string');
+    throw new TypeError('Value must be either number or string');
   }
 
-  const val = typeof value === 'string' ? convertToDecimal(value, usePoint) : new Decimal(value);
+  const val = typeof value === 'string' ? convertToDecimal(value, useComma) : new Decimal(value);
   const amount = val.times(subUnitDivisorAsDecimal);
 
   if (amount.isInteger()) {

@@ -3,11 +3,11 @@ import React, { PropTypes } from 'react';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import fi from 'react-intl/locale-data/fi';
-import { currencyDefaultConfig } from '../../util/currency';
+import { currencyConfig } from '../../util/test-data';
 import CurrencyInput from './CurrencyInput';
 
 const defaultConfig = {
-  ...currencyDefaultConfig,
+  ...currencyConfig,
   currency: 'USD',
 };
 

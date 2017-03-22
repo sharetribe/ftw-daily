@@ -11,6 +11,7 @@
   "EditListingForm.maxLength": "Must be {maxLength} characters or less",
   "EditListingForm.locationRequired": "You need to provide a location",
   "EditListingForm.locationNotRecognized": "We didn't recognize this location. Please try another location.",
+  "EditListingForm.pricePlaceholder": "$0.00",
   "EditListingPage.titleCreateListing": "Create a listing",
   "EditListingPage.titleEditListing": "Edit listing",
   "EditListingForm.descriptionRequired": "You need to add a description.",

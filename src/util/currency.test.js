@@ -9,7 +9,7 @@ import {
 
 describe('currency utils', () => {
   describe('ensureSeparator(str)', () => {
-    it('changes points in string to dots ', () => {
+    it('changes commas in string to dots ', () => {
       expect(ensureSeparator('0')).toEqual('0');
       expect(ensureSeparator('0.0')).toEqual('0.0');
       expect(ensureSeparator('0.')).toEqual('0.');
@@ -19,7 +19,7 @@ describe('currency utils', () => {
       expect(ensureSeparator('asdf')).toEqual('asdf');
     });
 
-    it('changes dots in string to points ', () => {
+    it('changes dots in string to commas ', () => {
       expect(ensureSeparator('0', true)).toEqual('0');
       expect(ensureSeparator('0.0', true)).toEqual('0,0');
       expect(ensureSeparator('0.', true)).toEqual('0,');
@@ -98,7 +98,7 @@ describe('currency utils', () => {
 
   describe('truncateToSubUnitPrecision(valueStr, subUnitDivisor)', () => {
     const subUnitDivisor = 100;
-    it('positive values', () => {
+    it('Values with no truncation needed', () => {
       expect(truncateToSubUnitPrecision('0', subUnitDivisor)).toEqual('0');
       expect(truncateToSubUnitPrecision('1', subUnitDivisor)).toEqual('1');
       expect(truncateToSubUnitPrecision('10', subUnitDivisor)).toEqual('10');

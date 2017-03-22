@@ -169,6 +169,7 @@ class EditListingForm extends Component {
     const descriptionRequiredMessage = intl.formatMessage({
       id: 'EditListingForm.descriptionRequired',
     });
+    const pricePlaceholderMessage = intl.formatMessage({ id: 'EditListingForm.pricePlaceholder' });
 
     return (
       <form onSubmit={handleSubmit}>
@@ -185,7 +186,7 @@ class EditListingForm extends Component {
           component={EnhancedCurrencyInput}
           currencyConfig={config.currencyConfig}
           validate={[required(priceRequiredMessage)]}
-          placeholder="10.0"
+          placeholder={pricePlaceholderMessage}
         />
 
         <h3>Images</h3>
