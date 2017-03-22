@@ -24,12 +24,16 @@ const allowedInputProps = allProps => {
 // Convert unformatted value (e.g. 10,00) to Money (or null)
 const getPrice = (unformattedValue, currencyConfig) => {
   const isEmptyString = unformattedValue === '';
-  return isEmptyString
-    ? null
-    : new types.Money(
-        convertUnitToSubUnit(unformattedValue, currencyConfig.subUnitDivisor),
-        currencyConfig.currency
-      );
+  try {
+    return isEmptyString
+      ? null
+      : new types.Money(
+          convertUnitToSubUnit(unformattedValue, currencyConfig.subUnitDivisor),
+          currencyConfig.currency
+        );
+  } catch(e) {
+    return null;
+  }
 };
 
 class CurrencyInput extends Component {
@@ -74,10 +78,6 @@ class CurrencyInput extends Component {
     this.onInputBlur = this.onInputBlur.bind(this);
     this.onInputFocus = this.onInputFocus.bind(this);
     this.updateValues = this.updateValues.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !(nextProps === this.props && nextState === this.state);
   }
 
   onInputChange(event) {
