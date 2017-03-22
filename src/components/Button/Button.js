@@ -8,23 +8,19 @@ const Button = props => {
 
   const classes = classNames(css.root, className);
 
-  return (
-    <button className={classes} {...rest}>{children}</button>
-  );
-}
-
-
+  return <button className={classes} {...rest}>{children}</button>;
+};
 
 const { any, string } = PropTypes;
 
 Button.defaultProps = {
   children: null,
   className: null,
-}
+};
 
 Button.propTypes = {
   children: any,
   className: string,
-}
+};
 
 export default Button;

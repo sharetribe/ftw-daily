@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import config from '../../config';
 import { parse } from '../../util/urlHelpers';
 import { getListingsById } from '../../ducks/sdk.duck';
 import {
@@ -22,6 +23,7 @@ export const SearchPageComponent = props => {
   const filtersClassName = classNames(css.filters, { [css.open]: tab === 'filters' });
   const listingsClassName = classNames(css.listings, { [css.open]: tab === 'listings' });
   const mapClassName = classNames(css.map, { [css.open]: tab === 'map' });
+  const currencyConfig = config.currencyConfig;
 
   const searchWasDone = searchParams && searchParams.address;
 
@@ -51,12 +53,16 @@ export const SearchPageComponent = props => {
         </div>
         <div className={listingsClassName}>
           <SearchResultsPanel>
-            {listings.map(l => <ListingCard key={l.id.uuid} listing={l} />)}
+            {listings.map(l => (
+              <ListingCard key={l.id.uuid} listing={l} currencyConfig={currencyConfig} />
+            ))}
           </SearchResultsPanel>
         </div>
         <div className={mapClassName}>
           <MapPanel>
-            {listings.map(l => <ListingCardSmall key={l.id.uuid} listing={l} />)}
+            {listings.map(l => (
+              <ListingCardSmall key={l.id.uuid} listing={l} currencyConfig={currencyConfig} />
+            ))}
           </MapPanel>
         </div>
       </div>

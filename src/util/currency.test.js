@@ -190,10 +190,10 @@ describe('currency utils', () => {
     const Money = types.Money;
 
     it('Money as value', () => {
-      expect(convertMoneyToNumber(new Money(10, 'USD'), subUnitDivisor)).toEqual(0.1);
-      expect(convertMoneyToNumber(new Money(1000, 'USD'), subUnitDivisor)).toEqual(10);
-      expect(convertMoneyToNumber(new Money(9900, 'USD'), subUnitDivisor)).toEqual(99);
-      expect(convertMoneyToNumber(new Money(10099, 'USD'), subUnitDivisor)).toEqual(100.99);
+      expect(convertMoneyToNumber(new Money(10, 'USD'), subUnitDivisor)).toBeCloseTo(0.1);
+      expect(convertMoneyToNumber(new Money(1000, 'USD'), subUnitDivisor)).toBeCloseTo(10);
+      expect(convertMoneyToNumber(new Money(9900, 'USD'), subUnitDivisor)).toBeCloseTo(99);
+      expect(convertMoneyToNumber(new Money(10099, 'USD'), subUnitDivisor)).toBeCloseTo(100.99);
     });
 
     it('Wrong type of a parameter', () => {

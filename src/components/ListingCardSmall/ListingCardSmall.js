@@ -1,19 +1,36 @@
 import React from 'react';
+import { intlShape, injectIntl } from 'react-intl';
 import { NamedLink } from '../../components';
 import * as propTypes from '../../util/propTypes';
+import { convertMoneyToNumber } from '../../util/currency';
 import css from './ListingCardSmall.css';
 import noImageIcon from './images/noImageIcon.svg';
 
-const ListingCardSmall = props => {
-  const { listing } = props;
-  const { title = '' } = listing.attributes || {};
+const priceData = (price, currencyConfig, intl) => {
+  if (price && price.currency === currencyConfig.currency) {
+    const priceAsNumber = convertMoneyToNumber(price, currencyConfig.subUnitDivisor);
+    const formattedPrice = intl.formatNumber(priceAsNumber, currencyConfig);
+    return { formattedPrice, priceTitle: formattedPrice };
+  } else if (price) {
+    return {
+      formattedPrice: `(${price.currency})`,
+      priceTitle: `Unsupported currency (${price.currency})`,
+    };
+  }
+  return {};
+};
+
+export const ListingCardSmallComponent = props => {
+  const { currencyConfig, intl, listing } = props;
+  const { price = null, title = '' } = listing.attributes || {};
   const id = listing.id.uuid;
   const slug = encodeURIComponent(title.split(' ').join('-'));
 
   // TODO: these are not yet present in the API data, figure out what
   // to do with them
-  const price = '55\u20AC / day';
-  const review = { rating: 3, count: 10 };
+  // TODO: Currently, API can return currencies that are not supported by starter app.
+  const { formattedPrice, priceTitle } = priceData(price, currencyConfig, intl);
+
   const images = listing.images
     ? listing.images.map(i => ({ id: i.id, sizes: i.attributes.sizes }))
     : [];
@@ -51,18 +68,18 @@ const ListingCardSmall = props => {
         <NamedLink className={css.title} name="ListingPage" params={{ id, slug }}>
           {title}
         </NamedLink>
-        <div className={css.reviews}>
-          (<span>{review.rating}</span><span>/5</span>){' '}
-          <span>{review.count}</span>
-        </div>
-        <div className={css.price}>
-          {price}
+        <div className={css.price} title={priceTitle}>
+          {formattedPrice}
         </div>
       </div>
     </div>
   );
 };
 
-ListingCardSmall.propTypes = { listing: propTypes.listing.isRequired };
+ListingCardSmallComponent.propTypes = {
+  currencyConfig: propTypes.currencyConfig.isRequired,
+  intl: intlShape.isRequired,
+  listing: propTypes.listing.isRequired,
+};
 
-export default ListingCardSmall;
+export default injectIntl(ListingCardSmallComponent);
