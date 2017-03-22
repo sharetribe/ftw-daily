@@ -13,6 +13,7 @@ import {
   ensureSeparator,
   truncateToSubUnitPrecision,
 } from '../../util/currency';
+import * as propTypes from '../../util/propTypes';
 
 const allowedInputProps = allProps => {
   // Strip away props that are not passed to input element (or are overwritten)
@@ -22,11 +23,14 @@ const allowedInputProps = allProps => {
 };
 
 // Convert unformatted value (e.g. 10,00) to Money (or null)
-const getPrice = (unformattedValue, currency) => {
+const getPrice = (unformattedValue, currencyConfig) => {
   const isEmptyString = unformattedValue === '';
   return isEmptyString
     ? null
-    : new types.Money(convertUnitToSubUnit(unformattedValue, currency), currency);
+    : new types.Money(
+        convertUnitToSubUnit(unformattedValue, currencyConfig.subUnitDivisor),
+        currencyConfig.currency
+      );
 };
 
 class CurrencyInput extends Component {
@@ -45,7 +49,7 @@ class CurrencyInput extends Component {
       const unformattedValue = defaultValue
         ? truncateToSubUnitPrecision(
             ensureSeparator(defaultValue.toString(), usesPoint),
-            currencyConfig.currency,
+            currencyConfig.subUnitDivisor,
             usesPoint
           )
         : '';
@@ -83,22 +87,18 @@ class CurrencyInput extends Component {
     // Update value strings on state
     const { unformattedValue } = this.updateValues(event);
     // Notify parent component about current price change
-    const price = getPrice(
-      ensureDotSeparator(unformattedValue),
-      this.props.currencyConfig.currency
-    );
+    const price = getPrice(ensureDotSeparator(unformattedValue), this.props.currencyConfig);
     this.props.input.onChange(price);
   }
 
   onInputBlur(event) {
     event.preventDefault();
     event.stopPropagation();
-    const onBlur = this.props.input.onBlur;
-    const currency = this.props.currencyConfig.currency;
+    const { currencyConfig, input: { onBlur } } = this.props;
     this.setState(prevState => {
       if (onBlur) {
         // If parent component has provided onBlur function, call it with current price.
-        const price = getPrice(ensureDotSeparator(prevState.unformattedValue), currency);
+        const price = getPrice(ensureDotSeparator(prevState.unformattedValue), currencyConfig);
         onBlur(price);
       }
       return {
@@ -110,12 +110,11 @@ class CurrencyInput extends Component {
   onInputFocus(event) {
     event.preventDefault();
     event.stopPropagation();
-    const onFocus = this.props.input.onFocus;
-    const currency = this.props.currencyConfig.currency;
+    const { currencyConfig, input: { onFocus } } = this.props;
     this.setState(prevState => {
       if (onFocus) {
         // If parent component has provided onFocus function, call it with current price.
-        const price = getPrice(ensureDotSeparator(prevState.unformattedValue), currency);
+        const price = getPrice(ensureDotSeparator(prevState.unformattedValue), currencyConfig);
         onFocus(price);
       }
       return {
@@ -134,7 +133,7 @@ class CurrencyInput extends Component {
       // truncate decimals to subunit precision: 10000.999 => 10000.99
       const truncatedValueString = truncateToSubUnitPrecision(
         valueOrZero,
-        currencyConfig.currency,
+        currencyConfig.subUnitDivisor,
         this.state.usesPoint
       );
       const unformattedValue = !isEmptyString ? truncatedValueString : '';
@@ -184,21 +183,14 @@ CurrencyInput.defaultProps = {
   placeholder: null,
 };
 
-const { bool, func, instanceOf, oneOfType, number, shape, string } = PropTypes;
+const { func, oneOfType, number, shape, string } = PropTypes;
 
 CurrencyInput.propTypes = {
-  currencyConfig: shape({
-    style: string.isRequired,
-    currency: string.isRequired,
-    currencyDisplay: string,
-    useGrouping: bool,
-    minimumFractionDigits: number,
-    maximumFractionDigits: number,
-  }).isRequired,
+  currencyConfig: propTypes.currencyConfig.isRequired,
   defaultValue: number,
   intl: intlShape.isRequired,
   input: shape({
-    value: oneOfType([string, instanceOf(types.Money)]),
+    value: oneOfType([string, propTypes.money]),
     onBlur: func,
     onChange: func.isRequired,
     onFocus: func,

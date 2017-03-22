@@ -1,9 +1,6 @@
 import { trimEnd } from 'lodash';
 import Decimal from 'decimal.js';
 
-// This works for USD and EUR
-const SUB_UNITS_DIVISOR = 100;
-
 // Default config for currency formatting (for React-Intl).
 export const currencyDefaultConfig = {
   style: 'currency',
@@ -12,7 +9,10 @@ export const currencyDefaultConfig = {
   useGrouping: true,
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
+  subUnitDivisor: 100,
 };
+
+////////// Currency manipulation in string format //////////
 
 // Ensures that the given string uses only dots or points
 // ensureSeparator('9999999,99', false) // => '9999999.99'
@@ -48,13 +48,22 @@ export const convertDecimalToString = (decimalValue, usePoint = false) => {
   }
 };
 
+const convertDivisorToDecimal = divisor => {
+  try {
+    const divisorAsDecimal = new Decimal(divisor);
+    if (divisorAsDecimal.isNegative()) {
+      throw new Error(`Parameter (${divisor}) must be a positive number.`);
+    }
+    return divisorAsDecimal;
+  } catch (e) {
+    throw new Error(`Parameter (${divisor}) must present a number.`, e);
+  }
+};
+
 // Limits value to sub-unit precision: "1.4567" -> "1.45"
 // Useful in input fields so this doesn't use rounding.
-export const truncateToSubUnitPrecision = (inputString, currency, usePoint = false) => {
-  if (!(currency === 'USD' || currency === 'EUR')) {
-    // Other currencies sub unit support need to be changed case by case
-    throw new Error('Currency must be either USD or EUR');
-  }
+export const truncateToSubUnitPrecision = (inputString, subUnitDivisor, usePoint = false) => {
+  const subUnitDivisorAsDecimal = convertDivisorToDecimal(subUnitDivisor);
 
   // '10,' should be passed through, but that format is not supported as valid number
   const trimmed = trimEnd(inputString, usePoint ? ',' : '.');
@@ -62,12 +71,12 @@ export const truncateToSubUnitPrecision = (inputString, currency, usePoint = fal
   const value = convertToDecimal(trimmed, usePoint);
 
   if (value.isNegative()) {
-    throw new Error('Parameter must be a positive number');
+    throw new Error(`Parameter (${inputString}) must be a positive number.`);
   }
 
   // Amount is always counted in subunits
   // E.g. $10 => 1000¢
-  const amount = value.times(SUB_UNITS_DIVISOR);
+  const amount = value.times(subUnitDivisorAsDecimal);
 
   // Amount must be integer
   // We don't deal with subunit fragments like 1000.345¢
@@ -80,27 +89,27 @@ export const truncateToSubUnitPrecision = (inputString, currency, usePoint = fal
     return ensureSeparator(decimalPrecisionMax2, usePoint);
   } else {
     // truncate strings ('9.999' => '9.99')
-    const truncated = amount.truncated().dividedBy(SUB_UNITS_DIVISOR);
+    const truncated = amount.truncated().dividedBy(subUnitDivisorAsDecimal);
     return convertDecimalToString(truncated, usePoint);
   }
 };
 
+////////// Currency - Money helpers //////////
+
 // Converts given value to sub unit value and returns it as a number
-export const convertUnitToSubUnit = (value, currency, usePoint = false) => {
-  if (!(currency === 'USD' || currency === 'EUR')) {
-    throw new Error('Currency must be either USD or EUR');
-  }
+export const convertUnitToSubUnit = (value, subUnitDivisor, usePoint = false) => {
+  const subUnitDivisorAsDecimal = convertDivisorToDecimal(subUnitDivisor);
 
   if (!(typeof value === 'string' || typeof value === 'number')) {
     throw new Error('Value must be either number or string');
   }
 
   const val = typeof value === 'string' ? convertToDecimal(value, usePoint) : new Decimal(value);
-  const amount = val.times(SUB_UNITS_DIVISOR);
+  const amount = val.times(subUnitDivisorAsDecimal);
 
   if (amount.isInteger()) {
     return amount.toNumber();
   } else {
-    throw new Error(`value must divisible by ${SUB_UNITS_DIVISOR}`);
+    throw new Error(`value must divisible by ${subUnitDivisor}`);
   }
 };

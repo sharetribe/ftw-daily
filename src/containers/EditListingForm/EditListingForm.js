@@ -3,6 +3,7 @@ import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
+import config from '../../config';
 import {
   noEmptyArray,
   maxLength,
@@ -182,6 +183,7 @@ class EditListingForm extends Component {
           name="price"
           label="Price"
           component={EnhancedCurrencyInput}
+          currencyConfig={config.currencyConfig}
           validate={[required(priceRequiredMessage)]}
           placeholder="10.0"
         />

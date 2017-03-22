@@ -96,90 +96,90 @@ describe('currency utils', () => {
     });
   });
 
-  describe('truncateToSubUnitPrecision(valueStr, currency)', () => {
+  describe('truncateToSubUnitPrecision(valueStr, subUnitDivisor)', () => {
+    const subUnitDivisor = 100;
     it('positive values', () => {
-      expect(truncateToSubUnitPrecision('0', 'USD')).toEqual('0');
-      expect(truncateToSubUnitPrecision('1', 'EUR')).toEqual('1');
-      expect(truncateToSubUnitPrecision('10', 'USD')).toEqual('10');
-      expect(truncateToSubUnitPrecision('10000', 'EUR')).toEqual('10000');
-      expect(truncateToSubUnitPrecision('10000.00', 'USD')).toEqual('10000.00');
-      expect(truncateToSubUnitPrecision('99.9', 'EUR')).toEqual('99.9');
-      expect(truncateToSubUnitPrecision('99.99', 'USD')).toEqual('99.99');
+      expect(truncateToSubUnitPrecision('0', subUnitDivisor)).toEqual('0');
+      expect(truncateToSubUnitPrecision('1', subUnitDivisor)).toEqual('1');
+      expect(truncateToSubUnitPrecision('10', subUnitDivisor)).toEqual('10');
+      expect(truncateToSubUnitPrecision('10000', subUnitDivisor)).toEqual('10000');
+      expect(truncateToSubUnitPrecision('10000.00', subUnitDivisor)).toEqual('10000.00');
+      expect(truncateToSubUnitPrecision('99.9', subUnitDivisor)).toEqual('99.9');
+      expect(truncateToSubUnitPrecision('99.99', subUnitDivisor)).toEqual('99.99');
     });
 
     it('truncate excess amount of decimal values', () => {
-      expect(truncateToSubUnitPrecision('99.999999', 'USD')).toEqual('99.99');
-      expect(truncateToSubUnitPrecision('1.111', 'USD')).toEqual('1.11');
-      expect(truncateToSubUnitPrecision('1.110000', 'USD')).toEqual('1.11');
+      expect(truncateToSubUnitPrecision('99.999999', subUnitDivisor)).toEqual('99.99');
+      expect(truncateToSubUnitPrecision('1.111', subUnitDivisor)).toEqual('1.11');
+      expect(truncateToSubUnitPrecision('1.110000', subUnitDivisor)).toEqual('1.11');
     });
 
     it('negative values to throw errors', () => {
-      expect(() => truncateToSubUnitPrecision('-0', 'USD')).toThrowError(
-        'Parameter must be a positive number'
+      expect(() => truncateToSubUnitPrecision('-0', subUnitDivisor)).toThrowError(
+        'Parameter (-0) must be a positive number'
       );
-      expect(() => truncateToSubUnitPrecision('-1', 'USD')).toThrowError(
-        'Parameter must be a positive number'
+      expect(() => truncateToSubUnitPrecision('-1', subUnitDivisor)).toThrowError(
+        'Parameter (-1) must be a positive number'
       );
-      expect(() => truncateToSubUnitPrecision('-10000', 'USD')).toThrowError(
-        'Parameter must be a positive number'
+      expect(() => truncateToSubUnitPrecision('-10000', subUnitDivisor)).toThrowError(
+        'Parameter (-10000) must be a positive number'
       );
-      expect(() => truncateToSubUnitPrecision('-99.99', 'USD')).toThrowError(
-        'Parameter must be a positive number'
+      expect(() => truncateToSubUnitPrecision('-99.99', subUnitDivisor)).toThrowError(
+        'Parameter (-99.99) must be a positive number'
       );
-      expect(() => truncateToSubUnitPrecision('-99.99999', 'USD')).toThrowError(
-        'Parameter must be a positive number'
+      expect(() => truncateToSubUnitPrecision('-99.99999', subUnitDivisor)).toThrowError(
+        'Parameter (-99.99999) must be a positive number'
       );
-      expect(() => truncateToSubUnitPrecision('-1.111', 'USD')).toThrowError(
-        'Parameter must be a positive number'
+      expect(() => truncateToSubUnitPrecision('-1.111', subUnitDivisor)).toThrowError(
+        'Parameter (-1.111) must be a positive number'
       );
     });
 
     it('text input to throw errors', () => {
-      expect(() => truncateToSubUnitPrecision('asdf', 'USD')).toThrowError();
-      expect(() => truncateToSubUnitPrecision('100asdf', 'USD')).toThrowError();
-      expect(() => truncateToSubUnitPrecision('asdf100', 'USD')).toThrowError();
-      expect(() => truncateToSubUnitPrecision('@', 'USD')).toThrowError();
+      expect(() => truncateToSubUnitPrecision('asdf', subUnitDivisor)).toThrowError();
+      expect(() => truncateToSubUnitPrecision('100asdf', subUnitDivisor)).toThrowError();
+      expect(() => truncateToSubUnitPrecision('asdf100', subUnitDivisor)).toThrowError();
+      expect(() => truncateToSubUnitPrecision('@', subUnitDivisor)).toThrowError();
     });
 
-    it('wrong currency to throw errors', () => {
-      expect(() => truncateToSubUnitPrecision('asdf', 'JPN')).toThrowError();
-      expect(() => truncateToSubUnitPrecision('100asdf', 'JPN')).toThrowError();
-      expect(() => truncateToSubUnitPrecision('asdf100', 'JPN')).toThrowError();
-      expect(() => truncateToSubUnitPrecision('@', 'JPN')).toThrowError();
+    it('wrong subUnitDivisor type to throw errors', () => {
+      expect(() => truncateToSubUnitPrecision('asdf', '')).toThrowError();
+      expect(() => truncateToSubUnitPrecision('100asdf', 'asdf')).toThrowError();
+      expect(() => truncateToSubUnitPrecision('asdf100', [])).toThrowError();
+      expect(() => truncateToSubUnitPrecision('@', {})).toThrowError();
     });
   });
 
-  describe('convertUnitToSubUnit(value, currency)', () => {
+  describe('convertUnitToSubUnit(value, subUnitDivisor)', () => {
+    const subUnitDivisor = 100;
     it('numbers as value', () => {
-      expect(convertUnitToSubUnit(0, 'USD')).toEqual(0);
-      expect(convertUnitToSubUnit(10, 'USD')).toEqual(1000);
-      expect(convertUnitToSubUnit(1, 'EUR')).toEqual(100);
+      expect(convertUnitToSubUnit(0, subUnitDivisor)).toEqual(0);
+      expect(convertUnitToSubUnit(10, subUnitDivisor)).toEqual(1000);
+      expect(convertUnitToSubUnit(1, subUnitDivisor)).toEqual(100);
     });
 
     it('strings as value', () => {
-      expect(convertUnitToSubUnit('0', 'USD')).toEqual(0);
-      expect(convertUnitToSubUnit('10', 'USD')).toEqual(1000);
-      expect(convertUnitToSubUnit('1', 'EUR')).toEqual(100);
-      expect(convertUnitToSubUnit('0.10', 'USD')).toEqual(10);
-      expect(convertUnitToSubUnit('10,99', 'USD')).toEqual(1099);
+      expect(convertUnitToSubUnit('0', subUnitDivisor)).toEqual(0);
+      expect(convertUnitToSubUnit('10', subUnitDivisor)).toEqual(1000);
+      expect(convertUnitToSubUnit('1', subUnitDivisor)).toEqual(100);
+      expect(convertUnitToSubUnit('0.10', subUnitDivisor)).toEqual(10);
+      expect(convertUnitToSubUnit('10,99', subUnitDivisor)).toEqual(1099);
     });
 
     it('wrong type', () => {
-      expect(() => convertUnitToSubUnit({}, 'USD')).toThrowError(
+      expect(() => convertUnitToSubUnit({}, subUnitDivisor)).toThrowError(
         'Value must be either number or string'
       );
-      expect(() => convertUnitToSubUnit([], 'USD')).toThrowError(
+      expect(() => convertUnitToSubUnit([], subUnitDivisor)).toThrowError(
         'Value must be either number or string'
       );
-      expect(() => convertUnitToSubUnit(null, 'EUR')).toThrowError(
+      expect(() => convertUnitToSubUnit(null, subUnitDivisor)).toThrowError(
         'Value must be either number or string'
       );
     });
 
-    it('wrong currency', () => {
-      expect(() => convertUnitToSubUnit(1, 'JPN')).toThrowError(
-        'Currency must be either USD or EUR'
-      );
+    it('wrong subUnitDivisor', () => {
+      expect(() => convertUnitToSubUnit(1, 'asdf')).toThrowError();
     });
   });
 });
