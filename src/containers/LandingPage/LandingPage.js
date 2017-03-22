@@ -1,38 +1,34 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { HeroSection, NamedRedirect, PageLayout } from '../../components';
+import { withRouter } from 'react-router-dom';
+import { HeroSection, PageLayout } from '../../components';
 import { HeroSearchForm } from '../../containers';
-import { changeLocationFilter } from '../../ducks/LocationFilter.duck';
+import { stringify } from '../../util/urlHelpers';
+
 import css from './LandingPage.css';
 
-const createSubmitHandler = onLocationChanged =>
-  formData => {
-    onLocationChanged(formData.location);
+export const LandingPageComponent = props => {
+  const { push: historyPush } = props;
+
+  const handleSubmit = values => {
+    const { location: { selectedPlace } } = values;
+    const { address, origin, bounds } = selectedPlace;
+    const searchQuery = stringify({ address, origin, bounds });
+    historyPush(`/s?${searchQuery}`);
   };
 
-export const LandingPageComponent = props => {
-  const { onLocationChanged, filter } = props;
-  const handleSubmit = createSubmitHandler(onLocationChanged);
-
-  return filter.length > 0
-    ? <NamedRedirect name="SearchPage" search={`location=${filter}`} />
-    : <PageLayout title="Landing page">
-        <HeroSection>
-          <HeroSearchForm className={css.form} onSubmit={handleSubmit} />
-        </HeroSection>
-      </PageLayout>;
+  return (
+    <PageLayout title="Landing page">
+      <HeroSection>
+        <HeroSearchForm className={css.form} onSubmit={handleSubmit} />
+      </HeroSection>
+    </PageLayout>
+  );
 };
 
-const { func, string } = PropTypes;
+const { func } = PropTypes;
 
-LandingPageComponent.defaultProps = { filter: '' };
-
-LandingPageComponent.propTypes = { onLocationChanged: func.isRequired, filter: string };
-
-const mapStateToProps = state => ({ filter: state.LocationFilter });
-
-const mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return { onLocationChanged: v => dispatch(changeLocationFilter(v)) };
+LandingPageComponent.propTypes = {
+  push: func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LandingPageComponent);
+export default withRouter(LandingPageComponent);

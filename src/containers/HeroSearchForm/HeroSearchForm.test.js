@@ -4,7 +4,9 @@ import HeroSearchForm from './HeroSearchForm';
 
 describe('HeroSearchForm', () => {
   it('matches snapshot', () => {
+    window.google = { maps: {} };
     const tree = renderDeep(<HeroSearchForm />);
     expect(tree).toMatchSnapshot();
+    delete window.google;
   });
 });

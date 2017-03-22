@@ -1,7 +1,7 @@
 {
   "AuthenticationPage.loginFailed": "The email and password you entered did not match our records. Please double-check and try again.",
   "AuthenticationPage.loginRequiredFor": "You must log in to view the page at",
-  "HeroSearchForm.placeholder": "Location search (soon)",
+  "HeroSearchForm.placeholder": "Search by location, e.g. New York",
   "HeroSearchForm.search": "Search",
   "HeroSection.subTitle": "The largest online community to rent music studios",
   "HeroSection.title": "Book Studiotime anywhere",

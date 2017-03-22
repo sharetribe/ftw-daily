@@ -1,17 +1,19 @@
 exports[`HeroSearchForm matches snapshot 1`] = `
 <form
   onSubmit={[Function]}>
-  <input
-    className={undefined}
-    name="location"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onDragStart={[Function]}
-    onDrop={[Function]}
-    onFocus={[Function]}
-    placeholder="Location search (soon)"
-    type="text"
-    value="" />
+  <div
+    className={undefined}>
+    <input
+      className=" undefined"
+      name="location"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      placeholder="Search by location, e.g. New York"
+      type="search"
+      value="" />
+  </div>
   <button
     className={undefined}
     disabled={true}
