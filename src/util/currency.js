@@ -78,8 +78,8 @@ const convertDivisorToDecimal = divisor => {
  *
  * @param {String} inputString - positive number presentation.
  *
- * @param {Decimal|Number|String} subUnitDivisor - a ratio between currency's
- * main unit and sub units
+ * @param {Decimal|Number|String} subUnitDivisor - should be something that can be converted to
+ * Decimal. (This is a ratio between currency's main unit and sub units.)
  *
  * @param {boolean} useComma - optional.
  * Specify if return value should use comma as separator
@@ -125,8 +125,8 @@ export const truncateToSubUnitPrecision = (inputString, subUnitDivisor, useComma
  *
  * @param {Number|String} value
  *
- * @param {Decimal|Number|String} subUnitDivisor - a ratio between currency's
- * main unit and sub units
+ * @param {Decimal|Number|String} subUnitDivisor - should be something that can be converted to
+ * Decimal. (This is a ratio between currency's main unit and sub units.)
  *
  * @param {boolean} useComma - optional.
  * Specify if return value should use comma as separator
@@ -155,10 +155,10 @@ export const convertUnitToSubUnit = (value, subUnitDivisor, useComma = false) =>
  *
  * @param {Money} value
  *
- * @param {Decimal|Number|String} subUnitDivisor - a ratio between currency's
- * main unit and sub units
+ * @param {Decimal|Number|String} subUnitDivisor - should be something that can be converted to
+ * Decimal. (This is a ratio between currency's main unit and sub units.)
  *
- * @return {number} converted value
+ * @return {Number} converted value
  */
 export const convertMoneyToNumber = (value, subUnitDivisor) => {
   if (!(value instanceof types.Money)) {

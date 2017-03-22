@@ -1,3 +1,9 @@
+.price {
+  font-size: 2em;
+  margin: 0.67em 0;
+  float: right;
+}
+
 .mainImage {
   width: 100%;
 }
@@ -34,47 +40,10 @@
   margin: 2rem;
 }
 
-.filterSection {
-  margin: 2rem;
-  padding: 1rem;
-  border: solid 1px #ccc;
-}
-
-.contact {
-  display: inline-block;
-  margin: 1rem 2rem;
-  color: #666;
-}
-
-.reviewSection {
-  margin: 1rem 2rem;
-}
-
-.reviewDetails {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.avatar {
-  border-radius: 22px;
-  margin-right: 1rem;
-}
-
-.rating {
-  margin-left: auto;
-}
-
 .map {
   margin-top: 3rem;
   height: 300px;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ddd;
-  color: #fff;
-  font-size: 2rem;
 }
 
 .buttonLink {

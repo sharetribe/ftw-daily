@@ -31,7 +31,7 @@ const getPrice = (unformattedValue, currencyConfig) => {
           convertUnitToSubUnit(unformattedValue, currencyConfig.subUnitDivisor),
           currencyConfig.currency
         );
-  } catch(e) {
+  } catch (e) {
     return null;
   }
 };
