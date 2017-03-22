@@ -7,7 +7,7 @@ import { NamedRedirect } from './components';
 import { withFlattenedRoutes } from './util/routes';
 import * as propTypes from './util/propTypes';
 
-const { bool, arrayOf, object, func, shape, string, any } = PropTypes;
+const { bool, arrayOf, object, func, shape, string } = PropTypes;
 
 class RouteComponentRenderer extends Component {
   constructor(props) {
@@ -15,12 +15,12 @@ class RouteComponentRenderer extends Component {
     this.canShowComponent = this.canShowComponent.bind(this);
   }
   componentDidMount() {
-    const { match, route, dispatch } = this.props;
+    const { match, location, route, dispatch } = this.props;
     const { loadData, name } = route;
     const shouldLoadData = typeof loadData === 'function' && this.canShowComponent();
 
     if (shouldLoadData) {
-      dispatch(loadData(match.params, {}))
+      dispatch(loadData(match.params, location.search))
         .then(() => {
           // eslint-disable-next-line no-console
           console.log(`loadData success for ${name} route`);
@@ -56,7 +56,9 @@ RouteComponentRenderer.propTypes = {
     params: object.isRequired,
     url: string.isRequired,
   }).isRequired,
-  location: any.isRequired,
+  location: shape({
+    search: string.isRequired,
+  }).isRequired,
   staticContext: object.isRequired,
   dispatch: func.isRequired,
 };
