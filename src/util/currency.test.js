@@ -1,6 +1,8 @@
 import Decimal from 'decimal.js';
+import { types } from './sdkLoader';
 import {
   convertDecimalToString,
+  convertMoneyToNumber,
   convertToDecimal,
   convertUnitToSubUnit,
   ensureSeparator,
@@ -180,6 +182,36 @@ describe('currency utils', () => {
 
     it('wrong subUnitDivisor', () => {
       expect(() => convertUnitToSubUnit(1, 'asdf')).toThrowError();
+    });
+  });
+
+  describe('convertMoneyToNumber(value, subUnitDivisor)', () => {
+    const subUnitDivisor = 100;
+    const Money = types.Money;
+
+    it('Money as value', () => {
+      expect(convertMoneyToNumber(new Money(10, 'USD'), subUnitDivisor)).toEqual(0.1);
+      expect(convertMoneyToNumber(new Money(1000, 'USD'), subUnitDivisor)).toEqual(10);
+      expect(convertMoneyToNumber(new Money(9900, 'USD'), subUnitDivisor)).toEqual(99);
+      expect(convertMoneyToNumber(new Money(10099, 'USD'), subUnitDivisor)).toEqual(100.99);
+    });
+
+    it('Wrong type of a parameter', () => {
+      expect(() => convertMoneyToNumber(10, subUnitDivisor)).toThrowError(
+        'Value must be a Money type'
+      );
+      expect(() => convertMoneyToNumber('10', subUnitDivisor)).toThrowError(
+        'Value must be a Money type'
+      );
+      expect(() => convertMoneyToNumber(true, subUnitDivisor)).toThrowError(
+        'Value must be a Money type'
+      );
+      expect(() => convertMoneyToNumber({}, subUnitDivisor)).toThrowError(
+        'Value must be a Money type'
+      );
+      expect(() => convertMoneyToNumber(new Money('asdf', 'USD'), subUnitDivisor)).toThrowError(
+        '[DecimalError] Invalid argument'
+      );
     });
   });
 });
