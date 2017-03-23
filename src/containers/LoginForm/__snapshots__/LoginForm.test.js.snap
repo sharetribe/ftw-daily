@@ -31,6 +31,7 @@ exports[`LoginForm matches snapshot 1`] = `
     Forgot password?
   </p>
   <button
+    className=""
     disabled={true}
     type="submit">
     Log in
