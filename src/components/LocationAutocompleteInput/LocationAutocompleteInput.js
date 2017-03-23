@@ -263,7 +263,6 @@ class LocationAutocompleteInput extends Component {
 
     const handleOnBlur = () => {
       this.setState({ inputHasFocus: false, highlightedIndex: -1 });
-      this.selectItemIfNoneSelected();
       onBlur(currentValue(this.props));
     };
 
