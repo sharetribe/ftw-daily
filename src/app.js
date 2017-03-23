@@ -7,7 +7,7 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import configureStore from './store';
 import Routes from './Routes';
-import { RoutesProvider } from './components';
+import { RoutesProvider, MobileFrame } from './components';
 import routesConfiguration from './routesConfiguration';
 import { flattenRoutes } from './util/routes';
 import localeData from './translations/en.json';
@@ -21,7 +21,9 @@ export const ClientApp = props => {
       <Provider store={store}>
         <RoutesProvider flattenedRoutes={flattenedRoutes}>
           <BrowserRouter>
-            <Routes />
+            <MobileFrame>
+              <Routes />
+            </MobileFrame>
           </BrowserRouter>
         </RoutesProvider>
       </Provider>
@@ -42,7 +44,9 @@ export const ServerApp = props => {
       <Provider store={store}>
         <RoutesProvider flattenedRoutes={flattenedRoutes}>
           <StaticRouter location={url} context={context}>
-            <Routes />
+            <MobileFrame>
+              <Routes />
+            </MobileFrame>
           </StaticRouter>
         </RoutesProvider>
       </Provider>
