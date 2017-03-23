@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { debounce } from 'lodash';
+import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
 
@@ -275,7 +276,7 @@ class LocationAutocompleteInput extends Component {
     return (
       <div className={css.root}>
         <input
-          className={`${className} ${css.input}`}
+          className={classNames(css.input, className)}
           type="search"
           placeholder={placeholder}
           name={name}
