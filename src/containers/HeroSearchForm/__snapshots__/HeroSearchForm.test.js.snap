@@ -4,6 +4,7 @@ exports[`HeroSearchForm matches snapshot 1`] = `
   <div
     className={undefined}>
     <input
+      autoComplete="off"
       className=""
       name="location"
       onBlur={[Function]}

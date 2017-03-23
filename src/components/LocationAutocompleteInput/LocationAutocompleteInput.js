@@ -278,6 +278,7 @@ class LocationAutocompleteInput extends Component {
         <input
           className={classNames(css.input, className)}
           type="search"
+          autoComplete="off"
           placeholder={placeholder}
           name={name}
           value={search}
