@@ -10,6 +10,7 @@ html, input, button {
      See: https://en.wikipedia.org/wiki/Chalkboard_(typeface)
   */
   font-family: "Chalkboard", "Comic Sans MS", sans-serif;
+  color: #4A4A4A;
 }
 
 ul {
