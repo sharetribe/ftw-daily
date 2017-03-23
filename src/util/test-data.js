@@ -23,3 +23,14 @@ export const createListing = id => ({
     geolocation: new LatLng(40, 60),
   },
 });
+
+// Default config for currency formatting in tests and examples.
+export const currencyConfig = {
+  style: 'currency',
+  currency: 'USD',
+  currencyDisplay: 'symbol',
+  useGrouping: true,
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+  subUnitDivisor: 100,
+};

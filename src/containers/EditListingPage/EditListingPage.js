@@ -14,7 +14,7 @@ import {
 } from './EditListingPage.duck';
 
 const formatRequestData = values => {
-  const { description, images, title, location } = values;
+  const { description, images, location, price, title } = values;
   const { selectedPlace: { address, origin } } = location;
 
   return {
@@ -22,6 +22,7 @@ const formatRequestData = values => {
     description,
     geolocation: origin,
     images: images.map(i => i.imageId),
+    price,
     title,
   };
 };
@@ -77,9 +78,12 @@ export class EditListingPageComponent extends Component {
 
       // Images are passed to EditListingForm so that it can generate thumbnails out of them
       const images = page.imageOrder.map(i => page.images[i]);
+      const title = isNew
+        ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
+        : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
 
       return (
-        <PageLayout title={'Edit listing'}>
+        <PageLayout title={title}>
           <EditListingForm
             disabled={disableForm}
             images={images}

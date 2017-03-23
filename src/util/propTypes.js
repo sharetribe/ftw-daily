@@ -20,7 +20,7 @@
 import { PropTypes } from 'react';
 import { types as sdkTypes } from './sdkLoader';
 
-const { UUID, LatLng, LatLngBounds } = sdkTypes;
+const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
 const { arrayOf, bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
 
 // Fixed value
@@ -30,6 +30,18 @@ export const value = val => oneOf([val]);
 export const uuid = instanceOf(UUID);
 export const latlng = instanceOf(LatLng);
 export const latlngBounds = instanceOf(LatLngBounds);
+export const money = instanceOf(Money);
+
+// Configuration for currency formatting
+export const currencyConfig = shape({
+  style: string.isRequired,
+  currency: string.isRequired,
+  currencyDisplay: string,
+  useGrouping: bool,
+  minimumFractionDigits: number,
+  maximumFractionDigits: number,
+  subUnitDivisor: number,
+});
 
 // Configuration for a single route
 export const route = shape({

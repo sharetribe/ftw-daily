@@ -10,6 +10,7 @@
 import React, { Component, PropTypes } from 'react';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { Promised } from '../../components';
+import { uuid } from '../../util/propTypes';
 import css from './AddImages.css';
 
 // readImage returns a promise which is resolved
@@ -66,7 +67,7 @@ const { any, array, func, node, string } = PropTypes;
 Thumbnail.propTypes = {
   file: any.isRequired,
   id: string.isRequired,
-  imageId: string,
+  imageId: uuid,
 };
 
 const SortableImage = SortableElement(Thumbnail);

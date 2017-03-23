@@ -8,6 +8,7 @@
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
+    "decimal.js": "^7.1.1",
     "express": "^4.15.2",
     "helmet": "^3.5.0",
     "lodash": "^4.17.4",
@@ -27,7 +28,7 @@
     "redux-thunk": "^2.2.0",
     "sanitize.css": "^5.0.0",
     "sharetribe-scripts": "0.9.2",
-    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#ef8b6d5643df72832f47208f5056b2d606ad19b0",
+    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#2972b2ec40509e89b30626fcfeb92327a6b805a0",
     "source-map-support": "^0.4.12",
     "url": "^0.11.0"
   },

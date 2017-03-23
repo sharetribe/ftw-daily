@@ -54,7 +54,7 @@ export const renderDeep = component => {
 export const fakeIntl = {
   formatDate: d => d,
   formatHTMLMessage: d => d,
-  formatMessage: msg => msg.defaultMessage,
+  formatMessage: msg => msg.id,
   formatNumber: d => d,
   formatPlural: d => d,
   formatRelative: d => d,
