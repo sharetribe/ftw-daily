@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Topbar } from '../../containers';
+import { MobileFrame } from '../../components';
 
 const scrollToTop = () => {
   // Todo: this might need fine tuning later
@@ -36,21 +37,23 @@ class PageLayout extends Component {
     /* eslint-enable no-console */
 
     return (
-      <div className={className}>
-        <Helmet title={title} />
-        {authInfoError
-          ? <div style={{ color: 'red' }}>
-              <FormattedMessage id="PageLayout.authInfoFailed" />
-            </div>
-          : null}
-        {logoutError
-          ? <div style={{ color: 'red' }}>
-              <FormattedMessage id="PageLayout.logoutFailed" />
-            </div>
-          : null}
-        <Topbar />
-        {children}
-      </div>
+      <MobileFrame>
+        <div className={className}>
+          <Helmet title={title} />
+          {authInfoError
+            ? <div style={{ color: 'red' }}>
+                <FormattedMessage id="PageLayout.authInfoFailed" />
+              </div>
+            : null}
+          {logoutError
+            ? <div style={{ color: 'red' }}>
+                <FormattedMessage id="PageLayout.logoutFailed" />
+              </div>
+            : null}
+          <Topbar />
+          {children}
+        </div>
+      </MobileFrame>
     );
   }
 }
