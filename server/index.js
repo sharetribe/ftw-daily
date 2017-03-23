@@ -31,8 +31,9 @@ const buildPath = path.resolve(__dirname, '..', 'build');
 const env = process.env.NODE_ENV;
 const dev = env !== 'production';
 const PORT = process.env.PORT || 4000;
-const CLIENT_ID = '08ec69f6-d37e-414d-83eb-324e94afddf0';
-const BASE_URL = 'http://localhost:8088';
+const CLIENT_ID = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID ||
+  '08ec69f6-d37e-414d-83eb-324e94afddf0';
+const BASE_URL = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'http://localhost:8088';
 const app = express();
 
 // The helmet middleware sets various HTTP headers to improve security.

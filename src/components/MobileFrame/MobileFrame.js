@@ -12,7 +12,7 @@ class MobileFrame extends Component {
 
   closeFrame(e) {
     e.preventDefault();
-    this.setState({frameEnabled: false});
+    this.setState({ frameEnabled: false });
   }
 
   render() {
@@ -30,13 +30,13 @@ class MobileFrame extends Component {
             {children}
           </div>
         </div>
-      )
+      );
     } else {
       return (
         <div>
           {children}
         </div>
-      )
+      );
     }
   }
 }
@@ -45,6 +45,6 @@ const { any } = PropTypes;
 
 MobileFrame.propTypes = {
   children: any.isRequired,
-}
+};
 
 export default MobileFrame;
