@@ -4,9 +4,13 @@ import { LandingPageComponent } from './LandingPage';
 import { RoutesProvider } from '../../components';
 import routesConfiguration from '../../routesConfiguration';
 
+const noop = () => null;
+
 describe('LandingPage', () => {
   it('matches snapshot', () => {
-    const tree = renderShallow(<LandingPageComponent onLocationChanged={v => v} />);
+    const tree = renderShallow(
+      <LandingPageComponent onLocationChanged={v => v} push={noop} flattenedRoutes={[]} />
+    );
     expect(tree).toMatchSnapshot();
   });
 });

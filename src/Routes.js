@@ -15,12 +15,12 @@ class RouteComponentRenderer extends Component {
     this.canShowComponent = this.canShowComponent.bind(this);
   }
   componentDidMount() {
-    const { match, route, dispatch } = this.props;
+    const { match, location, route, dispatch } = this.props;
     const { loadData, name } = route;
     const shouldLoadData = typeof loadData === 'function' && this.canShowComponent();
 
     if (shouldLoadData) {
-      dispatch(loadData(match.params, {}))
+      dispatch(loadData(match.params, location.search))
         .then(() => {
           // eslint-disable-next-line no-console
           console.log(`loadData success for ${name} route`);
@@ -37,26 +37,33 @@ class RouteComponentRenderer extends Component {
     return !auth || isAuthenticated;
   }
   render() {
-    const { route, match, location, staticContext } = this.props;
+    const { route, match, location, staticContext, flattenedRoutes } = this.props;
     const { component: RouteComponent } = route;
     const canShow = this.canShowComponent();
     if (!canShow) {
       staticContext.forbidden = true;
     }
     return canShow
-      ? <RouteComponent params={match.params} location={location} />
+      ? <RouteComponent
+          params={match.params}
+          location={location}
+          flattenedRoutes={flattenedRoutes}
+        />
       : <NamedRedirect name="LogInPage" state={{ from: match.url }} />;
   }
 }
 
 RouteComponentRenderer.propTypes = {
   isAuthenticated: bool.isRequired,
+  flattenedRoutes: any.isRequired,
   route: propTypes.route.isRequired,
   match: shape({
     params: object.isRequired,
     url: string.isRequired,
   }).isRequired,
-  location: any.isRequired,
+  location: shape({
+    search: string.isRequired,
+  }).isRequired,
   staticContext: object.isRequired,
   dispatch: func.isRequired,
 };
@@ -65,7 +72,7 @@ const Routes = props => {
   const { isAuthenticated, flattenedRoutes, staticContext, dispatch } = props;
 
   const toRouteComponent = route => {
-    const renderProps = { isAuthenticated, route, staticContext, dispatch };
+    const renderProps = { isAuthenticated, route, staticContext, dispatch, flattenedRoutes };
     return (
       <Route
         key={route.name}

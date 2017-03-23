@@ -3,13 +3,13 @@
 }
 
 .input {
-  height: 30px;
+  height: 50px;
 }
 
 .predictions {
   position: absolute;
   margin: 0;
-  top: 30px;
+  top: 50px;
   width: 100%;
   background-color: #fff;
   border: 1px solid #eee;

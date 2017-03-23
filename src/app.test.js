@@ -12,9 +12,11 @@ const render = (url, context) => {
 
 describe('Application', () => {
   it('renders in the client without crashing', () => {
+    window.google = { maps: {} };
     const store = configureStore({});
     const div = document.createElement('div');
     ReactDOM.render(<ClientApp store={store} />, div);
+    delete window.google;
   });
 
   it('renders in the server without crashing', () => {

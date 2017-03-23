@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { debounce } from 'lodash';
+import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
 
@@ -251,7 +252,8 @@ class LocationAutocompleteInput extends Component {
       });
   }
   render() {
-    const { onFocus, onBlur } = this.props.input;
+    const { className, placeholder, input } = this.props;
+    const { name, onFocus, onBlur } = input;
     const { search, predictions } = currentValue(this.props);
 
     const handleOnFocus = e => {
@@ -274,8 +276,10 @@ class LocationAutocompleteInput extends Component {
     return (
       <div className={css.root}>
         <input
-          className={css.input}
+          className={classNames(css.input, className)}
           type="search"
+          placeholder={placeholder}
+          name={name}
           value={search}
           onFocus={handleOnFocus}
           onBlur={handleOnBlur}
@@ -302,8 +306,13 @@ class LocationAutocompleteInput extends Component {
   }
 }
 
+LocationAutocompleteInput.defaultProps = { className: '', placeholder: '' };
+
 LocationAutocompleteInput.propTypes = {
+  className: string,
+  placeholder: string,
   input: shape({
+    name: string.isRequired,
     value: shape({
       search: string,
       predictions: any,
