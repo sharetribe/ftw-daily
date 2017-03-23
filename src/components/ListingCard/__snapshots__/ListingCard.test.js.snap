@@ -26,8 +26,9 @@ exports[`ListingCard matches snapshot 1`] = `
         }>
         listing1 title
       </withFlattenedRoutes(withRouter(NamedLink))>
-      <div>
-        55€ / day
+      <div
+        title={55}>
+        55
       </div>
     </div>
     <div>
@@ -37,42 +38,18 @@ exports[`ListingCard matches snapshot 1`] = `
       <div>
         listing1 address
       </div>
-      <div>
-        (
-        <span>
-          3
-        </span>
-        <span>
-          /5
-        </span>
-        )
-         
-        <span>
-          10
-           reviews
-        </span>
-      </div>
     </div>
     <hr />
     <div>
       <div>
         <img
           alt="user1 first name user1 last name"
-          src="http://placehold.it/44x44" />
+          src="https://placehold.it/44x44" />
       </div>
       <div>
         <span>
           user1 first name user1 last name
         </span>
-        <div>
-          review: 
-          <span>
-            4
-          </span>
-          <span>
-            /5
-          </span>
-        </div>
       </div>
     </div>
   </div>

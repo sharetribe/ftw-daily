@@ -1,6 +1,6 @@
 import { types } from './sdkLoader';
 
-const { UUID, LatLng } = types;
+const { UUID, LatLng, Money } = types;
 
 // Create a user that conforms to the util/propTypes user schema
 export const createUser = id => ({
@@ -18,6 +18,7 @@ export const createListing = id => ({
   type: 'listing',
   attributes: {
     title: `${id} title`,
+    price: new Money(5500, 'USD'),
     description: `${id} description`,
     address: `${id} address`,
     geolocation: new LatLng(40, 60),

@@ -25,22 +25,9 @@ exports[`ListingCardSmall matches snapshot 1`] = `
       }>
       listing1 title
     </withFlattenedRoutes(withRouter(NamedLink))>
-    <div>
-      (
-      <span>
-        3
-      </span>
-      <span>
-        /5
-      </span>
-      )
-       
-      <span>
-        10
-      </span>
-    </div>
-    <div>
-      55€ / day
+    <div
+      title={55}>
+      55
     </div>
   </div>
 </div>

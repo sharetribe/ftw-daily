@@ -1,5 +1,6 @@
 import { trimEnd } from 'lodash';
 import Decimal from 'decimal.js';
+import { types } from './sdkLoader';
 
 ////////// Currency manipulation in string format //////////
 
@@ -77,8 +78,8 @@ const convertDivisorToDecimal = divisor => {
  *
  * @param {String} inputString - positive number presentation.
  *
- * @param {Decimal|Number|String} subUnitDivisor - a ratio between currency's
- * main unit and sub units
+ * @param {Decimal|Number|String} subUnitDivisor - should be something that can be converted to
+ * Decimal. (This is a ratio between currency's main unit and sub units.)
  *
  * @param {boolean} useComma - optional.
  * Specify if return value should use comma as separator
@@ -124,8 +125,8 @@ export const truncateToSubUnitPrecision = (inputString, subUnitDivisor, useComma
  *
  * @param {Number|String} value
  *
- * @param {Decimal|Number|String} subUnitDivisor - a ratio between currency's
- * main unit and sub units
+ * @param {Decimal|Number|String} subUnitDivisor - should be something that can be converted to
+ * Decimal. (This is a ratio between currency's main unit and sub units.)
  *
  * @param {boolean} useComma - optional.
  * Specify if return value should use comma as separator
@@ -147,4 +148,23 @@ export const convertUnitToSubUnit = (value, subUnitDivisor, useComma = false) =>
   } else {
     throw new Error(`value must divisible by ${subUnitDivisor}`);
   }
+};
+
+/**
+ * Convert Money to a number
+ *
+ * @param {Money} value
+ *
+ * @param {Decimal|Number|String} subUnitDivisor - should be something that can be converted to
+ * Decimal. (This is a ratio between currency's main unit and sub units.)
+ *
+ * @return {Number} converted value
+ */
+export const convertMoneyToNumber = (value, subUnitDivisor) => {
+  if (!(value instanceof types.Money)) {
+    throw new Error('Value must be a Money type');
+  }
+  const subUnitDivisorAsDecimal = convertDivisorToDecimal(subUnitDivisor);
+  const amount = new Decimal(value.amount);
+  return amount.dividedBy(subUnitDivisorAsDecimal).toNumber();
 };

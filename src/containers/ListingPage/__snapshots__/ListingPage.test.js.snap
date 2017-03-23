@@ -1,18 +1,20 @@
 exports[`ListingPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
-  title="listing1 title 55€ / day">
+  title="listing1 title 55">
+  <div
+    title={55}>
+    55
+  </div>
+  <h1>
+    listing1 title
+  </h1>
   <div
     dangerouslySetInnerHTML={
       Object {
         "__html": "listing1 description",
       }
     } />
-  <div
-    style={
-      Object {
-        "height": 300,
-      }
-    }>
+  <div>
     <Map
       address="listing1 address"
       center={
@@ -23,75 +25,6 @@ exports[`ListingPage matches snapshot 1`] = `
       }
       className=""
       zoom={11} />
-  </div>
-  <div>
-    <h1>
-      Here will be filters (or dragons)
-    </h1>
-    <h2>
-      Studio type
-    </h2>
-    <h2>
-      Amenities
-    </h2>
-    <h2>
-      Additional Services Available
-    </h2>
-    <p>
-      <strong>
-        Studio hours:
-      </strong>
-       10am - 6pm
-    </p>
-  </div>
-  <a
-    href="mailto:studio.dude@mystudio.com">
-    <h2>
-      Contact studio
-    </h2>
-  </a>
-  <div>
-    <h2>
-      Studio reviews (1)
-    </h2>
-    <div>
-      <div>
-        <p>
-          
-                  Great studio in the New York for music professionals. Everything you need
-                  can be found from here and John was helpful with the right settings -
-                  we even got some tips for our songs! :)
-                  
-        </p>
-        <div>
-          <div>
-            <img
-              alt="Vesa L."
-              src="http://placehold.it/44x44" />
-          </div>
-          <div>
-            <span>
-              Vesa L.
-            </span>
-            <span>
-              January 2017
-            </span>
-          </div>
-          <div>
-            review: 
-            <span>
-              4
-            </span>
-            <span>
-              /5
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div>
-    Map
   </div>
   <withFlattenedRoutes(withRouter(NamedLink))
     name="OrderDetailsPage"

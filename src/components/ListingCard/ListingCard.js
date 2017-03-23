@@ -1,24 +1,37 @@
 import React from 'react';
+import { intlShape, injectIntl } from 'react-intl';
 import { NamedLink } from '../../components';
 import * as propTypes from '../../util/propTypes';
+import { convertMoneyToNumber } from '../../util/currency';
 import css from './ListingCard.css';
 import noImageIcon from './images/noImageIcon.svg';
 
-const ListingCard = props => {
-  const { listing } = props;
+const priceData = (price, currencyConfig, intl) => {
+  if (price && price.currency === currencyConfig.currency) {
+    const priceAsNumber = convertMoneyToNumber(price, currencyConfig.subUnitDivisor);
+    const formattedPrice = intl.formatNumber(priceAsNumber, currencyConfig);
+    return { formattedPrice, priceTitle: formattedPrice };
+  } else if (price) {
+    return {
+      formattedPrice: `(${price.currency})`,
+      priceTitle: `Unsupported currency (${price.currency})`,
+    };
+  }
+  return {};
+};
+
+export const ListingCardComponent = props => {
+  const { currencyConfig, intl, listing } = props;
   const id = listing.id.uuid;
-  const { title = '', description = '', address = '' } = listing.attributes || {};
+  const { title = '', description = '', address = '', price } = listing.attributes || {};
   const slug = encodeURIComponent(title.split(' ').join('-'));
   const authorName = listing.author && listing.author.attributes
     ? `${listing.author.attributes.profile.firstName} ${listing.author.attributes.profile.lastName}`
     : '';
 
-  // TODO: these are not yet present in the API data, figure out what
-  // to do with them
-  const price = '55\u20AC / day';
-  const review = { rating: 3, count: 10 };
-  const authorAvatar = 'http://placehold.it/44x44';
-  const authorReview = { rating: 4 };
+  // TODO: Currently, API can return currencies that are not supported by starter app.
+  const { formattedPrice, priceTitle } = priceData(price, currencyConfig, intl);
+
   const images = listing.images
     ? listing.images.map(i => ({ id: i.id, sizes: i.attributes.sizes }))
     : [];
@@ -26,6 +39,10 @@ const ListingCard = props => {
   const squareImageURL = mainImage ? mainImage.sizes.find(i => i.name === 'square').url : null;
   const square2XImageURL = mainImage ? mainImage.sizes.find(i => i.name === 'square2x').url : null;
   const higherRes = square2XImageURL ? { srcSet: `${square2XImageURL} 2x` } : null;
+
+  // TODO: these are not yet present in the API data, figure out what
+  // to do with them
+  const authorAvatar = 'https://placehold.it/44x44';
 
   // TODO: svg should have own loading strategy
   // Now noImageIcon is imported with default configuration (gives url)
@@ -57,8 +74,8 @@ const ListingCard = props => {
           <NamedLink className={css.title} name="ListingPage" params={{ id, slug }}>
             {title}
           </NamedLink>
-          <div className={css.price}>
-            {price}
+          <div className={css.price} title={priceTitle}>
+            {formattedPrice}
           </div>
         </div>
         <div className={css.description}>
@@ -68,10 +85,6 @@ const ListingCard = props => {
           <div className={css.location}>
             {address}
           </div>
-          <div className={css.reviews}>
-            (<span>{review.rating}</span><span>/5</span>){' '}
-            <span>{review.count} reviews</span>
-          </div>
         </div>
         <hr />
         <div className={css.authorInfo}>
@@ -80,9 +93,6 @@ const ListingCard = props => {
           </div>
           <div className={css.authorDetails}>
             <span className={css.authorName}>{authorName}</span>
-            <div className={css.authorReview}>
-              review: <span>{authorReview.rating}</span><span>/5</span>
-            </div>
           </div>
         </div>
       </div>
@@ -90,6 +100,10 @@ const ListingCard = props => {
   );
 };
 
-ListingCard.propTypes = { listing: propTypes.listing.isRequired };
+ListingCardComponent.propTypes = {
+  currencyConfig: propTypes.currencyConfig.isRequired,
+  intl: intlShape.isRequired,
+  listing: propTypes.listing.isRequired,
+};
 
-export default ListingCard;
+export default injectIntl(ListingCardComponent);
