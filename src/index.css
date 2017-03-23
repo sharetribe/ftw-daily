@@ -10,6 +10,7 @@ html, input, button {
      See: https://en.wikipedia.org/wiki/Chalkboard_(typeface)
   */
   font-family: "Chalkboard", "Comic Sans MS", sans-serif;
+  color: #4A4A4A;
 }
 
 ul {
@@ -27,37 +28,12 @@ input {
   display: block;
   width: 100%;
   font-size: 1.4rem;
-  border: 1px solid #ddd;
+  border: 1px solid #979797;
+  padding: initial 18px;
 }
 
 select {
   border: none;
-}
-
-button {
-  display: block;
-  width: 100%;
-  font-size: 1.4rem;
-  padding: 0.5rem;
-  margin: 1rem 0;
-  background-color: #eee;
-  border: 1px solid #ddd;
-
-  &:hover {
-    background-color: #ddd;
-  }
-  &:active {
-    background-color: #ccc;
-  }
-  &:disabled {
-    cursor: auto;
-    color: #aaa;
-
-    &:hover,
-    &:active {
-      background-color: #eee;
-    }
-  }
 }
 
 textarea {

@@ -1,12 +1,11 @@
 .section {
   width: 100%;
   min-height: calc(100vh - 80px);
-  background-image: url('http://placehold.it/700x300');
-  background-size: cover;
+  background-image: url("data:image/svg+xml;utf8,<svg width='375' height='240' xmlns='http://www.w3.org/2000/svg'><g fill='none' fill-rule='evenodd'><path fill='#D8D8D8' d='M0 0h375v240H0z' vector-effect='non-scaling-stroke'/><path d='M375 0l-375 240M.5.5l375 240' stroke='#979797' stroke-linecap='square' vector-effect='non-scaling-stroke'/></g></svg>");
+  background-size: 100% 100%;
   background-position: center;
 
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
@@ -18,13 +17,31 @@
 
 .titleWrapper {
   text-align: center;
+
+  /* Mobile padding */
+  margin-left: 24px; /* Number out of my head, not sure if it's the right one */
+  margin-right: 24px; /* Number out of my head, not sure if it's the right one */
 }
 
 .title {
-  font-size: 2em;
+  /* Font */
+  font-size: 24px;
+  letter-spacing: -0.6px;
+  font-weight: bold;
+
+  /* Mobile padding */
+  margin-top: 64px;
+  margin-bottom: 4px;
+
 }
 .subTitle {
-  font-size: 1em;
+  /* Font */
+  font-size: 20px;
+  letter-spacing: -0.5px;
+  font-weight: bold;
+
+  /* Mobile padding */
+  margin-bottom: 48px;
 }
 
 .ctaWrapper {
@@ -32,6 +49,7 @@
   flex-direction: column;
   flex-grow: 1;
   align-items: center;
-  width: 90%;
-}
 
+  /* Mobile dimensions */
+  width: 235px;
+}

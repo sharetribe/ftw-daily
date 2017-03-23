@@ -11,7 +11,7 @@ import {
   autocompleteSearchRequired,
   autocompletePlaceSelected,
 } from '../../util/validators';
-import { AddImages, CurrencyInput, LocationAutocompleteInput } from '../../components';
+import { AddImages, CurrencyInput, LocationAutocompleteInput, Button } from '../../components';
 import css from './EditListingForm.css';
 
 const ACCEPT_IMAGES = 'image/*';
@@ -235,7 +235,7 @@ class EditListingForm extends Component {
           component={EnhancedTextArea}
           validate={[required(descriptionRequiredMessage)]}
         />
-        <button type="submit" disabled={pristine || submitting || disabled}>{saveActionMsg}</button>
+        <Button type="submit" disabled={pristine || submitting || disabled}>{saveActionMsg}</Button>
       </form>
     );
   }

@@ -55,6 +55,7 @@ exports[`SignUpForm matches snapshot 1`] = `
     By confirming I accept the booking terms and conditions.
   </p>
   <button
+    className=""
     disabled={true}
     type="submit">
     Sign up

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Button } from '../../components';
 
 const ChangePasswordForm = props => {
   const { handleSubmit, pristine, submitting } = props;
@@ -9,7 +10,7 @@ const ChangePasswordForm = props => {
       <Field name="newPassword1" component="input" type="password" />
       <label htmlFor="newPassword2">New password, again</label>
       <Field name="newPassword2" component="input" type="password" />
-      <button type="submit" disabled={pristine || submitting}>Change password</button>
+      <Button type="submit" disabled={pristine || submitting}>Change password</Button>
     </form>
   );
 };

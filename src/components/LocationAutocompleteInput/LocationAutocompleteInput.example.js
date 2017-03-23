@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Button } from '../../components';
 import LocationAutocompleteInput from './LocationAutocompleteInput';
 
 const FormComponent = props => {
@@ -8,7 +9,7 @@ const FormComponent = props => {
     <form onSubmit={handleSubmit}>
       <label htmlFor="location">Select location:</label>
       <Field name="location" format={null} component={LocationAutocompleteInput} />
-      <button type="submit" disabled={pristine || submitting}>Submit</button>
+      <Button type="submit" disabled={pristine || submitting}>Submit</Button>
     </form>
   );
 };

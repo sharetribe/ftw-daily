@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { logout } from '../../ducks/Auth.duck';
-import { NamedLink } from '../../components';
+import { NamedLink, Button } from '../../components';
 
 import css from './Topbar.css';
 
@@ -52,7 +52,7 @@ const Topbar = props => {
       </div>
       <div className={css.user}>
         {isAuthenticated
-          ? <button className={css.logoutButton} onClick={handleLogout}>Logout</button>
+          ? <Button className={css.logoutButton} onClick={handleLogout}>Logout</Button>
           : <NamedLink name="LogInPage">Login</NamedLink>}
       </div>
     </div>
