@@ -37,7 +37,9 @@ describe('Application', () => {
     forEach(urlTitles, (title, url) => {
       const context = {};
       const body = render(url, context);
-      expect(body).toMatch(`>${title}</h1>`);
+
+      // context.url will contain the URL to redirect to if a <Redirect> was used
+      expect(context.url).not.toBeDefined();
     });
   });
 

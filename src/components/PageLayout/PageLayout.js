@@ -49,7 +49,6 @@ class PageLayout extends Component {
             </div>
           : null}
         <Topbar />
-        <h1>{title}</h1>
         {children}
       </div>
     );
