@@ -21,7 +21,7 @@ class MobileFrame extends Component {
 
     if (frameEnabled) {
       return (
-        <div className={css.root}>
+        <div className={`${css.root} mobileFrameEnabled`}>
           <a href="/" className={css.remove} onClick={this.closeFrame}>
             <span className={css.removeLabel}>✖ Remove mobile frame</span>
             <span className={css.removeLabelRefresh}>(refresh browser to get it back)</span>

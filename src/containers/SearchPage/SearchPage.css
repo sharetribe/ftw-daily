@@ -10,10 +10,11 @@
   composes: tab;
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
   height: 100vh;
   background-color: #fff;
+
+  /* This may be overriden if mobile frame is in use */
+  width: 100%;
 }
 
 .listings{
@@ -24,13 +25,23 @@
   composes: tab;
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
   height: 100vh;
+
+  /* This may be overriden if mobile frame is in use */
+  width: 100%;
 }
-
-
 
 .open {
   display: block;
+}
+
+/*
+  A temporary solution to make the filters panel (which has position: fixed)
+  to stay inside the mobile frame.
+
+  Remove this when we remove the mobile frame.
+*/
+:global(.mobileFrameEnabled) .filters,
+:global(.mobileFrameEnabled) .map {
+  width: 375px;
 }
