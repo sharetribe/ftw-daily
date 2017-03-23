@@ -270,7 +270,12 @@ class LocationAutocompleteInput extends Component {
     // Only render predictions when the input has focus. For
     // development and easier workflow with the browser devtools, you
     // might want to hardcode this to `true`. Otherwise the dropdown
-    // list will disappear
+    // list will disappear.
+    //
+    // We also have to check if the predictions have hover to avoid a
+    // click triggering a blur event that hides the predictions before
+    // the click event is sent, resulting in a click to whatever is
+    // rendered below the predictions.
     const renderPredictions = this.state.inputHasFocus || this.state.predictionsHaveHover;
 
     return (
