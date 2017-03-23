@@ -7,7 +7,7 @@ import { NamedRedirect } from './components';
 import { withFlattenedRoutes } from './util/routes';
 import * as propTypes from './util/propTypes';
 
-const { bool, arrayOf, object, func, shape, string } = PropTypes;
+const { bool, arrayOf, object, func, shape, string, any } = PropTypes;
 
 class RouteComponentRenderer extends Component {
   constructor(props) {
@@ -37,20 +37,25 @@ class RouteComponentRenderer extends Component {
     return !auth || isAuthenticated;
   }
   render() {
-    const { route, match, location, staticContext } = this.props;
+    const { route, match, location, staticContext, flattenedRoutes } = this.props;
     const { component: RouteComponent } = route;
     const canShow = this.canShowComponent();
     if (!canShow) {
       staticContext.forbidden = true;
     }
     return canShow
-      ? <RouteComponent params={match.params} location={location} />
+      ? <RouteComponent
+          params={match.params}
+          location={location}
+          flattenedRoutes={flattenedRoutes}
+        />
       : <NamedRedirect name="LogInPage" state={{ from: match.url }} />;
   }
 }
 
 RouteComponentRenderer.propTypes = {
   isAuthenticated: bool.isRequired,
+  flattenedRoutes: any.isRequired,
   route: propTypes.route.isRequired,
   match: shape({
     params: object.isRequired,
@@ -67,7 +72,7 @@ const Routes = props => {
   const { isAuthenticated, flattenedRoutes, staticContext, dispatch } = props;
 
   const toRouteComponent = route => {
-    const renderProps = { isAuthenticated, route, staticContext, dispatch };
+    const renderProps = { isAuthenticated, route, staticContext, dispatch, flattenedRoutes };
     return (
       <Route
         key={route.name}

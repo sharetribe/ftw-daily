@@ -2,18 +2,21 @@ import React, { PropTypes } from 'react';
 import { withRouter } from 'react-router-dom';
 import { HeroSection, PageLayout } from '../../components';
 import { HeroSearchForm } from '../../containers';
+import { pathByRouteName } from '../../util/routes';
 import { stringify } from '../../util/urlHelpers';
+import * as propTypes from '../../util/propTypes';
 
 import css from './LandingPage.css';
 
 export const LandingPageComponent = props => {
-  const { push: historyPush } = props;
+  const { push: historyPush, flattenedRoutes } = props;
 
   const handleSubmit = values => {
     const { location: { selectedPlace } } = values;
     const { address, origin, bounds } = selectedPlace;
     const searchQuery = stringify({ address, origin, bounds });
-    historyPush(`/s?${searchQuery}`);
+    const path = pathByRouteName('SearchPage', flattenedRoutes);
+    historyPush(`${path}?${searchQuery}`);
   };
 
   return (
@@ -25,9 +28,12 @@ export const LandingPageComponent = props => {
   );
 };
 
-const { func } = PropTypes;
+const { func, arrayOf } = PropTypes;
 
 LandingPageComponent.propTypes = {
+  flattenedRoutes: arrayOf(propTypes.route).isRequired,
+
+  // history.push from withRouter
   push: func.isRequired,
 };
 

@@ -8,7 +8,9 @@ const noop = () => null;
 
 describe('LandingPage', () => {
   it('matches snapshot', () => {
-    const tree = renderShallow(<LandingPageComponent onLocationChanged={v => v} push={noop} />);
+    const tree = renderShallow(
+      <LandingPageComponent onLocationChanged={v => v} push={noop} flattenedRoutes={[]} />
+    );
     expect(tree).toMatchSnapshot();
   });
 });
