@@ -21,6 +21,30 @@ exports[`HeroSearchForm matches snapshot 1`] = `
     <span>
       Search
     </span>
+    <div
+      className={undefined}>
+      <svg
+        height="18"
+        viewBox="189 165 18 18"
+        width="18"
+        xmlns="http://www.w3.org/2000/svg">
+        <g
+          fill="none"
+          fillRule="evenodd"
+          stroke="#FFF"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+          transform="matrix(-1 0 0 1 206 166)">
+          <path
+            d="M11.733 11.733l3.727 3.727" />
+          <circle
+            cx="6.4"
+            cy="6.4"
+            r="6.4" />
+        </g>
+      </svg>
+    </div>
   </button>
 </form>
 `;
