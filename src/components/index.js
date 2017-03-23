@@ -9,6 +9,7 @@ import LocationAutocompleteInput from './LocationAutocompleteInput/LocationAutoc
 import Map from './Map/Map';
 import MapPanel from './MapPanel/MapPanel';
 import Menu from './Menu/Menu';
+import MobileFrame from './MobileFrame/MobileFrame';
 import NamedLink from './NamedLink/NamedLink';
 import NamedRedirect from './NamedRedirect/NamedRedirect';
 import OrderDetailsPanel from './OrderDetailsPanel/OrderDetailsPanel';
@@ -30,6 +31,7 @@ export {
   Map,
   MapPanel,
   Menu,
+  MobileFrame,
   NamedLink,
   NamedRedirect,
   OrderDetailsPanel,
