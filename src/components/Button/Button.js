@@ -1,65 +1,30 @@
 import React, { PropTypes } from 'react';
-import _ from 'lodash';
+import classNames from 'classnames';
 
 import css from './Button.css';
 
-/*
-   Take list of `classes` as an array, and return a string
-   separated by space, or null if the array is empty after
-   compacting the array (removing null and undefined)
-
-   Note: If this is a common pattern, this should be moved to
-   utils.
- */
-const concatClasses = (classes) => {
-  const compactClasses = _.compact(classes);
-
-  if (compactClasses.length) {
-    return compactClasses.join(' ');
-  } else {
-    return null;
-  }
-}
-
-/*
-   Take object `obj` and remove all keys where the value is
-   `null` or `undefined`
- */
-const compactObject = (obj) => _.omitBy(obj, v => v == null);
-
 const Button = props => {
-  const { children, className, type, disabled, onClick } = props;
+  const { children, className, ...rest } = props;
 
-  const attrs = compactObject({
-    className: concatClasses([className, css.root]),
-    type,
-    disabled,
-    onClick,
-  })
+  const classes = classNames(css.root, className);
 
   return (
-    <button {...attrs}>{children}</button>
+    <button className={classes} {...rest}>{children}</button>
   );
 }
 
 
 
-const { any, string, bool, func } = PropTypes;
+const { any, string } = PropTypes;
 
 Button.defaultProps = {
   children: null,
   className: null,
-  type: null,
-  disabled: null,
-  onClick: null,
 }
 
 Button.propTypes = {
   children: any,
   className: string,
-  type: string,
-  disabled: bool,
-  onClick: func,
 }
 
 export default Button;
