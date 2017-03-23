@@ -1,6 +1,11 @@
 .locationInput {
   width: 100%;
   background-color: white;
+
+  /* Font */
+  font-size: 16px;
+  letter-spacing: -0.4px;
+  font-weight: bold;
 }
 
 .locationButton {
