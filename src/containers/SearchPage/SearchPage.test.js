@@ -2,6 +2,7 @@ import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import { types } from '../../util/sdkLoader';
+import { fakeIntl } from '../../util/test-helpers';
 import { SearchPageComponent } from './SearchPage';
 import reducer, {
   ADD_FILTER,
@@ -18,7 +19,7 @@ const { LatLng } = types;
 describe('SearchPageComponent', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
-      <SearchPageComponent onLoadListings={v => v} dispatch={() => null} />
+      <SearchPageComponent onLoadListings={v => v} dispatch={() => null} intl={fakeIntl} />
     );
     expect(tree).toMatchSnapshot();
   });

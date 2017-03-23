@@ -24,6 +24,8 @@ const listingPageReducer = (state = initialState, action = {}) => {
     case SEARCH_LISTINGS_SUCCESS:
       return { ...state, currentPageResultIds: resultIds(payload.data) };
     case SEARCH_LISTINGS_ERROR:
+      // eslint-disable-next-line no-console
+      console.error(payload);
       return { ...state, searchListingsError: payload };
     default:
       return state;
