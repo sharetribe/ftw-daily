@@ -1,0 +1,25 @@
+.root {
+  display: block;
+  width: 100%;
+  font-size: 1.4rem;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  background-color: #eee;
+  border: 1px solid #ddd;
+
+  &:hover {
+    background-color: #ddd;
+  }
+  &:active {
+    background-color: #ccc;
+  }
+  &:disabled {
+    cursor: auto;
+    color: #aaa;
+
+    &:hover,
+    &:active {
+      background-color: #eee;
+    }
+  }
+}

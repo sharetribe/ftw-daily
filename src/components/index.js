@@ -1,5 +1,6 @@
 import AddImages from './AddImages/AddImages';
 import BookingInfo from './BookingInfo/BookingInfo';
+import Button from './Button/Button';
 import CurrencyInput from './CurrencyInput/CurrencyInput';
 import Discussion from './Discussion/Discussion';
 import FilterPanel from './FilterPanel/FilterPanel';
@@ -23,6 +24,7 @@ import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 export {
   AddImages,
   BookingInfo,
+  Button,
   CurrencyInput,
   Discussion,
   FilterPanel,

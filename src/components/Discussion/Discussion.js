@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import { Button } from '../../components';
+
 import css from './Discussion.css';
 
 const Message = props => {
@@ -55,7 +57,7 @@ class Discussion extends Component {
             value={this.state.message}
             onChange={this.handleOnChange}
           />
-          <button className={css.sendMessageButton} type="submit">Send</button>
+          <Button className={css.sendMessageButton} type="submit">Send</Button>
         </form>
       </div>
     );
