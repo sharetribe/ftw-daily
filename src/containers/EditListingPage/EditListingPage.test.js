@@ -1,5 +1,6 @@
 import React from 'react';
-import { fakeIntl, renderShallow } from '../../util/test-helpers';
+import { renderShallow } from '../../util/test-helpers';
+import { fakeIntl } from '../../util/test-data';
 import { EditListingPageComponent } from './EditListingPage';
 
 describe('EditListingPageComponent', () => {
