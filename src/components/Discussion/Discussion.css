@@ -27,6 +27,16 @@
   padding: 1rem;
 }
 
+/*
+  A temporary solution to make the filters panel (which has position: fixed)
+  to stay inside the mobile frame.
+
+  Remove this when we remove the mobile frame.
+*/
+:global(.mobileFrameEnabled) .sendMessageForm {
+  width: 375px;
+}
+
 .sendMessageInput {
   display: inline-block;
   width: calc(100% - 6rem);
