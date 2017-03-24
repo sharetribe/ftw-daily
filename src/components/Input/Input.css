@@ -1,0 +1,7 @@
+.root {
+  display: block;
+  width: 100%;
+  font-size: 1.4rem;
+  border: 1px solid #979797;
+  padding: initial 18px;
+}

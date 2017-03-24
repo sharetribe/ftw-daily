@@ -11,7 +11,13 @@ import {
   autocompleteSearchRequired,
   autocompletePlaceSelected,
 } from '../../util/validators';
-import { AddImages, CurrencyInput, LocationAutocompleteInput, Button } from '../../components';
+import {
+  AddImages,
+  CurrencyInput,
+  LocationAutocompleteInput,
+  Button,
+  Input,
+} from '../../components';
 import css from './EditListingForm.css';
 
 const ACCEPT_IMAGES = 'image/*';
@@ -39,7 +45,7 @@ const enhancedField = Comp => {
     } else if (Comp === 'textarea') {
       component = <textarea {...input} placeholder={label} />;
     } else {
-      component = <input {...input} placeholder={label} type={type} />;
+      component = <Input {...input} placeholder={label} type={type} />;
     }
     return (
       <div>
@@ -88,7 +94,7 @@ const RenderAddImage = props => {
   const inputProps = { accept, id: name, name, onChange, type };
   return (
     <div className={css.addImageWrapper}>
-      <input {...inputProps} className={css.addImageInput} />
+      <Input {...inputProps} className={css.addImageInput} />
       <label htmlFor={name} className={css.addImage}>{label}</label>
     </div>
   );
@@ -205,7 +211,7 @@ class EditListingForm extends Component {
               const { input, type, meta: { error, touched } } = props;
               return (
                 <div className={css.imageRequiredWrapper}>
-                  <input {...input} type={type} />
+                  <Input {...input} type={type} />
                   {touched && error
                     ? <span className={css.imageRequiredError}>{error}</span>
                     : null}

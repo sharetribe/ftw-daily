@@ -6,6 +6,7 @@ exports[`LoginForm matches snapshot 1`] = `
     Email
   </label>
   <input
+    className=""
     name="email"
     onBlur={[Function]}
     onChange={[Function]}
@@ -19,6 +20,7 @@ exports[`LoginForm matches snapshot 1`] = `
     Password
   </label>
   <input
+    className=""
     name="password"
     onBlur={[Function]}
     onChange={[Function]}

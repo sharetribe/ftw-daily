@@ -13,6 +13,7 @@ import {
   truncateToSubUnitPrecision,
 } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
+import { Input } from '../../components';
 
 const allowedInputProps = allProps => {
   // Strip away props that are not passed to input element (or are overwritten)
@@ -162,7 +163,7 @@ class CurrencyInput extends Component {
     const { currencyConfig, defaultValue, placeholder, intl } = this.props;
     const placeholderText = placeholder || intl.formatNumber(defaultValue, currencyConfig);
     return (
-      <input
+      <Input
         {...allowedInputProps(this.props)}
         value={this.state.value}
         onChange={this.onInputChange}
