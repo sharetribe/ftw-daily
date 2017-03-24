@@ -1,6 +1,6 @@
 exports[`SearchPageComponent matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
-  title="Search page">
+  title="Search page: listings">
   <div>
     <div
       className="">

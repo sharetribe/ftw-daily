@@ -43,7 +43,7 @@ export const SearchPageComponent = props => {
   );
 
   return (
-    <PageLayout title="Search page">
+    <PageLayout title={`Search page: ${tab}`}>
       {searchListingsError ? <p style={{ color: 'red' }}>{searchErrorMessage}</p> : null}
       {searchWasDone && listings.length > 0 ? <p>{resultsFoundMessage}</p> : null}
       {searchWasDone && listings.length === 0 ? <p>{noResultsMessage}</p> : null}
