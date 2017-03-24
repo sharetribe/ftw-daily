@@ -1,37 +1,46 @@
 exports[`LoginForm matches snapshot 1`] = `
 <form
   onSubmit={[Function]}>
-  <label
-    htmlFor="email">
-    Email
-  </label>
-  <input
-    className=""
-    name="email"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onDragStart={[Function]}
-    onDrop={[Function]}
-    onFocus={[Function]}
-    type="email"
-    value="" />
-  <label
-    htmlFor="password">
-    Password
-  </label>
-  <input
-    className=""
-    name="password"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onDragStart={[Function]}
-    onDrop={[Function]}
-    onFocus={[Function]}
-    type="password"
-    value="" />
-  <p>
-    Forgot password?
-  </p>
+  <div
+    className={undefined}>
+    <div>
+      <label
+        className={undefined}
+        htmlFor="email">
+        Email
+      </label>
+      <input
+        className=""
+        name="email"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        onFocus={[Function]}
+        type="email"
+        value="" />
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div>
+      <label
+        className={undefined}
+        htmlFor="password">
+        Password
+      </label>
+      <input
+        className=""
+        name="password"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        onFocus={[Function]}
+        type="password"
+        value="" />
+    </div>
+  </div>
   <button
     className=""
     disabled={true}

@@ -1,26 +1,28 @@
 exports[`AuthenticationPageComponent matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   title="Authentication page: signup tab">
-  <p>
-    <FormattedMessage
-      id="AuthenticationPage.loginRequiredFor"
-      values={Object {}} />
-    <code>
-      /protected
-    </code>
-  </p>
-  <ReduxForm
-    onSubmit={[Function]} />
-  <withFlattenedRoutes(withRouter(NamedLink))
-    name="LogInPage"
-    to={
-      Object {
-        "state": Object {
-          "from": "/protected",
-        },
-      }
-    }>
-    Log in
-  </withFlattenedRoutes(withRouter(NamedLink))>
+  <div>
+    <p>
+      <FormattedMessage
+        id="AuthenticationPage.loginRequiredFor"
+        values={Object {}} />
+      <code>
+        /protected
+      </code>
+    </p>
+    <ReduxForm
+      onSubmit={[Function]} />
+    <withFlattenedRoutes(withRouter(NamedLink))
+      name="LogInPage"
+      to={
+        Object {
+          "state": Object {
+            "from": "/protected",
+          },
+        }
+      }>
+      Log in
+    </withFlattenedRoutes(withRouter(NamedLink))>
+  </div>
 </Connect(withRouter(PageLayout))>
 `;

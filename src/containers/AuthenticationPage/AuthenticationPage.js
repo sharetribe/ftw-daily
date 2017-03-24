@@ -45,7 +45,9 @@ export const AuthenticationPageComponent = props => {
               <code>{from}</code>
             </p>
           : null}
-        {isLogin ? <LoginForm onSubmit={onLoginSubmit} /> : <SignUpForm onSubmit={onSignUpSubmit} />}
+        {isLogin
+          ? <LoginForm onSubmit={onLoginSubmit} />
+          : <SignUpForm onSubmit={onSignUpSubmit} />}
         {isLogin
           ? <NamedLink name="SignUpPage" to={{ state: from ? { from } : null }}>Sign up</NamedLink>
           : <NamedLink name="LogInPage" to={{ state: from ? { from } : null }}>Log in</NamedLink>}

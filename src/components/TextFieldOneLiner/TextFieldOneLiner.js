@@ -16,8 +16,8 @@ const TextFieldOneLiner = props => {
 };
 
 TextFieldOneLiner.defaultProps = {
-  type: "input",
-}
+  type: 'input',
+};
 
 const { string } = PropTypes;
 
@@ -25,6 +25,6 @@ TextFieldOneLiner.propTypes = {
   label: string.isRequired,
   name: string.isRequired,
   type: string,
-}
+};
 
 export default TextFieldOneLiner;
