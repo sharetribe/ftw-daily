@@ -4,7 +4,6 @@ import { arrayMove } from 'react-sortable-hoc';
 import { types } from '../../util/sdkLoader';
 import AddImages from './AddImages';
 import css from './AddImages.example.css';
-import { Input } from '../../components';
 
 const getId = () => {
   return uniqueId();
@@ -65,7 +64,7 @@ class AddImagesTest extends Component {
         <AddImages images={this.state.images} onSortEnd={this.onSortEnd}>
           <div className={css.addImageWrapper}>
             <label className={css.addImage} htmlFor="addImageExampleInput">+ Add image</label>
-            <Input
+            <input
               id="addImageExampleInput"
               type="file"
               accept="images/*"
