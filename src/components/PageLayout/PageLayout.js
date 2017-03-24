@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { Topbar } from '../../containers';
 import classNames from 'classnames';
+import { Topbar } from '../../containers';
 
 import css from './PageLayout.css';
 

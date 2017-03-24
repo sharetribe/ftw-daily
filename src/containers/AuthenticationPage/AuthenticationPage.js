@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { PageLayout, NamedLink, NamedRedirect } from '../../components';
+import { PageLayout, NamedRedirect } from '../../components';
 import { LoginForm, SignUpForm } from '../../containers';
 import { login } from '../../ducks/Auth.duck';
 

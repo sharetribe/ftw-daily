@@ -1,44 +1,47 @@
 exports[`LoginForm matches snapshot 1`] = `
 <form
+  className={undefined}
   onSubmit={[Function]}>
-  <div
-    className={undefined}>
-    <div>
-      <label
-        className={undefined}
-        htmlFor="email">
-        Email
-      </label>
-      <input
-        className=""
-        name="email"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onDragStart={[Function]}
-        onDrop={[Function]}
-        onFocus={[Function]}
-        type="email"
-        value="" />
+  <div>
+    <div
+      className={undefined}>
+      <div>
+        <label
+          className={undefined}
+          htmlFor="email">
+          Email
+        </label>
+        <input
+          className=""
+          name="email"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+          type="email"
+          value="" />
+      </div>
     </div>
-  </div>
-  <div
-    className={undefined}>
-    <div>
-      <label
-        className={undefined}
-        htmlFor="password">
-        Password
-      </label>
-      <input
-        className=""
-        name="password"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onDragStart={[Function]}
-        onDrop={[Function]}
-        onFocus={[Function]}
-        type="password"
-        value="" />
+    <div
+      className={undefined}>
+      <div>
+        <label
+          className={undefined}
+          htmlFor="password">
+          Password
+        </label>
+        <input
+          className=""
+          name="password"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+          type="password"
+          value="" />
+      </div>
     </div>
   </div>
   <button
