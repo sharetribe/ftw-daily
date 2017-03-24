@@ -1,6 +1,5 @@
 .root {
   display: block;
-  width: 100%;
   padding: 0.5rem;
   margin: 1rem 0;
   background-color: #9B9B9B;
@@ -11,6 +10,12 @@
   font-size: 16px;
   color: #FFFFFF;
   letter-spacing: -0.4px;
+
+  /* Dimensions */
+  width: 100%;
+  height: 50px;
+
+  /* Hovers */
 
   &:enabled:hover {
     background-color: color(#9B9B9B blackness(+ 20%));
