@@ -4,7 +4,7 @@
  * Example:
  * // images = [{ id: 'tempId', imageId: 'realIdFromAPI', file: File }];
  * <AddImages images={images}>
- *   <input type="file" accept="images/*" onChange={handleChange} />
+ *   <Input type="file" accept="images/*" onChange={handleChange} />
  * </AddImages>
  */
 import React, { Component, PropTypes } from 'react';

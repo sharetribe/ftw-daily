@@ -5,6 +5,7 @@ import CurrencyInput from './CurrencyInput/CurrencyInput';
 import Discussion from './Discussion/Discussion';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
+import Input from './Input/Input';
 import ListingCard from './ListingCard/ListingCard';
 import ListingCardSmall from './ListingCardSmall/ListingCardSmall';
 import LocationAutocompleteInput from './LocationAutocompleteInput/LocationAutocompleteInput';
@@ -29,6 +30,7 @@ export {
   Discussion,
   FilterPanel,
   HeroSection,
+  Input,
   ListingCard,
   ListingCardSmall,
   LocationAutocompleteInput,

@@ -3,6 +3,7 @@ import { debounce } from 'lodash';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
+import { Input } from '../../components';
 
 import css from './LocationAutocompleteInput.css';
 
@@ -275,7 +276,7 @@ class LocationAutocompleteInput extends Component {
 
     return (
       <div className={css.root}>
-        <input
+        <Input
           className={classNames(css.input, className)}
           type="search"
           placeholder={placeholder}
