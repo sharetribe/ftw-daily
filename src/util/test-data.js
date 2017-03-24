@@ -35,3 +35,15 @@ export const currencyConfig = {
   maximumFractionDigits: 2,
   subUnitDivisor: 100,
 };
+
+// Create fake Internalization object to help with shallow rendering.
+export const fakeIntl = {
+  formatDate: d => d,
+  formatHTMLMessage: d => d,
+  formatMessage: msg => msg.id,
+  formatNumber: d => d,
+  formatPlural: d => d,
+  formatRelative: d => d,
+  formatTime: d => d,
+  now: d => d,
+};

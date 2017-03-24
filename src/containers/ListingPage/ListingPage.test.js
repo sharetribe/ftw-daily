@@ -1,7 +1,7 @@
 import React from 'react';
 import { types } from '../../util/sdkLoader';
-import { createListing } from '../../util/test-data';
-import { fakeIntl, renderShallow } from '../../util/test-helpers';
+import { createListing, fakeIntl } from '../../util/test-data';
+import { renderShallow } from '../../util/test-helpers';
 import { ListingPageComponent } from './ListingPage';
 import { showListingsSuccess } from '../../ducks/sdk.duck';
 import { showListingRequest, showListingError, showListing } from './ListingPage.duck';
