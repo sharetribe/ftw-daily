@@ -1,3 +1,21 @@
+
+// **************************************************************************
+//
+// D E A D
+//
+//     C O D E
+//
+//         W A R N I N G !
+//
+// This component is currently not in use because:
+//
+// - We don't have signup ability in API yet
+// - Link to the page/component has been removed
+//
+// If we decide to take this component into use again, remove this warning.
+//
+// **************************************************************************
+
 import React from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { Button, Input } from '../../components';
