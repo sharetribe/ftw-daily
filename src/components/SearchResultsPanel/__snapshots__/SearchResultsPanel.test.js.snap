@@ -1,6 +1,5 @@
 exports[`SearchResultsPanel matches snapshot 1`] = `
 <div>
-  <Menu />
   <div>
     <withFlattenedRoutes(withRouter(NamedLink))
       name="SearchFiltersPage">
