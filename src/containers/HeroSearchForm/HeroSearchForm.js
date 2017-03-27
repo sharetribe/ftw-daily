@@ -7,7 +7,7 @@ import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../uti
 import css from './HeroSearchForm.css';
 
 const HeroSearchForm = props => {
-  const { className, intl, handleSubmit, pristine, submitting } = props;
+  const { className, intl, handleSubmit, submitting } = props;
   const addClassName = className ? { className } : {};
 
   return (
@@ -19,9 +19,8 @@ const HeroSearchForm = props => {
         placeholder={intl.formatMessage({ id: 'HeroSearchForm.placeholder' })}
         format={null}
         component={LocationAutocompleteInput}
-        validate={[autocompleteSearchRequired(), autocompletePlaceSelected()]}
       />
-      <Button className={css.locationButton} type="submit" disabled={pristine || submitting}>
+      <Button className={css.locationButton} type="submit" disabled={submitting}>
         <FormattedMessage id="HeroSearchForm.search" />
         <div className={css.searchIcon}>
           <svg width="18" height="18" viewBox="189 165 18 18" xmlns="http://www.w3.org/2000/svg">

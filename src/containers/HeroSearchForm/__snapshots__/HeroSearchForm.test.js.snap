@@ -17,7 +17,7 @@ exports[`HeroSearchForm matches snapshot 1`] = `
   </div>
   <button
     className=""
-    disabled={true}
+    disabled={false}
     type="submit">
     <span>
       Search
