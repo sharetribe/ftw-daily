@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Menu, NamedLink } from '../../components';
+import { NamedLink } from '../../components';
 import css from './SearchResultsPanel.css';
 
 const SearchResultsPanel = props => (

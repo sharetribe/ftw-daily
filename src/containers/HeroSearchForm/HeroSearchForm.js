@@ -2,7 +2,6 @@ import React from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { LocationAutocompleteInput, Button } from '../../components';
-import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../util/validators';
 
 import css from './HeroSearchForm.css';
 

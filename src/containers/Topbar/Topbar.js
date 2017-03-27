@@ -12,12 +12,6 @@ const House = () => <span dangerouslySetInnerHTML={{ __html: '&#127968;' }} />;
 
 const Topbar = props => {
   const { isAuthenticated, onLogout, push: historyPush } = props;
-  const hamburger = { dangerouslySetInnerHTML: { __html: '&#127828;' } };
-
-  const handleChange = e => {
-    const value = e.target.value;
-    historyPush(value);
-  };
 
   const handleLogout = () => {
     // History push function is passed to the action to enable
