@@ -62,8 +62,14 @@ export const searchListingsError = e => ({
 export const searchListings = searchParams =>
   (dispatch, getState, sdk) => {
     dispatch(searchListingsRequest(searchParams));
-    return sdk.listings
-      .search(searchParams)
+
+    const { origin, include = [] } = searchParams;
+
+    const searchOrQuery = origin
+      ? sdk.listings.search(searchParams)
+      : sdk.listings.query({ include });
+
+    return searchOrQuery
       .then(response => {
         dispatch(showListingsSuccess(response));
         dispatch(searchListingsSuccess(response));

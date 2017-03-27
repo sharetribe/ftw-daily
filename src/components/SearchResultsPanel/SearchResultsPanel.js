@@ -1,10 +1,9 @@
 import React, { PropTypes } from 'react';
-import { Menu, NamedLink } from '../../components';
+import { NamedLink } from '../../components';
 import css from './SearchResultsPanel.css';
 
 const SearchResultsPanel = props => (
   <div>
-    <Menu />
     {props.children}
     <div className={css.navigation}>
       <NamedLink className={css.button} name="SearchFiltersPage">Filters</NamedLink>

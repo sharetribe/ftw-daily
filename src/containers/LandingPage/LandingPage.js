@@ -12,8 +12,8 @@ export const LandingPageComponent = props => {
   const { push: historyPush, flattenedRoutes } = props;
 
   const handleSubmit = values => {
-    const { location: { selectedPlace } } = values;
-    const { address, origin, bounds } = selectedPlace;
+    const selectedPlace = values && values.location ? values.location.selectedPlace : null;
+    const { address, origin, bounds } = selectedPlace || {};
     const searchQuery = stringify({ address, origin, bounds });
     const path = pathByRouteName('SearchPage', flattenedRoutes);
     historyPush(`${path}?${searchQuery}`);
