@@ -21,6 +21,7 @@ import PageLayout from './PageLayout/PageLayout';
 import Promised from './Promised/Promised';
 import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
+import LabeledField from './LabeledField/LabeledField';
 
 export {
   AddImages,
@@ -46,4 +47,5 @@ export {
   Promised,
   RoutesProvider,
   SearchResultsPanel,
+  LabeledField,
 };

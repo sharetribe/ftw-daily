@@ -2,9 +2,11 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { PageLayout, NamedLink, NamedRedirect } from '../../components';
+import { PageLayout, NamedRedirect } from '../../components';
 import { LoginForm, SignUpForm } from '../../containers';
 import { login } from '../../ducks/Auth.duck';
+
+import css from './AuthenticationPage.css';
 
 export const AuthenticationPageComponent = props => {
   const {
@@ -30,22 +32,26 @@ export const AuthenticationPageComponent = props => {
 
   return (
     <PageLayout title={`Authentication page: ${tab} tab`}>
-      {isAuthenticated ? authRedirect : null}
-      {loginError
-        ? <div style={{ color: 'red' }}>
-            <FormattedMessage id="AuthenticationPage.loginFailed" />
-          </div>
-        : null}
-      {from
-        ? <p>
-            <FormattedMessage id="AuthenticationPage.loginRequiredFor" />
-            <code>{from}</code>
-          </p>
-        : null}
-      {isLogin ? <LoginForm onSubmit={onLoginSubmit} /> : <SignUpForm onSubmit={onSignUpSubmit} />}
-      {isLogin
-        ? <NamedLink name="SignUpPage" to={{ state: from ? { from } : null }}>Sign up</NamedLink>
-        : <NamedLink name="LogInPage" to={{ state: from ? { from } : null }}>Log in</NamedLink>}
+      <div className={css.root}>
+        {isAuthenticated ? authRedirect : null}
+        {loginError
+          ? <div style={{ color: 'red' }}>
+              <FormattedMessage id="AuthenticationPage.loginFailed" />
+            </div>
+          : null}
+        {from
+          ? <p>
+              <FormattedMessage id="AuthenticationPage.loginRequiredFor" />
+              <code>{from}</code>
+            </p>
+          : null}
+        {isLogin
+          ? <LoginForm onSubmit={onLoginSubmit} />
+          : <SignUpForm onSubmit={onSignUpSubmit} />}
+        {/* {isLogin
+          ? <NamedLink name="SignUpPage" to={{ state: from ? { from } : null }}>Sign up</NamedLink>
+          : <NamedLink name="LogInPage" to={{ state: from ? { from } : null }}>Log in</NamedLink>} */}
+      </div>
     </PageLayout>
   );
 };

@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 import { Topbar } from '../../containers';
+
+import css from './PageLayout.css';
 
 const scrollToTop = () => {
   // Todo: this might need fine tuning later
@@ -36,7 +39,7 @@ class PageLayout extends Component {
     /* eslint-enable no-console */
 
     return (
-      <div className={className}>
+      <div className={classNames(css.root, className)}>
         <Helmet title={title} />
         {authInfoError
           ? <div style={{ color: 'red' }}>
@@ -49,7 +52,9 @@ class PageLayout extends Component {
             </div>
           : null}
         <Topbar />
-        {children}
+        <div className={css.content}>
+          {children}
+        </div>
       </div>
     );
   }

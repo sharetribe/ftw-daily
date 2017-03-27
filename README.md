@@ -30,6 +30,10 @@ development server:
 
     yarn run dev
 
+**Known issues:**
+
+* Adding/changing `import`s may not be synced properly with ESLint. You may see an error `Unable to resolve path to module` even though the module existing in right path. Restarting the server doesn't help. To solve the issue, you need to make a change to the file where the error occurs.
+
 ## Development Server
 
 To develop the server setup, run:
