@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import { intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import config from '../../config';
 import { parse } from '../../util/urlHelpers';
@@ -18,35 +18,45 @@ import { searchListings } from './SearchPage.duck';
 import css from './SearchPage.css';
 
 export const SearchPageComponent = props => {
-  const { tab, listings, searchParams, searchListingsError, intl } = props;
+  const { tab, listings, searchParams, searchInProgress, searchListingsError } = props;
 
   const filtersClassName = classNames(css.filters, { [css.open]: tab === 'filters' });
   const listingsClassName = classNames(css.listings, { [css.open]: tab === 'listings' });
   const mapClassName = classNames(css.map, { [css.open]: tab === 'map' });
   const currencyConfig = config.currencyConfig;
 
-  const searchWasDone = searchParams && searchParams.address;
+  const searchWasDone = !searchInProgress && searchParams && searchParams.address;
 
-  const searchErrorMessage = intl.formatMessage({ id: 'SearchPage.searchError' });
-  const resultsFoundMessage = intl.formatMessage(
-    { id: 'SearchPage.foundResults' },
-    {
-      count: listings.length,
-      address: searchParams && searchParams.address ? searchParams.address : '',
-    }
+  const searchError = (
+    <p style={{ color: 'red' }}>
+      <FormattedMessage id="SearchPage.searchError" />
+    </p>
   );
-  const noResultsMessage = intl.formatMessage(
-    { id: 'SearchPage.noResults' },
-    {
-      address: searchParams && searchParams.address ? searchParams.address : '',
-    }
+
+  const resultsFound = (
+    <p>
+      <FormattedMessage id="SearchPage.foundResults" values={{ count: listings.length }} />
+    </p>
+  );
+
+  const noResults = (
+    <p>
+      <FormattedMessage id="SearchPage.noResults" />
+    </p>
+  );
+
+  const loadingResults = (
+    <p>
+      <FormattedMessage id="SearchPage.loadingResults" />
+    </p>
   );
 
   return (
     <PageLayout title={`Search page: ${tab}`}>
-      {searchListingsError ? <p style={{ color: 'red' }}>{searchErrorMessage}</p> : null}
-      {searchWasDone && listings.length > 0 ? <p>{resultsFoundMessage}</p> : null}
-      {searchWasDone && listings.length === 0 ? <p>{noResultsMessage}</p> : null}
+      {searchListingsError ? searchError : null}
+      {searchWasDone && listings.length > 0 ? resultsFound : null}
+      {searchWasDone && listings.length === 0 ? noResults : null}
+      {searchInProgress ? loadingResults : null}
       <div className={css.container}>
         <div className={filtersClassName}>
           <FilterPanel />
@@ -77,26 +87,32 @@ SearchPageComponent.defaultProps = {
   searchListingsError: null,
 };
 
-const { array, oneOf, object, instanceOf } = PropTypes;
+const { array, oneOf, object, instanceOf, bool } = PropTypes;
 
 SearchPageComponent.propTypes = {
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
   listings: array,
   searchParams: object,
+  searchInProgress: bool.isRequired,
   searchListingsError: instanceOf(Error),
-  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
-  const { searchParams, searchListingsError, currentPageResultIds } = state.SearchPage;
+  const {
+    searchParams,
+    searchInProgress,
+    searchListingsError,
+    currentPageResultIds,
+  } = state.SearchPage;
   return {
     listings: getListingsById(state.data, currentPageResultIds),
     searchParams,
+    searchInProgress,
     searchListingsError,
   };
 };
 
-const SearchPage = connect(mapStateToProps)(injectIntl(SearchPageComponent));
+const SearchPage = connect(mapStateToProps)(SearchPageComponent);
 
 SearchPage.loadData = (params, search) => {
   const queryParams = parse(search, {

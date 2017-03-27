@@ -10,6 +10,7 @@ export const SEARCH_LISTINGS_ERROR = 'app/SearchPage/SEARCH_LISTINGS_ERROR';
 
 const initialState = {
   searchParams: null,
+  searchInProgress: false,
   searchListingsError: null,
   currentPageResultIds: [],
 };
@@ -20,13 +21,19 @@ const listingPageReducer = (state = initialState, action = {}) => {
   const { type, payload } = action;
   switch (type) {
     case SEARCH_LISTINGS_REQUEST:
-      return { ...state, searchParams: payload.searchParams, searchListingsError: null };
+      return {
+        ...state,
+        searchParams: payload.searchParams,
+        searchInProgress: true,
+        currentPageResultIds: [],
+        searchListingsError: null,
+      };
     case SEARCH_LISTINGS_SUCCESS:
-      return { ...state, currentPageResultIds: resultIds(payload.data) };
+      return { ...state, searchInProgress: false, currentPageResultIds: resultIds(payload.data) };
     case SEARCH_LISTINGS_ERROR:
       // eslint-disable-next-line no-console
       console.error(payload);
-      return { ...state, searchListingsError: payload };
+      return { ...state, searchInProgress: false, searchListingsError: payload };
     default:
       return state;
   }
@@ -58,8 +65,8 @@ export const searchListings = searchParams =>
     return sdk.listings
       .search(searchParams)
       .then(response => {
-        dispatch(searchListingsSuccess(response));
         dispatch(showListingsSuccess(response));
+        dispatch(searchListingsSuccess(response));
         return response;
       })
       .catch(e => {

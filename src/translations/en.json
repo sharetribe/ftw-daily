@@ -20,6 +20,7 @@
   "PageLayout.authInfoFailed": "Could not get authentication information.",
   "PageLayout.logoutFailed": "Logout failed. Please try again.",
   "SearchPage.searchError": "Search failed. Please try again.",
-  "SearchPage.foundResults": "{count} listings found near {address}.",
-  "SearchPage.noResults": "Could not find any listings near {address}."
+  "SearchPage.foundResults": "{count, number} {count, plural, one {listing} other {listings}} found.",
+  "SearchPage.noResults": "Could not find any listings.",
+  "SearchPage.loadingResults": "Loading search results..."
 }
