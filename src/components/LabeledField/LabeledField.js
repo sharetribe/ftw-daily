@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import { Field } from 'redux-form';
 import { Input } from '../../components';
 
-import css from './TextFieldOneLiner.css';
+import css from './LabeledField.css';
 
-const TextFieldOneLiner = props => {
+const LabeledField = props => {
   const { label, name, type } = props;
 
   return (
@@ -15,16 +15,16 @@ const TextFieldOneLiner = props => {
   );
 };
 
-TextFieldOneLiner.defaultProps = {
+LabeledField.defaultProps = {
   type: 'input',
 };
 
 const { string } = PropTypes;
 
-TextFieldOneLiner.propTypes = {
+LabeledField.propTypes = {
   label: string.isRequired,
   name: string.isRequired,
   type: string,
 };
 
-export default TextFieldOneLiner;
+export default LabeledField;
