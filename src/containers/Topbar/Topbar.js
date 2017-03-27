@@ -31,24 +31,6 @@ const Topbar = props => {
         <NamedLink className={css.home} name="LandingPage">
           <House />
         </NamedLink>
-        <select value="default" className={css.navDropDown} onChange={handleChange}>
-          <option value="default" {...hamburger} />
-          <option value="/s">Search</option>
-          <option value="/l/Bike-Pelago/12345">Listing page</option>
-          <option value="/u/Bikerrs">Profile</option>
-          <option value="/u/Bikerrs/edit">Edit profile</option>
-          <option value="/checkout/lid1234">Checkout</option>
-          <option value="/inbox">Inbox</option>
-          <option value="/orders">Orders</option>
-          <option value="/sales">Sales</option>
-          <option value="/password/forgotten">Request password</option>
-          <option value="/password/change">Change password</option>
-          <option value="/listings">Manage listings</option>
-          <option value="/account">Account settings</option>
-          <option value="/account/contact-details">Contact details</option>
-          <option value="/account/payout-preferences">Payout preferences</option>
-          <option value="/account/security">Security</option>
-        </select>
       </div>
       <div className={css.user}>
         {isAuthenticated
