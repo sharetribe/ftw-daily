@@ -3,7 +3,7 @@
   position: fixed;
   bottom: 15px;
   left: 50%;
-  margin-left: -100px;
+  margin-left: -104px;
 }
 
 .button {
@@ -13,7 +13,7 @@
   text-decoration: none;
   font-size: 1.4rem;
   padding: 0.5rem;
-  margin: 1rem 0.1rem;
+  margin: 1rem 2px;
   color: #fff;
   background-color: #9B9B9B;
   cursor: pointer;
@@ -21,4 +21,15 @@
   &:hover {
     background-color: #888;
   }
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1rem 6rem 1rem;
+}
+
+.nextPage,
+.prevPage {
+  flex-basis: calc(50% - 0.5rem);
 }

@@ -1,14 +1,1 @@
-exports[`SearchResultsPanel matches snapshot 1`] = `
-<div>
-  <div>
-    <withFlattenedRoutes(withRouter(NamedLink))
-      name="SearchFiltersPage">
-      Filters
-    </withFlattenedRoutes(withRouter(NamedLink))>
-    <withFlattenedRoutes(withRouter(NamedLink))
-      name="SearchMapPage">
-      Map
-    </withFlattenedRoutes(withRouter(NamedLink))>
-  </div>
-</div>
-`;
+exports[`SearchResultsPanel matches snapshot 1`] = `<div />`;

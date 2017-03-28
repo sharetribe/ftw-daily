@@ -1,21 +1,49 @@
 import React, { PropTypes } from 'react';
-import { NamedLink } from '../../components';
+import { FormattedMessage } from 'react-intl';
+import * as propTypes from '../../util/propTypes';
+import { Button, ListingCard } from '../../components';
 import css from './SearchResultsPanel.css';
 
-const SearchResultsPanel = props => (
-  <div>
-    {props.children}
-    <div className={css.navigation}>
-      <NamedLink className={css.button} name="SearchFiltersPage">Filters</NamedLink>
-      <NamedLink className={css.button} name="SearchMapPage">Map</NamedLink>
+const SearchResultsPanel = props => {
+  const { currencyConfig, listings, onNextPage, onPreviousPage } = props;
+  const pagination = onNextPage || onPreviousPage
+    ? <div className={css.pagination}>
+        <Button
+          onClick={() => onPreviousPage()}
+          disabled={!onPreviousPage}
+          className={css.prevPage}
+        >
+          <FormattedMessage id="SearchResultsPanel.previousPage" />
+        </Button>
+        <Button onClick={() => onNextPage()} disabled={!onNextPage} className={css.nextPage}>
+          <FormattedMessage id="SearchResultsPanel.nextPage" />
+        </Button>
+      </div>
+    : null;
+
+  return (
+    <div>
+      {listings.map(l => (
+        <ListingCard key={l.id.uuid} listing={l} currencyConfig={currencyConfig} />
+      ))}
+      {pagination}
     </div>
-  </div>
-);
+  );
+};
 
-SearchResultsPanel.defaultProps = { children: null };
+SearchResultsPanel.defaultProps = {
+  listings: [],
+  onNextPage: null,
+  onPreviousPage: null,
+};
 
-const { any } = PropTypes;
+const { array, func } = PropTypes;
 
-SearchResultsPanel.propTypes = { children: any };
+SearchResultsPanel.propTypes = {
+  currencyConfig: propTypes.currencyConfig.isRequired,
+  listings: array,
+  onNextPage: func,
+  onPreviousPage: func,
+};
 
 export default SearchResultsPanel;
