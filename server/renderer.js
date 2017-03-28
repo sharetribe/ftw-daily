@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
+const { types } = require('sharetribe-sdk');
 const { renderApp } = require('./importer');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
@@ -43,9 +44,14 @@ exports.render = function(requestUrl, context, preloadedState) {
   // For security reasons we ensure that preloaded state is considered as a string
   // by replacing '<' character with its unicode equivalent.
   // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
-  const serializedState = JSON.stringify(preloadedState).replace(/</g, '\\u003c');
+  const serializedState = JSON.stringify(preloadedState, types.replacer).replace(/</g, '\\u003c');
+
+  // At this point the serializedState is a string, the second
+  // JSON.stringify wraps it within double quotes and escapes the
+  // contents properly so the value can be injected in the script tag
+  // as a string.
   const preloadedStateScript = `
-      <script>window.__PRELOADED_STATE__ = ${serializedState};</script>
+      <script>window.__PRELOADED_STATE__ = ${JSON.stringify(serializedState)};</script>
   `;
 
   return template({ title: head.title.toString(), preloadedStateScript, body });
