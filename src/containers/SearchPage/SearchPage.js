@@ -33,7 +33,7 @@ export const SearchPageComponent = props => {
     searchParams,
     tab,
   } = props;
-  const totalItems = pagination ? pagination.total_items : 0;
+  const totalItems = pagination ? pagination.totalItems : 0;
 
   const filtersClassName = classNames(css.filters, { [css.open]: tab === 'filters' });
   const listingsClassName = classNames(css.listings, { [css.open]: tab === 'listings' });
@@ -134,9 +134,9 @@ SearchPageComponent.propTypes = {
   }).isRequired,
   pagination: shape({
     page: number.isRequired,
-    per_page: number, // TODO handle snake_case
-    total_items: number,
-    total_pages: number.isRequired,
+    perPage: number,
+    totalItems: number,
+    totalPages: number.isRequired,
   }),
   // history.push from withRouter
   push: func.isRequired,
@@ -174,7 +174,7 @@ SearchPage.loadData = (params, search) => {
   return searchListings({
     ...queryParams,
     page,
-    per_page: RESULT_PAGE_SIZE,
+    perPage: RESULT_PAGE_SIZE,
     include: ['author', 'images'],
   });
 };
