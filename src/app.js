@@ -67,7 +67,11 @@ ServerApp.propTypes = { url: string.isRequired, context: any.isRequired, store: 
  *  - {Object} head: Application head metadata from react-helmet
  */
 export const renderApp = (url, serverContext, preloadedState) => {
-  const store = configureStore(preloadedState);
+  // Pass `null` as the SDK instance since we're only rendering the
+  // component tree with the preloaded store state and components
+  // shouldn't do any SDK calls in the (server) rendering lifecycle.
+  const store = configureStore(null, preloadedState);
+
   const body = ReactDOMServer.renderToString(
     <ServerApp url={url} context={serverContext} store={store} />
   );
