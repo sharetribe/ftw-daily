@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { find } from 'lodash';
 import { matchPath } from 'react-router-dom';
 import pathToRegexp from 'path-to-regexp';
-import routesConfiguration from '../routesConfiguration';
+import { stringify } from './urlHelpers';
 import * as propTypes from './propTypes';
 
 // Flatten the routes config.
@@ -50,7 +50,7 @@ export const pathByRouteName = (nameToFind, flattenedRoutes, params = {}) =>
  *
  * @return {Array<{ route, params }>} - All matches as { route, params } objects
  */
-export const matchPathname = pathname => {
+export const matchPathname = (pathname, routesConfiguration) => {
   // TODO: remove flattening when routesConfiguration is flat
   const flattenedRoutes = flattenRoutes(routesConfiguration);
 
@@ -91,4 +91,20 @@ export const withFlattenedRoutes = Component => {
   };
 
   return WithFlattenedRoutesComponent;
+};
+
+/**
+ * ResourceLocatorString is used to direct webapp to correct page.
+ * In contrast to Universal Resource Locator (URL), this doesn't contain protocol, host, or port.
+ */
+export const createResourceLocatorString = (
+  routeName,
+  flattenedRoutes,
+  pathParams = {},
+  searchParams = {}
+) => {
+  const searchQuery = stringify(searchParams);
+  const includeSearchQuery = searchQuery.length > 0 ? `?${searchQuery}` : '';
+  const path = pathByRouteName(routeName, flattenedRoutes, pathParams);
+  return `${path}${includeSearchQuery}`;
 };

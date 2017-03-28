@@ -18,14 +18,14 @@ const { LatLng } = types;
 
 describe('SearchPageComponent', () => {
   it('matches snapshot', () => {
-    const tree = renderShallow(
-      <SearchPageComponent
-        onLoadListings={v => v}
-        dispatch={() => null}
-        intl={fakeIntl}
-        searchInProgress={false}
-      />
-    );
+    const props = {
+      flattenedRoutes: [],
+      location: { search: '' },
+      push: () => console.log('HistoryPush called'),
+      tab: 'listings',
+      searchInProgress: false,
+    };
+    const tree = renderShallow(<SearchPageComponent {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });

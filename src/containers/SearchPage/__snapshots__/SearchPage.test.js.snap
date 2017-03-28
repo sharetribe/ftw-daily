@@ -8,7 +8,21 @@ exports[`SearchPageComponent matches snapshot 1`] = `
     </div>
     <div
       className="undefined">
-      <SearchResultsPanel />
+      <SearchResultsPanel
+        currencyConfig={
+          Object {
+            "currency": "USD",
+            "currencyDisplay": "symbol",
+            "maximumFractionDigits": 2,
+            "minimumFractionDigits": 2,
+            "style": "currency",
+            "subUnitDivisor": 100,
+            "useGrouping": true,
+          }
+        }
+        listings={Array []}
+        onNextPage={null}
+        onPreviousPage={null} />
     </div>
     <div
       className="">
