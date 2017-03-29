@@ -53,9 +53,10 @@ const renderWhenAuthInfoLoaded = store => {
 // If we're in a browser already, render the client application.
 if (typeof window !== 'undefined') {
   // eslint-disable-next-line no-underscore-dangle
-  const preloadedState = window.__PRELOADED_STATE__ || {};
+  const preloadedState = window.__PRELOADED_STATE__ || '{}';
+  const initialState = JSON.parse(preloadedState, types.reviver);
   const sdk = createInstance({ clientId: config.sdk.clientId, baseUrl: config.sdk.baseUrl });
-  const store = configureStore(sdk, preloadedState);
+  const store = configureStore(sdk, initialState);
 
   store.runSaga(createRootSaga(sdk));
 
