@@ -22,5 +22,7 @@
   "SearchPage.searchError": "Search failed. Please try again.",
   "SearchPage.foundResults": "{count, number} {count, plural, one {listing} other {listings}} found.",
   "SearchPage.noResults": "Could not find any listings.",
-  "SearchPage.loadingResults": "Loading search results..."
+  "SearchPage.loadingResults": "Loading search results...",
+  "SearchResultsPanel.previousPage": "Previous page",
+  "SearchResultsPanel.nextPage": "Next page"
 }

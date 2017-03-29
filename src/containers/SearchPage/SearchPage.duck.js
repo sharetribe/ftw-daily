@@ -9,6 +9,7 @@ export const SEARCH_LISTINGS_ERROR = 'app/SearchPage/SEARCH_LISTINGS_ERROR';
 // ================ Reducer ================ //
 
 const initialState = {
+  pagination: null,
   searchParams: null,
   searchInProgress: false,
   searchListingsError: null,
@@ -29,7 +30,12 @@ const listingPageReducer = (state = initialState, action = {}) => {
         searchListingsError: null,
       };
     case SEARCH_LISTINGS_SUCCESS:
-      return { ...state, searchInProgress: false, currentPageResultIds: resultIds(payload.data) };
+      return {
+        ...state,
+        currentPageResultIds: resultIds(payload.data),
+        pagination: payload.data.meta,
+        searchInProgress: false,
+      };
     case SEARCH_LISTINGS_ERROR:
       // eslint-disable-next-line no-console
       console.error(payload);
@@ -63,11 +69,12 @@ export const searchListings = searchParams =>
   (dispatch, getState, sdk) => {
     dispatch(searchListingsRequest(searchParams));
 
-    const { origin, include = [] } = searchParams;
+    const { origin, include = [], page, perPage } = searchParams;
 
+    // TODO: API can't handle camelCase request parameter yet.
     const searchOrQuery = origin
-      ? sdk.listings.search(searchParams)
-      : sdk.listings.query({ include });
+      ? sdk.listings.search({ ...searchParams, per_page: perPage })
+      : sdk.listings.query({ include, page, per_page: perPage });
 
     return searchOrQuery
       .then(response => {

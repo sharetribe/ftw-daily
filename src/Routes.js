@@ -13,9 +13,29 @@ class RouteComponentRenderer extends Component {
   constructor(props) {
     super(props);
     this.canShowComponent = this.canShowComponent.bind(this);
+    this.callLoadData = this.callLoadData.bind(this);
   }
+
   componentDidMount() {
-    const { match, location, route, dispatch } = this.props;
+    // Calling loadData on initial rendering (on client side).
+    this.callLoadData(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // Calling loadData after initial rendering (on client side).
+    // This makes it possible to use loadData as default client side data loading technique.
+    // However it is better to fetch data before location change to avoid "Loading data" state.
+    this.callLoadData(nextProps);
+  }
+
+  canShowComponent() {
+    const { isAuthenticated, route } = this.props;
+    const { auth } = route;
+    return !auth || isAuthenticated;
+  }
+
+  callLoadData(props) {
+    const { match, location, route, dispatch } = props;
     const { loadData, name } = route;
     const shouldLoadData = typeof loadData === 'function' && this.canShowComponent();
 
@@ -31,11 +51,7 @@ class RouteComponentRenderer extends Component {
         });
     }
   }
-  canShowComponent() {
-    const { isAuthenticated, route } = this.props;
-    const { auth } = route;
-    return !auth || isAuthenticated;
-  }
+
   render() {
     const { route, match, location, staticContext, flattenedRoutes } = this.props;
     const { component: RouteComponent } = route;
@@ -65,6 +81,7 @@ RouteComponentRenderer.propTypes = {
     search: string.isRequired,
   }).isRequired,
   staticContext: object.isRequired,
+  // eslint-disable-next-line react/no-unused-prop-types
   dispatch: func.isRequired,
 };
 

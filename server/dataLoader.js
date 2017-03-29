@@ -1,9 +1,9 @@
 const url = require('url');
-const { matchPathname, configureStore } = require('./importer');
+const { matchPathname, configureStore, routeConfiguration } = require('./importer');
 
 exports.loadData = function(requestUrl, sdk) {
   const { pathname, query } = url.parse(requestUrl);
-  const matchedRoutes = matchPathname(pathname);
+  const matchedRoutes = matchPathname(pathname, routeConfiguration);
 
   const store = configureStore(sdk);
 

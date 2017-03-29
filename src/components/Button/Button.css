@@ -23,6 +23,7 @@
     background-color: #ccc;
   }
   &:disabled {
+    background-color: #ddd;
     cursor: auto;
   }
 }
