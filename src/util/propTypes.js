@@ -58,6 +58,7 @@ export const place = shape({
   address: string.isRequired,
   origin: latlng.isRequired,
   bounds: latlngBounds, // optional viewport bounds
+  country: string, // country code, e.g. FI, US
 });
 
 // Denormalised user object

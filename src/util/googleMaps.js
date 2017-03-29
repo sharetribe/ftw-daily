@@ -21,6 +21,16 @@ const placeBounds = place => {
   return null;
 };
 
+const placeCountry = place => {
+  if (place && place.address_components) {
+    const country = place.address_components.find(component => {
+      return component.types.includes('country');
+    });
+    return country ? country.short_name : null;
+  }
+  return null;
+};
+
 /**
  * Get a detailed place object
  *
@@ -46,6 +56,7 @@ export const getPlaceDetails = placeId =>
           address: place.formatted_address,
           origin: placeOrigin(place),
           bounds: placeBounds(place),
+          country: placeCountry(place),
         });
       }
     });
