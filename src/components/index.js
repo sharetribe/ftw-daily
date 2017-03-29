@@ -6,6 +6,7 @@ import Discussion from './Discussion/Discussion';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
 import Input from './Input/Input';
+import LabeledField from './LabeledField/LabeledField';
 import ListingCard from './ListingCard/ListingCard';
 import ListingCardSmall from './ListingCardSmall/ListingCardSmall';
 import LocationAutocompleteInput from './LocationAutocompleteInput/LocationAutocompleteInput';
@@ -21,7 +22,7 @@ import PageLayout from './PageLayout/PageLayout';
 import Promised from './Promised/Promised';
 import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
-import LabeledField from './LabeledField/LabeledField';
+import StripeBankAccountToken from './StripeBankAccountToken/StripeBankAccountToken';
 
 export {
   AddImages,
@@ -32,6 +33,7 @@ export {
   FilterPanel,
   HeroSection,
   Input,
+  LabeledField,
   ListingCard,
   ListingCardSmall,
   LocationAutocompleteInput,
@@ -47,5 +49,5 @@ export {
   Promised,
   RoutesProvider,
   SearchResultsPanel,
-  LabeledField,
+  StripeBankAccountToken,
 };

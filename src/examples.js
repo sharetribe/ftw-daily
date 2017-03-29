@@ -7,6 +7,7 @@ import * as Map from './components/Map/Map.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
 import * as LocationAutocompleteInput
   from './components/LocationAutocompleteInput/LocationAutocompleteInput.example';
+import * as StripeBankAccountToken from './components/StripeBankAccountToken/StripeBankAccountToken.example';
 
 // containers
 import * as ChangeAccountPasswordForm
@@ -28,10 +29,11 @@ export {
   EditListingForm,
   HeroSearchForm,
   ListingCard,
+  LocationAutocompleteInput,
   LoginForm,
   Map,
   NamedLink,
   PasswordForgottenForm,
   SignUpForm,
-  LocationAutocompleteInput,
+  StripeBankAccountToken,
 };
