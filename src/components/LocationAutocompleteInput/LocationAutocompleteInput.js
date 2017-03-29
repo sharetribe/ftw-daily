@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { debounce } from 'lodash';
 import classNames from 'classnames';
+import { Input } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
 
@@ -64,7 +65,8 @@ LocationPredictionsList.propTypes = {
 // LocationAutocompleteInput props.
 const currentValue = props => {
   const value = props.input.value || {};
-  return { search: '', predictions: [], selectedPlaceId: null, selectedPlace: null, ...value };
+  const { search = '', predictions = [], selectedPlaceId = null, selectedPlace = null } = value;
+  return { search, predictions, selectedPlaceId, selectedPlace };
 };
 
 /*
@@ -135,10 +137,10 @@ class LocationAutocompleteInput extends Component {
   }
 
   // Handle input text change, fetch predictions if the value isn't empty
-  onChange() {
+  onChange(e) {
     const onChange = this.props.input.onChange;
     const { predictions } = currentValue(this.props);
-    const newValue = this.input.value;
+    const newValue = e.target.value;
 
     // Clear the current values since the input content is changed
     onChange({
@@ -294,7 +296,7 @@ class LocationAutocompleteInput extends Component {
 
     return (
       <div className={css.root}>
-        <input
+        <Input
           className={classNames(css.input, className)}
           type="search"
           autoComplete="off"
@@ -305,9 +307,6 @@ class LocationAutocompleteInput extends Component {
           onBlur={handleOnBlur}
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
-          ref={i => {
-            this.input = i;
-          }}
         />
         {renderPredictions
           ? <div
