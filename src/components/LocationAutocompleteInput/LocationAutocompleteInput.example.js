@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
+import * as propTypes from '../../util/propTypes';
 import { Button } from '../../components';
 import LocationAutocompleteInput from './LocationAutocompleteInput';
 
@@ -20,6 +21,24 @@ const Form = reduxForm({
   form: 'Styleguide.LocationAutocompleteInput.Form',
 })(FormComponent);
 
+const PlaceInfo = props => {
+  const { place } = props;
+  const { address, country, origin, bounds } = place;
+  return (
+    <div>
+      <p>Submitted place:</p>
+      <ul>
+        <li>Address: {address}</li>
+        <li>Country: {country || '[no country]'}</li>
+        <li>Coordinates: {origin.lat}, {origin.lng}</li>
+        <li>Bounds: {bounds ? 'yes' : 'no'}</li>
+      </ul>
+    </div>
+  );
+};
+
+PlaceInfo.propTypes = { place: propTypes.place.isRequired };
+
 class FormContainer extends Component {
   constructor(props) {
     super(props);
@@ -36,15 +55,7 @@ class FormContainer extends Component {
           Search for a place name or address, select on with mouse or keyboard, and submit the form.
         </p>
         <Form onSubmit={onSubmit} />
-        {place
-          ? <p>
-              Submitted place: {place.address} (
-              {place.origin.lat},
-              {place.origin.lng},
-              {place.bounds ? ' with' : ' without'} bounds
-              )
-            </p>
-          : null}
+        {place ? <PlaceInfo place={place} /> : null}
       </div>
     );
   }
