@@ -25,6 +25,35 @@ const currencyConfig = {
 const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY ||
   'pk_test_FWtdKPZvtrj37t45dIomssBI';
 
+// Stripe only supports payments in certain countries, see full list
+// at https://stripe.com/global
+const stripeSupportedCountries = [
+  'AU', // Australia
+  'CA', // Canada
+  'DK', // Denmark
+  'FI', // Finland
+  'FR', // France
+  'IE', // Ireland
+  'JP', // Japan
+  'NO', // Norway
+  'SG', // Singapore
+  'ES', // Spain
+  'SE', // Sweden
+  'UK', // United Kingdom
+  'GB', // United Kingdom
+  'US', // United States
+  'AT', // Austria
+  'BE', // Belgium
+  'DE', // Germany
+  'HK', // Hong Kong
+  'IT', // Italy
+  'LU', // Luxembourg
+  'NL', // Netherlands
+  'NZ', // New Zealand
+  'PT', // Portugal
+  'CH', // Switzerland
+];
+
 // NOTE: only expose configuration that should be visible in the
 // client side, don't add any server secrets in this file.
 const config = {
@@ -32,7 +61,7 @@ const config = {
   dev,
   sdk: { clientId: sdkClientId, baseUrl: sdkBaseUrl },
   currencyConfig,
-  stripe: { publishableKey: stripePublishableKey },
+  stripe: { publishableKey: stripePublishableKey, supportedCountries: stripeSupportedCountries },
 };
 
 export default config;
