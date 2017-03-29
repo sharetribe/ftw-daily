@@ -22,8 +22,17 @@ const currencyConfig = {
   subUnitDivisor: 100,
 };
 
+const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY ||
+  'pk_test_FWtdKPZvtrj37t45dIomssBI';
+
 // NOTE: only expose configuration that should be visible in the
 // client side, don't add any server secrets in this file.
-const config = { env, dev, sdk: { clientId: sdkClientId, baseUrl: sdkBaseUrl }, currencyConfig };
+const config = {
+  env,
+  dev,
+  sdk: { clientId: sdkClientId, baseUrl: sdkBaseUrl },
+  currencyConfig,
+  stripe: { publishableKey: stripePublishableKey },
+};
 
 export default config;
