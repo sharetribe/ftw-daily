@@ -39,7 +39,6 @@ const stripeSupportedCountries = [
   'SG', // Singapore
   'ES', // Spain
   'SE', // Sweden
-  'UK', // United Kingdom
   'GB', // United Kingdom
   'US', // United States
   'AT', // Austria
