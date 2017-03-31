@@ -1,0 +1,7 @@
+exports[`util/contextHelpers.js withFlattenedRoutes should inject the provided routes 1`] = `<withFlattenedRoutes(CompComp) />`;
+
+exports[`util/contextHelpers.js withFlattenedRoutes should inject the provided routes 2`] = `
+<div>
+  SomePage
+</div>
+`;

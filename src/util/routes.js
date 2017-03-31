@@ -1,9 +1,7 @@
-import React, { PropTypes } from 'react';
 import { find } from 'lodash';
 import { matchPath } from 'react-router-dom';
 import pathToRegexp from 'path-to-regexp';
 import { stringify } from './urlHelpers';
-import * as propTypes from './propTypes';
 
 // Flatten the routes config.
 // TODO: flatten the original config and remove this function
@@ -68,29 +66,6 @@ export const matchPathname = (pathname, routesConfiguration) => {
     },
     []
   );
-};
-
-/**
- * A higher order component (HOC) to take the flattened routes from
- * the context that the RoutesProvider component has provided.
- *
- * Injects the routes as the `flattenedRoutes` prop in the given
- * component. Works similarly as `withRouter` in React Router.
- */
-export const withFlattenedRoutes = Component => {
-  const WithFlattenedRoutesComponent = (props, context) => (
-    <Component flattenedRoutes={context.flattenedRoutes} {...props} />
-  );
-
-  WithFlattenedRoutesComponent.displayName = `withFlattenedRoutes(${Component.displayName || Component.name})`;
-
-  const { arrayOf } = PropTypes;
-
-  WithFlattenedRoutesComponent.contextTypes = {
-    flattenedRoutes: arrayOf(propTypes.route).isRequired,
-  };
-
-  return WithFlattenedRoutesComponent;
 };
 
 /**

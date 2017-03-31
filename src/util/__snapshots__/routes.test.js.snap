@@ -1,7 +1,0 @@
-exports[`util/routes.js withFlattenedRoutes should inject the provided routes 1`] = `<withFlattenedRoutes(CompComp) />`;
-
-exports[`util/routes.js withFlattenedRoutes should inject the provided routes 2`] = `
-<div>
-  SomePage
-</div>
-`;
