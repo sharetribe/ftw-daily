@@ -40,7 +40,9 @@ class PageLayout extends Component {
 
     return (
       <div className={classNames(css.root, className)}>
-        <Helmet title={title} />
+        <Helmet>
+          <title>{title}</title>
+        </Helmet>
         {authInfoError
           ? <div style={{ color: 'red' }}>
               <FormattedMessage id="PageLayout.authInfoFailed" />
