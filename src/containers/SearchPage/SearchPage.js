@@ -32,7 +32,7 @@ export const SearchPageComponent = props => {
     listings,
     location,
     pagination,
-    push: historyPush,
+    history,
     searchInProgress,
     searchListingsError,
     searchParams,
@@ -88,7 +88,7 @@ export const SearchPageComponent = props => {
   const onNextPage = hasNext
     ? () => {
         const urlParams = { address, origin, bounds, page: page + 1 };
-        historyPush(createResourceLocatorString('SearchPage', flattenedRoutes, {}, urlParams));
+        history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, urlParams));
       }
     : null;
 
@@ -96,7 +96,7 @@ export const SearchPageComponent = props => {
   const onPreviousPage = hasPrev
     ? () => {
         const urlParams = { address, origin, bounds, page: page - 1 };
-        historyPush(createResourceLocatorString('SearchPage', flattenedRoutes, {}, urlParams));
+        history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, urlParams));
       }
     : null;
 
@@ -152,8 +152,12 @@ SearchPageComponent.propTypes = {
     totalItems: number,
     totalPages: number.isRequired,
   }),
-  // history.push from withRouter
-  push: func.isRequired,
+
+  // from withRouter
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
+
   searchParams: object,
   searchInProgress: bool.isRequired,
   searchListingsError: instanceOf(Error),

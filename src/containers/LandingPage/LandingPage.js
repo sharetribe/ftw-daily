@@ -8,13 +8,13 @@ import * as propTypes from '../../util/propTypes';
 import css from './LandingPage.css';
 
 export const LandingPageComponent = props => {
-  const { push: historyPush, flattenedRoutes } = props;
+  const { history, flattenedRoutes } = props;
 
   const handleSubmit = values => {
     const selectedPlace = values && values.location ? values.location.selectedPlace : null;
     const { address, origin, bounds } = selectedPlace || {};
     const searchParams = { address, origin, bounds };
-    historyPush(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
+    history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
   };
 
   return (
@@ -26,13 +26,15 @@ export const LandingPageComponent = props => {
   );
 };
 
-const { func, arrayOf } = PropTypes;
+const { func, arrayOf, shape } = PropTypes;
 
 LandingPageComponent.propTypes = {
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
 
-  // history.push from withRouter
-  push: func.isRequired,
+  // from withRouter
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
 };
 
 export default withRouter(LandingPageComponent);

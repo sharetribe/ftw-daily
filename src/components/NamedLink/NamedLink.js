@@ -63,16 +63,15 @@ NamedLinkComponent.propTypes = {
   // Link component props
   to: shape({ search: string, hash: string, state: object }),
   children: any,
-  // Note: The Link `replace` prop conflicts with the replace function
-  // from withRouter. If the replace boolean is required for the Link
-  // component, add it here with another name.
 
   // generic props for the underlying <a> element
   className: string,
   style: object,
   activeClassName: string,
+
   // from withFlattenedRoutes
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
+
   // from withRouter
   match: object,
 };

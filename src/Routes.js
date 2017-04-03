@@ -118,8 +118,14 @@ Routes.defaultProps = { staticContext: {} };
 
 Routes.propTypes = {
   isAuthenticated: bool.isRequired,
+
+  // from withFlattenedRoutes
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
+
+  // from withRouter
   staticContext: object,
+
+  // from connect
   dispatch: func.isRequired,
 };
 
