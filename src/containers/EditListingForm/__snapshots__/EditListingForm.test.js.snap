@@ -1,19 +1,86 @@
 exports[`EditListingForm matches snapshot 1`] = `
-<Connect(Form(InjectIntl(EditListingForm)))
-  destroyOnUnmount={true}
-  enableReinitialize={false}
-  forceUnregisterOnUnmount={false}
-  form="EditListingForm"
-  getFormState={[Function]}
-  images={Array []}
-  keepDirtyOnReinitialize={false}
-  onImageUpload={[Function]}
-  onSubmit={[Function]}
-  onUpdateImageOrder={[Function]}
-  persistentSubmitErrors={false}
-  pure={true}
-  shouldAsyncValidate={[Function]}
-  shouldValidate={[Function]}
-  touchOnBlur={true}
-  touchOnChange={false} />
+<form
+  onSubmit={[Function]}>
+  <Field
+    component={[Function]}
+    label="Title"
+    name="title"
+    type="text"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    } />
+  <Field
+    component={[Function]}
+    currencyConfig={
+      Object {
+        "currency": "USD",
+        "currencyDisplay": "symbol",
+        "maximumFractionDigits": 2,
+        "minimumFractionDigits": 2,
+        "style": "currency",
+        "subUnitDivisor": 100,
+        "useGrouping": true,
+      }
+    }
+    label="Price"
+    name="price"
+    placeholder="EditListingForm.pricePlaceholder"
+    validate={
+      Array [
+        [Function],
+      ]
+    } />
+  <h3>
+    Images
+  </h3>
+  <AddImages
+    images={Array []}
+    onSortEnd={[Function]}>
+    <Field
+      accept="image/*"
+      component={[Function]}
+      label="+ Add image"
+      name="addImage"
+      onChange={[Function]}
+      type="file" />
+    <Field
+      component={[Function]}
+      name="images"
+      type="hidden"
+      validate={
+        Array [
+          [Function],
+        ]
+      } />
+  </AddImages>
+  <Field
+    component={[Function]}
+    format={null}
+    label="Location"
+    name="location"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    } />
+  <Field
+    component={[Function]}
+    label="Description"
+    name="description"
+    validate={
+      Array [
+        [Function],
+      ]
+    } />
+  <Button
+    className={null}
+    disabled={true}
+    type="submit">
+    Save listing
+  </Button>
+</form>
 `;

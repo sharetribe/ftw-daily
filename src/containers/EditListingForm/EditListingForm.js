@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { Field, reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import config from '../../config';
+import * as propTypes from '../../util/propTypes';
 import {
   noEmptyArray,
   maxLength,
@@ -17,6 +20,7 @@ import {
   LocationAutocompleteInput,
   Button,
   Input,
+  StripeBankAccountToken,
 } from '../../components';
 import css from './EditListingForm.css';
 
@@ -111,7 +115,7 @@ RenderAddImage.propTypes = {
   type: string.isRequired,
 };
 
-class EditListingForm extends Component {
+export class EditListingFormComponent extends Component {
   constructor(props) {
     super(props);
     this.handleInitialize = this.handleInitialize.bind(this);
@@ -155,6 +159,7 @@ class EditListingForm extends Component {
       pristine,
       saveActionMsg = 'Save listing',
       submitting,
+      selectedPlace,
     } = this.props;
     const titleRequiredMessage = intl.formatMessage({ id: 'EditListingForm.titleRequired' });
     const maxLengthMessage = intl.formatMessage(
@@ -172,10 +177,16 @@ class EditListingForm extends Component {
     const locationNotRecognizedMessage = intl.formatMessage({
       id: 'EditListingForm.locationNotRecognized',
     });
+    const bankAccountNumberRequiredMessage = intl.formatMessage({
+      id: 'EditListingForm.bankAccountNumberRequired',
+    });
     const descriptionRequiredMessage = intl.formatMessage({
       id: 'EditListingForm.descriptionRequired',
     });
     const pricePlaceholderMessage = intl.formatMessage({ id: 'EditListingForm.pricePlaceholder' });
+
+    const country = selectedPlace ? selectedPlace.country : null;
+    const currency = config.currencyConfig.currency;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -241,21 +252,55 @@ class EditListingForm extends Component {
           component={EnhancedTextArea}
           validate={[required(descriptionRequiredMessage)]}
         />
-        <Button type="submit" disabled={pristine || submitting || disabled}>{saveActionMsg}</Button>
+
+        {country
+          ? <Field
+              name="bankAccountToken"
+              component={StripeBankAccountToken}
+              props={{ country, currency }}
+              validate={required(bankAccountNumberRequiredMessage)}
+            />
+          : null}
+
+        <Button
+          className={css.submitButton}
+          type="submit"
+          disabled={pristine || submitting || disabled}
+        >
+          {saveActionMsg}
+        </Button>
       </form>
     );
   }
 }
 
-EditListingForm.defaultProps = { initData: {} };
+EditListingFormComponent.defaultProps = { initData: {}, selectedPlace: null };
 
-EditListingForm.propTypes = {
+EditListingFormComponent.propTypes = {
   ...formPropTypes,
   initData: shape({ title: string, description: string }),
+  selectedPlace: propTypes.place,
   intl: intlShape.isRequired,
   onImageUpload: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,
 };
 
-export default reduxForm({ form: 'EditListingForm' })(injectIntl(EditListingForm));
+const formName = 'EditListingForm';
+
+// When a field depends on the value of another field, we must connect
+// to the store and select the required values to inject to the
+// component.
+//
+// See: http://redux-form.com/6.6.1/examples/selectingFormValues/
+const selector = formValueSelector(formName);
+const mapStateToProps = state => {
+  const location = selector(state, 'location');
+  return {
+    selectedPlace: location && location.selectedPlace ? location.selectedPlace : null,
+  };
+};
+
+export default compose(connect(mapStateToProps), reduxForm({ form: formName }), injectIntl)(
+  EditListingFormComponent
+);

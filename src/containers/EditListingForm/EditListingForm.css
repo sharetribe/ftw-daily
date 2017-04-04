@@ -40,3 +40,7 @@
   composes: error;
 
 }
+
+.submitButton {
+  margin-top: 1rem;
+}

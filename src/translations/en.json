@@ -1,6 +1,7 @@
 {
   "AuthenticationPage.loginFailed": "The email and password you entered did not match our records. Please double-check and try again.",
   "AuthenticationPage.loginRequiredFor": "You must log in to view the page at",
+  "EditListingForm.bankAccountNumberRequired": "You need to add a bank account number.",
   "EditListingForm.descriptionRequired": "You need to add a description.",
   "EditListingForm.imageRequired": "You need to add at least one image.",
   "EditListingForm.locationNotRecognized": "We didn't recognize this location. Please try another location.",

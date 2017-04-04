@@ -14,8 +14,8 @@ import {
 } from './EditListingPage.duck';
 
 const formatRequestData = values => {
-  const { description, images, location, price, title } = values;
-  const { selectedPlace: { address, origin } } = location;
+  const { description, images, location, price, title, bankAccountToken } = values;
+  const { selectedPlace: { address, origin, country } } = location;
 
   return {
     address,
@@ -24,6 +24,8 @@ const formatRequestData = values => {
     images: images.map(i => i.imageId),
     price,
     title,
+    country,
+    bankAccountToken,
   };
 };
 
