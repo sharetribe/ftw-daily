@@ -16,6 +16,9 @@
 
   /* Hovers */
 
+  &:enabled {
+    cursor: pointer;
+  }
   &:enabled:hover {
     background-color: color(#9B9B9B blackness(+ 20%));
   }

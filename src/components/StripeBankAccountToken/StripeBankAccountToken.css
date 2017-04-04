@@ -1,0 +1,8 @@
+.routingNumber {
+  width: calc(42% - 1px);
+}
+
+.accountNumberNotIban {
+  width: calc(58% - 1px);
+  margin-left: 2px;
+}

@@ -50,6 +50,14 @@ const renderWhenAuthInfoLoaded = store => {
   store.dispatch(authInfo());
 };
 
+const setupStripe = () => {
+  if (typeof window.Stripe === 'undefined') {
+    throw new Error('Stripe library not loaded');
+  }
+  // https://stripe.com/docs/stripe.js#setting-publishable-key
+  window.Stripe.setPublishableKey(config.stripe.publishableKey);
+};
+
 // If we're in a browser already, render the client application.
 if (typeof window !== 'undefined') {
   // eslint-disable-next-line no-underscore-dangle
@@ -59,6 +67,8 @@ if (typeof window !== 'undefined') {
   const store = configureStore(sdk, initialState);
 
   store.runSaga(createRootSaga(sdk));
+
+  setupStripe();
 
   const authInfoLoaded = store.getState().Auth.authInfoLoaded;
 
