@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
-import { intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import config from '../../config';
@@ -82,6 +82,45 @@ const enhancedField = Comp => {
 
   return EnhancedField;
 };
+
+// External link that opens in a new tab/window, ensuring that the
+// opened page doesn't have access to the current page.
+//
+// See: https://mathiasbynens.github.io/rel-noopener/
+const ExternalLink = props => {
+  const { children, ...rest } = props;
+  return (
+    <a {...rest} target="_blank" rel="noopener noreferrer">
+      {children}
+    </a>
+  );
+};
+
+ExternalLink.defaultProps = { children: null };
+
+const { any } = PropTypes;
+
+ExternalLink.propTypes = {
+  children: any,
+};
+
+// Render translated Stripe terms of service with links to legal texts.
+//
+// See: https://stripe.com/docs/connect/updating-accounts#tos-acceptance
+const StripeTos = () => (
+  <p>
+    <FormattedMessage
+      id="EditListingForm.stripeTermsOfService"
+      values={{
+        connectedAccountAgreementLink: (
+          <ExternalLink href="https://stripe.com/connect-account/legal">
+            <FormattedMessage id="EditListingForm.stripeConnectedAccountAgreementLinkText" />
+          </ExternalLink>
+        ),
+      }}
+    />
+  </p>
+);
 
 // We must create the enhanced components outside the render function
 // to avoid losing focus.
@@ -185,8 +224,10 @@ export class EditListingFormComponent extends Component {
     });
     const pricePlaceholderMessage = intl.formatMessage({ id: 'EditListingForm.pricePlaceholder' });
 
+    const stripeConnected = false;
     const country = selectedPlace ? selectedPlace.country : null;
     const currency = config.currencyConfig.currency;
+    const showBankAccountField = !stripeConnected && country;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -253,13 +294,16 @@ export class EditListingFormComponent extends Component {
           validate={[required(descriptionRequiredMessage)]}
         />
 
-        {country
-          ? <Field
-              name="bankAccountToken"
-              component={StripeBankAccountToken}
-              props={{ country, currency }}
-              validate={required(bankAccountNumberRequiredMessage)}
-            />
+        {showBankAccountField
+          ? <div>
+              <Field
+                name="bankAccountToken"
+                component={StripeBankAccountToken}
+                props={{ country, currency }}
+                validate={required(bankAccountNumberRequiredMessage)}
+              />
+              <StripeTos />
+            </div>
           : null}
 
         <Button

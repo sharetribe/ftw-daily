@@ -10,6 +10,8 @@
   "EditListingForm.pricePlaceholder": "$0.00",
   "EditListingForm.priceRequired": "You need to add a valid price.",
   "EditListingForm.titleRequired": "You need to add a title.",
+  "EditListingForm.stripeConnectedAccountAgreementLinkText": "Stripe Connected Account Agreement",
+  "EditListingForm.stripeTermsOfService": "By continuing, you agree to the {connectedAccountAgreementLink}.",
   "EditListingPage.titleCreateListing": "Create a listing",
   "EditListingPage.titleEditListing": "Edit listing",
   "HeroSearchForm.placeholder": "Search by location, e.g. New York",
