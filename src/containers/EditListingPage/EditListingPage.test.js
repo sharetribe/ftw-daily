@@ -7,7 +7,7 @@ describe('EditListingPageComponent', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
       <EditListingPageComponent
-        data={{ entities: {} }}
+        marketplaceData={{ entities: {} }}
         images={[]}
         intl={fakeIntl}
         onCreateListing={v => v}

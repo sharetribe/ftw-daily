@@ -66,12 +66,13 @@ export const user = shape({
   id: uuid.isRequired,
   type: value('user').isRequired,
   attributes: shape({
-    email: string.isRequired,
+    email: string,
     profile: shape({
       firstName: string.isRequired,
       lastName: string.isRequired,
       slug: string.isRequired,
     }).isRequired,
+    stripeConnected: bool,
   }),
 });
 
