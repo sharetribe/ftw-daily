@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component, PropTypes } from 'react';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { debounce } from 'lodash';
@@ -52,6 +53,19 @@ const initialState = { accountNumber: '', routingNumber: '', error: null };
 class StripeBankAccountToken extends Component {
   constructor(props) {
     super(props);
+
+    // We keep track of the mounted state of the component to avoid
+    // setting state or calling callback props if a createToken call
+    // finishes after the component is already removed.
+    //
+    // The correct solution would be to cancel all ongoing operations
+    // in componentWillUnmount, but since Promises don't have a
+    // cancellation mechanism yet, we must use a different solution
+    // for now.
+    //
+    // See: https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
+    this._isMounted = false;
+
     this.state = initialState;
     this.requestToken = debounce(this.requestToken.bind(this), DEBOUNCE_WAIT_TIME);
   }
@@ -59,6 +73,7 @@ class StripeBankAccountToken extends Component {
     if (!window.Stripe) {
       throw new Error('Stripe must be loaded for StripeBankAccountToken');
     }
+    this._isMounted = true;
   }
   componentWillReceiveProps(nextProps) {
     const countryChanged = nextProps.country !== this.props.country;
@@ -69,6 +84,9 @@ class StripeBankAccountToken extends Component {
       this.setState(initialState);
       nextProps.input.onChange('');
     }
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   /**
@@ -133,7 +151,7 @@ class StripeBankAccountToken extends Component {
     }
     createToken(accountData)
       .then(token => {
-        if (accountNumber === this.state.accountNumber) {
+        if (this._isMounted && accountNumber === this.state.accountNumber) {
           // Handle response only if the current number hasn't changed
           this.setState({ error: null });
           onChange(token);
@@ -142,7 +160,9 @@ class StripeBankAccountToken extends Component {
       .catch(e => {
         // eslint-disable-next-line no-console
         console.error(e);
-        this.setState({ error: new Error(stripeCreateBankAccountTokenErrorMessage) });
+        if (this._isMounted) {
+          this.setState({ error: new Error(stripeCreateBankAccountTokenErrorMessage) });
+        }
       });
   }
   render() {
