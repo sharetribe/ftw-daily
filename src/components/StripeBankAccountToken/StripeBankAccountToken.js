@@ -34,7 +34,12 @@ const createToken = data =>
     });
   });
 
-const isIban = currency => currency === 'EUR';
+// In addition to the bank account number, Stripe requires a routing
+// number when the currency is not EUR. When it is EUR, the account
+// number is expected to be an IBAN number.
+//
+// See: https://stripe.com/docs/stripe.js#bank-account-createToken
+const requiresRoutingNumber = currency => currency !== 'EUR';
 
 const isRoutingNumberValid = (routingNumber, country) =>
   window.Stripe.bankAccount.validateRoutingNumber(routingNumber, country);
@@ -78,8 +83,7 @@ class StripeBankAccountToken extends Component {
    */
   requestToken(accountNumber, routingNumber) {
     const { country, currency, input: { onChange }, intl } = this.props;
-    const iban = isIban(currency);
-    const requiresRoutingNumber = !iban;
+    const routingNumRequired = requiresRoutingNumber(currency);
 
     const invalidRoutingNumberMessage = intl.formatMessage(
       {
@@ -93,9 +97,9 @@ class StripeBankAccountToken extends Component {
 
     const stripeCreateBankAccountTokenErrorMessage = intl.formatMessage(
       {
-        id: iban
-          ? 'StripeBankAccountToken.createBankAccountTokenErrorIban'
-          : 'StripeBankAccountToken.createBankAccountTokenError',
+        id: routingNumRequired
+          ? 'StripeBankAccountToken.createBankAccountTokenError'
+          : 'StripeBankAccountToken.createBankAccountTokenErrorIban',
       },
       { country, currency }
     );
@@ -104,12 +108,12 @@ class StripeBankAccountToken extends Component {
     // form doesn't submit with an old value.
     onChange('');
 
-    if (!accountNumber || (requiresRoutingNumber && !routingNumber)) {
+    if (!accountNumber || (routingNumRequired && !routingNumber)) {
       // Incomplete info, not requesting token
       return;
     }
 
-    if (requiresRoutingNumber && !isRoutingNumberValid(routingNumber, country)) {
+    if (routingNumRequired && !isRoutingNumberValid(routingNumber, country)) {
       this.setState({ error: new Error(invalidRoutingNumberMessage) });
       return;
     }
@@ -124,7 +128,7 @@ class StripeBankAccountToken extends Component {
       currency: this.props.currency,
       account_number: accountNumber,
     };
-    if (requiresRoutingNumber) {
+    if (routingNumRequired) {
       accountData.routing_number = routingNumber;
     }
     createToken(accountData)
@@ -172,8 +176,7 @@ class StripeBankAccountToken extends Component {
       this.requestToken(this.state.accountNumber, value);
     };
 
-    const iban = isIban(currency);
-    const inlineInput = !iban;
+    const routingNumRequired = requiresRoutingNumber(currency);
     const routingNumberPlaceholder = intl.formatMessage({
       id: 'StripeBankAccountToken.routingNumberPlaceholder',
     });
@@ -183,7 +186,7 @@ class StripeBankAccountToken extends Component {
 
     const routingNumberInput = (
       <Input
-        inline={inlineInput}
+        inline={routingNumRequired}
         className={css.routingNumber}
         name="routingNumber"
         value={this.state.routingNumber}
@@ -198,14 +201,14 @@ class StripeBankAccountToken extends Component {
     return (
       <div>
         <label htmlFor={input.name}>
-          {iban
-            ? <FormattedMessage id="StripeBankAccountToken.bankAccountNumberLabelIban" />
-            : <FormattedMessage id="StripeBankAccountToken.bankAccountNumberLabel" />}
+          {routingNumRequired
+            ? <FormattedMessage id="StripeBankAccountToken.bankAccountNumberLabel" />
+            : <FormattedMessage id="StripeBankAccountToken.bankAccountNumberLabelIban" />}
         </label>
-        {!iban ? routingNumberInput : null}
+        {routingNumRequired ? routingNumberInput : null}
         <Input
-          inline={inlineInput}
-          className={iban ? null : css.accountNumberNotIban}
+          inline={routingNumRequired}
+          className={routingNumRequired ? css.accountNumberNotIban : null}
           value={this.state.accountNumber}
           placeholder={accountNumberPlaceholder}
           onChange={handleAccountNumberChange}
