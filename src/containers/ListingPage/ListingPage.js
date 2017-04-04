@@ -4,10 +4,13 @@ import { connect } from 'react-redux';
 import config from '../../config';
 import { types } from '../../util/sdkLoader';
 import { convertMoneyToNumber } from '../../util/currency';
-import { NamedLink, PageLayout, Map } from '../../components';
+import { Button, Map, ModalInMobile, PageLayout } from '../../components';
 import { getListingsById } from '../../ducks/sdk.duck';
 import { showListing } from './ListingPage.duck';
 import css from './ListingPage.css';
+
+// This defines when ModalInMobile shows content as Modal
+const MODAL_BREAKPOINT = 2500;
 
 const { UUID } = types;
 
@@ -28,6 +31,14 @@ const priceData = (price, currencyConfig, intl) => {
 // TODO: price unit (per x), custom fields, contact, reviews
 // N.B. All the presentational content needs to be extracted to their own components
 export class ListingPageComponent extends Component {
+  constructor(props) {
+    super(props);
+    const tab = props.tab;
+    this.state = {
+      isBookingModalOpenOnMobile: tab && tab === 'book',
+    };
+  }
+
   render() {
     const { params, marketplaceData, showListingError, intl } = this.props;
     const currencyConfig = config.currencyConfig;
@@ -44,6 +55,7 @@ export class ListingPageComponent extends Component {
       title = '',
     } = attributes;
 
+    const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' }, { title });
     const { formattedPrice, priceTitle } = priceData(price, currencyConfig, intl);
     const map = geolocation ? <Map center={geolocation} address={address} /> : null;
 
@@ -73,17 +85,31 @@ export class ListingPageComponent extends Component {
       : null;
 
     const pageContent = (
-      <PageLayout title={`${title} ${formattedPrice}`}>
-        <div className={css.price} title={priceTitle}>{formattedPrice}</div>
-        <h1>{title}</h1>
-        {imageCarousel}
-        {/* eslint-disable react/no-danger */}
-        <div className={css.description} dangerouslySetInnerHTML={{ __html: description }} />
-        {/* eslint-enable react/no-danger */}
-        {map ? <div className={css.map}>{map}</div> : null}
-        <NamedLink className={css.buttonLink} name="OrderDetailsPage" params={{ id: 12345 }}>
-          {`Book ${title}`}
-        </NamedLink>
+      <PageLayout title={`${title} ${formattedPrice}`} className={this.state.rootClasses}>
+        <div className={css.listing}>
+          <div className={css.header}>
+            <h1 className={css.title}>{title}</h1>
+            <div className={css.price} title={priceTitle}>{formattedPrice}</div>
+          </div>
+          {imageCarousel}
+          {/* eslint-disable react/no-danger */}
+          <div className={css.description} dangerouslySetInnerHTML={{ __html: description }} />
+          {/* eslint-enable react/no-danger */}
+          <ModalInMobile
+            isModalOpenOnMobile={this.state.isBookingModalOpenOnMobile}
+            onClose={() => this.setState({ isBookingModalOpenOnMobile: false })}
+            showAsModalMaxWidth={MODAL_BREAKPOINT}
+            title={bookBtnMessage}
+          >
+            <span>ModalInMobile content</span>
+          </ModalInMobile>
+          {map ? <div className={css.map}>{map}</div> : null}
+          <div className={css.openDatePickerForm}>
+            <Button onClick={() => this.setState({ isBookingModalOpenOnMobile: true })}>
+              {bookBtnMessage}
+            </Button>
+          </div>
+        </div>
       </PageLayout>
     );
 
@@ -98,9 +124,12 @@ export class ListingPageComponent extends Component {
   }
 }
 
-ListingPageComponent.defaultProps = { showListingError: null };
+ListingPageComponent.defaultProps = {
+  showListingError: null,
+  tab: 'listing',
+};
 
-const { instanceOf, object, shape, string } = PropTypes;
+const { instanceOf, object, oneOf, shape, string } = PropTypes;
 
 ListingPageComponent.propTypes = {
   intl: intlShape.isRequired,
@@ -110,6 +139,7 @@ ListingPageComponent.propTypes = {
     slug: string.isRequired,
   }).isRequired,
   showListingError: instanceOf(Error),
+  tab: oneOf(['book', 'listing']),
 };
 
 const mapStateToProps = state => ({

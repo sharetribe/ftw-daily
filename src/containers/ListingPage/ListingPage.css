@@ -1,7 +1,27 @@
+.pageRoot {}
+
+.listing {
+  display: block;
+}
+
+.listing {
+  padding-bottom: 80px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+}
+
+.title,
 .price {
   font-size: 2em;
   margin: 0.67em 0;
-  float: right;
+}
+
+.title {
+  flex-grow: 1;
 }
 
 .mainImage {
@@ -44,27 +64,25 @@
   margin-top: 3rem;
   height: 300px;
   width: 100%;
-}
-
-.buttonLink {
-  display: block;
-  width: 100%;
-  font-size: 1.4rem;
-  padding: 0.5rem;
-  margin: 1rem 0;
   background-color: #eee;
-  border: 1px solid #ddd;
-  cursor: pointer;
-
-  text-align: center;
-  text-decoration: none;
-  color: #000;
-
-  &:hover {
-    background-color: #ddd;
-  }
-  &:active {
-    background-color: #ccc;
-  }
 }
 
+.openDatePickerForm {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 80px;
+  padding: 1rem;
+  background-color: white;
+  border-top: solid 1px #ccc;
+
+  /* Mobile frame fix */
+  max-width: 375px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bookingModalTitle {
+  margin: 1rem 0;
+}

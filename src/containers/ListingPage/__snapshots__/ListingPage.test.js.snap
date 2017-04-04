@@ -1,39 +1,50 @@
 exports[`ListingPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   title="listing1 title 55">
-  <div
-    title={55}>
-    55
-  </div>
-  <h1>
-    listing1 title
-  </h1>
-  <div
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "listing1 description",
-      }
-    } />
   <div>
-    <Map
-      address="listing1 address"
-      center={
-        LatLng {
-          "lat": 40,
-          "lng": 60,
+    <div>
+      <h1>
+        listing1 title
+      </h1>
+      <div
+        title={55}>
+        55
+      </div>
+    </div>
+    <div
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "listing1 description",
         }
-      }
-      className=""
-      zoom={11} />
+      } />
+    <withTogglePageClassNames(InjectIntl(ModalInMobileComponent))
+      isModalOpenOnMobile={false}
+      onClose={[Function]}
+      showAsModalMaxWidth={2500}
+      title="ListingPage.ctaButtonMessage">
+      <span>
+        ModalInMobile content
+      </span>
+    </withTogglePageClassNames(InjectIntl(ModalInMobileComponent))>
+    <div>
+      <Map
+        address="listing1 address"
+        center={
+          LatLng {
+            "lat": 40,
+            "lng": 60,
+          }
+        }
+        className=""
+        zoom={11} />
+    </div>
+    <div>
+      <Button
+        className={null}
+        onClick={[Function]}>
+        ListingPage.ctaButtonMessage
+      </Button>
+    </div>
   </div>
-  <withFlattenedRoutes(withRouter(NamedLink))
-    name="OrderDetailsPage"
-    params={
-      Object {
-        "id": 12345,
-      }
-    }>
-    Book listing1 title
-  </withFlattenedRoutes(withRouter(NamedLink))>
 </Connect(withRouter(PageLayout))>
 `;
