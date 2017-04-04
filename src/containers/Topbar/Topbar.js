@@ -11,12 +11,12 @@ const House = () => <span dangerouslySetInnerHTML={{ __html: '&#127968;' }} />;
 /* eslint-enable react/no-danger */
 
 const Topbar = props => {
-  const { isAuthenticated, onLogout, push: historyPush } = props;
+  const { isAuthenticated, onLogout, history } = props;
 
   const handleLogout = () => {
     // History push function is passed to the action to enable
     // redirect to home when logout succeeds.
-    onLogout(historyPush);
+    onLogout(history.push);
   };
 
   return (
@@ -37,13 +37,16 @@ const Topbar = props => {
 
 Topbar.defaultProps = { user: null };
 
-const { bool, func } = PropTypes;
+const { bool, func, shape } = PropTypes;
 
 Topbar.propTypes = {
   isAuthenticated: bool.isRequired,
   onLogout: func.isRequired,
-  // history.push prop from withRouter
-  push: func.isRequired,
+
+  // from withRouter
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = state => ({ isAuthenticated: state.Auth.isAuthenticated });

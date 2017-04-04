@@ -15,7 +15,7 @@ const scrollToTop = () => {
 
 class PageLayout extends Component {
   componentDidMount() {
-    this.historyUnlisten = this.props.listen(() => scrollToTop());
+    this.historyUnlisten = this.props.history.listen(() => scrollToTop());
   }
 
   componentWillUnmount() {
@@ -40,7 +40,9 @@ class PageLayout extends Component {
 
     return (
       <div className={classNames(css.root, className)}>
-        <Helmet title={title} />
+        <Helmet>
+          <title>{title}</title>
+        </Helmet>
         {authInfoError
           ? <div style={{ color: 'red' }}>
               <FormattedMessage id="PageLayout.authInfoFailed" />
@@ -60,7 +62,7 @@ class PageLayout extends Component {
   }
 }
 
-const { any, string, instanceOf, func } = PropTypes;
+const { any, string, instanceOf, func, shape } = PropTypes;
 
 PageLayout.defaultProps = { className: '', children: null, authInfoError: null, logoutError: null };
 
@@ -70,8 +72,11 @@ PageLayout.propTypes = {
   children: any,
   authInfoError: instanceOf(Error),
   logoutError: instanceOf(Error),
-  // history.listen function from withRouter
-  listen: func.isRequired,
+
+  // from withRouter
+  history: shape({
+    listen: func.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = state => ({

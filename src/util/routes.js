@@ -56,8 +56,8 @@ export const matchPathname = (pathname, routesConfiguration) => {
 
   return flattenedRoutes.reduce(
     (matches, route) => {
-      const { exact = false } = route;
-      const match = !route.path || matchPath(pathname, route.path, { exact });
+      const { path, exact = false } = route;
+      const match = matchPath(pathname, { path, exact });
       if (match) {
         matches.push({
           route,

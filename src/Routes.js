@@ -118,11 +118,23 @@ Routes.defaultProps = { staticContext: {} };
 
 Routes.propTypes = {
   isAuthenticated: bool.isRequired,
+
+  // from withFlattenedRoutes
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
+
+  // from withRouter
   staticContext: object,
+
+  // from connect
   dispatch: func.isRequired,
 };
 
 const mapStateToProps = state => ({ isAuthenticated: state.Auth.isAuthenticated });
 
-export default compose(connect(mapStateToProps), withRouter, withFlattenedRoutes)(Routes);
+// Note: it is important that the withRouter HOC is **outside** the
+// connect HOC, otherwise React Router won't rerender any Route
+// components since connect implements a shouldComponentUpdate
+// lifecycle hook.
+//
+// See: https://github.com/ReactTraining/react-router/issues/4671
+export default compose(withRouter, connect(mapStateToProps), withFlattenedRoutes)(Routes);

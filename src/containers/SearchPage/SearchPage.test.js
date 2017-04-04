@@ -21,7 +21,9 @@ describe('SearchPageComponent', () => {
     const props = {
       flattenedRoutes: [],
       location: { search: '' },
-      push: () => console.log('HistoryPush called'),
+      history: {
+        push: () => console.log('HistoryPush called'),
+      },
       tab: 'listings',
       searchInProgress: false,
     };

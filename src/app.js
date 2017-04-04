@@ -75,6 +75,6 @@ export const renderApp = (url, serverContext, preloadedState) => {
   const body = ReactDOMServer.renderToString(
     <ServerApp url={url} context={serverContext} store={store} />
   );
-  const head = Helmet.rewind();
+  const head = Helmet.renderStatic();
   return { head, body };
 };
