@@ -4,7 +4,7 @@ import routesConfiguration from '../routesConfiguration';
 import { flattenRoutes } from './routes';
 import { renderDeep, renderShallow } from './test-helpers';
 import * as propTypes from './propTypes';
-import { withFlattenedRoutes, withTogglePageClasses } from './contextHelpers';
+import { withFlattenedRoutes, withTogglePageClassNames } from './contextHelpers';
 
 const { arrayOf, func } = PropTypes;
 
@@ -30,15 +30,15 @@ describe('util/contextHelpers.js', () => {
     });
   });
 
-  describe('withTogglePageClasses', () => {
+  describe('withTogglePageClassNames', () => {
     it('should inject the provided function', () => {
-      const CompComp = props => <div>{typeof props.togglePageClasses}</div>;
-      CompComp.propTypes = { togglePageClasses: func.isRequired };
-      const Comp = withTogglePageClasses(CompComp);
+      const CompComp = props => <div>{typeof props.togglePageClassNames}</div>;
+      CompComp.propTypes = { togglePageClassNames: func.isRequired };
+      const Comp = withTogglePageClassNames(CompComp);
 
       const deepTree = renderDeep(
         <RoutesProvider flattenedRoutes={flattenRoutes(routesConfiguration)}>
-          <PageLayout title="testing withTogglePageClasses">
+          <PageLayout title="testing withTogglePageClassNames">
             <Comp />
           </PageLayout>
         </RoutesProvider>

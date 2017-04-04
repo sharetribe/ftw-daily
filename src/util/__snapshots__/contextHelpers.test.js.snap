@@ -5,3 +5,42 @@ exports[`util/contextHelpers.js withFlattenedRoutes should inject the provided r
   SomePage
 </div>
 `;
+
+exports[`util/contextHelpers.js withTogglePageClassNames should inject the provided function 1`] = `
+<div
+  className="">
+  <div
+    className={undefined}>
+    <div>
+      <a
+        className="NamedLink_active"
+        href="/"
+        onClick={[Function]}
+        style={Object {}}>
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "&#127968;",
+            }
+          } />
+      </a>
+    </div>
+    <div
+      className={undefined}>
+      <a
+        className=""
+        href="/login"
+        onClick={[Function]}
+        style={Object {}}>
+        Login
+      </a>
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div>
+      function
+    </div>
+  </div>
+</div>
+`;

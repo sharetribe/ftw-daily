@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import { union, without } from 'lodash';
 import classNames from 'classnames';
 import { Topbar } from '../../containers';
 
@@ -14,6 +15,18 @@ const scrollToTop = () => {
 };
 
 class PageLayout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pageClassNames: '',
+    };
+    this.togglePageClassNames = this.togglePageClassNames.bind(this);
+  }
+
+  getChildContext() {
+    return { togglePageClassNames: this.togglePageClassNames };
+  }
+
   componentDidMount() {
     this.historyUnlisten = this.props.history.listen(() => scrollToTop());
   }
@@ -22,6 +35,17 @@ class PageLayout extends Component {
     if (this.historyUnlisten) {
       this.historyUnlisten();
     }
+  }
+
+  togglePageClassNames(className, addClass = true) {
+    this.setState(prevState => {
+      const prevPageClassNames = prevState.pageClassNames.split(' ');
+      const pageClassNames = addClass
+        ? union(prevPageClassNames, [className]).join(' ')
+        : without(prevPageClassNames, className).join(' ');
+
+      return { pageClassNames };
+    });
   }
 
   render() {
@@ -39,7 +63,7 @@ class PageLayout extends Component {
     /* eslint-enable no-console */
 
     return (
-      <div className={classNames(css.root, className)}>
+      <div className={classNames(css.root, className, this.state.pageClassNames)}>
         <Helmet>
           <title>{title}</title>
         </Helmet>
@@ -63,6 +87,8 @@ class PageLayout extends Component {
 }
 
 const { any, string, instanceOf, func, shape } = PropTypes;
+
+PageLayout.childContextTypes = { togglePageClassNames: func.isRequired };
 
 PageLayout.defaultProps = { className: '', children: null, authInfoError: null, logoutError: null };
 

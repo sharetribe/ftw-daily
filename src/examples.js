@@ -4,6 +4,7 @@ import * as BookingInfo from './components/BookingInfo/BookingInfo.example';
 import * as CurrencyInput from './components/CurrencyInput/CurrencyInput.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as Map from './components/Map/Map.example';
+import * as ModalInMobile from './components/ModalInMobile/ModalInMobile.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
 import * as LocationAutocompleteInput
   from './components/LocationAutocompleteInput/LocationAutocompleteInput.example';
@@ -33,6 +34,7 @@ export {
   LocationAutocompleteInput,
   LoginForm,
   Map,
+  ModalInMobile,
   NamedLink,
   PasswordForgottenForm,
   SignUpForm,

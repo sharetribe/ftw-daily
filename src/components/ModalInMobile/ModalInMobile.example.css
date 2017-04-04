@@ -1,0 +1,9 @@
+.visibleOnMobileLayout {
+  display: none;
+}
+
+@media (max-width: 400px) {
+  .visibleOnMobileLayout {
+    display: block;
+  }
+}

@@ -14,6 +14,7 @@ import Map from './Map/Map';
 import MapPanel from './MapPanel/MapPanel';
 import Menu from './Menu/Menu';
 import MobileFrame from './MobileFrame/MobileFrame';
+import ModalInMobile from './ModalInMobile/ModalInMobile';
 import NamedLink from './NamedLink/NamedLink';
 import NamedRedirect from './NamedRedirect/NamedRedirect';
 import OrderDetailsPanel from './OrderDetailsPanel/OrderDetailsPanel';
@@ -41,6 +42,7 @@ export {
   MapPanel,
   Menu,
   MobileFrame,
+  ModalInMobile,
   NamedLink,
   NamedRedirect,
   OrderDetailsPanel,

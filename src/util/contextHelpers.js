@@ -23,3 +23,23 @@ export const withFlattenedRoutes = Component => {
 
   return WithFlattenedRoutesComponent;
 };
+
+/**
+ * A higher order component (HOC) to take the togglePageClassNames function from
+ * the context that the PageLayout component has provided.
+ */
+export const withTogglePageClassNames = Component => {
+  const WithTogglePageClassNamesComponent = (props, context) => (
+    <Component togglePageClassNames={context.togglePageClassNames} {...props} />
+  );
+
+  WithTogglePageClassNamesComponent.displayName = `withTogglePageClassNames(${Component.displayName || Component.name})`;
+
+  const { func } = PropTypes;
+
+  WithTogglePageClassNamesComponent.contextTypes = {
+    togglePageClassNames: func.isRequired,
+  };
+
+  return WithTogglePageClassNamesComponent;
+};
