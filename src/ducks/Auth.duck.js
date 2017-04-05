@@ -168,7 +168,7 @@ export function* watchAuth(sdk) {
 export const fetchCurrentUser = () =>
   (dispatch, getState, sdk) => {
     dispatch(usersMeRequest());
-    sdk.users
+    return sdk.users
       .me()
       .then(response => {
         dispatch(usersMeSuccess(response.data.data));
