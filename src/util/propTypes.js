@@ -62,11 +62,25 @@ export const place = shape({
 });
 
 // Denormalised user object
-export const user = shape({
+export const currentUser = shape({
   id: uuid.isRequired,
   type: value('user').isRequired,
   attributes: shape({
     email: string.isRequired,
+    profile: shape({
+      firstName: string.isRequired,
+      lastName: string.isRequired,
+      slug: string.isRequired,
+    }).isRequired,
+    stripeConnected: bool.isRequired,
+  }),
+});
+
+// Denormalised user object
+export const user = shape({
+  id: uuid.isRequired,
+  type: value('user').isRequired,
+  attributes: shape({
     profile: shape({
       firstName: string.isRequired,
       lastName: string.isRequired,

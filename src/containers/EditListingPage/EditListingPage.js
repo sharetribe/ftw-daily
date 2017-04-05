@@ -5,7 +5,9 @@ import { types } from '../../util/sdkLoader';
 import { NamedRedirect, PageLayout } from '../../components';
 import { EditListingForm } from '../../containers';
 import { getListingsById } from '../../ducks/sdk.duck';
+import { fetchCurrentUser } from '../../ducks/Auth.duck';
 import { createSlug } from '../../util/urlHelpers';
+import * as propTypes from '../../util/propTypes';
 import {
   requestCreateListing,
   requestShowListing,
@@ -43,7 +45,7 @@ export class EditListingPageComponent extends Component {
 
   render() {
     const {
-      data,
+      marketplaceData,
       intl,
       onCreateListing,
       onImageUpload,
@@ -51,10 +53,11 @@ export class EditListingPageComponent extends Component {
       page,
       params,
       type,
+      currentUser,
     } = this.props;
     const isNew = type === 'new';
     const id = page.submittedListingId || (params && new types.UUID(params.id));
-    const listingsById = getListingsById(data, [id]);
+    const listingsById = getListingsById(marketplaceData, [id]);
     const currentListing = listingsById.length > 0 ? listingsById[0] : null;
 
     const shouldRedirect = page.submittedListingId && currentListing;
@@ -84,6 +87,9 @@ export class EditListingPageComponent extends Component {
         ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
         : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
 
+      // eslint-disable-next-line no-console
+      console.log('current user:', currentUser);
+
       return (
         <PageLayout title={title}>
           <EditListingForm
@@ -112,12 +118,17 @@ EditListingPageComponent.loadData = (id, onLoadListing) => {
   onLoadListing(id);
 };
 
-EditListingPageComponent.defaultProps = { listing: null, params: null, type: 'edit' };
+EditListingPageComponent.defaultProps = {
+  listing: null,
+  params: null,
+  type: 'edit',
+  currentUser: null,
+};
 
 const { func, object, shape, string } = PropTypes;
 
 EditListingPageComponent.propTypes = {
-  data: object.isRequired,
+  marketplaceData: object.isRequired,
   intl: intlShape.isRequired,
   onCreateListing: func.isRequired,
   onLoadListing: func.isRequired,
@@ -129,11 +140,15 @@ EditListingPageComponent.propTypes = {
     slug: string,
   }),
   type: string,
+  currentUser: propTypes.currentUser,
 };
 
 const mapStateToProps = state => {
-  const { data = {}, EditListingPage } = state;
-  return { page: EditListingPage, data };
+  return {
+    page: state.EditListingPage,
+    marketplaceData: state.data || {},
+    currentUser: state.Auth.currentUser,
+  };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -145,4 +160,12 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(EditListingPageComponent));
+const EditListingPage = connect(mapStateToProps, mapDispatchToProps)(
+  injectIntl(EditListingPageComponent)
+);
+
+EditListingPage.loadData = () => {
+  return fetchCurrentUser();
+};
+
+export default EditListingPage;
