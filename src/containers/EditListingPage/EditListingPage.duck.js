@@ -1,4 +1,5 @@
 import { showListingsSuccess as globalShowListingsSuccess } from '../../ducks/sdk.duck';
+import { createStripeAccount } from '../../ducks/user.duck';
 
 const requestAction = actionType => params => ({ type: actionType, payload: { params } });
 
@@ -147,7 +148,7 @@ export function requestCreateListing(data) {
 
     const shouldCreateStripeAccount = bankAccountToken && country;
     const accountCreated = shouldCreateStripeAccount
-      ? sdk.users.createStripeAccount({ bankAccountToken, country })
+      ? dispatch(createStripeAccount(bankAccountToken, country))
       : Promise.resolve('already created');
 
     return accountCreated

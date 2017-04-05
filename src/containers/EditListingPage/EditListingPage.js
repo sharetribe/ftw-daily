@@ -5,7 +5,7 @@ import { types } from '../../util/sdkLoader';
 import { NamedRedirect, PageLayout } from '../../components';
 import { EditListingForm } from '../../containers';
 import { getListingsById } from '../../ducks/sdk.duck';
-import { fetchCurrentUser } from '../../ducks/Auth.duck';
+import { fetchCurrentUser } from '../../ducks/user.duck';
 import { createSlug } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import {
@@ -149,7 +149,7 @@ const mapStateToProps = state => {
   return {
     page: state.EditListingPage,
     marketplaceData: state.data || {},
-    currentUser: state.Auth.currentUser,
+    currentUser: state.user.currentUser,
   };
 };
 
