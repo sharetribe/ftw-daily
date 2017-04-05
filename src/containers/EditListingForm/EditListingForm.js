@@ -160,6 +160,7 @@ export class EditListingFormComponent extends Component {
       saveActionMsg = 'Save listing',
       submitting,
       selectedPlace,
+      stripeConnected,
     } = this.props;
     const titleRequiredMessage = intl.formatMessage({ id: 'EditListingForm.titleRequired' });
     const maxLengthMessage = intl.formatMessage(
@@ -186,6 +187,7 @@ export class EditListingFormComponent extends Component {
     const pricePlaceholderMessage = intl.formatMessage({ id: 'EditListingForm.pricePlaceholder' });
 
     const country = selectedPlace ? selectedPlace.country : null;
+    const showBankAccountField = !stripeConnected && country;
     const currency = config.currencyConfig.currency;
 
     return (
@@ -253,7 +255,7 @@ export class EditListingFormComponent extends Component {
           validate={[required(descriptionRequiredMessage)]}
         />
 
-        {country
+        {showBankAccountField
           ? <Field
               name="bankAccountToken"
               component={StripeBankAccountToken}
@@ -280,6 +282,7 @@ EditListingFormComponent.propTypes = {
   ...formPropTypes,
   initData: shape({ title: string, description: string }),
   selectedPlace: propTypes.place,
+  stripeConnected: bool.isRequired,
   intl: intlShape.isRequired,
   onImageUpload: func.isRequired,
   onUpdateImageOrder: func.isRequired,

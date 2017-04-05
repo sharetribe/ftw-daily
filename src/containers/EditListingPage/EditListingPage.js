@@ -87,8 +87,9 @@ export class EditListingPageComponent extends Component {
         ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
         : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
 
-      // eslint-disable-next-line no-console
-      console.log('current user:', currentUser);
+      const stripeConnected = currentUser && currentUser.attributes
+        ? currentUser.attributes.stripeConnected
+        : false;
 
       return (
         <PageLayout title={title}>
@@ -100,6 +101,7 @@ export class EditListingPageComponent extends Component {
             onSubmit={onSubmit(onCreateListing)}
             onUpdateImageOrder={onUpdateImageOrder}
             saveActionMsg={saveActionMsg}
+            stripeConnected={stripeConnected}
           />
         </PageLayout>
       );
