@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { showListingsSuccess as globalShowListingsSuccess } from '../../ducks/sdk.duck';
 
 const requestAction = actionType => params => ({ type: actionType, payload: { params } });
@@ -48,6 +47,7 @@ export default function reducer(state = initialState, action = {}) {
     case CREATE_LISTING_SUCCESS:
       return { ...state, submittedListingId: payload.data.id, redirectToListing: true };
     case CREATE_LISTING_ERROR:
+      // eslint-disable-next-line no-console
       console.error(payload);
       return { ...state, createListingsError: payload, redirectToListing: false };
 
@@ -56,6 +56,7 @@ export default function reducer(state = initialState, action = {}) {
     case SHOW_LISTINGS_SUCCESS:
       return initialState;
     case SHOW_LISTINGS_ERROR:
+      // eslint-disable-next-line no-console
       console.error(payload);
       return { ...state, showListingsError: payload, redirectToListing: false };
 
@@ -75,6 +76,7 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, images };
     }
     case UPLOAD_IMAGE_ERROR: {
+      // eslint-disable-next-line no-console
       console.error(payload);
       const { id, error } = payload;
       const { file } = state.images[id];
@@ -138,8 +140,11 @@ export function requestShowListing(actionPayload) {
   };
 }
 
-export function requestCreateListing(actionPayload) {
+export function requestCreateListing(data) {
   return (dispatch, getState, sdk) => {
+    const { bankAccountToken, country, ...actionPayload } = data;
+    // eslint-disable-next-line no-console
+    console.log('TODO: call API with Stripe token:', bankAccountToken, 'and country:', country);
     dispatch(createListing(actionPayload));
     return sdk.listings
       .create(actionPayload)

@@ -9,7 +9,7 @@ import css from './StripeBankAccountToken.css';
 
 const DEBOUNCE_WAIT_TIME = 200;
 
-const ErrorMessage = props => <p style={{ color: 'red' }}>{props.children}</p>;
+const ErrorMessage = props => <span style={{ color: 'red' }}>{props.children}</span>;
 ErrorMessage.propTypes = { children: PropTypes.any.isRequired };
 
 /**

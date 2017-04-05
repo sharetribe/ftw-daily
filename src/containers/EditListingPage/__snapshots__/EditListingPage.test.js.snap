@@ -1,7 +1,7 @@
 exports[`EditListingPageComponent matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   title="EditListingPage.titleCreateListing">
-  <ReduxForm
+  <Connect(ReduxForm)
     images={Array []}
     initData={Object {}}
     onImageUpload={[Function]}

@@ -47,3 +47,33 @@ export const fakeIntl = {
   formatTime: d => d,
   now: d => d,
 };
+
+const noop = () => null;
+
+export const fakeFormProps = {
+  anyTouched: false,
+  asyncValidating: false,
+  dirty: false,
+  form: 'fakeTestForm',
+  invalid: false,
+  pristine: true,
+  clearSubmit: noop,
+  touch: noop,
+  untouch: noop,
+  submit: noop,
+  reset: noop,
+  initialize: noop,
+  handleSubmit: noop,
+  destroy: noop,
+  clearAsyncError: noop,
+  change: noop,
+  blur: noop,
+  autofill: noop,
+  asyncValidate: noop,
+  valid: true,
+  submitSucceeded: false,
+  submitFailed: false,
+  submitting: false,
+  pure: true,
+  initialized: true,
+};
