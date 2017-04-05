@@ -143,11 +143,15 @@ export function requestShowListing(actionPayload) {
 export function requestCreateListing(data) {
   return (dispatch, getState, sdk) => {
     const { bankAccountToken, country, ...actionPayload } = data;
-    // eslint-disable-next-line no-console
-    console.log('TODO: call API with Stripe token:', bankAccountToken, 'and country:', country);
     dispatch(createListing(actionPayload));
-    return sdk.listings
-      .create(actionPayload)
+
+    const shouldCreateStripeAccount = bankAccountToken && country;
+    const accountCreated = shouldCreateStripeAccount
+      ? sdk.users.createStripeAccount({ bankAccountToken, country })
+      : Promise.resolve('already created');
+
+    return accountCreated
+      .then(() => sdk.listings.create(actionPayload))
       .then(response => {
         const id = response.data.data.id.uuid;
         // Modify store to understand that we have created listing and can redirect away
