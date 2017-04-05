@@ -1,0 +1,36 @@
+exports[`DateInput matches snapshot 1`] = `
+<div>
+  <div
+    className="SingleDatePicker">
+    <div>
+      <div
+        className="SingleDatePickerInput">
+        <div
+          className="DateInput">
+          <input
+            aria-describedby=""
+            aria-label="Date"
+            autoComplete="off"
+            className="DateInput__input needsclick"
+            disabled={false}
+            id="date-input"
+            name="date-input"
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Date"
+            readOnly={false}
+            required={true}
+            type="text"
+            value="" />
+          
+          <div
+            className="DateInput__display-text">
+            Date
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
