@@ -140,7 +140,7 @@ EditListingPageComponent.propTypes = {
     slug: string,
   }),
   type: string,
-  currentUser: propTypes.user,
+  currentUser: propTypes.currentUser,
 };
 
 const mapStateToProps = state => {
