@@ -1,32 +1,30 @@
 exports[`CheckoutPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
-  title="Book Banyan Studios (some-listing-id)">
+  title="CheckoutPage.title">
+  <h1>
+    CheckoutPage.title
+  </h1>
   <img
-    alt="Banyan Studios"
-    src="http://placehold.it/750x470"
+    alt="Example listing"
+    src="https://placehold.it/750x470"
     style={
       Object {
         "width": "100%",
       }
     } />
-  <BookingInfo
-    bookingDuration="3 days"
-    bookingPeriod="Jan 2nd - Jan 4th"
-    imageUrl="http://placehold.it/750x470"
-    pricePerDay="55€"
-    title="Banyan Studios"
-    total="165€" />
-  <p>
-    By confirming I accept the booking terms and conditions.
-  </p>
-  <withFlattenedRoutes(withRouter(NamedLink))
-    name="OrderDetailsPage"
-    params={
-      Object {
-        "id": 12345,
-      }
-    }>
-    Confirm & Pay
-  </withFlattenedRoutes(withRouter(NamedLink))>
+  <section>
+    <h2>
+      <FormattedMessage
+        id="CheckoutPage.paymentTitle"
+        values={Object {}} />
+    </h2>
+    <p>
+      <FormattedMessage
+        id="CheckoutPage.paymentInfo"
+        values={Object {}} />
+    </p>
+    <InjectIntl(StripePaymentForm)
+      onSubmit={[Function]} />
+  </section>
 </Connect(withRouter(PageLayout))>
 `;
