@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { union, without } from 'lodash';
 import config from '../../config';
 import { types } from '../../util/sdkLoader';
 import { convertMoneyToNumber } from '../../util/currency';
@@ -36,7 +37,20 @@ export class ListingPageComponent extends Component {
     const tab = props.tab;
     this.state = {
       isBookingModalOpenOnMobile: tab && tab === 'book',
+      pageClassNames: '',
     };
+    this.togglePageClassNames = this.togglePageClassNames.bind(this);
+  }
+
+  togglePageClassNames(className, addClass = true) {
+    this.setState(prevState => {
+      const prevPageClassNames = prevState.pageClassNames.split(' ');
+      const pageClassNames = addClass
+        ? union(prevPageClassNames, [className]).join(' ')
+        : without(prevPageClassNames, className).join(' ');
+
+      return { pageClassNames };
+    });
   }
 
   render() {
@@ -100,6 +114,7 @@ export class ListingPageComponent extends Component {
             onClose={() => this.setState({ isBookingModalOpenOnMobile: false })}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             title={bookBtnMessage}
+            togglePageClassNames={this.togglePageClassNames}
           >
             <span>ModalInMobile content</span>
           </ModalInMobile>

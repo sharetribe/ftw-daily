@@ -29,21 +29,4 @@ describe('util/contextHelpers.js', () => {
       expect(deepTree).toMatchSnapshot();
     });
   });
-
-  describe('withTogglePageClassNames', () => {
-    it('should inject the provided function', () => {
-      const CompComp = props => <div>{typeof props.togglePageClassNames}</div>;
-      CompComp.propTypes = { togglePageClassNames: func.isRequired };
-      const Comp = withTogglePageClassNames(CompComp);
-
-      const deepTree = renderDeep(
-        <RoutesProvider flattenedRoutes={flattenRoutes(routesConfiguration)}>
-          <PageLayout title="testing withTogglePageClassNames">
-            <Comp />
-          </PageLayout>
-        </RoutesProvider>
-      );
-      expect(deepTree).toMatchSnapshot();
-    });
-  });
 });

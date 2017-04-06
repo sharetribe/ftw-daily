@@ -15,7 +15,6 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { intlShape, injectIntl } from 'react-intl';
 import { Button } from '../../components';
-import { withTogglePageClassNames } from '../../util/contextHelpers';
 import css from './ModalInMobile.css';
 
 export class ModalInMobileComponent extends Component {
@@ -139,4 +138,4 @@ ModalInMobileComponent.propTypes = {
   togglePageClassNames: func.isRequired,
 };
 
-export default withTogglePageClassNames(injectIntl(ModalInMobileComponent));
+export default injectIntl(ModalInMobileComponent);

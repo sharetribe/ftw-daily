@@ -17,15 +17,16 @@ exports[`ListingPage matches snapshot 1`] = `
           "__html": "listing1 description",
         }
       } />
-    <withTogglePageClassNames(InjectIntl(ModalInMobileComponent))
+    <InjectIntl(ModalInMobileComponent)
       isModalOpenOnMobile={false}
       onClose={[Function]}
       showAsModalMaxWidth={2500}
-      title="ListingPage.ctaButtonMessage">
+      title="ListingPage.ctaButtonMessage"
+      togglePageClassNames={[Function]}>
       <span>
         ModalInMobile content
       </span>
-    </withTogglePageClassNames(InjectIntl(ModalInMobileComponent))>
+    </InjectIntl(ModalInMobileComponent)>
     <div>
       <Map
         address="listing1 address"
