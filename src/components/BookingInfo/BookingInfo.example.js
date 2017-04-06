@@ -1,12 +1,12 @@
 /* eslint-disable import/prefer-default-export */
+import { types } from '../../util/sdkLoader';
 import BookingInfo from './BookingInfo';
 
 export const Empty = {
   component: BookingInfo,
   props: {
-    pricePerDay: '55\u20AC',
-    bookingPeriod: 'Jan 2nd - Jan 4th',
-    bookingDuration: '3 days',
-    total: '165\u20AC',
+    unitPrice: new types.Money(10, 'USD'),
+    bookingStart: new Date('Fri, 14 Apr 2017 GMT'),
+    bookingEnd: new Date('Sun, 16 Apr 2017 GMT'),
   },
 };
