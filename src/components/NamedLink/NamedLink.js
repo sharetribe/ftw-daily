@@ -20,7 +20,8 @@
 import React, { PropTypes } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
-import { pathByRouteName, withFlattenedRoutes } from '../../util/routes';
+import { pathByRouteName } from '../../util/routes';
+import { withFlattenedRoutes } from '../../util/contextHelpers';
 import * as propTypes from '../../util/propTypes';
 
 export const NamedLinkComponent = props => {

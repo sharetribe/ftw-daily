@@ -66,7 +66,14 @@ const routesConfiguration = [
         exact: true,
         name: 'ListingPage',
         loadData: (params, search) => ListingPage.loadData(params, search),
-        component: props => <ListingPage {...props} />,
+        component: props => <ListingPage {...props} tab="listing" />,
+      },
+      {
+        path: '/l/:slug/:id/book',
+        exact: true,
+        name: 'ListingPage',
+        loadData: (params, search) => ListingPage.loadData(params, search),
+        component: props => <ListingPage {...props} tab="book" />,
       },
       {
         auth: true,

@@ -7,7 +7,7 @@ const author = createUser('user1');
 const listing = { ...createListing('listing1'), author };
 
 const ListingCardWrapper = props => (
-  <div style={{ width: '400px' }}>
+  <div style={{ maxWidth: '400px' }}>
     <ListingCard {...props} />
   </div>
 );

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { NotFoundPage } from './containers';
 import { NamedRedirect } from './components';
-import { withFlattenedRoutes } from './util/routes';
+import { withFlattenedRoutes } from './util/contextHelpers';
 import * as propTypes from './util/propTypes';
 
 const { bool, arrayOf, object, func, shape, string, any } = PropTypes;

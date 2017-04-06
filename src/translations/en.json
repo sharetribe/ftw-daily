@@ -16,6 +16,8 @@
   "HeroSearchForm.search": "Search",
   "HeroSection.subTitle": "The largest online community to rent music studios",
   "HeroSection.title": "Book Studiotime anywhere",
+  "ModalInMobile.closeModal": "Close modal",
+  "ListingPage.ctaButtonMessage": "Book {title}",
   "ListingPage.loadingListingData": "Loading listing data",
   "ListingPage.noListingData": "Could not find listing data",
   "PageLayout.authInfoFailed": "Could not get authentication information.",

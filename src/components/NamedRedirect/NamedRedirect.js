@@ -4,7 +4,8 @@
  */
 import React, { PropTypes } from 'react';
 import { Redirect } from 'react-router-dom';
-import { pathByRouteName, withFlattenedRoutes } from '../../util/routes';
+import { pathByRouteName } from '../../util/routes';
+import { withFlattenedRoutes } from '../../util/contextHelpers';
 import * as propTypes from '../../util/propTypes';
 
 const NamedRedirect = props => {
