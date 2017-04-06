@@ -1,0 +1,47 @@
+/**
+ * The following styles are our overwrites for defaults from React-dates (./reactDates.css)
+ */
+
+/* These are likely to change completely wireframe MVP */
+.DateInput__display-text--focused {
+  background: transparent;
+  border-color: transparent;
+  border-radius: 0;
+  color: #000;
+}
+
+.SingleDatePicker {
+  width: 100%;
+  height: 50px;
+}
+
+.DateInput {
+  width: 100%;
+  height: 50px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.SingleDatePickerInput {
+  height: 100%;
+  border: 1px solid #979797;
+}
+
+.DateInput__input {
+  display: block;
+  padding: 0;
+}
+
+.DateInput__display-text {
+  padding-left: 0;
+  padding-right: 0;
+
+  /* Font */
+  font-size: 16px;
+  letter-spacing: -0.4px;
+  color: #4A4A4A;
+}
+
+.inline {
+  display: inline-block;
+}
