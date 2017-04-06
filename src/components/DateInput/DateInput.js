@@ -4,7 +4,6 @@
  * CSS modules can't handle global styles so they are currently added separately
  */
 import React, { PropTypes } from 'react';
-import momentPropTypes from 'react-moment-proptypes';
 import moment from 'moment';
 import { SingleDatePicker, isInclusivelyAfterDay } from 'react-dates';
 
@@ -69,7 +68,7 @@ class DateInput extends React.Component {
   }
 
   onDateChange(date) {
-    this.props.onChange(date instanceof moment ? date.clone() : null);
+    this.props.onChange(date instanceof moment ? date.toDate() : null);
   }
 
   onFocusChange({ focused }) {
@@ -87,7 +86,8 @@ class DateInput extends React.Component {
     const { focused } = this.state;
     // eslint-disable-next-line no-unused-vars
     const { initialDate, onBlur, onChange, onFocus, value, ...datePickerProps } = this.props;
-    const date = value instanceof moment ? value.clone() : initialDate;
+    const initialMoment = initialDate ? moment(initialDate) : null;
+    const date = value instanceof Date ? moment(value) : initialMoment;
 
     return (
       <div>
@@ -106,15 +106,16 @@ class DateInput extends React.Component {
 
 DateInput.defaultProps = defaultProps;
 
-const { func, string } = PropTypes;
+const { func, instanceOf, string } = PropTypes;
 
 DateInput.propTypes = {
-  initialDate: momentPropTypes.momentObj,
+  initialDate: instanceOf(Date),
+  isOutsideRange: func,
   onChange: func.isRequired,
   onBlur: func.isRequired,
   onFocus: func.isRequired,
   placeholder: string,
-  value: momentPropTypes.momentObj,
+  value: instanceOf(Date),
 };
 
 export default DateInput;
