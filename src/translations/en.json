@@ -1,6 +1,12 @@
 {
   "AuthenticationPage.loginFailed": "The email and password you entered did not match our records. Please double-check and try again.",
   "AuthenticationPage.loginRequiredFor": "You must log in to view the page at",
+  "BookingDatesForm.bookingEndTitle": "End date",
+  "BookingDatesForm.bookingStartTitle": "Start date",
+  "BookingDatesForm.placeholder": "mm/dd/yyyy",
+  "BookingDatesForm.requiredDate": "Oops, make sure your date is correct!",
+  "BookingDatesForm.requestToBook": "Request to book",
+  "BookingDatesForm.youWontBeChargedInfo": "You won't be charged yet",
   "BookingInfo.bookingPeriodLabel": "Booking period:",
   "BookingInfo.bookingPeriod": "{bookingStart} - {bookingEnd}",
   "BookingInfo.dayCount": "{count, number} {count, plural, one {day} other {days}}",

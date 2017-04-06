@@ -1,0 +1,55 @@
+exports[`EditListingForm matches snapshot 1`] = `
+<form
+  onSubmit={[Function]}>
+  <Field
+    component={[Function]}
+    format={null}
+    labelMessage={
+      <FormattedMessage
+        id="BookingDatesForm.bookingStartTitle"
+        values={Object {}} />
+    }
+    name="bookingStart"
+    placeholder="BookingDatesForm.placeholder"
+    validate={
+      Array [
+        [Function],
+      ]
+    } />
+  <Field
+    component={[Function]}
+    format={null}
+    labelMessage={
+      <FormattedMessage
+        id="BookingDatesForm.bookingEndTitle"
+        values={Object {}} />
+    }
+    name="bookingEnd"
+    placeholder="BookingDatesForm.placeholder"
+    validate={
+      Array [
+        [Function],
+      ]
+    } />
+  <BookingInfo
+    unitPrice={
+      Money {
+        "amount": 1099,
+        "currency": "USD",
+      }
+    } />
+  <p>
+    <FormattedMessage
+      id="BookingDatesForm.youWontBeChargedInfo"
+      values={Object {}} />
+  </p>
+  <Button
+    className={null}
+    disabled={true}
+    type="submit">
+    <FormattedMessage
+      id="BookingDatesForm.requestToBook"
+      values={Object {}} />
+  </Button>
+</form>
+`;
