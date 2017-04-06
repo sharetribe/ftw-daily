@@ -80,7 +80,8 @@ export const fetchCurrentUser = () =>
 export const createStripeAccount = (bankAccountToken, country) =>
   (dispatch, getState, sdk) => {
     dispatch(stripeAccountCreateRequest());
-    return sdk.users.createStripeAccount({ bankAccountToken, country })
+    return sdk.users
+      .createStripeAccount({ bankAccountToken, country })
       .then(response => {
         dispatch(stripeAccountCreateSuccess(response));
         return response;
