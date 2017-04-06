@@ -82,13 +82,11 @@ if (typeof window !== 'undefined') {
   }
 
   // Expose stuff for the browser REPL
-  if (config.dev) {
-    const actions = bindActionCreators(
-      { showListings, queryListings, searchListings, showMarketplace, showUsers },
-      store.dispatch
-    );
-    window.app = { config, sdk, sdkTypes: types, actions, store, sample, routeConfiguration };
-  }
+  const actions = bindActionCreators(
+    { showListings, queryListings, searchListings, showMarketplace, showUsers },
+    store.dispatch
+  );
+  window.app = { config, sdk, sdkTypes: types, actions, store, sample, routeConfiguration };
 }
 
 // Export the function for server side rendering.
