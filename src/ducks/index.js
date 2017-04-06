@@ -9,5 +9,6 @@ import Auth from './Auth.duck';
 import FlashNotification from './FlashNotification.duck';
 import LocationFilter from './LocationFilter.duck';
 import sdkReducer from './sdk.duck';
+import user from './user.duck';
 
-export { form, Auth, FlashNotification, LocationFilter, sdkReducer as data };
+export { form, Auth, FlashNotification, LocationFilter, sdkReducer as data, user };

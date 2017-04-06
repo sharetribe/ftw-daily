@@ -4,7 +4,7 @@ import EditListingForm from './EditListingForm';
 export const Empty = {
   component: EditListingForm,
   props: {
-    images: [],
+    stripeConnected: false,
     onImageUpload: values => {
       console.log(`onImageUpload with id (${values.id}) and file name (${values.file.name})`);
     },

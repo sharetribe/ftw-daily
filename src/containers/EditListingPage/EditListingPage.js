@@ -5,7 +5,7 @@ import { types } from '../../util/sdkLoader';
 import { NamedRedirect, PageLayout } from '../../components';
 import { EditListingForm } from '../../containers';
 import { getListingsById } from '../../ducks/sdk.duck';
-import { fetchCurrentUser } from '../../ducks/Auth.duck';
+import { fetchCurrentUser } from '../../ducks/user.duck';
 import { createSlug } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import {
@@ -87,8 +87,9 @@ export class EditListingPageComponent extends Component {
         ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
         : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
 
-      // eslint-disable-next-line no-console
-      console.log('current user:', currentUser);
+      const stripeConnected = currentUser && currentUser.attributes
+        ? currentUser.attributes.stripeConnected
+        : false;
 
       return (
         <PageLayout title={title}>
@@ -100,6 +101,7 @@ export class EditListingPageComponent extends Component {
             onSubmit={onSubmit(onCreateListing)}
             onUpdateImageOrder={onUpdateImageOrder}
             saveActionMsg={saveActionMsg}
+            stripeConnected={stripeConnected}
           />
         </PageLayout>
       );
@@ -147,7 +149,7 @@ const mapStateToProps = state => {
   return {
     page: state.EditListingPage,
     marketplaceData: state.data || {},
-    currentUser: state.Auth.currentUser,
+    currentUser: state.user.currentUser,
   };
 };
 

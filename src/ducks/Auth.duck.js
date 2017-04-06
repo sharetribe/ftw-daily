@@ -8,10 +8,6 @@ const authenticated = authInfo => authInfo.grantType === 'refresh_token';
 
 // ================ Action types ================ //
 
-export const USERS_ME_REQUEST = 'app/Auth/USERS_ME_REQUEST';
-export const USERS_ME_SUCCESS = 'app/Auth/USERS_ME_SUCCESS';
-export const USERS_ME_ERROR = 'app/Auth/USERS_ME_ERROR';
-
 export const AUTH_INFO_REQUEST = 'app/Auth/AUTH_INFO_REQUEST';
 export const AUTH_INFO_SUCCESS = 'app/Auth/AUTH_INFO_SUCCESS';
 export const AUTH_INFO_ERROR = 'app/Auth/AUTH_INFO_ERROR';
@@ -27,10 +23,8 @@ export const LOGOUT_ERROR = 'app/Auth/LOGOUT_ERROR';
 // ================ Reducer ================ //
 
 const initialState = {
-  currentUser: null,
   authInfoLoaded: false,
   isAuthenticated: false,
-  currentUserError: null,
   authInfoError: null,
   loginError: null,
   logoutError: null,
@@ -39,13 +33,6 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
-    case USERS_ME_REQUEST:
-      return { ...state, currentUserError: null };
-    case USERS_ME_SUCCESS:
-      return { ...state, currentUser: payload };
-    case USERS_ME_ERROR:
-      return { ...state, currentUserError: payload };
-
     case AUTH_INFO_REQUEST:
       return { ...state, authInfoError: null };
     case AUTH_INFO_SUCCESS:
@@ -72,19 +59,6 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 // ================ Action creators ================ //
-
-export const usersMeRequest = () => ({ type: USERS_ME_REQUEST });
-
-export const usersMeSuccess = user => ({
-  type: USERS_ME_SUCCESS,
-  payload: user,
-});
-
-export const usersMeError = e => ({
-  type: USERS_ME_ERROR,
-  payload: e,
-  error: true,
-});
 
 export const authInfo = () => ({ type: AUTH_INFO_REQUEST });
 export const authInfoSuccess = info => ({ type: AUTH_INFO_SUCCESS, payload: info });
@@ -162,20 +136,3 @@ export function* watchAuth(sdk) {
     }
   }
 }
-
-// ================ Thunks ================ //
-
-export const fetchCurrentUser = () =>
-  (dispatch, getState, sdk) => {
-    dispatch(usersMeRequest());
-    return sdk.users
-      .me()
-      .then(response => {
-        dispatch(usersMeSuccess(response.data.data));
-        return response;
-      })
-      .catch(e => {
-        dispatch(usersMeError(e));
-        throw e;
-      });
-  };
