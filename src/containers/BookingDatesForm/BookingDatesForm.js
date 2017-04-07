@@ -58,11 +58,11 @@ export const BookingDatesFormComponent = props => {
     submitting,
   } = props;
   const placeholderText = intl.formatMessage({ id: 'BookingDatesForm.placeholder' });
-  const bookingStartLabel = <FormattedMessage id="BookingDatesForm.bookingStartTitle" />;
-  const bookingEndLabel = <FormattedMessage id="BookingDatesForm.bookingEndTitle" />;
-  const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' })
+  const bookingStartLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingStartTitle'});
+  const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle'});
+  const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' });
 
-  // Choose start date starting from today to booking end date (if end date has been chosen)
+  // A day is outside range if it is between today and booking end date (if end date has been chosen)
   const isOutsideRangeStart = bookingEnd
     ? {
         isOutsideRange: day =>
@@ -71,7 +71,7 @@ export const BookingDatesFormComponent = props => {
       }
     : {};
 
-  // Choose end date starting from booking start date (or today if none is chosen)
+  // A day is outside range if it is after booking start date (or today if none is chosen)
   const startOfBookingEndRange = bookingStart ? moment(bookingStart) : moment();
   const isOutsideRangeEnd = bookingStart
     ? { isOutsideRange: day => !isInclusivelyAfterDay(day, startOfBookingEndRange) }
@@ -86,7 +86,7 @@ export const BookingDatesFormComponent = props => {
       />
     : null;
 
-  const notValid = !(bookingStart && bookingEnd);
+  const invalid = !(bookingStart && bookingEnd);
 
   return (
     <form className={className} onSubmit={handleSubmit}>
@@ -112,7 +112,7 @@ export const BookingDatesFormComponent = props => {
       <p className={css.smallPrint}>
         <FormattedMessage id="BookingDatesForm.youWontBeChargedInfo" />
       </p>
-      <Button type="submit" disabled={pristine || submitting || notValid}>
+      <Button type="submit" disabled={pristine || submitting || invalid}>
         <FormattedMessage id="BookingDatesForm.requestToBook" />
       </Button>
     </form>
@@ -134,9 +134,7 @@ const formName = 'bookingDates';
 // See: http://redux-form.com/6.6.1/examples/selectingFormValues/
 const selector = formValueSelector(formName);
 const mapStateToProps = state => {
-  const bookingStart = selector(state, 'bookingStart');
-  const bookingEnd = selector(state, 'bookingEnd');
-  return { bookingStart, bookingEnd };
+  return selector(state, 'bookingStart', 'bookingEnd');
 };
 
 const BookingDatesForm = compose(

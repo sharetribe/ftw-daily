@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export, no-console */
+/* eslint-disable no-console */
 import React, { PropTypes } from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import moment from 'moment';

@@ -53,7 +53,7 @@ export class ListingPageComponent extends Component {
 
     this.setState({ isBookingModalOpenOnMobile: false });
     // eslint-disable-next-line no-console
-    console.log('Submitting with bookedDates', values, ' and listing price', currentListing.attributes.price);
+    console.log('Submitting: bookedDates', values, 'and price', currentListing.attributes.price);
   }
 
   togglePageClassNames(className, addClass = true) {

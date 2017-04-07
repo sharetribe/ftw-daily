@@ -1,4 +1,4 @@
-/* eslint-disable no-console, import/prefer-default-export */
+/* eslint-disable no-console */
 import EditListingForm from './EditListingForm';
 
 export const Empty = {

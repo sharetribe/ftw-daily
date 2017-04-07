@@ -25,17 +25,15 @@ const BookingInfoComponent = props => {
         }}
       />
     : '';
-  const dayCount = hasSelectedDays
-    ? moment(bookingEnd).diff(moment(bookingStart), 'days') + 1
-    : null;
-  const dayCountMessage = dayCount
-    ? <FormattedMessage id="BookingInfo.dayCount" values={{ count: dayCount }} />
+  const nightCount = hasSelectedDays ? moment(bookingEnd).diff(moment(bookingStart), 'days') : null;
+  const nightCountMessage = nightCount
+    ? <FormattedMessage id="BookingInfo.nightCount" values={{ count: nightCount }} />
     : null;
 
   const priceAsNumber = convertMoneyToNumber(unitPrice, config.currencyConfig.subUnitDivisor);
   const formattedPrice = intl.formatNumber(priceAsNumber, config.currencyConfig);
   const totalPriceAsNumber = hasSelectedDays
-    ? new Decimal(priceAsNumber).times(dayCount).toNumber()
+    ? new Decimal(priceAsNumber).times(nightCount).toNumber()
     : null;
   const formattedTotalPrice = hasSelectedDays
     ? intl.formatNumber(totalPriceAsNumber, config.currencyConfig)
@@ -58,7 +56,7 @@ const BookingInfoComponent = props => {
           {bookingPeriod}
         </div>
         <div className={css.bookedDatesCount}>
-          {dayCountMessage}
+          {nightCountMessage}
         </div>
       </div>
       <hr className={css.totalDivider} />

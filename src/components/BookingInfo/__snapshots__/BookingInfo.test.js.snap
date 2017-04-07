@@ -29,7 +29,7 @@ exports[`BookingInfo matches snapshot 1`] = `
     <div
       className={undefined}>
       <span>
-        3 days
+        2 days
       </span>
     </div>
   </div>
@@ -45,7 +45,7 @@ exports[`BookingInfo matches snapshot 1`] = `
     </div>
     <div
       className={undefined}>
-      $30.00
+      $20.00
     </div>
   </div>
 </div>

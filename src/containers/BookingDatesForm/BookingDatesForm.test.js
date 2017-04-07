@@ -1,7 +1,3 @@
-// TODO: renderdeep doesn't work due to
-// "Invariant Violation: getNodeFromInstance: Invalid argument."
-// refs and findDOMNode are not supported by react-test-renderer
-// (react-sortable-hoc uses them)
 import React from 'react';
 import { types } from '../../util/sdkLoader';
 import { renderShallow } from '../../util/test-helpers';
@@ -10,7 +6,7 @@ import { BookingDatesFormComponent } from './BookingDatesForm';
 
 const noop = () => null;
 
-describe('EditListingForm', () => {
+describe('BookingDatesForm', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
       <BookingDatesFormComponent

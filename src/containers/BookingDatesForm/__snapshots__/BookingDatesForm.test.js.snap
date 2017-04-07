@@ -1,14 +1,10 @@
-exports[`EditListingForm matches snapshot 1`] = `
+exports[`BookingDatesForm matches snapshot 1`] = `
 <form
   onSubmit={[Function]}>
   <Field
     component={[Function]}
     format={null}
-    labelMessage={
-      <FormattedMessage
-        id="BookingDatesForm.bookingStartTitle"
-        values={Object {}} />
-    }
+    labelMessage="BookingDatesForm.bookingStartTitle"
     name="bookingStart"
     placeholder="BookingDatesForm.placeholder"
     validate={
@@ -19,11 +15,7 @@ exports[`EditListingForm matches snapshot 1`] = `
   <Field
     component={[Function]}
     format={null}
-    labelMessage={
-      <FormattedMessage
-        id="BookingDatesForm.bookingEndTitle"
-        values={Object {}} />
-    }
+    labelMessage="BookingDatesForm.bookingEndTitle"
     name="bookingEnd"
     placeholder="BookingDatesForm.placeholder"
     validate={

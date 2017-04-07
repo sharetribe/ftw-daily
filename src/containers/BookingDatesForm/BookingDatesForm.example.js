@@ -1,4 +1,4 @@
-/* eslint-disable no-console, import/prefer-default-export */
+/* eslint-disable no-console */
 import { types } from '../../util/sdkLoader';
 import BookingDatesForm from './BookingDatesForm';
 

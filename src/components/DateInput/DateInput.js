@@ -3,9 +3,10 @@
  * Styles for SingleDatePicker can be found from 'public/reactDates.css'.
  * CSS modules can't handle global styles so they are currently added separately
  */
-import React, { PropTypes } from 'react';
-import moment from 'moment';
+import React, { Component, PropTypes } from 'react';
+import { intlShape, injectIntl } from 'react-intl';
 import { SingleDatePicker, isInclusivelyAfterDay } from 'react-dates';
+import moment from 'moment';
 
 const HORIZONTAL_ORIENTATION = 'horizontal';
 const ANCHOR_LEFT = 'left';
@@ -17,10 +18,10 @@ const defaultProps = {
 
   // input related props
   id: 'date',
-  placeholder: 'Date',
+  placeholder: null, // Handled inside component
   disabled: false,
   required: false,
-  screenReaderInputMessage: '',
+  screenReaderInputMessage: null, // Handled inside component
   showClearDate: false,
 
   // calendar presentation and interaction related props
@@ -51,12 +52,12 @@ const defaultProps = {
   displayFormat: () => moment.localeData().longDateFormat('L'),
   monthFormat: 'MMMM YYYY',
   phrases: {
-    closeDatePicker: 'Close',
-    clearDate: 'Clear Date',
+    closeDatePicker: null, // Handled inside component
+    clearDate: null, // Handled inside component
   },
 };
 
-class DateInput extends React.Component {
+class DateInputComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -84,10 +85,34 @@ class DateInput extends React.Component {
 
   render() {
     const { focused } = this.state;
-    // eslint-disable-next-line no-unused-vars
-    const { initialDate, onBlur, onChange, onFocus, value, ...datePickerProps } = this.props;
+    /* eslint-disable no-unused-vars */
+    const {
+      initialDate,
+      intl,
+      placeholder,
+      onBlur,
+      onChange,
+      onFocus,
+      phrases,
+      screenReaderInputMessage,
+      value,
+      ...datePickerProps
+    } = this.props;
+    /* eslint-enable no-unused-vars */
+
     const initialMoment = initialDate ? moment(initialDate) : null;
     const date = value instanceof Date ? moment(value) : initialMoment;
+
+    const placeholderText = placeholder ||
+      intl.formatMessage({ id: 'DateInput.defaultPlaceholder' });
+    const screenReaderInputText = screenReaderInputMessage ||
+      intl.formatMessage({ id: 'DateInput.screenReaderInputMessage' });
+    const closeDatePickerText = phrases.closeDatePicker
+      ? phrases.closeDatePicker
+      : intl.formatMessage({ id: 'DateInput.closeDatePicker' });
+    const clearDateText = phrases.clearDate
+      ? phrases.clearDate
+      : intl.formatMessage({ id: 'DateInput.clearDate' });
 
     return (
       <div>
@@ -98,24 +123,37 @@ class DateInput extends React.Component {
           focused={focused}
           onDateChange={this.onDateChange}
           onFocusChange={this.onFocusChange}
+          placeholder={placeholderText}
+          screenReaderInputMessage={screenReaderInputText}
+          phrases={{ closeDatePicker: closeDatePickerText, clearDate: clearDateText }}
         />
       </div>
     );
   }
 }
 
-DateInput.defaultProps = defaultProps;
+DateInputComponent.defaultProps = defaultProps;
 
-const { func, instanceOf, string } = PropTypes;
+const { func, instanceOf, shape, string } = PropTypes;
 
-DateInput.propTypes = {
+DateInputComponent.propTypes = {
   initialDate: instanceOf(Date),
+  intl: intlShape.isRequired,
   isOutsideRange: func,
   onChange: func.isRequired,
   onBlur: func.isRequired,
   onFocus: func.isRequired,
+  phrases: shape({
+    closeDatePicker: string,
+    clearDate: string,
+  }),
   placeholder: string,
+  screenReaderInputMessage: string,
   value: instanceOf(Date),
 };
+
+const DateInput = injectIntl(DateInputComponent);
+
+DateInput.displayName = 'DateInput';
 
 export default DateInput;

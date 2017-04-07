@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { types } from '../../util/sdkLoader';
 import BookingInfo from './BookingInfo';
 

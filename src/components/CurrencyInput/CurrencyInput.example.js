@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import React, { PropTypes } from 'react';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
