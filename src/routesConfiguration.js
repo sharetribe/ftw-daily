@@ -118,16 +118,8 @@ const routesConfiguration = [
   {
     path: '/checkout',
     exact: true,
-    name: 'CheckoutBasePage',
-    component: RedirectToLandingPage,
-    routes: [
-      {
-        path: '/checkout/:listingId',
-        exact: true,
-        name: 'CheckoutPage',
-        component: props => <CheckoutPage {...props} />,
-      },
-    ],
+    name: 'CheckoutPage',
+    component: props => <CheckoutPage {...props} />,
   },
   {
     path: '/login',

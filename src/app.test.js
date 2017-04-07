@@ -41,7 +41,7 @@ describe('Application', () => {
       '/s/map': 'Search page: map',
       '/l/listing-title-slug/1234': 'Loading listing data',
       '/u/1234': 'Profile page with display name: 1234',
-      '/checkout/1234': 'Book Banyan Studios (1234)',
+      '/checkout': 'Book Example listing',
       '/login': 'Authentication page: login tab',
       '/signup': 'Authentication page: signup tab',
       '/password': 'Request new password',
@@ -87,7 +87,7 @@ describe('Application', () => {
   });
 
   it('redirects to correct URLs', () => {
-    const urlRedirects = { '/l': '/', '/u': '/', '/checkout': '/' };
+    const urlRedirects = { '/l': '/', '/u': '/' };
     forEach(urlRedirects, (redirectPath, url) => {
       const context = {};
       const { body } = render(url, context);

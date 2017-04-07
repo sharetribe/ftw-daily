@@ -1,6 +1,9 @@
 {
   "AuthenticationPage.loginFailed": "The email and password you entered did not match our records. Please double-check and try again.",
   "AuthenticationPage.loginRequiredFor": "You must log in to view the page at",
+  "CheckoutPage.title": "Book {listingTitle}",
+  "CheckoutPage.paymentTitle": "Payment",
+  "CheckoutPage.paymentInfo": "You'll only be charged if your request is accepted by the provider.",
   "EditListingForm.bankAccountNumberRequired": "You need to add a bank account number.",
   "EditListingForm.descriptionRequired": "You need to add a description.",
   "EditListingForm.imageRequired": "You need to add at least one image.",

@@ -1,10 +1,13 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
-import CheckoutPage from './CheckoutPage';
+import { fakeIntl } from '../../util/test-data';
+import { CheckoutPageComponent } from './CheckoutPage';
 
 describe('CheckoutPage', () => {
   it('matches snapshot', () => {
-    const tree = renderShallow(<CheckoutPage params={{ listingId: 'some-listing-id' }} />);
+    const tree = renderShallow(
+      <CheckoutPageComponent intl={fakeIntl}/>
+    );
     expect(tree).toMatchSnapshot();
   });
 });
