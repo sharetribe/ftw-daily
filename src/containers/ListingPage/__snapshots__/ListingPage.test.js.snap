@@ -1,5 +1,6 @@
 exports[`ListingPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
+  className=""
   title="listing1 title 55">
   <div>
     <div>

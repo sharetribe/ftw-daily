@@ -99,7 +99,7 @@ export class ListingPageComponent extends Component {
       : null;
 
     const pageContent = (
-      <PageLayout title={`${title} ${formattedPrice}`} className={this.state.rootClasses}>
+      <PageLayout title={`${title} ${formattedPrice}`} className={this.state.pageClassNames}>
         <div className={css.listing}>
           <div className={css.header}>
             <h1 className={css.title}>{title}</h1>
