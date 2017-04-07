@@ -19,7 +19,7 @@ const defaultProps = {
   id: 'date',
   placeholder: 'Date',
   disabled: false,
-  required: true,
+  required: false,
   screenReaderInputMessage: '',
   showClearDate: false,
 

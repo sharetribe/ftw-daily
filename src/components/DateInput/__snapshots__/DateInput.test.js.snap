@@ -20,7 +20,7 @@ exports[`DateInput matches snapshot 1`] = `
             onKeyDown={[Function]}
             placeholder="Date"
             readOnly={false}
-            required={true}
+            required={false}
             type="text"
             value="" />
           
