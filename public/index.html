@@ -11,9 +11,18 @@
   <body>
     <div id="root"><!--!body--></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIhL8ykNE8WcPihRdpkL33TXng-0SYDr0&libraries=places"></script>
-    <!-- Stripe script should be on every page, not just the pages that use the API:
-         https://stripe.com/docs/stripe.js#including-stripejs -->
+    <!--
+         Stripe script should be on every page, not just the pages that
+         use the API:
+
+         https://stripe.com/docs/stripe.js#including-stripejs
+
+         We need both v2 and v3. v2 is used for creating the bank
+         account token for providers, and v3 is used for getting
+         the payment token using Stripe elements.
+       -->
     <script src="https://js.stripe.com/v2/"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <!--!preloadedStateScript-->
   </body>
 </html>

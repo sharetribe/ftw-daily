@@ -22,6 +22,7 @@ import * as LoginForm from './containers/LoginForm/LoginForm.example';
 import * as PasswordForgottenForm
   from './containers/PasswordForgottenForm/PasswordForgottenForm.example';
 import * as SignUpForm from './containers/SignUpForm/SignUpForm.example';
+import * as StripePaymentForm from './containers/StripePaymentForm/StripePaymentForm.example';
 
 export {
   AddImages,
@@ -41,4 +42,5 @@ export {
   PasswordForgottenForm,
   SignUpForm,
   StripeBankAccountToken,
+  StripePaymentForm,
 };
