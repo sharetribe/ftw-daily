@@ -1,4 +1,9 @@
-.card {}
+.card {
+  border: 1px solid #979797;
+  padding: 15px 18px 0 18px;
+  height: 50px;
+  width: 100%;
+}
 
 .submitButton {
   margin-top: 1rem;

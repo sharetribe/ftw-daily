@@ -41,6 +41,15 @@ const stripeErrorTranslation = (intl, stripeError) => {
   });
 };
 
+const cardStyles = {
+  base: {
+    fontFamily: '"Chalkboard", "Comic Sans MS", sans-serif',
+    color: '#4A4A4A',
+    fontSize: '16px',
+    letterSpacing: '-0.4px',
+  },
+};
+
 /**
  * Payment form that asks for credit card info using Stripe Elements.
  *
@@ -63,13 +72,14 @@ class StripePaymentForm extends Component {
     }
     this.stripe = window.Stripe(config.stripe.publishableKey);
     const elements = this.stripe.elements();
-    this.card = elements.create('card');
+    this.card = elements.create('card', { style: cardStyles });
     this.card.mount(this.cardContainer);
     this.card.addEventListener('change', this.handleCardValueChange);
   }
   componentWillUnmount() {
     if (this.card) {
       this.card.removeEventListener('change', this.handleCardValueChange);
+      this.card.unmount();
     }
   }
   handleCardValueChange(event) {
@@ -118,9 +128,8 @@ class StripePaymentForm extends Component {
     const allowSubmit = !this.state.submitting && this.state.cardValueValid;
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor={css.card} />
         <div
-          id={css.card}
+          className={css.card}
           ref={el => {
             this.cardContainer = el;
           }}
