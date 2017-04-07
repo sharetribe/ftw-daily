@@ -7,7 +7,7 @@ import { required } from '../../util/validators';
 import DateInput from './DateInput';
 import css from './DateInput.example.css';
 
-const EnhancedDateInput = (props) => {
+const EnhancedDateInput = props => {
   const { input, placeholder, meta } = props;
   const { onBlur, onChange, onFocus, value } = input;
   const { touched, error } = meta;
@@ -38,8 +38,16 @@ const FormComponent = props => {
   const { handleSubmit, pristine, submitting, dateInputProps } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="bookingStart" component={EnhancedDateInput} format={null} {...dateInputProps} validate={[required('Required')]} />
-      <Button type="submit" disabled={pristine || submitting} className={css.submitBtn}>Select</Button>
+      <Field
+        name="bookingStart"
+        component={EnhancedDateInput}
+        format={null}
+        {...dateInputProps}
+        validate={[required('Required')]}
+      />
+      <Button type="submit" disabled={pristine || submitting} className={css.submitBtn}>
+        Select
+      </Button>
     </form>
   );
 };
@@ -50,7 +58,6 @@ const Form = reduxForm({
   form: 'Styleguide.DateInput.Form',
 })(FormComponent);
 
-
 export const Empty = {
   component: Form,
   props: {
@@ -60,7 +67,7 @@ export const Empty = {
       onFocus: () => console.log('onFocus called from DateInput props.'),
       placeholder: 'Select important date',
     },
-    onSubmit: (v) => {
+    onSubmit: v => {
       console.log('Submitting a form with values:', v);
     },
   },

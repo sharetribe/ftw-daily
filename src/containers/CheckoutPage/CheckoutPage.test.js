@@ -5,9 +5,7 @@ import { CheckoutPageComponent } from './CheckoutPage';
 
 describe('CheckoutPage', () => {
   it('matches snapshot', () => {
-    const tree = renderShallow(
-      <CheckoutPageComponent intl={fakeIntl}/>
-    );
+    const tree = renderShallow(<CheckoutPageComponent intl={fakeIntl} />);
     expect(tree).toMatchSnapshot();
   });
 });

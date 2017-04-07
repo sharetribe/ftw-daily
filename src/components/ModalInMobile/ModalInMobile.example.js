@@ -7,7 +7,7 @@ import css from './ModalInMobile.example.css';
 const togglePageClassNames = (className, addClass = true) => {
   // We are just checking the value for now
   console.log('Toggling ModalInMobile - currently:', className, addClass);
-}
+};
 
 class ModalInMobileWrapper extends Component {
   constructor(props) {
@@ -27,7 +27,8 @@ class ModalInMobileWrapper extends Component {
         <ModalInMobile
           {...this.props}
           isModalOpenOnMobile={this.state.isOpen}
-          togglePageClassNames={togglePageClassNames}>
+          togglePageClassNames={togglePageClassNames}
+        >
           Some content inside ModalInMobile component
         </ModalInMobile>
         <Button onClick={this.handleOpen} className={css.visibleOnMobileLayout}>Open</Button>

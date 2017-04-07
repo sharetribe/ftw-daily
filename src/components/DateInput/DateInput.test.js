@@ -10,7 +10,7 @@ describe('DateInput', () => {
       onBlur: noop,
       onChange: noop,
       onFocus: noop,
-    }
+    };
     const tree = renderDeep(<DateInput {...props} />);
     expect(tree).toMatchSnapshot();
   });
