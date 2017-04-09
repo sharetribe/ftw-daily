@@ -1,22 +1,52 @@
 exports[`BookingInfo matches snapshot 1`] = `
-<dl>
-  <dt>
-    Price per day:
-  </dt>
-  <dd>
-    55\\\\u20AC
-  </dd>
-  <dt>
-    Booking period:
-  </dt>
-  <dd>
-    Jan 2nd - Jan 4th, 3 days
-  </dd>
-  <dt>
-    Total
-  </dt>
-  <dd>
-    165\\u20AC
-  </dd>
-</dl>
+<div
+  className="">
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Price per day:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      $10.00
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Booking period:
+      </span>
+      <br />
+      <span>
+        04/14/2017 - 04/16/2017
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      <span>
+        2 days
+      </span>
+    </div>
+  </div>
+  <hr
+    className={undefined} />
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Total:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      $20.00
+    </div>
+  </div>
+</div>
 `;

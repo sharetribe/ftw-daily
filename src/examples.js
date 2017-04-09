@@ -13,6 +13,7 @@ import * as StripeBankAccountToken
   from './components/StripeBankAccountToken/StripeBankAccountToken.example';
 
 // containers
+import * as BookingDatesForm from './containers/BookingDatesForm/BookingDatesForm.example';
 import * as ChangeAccountPasswordForm
   from './containers/ChangeAccountPasswordForm/ChangeAccountPasswordForm.example';
 import * as ChangePasswordForm from './containers/ChangePasswordForm/ChangePasswordForm.example';
@@ -26,6 +27,7 @@ import * as StripePaymentForm from './containers/StripePaymentForm/StripePayment
 
 export {
   AddImages,
+  BookingDatesForm,
   BookingInfo,
   ChangeAccountPasswordForm,
   ChangePasswordForm,

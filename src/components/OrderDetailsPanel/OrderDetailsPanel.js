@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { BookingInfo, NamedLink } from '../../components';
+import { NamedLink } from '../../components';
 
 import css from './OrderDetailsPanel.css';
 
@@ -24,14 +24,13 @@ ContactInfo.propTypes = {
 };
 
 const OrderDetailsPanel = props => {
-  const { className, orderId, title, imageUrl, info, contact, confirmationCode } = props;
+  const { className, orderId, title, imageUrl, contact, confirmationCode } = props;
   return (
     <div className={className}>
       <img alt={title} src={imageUrl} style={{ width: '100%' }} />
       <h3>{title}</h3>
       <ContactInfo {...contact} />
       <p>Confirmation code {confirmationCode}</p>
-      <BookingInfo {...info} />
       <p>Cancel booking</p>
       <NamedLink className={css.buttonLink} name="OrderDiscussionPage" params={{ id: orderId }}>
         You have a new message!
@@ -47,7 +46,6 @@ OrderDetailsPanel.propTypes = {
   orderId: oneOfType([string, number]).isRequired,
   title: string.isRequired,
   imageUrl: string.isRequired,
-  info: object.isRequired,
   contact: object.isRequired,
   confirmationCode: string.isRequired,
 };

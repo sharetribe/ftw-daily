@@ -20,11 +20,6 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
     Confirmation code 
     some-test-confirmation-code
   </p>
-  <BookingInfo
-    bookingDuration="some booking duration"
-    bookingPeriod="some booking period"
-    pricePerDay="10$"
-    total="100$" />
   <p>
     Cancel booking
   </p>

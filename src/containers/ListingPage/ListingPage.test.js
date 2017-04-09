@@ -11,14 +11,19 @@ const { UUID } = types;
 describe('ListingPage', () => {
   it('matches snapshot', () => {
     const marketplaceData = { entities: { listing: { listing1: createListing('listing1') } } };
-    const tree = renderShallow(
-      <ListingPageComponent
-        params={{ slug: 'listing1-title', id: 'listing1' }}
-        marketplaceData={marketplaceData}
-        intl={fakeIntl}
-        onLoadListing={l => l}
-      />
-    );
+    const props = {
+      flattenedRoutes: [],
+      location: { search: '' },
+      history: {
+        push: () => console.log('HistoryPush called'),
+      },
+      params: { slug: 'listing1-title', id: 'listing1' },
+      marketplaceData,
+      intl: fakeIntl,
+      onLoadListing: () => {},
+    };
+
+    const tree = renderShallow(<ListingPageComponent {...props} />);
     expect(tree).toMatchSnapshot();
   });
 

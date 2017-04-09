@@ -6,6 +6,7 @@ import config from '../../config';
 import { types } from '../../util/sdkLoader';
 import { convertMoneyToNumber } from '../../util/currency';
 import { Button, Map, ModalInMobile, PageLayout } from '../../components';
+import { BookingDatesForm } from '../../containers';
 import { getListingsById } from '../../ducks/sdk.duck';
 import { showListing } from './ListingPage.duck';
 import css from './ListingPage.css';
@@ -39,7 +40,20 @@ export class ListingPageComponent extends Component {
       isBookingModalOpenOnMobile: tab && tab === 'book',
       pageClassNames: '',
     };
+
+    this.onSubmit = this.onSubmit.bind(this);
     this.togglePageClassNames = this.togglePageClassNames.bind(this);
+  }
+
+  onSubmit(values) {
+    const { marketplaceData, params } = this.props;
+    const id = new UUID(params.id);
+    const listingsById = getListingsById(marketplaceData, [id]);
+    const currentListing = listingsById.length > 0 ? listingsById[0] : null;
+
+    this.setState({ isBookingModalOpenOnMobile: false });
+    // eslint-disable-next-line no-console
+    console.log('Submitting: bookedDates', values, 'and price', currentListing.attributes.price);
   }
 
   togglePageClassNames(className, addClass = true) {
@@ -116,10 +130,10 @@ export class ListingPageComponent extends Component {
             title={bookBtnMessage}
             togglePageClassNames={this.togglePageClassNames}
           >
-            <span>ModalInMobile content</span>
+            <BookingDatesForm className={css.bookingForm} onSubmit={this.onSubmit} price={price} />
           </ModalInMobile>
           {map ? <div className={css.map}>{map}</div> : null}
-          <div className={css.openDatePickerForm}>
+          <div className={css.openBookingForm}>
             <Button onClick={() => this.setState({ isBookingModalOpenOnMobile: true })}>
               {bookBtnMessage}
             </Button>

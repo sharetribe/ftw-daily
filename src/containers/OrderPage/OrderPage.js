@@ -14,12 +14,6 @@ const OrderPage = props => {
     title,
     orderId,
     imageUrl: 'http://placehold.it/750x470',
-    info: {
-      pricePerDay: '55\u20AC',
-      bookingPeriod: 'Jan 2nd - Jan 4th',
-      bookingDuration: '3 days',
-      total: '165\u20AC',
-    },
     contact: {
       addressLine1: '350 5th Avenue',
       addressLine2: 'New York, NY 10118',

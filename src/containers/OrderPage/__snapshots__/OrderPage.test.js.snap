@@ -35,14 +35,6 @@ exports[`OrderPage matches snapshot 1`] = `
       }
     }
     imageUrl="http://placehold.it/750x470"
-    info={
-      Object {
-        "bookingDuration": "3 days",
-        "bookingPeriod": "Jan 2nd - Jan 4th",
-        "pricePerDay": "55€",
-        "total": "165€",
-      }
-    }
     orderId={1234}
     title="Banyan Studios" />
   <OrderDiscussionPanel

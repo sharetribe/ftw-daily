@@ -1,4 +1,4 @@
-/* eslint-disable no-console, import/prefer-default-export */
+/* eslint-disable no-console */
 import ChangePasswordForm from './ChangePasswordForm';
 
 export const Empty = {

@@ -1,4 +1,5 @@
 import AuthenticationPage from './AuthenticationPage/AuthenticationPage';
+import BookingDatesForm from './BookingDatesForm/BookingDatesForm';
 import ChangeAccountPasswordForm from './ChangeAccountPasswordForm/ChangeAccountPasswordForm';
 import ChangePasswordForm from './ChangePasswordForm/ChangePasswordForm';
 import CheckoutPage from './CheckoutPage/CheckoutPage';
@@ -29,6 +30,7 @@ import Topbar from './Topbar/Topbar';
 
 export {
   AuthenticationPage,
+  BookingDatesForm,
   ChangeAccountPasswordForm,
   ChangePasswordForm,
   CheckoutPage,

@@ -1,4 +1,4 @@
-/* eslint-disable no-console, import/prefer-default-export */
+/* eslint-disable no-console */
 import React, { Component } from 'react';
 import { Button } from '../../components';
 import ModalInMobile from './ModalInMobile';

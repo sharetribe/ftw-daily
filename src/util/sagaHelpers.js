@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export  */
-
 // async actions use request - success / failure pattern
 const REQUEST = 'REQUEST';
 const SUCCESS = 'SUCCESS';
@@ -15,4 +13,3 @@ export const createRequestTypes = base =>
     },
     {}
   );
-/* eslint-enable import/prefer-default-export */

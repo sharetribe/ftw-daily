@@ -24,9 +24,14 @@ exports[`ListingPage matches snapshot 1`] = `
       showAsModalMaxWidth={2500}
       title="ListingPage.ctaButtonMessage"
       togglePageClassNames={[Function]}>
-      <span>
-        ModalInMobile content
-      </span>
+      <BookingDatesForm
+        onSubmit={[Function]}
+        price={
+          Money {
+            "amount": 5500,
+            "currency": "USD",
+          }
+        } />
     </InjectIntl(ModalInMobileComponent)>
     <div>
       <Map

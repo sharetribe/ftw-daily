@@ -2,6 +2,7 @@ import AddImages from './AddImages/AddImages';
 import BookingInfo from './BookingInfo/BookingInfo';
 import Button from './Button/Button';
 import CurrencyInput from './CurrencyInput/CurrencyInput';
+import DateInput from './DateInput/DateInput';
 import Discussion from './Discussion/Discussion';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
@@ -30,6 +31,7 @@ export {
   BookingInfo,
   Button,
   CurrencyInput,
+  DateInput,
   Discussion,
   FilterPanel,
   HeroSection,

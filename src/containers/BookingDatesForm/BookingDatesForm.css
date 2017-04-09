@@ -1,0 +1,23 @@
+.receipt {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.totalDivider {
+  width: 100%;
+}
+
+.totalPrice {
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.smallPrint {
+  font-size: 12px;
+  text-align: center;
+}

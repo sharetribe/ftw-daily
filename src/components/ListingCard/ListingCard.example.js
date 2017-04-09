@@ -1,4 +1,4 @@
-/* eslint-disable no-console, import/prefer-default-export */
+/* eslint-disable no-console */
 import React from 'react';
 import ListingCard from './ListingCard';
 import { createUser, createListing, currencyConfig, fakeIntl } from '../../util/test-data';

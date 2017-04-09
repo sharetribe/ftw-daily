@@ -67,7 +67,11 @@
   background-color: #eee;
 }
 
-.openDatePickerForm {
+.bookingForm {
+  margin: 0 1rem;
+}
+
+.openBookingForm {
   position: fixed;
   bottom: 0;
   left: 0;
