@@ -120,6 +120,7 @@ const routesConfiguration = [
     auth: true,
     exact: true,
     name: 'CheckoutPage',
+    setInitialValues: initialValues => CheckoutPage.setInitialValues(initialValues),
     component: props => <CheckoutPage {...props} />,
   },
   {

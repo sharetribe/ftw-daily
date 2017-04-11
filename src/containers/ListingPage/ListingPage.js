@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { union, without } from 'lodash';
 import config from '../../config';
+import * as propTypes from '../../util/propTypes';
 import { types } from '../../util/sdkLoader';
 import { convertMoneyToNumber } from '../../util/currency';
+import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import { Button, Map, ModalInMobile, PageLayout } from '../../components';
 import { BookingDatesForm } from '../../containers';
 import { getListingsById } from '../../ducks/sdk.duck';
@@ -15,6 +18,12 @@ import css from './ListingPage.css';
 const MODAL_BREAKPOINT = 2500;
 
 const { UUID } = types;
+
+const denormaliseListing = (marketplaceData, params) => {
+  const id = new UUID(params.id);
+  const listingsById = getListingsById(marketplaceData, [id]);
+  return listingsById.length > 0 ? listingsById[0] : null;
+};
 
 const priceData = (price, currencyConfig, intl) => {
   if (price && price.currency === currencyConfig.currency) {
@@ -46,14 +55,17 @@ export class ListingPageComponent extends Component {
   }
 
   onSubmit(values) {
-    const { marketplaceData, params } = this.props;
-    const id = new UUID(params.id);
-    const listingsById = getListingsById(marketplaceData, [id]);
-    const currentListing = listingsById.length > 0 ? listingsById[0] : null;
+    const { dispatch, flattenedRoutes, history, marketplaceData, params } = this.props;
+    const listing = denormaliseListing(marketplaceData, params);
 
     this.setState({ isBookingModalOpenOnMobile: false });
-    // eslint-disable-next-line no-console
-    console.log('Submitting: bookedDates', values, 'and price', currentListing.attributes.price);
+
+    // Customize checkout page state with current listing and selected bookingDates
+    const { setInitialValues } = findRouteByRouteName('CheckoutPage', flattenedRoutes);
+    dispatch(setInitialValues({ listing, bookingDates: values }));
+
+    // Redirect to CheckoutPage
+    history.push(createResourceLocatorString('CheckoutPage', flattenedRoutes, {}, {}));
   }
 
   togglePageClassNames(className, addClass = true) {
@@ -70,9 +82,7 @@ export class ListingPageComponent extends Component {
   render() {
     const { params, marketplaceData, showListingError, intl } = this.props;
     const currencyConfig = config.currencyConfig;
-    const id = new UUID(params.id);
-    const listingsById = getListingsById(marketplaceData, [id]);
-    const currentListing = listingsById.length > 0 ? listingsById[0] : null;
+    const currentListing = denormaliseListing(marketplaceData, params);
 
     const attributes = currentListing ? currentListing.attributes : {};
     const {
@@ -158,9 +168,17 @@ ListingPageComponent.defaultProps = {
   tab: 'listing',
 };
 
-const { instanceOf, object, oneOf, shape, string } = PropTypes;
+const { arrayOf, func, instanceOf, object, oneOf, shape, string } = PropTypes;
 
 ListingPageComponent.propTypes = {
+  // from connect
+  dispatch: func.isRequired,
+  flattenedRoutes: arrayOf(propTypes.route).isRequired,
+  // from withRouter
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
+  // from injectIntl
   intl: intlShape.isRequired,
   marketplaceData: object.isRequired,
   params: shape({
@@ -176,7 +194,7 @@ const mapStateToProps = state => ({
   showListingError: state.ListingPage.showListingError,
 });
 
-const ListingPage = connect(mapStateToProps)(injectIntl(ListingPageComponent));
+const ListingPage = connect(mapStateToProps)(withRouter(injectIntl(ListingPageComponent)));
 
 ListingPage.loadData = params => {
   const id = new UUID(params.id);
