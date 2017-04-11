@@ -6,6 +6,7 @@ import CurrencyInput from './CurrencyInput/CurrencyInput';
 import DateInput from './DateInput/DateInput';
 import Discussion from './Discussion/Discussion';
 import FilterPanel from './FilterPanel/FilterPanel';
+import H1 from './H1/H1';
 import HeroSection from './HeroSection/HeroSection';
 import Input from './Input/Input';
 import LabeledField from './LabeledField/LabeledField';
@@ -36,6 +37,7 @@ export {
   DateInput,
   Discussion,
   FilterPanel,
+  H1,
   HeroSection,
   Input,
   LabeledField,
