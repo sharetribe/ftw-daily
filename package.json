@@ -33,7 +33,7 @@
     "redux-thunk": "^2.2.0",
     "sanitize.css": "^5.0.0",
     "sharetribe-scripts": "0.9.2",
-    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#d034401c335b115d41f283698d779d019906a419",
+    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#ef7ace53d1a1008db8f8352559f39529ed6eef2e",
     "source-map-support": "^0.4.14",
     "url": "^0.11.0"
   },
