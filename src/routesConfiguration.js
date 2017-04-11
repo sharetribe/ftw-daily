@@ -117,6 +117,7 @@ const routesConfiguration = [
   },
   {
     path: '/checkout',
+    auth: true,
     exact: true,
     name: 'CheckoutPage',
     component: props => <CheckoutPage {...props} />,
