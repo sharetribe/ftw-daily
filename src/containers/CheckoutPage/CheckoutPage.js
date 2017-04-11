@@ -3,28 +3,20 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
-import { types } from '../../util/sdkLoader';
 import { pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
-import { BookingInfo, PageLayout } from '../../components';
+import { AuthorInfo, BookingInfo, NamedRedirect, PageLayout } from '../../components';
 import { StripePaymentForm } from '../../containers';
 import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
 
 import css from './CheckoutPage.css';
 
-const { UUID, LatLng } = types;
-
-const currentListing = {
-  id: new UUID('927a30a2-3a69-4b0d-9c2e-a41744488703'),
-  type: 'listing',
-  attributes: {
-    title: 'Example listing',
-    description: 'Listing description here.',
-    address: 'Helsinki, Finland',
-    geolocation: new LatLng(60.16985569999999, 24.93837899999994),
-  },
-};
+const ensureListingProperties = (listing) => {
+  const empty = { id: null, type: 'listing', attributes: {}, author: {}, images: [] };
+  // assume own properties: id, type, attributes etc.
+  return { ...empty, ...listing };
+}
 
 export class CheckoutPageComponent extends Component {
   constructor(props) {
@@ -38,12 +30,9 @@ export class CheckoutPageComponent extends Component {
       return;
     }
     this.setState({ submitting: true });
-    const { bookingDates, history, flattenedRoutes, sendOrderRequest } = this.props;
-    const params = {
-      listingId: currentListing.id,
-      cardToken,
-      ...bookingDates,
-    };
+    const { bookingDates, flattenedRoutes, history, sendOrderRequest, listing } = this.props;
+    const params = { listingId: listing.id, cardToken, ...bookingDates };
+
     sendOrderRequest(params)
       .then(orderId => {
         this.setState({ submitting: false });
@@ -59,8 +48,15 @@ export class CheckoutPageComponent extends Component {
 
   render() {
     const { bookingDates, initiateOrderError, intl, listing } = this.props;
-    const { bookingStart, bookingEnd } = bookingDates;
-    const price = listing.attributes.price;
+    const { bookingStart, bookingEnd } = bookingDates || {};
+    const currentListing = ensureListingProperties(listing);
+    const price = currentListing.attributes.price;
+
+    if (!listing || !price) {
+      // eslint-disable-next-line no-console
+      console.error(`Listing price is undefined for listing (${currentListing.id}). Redirecting to SearchPage.`);
+      return <NamedRedirect name="SearchPage" />;
+    }
 
     const title = intl.formatMessage(
       {
@@ -80,9 +76,7 @@ export class CheckoutPageComponent extends Component {
     return (
       <PageLayout title={title}>
         <h1 className={css.title}>{title}</h1>
-        <div className={css.authorContainer}>
-          Author avatar and stuff
-        </div>
+        <AuthorInfo author={currentListing.author} className={css.authorContainer} />
         <BookingInfo
           className={css.receipt}
           bookingStart={bookingStart}

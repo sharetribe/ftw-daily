@@ -4,9 +4,24 @@ exports[`CheckoutPage matches snapshot 1`] = `
   <h1>
     CheckoutPage.title
   </h1>
-  <div>
-    Author avatar and stuff
-  </div>
+  <AuthorInfo
+    author={
+      Object {
+        "attributes": Object {
+          "email": "author@example.com",
+          "profile": Object {
+            "firstName": "author first name",
+            "lastName": "author last name",
+            "slug": "author-slug",
+          },
+        },
+        "id": UUID {
+          "uuid": "author",
+        },
+        "type": "user",
+      }
+    }
+    className={null} />
   <BookingInfo
     bookingEnd={2017-04-16T00:00:00.000Z}
     bookingStart={2017-04-14T00:00:00.000Z}
