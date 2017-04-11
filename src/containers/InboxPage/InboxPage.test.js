@@ -1,10 +1,15 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
-import InboxPage from './InboxPage';
+import { fakeIntl } from '../../util/test-data';
+import { InboxPageComponent } from './InboxPage';
 
 describe('InboxPage', () => {
   it('matches snapshot', () => {
-    const tree = renderShallow(<InboxPage filter="orders" />);
+    const props = {
+      tab: 'orders',
+      intl: fakeIntl,
+    };
+    const tree = renderShallow(<InboxPageComponent {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });
