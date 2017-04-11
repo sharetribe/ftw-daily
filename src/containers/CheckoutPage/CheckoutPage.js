@@ -7,16 +7,13 @@ import { types } from '../../util/sdkLoader';
 import { pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
-import { PageLayout } from '../../components';
+import { BookingInfo, PageLayout } from '../../components';
 import { StripePaymentForm } from '../../containers';
 import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
 
 import css from './CheckoutPage.css';
 
 const { UUID, LatLng } = types;
-
-const bookingStart = new Date(2017, 4, 18);
-const bookingEnd = new Date(2017, 4, 19);
 
 const currentListing = {
   id: new UUID('927a30a2-3a69-4b0d-9c2e-a41744488703'),
@@ -28,7 +25,6 @@ const currentListing = {
     geolocation: new LatLng(60.16985569999999, 24.93837899999994),
   },
 };
-const imageUrl = 'https://placehold.it/750x470';
 
 export class CheckoutPageComponent extends Component {
   constructor(props) {
@@ -42,12 +38,11 @@ export class CheckoutPageComponent extends Component {
       return;
     }
     this.setState({ submitting: true });
-    const { sendOrderRequest, history, flattenedRoutes } = this.props;
+    const { bookingDates, history, flattenedRoutes, sendOrderRequest } = this.props;
     const params = {
       listingId: currentListing.id,
-      bookingStart,
-      bookingEnd,
       cardToken,
+      ...bookingDates,
     };
     sendOrderRequest(params)
       .then(orderId => {
@@ -63,7 +58,9 @@ export class CheckoutPageComponent extends Component {
   }
 
   render() {
-    const { initiateOrderError, intl } = this.props;
+    const { bookingDates, initiateOrderError, intl, listing } = this.props;
+    const { bookingStart, bookingEnd } = bookingDates;
+    const price = listing.attributes.price;
 
     const title = intl.formatMessage(
       {
@@ -83,7 +80,15 @@ export class CheckoutPageComponent extends Component {
     return (
       <PageLayout title={title}>
         <h1 className={css.title}>{title}</h1>
-        <img alt={currentListing.attributes.title} src={imageUrl} style={{ width: '100%' }} />
+        <div className={css.authorContainer}>
+          Author avatar and stuff
+        </div>
+        <BookingInfo
+          className={css.receipt}
+          bookingStart={bookingStart}
+          bookingEnd={bookingEnd}
+          unitPrice={price}
+        />
         <section className={css.payment}>
           {errorMessage}
           <h2 className={css.paymentTitle}>
@@ -99,12 +104,17 @@ export class CheckoutPageComponent extends Component {
   }
 }
 
-CheckoutPageComponent.defaultProps = { initiateOrderError: null };
+CheckoutPageComponent.defaultProps = { bookingDates: null, initiateOrderError: null, listing: null };
 
-const { func, shape, arrayOf, instanceOf } = PropTypes;
+const { arrayOf, func, instanceOf, shape } = PropTypes;
 
 CheckoutPageComponent.propTypes = {
+  bookingDates: shape({
+    bookingStart: instanceOf(Date).isRequired,
+    bookingEnd: instanceOf(Date).isRequired,
+  }),
   initiateOrderError: instanceOf(Error),
+  listing: propTypes.listing,
   sendOrderRequest: func.isRequired,
 
   // from injectIntl

@@ -9,10 +9,15 @@ const noop = () => null;
 describe('CheckoutPage', () => {
   it('matches snapshot', () => {
     const props = {
-      intl: fakeIntl,
-      sendOrderRequest: noop,
-      history: { push: noop },
+      bookingDates: {
+        bookingStart: new Date('Fri, 14 Apr 2017 GMT'),
+        bookingEnd: new Date('Sun, 16 Apr 2017 GMT'),
+      },
       flattenedRoutes: [],
+      history: { push: noop },
+      intl: fakeIntl,
+      listing: { ...createListing('listing1'), author: createUser('author') },
+      sendOrderRequest: noop,
     };
     const tree = renderShallow(<CheckoutPageComponent {...props} />);
     expect(tree).toMatchSnapshot();

@@ -114,6 +114,7 @@ export const listing = shape({
     description: string.isRequired,
     address: string.isRequired,
     geolocation: latlng.isRequired,
+    price: money,
   }),
   author: user,
   images: arrayOf(image),
