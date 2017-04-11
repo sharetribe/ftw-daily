@@ -24,6 +24,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
         values={Object {}} />
     </p>
     <InjectIntl(StripePaymentForm)
+      disableSubmit={false}
       onSubmit={[Function]} />
   </section>
 </Connect(withRouter(PageLayout))>

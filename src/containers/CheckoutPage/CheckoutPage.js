@@ -30,7 +30,7 @@ const listing = {
 };
 const imageUrl = 'https://placehold.it/750x470';
 
-class CheckoutPageComponent extends Component {
+export class CheckoutPageComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { submitting: false };
