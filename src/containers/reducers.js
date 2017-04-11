@@ -6,5 +6,6 @@
 import EditListingPage from './EditListingPage/EditListingPage.duck';
 import ListingPage from './ListingPage/ListingPage.duck';
 import SearchPage from './SearchPage/SearchPage.duck';
+import CheckoutPage from './CheckoutPage/CheckoutPage.duck';
 
-export { EditListingPage, ListingPage, SearchPage };
+export { EditListingPage, ListingPage, SearchPage, CheckoutPage };
