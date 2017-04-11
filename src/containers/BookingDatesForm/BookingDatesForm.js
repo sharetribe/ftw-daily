@@ -58,8 +58,8 @@ export const BookingDatesFormComponent = props => {
     submitting,
   } = props;
   const placeholderText = intl.formatMessage({ id: 'BookingDatesForm.placeholder' });
-  const bookingStartLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingStartTitle'});
-  const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle'});
+  const bookingStartLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingStartTitle' });
+  const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle' });
   const priceRequiredMessage = intl.formatMessage({ id: 'BookingDatesForm.priceRequired' });
   const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' });
 
@@ -73,7 +73,9 @@ export const BookingDatesFormComponent = props => {
     : {};
 
   // A day is outside range if it is after booking start date (or today if none is chosen)
-  const startOfBookingEndRange = bookingStart ? moment(bookingStart) : moment();
+  const startOfBookingEndRange = bookingStart
+    ? moment(bookingStart).add(1, 'days')
+    : moment().add(1, 'days');
   const isOutsideRangeEnd = bookingStart
     ? { isOutsideRange: day => !isInclusivelyAfterDay(day, startOfBookingEndRange) }
     : {};
