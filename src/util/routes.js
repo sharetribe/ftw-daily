@@ -83,3 +83,22 @@ export const createResourceLocatorString = (
   const path = pathByRouteName(routeName, flattenedRoutes, pathParams);
   return `${path}${includeSearchQuery}`;
 };
+
+/**
+ * Find component related to route name
+ * E.g. `const PageComponent = findComponentByRouteName('CheckoutPage', routes);`
+ * Then we can call static methods of given component:
+ * `dispatch(PageComponent.customPageState({ listing, bookingDates }));`
+ *
+ * @param {String} nameToFind - Route name
+ * @param {Array<{ route }>} flattenedRoutes - Route configuration as flattened array.
+ *
+ * @return {Route} - Route that matches the given route name.
+ */
+export const findRouteByRouteName = (nameToFind, flattenedRoutes) => {
+  const route = findRouteByName(nameToFind, flattenedRoutes);
+  if (!route) {
+    throw new Error(`Component "${nameToFind}" was not found.`);
+  }
+  return route;
+};

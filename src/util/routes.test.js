@@ -3,7 +3,7 @@ import { RoutesProvider } from '../components';
 import routesConfiguration from '../routesConfiguration';
 import { renderDeep, renderShallow } from './test-helpers';
 import * as propTypes from './propTypes';
-import { createResourceLocatorString, flattenRoutes } from './routes';
+import { createResourceLocatorString, flattenRoutes, findRouteByRouteName } from './routes';
 
 const { arrayOf } = PropTypes;
 
@@ -71,6 +71,21 @@ describe('util/routes.js', () => {
           { extrainfo: true }
         )
       ).toEqual('/l/nice-listing/1234?extrainfo=true');
+    });
+  });
+
+  describe('findRouteByRouteName', () => {
+    const flattenedRoutes = flattenRoutes(routesConfiguration);
+    it('should return CheckoutPage route', () => {
+      const foundRoute = findRouteByRouteName('CheckoutPage', flattenedRoutes);
+      expect(foundRoute.name).toEqual('CheckoutPage');
+      expect(typeof foundRoute.setInitialValues).toEqual('function');
+    });
+
+    it('should throw exception for non-existing route (BlaaBlaaPage)', () => {
+      expect(() => findRouteByRouteName('BlaaBlaaPage', flattenedRoutes)).toThrowError(
+        'Component "BlaaBlaaPage" was not found.'
+      );
     });
   });
 });

@@ -12,6 +12,7 @@ describe('ListingPage', () => {
   it('matches snapshot', () => {
     const marketplaceData = { entities: { listing: { listing1: createListing('listing1') } } };
     const props = {
+      dispatch: () => console.log('Dispatch called'),
       flattenedRoutes: [],
       location: { search: '' },
       history: {

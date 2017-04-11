@@ -9,7 +9,7 @@ import * as propTypes from '../../util/propTypes';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { PageLayout } from '../../components';
 import { StripePaymentForm } from '../../containers';
-import { initiateOrder } from './CheckoutPage.duck';
+import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
 
 import css from './CheckoutPage.css';
 
@@ -18,7 +18,7 @@ const { UUID, LatLng } = types;
 const bookingStart = new Date(2017, 4, 18);
 const bookingEnd = new Date(2017, 4, 19);
 
-const listing = {
+const currentListing = {
   id: new UUID('927a30a2-3a69-4b0d-9c2e-a41744488703'),
   type: 'listing',
   attributes: {
@@ -36,6 +36,7 @@ export class CheckoutPageComponent extends Component {
     this.state = { submitting: false };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleSubmit(cardToken) {
     if (this.state.submitting) {
       return;
@@ -43,7 +44,7 @@ export class CheckoutPageComponent extends Component {
     this.setState({ submitting: true });
     const { sendOrderRequest, history, flattenedRoutes } = this.props;
     const params = {
-      listingId: listing.id,
+      listingId: currentListing.id,
       bookingStart,
       bookingEnd,
       cardToken,
@@ -60,6 +61,7 @@ export class CheckoutPageComponent extends Component {
         this.setState({ submitting: false });
       });
   }
+
   render() {
     const { initiateOrderError, intl } = this.props;
 
@@ -68,7 +70,7 @@ export class CheckoutPageComponent extends Component {
         id: 'CheckoutPage.title',
       },
       {
-        listingTitle: listing.attributes.title,
+        listingTitle: currentListing.attributes.title,
       }
     );
 
@@ -81,7 +83,7 @@ export class CheckoutPageComponent extends Component {
     return (
       <PageLayout title={title}>
         <h1 className={css.title}>{title}</h1>
-        <img alt={listing.attributes.title} src={imageUrl} style={{ width: '100%' }} />
+        <img alt={currentListing.attributes.title} src={imageUrl} style={{ width: '100%' }} />
         <section className={css.payment}>
           {errorMessage}
           <h2 className={css.paymentTitle}>
@@ -117,9 +119,10 @@ CheckoutPageComponent.propTypes = {
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
 };
 
-const mapStateToProps = state => ({
-  initiateOrderError: state.CheckoutPage.initiateOrderError,
-});
+const mapStateToProps = state => {
+  const { initiateOrderError, listing, bookingDates } = state.CheckoutPage;
+  return { initiateOrderError, listing, bookingDates };
+};
 
 const mapDispatchToProps = dispatch => ({
   sendOrderRequest: params => dispatch(initiateOrder(params)),
@@ -131,5 +134,9 @@ const CheckoutPage = compose(
   withFlattenedRoutes,
   injectIntl
 )(CheckoutPageComponent);
+
+CheckoutPage.setInitialValues = initiallValues => setInitialValues(initiallValues);
+
+CheckoutPage.displayName = 'CheckoutPage';
 
 export default CheckoutPage;
