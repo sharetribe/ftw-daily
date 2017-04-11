@@ -12,6 +12,28 @@ export const createUser = id => ({
   },
 });
 
+// Create a user that conforms to the util/propTypes user schema
+export const createImage = id => ({
+  id: new UUID(id),
+  type: 'image',
+  attributes: {
+    sizes: [
+      {
+        name: 'square',
+        height: 408,
+        width: 408,
+        url: 'https://placehold.it/408x408',
+      },
+      {
+        name: 'square2x',
+        height: 816,
+        width: 816,
+        url: 'https://placehold.it/816x816',
+      },
+    ],
+  },
+});
+
 // Create a user that conforms to the util/propTypes listing schema
 export const createListing = id => ({
   id: new UUID(id),
