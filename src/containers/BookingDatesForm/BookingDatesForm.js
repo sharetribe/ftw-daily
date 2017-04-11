@@ -60,6 +60,7 @@ export const BookingDatesFormComponent = props => {
   const placeholderText = intl.formatMessage({ id: 'BookingDatesForm.placeholder' });
   const bookingStartLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingStartTitle'});
   const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle'});
+  const priceRequiredMessage = intl.formatMessage({ id: 'BookingDatesForm.priceRequired' });
   const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' });
 
   // A day is outside range if it is between today and booking end date (if end date has been chosen)
@@ -84,9 +85,9 @@ export const BookingDatesFormComponent = props => {
         bookingEnd={bookingEnd}
         unitPrice={price}
       />
-    : null;
+    : <p className={css.error}>{priceRequiredMessage}</p>;
 
-  const invalid = !(bookingStart && bookingEnd);
+  const invalid = !(bookingStart && bookingEnd && price);
 
   return (
     <form className={className} onSubmit={handleSubmit}>
@@ -119,10 +120,12 @@ export const BookingDatesFormComponent = props => {
   );
 };
 
+BookingDatesFormComponent.defaultProps = { price: null };
+
 BookingDatesFormComponent.propTypes = {
   ...formPropTypes,
   intl: intlShape.isRequired,
-  price: instanceOf(types.Money).isRequired,
+  price: instanceOf(types.Money),
 };
 
 const formName = 'bookingDates';
