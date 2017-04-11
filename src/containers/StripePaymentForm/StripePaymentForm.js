@@ -125,7 +125,8 @@ class StripePaymentForm extends Component {
       });
   }
   render() {
-    const allowSubmit = !this.state.submitting && this.state.cardValueValid;
+    const { disableSubmit } = this.props;
+    const submitDisabled = disableSubmit || this.state.submitting || !this.state.cardValueValid;
     return (
       <form onSubmit={this.handleSubmit}>
         <div
@@ -135,7 +136,7 @@ class StripePaymentForm extends Component {
           }}
         />
         {this.state.error ? <span style={{ color: 'red' }}>{this.state.error}</span> : null}
-        <Button className={css.submitButton} type="submit" disabled={!allowSubmit}>
+        <Button className={css.submitButton} type="submit" disabled={submitDisabled}>
           <FormattedMessage id="StripePaymentForm.submitPaymentInfo" />
         </Button>
       </form>
@@ -143,11 +144,14 @@ class StripePaymentForm extends Component {
   }
 }
 
-const { func } = PropTypes;
+StripePaymentForm.defaultProps = { disableSubmit: false };
+
+const { func, bool } = PropTypes;
 
 StripePaymentForm.propTypes = {
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
+  disableSubmit: bool,
 };
 
 export default injectIntl(StripePaymentForm);
