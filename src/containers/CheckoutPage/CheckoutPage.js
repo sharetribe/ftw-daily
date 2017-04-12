@@ -52,7 +52,7 @@ export class CheckoutPageComponent extends Component {
       .then(orderId => {
         this.setState({ submitting: false });
         const orderDetailsPath = pathByRouteName('OrderDetailsPage', flattenedRoutes, {
-          id: orderId,
+          id: orderId.uuid,
         });
         history.push(orderDetailsPath);
       })
