@@ -41,14 +41,14 @@ export class CheckoutPageComponent extends Component {
       return;
     }
     this.setState({ submitting: true });
-    const { dispatch, history, flattenedRoutes } = this.props;
+    const { sendOrderRequest, history, flattenedRoutes } = this.props;
     const params = {
       listingId: listing.id,
       bookingStart,
       bookingEnd,
       cardToken,
     };
-    dispatch(initiateOrder(params))
+    sendOrderRequest(params)
       .then(orderId => {
         this.setState({ submitting: false });
         const orderDetailsPath = pathByRouteName('OrderDetailsPage', flattenedRoutes, {
@@ -103,12 +103,10 @@ const { func, shape, arrayOf, instanceOf } = PropTypes;
 
 CheckoutPageComponent.propTypes = {
   initiateOrderError: instanceOf(Error),
+  sendOrderRequest: func.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
-
-  // from connect
-  dispatch: func.isRequired,
 
   // from withRouter
   history: shape({
@@ -123,8 +121,15 @@ const mapStateToProps = state => ({
   initiateOrderError: state.CheckoutPage.initiateOrderError,
 });
 
-const CheckoutPage = compose(withRouter, connect(mapStateToProps), withFlattenedRoutes, injectIntl)(
-  CheckoutPageComponent
-);
+const mapDispatchToProps = dispatch => ({
+  sendOrderRequest: params => dispatch(initiateOrder(params)),
+});
+
+const CheckoutPage = compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
+  withFlattenedRoutes,
+  injectIntl
+)(CheckoutPageComponent);
 
 export default CheckoutPage;

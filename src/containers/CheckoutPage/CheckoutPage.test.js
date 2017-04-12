@@ -9,7 +9,7 @@ describe('CheckoutPage', () => {
   it('matches snapshot', () => {
     const props = {
       intl: fakeIntl,
-      dispatch: noop,
+      sendOrderRequest: noop,
       history: { push: noop },
       flattenedRoutes: [],
     };
