@@ -1,37 +1,259 @@
 exports[`InboxPage matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
-  title="InboxPage.ordersTitle">
-  <H1
-    className={null}>
-    <FormattedMessage
-      id="InboxPage.title"
-      values={Object {}} />
-  </H1>
-  <nav>
-    <withFlattenedRoutes(withRouter(NamedLink))
-      name="InboxPage"
-      params={
-        Object {
-          "tab": "orders",
-        }
-      }>
-      <FormattedMessage
-        id="InboxPage.ordersTabTitle"
-        values={Object {}} />
-    </withFlattenedRoutes(withRouter(NamedLink))>
-    <withFlattenedRoutes(withRouter(NamedLink))
-      activeClassName={null}
-      name="InboxPage"
-      params={
-        Object {
-          "tab": "sales",
-        }
-      }>
-      <FormattedMessage
-        id="InboxPage.salesTabTitle"
-        values={Object {}} />
-    </withFlattenedRoutes(withRouter(NamedLink))>
-  </nav>
-  <ul />
-</Connect(withRouter(PageLayout))>
+<div
+  className="">
+  <div
+    className={undefined}>
+    <div>
+      <a
+        className="NamedLink_active"
+        href="/"
+        onClick={[Function]}
+        style={Object {}}>
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "&#127968;",
+            }
+          } />
+      </a>
+    </div>
+    <div
+      className={undefined}>
+      <a
+        className=""
+        href="/login"
+        onClick={[Function]}
+        style={Object {}}>
+        Login
+      </a>
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <h1
+      className="">
+      <span>
+        Inbox
+      </span>
+    </h1>
+    <nav>
+      <a
+        className=""
+        href="/inbox/orders"
+        onClick={[Function]}
+        style={Object {}}>
+        <span>
+          Guest
+        </span>
+      </a>
+      <a
+        className=""
+        href="/inbox/sales"
+        onClick={[Function]}
+        style={Object {}}>
+        <span>
+          Host
+        </span>
+      </a>
+    </nav>
+    <ul>
+      <li
+        className={undefined}>
+        <a
+          className=""
+          href="/order/order-1/details"
+          onClick={[Function]}
+          style={Object {}}>
+          <div
+            className={undefined}>
+            <img
+              alt="provider-user-id first name provider-user-id last name"
+              className={undefined}
+              src="https://placehold.it/44x44" />
+          </div>
+          <div
+            className={undefined}>
+            <div>
+              <span
+                className={undefined}>
+                provider-user-id first name provider-user-id last name
+              </span>
+              <span
+                className={undefined}>
+                2017-01-15
+              </span>
+            </div>
+            <div
+              className={undefined}>
+              InboxPage.statePending
+            </div>
+          </div>
+        </a>
+      </li>
+      <li
+        className={undefined}>
+        <a
+          className=""
+          href="/order/order-2/details"
+          onClick={[Function]}
+          style={Object {}}>
+          <div
+            className={undefined}>
+            <img
+              alt="provider-user-id first name provider-user-id last name"
+              className={undefined}
+              src="https://placehold.it/44x44" />
+          </div>
+          <div
+            className={undefined}>
+            <div>
+              <span
+                className={undefined}>
+                provider-user-id first name provider-user-id last name
+              </span>
+              <span
+                className={undefined}>
+                2016-01-15
+              </span>
+            </div>
+            <div
+              className={undefined}>
+              InboxPage.statePending
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`InboxPage matches snapshot 2`] = `
+<div
+  className="">
+  <div
+    className={undefined}>
+    <div>
+      <a
+        className="NamedLink_active"
+        href="/"
+        onClick={[Function]}
+        style={Object {}}>
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "&#127968;",
+            }
+          } />
+      </a>
+    </div>
+    <div
+      className={undefined}>
+      <a
+        className=""
+        href="/login"
+        onClick={[Function]}
+        style={Object {}}>
+        Login
+      </a>
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <h1
+      className="">
+      <span>
+        Inbox
+      </span>
+    </h1>
+    <nav>
+      <a
+        className=""
+        href="/inbox/orders"
+        onClick={[Function]}
+        style={Object {}}>
+        <span>
+          Guest
+        </span>
+      </a>
+      <a
+        className=""
+        href="/inbox/sales"
+        onClick={[Function]}
+        style={Object {}}>
+        <span>
+          Host
+        </span>
+      </a>
+    </nav>
+    <ul>
+      <li
+        className={undefined}>
+        <a
+          className=""
+          href="/sale/sale-1/details"
+          onClick={[Function]}
+          style={Object {}}>
+          <div
+            className={undefined}>
+            <img
+              alt="customer-user-id first name customer-user-id last name"
+              className={undefined}
+              src="https://placehold.it/44x44" />
+          </div>
+          <div
+            className={undefined}>
+            <div>
+              <span
+                className={undefined}>
+                customer-user-id first name customer-user-id last name
+              </span>
+              <span
+                className={undefined}>
+                2017-01-15
+              </span>
+            </div>
+            <div
+              className={undefined}>
+              InboxPage.statePending
+            </div>
+          </div>
+        </a>
+      </li>
+      <li
+        className={undefined}>
+        <a
+          className=""
+          href="/sale/sale-2/details"
+          onClick={[Function]}
+          style={Object {}}>
+          <div
+            className={undefined}>
+            <img
+              alt="customer-user-id first name customer-user-id last name"
+              className={undefined}
+              src="https://placehold.it/44x44" />
+          </div>
+          <div
+            className={undefined}>
+            <div>
+              <span
+                className={undefined}>
+                customer-user-id first name customer-user-id last name
+              </span>
+              <span
+                className={undefined}>
+                2016-01-15
+              </span>
+            </div>
+            <div
+              className={undefined}>
+              InboxPage.statePending
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
 `;

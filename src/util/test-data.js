@@ -47,6 +47,29 @@ export const createListing = id => ({
   },
 });
 
+export const createTransaction = options => {
+  const {
+    id,
+    state = 'state/preauthorized',
+    customer = null,
+    provider = null,
+    lastTransitionedAt = new Date(2017, 5, 1),
+  } = options;
+  return {
+    id: new UUID(id),
+    type: 'transaction',
+    attributes: {
+      commission: null,
+      createdAt: new Date(2017, 4, 1),
+      lastTransitionedAt,
+      state,
+      total: null,
+    },
+    customer,
+    provider,
+  };
+};
+
 // Default config for currency formatting in tests and examples.
 export const currencyConfig = {
   style: 'currency',
