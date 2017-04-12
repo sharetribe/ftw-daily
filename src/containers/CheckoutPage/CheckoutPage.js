@@ -12,11 +12,11 @@ import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
 
 import css from './CheckoutPage.css';
 
-const ensureListingProperties = (listing) => {
+const ensureListingProperties = listing => {
   const empty = { id: null, type: 'listing', attributes: {}, author: {}, images: [] };
   // assume own properties: id, type, attributes etc.
   return { ...empty, ...listing };
-}
+};
 
 export class CheckoutPageComponent extends Component {
   constructor(props) {
@@ -47,15 +47,17 @@ export class CheckoutPageComponent extends Component {
   }
 
   render() {
-    const { bookingDates, initiateOrderError, intl, listing } = this.props;
+    const { bookingDates, initiateOrderError, intl, listing, params } = this.props;
     const { bookingStart, bookingEnd } = bookingDates || {};
     const currentListing = ensureListingProperties(listing);
     const price = currentListing.attributes.price;
 
     if (!listing || !price) {
       // eslint-disable-next-line no-console
-      console.error(`Listing price is undefined for listing (${currentListing.id}). Redirecting to SearchPage.`);
-      return <NamedRedirect name="SearchPage" />;
+      console.error(
+        `Listing price is undefined for listing (${currentListing.id}). Redirecting to SearchPage.`
+      );
+      return <NamedRedirect name="ListingPage" params={params} />;
     }
 
     const title = intl.formatMessage(
@@ -98,9 +100,13 @@ export class CheckoutPageComponent extends Component {
   }
 }
 
-CheckoutPageComponent.defaultProps = { bookingDates: null, initiateOrderError: null, listing: null };
+CheckoutPageComponent.defaultProps = {
+  bookingDates: null,
+  initiateOrderError: null,
+  listing: null,
+};
 
-const { arrayOf, func, instanceOf, shape } = PropTypes;
+const { arrayOf, func, instanceOf, shape, string } = PropTypes;
 
 CheckoutPageComponent.propTypes = {
   bookingDates: shape({
@@ -109,6 +115,10 @@ CheckoutPageComponent.propTypes = {
   }),
   initiateOrderError: instanceOf(Error),
   listing: propTypes.listing,
+  params: shape({
+    id: string,
+    slug: string,
+  }).isRequired,
   sendOrderRequest: func.isRequired,
 
   // from injectIntl
@@ -139,7 +149,7 @@ const CheckoutPage = compose(
   injectIntl
 )(CheckoutPageComponent);
 
-CheckoutPage.setInitialValues = initiallValues => setInitialValues(initiallValues);
+CheckoutPage.setInitialValues = initialValues => setInitialValues(initialValues);
 
 CheckoutPage.displayName = 'CheckoutPage';
 

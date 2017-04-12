@@ -17,6 +17,7 @@ describe('CheckoutPage', () => {
       history: { push: noop },
       intl: fakeIntl,
       listing: { ...createListing('listing1'), author: createUser('author') },
+      params: { id: 'listing1', slug: 'listing1' },
       sendOrderRequest: noop,
     };
     const tree = renderShallow(<CheckoutPageComponent {...props} />);
