@@ -88,7 +88,7 @@ export const createResourceLocatorString = (
  * Find component related to route name
  * E.g. `const PageComponent = findComponentByRouteName('CheckoutPage', routes);`
  * Then we can call static methods of given component:
- * `dispatch(PageComponent.customPageState({ listing, bookingDates }));`
+ * `dispatch(PageComponent.setInitialValues({ listing, bookingDates }));`
  *
  * @param {String} nameToFind - Route name
  * @param {Array<{ route }>} flattenedRoutes - Route configuration as flattened array.

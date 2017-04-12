@@ -6,6 +6,7 @@ import { union, without } from 'lodash';
 import config from '../../config';
 import * as propTypes from '../../util/propTypes';
 import { types } from '../../util/sdkLoader';
+import { createSlug } from '../../util/urlHelpers';
 import { convertMoneyToNumber } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import { Button, Map, ModalInMobile, PageLayout } from '../../components';
@@ -65,7 +66,14 @@ export class ListingPageComponent extends Component {
     dispatch(setInitialValues({ listing, bookingDates: values }));
 
     // Redirect to CheckoutPage
-    history.push(createResourceLocatorString('CheckoutPage', flattenedRoutes, {}, {}));
+    history.push(
+      createResourceLocatorString(
+        'CheckoutPage',
+        flattenedRoutes,
+        { id: listing.id.uuid, slug: createSlug(listing.attributes.title) },
+        {}
+      )
+    );
   }
 
   togglePageClassNames(className, addClass = true) {

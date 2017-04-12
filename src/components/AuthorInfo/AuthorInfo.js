@@ -21,7 +21,7 @@ const AuthorInfo = props => {
       </div>
       <div className={css.authorDetails}>
         <span className={css.authorName}>
-          <FormattedMessage id="AuthorInfo.host" values={{authorName}} />
+          <FormattedMessage id="AuthorInfo.host" values={{ authorName }} />
         </span>
       </div>
     </div>
