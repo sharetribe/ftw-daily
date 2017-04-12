@@ -1,4 +1,4 @@
-/* eslint-disable no-constant-condition, no-console */
+/* eslint-disable no-constant-condition */
 import { call, put, take, fork } from 'redux-saga/effects';
 import { updatedEntities, denormalisedEntities } from '../util/data';
 
@@ -30,6 +30,8 @@ export const SHOW_USERS_REQUEST = 'app/sdk/SHOW_USERS_REQUEST';
 export const SHOW_USERS_SUCCESS = 'app/sdk/SHOW_USERS_SUCCESS';
 export const SHOW_USERS_ERROR = 'app/sdk/SHOW_USERS_ERROR';
 
+export const ADD_ENTITIES = 'app/sdk/ADD_ENTITIES';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -44,9 +46,11 @@ const initialState = {
   searchPageResults: [],
 };
 
-const merge = (state, payload) => {
-  const entities = updatedEntities(state.entities, payload.data);
-  return { ...state, entities };
+const merge = (state, apiResponse) => {
+  return {
+    ...state,
+    entities: updatedEntities(state.entities, apiResponse.data),
+  };
 };
 
 const searchResults = payload => payload.data.data.map(listing => listing.id);
@@ -59,7 +63,7 @@ export default function sdkReducer(state = initialState, action = {}) {
     case SHOW_LISTINGS_SUCCESS:
       return merge(state, payload);
     case SHOW_LISTINGS_ERROR:
-      console.error(payload);
+      console.error(payload); // eslint-disable-line
       return { ...state, showListingsError: payload };
 
     case QUERY_LISTINGS_REQUEST:
@@ -67,7 +71,7 @@ export default function sdkReducer(state = initialState, action = {}) {
     case QUERY_LISTINGS_SUCCESS:
       return merge(state, payload);
     case QUERY_LISTINGS_ERROR:
-      console.error(payload);
+      console.error(payload); // eslint-disable-line
       return { ...state, queryListingsError: payload };
 
     case SEARCH_LISTINGS_REQUEST:
@@ -75,7 +79,7 @@ export default function sdkReducer(state = initialState, action = {}) {
     case SEARCH_LISTINGS_SUCCESS:
       return { ...merge(state, payload), searchPageResults: searchResults(payload) };
     case SEARCH_LISTINGS_ERROR:
-      console.error(payload);
+      console.error(payload); // eslint-disable-line
       return { ...state, searchListingsError: payload };
 
     case SHOW_MARKETPLACE_REQUEST:
@@ -83,7 +87,7 @@ export default function sdkReducer(state = initialState, action = {}) {
     case SHOW_MARKETPLACE_SUCCESS:
       return merge(state, payload);
     case SHOW_MARKETPLACE_ERROR:
-      console.error(payload);
+      console.error(payload); // eslint-disable-line
       return { ...state, showMarketplaceError: payload };
 
     case SHOW_USERS_REQUEST:
@@ -91,8 +95,11 @@ export default function sdkReducer(state = initialState, action = {}) {
     case SHOW_USERS_SUCCESS:
       return merge(state, payload);
     case SHOW_USERS_ERROR:
-      console.error(payload);
+      console.error(payload); // eslint-disable-line
       return { ...state, showUsersError: payload };
+
+    case ADD_ENTITIES:
+      return merge(state, payload);
 
     default:
       return state;
@@ -110,6 +117,28 @@ export default function sdkReducer(state = initialState, action = {}) {
 export const getListingsById = (data, listingIds) => {
   try {
     return denormalisedEntities(data.entities, 'listing', listingIds);
+  } catch (e) {
+    return [];
+  }
+};
+
+/**
+ * Get the denormalised entities from the given entity references.
+ *
+ * @param {Object} marketplaceData the state part of the Redux store
+ * for this reducer
+ *
+ * @param {Array<{ id, type }} entityRefs References to entities that
+ * we want to query from the data. Currently we expect that all the
+ * entities have the same type.
+ *
+ * @return {Array<Object>} denormalised entities
+ */
+export const getEntities = (marketplaceData, entityRefs) => {
+  const type = entityRefs.length > 0 ? entityRefs[0].type : null;
+  const ids = entityRefs.map(ref => ref.id);
+  try {
+    return denormalisedEntities(marketplaceData.entities, type, ids);
   } catch (e) {
     return [];
   }
@@ -145,6 +174,11 @@ export const showMarketplaceError = errorAction(SHOW_MARKETPLACE_ERROR);
 export const showUsers = requestAction(SHOW_USERS_REQUEST);
 export const showUsersSuccess = successAction(SHOW_USERS_SUCCESS);
 export const showUsersError = errorAction(SHOW_USERS_ERROR);
+
+export const addEntities = apiResponse => ({
+  type: ADD_ENTITIES,
+  payload: apiResponse,
+});
 
 // ================ Worker sagas ================ //
 
