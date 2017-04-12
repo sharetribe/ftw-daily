@@ -10,6 +10,7 @@ import {
   LandingPage,
   ListingPage,
   ManageListingsPage,
+  NotFoundPage,
   OrderPage,
   PasswordChangePage,
   PasswordForgottenPage,
@@ -157,22 +158,16 @@ const routesConfiguration = [
     path: '/inbox',
     auth: true,
     exact: true,
+    name: 'InboxBasePage',
+    component: () => <NamedRedirect name="InboxPage" params={{ tab: 'orders' }} />,
+  },
+  {
+    path: '/inbox/:tab',
+    auth: true,
+    exact: true,
     name: 'InboxPage',
-    component: () => <NamedRedirect name="InboxOrdersPage" />,
-  },
-  {
-    path: '/inbox/orders',
-    auth: true,
-    exact: true,
-    name: 'InboxOrdersPage',
-    component: props => <InboxPage {...props} tab="orders" />,
-  },
-  {
-    path: '/inbox/sales',
-    auth: true,
-    exact: true,
-    name: 'InboxSalesPage',
-    component: props => <InboxPage {...props} tab="sales" />,
+    component: props => <InboxPage {...props} />,
+    loadData: (params, search) => InboxPage.loadData(params, search),
   },
   {
     path: '/order/:id',
@@ -280,6 +275,12 @@ const routesConfiguration = [
     exact: true,
     name: 'StyleguideComponentExampleRaw',
     component: props => <StyleguidePage {...props} />,
+  },
+  {
+    path: '/notfound',
+    exact: true,
+    name: 'NotFoundPage',
+    component: props => <NotFoundPage {...props} />,
   },
 ];
 

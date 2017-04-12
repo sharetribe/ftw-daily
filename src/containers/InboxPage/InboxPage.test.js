@@ -6,7 +6,11 @@ import { InboxPageComponent } from './InboxPage';
 describe('InboxPage', () => {
   it('matches snapshot', () => {
     const props = {
-      tab: 'orders',
+      params: {
+        tab: 'orders',
+      },
+      fetchInProgress: false,
+      transactions: [],
       intl: fakeIntl,
     };
     const tree = renderShallow(<InboxPageComponent {...props} />);

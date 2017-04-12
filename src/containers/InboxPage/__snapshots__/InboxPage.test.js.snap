@@ -9,17 +9,29 @@ exports[`InboxPage matches snapshot 1`] = `
   </H1>
   <nav>
     <withFlattenedRoutes(withRouter(NamedLink))
-      name="InboxOrdersPage">
+      name="InboxPage"
+      params={
+        Object {
+          "tab": "orders",
+        }
+      }>
       <FormattedMessage
         id="InboxPage.ordersTabTitle"
         values={Object {}} />
     </withFlattenedRoutes(withRouter(NamedLink))>
     <withFlattenedRoutes(withRouter(NamedLink))
-      name="InboxSalesPage">
+      activeClassName={null}
+      name="InboxPage"
+      params={
+        Object {
+          "tab": "sales",
+        }
+      }>
       <FormattedMessage
         id="InboxPage.salesTabTitle"
         values={Object {}} />
     </withFlattenedRoutes(withRouter(NamedLink))>
   </nav>
+  <ul />
 </Connect(withRouter(PageLayout))>
 `;
