@@ -3,9 +3,9 @@
  * We are following Ducks module proposition:
  * https://github.com/erikras/ducks-modular-redux
  */
+import CheckoutPage from './CheckoutPage/CheckoutPage.duck';
 import EditListingPage from './EditListingPage/EditListingPage.duck';
 import ListingPage from './ListingPage/ListingPage.duck';
 import SearchPage from './SearchPage/SearchPage.duck';
-import CheckoutPage from './CheckoutPage/CheckoutPage.duck';
 
-export { EditListingPage, ListingPage, SearchPage, CheckoutPage };
+export { CheckoutPage, EditListingPage, ListingPage, SearchPage };

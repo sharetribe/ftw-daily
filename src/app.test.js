@@ -63,8 +63,8 @@ describe('Application', () => {
     const urlRedirects = {
       '/l/new': '/login',
       '/l/listing-title-slug/1234/edit': '/login',
+      '/l/listing-title-slug/1234/checkout': '/login',
       '/u/1234/edit': '/login',
-      '/checkout': '/login',
       '/orders': '/login',
       '/sales': '/login',
       '/order/1234': '/login',

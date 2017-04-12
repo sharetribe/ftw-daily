@@ -76,6 +76,14 @@ const routesConfiguration = [
         component: props => <ListingPage {...props} tab="book" />,
       },
       {
+        path: '/l/:slug/:id/checkout',
+        auth: true,
+        exact: true,
+        name: 'CheckoutPage',
+        setInitialValues: initialValues => CheckoutPage.setInitialValues(initialValues),
+        component: props => <CheckoutPage {...props} />,
+      },
+      {
         auth: true,
         path: '/l/new',
         exact: true,
@@ -114,13 +122,6 @@ const routesConfiguration = [
         ],
       },
     ],
-  },
-  {
-    path: '/checkout',
-    auth: true,
-    exact: true,
-    name: 'CheckoutPage',
-    component: props => <CheckoutPage {...props} />,
   },
   {
     path: '/login',

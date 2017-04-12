@@ -3,32 +3,20 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
-import { types } from '../../util/sdkLoader';
 import { pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
-import { PageLayout } from '../../components';
+import { AuthorInfo, BookingInfo, NamedRedirect, PageLayout } from '../../components';
 import { StripePaymentForm } from '../../containers';
-import { initiateOrder } from './CheckoutPage.duck';
+import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
 
 import css from './CheckoutPage.css';
 
-const { UUID, LatLng } = types;
-
-const bookingStart = new Date(2017, 4, 18);
-const bookingEnd = new Date(2017, 4, 19);
-
-const listing = {
-  id: new UUID('927a30a2-3a69-4b0d-9c2e-a41744488703'),
-  type: 'listing',
-  attributes: {
-    title: 'Example listing',
-    description: 'Listing description here.',
-    address: 'Helsinki, Finland',
-    geolocation: new LatLng(60.16985569999999, 24.93837899999994),
-  },
+const ensureListingProperties = listing => {
+  const empty = { id: null, type: 'listing', attributes: {}, author: {}, images: [] };
+  // assume own properties: id, type, attributes etc.
+  return { ...empty, ...listing };
 };
-const imageUrl = 'https://placehold.it/750x470';
 
 export class CheckoutPageComponent extends Component {
   constructor(props) {
@@ -36,18 +24,15 @@ export class CheckoutPageComponent extends Component {
     this.state = { submitting: false };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleSubmit(cardToken) {
     if (this.state.submitting) {
       return;
     }
     this.setState({ submitting: true });
-    const { sendOrderRequest, history, flattenedRoutes } = this.props;
-    const params = {
-      listingId: listing.id,
-      bookingStart,
-      bookingEnd,
-      cardToken,
-    };
+    const { bookingDates, flattenedRoutes, history, sendOrderRequest, listing } = this.props;
+    const params = { listingId: listing.id, cardToken, ...bookingDates };
+
     sendOrderRequest(params)
       .then(orderId => {
         this.setState({ submitting: false });
@@ -60,15 +45,27 @@ export class CheckoutPageComponent extends Component {
         this.setState({ submitting: false });
       });
   }
+
   render() {
-    const { initiateOrderError, intl } = this.props;
+    const { bookingDates, initiateOrderError, intl, listing, params } = this.props;
+    const { bookingStart, bookingEnd } = bookingDates || {};
+    const currentListing = ensureListingProperties(listing);
+    const price = currentListing.attributes.price;
+
+    if (!listing || !price) {
+      // eslint-disable-next-line no-console
+      console.error(
+        `Listing price is undefined for listing (${currentListing.id}). Redirecting to SearchPage.`
+      );
+      return <NamedRedirect name="ListingPage" params={params} />;
+    }
 
     const title = intl.formatMessage(
       {
         id: 'CheckoutPage.title',
       },
       {
-        listingTitle: listing.attributes.title,
+        listingTitle: currentListing.attributes.title,
       }
     );
 
@@ -81,7 +78,13 @@ export class CheckoutPageComponent extends Component {
     return (
       <PageLayout title={title}>
         <h1 className={css.title}>{title}</h1>
-        <img alt={listing.attributes.title} src={imageUrl} style={{ width: '100%' }} />
+        <AuthorInfo author={currentListing.author} className={css.authorContainer} />
+        <BookingInfo
+          className={css.receipt}
+          bookingStart={bookingStart}
+          bookingEnd={bookingEnd}
+          unitPrice={price}
+        />
         <section className={css.payment}>
           {errorMessage}
           <h2 className={css.paymentTitle}>
@@ -97,12 +100,25 @@ export class CheckoutPageComponent extends Component {
   }
 }
 
-CheckoutPageComponent.defaultProps = { initiateOrderError: null };
+CheckoutPageComponent.defaultProps = {
+  bookingDates: null,
+  initiateOrderError: null,
+  listing: null,
+};
 
-const { func, shape, arrayOf, instanceOf } = PropTypes;
+const { arrayOf, func, instanceOf, shape, string } = PropTypes;
 
 CheckoutPageComponent.propTypes = {
+  bookingDates: shape({
+    bookingStart: instanceOf(Date).isRequired,
+    bookingEnd: instanceOf(Date).isRequired,
+  }),
   initiateOrderError: instanceOf(Error),
+  listing: propTypes.listing,
+  params: shape({
+    id: string,
+    slug: string,
+  }).isRequired,
   sendOrderRequest: func.isRequired,
 
   // from injectIntl
@@ -117,9 +133,10 @@ CheckoutPageComponent.propTypes = {
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
 };
 
-const mapStateToProps = state => ({
-  initiateOrderError: state.CheckoutPage.initiateOrderError,
-});
+const mapStateToProps = state => {
+  const { initiateOrderError, listing, bookingDates } = state.CheckoutPage;
+  return { initiateOrderError, listing, bookingDates };
+};
 
 const mapDispatchToProps = dispatch => ({
   sendOrderRequest: params => dispatch(initiateOrder(params)),
@@ -131,5 +148,9 @@ const CheckoutPage = compose(
   withFlattenedRoutes,
   injectIntl
 )(CheckoutPageComponent);
+
+CheckoutPage.setInitialValues = initialValues => setInitialValues(initialValues);
+
+CheckoutPage.displayName = 'CheckoutPage';
 
 export default CheckoutPage;
