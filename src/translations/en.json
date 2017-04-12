@@ -13,6 +13,7 @@
   "BookingInfo.pricePerDay":"Price per day:",
   "BookingInfo.total": "Total:",
   "CheckoutPage.title": "Book {listingTitle}",
+  "CheckoutPage.initiateOrderError": "Payment request failed. Please try again.",
   "CheckoutPage.paymentTitle": "Payment",
   "DateInput.clearDate": "Clear Date",
   "DateInput.closeDatePicker": "Close",
