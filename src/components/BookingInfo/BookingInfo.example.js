@@ -5,7 +5,7 @@ export const Empty = {
   component: BookingInfo,
   props: {
     unitPrice: new types.Money(10, 'USD'),
-    bookingStart: new Date('Fri, 14 Apr 2017 GMT'),
-    bookingEnd: new Date('Sun, 16 Apr 2017 GMT'),
+    bookingStart: new Date(Date.UTC(2017, 3, 14)),
+    bookingEnd: new Date(Date.UTC(2017, 3, 16)),
   },
 };

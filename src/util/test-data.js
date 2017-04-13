@@ -53,14 +53,14 @@ export const createTransaction = options => {
     state = 'state/preauthorized',
     customer = null,
     provider = null,
-    lastTransitionedAt = new Date(2017, 5, 1),
+    lastTransitionedAt = new Date(Date.UTC(2017, 5, 1)),
   } = options;
   return {
     id: new UUID(id),
     type: 'transaction',
     attributes: {
       commission: null,
-      createdAt: new Date(2017, 4, 1),
+      createdAt: new Date(Date.UTC(2017, 4, 1)),
       lastTransitionedAt,
       state,
       total: null,
