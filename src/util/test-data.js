@@ -58,15 +58,19 @@ export const currencyConfig = {
   subUnitDivisor: 100,
 };
 
+const pad = num => {
+  return num >= 0 && num < 10 ? `0${num}` : `${num}`;
+};
+
 // Create fake Internalization object to help with shallow rendering.
 export const fakeIntl = {
-  formatDate: d => d,
+  formatDate: d => `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`,
   formatHTMLMessage: d => d,
   formatMessage: msg => msg.id,
   formatNumber: d => d,
   formatPlural: d => d,
   formatRelative: d => d,
-  formatTime: d => d,
+  formatTime: d => `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`,
   now: d => d,
 };
 
