@@ -21,8 +21,14 @@ const username = user => {
 
 // Localised timestamp when the given transaction was updated
 const timestamp = (intl, tx) => {
+  const defaultValue = { datetime: '', date: '' };
   const date = tx.attributes ? tx.attributes.lastTransitionedAt : null;
-  return date ? intl.formatDate(date) : '';
+  return date
+    ? {
+        datetime: `${intl.formatDate(date)} ${intl.formatTime(date)}`,
+        date: intl.formatDate(date),
+      }
+    : defaultValue;
 };
 
 // Translated name of the state of the given transaction
@@ -48,6 +54,7 @@ const InboxItem = props => {
   const isOrder = type === 'order';
   const otherUserName = username(isOrder ? provider : customer);
   const otherUserAvatar = 'https://placehold.it/44x44';
+  const changedDate = timestamp(intl, tx);
   return (
     <NamedLink
       className={css.itemLink}
@@ -60,7 +67,7 @@ const InboxItem = props => {
       <div className={css.itemInfo}>
         <div>
           <span className={css.itemUsername}>{otherUserName}</span>
-          <span className={css.itemTimestamp}>{timestamp(intl, tx)}</span>
+          <span className={css.itemTimestamp} title={changedDate.datetime}>{changedDate.date}</span>
         </div>
         <div className={css.itemState}>{txState(intl, tx)}</div>
       </div>
