@@ -31,7 +31,7 @@ exports[`InboxPage matches snapshot 1`] = `
   <div
     className={undefined}>
     <h1
-      className="">
+      className={undefined}>
       <span>
         Inbox
       </span>
@@ -161,7 +161,7 @@ exports[`InboxPage matches snapshot 2`] = `
   <div
     className={undefined}>
     <h1
-      className="">
+      className={undefined}>
       <span>
         Inbox
       </span>

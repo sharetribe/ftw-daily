@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { PageLayout, NamedRedirect, NamedLink, H1 } from '../../components';
+import { PageLayout, NamedRedirect, NamedLink } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { getEntities } from '../../ducks/sdk.duck';
 import { loadData } from './InboxPage.duck';
@@ -99,9 +99,9 @@ export const InboxPageComponent = props => {
 
   return (
     <PageLayout title={title}>
-      <H1 className={css.title}>
+      <h1 className={css.title}>
         <FormattedMessage id="InboxPage.title" />
-      </H1>
+      </h1>
       <nav>
         <NamedLink
           className={css.tab}
