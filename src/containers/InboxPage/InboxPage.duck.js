@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { reverse, sortBy } from 'lodash';
 import { addEntities } from '../../ducks/sdk.duck';
 
 // ================ Action types ================ //
@@ -53,12 +53,11 @@ const fetchOrdersOrSalesError = e => ({
 // ================ Thunks ================ //
 
 const sortedTransactions = txs =>
-  _.chain(txs)
-    .sortBy(tx => {
+  reverse(
+    sortBy(txs, tx => {
       return tx.attributes ? tx.attributes.lastTransitionedAt : null;
     })
-    .reverse()
-    .value();
+  );
 
 export const loadData = params =>
   (dispatch, getState, sdk) => {
