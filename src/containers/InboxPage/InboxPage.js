@@ -126,7 +126,7 @@ export const InboxPageComponent = props => {
           className={css.tab}
           name="InboxPage"
           params={{ tab: 'orders' }}
-          activeClassName={tab === 'orders' ? css.activeTab : null}
+          activeClassName={isOrders ? css.activeTab : null}
         >
           <FormattedMessage id="InboxPage.ordersTabTitle" />
         </NamedLink>
@@ -134,7 +134,7 @@ export const InboxPageComponent = props => {
           className={css.tab}
           name="InboxPage"
           params={{ tab: 'sales' }}
-          activeClassName={tab === 'sales' ? css.activeTab : null}
+          activeClassName={!isOrders ? css.activeTab : null}
         >
           <FormattedMessage id="InboxPage.salesTabTitle" />
         </NamedLink>
