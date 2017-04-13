@@ -15,6 +15,11 @@
   text-decoration: underline;
 }
 
+.error {
+  color: red;
+  margin: 1rem;
+}
+
 .listItem {
   border-bottom: 1px solid #979797;
 

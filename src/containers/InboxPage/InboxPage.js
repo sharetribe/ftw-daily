@@ -9,7 +9,7 @@ import { loadData } from './InboxPage.duck';
 
 import css from './InboxPage.css';
 
-const { shape, string, arrayOf, bool, oneOf } = PropTypes;
+const { shape, string, arrayOf, bool, oneOf, instanceOf } = PropTypes;
 
 // Formatted username
 const username = user => {
@@ -75,7 +75,7 @@ InboxItem.propTypes = {
 };
 
 export const InboxPageComponent = props => {
-  const { fetchInProgress, transactions, intl, params } = props;
+  const { fetchInProgress, fetchOrdersOrSalesError, transactions, intl, params } = props;
   const { tab } = params;
 
   const validTab = tab === 'orders' || tab === 'sales';
@@ -96,6 +96,12 @@ export const InboxPageComponent = props => {
       </li>
     );
   };
+
+  const error = fetchOrdersOrSalesError
+    ? <p className={css.error}>
+        <FormattedMessage id="InboxPage.fetchFailed" />
+      </p>
+    : null;
 
   return (
     <PageLayout title={title}>
@@ -120,6 +126,7 @@ export const InboxPageComponent = props => {
           <FormattedMessage id="InboxPage.salesTabTitle" />
         </NamedLink>
       </nav>
+      {error}
       <ul>
         {!fetchInProgress ? transactions.map(toTxItem) : null}
       </ul>
@@ -127,12 +134,15 @@ export const InboxPageComponent = props => {
   );
 };
 
+InboxPageComponent.defaultProps = { fetchOrdersOrSalesError: null };
+
 InboxPageComponent.propTypes = {
   params: shape({
     tab: string.isRequired,
   }).isRequired,
 
   fetchInProgress: bool.isRequired,
+  fetchOrdersOrSalesError: instanceOf(Error),
   transactions: arrayOf(propTypes.transaction).isRequired,
 
   // from injectIntl
@@ -141,10 +151,11 @@ InboxPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const marketplaceData = state.data;
-  const refs = state.InboxPage.transactionRefs;
+  const { fetchInProgress, fetchOrdersOrSalesError, transactionRefs } = state.InboxPage;
   return {
-    fetchInProgress: state.InboxPage.fetchInProgress,
-    transactions: getEntities(marketplaceData, refs),
+    fetchInProgress,
+    fetchOrdersOrSalesError,
+    transactions: getEntities(marketplaceData, transactionRefs),
   };
 };
 

@@ -38,6 +38,7 @@
   "HeroSearchForm.search": "Search",
   "HeroSection.subTitle": "The largest online community to rent music studios",
   "HeroSection.title": "Book Studiotime anywhere",
+  "InboxPage.fetchFailed": "Could not load messages. Please try again.",
   "InboxPage.ordersTabTitle": "Guest",
   "InboxPage.ordersTitle": "Inbox: Orders",
   "InboxPage.salesTabTitle": "Host",
