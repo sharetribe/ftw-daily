@@ -11,7 +11,7 @@ const Button = props => {
   return <button className={classes} {...rest}>{children}</button>;
 };
 
-const { any, string } = PropTypes;
+const { node, string } = PropTypes;
 
 Button.defaultProps = {
   children: null,
@@ -19,7 +19,7 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  children: any,
+  children: node,
   className: string,
 };
 

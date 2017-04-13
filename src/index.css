@@ -1,7 +1,7 @@
 @import "sanitize.css";
 
 /* Base font */
-html, input, button {
+html, input, button, a {
   /*
      Use Chalkboard font. This font is available in Mac OSX. Fallback
      to Comic Sans MS, "although it is not a perfect substitute font
@@ -11,6 +11,15 @@ html, input, button {
   */
   font-family: "Chalkboard", "Comic Sans MS", sans-serif;
   color: #4A4A4A;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  letter-spacing: -0.6px;
+}
+
+h1 {
+  font-size: 24px;
 }
 
 ul {

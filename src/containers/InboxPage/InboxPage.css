@@ -1,0 +1,70 @@
+.title {
+  margin: 1rem;
+}
+
+.tab {
+  float: left;
+  margin-left: 1rem;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+  text-decoration: none;
+}
+
+.activeTab {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.error {
+  color: red;
+  margin: 1rem;
+}
+
+.noResults {
+  margin: 0 1rem;
+}
+
+.listItem {
+  border-bottom: 1px solid #979797;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.itemLink {
+  display: flex;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.itemAvatar {
+  margin-right: 1rem;
+  width: 44px;
+  height: 44px;
+}
+
+.itemAvatarImage {
+  border-radius: 50%;
+}
+
+.itemInfo {
+  flex: 1;
+}
+
+.itemUsername {
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.itemTimestamp {
+  float: right;
+  font-size: 14px;
+}
+
+.itemState {
+  margin-top: 5px;
+  font-size: 14px;
+  text-decoration: none;
+}

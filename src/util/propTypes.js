@@ -21,7 +21,7 @@ import { PropTypes } from 'react';
 import { types as sdkTypes } from './sdkLoader';
 
 const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
-const { arrayOf, bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
+const { any, arrayOf, bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
 
 // Fixed value
 export const value = val => oneOf([val]);
@@ -118,4 +118,25 @@ export const listing = shape({
   }),
   author: user,
   images: arrayOf(image),
+});
+
+export const TX_STATE_ACCEPTED = 'state/accepted';
+export const TX_STATE_REJECTED = 'state/rejected';
+export const TX_STATE_PREAUTHORIZED = 'state/preauthorized';
+
+export const TX_STATES = [TX_STATE_ACCEPTED, TX_STATE_REJECTED, TX_STATE_PREAUTHORIZED];
+
+// Denormalised transaction object
+export const transaction = shape({
+  id: uuid.isRequired,
+  type: value('transaction').isRequired,
+  attributes: shape({
+    commission: any, // ???
+    createdAt: instanceOf(Date).isRequired,
+    lastTransitionedAt: instanceOf(Date).isRequired,
+    state: oneOf(TX_STATES).isRequired,
+    total: any, // ???
+  }),
+  customer: user,
+  provider: user,
 });
