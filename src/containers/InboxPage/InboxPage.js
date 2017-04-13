@@ -103,6 +103,12 @@ export const InboxPageComponent = props => {
       </p>
     : null;
 
+  const noResults = !fetchInProgress && transactions.length === 0 && !fetchOrdersOrSalesError
+    ? <li key="noResults" className={css.noResults}>
+        <FormattedMessage id={isOrders ? 'InboxPage.noOrdersFound' : 'InboxPage.noSalesFound'} />
+      </li>
+    : null;
+
   return (
     <PageLayout title={title}>
       <h1 className={css.title}>
@@ -129,6 +135,7 @@ export const InboxPageComponent = props => {
       {error}
       <ul>
         {!fetchInProgress ? transactions.map(toTxItem) : null}
+        {noResults}
       </ul>
     </PageLayout>
   );

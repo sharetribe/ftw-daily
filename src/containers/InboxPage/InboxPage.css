@@ -20,6 +20,10 @@
   margin: 1rem;
 }
 
+.noResults {
+  margin: 0 1rem;
+}
+
 .listItem {
   border-bottom: 1px solid #979797;
 
