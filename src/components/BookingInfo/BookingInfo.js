@@ -20,8 +20,8 @@ const BookingInfoComponent = props => {
     ? <FormattedMessage
         id="BookingInfo.bookingPeriod"
         values={{
-          bookingStart: moment(bookingStart).format('L'),
-          bookingEnd: moment(bookingEnd).format('L'),
+          bookingStart: intl.formatDate(bookingStart),
+          bookingEnd: intl.formatDate(bookingEnd),
         }}
       />
     : '';
