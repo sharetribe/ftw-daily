@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { union, without } from 'lodash';
@@ -9,7 +9,7 @@ import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import { convertMoneyToNumber } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import { Button, Map, ModalInMobile, PageLayout } from '../../components';
+import { Button, Map, ModalInMobile, PageLayout, NamedLink } from '../../components';
 import { BookingDatesForm } from '../../containers';
 import { getListingsById } from '../../ducks/sdk.duck';
 import { showListing } from './ListingPage.duck';
@@ -130,10 +130,10 @@ export class ListingPageComponent extends Component {
         </div>
       : null;
 
-    const showBookingButton = currentUser &&
+    const isOwnListing = currentUser &&
       currentListing &&
       currentListing.author &&
-      currentListing.author.id.uuid !== currentUser.id.uuid;
+      currentListing.author.id.uuid === currentUser.id.uuid;
 
     const pageContent = (
       <PageLayout title={`${title} ${formattedPrice}`} className={this.state.pageClassNames}>
@@ -156,13 +156,15 @@ export class ListingPageComponent extends Component {
             <BookingDatesForm className={css.bookingForm} onSubmit={this.onSubmit} price={price} />
           </ModalInMobile>
           {map ? <div className={css.map}>{map}</div> : null}
-          {showBookingButton
-            ? <div className={css.openBookingForm}>
+          {isOwnListing
+            ? <NamedLink className={css.editListing} name="EditListingPage" params={params}>
+                <FormattedMessage id="ListingPage.editListing" />
+              </NamedLink>
+            : <div className={css.openBookingForm}>
                 <Button onClick={() => this.setState({ isBookingModalOpenOnMobile: true })}>
                   {bookBtnMessage}
                 </Button>
-              </div>
-            : null}
+              </div>}
         </div>
       </PageLayout>
     );
