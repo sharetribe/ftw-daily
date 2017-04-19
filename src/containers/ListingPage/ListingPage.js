@@ -63,7 +63,7 @@ export class ListingPageComponent extends Component {
 
     // Customize checkout page state with current listing and selected bookingDates
     const { setInitialValues } = findRouteByRouteName('CheckoutPage', flattenedRoutes);
-    dispatch(setInitialValues({ listing, bookingDates: values }));
+    dispatch(setInitialValues({ listing, bookingDates: values, initiateOrderError: null }));
 
     // Redirect to CheckoutPage
     history.push(
