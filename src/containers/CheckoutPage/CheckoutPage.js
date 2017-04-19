@@ -8,7 +8,7 @@ import * as propTypes from '../../util/propTypes';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { AuthorInfo, BookingInfo, NamedRedirect, PageLayout } from '../../components';
 import { StripePaymentForm } from '../../containers';
-import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
+import { initiateOrder, setInitialValues, loadData } from './CheckoutPage.duck';
 
 import css from './CheckoutPage.css';
 
@@ -47,15 +47,24 @@ export class CheckoutPageComponent extends Component {
   }
 
   render() {
-    const { bookingDates, initiateOrderError, intl, listing, params } = this.props;
+    const { bookingDates, initiateOrderError, intl, listing, params, currentUser } = this.props;
     const { bookingStart, bookingEnd } = bookingDates || {};
     const currentListing = ensureListingProperties(listing);
     const price = currentListing.attributes.price;
 
-    if (!listing || !price) {
+    const isOwnListing = listing &&
+      currentUser &&
+      listing.author &&
+      listing.author.id.uuid === currentUser.id.uuid;
+
+    // Allow showing page when currentUser is still being downloaded,
+    // but show payment form only when user info is loaded.
+    const showPaymentForm = currentUser && !isOwnListing;
+
+    if (!listing || !price || isOwnListing) {
       // eslint-disable-next-line no-console
       console.error(
-        `Listing price is undefined for listing (${currentListing.id}). Redirecting to SearchPage.`
+        'Listing, price, or user invalid for checkout, redirecting back to listing page.'
       );
       return <NamedRedirect name="ListingPage" params={params} />;
     }
@@ -93,7 +102,12 @@ export class CheckoutPageComponent extends Component {
           <p>
             <FormattedMessage id="CheckoutPage.paymentInfo" />
           </p>
-          <StripePaymentForm onSubmit={this.handleSubmit} disableSubmit={this.state.submitting} />
+          {showPaymentForm
+            ? <StripePaymentForm
+                onSubmit={this.handleSubmit}
+                disableSubmit={this.state.submitting}
+              />
+            : null}
         </section>
       </PageLayout>
     );
@@ -104,6 +118,7 @@ CheckoutPageComponent.defaultProps = {
   bookingDates: null,
   initiateOrderError: null,
   listing: null,
+  currentUser: null,
 };
 
 const { arrayOf, func, instanceOf, shape, string } = PropTypes;
@@ -115,6 +130,7 @@ CheckoutPageComponent.propTypes = {
   }),
   initiateOrderError: instanceOf(Error),
   listing: propTypes.listing,
+  currentUser: propTypes.currentUser,
   params: shape({
     id: string,
     slug: string,
@@ -135,7 +151,8 @@ CheckoutPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { initiateOrderError, listing, bookingDates } = state.CheckoutPage;
-  return { initiateOrderError, listing, bookingDates };
+  const { currentUser } = state.user;
+  return { initiateOrderError, listing, bookingDates, currentUser };
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -152,5 +169,7 @@ const CheckoutPage = compose(
 CheckoutPage.setInitialValues = initialValues => setInitialValues(initialValues);
 
 CheckoutPage.displayName = 'CheckoutPage';
+
+CheckoutPage.loadData = loadData;
 
 export default CheckoutPage;

@@ -1,4 +1,5 @@
 import { pick } from 'lodash';
+import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
 
@@ -76,3 +77,8 @@ export const initiateOrder = params =>
   };
 
 // ================ Thunk ================ //
+
+export const loadData = () =>
+  dispatch => {
+    return dispatch(fetchCurrentUser());
+  };
