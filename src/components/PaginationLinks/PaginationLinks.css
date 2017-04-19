@@ -1,0 +1,31 @@
+.prev,
+.next {
+  display: inline-block;
+  background-color: #9B9B9B;
+
+  /* Font */
+  font-weight: bold;
+  font-size: 16px;
+  color: #FFFFFF;
+  letter-spacing: -0.4px;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+
+  /* Dimensions */
+  width: calc(50% - 0.5rem);
+  height: 50px;
+
+  &:hover {
+    background-color: color(#9B9B9B blackness(+ 20%));
+  }
+}
+
+.prev {
+  margin-right: 1rem;
+}
+
+.disabled,
+.disabled:hover {
+  background-color: #eee;
+}

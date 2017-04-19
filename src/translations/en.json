@@ -55,6 +55,8 @@
   "ModalInMobile.closeModal": "Close modal",
   "PageLayout.authInfoFailed": "Could not get authentication information.",
   "PageLayout.logoutFailed": "Logout failed. Please try again.",
+  "PaginationLinks.previous": "Previous page",
+  "PaginationLinks.next": "Next page",
   "SearchPage.foundResults": "{count, number} {count, plural, one {listing} other {listings}} found.",
   "SearchPage.loadingResults": "Loading search results...",
   "SearchPage.loadingResults": "Loading search results...",

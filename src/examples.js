@@ -9,6 +9,7 @@ import * as ModalInMobile from './components/ModalInMobile/ModalInMobile.example
 import * as NamedLink from './components/NamedLink/NamedLink.example';
 import * as LocationAutocompleteInput
   from './components/LocationAutocompleteInput/LocationAutocompleteInput.example';
+import * as PaginationLinks from './components/PaginationLinks/PaginationLinks.example';
 import * as StripeBankAccountToken
   from './components/StripeBankAccountToken/StripeBankAccountToken.example';
 
@@ -41,6 +42,7 @@ export {
   Map,
   ModalInMobile,
   NamedLink,
+  PaginationLinks,
   PasswordForgottenForm,
   SignUpForm,
   StripeBankAccountToken,
