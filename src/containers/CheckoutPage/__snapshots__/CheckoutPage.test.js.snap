@@ -8,7 +8,6 @@ exports[`CheckoutPage matches snapshot 1`] = `
     author={
       Object {
         "attributes": Object {
-          "email": "author@example.com",
           "profile": Object {
             "firstName": "author first name",
             "lastName": "author last name",
