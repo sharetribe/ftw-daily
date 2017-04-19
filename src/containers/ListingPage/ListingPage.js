@@ -88,7 +88,7 @@ export class ListingPageComponent extends Component {
   }
 
   render() {
-    const { params, marketplaceData, showListingError, intl } = this.props;
+    const { params, marketplaceData, showListingError, intl, currentUser } = this.props;
     const currencyConfig = config.currencyConfig;
     const currentListing = denormaliseListing(marketplaceData, params);
 
@@ -130,6 +130,11 @@ export class ListingPageComponent extends Component {
         </div>
       : null;
 
+    const showBookingButton = currentUser &&
+      currentListing &&
+      currentListing.author &&
+      currentListing.author.id.uuid !== currentUser.id.uuid;
+
     const pageContent = (
       <PageLayout title={`${title} ${formattedPrice}`} className={this.state.pageClassNames}>
         <div className={css.listing}>
@@ -151,11 +156,13 @@ export class ListingPageComponent extends Component {
             <BookingDatesForm className={css.bookingForm} onSubmit={this.onSubmit} price={price} />
           </ModalInMobile>
           {map ? <div className={css.map}>{map}</div> : null}
-          <div className={css.openBookingForm}>
-            <Button onClick={() => this.setState({ isBookingModalOpenOnMobile: true })}>
-              {bookBtnMessage}
-            </Button>
-          </div>
+          {showBookingButton
+            ? <div className={css.openBookingForm}>
+                <Button onClick={() => this.setState({ isBookingModalOpenOnMobile: true })}>
+                  {bookBtnMessage}
+                </Button>
+              </div>
+            : null}
         </div>
       </PageLayout>
     );
@@ -174,6 +181,7 @@ export class ListingPageComponent extends Component {
 ListingPageComponent.defaultProps = {
   showListingError: null,
   tab: 'listing',
+  currentUser: null,
 };
 
 const { arrayOf, func, instanceOf, object, oneOf, shape, string } = PropTypes;
@@ -194,13 +202,17 @@ ListingPageComponent.propTypes = {
     slug: string.isRequired,
   }).isRequired,
   showListingError: instanceOf(Error),
+  currentUser: propTypes.currentUser,
   tab: oneOf(['book', 'listing']),
 };
 
-const mapStateToProps = state => ({
-  marketplaceData: state.data,
-  showListingError: state.ListingPage.showListingError,
-});
+const mapStateToProps = state => {
+  return {
+    marketplaceData: state.data,
+    showListingError: state.ListingPage.showListingError,
+    currentUser: state.user.currentUser,
+  };
+};
 
 const ListingPage = connect(mapStateToProps)(withRouter(injectIntl(ListingPageComponent)));
 
