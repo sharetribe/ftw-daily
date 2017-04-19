@@ -87,6 +87,8 @@ export const InboxPageComponent = props => {
     fetchOrdersOrSalesError,
     pagination,
     transactions,
+    currentUserHasListings,
+    currentUserHasListingsError,
     intl,
     params,
   } = props;
@@ -111,7 +113,7 @@ export const InboxPageComponent = props => {
     );
   };
 
-  const error = fetchOrdersOrSalesError
+  const error = fetchOrdersOrSalesError || currentUserHasListingsError
     ? <p className={css.error}>
         <FormattedMessage id="InboxPage.fetchFailed" />
       </p>
@@ -137,24 +139,26 @@ export const InboxPageComponent = props => {
       <h1 className={css.title}>
         <FormattedMessage id="InboxPage.title" />
       </h1>
-      <nav>
-        <NamedLink
-          className={css.tab}
-          name="InboxPage"
-          params={{ tab: 'orders' }}
-          activeClassName={isOrders ? css.activeTab : null}
-        >
-          <FormattedMessage id="InboxPage.ordersTabTitle" />
-        </NamedLink>
-        <NamedLink
-          className={css.tab}
-          name="InboxPage"
-          params={{ tab: 'sales' }}
-          activeClassName={!isOrders ? css.activeTab : null}
-        >
-          <FormattedMessage id="InboxPage.salesTabTitle" />
-        </NamedLink>
-      </nav>
+      {currentUserHasListings
+        ? <nav>
+            <NamedLink
+              className={css.tab}
+              name="InboxPage"
+              params={{ tab: 'orders' }}
+              activeClassName={isOrders ? css.activeTab : null}
+            >
+              <FormattedMessage id="InboxPage.ordersTabTitle" />
+            </NamedLink>
+            <NamedLink
+              className={css.tab}
+              name="InboxPage"
+              params={{ tab: 'sales' }}
+              activeClassName={!isOrders ? css.activeTab : null}
+            >
+              <FormattedMessage id="InboxPage.salesTabTitle" />
+            </NamedLink>
+          </nav>
+        : null}
       {error}
       <ul>
         {!fetchInProgress ? transactions.map(toTxItem) : null}
@@ -165,7 +169,12 @@ export const InboxPageComponent = props => {
   );
 };
 
-InboxPageComponent.defaultProps = { fetchOrdersOrSalesError: null, pagination: null };
+InboxPageComponent.defaultProps = {
+  fetchOrdersOrSalesError: null,
+  pagination: null,
+  currentUserHasListings: false,
+  currentUserHasListingsError: null,
+};
 
 InboxPageComponent.propTypes = {
   params: shape({
@@ -176,6 +185,8 @@ InboxPageComponent.propTypes = {
   fetchOrdersOrSalesError: instanceOf(Error),
   pagination: propTypes.pagination,
   transactions: arrayOf(propTypes.transaction).isRequired,
+  currentUserHasListings: bool,
+  currentUserHasListingsError: instanceOf(Error),
 
   // from injectIntl
   intl: intlShape.isRequired,
@@ -183,12 +194,21 @@ InboxPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const marketplaceData = state.data;
-  const { fetchInProgress, fetchOrdersOrSalesError, pagination, transactionRefs } = state.InboxPage;
+  const {
+    fetchInProgress,
+    fetchOrdersOrSalesError,
+    pagination,
+    transactionRefs,
+    currentUserHasListings,
+    currentUserHasListingsError,
+  } = state.InboxPage;
   return {
     fetchInProgress,
     fetchOrdersOrSalesError,
     pagination,
     transactions: getEntities(marketplaceData, transactionRefs),
+    currentUserHasListings,
+    currentUserHasListingsError,
   };
 };
 

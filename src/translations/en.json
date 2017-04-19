@@ -38,7 +38,7 @@
   "HeroSearchForm.search": "Search",
   "HeroSection.subTitle": "The largest online community to rent music studios",
   "HeroSection.title": "Book Studiotime anywhere",
-  "InboxPage.fetchFailed": "Could not load messages. Please try again.",
+  "InboxPage.fetchFailed": "Could not load all messages. Please try again.",
   "InboxPage.noOrdersFound": "No orders found.",
   "InboxPage.noSalesFound": "No sales found.",
   "InboxPage.ordersTabTitle": "Guest",
