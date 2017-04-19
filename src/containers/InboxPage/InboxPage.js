@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { PageLayout, NamedRedirect, NamedLink } from '../../components';
+import { PageLayout, NamedRedirect, NamedLink, PaginationLinks } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { getEntities } from '../../ducks/sdk.duck';
 import { loadData } from './InboxPage.duck';
@@ -82,7 +82,14 @@ InboxItem.propTypes = {
 };
 
 export const InboxPageComponent = props => {
-  const { fetchInProgress, fetchOrdersOrSalesError, transactions, intl, params } = props;
+  const {
+    fetchInProgress,
+    fetchOrdersOrSalesError,
+    pagination,
+    transactions,
+    intl,
+    params,
+  } = props;
   const { tab } = params;
 
   const validTab = tab === 'orders' || tab === 'sales';
@@ -116,6 +123,15 @@ export const InboxPageComponent = props => {
       </li>
     : null;
 
+  const pagingLinks = !fetchInProgress && pagination && pagination.totalPages !== 1
+    ? <PaginationLinks
+        className={css.pagination}
+        pageName="InboxPage"
+        pagePathParams={params}
+        pagination={pagination}
+      />
+    : null;
+
   return (
     <PageLayout title={title}>
       <h1 className={css.title}>
@@ -144,11 +160,12 @@ export const InboxPageComponent = props => {
         {!fetchInProgress ? transactions.map(toTxItem) : null}
         {noResults}
       </ul>
+      {pagingLinks}
     </PageLayout>
   );
 };
 
-InboxPageComponent.defaultProps = { fetchOrdersOrSalesError: null };
+InboxPageComponent.defaultProps = { fetchOrdersOrSalesError: null, pagination: null };
 
 InboxPageComponent.propTypes = {
   params: shape({
@@ -157,6 +174,7 @@ InboxPageComponent.propTypes = {
 
   fetchInProgress: bool.isRequired,
   fetchOrdersOrSalesError: instanceOf(Error),
+  pagination: propTypes.pagination,
   transactions: arrayOf(propTypes.transaction).isRequired,
 
   // from injectIntl
@@ -165,10 +183,11 @@ InboxPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const marketplaceData = state.data;
-  const { fetchInProgress, fetchOrdersOrSalesError, transactionRefs } = state.InboxPage;
+  const { fetchInProgress, fetchOrdersOrSalesError, pagination, transactionRefs } = state.InboxPage;
   return {
     fetchInProgress,
     fetchOrdersOrSalesError,
+    pagination,
     transactions: getEntities(marketplaceData, transactionRefs),
   };
 };
