@@ -1,6 +1,6 @@
 import React from 'react';
 import { types } from '../../util/sdkLoader';
-import { createListing, fakeIntl } from '../../util/test-data';
+import { createUser, createCurrentUser, createListing, fakeIntl } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
 import { ListingPageComponent } from './ListingPage';
 import { showListingsSuccess } from '../../ducks/sdk.duck';
@@ -10,7 +10,9 @@ const { UUID } = types;
 
 describe('ListingPage', () => {
   it('matches snapshot', () => {
-    const marketplaceData = { entities: { listing: { listing1: createListing('listing1') } } };
+    const currentUser = createCurrentUser('user-2');
+    const listing1 = createListing('listing1', createUser('user-1'));
+    const marketplaceData = { entities: { listing: { listing1 } } };
     const props = {
       dispatch: () => console.log('Dispatch called'),
       flattenedRoutes: [],
@@ -20,6 +22,7 @@ describe('ListingPage', () => {
       },
       params: { slug: 'listing1-title', id: 'listing1' },
       marketplaceData,
+      currentUser,
       intl: fakeIntl,
       onLoadListing: () => {},
     };
@@ -34,13 +37,15 @@ describe('ListingPage', () => {
       const dispatch = jest.fn(action => action);
       const response = { status: 200 };
       const show = jest.fn(() => Promise.resolve(response));
-      const sdk = { listings: { show } };
+      const me = jest.fn(() => Promise.resolve(response));
+      const sdk = { listings: { show }, users: { me } };
 
       return showListing(id)(dispatch, null, sdk).then(data => {
         expect(data).toEqual(response);
         expect(show.mock.calls).toEqual([[{ id, include: ['author', 'images'] }]]);
         expect(dispatch.mock.calls).toEqual([
           [showListingRequest(id)],
+          [expect.anything()], // fetchCurrentUser() call
           [showListingsSuccess(data)],
         ]);
       });
@@ -62,7 +67,11 @@ describe('ListingPage', () => {
         e => {
           expect(e).toEqual(error);
           expect(show.mock.calls).toEqual([[{ id, include: ['author', 'images'] }]]);
-          expect(dispatch.mock.calls).toEqual([[showListingRequest(id)], [showListingError(e)]]);
+          expect(dispatch.mock.calls).toEqual([
+            [showListingRequest(id)],
+            [expect.anything()], // fetchCurrentUser() call
+            [showListingError(e)],
+          ]);
         }
       );
     });

@@ -1,4 +1,5 @@
 import { showListingsSuccess } from '../../ducks/sdk.duck';
+import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
 
@@ -42,6 +43,7 @@ export const showListingError = e => ({
 export const showListing = listingId =>
   (dispatch, getState, sdk) => {
     dispatch(showListingRequest(listingId));
+    dispatch(fetchCurrentUser());
     return sdk.listings
       .show({ id: listingId, include: ['author', 'images'] })
       .then(data => {

@@ -7,8 +7,18 @@ export const createUser = id => ({
   id: new UUID(id),
   type: 'user',
   attributes: {
+    profile: { firstName: `${id} first name`, lastName: `${id} last name`, slug: `${id}-slug` },
+  },
+});
+
+// Create a user that conforms to the util/propTypes user schema
+export const createCurrentUser = id => ({
+  id: new UUID(id),
+  type: 'user',
+  attributes: {
     email: `${id}@example.com`,
     profile: { firstName: `${id} first name`, lastName: `${id} last name`, slug: `${id}-slug` },
+    stripeConnected: true,
   },
 });
 
@@ -35,7 +45,7 @@ export const createImage = id => ({
 });
 
 // Create a user that conforms to the util/propTypes listing schema
-export const createListing = id => ({
+export const createListing = (id, author = null) => ({
   id: new UUID(id),
   type: 'listing',
   attributes: {
@@ -45,6 +55,7 @@ export const createListing = id => ({
     address: `${id} address`,
     geolocation: new LatLng(40, 60),
   },
+  author,
 });
 
 export const createTransaction = options => {

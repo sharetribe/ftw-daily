@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
-import { createUser, createListing, fakeIntl } from '../../util/test-data';
+import { createUser, createCurrentUser, createListing, fakeIntl } from '../../util/test-data';
 import { CheckoutPageComponent } from './CheckoutPage';
 import checkoutPageReducer, { SET_INITAL_VALUES, setInitialValues } from './CheckoutPage.duck';
 
@@ -8,6 +8,7 @@ const noop = () => null;
 
 describe('CheckoutPage', () => {
   it('matches snapshot', () => {
+    const listing = createListing('listing1', createUser('author'));
     const props = {
       bookingDates: {
         bookingStart: new Date(Date.UTC(2017, 3, 14)),
@@ -16,7 +17,8 @@ describe('CheckoutPage', () => {
       flattenedRoutes: [],
       history: { push: noop },
       intl: fakeIntl,
-      listing: { ...createListing('listing1'), author: createUser('author') },
+      listing,
+      currentUser: createCurrentUser('current-user'),
       params: { id: 'listing1', slug: 'listing1' },
       sendOrderRequest: noop,
     };
