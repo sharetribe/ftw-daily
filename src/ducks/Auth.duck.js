@@ -1,8 +1,4 @@
-/* eslint-disable no-constant-condition */
-/**
- * Authentication duck.
- */
-import { call, put, take, cancel, fork, takeLatest } from 'redux-saga/effects';
+import { call, put, take, cancel, fork } from 'redux-saga/effects';
 
 const authenticated = authInfo => authInfo.grantType === 'refresh_token';
 
@@ -38,7 +34,8 @@ export default function reducer(state = initialState, action = {}) {
     case AUTH_INFO_SUCCESS:
       return { ...state, authInfoLoaded: true, isAuthenticated: authenticated(payload) };
     case AUTH_INFO_ERROR:
-      return { ...state, authInfoError: payload };
+      console.error(payload); // eslint-disable-line
+      return { ...state, authInfoLoaded: true, authInfoError: payload };
 
     case LOGIN_REQUEST:
       return { ...state, loginError: null, logoutError: null };
@@ -60,7 +57,7 @@ export default function reducer(state = initialState, action = {}) {
 
 // ================ Action creators ================ //
 
-export const authInfo = () => ({ type: AUTH_INFO_REQUEST });
+export const authInfoRequest = () => ({ type: AUTH_INFO_REQUEST });
 export const authInfoSuccess = info => ({ type: AUTH_INFO_SUCCESS, payload: info });
 export const authInfoError = error => ({ type: AUTH_INFO_ERROR, payload: error, error: true });
 
@@ -76,15 +73,6 @@ export const logoutSuccess = () => ({ type: LOGOUT_SUCCESS });
 export const logoutError = error => ({ type: LOGOUT_ERROR, payload: error, error: true });
 
 // ================ Worker sagas ================ //
-
-export function* callAuthInfo(sdk) {
-  try {
-    const info = yield call(sdk.authInfo);
-    yield put(authInfoSuccess(info));
-  } catch (e) {
-    yield put(authInfoError(e));
-  }
-}
 
 export function* callLogin(action, sdk) {
   const { payload } = action;
@@ -111,10 +99,6 @@ export function* callLogout(action, sdk) {
 
 // ================ Watcher sagas ================ //
 
-export function* watchAuthInfo(sdk) {
-  yield takeLatest(AUTH_INFO_REQUEST, callAuthInfo, sdk);
-}
-
 export function* watchAuth(sdk) {
   let task;
 
@@ -136,3 +120,14 @@ export function* watchAuth(sdk) {
     }
   }
 }
+
+// ================ Thunks ================ //
+
+export const authInfo = () =>
+  (dispatch, getState, sdk) => {
+    dispatch(authInfoRequest());
+    return sdk
+      .authInfo()
+      .then(info => dispatch(authInfoSuccess(info)))
+      .catch(e => dispatch(authInfoError(e)));
+  };
