@@ -1,6 +1,7 @@
 import { reverse, sortBy } from 'lodash';
 import { parse } from '../../util/urlHelpers';
 import { addEntities } from '../../ducks/sdk.duck';
+import { fetchCurrentUser } from '../../ducks/user.duck';
 
 const sortedTransactions = txs =>
   reverse(
@@ -15,6 +16,10 @@ export const FETCH_ORDERS_OR_SALES_REQUEST = 'app/InboxPage/FETCH_ORDERS_OR_SALE
 export const FETCH_ORDERS_OR_SALES_SUCCESS = 'app/InboxPage/FETCH_ORDERS_OR_SALES_SUCCESS';
 export const FETCH_ORDERS_OR_SALES_ERROR = 'app/InboxPage/FETCH_ORDERS_OR_SALES_ERROR';
 
+export const FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST = 'app/InboxPage/FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST';
+export const FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS = 'app/InboxPage/FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS';
+export const FETCH_CURRENT_USER_HAS_LISTINGS_ERROR = 'app/InboxPage/FETCH_CURRENT_USER_HAS_LISTINGS_ERROR';
+
 // ================ Reducer ================ //
 
 const entityRefs = entities =>
@@ -28,6 +33,8 @@ const initialState = {
   fetchOrdersOrSalesError: null,
   pagination: null,
   transactionRefs: [],
+  currentUserHasListingsError: null,
+  currentUserHasListings: false,
 };
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
@@ -48,6 +55,14 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
       console.error(payload); // eslint-disable-line
       return { ...state, fetchInProgress: false, fetchOrdersOrSalesError: payload };
 
+    case FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST:
+      return { ...state, currentUserHasListingsError: null };
+    case FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS:
+      return { ...state, currentUserHasListings: payload.hasListings };
+    case FETCH_CURRENT_USER_HAS_LISTINGS_ERROR:
+      console.error(payload); // eslint-disable-line
+      return { ...state, currentUserHasListingsError: payload };
+
     default:
       return state;
   }
@@ -66,7 +81,45 @@ const fetchOrdersOrSalesError = e => ({
   payload: e,
 });
 
+const fetchCurrentUserHasListingsRequest = () => ({
+  type: FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST,
+});
+
+const fetchCurrentUserHasListingsSuccess = hasListings => ({
+  type: FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS,
+  payload: { hasListings },
+});
+
+const fetchCurrentUserHasListingsError = e => ({
+  type: FETCH_CURRENT_USER_HAS_LISTINGS_ERROR,
+  error: true,
+  payload: e,
+});
+
 // ================ Thunks ================ //
+
+const fetchCurrentUserHasListings = () =>
+  (dispatch, getState, sdk) => {
+    dispatch(fetchCurrentUserHasListingsRequest());
+    dispatch(fetchCurrentUser())
+      .then(() => {
+        const currentUserId = getState().user.currentUser.id;
+        const params = {
+          author_id: currentUserId,
+
+          // Since we are only interested in if the user has
+          // listings, we only need at most one result.
+          page: 1,
+          per_page: 1,
+        };
+        return sdk.listings.query(params);
+      })
+      .then(response => {
+        const hasListings = response.data.data && response.data.data.length > 0;
+        dispatch(fetchCurrentUserHasListingsSuccess(hasListings));
+      })
+      .catch(e => dispatch(fetchCurrentUserHasListingsError(e)));
+  };
 
 const INBOX_PAGE_SIZE = 10;
 
@@ -85,6 +138,7 @@ export const loadData = (params, search) =>
     }
 
     dispatch(fetchOrdersOrSalesRequest());
+    dispatch(fetchCurrentUserHasListings());
 
     const { page = 1 } = parse(search);
 
