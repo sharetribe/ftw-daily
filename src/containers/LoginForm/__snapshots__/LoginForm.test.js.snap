@@ -48,7 +48,9 @@ exports[`LoginForm matches snapshot 1`] = `
     className=""
     disabled={true}
     type="submit">
-    Log in
+    <span>
+      Log in
+    </span>
   </button>
 </form>
 `;
