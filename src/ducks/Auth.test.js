@@ -1,5 +1,4 @@
-import { call, put, take, fork, cancel } from 'redux-saga/effects';
-import { createMockTask } from 'redux-saga/utils';
+import { clearCurrentUser } from './user.duck';
 import reducer, {
   LOGIN_REQUEST,
   LOGOUT_REQUEST,
@@ -104,7 +103,11 @@ describe('Auth duck', () => {
 
       return login(username, password)(dispatch, getState, sdk).then(() => {
         expect(sdk.login.mock.calls).toEqual([[{ username, password }]]);
-        expect(dispatch.mock.calls).toEqual([[loginRequest()], [loginSuccess()]]);
+        expect(dispatch.mock.calls).toEqual([
+          [loginRequest()],
+          [expect.anything()], // fetchCurrentUser
+          [loginSuccess()],
+        ]);
       });
     });
     it('should dispatch error', () => {
@@ -172,7 +175,11 @@ describe('Auth duck', () => {
 
       return logout()(dispatch, getState, sdk).then(() => {
         expect(sdk.logout.mock.calls.length).toEqual(1);
-        expect(dispatch.mock.calls).toEqual([[logoutRequest()], [logoutSuccess()]]);
+        expect(dispatch.mock.calls).toEqual([
+          [logoutRequest()],
+          [clearCurrentUser()],
+          [logoutSuccess()],
+        ]);
       });
     });
     it('should dispatch error', () => {

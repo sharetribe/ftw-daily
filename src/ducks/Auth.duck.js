@@ -1,3 +1,5 @@
+import { clearCurrentUser, fetchCurrentUser } from './user.duck';
+
 const authenticated = authInfo => authInfo.grantType === 'refresh_token';
 
 // ================ Action types ================ //
@@ -98,6 +100,7 @@ export const login = (username, password) =>
     // just dispatches the login error action.
     return sdk
       .login({ username, password })
+      .then(() => dispatch(fetchCurrentUser()))
       .then(() => dispatch(loginSuccess()))
       .catch(e => dispatch(loginError(e)));
   };
@@ -111,5 +114,9 @@ export const logout = () =>
 
     // Not that the thunk does not reject when the logout fails, it
     // just dispatches the logout error action.
-    return sdk.logout().then(() => dispatch(logoutSuccess())).catch(e => dispatch(logoutError(e)));
+    return sdk
+      .logout()
+      .then(() => dispatch(clearCurrentUser()))
+      .then(() => dispatch(logoutSuccess()))
+      .catch(e => dispatch(logoutError(e)));
   };
