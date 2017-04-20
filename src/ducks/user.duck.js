@@ -72,6 +72,13 @@ export const stripeAccountCreateError = e => ({
 export const fetchCurrentUser = () =>
   (dispatch, getState, sdk) => {
     dispatch(usersMeRequest());
+    const { isAuthenticated } = getState().Auth;
+
+    if (!isAuthenticated) {
+      // Ignore when not logged in, current user should be null
+      return Promise.resolve({});
+    }
+
     return sdk.users
       .me()
       .then(response => {
