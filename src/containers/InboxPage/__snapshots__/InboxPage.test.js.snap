@@ -79,7 +79,8 @@ exports[`InboxPage matches snapshot 1`] = `
                 provider-user-id first name provider-user-id last name
               </span>
               <span
-                className={undefined}>
+                className={undefined}
+                title="2017-01-15 00:00">
                 2017-01-15
               </span>
             </div>
@@ -112,7 +113,8 @@ exports[`InboxPage matches snapshot 1`] = `
                 provider-user-id first name provider-user-id last name
               </span>
               <span
-                className={undefined}>
+                className={undefined}
+                title="2016-01-15 00:00">
                 2016-01-15
               </span>
             </div>
@@ -209,7 +211,8 @@ exports[`InboxPage matches snapshot 2`] = `
                 customer-user-id first name customer-user-id last name
               </span>
               <span
-                className={undefined}>
+                className={undefined}
+                title="2017-01-15 00:00">
                 2017-01-15
               </span>
             </div>
@@ -242,7 +245,8 @@ exports[`InboxPage matches snapshot 2`] = `
                 customer-user-id first name customer-user-id last name
               </span>
               <span
-                className={undefined}>
+                className={undefined}
+                title="2016-01-15 00:00">
                 2016-01-15
               </span>
             </div>

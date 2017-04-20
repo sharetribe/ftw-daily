@@ -140,3 +140,11 @@ export const transaction = shape({
   customer: user,
   provider: user,
 });
+
+// Pagination information in the response meta
+export const pagination = shape({
+  page: number.isRequired,
+  perPage: number.isRequired,
+  totalItems: number.isRequired,
+  totalPages: number.isRequired,
+});

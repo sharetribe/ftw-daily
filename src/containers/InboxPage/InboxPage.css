@@ -68,3 +68,7 @@
   font-size: 14px;
   text-decoration: none;
 }
+
+.pagination {
+  margin: 0 1rem;
+}

@@ -10,8 +10,8 @@ describe('CheckoutPage', () => {
   it('matches snapshot', () => {
     const props = {
       bookingDates: {
-        bookingStart: new Date('Fri, 14 Apr 2017 GMT'),
-        bookingEnd: new Date('Sun, 16 Apr 2017 GMT'),
+        bookingStart: new Date(Date.UTC(2017, 3, 14)),
+        bookingEnd: new Date(Date.UTC(2017, 3, 16)),
       },
       flattenedRoutes: [],
       history: { push: noop },
@@ -29,8 +29,8 @@ describe('CheckoutPage', () => {
       const author = createUser('author1');
       const listing = { ...createListing('00000000-0000-0000-0000-000000000000'), author };
       const bookingDates = {
-        bookingStart: new Date('Fri, 14 Apr 2017 GMT'),
-        bookingEnd: new Date('Sun, 16 Apr 2017 GMT'),
+        bookingStart: new Date(Date.UTC(2017, 3, 14)),
+        bookingEnd: new Date(Date.UTC(2017, 3, 16)),
       };
       const expectedAction = {
         type: SET_INITAL_VALUES,
@@ -54,8 +54,8 @@ describe('CheckoutPage', () => {
         const author = createUser('author1');
         const listing = { ...createListing('00000000-0000-0000-0000-000000000000'), author };
         const bookingDates = {
-          bookingStart: new Date('Fri, 14 Apr 2017 GMT'),
-          bookingEnd: new Date('Sun, 16 Apr 2017 GMT'),
+          bookingStart: new Date(Date.UTC(2017, 3, 14)),
+          bookingEnd: new Date(Date.UTC(2017, 3, 16)),
         };
         const payload = { listing, bookingDates };
         expect(checkoutPageReducer({}, { type: SET_INITAL_VALUES, payload })).toEqual(payload);

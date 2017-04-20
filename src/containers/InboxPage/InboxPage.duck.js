@@ -1,5 +1,13 @@
-import _ from 'lodash';
+import { reverse, sortBy } from 'lodash';
+import { parse } from '../../util/urlHelpers';
 import { addEntities } from '../../ducks/sdk.duck';
+
+const sortedTransactions = txs =>
+  reverse(
+    sortBy(txs, tx => {
+      return tx.attributes ? tx.attributes.lastTransitionedAt : null;
+    })
+  );
 
 // ================ Action types ================ //
 
@@ -18,6 +26,7 @@ const entityRefs = entities =>
 const initialState = {
   fetchInProgress: false,
   fetchOrdersOrSalesError: null,
+  pagination: null,
   transactionRefs: [],
 };
 
@@ -26,8 +35,15 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
   switch (type) {
     case FETCH_ORDERS_OR_SALES_REQUEST:
       return { ...state, fetchInProgress: true, fetchOrdersOrSalesError: null };
-    case FETCH_ORDERS_OR_SALES_SUCCESS:
-      return { ...state, fetchInProgress: false, transactionRefs: entityRefs(payload) };
+    case FETCH_ORDERS_OR_SALES_SUCCESS: {
+      const transactions = sortedTransactions(payload.data.data);
+      return {
+        ...state,
+        fetchInProgress: false,
+        transactionRefs: entityRefs(transactions),
+        pagination: payload.data.meta,
+      };
+    }
     case FETCH_ORDERS_OR_SALES_ERROR:
       console.error(payload); // eslint-disable-line
       return { ...state, fetchInProgress: false, fetchOrdersOrSalesError: payload };
@@ -40,9 +56,9 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
 // ================ Action creators ================ //
 
 const fetchOrdersOrSalesRequest = () => ({ type: FETCH_ORDERS_OR_SALES_REQUEST });
-const fetchOrdersOrSalesSuccess = transactions => ({
+const fetchOrdersOrSalesSuccess = response => ({
   type: FETCH_ORDERS_OR_SALES_SUCCESS,
-  payload: transactions,
+  payload: response,
 });
 const fetchOrdersOrSalesError = e => ({
   type: FETCH_ORDERS_OR_SALES_ERROR,
@@ -52,15 +68,9 @@ const fetchOrdersOrSalesError = e => ({
 
 // ================ Thunks ================ //
 
-const sortedTransactions = txs =>
-  _.chain(txs)
-    .sortBy(tx => {
-      return tx.attributes ? tx.attributes.lastTransitionedAt : null;
-    })
-    .reverse()
-    .value();
+const INBOX_PAGE_SIZE = 10;
 
-export const loadData = params =>
+export const loadData = (params, search) =>
   (dispatch, getState, sdk) => {
     const { tab } = params;
 
@@ -76,17 +86,20 @@ export const loadData = params =>
 
     dispatch(fetchOrdersOrSalesRequest());
 
-    const queryParams = {
+    const { page = 1 } = parse(search);
+
+    const apiQueryParams = {
       only: onlyFilter,
       include: ['provider', 'customer'],
+      page,
+      per_page: INBOX_PAGE_SIZE,
     };
 
     return sdk.transactions
-      .query(queryParams)
+      .query(apiQueryParams)
       .then(response => {
-        const transactions = sortedTransactions(response.data.data);
         dispatch(addEntities(response));
-        dispatch(fetchOrdersOrSalesSuccess(transactions));
+        dispatch(fetchOrdersOrSalesSuccess(response));
         return response;
       })
       .catch(e => {
