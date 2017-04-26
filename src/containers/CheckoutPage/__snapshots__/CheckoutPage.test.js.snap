@@ -11,7 +11,6 @@ exports[`CheckoutPage matches snapshot 1`] = `
           "profile": Object {
             "firstName": "author first name",
             "lastName": "author last name",
-            "slug": "author-slug",
           },
         },
         "id": UUID {
