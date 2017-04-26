@@ -1,25 +1,23 @@
 import React from 'react';
+import { types } from '../../util/sdkLoader';
+import { createBooking, createListing, createUser } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
 import OrderDetailsPanel from './OrderDetailsPanel.js';
 
 describe('OrderDetailsPanel', () => {
   it('matches snapshot', () => {
+    const { Money } = types;
     const props = {
-      orderId: 'some-test-order-id',
-      title: 'Test order',
-      imageUrl: 'http://example.com/img',
-      info: {
-        pricePerDay: '10$',
-        bookingPeriod: 'some booking period',
-        bookingDuration: 'some booking duration',
-        total: '100$',
-      },
-      contact: {
-        addressLine1: 'Some road 1',
-        addressLine2: 'Some city, somewhere',
-        phoneNumber: 'Some phone number',
-      },
-      confirmationCode: 'some-test-confirmation-code',
+      commission: null,
+      totalPrice: new Money(16500, 'USD'),
+      orderState: 'state/preauthorized',
+      booking: createBooking(
+        'booking1',
+        new Date(Date.UTC(2017, 5, 10)),
+        new Date(Date.UTC(2017, 5, 13))
+      ),
+      listing: createListing('listing1'),
+      provider: createUser('provider'),
     };
     const tree = renderShallow(<OrderDetailsPanel {...props} />);
     expect(tree).toMatchSnapshot();

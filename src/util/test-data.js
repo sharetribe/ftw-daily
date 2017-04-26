@@ -2,6 +2,16 @@ import { types } from './sdkLoader';
 
 const { UUID, LatLng, Money } = types;
 
+// Create a booking that conforms to the util/propTypes booking schema
+export const createBooking = (id, startDateInUTC, endDateInUTC) => ({
+  id: new UUID(id),
+  type: 'booking',
+  attributes: {
+    start: startDateInUTC,
+    end: endDateInUTC,
+  },
+});
+
 // Create a user that conforms to the util/propTypes user schema
 export const createUser = id => ({
   id: new UUID(id),
@@ -62,6 +72,9 @@ export const createTransaction = options => {
   const {
     id,
     state = 'state/preauthorized',
+    total = new Money(1000, 'USD'),
+    booking = null,
+    listing = null,
     customer = null,
     provider = null,
     lastTransitionedAt = new Date(Date.UTC(2017, 5, 1)),
@@ -74,8 +87,10 @@ export const createTransaction = options => {
       createdAt: new Date(Date.UTC(2017, 4, 1)),
       lastTransitionedAt,
       state,
-      total: null,
+      total,
     },
+    booking,
+    listing,
     customer,
     provider,
   };
