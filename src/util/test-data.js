@@ -7,7 +7,7 @@ export const createUser = id => ({
   id: new UUID(id),
   type: 'user',
   attributes: {
-    profile: { firstName: `${id} first name`, lastName: `${id} last name`, slug: `${id}-slug` },
+    profile: { firstName: `${id} first name`, lastName: `${id} last name` },
   },
 });
 
@@ -17,7 +17,7 @@ export const createCurrentUser = id => ({
   type: 'user',
   attributes: {
     email: `${id}@example.com`,
-    profile: { firstName: `${id} first name`, lastName: `${id} last name`, slug: `${id}-slug` },
+    profile: { firstName: `${id} first name`, lastName: `${id} last name` },
     stripeConnected: true,
   },
 });
