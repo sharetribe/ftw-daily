@@ -15,6 +15,8 @@ import { initiateOrder, setInitialValues, loadData } from './CheckoutPage.duck';
 
 import css from './CheckoutPage.css';
 
+const STORAGE_KEY = 'CheckoutPage';
+
 const ensureListingProperties = listing => {
   const empty = { id: null, type: 'listing', attributes: {}, author: {}, images: [] };
   // assume own properties: id, type, attributes etc.
@@ -74,14 +76,14 @@ const storeData = (bookingDates, listing) => {
     /* eslint-enable no-underscore-dangle */
 
     const storableData = JSON.stringify(data, types.replacer);
-    window.sessionStorage.setItem('CheckoutPage', storableData);
+    window.sessionStorage.setItem(STORAGE_KEY, storableData);
   }
 };
 
 // Get stored data
 const storedData = () => {
   if (window && window.sessionStorage) {
-    const checkoutPageData = window.sessionStorage.getItem('CheckoutPage');
+    const checkoutPageData = window.sessionStorage.getItem(STORAGE_KEY);
 
     // TODO How should we deal with Dates when data is serialized?
     // Dates are expected to be in format: { date: new Date(), _serializedType: 'SerializableDate' }
@@ -127,14 +129,18 @@ export class CheckoutPageComponent extends Component {
     }
     this.setState({ submitting: true });
     const { bookingDates, flattenedRoutes, history, sendOrderRequest, listing } = this.props;
-    const params = { listingId: listing.id, cardToken, ...bookingDates };
+    // Get page data from passed-in props or from storage
+    const pageData = bookingDates && listing ? { bookingDates, listing } : storedData();
+    const { bookingStart, bookingEnd } = pageData.bookingDates || {};
+    const requestParams = { listingId: pageData.listing.id, cardToken, bookingStart, bookingEnd };
 
-    sendOrderRequest(params)
+    sendOrderRequest(requestParams)
       .then(orderId => {
         this.setState({ submitting: false });
         const orderDetailsPath = pathByRouteName('OrderDetailsPage', flattenedRoutes, {
           id: orderId.uuid,
         });
+        window.sessionStorage.removeItem(STORAGE_KEY);
         history.push(orderDetailsPath);
       })
       .catch(() => {
@@ -151,7 +157,7 @@ export class CheckoutPageComponent extends Component {
     const currentListing = ensureListingProperties(pageData.listing);
     const price = currentListing.attributes.price;
 
-    const isOwnListing = currentListing &&
+    const isOwnListing = currentListing.id &&
       currentUser &&
       currentListing.author &&
       currentListing.author.id.uuid === currentUser.id.uuid;
