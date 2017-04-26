@@ -183,6 +183,7 @@ const routesConfiguration = [
         exact: true,
         name: 'OrderDetailsPage',
         component: props => <OrderPage {...props} tab="details" />,
+        loadData: params => OrderPage.loadData(params),
       },
       {
         path: '/order/:id/discussion',
@@ -190,6 +191,7 @@ const routesConfiguration = [
         exact: true,
         name: 'OrderDiscussionPage',
         component: props => <OrderPage {...props} tab="discussion" />,
+        loadData: params => OrderPage.loadData(params),
       },
     ],
   },

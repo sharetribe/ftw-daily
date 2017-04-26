@@ -1,43 +1,63 @@
 exports[`OrderPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
-  title="Your Banyan Studios booking is confirmed!">
-  <withFlattenedRoutes(withRouter(NamedLink))
-    name="OrderDetailsPage"
-    params={
-      Object {
-        "id": 1234,
-      }
-    }
-    style={
-      Object {
-        "marginRight": "2rem",
-      }
-    }>
-    Booking details
-  </withFlattenedRoutes(withRouter(NamedLink))>
-  <withFlattenedRoutes(withRouter(NamedLink))
-    name="OrderDiscussionPage"
-    params={
-      Object {
-        "id": 1234,
-      }
-    }>
-    Discussion
-  </withFlattenedRoutes(withRouter(NamedLink))>
+  title="OrderPage.title">
   <OrderDetailsPanel
-    className="undefined"
-    confirmationCode="X2587X"
-    contact={
+    booking={
       Object {
-        "addressLine1": "350 5th Avenue",
-        "addressLine2": "New York, NY 10118",
-        "phoneNumber": "+1 432 43184910",
+        "attributes": Object {
+          "end": 2017-06-13T00:00:00.000Z,
+          "start": 2017-06-10T00:00:00.000Z,
+        },
+        "id": UUID {
+          "uuid": "booking1",
+        },
+        "type": "booking",
       }
     }
-    imageUrl="http://placehold.it/750x470"
-    orderId={1234}
-    title="Banyan Studios" />
-  <OrderDiscussionPanel
-    className="" />
+    className="undefined"
+    listing={
+      Object {
+        "attributes": Object {
+          "address": "listing1 address",
+          "description": "listing1 description",
+          "geolocation": LatLng {
+            "lat": 40,
+            "lng": 60,
+          },
+          "price": Money {
+            "amount": 5500,
+            "currency": "USD",
+          },
+          "title": "listing1 title",
+        },
+        "author": null,
+        "id": UUID {
+          "uuid": "listing1",
+        },
+        "images": Array [],
+        "type": "listing",
+      }
+    }
+    orderState="state/preauthorized"
+    provider={
+      Object {
+        "attributes": Object {
+          "profile": Object {
+            "firstName": "provider1 first name",
+            "lastName": "provider1 last name",
+          },
+        },
+        "id": UUID {
+          "uuid": "provider1",
+        },
+        "type": "user",
+      }
+    }
+    totalPrice={
+      Money {
+        "amount": 1000,
+        "currency": "USD",
+      }
+    } />
 </Connect(withRouter(PageLayout))>
 `;

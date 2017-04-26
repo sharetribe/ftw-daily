@@ -6,7 +6,16 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
       id="OrderDetailsPanel.listingTitle"
       values={
         Object {
-          "title": "listing1 title",
+          "title": <withFlattenedRoutes(withRouter(NamedLink))
+            name="ListingPage"
+            params={
+                Object {
+                    "id": "listing1",
+                    "slug": "listing1-title",
+                  }
+            }>
+            listing1 title
+        </withFlattenedRoutes(withRouter(NamedLink))>,
         }
       } />
   </h1>

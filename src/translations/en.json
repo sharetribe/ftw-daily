@@ -57,6 +57,8 @@
   "ModalInMobile.closeModal": "Close modal",
   "OrderDetailsPanel.listingTitle": "You have requested to book {title}",
   "OrderDetailsPanel.orderStatusMessage": "{providerName} has been notified about the booking request, so sit back and relax",
+  "OrderPage.loadingData": "Loading order data",
+  "OrderPage.title": "Order details for ${title}",
   "PageLayout.authInfoFailed": "Could not get authentication information.",
   "PageLayout.logoutFailed": "Logout failed. Please try again.",
   "PaginationLinks.previous": "Previous page",
