@@ -3,6 +3,11 @@
   margin: 1rem 1rem 2rem 1rem;
 }
 
+.messagesContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 .message {
   display: flex;
   margin: 1rem 1rem 2rem 1rem;

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedDate, FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
 import { types } from '../../util/sdkLoader';
@@ -8,7 +8,15 @@ import { Avatar, BookingInfo, NamedLink } from '../../components';
 import css from './OrderDetailsPanel.css';
 
 const OrderDetailsPanel = props => {
-  const { className, totalPrice, orderState, booking, listing, provider } = props;
+  const {
+    className,
+    totalPrice,
+    orderState,
+    lastTransitionedAt,
+    booking,
+    listing,
+    provider,
+  } = props;
   const { firstName, lastName } = provider.attributes.profile;
   const providerName = firstName ? `${firstName} ${lastName}` : '';
 
@@ -18,24 +26,6 @@ const OrderDetailsPanel = props => {
       {listing.attributes.title}
     </NamedLink>
   );
-
-  const title = orderState === propTypes.TX_STATE_PREAUTHORIZED
-    ? <FormattedMessage
-        id="OrderDetailsPanel.listingTitle"
-        values={{ title: listingLink }}
-      />
-    : null;
-
-  const message = orderState === propTypes.TX_STATE_PREAUTHORIZED
-    ? <div className={css.message}>
-        <div className={css.avatarWrapper}>
-          <Avatar name={providerName} />
-        </div>
-        <div>
-          <FormattedMessage id="OrderDetailsPanel.orderStatusMessage" values={{ providerName }} />
-        </div>
-      </div>
-    : null;
 
   // TODO We can't use price from listing, since that might have changed.
   // When API includes unit price and possible additional fees, we need to change this.
@@ -51,10 +41,59 @@ const OrderDetailsPanel = props => {
       />
     : <p className={css.error}>{'priceRequiredMessage'}</p>;
 
+  // orderState affects to both title and message section
+  let stateMsgData = {};
+  switch (orderState) {
+    case propTypes.TX_STATE_PREAUTHORIZED:
+      stateMsgData = {
+        title: (
+          <FormattedMessage
+            id="OrderDetailsPanel.orderRequestedTitle"
+            values={{ title: listingLink }}
+          />
+        ),
+        message: (
+          <div className={css.messagesContainer}>
+            <FormattedMessage
+              id="OrderDetailsPanel.orderRequestedStatus"
+              values={{ providerName }}
+            />
+          </div>
+        ),
+      };
+      break;
+    case propTypes.TX_STATE_ACCEPTED:
+      stateMsgData = {
+        title: (
+          <FormattedMessage
+            id="OrderDetailsPanel.orderAcceptedTitle"
+            values={{ title: listingLink }}
+          />
+        ),
+        message: (
+          <div className={css.messagesContainer}>
+            <FormattedMessage
+              id="OrderDetailsPanel.orderAcceptedStatus"
+              values={{ providerName }}
+            />
+            <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
+          </div>
+        ),
+      };
+      break;
+    default:
+      stateMsgData = { title: null, message: null };
+  }
+
   return (
     <div className={className}>
-      <h1 className={css.title}>{title}</h1>
-      {message}
+      <h1 className={css.title}>{stateMsgData.title}</h1>
+      <div className={css.message}>
+        <div className={css.avatarWrapper}>
+          <Avatar name={providerName} />
+        </div>
+        {stateMsgData.message}
+      </div>
       {bookingInfo}
     </div>
   );
@@ -68,6 +107,7 @@ OrderDetailsPanel.propTypes = {
   className: string,
   totalPrice: instanceOf(types.Money).isRequired,
   orderState: string.isRequired,
+  lastTransitionedAt: instanceOf(Date).isRequired,
   booking: propTypes.booking.isRequired,
   listing: propTypes.listing.isRequired,
   provider: propTypes.user.isRequired,

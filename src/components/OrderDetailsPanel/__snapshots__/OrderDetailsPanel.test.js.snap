@@ -3,7 +3,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
   className={null}>
   <h1>
     <FormattedMessage
-      id="OrderDetailsPanel.listingTitle"
+      id="OrderDetailsPanel.orderRequestedTitle"
       values={
         Object {
           "title": <withFlattenedRoutes(withRouter(NamedLink))
@@ -27,7 +27,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
     </div>
     <div>
       <FormattedMessage
-        id="OrderDetailsPanel.orderStatusMessage"
+        id="OrderDetailsPanel.orderRequestedStatus"
         values={
           Object {
             "providerName": "provider first name provider last name",

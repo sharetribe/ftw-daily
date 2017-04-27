@@ -21,6 +21,7 @@ export const OrderPageComponent = props => {
   const detailsProps = {
     totalPrice: currentTransaction.attributes.total,
     orderState: currentTransaction.attributes.state,
+    lastTransitionedAt: currentTransaction.attributes.lastTransitionedAt,
     listing: currentListing,
     booking: ensureBooking(currentTransaction.booking),
     provider: ensureUser(currentTransaction.provider),
