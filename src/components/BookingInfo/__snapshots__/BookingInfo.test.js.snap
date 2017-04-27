@@ -157,7 +157,7 @@ exports[`BookingInfo provider transaction data matches snapshot 1`] = `
     <div
       className={undefined}>
       <span>
-        Charged commission:
+        Saunatime fee:
       </span>
     </div>
     <div

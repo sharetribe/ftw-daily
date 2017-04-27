@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedDate, FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
@@ -8,7 +8,16 @@ import { Avatar, BookingInfo, NamedLink } from '../../components';
 import css from './SaleDetailsPanel.css';
 
 const SaleDetailsPanel = props => {
-  const { className, subtotalPrice, saleState, booking, listing, customer, commission } = props;
+  const {
+    className,
+    subtotalPrice,
+    saleState,
+    booking,
+    lastTransitionedAt,
+    listing,
+    customer,
+    commission,
+  } = props;
   const { firstName, lastName } = customer.attributes.profile;
   const customerName = firstName ? `${firstName} ${lastName}` : '';
 
@@ -18,19 +27,6 @@ const SaleDetailsPanel = props => {
       {listing.attributes.title}
     </NamedLink>
   );
-
-  const title = saleState === propTypes.TX_STATE_PREAUTHORIZED
-    ? <FormattedMessage
-        id="SaleDetailsPanel.listingTitle"
-        values={{ customerName: customerName, title: listingLink }}
-      />
-    : null;
-
-  const message = saleState === propTypes.TX_STATE_PREAUTHORIZED
-    ? <div className={css.message}>
-        <FormattedMessage id="SaleDetailsPanel.saleStatusMessage" values={{ customerName }} />
-      </div>
-    : null;
 
   // TODO We can't use price from listing, since that might have changed.
   // When API includes unit price and possible additional fees, we need to change this.
@@ -47,14 +43,54 @@ const SaleDetailsPanel = props => {
       />
     : <p className={css.error}>{'priceRequiredMessage'}</p>;
 
+  // saleState affects to both title and message section
+  let stateMsgData = {};
+  switch (saleState) {
+    case propTypes.TX_STATE_PREAUTHORIZED:
+      stateMsgData = {
+        title: (
+          <FormattedMessage
+            id="SaleDetailsPanel.listingRequestedTitle"
+            values={{ customerName: customerName, title: listingLink }}
+          />
+        ),
+        message: (
+          <div className={css.message}>
+            <FormattedMessage id="SaleDetailsPanel.saleRequestedStatus" values={{ customerName }} />
+          </div>
+        ),
+      };
+      break;
+    case propTypes.TX_STATE_ACCEPTED:
+      stateMsgData = {
+        title: (
+          <FormattedMessage
+            id="SaleDetailsPanel.listingAcceptedTitle"
+            values={{ customerName: customerName, title: listingLink }}
+          />
+        ),
+        message: (
+          <div className={css.message}>
+            <FormattedMessage id="SaleDetailsPanel.saleAcceptedStatus" />
+            <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
+          </div>
+        ),
+      };
+      break;
+    default:
+      stateMsgData = { title: null, message: null };
+  }
+
   return (
     <div className={className}>
       <div className={css.messagesContainer}>
         <div className={css.avatarWrapper}>
           <Avatar name={customerName} />
         </div>
-        <h1 className={css.title}>{title}</h1>
-        {message}
+        <h1 className={css.title}>
+          {stateMsgData.title}
+        </h1>
+        {stateMsgData.message}
       </div>
       {bookingInfo}
     </div>
@@ -70,6 +106,7 @@ SaleDetailsPanel.propTypes = {
   subtotalPrice: instanceOf(types.Money).isRequired,
   commission: instanceOf(types.Money).isRequired,
   saleState: string.isRequired,
+  lastTransitionedAt: instanceOf(Date).isRequired,
   booking: propTypes.booking.isRequired,
   listing: propTypes.listing.isRequired,
   customer: propTypes.user.isRequired,
