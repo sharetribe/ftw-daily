@@ -25,6 +25,7 @@ describe('SalePage', () => {
 
     const props = {
       onAcceptSale: () => {},
+      onRejectSale: () => {},
       transaction,
       tab: 'details',
       intl: fakeIntl,

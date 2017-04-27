@@ -4,16 +4,22 @@ import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // Transition-to keys
 const TRANSITION_ACCEPT = 'transition/accept';
+const TRANSITION_REJECT = 'transition/reject';
 
 // ================ Action types ================ //
 
-export const FETCH_SALE_REQUEST = 'app/InboxPage/FETCH_SALE_REQUEST';
-export const FETCH_SALE_SUCCESS = 'app/InboxPage/FETCH_SALE_SUCCESS';
-export const FETCH_SALE_ERROR = 'app/InboxPage/FETCH_SALE_ERROR';
+export const FETCH_SALE_REQUEST = 'app/SalePagePage/FETCH_SALE_REQUEST';
+export const FETCH_SALE_SUCCESS = 'app/SalePage/FETCH_SALE_SUCCESS';
+export const FETCH_SALE_ERROR = 'app/SalePage/FETCH_SALE_ERROR';
 
-export const ACCEPT_SALE_REQUEST = 'app/InboxPage/ACCEPT_SALE_REQUEST';
-export const ACCEPT_SALE_SUCCESS = 'app/InboxPage/ACCEPT_SALE_SUCCESS';
-export const ACCEPT_SALE_ERROR = 'app/InboxPage/ACCEPT_SALE_ERROR';
+export const ACCEPT_SALE_REQUEST = 'app/SalePage/ACCEPT_SALE_REQUEST';
+export const ACCEPT_SALE_SUCCESS = 'app/SalePage/ACCEPT_SALE_SUCCESS';
+export const ACCEPT_SALE_ERROR = 'app/SalePage/ACCEPT_SALE_ERROR';
+
+export const REJECT_SALE_REQUEST = 'app/SalePage/REJECT_SALE_REQUEST';
+export const REJECT_SALE_SUCCESS = 'app/SalePage/REJECT_SALE_SUCCESS';
+export const REJECT_SALE_ERROR = 'app/SalePage/REJECT_SALE_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -22,6 +28,7 @@ const initialState = {
   transactionRef: null,
   acceptOrRejectInProgress: false,
   acceptSaleError: null,
+  rejectSaleError: null,
 };
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
@@ -45,6 +52,14 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
       console.error(payload); // eslint-disable-line
       return { ...state, acceptOrRejectInProgress: false, acceptSaleError: payload };
 
+    case REJECT_SALE_REQUEST:
+      return { ...state, acceptOrRejectInProgress: true, rejectSaleError: null };
+    case REJECT_SALE_SUCCESS:
+      return { ...state, acceptOrRejectInProgress: false };
+    case REJECT_SALE_ERROR:
+      console.error(payload); // eslint-disable-line
+      return { ...state, acceptOrRejectInProgress: false, rejectSaleError: payload };
+
     default:
       return state;
   }
@@ -59,6 +74,10 @@ const fetchSaleError = e => ({ type: FETCH_SALE_ERROR, error: true, payload: e }
 const acceptSaleRequest = () => ({ type: ACCEPT_SALE_REQUEST });
 const acceptSaleSuccess = () => ({ type: ACCEPT_SALE_SUCCESS });
 const acceptSaleError = e => ({ type: ACCEPT_SALE_ERROR, error: true, payload: e });
+
+const rejectSaleRequest = () => ({ type: REJECT_SALE_REQUEST });
+const rejectSaleSuccess = () => ({ type: REJECT_SALE_SUCCESS });
+const rejectSaleError = e => ({ type: REJECT_SALE_ERROR, error: true, payload: e });
 
 // ================ Thunks ================ //
 
@@ -92,6 +111,23 @@ export const acceptSale = id =>
       })
       .catch(e => {
         dispatch(acceptSaleError(e));
+        throw e;
+      });
+  };
+
+export const rejectSale = id =>
+  (dispatch, getState, sdk) => {
+    dispatch(rejectSaleRequest());
+
+    return sdk.transactions
+      .transition({ id, transition: TRANSITION_REJECT, params: {} }, { expand: true })
+      .then(response => {
+        dispatch(addEntities(response));
+        dispatch(rejectSaleSuccess());
+        return response;
+      })
+      .catch(e => {
+        dispatch(rejectSaleError(e));
         throw e;
       });
   };
