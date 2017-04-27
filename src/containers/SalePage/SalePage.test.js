@@ -24,6 +24,7 @@ describe('SalePage', () => {
     });
 
     const props = {
+      onAcceptSale: () => {},
       transaction,
       tab: 'details',
       intl: fakeIntl,

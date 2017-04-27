@@ -66,6 +66,7 @@
   "PaginationLinks.next": "Next page",
   "SaleDetailsPanel.listingTitle": "{customerName} has requested to book {title}.",
   "SaleDetailsPanel.saleStatusMessage": "{customerName} is waiting for your response.",
+  "SalePage.acceptButton": "Accept",
   "SalePage.loadingData": "Loading sale data.",
   "SalePage.title": "Sale details for ${title}.",
   "SearchPage.foundResults": "{count, number} {count, plural, one {listing} other {listings}} found.",
