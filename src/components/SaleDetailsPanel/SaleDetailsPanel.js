@@ -8,7 +8,7 @@ import { Avatar, BookingInfo, NamedLink } from '../../components';
 import css from './SaleDetailsPanel.css';
 
 const SaleDetailsPanel = props => {
-  const { className, totalPrice, saleState, booking, listing, customer } = props;
+  const { className, subtotalPrice, saleState, booking, listing, customer, commission } = props;
   const { firstName, lastName } = customer.attributes.profile;
   const customerName = firstName ? `${firstName} ${lastName}` : '';
 
@@ -42,7 +42,8 @@ const SaleDetailsPanel = props => {
         bookingStart={booking.attributes.start}
         bookingEnd={booking.attributes.end}
         unitPrice={unitPrice}
-        totalPrice={totalPrice}
+        commission={commission}
+        subtotalPrice={subtotalPrice}
       />
     : <p className={css.error}>{'priceRequiredMessage'}</p>;
 
@@ -66,7 +67,8 @@ const { instanceOf, string } = PropTypes;
 
 SaleDetailsPanel.propTypes = {
   className: string,
-  totalPrice: instanceOf(types.Money).isRequired,
+  subtotalPrice: instanceOf(types.Money).isRequired,
+  commission: instanceOf(types.Money).isRequired,
   saleState: string.isRequired,
   booking: propTypes.booking.isRequired,
   listing: propTypes.listing.isRequired,

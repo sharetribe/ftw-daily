@@ -19,7 +19,8 @@ export const SalePageComponent = props => {
   const title = currentListing.attributes.title;
 
   const detailsProps = {
-    totalPrice: currentTransaction.attributes.total,
+    subtotalPrice: currentTransaction.attributes.total,
+    commission: currentTransaction.attributes.commission,
     saleState: currentTransaction.attributes.state,
     listing: currentListing,
     booking: ensureBooking(currentTransaction.booking),

@@ -15,6 +15,7 @@
   "BookingInfo.commission": "Charged commission:",
   "BookingInfo.nightCount": "{count, number} {count, plural, one {night} other {nights}}",
   "BookingInfo.pricePerDay":"Price per night:",
+  "BookingInfo.subtotal": "Subtotal:",
   "BookingInfo.total": "Total:",
   "CheckoutPage.initiateOrderError": "Payment request failed. Please try again.",
   "CheckoutPage.paymentInfo": "You'll only be charged if your request is accepted by the provider.",

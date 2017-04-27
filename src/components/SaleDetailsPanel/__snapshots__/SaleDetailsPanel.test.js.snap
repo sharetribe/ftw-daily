@@ -39,7 +39,13 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
   <BookingInfo
     bookingEnd={2017-06-13T00:00:00.000Z}
     bookingStart={2017-06-10T00:00:00.000Z}
-    totalPrice={
+    commission={
+      Money {
+        "amount": 1650,
+        "currency": "USD",
+      }
+    }
+    subtotalPrice={
       Money {
         "amount": 16500,
         "currency": "USD",

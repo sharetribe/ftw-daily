@@ -8,8 +8,8 @@ describe('SaleDetailsPanel', () => {
   it('matches snapshot', () => {
     const { Money } = types;
     const props = {
-      commission: null,
-      totalPrice: new Money(16500, 'USD'),
+      commission: new Money(1650, 'USD'),
+      subtotalPrice: new Money(16500, 'USD'),
       saleState: 'state/preauthorized',
       booking: createBooking(
         'booking1',

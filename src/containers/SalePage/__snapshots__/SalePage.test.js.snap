@@ -15,13 +15,18 @@ exports[`SalePage matches snapshot 1`] = `
       }
     }
     className="undefined"
+    commission={
+      Money {
+        "amount": 100,
+        "currency": "USD",
+      }
+    }
     customer={
       Object {
         "attributes": Object {
           "profile": Object {
             "firstName": "customer1 first name",
             "lastName": "customer1 last name",
-            "slug": "customer1-slug",
           },
         },
         "id": UUID {
@@ -54,7 +59,7 @@ exports[`SalePage matches snapshot 1`] = `
       }
     }
     saleState="state/preauthorized"
-    totalPrice={
+    subtotalPrice={
       Money {
         "amount": 1000,
         "currency": "USD",
