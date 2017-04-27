@@ -6,14 +6,14 @@ import * as propTypes from '../../util/propTypes';
 import { ensureBooking, ensureListing, ensureTransaction, ensureUser } from '../../util/data';
 import { Button, SaleDetailsPanel, PageLayout } from '../../components';
 import { getEntities } from '../../ducks/sdk.duck';
-import { acceptSale, loadData } from './SalePage.duck';
+import { acceptSale, rejectSale, loadData } from './SalePage.duck';
 
 import css from './SalePage.css';
 
 // SalePage handles data loading
 // It show loading data text or SaleDetailsPanel (and later also another panel for messages).
 export const SalePageComponent = props => {
-  const { intl, onAcceptSale, transaction } = props;
+  const { intl, onAcceptSale, onRejectSale, transaction } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const title = currentListing.attributes.title;
@@ -38,7 +38,10 @@ export const SalePageComponent = props => {
 
   const actionButtons = currentTransaction.attributes.state === propTypes.TX_STATE_PREAUTHORIZED
     ? <div className={css.actionButtons}>
-        <Button onClick={() => onAcceptSale(currentTransaction.id)}>
+        <Button className={css.rejectButton} onClick={() => onRejectSale(currentTransaction.id)}>
+          <FormattedMessage id="SalePage.rejectButton" />
+        </Button>
+        <Button className={css.acceptButton} onClick={() => onAcceptSale(currentTransaction.id)}>
           <FormattedMessage id="SalePage.acceptButton" />
         </Button>
       </div>
@@ -59,6 +62,7 @@ const { func, oneOf } = PropTypes;
 SalePageComponent.propTypes = {
   intl: intlShape.isRequired,
   onAcceptSale: func.isRequired,
+  onRejectSale: func.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
 };
@@ -77,6 +81,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onAcceptSale: transactionId => dispatch(acceptSale(transactionId)),
+    onRejectSale: transactionId => dispatch(rejectSale(transactionId)),
   };
 };
 

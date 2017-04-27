@@ -1,4 +1,22 @@
-.actionButtons,
+.actionButtons {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 1rem 2rem 1rem;
+}
+
+.acceptButton {
+}
+
+.rejectButton {
+  background-color: transparent;
+  color: #333;
+
+  &:enabled:hover {
+    background-color: transparent;
+    text-decoration: underline;
+  }
+}
+
 .title {
   margin: 1rem 1rem 2rem 1rem;
 }

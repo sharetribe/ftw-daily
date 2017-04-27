@@ -71,6 +71,13 @@ exports[`SalePage matches snapshot 1`] = `
       className={null}
       onClick={[Function]}>
       <FormattedMessage
+        id="SalePage.rejectButton"
+        values={Object {}} />
+    </Button>
+    <Button
+      className={null}
+      onClick={[Function]}>
+      <FormattedMessage
         id="SalePage.acceptButton"
         values={Object {}} />
     </Button>

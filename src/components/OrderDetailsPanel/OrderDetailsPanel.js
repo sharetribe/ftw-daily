@@ -81,6 +81,25 @@ const OrderDetailsPanel = props => {
         ),
       };
       break;
+    case propTypes.TX_STATE_REJECTED:
+      stateMsgData = {
+        title: (
+          <FormattedMessage
+            id="OrderDetailsPanel.orderRejectedTitle"
+            values={{ title: listingLink }}
+          />
+        ),
+        message: (
+          <div className={css.messagesContainer}>
+            <FormattedMessage
+              id="OrderDetailsPanel.orderRejectedStatus"
+              values={{ providerName }}
+            />
+            <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
+          </div>
+        ),
+      };
+      break;
     default:
       stateMsgData = { title: null, message: null };
   }
