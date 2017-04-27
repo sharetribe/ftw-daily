@@ -13,7 +13,7 @@ import { types } from '../../util/sdkLoader';
 import css from './BookingInfo.css';
 
 const BookingInfoComponent = props => {
-  const { bookingStart, bookingEnd, className, intl, unitPrice } = props;
+  const { bookingStart, bookingEnd, className, intl, totalPrice, unitPrice } = props;
 
   const hasSelectedDays = bookingStart && bookingEnd;
   const bookingPeriod = hasSelectedDays
@@ -30,13 +30,20 @@ const BookingInfoComponent = props => {
     ? <FormattedMessage id="BookingInfo.nightCount" values={{ count: nightCount }} />
     : null;
 
-  const priceAsNumber = convertMoneyToNumber(unitPrice, config.currencyConfig.subUnitDivisor);
-  const formattedPrice = intl.formatNumber(priceAsNumber, config.currencyConfig);
-  const totalPriceAsNumber = hasSelectedDays
-    ? new Decimal(priceAsNumber).times(nightCount).toNumber()
+  const currencyConfig = config.currencyConfig;
+  const subUnitDivisor = currencyConfig.subUnitDivisor;
+  const unitPriceAsNumber = convertMoneyToNumber(unitPrice, subUnitDivisor);
+  const formattedUnitPrice = intl.formatNumber(unitPriceAsNumber, currencyConfig);
+  const calculatedTotalPriceAsNumber = !totalPrice && hasSelectedDays
+    ? new Decimal(unitPriceAsNumber).times(nightCount).toNumber()
     : null;
-  const formattedTotalPrice = hasSelectedDays
-    ? intl.formatNumber(totalPriceAsNumber, config.currencyConfig)
+
+  // Total price can be given (when it comes from API) or calculated based on unit price and nights
+  const totalPriceAsNumber = totalPrice
+    ? convertMoneyToNumber(totalPrice, subUnitDivisor)
+    : calculatedTotalPriceAsNumber;
+  const formattedTotalPrice = totalPriceAsNumber
+    ? intl.formatNumber(totalPriceAsNumber, currencyConfig)
     : null;
 
   return (
@@ -46,7 +53,7 @@ const BookingInfoComponent = props => {
           <FormattedMessage id="BookingInfo.pricePerDay" />
         </div>
         <div className={css.priceUnitPrice}>
-          {formattedPrice}
+          {formattedUnitPrice}
         </div>
       </div>
       <div className={css.row}>
@@ -72,7 +79,12 @@ const BookingInfoComponent = props => {
   );
 };
 
-BookingInfoComponent.defaultProps = { bookingStart: null, bookingEnd: null, className: '' };
+BookingInfoComponent.defaultProps = {
+  bookingStart: null,
+  bookingEnd: null,
+  className: '',
+  totalPrice: null,
+};
 
 const { instanceOf, string } = PropTypes;
 
@@ -81,6 +93,7 @@ BookingInfoComponent.propTypes = {
   bookingEnd: instanceOf(Date),
   className: string,
   intl: intlShape.isRequired,
+  totalPrice: instanceOf(types.Money),
   unitPrice: instanceOf(types.Money).isRequired,
 };
 

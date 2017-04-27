@@ -1,36 +1,54 @@
 exports[`OrderDetailsPanel matches snapshot 1`] = `
 <div
   className={null}>
-  <img
-    alt="Test order"
-    src="http://example.com/img"
-    style={
-      Object {
-        "width": "100%",
+  <h1>
+    <FormattedMessage
+      id="OrderDetailsPanel.listingTitle"
+      values={
+        Object {
+          "title": <withFlattenedRoutes(withRouter(NamedLink))
+            name="ListingPage"
+            params={
+                Object {
+                    "id": "listing1",
+                    "slug": "listing1-title",
+                  }
+            }>
+            listing1 title
+        </withFlattenedRoutes(withRouter(NamedLink))>,
+        }
+      } />
+  </h1>
+  <div>
+    <div>
+      <Avatar
+        className={null}
+        name="provider first name provider last name" />
+    </div>
+    <div>
+      <FormattedMessage
+        id="OrderDetailsPanel.orderStatusMessage"
+        values={
+          Object {
+            "providerName": "provider first name provider last name",
+          }
+        } />
+    </div>
+  </div>
+  <BookingInfo
+    bookingEnd={2017-06-13T00:00:00.000Z}
+    bookingStart={2017-06-10T00:00:00.000Z}
+    totalPrice={
+      Money {
+        "amount": 16500,
+        "currency": "USD",
+      }
+    }
+    unitPrice={
+      Money {
+        "amount": 5500,
+        "currency": "USD",
       }
     } />
-  <h3>
-    Test order
-  </h3>
-  <ContactInfo
-    addressLine1="Some road 1"
-    addressLine2="Some city, somewhere"
-    phoneNumber="Some phone number" />
-  <p>
-    Confirmation code 
-    some-test-confirmation-code
-  </p>
-  <p>
-    Cancel booking
-  </p>
-  <withFlattenedRoutes(withRouter(NamedLink))
-    name="OrderDiscussionPage"
-    params={
-      Object {
-        "id": "some-test-order-id",
-      }
-    }>
-    You have a new message!
-  </withFlattenedRoutes(withRouter(NamedLink))>
 </div>
 `;

@@ -118,6 +118,16 @@ export const listing = shape({
   images: arrayOf(image),
 });
 
+// Denormalised booking object
+export const booking = shape({
+  id: uuid.isRequired,
+  type: value('booking').isRequired,
+  attributes: shape({
+    end: instanceOf(Date).isRequired,
+    start: instanceOf(Date).isRequired,
+  }),
+});
+
 export const TX_STATE_ACCEPTED = 'state/accepted';
 export const TX_STATE_REJECTED = 'state/rejected';
 export const TX_STATE_PREAUTHORIZED = 'state/preauthorized';
@@ -135,6 +145,8 @@ export const transaction = shape({
     state: oneOf(TX_STATES).isRequired,
     total: any, // ???
   }),
+  booking,
+  listing,
   customer: user,
   provider: user,
 });

@@ -1,5 +1,6 @@
 import AddImages from './AddImages/AddImages';
 import AuthorInfo from './AuthorInfo/AuthorInfo';
+import Avatar from './Avatar/Avatar';
 import BookingInfo from './BookingInfo/BookingInfo';
 import Button from './Button/Button';
 import CurrencyInput from './CurrencyInput/CurrencyInput';
@@ -31,6 +32,7 @@ import StripeBankAccountToken from './StripeBankAccountToken/StripeBankAccountTo
 export {
   AddImages,
   AuthorInfo,
+  Avatar,
   BookingInfo,
   Button,
   CurrencyInput,
