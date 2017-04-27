@@ -11,6 +11,7 @@ describe('SaleDetailsPanel', () => {
       commission: new Money(1650, 'USD'),
       subtotalPrice: new Money(16500, 'USD'),
       saleState: 'state/preauthorized',
+      lastTransitionedAt: new Date(Date.UTC(2017, 5, 10)),
       booking: createBooking(
         'booking1',
         new Date(Date.UTC(2017, 5, 10)),

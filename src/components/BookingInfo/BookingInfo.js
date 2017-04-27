@@ -13,7 +13,16 @@ import { types } from '../../util/sdkLoader';
 import css from './BookingInfo.css';
 
 const BookingInfoComponent = props => {
-  const { bookingStart, bookingEnd, className, commission, intl, subtotalPrice, totalPrice, unitPrice } = props;
+  const {
+    bookingStart,
+    bookingEnd,
+    className,
+    commission,
+    intl,
+    subtotalPrice,
+    totalPrice,
+    unitPrice,
+  } = props;
 
   const hasSelectedNights = bookingStart && bookingEnd;
 
@@ -22,17 +31,21 @@ const BookingInfoComponent = props => {
     return <div className={classNames(css.container, className)} />;
   }
 
-  const bookingPeriod = <FormattedMessage
-    id="BookingInfo.bookingPeriod"
-    values={{
-      bookingStart: intl.formatDate(bookingStart),
-      bookingEnd: intl.formatDate(bookingEnd),
-    }}
-  />;
+  const bookingPeriod = (
+    <FormattedMessage
+      id="BookingInfo.bookingPeriod"
+      values={{
+        bookingStart: intl.formatDate(bookingStart),
+        bookingEnd: intl.formatDate(bookingEnd),
+      }}
+    />
+  );
 
   // diff gives night count between dates
   const nightCount = moment(bookingEnd).diff(moment(bookingStart), 'days');
-  const nightCountMessage = <FormattedMessage id="BookingInfo.nightCount" values={{ count: nightCount }} />;
+  const nightCountMessage = (
+    <FormattedMessage id="BookingInfo.nightCount" values={{ count: nightCount }} />
+  );
 
   const currencyConfig = config.currencyConfig;
   const subUnitDivisor = currencyConfig.subUnitDivisor;
@@ -79,7 +92,7 @@ const BookingInfoComponent = props => {
   const commisionInfo = commission
     ? <div className={css.row}>
         <div className={css.commissionLabel}>
-          <FormattedMessage id="BookingInfo.commission" />
+          <FormattedMessage id="BookingInfo.commission" values={{ marketplace: 'Saunatime' }} />
         </div>
         <div className={css.commission}>
           {formattedCommission}

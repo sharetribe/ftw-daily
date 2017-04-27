@@ -15,6 +15,7 @@ exports[`OrderPage matches snapshot 1`] = `
       }
     }
     className="undefined"
+    lastTransitionedAt={2017-06-01T00:00:00.000Z}
     listing={
       Object {
         "attributes": Object {

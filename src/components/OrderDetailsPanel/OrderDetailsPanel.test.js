@@ -11,6 +11,7 @@ describe('OrderDetailsPanel', () => {
       commission: null,
       totalPrice: new Money(16500, 'USD'),
       orderState: 'state/preauthorized',
+      lastTransitionedAt: new Date(Date.UTC(2017, 5, 10)),
       booking: createBooking(
         'booking1',
         new Date(Date.UTC(2017, 5, 10)),

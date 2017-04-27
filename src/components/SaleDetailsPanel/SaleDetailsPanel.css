@@ -5,8 +5,13 @@
   padding: 3rem 2rem;
 }
 
-.title,
+.title {
+  text-align: center;
+}
+
 .message {
+  display: flex;
+  flex-direction: column;
   text-align: center;
 }
 
