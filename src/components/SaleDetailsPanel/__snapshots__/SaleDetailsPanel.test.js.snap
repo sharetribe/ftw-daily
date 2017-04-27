@@ -1,0 +1,61 @@
+exports[`SaleDetailsPanel matches snapshot 1`] = `
+<div
+  className={null}>
+  <div>
+    <div>
+      <Avatar
+        className={null}
+        name="customer1 first name customer1 last name" />
+    </div>
+    <h1>
+      <FormattedMessage
+        id="SaleDetailsPanel.listingTitle"
+        values={
+          Object {
+            "customerName": "customer1 first name customer1 last name",
+            "title": <withFlattenedRoutes(withRouter(NamedLink))
+              name="ListingPage"
+              params={
+                  Object {
+                      "id": "listing1",
+                      "slug": "listing1-title",
+                    }
+              }>
+              listing1 title
+          </withFlattenedRoutes(withRouter(NamedLink))>,
+          }
+        } />
+    </h1>
+    <div>
+      <FormattedMessage
+        id="SaleDetailsPanel.saleStatusMessage"
+        values={
+          Object {
+            "customerName": "customer1 first name customer1 last name",
+          }
+        } />
+    </div>
+  </div>
+  <BookingInfo
+    bookingEnd={2017-06-13T00:00:00.000Z}
+    bookingStart={2017-06-10T00:00:00.000Z}
+    commission={
+      Money {
+        "amount": 1650,
+        "currency": "USD",
+      }
+    }
+    subtotalPrice={
+      Money {
+        "amount": 16500,
+        "currency": "USD",
+      }
+    }
+    unitPrice={
+      Money {
+        "amount": 5500,
+        "currency": "USD",
+      }
+    } />
+</div>
+`;

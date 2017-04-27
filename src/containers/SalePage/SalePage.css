@@ -1,0 +1,15 @@
+.title {
+  margin: 1rem 1rem 2rem 1rem;
+}
+
+.tabContent {
+  display: none;
+}
+
+.tabContentVisible {
+  display: block;
+}
+
+.activeTab {
+  font-weight: bold;
+}

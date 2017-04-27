@@ -1,0 +1,23 @@
+.messagesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 2rem;
+}
+
+.title,
+.message {
+  text-align: center;
+}
+
+.receipt {
+  margin: 1rem 1rem 2rem 1rem;
+}
+
+.avatarWrapper {
+  display: block;
+  flex-basis: 44px;
+  width: 44px;
+  height: 44px;
+  margin-right: 1rem;
+}

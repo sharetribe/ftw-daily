@@ -26,6 +26,7 @@ import PageLayout from './PageLayout/PageLayout';
 import PaginationLinks from './PaginationLinks/PaginationLinks';
 import Promised from './Promised/Promised';
 import RoutesProvider from './RoutesProvider/RoutesProvider';
+import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import StripeBankAccountToken from './StripeBankAccountToken/StripeBankAccountToken';
 
@@ -58,6 +59,7 @@ export {
   PaginationLinks,
   Promised,
   RoutesProvider,
+  SaleDetailsPanel,
   SearchResultsPanel,
   StripeBankAccountToken,
 };

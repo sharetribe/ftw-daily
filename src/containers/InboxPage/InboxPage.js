@@ -33,7 +33,7 @@ const timestamp = (intl, tx) => {
 
 // Translated name of the state of the given transaction
 const txState = (intl, tx) => {
-  const { state } = tx;
+  const { attributes: { state } } = tx;
   if (state === propTypes.TX_STATE_ACCEPTED) {
     return intl.formatMessage({
       id: 'InboxPage.stateAccepted',

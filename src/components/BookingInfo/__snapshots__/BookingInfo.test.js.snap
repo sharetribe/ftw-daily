@@ -1,4 +1,4 @@
-exports[`BookingInfo matches snapshot 1`] = `
+exports[`BookingInfo customer transaction data matches snapshot 1`] = `
 <div
   className="">
   <div
@@ -46,6 +46,138 @@ exports[`BookingInfo matches snapshot 1`] = `
     <div
       className={undefined}>
       $20.00
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BookingInfo pretransaction data matches snapshot 1`] = `
+<div
+  className="">
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Price per night:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      $10.00
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Booking period:
+      </span>
+      <br />
+      <span>
+        4/14/2017 - 4/16/2017
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      <span>
+        2 nights
+      </span>
+    </div>
+  </div>
+  <hr
+    className={undefined} />
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Total:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      $20.00
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BookingInfo provider transaction data matches snapshot 1`] = `
+<div
+  className="">
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Price per night:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      $10.00
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Booking period:
+      </span>
+      <br />
+      <span>
+        4/14/2017 - 4/16/2017
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      <span>
+        2 nights
+      </span>
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Subtotal:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      $20.00
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Charged commission:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      -$2.00
+    </div>
+  </div>
+  <hr
+    className={undefined} />
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Total:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      $18.00
     </div>
   </div>
 </div>

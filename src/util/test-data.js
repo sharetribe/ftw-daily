@@ -83,7 +83,7 @@ export const createTransaction = options => {
     id: new UUID(id),
     type: 'transaction',
     attributes: {
-      commission: null,
+      commission: new Money(100, 'USD'),
       createdAt: new Date(Date.UTC(2017, 4, 1)),
       lastTransitionedAt,
       state,

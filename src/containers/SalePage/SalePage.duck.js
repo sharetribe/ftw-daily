@@ -4,30 +4,30 @@ import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
 
-export const FETCH_ORDER_REQUEST = 'app/InboxPage/FETCH_ORDER_REQUEST';
-export const FETCH_ORDER_SUCCESS = 'app/InboxPage/FETCH_ORDER_SUCCESS';
-export const FETCH_ORDER_ERROR = 'app/InboxPage/FETCH_ORDER_ERROR';
+export const FETCH_SALE_REQUEST = 'app/InboxPage/FETCH_SALE_REQUEST';
+export const FETCH_SALE_SUCCESS = 'app/InboxPage/FETCH_SALE_SUCCESS';
+export const FETCH_SALE_ERROR = 'app/InboxPage/FETCH_SALE_ERROR';
 
 // ================ Reducer ================ //
 
 const initialState = {
   fetchInProgress: false,
-  fetchOrderError: null,
+  fetchSaleError: null,
   transactionRef: null,
 };
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
-    case FETCH_ORDER_REQUEST:
-      return { ...state, fetchInProgress: true, fetchOrderError: null };
-    case FETCH_ORDER_SUCCESS: {
+    case FETCH_SALE_REQUEST:
+      return { ...state, fetchInProgress: true, fetchSaleError: null };
+    case FETCH_SALE_SUCCESS: {
       const transactionRef = { id: payload.data.data.id, type: 'transaction' };
       return { ...state, fetchInProgress: false, transactionRef };
     }
-    case FETCH_ORDER_ERROR:
+    case FETCH_SALE_ERROR:
       console.error(payload); // eslint-disable-line
-      return { ...state, fetchInProgress: false, fetchOrderError: payload };
+      return { ...state, fetchInProgress: false, fetchSaleError: payload };
 
     default:
       return state;
@@ -36,25 +36,25 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
 
 // ================ Action creators ================ //
 
-const fetchOrderRequest = () => ({ type: FETCH_ORDER_REQUEST });
-const fetchOrderSuccess = response => ({ type: FETCH_ORDER_SUCCESS, payload: response });
-const fetchOrderError = e => ({ type: FETCH_ORDER_ERROR, error: true, payload: e });
+const fetchSaleRequest = () => ({ type: FETCH_SALE_REQUEST });
+const fetchSaleSuccess = response => ({ type: FETCH_SALE_SUCCESS, payload: response });
+const fetchSaleError = e => ({ type: FETCH_SALE_ERROR, error: true, payload: e });
 
 // ================ Thunks ================ //
 
-export const fetchOrder = id =>
+export const fetchSale = id =>
   (dispatch, getState, sdk) => {
-    dispatch(fetchOrderRequest());
+    dispatch(fetchSaleRequest());
 
     return sdk.transactions
-      .show({ id, include: ['provider', 'listing', 'booking'] }, { expand: true })
+      .show({ id, include: ['customer', 'listing', 'booking'] }, { expand: true })
       .then(response => {
         dispatch(addEntities(response));
-        dispatch(fetchOrderSuccess(response));
+        dispatch(fetchSaleSuccess(response));
         return response;
       })
       .catch(e => {
-        dispatch(fetchOrderError(e));
+        dispatch(fetchSaleError(e));
         throw e;
       });
   };
@@ -63,11 +63,11 @@ export const fetchOrder = id =>
 // before page has all the info it needs to render itself
 export const loadData = params =>
   dispatch => {
-    const orderId = new types.UUID(params.id);
+    const saleId = new types.UUID(params.id);
 
     // Current user is needed to render Topbar
     dispatch(fetchCurrentUser());
 
-    // Order (i.e. transaction entity in API, but from buyers perspective) contains order details
-    return dispatch(fetchOrder(orderId));
+    // Sale (i.e. transaction entity in API, but from buyers perspective) contains sale details
+    return dispatch(fetchSale(saleId));
   };
