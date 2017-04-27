@@ -28,12 +28,7 @@ const SaleDetailsPanel = props => {
 
   const message = saleState === propTypes.TX_STATE_PREAUTHORIZED
     ? <div className={css.message}>
-        <div className={css.avatarWrapper}>
-          <Avatar name={customerName} />
-        </div>
-        <div>
-          <FormattedMessage id="SaleDetailsPanel.saleStatusMessage" values={{ customerName }} />
-        </div>
+        <FormattedMessage id="SaleDetailsPanel.saleStatusMessage" values={{ customerName }} />
       </div>
     : null;
 
@@ -53,8 +48,13 @@ const SaleDetailsPanel = props => {
 
   return (
     <div className={className}>
-      <h1 className={css.title}>{title}</h1>
-      {message}
+      <div className={css.messagesContainer}>
+        <div className={css.avatarWrapper}>
+          <Avatar name={customerName} />
+        </div>
+        <h1 className={css.title}>{title}</h1>
+        {message}
+      </div>
       {bookingInfo}
     </div>
   );
