@@ -106,3 +106,50 @@ export const denormalisedEntities = (entities, type, ids) => {
     return entityData;
   });
 };
+
+/**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} transaction entity object, which is to be ensured agains null values
+ */
+export const ensureTransaction = transaction => {
+  const empty = {
+    id: null,
+    type: 'transaction',
+    attributes: {},
+    booking: {},
+    listing: {},
+    provider: {},
+  };
+  return { ...empty, ...transaction };
+};
+
+/**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} booking entity object, which is to be ensured agains null values
+ */
+export const ensureBooking = booking => {
+  const empty = { id: null, type: 'booking', attributes: {} };
+  return { ...empty, ...booking };
+};
+
+/**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} listing entity object, which is to be ensured agains null values
+ */
+export const ensureListing = listing => {
+  const empty = { id: null, type: 'listing', attributes: {}, images: [] };
+  return { ...empty, ...listing };
+};
+
+/**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} user entity object, which is to be ensured agains null values
+ */
+export const ensureUser = user => {
+  const empty = { id: null, type: 'user', attributes: { profile: {} } };
+  return { ...empty, ...user };
+};

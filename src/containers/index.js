@@ -20,7 +20,7 @@ import PasswordForgottenForm from './PasswordForgottenForm/PasswordForgottenForm
 import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage';
 import PayoutPreferencesPage from './PayoutPreferencesPage/PayoutPreferencesPage';
 import ProfilePage from './ProfilePage/ProfilePage';
-import SalesConversationPage from './SalesConversationPage/SalesConversationPage';
+import SalePage from './SalePage/SalePage';
 import SearchPage from './SearchPage/SearchPage';
 import SecurityPage from './SecurityPage/SecurityPage';
 import SignUpForm from './SignUpForm/SignUpForm';
@@ -51,7 +51,7 @@ export {
   PasswordForgottenPage,
   PayoutPreferencesPage,
   ProfilePage,
-  SalesConversationPage,
+  SalePage,
   SearchPage,
   SecurityPage,
   SignUpForm,

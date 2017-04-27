@@ -1,0 +1,64 @@
+exports[`SalePage matches snapshot 1`] = `
+<Connect(withRouter(PageLayout))
+  title="SalePage.title">
+  <SaleDetailsPanel
+    booking={
+      Object {
+        "attributes": Object {
+          "end": 2017-06-13T00:00:00.000Z,
+          "start": 2017-06-10T00:00:00.000Z,
+        },
+        "id": UUID {
+          "uuid": "booking1",
+        },
+        "type": "booking",
+      }
+    }
+    className="undefined"
+    customer={
+      Object {
+        "attributes": Object {
+          "profile": Object {
+            "firstName": "customer1 first name",
+            "lastName": "customer1 last name",
+            "slug": "customer1-slug",
+          },
+        },
+        "id": UUID {
+          "uuid": "customer1",
+        },
+        "type": "user",
+      }
+    }
+    listing={
+      Object {
+        "attributes": Object {
+          "address": "listing1 address",
+          "description": "listing1 description",
+          "geolocation": LatLng {
+            "lat": 40,
+            "lng": 60,
+          },
+          "price": Money {
+            "amount": 5500,
+            "currency": "USD",
+          },
+          "title": "listing1 title",
+        },
+        "author": null,
+        "id": UUID {
+          "uuid": "listing1",
+        },
+        "images": Array [],
+        "type": "listing",
+      }
+    }
+    saleState="state/preauthorized"
+    totalPrice={
+      Money {
+        "amount": 1000,
+        "currency": "USD",
+      }
+    } />
+</Connect(withRouter(PageLayout))>
+`;

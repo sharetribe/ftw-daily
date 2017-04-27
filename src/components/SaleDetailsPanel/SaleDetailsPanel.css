@@ -1,0 +1,17 @@
+.title,
+.receipt {
+  margin: 1rem 1rem 2rem 1rem;
+}
+
+.message {
+  display: flex;
+  margin: 1rem 1rem 2rem 1rem;
+}
+
+.avatarWrapper {
+  display: block;
+  flex-basis: 44px;
+  width: 44px;
+  height: 44px;
+  margin-right: 1rem;
+}

@@ -8,6 +8,7 @@ import EditListingPage from './EditListingPage/EditListingPage.duck';
 import InboxPage from './InboxPage/InboxPage.duck';
 import ListingPage from './ListingPage/ListingPage.duck';
 import OrderPage from './OrderPage/OrderPage.duck';
+import SalePage from './SalePage/SalePage.duck';
 import SearchPage from './SearchPage/SearchPage.duck';
 
-export { CheckoutPage, EditListingPage, InboxPage, ListingPage, OrderPage, SearchPage };
+export { CheckoutPage, EditListingPage, InboxPage, ListingPage, OrderPage, SalePage, SearchPage };
