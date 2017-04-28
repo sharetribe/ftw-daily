@@ -83,11 +83,10 @@ export const fetchCurrentUser = () =>
       .me()
       .then(response => {
         dispatch(usersMeSuccess(response.data.data));
-        return response;
       })
       .catch(e => {
+        // TODO: dispatch flash message
         dispatch(usersMeError(e));
-        throw e;
       });
   };
 

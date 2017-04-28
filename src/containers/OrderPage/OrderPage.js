@@ -65,8 +65,6 @@ const mapStateToProps = state => {
 
 const OrderPage = connect(mapStateToProps)(injectIntl(OrderPageComponent));
 
-OrderPage.loadData = params => {
-  return loadData(params);
-};
+OrderPage.loadData = loadData;
 
 export default OrderPage;

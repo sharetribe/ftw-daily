@@ -1,5 +1,4 @@
 import { pick } from 'lodash';
-import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
 
@@ -74,11 +73,4 @@ export const initiateOrder = params =>
         dispatch(initiateOrderError(e));
         throw e;
       });
-  };
-
-// ================ Thunk ================ //
-
-export const loadData = () =>
-  dispatch => {
-    return dispatch(fetchCurrentUser());
   };

@@ -1,6 +1,5 @@
 import { types } from '../../util/sdkLoader';
 import { addEntities } from '../../ducks/sdk.duck';
-import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
 
@@ -64,9 +63,6 @@ export const fetchOrder = id =>
 export const loadData = params =>
   dispatch => {
     const orderId = new types.UUID(params.id);
-
-    // Current user is needed to render Topbar
-    dispatch(fetchCurrentUser());
 
     // Order (i.e. transaction entity in API, but from buyers perspective) contains order details
     return dispatch(fetchOrder(orderId));

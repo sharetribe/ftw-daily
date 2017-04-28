@@ -11,7 +11,7 @@ import * as propTypes from '../../util/propTypes';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { AuthorInfo, BookingInfo, NamedRedirect, PageLayout } from '../../components';
 import { StripePaymentForm } from '../../containers';
-import { initiateOrder, setInitialValues, loadData } from './CheckoutPage.duck';
+import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
 
 import css from './CheckoutPage.css';
 
@@ -274,7 +274,5 @@ const CheckoutPage = compose(
 CheckoutPage.setInitialValues = initialValues => setInitialValues(initialValues);
 
 CheckoutPage.displayName = 'CheckoutPage';
-
-CheckoutPage.loadData = loadData;
 
 export default CheckoutPage;

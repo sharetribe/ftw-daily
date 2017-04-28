@@ -87,8 +87,6 @@ const mapDispatchToProps = dispatch => {
 
 const SalePage = connect(mapStateToProps, mapDispatchToProps)(injectIntl(SalePageComponent));
 
-SalePage.loadData = params => {
-  return loadData(params);
-};
+SalePage.loadData = loadData;
 
 export default SalePage;

@@ -1,6 +1,5 @@
 import { types } from '../../util/sdkLoader';
 import { addEntities } from '../../ducks/sdk.duck';
-import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // Transition-to keys
 const TRANSITION_ACCEPT = 'transition/accept';
@@ -137,9 +136,6 @@ export const rejectSale = id =>
 export const loadData = params =>
   dispatch => {
     const saleId = new types.UUID(params.id);
-
-    // Current user is needed to render Topbar
-    dispatch(fetchCurrentUser());
 
     // Sale (i.e. transaction entity in API, but from buyers perspective) contains sale details
     return dispatch(fetchSale(saleId));

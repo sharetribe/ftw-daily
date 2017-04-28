@@ -29,6 +29,7 @@ import {
   showMarketplace,
   showUsers,
 } from './ducks/sdk.duck';
+import { fetchCurrentUser } from './ducks/user.duck';
 import routeConfiguration from './routesConfiguration';
 
 import './index.css';
@@ -41,6 +42,7 @@ const render = store => {
   const info = authInfoLoaded ? Promise.resolve({}) : store.dispatch(authInfo());
   info
     .then(() => {
+      store.dispatch(fetchCurrentUser());
       ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
     })
     .catch(e => {
