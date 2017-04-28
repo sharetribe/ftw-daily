@@ -44,8 +44,6 @@ const TopbarComponent = props => {
   );
 };
 
-TopbarComponent.defaultProps = { user: null };
-
 const { bool, func, shape, arrayOf } = PropTypes;
 
 TopbarComponent.propTypes = {
@@ -59,7 +57,7 @@ TopbarComponent.propTypes = {
   }).isRequired,
 
   // from withFlattenedRoutes
-  flattenedRoutes: arrayOf(propTypes.route),
+  flattenedRoutes: arrayOf(propTypes.route).isRequired,
 };
 
 const mapStateToProps = state => {
