@@ -59,7 +59,7 @@ export default function reducer(state = initialState, action = {}) {
 
 // ================ Selectors ================ //
 
-export const loginOrLogoutInProgress = state => {
+export const authenticationInProgress = state => {
   const { loginInProgress, logoutInProgress } = state.Auth;
   return loginInProgress || logoutInProgress;
 };
@@ -91,7 +91,7 @@ export const authInfo = () =>
 
 export const login = (username, password) =>
   (dispatch, getState, sdk) => {
-    if (loginOrLogoutInProgress(getState())) {
+    if (authenticationInProgress(getState())) {
       return Promise.reject(new Error('Login or logout already in progress'));
     }
     dispatch(loginRequest());
@@ -107,7 +107,7 @@ export const login = (username, password) =>
 
 export const logout = () =>
   (dispatch, getState, sdk) => {
-    if (loginOrLogoutInProgress(getState())) {
+    if (authenticationInProgress(getState())) {
       return Promise.reject(new Error('Login or logout already in progress'));
     }
     dispatch(logoutRequest());

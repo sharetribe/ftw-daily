@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { PageLayout, NamedRedirect } from '../../components';
 import { LoginForm, SignUpForm } from '../../containers';
-import { login, loginOrLogoutInProgress } from '../../ducks/Auth.duck';
+import { login, authenticationInProgress } from '../../ducks/Auth.duck';
 
 import css from './AuthenticationPage.css';
 
@@ -91,7 +91,7 @@ const mapStateToProps = state => {
   return {
     isAuthenticated,
     loginError,
-    authInProgress: loginOrLogoutInProgress(state),
+    authInProgress: authenticationInProgress(state),
   };
 };
 

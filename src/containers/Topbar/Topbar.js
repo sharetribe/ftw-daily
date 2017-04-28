@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { logout, loginOrLogoutInProgress } from '../../ducks/Auth.duck';
+import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { NamedLink, Button } from '../../components';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { pathByRouteName } from '../../util/routes';
@@ -66,7 +66,7 @@ const mapStateToProps = state => {
   const { isAuthenticated } = state.Auth;
   return {
     isAuthenticated,
-    authInProgress: loginOrLogoutInProgress(state),
+    authInProgress: authenticationInProgress(state),
   };
 };
 
