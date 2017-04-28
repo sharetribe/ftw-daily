@@ -46,7 +46,7 @@ export const fetchOrder = id =>
     dispatch(fetchOrderRequest());
 
     return sdk.transactions
-      .show({ id, include: ['provider', 'listing', 'booking'] }, { expand: true })
+      .show({ id, include: ['customer', 'provider', 'listing', 'booking'] }, { expand: true })
       .then(response => {
         dispatch(addEntities(response));
         dispatch(fetchOrderSuccess(response));

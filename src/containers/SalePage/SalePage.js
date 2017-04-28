@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as propTypes from '../../util/propTypes';
 import { ensureBooking, ensureListing, ensureTransaction, ensureUser } from '../../util/data';
-import { Button, SaleDetailsPanel, PageLayout } from '../../components';
+import { Button, NamedRedirect, SaleDetailsPanel, PageLayout } from '../../components';
 import { getEntities } from '../../ducks/sdk.duck';
 import { acceptSale, rejectSale, loadData } from './SalePage.duck';
 
@@ -13,10 +14,19 @@ import css from './SalePage.css';
 // SalePage handles data loading
 // It show loading data text or SaleDetailsPanel (and later also another panel for messages).
 export const SalePageComponent = props => {
-  const { intl, onAcceptSale, onRejectSale, transaction } = props;
+  const { currentUser, intl, onAcceptSale, onRejectSale, transaction } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const title = currentListing.attributes.title;
+
+  // Redirect users with someone else's direct link to their own inbox/sales page.
+  const isDataAvailable = currentUser && currentTransaction.id && currentTransaction.provider;
+  const isOwnSale = isDataAvailable && currentUser.id.uuid === currentTransaction.provider.id.uuid;
+  if (isDataAvailable && !isOwnSale) {
+    // eslint-disable-next-line no-console
+    console.error('Tried to access a sale that was not owned by the current user');
+    return <NamedRedirect name="InboxPage" params={{ tab: 'sales' }} />;
+  }
 
   const detailsProps = {
     subtotalPrice: currentTransaction.attributes.total,
@@ -32,11 +42,13 @@ export const SalePageComponent = props => {
     [css.tabContentVisible]: props.tab === 'details',
   });
 
-  const panel = currentTransaction.id
+  const panel = isDataAvailable && currentTransaction.id
     ? <SaleDetailsPanel className={detailsClassName} {...detailsProps} />
     : <h1 className={css.title}><FormattedMessage id="SalePage.loadingData" /></h1>;
 
-  const actionButtons = currentTransaction.attributes.state === propTypes.TX_STATE_PREAUTHORIZED
+  const isPreauthorizedState = currentTransaction.attributes.state ===
+    propTypes.TX_STATE_PREAUTHORIZED;
+  const actionButtons = isDataAvailable && isPreauthorizedState
     ? <div className={css.actionButtons}>
         <Button className={css.rejectButton} onClick={() => onRejectSale(currentTransaction.id)}>
           <FormattedMessage id="SalePage.rejectButton" />
@@ -55,11 +67,12 @@ export const SalePageComponent = props => {
   );
 };
 
-SalePageComponent.defaultProps = { transaction: null };
+SalePageComponent.defaultProps = { transaction: null, currentUser: null };
 
 const { func, oneOf } = PropTypes;
 
 SalePageComponent.propTypes = {
+  currentUser: propTypes.currentUser,
   intl: intlShape.isRequired,
   onAcceptSale: func.isRequired,
   onRejectSale: func.isRequired,
@@ -85,7 +98,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const SalePage = connect(mapStateToProps, mapDispatchToProps)(injectIntl(SalePageComponent));
+const SalePage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
+  SalePageComponent
+);
 
 SalePage.loadData = loadData;
 

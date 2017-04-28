@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   createBooking,
+  createCurrentUser,
   createListing,
   createTransaction,
   createUser,
@@ -21,9 +22,11 @@ describe('SalePage', () => {
       ),
       listing: createListing('listing1'),
       customer: createUser('customer1'),
+      provider: createUser('provider1'),
     });
 
     const props = {
+      currentUser: createCurrentUser('provider1'),
       onAcceptSale: () => {},
       onRejectSale: () => {},
       transaction,
