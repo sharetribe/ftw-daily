@@ -6,8 +6,6 @@ import { Button, LabeledField } from '../../components';
 
 import css from './LoginForm.css';
 
-const { bool } = PropTypes;
-
 const LoginFormComponent = props => {
   const { handleSubmit, pristine, submitting, inProgress, intl } = props;
   const emailLabel = intl.formatMessage({
@@ -35,6 +33,8 @@ const LoginFormComponent = props => {
 };
 
 LoginFormComponent.defaultProps = { inProgress: false };
+
+const { bool } = PropTypes;
 
 LoginFormComponent.propTypes = {
   ...formPropTypes,
