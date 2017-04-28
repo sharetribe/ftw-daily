@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { OrderDetailsPanel, PageLayout } from '../../components';
+import { NamedRedirect, OrderDetailsPanel, PageLayout } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { ensureBooking, ensureListing, ensureTransaction, ensureUser } from '../../util/data';
 import { getEntities } from '../../ducks/sdk.duck';
@@ -13,10 +13,19 @@ import css from './OrderPage.css';
 // OrderPage handles data loading
 // It show loading data text or OrderDetailsPanel (and later also another panel for messages).
 export const OrderPageComponent = props => {
-  const { intl, transaction } = props;
+  const { currentUser, intl, transaction } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const title = currentListing.attributes.title;
+
+  // Redirect users with someone else's direct link to their own inbox/orders page.
+  const isDataAvailable = currentUser && currentTransaction.id && currentTransaction.customer;
+  const isOwnSale = isDataAvailable && currentUser.id.uuid === currentTransaction.customer.id.uuid;
+  if (isDataAvailable && !isOwnSale) {
+    // eslint-disable-next-line no-console
+    console.error('Tried to access an order that was not owned by the current user');
+    return <NamedRedirect name="InboxPage" params={{ tab: 'orders' }} />;
+  }
 
   const detailsProps = {
     totalPrice: currentTransaction.attributes.total,
@@ -31,7 +40,7 @@ export const OrderPageComponent = props => {
     [css.tabContentVisible]: props.tab === 'details',
   });
 
-  const panel = currentTransaction.id
+  const panel = isDataAvailable && currentTransaction.id
     ? <OrderDetailsPanel className={detailsClassName} {...detailsProps} />
     : <h1 className={css.title}><FormattedMessage id="OrderPage.loadingData" /></h1>;
 
@@ -42,11 +51,12 @@ export const OrderPageComponent = props => {
   );
 };
 
-OrderPageComponent.defaultProps = { transaction: null };
+OrderPageComponent.defaultProps = { transaction: null, currentUser: null };
 
 const { oneOf } = PropTypes;
 
 OrderPageComponent.propTypes = {
+  currentUser: propTypes.currentUser,
   intl: intlShape.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,

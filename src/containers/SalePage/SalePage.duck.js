@@ -85,7 +85,7 @@ export const fetchSale = id =>
     dispatch(fetchSaleRequest());
 
     return sdk.transactions
-      .show({ id, include: ['customer', 'listing', 'booking'] }, { expand: true })
+      .show({ id, include: ['customer', 'provider', 'listing', 'booking'] }, { expand: true })
       .then(response => {
         dispatch(addEntities(response));
         dispatch(fetchSaleSuccess(response));
