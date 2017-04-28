@@ -89,7 +89,7 @@ const BookingInfoComponent = props => {
       </div>
     : null;
 
-  const commisionInfo = commission
+  const commissionInfo = commission
     ? <div className={css.row}>
         <div className={css.commissionLabel}>
           <FormattedMessage id="BookingInfo.commission" values={{ marketplace: 'Saunatime' }} />
@@ -121,7 +121,7 @@ const BookingInfoComponent = props => {
         </div>
       </div>
       {subtotalInfo}
-      {commisionInfo}
+      {commissionInfo}
       <hr className={css.totalDivider} />
       <div className={css.row}>
         <div className={css.totalLabel}>
