@@ -83,7 +83,6 @@ const routesConfiguration = [
         name: 'CheckoutPage',
         setInitialValues: initialValues => CheckoutPage.setInitialValues(initialValues),
         component: props => <CheckoutPage {...props} />,
-        loadData: (params, search) => CheckoutPage.loadData(params, search),
       },
       {
         auth: true,
@@ -91,7 +90,6 @@ const routesConfiguration = [
         exact: true,
         name: 'NewListingPage',
         component: props => <EditListingPage {...props} type={'new'} />,
-        loadData: (params, search) => EditListingPage.loadData(params, search),
       },
       {
         auth: true,
