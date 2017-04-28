@@ -105,8 +105,8 @@ describe('Auth duck', () => {
         expect(sdk.login.mock.calls).toEqual([[{ username, password }]]);
         expect(dispatch.mock.calls).toEqual([
           [loginRequest()],
-          [expect.anything()], // fetchCurrentUser
           [loginSuccess()],
+          [expect.anything()], // fetchCurrentUser
         ]);
       });
     });
