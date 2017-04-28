@@ -54,7 +54,6 @@
   "InboxPage.stateRejected": "Rejected",
   "InboxPage.title": "Inbox",
   "ListingPage.ctaButtonMessage": "Book {title}",
-  "ListingPage.editListing": "Edit listing",
   "ListingPage.loadingListingData": "Loading listing data",
   "ListingPage.noListingData": "Could not find listing data",
   "LoginForm.emailLabel": "Email",
