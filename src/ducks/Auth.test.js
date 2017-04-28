@@ -1,5 +1,4 @@
-import { call, put, take, fork, cancel } from 'redux-saga/effects';
-import { createMockTask } from 'redux-saga/utils';
+import { clearCurrentUser } from './user.duck';
 import reducer, {
   LOGIN_REQUEST,
   LOGOUT_REQUEST,
@@ -10,10 +9,12 @@ import reducer, {
   authInfoSuccess,
   authInfoError,
   login,
+  loginRequest,
   loginSuccess,
   loginError,
   callLogin,
   logout,
+  logoutRequest,
   logoutSuccess,
   logoutError,
   callLogout,
@@ -29,32 +30,35 @@ describe('Auth duck', () => {
       expect(state.authInfoError).toBeNull();
       expect(state.loginError).toBeNull();
       expect(state.logoutError).toBeNull();
+      expect(state.loginInProgress).toEqual(false);
+      expect(state.logoutInProgress).toEqual(false);
     });
 
     it('should login successfully', () => {
-      const username = 'x@x.x';
-      const password = 'pass';
+      const initialState = reducer();
+      const loginRequestState = reducer(initialState, loginRequest());
+      expect(loginRequestState.isAuthenticated).toEqual(false);
+      expect(loginRequestState.loginError).toBeNull();
+      expect(loginRequestState.loginInProgress).toEqual(true);
 
-      let state = reducer();
-      state = reducer(state, login(username, password));
-      expect(state.isAuthenticated).toEqual(false);
-      expect(state.loginError).toBeNull();
-
-      state = reducer(state, loginSuccess());
-      expect(state.isAuthenticated).toEqual(true);
-      expect(state.loginError).toBeNull();
+      const loginSuccessState = reducer(loginRequestState, loginSuccess());
+      expect(loginSuccessState.isAuthenticated).toEqual(true);
+      expect(loginSuccessState.loginError).toBeNull();
+      expect(loginSuccessState.loginInProgress).toEqual(false);
     });
 
     it('should handle failed login', () => {
-      let state = reducer();
-      state = reducer(state, login('username', 'pass'));
-      expect(state.isAuthenticated).toEqual(false);
-      expect(state.loginError).toBeNull();
+      let initialState = reducer();
+      const loginRequestState = reducer(initialState, loginRequest());
+      expect(loginRequestState.isAuthenticated).toEqual(false);
+      expect(loginRequestState.loginError).toBeNull();
+      expect(loginRequestState.loginInProgress).toEqual(true);
 
       const error = new Error('test error');
-      state = reducer(state, loginError(error));
-      expect(state.isAuthenticated).toEqual(false);
-      expect(state.loginError).toEqual(error);
+      const loginErrorState = reducer(loginRequestState, loginError(error));
+      expect(loginErrorState.isAuthenticated).toEqual(false);
+      expect(loginErrorState.loginError).toEqual(error);
+      expect(loginErrorState.loginInProgress).toEqual(false);
     });
 
     it('should set initial state for unauthenticated users', () => {
@@ -88,177 +92,143 @@ describe('Auth duck', () => {
     });
   });
 
-  describe('login worker', () => {
-    it('should succeed when API call fulfills', () => {
-      const username = 'username';
+  describe('login thunk', () => {
+    it('should dispatch success', () => {
+      const dispatch = jest.fn();
+      const initialState = reducer();
+      const getState = () => ({ Auth: initialState });
+      const sdk = { login: jest.fn(() => Promise.resolve({})) };
+      const username = 'x.x@example.com';
       const password = 'pass';
-      const payload = { username, password };
-      const sdk = { login: jest.fn() };
-      const loginAction = login(username, password);
-      const worker = callLogin(loginAction, sdk);
-      expect(worker.next()).toEqual({
-        done: false,
-        value: call(sdk.login, { username, password }),
-      });
-      expect(worker.next(payload)).toEqual({ done: false, value: put(loginSuccess()) });
-      expect(worker.next().done).toEqual(true);
-      expect(sdk.login).not.toHaveBeenCalled();
-    });
 
-    it('should fail when API call rejects', () => {
-      const username = 'username';
-      const password = 'pass';
-      const sdk = { login: jest.fn() };
-      const loginAction = login(username, password);
-      const worker = callLogin(loginAction, sdk);
-      expect(worker.next()).toEqual({
-        done: false,
-        value: call(sdk.login, { username, password }),
+      return login(username, password)(dispatch, getState, sdk).then(() => {
+        expect(sdk.login.mock.calls).toEqual([[{ username, password }]]);
+        expect(dispatch.mock.calls).toEqual([
+          [loginRequest()],
+          [expect.anything()], // fetchCurrentUser
+          [loginSuccess()],
+        ]);
       });
-      const error = new Error('Test login failed');
-      expect(worker.throw(error)).toEqual({ done: false, value: put(loginError(error)) });
-      expect(worker.next().done).toEqual(true);
-      expect(sdk.login).not.toHaveBeenCalled();
+    });
+    it('should dispatch error', () => {
+      const dispatch = jest.fn();
+      const initialState = reducer();
+      const getState = () => ({ Auth: initialState });
+      const error = new Error('could not login');
+      const sdk = { login: jest.fn(() => Promise.reject(error)) };
+      const username = 'x.x@example.com';
+      const password = 'pass';
+
+      return login(username, password)(dispatch, getState, sdk).then(() => {
+        expect(sdk.login.mock.calls).toEqual([[{ username, password }]]);
+        expect(dispatch.mock.calls).toEqual([[loginRequest()], [loginError(error)]]);
+      });
+    });
+    it('should reject if another login is in progress', () => {
+      const dispatch = jest.fn();
+      const initialState = reducer();
+      const loginInProgressState = reducer(initialState, loginRequest());
+      const getState = () => ({ Auth: loginInProgressState });
+      const sdk = { login: jest.fn(() => Promise.resolve({})) };
+      const username = 'x.x@example.com';
+      const password = 'pass';
+
+      return login(username, password)(dispatch, getState, sdk).then(
+        () => {
+          throw new Error('should not succeed');
+        },
+        e => {
+          expect(e.message).toEqual('Login or logout already in progress');
+          expect(sdk.login.mock.calls.length).toEqual(0);
+          expect(dispatch.mock.calls.length).toEqual(0);
+        }
+      );
+    });
+    it('should reject if logout is in progress', () => {
+      const dispatch = jest.fn();
+      const initialState = reducer();
+      const logoutInProgressState = reducer(initialState, logoutRequest());
+      const getState = () => ({ Auth: logoutInProgressState });
+      const sdk = { login: jest.fn(() => Promise.resolve({})) };
+      const username = 'x.x@example.com';
+      const password = 'pass';
+
+      return login(username, password)(dispatch, getState, sdk).then(
+        () => {
+          throw new Error('should not succeed');
+        },
+        e => {
+          expect(e.message).toEqual('Login or logout already in progress');
+          expect(sdk.login.mock.calls.length).toEqual(0);
+          expect(dispatch.mock.calls.length).toEqual(0);
+        }
+      );
     });
   });
 
-  describe('logout worker', () => {
-    it('should redirect to root after logout', () => {
-      const sdk = { logout: jest.fn() };
-      const historyPush = jest.fn();
-      const action = logout(historyPush);
-      const worker = callLogout(action, sdk);
-      expect(worker.next()).toEqual({ done: false, value: call(sdk.logout) });
-      expect(worker.next()).toEqual({ done: false, value: put(logoutSuccess()) });
-      expect(worker.next()).toEqual({ done: false, value: call(historyPush, '/') });
-      expect(worker.next().done).toEqual(true);
-      expect(sdk.logout).not.toHaveBeenCalled();
-      expect(historyPush).not.toHaveBeenCalled();
+  describe('logout thunk', () => {
+    it('should dispatch success', () => {
+      const dispatch = jest.fn();
+      const initialState = reducer();
+      const getState = () => ({ Auth: initialState });
+      const sdk = { logout: jest.fn(() => Promise.resolve({})) };
+
+      return logout()(dispatch, getState, sdk).then(() => {
+        expect(sdk.logout.mock.calls.length).toEqual(1);
+        expect(dispatch.mock.calls).toEqual([
+          [logoutRequest()],
+          [clearCurrentUser()],
+          [logoutSuccess()],
+        ]);
+      });
     });
+    it('should dispatch error', () => {
+      const dispatch = jest.fn();
+      const initialState = reducer();
+      const getState = () => ({ Auth: initialState });
+      const error = new Error('could not logout');
+      const sdk = { logout: jest.fn(() => Promise.reject(error)) };
 
-    it('should not redirect if logout fails', () => {
-      const sdk = { logout: jest.fn() };
-      const historyPush = jest.fn();
-      const action = logout(historyPush);
-      const worker = callLogout(action, sdk);
-      expect(worker.next()).toEqual({ done: false, value: call(sdk.logout) });
-      const error = new Error('Test logout error');
-      expect(worker.throw(error)).toEqual({ done: false, value: put(logoutError(error)) });
-      expect(worker.next().done).toEqual(true);
-      expect(sdk.logout).not.toHaveBeenCalled();
-      expect(historyPush).not.toHaveBeenCalled();
+      return logout()(dispatch, getState, sdk).then(() => {
+        expect(sdk.logout.mock.calls.length).toEqual(1);
+        expect(dispatch.mock.calls).toEqual([[logoutRequest()], [logoutError(error)]]);
+      });
     });
-  });
+    it('should reject if another logout is in progress', () => {
+      const dispatch = jest.fn();
+      const initialState = reducer();
+      const logoutInProgressState = reducer(initialState, logoutRequest());
+      const getState = () => ({ Auth: logoutInProgressState });
+      const sdk = { logout: jest.fn(() => Promise.resolve({})) };
 
-  describe('auth watcher', () => {
-    it('calls login', () => {
-      const sdk = { login: jest.fn() };
-      const watcher = watchAuth(sdk);
-      const loginAction = login('username', 'password');
-      const takeLoginOrLogout = take([LOGIN_REQUEST, LOGOUT_REQUEST]);
-      const forkLogin = fork(callLogin, loginAction, sdk);
-
-      // The watcher should first take a login or a logout action
-      expect(watcher.next().value).toEqual(takeLoginOrLogout);
-
-      // If we pass it a login action, it should fork the login worker
-      expect(watcher.next(loginAction).value).toEqual(forkLogin);
-
-      // It should continue back at taking a login or a logout action
-      expect(watcher.next({}).value).toEqual(takeLoginOrLogout);
-
-      expect(sdk.login).not.toHaveBeenCalled();
+      return logout()(dispatch, getState, sdk).then(
+        () => {
+          throw new Error('should not succeed');
+        },
+        e => {
+          expect(e.message).toEqual('Login or logout already in progress');
+          expect(sdk.logout.mock.calls.length).toEqual(0);
+          expect(dispatch.mock.calls.length).toEqual(0);
+        }
+      );
     });
+    it('should reject if login is in progress', () => {
+      const dispatch = jest.fn();
+      const initialState = reducer();
+      const loginInProgressState = reducer(initialState, loginRequest());
+      const getState = () => ({ Auth: loginInProgressState });
+      const sdk = { logout: jest.fn(() => Promise.resolve({})) };
 
-    it('calls logout', () => {
-      const sdk = { logout: jest.fn() };
-      const historyPush = jest.fn();
-      const watcher = watchAuth(sdk);
-      const logoutAction = logout(historyPush);
-      const takeLoginOrLogout = take([LOGIN_REQUEST, LOGOUT_REQUEST]);
-      const forkLogout = fork(callLogout, logoutAction, sdk);
-
-      // The watcher should first take a login or a logout action
-      expect(watcher.next().value).toEqual(takeLoginOrLogout);
-
-      // If we pass it a logout action, it should fork the logout worker
-      expect(watcher.next(logoutAction).value).toEqual(forkLogout);
-
-      // It should continue back at taking a login or a logout action
-      expect(watcher.next().value).toEqual(takeLoginOrLogout);
-
-      expect(sdk.logout).not.toHaveBeenCalled();
-      expect(historyPush).not.toHaveBeenCalled();
-    });
-
-    it('should cancel login if another login comes', () => {
-      const sdk = { login: jest.fn(), logout: jest.fn() };
-      const watcher = watchAuth(sdk);
-      const loginAction1 = login('username1', 'password1');
-      const loginAction2 = login('username2', 'password2');
-      const task = createMockTask();
-      const takeLoginOrLogout = take([LOGIN_REQUEST, LOGOUT_REQUEST]);
-      const forkLogin1 = fork(callLogin, loginAction1, sdk);
-      const forkLogin2 = fork(callLogin, loginAction2, sdk);
-      const cancelLogin1 = cancel(task);
-
-      // First take a login or a logout
-      expect(watcher.next().value).toEqual(takeLoginOrLogout);
-
-      // Passing the first login should fork login worker
-      expect(watcher.next(loginAction1).value).toEqual(forkLogin1);
-
-      // Passing in the task to mock the fork results should make the
-      // watcher take a login or a logout again
-      expect(watcher.next(task).value).toEqual(takeLoginOrLogout);
-
-      // Passing in another login should cancel the first fork task
-      expect(watcher.next(loginAction2).value).toEqual(cancelLogin1);
-
-      // Then it should fork the second login
-      expect(watcher.next().value).toEqual(forkLogin2);
-
-      // And finally take a login or a logout again
-      expect(watcher.next().value).toEqual(takeLoginOrLogout);
-
-      expect(sdk.login).not.toHaveBeenCalled();
-      expect(sdk.logout).not.toHaveBeenCalled();
-    });
-
-    it('should cancel login if a logout comes', () => {
-      const sdk = { login: jest.fn(), logout: jest.fn() };
-      const historyPush = jest.fn();
-      const watcher = watchAuth(sdk);
-      const loginAction = login('username', 'password');
-      const logoutAction = logout(historyPush);
-      const task = createMockTask();
-      const takeLoginOrLogout = take([LOGIN_REQUEST, LOGOUT_REQUEST]);
-      const forkLogin = fork(callLogin, loginAction, sdk);
-      const forkLogout = fork(callLogout, logoutAction, sdk);
-      const cancelLogin = cancel(task);
-
-      // First take a login or a logout
-      expect(watcher.next().value).toEqual(takeLoginOrLogout);
-
-      // Passing the login should fork login worker
-      expect(watcher.next(loginAction).value).toEqual(forkLogin);
-
-      // Passing in the task to mock the fork results should make the
-      // watcher take a login or a logout again
-      expect(watcher.next(task).value).toEqual(takeLoginOrLogout);
-
-      // Passing in logout should cancel the login fork task
-      expect(watcher.next(logoutAction).value).toEqual(cancelLogin);
-
-      // Then it should fork the logout
-      expect(watcher.next().value).toEqual(forkLogout);
-
-      // And finally take a login or a logout again
-      expect(watcher.next().value).toEqual(takeLoginOrLogout);
-
-      expect(sdk.login).not.toHaveBeenCalled();
-      expect(sdk.logout).not.toHaveBeenCalled();
-      expect(historyPush).not.toHaveBeenCalled();
+      return logout()(dispatch, getState, sdk).then(
+        () => {
+          throw new Error('should not succeed');
+        },
+        e => {
+          expect(e.message).toEqual('Login or logout already in progress');
+          expect(sdk.logout.mock.calls.length).toEqual(0);
+          expect(dispatch.mock.calls.length).toEqual(0);
+        }
+      );
     });
   });
 });

@@ -4,6 +4,8 @@ export const USERS_ME_REQUEST = 'app/user/USERS_ME_REQUEST';
 export const USERS_ME_SUCCESS = 'app/user/USERS_ME_SUCCESS';
 export const USERS_ME_ERROR = 'app/user/USERS_ME_ERROR';
 
+export const CLEAR_CURRENT_USER = 'app/user/CLEAR_CURRENT_USER';
+
 export const STRIPE_ACCOUNT_CREATE_REQUEST = 'app/user/STRIPE_ACCOUNT_CREATE_REQUEST';
 export const STRIPE_ACCOUNT_CREATE_SUCCESS = 'app/user/STRIPE_ACCOUNT_CREATE_SUCCESS';
 export const STRIPE_ACCOUNT_CREATE_ERROR = 'app/user/STRIPE_ACCOUNT_CREATE_ERROR';
@@ -27,6 +29,9 @@ export default function reducer(state = initialState, action = {}) {
       console.error(payload);
       return { ...state, usersMeError: payload };
 
+    case CLEAR_CURRENT_USER:
+      return { ...state, currentUser: null, usersMeError: null };
+
     default:
       return state;
   }
@@ -47,6 +52,8 @@ export const usersMeError = e => ({
   error: true,
 });
 
+export const clearCurrentUser = () => ({ type: CLEAR_CURRENT_USER });
+
 export const stripeAccountCreateRequest = () => ({ type: STRIPE_ACCOUNT_CREATE_REQUEST });
 
 export const stripeAccountCreateSuccess = response => ({
@@ -65,6 +72,13 @@ export const stripeAccountCreateError = e => ({
 export const fetchCurrentUser = () =>
   (dispatch, getState, sdk) => {
     dispatch(usersMeRequest());
+    const { isAuthenticated } = getState().Auth;
+
+    if (!isAuthenticated) {
+      // Ignore when not logged in, current user should be null
+      return Promise.resolve({});
+    }
+
     return sdk.users
       .me()
       .then(response => {

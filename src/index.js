@@ -33,21 +33,19 @@ import routeConfiguration from './routesConfiguration';
 
 import './index.css';
 
-const renderWithAuthInfo = store => {
-  ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
-};
-
-// Wait for the store to have the Auth.authInfoLoaded flag, render the
-// application when the auth information is present.
-const renderWhenAuthInfoLoaded = store => {
-  const unsubscribe = store.subscribe(() => {
-    const authInfoLoaded = store.getState().Auth.authInfoLoaded;
-    if (authInfoLoaded) {
-      unsubscribe();
-      renderWithAuthInfo(store);
-    }
-  });
-  store.dispatch(authInfo());
+const render = store => {
+  // If the server already loaded the auth information, render the app
+  // immediately. Otherwise wait for the flag to be loaded and render
+  // when auth information is present.
+  const authInfoLoaded = store.getState().Auth.authInfoLoaded;
+  const info = authInfoLoaded ? Promise.resolve({}) : store.dispatch(authInfo());
+  info
+    .then(() => {
+      ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
+    })
+    .catch(e => {
+      console.error(e); // eslint-disable-line
+    });
 };
 
 const setupStripe = () => {
@@ -67,19 +65,8 @@ if (typeof window !== 'undefined') {
   const store = configureStore(sdk, initialState);
 
   store.runSaga(createRootSaga(sdk));
-
   setupStripe();
-
-  const authInfoLoaded = store.getState().Auth.authInfoLoaded;
-
-  // If the server already loaded the auth information, render the app
-  // immediately. Otherwise wait for the flag to be loaded and render
-  // when auth information is present.
-  if (authInfoLoaded) {
-    renderWithAuthInfo(store);
-  } else {
-    renderWhenAuthInfoLoaded(store);
-  }
+  render(store);
 
   // Expose stuff for the browser REPL
   const actions = bindActionCreators(

@@ -1,8 +1,12 @@
 import React, { PropTypes } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { logout } from '../../ducks/Auth.duck';
+import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { NamedLink, Button } from '../../components';
+import { withFlattenedRoutes } from '../../util/contextHelpers';
+import { pathByRouteName } from '../../util/routes';
+import * as propTypes from '../../util/propTypes';
 
 import css from './Topbar.css';
 
@@ -10,14 +14,21 @@ import css from './Topbar.css';
 const House = () => <span dangerouslySetInnerHTML={{ __html: '&#127968;' }} />;
 /* eslint-enable react/no-danger */
 
-const Topbar = props => {
-  const { isAuthenticated, onLogout, history } = props;
+const TopbarComponent = props => {
+  const { isAuthenticated, authInProgress, onLogout, history, flattenedRoutes } = props;
 
   const handleLogout = () => {
-    // History push function is passed to the action to enable
-    // redirect to home when logout succeeds.
-    onLogout(history.push);
+    const path = pathByRouteName('LandingPage', flattenedRoutes);
+    history.push(path);
+    onLogout().then(() => {
+      // TODO: show flash message
+      console.log('logged out'); // eslint-disable-line
+    });
   };
+
+  const authAction = isAuthenticated
+    ? <Button className={css.logoutButton} onClick={handleLogout}>Logout</Button>
+    : <NamedLink name="LogInPage">Login</NamedLink>;
 
   return (
     <div className={css.container}>
@@ -27,30 +38,44 @@ const Topbar = props => {
         </NamedLink>
       </div>
       <div className={css.user}>
-        {isAuthenticated
-          ? <Button className={css.logoutButton} onClick={handleLogout}>Logout</Button>
-          : <NamedLink name="LogInPage">Login</NamedLink>}
+        {authInProgress ? null : authAction}
       </div>
     </div>
   );
 };
 
-Topbar.defaultProps = { user: null };
+TopbarComponent.defaultProps = { user: null };
 
-const { bool, func, shape } = PropTypes;
+const { bool, func, shape, arrayOf } = PropTypes;
 
-Topbar.propTypes = {
+TopbarComponent.propTypes = {
   isAuthenticated: bool.isRequired,
+  authInProgress: bool.isRequired,
   onLogout: func.isRequired,
 
   // from withRouter
   history: shape({
     push: func.isRequired,
   }).isRequired,
+
+  // from withFlattenedRoutes
+  flattenedRoutes: arrayOf(propTypes.route),
 };
 
-const mapStateToProps = state => ({ isAuthenticated: state.Auth.isAuthenticated });
+const mapStateToProps = state => {
+  const { isAuthenticated } = state.Auth;
+  return {
+    isAuthenticated,
+    authInProgress: authenticationInProgress(state),
+  };
+};
 
 const mapDispatchToProps = dispatch => ({ onLogout: historyPush => dispatch(logout(historyPush)) });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Topbar));
+const Topbar = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter,
+  withFlattenedRoutes
+)(TopbarComponent);
+
+export default Topbar;
