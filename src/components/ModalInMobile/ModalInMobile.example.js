@@ -23,15 +23,25 @@ class ModalInMobileWrapper extends Component {
   render() {
     return (
       <div>
-        Wrapper text before ModalInMobile
+        <div style={{ margin: '1rem' }}>
+          Wrapper text before ModalInMobile
+        </div>
         <ModalInMobile
           {...this.props}
+          onClose={() => {
+            this.setState({ isOpen: false });
+            console.log('Closing modal');
+          }}
           isModalOpenOnMobile={this.state.isOpen}
           togglePageClassNames={togglePageClassNames}
         >
-          Some content inside ModalInMobile component
+          <div style={{ margin: '1rem' }}>
+            Some content inside ModalInMobile component
+          </div>
         </ModalInMobile>
-        <Button onClick={this.handleOpen} className={css.visibleOnMobileLayout}>Open</Button>
+        <div style={{ margin: '1rem' }}>
+          <Button onClick={this.handleOpen} className={css.visibleOnMobileLayout}>Open</Button>
+        </div>
       </div>
     );
   }
@@ -39,10 +49,8 @@ class ModalInMobileWrapper extends Component {
 
 export const Empty = {
   component: ModalInMobileWrapper,
+  style: { padding: '1rem 0' },
   props: {
-    onClose() {
-      console.log('Closing modal');
-    },
     showAsModalMaxWidth: 400,
     title: 'Test ModalInMobile',
   },

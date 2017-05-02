@@ -14,11 +14,13 @@ const Example = props => {
     component: ExampleComponent,
     description,
     props: exampleProps,
+    style,
   } = props;
-  const desc = description ? <p>Description: {description}</p> : null;
+  const exampleStyle = style || css.withPadding;
+  const desc = description ? <p className={css.withPadding}>Description: {description}</p> : null;
   return (
     <li>
-      <h2>
+      <h2 className={css.withPadding}>
         <NamedLink name="StyleguideComponent" params={{ component: componentName }}>
           {componentName}
         </NamedLink>
@@ -31,7 +33,7 @@ const Example = props => {
           {exampleName}
         </NamedLink>
       </h2>
-      <span>
+      <span className={css.withPadding}>
         <NamedLink
           name="StyleguideComponentExampleRaw"
           params={{ component: componentName, example: exampleName, type: 'raw' }}
@@ -40,7 +42,7 @@ const Example = props => {
         </NamedLink>
       </span>
       {desc}
-      <div>
+      <div className={exampleStyle}>
         <ExampleComponent {...exampleProps} />
       </div>
     </li>
@@ -49,7 +51,7 @@ const Example = props => {
 
 const { string, oneOfType, func, node, object, objectOf, shape } = PropTypes;
 
-Example.defaultProps = { description: null, props: {} };
+Example.defaultProps = { description: null, props: {}, style: null };
 
 Example.propTypes = {
   componentName: string.isRequired,
@@ -57,6 +59,7 @@ Example.propTypes = {
   component: oneOfType([func, node]).isRequired,
   description: string,
   props: object,
+  style: object,
 };
 
 const Examples = props => {

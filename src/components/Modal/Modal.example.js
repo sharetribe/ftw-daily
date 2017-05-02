@@ -22,7 +22,9 @@ class ModalWrapper extends Component {
   render() {
     return (
       <div>
-        Wrapper text before ModalInMobile
+        <div style={{ margin: '1rem' }}>
+          Wrapper text before ModalInMobile
+        </div>
         <Modal
           {...this.props}
           isOpen={this.state.isOpen}
@@ -32,9 +34,11 @@ class ModalWrapper extends Component {
           }}
           togglePageClassNames={togglePageClassNames}
         >
-          Some content inside Modal component
+          <div style={{ margin: '1rem' }}>Some content inside Modal component</div>
         </Modal>
-        <Button onClick={this.handleOpen}>Open</Button>
+        <div style={{ margin: '1rem' }}>
+          <Button onClick={this.handleOpen}>Open</Button>
+        </div>
       </div>
     );
   }
@@ -42,6 +46,7 @@ class ModalWrapper extends Component {
 
 export const Empty = {
   component: ModalWrapper,
+  style: { padding: '1rem 0' },
   props: {
     title: 'Test Modal',
   },
