@@ -1,0 +1,60 @@
+/* Content is visible as modal layer */
+.isOpen {
+  display: block;
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 100;
+  background-color: white;
+
+  /* Mobile frame fix - this needs to be removed */
+  max-width: 375px;
+  margin: 0 auto;
+}
+
+/* Content is explicitly hidden (this default can be overridden with passed-in class) */
+/* The use case for having both .isOpen and .isClosed is ModalInMobile use case       */
+/* where desktop layout should not get any styling from Modal component.              */
+.isClosed {
+  display: none;
+}
+
+/* This class is passed to page layout level to fix scrolling while modal is open */
+.modalIsOpen {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Header section for Modal */
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.title {
+  margin: 1rem;
+  flex-grow: 1;
+}
+
+.close {
+  width: auto;
+  height: 3em;
+  background-color: transparent;
+  padding: 1em;
+  color: #999;
+  border: 0;
+
+  &:enabled:hover {
+    background-color: transparent;
+    color: #666;
+  }
+  &:enabled:active {
+    background-color: transparent;
+    color: #000;
+  }
+  &:disabled {
+    background-color: transparent;
+  }
+}

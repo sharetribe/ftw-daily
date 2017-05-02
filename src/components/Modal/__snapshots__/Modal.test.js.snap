@@ -1,0 +1,6 @@
+exports[`Modal no extra classes when window is missing 1`] = `
+<div
+  className="test-class-from-props">
+  Content
+</div>
+`;
