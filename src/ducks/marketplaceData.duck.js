@@ -58,7 +58,7 @@ export const getListingsById = (state, listingIds) => {
  *
  * @return {Array<Object>} denormalised entities
  */
-export const getEntities = (marketplaceData, entityRefs) => {
+export const getMarketplaceEntities = (marketplaceData, entityRefs) => {
   const type = entityRefs.length > 0 ? entityRefs[0].type : null;
   const ids = entityRefs.map(ref => ref.id);
   try {

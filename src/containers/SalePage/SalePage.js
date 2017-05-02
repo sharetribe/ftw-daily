@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as propTypes from '../../util/propTypes';
 import { ensureBooking, ensureListing, ensureTransaction, ensureUser } from '../../util/data';
 import { Button, NamedRedirect, SaleDetailsPanel, PageLayout } from '../../components';
-import { getEntities } from '../../ducks/marketplaceData.duck';
+import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { acceptSale, rejectSale, loadData } from './SalePage.duck';
 
 import css from './SalePage.css';
@@ -85,7 +85,10 @@ const mapStateToProps = state => {
   const { showListingError: showSaleError } = state.ListingPage;
   const { currentUser } = state.user;
 
-  const transactions = getEntities(state.marketplaceData, transactionRef ? [transactionRef] : []);
+  const transactions = getMarketplaceEntities(
+    state.marketplaceData,
+    transactionRef ? [transactionRef] : []
+  );
   const transaction = transactions.length > 0 ? transactions[0] : null;
 
   return { transaction, showSaleError, currentUser };

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { PageLayout, NamedRedirect, NamedLink, PaginationLinks } from '../../components';
 import * as propTypes from '../../util/propTypes';
-import { getEntities } from '../../ducks/marketplaceData.duck';
+import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { loadData } from './InboxPage.duck';
 
 import css from './InboxPage.css';
@@ -206,7 +206,7 @@ const mapStateToProps = state => {
     fetchInProgress,
     fetchOrdersOrSalesError,
     pagination,
-    transactions: getEntities(marketplaceData, transactionRefs),
+    transactions: getMarketplaceEntities(marketplaceData, transactionRefs),
     currentUserHasListings,
     currentUserHasListingsError,
   };
