@@ -1,6 +1,6 @@
 import { reverse, sortBy } from 'lodash';
 import { parse } from '../../util/urlHelpers';
-import { addEntities } from '../../ducks/marketplaceData.duck';
+import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
 const sortedTransactions = txs =>
@@ -152,7 +152,7 @@ export const loadData = (params, search) =>
     return sdk.transactions
       .query(apiQueryParams)
       .then(response => {
-        dispatch(addEntities(response));
+        dispatch(addMarketplaceEntities(response));
         dispatch(fetchOrdersOrSalesSuccess(response));
         return response;
       })

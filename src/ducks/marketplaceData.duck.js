@@ -2,7 +2,7 @@ import { updatedEntities, denormalisedEntities } from '../util/data';
 
 // ================ Action types ================ //
 
-const ADD_ENTITIES = 'app/sdk/ADD_ENTITIES';
+export const ADD_MARKETPLACE_ENTITIES = 'app/marketplaceData/ADD_MARKETPLACE_ENTITIES';
 
 // ================ Reducer ================ //
 
@@ -21,7 +21,7 @@ const merge = (state, apiResponse) => {
 export default function marketplaceDataReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
-    case ADD_ENTITIES:
+    case ADD_MARKETPLACE_ENTITIES:
       return merge(state, payload);
 
     default:
@@ -69,7 +69,7 @@ export const getEntities = (marketplaceData, entityRefs) => {
 
 // ================ Action creators ================ //
 
-export const addEntities = apiResponse => ({
-  type: ADD_ENTITIES,
+export const addMarketplaceEntities = apiResponse => ({
+  type: ADD_MARKETPLACE_ENTITIES,
   payload: apiResponse,
 });

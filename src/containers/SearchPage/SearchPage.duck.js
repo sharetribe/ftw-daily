@@ -1,4 +1,4 @@
-import { addEntities } from '../../ducks/marketplaceData.duck';
+import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 
 // ================ Action types ================ //
 
@@ -78,7 +78,7 @@ export const searchListings = searchParams =>
 
     return searchOrQuery
       .then(response => {
-        dispatch(addEntities(response));
+        dispatch(addMarketplaceEntities(response));
         dispatch(searchListingsSuccess(response));
         return response;
       })

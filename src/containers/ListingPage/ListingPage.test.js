@@ -3,7 +3,7 @@ import { types } from '../../util/sdkLoader';
 import { createUser, createCurrentUser, createListing, fakeIntl } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
 import { ListingPageComponent } from './ListingPage';
-import { addEntities } from '../../ducks/marketplaceData.duck';
+import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { showListingRequest, showListingError, showListing } from './ListingPage.duck';
 
 const { UUID } = types;
@@ -46,7 +46,7 @@ describe('ListingPage', () => {
         expect(dispatch.mock.calls).toEqual([
           [showListingRequest(id)],
           [expect.anything()], // fetchCurrentUser() call
-          [addEntities(data)],
+          [addMarketplaceEntities(data)],
         ]);
       });
     });
