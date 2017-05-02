@@ -1,4 +1,4 @@
-import { showListingsSuccess } from '../../ducks/sdk.duck';
+import { showListingsSuccess } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //

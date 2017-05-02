@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { PageLayout, NamedRedirect, NamedLink, PaginationLinks } from '../../components';
 import * as propTypes from '../../util/propTypes';
-import { getEntities } from '../../ducks/sdk.duck';
+import { getEntities } from '../../ducks/marketplaceData.duck';
 import { loadData } from './InboxPage.duck';
 
 import css from './InboxPage.css';

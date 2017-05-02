@@ -1,6 +1,6 @@
 import { reverse, sortBy } from 'lodash';
 import { parse } from '../../util/urlHelpers';
-import { addEntities } from '../../ducks/sdk.duck';
+import { addEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
 const sortedTransactions = txs =>

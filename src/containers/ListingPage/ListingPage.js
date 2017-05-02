@@ -11,7 +11,7 @@ import { convertMoneyToNumber } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import { Button, Map, ModalInMobile, PageLayout } from '../../components';
 import { BookingDatesForm } from '../../containers';
-import { getListingsById } from '../../ducks/sdk.duck';
+import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { showListing } from './ListingPage.duck';
 import css from './ListingPage.css';
 

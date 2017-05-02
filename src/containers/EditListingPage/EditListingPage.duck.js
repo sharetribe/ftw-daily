@@ -1,4 +1,4 @@
-import { showListingsSuccess as globalShowListingsSuccess } from '../../ducks/sdk.duck';
+import { showListingsSuccess as globalShowListingsSuccess } from '../../ducks/marketplaceData.duck';
 import { createStripeAccount } from '../../ducks/user.duck';
 
 const requestAction = actionType => params => ({ type: actionType, payload: { params } });

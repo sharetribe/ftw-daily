@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { NamedRedirect, OrderDetailsPanel, PageLayout } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { ensureBooking, ensureListing, ensureTransaction, ensureUser } from '../../util/data';
-import { getEntities } from '../../ducks/sdk.duck';
+import { getEntities } from '../../ducks/marketplaceData.duck';
 import { loadData } from './OrderPage.duck';
 
 import css from './OrderPage.css';

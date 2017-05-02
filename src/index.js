@@ -28,7 +28,7 @@ import {
   searchListings,
   showMarketplace,
   showUsers,
-} from './ducks/sdk.duck';
+} from './ducks/marketplaceData.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
 import routeConfiguration from './routesConfiguration';
 

@@ -1,5 +1,5 @@
 import { types } from '../../util/sdkLoader';
-import { addEntities } from '../../ducks/sdk.duck';
+import { addEntities } from '../../ducks/marketplaceData.duck';
 
 // Transition-to keys
 const TRANSITION_ACCEPT = 'transition/accept';

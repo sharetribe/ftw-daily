@@ -7,7 +7,7 @@ import config from '../../config';
 import { createResourceLocatorString } from '../../util/routes';
 import { parse, stringify } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
-import { getListingsById } from '../../ducks/sdk.duck';
+import { getListingsById } from '../../ducks/marketplaceData.duck';
 import {
   FilterPanel,
   ListingCardSmall,

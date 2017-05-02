@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { types } from '../../util/sdkLoader';
 import { NamedRedirect, PageLayout } from '../../components';
 import { EditListingForm } from '../../containers';
-import { getListingsById } from '../../ducks/sdk.duck';
+import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { createSlug } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import {

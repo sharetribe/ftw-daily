@@ -3,7 +3,7 @@ import { types } from '../../util/sdkLoader';
 import { createUser, createCurrentUser, createListing, fakeIntl } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
 import { ListingPageComponent } from './ListingPage';
-import { showListingsSuccess } from '../../ducks/sdk.duck';
+import { showListingsSuccess } from '../../ducks/marketplaceData.duck';
 import { showListingRequest, showListingError, showListing } from './ListingPage.duck';
 
 const { UUID } = types;

@@ -1,4 +1,4 @@
-import { watchSdk } from './ducks/sdk.duck';
+import { watchSdk } from './ducks/marketplaceData.duck';
 
 const createRootSaga = sdk =>
   function* rootSaga() {
