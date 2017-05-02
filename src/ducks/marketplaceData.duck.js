@@ -1,10 +1,7 @@
 import { updatedEntities, denormalisedEntities } from '../util/data';
 
-const successAction = actionType => data => ({ type: actionType, payload: data });
-
 // ================ Action types ================ //
 
-const SHOW_LISTINGS_SUCCESS = 'app/sdk/SHOW_LISTINGS_SUCCESS';
 const ADD_ENTITIES = 'app/sdk/ADD_ENTITIES';
 
 // ================ Reducer ================ //
@@ -24,9 +21,6 @@ const merge = (state, apiResponse) => {
 export default function marketplaceDataReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
-    case SHOW_LISTINGS_SUCCESS:
-      return merge(state, payload);
-
     case ADD_ENTITIES:
       return merge(state, payload);
 
@@ -74,9 +68,6 @@ export const getEntities = (marketplaceData, entityRefs) => {
 };
 
 // ================ Action creators ================ //
-
-// SDK method: listings.show
-export const showListingsSuccess = successAction(SHOW_LISTINGS_SUCCESS);
 
 export const addEntities = apiResponse => ({
   type: ADD_ENTITIES,
