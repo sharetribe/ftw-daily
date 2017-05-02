@@ -138,9 +138,7 @@ const formName = 'bookingDates';
 //
 // See: http://redux-form.com/6.6.1/examples/selectingFormValues/
 const selector = formValueSelector(formName);
-const mapStateToProps = state => {
-  return selector(state, 'bookingStart', 'bookingEnd');
-};
+const mapStateToProps = state => selector(state, 'bookingStart', 'bookingEnd');
 
 const BookingDatesForm = compose(
   connect(mapStateToProps),

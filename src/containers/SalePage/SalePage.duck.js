@@ -1,5 +1,5 @@
 import { types } from '../../util/sdkLoader';
-import { addEntities } from '../../ducks/sdk.duck';
+import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 
 // Transition-to keys
 const TRANSITION_ACCEPT = 'transition/accept';
@@ -87,7 +87,7 @@ export const fetchSale = id =>
     return sdk.transactions
       .show({ id, include: ['customer', 'provider', 'listing', 'booking'] }, { expand: true })
       .then(response => {
-        dispatch(addEntities(response));
+        dispatch(addMarketplaceEntities(response));
         dispatch(fetchSaleSuccess(response));
         return response;
       })
@@ -104,7 +104,7 @@ export const acceptSale = id =>
     return sdk.transactions
       .transition({ id, transition: TRANSITION_ACCEPT, params: {} }, { expand: true })
       .then(response => {
-        dispatch(addEntities(response));
+        dispatch(addMarketplaceEntities(response));
         dispatch(acceptSaleSuccess());
         return response;
       })
@@ -121,7 +121,7 @@ export const rejectSale = id =>
     return sdk.transactions
       .transition({ id, transition: TRANSITION_REJECT, params: {} }, { expand: true })
       .then(response => {
-        dispatch(addEntities(response));
+        dispatch(addMarketplaceEntities(response));
         dispatch(rejectSaleSuccess());
         return response;
       })

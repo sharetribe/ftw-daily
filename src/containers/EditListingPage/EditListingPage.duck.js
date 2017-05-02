@@ -1,4 +1,4 @@
-import { showListingsSuccess as globalShowListingsSuccess } from '../../ducks/sdk.duck';
+import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { createStripeAccount } from '../../ducks/user.duck';
 
 const requestAction = actionType => params => ({ type: actionType, payload: { params } });
@@ -132,7 +132,7 @@ export function requestShowListing(actionPayload) {
       .show(actionPayload)
       .then(response => {
         // EditListingPage fetches new listing data, which also needs to be added to global data
-        dispatch(globalShowListingsSuccess(response));
+        dispatch(addMarketplaceEntities(response));
         // In case of success, we'll clear state.EditListingPage (user will be redirected away)
         dispatch(showListingsSuccess(response));
         return response;

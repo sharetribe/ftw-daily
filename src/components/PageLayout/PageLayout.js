@@ -79,9 +79,9 @@ PageLayout.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = state => ({
-  authInfoError: state.Auth.authInfoError,
-  logoutError: state.Auth.logoutError,
-});
+const mapStateToProps = state => {
+  const { authInfoError, logoutError } = state.Auth;
+  return { authInfoError, logoutError };
+};
 
 export default connect(mapStateToProps)(withRouter(PageLayout));

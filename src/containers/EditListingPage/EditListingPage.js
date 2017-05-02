@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { types } from '../../util/sdkLoader';
 import { NamedRedirect, PageLayout } from '../../components';
 import { EditListingForm } from '../../containers';
-import { getListingsById } from '../../ducks/sdk.duck';
+import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { createSlug } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import {
@@ -44,7 +44,6 @@ export class EditListingPageComponent extends Component {
 
   render() {
     const {
-      marketplaceData,
       intl,
       onCreateListing,
       onImageUpload,
@@ -53,11 +52,12 @@ export class EditListingPageComponent extends Component {
       params,
       type,
       currentUser,
+      getListing,
     } = this.props;
     const isNew = type === 'new';
-    const id = page.submittedListingId || (params && new types.UUID(params.id));
-    const listingsById = getListingsById(marketplaceData, [id]);
-    const currentListing = listingsById.length > 0 ? listingsById[0] : null;
+    const hasIdParam = params && params.id;
+    const id = page.submittedListingId || (hasIdParam ? new types.UUID(params.id) : null);
+    const currentListing = getListing(id);
 
     const shouldRedirect = page.submittedListingId && currentListing;
     const showForm = isNew || currentListing;
@@ -129,7 +129,6 @@ EditListingPageComponent.defaultProps = {
 const { func, object, shape, string } = PropTypes;
 
 EditListingPageComponent.propTypes = {
-  marketplaceData: object.isRequired,
   intl: intlShape.isRequired,
   onCreateListing: func.isRequired,
   onLoadListing: func.isRequired,
@@ -142,14 +141,18 @@ EditListingPageComponent.propTypes = {
   }),
   type: string,
   currentUser: propTypes.currentUser,
+  getListing: func.isRequired,
 };
 
 const mapStateToProps = state => {
-  return {
-    page: state.EditListingPage,
-    marketplaceData: state.data || {},
-    currentUser: state.user.currentUser,
+  const page = state.EditListingPage;
+  const { currentUser } = state.user;
+
+  const getListing = id => {
+    const listings = getListingsById(state, [id]);
+    return listings.length === 1 ? listings[0] : null;
   };
+  return { page, currentUser, getListing };
 };
 
 const mapDispatchToProps = dispatch => {

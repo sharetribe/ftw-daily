@@ -1,4 +1,4 @@
-import { showListingsSuccess } from '../../ducks/sdk.duck';
+import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
@@ -47,7 +47,7 @@ export const showListing = listingId =>
     return sdk.listings
       .show({ id: listingId, include: ['author', 'images'] })
       .then(data => {
-        dispatch(showListingsSuccess(data));
+        dispatch(addMarketplaceEntities(data));
         return data;
       })
       .catch(e => {

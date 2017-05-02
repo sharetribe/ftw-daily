@@ -1,5 +1,5 @@
 import { types } from '../../util/sdkLoader';
-import { addEntities } from '../../ducks/sdk.duck';
+import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 
 // ================ Action types ================ //
 
@@ -48,7 +48,7 @@ export const fetchOrder = id =>
     return sdk.transactions
       .show({ id, include: ['customer', 'provider', 'listing', 'booking'] }, { expand: true })
       .then(response => {
-        dispatch(addEntities(response));
+        dispatch(addMarketplaceEntities(response));
         dispatch(fetchOrderSuccess(response));
         return response;
       })

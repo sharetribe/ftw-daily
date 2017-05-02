@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { PageLayout, NamedRedirect, NamedLink, PaginationLinks } from '../../components';
 import * as propTypes from '../../util/propTypes';
-import { getEntities } from '../../ducks/sdk.duck';
+import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { loadData } from './InboxPage.duck';
 
 import css from './InboxPage.css';
@@ -193,7 +193,6 @@ InboxPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const marketplaceData = state.data;
   const {
     fetchInProgress,
     fetchOrdersOrSalesError,
@@ -206,7 +205,7 @@ const mapStateToProps = state => {
     fetchInProgress,
     fetchOrdersOrSalesError,
     pagination,
-    transactions: getEntities(marketplaceData, transactionRefs),
+    transactions: getMarketplaceEntities(state, transactionRefs),
     currentUserHasListings,
     currentUserHasListingsError,
   };

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { NamedRedirect, OrderDetailsPanel, PageLayout } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { ensureBooking, ensureListing, ensureTransaction, ensureUser } from '../../util/data';
-import { getEntities } from '../../ducks/sdk.duck';
+import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { loadData } from './OrderPage.duck';
 
 import css from './OrderPage.css';
@@ -63,14 +63,14 @@ OrderPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const transactionRef = state.OrderPage.transactionRef;
-  const transactions = getEntities(state.data, transactionRef ? [transactionRef] : []);
+  const { transactionRef } = state.OrderPage;
+  const { showListingError: showOrderError } = state.ListingPage;
+  const { currentUser } = state.user;
+
+  const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
-  return {
-    transaction,
-    showOrderError: state.ListingPage.showListingError,
-    currentUser: state.user.currentUser,
-  };
+
+  return { transaction, showOrderError, currentUser };
 };
 
 const OrderPage = connect(mapStateToProps)(injectIntl(OrderPageComponent));

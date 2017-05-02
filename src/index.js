@@ -13,22 +13,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { bindActionCreators } from 'redux';
 import { createInstance, types } from './util/sdkLoader';
 import { ClientApp, renderApp } from './app';
 import configureStore from './store';
 import { matchPathname } from './util/routes';
 import * as sample from './util/sample';
-import createRootSaga from './sagas';
 import config from './config';
 import { authInfo } from './ducks/Auth.duck';
-import {
-  showListings,
-  queryListings,
-  searchListings,
-  showMarketplace,
-  showUsers,
-} from './ducks/sdk.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
 import routeConfiguration from './routesConfiguration';
 
@@ -66,16 +57,13 @@ if (typeof window !== 'undefined') {
   const sdk = createInstance({ clientId: config.sdk.clientId, baseUrl: config.sdk.baseUrl });
   const store = configureStore(sdk, initialState);
 
-  store.runSaga(createRootSaga(sdk));
   setupStripe();
   render(store);
 
-  // Expose stuff for the browser REPL
-  const actions = bindActionCreators(
-    { showListings, queryListings, searchListings, showMarketplace, showUsers },
-    store.dispatch
-  );
-  window.app = { config, sdk, sdkTypes: types, actions, store, sample, routeConfiguration };
+  if (config.dev) {
+    // Expose stuff for the browser REPL
+    window.app = { config, sdk, sdkTypes: types, store, sample, routeConfiguration };
+  }
 }
 
 // Export the function for server side rendering.
