@@ -81,14 +81,14 @@ SalePageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const transactionRef = state.SalePage.transactionRef;
+  const { transactionRef } = state.SalePage;
+  const { showListingError: showSaleError } = state.ListingPage;
+  const { currentUser } = state.user;
+
   const transactions = getEntities(state.data, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
-  return {
-    transaction,
-    showSaleError: state.ListingPage.showListingError,
-    currentUser: state.user.currentUser,
-  };
+
+  return { transaction, showSaleError, currentUser };
 };
 
 const mapDispatchToProps = dispatch => {

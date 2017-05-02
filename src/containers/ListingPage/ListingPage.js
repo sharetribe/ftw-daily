@@ -207,11 +207,10 @@ ListingPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return {
-    marketplaceData: state.data,
-    showListingError: state.ListingPage.showListingError,
-    currentUser: state.user.currentUser,
-  };
+  const marketplaceData = state.data;
+  const { showListingError } = state.ListingPage;
+  const { currentUser } = state.user;
+  return { marketplaceData, showListingError, currentUser };
 };
 
 const ListingPage = connect(mapStateToProps)(withRouter(injectIntl(ListingPageComponent)));

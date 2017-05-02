@@ -129,7 +129,10 @@ Routes.propTypes = {
   dispatch: func.isRequired,
 };
 
-const mapStateToProps = state => ({ isAuthenticated: state.Auth.isAuthenticated });
+const mapStateToProps = state => {
+  const { isAuthenticated } = state.Auth;
+  return { isAuthenticated };
+};
 
 // Note: it is important that the withRouter HOC is **outside** the
 // connect HOC, otherwise React Router won't rerender any Route

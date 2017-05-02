@@ -145,11 +145,10 @@ EditListingPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return {
-    page: state.EditListingPage,
-    marketplaceData: state.data || {},
-    currentUser: state.user.currentUser,
-  };
+  const page = state.EditListingPage;
+  const marketplaceData = state.data || {};
+  const { currentUser } = state.user;
+  return { page, marketplaceData, currentUser };
 };
 
 const mapDispatchToProps = dispatch => {
