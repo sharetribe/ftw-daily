@@ -51,7 +51,7 @@ export class ListingPageComponent extends Component {
 
   onSubmit(values) {
     const { dispatch, flattenedRoutes, history, getListing, params } = this.props;
-    const listing = getListing(params.id);
+    const listing = getListing(new UUID(params.id));
 
     this.setState({ isBookingModalOpenOnMobile: false });
 
@@ -84,7 +84,7 @@ export class ListingPageComponent extends Component {
   render() {
     const { params, showListingError, intl, currentUser, getListing } = this.props;
     const currencyConfig = config.currencyConfig;
-    const currentListing = getListing(params.id);
+    const currentListing = getListing(new UUID(params.id));
 
     const attributes = currentListing ? currentListing.attributes : {};
     const {
