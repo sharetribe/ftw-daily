@@ -20,12 +20,6 @@ const MODAL_BREAKPOINT = 2500;
 
 const { UUID } = types;
 
-const denormaliseListing = (storeState, params) => {
-  const id = new UUID(params.id);
-  const listingsById = getListingsById(storeState, [id]);
-  return listingsById.length > 0 ? listingsById[0] : null;
-};
-
 const priceData = (price, currencyConfig, intl) => {
   if (price && price.currency === currencyConfig.currency) {
     const priceAsNumber = convertMoneyToNumber(price, currencyConfig.subUnitDivisor);
@@ -56,8 +50,8 @@ export class ListingPageComponent extends Component {
   }
 
   onSubmit(values) {
-    const { dispatch, flattenedRoutes, history, storeState, params } = this.props;
-    const listing = denormaliseListing(storeState, params);
+    const { dispatch, flattenedRoutes, history, getListing, params } = this.props;
+    const listing = getListing(params.id);
 
     this.setState({ isBookingModalOpenOnMobile: false });
 
@@ -88,9 +82,9 @@ export class ListingPageComponent extends Component {
   }
 
   render() {
-    const { params, storeState, showListingError, intl, currentUser } = this.props;
+    const { params, showListingError, intl, currentUser, getListing } = this.props;
     const currencyConfig = config.currencyConfig;
-    const currentListing = denormaliseListing(storeState, params);
+    const currentListing = getListing(params.id);
 
     const attributes = currentListing ? currentListing.attributes : {};
     const {
@@ -184,7 +178,7 @@ ListingPageComponent.defaultProps = {
   currentUser: null,
 };
 
-const { arrayOf, func, instanceOf, object, oneOf, shape, string } = PropTypes;
+const { arrayOf, func, instanceOf, oneOf, shape, string } = PropTypes;
 
 ListingPageComponent.propTypes = {
   // from connect
@@ -196,21 +190,26 @@ ListingPageComponent.propTypes = {
   }).isRequired,
   // from injectIntl
   intl: intlShape.isRequired,
-  storeState: object.isRequired,
   params: shape({
     id: string.isRequired,
     slug: string.isRequired,
   }).isRequired,
   showListingError: instanceOf(Error),
   currentUser: propTypes.currentUser,
+  getListing: func.isRequired,
   tab: oneOf(['book', 'listing']),
 };
 
 const mapStateToProps = state => {
-  const storeState = state;
   const { showListingError } = state.ListingPage;
   const { currentUser } = state.user;
-  return { storeState, showListingError, currentUser };
+
+  const getListing = id => {
+    const listings = getListingsById(state, [id]);
+    return listings.length === 1 ? listings[0] : null;
+  };
+
+  return { showListingError, currentUser, getListing };
 };
 
 const ListingPage = connect(mapStateToProps)(withRouter(injectIntl(ListingPageComponent)));

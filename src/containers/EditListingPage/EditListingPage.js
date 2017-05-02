@@ -44,7 +44,6 @@ export class EditListingPageComponent extends Component {
 
   render() {
     const {
-      storeState,
       intl,
       onCreateListing,
       onImageUpload,
@@ -53,11 +52,12 @@ export class EditListingPageComponent extends Component {
       params,
       type,
       currentUser,
+      getListing,
     } = this.props;
     const isNew = type === 'new';
-    const id = page.submittedListingId || (params && new types.UUID(params.id));
-    const listingsById = getListingsById(storeState, [id]);
-    const currentListing = listingsById.length > 0 ? listingsById[0] : null;
+    const hasIdParam = params && params.id;
+    const id = page.submittedListingId || (hasIdParam ? new types.UUID(params.id) : null);
+    const currentListing = getListing(id);
 
     const shouldRedirect = page.submittedListingId && currentListing;
     const showForm = isNew || currentListing;
@@ -129,7 +129,6 @@ EditListingPageComponent.defaultProps = {
 const { func, object, shape, string } = PropTypes;
 
 EditListingPageComponent.propTypes = {
-  storeState: object.isRequired,
   intl: intlShape.isRequired,
   onCreateListing: func.isRequired,
   onLoadListing: func.isRequired,
@@ -142,13 +141,18 @@ EditListingPageComponent.propTypes = {
   }),
   type: string,
   currentUser: propTypes.currentUser,
+  getListing: func.isRequired,
 };
 
 const mapStateToProps = state => {
   const page = state.EditListingPage;
-  const storeState = state;
   const { currentUser } = state.user;
-  return { page, storeState, currentUser };
+
+  const getListing = id => {
+    const listings = getListingsById(state, [id]);
+    return listings.length === 1 ? listings[0] : null;
+  };
+  return { page, currentUser, getListing };
 };
 
 const mapDispatchToProps = dispatch => {
