@@ -14,13 +14,16 @@ import css from './SalePage.css';
 // SalePage handles data loading
 // It show loading data text or SaleDetailsPanel (and later also another panel for messages).
 export const SalePageComponent = props => {
-  const { currentUser, intl, onAcceptSale, onRejectSale, transaction } = props;
+  const { currentUser, fetchSaleError, intl, onAcceptSale, onRejectSale, transaction } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const title = currentListing.attributes.title;
 
   // Redirect users with someone else's direct link to their own inbox/sales page.
-  const isDataAvailable = currentUser && currentTransaction.id && currentTransaction.provider;
+  const isDataAvailable = currentUser &&
+    currentTransaction.id &&
+    currentTransaction.provider &&
+    !fetchSaleError;
   const isOwnSale = isDataAvailable && currentUser.id.uuid === currentTransaction.provider.id.uuid;
   if (isDataAvailable && !isOwnSale) {
     // eslint-disable-next-line no-console
@@ -42,9 +45,13 @@ export const SalePageComponent = props => {
     [css.tabContentVisible]: props.tab === 'details',
   });
 
+  const loadingOrFaildFetching = fetchSaleError
+    ? <h1 className={css.title}><FormattedMessage id="SalePage.fetchSaleFailed" /></h1>
+    : <h1 className={css.title}><FormattedMessage id="SalePage.loadingData" /></h1>;
+
   const panel = isDataAvailable && currentTransaction.id
     ? <SaleDetailsPanel className={detailsClassName} {...detailsProps} />
-    : <h1 className={css.title}><FormattedMessage id="SalePage.loadingData" /></h1>;
+    : loadingOrFaildFetching;
 
   const isPreauthorizedState = currentTransaction.attributes.state ===
     propTypes.TX_STATE_PREAUTHORIZED;
@@ -67,12 +74,13 @@ export const SalePageComponent = props => {
   );
 };
 
-SalePageComponent.defaultProps = { transaction: null, currentUser: null };
+SalePageComponent.defaultProps = { transaction: null, currentUser: null, fetchSaleError: null };
 
-const { func, oneOf } = PropTypes;
+const { func, instanceOf, oneOf } = PropTypes;
 
 SalePageComponent.propTypes = {
   currentUser: propTypes.currentUser,
+  fetchSaleError: instanceOf(Error),
   intl: intlShape.isRequired,
   onAcceptSale: func.isRequired,
   onRejectSale: func.isRequired,
@@ -81,14 +89,13 @@ SalePageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { transactionRef } = state.SalePage;
-  const { showListingError: showSaleError } = state.ListingPage;
+  const { fetchSaleError, transactionRef } = state.SalePage;
   const { currentUser } = state.user;
 
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
 
-  return { transaction, showSaleError, currentUser };
+  return { transaction, fetchSaleError, currentUser };
 };
 
 const mapDispatchToProps = dispatch => {
