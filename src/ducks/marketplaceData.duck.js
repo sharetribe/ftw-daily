@@ -49,8 +49,7 @@ export const getListingsById = (state, listingIds) => {
 /**
  * Get the denormalised entities from the given entity references.
  *
- * @param {Object} marketplaceData the state part of the Redux store
- * for this reducer
+ * @param {Object} state the full Redux store
  *
  * @param {Array<{ id, type }} entityRefs References to entities that
  * we want to query from the data. Currently we expect that all the
@@ -58,11 +57,12 @@ export const getListingsById = (state, listingIds) => {
  *
  * @return {Array<Object>} denormalised entities
  */
-export const getMarketplaceEntities = (marketplaceData, entityRefs) => {
+export const getMarketplaceEntities = (state, entityRefs) => {
+  const { entities } = state.marketplaceData;
   const type = entityRefs.length > 0 ? entityRefs[0].type : null;
   const ids = entityRefs.map(ref => ref.id);
   try {
-    return denormalisedEntities(marketplaceData.entities, type, ids);
+    return denormalisedEntities(entities, type, ids);
   } catch (e) {
     return [];
   }

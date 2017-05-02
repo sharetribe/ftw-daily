@@ -193,7 +193,6 @@ InboxPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const marketplaceData = state.marketplaceData;
   const {
     fetchInProgress,
     fetchOrdersOrSalesError,
@@ -206,7 +205,7 @@ const mapStateToProps = state => {
     fetchInProgress,
     fetchOrdersOrSalesError,
     pagination,
-    transactions: getMarketplaceEntities(marketplaceData, transactionRefs),
+    transactions: getMarketplaceEntities(state, transactionRefs),
     currentUserHasListings,
     currentUserHasListingsError,
   };
