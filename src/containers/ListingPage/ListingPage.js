@@ -207,7 +207,7 @@ ListingPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const marketplaceData = state.data;
+  const marketplaceData = state.marketplaceData;
   const { showListingError } = state.ListingPage;
   const { currentUser } = state.user;
   return { marketplaceData, showListingError, currentUser };

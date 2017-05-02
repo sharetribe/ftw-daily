@@ -85,7 +85,7 @@ const mapStateToProps = state => {
   const { showListingError: showSaleError } = state.ListingPage;
   const { currentUser } = state.user;
 
-  const transactions = getEntities(state.data, transactionRef ? [transactionRef] : []);
+  const transactions = getEntities(state.marketplaceData, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
 
   return { transaction, showSaleError, currentUser };

@@ -55,7 +55,7 @@ const merge = (state, apiResponse) => {
 
 const searchResults = payload => payload.data.data.map(listing => listing.id);
 
-export default function sdkReducer(state = initialState, action = {}) {
+export default function marketplaceDataReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case SHOW_LISTINGS_REQUEST:

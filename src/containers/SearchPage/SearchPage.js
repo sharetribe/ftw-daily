@@ -173,7 +173,7 @@ const mapStateToProps = state => {
     searchParams,
   } = state.SearchPage;
   return {
-    listings: getListingsById(state.data, currentPageResultIds),
+    listings: getListingsById(state.marketplaceData, currentPageResultIds),
     pagination,
     searchInProgress,
     searchListingsError,

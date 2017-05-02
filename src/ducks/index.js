@@ -8,7 +8,7 @@ import { reducer as form } from 'redux-form';
 import Auth from './Auth.duck';
 import FlashNotification from './FlashNotification.duck';
 import LocationFilter from './LocationFilter.duck';
-import sdkReducer from './marketplaceData.duck';
+import marketplaceData from './marketplaceData.duck';
 import user from './user.duck';
 
-export { form, Auth, FlashNotification, LocationFilter, sdkReducer as data, user };
+export { form, Auth, FlashNotification, LocationFilter, marketplaceData, user };

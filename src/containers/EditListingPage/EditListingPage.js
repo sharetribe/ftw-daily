@@ -146,7 +146,7 @@ EditListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const page = state.EditListingPage;
-  const marketplaceData = state.data || {};
+  const marketplaceData = state.marketplaceData;
   const { currentUser } = state.user;
   return { page, marketplaceData, currentUser };
 };
