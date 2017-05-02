@@ -5638,10 +5638,6 @@ redux-form@^6.6.1:
     lodash "^4.17.3"
     lodash-es "^4.17.3"
 
-redux-saga@^0.14.4:
-  version "0.14.4"
-  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.14.4.tgz#a09acf294ef8387a0f23043e5c6d2f9f3fd25b54"
-
 redux-thunk@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
