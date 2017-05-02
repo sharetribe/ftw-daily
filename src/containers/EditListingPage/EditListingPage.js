@@ -44,7 +44,7 @@ export class EditListingPageComponent extends Component {
 
   render() {
     const {
-      marketplaceData,
+      storeState,
       intl,
       onCreateListing,
       onImageUpload,
@@ -56,7 +56,7 @@ export class EditListingPageComponent extends Component {
     } = this.props;
     const isNew = type === 'new';
     const id = page.submittedListingId || (params && new types.UUID(params.id));
-    const listingsById = getListingsById(marketplaceData, [id]);
+    const listingsById = getListingsById(storeState, [id]);
     const currentListing = listingsById.length > 0 ? listingsById[0] : null;
 
     const shouldRedirect = page.submittedListingId && currentListing;
@@ -129,7 +129,7 @@ EditListingPageComponent.defaultProps = {
 const { func, object, shape, string } = PropTypes;
 
 EditListingPageComponent.propTypes = {
-  marketplaceData: object.isRequired,
+  storeState: object.isRequired,
   intl: intlShape.isRequired,
   onCreateListing: func.isRequired,
   onLoadListing: func.isRequired,
@@ -146,9 +146,9 @@ EditListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const page = state.EditListingPage;
-  const marketplaceData = state.marketplaceData;
+  const storeState = state;
   const { currentUser } = state.user;
-  return { page, marketplaceData, currentUser };
+  return { page, storeState, currentUser };
 };
 
 const mapDispatchToProps = dispatch => {

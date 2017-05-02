@@ -34,12 +34,13 @@ export default function marketplaceDataReducer(state = initialState, action = {}
 /**
  * Get the denormalised listing entities with the given IDs
  *
- * @param {Object} data the state part of the Redux store for this SDK reducer
+ * @param {Object} state the full Redux store
  * @param {Array<UUID>} listingIds listing IDs to select from the store
  */
-export const getListingsById = (data, listingIds) => {
+export const getListingsById = (state, listingIds) => {
+  const { entities } = state.marketplaceData;
   try {
-    return denormalisedEntities(data.entities, 'listing', listingIds);
+    return denormalisedEntities(entities, 'listing', listingIds);
   } catch (e) {
     return [];
   }

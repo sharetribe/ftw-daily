@@ -5,9 +5,14 @@ import { EditListingPageComponent } from './EditListingPage';
 
 describe('EditListingPageComponent', () => {
   it('matches snapshot', () => {
+    const state = {
+      marketplaceData: {
+        entities: {},
+      },
+    };
     const tree = renderShallow(
       <EditListingPageComponent
-        marketplaceData={{ entities: {} }}
+        storeState={state}
         images={[]}
         intl={fakeIntl}
         onCreateListing={v => v}

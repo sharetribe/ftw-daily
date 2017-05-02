@@ -20,9 +20,9 @@ const MODAL_BREAKPOINT = 2500;
 
 const { UUID } = types;
 
-const denormaliseListing = (marketplaceData, params) => {
+const denormaliseListing = (storeState, params) => {
   const id = new UUID(params.id);
-  const listingsById = getListingsById(marketplaceData, [id]);
+  const listingsById = getListingsById(storeState, [id]);
   return listingsById.length > 0 ? listingsById[0] : null;
 };
 
@@ -56,8 +56,8 @@ export class ListingPageComponent extends Component {
   }
 
   onSubmit(values) {
-    const { dispatch, flattenedRoutes, history, marketplaceData, params } = this.props;
-    const listing = denormaliseListing(marketplaceData, params);
+    const { dispatch, flattenedRoutes, history, storeState, params } = this.props;
+    const listing = denormaliseListing(storeState, params);
 
     this.setState({ isBookingModalOpenOnMobile: false });
 
@@ -88,9 +88,9 @@ export class ListingPageComponent extends Component {
   }
 
   render() {
-    const { params, marketplaceData, showListingError, intl, currentUser } = this.props;
+    const { params, storeState, showListingError, intl, currentUser } = this.props;
     const currencyConfig = config.currencyConfig;
-    const currentListing = denormaliseListing(marketplaceData, params);
+    const currentListing = denormaliseListing(storeState, params);
 
     const attributes = currentListing ? currentListing.attributes : {};
     const {
@@ -196,7 +196,7 @@ ListingPageComponent.propTypes = {
   }).isRequired,
   // from injectIntl
   intl: intlShape.isRequired,
-  marketplaceData: object.isRequired,
+  storeState: object.isRequired,
   params: shape({
     id: string.isRequired,
     slug: string.isRequired,
@@ -207,10 +207,10 @@ ListingPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const marketplaceData = state.marketplaceData;
+  const storeState = state;
   const { showListingError } = state.ListingPage;
   const { currentUser } = state.user;
-  return { marketplaceData, showListingError, currentUser };
+  return { storeState, showListingError, currentUser };
 };
 
 const ListingPage = connect(mapStateToProps)(withRouter(injectIntl(ListingPageComponent)));

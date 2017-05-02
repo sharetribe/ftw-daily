@@ -12,7 +12,7 @@ describe('ListingPage', () => {
   it('matches snapshot', () => {
     const currentUser = createCurrentUser('user-2');
     const listing1 = createListing('listing1', createUser('user-1'));
-    const marketplaceData = { entities: { listing: { listing1 } } };
+    const storeState = { marketplaceData: { entities: { listing: { listing1 } } } };
     const props = {
       dispatch: () => console.log('Dispatch called'),
       flattenedRoutes: [],
@@ -21,7 +21,7 @@ describe('ListingPage', () => {
         push: () => console.log('HistoryPush called'),
       },
       params: { slug: 'listing1-title', id: 'listing1' },
-      marketplaceData,
+      storeState,
       currentUser,
       intl: fakeIntl,
       onLoadListing: () => {},
