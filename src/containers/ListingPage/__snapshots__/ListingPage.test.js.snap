@@ -18,7 +18,8 @@ exports[`ListingPage matches snapshot 1`] = `
           "__html": "listing1 description",
         }
       } />
-    <InjectIntl(ModalInMobileComponent)
+    <ModalInMobile
+      className=""
       isModalOpenOnMobile={false}
       onClose={[Function]}
       showAsModalMaxWidth={2500}
@@ -32,7 +33,7 @@ exports[`ListingPage matches snapshot 1`] = `
             "currency": "USD",
           }
         } />
-    </InjectIntl(ModalInMobileComponent)>
+    </ModalInMobile>
     <div>
       <Map
         address="listing1 address"

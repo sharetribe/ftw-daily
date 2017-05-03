@@ -1,58 +1,9 @@
-/* Content is visible as modal layer */
-.modal {
+/* ModalInMobile is visible by default */
+.modalInMobile {
   display: block;
-  position: fixed;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  z-index: 100;
-  background-color: white;
-
-  /* Mobile frame fix - this needs to be removed */
-  max-width: 375px;
-  margin: 0 auto;
 }
 
 /* Content is hidden in Mobile layout */
 .modalHidden {
   display: none;
-}
-
-/* This class is passed to page layout level to fix scrolling while modal is open */
-.modalInMobileOpen {
-  height: 100vh;
-  overflow: hidden;
-}
-
-/* Header section for Modal */
-.header {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-
-.title {
-  margin: 1rem 0;
-}
-
-/* This button skin should come from global style configurations */
-.close {
-  width: auto;
-  height: 3em;
-  background-color: transparent;
-  padding: 1em;
-  color: #999;
-  border: 0;
-
-  &:enabled:hover {
-    background-color: transparent;
-    color: #666;
-  }
-  &:enabled:active {
-    background-color: transparent;
-    color: #000;
-  }
-  &:disabled {
-    background-color: transparent;
-  }
 }

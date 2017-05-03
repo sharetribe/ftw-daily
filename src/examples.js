@@ -5,6 +5,7 @@ import * as CurrencyInput from './components/CurrencyInput/CurrencyInput.example
 import * as DateInput from './components/DateInput/DateInput.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as Map from './components/Map/Map.example';
+import * as Modal from './components/Modal/Modal.example';
 import * as ModalInMobile from './components/ModalInMobile/ModalInMobile.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
 import * as LocationAutocompleteInput
@@ -40,6 +41,7 @@ export {
   LocationAutocompleteInput,
   LoginForm,
   Map,
+  Modal,
   ModalInMobile,
   NamedLink,
   PaginationLinks,

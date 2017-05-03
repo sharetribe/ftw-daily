@@ -13,11 +13,10 @@
  */
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import { intlShape, injectIntl } from 'react-intl';
-import { Button } from '../../components';
+import { Modal } from '../../components';
 import css from './ModalInMobile.css';
 
-export class ModalInMobileComponent extends Component {
+class ModalInMobile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -55,8 +54,6 @@ export class ModalInMobileComponent extends Component {
   }
 
   changeOpenStatus(isOpen) {
-    const { togglePageClassNames } = this.props;
-    togglePageClassNames(css.modalInMobileOpen, isOpen);
     this.setState({ isOpen });
   }
 
@@ -72,10 +69,9 @@ export class ModalInMobileComponent extends Component {
     const {
       children,
       className,
-      intl,
-      onClose,
       showAsModalMaxWidth,
       title,
+      togglePageClassNames,
     } = this.props;
 
     const isMobileLayout = typeof window !== 'undefined' && window.matchMedia
@@ -84,39 +80,29 @@ export class ModalInMobileComponent extends Component {
     const isOpenInMobile = this.state.isOpen;
     const isClosedInMobile = isMobileLayout && !isOpenInMobile;
 
-    const closeModalMessage = intl.formatMessage({ id: 'ModalInMobile.closeModal' });
-    const modalTitle = title ? <h2 className={css.title}>{title}</h2> : null;
-    const closeBtn = onClose && isOpenInMobile
-      ? <Button onClick={this.handleClose} className={css.close} title={closeModalMessage}>
-          ✖
-        </Button>
-      : null;
-    const header = isOpenInMobile && (closeBtn || modalTitle)
-      ? <div className={css.header}>
-          {closeBtn}
-          {modalTitle}
-        </div>
-      : null;
-
     // We have 3 view states:
     // - default desktop layout (just an extra wrapper)
     // - mobile layout: content visible inside modal popup
     // - mobile layout: content hidden
-    const classes = classNames(
-      { [css.modal]: isOpenInMobile, [css.modalHidden]: isClosedInMobile },
-      className
-    );
+    const closedClassName = isClosedInMobile ? css.modalHidden : null;
+    const classes = classNames({ [css.modalInMobile]: isOpenInMobile }, className);
 
     return (
-      <div className={classes}>
-        {header}
+      <Modal
+        className={classes}
+        isOpen={isOpenInMobile}
+        isClosedClassName={closedClassName}
+        onClose={this.handleClose}
+        title={title}
+        togglePageClassNames={togglePageClassNames}
+      >
         {children}
-      </div>
+      </Modal>
     );
   }
 }
 
-ModalInMobileComponent.defaultProps = {
+ModalInMobile.defaultProps = {
   children: null,
   className: '',
   onClose: null,
@@ -126,10 +112,9 @@ ModalInMobileComponent.defaultProps = {
 
 const { bool, func, node, number, string } = PropTypes;
 
-ModalInMobileComponent.propTypes = {
+ModalInMobile.propTypes = {
   children: node,
   className: string,
-  intl: intlShape.isRequired,
   isModalOpenOnMobile: bool.isRequired,
   onClose: func,
   showAsModalMaxWidth: number,
@@ -138,4 +123,4 @@ ModalInMobileComponent.propTypes = {
   togglePageClassNames: func.isRequired,
 };
 
-export default injectIntl(ModalInMobileComponent);
+export default ModalInMobile;

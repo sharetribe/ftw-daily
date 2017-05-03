@@ -59,7 +59,7 @@
   "LoginForm.emailLabel": "Email",
   "LoginForm.logIn": "Log in",
   "LoginForm.passwordLabel": "Password",
-  "ModalInMobile.closeModal": "Close modal",
+  "Modal.closeModal": "Close modal",
   "OrderDetailsPanel.orderAcceptedStatus": "{providerName} accepted the booking.",
   "OrderDetailsPanel.orderAcceptedTitle": "You have booked {title}.",
   "OrderDetailsPanel.orderRejectedStatus": "{providerName} rejected the booking.",
