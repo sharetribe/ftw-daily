@@ -3,29 +3,57 @@ exports[`InboxPage matches snapshot 1`] = `
   className="">
   <div
     className={undefined}>
-    <div>
-      <a
-        className="NamedLink_active"
-        href="/"
-        onClick={[Function]}
-        style={Object {}}>
+    <div
+      className={undefined}>
+      <button
+        className=""
+        onClick={[Function]}>
         <span
           dangerouslySetInnerHTML={
             Object {
-              "__html": "&#127968;",
+              "__html": "&#9776;",
             }
           } />
-      </a>
+      </button>
+      <div>
+        <a
+          className="NamedLink_active"
+          href="/"
+          onClick={[Function]}
+          style={Object {}}>
+          <span
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "&#127968;",
+              }
+            } />
+        </a>
+      </div>
+      <div
+        className={undefined}>
+        <a
+          className=""
+          href="/login"
+          onClick={[Function]}
+          style={Object {}}>
+          Login
+        </a>
+      </div>
     </div>
     <div
-      className={undefined}>
-      <a
-        className=""
-        href="/login"
-        onClick={[Function]}
-        style={Object {}}>
-        Login
-      </a>
+      className="">
+      <div
+        className={undefined}>
+        <a
+          className=""
+          href="/inbox"
+          onClick={[Function]}
+          style={Object {}}>
+          <span>
+            Inbox
+          </span>
+        </a>
+      </div>
     </div>
   </div>
   <div
@@ -135,29 +163,57 @@ exports[`InboxPage matches snapshot 2`] = `
   className="">
   <div
     className={undefined}>
-    <div>
-      <a
-        className="NamedLink_active"
-        href="/"
-        onClick={[Function]}
-        style={Object {}}>
+    <div
+      className={undefined}>
+      <button
+        className=""
+        onClick={[Function]}>
         <span
           dangerouslySetInnerHTML={
             Object {
-              "__html": "&#127968;",
+              "__html": "&#9776;",
             }
           } />
-      </a>
+      </button>
+      <div>
+        <a
+          className="NamedLink_active"
+          href="/"
+          onClick={[Function]}
+          style={Object {}}>
+          <span
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "&#127968;",
+              }
+            } />
+        </a>
+      </div>
+      <div
+        className={undefined}>
+        <a
+          className=""
+          href="/login"
+          onClick={[Function]}
+          style={Object {}}>
+          Login
+        </a>
+      </div>
     </div>
     <div
-      className={undefined}>
-      <a
-        className=""
-        href="/login"
-        onClick={[Function]}
-        style={Object {}}>
-        Login
-      </a>
+      className="">
+      <div
+        className={undefined}>
+        <a
+          className=""
+          href="/inbox"
+          onClick={[Function]}
+          style={Object {}}>
+          <span>
+            Inbox
+          </span>
+        </a>
+      </div>
     </div>
   </div>
   <div
