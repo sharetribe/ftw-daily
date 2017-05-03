@@ -1,0 +1,16 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+
+  height: 100%;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+.button {
+  align-self: stretch;
+}
