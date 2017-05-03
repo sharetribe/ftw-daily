@@ -79,6 +79,7 @@ exports[`EditListingForm matches snapshot 1`] = `
   <Button
     className={null}
     disabled={true}
+    rootClassName=""
     type="submit">
     Save listing
   </Button>
