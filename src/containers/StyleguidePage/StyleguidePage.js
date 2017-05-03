@@ -14,9 +14,10 @@ const Example = props => {
     component: ExampleComponent,
     description,
     props: exampleProps,
-    style,
+    useDefaultWrapperStyles,
   } = props;
-  const exampleStyle = style || css.withPadding;
+
+  const exampleWrapperClassName = useDefaultWrapperStyles ? css.defaultWrapperStyles : '';
   const desc = description ? <p className={css.withPadding}>Description: {description}</p> : null;
   return (
     <li>
@@ -42,16 +43,16 @@ const Example = props => {
         </NamedLink>
       </span>
       {desc}
-      <div className={exampleStyle}>
+      <div className={exampleWrapperClassName}>
         <ExampleComponent {...exampleProps} />
       </div>
     </li>
   );
 };
 
-const { string, oneOfType, func, node, object, objectOf, shape } = PropTypes;
+const { bool, func, node, object, objectOf, oneOfType, shape, string } = PropTypes;
 
-Example.defaultProps = { description: null, props: {}, style: null };
+Example.defaultProps = { description: null, props: {}, useDefaultWrapperStyles: true };
 
 Example.propTypes = {
   componentName: string.isRequired,
@@ -59,7 +60,7 @@ Example.propTypes = {
   component: oneOfType([func, node]).isRequired,
   description: string,
   props: object,
-  style: object,
+  useDefaultWrapperStyles: bool,
 };
 
 const Examples = props => {
@@ -120,7 +121,7 @@ const StyleguidePage = props => {
 
   return (
     <section className={css.root}>
-      <h1>
+      <h1 className={css.withPadding}>
         <NamedLink name="Styleguide">Styleguide</NamedLink>
       </h1>
       {html}

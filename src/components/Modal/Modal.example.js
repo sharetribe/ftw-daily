@@ -46,7 +46,7 @@ class ModalWrapper extends Component {
 
 export const Empty = {
   component: ModalWrapper,
-  style: { padding: '1rem 0' },
+  useDefaultWrapperStyles: false,
   props: {
     title: 'Test Modal',
   },
