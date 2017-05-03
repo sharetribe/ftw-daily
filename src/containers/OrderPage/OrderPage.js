@@ -13,13 +13,16 @@ import css from './OrderPage.css';
 // OrderPage handles data loading
 // It show loading data text or OrderDetailsPanel (and later also another panel for messages).
 export const OrderPageComponent = props => {
-  const { currentUser, intl, transaction } = props;
+  const { currentUser, fetchOrderError, intl, transaction } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const title = currentListing.attributes.title;
 
   // Redirect users with someone else's direct link to their own inbox/orders page.
-  const isDataAvailable = currentUser && currentTransaction.id && currentTransaction.customer;
+  const isDataAvailable = currentUser &&
+    currentTransaction.id &&
+    currentTransaction.customer &&
+    !fetchOrderError;
   const isOwnSale = isDataAvailable && currentUser.id.uuid === currentTransaction.customer.id.uuid;
   if (isDataAvailable && !isOwnSale) {
     // eslint-disable-next-line no-console
@@ -40,9 +43,13 @@ export const OrderPageComponent = props => {
     [css.tabContentVisible]: props.tab === 'details',
   });
 
+  const loadingOrFaildFetching = fetchOrderError
+    ? <h1 className={css.title}><FormattedMessage id="OrderPage.fetchOrderFailed" /></h1>
+    : <h1 className={css.title}><FormattedMessage id="OrderPage.loadingData" /></h1>;
+
   const panel = isDataAvailable && currentTransaction.id
     ? <OrderDetailsPanel className={detailsClassName} {...detailsProps} />
-    : <h1 className={css.title}><FormattedMessage id="OrderPage.loadingData" /></h1>;
+    : loadingOrFaildFetching;
 
   return (
     <PageLayout title={intl.formatMessage({ id: 'OrderPage.title' }, { title })}>
@@ -51,26 +58,26 @@ export const OrderPageComponent = props => {
   );
 };
 
-OrderPageComponent.defaultProps = { transaction: null, currentUser: null };
+OrderPageComponent.defaultProps = { transaction: null, currentUser: null, fetchOrderError: null };
 
-const { oneOf } = PropTypes;
+const { instanceOf, oneOf } = PropTypes;
 
 OrderPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
+  fetchOrderError: instanceOf(Error),
   intl: intlShape.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
 };
 
 const mapStateToProps = state => {
-  const { transactionRef } = state.OrderPage;
-  const { showListingError: showOrderError } = state.ListingPage;
+  const { fetchOrderError, transactionRef } = state.OrderPage;
   const { currentUser } = state.user;
 
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
 
-  return { transaction, showOrderError, currentUser };
+  return { transaction, fetchOrderError, currentUser };
 };
 
 const OrderPage = connect(mapStateToProps)(injectIntl(OrderPageComponent));
