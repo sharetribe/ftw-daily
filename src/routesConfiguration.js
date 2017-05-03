@@ -126,13 +126,13 @@ const routesConfiguration = [
   {
     path: '/login',
     exact: true,
-    name: 'LogInPage',
+    name: 'LoginPage',
     component: props => <AuthenticationPage {...props} tab="login" />,
   },
   {
     path: '/signup',
     exact: true,
-    name: 'SignUpPage',
+    name: 'SignupPage',
     component: props => <AuthenticationPage {...props} tab="signup" />,
   },
   {
