@@ -1,8 +1,10 @@
 {
   "AuthenticationPage.loginFailed": "The email and password you entered did not match our records. Please double-check and try again.",
-  "AuthenticationPage.loginPageTitle": "Log in",
-  "AuthenticationPage.loginRequiredFor": "You must log in to view the page at",
-  "AuthenticationPage.signupPageTitle": "Signup",
+  "AuthenticationPage.loginLinkText": "Login",
+  "AuthenticationPage.loginPageTitle": "Login",
+  "AuthenticationPage.signupFailed": "Oops, could not sign up. Please try again.",
+  "AuthenticationPage.signupLinkText": "Sign up",
+  "AuthenticationPage.signupPageTitle": "Sign up",
   "AuthorInfo.host": "Hosted by {authorName}",
   "BookingDatesForm.bookingEndTitle": "End date",
   "BookingDatesForm.bookingStartTitle": "Start date",

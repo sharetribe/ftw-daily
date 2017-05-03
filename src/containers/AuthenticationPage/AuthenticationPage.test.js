@@ -6,12 +6,12 @@ import { AuthenticationPageComponent } from './AuthenticationPage';
 describe('AuthenticationPageComponent', () => {
   it('matches snapshot', () => {
     const props = {
-      tab: 'login',
       location: { state: { from: '/protected' } },
+      tab: 'login',
       isAuthenticated: false,
       authInProgress: false,
-      onLoginSubmit: () => null,
-      onSignUpSubmit: () => null,
+      submitLogin: () => null,
+      submitSignup: () => null,
       intl: fakeIntl,
     };
     const tree = renderShallow(<AuthenticationPageComponent {...props} />);
