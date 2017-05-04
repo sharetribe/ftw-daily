@@ -76,7 +76,7 @@ export const AuthenticationPageComponent = props => {
         {signupError ? signupErrorMessage : null}
         {isLogin
           ? <LoginForm onSubmit={submitLogin} inProgress={authInProgress} />
-          : <SignUpForm onSubmit={submitSignup} />}
+          : <SignUpForm onSubmit={submitSignup} inProgress={authInProgress} />}
       </div>
     </PageLayout>
   );

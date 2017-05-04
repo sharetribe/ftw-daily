@@ -1,16 +1,23 @@
-.form {
+.root {
   display: flex;
   flex-direction: column;
   flex: 1;
   justify-content: space-between;
-
   height: 100%;
 }
 
-.row {
-  margin-bottom: 20px;
+.firstName {
+  display: inline-block;
+  width: 35%;
+  margin-right: 1rem;
+}
+
+.lastName {
+  display: inline-block;
+  width: calc(100% - 35% - 1rem);
 }
 
 .button {
   align-self: stretch;
+  margin-bottom: 20px;
 }
