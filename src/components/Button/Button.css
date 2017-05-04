@@ -72,3 +72,30 @@
     cursor: auto;
   }
 }
+
+.inlineButton {
+  display: inline-block;
+  padding: 0;
+
+  /* fill colors should be in sync with marketplace color palette */
+  background-color: transparent;
+
+  /* border-width should be in sync with marketplace strike-widths */
+  border-width: 0px;
+
+  /* Font configuration */
+  text-decoration: underline;
+
+  /* Hovers */
+  &:enabled {
+    cursor: pointer;
+  }
+  &:enabled:hover,
+  &:enabled:active {
+    background-color: transparent;
+  }
+  &:disabled {
+    background-color: transparent;
+    cursor: auto;
+  }
+}
