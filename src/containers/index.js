@@ -7,7 +7,7 @@ import ContactDetailsPage from './ContactDetailsPage/ContactDetailsPage';
 import EditListingForm from './EditListingForm/EditListingForm';
 import EditListingPage from './EditListingPage/EditListingPage';
 import EditProfilePage from './EditProfilePage/EditProfilePage';
-import HeroSearchForm from './HeroSearchForm/HeroSearchForm';
+import SearchForm from './SearchForm/SearchForm';
 import InboxPage from './InboxPage/InboxPage';
 import LandingPage from './LandingPage/LandingPage';
 import ListingPage from './ListingPage/ListingPage';
@@ -38,7 +38,7 @@ export {
   EditListingForm,
   EditListingPage,
   EditProfilePage,
-  HeroSearchForm,
+  SearchForm,
   InboxPage,
   LandingPage,
   ListingPage,
