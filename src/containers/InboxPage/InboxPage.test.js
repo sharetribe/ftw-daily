@@ -2,7 +2,7 @@ import React from 'react';
 import { RoutesProvider } from '../../components';
 import { renderShallow, renderDeep } from '../../util/test-helpers';
 import { fakeIntl, createUser, createTransaction } from '../../util/test-data';
-import { InboxPageComponent } from './InboxPage';
+import { InboxPageComponent, InboxItem } from './InboxPage';
 import routesConfiguration from '../../routesConfiguration';
 import { flattenRoutes } from '../../util/routes';
 
@@ -37,12 +37,16 @@ describe('InboxPage', () => {
       intl: fakeIntl,
     };
 
-    const ordersTree = renderDeep(
+    const ordersTree = renderShallow(<InboxPageComponent {...ordersProps} />);
+    expect(ordersTree).toMatchSnapshot();
+
+    // Deeply render one InboxItem
+    const orderItem = renderDeep(
       <RoutesProvider flattenedRoutes={flattenedRoutes}>
-        <InboxPageComponent {...ordersProps} />
+        <InboxItem type="order" tx={ordersProps.transactions[0]} intl={fakeIntl} />
       </RoutesProvider>
     );
-    expect(ordersTree).toMatchSnapshot();
+    expect(orderItem).toMatchSnapshot();
 
     const salesProps = {
       params: {
@@ -67,11 +71,15 @@ describe('InboxPage', () => {
       intl: fakeIntl,
     };
 
-    const salesTree = renderDeep(
+    const salesTree = renderShallow(<InboxPageComponent {...salesProps} />);
+    expect(salesTree).toMatchSnapshot();
+
+    // Deeply render one InboxItem
+    const saleItem = renderDeep(
       <RoutesProvider flattenedRoutes={flattenedRoutes}>
-        <InboxPageComponent {...salesProps} />
+        <InboxItem type="sale" tx={salesProps.transactions[0]} intl={fakeIntl} />
       </RoutesProvider>
     );
-    expect(salesTree).toMatchSnapshot();
+    expect(saleItem).toMatchSnapshot();
   });
 });

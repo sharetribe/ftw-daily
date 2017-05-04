@@ -1,373 +1,351 @@
 exports[`InboxPage matches snapshot 1`] = `
-<div
-  className="">
-  <div
-    className={undefined}>
-    <div
-      className={undefined}>
-      <button
-        className=""
-        onClick={[Function]}>
-        <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#9776;",
-            }
-          } />
-      </button>
-      <div>
-        <a
-          className="NamedLink_active"
-          href="/"
-          onClick={[Function]}
-          style={Object {}}>
-          <span
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "&#127968;",
-              }
-            } />
-        </a>
-      </div>
-      <div
-        className={undefined}>
-        <a
-          className=""
-          href="/login"
-          onClick={[Function]}
-          style={Object {}}>
-          Login
-        </a>
-      </div>
-    </div>
-    <div
-      className="">
-      <div
-        className={undefined}>
-        <div
-          className={undefined}>
-          <div
-            className={undefined}>
-            <a
-              className=""
-              href="/signup"
-              onClick={[Function]}
-              style={Object {}}>
-              <span>
-                Sign up
-              </span>
-            </a>
-            <a
-              className=""
-              href="/login"
-              onClick={[Function]}
-              style={Object {}}>
-              <span>
-                Log in
-              </span>
-            </a>
-          </div>
-          <div
-            className={undefined}>
-            <a
-              className=""
-              href="/l/new"
-              onClick={[Function]}
-              style={Object {}}>
-              <span>
-                + Add your sauna
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    className={undefined}>
-    <h1
-      className={undefined}>
-      <span>
-        Inbox
-      </span>
-    </h1>
-    <nav>
-      <a
-        className=""
-        href="/inbox/orders"
-        onClick={[Function]}
-        style={Object {}}>
-        <span>
-          Guest
-        </span>
-      </a>
-      <a
-        className=""
-        href="/inbox/sales"
-        onClick={[Function]}
-        style={Object {}}>
-        <span>
-          Host
-        </span>
-      </a>
-    </nav>
-    <ul>
-      <li
-        className={undefined}>
-        <a
-          className=""
-          href="/order/order-1/details"
-          onClick={[Function]}
-          style={Object {}}>
-          <div
-            className={undefined}>
-            <img
-              alt="provider-user-id first name provider-user-id last name"
-              className={undefined}
-              src="https://placehold.it/44x44" />
-          </div>
-          <div
-            className={undefined}>
-            <div>
-              <span
-                className={undefined}>
-                provider-user-id first name provider-user-id last name
-              </span>
-              <span
-                className={undefined}
-                title="2017-01-15 00:00">
-                2017-01-15
-              </span>
-            </div>
-            <div
-              className={undefined}>
-              InboxPage.statePending
-            </div>
-          </div>
-        </a>
-      </li>
-      <li
-        className={undefined}>
-        <a
-          className=""
-          href="/order/order-2/details"
-          onClick={[Function]}
-          style={Object {}}>
-          <div
-            className={undefined}>
-            <img
-              alt="provider-user-id first name provider-user-id last name"
-              className={undefined}
-              src="https://placehold.it/44x44" />
-          </div>
-          <div
-            className={undefined}>
-            <div>
-              <span
-                className={undefined}>
-                provider-user-id first name provider-user-id last name
-              </span>
-              <span
-                className={undefined}
-                title="2016-01-15 00:00">
-                2016-01-15
-              </span>
-            </div>
-            <div
-              className={undefined}>
-              InboxPage.statePending
-            </div>
-          </div>
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+<Connect(withRouter(PageLayout))
+  title="InboxPage.ordersTitle">
+  <h1>
+    <FormattedMessage
+      id="InboxPage.title"
+      values={Object {}} />
+  </h1>
+  <nav>
+    <withFlattenedRoutes(withRouter(NamedLink))
+      name="InboxPage"
+      params={
+        Object {
+          "tab": "orders",
+        }
+      }>
+      <FormattedMessage
+        id="InboxPage.ordersTabTitle"
+        values={Object {}} />
+    </withFlattenedRoutes(withRouter(NamedLink))>
+    <withFlattenedRoutes(withRouter(NamedLink))
+      activeClassName={null}
+      name="InboxPage"
+      params={
+        Object {
+          "tab": "sales",
+        }
+      }>
+      <FormattedMessage
+        id="InboxPage.salesTabTitle"
+        values={Object {}} />
+    </withFlattenedRoutes(withRouter(NamedLink))>
+  </nav>
+  <ul>
+    <li>
+      <Component
+        intl={
+          Object {
+            "formatDate": [Function],
+            "formatHTMLMessage": [Function],
+            "formatMessage": [Function],
+            "formatNumber": [Function],
+            "formatPlural": [Function],
+            "formatRelative": [Function],
+            "formatTime": [Function],
+            "now": [Function],
+          }
+        }
+        tx={
+          Object {
+            "attributes": Object {
+              "commission": Money {
+                "amount": 100,
+                "currency": "USD",
+              },
+              "createdAt": 2017-05-01T00:00:00.000Z,
+              "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
+              "state": "state/preauthorized",
+              "total": Money {
+                "amount": 1000,
+                "currency": "USD",
+              },
+            },
+            "booking": null,
+            "customer": null,
+            "id": UUID {
+              "uuid": "order-1",
+            },
+            "listing": null,
+            "provider": Object {
+              "attributes": Object {
+                "profile": Object {
+                  "firstName": "provider-user-id first name",
+                  "lastName": "provider-user-id last name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider-user-id",
+              },
+              "type": "user",
+            },
+            "type": "transaction",
+          }
+        }
+        type="order" />
+    </li>
+    <li>
+      <Component
+        intl={
+          Object {
+            "formatDate": [Function],
+            "formatHTMLMessage": [Function],
+            "formatMessage": [Function],
+            "formatNumber": [Function],
+            "formatPlural": [Function],
+            "formatRelative": [Function],
+            "formatTime": [Function],
+            "now": [Function],
+          }
+        }
+        tx={
+          Object {
+            "attributes": Object {
+              "commission": Money {
+                "amount": 100,
+                "currency": "USD",
+              },
+              "createdAt": 2017-05-01T00:00:00.000Z,
+              "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
+              "state": "state/preauthorized",
+              "total": Money {
+                "amount": 1000,
+                "currency": "USD",
+              },
+            },
+            "booking": null,
+            "customer": null,
+            "id": UUID {
+              "uuid": "order-2",
+            },
+            "listing": null,
+            "provider": Object {
+              "attributes": Object {
+                "profile": Object {
+                  "firstName": "provider-user-id first name",
+                  "lastName": "provider-user-id last name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider-user-id",
+              },
+              "type": "user",
+            },
+            "type": "transaction",
+          }
+        }
+        type="order" />
+    </li>
+  </ul>
+</Connect(withRouter(PageLayout))>
 `;
 
 exports[`InboxPage matches snapshot 2`] = `
-<div
-  className="">
+<a
+  className=""
+  href="/order/order-1/details"
+  onClick={[Function]}
+  style={Object {}}>
   <div
     className={undefined}>
-    <div
-      className={undefined}>
-      <button
-        className=""
-        onClick={[Function]}>
-        <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#9776;",
-            }
-          } />
-      </button>
-      <div>
-        <a
-          className="NamedLink_active"
-          href="/"
-          onClick={[Function]}
-          style={Object {}}>
-          <span
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "&#127968;",
-              }
-            } />
-        </a>
-      </div>
-      <div
-        className={undefined}>
-        <a
-          className=""
-          href="/login"
-          onClick={[Function]}
-          style={Object {}}>
-          Login
-        </a>
-      </div>
-    </div>
-    <div
-      className="">
-      <div
-        className={undefined}>
-        <div
-          className={undefined}>
-          <div
-            className={undefined}>
-            <a
-              className=""
-              href="/signup"
-              onClick={[Function]}
-              style={Object {}}>
-              <span>
-                Sign up
-              </span>
-            </a>
-            <a
-              className=""
-              href="/login"
-              onClick={[Function]}
-              style={Object {}}>
-              <span>
-                Log in
-              </span>
-            </a>
-          </div>
-          <div
-            className={undefined}>
-            <a
-              className=""
-              href="/l/new"
-              onClick={[Function]}
-              style={Object {}}>
-              <span>
-                + Add your sauna
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <img
+      alt="provider-user-id first name provider-user-id last name"
+      className={undefined}
+      src="https://placehold.it/44x44" />
   </div>
   <div
     className={undefined}>
-    <h1
-      className={undefined}>
-      <span>
-        Inbox
+    <div>
+      <span
+        className={undefined}>
+        provider-user-id first name provider-user-id last name
       </span>
-    </h1>
-    <nav>
-      <a
-        className=""
-        href="/inbox/orders"
-        onClick={[Function]}
-        style={Object {}}>
-        <span>
-          Guest
-        </span>
-      </a>
-      <a
-        className=""
-        href="/inbox/sales"
-        onClick={[Function]}
-        style={Object {}}>
-        <span>
-          Host
-        </span>
-      </a>
-    </nav>
-    <ul>
-      <li
-        className={undefined}>
-        <a
-          className=""
-          href="/sale/sale-1/details"
-          onClick={[Function]}
-          style={Object {}}>
-          <div
-            className={undefined}>
-            <img
-              alt="customer-user-id first name customer-user-id last name"
-              className={undefined}
-              src="https://placehold.it/44x44" />
-          </div>
-          <div
-            className={undefined}>
-            <div>
-              <span
-                className={undefined}>
-                customer-user-id first name customer-user-id last name
-              </span>
-              <span
-                className={undefined}
-                title="2017-01-15 00:00">
-                2017-01-15
-              </span>
-            </div>
-            <div
-              className={undefined}>
-              InboxPage.statePending
-            </div>
-          </div>
-        </a>
-      </li>
-      <li
-        className={undefined}>
-        <a
-          className=""
-          href="/sale/sale-2/details"
-          onClick={[Function]}
-          style={Object {}}>
-          <div
-            className={undefined}>
-            <img
-              alt="customer-user-id first name customer-user-id last name"
-              className={undefined}
-              src="https://placehold.it/44x44" />
-          </div>
-          <div
-            className={undefined}>
-            <div>
-              <span
-                className={undefined}>
-                customer-user-id first name customer-user-id last name
-              </span>
-              <span
-                className={undefined}
-                title="2016-01-15 00:00">
-                2016-01-15
-              </span>
-            </div>
-            <div
-              className={undefined}>
-              InboxPage.statePending
-            </div>
-          </div>
-        </a>
-      </li>
-    </ul>
+      <span
+        className={undefined}
+        title="2017-01-15 00:00">
+        2017-01-15
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      InboxPage.statePending
+    </div>
   </div>
-</div>
+</a>
+`;
+
+exports[`InboxPage matches snapshot 3`] = `
+<Connect(withRouter(PageLayout))
+  title="InboxPage.salesTitle">
+  <h1>
+    <FormattedMessage
+      id="InboxPage.title"
+      values={Object {}} />
+  </h1>
+  <nav>
+    <withFlattenedRoutes(withRouter(NamedLink))
+      activeClassName={null}
+      name="InboxPage"
+      params={
+        Object {
+          "tab": "orders",
+        }
+      }>
+      <FormattedMessage
+        id="InboxPage.ordersTabTitle"
+        values={Object {}} />
+    </withFlattenedRoutes(withRouter(NamedLink))>
+    <withFlattenedRoutes(withRouter(NamedLink))
+      name="InboxPage"
+      params={
+        Object {
+          "tab": "sales",
+        }
+      }>
+      <FormattedMessage
+        id="InboxPage.salesTabTitle"
+        values={Object {}} />
+    </withFlattenedRoutes(withRouter(NamedLink))>
+  </nav>
+  <ul>
+    <li>
+      <Component
+        intl={
+          Object {
+            "formatDate": [Function],
+            "formatHTMLMessage": [Function],
+            "formatMessage": [Function],
+            "formatNumber": [Function],
+            "formatPlural": [Function],
+            "formatRelative": [Function],
+            "formatTime": [Function],
+            "now": [Function],
+          }
+        }
+        tx={
+          Object {
+            "attributes": Object {
+              "commission": Money {
+                "amount": 100,
+                "currency": "USD",
+              },
+              "createdAt": 2017-05-01T00:00:00.000Z,
+              "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
+              "state": "state/preauthorized",
+              "total": Money {
+                "amount": 1000,
+                "currency": "USD",
+              },
+            },
+            "booking": null,
+            "customer": Object {
+              "attributes": Object {
+                "profile": Object {
+                  "firstName": "customer-user-id first name",
+                  "lastName": "customer-user-id last name",
+                },
+              },
+              "id": UUID {
+                "uuid": "customer-user-id",
+              },
+              "type": "user",
+            },
+            "id": UUID {
+              "uuid": "sale-1",
+            },
+            "listing": null,
+            "provider": null,
+            "type": "transaction",
+          }
+        }
+        type="sale" />
+    </li>
+    <li>
+      <Component
+        intl={
+          Object {
+            "formatDate": [Function],
+            "formatHTMLMessage": [Function],
+            "formatMessage": [Function],
+            "formatNumber": [Function],
+            "formatPlural": [Function],
+            "formatRelative": [Function],
+            "formatTime": [Function],
+            "now": [Function],
+          }
+        }
+        tx={
+          Object {
+            "attributes": Object {
+              "commission": Money {
+                "amount": 100,
+                "currency": "USD",
+              },
+              "createdAt": 2017-05-01T00:00:00.000Z,
+              "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
+              "state": "state/preauthorized",
+              "total": Money {
+                "amount": 1000,
+                "currency": "USD",
+              },
+            },
+            "booking": null,
+            "customer": Object {
+              "attributes": Object {
+                "profile": Object {
+                  "firstName": "customer-user-id first name",
+                  "lastName": "customer-user-id last name",
+                },
+              },
+              "id": UUID {
+                "uuid": "customer-user-id",
+              },
+              "type": "user",
+            },
+            "id": UUID {
+              "uuid": "sale-2",
+            },
+            "listing": null,
+            "provider": null,
+            "type": "transaction",
+          }
+        }
+        type="sale" />
+    </li>
+  </ul>
+</Connect(withRouter(PageLayout))>
+`;
+
+exports[`InboxPage matches snapshot 4`] = `
+<a
+  className=""
+  href="/sale/sale-1/details"
+  onClick={[Function]}
+  style={Object {}}>
+  <div
+    className={undefined}>
+    <img
+      alt="customer-user-id first name customer-user-id last name"
+      className={undefined}
+      src="https://placehold.it/44x44" />
+  </div>
+  <div
+    className={undefined}>
+    <div>
+      <span
+        className={undefined}>
+        customer-user-id first name customer-user-id last name
+      </span>
+      <span
+        className={undefined}
+        title="2017-01-15 00:00">
+        2017-01-15
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      InboxPage.statePending
+    </div>
+  </div>
+</a>
 `;
