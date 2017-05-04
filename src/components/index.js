@@ -31,6 +31,7 @@ import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import StripeBankAccountToken from './StripeBankAccountToken/StripeBankAccountToken';
+import ValidationError from './ValidationError/ValidationError';
 
 export {
   AddImages,
@@ -68,4 +69,5 @@ export {
   SaleDetailsPanel,
   SearchResultsPanel,
   StripeBankAccountToken,
+  ValidationError,
 };
