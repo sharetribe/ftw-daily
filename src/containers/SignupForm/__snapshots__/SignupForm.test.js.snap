@@ -1,4 +1,4 @@
-exports[`SignUpForm matches snapshot 1`] = `
+exports[`SignupForm matches snapshot 1`] = `
 <form
   className={undefined}
   onSubmit={[Function]}>

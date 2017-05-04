@@ -23,7 +23,7 @@ import ProfilePage from './ProfilePage/ProfilePage';
 import SalePage from './SalePage/SalePage';
 import SearchPage from './SearchPage/SearchPage';
 import SecurityPage from './SecurityPage/SecurityPage';
-import SignUpForm from './SignUpForm/SignUpForm';
+import SignupForm from './SignupForm/SignupForm';
 import StripePaymentForm from './StripePaymentForm/StripePaymentForm';
 import StyleguidePage from './StyleguidePage/StyleguidePage';
 import Topbar from './Topbar/Topbar';
@@ -54,7 +54,7 @@ export {
   SalePage,
   SearchPage,
   SecurityPage,
-  SignUpForm,
+  SignupForm,
   StripePaymentForm,
   StyleguidePage,
   Topbar,

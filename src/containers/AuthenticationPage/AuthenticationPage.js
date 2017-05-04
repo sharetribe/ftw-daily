@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { PageLayout, NamedRedirect, NamedLink } from '../../components';
-import { LoginForm, SignUpForm } from '../../containers';
+import { LoginForm, SignupForm } from '../../containers';
 import { login, authenticationInProgress, signup } from '../../ducks/Auth.duck';
 
 import css from './AuthenticationPage.css';
@@ -76,7 +76,7 @@ export const AuthenticationPageComponent = props => {
         {signupError ? signupErrorMessage : null}
         {isLogin
           ? <LoginForm onSubmit={submitLogin} inProgress={authInProgress} />
-          : <SignUpForm onSubmit={submitSignup} inProgress={authInProgress} />}
+          : <SignupForm onSubmit={submitSignup} inProgress={authInProgress} />}
       </div>
     </PageLayout>
   );

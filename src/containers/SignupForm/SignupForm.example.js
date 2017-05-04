@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-import SignUpForm from './SignUpForm';
+import SignupForm from './SignupForm';
 
 export const Empty = {
-  component: SignUpForm,
+  component: SignupForm,
   props: {
     onSubmit(values) {
       console.log('sign up with form values:', values);
