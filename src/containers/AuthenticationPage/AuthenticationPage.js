@@ -65,11 +65,11 @@ export const AuthenticationPageComponent = props => {
     <PageLayout title={title}>
       <div className={css.root}>
         <nav className={css.tabs}>
-          <NamedLink className={loginLinkClasses} name="LoginPage" to={fromState}>
-            <FormattedMessage id="AuthenticationPage.loginLinkText" />
-          </NamedLink>
           <NamedLink className={signupLinkClasses} name="SignupPage" to={fromState}>
             <FormattedMessage id="AuthenticationPage.signupLinkText" />
+          </NamedLink>
+          <NamedLink className={loginLinkClasses} name="LoginPage" to={fromState}>
+            <FormattedMessage id="AuthenticationPage.loginLinkText" />
           </NamedLink>
         </nav>
         {loginError ? loginErrorMessage : null}

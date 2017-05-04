@@ -5,20 +5,6 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
     <nav>
       <withFlattenedRoutes(withRouter(NamedLink))
         className=""
-        name="LoginPage"
-        to={
-          Object {
-            "state": Object {
-              "from": "/protected",
-            },
-          }
-        }>
-        <FormattedMessage
-          id="AuthenticationPage.loginLinkText"
-          values={Object {}} />
-      </withFlattenedRoutes(withRouter(NamedLink))>
-      <withFlattenedRoutes(withRouter(NamedLink))
-        className=""
         name="SignupPage"
         to={
           Object {
@@ -29,6 +15,20 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
         }>
         <FormattedMessage
           id="AuthenticationPage.signupLinkText"
+          values={Object {}} />
+      </withFlattenedRoutes(withRouter(NamedLink))>
+      <withFlattenedRoutes(withRouter(NamedLink))
+        className=""
+        name="LoginPage"
+        to={
+          Object {
+            "state": Object {
+              "from": "/protected",
+            },
+          }
+        }>
+        <FormattedMessage
+          id="AuthenticationPage.loginLinkText"
           values={Object {}} />
       </withFlattenedRoutes(withRouter(NamedLink))>
     </nav>
