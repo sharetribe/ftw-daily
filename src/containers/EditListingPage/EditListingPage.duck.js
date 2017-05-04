@@ -147,8 +147,9 @@ export function requestCreateListing(data) {
     dispatch(createListing(actionPayload));
 
     const shouldCreateStripeAccount = bankAccountToken && country;
+    const stripeAccountAddress = { country };
     const accountCreated = shouldCreateStripeAccount
-      ? dispatch(createStripeAccount(bankAccountToken, country))
+      ? dispatch(createStripeAccount(bankAccountToken, stripeAccountAddress))
       : Promise.resolve('already created');
 
     return accountCreated
