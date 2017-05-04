@@ -1,0 +1,46 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 1rem;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 80px;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.footer {
+  flex-basis: 80px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  margin-right: 1rem;
+}
+
+.createNewListingLink {
+  font-size: 14px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.authenticationLinks {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  font-size: 20px;
+}
+
+.signupLink {
+  margin-right: 1rem;
+}

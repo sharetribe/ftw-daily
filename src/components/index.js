@@ -2,7 +2,7 @@ import AddImages from './AddImages/AddImages';
 import AuthorInfo from './AuthorInfo/AuthorInfo';
 import Avatar from './Avatar/Avatar';
 import BookingInfo from './BookingInfo/BookingInfo';
-import Button, { FlatButton } from './Button/Button';
+import Button, { FlatButton, InlineButton } from './Button/Button';
 import CurrencyInput from './CurrencyInput/CurrencyInput';
 import DateInput from './DateInput/DateInput';
 import Discussion from './Discussion/Discussion';
@@ -17,6 +17,7 @@ import Map from './Map/Map';
 import MapPanel from './MapPanel/MapPanel';
 import Menu from './Menu/Menu';
 import MobileFrame from './MobileFrame/MobileFrame';
+import MobileMenu from './MobileMenu/MobileMenu';
 import Modal from './Modal/Modal';
 import ModalInMobile from './ModalInMobile/ModalInMobile';
 import NamedLink from './NamedLink/NamedLink';
@@ -43,6 +44,7 @@ export {
   FilterPanel,
   FlatButton,
   HeroSection,
+  InlineButton,
   Input,
   LabeledField,
   ListingCard,
@@ -52,6 +54,7 @@ export {
   MapPanel,
   Menu,
   MobileFrame,
+  MobileMenu,
   Modal,
   ModalInMobile,
   NamedLink,

@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { Button, FlatButton, Modal, NamedLink } from '../../components';
+import { Button, FlatButton, MobileMenu, Modal, NamedLink } from '../../components';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
+import { ensureUser } from '../../util/data';
 import { pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 
@@ -53,7 +53,16 @@ class TopbarComponent extends Component {
   }
 
   render() {
-    const { isAuthenticated, authInProgress, location, togglePageClassNames } = this.props;
+    const {
+      isAuthenticated,
+      authInProgress,
+      currentUser,
+      location,
+      togglePageClassNames,
+    } = this.props;
+    const me = ensureUser(currentUser);
+    const profile = me.attributes.profile;
+    const name = me.id ? `${profile.firstName} ${profile.lastName}` : '';
     const { mobilemenu } = parse(location.search);
     const isMobileMenuOpen = mobilemenu === 'open';
 
@@ -81,11 +90,7 @@ class TopbarComponent extends Component {
           onClose={this.handleMobileMenuClose}
           togglePageClassNames={togglePageClassNames}
         >
-          <div className={css.mobileMenuContent}>
-            <NamedLink name="InboxBasePage">
-              <FormattedMessage id="Topbar.inboxLink" defaultMessage="Inbox" />
-            </NamedLink>
-          </div>
+          <MobileMenu isAuthenticated={isAuthenticated} name={name} onLogout={this.handleLogout} />
         </Modal>
       </div>
     );
@@ -97,6 +102,7 @@ const { arrayOf, bool, func, shape, string } = PropTypes;
 TopbarComponent.propTypes = {
   isAuthenticated: bool.isRequired,
   authInProgress: bool.isRequired,
+  currentUser: propTypes.currentUser,
   onLogout: func.isRequired,
   togglePageClassNames: func.isRequired,
 
@@ -114,9 +120,11 @@ TopbarComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { isAuthenticated } = state.Auth;
+  const { currentUser } = state.user;
   return {
     isAuthenticated,
     authInProgress: authenticationInProgress(state),
+    currentUser,
   };
 };
 
