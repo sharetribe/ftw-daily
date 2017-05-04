@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-import HeroSearchForm from './HeroSearchForm';
+import SearchForm from './SearchForm';
 
 export const Empty = {
-  component: HeroSearchForm,
+  component: SearchForm,
   props: {
     onSubmit(values) {
       console.log('submit search query:', values);

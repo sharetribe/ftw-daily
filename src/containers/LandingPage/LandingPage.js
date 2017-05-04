@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { withRouter } from 'react-router-dom';
 import { HeroSection, PageLayout } from '../../components';
-import { HeroSearchForm } from '../../containers';
+import { SearchForm } from '../../containers';
 import { createResourceLocatorString } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 
@@ -20,7 +20,7 @@ export const LandingPageComponent = props => {
   return (
     <PageLayout title="Landing page">
       <HeroSection>
-        <HeroSearchForm className={css.form} onSubmit={handleSubmit} />
+        <SearchForm className={css.form} onSubmit={handleSubmit} />
       </HeroSection>
     </PageLayout>
   );

@@ -43,6 +43,11 @@
 }
 
 /* Child component's size (and positioning) should be given here */
-.hamburgerMenu {
+.hamburgerMenu,
+.searchMenu {
   width: 44px;
+}
+
+.searchForm {
+  margin: 2rem;
 }

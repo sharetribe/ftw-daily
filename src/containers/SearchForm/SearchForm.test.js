@@ -1,11 +1,11 @@
 import React from 'react';
 import { renderDeep } from '../../util/test-helpers';
-import HeroSearchForm from './HeroSearchForm';
+import SearchForm from './SearchForm';
 
-describe('HeroSearchForm', () => {
+describe('SearchForm', () => {
   it('matches snapshot', () => {
     window.google = { maps: {} };
-    const tree = renderDeep(<HeroSearchForm />);
+    const tree = renderDeep(<SearchForm />);
     expect(tree).toMatchSnapshot();
     delete window.google;
   });

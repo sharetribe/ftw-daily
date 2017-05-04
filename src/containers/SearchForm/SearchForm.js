@@ -3,9 +3,9 @@ import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { LocationAutocompleteInput, Button } from '../../components';
 
-import css from './HeroSearchForm.css';
+import css from './SearchForm.css';
 
-const HeroSearchForm = props => {
+const SearchForm = props => {
   const { className, intl, handleSubmit, submitting } = props;
   const addClassName = className ? { className } : {};
 
@@ -15,12 +15,12 @@ const HeroSearchForm = props => {
         className={css.locationInput}
         name="location"
         label="Location"
-        placeholder={intl.formatMessage({ id: 'HeroSearchForm.placeholder' })}
+        placeholder={intl.formatMessage({ id: 'SearchForm.placeholder' })}
         format={null}
         component={LocationAutocompleteInput}
       />
       <Button className={css.locationButton} type="submit" disabled={submitting}>
-        <FormattedMessage id="HeroSearchForm.search" />
+        <FormattedMessage id="SearchForm.search" />
         <div className={css.searchIcon}>
           <svg width="18" height="18" viewBox="189 165 18 18" xmlns="http://www.w3.org/2000/svg">
             <g
@@ -41,6 +41,6 @@ const HeroSearchForm = props => {
   );
 };
 
-HeroSearchForm.propTypes = { ...formPropTypes, intl: intlShape.isRequired };
+SearchForm.propTypes = { ...formPropTypes, intl: intlShape.isRequired };
 
-export default reduxForm({ form: 'herosearchform' })(injectIntl(HeroSearchForm));
+export default reduxForm({ form: 'searchform' })(injectIntl(SearchForm));

@@ -48,7 +48,7 @@ const txState = (intl, tx) => {
   });
 };
 
-const InboxItem = props => {
+export const InboxItem = props => {
   const { type, tx, intl } = props;
   const { customer, provider } = tx;
   const isOrder = type === 'order';

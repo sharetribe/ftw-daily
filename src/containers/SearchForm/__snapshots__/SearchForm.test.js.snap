@@ -1,4 +1,4 @@
-exports[`HeroSearchForm matches snapshot 1`] = `
+exports[`SearchForm matches snapshot 1`] = `
 <form
   onSubmit={[Function]}>
   <div

@@ -20,7 +20,7 @@ import * as ChangeAccountPasswordForm
   from './containers/ChangeAccountPasswordForm/ChangeAccountPasswordForm.example';
 import * as ChangePasswordForm from './containers/ChangePasswordForm/ChangePasswordForm.example';
 import * as EditListingForm from './containers/EditListingForm/EditListingForm.example';
-import * as HeroSearchForm from './containers/HeroSearchForm/HeroSearchForm.example';
+import * as SearchForm from './containers/SearchForm/SearchForm.example';
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
 import * as PasswordForgottenForm
   from './containers/PasswordForgottenForm/PasswordForgottenForm.example';
@@ -36,7 +36,7 @@ export {
   CurrencyInput,
   DateInput,
   EditListingForm,
-  HeroSearchForm,
+  SearchForm,
   ListingCard,
   LocationAutocompleteInput,
   LoginForm,
