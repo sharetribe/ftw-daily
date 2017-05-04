@@ -45,7 +45,15 @@ class PageLayout extends Component {
   }
 
   render() {
-    const { className, title, children, authInfoError, logoutError, history, location } = this.props;
+    const {
+      className,
+      title,
+      children,
+      authInfoError,
+      logoutError,
+      history,
+      location,
+    } = this.props;
     const topbarProps = { history, location, togglePageClassNames: this.togglePageClassNames };
 
     // TODO: use FlashMessages for auth errors

@@ -122,9 +122,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({ onLogout: historyPush => dispatch(logout(historyPush)) });
 
-const Topbar = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withFlattenedRoutes
-)(TopbarComponent);
+const Topbar = compose(connect(mapStateToProps, mapDispatchToProps), withFlattenedRoutes)(
+  TopbarComponent
+);
 
 export default Topbar;
