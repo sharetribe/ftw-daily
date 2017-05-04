@@ -7,6 +7,7 @@ import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import config from '../../config';
 import * as propTypes from '../../util/propTypes';
+import { enhancedField } from '../../util/forms';
 import {
   noEmptyArray,
   maxLength,
@@ -28,68 +29,6 @@ const ACCEPT_IMAGES = 'image/*';
 const TITLE_MAX_LENGTH = 60;
 
 const { bool, func, object, shape, string } = PropTypes;
-
-/**
- * Hoc to convert a component used within a Field to one that renders
- * a label and possible errors.
- *
- * @param {Component|String} Comp component or a String that is used
- * to create an input element
- *
- * @return {Component} new component that wraps the given one with a
- * label and possible errors
- */
-const enhancedField = Comp => {
-  const EnhancedField = props => {
-    const { input, type, label, meta } = props;
-    const { touched, error } = meta;
-    let component = null;
-    if (typeof Comp !== 'string') {
-      component = <Comp {...props} />;
-    } else if (Comp === 'textarea') {
-      component = <textarea {...input} placeholder={label} />;
-    } else {
-      component = <Input {...input} placeholder={label} type={type} />;
-    }
-    return (
-      <div>
-        <label htmlFor={input.name}>{label}</label>
-        {component}
-        {touched && error ? <span className={css.error}>{error}</span> : null}
-      </div>
-    );
-  };
-  let displayName = Comp;
-  if (Comp && typeof Comp !== 'string') {
-    displayName = Comp.displayName || Comp.name;
-  }
-  EnhancedField.displayName = `EnhancedField(${displayName})`;
-
-  EnhancedField.defaultProps = { type: null };
-
-  EnhancedField.propTypes = {
-    input: shape({
-      onChange: func.isRequired,
-      name: string.isRequired,
-    }).isRequired,
-    type: string,
-    label: string.isRequired,
-    meta: shape({
-      touched: bool,
-      error: string,
-    }).isRequired,
-  };
-
-  return EnhancedField;
-};
-
-// We must create the enhanced components outside the render function
-// to avoid losing focus.
-// See: https://github.com/erikras/redux-form/releases/tag/v6.0.0-alpha.14
-const EnhancedInput = enhancedField('input');
-const EnhancedTextArea = enhancedField('textarea');
-const EnhancedCurrencyInput = enhancedField(CurrencyInput);
-const EnhancedLocationAutocompleteInput = enhancedField(LocationAutocompleteInput);
 
 // Add image wrapper. Label is the only visible element, file input is hidden.
 const RenderAddImage = props => {
@@ -121,6 +60,14 @@ export class EditListingFormComponent extends Component {
     this.handleInitialize = this.handleInitialize.bind(this);
     this.onImageUploadHandler = this.onImageUploadHandler.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
+
+    // We must create the enhanced components outside the render function
+    // to avoid losing focus.
+    // See: https://github.com/erikras/redux-form/releases/tag/v6.0.0-alpha.14
+    this.EnhancedInput = enhancedField('input');
+    this.EnhancedTextArea = enhancedField('textarea');
+    this.EnhancedCurrencyInput = enhancedField(CurrencyInput);
+    this.EnhancedLocationAutocompleteInput = enhancedField(LocationAutocompleteInput);
   }
 
   componentDidMount() {
@@ -195,14 +142,15 @@ export class EditListingFormComponent extends Component {
         <Field
           name="title"
           label="Title"
-          component={EnhancedInput}
+          placeholder="Title"
+          component={this.EnhancedInput}
           type="text"
           validate={[required(titleRequiredMessage), maxLength60Message]}
         />
         <Field
           name="price"
           label="Price"
-          component={EnhancedCurrencyInput}
+          component={this.EnhancedCurrencyInput}
           currencyConfig={config.currencyConfig}
           validate={[required(priceRequiredMessage)]}
           placeholder={pricePlaceholderMessage}
@@ -241,7 +189,7 @@ export class EditListingFormComponent extends Component {
           name="location"
           label="Location"
           format={null}
-          component={EnhancedLocationAutocompleteInput}
+          component={this.EnhancedLocationAutocompleteInput}
           validate={[
             autocompleteSearchRequired(locationRequiredMessage),
             autocompletePlaceSelected(locationNotRecognizedMessage),
@@ -251,7 +199,8 @@ export class EditListingFormComponent extends Component {
         <Field
           name="description"
           label="Description"
-          component={EnhancedTextArea}
+          placeholder="Description"
+          component={this.EnhancedTextArea}
           validate={[required(descriptionRequiredMessage)]}
         />
 

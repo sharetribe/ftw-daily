@@ -5,6 +5,7 @@ exports[`EditListingForm matches snapshot 1`] = `
     component={[Function]}
     label="Title"
     name="title"
+    placeholder="Title"
     type="text"
     validate={
       Array [
@@ -71,6 +72,7 @@ exports[`EditListingForm matches snapshot 1`] = `
     component={[Function]}
     label="Description"
     name="description"
+    placeholder="Description"
     validate={
       Array [
         [Function],
