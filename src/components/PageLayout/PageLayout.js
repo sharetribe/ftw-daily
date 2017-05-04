@@ -45,7 +45,8 @@ class PageLayout extends Component {
   }
 
   render() {
-    const { className, title, children, authInfoError, logoutError } = this.props;
+    const { className, title, children, authInfoError, logoutError, history, location } = this.props;
+    const topbarProps = { history, location, togglePageClassNames: this.togglePageClassNames };
 
     // TODO: use FlashMessages for auth errors
 
@@ -73,7 +74,7 @@ class PageLayout extends Component {
               <FormattedMessage id="PageLayout.logoutFailed" />
             </div>
           : null}
-        <Topbar togglePageClassNames={this.togglePageClassNames} />
+        <Topbar {...topbarProps} />
         <div className={css.content}>
           {children}
         </div>
@@ -96,6 +97,9 @@ PageLayout.propTypes = {
   // from withRouter
   history: shape({
     listen: func.isRequired,
+  }).isRequired,
+  location: shape({
+    search: string.isRequired,
   }).isRequired,
 };
 

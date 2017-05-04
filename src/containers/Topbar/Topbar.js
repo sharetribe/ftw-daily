@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { Button, FlatButton, Modal, NamedLink } from '../../components';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
+import { parse, stringify } from '../../util/urlHelpers';
 import { pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 
@@ -19,13 +19,27 @@ const Burger = () => <span dangerouslySetInnerHTML={{ __html: '&#9776;' }} />;
 class TopbarComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { isMobileMenuOpen: false };
     this.handleMobileMenuOpen = this.handleMobileMenuOpen.bind(this);
+    this.handleMobileMenuClose = this.handleMobileMenuClose.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleMobileMenuOpen() {
-    this.setState({ isMobileMenuOpen: true });
+    const { history, location } = this.props;
+    const { pathname, search, state } = location;
+    const searchString = `?${stringify({ mobilemenu: 'open', ...parse(search) })}`;
+
+    history.push(`${pathname}${searchString}`, state);
+  }
+
+  handleMobileMenuClose() {
+    const { history, location } = this.props;
+    const { pathname, search, state } = location;
+    const { mobilemenu, ...queryParams } = parse(search); // eslint-disable-line no-unused-vars
+    const stringified = stringify(queryParams);
+    const searchString = stringified ? `?${stringified}` : '';
+
+    history.push(`${pathname}${searchString}`, state);
   }
 
   handleLogout() {
@@ -39,7 +53,9 @@ class TopbarComponent extends Component {
   }
 
   render() {
-    const { isAuthenticated, authInProgress, togglePageClassNames } = this.props;
+    const { isAuthenticated, authInProgress, location, togglePageClassNames } = this.props;
+    const { mobilemenu } = parse(location.search);
+    const isMobileMenuOpen = mobilemenu === 'open';
 
     const authAction = isAuthenticated
       ? <Button className={css.logoutButton} onClick={this.handleLogout}>Logout</Button>
@@ -61,8 +77,8 @@ class TopbarComponent extends Component {
           </div>
         </div>
         <Modal
-          isOpen={this.state.isMobileMenuOpen}
-          onClose={() => this.setState({ isMobileMenuOpen: false })}
+          isOpen={isMobileMenuOpen}
+          onClose={this.handleMobileMenuClose}
           togglePageClassNames={togglePageClassNames}
         >
           <div className={css.mobileMenuContent}>
@@ -76,7 +92,7 @@ class TopbarComponent extends Component {
   }
 }
 
-const { arrayOf, bool, func, shape } = PropTypes;
+const { arrayOf, bool, func, shape, string } = PropTypes;
 
 TopbarComponent.propTypes = {
   isAuthenticated: bool.isRequired,
@@ -84,9 +100,12 @@ TopbarComponent.propTypes = {
   onLogout: func.isRequired,
   togglePageClassNames: func.isRequired,
 
-  // from withRouter
+  // These are passed from PageLayout to keep Topbar rendering aware of location changes
   history: shape({
     push: func.isRequired,
+  }).isRequired,
+  location: shape({
+    search: string.isRequired,
   }).isRequired,
 
   // from withFlattenedRoutes
@@ -105,7 +124,6 @@ const mapDispatchToProps = dispatch => ({ onLogout: historyPush => dispatch(logo
 
 const Topbar = compose(
   connect(mapStateToProps, mapDispatchToProps),
-  withRouter,
   withFlattenedRoutes
 )(TopbarComponent);
 
