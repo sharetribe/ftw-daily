@@ -75,7 +75,9 @@ export class ModalComponent extends Component {
     return (
       <div className={classes}>
         {header}
-        {children}
+        <div className={css.content}>
+          {children}
+        </div>
       </div>
     );
   }
