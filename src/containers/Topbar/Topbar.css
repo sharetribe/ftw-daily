@@ -1,12 +1,22 @@
+.root {
+  width: 100%;
+}
+
 .container {
-  display: flex;
-  background-color: #f9f9f9;
-  flex-direction: row;
-  padding: 0 1rem;
+
+  /* Size */
   width: 100%;
   height: 80px;
+
+  /* Layout for child components */
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 0 1rem;
+
+  /* fill */
+  background-color: #f9f9f9;
 }
 
 .home {
@@ -30,4 +40,13 @@
 
 .logoutButton {
   margin: 0;
+}
+
+/* Child component's size (and positioning) should be given here */
+.hamburgerMenu {
+  width: 44px;
+}
+
+.mobileMenuContent {
+  padding: 1rem;
 }

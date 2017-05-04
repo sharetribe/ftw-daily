@@ -2,7 +2,7 @@ import AddImages from './AddImages/AddImages';
 import AuthorInfo from './AuthorInfo/AuthorInfo';
 import Avatar from './Avatar/Avatar';
 import BookingInfo from './BookingInfo/BookingInfo';
-import Button from './Button/Button';
+import Button, { FlatButton } from './Button/Button';
 import CurrencyInput from './CurrencyInput/CurrencyInput';
 import DateInput from './DateInput/DateInput';
 import Discussion from './Discussion/Discussion';
@@ -41,6 +41,7 @@ export {
   DateInput,
   Discussion,
   FilterPanel,
+  FlatButton,
   HeroSection,
   Input,
   LabeledField,

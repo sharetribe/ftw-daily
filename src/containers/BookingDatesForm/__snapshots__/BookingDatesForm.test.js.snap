@@ -38,6 +38,7 @@ exports[`BookingDatesForm matches snapshot 1`] = `
   <Button
     className={null}
     disabled={true}
+    rootClassName=""
     type="submit">
     <FormattedMessage
       id="BookingDatesForm.requestToBook"

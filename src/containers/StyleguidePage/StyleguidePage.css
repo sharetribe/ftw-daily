@@ -2,6 +2,7 @@
   padding: 1rem 0;
 }
 
-.withPadding {
+.withPadding,
+.defaultWrapperStyles {
   padding: 1rem;
 }

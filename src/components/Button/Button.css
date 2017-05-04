@@ -30,3 +30,45 @@
     cursor: auto;
   }
 }
+
+/**
+* This is an alternative button styling instead of default .root style
+* TODO css.flatButton could compose styles from marketplace's style configuration
+* (to make it easier to manage colors, strokes, fonts etc. from one file)
+*/
+.flatButton {
+  display: block;
+  padding: 0.5rem;
+
+  /* fill colors should be in sync with marketplace color palette */
+  background-color: transparent;
+
+  /* border-width should be in sync with marketplace strike-widths */
+  border-width: 0px;
+
+  /* Font configuration */
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: -0.4px;
+
+  /* Font color should be in sync with marketplace color palette */
+  color: #4A4A4A;
+
+  /* Dimensions */
+  /* TODO parent should be able to define or override these */
+  width: 100%;
+  height: 50px;
+
+  /* Hovers */
+  &:enabled {
+    cursor: pointer;
+  }
+  &:enabled:hover,
+  &:enabled:active {
+    background-color: transparent;
+  }
+  &:disabled {
+    background-color: transparent;
+    cursor: auto;
+  }
+}

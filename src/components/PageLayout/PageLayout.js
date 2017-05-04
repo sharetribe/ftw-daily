@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import { union, without } from 'lodash';
 import classNames from 'classnames';
 import { Topbar } from '../../containers';
 
@@ -14,6 +15,12 @@ const scrollToTop = () => {
 };
 
 class PageLayout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { pageClassNames: '' };
+    this.togglePageClassNames = this.togglePageClassNames.bind(this);
+  }
+
   componentDidMount() {
     this.historyUnlisten = this.props.history.listen(() => scrollToTop());
   }
@@ -24,8 +31,30 @@ class PageLayout extends Component {
     }
   }
 
+  // This function makes it possible to change page level styles
+  // E.g. disable scrolling when using Modal
+  togglePageClassNames(className, addClass = true) {
+    this.setState(prevState => {
+      const prevPageClassNames = prevState.pageClassNames.split(' ');
+      const pageClassNames = addClass
+        ? union(prevPageClassNames, [className]).join(' ')
+        : without(prevPageClassNames, className).join(' ');
+
+      return { pageClassNames };
+    });
+  }
+
   render() {
-    const { className, title, children, authInfoError, logoutError } = this.props;
+    const {
+      className,
+      title,
+      children,
+      authInfoError,
+      logoutError,
+      history,
+      location,
+    } = this.props;
+    const topbarProps = { history, location, togglePageClassNames: this.togglePageClassNames };
 
     // TODO: use FlashMessages for auth errors
 
@@ -39,7 +68,7 @@ class PageLayout extends Component {
     /* eslint-enable no-console */
 
     return (
-      <div className={classNames(css.root, className)}>
+      <div className={classNames(css.root, this.state.pageClassNames, className)}>
         <Helmet>
           <title>{title}</title>
         </Helmet>
@@ -53,7 +82,7 @@ class PageLayout extends Component {
               <FormattedMessage id="PageLayout.logoutFailed" />
             </div>
           : null}
-        <Topbar />
+        <Topbar {...topbarProps} />
         <div className={css.content}>
           {children}
         </div>
@@ -76,6 +105,9 @@ PageLayout.propTypes = {
   // from withRouter
   history: shape({
     listen: func.isRequired,
+  }).isRequired,
+  location: shape({
+    search: string.isRequired,
   }).isRequired,
 };
 

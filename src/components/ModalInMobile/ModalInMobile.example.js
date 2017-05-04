@@ -49,7 +49,7 @@ class ModalInMobileWrapper extends Component {
 
 export const Empty = {
   component: ModalInMobileWrapper,
-  style: { padding: '1rem 0' },
+  useDefaultWrapperStyles: false,
   props: {
     showAsModalMaxWidth: 400,
     title: 'Test ModalInMobile',
