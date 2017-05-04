@@ -43,4 +43,8 @@
 
 .signupLink {
   margin-right: 1rem;
+  text-decoration: none;
+}
+.loginLink {
+  text-decoration: none;
 }

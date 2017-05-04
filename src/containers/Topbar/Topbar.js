@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { FlatButton, MobileMenu, Modal, NamedLink } from '../../components';
@@ -11,13 +12,9 @@ import { ensureUser } from '../../util/data';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 
+import hamburgerIcon from './images/hamburgerIcon.svg';
+import searchIcon from './images/searchIcon.svg';
 import css from './Topbar.css';
-
-/* eslint-disable react/no-danger */
-const House = () => <span dangerouslySetInnerHTML={{ __html: '&#127968;' }} />;
-const Burger = () => <span dangerouslySetInnerHTML={{ __html: '&#9776;' }} />;
-const Search = () => <span dangerouslySetInnerHTML={{ __html: '&#128269;' }} />;
-/* eslint-enable react/no-danger */
 
 const redirectToURLWithModalState = (props, modalStateParam) => {
   const { history, location } = props;
@@ -87,6 +84,7 @@ class TopbarComponent extends Component {
       isAuthenticated,
       authInProgress,
       currentUser,
+      intl,
       location,
       togglePageClassNames,
     } = this.props;
@@ -104,15 +102,15 @@ class TopbarComponent extends Component {
       <div className={css.root}>
         <div className={css.container}>
           <FlatButton className={css.hamburgerMenu} onClick={this.handleMobileMenuOpen}>
-            <Burger />
+            <img src={hamburgerIcon} alt={intl.formatMessage({ id: 'Topbar.menuIcon' })} />
           </FlatButton>
           <div>
             <NamedLink className={css.home} name="LandingPage">
-              <House />
+              Saunatime
             </NamedLink>
           </div>
           <FlatButton className={css.searchMenu} onClick={this.handleMobileSearchOpen}>
-            <Search />
+            <img src={searchIcon} alt={intl.formatMessage({ id: 'Topbar.searchIcon' })} />
           </FlatButton>
         </div>
         <Modal
@@ -134,6 +132,8 @@ class TopbarComponent extends Component {
   }
 }
 
+TopbarComponent.defaultProps = { currentUser: null };
+
 const { arrayOf, bool, func, shape, string } = PropTypes;
 
 TopbarComponent.propTypes = {
@@ -153,6 +153,9 @@ TopbarComponent.propTypes = {
 
   // from withFlattenedRoutes
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -167,8 +170,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({ onLogout: historyPush => dispatch(logout(historyPush)) });
 
-const Topbar = compose(connect(mapStateToProps, mapDispatchToProps), withFlattenedRoutes)(
-  TopbarComponent
-);
+const Topbar = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withFlattenedRoutes,
+  injectIntl
+)(TopbarComponent);
 
 export default Topbar;

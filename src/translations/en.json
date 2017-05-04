@@ -125,5 +125,7 @@
   "StripePaymentForm.stripe.validation_error.invalid_swipe_data": "The card's swipe data is invalid.",
   "StripePaymentForm.stripe.validation_error.missing": "There is no card on a customer that is being charged.",
   "StripePaymentForm.stripe.validation_error.processing_error": "An error occurred while processing the card.",
-  "StripePaymentForm.submitPaymentInfo": "Send request"
+  "StripePaymentForm.submitPaymentInfo": "Send request",
+  "Topbar.menuIcon": "Open menu",
+  "Topbar.searchIcon": "Open search"
 }
