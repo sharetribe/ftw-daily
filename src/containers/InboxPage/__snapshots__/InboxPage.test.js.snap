@@ -44,15 +44,39 @@ exports[`InboxPage matches snapshot 1`] = `
       className="">
       <div
         className={undefined}>
-        <a
-          className=""
-          href="/inbox"
-          onClick={[Function]}
-          style={Object {}}>
-          <span>
-            Inbox
-          </span>
-        </a>
+        <div
+          className={undefined}>
+          <a
+            className=""
+            href="/signup"
+            onClick={[Function]}
+            style={Object {}}>
+            <span>
+              Sign up
+            </span>
+          </a>
+          <a
+            className=""
+            href="/login"
+            onClick={[Function]}
+            style={Object {}}>
+            <span>
+              Log in
+            </span>
+          </a>
+        </div>
+        <div
+          className={undefined}>
+          <a
+            className=""
+            href="/l/new"
+            onClick={[Function]}
+            style={Object {}}>
+            <span>
+              + Add your sauna
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -204,15 +228,39 @@ exports[`InboxPage matches snapshot 2`] = `
       className="">
       <div
         className={undefined}>
-        <a
-          className=""
-          href="/inbox"
-          onClick={[Function]}
-          style={Object {}}>
-          <span>
-            Inbox
-          </span>
-        </a>
+        <div
+          className={undefined}>
+          <a
+            className=""
+            href="/signup"
+            onClick={[Function]}
+            style={Object {}}>
+            <span>
+              Sign up
+            </span>
+          </a>
+          <a
+            className=""
+            href="/login"
+            onClick={[Function]}
+            style={Object {}}>
+            <span>
+              Log in
+            </span>
+          </a>
+        </div>
+        <div
+          className={undefined}>
+          <a
+            className=""
+            href="/l/new"
+            onClick={[Function]}
+            style={Object {}}>
+            <span>
+              + Add your sauna
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
