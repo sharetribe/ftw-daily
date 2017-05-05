@@ -14,7 +14,7 @@ import css from './SalePage.css';
 // SalePage handles data loading
 // It show loading data text or SaleDetailsPanel (and later also another panel for messages).
 export const SalePageComponent = props => {
-  const { currentUser, fetchSaleError, intl, onAcceptSale, onRejectSale, transaction } = props;
+  const { currentUser, fetchSaleError, intl, onAcceptSale, onRejectSale, params, transaction } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const title = currentListing.attributes.title;
@@ -22,6 +22,7 @@ export const SalePageComponent = props => {
   // Redirect users with someone else's direct link to their own inbox/sales page.
   const isDataAvailable = currentUser &&
     currentTransaction.id &&
+    currentTransaction.id.uuid === params.id &&
     currentTransaction.provider &&
     !fetchSaleError;
   const isOwnSale = isDataAvailable && currentUser.id.uuid === currentTransaction.provider.id.uuid;
@@ -76,7 +77,7 @@ export const SalePageComponent = props => {
 
 SalePageComponent.defaultProps = { transaction: null, currentUser: null, fetchSaleError: null };
 
-const { func, instanceOf, oneOf } = PropTypes;
+const { func, instanceOf, oneOf, shape, string } = PropTypes;
 
 SalePageComponent.propTypes = {
   currentUser: propTypes.currentUser,
@@ -84,6 +85,7 @@ SalePageComponent.propTypes = {
   intl: intlShape.isRequired,
   onAcceptSale: func.isRequired,
   onRejectSale: func.isRequired,
+  params: shape({ id: string }).isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
 };

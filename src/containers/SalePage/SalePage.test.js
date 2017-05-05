@@ -12,8 +12,9 @@ import { SalePageComponent } from './SalePage';
 
 describe('SalePage', () => {
   it('matches snapshot', () => {
+    const txId = 'tx-sale-1';
     const transaction = createTransaction({
-      id: 'tx-sale-1',
+      id: txId,
       state: 'state/preauthorized',
       booking: createBooking(
         'booking1',
@@ -29,6 +30,7 @@ describe('SalePage', () => {
       currentUser: createCurrentUser('provider1'),
       onAcceptSale: () => {},
       onRejectSale: () => {},
+      params: { id: txId },
       transaction,
       tab: 'details',
       intl: fakeIntl,

@@ -13,7 +13,7 @@ import css from './OrderPage.css';
 // OrderPage handles data loading
 // It show loading data text or OrderDetailsPanel (and later also another panel for messages).
 export const OrderPageComponent = props => {
-  const { currentUser, fetchOrderError, intl, transaction } = props;
+  const { currentUser, fetchOrderError, intl, params, transaction } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const title = currentListing.attributes.title;
@@ -21,6 +21,7 @@ export const OrderPageComponent = props => {
   // Redirect users with someone else's direct link to their own inbox/orders page.
   const isDataAvailable = currentUser &&
     currentTransaction.id &&
+    currentTransaction.id.uuid === params.id &&
     currentTransaction.customer &&
     !fetchOrderError;
   const isOwnSale = isDataAvailable && currentUser.id.uuid === currentTransaction.customer.id.uuid;
@@ -60,12 +61,13 @@ export const OrderPageComponent = props => {
 
 OrderPageComponent.defaultProps = { transaction: null, currentUser: null, fetchOrderError: null };
 
-const { instanceOf, oneOf } = PropTypes;
+const { instanceOf, oneOf, shape, string } = PropTypes;
 
 OrderPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   fetchOrderError: instanceOf(Error),
   intl: intlShape.isRequired,
+  params: shape({ id: string }).isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
 };
