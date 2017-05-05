@@ -10,6 +10,20 @@ import { login, authenticationInProgress, signup } from '../../ducks/Auth.duck';
 
 import css from './AuthenticationPage.css';
 
+const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
+
+const firstApiError = error => {
+  if (error && error.data && error.data.errors && error.data.errors.length > 0) {
+    return error.data.errors[0];
+  }
+  return null;
+};
+
+const isEmailTakenApiError = error => {
+  const apiError = firstApiError(error);
+  return apiError && apiError.code === ERROR_CODE_EMAIL_TAKEN;
+};
+
 export const AuthenticationPageComponent = props => {
   const {
     location,
@@ -53,7 +67,9 @@ export const AuthenticationPageComponent = props => {
 
   const signupErrorMessage = (
     <div style={{ color: 'red' }}>
-      <FormattedMessage id="AuthenticationPage.signupFailed" />
+      {isEmailTakenApiError(signupError)
+        ? <FormattedMessage id="AuthenticationPage.signupFailedEmailAlreadyTaken" />
+        : <FormattedMessage id="AuthenticationPage.signupFailed" />}
     </div>
   );
 
