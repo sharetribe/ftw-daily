@@ -56,6 +56,7 @@
   "InboxPage.stateRejected": "Rejected",
   "InboxPage.title": "Inbox",
   "ListingCard.hostedBy": "Hosted by {authorName}.",
+  "ListingCard.perNight": "/ night",
   "ListingPage.ctaButtonMessage": "Book {title}",
   "ListingPage.loadingListingData": "Loading listing data",
   "ListingPage.noListingData": "Could not find listing data",

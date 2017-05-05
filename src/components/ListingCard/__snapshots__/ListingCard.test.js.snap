@@ -26,31 +26,26 @@ exports[`ListingCard matches snapshot 1`] = `
         }>
         listing1 title
       </withFlattenedRoutes(withRouter(NamedLink))>
-      <div
-        title={55}>
-        55
+      <div>
+        <div
+          title={55}>
+          55
+        </div>
+        <div>
+          <FormattedMessage
+            id="ListingCard.perNight"
+            values={Object {}} />
+        </div>
       </div>
     </div>
     <div>
-      listing1 description
-    </div>
-    <div>
-      <div>
-        listing1 address
-      </div>
-    </div>
-    <hr />
-    <div>
-      <div>
-        <img
-          alt="user1 first name user1 last name"
-          src="https://placehold.it/44x44" />
-      </div>
-      <div>
-        <span>
-          user1 first name user1 last name
-        </span>
-      </div>
+      <FormattedMessage
+        id="ListingCard.hostedBy"
+        values={
+          Object {
+            "authorName": "user1 first name user1 last name",
+          }
+        } />
     </div>
   </div>
 </div>
