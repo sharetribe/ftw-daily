@@ -92,22 +92,24 @@ class SignupFormComponent extends Component {
             validate={emailRequired}
             component={this.EnhancedInput}
           />
-          <Field
-            className={css.firstName}
-            name="firstName"
-            type="text"
-            label={firstNameLabel}
-            validate={firstNameRequired}
-            component={this.EnhancedFirstNameInput}
-          />
-          <Field
-            className={css.lastName}
-            name="lastName"
-            type="text"
-            label={lastNameLabel}
-            validate={lastNameRequired}
-            component={this.EnhancedLastNameInput}
-          />
+          <div className={css.name}>
+            <Field
+              className={css.firstName}
+              name="firstName"
+              type="text"
+              label={firstNameLabel}
+              validate={firstNameRequired}
+              component={this.EnhancedFirstNameInput}
+            />
+            <Field
+              className={css.lastName}
+              name="lastName"
+              type="text"
+              label={lastNameLabel}
+              validate={lastNameRequired}
+              component={this.EnhancedLastNameInput}
+            />
+          </div>
           <Field
             name="password"
             type="password"
