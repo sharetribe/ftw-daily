@@ -16,16 +16,30 @@ export const LOGOUT_REQUEST = 'app/Auth/LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'app/Auth/LOGOUT_SUCCESS';
 export const LOGOUT_ERROR = 'app/Auth/LOGOUT_ERROR';
 
+export const SIGNUP_REQUEST = 'app/Auth/SIGNUP_REQUEST';
+export const SIGNUP_SUCCESS = 'app/Auth/SIGNUP_SUCCESS';
+export const SIGNUP_ERROR = 'app/Auth/SIGNUP_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
-  authInfoLoaded: false,
   isAuthenticated: false,
+
+  // auth info
+  authInfoLoaded: false,
   authInfoError: null,
+
+  // login
   loginError: null,
   loginInProgress: false,
+
+  // logout
   logoutError: null,
   logoutInProgress: false,
+
+  // signup
+  signupError: null,
+  signupInProgress: false,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -40,7 +54,13 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, authInfoLoaded: true, authInfoError: payload };
 
     case LOGIN_REQUEST:
-      return { ...state, loginInProgress: true, loginError: null, logoutError: null };
+      return {
+        ...state,
+        loginInProgress: true,
+        loginError: null,
+        logoutError: null,
+        signupError: null,
+      };
     case LOGIN_SUCCESS:
       return { ...state, loginInProgress: false, isAuthenticated: true };
     case LOGIN_ERROR:
@@ -52,6 +72,14 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, logoutInProgress: false, isAuthenticated: false };
     case LOGOUT_ERROR:
       return { ...state, logoutInProgress: false, logoutError: payload };
+
+    case SIGNUP_REQUEST:
+      return { ...state, signupInProgress: true, loginError: null, signupError: null };
+    case SIGNUP_SUCCESS:
+      return { ...state, signupInProgress: false };
+    case SIGNUP_ERROR:
+      return { ...state, signupInProgress: false, signupError: payload };
+
     default:
       return state;
   }
@@ -60,8 +88,8 @@ export default function reducer(state = initialState, action = {}) {
 // ================ Selectors ================ //
 
 export const authenticationInProgress = state => {
-  const { loginInProgress, logoutInProgress } = state.Auth;
-  return loginInProgress || logoutInProgress;
+  const { loginInProgress, logoutInProgress, signupInProgress } = state.Auth;
+  return loginInProgress || logoutInProgress || signupInProgress;
 };
 
 // ================ Action creators ================ //
@@ -77,6 +105,10 @@ export const loginError = error => ({ type: LOGIN_ERROR, payload: error, error: 
 export const logoutRequest = () => ({ type: LOGOUT_REQUEST });
 export const logoutSuccess = () => ({ type: LOGOUT_SUCCESS });
 export const logoutError = error => ({ type: LOGOUT_ERROR, payload: error, error: true });
+
+export const signupRequest = () => ({ type: SIGNUP_REQUEST });
+export const signupSuccess = () => ({ type: SIGNUP_SUCCESS });
+export const signupError = error => ({ type: SIGNUP_ERROR, payload: error, error: true });
 
 // ================ Thunks ================ //
 
@@ -119,4 +151,21 @@ export const logout = () =>
       .then(() => dispatch(clearCurrentUser()))
       .then(() => dispatch(logoutSuccess()))
       .catch(e => dispatch(logoutError(e)));
+  };
+
+export const signup = params =>
+  (dispatch, getState, sdk) => {
+    if (authenticationInProgress(getState())) {
+      return Promise.reject(new Error('Login or logout already in progress'));
+    }
+    dispatch(signupRequest());
+    const { email, password } = params;
+
+    // We must login the user if signup succeeds since the API doesn't
+    // do that automatically.
+    return sdk.users
+      .create(params)
+      .then(() => dispatch(signupSuccess()))
+      .then(() => dispatch(login(email, password)))
+      .catch(e => dispatch(signupError(e)));
   };

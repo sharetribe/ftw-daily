@@ -7,3 +7,23 @@
   margin-left: 20px;
   margin-right: 20px;
 }
+
+.tabs {
+  margin-bottom: 1rem;
+}
+
+.tab {
+  float: left;
+  margin-left: 1rem;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+  text-decoration: none;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.activeTab {
+  font-weight: bold;
+}

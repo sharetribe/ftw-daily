@@ -1,0 +1,107 @@
+exports[`SignupForm matches snapshot 1`] = `
+<form
+  className={undefined}
+  onSubmit={[Function]}>
+  <div>
+    <div
+      className="">
+      <label
+        className=""
+        htmlFor="email">
+        Email
+      </label>
+      <input
+        className=""
+        name="email"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        onFocus={[Function]}
+        placeholder=""
+        type="email"
+        value="" />
+    </div>
+    <div
+      className="">
+      <label
+        className=""
+        htmlFor="firstName">
+        First name
+      </label>
+      <input
+        className=""
+        name="firstName"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        onFocus={[Function]}
+        placeholder=""
+        type="text"
+        value="" />
+    </div>
+    <div
+      className="">
+      <label
+        className=""
+        htmlFor="lastName">
+        Last name
+      </label>
+      <input
+        className=""
+        name="lastName"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        onFocus={[Function]}
+        placeholder=""
+        type="text"
+        value="" />
+    </div>
+    <div
+      className="">
+      <label
+        className=""
+        htmlFor="password">
+        Password
+      </label>
+      <input
+        className=""
+        name="password"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        onFocus={[Function]}
+        placeholder=""
+        type="password"
+        value="" />
+    </div>
+  </div>
+  <div>
+    <p>
+      <span>
+        By confirming I accept the terms and conditions and the 
+        <a
+          href="https://stripe.com/connect-account/legal"
+          rel="noopener noreferrer"
+          target="_blank">
+          <span>
+            Stripe Connected Account Agreement
+          </span>
+        </a>
+      </span>
+    </p>
+    <button
+      className=""
+      disabled={true}
+      type="submit">
+      <span>
+        Sign up
+      </span>
+    </button>
+  </div>
+</form>
+`;

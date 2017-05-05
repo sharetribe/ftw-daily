@@ -30,7 +30,9 @@ ul {
 label {
   display: block;
   font-weight: bold;
-  margin-top: 1rem;
+  font-size: 14px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 select {

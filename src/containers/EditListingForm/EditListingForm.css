@@ -1,7 +1,3 @@
-.error {
-  color: red;
-}
-
 .addImageWrapper {
   float: left;
   width: 110px;
@@ -37,8 +33,7 @@
   clear: both;
 }
 .imageRequiredError {
-  composes: error;
-
+  color: red;
 }
 
 .submitButton {

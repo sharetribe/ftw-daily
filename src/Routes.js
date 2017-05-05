@@ -65,7 +65,7 @@ class RouteComponentRenderer extends Component {
           location={location}
           flattenedRoutes={flattenedRoutes}
         />
-      : <NamedRedirect name="LogInPage" state={{ from: match.url }} />;
+      : <NamedRedirect name="SignupPage" state={{ from: match.url }} />;
   }
 }
 

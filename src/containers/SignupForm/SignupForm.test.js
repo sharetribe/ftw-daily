@@ -1,10 +1,10 @@
 import React from 'react';
 import { renderDeep } from '../../util/test-helpers';
-import SignUpForm from './SignUpForm';
+import SignupForm from './SignupForm';
 
-describe('SignUpForm', () => {
+describe('SignupForm', () => {
   it('matches snapshot', () => {
-    const tree = renderDeep(<SignUpForm />);
+    const tree = renderDeep(<SignupForm />);
     expect(tree).toMatchSnapshot();
   });
 });

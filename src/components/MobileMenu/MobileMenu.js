@@ -15,10 +15,10 @@ const MobileMenu = props => {
     return (
       <div className={css.root}>
         <div className={css.authenticationLinks}>
-          <NamedLink name="SignUpPage" className={css.signupLink}>
+          <NamedLink name="SignupPage" className={css.signupLink}>
             <FormattedMessage id="MobileMenu.signupLink" />
           </NamedLink>
-          <NamedLink name="LogInPage" className={css.loginLink}>
+          <NamedLink name="LoginPage" className={css.loginLink}>
             <FormattedMessage id="MobileMenu.loginLink" />
           </NamedLink>
         </div>

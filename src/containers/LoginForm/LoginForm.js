@@ -1,36 +1,67 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { reduxForm, propTypes as formPropTypes } from 'redux-form';
-import { Button, LabeledField } from '../../components';
+import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Button } from '../../components';
+import * as validators from '../../util/validators';
+import { enhancedField } from '../../util/forms';
 
 import css from './LoginForm.css';
 
-const LoginFormComponent = props => {
-  const { handleSubmit, pristine, submitting, inProgress, intl } = props;
-  const emailLabel = intl.formatMessage({
-    id: 'LoginForm.emailLabel',
-  });
-  const passwordLabel = intl.formatMessage({
-    id: 'LoginForm.passwordLabel',
-  });
-  const submitDisabled = pristine || submitting || inProgress;
-  return (
-    <form className={css.form} onSubmit={handleSubmit}>
-      <div>
-        <div className={css.row}>
-          <LabeledField name="email" type="email" label={emailLabel} />
+class LoginFormComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.EnhancedInput = enhancedField('input', {
+      errorClassName: css.error,
+    });
+  }
+  render() {
+    const { handleSubmit, pristine, submitting, inProgress, intl } = this.props;
+
+    // email
+    const emailLabel = intl.formatMessage({
+      id: 'LoginForm.emailLabel',
+    });
+    const emailRequiredMessage = intl.formatMessage({
+      id: 'LoginForm.emailRequired',
+    });
+    const emailRequired = validators.required(emailRequiredMessage);
+
+    // password
+    const passwordLabel = intl.formatMessage({
+      id: 'LoginForm.passwordLabel',
+    });
+    const passwordRequiredMessage = intl.formatMessage({
+      id: 'LoginForm.passwordRequired',
+    });
+    const passwordRequired = validators.required(passwordRequiredMessage);
+
+    const submitDisabled = pristine || submitting || inProgress;
+    return (
+      <form className={css.form} onSubmit={handleSubmit}>
+        <div>
+          <Field
+            name="email"
+            type="email"
+            label={emailLabel}
+            component={this.EnhancedInput}
+            validate={emailRequired}
+          />
+          <Field
+            name="password"
+            type="password"
+            label={passwordLabel}
+            component={this.EnhancedInput}
+            validate={passwordRequired}
+          />
         </div>
-        <div className={css.row}>
-          <LabeledField name="password" type="password" label={passwordLabel} />
-        </div>
-      </div>
-      <Button className={css.button} type="submit" disabled={submitDisabled}>
-        <FormattedMessage id="LoginForm.logIn" />
-      </Button>
-    </form>
-  );
-};
+        <Button className={css.button} type="submit" disabled={submitDisabled}>
+          <FormattedMessage id="LoginForm.logIn" />
+        </Button>
+      </form>
+    );
+  }
+}
 
 LoginFormComponent.defaultProps = { inProgress: false };
 
