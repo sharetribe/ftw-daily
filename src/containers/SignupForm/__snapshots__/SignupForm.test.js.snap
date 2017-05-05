@@ -80,13 +80,28 @@ exports[`SignupForm matches snapshot 1`] = `
         value="" />
     </div>
   </div>
-  <button
-    className=""
-    disabled={true}
-    type="submit">
-    <span>
-      Sign up
-    </span>
-  </button>
+  <div>
+    <p>
+      <span>
+        By confirming I accept the terms and conditions and the 
+        <a
+          href="https://stripe.com/connect-account/legal"
+          rel="noopener noreferrer"
+          target="_blank">
+          <span>
+            Stripe Connected Account Agreement
+          </span>
+        </a>
+      </span>
+    </p>
+    <button
+      className=""
+      disabled={true}
+      type="submit">
+      <span>
+        Sign up
+      </span>
+    </button>
+  </div>
 </form>
 `;

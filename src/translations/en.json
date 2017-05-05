@@ -110,6 +110,8 @@
   "SignupForm.passwordLabel": "Password",
   "SignupForm.passwordRequired": "You need to add a password.",
   "SignupForm.signUp": "Sign up",
+  "SignupForm.stripeConnectedAccountAgreementLinkText": "Stripe Connected Account Agreement",
+  "SignupForm.termsOfService": "By confirming I accept the terms and conditions and the {stripeConnectedAccountAgreementLink}",
   "StripeBankAccountToken.accountNumberPlaceholder": "account number",
   "StripeBankAccountToken.bankAccountNumberLabel": "Bank account number:",
   "StripeBankAccountToken.bankAccountNumberLabelIban": "Bank account number (IBAN):",

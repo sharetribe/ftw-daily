@@ -2,11 +2,30 @@ import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
-import { Button } from '../../components';
+import { Button, ExternalLink } from '../../components';
 import * as validators from '../../util/validators';
 import { enhancedField } from '../../util/forms';
 
 import css from './SignupForm.css';
+
+// Render translated application and Stripe terms of service with
+// links to legal texts.
+//
+// See: https://stripe.com/docs/connect/updating-accounts#tos-acceptance
+const Tos = () => (
+  <p>
+    <FormattedMessage
+      id="SignupForm.termsOfService"
+      values={{
+        stripeConnectedAccountAgreementLink: (
+          <ExternalLink href="https://stripe.com/connect-account/legal">
+            <FormattedMessage id="SignupForm.stripeConnectedAccountAgreementLinkText" />
+          </ExternalLink>
+        ),
+      }}
+    />
+  </p>
+);
 
 class SignupFormComponent extends Component {
   constructor(props) {
@@ -97,9 +116,12 @@ class SignupFormComponent extends Component {
             component={this.EnhancedInput}
           />
         </div>
-        <Button className={css.button} type="submit" disabled={submitDisabled}>
-          <FormattedMessage id="SignupForm.signUp" />
-        </Button>
+        <div>
+          <Tos />
+          <Button className={css.button} type="submit" disabled={submitDisabled}>
+            <FormattedMessage id="SignupForm.signUp" />
+          </Button>
+        </div>
       </form>
     );
   }
