@@ -8,6 +8,9 @@ import { Input, ValidationError } from '../components';
  * @param {Component|String} Comp component or a String that is used
  * to create an input element
  *
+ * @param {Object} options extra class names to inject to the child
+ * components
+ *
  * @return {Component} new component that wraps the given one with a
  * label and possible errors
  */
