@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 4px;
+  margin-bottom: 24px;
 }
 
 .squareWrapper {
@@ -49,33 +50,33 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
-.details {
-  width: 100%;
+.title {
+  font-size: 18px;
+}
+
+.price {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
+}
+
+.priceValue {
+  font-size: 18px;
+}
+
+.perNight {
+  margin-left: 5px;
+  font-size: 12px;
+
+  /* Align small price unit text with bigger font (priceValue) */
+  line-height: 23px;
+  padding-top: 2px;
 }
 
 .authorInfo {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-
-.authorDetails {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.avatarWrapper {
-  display: block;
-  flex-basis: 44px;
-  width: 44px;
-  height: 44px;
-  margin-right: 1rem;
-}
-.avatar {
-  border-radius: 22px;
+  font-size: 12px;
 }

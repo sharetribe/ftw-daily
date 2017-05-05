@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { PageLayout, NamedRedirect, NamedLink, PaginationLinks } from '../../components';
+import { Avatar, NamedLink, NamedRedirect, PageLayout, PaginationLinks } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { loadData } from './InboxPage.duck';
@@ -53,7 +53,6 @@ export const InboxItem = props => {
   const { customer, provider } = tx;
   const isOrder = type === 'order';
   const otherUserName = username(isOrder ? provider : customer);
-  const otherUserAvatar = 'https://placehold.it/44x44';
   const changedDate = timestamp(intl, tx);
   return (
     <NamedLink
@@ -62,7 +61,7 @@ export const InboxItem = props => {
       params={{ id: tx.id.uuid }}
     >
       <div className={css.itemAvatar}>
-        <img className={css.itemAvatarImage} src={otherUserAvatar} alt={otherUserName} />
+        <Avatar name={otherUserName} />
       </div>
       <div className={css.itemInfo}>
         <div>

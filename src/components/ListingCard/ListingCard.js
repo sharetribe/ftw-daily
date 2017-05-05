@@ -1,5 +1,5 @@
 import React from 'react';
-import { intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { NamedLink } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { convertMoneyToNumber } from '../../util/currency';
@@ -23,7 +23,7 @@ const priceData = (price, currencyConfig, intl) => {
 export const ListingCardComponent = props => {
   const { currencyConfig, intl, listing } = props;
   const id = listing.id.uuid;
-  const { title = '', description = '', address = '', price } = listing.attributes || {};
+  const { title = '', price } = listing.attributes || {};
   const slug = encodeURIComponent(title.split(' ').join('-'));
   const authorName = listing.author && listing.author.attributes
     ? `${listing.author.attributes.profile.firstName} ${listing.author.attributes.profile.lastName}`
@@ -39,10 +39,6 @@ export const ListingCardComponent = props => {
   const squareImageURL = mainImage ? mainImage.sizes.find(i => i.name === 'square').url : null;
   const square2XImageURL = mainImage ? mainImage.sizes.find(i => i.name === 'square2x').url : null;
   const higherRes = square2XImageURL ? { srcSet: `${square2XImageURL} 2x` } : null;
-
-  // TODO: these are not yet present in the API data, figure out what
-  // to do with them
-  const authorAvatar = 'https://placehold.it/44x44';
 
   // TODO: svg should have own loading strategy
   // Now noImageIcon is imported with default configuration (gives url)
@@ -74,26 +70,21 @@ export const ListingCardComponent = props => {
           <NamedLink className={css.title} name="ListingPage" params={{ id, slug }}>
             {title}
           </NamedLink>
-          <div className={css.price} title={priceTitle}>
-            {formattedPrice}
+          <div className={css.price}>
+            <div className={css.priceValue} title={priceTitle}>
+              {formattedPrice}
+            </div>
+            <div className={css.perNight}>
+              <FormattedMessage id="ListingCard.perNight" />
+            </div>
           </div>
         </div>
-        <div className={css.description}>
-          {description}
-        </div>
-        <div className={css.details}>
-          <div className={css.location}>
-            {address}
-          </div>
-        </div>
-        <hr />
         <div className={css.authorInfo}>
-          <div className={css.avatarWrapper}>
-            <img className={css.avatar} src={authorAvatar} alt={authorName} />
-          </div>
-          <div className={css.authorDetails}>
-            <span className={css.authorName}>{authorName}</span>
-          </div>
+          <FormattedMessage
+            className={css.authorName}
+            id="ListingCard.hostedBy"
+            values={{ authorName }}
+          />
         </div>
       </div>
     </div>
