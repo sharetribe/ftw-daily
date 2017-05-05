@@ -150,8 +150,8 @@ exports[`InboxPage matches snapshot 2`] = `
     className={undefined}>
     <img
       alt="provider-user-id first name provider-user-id last name"
-      className={undefined}
-      src="https://placehold.it/44x44" />
+      className=""
+      src="wireframeAvatar.svg" />
   </div>
   <div
     className={undefined}>
@@ -326,8 +326,8 @@ exports[`InboxPage matches snapshot 4`] = `
     className={undefined}>
     <img
       alt="customer-user-id first name customer-user-id last name"
-      className={undefined}
-      src="https://placehold.it/44x44" />
+      className=""
+      src="wireframeAvatar.svg" />
   </div>
   <div
     className={undefined}>

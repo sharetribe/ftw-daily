@@ -55,6 +55,7 @@
   "InboxPage.statePending": "Pending",
   "InboxPage.stateRejected": "Rejected",
   "InboxPage.title": "Inbox",
+  "ListingCard.hostedBy": "Hosted by {authorName}.",
   "ListingPage.ctaButtonMessage": "Book {title}",
   "ListingPage.loadingListingData": "Loading listing data",
   "ListingPage.noListingData": "Could not find listing data",

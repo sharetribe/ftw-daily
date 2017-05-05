@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
+import { Avatar } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import css from './AuthorInfo.css';
 
@@ -12,12 +13,11 @@ const AuthorInfo = props => {
   const authorName = currentAuthor.attributes.profile
     ? `${currentAuthor.attributes.profile.firstName} ${currentAuthor.attributes.profile.lastName}`
     : '';
-  const authorAvatar = 'https://placehold.it/44x44';
 
   return (
     <div className={classes}>
       <div className={css.avatarWrapper}>
-        <img className={css.avatar} src={authorAvatar} alt={authorName} />
+        <Avatar name={authorName} />
       </div>
       <div className={css.authorDetails}>
         <span className={css.authorName}>
