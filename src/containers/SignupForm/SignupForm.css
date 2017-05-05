@@ -6,6 +6,10 @@
   height: 100%;
 }
 
+.name {
+  display: flex;
+}
+
 .firstName {
   display: inline-block;
   width: 35%;

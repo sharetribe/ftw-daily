@@ -23,42 +23,45 @@ exports[`SignupForm matches snapshot 1`] = `
         value="" />
     </div>
     <div
-      className="">
-      <label
-        className=""
-        htmlFor="firstName">
-        First name
-      </label>
-      <input
-        className=""
-        name="firstName"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onDragStart={[Function]}
-        onDrop={[Function]}
-        onFocus={[Function]}
-        placeholder=""
-        type="text"
-        value="" />
-    </div>
-    <div
-      className="">
-      <label
-        className=""
-        htmlFor="lastName">
-        Last name
-      </label>
-      <input
-        className=""
-        name="lastName"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onDragStart={[Function]}
-        onDrop={[Function]}
-        onFocus={[Function]}
-        placeholder=""
-        type="text"
-        value="" />
+      className={undefined}>
+      <div
+        className="">
+        <label
+          className=""
+          htmlFor="firstName">
+          First name
+        </label>
+        <input
+          className=""
+          name="firstName"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+          placeholder=""
+          type="text"
+          value="" />
+      </div>
+      <div
+        className="">
+        <label
+          className=""
+          htmlFor="lastName">
+          Last name
+        </label>
+        <input
+          className=""
+          name="lastName"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+          placeholder=""
+          type="text"
+          value="" />
+      </div>
     </div>
     <div
       className="">
