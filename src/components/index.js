@@ -32,6 +32,7 @@ import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import StripeBankAccountToken from './StripeBankAccountToken/StripeBankAccountToken';
+import TabNav from './TabNav/TabNav';
 import ValidationError from './ValidationError/ValidationError';
 
 export {
@@ -71,5 +72,6 @@ export {
   SaleDetailsPanel,
   SearchResultsPanel,
   StripeBankAccountToken,
+  TabNav,
   ValidationError,
 };

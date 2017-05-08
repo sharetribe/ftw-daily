@@ -2,7 +2,14 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { Avatar, NamedLink, NamedRedirect, PageLayout, PaginationLinks } from '../../components';
+import {
+  Avatar,
+  NamedLink,
+  NamedRedirect,
+  PageLayout,
+  PaginationLinks,
+  TabNav,
+} from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { loadData } from './InboxPage.duck';
@@ -86,8 +93,6 @@ export const InboxPageComponent = props => {
     fetchOrdersOrSalesError,
     pagination,
     transactions,
-    currentUserHasListings,
-    currentUserHasListingsError,
     intl,
     params,
   } = props;
@@ -112,7 +117,7 @@ export const InboxPageComponent = props => {
     );
   };
 
-  const error = fetchOrdersOrSalesError || currentUserHasListingsError
+  const error = fetchOrdersOrSalesError
     ? <p className={css.error}>
         <FormattedMessage id="InboxPage.fetchFailed" />
       </p>
@@ -133,31 +138,36 @@ export const InboxPageComponent = props => {
       />
     : null;
 
+  const tabs = [
+    {
+      text: intl.formatMessage({
+        id: 'InboxPage.ordersTabTitle',
+      }),
+      selected: isOrders,
+      linkProps: {
+        name: 'InboxPage',
+        params: { tab: 'orders' },
+      },
+    },
+    {
+      text: intl.formatMessage({
+        id: 'InboxPage.salesTabTitle',
+      }),
+      selected: !isOrders,
+      linkProps: {
+        name: 'InboxPage',
+        params: { tab: 'sales' },
+      },
+    },
+  ];
+  const nav = <TabNav className={css.tabs} tabs={tabs} />;
+
   return (
     <PageLayout title={title}>
       <h1 className={css.title}>
         <FormattedMessage id="InboxPage.title" />
       </h1>
-      {currentUserHasListings
-        ? <nav>
-            <NamedLink
-              className={css.tab}
-              name="InboxPage"
-              params={{ tab: 'orders' }}
-              activeClassName={isOrders ? css.activeTab : null}
-            >
-              <FormattedMessage id="InboxPage.ordersTabTitle" />
-            </NamedLink>
-            <NamedLink
-              className={css.tab}
-              name="InboxPage"
-              params={{ tab: 'sales' }}
-              activeClassName={!isOrders ? css.activeTab : null}
-            >
-              <FormattedMessage id="InboxPage.salesTabTitle" />
-            </NamedLink>
-          </nav>
-        : null}
+      {nav}
       {error}
       <ul>
         {!fetchInProgress ? transactions.map(toTxItem) : null}
@@ -171,8 +181,6 @@ export const InboxPageComponent = props => {
 InboxPageComponent.defaultProps = {
   fetchOrdersOrSalesError: null,
   pagination: null,
-  currentUserHasListings: false,
-  currentUserHasListingsError: null,
 };
 
 InboxPageComponent.propTypes = {
@@ -184,8 +192,6 @@ InboxPageComponent.propTypes = {
   fetchOrdersOrSalesError: instanceOf(Error),
   pagination: propTypes.pagination,
   transactions: arrayOf(propTypes.transaction).isRequired,
-  currentUserHasListings: bool,
-  currentUserHasListingsError: instanceOf(Error),
 
   // from injectIntl
   intl: intlShape.isRequired,
@@ -197,16 +203,12 @@ const mapStateToProps = state => {
     fetchOrdersOrSalesError,
     pagination,
     transactionRefs,
-    currentUserHasListings,
-    currentUserHasListingsError,
   } = state.InboxPage;
   return {
     fetchInProgress,
     fetchOrdersOrSalesError,
     pagination,
     transactions: getMarketplaceEntities(state, transactionRefs),
-    currentUserHasListings,
-    currentUserHasListingsError,
   };
 };
 

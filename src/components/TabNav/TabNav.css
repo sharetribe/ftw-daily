@@ -1,0 +1,19 @@
+.tab {
+  float: left;
+  margin-left: 1rem;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.link {
+  text-decoration: none;
+}
+
+.selected {
+  font-weight: bold;
+  text-decoration: underline;
+}
