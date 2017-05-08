@@ -17,8 +17,10 @@ const FormComponent = props => {
 
 FormComponent.propTypes = formPropTypes;
 
+const defaultFormName = 'Styleguide.LocationAutocompleteInput.Form';
+
 const Form = reduxForm({
-  form: 'Styleguide.LocationAutocompleteInput.Form',
+  form: defaultFormName,
 })(FormComponent);
 
 const PlaceInfo = props => {

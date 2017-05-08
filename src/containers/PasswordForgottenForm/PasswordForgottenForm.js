@@ -16,4 +16,6 @@ const PasswordForgottenForm = props => {
 
 PasswordForgottenForm.propTypes = { ...formPropTypes };
 
-export default reduxForm({ form: 'passwordForgotten' })(PasswordForgottenForm);
+const defaultFormName = 'PasswordForgottenForm';
+
+export default reduxForm({ form: defaultFormName })(PasswordForgottenForm);

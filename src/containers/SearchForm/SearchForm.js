@@ -50,6 +50,6 @@ SearchForm.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const formName = 'SearchForm';
+const defaultFormName = 'SearchForm';
 
-export default reduxForm({ form: formName })(injectIntl(SearchForm));
+export default reduxForm({ form: defaultFormName })(injectIntl(SearchForm));
