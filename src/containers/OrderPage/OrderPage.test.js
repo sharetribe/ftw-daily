@@ -12,8 +12,9 @@ import { OrderPageComponent } from './OrderPage';
 
 describe('OrderPage', () => {
   it('matches snapshot', () => {
+    const txId = 'tx-order-1';
     const transaction = createTransaction({
-      id: 'tx-order-1',
+      id: txId,
       state: 'state/preauthorized',
       booking: createBooking(
         'booking1',
@@ -27,6 +28,7 @@ describe('OrderPage', () => {
 
     const props = {
       currentUser: createCurrentUser('customer1'),
+      params: { id: txId },
       transaction,
       tab: 'details',
       intl: fakeIntl,
