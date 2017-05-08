@@ -64,8 +64,8 @@ class TopbarComponent extends Component {
   handleSubmit(values) {
     const selectedPlace = values && values.location ? values.location.selectedPlace : null;
     const { flattenedRoutes, history } = this.props;
-    const { address, origin, bounds } = selectedPlace || {};
-    const searchParams = { address, origin, bounds };
+    const { address, origin, bounds, country } = selectedPlace || {};
+    const searchParams = { address, origin, bounds, country };
     history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
   }
 
@@ -91,12 +91,28 @@ class TopbarComponent extends Component {
     const me = ensureUser(currentUser);
     const profile = me.attributes.profile;
     const name = me.id ? `${profile.firstName} ${profile.lastName}` : '';
-    const { mobilemenu, mobilesearch } = parse(location.search);
+
+    const { mobilemenu, mobilesearch, address, origin, bounds, country } = parse(location.search, {
+      latlng: ['origin'],
+      latlngBounds: ['bounds'],
+    });
+
     const isMobileMenuOpen = mobilemenu === 'open';
     const isMobileSearchOpen = mobilesearch === 'open';
     const mobileMenu = (
       <MobileMenu isAuthenticated={isAuthenticated} name={name} onLogout={this.handleLogout} />
     );
+
+    // Only render current search if full place object is available in the URL params
+    const locationFieldsPresent = address && origin && bounds && country;
+    const initialSearchFormValues = {
+      location: locationFieldsPresent
+        ? {
+            search: address,
+            selectedPlace: { address, origin, bounds, country },
+          }
+        : null,
+    };
 
     return (
       <div className={css.root}>
@@ -125,7 +141,12 @@ class TopbarComponent extends Component {
           onClose={this.handleMobileSearchClose}
           togglePageClassNames={togglePageClassNames}
         >
-          <SearchForm className={css.searchForm} onSubmit={this.handleSubmit} />
+          <SearchForm
+            form="TopbarSearchForm"
+            className={css.searchForm}
+            onSubmit={this.handleSubmit}
+            initialValues={initialSearchFormValues}
+          />
         </Modal>
       </div>
     );

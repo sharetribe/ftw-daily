@@ -12,15 +12,15 @@ export const LandingPageComponent = props => {
 
   const handleSubmit = values => {
     const selectedPlace = values && values.location ? values.location.selectedPlace : null;
-    const { address, origin, bounds } = selectedPlace || {};
-    const searchParams = { address, origin, bounds };
+    const { address, origin, bounds, country } = selectedPlace || {};
+    const searchParams = { address, origin, bounds, country };
     history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
   };
 
   return (
     <PageLayout title="Landing page">
       <HeroSection>
-        <SearchForm className={css.form} onSubmit={handleSubmit} />
+        <SearchForm form="LandingPageSearchForm" className={css.form} onSubmit={handleSubmit} />
       </HeroSection>
     </PageLayout>
   );

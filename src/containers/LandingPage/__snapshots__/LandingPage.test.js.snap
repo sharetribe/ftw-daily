@@ -3,6 +3,7 @@ exports[`LandingPage matches snapshot 1`] = `
   title="Landing page">
   <HeroSection>
     <ReduxForm
+      form="LandingPageSearchForm"
       onSubmit={[Function]} />
   </HeroSection>
 </Connect(withRouter(PageLayout))>
