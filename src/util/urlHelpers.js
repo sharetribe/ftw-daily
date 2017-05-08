@@ -13,8 +13,14 @@ export const createSlug = str => encodeURIComponent(str.toLowerCase().split(' ')
  * @return {Number|null} number parsed from the string, null if not a number
  */
 export const parseFloatNum = str => {
-  const num = parseFloat(str);
-  return isNaN(num) ? null : num;
+  const trimmed = str ? str.trim() : null;
+  if (!trimmed) {
+    return null;
+  }
+  const num = parseFloat(trimmed);
+  const isNumber = !isNaN(num);
+  const isFullyParsedNum = isNumber && num.toString() === trimmed;
+  return isFullyParsedNum ? num : null;
 };
 
 /**

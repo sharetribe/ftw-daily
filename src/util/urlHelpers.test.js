@@ -33,7 +33,11 @@ describe('urlHelpers', () => {
     });
 
     it('handles trailing chars', () => {
-      expect(parseFloatNum('123abc')).toEqual(123);
+      expect(parseFloatNum('123abc')).toBeNull();
+    });
+
+    it('does not parse comma as a separator', () => {
+      expect(parseFloatNum('10,20')).toBeNull();
     });
   });
 
@@ -116,6 +120,16 @@ describe('urlHelpers', () => {
         invalid: null,
         bounds: new LatLngBounds(new LatLng(50, 70), new LatLng(30, 50)),
         badBounds: null,
+      });
+    });
+
+    it('keeps SDK type info without options', () => {
+      const origin = `40${COMMA}60`;
+      const bounds = `50${COMMA}70${COMMA}30${COMMA}50`;
+      const search = `bounds=${bounds}&origin=${origin}`;
+      expect(parse(search)).toEqual({
+        bounds: '50,70,30,50',
+        origin: '40,60',
       });
     });
   });
