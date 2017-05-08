@@ -2,17 +2,8 @@
   margin: 1rem;
 }
 
-.tab {
-  float: left;
+.tabs {
   margin-left: 1rem;
-  font-size: 20px;
-  letter-spacing: -0.5px;
-  text-decoration: none;
-}
-
-.activeTab {
-  font-weight: bold;
-  text-decoration: underline;
 }
 
 .error {

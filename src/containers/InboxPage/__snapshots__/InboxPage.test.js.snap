@@ -6,31 +6,32 @@ exports[`InboxPage matches snapshot 1`] = `
       id="InboxPage.title"
       values={Object {}} />
   </h1>
-  <nav>
-    <withFlattenedRoutes(withRouter(NamedLink))
-      name="InboxPage"
-      params={
+  <TabNav
+    className=""
+    tabs={
+      Array [
         Object {
-          "tab": "orders",
-        }
-      }>
-      <FormattedMessage
-        id="InboxPage.ordersTabTitle"
-        values={Object {}} />
-    </withFlattenedRoutes(withRouter(NamedLink))>
-    <withFlattenedRoutes(withRouter(NamedLink))
-      activeClassName={null}
-      name="InboxPage"
-      params={
+          "linkProps": Object {
+            "name": "InboxPage",
+            "params": Object {
+              "tab": "orders",
+            },
+          },
+          "selected": true,
+          "text": "InboxPage.ordersTabTitle",
+        },
         Object {
-          "tab": "sales",
-        }
-      }>
-      <FormattedMessage
-        id="InboxPage.salesTabTitle"
-        values={Object {}} />
-    </withFlattenedRoutes(withRouter(NamedLink))>
-  </nav>
+          "linkProps": Object {
+            "name": "InboxPage",
+            "params": Object {
+              "tab": "sales",
+            },
+          },
+          "selected": false,
+          "text": "InboxPage.salesTabTitle",
+        },
+      ]
+    } />
   <ul>
     <li>
       <Component
@@ -182,31 +183,32 @@ exports[`InboxPage matches snapshot 3`] = `
       id="InboxPage.title"
       values={Object {}} />
   </h1>
-  <nav>
-    <withFlattenedRoutes(withRouter(NamedLink))
-      activeClassName={null}
-      name="InboxPage"
-      params={
+  <TabNav
+    className=""
+    tabs={
+      Array [
         Object {
-          "tab": "orders",
-        }
-      }>
-      <FormattedMessage
-        id="InboxPage.ordersTabTitle"
-        values={Object {}} />
-    </withFlattenedRoutes(withRouter(NamedLink))>
-    <withFlattenedRoutes(withRouter(NamedLink))
-      name="InboxPage"
-      params={
+          "linkProps": Object {
+            "name": "InboxPage",
+            "params": Object {
+              "tab": "orders",
+            },
+          },
+          "selected": false,
+          "text": "InboxPage.ordersTabTitle",
+        },
         Object {
-          "tab": "sales",
-        }
-      }>
-      <FormattedMessage
-        id="InboxPage.salesTabTitle"
-        values={Object {}} />
-    </withFlattenedRoutes(withRouter(NamedLink))>
-  </nav>
+          "linkProps": Object {
+            "name": "InboxPage",
+            "params": Object {
+              "tab": "sales",
+            },
+          },
+          "selected": true,
+          "text": "InboxPage.salesTabTitle",
+        },
+      ]
+    } />
   <ul>
     <li>
       <Component
