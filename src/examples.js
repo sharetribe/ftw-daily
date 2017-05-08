@@ -13,6 +13,7 @@ import * as LocationAutocompleteInput
 import * as PaginationLinks from './components/PaginationLinks/PaginationLinks.example';
 import * as StripeBankAccountToken
   from './components/StripeBankAccountToken/StripeBankAccountToken.example';
+import * as TabNav from './components/TabNav/TabNav.example';
 
 // containers
 import * as BookingDatesForm from './containers/BookingDatesForm/BookingDatesForm.example';
@@ -36,7 +37,6 @@ export {
   CurrencyInput,
   DateInput,
   EditListingForm,
-  SearchForm,
   ListingCard,
   LocationAutocompleteInput,
   LoginForm,
@@ -46,7 +46,9 @@ export {
   NamedLink,
   PaginationLinks,
   PasswordForgottenForm,
+  SearchForm,
   SignupForm,
   StripeBankAccountToken,
   StripePaymentForm,
+  TabNav,
 };
