@@ -9,6 +9,8 @@ const SearchForm = props => {
   const { className, intl, handleSubmit, submitting } = props;
   const addClassName = className ? { className } : {};
 
+  const submitDisabled = submitting;
+
   return (
     <form {...addClassName} onSubmit={handleSubmit}>
       <Field
@@ -19,7 +21,7 @@ const SearchForm = props => {
         format={null}
         component={LocationAutocompleteInput}
       />
-      <Button className={css.locationButton} type="submit" disabled={submitting}>
+      <Button className={css.locationButton} type="submit" disabled={submitDisabled}>
         <FormattedMessage id="SearchForm.search" />
         <div className={css.searchIcon}>
           <svg width="18" height="18" viewBox="189 165 18 18" xmlns="http://www.w3.org/2000/svg">
@@ -41,6 +43,13 @@ const SearchForm = props => {
   );
 };
 
-SearchForm.propTypes = { ...formPropTypes, intl: intlShape.isRequired };
+SearchForm.propTypes = {
+  ...formPropTypes,
 
-export default reduxForm({ form: 'searchform' })(injectIntl(SearchForm));
+  // from injectIntl
+  intl: intlShape.isRequired,
+};
+
+const formName = 'SearchForm';
+
+export default reduxForm({ form: formName })(injectIntl(SearchForm));
