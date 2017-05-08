@@ -139,8 +139,8 @@ SignupFormComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const formName = 'SignupForm';
+const defaultFormName = 'SignupForm';
 
-const SignupForm = compose(reduxForm({ form: formName }), injectIntl)(SignupFormComponent);
+const SignupForm = compose(reduxForm({ form: defaultFormName }), injectIntl)(SignupFormComponent);
 
 export default SignupForm;

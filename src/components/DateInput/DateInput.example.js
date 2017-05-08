@@ -54,8 +54,10 @@ const FormComponent = props => {
 
 FormComponent.propTypes = formPropTypes;
 
+const defaultFormName = 'Styleguide.DateInput.Form';
+
 const Form = reduxForm({
-  form: 'Styleguide.DateInput.Form',
+  form: defaultFormName,
 })(FormComponent);
 
 export const Empty = {

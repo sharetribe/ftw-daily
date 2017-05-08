@@ -130,7 +130,7 @@ BookingDatesFormComponent.propTypes = {
   price: instanceOf(types.Money),
 };
 
-const formName = 'bookingDates';
+const formName = 'BookingDates';
 
 // When a field depends on the value of another field, we must connect
 // to the store and select the required values to inject to the
