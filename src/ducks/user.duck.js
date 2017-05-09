@@ -10,11 +10,17 @@ export const STRIPE_ACCOUNT_CREATE_REQUEST = 'app/user/STRIPE_ACCOUNT_CREATE_REQ
 export const STRIPE_ACCOUNT_CREATE_SUCCESS = 'app/user/STRIPE_ACCOUNT_CREATE_SUCCESS';
 export const STRIPE_ACCOUNT_CREATE_ERROR = 'app/user/STRIPE_ACCOUNT_CREATE_ERROR';
 
+export const FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST = 'app/InboxPage/FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST';
+export const FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS = 'app/InboxPage/FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS';
+export const FETCH_CURRENT_USER_HAS_LISTINGS_ERROR = 'app/InboxPage/FETCH_CURRENT_USER_HAS_LISTINGS_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
   currentUser: null,
   usersMeError: null,
+  currentUserHasListingsError: null,
+  currentUserHasListings: false,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -31,6 +37,14 @@ export default function reducer(state = initialState, action = {}) {
 
     case CLEAR_CURRENT_USER:
       return { ...state, currentUser: null, usersMeError: null };
+
+    case FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST:
+      return { ...state, currentUserHasListingsError: null };
+    case FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS:
+      return { ...state, currentUserHasListings: payload.hasListings };
+    case FETCH_CURRENT_USER_HAS_LISTINGS_ERROR:
+      console.error(payload); // eslint-disable-line
+      return { ...state, currentUserHasListingsError: payload };
 
     default:
       return state;
@@ -67,6 +81,21 @@ export const stripeAccountCreateError = e => ({
   error: true,
 });
 
+const fetchCurrentUserHasListingsRequest = () => ({
+  type: FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST,
+});
+
+const fetchCurrentUserHasListingsSuccess = hasListings => ({
+  type: FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS,
+  payload: { hasListings },
+});
+
+const fetchCurrentUserHasListingsError = e => ({
+  type: FETCH_CURRENT_USER_HAS_LISTINGS_ERROR,
+  error: true,
+  payload: e,
+});
+
 // ================ Thunks ================ //
 
 export const fetchCurrentUser = () =>
@@ -88,6 +117,29 @@ export const fetchCurrentUser = () =>
         // TODO: dispatch flash message
         dispatch(usersMeError(e));
       });
+  };
+
+export const fetchCurrentUserHasListings = () =>
+  (dispatch, getState, sdk) => {
+    dispatch(fetchCurrentUserHasListingsRequest());
+    dispatch(fetchCurrentUser())
+      .then(() => {
+        const currentUserId = getState().user.currentUser.id;
+        const params = {
+          author_id: currentUserId,
+
+          // Since we are only interested in if the user has
+          // listings, we only need at most one result.
+          page: 1,
+          per_page: 1,
+        };
+        return sdk.listings.query(params);
+      })
+      .then(response => {
+        const hasListings = response.data.data && response.data.data.length > 0;
+        dispatch(fetchCurrentUserHasListingsSuccess(hasListings));
+      })
+      .catch(e => dispatch(fetchCurrentUserHasListingsError(e)));
   };
 
 export const createStripeAccount = (bankAccountToken, address) =>
