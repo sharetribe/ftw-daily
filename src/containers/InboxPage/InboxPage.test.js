@@ -33,7 +33,6 @@ describe('InboxPage', () => {
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
         }),
       ],
-      currentUserHasListings: true,
       intl: fakeIntl,
     };
 
@@ -67,7 +66,6 @@ describe('InboxPage', () => {
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
         }),
       ],
-      currentUserHasListings: true,
       intl: fakeIntl,
     };
 
