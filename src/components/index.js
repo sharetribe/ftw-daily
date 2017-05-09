@@ -1,6 +1,7 @@
 import AddImages from './AddImages/AddImages';
 import AuthorInfo from './AuthorInfo/AuthorInfo';
 import Avatar from './Avatar/Avatar';
+import BirthdayInput from './BirthdayInput/BirthdayInput';
 import BookingInfo from './BookingInfo/BookingInfo';
 import Button, { FlatButton, InlineButton } from './Button/Button';
 import CurrencyInput from './CurrencyInput/CurrencyInput';
@@ -39,6 +40,7 @@ export {
   AddImages,
   AuthorInfo,
   Avatar,
+  BirthdayInput,
   BookingInfo,
   Button,
   CurrencyInput,
