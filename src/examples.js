@@ -4,6 +4,7 @@ import * as BirthdayInput from './components/BirthdayInput/BirthdayInput.example
 import * as BookingInfo from './components/BookingInfo/BookingInfo.example';
 import * as CurrencyInput from './components/CurrencyInput/CurrencyInput.example';
 import * as DateInput from './components/DateInput/DateInput.example';
+import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as Map from './components/Map/Map.example';
 import * as Modal from './components/Modal/Modal.example';
@@ -40,6 +41,7 @@ export {
   CurrencyInput,
   DateInput,
   EditListingForm,
+  EditListingWizard,
   ListingCard,
   LocationAutocompleteInput,
   LoginForm,
