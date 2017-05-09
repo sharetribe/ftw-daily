@@ -138,7 +138,6 @@ export const loadData = (params, search) =>
     }
 
     dispatch(fetchOrdersOrSalesRequest());
-    dispatch(fetchCurrentUserHasListings());
 
     const { page = 1 } = parse(search);
 
