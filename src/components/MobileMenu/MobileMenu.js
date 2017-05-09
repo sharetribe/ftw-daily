@@ -9,7 +9,7 @@ import { Avatar, InlineButton, NamedLink } from '../../components';
 import css from './MobileMenu.css';
 
 const MobileMenu = props => {
-  const { isAuthenticated, name, onLogout } = props;
+  const { isAuthenticated, currentUserHasListings, name, onLogout } = props;
 
   if (!isAuthenticated) {
     return (
@@ -31,6 +31,12 @@ const MobileMenu = props => {
     );
   }
 
+  const inboxLink = (
+    <NamedLink name="InboxPage" params={{ tab: currentUserHasListings ? 'sales' : 'orders' }}>
+      <FormattedMessage id="MobileMenu.inboxLink" />
+    </NamedLink>
+  );
+
   return (
     <div className={css.root}>
       <div className={css.user}>
@@ -43,9 +49,7 @@ const MobileMenu = props => {
         </div>
       </div>
       <div className={css.content}>
-        <NamedLink name="InboxPage" params={{ tab: 'orders' }}>
-          <FormattedMessage id="MobileMenu.inboxLink" />
-        </NamedLink>
+        {inboxLink}
       </div>
       <div className={css.footer}>
         <InlineButton className={css.logoutButton} onClick={onLogout}>
@@ -62,6 +66,7 @@ const { bool, func, string } = PropTypes;
 
 MobileMenu.propTypes = {
   isAuthenticated: bool.isRequired,
+  currentUserHasListings: bool.isRequired,
   name: string,
   onLogout: func.isRequired,
 };

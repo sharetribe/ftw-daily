@@ -84,6 +84,7 @@ class TopbarComponent extends Component {
       isAuthenticated,
       authInProgress,
       currentUser,
+      currentUserHasListings,
       intl,
       location,
       togglePageClassNames,
@@ -100,7 +101,12 @@ class TopbarComponent extends Component {
     const isMobileMenuOpen = mobilemenu === 'open';
     const isMobileSearchOpen = mobilesearch === 'open';
     const mobileMenu = (
-      <MobileMenu isAuthenticated={isAuthenticated} name={name} onLogout={this.handleLogout} />
+      <MobileMenu
+        isAuthenticated={isAuthenticated}
+        currentUserHasListings={currentUserHasListings}
+        name={name}
+        onLogout={this.handleLogout}
+      />
     );
 
     // Only render current search if full place object is available in the URL params
@@ -161,6 +167,7 @@ TopbarComponent.propTypes = {
   isAuthenticated: bool.isRequired,
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
+  currentUserHasListings: bool.isRequired,
   onLogout: func.isRequired,
   togglePageClassNames: func.isRequired,
 
@@ -181,11 +188,12 @@ TopbarComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { isAuthenticated } = state.Auth;
-  const { currentUser } = state.user;
+  const { currentUser, currentUserHasListings } = state.user;
   return {
     isAuthenticated,
     authInProgress: authenticationInProgress(state),
     currentUser,
+    currentUserHasListings,
   };
 };
 
