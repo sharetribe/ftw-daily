@@ -14,7 +14,15 @@ import css from './SalePage.css';
 // SalePage handles data loading
 // It show loading data text or SaleDetailsPanel (and later also another panel for messages).
 export const SalePageComponent = props => {
-  const { currentUser, fetchSaleError, intl, onAcceptSale, onRejectSale, params, transaction } = props;
+  const {
+    currentUser,
+    fetchSaleError,
+    intl,
+    onAcceptSale,
+    onRejectSale,
+    params,
+    transaction,
+  } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const title = currentListing.attributes.title;
@@ -29,7 +37,7 @@ export const SalePageComponent = props => {
   if (isDataAvailable && !isOwnSale) {
     // eslint-disable-next-line no-console
     console.error('Tried to access a sale that was not owned by the current user');
-    return <NamedRedirect name="InboxPage" params={{ tab: 'sales' }} />;
+    return <NamedRedirect name="InboxSalesPage" />;
   }
 
   const detailsProps = {
