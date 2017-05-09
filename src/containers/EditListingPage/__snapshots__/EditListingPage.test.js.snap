@@ -1,13 +1,17 @@
 exports[`EditListingPageComponent matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   title="EditListingPage.titleCreateListing">
-  <Connect(ReduxForm)
+  <EditListingWizard
+    className={null}
     images={Array []}
-    initData={Object {}}
+    listing={null}
+    onCreateListing={[Function]}
+    onCreateListingDraft={[Function]}
     onImageUpload={[Function]}
-    onSubmit={[Function]}
     onUpdateImageOrder={[Function]}
-    saveActionMsg="Create listing"
+    onUpdateListingDraft={[Function]}
+    rootClassName={null}
+    selectedTab="description"
     stripeConnected={false} />
 </Connect(withRouter(PageLayout))>
 `;

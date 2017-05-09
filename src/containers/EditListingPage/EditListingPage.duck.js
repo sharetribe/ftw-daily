@@ -1,3 +1,4 @@
+import { omitBy, isUndefined } from 'lodash';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { createStripeAccount, fetchCurrentUserHasListingsSuccess } from '../../ducks/user.duck';
 
@@ -23,6 +24,9 @@ export const UPLOAD_IMAGE_ERROR = 'app/EditListingPage/UPLOAD_IMAGE_ERROR';
 
 export const UPDATE_IMAGE_ORDER = 'app/EditListingPage/UPDATE_IMAGE_ORDER';
 
+export const CREATE_LISTING_DRAFT = 'app/EditListingPage/CREATE_LISTING_DRAFT';
+export const UPDATE_LISTING_DRAFT = 'app/EditListingPage/UPDATE_LISTING_DRAFT';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -33,6 +37,7 @@ const initialState = {
   redirectToListing: false,
   images: {},
   imageOrder: [],
+  listingDraft: null,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -90,6 +95,17 @@ export default function reducer(state = initialState, action = {}) {
     case UPDATE_IMAGE_ORDER:
       return { ...state, imageOrder: payload.imageOrder };
 
+    case CREATE_LISTING_DRAFT:
+    case UPDATE_LISTING_DRAFT: {
+      const { attributes, images } = state.listingDraft || {};
+      const updatedImages = payload.images || images;
+      const listingDraft = {
+        attributes: { ...attributes, ...omitBy(payload.attributes, isUndefined) },
+        images: updatedImages,
+      };
+      return { ...state, listingDraft };
+    }
+
     default:
       return state;
   }
@@ -103,6 +119,23 @@ export const updateImageOrder = imageOrder => ({
   type: UPDATE_IMAGE_ORDER,
   payload: { imageOrder },
 });
+
+// TODO These temporary listing actions will be changed when API supports unpublished listings
+export const createListingDraft = listingData => {
+  const { description, title } = listingData;
+  return {
+    type: CREATE_LISTING_DRAFT,
+    payload: { attributes: { title, description } },
+  };
+};
+
+export const updateListingDraft = listingData => {
+  const { address, description, title, geolocation, images, price } = listingData;
+  return {
+    type: UPDATE_LISTING_DRAFT,
+    payload: { attributes: { address, description, geolocation, price, title }, images },
+  };
+};
 
 // All the action creators that don't have the {Success, Error} suffix
 // take the params object that the corresponding SDK endpoint method

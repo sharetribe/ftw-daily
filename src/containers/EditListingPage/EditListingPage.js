@@ -1,13 +1,14 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { types } from '../../util/sdkLoader';
-import { NamedRedirect, PageLayout } from '../../components';
-import { EditListingForm } from '../../containers';
-import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { createSlug } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
+import { EditListingWizard, NamedRedirect, PageLayout } from '../../components';
+import { getListingsById } from '../../ducks/marketplaceData.duck';
 import {
+  createListingDraft,
+  updateListingDraft,
   requestCreateListing,
   requestShowListing,
   requestImageUpload,
@@ -30,97 +31,83 @@ const formatRequestData = values => {
   };
 };
 
-const onSubmit = submitListing => {
-  return values => submitListing(values);
+// N.B. All the presentational content needs to be extracted to their own components
+export const EditListingPageComponent = props => {
+  const {
+    intl,
+    onCreateListing,
+    onImageUpload,
+    onUpdateImageOrder,
+    page,
+    params,
+    tab,
+    type,
+    currentUser,
+    getListing,
+    onCreateListingDraft,
+    onUpdateListingDraft,
+  } = props;
+  const isNew = type === 'new';
+  const hasIdParam = params && params.id;
+  const id = page.submittedListingId || (hasIdParam ? new types.UUID(params.id) : null);
+  const currentListing = getListing(id);
+
+  const shouldRedirect = page.submittedListingId && currentListing;
+  const showForm = isNew || currentListing;
+
+  if (shouldRedirect) {
+    // If page has already listingId (after submit) and current listings exist
+    // redirect to listing page
+    const slug = currentListing ? createSlug(currentListing.attributes.title) : null;
+    return <NamedRedirect name="ListingPage" params={{ id: id.uuid, slug }} />;
+  } else if (showForm) {
+    // Show form if user is posting a new listing or editing existing one
+    const disableForm = page.redirectToListing && !page.showListingsError;
+
+    // Images are passed to EditListingForm so that it can generate thumbnails out of them
+    const images = page.imageOrder.map(i => page.images[i]);
+
+    const stripeConnected = currentUser && currentUser.attributes
+      ? currentUser.attributes.stripeConnected
+      : false;
+
+    const title = isNew
+      ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
+      : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
+
+    return (
+      <PageLayout title={title}>
+        <EditListingWizard
+          disabled={disableForm}
+          images={images}
+          listing={page.listingDraft}
+          onCreateListing={onCreateListing}
+          onCreateListingDraft={onCreateListingDraft}
+          onUpdateListingDraft={onUpdateListingDraft}
+          onImageUpload={onImageUpload}
+          onUpdateImageOrder={onUpdateImageOrder}
+          selectedTab={tab}
+          stripeConnected={stripeConnected}
+        />
+      </PageLayout>
+    );
+  } else {
+    // If user has come to this page through a direct linkto edit existing listing,
+    // we need to load it first.
+    const loadingPageMsg = {
+      id: 'ListingPage.loadingListingData',
+    };
+    return <PageLayout title={intl.formatMessage(loadingPageMsg)} />;
+  }
 };
 
-// N.B. All the presentational content needs to be extracted to their own components
-export class EditListingPageComponent extends Component {
-  componentDidMount() {
-    if (this.props.type === 'edit') {
-      EditListingPageComponent.loadData(this.props.params.id, this.props.onLoadListing);
-    }
-  }
-
-  render() {
-    const {
-      intl,
-      onCreateListing,
-      onImageUpload,
-      onUpdateImageOrder,
-      page,
-      params,
-      type,
-      currentUser,
-      getListing,
-    } = this.props;
-    const isNew = type === 'new';
-    const hasIdParam = params && params.id;
-    const id = page.submittedListingId || (hasIdParam ? new types.UUID(params.id) : null);
-    const currentListing = getListing(id);
-
-    const shouldRedirect = page.submittedListingId && currentListing;
-    const showForm = isNew || currentListing;
-
-    if (shouldRedirect) {
-      // If page has already listingId (after submit) and current listings exist
-      // redirect to listing page
-      const slug = currentListing ? createSlug(currentListing.attributes.title) : null;
-      return <NamedRedirect name="ListingPage" params={{ id: id.uuid, slug }} />;
-    } else if (showForm) {
-      // Show form if user is posting a new listing or editing existing one
-      const saveActionMsg = page.redirectToListing ? 'Redirecting to listing' : 'Create listing';
-      const disableForm = page.redirectToListing && !page.showListingsError;
-
-      // Currently creates a new listing based on existing one (sdk doesn't support listings.update)
-      const initData = currentListing && type === 'edit'
-        ? {
-            title: currentListing.attributes.title,
-            description: currentListing.attributes.description,
-          }
-        : {};
-
-      // Images are passed to EditListingForm so that it can generate thumbnails out of them
-      const images = page.imageOrder.map(i => page.images[i]);
-      const title = isNew
-        ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
-        : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
-
-      const stripeConnected = currentUser && currentUser.attributes
-        ? currentUser.attributes.stripeConnected
-        : false;
-
-      return (
-        <PageLayout title={title}>
-          <EditListingForm
-            disabled={disableForm}
-            images={images}
-            initData={initData}
-            onImageUpload={onImageUpload}
-            onSubmit={onSubmit(onCreateListing)}
-            onUpdateImageOrder={onUpdateImageOrder}
-            saveActionMsg={saveActionMsg}
-            stripeConnected={stripeConnected}
-          />
-        </PageLayout>
-      );
-    } else {
-      // If user has come to this page through a direct linkto edit existing listing,
-      // we need to load it first.
-      const loadingPageMsg = {
-        id: 'ListingPage.loadingListingData',
-      };
-      return <PageLayout title={intl.formatMessage(loadingPageMsg)} />;
-    }
-  }
-}
-
-EditListingPageComponent.loadData = (id, onLoadListing) => {
-  onLoadListing(id);
+EditListingPageComponent.loadData = id => {
+  requestShowListing({ id, include: ['author', 'images'] });
 };
 
 EditListingPageComponent.defaultProps = {
   listing: null,
+  listingDraft: null,
   params: null,
   type: 'edit',
   currentUser: null,
@@ -131,7 +118,6 @@ const { func, object, shape, string } = PropTypes;
 EditListingPageComponent.propTypes = {
   intl: intlShape.isRequired,
   onCreateListing: func.isRequired,
-  onLoadListing: func.isRequired,
   onImageUpload: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   page: object.isRequired,
@@ -139,9 +125,12 @@ EditListingPageComponent.propTypes = {
     id: string,
     slug: string,
   }),
+  tab: string.isRequired,
   type: string,
   currentUser: propTypes.currentUser,
   getListing: func.isRequired,
+  onCreateListingDraft: func.isRequired,
+  onUpdateListingDraft: func.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -157,10 +146,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLoadListing: id => dispatch(requestShowListing({ id, include: ['author', 'images'] })),
     onCreateListing: values => dispatch(requestCreateListing(formatRequestData(values))),
     onImageUpload: data => dispatch(requestImageUpload(data)),
     onUpdateImageOrder: imageOrder => dispatch(updateImageOrder(imageOrder)),
+    onCreateListingDraft: values => dispatch(createListingDraft(values)),
+    onUpdateListingDraft: values => dispatch(updateListingDraft(values)),
   };
 };
 

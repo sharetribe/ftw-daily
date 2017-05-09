@@ -12,10 +12,12 @@ describe('EditListingPageComponent', () => {
         images={[]}
         intl={fakeIntl}
         onCreateListing={v => v}
-        onLoadListing={v => v}
+        onCreateListingDraft={v => v}
+        onUpdateListingDraft={v => v}
         onImageUpload={v => v}
         onUpdateImageOrder={v => v}
         page={{ imageOrder: [], images: {} }}
+        tab="description"
         type="new"
       />
     );
