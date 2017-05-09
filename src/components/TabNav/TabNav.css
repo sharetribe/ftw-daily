@@ -10,10 +10,16 @@
 }
 
 .link {
+  text-decoration: underline;
+}
+
+.selectedLink {
+  font-weight: bold;
   text-decoration: none;
 }
 
-.selected {
-  font-weight: bold;
-  text-decoration: underline;
+.disabled {
+  pointer-events: none;
+  color: #999;
+  text-decoration: none;
 }

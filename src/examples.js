@@ -15,6 +15,7 @@ import * as PaginationLinks from './components/PaginationLinks/PaginationLinks.e
 import * as StripeBankAccountToken
   from './components/StripeBankAccountToken/StripeBankAccountToken.example';
 import * as TabNav from './components/TabNav/TabNav.example';
+import * as Tabs from './components/Tabs/Tabs.example';
 
 // containers
 import * as BookingDatesForm from './containers/BookingDatesForm/BookingDatesForm.example';
@@ -53,4 +54,5 @@ export {
   StripeBankAccountToken,
   StripePaymentForm,
   TabNav,
+  Tabs,
 };

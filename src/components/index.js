@@ -34,6 +34,7 @@ import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import StripeBankAccountToken from './StripeBankAccountToken/StripeBankAccountToken';
 import TabNav from './TabNav/TabNav';
+import Tabs from './Tabs/Tabs';
 import ValidationError from './ValidationError/ValidationError';
 
 export {
@@ -75,5 +76,6 @@ export {
   SearchResultsPanel,
   StripeBankAccountToken,
   TabNav,
+  Tabs,
   ValidationError,
 };
