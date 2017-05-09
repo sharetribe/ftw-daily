@@ -10,17 +10,17 @@ export const STRIPE_ACCOUNT_CREATE_REQUEST = 'app/user/STRIPE_ACCOUNT_CREATE_REQ
 export const STRIPE_ACCOUNT_CREATE_SUCCESS = 'app/user/STRIPE_ACCOUNT_CREATE_SUCCESS';
 export const STRIPE_ACCOUNT_CREATE_ERROR = 'app/user/STRIPE_ACCOUNT_CREATE_ERROR';
 
-export const FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST = 'app/InboxPage/FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST';
-export const FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS = 'app/InboxPage/FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS';
-export const FETCH_CURRENT_USER_HAS_LISTINGS_ERROR = 'app/InboxPage/FETCH_CURRENT_USER_HAS_LISTINGS_ERROR';
+export const FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST = 'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST';
+export const FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS = 'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS';
+export const FETCH_CURRENT_USER_HAS_LISTINGS_ERROR = 'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_ERROR';
 
 // ================ Reducer ================ //
 
 const initialState = {
   currentUser: null,
   usersMeError: null,
-  currentUserHasListingsError: null,
   currentUserHasListings: false,
+  currentUserHasListingsError: null,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -36,7 +36,13 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, usersMeError: payload };
 
     case CLEAR_CURRENT_USER:
-      return { ...state, currentUser: null, usersMeError: null };
+      return {
+        ...state,
+        currentUser: null,
+        usersMeError: null,
+        currentUserHasListings: false,
+        currentUserHasListingsError: null,
+      };
 
     case FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST:
       return { ...state, currentUserHasListingsError: null };
@@ -98,6 +104,38 @@ const fetchCurrentUserHasListingsError = e => ({
 
 // ================ Thunks ================ //
 
+export const fetchCurrentUserHasListings = () =>
+  (dispatch, getState, sdk) => {
+    dispatch(fetchCurrentUserHasListingsRequest());
+    const { currentUser } = getState().user;
+
+    if (!currentUser) {
+      dispatch(fetchCurrentUserHasListingsSuccess(false));
+      return Promise.resolve(null);
+    }
+
+    const currentUserId = currentUser.id;
+    const params = {
+      author_id: currentUserId,
+
+      // Since we are only interested in if the user has
+      // listings, we only need at most one result.
+      page: 1,
+      per_page: 1,
+    };
+
+    return sdk.listings
+      .query(params)
+      .then(response => {
+        const hasListings = response.data.data && response.data.data.length > 0;
+        dispatch(fetchCurrentUserHasListingsSuccess(!!hasListings));
+      })
+      .catch(e => {
+        // TODO: dispatch flash message
+        dispatch(fetchCurrentUserHasListingsError(e));
+      });
+  };
+
 export const fetchCurrentUser = () =>
   (dispatch, getState, sdk) => {
     dispatch(usersMeRequest());
@@ -113,33 +151,13 @@ export const fetchCurrentUser = () =>
       .then(response => {
         dispatch(usersMeSuccess(response.data.data));
       })
+      .then(() => {
+        dispatch(fetchCurrentUserHasListings());
+      })
       .catch(e => {
         // TODO: dispatch flash message
         dispatch(usersMeError(e));
       });
-  };
-
-export const fetchCurrentUserHasListings = () =>
-  (dispatch, getState, sdk) => {
-    dispatch(fetchCurrentUserHasListingsRequest());
-    dispatch(fetchCurrentUser())
-      .then(() => {
-        const currentUserId = getState().user.currentUser.id;
-        const params = {
-          author_id: currentUserId,
-
-          // Since we are only interested in if the user has
-          // listings, we only need at most one result.
-          page: 1,
-          per_page: 1,
-        };
-        return sdk.listings.query(params);
-      })
-      .then(response => {
-        const hasListings = response.data.data && response.data.data.length > 0;
-        dispatch(fetchCurrentUserHasListingsSuccess(hasListings));
-      })
-      .catch(e => dispatch(fetchCurrentUserHasListingsError(e)));
   };
 
 export const createStripeAccount = (bankAccountToken, address) =>
