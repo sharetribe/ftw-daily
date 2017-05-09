@@ -1,5 +1,5 @@
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
-import { createStripeAccount, fetchCurrentUser } from '../../ducks/user.duck';
+import { createStripeAccount, fetchCurrentUserHasListingsSuccess } from '../../ducks/user.duck';
 
 const requestAction = actionType => params => ({ type: actionType, payload: { params } });
 
@@ -165,8 +165,8 @@ export function requestCreateListing(data) {
       .then(response => {
         // We must update the user duck since this might be the first
         // listing for the user, therefore changing the
-        // currentUserHasListingsFlag in the store.
-        dispatch(fetchCurrentUser());
+        // currentUserHasListings flag in the store.
+        dispatch(fetchCurrentUserHasListingsSuccess({ hasListings: true }));
         return response;
       })
       .catch(e => dispatch(createListingError(e)));
