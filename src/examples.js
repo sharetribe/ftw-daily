@@ -1,5 +1,6 @@
 // components
 import * as AddImages from './components/AddImages/AddImages.example';
+import * as BirthdayInput from './components/BirthdayInput/BirthdayInput.example';
 import * as BookingInfo from './components/BookingInfo/BookingInfo.example';
 import * as CurrencyInput from './components/CurrencyInput/CurrencyInput.example';
 import * as DateInput from './components/DateInput/DateInput.example';
@@ -30,6 +31,7 @@ import * as StripePaymentForm from './containers/StripePaymentForm/StripePayment
 
 export {
   AddImages,
+  BirthdayInput,
   BookingDatesForm,
   BookingInfo,
   ChangeAccountPasswordForm,

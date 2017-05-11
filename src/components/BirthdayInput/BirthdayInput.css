@@ -1,0 +1,32 @@
+.root {
+  display: flex;
+}
+
+.dropdown {
+  display: inline-block;
+  flex: 1;
+  appearance: none;
+
+  /* Font */
+  font-size: 16px;
+  letter-spacing: -0.4px;
+
+  /* Border */
+  border: 1px solid #979797;
+  border-left-width: 0;
+  border-radius: 0;
+
+  &:first-child {
+    border-left-width: 1px;
+  }
+
+  /* Dimensions */
+  padding-left: 18px;
+  padding-right: 18px;
+  height: 50px;
+
+  /* Background */
+  background-image: url('data:image/svg+xml;utf8,<svg width="16" height="10" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg"><path d="M15.027 2.5a.577.577 0 0 0 0-.813L13.545.214a.566.566 0 0 0-.804 0L8 4.955 3.259.215a.566.566 0 0 0-.804 0L.973 1.686a.577.577 0 0 0 0 .813l6.625 6.616c.223.223.58.223.804 0L15.027 2.5z" fill="#4A4A4A" fill-rule="evenodd"/></svg>');
+  background-size: 16px 16px;
+  background-position: center right 10px;
+}
