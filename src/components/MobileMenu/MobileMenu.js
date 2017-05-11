@@ -32,7 +32,7 @@ const MobileMenu = props => {
   }
 
   const inboxLink = (
-    <NamedLink name={currentUserHasListings ? 'InboxSalesPage' : 'InboxOrdersPage'}>
+    <NamedLink name="InboxPage" params={{ tab: currentUserHasListings ? 'sales' : 'orders' }}>
       <FormattedMessage id="MobileMenu.inboxLink" />
     </NamedLink>
   );
