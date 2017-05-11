@@ -63,14 +63,16 @@ class AddImagesTest extends Component {
       <div>
         <AddImages images={this.state.images} onSortEnd={this.onSortEnd}>
           <div className={css.addImageWrapper}>
-            <label className={css.addImage} htmlFor="addImageExampleInput">+ Add image</label>
-            <input
-              id="addImageExampleInput"
-              type="file"
-              accept="images/*"
-              onChange={this.onChange}
-              className={css.addImageInput}
-            />
+            <div className={css.aspectRatioWrapper}>
+              <label className={css.addImage} htmlFor="addImageExampleInput">+ Add image</label>
+              <input
+                id="addImageExampleInput"
+                type="file"
+                accept="images/*"
+                onChange={this.onChange}
+                className={css.addImageInput}
+              />
+            </div>
           </div>
         </AddImages>
       </div>
