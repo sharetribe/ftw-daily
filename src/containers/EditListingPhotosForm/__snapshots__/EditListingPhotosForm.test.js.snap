@@ -1,0 +1,46 @@
+exports[`EditListingPhotosForm matches snapshot 1`] = `
+<form
+  onSubmit={[Function]}>
+  <AddImages
+    images={Array []}
+    onSortEnd={[Function]}>
+    <Field
+      accept="image/*"
+      component={[Function]}
+      label="+ Add image"
+      name="addImage"
+      onChange={[Function]}
+      type="file" />
+    <Field
+      component={[Function]}
+      name="images"
+      type="hidden"
+      validate={
+        Array [
+          [Function],
+        ]
+      } />
+  </AddImages>
+  <Field
+    component="input"
+    name="country"
+    type="hidden"
+    value="US" />
+  <Field
+    component={[Function]}
+    name="bankAccountToken"
+    props={
+      Object {
+        "country": "US",
+        "currency": "USD",
+      }
+    }
+    validate={[Function]} />
+  <Button
+    className={null}
+    rootClassName=""
+    type="submit">
+    Publish listing
+  </Button>
+</form>
+`;

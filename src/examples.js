@@ -27,6 +27,8 @@ import * as EditListingDescriptionForm
   from './containers/EditListingDescriptionForm/EditListingDescriptionForm.example';
 import * as EditListingLocationForm
   from './containers/EditListingLocationForm/EditListingLocationForm.example';
+import * as EditListingPhotosForm
+  from './containers/EditListingPhotosForm/EditListingPhotosForm.example';
 import * as EditListingPricingForm
   from './containers/EditListingPricingForm/EditListingPricingForm.example';
 import * as SearchForm from './containers/SearchForm/SearchForm.example';
@@ -47,6 +49,7 @@ export {
   DateInput,
   EditListingDescriptionForm,
   EditListingLocationForm,
+  EditListingPhotosForm,
   EditListingPricingForm,
   EditListingWizard,
   ListingCard,

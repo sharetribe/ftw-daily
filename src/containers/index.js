@@ -6,6 +6,7 @@ import CheckoutPage from './CheckoutPage/CheckoutPage';
 import ContactDetailsPage from './ContactDetailsPage/ContactDetailsPage';
 import EditListingDescriptionForm from './EditListingDescriptionForm/EditListingDescriptionForm';
 import EditListingLocationForm from './EditListingLocationForm/EditListingLocationForm';
+import EditListingPhotosForm from './EditListingPhotosForm/EditListingPhotosForm';
 import EditListingPricingForm from './EditListingPricingForm/EditListingPricingForm';
 import EditListingPage from './EditListingPage/EditListingPage';
 import EditProfilePage from './EditProfilePage/EditProfilePage';
@@ -39,6 +40,7 @@ export {
   ContactDetailsPage,
   EditListingDescriptionForm,
   EditListingLocationForm,
+  EditListingPhotosForm,
   EditListingPricingForm,
   EditListingPage,
   EditProfilePage,
