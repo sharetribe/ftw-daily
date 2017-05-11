@@ -9,6 +9,7 @@ import DateInput from './DateInput/DateInput';
 import Discussion from './Discussion/Discussion';
 import EditListingDescriptionPanel from './EditListingDescriptionPanel/EditListingDescriptionPanel';
 import EditListingLocationPanel from './EditListingLocationPanel/EditListingLocationPanel';
+import EditListingPricingPanel from './EditListingPricingPanel/EditListingPricingPanel';
 import EditListingWizard from './EditListingWizard/EditListingWizard';
 import ExternalLink from './ExternalLink/ExternalLink';
 import FilterPanel from './FilterPanel/FilterPanel';
@@ -52,6 +53,7 @@ export {
   Discussion,
   EditListingDescriptionPanel,
   EditListingLocationPanel,
+  EditListingPricingPanel,
   EditListingWizard,
   ExternalLink,
   FilterPanel,
