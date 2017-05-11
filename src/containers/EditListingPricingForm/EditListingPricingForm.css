@@ -5,6 +5,22 @@
   flex-direction: column;
 }
 
+.priceWrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.priceInput {
+  flex-basis: 70%;
+}
+
+.perNight {
+  flex-basis: 80px;
+  font-size: 14px;
+  line-height: 50px;
+  margin-left: 1rem;}
+
 .submitButton {
   margin-top: 1rem;
 }

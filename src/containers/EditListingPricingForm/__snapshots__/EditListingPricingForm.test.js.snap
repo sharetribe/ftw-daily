@@ -2,21 +2,25 @@ exports[`EditListingPricingForm matches snapshot 1`] = `
 <form
   onSubmit={[Function]}>
   <div
-    className="">
-    <label
-      className=""
-      htmlFor="price">
-      Price
-    </label>
-    <input
-      className=""
-      label="Price"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      placeholder="$0.00"
-      type="text"
-      value="" />
+    className={undefined}>
+    <div
+      className="">
+      <input
+        className=""
+        label={null}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="$0.00"
+        type="text"
+        value="" />
+    </div>
+    <div
+      className={undefined}>
+      <span>
+        per night
+      </span>
+    </div>
   </div>
   <button
     className=""
