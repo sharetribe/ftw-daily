@@ -7,6 +7,7 @@ import Button, { FlatButton, InlineButton } from './Button/Button';
 import CurrencyInput from './CurrencyInput/CurrencyInput';
 import DateInput from './DateInput/DateInput';
 import Discussion from './Discussion/Discussion';
+import EditListingDescriptionPanel from './EditListingDescriptionPanel/EditListingDescriptionPanel';
 import EditListingWizard from './EditListingWizard/EditListingWizard';
 import ExternalLink from './ExternalLink/ExternalLink';
 import FilterPanel from './FilterPanel/FilterPanel';
@@ -48,6 +49,7 @@ export {
   CurrencyInput,
   DateInput,
   Discussion,
+  EditListingDescriptionPanel,
   EditListingWizard,
   ExternalLink,
   FilterPanel,
