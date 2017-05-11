@@ -30,22 +30,86 @@ const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY ||
 //
 // We currently only support EU countries, US, and AU.
 const stripeSupportedCountries = [
-  'AU', // Australia
-  'DK', // Denmark
-  'FI', // Finland
-  'FR', // France
-  'IE', // Ireland
-  'ES', // Spain
-  'SE', // Sweden
-  'GB', // United Kingdom
-  'US', // United States
-  'AT', // Austria
-  'BE', // Belgium
-  'DE', // Germany
-  'IT', // Italy
-  'LU', // Luxembourg
-  'NL', // Netherlands
-  'PT', // Portugal
+  {
+    // Australia
+    code: 'AU',
+    payoutAddressRequired: false,
+  },
+  {
+    // Denmark
+    code: 'DK',
+    payoutAddressRequired: true,
+  },
+  {
+    // Finland
+    code: 'FI',
+    payoutAddressRequired: true,
+  },
+  {
+    // France
+    code: 'FR',
+    payoutAddressRequired: true,
+  },
+  {
+    // Ireland
+    code: 'IE',
+    payoutAddressRequired: true,
+  },
+  {
+    // Spain
+    code: 'ES',
+    payoutAddressRequired: true,
+  },
+  {
+    // Sweden
+    code: 'SE',
+    payoutAddressRequired: true,
+  },
+  {
+    // United Kingdom
+    code: 'GB',
+    payoutAddressRequired: true,
+  },
+  {
+    // United States
+    code: 'US',
+    payoutAddressRequired: false,
+  },
+  {
+    // Austria
+    code: 'AT',
+    payoutAddressRequired: true,
+  },
+  {
+    // Belgium
+    code: 'BE',
+    payoutAddressRequired: true,
+  },
+  {
+    // Germany
+    code: 'DE',
+    payoutAddressRequired: true,
+  },
+  {
+    // Italy
+    code: 'IT',
+    payoutAddressRequired: true,
+  },
+  {
+    // Luxembourg
+    code: 'LU',
+    payoutAddressRequired: true,
+  },
+  {
+    // Netherlands
+    code: 'NL',
+    payoutAddressRequired: true,
+  },
+  {
+    // Portugal
+    code: 'PT',
+    payoutAddressRequired: true,
+  },
 ];
 
 // NOTE: only expose configuration that should be visible in the

@@ -7,6 +7,8 @@ import config from '../../config';
 
 import css from './StripeBankAccountToken.css';
 
+const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
+
 const DEBOUNCE_WAIT_TIME = 200;
 
 const ErrorMessage = props => <span style={{ color: 'red' }}>{props.children}</span>;
@@ -170,7 +172,7 @@ class StripeBankAccountToken extends Component {
     const { value: tokenValue, onBlur } = input;
     const { touched, error: formError } = meta;
 
-    if (!config.stripe.supportedCountries.includes(country)) {
+    if (!supportedCountries.includes(country)) {
       return (
         <ErrorMessage>
           <FormattedMessage id="StripeBankAccountToken.unsupportedCountry" values={{ country }} />
