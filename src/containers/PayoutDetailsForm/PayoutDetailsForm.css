@@ -1,0 +1,23 @@
+.root {
+
+}
+
+.countries {
+  border: 1px solid #979797;
+}
+
+.error {
+  color: red;
+}
+
+.formTitle {
+  margin-top: 0;
+}
+
+.subTitle {
+  margin-top: 60px;
+}
+
+.submitButton {
+  margin-top: 40px;
+}

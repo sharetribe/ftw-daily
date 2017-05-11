@@ -35,6 +35,7 @@ import * as SearchForm from './containers/SearchForm/SearchForm.example';
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
 import * as PasswordForgottenForm
   from './containers/PasswordForgottenForm/PasswordForgottenForm.example';
+import * as PayoutDetailsForm from './containers/PayoutDetailsForm/PayoutDetailsForm.example';
 import * as SignupForm from './containers/SignupForm/SignupForm.example';
 import * as StripePaymentForm from './containers/StripePaymentForm/StripePaymentForm.example';
 
@@ -61,6 +62,7 @@ export {
   NamedLink,
   PaginationLinks,
   PasswordForgottenForm,
+  PayoutDetailsForm,
   SearchForm,
   SignupForm,
   StripeBankAccountToken,
