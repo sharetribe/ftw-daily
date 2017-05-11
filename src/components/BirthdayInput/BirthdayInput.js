@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { range } from 'lodash';
+import { Select } from '../../components';
 
 import css from './BirthdayInput.css';
 
@@ -126,7 +127,7 @@ class BirthdayInput extends Component {
 
     return (
       <div className={classes}>
-        <select
+        <Select
           value={selectedValue(this.state.selected.day)}
           className={css.dropdown}
           onFocus={() => this.handleSelectFocus()}
@@ -135,8 +136,8 @@ class BirthdayInput extends Component {
         >
           <option />
           {days.map(d => <option key={d} value={d}>{pad(d)}</option>)}
-        </select>
-        <select
+        </Select>
+        <Select
           value={selectedValue(this.state.selected.month)}
           className={css.dropdown}
           onFocus={() => this.handleSelectFocus()}
@@ -145,8 +146,8 @@ class BirthdayInput extends Component {
         >
           <option />
           {months.map(m => <option key={m} value={m}>{pad(m)}</option>)}
-        </select>
-        <select
+        </Select>
+        <Select
           value={selectedValue(this.state.selected.year)}
           className={css.dropdown}
           onFocus={() => this.handleSelectFocus()}
@@ -155,7 +156,7 @@ class BirthdayInput extends Component {
         >
           <option />
           {years.map(y => <option key={y} value={y}>{y}</option>)}
-        </select>
+        </Select>
       </div>
     );
   }
