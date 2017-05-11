@@ -25,6 +25,8 @@ import * as ChangeAccountPasswordForm
 import * as ChangePasswordForm from './containers/ChangePasswordForm/ChangePasswordForm.example';
 import * as EditListingDescriptionForm
   from './containers/EditListingDescriptionForm/EditListingDescriptionForm.example';
+import * as EditListingLocationForm
+  from './containers/EditListingLocationForm/EditListingLocationForm.example';
 import * as SearchForm from './containers/SearchForm/SearchForm.example';
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
 import * as PasswordForgottenForm
@@ -42,6 +44,7 @@ export {
   CurrencyInput,
   DateInput,
   EditListingDescriptionForm,
+  EditListingLocationForm,
   EditListingWizard,
   ListingCard,
   LocationAutocompleteInput,

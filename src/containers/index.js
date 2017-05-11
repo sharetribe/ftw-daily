@@ -5,6 +5,7 @@ import ChangePasswordForm from './ChangePasswordForm/ChangePasswordForm';
 import CheckoutPage from './CheckoutPage/CheckoutPage';
 import ContactDetailsPage from './ContactDetailsPage/ContactDetailsPage';
 import EditListingDescriptionForm from './EditListingDescriptionForm/EditListingDescriptionForm';
+import EditListingLocationForm from './EditListingLocationForm/EditListingLocationForm';
 import EditListingPage from './EditListingPage/EditListingPage';
 import EditProfilePage from './EditProfilePage/EditProfilePage';
 import SearchForm from './SearchForm/SearchForm';
@@ -36,6 +37,7 @@ export {
   CheckoutPage,
   ContactDetailsPage,
   EditListingDescriptionForm,
+  EditListingLocationForm,
   EditListingPage,
   EditProfilePage,
   SearchForm,

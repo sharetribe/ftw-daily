@@ -8,6 +8,7 @@ import CurrencyInput from './CurrencyInput/CurrencyInput';
 import DateInput from './DateInput/DateInput';
 import Discussion from './Discussion/Discussion';
 import EditListingDescriptionPanel from './EditListingDescriptionPanel/EditListingDescriptionPanel';
+import EditListingLocationPanel from './EditListingLocationPanel/EditListingLocationPanel';
 import EditListingWizard from './EditListingWizard/EditListingWizard';
 import ExternalLink from './ExternalLink/ExternalLink';
 import FilterPanel from './FilterPanel/FilterPanel';
@@ -50,6 +51,7 @@ export {
   DateInput,
   Discussion,
   EditListingDescriptionPanel,
+  EditListingLocationPanel,
   EditListingWizard,
   ExternalLink,
   FilterPanel,
