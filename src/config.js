@@ -27,16 +27,14 @@ const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY ||
 
 // Stripe only supports payments in certain countries, see full list
 // at https://stripe.com/global
+//
+// We currently only support EU countries, US, and AU.
 const stripeSupportedCountries = [
   'AU', // Australia
-  'CA', // Canada
   'DK', // Denmark
   'FI', // Finland
   'FR', // France
   'IE', // Ireland
-  'JP', // Japan
-  'NO', // Norway
-  'SG', // Singapore
   'ES', // Spain
   'SE', // Sweden
   'GB', // United Kingdom
@@ -44,13 +42,10 @@ const stripeSupportedCountries = [
   'AT', // Austria
   'BE', // Belgium
   'DE', // Germany
-  'HK', // Hong Kong
   'IT', // Italy
   'LU', // Luxembourg
   'NL', // Netherlands
-  'NZ', // New Zealand
   'PT', // Portugal
-  'CH', // Switzerland
 ];
 
 // NOTE: only expose configuration that should be visible in the
