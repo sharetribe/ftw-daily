@@ -8,6 +8,8 @@ describe('EditListingPageComponent', () => {
     const getListing = () => null;
     const tree = renderShallow(
       <EditListingPageComponent
+        flattenedRoutes={[]}
+        history={{ push: v => v }}
         getListing={getListing}
         images={[]}
         intl={fakeIntl}

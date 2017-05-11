@@ -3,7 +3,15 @@ import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
-import { NamedRedirect, Tabs } from '../../components';
+import { createResourceLocatorString } from '../../util/routes';
+import {
+  EditListingDescriptionPanel,
+  EditListingLocationPanel,
+  EditListingPhotosPanel,
+  EditListingPricingPanel,
+  NamedRedirect,
+  Tabs,
+} from '../../components';
 
 import css from './EditListingWizard.css';
 
@@ -50,12 +58,18 @@ TestPanel.propTypes = {
 const EditListingWizard = props => {
   const {
     className,
+    flattenedRoutes,
+    history,
+    images,
     listing,
     onCreateListing,
     onCreateListingDraft,
+    onImageUpload,
+    onUpdateImageOrder,
     onUpdateListingDraft,
     rootClassName,
     selectedTab,
+    stripeConnected,
   } = props;
 
   const rootClasses = rootClassName || css.root;
@@ -85,42 +99,65 @@ const EditListingWizard = props => {
 
   return (
     <Tabs className={classes}>
-      <TestPanel
+      <EditListingDescriptionPanel
         tabLabel="Description"
         tabLinkProps={descriptionLinkProps}
-        onSubmit={onUpcertListingDraft}
         selected={selectedTab === DESCRIPTION}
         disabled={!stepsStatus[DESCRIPTION]}
-      >
-        Description form
-      </TestPanel>
-      <TestPanel
+        listing={listing}
+        onSubmit={values => {
+          onUpsertListingDraft(values);
+          // Redirect to EditListingLocationPage
+          history.push(
+            createResourceLocatorString('EditListingLocationPage', flattenedRoutes, {}, {})
+          );
+        }}
+      />
+      <EditListingLocationPanel
         tabLabel="Location"
         tabLinkProps={{ name: 'EditListingLocationPage' }}
-        onSubmit={onUpdateListingDraft}
         selected={selectedTab === LOCATION}
         disabled={!stepsStatus[LOCATION]}
-      >
-        Location form
-      </TestPanel>
-      <TestPanel
+        listing={listing}
+        onSubmit={values => {
+          const { selectedPlace: { address, origin } } = values.location;
+          onUpdateListingDraft({ address, geolocation: origin });
+
+          // Redirect to EditListingPricingPage
+          history.push(
+            createResourceLocatorString('EditListingPricingPage', flattenedRoutes, {}, {})
+          );
+        }}
+      />
+      <EditListingPricingPanel
         tabLabel="Pricing"
-        tabLinkProps={{ name: 'EditListingPricePage' }}
-        onSubmit={onUpdateListingDraft}
-        selected={selectedTab === PRICE}
+        tabLinkProps={{ name: 'EditListingPricingPage' }}
+        selected={selectedTab === PRICING}
         disabled={!stepsStatus[PRICING]}
-      >
-        Pricing form
-      </TestPanel>
-      <TestPanel
+        listing={listing}
+        onSubmit={values => {
+          onUpdateListingDraft(values);
+          // Redirect to EditListingPhotosPage
+          history.push(
+            createResourceLocatorString('EditListingPhotosPage', flattenedRoutes, {}, {})
+          );
+        }}
+      />
+      <EditListingPhotosPanel
         tabLabel="Photos"
         tabLinkProps={{ name: 'EditListingPhotosPage' }}
-        onSubmit={onCreateListing}
         selected={selectedTab === PHOTOS}
         disabled={!stepsStatus[PHOTOS]}
-      >
-        Photos form
-      </TestPanel>
+        listing={listing}
+        images={images}
+        onImageUpload={onImageUpload}
+        onSubmit={values => {
+          const { country, images: updatedImages } = values;
+          onCreateListing({ ...listing.attributes, country, images: updatedImages });
+        }}
+        onUpdateImageOrder={onUpdateImageOrder}
+        stripeConnected={stripeConnected}
+      />
     </Tabs>
   );
 };
@@ -131,16 +168,34 @@ EditListingWizard.defaultProps = {
   rootClassName: null,
 };
 
-const { func, oneOf, string } = PropTypes;
+const { array, arrayOf, bool, func, object, oneOf, shape, string } = PropTypes;
 
 EditListingWizard.propTypes = {
   className: string,
-  listing: propTypes.listing,
+  flattenedRoutes: arrayOf(propTypes.route).isRequired,
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
+  images: array.isRequired,
+  listing: shape({
+    // TODO Should be propTypes.listing after API support is added.
+    attributes: shape({
+      address: string,
+      description: string,
+      geolocation: object,
+      pricing: object,
+      title: string,
+    }),
+    images: array,
+  }),
   onCreateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
+  onImageUpload: func.isRequired,
+  onUpdateImageOrder: func.isRequired,
   onUpdateListingDraft: func.isRequired,
   rootClassName: string,
   selectedTab: oneOf(STEPS).isRequired,
+  stripeConnected: bool.isRequired,
 };
 
 export default EditListingWizard;

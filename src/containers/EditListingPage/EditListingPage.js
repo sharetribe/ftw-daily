@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { types } from '../../util/sdkLoader';
@@ -16,13 +18,21 @@ import {
 } from './EditListingPage.duck';
 
 const formatRequestData = values => {
-  const { description, images, location, price, title, bankAccountToken } = values;
-  const { selectedPlace: { address, origin, country } } = location;
+  const {
+    address,
+    country,
+    description,
+    images,
+    geolocation,
+    price,
+    title,
+    bankAccountToken,
+  } = values;
 
   return {
     address,
     description,
-    geolocation: origin,
+    geolocation,
     images: images.map(i => i.imageId),
     price,
     title,
@@ -34,6 +44,8 @@ const formatRequestData = values => {
 // N.B. All the presentational content needs to be extracted to their own components
 export const EditListingPageComponent = props => {
   const {
+    flattenedRoutes,
+    history,
     intl,
     onCreateListing,
     onImageUpload,
@@ -79,6 +91,8 @@ export const EditListingPageComponent = props => {
       <PageLayout title={title}>
         <EditListingWizard
           disabled={disableForm}
+          flattenedRoutes={flattenedRoutes}
+          history={history}
           images={images}
           listing={page.listingDraft}
           onCreateListing={onCreateListing}
@@ -113,9 +127,13 @@ EditListingPageComponent.defaultProps = {
   currentUser: null,
 };
 
-const { func, object, shape, string } = PropTypes;
+const { arrayOf, func, object, shape, string } = PropTypes;
 
 EditListingPageComponent.propTypes = {
+  flattenedRoutes: arrayOf(propTypes.route).isRequired,
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
   intl: intlShape.isRequired,
   onCreateListing: func.isRequired,
   onImageUpload: func.isRequired,
@@ -154,7 +172,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const EditListingPage = connect(mapStateToProps, mapDispatchToProps)(
+const EditListingPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
   injectIntl(EditListingPageComponent)
 );
 

@@ -3,6 +3,12 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
   title="EditListingPage.titleCreateListing">
   <EditListingWizard
     className={null}
+    flattenedRoutes={Array []}
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
     images={Array []}
     listing={null}
     onCreateListing={[Function]}
