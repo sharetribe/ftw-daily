@@ -199,7 +199,7 @@ export function requestCreateListing(data) {
         // We must update the user duck since this might be the first
         // listing for the user, therefore changing the
         // currentUserHasListings flag in the store.
-        dispatch(fetchCurrentUserHasListingsSuccess({ hasListings: true }));
+        dispatch(fetchCurrentUserHasListingsSuccess(true));
         return response;
       })
       .catch(e => dispatch(createListingError(e)));

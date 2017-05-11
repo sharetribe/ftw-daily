@@ -91,7 +91,7 @@ const fetchCurrentUserHasListingsRequest = () => ({
   type: FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST,
 });
 
-const fetchCurrentUserHasListingsSuccess = hasListings => ({
+export const fetchCurrentUserHasListingsSuccess = hasListings => ({
   type: FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS,
   payload: { hasListings },
 });
