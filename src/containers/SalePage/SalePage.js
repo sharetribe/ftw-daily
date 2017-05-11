@@ -37,7 +37,7 @@ export const SalePageComponent = props => {
   if (isDataAvailable && !isOwnSale) {
     // eslint-disable-next-line no-console
     console.error('Tried to access a sale that was not owned by the current user');
-    return <NamedRedirect name="InboxSalesPage" />;
+    return <NamedRedirect name="InboxPage" params={{ tab: 'sales' }} />;
   }
 
   const detailsProps = {
