@@ -23,7 +23,6 @@ import * as BookingDatesForm from './containers/BookingDatesForm/BookingDatesFor
 import * as ChangeAccountPasswordForm
   from './containers/ChangeAccountPasswordForm/ChangeAccountPasswordForm.example';
 import * as ChangePasswordForm from './containers/ChangePasswordForm/ChangePasswordForm.example';
-import * as EditListingForm from './containers/EditListingForm/EditListingForm.example';
 import * as SearchForm from './containers/SearchForm/SearchForm.example';
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
 import * as PasswordForgottenForm
@@ -40,7 +39,6 @@ export {
   ChangePasswordForm,
   CurrencyInput,
   DateInput,
-  EditListingForm,
   EditListingWizard,
   ListingCard,
   LocationAutocompleteInput,
