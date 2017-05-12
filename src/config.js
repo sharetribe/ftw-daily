@@ -14,7 +14,7 @@ const sdkBaseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'http://loca
 // E.g. 1099¢ / subUnitDivisor = $10.99
 const currencyConfig = {
   style: 'currency',
-  currency: 'USD',
+  currency: process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY || 'USD',
   currencyDisplay: 'symbol',
   useGrouping: true,
   minimumFractionDigits: 2,
