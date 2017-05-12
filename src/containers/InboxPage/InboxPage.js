@@ -129,7 +129,8 @@ export const InboxPageComponent = props => {
       </li>
     : null;
 
-  const pagingLinks = !fetchInProgress && pagination && pagination.totalPages !== 1
+  const hasTransactions = !fetchInProgress && transactions && transactions.length > 0;
+  const pagingLinks = hasTransactions && pagination && pagination.totalPages !== 1
     ? <PaginationLinks
         className={css.pagination}
         pageName="InboxPage"
