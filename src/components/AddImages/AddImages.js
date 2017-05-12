@@ -49,7 +49,9 @@ class Thumbnail extends Component {
         renderFulfilled={dataURL => {
           return (
             <li className={css.thumbnail}>
-              <img src={dataURL} alt={file.name} className={css.thumbnailImage} />
+              <div className={css.aspectRatioWrapper}>
+                <img src={dataURL} alt={file.name} className={css.thumbnailImage} />
+              </div>
               {uploadingOverlay}
             </li>
           );

@@ -25,8 +25,10 @@ const RenderAddImage = props => {
   const inputProps = { accept, id: name, name, onChange, type };
   return (
     <div className={css.addImageWrapper}>
-      <Input {...inputProps} className={css.addImageInput} />
-      <label htmlFor={name} className={css.addImage}>{label}</label>
+      <div className={css.aspectRatioWrapper}>
+        <Input {...inputProps} className={css.addImageInput} />
+        <label htmlFor={name} className={css.addImage}>{label}</label>
+      </div>
     </div>
   );
 };
