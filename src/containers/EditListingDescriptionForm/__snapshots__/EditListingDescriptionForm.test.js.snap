@@ -9,6 +9,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
       Name of your sauna
     </label>
     <input
+      autoFocus={true}
       className=""
       name="title"
       onBlur={[Function]}

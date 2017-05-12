@@ -5,6 +5,7 @@ exports[`SearchForm matches snapshot 1`] = `
     className={undefined}>
     <input
       autoComplete="off"
+      autoFocus={false}
       className=""
       name="location"
       onBlur={[Function]}

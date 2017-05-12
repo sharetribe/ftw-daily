@@ -57,6 +57,7 @@ export class EditListingDescriptionFormComponent extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <Field
+          autoFocus
           name="title"
           label={titleMessage}
           placeholder={titlePlaceholderMessage}

@@ -6,6 +6,7 @@ exports[`EditListingPricingForm matches snapshot 1`] = `
     <div
       className="">
       <input
+        autoFocus={true}
         className=""
         label={null}
         onBlur={[Function]}

@@ -2,6 +2,7 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
 <form
   onSubmit={[Function]}>
   <Field
+    autoFocus={true}
     component={[Function]}
     format={null}
     label="EditListingLocationForm.location"

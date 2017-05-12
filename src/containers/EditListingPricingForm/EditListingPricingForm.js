@@ -38,6 +38,7 @@ export class EditListingPricingFormComponent extends Component {
       <form onSubmit={handleSubmit}>
         <div className={css.priceWrapper}>
           <Field
+            autoFocus
             name="price"
             component={this.EnhancedCurrencyInput}
             currencyConfig={config.currencyConfig}

@@ -41,6 +41,7 @@ export class EditListingLocationFormComponent extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <Field
+          autoFocus
           name="location"
           label={titleRequiredMessage}
           format={null}

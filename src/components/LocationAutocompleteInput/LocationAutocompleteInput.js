@@ -45,7 +45,7 @@ const LocationPredictionsList = props => {
   );
 };
 
-const { shape, string, arrayOf, func, any, number } = PropTypes;
+const { bool, shape, string, arrayOf, func, any, number } = PropTypes;
 
 LocationPredictionsList.defaultProps = { highlightedIndex: null };
 
@@ -269,7 +269,7 @@ class LocationAutocompleteInput extends Component {
       });
   }
   render() {
-    const { className, placeholder, input } = this.props;
+    const { autoFocus, className, placeholder, input } = this.props;
     const { name, onFocus, onBlur } = input;
     const { search, predictions } = currentValue(this.props);
 
@@ -300,6 +300,7 @@ class LocationAutocompleteInput extends Component {
           className={classNames(css.input, className)}
           type="search"
           autoComplete="off"
+          autoFocus={autoFocus}
           placeholder={placeholder}
           name={name}
           value={search}
@@ -325,9 +326,10 @@ class LocationAutocompleteInput extends Component {
   }
 }
 
-LocationAutocompleteInput.defaultProps = { className: '', placeholder: '' };
+LocationAutocompleteInput.defaultProps = { autoFocus: false, className: '', placeholder: '' };
 
 LocationAutocompleteInput.propTypes = {
+  autoFocus: bool,
   className: string,
   placeholder: string,
   input: shape({
