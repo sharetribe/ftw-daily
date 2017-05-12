@@ -127,6 +127,7 @@
   "SignupForm.termsOfService": "By confirming I accept the terms and conditions and the {stripeConnectedAccountAgreementLink}",
   "StripeBankAccountToken.accountNumberPlaceholder": "account number",
   "StripeBankAccountToken.bankAccountNumberLabel": "Bank account number:",
+  "StripeBankAccountToken.routingNumberLabel": "Routing number:",
   "StripeBankAccountToken.bankAccountNumberLabelIban": "Bank account number (IBAN):",
   "StripeBankAccountToken.createBankAccountTokenError": "Could not connect account number. Please double-check that your routing number and account number are valid in {country} when using {currency}",
   "StripeBankAccountToken.createBankAccountTokenErrorIban": "Could not connect account number. Please double-check that your account number is valid in {country} when using {currency}",

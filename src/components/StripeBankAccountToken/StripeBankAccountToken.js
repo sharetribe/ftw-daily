@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { debounce } from 'lodash';
-import { Input } from '../../components';
+import { Input, ValidationError } from '../../components';
 import config from '../../config';
 
 import css from './StripeBankAccountToken.css';
@@ -10,9 +10,6 @@ import css from './StripeBankAccountToken.css';
 const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
 
 const DEBOUNCE_WAIT_TIME = 200;
-
-const ErrorMessage = props => <span style={{ color: 'red' }}>{props.children}</span>;
-ErrorMessage.propTypes = { children: PropTypes.any.isRequired };
 
 /**
  * Create a single-use token from the given bank account data
@@ -170,13 +167,12 @@ class StripeBankAccountToken extends Component {
   render() {
     const { country, currency, input, meta, intl } = this.props;
     const { value: tokenValue, onBlur } = input;
-    const { touched, error: formError } = meta;
 
     if (!supportedCountries.includes(country)) {
       return (
-        <ErrorMessage>
+        <div className={css.unsupportedCountryError}>
           <FormattedMessage id="StripeBankAccountToken.unsupportedCountry" values={{ country }} />
-        </ErrorMessage>
+        </div>
       );
     }
 
@@ -194,7 +190,7 @@ class StripeBankAccountToken extends Component {
 
     const handleRoutingNumberChange = e => {
       const value = e.target.value.trim();
-      this.setState({ routingNumber: value });
+      this.setState({ routingNumber: value, error: null });
       this.requestToken(this.state.accountNumber, value);
     };
 
@@ -207,41 +203,43 @@ class StripeBankAccountToken extends Component {
     });
 
     const routingNumberInput = (
-      <Input
-        inline={routingNumRequired}
-        className={css.routingNumber}
-        name="routingNumber"
-        value={this.state.routingNumber}
-        placeholder={routingNumberPlaceholder}
-        onChange={handleRoutingNumberChange}
-        onBlur={handleBlur}
-      />
+      <div>
+        <label htmlFor="routingNumber">
+          <FormattedMessage id="StripeBankAccountToken.routingNumberLabel" />
+        </label>
+        <Input
+          name="routingNumber"
+          value={this.state.routingNumber}
+          placeholder={routingNumberPlaceholder}
+          onChange={handleRoutingNumberChange}
+          onBlur={handleBlur}
+        />
+      </div>
     );
 
-    const showErrors = touched;
+    const { touched, error: metaError } = meta;
+    const stateErrorMessage = this.state.error ? this.state.error.message : null;
+    const error = <ValidationError fieldMeta={{ touched, error: stateErrorMessage }} />;
+    const formError = this.state.error
+      ? null
+      : <ValidationError fieldMeta={{ touched, error: metaError }} />;
 
     return (
       <div>
+        {routingNumRequired ? routingNumberInput : null}
         <label htmlFor={input.name}>
           {routingNumRequired
             ? <FormattedMessage id="StripeBankAccountToken.bankAccountNumberLabel" />
             : <FormattedMessage id="StripeBankAccountToken.bankAccountNumberLabelIban" />}
         </label>
-        {routingNumRequired ? routingNumberInput : null}
         <Input
-          inline={routingNumRequired}
-          className={routingNumRequired ? css.accountNumberNotIban : null}
           value={this.state.accountNumber}
           placeholder={accountNumberPlaceholder}
           onChange={handleAccountNumberChange}
           onBlur={handleBlur}
         />
-        {showErrors && this.state.error
-          ? <ErrorMessage>{this.state.error.message}</ErrorMessage>
-          : null}
-        {showErrors && formError && !this.state.error
-          ? <ErrorMessage>{formError}</ErrorMessage>
-          : null}
+        {error}
+        {formError}
       </div>
     );
   }
