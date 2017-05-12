@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
-import { intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import config from '../../config';
 import { enhancedField } from '../../util/forms';
 import { required } from '../../util/validators';
@@ -16,7 +16,7 @@ export class EditListingPricingFormComponent extends Component {
     // We must create the enhanced components outside the render function
     // to avoid losing focus.
     // See: https://github.com/erikras/redux-form/releases/tag/v6.0.0-alpha.14
-    this.EnhancedCurrencyInput = enhancedField(CurrencyInput);
+    this.EnhancedCurrencyInput = enhancedField(CurrencyInput, { rootClassName: css.priceInput });
   }
 
   render() {
@@ -29,7 +29,6 @@ export class EditListingPricingFormComponent extends Component {
       submitting,
     } = this.props;
 
-    const priceMessage = intl.formatMessage({ id: 'EditListingPricingForm.price' });
     const priceRequiredMessage = intl.formatMessage({ id: 'EditListingPricingForm.priceRequired' });
     const pricePlaceholderMessage = intl.formatMessage({
       id: 'EditListingPricingForm.pricePlaceholder',
@@ -37,14 +36,18 @@ export class EditListingPricingFormComponent extends Component {
 
     return (
       <form onSubmit={handleSubmit}>
-        <Field
-          name="price"
-          label={priceMessage}
-          component={this.EnhancedCurrencyInput}
-          currencyConfig={config.currencyConfig}
-          validate={[required(priceRequiredMessage)]}
-          placeholder={pricePlaceholderMessage}
-        />
+        <div className={css.priceWrapper}>
+          <Field
+            name="price"
+            component={this.EnhancedCurrencyInput}
+            currencyConfig={config.currencyConfig}
+            validate={[required(priceRequiredMessage)]}
+            placeholder={pricePlaceholderMessage}
+          />
+          <div className={css.perNight}>
+            <FormattedMessage id="EditListingPricingForm.perNight" />
+          </div>
+        </div>
 
         <Button
           className={css.submitButton}

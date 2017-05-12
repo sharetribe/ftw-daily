@@ -27,9 +27,13 @@ export const enhancedField = (Comp, options = {}) => {
     } else {
       component = <Input {...otherProps} {...input} type={type} placeholder={placeholder} />;
     }
+    const labelInfo = label
+      ? <label className={labelClassName} htmlFor={input.name}>{label}</label>
+      : null;
+
     return (
       <div className={rootClassName}>
-        <label className={labelClassName} htmlFor={input.name}>{label}</label>
+        {labelInfo}
         {component}
         <ValidationError className={errorClassName} fieldMeta={meta} />
       </div>
@@ -41,7 +45,7 @@ export const enhancedField = (Comp, options = {}) => {
   }
   EnhancedField.displayName = `EnhancedField(${displayName})`;
 
-  EnhancedField.defaultProps = { type: null, placeholder: '' };
+  EnhancedField.defaultProps = { type: null, placeholder: '', label: null };
 
   const { shape, func, string, object } = PropTypes;
 
@@ -51,7 +55,7 @@ export const enhancedField = (Comp, options = {}) => {
       name: string.isRequired,
     }).isRequired,
     type: string,
-    label: string.isRequired,
+    label: string,
     placeholder: string,
     meta: object.isRequired,
   };
