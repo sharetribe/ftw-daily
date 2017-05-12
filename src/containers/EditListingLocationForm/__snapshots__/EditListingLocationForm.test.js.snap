@@ -1,0 +1,22 @@
+exports[`EditListingLocationForm matches snapshot 1`] = `
+<form
+  onSubmit={[Function]}>
+  <Field
+    component={[Function]}
+    format={null}
+    label="EditListingLocationForm.location"
+    name="location"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    } />
+  <Button
+    className={null}
+    rootClassName=""
+    type="submit">
+    Next: pricing
+  </Button>
+</form>
+`;

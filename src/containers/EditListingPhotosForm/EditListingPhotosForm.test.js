@@ -5,15 +5,16 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl, fakeFormProps } from '../../util/test-data';
-import { EditListingFormComponent } from './EditListingForm';
+import { EditListingPhotosFormComponent } from './EditListingPhotosForm';
 
 const noop = () => null;
 
-describe('EditListingForm', () => {
+describe('EditListingPhotosForm', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
-      <EditListingFormComponent
+      <EditListingPhotosFormComponent
         {...fakeFormProps}
+        initialValues={{ country: 'US', images: [] }}
         intl={fakeIntl}
         dispatch={noop}
         onImageUpload={v => v}

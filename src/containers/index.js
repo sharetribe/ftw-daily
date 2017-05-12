@@ -4,7 +4,10 @@ import ChangeAccountPasswordForm from './ChangeAccountPasswordForm/ChangeAccount
 import ChangePasswordForm from './ChangePasswordForm/ChangePasswordForm';
 import CheckoutPage from './CheckoutPage/CheckoutPage';
 import ContactDetailsPage from './ContactDetailsPage/ContactDetailsPage';
-import EditListingForm from './EditListingForm/EditListingForm';
+import EditListingDescriptionForm from './EditListingDescriptionForm/EditListingDescriptionForm';
+import EditListingLocationForm from './EditListingLocationForm/EditListingLocationForm';
+import EditListingPhotosForm from './EditListingPhotosForm/EditListingPhotosForm';
+import EditListingPricingForm from './EditListingPricingForm/EditListingPricingForm';
 import EditListingPage from './EditListingPage/EditListingPage';
 import EditProfilePage from './EditProfilePage/EditProfilePage';
 import SearchForm from './SearchForm/SearchForm';
@@ -35,7 +38,10 @@ export {
   ChangePasswordForm,
   CheckoutPage,
   ContactDetailsPage,
-  EditListingForm,
+  EditListingDescriptionForm,
+  EditListingLocationForm,
+  EditListingPhotosForm,
+  EditListingPricingForm,
   EditListingPage,
   EditProfilePage,
   SearchForm,

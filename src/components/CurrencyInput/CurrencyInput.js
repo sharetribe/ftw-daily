@@ -8,6 +8,7 @@ import { intlShape, injectIntl } from 'react-intl';
 import { types } from '../../util/sdkLoader';
 import {
   convertUnitToSubUnit,
+  convertMoneyToNumber,
   ensureDotSeparator,
   ensureSeparator,
   truncateToSubUnitPrecision,
@@ -40,7 +41,10 @@ const getPrice = (unformattedValue, currencyConfig) => {
 class CurrencyInput extends Component {
   constructor(props) {
     super(props);
-    const { currencyConfig, defaultValue, intl } = props;
+    const { currencyConfig, defaultValue, input, intl } = props;
+    const initialValue = input.value instanceof types.Money
+      ? convertMoneyToNumber(input.value, currencyConfig.subUnitDivisor)
+      : defaultValue;
 
     // We need to handle number format - some locales use dots and some commas as decimal separator
     // TODO Figure out if this could be digged from React-Intl directly somehow
@@ -50,15 +54,15 @@ class CurrencyInput extends Component {
     try {
       // whatever is passed as a default value, will be converted to currency string
       // Unformatted value is digits + localized sub unit separator ("9,99")
-      const unformattedValue = defaultValue
+      const unformattedValue = initialValue
         ? truncateToSubUnitPrecision(
-            ensureSeparator(defaultValue.toString(), usesComma),
+            ensureSeparator(initialValue.toString(), usesComma),
             currencyConfig.subUnitDivisor,
             usesComma
           )
         : '';
       // Formatted value fully localized currency string ("$1,000.99")
-      const formattedValue = defaultValue
+      const formattedValue = initialValue
         ? intl.formatNumber(ensureDotSeparator(unformattedValue), currencyConfig)
         : '';
 

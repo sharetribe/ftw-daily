@@ -1,0 +1,15 @@
+.root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.descriptionField {
+  border: 1px solid #979797;
+  padding: 18px;
+}
+
+.submitButton {
+  margin-top: 1rem;
+}

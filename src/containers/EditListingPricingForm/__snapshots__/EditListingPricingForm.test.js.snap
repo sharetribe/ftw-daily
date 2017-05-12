@@ -1,0 +1,28 @@
+exports[`EditListingPricingForm matches snapshot 1`] = `
+<form
+  onSubmit={[Function]}>
+  <div
+    className="">
+    <label
+      className=""
+      htmlFor="price">
+      Price
+    </label>
+    <input
+      className=""
+      label="Price"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="$0.00"
+      type="text"
+      value="" />
+  </div>
+  <button
+    className=""
+    disabled={true}
+    type="submit">
+    Next: photos
+  </button>
+</form>
+`;

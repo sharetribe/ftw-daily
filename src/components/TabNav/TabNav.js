@@ -5,23 +5,26 @@ import { NamedLink } from '../../components';
 import css from './TabNav.css';
 
 const Tab = props => {
-  const { text, selected, linkProps } = props;
-  const classes = classNames(css.tab, {
-    [css.selected]: selected,
+  const { disabled, text, selected, linkProps } = props;
+  const linkClasses = classNames(css.link, {
+    [css.selectedLink]: selected,
+    [css.disabled]: disabled,
   });
+
   return (
-    <div className={classes}>
-      <NamedLink className={css.link} {...linkProps}>{text}</NamedLink>
+    <div className={css.tab}>
+      <NamedLink className={linkClasses} {...linkProps}>{text}</NamedLink>
     </div>
   );
 };
 
-Tab.defaultProps = { selected: false };
+Tab.defaultProps = { disabled: false, selected: false };
 
 const { arrayOf, object, string, bool } = PropTypes;
 
 Tab.propTypes = {
   text: string.isRequired,
+  disabled: bool,
   selected: bool,
   linkProps: object.isRequired,
 };

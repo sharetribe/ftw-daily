@@ -18,14 +18,14 @@ export const enhancedField = (Comp, options = {}) => {
   const { rootClassName = '', labelClassName = '', errorClassName = '' } = options;
 
   const EnhancedField = props => {
-    const { input, type, label, placeholder, meta } = props;
+    const { input, type, label, placeholder, meta, ...otherProps } = props;
     let component = null;
     if (typeof Comp !== 'string') {
       component = <Comp {...props} />;
     } else if (Comp === 'textarea') {
-      component = <textarea {...input} placeholder={placeholder} />;
+      component = <textarea {...otherProps} {...input} placeholder={placeholder} />;
     } else {
-      component = <Input {...input} type={type} placeholder={placeholder} />;
+      component = <Input {...otherProps} {...input} type={type} placeholder={placeholder} />;
     }
     return (
       <div className={rootClassName}>

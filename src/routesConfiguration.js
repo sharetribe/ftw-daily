@@ -89,7 +89,35 @@ const routesConfiguration = [
         path: '/l/new',
         exact: true,
         name: 'NewListingPage',
-        component: props => <EditListingPage {...props} type={'new'} />,
+        component: props => <EditListingPage {...props} type={'new'} tab={'description'} />,
+      },
+      {
+        auth: true,
+        path: '/l/new-description', // TODO should be l/:slug/:id/description
+        exact: true,
+        name: 'EditListingDescriptionPage',
+        component: props => <EditListingPage {...props} type={'new'} tab={'description'} />,
+      },
+      {
+        auth: true,
+        path: '/l/new-location', // TODO should be l/:slug/:id/location
+        exact: true,
+        name: 'EditListingLocationPage',
+        component: props => <EditListingPage {...props} type={'new'} tab={'location'} />,
+      },
+      {
+        auth: true,
+        path: '/l/new-pricing', // TODO should be l/:slug/:id/pricing
+        exact: true,
+        name: 'EditListingPricingPage',
+        component: props => <EditListingPage {...props} type={'new'} tab={'pricing'} />,
+      },
+      {
+        auth: true,
+        path: '/l/new-photos', // TODO should be l/:slug/:id/photos
+        exact: true,
+        name: 'EditListingPhotosPage',
+        component: props => <EditListingPage {...props} type={'new'} tab={'photos'} />,
       },
       {
         auth: true,
