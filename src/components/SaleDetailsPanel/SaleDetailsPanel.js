@@ -93,6 +93,22 @@ const SaleDetailsPanel = props => {
         ),
       };
       break;
+    case propTypes.TX_STATE_DELIVERED:
+      stateMsgData = {
+        title: (
+          <FormattedMessage
+            id="SaleDetailsPanel.listingDeliveredTitle"
+            values={{ customerName: customerName, title: listingLink }}
+          />
+        ),
+        message: (
+          <div className={css.message}>
+            <FormattedMessage id="SaleDetailsPanel.saleDeliveredStatus" />
+            <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
+          </div>
+        ),
+      };
+      break;
     default:
       stateMsgData = { title: null, message: null };
   }
