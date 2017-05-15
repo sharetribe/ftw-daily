@@ -120,8 +120,14 @@ const EditListingWizard = props => {
         disabled={!stepsStatus[LOCATION]}
         listing={listing}
         onSubmit={values => {
-          const { selectedPlace: { address, origin } } = values.location;
-          onUpdateListingDraft({ address, geolocation: origin });
+          const { building, location } = values;
+          const { selectedPlace: { address, origin } } = location;
+
+          // TODO When API supports building number, etc. change this to use those fields instead.
+          onUpdateListingDraft({
+            address: JSON.stringify({ locationAddress: address, building }),
+            geolocation: origin,
+          });
 
           // Redirect to EditListingPricingPage
           history.push(

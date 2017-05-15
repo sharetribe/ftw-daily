@@ -18,6 +18,7 @@ export class EditListingLocationFormComponent extends Component {
     // to avoid losing focus.
     // See: https://github.com/erikras/redux-form/releases/tag/v6.0.0-alpha.14
     this.EnhancedLocationAutocompleteInput = enhancedField(LocationAutocompleteInput);
+    this.EnhancedInput = enhancedField('input');
   }
 
   render() {
@@ -30,12 +31,17 @@ export class EditListingLocationFormComponent extends Component {
       submitting,
     } = this.props;
 
-    const titleRequiredMessage = intl.formatMessage({ id: 'EditListingLocationForm.location' });
-    const locationRequiredMessage = intl.formatMessage({
-      id: 'EditListingLocationForm.locationRequired',
+    const titleRequiredMessage = intl.formatMessage({ id: 'EditListingLocationForm.address' });
+    const addressRequiredMessage = intl.formatMessage({
+      id: 'EditListingLocationForm.addressRequired',
     });
-    const locationNotRecognizedMessage = intl.formatMessage({
-      id: 'EditListingLocationForm.locationNotRecognized',
+    const addressNotRecognizedMessage = intl.formatMessage({
+      id: 'EditListingLocationForm.addressNotRecognized',
+    });
+
+    const buildingMessage = intl.formatMessage({ id: 'EditListingLocationForm.building' });
+    const buildingPlaceholderMessage = intl.formatMessage({
+      id: 'EditListingLocationForm.buildingPlaceholder',
     });
 
     return (
@@ -47,9 +53,17 @@ export class EditListingLocationFormComponent extends Component {
           format={null}
           component={this.EnhancedLocationAutocompleteInput}
           validate={[
-            autocompleteSearchRequired(locationRequiredMessage),
-            autocompletePlaceSelected(locationNotRecognizedMessage),
+            autocompleteSearchRequired(addressRequiredMessage),
+            autocompletePlaceSelected(addressNotRecognizedMessage),
           ]}
+        />
+
+        <Field
+          name="building"
+          label={buildingMessage}
+          placeholder={buildingPlaceholderMessage}
+          component={this.EnhancedInput}
+          type="text"
         />
 
         <Button

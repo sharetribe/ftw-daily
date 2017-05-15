@@ -15,11 +15,25 @@ const EditListingLocationPanel = props => {
   // Only render current search if full place object is available in the URL params
   // TODO bounds and country are missing - those need to be queried directly from Google Places
   const locationFieldsPresent = address && geolocation;
+
+  // TODO location address is currently serialized inside address field (API will change later)
+  // Content is something like { locationAddress: 'Street, Province, Country', building: 'A 42' };
+  let locationAddress = "";
+  let building = "";
+  try {
+    const deserializedAddress = JSON.parse(address || "{}");
+    locationAddress = deserializedAddress.locationAddress;
+    building = deserializedAddress.building;
+  } catch(e) {
+    locationAddress = address;
+  }
+
   const initialSearchFormValues = {
+    building,
     location: locationFieldsPresent
       ? {
-          search: address,
-          selectedPlace: { address, origin: geolocation },
+          search: locationAddress,
+          selectedPlace: { address: locationAddress, origin: geolocation },
         }
       : null,
   };
