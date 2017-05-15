@@ -5,7 +5,7 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
     autoFocus={true}
     component={[Function]}
     format={null}
-    label="EditListingLocationForm.location"
+    label="EditListingLocationForm.address"
     name="location"
     validate={
       Array [
@@ -13,6 +13,12 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
         [Function],
       ]
     } />
+  <Field
+    component={[Function]}
+    label="EditListingLocationForm.building"
+    name="building"
+    placeholder="EditListingLocationForm.buildingPlaceholder"
+    type="text" />
   <Button
     className={null}
     rootClassName=""

@@ -95,9 +95,19 @@ export class ListingPageComponent extends Component {
       title = '',
     } = attributes;
 
+    // TODO location address is currently serialized inside address field (API will change later)
+    // Content is something like { locationAddress: 'Street, Province, Country', building: 'A 42' };
+    let locationAddress = "";
+    try {
+      const deserializedAddress = JSON.parse(address || "{}");
+      locationAddress = deserializedAddress.locationAddress;
+    } catch(e) {
+      locationAddress = address;
+    }
+
     const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' }, { title });
     const { formattedPrice, priceTitle } = priceData(price, currencyConfig, intl);
-    const map = geolocation ? <Map center={geolocation} address={address} /> : null;
+    const map = geolocation ? <Map center={geolocation} address={locationAddress} /> : null;
 
     // TODO Responsive image-objects need to be thought through when final image sizes are known
     const images = currentListing && currentListing.images
