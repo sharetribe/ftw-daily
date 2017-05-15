@@ -17,7 +17,6 @@
   "BookingDatesForm.requiredDate": "Oops, make sure your date is correct!",
   "BookingDatesForm.youWontBeChargedInfo": "You won't be charged yet",
   "BookingInfo.bookingPeriod": "{bookingStart} - {bookingEnd}",
-  "BookingInfo.bookingPeriodLabel": "Booking period:",
   "BookingInfo.commission": "{marketplace} fee:",
   "BookingInfo.nightCount": "{count, number} {count, plural, one {night} other {nights}}",
   "BookingInfo.pricePerDay":"Price per night:",

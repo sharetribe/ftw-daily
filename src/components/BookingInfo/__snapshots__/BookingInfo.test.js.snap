@@ -19,10 +19,6 @@ exports[`BookingInfo customer transaction data matches snapshot 1`] = `
     <div
       className={undefined}>
       <span>
-        Booking period:
-      </span>
-      <br />
-      <span>
         4/14/2017 - 4/16/2017
       </span>
     </div>
@@ -72,10 +68,6 @@ exports[`BookingInfo pretransaction data matches snapshot 1`] = `
     <div
       className={undefined}>
       <span>
-        Booking period:
-      </span>
-      <br />
-      <span>
         4/14/2017 - 4/16/2017
       </span>
     </div>
@@ -124,10 +116,6 @@ exports[`BookingInfo provider transaction data matches snapshot 1`] = `
     className={undefined}>
     <div
       className={undefined}>
-      <span>
-        Booking period:
-      </span>
-      <br />
       <span>
         4/14/2017 - 4/16/2017
       </span>
