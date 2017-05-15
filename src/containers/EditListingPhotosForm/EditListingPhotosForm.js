@@ -11,7 +11,7 @@ import {
   Button,
   Input,
   StripeBankAccountToken,
-  ValidationError
+  ValidationError,
 } from '../../components';
 
 import css from './EditListingPhotosForm.css';

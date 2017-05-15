@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Input, ValidationError } from '../components';
 
 /**
@@ -17,37 +17,50 @@ import { Input, ValidationError } from '../components';
 export const enhancedField = (Comp, options = {}) => {
   const { rootClassName = '', labelClassName = '', errorClassName = '' } = options;
 
-  const EnhancedField = props => {
-    const { input, type, label, placeholder, meta, ...otherProps } = props;
-    let component = null;
-    if (typeof Comp !== 'string') {
-      component = <Comp {...props} />;
-    } else if (Comp === 'textarea') {
-      component = <textarea {...otherProps} {...input} placeholder={placeholder} />;
-    } else {
-      component = <Input {...otherProps} {...input} type={type} placeholder={placeholder} />;
+  class EnhancedField extends Component {
+    componentWillUnmount() {
+      if (this.props.clearOnUnmount) {
+        this.props.input.onChange('');
+      }
     }
-    const labelInfo = label
-      ? <label className={labelClassName} htmlFor={input.name}>{label}</label>
-      : null;
+    render() {
+      /* eslint-disable no-unused-vars */
+      const { clearOnUnmount, ...restProps } = this.props;
+      /* eslint-enable no-unused-vars */
+      const { input, type, label, placeholder, meta, ...otherProps } = restProps;
 
-    return (
-      <div className={rootClassName}>
-        {labelInfo}
-        {component}
-        <ValidationError className={errorClassName} fieldMeta={meta} />
-      </div>
-    );
-  };
+      let component = null;
+
+      if (typeof Comp !== 'string') {
+        component = <Comp {...restProps} />;
+      } else if (Comp === 'textarea') {
+        component = <textarea {...otherProps} {...input} placeholder={placeholder} />;
+      } else {
+        component = <Input {...otherProps} {...input} type={type} placeholder={placeholder} />;
+      }
+      const labelInfo = label
+        ? <label className={labelClassName} htmlFor={input.name}>{label}</label>
+        : null;
+
+      return (
+        <div className={rootClassName}>
+          {labelInfo}
+          {component}
+          <ValidationError className={errorClassName} fieldMeta={meta} />
+        </div>
+      );
+    }
+  }
+
   let displayName = Comp;
   if (Comp && typeof Comp !== 'string') {
     displayName = Comp.displayName || Comp.name;
   }
   EnhancedField.displayName = `EnhancedField(${displayName})`;
 
-  EnhancedField.defaultProps = { type: null, placeholder: '', label: null };
+  EnhancedField.defaultProps = { type: null, placeholder: '', label: null, clearOnUnmount: false };
 
-  const { shape, func, string, object } = PropTypes;
+  const { shape, func, string, object, bool } = PropTypes;
 
   EnhancedField.propTypes = {
     input: shape({
@@ -58,6 +71,7 @@ export const enhancedField = (Comp, options = {}) => {
     label: string,
     placeholder: string,
     meta: object.isRequired,
+    clearOnUnmount: bool,
   };
 
   return EnhancedField;

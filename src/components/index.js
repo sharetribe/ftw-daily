@@ -37,6 +37,7 @@ import Promised from './Promised/Promised';
 import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
+import Select from './Select/Select';
 import StripeBankAccountToken from './StripeBankAccountToken/StripeBankAccountToken';
 import TabNav from './TabNav/TabNav';
 import Tabs from './Tabs/Tabs';
@@ -84,6 +85,7 @@ export {
   RoutesProvider,
   SaleDetailsPanel,
   SearchResultsPanel,
+  Select,
   StripeBankAccountToken,
   TabNav,
   Tabs,

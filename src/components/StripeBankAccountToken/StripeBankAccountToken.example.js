@@ -8,7 +8,8 @@ import { required } from '../../util/validators';
 import config from '../../config';
 
 const invalidCountries = ['RU', 'CX', 'invalid'];
-const countries = config.stripe.supportedCountries.concat(invalidCountries);
+const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
+const countries = supportedCountries.concat(invalidCountries);
 const currencies = ['USD', 'EUR'];
 
 const FormComponent = props => {
