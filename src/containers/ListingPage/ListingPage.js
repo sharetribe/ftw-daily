@@ -10,7 +10,7 @@ import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import { convertMoneyToNumber } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import { Button, Map, ModalInMobile, PageLayout } from '../../components';
+import { Avatar, Button, Map, ModalInMobile, PageLayout } from '../../components';
 import { BookingDatesForm } from '../../containers';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { showListing } from './ListingPage.duck';
@@ -159,6 +159,22 @@ export class ListingPageComponent extends Component {
       currentListing.author.id.uuid === currentUser.id.uuid;
     const showBookButton = !isOwnListing;
 
+    const authorAvailable = currentListing && currentListing.author;
+    const authorProfile = authorAvailable && currentListing.author.attributes.profile
+    const authorName = authorAvailable
+      ? `${authorProfile.firstName} ${authorProfile.lastName}`
+      : '';
+    const authorInfo = authorAvailable
+      ? <div className={css.author}>
+          <div className={css.avatarWrapper}>
+            <Avatar name={authorName} />
+          </div>
+          <div className={css.authorDetails}>
+            <span className={css.authorName}>{authorName}</span>
+          </div>
+        </div>
+      : null;
+
     const listingClasses = classNames(css.listing, { [css.bookable]: showBookButton });
 
     const pageContent = (
@@ -180,6 +196,7 @@ export class ListingPageComponent extends Component {
           {/* eslint-disable react/no-danger */}
           <div className={css.description} dangerouslySetInnerHTML={{ __html: description }} />
           {/* eslint-enable react/no-danger */}
+          {authorInfo}
           <ModalInMobile
             isModalOpenOnMobile={this.state.isBookingModalOpenOnMobile}
             onClose={() => this.setState({ isBookingModalOpenOnMobile: false })}
