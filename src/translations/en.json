@@ -47,7 +47,6 @@
   "EditListingPhotosForm.bankAccountNumberRequired": "You need to add a bank account number.",
   "EditListingPhotosPanel.title": "Add photos",
   "EditListingPricingForm.perNight": "per night",
-  "EditListingPricingForm.pricePlaceholder": "$0.00",
   "EditListingPricingForm.priceRequired": "You need to add a valid price.",
   "EditListingPricingPanel.title": "How much does it cost?",
   "EditListingPage.titleCreateListing": "Create a listing",
