@@ -49,6 +49,10 @@ const txState = (intl, tx) => {
     return intl.formatMessage({
       id: 'InboxPage.stateRejected',
     });
+  } else if (state === propTypes.TX_STATE_DELIVERED) {
+    return intl.formatMessage({
+      id: 'InboxPage.stateDelivered',
+    });
   }
   return intl.formatMessage({
     id: 'InboxPage.statePending',

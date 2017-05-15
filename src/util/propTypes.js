@@ -131,8 +131,9 @@ export const booking = shape({
 export const TX_STATE_ACCEPTED = 'state/accepted';
 export const TX_STATE_REJECTED = 'state/rejected';
 export const TX_STATE_PREAUTHORIZED = 'state/preauthorized';
+export const TX_STATE_DELIVERED = 'state/delivered';
 
-export const TX_STATES = [TX_STATE_ACCEPTED, TX_STATE_REJECTED, TX_STATE_PREAUTHORIZED];
+export const TX_STATES = [TX_STATE_ACCEPTED, TX_STATE_REJECTED, TX_STATE_PREAUTHORIZED, TX_STATE_DELIVERED];
 
 // Denormalised transaction object
 export const transaction = shape({
