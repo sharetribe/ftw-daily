@@ -1,14 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
+import { omitBy, isUndefined } from 'lodash';
 import { EditListingPhotosForm, PayoutDetailsForm } from '../../containers';
 import { Modal } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import config from '../../config';
+import { createStripeAccount } from '../../ducks/user.duck';
 
 import css from './EditListingPhotosPanel.css';
 
-class EditListingPhotosPanel extends Component {
+class EditListingPhotosPanelComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +23,6 @@ class EditListingPhotosPanel extends Component {
     this.handlePayoutSubmit = this.handlePayoutSubmit.bind(this);
   }
   handlePhotosSubmit(values) {
-    console.log('EditListingPhotosPanel.handleSubmit():', values);
     const { onSubmit, currentUser } = this.props;
     const stripeConnected = currentUser &&
       currentUser.attributes &&
@@ -48,21 +50,22 @@ class EditListingPhotosPanel extends Component {
       city,
       bankAccountToken,
     } = values;
+    const address = {
+      country,
+      city,
+      addressLine: streetAddress,
+      postalCode,
+    };
     const params = {
       firstName,
       lastName,
       birthDate,
       bankAccountToken,
-      address: {
-        country,
-        city,
-        addressLine: streetAddress && streetAddress.selectedPlace
-          ? streetAddress.selectedPlace.address
-          : null,
-        postalCode,
-      },
+      address: omitBy(address, isUndefined),
     };
-    console.log('payout details:', params, 'state:', this.state);
+    this.props.onPayoutDetailsSubmit(params).then(() => {
+      this.props.onSubmit(this.state.submittedValues);
+    });
   }
   render() {
     const {
@@ -75,7 +78,9 @@ class EditListingPhotosPanel extends Component {
     } = this.props;
 
     const rootClass = rootClassName || css.root;
-    const classes = classNames(rootClass, className);
+    const classes = classNames(rootClass, className, {
+      [css.payoutModalOpen]: this.state.showPayoutDetails,
+    });
     const currency = config.currencyConfig.currency;
 
     const payoutDetailsModal = (
@@ -85,7 +90,11 @@ class EditListingPhotosPanel extends Component {
         onClose={this.handlePayoutModalClose}
         togglePageClassNames={togglePageClassNames}
       >
-        <PayoutDetailsForm currency={currency} onSubmit={this.handlePayoutSubmit} />
+        <PayoutDetailsForm
+          className={css.payoutDetails}
+          currency={currency}
+          onSubmit={this.handlePayoutSubmit}
+        />
       </Modal>
     );
 
@@ -107,14 +116,14 @@ class EditListingPhotosPanel extends Component {
 
 const { array, func, string } = PropTypes;
 
-EditListingPhotosPanel.defaultProps = {
+EditListingPhotosPanelComponent.defaultProps = {
   className: null,
   rootClassName: null,
   images: [],
   currentUser: null,
 };
 
-EditListingPhotosPanel.propTypes = {
+EditListingPhotosPanelComponent.propTypes = {
   className: string,
   rootClassName: string,
   images: array,
@@ -123,6 +132,13 @@ EditListingPhotosPanel.propTypes = {
   onSubmit: func.isRequired,
   currentUser: propTypes.currentUser,
   togglePageClassNames: func.isRequired,
+  onPayoutDetailsSubmit: func.isRequired,
 };
+
+const mapDispatchToProps = dispatch => ({
+  onPayoutDetailsSubmit: values => dispatch(createStripeAccount(values)),
+});
+
+const EditListingPhotosPanel = connect(null, mapDispatchToProps)(EditListingPhotosPanelComponent);
 
 export default EditListingPhotosPanel;
