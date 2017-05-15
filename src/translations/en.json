@@ -128,7 +128,7 @@
   "SaleDetailsPanel.saleDeliveredStatus": "You delivered the order.",
   "SaleDetailsPanel.saleRejectedStatus": "You rejected the booking.",
   "SaleDetailsPanel.saleRequestedStatus": "{customerName} is waiting for your response.",
-  "Salepage.acceptButton": "Accept",
+  "SalePage.acceptButton": "Accept",
   "SalePage.fetchSaleFailed": "Fetching sale data failed.",
   "SalePage.loadingData": "Loading sale data.",
   "SalePage.rejectButton": "Reject",
