@@ -103,6 +103,7 @@ class EditListingPhotosPanel extends Component {
         {payoutDetailsModal}
         <h1><FormattedMessage id="EditListingPhotosPanel.title" /></h1>
         <EditListingPhotosForm
+          className={css.form}
           disabled={fetchInProgress}
           initialValues={{ images }}
           images={images}

@@ -41,7 +41,11 @@ const EditListingLocationPanel = props => {
   return (
     <div className={classes}>
       <h1><FormattedMessage id="EditListingLocationPanel.title" /></h1>
-      <EditListingLocationForm initialValues={initialSearchFormValues} onSubmit={onSubmit} />
+      <EditListingLocationForm
+        className={css.form}
+        initialValues={initialSearchFormValues}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 };
