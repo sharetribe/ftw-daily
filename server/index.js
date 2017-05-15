@@ -29,8 +29,7 @@ const renderer = require('./renderer');
 const dataLoader = require('./dataLoader');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
-const env = process.env.NODE_ENV;
-const dev = env !== 'production';
+const dev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 4000;
 const CLIENT_ID = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID ||
   '08ec69f6-d37e-414d-83eb-324e94afddf0';
@@ -130,7 +129,8 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Listening to port ${PORT} in ${env} mode`);
+  const mode = dev ? "development" : "production";
+  console.log(`Listening to port ${PORT} in ${mode} mode`);
   if (dev) {
     console.log(`Open http://localhost:${PORT}/ and start hacking!`);
   }
