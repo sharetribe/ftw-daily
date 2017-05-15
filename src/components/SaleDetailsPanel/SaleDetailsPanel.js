@@ -72,7 +72,19 @@ const SaleDetailsPanel = props => {
         message: (
           <div className={css.message}>
             <FormattedMessage id="SaleDetailsPanel.saleAcceptedStatus" />
-            <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
+            <FormattedMessage
+              id="SaleDetailsPanel.onDate"
+              values={{
+                formattedDate: (
+                  <FormattedDate
+                    value={lastTransitionedAt}
+                    year="numeric"
+                    month="short"
+                    day="numeric"
+                  />
+                ),
+              }}
+            />
           </div>
         ),
       };
@@ -88,7 +100,19 @@ const SaleDetailsPanel = props => {
         message: (
           <div className={css.message}>
             <FormattedMessage id="SaleDetailsPanel.saleRejectedStatus" />
-            <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
+            <FormattedMessage
+              id="SaleDetailsPanel.onDate"
+              values={{
+                formattedDate: (
+                  <FormattedDate
+                    value={lastTransitionedAt}
+                    year="numeric"
+                    month="short"
+                    day="numeric"
+                  />
+                ),
+              }}
+            />
           </div>
         ),
       };
@@ -104,7 +128,19 @@ const SaleDetailsPanel = props => {
         message: (
           <div className={css.message}>
             <FormattedMessage id="SaleDetailsPanel.saleDeliveredStatus" />
-            <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
+            <FormattedMessage
+              id="SaleDetailsPanel.onDate"
+              values={{
+                formattedDate: (
+                  <FormattedDate
+                    value={lastTransitionedAt}
+                    year="numeric"
+                    month="short"
+                    day="numeric"
+                  />
+                ),
+              }}
+            />
           </div>
         ),
       };
