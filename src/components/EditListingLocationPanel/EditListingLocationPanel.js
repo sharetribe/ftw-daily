@@ -18,13 +18,13 @@ const EditListingLocationPanel = props => {
 
   // TODO location address is currently serialized inside address field (API will change later)
   // Content is something like { locationAddress: 'Street, Province, Country', building: 'A 42' };
-  let locationAddress = "";
-  let building = "";
+  let locationAddress = '';
+  let building = '';
   try {
-    const deserializedAddress = JSON.parse(address || "{}");
+    const deserializedAddress = JSON.parse(address || '{}');
     locationAddress = deserializedAddress.locationAddress;
     building = deserializedAddress.building;
-  } catch(e) {
+  } catch (e) {
     locationAddress = address;
   }
 
