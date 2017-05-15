@@ -14,7 +14,9 @@ import { Button, Map, ModalInMobile, PageLayout } from '../../components';
 import { BookingDatesForm } from '../../containers';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { showListing } from './ListingPage.duck';
+
 import css from './ListingPage.css';
+import noImageIcon from './images/noImageIcon.svg';
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 2500;
@@ -115,13 +117,30 @@ export class ListingPageComponent extends Component {
       ? currentListing.images.map(i => ({ id: i.id, sizes: i.attributes.sizes }))
       : [];
 
+
+    // TODO: svg should have own loading strategy
+    // Now noImageIcon is imported with default configuration (gives url)
+    // This should be handled by ResponsiveImage or separate ImagePlaceholder component
+    const noListingImage = (
+      <div className={css.mainImage}>
+        <div className={css.aspectWrapper}>
+          <div className={css.noImageContainer}>
+            <div className={css.noImageWrapper}>
+              <img className={css.noImageIcon} src={noImageIcon} alt="No images added" />
+              <div className={css.noImageText}>No image</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
     // TODO componentize
     const imageCarousel = images.length > 0
       ? <div className={css.imageContainer}>
           <img className={css.mainImage} alt={title} src={images[0].sizes[0].url} />
           <div className={css.thumbnailContainer}>
             {images.slice(1).map(image => (
-              <div key={image.id.uuid} className={css.squareWrapper}>
+              <div key={image.id.uuid} className={css.thumbnailWrapper}>
                 <div className={css.aspectWrapper}>
                   <img
                     className={css.thumbnail}
@@ -133,7 +152,7 @@ export class ListingPageComponent extends Component {
             ))}
           </div>
         </div>
-      : null;
+      : noListingImage;
 
     const userAndListingAuthorAvailable = currentUser && currentListing && currentListing.author;
     const isOwnListing = userAndListingAuthorAvailable &&
