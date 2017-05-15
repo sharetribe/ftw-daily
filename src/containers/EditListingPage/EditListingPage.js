@@ -21,13 +21,11 @@ import {
 const formatRequestData = values => {
   const {
     address,
-    country,
     description,
     images,
     geolocation,
     price,
     title,
-    bankAccountToken,
   } = values;
 
   return {
@@ -37,8 +35,6 @@ const formatRequestData = values => {
     images: images.map(i => i.imageId),
     price,
     title,
-    country,
-    bankAccountToken,
   };
 };
 
