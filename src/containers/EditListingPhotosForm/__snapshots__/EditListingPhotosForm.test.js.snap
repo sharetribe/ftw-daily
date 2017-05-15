@@ -1,7 +1,9 @@
 exports[`EditListingPhotosForm matches snapshot 1`] = `
 <form
+  className=""
   onSubmit={[Function]}>
   <AddImages
+    className={null}
     images={Array []}
     onSortEnd={[Function]}>
     <Field

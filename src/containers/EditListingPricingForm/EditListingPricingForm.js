@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import classNames from 'classnames';
 import config from '../../config';
 import { enhancedField } from '../../util/forms';
 import { required } from '../../util/validators';
@@ -21,6 +22,7 @@ export class EditListingPricingFormComponent extends Component {
 
   render() {
     const {
+      className,
       disabled,
       handleSubmit,
       intl,
@@ -31,8 +33,10 @@ export class EditListingPricingFormComponent extends Component {
 
     const priceRequiredMessage = intl.formatMessage({ id: 'EditListingPricingForm.priceRequired' });
 
+    const classes = classNames(css.root, className);
+
     return (
-      <form onSubmit={handleSubmit}>
+      <form className={classes} onSubmit={handleSubmit}>
         <div className={css.priceWrapper}>
           <Field
             autoFocus

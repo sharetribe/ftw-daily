@@ -1,5 +1,6 @@
 exports[`EditListingDescriptionForm matches snapshot 1`] = `
 <form
+  className=""
   onSubmit={[Function]}>
   <div
     className="">
