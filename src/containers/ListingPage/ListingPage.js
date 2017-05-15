@@ -108,7 +108,7 @@ export class ListingPageComponent extends Component {
       locationAddress = address;
     }
 
-    const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' }, { title });
+    const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' });
     const { formattedPrice, priceTitle } = priceData(price, currencyConfig, intl);
     const map = geolocation ? <Map center={geolocation} address={locationAddress} /> : null;
 

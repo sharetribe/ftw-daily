@@ -70,7 +70,7 @@
   "InboxPage.title": "Inbox",
   "ListingCard.hostedBy": "Hosted by {authorName}.",
   "ListingCard.perNight": "/ night",
-  "ListingPage.ctaButtonMessage": "Book {title}",
+  "ListingPage.ctaButtonMessage": "Request to book",
   "ListingPage.loadingListingData": "Loading listing data",
   "ListingPage.noListingData": "Could not find listing data",
   "ListingPage.perNight": "/ night",
