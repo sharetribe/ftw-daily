@@ -97,11 +97,11 @@ export class ListingPageComponent extends Component {
 
     // TODO location address is currently serialized inside address field (API will change later)
     // Content is something like { locationAddress: 'Street, Province, Country', building: 'A 42' };
-    let locationAddress = "";
+    let locationAddress = '';
     try {
-      const deserializedAddress = JSON.parse(address || "{}");
+      const deserializedAddress = JSON.parse(address || '{}');
       locationAddress = deserializedAddress.locationAddress;
-    } catch(e) {
+    } catch (e) {
       locationAddress = address;
     }
 
