@@ -160,11 +160,11 @@ export const fetchCurrentUser = () =>
       });
   };
 
-export const createStripeAccount = (bankAccountToken, address) =>
+export const createStripeAccount = payoutDetails =>
   (dispatch, getState, sdk) => {
     dispatch(stripeAccountCreateRequest());
     return sdk.users
-      .createStripeAccount({ bankAccountToken, address })
+      .createStripeAccount(payoutDetails)
       .then(response => {
         dispatch(stripeAccountCreateSuccess(response));
         return response;
