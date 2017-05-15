@@ -79,10 +79,6 @@ export const EditListingPageComponent = props => {
     // Images are passed to EditListingForm so that it can generate thumbnails out of them
     const images = page.imageOrder.map(i => page.images[i]);
 
-    const stripeConnected = currentUser && currentUser.attributes
-      ? currentUser.attributes.stripeConnected
-      : false;
-
     const title = isNew
       ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
       : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
@@ -101,7 +97,7 @@ export const EditListingPageComponent = props => {
           onImageUpload={onImageUpload}
           onUpdateImageOrder={onUpdateImageOrder}
           selectedTab={tab}
-          stripeConnected={stripeConnected}
+          currentUser={currentUser}
         />
       </PageLayout>
     );

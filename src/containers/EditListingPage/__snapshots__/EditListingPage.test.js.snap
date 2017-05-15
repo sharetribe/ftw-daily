@@ -3,6 +3,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
   title="EditListingPage.titleCreateListing">
   <EditListingWizard
     className={null}
+    currentUser={null}
     flattenedRoutes={Array []}
     history={
       Object {
@@ -17,7 +18,6 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     onUpdateImageOrder={[Function]}
     onUpdateListingDraft={[Function]}
     rootClassName={null}
-    selectedTab="description"
-    stripeConnected={false} />
+    selectedTab="description" />
 </Connect(withRouter(PageLayout))>
 `;

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { EditListingPhotosForm } from '../../containers';
+import * as propTypes from '../../util/propTypes';
 
 import css from './EditListingPhotosPanel.css';
 
@@ -22,7 +23,6 @@ class EditListingPhotosPanel extends Component {
       images,
       onImageUpload,
       onUpdateImageOrder,
-      stripeConnected,
     } = this.props;
 
     const rootClass = rootClassName || css.root;
@@ -37,19 +37,19 @@ class EditListingPhotosPanel extends Component {
           onImageUpload={onImageUpload}
           onSubmit={this.handleSubmit}
           onUpdateImageOrder={onUpdateImageOrder}
-          stripeConnected={stripeConnected}
         />
       </div>
     );
   }
 }
 
-const { array, bool, func, string } = PropTypes;
+const { array, func, string } = PropTypes;
 
 EditListingPhotosPanel.defaultProps = {
   className: null,
   rootClassName: null,
   images: [],
+  currentUser: null,
 };
 
 EditListingPhotosPanel.propTypes = {
@@ -59,7 +59,7 @@ EditListingPhotosPanel.propTypes = {
   onImageUpload: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,
-  stripeConnected: bool.isRequired,
+  currentUser: propTypes.currentUser,
 };
 
 export default EditListingPhotosPanel;
