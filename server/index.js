@@ -20,6 +20,7 @@ const express = require('express');
 const helmet = require('helmet');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
+const enforceSsl = require('express-enforces-ssl');
 const path = require('path');
 const qs = require('qs');
 const sharetribeSdk = require('sharetribe-sdk');
@@ -34,6 +35,8 @@ const PORT = process.env.PORT || 4000;
 const CLIENT_ID = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID ||
   '08ec69f6-d37e-414d-83eb-324e94afddf0';
 const BASE_URL = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'http://localhost:8088';
+const ENFORCE_SSL = process.env.SERVER_SHARETRIBE_ENFORCE_SSL === 'true';
+const TRUST_PROXY = process.env.SERVER_SHARETRIBE_TRUST_PROXY || null;
 const app = express();
 
 // The helmet middleware sets various HTTP headers to improve security.
@@ -45,6 +48,30 @@ if (!dev) {
   const USERNAME = process.env.BASIC_AUTH_USERNAME;
   const PASSWORD = process.env.BASIC_AUTH_PASSWORD;
   app.use(auth.basicAuth(USERNAME, PASSWORD));
+}
+
+// Redirect HTTP to HTTPS if ENFORCE_SSL is `true`.
+// This also works behind reverse proxies (load balancers) as they are for example used by Heroku.
+// In such cases, however, the TRUST_PROXY parameter has to be set (see below)
+//
+// Read more: https://github.com/aredo/express-enforces-ssl
+//
+if (ENFORCE_SSL) {
+  app.use(enforceSsl());
+}
+
+// Set the TRUST_PROXY when running the app behind a reverse proxy.
+//
+// For example, when running the app in Heroku, set TRUST_PROXY to `true`.
+//
+// Read more: https://expressjs.com/en/guide/behind-proxies.html
+//
+if (TRUST_PROXY === 'true') {
+  app.enable('trust proxy');
+} else if (TRUST_PROXY === 'false') {
+  app.disable('trust proxy');
+} else if (TRUST_PROXY !== null) {
+  app.set('trust proxy', TRUST_PROXY);
 }
 
 app.use(compression());
