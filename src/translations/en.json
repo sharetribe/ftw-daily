@@ -73,6 +73,7 @@
   "ListingPage.ctaButtonMessage": "Book {title}",
   "ListingPage.loadingListingData": "Loading listing data",
   "ListingPage.noListingData": "Could not find listing data",
+  "ListingPage.perNight": "/ night",
   "LoginForm.emailLabel": "Email",
   "LoginForm.emailRequired": "required",
   "LoginForm.logIn": "Log in",

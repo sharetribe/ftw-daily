@@ -16,12 +16,34 @@
 
 .title,
 .price {
-  font-size: 2em;
+  font-size: 22px;
   margin: 0.67em 0;
 }
 
 .title {
   flex-grow: 1;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-left: 1rem;
+  flex-shrink: 0;
+
+}
+
+.priceValue {
+  font-size: 22px;
+}
+
+.perNight {
+  margin-left: 6px;
+  font-size: 16px;
+
+  /* Align small price unit text with bigger font (priceValue) */
+  line-height: 23px;
+  padding-top: 6px;
 }
 
 .mainImage {

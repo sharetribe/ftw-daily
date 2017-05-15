@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { union, without } from 'lodash';
@@ -166,7 +166,15 @@ export class ListingPageComponent extends Component {
         <div className={listingClasses}>
           <div className={css.header}>
             <h1 className={css.title}>{title}</h1>
-            <div className={css.price} title={priceTitle}>{formattedPrice}</div>
+            <div className={css.price}>
+              <div className={css.priceValue} title={priceTitle}>
+                {formattedPrice}
+              </div>
+              <div className={css.perNight}>
+                <FormattedMessage id="ListingPage.perNight" />
+              </div>
+            </div>
+
           </div>
           {imageCarousel}
           {/* eslint-disable react/no-danger */}
