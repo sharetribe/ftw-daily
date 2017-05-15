@@ -61,10 +61,17 @@ class PayoutDetailsFormComponent extends Component {
   render() {
     const { country, currency, handleSubmit, pristine, submitting, inProgress, intl } = this.props;
 
-    const nameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.nameLabel' });
-    const nameRequired = validators.required(
+    const firstNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.firstNameLabel' });
+    const firstNameRequired = validators.required(
       intl.formatMessage({
-        id: 'PayoutDetailsForm.nameRequired',
+        id: 'PayoutDetailsForm.firstNameRequired',
+      })
+    );
+
+    const lastNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.lastNameLabel' });
+    const lastNameRequired = validators.required(
+      intl.formatMessage({
+        id: 'PayoutDetailsForm.lastNameRequired',
       })
     );
 
@@ -184,14 +191,21 @@ class PayoutDetailsFormComponent extends Component {
           <FormattedMessage id="PayoutDetailsForm.personalDetailsTitle" />
         </h2>
         <Field
-          name="name"
+          name="firstName"
           type="text"
-          label={nameLabel}
+          label={firstNameLabel}
           component={this.EnhancedInput}
-          validate={nameRequired}
+          validate={firstNameRequired}
         />
         <Field
-          name="birthday"
+          name="lastName"
+          type="text"
+          label={lastNameLabel}
+          component={this.EnhancedInput}
+          validate={lastNameRequired}
+        />
+        <Field
+          name="birthDate"
           type="text"
           label={birthdayLabel}
           format={null}
