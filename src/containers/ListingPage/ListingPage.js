@@ -3,6 +3,7 @@ import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { union, without } from 'lodash';
+import classNames from 'classnames';
 import config from '../../config';
 import * as propTypes from '../../util/propTypes';
 import { types } from '../../util/sdkLoader';
@@ -139,9 +140,11 @@ export class ListingPageComponent extends Component {
       currentListing.author.id.uuid === currentUser.id.uuid;
     const showBookButton = !isOwnListing;
 
+    const listingClasses = classNames(css.listing, { [css.bookable]: showBookButton });
+
     const pageContent = (
       <PageLayout title={`${title} ${formattedPrice}`} className={this.state.pageClassNames}>
-        <div className={css.listing}>
+        <div className={listingClasses}>
           <div className={css.header}>
             <h1 className={css.title}>{title}</h1>
             <div className={css.price} title={priceTitle}>{formattedPrice}</div>

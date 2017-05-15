@@ -4,7 +4,7 @@
   display: block;
 }
 
-.listing {
+.bookable {
   padding-bottom: 80px;
 }
 
@@ -31,14 +31,14 @@
 .thumbnailContainer {
   display: flex;
   flex-direction: row;
-  padding: 2rem 1.5rem;
+  padding: 1rem;
 }
 
 .squareWrapper {
   display: block;
   position: relative;
   width: 100px;
-  margin: 0 0.5rem;
+  margin-right: 1rem;
 }
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
@@ -57,7 +57,7 @@
 }
 
 .description {
-  margin: 2rem;
+  margin: 1rem;
 }
 
 .map {
