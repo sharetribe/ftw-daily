@@ -99,7 +99,7 @@ const EditListingWizard = props => {
   const onUpsertListingDraft = currentListing.id ? onUpdateListingDraft : onCreateListingDraft;
 
   return (
-    <Tabs className={classes}>
+    <Tabs className={classes} navClassName={css.nav}>
       <EditListingDescriptionPanel
         tabLabel="Description"
         tabLinkProps={descriptionLinkProps}
