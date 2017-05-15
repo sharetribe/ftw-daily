@@ -99,9 +99,28 @@ const OrderDetailsPanel = props => {
           </div>
         ),
       };
-      break;
-    default:
-      stateMsgData = { title: null, message: null };
+    break;
+  case propTypes.TX_STATE_DELIVERED:
+    stateMsgData = {
+      title: (
+          <FormattedMessage
+        id="OrderDetailsPanel.orderDeliveredTitle"
+        values={{ title: listingLink }}
+          />
+      ),
+      message: (
+        <div className={css.messagesContainer}>
+          <FormattedMessage
+            id="OrderDetailsPanel.orderDeliveredStatus"
+            values={{ providerName }}
+          />
+          <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
+        </div>
+      ),
+    };
+    break;
+  default:
+    stateMsgData = { title: null, message: null };
   }
 
   return (
