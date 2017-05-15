@@ -112,8 +112,6 @@ const BookingInfoComponent = props => {
       </div>
       <div className={css.row}>
         <div className={css.bookingPeriodLabel}>
-          <FormattedMessage id="BookingInfo.bookingPeriodLabel" />
-          <br />
           {bookingPeriod}
         </div>
         <div className={css.bookedDatesCount}>

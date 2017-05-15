@@ -2,14 +2,36 @@ exports[`ListingPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   className=""
   title="listing1 title 55">
-  <div>
+  <div
+    className="undefined">
     <div>
       <h1>
         listing1 title
       </h1>
-      <div
-        title={55}>
-        55
+      <div>
+        <div
+          title={55}>
+          55
+        </div>
+        <div>
+          <FormattedMessage
+            id="ListingPage.perNight"
+            values={Object {}} />
+        </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <div>
+          <div>
+            <img
+              alt="No images added"
+              src="noImageIcon.svg" />
+            <div>
+              No image
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -18,6 +40,18 @@ exports[`ListingPage matches snapshot 1`] = `
           "__html": "listing1 description",
         }
       } />
+    <div>
+      <div>
+        <Avatar
+          className={null}
+          name="user-1 first name user-1 last name" />
+      </div>
+      <div>
+        <span>
+          user-1 first name user-1 last name
+        </span>
+      </div>
+    </div>
     <ModalInMobile
       className=""
       isModalOpenOnMobile={false}

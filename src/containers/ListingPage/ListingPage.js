@@ -1,19 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import { intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { union, without } from 'lodash';
+import classNames from 'classnames';
 import config from '../../config';
 import * as propTypes from '../../util/propTypes';
 import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import { convertMoneyToNumber } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import { Button, Map, ModalInMobile, PageLayout } from '../../components';
+import { Avatar, Button, Map, ModalInMobile, PageLayout } from '../../components';
 import { BookingDatesForm } from '../../containers';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { showListing } from './ListingPage.duck';
+
 import css from './ListingPage.css';
+import noImageIcon from './images/noImageIcon.svg';
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 2500;
@@ -105,7 +108,7 @@ export class ListingPageComponent extends Component {
       locationAddress = address;
     }
 
-    const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' }, { title });
+    const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' });
     const { formattedPrice, priceTitle } = priceData(price, currencyConfig, intl);
     const map = geolocation ? <Map center={geolocation} address={locationAddress} /> : null;
 
@@ -114,13 +117,30 @@ export class ListingPageComponent extends Component {
       ? currentListing.images.map(i => ({ id: i.id, sizes: i.attributes.sizes }))
       : [];
 
+
+    // TODO: svg should have own loading strategy
+    // Now noImageIcon is imported with default configuration (gives url)
+    // This should be handled by ResponsiveImage or separate ImagePlaceholder component
+    const noListingImage = (
+      <div className={css.mainImage}>
+        <div className={css.aspectWrapper}>
+          <div className={css.noImageContainer}>
+            <div className={css.noImageWrapper}>
+              <img className={css.noImageIcon} src={noImageIcon} alt="No images added" />
+              <div className={css.noImageText}>No image</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
     // TODO componentize
     const imageCarousel = images.length > 0
       ? <div className={css.imageContainer}>
           <img className={css.mainImage} alt={title} src={images[0].sizes[0].url} />
           <div className={css.thumbnailContainer}>
             {images.slice(1).map(image => (
-              <div key={image.id.uuid} className={css.squareWrapper}>
+              <div key={image.id.uuid} className={css.thumbnailWrapper}>
                 <div className={css.aspectWrapper}>
                   <img
                     className={css.thumbnail}
@@ -132,24 +152,51 @@ export class ListingPageComponent extends Component {
             ))}
           </div>
         </div>
-      : null;
+      : noListingImage;
 
     const userAndListingAuthorAvailable = currentUser && currentListing && currentListing.author;
     const isOwnListing = userAndListingAuthorAvailable &&
       currentListing.author.id.uuid === currentUser.id.uuid;
     const showBookButton = !isOwnListing;
 
+    const authorAvailable = currentListing && currentListing.author;
+    const authorProfile = authorAvailable && currentListing.author.attributes.profile
+    const authorName = authorAvailable
+      ? `${authorProfile.firstName} ${authorProfile.lastName}`
+      : '';
+    const authorInfo = authorAvailable
+      ? <div className={css.author}>
+          <div className={css.avatarWrapper}>
+            <Avatar name={authorName} />
+          </div>
+          <div className={css.authorDetails}>
+            <span className={css.authorName}>{authorName}</span>
+          </div>
+        </div>
+      : null;
+
+    const listingClasses = classNames(css.listing, { [css.bookable]: showBookButton });
+
     const pageContent = (
       <PageLayout title={`${title} ${formattedPrice}`} className={this.state.pageClassNames}>
-        <div className={css.listing}>
+        <div className={listingClasses}>
           <div className={css.header}>
             <h1 className={css.title}>{title}</h1>
-            <div className={css.price} title={priceTitle}>{formattedPrice}</div>
+            <div className={css.price}>
+              <div className={css.priceValue} title={priceTitle}>
+                {formattedPrice}
+              </div>
+              <div className={css.perNight}>
+                <FormattedMessage id="ListingPage.perNight" />
+              </div>
+            </div>
+
           </div>
           {imageCarousel}
           {/* eslint-disable react/no-danger */}
           <div className={css.description} dangerouslySetInnerHTML={{ __html: description }} />
           {/* eslint-enable react/no-danger */}
+          {authorInfo}
           <ModalInMobile
             isModalOpenOnMobile={this.state.isBookingModalOpenOnMobile}
             onClose={() => this.setState({ isBookingModalOpenOnMobile: false })}
