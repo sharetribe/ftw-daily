@@ -3,6 +3,7 @@
   flex-direction: column;
   border-radius: 4px;
   margin-bottom: 24px;
+  text-decoration: none;
 }
 
 .squareWrapper {

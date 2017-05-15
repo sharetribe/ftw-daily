@@ -1,5 +1,12 @@
 exports[`ListingCard matches snapshot 1`] = `
-<div>
+<withFlattenedRoutes(withRouter(NamedLink))
+  name="ListingPage"
+  params={
+    Object {
+      "id": "listing1",
+      "slug": "listing1-title",
+    }
+  }>
   <div>
     <div>
       <div>
@@ -16,16 +23,9 @@ exports[`ListingCard matches snapshot 1`] = `
   </div>
   <div>
     <div>
-      <withFlattenedRoutes(withRouter(NamedLink))
-        name="ListingPage"
-        params={
-          Object {
-            "id": "listing1",
-            "slug": "listing1-title",
-          }
-        }>
+      <div>
         listing1 title
-      </withFlattenedRoutes(withRouter(NamedLink))>
+      </div>
       <div>
         <div
           title={55}>
@@ -48,5 +48,5 @@ exports[`ListingCard matches snapshot 1`] = `
         } />
     </div>
   </div>
-</div>
+</withFlattenedRoutes(withRouter(NamedLink))>
 `;

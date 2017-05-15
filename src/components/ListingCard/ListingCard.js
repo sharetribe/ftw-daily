@@ -59,7 +59,7 @@ export const ListingCardComponent = props => {
   const imageOrPlaceholder = squareImageURL ? listingImage : noListingImage;
 
   return (
-    <div className={css.listing}>
+    <NamedLink className={css.listing} name="ListingPage" params={{ id, slug }}>
       <div className={css.squareWrapper}>
         <div className={css.aspectWrapper}>
           {imageOrPlaceholder}
@@ -67,9 +67,9 @@ export const ListingCardComponent = props => {
       </div>
       <div className={css.info}>
         <div className={css.mainInfo}>
-          <NamedLink className={css.title} name="ListingPage" params={{ id, slug }}>
+          <div className={css.title}>
             {title}
-          </NamedLink>
+          </div>
           <div className={css.price}>
             <div className={css.priceValue} title={priceTitle}>
               {formattedPrice}
@@ -87,7 +87,7 @@ export const ListingCardComponent = props => {
           />
         </div>
       </div>
-    </div>
+    </NamedLink>
   );
 };
 
