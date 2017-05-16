@@ -8,6 +8,7 @@ describe('EditListingPageComponent', () => {
     const getListing = () => null;
     const tree = renderShallow(
       <EditListingPageComponent
+        fetchInProgress={false}
         flattenedRoutes={[]}
         history={{ push: v => v }}
         getListing={getListing}
@@ -17,6 +18,7 @@ describe('EditListingPageComponent', () => {
         onCreateListingDraft={v => v}
         onUpdateListingDraft={v => v}
         onImageUpload={v => v}
+        onPayoutDetailsSubmit={v => v}
         onUpdateImageOrder={v => v}
         page={{ imageOrder: [], images: {} }}
         tab="description"

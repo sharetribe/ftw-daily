@@ -5,6 +5,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
   <EditListingWizard
     className={null}
     currentUser={null}
+    fetchInProgress={false}
     flattenedRoutes={Array []}
     history={
       Object {
@@ -16,6 +17,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     onCreateListing={[Function]}
     onCreateListingDraft={[Function]}
     onImageUpload={[Function]}
+    onPayoutDetailsSubmit={[Function]}
     onUpdateImageOrder={[Function]}
     onUpdateListingDraft={[Function]}
     rootClassName={null}

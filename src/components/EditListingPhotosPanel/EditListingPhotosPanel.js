@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { omitBy, isUndefined } from 'lodash';
@@ -7,11 +6,10 @@ import { EditListingPhotosForm, PayoutDetailsForm } from '../../containers';
 import { Modal } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import config from '../../config';
-import { createStripeAccount } from '../../ducks/user.duck';
 
 import css from './EditListingPhotosPanel.css';
 
-class EditListingPhotosPanelComponent extends Component {
+class EditListingPhotosPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,6 +69,7 @@ class EditListingPhotosPanelComponent extends Component {
     const {
       className,
       rootClassName,
+      fetchInProgress,
       images,
       onImageUpload,
       onUpdateImageOrder,
@@ -93,6 +92,7 @@ class EditListingPhotosPanelComponent extends Component {
         <PayoutDetailsForm
           className={css.payoutDetails}
           currency={currency}
+          disabled={fetchInProgress}
           onSubmit={this.handlePayoutSubmit}
         />
       </Modal>
@@ -103,6 +103,7 @@ class EditListingPhotosPanelComponent extends Component {
         {payoutDetailsModal}
         <h1><FormattedMessage id="EditListingPhotosPanel.title" /></h1>
         <EditListingPhotosForm
+          disabled={fetchInProgress}
           initialValues={{ images }}
           images={images}
           onImageUpload={onImageUpload}
@@ -114,31 +115,26 @@ class EditListingPhotosPanelComponent extends Component {
   }
 }
 
-const { array, func, string } = PropTypes;
+const { array, bool, func, string } = PropTypes;
 
-EditListingPhotosPanelComponent.defaultProps = {
+EditListingPhotosPanel.defaultProps = {
   className: null,
   rootClassName: null,
   images: [],
   currentUser: null,
 };
 
-EditListingPhotosPanelComponent.propTypes = {
+EditListingPhotosPanel.propTypes = {
   className: string,
   rootClassName: string,
+  currentUser: propTypes.currentUser,
+  fetchInProgress: bool.isRequired,
   images: array,
   onImageUpload: func.isRequired,
+  onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,
-  currentUser: propTypes.currentUser,
   togglePageClassNames: func.isRequired,
-  onPayoutDetailsSubmit: func.isRequired,
 };
-
-const mapDispatchToProps = dispatch => ({
-  onPayoutDetailsSubmit: values => dispatch(createStripeAccount(values)),
-});
-
-const EditListingPhotosPanel = connect(null, mapDispatchToProps)(EditListingPhotosPanelComponent);
 
 export default EditListingPhotosPanel;

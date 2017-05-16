@@ -55,10 +55,10 @@ class PayoutDetailsFormComponent extends Component {
       className,
       country,
       currency,
+      disabled,
       handleSubmit,
       pristine,
       submitting,
-      inProgress,
       intl,
     } = this.props;
 
@@ -173,7 +173,7 @@ class PayoutDetailsFormComponent extends Component {
       : null;
 
     const classes = classNames(css.root, className);
-    const submitDisabled = pristine || submitting || inProgress;
+    const submitDisabled = pristine || submitting || disabled;
 
     return (
       <form className={classes} onSubmit={handleSubmit}>
@@ -228,12 +228,12 @@ class PayoutDetailsFormComponent extends Component {
   }
 }
 
-PayoutDetailsFormComponent.defaultProps = { className: null, country: null, inProgress: false };
+PayoutDetailsFormComponent.defaultProps = { className: null, country: null, disabled: false };
 
 PayoutDetailsFormComponent.propTypes = {
   ...formPropTypes,
   className: string,
-  inProgress: bool,
+  disabled: bool,
   currency: string.isRequired,
 
   // from mapStateToProps

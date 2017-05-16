@@ -8,6 +8,7 @@ const noop = () => null;
 export const NoPhotos = {
   component: EditListingWizard,
   props: {
+    fetchInProgress: false,
     flattenedRoutes: flattenRoutes(routesConfiguration),
     history: { push: noop },
     selectedTab: 'pricing',
@@ -18,6 +19,7 @@ export const NoPhotos = {
     onUpdateImageOrder: noop,
     onCreateListing: noop,
     onCreateListingDraft: noop,
+    onPayoutDetailsSubmit: noop,
     onUpdateListingDraft: noop,
     togglePageClassNames: noop,
   },

@@ -9,6 +9,7 @@ import { createSlug } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import { EditListingWizard, NamedRedirect, PageLayout } from '../../components';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
+import { createStripeAccount } from '../../ducks/user.duck';
 import {
   createListingDraft,
   updateListingDraft,
@@ -58,11 +59,13 @@ export class EditListingPageComponent extends Component {
 
   render() {
     const {
+      fetchInProgress,
       flattenedRoutes,
       history,
       intl,
       onCreateListing,
       onImageUpload,
+      onPayoutDetailsSubmit,
       onUpdateImageOrder,
       page,
       params,
@@ -101,6 +104,7 @@ export class EditListingPageComponent extends Component {
         <PageLayout title={title} className={this.state.pageClassNames}>
           <EditListingWizard
             disabled={disableForm}
+            fetchInProgress={fetchInProgress}
             flattenedRoutes={flattenedRoutes}
             history={history}
             images={images}
@@ -108,6 +112,7 @@ export class EditListingPageComponent extends Component {
             onCreateListing={onCreateListing}
             onCreateListingDraft={onCreateListingDraft}
             onUpdateListingDraft={onUpdateListingDraft}
+            onPayoutDetailsSubmit={onPayoutDetailsSubmit}
             onImageUpload={onImageUpload}
             onUpdateImageOrder={onUpdateImageOrder}
             selectedTab={tab}
@@ -139,9 +144,10 @@ EditListingPageComponent.defaultProps = {
   currentUser: null,
 };
 
-const { arrayOf, func, object, shape, string } = PropTypes;
+const { arrayOf, bool, func, object, shape, string } = PropTypes;
 
 EditListingPageComponent.propTypes = {
+  fetchInProgress: bool.isRequired,
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
   history: shape({
     push: func.isRequired,
@@ -149,6 +155,7 @@ EditListingPageComponent.propTypes = {
   intl: intlShape.isRequired,
   onCreateListing: func.isRequired,
   onImageUpload: func.isRequired,
+  onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   page: object.isRequired,
   params: shape({
@@ -165,19 +172,21 @@ EditListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const page = state.EditListingPage;
-  const { currentUser } = state.user;
+  const { currentUser, createStripeAccountInProgress } = state.user;
+  const fetchInProgress = createStripeAccountInProgress;
 
   const getListing = id => {
     const listings = getListingsById(state, [id]);
     return listings.length === 1 ? listings[0] : null;
   };
-  return { page, currentUser, getListing };
+  return { page, currentUser, getListing, fetchInProgress };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onCreateListing: values => dispatch(requestCreateListing(formatRequestData(values))),
     onImageUpload: data => dispatch(requestImageUpload(data)),
+    onPayoutDetailsSubmit: values => dispatch(createStripeAccount(values)),
     onUpdateImageOrder: imageOrder => dispatch(updateImageOrder(imageOrder)),
     onCreateListingDraft: values => dispatch(createListingDraft(values)),
     onUpdateListingDraft: values => dispatch(updateListingDraft(values)),
