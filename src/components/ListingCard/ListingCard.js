@@ -37,7 +37,9 @@ export const ListingCardComponent = props => {
     : [];
   const mainImage = images.length > 0 ? images[0] : null;
   const imageURL = mainImage ? mainImage.sizes.find(i => i.name === 'landscape-crop').url : null;
-  const image2XURL = mainImage ? mainImage.sizes.find(i => i.name === 'landscape-crop2x').url : null;
+  const image2XURL = mainImage
+    ? mainImage.sizes.find(i => i.name === 'landscape-crop2x').url
+    : null;
   const higherRes = image2XURL ? { srcSet: `${image2XURL} 2x` } : null;
 
   // TODO: svg should have own loading strategy

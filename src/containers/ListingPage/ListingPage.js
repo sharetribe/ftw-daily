@@ -117,7 +117,6 @@ export class ListingPageComponent extends Component {
       ? currentListing.images.map(i => ({ id: i.id, sizes: i.attributes.sizes }))
       : [];
 
-
     // TODO: svg should have own loading strategy
     // Now noImageIcon is imported with default configuration (gives url)
     // This should be handled by ResponsiveImage or separate ImagePlaceholder component
@@ -137,7 +136,11 @@ export class ListingPageComponent extends Component {
     // TODO componentize
     const imageCarousel = images.length > 0
       ? <div className={css.imageContainer}>
-          <img className={css.mainImage} alt={title} src={images[0].sizes.find(i => i.name === 'landscape-crop').url} />
+          <img
+            className={css.mainImage}
+            alt={title}
+            src={images[0].sizes.find(i => i.name === 'landscape-crop').url}
+          />
           <div className={css.thumbnailContainer}>
             {images.slice(1).map(image => (
               <div key={image.id.uuid} className={css.thumbnailWrapper}>
@@ -160,7 +163,7 @@ export class ListingPageComponent extends Component {
     const showBookButton = !isOwnListing;
 
     const authorAvailable = currentListing && currentListing.author;
-    const authorProfile = authorAvailable && currentListing.author.attributes.profile
+    const authorProfile = authorAvailable && currentListing.author.attributes.profile;
     const authorName = authorAvailable
       ? `${authorProfile.firstName} ${authorProfile.lastName}`
       : '';

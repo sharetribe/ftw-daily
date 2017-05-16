@@ -49,7 +49,7 @@ export class EditListingLocationFormComponent extends Component {
     const classes = classNames(css.root, className);
 
     return (
-      <form className= {classes} onSubmit={handleSubmit}>
+      <form className={classes} onSubmit={handleSubmit}>
         <Field
           autoFocus
           name="location"

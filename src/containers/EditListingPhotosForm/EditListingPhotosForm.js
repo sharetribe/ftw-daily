@@ -5,15 +5,8 @@ import { intlShape, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import classNames from 'classnames';
-import config from '../../config';
-import { noEmptyArray, required } from '../../util/validators';
-import {
-  AddImages,
-  Button,
-  Input,
-  StripeBankAccountToken,
-  ValidationError,
-} from '../../components';
+import { noEmptyArray } from '../../util/validators';
+import { AddImages, Button, Input, ValidationError } from '../../components';
 
 import css from './EditListingPhotosForm.css';
 

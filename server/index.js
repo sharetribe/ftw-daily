@@ -129,7 +129,7 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  const mode = dev ? "development" : "production";
+  const mode = dev ? 'development' : 'production';
   console.log(`Listening to port ${PORT} in ${mode} mode`);
   if (dev) {
     console.log(`Open http://localhost:${PORT}/ and start hacking!`);
