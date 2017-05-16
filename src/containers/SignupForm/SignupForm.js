@@ -15,11 +15,11 @@ class SignupFormComponent extends Component {
       errorClassName: css.error,
     });
     this.EnhancedFirstNameInput = enhancedField('input', {
-      rootClassName: css.firstName,
+      rootClassName: css.firstNameRoot,
       errorClassName: css.error,
     });
     this.EnhancedLastNameInput = enhancedField('input', {
-      rootClassName: css.lastName,
+      rootClassName: css.lastNameRoot,
       errorClassName: css.error,
     });
   }
@@ -75,7 +75,6 @@ class SignupFormComponent extends Component {
           />
           <div className={css.name}>
             <Field
-              className={css.firstName}
               name="firstName"
               type="text"
               label={firstNameLabel}
@@ -83,7 +82,6 @@ class SignupFormComponent extends Component {
               component={this.EnhancedFirstNameInput}
             />
             <Field
-              className={css.lastName}
               name="lastName"
               type="text"
               label={lastNameLabel}
