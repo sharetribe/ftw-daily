@@ -137,7 +137,7 @@ export class ListingPageComponent extends Component {
     // TODO componentize
     const imageCarousel = images.length > 0
       ? <div className={css.imageContainer}>
-          <img className={css.mainImage} alt={title} src={images[0].sizes[0].url} />
+          <img className={css.mainImage} alt={title} src={images[0].sizes.find(i => i.name === 'landscape-crop').url} />
           <div className={css.thumbnailContainer}>
             {images.slice(1).map(image => (
               <div key={image.id.uuid} className={css.thumbnailWrapper}>
@@ -145,7 +145,7 @@ export class ListingPageComponent extends Component {
                   <img
                     className={css.thumbnail}
                     alt={`${title} thumbnail`}
-                    src={image.sizes[0].url}
+                    src={image.sizes.find(i => i.name === 'landscape-crop').url}
                   />
                 </div>
               </div>

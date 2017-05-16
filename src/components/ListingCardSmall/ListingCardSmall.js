@@ -35,9 +35,9 @@ export const ListingCardSmallComponent = props => {
     ? listing.images.map(i => ({ id: i.id, sizes: i.attributes.sizes }))
     : [];
   const mainImage = images.length > 0 ? images[0] : null;
-  const squareImageURL = mainImage ? mainImage.sizes.find(i => i.name === 'square').url : null;
-  const square2XImageURL = mainImage ? mainImage.sizes.find(i => i.name === 'square2x').url : null;
-  const higherRes = square2XImageURL ? { srcSet: `${square2XImageURL} 2x` } : null;
+  const imageURL = mainImage ? mainImage.sizes.find(i => i.name === 'landscape-crop').url : null;
+  const image2XURL = mainImage ? mainImage.sizes.find(i => i.name === 'landscape-crop2x').url : null;
+  const higherRes = image2XURL ? { srcSet: `${image2XURL} 2x` } : null;
 
   // TODO: svg should have own loading strategy
   // Now noImageIcon is imported with default configuration (gives url)
@@ -52,14 +52,14 @@ export const ListingCardSmallComponent = props => {
   );
   /* eslint-enable jsx-a11y/img-redundant-alt */
   const listingImage = (
-    <img className={css.thumbnail} src={squareImageURL} alt="Listing Title" {...higherRes} />
+    <img className={css.thumbnail} src={imageURL} alt="Listing Title" {...higherRes} />
   );
 
-  const imageOrPlaceholder = squareImageURL ? listingImage : noListingImage;
+  const imageOrPlaceholder = imageURL ? listingImage : noListingImage;
 
   return (
     <div className={css.listing}>
-      <div className={css.squareWrapper}>
+      <div className={css.threeToTwoWrapper}>
         <div className={css.aspectWrapper}>
           {imageOrPlaceholder}
         </div>
