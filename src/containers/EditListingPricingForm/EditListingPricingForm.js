@@ -30,9 +30,6 @@ export class EditListingPricingFormComponent extends Component {
     } = this.props;
 
     const priceRequiredMessage = intl.formatMessage({ id: 'EditListingPricingForm.priceRequired' });
-    const pricePlaceholderMessage = intl.formatMessage({
-      id: 'EditListingPricingForm.pricePlaceholder',
-    });
 
     return (
       <form onSubmit={handleSubmit}>
@@ -43,7 +40,6 @@ export class EditListingPricingFormComponent extends Component {
             component={this.EnhancedCurrencyInput}
             currencyConfig={config.currencyConfig}
             validate={[required(priceRequiredMessage)]}
-            placeholder={pricePlaceholderMessage}
           />
           <div className={css.perNight}>
             <FormattedMessage id="EditListingPricingForm.perNight" />
