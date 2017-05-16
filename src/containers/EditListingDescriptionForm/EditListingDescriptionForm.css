@@ -6,8 +6,16 @@
 }
 
 .descriptionField {
+  /* Font */
+  font-family: inherit;
+
+  /* Border */
   border: 1px solid #979797;
-  padding: 18px;
+  border-radius: 0px; /* Remove default iOS border radius */
+
+  /* Dimensions */
+  padding: 12px 18px;
+  min-height: 120px;
 }
 
 .submitButton {

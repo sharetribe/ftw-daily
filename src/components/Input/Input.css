@@ -7,6 +7,7 @@
 
   /* Border */
   border: 1px solid #979797;
+  border-radius: 0px; /* Remove default iOS border radius */
 
   /* Dimensions */
   padding-left: 18px;
