@@ -8,7 +8,7 @@
   flex-shrink: 0;
 }
 
-.squareWrapper {
+.threeToTwoWrapper {
   display: block;
   position: relative;
   width: 100%;
@@ -16,7 +16,7 @@
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
-  padding-bottom: 100%; /* 4:3 Aspect Ratio */
+  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
 }
 
 .noImageContainer,
