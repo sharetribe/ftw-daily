@@ -19,6 +19,8 @@ export const FETCH_CURRENT_USER_HAS_LISTINGS_ERROR = 'app/user/FETCH_CURRENT_USE
 const initialState = {
   currentUser: null,
   usersMeError: null,
+  createStripeAccountInProgress: false,
+  createStripeAccountError: null,
   currentUserHasListings: false,
   currentUserHasListingsError: null,
 };
@@ -51,6 +53,15 @@ export default function reducer(state = initialState, action = {}) {
     case FETCH_CURRENT_USER_HAS_LISTINGS_ERROR:
       console.error(payload); // eslint-disable-line
       return { ...state, currentUserHasListingsError: payload };
+
+    case STRIPE_ACCOUNT_CREATE_REQUEST:
+      return { ...state, createStripeAccountError: null, createStripeAccountInProgress: true };
+    case STRIPE_ACCOUNT_CREATE_SUCCESS:
+      return { ...state, createStripeAccountInProgress: false };
+    case STRIPE_ACCOUNT_CREATE_ERROR:
+      // eslint-disable-next-line no-console
+      console.error(payload);
+      return { ...state, createStripeAccountError: payload, createStripeAccountInProgress: false };
 
     default:
       return state;
@@ -160,11 +171,11 @@ export const fetchCurrentUser = () =>
       });
   };
 
-export const createStripeAccount = (bankAccountToken, address) =>
+export const createStripeAccount = payoutDetails =>
   (dispatch, getState, sdk) => {
     dispatch(stripeAccountCreateRequest());
     return sdk.users
-      .createStripeAccount({ bankAccountToken, address })
+      .createStripeAccount(payoutDetails)
       .then(response => {
         dispatch(stripeAccountCreateSuccess(response));
         return response;

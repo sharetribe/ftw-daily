@@ -58,6 +58,7 @@ TestPanel.propTypes = {
 const EditListingWizard = props => {
   const {
     className,
+    fetchInProgress,
     flattenedRoutes,
     history,
     images,
@@ -65,11 +66,13 @@ const EditListingWizard = props => {
     onCreateListing,
     onCreateListingDraft,
     onImageUpload,
+    onPayoutDetailsSubmit,
     onUpdateImageOrder,
     onUpdateListingDraft,
     rootClassName,
     selectedTab,
-    stripeConnected,
+    currentUser,
+    togglePageClassNames,
   } = props;
 
   const rootClasses = rootClassName || css.root;
@@ -98,7 +101,7 @@ const EditListingWizard = props => {
   const onUpsertListingDraft = currentListing.id ? onUpdateListingDraft : onCreateListingDraft;
 
   return (
-    <Tabs className={classes}>
+    <Tabs className={classes} navClassName={css.nav}>
       <EditListingDescriptionPanel
         tabLabel="Description"
         tabLinkProps={descriptionLinkProps}
@@ -154,15 +157,18 @@ const EditListingWizard = props => {
         tabLinkProps={{ name: 'EditListingPhotosPage' }}
         selected={selectedTab === PHOTOS}
         disabled={!stepsStatus[PHOTOS]}
+        fetchInProgress={fetchInProgress}
         listing={listing}
         images={images}
         onImageUpload={onImageUpload}
+        onPayoutDetailsSubmit={onPayoutDetailsSubmit}
         onSubmit={values => {
           const { country, images: updatedImages } = values;
           onCreateListing({ ...listing.attributes, country, images: updatedImages });
         }}
         onUpdateImageOrder={onUpdateImageOrder}
-        stripeConnected={stripeConnected}
+        currentUser={currentUser}
+        togglePageClassNames={togglePageClassNames}
       />
     </Tabs>
   );
@@ -172,12 +178,14 @@ EditListingWizard.defaultProps = {
   className: null,
   listing: null,
   rootClassName: null,
+  currentUser: null,
 };
 
 const { array, arrayOf, bool, func, object, oneOf, shape, string } = PropTypes;
 
 EditListingWizard.propTypes = {
   className: string,
+  fetchInProgress: bool.isRequired,
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
   history: shape({
     push: func.isRequired,
@@ -197,11 +205,13 @@ EditListingWizard.propTypes = {
   onCreateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
+  onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onUpdateListingDraft: func.isRequired,
   rootClassName: string,
   selectedTab: oneOf(STEPS).isRequired,
-  stripeConnected: bool.isRequired,
+  currentUser: propTypes.currentUser,
+  togglePageClassNames: func.isRequired,
 };
 
 export default EditListingWizard;

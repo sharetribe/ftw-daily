@@ -21,21 +21,6 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
         ]
       } />
   </AddImages>
-  <Field
-    component="input"
-    name="country"
-    type="hidden"
-    value="US" />
-  <Field
-    component={[Function]}
-    name="bankAccountToken"
-    props={
-      Object {
-        "country": "US",
-        "currency": "USD",
-      }
-    }
-    validate={[Function]} />
   <Button
     className={null}
     rootClassName=""

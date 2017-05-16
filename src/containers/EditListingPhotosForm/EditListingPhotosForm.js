@@ -4,15 +4,8 @@ import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
-import config from '../../config';
-import { noEmptyArray, required } from '../../util/validators';
-import {
-  AddImages,
-  Button,
-  Input,
-  StripeBankAccountToken,
-  ValidationError,
-} from '../../components';
+import { noEmptyArray } from '../../util/validators';
+import { AddImages, Button, Input, ValidationError } from '../../components';
 
 import css from './EditListingPhotosForm.css';
 
@@ -33,7 +26,7 @@ const RenderAddImage = props => {
   );
 };
 
-const { bool, func, object, shape, string } = PropTypes;
+const { func, object, shape, string } = PropTypes;
 
 RenderAddImage.propTypes = {
   accept: string.isRequired,
@@ -80,19 +73,9 @@ export class EditListingPhotosFormComponent extends Component {
       invalid,
       saveActionMsg,
       submitting,
-      stripeConnected,
     } = this.props;
 
     const imageRequiredMessage = intl.formatMessage({ id: 'EditListingPhotosForm.imageRequired' });
-    const bankAccountNumberRequiredMessage = intl.formatMessage({
-      id: 'EditListingPhotosForm.bankAccountNumberRequired',
-    });
-
-    // TODO This will be defined in the stripe popup form later.
-    // When that's ready, remove country from initialValues and hidden field.
-    const country = this.props.initialValues.country;
-    const showBankAccountField = !stripeConnected;
-    const currency = config.currencyConfig.currency;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -123,16 +106,6 @@ export class EditListingPhotosFormComponent extends Component {
           />
         </AddImages>
 
-        <Field component="input" name="country" type="hidden" value={country} />
-        {showBankAccountField
-          ? <Field
-              name="bankAccountToken"
-              component={StripeBankAccountToken}
-              props={{ country, currency }}
-              validate={required(bankAccountNumberRequiredMessage)}
-            />
-          : null}
-
         <Button
           className={css.submitButton}
           type="submit"
@@ -154,7 +127,6 @@ EditListingPhotosFormComponent.propTypes = {
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string,
-  stripeConnected: bool.isRequired,
 };
 
 const formName = 'EditListingPhotosForm';

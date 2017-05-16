@@ -3,14 +3,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Field, reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
+import classNames from 'classnames';
 import config from '../../config';
-import {
-  Button,
-  StripeBankAccountToken,
-  Select,
-  BirthdayInput,
-  LocationAutocompleteInput,
-} from '../../components';
+import { Button, StripeBankAccountToken, Select, BirthdayInput } from '../../components';
 import * as validators from '../../util/validators';
 import { enhancedField } from '../../util/forms';
 
@@ -54,17 +49,30 @@ class PayoutDetailsFormComponent extends Component {
     this.EnhancedBirthdayInput = enhancedField(BirthdayInput, {
       errorClassName: css.error,
     });
-    this.EnhancedLocationAutocompleteInput = enhancedField(LocationAutocompleteInput, {
-      errorClassName: css.error,
-    });
   }
   render() {
-    const { country, currency, handleSubmit, pristine, submitting, inProgress, intl } = this.props;
+    const {
+      className,
+      country,
+      currency,
+      disabled,
+      handleSubmit,
+      pristine,
+      submitting,
+      intl,
+    } = this.props;
 
-    const nameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.nameLabel' });
-    const nameRequired = validators.required(
+    const firstNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.firstNameLabel' });
+    const firstNameRequired = validators.required(
       intl.formatMessage({
-        id: 'PayoutDetailsForm.nameRequired',
+        id: 'PayoutDetailsForm.firstNameRequired',
+      })
+    );
+
+    const lastNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.lastNameLabel' });
+    const lastNameRequired = validators.required(
+      intl.formatMessage({
+        id: 'PayoutDetailsForm.lastNameRequired',
       })
     );
 
@@ -86,16 +94,11 @@ class PayoutDetailsFormComponent extends Component {
     const streetAddressPlaceholder = intl.formatMessage({
       id: 'PayoutDetailsForm.streetAddressPlaceholder',
     });
-    const streetAddressRequiredMessage = intl.formatMessage({
-      id: 'PayoutDetailsForm.streetAddressRequired',
-    });
-    const streetAddressNotRecognizedMessage = intl.formatMessage({
-      id: 'PayoutDetailsForm.streetAddressNotRecognized',
-    });
-    const validateStreetAddress = [
-      validators.autocompleteSearchRequired(streetAddressRequiredMessage),
-      validators.autocompletePlaceSelected(streetAddressNotRecognizedMessage),
-    ];
+    const streetAddressRequired = validators.required(
+      intl.formatMessage({
+        id: 'PayoutDetailsForm.streetAddressRequired',
+      })
+    );
 
     const postalCodeLabel = intl.formatMessage({ id: 'PayoutDetailsForm.postalCodeLabel' });
     const postalCodePlaceholder = intl.formatMessage({
@@ -123,9 +126,8 @@ class PayoutDetailsFormComponent extends Component {
             type="text"
             label={streetAddressLabel}
             placeholder={streetAddressPlaceholder}
-            format={null}
-            component={this.EnhancedLocationAutocompleteInput}
-            validate={validateStreetAddress}
+            component={this.EnhancedInput}
+            validate={streetAddressRequired}
             clearOnUnmount
           />
           <Field
@@ -170,10 +172,11 @@ class PayoutDetailsFormComponent extends Component {
         </div>
       : null;
 
-    const submitDisabled = pristine || submitting || inProgress;
+    const classes = classNames(css.root, className);
+    const submitDisabled = pristine || submitting || disabled;
 
     return (
-      <form className={css.root} onSubmit={handleSubmit}>
+      <form className={classes} onSubmit={handleSubmit}>
         <h2 className={css.formTitle}>
           <FormattedMessage id="PayoutDetailsForm.title" />
         </h2>
@@ -184,14 +187,21 @@ class PayoutDetailsFormComponent extends Component {
           <FormattedMessage id="PayoutDetailsForm.personalDetailsTitle" />
         </h2>
         <Field
-          name="name"
+          name="firstName"
           type="text"
-          label={nameLabel}
+          label={firstNameLabel}
           component={this.EnhancedInput}
-          validate={nameRequired}
+          validate={firstNameRequired}
         />
         <Field
-          name="birthday"
+          name="lastName"
+          type="text"
+          label={lastNameLabel}
+          component={this.EnhancedInput}
+          validate={lastNameRequired}
+        />
+        <Field
+          name="birthDate"
           type="text"
           label={birthdayLabel}
           format={null}
@@ -218,11 +228,12 @@ class PayoutDetailsFormComponent extends Component {
   }
 }
 
-PayoutDetailsFormComponent.defaultProps = { country: null, inProgress: false };
+PayoutDetailsFormComponent.defaultProps = { className: null, country: null, disabled: false };
 
 PayoutDetailsFormComponent.propTypes = {
   ...formPropTypes,
-  inProgress: bool,
+  className: string,
+  disabled: bool,
   currency: string.isRequired,
 
   // from mapStateToProps

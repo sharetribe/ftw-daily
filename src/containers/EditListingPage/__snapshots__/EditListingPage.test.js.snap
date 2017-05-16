@@ -1,8 +1,11 @@
 exports[`EditListingPageComponent matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
+  className=""
   title="EditListingPage.titleCreateListing">
   <EditListingWizard
     className={null}
+    currentUser={null}
+    fetchInProgress={false}
     flattenedRoutes={Array []}
     history={
       Object {
@@ -14,10 +17,11 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     onCreateListing={[Function]}
     onCreateListingDraft={[Function]}
     onImageUpload={[Function]}
+    onPayoutDetailsSubmit={[Function]}
     onUpdateImageOrder={[Function]}
     onUpdateListingDraft={[Function]}
     rootClassName={null}
     selectedTab="description"
-    stripeConnected={false} />
+    togglePageClassNames={[Function]} />
 </Connect(withRouter(PageLayout))>
 `;

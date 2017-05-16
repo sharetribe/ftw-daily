@@ -1,41 +1,119 @@
-import React, { PropTypes } from 'react';
-import classNames from 'classnames';
+import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { EditListingPhotosForm } from '../../containers';
+import classNames from 'classnames';
+import { omitBy, isUndefined } from 'lodash';
+import { EditListingPhotosForm, PayoutDetailsForm } from '../../containers';
+import { Modal } from '../../components';
+import * as propTypes from '../../util/propTypes';
+import config from '../../config';
 
 import css from './EditListingPhotosPanel.css';
 
-const EditListingPhotosPanel = props => {
-  const {
-    className,
-    rootClassName,
-    images,
-    onImageUpload,
-    onSubmit,
-    onUpdateImageOrder,
-    stripeConnected,
-  } = props;
+class EditListingPhotosPanel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      submittedValues: null,
+      showPayoutDetails: false,
+    };
+    this.handlePhotosSubmit = this.handlePhotosSubmit.bind(this);
+    this.handlePayoutModalClose = this.handlePayoutModalClose.bind(this);
+    this.handlePayoutSubmit = this.handlePayoutSubmit.bind(this);
+  }
+  handlePhotosSubmit(values) {
+    const { onSubmit, currentUser } = this.props;
+    const stripeConnected = currentUser &&
+      currentUser.attributes &&
+      currentUser.attributes.stripeConnected;
+    if (stripeConnected) {
+      onSubmit(values);
+    } else {
+      this.setState({
+        submittedValues: values,
+        showPayoutDetails: true,
+      });
+    }
+  }
+  handlePayoutModalClose() {
+    this.setState({ showPayoutDetails: false });
+  }
+  handlePayoutSubmit(values) {
+    const {
+      firstName,
+      lastName,
+      birthDate,
+      country,
+      streetAddress,
+      postalCode,
+      city,
+      bankAccountToken,
+    } = values;
+    const address = {
+      country,
+      city,
+      addressLine: streetAddress,
+      postalCode,
+    };
+    const params = {
+      firstName,
+      lastName,
+      birthDate,
+      bankAccountToken,
+      address: omitBy(address, isUndefined),
+    };
+    this.props.onPayoutDetailsSubmit(params).then(() => {
+      this.props.onSubmit(this.state.submittedValues);
+    });
+  }
+  render() {
+    const {
+      className,
+      rootClassName,
+      fetchInProgress,
+      images,
+      onImageUpload,
+      onUpdateImageOrder,
+      togglePageClassNames,
+    } = this.props;
 
-  const rootClass = rootClassName || css.root;
-  const classes = classNames(rootClass, className);
+    const rootClass = rootClassName || css.root;
+    const classes = classNames(rootClass, className, {
+      [css.payoutModalOpen]: this.state.showPayoutDetails,
+    });
+    const currency = config.currencyConfig.currency;
 
-  // TODO This will be defined in the stripe popup form later.
-  const country = 'US';
+    const payoutDetailsModal = (
+      <Modal
+        className={css.payoutModal}
+        isOpen={this.state.showPayoutDetails}
+        onClose={this.handlePayoutModalClose}
+        togglePageClassNames={togglePageClassNames}
+      >
+        <PayoutDetailsForm
+          className={css.payoutDetails}
+          currency={currency}
+          disabled={fetchInProgress}
+          onSubmit={this.handlePayoutSubmit}
+        />
+      </Modal>
+    );
 
-  return (
-    <div className={classes}>
-      <h1><FormattedMessage id="EditListingPhotosPanel.title" /></h1>
-      <EditListingPhotosForm
-        initialValues={{ country, images }}
-        images={images}
-        onImageUpload={onImageUpload}
-        onSubmit={onSubmit}
-        onUpdateImageOrder={onUpdateImageOrder}
-        stripeConnected={stripeConnected}
-      />
-    </div>
-  );
-};
+    return (
+      <div className={classes}>
+        {payoutDetailsModal}
+        <h1><FormattedMessage id="EditListingPhotosPanel.title" /></h1>
+        <EditListingPhotosForm
+          disabled={fetchInProgress}
+          initialValues={{ images }}
+          images={images}
+          onImageUpload={onImageUpload}
+          onSubmit={this.handlePhotosSubmit}
+          onUpdateImageOrder={onUpdateImageOrder}
+        />
+      </div>
+    );
+  }
+}
 
 const { array, bool, func, string } = PropTypes;
 
@@ -43,16 +121,20 @@ EditListingPhotosPanel.defaultProps = {
   className: null,
   rootClassName: null,
   images: [],
+  currentUser: null,
 };
 
 EditListingPhotosPanel.propTypes = {
   className: string,
   rootClassName: string,
+  currentUser: propTypes.currentUser,
+  fetchInProgress: bool.isRequired,
   images: array,
   onImageUpload: func.isRequired,
+  onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,
-  stripeConnected: bool.isRequired,
+  togglePageClassNames: func.isRequired,
 };
 
 export default EditListingPhotosPanel;
