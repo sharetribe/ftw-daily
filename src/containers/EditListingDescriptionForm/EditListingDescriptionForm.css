@@ -5,6 +5,10 @@
   flex-direction: column;
 }
 
+.description {
+  flex-grow: 1;
+}
+
 .descriptionField {
   /* Font */
   font-family: inherit;

@@ -19,6 +19,8 @@ import {
   updateImageOrder,
 } from './EditListingPage.duck';
 
+import css from './EditListingPage.css';
+
 const formatRequestData = values => {
   const {
     address,
@@ -46,6 +48,7 @@ export class EditListingPageComponent extends Component {
     this.state = { pageClassNames: '' };
     this.togglePageClassNames = this.togglePageClassNames.bind(this);
   }
+
   togglePageClassNames(className, addClass = true) {
     this.setState(prevState => {
       const prevPageClassNames = prevState.pageClassNames.split(' ');
@@ -103,6 +106,7 @@ export class EditListingPageComponent extends Component {
       return (
         <PageLayout title={title} className={this.state.pageClassNames}>
           <EditListingWizard
+            className={css.wizard}
             disabled={disableForm}
             fetchInProgress={fetchInProgress}
             flattenedRoutes={flattenedRoutes}

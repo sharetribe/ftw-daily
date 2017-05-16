@@ -4,6 +4,7 @@ import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
+import classNames from 'classnames';
 import { noEmptyArray } from '../../util/validators';
 import { AddImages, Button, Input, ValidationError } from '../../components';
 
@@ -66,6 +67,7 @@ export class EditListingPhotosFormComponent extends Component {
 
   render() {
     const {
+      className,
       disabled,
       handleSubmit,
       images,
@@ -77,10 +79,12 @@ export class EditListingPhotosFormComponent extends Component {
 
     const imageRequiredMessage = intl.formatMessage({ id: 'EditListingPhotosForm.imageRequired' });
 
-    return (
-      <form onSubmit={handleSubmit}>
+    const classes = classNames(css.root, className);
 
-        <AddImages images={images} onSortEnd={this.onSortEnd}>
+    return (
+      <form className={classes} onSubmit={handleSubmit}>
+
+        <AddImages className={css.imagesField} images={images} onSortEnd={this.onSortEnd}>
           <Field
             accept={ACCEPT_IMAGES}
             component={RenderAddImage}

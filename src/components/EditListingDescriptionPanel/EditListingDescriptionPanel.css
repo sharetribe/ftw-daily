@@ -5,3 +5,7 @@
   flex-direction: column;
   padding: 0 1rem;
 }
+
+.form {
+  flex-grow: 1;
+}

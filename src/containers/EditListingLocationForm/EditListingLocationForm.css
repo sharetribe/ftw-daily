@@ -5,6 +5,10 @@
   flex-direction: column;
 }
 
+.building {
+  flex-grow: 1;
+}
+
 .submitButton {
   margin-top: 1rem;
 }

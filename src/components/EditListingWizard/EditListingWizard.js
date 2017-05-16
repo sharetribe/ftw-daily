@@ -103,6 +103,7 @@ const EditListingWizard = props => {
   return (
     <Tabs className={classes} navClassName={css.nav}>
       <EditListingDescriptionPanel
+        className={css.panel}
         tabLabel="Description"
         tabLinkProps={descriptionLinkProps}
         selected={selectedTab === DESCRIPTION}
@@ -117,6 +118,7 @@ const EditListingWizard = props => {
         }}
       />
       <EditListingLocationPanel
+        className={css.panel}
         tabLabel="Location"
         tabLinkProps={{ name: 'EditListingLocationPage' }}
         selected={selectedTab === LOCATION}
@@ -139,6 +141,7 @@ const EditListingWizard = props => {
         }}
       />
       <EditListingPricingPanel
+        className={css.panel}
         tabLabel="Pricing"
         tabLinkProps={{ name: 'EditListingPricingPage' }}
         selected={selectedTab === PRICING}
@@ -153,6 +156,7 @@ const EditListingWizard = props => {
         }}
       />
       <EditListingPhotosPanel
+        className={css.panel}
         tabLabel="Photos"
         tabLinkProps={{ name: 'EditListingPhotosPage' }}
         selected={selectedTab === PHOTOS}

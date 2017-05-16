@@ -13,3 +13,7 @@
 .payoutDetails {
   margin: 1rem;
 }
+
+.form {
+  flex-grow: 1;
+}

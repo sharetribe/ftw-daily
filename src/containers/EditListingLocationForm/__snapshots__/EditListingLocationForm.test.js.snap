@@ -1,5 +1,6 @@
 exports[`EditListingLocationForm matches snapshot 1`] = `
 <form
+  className=""
   onSubmit={[Function]}>
   <Field
     autoFocus={true}

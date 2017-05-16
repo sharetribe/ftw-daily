@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
+import classNames from 'classnames';
 import { enhancedField } from '../../util/forms';
 import { maxLength, required } from '../../util/validators';
 import { Button } from '../../components';
@@ -18,11 +19,12 @@ export class EditListingDescriptionFormComponent extends Component {
     // to avoid losing focus.
     // See: https://github.com/erikras/redux-form/releases/tag/v6.0.0-alpha.14
     this.EnhancedInput = enhancedField('input');
-    this.EnhancedTextArea = enhancedField('textarea');
+    this.EnhancedTextArea = enhancedField('textarea', { rootClassName: css.description });
   }
 
   render() {
     const {
+      className,
       disabled,
       handleSubmit,
       intl,
@@ -54,8 +56,9 @@ export class EditListingDescriptionFormComponent extends Component {
       id: 'EditListingDescriptionForm.descriptionRequired',
     });
 
+    const classes = classNames(css.root, className);
     return (
-      <form onSubmit={handleSubmit}>
+      <form className={classes} onSubmit={handleSubmit}>
         <Field
           autoFocus
           name="title"
@@ -87,12 +90,16 @@ export class EditListingDescriptionFormComponent extends Component {
   }
 }
 
-EditListingDescriptionFormComponent.defaultProps = { saveActionMsg: 'Next: location' };
+EditListingDescriptionFormComponent.defaultProps = {
+  className: null,
+  saveActionMsg: 'Next: location',
+};
 
 const { func, string } = PropTypes;
 
 EditListingDescriptionFormComponent.propTypes = {
   ...formPropTypes,
+  className: string,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string,

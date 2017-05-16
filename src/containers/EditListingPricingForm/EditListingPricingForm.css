@@ -3,12 +3,14 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .priceWrapper {
   display: flex;
   flex-direction: row;
   width: 100%;
+  flex-grow: 1;
 }
 
 .priceInput {
@@ -19,7 +21,8 @@
   flex-basis: 80px;
   font-size: 14px;
   line-height: 50px;
-  margin-left: 1rem;}
+  margin-left: 1rem;
+}
 
 .submitButton {
   margin-top: 1rem;

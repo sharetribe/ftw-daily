@@ -9,6 +9,7 @@
  */
 import React, { Component, PropTypes } from 'react';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import classNames from 'classnames';
 import { Promised } from '../../components';
 import { uuid } from '../../util/propTypes';
 import css from './AddImages.css';
@@ -76,9 +77,10 @@ const SortableImage = SortableElement(Thumbnail);
 
 // Create container where there are sortable images and passed children like "Add image" input etc.
 const SortableImages = SortableContainer(props => {
-  const { children, images } = props;
+  const { children, className, images } = props;
+  const classes = classNames(css.root, className);
   return (
-    <ol className={css.imagesContainer}>
+    <ol className={classes}>
       {images.map((image, index) => <SortableImage {...image} index={index} key={image.id} />)}
       {children}
     </ol>
@@ -92,11 +94,12 @@ const AddImages = props => {
   return <SortableImages axis="xy" {...props} />;
 };
 
-AddImages.defaultProps = { images: [] };
+AddImages.defaultProps = { className: null, images: [] };
 
 AddImages.propTypes = {
   images: array,
   children: node.isRequired,
+  className: string,
   onSortEnd: func.isRequired,
 };
 

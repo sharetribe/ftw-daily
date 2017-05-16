@@ -15,7 +15,7 @@ const EditListingPricingPanel = props => {
   return (
     <div className={classes}>
       <h1><FormattedMessage id="EditListingPricingPanel.title" /></h1>
-      <EditListingPricingForm initialValues={{ price }} onSubmit={onSubmit} />
+      <EditListingPricingForm className={css.form} initialValues={{ price }} onSubmit={onSubmit} />
     </div>
   );
 };
