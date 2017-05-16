@@ -102,10 +102,12 @@ export const SearchPageComponent = props => {
 
   return (
     <PageLayout title={`Search page: ${tab}`}>
-      {searchListingsError ? searchError : null}
-      {listingsAreLoaded && totalItems > 0 ? resultsFound : null}
-      {listingsAreLoaded && totalItems === 0 ? noResults : null}
-      {searchInProgress ? loadingResults : null}
+      <div className={css.searchResultSummary}>
+        {searchListingsError ? searchError : null}
+        {listingsAreLoaded && totalItems > 0 ? resultsFound : null}
+        {listingsAreLoaded && totalItems === 0 ? noResults : null}
+        {searchInProgress ? loadingResults : null}
+      </div>
       <div className={css.container}>
         <div className={filtersClassName}>
           <FilterPanel />
