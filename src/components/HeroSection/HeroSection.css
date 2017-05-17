@@ -1,7 +1,7 @@
 .section {
   width: 100%;
   min-height: calc(100vh - 50px);
-  background-image: url("data:image/svg+xml;utf8,<svg width='375' height='240' xmlns='http://www.w3.org/2000/svg'><g fill='none' fill-rule='evenodd'><path fill='#D8D8D8' d='M0 0h375v240H0z' vector-effect='non-scaling-stroke'/><path d='M375 0l-375 240M.5.5l375 240' stroke='#979797' stroke-linecap='square' vector-effect='non-scaling-stroke'/></g></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg width='375' height='240' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'><g fill='none' fill-rule='evenodd'><path fill='#D8D8D8' d='M0 0h375v240H0z' vector-effect='non-scaling-stroke'/><path d='M375 0l-375 240M.5.5l375 240' stroke='#979797' stroke-linecap='square' vector-effect='non-scaling-stroke'/></g></svg>");
   background-size: 100% 100%;
   background-position: center;
 
