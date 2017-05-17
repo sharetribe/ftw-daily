@@ -42,13 +42,6 @@ const app = express();
 // See: https://www.npmjs.com/package/helmet
 app.use(helmet());
 
-// Use basic authentication when not in dev mode.
-if (!dev) {
-  const USERNAME = process.env.BASIC_AUTH_USERNAME;
-  const PASSWORD = process.env.BASIC_AUTH_PASSWORD;
-  app.use(auth.basicAuth(USERNAME, PASSWORD));
-}
-
 // Redirect HTTP to HTTPS if ENFORCE_SSL is `true`.
 // This also works behind reverse proxies (load balancers) as they are for example used by Heroku.
 // In such cases, however, the TRUST_PROXY parameter has to be set (see below)
@@ -71,6 +64,13 @@ if (TRUST_PROXY === 'true') {
   app.disable('trust proxy');
 } else if (TRUST_PROXY !== null) {
   app.set('trust proxy', TRUST_PROXY);
+}
+
+// Use basic authentication when not in dev mode.
+if (!dev) {
+  const USERNAME = process.env.BASIC_AUTH_USERNAME;
+  const PASSWORD = process.env.BASIC_AUTH_PASSWORD;
+  app.use(auth.basicAuth(USERNAME, PASSWORD));
 }
 
 app.use(compression());
