@@ -1,7 +1,5 @@
 /* ModalInMobile is visible by default */
-.modalInMobile {
-  display: block;
-}
+.modalInMobile { }
 
 /* Content is hidden in Mobile layout */
 .modalHidden {
