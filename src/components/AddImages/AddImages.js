@@ -73,7 +73,20 @@ Thumbnail.propTypes = {
   imageId: uuid,
 };
 
-const SortableImage = SortableElement(Thumbnail);
+// Sorting is disabled temporarily.
+//
+// The issue with sorting is that in touch devices it makes
+// scrolling the page really hard. The image takes 100% of the width
+// of the device (minus margin) and thus the whole screen is filled
+// up with the sortable images. When the user tries to scroll by dragging
+// the finger on the device, it actually start to sort the images and
+// not scroll.
+//
+// TODO Think what to do with the scrolling issue when sorting is in use
+//
+// TODO Enable me:
+// const SortableImage = SortableElement(Thumbnail);
+const SortableImage = Thumbnail;
 
 // Create container where there are sortable images and passed children like "Add image" input etc.
 const SortableImages = SortableContainer(props => {
