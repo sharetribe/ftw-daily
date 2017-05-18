@@ -5,7 +5,7 @@
   flex-direction: column;
   position: fixed;
   top: 0;
-  height: 100vh;
+  bottom: 0;
   width: 100%;
   z-index: 100;
   background-color: white;
