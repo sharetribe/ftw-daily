@@ -22,14 +22,14 @@ const windowWidth = () => {
   const x = w.innerWidth || e.clientWidth || g.clientWidth;
 
   return x;
-}
+};
 
 class MobileFrame extends Component {
   constructor(props) {
     super(props);
     this.state = {
       manuallyDisabled: false,
-      automaticallyDisabled: false
+      automaticallyDisabled: false,
     };
 
     this.closeFrame = this.closeFrame.bind(this);
@@ -41,11 +41,11 @@ class MobileFrame extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this.toggleBasedOnWindowSize);
+    window.addEventListener('resize', this.toggleBasedOnWindowSize);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.toggleBasedOnWindowSize);
+    window.removeEventListener('resize', this.toggleBasedOnWindowSize);
   }
 
   closeFrame(e) {
@@ -57,9 +57,9 @@ class MobileFrame extends Component {
     const shouldHide = windowWidth() < SHOW_FRAME_BREAKPOINT;
 
     if (shouldHide) {
-      this.setState({automaticallyDisabled: true})
+      this.setState({ automaticallyDisabled: true });
     } else {
-      this.setState({automaticallyDisabled: false})
+      this.setState({ automaticallyDisabled: false });
     }
   }
 

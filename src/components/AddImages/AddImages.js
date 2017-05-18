@@ -8,7 +8,7 @@
  * </AddImages>
  */
 import React, { Component, PropTypes } from 'react';
-import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import { SortableContainer } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { Promised } from '../../components';
 import { uuid } from '../../util/propTypes';
