@@ -9,10 +9,17 @@
   width: 100%;
   z-index: 100;
   background-color: white;
-
-  /* Mobile frame fix - this needs to be removed */
-  max-width: 375px;
   margin: 0 auto;
+}
+
+/*
+  A temporary solution to make the modal (which has position: fixed)
+  to stay inside the mobile frame.
+
+  Remove this when we remove the mobile frame.
+*/
+:global(.mobileFrameEnabled) .isOpen {
+  max-width: 375px;
 }
 
 /* Content is explicitly hidden (this default can be overridden with passed-in class) */
