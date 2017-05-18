@@ -141,11 +141,18 @@
   padding: 1rem;
   background-color: white;
   border-top: solid 1px #ccc;
-
-  /* Mobile frame fix */
-  max-width: 375px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+/*
+  A temporary solution to make the modal (which has position: fixed)
+  to stay inside the mobile frame.
+
+  Remove this when we remove the mobile frame.
+*/
+:global(.mobileFrameEnabled) .openBookingForm {
+  max-width: 375px;
 }
 
 .bookingModalTitle {
