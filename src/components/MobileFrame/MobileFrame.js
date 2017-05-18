@@ -54,6 +54,10 @@ class MobileFrame extends Component {
   }
 
   toggleBasedOnWindowSize() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
     const shouldHide = windowWidth() < SHOW_FRAME_BREAKPOINT;
 
     if (shouldHide) {
