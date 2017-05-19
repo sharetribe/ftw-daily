@@ -17,7 +17,7 @@ const DIRECTION_DOWN = 'down';
 
 // Renders the autocompletion prediction results in a list
 const LocationPredictionsList = props => {
-  const { predictions, highlightedIndex, onSelectItem } = props;
+  const { predictions, highlightedIndex, onSelectStart, onSelectEnd } = props;
   if (predictions.length === 0) {
     return null;
   }
@@ -30,7 +30,10 @@ const LocationPredictionsList = props => {
       <li
         className={isHighlighted ? css.highlighted : null}
         key={prediction.id}
-        onClick={() => onSelectItem(index)}
+        onTouchStart={onSelectStart}
+        onMouseDown={onSelectStart}
+        onTouchEnd={() => onSelectEnd(index)}
+        onMouseUp={() => onSelectEnd(index)}
       >
         {prediction.description}
       </li>
@@ -58,7 +61,8 @@ LocationPredictionsList.propTypes = {
     })
   ).isRequired,
   highlightedIndex: number,
-  onSelectItem: func.isRequired,
+  onSelectStart: func.isRequired,
+  onSelectEnd: func.isRequired,
 };
 
 // Get the current value with defaults from the given
@@ -91,7 +95,7 @@ class LocationAutocompleteInput extends Component {
 
     this.state = {
       inputHasFocus: false,
-      predictionsHaveHover: false,
+      selectionInProgress: false,
       highlightedIndex: -1, // -1 means no highlight
     };
 
@@ -100,6 +104,10 @@ class LocationAutocompleteInput extends Component {
     this.selectItemIfNoneSelected = this.selectItemIfNoneSelected.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.handleOnBlur = this.handleOnBlur.bind(this);
+    this.handlePredictionsSelectStart = this.handlePredictionsSelectStart.bind(this);
+    this.handlePredictionsSelectEnd = this.handlePredictionsSelectEnd.bind(this);
+    this.finalizeSelection = this.finalizeSelection.bind(this);
 
     // Debounce the method to avoid calling the API too many times
     // when the user is typing fast.
@@ -268,9 +276,31 @@ class LocationAutocompleteInput extends Component {
         });
       });
   }
+
+  finalizeSelection() {
+    this.setState({ inputHasFocus: false, highlightedIndex: -1 });
+    this.props.input.onBlur(currentValue(this.props));
+  }
+
+  handleOnBlur() {
+    if (!this.state.selectionInProgress) {
+      this.finalizeSelection();
+    }
+  }
+
+  handlePredictionsSelectStart() {
+    this.setState({selectionInProgress: true})
+  }
+
+  handlePredictionsSelectEnd(index) {
+    this.setState({selectionInProgress: false});
+    this.selectItem(index);
+    this.finalizeSelection();
+  }
+
   render() {
     const { autoFocus, className, placeholder, input } = this.props;
-    const { name, onFocus, onBlur } = input;
+    const { name, onFocus } = input;
     const { search, predictions } = currentValue(this.props);
 
     const handleOnFocus = e => {
@@ -278,21 +308,12 @@ class LocationAutocompleteInput extends Component {
       onFocus(e);
     };
 
-    const handleOnBlur = () => {
-      this.setState({ inputHasFocus: false, highlightedIndex: -1 });
-      onBlur(currentValue(this.props));
-    };
-
     // Only render predictions when the input has focus. For
     // development and easier workflow with the browser devtools, you
     // might want to hardcode this to `true`. Otherwise the dropdown
     // list will disappear.
     //
-    // We also have to check if the predictions have hover to avoid a
-    // click triggering a blur event that hides the predictions before
-    // the click event is sent, resulting in a click to whatever is
-    // rendered below the predictions.
-    const renderPredictions = this.state.inputHasFocus || this.state.predictionsHaveHover;
+    const renderPredictions = this.state.inputHasFocus;
 
     return (
       <div className={css.root}>
@@ -305,21 +326,17 @@ class LocationAutocompleteInput extends Component {
           name={name}
           value={search}
           onFocus={handleOnFocus}
-          onBlur={handleOnBlur}
+          onBlur={this.handleOnBlur}
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
         />
         {renderPredictions
-          ? <div
-              onMouseEnter={() => this.setState({ predictionsHaveHover: true })}
-              onMouseLeave={() => this.setState({ predictionsHaveHover: false })}
-            >
-              <LocationPredictionsList
-                predictions={predictions}
-                highlightedIndex={this.state.highlightedIndex}
-                onSelectItem={this.selectItem}
-              />
-            </div>
+          ? <LocationPredictionsList
+              predictions={predictions}
+              highlightedIndex={this.state.highlightedIndex}
+              onSelectStart={this.handlePredictionsSelectStart}
+              onSelectEnd={this.handlePredictionsSelectEnd}
+            />
           : null}
       </div>
     );
