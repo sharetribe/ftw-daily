@@ -289,11 +289,11 @@ class LocationAutocompleteInput extends Component {
   }
 
   handlePredictionsSelectStart() {
-    this.setState({selectionInProgress: true})
+    this.setState({ selectionInProgress: true });
   }
 
   handlePredictionsSelectEnd(index) {
-    this.setState({selectionInProgress: false});
+    this.setState({ selectionInProgress: false });
     this.selectItem(index);
     this.finalizeSelection();
   }
