@@ -36,11 +36,8 @@ class MobileFrame extends Component {
     this.toggleBasedOnWindowSize = this.toggleBasedOnWindowSize.bind(this);
   }
 
-  componentWillMount() {
-    this.toggleBasedOnWindowSize();
-  }
-
   componentDidMount() {
+    this.toggleBasedOnWindowSize();
     window.addEventListener('resize', this.toggleBasedOnWindowSize);
   }
 
@@ -54,17 +51,8 @@ class MobileFrame extends Component {
   }
 
   toggleBasedOnWindowSize() {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
     const shouldHide = windowWidth() < SHOW_FRAME_BREAKPOINT;
-
-    if (shouldHide) {
-      this.setState({ automaticallyDisabled: true });
-    } else {
-      this.setState({ automaticallyDisabled: false });
-    }
+    this.setState({ automaticallyDisabled: shouldHide });
   }
 
   render() {
