@@ -12,16 +12,6 @@
   margin: 0 auto;
 }
 
-/*
-  A temporary solution to make the modal (which has position: fixed)
-  to stay inside the mobile frame.
-
-  Remove this when we remove the mobile frame.
-*/
-:global(.mobileFrameEnabled) .isOpen {
-  max-width: 375px;
-}
-
 /* Content is explicitly hidden (this default can be overridden with passed-in class) */
 /* The use case for having both .isOpen and .isClosed is ModalInMobile use case       */
 /* where desktop layout should not get any styling from Modal component.              */
