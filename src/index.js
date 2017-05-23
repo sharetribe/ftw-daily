@@ -23,7 +23,7 @@ import { authInfo } from './ducks/Auth.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
 import routeConfiguration from './routesConfiguration';
 
-import './index.css';
+import './marketplace.css';
 
 const render = store => {
   // If the server already loaded the auth information, render the app
