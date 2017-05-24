@@ -38,6 +38,7 @@ import * as PasswordForgottenForm
 import * as PayoutDetailsForm from './containers/PayoutDetailsForm/PayoutDetailsForm.example';
 import * as SignupForm from './containers/SignupForm/SignupForm.example';
 import * as StripePaymentForm from './containers/StripePaymentForm/StripePaymentForm.example';
+import * as Typography from './containers/StyleguidePage/Typography.example';
 
 export {
   AddImages,
@@ -69,4 +70,5 @@ export {
   StripePaymentForm,
   TabNav,
   Tabs,
+  Typography,
 };

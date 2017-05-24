@@ -1,8 +1,78 @@
+:root {
+  --spacing-unit: 6px;
+}
+
 .root {
   padding: 1rem 0;
 }
 
 .withPadding,
 .defaultWrapperStyles {
-  padding: 1rem;
+  padding: 12px;
+}
+
+/* Typography.example */
+.content {
+
+}
+
+.baselines {
+  background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 5h10M0 11h10M0 17h10" stroke="#f1f1f1"/><path d="M0 23h10" stroke="#ddd" stroke-width="1"/></svg>');
+  background-repeat: repeat;
+
+  @media (min-width: 768px) {
+      background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 7h10M0 15h10M0" stroke="#f1f1f1"/><path d="M0 23h10" stroke="#ddd" stroke-width="1"/></svg>');
+      background-repeat: repeat;
+  }
+}
+
+
+.spacing2x {
+  margin: calc(2 * var(--spacing-unit)) 0;
+}
+
+.fontsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(4 * var(--spacing-unit));
+
+  &::after {
+    content: ".";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}
+
+.fontCard {
+  flex-basis: 300px;
+  display: flex;
+  flex-direction: column;
+
+  /**
+   * FontCard contains 4px worth of borders, which needs to be factored in since we use
+   * box-sizing: border-box;
+   * In this case, we'll adjust margin-bottoms (24px - 4px = 20px)
+   */
+  margin-bottom: calc(4 * var(--spacing-unit) - 4px);
+  margin-right: calc(2 * var(--spacing-unit));
+}
+
+.element {
+  border-style: solid;
+  border-color: #aaa;
+  border-width: 1px;
+}
+
+.description {
+  flex-grow: 1;
+  width: 100%;
+  background-color: #f1f1f1;
+  padding: calc(2 * var(--spacing-unit));
+
+  border-style: solid;
+  border-color: #aaa;
+  border-width: 1px;
+  border-top-color: transparent;
 }
