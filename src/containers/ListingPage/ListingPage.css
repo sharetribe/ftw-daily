@@ -145,16 +145,6 @@
   transform: translateX(-50%);
 }
 
-/*
-  A temporary solution to make the modal (which has position: fixed)
-  to stay inside the mobile frame.
-
-  Remove this when we remove the mobile frame.
-*/
-:global(.mobileFrameEnabled) .openBookingForm {
-  max-width: 375px;
-}
-
 .bookingModalTitle {
   margin: 1rem 0;
 }

@@ -23,7 +23,6 @@ import LocationAutocompleteInput from './LocationAutocompleteInput/LocationAutoc
 import Map from './Map/Map';
 import MapPanel from './MapPanel/MapPanel';
 import Menu from './Menu/Menu';
-import MobileFrame from './MobileFrame/MobileFrame';
 import MobileMenu from './MobileMenu/MobileMenu';
 import Modal from './Modal/Modal';
 import ModalInMobile from './ModalInMobile/ModalInMobile';
@@ -71,7 +70,6 @@ export {
   Map,
   MapPanel,
   Menu,
-  MobileFrame,
   MobileMenu,
   Modal,
   ModalInMobile,
