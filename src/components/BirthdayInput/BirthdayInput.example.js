@@ -33,8 +33,8 @@ const Form = reduxForm({
 export const Empty = {
   component: Form,
   props: {
-    onChange: values => {
-      console.log('birthday changed to:', values.birthday);
+    onChange: ({ birthday }) => {
+      console.log('birthday changed to:', birthday ? birthday.toUTCString() : birthday);
     },
   },
 };
