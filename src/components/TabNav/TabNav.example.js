@@ -13,4 +13,5 @@ export const Empty = {
       { text: 'Selected', linkProps: selfLinkProps, selected: true },
     ],
   },
+  group: 'navigation',
 };

@@ -39,6 +39,7 @@ export const EmptyWithEnUS = {
     currencyConfig: defaultConfig,
     locale: 'en-US',
   },
+  group: 'inputs',
 };
 
 // Default value with fi-FI locale
@@ -49,4 +50,5 @@ export const defaultValueWithFiFI = {
     locale: 'fi-FI',
     defaultValue: 9999.99,
   },
+  group: 'inputs',
 };

@@ -73,4 +73,5 @@ export const Empty = {
       console.log('Submitting a form with values:', v);
     },
   },
+  group: 'inputs',
 };

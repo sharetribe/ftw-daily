@@ -77,4 +77,5 @@ class FormContainer extends Component {
 
 export const Empty = {
   component: FormContainer,
+  group: 'inputs',
 };

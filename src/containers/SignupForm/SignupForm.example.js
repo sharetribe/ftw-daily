@@ -8,4 +8,5 @@ export const Empty = {
       console.log('sign up with form values:', values);
     },
   },
+  group: 'forms',
 };

@@ -8,4 +8,5 @@ export const Empty = {
       console.log('submit search query:', values);
     },
   },
+  group: 'forms',
 };

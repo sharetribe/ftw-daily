@@ -8,4 +8,5 @@ export const Empty = {
       console.log('submit new password form values:', values);
     },
   },
+  group: 'forms',
 };

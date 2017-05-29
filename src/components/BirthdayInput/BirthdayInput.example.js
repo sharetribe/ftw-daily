@@ -37,4 +37,5 @@ export const Empty = {
       console.log('birthday changed to:', birthday ? birthday.toUTCString() : birthday);
     },
   },
+  group: 'inputs',
 };

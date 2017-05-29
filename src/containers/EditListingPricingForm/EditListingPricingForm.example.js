@@ -8,4 +8,5 @@ export const Empty = {
       console.log('Submit EditListingPricingForm with (unformatted) values:', values);
     },
   },
+  group: 'forms',
 };

@@ -82,4 +82,5 @@ class AddImagesTest extends Component {
 
 export const Empty = {
   component: AddImagesTest,
+  group: 'inputs',
 };

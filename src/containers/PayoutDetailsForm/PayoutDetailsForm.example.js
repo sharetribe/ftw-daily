@@ -8,4 +8,5 @@ export const USD = {
       console.log('submit payout details:', values); // eslint-disable-line
     },
   },
+  group: 'forms',
 };
