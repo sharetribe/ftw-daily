@@ -13,7 +13,6 @@ const Example = props => {
     componentName,
     exampleName,
     component: ExampleComponent,
-    group,
     description,
     props: exampleProps,
     useDefaultWrapperStyles,
@@ -24,14 +23,14 @@ const Example = props => {
   return (
     <li>
       <h3 className={css.withPadding}>
-        <NamedLink name="StyleguideComponent" params={{ group, component: componentName }}>
+        <NamedLink name="StyleguideComponent" params={{ component: componentName }}>
           {componentName}
         </NamedLink>
         /
 
         <NamedLink
           name="StyleguideComponentExample"
-          params={{ group, component: componentName, example: exampleName }}
+          params={{ component: componentName, example: exampleName }}
         >
           {exampleName}
         </NamedLink>
@@ -39,7 +38,7 @@ const Example = props => {
       <span className={css.withPadding}>
         <NamedLink
           name="StyleguideComponentExampleRaw"
-          params={{ group, component: componentName, example: exampleName }}
+          params={{ component: componentName, example: exampleName }}
         >
           raw
         </NamedLink>
@@ -56,7 +55,6 @@ const { bool, func, node, object, oneOfType, shape, string, arrayOf } = PropType
 
 Example.defaultProps = {
   description: null,
-  group: DEFAULT_GROUP,
   props: {},
   useDefaultWrapperStyles: true,
 };
@@ -64,7 +62,6 @@ Example.defaultProps = {
 Example.propTypes = {
   componentName: string.isRequired,
   exampleName: string.isRequired,
-  group: string,
   component: oneOfType([func, node]).isRequired,
   description: string,
   props: object,
