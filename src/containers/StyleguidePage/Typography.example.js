@@ -134,4 +134,5 @@ const Fonts = () =>  {
 export const Typography = {
   component: Fonts,
   props: {},
+  group: 'typography',
 };
