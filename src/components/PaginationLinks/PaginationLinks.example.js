@@ -46,4 +46,5 @@ Pagination.propTypes = {
 
 export const Empty = {
   component: withRouter(Pagination),
+  group: 'navigation',
 };

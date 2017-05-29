@@ -10,4 +10,5 @@ export const Empty = {
     },
     price: new types.Money(1099, 'USD'),
   },
+  group: 'forms',
 };

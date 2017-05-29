@@ -76,3 +76,7 @@
   border-width: 1px;
   border-top-color: transparent;
 }
+
+.selectedGroup {
+  font-weight: bold;
+}

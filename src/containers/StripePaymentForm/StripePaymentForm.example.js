@@ -23,4 +23,5 @@ class StripePaymentFormExample extends Component {
 export const Empty = {
   component: StripePaymentFormExample,
   props: { intl: fakeIntl },
+  group: 'forms',
 };

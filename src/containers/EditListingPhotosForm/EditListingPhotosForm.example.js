@@ -16,4 +16,5 @@ export const Empty = {
       console.log('onUpdateImageOrder with new imageOrder:', imageOrder);
     },
   },
+  group: 'forms',
 };

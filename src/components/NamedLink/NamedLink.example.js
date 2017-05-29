@@ -7,4 +7,5 @@ export const NamedLinkToSearchPage = {
     name: 'SearchPage',
     children: 'SearchPage',
   },
+  group: 'navigation',
 };

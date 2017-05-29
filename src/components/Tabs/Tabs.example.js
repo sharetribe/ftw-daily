@@ -33,4 +33,5 @@ const TabsWrapper = () => {
 export const Example = {
   component: TabsWrapper,
   props: {},
+  group: 'navigation',
 };

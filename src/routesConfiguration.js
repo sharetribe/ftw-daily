@@ -290,22 +290,28 @@ const routesConfiguration = [
     component: props => <StyleguidePage {...props} />,
   },
   {
-    path: '/styleguide/:component',
+    path: '/styleguide/g/:group',
+    exact: true,
+    name: 'StyleguideGroup',
+    component: props => <StyleguidePage {...props} />,
+  },
+  {
+    path: '/styleguide/c/:component',
     exact: true,
     name: 'StyleguideComponent',
     component: props => <StyleguidePage {...props} />,
   },
   {
-    path: '/styleguide/:component/:example',
+    path: '/styleguide/c/:component/:example',
     exact: true,
     name: 'StyleguideComponentExample',
     component: props => <StyleguidePage {...props} />,
   },
   {
-    path: '/styleguide/:component/:example/:type',
+    path: '/styleguide/c/:component/:example/raw',
     exact: true,
     name: 'StyleguideComponentExampleRaw',
-    component: props => <StyleguidePage {...props} />,
+    component: props => <StyleguidePage raw {...props} />,
   },
   {
     path: '/notfound',
