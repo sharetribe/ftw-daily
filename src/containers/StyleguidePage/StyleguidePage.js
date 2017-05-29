@@ -161,6 +161,8 @@ const StyleguidePage = props => {
 
   // Raw examples are rendered without any wrapper
   if (raw && examples.length > 0) {
+    // There can be only one raw example at a time, therefore pick
+    // only the first example in the examples Array
     const { component: ExampleComponent, props: exampleProps } = examples[0];
     return <ExampleComponent {...exampleProps} />;
   } else if (raw) {
