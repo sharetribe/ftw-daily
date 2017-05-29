@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { isEmpty } from 'lodash';
 import { NamedLink } from '../../components';
 import * as allExamples from '../../examples';
 
@@ -51,7 +52,7 @@ const Example = props => {
   );
 };
 
-const { bool, func, node, object, oneOfType, shape, string } = PropTypes;
+const { bool, func, node, object, oneOfType, shape, string, arrayOf } = PropTypes;
 
 Example.defaultProps = {
   description: null,
@@ -70,6 +71,43 @@ Example.propTypes = {
   useDefaultWrapperStyles: bool,
 };
 
+const Nav = props => {
+  const { groups, selectedGroup } = props;
+  const filteredGroups = groups.filter(g => g !== ALL && g !== DEFAULT_GROUP);
+  const toGroupLink = group => {
+    const linkProps = {
+      name: group === ALL ? 'Styleguide' : 'StyleguideGroup',
+      params: group === ALL ? null : { group },
+    };
+    const linkContent = group === ALL ? 'all' : group;
+    const isSelected = selectedGroup && group === selectedGroup;
+    return (
+      <li key={group}>
+        <NamedLink {...linkProps} className={isSelected ? css.selectedGroup : null}>
+          {linkContent}
+        </NamedLink>
+      </li>
+    );
+  };
+  return (
+    <nav>
+      <h2>Filter by category:</h2>
+      <ul>
+        {toGroupLink(ALL)}
+        {filteredGroups.map(toGroupLink)}
+        {toGroupLink(DEFAULT_GROUP)}
+      </ul>
+    </nav>
+  );
+};
+
+Nav.defaultProps = { selectedGroup: null };
+
+Nav.propTypes = {
+  groups: arrayOf(string).isRequired,
+  selectedGroup: string,
+};
+
 const flatExamples = examples => {
   return Object.keys(examples).reduce(
     (flattened, componentName) => {
@@ -80,6 +118,7 @@ const flatExamples = examples => {
             {
               componentName,
               exampleName,
+              group: DEFAULT_GROUP,
               ...ex,
             },
           ]);
@@ -107,6 +146,17 @@ const StyleguidePage = props => {
   const exampleName = params.example || ALL;
 
   const flattened = flatExamples(allExamples);
+  const groups = flattened.reduce(
+    (result, ex) => {
+      if (ex.group && !result.includes(ex.group)) {
+        return result.concat(ex.group);
+      }
+      return result;
+    },
+    []
+  );
+  groups.sort();
+  const selectedGroup = isEmpty(params) ? ALL : params.group;
   const examples = examplesFor(flattened, group, componentName, exampleName);
 
   // Raw examples are rendered without any wrapper
@@ -128,6 +178,8 @@ const StyleguidePage = props => {
       <h1 className={css.withPadding}>
         <NamedLink name="Styleguide">Styleguide</NamedLink>
       </h1>
+      <Nav groups={groups} selectedGroup={selectedGroup} />
+      <h2>Component examples:</h2>
       {html}
     </section>
   );
