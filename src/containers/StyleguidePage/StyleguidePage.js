@@ -23,7 +23,7 @@ const Example = props => {
   const desc = description ? <p className={css.withPadding}>Description: {description}</p> : null;
   return (
     <li>
-      <h2 className={css.withPadding}>
+      <h3 className={css.withPadding}>
         <NamedLink name="StyleguideComponent" params={{ group, component: componentName }}>
           {componentName}
         </NamedLink>
@@ -35,7 +35,7 @@ const Example = props => {
         >
           {exampleName}
         </NamedLink>
-      </h2>
+      </h3>
       <span className={css.withPadding}>
         <NamedLink
           name="StyleguideComponentExampleRaw"
@@ -71,6 +71,7 @@ Example.propTypes = {
   useDefaultWrapperStyles: bool,
 };
 
+// Renders the list of component example groups as clickable filters
 const Nav = props => {
   const { groups, selectedGroup } = props;
   const filteredGroups = groups.filter(g => g !== ALL && g !== DEFAULT_GROUP);
@@ -90,8 +91,7 @@ const Nav = props => {
     );
   };
   return (
-    <nav>
-      <h2>Filter by category:</h2>
+    <nav className={css.withPadding}>
       <ul>
         {toGroupLink(ALL)}
         {filteredGroups.map(toGroupLink)}
@@ -108,6 +108,8 @@ Nav.propTypes = {
   selectedGroup: string,
 };
 
+// The imported examples are in a nested tree structure. Flatten the
+// structure into an array of example objects.
 const flatExamples = examples => {
   return Object.keys(examples).reduce(
     (flattened, componentName) => {
@@ -131,6 +133,7 @@ const flatExamples = examples => {
   );
 };
 
+// Filter the examples based on the given criteria
 const examplesFor = (examples, group, componentName, exampleName) => {
   return examples.filter(ex => {
     return (group === ALL || ex.group === group) &&
@@ -178,8 +181,9 @@ const StyleguidePage = props => {
       <h1 className={css.withPadding}>
         <NamedLink name="Styleguide">Styleguide</NamedLink>
       </h1>
+      <h2 className={css.withPadding}>Select category:</h2>
       <Nav groups={groups} selectedGroup={selectedGroup} />
-      <h2>Component examples:</h2>
+      <h2 className={css.withPadding}>Component examples:</h2>
       {html}
     </section>
   );
