@@ -70,7 +70,7 @@ const Fonts = () => {
   const fontsContainerClasses = classNames(css.fontsContainer, css.baselines);
 
   return (
-    <div className={css.content}>
+    <div className={css.typographyContent}>
       <p className={css.spacing2x}>
         The line-height of typographic elements is an multiple of 6px on mobile and multiple of 8px
         on desktop. In addition to line-height, baselines are adjusted with vertical padding

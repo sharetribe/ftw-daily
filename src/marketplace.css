@@ -16,7 +16,8 @@ h1,
 
   /* TODO: this seems to be biggest font in Page titles (except in Hero) - is it h1 then? */
   @media (min-width: 768px) {
-    font-family: "sofiapro-semibold";
+    font-family: "sofiapro";
+    font-weight: 600;
     font-size: 48px;
     line-height: 56px;
     padding: 7px 0 1px 0; /* 7 + 1 = 8px */
