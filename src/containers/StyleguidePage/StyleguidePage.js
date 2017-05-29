@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 import { isEmpty } from 'lodash';
+import classNames from 'classnames';
 import { NamedLink } from '../../components';
 import * as allExamples from '../../examples';
 
 import css from './StyleguidePage.css';
+import mpCSS from '../../marketplace.css';
 
 const ALL = '*';
 const DEFAULT_GROUP = 'misc';
@@ -19,11 +21,15 @@ const Example = props => {
   } = props;
 
   const exampleWrapperClassName = useDefaultWrapperStyles ? css.defaultWrapperStyles : '';
-  const desc = description ? <p className={css.withPadding}>Description: {description}</p> : null;
+  const desc = description ? <p className={css.withMargin}>Description: {description}</p> : null;
   return (
     <li>
-      <h3 className={css.withPadding}>
-        <NamedLink name="StyleguideComponent" params={{ component: componentName }}>
+      <h3 className={css.withMargin}>
+        <NamedLink
+          name="StyleguideComponent"
+          params={{ component: componentName }}
+          className={css.link}
+        >
           {componentName}
         </NamedLink>
         /
@@ -31,14 +37,16 @@ const Example = props => {
         <NamedLink
           name="StyleguideComponentExample"
           params={{ component: componentName, example: exampleName }}
+          className={css.link}
         >
           {exampleName}
         </NamedLink>
       </h3>
-      <span className={css.withPadding}>
+      <span className={css.withMargin}>
         <NamedLink
           name="StyleguideComponentExampleRaw"
           params={{ component: componentName, example: exampleName }}
+          className={css.link}
         >
           raw
         </NamedLink>
@@ -71,27 +79,45 @@ Example.propTypes = {
 // Renders the list of component example groups as clickable filters
 const Nav = props => {
   const { groups, selectedGroup } = props;
-  const filteredGroups = groups.filter(g => g !== ALL && g !== DEFAULT_GROUP);
   const toGroupLink = group => {
     const linkProps = {
       name: group === ALL ? 'Styleguide' : 'StyleguideGroup',
       params: group === ALL ? null : { group },
     };
-    const linkContent = group === ALL ? 'all' : group;
+
+    const linkContent = group === ALL ? 'all components' : group;
     const isSelected = selectedGroup && group === selectedGroup;
+    const groupLink = classNames(css.link, { [css.selectedGroup]: isSelected });
     return (
-      <li key={group}>
-        <NamedLink {...linkProps} className={isSelected ? css.selectedGroup : null}>
+      <li key={group} className={css.group}>
+        <NamedLink {...linkProps} className={groupLink}>
           {linkContent}
         </NamedLink>
       </li>
     );
   };
+
+  const filteredGroups = groups.filter(g => g !== ALL && g !== DEFAULT_GROUP);
+  const basicStylings = ['typography', 'colors'];
+  const basicStylingGroups = filteredGroups
+    .filter(g => basicStylings.includes(g))
+    .map(toGroupLink);
+  const componentGroups = filteredGroups
+    .filter(g => !basicStylings.includes(g))
+    .map(toGroupLink);
+
   return (
-    <nav className={css.withPadding}>
+    <nav className={css.withMargin}>
       <ul>
         {toGroupLink(ALL)}
-        {filteredGroups.map(toGroupLink)}
+      </ul>
+      <h3 className={mpCSS.h5Font}>Basic styling</h3>
+      <ul className={css.groups}>
+        {basicStylingGroups}
+      </ul>
+      <h3 className={mpCSS.h5Font}>Component categories</h3>
+      <ul className={css.groups}>
+        {componentGroups}
         {toGroupLink(DEFAULT_GROUP)}
       </ul>
     </nav>
@@ -177,13 +203,17 @@ const StyleguidePage = props => {
 
   return (
     <section className={css.root}>
-      <h1 className={css.withPadding}>
-        <NamedLink name="Styleguide">Styleguide</NamedLink>
-      </h1>
-      <h2 className={css.withPadding}>Select category:</h2>
-      <Nav groups={groups} selectedGroup={selectedGroup} />
-      <h2 className={css.withPadding}>Component examples:</h2>
-      {html}
+      <div className={css.navBar}>
+        <h1 className={css.withMargin}>
+          <NamedLink name="Styleguide" className={css.link}>Styleguide</NamedLink>
+        </h1>
+        <h2 className={css.withMargin}>Select category:</h2>
+        <Nav groups={groups} selectedGroup={selectedGroup} />
+      </div>
+      <div className={css.main}>
+        <h2>Component examples:</h2>
+        {html}
+      </div>
     </section>
   );
 };

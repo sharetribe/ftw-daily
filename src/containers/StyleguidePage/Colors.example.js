@@ -114,5 +114,6 @@ const MarketplaceColors = () => {
 
 export const Colors = {
   component: MarketplaceColors,
+  group: 'colors',
   props: {},
 };

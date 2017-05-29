@@ -1,18 +1,63 @@
 @import '../../marketplace.css';
 
 .root {
-  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 }
 
-.withPadding,
+.withPadding {
+  padding: calc(2 * var(--spacingUnit));
+
+  @media (min-width: 768px) {
+    padding: calc(2 * var(--spacingUnitDesktop));
+  }
+}
+
+.withMargin,
 .defaultWrapperStyles {
-  padding: 12px;
+  margin: calc(2 * var(--spacingUnit)) 0;
+
+  @media (min-width: 768px) {
+    margin: calc(2 * var(--spacingUnitDesktop)) 0;
+  }
+}
+
+.navBar {
+  flex-basis: 300px;
+  flex-shrink: 0;
+  composes: withPadding;
+  box-shadow: var(--boxShadow);
+}
+
+.main {
+  flex-grow: 1;
+  composes: withPadding;
+
+  @media (min-width: 768px) {
+    padding: 56px 0 0 16px;
+  }
+}
+
+.link {
+  color: var(--marketplaceColor);
+}
+
+.groups {
+  margin: 0 0 12px 0;
+}
+
+.group {
+  text-transform: capitalize;
 }
 
 .selectedGroup {
   font-weight: bold;
+  color: var(--marketplaceColorDark);
 }
-
 
 /* Typography.example */
 .typographyContent {}
