@@ -2,26 +2,22 @@
 
 /* Desktop */
 .root {
-  display: none;
+  /* Size */
+  width: 100%;
+  height: 72px;
 
-  @media (min-width: 768px) {
-    /* Size */
-    width: 100%;
-    height: 72px;
+  /* Layout for child components */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 36px;
 
-    /* Layout for child components */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 0 36px;
+  /* fill */
+  background-color: var(--matterColorLight);
 
-    /* fill */
-    background-color: var(--matterColorLight);
-
-    /* shadows */
-    box-shadow: var(--boxShadowLight);
-  }
+  /* shadows */
+  box-shadow: var(--boxShadowLight);
 }
 
 /* Compose text label items on top of this */

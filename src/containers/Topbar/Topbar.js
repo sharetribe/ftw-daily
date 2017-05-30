@@ -135,12 +135,14 @@ class TopbarComponent extends Component {
             <img src={searchIcon} alt={intl.formatMessage({ id: 'Topbar.searchIcon' })} />
           </FlatButton>
         </div>
-        <TopbarDesktop
-          currentUserHasListings={currentUserHasListings}
-          intl={intl}
-          isAuthenticated={isAuthenticated}
-          name={name}
-        />
+        <div className={css.desktop}>
+          <TopbarDesktop
+            currentUserHasListings={currentUserHasListings}
+            intl={intl}
+            isAuthenticated={isAuthenticated}
+            name={name}
+          />
+        </div>
         <Modal
           isOpen={isMobileMenuOpen}
           onClose={this.handleMobileMenuClose}

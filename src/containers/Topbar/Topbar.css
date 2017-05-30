@@ -61,3 +61,11 @@
 .searchForm {
   margin: 2rem;
 }
+
+.desktop {
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+}
