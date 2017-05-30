@@ -17,6 +17,7 @@ import * as StripeBankAccountToken
   from './components/StripeBankAccountToken/StripeBankAccountToken.example';
 import * as TabNav from './components/TabNav/TabNav.example';
 import * as Tabs from './components/Tabs/Tabs.example';
+import * as TopbarDesktop from './components/TopbarDesktop/TopbarDesktop.example';
 
 // containers
 import * as BookingDatesForm from './containers/BookingDatesForm/BookingDatesForm.example';
@@ -72,5 +73,6 @@ export {
   StripePaymentForm,
   TabNav,
   Tabs,
+  TopbarDesktop,
   Typography,
 };

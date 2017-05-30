@@ -40,6 +40,7 @@ import Select from './Select/Select';
 import StripeBankAccountToken from './StripeBankAccountToken/StripeBankAccountToken';
 import TabNav from './TabNav/TabNav';
 import Tabs from './Tabs/Tabs';
+import TopbarDesktop from './TopbarDesktop/TopbarDesktop';
 import ValidationError from './ValidationError/ValidationError';
 
 export {
@@ -87,5 +88,6 @@ export {
   StripeBankAccountToken,
   TabNav,
   Tabs,
+  TopbarDesktop,
   ValidationError,
 };

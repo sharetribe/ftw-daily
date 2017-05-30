@@ -1,0 +1,56 @@
+exports[`TopbarDesktop data matches snapshot 1`] = `
+<div
+  className="">
+  <a
+    className="NamedLink_active"
+    href="/"
+    onClick={[Function]}
+    style={Object {}}>
+    <img
+      alt="Logo"
+      className={undefined}
+      src="saunatime-logo.png" />
+  </a>
+  <div
+    className={undefined}>
+    <span
+      className={undefined}>
+      Search should be here
+    </span>
+  </div>
+  <div
+    className={undefined} />
+  <a
+    className=""
+    href="/l/new"
+    onClick={[Function]}
+    style={Object {}}>
+    <span
+      className={undefined}>
+      <span>
+        + Add your sauna
+      </span>
+    </span>
+  </a>
+  <a
+    className=""
+    href="/inbox/sales"
+    onClick={[Function]}
+    style={Object {}}>
+    <span
+      className={undefined}>
+      <span>
+        Inbox
+      </span>
+    </span>
+  </a>
+  <div
+    className={undefined}>
+     
+    <img
+      alt="John Doe"
+      className=""
+      src="wireframeAvatar.svg" />
+  </div>
+</div>
+`;
