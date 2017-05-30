@@ -188,5 +188,10 @@
   "StripePaymentForm.stripe.validation_error.processing_error": "An error occurred while processing the card.",
   "StripePaymentForm.submitPaymentInfo": "Send request",
   "Topbar.menuIcon": "Open menu",
-  "Topbar.searchIcon": "Open search"
+  "Topbar.searchIcon": "Open search",
+  "TopbarDesktop.createListing": "+ Add your sauna",
+  "TopbarDesktop.inbox": "Inbox",
+  "TopbarDesktop.login": "Log in",
+  "TopbarDesktop.logo": "Logo",
+  "TopbarDesktop.signup": "Sign up"
 }

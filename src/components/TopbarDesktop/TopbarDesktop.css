@@ -1,0 +1,127 @@
+@import '../../marketplace.css';
+
+/* Desktop */
+.root {
+  /* Size */
+  width: 100%;
+  height: 72px;
+
+  /* Layout for child components */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 36px;
+
+  /* fill */
+  background-color: var(--matterColorLight);
+
+  /* shadows */
+  box-shadow: var(--boxShadowLight);
+}
+
+/* Compose text label items on top of this */
+/* This stretches inline element (link) to take available vertical space (big hover area),
+ * and align baselines, and passes text-decoration hover effect
+ */
+.topbarDesktopLabel {
+  display: inline-block;
+  margin: 24px 0 16px 0;
+  text-decoration: inherit;
+}
+
+/* logo */
+.logoLink {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-right: 24px;
+}
+
+.logo {
+  width: 155px;
+  height: 27px;
+}
+
+/* Search */
+/* TODO This is placeholder, it needs Search component */
+.searchLink {
+  min-width: 220px;
+  align-self: flex-start;
+  height: 100%;
+  margin-right: 24px;
+}
+
+.search {
+  composes: topbarDesktopLabel;
+  composes: bodyFont from '../../marketplace.css';
+  color: var(--matterColor);
+}
+
+/* Spacer */
+/* Extra space is gathered between search and createListingLink */
+.spacer {
+  flex-grow: 1;
+}
+
+/* Create listing (CTA for providers) */
+.createListingLink {
+  align-self: flex-start;
+  height: 100%;
+  margin-right: 24px;
+}
+
+.createListing {
+  composes: topbarDesktopLabel;
+  composes: bodyFont from '../../marketplace.css';
+  color: var(--marketplaceColor);
+}
+
+/* Inbox */
+.inboxLink {
+  align-self: flex-start;
+  height: 100%;
+  margin-right: 24px;
+}
+
+.inbox {
+  composes: topbarDesktopLabel;
+  composes: bodyFont from '../../marketplace.css';
+  color: var(--matterColor);
+}
+
+/* Profile menu */
+/* TODO This is placeholder, it needs Menu component */
+.avatarLink {
+  align-self: flex-start;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 41px;
+  height: 41px;
+}
+
+/* Authentication */
+.signupLink {
+  align-self: flex-start;
+  height: 100%;
+  margin-right: 24px;
+}
+
+.loginLink {
+  align-self: flex-start;
+  height: 100%;
+}
+
+.signup,
+.login {
+  composes: topbarDesktopLabel;
+  composes: bodyFont from '../../marketplace.css';
+  color: var(--matterColor);
+}

@@ -133,6 +133,12 @@ pre,
   letter-spacing: -0.1px;
 
   /* TODO Desktop styles needs to be extracted */
+  @media (min-width: 768px) {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 2px 0 6px 0; /* 2px + 6px = 8px */
+  }
 }
 
 .tinyFont {
@@ -154,6 +160,10 @@ html,
 
 /* NORMALIZATIONS for other elements */
 /* TODO */
+
+html {
+  padding: 0;
+}
 
 a {
   text-decoration: none;
