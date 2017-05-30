@@ -49,12 +49,18 @@ const TopbarDesktop = props => {
   return (
     <div className={classes}>
       <NamedLink className={css.logoLink} name="LandingPage">
-        <img className={css.logo} src={logo} alt={intl.formatMessage({ id: 'TopbarDesktop.logo' })} />
+        <img
+          className={css.logo}
+          src={logo}
+          alt={intl.formatMessage({ id: 'TopbarDesktop.logo' })}
+        />
       </NamedLink>
       {search}
       <div className={css.spacer} />
       <NamedLink className={css.createListingLink} name="NewListingPage">
-        <span className={css.createListing}><FormattedMessage id="TopbarDesktop.createListing" /></span>
+        <span className={css.createListing}>
+          <FormattedMessage id="TopbarDesktop.createListing" />
+        </span>
       </NamedLink>
       {inboxLink}
       {profileMenu}

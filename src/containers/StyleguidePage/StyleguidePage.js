@@ -99,12 +99,8 @@ const Nav = props => {
 
   const filteredGroups = groups.filter(g => g !== ALL && g !== DEFAULT_GROUP);
   const basicStylings = ['typography', 'colors'];
-  const basicStylingGroups = filteredGroups
-    .filter(g => basicStylings.includes(g))
-    .map(toGroupLink);
-  const componentGroups = filteredGroups
-    .filter(g => !basicStylings.includes(g))
-    .map(toGroupLink);
+  const basicStylingGroups = filteredGroups.filter(g => basicStylings.includes(g)).map(toGroupLink);
+  const componentGroups = filteredGroups.filter(g => !basicStylings.includes(g)).map(toGroupLink);
 
   return (
     <nav className={css.withMargin}>
