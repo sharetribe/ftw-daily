@@ -11,15 +11,9 @@ describe('TopbarDesktop', () => {
     const flattenedRoutes = flattenRoutes(routesConfiguration);
     const tree = renderDeep(
       <RoutesProvider flattenedRoutes={flattenedRoutes}>
-        <TopbarDesktop
-          isAuthenticated
-          currentUserHasListings
-          name="John Doe"
-          intl={fakeIntl}
-        />
+        <TopbarDesktop isAuthenticated currentUserHasListings name="John Doe" intl={fakeIntl} />
       </RoutesProvider>
     );
     expect(tree).toMatchSnapshot();
   });
-
 });
