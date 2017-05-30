@@ -1,31 +1,54 @@
+@import '../../marketplace.css';
+
+:root {
+  --inputHeight: 50px;
+  --sidePadding: 24px;
+  --sidePaddingDesktop: 36px;
+}
+
 .root {
   position: relative;
 }
 
 .input {
-  height: 50px;
+  height: var(--inputHeight);
 }
 
 .predictions {
+
+  composes: searchResultsFont;
+
+  /* Position right below the input field, take full width */
   position: absolute;
   margin: 0;
-  top: 50px;
+  top: var(--inputHeight);
   width: 100%;
-  background-color: #fff;
-  border: 1px solid #eee;
-  border-top: none;
+
+  padding: 14px 0 98px 0;
+  background-color: var(--marketplaceColor);
+
+  background-image: url(./images/powered_by_google_on_non_white_hdpi.png);
+  background-size: auto 18px;
+  background-position: bottom 27px center;
+
+  @media (--desktop-viewport) {
+    background-position: bottom 29px left var(--sidePaddingDesktop);
+  }
 
   & li {
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid #eee;
+    color: var(--matterColorLight);
 
-    &:last-child {
-      border-bottom: none;
+    /* Assign enough vertical padding to make the element at least 44px high */
+    padding: 10px var(--sidePadding);
+
+    @media (--desktop-viewport) {
+      padding: 10px var(--sidePaddingDesktop);
     }
 
     &:hover,
     &.highlighted {
-      background-color: #eee;
+      text-decoration: underline;
+      cursor: pointer;
     }
   }
 }
