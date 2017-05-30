@@ -1,5 +1,7 @@
 @import "sanitize.css";
 
+/* ================ Custom properties aka variables ================ */
+
 :root {
   /* Colors */
   --marketplaceColor: #C0392B;
@@ -37,7 +39,12 @@
   --borderRadius: 2px;
 }
 
-/* FONTS */
+/* ================ Custom media queries ================ */
+
+@custom-media --desktop-viewport (min-width: 768px);
+
+/* ================ Fonts ================ */
+
 h1, h2, h3, h4, h5, h6, p, pre {
   margin: 0;
 }
@@ -52,7 +59,7 @@ h1,
   letter-spacing: -1px;
 
   /* TODO: this seems to be biggest font in Page titles (except in Hero) - is it h1 then? */
-  @media (min-width: 768px) {
+  @media (--desktop-viewport) {
     font-family: "sofiapro";
     font-weight: 600;
     font-size: 48px;
@@ -72,7 +79,7 @@ h2,
   letter-spacing: -0.5px;
 
   /* TODO Are these correct settings? */
-  @media (min-width: 768px) {
+  @media (--desktop-viewport) {
     font-size: 24px;
     line-height: 32px;
     padding: 4px 0 4px 0; /* 4px + 4px = 8px */
@@ -133,6 +140,7 @@ input,
 button,
 p,
 pre,
+li,
 .bodyFont {
   font-family: "sofiapro", Helvetica, Arial, sans-serif;
   font-weight: 500;
@@ -191,13 +199,17 @@ pre,
   letter-spacing: 0.1px;
 }
 
+.searchResultsFont {
+  composes: bodyFont;
+}
+
 /* Base font color */
 html,
 .textColor {
   color: var(--matterColor);
 }
 
-/* NORMALIZATIONS for other elements */
+/* ================ Normalisations ================ */
 /* TODO */
 
 html {
