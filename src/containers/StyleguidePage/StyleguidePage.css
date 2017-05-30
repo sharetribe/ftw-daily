@@ -1,6 +1,4 @@
-:root {
-  --spacing-unit: 6px;
-}
+@import '../../marketplace.css';
 
 .root {
   padding: 1rem 0;
@@ -11,10 +9,13 @@
   padding: 12px;
 }
 
-/* Typography.example */
-.content {
-
+.selectedGroup {
+  font-weight: bold;
 }
+
+
+/* Typography.example */
+.typographyContent {}
 
 .baselines {
   background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 5h10M0 11h10M0 17h10" stroke="#f1f1f1"/><path d="M0 23h10" stroke="#ddd" stroke-width="1"/></svg>');
@@ -26,23 +27,14 @@
   }
 }
 
-
 .spacing2x {
-  margin: calc(2 * var(--spacing-unit)) 0;
+  margin: calc(2 * var(--spacingUnit)) 0;
 }
 
 .fontsContainer {
   display: flex;
   flex-wrap: wrap;
-  margin-top: calc(4 * var(--spacing-unit));
-
-  &::after {
-    content: ".";
-    visibility: hidden;
-    display: block;
-    height: 0;
-    clear: both;
-  }
+  margin-top: calc(4 * var(--spacingUnit));
 }
 
 .fontCard {
@@ -55,8 +47,8 @@
    * box-sizing: border-box;
    * In this case, we'll adjust margin-bottoms (24px - 4px = 20px)
    */
-  margin-bottom: calc(4 * var(--spacing-unit) - 4px);
-  margin-right: calc(2 * var(--spacing-unit));
+  margin-bottom: calc(4 * var(--spacingUnit) - 4px);
+  margin-right: calc(2 * var(--spacingUnit));
 }
 
 .element {
@@ -69,7 +61,7 @@
   flex-grow: 1;
   width: 100%;
   background-color: #f1f1f1;
-  padding: calc(2 * var(--spacing-unit));
+  padding: calc(2 * var(--spacingUnit));
 
   border-style: solid;
   border-color: #aaa;
@@ -77,6 +69,95 @@
   border-top-color: transparent;
 }
 
-.selectedGroup {
-  font-weight: bold;
+/* Colors.example */
+
+.colorsContent,
+.colorsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.colorsGroup {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(4 * var(--spacingUnit));
+}
+
+.colorCard {
+  flex-basis: 275px;
+  height: 275px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: calc(4 * var(--spacingUnit));
+  margin-right: calc(2 * var(--spacingUnit));
+  overflow: hidden;
+
+  border: 1px solid var(--matterColorNegative);
+}
+
+.color {
+  width: 100%;
+  height: 66.6%;
+}
+
+.colorDescription {
+  flex-grow: 1;
+  width: 100%;
+  background-color: #fff;
+  padding: calc(2 * var(--spacingUnit));
+}
+
+.marketplaceColorBackground {
+  composes: color;
+  background-color: var(--marketplaceColor);
+}
+
+.marketplaceColorLightBackground {
+  composes: color;
+  background-color: var(--marketplaceColorLight);
+}
+
+.marketplaceColorDarkBackground {
+  composes: color;
+  background-color: var(--marketplaceColorDark);
+}
+
+.successColorBackground {
+  composes: color;
+  background-color: var(--successColor);
+}
+
+.failColorBackground {
+  composes: color;
+  background-color: var(--failColor);
+}
+
+.attentionColorBackground {
+  composes: color;
+  background-color: var(--attentionColor);
+}
+
+.matterColorBackground {
+  composes: color;
+  background-color: var(--matterColor);
+}
+
+.matterColorAntiBackground {
+  composes: color;
+  background-color: var(--matterColorAnti);
+}
+
+.matterColorDarkBackground {
+  composes: color;
+  background-color: var(--matterColorDark);
+}
+
+.matterColorNegativeBackground {
+  composes: color;
+  background-color: var(--matterColorNegative);
+}
+
+.matterColorLightBackground {
+  composes: color;
+  background-color: var(--matterColorLight);
 }

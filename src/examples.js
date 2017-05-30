@@ -23,6 +23,7 @@ import * as BookingDatesForm from './containers/BookingDatesForm/BookingDatesFor
 import * as ChangeAccountPasswordForm
   from './containers/ChangeAccountPasswordForm/ChangeAccountPasswordForm.example';
 import * as ChangePasswordForm from './containers/ChangePasswordForm/ChangePasswordForm.example';
+import * as Colors from './containers/StyleguidePage/Colors.example';
 import * as EditListingDescriptionForm
   from './containers/EditListingDescriptionForm/EditListingDescriptionForm.example';
 import * as EditListingLocationForm
@@ -47,6 +48,7 @@ export {
   BookingInfo,
   ChangeAccountPasswordForm,
   ChangePasswordForm,
+  Colors,
   CurrencyInput,
   DateInput,
   EditListingDescriptionForm,

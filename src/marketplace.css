@@ -1,5 +1,27 @@
 @import "sanitize.css";
 
+:root {
+  /* Colors */
+  --marketplaceColor: #C0392B;
+  --marketplaceColorLight: #FF4C38;
+  --marketplaceColorDark: #8C291E;
+
+  --successColor: #2ECC71;
+  --failColor: #FF0000;
+  --attentionColor: #FFAA00;
+
+  --matterColorDark: #000000;
+  --matterColor: #4A4A4A;
+  --matterColorAnti: #B2B2B2;
+  --matterColorNegative: #E7E7E7;
+  --matterColorLight: #FFFFFF;
+
+  /* Spacing units */
+  /* Multiples of mobile and desktop spacing units should be used with margins and paddings. */
+  --spacingUnit: 6px;
+  --spacingUnitDesktop: 8px;
+}
+
 /* FONTS */
 h1, h2, h3, h4, h5, h6, p, pre {
   margin: 0;
@@ -16,7 +38,8 @@ h1,
 
   /* TODO: this seems to be biggest font in Page titles (except in Hero) - is it h1 then? */
   @media (min-width: 768px) {
-    font-family: "sofiapro-semibold";
+    font-family: "sofiapro";
+    font-weight: 600;
     font-size: 48px;
     line-height: 56px;
     padding: 7px 0 1px 0; /* 7 + 1 = 8px */
@@ -117,11 +140,10 @@ pre,
   /* TODO Desktop styles needs to be extracted */
 }
 
-/* COLORS */
 /* Base font color */
 html,
 .textColor {
-  color: #4A4A4A;
+  color: var(--matterColor);
 }
 
 /* NORMALIZATIONS for other elements */
