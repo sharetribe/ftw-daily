@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { FlatButton, MobileMenu, Modal, NamedLink, TopbarDesktop } from '../../components';
+import { FlatButton, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
 import { SearchForm } from '../../containers';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
@@ -101,7 +101,7 @@ class TopbarComponent extends Component {
     const isMobileMenuOpen = mobilemenu === 'open';
     const isMobileSearchOpen = mobilesearch === 'open';
     const mobileMenu = (
-      <MobileMenu
+      <TopbarMobileMenu
         isAuthenticated={isAuthenticated}
         currentUserHasListings={currentUserHasListings}
         name={name}
