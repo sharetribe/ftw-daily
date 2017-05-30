@@ -31,8 +31,9 @@ Tab.propTypes = {
 
 const TabNav = props => {
   const { className, tabs } = props;
+  const classes = classNames(css.root, className);
   return (
-    <nav className={className}>
+    <nav className={classes}>
       {tabs.map(tab => <Tab key={tab.text} {...tab} />)}
     </nav>
   );
