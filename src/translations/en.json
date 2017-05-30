@@ -77,11 +77,6 @@
   "LoginForm.logIn": "Log in",
   "LoginForm.passwordLabel": "Password",
   "LoginForm.passwordRequired": "required",
-  "MobileMenu.inboxLink": "Inbox",
-  "MobileMenu.loginLink": "Log in",
-  "MobileMenu.logoutLink": "Log out",
-  "MobileMenu.newListingLink": "+ Add your sauna",
-  "MobileMenu.signupLink": "Sign up",
   "Modal.closeModal": "Close modal",
   "OrderDetailsPanel.orderAcceptedStatus": "{providerName} accepted the booking.",
   "OrderDetailsPanel.orderAcceptedTitle": "You have booked {title}.",
@@ -193,5 +188,10 @@
   "TopbarDesktop.inbox": "Inbox",
   "TopbarDesktop.login": "Log in",
   "TopbarDesktop.logo": "Logo",
-  "TopbarDesktop.signup": "Sign up"
+  "TopbarDesktop.signup": "Sign up",
+  "TopbarMobileMenu.inboxLink": "Inbox",
+  "TopbarMobileMenu.loginLink": "Log in",
+  "TopbarMobileMenu.logoutLink": "Log out",
+  "TopbarMobileMenu.newListingLink": "+ Add your sauna",
+  "TopbarMobileMenu.signupLink": "Sign up"
 }

@@ -23,7 +23,6 @@ import LocationAutocompleteInput from './LocationAutocompleteInput/LocationAutoc
 import Map from './Map/Map';
 import MapPanel from './MapPanel/MapPanel';
 import Menu from './Menu/Menu';
-import MobileMenu from './MobileMenu/MobileMenu';
 import Modal from './Modal/Modal';
 import ModalInMobile from './ModalInMobile/ModalInMobile';
 import NamedLink from './NamedLink/NamedLink';
@@ -41,6 +40,7 @@ import StripeBankAccountToken from './StripeBankAccountToken/StripeBankAccountTo
 import TabNav from './TabNav/TabNav';
 import Tabs from './Tabs/Tabs';
 import TopbarDesktop from './TopbarDesktop/TopbarDesktop';
+import TopbarMobileMenu from './TopbarMobileMenu/TopbarMobileMenu';
 import ValidationError from './ValidationError/ValidationError';
 
 export {
@@ -71,7 +71,6 @@ export {
   Map,
   MapPanel,
   Menu,
-  MobileMenu,
   Modal,
   ModalInMobile,
   NamedLink,
@@ -89,5 +88,6 @@ export {
   TabNav,
   Tabs,
   TopbarDesktop,
+  TopbarMobileMenu,
   ValidationError,
 };
