@@ -17,7 +17,7 @@ const DIRECTION_DOWN = 'down';
 
 // Renders the autocompletion prediction results in a list
 const LocationPredictionsList = props => {
-  const { predictions, highlightedIndex, onSelectStart, onSelectEnd } = props;
+  const { className, predictions, highlightedIndex, onSelectStart, onSelectEnd } = props;
   if (predictions.length === 0) {
     return null;
   }
@@ -41,8 +41,10 @@ const LocationPredictionsList = props => {
   };
   /* eslint-enable jsx-a11y/no-static-element-interactions */
 
+  const classes = classNames(css.predictions, className);
+
   return (
-    <ul className={css.predictions}>
+    <ul className={classes}>
       {predictions.map(item)}
     </ul>
   );
@@ -50,9 +52,10 @@ const LocationPredictionsList = props => {
 
 const { bool, shape, string, arrayOf, func, any, number } = PropTypes;
 
-LocationPredictionsList.defaultProps = { highlightedIndex: null };
+LocationPredictionsList.defaultProps = { className: null, highlightedIndex: null };
 
 LocationPredictionsList.propTypes = {
+  className: string,
   predictions: arrayOf(
     shape({
       id: string.isRequired,
@@ -299,7 +302,14 @@ class LocationAutocompleteInput extends Component {
   }
 
   render() {
-    const { autoFocus, className, placeholder, input } = this.props;
+    const {
+      autoFocus,
+      rootClassName,
+      inputClassName,
+      predictionsClassName,
+      placeholder,
+      input,
+    } = this.props;
     const { name, onFocus } = input;
     const { search, predictions } = currentValue(this.props);
 
@@ -308,17 +318,20 @@ class LocationAutocompleteInput extends Component {
       onFocus(e);
     };
 
+    const rootClass = rootClassName || css.root;
+    const inputClass = classNames(css.input, inputClassName);
+    const predictionsClass = classNames(predictionsClassName);
+
     // Only render predictions when the input has focus. For
     // development and easier workflow with the browser devtools, you
     // might want to hardcode this to `true`. Otherwise the dropdown
     // list will disappear.
-    //
     const renderPredictions = this.state.inputHasFocus;
 
     return (
-      <div className={css.root}>
+      <div className={rootClass}>
         <Input
-          className={classNames(css.input, className)}
+          className={inputClass}
           type="search"
           autoComplete="off"
           autoFocus={autoFocus}
@@ -332,6 +345,7 @@ class LocationAutocompleteInput extends Component {
         />
         {renderPredictions
           ? <LocationPredictionsList
+              className={predictionsClass}
               predictions={predictions}
               highlightedIndex={this.state.highlightedIndex}
               onSelectStart={this.handlePredictionsSelectStart}
@@ -343,11 +357,19 @@ class LocationAutocompleteInput extends Component {
   }
 }
 
-LocationAutocompleteInput.defaultProps = { autoFocus: false, className: '', placeholder: '' };
+LocationAutocompleteInput.defaultProps = {
+  autoFocus: false,
+  rootClassName: null,
+  inputClassName: null,
+  predictionsClassName: null,
+  placeholder: '',
+};
 
 LocationAutocompleteInput.propTypes = {
   autoFocus: bool,
-  className: string,
+  rootClassName: string,
+  inputClassName: string,
+  predictionsClassName: string,
   placeholder: string,
   input: shape({
     name: string.isRequired,
