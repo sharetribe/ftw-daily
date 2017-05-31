@@ -17,7 +17,14 @@ const DIRECTION_DOWN = 'down';
 
 // Renders the autocompletion prediction results in a list
 const LocationPredictionsList = props => {
-  const { className, predictions, highlightedIndex, onSelectStart, onSelectEnd } = props;
+  const {
+    rootClassName,
+    className,
+    predictions,
+    highlightedIndex,
+    onSelectStart,
+    onSelectEnd,
+  } = props;
   if (predictions.length === 0) {
     return null;
   }
@@ -41,20 +48,28 @@ const LocationPredictionsList = props => {
   };
   /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-  const classes = classNames(css.predictions, className);
+  const classes = classNames(rootClassName || css.predictionsRoot, className);
 
   return (
-    <ul className={classes}>
-      {predictions.map(item)}
-    </ul>
+    <div className={classes}>
+      <ul className={css.predictions}>
+        {predictions.map(item)}
+      </ul>
+      <div className={css.poweredByGoogle} />
+    </div>
   );
 };
 
 const { bool, shape, string, arrayOf, func, any, number } = PropTypes;
 
-LocationPredictionsList.defaultProps = { className: null, highlightedIndex: null };
+LocationPredictionsList.defaultProps = {
+  rootClassName: null,
+  className: null,
+  highlightedIndex: null,
+};
 
 LocationPredictionsList.propTypes = {
+  rootClassName: string,
   className: string,
   predictions: arrayOf(
     shape({
@@ -305,6 +320,7 @@ class LocationAutocompleteInput extends Component {
     const {
       autoFocus,
       rootClassName,
+      className,
       inputClassName,
       predictionsClassName,
       placeholder,
@@ -318,7 +334,7 @@ class LocationAutocompleteInput extends Component {
       onFocus(e);
     };
 
-    const rootClass = rootClassName || css.root;
+    const rootClass = classNames(rootClassName || css.root, className);
     const inputClass = classNames(css.input, inputClassName);
     const predictionsClass = classNames(predictionsClassName);
 
@@ -345,7 +361,7 @@ class LocationAutocompleteInput extends Component {
         />
         {renderPredictions
           ? <LocationPredictionsList
-              className={predictionsClass}
+              rootClassName={predictionsClass}
               predictions={predictions}
               highlightedIndex={this.state.highlightedIndex}
               onSelectStart={this.handlePredictionsSelectStart}
@@ -360,6 +376,7 @@ class LocationAutocompleteInput extends Component {
 LocationAutocompleteInput.defaultProps = {
   autoFocus: false,
   rootClassName: null,
+  className: null,
   inputClassName: null,
   predictionsClassName: null,
   placeholder: '',
@@ -368,6 +385,7 @@ LocationAutocompleteInput.defaultProps = {
 LocationAutocompleteInput.propTypes = {
   autoFocus: bool,
   rootClassName: string,
+  className: string,
   inputClassName: string,
   predictionsClassName: string,
   placeholder: string,
