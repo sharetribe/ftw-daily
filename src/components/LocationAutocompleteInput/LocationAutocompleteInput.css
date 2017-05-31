@@ -4,6 +4,7 @@
   --inputHeight: 50px;
   --sidePadding: 24px;
   --sidePaddingDesktop: 36px;
+  --poweredImageHeight: 18px;
 }
 
 .root {
@@ -14,26 +15,43 @@
   height: var(--inputHeight);
 }
 
-.predictions {
-
-  composes: searchResultsFont;
-
-  /* Position right below the input field, take full width */
+/*
+Predictions container can be overriden with new container styles for
+size and position, etc.
+*/
+.predictionsRoot {
   position: absolute;
-  margin: 0;
-  top: var(--inputHeight);
   width: 100%;
-
-  padding: 14px 0 98px 0;
+  padding-bottom: 98px;
+  top: var(--inputHeight);
   background-color: var(--marketplaceColor);
+}
 
+/*
+The Google Maps API TOS requires us to show a Powered by Google logo
+next to the autocomplete service predictions. It is rendered to the
+bottom of the container.
+*/
+.poweredByGoogle {
+  position: absolute;
+  bottom: 27px;
+  width: 100%;
+  height: var(--poweredImageHeight);
   background-image: url(./images/powered_by_google_on_non_white_hdpi.png);
-  background-size: auto 18px;
-  background-position: bottom 27px center;
+  background-size: auto var(--poweredImageHeight);
+  background-position: center;
 
   @media (--desktop-viewport) {
-    background-position: bottom 29px left var(--sidePaddingDesktop);
+    background-position: center left var(--sidePaddingDesktop);
   }
+}
+
+/* List of predictions, with a responsive padding size */
+.predictions {
+  composes: searchResultsFont;
+
+  margin: 0;
+  padding: 14px 0;
 
   & li {
     color: var(--matterColorLight);
