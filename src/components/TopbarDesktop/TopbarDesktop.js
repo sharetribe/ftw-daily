@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import {
   Avatar,
@@ -10,6 +10,7 @@ import {
   MenuItem,
   NamedLink,
 } from '../../components';
+import { TopbarSearchForm } from '../../containers';
 
 import logo from './images/saunatime-logo.png';
 import css from './TopbarDesktop.css';
@@ -24,16 +25,20 @@ const TopbarDesktop = props => {
     intl,
     isAuthenticated,
     onLogout,
+    onSearchSubmit,
+    initialSearchFormValues,
   } = props;
 
   const rootClass = rootClassName || css.root;
   const classes = classNames(rootClass, className);
 
-  // TODO This is just a placeholder
   const search = (
-    <div className={css.searchLink}>
-      <span className={css.search}>Search should be here</span>
-    </div>
+    <TopbarSearchForm
+      className={css.searchLink}
+      form="TopbarSearchFormDesktop"
+      onSubmit={onSearchSubmit}
+      initialValues={initialSearchFormValues}
+    />
   );
 
   const inboxLink = isAuthenticated
@@ -83,7 +88,6 @@ const TopbarDesktop = props => {
         />
       </NamedLink>
       {search}
-      <div className={css.spacer} />
       <NamedLink className={css.createListingLink} name="NewListingPage">
         <span className={css.createListing}>
           <FormattedMessage id="TopbarDesktop.createListing" />
@@ -97,9 +101,15 @@ const TopbarDesktop = props => {
   );
 };
 
-TopbarDesktop.defaultProps = { className: null, firstName: '', lastName: '', rootClassName: '' };
+const { bool, func, string, object } = PropTypes;
 
-const { bool, func, string } = PropTypes;
+TopbarDesktop.defaultProps = {
+  firstName: '',
+  lastName: '',
+  className: null,
+  rootClassName: null,
+  initialSearchFormValues: {},
+};
 
 TopbarDesktop.propTypes = {
   className: string,
@@ -109,9 +119,9 @@ TopbarDesktop.propTypes = {
   firstName: string,
   lastName: string,
   rootClassName: string,
-
-  // from injectIntl
+  onSearchSubmit: func.isRequired,
+  initialSearchFormValues: object,
   intl: intlShape.isRequired,
 };
 
-export default injectIntl(TopbarDesktop);
+export default TopbarDesktop;

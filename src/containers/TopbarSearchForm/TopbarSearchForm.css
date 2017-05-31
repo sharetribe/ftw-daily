@@ -8,13 +8,31 @@
   display: flex;
   height: 100%;
   flex-direction: column;
+
+  @media (--desktop-viewport) {
+    display: block;
+  }
 }
 
 .locationInput {
+  height: 72px;
+  padding: 0 18px;
+  border: none;
+  outline: none;
 
+  @media (--desktop-viewport) {
+    padding: 0;
+  }
 }
 
 .locationPredictions {
   flex-grow: 1;
   background-color: var(--marketplaceColor);
+
+  @media (--desktop-viewport) {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 98px;
+    max-width: 434px;
+  }
 }

@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-start;
   padding: 0 36px;
 
   /* fill */
@@ -32,7 +32,6 @@
 
 /* logo */
 .logoLink {
-  align-self: flex-start;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -46,10 +45,8 @@
 }
 
 /* Search */
-/* TODO This is placeholder, it needs Search component */
 .searchLink {
-  min-width: 220px;
-  align-self: flex-start;
+  flex-grow: 1;
   height: 100%;
   margin-right: 24px;
 }
@@ -60,15 +57,9 @@
   color: var(--matterColor);
 }
 
-/* Spacer */
-/* Extra space is gathered between search and createListingLink */
-.spacer {
-  flex-grow: 1;
-}
-
 /* Create listing (CTA for providers) */
 .createListingLink {
-  align-self: flex-start;
+  flex-shrink: 0;
   height: 100%;
   margin-right: 24px;
 }
@@ -81,7 +72,6 @@
 
 /* Inbox */
 .inboxLink {
-  align-self: flex-start;
   height: 100%;
   margin-right: 24px;
 }
@@ -94,7 +84,6 @@
 
 /* Profile menu */
 .profileMenuLabel {
-  align-self: flex-start;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -112,13 +101,13 @@
 
 /* Authentication */
 .signupLink {
-  align-self: flex-start;
+  flex-shrink: 0;
   height: 100%;
   margin-right: 24px;
 }
 
 .loginLink {
-  align-self: flex-start;
+  flex-shrink: 0;
   height: 100%;
 }
 
