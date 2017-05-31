@@ -62,10 +62,10 @@ class TopbarComponent extends Component {
   }
 
   handleSubmit(values) {
-    const selectedPlace = values && values.location ? values.location.selectedPlace : null;
+    const { search, selectedPlace } = values.location;
     const { flattenedRoutes, history } = this.props;
-    const { address, origin, bounds, country } = selectedPlace || {};
-    const searchParams = { address, origin, bounds, country };
+    const { origin, bounds, country } = selectedPlace;
+    const searchParams = { address: search, origin, bounds, country };
     history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
   }
 
@@ -141,6 +141,8 @@ class TopbarComponent extends Component {
             intl={intl}
             isAuthenticated={isAuthenticated}
             name={name}
+            onSearchSubmit={this.handleSubmit}
+            initialSearchFormValues={initialSearchFormValues}
           />
         </div>
         <Modal
