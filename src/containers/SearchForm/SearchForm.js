@@ -14,7 +14,7 @@ const SearchForm = props => {
   return (
     <form {...addClassName} onSubmit={handleSubmit}>
       <Field
-        className={css.locationInput}
+        inputClassName={css.locationInput}
         name="location"
         label="Location"
         placeholder={intl.formatMessage({ id: 'SearchForm.placeholder' })}
