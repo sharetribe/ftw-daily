@@ -5,7 +5,7 @@ import { intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { FlatButton, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
-import { SearchForm } from '../../containers';
+import { TopbarSearchForm } from '../../containers';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
 import { ensureUser } from '../../util/data';
@@ -156,9 +156,8 @@ class TopbarComponent extends Component {
           onClose={this.handleMobileSearchClose}
           togglePageClassNames={togglePageClassNames}
         >
-          <SearchForm
+          <TopbarSearchForm
             form="TopbarSearchForm"
-            className={css.searchForm}
             onSubmit={this.handleSubmit}
             initialValues={initialSearchFormValues}
           />
