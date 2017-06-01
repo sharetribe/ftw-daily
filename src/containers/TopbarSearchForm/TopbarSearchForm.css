@@ -1,41 +1,39 @@
 @import '../../marketplace.css';
 
-.root {
-  height: 100%;
+:root {
+  --inputHeight: 50px;
+  --topbarHeight: 72px;
 }
 
-.location {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-
-  @media (--desktop-viewport) {
-    display: block;
-  }
+.mobileInputRoot {
+  margin-left: 24px;
+  margin-right: 24px;
 }
 
-.locationInput {
-  height: 72px;
-  padding: 0 18px;
+.desktopInputRoot {
+  height: var(--topbarHeight);
+}
+
+.desktopIcon {
   border: none;
-  outline: none;
-
-  @media (--desktop-viewport) {
-    padding: 0;
-  }
 }
 
-.locationPredictions {
-  flex-grow: 1;
-  background-color: var(--marketplaceColor);
-  box-shadow: var(--boxShadowPopup);
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
+.desktopInput {
+  height: var(--topbarHeight);
+  border: none;
+  padding-top: 0;
+  padding-bottom: 0;
+}
 
-  @media (--desktop-viewport) {
-    position: relative;
-    z-index: 1;
-    padding-bottom: 98px;
-    max-width: 434px;
-  }
+.mobilePredictions {
+  position: fixed;
+  top: 95px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.desktopPredictions {
+  margin-top: calc(var(--topbarHeight) - var(--inputHeight));
+  max-width: 434px;
 }

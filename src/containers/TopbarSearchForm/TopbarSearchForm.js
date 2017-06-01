@@ -8,7 +8,7 @@ import { LocationAutocompleteInput } from '../../components';
 import css from './TopbarSearchForm.css';
 
 const TopbarSearchFormComponent = props => {
-  const { rootClassName, className, intl, onSubmit } = props;
+  const { rootClassName, className, intl, onSubmit, isMobile } = props;
 
   const onChange = location => {
     if (location.selectedPlace) {
@@ -20,7 +20,7 @@ const TopbarSearchFormComponent = props => {
     }
   };
 
-  const classes = classNames(rootClassName || css.root, className);
+  const classes = classNames(rootClassName, className);
 
   // Allow form submit only when the place has changed
   const preventFormSubmit = e => e.preventDefault();
@@ -30,9 +30,10 @@ const TopbarSearchFormComponent = props => {
       <Field
         name="location"
         label="Location"
-        className={css.location}
-        inputClassName={css.locationInput}
-        predictionsClassName={css.locationPredictions}
+        className={isMobile ? css.mobileInputRoot : css.desktopInputRoot}
+        iconClassName={isMobile ? null : css.desktopIcon}
+        inputClassName={isMobile ? null : css.desktopInput}
+        predictionsClassName={isMobile ? css.mobilePredictions : css.desktopPredictions}
         placeholder={intl.formatMessage({ id: 'TopbarSearchForm.placeholder' })}
         format={null}
         component={LocationAutocompleteInput}
@@ -42,9 +43,9 @@ const TopbarSearchFormComponent = props => {
   );
 };
 
-const { func, string } = PropTypes;
+const { func, string, bool } = PropTypes;
 
-TopbarSearchFormComponent.defaultProps = { rootClassName: null, className: null };
+TopbarSearchFormComponent.defaultProps = { rootClassName: null, className: null, isMobile: false };
 
 TopbarSearchFormComponent.propTypes = {
   ...formPropTypes,
@@ -52,6 +53,7 @@ TopbarSearchFormComponent.propTypes = {
   rootClassName: string,
   className: string,
   onSubmit: func.isRequired,
+  isMobile: bool,
 
   // from injectIntl
   intl: intlShape.isRequired,

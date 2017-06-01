@@ -9,10 +9,29 @@
 
 .root {
   position: relative;
+  display: flex;
+}
+
+.icon {
+  display: flex;
+  width: 24px;
+  align-self: stretch;
+  border-bottom: 3px solid var(--marketplaceColor);
+  background-color: var(--matterColorLight);
+}
+
+.iconSvg {
+  margin: auto;
+}
+
+.iconSvgGroup {
+  stroke: var(--marketplaceColor);
 }
 
 .input {
+  flex-grow: 1;
   height: var(--inputHeight);
+  padding-left: 18px;
 }
 
 /*
@@ -25,6 +44,10 @@ size and position, etc.
   padding-bottom: 98px;
   top: var(--inputHeight);
   background-color: var(--marketplaceColor);
+  z-index: 1;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  box-shadow: var(--boxShadowPopup);
 }
 
 /*
