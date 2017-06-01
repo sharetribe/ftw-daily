@@ -159,6 +159,16 @@ pre,
   /* TODO Desktop styles needs to be extracted */
 }
 
+/* This font is specific to Avatar component only */
+.smallAvatarFont {
+  font-family: "sofiapro", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 7.5px 0 4.5px 0;
+  letter-spacing: 0.1px;
+}
+
 /* Base font color */
 html,
 .textColor {

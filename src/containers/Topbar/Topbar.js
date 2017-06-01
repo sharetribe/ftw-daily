@@ -91,7 +91,6 @@ class TopbarComponent extends Component {
     } = this.props;
     const me = ensureUser(currentUser);
     const profile = me.attributes.profile;
-    const name = me.id ? `${profile.firstName} ${profile.lastName}` : '';
 
     const { mobilemenu, mobilesearch, address, origin, bounds, country } = parse(location.search, {
       latlng: ['origin'],
@@ -104,7 +103,8 @@ class TopbarComponent extends Component {
       <TopbarMobileMenu
         isAuthenticated={isAuthenticated}
         currentUserHasListings={currentUserHasListings}
-        name={name}
+        firstName={profile.firstName}
+        lastName={profile.lastName}
         onLogout={this.handleLogout}
       />
     );
@@ -140,8 +140,9 @@ class TopbarComponent extends Component {
             currentUserHasListings={currentUserHasListings}
             intl={intl}
             isAuthenticated={isAuthenticated}
-            name={name}
             onLogout={this.handleLogout}
+            firstName={profile.firstName}
+            lastName={profile.lastName}
           />
         </div>
         <Modal

@@ -1,25 +1,37 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
-import avatarPlaceholder from './images/wireframeAvatar.svg';
 import css from './Avatar.css';
 
 const Avatar = props => {
-  const { className, name } = props;
-  const classes = classNames(css.avatar, className);
+  const { className, firstName, lastName, rootClassName } = props;
+  const classes = classNames(rootClassName || css.root, className);
 
-  return <img className={classes} src={avatarPlaceholder} alt={name} />;
+  const authorName = lastName ? `${firstName} ${lastName}` : firstName;
+  const initials = lastName ? firstName.charAt(0) + lastName.charAt(0) : firstName.charAt(0);
+
+  const placeHolderAvatar = (
+    <div className={classes} title={authorName}>
+      <span>{initials}</span>
+    </div>
+  );
+
+  return placeHolderAvatar;
 };
 
 const { string } = PropTypes;
 
 Avatar.defaultProps = {
   className: null,
+  lastName: null,
+  rootClassName: null,
 };
 
 Avatar.propTypes = {
   className: string,
-  name: string.isRequired,
+  firstName: string.isRequired,
+  lastName: string,
+  rootClassName: string,
 };
 
 export default Avatar;
