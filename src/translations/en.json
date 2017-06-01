@@ -77,6 +77,7 @@
   "LoginForm.logIn": "Log in",
   "LoginForm.passwordLabel": "Password",
   "LoginForm.passwordRequired": "required",
+  "Modal.close": "CLOSE",
   "Modal.closeModal": "Close modal",
   "OrderDetailsPanel.orderAcceptedStatus": "{providerName} accepted the booking.",
   "OrderDetailsPanel.orderAcceptedTitle": "You have booked {title}.",
@@ -190,9 +191,12 @@
   "TopbarDesktop.logout": "Log out",
   "TopbarDesktop.logo": "Logo",
   "TopbarDesktop.signup": "Sign up",
+  "TopbarMobileMenu.greeting": "Hello {firstName}",
   "TopbarMobileMenu.inboxLink": "Inbox",
   "TopbarMobileMenu.loginLink": "Log in",
   "TopbarMobileMenu.logoutLink": "Log out",
   "TopbarMobileMenu.newListingLink": "+ Add your sauna",
-  "TopbarMobileMenu.signupLink": "Sign up"
+  "TopbarMobileMenu.signupLink": "Sign up",
+  "TopbarMobileMenu.signupOrLogin": "{signup} or {login}",
+  "TopbarMobileMenu.unauthorizedGreeting": "Hello there,{lineBreak}would you like to {signupOrLogin}?"
 }

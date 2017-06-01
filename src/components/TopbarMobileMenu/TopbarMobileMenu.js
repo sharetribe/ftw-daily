@@ -12,18 +12,35 @@ const TopbarMobileMenu = props => {
   const { isAuthenticated, currentUserHasListings, firstName, lastName, onLogout } = props;
 
   if (!isAuthenticated) {
+    const signup = (
+      <NamedLink name="SignupPage" className={css.signupLink}>
+        <FormattedMessage id="TopbarMobileMenu.signupLink" />
+      </NamedLink>
+    );
+
+    const login = (
+      <NamedLink name="LoginPage" className={css.loginLink}>
+        <FormattedMessage id="TopbarMobileMenu.loginLink" />
+      </NamedLink>
+    );
+
+    const signupOrLogin = (
+      <span className={css.authenticationLinks}>
+        <FormattedMessage id="TopbarMobileMenu.signupOrLogin" values={{ signup, login }} />
+      </span>
+    );
     return (
       <div className={css.root}>
-        <div className={css.authenticationLinks}>
-          <NamedLink name="SignupPage" className={css.signupLink}>
-            <FormattedMessage id="TopbarMobileMenu.signupLink" />
-          </NamedLink>
-          <NamedLink name="LoginPage" className={css.loginLink}>
-            <FormattedMessage id="TopbarMobileMenu.loginLink" />
-          </NamedLink>
+        <div className={css.content}>
+          <div className={css.authenticationGreeting}>
+            <FormattedMessage
+              id="TopbarMobileMenu.unauthorizedGreeting"
+              values={{ lineBreak: <br />, signupOrLogin }}
+            />
+          </div>
         </div>
-        <div className={css.createNewListingLink}>
-          <NamedLink name="NewListingPage">
+        <div className={css.footer}>
+          <NamedLink className={css.createNewListingLink} name="NewListingPage">
             <FormattedMessage id="TopbarMobileMenu.newListingLink" />
           </NamedLink>
         </div>
@@ -32,29 +49,31 @@ const TopbarMobileMenu = props => {
   }
 
   const inboxLink = (
-    <NamedLink name="InboxPage" params={{ tab: currentUserHasListings ? 'sales' : 'orders' }}>
+    <NamedLink
+      className={css.inbox}
+      name="InboxPage"
+      params={{ tab: currentUserHasListings ? 'sales' : 'orders' }}
+    >
       <FormattedMessage id="TopbarMobileMenu.inboxLink" />
     </NamedLink>
   );
 
   return (
     <div className={css.root}>
-      <div className={css.user}>
-        <Avatar rootClassName={css.avatar} firstName={firstName} lastName={lastName} />
-        <div className={css.userInfo}>
-          <span>{name}</span>
-          <NamedLink className={css.createNewListingLink} name="NewListingPage">
-            <FormattedMessage id="TopbarMobileMenu.newListingLink" />
-          </NamedLink>
-        </div>
-      </div>
+      <Avatar rootClassName={css.avatar} firstName={firstName} lastName={lastName} />
       <div className={css.content}>
-        {inboxLink}
-      </div>
-      <div className={css.footer}>
+        <span className={css.greeting}>
+          <FormattedMessage id="TopbarMobileMenu.greeting" values={{ firstName }} />
+        </span>
         <InlineButton className={css.logoutButton} onClick={onLogout}>
           <FormattedMessage id="TopbarMobileMenu.logoutLink" />
         </InlineButton>
+        {inboxLink}
+      </div>
+      <div className={css.footer}>
+        <NamedLink className={css.createNewListingLink} name="NewListingPage">
+          <FormattedMessage id="TopbarMobileMenu.newListingLink" />
+        </NamedLink>
       </div>
     </div>
   );

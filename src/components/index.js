@@ -4,6 +4,7 @@ import Avatar from './Avatar/Avatar';
 import BirthdayInput from './BirthdayInput/BirthdayInput';
 import BookingInfo from './BookingInfo/BookingInfo';
 import Button, { FlatButton, InlineButton } from './Button/Button';
+import CloseIcon from './CloseIcon/CloseIcon';
 import CurrencyInput from './CurrencyInput/CurrencyInput';
 import DateInput from './DateInput/DateInput';
 import Discussion from './Discussion/Discussion';
@@ -53,6 +54,7 @@ export {
   BirthdayInput,
   BookingInfo,
   Button,
+  CloseIcon,
   CurrencyInput,
   DateInput,
   Discussion,

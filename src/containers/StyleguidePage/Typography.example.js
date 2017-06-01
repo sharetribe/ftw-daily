@@ -67,6 +67,12 @@ const Fonts = () => {
   line-height: 18px;
   padding: 2px 0 4px 0;`;
 
+  const tinyBoldFontStyling = `Styles affecting size:
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 18px;
+  padding: 2px 0 4px 0;`;
+
   const fontsContainerClasses = classNames(css.fontsContainer, css.baselines);
 
   return (
@@ -131,6 +137,15 @@ const Fonts = () => {
           )}
           description="Very small print."
           styling={tinyFontStyling}
+        />
+        <Font
+          component={() => (
+            <p className={mpStyle.tinyBoldFont}>
+              Tiny bold mobile text (.tinyBoldFont): CLOSE
+            </p>
+          )}
+          description="Very small bold print used next to close icon."
+          styling={tinyBoldFontStyling}
         />
       </div>
     </div>
