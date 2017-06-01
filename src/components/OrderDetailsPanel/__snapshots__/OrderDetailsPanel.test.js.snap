@@ -23,7 +23,9 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
     <div>
       <Avatar
         className={null}
-        name="provider first name provider last name" />
+        firstName="provider first name"
+        lastName="provider last name"
+        rootClassName={null} />
     </div>
     <div>
       <FormattedMessage

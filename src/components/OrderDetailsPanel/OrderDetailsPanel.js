@@ -128,7 +128,7 @@ const OrderDetailsPanel = props => {
       <h1 className={css.title}>{stateMsgData.title}</h1>
       <div className={css.message}>
         <div className={css.avatarWrapper}>
-          <Avatar name={providerName} />
+          <Avatar firstName={firstName} lastName={lastName} />
         </div>
         {stateMsgData.message}
       </div>

@@ -1,5 +1,21 @@
-.avatar {
-  border-radius: 50%;
+@import '../../marketplace.css';
+
+.root {
   width: 100%;
   height: 100%;
+  border-radius: 50%;
+
+  /* Position possible initials to the center of the component */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Colors */
+  background-color: var(--matterColorAnti);
+  color: var(--matterColorLight);
+
+  /* Font is specific to this component, but defining it in marketplace.css makes it easier
+   * to change font if brand look-and-feel needs such changes.
+   */
+  composes: smallAvatarFont from '../../marketplace.css';
 }

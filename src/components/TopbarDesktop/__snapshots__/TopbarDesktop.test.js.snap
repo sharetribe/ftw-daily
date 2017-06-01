@@ -51,10 +51,13 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     <button
       className=""
       onClick={[Function]}>
-      <img
-        alt="John Doe"
+      <div
         className=""
-        src="wireframeAvatar.svg" />
+        title="">
+        <span>
+          
+        </span>
+      </div>
     </button>
     <div
       className=""

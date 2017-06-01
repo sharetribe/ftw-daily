@@ -153,7 +153,7 @@ const SaleDetailsPanel = props => {
     <div className={className}>
       <div className={css.messagesContainer}>
         <div className={css.avatarWrapper}>
-          <Avatar name={customerName} />
+          <Avatar firstName={firstName} lastName={lastName} />
         </div>
         <h1 className={css.title}>
           {stateMsgData.title}

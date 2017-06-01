@@ -9,7 +9,7 @@ import { Avatar, InlineButton, NamedLink } from '../../components';
 import css from './TopbarMobileMenu.css';
 
 const TopbarMobileMenu = props => {
-  const { isAuthenticated, currentUserHasListings, name, onLogout } = props;
+  const { isAuthenticated, currentUserHasListings, firstName, lastName, onLogout } = props;
 
   if (!isAuthenticated) {
     return (
@@ -40,7 +40,7 @@ const TopbarMobileMenu = props => {
   return (
     <div className={css.root}>
       <div className={css.user}>
-        <Avatar className={css.avatar} name={name} />
+        <Avatar rootClassName={css.avatar} firstName={firstName} lastName={lastName} />
         <div className={css.userInfo}>
           <span>{name}</span>
           <NamedLink className={css.createNewListingLink} name="NewListingPage">
@@ -60,14 +60,15 @@ const TopbarMobileMenu = props => {
   );
 };
 
-TopbarMobileMenu.defaultProps = { name: '' };
+TopbarMobileMenu.defaultProps = { firstName: '', lastName: '' };
 
 const { bool, func, string } = PropTypes;
 
 TopbarMobileMenu.propTypes = {
   isAuthenticated: bool.isRequired,
   currentUserHasListings: bool.isRequired,
-  name: string,
+  firstName: string,
+  lastName: string,
   onLogout: func.isRequired,
 };
 

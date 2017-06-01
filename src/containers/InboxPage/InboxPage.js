@@ -20,10 +20,12 @@ const { shape, string, arrayOf, bool, oneOf, instanceOf } = PropTypes;
 
 // Formatted username
 const username = user => {
-  const profile = user && user.attributes && user.attributes.profile
-    ? user.attributes.profile
-    : null;
-  return profile ? `${profile.firstName} ${profile.lastName}` : '';
+  const profile = user && user.attributes && user.attributes.profile ? user.attributes.profile : {};
+  return {
+    firstName: profile.firstName,
+    lastName: profile.lastName,
+    name: profile.firstName ? `${profile.firstName} ${profile.lastName}` : '',
+  };
 };
 
 // Localised timestamp when the given transaction was updated
@@ -63,7 +65,7 @@ export const InboxItem = props => {
   const { type, tx, intl } = props;
   const { customer, provider } = tx;
   const isOrder = type === 'order';
-  const otherUserName = username(isOrder ? provider : customer);
+  const otherUser = username(isOrder ? provider : customer);
   const changedDate = timestamp(intl, tx);
   return (
     <NamedLink
@@ -72,11 +74,11 @@ export const InboxItem = props => {
       params={{ id: tx.id.uuid }}
     >
       <div className={css.itemAvatar}>
-        <Avatar name={otherUserName} />
+        <Avatar firstName={otherUser.firstName} lastName={otherUser.lastName} />
       </div>
       <div className={css.itemInfo}>
         <div>
-          <span className={css.itemUsername}>{otherUserName}</span>
+          <span className={css.itemUsername}>{otherUser.name}</span>
           <span className={css.itemTimestamp} title={changedDate.datetime}>{changedDate.date}</span>
         </div>
         <div className={css.itemState}>{txState(intl, tx)}</div>

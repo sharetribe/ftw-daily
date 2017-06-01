@@ -17,11 +17,12 @@ import css from './TopbarDesktop.css';
 const TopbarDesktop = props => {
   const {
     className,
+    firstName,
+    lastName,
     rootClassName,
     currentUserHasListings,
     intl,
     isAuthenticated,
-    name,
     onLogout,
   } = props;
 
@@ -48,7 +49,7 @@ const TopbarDesktop = props => {
   const profileMenu = isAuthenticated
     ? <Menu>
         <MenuLabel className={css.profileMenuLabel}>
-          <Avatar className={css.avatar} name={name} />
+          <Avatar className={css.avatar} firstName={firstName} lastName={lastName} />
         </MenuLabel>
         <MenuContent className={css.profileMenuContent}>
           <MenuItem key="logout">
@@ -96,7 +97,7 @@ const TopbarDesktop = props => {
   );
 };
 
-TopbarDesktop.defaultProps = { name: '', className: null, rootClassName: '' };
+TopbarDesktop.defaultProps = { className: null, firstName: '', lastName: '', rootClassName: '' };
 
 const { bool, func, string } = PropTypes;
 
@@ -105,7 +106,8 @@ TopbarDesktop.propTypes = {
   currentUserHasListings: bool.isRequired,
   isAuthenticated: bool.isRequired,
   onLogout: func.isRequired,
-  name: string,
+  firstName: string,
+  lastName: string,
   rootClassName: string,
 
   // from injectIntl
