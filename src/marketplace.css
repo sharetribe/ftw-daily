@@ -243,5 +243,25 @@ select {
 
 textarea {
   width: 100%;
-  border: 1px solid #ddd;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--marketplaceColor);
+}
+
+input {
+  display: block;
+  width: 100%;
+
+  border: none;
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--marketplaceColor);
+
+  &::placeholder {
+    color: var(--matterColorAnti);
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
