@@ -1,13 +1,29 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
-import { Avatar, NamedLink } from '../../components';
+import {
+  Avatar,
+  InlineButton,
+  Menu,
+  MenuLabel,
+  MenuContent,
+  MenuItem,
+  NamedLink,
+} from '../../components';
 
 import logo from './images/saunatime-logo.png';
 import css from './TopbarDesktop.css';
 
 const TopbarDesktop = props => {
-  const { className, rootClassName, currentUserHasListings, intl, isAuthenticated, name } = props;
+  const {
+    className,
+    rootClassName,
+    currentUserHasListings,
+    intl,
+    isAuthenticated,
+    name,
+    onLogout,
+  } = props;
 
   const rootClass = rootClassName || css.root;
   const classes = classNames(rootClass, className);
@@ -29,9 +45,19 @@ const TopbarDesktop = props => {
       </NamedLink>
     : null;
 
-  // TODO This is just a placeholder
   const profileMenu = isAuthenticated
-    ? <div className={css.avatarLink}> <Avatar className={css.avatar} name={name} /></div>
+    ? <Menu>
+        <MenuLabel className={css.profileMenuLabel}>
+          <Avatar className={css.avatar} name={name} />
+        </MenuLabel>
+        <MenuContent className={css.profileMenuContent}>
+          <MenuItem key="logout">
+            <InlineButton className={css.logoutButton} onClick={onLogout}>
+              <FormattedMessage id="TopbarDesktop.logout" />
+            </InlineButton>
+          </MenuItem>
+        </MenuContent>
+      </Menu>
     : null;
 
   const signupLink = isAuthenticated
@@ -47,7 +73,7 @@ const TopbarDesktop = props => {
       </NamedLink>;
 
   return (
-    <div className={classes}>
+    <nav className={classes}>
       <NamedLink className={css.logoLink} name="LandingPage">
         <img
           className={css.logo}
@@ -66,18 +92,19 @@ const TopbarDesktop = props => {
       {profileMenu}
       {signupLink}
       {loginLink}
-    </div>
+    </nav>
   );
 };
 
 TopbarDesktop.defaultProps = { name: '', className: null, rootClassName: '' };
 
-const { bool, string } = PropTypes;
+const { bool, func, string } = PropTypes;
 
 TopbarDesktop.propTypes = {
   className: string,
   currentUserHasListings: bool.isRequired,
   isAuthenticated: bool.isRequired,
+  onLogout: func.isRequired,
   name: string,
   rootClassName: string,
 

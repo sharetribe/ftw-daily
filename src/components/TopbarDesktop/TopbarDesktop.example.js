@@ -1,6 +1,8 @@
 import { fakeIntl } from '../../util/test-data';
 import TopbarDesktop from './TopbarDesktop';
 
+const noop = () => null;
+
 export const AuthenticatedDesktopTopbar = {
   component: TopbarDesktop,
   props: {
@@ -8,6 +10,7 @@ export const AuthenticatedDesktopTopbar = {
     currentUserHasListings: true,
     name: 'John Doe',
     intl: fakeIntl,
+    onLogout: noop,
   },
   group: 'navigation',
 };

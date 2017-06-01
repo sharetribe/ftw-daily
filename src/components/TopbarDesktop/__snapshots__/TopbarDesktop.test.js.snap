@@ -1,5 +1,5 @@
 exports[`TopbarDesktop data matches snapshot 1`] = `
-<div
+<nav
   className="">
   <a
     className="NamedLink_active"
@@ -45,12 +45,35 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     </span>
   </a>
   <div
-    className={undefined}>
-     
-    <img
-      alt="John Doe"
+    className=""
+    onBlur={[Function]}
+    onKeyDown={[Function]}>
+    <button
       className=""
-      src="wireframeAvatar.svg" />
+      onClick={[Function]}>
+      <img
+        alt="John Doe"
+        className=""
+        src="wireframeAvatar.svg" />
+    </button>
+    <div
+      className=""
+      style={Object {}}>
+      <ul
+        className="">
+        <li
+          className=""
+          role="menuitem">
+          <button
+            className=""
+            onClick={[Function]}>
+            <span>
+              Log out
+            </span>
+          </button>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
+</nav>
 `;

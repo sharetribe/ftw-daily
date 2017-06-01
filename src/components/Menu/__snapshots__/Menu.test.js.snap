@@ -1,10 +1,29 @@
 exports[`Menu matches snapshot 1`] = `
 <div
-  className={undefined}>
-  New York, Jan 2nd – Jan 4th 
-  <span
-    className={undefined}>
-    ▼
-  </span>
+  className=""
+  onBlur={[Function]}
+  onKeyDown={[Function]}>
+  <button
+    className=""
+    onClick={[Function]}>
+    Label
+  </button>
+  <div
+    className=""
+    style={Object {}}>
+    <ul
+      className="">
+      <li
+        className=""
+        role="menuitem">
+        Menu item 1
+      </li>
+      <li
+        className=""
+        role="menuitem">
+        Menu item 2
+      </li>
+    </ul>
+  </div>
 </div>
 `;

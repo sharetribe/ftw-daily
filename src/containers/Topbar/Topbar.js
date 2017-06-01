@@ -141,6 +141,7 @@ class TopbarComponent extends Component {
             intl={intl}
             isAuthenticated={isAuthenticated}
             name={name}
+            onLogout={this.handleLogout}
           />
         </div>
         <Modal
