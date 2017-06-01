@@ -22,8 +22,11 @@ const TopbarSearchFormComponent = props => {
 
   const classes = classNames(rootClassName || css.root, className);
 
+  // Allow form submit only when the place has changed
+  const preventFormSubmit = e => e.preventDefault();
+
   return (
-    <form className={classes} onSubmit={onSubmit}>
+    <form className={classes} onSubmit={preventFormSubmit}>
       <Field
         name="location"
         label="Location"
