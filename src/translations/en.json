@@ -183,6 +183,7 @@
   "StripePaymentForm.stripe.validation_error.processing_error": "An error occurred while processing the card.",
   "StripePaymentForm.submitPaymentInfo": "Send request",
   "Topbar.menuIcon": "Open menu",
+  "Topbar.mobileSearchHelp": "Tip: You can also search saunas by zip code, for example \"00500\" or city district – \"Sörnäinen\".",
   "Topbar.searchIcon": "Open search",
   "TopbarDesktop.createListing": "+ Add your sauna",
   "TopbarDesktop.inbox": "Inbox",
@@ -194,6 +195,5 @@
   "TopbarMobileMenu.logoutLink": "Log out",
   "TopbarMobileMenu.newListingLink": "+ Add your sauna",
   "TopbarMobileMenu.signupLink": "Sign up",
-  "TopbarSearchForm.placeholder": "Search saunas...",
-  "TopbarSearchForm.searchHelp": "Tip: You can also search saunas by zip code, for example \"00500\" or city district \"Sörnäinen\"."
+  "TopbarSearchForm.placeholder": "Search saunas..."
 }
