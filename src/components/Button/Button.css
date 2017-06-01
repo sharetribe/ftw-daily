@@ -84,7 +84,7 @@
   border-width: 0px;
 
   /* Font configuration */
-  text-decoration: underline;
+  text-decoration: none;
 
   /* Hovers */
   &:enabled {
@@ -93,6 +93,7 @@
   &:enabled:hover,
   &:enabled:active {
     background-color: transparent;
+    text-decoration: underline;
   }
   &:disabled {
     background-color: transparent;
