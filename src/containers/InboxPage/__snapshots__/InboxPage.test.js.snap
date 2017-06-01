@@ -149,10 +149,13 @@ exports[`InboxPage matches snapshot 2`] = `
   style={Object {}}>
   <div
     className={undefined}>
-    <img
-      alt="provider-user-id first name provider-user-id last name"
+    <div
       className=""
-      src="wireframeAvatar.svg" />
+      title="provider-user-id first name provider-user-id last name">
+      <span>
+        pp
+      </span>
+    </div>
   </div>
   <div
     className={undefined}>
@@ -326,10 +329,13 @@ exports[`InboxPage matches snapshot 4`] = `
   style={Object {}}>
   <div
     className={undefined}>
-    <img
-      alt="customer-user-id first name customer-user-id last name"
+    <div
       className=""
-      src="wireframeAvatar.svg" />
+      title="customer-user-id first name customer-user-id last name">
+      <span>
+        cc
+      </span>
+    </div>
   </div>
   <div
     className={undefined}>

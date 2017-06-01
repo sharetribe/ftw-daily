@@ -170,7 +170,7 @@ export class ListingPageComponent extends Component {
     const authorInfo = authorAvailable
       ? <div className={css.author}>
           <div className={css.avatarWrapper}>
-            <Avatar name={authorName} />
+            <Avatar firstName={authorProfile.firstName} lastName={authorProfile.lastName} />
           </div>
           <div className={css.authorDetails}>
             <span className={css.authorName}>{authorName}</span>

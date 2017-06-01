@@ -44,7 +44,9 @@ exports[`ListingPage matches snapshot 1`] = `
       <div>
         <Avatar
           className={null}
-          name="user-1 first name user-1 last name" />
+          firstName="user-1 first name"
+          lastName="user-1 last name"
+          rootClassName={null} />
       </div>
       <div>
         <span>

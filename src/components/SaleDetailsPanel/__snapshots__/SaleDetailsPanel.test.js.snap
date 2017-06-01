@@ -5,7 +5,9 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
     <div>
       <Avatar
         className={null}
-        name="customer1 first name customer1 last name" />
+        firstName="customer1 first name"
+        lastName="customer1 last name"
+        rootClassName={null} />
     </div>
     <h1>
       <FormattedMessage
