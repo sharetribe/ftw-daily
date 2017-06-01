@@ -1,31 +1,72 @@
+@import '../../marketplace.css';
+
+:root {
+  --inputHeight: 50px;
+  --sidePadding: 24px;
+  --sidePaddingDesktop: 36px;
+  --poweredImageHeight: 18px;
+}
+
 .root {
   position: relative;
 }
 
 .input {
-  height: 50px;
+  height: var(--inputHeight);
 }
 
-.predictions {
+/*
+Predictions container can be overriden with new container styles for
+size and position, etc.
+*/
+.predictionsRoot {
   position: absolute;
-  margin: 0;
-  top: 50px;
   width: 100%;
-  background-color: #fff;
-  border: 1px solid #eee;
-  border-top: none;
+  padding-bottom: 98px;
+  top: var(--inputHeight);
+  background-color: var(--marketplaceColor);
+}
+
+/*
+The Google Maps API TOS requires us to show a Powered by Google logo
+next to the autocomplete service predictions. It is rendered to the
+bottom of the container.
+*/
+.poweredByGoogle {
+  position: absolute;
+  bottom: 27px;
+  width: 100%;
+  height: var(--poweredImageHeight);
+  background-image: url(./images/powered_by_google_on_non_white_hdpi.png);
+  background-size: auto var(--poweredImageHeight);
+  background-position: center;
+
+  @media (--desktop-viewport) {
+    background-position: center left var(--sidePaddingDesktop);
+  }
+}
+
+/* List of predictions, with a responsive padding size */
+.predictions {
+  composes: searchResultsFont;
+
+  margin: 0;
+  padding: 14px 0;
 
   & li {
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid #eee;
+    color: var(--matterColorLight);
 
-    &:last-child {
-      border-bottom: none;
+    /* Assign enough vertical padding to make the element at least 44px high */
+    padding: 10px var(--sidePadding);
+
+    @media (--desktop-viewport) {
+      padding: 10px var(--sidePaddingDesktop);
     }
 
     &:hover,
     &.highlighted {
-      background-color: #eee;
+      text-decoration: underline;
+      cursor: pointer;
     }
   }
 }

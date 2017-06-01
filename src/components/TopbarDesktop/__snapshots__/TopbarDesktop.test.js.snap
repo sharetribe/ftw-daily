@@ -7,19 +7,29 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     onClick={[Function]}
     style={Object {}}>
     <img
-      alt="Logo"
+      alt="TopbarDesktop.logo"
       className={undefined}
       src="saunatime-logo.png" />
   </a>
-  <div
-    className={undefined}>
-    <span
-      className={undefined}>
-      Search should be here
-    </span>
-  </div>
-  <div
-    className={undefined} />
+  <form
+    className=""
+    onSubmit={[Function]}>
+    <div
+      className="">
+      <input
+        autoComplete="off"
+        autoFocus={false}
+        className=""
+        name="location"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Search saunas..."
+        type="search"
+        value="" />
+    </div>
+  </form>
   <a
     className=""
     href="/l/new"

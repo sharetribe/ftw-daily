@@ -6,14 +6,25 @@ import routesConfiguration from '../../routesConfiguration';
 import { flattenRoutes } from '../../util/routes';
 import TopbarDesktop from './TopbarDesktop';
 
+const noop = () => null;
+
 describe('TopbarDesktop', () => {
   it('data matches snapshot', () => {
+    window.google = { maps: {} };
     const flattenedRoutes = flattenRoutes(routesConfiguration);
+    const topbarProps = {
+      isAuthenticated: true,
+      currentUserHasListings: true,
+      name: 'John Doe',
+      onSearchSubmit: noop,
+      intl: fakeIntl,
+    };
     const tree = renderDeep(
       <RoutesProvider flattenedRoutes={flattenedRoutes}>
-        <TopbarDesktop isAuthenticated currentUserHasListings name="John Doe" intl={fakeIntl} />
+        <TopbarDesktop {...topbarProps} />
       </RoutesProvider>
     );
+    delete window.google;
     expect(tree).toMatchSnapshot();
   });
 });
