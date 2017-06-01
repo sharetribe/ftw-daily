@@ -57,3 +57,20 @@
 .rootSearchIcon {
   stroke: var(--matterColor);
 }
+
+.searchContainer {
+  position: relative;
+  height: 100%;
+}
+
+.mobileHelp {
+  color: var(--matterColorAnti);
+  margin: 0 24px;
+
+  /* Absolute position to prevent changing search form positioning */
+  position: absolute;
+  top: 115px;
+
+  /* Pull text behind search suggestions */
+  z-index: -1;
+}

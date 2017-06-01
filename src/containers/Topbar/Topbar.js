@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { FlatButton, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
@@ -158,11 +158,16 @@ class TopbarComponent extends Component {
           onClose={this.handleMobileSearchClose}
           togglePageClassNames={togglePageClassNames}
         >
-          <TopbarSearchForm
-            form="TopbarSearchForm"
-            onSubmit={this.handleSubmit}
-            initialValues={initialSearchFormValues}
-          />
+          <div className={css.searchContainer}>
+            <TopbarSearchForm
+              form="TopbarSearchForm"
+              onSubmit={this.handleSubmit}
+              initialValues={initialSearchFormValues}
+            />
+            <p className={css.mobileHelp}>
+              <FormattedMessage id="Topbar.mobileSearchHelp" />
+            </p>
+          </div>
         </Modal>
       </div>
     );

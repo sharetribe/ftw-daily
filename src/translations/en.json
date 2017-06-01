@@ -185,6 +185,7 @@
   "StripePaymentForm.submitPaymentInfo": "Send request",
   "Topbar.logoIcon": "Go to homepage",
   "Topbar.menuIcon": "Open menu",
+  "Topbar.mobileSearchHelp": "Tip: You can also search saunas by zip code, for example \"00500\" or city district – \"Sörnäinen\".",
   "Topbar.searchIcon": "Open search",
   "TopbarDesktop.createListing": "+ Add your sauna",
   "TopbarDesktop.inbox": "Inbox",
@@ -200,6 +201,7 @@
   "TopbarMobileMenu.signupLink": "Sign up",
   "TopbarMobileMenu.signupOrLogin": "{signup} or {login}",
   "TopbarMobileMenu.unauthorizedGreeting": "Hello there,{lineBreak}would you like to {signupOrLogin}?",
+  "TopbarSearchForm.placeholder": "Search saunas...",
   "TopbarSearchForm.placeholder": "Search saunas...",
   "TopbarSearchForm.searchHelp": "Tip: You can also search saunas by zip code, for example \"00500\" or city district \"Sörnäinen\"."
 }
