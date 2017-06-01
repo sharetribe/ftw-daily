@@ -28,6 +28,9 @@
 .locationPredictions {
   flex-grow: 1;
   background-color: var(--marketplaceColor);
+  box-shadow: var(--boxShadowPopup);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
 
   @media (--desktop-viewport) {
     position: relative;
