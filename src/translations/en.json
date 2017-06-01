@@ -77,6 +77,7 @@
   "LoginForm.logIn": "Log in",
   "LoginForm.passwordLabel": "Password",
   "LoginForm.passwordRequired": "required",
+  "Modal.close": "CLOSE",
   "Modal.closeModal": "Close modal",
   "OrderDetailsPanel.orderAcceptedStatus": "{providerName} accepted the booking.",
   "OrderDetailsPanel.orderAcceptedTitle": "You have booked {title}.",

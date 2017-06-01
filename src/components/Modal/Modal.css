@@ -1,3 +1,5 @@
+@import '../../marketplace.css';
+
 /* Content is visible as modal layer */
 .isOpen {
   display: flex;
@@ -8,7 +10,7 @@
   bottom: 0;
   width: 100%;
   z-index: 100;
-  background-color: white;
+  background-color: var(--matterColorLight);
   margin: 0 auto;
 }
 
@@ -33,29 +35,35 @@
 }
 
 .title {
-  margin: 1rem;
+  margin: 24px;
   flex-grow: 1;
 }
 
 .close {
+  display: flex;
+  align-items: baseline;
   width: auto;
-  height: 3em;
   background-color: transparent;
-  padding: 1em;
-  color: #999;
+  padding: 24px;
+  color: var(--matterColor);
   border: 0;
+  composes: tinyBoldFont from '../../marketplace.css';
 
   &:enabled:hover {
     background-color: transparent;
-    color: #666;
+    color: var(--matterColorDark);
   }
   &:enabled:active {
     background-color: transparent;
-    color: #000;
+    color: var(--matterColorDark);
   }
   &:disabled {
     background-color: transparent;
   }
+}
+
+.closeIcon {
+  margin-left: 12px;
 }
 
 .content {

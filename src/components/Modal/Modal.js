@@ -10,10 +10,9 @@
  */
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import { intlShape, injectIntl } from 'react-intl';
-import { Button } from '../../components';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { Button, CloseIcon } from '../../components';
 
-import closeIcon from './images/closeIcon.svg';
 import css from './Modal.css';
 
 export class ModalComponent extends Component {
@@ -53,8 +52,9 @@ export class ModalComponent extends Component {
     const closeModalMessage = intl.formatMessage({ id: 'Modal.closeModal' });
     const modalTitle = title ? <h2 className={css.title}>{title}</h2> : null;
     const closeBtn = (
-      <Button onClick={this.handleClose} className={css.close} title={closeModalMessage}>
-        <img src={closeIcon} alt={closeModalMessage} />
+      <Button onClick={this.handleClose} rootClassName={css.close} title={closeModalMessage}>
+        <span><FormattedMessage id="Modal.close" /></span>
+        <CloseIcon rootClassName={css.closeIcon} />
       </Button>
     );
 
