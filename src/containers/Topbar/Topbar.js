@@ -12,8 +12,9 @@ import { ensureUser } from '../../util/data';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 
-import hamburgerIcon from './images/hamburgerIcon.svg';
-import searchIcon from './images/searchIcon.svg';
+import MenuIcon from './MenuIcon';
+import LogoIcon from './LogoIcon';
+import SearchIcon from './SearchIcon';
 import css from './Topbar.css';
 
 const redirectToURLWithModalState = (props, modalStateParam) => {
@@ -124,15 +125,13 @@ class TopbarComponent extends Component {
       <div className={css.root}>
         <div className={css.container}>
           <FlatButton className={css.hamburgerMenu} onClick={this.handleMobileMenuOpen}>
-            <img src={hamburgerIcon} alt={intl.formatMessage({ id: 'Topbar.menuIcon' })} />
+            <MenuIcon title={intl.formatMessage({ id: 'Topbar.menuIcon' })} />
           </FlatButton>
-          <div>
-            <NamedLink className={css.home} name="LandingPage">
-              Saunatime
-            </NamedLink>
-          </div>
+          <NamedLink className={css.home} name="LandingPage">
+            <LogoIcon title={intl.formatMessage({ id: 'Topbar.logoIcon' })} />
+          </NamedLink>
           <FlatButton className={css.searchMenu} onClick={this.handleMobileSearchOpen}>
-            <img src={searchIcon} alt={intl.formatMessage({ id: 'Topbar.searchIcon' })} />
+            <SearchIcon title={intl.formatMessage({ id: 'Topbar.searchIcon' })} />
           </FlatButton>
         </div>
         <div className={css.desktop}>
