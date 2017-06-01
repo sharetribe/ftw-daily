@@ -4,24 +4,24 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding: 1rem;
-}
-
-.user {
-  display: flex;
-  flex-direction: row;
-  flex-basis: 80px;
+  padding: 24px;
 }
 
 .content {
   flex-grow: 1;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 24px 0;
 }
 
 .footer {
-  flex-basis: 80px;
+  flex-basis: 66px;
+  flex-shrink: 0;
 }
 
 .avatar {
+  flex-shrink: 0;
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -39,26 +39,71 @@
   composes: h2Font from '../../marketplace.css';
 }
 
+.greeting {
+  composes: h2Font from '../../marketplace.css';
+}
+
+.logoutButton {
+  composes: h4Font from '../../marketplace.css';
+  text-align: left;
+  color: var(--matterColorAnti);
+  margin-top: 6px;
+}
+.inbox {
+  composes: h2Font from '../../marketplace.css';
+  color: var(--marketplaceColor);
+  margin-top: auto;
+}
+
+/* TODO createNewListingLink camouflages as a button. */
 .createNewListingLink {
-  font-size: 14px;
+  display: block;
+  padding: 21px;
+  background-color: var(--marketplaceColor);
+  border-width: 0;
+  border-radius: var(--borderRadius);
+
+  /* Font */
+  composes: buttonFont from '../../marketplace.css';
+  color: var(--matterColorLight);
+  text-align: center;
+
+  /* Dimensions */
+  width: 100%;
+
+  /* Hovers */
+
+  &:enabled {
+    cursor: pointer;
+  }
+  &:enabled:hover {
+    background-color: var(--marketplaceColorDark);
+    text-decoration: none;
+  }
+  &:enabled:active {
+    background-color: var(--marketplaceColorLight);
+  }
+  &:disabled {
+    background-color: var(--matterColorAnti);
+    cursor: auto;
+  }
 }
 
-.userInfo {
-  display: flex;
-  flex-direction: column;
+.authenticationGreeting {
+  composes: h2Font from '../../marketplace.css';
+  margin-bottom: 24px;
 }
-
 .authenticationLinks {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 1rem;
-  font-size: 20px;
+  white-space: nowrap;
 }
 
 .signupLink {
-  margin-right: 1rem;
   text-decoration: none;
+  white-space: nowrap;
+  color: var(--marketplaceColor);
 }
 .loginLink {
   text-decoration: none;
+  white-space: nowrap;
+  color: var(--marketplaceColor);
 }

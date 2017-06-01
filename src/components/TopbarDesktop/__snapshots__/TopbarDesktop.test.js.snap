@@ -55,6 +55,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
         className=""
         title="">
         <span>
+          
         </span>
       </div>
     </button>

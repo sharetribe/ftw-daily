@@ -75,7 +75,6 @@
 
 .inlineButton {
   display: inline-block;
-  padding: 0;
 
   /* fill colors should be in sync with marketplace color palette */
   background-color: transparent;
