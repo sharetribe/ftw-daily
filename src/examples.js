@@ -7,6 +7,7 @@ import * as DateInput from './components/DateInput/DateInput.example';
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as Map from './components/Map/Map.example';
+import * as Menu from './components/Menu/Menu.example';
 import * as Modal from './components/Modal/Modal.example';
 import * as ModalInMobile from './components/ModalInMobile/ModalInMobile.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
@@ -61,6 +62,7 @@ export {
   LocationAutocompleteInput,
   LoginForm,
   Map,
+  Menu,
   Modal,
   ModalInMobile,
   NamedLink,

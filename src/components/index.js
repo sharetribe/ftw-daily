@@ -23,6 +23,9 @@ import LocationAutocompleteInput from './LocationAutocompleteInput/LocationAutoc
 import Map from './Map/Map';
 import MapPanel from './MapPanel/MapPanel';
 import Menu from './Menu/Menu';
+import MenuContent from './MenuContent/MenuContent';
+import MenuItem from './MenuItem/MenuItem';
+import MenuLabel from './MenuLabel/MenuLabel';
 import Modal from './Modal/Modal';
 import ModalInMobile from './ModalInMobile/ModalInMobile';
 import NamedLink from './NamedLink/NamedLink';
@@ -71,6 +74,9 @@ export {
   Map,
   MapPanel,
   Menu,
+  MenuContent,
+  MenuItem,
+  MenuLabel,
   Modal,
   ModalInMobile,
   NamedLink,

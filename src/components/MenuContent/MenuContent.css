@@ -1,0 +1,48 @@
+@import '../../marketplace.css';
+
+.root {
+  visibility: hidden;
+  pointer-events: none;
+
+  position: absolute;
+  z-index: var(--zIndexPopup);
+
+  background-color: var(--matterColorLight);
+  border: 1px solid var(--matterColorAnti);
+  box-shadow: var(--boxShadowPopup);
+}
+
+.isOpen {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* Styles for arrow (if arrowPosition is defined) */
+.arrowTop,
+.arrowBelow {
+  content: ' ';
+  position: absolute;
+  bottom: 100%;
+  height: 0;
+  width: 0;
+  border: solid transparent;
+  pointer-events: none;
+}
+
+.arrowTop {
+  border-bottom-color: var(--matterColorLight);
+  border-width: 7px;
+  margin-left: -7px;
+}
+
+.arrowBelow {
+  border-bottom-color: var(--matterColorAnti);
+  border-width: 9px;
+  margin-left: -9px;
+}
