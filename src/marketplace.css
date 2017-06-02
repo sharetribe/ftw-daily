@@ -41,7 +41,7 @@
 
 /* ================ Custom media queries ================ */
 
-@custom-media --desktop-viewport (min-width: 768px);
+@custom-media --desktopViewport (min-width: 768px);
 
 /* ================ Fonts ================ */
 
@@ -59,7 +59,7 @@ h1,
   letter-spacing: -1px;
 
   /* TODO: this seems to be biggest font in Page titles (except in Hero) - is it h1 then? */
-  @media (--desktop-viewport) {
+  @media (--desktopViewport) {
     font-family: "sofiapro";
     font-weight: 600;
     font-size: 48px;
@@ -79,7 +79,7 @@ h2,
   letter-spacing: -0.5px;
 
   /* TODO Are these correct settings? */
-  @media (--desktop-viewport) {
+  @media (--desktopViewport) {
     font-size: 24px;
     line-height: 32px;
     padding: 4px 0 4px 0; /* 4px + 4px = 8px */
@@ -150,7 +150,7 @@ li,
   letter-spacing: -0.1px;
 
   /* TODO Desktop styles needs to be extracted */
-  @media (min-width: 768px) {
+  @media (--desktopViewport) {
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;

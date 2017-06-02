@@ -44,10 +44,10 @@ size and position, etc.
   padding-bottom: 98px;
   top: var(--inputHeight);
   background-color: var(--marketplaceColor);
-  z-index: 1;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: var(--borderRadius);
+  border-bottom-right-radius: var(--borderRadius);
   box-shadow: var(--boxShadowPopup);
+  z-index: var(--zIndexPopup + 1);
 }
 
 /*
@@ -64,14 +64,14 @@ bottom of the container.
   background-size: auto var(--poweredImageHeight);
   background-position: center;
 
-  @media (--desktop-viewport) {
+  @media (--desktopViewport) {
     background-position: center left var(--sidePaddingDesktop);
   }
 }
 
 /* List of predictions, with a responsive padding size */
 .predictions {
-  composes: searchResultsFont;
+  composes: searchResultsFont from '../../marketplace.css';
 
   margin: 0;
   padding: 14px 0;
@@ -82,7 +82,7 @@ bottom of the container.
     /* Assign enough vertical padding to make the element at least 44px high */
     padding: 10px var(--sidePadding);
 
-    @media (--desktop-viewport) {
+    @media (--desktopViewport) {
       padding: 10px var(--sidePaddingDesktop);
     }
 

@@ -23,7 +23,7 @@
   /* shadows */
   box-shadow: 0 1px 1px 0 #dcdcdc;
 
-  @media (min-width: 768px) {
+  @media (--desktopViewport) {
     display: none;
   }
 }
@@ -47,7 +47,7 @@
 .desktop {
   display: none;
 
-  @media (min-width: 768px) {
+  @media (--desktopViewport) {
     display: block;
   }
 }
@@ -67,7 +67,8 @@
   color: var(--matterColorAnti);
   margin: 0 24px;
 
-  /* Absolute position to prevent changing search form positioning */
+  /* Absolute position to avoid affecting the layout of the autocomplete
+   predictions list */
   position: absolute;
   top: 115px;
 
