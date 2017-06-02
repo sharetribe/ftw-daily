@@ -43,6 +43,7 @@ size and position, etc.
   width: 100%;
   padding-bottom: 98px;
   top: var(--inputHeight);
+  left: 0;
   background-color: var(--marketplaceColor);
   border-bottom-left-radius: var(--borderRadius);
   border-bottom-right-radius: var(--borderRadius);
