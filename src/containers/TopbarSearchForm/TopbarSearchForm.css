@@ -1,0 +1,39 @@
+@import '../../marketplace.css';
+
+:root {
+  --inputHeight: 50px;
+  --topbarHeight: 72px;
+}
+
+.mobileInputRoot {
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.desktopInputRoot {
+  height: var(--topbarHeight);
+}
+
+.desktopIcon {
+  border: none;
+}
+
+.desktopInput {
+  height: var(--topbarHeight);
+  border: none;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.mobilePredictions {
+  position: fixed;
+  top: 113px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.desktopPredictions {
+  margin-top: calc(var(--topbarHeight) - var(--inputHeight));
+  max-width: 434px;
+}

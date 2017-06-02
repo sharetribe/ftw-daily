@@ -10,7 +10,9 @@ const FormComponent = props => {
     <form onSubmit={handleSubmit}>
       <label htmlFor="location">Select location:</label>
       <Field name="location" format={null} component={LocationAutocompleteInput} />
-      <Button type="submit" disabled={pristine || submitting}>Submit</Button>
+      <Button type="submit" style={{ marginTop: '24px' }} disabled={pristine || submitting}>
+        Submit
+      </Button>
     </form>
   );
 };

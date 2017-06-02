@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 768px) {
+  @media (--desktopViewport) {
     flex-direction: row;
   }
 }
@@ -12,7 +12,7 @@
 .withPadding {
   padding: calc(2 * var(--spacingUnit));
 
-  @media (min-width: 768px) {
+  @media (--desktopViewport) {
     padding: calc(2 * var(--spacingUnitDesktop));
   }
 }
@@ -21,7 +21,7 @@
 .defaultWrapperStyles {
   margin: calc(2 * var(--spacingUnit)) 0;
 
-  @media (min-width: 768px) {
+  @media (--desktopViewport) {
     margin: calc(2 * var(--spacingUnitDesktop)) 0;
   }
 }
@@ -37,7 +37,7 @@
   flex-grow: 1;
   composes: withPadding;
 
-  @media (min-width: 768px) {
+  @media (--desktopViewport) {
     padding: 56px 0 0 16px;
   }
 }
@@ -66,7 +66,7 @@
   background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 5h10M0 11h10M0 17h10" stroke="#f1f1f1"/><path d="M0 23h10" stroke="#ddd" stroke-width="1"/></svg>');
   background-repeat: repeat;
 
-  @media (min-width: 768px) {
+  @media (--desktopViewport) {
       background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 7h10M0 15h10M0" stroke="#f1f1f1"/><path d="M0 23h10" stroke="#ddd" stroke-width="1"/></svg>');
       background-repeat: repeat;
   }

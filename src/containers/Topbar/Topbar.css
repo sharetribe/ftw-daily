@@ -23,7 +23,7 @@
   /* shadows */
   box-shadow: 0 1px 1px 0 #dcdcdc;
 
-  @media (min-width: 768px) {
+  @media (--desktopViewport) {
     display: none;
   }
 }
@@ -44,14 +44,10 @@
   width: 44px;
 }
 
-.searchForm {
-  margin: 2rem;
-}
-
 .desktop {
   display: none;
 
-  @media (min-width: 768px) {
+  @media (--desktopViewport) {
     display: block;
   }
 }
@@ -60,4 +56,22 @@
 .rootMenuIcon,
 .rootSearchIcon {
   stroke: var(--matterColor);
+}
+
+.searchContainer {
+  position: relative;
+  height: 100%;
+}
+
+.mobileHelp {
+  color: var(--matterColorAnti);
+  margin: 0 24px;
+
+  /* Absolute position to avoid affecting the layout of the autocomplete
+   predictions list */
+  position: absolute;
+  top: 115px;
+
+  /* Pull text behind search suggestions */
+  z-index: -1;
 }

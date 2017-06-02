@@ -31,6 +31,7 @@ import SignupForm from './SignupForm/SignupForm';
 import StripePaymentForm from './StripePaymentForm/StripePaymentForm';
 import StyleguidePage from './StyleguidePage/StyleguidePage';
 import Topbar from './Topbar/Topbar';
+import TopbarSearchForm from './TopbarSearchForm/TopbarSearchForm';
 
 export {
   AuthenticationPage,
@@ -66,4 +67,5 @@ export {
   StripePaymentForm,
   StyleguidePage,
   Topbar,
+  TopbarSearchForm,
 };

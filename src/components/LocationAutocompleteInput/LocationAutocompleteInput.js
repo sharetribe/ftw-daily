@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { debounce } from 'lodash';
 import classNames from 'classnames';
-import { Input } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
 
@@ -15,9 +14,38 @@ const KEY_CODE_TAB = 9;
 const DIRECTION_UP = 'up';
 const DIRECTION_DOWN = 'down';
 
+const Icon = () => (
+  <svg
+    className={css.iconSvg}
+    width="21"
+    height="22"
+    viewBox="0 0 21 22"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g
+      className={css.iconSvgGroup}
+      transform="matrix(-1 0 0 1 20 1)"
+      strokeWidth="2"
+      fill="none"
+      fillRule="evenodd"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M13 14l5.241 5.241" /><circle cx="7.5" cy="7.5" r="7.5" />
+    </g>
+  </svg>
+);
+
 // Renders the autocompletion prediction results in a list
 const LocationPredictionsList = props => {
-  const { predictions, highlightedIndex, onSelectStart, onSelectEnd } = props;
+  const {
+    rootClassName,
+    className,
+    predictions,
+    highlightedIndex,
+    onSelectStart,
+    onSelectEnd,
+  } = props;
   if (predictions.length === 0) {
     return null;
   }
@@ -41,18 +69,29 @@ const LocationPredictionsList = props => {
   };
   /* eslint-enable jsx-a11y/no-static-element-interactions */
 
+  const classes = classNames(rootClassName || css.predictionsRoot, className);
+
   return (
-    <ul className={css.predictions}>
-      {predictions.map(item)}
-    </ul>
+    <div className={classes}>
+      <ul className={css.predictions}>
+        {predictions.map(item)}
+      </ul>
+      <div className={css.poweredByGoogle} />
+    </div>
   );
 };
 
 const { bool, shape, string, arrayOf, func, any, number } = PropTypes;
 
-LocationPredictionsList.defaultProps = { highlightedIndex: null };
+LocationPredictionsList.defaultProps = {
+  rootClassName: null,
+  className: null,
+  highlightedIndex: null,
+};
 
 LocationPredictionsList.propTypes = {
+  rootClassName: string,
+  className: string,
   predictions: arrayOf(
     shape({
       id: string.isRequired,
@@ -299,7 +338,16 @@ class LocationAutocompleteInput extends Component {
   }
 
   render() {
-    const { autoFocus, className, placeholder, input } = this.props;
+    const {
+      autoFocus,
+      rootClassName,
+      className,
+      iconClassName,
+      inputClassName,
+      predictionsClassName,
+      placeholder,
+      input,
+    } = this.props;
     const { name, onFocus } = input;
     const { search, predictions } = currentValue(this.props);
 
@@ -308,17 +356,24 @@ class LocationAutocompleteInput extends Component {
       onFocus(e);
     };
 
+    const rootClass = classNames(rootClassName || css.root, className);
+    const iconClass = classNames(css.icon, iconClassName);
+    const inputClass = classNames(css.input, inputClassName);
+    const predictionsClass = classNames(predictionsClassName);
+
     // Only render predictions when the input has focus. For
     // development and easier workflow with the browser devtools, you
     // might want to hardcode this to `true`. Otherwise the dropdown
     // list will disappear.
-    //
     const renderPredictions = this.state.inputHasFocus;
 
     return (
-      <div className={css.root}>
-        <Input
-          className={classNames(css.input, className)}
+      <div className={rootClass}>
+        <div className={iconClass}>
+          <Icon />
+        </div>
+        <input
+          className={inputClass}
           type="search"
           autoComplete="off"
           autoFocus={autoFocus}
@@ -332,6 +387,7 @@ class LocationAutocompleteInput extends Component {
         />
         {renderPredictions
           ? <LocationPredictionsList
+              className={predictionsClass}
               predictions={predictions}
               highlightedIndex={this.state.highlightedIndex}
               onSelectStart={this.handlePredictionsSelectStart}
@@ -343,11 +399,23 @@ class LocationAutocompleteInput extends Component {
   }
 }
 
-LocationAutocompleteInput.defaultProps = { autoFocus: false, className: '', placeholder: '' };
+LocationAutocompleteInput.defaultProps = {
+  autoFocus: false,
+  rootClassName: null,
+  className: null,
+  iconClassName: null,
+  inputClassName: null,
+  predictionsClassName: null,
+  placeholder: '',
+};
 
 LocationAutocompleteInput.propTypes = {
   autoFocus: bool,
+  rootClassName: string,
   className: string,
+  iconClassName: string,
+  inputClassName: string,
+  predictionsClassName: string,
   placeholder: string,
   input: shape({
     name: string.isRequired,

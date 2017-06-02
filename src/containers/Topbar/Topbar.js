@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { FlatButton, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
-import { SearchForm } from '../../containers';
+import { TopbarSearchForm } from '../../containers';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
 import { ensureUser } from '../../util/data';
@@ -63,10 +63,10 @@ class TopbarComponent extends Component {
   }
 
   handleSubmit(values) {
-    const selectedPlace = values && values.location ? values.location.selectedPlace : null;
+    const { search, selectedPlace } = values.location;
     const { flattenedRoutes, history } = this.props;
-    const { address, origin, bounds, country } = selectedPlace || {};
-    const searchParams = { address, origin, bounds, country };
+    const { origin, bounds, country } = selectedPlace;
+    const searchParams = { address: search, origin, bounds, country };
     history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
   }
 
@@ -142,6 +142,8 @@ class TopbarComponent extends Component {
             onLogout={this.handleLogout}
             firstName={profile.firstName}
             lastName={profile.lastName}
+            onSearchSubmit={this.handleSubmit}
+            initialSearchFormValues={initialSearchFormValues}
           />
         </div>
         <Modal
@@ -156,12 +158,17 @@ class TopbarComponent extends Component {
           onClose={this.handleMobileSearchClose}
           togglePageClassNames={togglePageClassNames}
         >
-          <SearchForm
-            form="TopbarSearchForm"
-            className={css.searchForm}
-            onSubmit={this.handleSubmit}
-            initialValues={initialSearchFormValues}
-          />
+          <div className={css.searchContainer}>
+            <TopbarSearchForm
+              form="TopbarSearchForm"
+              onSubmit={this.handleSubmit}
+              initialValues={initialSearchFormValues}
+              isMobile
+            />
+            <p className={css.mobileHelp}>
+              <FormattedMessage id="Topbar.mobileSearchHelp" />
+            </p>
+          </div>
         </Modal>
       </div>
     );

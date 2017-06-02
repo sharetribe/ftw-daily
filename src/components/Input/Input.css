@@ -1,19 +1,5 @@
 .root {
-  display: block;
 
-  /* Font */
-  font-size: 16px;
-  letter-spacing: -0.4px;
-
-  /* Border */
-  border: 1px solid #979797;
-  border-radius: 0px; /* Remove default iOS border radius */
-
-  /* Dimensions */
-  padding-left: 18px;
-  padding-right: 18px;
-  height: 50px;
-  width: 100%;
 }
 
 .inline {
