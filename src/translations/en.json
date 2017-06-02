@@ -183,6 +183,7 @@
   "StripePaymentForm.stripe.validation_error.missing": "There is no card on a customer that is being charged.",
   "StripePaymentForm.stripe.validation_error.processing_error": "An error occurred while processing the card.",
   "StripePaymentForm.submitPaymentInfo": "Send request",
+  "Topbar.logoIcon": "Go to homepage",
   "Topbar.menuIcon": "Open menu",
   "Topbar.searchIcon": "Open search",
   "TopbarDesktop.createListing": "+ Add your sauna",
