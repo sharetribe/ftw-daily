@@ -201,10 +201,10 @@ export class ListingPageComponent extends Component {
           {/* eslint-enable react/no-danger */}
           {authorInfo}
           <ModalInMobile
+            id="BookingDatesFormInModal"
             isModalOpenOnMobile={this.state.isBookingModalOpenOnMobile}
             onClose={() => this.setState({ isBookingModalOpenOnMobile: false })}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
-            title={bookBtnMessage}
             togglePageClassNames={this.togglePageClassNames}
           >
             <BookingDatesForm className={css.bookingForm} onSubmit={this.onSubmit} price={price} />

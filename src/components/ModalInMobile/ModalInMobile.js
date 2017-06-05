@@ -69,8 +69,8 @@ class ModalInMobile extends Component {
     const {
       children,
       className,
+      id,
       showAsModalMaxWidth,
-      title,
       togglePageClassNames,
     } = this.props;
 
@@ -90,10 +90,10 @@ class ModalInMobile extends Component {
     return (
       <Modal
         className={classes}
+        id={id}
         isOpen={isOpenInMobile}
         isClosedClassName={closedClassName}
         onClose={this.handleClose}
-        title={title}
         togglePageClassNames={togglePageClassNames}
       >
         {children}
@@ -107,7 +107,6 @@ ModalInMobile.defaultProps = {
   className: '',
   onClose: null,
   showAsModalMaxWidth: 0,
-  title: null,
 };
 
 const { bool, func, node, number, string } = PropTypes;
@@ -115,10 +114,10 @@ const { bool, func, node, number, string } = PropTypes;
 ModalInMobile.propTypes = {
   children: node,
   className: string,
+  id: string.isRequired,
   isModalOpenOnMobile: bool.isRequired,
   onClose: func,
   showAsModalMaxWidth: number,
-  title: string,
   // eslint-disable-next-line react/no-unused-prop-types
   togglePageClassNames: func.isRequired,
 };

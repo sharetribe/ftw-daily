@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { union, without } from 'lodash';
 import classNames from 'classnames';
 import { Topbar } from '../../containers';
 
@@ -17,7 +16,7 @@ const scrollToTop = () => {
 class PageLayout extends Component {
   constructor(props) {
     super(props);
-    this.state = { pageClassNames: '' };
+    this.state = { pageClassNames: [] };
     this.togglePageClassNames = this.togglePageClassNames.bind(this);
   }
 
@@ -33,14 +32,24 @@ class PageLayout extends Component {
 
   // This function makes it possible to change page level styles
   // E.g. disable scrolling when using Modal
-  togglePageClassNames(className, addClass = true) {
+  togglePageClassNames(componentId, classNameFromComponent, addClass = true) {
     this.setState(prevState => {
-      const prevPageClassNames = prevState.pageClassNames.split(' ');
-      const pageClassNames = addClass
-        ? union(prevPageClassNames, [className]).join(' ')
-        : without(prevPageClassNames, className).join(' ');
+      const componentIdExists = prevState.pageClassNames.find(c => c.componentId === componentId);
+      if (componentIdExists) {
+        const pageClassNames = prevState.pageClassNames.map(c => {
+          if (c.componentId === componentId) {
+            return { ...c, addClass };
+          }
+          return c;
+        });
 
-      return { pageClassNames };
+        return { pageClassNames };
+      } else {
+        const pageClassNames = prevState.pageClassNames.concat([
+          { componentId, className: classNameFromComponent, addClass },
+        ]);
+        return { pageClassNames };
+      }
     });
   }
 
@@ -67,8 +76,10 @@ class PageLayout extends Component {
     }
     /* eslint-enable no-console */
 
+    const pageClassNames = this.state.pageClassNames.map(c => ({ [c.className]: c.addClass }));
+
     return (
-      <div className={classNames(css.root, this.state.pageClassNames, className)}>
+      <div className={classNames(css.root, pageClassNames, className)}>
         <Helmet>
           <title>{title}</title>
         </Helmet>

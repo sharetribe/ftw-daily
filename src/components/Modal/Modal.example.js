@@ -48,6 +48,6 @@ export const Empty = {
   component: ModalWrapper,
   useDefaultWrapperStyles: false,
   props: {
-    title: 'Test Modal',
+    id: 'ExampleModal',
   },
 };
