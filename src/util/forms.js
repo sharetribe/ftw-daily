@@ -15,7 +15,7 @@ import { Input, ValidationError } from '../components';
  * label and possible errors
  */
 export const enhancedField = (Comp, options = {}) => {
-  const { rootClassName = '', labelClassName = '', errorClassName = '' } = options;
+  const { rootClassName = '', labelClassName = '' } = options;
 
   class EnhancedField extends Component {
     componentWillUnmount() {
@@ -46,7 +46,7 @@ export const enhancedField = (Comp, options = {}) => {
         <div className={rootClassName}>
           {labelInfo}
           {component}
-          <ValidationError className={errorClassName} fieldMeta={meta} />
+          <ValidationError fieldMeta={meta} />
         </div>
       );
     }

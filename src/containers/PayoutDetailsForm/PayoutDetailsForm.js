@@ -40,15 +40,9 @@ CountriesSelect.propTypes = {
 class PayoutDetailsFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.EnhancedInput = enhancedField('input', {
-      errorClassName: css.error,
-    });
-    this.EnhancedCountriesDropdown = enhancedField(CountriesSelect, {
-      errorClassName: css.error,
-    });
-    this.EnhancedBirthdayInput = enhancedField(BirthdayInput, {
-      errorClassName: css.error,
-    });
+    this.EnhancedInput = enhancedField('input');
+    this.EnhancedCountriesDropdown = enhancedField(CountriesSelect);
+    this.EnhancedBirthdayInput = enhancedField(BirthdayInput);
   }
   render() {
     const {

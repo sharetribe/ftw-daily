@@ -11,9 +11,7 @@ import css from './LoginForm.css';
 class LoginFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.EnhancedInput = enhancedField('input', {
-      errorClassName: css.error,
-    });
+    this.EnhancedInput = enhancedField('input');
   }
   render() {
     const { handleSubmit, pristine, submitting, inProgress, intl } = this.props;
