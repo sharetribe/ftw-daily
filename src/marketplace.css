@@ -85,7 +85,7 @@ h1,
   @media (--desktopViewport) {
     font-size: 48px;
     line-height: 56px;
-    padding: 6px 0 2px; /* 6px + 2px = 8px */
+    padding: 0;
     letter-spacing: -1px;
   }
 }
