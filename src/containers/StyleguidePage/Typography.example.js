@@ -57,7 +57,6 @@ const Fonts = () => {
   line-height: 32px;
   padding: 4px 0 4px;`;
 
-
   const h3FontStyling = `Mobile styles:
   font-size: 20px;
   line-height: 24px;
@@ -67,7 +66,6 @@ const Fonts = () => {
   font-size: 20px;
   line-height: 24px;
   padding: 2px 0 6px;`;
-
 
   const h4FontStyling = `Mobile styles:
   font-size: 16px;
@@ -79,7 +77,6 @@ const Fonts = () => {
   line-height: 24px;
   padding: 4px 0 4px;`;
 
-
   const h5FontStyling = `Mobile styles:
   font-size: 14px;
   line-height: 18px;
@@ -89,7 +86,6 @@ const Fonts = () => {
   font-size: 14px;
   line-height: 18px;
   padding: 7px 0 1px;`;
-
 
   const h6FontStyling = `Mobile styles:
   font-size: 12px;
@@ -111,7 +107,6 @@ const Fonts = () => {
   line-height: 32px;
   padding: 5px 0 3px;`;
 
-
   const tinyFontStyling = `Mobile styles:
   font-size: 13px;
   line-height: 18px;
@@ -121,7 +116,6 @@ const Fonts = () => {
   font-size: 13px;
   line-height: 18px;
   padding: 7px 0 1px;`;
-
 
   const fontsContainerClasses = classNames(css.fontsContainer, css.baselines);
 
@@ -167,20 +161,22 @@ const Fonts = () => {
           styling={h4FontStyling}
         />
         <Font
-          component={() => <h5>You will only be charged if your request is accepted by the provider.</h5>}
+          component={() => (
+            <h5>You will only be charged if your request is accepted by the provider.</h5>
+          )}
           description="H5 / .h5Font: Can be used as a fine print text."
           styling={h5FontStyling}
         />
         <Font
-          component={() => (
-            <h6>Close</h6>
-          )}
+          component={() => <h6>Close</h6>}
           description="H6 / .h6Font: Works as a close text."
           styling={h6FontStyling}
         />
         <Font
           component={() => (
-            <p>Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+            <p>
+              Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+            </p>
           )}
           description=".bodyFont, p, button, etc: Paragraphs and other body texts."
           styling={bodyFontStyling}
