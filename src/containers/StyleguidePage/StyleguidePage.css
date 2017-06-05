@@ -63,11 +63,11 @@
 .typographyContent {}
 
 .baselines {
-  background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 5h10M0 11h10M0 17h10" stroke="#f1f1f1"/><path d="M0 23h10" stroke="#ddd" stroke-width="1"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 5h10M0 11h10M0 17h10" stroke="#ccc"/><path d="M0 23h10" stroke="#ddd" stroke-width="1"/></svg>');
   background-repeat: repeat;
 
   @media (--desktopViewport) {
-      background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 7h10M0 15h10M0" stroke="#f1f1f1"/><path d="M0 23h10" stroke="#ddd" stroke-width="1"/></svg>');
+      background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 7h10M0 15h10M0" stroke="#ccc"/><path d="M0 23h10" stroke="#ddd" stroke-width="1"/></svg>');
       background-repeat: repeat;
   }
 }
