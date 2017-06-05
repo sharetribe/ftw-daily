@@ -1,0 +1,38 @@
+@import '../../marketplace.css';
+
+.root {
+  margin-top: 20px;
+}
+
+.label {
+  margin-top: 0;
+}
+
+.input {
+  border-color: var(--attentionColor);
+
+  &:hover,
+  &:focus {
+    border-color: var(--matterColor);
+  }
+}
+
+.inputSuccess {
+  border-color: var(--successColor);
+}
+
+.inputError {
+  border-color: var(--failColor);
+}
+
+.validationError {
+  composes: h5Font from '../../marketplace.css';
+
+  margin-top: calc(2 * var(--spacingUnit));
+  color: var(--failColor);
+  overflow: hidden;
+
+  @media (--desktopViewport) {
+    margin-top: calc(2 * var(--spacingUnitDesktop));
+  }
+}
