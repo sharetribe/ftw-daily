@@ -15,7 +15,6 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 12px;
 
   /* fill */
   background-color: var(--matterColorLight);
@@ -29,7 +28,9 @@
 }
 
 .home {
-  padding: 18px;
+  /* Home icon's height is 25px. Touch area is created with padding (covers Topbar height) */
+  display: flex;
+  padding: 17.5px 24px;
 }
 
 .logoutButton {
@@ -37,11 +38,35 @@
 }
 
 /* Child component's size (and positioning) should be given here */
-.hamburgerMenu,
+.menu,
 .searchMenu {
   display: flex;
-  align-items: center;
-  width: 44px;
+  width: 66px;
+  padding: 12px 24px;
+  border-width: 0px;
+  background-color: transparent;
+
+  /* Font */
+  composes: h5Font from '../../marketplace.css';
+  color: var(--matterColor);
+
+  /* Hovers */
+  &:enabled {
+    cursor: pointer;
+  }
+  &:enabled:hover,
+  &:enabled:active {
+    background-color: transparent;
+  }
+  &:disabled {
+    background-color: transparent;
+    cursor: auto;
+  }
+}
+
+.menuIcon,
+.searchMenuIcon {
+  margin: 9px 0;
 }
 
 .desktop {

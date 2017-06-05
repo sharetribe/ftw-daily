@@ -46,24 +46,14 @@ export class ModalComponent extends Component {
       intl,
       isClosedClassName,
       isOpen,
-      title,
     } = this.props;
 
     const closeModalMessage = intl.formatMessage({ id: 'Modal.closeModal' });
-    const modalTitle = title ? <h2 className={css.title}>{title}</h2> : null;
-    const closeBtn = (
-      <Button onClick={this.handleClose} rootClassName={css.close} title={closeModalMessage}>
-        <span><FormattedMessage id="Modal.close" /></span>
-        <CloseIcon rootClassName={css.closeIcon} />
-      </Button>
-    );
-
-    // Header
-    const header = isOpen
-      ? <div className={css.header}>
-          {modalTitle}
-          {closeBtn}
-        </div>
+    const closeBtn = isOpen
+      ? <Button onClick={this.handleClose} rootClassName={css.close} title={closeModalMessage}>
+          <span><FormattedMessage id="Modal.close" /></span>
+          <CloseIcon rootClassName={css.closeIcon} />
+        </Button>
       : null;
 
     // Modal uses given styles to wrap child components.
@@ -74,7 +64,7 @@ export class ModalComponent extends Component {
     const classes = classNames(modalClass, className);
     return (
       <div className={classes}>
-        {header}
+        {closeBtn}
         <div className={css.content}>
           {children}
         </div>
@@ -89,7 +79,6 @@ ModalComponent.defaultProps = {
   isClosedClassName: css.isClosed,
   isOpen: false,
   onClose: null,
-  title: null,
 };
 
 const { bool, func, node, string } = PropTypes;
@@ -101,7 +90,6 @@ ModalComponent.propTypes = {
   isClosedClassName: string,
   isOpen: bool,
   onClose: func.isRequired,
-  title: string,
 
   // eslint-disable-next-line react/no-unused-prop-types
   togglePageClassNames: func.isRequired,
