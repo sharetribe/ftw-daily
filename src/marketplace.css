@@ -256,6 +256,7 @@ input {
   border-bottom-width: 3px;
   border-bottom-style: solid;
   border-bottom-color: var(--marketplaceColor);
+  border-radius: 0;
 
   &::placeholder {
     color: var(--matterColorAnti);
