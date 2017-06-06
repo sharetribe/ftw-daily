@@ -10,18 +10,6 @@
   flex-grow: 1;
 }
 
-.descriptionField {
-  /* Font */
-  font-family: inherit;
-
-  /* Border */
-  border-radius: 0px; /* Remove default iOS border radius */
-
-  /* Dimensions */
-  padding: 12px 18px;
-  min-height: 120px;
-}
-
 .submitButton {
   margin-top: 1rem;
   margin-bottom: 1rem;
