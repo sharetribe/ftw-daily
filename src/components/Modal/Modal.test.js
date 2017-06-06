@@ -5,6 +5,7 @@ import Modal from './Modal';
 describe('Modal', () => {
   it('no extra classes when window is missing', () => {
     const props = {
+      id: 'TestModal',
       className: 'test-class-from-props',
       isOpen: false,
       onClose: v => v,

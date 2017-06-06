@@ -51,7 +51,7 @@ export const Empty = {
   component: ModalInMobileWrapper,
   useDefaultWrapperStyles: false,
   props: {
+    id: 'ExampleModalInMobile',
     showAsModalMaxWidth: 400,
-    title: 'Test ModalInMobile',
   },
 };

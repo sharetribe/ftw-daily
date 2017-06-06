@@ -3,7 +3,7 @@
  *
  * Example:
  * <Parent>
- *   <Modal isOpen={this.state.modalIsOpen} onClose={handleClose}>
+ *   <Modal id="UniqueIdForThisModal" isOpen={this.state.modalIsOpen} onClose={handleClose}>
  *     <FormX />
  *   </Modal>
  * </Parent>
@@ -22,20 +22,20 @@ export class ModalComponent extends Component {
   }
 
   componentDidMount() {
-    const { isOpen, togglePageClassNames } = this.props;
-    togglePageClassNames(css.modalIsOpen, isOpen);
+    const { id, isOpen, togglePageClassNames } = this.props;
+    togglePageClassNames(id, css.modalIsOpen, isOpen);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { isOpen, togglePageClassNames } = this.props;
+    const { id, isOpen, togglePageClassNames } = this.props;
     if (nextProps.isOpen !== isOpen) {
-      togglePageClassNames(css.modalIsOpen, nextProps.isOpen);
+      togglePageClassNames(id, css.modalIsOpen, nextProps.isOpen);
     }
   }
 
   handleClose(event) {
-    const { onClose, togglePageClassNames } = this.props;
-    togglePageClassNames(css.modalIsOpen, false);
+    const { id, onClose, togglePageClassNames } = this.props;
+    togglePageClassNames(id, css.modalIsOpen, false);
     onClose(event);
   }
 
@@ -86,6 +86,7 @@ const { bool, func, node, string } = PropTypes;
 ModalComponent.propTypes = {
   children: node,
   className: string,
+  id: string.isRequired,
   intl: intlShape.isRequired,
   isClosedClassName: string,
   isOpen: bool,

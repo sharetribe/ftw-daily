@@ -56,10 +56,10 @@ exports[`ListingPage matches snapshot 1`] = `
     </div>
     <ModalInMobile
       className=""
+      id="BookingDatesFormInModal"
       isModalOpenOnMobile={false}
       onClose={[Function]}
       showAsModalMaxWidth={2500}
-      title="ListingPage.ctaButtonMessage"
       togglePageClassNames={[Function]}>
       <BookingDatesForm
         onSubmit={[Function]}
