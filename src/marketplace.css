@@ -258,6 +258,8 @@ input {
   border-bottom-color: var(--marketplaceColor);
   border-radius: 0;
 
+  transition: border-bottom-color ease-in 0.2s;
+
   &::placeholder {
     color: var(--matterColorAnti);
   }
