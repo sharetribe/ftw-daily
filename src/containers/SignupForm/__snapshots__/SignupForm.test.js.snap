@@ -11,6 +11,7 @@ exports[`SignupForm matches snapshot 1`] = `
         Email
       </label>
       <input
+        autoFocus={false}
         className=""
         name="email"
         onBlur={[Function]}
@@ -32,6 +33,7 @@ exports[`SignupForm matches snapshot 1`] = `
           First name
         </label>
         <input
+          autoFocus={false}
           className=""
           name="firstName"
           onBlur={[Function]}
@@ -51,6 +53,7 @@ exports[`SignupForm matches snapshot 1`] = `
           Last name
         </label>
         <input
+          autoFocus={false}
           className=""
           name="lastName"
           onBlur={[Function]}
@@ -71,6 +74,7 @@ exports[`SignupForm matches snapshot 1`] = `
         Password
       </label>
       <input
+        autoFocus={false}
         className=""
         name="password"
         onBlur={[Function]}

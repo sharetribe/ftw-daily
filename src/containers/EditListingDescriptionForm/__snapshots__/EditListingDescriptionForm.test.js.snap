@@ -5,7 +5,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
   <div
     className="">
     <label
-      className=""
+      className={undefined}
       htmlFor="title">
       Name of your sauna
     </label>
