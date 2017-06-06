@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { enhancedField } from '../../util/forms';
 import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../util/validators';
-import { LocationAutocompleteInput, Button } from '../../components';
+import { LocationAutocompleteInput, Button, InputField } from '../../components';
 
 import css from './EditListingLocationForm.css';
 
@@ -19,7 +19,6 @@ export class EditListingLocationFormComponent extends Component {
     // to avoid losing focus.
     // See: https://github.com/erikras/redux-form/releases/tag/v6.0.0-alpha.14
     this.EnhancedLocationAutocompleteInput = enhancedField(LocationAutocompleteInput);
-    this.EnhancedInput = enhancedField('input', { rootClassName: css.building });
   }
 
   render() {
@@ -63,10 +62,11 @@ export class EditListingLocationFormComponent extends Component {
         />
 
         <Field
+          className={css.building}
           name="building"
           label={buildingMessage}
           placeholder={buildingPlaceholderMessage}
-          component={this.EnhancedInput}
+          component={InputField}
           type="text"
         />
 

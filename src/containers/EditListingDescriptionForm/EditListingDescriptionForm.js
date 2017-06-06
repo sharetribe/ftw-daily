@@ -5,7 +5,7 @@ import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import { enhancedField } from '../../util/forms';
 import { maxLength, required } from '../../util/validators';
-import { Button } from '../../components';
+import { Button, InputField } from '../../components';
 
 import css from './EditListingDescriptionForm.css';
 
@@ -18,7 +18,6 @@ export class EditListingDescriptionFormComponent extends Component {
     // We must create the enhanced components outside the render function
     // to avoid losing focus.
     // See: https://github.com/erikras/redux-form/releases/tag/v6.0.0-alpha.14
-    this.EnhancedInput = enhancedField('input');
     this.EnhancedTextArea = enhancedField('textarea', { rootClassName: css.description });
   }
 
@@ -64,7 +63,7 @@ export class EditListingDescriptionFormComponent extends Component {
           name="title"
           label={titleMessage}
           placeholder={titlePlaceholderMessage}
-          component={this.EnhancedInput}
+          component={InputField}
           type="text"
           validate={[required(titleRequiredMessage), maxLength60Message]}
         />

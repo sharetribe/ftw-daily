@@ -5,7 +5,13 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Field, reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
 import config from '../../config';
-import { Button, StripeBankAccountToken, Select, BirthdayInput } from '../../components';
+import {
+  Button,
+  StripeBankAccountToken,
+  Select,
+  BirthdayInput,
+  InputField,
+} from '../../components';
 import * as validators from '../../util/validators';
 import { enhancedField } from '../../util/forms';
 
@@ -40,7 +46,6 @@ CountriesSelect.propTypes = {
 class PayoutDetailsFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.EnhancedInput = enhancedField('input');
     this.EnhancedCountriesDropdown = enhancedField(CountriesSelect);
     this.EnhancedBirthdayInput = enhancedField(BirthdayInput);
   }
@@ -120,7 +125,7 @@ class PayoutDetailsFormComponent extends Component {
             type="text"
             label={streetAddressLabel}
             placeholder={streetAddressPlaceholder}
-            component={this.EnhancedInput}
+            component={InputField}
             validate={streetAddressRequired}
             clearOnUnmount
           />
@@ -129,7 +134,7 @@ class PayoutDetailsFormComponent extends Component {
             type="text"
             label={postalCodeLabel}
             placeholder={postalCodePlaceholder}
-            component={this.EnhancedInput}
+            component={InputField}
             validate={postalCodeRequired}
             clearOnUnmount
           />
@@ -138,7 +143,7 @@ class PayoutDetailsFormComponent extends Component {
             type="text"
             label={cityLabel}
             placeholder={cityPlaceholder}
-            component={this.EnhancedInput}
+            component={InputField}
             validate={cityRequired}
             clearOnUnmount
           />
@@ -184,14 +189,14 @@ class PayoutDetailsFormComponent extends Component {
           name="firstName"
           type="text"
           label={firstNameLabel}
-          component={this.EnhancedInput}
+          component={InputField}
           validate={firstNameRequired}
         />
         <Field
           name="lastName"
           type="text"
           label={lastNameLabel}
-          component={this.EnhancedInput}
+          component={InputField}
           validate={lastNameRequired}
         />
         <Field

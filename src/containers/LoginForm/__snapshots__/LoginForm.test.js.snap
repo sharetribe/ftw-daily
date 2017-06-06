@@ -6,11 +6,12 @@ exports[`LoginForm matches snapshot 1`] = `
     <div
       className="">
       <label
-        className=""
+        className={undefined}
         htmlFor="email">
         Email
       </label>
       <input
+        autoFocus={false}
         className=""
         name="email"
         onBlur={[Function]}
@@ -18,18 +19,19 @@ exports[`LoginForm matches snapshot 1`] = `
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder=""
+        placeholder={null}
         type="email"
         value="" />
     </div>
     <div
       className="">
       <label
-        className=""
+        className={undefined}
         htmlFor="password">
         Password
       </label>
       <input
+        autoFocus={false}
         className=""
         name="password"
         onBlur={[Function]}
@@ -37,7 +39,7 @@ exports[`LoginForm matches snapshot 1`] = `
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder=""
+        placeholder={null}
         type="password"
         value="" />
     </div>
