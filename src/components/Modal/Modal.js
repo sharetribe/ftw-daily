@@ -51,7 +51,7 @@ export class ModalComponent extends Component {
     const closeModalMessage = intl.formatMessage({ id: 'Modal.closeModal' });
     const closeBtn = isOpen
       ? <Button onClick={this.handleClose} rootClassName={css.close} title={closeModalMessage}>
-          <span><FormattedMessage id="Modal.close" /></span>
+          <span className={css.closeText}><FormattedMessage id="Modal.close" /></span>
           <CloseIcon rootClassName={css.closeIcon} />
         </Button>
       : null;

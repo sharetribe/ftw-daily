@@ -1,5 +1,10 @@
 @import '../../marketplace.css';
 
+:root {
+  --topbarHeight: 60px;
+  --logoHeight: 25px;
+}
+
 .root {
   width: 100%;
 }
@@ -8,7 +13,7 @@
 
   /* Size */
   width: 100%;
-  height: 60px;
+  height: var(--topbarHeight);
 
   /* Layout for child components */
   display: flex;
@@ -28,9 +33,8 @@
 }
 
 .home {
-  /* Home icon's height is 25px. Touch area is created with padding (covers Topbar height) */
   display: flex;
-  padding: 17.5px 24px;
+  padding: calc((var(--topbarHeight) - var(--logoHeight)) / 2) 24px;
 }
 
 .logoutButton {
@@ -86,6 +90,7 @@
 .searchContainer {
   position: relative;
   height: 100%;
+  margin-top: 72px;
 }
 
 .mobileHelp {
@@ -95,7 +100,7 @@
   /* Absolute position to avoid affecting the layout of the autocomplete
    predictions list */
   position: absolute;
-  top: 115px;
+  top: 114px;
 
   /* Pull text behind search suggestions */
   z-index: -1;

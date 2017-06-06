@@ -38,8 +38,16 @@
   composes: withPadding;
 
   @media (--desktopViewport) {
-    padding: 56px 0 0 16px;
+    padding: 48px 0 0 16px;
   }
+}
+
+.examplesList {
+  margin: 24px 0;
+}
+
+.example {
+  padding: 0;
 }
 
 .link {
@@ -63,23 +71,31 @@
 .typographyContent {}
 
 .baselines {
-  background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 5h10M0 11h10M0 17h10" stroke="#ccc"/><path d="M0 23h10" stroke="#ddd" stroke-width="1"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h10M0 06h10M0 12h10" stroke="#ccc" shape-rendering="crispEdges" /><path d="M0 18h10" stroke="#ddd" stroke-width="1" shape-rendering="crispEdges" /></svg>');
   background-repeat: repeat;
 
   @media (--desktopViewport) {
-      background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 7h10M0 15h10M0" stroke="#ccc"/><path d="M0 23h10" stroke="#ddd" stroke-width="1"/></svg>');
+      background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h10" stroke="#ddd" stroke-width="1" shape-rendering="crispEdges" /><path d="M0 08h10M0 16h10M0" stroke="#ccc" shape-rendering="crispEdges" /></svg>');
       background-repeat: repeat;
   }
 }
 
 .spacing2x {
   margin: calc(2 * var(--spacingUnit)) 0;
+
+  @media (--desktopViewport) {
+    margin: calc(2 * var(--spacingUnitDesktop)) 0;
+  }
 }
 
 .fontsContainer {
   display: flex;
   flex-wrap: wrap;
   margin-top: calc(4 * var(--spacingUnit));
+
+  @media (--desktopViewport) {
+    margin-top: calc(3 * var(--spacingUnitDesktop));
+  }
 }
 
 .fontCard {
@@ -87,13 +103,14 @@
   display: flex;
   flex-direction: column;
 
-  /**
-   * FontCard contains 4px worth of borders, which needs to be factored in since we use
-   * box-sizing: border-box;
-   * In this case, we'll adjust margin-bottoms (24px - 4px = 20px)
-   */
-  margin-bottom: calc(4 * var(--spacingUnit) - 4px);
   margin-right: calc(2 * var(--spacingUnit));
+  margin-bottom: calc(2 * var(--spacingUnit) + 2px);
+
+  @media (--desktopViewport) {
+    margin-right: calc(2 * var(--spacingUnitDesktop));
+    margin-bottom: calc(2 * var(--spacingUnitDesktop) + 2px);
+  }
+
 }
 
 .element {
@@ -106,12 +123,16 @@
   flex-grow: 1;
   width: 100%;
   background-color: #f1f1f1;
-  padding: calc(2 * var(--spacingUnit));
+  padding: calc(2 * var(--spacingUnit) - 3px) calc(2 * var(--spacingUnit));
 
   border-style: solid;
   border-color: #aaa;
   border-width: 1px;
   border-top-color: transparent;
+
+  @media (--desktopViewport) {
+    padding: calc(2 * var(--spacingUnitDesktop) - 3px) calc(2 * var(--spacingUnitDesktop));
+  }
 }
 
 /* Colors.example */
@@ -150,6 +171,10 @@
   width: 100%;
   background-color: #fff;
   padding: calc(2 * var(--spacingUnit));
+
+  @media (--desktopViewport) {
+    padding: calc(2 * var(--spacingUnitDesktop) - 2px) calc(2 * var(--spacingUnitDesktop));
+  }
 }
 
 .marketplaceColorBackground {

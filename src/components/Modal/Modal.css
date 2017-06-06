@@ -46,8 +46,6 @@
   background-color: transparent;
   color: var(--matterColor);
 
-  /* Font */
-  composes: h6Font from '../../marketplace.css';
   cursor: pointer;
 
   &:enabled:hover {
@@ -63,10 +61,16 @@
   }
 }
 
+.closeText {
+  /* Font */
+  composes: h6Font from '../../marketplace.css';
+}
+
 .closeIcon {
   display: inline-block;
   margin-left: 12px;
-  margin-top: 2px;
+  padding: 6px 0 6px;
+  box-sizing: content-box;
 }
 
 .content {

@@ -22,7 +22,7 @@
   height: var(--topbarHeight);
   border: none;
   padding-top: 0;
-  padding-bottom: 0;
+  padding-bottom: 3px;
 }
 
 .mobilePredictions {
