@@ -1,10 +1,10 @@
 @import '../../marketplace.css';
 
 .root {
-  margin-top: calc(6 * var(--spacingUnit));
+  margin-top: calc(4 * var(--spacingUnit));
 
   @media (--desktopViewport) {
-    margin-top: calc(6 * var(--spacingUnitDesktop));
+    margin-top: calc(4 * var(--spacingUnitDesktop));
   }
 }
 
