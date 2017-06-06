@@ -39,6 +39,14 @@ const FormComponent = props => {
         label="Label for input with initial value"
         component={InputField}
       />
+      <Field
+        name="textarea1"
+        type="textarea"
+        label="Label for textarea"
+        placeholder="Textarea placeholder..."
+        validate={required}
+        component={InputField}
+      />
       <Button type="submit" disabled={submitDisabled} style={buttonStyles}>Submit form</Button>
     </form>
   );
