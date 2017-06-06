@@ -53,7 +53,7 @@
 
 .search {
   composes: topbarDesktopLabel;
-  composes: bodyFont from '../../marketplace.css';
+  composes: h4Font from '../../marketplace.css';
   color: var(--matterColor);
 }
 
@@ -66,7 +66,7 @@
 
 .createListing {
   composes: topbarDesktopLabel;
-  composes: bodyFont from '../../marketplace.css';
+  composes: h4Font from '../../marketplace.css';
   color: var(--marketplaceColor);
 }
 
@@ -78,7 +78,7 @@
 
 .inbox {
   composes: topbarDesktopLabel;
-  composes: bodyFont from '../../marketplace.css';
+  composes: h4Font from '../../marketplace.css';
   color: var(--matterColor);
 }
 
@@ -114,14 +114,14 @@
 .signup,
 .login {
   composes: topbarDesktopLabel;
-  composes: bodyFont from '../../marketplace.css';
+  composes: h4Font from '../../marketplace.css';
   color: var(--matterColor);
 }
 
 .logoutButton {
   width: 100%;
   padding: 20px 24px;
-  composes: bodyFont from '../../marketplace.css';
+  composes: h4Font from '../../marketplace.css';
   text-align: left;
   white-space: nowrap;
 

@@ -47,7 +47,7 @@
   padding: 24px;
   color: var(--matterColor);
   border: 0;
-  composes: tinyBoldFont from '../../marketplace.css';
+  composes: h6Font from '../../marketplace.css';
 
   &:enabled:hover {
     background-color: transparent;
