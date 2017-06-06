@@ -61,13 +61,13 @@ h1, h2, h3, h4, h5, h6, p, pre {
   font-weight: 700; /* Bold */
   font-size: 48px;
   line-height: 54px;
-  padding: 5px 0 1px; /* 5px + 1px = 6px */;
+  padding: 1px 0 5px; /* 1px + 5px = 6px */;
   letter-spacing: -1px;
 
   @media (--desktopViewport) {
     font-size: 90px;
     line-height: 96px;
-    padding: 0;
+    padding: 1px 0 7px; /* 1px + 7px = 8px */
     letter-spacing: -2px;
   }
 }
@@ -79,7 +79,7 @@ h1,
   font-weight: 600; /* SemiBold */
   font-size: 30px;
   line-height: 36px;
-  padding: 3.5px 0 2.5px;  /* 3.5px + 2.5px = 6px */
+  padding: 0;
   letter-spacing: -0.5px;
 
   @media (--desktopViewport) {
@@ -96,12 +96,12 @@ h2,
   font-weight: 600; /* SemiBold */
   font-size: 24px;
   line-height: 30px;
-  padding: 3px 0 3px; /* 3px + 3px = 6px */
+  padding: 5px 0 1px; /* 5px + 1px = 6px */
   letter-spacing: -0.3px;
 
   @media (--desktopViewport) {
     line-height: 32px;
-    padding: 4px 0 4px; /* 4px + 4px = 8px */
+    padding: 5px 0 3px;; /* 5px + 3px = 8px */
   }
 }
 
@@ -111,11 +111,11 @@ h3,
   font-weight: 600; /* SemiBold */
   font-size: 20px;
   line-height: 24px;
-  padding: 2px 0 4px; /* 2px + 4px = 6px */
+  padding: 4px 0 2px; /* 4px + 2px = 6px */
   letter-spacing: -0.2px;
 
   @media (--desktopViewport) {
-    padding: 2px 0 6px; /* 2px + 6px = 8px */
+    padding: 4px 0 4px; /* 4px + 4px = 8px */
   }
 }
 
@@ -125,11 +125,11 @@ h4,
   font-weight: 500; /* Medium */
   font-size: 16px;
   line-height: 24px;
-  padding: 3.5px 0 2.5px; /* 3.5px + 2.5px = 6px */
+  padding: 0;
   letter-spacing: 0;
 
   @media (--desktopViewport) {
-    padding: 4px 0 4px; /* 4px + 4px = 8px */
+    padding: 5px 0 3px; /* 5px + 3px = 8px */
   }
 }
 
@@ -139,12 +139,12 @@ h5,
   font-weight: 400; /* Regular */
   font-size: 14px;
   line-height: 18px;
-  padding: 1.5px 0 4.5px; /* 1.5px + 4.5px = 6px */
+  padding: 4px 0 2px; /* 4px + 2px = 6px */
   letter-spacing: 0;
 
   @media (--desktopViewport) {
     line-height: 16px;
-    padding: 1px 0 7px; /* 1px + 7px = 8px */
+    padding: 2px 0 6px; /* 2px + 6px = 8px */
   }
 }
 
@@ -154,7 +154,7 @@ h6,
   font-weight: 700; /* Bold */
   font-size: 12px;
   line-height: 18px;
-  padding: 2px 0 4px; /* 2px + 4px = 6px */
+  padding: 4px 0 2px; /* 4px + 2px = 6px */
   letter-spacing: 1.5px;
   text-transform: uppercase;
 
@@ -175,13 +175,13 @@ li,
   font-weight: 500; /* Medium */
   font-size: 18px;
   line-height: 24px;
-  padding: 2.5px 0 3.5px; /* 2.5px + 3.5px = 6px */
+  padding: 0;
   letter-spacing: -0.1px;
 
   @media (--desktopViewport) {
     font-size: 20px;
     line-height: 32px;
-    padding: 6px 0 2px; /* 6px + 2px = 8px */
+    padding: 0;
   }
 }
 
@@ -190,12 +190,12 @@ li,
   font-weight: 400; /* Regular */
   font-size: 13px;
   line-height: 18px;
-  padding: 2px 0 4px; /* 2px + 4px = 6px */
+  padding: 3.5px 0 2.5px; /* 3.5px + 2.5px = 6px */
   letter-spacing: -0.1px;
 
   @media (--desktopViewport) {
     line-height: 16px;
-    padding: 1.5px 0 6.5px; /* 1.5px + 6.5px; = 8px */
+    padding: 2.5px 0 5.5px; /* 1.5px + 6.5px; = 8px */
   }
 }
 
@@ -218,7 +218,6 @@ li,
   font-weight: 700; /* Bold */
   font-size: 14px;
   line-height: 18px;
-  padding: 7.5px 0 4.5px;
   letter-spacing: 0.1px;
 }
 

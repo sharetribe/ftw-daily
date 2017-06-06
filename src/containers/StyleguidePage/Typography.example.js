@@ -30,72 +30,70 @@ const Fonts = () => {
   const heroTitleFontStyling = `Mobile styles:
   font-size: 48px;
   line-height: 54px;
-  padding: 5px 0 1px;
+  padding: 1px 0 5px;
 
   Desktop styles:
   font-size: 90px;
   line-height: 96px;
-  padding: 0;`;
+  padding: 1px 0 7px;`;
 
   const h1FontStyling = `Mobile styles:
   font-size: 30px;
   line-height: 36px;
-  padding: 3.5px 0 2.5px;
 
   Desktop styles:
   font-size: 48px;
-  line-height: 56px;
-  padding: 6px 0 2px;`;
+  line-height: 56px;`;
 
   const h2FontStyling = `Mobile styles:
   font-size: 24px;
   line-height: 30px;
-  padding: 3px 0 3px;
+  padding: 5px 0 1px;
 
   Desktop styles:
   font-size: 24px;
   line-height: 32px;
-  padding: 4px 0 4px;`;
+  padding: 5px 0 3px;`;
 
   const h3FontStyling = `Mobile styles:
   font-size: 20px;
   line-height: 24px;
-  padding: 2px 0 4px;
+  padding: 4px 0 2px;
 
   Desktop styles:
   font-size: 20px;
   line-height: 24px;
-  padding: 2px 0 6px;`;
+  padding: 4px 0 4px;`;
 
   const h4FontStyling = `Mobile styles:
   font-size: 16px;
   line-height: 24px;
-  padding: 3.5px 0 2.5px;
+  padding: 0;
 
   Desktop styles:
   font-size: 16px;
   line-height: 24px;
-  padding: 4px 0 4px;`;
+  padding: 5px 0 3px;`;
 
   const h5FontStyling = `Mobile styles:
   font-size: 14px;
   line-height: 18px;
-  padding: 1.5px 0 4.5px;
+  padding: 4px 0 2px;
 
   Desktop styles:
   font-size: 14px;
-  line-height: 18px;
-  padding: 7px 0 1px;`;
+  line-height: 16px;
+  padding: 2px 0 6px;`;
 
   const h6FontStyling = `Mobile styles:
   font-size: 12px;
   line-height: 18px;
-  padding: 2px 0 4px;
+  padding: 4px 0 2px;
 
   Desktop styles:
   font-size: 12px;
-  line-height: 18px;
-  padding: 6px 0 2px;`;
+  line-height: 16px;
+  padding: 2px 0 6px;`;
 
   const bodyFontStyling = `Mobile styles:
   font-size: 18px;

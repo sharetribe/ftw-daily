@@ -27,27 +27,26 @@
   overflow: hidden;
 }
 
-/* Header section for Modal */
-.header {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-.title {
-  margin: 24px;
-  flex-grow: 1;
-}
-
 .close {
+  /* Position inside modal */
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  /* Safari didn't know how to baseline-align svg icon and text */
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   width: auto;
-  background-color: transparent;
+
+  /* Sizing (touch area) */
   padding: 24px;
-  color: var(--matterColor);
   border: 0;
-  composes: h6Font from '../../marketplace.css';
+
+  /* Colors */
+  background-color: transparent;
+  color: var(--matterColor);
+
+  cursor: pointer;
 
   &:enabled:hover {
     background-color: transparent;
@@ -62,8 +61,16 @@
   }
 }
 
+.closeText {
+  /* Font */
+  composes: h6Font from '../../marketplace.css';
+}
+
 .closeIcon {
+  display: inline-block;
   margin-left: 12px;
+  padding: 6px 0 6px;
+  box-sizing: content-box;
 }
 
 .content {

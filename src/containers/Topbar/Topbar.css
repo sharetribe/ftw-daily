@@ -1,5 +1,10 @@
 @import '../../marketplace.css';
 
+:root {
+  --topbarHeight: 60px;
+  --logoHeight: 25px;
+}
+
 .root {
   width: 100%;
 }
@@ -8,14 +13,13 @@
 
   /* Size */
   width: 100%;
-  height: 60px;
+  height: var(--topbarHeight);
 
   /* Layout for child components */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 12px;
 
   /* fill */
   background-color: var(--matterColorLight);
@@ -29,7 +33,8 @@
 }
 
 .home {
-  padding: 18px;
+  display: flex;
+  padding: calc((var(--topbarHeight) - var(--logoHeight)) / 2) 24px;
 }
 
 .logoutButton {
@@ -37,11 +42,35 @@
 }
 
 /* Child component's size (and positioning) should be given here */
-.hamburgerMenu,
+.menu,
 .searchMenu {
   display: flex;
-  align-items: center;
-  width: 44px;
+  width: 66px;
+  padding: 12px 24px;
+  border-width: 0px;
+  background-color: transparent;
+
+  /* Font */
+  composes: h5Font from '../../marketplace.css';
+  color: var(--matterColor);
+
+  /* Hovers */
+  &:enabled {
+    cursor: pointer;
+  }
+  &:enabled:hover,
+  &:enabled:active {
+    background-color: transparent;
+  }
+  &:disabled {
+    background-color: transparent;
+    cursor: auto;
+  }
+}
+
+.menuIcon,
+.searchMenuIcon {
+  margin: 9px 0;
 }
 
 .desktop {
@@ -61,6 +90,7 @@
 .searchContainer {
   position: relative;
   height: 100%;
+  margin-top: 72px;
 }
 
 .mobileHelp {
@@ -70,7 +100,7 @@
   /* Absolute position to avoid affecting the layout of the autocomplete
    predictions list */
   position: absolute;
-  top: 115px;
+  top: 114px;
 
   /* Pull text behind search suggestions */
   z-index: -1;

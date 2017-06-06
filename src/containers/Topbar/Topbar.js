@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { FlatButton, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
+import { Button, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
 import { TopbarSearchForm } from '../../containers';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
@@ -124,15 +124,15 @@ class TopbarComponent extends Component {
     return (
       <div className={css.root}>
         <div className={css.container}>
-          <FlatButton className={css.hamburgerMenu} onClick={this.handleMobileMenuOpen}>
-            <MenuIcon title={intl.formatMessage({ id: 'Topbar.menuIcon' })} />
-          </FlatButton>
+          <Button rootClassName={css.menu} onClick={this.handleMobileMenuOpen}>
+            <MenuIcon className={css.menuIcon} title={intl.formatMessage({ id: 'Topbar.menuIcon' })} />
+          </Button>
           <NamedLink className={css.home} name="LandingPage">
             <LogoIcon title={intl.formatMessage({ id: 'Topbar.logoIcon' })} />
           </NamedLink>
-          <FlatButton className={css.searchMenu} onClick={this.handleMobileSearchOpen}>
-            <SearchIcon title={intl.formatMessage({ id: 'Topbar.searchIcon' })} />
-          </FlatButton>
+          <Button rootClassName={css.searchMenu} onClick={this.handleMobileSearchOpen}>
+            <SearchIcon className={css.searchMenuIcon} title={intl.formatMessage({ id: 'Topbar.searchIcon' })} />
+          </Button>
         </div>
         <div className={css.desktop}>
           <TopbarDesktop
@@ -147,6 +147,7 @@ class TopbarComponent extends Component {
           />
         </div>
         <Modal
+          id="TopbarMobileMenu"
           isOpen={isMobileMenuOpen}
           onClose={this.handleMobileMenuClose}
           togglePageClassNames={togglePageClassNames}
@@ -154,6 +155,7 @@ class TopbarComponent extends Component {
           {authInProgress ? null : mobileMenu}
         </Modal>
         <Modal
+          id="TopbarMobileSearch"
           isOpen={isMobileSearchOpen}
           onClose={this.handleMobileSearchClose}
           togglePageClassNames={togglePageClassNames}

@@ -23,7 +23,7 @@ const Example = props => {
   const exampleWrapperClassName = useDefaultWrapperStyles ? css.defaultWrapperStyles : '';
   const desc = description ? <p className={css.withMargin}>Description: {description}</p> : null;
   return (
-    <li>
+    <li className={css.example}>
       <h3 className={css.withMargin}>
         <NamedLink
           name="StyleguideComponent"
@@ -192,7 +192,7 @@ const StyleguidePage = props => {
   }
 
   const html = examples.length > 0
-    ? <ul>
+    ? <ul className={css.examplesList}>
         {examples.map(ex => <Example key={`${ex.componentName}/${ex.exampleName}`} {...ex} />)}
       </ul>
     : <p>No examples with filter: {componentName}/{exampleName}</p>;
