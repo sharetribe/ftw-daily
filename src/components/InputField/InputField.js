@@ -24,20 +24,16 @@ class InputField extends Component {
       meta,
     } = this.props;
     const inputProps = { ...input, type, placeholder, autoFocus };
-    const { pristine, valid, invalid, touched, error } = meta;
+    const { valid, invalid, touched, error } = meta;
 
     // Error message and input error styles are only shown if the
     // field has been touched and the validation has failed.
     const hasError = touched && invalid && error;
 
-    // Input is market as succesful if it has been changed and
-    // validation has not failed.
-    const isFilledInAndValid = !pristine && touched && valid;
-
     const classes = classNames(rootClassName || css.root, className);
     const labelClasses = labelRootClassName || css.label;
     const inputClasses = classNames(inputRootClassName || css.input, {
-      [css.inputSuccess]: isFilledInAndValid,
+      [css.inputSuccess]: valid,
       [css.inputError]: hasError,
     });
     const errorClasses = errorRootClassName || css.validationError;
