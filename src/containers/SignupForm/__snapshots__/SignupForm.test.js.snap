@@ -6,7 +6,7 @@ exports[`SignupForm matches snapshot 1`] = `
     <div
       className="">
       <label
-        className=""
+        className={undefined}
         htmlFor="email">
         Email
       </label>
@@ -18,7 +18,7 @@ exports[`SignupForm matches snapshot 1`] = `
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder=""
+        placeholder={null}
         type="email"
         value="" />
     </div>
@@ -27,7 +27,7 @@ exports[`SignupForm matches snapshot 1`] = `
       <div
         className="">
         <label
-          className=""
+          className={undefined}
           htmlFor="firstName">
           First name
         </label>
@@ -39,14 +39,14 @@ exports[`SignupForm matches snapshot 1`] = `
           onDragStart={[Function]}
           onDrop={[Function]}
           onFocus={[Function]}
-          placeholder=""
+          placeholder={null}
           type="text"
           value="" />
       </div>
       <div
         className="">
         <label
-          className=""
+          className={undefined}
           htmlFor="lastName">
           Last name
         </label>
@@ -58,7 +58,7 @@ exports[`SignupForm matches snapshot 1`] = `
           onDragStart={[Function]}
           onDrop={[Function]}
           onFocus={[Function]}
-          placeholder=""
+          placeholder={null}
           type="text"
           value="" />
       </div>
@@ -66,7 +66,7 @@ exports[`SignupForm matches snapshot 1`] = `
     <div
       className="">
       <label
-        className=""
+        className={undefined}
         htmlFor="password">
         Password
       </label>
@@ -78,7 +78,7 @@ exports[`SignupForm matches snapshot 1`] = `
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder=""
+        placeholder={null}
         type="password"
         value="" />
     </div>
