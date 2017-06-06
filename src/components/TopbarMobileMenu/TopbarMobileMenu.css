@@ -36,21 +36,22 @@
   color: var(--matterColorLight);
 
   /* Font */
-  composes: h2Font from '../../marketplace.css';
+  composes: h1Font from '../../marketplace.css';
 }
 
 .greeting {
-  composes: h2Font from '../../marketplace.css';
+  composes: h1Font from '../../marketplace.css';
 }
 
 .logoutButton {
-  composes: h4Font from '../../marketplace.css';
+  composes: h3Font from '../../marketplace.css';
   text-align: left;
   color: var(--matterColorAnti);
   margin-top: 6px;
 }
+
 .inbox {
-  composes: h2Font from '../../marketplace.css';
+  composes: h1Font from '../../marketplace.css';
   color: var(--marketplaceColor);
   margin-top: auto;
 }
@@ -90,7 +91,7 @@
 }
 
 .authenticationGreeting {
-  composes: h2Font from '../../marketplace.css';
+  composes: h1Font from '../../marketplace.css';
   margin-bottom: 24px;
 }
 .authenticationLinks {

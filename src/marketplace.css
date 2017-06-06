@@ -215,7 +215,7 @@ li,
 /* This font is specific to Avatar component only */
 .smallAvatarFont {
   font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 400; /* Regular */
+  font-weight: 700; /* Bold */
   font-size: 14px;
   line-height: 18px;
   padding: 7.5px 0 4.5px;
