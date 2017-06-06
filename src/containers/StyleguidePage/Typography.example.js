@@ -27,51 +27,95 @@ Font.propTypes = {
 };
 
 const Fonts = () => {
-  const h1FontStyling = `Styles affecting size:
+  const heroTitleFontStyling = `Mobile styles:
   font-size: 48px;
   line-height: 54px;
-  padding: 5px 0 1px 0;`;
+  padding: 5px 0 1px;
 
-  const h2FontStyling = `Styles affecting size:
+  Desktop styles:
+  font-size: 90px;
+  line-height: 96px;
+  padding: 0;`;
+
+  const h1FontStyling = `Mobile styles:
   font-size: 30px;
   line-height: 36px;
-  padding: 3.5px 0 2.5px 0;`;
+  padding: 3.5px 0 2.5px;
 
-  const h3FontStyling = `Styles affecting size:
+  Desktop styles:
+  font-size: 48px;
+  line-height: 56px;
+  padding: 6px 0 2px;`;
+
+  const h2FontStyling = `Mobile styles:
   font-size: 24px;
   line-height: 30px;
-  padding: 3px 0 3px 0;`;
+  padding: 3px 0 3px;
 
-  const h4FontStyling = `Styles affecting size:
+  Desktop styles:
+  font-size: 24px;
+  line-height: 32px;
+  padding: 4px 0 4px;`;
+
+  const h3FontStyling = `Mobile styles:
   font-size: 20px;
   line-height: 24px;
-  padding: 2px 0 4px 0;`;
+  padding: 2px 0 4px;
 
-  const h5FontStyling = `Styles affecting size:
+  Desktop styles:
+  font-size: 20px;
+  line-height: 24px;
+  padding: 2px 0 6px;`;
+
+  const h4FontStyling = `Mobile styles:
   font-size: 16px;
   line-height: 24px;
-  padding: 3.5px 0 2.5px 0;`;
+  padding: 3.5px 0 2.5px;
 
-  const h6FontStyling = `Styles affecting size:
+  Desktop styles:
+  font-size: 16px;
+  line-height: 24px;
+  padding: 4px 0 4px;`;
+
+  const h5FontStyling = `Mobile styles:
   font-size: 14px;
   line-height: 18px;
-  padding: 1.5px 0 4.5px 0;`;
+  padding: 1.5px 0 4.5px;
 
-  const bodyFontStyling = `Styles affecting size:
+  Desktop styles:
+  font-size: 14px;
+  line-height: 18px;
+  padding: 7px 0 1px;`;
+
+  const h6FontStyling = `Mobile styles:
+  font-size: 12px;
+  line-height: 18px;
+  padding: 2px 0 4px;
+
+  Desktop styles:
+  font-size: 12px;
+  line-height: 18px;
+  padding: 6px 0 2px;`;
+
+  const bodyFontStyling = `Mobile styles:
   font-size: 18px;
   line-height: 24px;
-  padding: 2.5px 0 3.5px 0;`;
+  padding: 2.5px 0 3.5px;
 
-  const tinyFontStyling = `Styles affecting size:
+  Desktop styles:
+  font-size: 20px;
+  line-height: 32px;
+  padding: 5px 0 3px;`;
+
+  const tinyFontStyling = `Mobile styles:
   font-size: 13px;
   line-height: 18px;
-  padding: 2px 0 4px 0;`;
+  padding: 2px 0 4px;
 
-  const tinyBoldFontStyling = `Styles affecting size:
-  font-weight: 700;
+  Desktop styles:
   font-size: 13px;
   line-height: 18px;
-  padding: 2px 0 4px 0;`;
+  padding: 7px 0 1px;`;
 
   const fontsContainerClasses = classNames(css.fontsContainer, css.baselines);
 
@@ -86,66 +130,65 @@ const Fonts = () => {
       <p className={css.spacing2x}>
         N.B. box-sizing is border-box, so borders affect to the total height of elements.
       </p>
-      <p className={css.spacing2x}>
-        TODO: breakpoints for desktop are missing (desktop fonts needs to be extracted.
-      </p>
       <div className={fontsContainerClasses}>
         <Font
-          component={() => <h1>H1 (.h1Font): Lorem ipsum dolor sit amet</h1>}
-          description="Biggest font style. Used in main heading on a page. "
+          component={() => (
+            <p className={mpStyle.heroTitle}>
+              Hello beautiful world.
+            </p>
+          )}
+          description=".heroTitle: Biggest font style. Used in the hero in landingPage. Works as a site title."
+          styling={heroTitleFontStyling}
+        />
+        <Font
+          component={() => <h1>Listing + Page title</h1>}
+          description="H1 / .h1Font: Works as a page title. Inline component using .h2Font can be aligned with .h1Font to the same baseline by dropping it 18px (e.g. with margin-top)."
           styling={h1FontStyling}
         />
         <Font
-          component={() => <h2>H2 (.h2Font): Lorem ipsum dolor sit amet</h2>}
-          description="Works as a subtitle. Inline component using .h2Font can be aligned with .h1Font to the same baseline by dropping it 18px (e.g. with margin-top)."
+          component={() => <h2>This many listings found in here</h2>}
+          description="H2 / .h2Font: Works as a page subtitle and in sidebar menu link."
           styling={h2FontStyling}
         />
         <Font
-          component={() => <h3>H3 (.h3Font): Lorem ipsum dolor sit amet</h3>}
-          description="Works as a subtitle and in sidebar menu."
+          component={() => <h3>About this listing</h3>}
+          description="H3 / .h3Font: Works as a paragraph subtitle."
           styling={h3FontStyling}
         />
         <Font
           component={() => <h4>H4 (.h4Font): Lorem ipsum dolor sit amet</h4>}
-          description="Works as a subtitle."
+          description="Can be used as a subtitle and also as a label font for form inputs."
           styling={h4FontStyling}
         />
         <Font
-          component={() => <h5>H5 (.h5Font): Lorem ipsum dolor sit amet</h5>}
-          description="Can be used as a subtitle and also as a label font for form inputs."
+          component={() => (
+            <h5>You will only be charged if your request is accepted by the provider.</h5>
+          )}
+          description="H5 / .h5Font: Can be used as a fine print text."
           styling={h5FontStyling}
         />
         <Font
-          component={() => (
-            <h6>H6 (.h6Font): Lorem ipsum dolor sit amet consectetur adebisci velit</h6>
-          )}
-          description="Works as a subtitle."
+          component={() => <h6>Close</h6>}
+          description="H6 / .h6Font: Works as a close text."
           styling={h6FontStyling}
         />
         <Font
           component={() => (
-            <p>Default font (.bodyFont, p, button, etc.): Lorem ipsum dolor sit amet</p>
+            <p>
+              Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+            </p>
           )}
-          description="Paragraphs and other body texts."
+          description=".bodyFont, p, button, etc: Paragraphs and other body texts."
           styling={bodyFontStyling}
         />
         <Font
           component={() => (
             <p className={mpStyle.tinyFont}>
-              Tiny mobile text (.tinyFont): Lorem ipsum dolor sit amet
+              Hosted by user
             </p>
           )}
-          description="Very small print."
+          description=".tinyFont: Very small print."
           styling={tinyFontStyling}
-        />
-        <Font
-          component={() => (
-            <p className={mpStyle.tinyBoldFont}>
-              Tiny bold mobile text (.tinyBoldFont): CLOSE
-            </p>
-          )}
-          description="Very small bold print used next to close icon."
-          styling={tinyBoldFontStyling}
         />
       </div>
     </div>
