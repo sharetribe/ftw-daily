@@ -19,10 +19,11 @@ class InputField extends Component {
       type,
       label,
       placeholder,
+      autoFocus,
       input,
       meta,
     } = this.props;
-    const inputProps = { ...input, type, placeholder };
+    const inputProps = { ...input, type, placeholder, autoFocus };
     const { pristine, valid, invalid, touched, error } = meta;
 
     // Error message and input error styles are only shown if the
@@ -60,6 +61,7 @@ InputField.defaultProps = {
   clearOnUnmount: false,
   label: null,
   placeholder: null,
+  autoFocus: false,
 };
 
 const { string, shape, bool, func } = PropTypes;
@@ -78,6 +80,7 @@ InputField.propTypes = {
   type: string.isRequired,
   label: string,
   placeholder: string,
+  autoFocus: bool,
 
   // Objects created by redux-form
   input: shape({
