@@ -85,14 +85,14 @@ class BirthdayInput extends Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
   componentWillMount() {
-    const value = this.props.input.value;
+    const value = this.props.value;
     if (value instanceof Date) {
       this.setState({ selected: selectedFromDate(value) });
     }
   }
   componentWillReceiveProps(newProps) {
-    const oldValue = this.props.input.value;
-    const newValue = newProps.input.value;
+    const oldValue = this.props.value;
+    const newValue = newProps.value;
     const valueChanged = oldValue !== newValue;
     if (valueChanged && newValue instanceof Date) {
       this.setState({ selected: selectedFromDate(newValue) });
@@ -103,13 +103,13 @@ class BirthdayInput extends Component {
   }
   handleSelectFocus() {
     window.clearTimeout(this.blurTimeoutId);
-    this.props.input.onFocus();
+    this.props.onFocus();
   }
   handleSelectBlur() {
     window.clearTimeout(this.blurTimeoutId);
     this.blurTimeoutId = window.setTimeout(
       () => {
-        this.props.input.onBlur();
+        this.props.onBlur();
       },
       BLUR_TIMEOUT
     );
@@ -117,18 +117,18 @@ class BirthdayInput extends Component {
   handleSelectChange(type, value) {
     this.setState(prevState => {
       const selected = { ...prevState.selected, [type]: parseNum(value) };
-      this.props.input.onChange(dateFromSelected(selected));
+      this.props.onChange(dateFromSelected(selected));
       return { selected };
     });
   }
   render() {
-    const { className } = this.props;
+    const { rootClassName, className } = this.props;
 
     const selectedValue = n => {
       return typeof n === 'number' ? n : '';
     };
 
-    const classes = classNames(css.root, className);
+    const classes = classNames(rootClassName || css.root, className);
 
     return (
       <div className={classes}>
@@ -167,19 +167,21 @@ class BirthdayInput extends Component {
   }
 }
 
-BirthdayInput.defaultProps = { className: '' };
+BirthdayInput.defaultProps = {
+  rootClassName: null,
+  className: null,
+  value: null,
+};
 
-const { string, shape, instanceOf, func } = PropTypes;
+const { string, instanceOf, func } = PropTypes;
 
 BirthdayInput.propTypes = {
+  rootClassName: string,
   className: string,
-  input: shape({
-    name: string.isRequired,
-    value: instanceOf(Date),
-    onChange: func.isRequired,
-    onFocus: func.isRequired,
-    onBlur: func.isRequired,
-  }).isRequired,
+  value: instanceOf(Date),
+  onChange: func.isRequired,
+  onFocus: func.isRequired,
+  onBlur: func.isRequired,
 };
 
 export default BirthdayInput;
