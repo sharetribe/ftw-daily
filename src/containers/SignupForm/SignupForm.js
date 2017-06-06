@@ -11,16 +11,12 @@ import css from './SignupForm.css';
 class SignupFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.EnhancedInput = enhancedField('input', {
-      errorClassName: css.error,
-    });
+    this.EnhancedInput = enhancedField('input');
     this.EnhancedFirstNameInput = enhancedField('input', {
       rootClassName: css.firstNameRoot,
-      errorClassName: css.error,
     });
     this.EnhancedLastNameInput = enhancedField('input', {
       rootClassName: css.lastNameRoot,
-      errorClassName: css.error,
     });
   }
   render() {

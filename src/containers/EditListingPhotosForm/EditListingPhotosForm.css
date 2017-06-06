@@ -55,9 +55,6 @@
   width: 100%;
   clear: both;
 }
-.imageRequiredError {
-  color: red;
-}
 
 .submitButton {
   margin-top: 1rem;

@@ -10,17 +10,18 @@ import css from './ValidationError.css';
  * shown.
  */
 const ValidationError = props => {
-  const { className, fieldMeta } = props;
+  const { rootClassName, className, fieldMeta } = props;
   const { touched, error } = fieldMeta;
-  const classes = classNames(css.root, className);
+  const classes = classNames(rootClassName || css.root, className);
   return touched && error ? <div className={classes}>{error}</div> : null;
 };
 
-ValidationError.defaultProps = { className: '' };
+ValidationError.defaultProps = { rootClassName: null, className: null };
 
 const { shape, bool, string } = PropTypes;
 
 ValidationError.propTypes = {
+  rootClassName: string,
   className: string,
   fieldMeta: shape({
     touched: bool.isRequired,

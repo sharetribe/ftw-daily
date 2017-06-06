@@ -100,7 +100,7 @@ export class EditListingPhotosFormComponent extends Component {
               return (
                 <div className={css.imageRequiredWrapper}>
                   <Input {...input} type={type} />
-                  <ValidationError className={css.imageRequiredError} fieldMeta={meta} />
+                  <ValidationError fieldMeta={meta} />
                 </div>
               );
             }}
