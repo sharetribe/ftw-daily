@@ -1,7 +1,11 @@
 @import '../../marketplace.css';
 
 .root {
-  margin-top: 20px;
+  margin-top: calc(6 * var(--spacingUnit));
+
+  @media (--desktopViewport) {
+    margin-top: calc(6 * var(--spacingUnitDesktop));
+  }
 }
 
 .label {
