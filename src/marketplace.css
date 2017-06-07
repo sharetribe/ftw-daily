@@ -37,6 +37,9 @@
 
   /* Border radius */
   --borderRadius: 2px;
+
+  /* Transitions */
+  --transitionStyle: ease-in 0.2s;
 }
 
 /* ================ Custom media queries ================ */
@@ -268,7 +271,7 @@ input {
   border-bottom-color: var(--marketplaceColor);
   border-radius: 0;
 
-  transition: border-bottom-color ease-in 0.2s;
+  transition: border-bottom-color var(--transitionStyle);
 
   &::placeholder {
     color: var(--matterColorAnti);
