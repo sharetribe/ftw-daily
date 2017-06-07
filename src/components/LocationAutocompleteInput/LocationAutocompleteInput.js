@@ -250,7 +250,7 @@ class LocationAutocompleteInput extends Component {
     const placeId = prediction.place_id;
 
     this.props.input.onChange({
-      ...this.props.input,
+      ...this.props.input.value,
       selectedPlaceId: placeId,
       selectedPlace: null,
     });
