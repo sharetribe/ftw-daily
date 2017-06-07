@@ -12,6 +12,7 @@
 
 .desktopInputRoot {
   height: var(--topbarHeight);
+  margin-top: 0;
 }
 
 .desktopIcon {

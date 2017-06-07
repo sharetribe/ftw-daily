@@ -6,8 +6,10 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
     autoFocus={true}
     component={[Function]}
     format={null}
+    inputComponent={[Function]}
     label="EditListingLocationForm.address"
     name="location"
+    type="custom"
     validate={
       Array [
         [Function],

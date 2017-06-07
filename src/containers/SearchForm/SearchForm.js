@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
-import { LocationAutocompleteInput, Button } from '../../components';
+import { LocationAutocompleteInput, Button, InputField } from '../../components';
 
 import css from './SearchForm.css';
 
@@ -14,12 +14,13 @@ const SearchForm = props => {
   return (
     <form {...addClassName} onSubmit={handleSubmit}>
       <Field
-        inputClassName={css.locationInput}
         name="location"
-        label="Location"
         placeholder={intl.formatMessage({ id: 'SearchForm.placeholder' })}
         format={null}
-        component={LocationAutocompleteInput}
+        type="custom"
+        component={InputField}
+        inputComponent={LocationAutocompleteInput}
+        inputComponentProps={{ inputClassName: css.locationInput }}
       />
       <Button className={css.locationButton} type="submit" disabled={submitDisabled}>
         <FormattedMessage id="SearchForm.search" />
