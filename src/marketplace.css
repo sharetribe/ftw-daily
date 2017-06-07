@@ -37,6 +37,9 @@
 
   /* Border radius */
   --borderRadius: 2px;
+
+  /* Transitions */
+  --transitionStyle: ease-in 0.2s;
 }
 
 /* ================ Custom media queries ================ */
@@ -265,9 +268,19 @@ select {
 
 textarea {
   width: 100%;
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--marketplaceColor);
+  min-height: 48px;
+  padding: 0 0 5px 0;
+
+  /* Borders */
+  border: none;
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--marketplaceColor);
+  border-radius: 0;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 input {
@@ -279,6 +292,8 @@ input {
   border-bottom-style: solid;
   border-bottom-color: var(--marketplaceColor);
   border-radius: 0;
+
+  transition: border-bottom-color var(--transitionStyle);
 
   &::placeholder {
     color: var(--matterColorAnti);

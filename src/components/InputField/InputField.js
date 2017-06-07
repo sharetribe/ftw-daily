@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { omit } from 'lodash';
 import classNames from 'classnames';
 
 import css from './InputField.css';
@@ -16,6 +17,7 @@ class InputField extends Component {
       labelRootClassName,
       inputRootClassName,
       errorRootClassName,
+      inputComponent: InputComponent,
       type,
       label,
       placeholder,
@@ -23,29 +25,50 @@ class InputField extends Component {
       input,
       meta,
     } = this.props;
+
+    const isCustom = type === 'custom';
+    const isTextarea = type === 'textarea';
+
+    if (!isCustom && InputComponent) {
+      throw new Error('inputComponent should only be given with type="custom" prop');
+    }
+    if (isCustom && !InputComponent) {
+      throw new Error('inputComponent prop required for custom inputs');
+    }
+
+    // Normal <input> component takes all the props, but the type prop
+    // is omitted from <textarea> and custom components.
     const inputProps = { ...input, type, placeholder, autoFocus };
-    const { pristine, valid, invalid, touched, error } = meta;
+    const inputPropsWithoutType = omit(inputProps, 'type');
+
+    const { valid, invalid, touched, error } = meta;
 
     // Error message and input error styles are only shown if the
     // field has been touched and the validation has failed.
     const hasError = touched && invalid && error;
 
-    // Input is market as succesful if it has been changed and
-    // validation has not failed.
-    const isFilledInAndValid = !pristine && touched && valid;
-
     const classes = classNames(rootClassName || css.root, className);
     const labelClasses = labelRootClassName || css.label;
     const inputClasses = classNames(inputRootClassName || css.input, {
-      [css.inputSuccess]: isFilledInAndValid,
+      [css.inputSuccess]: valid,
       [css.inputError]: hasError,
     });
     const errorClasses = errorRootClassName || css.validationError;
 
+    let component;
+
+    if (isCustom) {
+      component = <InputComponent className={inputRootClassName} {...inputPropsWithoutType} />;
+    } else if (isTextarea) {
+      component = <textarea className={inputClasses} {...inputPropsWithoutType} />;
+    } else {
+      component = <input className={inputClasses} {...inputProps} />;
+    }
+
     return (
       <div className={classes}>
-        {label ? <label className={labelClasses} htmlFor={inputProps.name}>{label}</label> : null}
-        <input className={inputClasses} {...inputProps} />
+        {label ? <label className={labelClasses} htmlFor={input.name}>{label}</label> : null}
+        {component}
         {hasError ? <p className={errorClasses}>{error}</p> : null}
       </div>
     );
@@ -59,12 +82,14 @@ InputField.defaultProps = {
   inputRootClassName: null,
   errorRootClassName: null,
   clearOnUnmount: false,
+  inputComponent: null,
+  type: null,
   label: null,
   placeholder: null,
   autoFocus: false,
 };
 
-const { string, shape, bool, func } = PropTypes;
+const { string, shape, bool, func, oneOfType } = PropTypes;
 
 InputField.propTypes = {
   // Allow passing in classes to subcomponents
@@ -76,8 +101,13 @@ InputField.propTypes = {
 
   clearOnUnmount: bool,
 
+  // If the type props is 'custom', this prop is used as the component
+  inputComponent: oneOfType([func, string]),
+
+  // 'custom', 'textarea', or something passed to an <input> element
+  type: string,
+
   // Extra props passed to the underlying input component
-  type: string.isRequired,
   label: string,
   placeholder: string,
   autoFocus: bool,

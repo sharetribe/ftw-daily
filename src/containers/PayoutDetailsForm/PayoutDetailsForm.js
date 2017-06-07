@@ -47,7 +47,6 @@ class PayoutDetailsFormComponent extends Component {
   constructor(props) {
     super(props);
     this.EnhancedCountriesDropdown = enhancedField(CountriesSelect);
-    this.EnhancedBirthdayInput = enhancedField(BirthdayInput);
   }
   render() {
     const {
@@ -201,10 +200,11 @@ class PayoutDetailsFormComponent extends Component {
         />
         <Field
           name="birthDate"
-          type="text"
           label={birthdayLabel}
           format={null}
-          component={this.EnhancedBirthdayInput}
+          type="custom"
+          inputComponent={BirthdayInput}
+          component={InputField}
           validate={birthdayRequired}
         />
         <h2 className={css.subTitle}>
