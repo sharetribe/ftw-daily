@@ -48,10 +48,12 @@ class InputField extends Component {
     // field has been touched and the validation has failed.
     const hasError = touched && invalid && error;
 
+    const isSuccess = valid;
+
     const classes = classNames(rootClassName || css.root, className);
     const labelClasses = labelRootClassName || css.label;
     const inputClasses = classNames(inputRootClassName || css.input, {
-      [css.inputSuccess]: valid,
+      [css.inputSuccess]: isSuccess,
       [css.inputError]: hasError,
     });
     const errorClasses = errorRootClassName || css.validationError;
@@ -62,6 +64,7 @@ class InputField extends Component {
       component = (
         <InputComponent
           className={inputRootClassName}
+          inputClassName={inputClasses}
           {...inputPropsWithoutType}
           {...inputComponentProps}
         />

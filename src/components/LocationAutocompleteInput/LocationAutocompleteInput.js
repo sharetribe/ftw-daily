@@ -14,28 +14,6 @@ const KEY_CODE_TAB = 9;
 const DIRECTION_UP = 'up';
 const DIRECTION_DOWN = 'down';
 
-const Icon = () => (
-  <svg
-    className={css.iconSvg}
-    width="21"
-    height="22"
-    viewBox="0 0 21 22"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g
-      className={css.iconSvgGroup}
-      transform="matrix(-1 0 0 1 20 1)"
-      strokeWidth="2"
-      fill="none"
-      fillRule="evenodd"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M13 14l5.241 5.241" /><circle cx="7.5" cy="7.5" r="7.5" />
-    </g>
-  </svg>
-);
-
 // Renders the autocompletion prediction results in a list
 const LocationPredictionsList = props => {
   const {
@@ -342,7 +320,6 @@ class LocationAutocompleteInput extends Component {
       autoFocus,
       rootClassName,
       className,
-      iconClassName,
       inputClassName,
       predictionsClassName,
       placeholder,
@@ -357,7 +334,6 @@ class LocationAutocompleteInput extends Component {
     };
 
     const rootClass = classNames(rootClassName || css.root, className);
-    const iconClass = classNames(css.icon, iconClassName);
     const inputClass = classNames(css.input, inputClassName);
     const predictionsClass = classNames(predictionsClassName);
 
@@ -369,9 +345,6 @@ class LocationAutocompleteInput extends Component {
 
     return (
       <div className={rootClass}>
-        <div className={iconClass}>
-          <Icon />
-        </div>
         <input
           className={inputClass}
           type="search"
@@ -413,7 +386,6 @@ LocationAutocompleteInput.propTypes = {
   autoFocus: bool,
   rootClassName: string,
   className: string,
-  iconClassName: string,
   inputClassName: string,
   predictionsClassName: string,
   placeholder: string,

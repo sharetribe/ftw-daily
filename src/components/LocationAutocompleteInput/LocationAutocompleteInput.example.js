@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import * as propTypes from '../../util/propTypes';
 import { Button, InputField } from '../../components';
+import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../util/validators';
 import LocationAutocompleteInput from './LocationAutocompleteInput';
 
 const FormComponent = props => {
@@ -12,9 +13,13 @@ const FormComponent = props => {
       <Field
         name="location"
         format={null}
+        component={InputField}
         type="custom"
         inputComponent={LocationAutocompleteInput}
-        component={InputField}
+        validate={[
+          autocompleteSearchRequired('required'),
+          autocompletePlaceSelected('address not recognized'),
+        ]}
       />
       <Button type="submit" style={{ marginTop: '24px' }} disabled={pristine || submitting}>
         Submit

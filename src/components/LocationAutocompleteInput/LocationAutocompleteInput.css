@@ -1,7 +1,11 @@
 @import '../../marketplace.css';
 
 :root {
+
+  /* Input height is explicitly defined so we can position the
+   predictions below it */
   --inputHeight: 50px;
+
   --sidePadding: 24px;
   --sidePaddingDesktop: 36px;
   --poweredImageHeight: 18px;
@@ -9,29 +13,10 @@
 
 .root {
   position: relative;
-  display: flex;
-}
-
-.icon {
-  display: flex;
-  width: 24px;
-  align-self: stretch;
-  border-bottom: 3px solid var(--marketplaceColor);
-  background-color: var(--matterColorLight);
-}
-
-.iconSvg {
-  margin: auto;
-}
-
-.iconSvgGroup {
-  stroke: var(--marketplaceColor);
 }
 
 .input {
-  flex-grow: 1;
   height: var(--inputHeight);
-  padding-left: 18px;
 }
 
 /*
@@ -42,7 +27,7 @@ size and position, etc.
   position: absolute;
   width: 100%;
   padding-bottom: 98px;
-  top: var(--inputHeight);
+  top: calc(var(--inputHeight) - var(--inputBorderWidth));
   left: 0;
   background-color: var(--marketplaceColor);
   border-bottom-left-radius: var(--borderRadius);
