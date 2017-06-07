@@ -107,7 +107,7 @@ LocationPredictionsList.propTypes = {
 // Get the current value with defaults from the given
 // LocationAutocompleteInput props.
 const currentValue = props => {
-  const value = props.input.value || {};
+  const value = props.value || {};
   const { search = '', predictions = [], selectedPlaceId = null, selectedPlace = null } = value;
   return { search, predictions, selectedPlaceId, selectedPlace };
 };
@@ -185,7 +185,7 @@ class LocationAutocompleteInput extends Component {
 
   // Handle input text change, fetch predictions if the value isn't empty
   onChange(e) {
-    const onChange = this.props.input.onChange;
+    const onChange = this.props.onChange;
     const { predictions } = currentValue(this.props);
     const newValue = e.target.value;
 
@@ -249,15 +249,15 @@ class LocationAutocompleteInput extends Component {
     const prediction = predictions[index];
     const placeId = prediction.place_id;
 
-    this.props.input.onChange({
-      ...this.props.input.value,
+    this.props.onChange({
+      ...this.props.value,
       selectedPlaceId: placeId,
       selectedPlace: null,
     });
 
     getPlaceDetails(placeId)
       .then(place => {
-        this.props.input.onChange({
+        this.props.onChange({
           search: prediction.description,
           predictions: [],
           selectedPlaceId: placeId,
@@ -267,8 +267,8 @@ class LocationAutocompleteInput extends Component {
       .catch(e => {
         // eslint-disable-next-line no-console
         console.error(e);
-        this.props.input.onChange({
-          ...this.props.input.value,
+        this.props.onChange({
+          ...this.props.value,
           selectedPlaceId: null,
           selectedPlace: null,
         });
@@ -282,7 +282,7 @@ class LocationAutocompleteInput extends Component {
     }
   }
   predict(search) {
-    const onChange = this.props.input.onChange;
+    const onChange = this.props.onChange;
     getPlacePredictions(search)
       .then(results => {
         const { search: currentSearch } = currentValue(this.props);
@@ -318,7 +318,7 @@ class LocationAutocompleteInput extends Component {
 
   finalizeSelection() {
     this.setState({ inputHasFocus: false, highlightedIndex: -1 });
-    this.props.input.onBlur(currentValue(this.props));
+    this.props.onBlur(currentValue(this.props));
   }
 
   handleOnBlur() {
@@ -346,9 +346,9 @@ class LocationAutocompleteInput extends Component {
       inputClassName,
       predictionsClassName,
       placeholder,
-      input,
+      name,
+      onFocus,
     } = this.props;
-    const { name, onFocus } = input;
     const { search, predictions } = currentValue(this.props);
 
     const handleOnFocus = e => {
@@ -417,17 +417,15 @@ LocationAutocompleteInput.propTypes = {
   inputClassName: string,
   predictionsClassName: string,
   placeholder: string,
-  input: shape({
-    name: string.isRequired,
-    value: shape({
-      search: string,
-      predictions: any,
-      selectedPlace: propTypes.place,
-    }),
-    onChange: func.isRequired,
-    onFocus: func.isRequired,
-    onBlur: func.isRequired,
-  }).isRequired,
+  name: string.isRequired,
+  value: shape({
+    search: string,
+    predictions: any,
+    selectedPlace: propTypes.place,
+  }),
+  onChange: func.isRequired,
+  onFocus: func.isRequired,
+  onBlur: func.isRequired,
 };
 
 export default LocationAutocompleteInput;
