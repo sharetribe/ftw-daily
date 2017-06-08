@@ -51,6 +51,7 @@
   &:enabled:hover {
     background-color: transparent;
     color: var(--matterColorDark);
+    box-shadow: none;
   }
   &:enabled:active {
     background-color: transparent;

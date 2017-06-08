@@ -4,7 +4,7 @@
 .root {
   /* Size */
   width: 100%;
-  height: 72px;
+  height: var(--topbarHeightDesktop);
 
   /* Layout for child components */
   display: flex;
@@ -121,6 +121,7 @@
   width: 100%;
   padding: 20px 24px;
   composes: h4Font from '../../marketplace.css';
+  composes: textColor from '../../marketplace.css';
   text-align: left;
   white-space: nowrap;
 

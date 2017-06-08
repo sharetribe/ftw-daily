@@ -10,9 +10,9 @@ describe('LandingPage', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
       <LandingPageComponent
-        onLocationChanged={v => v}
-        history={{ push: noop }}
         flattenedRoutes={[]}
+        history={{ push: noop }}
+        location={{ search: '' }}
       />
     );
     expect(tree).toMatchSnapshot();

@@ -1,40 +1,33 @@
 import React, { PropTypes } from 'react';
 import { withRouter } from 'react-router-dom';
-import { HeroSection, PageLayout } from '../../components';
-import { SearchForm } from '../../containers';
-import { createResourceLocatorString } from '../../util/routes';
-import * as propTypes from '../../util/propTypes';
+import { PageLayout, HeroSection } from '../../components';
+import { withFlattenedRoutes } from '../../util/contextHelpers';
 
 import css from './LandingPage.css';
 
 export const LandingPageComponent = props => {
-  const { history, flattenedRoutes } = props;
-
-  const handleSubmit = values => {
-    const selectedPlace = values && values.location ? values.location.selectedPlace : null;
-    const { address, origin, bounds, country } = selectedPlace || {};
-    const searchParams = { address, origin, bounds, country };
-    history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
-  };
-
+  const { flattenedRoutes, history, location } = props;
   return (
-    <PageLayout title="Landing page">
-      <HeroSection>
-        <SearchForm form="LandingPageSearchForm" className={css.form} onSubmit={handleSubmit} />
-      </HeroSection>
+    <PageLayout title="Landing page" className={css.root}>
+      <HeroSection
+        className={css.hero}
+        flattenedRoutes={flattenedRoutes}
+        history={history}
+        location={location}
+      />
     </PageLayout>
   );
 };
 
-const { func, arrayOf, shape } = PropTypes;
+const { array, object } = PropTypes;
 
 LandingPageComponent.propTypes = {
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
+  // from withFlattenedRoutes
+  flattenedRoutes: array.isRequired,
 
   // from withRouter
-  history: shape({
-    push: func.isRequired,
-  }).isRequired,
+  history: object.isRequired,
+  location: object.isRequired,
 };
 
-export default withRouter(LandingPageComponent);
+export default withRouter(withFlattenedRoutes(LandingPageComponent));

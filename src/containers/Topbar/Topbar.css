@@ -1,7 +1,6 @@
 @import '../../marketplace.css';
 
 :root {
-  --topbarHeight: 60px;
   --logoHeight: 25px;
 }
 
@@ -61,6 +60,7 @@
   &:enabled:hover,
   &:enabled:active {
     background-color: transparent;
+    box-shadow: none;
   }
   &:disabled {
     background-color: transparent;

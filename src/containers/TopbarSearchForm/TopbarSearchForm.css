@@ -25,11 +25,12 @@
 }
 
 .desktopIcon {
+  height: var(--topbarHeightDesktop);
   border: none;
 }
 
 .desktopInput {
-  height: var(--topbarMargin);
+  height: var(--topbarHeightDesktop);
   border: none;
   padding-top: 0;
   padding-bottom: var(--bottomBorder);
@@ -43,6 +44,6 @@
 }
 
 .desktopPredictions {
-  margin-top: calc(var(--topbarMargin) - var(--inputHeight));
+  margin-top: calc(var(--topbarHeightDesktop) - var(--inputHeight));
   max-width: 434px;
 }

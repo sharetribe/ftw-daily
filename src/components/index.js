@@ -39,6 +39,7 @@ import PaginationLinks from './PaginationLinks/PaginationLinks';
 import Promised from './Promised/Promised';
 import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
+import SearchIcon from './SearchIcon/SearchIcon';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import Select from './Select/Select';
 import StripeBankAccountToken from './StripeBankAccountToken/StripeBankAccountToken';
@@ -92,6 +93,7 @@ export {
   Promised,
   RoutesProvider,
   SaleDetailsPanel,
+  SearchIcon,
   SearchResultsPanel,
   Select,
   StripeBankAccountToken,

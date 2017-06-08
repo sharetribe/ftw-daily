@@ -2,13 +2,18 @@ import React from 'react';
 import { renderDeep } from '../../util/test-helpers';
 import HeroSection from './HeroSection';
 
+const noop = () => null;
+
 describe('HeroSection', () => {
   it('matches snapshot', () => {
-    const tree = renderDeep(
-      <HeroSection params={{ displayName: 'most-awesome-shop' }}>
-        test
-      </HeroSection>
-    );
+    window.google = { maps: {} };
+    const heroProps = {
+      flattenedRoutes: [],
+      history: { push: noop },
+      location: { search: '' },
+    };
+    const tree = renderDeep(<HeroSection {...heroProps} />);
+    delete window.google;
     expect(tree).toMatchSnapshot();
   });
 });

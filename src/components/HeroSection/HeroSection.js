@@ -1,29 +1,64 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
+import { SearchIcon } from '../../components';
+import { LocationSearchForm } from '../../containers';
+import { stringify } from '../../util/urlHelpers';
+import { createResourceLocatorString } from '../../util/routes';
+import * as propTypes from '../../util/propTypes';
+
 import css from './HeroSection.css';
 
-const HeroSection = props => (
-  <section className={css.section}>
-    <div className={css.content}>
-      <div className={css.titleWrapper}>
-        <div className={css.title}>
-          <FormattedMessage id="HeroSection.title" />
-        </div>
-        <div className={css.subTitle}>
-          <FormattedMessage id="HeroSection.subTitle" />
-        </div>
-      </div>
-      <div className={css.ctaWrapper}>
-        {props.children}
-      </div>
+const HeroSection = props => {
+  const { rootClassName, className, flattenedRoutes, history, location } = props;
+
+  const handleMobileSearchClick = () => {
+    const params = { mobilesearch: 'open' };
+    const path = `${location.pathname}?${stringify(params)}`;
+    history.push(path);
+  };
+
+  const handleSearchSubmit = values => {
+    const { search, selectedPlace } = values.location;
+    const { origin, bounds, country } = selectedPlace;
+    const searchParams = { address: search, origin, bounds, country };
+    history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
+  };
+
+  const classes = classNames(rootClassName || css.root, className);
+
+  return (
+    <div className={classes}>
+      <h1 className={css.heroMainTitle}>
+        <FormattedMessage id="HeroSection.title" />
+      </h1>
+      <p className={css.heroSubTitle}>
+        <FormattedMessage id="HeroSection.subTitle" />
+      </p>
+      <button className={css.mobileSearchButton} onClick={handleMobileSearchClick}>
+        <SearchIcon rootClassName={css.searchIcon} />
+        <FormattedMessage id="HeroSection.mobileSearchButtonText" />
+      </button>
+      <LocationSearchForm className={css.desktopSearchForm} onSubmit={handleSearchSubmit} />
     </div>
-  </section>
-);
+  );
+};
 
-HeroSection.defaultProps = { children: [] };
+HeroSection.defaultProps = { rootClassName: null, className: null };
 
-const { any } = PropTypes;
+const { string, shape, func, arrayOf } = PropTypes;
 
-HeroSection.propTypes = { children: any };
+HeroSection.propTypes = {
+  rootClassName: string,
+  className: string,
+
+  flattenedRoutes: arrayOf(propTypes.route).isRequired,
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
+  location: shape({
+    search: string.isRequired,
+  }).isRequired,
+};
 
 export default HeroSection;

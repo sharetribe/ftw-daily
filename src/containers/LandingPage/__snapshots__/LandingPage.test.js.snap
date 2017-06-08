@@ -1,10 +1,19 @@
 exports[`LandingPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   title="Landing page">
-  <HeroSection>
-    <ReduxForm
-      form="LandingPageSearchForm"
-      onSubmit={[Function]} />
-  </HeroSection>
+  <HeroSection
+    className={null}
+    flattenedRoutes={Array []}
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    location={
+      Object {
+        "search": "",
+      }
+    }
+    rootClassName={null} />
 </Connect(withRouter(PageLayout))>
 `;
