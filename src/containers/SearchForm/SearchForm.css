@@ -1,11 +1,7 @@
-.locationInput {
-  width: 100%;
-  background-color: white;
+@import '../../marketplace.css';
 
-  /* Font */
-  font-size: 16px;
-  letter-spacing: -0.4px;
-  font-weight: bold;
+.locationInput {
+  background-color: var(--matterColorLight);
 }
 
 .locationButton {

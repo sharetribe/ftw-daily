@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
-import { LocationAutocompleteInput } from '../../components';
+import { LocationAutocompleteInput, InputField } from '../../components';
 
 import css from './TopbarSearchForm.css';
 
@@ -28,16 +28,19 @@ const TopbarSearchFormComponent = props => {
   return (
     <form className={classes} onSubmit={preventFormSubmit}>
       <Field
-        name="location"
-        label="Location"
         className={isMobile ? css.mobileInputRoot : css.desktopInputRoot}
-        iconClassName={isMobile ? null : css.desktopIcon}
-        inputClassName={isMobile ? null : css.desktopInput}
-        predictionsClassName={isMobile ? css.mobilePredictions : css.desktopPredictions}
+        name="location"
         placeholder={intl.formatMessage({ id: 'TopbarSearchForm.placeholder' })}
-        format={null}
-        component={LocationAutocompleteInput}
         onChange={onChange}
+        format={null}
+        type="custom"
+        component={InputField}
+        inputComponent={LocationAutocompleteInput}
+        inputComponentProps={{
+          iconClassName: isMobile ? null : css.desktopIcon,
+          inputClassName: isMobile ? null : css.desktopInput,
+          predictionsClassName: isMobile ? css.mobilePredictions : css.desktopPredictions,
+        }}
       />
     </form>
   );

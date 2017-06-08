@@ -14,28 +14,6 @@ const KEY_CODE_TAB = 9;
 const DIRECTION_UP = 'up';
 const DIRECTION_DOWN = 'down';
 
-const Icon = () => (
-  <svg
-    className={css.iconSvg}
-    width="21"
-    height="22"
-    viewBox="0 0 21 22"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g
-      className={css.iconSvgGroup}
-      transform="matrix(-1 0 0 1 20 1)"
-      strokeWidth="2"
-      fill="none"
-      fillRule="evenodd"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M13 14l5.241 5.241" /><circle cx="7.5" cy="7.5" r="7.5" />
-    </g>
-  </svg>
-);
-
 // Renders the autocompletion prediction results in a list
 const LocationPredictionsList = props => {
   const {
@@ -107,7 +85,7 @@ LocationPredictionsList.propTypes = {
 // Get the current value with defaults from the given
 // LocationAutocompleteInput props.
 const currentValue = props => {
-  const value = props.input.value || {};
+  const value = props.value || {};
   const { search = '', predictions = [], selectedPlaceId = null, selectedPlace = null } = value;
   return { search, predictions, selectedPlaceId, selectedPlace };
 };
@@ -185,7 +163,7 @@ class LocationAutocompleteInput extends Component {
 
   // Handle input text change, fetch predictions if the value isn't empty
   onChange(e) {
-    const onChange = this.props.input.onChange;
+    const onChange = this.props.onChange;
     const { predictions } = currentValue(this.props);
     const newValue = e.target.value;
 
@@ -249,15 +227,15 @@ class LocationAutocompleteInput extends Component {
     const prediction = predictions[index];
     const placeId = prediction.place_id;
 
-    this.props.input.onChange({
-      ...this.props.input,
+    this.props.onChange({
+      ...this.props.value,
       selectedPlaceId: placeId,
       selectedPlace: null,
     });
 
     getPlaceDetails(placeId)
       .then(place => {
-        this.props.input.onChange({
+        this.props.onChange({
           search: prediction.description,
           predictions: [],
           selectedPlaceId: placeId,
@@ -267,8 +245,8 @@ class LocationAutocompleteInput extends Component {
       .catch(e => {
         // eslint-disable-next-line no-console
         console.error(e);
-        this.props.input.onChange({
-          ...this.props.input.value,
+        this.props.onChange({
+          ...this.props.value,
           selectedPlaceId: null,
           selectedPlace: null,
         });
@@ -282,7 +260,7 @@ class LocationAutocompleteInput extends Component {
     }
   }
   predict(search) {
-    const onChange = this.props.input.onChange;
+    const onChange = this.props.onChange;
     getPlacePredictions(search)
       .then(results => {
         const { search: currentSearch } = currentValue(this.props);
@@ -318,7 +296,7 @@ class LocationAutocompleteInput extends Component {
 
   finalizeSelection() {
     this.setState({ inputHasFocus: false, highlightedIndex: -1 });
-    this.props.input.onBlur(currentValue(this.props));
+    this.props.onBlur(currentValue(this.props));
   }
 
   handleOnBlur() {
@@ -342,13 +320,12 @@ class LocationAutocompleteInput extends Component {
       autoFocus,
       rootClassName,
       className,
-      iconClassName,
       inputClassName,
       predictionsClassName,
       placeholder,
-      input,
+      name,
+      onFocus,
     } = this.props;
-    const { name, onFocus } = input;
     const { search, predictions } = currentValue(this.props);
 
     const handleOnFocus = e => {
@@ -357,7 +334,6 @@ class LocationAutocompleteInput extends Component {
     };
 
     const rootClass = classNames(rootClassName || css.root, className);
-    const iconClass = classNames(css.icon, iconClassName);
     const inputClass = classNames(css.input, inputClassName);
     const predictionsClass = classNames(predictionsClassName);
 
@@ -369,9 +345,6 @@ class LocationAutocompleteInput extends Component {
 
     return (
       <div className={rootClass}>
-        <div className={iconClass}>
-          <Icon />
-        </div>
         <input
           className={inputClass}
           type="search"
@@ -413,21 +386,18 @@ LocationAutocompleteInput.propTypes = {
   autoFocus: bool,
   rootClassName: string,
   className: string,
-  iconClassName: string,
   inputClassName: string,
   predictionsClassName: string,
   placeholder: string,
-  input: shape({
-    name: string.isRequired,
-    value: shape({
-      search: string,
-      predictions: any,
-      selectedPlace: propTypes.place,
-    }),
-    onChange: func.isRequired,
-    onFocus: func.isRequired,
-    onBlur: func.isRequired,
-  }).isRequired,
+  name: string.isRequired,
+  value: shape({
+    search: string,
+    predictions: any,
+    selectedPlace: propTypes.place,
+  }),
+  onChange: func.isRequired,
+  onFocus: func.isRequired,
+  onBlur: func.isRequired,
 };
 
 export default LocationAutocompleteInput;

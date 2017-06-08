@@ -18,6 +18,7 @@ class InputField extends Component {
       inputRootClassName,
       errorRootClassName,
       inputComponent: InputComponent,
+      inputComponentProps,
       type,
       label,
       placeholder,
@@ -47,10 +48,12 @@ class InputField extends Component {
     // field has been touched and the validation has failed.
     const hasError = touched && invalid && error;
 
+    const isSuccess = valid;
+
     const classes = classNames(rootClassName || css.root, className);
     const labelClasses = labelRootClassName || css.label;
     const inputClasses = classNames(inputRootClassName || css.input, {
-      [css.inputSuccess]: valid,
+      [css.inputSuccess]: isSuccess,
       [css.inputError]: hasError,
     });
     const errorClasses = errorRootClassName || css.validationError;
@@ -58,7 +61,14 @@ class InputField extends Component {
     let component;
 
     if (isCustom) {
-      component = <InputComponent className={inputRootClassName} {...inputPropsWithoutType} />;
+      component = (
+        <InputComponent
+          className={inputRootClassName}
+          inputClassName={inputClasses}
+          {...inputPropsWithoutType}
+          {...inputComponentProps}
+        />
+      );
     } else if (isTextarea) {
       component = <textarea className={inputClasses} {...inputPropsWithoutType} />;
     } else {
@@ -83,13 +93,14 @@ InputField.defaultProps = {
   errorRootClassName: null,
   clearOnUnmount: false,
   inputComponent: null,
+  inputComponentProps: null,
   type: null,
   label: null,
   placeholder: null,
   autoFocus: false,
 };
 
-const { string, shape, bool, func, oneOfType } = PropTypes;
+const { string, shape, bool, func, oneOfType, object } = PropTypes;
 
 InputField.propTypes = {
   // Allow passing in classes to subcomponents
@@ -103,6 +114,7 @@ InputField.propTypes = {
 
   // If the type props is 'custom', this prop is used as the component
   inputComponent: oneOfType([func, string]),
+  inputComponentProps: object,
 
   // 'custom', 'textarea', or something passed to an <input> element
   type: string,

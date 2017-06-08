@@ -35,7 +35,8 @@
   /* modals and UI overlays should use z-indexes above 100 */
   --zIndexModal: 100;
 
-  /* Border radius */
+  /* Borders */
+  --inputBorderWidth: 3px;
   --borderRadius: 2px;
 
   /* Transitions */
@@ -273,7 +274,7 @@ textarea {
 
   /* Borders */
   border: none;
-  border-bottom-width: 3px;
+  border-bottom-width: var(--inputBorderWidth);
   border-bottom-style: solid;
   border-bottom-color: var(--marketplaceColor);
   border-radius: 0;
@@ -288,7 +289,7 @@ input {
   width: 100%;
 
   border: none;
-  border-bottom-width: 3px;
+  border-bottom-width: var(--inputBorderWidth);
   border-bottom-style: solid;
   border-bottom-color: var(--marketplaceColor);
   border-radius: 0;
