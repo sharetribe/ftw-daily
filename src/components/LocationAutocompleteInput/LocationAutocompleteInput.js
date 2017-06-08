@@ -13,6 +13,7 @@ const KEY_CODE_ENTER = 13;
 const KEY_CODE_TAB = 9;
 const DIRECTION_UP = 'up';
 const DIRECTION_DOWN = 'down';
+const TOUCH_TAP_RADIUS = 5; // Movement within 5px from touch start is considered a tap
 
 const Icon = () => (
   <svg
@@ -36,6 +37,12 @@ const Icon = () => (
   </svg>
 );
 
+// Touch devices need to be able to distinguish touches for scrolling and touches to tap
+const getTouchCoordinates = nativeEvent => {
+  const touch = nativeEvent && nativeEvent.changedTouches ? nativeEvent.changedTouches[0] : null;
+  return touch ? { x: touch.screenX, y: touch.screenY } : null;
+};
+
 // Renders the autocompletion prediction results in a list
 const LocationPredictionsList = props => {
   const {
@@ -44,6 +51,7 @@ const LocationPredictionsList = props => {
     predictions,
     highlightedIndex,
     onSelectStart,
+    onSelectMove,
     onSelectEnd,
   } = props;
   if (predictions.length === 0) {
@@ -58,8 +66,9 @@ const LocationPredictionsList = props => {
       <li
         className={isHighlighted ? css.highlighted : null}
         key={prediction.id}
-        onTouchStart={onSelectStart}
-        onMouseDown={onSelectStart}
+        onTouchStart={e => onSelectStart(getTouchCoordinates(e.nativeEvent))}
+        onMouseDown={() => onSelectStart()}
+        onTouchMove={e => onSelectMove(getTouchCoordinates(e.nativeEvent))}
         onTouchEnd={() => onSelectEnd(index)}
         onMouseUp={() => onSelectEnd(index)}
       >
@@ -101,6 +110,7 @@ LocationPredictionsList.propTypes = {
   ).isRequired,
   highlightedIndex: number,
   onSelectStart: func.isRequired,
+  onSelectMove: func.isRequired,
   onSelectEnd: func.isRequired,
 };
 
@@ -135,6 +145,7 @@ class LocationAutocompleteInput extends Component {
     this.state = {
       inputHasFocus: false,
       selectionInProgress: false,
+      touchStartedFrom: null,
       highlightedIndex: -1, // -1 means no highlight
     };
 
@@ -145,6 +156,7 @@ class LocationAutocompleteInput extends Component {
     this.onChange = this.onChange.bind(this);
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.handlePredictionsSelectStart = this.handlePredictionsSelectStart.bind(this);
+    this.handlePredictionsSelectMove = this.handlePredictionsSelectMove.bind(this);
     this.handlePredictionsSelectEnd = this.handlePredictionsSelectEnd.bind(this);
     this.finalizeSelection = this.finalizeSelection.bind(this);
 
@@ -327,14 +339,34 @@ class LocationAutocompleteInput extends Component {
     }
   }
 
-  handlePredictionsSelectStart() {
-    this.setState({ selectionInProgress: true });
+  handlePredictionsSelectStart(touchCoordinates) {
+    this.setState({
+      selectionInProgress: true,
+      touchStartedFrom: touchCoordinates,
+      isSwipe: false,
+    });
+  }
+
+  handlePredictionsSelectMove(touchCoordinates) {
+    this.setState(prevState => {
+      const touchStartedFrom = prevState.touchStartedFrom;
+      const isTouchAction = !!touchStartedFrom;
+      const isSwipe = isTouchAction
+        ? Math.abs(touchStartedFrom.y - touchCoordinates.y) > TOUCH_TAP_RADIUS
+        : false;
+
+      return { selectionInProgress: false, isSwipe };
+    });
   }
 
   handlePredictionsSelectEnd(index) {
-    this.setState({ selectionInProgress: false });
-    this.selectItem(index);
-    this.finalizeSelection();
+    this.setState(prevState => {
+      if (!prevState.isSwipe) {
+        this.selectItem(index);
+        this.finalizeSelection();
+      }
+      return { selectionInProgress: false, touchStartedFrom: null, isSwipe: false };
+    });
   }
 
   render() {
@@ -391,6 +423,7 @@ class LocationAutocompleteInput extends Component {
               predictions={predictions}
               highlightedIndex={this.state.highlightedIndex}
               onSelectStart={this.handlePredictionsSelectStart}
+              onSelectMove={this.handlePredictionsSelectMove}
               onSelectEnd={this.handlePredictionsSelectEnd}
             />
           : null}

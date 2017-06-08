@@ -125,13 +125,19 @@ class TopbarComponent extends Component {
       <div className={css.root}>
         <div className={css.container}>
           <Button rootClassName={css.menu} onClick={this.handleMobileMenuOpen}>
-            <MenuIcon className={css.menuIcon} title={intl.formatMessage({ id: 'Topbar.menuIcon' })} />
+            <MenuIcon
+              className={css.menuIcon}
+              title={intl.formatMessage({ id: 'Topbar.menuIcon' })}
+            />
           </Button>
           <NamedLink className={css.home} name="LandingPage">
             <LogoIcon title={intl.formatMessage({ id: 'Topbar.logoIcon' })} />
           </NamedLink>
           <Button rootClassName={css.searchMenu} onClick={this.handleMobileSearchOpen}>
-            <SearchIcon className={css.searchMenuIcon} title={intl.formatMessage({ id: 'Topbar.searchIcon' })} />
+            <SearchIcon
+              className={css.searchMenuIcon}
+              title={intl.formatMessage({ id: 'Topbar.searchIcon' })}
+            />
           </Button>
         </div>
         <div className={css.desktop}>
