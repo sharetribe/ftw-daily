@@ -3,25 +3,23 @@ import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { Avatar } from '../../components';
 import * as propTypes from '../../util/propTypes';
+import { ensureUser } from '../../util/data';
 import css from './AuthorInfo.css';
 
 const AuthorInfo = props => {
   const { className, author } = props;
   const classes = classNames(css.root, className);
-  const currentAuthor = { id: null, type: 'user', attributes: {}, ...author };
-
-  const authorName = currentAuthor.attributes.profile
-    ? `${currentAuthor.attributes.profile.firstName} ${currentAuthor.attributes.profile.lastName}`
-    : '';
+  const currentAuthor = ensureUser(author);
+  const { firstName, lastName } = currentAuthor.attributes.profile;
 
   return (
     <div className={classes}>
       <div className={css.avatarWrapper}>
-        <Avatar name={authorName} />
+        <Avatar firstName={firstName} lastName={lastName} />
       </div>
       <div className={css.authorDetails}>
         <span className={css.authorName}>
-          <FormattedMessage id="AuthorInfo.host" values={{ authorName }} />
+          <FormattedMessage id="AuthorInfo.host" values={{ firstName, lastName }} />
         </span>
       </div>
     </div>
