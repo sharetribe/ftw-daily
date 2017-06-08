@@ -334,7 +334,7 @@ class LocationAutocompleteInput extends Component {
   }
 
   handleOnBlur() {
-    if (!this.state.selectionInProgress) {
+    if (this.props.closeOnBlur && !this.state.selectionInProgress) {
       this.finalizeSelection();
     }
   }
@@ -434,6 +434,7 @@ class LocationAutocompleteInput extends Component {
 
 LocationAutocompleteInput.defaultProps = {
   autoFocus: false,
+  closeOnBlur: true,
   rootClassName: null,
   className: null,
   iconClassName: null,
@@ -446,6 +447,7 @@ LocationAutocompleteInput.propTypes = {
   autoFocus: bool,
   rootClassName: string,
   className: string,
+  closeOnBlur: bool,
   iconClassName: string,
   inputClassName: string,
   predictionsClassName: string,

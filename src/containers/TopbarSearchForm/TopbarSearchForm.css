@@ -2,16 +2,26 @@
 
 :root {
   --inputHeight: 50px;
-  --topbarHeight: 72px;
+  --topbarMargin: 94px;
+  --bottomBorder: 3px;
+  --mobilePredictionTop: calc(var(--topbarMargin) + var(--inputHeight) - var(--bottomBorder));
 }
 
 .mobileInputRoot {
-  margin-left: 24px;
-  margin-right: 24px;
+  width: 100%;
 }
 
 .desktopInputRoot {
-  height: var(--topbarHeight);
+  height: var(--topbarMargin);
+}
+
+
+.mobileIcon {
+  margin-left: 24px;
+}
+
+.mobileInput {
+  margin-right: 24px;
 }
 
 .desktopIcon {
@@ -19,21 +29,20 @@
 }
 
 .desktopInput {
-  height: var(--topbarHeight);
+  height: var(--topbarMargin);
   border: none;
   padding-top: 0;
-  padding-bottom: 3px;
+  padding-bottom: var(--bottomBorder);
 }
 
 .mobilePredictions {
-  position: fixed;
-  top: 113px;
+  position: absolute;
+  top: calc(var(--inputHeight) - var(--bottomBorder));
   left: 0;
-  right: 0;
-  bottom: 0;
+  min-height: calc(100vh - var(--mobilePredictionTop));
 }
 
 .desktopPredictions {
-  margin-top: calc(var(--topbarHeight) - var(--inputHeight));
+  margin-top: calc(var(--topbarMargin) - var(--inputHeight));
   max-width: 434px;
 }

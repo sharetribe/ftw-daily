@@ -31,12 +31,13 @@ const TopbarSearchFormComponent = props => {
         name="location"
         label="Location"
         className={isMobile ? css.mobileInputRoot : css.desktopInputRoot}
-        iconClassName={isMobile ? null : css.desktopIcon}
-        inputClassName={isMobile ? null : css.desktopInput}
+        iconClassName={isMobile ? css.mobileIcon : css.desktopIcon}
+        inputClassName={isMobile ? css.mobileInput : css.desktopInput}
         predictionsClassName={isMobile ? css.mobilePredictions : css.desktopPredictions}
         placeholder={intl.formatMessage({ id: 'TopbarSearchForm.placeholder' })}
         format={null}
         component={LocationAutocompleteInput}
+        closeOnBlur={!isMobile}
         onChange={onChange}
       />
     </form>
