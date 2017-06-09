@@ -53,10 +53,12 @@
 }
 
 .searchIcon {
+  vertical-align: top;
   stroke: var(--matterColorLight);
   width: 16px;
   height: 16px;
   margin-right: 10px;
+  margin-top: 5px;
 }
 
 .desktopSearchForm {
