@@ -35,7 +35,6 @@ import * as EditListingPhotosForm
   from './containers/EditListingPhotosForm/EditListingPhotosForm.example';
 import * as EditListingPricingForm
   from './containers/EditListingPricingForm/EditListingPricingForm.example';
-import * as SearchForm from './containers/SearchForm/SearchForm.example';
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
 import * as PasswordForgottenForm
   from './containers/PasswordForgottenForm/PasswordForgottenForm.example';
@@ -71,7 +70,6 @@ export {
   PaginationLinks,
   PasswordForgottenForm,
   PayoutDetailsForm,
-  SearchForm,
   SignupForm,
   StripeBankAccountToken,
   StripePaymentForm,

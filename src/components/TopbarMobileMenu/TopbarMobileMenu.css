@@ -26,7 +26,7 @@
 
 .avatar {
   flex-shrink: 0;
-  margin-top: 72px;
+  margin-top: 96px;
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -51,6 +51,7 @@
 .logoutButton {
   /* Position component */
   margin: 6px 0;
+  width: initial;
 
   /* Logout font is smaller and gray since the action is not recommended. */
   composes: h3Font from '../../marketplace.css';

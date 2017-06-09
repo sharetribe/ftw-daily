@@ -1,55 +1,72 @@
-.section {
-  width: 100%;
-  min-height: calc(100vh - 60px);
-  background-image: url("data:image/svg+xml;utf8,<svg width='375' height='240' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'><g fill='none' fill-rule='evenodd'><path fill='#D8D8D8' d='M0 0h375v240H0z' vector-effect='non-scaling-stroke'/><path d='M375 0l-375 240M.5.5l375 240' stroke='#979797' stroke-linecap='square' vector-effect='non-scaling-stroke'/></g></svg>");
-  background-size: 100% 100%;
-  background-position: center;
+@import '../../marketplace.css';
 
-  display: flex;
-  justify-content: center;
+:root {
+  --desktopTitleMaxWidth: 625px;
 }
 
-.content {
+.root {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  background-color: var(--matterColor);
+  background-image: url(./background.jpg);
+  background-size: cover;
+  background-position-y: center;
+
+  /*
+   This value is specific to the given image. The value is the
+   relative position of the interesting area in the x axis, counted
+   from the left side of the image.
+
+   In the default image, this means the person sitting in the
+   sauna. This value ensures the person is approximately centered in
+   the viewport when the browser width changes.
+  */
+  background-position-x: 80%;
 }
 
-.titleWrapper {
-  text-align: center;
+.heroMainTitle {
+  composes: heroTitle from '../../marketplace.css';
+  color: var(--matterColorLight);
+  margin-top: auto;
+  margin-bottom: 12px;
 
-  /* Mobile padding */
-  margin-left: 24px; /* Number out of my head, not sure if it's the right one */
-  margin-right: 24px; /* Number out of my head, not sure if it's the right one */
+  @media (--desktopViewport) {
+    max-width: var(--desktopTitleMaxWidth);
+  }
 }
 
-.title {
-  /* Font */
-  font-size: 24px;
-  letter-spacing: -0.6px;
-  font-weight: bold;
+.heroSubTitle {
+  color: var(--matterColorLight);
+  margin-bottom: 47px;
 
-  /* Mobile padding */
-  margin-top: 64px;
-  margin-bottom: 4px;
-
-}
-.subTitle {
-  /* Font */
-  font-size: 20px;
-  letter-spacing: -0.5px;
-  font-weight: bold;
-
-  /* Mobile padding */
-  margin-bottom: 48px;
+  @media (--desktopViewport) {
+    max-width: var(--desktopTitleMaxWidth);
+  }
 }
 
-.ctaWrapper {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  align-items: center;
+.mobileSearchButton {
+  border-radius: 4px;
 
-  /* Mobile dimensions */
-  width: 235px;
+  @media (--desktopViewport) {
+    display: none;
+  }
+}
+
+.searchIcon {
+  vertical-align: top;
+  stroke: var(--matterColorLight);
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.desktopSearchForm {
+  display: none;
+  background-color: var(--matterColorLight);
+
+  @media (--desktopViewport) {
+    display: block;
+    width: 400px;
+  }
 }

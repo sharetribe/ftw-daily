@@ -1,27 +1,89 @@
 exports[`HeroSection matches snapshot 1`] = `
-<section
-  className={undefined}>
-  <div
+<div
+  className="">
+  <h1
     className={undefined}>
+    <span>
+      Book saunas everywhere.
+    </span>
+  </h1>
+  <p
+    className={undefined}>
+    <span>
+      The largest online community to rent saunas in Finland.
+    </span>
+  </p>
+  <button
+    className={undefined}
+    onClick={[Function]}>
+    <svg
+      className=""
+      height="22"
+      viewBox="0 0 21 22"
+      width="21"
+      xmlns="http://www.w3.org/2000/svg">
+      <g
+        fill="none"
+        fillRule="evenodd"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        transform="matrix(-1 0 0 1 20 1)">
+        <path
+          d="M13 14l5.241 5.241" />
+        <circle
+          cx="7.5"
+          cy="7.5"
+          r="7.5" />
+      </g>
+    </svg>
+    <span>
+      Search saunas
+    </span>
+  </button>
+  <form
+    className=""
+    onSubmit={[Function]}>
     <div
-      className={undefined}>
+      className="">
       <div
-        className={undefined}>
-        <span>
-          Book Studiotime anywhere
-        </span>
+        className="">
+        <svg
+          className={undefined}
+          height="22"
+          viewBox="0 0 21 22"
+          width="21"
+          xmlns="http://www.w3.org/2000/svg">
+          <g
+            className={undefined}
+            fill="none"
+            fillRule="evenodd"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            transform="matrix(-1 0 0 1 20 1)">
+            <path
+              d="M13 14l5.241 5.241" />
+            <circle
+              cx="7.5"
+              cy="7.5"
+              r="7.5" />
+          </g>
+        </svg>
       </div>
-      <div
-        className={undefined}>
-        <span>
-          The largest online community to rent music studios
-        </span>
-      </div>
+      <input
+        autoComplete="off"
+        autoFocus={false}
+        className=""
+        name="location"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Search saunas..."
+        type="search"
+        value="" />
     </div>
-    <div
-      className={undefined}>
-      test
-    </div>
-  </div>
-</section>
+  </form>
+</div>
 `;

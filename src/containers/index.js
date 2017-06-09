@@ -13,6 +13,7 @@ import EditProfilePage from './EditProfilePage/EditProfilePage';
 import InboxPage from './InboxPage/InboxPage';
 import LandingPage from './LandingPage/LandingPage';
 import ListingPage from './ListingPage/ListingPage';
+import LocationSearchForm from './LocationSearchForm/LocationSearchForm';
 import LoginForm from './LoginForm/LoginForm';
 import ManageListingsPage from './ManageListingsPage/ManageListingsPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
@@ -24,7 +25,6 @@ import PayoutDetailsForm from './PayoutDetailsForm/PayoutDetailsForm';
 import PayoutPreferencesPage from './PayoutPreferencesPage/PayoutPreferencesPage';
 import ProfilePage from './ProfilePage/ProfilePage';
 import SalePage from './SalePage/SalePage';
-import SearchForm from './SearchForm/SearchForm';
 import SearchPage from './SearchPage/SearchPage';
 import SecurityPage from './SecurityPage/SecurityPage';
 import SignupForm from './SignupForm/SignupForm';
@@ -49,6 +49,7 @@ export {
   InboxPage,
   LandingPage,
   ListingPage,
+  LocationSearchForm,
   LoginForm,
   ManageListingsPage,
   NotFoundPage,
@@ -60,7 +61,6 @@ export {
   PayoutPreferencesPage,
   ProfilePage,
   SalePage,
-  SearchForm,
   SearchPage,
   SecurityPage,
   SignupForm,
