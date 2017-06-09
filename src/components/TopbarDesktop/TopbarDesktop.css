@@ -26,14 +26,14 @@
  */
 .topbarDesktopLabel {
   display: inline-block;
-  margin: 20px 0;
+  margin: 24px 0;
   text-decoration: inherit;
 }
 
 /* logo */
 .logoLink {
   flex-shrink: 0;
-  padding: 16px 0 23px 0;
+  padding: 21px 0;
   height: 100%;
   margin-right: 24px;
 }
@@ -87,6 +87,8 @@
   display: flex;
   align-items: center;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .avatar {
@@ -119,11 +121,17 @@
 
 .logoutButton {
   width: 100%;
+  margin: 0;
   padding: 20px 24px;
   composes: h4Font from '../../marketplace.css';
   composes: textColor from '../../marketplace.css';
   text-align: left;
   white-space: nowrap;
+
+  &:hover,
+  &:active {
+    box-shadow: none;
+  }
 
   &:focus {
     outline: none;

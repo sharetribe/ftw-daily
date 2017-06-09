@@ -40,6 +40,7 @@
 
   /* Sizing (touch area) */
   padding: 24px;
+  margin: 0;
   border: 0;
 
   /* Colors */
@@ -65,12 +66,13 @@
 .closeText {
   /* Font */
   composes: h6Font from '../../marketplace.css';
+  margin: 0;
 }
 
 .closeIcon {
   display: inline-block;
   margin-left: 12px;
-  padding: 6px 0 6px;
+  padding: 2px 0 4px;
   box-sizing: content-box;
 }
 
