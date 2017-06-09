@@ -22,6 +22,9 @@
 
 .mobileInput {
   margin: 0 24px 0 0;
+  padding: 1px 13px 13px 13px;
+  height: auto;
+  composes: h1Font from '../../marketplace.css';
 }
 
 .desktopIcon {
