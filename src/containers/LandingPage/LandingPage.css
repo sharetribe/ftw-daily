@@ -6,7 +6,7 @@
 
 .hero {
   height: calc(100vh - var(--topbarHeight));
-  padding: 0 24px 26px 24px;
+  padding: 0 24px 98px 24px;
 
   @media (--desktopViewport) {
     height: calc(100vh - var(--topbarHeightDesktop));

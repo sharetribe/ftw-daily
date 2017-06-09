@@ -26,6 +26,7 @@
 
 .iconSvgGroup {
   stroke: var(--marketplaceColor);
+  stroke-width: 2.5px;
 }
 
 .input {

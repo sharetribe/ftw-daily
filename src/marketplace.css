@@ -89,7 +89,7 @@ h1, h2, h3, h4, h5, h6, p, pre {
 h1,
 .h1Font {
   font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 600; /* SemiBold */
+  font-weight: 700; /* SemiBold */
   font-size: 30px;
   line-height: 36px;
   letter-spacing: -0.5px;
@@ -359,7 +359,7 @@ button {
 
   /* Dimensions */
   width: 100%;
-  padding: 13px 0;
+  padding: 17px 0 20px;
   margin: 0;
 
   /* Colors */

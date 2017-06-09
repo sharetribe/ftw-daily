@@ -66,12 +66,12 @@
 .closeText {
   /* Font */
   composes: h6Font from '../../marketplace.css';
-  margin: 0;
+  margin: -2.5px 0 0;
 }
 
 .closeIcon {
   display: inline-block;
-  margin-left: 12px;
+  margin-left: 8px;
   padding: 2px 0 4px;
   box-sizing: content-box;
 }
