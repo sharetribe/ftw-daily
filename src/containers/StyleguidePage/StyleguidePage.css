@@ -91,10 +91,10 @@
 .fontsContainer {
   display: flex;
   flex-wrap: wrap;
-  margin-top: calc(4 * var(--spacingUnit));
+  margin-top: 15px;
 
   @media (--desktopViewport) {
-    margin-top: calc(3 * var(--spacingUnitDesktop));
+    margin-top: 19px;
   }
 }
 

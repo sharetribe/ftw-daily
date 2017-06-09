@@ -32,6 +32,7 @@
   flex-grow: 1;
   height: var(--inputHeight);
   padding-left: 18px;
+  margin: 0;
 }
 
 /*

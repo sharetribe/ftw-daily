@@ -28,7 +28,7 @@
   composes: heroTitle from '../../marketplace.css';
   color: var(--matterColorLight);
   margin-top: auto;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 
   @media (--desktopViewport) {
     max-width: var(--desktopTitleMaxWidth);
@@ -38,6 +38,7 @@
 .heroSubTitle {
   color: var(--matterColorLight);
   margin-bottom: 47px;
+  margin-top: 0;
 
   @media (--desktopViewport) {
     max-width: var(--desktopTitleMaxWidth);
