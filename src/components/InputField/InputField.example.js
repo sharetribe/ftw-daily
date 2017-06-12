@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
-import { Button } from '../../components';
 import * as validators from '../../util/validators';
 import InputField from './InputField';
 
@@ -47,7 +46,7 @@ const FormComponent = props => {
         validate={required}
         component={InputField}
       />
-      <Button type="submit" disabled={submitDisabled} style={buttonStyles}>Submit form</Button>
+      <button type="submit" disabled={submitDisabled} style={buttonStyles}>Submit form</button>
     </form>
   );
 };

@@ -51,7 +51,7 @@
   background-color: transparent;
 
   /* Font */
-  composes: h5Font from '../../marketplace.css';
+  @apply --marketplaceH5FontStyles;
   color: var(--matterColor);
 
   /* Hovers */

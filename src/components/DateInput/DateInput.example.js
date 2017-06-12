@@ -2,7 +2,6 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import moment from 'moment';
-import { Button } from '../../components';
 import { required } from '../../util/validators';
 import DateInput from './DateInput';
 import css from './DateInput.example.css';
@@ -45,9 +44,9 @@ const FormComponent = props => {
         {...dateInputProps}
         validate={[required('Required')]}
       />
-      <Button type="submit" disabled={pristine || submitting} className={css.submitBtn}>
+      <button type="submit" disabled={pristine || submitting} className={css.submitBtn}>
         Select
-      </Button>
+      </button>
     </form>
   );
 };
@@ -73,5 +72,5 @@ export const Empty = {
       console.log('Submitting a form with values:', v);
     },
   },
-  group: 'inputs',
+  group: 'custom inputs',
 };

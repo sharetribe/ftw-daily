@@ -25,7 +25,7 @@
 }
 
 .heroMainTitle {
-  composes: heroTitle from '../../marketplace.css';
+  @apply --marketplaceHeroTitleFontStyles;
   color: var(--matterColorLight);
   margin-top: auto;
   margin-bottom: 24px;

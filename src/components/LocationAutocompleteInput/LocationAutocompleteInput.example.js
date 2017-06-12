@@ -1,21 +1,36 @@
 import React, { Component } from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import * as propTypes from '../../util/propTypes';
-import { Button } from '../../components';
+import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../util/validators';
+import { enhancedField } from '../../util/forms';
 import LocationAutocompleteInput from './LocationAutocompleteInput';
 
-const FormComponent = props => {
-  const { handleSubmit, pristine, submitting } = props;
-  return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="location">Select location:</label>
-      <Field name="location" format={null} component={LocationAutocompleteInput} />
-      <Button type="submit" style={{ marginTop: '24px' }} disabled={pristine || submitting}>
-        Submit
-      </Button>
-    </form>
-  );
-};
+class FormComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.EnhancedLocationAutocompleteInput = enhancedField(LocationAutocompleteInput);
+  }
+  render() {
+    const { handleSubmit, pristine, submitting } = this.props;
+    return (
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="location">Select location:</label>
+        <Field
+          name="location"
+          format={null}
+          component={this.EnhancedLocationAutocompleteInput}
+          validate={[
+            autocompleteSearchRequired('Address required'),
+            autocompletePlaceSelected('Address not recognized'),
+          ]}
+        />
+        <button type="submit" style={{ marginTop: '24px' }} disabled={pristine || submitting}>
+          Submit
+        </button>
+      </form>
+    );
+  }
+}
 
 FormComponent.propTypes = formPropTypes;
 
@@ -67,5 +82,5 @@ class FormContainer extends Component {
 
 export const Empty = {
   component: FormContainer,
-  group: 'inputs',
+  group: 'custom inputs',
 };

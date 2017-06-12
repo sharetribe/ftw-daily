@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import React, { Component } from 'react';
-import { Button } from '../../components';
 import ModalInMobile from './ModalInMobile';
 import css from './ModalInMobile.example.css';
 
@@ -40,7 +39,7 @@ class ModalInMobileWrapper extends Component {
           </div>
         </ModalInMobile>
         <div style={{ margin: '1rem' }}>
-          <Button onClick={this.handleOpen} className={css.visibleOnMobileLayout}>Open</Button>
+          <button onClick={this.handleOpen} className={css.visibleOnMobileLayout}>Open</button>
         </div>
       </div>
     );

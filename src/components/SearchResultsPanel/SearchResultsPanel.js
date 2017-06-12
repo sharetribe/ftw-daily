@@ -1,23 +1,23 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
-import { Button, ListingCard } from '../../components';
+import { ListingCard } from '../../components';
 import css from './SearchResultsPanel.css';
 
 const SearchResultsPanel = props => {
   const { currencyConfig, listings, onNextPage, onPreviousPage } = props;
   const pagination = onNextPage || onPreviousPage
     ? <div className={css.pagination}>
-        <Button
+        <button
           onClick={() => onPreviousPage()}
           disabled={!onPreviousPage}
           className={css.prevPage}
         >
           <FormattedMessage id="SearchResultsPanel.previousPage" />
-        </Button>
-        <Button onClick={() => onNextPage()} disabled={!onNextPage} className={css.nextPage}>
+        </button>
+        <button onClick={() => onNextPage()} disabled={!onNextPage} className={css.nextPage}>
           <FormattedMessage id="SearchResultsPanel.nextPage" />
-        </Button>
+        </button>
       </div>
     : null;
 

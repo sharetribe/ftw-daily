@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { enhancedField } from '../../util/forms';
 import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../util/validators';
-import { LocationAutocompleteInput, Button, InputField } from '../../components';
+import { LocationAutocompleteInput, InputField } from '../../components';
 
 import css from './EditListingLocationForm.css';
 
@@ -70,13 +70,13 @@ export class EditListingLocationFormComponent extends Component {
           type="text"
         />
 
-        <Button
+        <button
           className={css.submitButton}
           type="submit"
           disabled={invalid || submitting || disabled}
         >
           {saveActionMsg}
-        </Button>
+        </button>
       </form>
     );
   }

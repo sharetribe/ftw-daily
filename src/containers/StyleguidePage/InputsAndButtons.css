@@ -1,0 +1,14 @@
+@import '../../marketplace.css';
+
+.withTopMargin {
+  margin-top: 24px;
+}
+
+.buttonThatLooksLikeLink {
+  @apply --marketplaceLinkStyles;
+  @apply --marketplaceDefaultFontStyles;
+}
+
+.linkThatLooksLikeButton {
+  @apply --marketplaceButtonStyles;
+}

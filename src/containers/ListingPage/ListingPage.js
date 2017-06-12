@@ -10,7 +10,7 @@ import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import { convertMoneyToNumber } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import { Avatar, Button, Map, ModalInMobile, PageLayout } from '../../components';
+import { Avatar, Map, ModalInMobile, PageLayout } from '../../components';
 import { BookingDatesForm } from '../../containers';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { showListing } from './ListingPage.duck';
@@ -212,9 +212,9 @@ export class ListingPageComponent extends Component {
           {map ? <div className={css.map}>{map}</div> : null}
           {showBookButton
             ? <div className={css.openBookingForm}>
-                <Button onClick={() => this.setState({ isBookingModalOpenOnMobile: true })}>
+                <button onClick={() => this.setState({ isBookingModalOpenOnMobile: true })}>
                   {bookBtnMessage}
-                </Button>
+                </button>
               </div>
             : null}
         </div>

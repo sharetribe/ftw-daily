@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { Button, Input } from '../../components';
+import { Input } from '../../components';
 
 import css from './Discussion.css';
 
@@ -57,7 +57,7 @@ class Discussion extends Component {
             value={this.state.message}
             onChange={this.handleOnChange}
           />
-          <Button className={css.sendMessageButton} type="submit">Send</Button>
+          <button className={css.sendMessageButton} type="submit">Send</button>
         </form>
       </div>
     );

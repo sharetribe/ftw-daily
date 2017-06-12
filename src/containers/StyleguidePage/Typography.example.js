@@ -131,7 +131,7 @@ const Fonts = () => {
       <div className={fontsContainerClasses}>
         <Font
           component={() => (
-            <p className={mpStyle.heroTitle}>
+            <p className={css.heroTitle}>
               Hello beautiful world.
             </p>
           )}
@@ -176,7 +176,7 @@ const Fonts = () => {
               Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
             </p>
           )}
-          description=".bodyFont, p, button, etc: Paragraphs and other body texts."
+          description=".marketplaceBodyFont, p, button, etc: Paragraphs and other body texts."
           styling={bodyFontStyling}
         />
         <Font

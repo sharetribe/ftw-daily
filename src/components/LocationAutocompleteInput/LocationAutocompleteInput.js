@@ -24,7 +24,6 @@ const Icon = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <g
-      className={css.iconSvgGroup}
       transform="matrix(-1 0 0 1 20 1)"
       strokeWidth="2"
       fill="none"
@@ -377,6 +376,7 @@ class LocationAutocompleteInput extends Component {
       iconClassName,
       inputClassName,
       predictionsClassName,
+      showSearchIcon,
       placeholder,
       input,
     } = this.props;
@@ -393,30 +393,36 @@ class LocationAutocompleteInput extends Component {
     const inputClass = classNames(css.input, inputClassName);
     const predictionsClass = classNames(predictionsClassName);
 
+    const icon = showSearchIcon
+      ? <div className={iconClass}>
+          <Icon />
+        </div>
+      : null;
+
     // Only render predictions when the input has focus. For
     // development and easier workflow with the browser devtools, you
     // might want to hardcode this to `true`. Otherwise the dropdown
     // list will disappear.
-    const renderPredictions = this.state.inputHasFocus;
+    const renderPredictions = true; //this.state.inputHasFocus;
 
     return (
       <div className={rootClass}>
-        <div className={iconClass}>
-          <Icon />
+        <div className={css.inputWrapper}>
+          {icon}
+          <input
+            className={inputClass}
+            type="search"
+            autoComplete="off"
+            autoFocus={autoFocus}
+            placeholder={placeholder}
+            name={name}
+            value={search}
+            onFocus={handleOnFocus}
+            onBlur={this.handleOnBlur}
+            onChange={this.onChange}
+            onKeyDown={this.onKeyDown}
+          />
         </div>
-        <input
-          className={inputClass}
-          type="search"
-          autoComplete="off"
-          autoFocus={autoFocus}
-          placeholder={placeholder}
-          name={name}
-          value={search}
-          onFocus={handleOnFocus}
-          onBlur={this.handleOnBlur}
-          onChange={this.onChange}
-          onKeyDown={this.onKeyDown}
-        />
         {renderPredictions
           ? <LocationPredictionsList
               className={predictionsClass}
@@ -440,6 +446,7 @@ LocationAutocompleteInput.defaultProps = {
   iconClassName: null,
   inputClassName: null,
   predictionsClassName: null,
+  showSearchIcon: false,
   placeholder: '',
 };
 
@@ -452,6 +459,7 @@ LocationAutocompleteInput.propTypes = {
   inputClassName: string,
   predictionsClassName: string,
   placeholder: string,
+  showSearchIcon: bool,
   input: shape({
     name: string.isRequired,
     value: shape({

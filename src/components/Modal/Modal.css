@@ -64,8 +64,7 @@
 }
 
 .closeText {
-  /* Font */
-  composes: h6Font from '../../marketplace.css';
+  @apply --marketplaceH6FontStyles;
   margin: 0;
 }
 

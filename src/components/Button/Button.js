@@ -26,8 +26,6 @@ Button.propTypes = {
   rootClassName: string,
 };
 
-export default Button;
-
 export const FlatButton = props => <Button {...props} rootClassName={css.flatButton} />;
 FlatButton.defaultProps = { className: '' };
 FlatButton.propTypes = { className: string };
