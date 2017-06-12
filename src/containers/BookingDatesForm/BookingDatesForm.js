@@ -7,7 +7,7 @@ import { isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
 import moment from 'moment';
 import { types } from '../../util/sdkLoader';
 import { required } from '../../util/validators';
-import { Button, BookingInfo, DateInput } from '../../components';
+import { BookingInfo, DateInput } from '../../components';
 import css from './BookingDatesForm.css';
 
 const EnhancedDateInput = props => {
@@ -115,9 +115,9 @@ export const BookingDatesFormComponent = props => {
       <p className={css.smallPrint}>
         <FormattedMessage id="BookingDatesForm.youWontBeChargedInfo" />
       </p>
-      <Button type="submit" disabled={pristine || submitting || invalid}>
+      <button type="submit" disabled={pristine || submitting || invalid}>
         <FormattedMessage id="BookingDatesForm.requestToBook" />
-      </Button>
+      </button>
     </form>
   );
 };

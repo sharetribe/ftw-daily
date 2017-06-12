@@ -11,7 +11,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
-import { Button, CloseIcon } from '../../components';
+import { CloseIcon } from '../../components';
 
 import css from './Modal.css';
 
@@ -50,10 +50,10 @@ export class ModalComponent extends Component {
 
     const closeModalMessage = intl.formatMessage({ id: 'Modal.closeModal' });
     const closeBtn = isOpen
-      ? <Button onClick={this.handleClose} rootClassName={css.close} title={closeModalMessage}>
+      ? <button onClick={this.handleClose} rootClassName={css.close} title={closeModalMessage}>
           <span className={css.closeText}><FormattedMessage id="Modal.close" /></span>
           <CloseIcon rootClassName={css.closeIcon} />
-        </Button>
+        </button>
       : null;
 
     // Modal uses given styles to wrap child components.

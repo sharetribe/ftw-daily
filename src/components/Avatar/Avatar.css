@@ -17,5 +17,5 @@
   /* Font is specific to this component, but defining it in marketplace.css makes it easier
    * to change font if brand look-and-feel needs such changes.
    */
-  composes: smallAvatarFont from '../../marketplace.css';
+  @apply --marketplaceSmallAvatarFontStyles;
 }

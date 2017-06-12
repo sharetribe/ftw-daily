@@ -9,30 +9,27 @@
 
 .root {
   position: relative;
-  display: flex;
+}
+
+.inputWrapper {
+
 }
 
 .icon {
-  display: flex;
-  width: 24px;
-  align-self: stretch;
-  border-bottom: 3px solid var(--marketplaceColor);
-  background-color: var(--matterColorLight);
+  /* display: flex; */
+  /* width: 24px; */
+  /* align-self: stretch; */
+  /* border-bottom: 3px solid var(--marketplaceColor); */
+  /* background-color: var(--matterColorLight); */
 }
 
 .iconSvg {
-  margin: auto;
-}
-
-.iconSvgGroup {
-  stroke: var(--marketplaceColor);
+  /* margin: auto; */
+  /* stroke: var(--marketplaceColor); */
 }
 
 .input {
-  flex-grow: 1;
-  height: var(--inputHeight);
-  padding-left: 18px;
-  margin: 0;
+
 }
 
 /*
@@ -42,14 +39,15 @@ size and position, etc.
 .predictionsRoot {
   position: absolute;
   width: 100%;
+  margin-top: -3px;
   padding-bottom: 98px;
-  top: var(--inputHeight);
-  left: 0;
+  /* top: initial; */
+  /* left: 0; */
   background-color: var(--marketplaceColor);
   border-bottom-left-radius: var(--borderRadius);
   border-bottom-right-radius: var(--borderRadius);
   box-shadow: var(--boxShadowPopup);
-  z-index: var(--zIndexPopup + 1);
+  z-index: calc(var(--zIndexPopup) + 1);
 }
 
 /*
@@ -73,7 +71,7 @@ bottom of the container.
 
 /* List of predictions, with a responsive padding size */
 .predictions {
-  composes: searchResultsFont from '../../marketplace.css';
+  @apply --marketplaceBodyFontStyles;
 
   margin: 0;
   padding: 14px 0;

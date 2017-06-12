@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { Button, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
+import { Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
 import { TopbarSearchForm } from '../../containers';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
@@ -124,21 +124,21 @@ class TopbarComponent extends Component {
     return (
       <div className={css.root}>
         <div className={css.container}>
-          <Button rootClassName={css.menu} onClick={this.handleMobileMenuOpen}>
+          <button rootClassName={css.menu} onClick={this.handleMobileMenuOpen}>
             <MenuIcon
               className={css.menuIcon}
               title={intl.formatMessage({ id: 'Topbar.menuIcon' })}
             />
-          </Button>
+          </button>
           <NamedLink className={css.home} name="LandingPage">
             <LogoIcon title={intl.formatMessage({ id: 'Topbar.logoIcon' })} />
           </NamedLink>
-          <Button rootClassName={css.searchMenu} onClick={this.handleMobileSearchOpen}>
+          <button rootClassName={css.searchMenu} onClick={this.handleMobileSearchOpen}>
             <SearchIcon
               className={css.searchMenuIcon}
               title={intl.formatMessage({ id: 'Topbar.searchIcon' })}
             />
-          </Button>
+          </button>
         </div>
         <div className={css.desktop}>
           <TopbarDesktop

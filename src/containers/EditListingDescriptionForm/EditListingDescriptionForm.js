@@ -4,7 +4,7 @@ import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import { maxLength, required } from '../../util/validators';
-import { Button, InputField } from '../../components';
+import { InputField } from '../../components';
 
 import css from './EditListingDescriptionForm.css';
 
@@ -67,13 +67,13 @@ const EditListingDescriptionFormComponent = props => {
         validate={[required(descriptionRequiredMessage)]}
       />
 
-      <Button
+      <button
         className={css.submitButton}
         type="submit"
         disabled={invalid || submitting || disabled}
       >
         {saveActionMsg}
-      </Button>
+      </button>
     </form>
   );
 };

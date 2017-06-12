@@ -35,6 +35,7 @@ import * as EditListingPhotosForm
   from './containers/EditListingPhotosForm/EditListingPhotosForm.example';
 import * as EditListingPricingForm
   from './containers/EditListingPricingForm/EditListingPricingForm.example';
+import * as InputsAndButtons from './containers/StyleguidePage/InputsAndButtons.example';
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
 import * as PasswordForgottenForm
   from './containers/PasswordForgottenForm/PasswordForgottenForm.example';
@@ -59,6 +60,7 @@ export {
   EditListingPricingForm,
   EditListingWizard,
   InputField,
+  InputsAndButtons,
   ListingCard,
   LocationAutocompleteInput,
   LoginForm,

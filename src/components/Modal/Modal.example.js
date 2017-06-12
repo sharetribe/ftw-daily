@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import React, { Component } from 'react';
-import { Button } from '../../components';
 import Modal from './Modal';
 
 const togglePageClassNames = (className, addClass = true) => {
@@ -37,7 +36,7 @@ class ModalWrapper extends Component {
           <div style={{ margin: '1rem' }}>Some content inside Modal component</div>
         </Modal>
         <div style={{ margin: '1rem' }}>
-          <Button onClick={this.handleOpen}>Open</Button>
+          <button onClick={this.handleOpen}>Open</button>
         </div>
       </div>
     );

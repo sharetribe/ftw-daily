@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import config from '../../config';
 import { enhancedField } from '../../util/forms';
 import { required } from '../../util/validators';
-import { CurrencyInput, Button } from '../../components';
+import { CurrencyInput } from '../../components';
 
 import css from './EditListingPricingForm.css';
 
@@ -50,13 +50,13 @@ export class EditListingPricingFormComponent extends Component {
           </div>
         </div>
 
-        <Button
+        <button
           className={css.submitButton}
           type="submit"
           disabled={invalid || submitting || disabled}
         >
           {saveActionMsg}
-        </Button>
+        </button>
       </form>
     );
   }

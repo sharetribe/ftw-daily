@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
-import { Button } from '../../components';
 import StripeBankAccountToken from './StripeBankAccountToken';
 import { required } from '../../util/validators';
 import config from '../../config';
@@ -31,9 +30,9 @@ const FormComponent = props => {
             validate={required('Bank account number required')}
           />
         : null}
-      <Button style={{ marginTop: '1rem' }} type="submit" disabled={pristine || submitting}>
+      <button style={{ marginTop: '1rem' }} type="submit" disabled={pristine || submitting}>
         Submit
-      </Button>
+      </button>
     </form>
   );
 };
@@ -77,5 +76,5 @@ class FormContainer extends Component {
 
 export const Empty = {
   component: FormContainer,
-  group: 'inputs',
+  group: 'custom inputs',
 };

@@ -1,4 +1,5 @@
 @import "sanitize.css";
+@import './fonts.css';
 
 /* ================ Custom properties aka variables ================ */
 
@@ -46,13 +47,73 @@
   /* Topbar */
   --topbarHeight: 60px;
   --topbarHeightDesktop: 72px;
+
+  /* Fonts defined in fonts.css */
+
+  /* Button or a link that looks like a button */
+  --marketplaceButtonStyles: {
+    @apply --marketplaceButtonFontStyles;
+
+    display: block;
+
+    text-align: center;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    /* Borders */
+    border: none;
+    border-radius: var(--borderRadius);
+
+    /* Dimensions */
+    width: 100%;
+    padding: 13px 0;
+    margin: 0;
+
+    /* Colors */
+    color: var(--matterColorLight);
+    background-color: var(--marketplaceColor);
+
+    transition: all var(--transitionStyleButton);
+
+    &:disabled {
+      background-color: var(--matterColorNegative);
+    }
+
+    &:enabled:hover,
+    &:enabled:active {
+      cursor: pointer;
+      text-decoration: none;
+      background-color: var(--marketplaceColorDark);
+      box-shadow: var(--boxShadowButton);
+    }
+  }
+
+  /* Link or a button that looks like a link */
+  --marketplaceLinkStyles {
+    display: inline;
+    width: auto;
+    padding: 0;
+    color: blue;
+    text-decoration: none;
+    transition: none;
+    background-color: transparent;
+
+    &:hover,
+    &:enabled:hover {
+      text-decoration: underline;
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
 }
 
 /* ================ Custom media queries ================ */
 
 @custom-media --desktopViewport (min-width: 768px);
 
-/* ================ Fonts ================ */
+/* ================ Normalisations ================ */
 
 body {
   -webkit-font-smoothing: antialiased; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
@@ -60,237 +121,31 @@ body {
   text-rendering: optimizeSpeed;
 }
 
-h1, h2, h3, h4, h5, h6, p, pre {
-  margin: 0;
-}
-
-/* Site title (landing page) */
-.heroTitle {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 700; /* Bold */
-  font-size: 48px;
-  line-height: 54px;
-  letter-spacing: -1px;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 25px;
-  margin-bottom: 29px;
-
-  @media (--desktopViewport) {
-    font-size: 90px;
-    line-height: 96px;
-    letter-spacing: -2px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 25px;
-    margin-bottom: 31px;
-  }
-}
-
-/* Page title */
-h1,
-.h1Font {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 600; /* SemiBold */
-  font-size: 30px;
-  line-height: 36px;
-  letter-spacing: -0.5px;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 18px;
-  margin-bottom: 18px;
-
-  @media (--desktopViewport) {
-    font-size: 48px;
-    line-height: 56px;
-    letter-spacing: -1px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 24px;
-    margin-bottom: 24px;
-  }
-}
-
-h2,
-.h2Font {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 600; /* SemiBold */
-  font-size: 24px;
-  line-height: 30px;
-  letter-spacing: -0.3px;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 21px;
-  margin-bottom: 17px;
-
-  @media (--desktopViewport) {
-    line-height: 32px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 21px;
-    margin-bottom: 19px;
-  }
-}
-
-h3,
-.h3Font {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 600; /* SemiBold */
-  font-size: 20px;
-  line-height: 24px;
-  letter-spacing: -0.2px;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 16px;
-  margin-bottom: 14px;
-
-  @media (--desktopViewport) {
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
-}
-
-h4,
-.h4Font {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 500; /* Medium */
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 12px;
-  margin-bottom: 12px;
-
-  @media (--desktopViewport) {
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 17px;
-    margin-bottom: 15px;
-  }
-}
-
-h5,
-.h5Font {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 400; /* Regular */
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: 0;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 10px;
-  margin-bottom: 8px;
-
-  @media (--desktopViewport) {
-    line-height: 16px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 10px;
-    margin-bottom: 14px;
-  }
-}
-
-h6,
-.h6Font {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 700; /* Bold */
-  font-size: 12px;
-  line-height: 18px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 10px;
-  margin-bottom: 8px;
-
-  @media (--desktopViewport) {
-    line-height: 16px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 10px;
-    margin-bottom: 6px;
-  }
-}
+h1 { @apply --marketplaceH1FontStyles; }
+h2 { @apply --marketplaceH2FontStyles; }
+h3 { @apply --marketplaceH3FontStyles; }
+h4 { @apply --marketplaceH4FontStyles; }
+h5 { @apply --marketplaceH5FontStyles; }
+h6 { @apply --marketplaceH6FontStyles; }
 
 html,
-input,
-button,
-p,
-pre,
 li,
-.bodyFont {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 500; /* Medium */
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: -0.1px;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 12px;
-  margin-bottom: 12px;
-
-  @media (--desktopViewport) {
-    font-size: 20px;
-    line-height: 24px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
+input,
+textarea {
+  @apply --marketplaceDefaultFontStyles;
 }
 
-.tinyFont {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 400; /* Regular */
-  font-size: 13px;
-  line-height: 18px;
-  letter-spacing: -0.1px;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 9.5px;
-  margin-bottom: 8.5px;
-
-  @media (--desktopViewport) {
-    line-height: 16px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 10.5px;
-    margin-bottom: 13.5px;
-  }
+p,
+pre {
+  @apply --marketplaceBodyFontStyles;
 }
 
-button,
-.buttonFont {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 600; /* SemiBold */
-  font-size: 18px;
-  line-height: 24px;
-  padding: 2.5px 0 3.5px; /* 2.5px + 3.5px = 6px */
-  letter-spacing: -0.3px;
-
-  @media (--desktopViewport) {
-    /* TODO: Make sure button text aligns with the baseline */
-  }
-}
-
-/* This font is specific to Avatar component only */
-.smallAvatarFont {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 700; /* Bold */
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: 0.1px;
-}
-
-.searchResultsFont {
-  composes: bodyFont;
-}
-
-/* Base font color */
-html,
-.textColor {
-  color: var(--matterColor);
-}
-
-/* ================ Normalisations ================ */
-/* TODO */
+a { @apply --marketplaceLinkStyles; }
 
 html {
   padding: 0;
   margin: 0;
-}
-
-a {
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  color: var(--matterColor);
 }
 
 ul {
@@ -310,29 +165,15 @@ select {
   border: none;
 }
 
+input,
 textarea {
-  width: 100%;
-  min-height: 48px;
-  padding: 0 0 5px 0;
-
-  /* Borders */
-  border: none;
-  border-bottom-width: 3px;
-  border-bottom-style: solid;
-  border-bottom-color: var(--marketplaceColor);
-  border-radius: 0;
-
-  &:focus {
-    outline: none;
-  }
-}
-
-input {
+  /* Dimensions */
   display: block;
   width: 100%;
   margin: 0;
   padding: 13px 0;
 
+  /* Borders */
   border: none;
   border-bottom-width: 3px;
   border-bottom-style: solid;
@@ -341,37 +182,24 @@ input {
 
   transition: border-bottom-color var(--transitionStyle);
 
+  &:hover,
+  &:focus {
+    border-color: var(--matterColor);
+    outline: none;
+  }
+
   &::placeholder {
     color: var(--matterColorAnti);
   }
+}
 
-  &:focus {
-    outline: none;
-  }
+textarea {
+  min-height: 48px;
+  padding-bottom: 4px;
 }
 
 button {
-  display: block;
-
-  /* Borders */
-  border: none;
-  border-radius: var(--borderRadius);
-
-  /* Dimensions */
-  width: 100%;
-  padding: 13px 0;
   margin: 0;
-
-  /* Colors */
-  color: var(--matterColorLight);
-  background-color: var(--marketplaceColor);
-
-  transition: all var(--transitionStyleButton);
-
-  &:hover,
-  &:active {
-    cursor: pointer;
-    background-color: var(--marketplaceColorDark);
-    box-shadow: var(--boxShadowButton);
-  }
+  padding: 0;
+  border: none;
 }

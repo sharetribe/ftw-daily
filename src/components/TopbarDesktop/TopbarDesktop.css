@@ -52,7 +52,7 @@
 
 .search {
   composes: topbarDesktopLabel;
-  composes: h4Font from '../../marketplace.css';
+  @apply --marketplaceH4FontStyles;
   color: var(--matterColor);
 }
 
@@ -65,7 +65,7 @@
 
 .createListing {
   composes: topbarDesktopLabel;
-  composes: h4Font from '../../marketplace.css';
+  @apply --marketplaceH4FontStyles;
   color: var(--marketplaceColor);
 }
 
@@ -77,7 +77,7 @@
 
 .inbox {
   composes: topbarDesktopLabel;
-  composes: h4Font from '../../marketplace.css';
+  @apply --marketplaceH4FontStyles;
   color: var(--matterColor);
 }
 
@@ -115,7 +115,7 @@
 .signup,
 .login {
   composes: topbarDesktopLabel;
-  composes: h4Font from '../../marketplace.css';
+  @apply --marketplaceH4FontStyles;
   color: var(--matterColor);
 }
 
@@ -123,8 +123,8 @@
   width: 100%;
   margin: 0;
   padding: 20px 24px;
-  composes: h4Font from '../../marketplace.css';
-  composes: textColor from '../../marketplace.css';
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColor);
   text-align: left;
   white-space: nowrap;
 
