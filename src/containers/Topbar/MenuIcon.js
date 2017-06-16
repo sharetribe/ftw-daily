@@ -16,9 +16,9 @@ const MenuIcon = props => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <g fillRule="evenodd">
-        <rect width="18" height="2" rx="1"/>
-        <rect y="5" width="18" height="2" rx="1"/>
-        <rect y="10" width="18" height="2" rx="1"/>
+        <rect width="18" height="2" rx="1" />
+        <rect y="5" width="18" height="2" rx="1" />
+        <rect y="10" width="18" height="2" rx="1" />
       </g>
     </svg>
   );
