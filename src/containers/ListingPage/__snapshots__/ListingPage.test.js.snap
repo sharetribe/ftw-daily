@@ -86,7 +86,7 @@ exports[`ListingPage matches snapshot 1`] = `
       <Button
         className={null}
         onClick={[Function]}
-        rootClassName="">
+        rootClassName={null}>
         ListingPage.ctaButtonMessage
       </Button>
     </div>
