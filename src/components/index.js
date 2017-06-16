@@ -3,7 +3,7 @@ import AuthorInfo from './AuthorInfo/AuthorInfo';
 import Avatar from './Avatar/Avatar';
 import BirthdayInput from './BirthdayInput/BirthdayInput';
 import BookingInfo from './BookingInfo/BookingInfo';
-import Button, { InlineButton } from './Button/Button';
+import Button, { InlineButton, InlineTextButton } from './Button/Button';
 import CloseIcon from './CloseIcon/CloseIcon';
 import CurrencyInput from './CurrencyInput/CurrencyInput';
 import DateInput from './DateInput/DateInput';
@@ -69,6 +69,7 @@ export {
   FilterPanel,
   HeroSection,
   InlineButton,
+  InlineTextButton,
   Input,
   InputField,
   LabeledField,
