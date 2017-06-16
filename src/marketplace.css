@@ -304,6 +304,10 @@
   --marketplaceButtonStylesSecondary {
     @apply --marketplaceButtonStyles;
 
+    /* We must reduce the padding since the border takes space from the
+       full height that should match the default button height */
+    padding: 16px 0 19px 0;
+
     background-color: var(--matterColorLight);
     color: var(--matterColor);
 
