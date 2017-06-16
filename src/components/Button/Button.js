@@ -15,23 +15,21 @@ const Button = props => {
 const { node, string } = PropTypes;
 
 Button.defaultProps = {
-  children: null,
+  rootClassName: null,
   className: null,
-  rootClassName: '',
+  children: null,
 };
 
 Button.propTypes = {
-  children: node,
-  className: string,
   rootClassName: string,
+  className: string,
+  children: node,
 };
 
 export default Button;
 
-export const FlatButton = props => <Button {...props} rootClassName={css.flatButton} />;
-FlatButton.defaultProps = { className: '' };
-FlatButton.propTypes = { className: string };
+export const PrimaryButton = props => <Button {...props} rootClassName={css.primaryButton} />;
 
-export const InlineButton = props => <Button {...props} rootClassName={css.inlineButton} />;
-InlineButton.defaultProps = { className: '' };
-InlineButton.propTypes = { className: string };
+export const SecondaryButton = props => <Button {...props} rootClassName={css.secondaryButton} />;
+
+export const InlineTextButton = props => <Button {...props} rootClassName={css.inlineTextButton} />;

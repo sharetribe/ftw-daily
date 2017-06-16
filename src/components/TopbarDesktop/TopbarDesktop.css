@@ -120,17 +120,17 @@
 }
 
 .logoutButton {
+  @apply --marketplaceH4FontStyles;
   width: 100%;
+  min-width: 276px;
   margin: 0;
   padding: 20px 24px;
-  composes: h4Font from '../../marketplace.css';
-  composes: textColor from '../../marketplace.css';
+  color: var(--matterColor);
   text-align: left;
   white-space: nowrap;
 
-  &:hover,
-  &:active {
-    box-shadow: none;
+  @media (--desktopViewport) {
+    margin: 0;
   }
 
   &:focus {

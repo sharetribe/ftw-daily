@@ -3,7 +3,7 @@ import AuthorInfo from './AuthorInfo/AuthorInfo';
 import Avatar from './Avatar/Avatar';
 import BirthdayInput from './BirthdayInput/BirthdayInput';
 import BookingInfo from './BookingInfo/BookingInfo';
-import Button, { FlatButton, InlineButton } from './Button/Button';
+import Button, { InlineTextButton } from './Button/Button';
 import CloseIcon from './CloseIcon/CloseIcon';
 import CurrencyInput from './CurrencyInput/CurrencyInput';
 import DateInput from './DateInput/DateInput';
@@ -67,9 +67,8 @@ export {
   EditListingWizard,
   ExternalLink,
   FilterPanel,
-  FlatButton,
   HeroSection,
-  InlineButton,
+  InlineTextButton,
   Input,
   InputField,
   LabeledField,

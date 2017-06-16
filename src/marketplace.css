@@ -9,6 +9,7 @@
   --marketplaceColorDark: #8C291E;
 
   --successColor: #2ECC71;
+  --successColorDark: #239954;
   --failColor: #FF0000;
   --attentionColor: #FFAA00;
 
@@ -46,6 +47,280 @@
   /* Topbar */
   --topbarHeight: 60px;
   --topbarHeightDesktop: 72px;
+
+  /* Fonts */
+  --marketplaceBodyFontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 500; /* Medium */
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.1px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 12px;
+    margin-bottom: 12px;
+
+    @media (--desktopViewport) {
+      font-size: 20px;
+      line-height: 24px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+  }
+  --marketplaceHeroTitleFontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 700; /* Bold */
+    font-size: 48px;
+    line-height: 54px;
+    letter-spacing: -1px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 25px;
+    margin-bottom: 29px;
+
+    @media (--desktopViewport) {
+      font-size: 90px;
+      line-height: 96px;
+      letter-spacing: -2px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 25px;
+      margin-bottom: 31px;
+    }
+  }
+  --marketplaceH1FontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 700; /* SemiBold */
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -0.5px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 18px;
+    margin-bottom: 18px;
+
+    @media (--desktopViewport) {
+      font-size: 48px;
+      line-height: 56px;
+      letter-spacing: -1px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+  }
+  --marketplaceH2FontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 600; /* SemiBold */
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: -0.3px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 21px;
+    margin-bottom: 17px;
+
+    @media (--desktopViewport) {
+      line-height: 32px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 21px;
+      margin-bottom: 19px;
+    }
+  }
+  --marketplaceH3FontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 600; /* SemiBold */
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 16px;
+    margin-bottom: 14px;
+
+    @media (--desktopViewport) {
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+  }
+  --marketplaceH4FontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 500; /* Medium */
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 12px;
+    margin-bottom: 12px;
+
+    @media (--desktopViewport) {
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 17px;
+      margin-bottom: 15px;
+    }
+  }
+  --marketplaceH5FontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 400; /* Regular */
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 10px;
+    margin-bottom: 8px;
+
+    @media (--desktopViewport) {
+      line-height: 16px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 10px;
+      margin-bottom: 14px;
+    }
+  }
+  --marketplaceH6FontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 700; /* Bold */
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 10px;
+    margin-bottom: 8px;
+
+    @media (--desktopViewport) {
+      line-height: 16px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+  }
+  --marketplaceTinyFontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 400; /* Regular */
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: -0.1px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 9.5px;
+    margin-bottom: 8.5px;
+
+    @media (--desktopViewport) {
+      line-height: 16px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 10.5px;
+      margin-bottom: 13.5px;
+    }
+  }
+
+  /* This font is specific to Avatar component only */
+  --marketplaceSmallAvatarFontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 700; /* Bold */
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.1px;
+  }
+
+  /* Links */
+  --marketplaceLinkStyles: {
+
+    /* Position and dimensions */
+    display: inline;
+    margin: 0;
+    padding: 0;
+
+    /* Borders */
+    border: none;
+
+    /* Colors */
+    color: var(--marketplaceColor);
+
+    /* Text size should be inherited */
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  /* Buttons */
+  --marketplaceButtonFontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 600; /* SemiBold */
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.3px;
+
+    @media (--desktopViewport) {
+      /* TODO: Make sure button text aligns with the baseline */
+    }
+  }
+  --marketplaceButtonStyles {
+    @apply --marketplaceButtonFontStyles;
+
+    /* Dimensions */
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 17px 0 20px 0;
+
+    /* Borders */
+    border: none;
+    border-radius: var(--borderRadius);
+
+    /* Colors */
+    background-color: var(--marketplaceColor);
+    color: var(--matterColorLight);
+
+    /* Text */
+    text-align: center;
+
+    /* Effects */
+
+    transition: all var(--transitionStyleButton);
+
+    &:enabled:hover,
+    &:enabled:focus {
+      outline: none;
+      background-color: var(--marketplaceColorDark);
+      text-decoration: none;
+      box-shadow: var(--boxShadowButton);
+    }
+    &:disabled {
+      background-color: var(--matterColorNegative);
+      color: var(--matterColorLight);
+    }
+    &:enabled {
+      cursor: pointer;
+    }
+  }
+  --marketplaceButtonStylesPrimary {
+    @apply --marketplaceButtonStyles;
+
+    background-color: var(--successColor);
+    color: var(--matterColorLight);
+
+    &:enabled:hover,
+    &:enabled:focus {
+      background-color: var(--successColorDark);
+    }
+  }
+  --marketplaceButtonStylesSecondary {
+    @apply --marketplaceButtonStyles;
+
+    /* We must reduce the padding since the border takes space from the
+       full height that should match the default button height */
+    padding: 16px 0 19px 0;
+
+    background-color: var(--matterColorLight);
+    color: var(--matterColor);
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--matterColorNegative);
+
+    &:enabled:hover,
+    &:enabled:focus {
+      background-color: var(--matterColorLight);
+      border-color: var(--matterColorAnti);
+    }
+  }
 }
 
 /* ================ Custom media queries ================ */
@@ -60,215 +335,40 @@ body {
   text-rendering: optimizeSpeed;
 }
 
-h1, h2, h3, h4, h5, h6, p, pre {
-  margin: 0;
+a {
+  @apply --marketplaceLinkStyles;
 }
 
 /* Site title (landing page) */
-.heroTitle {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 700; /* Bold */
-  font-size: 48px;
-  line-height: 54px;
-  letter-spacing: -1px;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 25px;
-  margin-bottom: 29px;
+.heroTitle { @apply --marketplaceHeroTitleFontStyles; }
 
-  @media (--desktopViewport) {
-    font-size: 90px;
-    line-height: 96px;
-    letter-spacing: -2px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 25px;
-    margin-bottom: 31px;
-  }
-}
-
-/* Page title */
-h1,
-.h1Font {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 700; /* SemiBold */
-  font-size: 30px;
-  line-height: 36px;
-  letter-spacing: -0.5px;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 18px;
-  margin-bottom: 18px;
-
-  @media (--desktopViewport) {
-    font-size: 48px;
-    line-height: 56px;
-    letter-spacing: -1px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 24px;
-    margin-bottom: 24px;
-  }
-}
-
-h2,
-.h2Font {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 600; /* SemiBold */
-  font-size: 24px;
-  line-height: 30px;
-  letter-spacing: -0.3px;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 21px;
-  margin-bottom: 17px;
-
-  @media (--desktopViewport) {
-    line-height: 32px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 21px;
-    margin-bottom: 19px;
-  }
-}
-
-h3,
-.h3Font {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 600; /* SemiBold */
-  font-size: 20px;
-  line-height: 24px;
-  letter-spacing: -0.2px;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 16px;
-  margin-bottom: 14px;
-
-  @media (--desktopViewport) {
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
-}
-
-h4,
-.h4Font {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 500; /* Medium */
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 12px;
-  margin-bottom: 12px;
-
-  @media (--desktopViewport) {
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 17px;
-    margin-bottom: 15px;
-  }
-}
-
-h5,
-.h5Font {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 400; /* Regular */
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: 0;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 10px;
-  margin-bottom: 8px;
-
-  @media (--desktopViewport) {
-    line-height: 16px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 10px;
-    margin-bottom: 14px;
-  }
-}
-
-h6,
-.h6Font {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 700; /* Bold */
-  font-size: 12px;
-  line-height: 18px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 10px;
-  margin-bottom: 8px;
-
-  @media (--desktopViewport) {
-    line-height: 16px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 10px;
-    margin-bottom: 6px;
-  }
-}
+h1, .h1Font { @apply --marketplaceH1FontStyles; }
+h2, .h2Font { @apply --marketplaceH2FontStyles; }
+h3, .h3Font { @apply --marketplaceH3FontStyles; }
+h4, .h4Font { @apply --marketplaceH4FontStyles; }
+h5, .h5Font { @apply --marketplaceH5FontStyles; }
+h6, .h6Font { @apply --marketplaceH6FontStyles; }
 
 html,
 input,
-button,
 p,
 pre,
 li,
 .bodyFont {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 500; /* Medium */
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: -0.1px;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 12px;
-  margin-bottom: 12px;
-
-  @media (--desktopViewport) {
-    font-size: 20px;
-    line-height: 24px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
+  @apply --marketplaceBodyFontStyles;
 }
 
 .tinyFont {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 400; /* Regular */
-  font-size: 13px;
-  line-height: 18px;
-  letter-spacing: -0.1px;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 9.5px;
-  margin-bottom: 8.5px;
-
-  @media (--desktopViewport) {
-    line-height: 16px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 10.5px;
-    margin-bottom: 13.5px;
-  }
-}
-
-button,
-.buttonFont {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 600; /* SemiBold */
-  font-size: 18px;
-  line-height: 24px;
-  padding: 2.5px 0 3.5px; /* 2.5px + 3.5px = 6px */
-  letter-spacing: -0.3px;
-
-  @media (--desktopViewport) {
-    /* TODO: Make sure button text aligns with the baseline */
-  }
+  @apply --marketplaceTinyFontStyles;
 }
 
 /* This font is specific to Avatar component only */
 .smallAvatarFont {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 700; /* Bold */
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: 0.1px;
+  @apply --marketplaceSmallAvatarFontStyles;
 }
 
 .searchResultsFont {
-  composes: bodyFont;
+  @apply --marketplaceBodyFontStyles;
 }
 
 /* Base font color */
@@ -283,14 +383,6 @@ html,
 html {
   padding: 0;
   margin: 0;
-}
-
-a {
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 ul {
@@ -347,31 +439,5 @@ input {
 
   &:focus {
     outline: none;
-  }
-}
-
-button {
-  display: block;
-
-  /* Borders */
-  border: none;
-  border-radius: var(--borderRadius);
-
-  /* Dimensions */
-  width: 100%;
-  padding: 17px 0 20px 0;
-  margin: 0;
-
-  /* Colors */
-  color: var(--matterColorLight);
-  background-color: var(--marketplaceColor);
-
-  transition: all var(--transitionStyleButton);
-
-  &:hover,
-  &:active {
-    cursor: pointer;
-    background-color: var(--marketplaceColorDark);
-    box-shadow: var(--boxShadowButton);
   }
 }

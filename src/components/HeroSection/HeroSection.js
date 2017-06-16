@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { SearchIcon } from '../../components';
+import { SearchIcon, Button } from '../../components';
 import { LocationSearchForm } from '../../containers';
 import { stringify } from '../../util/urlHelpers';
 import { createResourceLocatorString } from '../../util/routes';
@@ -35,10 +35,10 @@ const HeroSection = props => {
       <p className={css.heroSubTitle}>
         <FormattedMessage id="HeroSection.subTitle" />
       </p>
-      <button className={css.mobileSearchButton} onClick={handleMobileSearchClick}>
+      <Button className={css.mobileSearchButton} onClick={handleMobileSearchClick}>
         <SearchIcon rootClassName={css.searchIcon} />
         <FormattedMessage id="HeroSection.mobileSearchButtonText" />
-      </button>
+      </Button>
       <LocationSearchForm className={css.desktopSearchForm} onSubmit={handleSearchSubmit} />
     </div>
   );

@@ -2,6 +2,7 @@
 
 :root{
   --topMarginMobileMenu: 96px;
+  --buttonHeight: 61px;
 }
 
 .root {
@@ -20,7 +21,7 @@
 }
 
 .footer {
-  flex-basis: 66px;
+  flex-basis: var(--buttonHeight);
   flex-shrink: 0;
   margin-bottom: 24px;
 }
@@ -51,15 +52,10 @@
 }
 
 .logoutButton {
-  /* Position component */
-  margin: 6px 0;
-  width: initial;
-
   /* Logout font is smaller and gray since the action is not recommended. */
-  composes: h3Font from '../../marketplace.css';
+  @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
 
-  /* Position component */
   margin-top: 0;
   padding: 0;
 }
@@ -73,38 +69,8 @@
   color: var(--marketplaceColor);
 }
 
-/* TODO createNewListingLink camouflages as a button. */
 .createNewListingLink {
-  display: block;
-  padding: 17px 0 20px 0;
-  background-color: var(--marketplaceColor);
-  border-width: 0;
-  border-radius: var(--borderRadius);
-
-  /* Font */
-  composes: buttonFont from '../../marketplace.css';
-  color: var(--matterColorLight);
-  text-align: center;
-
-  /* Dimensions */
-  width: 100%;
-
-  /* Hovers */
-
-  &:enabled {
-    cursor: pointer;
-  }
-  &:enabled:hover {
-    background-color: var(--marketplaceColorDark);
-    text-decoration: none;
-  }
-  &:enabled:active {
-    background-color: var(--marketplaceColorLight);
-  }
-  &:disabled {
-    background-color: var(--matterColorAnti);
-    cursor: auto;
-  }
+  @apply --marketplaceButtonStyles;
 }
 
 .authenticationGreeting {

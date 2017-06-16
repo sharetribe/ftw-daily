@@ -3,7 +3,7 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import {
   Avatar,
-  InlineButton,
+  InlineTextButton,
   Menu,
   MenuLabel,
   MenuContent,
@@ -58,9 +58,9 @@ const TopbarDesktop = props => {
         </MenuLabel>
         <MenuContent className={css.profileMenuContent}>
           <MenuItem key="logout">
-            <InlineButton className={css.logoutButton} onClick={onLogout}>
+            <InlineTextButton className={css.logoutButton} onClick={onLogout}>
               <FormattedMessage id="TopbarDesktop.logout" />
-            </InlineButton>
+            </InlineTextButton>
           </MenuItem>
         </MenuContent>
       </Menu>

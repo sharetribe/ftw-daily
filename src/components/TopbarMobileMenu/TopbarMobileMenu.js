@@ -4,7 +4,7 @@
  */
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Avatar, InlineButton, NamedLink } from '../../components';
+import { Avatar, InlineTextButton, NamedLink } from '../../components';
 
 import css from './TopbarMobileMenu.css';
 
@@ -65,9 +65,9 @@ const TopbarMobileMenu = props => {
         <span className={css.greeting}>
           <FormattedMessage id="TopbarMobileMenu.greeting" values={{ firstName }} />
         </span>
-        <InlineButton className={css.logoutButton} onClick={onLogout}>
+        <InlineTextButton className={css.logoutButton} onClick={onLogout}>
           <FormattedMessage id="TopbarMobileMenu.logoutLink" />
-        </InlineButton>
+        </InlineTextButton>
         {inboxLink}
       </div>
       <div className={css.footer}>

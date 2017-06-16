@@ -22,7 +22,7 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
     type="text" />
   <Button
     className={null}
-    rootClassName=""
+    rootClassName={null}
     type="submit">
     Next: pricing
   </Button>

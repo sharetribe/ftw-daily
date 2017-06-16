@@ -2,6 +2,7 @@
 import * as AddImages from './components/AddImages/AddImages.example';
 import * as BirthdayInput from './components/BirthdayInput/BirthdayInput.example';
 import * as BookingInfo from './components/BookingInfo/BookingInfo.example';
+import * as Button from './components/Button/Button.example';
 import * as CurrencyInput from './components/CurrencyInput/CurrencyInput.example';
 import * as DateInput from './components/DateInput/DateInput.example';
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
@@ -48,6 +49,7 @@ export {
   BirthdayInput,
   BookingDatesForm,
   BookingInfo,
+  Button,
   ChangeAccountPasswordForm,
   ChangePasswordForm,
   Colors,
