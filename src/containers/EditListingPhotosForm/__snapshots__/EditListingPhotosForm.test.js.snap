@@ -25,7 +25,7 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
   </AddImages>
   <Button
     className={null}
-    rootClassName=""
+    rootClassName={null}
     type="submit">
     Publish listing
   </Button>
