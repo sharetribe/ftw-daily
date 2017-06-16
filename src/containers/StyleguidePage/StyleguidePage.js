@@ -163,7 +163,7 @@ const examplesFor = (examples, group, componentName, exampleName) => {
 
 const StyleguidePage = props => {
   const { params, raw } = props;
-  const group = params.group || ALL;
+  const group = params.group ? decodeURIComponent(params.group) : ALL;
   const componentName = params.component || ALL;
   const exampleName = params.example || ALL;
 
