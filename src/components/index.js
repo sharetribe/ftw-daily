@@ -18,7 +18,6 @@ import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
 import Input from './Input/Input';
 import InputField from './InputField/InputField';
-import LabeledField from './LabeledField/LabeledField';
 import ListingCard from './ListingCard/ListingCard';
 import ListingCardSmall from './ListingCardSmall/ListingCardSmall';
 import LocationAutocompleteInput from './LocationAutocompleteInput/LocationAutocompleteInput';
@@ -71,7 +70,6 @@ export {
   InlineTextButton,
   Input,
   InputField,
-  LabeledField,
   ListingCard,
   ListingCardSmall,
   LocationAutocompleteInput,
