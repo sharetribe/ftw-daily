@@ -9,7 +9,7 @@
  *    </MenuLabel>
  *    <MenuContent>
  *      <MenuItem key="first item">
- *        <button onClick={onClick}>Click this</button>
+ *        <Button onClick={onClick}>Click this</Button>
  *      </MenuItem>
  *    </MenuContent>
  *  </Menu>
