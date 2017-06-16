@@ -23,21 +23,4 @@ Input.propTypes = {
   inline: bool,
 };
 
-/*
-   Creates a new Input component for Redux Form Field.
-
-   Usage:
-
-   ```
-   <Field name="password" type="password" component={Input.fieldComponent} />
-   ```
-*/
-Input.fieldComponent = props => {
-  /* eslint-disable react/prop-types */
-  const { input, type } = props;
-  /* eslint-enable react/prop-types */
-
-  return <Input type={type} {...input} />;
-};
-
 export default Input;
