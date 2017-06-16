@@ -26,6 +26,7 @@
 
 .iconSvgGroup {
   stroke: var(--marketplaceColor);
+  stroke-width: 2.5px;
 }
 
 .input {
@@ -33,6 +34,11 @@
   height: var(--inputHeight);
   padding-left: 18px;
   margin: 0;
+
+  /* Safari bugfix: without this Safari will print placeholder to a wrong place */
+  &::-webkit-input-placeholder {
+    line-height:normal;
+  }
 }
 
 /*

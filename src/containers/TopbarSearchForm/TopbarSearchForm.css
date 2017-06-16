@@ -18,10 +18,14 @@
 
 .mobileIcon {
   margin-left: 24px;
+  padding: 11px 0 17px 0;
 }
 
 .mobileInput {
   margin: 0 24px 0 0;
+  padding: 1px 13px 13px 13px;
+  height: auto;
+  composes: h1Font from '../../marketplace.css';
 }
 
 .desktopIcon {

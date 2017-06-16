@@ -83,7 +83,9 @@
 }
 
 /* Icon component styles */
-.rootMenuIcon,
+.rootMenuIcon {
+  fill: var(--matterColor);
+}
 .rootSearchIcon {
   stroke: var(--matterColor);
 }
@@ -101,7 +103,7 @@
   /* Absolute position to avoid affecting the layout of the autocomplete
    predictions list */
   position: absolute;
-  top: 114px;
+  top: 73px;
 
   /* Pull text behind search suggestions */
   z-index: -1;
