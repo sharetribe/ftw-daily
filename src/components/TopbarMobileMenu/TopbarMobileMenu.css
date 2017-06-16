@@ -76,7 +76,7 @@
 /* TODO createNewListingLink camouflages as a button. */
 .createNewListingLink {
   display: block;
-  padding: 17px 0 20px;
+  padding: 17px 0 20px 0;
   background-color: var(--marketplaceColor);
   border-width: 0;
   border-radius: var(--borderRadius);
