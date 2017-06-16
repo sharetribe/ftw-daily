@@ -1,10 +1,10 @@
 import React from 'react';
-import { InlineButton, MenuContent, MenuLabel, MenuItem } from '../../components';
+import { InlineTextButton, MenuContent, MenuLabel, MenuItem } from '../../components';
 import Menu from './Menu';
 
 const noop = () => null;
 const style = { padding: '24px' };
-const btnStyle = { whiteSpace: 'nowrap' };
+const btnStyle = { whiteSpace: 'nowrap', padding: '6px 0' };
 
 const MenuWrapper = () => {
   return (
@@ -14,10 +14,10 @@ const MenuWrapper = () => {
       </MenuLabel>
       <MenuContent style={style}>
         <MenuItem key="first item">
-          <InlineButton onClick={noop} style={btnStyle}>Click this</InlineButton>
+          <InlineTextButton onClick={noop} style={btnStyle}>Click this</InlineTextButton>
         </MenuItem>
         <MenuItem key="second item">
-          <InlineButton onClick={noop} style={btnStyle}>Click this</InlineButton>
+          <InlineTextButton onClick={noop} style={btnStyle}>Click this</InlineTextButton>
         </MenuItem>
       </MenuContent>
     </Menu>

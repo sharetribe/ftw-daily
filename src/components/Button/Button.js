@@ -33,7 +33,3 @@ export const PrimaryButton = props => <Button {...props} rootClassName={css.prim
 export const SecondaryButton = props => <Button {...props} rootClassName={css.secondaryButton} />;
 
 export const InlineTextButton = props => <Button {...props} rootClassName={css.inlineTextButton} />;
-
-export const InlineButton = props => <Button {...props} rootClassName={css.inlineButton} />;
-InlineButton.defaultProps = { className: '' };
-InlineButton.propTypes = { className: string };
