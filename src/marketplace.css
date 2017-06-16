@@ -9,6 +9,7 @@
   --marketplaceColorDark: #8C291E;
 
   --successColor: #2ECC71;
+  --successColorDark: #239954;
   --failColor: #FF0000;
   --attentionColor: #FFAA00;
 
@@ -46,6 +47,120 @@
   /* Topbar */
   --topbarHeight: 60px;
   --topbarHeightDesktop: 72px;
+
+  /* Fonts */
+  --marketplaceBodyFontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 500; /* Medium */
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.1px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 12px;
+    margin-bottom: 12px;
+
+    @media (--desktopViewport) {
+      font-size: 20px;
+      line-height: 24px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+  }
+
+  /* Links */
+  --marketplaceLinkStyles: {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    border: none;
+
+    color: var(--marketplaceColor);
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  /* Buttons */
+  --marketplaceButtonFontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 600; /* SemiBold */
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.3px;
+
+    @media (--desktopViewport) {
+      /* TODO: Make sure button text aligns with the baseline */
+    }
+  }
+  --marketplaceButtonStyles {
+    @apply --marketplaceButtonFontStyles;
+
+    /* Dimensions */
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 17px 0 20px 0;
+
+    /* Borders */
+    border: none;
+    border-radius: var(--borderRadius);
+
+    /* Colors */
+    background-color: var(--marketplaceColor);
+    color: var(--matterColorLight);
+
+    /* Text */
+    text-align: center;
+
+    /* Effects */
+
+    transition: all var(--transitionStyleButton);
+
+    &:enabled:hover,
+    &:enabled:focus {
+      outline: none;
+      background-color: var(--marketplaceColorDark);
+      text-decoration: none;
+      box-shadow: var(--boxShadowButton);
+    }
+    &:disabled {
+      background-color: var(--matterColorNegative);
+      color: var(--matterColorLight);
+    }
+    &:enabled {
+      cursor: pointer;
+    }
+  }
+  --marketplaceButtonStylesPrimary {
+    @apply --marketplaceButtonStyles;
+
+    background-color: var(--successColor);
+    color: var(--matterColorLight);
+
+    &:enabled:hover,
+    &:enabled:focus {
+      background-color: var(--successColorDark);
+    }
+  }
+  --marketplaceButtonStylesSecondary {
+    @apply --marketplaceButtonStyles;
+
+    background-color: var(--matterColorLight);
+    color: var(--matterColor);
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--matterColorNegative);
+
+    &:enabled:hover,
+    &:enabled:focus {
+      background-color: var(--matterColorLight);
+      border-color: var(--matterColorAnti);
+    }
+  }
 }
 
 /* ================ Custom media queries ================ */
@@ -58,6 +173,10 @@ body {
   -webkit-font-smoothing: antialiased; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
   -moz-osx-font-smoothing: grayscale; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
   text-rendering: optimizeSpeed;
+}
+
+a {
+  @apply --marketplaceLinkStyles;
 }
 
 h1, h2, h3, h4, h5, h6, p, pre {
@@ -203,27 +322,11 @@ h6,
 
 html,
 input,
-button,
 p,
 pre,
 li,
 .bodyFont {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 500; /* Medium */
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: -0.1px;
-  /* margin-top + n * line-height + margin-bottom => x * 6px */
-  margin-top: 12px;
-  margin-bottom: 12px;
-
-  @media (--desktopViewport) {
-    font-size: 20px;
-    line-height: 24px;
-    /* margin-top + n * line-height + margin-bottom => x * 8px */
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
+  @apply --marketplaceBodyFontStyles;
 }
 
 .tinyFont {
@@ -244,18 +347,7 @@ li,
   }
 }
 
-button,
 .buttonFont {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
-  font-weight: 600; /* SemiBold */
-  font-size: 18px;
-  line-height: 24px;
-  padding: 2.5px 0 3.5px; /* 2.5px + 3.5px = 6px */
-  letter-spacing: -0.3px;
-
-  @media (--desktopViewport) {
-    /* TODO: Make sure button text aligns with the baseline */
-  }
 }
 
 /* This font is specific to Avatar component only */
@@ -347,31 +439,5 @@ input {
 
   &:focus {
     outline: none;
-  }
-}
-
-button {
-  display: block;
-
-  /* Borders */
-  border: none;
-  border-radius: var(--borderRadius);
-
-  /* Dimensions */
-  width: 100%;
-  padding: 17px 0 20px 0;
-  margin: 0;
-
-  /* Colors */
-  color: var(--matterColorLight);
-  background-color: var(--marketplaceColor);
-
-  transition: all var(--transitionStyleButton);
-
-  &:hover,
-  &:active {
-    cursor: pointer;
-    background-color: var(--marketplaceColorDark);
-    box-shadow: var(--boxShadowButton);
   }
 }

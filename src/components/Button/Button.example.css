@@ -1,0 +1,19 @@
+@import '../../marketplace.css';
+
+.buttonLink {
+  @apply --marketplaceButtonStyles;
+}
+
+.buttonLinkPrimary {
+  @apply --marketplaceButtonStylesPrimary;
+}
+
+.buttonLinkSecondary {
+  @apply --marketplaceButtonStylesSecondary;
+}
+
+.customButton {
+  @apply --marketplaceButtonStyles;
+  border-radius: 4px;
+  padding: 12px 0;
+}
