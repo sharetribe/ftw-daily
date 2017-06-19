@@ -30,7 +30,7 @@
 }
 
 .validationError {
-  composes: h5Font from '../../marketplace.css';
+  @apply --marketplaceH5FontStyles;
 
   margin-top: calc(2 * var(--spacingUnit));
   color: var(--failColor);

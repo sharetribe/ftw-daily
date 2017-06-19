@@ -1,6 +1,12 @@
 @import '../../marketplace.css';
 
 .root {
+  /* Font is specific to this component, but defining it in marketplace.css makes it easier
+   * to change font if brand look-and-feel needs such changes.
+   */
+  @apply --marketplaceSmallAvatarFontStyles;
+
+  /* Layout */
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -13,9 +19,4 @@
   /* Colors */
   background-color: var(--matterColorAnti);
   color: var(--matterColorLight);
-
-  /* Font is specific to this component, but defining it in marketplace.css makes it easier
-   * to change font if brand look-and-feel needs such changes.
-   */
-  composes: smallAvatarFont from '../../marketplace.css';
 }

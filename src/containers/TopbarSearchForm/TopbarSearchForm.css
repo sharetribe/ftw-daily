@@ -22,10 +22,13 @@
 }
 
 .mobileInput {
+  /* Font */
+  @apply --marketplaceH1FontStyles;
+
+  /* Layout */
   margin: 0 24px 0 0;
   padding: 1px 13px 13px 13px;
   height: var(--inputHeight);
-  composes: h1Font from '../../marketplace.css';
 }
 
 .desktopIcon {

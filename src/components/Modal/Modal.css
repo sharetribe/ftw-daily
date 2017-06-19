@@ -65,7 +65,7 @@
 
 .closeText {
   /* Font */
-  composes: h6Font from '../../marketplace.css';
+  @apply --marketplaceH6FontStyles;
   margin: -2.5px 0 0 0;
 }
 

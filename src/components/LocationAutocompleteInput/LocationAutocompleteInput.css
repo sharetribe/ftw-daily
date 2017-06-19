@@ -80,7 +80,7 @@ bottom of the container.
 
 /* List of predictions, with a responsive padding size */
 .predictions {
-  composes: searchResultsFont from '../../marketplace.css';
+  @apply --marketplaceBodyFontStyles;
 
   margin: 0;
   padding: 14px 0;
