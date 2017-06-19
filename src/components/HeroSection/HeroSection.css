@@ -47,6 +47,7 @@
 
 .mobileSearchButton {
   border-radius: 4px;
+  flex-shrink: 0;
 
   @media (--desktopViewport) {
     display: none;
