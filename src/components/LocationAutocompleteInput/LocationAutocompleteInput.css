@@ -65,7 +65,7 @@ bottom of the container.
 */
 .poweredByGoogle {
   position: absolute;
-  bottom: 30px; /* 27px + bottomBorder */
+  bottom: 30px;
   width: 100%;
   height: var(--poweredImageHeight);
   background-image: url(./images/powered_by_google_on_non_white_hdpi.png);
@@ -92,7 +92,7 @@ bottom of the container.
     padding: 9px var(--sidePadding);
 
     @media (--desktopViewport) {
-      padding: 10px var(--sidePaddingDesktop);
+      padding: 8px var(--sidePaddingDesktop);
       margin: 0;
     }
 
