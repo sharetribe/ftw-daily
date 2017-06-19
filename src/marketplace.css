@@ -49,9 +49,15 @@
   --topbarHeightDesktop: 72px;
 
   /* Fonts */
+
+  --fontWeightRegular: 400;
+  --fontWeightMedium: 500;
+  --fontWeightSemiBold: 600;
+  --fontWeightBold: 700;
+
   --marketplaceDefaultFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: 500; /* Medium */
+    font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.1px;
@@ -65,7 +71,7 @@
 
   --marketplaceBodyFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: 500; /* Medium */
+    font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.1px;
@@ -84,7 +90,7 @@
 
   --marketplaceHeroTitleFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: 700; /* Bold */
+    font-weight: var(--fontWeightBold);
     font-size: 48px;
     line-height: 54px;
     letter-spacing: -1px;
@@ -103,7 +109,7 @@
   }
   --marketplaceH1FontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: 700; /* SemiBold */
+    font-weight: var(--fontWeightBold);
     font-size: 30px;
     line-height: 36px;
     letter-spacing: -0.5px;
@@ -122,7 +128,7 @@
   }
   --marketplaceH2FontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: 600; /* SemiBold */
+    font-weight: var(--fontWeightSemiBold);
     font-size: 24px;
     line-height: 30px;
     letter-spacing: -0.3px;
@@ -139,7 +145,7 @@
   }
   --marketplaceH3FontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: 600; /* SemiBold */
+    font-weight: var(--fontWeightSemiBold);
     font-size: 20px;
     line-height: 24px;
     letter-spacing: -0.2px;
@@ -155,7 +161,7 @@
   }
   --marketplaceH4FontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: 500; /* Medium */
+    font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0;
@@ -171,7 +177,7 @@
   }
   --marketplaceH5FontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: 400; /* Regular */
+    font-weight: var(--fontWeightRegular);
     font-size: 14px;
     line-height: 18px;
     letter-spacing: 0;
@@ -188,7 +194,7 @@
   }
   --marketplaceH6FontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: 700; /* Bold */
+    font-weight: var(--fontWeightBold);
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 1.5px;
@@ -206,7 +212,7 @@
   }
   --marketplaceTinyFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: 400; /* Regular */
+    font-weight: var(--fontWeightRegular);
     font-size: 13px;
     line-height: 18px;
     letter-spacing: -0.1px;
@@ -225,7 +231,7 @@
   /* This font is specific to Avatar component only */
   --marketplaceSmallAvatarFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: 700; /* Bold */
+    font-weight: var(--fontWeightBold);
     font-size: 14px;
     line-height: 18px;
     letter-spacing: 0.1px;
@@ -257,7 +263,7 @@
   /* Buttons */
   --marketplaceButtonFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: 600; /* SemiBold */
+    font-weight: var(--fontWeightSemiBold);
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.3px;
