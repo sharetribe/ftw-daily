@@ -65,7 +65,7 @@ bottom of the container.
 */
 .poweredByGoogle {
   position: absolute;
-  bottom: 27px;
+  bottom: 30px; /* 27px + bottomBorder */
   width: 100%;
   height: var(--poweredImageHeight);
   background-image: url(./images/powered_by_google_on_non_white_hdpi.png);
@@ -86,12 +86,14 @@ bottom of the container.
 
   & li {
     color: var(--matterColorLight);
+    margin: 0; /* Remove the double white space */
 
     /* Assign enough vertical padding to make the element at least 44px high */
-    padding: 10px var(--sidePadding);
+    padding: 9px var(--sidePadding);
 
     @media (--desktopViewport) {
       padding: 10px var(--sidePaddingDesktop);
+      margin: 0;
     }
 
     &:hover,
