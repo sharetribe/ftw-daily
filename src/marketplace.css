@@ -344,11 +344,11 @@
     display: block;
     width: 100%;
     margin: 0;
-    padding: 13px 0;
+    padding: 5px 0 4px 0;
 
     /* Borders */
     border: none;
-    border-bottom-width: 3px;
+    border-bottom-width: 2px;
     border-bottom-style: solid;
     border-bottom-color: var(--marketplaceColor);
     border-radius: 0;
