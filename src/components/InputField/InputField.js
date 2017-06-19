@@ -14,7 +14,6 @@ class InputField extends Component {
     const {
       rootClassName,
       className,
-      labelRootClassName,
       inputRootClassName,
       errorRootClassName,
       inputComponent: InputComponent,
@@ -48,7 +47,6 @@ class InputField extends Component {
     const hasError = touched && invalid && error;
 
     const classes = classNames(rootClassName || css.root, className);
-    const labelClasses = labelRootClassName || css.label;
     const inputClasses = classNames(inputRootClassName || css.input, {
       [css.inputSuccess]: valid,
       [css.inputError]: hasError,
@@ -67,7 +65,7 @@ class InputField extends Component {
 
     return (
       <div className={classes}>
-        {label ? <label className={labelClasses} htmlFor={input.name}>{label}</label> : null}
+        {label ? <label htmlFor={input.name}>{label}</label> : null}
         {component}
         {hasError ? <p className={errorClasses}>{error}</p> : null}
       </div>
@@ -78,7 +76,6 @@ class InputField extends Component {
 InputField.defaultProps = {
   rootClassName: null,
   className: null,
-  labelRootClassName: null,
   inputRootClassName: null,
   errorRootClassName: null,
   clearOnUnmount: false,
@@ -95,7 +92,6 @@ InputField.propTypes = {
   // Allow passing in classes to subcomponents
   rootClassName: string,
   className: string,
-  labelRootClassName: string,
   inputRootClassName: string,
   errorRootClassName: string,
 
