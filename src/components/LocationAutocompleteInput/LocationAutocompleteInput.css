@@ -34,6 +34,7 @@
   height: var(--inputHeight);
   padding-left: 18px;
   margin: 0;
+  line-height: unset;
 
   /* Safari bugfix: without this Safari will print placeholder to a wrong place */
   &::-webkit-input-placeholder {
