@@ -1,7 +1,7 @@
 @import '../../marketplace.css';
 
 :root {
-  --inputHeight: 50px;
+  --inputHeight: 53px;
   --topbarMargin: 94px;
   --bottomBorder: 3px;
   --mobilePredictionTop: calc(var(--topbarMargin) + var(--inputHeight) - var(--bottomBorder));
@@ -24,7 +24,7 @@
 .mobileInput {
   margin: 0 24px 0 0;
   padding: 1px 13px 13px 13px;
-  height: auto;
+  height: var(--inputHeight);
   composes: h1Font from '../../marketplace.css';
 }
 
@@ -42,12 +42,12 @@
 
 .mobilePredictions {
   position: absolute;
-  top: calc(var(--inputHeight));
+  top: calc(var(--inputHeight) - var(--bottomBorder));
   left: 0;
   min-height: calc(100vh - var(--mobilePredictionTop));
 }
 
 .desktopPredictions {
-  margin-top: calc(var(--topbarHeightDesktop) - var(--inputHeight));
+  margin-top: calc(var(--topbarHeightDesktop) - var(--inputHeight) + var(--bottomBorder));
   max-width: 434px;
 }
