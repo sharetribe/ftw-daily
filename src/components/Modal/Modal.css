@@ -39,7 +39,7 @@
   width: auto;
 
   /* Sizing (touch area) */
-  padding: 24px;
+  padding: 23px 24px;
   margin: 0;
   border: 0;
 
@@ -66,7 +66,7 @@
 .closeText {
   /* Font */
   composes: h6Font from '../../marketplace.css';
-  margin: -2.5px 0 0;
+  margin: 0;
 }
 
 .closeIcon {

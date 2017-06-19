@@ -23,7 +23,7 @@
 .footer {
   flex-basis: var(--buttonHeight);
   flex-shrink: 0;
-  margin-bottom: 24px;
+  padding-bottom: 24px;
 }
 
 .avatar {
@@ -48,16 +48,18 @@
 
 .greeting {
   composes: h1Font from '../../marketplace.css';
-  margin-top: 0;
+  margin-bottom: 12px;
 }
 
 .logoutButton {
+  /* Position component */
+  width: initial;
+  margin: 4px 0 6px 0;
+  padding: 0;
+
   /* Logout font is smaller and gray since the action is not recommended. */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
-
-  margin-top: 0;
-  padding: 0;
 }
 
 .inbox {
