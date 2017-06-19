@@ -22,7 +22,7 @@ exports[`OrderDiscussionPanel matches snapshot 1`] = `
     onSubmit={[Function]}>
     <input
       autoFocus={true}
-      className=""
+      className={undefined}
       onChange={[Function]}
       type="text"
       value="" />

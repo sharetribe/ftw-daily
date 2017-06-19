@@ -6,7 +6,7 @@ import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { noEmptyArray } from '../../util/validators';
-import { AddImages, Button, Input, ValidationError } from '../../components';
+import { AddImages, Button, ValidationError } from '../../components';
 
 import css from './EditListingPhotosForm.css';
 
@@ -20,7 +20,7 @@ const RenderAddImage = props => {
   return (
     <div className={css.addImageWrapper}>
       <div className={css.aspectRatioWrapper}>
-        <Input {...inputProps} className={css.addImageInput} />
+        <input {...inputProps} className={css.addImageInput} />
         <label htmlFor={name} className={css.addImage}>{label}</label>
       </div>
     </div>
@@ -99,7 +99,7 @@ export class EditListingPhotosFormComponent extends Component {
               const { input, type, meta } = props;
               return (
                 <div className={css.imageRequiredWrapper}>
-                  <Input {...input} type={type} />
+                  <input {...input} type={type} />
                   <ValidationError fieldMeta={meta} />
                 </div>
               );

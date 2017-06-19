@@ -16,7 +16,6 @@ import EditListingWizard from './EditListingWizard/EditListingWizard';
 import ExternalLink from './ExternalLink/ExternalLink';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
-import Input from './Input/Input';
 import InputField from './InputField/InputField';
 import ListingCard from './ListingCard/ListingCard';
 import ListingCardSmall from './ListingCardSmall/ListingCardSmall';
@@ -68,7 +67,6 @@ export {
   FilterPanel,
   HeroSection,
   InlineTextButton,
-  Input,
   InputField,
   ListingCard,
   ListingCardSmall,

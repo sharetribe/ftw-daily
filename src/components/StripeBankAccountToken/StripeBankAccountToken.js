@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { debounce } from 'lodash';
-import { Input, ValidationError } from '../../components';
+import { ValidationError } from '../../components';
 import config from '../../config';
 
 import css from './StripeBankAccountToken.css';
@@ -207,7 +207,7 @@ class StripeBankAccountToken extends Component {
         <label htmlFor="routingNumber">
           <FormattedMessage id="StripeBankAccountToken.routingNumberLabel" />
         </label>
-        <Input
+        <input
           name="routingNumber"
           value={this.state.routingNumber}
           placeholder={routingNumberPlaceholder}
@@ -232,7 +232,7 @@ class StripeBankAccountToken extends Component {
             ? <FormattedMessage id="StripeBankAccountToken.bankAccountNumberLabel" />
             : <FormattedMessage id="StripeBankAccountToken.bankAccountNumberLabelIban" />}
         </label>
-        <Input
+        <input
           value={this.state.accountNumber}
           placeholder={accountNumberPlaceholder}
           onChange={handleAccountNumberChange}

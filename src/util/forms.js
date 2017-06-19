@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Input, ValidationError } from '../components';
+import { ValidationError } from '../components';
 
 /**
  * Hoc to convert a component used within a Field to one that renders
@@ -36,7 +36,7 @@ export const enhancedField = (Comp, options = {}) => {
       } else if (Comp === 'textarea') {
         component = <textarea {...otherProps} {...input} placeholder={placeholder} />;
       } else {
-        component = <Input {...otherProps} {...input} type={type} placeholder={placeholder} />;
+        component = <input {...otherProps} {...input} type={type} placeholder={placeholder} />;
       }
       const labelInfo = label
         ? <label className={labelClassName} htmlFor={input.name}>{label}</label>
