@@ -5,11 +5,11 @@
 }
 
 .hero {
-  height: calc(100vh - var(--topbarHeight));
+  min-height: calc(100vh - var(--topbarHeight));
   padding: 0 24px 98px 24px;
 
   @media (--desktopViewport) {
-    height: calc(100vh - var(--topbarHeightDesktop));
+    min-height: calc(100vh - var(--topbarHeightDesktop));
   }
 
   @media (min-width: 768px) {
