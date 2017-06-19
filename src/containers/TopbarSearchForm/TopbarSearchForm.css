@@ -42,7 +42,7 @@
 
 .mobilePredictions {
   position: absolute;
-  top: calc(var(--inputHeight) - var(--bottomBorder));
+  top: calc(var(--inputHeight));
   left: 0;
   min-height: calc(100vh - var(--mobilePredictionTop));
 }
