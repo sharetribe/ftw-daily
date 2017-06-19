@@ -43,16 +43,17 @@
 /* Child component's size (and positioning) should be given here */
 .menu,
 .searchMenu {
+  /* Font */
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColor);
+
+  /* Layout */
   display: flex;
   width: 66px;
   padding: 12px 24px;
   margin: 0;
   border-width: 0px;
   background-color: transparent;
-
-  /* Font */
-  composes: h5Font from '../../marketplace.css';
-  color: var(--matterColor);
 
   /* Hovers */
   &:enabled {

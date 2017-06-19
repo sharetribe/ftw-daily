@@ -49,6 +49,20 @@
   --topbarHeightDesktop: 72px;
 
   /* Fonts */
+  --marketplaceDefaultFontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: 500; /* Medium */
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.1px;
+    /* No margins for default font */
+
+    @media (--desktopViewport) {
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+
   --marketplaceBodyFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: 500; /* Medium */
@@ -67,6 +81,7 @@
       margin-bottom: 16px;
     }
   }
+
   --marketplaceHeroTitleFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: 700; /* Bold */
@@ -339,41 +354,26 @@ a {
   @apply --marketplaceLinkStyles;
 }
 
-/* Site title (landing page) */
-.heroTitle { @apply --marketplaceHeroTitleFontStyles; }
-
-h1, .h1Font { @apply --marketplaceH1FontStyles; }
-h2, .h2Font { @apply --marketplaceH2FontStyles; }
-h3, .h3Font { @apply --marketplaceH3FontStyles; }
-h4, .h4Font { @apply --marketplaceH4FontStyles; }
-h5, .h5Font { @apply --marketplaceH5FontStyles; }
-h6, .h6Font { @apply --marketplaceH6FontStyles; }
+h1 { @apply --marketplaceH1FontStyles; }
+h2 { @apply --marketplaceH2FontStyles; }
+h3 { @apply --marketplaceH3FontStyles; }
+h4 { @apply --marketplaceH4FontStyles; }
+h5 { @apply --marketplaceH5FontStyles; }
+h6 { @apply --marketplaceH6FontStyles; }
 
 html,
 input,
+li {
+  @apply --marketplaceDefaultFontStyles
+}
+
 p,
-pre,
-li,
-.bodyFont {
-  @apply --marketplaceBodyFontStyles;
-}
-
-.tinyFont {
-  @apply --marketplaceTinyFontStyles;
-}
-
-/* This font is specific to Avatar component only */
-.smallAvatarFont {
-  @apply --marketplaceSmallAvatarFontStyles;
-}
-
-.searchResultsFont {
+pre {
   @apply --marketplaceBodyFontStyles;
 }
 
 /* Base font color */
-html,
-.textColor {
+html {
   color: var(--matterColor);
 }
 

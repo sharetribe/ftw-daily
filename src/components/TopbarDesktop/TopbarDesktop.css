@@ -1,5 +1,21 @@
 @import '../../marketplace.css';
 
+:root {
+  /* Compose text label items on top of this */
+  /* This stretches inline element (link) to take available vertical space (big hover area),
+   * and align baselines
+   */
+  --topbarDesktopLabelStyles: {
+    display: inline-block;
+    margin: 24px 0;
+    text-decoration: inherit;
+
+    @media (--desktopViewport) {
+      margin: 24px 0;
+    }
+  }
+}
+
 /* Desktop */
 .root {
   /* Size */
@@ -18,16 +34,6 @@
 
   /* shadows */
   box-shadow: var(--boxShadowLight);
-}
-
-/* Compose text label items on top of this */
-/* This stretches inline element (link) to take available vertical space (big hover area),
- * and align baselines, and passes text-decoration hover effect
- */
-.topbarDesktopLabel {
-  display: inline-block;
-  margin: 24px 0;
-  text-decoration: inherit;
 }
 
 /* logo */
@@ -51,8 +57,8 @@
 }
 
 .search {
-  composes: topbarDesktopLabel;
-  composes: h4Font from '../../marketplace.css';
+  @apply --marketplaceH4FontStyles;
+  @apply --topbarDesktopLabelStyles;
   color: var(--matterColor);
 }
 
@@ -64,8 +70,8 @@
 }
 
 .createListing {
-  composes: topbarDesktopLabel;
-  composes: h4Font from '../../marketplace.css';
+  @apply --marketplaceH4FontStyles;
+  @apply --topbarDesktopLabelStyles;
   color: var(--marketplaceColor);
 }
 
@@ -76,8 +82,8 @@
 }
 
 .inbox {
-  composes: topbarDesktopLabel;
-  composes: h4Font from '../../marketplace.css';
+  @apply --marketplaceH4FontStyles;
+  @apply --topbarDesktopLabelStyles;
   color: var(--matterColor);
 }
 
@@ -114,8 +120,8 @@
 
 .signup,
 .login {
-  composes: topbarDesktopLabel;
-  composes: h4Font from '../../marketplace.css';
+  @apply --marketplaceH4FontStyles;
+  @apply --topbarDesktopLabelStyles;
   color: var(--matterColor);
 }
 

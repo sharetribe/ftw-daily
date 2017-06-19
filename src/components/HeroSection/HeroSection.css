@@ -25,13 +25,15 @@
 }
 
 .heroMainTitle {
-  composes: heroTitle from '../../marketplace.css';
+  @apply --marketplaceHeroTitleFontStyles;
   color: var(--matterColorLight);
   margin-top: auto;
   margin-bottom: 22px;
 
   @media (--desktopViewport) {
     max-width: var(--desktopTitleMaxWidth);
+    margin-top: auto;
+    margin-bottom: 22px;
   }
 }
 

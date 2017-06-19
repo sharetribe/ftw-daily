@@ -135,6 +135,14 @@
   }
 }
 
+.heroTitle {
+  @apply --marketplaceHeroTitleFontStyles;
+}
+
+.tinyFont {
+  @apply --marketplaceTinyFontStyles;
+}
+
 /* Colors.example */
 
 .colorsContent,

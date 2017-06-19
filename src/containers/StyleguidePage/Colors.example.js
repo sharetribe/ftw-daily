@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import css from './StyleguidePage.css';
-import mpCSS from '../../marketplace.css';
 
 const ColorCard = props => {
   const { mpColor, name, usage } = props;
@@ -13,7 +12,7 @@ const ColorCard = props => {
         <p>
           <span>{name}</span>
           <br />
-          <span className={mpCSS.tinyFont}>{usage}</span>
+          <span className={css.tinyFont}>{usage}</span>
         </p>
       </div>
     </div>

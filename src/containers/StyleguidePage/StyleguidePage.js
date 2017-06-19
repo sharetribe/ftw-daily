@@ -5,7 +5,6 @@ import { NamedLink } from '../../components';
 import * as allExamples from '../../examples';
 
 import css from './StyleguidePage.css';
-import mpCSS from '../../marketplace.css';
 
 const ALL = '*';
 const DEFAULT_GROUP = 'misc';
@@ -107,11 +106,11 @@ const Nav = props => {
       <ul>
         {toGroupLink(ALL)}
       </ul>
-      <h3 className={mpCSS.h5Font}>Basic styling</h3>
+      <h5>Basic styling</h5>
       <ul className={css.groups}>
         {basicStylingGroups}
       </ul>
-      <h3 className={mpCSS.h5Font}>Component categories</h3>
+      <h5>Component categories</h5>
       <ul className={css.groups}>
         {componentGroups}
         {toGroupLink(DEFAULT_GROUP)}
