@@ -321,6 +321,37 @@
       border-color: var(--matterColorAnti);
     }
   }
+
+  /* Inputs */
+  --marketplaceInputStyles: {
+
+    /* Dimensions */
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 13px 0;
+
+    /* Borders */
+    border: none;
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--marketplaceColor);
+    border-radius: 0;
+
+    &::placeholder {
+      color: var(--matterColorAnti);
+    }
+
+    /* Effects */
+
+    transition: border-bottom-color var(--transitionStyle);
+
+    &:hover,
+    &:focus {
+      border-bottom-color: var(--matterColor);
+      outline: none;
+    }
+  }
 }
 
 /* ================ Custom media queries ================ */
@@ -402,42 +433,12 @@ select {
   border: none;
 }
 
-textarea {
-  width: 100%;
-  min-height: 48px;
-  padding: 0 0 5px 0;
-
-  /* Borders */
-  border: none;
-  border-bottom-width: 3px;
-  border-bottom-style: solid;
-  border-bottom-color: var(--marketplaceColor);
-  border-radius: 0;
-
-  &:focus {
-    outline: none;
-  }
+input {
+  @apply --marketplaceInputStyles;
 }
 
-input {
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: 13px 0;
-
-  border: none;
-  border-bottom-width: 3px;
-  border-bottom-style: solid;
-  border-bottom-color: var(--marketplaceColor);
-  border-radius: 0;
-
-  transition: border-bottom-color var(--transitionStyle);
-
-  &::placeholder {
-    color: var(--matterColorAnti);
-  }
-
-  &:focus {
-    outline: none;
-  }
+textarea {
+  @apply --marketplaceInputStyles;
+  min-height: 48px;
+  padding: 0 0 5px 0;
 }
