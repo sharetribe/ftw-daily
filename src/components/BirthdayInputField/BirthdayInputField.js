@@ -181,6 +181,11 @@ BirthdayInput.propTypes = {
 
 const BirthdayInputFieldComponent = props => {
   const { rootClassName, className, id, label, input, meta } = props;
+
+  if (label && !id) {
+    throw new Error('id required when a label is given');
+  }
+
   const classes = classNames(rootClassName || css.fieldRoot, className);
   const inputProps = { id, ...input };
   return (
@@ -195,13 +200,14 @@ const BirthdayInputFieldComponent = props => {
 BirthdayInputFieldComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  id: null,
   label: null,
 };
 
 BirthdayInputFieldComponent.propTypes = {
   rootClassName: string,
   className: string,
-  id: string.isRequired,
+  id: string,
   label: string,
   input: object.isRequired,
   meta: object.isRequired,
