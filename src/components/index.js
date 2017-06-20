@@ -43,6 +43,7 @@ import Select from './Select/Select';
 import StripeBankAccountToken from './StripeBankAccountToken/StripeBankAccountToken';
 import TabNav from './TabNav/TabNav';
 import Tabs from './Tabs/Tabs';
+import TextInputField from './TextInputField/TextInputField';
 import TopbarDesktop from './TopbarDesktop/TopbarDesktop';
 import TopbarMobileMenu from './TopbarMobileMenu/TopbarMobileMenu';
 import ValidationError from './ValidationError/ValidationError';
@@ -94,6 +95,7 @@ export {
   StripeBankAccountToken,
   TabNav,
   Tabs,
+  TextInputField,
   TopbarDesktop,
   TopbarMobileMenu,
   ValidationError,

@@ -6,7 +6,6 @@ import * as Button from './components/Button/Button.example';
 import * as CurrencyInput from './components/CurrencyInput/CurrencyInput.example';
 import * as DateInput from './components/DateInput/DateInput.example';
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
-import * as InputFieldOld from './components/InputFieldOld/InputFieldOld.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as Map from './components/Map/Map.example';
 import * as Menu from './components/Menu/Menu.example';
@@ -20,6 +19,7 @@ import * as StripeBankAccountToken
   from './components/StripeBankAccountToken/StripeBankAccountToken.example';
 import * as TabNav from './components/TabNav/TabNav.example';
 import * as Tabs from './components/Tabs/Tabs.example';
+import * as TextInputField from './components/TextInputField/TextInputField.example';
 import * as TopbarDesktop from './components/TopbarDesktop/TopbarDesktop.example';
 
 // containers
@@ -60,7 +60,6 @@ export {
   EditListingPhotosForm,
   EditListingPricingForm,
   EditListingWizard,
-  InputFieldOld,
   ListingCard,
   LocationAutocompleteInput,
   LoginForm,
@@ -77,6 +76,7 @@ export {
   StripePaymentForm,
   TabNav,
   Tabs,
+  TextInputField,
   TopbarDesktop,
   Typography,
 };
