@@ -4,7 +4,7 @@ import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import { maxLength, required } from '../../util/validators';
-import { Button, InputField } from '../../components';
+import { Button, InputFieldOld } from '../../components';
 
 import css from './EditListingDescriptionForm.css';
 
@@ -52,7 +52,7 @@ const EditListingDescriptionFormComponent = props => {
         name="title"
         label={titleMessage}
         placeholder={titlePlaceholderMessage}
-        component={InputField}
+        component={InputFieldOld}
         type="text"
         validate={[required(titleRequiredMessage), maxLength60Message]}
       />
@@ -63,7 +63,7 @@ const EditListingDescriptionFormComponent = props => {
         placeholder={descriptionPlaceholderMessage}
         className={css.description}
         type="textarea"
-        component={InputField}
+        component={InputFieldOld}
         validate={[required(descriptionRequiredMessage)]}
       />
 

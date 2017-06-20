@@ -3,7 +3,7 @@ import React from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { Button } from '../../components';
 import * as validators from '../../util/validators';
-import InputField from './InputField';
+import InputFieldOld from './InputFieldOld';
 
 const FormComponent = props => {
   const { handleSubmit, pristine, submitting } = props;
@@ -18,26 +18,26 @@ const FormComponent = props => {
         label="Label for required input"
         placeholder="Placeholder..."
         validate={required}
-        component={InputField}
+        component={InputFieldOld}
       />
       <Field
         name="input2"
         type="text"
         label="Example input label"
         placeholder="Example input placeholder..."
-        component={InputField}
+        component={InputFieldOld}
       />
       <Field
         name="input3"
         type="text"
         placeholder="No label in this input..."
-        component={InputField}
+        component={InputFieldOld}
       />
       <Field
         name="input4"
         type="text"
         label="Label for input with initial value"
-        component={InputField}
+        component={InputFieldOld}
       />
       <Field
         name="textarea1"
@@ -45,7 +45,7 @@ const FormComponent = props => {
         label="Label for textarea"
         placeholder="Textarea placeholder..."
         validate={required}
-        component={InputField}
+        component={InputFieldOld}
       />
       <Button type="submit" disabled={submitDisabled} style={buttonStyles}>Submit form</Button>
     </form>
@@ -54,7 +54,7 @@ const FormComponent = props => {
 
 FormComponent.propTypes = formPropTypes;
 
-const defaultFormName = 'Styleguide.InputField';
+const defaultFormName = 'Styleguide.InputFieldOld';
 
 const Form = reduxForm({
   form: defaultFormName,

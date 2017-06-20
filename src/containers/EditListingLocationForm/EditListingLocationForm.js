@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { enhancedField } from '../../util/forms';
 import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../util/validators';
-import { LocationAutocompleteInput, Button, InputField } from '../../components';
+import { LocationAutocompleteInput, Button, InputFieldOld } from '../../components';
 
 import css from './EditListingLocationForm.css';
 
@@ -66,7 +66,7 @@ export class EditListingLocationFormComponent extends Component {
           name="building"
           label={buildingMessage}
           placeholder={buildingPlaceholderMessage}
-          component={InputField}
+          component={InputFieldOld}
           type="text"
         />
 

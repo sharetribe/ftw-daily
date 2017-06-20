@@ -2,7 +2,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import * as validators from '../../util/validators';
-import { InputField } from '../../components';
+import { InputFieldOld } from '../../components';
 import BirthdayInput from './BirthdayInput';
 
 const FormComponent = () => {
@@ -15,7 +15,7 @@ const FormComponent = () => {
         format={null}
         type="custom"
         inputComponent={BirthdayInput}
-        component={InputField}
+        component={InputFieldOld}
         validate={required}
       />
     </form>

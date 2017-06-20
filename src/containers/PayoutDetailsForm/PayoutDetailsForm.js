@@ -10,7 +10,7 @@ import {
   StripeBankAccountToken,
   Select,
   BirthdayInput,
-  InputField,
+  InputFieldOld,
 } from '../../components';
 import * as validators from '../../util/validators';
 import { enhancedField } from '../../util/forms';
@@ -124,7 +124,7 @@ class PayoutDetailsFormComponent extends Component {
             type="text"
             label={streetAddressLabel}
             placeholder={streetAddressPlaceholder}
-            component={InputField}
+            component={InputFieldOld}
             validate={streetAddressRequired}
             clearOnUnmount
           />
@@ -133,7 +133,7 @@ class PayoutDetailsFormComponent extends Component {
             type="text"
             label={postalCodeLabel}
             placeholder={postalCodePlaceholder}
-            component={InputField}
+            component={InputFieldOld}
             validate={postalCodeRequired}
             clearOnUnmount
           />
@@ -142,7 +142,7 @@ class PayoutDetailsFormComponent extends Component {
             type="text"
             label={cityLabel}
             placeholder={cityPlaceholder}
-            component={InputField}
+            component={InputFieldOld}
             validate={cityRequired}
             clearOnUnmount
           />
@@ -188,14 +188,14 @@ class PayoutDetailsFormComponent extends Component {
           name="firstName"
           type="text"
           label={firstNameLabel}
-          component={InputField}
+          component={InputFieldOld}
           validate={firstNameRequired}
         />
         <Field
           name="lastName"
           type="text"
           label={lastNameLabel}
-          component={InputField}
+          component={InputFieldOld}
           validate={lastNameRequired}
         />
         <Field
@@ -204,7 +204,7 @@ class PayoutDetailsFormComponent extends Component {
           format={null}
           type="custom"
           inputComponent={BirthdayInput}
-          component={InputField}
+          component={InputFieldOld}
           validate={birthdayRequired}
         />
         <h2 className={css.subTitle}>

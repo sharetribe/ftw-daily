@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { omit } from 'lodash';
 import classNames from 'classnames';
 
-import css from './InputField.css';
+import css from './InputFieldOld.css';
 
-class InputField extends Component {
+class InputFieldOld extends Component {
   componentWillUnmount() {
     if (this.props.clearOnUnmount) {
       this.props.input.onChange('');
@@ -73,7 +73,7 @@ class InputField extends Component {
   }
 }
 
-InputField.defaultProps = {
+InputFieldOld.defaultProps = {
   rootClassName: null,
   className: null,
   inputRootClassName: null,
@@ -88,7 +88,7 @@ InputField.defaultProps = {
 
 const { string, shape, bool, func, oneOfType } = PropTypes;
 
-InputField.propTypes = {
+InputFieldOld.propTypes = {
   // Allow passing in classes to subcomponents
   rootClassName: string,
   className: string,
@@ -122,4 +122,4 @@ InputField.propTypes = {
   }).isRequired,
 };
 
-export default InputField;
+export default InputFieldOld;
