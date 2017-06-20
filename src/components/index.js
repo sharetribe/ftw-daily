@@ -16,7 +16,7 @@ import EditListingWizard from './EditListingWizard/EditListingWizard';
 import ExternalLink from './ExternalLink/ExternalLink';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
-import InputField from './InputField/InputField';
+import InputFieldOld from './InputFieldOld/InputFieldOld';
 import ListingCard from './ListingCard/ListingCard';
 import ListingCardSmall from './ListingCardSmall/ListingCardSmall';
 import LocationAutocompleteInput from './LocationAutocompleteInput/LocationAutocompleteInput';
@@ -67,7 +67,7 @@ export {
   FilterPanel,
   HeroSection,
   InlineTextButton,
-  InputField,
+  InputFieldOld,
   ListingCard,
   ListingCardSmall,
   LocationAutocompleteInput,
