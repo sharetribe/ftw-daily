@@ -179,8 +179,6 @@ BirthdayInput.propTypes = {
   onBlur: func.isRequired,
 };
 
-export default BirthdayInput;
-
 const BirthdayInputFieldComponent = props => {
   const { rootClassName, className, id, label, input, meta } = props;
   const classes = classNames(rootClassName || css.fieldRoot, className);
@@ -209,6 +207,8 @@ BirthdayInputFieldComponent.propTypes = {
   meta: object.isRequired,
 };
 
-export const BirthdayInputField = props => {
+const BirthdayInputField = props => {
   return <Field component={BirthdayInputFieldComponent} {...props} />;
 };
+
+export default BirthdayInputField;

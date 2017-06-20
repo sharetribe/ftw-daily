@@ -1,7 +1,7 @@
 import AddImages from './AddImages/AddImages';
 import AuthorInfo from './AuthorInfo/AuthorInfo';
 import Avatar from './Avatar/Avatar';
-import { BirthdayInputField } from './BirthdayInputField/BirthdayInputField';
+import BirthdayInputField from './BirthdayInputField/BirthdayInputField';
 import BookingInfo from './BookingInfo/BookingInfo';
 import Button, { InlineTextButton } from './Button/Button';
 import CloseIcon from './CloseIcon/CloseIcon';
