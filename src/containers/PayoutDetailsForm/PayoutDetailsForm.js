@@ -10,7 +10,7 @@ import {
   StripeBankAccountToken,
   Select,
   BirthdayInputField,
-  InputFieldOld,
+  TextInputField,
 } from '../../components';
 import * as validators from '../../util/validators';
 import { enhancedField } from '../../util/forms';
@@ -121,30 +121,33 @@ class PayoutDetailsFormComponent extends Component {
     const showAddressFields = country && requiresAddress(country);
     const addressSection = showAddressFields
       ? <div>
-          <Field
-            name="streetAddress"
+          <TextInputField
+            className={css.field}
             type="text"
+            name="streetAddress"
+            id={`${form}.streetAddress`}
             label={streetAddressLabel}
             placeholder={streetAddressPlaceholder}
-            component={InputFieldOld}
             validate={streetAddressRequired}
             clearOnUnmount
           />
-          <Field
-            name="postalCode"
+          <TextInputField
+            className={css.field}
             type="text"
+            name="postalCode"
+            id={`${form}.postalCode`}
             label={postalCodeLabel}
             placeholder={postalCodePlaceholder}
-            component={InputFieldOld}
             validate={postalCodeRequired}
             clearOnUnmount
           />
-          <Field
-            name="city"
+          <TextInputField
+            className={css.field}
             type="text"
+            name="city"
+            id={`${form}.city`}
             label={cityLabel}
             placeholder={cityPlaceholder}
-            component={InputFieldOld}
             validate={cityRequired}
             clearOnUnmount
           />
@@ -186,18 +189,20 @@ class PayoutDetailsFormComponent extends Component {
         <h2 className={css.subTitle}>
           <FormattedMessage id="PayoutDetailsForm.personalDetailsTitle" />
         </h2>
-        <Field
-          name="firstName"
+        <TextInputField
+          className={css.field}
           type="text"
+          name="firstName"
+          id={`${form}.firstName`}
           label={firstNameLabel}
-          component={InputFieldOld}
           validate={firstNameRequired}
         />
-        <Field
-          name="lastName"
+        <TextInputField
+          className={css.field}
           type="text"
+          name="lastName"
+          id={`${form}.lastName`}
           label={lastNameLabel}
-          component={InputFieldOld}
           validate={lastNameRequired}
         />
         <BirthdayInputField

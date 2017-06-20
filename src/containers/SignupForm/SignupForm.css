@@ -9,6 +9,7 @@
 .name {
   display: flex;
   justify-content: space-between;
+  margin-top: 24px;
 }
 
 .firstNameRoot,
@@ -16,7 +17,11 @@
   width: calc(50% - 0.5rem);
 }
 
+.password {
+  margin-top: 24px;
+}
+
 .button {
   align-self: stretch;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }

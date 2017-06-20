@@ -6,19 +6,18 @@ exports[`SignupForm matches snapshot 1`] = `
     <div
       className="">
       <label
-        htmlFor="email">
+        htmlFor="SignupForm.email">
         Email
       </label>
       <input
-        autoFocus={false}
         className=""
+        id="SignupForm.email"
         name="email"
         onBlur={[Function]}
         onChange={[Function]}
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder={null}
         type="email"
         value="" />
     </div>
@@ -27,38 +26,36 @@ exports[`SignupForm matches snapshot 1`] = `
       <div
         className="">
         <label
-          htmlFor="firstName">
+          htmlFor="SignupForm.firstName">
           First name
         </label>
         <input
-          autoFocus={false}
           className=""
+          id="SignupForm.firstName"
           name="firstName"
           onBlur={[Function]}
           onChange={[Function]}
           onDragStart={[Function]}
           onDrop={[Function]}
           onFocus={[Function]}
-          placeholder={null}
           type="text"
           value="" />
       </div>
       <div
         className="">
         <label
-          htmlFor="lastName">
+          htmlFor="SignupForm.lastName">
           Last name
         </label>
         <input
-          autoFocus={false}
           className=""
+          id="SignupForm.lastName"
           name="lastName"
           onBlur={[Function]}
           onChange={[Function]}
           onDragStart={[Function]}
           onDrop={[Function]}
           onFocus={[Function]}
-          placeholder={null}
           type="text"
           value="" />
       </div>
@@ -66,19 +63,18 @@ exports[`SignupForm matches snapshot 1`] = `
     <div
       className="">
       <label
-        htmlFor="password">
+        htmlFor="SignupForm.password">
         Password
       </label>
       <input
-        autoFocus={false}
         className=""
+        id="SignupForm.password"
         name="password"
         onBlur={[Function]}
         onChange={[Function]}
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder={null}
         type="password"
         value="" />
     </div>

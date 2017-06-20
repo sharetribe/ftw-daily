@@ -6,38 +6,36 @@ exports[`LoginForm matches snapshot 1`] = `
     <div
       className="">
       <label
-        htmlFor="email">
+        htmlFor="LoginForm.email">
         Email
       </label>
       <input
-        autoFocus={false}
         className=""
+        id="LoginForm.email"
         name="email"
         onBlur={[Function]}
         onChange={[Function]}
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder={null}
         type="email"
         value="" />
     </div>
     <div
       className="">
       <label
-        htmlFor="password">
+        htmlFor="LoginForm.password">
         Password
       </label>
       <input
-        autoFocus={false}
         className=""
+        id="LoginForm.password"
         name="password"
         onBlur={[Function]}
         onChange={[Function]}
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder={null}
         type="password"
         value="" />
     </div>

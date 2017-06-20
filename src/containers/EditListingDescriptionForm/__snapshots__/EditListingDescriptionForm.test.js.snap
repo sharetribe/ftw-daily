@@ -5,12 +5,13 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
   <div
     className="">
     <label
-      htmlFor="title">
+      htmlFor="fakeTestForm.title">
       Name of your sauna
     </label>
     <input
       autoFocus={true}
       className=""
+      id="fakeTestForm.title"
       name="title"
       onBlur={[Function]}
       onChange={[Function]}
@@ -24,12 +25,12 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
   <div
     className="">
     <label
-      htmlFor="description">
+      htmlFor="fakeTestForm.description">
       Describe your sauna
     </label>
     <textarea
-      autoFocus={false}
       className=""
+      id="fakeTestForm.description"
       name="description"
       onBlur={[Function]}
       onChange={[Function]}

@@ -8,9 +8,10 @@
 
 .description {
   flex-grow: 1;
+  margin-top: 24px;
 }
 
 .submitButton {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
