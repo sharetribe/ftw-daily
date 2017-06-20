@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { Button, Input } from '../../components';
+import { Button } from '../../components';
 
 import css from './Discussion.css';
 
@@ -47,7 +47,7 @@ class Discussion extends Component {
           {this.props.messages.map(msg => <Message key={msg.id} {...msg} />)}
         </ul>
         <form className={css.sendMessageForm} onSubmit={this.handleNewMessage}>
-          <Input
+          <input
             className={css.sendMessageInput}
             autoFocus
             type="text"

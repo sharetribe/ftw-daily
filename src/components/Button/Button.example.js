@@ -53,5 +53,5 @@ const ButtonsComponent = () => {
 
 export const Buttons = {
   component: ButtonsComponent,
-  group: 'buttons',
+  group: 'inputs and buttons',
 };
