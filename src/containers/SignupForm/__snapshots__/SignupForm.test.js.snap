@@ -6,7 +6,6 @@ exports[`SignupForm matches snapshot 1`] = `
     <div
       className="">
       <label
-        className={undefined}
         htmlFor="email">
         Email
       </label>
@@ -28,7 +27,6 @@ exports[`SignupForm matches snapshot 1`] = `
       <div
         className="">
         <label
-          className={undefined}
           htmlFor="firstName">
           First name
         </label>
@@ -48,7 +46,6 @@ exports[`SignupForm matches snapshot 1`] = `
       <div
         className="">
         <label
-          className={undefined}
           htmlFor="lastName">
           Last name
         </label>
@@ -69,7 +66,6 @@ exports[`SignupForm matches snapshot 1`] = `
     <div
       className="">
       <label
-        className={undefined}
         htmlFor="password">
         Password
       </label>

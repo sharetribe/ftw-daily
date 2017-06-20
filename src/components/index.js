@@ -1,7 +1,7 @@
 import AddImages from './AddImages/AddImages';
 import AuthorInfo from './AuthorInfo/AuthorInfo';
 import Avatar from './Avatar/Avatar';
-import BirthdayInput from './BirthdayInput/BirthdayInput';
+import BirthdayInputField from './BirthdayInputField/BirthdayInputField';
 import BookingInfo from './BookingInfo/BookingInfo';
 import Button, { InlineTextButton } from './Button/Button';
 import CloseIcon from './CloseIcon/CloseIcon';
@@ -16,7 +16,7 @@ import EditListingWizard from './EditListingWizard/EditListingWizard';
 import ExternalLink from './ExternalLink/ExternalLink';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
-import InputField from './InputField/InputField';
+import InputFieldOld from './InputFieldOld/InputFieldOld';
 import ListingCard from './ListingCard/ListingCard';
 import ListingCardSmall from './ListingCardSmall/ListingCardSmall';
 import LocationAutocompleteInput from './LocationAutocompleteInput/LocationAutocompleteInput';
@@ -51,7 +51,7 @@ export {
   AddImages,
   AuthorInfo,
   Avatar,
-  BirthdayInput,
+  BirthdayInputField,
   BookingInfo,
   Button,
   CloseIcon,
@@ -67,7 +67,7 @@ export {
   FilterPanel,
   HeroSection,
   InlineTextButton,
-  InputField,
+  InputFieldOld,
   ListingCard,
   ListingCardSmall,
   LocationAutocompleteInput,

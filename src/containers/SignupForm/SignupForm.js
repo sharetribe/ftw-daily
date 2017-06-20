@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
-import { InputField, Button } from '../../components';
+import { InputFieldOld, Button } from '../../components';
 import * as validators from '../../util/validators';
 
 import css from './SignupForm.css';
@@ -55,7 +55,7 @@ const SignupFormComponent = props => {
           type="email"
           label={emailLabel}
           validate={emailRequired}
-          component={InputField}
+          component={InputFieldOld}
         />
         <div className={css.name}>
           <Field
@@ -64,7 +64,7 @@ const SignupFormComponent = props => {
             type="text"
             label={firstNameLabel}
             validate={firstNameRequired}
-            component={InputField}
+            component={InputFieldOld}
           />
           <Field
             className={css.lastNameRoot}
@@ -72,7 +72,7 @@ const SignupFormComponent = props => {
             type="text"
             label={lastNameLabel}
             validate={lastNameRequired}
-            component={InputField}
+            component={InputFieldOld}
           />
         </div>
         <Field
@@ -80,7 +80,7 @@ const SignupFormComponent = props => {
           type="password"
           label={passwordLabel}
           validate={passwordRequired}
-          component={InputField}
+          component={InputFieldOld}
         />
       </div>
       <div>

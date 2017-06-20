@@ -1,21 +1,20 @@
 /* eslint-disable no-console */
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import * as validators from '../../util/validators';
-import { InputField } from '../../components';
-import BirthdayInput from './BirthdayInput';
+import BirthdayInputField from './BirthdayInputField';
+
+const formName = 'Styleguide.BirthdayInput.Form';
 
 const FormComponent = () => {
   const required = validators.required('A valid date is required');
   return (
     <form>
-      <Field
+      <BirthdayInputField
+        id={`${formName}.birthday`}
         name="birthday"
         label="Date of birth"
         format={null}
-        type="custom"
-        inputComponent={BirthdayInput}
-        component={InputField}
         validate={required}
       />
     </form>
@@ -23,7 +22,7 @@ const FormComponent = () => {
 };
 
 const Form = reduxForm({
-  form: 'Styleguide.BirthdayInput.Form',
+  form: formName,
 })(FormComponent);
 
 export const Empty = {

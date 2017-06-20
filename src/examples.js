@@ -1,12 +1,12 @@
 // components
 import * as AddImages from './components/AddImages/AddImages.example';
-import * as BirthdayInput from './components/BirthdayInput/BirthdayInput.example';
+import * as BirthdayInputField from './components/BirthdayInputField/BirthdayInputField.example';
 import * as BookingInfo from './components/BookingInfo/BookingInfo.example';
 import * as Button from './components/Button/Button.example';
 import * as CurrencyInput from './components/CurrencyInput/CurrencyInput.example';
 import * as DateInput from './components/DateInput/DateInput.example';
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
-import * as InputField from './components/InputField/InputField.example';
+import * as InputFieldOld from './components/InputFieldOld/InputFieldOld.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as Map from './components/Map/Map.example';
 import * as Menu from './components/Menu/Menu.example';
@@ -46,7 +46,7 @@ import * as Typography from './containers/StyleguidePage/Typography.example';
 
 export {
   AddImages,
-  BirthdayInput,
+  BirthdayInputField,
   BookingDatesForm,
   BookingInfo,
   Button,
@@ -60,7 +60,7 @@ export {
   EditListingPhotosForm,
   EditListingPricingForm,
   EditListingWizard,
-  InputField,
+  InputFieldOld,
   ListingCard,
   LocationAutocompleteInput,
   LoginForm,

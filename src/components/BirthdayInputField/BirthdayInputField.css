@@ -1,4 +1,8 @@
-.root {
+.fieldRoot {
+
+}
+
+.inputRoot {
   display: flex;
 }
 

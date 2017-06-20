@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { omit } from 'lodash';
 import classNames from 'classnames';
 
-import css from './InputField.css';
+import css from './InputFieldOld.css';
 
-class InputField extends Component {
+class InputFieldOld extends Component {
   componentWillUnmount() {
     if (this.props.clearOnUnmount) {
       this.props.input.onChange('');
@@ -14,10 +14,8 @@ class InputField extends Component {
     const {
       rootClassName,
       className,
-      labelRootClassName,
       inputRootClassName,
       errorRootClassName,
-      inputComponent: InputComponent,
       type,
       label,
       placeholder,
@@ -26,15 +24,7 @@ class InputField extends Component {
       meta,
     } = this.props;
 
-    const isCustom = type === 'custom';
     const isTextarea = type === 'textarea';
-
-    if (!isCustom && InputComponent) {
-      throw new Error('inputComponent should only be given with type="custom" prop');
-    }
-    if (isCustom && !InputComponent) {
-      throw new Error('inputComponent prop required for custom inputs');
-    }
 
     // Normal <input> component takes all the props, but the type prop
     // is omitted from <textarea> and custom components.
@@ -48,7 +38,6 @@ class InputField extends Component {
     const hasError = touched && invalid && error;
 
     const classes = classNames(rootClassName || css.root, className);
-    const labelClasses = labelRootClassName || css.label;
     const inputClasses = classNames(inputRootClassName || css.input, {
       [css.inputSuccess]: valid,
       [css.inputError]: hasError,
@@ -57,9 +46,7 @@ class InputField extends Component {
 
     let component;
 
-    if (isCustom) {
-      component = <InputComponent className={inputRootClassName} {...inputPropsWithoutType} />;
-    } else if (isTextarea) {
+    if (isTextarea) {
       component = <textarea className={inputClasses} {...inputPropsWithoutType} />;
     } else {
       component = <input className={inputClasses} {...inputProps} />;
@@ -67,7 +54,7 @@ class InputField extends Component {
 
     return (
       <div className={classes}>
-        {label ? <label className={labelClasses} htmlFor={input.name}>{label}</label> : null}
+        {label ? <label htmlFor={input.name}>{label}</label> : null}
         {component}
         {hasError ? <p className={errorClasses}>{error}</p> : null}
       </div>
@@ -75,36 +62,30 @@ class InputField extends Component {
   }
 }
 
-InputField.defaultProps = {
+InputFieldOld.defaultProps = {
   rootClassName: null,
   className: null,
-  labelRootClassName: null,
   inputRootClassName: null,
   errorRootClassName: null,
   clearOnUnmount: false,
-  inputComponent: null,
   type: null,
   label: null,
   placeholder: null,
   autoFocus: false,
 };
 
-const { string, shape, bool, func, oneOfType } = PropTypes;
+const { string, shape, bool, func } = PropTypes;
 
-InputField.propTypes = {
+InputFieldOld.propTypes = {
   // Allow passing in classes to subcomponents
   rootClassName: string,
   className: string,
-  labelRootClassName: string,
   inputRootClassName: string,
   errorRootClassName: string,
 
   clearOnUnmount: bool,
 
-  // If the type props is 'custom', this prop is used as the component
-  inputComponent: oneOfType([func, string]),
-
-  // 'custom', 'textarea', or something passed to an <input> element
+  // 'textarea' or something passed to an <input> element
   type: string,
 
   // Extra props passed to the underlying input component
@@ -126,4 +107,4 @@ InputField.propTypes = {
   }).isRequired,
 };
 
-export default InputField;
+export default InputFieldOld;

@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+import { Field } from 'redux-form';
 import classNames from 'classnames';
 import { range } from 'lodash';
-import { Select } from '../../components';
+import { Select, ValidationError } from '../../components';
 
-import css from './BirthdayInput.css';
+import css from './BirthdayInputField.css';
 
 // Since redux-form tracks the onBlur event for marking the field as
 // touched (which triggers possible error validation rendering), only
@@ -122,17 +123,16 @@ class BirthdayInput extends Component {
     });
   }
   render() {
-    const { rootClassName, className } = this.props;
+    const { id } = this.props;
 
     const selectedValue = n => {
       return typeof n === 'number' ? n : '';
     };
 
-    const classes = classNames(rootClassName || css.root, className);
-
     return (
-      <div className={classes}>
+      <div className={css.inputRoot}>
         <Select
+          id={id}
           value={selectedValue(this.state.selected.day)}
           className={css.dropdown}
           onFocus={() => this.handleSelectFocus()}
@@ -167,21 +167,54 @@ class BirthdayInput extends Component {
   }
 }
 
-BirthdayInput.defaultProps = {
-  rootClassName: null,
-  className: null,
-  value: null,
-};
+BirthdayInput.defaultProps = { value: null };
 
-const { string, instanceOf, func } = PropTypes;
+const { string, instanceOf, func, object } = PropTypes;
 
 BirthdayInput.propTypes = {
-  rootClassName: string,
-  className: string,
+  id: string.isRequired,
   value: instanceOf(Date),
   onChange: func.isRequired,
   onFocus: func.isRequired,
   onBlur: func.isRequired,
 };
 
-export default BirthdayInput;
+const BirthdayInputFieldComponent = props => {
+  const { rootClassName, className, id, label, input, meta } = props;
+
+  if (label && !id) {
+    throw new Error('id required when a label is given');
+  }
+
+  const classes = classNames(rootClassName || css.fieldRoot, className);
+  const inputProps = { id, ...input };
+  return (
+    <div className={classes}>
+      {label ? <label htmlFor={id}>{label}</label> : null}
+      <BirthdayInput {...inputProps} />
+      <ValidationError fieldMeta={meta} />
+    </div>
+  );
+};
+
+BirthdayInputFieldComponent.defaultProps = {
+  rootClassName: null,
+  className: null,
+  id: null,
+  label: null,
+};
+
+BirthdayInputFieldComponent.propTypes = {
+  rootClassName: string,
+  className: string,
+  id: string,
+  label: string,
+  input: object.isRequired,
+  meta: object.isRequired,
+};
+
+const BirthdayInputField = props => {
+  return <Field component={BirthdayInputFieldComponent} {...props} />;
+};
+
+export default BirthdayInputField;

@@ -9,8 +9,8 @@ import {
   Button,
   StripeBankAccountToken,
   Select,
-  BirthdayInput,
-  InputField,
+  BirthdayInputField,
+  InputFieldOld,
 } from '../../components';
 import * as validators from '../../util/validators';
 import { enhancedField } from '../../util/forms';
@@ -53,6 +53,7 @@ class PayoutDetailsFormComponent extends Component {
       className,
       country,
       currency,
+      form,
       disabled,
       handleSubmit,
       pristine,
@@ -74,6 +75,7 @@ class PayoutDetailsFormComponent extends Component {
       })
     );
 
+    const birthdayId = `${form}.birthday`;
     const birthdayLabel = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayLabel' });
     const birthdayRequired = validators.required(
       intl.formatMessage({
@@ -124,7 +126,7 @@ class PayoutDetailsFormComponent extends Component {
             type="text"
             label={streetAddressLabel}
             placeholder={streetAddressPlaceholder}
-            component={InputField}
+            component={InputFieldOld}
             validate={streetAddressRequired}
             clearOnUnmount
           />
@@ -133,7 +135,7 @@ class PayoutDetailsFormComponent extends Component {
             type="text"
             label={postalCodeLabel}
             placeholder={postalCodePlaceholder}
-            component={InputField}
+            component={InputFieldOld}
             validate={postalCodeRequired}
             clearOnUnmount
           />
@@ -142,7 +144,7 @@ class PayoutDetailsFormComponent extends Component {
             type="text"
             label={cityLabel}
             placeholder={cityPlaceholder}
-            component={InputField}
+            component={InputFieldOld}
             validate={cityRequired}
             clearOnUnmount
           />
@@ -188,23 +190,22 @@ class PayoutDetailsFormComponent extends Component {
           name="firstName"
           type="text"
           label={firstNameLabel}
-          component={InputField}
+          component={InputFieldOld}
           validate={firstNameRequired}
         />
         <Field
           name="lastName"
           type="text"
           label={lastNameLabel}
-          component={InputField}
+          component={InputFieldOld}
           validate={lastNameRequired}
         />
-        <Field
+        <BirthdayInputField
+          className={css.field}
+          id={birthdayId}
           name="birthDate"
           label={birthdayLabel}
           format={null}
-          type="custom"
-          inputComponent={BirthdayInput}
-          component={InputField}
           validate={birthdayRequired}
         />
         <h2 className={css.subTitle}>

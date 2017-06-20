@@ -16,7 +16,7 @@
   display: flex;
   width: 24px;
   align-self: stretch;
-  border-bottom: 3px solid var(--marketplaceColor);
+  border-bottom: 2px solid var(--marketplaceColor);
   background-color: var(--matterColorLight);
 }
 
