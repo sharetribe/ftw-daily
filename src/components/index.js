@@ -1,7 +1,7 @@
 import AddImages from './AddImages/AddImages';
 import AuthorInfo from './AuthorInfo/AuthorInfo';
 import Avatar from './Avatar/Avatar';
-import BirthdayInput from './BirthdayInput/BirthdayInput';
+import BirthdayInput, { BirthdayInputField } from './BirthdayInput/BirthdayInput';
 import BookingInfo from './BookingInfo/BookingInfo';
 import Button, { InlineTextButton } from './Button/Button';
 import CloseIcon from './CloseIcon/CloseIcon';
@@ -52,6 +52,7 @@ export {
   AuthorInfo,
   Avatar,
   BirthdayInput,
+  BirthdayInputField,
   BookingInfo,
   Button,
   CloseIcon,

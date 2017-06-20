@@ -9,7 +9,7 @@ import {
   Button,
   StripeBankAccountToken,
   Select,
-  BirthdayInput,
+  BirthdayInputField,
   InputFieldOld,
 } from '../../components';
 import * as validators from '../../util/validators';
@@ -53,6 +53,7 @@ class PayoutDetailsFormComponent extends Component {
       className,
       country,
       currency,
+      form,
       disabled,
       handleSubmit,
       pristine,
@@ -74,6 +75,7 @@ class PayoutDetailsFormComponent extends Component {
       })
     );
 
+    const birthdayId = `${form}.birthday`;
     const birthdayLabel = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayLabel' });
     const birthdayRequired = validators.required(
       intl.formatMessage({
@@ -198,13 +200,13 @@ class PayoutDetailsFormComponent extends Component {
           component={InputFieldOld}
           validate={lastNameRequired}
         />
-        <Field
+        <BirthdayInputField
+          className={css.field}
+          id={birthdayId}
           name="birthDate"
           label={birthdayLabel}
           format={null}
           type="custom"
-          inputComponent={BirthdayInput}
-          component={InputFieldOld}
           validate={birthdayRequired}
         />
         <h2 className={css.subTitle}>
