@@ -206,7 +206,6 @@ class PayoutDetailsFormComponent extends Component {
           name="birthDate"
           label={birthdayLabel}
           format={null}
-          type="custom"
           validate={birthdayRequired}
         />
         <h2 className={css.subTitle}>
