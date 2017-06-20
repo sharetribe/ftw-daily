@@ -20,6 +20,7 @@ import * as StripeBankAccountToken
   from './components/StripeBankAccountToken/StripeBankAccountToken.example';
 import * as TabNav from './components/TabNav/TabNav.example';
 import * as Tabs from './components/Tabs/Tabs.example';
+import * as TextInputField from './components/TextInputField/TextInputField.example';
 import * as TopbarDesktop from './components/TopbarDesktop/TopbarDesktop.example';
 
 // containers
@@ -77,6 +78,7 @@ export {
   StripePaymentForm,
   TabNav,
   Tabs,
+  TextInputField,
   TopbarDesktop,
   Typography,
 };
