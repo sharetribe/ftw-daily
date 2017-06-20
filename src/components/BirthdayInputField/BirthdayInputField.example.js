@@ -2,7 +2,7 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 import * as validators from '../../util/validators';
-import { BirthdayInputField } from './BirthdayInput';
+import { BirthdayInputField } from './BirthdayInputField';
 
 const formName = 'Styleguide.BirthdayInput.Form';
 
