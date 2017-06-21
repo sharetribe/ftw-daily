@@ -373,6 +373,41 @@
       outline: none;
     }
   }
+
+  --marketplaceSelectStyles: {
+
+    /* Dimensions */
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 5px 0 4px 0;
+
+    /* Unset user agent styles */
+    appearance: none;
+
+    /* Borders */
+    border: none;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--marketplaceColor);
+    border-radius: 0;
+
+    /* Background */
+    background-image: url('data:image/svg+xml;utf8,<svg width="16" height="10" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg"><path d="M15.027 2.5a.577.577 0 0 0 0-.813L13.545.214a.566.566 0 0 0-.804 0L8 4.955 3.259.215a.566.566 0 0 0-.804 0L.973 1.686a.577.577 0 0 0 0 .813l6.625 6.616c.223.223.58.223.804 0L15.027 2.5z" fill="#4A4A4A" fill-rule="evenodd"/></svg>');
+    background-size: 16px 16px;
+    background-position: center right;
+
+    /* Effects */
+
+    cursor: pointer;
+    transition: border-bottom-color var(--transitionStyle);
+
+    &:hover,
+    &:focus {
+      border-bottom-color: var(--matterColor);
+      outline: none;
+    }
+  }
 }
 
 /* ================ Custom media queries ================ */
@@ -401,6 +436,7 @@ h6 { @apply --marketplaceH6FontStyles; }
 html,
 input,
 textarea,
+select,
 li {
   @apply --marketplaceDefaultFontStyles
 }
@@ -441,7 +477,7 @@ label {
 }
 
 select {
-  border: none;
+  @apply --marketplaceSelectStyles;
 }
 
 input {
