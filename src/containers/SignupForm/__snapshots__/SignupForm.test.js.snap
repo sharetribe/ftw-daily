@@ -18,7 +18,7 @@ exports[`SignupForm matches snapshot 1`] = `
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder="me@example.com"
+        placeholder="john.doe@example.com"
         type="email"
         value="" />
     </div>
@@ -39,7 +39,7 @@ exports[`SignupForm matches snapshot 1`] = `
           onDragStart={[Function]}
           onDrop={[Function]}
           onFocus={[Function]}
-          placeholder="Elon"
+          placeholder="John"
           type="text"
           value="" />
       </div>
@@ -58,7 +58,7 @@ exports[`SignupForm matches snapshot 1`] = `
           onDragStart={[Function]}
           onDrop={[Function]}
           onFocus={[Function]}
-          placeholder="Musk"
+          placeholder="Doe"
           type="text"
           value="" />
       </div>

@@ -18,7 +18,7 @@ exports[`LoginForm matches snapshot 1`] = `
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder="me@example.com"
+        placeholder="john.doe@example.com"
         type="email"
         value="" />
     </div>
