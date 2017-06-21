@@ -1,6 +1,7 @@
 import React from 'react';
+import { fakeIntl } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
-import PaginationLinks from './PaginationLinks';
+import { PaginationLinksComponent as PaginationLinks } from './PaginationLinks';
 
 describe('PaginationLinks', () => {
   it('should match snapshot with both links enabled', () => {
@@ -15,6 +16,7 @@ describe('PaginationLinks', () => {
       pagePathParams: { id: 'some-page-id' },
       pageSearchParams: { param: 'foobar' },
       pagination,
+      intl: fakeIntl,
     };
     const tree = renderShallow(<PaginationLinks {...props} />);
     expect(tree).toMatchSnapshot();
@@ -31,6 +33,7 @@ describe('PaginationLinks', () => {
       pagePathParams: { id: 'some-page-id' },
       pageSearchParams: { param: 'foobar' },
       pagination,
+      intl: fakeIntl,
     };
     const tree = renderShallow(<PaginationLinks {...props} />);
     expect(tree).toMatchSnapshot();
@@ -47,6 +50,7 @@ describe('PaginationLinks', () => {
       pagePathParams: { id: 'some-page-id' },
       pageSearchParams: { param: 'foobar' },
       pagination,
+      intl: fakeIntl,
     };
     const tree = renderShallow(<PaginationLinks {...props} />);
     expect(tree).toMatchSnapshot();
@@ -63,6 +67,7 @@ describe('PaginationLinks', () => {
       pagePathParams: { id: 'some-page-id' },
       pageSearchParams: { param: 'foobar' },
       pagination,
+      intl: fakeIntl,
     };
     const tree = renderShallow(<PaginationLinks {...props} />);
     expect(tree).toMatchSnapshot();
