@@ -50,22 +50,31 @@ export const SearchPageComponent = props => {
     </p>
   );
 
-  const resultsFound = (
-    <p>
+  const resultsFoundNoAddress = (
+    <h3>
       <FormattedMessage id="SearchPage.foundResults" values={{ count: totalItems }} />
-    </p>
+    </h3>
   );
+  const address = searchInURL && searchInURL.address
+    ? <span className={css.searchString}>{searchInURL.address.split(', ')[0]}</span>
+    : null;
+  const resultsFoundWithAddress = (
+    <h3>
+      <FormattedMessage id="SearchPage.foundResultsWithAddress" values={{ count: totalItems, address }} />
+    </h3>
+  );
+  const resultsFound = address ? resultsFoundWithAddress : resultsFoundNoAddress;
 
   const noResults = (
-    <p>
+    <h3>
       <FormattedMessage id="SearchPage.noResults" />
-    </p>
+    </h3>
   );
 
   const loadingResults = (
-    <p>
+    <h3>
       <FormattedMessage id="SearchPage.loadingResults" />
-    </p>
+    </h3>
   );
 
   const searchParamsForPagination = parse(location.search);
@@ -83,7 +92,7 @@ export const SearchPageComponent = props => {
           <SearchResultsPanel
             currencyConfig={config.currencyConfig}
             listings={listingsAreLoaded ? listings : []}
-            pagination={pagination}
+            pagination={listingsAreLoaded ? pagination : null}
             search={searchParamsForPagination}
           />
         </div>

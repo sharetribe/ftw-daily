@@ -2,7 +2,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   title="Search page: listings">
   <div>
-    <p>
+    <h3>
       <FormattedMessage
         id="SearchPage.foundResults"
         values={
@@ -10,7 +10,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             "count": 22,
           }
         } />
-    </p>
+    </h3>
   </div>
   <div>
     <div>
