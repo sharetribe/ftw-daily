@@ -5,7 +5,8 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     className="NamedLink_active"
     href="/"
     onClick={[Function]}
-    style={Object {}}>
+    style={Object {}}
+    title={null}>
     <img
       alt="TopbarDesktop.logo"
       className={undefined}
@@ -59,7 +60,8 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     className=""
     href="/l/new"
     onClick={[Function]}
-    style={Object {}}>
+    style={Object {}}
+    title={null}>
     <span
       className={undefined}>
       <span>
@@ -71,7 +73,8 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     className=""
     href="/inbox/sales"
     onClick={[Function]}
-    style={Object {}}>
+    style={Object {}}
+    title={null}>
     <span
       className={undefined}>
       <span>
