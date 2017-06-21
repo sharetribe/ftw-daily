@@ -6,7 +6,7 @@ import { ValidationError } from '../../components';
 import css from './SelectField.css';
 
 const SelectFieldComponent = props => {
-  const { rootClassName, className, id, label, input, meta, children } = props;
+  const { rootClassName, className, id, label, input, meta, children, ...rest } = props;
 
   if (label && !id) {
     throw new Error('id required when a label is given');
@@ -22,7 +22,7 @@ const SelectFieldComponent = props => {
     [css.selectSuccess]: valid,
     [css.selectError]: hasError,
   });
-  const selectProps = { className: selectClasses, ...input };
+  const selectProps = { className: selectClasses, id, ...input, ...rest };
 
   const classes = classNames(rootClassName || css.root, className);
   return (
