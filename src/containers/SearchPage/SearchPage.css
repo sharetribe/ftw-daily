@@ -1,12 +1,23 @@
+@import '../../marketplace.css';
+
 .container {
+  /* Layout */
   width: 100%;
 }
 
 .searchResultSummary {
-  margin: 0 1rem;
+  /* Layout */
+  margin: 18px 24px;
+}
+
+.searchString {
+  /* Font color */
+  color: var(--marketplaceColor);
+  white-space: nowrap;
 }
 
 .listings {
+  /* Layout */
   display: block;
-  padding: 0 24px;
+  padding: 0 24px 24px 24px;
 }
