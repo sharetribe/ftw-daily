@@ -237,13 +237,6 @@
     letter-spacing: 0.1px;
   }
 
-  --marketplaceLabelFontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: var(--fontWeightSemiBold);
-    font-size: 16px;
-    line-height: 24px;
-  }
-
   /* Links */
   --marketplaceLinkStyles: {
 
@@ -407,6 +400,7 @@ h6 { @apply --marketplaceH6FontStyles; }
 
 html,
 input,
+textarea,
 li {
   @apply --marketplaceDefaultFontStyles
 }
@@ -435,8 +429,15 @@ ul {
 }
 
 label {
-  @apply --marketplaceLabelFontStyles;
+  @apply --marketplaceH4FontStyles;
   display: block;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 select {
