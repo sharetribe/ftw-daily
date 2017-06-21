@@ -1,1 +1,4 @@
-exports[`SearchResultsPanel matches snapshot 1`] = `<div />`;
+exports[`SearchResultsPanel matches snapshot 1`] = `
+<div
+  className="" />
+`;
