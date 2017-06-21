@@ -99,6 +99,7 @@
   "PageLayout.logoutFailed": "Logout failed. Please try again.",
   "PaginationLinks.next": "Next page",
   "PaginationLinks.previous": "Previous page",
+  "PaginationLinks.toPage": "Go to page {page}",
   "PayoutDetailsForm.addressTitle": "Address",
   "PayoutDetailsForm.bankAccountRequired": "Bank account information is required",
   "PayoutDetailsForm.bankDetails": "Bank details",

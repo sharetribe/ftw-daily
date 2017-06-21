@@ -1,49 +1,54 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
-import { Button, ListingCard } from '../../components';
+import { ListingCard, PaginationLinks } from '../../components';
 import css from './SearchResultsPanel.css';
 
 const SearchResultsPanel = props => {
-  const { currencyConfig, listings, onNextPage, onPreviousPage } = props;
-  const pagination = onNextPage || onPreviousPage
-    ? <div className={css.pagination}>
-        <Button
-          onClick={() => onPreviousPage()}
-          disabled={!onPreviousPage}
-          className={css.prevPage}
-        >
-          <FormattedMessage id="SearchResultsPanel.previousPage" />
-        </Button>
-        <Button onClick={() => onNextPage()} disabled={!onNextPage} className={css.nextPage}>
-          <FormattedMessage id="SearchResultsPanel.nextPage" />
-        </Button>
-      </div>
+  const { className, rootClassName, currencyConfig, listings, pagination, search } = props;
+  const classes = classNames(rootClassName || css.root, className);
+
+  const paginationLinks = pagination && pagination.totalPages > 1
+    ? <PaginationLinks
+        className={css.pagination}
+        pageName="SearchPage"
+        pageSearchParams={search}
+        pagination={pagination}
+      />
     : null;
 
   return (
-    <div>
+    <div className={classes}>
       {listings.map(l => (
-        <ListingCard key={l.id.uuid} listing={l} currencyConfig={currencyConfig} />
+        <ListingCard
+          className={css.listingCard}
+          key={l.id.uuid}
+          listing={l}
+          currencyConfig={currencyConfig}
+        />
       ))}
-      {pagination}
+      {paginationLinks}
     </div>
   );
 };
 
 SearchResultsPanel.defaultProps = {
+  className: null,
   listings: [],
-  onNextPage: null,
-  onPreviousPage: null,
+  pagination: null,
+  rootClassName: null,
+  search: null,
 };
 
-const { array, func } = PropTypes;
+const { array, object, string } = PropTypes;
 
 SearchResultsPanel.propTypes = {
+  className: string,
   currencyConfig: propTypes.currencyConfig.isRequired,
   listings: array,
-  onNextPage: func,
-  onPreviousPage: func,
+  pagination: propTypes.pagination,
+  rootClassName: string,
+  search: object,
 };
 
 export default SearchResultsPanel;

@@ -6,29 +6,7 @@
   margin: 0 1rem;
 }
 
-.tab {
-  display: none;
-}
-
-.filters {
-  composes: tab;
-  position: fixed;
-  top: 0;
-  height: 100vh;
-  background-color: #fff;
-}
-
-.listings{
-  composes: tab;
-}
-
-.map {
-  composes: tab;
-  position: fixed;
-  top: 0;
-  height: 100vh;
-}
-
-.open {
+.listings {
   display: block;
+  padding: 0 24px;
 }

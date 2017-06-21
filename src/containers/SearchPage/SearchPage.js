@@ -1,20 +1,12 @@
 import React, { PropTypes } from 'react';
-import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import config from '../../config';
-import { createResourceLocatorString } from '../../util/routes';
 import { parse, stringify } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
-import {
-  FilterPanel,
-  ListingCardSmall,
-  MapPanel,
-  PageLayout,
-  SearchResultsPanel,
-} from '../../components';
+import { PageLayout, SearchResultsPanel } from '../../components';
 import { searchListings } from './SearchPage.duck';
 import css from './SearchPage.css';
 
@@ -28,24 +20,17 @@ const pickSearchParamsOnly = params => {
 
 export const SearchPageComponent = props => {
   const {
-    flattenedRoutes,
     listings,
     location,
     pagination,
-    history,
     searchInProgress,
     searchListingsError,
     searchParams,
     tab,
   } = props;
 
-  const filtersClassName = classNames(css.filters, { [css.open]: tab === 'filters' });
-  const listingsClassName = classNames(css.listings, { [css.open]: tab === 'listings' });
-  const mapClassName = classNames(css.map, { [css.open]: tab === 'map' });
-  const currencyConfig = config.currencyConfig;
-
-  // Page is parsed from url
-  const { page = 1, ...searchInURL } = parse(location.search, {
+  // eslint-disable-next-line no-unused-vars
+  const { page, ...searchInURL } = parse(location.search, {
     latlng: ['origin'],
     latlngBounds: ['bounds'],
   });
@@ -83,22 +68,7 @@ export const SearchPageComponent = props => {
     </p>
   );
 
-  const { address, origin, bounds } = searchParamsInURL;
-  const hasNext = listingsAreLoaded && page < pagination.totalPages;
-  const onNextPage = hasNext
-    ? () => {
-        const urlParams = { address, origin, bounds, page: page + 1 };
-        history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, urlParams));
-      }
-    : null;
-
-  const hasPrev = listingsAreLoaded && page > 1;
-  const onPreviousPage = hasPrev
-    ? () => {
-        const urlParams = { address, origin, bounds, page: page - 1 };
-        history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, urlParams));
-      }
-    : null;
+  const searchParamsForPagination = parse(location.search);
 
   return (
     <PageLayout title={`Search page: ${tab}`}>
@@ -109,23 +79,13 @@ export const SearchPageComponent = props => {
         {searchInProgress ? loadingResults : null}
       </div>
       <div className={css.container}>
-        <div className={filtersClassName}>
-          <FilterPanel />
-        </div>
-        <div className={listingsClassName}>
+        <div className={css.listings}>
           <SearchResultsPanel
-            currencyConfig={currencyConfig}
+            currencyConfig={config.currencyConfig}
             listings={listingsAreLoaded ? listings : []}
-            onNextPage={onNextPage}
-            onPreviousPage={onPreviousPage}
+            pagination={pagination}
+            search={searchParamsForPagination}
           />
-        </div>
-        <div className={mapClassName}>
-          <MapPanel>
-            {listings.map(l => (
-              <ListingCardSmall key={l.id.uuid} listing={l} currencyConfig={currencyConfig} />
-            ))}
-          </MapPanel>
         </div>
       </div>
     </PageLayout>
@@ -140,25 +100,14 @@ SearchPageComponent.defaultProps = {
   searchListingsError: null,
 };
 
-const { array, arrayOf, bool, func, instanceOf, number, oneOf, object, shape, string } = PropTypes;
+const { array, bool, instanceOf, oneOf, object, shape, string } = PropTypes;
 
 SearchPageComponent.propTypes = {
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
   listings: array,
   location: shape({
     search: string.isRequired,
   }).isRequired,
-  pagination: shape({
-    page: number.isRequired,
-    perPage: number,
-    totalItems: number,
-    totalPages: number.isRequired,
-  }),
-
-  // from withRouter
-  history: shape({
-    push: func.isRequired,
-  }).isRequired,
+  pagination: propTypes.pagination,
 
   searchParams: object,
   searchInProgress: bool.isRequired,

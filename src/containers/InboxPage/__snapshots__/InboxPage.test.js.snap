@@ -146,7 +146,8 @@ exports[`InboxPage matches snapshot 2`] = `
   className=""
   href="/order/order-1/details"
   onClick={[Function]}
-  style={Object {}}>
+  style={Object {}}
+  title={null}>
   <div
     className={undefined}>
     <div
@@ -326,7 +327,8 @@ exports[`InboxPage matches snapshot 4`] = `
   className=""
   href="/sale/sale-1/details"
   onClick={[Function]}
-  style={Object {}}>
+  style={Object {}}
+  title={null}>
   <div
     className={undefined}>
     <div

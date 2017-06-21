@@ -3,15 +3,32 @@ exports[`PaginationLinks should match snapshot with both links disabled 1`] = `
   className="">
   <div
     className="">
-    <FormattedMessage
-      id="PaginationLinks.previous"
-      values={Object {}} />
+    <PrevPageIcon
+      className={null} />
   </div>
   <div
     className="">
-    <FormattedMessage
-      id="PaginationLinks.next"
-      values={Object {}} />
+    <withFlattenedRoutes(withRouter(NamedLink))
+      className="undefined"
+      name="SomePage"
+      params={
+        Object {
+          "id": "some-page-id",
+        }
+      }
+      title="PaginationLinks.toPage"
+      to={
+        Object {
+          "search": "page=1&param=foobar",
+        }
+      }>
+      1
+    </withFlattenedRoutes(withRouter(NamedLink))>
+  </div>
+  <div
+    className="">
+    <NextPageIcon
+      className={null} />
   </div>
 </nav>
 `;
@@ -26,15 +43,66 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
         "id": "some-page-id",
       }
     }
+    title="PaginationLinks.previous"
     to={
       Object {
         "search": "page=1&param=foobar",
       }
     }>
-    <FormattedMessage
-      id="PaginationLinks.previous"
-      values={Object {}} />
+    <PrevPageIcon
+      className={null} />
   </withFlattenedRoutes(withRouter(NamedLink))>
+  <div
+    className="">
+    <withFlattenedRoutes(withRouter(NamedLink))
+      className=""
+      name="SomePage"
+      params={
+        Object {
+          "id": "some-page-id",
+        }
+      }
+      title="PaginationLinks.toPage"
+      to={
+        Object {
+          "search": "page=1&param=foobar",
+        }
+      }>
+      1
+    </withFlattenedRoutes(withRouter(NamedLink))>
+    <withFlattenedRoutes(withRouter(NamedLink))
+      className="undefined"
+      name="SomePage"
+      params={
+        Object {
+          "id": "some-page-id",
+        }
+      }
+      title="PaginationLinks.toPage"
+      to={
+        Object {
+          "search": "page=2&param=foobar",
+        }
+      }>
+      2
+    </withFlattenedRoutes(withRouter(NamedLink))>
+    <withFlattenedRoutes(withRouter(NamedLink))
+      className=""
+      name="SomePage"
+      params={
+        Object {
+          "id": "some-page-id",
+        }
+      }
+      title="PaginationLinks.toPage"
+      to={
+        Object {
+          "search": "page=3&param=foobar",
+        }
+      }>
+      3
+    </withFlattenedRoutes(withRouter(NamedLink))>
+  </div>
   <withFlattenedRoutes(withRouter(NamedLink))
     name="SomePage"
     params={
@@ -42,14 +110,14 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
         "id": "some-page-id",
       }
     }
+    title="PaginationLinks.next"
     to={
       Object {
         "search": "page=3&param=foobar",
       }
     }>
-    <FormattedMessage
-      id="PaginationLinks.next"
-      values={Object {}} />
+    <NextPageIcon
+      className={null} />
   </withFlattenedRoutes(withRouter(NamedLink))>
 </nav>
 `;
@@ -59,9 +127,59 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
   className="">
   <div
     className="">
-    <FormattedMessage
-      id="PaginationLinks.previous"
-      values={Object {}} />
+    <PrevPageIcon
+      className={null} />
+  </div>
+  <div
+    className="">
+    <withFlattenedRoutes(withRouter(NamedLink))
+      className="undefined"
+      name="SomePage"
+      params={
+        Object {
+          "id": "some-page-id",
+        }
+      }
+      title="PaginationLinks.toPage"
+      to={
+        Object {
+          "search": "page=1&param=foobar",
+        }
+      }>
+      1
+    </withFlattenedRoutes(withRouter(NamedLink))>
+    <withFlattenedRoutes(withRouter(NamedLink))
+      className=""
+      name="SomePage"
+      params={
+        Object {
+          "id": "some-page-id",
+        }
+      }
+      title="PaginationLinks.toPage"
+      to={
+        Object {
+          "search": "page=2&param=foobar",
+        }
+      }>
+      2
+    </withFlattenedRoutes(withRouter(NamedLink))>
+    <withFlattenedRoutes(withRouter(NamedLink))
+      className=""
+      name="SomePage"
+      params={
+        Object {
+          "id": "some-page-id",
+        }
+      }
+      title="PaginationLinks.toPage"
+      to={
+        Object {
+          "search": "page=3&param=foobar",
+        }
+      }>
+      3
+    </withFlattenedRoutes(withRouter(NamedLink))>
   </div>
   <withFlattenedRoutes(withRouter(NamedLink))
     name="SomePage"
@@ -70,14 +188,14 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
         "id": "some-page-id",
       }
     }
+    title="PaginationLinks.next"
     to={
       Object {
         "search": "page=2&param=foobar",
       }
     }>
-    <FormattedMessage
-      id="PaginationLinks.next"
-      values={Object {}} />
+    <NextPageIcon
+      className={null} />
   </withFlattenedRoutes(withRouter(NamedLink))>
 </nav>
 `;
@@ -92,20 +210,70 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
         "id": "some-page-id",
       }
     }
+    title="PaginationLinks.previous"
     to={
       Object {
         "search": "page=2&param=foobar",
       }
     }>
-    <FormattedMessage
-      id="PaginationLinks.previous"
-      values={Object {}} />
+    <PrevPageIcon
+      className={null} />
   </withFlattenedRoutes(withRouter(NamedLink))>
   <div
     className="">
-    <FormattedMessage
-      id="PaginationLinks.next"
-      values={Object {}} />
+    <withFlattenedRoutes(withRouter(NamedLink))
+      className=""
+      name="SomePage"
+      params={
+        Object {
+          "id": "some-page-id",
+        }
+      }
+      title="PaginationLinks.toPage"
+      to={
+        Object {
+          "search": "page=1&param=foobar",
+        }
+      }>
+      1
+    </withFlattenedRoutes(withRouter(NamedLink))>
+    <withFlattenedRoutes(withRouter(NamedLink))
+      className=""
+      name="SomePage"
+      params={
+        Object {
+          "id": "some-page-id",
+        }
+      }
+      title="PaginationLinks.toPage"
+      to={
+        Object {
+          "search": "page=2&param=foobar",
+        }
+      }>
+      2
+    </withFlattenedRoutes(withRouter(NamedLink))>
+    <withFlattenedRoutes(withRouter(NamedLink))
+      className="undefined"
+      name="SomePage"
+      params={
+        Object {
+          "id": "some-page-id",
+        }
+      }
+      title="PaginationLinks.toPage"
+      to={
+        Object {
+          "search": "page=3&param=foobar",
+        }
+      }>
+      3
+    </withFlattenedRoutes(withRouter(NamedLink))>
+  </div>
+  <div
+    className="">
+    <NextPageIcon
+      className={null} />
   </div>
 </nav>
 `;

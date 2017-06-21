@@ -1,35 +1,6 @@
-.navigation {
-  display: flex;
-  position: fixed;
-  bottom: 15px;
-  left: 50%;
-  margin-left: -104px;
-}
-
-.button {
-  display: block;
-  width: 100px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 1.4rem;
-  padding: 0.5rem;
-  margin: 1rem 2px;
-  color: #fff;
-  background-color: #9B9B9B;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #888;
-  }
+.listingCard {
+  margin-bottom: 36px;
 }
 
 .pagination {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 1rem 6rem 1rem;
-}
-
-.nextPage,
-.prevPage {
-  flex-basis: calc(50% - 0.5rem);
 }

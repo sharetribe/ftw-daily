@@ -18,10 +18,12 @@ const { LatLng } = types;
 describe('SearchPageComponent', () => {
   it('matches snapshot', () => {
     const props = {
-      flattenedRoutes: [],
       location: { search: '' },
-      history: {
-        push: () => console.log('HistoryPush called'),
+      pagination: {
+        page: 1,
+        perPage: 12,
+        totalItems: 22,
+        totalPages: 2,
       },
       tab: 'listings',
       searchInProgress: false,

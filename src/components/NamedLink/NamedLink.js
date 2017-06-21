@@ -25,7 +25,7 @@ import { withFlattenedRoutes } from '../../util/contextHelpers';
 import * as propTypes from '../../util/propTypes';
 
 export const NamedLinkComponent = props => {
-  const { name, params, flattenedRoutes } = props;
+  const { name, params, flattenedRoutes, title } = props;
 
   // Link props
   const { to, children } = props;
@@ -36,7 +36,11 @@ export const NamedLinkComponent = props => {
 
   // <a> element props
   const { className, style, activeClassName } = props;
-  const aElemProps = { className: classNames(className, { [activeClassName]: active }), style };
+  const aElemProps = {
+    className: classNames(className, { [activeClassName]: active }),
+    style,
+    title,
+  };
 
   return <Link to={{ pathname, ...to }} {...aElemProps}>{children}</Link>;
 };
@@ -50,6 +54,7 @@ NamedLinkComponent.defaultProps = {
   className: '',
   style: {},
   activeClassName: 'NamedLink_active',
+  title: null,
   match: {},
 };
 
@@ -69,6 +74,7 @@ NamedLinkComponent.propTypes = {
   className: string,
   style: object,
   activeClassName: string,
+  title: string,
 
   // from withFlattenedRoutes
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
