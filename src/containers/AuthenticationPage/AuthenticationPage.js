@@ -96,12 +96,11 @@ export const AuthenticationPageComponent = props => {
       },
     },
   ];
-  const nav = <TabNav tabs={tabs} />;
 
   return (
     <PageLayout title={title}>
       <div className={css.root}>
-        {nav}
+        <TabNav tabs={tabs} />
         {loginError ? loginErrorMessage : null}
         {signupError ? signupErrorMessage : null}
         {isLogin
