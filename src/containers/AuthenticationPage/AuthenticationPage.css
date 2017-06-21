@@ -1,29 +1,17 @@
+@import '../../marketplace.css';
+
 .root {
   display: flex;
   flex-direction: column;
   flex: 1;
+  padding: 34px 24px 98px 24px;
+}
 
+.form {
+  margin-top: 39px;
+}
+
+.error {
   margin-top: 24px;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-.tabs {
-  margin-bottom: 1rem;
-}
-
-.tab {
-  float: left;
-  margin-left: 1rem;
-  font-size: 20px;
-  letter-spacing: -0.5px;
-  text-decoration: none;
-
-  &:first-child {
-    margin-left: 0;
-  }
-}
-
-.activeTab {
-  font-weight: bold;
+  color: var(--failColor);
 }
