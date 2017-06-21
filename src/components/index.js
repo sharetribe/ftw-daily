@@ -34,6 +34,7 @@ import OrderDiscussionPanel from './OrderDiscussionPanel/OrderDiscussionPanel';
 import PageLayout from './PageLayout/PageLayout';
 import PaginationLinks from './PaginationLinks/PaginationLinks';
 import Promised from './Promised/Promised';
+import ResponsiveImage from './ResponsiveImage/ResponsiveImage';
 import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
 import SearchIcon from './SearchIcon/SearchIcon';
@@ -85,6 +86,7 @@ export {
   PageLayout,
   PaginationLinks,
   Promised,
+  ResponsiveImage,
   RoutesProvider,
   SaleDetailsPanel,
   SearchIcon,
