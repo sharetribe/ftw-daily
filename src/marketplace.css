@@ -39,6 +39,7 @@
 
   /* Border radius */
   --borderRadius: 2px;
+  --borderRadiusMobileSearch: 3px;
 
   /* Transitions */
   --transitionStyle: ease-in 0.2s;
