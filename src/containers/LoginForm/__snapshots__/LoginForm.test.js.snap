@@ -1,6 +1,6 @@
 exports[`LoginForm matches snapshot 1`] = `
 <form
-  className={undefined}
+  className=""
   onSubmit={[Function]}>
   <div>
     <div
@@ -18,6 +18,7 @@ exports[`LoginForm matches snapshot 1`] = `
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
+        placeholder="me@example.com"
         type="email"
         value="" />
     </div>
@@ -36,6 +37,7 @@ exports[`LoginForm matches snapshot 1`] = `
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
+        placeholder="Enter your password..."
         type="password"
         value="" />
     </div>

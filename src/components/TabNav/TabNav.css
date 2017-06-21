@@ -1,3 +1,5 @@
+@import '../../marketplace.css';
+
 .root {
   &::after {
     content: ".";
@@ -10,9 +12,7 @@
 
 .tab {
   float: left;
-  margin-left: 1rem;
-  font-size: 20px;
-  letter-spacing: -0.5px;
+  margin-left: 24px;
 
   &:first-child {
     margin-left: 0;
@@ -20,12 +20,13 @@
 }
 
 .link {
-  text-decoration: underline;
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColor);
 }
 
 .selectedLink {
-  font-weight: bold;
-  text-decoration: none;
+  color: var(--matterColorDark);
+  text-decoration: underline;
 }
 
 .disabled {

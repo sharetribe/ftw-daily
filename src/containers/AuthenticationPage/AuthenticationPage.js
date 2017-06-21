@@ -3,8 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import classNames from 'classnames';
-import { PageLayout, NamedRedirect, NamedLink } from '../../components';
+import { PageLayout, NamedRedirect, TabNav } from '../../components';
 import { LoginForm, SignupForm } from '../../containers';
 import { login, authenticationInProgress, signup } from '../../ducks/Auth.duck';
 
@@ -73,26 +72,41 @@ export const AuthenticationPageComponent = props => {
     </div>
   );
 
-  const loginLinkClasses = classNames(css.tab, isLogin ? css.activeTab : null);
-  const signupLinkClasses = classNames(css.tab, !isLogin ? css.activeTab : null);
   const fromState = { state: from ? { from } : null };
+
+  const tabs = [
+    {
+      text: intl.formatMessage({
+        id: 'AuthenticationPage.signupLinkText',
+      }),
+      selected: !isLogin,
+      linkProps: {
+        name: 'SignupPage',
+        to: fromState,
+      },
+    },
+    {
+      text: intl.formatMessage({
+        id: 'AuthenticationPage.loginLinkText',
+      }),
+      selected: isLogin,
+      linkProps: {
+        name: 'LoginPage',
+        to: fromState,
+      },
+    },
+  ];
+  const nav = <TabNav tabs={tabs} />;
 
   return (
     <PageLayout title={title}>
       <div className={css.root}>
-        <nav className={css.tabs}>
-          <NamedLink className={signupLinkClasses} name="SignupPage" to={fromState}>
-            <FormattedMessage id="AuthenticationPage.signupLinkText" />
-          </NamedLink>
-          <NamedLink className={loginLinkClasses} name="LoginPage" to={fromState}>
-            <FormattedMessage id="AuthenticationPage.loginLinkText" />
-          </NamedLink>
-        </nav>
+        {nav}
         {loginError ? loginErrorMessage : null}
         {signupError ? signupErrorMessage : null}
         {isLogin
-          ? <LoginForm onSubmit={submitLogin} inProgress={authInProgress} />
-          : <SignupForm onSubmit={submitSignup} inProgress={authInProgress} />}
+          ? <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
+          : <SignupForm className={css.form} onSubmit={submitSignup} inProgress={authInProgress} />}
       </div>
     </PageLayout>
   );
