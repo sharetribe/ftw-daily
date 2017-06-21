@@ -84,11 +84,9 @@ const SignupFormComponent = props => {
           validate={passwordRequired}
         />
       </div>
-      <div>
-        <Button className={css.button} type="submit" disabled={submitDisabled}>
-          <FormattedMessage id="SignupForm.signUp" />
-        </Button>
-      </div>
+      <Button className={css.button} type="submit" disabled={submitDisabled}>
+        <FormattedMessage id="SignupForm.signUp" />
+      </Button>
     </form>
   );
 };
