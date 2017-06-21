@@ -59,13 +59,13 @@ export const AuthenticationPageComponent = props => {
   /* eslint-enable no-console */
 
   const loginErrorMessage = (
-    <div style={{ color: 'red' }}>
+    <div className={css.error}>
       <FormattedMessage id="AuthenticationPage.loginFailed" />
     </div>
   );
 
   const signupErrorMessage = (
-    <div style={{ color: 'red' }}>
+    <div className={css.error}>
       {isEmailTakenApiError(signupError)
         ? <FormattedMessage id="AuthenticationPage.signupFailedEmailAlreadyTaken" />
         : <FormattedMessage id="AuthenticationPage.signupFailed" />}
