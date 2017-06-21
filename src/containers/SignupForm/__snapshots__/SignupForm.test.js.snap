@@ -79,15 +79,13 @@ exports[`SignupForm matches snapshot 1`] = `
         value="" />
     </div>
   </div>
-  <div>
-    <button
-      className=""
-      disabled={true}
-      type="submit">
-      <span>
-        Sign up
-      </span>
-    </button>
-  </div>
+  <button
+    className=""
+    disabled={false}
+    type="submit">
+    <span>
+      Sign up
+    </span>
+  </button>
 </form>
 `;

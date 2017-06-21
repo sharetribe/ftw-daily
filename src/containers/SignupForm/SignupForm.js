@@ -8,7 +8,7 @@ import * as validators from '../../util/validators';
 import css from './SignupForm.css';
 
 const SignupFormComponent = props => {
-  const { form, handleSubmit, pristine, submitting, inProgress, intl } = props;
+  const { form, handleSubmit, submitting, inProgress, intl } = props;
 
   // email
   const emailLabel = intl.formatMessage({
@@ -46,7 +46,7 @@ const SignupFormComponent = props => {
   });
   const lastNameRequired = validators.required(lastNameRequiredMessage);
 
-  const submitDisabled = pristine || submitting || inProgress;
+  const submitDisabled = submitting || inProgress;
   return (
     <form className={css.root} onSubmit={handleSubmit}>
       <div>

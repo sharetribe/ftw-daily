@@ -8,7 +8,7 @@ import * as validators from '../../util/validators';
 import css from './LoginForm.css';
 
 const LoginFormComponent = props => {
-  const { form, handleSubmit, pristine, submitting, inProgress, intl } = props;
+  const { form, handleSubmit, submitting, inProgress, intl } = props;
 
   // email
   const emailLabel = intl.formatMessage({
@@ -28,7 +28,7 @@ const LoginFormComponent = props => {
   });
   const passwordRequired = validators.required(passwordRequiredMessage);
 
-  const submitDisabled = pristine || submitting || inProgress;
+  const submitDisabled = submitting || inProgress;
   return (
     <form className={css.form} onSubmit={handleSubmit}>
       <div>
