@@ -11,5 +11,6 @@
 }
 
 .button {
+  margin-top: 24px;
   align-self: stretch;
 }
