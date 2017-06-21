@@ -6,6 +6,10 @@
   height: 100%;
 }
 
+.password {
+  margin-top: 24px;
+}
+
 .button {
   align-self: stretch;
   margin-bottom: 20px;

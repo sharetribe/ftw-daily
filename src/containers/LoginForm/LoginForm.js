@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
-import { InputFieldOld, Button } from '../../components';
+import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Button, TextInputField } from '../../components';
 import * as validators from '../../util/validators';
 
 import css from './LoginForm.css';
 
 const LoginFormComponent = props => {
-  const { handleSubmit, pristine, submitting, inProgress, intl } = props;
+  const { form, handleSubmit, pristine, submitting, inProgress, intl } = props;
 
   // email
   const emailLabel = intl.formatMessage({
@@ -32,18 +32,19 @@ const LoginFormComponent = props => {
   return (
     <form className={css.form} onSubmit={handleSubmit}>
       <div>
-        <Field
-          name="email"
+        <TextInputField
           type="email"
+          name="email"
+          id={`${form}.email`}
           label={emailLabel}
-          component={InputFieldOld}
           validate={emailRequired}
         />
-        <Field
-          name="password"
+        <TextInputField
+          className={css.password}
           type="password"
+          name="password"
+          id={`${form}.password`}
           label={passwordLabel}
-          component={InputFieldOld}
           validate={passwordRequired}
         />
       </div>

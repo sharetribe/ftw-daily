@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { enhancedField } from '../../util/forms';
 import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../util/validators';
-import { LocationAutocompleteInput, Button, InputFieldOld } from '../../components';
+import { LocationAutocompleteInput, Button, TextInputField } from '../../components';
 
 import css from './EditListingLocationForm.css';
 
@@ -27,6 +27,7 @@ export class EditListingLocationFormComponent extends Component {
       disabled,
       handleSubmit,
       intl,
+      form,
       invalid,
       saveActionMsg,
       submitting,
@@ -61,13 +62,13 @@ export class EditListingLocationFormComponent extends Component {
           ]}
         />
 
-        <Field
+        <TextInputField
           className={css.building}
+          type="text"
           name="building"
+          id={`${form}.building`}
           label={buildingMessage}
           placeholder={buildingPlaceholderMessage}
-          component={InputFieldOld}
-          type="text"
         />
 
         <Button
@@ -83,7 +84,7 @@ export class EditListingLocationFormComponent extends Component {
 }
 
 EditListingLocationFormComponent.defaultProps = {
-  saveActionMsg: 'Next: pricing',
+  saveActionMsg: 'Next: pricing', // TODO: i18n
   selectedPlace: null,
 };
 

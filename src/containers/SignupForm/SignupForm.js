@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
-import { InputFieldOld, Button } from '../../components';
+import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Button, TextInputField } from '../../components';
 import * as validators from '../../util/validators';
 
 import css from './SignupForm.css';
 
 const SignupFormComponent = props => {
-  const { handleSubmit, pristine, submitting, inProgress, intl } = props;
+  const { form, handleSubmit, pristine, submitting, inProgress, intl } = props;
 
   // email
   const emailLabel = intl.formatMessage({
@@ -50,37 +50,38 @@ const SignupFormComponent = props => {
   return (
     <form className={css.root} onSubmit={handleSubmit}>
       <div>
-        <Field
-          name="email"
+        <TextInputField
           type="email"
+          name="email"
+          id={`${form}.email`}
           label={emailLabel}
           validate={emailRequired}
-          component={InputFieldOld}
         />
         <div className={css.name}>
-          <Field
+          <TextInputField
             className={css.firstNameRoot}
-            name="firstName"
             type="text"
+            name="firstName"
+            id={`${form}.firstName`}
             label={firstNameLabel}
             validate={firstNameRequired}
-            component={InputFieldOld}
           />
-          <Field
+          <TextInputField
             className={css.lastNameRoot}
-            name="lastName"
             type="text"
+            name="lastName"
+            id={`${form}.lastName`}
             label={lastNameLabel}
             validate={lastNameRequired}
-            component={InputFieldOld}
           />
         </div>
-        <Field
-          name="password"
+        <TextInputField
+          className={css.password}
           type="password"
+          name="password"
+          id={`${form}.password`}
           label={passwordLabel}
           validate={passwordRequired}
-          component={InputFieldOld}
         />
       </div>
       <div>

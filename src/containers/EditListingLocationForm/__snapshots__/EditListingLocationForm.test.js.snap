@@ -14,8 +14,8 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
         [Function],
       ]
     } />
-  <Field
-    component={[Function]}
+  <TextInputField
+    id="fakeTestForm.building"
     label="EditListingLocationForm.building"
     name="building"
     placeholder="EditListingLocationForm.buildingPlaceholder"

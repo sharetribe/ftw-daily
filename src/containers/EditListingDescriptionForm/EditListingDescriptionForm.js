@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { compose } from 'redux';
-import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import { maxLength, required } from '../../util/validators';
-import { Button, InputFieldOld } from '../../components';
+import { Button, TextInputField } from '../../components';
 
 import css from './EditListingDescriptionForm.css';
 
@@ -16,6 +16,7 @@ const EditListingDescriptionFormComponent = props => {
     disabled,
     handleSubmit,
     intl,
+    form,
     invalid,
     saveActionMsg,
     submitting,
@@ -47,23 +48,23 @@ const EditListingDescriptionFormComponent = props => {
   const classes = classNames(css.root, className);
   return (
     <form className={classes} onSubmit={handleSubmit}>
-      <Field
-        autoFocus
+      <TextInputField
+        type="text"
         name="title"
+        id={`${form}.title`}
         label={titleMessage}
         placeholder={titlePlaceholderMessage}
-        component={InputFieldOld}
-        type="text"
         validate={[required(titleRequiredMessage), maxLength60Message]}
+        autoFocus
       />
 
-      <Field
-        name="description"
-        label={descriptionMessage}
-        placeholder={descriptionPlaceholderMessage}
+      <TextInputField
         className={css.description}
         type="textarea"
-        component={InputFieldOld}
+        name="description"
+        id={`${form}.description`}
+        label={descriptionMessage}
+        placeholder={descriptionPlaceholderMessage}
         validate={[required(descriptionRequiredMessage)]}
       />
 
