@@ -1,15 +1,21 @@
-.listing {
+@import '../../marketplace.css';
+
+.root {
+  /* Layout */
   display: flex;
   flex-direction: column;
-  border-radius: 4px;
-  margin-bottom: 24px;
-  text-decoration: none;
+
+  /* Remove link's hover effect */
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .threeToTwoWrapper {
+  /* Layout */
   display: block;
-  position: relative;
   width: 100%;
+  position: relative;
 }
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
@@ -17,8 +23,8 @@
   padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
 }
 
-.noImageContainer,
-.thumbnail {
+.rootForImage {
+  /* Layout - image will take space defined by aspect ratio wrapper */
   position: absolute;
   top: 0;
   bottom: 0;
@@ -27,58 +33,84 @@
   width: 100%;
 }
 
-.noImageContainer,
-.noImageWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #eee;
-}
-
-.noImageText {
-  color: #666;
-}
-
 .info {
-  padding: 1rem;
-
-}
-
-.mainInfo {
-  width: 100%;
+  /* Layout */
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.title {
-  font-size: 18px;
+  padding: 15px 0 6px 0;
 }
 
 .price {
+  /* Layout */
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: flex-start;
   flex-shrink: 0;
-  padding-left: 1rem;
+  margin-right: 18px;
 }
 
 .priceValue {
-  font-size: 18px;
+  /* Font */
+  @apply --marketplaceH4FontStyles;
+
+  /* Remove default margins from font */
+  margin-top: 0;
+  margin-bottom: 4px;
+
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 4px;
+  }
 }
 
 .perNight {
-  margin-left: 5px;
-  font-size: 12px;
+  /* Font */
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColor);
 
-  /* Align small price unit text with bigger font (priceValue) */
-  line-height: 23px;
-  padding-top: 2px;
+  /* Remove default margins from font */
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
+
+.mainInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  /* Font */
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColor);
+
+  /* Remove default margins from font */
+  margin-top: 0;
+  margin-bottom: 4px;
+
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 4px;
+  }
+}
+
+
 .authorInfo {
-  width: 100%;
-  font-size: 12px;
+  /* Font */
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColor);
+
+  /* Remove default margins from font */
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }

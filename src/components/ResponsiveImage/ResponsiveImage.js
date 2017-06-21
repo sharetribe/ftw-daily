@@ -61,9 +61,9 @@ const ResponsiveImage = props => {
 
   const srcSet = nameSet
     .map(v => {
-        const url = imageSizes.find(i => i.name === v.name).url;
-        return `${url} ${v.size}`;
-      })
+      const url = imageSizes.find(i => i.name === v.name).url;
+      return `${url} ${v.size}`;
+    })
     .join(', ');
 
   const sizesProp = sizes ? { sizes } : {};
