@@ -40,6 +40,7 @@ import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
 import SearchIcon from './SearchIcon/SearchIcon';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import Select from './Select/Select';
+import SelectField from './SelectField/SelectField';
 import StripeBankAccountToken from './StripeBankAccountToken/StripeBankAccountToken';
 import TabNav from './TabNav/TabNav';
 import Tabs from './Tabs/Tabs';
@@ -92,6 +93,7 @@ export {
   SearchIcon,
   SearchResultsPanel,
   Select,
+  SelectField,
   StripeBankAccountToken,
   TabNav,
   Tabs,

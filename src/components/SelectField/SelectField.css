@@ -4,14 +4,14 @@
 
 }
 
-.input {
+.select {
   border-bottom-color: var(--attentionColor);
 }
 
-.inputSuccess {
+.selectSuccess {
   border-bottom-color: var(--successColor);
 }
 
-.inputError {
+.selectError {
   border-bottom-color: var(--failColor);
 }

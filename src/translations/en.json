@@ -104,6 +104,7 @@
   "PayoutDetailsForm.cityPlaceholder": "Enter your city...",
   "PayoutDetailsForm.cityRequired": "This field is required",
   "PayoutDetailsForm.countryLabel": "Country",
+  "PayoutDetailsForm.countryPlaceholder": "Select your country...",
   "PayoutDetailsForm.countryRequired": "This field is required",
   "PayoutDetailsForm.firstNameLabel": "First name",
   "PayoutDetailsForm.firstNameRequired": "This field is required",
