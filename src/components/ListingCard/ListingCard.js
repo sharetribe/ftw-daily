@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
-import { NamedLink } from '../../components';
+import classNames from 'classnames';
+import { NamedLink, ResponsiveImage } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { convertMoneyToNumber } from '../../util/currency';
+import { ensureListing, ensureUser } from '../../util/data';
+
 import css from './ListingCard.css';
-import noImageIcon from './images/noImageIcon.svg';
 
 const priceData = (price, currencyConfig, intl) => {
   if (price && price.currency === currencyConfig.currency) {
@@ -13,87 +15,86 @@ const priceData = (price, currencyConfig, intl) => {
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
     return {
-      formattedPrice: `(${price.currency})`,
-      priceTitle: `Unsupported currency (${price.currency})`,
+      formattedPrice: intl.formatMessage(
+        { id: 'ListingCard.unsupportedPrice' },
+        { currency: price.currency }
+      ),
+      priceTitle: intl.formatMessage(
+        { id: 'ListingCard.unsupportedPriceTitle' },
+        { currency: price.currency }
+      ),
     };
   }
   return {};
 };
 
 export const ListingCardComponent = props => {
-  const { currencyConfig, intl, listing } = props;
-  const id = listing.id.uuid;
-  const { title = '', price } = listing.attributes || {};
+  const { className, rootClassName, currencyConfig, intl, listing } = props;
+  const classes = classNames(rootClassName || css.root, className);
+  const currentListing = ensureListing(listing);
+  const id = currentListing.id.uuid;
+  const { title = '', price } = currentListing.attributes;
   const slug = encodeURIComponent(title.split(' ').join('-'));
-  const authorName = listing.author && listing.author.attributes
-    ? `${listing.author.attributes.profile.firstName} ${listing.author.attributes.profile.lastName}`
-    : '';
+  const author = ensureUser(listing.author);
+  const authorName = `${author.attributes.profile.firstName} ${author.attributes.profile.lastName}`;
+  const firstImage = currentListing.images && currentListing.images.length > 0
+    ? currentListing.images[0]
+    : null;
 
   // TODO: Currently, API can return currencies that are not supported by starter app.
   const { formattedPrice, priceTitle } = priceData(price, currencyConfig, intl);
 
-  const images = listing.images
-    ? listing.images.map(i => ({ id: i.id, sizes: i.attributes.sizes }))
-    : [];
-  const mainImage = images.length > 0 ? images[0] : null;
-  const imageURL = mainImage ? mainImage.sizes.find(i => i.name === 'landscape-crop').url : null;
-  const image2XURL = mainImage
-    ? mainImage.sizes.find(i => i.name === 'landscape-crop2x').url
-    : null;
-  const higherRes = image2XURL ? { srcSet: `${image2XURL} 2x` } : null;
-
-  // TODO: svg should have own loading strategy
-  // Now noImageIcon is imported with default configuration (gives url)
-  /* eslint-disable jsx-a11y/img-redundant-alt */
-  const noListingImage = (
-    <div className={css.noImageContainer}>
-      <div className={css.noImageWrapper}>
-        <img className={css.noImageIcon} src={noImageIcon} alt="No image" />
-        <div className={css.noImageText}>No image</div>
-      </div>
-    </div>
-  );
-  /* eslint-enable jsx-a11y/img-redundant-alt */
-  const listingImage = (
-    <img className={css.thumbnail} src={imageURL} alt="Listing Title" {...higherRes} />
-  );
-
-  const imageOrPlaceholder = imageURL ? listingImage : noListingImage;
-
   return (
-    <NamedLink className={css.listing} name="ListingPage" params={{ id, slug }}>
+    <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
       <div className={css.threeToTwoWrapper}>
         <div className={css.aspectWrapper}>
-          {imageOrPlaceholder}
+          <ResponsiveImage
+            rootClassName={css.rootForImage}
+            alt={title}
+            image={firstImage}
+            nameSet={[
+              { name: 'landscape-crop', size: '1x' },
+              { name: 'landscape-crop2x', size: '2x' },
+            ]}
+          />
         </div>
       </div>
       <div className={css.info}>
+        <div className={css.price}>
+          <div className={css.priceValue} title={priceTitle}>
+            {formattedPrice}
+          </div>
+          <div className={css.perNight}>
+            <FormattedMessage id="ListingCard.perNight" />
+          </div>
+        </div>
         <div className={css.mainInfo}>
           <div className={css.title}>
             {title}
           </div>
-          <div className={css.price}>
-            <div className={css.priceValue} title={priceTitle}>
-              {formattedPrice}
-            </div>
-            <div className={css.perNight}>
-              <FormattedMessage id="ListingCard.perNight" />
-            </div>
+          <div className={css.authorInfo}>
+            <FormattedMessage
+              className={css.authorName}
+              id="ListingCard.hostedBy"
+              values={{ authorName }}
+            />
           </div>
-        </div>
-        <div className={css.authorInfo}>
-          <FormattedMessage
-            className={css.authorName}
-            id="ListingCard.hostedBy"
-            values={{ authorName }}
-          />
         </div>
       </div>
     </NamedLink>
   );
 };
 
+ListingCardComponent.defaultProps = {
+  className: null,
+  rootClassName: null,
+};
+
+const { string } = PropTypes;
+
 ListingCardComponent.propTypes = {
+  className: string,
+  rootClassName: string,
   currencyConfig: propTypes.currencyConfig.isRequired,
   intl: intlShape.isRequired,
   listing: propTypes.listing.isRequired,
