@@ -3,13 +3,9 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   title="Search page: listings">
   <div />
   <div>
-    <div
-      className="">
-      <FilterPanel />
-    </div>
-    <div
-      className="undefined">
+    <div>
       <SearchResultsPanel
+        className={null}
         currencyConfig={
           Object {
             "currency": "USD",
@@ -22,12 +18,9 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           }
         }
         listings={Array []}
-        onNextPage={null}
-        onPreviousPage={null} />
-    </div>
-    <div
-      className="">
-      <MapPanel />
+        pagination={null}
+        rootClassName={null}
+        search={Object {}} />
     </div>
   </div>
 </Connect(withRouter(PageLayout))>
