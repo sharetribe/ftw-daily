@@ -4,7 +4,8 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import moment from 'moment';
 import { Button } from '../../components';
 import { required } from '../../util/validators';
-import { DateInputField } from './DateInputField';
+import DateInputField from './DateInputField';
+
 import css from './DateInputField.example.css';
 
 const FormComponent = props => {

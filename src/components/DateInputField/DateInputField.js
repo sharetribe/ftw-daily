@@ -163,9 +163,7 @@ DateInputComponent.propTypes = {
   value: instanceOf(Date),
 };
 
-const DateInput = injectIntl(DateInputComponent);
-
-export default DateInput;
+export const DateInput = injectIntl(DateInputComponent);
 
 const DateInputFieldComponent = props => {
   const { rootClassName, className, id, label, input, meta, ...rest } = props;
@@ -203,6 +201,8 @@ DateInputFieldComponent.propTypes = {
   meta: object.isRequired,
 };
 
-export const DateInputField = props => {
+const DateInputField = props => {
   return <Field component={DateInputFieldComponent} {...props} />;
 };
+
+export default DateInputField;
