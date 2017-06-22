@@ -37,7 +37,7 @@ const getPrice = (unformattedValue, currencyConfig) => {
   }
 };
 
-class CurrencyInput extends Component {
+class CurrencyInputComponent extends Component {
   constructor(props) {
     super(props);
     const { currencyConfig, defaultValue, input, intl } = props;
@@ -163,10 +163,11 @@ class CurrencyInput extends Component {
   }
 
   render() {
-    const { currencyConfig, defaultValue, placeholder, intl } = this.props;
+    const { className, currencyConfig, defaultValue, placeholder, intl } = this.props;
     const placeholderText = placeholder || intl.formatNumber(defaultValue, currencyConfig);
     return (
       <input
+        className={className}
         {...allowedInputProps(this.props)}
         value={this.state.value}
         onChange={this.onInputChange}
@@ -179,7 +180,8 @@ class CurrencyInput extends Component {
   }
 }
 
-CurrencyInput.defaultProps = {
+CurrencyInputComponent.defaultProps = {
+  className: null,
   currencyConfig: null,
   defaultValue: 0,
   input: null,
@@ -188,7 +190,8 @@ CurrencyInput.defaultProps = {
 
 const { func, oneOfType, number, shape, string } = PropTypes;
 
-CurrencyInput.propTypes = {
+CurrencyInputComponent.propTypes = {
+  className: string,
   currencyConfig: propTypes.currencyConfig.isRequired,
   defaultValue: number,
   intl: intlShape.isRequired,
@@ -202,4 +205,6 @@ CurrencyInput.propTypes = {
   placeholder: string,
 };
 
-export default injectIntl(CurrencyInput);
+const CurrencyInput = injectIntl(CurrencyInputComponent);
+
+export default CurrencyInput;
