@@ -5,7 +5,7 @@ import BirthdayInputField from './BirthdayInputField/BirthdayInputField';
 import BookingInfo from './BookingInfo/BookingInfo';
 import Button, { InlineTextButton } from './Button/Button';
 import CloseIcon from './CloseIcon/CloseIcon';
-import CurrencyInput from './CurrencyInput/CurrencyInput';
+import CurrencyInput from './CurrencyInputField/CurrencyInputField';
 import DateInput from './DateInput/DateInput';
 import Discussion from './Discussion/Discussion';
 import EditListingDescriptionPanel from './EditListingDescriptionPanel/EditListingDescriptionPanel';

@@ -3,7 +3,7 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import fi from 'react-intl/locale-data/fi';
 import { currencyConfig } from '../../util/test-data';
-import CurrencyInput from './CurrencyInput';
+import CurrencyInput from './CurrencyInputField';
 
 const defaultConfig = {
   ...currencyConfig,
