@@ -92,6 +92,7 @@ class DateInputComponent extends Component {
     const { focused } = this.state;
     /* eslint-disable no-unused-vars */
     const {
+      className,
       initialDate,
       intl,
       name,
@@ -122,8 +123,10 @@ class DateInputComponent extends Component {
       ? phrases.clearDate
       : intl.formatMessage({ id: 'DateInput.clearDate' });
 
+    const classes = classNames(css.inputRoot, className);
+
     return (
-      <div>
+      <div className={classes}>
         <SingleDatePicker
           {...datePickerProps}
           id="date-input"
@@ -140,11 +143,12 @@ class DateInputComponent extends Component {
   }
 }
 
-DateInputComponent.defaultProps = defaultProps;
+DateInputComponent.defaultProps = { className: null, ...defaultProps };
 
 const { func, instanceOf, shape, string, object } = PropTypes;
 
 DateInputComponent.propTypes = {
+  className: string,
   initialDate: instanceOf(Date),
   intl: intlShape.isRequired,
   name: string.isRequired,
@@ -172,8 +176,19 @@ const DateInputFieldComponent = props => {
     throw new Error('id required when a label is given');
   }
 
+  const { valid, invalid, touched, error } = meta;
+
+  // Error message and input error styles are only shown if the
+  // field has been touched and the validation has failed.
+  const hasError = touched && invalid && error;
+
+  const inputClasses = classNames(css.input, {
+    [css.inputSuccess]: valid,
+    [css.inputError]: hasError,
+  });
+
+  const inputProps = { className: inputClasses, ...input, ...rest };
   const classes = classNames(rootClassName || css.fieldRoot, className);
-  const inputProps = { ...input, ...rest };
 
   return (
     <div className={classes}>
