@@ -1,9 +1,12 @@
+/* eslint-disable no-console */
 import React, { PropTypes } from 'react';
 import { IntlProvider, addLocaleData } from 'react-intl';
+import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import en from 'react-intl/locale-data/en';
 import fi from 'react-intl/locale-data/fi';
 import { currencyConfig } from '../../util/test-data';
-import CurrencyInput from './CurrencyInputField';
+import * as validators from '../../util/validators';
+import CurrencyInput, { CurrencyInputField } from './CurrencyInputField';
 
 const defaultConfig = {
   ...currencyConfig,
@@ -49,6 +52,41 @@ export const defaultValueWithFiFI = {
     currencyConfig: { ...defaultConfig, currency: 'EUR' },
     locale: 'fi-FI',
     defaultValue: 9999.99,
+  },
+  group: 'custom inputs',
+};
+
+const formName = 'Styleguide.CurrencyInputField.Form';
+
+const FormComponent = props => {
+  const { form } = props;
+  const required = validators.required('This field is required');
+  return (
+    <form>
+      <CurrencyInputField
+        name="price"
+        id={`${form}.price`}
+        label="Set price:"
+        placeholder="Type in amount in EUR..."
+        currencyConfig={{ ...defaultConfig, currency: 'EUR' }}
+        validate={required}
+      />
+    </form>
+  );
+};
+
+FormComponent.propTypes = formPropTypes;
+
+const Form = reduxForm({
+  form: formName,
+})(FormComponent);
+
+export const FieldInForm = {
+  component: Form,
+  props: {
+    onChange: values => {
+      console.log('form values changed to:', values);
+    },
   },
   group: 'custom inputs',
 };
