@@ -4,8 +4,8 @@ import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import moment from 'moment';
 import { Button } from '../../components';
 import { required } from '../../util/validators';
-import DateInput from './DateInput';
-import css from './DateInput.example.css';
+import DateInput from './DateInputField';
+import css from './DateInputField.example.css';
 
 const EnhancedDateInput = props => {
   const { input, placeholder, meta } = props;

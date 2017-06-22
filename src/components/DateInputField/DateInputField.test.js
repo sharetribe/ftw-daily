@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderDeep } from '../../util/test-helpers';
-import DateInput from './DateInput';
+import DateInput from './DateInputField';
 
 const noop = () => null;
 
