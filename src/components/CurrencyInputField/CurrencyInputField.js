@@ -210,9 +210,7 @@ CurrencyInputComponent.propTypes = {
   placeholder: string,
 };
 
-const CurrencyInput = injectIntl(CurrencyInputComponent);
-
-export default CurrencyInput;
+export const CurrencyInput = injectIntl(CurrencyInputComponent);
 
 const CurrencyInputFieldComponent = props => {
   const { rootClassName, className, id, label, input, meta, ...rest } = props;
@@ -264,6 +262,8 @@ CurrencyInputFieldComponent.propTypes = {
   meta: object.isRequired,
 };
 
-export const CurrencyInputField = props => {
+const CurrencyInputField = props => {
   return <Field component={CurrencyInputFieldComponent} {...props} />;
 };
+
+export default CurrencyInputField;

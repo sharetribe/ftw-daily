@@ -6,7 +6,7 @@ import en from 'react-intl/locale-data/en';
 import fi from 'react-intl/locale-data/fi';
 import { currencyConfig } from '../../util/test-data';
 import * as validators from '../../util/validators';
-import CurrencyInput, { CurrencyInputField } from './CurrencyInputField';
+import CurrencyInputField, { CurrencyInput } from './CurrencyInputField';
 
 const defaultConfig = {
   ...currencyConfig,
