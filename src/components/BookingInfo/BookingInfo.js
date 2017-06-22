@@ -26,9 +26,9 @@ const BookingInfoComponent = props => {
 
   const hasSelectedNights = bookingStart && bookingEnd;
 
-  // If there's not enough info, we print empty container
+  // If there's not enough info, don't render anything
   if (!hasSelectedNights) {
-    return <div className={classNames(css.container, className)} />;
+    return null;
   }
 
   const bookingPeriod = (
