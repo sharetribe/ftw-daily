@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
@@ -9,48 +9,46 @@ import { Button, CurrencyInputField } from '../../components';
 
 import css from './EditListingPricingForm.css';
 
-export class EditListingPricingFormComponent extends Component {
-  render() {
-    const {
-      className,
-      disabled,
-      handleSubmit,
-      intl,
-      invalid,
-      saveActionMsg,
-      submitting,
-    } = this.props;
+export const EditListingPricingFormComponent = props => {
+  const {
+    className,
+    disabled,
+    handleSubmit,
+    intl,
+    invalid,
+    saveActionMsg,
+    submitting,
+  } = props;
 
-    const priceRequiredMessage = intl.formatMessage({ id: 'EditListingPricingForm.priceRequired' });
+  const priceRequiredMessage = intl.formatMessage({ id: 'EditListingPricingForm.priceRequired' });
 
-    const classes = classNames(css.root, className);
+  const classes = classNames(css.root, className);
 
-    return (
-      <form className={classes} onSubmit={handleSubmit}>
-        <div className={css.priceWrapper}>
-          <CurrencyInputField
-            className={css.priceInput}
-            name="price"
-            currencyConfig={config.currencyConfig}
-            validate={[required(priceRequiredMessage)]}
-            autoFocus
-          />
-          <div className={css.perNight}>
-            <FormattedMessage id="EditListingPricingForm.perNight" />
-          </div>
+  return (
+    <form className={classes} onSubmit={handleSubmit}>
+      <div className={css.priceWrapper}>
+        <CurrencyInputField
+          className={css.priceInput}
+          name="price"
+          currencyConfig={config.currencyConfig}
+          validate={[required(priceRequiredMessage)]}
+          autoFocus
+        />
+        <div className={css.perNight}>
+          <FormattedMessage id="EditListingPricingForm.perNight" />
         </div>
+      </div>
 
-        <Button
-          className={css.submitButton}
-          type="submit"
-          disabled={invalid || submitting || disabled}
-        >
-          {saveActionMsg}
-        </Button>
-      </form>
-    );
-  }
-}
+      <Button
+        className={css.submitButton}
+        type="submit"
+        disabled={invalid || submitting || disabled}
+      >
+        {saveActionMsg}
+      </Button>
+    </form>
+  );
+};
 
 EditListingPricingFormComponent.defaultProps = { saveActionMsg: 'Next: photos' };
 
