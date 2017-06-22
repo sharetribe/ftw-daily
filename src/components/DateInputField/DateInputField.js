@@ -4,9 +4,14 @@
  * CSS modules can't handle global styles so they are currently added separately
  */
 import React, { Component, PropTypes } from 'react';
+import { Field } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import { SingleDatePicker, isInclusivelyAfterDay } from 'react-dates';
+import classNames from 'classnames';
 import moment from 'moment';
+import { ValidationError } from '../../components';
+
+import css from './DateInputField.css';
 
 const HORIZONTAL_ORIENTATION = 'horizontal';
 const ANCHOR_LEFT = 'left';
@@ -89,10 +94,13 @@ class DateInputComponent extends Component {
     const {
       initialDate,
       intl,
+      name,
       placeholder,
       onBlur,
       onChange,
       onFocus,
+      onDragStart,
+      onDrop,
       phrases,
       screenReaderInputMessage,
       value,
@@ -134,15 +142,18 @@ class DateInputComponent extends Component {
 
 DateInputComponent.defaultProps = defaultProps;
 
-const { func, instanceOf, shape, string } = PropTypes;
+const { func, instanceOf, shape, string, object } = PropTypes;
 
 DateInputComponent.propTypes = {
   initialDate: instanceOf(Date),
   intl: intlShape.isRequired,
+  name: string.isRequired,
   isOutsideRange: func,
   onChange: func.isRequired,
   onBlur: func.isRequired,
   onFocus: func.isRequired,
+  onDragStart: func.isRequired,
+  onDrop: func.isRequired,
   phrases: shape({
     closeDatePicker: string,
     clearDate: string,
@@ -154,6 +165,44 @@ DateInputComponent.propTypes = {
 
 const DateInput = injectIntl(DateInputComponent);
 
-DateInput.displayName = 'DateInput';
-
 export default DateInput;
+
+const DateInputFieldComponent = props => {
+  const { rootClassName, className, id, label, input, meta, ...rest } = props;
+
+  if (label && !id) {
+    throw new Error('id required when a label is given');
+  }
+
+  const classes = classNames(rootClassName || css.fieldRoot, className);
+  const inputProps = { ...input, ...rest };
+
+  return (
+    <div className={classes}>
+      {label ? <label htmlFor={id}>{label}</label> : null}
+      <DateInput {...inputProps} />
+      <ValidationError fieldMeta={meta} />
+    </div>
+  );
+};
+
+DateInputFieldComponent.defaultProps = {
+  rootClassName: null,
+  className: null,
+  id: null,
+  label: null,
+  placeholder: null,
+};
+
+DateInputFieldComponent.propTypes = {
+  rootClassName: string,
+  className: string,
+  id: string,
+  label: string,
+  input: object.isRequired,
+  meta: object.isRequired,
+};
+
+export const DateInputField = props => {
+  return <Field component={DateInputFieldComponent} {...props} />;
+};

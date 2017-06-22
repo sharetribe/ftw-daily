@@ -1,51 +1,26 @@
 /* eslint-disable no-console */
-import React, { PropTypes } from 'react';
-import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
+import React from 'react';
+import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import moment from 'moment';
 import { Button } from '../../components';
 import { required } from '../../util/validators';
-import DateInput from './DateInputField';
+import { DateInputField } from './DateInputField';
 import css from './DateInputField.example.css';
 
-const EnhancedDateInput = props => {
-  const { input, placeholder, meta } = props;
-  const { onBlur, onChange, onFocus, value } = input;
-  const { touched, error } = meta;
-  const inputProps = { onBlur, onChange, onFocus, placeholder, value };
-  return (
-    <div>
-      <label htmlFor="bookingStart">Select date</label>
-      <DateInput {...inputProps} />
-      {touched && error ? <span className={css.error}>{error}</span> : null}
-    </div>
-  );
-};
-
-EnhancedDateInput.defaultProps = { input: null, placeholder: 'Date' };
-
-const { bool, object, shape, string } = PropTypes;
-
-EnhancedDateInput.propTypes = {
-  input: object,
-  meta: shape({
-    touched: bool,
-    error: string,
-  }).isRequired,
-  placeholder: string,
-};
-
 const FormComponent = props => {
-  const { handleSubmit, pristine, submitting, dateInputProps } = props;
+  const { form, handleSubmit, pristine, submitting, dateInputProps } = props;
+  const submitDisabled = pristine || submitting;
   return (
     <form onSubmit={handleSubmit}>
-      <Field
+      <DateInputField
         name="bookingStart"
-        component={EnhancedDateInput}
+        id={`${form}.bookingStart`}
+        label="Select date:"
         format={null}
-        {...dateInputProps}
         validate={[required('Required')]}
+        {...dateInputProps}
       />
-      <Button type="submit" disabled={pristine || submitting} className={css.submitBtn}>
+      <Button type="submit" disabled={submitDisabled} className={css.submitBtn}>
         Select
       </Button>
     </form>
@@ -65,12 +40,15 @@ export const Empty = {
   props: {
     dateInputProps: {
       onBlur: () => console.log('onBlur called from DateInput props.'),
-      onChange: v => console.log('Changed to', moment(v).format('L')),
       onFocus: () => console.log('onFocus called from DateInput props.'),
       placeholder: 'Select important date',
     },
-    onSubmit: v => {
-      console.log('Submitting a form with values:', v);
+    onChange: values => {
+      const { bookingStart } = values;
+      console.log('Changed to', moment(bookingStart).format('L'));
+    },
+    onSubmit: values => {
+      console.log('Submitting a form with values:', values);
     },
   },
   group: 'custom inputs',
