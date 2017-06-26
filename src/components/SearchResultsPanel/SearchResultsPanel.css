@@ -1,6 +1,16 @@
+@import '../../marketplace.css';
+
+.root {}
+
+.listingCards {
+  padding: 0 24px 24px 24px;
+}
+
 .listingCard {
   margin-bottom: 36px;
 }
 
 .pagination {
+  background-color: var(--matterColorLight);
+  padding: 0 24px;
 }

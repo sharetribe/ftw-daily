@@ -17,6 +17,7 @@
   --matterColor: #4A4A4A;
   --matterColorAnti: #B2B2B2;
   --matterColorNegative: #E7E7E7;
+  --matterColorBright: #FDFDFD;
   --matterColorLight: #FFFFFF;
 
   /* Spacing units */
@@ -421,6 +422,8 @@ body {
   -webkit-font-smoothing: antialiased; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
   -moz-osx-font-smoothing: grayscale; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
   text-rendering: optimizeSpeed;
+
+  background-color: var(--matterColorBright);
 }
 
 a {
