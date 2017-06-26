@@ -45,36 +45,36 @@ export const SearchPageComponent = props => {
   const listingsAreLoaded = !searchInProgress && searchParamsMatch && hasPaginationInfo;
 
   const searchError = (
-    <p style={{ color: 'red' }}>
+    <h2 className={css.error}>
       <FormattedMessage id="SearchPage.searchError" />
-    </p>
+    </h2>
   );
 
   const resultsFoundNoAddress = (
-    <h3>
+    <h2>
       <FormattedMessage id="SearchPage.foundResults" values={{ count: totalItems }} />
-    </h3>
+    </h2>
   );
   const address = searchInURL && searchInURL.address
     ? <span className={css.searchString}>{searchInURL.address.split(', ')[0]}</span>
     : null;
   const resultsFoundWithAddress = (
-    <h3>
+    <h2>
       <FormattedMessage id="SearchPage.foundResultsWithAddress" values={{ count: totalItems, address }} />
-    </h3>
+    </h2>
   );
   const resultsFound = address ? resultsFoundWithAddress : resultsFoundNoAddress;
 
   const noResults = (
-    <h3>
+    <h2>
       <FormattedMessage id="SearchPage.noResults" />
-    </h3>
+    </h2>
   );
 
   const loadingResults = (
-    <h3>
+    <h2>
       <FormattedMessage id="SearchPage.loadingResults" />
-    </h3>
+    </h2>
   );
 
   const searchParamsForPagination = parse(location.search);

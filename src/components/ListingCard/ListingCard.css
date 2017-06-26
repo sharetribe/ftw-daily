@@ -31,6 +31,7 @@
   left: 0;
   right: 0;
   width: 100%;
+  border-radius: 2px;
 }
 
 .info {
@@ -51,15 +52,15 @@
 
 .priceValue {
   /* Font */
-  @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH3FontStyles;
 
   /* Remove default margins from font */
   margin-top: 0;
-  margin-bottom: 4px;
+  margin-bottom: 0;
 
   @media (--desktopViewport) {
     margin-top: 0;
-    margin-bottom: 4px;
+    margin-bottom: 0;
   }
 }
 
@@ -86,16 +87,16 @@
 
 .title {
   /* Font */
-  @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH3FontStyles;
   color: var(--matterColor);
 
   /* Remove default margins from font */
   margin-top: 0;
-  margin-bottom: 4px;
+  margin-bottom: 0;
 
   @media (--desktopViewport) {
     margin-top: 0;
-    margin-bottom: 4px;
+    margin-bottom: 0;
   }
 }
 
