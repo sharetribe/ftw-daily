@@ -20,13 +20,14 @@
 }
 
 .link {
-  @apply --marketplaceH3FontStyles;
+  @apply --marketplaceH1FontStyles;
   color: var(--matterColor);
 }
 
 .selectedLink {
   color: var(--matterColorDark);
-  text-decoration: underline;
+  border-bottom: 3px solid var(--matterColorDark);
+  padding-bottom: 7px;
 }
 
 .disabled {

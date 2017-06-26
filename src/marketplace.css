@@ -351,7 +351,7 @@
     display: block;
     width: 100%;
     margin: 0;
-    padding: 5px 0 4px 0;
+    padding: 5px 0 5px 0;
 
     /* Borders */
     border: none;
@@ -467,6 +467,7 @@ ul {
 
 label {
   @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightSemiBold);
   display: block;
   margin-top: 0;
   margin-bottom: 0;
