@@ -49,7 +49,7 @@ const isBankAccountNumberValid = (accountNumber, country) =>
 
 const initialState = { accountNumber: '', routingNumber: '', error: null };
 
-class StripeBankAccountToken extends Component {
+class StripeBankAccountTokenInputComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -247,7 +247,7 @@ class StripeBankAccountToken extends Component {
 
 const { string, shape, func, bool } = PropTypes;
 
-StripeBankAccountToken.propTypes = {
+StripeBankAccountTokenInputComponent.propTypes = {
   country: string.isRequired,
   currency: string.isRequired,
   input: shape({
@@ -262,4 +262,6 @@ StripeBankAccountToken.propTypes = {
   intl: intlShape.isRequired,
 };
 
-export default injectIntl(StripeBankAccountToken);
+const StripeBankAccountTokenInput = injectIntl(StripeBankAccountTokenInputComponent);
+
+export default StripeBankAccountTokenInput;
