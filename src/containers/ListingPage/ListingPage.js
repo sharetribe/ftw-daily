@@ -10,13 +10,13 @@ import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import { convertMoneyToNumber } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import { Avatar, Button, Map, ModalInMobile, PageLayout } from '../../components';
+import { ensureListing, ensureUser } from '../../util/data';
+import { Avatar, Button, Map, ModalInMobile, PageLayout, ResponsiveImage } from '../../components';
 import { BookingDatesForm } from '../../containers';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { showListing } from './ListingPage.duck';
 
 import css from './ListingPage.css';
-import noImageIcon from './images/noImageIcon.svg';
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 2500;
@@ -87,16 +87,36 @@ export class ListingPageComponent extends Component {
   render() {
     const { params, showListingError, intl, currentUser, getListing } = this.props;
     const currencyConfig = config.currencyConfig;
-    const currentListing = getListing(new UUID(params.id));
-
-    const attributes = currentListing ? currentListing.attributes : {};
+    const currentListing = ensureListing(getListing(new UUID(params.id)));
     const {
       address = '',
       description = '',
       geolocation = null,
       price = null,
       title = '',
-    } = attributes;
+    } = currentListing.attributes;
+
+    if (!currentListing.id && showListingError) {
+      const noDataMsg = { id: 'ListingPage.noListingData' };
+      return <PageLayout title={intl.formatMessage(noDataMsg)} />;
+    } else if (!currentListing.id) {
+      const loadingPageMsg = { id: 'ListingPage.loadingListingData' };
+      return <PageLayout title={intl.formatMessage(loadingPageMsg)} />;
+    }
+
+    const firstImage = currentListing.images && currentListing.images.length > 0
+      ? currentListing.images[0]
+      : null;
+
+    const authorAvailable = currentListing && currentListing.author;
+    const userAndListingAuthorAvailable = currentUser && authorAvailable;
+    const isOwnListing = userAndListingAuthorAvailable &&
+      currentListing.author.id.uuid === currentUser.id.uuid;
+    const showBookButton = !isOwnListing;
+
+    const { firstName: authorFirstName, lastName: authorLastName } = authorAvailable
+      ? ensureUser(currentListing.author).attributes.profile
+      : { firstName: '', lastName: '' };
 
     // TODO location address is currently serialized inside address field (API will change later)
     // Content is something like { locationAddress: 'Street, Province, Country', building: 'A 42' };
@@ -110,96 +130,61 @@ export class ListingPageComponent extends Component {
 
     const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' });
     const { formattedPrice, priceTitle } = priceData(price, currencyConfig, intl);
-    const map = geolocation ? <Map center={geolocation} address={locationAddress} /> : null;
-
-    // TODO Responsive image-objects need to be thought through when final image sizes are known
-    const images = currentListing && currentListing.images
-      ? currentListing.images.map(i => ({ id: i.id, sizes: i.attributes.sizes }))
-      : [];
-
-    // TODO: svg should have own loading strategy
-    // Now noImageIcon is imported with default configuration (gives url)
-    // This should be handled by ResponsiveImage or separate ImagePlaceholder component
-    const noListingImage = (
-      <div className={css.mainImage}>
-        <div className={css.aspectWrapper}>
-          <div className={css.noImageContainer}>
-            <div className={css.noImageWrapper}>
-              <img className={css.noImageIcon} src={noImageIcon} alt="No images added" />
-              <div className={css.noImageText}>No image</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-
-    // TODO componentize
-    const imageCarousel = images.length > 0
-      ? <div className={css.imageContainer}>
-          <img
-            className={css.mainImage}
-            alt={title}
-            src={images[0].sizes.find(i => i.name === 'landscape-crop').url}
-          />
-          <div className={css.thumbnailContainer}>
-            {images.slice(1).map(image => (
-              <div key={image.id.uuid} className={css.thumbnailWrapper}>
-                <div className={css.aspectWrapper}>
-                  <img
-                    className={css.thumbnail}
-                    alt={`${title} thumbnail`}
-                    src={image.sizes.find(i => i.name === 'landscape-crop').url}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      : noListingImage;
-
-    const userAndListingAuthorAvailable = currentUser && currentListing && currentListing.author;
-    const isOwnListing = userAndListingAuthorAvailable &&
-      currentListing.author.id.uuid === currentUser.id.uuid;
-    const showBookButton = !isOwnListing;
-
-    const authorAvailable = currentListing && currentListing.author;
-    const authorProfile = authorAvailable && currentListing.author.attributes.profile;
-    const authorName = authorAvailable
-      ? `${authorProfile.firstName} ${authorProfile.lastName}`
-      : '';
-    const authorInfo = authorAvailable
-      ? <div className={css.author}>
-          <div className={css.avatarWrapper}>
-            <Avatar firstName={authorProfile.firstName} lastName={authorProfile.lastName} />
-          </div>
-          <div className={css.authorDetails}>
-            <span className={css.authorName}>{authorName}</span>
-          </div>
+    const map = geolocation
+      ? <div className={css.locationContainer}>
+          <h3 className={css.locationTitle}>
+            <FormattedMessage id="ListingPage.locationTitle" />
+          </h3>
+          <div className={css.map}><Map center={geolocation} address={locationAddress} /></div>
         </div>
       : null;
 
     const listingClasses = classNames(css.listing, { [css.bookable]: showBookButton });
 
-    const pageContent = (
+    return (
       <PageLayout title={`${title} ${formattedPrice}`} className={this.state.pageClassNames}>
         <div className={listingClasses}>
-          <div className={css.header}>
-            <h1 className={css.title}>{title}</h1>
-            <div className={css.price}>
-              <div className={css.priceValue} title={priceTitle}>
-                {formattedPrice}
-              </div>
-              <div className={css.perNight}>
-                <FormattedMessage id="ListingPage.perNight" />
-              </div>
+          <div className={css.threeToTwoWrapper}>
+            <div className={css.aspectWrapper}>
+              <ResponsiveImage
+                rootClassName={css.rootForImage}
+                alt={title}
+                image={firstImage}
+                nameSet={[
+                  { name: 'landscape-crop', size: '400w' },
+                  { name: 'landscape-crop2x', size: '800w' },
+                ]}
+                sizes="100vw"
+              />
             </div>
-
           </div>
-          {imageCarousel}
-          {/* eslint-disable react/no-danger */}
-          <div className={css.description} dangerouslySetInnerHTML={{ __html: description }} />
-          {/* eslint-enable react/no-danger */}
-          {authorInfo}
+
+          <div className={css.avatarWrapper}>
+            <Avatar
+              rootClassName={css.avatar}
+              firstName={authorFirstName}
+              lastName={authorLastName}
+            />
+          </div>
+
+          <div className={css.heading}>
+            <h1 className={css.title}>{title}</h1>
+            <div className={css.author}>
+              <span className={css.authorName}>
+                <FormattedMessage id="ListingPage.hostedBy" values={{ name: authorFirstName }} />
+              </span>
+            </div>
+          </div>
+
+          <div className={css.descriptionContainer}>
+            <h3 className={css.descriptionTitle}>
+              <FormattedMessage id="ListingPage.descriptionTitle" />
+            </h3>
+            <p className={css.description}>{description}</p>
+          </div>
+
+          {map}
+
           <ModalInMobile
             id="BookingDatesFormInModal"
             isModalOpenOnMobile={this.state.isBookingModalOpenOnMobile}
@@ -209,10 +194,21 @@ export class ListingPageComponent extends Component {
           >
             <BookingDatesForm className={css.bookingForm} onSubmit={this.onSubmit} price={price} />
           </ModalInMobile>
-          {map ? <div className={css.map}>{map}</div> : null}
           {showBookButton
             ? <div className={css.openBookingForm}>
-                <Button onClick={() => this.setState({ isBookingModalOpenOnMobile: true })}>
+                <div className={css.priceContainer}>
+                  <div className={css.priceValue} title={priceTitle}>
+                    {formattedPrice}
+                  </div>
+                  <div className={css.perNight}>
+                    <FormattedMessage id="ListingPage.perNight" />
+                  </div>
+                </div>
+
+                <Button
+                  rootClassName={css.bookButton}
+                  onClick={() => this.setState({ isBookingModalOpenOnMobile: true })}
+                >
                   {bookBtnMessage}
                 </Button>
               </div>
@@ -220,15 +216,6 @@ export class ListingPageComponent extends Component {
         </div>
       </PageLayout>
     );
-
-    const loadingPageMsg = { id: 'ListingPage.loadingListingData' };
-    const loadingContent = <PageLayout title={intl.formatMessage(loadingPageMsg)} />;
-
-    const noDataMsg = { id: 'ListingPage.noListingData' };
-    const noDataError = <PageLayout title={intl.formatMessage(noDataMsg)} />;
-    const loadingOrError = showListingError ? noDataError : loadingContent;
-
-    return currentListing ? pageContent : loadingOrError;
   }
 }
 

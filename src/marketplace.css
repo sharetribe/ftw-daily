@@ -27,6 +27,7 @@
 
   /* Shadows */
   --boxShadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  --boxShadowTop: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
   --boxShadowLight: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   --boxShadowPopup: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
   --boxShadowPopupLight: 0 3px 6px 0 rgba(0, 0, 0, 0.3);
@@ -172,6 +173,7 @@
     margin-bottom: 12px;
 
     @media (--desktopViewport) {
+      font-weight: var(--fontWeightMedium);
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 17px;
       margin-bottom: 15px;

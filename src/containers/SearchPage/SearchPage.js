@@ -60,7 +60,10 @@ export const SearchPageComponent = props => {
     : null;
   const resultsFoundWithAddress = (
     <h2>
-      <FormattedMessage id="SearchPage.foundResultsWithAddress" values={{ count: totalItems, address }} />
+      <FormattedMessage
+        id="SearchPage.foundResultsWithAddress"
+        values={{ count: totalItems, address }}
+      />
     </h2>
   );
   const resultsFound = address ? resultsFoundWithAddress : resultsFoundNoAddress;

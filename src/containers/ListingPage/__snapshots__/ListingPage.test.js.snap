@@ -5,53 +5,78 @@ exports[`ListingPage matches snapshot 1`] = `
   <div
     className="undefined">
     <div>
+      <div>
+        <ResponsiveImage
+          alt="listing1 title"
+          className={null}
+          image={null}
+          nameSet={
+            Array [
+              Object {
+                "name": "landscape-crop",
+                "size": "400w",
+              },
+              Object {
+                "name": "landscape-crop2x",
+                "size": "800w",
+              },
+            ]
+          }
+          rootClassName={null}
+          sizes="100vw" />
+      </div>
+    </div>
+    <div>
+      <Avatar
+        className={null}
+        firstName="user-1 first name"
+        lastName="user-1 last name"
+        rootClassName={null} />
+    </div>
+    <div>
       <h1>
         listing1 title
       </h1>
       <div>
-        <div
-          title={55}>
-          55
-        </div>
-        <div>
-          <FormattedMessage
-            id="ListingPage.perNight"
-            values={Object {}} />
-        </div>
-      </div>
-    </div>
-    <div>
-      <div>
-        <div>
-          <div>
-            <img
-              alt="No images added"
-              src="noImageIcon.svg" />
-            <div>
-              No image
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "listing1 description",
-        }
-      } />
-    <div>
-      <div>
-        <Avatar
-          className={null}
-          firstName="user-1 first name"
-          lastName="user-1 last name"
-          rootClassName={null} />
-      </div>
-      <div>
         <span>
-          user-1 first name user-1 last name
+          <FormattedMessage
+            id="ListingPage.hostedBy"
+            values={
+              Object {
+                "name": "user-1 first name",
+              }
+            } />
         </span>
+      </div>
+    </div>
+    <div>
+      <h3>
+        <FormattedMessage
+          id="ListingPage.descriptionTitle"
+          values={Object {}} />
+      </h3>
+      <p>
+        listing1 description
+      </p>
+    </div>
+    <div>
+      <h3>
+        <FormattedMessage
+          id="ListingPage.locationTitle"
+          values={Object {}} />
+      </h3>
+      <div>
+        <Map
+          address="listing1 address"
+          center={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          className=""
+          rootClassName={null}
+          zoom={11} />
       </div>
     </div>
     <ModalInMobile
@@ -71,18 +96,17 @@ exports[`ListingPage matches snapshot 1`] = `
         } />
     </ModalInMobile>
     <div>
-      <Map
-        address="listing1 address"
-        center={
-          LatLng {
-            "lat": 40,
-            "lng": 60,
-          }
-        }
-        className=""
-        zoom={11} />
-    </div>
-    <div>
+      <div>
+        <div
+          title={55}>
+          55
+        </div>
+        <div>
+          <FormattedMessage
+            id="ListingPage.perNight"
+            values={Object {}} />
+        </div>
+      </div>
       <Button
         className={null}
         onClick={[Function]}

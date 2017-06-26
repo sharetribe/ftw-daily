@@ -1,3 +1,5 @@
+@import '../../marketplace.css';
+
 .pageRoot {}
 
 .listing {
@@ -8,128 +10,140 @@
   padding-bottom: 80px;
 }
 
-.header {
-  display: flex;
-  flex-direction: row;
-  padding: 1rem;
-}
-
-.title,
-.price {
-  font-size: 22px;
-  margin: 0.67em 0;
-}
-
-.title {
-  flex-grow: 1;
-}
-
-.price {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  padding-left: 1rem;
-  flex-shrink: 0;
-
-}
-
-.priceValue {
-  font-size: 22px;
-}
-
-.perNight {
-  margin-left: 6px;
-  font-size: 16px;
-
-  /* Align small price unit text with bigger font (priceValue) */
-  line-height: 23px;
-  padding-top: 6px;
-}
-
-.mainImage {
+.threeToTwoWrapper {
+  /* Layout */
+  display: block;
   width: 100%;
   position: relative;
 }
 
-.thumbnailContainer {
-  display: flex;
-  flex-direction: row;
-  padding: 1rem;
-}
-
-/* Reserves a correct size of painting area for the image before it has been downloaded */
-.thumbnailWrapper {
-  display: block;
-  position: relative;
-  width: 100px;
-  margin-right: 1rem;
-}
-
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
-  padding-bottom: 66.67%; /* Aspect Ratio: 3:2  = 100%/(w/h) */
+  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
 }
 
-.noImageContainer,
-.thumbnail {
+.rootForImage {
+  /* Layout - image will take space defined by aspect ratio wrapper */
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
+}
+
+.avatarWrapper {
+  /* Position (over the listing image)*/
+  margin-left: 24px;
+  margin-top: -30px;
+
+  /* Rendering context to the same lavel as listing image */
+  position: relative;
+
+  /* Layout */
+  display: block;
+  width: 61px;
+  height: 61px;
+}
+
+.avatar {
+  /* Font */
+  @apply --marketplaceH3FontStyles;
+
+  /* Layout */
+  width: 100%;
   height: 100%;
-}
+  border-radius: 50%;
+  margin-top: 0;
+  margin-bottom: 0;
 
-.noImageContainer,
-.noImageWrapper {
+  /* Position possible initials to the center of the component */
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background-color: #eee;
+  justify-content: center;
+
+  /* Colors */
+  background-color: var(--matterColorAnti);
+  color: var(--matterColorLight);
+
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
-.noImageText {
-  color: #666;
+.heading {
+  margin-top: 23px;
+  margin-bottom: 35px;
+  padding: 0 24px;
 }
 
-.description {
-  margin: 1rem;
+.title {
+  /* Font */
+  @apply --marketplaceH2FontStyles;
+  color: var(--matterColor);
+
+  /* Layout */
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .author {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  padding: 1rem;
 }
 
-.authorDetails {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+.descriptionContainer {
+  padding: 0 24px;
+  margin-bottom: 35px;
 }
-.avatarWrapper {
-  display: block;
-  flex-basis: 44px;
-  width: 44px;
-  height: 44px;
-  margin-right: 1rem;
+
+.descriptionTitle {
+  /* Font */
+  color: var(--matterColorAnti);
+
+  margin-top: 0;
+  margin-bottom: 13px;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 13px;
+  }
 }
-.avatar {
-  border-radius: 22px;
+
+.description {
+  margin-top: 0;
+  margin-bottom: 0;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.locationContainer {
+  padding: 0 24px;
+  margin-bottom: 35px;
+}
+
+.locationTitle {
+  /* Font */
+  color: var(--matterColorAnti);
+
+  margin-top: 0;
+  margin-bottom: 24px;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
 }
 
 .map {
-  margin-top: 1rem;
-  height: 300px;
+  height: 325px;
   width: 100%;
   background-color: #eee;
-}
-
-.bookingForm {
-  margin: 96px 24px 24px 24px;
 }
 
 .openBookingForm {
@@ -137,19 +151,57 @@
   bottom: 0;
   left: 0;
   width: 100vw;
-  height: 80px;
-  padding: 1rem;
-  background-color: white;
-  border-top: solid 1px #ccc;
-  left: 50%;
-  transform: translateX(-50%);
+  padding: 18px 24px;
+  background-color: var(--matterColorLight);
+  box-shadow: var(--boxShadowTop);
+  display: flex;
 }
+
+.priceContainer {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 22px;
+  padding: 5px 12px;
+}
+
+.priceValue {
+  /* Font */
+  @apply --marketplaceH2FontStyles;
+  color: var(--matterColor);
+
+  margin-top: 0;
+  margin-bottom: 0px;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.perNight {
+  /* Font */
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColor);
+
+  margin-top: 0;
+  margin-bottom: 0px;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.bookButton {
+  @apply --marketplaceButtonStylesPrimary;
+}
+
+.bookingForm {
+  margin: 96px 24px 24px 24px;
+}
+
 
 .bookingModalTitle {
   margin: 1rem 0;
-}
-
-.editListing {
-  float: right;
-  margin: 1rem;
 }
