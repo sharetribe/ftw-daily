@@ -24,7 +24,7 @@
   background-color: var(--matterColorLight);
 
   /* shadows */
-  box-shadow: 0 1px 1px 0 #dcdcdc;
+  box-shadow: 0 2px 4px 0 #E7E7E7;
 
   @media (--desktopViewport) {
     display: none;
