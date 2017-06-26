@@ -5,7 +5,7 @@ import { debounce } from 'lodash';
 import { ValidationError } from '../../components';
 import config from '../../config';
 
-import css from './StripeBankAccountToken.css';
+import css from './StripeBankAccountTokenInputField.css';
 
 const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
 

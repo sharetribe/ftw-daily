@@ -17,8 +17,8 @@ import * as LocationAutocompleteInput
 import * as PaginationLinks from './components/PaginationLinks/PaginationLinks.example';
 import * as ResponsiveImage from './components/ResponsiveImage/ResponsiveImage.example';
 import * as SelectField from './components/SelectField/SelectField.example';
-import * as StripeBankAccountToken
-  from './components/StripeBankAccountToken/StripeBankAccountToken.example';
+import * as StripeBankAccountTokenInputField
+  from './components/StripeBankAccountTokenInputField/StripeBankAccountTokenInputField.example';
 import * as TabNav from './components/TabNav/TabNav.example';
 import * as Tabs from './components/Tabs/Tabs.example';
 import * as TextInputField from './components/TextInputField/TextInputField.example';
@@ -76,7 +76,7 @@ export {
   ResponsiveImage,
   SelectField,
   SignupForm,
-  StripeBankAccountToken,
+  StripeBankAccountTokenInputField,
   StripePaymentForm,
   TabNav,
   Tabs,

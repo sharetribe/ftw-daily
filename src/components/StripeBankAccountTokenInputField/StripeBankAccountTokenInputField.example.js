@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
 import { Button } from '../../components';
-import StripeBankAccountToken from './StripeBankAccountToken';
+import StripeBankAccountToken from './StripeBankAccountTokenInputField';
 import { required } from '../../util/validators';
 import config from '../../config';
 
