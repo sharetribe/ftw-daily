@@ -41,7 +41,7 @@ import SearchIcon from './SearchIcon/SearchIcon';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import Select from './Select/Select';
 import SelectField from './SelectField/SelectField';
-import StripeBankAccountToken
+import StripeBankAccountTokenInputField
   from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';
 import TabNav from './TabNav/TabNav';
 import Tabs from './Tabs/Tabs';
@@ -95,7 +95,7 @@ export {
   SearchResultsPanel,
   Select,
   SelectField,
-  StripeBankAccountToken,
+  StripeBankAccountTokenInputField,
   TabNav,
   Tabs,
   TextInputField,

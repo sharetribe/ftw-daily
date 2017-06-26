@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { Field, reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
+import { reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
 import config from '../../config';
 import {
   Button,
-  StripeBankAccountToken,
+  StripeBankAccountTokenInputField,
   SelectField,
   BirthdayInputField,
   TextInputField,
@@ -133,23 +133,23 @@ const PayoutDetailsFormComponent = props => {
       </div>
     : null;
 
-  const bankAccountRequired = validators.required(
-    intl.formatMessage({
-      id: 'PayoutDetailsForm.bankAccountRequired',
-    })
-  );
+  // StripeBankAccountTokenInputField handles the error messages
+  // internally, we just have to make sure we require a valid token
+  // out of the field. Therefore the empty validation message.
+  const bankAccountRequired = validators.required(' ');
 
   const bankAccountSection = country
     ? <div>
         <h2 className={css.subTitle}>
           <FormattedMessage id="PayoutDetailsForm.bankDetails" />
         </h2>
-        <Field
+        <StripeBankAccountTokenInputField
           name="bankAccountToken"
-          component={StripeBankAccountToken}
-          props={{ country, currency }}
+          routingNumberId={`${form}.bankAccountToken.routingNumber`}
+          accountNumberId={`${form}.bankAccountToken.accountNumber`}
+          country={country}
+          currency={currency}
           validate={bankAccountRequired}
-          clearOnUnmount
         />
       </div>
     : null;

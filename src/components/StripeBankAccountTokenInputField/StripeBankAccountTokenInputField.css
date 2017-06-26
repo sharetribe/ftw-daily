@@ -1,3 +1,29 @@
+@import '../../marketplace.css';
+
 .unsupportedCountryError {
-  color: red;
+  color: var(--failColor);
+}
+
+.root {
+
+}
+
+.withTopMargin {
+  margin-top: 24px;
+}
+
+.input {
+  border-bottom-color: var(--attentionColor);
+}
+
+.inputSuccess {
+  border-bottom-color: var(--successColor);
+}
+
+.inputError {
+  border-bottom-color: var(--failColor);
+}
+
+.error {
+  color: var(--failColor);
 }
