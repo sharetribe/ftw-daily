@@ -1,5 +1,8 @@
+@import '../../marketplace.css';
+
 .root {
-  margin-top: 10px;
-  color: red;
+  @apply --marketplaceH4FontStyles;
+  margin-top: 6px;
+  color: var(--failColor);
   overflow: hidden;
 }
