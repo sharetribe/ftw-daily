@@ -90,6 +90,7 @@ export const SearchPageComponent = props => {
       <div className={css.container}>
         <div className={css.listings}>
           <SearchResultsPanel
+            className={css.searchListingsPanel}
             currencyConfig={config.currencyConfig}
             listings={listingsAreLoaded ? listings : []}
             pagination={listingsAreLoaded ? pagination : null}

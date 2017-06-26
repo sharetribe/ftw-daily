@@ -3,6 +3,8 @@
 .container {
   /* Layout */
   width: 100%;
+  flex-grow: 1;
+  display: flex;
 }
 
 .searchResultSummary {
@@ -18,4 +20,12 @@
   white-space: nowrap;
 }
 
-.listings {}
+.listings {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchListingsPanel {
+  flex-grow: 1;
+}

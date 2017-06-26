@@ -1,6 +1,9 @@
 @import '../../marketplace.css';
 
-.root {}
+.root {
+  display: flex;
+  flex-direction: column;
+}
 
 .listingCards {
   padding: 0 24px 24px 24px;
@@ -11,6 +14,7 @@
 }
 
 .pagination {
+  margin-top: auto;
   background-color: var(--matterColorLight);
   padding: 0 24px;
 }
