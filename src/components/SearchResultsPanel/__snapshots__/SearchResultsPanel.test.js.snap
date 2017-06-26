@@ -1,4 +1,6 @@
 exports[`SearchResultsPanel matches snapshot 1`] = `
 <div
-  className="" />
+  className="">
+  <div />
+</div>
 `;

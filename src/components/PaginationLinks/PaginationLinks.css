@@ -100,6 +100,9 @@
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: var(--matterColorDark);
+
+  /* Color */
+  color: var(--matterColorDark);
 }
 
 .paginationGap {

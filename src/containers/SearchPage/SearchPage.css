@@ -3,6 +3,8 @@
 .container {
   /* Layout */
   width: 100%;
+  flex-grow: 1;
+  display: flex;
 }
 
 .searchResultSummary {
@@ -19,7 +21,11 @@
 }
 
 .listings {
-  /* Layout */
-  display: block;
-  padding: 0 24px 24px 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchListingsPanel {
+  flex-grow: 1;
 }

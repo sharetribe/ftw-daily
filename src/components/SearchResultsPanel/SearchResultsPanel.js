@@ -19,14 +19,16 @@ const SearchResultsPanel = props => {
 
   return (
     <div className={classes}>
-      {listings.map(l => (
-        <ListingCard
-          className={css.listingCard}
-          key={l.id.uuid}
-          listing={l}
-          currencyConfig={currencyConfig}
-        />
-      ))}
+      <div className={css.listingCards}>
+        {listings.map(l => (
+          <ListingCard
+            className={css.listingCard}
+            key={l.id.uuid}
+            listing={l}
+            currencyConfig={currencyConfig}
+          />
+        ))}
+      </div>
       {paginationLinks}
     </div>
   );
