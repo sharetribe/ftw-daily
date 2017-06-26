@@ -38,7 +38,7 @@
   /* Layout */
   display: flex;
   flex-direction: row;
-  padding: 15px 0 6px 0;
+  padding: 16px 0 2px 0;
 }
 
 .price {
