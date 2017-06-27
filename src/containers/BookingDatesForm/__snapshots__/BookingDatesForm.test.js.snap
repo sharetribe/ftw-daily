@@ -1,10 +1,17 @@
 exports[`BookingDatesForm matches snapshot 1`] = `
 <form
   onSubmit={[Function]}>
-  <Field
-    component={[Function]}
+  <BookingInfo
+    unitPrice={
+      Money {
+        "amount": 1099,
+        "currency": "USD",
+      }
+    } />
+  <DateInputField
     format={null}
-    labelMessage="BookingDatesForm.bookingStartTitle"
+    id="fakeTestForm.bookingStart"
+    label="BookingDatesForm.bookingStartTitle"
     name="bookingStart"
     placeholder="BookingDatesForm.placeholder"
     validate={
@@ -12,23 +19,16 @@ exports[`BookingDatesForm matches snapshot 1`] = `
         [Function],
       ]
     } />
-  <Field
-    component={[Function]}
+  <DateInputField
     format={null}
-    labelMessage="BookingDatesForm.bookingEndTitle"
+    id="fakeTestForm.bookingEnd"
+    label="BookingDatesForm.bookingEndTitle"
     name="bookingEnd"
     placeholder="BookingDatesForm.placeholder"
     validate={
       Array [
         [Function],
       ]
-    } />
-  <BookingInfo
-    unitPrice={
-      Money {
-        "amount": 1099,
-        "currency": "USD",
-      }
     } />
   <p>
     <FormattedMessage

@@ -1,56 +1,22 @@
 import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
+import { reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
 import moment from 'moment';
 import { types } from '../../util/sdkLoader';
 import { required } from '../../util/validators';
-import { Button, BookingInfo, DateInput } from '../../components';
+import { Button, BookingInfo, DateInputField } from '../../components';
+
 import css from './BookingDatesForm.css';
-
-const EnhancedDateInput = props => {
-  const { input, isOutsideRange, labelMessage, placeholder, meta } = props;
-  const { onBlur, onChange, onFocus, value } = input;
-  const { touched, error } = meta;
-  const maybeIsOutsideRange = isOutsideRange ? { isOutsideRange } : {};
-  const inputProps = { ...maybeIsOutsideRange, onBlur, onChange, onFocus, placeholder, value };
-
-  return (
-    <div>
-      {labelMessage ? <label htmlFor="bookingStart">{labelMessage}</label> : null}
-      <DateInput {...inputProps} />
-      {touched && error ? <span className={css.error}>{error}</span> : null}
-    </div>
-  );
-};
-
-EnhancedDateInput.defaultProps = {
-  input: null,
-  isOutsideRange: null,
-  labelMessage: null,
-  placeholder: 'Date',
-};
-
-const { bool, func, instanceOf, node, object, shape, string } = PropTypes;
-
-EnhancedDateInput.propTypes = {
-  input: object,
-  isOutsideRange: func,
-  labelMessage: node,
-  meta: shape({
-    touched: bool,
-    error: string,
-  }).isRequired,
-  placeholder: string,
-};
 
 export const BookingDatesFormComponent = props => {
   const {
     bookingStart,
     bookingEnd,
     className,
+    form,
     handleSubmit,
     intl,
     price,
@@ -93,25 +59,26 @@ export const BookingDatesFormComponent = props => {
 
   return (
     <form className={className} onSubmit={handleSubmit}>
-      <Field
+      {bookingInfo}
+      <DateInputField
         name="bookingStart"
-        labelMessage={bookingStartLabel}
-        component={EnhancedDateInput}
+        id={`${form}.bookingStart`}
+        label={bookingStartLabel}
         format={null}
         placeholder={placeholderText}
         {...isOutsideRangeStart}
         validate={[required(requiredMessage)]}
       />
-      <Field
+      <DateInputField
+        className={css.bookingEnd}
         name="bookingEnd"
-        labelMessage={bookingEndLabel}
-        component={EnhancedDateInput}
+        id={`${form}.bookingEnd`}
+        label={bookingEndLabel}
         format={null}
         placeholder={placeholderText}
         {...isOutsideRangeEnd}
         validate={[required(requiredMessage)]}
       />
-      {bookingInfo}
       <p className={css.smallPrint}>
         <FormattedMessage id="BookingDatesForm.youWontBeChargedInfo" />
       </p>
@@ -123,6 +90,8 @@ export const BookingDatesFormComponent = props => {
 };
 
 BookingDatesFormComponent.defaultProps = { price: null };
+
+const { instanceOf } = PropTypes;
 
 BookingDatesFormComponent.propTypes = {
   ...formPropTypes,

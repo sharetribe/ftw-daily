@@ -4,9 +4,14 @@
  * CSS modules can't handle global styles so they are currently added separately
  */
 import React, { Component, PropTypes } from 'react';
+import { Field } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import { SingleDatePicker, isInclusivelyAfterDay } from 'react-dates';
+import classNames from 'classnames';
 import moment from 'moment';
+import { ValidationError } from '../../components';
+
+import css from './DateInputField.css';
 
 const HORIZONTAL_ORIENTATION = 'horizontal';
 const ANCHOR_LEFT = 'left';
@@ -87,12 +92,16 @@ class DateInputComponent extends Component {
     const { focused } = this.state;
     /* eslint-disable no-unused-vars */
     const {
+      className,
       initialDate,
       intl,
+      name,
       placeholder,
       onBlur,
       onChange,
       onFocus,
+      onDragStart,
+      onDrop,
       phrases,
       screenReaderInputMessage,
       value,
@@ -114,8 +123,10 @@ class DateInputComponent extends Component {
       ? phrases.clearDate
       : intl.formatMessage({ id: 'DateInput.clearDate' });
 
+    const classes = classNames(css.inputRoot, className);
+
     return (
-      <div>
+      <div className={classes}>
         <SingleDatePicker
           {...datePickerProps}
           id="date-input"
@@ -132,17 +143,21 @@ class DateInputComponent extends Component {
   }
 }
 
-DateInputComponent.defaultProps = defaultProps;
+DateInputComponent.defaultProps = { className: null, ...defaultProps };
 
-const { func, instanceOf, shape, string } = PropTypes;
+const { func, instanceOf, shape, string, object } = PropTypes;
 
 DateInputComponent.propTypes = {
+  className: string,
   initialDate: instanceOf(Date),
   intl: intlShape.isRequired,
+  name: string.isRequired,
   isOutsideRange: func,
   onChange: func.isRequired,
   onBlur: func.isRequired,
   onFocus: func.isRequired,
+  onDragStart: func.isRequired,
+  onDrop: func.isRequired,
   phrases: shape({
     closeDatePicker: string,
     clearDate: string,
@@ -152,8 +167,57 @@ DateInputComponent.propTypes = {
   value: instanceOf(Date),
 };
 
-const DateInput = injectIntl(DateInputComponent);
+export const DateInput = injectIntl(DateInputComponent);
 
-DateInput.displayName = 'DateInput';
+const DateInputFieldComponent = props => {
+  const { rootClassName, className, id, label, input, meta, ...rest } = props;
 
-export default DateInput;
+  if (label && !id) {
+    throw new Error('id required when a label is given');
+  }
+
+  const { valid, invalid, touched, error } = meta;
+
+  // Error message and input error styles are only shown if the
+  // field has been touched and the validation has failed.
+  const hasError = touched && invalid && error;
+
+  const inputClasses = classNames(css.input, {
+    [css.inputSuccess]: valid,
+    [css.inputError]: hasError,
+  });
+
+  const inputProps = { className: inputClasses, ...input, ...rest };
+  const classes = classNames(rootClassName || css.fieldRoot, className);
+
+  return (
+    <div className={classes}>
+      {label ? <label htmlFor={id}>{label}</label> : null}
+      <DateInput {...inputProps} />
+      <ValidationError fieldMeta={meta} />
+    </div>
+  );
+};
+
+DateInputFieldComponent.defaultProps = {
+  rootClassName: null,
+  className: null,
+  id: null,
+  label: null,
+  placeholder: null,
+};
+
+DateInputFieldComponent.propTypes = {
+  rootClassName: string,
+  className: string,
+  id: string,
+  label: string,
+  input: object.isRequired,
+  meta: object.isRequired,
+};
+
+const DateInputField = props => {
+  return <Field component={DateInputFieldComponent} {...props} />;
+};
+
+export default DateInputField;

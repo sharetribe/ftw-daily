@@ -1,5 +1,6 @@
 exports[`DateInput matches snapshot 1`] = `
-<div>
+<div
+  className="">
   <div
     className="SingleDatePicker">
     <div>

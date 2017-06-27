@@ -6,7 +6,7 @@ import BookingInfo from './BookingInfo/BookingInfo';
 import Button, { InlineTextButton } from './Button/Button';
 import CloseIcon from './CloseIcon/CloseIcon';
 import CurrencyInputField from './CurrencyInputField/CurrencyInputField';
-import DateInput from './DateInput/DateInput';
+import DateInputField from './DateInputField/DateInputField';
 import Discussion from './Discussion/Discussion';
 import EditListingDescriptionPanel from './EditListingDescriptionPanel/EditListingDescriptionPanel';
 import EditListingLocationPanel from './EditListingLocationPanel/EditListingLocationPanel';
@@ -58,7 +58,7 @@ export {
   Button,
   CloseIcon,
   CurrencyInputField,
-  DateInput,
+  DateInputField,
   Discussion,
   EditListingDescriptionPanel,
   EditListingLocationPanel,

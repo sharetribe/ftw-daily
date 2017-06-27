@@ -4,7 +4,7 @@ import * as BirthdayInputField from './components/BirthdayInputField/BirthdayInp
 import * as BookingInfo from './components/BookingInfo/BookingInfo.example';
 import * as Button from './components/Button/Button.example';
 import * as CurrencyInputField from './components/CurrencyInputField/CurrencyInputField.example';
-import * as DateInput from './components/DateInput/DateInput.example';
+import * as DateInputField from './components/DateInputField/DateInputField.example';
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as Map from './components/Map/Map.example';
@@ -56,7 +56,7 @@ export {
   ChangePasswordForm,
   Colors,
   CurrencyInputField,
-  DateInput,
+  DateInputField,
   EditListingDescriptionForm,
   EditListingLocationForm,
   EditListingPhotosForm,
