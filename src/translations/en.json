@@ -17,7 +17,7 @@
   "BookingDatesForm.requiredDate": "Oops, make sure your date is correct!",
   "BookingDatesForm.youWontBeChargedInfo": "You won't be charged yet",
   "BookingBreakdown.bookingPeriod": "{bookingStart} - {bookingEnd}",
-  "BookingBreakdown.commission": "{marketplace} fee:",
+  "BookingBreakdown.commission": "Saunatime fee:",
   "BookingBreakdown.nightCount": "{count, number} {count, plural, one {night} other {nights}}",
   "BookingBreakdown.pricePerDay":"Price per night:",
   "BookingBreakdown.subtotal": "Subtotal:",

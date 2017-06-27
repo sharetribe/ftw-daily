@@ -36,7 +36,7 @@ describe('BookingBreakdown', () => {
         unitPrice={new types.Money(1000, 'USD')}
         bookingStart={new Date(Date.UTC(2017, 3, 14))}
         bookingEnd={new Date(Date.UTC(2017, 3, 16))}
-        subtotalPrice={new types.Money(2000, 'USD')}
+        totalPrice={new types.Money(1800, 'USD')}
         commission={new types.Money(200, 'USD')}
         intl={fakeIntl}
       />

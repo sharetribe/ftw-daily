@@ -9,27 +9,28 @@ import moment from 'moment';
 import classNames from 'classnames';
 import config from '../../config';
 import { convertMoneyToNumber } from '../../util/currency';
-import { types } from '../../util/sdkLoader';
+import * as propTypes from '../../util/propTypes';
 
 import css from './BookingBreakdown.css';
 
 export const BookingBreakdownComponent = props => {
   const {
+    rootClassName,
+    className,
     bookingStart,
     bookingEnd,
-    className,
-    commission,
-    intl,
-    subtotalPrice,
-    totalPrice,
     unitPrice,
+    commission,
+    totalPrice,
+    intl,
   } = props;
 
+  const classes = classNames(rootClassName || css.root, className);
   const hasSelectedNights = bookingStart && bookingEnd;
 
   // If there's not enough info, render an empty container
   if (!hasSelectedNights) {
-    return <div className={classNames(css.container, className)} />;
+    return <div className={classes} />;
   }
 
   const bookingPeriod = (
@@ -54,55 +55,32 @@ export const BookingBreakdownComponent = props => {
   const unitPriceAsNumber = convertMoneyToNumber(unitPrice, subUnitDivisor);
   const formattedUnitPrice = intl.formatNumber(unitPriceAsNumber, currencyConfig);
 
-  // Subtotal price can be given (when it comes from API)
-  // or calculated: unit price * booked nights
-  const subtotalPriceAsNumber = subtotalPrice
-    ? convertMoneyToNumber(subtotalPrice, subUnitDivisor)
-    : new Decimal(unitPriceAsNumber).times(nightCount).toNumber();
-  const formattedSubtotal = commission
-    ? intl.formatNumber(subtotalPriceAsNumber, currencyConfig)
-    : null;
-
-  // If commission is passed it will be reduced from sub total.
+  // If commission is passed it will be shown as a fee already reduces from the total price
   const commissionAsNumber = commission ? convertMoneyToNumber(commission, subUnitDivisor) : 0;
   const formattedCommission = commission
     ? intl.formatNumber(new Decimal(commissionAsNumber).negated().toNumber(), currencyConfig)
     : null;
 
+  const commissionInfo = (
+    <div className={css.row}>
+      <div className={css.commissionLabel}>
+        <FormattedMessage id="BookingBreakdown.commission" />
+      </div>
+      <div className={css.commission}>
+        {formattedCommission}
+      </div>
+    </div>
+  );
+
   // Total price can be given (when it comes from API)
   // or calculated: sub total - commission
-  const totalPriceAsNumber = totalPrice
-    ? convertMoneyToNumber(totalPrice, subUnitDivisor)
-    : new Decimal(subtotalPriceAsNumber).minus(commissionAsNumber).toNumber();
+  const totalPriceAsNumber = totalPrice ? convertMoneyToNumber(totalPrice, subUnitDivisor) : 0;
   const formattedTotalPrice = totalPriceAsNumber
     ? intl.formatNumber(totalPriceAsNumber, currencyConfig)
     : null;
 
-  // Sub total is shown if commission is given
-  const subtotalInfo = commission
-    ? <div className={css.row}>
-        <div className={css.subtotalLabel}>
-          <FormattedMessage id="BookingBreakdown.subtotal" />
-        </div>
-        <div className={css.subtotal}>
-          {formattedSubtotal}
-        </div>
-      </div>
-    : null;
-
-  const commissionInfo = commission
-    ? <div className={css.row}>
-        <div className={css.commissionLabel}>
-          <FormattedMessage id="BookingBreakdown.commission" values={{ marketplace: 'Saunatime' }} />
-        </div>
-        <div className={css.commission}>
-          {formattedCommission}
-        </div>
-      </div>
-    : null;
-
   return (
-    <div className={classNames(css.container, className)}>
+    <div className={classes}>
       <div className={css.row}>
         <div className={css.priceUnitLabel}>
           <FormattedMessage id="BookingBreakdown.pricePerDay" />
@@ -119,8 +97,7 @@ export const BookingBreakdownComponent = props => {
           {nightCountMessage}
         </div>
       </div>
-      {subtotalInfo}
-      {commissionInfo}
+      {commission ? commissionInfo : null}
       <hr className={css.totalDivider} />
       <div className={css.row}>
         <div className={css.totalLabel}>
@@ -135,25 +112,30 @@ export const BookingBreakdownComponent = props => {
 };
 
 BookingBreakdownComponent.defaultProps = {
+  rootClassName: null,
+  className: null,
   bookingStart: null,
   bookingEnd: null,
-  className: '',
-  subtotalPrice: null,
-  totalPrice: null,
+  unitPrice: null,
   commission: null,
+  totalPrice: null,
 };
 
-const { instanceOf, string } = PropTypes;
+const { string, instanceOf } = PropTypes;
 
 BookingBreakdownComponent.propTypes = {
+  rootClassName: string,
+  className: string,
+
   bookingStart: instanceOf(Date),
   bookingEnd: instanceOf(Date),
-  className: string,
-  commission: instanceOf(types.Money),
+
+  unitPrice: propTypes.money,
+  commission: propTypes.money,
+  totalPrice: propTypes.money,
+
+  // from injectIntl
   intl: intlShape.isRequired,
-  subtotalPrice: instanceOf(types.Money),
-  totalPrice: instanceOf(types.Money),
-  unitPrice: instanceOf(types.Money).isRequired,
 };
 
 const BookingBreakdown = injectIntl(BookingBreakdownComponent);

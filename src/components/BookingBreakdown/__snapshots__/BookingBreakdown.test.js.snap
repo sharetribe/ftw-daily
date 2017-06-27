@@ -89,9 +89,7 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
       </span>
     </div>
     <div
-      className={undefined}>
-      20
-    </div>
+      className={undefined} />
   </div>
 </div>
 `;
@@ -125,19 +123,6 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
       <span>
         2 nights
       </span>
-    </div>
-  </div>
-  <div
-    className={undefined}>
-    <div
-      className={undefined}>
-      <span>
-        Subtotal:
-      </span>
-    </div>
-    <div
-      className={undefined}>
-      20
     </div>
   </div>
   <div
