@@ -38,6 +38,7 @@ export const OrderPageComponent = props => {
     listing: currentListing,
     booking: ensureBooking(currentTransaction.booking),
     provider: ensureUser(currentTransaction.provider),
+    customer: ensureUser(currentTransaction.customer),
   };
 
   const detailsClassName = classNames(css.tabContent, {

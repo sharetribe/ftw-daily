@@ -7,6 +7,13 @@ import { Avatar, BookingInfo, NamedLink } from '../../components';
 
 import css from './OrderDetailsPanel.css';
 
+const formatName = (user, defaultName) => {
+  if (user && user.attributes && user.attributes.profile && user.attributes.profile.firstName) {
+    return user.attributes.profile.firstName;
+  }
+  return defaultName;
+};
+
 const OrderDetailsPanel = props => {
   const {
     className,
@@ -16,9 +23,10 @@ const OrderDetailsPanel = props => {
     booking,
     listing,
     provider,
+    customer,
   } = props;
-  const { firstName, lastName } = provider.attributes.profile;
-  const providerName = firstName ? `${firstName} ${lastName}` : '';
+  const providerName = formatName(provider, '');
+  const customerName = formatName(customer, '');
 
   const listingLinkParams = { id: listing.id.uuid, slug: createSlug(listing.attributes.title) };
   const listingLink = (
@@ -49,7 +57,7 @@ const OrderDetailsPanel = props => {
         title: (
           <FormattedMessage
             id="OrderDetailsPanel.orderRequestedTitle"
-            values={{ title: listingLink }}
+            values={{ customerName, listingTitle: listingLink }}
           />
         ),
         message: (
@@ -127,11 +135,11 @@ const OrderDetailsPanel = props => {
     <div className={className}>
       <h1 className={css.title}>{stateMsgData.title}</h1>
       <div className={css.message}>
-        <div className={css.avatarWrapper}>
-          <Avatar firstName={firstName} lastName={lastName} />
-        </div>
         {stateMsgData.message}
       </div>
+      <h3 className={css.bookingBreakdownTitle}>
+        <FormattedMessage id="OrderDetailsPanel.bookingBreakdownTitle" />
+      </h3>
       {bookingInfo}
     </div>
   );
@@ -149,6 +157,7 @@ OrderDetailsPanel.propTypes = {
   booking: propTypes.booking.isRequired,
   listing: propTypes.listing.isRequired,
   provider: propTypes.user.isRequired,
+  customer: propTypes.user.isRequired,
 };
 
 export default OrderDetailsPanel;

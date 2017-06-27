@@ -6,7 +6,8 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
       id="OrderDetailsPanel.orderRequestedTitle"
       values={
         Object {
-          "title": <withFlattenedRoutes(withRouter(NamedLink))
+          "customerName": "",
+          "listingTitle": <withFlattenedRoutes(withRouter(NamedLink))
             name="ListingPage"
             params={
                 Object {
@@ -21,22 +22,20 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
   </h1>
   <div>
     <div>
-      <Avatar
-        className={null}
-        firstName="provider first name"
-        lastName="provider last name"
-        rootClassName={null} />
-    </div>
-    <div>
       <FormattedMessage
         id="OrderDetailsPanel.orderRequestedStatus"
         values={
           Object {
-            "providerName": "provider first name provider last name",
+            "providerName": "provider first name",
           }
         } />
     </div>
   </div>
+  <h3>
+    <FormattedMessage
+      id="OrderDetailsPanel.bookingBreakdownTitle"
+      values={Object {}} />
+  </h3>
   <BookingInfo
     bookingEnd={2017-06-13T00:00:00.000Z}
     bookingStart={2017-06-10T00:00:00.000Z}

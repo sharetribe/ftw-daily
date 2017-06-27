@@ -15,6 +15,20 @@ exports[`OrderPage matches snapshot 1`] = `
       }
     }
     className="undefined"
+    customer={
+      Object {
+        "attributes": Object {
+          "profile": Object {
+            "firstName": "customer1 first name",
+            "lastName": "customer1 last name",
+          },
+        },
+        "id": UUID {
+          "uuid": "customer1",
+        },
+        "type": "user",
+      }
+    }
     lastTransitionedAt={2017-06-01T00:00:00.000Z}
     listing={
       Object {
