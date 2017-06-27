@@ -21,7 +21,7 @@ import { PropTypes } from 'react';
 import { types as sdkTypes } from './sdkLoader';
 
 const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
-const { any, arrayOf, bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
+const { arrayOf, bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
 
 // Fixed value
 export const value = val => oneOf([val]);
@@ -147,12 +147,12 @@ export const transaction = shape({
   id: uuid.isRequired,
   type: value('transaction').isRequired,
   attributes: shape({
-    commission: any, // ???
+    commission: money.isRequired,
     createdAt: instanceOf(Date).isRequired,
     lastTransitionedAt: instanceOf(Date).isRequired,
     lastTransition: string,
     state: oneOf(TX_STATES).isRequired,
-    total: any, // ???
+    total: money.isRequired,
   }),
   booking,
   listing,
