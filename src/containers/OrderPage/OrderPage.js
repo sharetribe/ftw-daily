@@ -16,7 +16,7 @@ export const OrderPageComponent = props => {
   const { currentUser, fetchOrderError, intl, params, transaction } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
-  const title = currentListing.attributes.title;
+  const listingTitle = currentListing.attributes.title;
 
   // Redirect users with someone else's direct link to their own inbox/orders page.
   const isDataAvailable = currentUser &&
@@ -54,7 +54,7 @@ export const OrderPageComponent = props => {
     : loadingOrFaildFetching;
 
   return (
-    <PageLayout title={intl.formatMessage({ id: 'OrderPage.title' }, { title })}>
+    <PageLayout title={intl.formatMessage({ id: 'OrderPage.title' }, { listingTitle })}>
       {panel}
     </PageLayout>
   );

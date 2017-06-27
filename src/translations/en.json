@@ -95,7 +95,7 @@
   "OrderDetailsPanel.bookingBreakdownTitle": "Booking breakdown",
   "OrderPage.fetchOrderFailed": "Fetching order data failed.",
   "OrderPage.loadingData": "Loading order data.",
-  "OrderPage.title": "Order details for ${title}.",
+  "OrderPage.title": "Order details: {listingTitle}",
   "PageLayout.authInfoFailed": "Could not get authentication information.",
   "PageLayout.logoutFailed": "Logout failed. Please try again.",
   "PaginationLinks.next": "Next page",
