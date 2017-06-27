@@ -2,34 +2,42 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
 <div
   className={null}>
   <h1>
-    <FormattedMessage
-      id="OrderDetailsPanel.orderRequestedTitle"
-      values={
-        Object {
-          "customerName": "",
-          "listingTitle": <withFlattenedRoutes(withRouter(NamedLink))
-            name="ListingPage"
-            params={
-                Object {
-                    "id": "listing1",
-                    "slug": "listing1-title",
-                  }
-            }>
-            listing1 title
-        </withFlattenedRoutes(withRouter(NamedLink))>,
-        }
-      } />
-  </h1>
-  <div>
-    <div>
+    <span>
+      <span>
+        <FormattedMessage
+          id="OrderDetailsPanel.orderPreauthorizedTitle"
+          values={
+            Object {
+              "customerName": "customer first name",
+            }
+          } />
+      </span>
       <FormattedMessage
-        id="OrderDetailsPanel.orderRequestedStatus"
+        id="OrderDetailsPanel.orderPreauthorizedSubtitle"
         values={
           Object {
-            "providerName": "provider first name",
+            "listingLink": <withFlattenedRoutes(withRouter(NamedLink))
+              name="ListingPage"
+              params={
+                  Object {
+                      "id": "listing1",
+                      "slug": "listing1-title",
+                    }
+              }>
+              listing1 title
+          </withFlattenedRoutes(withRouter(NamedLink))>,
           }
         } />
-    </div>
+    </span>
+  </h1>
+  <div>
+    <FormattedMessage
+      id="OrderDetailsPanel.orderPreauthorizedStatus"
+      values={
+        Object {
+          "providerName": "provider first name",
+        }
+      } />
   </div>
   <h3>
     <FormattedMessage

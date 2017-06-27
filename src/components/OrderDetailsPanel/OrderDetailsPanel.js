@@ -3,7 +3,7 @@ import { FormattedDate, FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
 import { types } from '../../util/sdkLoader';
-import { Avatar, BookingInfo, NamedLink } from '../../components';
+import { BookingInfo, NamedLink } from '../../components';
 
 import css from './OrderDetailsPanel.css';
 
@@ -12,6 +12,85 @@ const formatName = (user, defaultName) => {
     return user.attributes.profile.firstName;
   }
   return defaultName;
+};
+
+const orderTitle = (orderState, listingLink, customerName) => {
+  switch (orderState) {
+    case propTypes.TX_STATE_PREAUTHORIZED:
+      return (
+        <span>
+          <span className={css.mainTitle}>
+            <FormattedMessage
+              id="OrderDetailsPanel.orderPreauthorizedTitle"
+              values={{ customerName }}
+            />
+          </span>
+          <FormattedMessage
+            id="OrderDetailsPanel.orderPreauthorizedSubtitle"
+            values={{ listingLink }}
+          />
+        </span>
+      );
+    case propTypes.TX_STATE_ACCEPTED:
+      return (
+        <span>
+          <span className={css.mainTitle}>
+            <FormattedMessage id="OrderDetailsPanel.orderAcceptedTitle" values={{ customerName }} />
+          </span>
+          <FormattedMessage id="OrderDetailsPanel.orderAcceptedSubtitle" values={{ listingLink }} />
+        </span>
+      );
+    case propTypes.TX_STATE_REJECTED:
+      return (
+        <FormattedMessage id="OrderDetailsPanel.orderRejectedTitle" values={{ listingLink }} />
+      );
+    case propTypes.TX_STATE_DELIVERED:
+      return (
+        <FormattedMessage id="OrderDetailsPanel.orderDeliveredTitle" values={{ listingLink }} />
+      );
+    default:
+      return null;
+  }
+};
+
+const orderMessage = (orderState, listingTitle, providerName, lastTransitionedAt) => {
+  const transitionDate = (
+    <span className={css.transitionDate}>
+      <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
+    </span>
+  );
+  switch (orderState) {
+    case propTypes.TX_STATE_PREAUTHORIZED:
+      return (
+        <FormattedMessage
+          id="OrderDetailsPanel.orderPreauthorizedStatus"
+          values={{ providerName }}
+        />
+      );
+    case propTypes.TX_STATE_ACCEPTED:
+      return (
+        <FormattedMessage
+          id="OrderDetailsPanel.orderAcceptedStatus"
+          values={{ providerName, transitionDate }}
+        />
+      );
+    case propTypes.TX_STATE_REJECTED:
+      return (
+        <FormattedMessage
+          id="OrderDetailsPanel.orderRejectedStatus"
+          values={{ providerName, transitionDate }}
+        />
+      );
+    case propTypes.TX_STATE_DELIVERED:
+      return (
+        <FormattedMessage
+          id="OrderDetailsPanel.orderDeliveredStatus"
+          values={{ providerName, transitionDate }}
+        />
+      );
+    default:
+      return null;
+  }
 };
 
 const OrderDetailsPanel = props => {
@@ -50,92 +129,14 @@ const OrderDetailsPanel = props => {
     : <p className={css.error}>{'priceRequiredMessage'}</p>;
 
   // orderState affects to both title and message section
-  let stateMsgData = {};
-  switch (orderState) {
-    case propTypes.TX_STATE_PREAUTHORIZED:
-      stateMsgData = {
-        title: (
-          <FormattedMessage
-            id="OrderDetailsPanel.orderRequestedTitle"
-            values={{ customerName, listingTitle: listingLink }}
-          />
-        ),
-        message: (
-          <div className={css.messagesContainer}>
-            <FormattedMessage
-              id="OrderDetailsPanel.orderRequestedStatus"
-              values={{ providerName }}
-            />
-          </div>
-        ),
-      };
-      break;
-    case propTypes.TX_STATE_ACCEPTED:
-      stateMsgData = {
-        title: (
-          <FormattedMessage
-            id="OrderDetailsPanel.orderAcceptedTitle"
-            values={{ title: listingLink }}
-          />
-        ),
-        message: (
-          <div className={css.messagesContainer}>
-            <FormattedMessage
-              id="OrderDetailsPanel.orderAcceptedStatus"
-              values={{ providerName }}
-            />
-            <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
-          </div>
-        ),
-      };
-      break;
-    case propTypes.TX_STATE_REJECTED:
-      stateMsgData = {
-        title: (
-          <FormattedMessage
-            id="OrderDetailsPanel.orderRejectedTitle"
-            values={{ title: listingLink }}
-          />
-        ),
-        message: (
-          <div className={css.messagesContainer}>
-            <FormattedMessage
-              id="OrderDetailsPanel.orderRejectedStatus"
-              values={{ providerName }}
-            />
-            <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
-          </div>
-        ),
-      };
-      break;
-    case propTypes.TX_STATE_DELIVERED:
-      stateMsgData = {
-        title: (
-          <FormattedMessage
-            id="OrderDetailsPanel.orderDeliveredTitle"
-            values={{ title: listingLink }}
-          />
-        ),
-        message: (
-          <div className={css.messagesContainer}>
-            <FormattedMessage
-              id="OrderDetailsPanel.orderDeliveredStatus"
-              values={{ providerName }}
-            />
-            <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
-          </div>
-        ),
-      };
-      break;
-    default:
-      stateMsgData = { title: null, message: null };
-  }
+  const title = orderTitle(orderState, listingLink, customerName);
+  const message = orderMessage(orderState, listingLink, providerName, lastTransitionedAt);
 
   return (
     <div className={className}>
-      <h1 className={css.title}>{stateMsgData.title}</h1>
+      <h1 className={css.title}>{title}</h1>
       <div className={css.message}>
-        {stateMsgData.message}
+        {message}
       </div>
       <h3 className={css.bookingBreakdownTitle}>
         <FormattedMessage id="OrderDetailsPanel.bookingBreakdownTitle" />

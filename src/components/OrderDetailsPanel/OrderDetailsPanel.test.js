@@ -19,6 +19,7 @@ describe('OrderDetailsPanel', () => {
       ),
       listing: createListing('listing1'),
       provider: createUser('provider'),
+      customer: createUser('customer'),
     };
     const tree = renderShallow(<OrderDetailsPanel {...props} />);
     expect(tree).toMatchSnapshot();
