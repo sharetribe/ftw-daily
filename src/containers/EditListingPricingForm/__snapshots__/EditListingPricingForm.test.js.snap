@@ -8,7 +8,8 @@ exports[`EditListingPricingForm matches snapshot 1`] = `
       className="">
       <input
         autoFocus={true}
-        label={null}
+        className=""
+        id={null}
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
