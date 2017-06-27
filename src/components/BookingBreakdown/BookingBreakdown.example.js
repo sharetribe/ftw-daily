@@ -1,8 +1,8 @@
 import { types } from '../../util/sdkLoader';
-import BookingInfo from './BookingInfo';
+import BookingBreakdown from './BookingBreakdown';
 
 export const BeforeTX = {
-  component: BookingInfo,
+  component: BookingBreakdown,
   props: {
     unitPrice: new types.Money(10, 'USD'),
     bookingStart: new Date(Date.UTC(2017, 3, 14)),
@@ -11,7 +11,7 @@ export const BeforeTX = {
 };
 
 export const TXCustomerSide = {
-  component: BookingInfo,
+  component: BookingBreakdown,
   props: {
     unitPrice: new types.Money(10, 'USD'),
     bookingStart: new Date(Date.UTC(2017, 3, 14)),
@@ -21,7 +21,7 @@ export const TXCustomerSide = {
 };
 
 export const TXProviderSide = {
-  component: BookingInfo,
+  component: BookingBreakdown,
   props: {
     unitPrice: new types.Money(10, 'USD'),
     bookingStart: new Date(Date.UTC(2017, 3, 14)),
@@ -32,7 +32,7 @@ export const TXProviderSide = {
 };
 
 export const TXNoCalculation = {
-  component: BookingInfo,
+  component: BookingBreakdown,
   props: {
     unitPrice: new types.Money(10, 'USD'),
     bookingStart: new Date(Date.UTC(2017, 3, 14)),

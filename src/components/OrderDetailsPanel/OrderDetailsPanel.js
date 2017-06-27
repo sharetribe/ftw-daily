@@ -3,7 +3,7 @@ import { FormattedDate, FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
 import { types } from '../../util/sdkLoader';
-import { BookingInfo, NamedLink } from '../../components';
+import { BookingBreakdown, NamedLink } from '../../components';
 
 import css from './OrderDetailsPanel.css';
 
@@ -130,7 +130,7 @@ const OrderDetailsPanel = props => {
   const unitPrice = listing.attributes.price;
 
   const bookingInfo = unitPrice
-    ? <BookingInfo
+    ? <BookingBreakdown
         className={css.receipt}
         bookingStart={booking.attributes.start}
         bookingEnd={booking.attributes.end}

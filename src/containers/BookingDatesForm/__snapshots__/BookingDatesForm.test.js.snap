@@ -1,7 +1,7 @@
 exports[`BookingDatesForm matches snapshot 1`] = `
 <form
   onSubmit={[Function]}>
-  <BookingInfo
+  <BookingBreakdown
     unitPrice={
       Money {
         "amount": 1099,

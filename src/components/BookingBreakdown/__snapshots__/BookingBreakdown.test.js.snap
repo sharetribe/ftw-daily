@@ -1,0 +1,172 @@
+exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
+<div
+  className="">
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Price per night:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      10
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        2017-04-14 - 2017-04-16
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      <span>
+        2 nights
+      </span>
+    </div>
+  </div>
+  <hr
+    className={undefined} />
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Total:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      20
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
+<div
+  className="">
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Price per night:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      10
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        2017-04-14 - 2017-04-16
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      <span>
+        2 nights
+      </span>
+    </div>
+  </div>
+  <hr
+    className={undefined} />
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Total:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      20
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
+<div
+  className="">
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Price per night:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      10
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        2017-04-14 - 2017-04-16
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      <span>
+        2 nights
+      </span>
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Subtotal:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      20
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Saunatime fee:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      -2
+    </div>
+  </div>
+  <hr
+    className={undefined} />
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <span>
+        Total:
+      </span>
+    </div>
+    <div
+      className={undefined}>
+      18
+    </div>
+  </div>
+</div>
+`;

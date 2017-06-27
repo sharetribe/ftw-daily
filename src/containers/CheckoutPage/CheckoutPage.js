@@ -9,7 +9,7 @@ import { types } from '../../util/sdkLoader';
 import { pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
-import { AuthorInfo, BookingInfo, NamedRedirect, PageLayout } from '../../components';
+import { AuthorInfo, BookingBreakdown, NamedRedirect, PageLayout } from '../../components';
 import { StripePaymentForm } from '../../containers';
 import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
 
@@ -193,7 +193,7 @@ export class CheckoutPageComponent extends Component {
       <PageLayout title={title}>
         <h1 className={css.title}>{title}</h1>
         <AuthorInfo author={currentListing.author} className={css.authorContainer} />
-        <BookingInfo
+        <BookingBreakdown
           className={css.receipt}
           bookingStart={bookingStart}
           bookingEnd={bookingEnd}

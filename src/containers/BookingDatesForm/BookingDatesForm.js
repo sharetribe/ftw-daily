@@ -7,7 +7,7 @@ import { isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
 import moment from 'moment';
 import { types } from '../../util/sdkLoader';
 import { required } from '../../util/validators';
-import { Button, BookingInfo, DateInputField } from '../../components';
+import { Button, BookingBreakdown, DateInputField } from '../../components';
 
 import css from './BookingDatesForm.css';
 
@@ -47,7 +47,7 @@ export const BookingDatesFormComponent = props => {
     : {};
 
   const bookingInfo = price
-    ? <BookingInfo
+    ? <BookingBreakdown
         className={css.receipt}
         bookingStart={bookingStart}
         bookingEnd={bookingEnd}

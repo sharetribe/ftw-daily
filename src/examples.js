@@ -1,7 +1,7 @@
 // components
 import * as AddImages from './components/AddImages/AddImages.example';
 import * as BirthdayInputField from './components/BirthdayInputField/BirthdayInputField.example';
-import * as BookingInfo from './components/BookingInfo/BookingInfo.example';
+import * as BookingBreakdown from './components/BookingBreakdown/BookingBreakdown.example';
 import * as Button from './components/Button/Button.example';
 import * as CurrencyInputField from './components/CurrencyInputField/CurrencyInputField.example';
 import * as DateInputField from './components/DateInputField/DateInputField.example';
@@ -50,7 +50,7 @@ export {
   AddImages,
   BirthdayInputField,
   BookingDatesForm,
-  BookingInfo,
+  BookingBreakdown,
   Button,
   ChangeAccountPasswordForm,
   ChangePasswordForm,

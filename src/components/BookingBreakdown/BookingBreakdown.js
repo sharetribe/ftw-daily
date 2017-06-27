@@ -10,9 +10,10 @@ import classNames from 'classnames';
 import config from '../../config';
 import { convertMoneyToNumber } from '../../util/currency';
 import { types } from '../../util/sdkLoader';
-import css from './BookingInfo.css';
 
-const BookingInfoComponent = props => {
+import css from './BookingBreakdown.css';
+
+export const BookingBreakdownComponent = props => {
   const {
     bookingStart,
     bookingEnd,
@@ -33,7 +34,7 @@ const BookingInfoComponent = props => {
 
   const bookingPeriod = (
     <FormattedMessage
-      id="BookingInfo.bookingPeriod"
+      id="BookingBreakdown.bookingPeriod"
       values={{
         bookingStart: intl.formatDate(bookingStart),
         bookingEnd: intl.formatDate(bookingEnd),
@@ -44,7 +45,7 @@ const BookingInfoComponent = props => {
   // diff gives night count between dates
   const nightCount = moment(bookingEnd).diff(moment(bookingStart), 'days');
   const nightCountMessage = (
-    <FormattedMessage id="BookingInfo.nightCount" values={{ count: nightCount }} />
+    <FormattedMessage id="BookingBreakdown.nightCount" values={{ count: nightCount }} />
   );
 
   const currencyConfig = config.currencyConfig;
@@ -81,7 +82,7 @@ const BookingInfoComponent = props => {
   const subtotalInfo = commission
     ? <div className={css.row}>
         <div className={css.subtotalLabel}>
-          <FormattedMessage id="BookingInfo.subtotal" />
+          <FormattedMessage id="BookingBreakdown.subtotal" />
         </div>
         <div className={css.subtotal}>
           {formattedSubtotal}
@@ -92,7 +93,7 @@ const BookingInfoComponent = props => {
   const commissionInfo = commission
     ? <div className={css.row}>
         <div className={css.commissionLabel}>
-          <FormattedMessage id="BookingInfo.commission" values={{ marketplace: 'Saunatime' }} />
+          <FormattedMessage id="BookingBreakdown.commission" values={{ marketplace: 'Saunatime' }} />
         </div>
         <div className={css.commission}>
           {formattedCommission}
@@ -104,7 +105,7 @@ const BookingInfoComponent = props => {
     <div className={classNames(css.container, className)}>
       <div className={css.row}>
         <div className={css.priceUnitLabel}>
-          <FormattedMessage id="BookingInfo.pricePerDay" />
+          <FormattedMessage id="BookingBreakdown.pricePerDay" />
         </div>
         <div className={css.priceUnitPrice}>
           {formattedUnitPrice}
@@ -123,7 +124,7 @@ const BookingInfoComponent = props => {
       <hr className={css.totalDivider} />
       <div className={css.row}>
         <div className={css.totalLabel}>
-          <FormattedMessage id="BookingInfo.total" />
+          <FormattedMessage id="BookingBreakdown.total" />
         </div>
         <div className={css.totalPrice}>
           {formattedTotalPrice}
@@ -133,7 +134,7 @@ const BookingInfoComponent = props => {
   );
 };
 
-BookingInfoComponent.defaultProps = {
+BookingBreakdownComponent.defaultProps = {
   bookingStart: null,
   bookingEnd: null,
   className: '',
@@ -144,7 +145,7 @@ BookingInfoComponent.defaultProps = {
 
 const { instanceOf, string } = PropTypes;
 
-BookingInfoComponent.propTypes = {
+BookingBreakdownComponent.propTypes = {
   bookingStart: instanceOf(Date),
   bookingEnd: instanceOf(Date),
   className: string,
@@ -155,8 +156,8 @@ BookingInfoComponent.propTypes = {
   unitPrice: instanceOf(types.Money).isRequired,
 };
 
-const BookingInfo = injectIntl(BookingInfoComponent);
+const BookingBreakdown = injectIntl(BookingBreakdownComponent);
 
-BookingInfo.displayName = 'BookingInfo';
+BookingBreakdown.displayName = 'BookingBreakdown';
 
-export default BookingInfo;
+export default BookingBreakdown;
