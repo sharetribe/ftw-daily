@@ -7,7 +7,7 @@ import { BookingDatesFormComponent } from './BookingDatesForm';
 const noop = () => null;
 
 describe('BookingDatesForm', () => {
-  it('matches snapshot', () => {
+  it('matches snapshot without selected dates', () => {
     const tree = renderShallow(
       <BookingDatesFormComponent
         {...fakeFormProps}
@@ -15,6 +15,20 @@ describe('BookingDatesForm', () => {
         dispatch={noop}
         onSubmit={v => v}
         price={new types.Money(1099, 'USD')}
+      />
+    );
+    expect(tree).toMatchSnapshot();
+  });
+  it('matches snapshot with selected dates', () => {
+    const tree = renderShallow(
+      <BookingDatesFormComponent
+        {...fakeFormProps}
+        intl={fakeIntl}
+        dispatch={noop}
+        onSubmit={v => v}
+        price={new types.Money(1099, 'USD')}
+        bookingStart={new Date(Date.UTC(2017, 3, 14))}
+        bookingEnd={new Date(Date.UTC(2017, 3, 16))}
       />
     );
     expect(tree).toMatchSnapshot();
