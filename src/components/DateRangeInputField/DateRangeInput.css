@@ -1,0 +1,173 @@
+@import '../../marketplace.css';
+
+:root {
+  --selectionHeight: 36px;
+  --hoveredOverlayColor: rgba(255, 255, 255, 0.2);
+  --datepickerDistanceToTop: 271px;
+}
+
+.inputRoot {
+
+  /* Override react-dates default styles to match input styles */
+
+  & :global(.DateRangePicker) {
+    display: block;
+  }
+  & :global(.DateRangePicker__picker--horizontal) {
+    top: 43px;
+    width: 100%;
+    min-height: calc(100vh - var(--datepickerDistanceToTop));
+    background-color: var(--marketplaceColor);
+  }
+  & :global(.DateRangePickerInput) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border: none;
+  }
+  & :global(.DayPicker--horizontal) {
+    margin: 0 auto;
+    background-color: var(--marketplaceColor);
+    box-shadow: none;
+  }
+  & :global(.CalendarMonthGrid) {
+    background-color: transparent;
+  }
+  & :global(.DateInput) {
+    display: block;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  & :global(.DayPicker__week-header) {
+    color: var(--matterColorLight);
+  }
+
+  & :global(.CalendarMonth__caption) {
+    color: var(--matterColorLight);
+  }
+  & :global(.DayPickerNavigation__prev),
+  & :global(.DayPickerNavigation__next) {
+    color: var(--matterColorLight);
+  }
+  & :global(.CalendarDay) {
+    @apply --marketplaceH4FontStyles;
+    color: var(--matterColorLight);
+    border: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    @media (--desktopViewport) {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+  & :global(.CalendarDay--today) {
+    text-decoration: underline;
+  }
+  /* Remove default bg-color and use our extra span instead '.renderedDay' */
+  & :global(.CalendarDay--hovered-span),
+  & :global(.CalendarDay--selected-span) {
+    background-color: transparent;
+  }
+  & :global(.CalendarDay--hovered-span .renderedDay) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: var(--selectionHeight);
+    background-color: var(--hoveredOverlayColor);
+  }
+  & :global(.CalendarDay--selected-span .renderedDay) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: var(--selectionHeight);
+    background-color: var(--successColor);
+  }
+  /* Remove default bg-color and use our extra span instead '.renderedDay' */
+  & :global(.CalendarDay--selected-start) {
+    background-color: transparent;
+  }
+  & :global(.CalendarDay--selected-start .renderedDay) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: var(--selectionHeight);
+    background-color: var(--successColor);
+    border-top-left-radius: calc(var(--selectionHeight) / 2);
+    border-bottom-left-radius: calc(var(--selectionHeight) / 2);
+  }
+  /* Remove default bg-color and use our extra span instead '.renderedDay' */
+  & :global(.CalendarDay--after-hovered-start) {
+    background-color: transparent;
+  }
+  & :global(.CalendarDay--after-hovered-start .renderedDay) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: var(--selectionHeight);
+    background-color: var(--hoveredOverlayColor);
+  }
+  /* Remove default bg-color and use our extra span instead '.renderedDay' */
+  & :global(.CalendarDay--selected-end) {
+    background-color: transparent;
+  }
+  & :global(.CalendarDay--selected-end .renderedDay) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: var(--selectionHeight);
+    background-color: var(--successColor);
+    border-top-right-radius: calc(var(--selectionHeight) / 2);
+    border-bottom-right-radius: calc(var(--selectionHeight) / 2);
+  }
+  /* Remove default bg-color and use our extra span instead '.renderedDay' */
+  & :global(.CalendarDay--hovered) {
+    background-color: transparent;
+  }
+  & :global(.CalendarDay--hovered .renderedDay) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: var(--selectionHeight);
+    background-color: var(--hoveredOverlayColor);
+  }
+  /* Remove default bg-color and use our extra span instead '.renderedDay' */
+  & :global(.CalendarDay--blocked-out-of-range) {
+    background-color: transparent;
+    color: var(--marketplaceColorDark);
+    border: 0;
+  }
+  & :global(.CalendarDay--blocked-out-of-range .renderedDay) {
+    background-color: transparent;
+  }
+  & :global(.DateInput--with-caret::before) {
+    display: none;
+  }
+  & :global(.DateInput--with-caret::after) {
+    display: none;
+  }
+  & :global(.DateInput__display-text) {
+    @apply --marketplaceDefaultFontStyles;
+    padding: 0;
+    color: var(--matterColorAnti);
+  }
+  & :global(.DateInput__display-text--focused) {
+    background-color: transparent;
+  }
+  & :global(.DateInput__display-text--has-input) {
+    color: var(--matterColor);
+  }
+}
+
+.rootNextMonthIcon,
+.rootPreviousMonthIcon {
+  stroke: var(--matterColorLight);
+  fill: var(--matterColorLight);
+}
