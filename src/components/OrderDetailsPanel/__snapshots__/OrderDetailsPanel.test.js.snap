@@ -2,41 +2,48 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
 <div
   className={null}>
   <h1>
-    <FormattedMessage
-      id="OrderDetailsPanel.orderRequestedTitle"
-      values={
-        Object {
-          "title": <withFlattenedRoutes(withRouter(NamedLink))
-            name="ListingPage"
-            params={
-                Object {
-                    "id": "listing1",
-                    "slug": "listing1-title",
-                  }
-            }>
-            listing1 title
-        </withFlattenedRoutes(withRouter(NamedLink))>,
-        }
-      } />
-  </h1>
-  <div>
-    <div>
-      <Avatar
-        className={null}
-        firstName="provider first name"
-        lastName="provider last name"
-        rootClassName={null} />
-    </div>
-    <div>
+    <span>
+      <span>
+        <FormattedMessage
+          id="OrderDetailsPanel.orderPreauthorizedTitle"
+          values={
+            Object {
+              "customerName": "customer first name",
+            }
+          } />
+      </span>
       <FormattedMessage
-        id="OrderDetailsPanel.orderRequestedStatus"
+        id="OrderDetailsPanel.orderPreauthorizedSubtitle"
         values={
           Object {
-            "providerName": "provider first name provider last name",
+            "listingLink": <withFlattenedRoutes(withRouter(NamedLink))
+              name="ListingPage"
+              params={
+                  Object {
+                      "id": "listing1",
+                      "slug": "listing1-title",
+                    }
+              }>
+              listing1 title
+          </withFlattenedRoutes(withRouter(NamedLink))>,
           }
         } />
-    </div>
+    </span>
+  </h1>
+  <div>
+    <FormattedMessage
+      id="OrderDetailsPanel.orderPreauthorizedStatus"
+      values={
+        Object {
+          "providerName": "provider first name",
+        }
+      } />
   </div>
+  <h3>
+    <FormattedMessage
+      id="OrderDetailsPanel.bookingBreakdownTitle"
+      values={Object {}} />
+  </h3>
   <BookingInfo
     bookingEnd={2017-06-13T00:00:00.000Z}
     bookingStart={2017-06-10T00:00:00.000Z}

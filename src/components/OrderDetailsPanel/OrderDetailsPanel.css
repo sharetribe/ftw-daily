@@ -1,6 +1,11 @@
-.title,
-.receipt {
-  margin: 1rem 1rem 2rem 1rem;
+@import '../../marketplace.css';
+
+.title {
+  margin: 35px 24px 0 24px;
+}
+
+.mainTitle {
+  display: block;
 }
 
 .messagesContainer {
@@ -10,13 +15,18 @@
 
 .message {
   display: flex;
-  margin: 1rem 1rem 2rem 1rem;
+  margin: 24px 24px 0 24px;
 }
 
-.avatarWrapper {
-  display: block;
-  flex-basis: 48px;
-  width: 48px;
-  height: 48px;
-  margin-right: 1rem;
+.transitionDate {
+  white-space: nowrap;
+}
+
+.bookingBreakdownTitle {
+  margin: 47px 24px 0 24px;
+  color: var(--matterColorAnti);
+}
+
+.receipt {
+  margin: 13px 24px 0 24px;
 }
