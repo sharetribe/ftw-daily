@@ -14,7 +14,7 @@ const formatName = (user, defaultName) => {
   return defaultName;
 };
 
-const orderTitle = (orderState, listingLink, customerName) => {
+const orderTitle = (orderState, listingLink, customerName, lastTransition) => {
   switch (orderState) {
     case propTypes.TX_STATE_PREAUTHORIZED:
       return (
@@ -41,9 +41,19 @@ const orderTitle = (orderState, listingLink, customerName) => {
         </span>
       );
     case propTypes.TX_STATE_REJECTED:
-      return (
-        <FormattedMessage id="OrderDetailsPanel.orderRejectedTitle" values={{ listingLink }} />
-      );
+      switch (lastTransition) {
+        case propTypes.TX_TRANSITION_AUTO_REJECT:
+          return (
+            <FormattedMessage
+              id="OrderDetailsPanel.orderAutoRejectedTitle"
+              values={{ listingLink }}
+            />
+          );
+        default:
+          return (
+            <FormattedMessage id="OrderDetailsPanel.orderRejectedTitle" values={{ listingLink }} />
+          );
+      }
     case propTypes.TX_STATE_DELIVERED:
       return (
         <FormattedMessage id="OrderDetailsPanel.orderDeliveredTitle" values={{ listingLink }} />
@@ -53,7 +63,13 @@ const orderTitle = (orderState, listingLink, customerName) => {
   }
 };
 
-const orderMessage = (orderState, listingTitle, providerName, lastTransitionedAt) => {
+const orderMessage = (
+  orderState,
+  listingTitle,
+  providerName,
+  lastTransitionedAt,
+  lastTransition
+) => {
   const transitionDate = (
     <span className={css.transitionDate}>
       <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
@@ -75,12 +91,22 @@ const orderMessage = (orderState, listingTitle, providerName, lastTransitionedAt
         />
       );
     case propTypes.TX_STATE_REJECTED:
-      return (
-        <FormattedMessage
-          id="OrderDetailsPanel.orderRejectedStatus"
-          values={{ providerName, transitionDate }}
-        />
-      );
+      switch (lastTransition) {
+        case propTypes.TX_TRANSITION_AUTO_REJECT:
+          return (
+            <FormattedMessage
+              id="OrderDetailsPanel.orderAutoRejectedStatus"
+              values={{ providerName, transitionDate }}
+            />
+          );
+        default:
+          return (
+            <FormattedMessage
+              id="OrderDetailsPanel.orderRejectedStatus"
+              values={{ providerName, transitionDate }}
+            />
+          );
+      }
     case propTypes.TX_STATE_DELIVERED:
       return (
         <FormattedMessage
@@ -99,6 +125,7 @@ const OrderDetailsPanel = props => {
     totalPrice,
     orderState,
     lastTransitionedAt,
+    lastTransition,
     booking,
     listing,
     provider,
@@ -129,8 +156,14 @@ const OrderDetailsPanel = props => {
     : <p className={css.error}>{'priceRequiredMessage'}</p>;
 
   // orderState affects to both title and message section
-  const title = orderTitle(orderState, listingLink, customerName);
-  const message = orderMessage(orderState, listingLink, providerName, lastTransitionedAt);
+  const title = orderTitle(orderState, listingLink, customerName, lastTransition);
+  const message = orderMessage(
+    orderState,
+    listingLink,
+    providerName,
+    lastTransitionedAt,
+    lastTransition
+  );
 
   return (
     <div className={className}>
@@ -146,7 +179,7 @@ const OrderDetailsPanel = props => {
   );
 };
 
-OrderDetailsPanel.defaultProps = { className: null };
+OrderDetailsPanel.defaultProps = { className: null, lastTransition: null };
 
 const { instanceOf, string } = PropTypes;
 
@@ -155,6 +188,7 @@ OrderDetailsPanel.propTypes = {
   totalPrice: instanceOf(types.Money).isRequired,
   orderState: string.isRequired,
   lastTransitionedAt: instanceOf(Date).isRequired,
+  lastTransition: string,
   booking: propTypes.booking.isRequired,
   listing: propTypes.listing.isRequired,
   provider: propTypes.user.isRequired,
