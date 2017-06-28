@@ -5,11 +5,11 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import Decimal from 'decimal.js';
-import moment from 'moment';
 import classNames from 'classnames';
 import config from '../../config';
 import { convertMoneyToNumber } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
+import { nightsBetween } from '../../util/dates';
 
 import css from './BookingBreakdown.css';
 
@@ -43,8 +43,7 @@ export const BookingBreakdownComponent = props => {
     />
   );
 
-  // diff gives night count between dates
-  const nightCount = moment(bookingEnd).diff(moment(bookingStart), 'days');
+  const nightCount = nightsBetween(bookingStart, bookingEnd);
   const nightCountMessage = (
     <FormattedMessage id="BookingBreakdown.nightCount" values={{ count: nightCount }} />
   );
