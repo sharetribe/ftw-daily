@@ -140,6 +140,8 @@ export const TX_STATES = [
   TX_STATE_DELIVERED,
 ];
 
+export const TX_TRANSITION_AUTO_REJECT = 'transition/auto-reject';
+
 // Denormalised transaction object
 export const transaction = shape({
   id: uuid.isRequired,
@@ -148,6 +150,7 @@ export const transaction = shape({
     commission: any, // ???
     createdAt: instanceOf(Date).isRequired,
     lastTransitionedAt: instanceOf(Date).isRequired,
+    lastTransition: string,
     state: oneOf(TX_STATES).isRequired,
     total: any, // ???
   }),

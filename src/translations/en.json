@@ -98,6 +98,8 @@
   "OrderDetailsPanel.orderPreauthorizedTitle": "Great success, {customerName}!",
   "OrderDetailsPanel.orderRejectedStatus": "Unfortunately {providerName} declined the booking on {transitionDate}.",
   "OrderDetailsPanel.orderRejectedTitle": "You requested to book {listingLink}",
+  "OrderDetailsPanel.orderAutoRejectedStatus": "The request expired on {transitionDate}. {providerName} never replied to the request.",
+  "OrderDetailsPanel.orderAutoRejectedTitle": "You requested to book {listingLink}",
   "OrderPage.fetchOrderFailed": "Fetching order data failed.",
   "OrderPage.loadingData": "Loading order data.",
   "OrderPage.title": "Order details: {listingTitle}",
