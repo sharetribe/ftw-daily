@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import PayoutDetailsForm from './PayoutDetailsForm';
 
 export const USD = {
@@ -5,7 +6,10 @@ export const USD = {
   props: {
     currency: 'USD',
     onSubmit: values => {
-      console.log('submit payout details:', values); // eslint-disable-line
+      console.log('submit payout details:', values);
+    },
+    onChange: values => {
+      console.log('payout details changed:', values);
     },
   },
   group: 'forms',
