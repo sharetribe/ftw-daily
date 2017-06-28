@@ -45,6 +45,7 @@ export const SalePageComponent = props => {
     commission: currentTransaction.attributes.commission,
     saleState: currentTransaction.attributes.state,
     lastTransitionedAt: currentTransaction.attributes.lastTransitionedAt,
+    lastTransition: currentTransaction.attributes.lastTransition,
     listing: currentListing,
     booking: ensureBooking(currentTransaction.booking),
     customer: ensureUser(currentTransaction.customer),

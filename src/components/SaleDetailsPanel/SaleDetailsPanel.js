@@ -14,6 +14,7 @@ const SaleDetailsPanel = props => {
     saleState,
     booking,
     lastTransitionedAt,
+    lastTransition,
     listing,
     customer,
     commission,
@@ -42,6 +43,10 @@ const SaleDetailsPanel = props => {
         subtotalPrice={subtotalPrice}
       />
     : <p className={css.error}>{'priceRequiredMessage'}</p>;
+
+  const rejectedStatusTranslationId = lastTransition === propTypes.TX_TRANSITION_AUTO_REJECT
+    ? 'SaleDetailsPanel.saleAutoRejectedStatus'
+    : 'SaleDetailsPanel.saleRejectedStatus';
 
   // saleState affects to both title and message section
   let stateMsgData = {};
@@ -99,7 +104,7 @@ const SaleDetailsPanel = props => {
         ),
         message: (
           <div className={css.message}>
-            <FormattedMessage id="SaleDetailsPanel.saleRejectedStatus" />
+            <FormattedMessage id={rejectedStatusTranslationId} />
             <FormattedMessage
               id="SaleDetailsPanel.onDate"
               values={{
@@ -165,7 +170,7 @@ const SaleDetailsPanel = props => {
   );
 };
 
-SaleDetailsPanel.defaultProps = { className: null };
+SaleDetailsPanel.defaultProps = { className: null, lastTransition: null };
 
 const { instanceOf, string } = PropTypes;
 
@@ -175,6 +180,7 @@ SaleDetailsPanel.propTypes = {
   commission: instanceOf(types.Money).isRequired,
   saleState: string.isRequired,
   lastTransitionedAt: instanceOf(Date).isRequired,
+  lastTransition: string,
   booking: propTypes.booking.isRequired,
   listing: propTypes.listing.isRequired,
   customer: propTypes.user.isRequired,
