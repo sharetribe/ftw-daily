@@ -148,6 +148,7 @@
 }
 
 .map {
+  /* Dimensions: Map takes all available space from viewport (excludes action button and section title) */
   height: calc(100vh - 193px);
   width: 100%;
   background-color: #eee;
