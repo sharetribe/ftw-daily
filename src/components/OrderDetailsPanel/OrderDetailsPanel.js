@@ -15,6 +15,10 @@ const formatName = (user, defaultName) => {
 };
 
 const orderTitle = (orderState, listingLink, customerName, lastTransition) => {
+  const rejectedTranslationId = lastTransition === propTypes.TX_TRANSITION_AUTO_REJECT
+    ? 'OrderDetailsPanel.orderAutoRejectedTitle'
+    : 'OrderDetailsPanel.orderRejectedTitle';
+
   switch (orderState) {
     case propTypes.TX_STATE_PREAUTHORIZED:
       return (
@@ -41,19 +45,7 @@ const orderTitle = (orderState, listingLink, customerName, lastTransition) => {
         </span>
       );
     case propTypes.TX_STATE_REJECTED:
-      switch (lastTransition) {
-        case propTypes.TX_TRANSITION_AUTO_REJECT:
-          return (
-            <FormattedMessage
-              id="OrderDetailsPanel.orderAutoRejectedTitle"
-              values={{ listingLink }}
-            />
-          );
-        default:
-          return (
-            <FormattedMessage id="OrderDetailsPanel.orderRejectedTitle" values={{ listingLink }} />
-          );
-      }
+      return <FormattedMessage id={rejectedTranslationId} values={{ listingLink }} />;
     case propTypes.TX_STATE_DELIVERED:
       return (
         <FormattedMessage id="OrderDetailsPanel.orderDeliveredTitle" values={{ listingLink }} />
@@ -75,6 +67,11 @@ const orderMessage = (
       <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
     </span>
   );
+
+  const rejectedTranslationId = lastTransition === propTypes.TX_TRANSITION_AUTO_REJECT
+    ? 'OrderDetailsPanel.orderAutoRejectedStatus'
+    : 'OrderDetailsPanel.orderRejectedStatus';
+
   switch (orderState) {
     case propTypes.TX_STATE_PREAUTHORIZED:
       return (
@@ -91,22 +88,9 @@ const orderMessage = (
         />
       );
     case propTypes.TX_STATE_REJECTED:
-      switch (lastTransition) {
-        case propTypes.TX_TRANSITION_AUTO_REJECT:
-          return (
-            <FormattedMessage
-              id="OrderDetailsPanel.orderAutoRejectedStatus"
-              values={{ providerName, transitionDate }}
-            />
-          );
-        default:
-          return (
-            <FormattedMessage
-              id="OrderDetailsPanel.orderRejectedStatus"
-              values={{ providerName, transitionDate }}
-            />
-          );
-      }
+      return (
+        <FormattedMessage id={rejectedTranslationId} values={{ providerName, transitionDate }} />
+      );
     case propTypes.TX_STATE_DELIVERED:
       return (
         <FormattedMessage
