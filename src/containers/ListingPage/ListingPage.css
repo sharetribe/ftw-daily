@@ -7,7 +7,7 @@
 }
 
 .bookable {
-  padding-bottom: 80px;
+  padding-bottom: 90px;
 }
 
 .threeToTwoWrapper {
@@ -35,7 +35,7 @@
 .avatarWrapper {
   /* Position (over the listing image)*/
   margin-left: 24px;
-  margin-top: -30px;
+  margin-top: -31px;
 
   /* Rendering context to the same lavel as listing image */
   position: relative;
@@ -72,15 +72,20 @@
   }
 }
 
+/* Align the avatar initials properly within the circle */
+.avatar span {
+  margin-bottom: 5px;
+}
+
 .heading {
-  margin-top: 23px;
-  margin-bottom: 35px;
+  margin-top: 22px;
+  margin-bottom: 33px;
   padding: 0 24px;
 }
 
 .title {
   /* Font */
-  @apply --marketplaceH2FontStyles;
+  @apply --marketplaceH1FontStyles;
   color: var(--matterColor);
 
   /* Layout */
@@ -95,6 +100,8 @@
 
 .author {
   width: 100%;
+  @apply --marketplaceH4FontStyles;
+  margin-top: 2px;
 }
 
 .descriptionContainer {
@@ -133,7 +140,7 @@
   color: var(--matterColorAnti);
 
   margin-top: 0;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   @media (--desktopViewport) {
     margin-top: 0;
     margin-bottom: 24px;
@@ -141,7 +148,8 @@
 }
 
 .map {
-  height: 325px;
+  /* Dimensions: Map takes all available space from viewport (excludes action button and section title) */
+  height: calc(100vh - 193px);
   width: 100%;
   background-color: #eee;
 }

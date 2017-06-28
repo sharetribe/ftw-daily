@@ -18,6 +18,9 @@ class Map extends Component {
       center: centerLocation,
       zoom,
 
+      // Disable Map Type ie. Satellite etc.
+      mapTypeControl: false,
+
       // Disable zooming by scrolling
       scrollwheel: false,
     };
