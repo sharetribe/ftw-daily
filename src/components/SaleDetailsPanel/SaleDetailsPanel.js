@@ -53,6 +53,7 @@ const breakdown = transaction => {
       bookingEnd={bookingEnd}
       unitPrice={unitPrice}
       totalPrice={totalPrice}
+      commission={commission}
     />
   );
 };
