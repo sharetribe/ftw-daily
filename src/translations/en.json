@@ -35,6 +35,8 @@
   "DateRangeInputField.clearDate": "Clear Date",
   "DateRangeInputField.closeDatePicker": "Close",
   "DateRangeInputField.endDatePlaceholderText": "Add end date",
+  "DateRangeInputField.invalidEndDate": "End date is not valid",
+  "DateRangeInputField.invalidStartDate": "Start date is not valid",
   "DateRangeInputField.screenReaderInputMessage": "Date input",
   "DateRangeInputField.startDatePlaceholderText": "Add start date",
   "EditListingDescriptionForm.description": "Describe your sauna",

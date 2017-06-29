@@ -265,7 +265,7 @@ export class CheckoutPageComponent extends Component {
                 onSubmit={this.handleSubmit}
                 disableSubmit={this.state.submitting}
                 formId="CheckoutPagePaymentForm"
-                paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo'})}
+                paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo' })}
               />
             : null}
         </section>

@@ -26,14 +26,15 @@ class DateRangeInputFieldComponent extends Component {
 
   render() {
     const {
-      rootClassName,
       className,
+      rootClassName,
       startDateId,
       startDateLabel,
       endDateId,
       endDateLabel,
       input,
       meta,
+      useMobileMargins,
       ...rest
     } = this.props;
 
@@ -71,7 +72,7 @@ class DateRangeInputFieldComponent extends Component {
     });
 
     const label = startDateLabel && endDateLabel
-      ? <div className={css.labels}>
+      ? <div className={classNames(css.labels, { [css.mobileMargins]: useMobileMargins })}>
           <label className={startDateLabelClasses} htmlFor={startDateId}>{startDateLabel}</label>
           <label className={endDateLabelClasses} htmlFor={endDateId}>{endDateLabel}</label>
         </div>
@@ -82,28 +83,35 @@ class DateRangeInputFieldComponent extends Component {
     const inputProps = {
       onBlur: this.handleBlur,
       onFocus: this.handleFocus,
+      useMobileMargins,
       ...restOfInput,
       ...rest,
     };
     const classes = classNames(rootClassName || css.fieldRoot, className);
+    const errorClasses = classNames({ [css.mobileMargins]: useMobileMargins });
 
     return (
       <div className={classes}>
         {label}
         <DateRangeInput {...inputProps} />
-        <div className={css.inputBorders}>
+        <div
+          className={classNames(css.inputBorders, {
+            [css.mobileMargins]: useMobileMargins && !this.state.focusedInput,
+          })}
+        >
           <div className={startDateBorderClasses} />
           <div className={endDateBorderClasses} />
         </div>
-        <ValidationError fieldMeta={meta} />
+        <ValidationError className={errorClasses} fieldMeta={meta} />
       </div>
     );
   }
 }
 
 DateRangeInputFieldComponent.defaultProps = {
-  rootClassName: null,
   className: null,
+  rootClassName: null,
+  useMobileMargins: false,
   endDateId: null,
   endDateLabel: null,
   endDatePlaceholderText: null,
@@ -112,11 +120,12 @@ DateRangeInputFieldComponent.defaultProps = {
   startDatePlaceholderText: null,
 };
 
-const { object, string } = PropTypes;
+const { bool, object, string } = PropTypes;
 
 DateRangeInputFieldComponent.propTypes = {
-  rootClassName: string,
   className: string,
+  rootClassName: string,
+  useMobileMargins: bool,
   endDateId: string,
   endDateLabel: string,
   endDatePlaceholderText: string,

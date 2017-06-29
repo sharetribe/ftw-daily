@@ -129,7 +129,6 @@ class DateRangeInputComponent extends Component {
   }
 
   render() {
-    //const { focused } = this.state;
     /* eslint-disable no-unused-vars */
     const {
       className,
@@ -145,6 +144,7 @@ class DateRangeInputComponent extends Component {
       onDrop,
       phrases,
       screenReaderInputMessage,
+      useMobileMargins,
       value,
       ...datePickerProps
     } = this.props;
@@ -172,7 +172,9 @@ class DateRangeInputComponent extends Component {
       ? phrases.clearDate
       : intl.formatMessage({ id: 'DateRangeInputField.clearDate' });
 
-    const classes = classNames(css.inputRoot, className);
+    const classes = classNames(css.inputRoot, className, {
+      [css.withMobileMargins]: useMobileMargins,
+    });
 
     return (
       <div className={classes}>
@@ -193,9 +195,13 @@ class DateRangeInputComponent extends Component {
   }
 }
 
-DateRangeInputComponent.defaultProps = { className: null, ...defaultProps };
+DateRangeInputComponent.defaultProps = {
+  className: null,
+  useMobileMargins: false,
+  ...defaultProps,
+};
 
-const { func, instanceOf, oneOf, shape, string } = PropTypes;
+const { bool, func, instanceOf, oneOf, shape, string } = PropTypes;
 
 DateRangeInputComponent.propTypes = {
   className: string,
@@ -213,6 +219,7 @@ DateRangeInputComponent.propTypes = {
     closeDatePicker: string,
     clearDate: string,
   }),
+  useMobileMargins: bool,
   startDatePlaceholderText: string,
   endDatePlaceholderText: string,
   screenReaderInputMessage: string,

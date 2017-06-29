@@ -1,7 +1,23 @@
 exports[`BookingDatesForm matches snapshot with selected dates 1`] = `
 <form
-  className=""
+  className={null}
   onSubmit={[Function]}>
+  <DateRangeInputField
+    endDateId="fakeTestForm.bookingEndDate"
+    endDateLabel="BookingDatesForm.bookingEndTitle"
+    endDatePlaceholderText="Sat, July 1"
+    format={null}
+    name="bookingDates"
+    startDateId="fakeTestForm.bookingStartDate"
+    startDateLabel="BookingDatesForm.bookingStartTitle"
+    startDatePlaceholderText="Fri, June 30"
+    useMobileMargins={true}
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    } />
   <BookingBreakdown
     bookingEnd={2017-04-16T00:00:00.000Z}
     bookingStart={2017-04-14T00:00:00.000Z}
@@ -16,30 +32,6 @@ exports[`BookingDatesForm matches snapshot with selected dates 1`] = `
         "amount": 1099,
         "currency": "USD",
       }
-    } />
-  <DateInputField
-    format={null}
-    id="fakeTestForm.bookingStart"
-    isOutsideRange={[Function]}
-    label="BookingDatesForm.bookingStartTitle"
-    name="bookingStart"
-    placeholder="BookingDatesForm.placeholder"
-    validate={
-      Array [
-        [Function],
-      ]
-    } />
-  <DateInputField
-    format={null}
-    id="fakeTestForm.bookingEnd"
-    isOutsideRange={[Function]}
-    label="BookingDatesForm.bookingEndTitle"
-    name="bookingEnd"
-    placeholder="BookingDatesForm.placeholder"
-    validate={
-      Array [
-        [Function],
-      ]
     } />
   <p>
     <FormattedMessage
@@ -60,27 +52,21 @@ exports[`BookingDatesForm matches snapshot with selected dates 1`] = `
 
 exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
 <form
-  className=""
+  className={null}
   onSubmit={[Function]}>
-  <DateInputField
+  <DateRangeInputField
+    endDateId="fakeTestForm.bookingEndDate"
+    endDateLabel="BookingDatesForm.bookingEndTitle"
+    endDatePlaceholderText="Sat, July 1"
     format={null}
-    id="fakeTestForm.bookingStart"
-    label="BookingDatesForm.bookingStartTitle"
-    name="bookingStart"
-    placeholder="BookingDatesForm.placeholder"
+    name="bookingDates"
+    startDateId="fakeTestForm.bookingStartDate"
+    startDateLabel="BookingDatesForm.bookingStartTitle"
+    startDatePlaceholderText="Fri, June 30"
+    useMobileMargins={true}
     validate={
       Array [
         [Function],
-      ]
-    } />
-  <DateInputField
-    format={null}
-    id="fakeTestForm.bookingEnd"
-    label="BookingDatesForm.bookingEndTitle"
-    name="bookingEnd"
-    placeholder="BookingDatesForm.placeholder"
-    validate={
-      Array [
         [Function],
       ]
     } />
