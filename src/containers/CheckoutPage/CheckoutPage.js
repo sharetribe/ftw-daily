@@ -14,10 +14,11 @@ import { ensureListing, ensureUser } from '../../util/data';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { nightsBetween } from '../../util/dates';
 import { convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
-import { BookingBreakdown, NamedRedirect, PageLayout } from '../../components';
+import { BookingBreakdown, NamedLink, NamedRedirect, PageLayout } from '../../components';
 import { StripePaymentForm } from '../../containers';
 import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
 
+import LogoIcon from './LogoIcon';
 import css from './CheckoutPage.css';
 
 const STORAGE_KEY = 'CheckoutPage';
@@ -241,8 +242,16 @@ export class CheckoutPageComponent extends Component {
         </p>
       : null;
 
+    const topbar = (
+      <div className={css.topbar}>
+        <NamedLink className={css.home} name="LandingPage">
+          <LogoIcon title={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })} />
+        </NamedLink>
+      </div>
+    );
+
     return (
-      <PageLayout title={title}>
+      <PageLayout title={title} topbar={topbar}>
         <div className={css.heading}>
           <h1 className={css.title}>{title}</h1>
           <div className={css.author}>
@@ -265,7 +274,7 @@ export class CheckoutPageComponent extends Component {
                 onSubmit={this.handleSubmit}
                 disableSubmit={this.state.submitting}
                 formId="CheckoutPagePaymentForm"
-                paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo'})}
+                paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo' })}
               />
             : null}
         </section>

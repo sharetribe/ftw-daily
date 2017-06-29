@@ -1,5 +1,9 @@
 @import '../../marketplace.css';
 
+:root {
+  --logoHeight: 25px;
+}
+
 .heading {
   margin-top: 29px;
   margin-bottom: 35px;
@@ -72,4 +76,33 @@
 
 .paymentForm {
   flex-grow: 1;
+}
+
+/* Dummy Topbar */
+
+.topbar {
+
+  /* Size */
+  width: 100%;
+  height: var(--topbarHeight);
+
+  /* Layout for child components */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* fill */
+  background-color: var(--matterColorLight);
+
+  /* shadows */
+  box-shadow: var(--boxShadow);
+
+  @media (--desktopViewport) {
+    display: none;
+  }
+}
+
+.home {
+  display: flex;
+  padding: calc((var(--topbarHeight) - var(--logoHeight)) / 2) 24px;
 }
