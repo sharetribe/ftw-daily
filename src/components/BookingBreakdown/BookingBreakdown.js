@@ -27,12 +27,25 @@ export const BookingBreakdownComponent = props => {
 
   const classes = classNames(rootClassName || css.root, className);
 
+  const dateFormatOptions = {
+    weekday: 'short',
+    month: 'long',
+    day: 'numeric',
+  };
   const bookingPeriod = (
     <FormattedMessage
       id="BookingBreakdown.bookingPeriod"
       values={{
-        bookingStart: intl.formatDate(bookingStart),
-        bookingEnd: intl.formatDate(bookingEnd),
+        bookingStart: (
+          <span className={css.nowrap}>
+            {intl.formatDate(bookingStart, dateFormatOptions)}
+          </span>
+        ),
+        bookingEnd: (
+          <span className={css.nowrap}>
+            {intl.formatDate(bookingEnd, dateFormatOptions)}
+          </span>
+        ),
       }}
     />
   );
