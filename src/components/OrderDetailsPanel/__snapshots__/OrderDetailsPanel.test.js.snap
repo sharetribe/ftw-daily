@@ -1,6 +1,6 @@
 exports[`OrderDetailsPanel matches snapshot 1`] = `
 <div
-  className={null}>
+  className="">
   <h1>
     <span>
       <span>

@@ -26,12 +26,6 @@ export const BookingBreakdownComponent = props => {
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
-  const hasSelectedNights = bookingStart && bookingEnd;
-
-  // If there's not enough info, render an empty container
-  if (!hasSelectedNights) {
-    return <div className={classes} />;
-  }
 
   const bookingPeriod = (
     <FormattedMessage
@@ -71,9 +65,7 @@ export const BookingBreakdownComponent = props => {
     </div>
   );
 
-  // Total price can be given (when it comes from API)
-  // or calculated: sub total - commission
-  const totalPriceAsNumber = totalPrice ? convertMoneyToNumber(totalPrice, subUnitDivisor) : 0;
+  const totalPriceAsNumber = convertMoneyToNumber(totalPrice, subUnitDivisor);
   const formattedTotalPrice = totalPriceAsNumber
     ? intl.formatNumber(totalPriceAsNumber, currencyConfig)
     : null;
@@ -113,11 +105,7 @@ export const BookingBreakdownComponent = props => {
 BookingBreakdownComponent.defaultProps = {
   rootClassName: null,
   className: null,
-  bookingStart: null,
-  bookingEnd: null,
-  unitPrice: null,
   commission: null,
-  totalPrice: null,
 };
 
 const { string, instanceOf } = PropTypes;
@@ -126,12 +114,12 @@ BookingBreakdownComponent.propTypes = {
   rootClassName: string,
   className: string,
 
-  bookingStart: instanceOf(Date),
-  bookingEnd: instanceOf(Date),
+  bookingStart: instanceOf(Date).isRequired,
+  bookingEnd: instanceOf(Date).isRequired,
 
-  unitPrice: propTypes.money,
+  unitPrice: propTypes.money.isRequired,
+  totalPrice: propTypes.money.isRequired,
   commission: propTypes.money,
-  totalPrice: propTypes.money,
 
   // from injectIntl
   intl: intlShape.isRequired,

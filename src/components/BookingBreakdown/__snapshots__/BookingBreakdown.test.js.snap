@@ -89,7 +89,9 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
       </span>
     </div>
     <div
-      className={undefined} />
+      className={undefined}>
+      20
+    </div>
   </div>
 </div>
 `;

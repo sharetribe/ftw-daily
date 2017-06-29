@@ -16,6 +16,36 @@ import { Button, BookingBreakdown, DateInputField } from '../../components';
 
 import css from './BookingDatesForm.css';
 
+// TODO: This is a temporary function to calculate the booking
+// price. This should be removed when the API supports dry-runs and we
+// can take the total price from the transaction itself.
+const estimatedTotalPrice = (startDate, endDate, unitPrice) => {
+  const { subUnitDivisor } = config.currencyConfig;
+  const numericPrice = convertMoneyToNumber(unitPrice, subUnitDivisor);
+  const nightCount = nightsBetween(startDate, endDate);
+  const numericTotalPrice = new Decimal(numericPrice).times(nightCount).toNumber();
+  return new types.Money(
+    convertUnitToSubUnit(numericTotalPrice, subUnitDivisor),
+    unitPrice.currency
+  );
+};
+
+const breakdown = (bookingStart, bookingEnd, unitPrice) => {
+  if (!bookingStart || !bookingEnd || !unitPrice) {
+    return null;
+  }
+  const totalPrice = estimatedTotalPrice(bookingStart, bookingEnd, unitPrice);
+  return (
+    <BookingBreakdown
+      className={css.receipt}
+      bookingStart={bookingStart}
+      bookingEnd={bookingEnd}
+      unitPrice={unitPrice}
+      totalPrice={totalPrice}
+    />
+  );
+};
+
 export const BookingDatesFormComponent = props => {
   const {
     rootClassName,
@@ -25,16 +55,16 @@ export const BookingDatesFormComponent = props => {
     form,
     invalid,
     handleSubmit,
-    price,
+    price: unitPrice,
     pristine,
     submitting,
     intl,
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
-  const { subUnitDivisor, currency } = config.currencyConfig;
+  const { currency: marketplaceCurrency } = config.currencyConfig;
 
-  if (!price) {
+  if (!unitPrice) {
     return (
       <div className={classes}>
         <p className={css.error}>
@@ -43,7 +73,7 @@ export const BookingDatesFormComponent = props => {
       </div>
     );
   }
-  if (price.currency !== currency) {
+  if (unitPrice.currency !== marketplaceCurrency) {
     return (
       <div className={classes}>
         <p className={css.error}>
@@ -76,26 +106,7 @@ export const BookingDatesFormComponent = props => {
     : {};
 
   const hasBookingInfo = bookingStart && bookingEnd;
-
-  // Estimate total price. NOTE: this will change when we can do a
-  // dry-run to the API and get a proper breakdown of the price.
-  const numericPrice = convertMoneyToNumber(price, subUnitDivisor);
-  const nightCount = hasBookingInfo ? nightsBetween(bookingStart, bookingEnd) : 0;
-  const numericTotalPrice = new Decimal(numericPrice).times(nightCount).toNumber();
-  const totalPrice = new types.Money(
-    convertUnitToSubUnit(numericTotalPrice, subUnitDivisor),
-    currency
-  );
-
-  const bookingInfo = hasBookingInfo
-    ? <BookingBreakdown
-        className={css.receipt}
-        bookingStart={bookingStart}
-        bookingEnd={bookingEnd}
-        unitPrice={price}
-        totalPrice={totalPrice}
-      />
-    : null;
+  const bookingInfo = breakdown(bookingStart, bookingEnd, unitPrice);
 
   const submitDisabled = pristine || submitting || invalid || !hasBookingInfo;
 

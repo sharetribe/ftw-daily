@@ -1,6 +1,6 @@
 exports[`SaleDetailsPanel matches snapshot 1`] = `
 <div
-  className={null}>
+  className="">
   <div>
     <div>
       <Avatar
@@ -14,7 +14,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
         id="SaleDetailsPanel.listingRequestedTitle"
         values={
           Object {
-            "customerName": "customer1 first name customer1 last name",
+            "customerName": "customer1 first name",
             "title": <withFlattenedRoutes(withRouter(NamedLink))
               name="ListingPage"
               params={
@@ -33,7 +33,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
         id="SaleDetailsPanel.saleRequestedStatus"
         values={
           Object {
-            "customerName": "customer1 first name customer1 last name",
+            "customerName": "customer1 first name",
           }
         } />
     </div>
@@ -41,15 +41,9 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
   <BookingBreakdown
     bookingEnd={2017-06-13T00:00:00.000Z}
     bookingStart={2017-06-10T00:00:00.000Z}
-    commission={
+    totalPrice={
       Money {
-        "amount": 1650,
-        "currency": "USD",
-      }
-    }
-    subtotalPrice={
-      Money {
-        "amount": 16500,
+        "amount": 15500,
         "currency": "USD",
       }
     }

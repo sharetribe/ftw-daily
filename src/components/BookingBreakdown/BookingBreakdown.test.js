@@ -8,9 +8,10 @@ describe('BookingBreakdown', () => {
   it('pretransaction data matches snapshot', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
-        unitPrice={new types.Money(1000, 'USD')}
         bookingStart={new Date(Date.UTC(2017, 3, 14))}
         bookingEnd={new Date(Date.UTC(2017, 3, 16))}
+        unitPrice={new types.Money(1000, 'USD')}
+        totalPrice={new types.Money(2000, 'USD')}
         intl={fakeIntl}
       />
     );
@@ -20,9 +21,9 @@ describe('BookingBreakdown', () => {
   it('customer transaction data matches snapshot', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
-        unitPrice={new types.Money(1000, 'USD')}
         bookingStart={new Date(Date.UTC(2017, 3, 14))}
         bookingEnd={new Date(Date.UTC(2017, 3, 16))}
+        unitPrice={new types.Money(1000, 'USD')}
         totalPrice={new types.Money(2000, 'USD')}
         intl={fakeIntl}
       />
@@ -33,9 +34,9 @@ describe('BookingBreakdown', () => {
   it('provider transaction data matches snapshot', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
-        unitPrice={new types.Money(1000, 'USD')}
         bookingStart={new Date(Date.UTC(2017, 3, 14))}
         bookingEnd={new Date(Date.UTC(2017, 3, 16))}
+        unitPrice={new types.Money(1000, 'USD')}
         totalPrice={new types.Money(1800, 'USD')}
         commission={new types.Money(200, 'USD')}
         intl={fakeIntl}
