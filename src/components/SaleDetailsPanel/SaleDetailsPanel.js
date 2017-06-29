@@ -15,19 +15,19 @@ import css from './SaleDetailsPanel.css';
 // TODO: This is a temporary function to calculate the booking
 // price. This should be removed when the API supports dry-runs and we
 // can take the total price from the transaction itself.
-const estimatedProviderTotalPrice = (customerTotalPrice, commission) => {
+const estimatedCommission = (customerTotalPrice, providerTotalPrice) => {
   const { subUnitDivisor, currency } = config.currencyConfig;
-  if (customerTotalPrice.currency !== currency || commission.currency !== currency) {
+  if (customerTotalPrice.currency !== currency || providerTotalPrice.currency !== currency) {
     throw new Error('Transaction total or commission currency does not match marketplace currency');
   }
 
   const numericCustomerTotalPrice = convertMoneyToNumber(customerTotalPrice, subUnitDivisor);
-  const numericCommission = convertMoneyToNumber(commission, subUnitDivisor);
-  const numericTotalPrice = new Decimal(numericCustomerTotalPrice)
-    .minus(numericCommission)
+  const numericProviderTotalPrice = convertMoneyToNumber(providerTotalPrice, subUnitDivisor);
+  const numericCommission = new Decimal(numericProviderTotalPrice)
+    .minus(numericCustomerTotalPrice)
     .toNumber();
 
-  return new types.Money(convertUnitToSubUnit(numericTotalPrice, subUnitDivisor), currency);
+  return new types.Money(convertUnitToSubUnit(numericCommission, subUnitDivisor), currency);
 };
 
 const breakdown = transaction => {
@@ -37,14 +37,14 @@ const breakdown = transaction => {
   const bookingStart = booking.attributes.start;
   const bookingEnd = booking.attributes.end;
   const unitPrice = listing.attributes.price;
-  const customerTotalPrice = tx.attributes.total;
-  const commission = tx.attributes.commission;
+  const customerTotalPrice = tx.attributes.payinTotal;
+  const providerTotalPrice = tx.attributes.payoutTotal;
 
-  if (!bookingStart || !bookingEnd || !unitPrice || !customerTotalPrice || !commission) {
+  if (!bookingStart || !bookingEnd || !unitPrice || !customerTotalPrice || !providerTotalPrice) {
     return null;
   }
 
-  const totalPrice = estimatedProviderTotalPrice(customerTotalPrice, commission);
+  const commission = estimatedCommission(customerTotalPrice, providerTotalPrice);
 
   return (
     <BookingBreakdown
@@ -52,7 +52,7 @@ const breakdown = transaction => {
       bookingStart={bookingStart}
       bookingEnd={bookingEnd}
       unitPrice={unitPrice}
-      totalPrice={totalPrice}
+      totalPrice={providerTotalPrice}
       commission={commission}
     />
   );

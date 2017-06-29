@@ -15,7 +15,7 @@ const breakdown = transaction => {
   const bookingStart = booking.attributes.start;
   const bookingEnd = booking.attributes.end;
   const unitPrice = listing.attributes.price;
-  const totalPrice = tx.attributes.total;
+  const totalPrice = tx.attributes.payinTotal;
 
   if (!bookingStart || !bookingEnd || !unitPrice || !totalPrice) {
     return null;
