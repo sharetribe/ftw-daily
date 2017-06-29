@@ -102,6 +102,11 @@
   width: 100%;
   @apply --marketplaceH4FontStyles;
   margin-top: 2px;
+  margin-bottom: 0;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .descriptionContainer {
@@ -201,15 +206,20 @@
   }
 }
 
+.modalHeading {
+  margin-top: 89px;
+  margin-bottom: 33px;
+  padding: 0 24px;
+}
+
+.bookingForm {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
 .bookButton {
   @apply --marketplaceButtonStylesPrimary;
 }
 
-.bookingForm {
-  margin: 96px 24px 24px 24px;
-}
-
-
-.bookingModalTitle {
-  margin: 1rem 0;
-}

@@ -60,7 +60,9 @@ export class ListingPageComponent extends Component {
 
     // Customize checkout page state with current listing and selected bookingDates
     const { setInitialValues } = findRouteByRouteName('CheckoutPage', flattenedRoutes);
-    dispatch(setInitialValues({ listing, bookingDates: values, initiateOrderError: null }));
+    const { startDate: bookingStart, endDate: bookingEnd } = values.bookingDates;
+    const bookingDates = { bookingStart, bookingEnd };
+    dispatch(setInitialValues({ listing, bookingDates, initiateOrderError: null }));
 
     // Redirect to CheckoutPage
     history.push(
@@ -192,6 +194,14 @@ export class ListingPageComponent extends Component {
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             togglePageClassNames={this.togglePageClassNames}
           >
+            <div className={css.modalHeading}>
+              <h1 className={css.title}>{title}</h1>
+              <div className={css.author}>
+                <span className={css.authorName}>
+                  <FormattedMessage id="ListingPage.hostedBy" values={{ name: authorFirstName }} />
+                </span>
+              </div>
+            </div>
             <BookingDatesForm className={css.bookingForm} onSubmit={this.onSubmit} price={price} />
           </ModalInMobile>
           {showBookButton
