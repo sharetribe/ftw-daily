@@ -2,6 +2,7 @@
  * This component will show the booking info and calculated total price.
  * I.e. dates and other details related to payment decision in receipt format.
  */
+import _ from 'lodash';
 import React, { PropTypes } from 'react';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import Decimal from 'decimal.js';
@@ -9,7 +10,6 @@ import classNames from 'classnames';
 import config from '../../config';
 import { convertMoneyToNumber } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
-import { nightsBetween } from '../../util/dates';
 
 import css from './BookingBreakdown.css';
 
@@ -19,9 +19,10 @@ export const BookingBreakdownComponent = props => {
     className,
     bookingStart,
     bookingEnd,
-    unitPrice,
-    commission,
-    totalPrice,
+    payinTotal,
+    payoutTotal,
+    lineItems,
+    userRole,
     intl,
   } = props;
 
@@ -50,7 +51,13 @@ export const BookingBreakdownComponent = props => {
     />
   );
 
-  const nightCount = nightsBetween(bookingStart, bookingEnd);
+  const nightPurchase = _.find(lineItems, item => item.code === 'line-item.purchase/night');
+  const providerCommission = _.find(
+    lineItems,
+    item => item.code === 'line-item.commission/provider'
+  );
+
+  const nightCount = nightPurchase.quantity.toFixed();
   const nightCountMessage = (
     <FormattedMessage id="BookingBreakdown.nightCount" values={{ count: nightCount }} />
   );
@@ -58,10 +65,11 @@ export const BookingBreakdownComponent = props => {
   const currencyConfig = config.currencyConfig;
   const subUnitDivisor = currencyConfig.subUnitDivisor;
 
-  const unitPriceAsNumber = convertMoneyToNumber(unitPrice, subUnitDivisor);
+  const unitPriceAsNumber = convertMoneyToNumber(nightPurchase.unitPrice, subUnitDivisor);
   const formattedUnitPrice = intl.formatNumber(unitPriceAsNumber, currencyConfig);
 
   // If commission is passed it will be shown as a fee already reduces from the total price
+  const commission = providerCommission.lineTotal;
   const commissionAsNumber = commission ? convertMoneyToNumber(commission, subUnitDivisor) : 0;
   const formattedCommission = commission
     ? intl.formatNumber(new Decimal(commissionAsNumber).negated().toNumber(), currencyConfig)
@@ -76,7 +84,10 @@ export const BookingBreakdownComponent = props => {
     </div>
   );
 
-  const totalPriceAsNumber = convertMoneyToNumber(totalPrice, subUnitDivisor);
+  const totalPriceAsNumber = convertMoneyToNumber(
+    userRole === 'customer' ? payinTotal : payoutTotal,
+    subUnitDivisor
+  );
   const formattedTotalPrice = totalPriceAsNumber
     ? intl.formatNumber(totalPriceAsNumber, currencyConfig)
     : null;
@@ -95,7 +106,7 @@ export const BookingBreakdownComponent = props => {
         </span>
         <span className={css.itemValue}>{nightCountMessage}</span>
       </div>
-      {commission ? commissionInfo : null}
+      {userRole === 'provider' ? commissionInfo : null}
       <hr className={css.totalDivider} />
       <div className={css.lineItem}>
         <div className={css.totalLabel}>
@@ -115,7 +126,14 @@ BookingBreakdownComponent.defaultProps = {
   commission: null,
 };
 
-const { string, instanceOf } = PropTypes;
+const { string, instanceOf, arrayOf, oneOf, shape } = PropTypes;
+
+const lineItem = shape({
+  code: string.isRequired,
+  quantity: instanceOf(Decimal),
+  unitPrice: propTypes.money,
+  lineTotal: propTypes.money,
+});
 
 BookingBreakdownComponent.propTypes = {
   rootClassName: string,
@@ -123,10 +141,10 @@ BookingBreakdownComponent.propTypes = {
 
   bookingStart: instanceOf(Date).isRequired,
   bookingEnd: instanceOf(Date).isRequired,
-
-  unitPrice: propTypes.money.isRequired,
-  totalPrice: propTypes.money.isRequired,
-  commission: propTypes.money,
+  lineItems: arrayOf(lineItem).isRequired,
+  userRole: oneOf(['customer', 'provider']).isRequired,
+  payinTotal: propTypes.money.isRequired,
+  payoutTotal: propTypes.money.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,

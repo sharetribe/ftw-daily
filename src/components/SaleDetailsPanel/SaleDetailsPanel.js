@@ -1,59 +1,35 @@
 import React, { PropTypes } from 'react';
 import { FormattedDate, FormattedMessage } from 'react-intl';
-import Decimal from 'decimal.js';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
-import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import { ensureListing, ensureTransaction, ensureBooking, ensureUser } from '../../util/data';
-import { convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
-import config from '../../config';
 import { Avatar, BookingBreakdown, NamedLink } from '../../components';
 
 import css from './SaleDetailsPanel.css';
 
-// TODO: This is a temporary function to calculate the booking
-// price. This should be removed when the API supports dry-runs and we
-// can take the total price from the transaction itself.
-const estimatedCommission = (customerTotalPrice, providerTotalPrice) => {
-  const { subUnitDivisor, currency } = config.currencyConfig;
-  if (customerTotalPrice.currency !== currency || providerTotalPrice.currency !== currency) {
-    throw new Error('Transaction total or commission currency does not match marketplace currency');
-  }
-
-  const numericCustomerTotalPrice = convertMoneyToNumber(customerTotalPrice, subUnitDivisor);
-  const numericProviderTotalPrice = convertMoneyToNumber(providerTotalPrice, subUnitDivisor);
-  const numericCommission = new Decimal(numericProviderTotalPrice)
-    .minus(numericCustomerTotalPrice)
-    .toNumber();
-
-  return new types.Money(convertUnitToSubUnit(numericCommission, subUnitDivisor), currency);
-};
-
 const breakdown = transaction => {
   const tx = ensureTransaction(transaction);
-  const listing = ensureListing(tx.listing);
   const booking = ensureBooking(tx.booking);
   const bookingStart = booking.attributes.start;
   const bookingEnd = booking.attributes.end;
-  const unitPrice = listing.attributes.price;
-  const customerTotalPrice = tx.attributes.payinTotal;
-  const providerTotalPrice = tx.attributes.payoutTotal;
+  const payinTotal = tx.attributes.payinTotal;
+  const payoutTotal = tx.attributes.payoutTotal;
+  const lineItems = tx.attributes.lineItems;
 
-  if (!bookingStart || !bookingEnd || !unitPrice || !customerTotalPrice || !providerTotalPrice) {
+  if (!bookingStart || !bookingEnd || !payinTotal || !payoutTotal || !lineItems) {
     return null;
   }
-
-  const commission = estimatedCommission(customerTotalPrice, providerTotalPrice);
 
   return (
     <BookingBreakdown
       className={css.breakdown}
       bookingStart={bookingStart}
       bookingEnd={bookingEnd}
-      unitPrice={unitPrice}
-      totalPrice={providerTotalPrice}
-      commission={commission}
+      payinTotal={payinTotal}
+      payoutTotal={payoutTotal}
+      lineItems={lineItems}
+      userRole="provider"
     />
   );
 };
