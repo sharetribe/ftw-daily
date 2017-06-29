@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import classNames from 'classnames';
 import { Button } from '../../components';
 import config from '../../config';
 
@@ -125,33 +126,50 @@ class StripePaymentForm extends Component {
       });
   }
   render() {
-    const { disableSubmit } = this.props;
+    const { className, rootClassName, disableSubmit, formId, paymentInfo } = this.props;
     const submitDisabled = disableSubmit || this.state.submitting || !this.state.cardValueValid;
+    const classes = classNames(rootClassName || css.root, className);
+    const cardClasses = classNames(css.card, {
+      [css.cardSuccess]: this.state.cardValueValid,
+      [css.cardError]: this.state.error,
+    });
+
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className={classes} onSubmit={this.handleSubmit}>
+        <label className={css.label} htmlFor={`${formId}-card`}>
+          <FormattedMessage id="StripePaymentForm.creditCardDetails" />
+        </label>
         <div
-          className={css.card}
+          className={cardClasses}
+          id={`${formId}-card`}
           ref={el => {
             this.cardContainer = el;
           }}
         />
         {this.state.error ? <span style={{ color: 'red' }}>{this.state.error}</span> : null}
-        <Button className={css.submitButton} type="submit" disabled={submitDisabled}>
-          <FormattedMessage id="StripePaymentForm.submitPaymentInfo" />
-        </Button>
+        <div className={css.submitContainer}>
+          {paymentInfo ? <p className={css.paymentInfo}>{paymentInfo}</p> : null}
+          <Button className={css.submitButton} type="submit" disabled={submitDisabled}>
+            <FormattedMessage id="StripePaymentForm.submitPaymentInfo" />
+          </Button>
+        </div>
       </form>
     );
   }
 }
 
-StripePaymentForm.defaultProps = { disableSubmit: false };
+StripePaymentForm.defaultProps = { className: null, rootClassName: null, disableSubmit: false, paymentInfo: null };
 
-const { func, bool } = PropTypes;
+const { bool, func, string } = PropTypes;
 
 StripePaymentForm.propTypes = {
+  className: string,
+  rootClassName: string,
+  disableSubmit: bool,
+  formId: string.isRequired,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
-  disableSubmit: bool,
+  paymentInfo: string,
 };
 
 export default injectIntl(StripePaymentForm);

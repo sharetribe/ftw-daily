@@ -10,10 +10,11 @@ import config from '../../config';
 import { types } from '../../util/sdkLoader';
 import { pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
+import { ensureListing, ensureUser } from '../../util/data';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { nightsBetween } from '../../util/dates';
 import { convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
-import { AuthorInfo, BookingBreakdown, NamedRedirect, PageLayout } from '../../components';
+import { BookingBreakdown, NamedRedirect, PageLayout } from '../../components';
 import { StripePaymentForm } from '../../containers';
 import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
 
@@ -49,12 +50,6 @@ const breakdown = (bookingStart, bookingEnd, unitPrice) => {
       totalPrice={totalPrice}
     />
   );
-};
-
-const ensureListingProperties = listing => {
-  const empty = { id: null, type: 'listing', attributes: {}, author: {}, images: [] };
-  // assume own properties: id, type, attributes etc.
-  return { ...empty, ...listing };
 };
 
 // Validate that given 'obj' has all the keys of defined by validPropTypes parameter
@@ -188,16 +183,26 @@ export class CheckoutPageComponent extends Component {
     // Get page data from passed-in props or from storage
     const pageData = bookingDates && listing ? { bookingDates, listing } : storedData();
     const { bookingStart, bookingEnd } = pageData.bookingDates || {};
-    const currentListing = ensureListingProperties(pageData.listing);
+    const currentListing = ensureListing(pageData.listing);
+    const currentAuthor = ensureUser(currentListing.author);
 
     const isOwnListing = currentListing.id &&
       currentUser &&
-      currentListing.author &&
+      currentAuthor.id &&
       currentListing.author.id.uuid === currentUser.id.uuid;
 
-    // Allow showing page when currentUser is still being downloaded,
-    // but show payment form only when user info is loaded.
-    const showPaymentForm = currentUser && !isOwnListing;
+    const hasBookingInfo = bookingStart && bookingEnd;
+
+    // Redirect back to ListingPage if data is missing.
+    // Redirection must happen before any data format error is thrown (e.g. wrong currency)
+    if (!currentListing.id || isOwnListing || !hasBookingInfo) {
+      // eslint-disable-next-line no-console
+      console.error(
+        'Listing, user, or dates invalid for checkout, redirecting back to listing page.',
+        { currentListing, isOwnListing, hasBookingInfo, bookingStart, bookingEnd }
+      );
+      return <NamedRedirect name="ListingPage" params={params} />;
+    }
 
     // Estimate total price. NOTE: this will change when we can do a
     // dry-run to the API and get a proper breakdown of the price.
@@ -213,51 +218,54 @@ export class CheckoutPageComponent extends Component {
       );
     }
 
-    const hasBookingInfo = bookingStart && bookingEnd;
+    // Allow showing page when currentUser is still being downloaded,
+    // but show payment form only when user info is loaded.
+    const showPaymentForm = currentUser && !isOwnListing;
 
-    if (!currentListing.id || isOwnListing || !hasBookingInfo) {
-      // eslint-disable-next-line no-console
-      console.error(
-        'Listing, user, or dates invalid for checkout, redirecting back to listing page.',
-        { currentListing, isOwnListing, hasBookingInfo, bookingStart, bookingEnd }
-      );
-      return <NamedRedirect name="ListingPage" params={params} />;
-    }
+    const listingTitle = currentListing.attributes.title;
+    const title = intl.formatMessage({ id: 'CheckoutPage.title' }, { listingTitle });
+    const authorFirstName = currentAuthor.attributes.profile.firstName;
 
-    const title = intl.formatMessage(
-      {
-        id: 'CheckoutPage.title',
-      },
-      {
-        listingTitle: currentListing.attributes.title,
-      }
+    const priceBreakdown = (
+      <div className={css.priceBreakdownContainer}>
+        <h3 className={css.priceBreakdownTitle}>
+          <FormattedMessage id="CheckoutPage.priceBreakdownTitle" />
+        </h3>
+        {breakdown(bookingStart, bookingEnd, unitPrice)}
+      </div>
     );
 
     const errorMessage = initiateOrderError
-      ? <p style={{ color: 'red' }}>
+      ? <p className={css.orderError}>
           <FormattedMessage id="CheckoutPage.initiateOrderError" />
         </p>
       : null;
 
-    const bookingInfo = breakdown(bookingStart, bookingEnd, unitPrice);
-
     return (
       <PageLayout title={title}>
-        <h1 className={css.title}>{title}</h1>
-        <AuthorInfo author={currentListing.author} className={css.authorContainer} />
-        {bookingInfo}
-        <section className={css.payment}>
-          {errorMessage}
-          <h2 className={css.paymentTitle}>
+        <div className={css.heading}>
+          <h1 className={css.title}>{title}</h1>
+          <div className={css.author}>
+            <span className={css.authorName}>
+              <FormattedMessage id="ListingPage.hostedBy" values={{ name: authorFirstName }} />
+            </span>
+          </div>
+        </div>
+
+        {priceBreakdown}
+
+        <section className={css.paymentContainer}>
+          <h3 className={css.paymentTitle}>
             <FormattedMessage id="CheckoutPage.paymentTitle" />
-          </h2>
-          <p>
-            <FormattedMessage id="CheckoutPage.paymentInfo" />
-          </p>
+          </h3>
+          {errorMessage}
           {showPaymentForm
             ? <StripePaymentForm
+                className={css.paymentForm}
                 onSubmit={this.handleSubmit}
                 disableSubmit={this.state.submitting}
+                formId="CheckoutPagePaymentForm"
+                paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo'})}
               />
             : null}
         </section>
