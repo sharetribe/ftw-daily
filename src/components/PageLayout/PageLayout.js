@@ -62,6 +62,7 @@ class PageLayout extends Component {
       logoutError,
       history,
       location,
+      topbar,
     } = this.props;
     const topbarProps = { history, location, togglePageClassNames: this.togglePageClassNames };
 
@@ -93,7 +94,7 @@ class PageLayout extends Component {
               <FormattedMessage id="PageLayout.logoutFailed" />
             </div>
           : null}
-        <Topbar {...topbarProps} />
+        {topbar || <Topbar {...topbarProps} />}
         <div className={css.content}>
           {children}
         </div>
@@ -102,9 +103,15 @@ class PageLayout extends Component {
   }
 }
 
-const { any, string, instanceOf, func, shape } = PropTypes;
+const { any, func, instanceOf, node, shape, string } = PropTypes;
 
-PageLayout.defaultProps = { className: '', children: null, authInfoError: null, logoutError: null };
+PageLayout.defaultProps = {
+  className: null,
+  children: null,
+  authInfoError: null,
+  logoutError: null,
+  topbar: null,
+};
 
 PageLayout.propTypes = {
   className: string,
@@ -112,6 +119,7 @@ PageLayout.propTypes = {
   children: any,
   authInfoError: instanceOf(Error),
   logoutError: instanceOf(Error),
+  topbar: node,
 
   // from withRouter
   history: shape({
