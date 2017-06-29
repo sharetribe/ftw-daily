@@ -1,18 +1,54 @@
+@import '../../marketplace.css';
+
 .root {
+  padding-top: 6px; /* align with baseline */
   display: flex;
   flex-direction: column;
 }
 
-.row {
+.lineItem {
+  @apply --marketplaceH4FontStyles;
+  margin: -1px 0 0 0; /* align with baseline */
+
+  @media (--desktopViewport) {
+    margin: -1px 0 0 0; /* align with baseline */
+  }
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
+.itemLabel {
+  margin-top: 1px; /* align with baseline */
+}
+
+.itemValue {
+  @apply --marketplaceDefaultFontStyles;
+}
+
 .totalDivider {
+  /* dimensions */
   width: 100%;
+  height: 1px;
+  margin: 10px 0 13px 0;
+
+  border: none;
+  background-color: var(--matterColorNegative);
+}
+
+.totalLabel {
+  font-weight: var(--fontWeightSemiBold);
+
+  /* Move so that baseline aligns with the total price */
+  padding-top: 7px;
 }
 
 .totalPrice {
-  font-weight: bold;
+  @apply --marketplaceH2FontStyles;
+  margin: 0;
+
+  @media (--desktopViewport) {
+    margin: 0;
+  }
 }

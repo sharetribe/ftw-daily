@@ -3,31 +3,31 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
   className="">
   <div
     className={undefined}>
-    <div
+    <span
       className={undefined}>
       <span>
-        Price per night:
+        Price per night
       </span>
-    </div>
-    <div
+    </span>
+    <span
       className={undefined}>
       10
-    </div>
+    </span>
   </div>
   <div
     className={undefined}>
-    <div
+    <span
       className={undefined}>
       <span>
         2017-04-14 - 2017-04-16
       </span>
-    </div>
-    <div
+    </span>
+    <span
       className={undefined}>
       <span>
-        2 nights
+        * 2 nights
       </span>
-    </div>
+    </span>
   </div>
   <hr
     className={undefined} />
@@ -36,7 +36,7 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
     <div
       className={undefined}>
       <span>
-        Total:
+        Total price
       </span>
     </div>
     <div
@@ -52,31 +52,31 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
   className="">
   <div
     className={undefined}>
-    <div
+    <span
       className={undefined}>
       <span>
-        Price per night:
+        Price per night
       </span>
-    </div>
-    <div
+    </span>
+    <span
       className={undefined}>
       10
-    </div>
+    </span>
   </div>
   <div
     className={undefined}>
-    <div
+    <span
       className={undefined}>
       <span>
         2017-04-14 - 2017-04-16
       </span>
-    </div>
-    <div
+    </span>
+    <span
       className={undefined}>
       <span>
-        2 nights
+        * 2 nights
       </span>
-    </div>
+    </span>
   </div>
   <hr
     className={undefined} />
@@ -85,7 +85,7 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
     <div
       className={undefined}>
       <span>
-        Total:
+        Total price
       </span>
     </div>
     <div
@@ -101,44 +101,44 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
   className="">
   <div
     className={undefined}>
-    <div
+    <span
       className={undefined}>
       <span>
-        Price per night:
+        Price per night
       </span>
-    </div>
-    <div
+    </span>
+    <span
       className={undefined}>
       10
-    </div>
+    </span>
   </div>
   <div
     className={undefined}>
-    <div
+    <span
       className={undefined}>
       <span>
         2017-04-14 - 2017-04-16
       </span>
-    </div>
-    <div
+    </span>
+    <span
       className={undefined}>
       <span>
-        2 nights
+        * 2 nights
       </span>
-    </div>
+    </span>
   </div>
   <div
     className={undefined}>
-    <div
+    <span
       className={undefined}>
       <span>
         Saunatime fee:
       </span>
-    </div>
-    <div
+    </span>
+    <span
       className={undefined}>
       -2
-    </div>
+    </span>
   </div>
   <hr
     className={undefined} />
@@ -147,7 +147,7 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
     <div
       className={undefined}>
       <span>
-        Total:
+        Total price
       </span>
     </div>
     <div

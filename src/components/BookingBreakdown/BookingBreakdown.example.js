@@ -42,3 +42,14 @@ export const ProviderSaleZeroCommission = {
     totalPrice: new types.Money(7000, 'USD'),
   },
 };
+
+export const ProviderSaleSingleNight = {
+  component: BookingBreakdown,
+  props: {
+    bookingStart: new Date(Date.UTC(2017, 3, 14)),
+    bookingEnd: new Date(Date.UTC(2017, 3, 15)),
+    unitPrice: new types.Money(4500, 'USD'),
+    commission: new types.Money(2000, 'USD'),
+    totalPrice: new types.Money(2500, 'USD'),
+  },
+};
