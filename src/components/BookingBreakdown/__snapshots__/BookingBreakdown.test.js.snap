@@ -1,4 +1,4 @@
-exports[`BookingInfo customer transaction data matches snapshot 1`] = `
+exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
 <div
   className="">
   <div
@@ -11,7 +11,7 @@ exports[`BookingInfo customer transaction data matches snapshot 1`] = `
     </div>
     <div
       className={undefined}>
-      $10.00
+      10
     </div>
   </div>
   <div
@@ -19,7 +19,7 @@ exports[`BookingInfo customer transaction data matches snapshot 1`] = `
     <div
       className={undefined}>
       <span>
-        4/14/2017 - 4/16/2017
+        2017-04-14 - 2017-04-16
       </span>
     </div>
     <div
@@ -41,13 +41,13 @@ exports[`BookingInfo customer transaction data matches snapshot 1`] = `
     </div>
     <div
       className={undefined}>
-      $20.00
+      20
     </div>
   </div>
 </div>
 `;
 
-exports[`BookingInfo pretransaction data matches snapshot 1`] = `
+exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
 <div
   className="">
   <div
@@ -60,7 +60,7 @@ exports[`BookingInfo pretransaction data matches snapshot 1`] = `
     </div>
     <div
       className={undefined}>
-      $10.00
+      10
     </div>
   </div>
   <div
@@ -68,7 +68,7 @@ exports[`BookingInfo pretransaction data matches snapshot 1`] = `
     <div
       className={undefined}>
       <span>
-        4/14/2017 - 4/16/2017
+        2017-04-14 - 2017-04-16
       </span>
     </div>
     <div
@@ -90,13 +90,13 @@ exports[`BookingInfo pretransaction data matches snapshot 1`] = `
     </div>
     <div
       className={undefined}>
-      $20.00
+      20
     </div>
   </div>
 </div>
 `;
 
-exports[`BookingInfo provider transaction data matches snapshot 1`] = `
+exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
 <div
   className="">
   <div
@@ -109,7 +109,7 @@ exports[`BookingInfo provider transaction data matches snapshot 1`] = `
     </div>
     <div
       className={undefined}>
-      $10.00
+      10
     </div>
   </div>
   <div
@@ -117,7 +117,7 @@ exports[`BookingInfo provider transaction data matches snapshot 1`] = `
     <div
       className={undefined}>
       <span>
-        4/14/2017 - 4/16/2017
+        2017-04-14 - 2017-04-16
       </span>
     </div>
     <div
@@ -125,19 +125,6 @@ exports[`BookingInfo provider transaction data matches snapshot 1`] = `
       <span>
         2 nights
       </span>
-    </div>
-  </div>
-  <div
-    className={undefined}>
-    <div
-      className={undefined}>
-      <span>
-        Subtotal:
-      </span>
-    </div>
-    <div
-      className={undefined}>
-      $20.00
     </div>
   </div>
   <div
@@ -150,7 +137,7 @@ exports[`BookingInfo provider transaction data matches snapshot 1`] = `
     </div>
     <div
       className={undefined}>
-      -$2.00
+      -2
     </div>
   </div>
   <hr
@@ -165,7 +152,7 @@ exports[`BookingInfo provider transaction data matches snapshot 1`] = `
     </div>
     <div
       className={undefined}>
-      $18.00
+      18
     </div>
   </div>
 </div>

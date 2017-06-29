@@ -2,7 +2,7 @@ import AddImages from './AddImages/AddImages';
 import AuthorInfo from './AuthorInfo/AuthorInfo';
 import Avatar from './Avatar/Avatar';
 import BirthdayInputField from './BirthdayInputField/BirthdayInputField';
-import BookingInfo from './BookingInfo/BookingInfo';
+import BookingBreakdown from './BookingBreakdown/BookingBreakdown';
 import Button, { InlineTextButton } from './Button/Button';
 import CloseIcon from './CloseIcon/CloseIcon';
 import CurrencyInputField from './CurrencyInputField/CurrencyInputField';
@@ -55,7 +55,7 @@ export {
   AuthorInfo,
   Avatar,
   BirthdayInputField,
-  BookingInfo,
+  BookingBreakdown,
   Button,
   CloseIcon,
   CurrencyInputField,

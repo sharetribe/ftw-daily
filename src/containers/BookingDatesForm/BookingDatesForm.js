@@ -4,29 +4,88 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
+import classNames from 'classnames';
 import moment from 'moment';
+import Decimal from 'decimal.js';
 import { types } from '../../util/sdkLoader';
 import { required } from '../../util/validators';
-import { Button, BookingInfo, DateInputField } from '../../components';
+import { nightsBetween } from '../../util/dates';
+import { convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
+import config from '../../config';
+import { Button, BookingBreakdown, DateInputField } from '../../components';
 
 import css from './BookingDatesForm.css';
 
+// TODO: This is a temporary function to calculate the booking
+// price. This should be removed when the API supports dry-runs and we
+// can take the total price from the transaction itself.
+const estimatedTotalPrice = (startDate, endDate, unitPrice) => {
+  const { subUnitDivisor } = config.currencyConfig;
+  const numericPrice = convertMoneyToNumber(unitPrice, subUnitDivisor);
+  const nightCount = nightsBetween(startDate, endDate);
+  const numericTotalPrice = new Decimal(numericPrice).times(nightCount).toNumber();
+  return new types.Money(
+    convertUnitToSubUnit(numericTotalPrice, subUnitDivisor),
+    unitPrice.currency
+  );
+};
+
+const breakdown = (bookingStart, bookingEnd, unitPrice) => {
+  if (!bookingStart || !bookingEnd || !unitPrice) {
+    return null;
+  }
+  const totalPrice = estimatedTotalPrice(bookingStart, bookingEnd, unitPrice);
+  return (
+    <BookingBreakdown
+      className={css.receipt}
+      bookingStart={bookingStart}
+      bookingEnd={bookingEnd}
+      unitPrice={unitPrice}
+      totalPrice={totalPrice}
+    />
+  );
+};
+
 export const BookingDatesFormComponent = props => {
   const {
+    rootClassName,
+    className,
     bookingStart,
     bookingEnd,
-    className,
     form,
+    invalid,
     handleSubmit,
-    intl,
-    price,
+    price: unitPrice,
     pristine,
     submitting,
+    intl,
   } = props;
+
+  const classes = classNames(rootClassName || css.root, className);
+  const { currency: marketplaceCurrency } = config.currencyConfig;
+
+  if (!unitPrice) {
+    return (
+      <div className={classes}>
+        <p className={css.error}>
+          <FormattedMessage id="BookingDatesForm.listingPriceMissing" />
+        </p>
+      </div>
+    );
+  }
+  if (unitPrice.currency !== marketplaceCurrency) {
+    return (
+      <div className={classes}>
+        <p className={css.error}>
+          <FormattedMessage id="BookingDatesForm.listingCurrencyInvalid" />
+        </p>
+      </div>
+    );
+  }
+
   const placeholderText = intl.formatMessage({ id: 'BookingDatesForm.placeholder' });
   const bookingStartLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingStartTitle' });
   const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle' });
-  const priceRequiredMessage = intl.formatMessage({ id: 'BookingDatesForm.priceRequired' });
   const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' });
 
   // A day is outside range if it is between today and booking end date (if end date has been chosen)
@@ -46,19 +105,13 @@ export const BookingDatesFormComponent = props => {
     ? { isOutsideRange: day => !isInclusivelyAfterDay(day, startOfBookingEndRange) }
     : {};
 
-  const bookingInfo = price
-    ? <BookingInfo
-        className={css.receipt}
-        bookingStart={bookingStart}
-        bookingEnd={bookingEnd}
-        unitPrice={price}
-      />
-    : <p className={css.error}>{priceRequiredMessage}</p>;
+  const hasBookingInfo = bookingStart && bookingEnd;
+  const bookingInfo = breakdown(bookingStart, bookingEnd, unitPrice);
 
-  const invalid = !(bookingStart && bookingEnd && price);
+  const submitDisabled = pristine || submitting || invalid || !hasBookingInfo;
 
   return (
-    <form className={className} onSubmit={handleSubmit}>
+    <form className={classes} onSubmit={handleSubmit}>
       {bookingInfo}
       <DateInputField
         name="bookingStart"
@@ -82,21 +135,36 @@ export const BookingDatesFormComponent = props => {
       <p className={css.smallPrint}>
         <FormattedMessage id="BookingDatesForm.youWontBeChargedInfo" />
       </p>
-      <Button type="submit" disabled={pristine || submitting || invalid}>
+      <Button type="submit" disabled={submitDisabled}>
         <FormattedMessage id="BookingDatesForm.requestToBook" />
       </Button>
     </form>
   );
 };
 
-BookingDatesFormComponent.defaultProps = { price: null };
+BookingDatesFormComponent.defaultProps = {
+  rootClassName: null,
+  className: null,
+  price: null,
+  bookingStart: null,
+  bookingEnd: null,
+};
 
-const { instanceOf } = PropTypes;
+const { string, instanceOf } = PropTypes;
 
 BookingDatesFormComponent.propTypes = {
   ...formPropTypes,
-  intl: intlShape.isRequired,
+
+  rootClassName: string,
+  className: string,
   price: instanceOf(types.Money),
+
+  // from formValueSelector
+  bookingStart: instanceOf(Date),
+  bookingEnd: instanceOf(Date),
+
+  // from inejctIntl
+  intl: intlShape.isRequired,
 };
 
 const formName = 'BookingDates';

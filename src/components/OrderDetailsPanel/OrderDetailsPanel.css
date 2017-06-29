@@ -1,5 +1,9 @@
 @import '../../marketplace.css';
 
+.root {
+
+}
+
 .title {
   margin: 35px 24px 0 24px;
 }

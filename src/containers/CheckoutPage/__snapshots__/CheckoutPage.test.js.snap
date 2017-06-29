@@ -20,9 +20,15 @@ exports[`CheckoutPage matches snapshot 1`] = `
       }
     }
     className={null} />
-  <BookingInfo
+  <BookingBreakdown
     bookingEnd={2017-04-16T00:00:00.000Z}
     bookingStart={2017-04-14T00:00:00.000Z}
+    totalPrice={
+      Money {
+        "amount": 11000,
+        "currency": "USD",
+      }
+    }
     unitPrice={
       Money {
         "amount": 5500,

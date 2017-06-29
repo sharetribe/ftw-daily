@@ -1,13 +1,67 @@
-exports[`BookingDatesForm matches snapshot 1`] = `
+exports[`BookingDatesForm matches snapshot with selected dates 1`] = `
 <form
+  className=""
   onSubmit={[Function]}>
-  <BookingInfo
+  <BookingBreakdown
+    bookingEnd={2017-04-16T00:00:00.000Z}
+    bookingStart={2017-04-14T00:00:00.000Z}
+    totalPrice={
+      Money {
+        "amount": 2198,
+        "currency": "USD",
+      }
+    }
     unitPrice={
       Money {
         "amount": 1099,
         "currency": "USD",
       }
     } />
+  <DateInputField
+    format={null}
+    id="fakeTestForm.bookingStart"
+    isOutsideRange={[Function]}
+    label="BookingDatesForm.bookingStartTitle"
+    name="bookingStart"
+    placeholder="BookingDatesForm.placeholder"
+    validate={
+      Array [
+        [Function],
+      ]
+    } />
+  <DateInputField
+    format={null}
+    id="fakeTestForm.bookingEnd"
+    isOutsideRange={[Function]}
+    label="BookingDatesForm.bookingEndTitle"
+    name="bookingEnd"
+    placeholder="BookingDatesForm.placeholder"
+    validate={
+      Array [
+        [Function],
+      ]
+    } />
+  <p>
+    <FormattedMessage
+      id="BookingDatesForm.youWontBeChargedInfo"
+      values={Object {}} />
+  </p>
+  <Button
+    className={null}
+    disabled={true}
+    rootClassName={null}
+    type="submit">
+    <FormattedMessage
+      id="BookingDatesForm.requestToBook"
+      values={Object {}} />
+  </Button>
+</form>
+`;
+
+exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
+<form
+  className=""
+  onSubmit={[Function]}>
   <DateInputField
     format={null}
     id="fakeTestForm.bookingStart"

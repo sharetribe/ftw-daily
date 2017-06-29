@@ -4,7 +4,7 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as propTypes from '../../util/propTypes';
-import { ensureBooking, ensureListing, ensureTransaction, ensureUser } from '../../util/data';
+import { ensureListing, ensureTransaction } from '../../util/data';
 import { Button, NamedRedirect, SaleDetailsPanel, PageLayout } from '../../components';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { acceptSale, rejectSale, loadData } from './SalePage.duck';
@@ -25,7 +25,7 @@ export const SalePageComponent = props => {
   } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
-  const title = currentListing.attributes.title;
+  const listingTitle = currentListing.attributes.title;
 
   // Redirect users with someone else's direct link to their own inbox/sales page.
   const isDataAvailable = currentUser &&
@@ -39,18 +39,6 @@ export const SalePageComponent = props => {
     console.error('Tried to access a sale that was not owned by the current user');
     return <NamedRedirect name="InboxPage" params={{ tab: 'sales' }} />;
   }
-
-  const detailsProps = {
-    subtotalPrice: currentTransaction.attributes.total,
-    commission: currentTransaction.attributes.commission,
-    saleState: currentTransaction.attributes.state,
-    lastTransitionedAt: currentTransaction.attributes.lastTransitionedAt,
-    lastTransition: currentTransaction.attributes.lastTransition,
-    listing: currentListing,
-    booking: ensureBooking(currentTransaction.booking),
-    customer: ensureUser(currentTransaction.customer),
-  };
-
   const detailsClassName = classNames(css.tabContent, {
     [css.tabContentVisible]: props.tab === 'details',
   });
@@ -60,7 +48,7 @@ export const SalePageComponent = props => {
     : <h1 className={css.title}><FormattedMessage id="SalePage.loadingData" /></h1>;
 
   const panel = isDataAvailable && currentTransaction.id
-    ? <SaleDetailsPanel className={detailsClassName} {...detailsProps} />
+    ? <SaleDetailsPanel className={detailsClassName} transaction={currentTransaction} />
     : loadingOrFaildFetching;
 
   const isPreauthorizedState = currentTransaction.attributes.state ===
@@ -77,7 +65,7 @@ export const SalePageComponent = props => {
     : null;
 
   return (
-    <PageLayout title={intl.formatMessage({ id: 'SalePage.title' }, { title })}>
+    <PageLayout title={intl.formatMessage({ id: 'SalePage.title' }, { title: listingTitle })}>
       {panel}
       {actionButtons}
     </PageLayout>

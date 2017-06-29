@@ -1,5 +1,9 @@
 @import '../../marketplace.css';
 
+.root {
+
+}
+
 .receipt {
   margin-bottom: 24px;
 }

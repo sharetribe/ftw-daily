@@ -1,17 +1,34 @@
 import React, { PropTypes } from 'react';
 import { FormattedDate, FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
-import { types } from '../../util/sdkLoader';
-import { BookingInfo, NamedLink } from '../../components';
+import { ensureListing, ensureTransaction, ensureBooking, ensureUser } from '../../util/data';
+import { BookingBreakdown, NamedLink } from '../../components';
 
 import css from './OrderDetailsPanel.css';
 
-const formatName = (user, defaultName) => {
-  if (user && user.attributes && user.attributes.profile && user.attributes.profile.firstName) {
-    return user.attributes.profile.firstName;
+const breakdown = transaction => {
+  const tx = ensureTransaction(transaction);
+  const listing = ensureListing(tx.listing);
+  const booking = ensureBooking(tx.booking);
+  const bookingStart = booking.attributes.start;
+  const bookingEnd = booking.attributes.end;
+  const unitPrice = listing.attributes.price;
+  const totalPrice = tx.attributes.total;
+
+  if (!bookingStart || !bookingEnd || !unitPrice || !totalPrice) {
+    return null;
   }
-  return defaultName;
+  return (
+    <BookingBreakdown
+      className={css.receipt}
+      bookingStart={bookingStart}
+      bookingEnd={bookingEnd}
+      unitPrice={unitPrice}
+      totalPrice={totalPrice}
+    />
+  );
 };
 
 const orderTitle = (orderState, listingLink, customerName, lastTransition) => {
@@ -105,52 +122,47 @@ const orderMessage = (
 
 const OrderDetailsPanel = props => {
   const {
+    rootClassName,
     className,
-    totalPrice,
-    orderState,
-    lastTransitionedAt,
-    lastTransition,
-    booking,
-    listing,
-    provider,
-    customer,
+    transaction,
   } = props;
-  const providerName = formatName(provider, '');
-  const customerName = formatName(customer, '');
+  const currentTransaction = ensureTransaction(transaction);
+  const currentListing = ensureListing(currentTransaction.listing);
+  const currentProvider = ensureUser(currentTransaction.provider);
+  const currentCustomer = ensureUser(currentTransaction.customer);
 
-  const listingLinkParams = { id: listing.id.uuid, slug: createSlug(listing.attributes.title) };
-  const listingLink = (
-    <NamedLink name="ListingPage" params={listingLinkParams}>
-      {listing.attributes.title}
-    </NamedLink>
-  );
+  const providerName = currentProvider.attributes.profile.firstName;
+  const customerName = currentCustomer.attributes.profile.firstName;
+  const transactionState = currentTransaction.attributes.state;
+  const lastTransitionedAt = currentTransaction.attributes.lastTransitionedAt;
+  const lastTransition = currentTransaction.attributes.lastTransitione;
 
-  // TODO We can't use price from listing, since that might have changed.
-  // When API includes unit price and possible additional fees, we need to change this.
-  const unitPrice = listing.attributes.price;
+  let listingLink = null;
 
-  const bookingInfo = unitPrice
-    ? <BookingInfo
-        className={css.receipt}
-        bookingStart={booking.attributes.start}
-        bookingEnd={booking.attributes.end}
-        unitPrice={unitPrice}
-        totalPrice={totalPrice}
-      />
-    : <p className={css.error}>{'priceRequiredMessage'}</p>;
+  if (currentListing.id && currentListing.attributes.title) {
+    const title = currentListing.attributes.title;
+    const params = { id: currentListing.id.uuid, slug: createSlug(title) };
+    listingLink = (
+      <NamedLink name="ListingPage" params={params}>
+        {title}
+      </NamedLink>
+    );
+  }
 
-  // orderState affects to both title and message section
-  const title = orderTitle(orderState, listingLink, customerName, lastTransition);
+  const bookingInfo = breakdown(currentTransaction);
+  const title = orderTitle(transactionState, listingLink, customerName, lastTransition);
   const message = orderMessage(
-    orderState,
+    transactionState,
     listingLink,
     providerName,
     lastTransitionedAt,
     lastTransition
   );
 
+  const classes = classNames(rootClassName || css.root, className);
+
   return (
-    <div className={className}>
+    <div className={classes}>
       <h1 className={css.title}>{title}</h1>
       <div className={css.message}>
         {message}
@@ -163,20 +175,18 @@ const OrderDetailsPanel = props => {
   );
 };
 
-OrderDetailsPanel.defaultProps = { className: null, lastTransition: null };
+OrderDetailsPanel.defaultProps = {
+  rootClassName: null,
+  className: null,
+  lastTransition: null,
+};
 
-const { instanceOf, string } = PropTypes;
+const { string } = PropTypes;
 
 OrderDetailsPanel.propTypes = {
+  rootClassName: string,
   className: string,
-  totalPrice: instanceOf(types.Money).isRequired,
-  orderState: string.isRequired,
-  lastTransitionedAt: instanceOf(Date).isRequired,
-  lastTransition: string,
-  booking: propTypes.booking.isRequired,
-  listing: propTypes.listing.isRequired,
-  provider: propTypes.user.isRequired,
-  customer: propTypes.user.isRequired,
+  transaction: propTypes.transaction.isRequired,
 };
 
 export default OrderDetailsPanel;

@@ -4,7 +4,7 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { NamedRedirect, OrderDetailsPanel, PageLayout } from '../../components';
 import * as propTypes from '../../util/propTypes';
-import { ensureBooking, ensureListing, ensureTransaction, ensureUser } from '../../util/data';
+import { ensureListing, ensureTransaction } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { loadData } from './OrderPage.duck';
 
@@ -31,17 +31,6 @@ export const OrderPageComponent = props => {
     return <NamedRedirect name="InboxPage" params={{ tab: 'orders' }} />;
   }
 
-  const detailsProps = {
-    totalPrice: currentTransaction.attributes.total,
-    orderState: currentTransaction.attributes.state,
-    lastTransitionedAt: currentTransaction.attributes.lastTransitionedAt,
-    lastTransition: currentTransaction.attributes.lastTransition,
-    listing: currentListing,
-    booking: ensureBooking(currentTransaction.booking),
-    provider: ensureUser(currentTransaction.provider),
-    customer: ensureUser(currentTransaction.customer),
-  };
-
   const detailsClassName = classNames(css.tabContent, {
     [css.tabContentVisible]: props.tab === 'details',
   });
@@ -51,7 +40,7 @@ export const OrderPageComponent = props => {
     : <h1 className={css.title}><FormattedMessage id="OrderPage.loadingData" /></h1>;
 
   const panel = isDataAvailable && currentTransaction.id
-    ? <OrderDetailsPanel className={detailsClassName} {...detailsProps} />
+    ? <OrderDetailsPanel className={detailsClassName} transaction={currentTransaction} />
     : loadingOrFaildFetching;
 
   return (

@@ -5,17 +5,51 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { reduce } from 'lodash';
 import moment from 'moment';
+import Decimal from 'decimal.js';
+import config from '../../config';
 import { types } from '../../util/sdkLoader';
 import { pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
-import { AuthorInfo, BookingInfo, NamedRedirect, PageLayout } from '../../components';
+import { nightsBetween } from '../../util/dates';
+import { convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
+import { AuthorInfo, BookingBreakdown, NamedRedirect, PageLayout } from '../../components';
 import { StripePaymentForm } from '../../containers';
 import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
 
 import css from './CheckoutPage.css';
 
 const STORAGE_KEY = 'CheckoutPage';
+
+// TODO: This is a temporary function to calculate the booking
+// price. This should be removed when the API supports dry-runs and we
+// can take the total price from the transaction itself.
+const estimatedTotalPrice = (startDate, endDate, unitPrice) => {
+  const { subUnitDivisor } = config.currencyConfig;
+  const numericPrice = convertMoneyToNumber(unitPrice, subUnitDivisor);
+  const nightCount = nightsBetween(startDate, endDate);
+  const numericTotalPrice = new Decimal(numericPrice).times(nightCount).toNumber();
+  return new types.Money(
+    convertUnitToSubUnit(numericTotalPrice, subUnitDivisor),
+    unitPrice.currency
+  );
+};
+
+const breakdown = (bookingStart, bookingEnd, unitPrice) => {
+  if (!bookingStart || !bookingEnd || !unitPrice) {
+    return null;
+  }
+  const totalPrice = estimatedTotalPrice(bookingStart, bookingEnd, unitPrice);
+  return (
+    <BookingBreakdown
+      className={css.receipt}
+      bookingStart={bookingStart}
+      bookingEnd={bookingEnd}
+      unitPrice={unitPrice}
+      totalPrice={totalPrice}
+    />
+  );
+};
 
 const ensureListingProperties = listing => {
   const empty = { id: null, type: 'listing', attributes: {}, author: {}, images: [] };
@@ -155,7 +189,6 @@ export class CheckoutPageComponent extends Component {
     const pageData = bookingDates && listing ? { bookingDates, listing } : storedData();
     const { bookingStart, bookingEnd } = pageData.bookingDates || {};
     const currentListing = ensureListingProperties(pageData.listing);
-    const price = currentListing.attributes.price;
 
     const isOwnListing = currentListing.id &&
       currentUser &&
@@ -166,10 +199,27 @@ export class CheckoutPageComponent extends Component {
     // but show payment form only when user info is loaded.
     const showPaymentForm = currentUser && !isOwnListing;
 
-    if (!currentListing.id || !price || isOwnListing) {
+    // Estimate total price. NOTE: this will change when we can do a
+    // dry-run to the API and get a proper breakdown of the price.
+    const { currency: marketplaceCurrency } = config.currencyConfig;
+    const unitPrice = currentListing.attributes.price;
+
+    if (!unitPrice) {
+      throw new Error('Listing has no price');
+    }
+    if (unitPrice.currency !== marketplaceCurrency) {
+      throw new Error(
+        `Listing currency different from marketplace currency: ${unitPrice.currency}`
+      );
+    }
+
+    const hasBookingInfo = bookingStart && bookingEnd;
+
+    if (!currentListing.id || isOwnListing || !hasBookingInfo) {
       // eslint-disable-next-line no-console
       console.error(
-        'Listing, price, or user invalid for checkout, redirecting back to listing page.'
+        'Listing, user, or dates invalid for checkout, redirecting back to listing page.',
+        { currentListing, isOwnListing, hasBookingInfo, bookingStart, bookingEnd }
       );
       return <NamedRedirect name="ListingPage" params={params} />;
     }
@@ -189,16 +239,13 @@ export class CheckoutPageComponent extends Component {
         </p>
       : null;
 
+    const bookingInfo = breakdown(bookingStart, bookingEnd, unitPrice);
+
     return (
       <PageLayout title={title}>
         <h1 className={css.title}>{title}</h1>
         <AuthorInfo author={currentListing.author} className={css.authorContainer} />
-        <BookingInfo
-          className={css.receipt}
-          bookingStart={bookingStart}
-          bookingEnd={bookingEnd}
-          unitPrice={price}
-        />
+        {bookingInfo}
         <section className={css.payment}>
           {errorMessage}
           <h2 className={css.paymentTitle}>

@@ -55,12 +55,12 @@ export const createImage = id => ({
 });
 
 // Create a user that conforms to the util/propTypes listing schema
-export const createListing = (id, author = null) => ({
+export const createListing = (id, author = null, price = new Money(5500, 'USD')) => ({
   id: new UUID(id),
   type: 'listing',
   attributes: {
     title: `${id} title`,
-    price: new Money(5500, 'USD'),
+    price,
     description: `${id} description`,
     address: `${id} address`,
     geolocation: new LatLng(40, 60),
@@ -73,6 +73,7 @@ export const createTransaction = options => {
     id,
     state = 'state/preauthorized',
     total = new Money(1000, 'USD'),
+    commission = new Money(100, 'USD'),
     booking = null,
     listing = null,
     customer = null,
@@ -83,7 +84,7 @@ export const createTransaction = options => {
     id: new UUID(id),
     type: 'transaction',
     attributes: {
-      commission: new Money(100, 'USD'),
+      commission,
       createdAt: new Date(Date.UTC(2017, 4, 1)),
       lastTransitionedAt,
       state,
