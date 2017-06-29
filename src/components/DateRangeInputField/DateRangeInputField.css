@@ -1,0 +1,61 @@
+@import '../../marketplace.css';
+
+.fieldRoot {
+
+}
+
+.labels {
+  width: 100%;
+  display: flex;
+}
+
+.startDateLabel,
+.endDateLabel {
+  flex-basis: 50%;
+  @apply --marketplaceH4FontStyles;
+  font-weight: 600;
+  color: var(--matterColor);
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.labelSuccess {
+  color: var(--successColor);
+}
+
+.inputBorders {
+  width: 100%;
+  display: flex;
+}
+
+.input {
+  flex-basis: 50%;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: var(--attentionColor);
+
+  transition: border-bottom-color var(--transitionStyle);
+
+  &:hover,
+  &:focus {
+    border-bottom-color: var(--matterColor);
+    outline: none;
+  }
+}
+
+.inputSuccess {
+  border-bottom-color: var(--successColor);
+}
+
+.inputError {
+  border-bottom-color: var(--failColor);
+}
+
+.hover {
+  border-bottom-color: var(--matterColorDark);
+}

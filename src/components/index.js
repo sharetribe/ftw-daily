@@ -7,6 +7,7 @@ import Button, { InlineTextButton } from './Button/Button';
 import CloseIcon from './CloseIcon/CloseIcon';
 import CurrencyInputField from './CurrencyInputField/CurrencyInputField';
 import DateInputField from './DateInputField/DateInputField';
+import DateRangeInputField from './DateRangeInputField/DateRangeInputField';
 import Discussion from './Discussion/Discussion';
 import EditListingDescriptionPanel from './EditListingDescriptionPanel/EditListingDescriptionPanel';
 import EditListingLocationPanel from './EditListingLocationPanel/EditListingLocationPanel';
@@ -60,6 +61,7 @@ export {
   CloseIcon,
   CurrencyInputField,
   DateInputField,
+  DateRangeInputField,
   Discussion,
   EditListingDescriptionPanel,
   EditListingLocationPanel,

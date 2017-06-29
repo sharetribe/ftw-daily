@@ -1,0 +1,73 @@
+exports[`DateRangeInput matches snapshot 1`] = `
+<div
+  className="">
+  <div
+    className="DateRangePicker">
+    <div>
+      <div
+        className="DateRangePickerInput">
+        <div
+          className="DateInput">
+          <input
+            aria-describedby="DateInput__screen-reader-message-bookingStartDate"
+            aria-label="today"
+            autoComplete="off"
+            className="DateInput__input needsclick"
+            disabled={false}
+            id="bookingStartDate"
+            name="bookingStartDate"
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            placeholder="today"
+            readOnly={false}
+            required={false}
+            type="text"
+            value="" />
+          <p
+            className="screen-reader-only"
+            id="DateInput__screen-reader-message-bookingStartDate">
+            Date input
+          </p>
+          <div
+            className="DateInput__display-text">
+            today
+          </div>
+        </div>
+        <div
+          className="DateRangePickerInput__arrow">
+          <span />
+        </div>
+        <div
+          className="DateInput">
+          <input
+            aria-describedby="DateInput__screen-reader-message-bookingEndDate"
+            aria-label="tomorrow"
+            autoComplete="off"
+            className="DateInput__input needsclick"
+            disabled={false}
+            id="bookingEndDate"
+            name="bookingEndDate"
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            placeholder="tomorrow"
+            readOnly={false}
+            required={false}
+            type="text"
+            value="" />
+          <p
+            className="screen-reader-only"
+            id="DateInput__screen-reader-message-bookingEndDate">
+            Date input
+          </p>
+          <div
+            className="DateInput__display-text">
+            tomorrow
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

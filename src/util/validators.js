@@ -37,3 +37,17 @@ export const autocompletePlaceSelected = message =>
       value.selectedPlace.origin instanceof LatLng;
     return selectedPlaceIsValid ? VALID : message;
   };
+
+export const bookingDatesRequired = (inValidStartDateMessage, inValidEndDateMessage) =>
+  value => {
+    const startDateIsValid = value && value.startDate instanceof Date;
+    const endDateIsValid = value && value.endDate instanceof Date;
+
+    if (!startDateIsValid) {
+      return inValidStartDateMessage;
+    } else if (!endDateIsValid) {
+      return inValidEndDateMessage;
+    } else {
+      return VALID;
+    }
+  };
