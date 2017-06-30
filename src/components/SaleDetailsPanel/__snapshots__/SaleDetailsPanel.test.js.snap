@@ -63,11 +63,11 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
         Object {
           "code": "line-item.commission/provider",
           "lineTotal": Money {
-            "amount": 1000,
+            "amount": -1000,
             "currency": "USD",
           },
           "unitPrice": Money {
-            "amount": 1000,
+            "amount": -1000,
             "currency": "USD",
           },
         },

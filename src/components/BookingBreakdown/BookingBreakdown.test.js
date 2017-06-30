@@ -65,8 +65,8 @@ describe('BookingBreakdown', () => {
           },
           {
             code: 'line-item.commission/provider',
-            lineTotal: new types.Money(200, 'USD'),
-            unitPrice: new types.Money(200, 'USD'),
+            lineTotal: new types.Money(-200, 'USD'),
+            unitPrice: new types.Money(-200, 'USD'),
           },
         ]}
         intl={fakeIntl}

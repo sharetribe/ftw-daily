@@ -101,8 +101,8 @@ export const createTransaction = options => {
         },
         {
           code: 'line-item.commission/provider',
-          unitPrice: commission,
-          lineTotal: commission,
+          unitPrice: new Money(commission.amount * -1, commission.currency),
+          lineTotal: new Money(commission.amount * -1, commission.currency),
         },
       ],
     },

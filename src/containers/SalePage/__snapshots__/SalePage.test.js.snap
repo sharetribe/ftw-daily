@@ -27,11 +27,11 @@ exports[`SalePage matches snapshot 1`] = `
               Object {
                 "code": "line-item.commission/provider",
                 "lineTotal": Money {
-                  "amount": 100,
+                  "amount": -100,
                   "currency": "USD",
                 },
                 "unitPrice": Money {
-                  "amount": 100,
+                  "amount": -100,
                   "currency": "USD",
                 },
               },

@@ -170,7 +170,7 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
     </span>
     <span
       className={undefined}>
-      -2
+      2
     </span>
   </div>
   <hr

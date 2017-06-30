@@ -2,7 +2,6 @@
  * This component will show the booking info and calculated total price.
  * I.e. dates and other details related to payment decision in receipt format.
  */
-import _ from 'lodash';
 import React, { PropTypes } from 'react';
 import { FormattedMessage, FormattedHTMLMessage, intlShape, injectIntl } from 'react-intl';
 import Decimal from 'decimal.js';
@@ -51,11 +50,8 @@ export const BookingBreakdownComponent = props => {
     />
   );
 
-  const nightPurchase = _.find(lineItems, item => item.code === 'line-item.purchase/night');
-  const providerCommission = _.find(
-    lineItems,
-    item => item.code === 'line-item.commission/provider'
-  );
+  const nightPurchase = lineItems.find(item => item.code === 'line-item.purchase/night');
+  const providerCommission = lineItems.find(item => item.code === 'line-item.commission/provider');
 
   const nightCount = nightPurchase.quantity.toFixed();
   const nightCountMessage = (
