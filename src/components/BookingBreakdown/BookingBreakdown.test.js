@@ -13,12 +13,14 @@ describe('BookingBreakdown', () => {
         bookingEnd={new Date(Date.UTC(2017, 3, 16))}
         payinTotal={new types.Money(2000, 'USD')}
         userRole="customer"
-        lineItems={[{
-          code: "line-item.purchase/night",
-          quantity: new Decimal(2),
-          lineTotal: new types.Money(2000, 'USD'),
-          unitPrice: new types.Money(1000, 'USD'),
-        }]}
+        lineItems={[
+          {
+            code: 'line-item.purchase/night',
+            quantity: new Decimal(2),
+            lineTotal: new types.Money(2000, 'USD'),
+            unitPrice: new types.Money(1000, 'USD'),
+          },
+        ]}
         intl={fakeIntl}
       />
     );
@@ -32,12 +34,14 @@ describe('BookingBreakdown', () => {
         bookingEnd={new Date(Date.UTC(2017, 3, 16))}
         userRole="customer"
         payinTotal={new types.Money(2000, 'USD')}
-        lineItems={[{
-          code: "line-item.purchase/night",
-          quantity: new Decimal(2),
-          lineTotal: new types.Money(2000, 'USD'),
-          unitPrice: new types.Money(1000, 'USD'),
-        }]}
+        lineItems={[
+          {
+            code: 'line-item.purchase/night',
+            quantity: new Decimal(2),
+            lineTotal: new types.Money(2000, 'USD'),
+            unitPrice: new types.Money(1000, 'USD'),
+          },
+        ]}
         intl={fakeIntl}
       />
     );
@@ -52,16 +56,19 @@ describe('BookingBreakdown', () => {
         commission={new types.Money(200, 'USD')}
         payoutTotal={new types.Money(1800, 'USD')}
         userRole="provider"
-        lineItems={[{
-          code: "line-item.purchase/night",
-          quantity: new Decimal(2),
-          lineTotal: new types.Money(2000, 'USD'),
-          unitPrice: new types.Money(1000, 'USD'),
-        }, {
-          code: "line-item.commission/provider",
-          lineTotal: new types.Money(200, 'USD'),
-          unitPrice: new types.Money(200, 'USD'),
-        }]}
+        lineItems={[
+          {
+            code: 'line-item.purchase/night',
+            quantity: new Decimal(2),
+            lineTotal: new types.Money(2000, 'USD'),
+            unitPrice: new types.Money(1000, 'USD'),
+          },
+          {
+            code: 'line-item.commission/provider',
+            lineTotal: new types.Money(200, 'USD'),
+            unitPrice: new types.Money(200, 'USD'),
+          },
+        ]}
         intl={fakeIntl}
       />
     );

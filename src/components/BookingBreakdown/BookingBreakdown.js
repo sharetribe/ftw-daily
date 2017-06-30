@@ -71,20 +71,20 @@ export const BookingBreakdownComponent = props => {
   // If commission is passed it will be shown as a fee already reduces from the total price
   let commissionInfo = null;
 
-  if (userRole === "provider") {
+  if (userRole === 'provider') {
     const commission = providerCommission.lineTotal;
     const commissionAsNumber = commission ? convertMoneyToNumber(commission, subUnitDivisor) : 0;
     const formattedCommission = commission
-                              ? intl.formatNumber(new Decimal(commissionAsNumber).negated().toNumber(), currencyConfig)
-                              : null;
+      ? intl.formatNumber(new Decimal(commissionAsNumber).negated().toNumber(), currencyConfig)
+      : null;
 
     commissionInfo = (
       <div className={css.lineItem}>
-      <span className={css.itemLabel}>
-        <FormattedMessage id="BookingBreakdown.commission" />
-      </span>
-      <span className={css.itemValue}>{formattedCommission}</span>
-    </div>
+        <span className={css.itemLabel}>
+          <FormattedMessage id="BookingBreakdown.commission" />
+        </span>
+        <span className={css.itemValue}>{formattedCommission}</span>
+      </div>
     );
   }
 

@@ -92,16 +92,19 @@ export const createTransaction = options => {
       state,
       payinTotal: total,
       payoutTotal: new Money(total.amount - commission.amount, total.currency),
-      lineItems: [{
-        code: "line-item.purchase/night",
-        quantity: new Decimal(nightCount),
-        unitPrice: new Money(total.amount / nightCount, total.currency),
-        lineTotal: total,
-      }, {
-        code: "line-item.commission/provider",
-        unitPrice: commission,
-        lineTotal: commission,
-      }]
+      lineItems: [
+        {
+          code: 'line-item.purchase/night',
+          quantity: new Decimal(nightCount),
+          unitPrice: new Money(total.amount / nightCount, total.currency),
+          lineTotal: total,
+        },
+        {
+          code: 'line-item.commission/provider',
+          unitPrice: commission,
+          lineTotal: commission,
+        },
+      ],
     },
     booking,
     listing,

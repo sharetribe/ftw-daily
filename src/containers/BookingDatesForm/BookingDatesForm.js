@@ -34,12 +34,14 @@ const breakdown = (bookingStart, bookingEnd, unitPrice) => {
   }
   const nightCount = nightsBetween(bookingStart, bookingEnd);
   const totalPrice = estimatedTotalPrice(unitPrice, nightCount);
-  const lineItems = [{
-    code: "line-item.purchase/night",
-    unitPrice: unitPrice,
-    quantity: new Decimal(nightCount),
-    lineTotal: totalPrice,
-  }];
+  const lineItems = [
+    {
+      code: 'line-item.purchase/night',
+      unitPrice: unitPrice,
+      quantity: new Decimal(nightCount),
+      lineTotal: totalPrice,
+    },
+  ];
 
   return (
     <BookingBreakdown
