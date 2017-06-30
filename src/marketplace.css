@@ -240,6 +240,14 @@
     line-height: 18px;
     letter-spacing: 0.1px;
   }
+  /* This font is specific to Avatar component only */
+  --marketplaceMediumAvatarFontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
 
   /* Links */
   --marketplaceLinkStyles: {

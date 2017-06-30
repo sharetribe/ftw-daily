@@ -48,7 +48,7 @@ const breakdown = transaction => {
 
   return (
     <BookingBreakdown
-      className={css.receipt}
+      className={css.breakdown}
       bookingStart={bookingStart}
       bookingEnd={bookingEnd}
       unitPrice={unitPrice}
@@ -182,7 +182,10 @@ const SaleDetailsPanel = props => {
           />
         </div>
       </div>
-      <p>{message}</p>
+      <p className={css.message}>{message}</p>
+      <h3 className={css.breakdownTitle}>
+        <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
+      </h3>
       {bookingInfo}
     </div>
   );

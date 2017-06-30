@@ -138,6 +138,7 @@
   "PayoutDetailsForm.submitButtonText": "Save details & publish listing",
   "PayoutDetailsForm.title": "One more thing: payout preferences",
   "ResponsiveImage.noImage": "No image",
+  "SaleDetailsPanel.bookingBreakdownTitle": "Booking breakdown",
   "SaleDetailsPanel.listingAcceptedTitle": "Woohoo! You accepted a request from {customerName} for {listingLink}",
   "SaleDetailsPanel.listingDeliveredTitle": "{customerName} booked {listingLink}",
   "SaleDetailsPanel.listingRejectedTitle": "{customerName} requested to book {listingLink}",
