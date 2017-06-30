@@ -36,8 +36,8 @@ export const OrderPageComponent = props => {
   });
 
   const loadingOrFaildFetching = fetchOrderError
-    ? <h1 className={css.title}><FormattedMessage id="OrderPage.fetchOrderFailed" /></h1>
-    : <h1 className={css.title}><FormattedMessage id="OrderPage.loadingData" /></h1>;
+    ? <p className={css.error}><FormattedMessage id="OrderPage.fetchOrderFailed" /></p>
+    : <p className={css.loading}><FormattedMessage id="OrderPage.loadingData" /></p>;
 
   const panel = isDataAvailable && currentTransaction.id
     ? <OrderDetailsPanel className={detailsClassName} transaction={currentTransaction} />

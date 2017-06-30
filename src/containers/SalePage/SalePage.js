@@ -49,13 +49,13 @@ export const SalePageComponent = props => {
     [css.tabContentVisible]: props.tab === 'details',
   });
 
-  const loadingOrFaildFetching = fetchSaleError
-    ? <h1><FormattedMessage id="SalePage.fetchSaleFailed" /></h1>
-    : <h1><FormattedMessage id="SalePage.loadingData" /></h1>;
+  const loadingOrFailedFetching = fetchSaleError
+    ? <p className={css.error}><FormattedMessage id="SalePage.fetchSaleFailed" /></p>
+    : <p className={css.loading}><FormattedMessage id="SalePage.loadingData" /></p>;
 
   const panel = isDataAvailable && currentTransaction.id
     ? <SaleDetailsPanel className={detailsClassName} transaction={currentTransaction} />
-    : loadingOrFaildFetching;
+    : loadingOrFailedFetching;
 
   const isPreauthorizedState = currentTransaction.attributes.state ===
     propTypes.TX_STATE_PREAUTHORIZED;
