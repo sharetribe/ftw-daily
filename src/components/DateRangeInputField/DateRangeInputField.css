@@ -7,6 +7,7 @@
 .labels {
   width: 100%;
   display: flex;
+  justify-content: space-between;
 }
 
 .startDateLabel,
@@ -31,6 +32,7 @@
 .inputBorders {
   width: 100%;
   display: flex;
+  justify-content: space-between;
 }
 
 .input {
@@ -58,4 +60,23 @@
 
 .hover {
   border-bottom-color: var(--matterColorDark);
+}
+
+/**
+ * Mobile margins mean that labels, inputs (incl separate borders) get margins,
+ * but calendar popup doesn't.
+ */
+.mobileMargins {
+  width: calc(100% - 48px);
+  margin: 0 24px;
+
+  /* Gutter between inputs (when calendar is not visible) */
+  & .startDateLabel,
+  & .endDateLabel {
+    flex-basis: calc(50% - 9px);
+  }
+
+  & .input {
+    flex-basis: calc(50% - 9px);
+  }
 }

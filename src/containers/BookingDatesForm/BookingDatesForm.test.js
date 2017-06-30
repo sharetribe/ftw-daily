@@ -15,6 +15,7 @@ describe('BookingDatesForm', () => {
         dispatch={noop}
         onSubmit={v => v}
         price={new types.Money(1099, 'USD')}
+        bookingDates={{}}
       />
     );
     expect(tree).toMatchSnapshot();
@@ -27,8 +28,10 @@ describe('BookingDatesForm', () => {
         dispatch={noop}
         onSubmit={v => v}
         price={new types.Money(1099, 'USD')}
-        bookingStart={new Date(Date.UTC(2017, 3, 14))}
-        bookingEnd={new Date(Date.UTC(2017, 3, 16))}
+        bookingDates={{
+          startDate: new Date(Date.UTC(2017, 3, 14)),
+          endDate: new Date(Date.UTC(2017, 3, 16)),
+        }}
       />
     );
     expect(tree).toMatchSnapshot();

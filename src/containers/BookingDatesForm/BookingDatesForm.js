@@ -3,16 +3,15 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
-import { isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
 import classNames from 'classnames';
 import moment from 'moment';
 import Decimal from 'decimal.js';
 import { types } from '../../util/sdkLoader';
-import { required } from '../../util/validators';
+import { required, bookingDatesRequired } from '../../util/validators';
 import { nightsBetween } from '../../util/dates';
 import { convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import config from '../../config';
-import { Button, BookingBreakdown, DateInputField } from '../../components';
+import { Button, BookingBreakdown, DateRangeInputField } from '../../components';
 
 import css from './BookingDatesForm.css';
 
@@ -50,8 +49,7 @@ export const BookingDatesFormComponent = props => {
   const {
     rootClassName,
     className,
-    bookingStart,
-    bookingEnd,
+    bookingDates,
     form,
     invalid,
     handleSubmit,
@@ -60,6 +58,7 @@ export const BookingDatesFormComponent = props => {
     intl,
   } = props;
 
+  const { startDate, endDate } = bookingDates;
   const classes = classNames(rootClassName || css.root, className);
   const { currency: marketplaceCurrency } = config.currencyConfig;
 
@@ -82,59 +81,45 @@ export const BookingDatesFormComponent = props => {
     );
   }
 
-  const placeholderText = intl.formatMessage({ id: 'BookingDatesForm.placeholder' });
   const bookingStartLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingStartTitle' });
   const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle' });
   const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' });
+  const startDateErrorMessage = intl.formatMessage({ id: 'DateRangeInputField.invalidStartDate' });
+  const endDateErrorMessage = intl.formatMessage({ id: 'DateRangeInputField.invalidEndDate' });
 
-  // A day is outside range if it is between today and booking end date (if end date has been chosen)
-  const isOutsideRangeStart = bookingEnd
-    ? {
-        isOutsideRange: day =>
-          !(isInclusivelyAfterDay(day, moment()) &&
-            isInclusivelyBeforeDay(day, moment(bookingEnd))),
-      }
-    : {};
-
-  // A day is outside range if it is after booking start date (or today if none is chosen)
-  const startOfBookingEndRange = bookingStart
-    ? moment(bookingStart).add(1, 'days')
-    : moment().add(1, 'days');
-  const isOutsideRangeEnd = bookingStart
-    ? { isOutsideRange: day => !isInclusivelyAfterDay(day, startOfBookingEndRange) }
-    : {};
-
-  const hasBookingInfo = bookingStart && bookingEnd;
-  const bookingInfo = breakdown(bookingStart, bookingEnd, unitPrice);
+  const hasBookingInfo = startDate && endDate;
+  const bookingInfo = breakdown(startDate, endDate, unitPrice);
 
   const submitDisabled = submitting || invalid || !hasBookingInfo;
 
+  // Multilocale support can be achieved with formatting like
+  // moment().format('LL');  => e.g. 'June 29, 2017' in en-US, '29. kesäkuuta 2017' in fi-FI.
+  // https://momentjs.com/
+  const dateFormatString = 'ddd, MMMM D';
+
   return (
-    <form className={classes} onSubmit={handleSubmit}>
+    <form className={className} onSubmit={handleSubmit}>
+      <DateRangeInputField
+        className={css.bookingDates}
+        name="bookingDates"
+        startDateId={`${form}.bookingStartDate`}
+        startDateLabel={bookingStartLabel}
+        startDatePlaceholderText={moment().format(dateFormatString)}
+        endDateId={`${form}.bookingEndDate`}
+        endDateLabel={bookingEndLabel}
+        endDatePlaceholderText={moment().add(1, 'days').format(dateFormatString)}
+        format={null}
+        useMobileMargins
+        validate={[
+          required(requiredMessage),
+          bookingDatesRequired(startDateErrorMessage, endDateErrorMessage),
+        ]}
+      />
       {bookingInfo}
-      <DateInputField
-        name="bookingStart"
-        id={`${form}.bookingStart`}
-        label={bookingStartLabel}
-        format={null}
-        placeholder={placeholderText}
-        {...isOutsideRangeStart}
-        validate={[required(requiredMessage)]}
-      />
-      <DateInputField
-        className={css.bookingEnd}
-        name="bookingEnd"
-        id={`${form}.bookingEnd`}
-        label={bookingEndLabel}
-        format={null}
-        placeholder={placeholderText}
-        {...isOutsideRangeEnd}
-        validate={[required(requiredMessage)]}
-      />
       <p className={css.smallPrint}>
         <FormattedMessage id="BookingDatesForm.youWontBeChargedInfo" />
       </p>
-      <Button type="submit" disabled={submitDisabled}>
+      <Button className={css.submitButton} type="submit" disabled={submitDisabled}>
         <FormattedMessage id="BookingDatesForm.requestToBook" />
       </Button>
     </form>
@@ -145,11 +130,9 @@ BookingDatesFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
   price: null,
-  bookingStart: null,
-  bookingEnd: null,
 };
 
-const { string, instanceOf } = PropTypes;
+const { instanceOf, shape, string } = PropTypes;
 
 BookingDatesFormComponent.propTypes = {
   ...formPropTypes,
@@ -159,8 +142,10 @@ BookingDatesFormComponent.propTypes = {
   price: instanceOf(types.Money),
 
   // from formValueSelector
-  bookingStart: instanceOf(Date),
-  bookingEnd: instanceOf(Date),
+  bookingDates: shape({
+    startDate: instanceOf(Date),
+    endDate: instanceOf(Date),
+  }).isRequired,
 
   // from inejctIntl
   intl: intlShape.isRequired,
@@ -174,7 +159,7 @@ const formName = 'BookingDates';
 //
 // See: http://redux-form.com/6.6.1/examples/selectingFormValues/
 const selector = formValueSelector(formName);
-const mapStateToProps = state => selector(state, 'bookingStart', 'bookingEnd');
+const mapStateToProps = state => ({ bookingDates: selector(state, 'bookingDates') || {} });
 
 const BookingDatesForm = compose(
   connect(mapStateToProps),

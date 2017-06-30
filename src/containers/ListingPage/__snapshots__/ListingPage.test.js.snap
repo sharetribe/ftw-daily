@@ -86,6 +86,22 @@ exports[`ListingPage matches snapshot 1`] = `
       onClose={[Function]}
       showAsModalMaxWidth={2500}
       togglePageClassNames={[Function]}>
+      <div>
+        <h1>
+          listing1 title
+        </h1>
+        <div>
+          <span>
+            <FormattedMessage
+              id="ListingPage.hostedBy"
+              values={
+                Object {
+                  "name": "user-1 first name",
+                }
+              } />
+          </span>
+        </div>
+      </div>
       <BookingDatesForm
         onSubmit={[Function]}
         price={

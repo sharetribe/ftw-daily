@@ -3,7 +3,7 @@
 :root {
   --selectionHeight: 36px;
   --hoveredOverlayColor: rgba(255, 255, 255, 0.2);
-  --datepickerDistanceToTop: 271px;
+  --datepickerDistanceToTop: 242px;
 }
 
 .inputRoot {
@@ -14,7 +14,7 @@
     display: block;
   }
   & :global(.DateRangePicker__picker--horizontal) {
-    top: 43px;
+    top: 34px;
     width: 100%;
     min-height: calc(100vh - var(--datepickerDistanceToTop));
     background-color: var(--marketplaceColor);
@@ -36,8 +36,7 @@
   & :global(.DateInput) {
     display: block;
     width: 100%;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 5px 0 2px 0;
   }
   & :global(.DayPicker__week-header) {
     color: var(--matterColorLight);
@@ -163,6 +162,25 @@
   }
   & :global(.DateInput__display-text--has-input) {
     color: var(--matterColor);
+  }
+}
+
+/**
+ * Mobile margins mean that labels, inputs (incl separate borders) get margins,
+ * but calendar popup doesn't.
+ */
+.withMobileMargins {
+  & :global(.DateRangePickerInput) {
+    width: calc(100% - 48px);
+    margin: 0 24px;
+  }
+
+  /* Create gutter between inputs */
+  & :global(.DateInput) {
+    width: calc(100% - 9px);
+  }
+  & :global(.DateInput:first-of-type) {
+    margin-right: 18px;
   }
 }
 

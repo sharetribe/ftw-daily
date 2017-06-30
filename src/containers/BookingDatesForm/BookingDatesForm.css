@@ -1,24 +1,36 @@
 @import '../../marketplace.css';
 
 .root {
+  display: flex;
+  flex-direction: column;
+}
 
+.bookingDates {
+  margin-bottom: 46px;
 }
 
 .receipt {
-  margin-bottom: 24px;
+  margin: 0 24px 24px 24px;
 }
 
 .error {
   color: var(--failColor);
-  margin-top: 0;
+  margin: 0 24px;
   display: inline-block;
 }
 
 .smallPrint {
-  font-size: 12px;
+  @apply --marketplaceTinyFontStyles;
   text-align: center;
+  margin: auto 24px 21px 24px;
+
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
-.bookingEnd {
-  margin-top: 24px;
+.submitButton {
+  margin: 0 24px 48px 24px;
+  width: calc(100% - 48px);
 }
