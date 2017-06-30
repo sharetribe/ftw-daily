@@ -14,7 +14,7 @@
 
 .header {
   display: flex;
-  margin-top: 35px;
+  margin-top: 28px;
 }
 
 .title {
@@ -32,12 +32,17 @@
 
 .avatarWrapper {
   width: var(--avatarSize);
+  margin-top: 7px;
 }
 
 .avatar {
   @apply --marketplaceMediumAvatarFontStyles;
   width: var(--avatarSize);
   height: var(--avatarSize);
+}
+
+.avatar span {
+  margin-bottom: 5px;
 }
 
 .breakdownTitle {
