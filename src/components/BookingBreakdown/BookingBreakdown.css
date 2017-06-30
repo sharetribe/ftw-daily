@@ -12,10 +12,14 @@
 
 .lineItem {
   @apply --marketplaceH4FontStyles;
-  margin: -1px 0 0 0; /* align with baseline */
+
+  /* Since the line items have different font sizes in the label and the
+   value columns, we have to balance the line to align to the
+   baseline. */
+  margin: -1px 0 0 0;
 
   @media (--desktopViewport) {
-    margin: -1px 0 0 0; /* align with baseline */
+    margin: -1px 0 0 0;
   }
 
   display: flex;
