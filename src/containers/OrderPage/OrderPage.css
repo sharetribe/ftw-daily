@@ -1,5 +1,14 @@
-.title {
-  margin: 1rem 1rem 2rem 1rem;
+@import '../../marketplace.css';
+
+.loading {
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.error {
+  margin-left: 24px;
+  margin-right: 24px;
+  color: var(--failColor);
 }
 
 .tabContent {
