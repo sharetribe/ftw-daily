@@ -14,10 +14,9 @@ const breakdown = transaction => {
   const bookingStart = booking.attributes.start;
   const bookingEnd = booking.attributes.end;
   const payinTotal = tx.attributes.payinTotal;
-  const payoutTotal = tx.attributes.payoutTotal;
   const lineItems = tx.attributes.lineItems;
 
-  if (!bookingStart || !bookingEnd || !payinTotal || !payoutTotal || !lineItems) {
+  if (!bookingStart || !bookingEnd || !payinTotal || !lineItems) {
     return null;
   }
   return (
@@ -26,7 +25,6 @@ const breakdown = transaction => {
       bookingStart={bookingStart}
       bookingEnd={bookingEnd}
       payinTotal={payinTotal}
-      payoutTotal={payoutTotal}
       lineItems={lineItems}
       userRole="customer"
     />

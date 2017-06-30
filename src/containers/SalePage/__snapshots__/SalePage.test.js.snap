@@ -9,17 +9,42 @@ exports[`SalePage matches snapshot 1`] = `
       transaction={
         Object {
           "attributes": Object {
-            "commission": Money {
-              "amount": 100,
-              "currency": "USD",
-            },
             "createdAt": 2017-05-01T00:00:00.000Z,
             "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
-            "state": "state/preauthorized",
-            "total": Money {
+            "lineItems": Array [
+              Object {
+                "code": "line-item.purchase/night",
+                "lineTotal": Money {
+                  "amount": 1000,
+                  "currency": "USD",
+                },
+                "quantity": "3",
+                "unitPrice": Money {
+                  "amount": 333.3333333333333,
+                  "currency": "USD",
+                },
+              },
+              Object {
+                "code": "line-item.commission/provider",
+                "lineTotal": Money {
+                  "amount": 100,
+                  "currency": "USD",
+                },
+                "unitPrice": Money {
+                  "amount": 100,
+                  "currency": "USD",
+                },
+              },
+            ],
+            "payinTotal": Money {
               "amount": 1000,
               "currency": "USD",
             },
+            "payoutTotal": Money {
+              "amount": 900,
+              "currency": "USD",
+            },
+            "state": "state/preauthorized",
           },
           "booking": Object {
             "attributes": Object {

@@ -65,6 +65,8 @@ export const BookingDatesFormComponent = props => {
     price: unitPrice,
     submitting,
     intl,
+    startDatePlaceholder,
+    endDatePlaceholder,
   } = props;
 
   const { startDate, endDate } = bookingDates;
@@ -106,6 +108,9 @@ export const BookingDatesFormComponent = props => {
   // https://momentjs.com/
   const dateFormatString = 'ddd, MMMM D';
 
+  const startDatePlaceholderText = startDatePlaceholder || moment().format(dateFormatString);
+  const endDatePlaceholderText = endDatePlaceholder || moment().add(1, 'days').format(dateFormatString)
+
   return (
     <form className={className} onSubmit={handleSubmit}>
       <DateRangeInputField
@@ -113,10 +118,10 @@ export const BookingDatesFormComponent = props => {
         name="bookingDates"
         startDateId={`${form}.bookingStartDate`}
         startDateLabel={bookingStartLabel}
-        startDatePlaceholderText={moment().format(dateFormatString)}
+        startDatePlaceholderText={startDatePlaceholderText}
         endDateId={`${form}.bookingEndDate`}
         endDateLabel={bookingEndLabel}
-        endDatePlaceholderText={moment().add(1, 'days').format(dateFormatString)}
+        endDatePlaceholderText={endDatePlaceholderText}
         format={null}
         useMobileMargins
         validate={[
@@ -139,6 +144,8 @@ BookingDatesFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
   price: null,
+  startDatePlaceholder: null,
+  endDatePlaceholder: null,
 };
 
 const { instanceOf, shape, string } = PropTypes;
@@ -158,6 +165,10 @@ BookingDatesFormComponent.propTypes = {
 
   // from inejctIntl
   intl: intlShape.isRequired,
+
+  // for tests
+  startDatePlaceholder: string,
+  endDatePlaceholder: string,
 };
 
 const formName = 'BookingDates';

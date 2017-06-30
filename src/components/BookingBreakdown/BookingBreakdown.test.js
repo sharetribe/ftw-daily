@@ -1,4 +1,5 @@
 import React from 'react';
+import Decimal from 'decimal.js';
 import { fakeIntl } from '../../util/test-data';
 import { renderDeep } from '../../util/test-helpers';
 import { types } from '../../util/sdkLoader';
@@ -10,8 +11,14 @@ describe('BookingBreakdown', () => {
       <BookingBreakdownComponent
         bookingStart={new Date(Date.UTC(2017, 3, 14))}
         bookingEnd={new Date(Date.UTC(2017, 3, 16))}
-        unitPrice={new types.Money(1000, 'USD')}
-        totalPrice={new types.Money(2000, 'USD')}
+        payinTotal={new types.Money(2000, 'USD')}
+        userRole="customer"
+        lineItems={[{
+          code: "line-item.purchase/night",
+          quantity: new Decimal(2),
+          lineTotal: new types.Money(2000, 'USD'),
+          unitPrice: new types.Money(1000, 'USD'),
+        }]}
         intl={fakeIntl}
       />
     );
@@ -23,8 +30,14 @@ describe('BookingBreakdown', () => {
       <BookingBreakdownComponent
         bookingStart={new Date(Date.UTC(2017, 3, 14))}
         bookingEnd={new Date(Date.UTC(2017, 3, 16))}
-        unitPrice={new types.Money(1000, 'USD')}
-        totalPrice={new types.Money(2000, 'USD')}
+        userRole="customer"
+        payinTotal={new types.Money(2000, 'USD')}
+        lineItems={[{
+          code: "line-item.purchase/night",
+          quantity: new Decimal(2),
+          lineTotal: new types.Money(2000, 'USD'),
+          unitPrice: new types.Money(1000, 'USD'),
+        }]}
         intl={fakeIntl}
       />
     );
@@ -36,9 +49,19 @@ describe('BookingBreakdown', () => {
       <BookingBreakdownComponent
         bookingStart={new Date(Date.UTC(2017, 3, 14))}
         bookingEnd={new Date(Date.UTC(2017, 3, 16))}
-        unitPrice={new types.Money(1000, 'USD')}
-        totalPrice={new types.Money(1800, 'USD')}
         commission={new types.Money(200, 'USD')}
+        payoutTotal={new types.Money(1800, 'USD')}
+        userRole="provider"
+        lineItems={[{
+          code: "line-item.purchase/night",
+          quantity: new Decimal(2),
+          lineTotal: new types.Money(2000, 'USD'),
+          unitPrice: new types.Money(1000, 'USD'),
+        }, {
+          code: "line-item.commission/provider",
+          lineTotal: new types.Money(200, 'USD'),
+          unitPrice: new types.Money(200, 'USD'),
+        }]}
         intl={fakeIntl}
       />
     );

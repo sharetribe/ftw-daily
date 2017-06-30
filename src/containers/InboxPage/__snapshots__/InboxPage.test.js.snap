@@ -50,17 +50,42 @@ exports[`InboxPage matches snapshot 1`] = `
         tx={
           Object {
             "attributes": Object {
-              "commission": Money {
-                "amount": 100,
-                "currency": "USD",
-              },
               "createdAt": 2017-05-01T00:00:00.000Z,
               "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
-              "state": "state/preauthorized",
-              "total": Money {
+              "lineItems": Array [
+                Object {
+                  "code": "line-item.purchase/night",
+                  "lineTotal": Money {
+                    "amount": 1000,
+                    "currency": "USD",
+                  },
+                  "quantity": "1",
+                  "unitPrice": Money {
+                    "amount": 1000,
+                    "currency": "USD",
+                  },
+                },
+                Object {
+                  "code": "line-item.commission/provider",
+                  "lineTotal": Money {
+                    "amount": 100,
+                    "currency": "USD",
+                  },
+                  "unitPrice": Money {
+                    "amount": 100,
+                    "currency": "USD",
+                  },
+                },
+              ],
+              "payinTotal": Money {
                 "amount": 1000,
                 "currency": "USD",
               },
+              "payoutTotal": Money {
+                "amount": 900,
+                "currency": "USD",
+              },
+              "state": "state/preauthorized",
             },
             "booking": null,
             "customer": null,
@@ -102,17 +127,42 @@ exports[`InboxPage matches snapshot 1`] = `
         tx={
           Object {
             "attributes": Object {
-              "commission": Money {
-                "amount": 100,
-                "currency": "USD",
-              },
               "createdAt": 2017-05-01T00:00:00.000Z,
               "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
-              "state": "state/preauthorized",
-              "total": Money {
+              "lineItems": Array [
+                Object {
+                  "code": "line-item.purchase/night",
+                  "lineTotal": Money {
+                    "amount": 1000,
+                    "currency": "USD",
+                  },
+                  "quantity": "1",
+                  "unitPrice": Money {
+                    "amount": 1000,
+                    "currency": "USD",
+                  },
+                },
+                Object {
+                  "code": "line-item.commission/provider",
+                  "lineTotal": Money {
+                    "amount": 100,
+                    "currency": "USD",
+                  },
+                  "unitPrice": Money {
+                    "amount": 100,
+                    "currency": "USD",
+                  },
+                },
+              ],
+              "payinTotal": Money {
                 "amount": 1000,
                 "currency": "USD",
               },
+              "payoutTotal": Money {
+                "amount": 900,
+                "currency": "USD",
+              },
+              "state": "state/preauthorized",
             },
             "booking": null,
             "customer": null,
@@ -231,17 +281,42 @@ exports[`InboxPage matches snapshot 3`] = `
         tx={
           Object {
             "attributes": Object {
-              "commission": Money {
-                "amount": 100,
-                "currency": "USD",
-              },
               "createdAt": 2017-05-01T00:00:00.000Z,
               "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
-              "state": "state/preauthorized",
-              "total": Money {
+              "lineItems": Array [
+                Object {
+                  "code": "line-item.purchase/night",
+                  "lineTotal": Money {
+                    "amount": 1000,
+                    "currency": "USD",
+                  },
+                  "quantity": "1",
+                  "unitPrice": Money {
+                    "amount": 1000,
+                    "currency": "USD",
+                  },
+                },
+                Object {
+                  "code": "line-item.commission/provider",
+                  "lineTotal": Money {
+                    "amount": 100,
+                    "currency": "USD",
+                  },
+                  "unitPrice": Money {
+                    "amount": 100,
+                    "currency": "USD",
+                  },
+                },
+              ],
+              "payinTotal": Money {
                 "amount": 1000,
                 "currency": "USD",
               },
+              "payoutTotal": Money {
+                "amount": 900,
+                "currency": "USD",
+              },
+              "state": "state/preauthorized",
             },
             "booking": null,
             "customer": Object {
@@ -283,17 +358,42 @@ exports[`InboxPage matches snapshot 3`] = `
         tx={
           Object {
             "attributes": Object {
-              "commission": Money {
-                "amount": 100,
-                "currency": "USD",
-              },
               "createdAt": 2017-05-01T00:00:00.000Z,
               "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
-              "state": "state/preauthorized",
-              "total": Money {
+              "lineItems": Array [
+                Object {
+                  "code": "line-item.purchase/night",
+                  "lineTotal": Money {
+                    "amount": 1000,
+                    "currency": "USD",
+                  },
+                  "quantity": "1",
+                  "unitPrice": Money {
+                    "amount": 1000,
+                    "currency": "USD",
+                  },
+                },
+                Object {
+                  "code": "line-item.commission/provider",
+                  "lineTotal": Money {
+                    "amount": 100,
+                    "currency": "USD",
+                  },
+                  "unitPrice": Money {
+                    "amount": 100,
+                    "currency": "USD",
+                  },
+                },
+              ],
+              "payinTotal": Money {
                 "amount": 1000,
                 "currency": "USD",
               },
+              "payoutTotal": Money {
+                "amount": 900,
+                "currency": "USD",
+              },
+              "state": "state/preauthorized",
             },
             "booking": null,
             "customer": Object {

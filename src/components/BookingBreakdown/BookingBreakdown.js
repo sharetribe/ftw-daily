@@ -86,6 +86,7 @@ export const BookingBreakdownComponent = props => {
       <span className={css.itemValue}>{formattedCommission}</span>
     </div>
     );
+  }
 
   const totalPriceAsNumber = convertMoneyToNumber(
     userRole === 'customer' ? payinTotal : payoutTotal,
