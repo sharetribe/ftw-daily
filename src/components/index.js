@@ -3,7 +3,7 @@ import AuthorInfo from './AuthorInfo/AuthorInfo';
 import Avatar from './Avatar/Avatar';
 import BirthdayInputField from './BirthdayInputField/BirthdayInputField';
 import BookingBreakdown from './BookingBreakdown/BookingBreakdown';
-import Button, { InlineTextButton } from './Button/Button';
+import Button, { PrimaryButton, SecondaryButton, InlineTextButton } from './Button/Button';
 import CloseIcon from './CloseIcon/CloseIcon';
 import CurrencyInputField from './CurrencyInputField/CurrencyInputField';
 import DateInputField from './DateInputField/DateInputField';
@@ -89,12 +89,14 @@ export {
   OrderDiscussionPanel,
   PageLayout,
   PaginationLinks,
+  PrimaryButton,
   Promised,
   ResponsiveImage,
   RoutesProvider,
   SaleDetailsPanel,
   SearchIcon,
   SearchResultsPanel,
+  SecondaryButton,
   Select,
   SelectField,
   StripeBankAccountTokenInputField,

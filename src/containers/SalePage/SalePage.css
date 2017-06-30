@@ -1,24 +1,22 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .actionButtons {
   display: flex;
   justify-content: space-between;
-  margin: 1rem 1rem 2rem 1rem;
-}
-
-.acceptButton {
+  margin: auto 24px 96px 24px;
+  padding-top: 24px;
 }
 
 .rejectButton {
-  background-color: transparent;
-  color: #333;
-
-  &:enabled:hover {
-    background-color: transparent;
-    text-decoration: underline;
-  }
+  margin-right: 6.5px;
 }
 
-.title {
-  margin: 1rem 1rem 2rem 1rem;
+.acceptButton {
+  margin-left: 6.5px;
 }
 
 .tabContent {
@@ -27,8 +25,4 @@
 
 .tabContentVisible {
   display: block;
-}
-
-.activeTab {
-  font-weight: bold;
 }

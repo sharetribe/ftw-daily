@@ -1,27 +1,50 @@
-.messagesContainer {
+@import '../../marketplace.css';
+
+:root {
+  --avatarSize: 61px;
+}
+
+.root {
+  padding: 0 24px;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.header {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 3rem 2rem;
+  margin-top: 35px;
 }
 
 .title {
-  text-align: center;
+  flex: 1;
+  margin: 0 12px 0 0;
+
+  @media (--desktopViewport) {
+    margin: 0 12px 0 0;
+  }
 }
 
 .message {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-.receipt {
-  margin: 1rem 1rem 2rem 1rem;
+  margin: 24px 0 0 0;
 }
 
 .avatarWrapper {
-  display: block;
-  flex-basis: 48px;
-  width: 48px;
-  height: 48px;
+  width: var(--avatarSize);
+}
+
+.avatar {
+  @apply --marketplaceMediumAvatarFontStyles;
+  width: var(--avatarSize);
+  height: var(--avatarSize);
+}
+
+.breakdownTitle {
+  color: var(--matterColorAnti);
+  margin-top: 47px;
+}
+
+.breakdown {
+
 }

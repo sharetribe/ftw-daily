@@ -48,7 +48,7 @@ exports[`BookingDatesForm matches snapshot with selected dates 1`] = `
   </p>
   <Button
     className={null}
-    disabled={true}
+    disabled={false}
     rootClassName={null}
     type="submit">
     <FormattedMessage

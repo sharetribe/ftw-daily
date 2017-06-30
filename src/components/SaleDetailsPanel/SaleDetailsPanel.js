@@ -48,7 +48,7 @@ const breakdown = transaction => {
 
   return (
     <BookingBreakdown
-      className={css.receipt}
+      className={css.breakdown}
       bookingStart={bookingStart}
       bookingEnd={bookingEnd}
       unitPrice={unitPrice}
@@ -64,28 +64,28 @@ const saleTitle = (saleState, listingLink, customerName) => {
       return (
         <FormattedMessage
           id="SaleDetailsPanel.listingRequestedTitle"
-          values={{ customerName: customerName, title: listingLink }}
+          values={{ customerName, listingLink }}
         />
       );
     case propTypes.TX_STATE_ACCEPTED:
       return (
         <FormattedMessage
           id="SaleDetailsPanel.listingAcceptedTitle"
-          values={{ customerName: customerName, title: listingLink }}
+          values={{ customerName, listingLink }}
         />
       );
     case propTypes.TX_STATE_REJECTED:
       return (
         <FormattedMessage
           id="SaleDetailsPanel.listingRejectedTitle"
-          values={{ customerName: customerName, title: listingLink }}
+          values={{ customerName, listingLink }}
         />
       );
     case propTypes.TX_STATE_DELIVERED:
       return (
         <FormattedMessage
           id="SaleDetailsPanel.listingDeliveredTitle"
-          values={{ customerName: customerName, title: listingLink }}
+          values={{ customerName, listingLink }}
         />
       );
     default:
@@ -94,72 +94,35 @@ const saleTitle = (saleState, listingLink, customerName) => {
 };
 
 const saleMessage = (saleState, customerName, lastTransitionedAt, lastTransition) => {
+  const formattedDate = (
+    <span className={css.nowrap}>
+      <FormattedDate
+        value={lastTransitionedAt}
+        year="numeric"
+        month="short"
+        day="numeric"
+        weekday="long"
+      />
+    </span>
+  );
   const rejectedStatusTranslationId = lastTransition === propTypes.TX_TRANSITION_AUTO_REJECT
     ? 'SaleDetailsPanel.saleAutoRejectedStatus'
     : 'SaleDetailsPanel.saleRejectedStatus';
   switch (saleState) {
     case propTypes.TX_STATE_PREAUTHORIZED:
       return (
-        <div className={css.message}>
-          <FormattedMessage id="SaleDetailsPanel.saleRequestedStatus" values={{ customerName }} />
-        </div>
+        <FormattedMessage id="SaleDetailsPanel.saleRequestedStatus" values={{ customerName }} />
       );
-    case propTypes.TX_STATE_ACCEPTED:
+    case propTypes.TX_STATE_ACCEPTED: {
       return (
-        <div className={css.message}>
-          <FormattedMessage id="SaleDetailsPanel.saleAcceptedStatus" />
-          <FormattedMessage
-            id="SaleDetailsPanel.onDate"
-            values={{
-              formattedDate: (
-                <FormattedDate
-                  value={lastTransitionedAt}
-                  year="numeric"
-                  month="short"
-                  day="numeric"
-                />
-              ),
-            }}
-          />
-        </div>
+        <FormattedMessage id="SaleDetailsPanel.saleAcceptedStatus" values={{ formattedDate }} />
       );
+    }
     case propTypes.TX_STATE_REJECTED:
-      return (
-        <div className={css.message}>
-          <FormattedMessage id={rejectedStatusTranslationId} />
-          <FormattedMessage
-            id="SaleDetailsPanel.onDate"
-            values={{
-              formattedDate: (
-                <FormattedDate
-                  value={lastTransitionedAt}
-                  year="numeric"
-                  month="short"
-                  day="numeric"
-                />
-              ),
-            }}
-          />
-        </div>
-      );
+      return <FormattedMessage id={rejectedStatusTranslationId} values={{ formattedDate }} />;
     case propTypes.TX_STATE_DELIVERED:
       return (
-        <div className={css.message}>
-          <FormattedMessage id="SaleDetailsPanel.saleDeliveredStatus" />
-          <FormattedMessage
-            id="SaleDetailsPanel.onDate"
-            values={{
-              formattedDate: (
-                <FormattedDate
-                  value={lastTransitionedAt}
-                  year="numeric"
-                  month="short"
-                  day="numeric"
-                />
-              ),
-            }}
-          />
-        </div>
+        <FormattedMessage id="SaleDetailsPanel.saleDeliveredStatus" values={{ formattedDate }} />
       );
     default:
       return null;
@@ -207,15 +170,22 @@ const SaleDetailsPanel = props => {
 
   return (
     <div className={classes}>
-      <div className={css.messagesContainer}>
-        <div className={css.avatarWrapper}>
-          <Avatar firstName={customerFirstName} lastName={customerLastName} />
-        </div>
+      <div className={css.header}>
         <h1 className={css.title}>
           {title}
         </h1>
-        {message}
+        <div className={css.avatarWrapper}>
+          <Avatar
+            className={css.avatar}
+            firstName={customerFirstName}
+            lastName={customerLastName}
+          />
+        </div>
       </div>
+      <p className={css.message}>{message}</p>
+      <h3 className={css.breakdownTitle}>
+        <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
+      </h3>
       {bookingInfo}
     </div>
   );

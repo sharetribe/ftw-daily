@@ -27,12 +27,25 @@ export const BookingBreakdownComponent = props => {
 
   const classes = classNames(rootClassName || css.root, className);
 
+  const dateFormatOptions = {
+    weekday: 'short',
+    month: 'long',
+    day: 'numeric',
+  };
   const bookingPeriod = (
     <FormattedMessage
       id="BookingBreakdown.bookingPeriod"
       values={{
-        bookingStart: intl.formatDate(bookingStart),
-        bookingEnd: intl.formatDate(bookingEnd),
+        bookingStart: (
+          <span className={css.nowrap}>
+            {intl.formatDate(bookingStart, dateFormatOptions)}
+          </span>
+        ),
+        bookingEnd: (
+          <span className={css.nowrap}>
+            {intl.formatDate(bookingEnd, dateFormatOptions)}
+          </span>
+        ),
       }}
     />
   );
@@ -55,13 +68,11 @@ export const BookingBreakdownComponent = props => {
     : null;
 
   const commissionInfo = (
-    <div className={css.row}>
-      <div className={css.commissionLabel}>
+    <div className={css.lineItem}>
+      <span className={css.itemLabel}>
         <FormattedMessage id="BookingBreakdown.commission" />
-      </div>
-      <div className={css.commission}>
-        {formattedCommission}
-      </div>
+      </span>
+      <span className={css.itemValue}>{formattedCommission}</span>
     </div>
   );
 
@@ -72,25 +83,21 @@ export const BookingBreakdownComponent = props => {
 
   return (
     <div className={classes}>
-      <div className={css.row}>
-        <div className={css.priceUnitLabel}>
-          <FormattedMessage id="BookingBreakdown.pricePerDay" />
-        </div>
-        <div className={css.priceUnitPrice}>
-          {formattedUnitPrice}
-        </div>
+      <div className={css.lineItem}>
+        <span className={css.itemLabel}>
+          <FormattedMessage id="BookingBreakdown.pricePerNight" />
+        </span>
+        <span className={css.itemValue}>{formattedUnitPrice}</span>
       </div>
-      <div className={css.row}>
-        <div className={css.bookingPeriodLabel}>
+      <div className={css.lineItem}>
+        <span className={css.itemLabel}>
           {bookingPeriod}
-        </div>
-        <div className={css.bookedDatesCount}>
-          {nightCountMessage}
-        </div>
+        </span>
+        <span className={css.itemValue}>{nightCountMessage}</span>
       </div>
       {commission ? commissionInfo : null}
       <hr className={css.totalDivider} />
-      <div className={css.row}>
+      <div className={css.lineItem}>
         <div className={css.totalLabel}>
           <FormattedMessage id="BookingBreakdown.total" />
         </div>

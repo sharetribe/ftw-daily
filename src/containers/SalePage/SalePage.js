@@ -5,7 +5,13 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
-import { Button, NamedRedirect, SaleDetailsPanel, PageLayout } from '../../components';
+import {
+  PrimaryButton,
+  SecondaryButton,
+  NamedRedirect,
+  SaleDetailsPanel,
+  PageLayout,
+} from '../../components';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { acceptSale, rejectSale, loadData } from './SalePage.duck';
 
@@ -44,8 +50,8 @@ export const SalePageComponent = props => {
   });
 
   const loadingOrFaildFetching = fetchSaleError
-    ? <h1 className={css.title}><FormattedMessage id="SalePage.fetchSaleFailed" /></h1>
-    : <h1 className={css.title}><FormattedMessage id="SalePage.loadingData" /></h1>;
+    ? <h1><FormattedMessage id="SalePage.fetchSaleFailed" /></h1>
+    : <h1><FormattedMessage id="SalePage.loadingData" /></h1>;
 
   const panel = isDataAvailable && currentTransaction.id
     ? <SaleDetailsPanel className={detailsClassName} transaction={currentTransaction} />
@@ -55,19 +61,27 @@ export const SalePageComponent = props => {
     propTypes.TX_STATE_PREAUTHORIZED;
   const actionButtons = isDataAvailable && isPreauthorizedState
     ? <div className={css.actionButtons}>
-        <Button className={css.rejectButton} onClick={() => onRejectSale(currentTransaction.id)}>
+        <SecondaryButton
+          className={css.rejectButton}
+          onClick={() => onRejectSale(currentTransaction.id)}
+        >
           <FormattedMessage id="SalePage.rejectButton" />
-        </Button>
-        <Button className={css.acceptButton} onClick={() => onAcceptSale(currentTransaction.id)}>
+        </SecondaryButton>
+        <PrimaryButton
+          className={css.acceptButton}
+          onClick={() => onAcceptSale(currentTransaction.id)}
+        >
           <FormattedMessage id="SalePage.acceptButton" />
-        </Button>
+        </PrimaryButton>
       </div>
     : null;
 
   return (
     <PageLayout title={intl.formatMessage({ id: 'SalePage.title' }, { title: listingTitle })}>
-      {panel}
-      {actionButtons}
+      <div className={css.root}>
+        {panel}
+        {actionButtons}
+      </div>
     </PageLayout>
   );
 };

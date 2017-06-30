@@ -56,7 +56,6 @@ export const BookingDatesFormComponent = props => {
     invalid,
     handleSubmit,
     price: unitPrice,
-    pristine,
     submitting,
     intl,
   } = props;
@@ -108,7 +107,7 @@ export const BookingDatesFormComponent = props => {
   const hasBookingInfo = bookingStart && bookingEnd;
   const bookingInfo = breakdown(bookingStart, bookingEnd, unitPrice);
 
-  const submitDisabled = pristine || submitting || invalid || !hasBookingInfo;
+  const submitDisabled = submitting || invalid || !hasBookingInfo;
 
   return (
     <form className={classes} onSubmit={handleSubmit}>
