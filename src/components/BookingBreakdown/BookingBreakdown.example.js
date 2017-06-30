@@ -10,7 +10,7 @@ export const Checkout = {
     userRole: 'customer',
     lineItems: [
       {
-        code: 'line-item.purchase/night',
+        code: 'line-item/night',
         quantity: new Decimal(2),
         unitPrice: new types.Money(4500, 'USD'),
         lineTotal: new types.Money(9000, 'USD'),
@@ -28,7 +28,7 @@ export const CustomerOrder = {
     userRole: 'customer',
     lineItems: [
       {
-        code: 'line-item.purchase/night',
+        code: 'line-item/night',
         quantity: new Decimal(2),
         unitPrice: new types.Money(4500, 'USD'),
         lineTotal: new types.Money(9000, 'USD'),
@@ -46,13 +46,13 @@ export const ProviderSale = {
     userRole: 'provider',
     lineItems: [
       {
-        code: 'line-item.purchase/night',
+        code: 'line-item/night',
         quantity: new Decimal(2),
         unitPrice: new types.Money(4500, 'USD'),
         lineTotal: new types.Money(9000, 'USD'),
       },
       {
-        code: 'line-item.commission/provider',
+        code: 'line-item/provider-commission',
         unitPrice: new types.Money(-2000, 'USD'),
         lineTotal: new types.Money(-2000, 'USD'),
       },
@@ -69,13 +69,13 @@ export const ProviderSaleZeroCommission = {
     userRole: 'provider',
     lineItems: [
       {
-        code: 'line-item.purchase/night',
+        code: 'line-item/night',
         quantity: new Decimal(2),
         unitPrice: new types.Money(4500, 'USD'),
         lineTotal: new types.Money(9000, 'USD'),
       },
       {
-        code: 'line-item.commission/provider',
+        code: 'line-item/provider-commission',
         unitPrice: new types.Money(0, 'USD'),
         lineTotal: new types.Money(0, 'USD'),
       },
@@ -92,13 +92,13 @@ export const ProviderSaleSingleNight = {
     userRole: 'provider',
     lineItems: [
       {
-        code: 'line-item.purchase/night',
+        code: 'line-item/night',
         quantity: new Decimal(1),
         unitPrice: new types.Money(4500, 'USD'),
         lineTotal: new types.Money(4500, 'USD'),
       },
       {
-        code: 'line-item.commission/provider',
+        code: 'line-item/provider-commission',
         unitPrice: new types.Money(-2000, 'USD'),
         lineTotal: new types.Money(-2000, 'USD'),
       },

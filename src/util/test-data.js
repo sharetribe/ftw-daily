@@ -94,13 +94,13 @@ export const createTransaction = options => {
       payoutTotal: new Money(total.amount - commission.amount, total.currency),
       lineItems: [
         {
-          code: 'line-item.purchase/night',
+          code: 'line-item/night',
           quantity: new Decimal(nightCount),
           unitPrice: new Money(total.amount / nightCount, total.currency),
           lineTotal: total,
         },
         {
-          code: 'line-item.commission/provider',
+          code: 'line-item/provider-commission',
           unitPrice: new Money(commission.amount * -1, commission.currency),
           lineTotal: new Money(commission.amount * -1, commission.currency),
         },

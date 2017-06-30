@@ -12,7 +12,7 @@ exports[`OrderPage matches snapshot 1`] = `
           "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
           "lineItems": Array [
             Object {
-              "code": "line-item.purchase/night",
+              "code": "line-item/night",
               "lineTotal": Money {
                 "amount": 1000,
                 "currency": "USD",
@@ -24,7 +24,7 @@ exports[`OrderPage matches snapshot 1`] = `
               },
             },
             Object {
-              "code": "line-item.commission/provider",
+              "code": "line-item/provider-commission",
               "lineTotal": Money {
                 "amount": -100,
                 "currency": "USD",

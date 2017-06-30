@@ -15,7 +15,7 @@ describe('BookingBreakdown', () => {
         userRole="customer"
         lineItems={[
           {
-            code: 'line-item.purchase/night',
+            code: 'line-item/night',
             quantity: new Decimal(2),
             lineTotal: new types.Money(2000, 'USD'),
             unitPrice: new types.Money(1000, 'USD'),
@@ -36,7 +36,7 @@ describe('BookingBreakdown', () => {
         payinTotal={new types.Money(2000, 'USD')}
         lineItems={[
           {
-            code: 'line-item.purchase/night',
+            code: 'line-item/night',
             quantity: new Decimal(2),
             lineTotal: new types.Money(2000, 'USD'),
             unitPrice: new types.Money(1000, 'USD'),
@@ -58,13 +58,13 @@ describe('BookingBreakdown', () => {
         userRole="provider"
         lineItems={[
           {
-            code: 'line-item.purchase/night',
+            code: 'line-item/night',
             quantity: new Decimal(2),
             lineTotal: new types.Money(2000, 'USD'),
             unitPrice: new types.Money(1000, 'USD'),
           },
           {
-            code: 'line-item.commission/provider',
+            code: 'line-item/provider-commission',
             lineTotal: new types.Money(-200, 'USD'),
             unitPrice: new types.Money(-200, 'USD'),
           },

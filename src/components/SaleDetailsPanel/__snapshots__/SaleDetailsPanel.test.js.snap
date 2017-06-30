@@ -49,7 +49,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
     lineItems={
       Array [
         Object {
-          "code": "line-item.purchase/night",
+          "code": "line-item/night",
           "lineTotal": Money {
             "amount": 16500,
             "currency": "USD",
@@ -61,7 +61,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
           },
         },
         Object {
-          "code": "line-item.commission/provider",
+          "code": "line-item/provider-commission",
           "lineTotal": Money {
             "amount": -1000,
             "currency": "USD",

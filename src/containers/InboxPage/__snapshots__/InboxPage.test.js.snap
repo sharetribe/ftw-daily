@@ -54,7 +54,7 @@ exports[`InboxPage matches snapshot 1`] = `
               "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item.purchase/night",
+                  "code": "line-item/night",
                   "lineTotal": Money {
                     "amount": 1000,
                     "currency": "USD",
@@ -66,7 +66,7 @@ exports[`InboxPage matches snapshot 1`] = `
                   },
                 },
                 Object {
-                  "code": "line-item.commission/provider",
+                  "code": "line-item/provider-commission",
                   "lineTotal": Money {
                     "amount": -100,
                     "currency": "USD",
@@ -131,7 +131,7 @@ exports[`InboxPage matches snapshot 1`] = `
               "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item.purchase/night",
+                  "code": "line-item/night",
                   "lineTotal": Money {
                     "amount": 1000,
                     "currency": "USD",
@@ -143,7 +143,7 @@ exports[`InboxPage matches snapshot 1`] = `
                   },
                 },
                 Object {
-                  "code": "line-item.commission/provider",
+                  "code": "line-item/provider-commission",
                   "lineTotal": Money {
                     "amount": -100,
                     "currency": "USD",
@@ -285,7 +285,7 @@ exports[`InboxPage matches snapshot 3`] = `
               "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item.purchase/night",
+                  "code": "line-item/night",
                   "lineTotal": Money {
                     "amount": 1000,
                     "currency": "USD",
@@ -297,7 +297,7 @@ exports[`InboxPage matches snapshot 3`] = `
                   },
                 },
                 Object {
-                  "code": "line-item.commission/provider",
+                  "code": "line-item/provider-commission",
                   "lineTotal": Money {
                     "amount": -100,
                     "currency": "USD",
@@ -362,7 +362,7 @@ exports[`InboxPage matches snapshot 3`] = `
               "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item.purchase/night",
+                  "code": "line-item/night",
                   "lineTotal": Money {
                     "amount": 1000,
                     "currency": "USD",
@@ -374,7 +374,7 @@ exports[`InboxPage matches snapshot 3`] = `
                   },
                 },
                 Object {
-                  "code": "line-item.commission/provider",
+                  "code": "line-item/provider-commission",
                   "lineTotal": Money {
                     "amount": -100,
                     "currency": "USD",

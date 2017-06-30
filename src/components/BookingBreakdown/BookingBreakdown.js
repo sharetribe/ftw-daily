@@ -58,8 +58,8 @@ export const BookingBreakdownComponent = props => {
     />
   );
 
-  const nightPurchase = lineItems.find(item => item.code === 'line-item.purchase/night');
-  const providerCommission = lineItems.find(item => item.code === 'line-item.commission/provider');
+  const nightPurchase = lineItems.find(item => item.code === 'line-item/night');
+  const providerCommission = lineItems.find(item => item.code === 'line-item/provider-commission');
 
   const nightCount = nightPurchase.quantity.toFixed();
   const nightCountMessage = (
