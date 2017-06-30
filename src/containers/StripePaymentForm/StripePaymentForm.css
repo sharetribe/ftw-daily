@@ -1,10 +1,46 @@
+@import '../../marketplace.css';
+
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin: 0 0 0px 0;
+}
+
 .card {
-  border: 1px solid #979797;
-  padding: 15px 18px 0 18px;
-  height: 50px;
-  width: 100%;
+  @apply --marketplaceInputStyles;
+
+  /* Layout */
+  padding: 9px 0 6px 0;
+  height: 36px;
+
+  /* Border */
+  border-bottom-color: var(--attentionColor);
+}
+
+.cardSuccess {
+  border-bottom-color: var(--successColor);
+}
+
+.cardError {
+  border-bottom-color: var(--failColor);
+}
+
+
+.submitContainer {
+  margin-top: auto;
+}
+
+.paymentInfo {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorAnti);
+  text-align: center;
+  padding: 0 42px;
+
 }
 
 .submitButton {
-  margin-top: 1rem;
+  margin-top: 24px;
 }

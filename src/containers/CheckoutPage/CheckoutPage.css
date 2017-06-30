@@ -1,21 +1,75 @@
+@import '../../marketplace.css';
+
+.heading {
+  margin-top: 29px;
+  margin-bottom: 35px;
+  padding: 0 24px;
+}
+
 .title {
-  margin: 1rem;
+  /* Font */
+  @apply --marketplaceH1FontStyles;
+  color: var(--matterColor);
+
+  /* Layout */
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 7px;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 7px;
+  }
 }
 
-.authorContainer {
-  padding: 1rem;
+.author {
+  width: 100%;
+  @apply --marketplaceH4FontStyles;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
-.receipt {
-  margin: 1rem 1rem 2rem 1rem;
+.priceBreakdownContainer {
+  padding: 0 24px;
+  margin-bottom: 40px;
 }
 
-.payment {
-  padding: 0 1rem;
+.priceBreakdownTitle {
+  /* Font */
+  color: var(--matterColorAnti);
+
+  margin-top: 0;
+  margin-bottom: 14px;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 14px;
+  }
+}
+
+.paymentContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+  margin-bottom: 35px;
 }
 
 .paymentTitle {
-  font-size: 1rem;
-  font-weight: bold;
-  margin: 1rem 0 0 0;
+  /* Font */
+  color: var(--matterColorAnti);
+
+  margin-top: 0;
+  margin-bottom: 14px;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 14px;
+  }
+}
+
+.orderError {
+  /* Font */
+  color: var(--failColor);
+}
+
+.paymentForm {
+  flex-grow: 1;
 }
