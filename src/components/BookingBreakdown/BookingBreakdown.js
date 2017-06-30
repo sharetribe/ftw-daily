@@ -27,6 +27,14 @@ export const BookingBreakdownComponent = props => {
 
   const classes = classNames(rootClassName || css.root, className);
 
+  if (userRole === "customer" && !payinTotal) {
+    throw new Error('payinTotal is required for customer breakdown');
+  }
+
+  if (userRole === "provider" && !payoutTotal) {
+    throw new Error('payoutTotal is required for provider breakdown');
+  }
+
   const dateFormatOptions = {
     weekday: 'short',
     month: 'long',
