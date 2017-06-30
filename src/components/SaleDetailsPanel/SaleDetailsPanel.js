@@ -111,28 +111,18 @@ const saleMessage = (saleState, customerName, lastTransitionedAt, lastTransition
   switch (saleState) {
     case propTypes.TX_STATE_PREAUTHORIZED:
       return (
-        <div className={css.message}>
-          <FormattedMessage id="SaleDetailsPanel.saleRequestedStatus" values={{ customerName }} />
-        </div>
+        <FormattedMessage id="SaleDetailsPanel.saleRequestedStatus" values={{ customerName }} />
       );
     case propTypes.TX_STATE_ACCEPTED: {
       return (
-        <div className={css.message}>
-          <FormattedMessage id="SaleDetailsPanel.saleAcceptedStatus" values={{ formattedDate }} />
-        </div>
+        <FormattedMessage id="SaleDetailsPanel.saleAcceptedStatus" values={{ formattedDate }} />
       );
     }
     case propTypes.TX_STATE_REJECTED:
-      return (
-        <div className={css.message}>
-          <FormattedMessage id={rejectedStatusTranslationId} values={{ formattedDate }} />
-        </div>
-      );
+      return <FormattedMessage id={rejectedStatusTranslationId} values={{ formattedDate }} />;
     case propTypes.TX_STATE_DELIVERED:
       return (
-        <div className={css.message}>
-          <FormattedMessage id="SaleDetailsPanel.saleDeliveredStatus" values={{ formattedDate }} />
-        </div>
+        <FormattedMessage id="SaleDetailsPanel.saleDeliveredStatus" values={{ formattedDate }} />
       );
     default:
       return null;
@@ -180,15 +170,19 @@ const SaleDetailsPanel = props => {
 
   return (
     <div className={classes}>
-      <div className={css.messagesContainer}>
-        <div className={css.avatarWrapper}>
-          <Avatar firstName={customerFirstName} lastName={customerLastName} />
-        </div>
+      <div className={css.header}>
         <h1 className={css.title}>
           {title}
         </h1>
-        {message}
+        <div className={css.avatarWrapper}>
+          <Avatar
+            className={css.avatar}
+            firstName={customerFirstName}
+            lastName={customerLastName}
+          />
+        </div>
       </div>
+      <p>{message}</p>
       {bookingInfo}
     </div>
   );

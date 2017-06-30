@@ -1,18 +1,28 @@
-.root {
-  padding: 24px;
+@import '../../marketplace.css';
+
+:root {
+  --avatarSize: 61px;
 }
 
-.messagesContainer {
-  display: flex;
-  flex-direction: column;
+.root {
+  padding: 24px;
 }
 
 .nowrap {
   white-space: nowrap;
 }
 
-.title {
+.header {
+  display: flex;
+}
 
+.title {
+  flex: 1;
+  margin: 0 12px 0 0;
+
+  @media (--desktopViewport) {
+    margin: 0 12px 0 0;
+  }
 }
 
 .message {
@@ -25,8 +35,10 @@
 }
 
 .avatarWrapper {
-  display: block;
-  flex-basis: 48px;
-  width: 48px;
-  height: 48px;
+  width: var(--avatarSize);
+}
+
+.avatar {
+  width: var(--avatarSize);
+  height: var(--avatarSize);
 }
