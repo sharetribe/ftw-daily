@@ -69,20 +69,23 @@ export const BookingBreakdownComponent = props => {
   const formattedUnitPrice = intl.formatNumber(unitPriceAsNumber, currencyConfig);
 
   // If commission is passed it will be shown as a fee already reduces from the total price
-  const commission = providerCommission.lineTotal;
-  const commissionAsNumber = commission ? convertMoneyToNumber(commission, subUnitDivisor) : 0;
-  const formattedCommission = commission
-    ? intl.formatNumber(new Decimal(commissionAsNumber).negated().toNumber(), currencyConfig)
-    : null;
+  let commissionInfo = null;
 
-  const commissionInfo = (
-    <div className={css.lineItem}>
+  if (userRole === "provider") {
+    const commission = providerCommission.lineTotal;
+    const commissionAsNumber = commission ? convertMoneyToNumber(commission, subUnitDivisor) : 0;
+    const formattedCommission = commission
+                              ? intl.formatNumber(new Decimal(commissionAsNumber).negated().toNumber(), currencyConfig)
+                              : null;
+
+    commissionInfo = (
+      <div className={css.lineItem}>
       <span className={css.itemLabel}>
         <FormattedMessage id="BookingBreakdown.commission" />
       </span>
       <span className={css.itemValue}>{formattedCommission}</span>
     </div>
-  );
+    );
 
   const totalPriceAsNumber = convertMoneyToNumber(
     userRole === 'customer' ? payinTotal : payoutTotal,
@@ -106,7 +109,7 @@ export const BookingBreakdownComponent = props => {
         </span>
         <span className={css.itemValue}>{nightCountMessage}</span>
       </div>
-      {userRole === 'provider' ? commissionInfo : null}
+      {commissionInfo}
       <hr className={css.totalDivider} />
       <div className={css.lineItem}>
         <div className={css.totalLabel}>
@@ -123,7 +126,8 @@ export const BookingBreakdownComponent = props => {
 BookingBreakdownComponent.defaultProps = {
   rootClassName: null,
   className: null,
-  commission: null,
+  payinTotal: null,
+  payoutTotal: null,
 };
 
 const { string, instanceOf, arrayOf, oneOf, shape } = PropTypes;
@@ -143,8 +147,8 @@ BookingBreakdownComponent.propTypes = {
   bookingEnd: instanceOf(Date).isRequired,
   lineItems: arrayOf(lineItem).isRequired,
   userRole: oneOf(['customer', 'provider']).isRequired,
-  payinTotal: propTypes.money.isRequired,
-  payoutTotal: propTypes.money.isRequired,
+  payinTotal: propTypes.money, // required if userRole === customer
+  payoutTotal: propTypes.money, // required if userRole === provider
 
   // from injectIntl
   intl: intlShape.isRequired,

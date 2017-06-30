@@ -18,10 +18,9 @@ import css from './BookingDatesForm.css';
 // TODO: This is a temporary function to calculate the booking
 // price. This should be removed when the API supports dry-runs and we
 // can take the total price from the transaction itself.
-const estimatedTotalPrice = (startDate, endDate, unitPrice) => {
+const estimatedTotalPrice = (unitPrice, nightCount) => {
   const { subUnitDivisor } = config.currencyConfig;
   const numericPrice = convertMoneyToNumber(unitPrice, subUnitDivisor);
-  const nightCount = nightsBetween(startDate, endDate);
   const numericTotalPrice = new Decimal(numericPrice).times(nightCount).toNumber();
   return new types.Money(
     convertUnitToSubUnit(numericTotalPrice, subUnitDivisor),
@@ -33,14 +32,24 @@ const breakdown = (bookingStart, bookingEnd, unitPrice) => {
   if (!bookingStart || !bookingEnd || !unitPrice) {
     return null;
   }
-  const totalPrice = estimatedTotalPrice(bookingStart, bookingEnd, unitPrice);
+  const nightCount = nightsBetween(bookingStart, bookingEnd);
+  const totalPrice = estimatedTotalPrice(unitPrice, nightCount);
+  const lineItems = [{
+    code: "line-item.purchase/night",
+    unitPrice: unitPrice,
+    quantity: new Decimal(nightCount),
+    lineTotal: totalPrice,
+  }];
+
   return (
     <BookingBreakdown
       className={css.receipt}
       bookingStart={bookingStart}
       bookingEnd={bookingEnd}
       unitPrice={unitPrice}
-      totalPrice={totalPrice}
+      userRole="customer"
+      payinTotal={totalPrice}
+      lineItems={lineItems}
     />
   );
 };
