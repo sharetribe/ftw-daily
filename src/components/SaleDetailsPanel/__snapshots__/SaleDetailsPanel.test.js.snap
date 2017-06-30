@@ -15,7 +15,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
         values={
           Object {
             "customerName": "customer1 first name",
-            "title": <withFlattenedRoutes(withRouter(NamedLink))
+            "listingLink": <withFlattenedRoutes(withRouter(NamedLink))
               name="ListingPage"
               params={
                   Object {
