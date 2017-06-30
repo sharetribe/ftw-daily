@@ -158,7 +158,12 @@ class StripePaymentForm extends Component {
   }
 }
 
-StripePaymentForm.defaultProps = { className: null, rootClassName: null, disableSubmit: false, paymentInfo: null };
+StripePaymentForm.defaultProps = {
+  className: null,
+  rootClassName: null,
+  disableSubmit: false,
+  paymentInfo: null,
+};
 
 const { bool, func, string } = PropTypes;
 
