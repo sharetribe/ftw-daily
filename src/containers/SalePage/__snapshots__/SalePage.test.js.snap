@@ -1,102 +1,100 @@
 exports[`SalePage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   title="SalePage.title">
-  <SaleDetailsPanel
-    className="undefined"
-    lastTransition={null}
-    rootClassName={null}
-    transaction={
-      Object {
-        "attributes": Object {
-          "commission": Money {
-            "amount": 100,
-            "currency": "USD",
-          },
-          "createdAt": 2017-05-01T00:00:00.000Z,
-          "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
-          "state": "state/preauthorized",
-          "total": Money {
-            "amount": 1000,
-            "currency": "USD",
-          },
-        },
-        "booking": Object {
+  <div>
+    <SaleDetailsPanel
+      className="undefined"
+      lastTransition={null}
+      rootClassName={null}
+      transaction={
+        Object {
           "attributes": Object {
-            "end": 2017-06-13T00:00:00.000Z,
-            "start": 2017-06-10T00:00:00.000Z,
-          },
-          "id": UUID {
-            "uuid": "booking1",
-          },
-          "type": "booking",
-        },
-        "customer": Object {
-          "attributes": Object {
-            "profile": Object {
-              "firstName": "customer1 first name",
-              "lastName": "customer1 last name",
-            },
-          },
-          "id": UUID {
-            "uuid": "customer1",
-          },
-          "type": "user",
-        },
-        "id": UUID {
-          "uuid": "tx-sale-1",
-        },
-        "listing": Object {
-          "attributes": Object {
-            "address": "listing1 address",
-            "description": "listing1 description",
-            "geolocation": LatLng {
-              "lat": 40,
-              "lng": 60,
-            },
-            "price": Money {
-              "amount": 5500,
+            "commission": Money {
+              "amount": 100,
               "currency": "USD",
             },
-            "title": "listing1 title",
-          },
-          "author": null,
-          "id": UUID {
-            "uuid": "listing1",
-          },
-          "type": "listing",
-        },
-        "provider": Object {
-          "attributes": Object {
-            "profile": Object {
-              "firstName": "provider1 first name",
-              "lastName": "provider1 last name",
+            "createdAt": 2017-05-01T00:00:00.000Z,
+            "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
+            "state": "state/preauthorized",
+            "total": Money {
+              "amount": 1000,
+              "currency": "USD",
             },
           },
-          "id": UUID {
-            "uuid": "provider1",
+          "booking": Object {
+            "attributes": Object {
+              "end": 2017-06-13T00:00:00.000Z,
+              "start": 2017-06-10T00:00:00.000Z,
+            },
+            "id": UUID {
+              "uuid": "booking1",
+            },
+            "type": "booking",
           },
-          "type": "user",
-        },
-        "type": "transaction",
-      }
-    } />
-  <div>
-    <Button
-      className={null}
-      onClick={[Function]}
-      rootClassName={null}>
-      <FormattedMessage
-        id="SalePage.rejectButton"
-        values={Object {}} />
-    </Button>
-    <Button
-      className={null}
-      onClick={[Function]}
-      rootClassName={null}>
-      <FormattedMessage
-        id="SalePage.acceptButton"
-        values={Object {}} />
-    </Button>
+          "customer": Object {
+            "attributes": Object {
+              "profile": Object {
+                "firstName": "customer1 first name",
+                "lastName": "customer1 last name",
+              },
+            },
+            "id": UUID {
+              "uuid": "customer1",
+            },
+            "type": "user",
+          },
+          "id": UUID {
+            "uuid": "tx-sale-1",
+          },
+          "listing": Object {
+            "attributes": Object {
+              "address": "listing1 address",
+              "description": "listing1 description",
+              "geolocation": LatLng {
+                "lat": 40,
+                "lng": 60,
+              },
+              "price": Money {
+                "amount": 5500,
+                "currency": "USD",
+              },
+              "title": "listing1 title",
+            },
+            "author": null,
+            "id": UUID {
+              "uuid": "listing1",
+            },
+            "type": "listing",
+          },
+          "provider": Object {
+            "attributes": Object {
+              "profile": Object {
+                "firstName": "provider1 first name",
+                "lastName": "provider1 last name",
+              },
+            },
+            "id": UUID {
+              "uuid": "provider1",
+            },
+            "type": "user",
+          },
+          "type": "transaction",
+        }
+      } />
+    <div>
+      <Component
+        onClick={[Function]}>
+        <FormattedMessage
+          id="SalePage.rejectButton"
+          values={Object {}} />
+      </Component>
+      <Component
+        onClick={[Function]}>
+        <FormattedMessage
+          id="SalePage.acceptButton"
+          values={Object {}} />
+      </Component>
+    </div>
   </div>
 </Connect(withRouter(PageLayout))>
 `;
