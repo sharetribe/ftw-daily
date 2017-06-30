@@ -10,7 +10,7 @@
   "AuthorInfo.host": "Hosted by {firstName} {lastName}",
   "BookingBreakdown.bookingPeriod": "{bookingStart} - {bookingEnd}",
   "BookingBreakdown.commission": "Saunatime fee:",
-  "BookingBreakdown.nightCount": "* {count, number} {count, plural, one {night} other {nights}}",
+  "BookingBreakdown.nightCount": "&times; {count, number} {count, plural, one {night} other {nights}}",
   "BookingBreakdown.pricePerNight": "Price per night",
   "BookingBreakdown.total": "Total price",
   "BookingDatesForm.bookingEndTitle": "End date",

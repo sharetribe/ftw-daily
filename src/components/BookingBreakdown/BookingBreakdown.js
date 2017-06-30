@@ -4,7 +4,7 @@
  */
 import _ from 'lodash';
 import React, { PropTypes } from 'react';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, intlShape, injectIntl } from 'react-intl';
 import Decimal from 'decimal.js';
 import classNames from 'classnames';
 import config from '../../config';
@@ -59,7 +59,7 @@ export const BookingBreakdownComponent = props => {
 
   const nightCount = nightPurchase.quantity.toFixed();
   const nightCountMessage = (
-    <FormattedMessage id="BookingBreakdown.nightCount" values={{ count: nightCount }} />
+    <FormattedHTMLMessage id="BookingBreakdown.nightCount" values={{ count: nightCount }} />
   );
 
   const currencyConfig = config.currencyConfig;
