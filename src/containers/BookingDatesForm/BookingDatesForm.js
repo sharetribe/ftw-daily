@@ -111,7 +111,8 @@ export const BookingDatesFormComponent = props => {
   const dateFormatString = 'ddd, MMMM D';
 
   const startDatePlaceholderText = startDatePlaceholder || moment().format(dateFormatString);
-  const endDatePlaceholderText = endDatePlaceholder || moment().add(1, 'days').format(dateFormatString)
+  const endDatePlaceholderText = endDatePlaceholder ||
+    moment().add(1, 'days').format(dateFormatString);
 
   return (
     <form className={className} onSubmit={handleSubmit}>
