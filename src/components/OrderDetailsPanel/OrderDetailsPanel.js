@@ -10,14 +10,13 @@ import css from './OrderDetailsPanel.css';
 
 const breakdown = transaction => {
   const tx = ensureTransaction(transaction);
-  const listing = ensureListing(tx.listing);
   const booking = ensureBooking(tx.booking);
   const bookingStart = booking.attributes.start;
   const bookingEnd = booking.attributes.end;
-  const unitPrice = listing.attributes.price;
-  const totalPrice = tx.attributes.total;
+  const payinTotal = tx.attributes.payinTotal;
+  const lineItems = tx.attributes.lineItems;
 
-  if (!bookingStart || !bookingEnd || !unitPrice || !totalPrice) {
+  if (!bookingStart || !bookingEnd || !payinTotal || !lineItems) {
     return null;
   }
   return (
@@ -25,8 +24,9 @@ const breakdown = transaction => {
       className={css.receipt}
       bookingStart={bookingStart}
       bookingEnd={bookingEnd}
-      unitPrice={unitPrice}
-      totalPrice={totalPrice}
+      payinTotal={payinTotal}
+      lineItems={lineItems}
+      userRole="customer"
     />
   );
 };

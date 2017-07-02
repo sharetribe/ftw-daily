@@ -1,4 +1,6 @@
+import Decimal from 'decimal.js';
 import { types } from './sdkLoader';
+import { nightsBetween } from '../util/dates';
 
 const { UUID, LatLng, Money } = types;
 
@@ -80,15 +82,29 @@ export const createTransaction = options => {
     provider = null,
     lastTransitionedAt = new Date(Date.UTC(2017, 5, 1)),
   } = options;
+  const nightCount = booking ? nightsBetween(booking.attributes.start, booking.attributes.end) : 1;
   return {
     id: new UUID(id),
     type: 'transaction',
     attributes: {
-      commission,
       createdAt: new Date(Date.UTC(2017, 4, 1)),
       lastTransitionedAt,
       state,
-      total,
+      payinTotal: total,
+      payoutTotal: new Money(total.amount - commission.amount, total.currency),
+      lineItems: [
+        {
+          code: 'line-item/night',
+          quantity: new Decimal(nightCount),
+          unitPrice: new Money(total.amount / nightCount, total.currency),
+          lineTotal: total,
+        },
+        {
+          code: 'line-item/provider-commission',
+          unitPrice: new Money(commission.amount * -1, commission.currency),
+          lineTotal: new Money(commission.amount * -1, commission.currency),
+        },
+      ],
     },
     booking,
     listing,

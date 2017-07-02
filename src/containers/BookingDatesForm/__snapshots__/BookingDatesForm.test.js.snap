@@ -5,12 +5,12 @@ exports[`BookingDatesForm matches snapshot with selected dates 1`] = `
   <DateRangeInputField
     endDateId="fakeTestForm.bookingEndDate"
     endDateLabel="BookingDatesForm.bookingEndTitle"
-    endDatePlaceholderText="Sat, July 1"
+    endDatePlaceholderText="tomorrow"
     format={null}
     name="bookingDates"
     startDateId="fakeTestForm.bookingStartDate"
     startDateLabel="BookingDatesForm.bookingStartTitle"
-    startDatePlaceholderText="Fri, June 30"
+    startDatePlaceholderText="today"
     useMobileMargins={true}
     validate={
       Array [
@@ -21,7 +21,23 @@ exports[`BookingDatesForm matches snapshot with selected dates 1`] = `
   <BookingBreakdown
     bookingEnd={2017-04-16T00:00:00.000Z}
     bookingStart={2017-04-14T00:00:00.000Z}
-    totalPrice={
+    lineItems={
+      Array [
+        Object {
+          "code": "line-item.purchase/night",
+          "lineTotal": Money {
+            "amount": 2198,
+            "currency": "USD",
+          },
+          "quantity": "2",
+          "unitPrice": Money {
+            "amount": 1099,
+            "currency": "USD",
+          },
+        },
+      ]
+    }
+    payinTotal={
       Money {
         "amount": 2198,
         "currency": "USD",
@@ -32,7 +48,8 @@ exports[`BookingDatesForm matches snapshot with selected dates 1`] = `
         "amount": 1099,
         "currency": "USD",
       }
-    } />
+    }
+    userRole="customer" />
   <p>
     <FormattedMessage
       id="BookingDatesForm.youWontBeChargedInfo"
@@ -57,12 +74,12 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
   <DateRangeInputField
     endDateId="fakeTestForm.bookingEndDate"
     endDateLabel="BookingDatesForm.bookingEndTitle"
-    endDatePlaceholderText="Sat, July 1"
+    endDatePlaceholderText="tomorrow"
     format={null}
     name="bookingDates"
     startDateId="fakeTestForm.bookingStartDate"
     startDateLabel="BookingDatesForm.bookingStartTitle"
-    startDatePlaceholderText="Fri, June 30"
+    startDatePlaceholderText="today"
     useMobileMargins={true}
     validate={
       Array [

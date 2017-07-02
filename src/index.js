@@ -13,6 +13,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Decimal from 'decimal.js';
 import { createInstance, types } from './util/sdkLoader';
 import { ClientApp, renderApp } from './app';
 import configureStore from './store';
@@ -24,6 +25,8 @@ import { fetchCurrentUser } from './ducks/user.duck';
 import routeConfiguration from './routesConfiguration';
 
 import './marketplace.css';
+
+const { BigDecimal } = types;
 
 const render = store => {
   // If the server already loaded the auth information, render the app
@@ -54,7 +57,18 @@ if (typeof window !== 'undefined') {
   // eslint-disable-next-line no-underscore-dangle
   const preloadedState = window.__PRELOADED_STATE__ || '{}';
   const initialState = JSON.parse(preloadedState, types.reviver);
-  const sdk = createInstance({ clientId: config.sdk.clientId, baseUrl: config.sdk.baseUrl });
+  const sdk = createInstance({
+    clientId: config.sdk.clientId,
+    baseUrl: config.sdk.baseUrl,
+    typeHandlers: [
+      {
+        type: BigDecimal,
+        customType: Decimal,
+        writer: v => new BigDecimal(v.toString()),
+        reader: v => new Decimal(v.value),
+      },
+    ],
+  });
   const store = configureStore(sdk, initialState);
 
   setupStripe();

@@ -24,6 +24,7 @@ const enforceSsl = require('express-enforces-ssl');
 const path = require('path');
 const qs = require('qs');
 const sharetribeSdk = require('sharetribe-sdk');
+const Decimal = require('decimal.js');
 const auth = require('./auth');
 const renderer = require('./renderer');
 const dataLoader = require('./dataLoader');
@@ -89,6 +90,14 @@ app.get('*', (req, res) => {
       req,
       res,
     }),
+    typeHandlers: [
+      {
+        type: sharetribeSdk.types.BigDecimal,
+        customType: Decimal,
+        writer: v => new sharetribeSdk.types.BigDecimal(v.toString()),
+        reader: v => new Decimal(v.value),
+      },
+    ],
   });
 
   dataLoader
