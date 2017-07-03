@@ -35,3 +35,9 @@ Avatar.propTypes = {
 };
 
 export default Avatar;
+
+export const AvatarMedium = props => <Avatar rootClassName={css.mediumAvatar} {...props} />;
+AvatarMedium.displayName = 'AvatarMedium';
+
+export const AvatarLarge = props => <Avatar rootClassName={css.largeAvatar} {...props} />;
+AvatarLarge.displayName = 'AvatarLarge';

@@ -1,5 +1,5 @@
 import AddImages from './AddImages/AddImages';
-import Avatar from './Avatar/Avatar';
+import Avatar, { AvatarMedium, AvatarLarge } from './Avatar/Avatar';
 import BirthdayInputField from './BirthdayInputField/BirthdayInputField';
 import BookingBreakdown from './BookingBreakdown/BookingBreakdown';
 import Button, { PrimaryButton, SecondaryButton, InlineTextButton } from './Button/Button';
@@ -53,6 +53,8 @@ import ValidationError from './ValidationError/ValidationError';
 export {
   AddImages,
   Avatar,
+  AvatarMedium,
+  AvatarLarge,
   BirthdayInputField,
   BookingBreakdown,
   Button,
