@@ -1,5 +1,4 @@
 import AddImages from './AddImages/AddImages';
-import AuthorInfo from './AuthorInfo/AuthorInfo';
 import Avatar from './Avatar/Avatar';
 import BirthdayInputField from './BirthdayInputField/BirthdayInputField';
 import BookingBreakdown from './BookingBreakdown/BookingBreakdown';
@@ -53,7 +52,6 @@ import ValidationError from './ValidationError/ValidationError';
 
 export {
   AddImages,
-  AuthorInfo,
   Avatar,
   BirthdayInputField,
   BookingBreakdown,
