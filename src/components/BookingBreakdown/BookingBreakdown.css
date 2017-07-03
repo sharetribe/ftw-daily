@@ -1,7 +1,6 @@
 @import '../../marketplace.css';
 
 .root {
-  padding-top: 6px; /* align with baseline */
   display: flex;
   flex-direction: column;
 }
@@ -33,13 +32,14 @@
 
 .itemValue {
   @apply --marketplaceDefaultFontStyles;
+  font-weight: 600;
 }
 
 .totalDivider {
   /* dimensions */
   width: 100%;
   height: 1px;
-  margin: 10px 0 13px 0;
+  margin: 13px 0 4px 0;
 
   border: none;
   background-color: var(--matterColorNegative);

@@ -23,7 +23,7 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
           className={undefined}>
           2017-04-14
         </span>
-         - 
+         – 
         <span
           className={undefined}>
           2017-04-16
@@ -83,7 +83,7 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
           className={undefined}>
           2017-04-14
         </span>
-         - 
+         – 
         <span
           className={undefined}>
           2017-04-16
@@ -143,7 +143,7 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
           className={undefined}>
           2017-04-14
         </span>
-         - 
+         – 
         <span
           className={undefined}>
           2017-04-16

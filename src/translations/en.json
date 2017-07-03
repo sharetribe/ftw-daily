@@ -8,7 +8,7 @@
   "AuthenticationPage.signupLinkText": "Sign up",
   "AuthenticationPage.signupPageTitle": "Sign up",
   "AuthorInfo.host": "Hosted by {firstName} {lastName}",
-  "BookingBreakdown.bookingPeriod": "{bookingStart} - {bookingEnd}",
+  "BookingBreakdown.bookingPeriod": "{bookingStart} – {bookingEnd}",
   "BookingBreakdown.commission": "Saunatime fee:",
   "BookingBreakdown.nightCount": "&times; {count, number} {count, plural, one {night} other {nights}}",
   "BookingBreakdown.pricePerNight": "Price per night",

@@ -33,4 +33,5 @@
 .submitButton {
   margin: 0 24px 48px 24px;
   width: calc(100% - 48px);
+  background-color: var(--successColor);
 }
