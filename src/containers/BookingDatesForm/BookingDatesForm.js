@@ -11,7 +11,7 @@ import { required, bookingDatesRequired } from '../../util/validators';
 import { nightsBetween } from '../../util/dates';
 import { convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import config from '../../config';
-import { Button, BookingBreakdown, DateRangeInputField } from '../../components';
+import { PrimaryButton, BookingBreakdown, DateRangeInputField } from '../../components';
 
 import css from './BookingDatesForm.css';
 
@@ -36,7 +36,7 @@ const breakdown = (bookingStart, bookingEnd, unitPrice) => {
   const totalPrice = estimatedTotalPrice(unitPrice, nightCount);
   const lineItems = [
     {
-      code: 'line-item.purchase/night',
+      code: 'line-item/night',
       unitPrice: unitPrice,
       quantity: new Decimal(nightCount),
       lineTotal: totalPrice,
@@ -136,9 +136,9 @@ export const BookingDatesFormComponent = props => {
       <p className={css.smallPrint}>
         <FormattedMessage id="BookingDatesForm.youWontBeChargedInfo" />
       </p>
-      <Button className={css.submitButton} type="submit" disabled={submitDisabled}>
+      <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
         <FormattedMessage id="BookingDatesForm.requestToBook" />
-      </Button>
+      </PrimaryButton>
     </form>
   );
 };

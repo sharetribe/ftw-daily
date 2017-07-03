@@ -6,10 +6,12 @@
 }
 
 .bookingDates {
+  flex-shrink: 0;
   margin-bottom: 46px;
 }
 
 .receipt {
+  flex-shrink: 0;
   margin: 0 24px 24px 24px;
 }
 
@@ -23,6 +25,7 @@
   @apply --marketplaceTinyFontStyles;
   text-align: center;
   margin: auto 24px 21px 24px;
+  flex-shrink: 0;
 
   @media (--desktopViewport) {
     margin-top: 0;
@@ -31,7 +34,8 @@
 }
 
 .submitButton {
-  margin: 0 24px 48px 24px;
+  flex-shrink: 0;
+  margin: 0 24px 24px 24px;
   width: calc(100% - 48px);
   background-color: var(--successColor);
 }

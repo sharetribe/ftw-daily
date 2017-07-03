@@ -24,7 +24,7 @@ exports[`BookingDatesForm matches snapshot with selected dates 1`] = `
     lineItems={
       Array [
         Object {
-          "code": "line-item.purchase/night",
+          "code": "line-item/night",
           "lineTotal": Money {
             "amount": 2198,
             "currency": "USD",
@@ -55,15 +55,13 @@ exports[`BookingDatesForm matches snapshot with selected dates 1`] = `
       id="BookingDatesForm.youWontBeChargedInfo"
       values={Object {}} />
   </p>
-  <Button
-    className={null}
+  <Component
     disabled={false}
-    rootClassName={null}
     type="submit">
     <FormattedMessage
       id="BookingDatesForm.requestToBook"
       values={Object {}} />
-  </Button>
+  </Component>
 </form>
 `;
 
@@ -92,14 +90,12 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
       id="BookingDatesForm.youWontBeChargedInfo"
       values={Object {}} />
   </p>
-  <Button
-    className={null}
+  <Component
     disabled={true}
-    rootClassName={null}
     type="submit">
     <FormattedMessage
       id="BookingDatesForm.requestToBook"
       values={Object {}} />
-  </Button>
+  </Component>
 </form>
 `;
