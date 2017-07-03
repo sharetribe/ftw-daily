@@ -22,11 +22,9 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
         } />
     </h1>
     <div>
-      <Avatar
-        className={null}
+      <AvatarMedium
         firstName="customer1 first name"
-        lastName="customer1 last name"
-        rootClassName={null} />
+        lastName="customer1 last name" />
     </div>
   </div>
   <p>
