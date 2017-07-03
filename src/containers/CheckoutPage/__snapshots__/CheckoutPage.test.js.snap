@@ -36,18 +36,29 @@ exports[`CheckoutPage matches snapshot 1`] = `
     <BookingBreakdown
       bookingEnd={2017-04-16T00:00:00.000Z}
       bookingStart={2017-04-14T00:00:00.000Z}
-      totalPrice={
+      lineItems={
+        Array [
+          Object {
+            "code": "line-item/night",
+            "lineTotal": Money {
+              "amount": 11000,
+              "currency": "USD",
+            },
+            "quantity": "2",
+            "unitPrice": Money {
+              "amount": 5500,
+              "currency": "USD",
+            },
+          },
+        ]
+      }
+      payinTotal={
         Money {
           "amount": 11000,
           "currency": "USD",
         }
       }
-      unitPrice={
-        Money {
-          "amount": 5500,
-          "currency": "USD",
-        }
-      } />
+      userRole="customer" />
   </div>
   <section>
     <h3>

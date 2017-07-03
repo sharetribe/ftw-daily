@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { Button } from '../../components';
+import { PrimaryButton } from '../../components';
 import config from '../../config';
 
 import css from './StripePaymentForm.css';
@@ -149,9 +149,9 @@ class StripePaymentForm extends Component {
         {this.state.error ? <span style={{ color: 'red' }}>{this.state.error}</span> : null}
         <div className={css.submitContainer}>
           {paymentInfo ? <p className={css.paymentInfo}>{paymentInfo}</p> : null}
-          <Button className={css.submitButton} type="submit" disabled={submitDisabled}>
+          <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
             <FormattedMessage id="StripePaymentForm.submitPaymentInfo" />
-          </Button>
+          </PrimaryButton>
         </div>
       </form>
     );
