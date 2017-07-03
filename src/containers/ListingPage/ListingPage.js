@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { union, without } from 'lodash';
 import classNames from 'classnames';
 import config from '../../config';
 import * as propTypes from '../../util/propTypes';
@@ -45,7 +44,7 @@ export class ListingPageComponent extends Component {
     const tab = props.tab;
     this.state = {
       isBookingModalOpenOnMobile: tab && tab === 'book',
-      pageClassNames: '',
+      pageClassNames: [],
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -75,14 +74,18 @@ export class ListingPageComponent extends Component {
     );
   }
 
-  togglePageClassNames(className, addClass = true) {
+  togglePageClassNames(componentId, classNameFromComponent, addClass = true) {
     this.setState(prevState => {
-      const prevPageClassNames = prevState.pageClassNames.split(' ');
-      const pageClassNames = addClass
-        ? union(prevPageClassNames, [className]).join(' ')
-        : without(prevPageClassNames, className).join(' ');
-
-      return { pageClassNames };
+      const pageClassNames = prevState.pageClassNames;
+      const componentIdExists = pageClassNames.find(c => c.componentId === componentId);
+      if (componentIdExists) {
+        return { pageClassNames: pageClassNames
+          .map(c => (c.componentId === componentId ? { ...c, addClass } : c)),
+        };
+      }
+      return { pageClassNames: pageClassNames
+        .concat([{ componentId, className: classNameFromComponent, addClass }]),
+      };
     });
   }
 
@@ -142,9 +145,10 @@ export class ListingPageComponent extends Component {
       : null;
 
     const listingClasses = classNames(css.listing, { [css.bookable]: showBookButton });
+    const pageClassNames = classNames(this.state.pageClassNames.map(c => ({ [c.className]: c.addClass })));
 
     return (
-      <PageLayout title={`${title} ${formattedPrice}`} className={this.state.pageClassNames}>
+      <PageLayout title={`${title} ${formattedPrice}`} className={pageClassNames}>
         <div className={listingClasses}>
           <div className={css.threeToTwoWrapper}>
             <div className={css.aspectWrapper}>

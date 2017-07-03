@@ -42,13 +42,23 @@ const breakdown = (bookingStart, bookingEnd, unitPrice) => {
     return null;
   }
   const totalPrice = estimatedTotalPrice(bookingStart, bookingEnd, unitPrice);
+  const nightCount = nightsBetween(bookingStart, bookingEnd);
+
   return (
     <BookingBreakdown
       className={css.receipt}
       bookingStart={bookingStart}
       bookingEnd={bookingEnd}
-      unitPrice={unitPrice}
-      totalPrice={totalPrice}
+      userRole="customer"
+      lineItems={[
+        {
+          code: 'line-item/night',
+          quantity: new Decimal(nightCount),
+          unitPrice: unitPrice,
+          lineTotal: totalPrice,
+        },
+      ]}
+      payinTotal={totalPrice}
     />
   );
 };
