@@ -4,7 +4,7 @@
  */
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Avatar, InlineTextButton, NamedLink } from '../../components';
+import { AvatarLarge, InlineTextButton, NamedLink } from '../../components';
 
 import css from './TopbarMobileMenu.css';
 
@@ -60,7 +60,7 @@ const TopbarMobileMenu = props => {
 
   return (
     <div className={css.root}>
-      <Avatar rootClassName={css.avatar} firstName={firstName} lastName={lastName} />
+      <AvatarLarge className={css.avatar} firstName={firstName} lastName={lastName} />
       <div className={css.content}>
         <span className={css.greeting}>
           <FormattedMessage id="TopbarMobileMenu.greeting" values={{ firstName }} />

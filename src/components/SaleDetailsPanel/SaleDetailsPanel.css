@@ -1,9 +1,5 @@
 @import '../../marketplace.css';
 
-:root {
-  --avatarSize: 61px;
-}
-
 .root {
   padding: 0 24px;
 }
@@ -31,14 +27,8 @@
 }
 
 .avatarWrapper {
-  width: var(--avatarSize);
+  width: auto;
   margin-top: 7px;
-}
-
-.avatar {
-  @apply --marketplaceMediumAvatarFontStyles;
-  width: var(--avatarSize);
-  height: var(--avatarSize);
 }
 
 .avatar span {

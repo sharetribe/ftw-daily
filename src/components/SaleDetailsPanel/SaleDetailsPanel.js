@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
 import { ensureListing, ensureTransaction, ensureBooking, ensureUser } from '../../util/data';
-import { Avatar, BookingBreakdown, NamedLink } from '../../components';
+import { AvatarMedium, BookingBreakdown, NamedLink } from '../../components';
 
 import css from './SaleDetailsPanel.css';
 
@@ -151,8 +151,7 @@ const SaleDetailsPanel = props => {
           {title}
         </h1>
         <div className={css.avatarWrapper}>
-          <Avatar
-            className={css.avatar}
+          <AvatarMedium
             firstName={customerFirstName}
             lastName={customerLastName}
           />
