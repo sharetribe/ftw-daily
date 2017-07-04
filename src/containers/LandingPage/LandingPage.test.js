@@ -13,6 +13,7 @@ describe('LandingPage', () => {
         flattenedRoutes={[]}
         history={{ push: noop }}
         location={{ search: '' }}
+        scrollingDisabled={false}
       />
     );
     expect(tree).toMatchSnapshot();
