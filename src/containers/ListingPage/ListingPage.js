@@ -79,12 +79,16 @@ export class ListingPageComponent extends Component {
       const pageClassNames = prevState.pageClassNames;
       const componentIdExists = pageClassNames.find(c => c.componentId === componentId);
       if (componentIdExists) {
-        return { pageClassNames: pageClassNames
-          .map(c => (c.componentId === componentId ? { ...c, addClass } : c)),
+        return {
+          pageClassNames: pageClassNames.map(c => {
+            return c.componentId === componentId ? { ...c, addClass } : c;
+          }),
         };
       }
-      return { pageClassNames: pageClassNames
-        .concat([{ componentId, className: classNameFromComponent, addClass }]),
+      return {
+        pageClassNames: pageClassNames.concat([
+          { componentId, className: classNameFromComponent, addClass },
+        ]),
       };
     });
   }
@@ -145,7 +149,9 @@ export class ListingPageComponent extends Component {
       : null;
 
     const listingClasses = classNames(css.listing, { [css.bookable]: showBookButton });
-    const pageClassNames = classNames(this.state.pageClassNames.map(c => ({ [c.className]: c.addClass })));
+    const pageClassNames = classNames(
+      this.state.pageClassNames.map(c => ({ [c.className]: c.addClass }))
+    );
 
     return (
       <PageLayout title={`${title} ${formattedPrice}`} className={pageClassNames}>
