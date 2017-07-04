@@ -1,5 +1,6 @@
 exports[`SalePage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
+  scrollingDisabled={false}
   title="SalePage.title">
   <div>
     <SaleDetailsPanel
