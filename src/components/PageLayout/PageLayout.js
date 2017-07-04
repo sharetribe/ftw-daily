@@ -4,7 +4,6 @@ import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { Topbar } from '../../containers';
 
 import css from './PageLayout.css';
 
@@ -32,12 +31,8 @@ class PageLayout extends Component {
       children,
       authInfoError,
       logoutError,
-      history,
-      location,
       scrollingDisabled,
-      topbar,
     } = this.props;
-    const topbarProps = { history, location };
 
     // TODO: use FlashMessages for auth errors
 
@@ -69,7 +64,6 @@ class PageLayout extends Component {
               <FormattedMessage id="PageLayout.logoutFailed" />
             </div>
           : null}
-        {topbar || <Topbar {...topbarProps} />}
         <div className={css.content}>
           {children}
         </div>
@@ -78,7 +72,7 @@ class PageLayout extends Component {
   }
 }
 
-const { any, bool, func, instanceOf, node, shape, string } = PropTypes;
+const { any, bool, func, instanceOf, shape, string } = PropTypes;
 
 PageLayout.defaultProps = {
   className: null,
@@ -87,7 +81,6 @@ PageLayout.defaultProps = {
   authInfoError: null,
   logoutError: null,
   scrollingDisabled: false,
-  topbar: null,
 };
 
 PageLayout.propTypes = {
@@ -98,14 +91,10 @@ PageLayout.propTypes = {
   authInfoError: instanceOf(Error),
   logoutError: instanceOf(Error),
   scrollingDisabled: bool,
-  topbar: node,
 
   // from withRouter
   history: shape({
     listen: func.isRequired,
-  }).isRequired,
-  location: shape({
-    search: string.isRequired,
   }).isRequired,
 };
 
