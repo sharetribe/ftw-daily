@@ -30,8 +30,8 @@ Tab.propTypes = {
 };
 
 const TabNav = props => {
-  const { className, tabs } = props;
-  const classes = classNames(css.root, className);
+  const { className, rootClassName, tabs } = props;
+  const classes = classNames(rootClassName || css.root, className);
   return (
     <nav className={classes}>
       {tabs.map(tab => <Tab key={tab.text} {...tab} />)}
@@ -39,10 +39,11 @@ const TabNav = props => {
   );
 };
 
-TabNav.defaultProps = { className: '' };
+TabNav.defaultProps = { className: null, rootClassName: null };
 
 TabNav.propTypes = {
   className: string,
+  rootClassName: string,
   tabs: arrayOf(object).isRequired,
 };
 

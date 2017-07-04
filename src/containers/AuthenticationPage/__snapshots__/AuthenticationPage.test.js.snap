@@ -3,7 +3,8 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
   title="AuthenticationPage.loginPageTitle">
   <div>
     <TabNav
-      className=""
+      className={null}
+      rootClassName={null}
       tabs={
         Array [
           Object {
