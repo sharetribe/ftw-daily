@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
@@ -13,6 +14,7 @@ import { ensureListing, ensureUser } from '../../util/data';
 import { Avatar, Button, Map, ModalInMobile, PageLayout, ResponsiveImage } from '../../components';
 import { BookingDatesForm } from '../../containers';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
+import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { showListing } from './ListingPage.duck';
 
 import css from './ListingPage.css';
@@ -48,11 +50,10 @@ export class ListingPageComponent extends Component {
     };
 
     this.onSubmit = this.onSubmit.bind(this);
-    this.togglePageClassNames = this.togglePageClassNames.bind(this);
   }
 
   onSubmit(values) {
-    const { dispatch, flattenedRoutes, history, getListing, params } = this.props;
+    const { flattenedRoutes, history, getListing, params, useInitialValues } = this.props;
     const listing = getListing(new UUID(params.id));
 
     this.setState({ isBookingModalOpenOnMobile: false });
@@ -61,7 +62,7 @@ export class ListingPageComponent extends Component {
     const { setInitialValues } = findRouteByRouteName('CheckoutPage', flattenedRoutes);
     const { startDate: bookingStart, endDate: bookingEnd } = values.bookingDates;
     const bookingDates = { bookingStart, bookingEnd };
-    dispatch(setInitialValues({ listing, bookingDates, initiateOrderError: null }));
+    useInitialValues(setInitialValues, { listing, bookingDates, initiateOrderError: null });
 
     // Redirect to CheckoutPage
     history.push(
@@ -74,27 +75,16 @@ export class ListingPageComponent extends Component {
     );
   }
 
-  togglePageClassNames(componentId, classNameFromComponent, addClass = true) {
-    this.setState(prevState => {
-      const pageClassNames = prevState.pageClassNames;
-      const componentIdExists = pageClassNames.find(c => c.componentId === componentId);
-      if (componentIdExists) {
-        return {
-          pageClassNames: pageClassNames.map(c => {
-            return c.componentId === componentId ? { ...c, addClass } : c;
-          }),
-        };
-      }
-      return {
-        pageClassNames: pageClassNames.concat([
-          { componentId, className: classNameFromComponent, addClass },
-        ]),
-      };
-    });
-  }
-
   render() {
-    const { params, showListingError, intl, currentUser, getListing } = this.props;
+    const {
+      params,
+      showListingError,
+      intl,
+      currentUser,
+      getListing,
+      onManageDisableScrolling,
+      scrollingDisabled,
+    } = this.props;
     const currencyConfig = config.currencyConfig;
     const currentListing = ensureListing(getListing(new UUID(params.id)));
     const {
@@ -149,12 +139,9 @@ export class ListingPageComponent extends Component {
       : null;
 
     const listingClasses = classNames(css.listing, { [css.bookable]: showBookButton });
-    const pageClassNames = classNames(
-      this.state.pageClassNames.map(c => ({ [c.className]: c.addClass }))
-    );
 
     return (
-      <PageLayout title={`${title} ${formattedPrice}`} className={pageClassNames}>
+      <PageLayout title={`${title} ${formattedPrice}`} scrollingDisabled={scrollingDisabled}>
         <div className={listingClasses}>
           <div className={css.threeToTwoWrapper}>
             <div className={css.aspectWrapper}>
@@ -202,7 +189,7 @@ export class ListingPageComponent extends Component {
             isModalOpenOnMobile={this.state.isBookingModalOpenOnMobile}
             onClose={() => this.setState({ isBookingModalOpenOnMobile: false })}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
-            togglePageClassNames={this.togglePageClassNames}
+            onManageDisableScrolling={onManageDisableScrolling}
           >
             <div className={css.modalHeading}>
               <h1 className={css.title}>{title}</h1>
@@ -245,16 +232,14 @@ ListingPageComponent.defaultProps = {
   currentUser: null,
 };
 
-const { arrayOf, func, instanceOf, oneOf, shape, string } = PropTypes;
+const { arrayOf, bool, func, instanceOf, oneOf, shape, string } = PropTypes;
 
 ListingPageComponent.propTypes = {
-  // from connect
-  dispatch: func.isRequired,
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
   // from withRouter
   history: shape({
     push: func.isRequired,
   }).isRequired,
+  flattenedRoutes: arrayOf(propTypes.route).isRequired,
   // from injectIntl
   intl: intlShape.isRequired,
   params: shape({
@@ -265,6 +250,9 @@ ListingPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   getListing: func.isRequired,
   tab: oneOf(['book', 'listing']),
+  scrollingDisabled: bool.isRequired,
+  onManageDisableScrolling: func.isRequired,
+  useInitialValues: func.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -276,10 +264,24 @@ const mapStateToProps = state => {
     return listings.length === 1 ? listings[0] : null;
   };
 
-  return { showListingError, currentUser, getListing };
+  return {
+    showListingError,
+    currentUser,
+    getListing,
+    scrollingDisabled: isScrollingDisabled(state),
+  };
 };
 
-const ListingPage = connect(mapStateToProps)(withRouter(injectIntl(ListingPageComponent)));
+const mapDispatchToProps = dispatch => ({
+  onManageDisableScrolling: (componentId, disableScrolling) =>
+    dispatch(manageDisableScrolling(componentId, disableScrolling)),
+  useInitialValues: (setInitialValues, { listing, bookingDates, initiateOrderError }) =>
+    dispatch(setInitialValues({ listing, bookingDates, initiateOrderError })),
+});
+
+const ListingPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(
+  ListingPageComponent
+);
 
 ListingPage.loadData = params => {
   const id = new UUID(params.id);

@@ -1,6 +1,6 @@
 exports[`ListingPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
-  className=""
+  scrollingDisabled={false}
   title="listing1 title 55">
   <div
     className="undefined">
@@ -84,8 +84,8 @@ exports[`ListingPage matches snapshot 1`] = `
       id="BookingDatesFormInModal"
       isModalOpenOnMobile={false}
       onClose={[Function]}
-      showAsModalMaxWidth={2500}
-      togglePageClassNames={[Function]}>
+      onManageDisableScrolling={[Function]}
+      showAsModalMaxWidth={2500}>
       <div>
         <h1>
           listing1 title
