@@ -1,7 +1,10 @@
 import React, { PropTypes } from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
-import { connect } from 'react-redux';
+import { Topbar } from '../../containers';
 import { NamedRedirect, OrderDetailsPanel, PageLayout } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
@@ -14,7 +17,16 @@ import css from './OrderPage.css';
 // OrderPage handles data loading
 // It show loading data text or OrderDetailsPanel (and later also another panel for messages).
 export const OrderPageComponent = props => {
-  const { currentUser, fetchOrderError, intl, params, transaction, scrollingDisabled } = props;
+  const {
+    currentUser,
+    fetchOrderError,
+    intl,
+    params,
+    transaction,
+    scrollingDisabled,
+    history,
+    location,
+  } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const listingTitle = currentListing.attributes.title;
@@ -49,6 +61,7 @@ export const OrderPageComponent = props => {
       title={intl.formatMessage({ id: 'OrderPage.title' }, { listingTitle })}
       scrollingDisabled={scrollingDisabled}
     >
+      <Topbar history={history} location={location} />
       {panel}
     </PageLayout>
   );
@@ -56,7 +69,7 @@ export const OrderPageComponent = props => {
 
 OrderPageComponent.defaultProps = { transaction: null, currentUser: null, fetchOrderError: null };
 
-const { bool, instanceOf, oneOf, shape, string } = PropTypes;
+const { bool, func, instanceOf, oneOf, shape, string } = PropTypes;
 
 OrderPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
@@ -66,6 +79,14 @@ OrderPageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
+
+  // from withRouter
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
+  location: shape({
+    search: string.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = state => {
@@ -88,7 +109,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
 });
 
-const OrderPage = connect(mapStateToProps, mapDispatchToProps)(injectIntl(OrderPageComponent));
+const OrderPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(
+  OrderPageComponent
+);
 
 OrderPage.loadData = loadData;
 

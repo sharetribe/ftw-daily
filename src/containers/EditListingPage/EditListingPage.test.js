@@ -10,6 +10,7 @@ describe('EditListingPageComponent', () => {
       <EditListingPageComponent
         fetchInProgress={false}
         flattenedRoutes={[]}
+        location={{ search: '' }}
         history={{ push: v => v }}
         getListing={getListing}
         images={[]}

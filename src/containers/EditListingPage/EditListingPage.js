@@ -7,6 +7,7 @@ import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import { EditListingWizard, NamedRedirect, PageLayout } from '../../components';
+import { Topbar } from '../../containers';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { createStripeAccount } from '../../ducks/user.duck';
@@ -48,6 +49,7 @@ export const EditListingPageComponent = props => {
     flattenedRoutes,
     history,
     intl,
+    location,
     onCreateListing,
     onImageUpload,
     onPayoutDetailsSubmit,
@@ -89,6 +91,7 @@ export const EditListingPageComponent = props => {
 
     return (
       <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
+        <Topbar history={history} location={location} />
         <EditListingWizard
           className={css.wizard}
           disabled={disableForm}
@@ -139,6 +142,7 @@ EditListingPageComponent.propTypes = {
   history: shape({
     push: func.isRequired,
   }).isRequired,
+  location: object.isRequired,
   intl: intlShape.isRequired,
   onCreateListing: func.isRequired,
   onImageUpload: func.isRequired,

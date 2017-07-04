@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { PageLayout, NamedRedirect, TabNav } from '../../components';
-import { LoginForm, SignupForm } from '../../containers';
+import { LoginForm, SignupForm, Topbar } from '../../containers';
 import { login, authenticationInProgress, signup } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 
@@ -26,6 +26,7 @@ const isEmailTakenApiError = error => {
 
 export const AuthenticationPageComponent = props => {
   const {
+    history,
     location,
     tab,
     isAuthenticated,
@@ -101,6 +102,7 @@ export const AuthenticationPageComponent = props => {
 
   return (
     <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
+      <Topbar history={history} location={location} />
       <div className={css.root}>
         <TabNav tabs={tabs} />
         {loginError ? loginErrorMessage : null}
@@ -122,7 +124,6 @@ AuthenticationPageComponent.defaultProps = {
 const { bool, func, instanceOf, object, oneOf, shape } = PropTypes;
 
 AuthenticationPageComponent.propTypes = {
-  location: shape({ state: object }).isRequired,
   tab: oneOf(['login', 'signup']),
 
   isAuthenticated: bool.isRequired,
@@ -133,6 +134,12 @@ AuthenticationPageComponent.propTypes = {
 
   submitLogin: func.isRequired,
   submitSignup: func.isRequired,
+
+  // from withRouter
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
+  location: shape({ state: object }).isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
@@ -156,8 +163,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
 });
 
-const AuthenticationPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
-  AuthenticationPageComponent
-);
+const AuthenticationPage = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter,
+  injectIntl
+)(AuthenticationPageComponent);
 
 export default AuthenticationPage;

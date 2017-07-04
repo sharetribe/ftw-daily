@@ -2,6 +2,17 @@ exports[`InboxPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   scrollingDisabled={false}
   title="InboxPage.ordersTitle">
+  <Topbar
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    location={
+      Object {
+        "search": "",
+      }
+    } />
   <h1>
     <FormattedMessage
       id="InboxPage.title"
@@ -235,6 +246,17 @@ exports[`InboxPage matches snapshot 3`] = `
 <Connect(withRouter(PageLayout))
   scrollingDisabled={false}
   title="InboxPage.salesTitle">
+  <Topbar
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    location={
+      Object {
+        "search": "",
+      }
+    } />
   <h1>
     <FormattedMessage
       id="InboxPage.title"

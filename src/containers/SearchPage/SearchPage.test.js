@@ -19,6 +19,9 @@ describe('SearchPageComponent', () => {
   it('matches snapshot', () => {
     const props = {
       location: { search: '' },
+      history: {
+        push: () => console.log('HistoryPush called'),
+      },
       pagination: {
         page: 1,
         perPage: 12,

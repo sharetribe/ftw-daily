@@ -33,6 +33,10 @@ describe('OrderPage', () => {
       tab: 'details',
       intl: fakeIntl,
       scrollingDisabled: false,
+      location: { search: '' },
+      history: {
+        push: () => console.log('HistoryPush called'),
+      },
     };
 
     const tree = renderShallow(<OrderPageComponent {...props} />);

@@ -2,6 +2,17 @@ exports[`ListingPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   scrollingDisabled={false}
   title="listing1 title 55">
+  <Topbar
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    location={
+      Object {
+        "search": "",
+      }
+    } />
   <div
     className="undefined">
     <div>

@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
@@ -10,6 +11,7 @@ import {
   PaginationLinks,
   TabNav,
 } from '../../components';
+import { Topbar } from '../../containers';
 import * as propTypes from '../../util/propTypes';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
@@ -17,7 +19,7 @@ import { loadData } from './InboxPage.duck';
 
 import css from './InboxPage.css';
 
-const { arrayOf, bool, instanceOf, oneOf, shape, string } = PropTypes;
+const { arrayOf, bool, func, instanceOf, object, oneOf, shape, string } = PropTypes;
 
 // Formatted username
 const username = user => {
@@ -98,6 +100,8 @@ export const InboxPageComponent = props => {
   const {
     fetchInProgress,
     fetchOrdersOrSalesError,
+    history,
+    location,
     pagination,
     scrollingDisabled,
     transactions,
@@ -173,6 +177,7 @@ export const InboxPageComponent = props => {
 
   return (
     <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
+      <Topbar history={history} location={location} />
       <h1 className={css.title}>
         <FormattedMessage id="InboxPage.title" />
       </h1>
@@ -203,6 +208,12 @@ InboxPageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
   transactions: arrayOf(propTypes.transaction).isRequired,
 
+  // from withRouter
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
+  location: object.isRequired,
+
   // from injectIntl
   intl: intlShape.isRequired,
 };
@@ -228,7 +239,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
 });
 
-const InboxPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
+const InboxPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(
   InboxPageComponent
 );
 

@@ -261,7 +261,8 @@ export class CheckoutPageComponent extends Component {
     );
 
     return (
-      <PageLayout title={title} topbar={topbar}>
+      <PageLayout title={title}>
+        {topbar}
         <div className={css.heading}>
           <h1 className={css.title}>{title}</h1>
           <div className={css.author}>

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import config from '../../config';
 import { parse, stringify } from '../../util/urlHelpers';
@@ -8,6 +9,7 @@ import * as propTypes from '../../util/propTypes';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { PageLayout, SearchResultsPanel } from '../../components';
+import { Topbar } from '../../containers';
 import { searchListings } from './SearchPage.duck';
 import css from './SearchPage.css';
 
@@ -21,6 +23,7 @@ const pickSearchParamsOnly = params => {
 
 export const SearchPageComponent = props => {
   const {
+    history,
     listings,
     location,
     pagination,
@@ -86,6 +89,7 @@ export const SearchPageComponent = props => {
 
   return (
     <PageLayout title={`Search page: ${tab}`} scrollingDisabled={scrollingDisabled}>
+      <Topbar history={history} location={location} />
       <div className={css.searchResultSummary}>
         {searchListingsError ? searchError : null}
         {listingsAreLoaded && totalItems > 0 ? resultsFound : null}
@@ -115,20 +119,24 @@ SearchPageComponent.defaultProps = {
   searchListingsError: null,
 };
 
-const { array, bool, instanceOf, oneOf, object, shape, string } = PropTypes;
+const { array, bool, func, instanceOf, oneOf, object, shape, string } = PropTypes;
 
 SearchPageComponent.propTypes = {
   listings: array,
-  location: shape({
-    search: string.isRequired,
-  }).isRequired,
   pagination: propTypes.pagination,
-
   scrollingDisabled: bool.isRequired,
   searchParams: object,
   searchInProgress: bool.isRequired,
   searchListingsError: instanceOf(Error),
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
+
+  // from withRouter
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
+  location: shape({
+    search: string.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = state => {
@@ -154,7 +162,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
 });
 
-const SearchPage = connect(mapStateToProps, mapDispatchToProps)(withRouter(SearchPageComponent));
+const SearchPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
+  SearchPageComponent
+);
 
 SearchPage.loadData = (params, search) => {
   const queryParams = parse(search, {

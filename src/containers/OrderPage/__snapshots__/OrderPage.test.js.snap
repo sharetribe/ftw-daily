@@ -2,6 +2,17 @@ exports[`OrderPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   scrollingDisabled={false}
   title="OrderPage.title">
+  <Topbar
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    location={
+      Object {
+        "search": "",
+      }
+    } />
   <OrderDetailsPanel
     className="undefined"
     lastTransition={null}

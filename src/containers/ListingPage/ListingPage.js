@@ -12,7 +12,7 @@ import { convertMoneyToNumber } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import { ensureListing, ensureUser } from '../../util/data';
 import { Avatar, Button, Map, ModalInMobile, PageLayout, ResponsiveImage } from '../../components';
-import { BookingDatesForm } from '../../containers';
+import { BookingDatesForm, Topbar } from '../../containers';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { showListing } from './ListingPage.duck';
@@ -77,6 +77,8 @@ export class ListingPageComponent extends Component {
 
   render() {
     const {
+      history,
+      location,
       params,
       showListingError,
       intl,
@@ -142,6 +144,7 @@ export class ListingPageComponent extends Component {
 
     return (
       <PageLayout title={`${title} ${formattedPrice}`} scrollingDisabled={scrollingDisabled}>
+        <Topbar history={history} location={location} />
         <div className={listingClasses}>
           <div className={css.threeToTwoWrapper}>
             <div className={css.aspectWrapper}>
@@ -232,13 +235,14 @@ ListingPageComponent.defaultProps = {
   currentUser: null,
 };
 
-const { arrayOf, bool, func, instanceOf, oneOf, shape, string } = PropTypes;
+const { arrayOf, bool, func, instanceOf, object, oneOf, shape, string } = PropTypes;
 
 ListingPageComponent.propTypes = {
   // from withRouter
   history: shape({
     push: func.isRequired,
   }).isRequired,
+  location: object.isRequired,
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
   // from injectIntl
   intl: intlShape.isRequired,
