@@ -20,19 +20,29 @@
 }
 
 .link {
-  @apply --marketplaceH1FontStyles;
+  display: inline-block;
+
+  /* Font */
+  @apply --marketplaceH4FontStyles;
   color: var(--matterColor);
+
+  margin-top: 0;
+  margin-bottom: 0;
 
   &:hover {
     text-decoration: none;
     color: var(--matterColorDark);
   }
+
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .selectedLink {
-  color: var(--matterColorDark);
-  border-bottom: 3px solid var(--matterColorDark);
-  padding-bottom: 7px;
+  border-bottom: 2px solid var(--matterColorDark);
+  padding-bottom: 10px;
 }
 
 .disabled {

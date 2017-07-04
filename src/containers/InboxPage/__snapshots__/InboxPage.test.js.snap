@@ -7,7 +7,8 @@ exports[`InboxPage matches snapshot 1`] = `
       values={Object {}} />
   </h1>
   <TabNav
-    className=""
+    className={null}
+    rootClassName={null}
     tabs={
       Array [
         Object {
@@ -238,7 +239,8 @@ exports[`InboxPage matches snapshot 3`] = `
       values={Object {}} />
   </h1>
   <TabNav
-    className=""
+    className={null}
+    rootClassName={null}
     tabs={
       Array [
         Object {
