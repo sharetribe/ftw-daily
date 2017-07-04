@@ -8,6 +8,9 @@
 
 .inputRoot {
 
+  /* Contain repainting to this component only */
+  transform: translate3d(0,0,0);
+
   /* Override react-dates default styles to match input styles */
 
   & :global(.DateRangePicker) {
