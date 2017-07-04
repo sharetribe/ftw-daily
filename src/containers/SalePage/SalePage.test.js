@@ -28,6 +28,10 @@ describe('SalePage', () => {
 
     const props = {
       currentUser: createCurrentUser('provider1'),
+      location: { search: '' },
+      history: {
+        push: () => console.log('HistoryPush called'),
+      },
       onAcceptSale: () => {},
       onRejectSale: () => {},
       params: { id: txId },

@@ -2,6 +2,17 @@ exports[`SearchPageComponent matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   scrollingDisabled={false}
   title="Search page: listings">
+  <Topbar
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    location={
+      Object {
+        "search": "",
+      }
+    } />
   <div>
     <h2>
       <FormattedMessage

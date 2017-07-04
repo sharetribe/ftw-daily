@@ -1,16 +1,14 @@
 exports[`CheckoutPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
-  title="CheckoutPage.title"
-  topbar={
-    <div>
-      <withFlattenedRoutes(withRouter(NamedLink))
-        name="LandingPage">
-        <LogoIcon
-          className={null}
-          title="CheckoutPage.goToLandingPage" />
-      </withFlattenedRoutes(withRouter(NamedLink))>
-    </div>
-  }>
+  title="CheckoutPage.title">
+  <div>
+    <withFlattenedRoutes(withRouter(NamedLink))
+      name="LandingPage">
+      <LogoIcon
+        className={null}
+        title="CheckoutPage.goToLandingPage" />
+    </withFlattenedRoutes(withRouter(NamedLink))>
+  </div>
   <div>
     <h1>
       CheckoutPage.title

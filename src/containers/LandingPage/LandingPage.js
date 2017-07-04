@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { PageLayout, HeroSection } from '../../components';
+import { Topbar } from '../../containers';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 
 import css from './LandingPage.css';
@@ -12,6 +13,7 @@ export const LandingPageComponent = props => {
   const { flattenedRoutes, history, location, scrollingDisabled } = props;
   return (
     <PageLayout title="Landing page" className={css.root} scrollingDisabled={scrollingDisabled}>
+      <Topbar history={history} location={location} />
       <HeroSection
         className={css.hero}
         flattenedRoutes={flattenedRoutes}

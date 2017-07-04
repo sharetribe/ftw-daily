@@ -2,6 +2,19 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
   scrollingDisabled={false}
   title="AuthenticationPage.loginPageTitle">
+  <Topbar
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    location={
+      Object {
+        "state": Object {
+          "from": "/protected",
+        },
+      }
+    } />
   <div>
     <TabNav
       className={null}

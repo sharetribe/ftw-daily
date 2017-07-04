@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
-import classNames from 'classnames';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
+import { Topbar } from '../../containers';
 import {
   PrimaryButton,
   SecondaryButton,
@@ -30,6 +32,8 @@ export const SalePageComponent = props => {
     params,
     scrollingDisabled,
     transaction,
+    history,
+    location,
   } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
@@ -83,6 +87,7 @@ export const SalePageComponent = props => {
       title={intl.formatMessage({ id: 'SalePage.title' }, { title: listingTitle })}
       scrollingDisabled={scrollingDisabled}
     >
+      <Topbar history={history} location={location} />
       <div className={css.root}>
         {panel}
         {actionButtons}
@@ -105,6 +110,14 @@ SalePageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
+
+  // from withRouter
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
+  location: shape({
+    search: string.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = state => {
@@ -131,7 +144,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const SalePage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
+const SalePage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(
   SalePageComponent
 );
 

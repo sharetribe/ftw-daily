@@ -15,6 +15,10 @@ describe('InboxPage', () => {
     const customer = createUser('customer-user-id');
 
     const ordersProps = {
+      location: { search: '' },
+      history: {
+        push: () => console.log('HistoryPush called'),
+      },
       params: {
         tab: 'orders',
       },
@@ -49,6 +53,10 @@ describe('InboxPage', () => {
     expect(orderItem).toMatchSnapshot();
 
     const salesProps = {
+      location: { search: '' },
+      history: {
+        push: () => console.log('HistoryPush called'),
+      },
       params: {
         tab: 'sales',
       },
