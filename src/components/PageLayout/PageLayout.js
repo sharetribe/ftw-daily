@@ -14,12 +14,6 @@ const scrollToTop = () => {
 };
 
 class PageLayout extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { pageClassNames: [] };
-    this.togglePageClassNames = this.togglePageClassNames.bind(this);
-  }
-
   componentDidMount() {
     this.historyUnlisten = this.props.history.listen(() => scrollToTop());
   }
@@ -30,41 +24,20 @@ class PageLayout extends Component {
     }
   }
 
-  // This function makes it possible to change page level styles
-  // E.g. disable scrolling when using Modal
-  togglePageClassNames(componentId, classNameFromComponent, addClass = true) {
-    this.setState(prevState => {
-      const componentIdExists = prevState.pageClassNames.find(c => c.componentId === componentId);
-      if (componentIdExists) {
-        const pageClassNames = prevState.pageClassNames.map(c => {
-          if (c.componentId === componentId) {
-            return { ...c, addClass };
-          }
-          return c;
-        });
-
-        return { pageClassNames };
-      } else {
-        const pageClassNames = prevState.pageClassNames.concat([
-          { componentId, className: classNameFromComponent, addClass },
-        ]);
-        return { pageClassNames };
-      }
-    });
-  }
-
   render() {
     const {
       className,
+      rootClassName,
       title,
       children,
       authInfoError,
       logoutError,
       history,
       location,
+      scrollingDisabled,
       topbar,
     } = this.props;
-    const topbarProps = { history, location, togglePageClassNames: this.togglePageClassNames };
+    const topbarProps = { history, location };
 
     // TODO: use FlashMessages for auth errors
 
@@ -77,10 +50,12 @@ class PageLayout extends Component {
     }
     /* eslint-enable no-console */
 
-    const pageClassNames = this.state.pageClassNames.map(c => ({ [c.className]: c.addClass }));
+    const classes = classNames(rootClassName || css.root, className, {
+      [css.scrollingDisabled]: scrollingDisabled,
+    });
 
     return (
-      <div className={classNames(css.root, pageClassNames, className)}>
+      <div className={classes}>
         <Helmet>
           <title>{title}</title>
         </Helmet>
@@ -103,22 +78,26 @@ class PageLayout extends Component {
   }
 }
 
-const { any, func, instanceOf, node, shape, string } = PropTypes;
+const { any, bool, func, instanceOf, node, shape, string } = PropTypes;
 
 PageLayout.defaultProps = {
   className: null,
+  rootClassName: null,
   children: null,
   authInfoError: null,
   logoutError: null,
+  scrollingDisabled: false,
   topbar: null,
 };
 
 PageLayout.propTypes = {
   className: string,
+  rootClassName: string,
   title: string.isRequired,
   children: any,
   authInfoError: instanceOf(Error),
   logoutError: instanceOf(Error),
+  scrollingDisabled: bool,
   topbar: node,
 
   // from withRouter

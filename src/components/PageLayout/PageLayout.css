@@ -10,3 +10,8 @@
   flex-direction: column;
   flex: 1;
 }
+
+.scrollingDisabled {
+  height: 100vh;
+  overflow: hidden;
+}
