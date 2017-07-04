@@ -10,9 +10,26 @@
   margin-bottom: 46px;
 }
 
+.priceBreakdownContainer {
+  padding: 0 24px;
+  margin-bottom: 40px;
+}
+
+.priceBreakdownTitle {
+  /* Font */
+  color: var(--matterColorAnti);
+
+  margin-top: 5px;
+  margin-bottom: 14px;
+  @media (--desktopViewport) {
+    margin-top: 5px;
+    margin-bottom: 14px;
+  }
+}
+
 .receipt {
   flex-shrink: 0;
-  margin: 0 24px 24px 24px;
+  margin: 0 0 24px 0;
 }
 
 .error {
