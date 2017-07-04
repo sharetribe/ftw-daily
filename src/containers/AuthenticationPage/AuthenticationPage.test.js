@@ -10,6 +10,7 @@ describe('AuthenticationPageComponent', () => {
       tab: 'login',
       isAuthenticated: false,
       authInProgress: false,
+      scrollingDisabled: false,
       submitLogin: () => null,
       submitSignup: () => null,
       intl: fakeIntl,
