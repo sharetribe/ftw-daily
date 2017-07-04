@@ -71,7 +71,7 @@ class ModalInMobile extends Component {
       className,
       id,
       showAsModalMaxWidth,
-      togglePageClassNames,
+      onManageDisableScrolling,
     } = this.props;
 
     const isMobileLayout = typeof window !== 'undefined' && window.matchMedia
@@ -94,7 +94,7 @@ class ModalInMobile extends Component {
         isOpen={isOpenInMobile}
         isClosedClassName={closedClassName}
         onClose={this.handleClose}
-        togglePageClassNames={togglePageClassNames}
+        onManageDisableScrolling={onManageDisableScrolling}
       >
         {children}
       </Modal>
@@ -119,7 +119,7 @@ ModalInMobile.propTypes = {
   onClose: func,
   showAsModalMaxWidth: number,
   // eslint-disable-next-line react/no-unused-prop-types
-  togglePageClassNames: func.isRequired,
+  onManageDisableScrolling: func.isRequired,
 };
 
 export default ModalInMobile;

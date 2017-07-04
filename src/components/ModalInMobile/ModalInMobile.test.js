@@ -8,7 +8,7 @@ describe('ModalInMobile', () => {
       id: 'TestModalInMobile',
       className: 'test-class-from-props',
       isModalOpenOnMobile: false,
-      togglePageClassNames: v => v,
+      onManageDisableScrolling: v => v,
     };
 
     const tree = renderDeep(<ModalInMobile {...props}>Content</ModalInMobile>);

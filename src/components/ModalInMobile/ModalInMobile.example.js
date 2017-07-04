@@ -4,9 +4,9 @@ import { Button } from '../../components';
 import ModalInMobile from './ModalInMobile';
 import css from './ModalInMobile.example.css';
 
-const togglePageClassNames = (className, addClass = true) => {
+const onManageDisableScrolling = (componentId, scrollingDisabled = true) => {
   // We are just checking the value for now
-  console.log('Toggling ModalInMobile - currently:', className, addClass);
+  console.log('Toggling ModalInMobile - currently:', componentId, scrollingDisabled);
 };
 
 class ModalInMobileWrapper extends Component {
@@ -33,7 +33,7 @@ class ModalInMobileWrapper extends Component {
             console.log('Closing modal');
           }}
           isModalOpenOnMobile={this.state.isOpen}
-          togglePageClassNames={togglePageClassNames}
+          onManageDisableScrolling={onManageDisableScrolling}
         >
           <div style={{ margin: '1rem' }}>
             Some content inside ModalInMobile component

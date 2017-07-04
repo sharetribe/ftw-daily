@@ -21,12 +21,6 @@
   display: none;
 }
 
-/* This class is passed to page layout level to fix scrolling while modal is open */
-.modalIsOpen {
-  height: 100vh;
-  overflow: hidden;
-}
-
 .close {
   /* Position inside modal */
   position: absolute;

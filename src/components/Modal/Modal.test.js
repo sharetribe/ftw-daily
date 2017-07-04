@@ -9,7 +9,7 @@ describe('Modal', () => {
       className: 'test-class-from-props',
       isOpen: false,
       onClose: v => v,
-      togglePageClassNames: v => v,
+      onManageDisableScrolling: v => v,
     };
 
     const tree = renderDeep(<Modal {...props}>Content</Modal>);

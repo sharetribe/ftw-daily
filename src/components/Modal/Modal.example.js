@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { Button } from '../../components';
 import Modal from './Modal';
 
-const togglePageClassNames = (className, addClass = true) => {
+const onManageDisableScrolling = (componentId, scrollingDisabled = true) => {
   // We are just checking the value for now
-  console.log('Toggling Modal - pageClassName currently:', className, addClass);
+  console.log('Toggling Modal - scrollingDisabled currently:', componentId, scrollingDisabled);
 };
 
 class ModalWrapper extends Component {
@@ -32,7 +32,7 @@ class ModalWrapper extends Component {
             this.setState({ isOpen: false });
             console.log('Closing modal');
           }}
-          togglePageClassNames={togglePageClassNames}
+          onManageDisableScrolling={onManageDisableScrolling}
         >
           <div style={{ margin: '1rem' }}>Some content inside Modal component</div>
         </Modal>
