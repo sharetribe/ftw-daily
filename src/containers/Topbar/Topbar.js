@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
+import { manageDisableScrolling } from '../../ducks/UI.duck';
 import { Button, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
 import { TopbarSearchForm } from '../../containers';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
@@ -88,7 +89,7 @@ class TopbarComponent extends Component {
       currentUserHasListings,
       intl,
       location,
-      togglePageClassNames,
+      onManageDisableScrolling,
     } = this.props;
     const me = ensureUser(currentUser);
     const profile = me.attributes.profile;
@@ -156,7 +157,7 @@ class TopbarComponent extends Component {
           id="TopbarMobileMenu"
           isOpen={isMobileMenuOpen}
           onClose={this.handleMobileMenuClose}
-          togglePageClassNames={togglePageClassNames}
+          onManageDisableScrolling={onManageDisableScrolling}
         >
           {authInProgress ? null : mobileMenu}
         </Modal>
@@ -164,7 +165,7 @@ class TopbarComponent extends Component {
           id="TopbarMobileSearch"
           isOpen={isMobileSearchOpen}
           onClose={this.handleMobileSearchClose}
-          togglePageClassNames={togglePageClassNames}
+          onManageDisableScrolling={onManageDisableScrolling}
         >
           <div className={css.searchContainer}>
             <TopbarSearchForm
@@ -193,7 +194,7 @@ TopbarComponent.propTypes = {
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   onLogout: func.isRequired,
-  togglePageClassNames: func.isRequired,
+  onManageDisableScrolling: func.isRequired,
 
   // These are passed from PageLayout to keep Topbar rendering aware of location changes
   history: shape({
@@ -221,7 +222,11 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({ onLogout: historyPush => dispatch(logout(historyPush)) });
+const mapDispatchToProps = dispatch => ({
+  onManageDisableScrolling: (componentId, disableScrolling) =>
+    dispatch(manageDisableScrolling(componentId, disableScrolling)),
+  onLogout: historyPush => dispatch(logout(historyPush)),
+});
 
 const Topbar = compose(
   connect(mapStateToProps, mapDispatchToProps),
