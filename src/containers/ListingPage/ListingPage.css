@@ -168,6 +168,9 @@
   background-color: var(--matterColorLight);
   box-shadow: var(--boxShadowTop);
   display: flex;
+
+  /* Contain repainting to this component only */
+  transform: translate3d(0,0,0);
 }
 
 .priceContainer {
