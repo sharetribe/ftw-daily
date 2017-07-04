@@ -26,6 +26,7 @@ describe('SearchPageComponent', () => {
         totalPages: 2,
       },
       tab: 'listings',
+      scrollingDisabled: false,
       searchInProgress: false,
     };
     const tree = renderShallow(<SearchPageComponent {...props} />);

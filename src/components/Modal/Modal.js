@@ -22,20 +22,20 @@ export class ModalComponent extends Component {
   }
 
   componentDidMount() {
-    const { id, isOpen, togglePageClassNames } = this.props;
-    togglePageClassNames(id, css.modalIsOpen, isOpen);
+    const { id, isOpen, onManageDisableScrolling } = this.props;
+    onManageDisableScrolling(id, isOpen);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { id, isOpen, togglePageClassNames } = this.props;
+    const { id, isOpen, onManageDisableScrolling } = this.props;
     if (nextProps.isOpen !== isOpen) {
-      togglePageClassNames(id, css.modalIsOpen, nextProps.isOpen);
+      onManageDisableScrolling(id, nextProps.isOpen);
     }
   }
 
   handleClose(event) {
-    const { id, onClose, togglePageClassNames } = this.props;
-    togglePageClassNames(id, css.modalIsOpen, false);
+    const { id, onClose, onManageDisableScrolling } = this.props;
+    onManageDisableScrolling(id, false);
     onClose(event);
   }
 
@@ -93,7 +93,7 @@ ModalComponent.propTypes = {
   onClose: func.isRequired,
 
   // eslint-disable-next-line react/no-unused-prop-types
-  togglePageClassNames: func.isRequired,
+  onManageDisableScrolling: func.isRequired,
 };
 
 export default injectIntl(ModalComponent);

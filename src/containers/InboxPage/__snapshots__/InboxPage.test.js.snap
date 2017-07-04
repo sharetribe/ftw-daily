@@ -1,5 +1,6 @@
 exports[`InboxPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
+  scrollingDisabled={false}
   title="InboxPage.ordersTitle">
   <h1>
     <FormattedMessage
@@ -232,6 +233,7 @@ exports[`InboxPage matches snapshot 2`] = `
 
 exports[`InboxPage matches snapshot 3`] = `
 <Connect(withRouter(PageLayout))
+  scrollingDisabled={false}
   title="InboxPage.salesTitle">
   <h1>
     <FormattedMessage

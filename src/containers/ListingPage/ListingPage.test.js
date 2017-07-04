@@ -14,7 +14,6 @@ describe('ListingPage', () => {
     const listing1 = createListing('listing1', createUser('user-1'));
     const getListing = () => listing1;
     const props = {
-      dispatch: () => console.log('Dispatch called'),
       flattenedRoutes: [],
       location: { search: '' },
       history: {
@@ -25,6 +24,9 @@ describe('ListingPage', () => {
       getListing: getListing,
       intl: fakeIntl,
       onLoadListing: () => {},
+      onManageDisableScrolling: () => {},
+      scrollingDisabled: false,
+      useInitialValues: () => {},
     };
 
     const tree = renderShallow(<ListingPageComponent {...props} />);

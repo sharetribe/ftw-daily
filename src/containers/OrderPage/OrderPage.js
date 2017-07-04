@@ -6,6 +6,7 @@ import { NamedRedirect, OrderDetailsPanel, PageLayout } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { loadData } from './OrderPage.duck';
 
 import css from './OrderPage.css';
@@ -13,7 +14,7 @@ import css from './OrderPage.css';
 // OrderPage handles data loading
 // It show loading data text or OrderDetailsPanel (and later also another panel for messages).
 export const OrderPageComponent = props => {
-  const { currentUser, fetchOrderError, intl, params, transaction } = props;
+  const { currentUser, fetchOrderError, intl, params, transaction, scrollingDisabled } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const listingTitle = currentListing.attributes.title;
@@ -44,7 +45,10 @@ export const OrderPageComponent = props => {
     : loadingOrFaildFetching;
 
   return (
-    <PageLayout title={intl.formatMessage({ id: 'OrderPage.title' }, { listingTitle })}>
+    <PageLayout
+      title={intl.formatMessage({ id: 'OrderPage.title' }, { listingTitle })}
+      scrollingDisabled={scrollingDisabled}
+    >
       {panel}
     </PageLayout>
   );
@@ -52,13 +56,14 @@ export const OrderPageComponent = props => {
 
 OrderPageComponent.defaultProps = { transaction: null, currentUser: null, fetchOrderError: null };
 
-const { instanceOf, oneOf, shape, string } = PropTypes;
+const { bool, instanceOf, oneOf, shape, string } = PropTypes;
 
 OrderPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   fetchOrderError: instanceOf(Error),
   intl: intlShape.isRequired,
   params: shape({ id: string }).isRequired,
+  scrollingDisabled: bool.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
 };
@@ -70,10 +75,20 @@ const mapStateToProps = state => {
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
 
-  return { transaction, fetchOrderError, currentUser };
+  return {
+    transaction,
+    fetchOrderError,
+    currentUser,
+    scrollingDisabled: isScrollingDisabled(state),
+  };
 };
 
-const OrderPage = connect(mapStateToProps)(injectIntl(OrderPageComponent));
+const mapDispatchToProps = dispatch => ({
+  onManageDisableScrolling: (componentId, disableScrolling) =>
+    dispatch(manageDisableScrolling(componentId, disableScrolling)),
+});
+
+const OrderPage = connect(mapStateToProps, mapDispatchToProps)(injectIntl(OrderPageComponent));
 
 OrderPage.loadData = loadData;
 

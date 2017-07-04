@@ -18,9 +18,11 @@ describe('EditListingPageComponent', () => {
         onCreateListingDraft={v => v}
         onUpdateListingDraft={v => v}
         onImageUpload={v => v}
+        onManageDisableScrolling={v => v}
         onPayoutDetailsSubmit={v => v}
         onUpdateImageOrder={v => v}
         page={{ imageOrder: [], images: {} }}
+        scrollingDisabled={false}
         tab="description"
         type="new"
       />

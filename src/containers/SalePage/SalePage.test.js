@@ -31,6 +31,7 @@ describe('SalePage', () => {
       onAcceptSale: () => {},
       onRejectSale: () => {},
       params: { id: txId },
+      scrollingDisabled: false,
       transaction,
       tab: 'details',
       intl: fakeIntl,

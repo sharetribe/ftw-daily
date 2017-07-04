@@ -13,6 +13,7 @@ import {
   PageLayout,
 } from '../../components';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { acceptSale, rejectSale, loadData } from './SalePage.duck';
 
 import css from './SalePage.css';
@@ -27,6 +28,7 @@ export const SalePageComponent = props => {
     onAcceptSale,
     onRejectSale,
     params,
+    scrollingDisabled,
     transaction,
   } = props;
   const currentTransaction = ensureTransaction(transaction);
@@ -77,7 +79,10 @@ export const SalePageComponent = props => {
     : null;
 
   return (
-    <PageLayout title={intl.formatMessage({ id: 'SalePage.title' }, { title: listingTitle })}>
+    <PageLayout
+      title={intl.formatMessage({ id: 'SalePage.title' }, { title: listingTitle })}
+      scrollingDisabled={scrollingDisabled}
+    >
       <div className={css.root}>
         {panel}
         {actionButtons}
@@ -88,7 +93,7 @@ export const SalePageComponent = props => {
 
 SalePageComponent.defaultProps = { transaction: null, currentUser: null, fetchSaleError: null };
 
-const { func, instanceOf, oneOf, shape, string } = PropTypes;
+const { bool, func, instanceOf, oneOf, shape, string } = PropTypes;
 
 SalePageComponent.propTypes = {
   currentUser: propTypes.currentUser,
@@ -97,6 +102,7 @@ SalePageComponent.propTypes = {
   onAcceptSale: func.isRequired,
   onRejectSale: func.isRequired,
   params: shape({ id: string }).isRequired,
+  scrollingDisabled: bool.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
 };
@@ -108,13 +114,20 @@ const mapStateToProps = state => {
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
 
-  return { transaction, fetchSaleError, currentUser };
+  return {
+    transaction,
+    fetchSaleError,
+    currentUser,
+    scrollingDisabled: isScrollingDisabled(state),
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onAcceptSale: transactionId => dispatch(acceptSale(transactionId)),
     onRejectSale: transactionId => dispatch(rejectSale(transactionId)),
+    onManageDisableScrolling: (componentId, disableScrolling) =>
+      dispatch(manageDisableScrolling(componentId, disableScrolling)),
   };
 };
 

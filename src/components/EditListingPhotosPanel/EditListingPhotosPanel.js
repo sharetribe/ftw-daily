@@ -73,7 +73,7 @@ class EditListingPhotosPanel extends Component {
       images,
       onImageUpload,
       onUpdateImageOrder,
-      togglePageClassNames,
+      onManageDisableScrolling,
     } = this.props;
 
     const rootClass = rootClassName || css.root;
@@ -87,7 +87,7 @@ class EditListingPhotosPanel extends Component {
         className={css.payoutModal}
         isOpen={this.state.showPayoutDetails}
         onClose={this.handlePayoutModalClose}
-        togglePageClassNames={togglePageClassNames}
+        onManageDisableScrolling={onManageDisableScrolling}
       >
         <PayoutDetailsForm
           className={css.payoutDetails}
@@ -135,7 +135,7 @@ EditListingPhotosPanel.propTypes = {
   onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,
-  togglePageClassNames: func.isRequired,
+  onManageDisableScrolling: func.isRequired,
 };
 
 export default EditListingPhotosPanel;

@@ -6,6 +6,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { PageLayout, NamedRedirect, TabNav } from '../../components';
 import { LoginForm, SignupForm } from '../../containers';
 import { login, authenticationInProgress, signup } from '../../ducks/Auth.duck';
+import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 
 import css from './AuthenticationPage.css';
 
@@ -31,6 +32,7 @@ export const AuthenticationPageComponent = props => {
     loginError,
     signupError,
     authInProgress,
+    scrollingDisabled,
     submitLogin,
     submitSignup,
     intl,
@@ -98,7 +100,7 @@ export const AuthenticationPageComponent = props => {
   ];
 
   return (
-    <PageLayout title={title}>
+    <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
       <div className={css.root}>
         <TabNav tabs={tabs} />
         {loginError ? loginErrorMessage : null}
@@ -117,7 +119,7 @@ AuthenticationPageComponent.defaultProps = {
   signupError: null,
 };
 
-const { object, oneOf, shape, bool, func, instanceOf } = PropTypes;
+const { bool, func, instanceOf, object, oneOf, shape } = PropTypes;
 
 AuthenticationPageComponent.propTypes = {
   location: shape({ state: object }).isRequired,
@@ -127,6 +129,7 @@ AuthenticationPageComponent.propTypes = {
   loginError: instanceOf(Error),
   signupError: instanceOf(Error),
   authInProgress: bool.isRequired,
+  scrollingDisabled: bool.isRequired,
 
   submitLogin: func.isRequired,
   submitSignup: func.isRequired,
@@ -142,12 +145,15 @@ const mapStateToProps = state => {
     loginError,
     signupError,
     authInProgress: authenticationInProgress(state),
+    scrollingDisabled: isScrollingDisabled(state),
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   submitLogin: ({ email, password }) => dispatch(login(email, password)),
   submitSignup: params => dispatch(signup(params)),
+  onManageDisableScrolling: (componentId, disableScrolling) =>
+    dispatch(manageDisableScrolling(componentId, disableScrolling)),
 });
 
 const AuthenticationPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(

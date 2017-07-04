@@ -1,6 +1,6 @@
 exports[`EditListingPageComponent matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
-  className=""
+  scrollingDisabled={false}
   title="EditListingPage.titleCreateListing">
   <EditListingWizard
     className={null}
@@ -17,11 +17,11 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     onCreateListing={[Function]}
     onCreateListingDraft={[Function]}
     onImageUpload={[Function]}
+    onManageDisableScrolling={[Function]}
     onPayoutDetailsSubmit={[Function]}
     onUpdateImageOrder={[Function]}
     onUpdateListingDraft={[Function]}
     rootClassName={null}
-    selectedTab="description"
-    togglePageClassNames={[Function]} />
+    selectedTab="description" />
 </Connect(withRouter(PageLayout))>
 `;

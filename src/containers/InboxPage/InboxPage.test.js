@@ -34,6 +34,7 @@ describe('InboxPage', () => {
         }),
       ],
       intl: fakeIntl,
+      scrollingDisabled: false,
     };
 
     const ordersTree = renderShallow(<InboxPageComponent {...ordersProps} />);
@@ -67,6 +68,7 @@ describe('InboxPage', () => {
         }),
       ],
       intl: fakeIntl,
+      scrollingDisabled: false,
     };
 
     const salesTree = renderShallow(<InboxPageComponent {...salesProps} />);
