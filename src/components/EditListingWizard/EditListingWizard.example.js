@@ -21,7 +21,7 @@ export const NoPhotos = {
     onCreateListingDraft: noop,
     onPayoutDetailsSubmit: noop,
     onUpdateListingDraft: noop,
-    togglePageClassNames: noop,
+    onManageDisableScrolling: noop,
   },
   useDefaultWrapperStyles: false,
 };
