@@ -12,11 +12,12 @@ import {
 } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { loadData } from './InboxPage.duck';
 
 import css from './InboxPage.css';
 
-const { shape, string, arrayOf, bool, oneOf, instanceOf } = PropTypes;
+const { arrayOf, bool, instanceOf, oneOf, shape, string } = PropTypes;
 
 // Formatted username
 const username = user => {
@@ -98,6 +99,7 @@ export const InboxPageComponent = props => {
     fetchInProgress,
     fetchOrdersOrSalesError,
     pagination,
+    scrollingDisabled,
     transactions,
     intl,
     params,
@@ -170,7 +172,7 @@ export const InboxPageComponent = props => {
   const nav = <TabNav className={css.tabs} tabs={tabs} />;
 
   return (
-    <PageLayout title={title}>
+    <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
       <h1 className={css.title}>
         <FormattedMessage id="InboxPage.title" />
       </h1>
@@ -198,6 +200,7 @@ InboxPageComponent.propTypes = {
   fetchInProgress: bool.isRequired,
   fetchOrdersOrSalesError: instanceOf(Error),
   pagination: propTypes.pagination,
+  scrollingDisabled: bool.isRequired,
   transactions: arrayOf(propTypes.transaction).isRequired,
 
   // from injectIntl
@@ -216,10 +219,18 @@ const mapStateToProps = state => {
     fetchOrdersOrSalesError,
     pagination,
     transactions: getMarketplaceEntities(state, transactionRefs),
+    scrollingDisabled: isScrollingDisabled(state),
   };
 };
 
-const InboxPage = compose(connect(mapStateToProps), injectIntl)(InboxPageComponent);
+const mapDispatchToProps = dispatch => ({
+  onManageDisableScrolling: (componentId, disableScrolling) =>
+    dispatch(manageDisableScrolling(componentId, disableScrolling)),
+});
+
+const InboxPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
+  InboxPageComponent
+);
 
 InboxPage.loadData = loadData;
 
