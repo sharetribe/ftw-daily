@@ -6,6 +6,7 @@ import config from '../../config';
 import { parse, stringify } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
+import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { PageLayout, SearchResultsPanel } from '../../components';
 import { searchListings } from './SearchPage.duck';
 import css from './SearchPage.css';
@@ -23,6 +24,7 @@ export const SearchPageComponent = props => {
     listings,
     location,
     pagination,
+    scrollingDisabled,
     searchInProgress,
     searchListingsError,
     searchParams,
@@ -83,7 +85,7 @@ export const SearchPageComponent = props => {
   const searchParamsForPagination = parse(location.search);
 
   return (
-    <PageLayout title={`Search page: ${tab}`}>
+    <PageLayout title={`Search page: ${tab}`} scrollingDisabled={scrollingDisabled}>
       <div className={css.searchResultSummary}>
         {searchListingsError ? searchError : null}
         {listingsAreLoaded && totalItems > 0 ? resultsFound : null}
@@ -122,6 +124,7 @@ SearchPageComponent.propTypes = {
   }).isRequired,
   pagination: propTypes.pagination,
 
+  scrollingDisabled: bool.isRequired,
   searchParams: object,
   searchInProgress: bool.isRequired,
   searchListingsError: instanceOf(Error),
@@ -142,10 +145,16 @@ const mapStateToProps = state => {
     searchInProgress,
     searchListingsError,
     searchParams,
+    scrollingDisabled: isScrollingDisabled(state),
   };
 };
 
-const SearchPage = connect(mapStateToProps)(withRouter(SearchPageComponent));
+const mapDispatchToProps = dispatch => ({
+  onManageDisableScrolling: (componentId, disableScrolling) =>
+    dispatch(manageDisableScrolling(componentId, disableScrolling)),
+});
+
+const SearchPage = connect(mapStateToProps, mapDispatchToProps)(withRouter(SearchPageComponent));
 
 SearchPage.loadData = (params, search) => {
   const queryParams = parse(search, {

@@ -1,5 +1,6 @@
 exports[`SearchPageComponent matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
+  scrollingDisabled={false}
   title="Search page: listings">
   <div>
     <h2>
