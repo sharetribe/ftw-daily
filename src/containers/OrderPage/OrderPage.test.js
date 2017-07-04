@@ -32,6 +32,7 @@ describe('OrderPage', () => {
       transaction,
       tab: 'details',
       intl: fakeIntl,
+      scrollingDisabled: false,
     };
 
     const tree = renderShallow(<OrderPageComponent {...props} />);

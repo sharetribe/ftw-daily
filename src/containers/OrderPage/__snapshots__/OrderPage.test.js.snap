@@ -1,5 +1,6 @@
 exports[`OrderPage matches snapshot 1`] = `
 <Connect(withRouter(PageLayout))
+  scrollingDisabled={false}
   title="OrderPage.title">
   <OrderDetailsPanel
     className="undefined"
