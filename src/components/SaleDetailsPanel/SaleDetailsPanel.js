@@ -151,10 +151,7 @@ const SaleDetailsPanel = props => {
           {title}
         </h1>
         <div className={css.avatarWrapper}>
-          <AvatarMedium
-            firstName={customerFirstName}
-            lastName={customerLastName}
-          />
+          <AvatarMedium firstName={customerFirstName} lastName={customerLastName} />
         </div>
       </div>
       <p className={css.message}>{message}</p>
