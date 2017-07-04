@@ -234,4 +234,6 @@ const Topbar = compose(
   injectIntl
 )(TopbarComponent);
 
+Topbar.displayName = 'Topbar';
+
 export default Topbar;
