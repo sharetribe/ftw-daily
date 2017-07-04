@@ -18,38 +18,45 @@ exports[`BookingDatesForm matches snapshot with selected dates 1`] = `
         [Function],
       ]
     } />
-  <BookingBreakdown
-    bookingEnd={2017-04-16T00:00:00.000Z}
-    bookingStart={2017-04-14T00:00:00.000Z}
-    lineItems={
-      Array [
-        Object {
-          "code": "line-item/night",
-          "lineTotal": Money {
-            "amount": 2198,
-            "currency": "USD",
+  <div>
+    <h3>
+      <FormattedMessage
+        id="BookingDatesForm.priceBreakdownTitle"
+        values={Object {}} />
+    </h3>
+    <BookingBreakdown
+      bookingEnd={2017-04-16T00:00:00.000Z}
+      bookingStart={2017-04-14T00:00:00.000Z}
+      lineItems={
+        Array [
+          Object {
+            "code": "line-item/night",
+            "lineTotal": Money {
+              "amount": 2198,
+              "currency": "USD",
+            },
+            "quantity": "2",
+            "unitPrice": Money {
+              "amount": 1099,
+              "currency": "USD",
+            },
           },
-          "quantity": "2",
-          "unitPrice": Money {
-            "amount": 1099,
-            "currency": "USD",
-          },
-        },
-      ]
-    }
-    payinTotal={
-      Money {
-        "amount": 2198,
-        "currency": "USD",
+        ]
       }
-    }
-    unitPrice={
-      Money {
-        "amount": 1099,
-        "currency": "USD",
+      payinTotal={
+        Money {
+          "amount": 2198,
+          "currency": "USD",
+        }
       }
-    }
-    userRole="customer" />
+      unitPrice={
+        Money {
+          "amount": 1099,
+          "currency": "USD",
+        }
+      }
+      userRole="customer" />
+  </div>
   <p>
     <FormattedMessage
       id="BookingDatesForm.youWontBeChargedInfo"
@@ -85,6 +92,13 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
         [Function],
       ]
     } />
+  <div>
+    <h3>
+      <FormattedMessage
+        id="BookingDatesForm.priceBreakdownTitle"
+        values={Object {}} />
+    </h3>
+  </div>
   <p>
     <FormattedMessage
       id="BookingDatesForm.youWontBeChargedInfo"
