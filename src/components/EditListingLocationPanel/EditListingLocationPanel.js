@@ -8,8 +8,7 @@ import css from './EditListingLocationPanel.css';
 const EditListingLocationPanel = props => {
   const { className, rootClassName, listing, onSubmit } = props;
 
-  const rootClass = rootClassName || css.root;
-  const classes = classNames(rootClass, className);
+  const classes = classNames(rootClassName || css.root, className);
   const { attributes: { address, geolocation } } = listing || { attributes: {} };
 
   // Only render current search if full place object is available in the URL params
