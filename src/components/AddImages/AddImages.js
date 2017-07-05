@@ -8,6 +8,7 @@
  * </AddImages>
  */
 import React, { Component, PropTypes } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { SortableContainer } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { Promised } from '../../components';
@@ -41,7 +42,7 @@ class Thumbnail extends Component {
     const { file, id, imageId } = this.props;
     // While image is uploading we show overlay on top of thumbnail
     const uploadingOverlay = !imageId
-      ? <div className={css.thumbnailLoading}>Uploading</div>
+      ? <div className={css.thumbnailLoading}><FormattedMessage id="AddImages.upload" /></div>
       : null;
     return (
       <Promised
@@ -57,7 +58,7 @@ class Thumbnail extends Component {
             </li>
           );
         }}
-        renderRejected={() => <li className={css.thumbnail}>Could not read file</li>}
+        renderRejected={() => <li className={css.thumbnail}><FormattedMessage id="AddImages.couldNotReadFile" /></li>}
       />
     );
   }

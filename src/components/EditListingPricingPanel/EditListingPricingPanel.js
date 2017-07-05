@@ -8,8 +8,7 @@ import css from './EditListingPricingPanel.css';
 const EditListingPricingPanel = props => {
   const { className, rootClassName, listing, onSubmit } = props;
 
-  const rootClass = rootClassName || css.root;
-  const classes = classNames(rootClass, className);
+  const classes = classNames(rootClassName || css.root, className);
   const { attributes: { price } } = listing || { attributes: {} };
 
   return (

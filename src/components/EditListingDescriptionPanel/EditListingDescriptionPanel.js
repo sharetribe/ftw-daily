@@ -8,8 +8,7 @@ import css from './EditListingDescriptionPanel.css';
 const EditListingDescriptionPanel = props => {
   const { className, rootClassName, listing, onSubmit } = props;
 
-  const rootClass = rootClassName || css.root;
-  const classes = classNames(rootClass, className);
+  const classes = classNames(rootClassName || css.root, className);
   const { attributes: { description, title } } = listing || { attributes: {} };
 
   return (

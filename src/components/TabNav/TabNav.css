@@ -1,6 +1,8 @@
 @import '../../marketplace.css';
 
 .root {
+  overflow-x: auto;
+
   &::after {
     content: ".";
     visibility: hidden;

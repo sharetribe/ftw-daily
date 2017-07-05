@@ -2,12 +2,12 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
 <form
   className=""
   onSubmit={[Function]}>
-  <Field
+  <Component
     autoFocus={true}
-    component={[Function]}
     format={null}
     label="EditListingLocationForm.address"
     name="location"
+    placeholder="EditListingLocationForm.addressPlaceholder"
     validate={
       Array [
         [Function],
@@ -20,11 +20,9 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
     name="building"
     placeholder="EditListingLocationForm.buildingPlaceholder"
     type="text" />
-  <Button
-    className={null}
-    rootClassName={null}
+  <Component
     type="submit">
     Next: pricing
-  </Button>
+  </Component>
 </form>
 `;

@@ -1,86 +1,79 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
+import { reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
-import { enhancedField } from '../../util/forms';
 import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../util/validators';
-import { LocationAutocompleteInput, Button, TextInputField } from '../../components';
+import { LocationAutocompleteInputField, PrimaryButton, TextInputField } from '../../components';
 
 import css from './EditListingLocationForm.css';
 
-export class EditListingLocationFormComponent extends Component {
-  constructor(props) {
-    super(props);
+export const EditListingLocationFormComponent = props => {
+  const {
+    className,
+    disabled,
+    handleSubmit,
+    intl,
+    form,
+    invalid,
+    saveActionMsg,
+    submitting,
+  } = props;
 
-    // We must create the enhanced components outside the render function
-    // to avoid losing focus.
-    // See: https://github.com/erikras/redux-form/releases/tag/v6.0.0-alpha.14
-    this.EnhancedLocationAutocompleteInput = enhancedField(LocationAutocompleteInput);
-  }
+  const titleRequiredMessage = intl.formatMessage({ id: 'EditListingLocationForm.address' });
+  const addressPlaceholderMessage = intl.formatMessage({
+    id: 'EditListingLocationForm.addressPlaceholder',
+  });
+  const addressRequiredMessage = intl.formatMessage({
+    id: 'EditListingLocationForm.addressRequired',
+  });
+  const addressNotRecognizedMessage = intl.formatMessage({
+    id: 'EditListingLocationForm.addressNotRecognized',
+  });
 
-  render() {
-    const {
-      className,
-      disabled,
-      handleSubmit,
-      intl,
-      form,
-      invalid,
-      saveActionMsg,
-      submitting,
-    } = this.props;
+  const buildingMessage = intl.formatMessage({ id: 'EditListingLocationForm.building' });
+  const buildingPlaceholderMessage = intl.formatMessage({
+    id: 'EditListingLocationForm.buildingPlaceholder',
+  });
 
-    const titleRequiredMessage = intl.formatMessage({ id: 'EditListingLocationForm.address' });
-    const addressRequiredMessage = intl.formatMessage({
-      id: 'EditListingLocationForm.addressRequired',
-    });
-    const addressNotRecognizedMessage = intl.formatMessage({
-      id: 'EditListingLocationForm.addressNotRecognized',
-    });
+  const classes = classNames(css.root, className);
 
-    const buildingMessage = intl.formatMessage({ id: 'EditListingLocationForm.building' });
-    const buildingPlaceholderMessage = intl.formatMessage({
-      id: 'EditListingLocationForm.buildingPlaceholder',
-    });
+  return (
+    <form className={classes} onSubmit={handleSubmit}>
+      <LocationAutocompleteInputField
+        inputClassName={css.locationAutocompleteInput}
+        iconClassName={css.locationAutocompleteInputIcon}
+        autoFocus
+        name="location"
+        label={titleRequiredMessage}
+        placeholder={addressPlaceholderMessage}
+        format={null}
+        validate={[
+          autocompleteSearchRequired(addressRequiredMessage),
+          autocompletePlaceSelected(addressNotRecognizedMessage),
+        ]}
+      />
 
-    const classes = classNames(css.root, className);
+      <TextInputField
+        className={css.building}
+        type="text"
+        name="building"
+        id={`${form}.building`}
+        label={buildingMessage}
+        placeholder={buildingPlaceholderMessage}
+      />
 
-    return (
-      <form className={classes} onSubmit={handleSubmit}>
-        <Field
-          autoFocus
-          name="location"
-          label={titleRequiredMessage}
-          format={null}
-          component={this.EnhancedLocationAutocompleteInput}
-          validate={[
-            autocompleteSearchRequired(addressRequiredMessage),
-            autocompletePlaceSelected(addressNotRecognizedMessage),
-          ]}
-        />
-
-        <TextInputField
-          className={css.building}
-          type="text"
-          name="building"
-          id={`${form}.building`}
-          label={buildingMessage}
-          placeholder={buildingPlaceholderMessage}
-        />
-
-        <Button
-          className={css.submitButton}
-          type="submit"
-          disabled={invalid || submitting || disabled}
-        >
-          {saveActionMsg}
-        </Button>
-      </form>
-    );
-  }
+      <PrimaryButton
+        className={css.submitButton}
+        type="submit"
+        disabled={invalid || submitting || disabled}
+      >
+        {saveActionMsg}
+      </PrimaryButton>
+    </form>
+  );
 }
 
 EditListingLocationFormComponent.defaultProps = {

@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+import { Field } from 'redux-form';
 import { debounce } from 'lodash';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
+import { ValidationError } from '../../components';
 
 import css from './LocationAutocompleteInput.css';
 
@@ -90,7 +92,7 @@ const LocationPredictionsList = props => {
   );
 };
 
-const { bool, shape, string, arrayOf, func, any, number } = PropTypes;
+const { any, arrayOf, bool, func, number, object, shape, string } = PropTypes;
 
 LocationPredictionsList.defaultProps = {
   rootClassName: null,
@@ -466,3 +468,49 @@ LocationAutocompleteInput.propTypes = {
 };
 
 export default LocationAutocompleteInput;
+
+class LocationAutocompleteInputFieldComponent extends Component {
+  componentWillUnmount() {
+    if (this.props.clearOnUnmount) {
+      this.props.input.onChange('');
+    }
+  }
+
+  render() {
+    /* eslint-disable no-unused-vars */
+    const { rootClassName, labelClassName, clearOnUnmount, ...restProps } = this.props;
+    const { input, label, meta, ...otherProps } = restProps;
+    /* eslint-enable no-unused-vars */
+
+    const labelInfo = label
+      ? <label className={labelClassName} htmlFor={input.name}>{label}</label>
+      : null;
+
+    return (
+      <div className={rootClassName}>
+        {labelInfo}
+        <LocationAutocompleteInput {...restProps} />
+        <ValidationError fieldMeta={meta} />
+      </div>
+    );
+  }
+}
+
+LocationAutocompleteInputFieldComponent.defaultProps = { rootClassName: null, labelClassName: null, type: null, label: null, clearOnUnmount: false };
+
+LocationAutocompleteInputFieldComponent.propTypes = {
+  rootClassName: string,
+  labelClassName: string,
+  input: shape({
+    onChange: func.isRequired,
+    name: string.isRequired,
+  }).isRequired,
+  label: string,
+  meta: object.isRequired,
+  clearOnUnmount: bool,
+};
+
+export const LocationAutocompleteInputField = props => {
+  return <Field component={LocationAutocompleteInputFieldComponent} {...props} />;
+};
+

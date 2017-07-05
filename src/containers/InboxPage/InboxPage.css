@@ -33,6 +33,7 @@
   border-top-width: 1px;
   border-top-color: var(--matterColorNegative);
   border-top-style: solid;
+  background-color: var(--matterColorLight);
   box-shadow: var(--boxShadow);
 }
 

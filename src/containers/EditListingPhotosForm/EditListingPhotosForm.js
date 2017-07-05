@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
-import { intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { noEmptyArray } from '../../util/validators';
-import { AddImages, Button, ValidationError } from '../../components';
+import { AddImages, PrimaryButton, ValidationError } from '../../components';
 
 import css from './EditListingPhotosForm.css';
 
@@ -27,7 +27,7 @@ const RenderAddImage = props => {
   );
 };
 
-const { func, object, shape, string } = PropTypes;
+const { func, node, object, shape, string } = PropTypes;
 
 RenderAddImage.propTypes = {
   accept: string.isRequired,
@@ -36,7 +36,7 @@ RenderAddImage.propTypes = {
     onChange: func.isRequired,
     name: string.isRequired,
   }).isRequired,
-  label: string.isRequired,
+  label: node.isRequired,
   type: string.isRequired,
 };
 
@@ -77,6 +77,19 @@ export class EditListingPhotosFormComponent extends Component {
       submitting,
     } = this.props;
 
+    const chooseImageText = (
+      <span className={css.chooseImageText}>
+        <span className={css.chooseImage}>
+          <FormattedMessage id="EditListingPhotosForm.chooseImage" />
+        </span>
+        <span className={css.imageTypes}>
+          <FormattedMessage id="EditListingPhotosForm.imageTypes" />
+        </span>
+      </span>
+      );
+
+    // TODO Add tip #2: re-order text
+
     const imageRequiredMessage = intl.formatMessage({ id: 'EditListingPhotosForm.imageRequired' });
 
     const classes = classNames(css.root, className);
@@ -86,9 +99,10 @@ export class EditListingPhotosFormComponent extends Component {
 
         <AddImages className={css.imagesField} images={images} onSortEnd={this.onSortEnd}>
           <Field
+            id="EditListingPhotosForm.AddImages"
             accept={ACCEPT_IMAGES}
             component={RenderAddImage}
-            label="+ Add image"
+            label={chooseImageText}
             name="addImage"
             onChange={this.onImageUploadHandler}
             type="file"
@@ -110,13 +124,17 @@ export class EditListingPhotosFormComponent extends Component {
           />
         </AddImages>
 
-        <Button
+        <p className={css.tip}>
+          <FormattedMessage id="EditListingPhotosForm.addImagesTip" />
+        </p>
+
+        <PrimaryButton
           className={css.submitButton}
           type="submit"
           disabled={invalid || submitting || disabled}
         >
           {saveActionMsg}
-        </Button>
+        </PrimaryButton>
       </form>
     );
   }

@@ -91,7 +91,7 @@ export const EditListingPageComponent = props => {
 
     return (
       <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
-        <Topbar history={history} location={location} />
+        <Topbar mobileRootClassName={css.mobileTopbar} history={history} location={location} />
         <EditListingWizard
           className={css.wizard}
           disabled={disableForm}

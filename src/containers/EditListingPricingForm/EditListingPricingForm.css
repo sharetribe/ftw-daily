@@ -7,25 +7,12 @@
   flex-grow: 1;
 }
 
-.priceWrapper {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  flex-grow: 1;
-}
-
 .priceInput {
-  flex-basis: 70%;
-}
-
-.perNight {
-  flex-basis: 80px;
-  font-size: 14px;
-  line-height: 50px;
-  margin-left: 1rem;
+  flex-shrink: 0;
+  width: 100%;
 }
 
 .submitButton {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: auto;
+  margin-bottom: 24px;
 }
