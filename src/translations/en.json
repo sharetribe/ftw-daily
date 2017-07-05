@@ -1,4 +1,6 @@
 {
+  "AddImages.upload": "Upload",
+  "AddImages.couldNotReadFile": "Could not read file",
   "AuthenticationPage.emailAlreadyInUse": "An account already exists with this email address. Try logging in instead.",
   "AuthenticationPage.loginFailed": "The email and password you entered did not match our records. Please double-check and try again.",
   "AuthenticationPage.loginLinkText": "Login",
