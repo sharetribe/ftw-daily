@@ -82,7 +82,8 @@
   /* Remove default bg-color and use our extra span instead '.renderedDay' */
   & :global(.CalendarDay--hovered-span),
   & :global(.CalendarDay--selected-span) {
-    background: transparent;
+    background-image: transparent;
+    background-color: transparent;
   }
   & :global(.CalendarDay--hovered-span .renderedDay) {
     display: flex;
