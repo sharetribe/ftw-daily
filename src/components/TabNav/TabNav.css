@@ -26,6 +26,7 @@
   @apply --marketplaceH4FontStyles;
   color: var(--matterColor);
 
+  padding-bottom: 10px;
   margin-top: 0;
   margin-bottom: 0;
 
@@ -42,7 +43,6 @@
 
 .selectedLink {
   border-bottom: 2px solid var(--matterColorDark);
-  padding-bottom: 10px;
 }
 
 .disabled {
