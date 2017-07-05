@@ -1,22 +1,81 @@
+@import '../../marketplace.css';
+
+.mobileTopbar {
+  /* Size */
+  width: 100%;
+  height: var(--topbarHeight);
+
+  /* Layout for child components */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  /* fill */
+  background-color: var(--matterColorLight);
+
+  /* shadows */
+  box-shadow: none;
+
+  @media (--desktopViewport) {
+    display: none;
+  }
+}
+
+.heading {
+
+  /* Layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 29px 24px 0 24px;
+
+  border-top-width: 1px;
+  border-top-color: var(--matterColorNegative);
+  border-top-style: solid;
+  box-shadow: var(--boxShadow);
+}
+
 .title {
-  margin: 1rem;
+
+  /* Font */
+  @apply --marketplaceH1FontStyles;
+  color: var(--matterColor);
+
+  /* Layout */
+  margin-top: 0;
+  margin-bottom: 0;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .tabs {
-  margin-left: 1rem;
+  padding-top: 11px;
 }
 
 .error {
   color: red;
-  margin: 1rem;
+  margin: 24px;
 }
 
 .noResults {
-  margin: 0 1rem;
+  margin: 0 24px;
+}
+
+.itemList {
+  margin: 0;
+  padding: 18px 24px;
 }
 
 .listItem {
-  border-bottom: 1px solid #979797;
+  /* Layout */
+  margin-bottom: 11px;
+
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: var(--matterColorNegative);
 
   &:last-child {
     border-bottom: none;
@@ -24,42 +83,149 @@
 }
 
 .itemLink {
+  /* Layout */
   display: flex;
-  padding: 1rem;
+  padding-bottom: 11px;
+
+  /* Remove text underline from this link */
   text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .itemAvatar {
-  margin-right: 1rem;
-  width: 44px;
-  height: 44px;
+  margin-right: 8px;
+  width: 43px;
+  height: 43px;
 }
 
 .itemAvatarImage {
   border-radius: 50%;
 }
 
+.rowNotificationBadge {
+  width: 6px;
+  height: 6px;
+  margin-top: 10px;
+  margin-right: 8px;
+}
+
+.notificationBadge {
+  color: var(--matterColorLight);
+
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--failColor);
+}
+
+.notificationCount {
+  /* Font */
+  @apply --marketplaceH6FontStyles;
+  color: var(--matterColorLight);
+  text-align: center;
+
+  background-color: var(--failColor);
+
+  /* Layout of a red dot */
+  display: inline-block;
+  width: auto;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  padding-right: 6px;
+  padding-left: 6px;
+  margin-left: 4px;
+
+  /* Font margins off */
+  margin-top: 0;
+  margin-bottom: 0;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
 .itemInfo {
+  /* Layout */
+  flex-grow: 1;
   flex: 1;
+  flex-direction: column;
 }
 
 .itemUsername {
-  font-weight: bold;
-  font-size: 16px;
-  text-decoration: none;
+  /* Font */
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColor);
+
+  margin-top: 0;
+  margin-bottom: 0px;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .itemTimestamp {
-  float: right;
-  font-size: 14px;
+  /* Font */
+  @apply --marketplaceH5FontStyles;
+
+  margin-top: 4px;
+  margin-bottom: 0px;
+  @media (--desktopViewport) {
+    margin-top: 4px;
+    margin-bottom: 0;
+  }
 }
 
 .itemState {
-  margin-top: 5px;
-  font-size: 14px;
-  text-decoration: none;
+  /* Font */
+  @apply --marketplaceH5FontStyles;
+
+  margin-top: 4px;
+  margin-bottom: 0px;
+  @media (--desktopViewport) {
+    margin-top: 4px;
+    margin-bottom: 0;
+  }
 }
 
 .pagination {
-  margin: 0 1rem;
+  margin: auto 24px 0 24px;
+}
+
+/* Transaction status affects to certain font colors and weights */
+
+.namePending {
+  font-weight: var(--fontWeightRegular);
+}
+
+.timePending {
+  color: var(--matterColor);
+}
+
+.statePending {
+  font-weight: var(--fontWeightSemiBold);
+  color: var(--attentionColor);
+}
+
+.stateAccepted,
+.stateDelivered {
+  color: var(--successColor);
+}
+.stateDeclined {
+  color: var(--matterColorAnti);
+}
+
+.nameDeclined,
+.nameAccepted,
+.nameDelivered {
+  font-weight: var(--fontWeightMedium);
+}
+
+.timeDeclined,
+.timeAccepted,
+.timeDelivered {
+  color: var(--matterColorAnti);
 }

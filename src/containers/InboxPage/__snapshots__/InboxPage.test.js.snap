@@ -13,38 +13,48 @@ exports[`InboxPage matches snapshot 1`] = `
         "search": "",
       }
     } />
-  <h1>
-    <FormattedMessage
-      id="InboxPage.title"
-      values={Object {}} />
-  </h1>
-  <TabNav
-    className={null}
-    rootClassName={null}
-    tabs={
-      Array [
-        Object {
-          "linkProps": Object {
-            "name": "InboxPage",
-            "params": Object {
-              "tab": "orders",
+  <div>
+    <h1>
+      <FormattedMessage
+        id="InboxPage.title"
+        values={Object {}} />
+    </h1>
+    <TabNav
+      className={null}
+      rootClassName={null}
+      tabs={
+        Array [
+          Object {
+            "linkProps": Object {
+              "name": "InboxPage",
+              "params": Object {
+                "tab": "orders",
+              },
             },
+            "selected": true,
+            "text": <span>
+              <FormattedMessage
+                    id="InboxPage.ordersTabTitle"
+                    values={Object {}} />
+        </span>,
           },
-          "selected": true,
-          "text": "InboxPage.ordersTabTitle",
-        },
-        Object {
-          "linkProps": Object {
-            "name": "InboxPage",
-            "params": Object {
-              "tab": "sales",
+          Object {
+            "linkProps": Object {
+              "name": "InboxPage",
+              "params": Object {
+                "tab": "sales",
+              },
             },
+            "selected": false,
+            "text": <span>
+              <FormattedMessage
+                    id="InboxPage.salesTabTitle"
+                    values={Object {}} />
+        </span>,
           },
-          "selected": false,
-          "text": "InboxPage.salesTabTitle",
-        },
-      ]
-    } />
+        ]
+      } />
+  </div>
   <ul>
     <li>
       <Component
@@ -222,22 +232,22 @@ exports[`InboxPage matches snapshot 2`] = `
     </div>
   </div>
   <div
+    className={undefined} />
+  <div
     className={undefined}>
-    <div>
-      <span
-        className={undefined}>
-        provider-user-id first name provider-user-id last name
-      </span>
-      <span
-        className={undefined}
-        title="2017-01-15 00:00">
-        2017-01-15
-      </span>
+    <div
+      className="">
+      provider-user-id first name provider-user-id last name
     </div>
     <div
-      className={undefined}>
-      InboxPage.statePending
+      className=""
+      title="2017-01-15 00:00">
+      2017-01-15
     </div>
+  </div>
+  <div
+    className="">
+    InboxPage.statePending
   </div>
 </a>
 `;
@@ -257,38 +267,48 @@ exports[`InboxPage matches snapshot 3`] = `
         "search": "",
       }
     } />
-  <h1>
-    <FormattedMessage
-      id="InboxPage.title"
-      values={Object {}} />
-  </h1>
-  <TabNav
-    className={null}
-    rootClassName={null}
-    tabs={
-      Array [
-        Object {
-          "linkProps": Object {
-            "name": "InboxPage",
-            "params": Object {
-              "tab": "orders",
+  <div>
+    <h1>
+      <FormattedMessage
+        id="InboxPage.title"
+        values={Object {}} />
+    </h1>
+    <TabNav
+      className={null}
+      rootClassName={null}
+      tabs={
+        Array [
+          Object {
+            "linkProps": Object {
+              "name": "InboxPage",
+              "params": Object {
+                "tab": "orders",
+              },
             },
+            "selected": false,
+            "text": <span>
+              <FormattedMessage
+                    id="InboxPage.ordersTabTitle"
+                    values={Object {}} />
+        </span>,
           },
-          "selected": false,
-          "text": "InboxPage.ordersTabTitle",
-        },
-        Object {
-          "linkProps": Object {
-            "name": "InboxPage",
-            "params": Object {
-              "tab": "sales",
+          Object {
+            "linkProps": Object {
+              "name": "InboxPage",
+              "params": Object {
+                "tab": "sales",
+              },
             },
+            "selected": true,
+            "text": <span>
+              <FormattedMessage
+                    id="InboxPage.salesTabTitle"
+                    values={Object {}} />
+        </span>,
           },
-          "selected": true,
-          "text": "InboxPage.salesTabTitle",
-        },
-      ]
-    } />
+        ]
+      } />
+  </div>
   <ul>
     <li>
       <Component
@@ -467,21 +487,24 @@ exports[`InboxPage matches snapshot 4`] = `
   </div>
   <div
     className={undefined}>
-    <div>
-      <span
-        className={undefined}>
-        customer-user-id first name customer-user-id last name
-      </span>
-      <span
-        className={undefined}
-        title="2017-01-15 00:00">
-        2017-01-15
-      </span>
+    <div
+      className={undefined} />
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className="">
+      customer-user-id first name customer-user-id last name
     </div>
     <div
-      className={undefined}>
-      InboxPage.statePending
+      className=""
+      title="2017-01-15 00:00">
+      2017-01-15
     </div>
+  </div>
+  <div
+    className="">
+    InboxPage.statePending
   </div>
 </a>
 `;
