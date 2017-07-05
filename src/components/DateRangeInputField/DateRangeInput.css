@@ -3,7 +3,7 @@
 :root {
   --selectionHeight: 36px;
   --hoveredOverlayColor: rgba(255, 255, 255, 0.2);
-  --datepickerDistanceToTop: 242px;
+  --datepickerDistanceToTop: 252px;
 }
 
 .inputRoot {
@@ -17,7 +17,7 @@
     display: block;
   }
   & :global(.DateRangePicker__picker--horizontal) {
-    top: 34px;
+    top: 36px;
     width: 100%;
     min-height: calc(100vh - var(--datepickerDistanceToTop));
     background-color: var(--marketplaceColor);
@@ -43,10 +43,18 @@
   }
   & :global(.DayPicker__week-header) {
     color: var(--matterColorLight);
+    top: 57px;
+  }
+
+  & :global(.DayPicker__week-header li) {
+    font-weight: 400;
   }
 
   & :global(.CalendarMonth__caption) {
     color: var(--matterColorLight);
+    @apply --marketplaceH2FontStyles;
+    margin: 1px 0 14px;
+    font-weight: 400;
   }
   & :global(.DayPickerNavigation__prev),
   & :global(.DayPickerNavigation__next) {
@@ -64,12 +72,17 @@
       margin-bottom: 0;
     }
   }
+
+  /* Add an underline for '.renderedDay' */
   & :global(.CalendarDay--today) {
-    text-decoration: underline;
+    background-image: url("data:image/svg+xml;utf8,<svg width='14' height='2' viewBox='0 0 14 2' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h14v2H0z' fill='#FFF' fill-rule='evenodd'/></svg>");
+    background-position: center 30px;
   }
+
   /* Remove default bg-color and use our extra span instead '.renderedDay' */
   & :global(.CalendarDay--hovered-span),
   & :global(.CalendarDay--selected-span) {
+    background-image: transparent;
     background-color: transparent;
   }
   & :global(.CalendarDay--hovered-span .renderedDay) {
@@ -91,6 +104,7 @@
   /* Remove default bg-color and use our extra span instead '.renderedDay' */
   & :global(.CalendarDay--selected-start) {
     background-color: transparent;
+    background-image: none;
   }
   & :global(.CalendarDay--selected-start .renderedDay) {
     display: flex;
@@ -175,15 +189,15 @@
 .withMobileMargins {
   & :global(.DateRangePickerInput) {
     width: calc(100% - 48px);
-    margin: 0 24px;
+    margin: 0 24px 3px 24px;
   }
 
   /* Create gutter between inputs */
   & :global(.DateInput) {
-    width: calc(100% - 9px);
+    width: calc(100% - 6px);
   }
   & :global(.DateInput:first-of-type) {
-    margin-right: 18px;
+    margin-right: 12px;
   }
 }
 

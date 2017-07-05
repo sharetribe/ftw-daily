@@ -92,13 +92,6 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
         [Function],
       ]
     } />
-  <div>
-    <h3>
-      <FormattedMessage
-        id="BookingDatesForm.priceBreakdownTitle"
-        values={Object {}} />
-    </h3>
-  </div>
   <p>
     <FormattedMessage
       id="BookingDatesForm.youWontBeChargedInfo"

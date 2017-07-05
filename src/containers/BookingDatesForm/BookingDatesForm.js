@@ -101,14 +101,14 @@ export const BookingDatesFormComponent = props => {
   const endDateErrorMessage = intl.formatMessage({ id: 'DateRangeInputField.invalidEndDate' });
 
   const hasBookingInfo = startDate && endDate;
-  const bookingInfo = (
-    <div className={css.priceBreakdownContainer}>
-      <h3 className={css.priceBreakdownTitle}>
-        <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
-      </h3>
-      {breakdown(startDate, endDate, unitPrice)}
-    </div>
-  );
+  const bookingInfo = hasBookingInfo
+    ? <div className={css.priceBreakdownContainer}>
+        <h3 className={css.priceBreakdownTitle}>
+          <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
+        </h3>
+        {breakdown(startDate, endDate, unitPrice)}
+      </div>
+    : null;
 
   const submitDisabled = submitting || invalid || !hasBookingInfo;
 
