@@ -9,7 +9,21 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
     <Field
       accept="image/*"
       component={[Function]}
-      label="+ Add image"
+      id="EditListingPhotosForm.AddImages"
+      label={
+        <span>
+          <span>
+            <FormattedMessage
+              id="EditListingPhotosForm.chooseImage"
+              values={Object {}} />
+          </span>
+          <span>
+            <FormattedMessage
+              id="EditListingPhotosForm.imageTypes"
+              values={Object {}} />
+          </span>
+        </span>
+      }
       name="addImage"
       onChange={[Function]}
       type="file" />
@@ -23,11 +37,14 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
         ]
       } />
   </AddImages>
-  <Button
-    className={null}
-    rootClassName={null}
+  <p>
+    <FormattedMessage
+      id="EditListingPhotosForm.addImagesTip"
+      values={Object {}} />
+  </p>
+  <Component
     type="submit">
     Publish listing
-  </Button>
+  </Component>
 </form>
 `;

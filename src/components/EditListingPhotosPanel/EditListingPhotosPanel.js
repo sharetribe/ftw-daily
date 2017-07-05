@@ -82,25 +82,8 @@ class EditListingPhotosPanel extends Component {
     });
     const currency = config.currencyConfig.currency;
 
-    const payoutDetailsModal = (
-      <Modal
-        className={css.payoutModal}
-        isOpen={this.state.showPayoutDetails}
-        onClose={this.handlePayoutModalClose}
-        onManageDisableScrolling={onManageDisableScrolling}
-      >
-        <PayoutDetailsForm
-          className={css.payoutDetails}
-          currency={currency}
-          disabled={fetchInProgress}
-          onSubmit={this.handlePayoutSubmit}
-        />
-      </Modal>
-    );
-
     return (
       <div className={classes}>
-        {payoutDetailsModal}
         <h1><FormattedMessage id="EditListingPhotosPanel.title" /></h1>
         <EditListingPhotosForm
           className={css.form}
@@ -111,6 +94,20 @@ class EditListingPhotosPanel extends Component {
           onSubmit={this.handlePhotosSubmit}
           onUpdateImageOrder={onUpdateImageOrder}
         />
+        <Modal
+          id="EditListingPhotosPanel.payoutModal"
+          className={css.payoutModal}
+          isOpen={this.state.showPayoutDetails}
+          onClose={this.handlePayoutModalClose}
+          onManageDisableScrolling={onManageDisableScrolling}
+        >
+          <PayoutDetailsForm
+            className={css.payoutDetails}
+            currency={currency}
+            disabled={fetchInProgress}
+            onSubmit={this.handlePayoutSubmit}
+          />
+        </Modal>
       </div>
     );
   }
