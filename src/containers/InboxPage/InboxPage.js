@@ -36,10 +36,14 @@ const username = user => {
 const timestamp = (intl, tx) => {
   const defaultValue = { datetime: '', date: '' };
   const date = tx.attributes ? tx.attributes.lastTransitionedAt : null;
+  const dateFormatOptions = {
+    month: 'long',
+    day: 'numeric',
+  };
   return date
     ? {
         datetime: `${intl.formatDate(date)} ${intl.formatTime(date)}`,
-        date: intl.formatDate(date),
+        date: intl.formatDate(date, dateFormatOptions),
       }
     : defaultValue;
 };
