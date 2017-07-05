@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import config from '../../config';
 import { required } from '../../util/validators';
-import { Button, CurrencyInputField } from '../../components';
+import { PrimaryButton, CurrencyInputField } from '../../components';
 
 import css from './EditListingPricingForm.css';
 
@@ -20,32 +20,32 @@ export const EditListingPricingFormComponent = props => {
     submitting,
   } = props;
 
+  const pricePerNightMessage = intl.formatMessage({ id: 'EditListingPricingForm.pricePerNight' });
   const priceRequiredMessage = intl.formatMessage({ id: 'EditListingPricingForm.priceRequired' });
+  const pricePlaceholderMessage = intl.formatMessage({ id: 'EditListingPricingForm.priceInputPlaceholder' });
 
   const classes = classNames(css.root, className);
 
   return (
     <form className={classes} onSubmit={handleSubmit}>
-      <div className={css.priceWrapper}>
-        <CurrencyInputField
-          className={css.priceInput}
-          name="price"
-          currencyConfig={config.currencyConfig}
-          validate={[required(priceRequiredMessage)]}
-          autoFocus
-        />
-        <div className={css.perNight}>
-          <FormattedMessage id="EditListingPricingForm.perNight" />
-        </div>
-      </div>
+      <CurrencyInputField
+        id="EditListingPricingForm.CurrencyInputField"
+        className={css.priceInput}
+        autoFocus
+        name="price"
+        label={pricePerNightMessage}
+        placeholder={pricePlaceholderMessage}
+        currencyConfig={config.currencyConfig}
+        validate={[required(priceRequiredMessage)]}
+      />
 
-      <Button
+      <PrimaryButton
         className={css.submitButton}
         type="submit"
         disabled={invalid || submitting || disabled}
       >
         {saveActionMsg}
-      </Button>
+      </PrimaryButton>
     </form>
   );
 };
