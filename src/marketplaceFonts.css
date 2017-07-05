@@ -166,7 +166,6 @@
   --marketplaceTinyFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
-    color: var(--matterColorAnti);
     font-size: 13px;
     line-height: 18px;
     letter-spacing: -0.1px;

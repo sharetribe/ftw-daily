@@ -40,6 +40,7 @@
 
 .smallPrint {
   @apply --marketplaceTinyFontStyles;
+  color: var(--matterColorAnti);
   text-align: center;
   margin: auto 24px 21px 24px;
   flex-shrink: 0;
