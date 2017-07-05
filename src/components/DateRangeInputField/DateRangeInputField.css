@@ -33,15 +33,17 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  transition: all 0.15s ease-out;
 }
 
 .input {
   flex-basis: 50%;
   border-bottom-style: solid;
-  border-bottom-width: 3px;
+  border-bottom-width: 2px;
   border-bottom-color: var(--attentionColor);
 
   transition: border-bottom-color var(--transitionStyle);
+  transition: all 0.15s ease-out;
 
   &:hover,
   &:focus {
@@ -73,10 +75,11 @@
   /* Gutter between inputs (when calendar is not visible) */
   & .startDateLabel,
   & .endDateLabel {
-    flex-basis: calc(50% - 9px);
+    flex-basis: calc(50% - 6px);
   }
 
   & .input {
-    flex-basis: calc(50% - 9px);
+    flex-basis: calc(50% - 6px);
+    transition: all 0.15s ease-out;
   }
 }
