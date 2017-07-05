@@ -20,10 +20,10 @@ const Tab = props => {
 
 Tab.defaultProps = { disabled: false, selected: false };
 
-const { arrayOf, object, string, bool } = PropTypes;
+const { arrayOf, bool, node, object, string } = PropTypes;
 
 Tab.propTypes = {
-  text: string.isRequired,
+  text: node.isRequired,
   disabled: bool,
   selected: bool,
   linkProps: object.isRequired,
@@ -34,7 +34,10 @@ const TabNav = props => {
   const classes = classNames(rootClassName || css.root, className);
   return (
     <nav className={classes}>
-      {tabs.map(tab => <Tab key={tab.text} {...tab} />)}
+      {tabs.map((tab, index) => {
+        const key = typeof tab.text === 'string' ? tab.text : index;
+        return <Tab key={key} {...tab} />;
+      })}
     </nav>
   );
 };

@@ -75,7 +75,7 @@
   "InboxPage.stateAccepted": "Accepted",
   "InboxPage.stateDelivered": "Delivered",
   "InboxPage.statePending": "Pending",
-  "InboxPage.stateRejected": "Rejected",
+  "InboxPage.stateDeclined": "Declined",
   "InboxPage.title": "Inbox",
   "ListingCard.hostedBy": "Hosted by {authorName}.",
   "ListingCard.perNight": "per night",

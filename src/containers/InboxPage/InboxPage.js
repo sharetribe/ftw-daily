@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import classNames from 'classnames';
 import {
   Avatar,
   NamedLink,
@@ -47,21 +48,41 @@ const timestamp = (intl, tx) => {
 const txState = (intl, tx) => {
   const { attributes: { state } } = tx;
   if (state === propTypes.TX_STATE_ACCEPTED) {
-    return intl.formatMessage({
-      id: 'InboxPage.stateAccepted',
-    });
+    return {
+      nameClassName: css.nameAccepted,
+      timeClassName: css.timeAccepted,
+      stateClassName: css.stateAccepted,
+      state: intl.formatMessage({
+        id: 'InboxPage.stateAccepted',
+      }),
+    };
   } else if (state === propTypes.TX_STATE_REJECTED) {
-    return intl.formatMessage({
-      id: 'InboxPage.stateRejected',
-    });
+    return {
+      nameClassName: css.nameDeclined,
+      timeClassName: css.timeDeclined,
+      stateClassName: css.stateDeclined,
+      state: intl.formatMessage({
+        id: 'InboxPage.stateDeclined',
+      }),
+    };
   } else if (state === propTypes.TX_STATE_DELIVERED) {
-    return intl.formatMessage({
-      id: 'InboxPage.stateDelivered',
-    });
+    return {
+      nameClassName: css.nameDelivered,
+      timeClassName: css.timeDelivered,
+      stateClassName: css.stateDelivered,
+      state: intl.formatMessage({
+        id: 'InboxPage.stateDelivered',
+      }),
+    };
   }
-  return intl.formatMessage({
-    id: 'InboxPage.statePending',
-  });
+  return {
+    nameClassName: css.namePending,
+    timeClassName: css.timePending,
+    stateClassName: css.statePending,
+    state: intl.formatMessage({
+      id: 'InboxPage.statePending',
+    }),
+  };
 };
 
 export const InboxItem = props => {
@@ -70,6 +91,15 @@ export const InboxItem = props => {
   const isOrder = type === 'order';
   const otherUser = username(isOrder ? provider : customer);
   const changedDate = timestamp(intl, tx);
+  const stateData = txState(intl, tx);
+  const isOrderOrSaleNotification = (isOrder &&
+    tx.attributes.state === propTypes.TX_STATE_ACCEPTED) ||
+    (!isOrder && tx.attributes.state === propTypes.TX_STATE_PREAUTHORIZED);
+
+  const rowNotificationBadge = isOrderOrSaleNotification
+    ? <div className={css.notificationBadge} />
+    : null;
+
   return (
     <NamedLink
       className={css.itemLink}
@@ -79,13 +109,21 @@ export const InboxItem = props => {
       <div className={css.itemAvatar}>
         <Avatar firstName={otherUser.firstName} lastName={otherUser.lastName} />
       </div>
-      <div className={css.itemInfo}>
-        <div>
-          <span className={css.itemUsername}>{otherUser.name}</span>
-          <span className={css.itemTimestamp} title={changedDate.datetime}>{changedDate.date}</span>
-        </div>
-        <div className={css.itemState}>{txState(intl, tx)}</div>
+      <div className={css.rowNotificationBadge}>
+        {rowNotificationBadge}
       </div>
+      <div className={css.itemInfo}>
+        <div className={classNames(css.itemUsername, stateData.nameClassName)}>
+          {otherUser.name}
+        </div>
+        <div
+          className={classNames(css.itemTimestamp, stateData.timeClassName)}
+          title={changedDate.datetime}
+        >
+          {changedDate.date}
+        </div>
+      </div>
+      <div className={classNames(css.itemState, stateData.stateClassName)}>{stateData.state}</div>
     </NamedLink>
   );
 };
@@ -153,9 +191,7 @@ export const InboxPageComponent = props => {
 
   const tabs = [
     {
-      text: intl.formatMessage({
-        id: 'InboxPage.ordersTabTitle',
-      }),
+      text: <span><FormattedMessage id="InboxPage.ordersTabTitle" /></span>,
       selected: isOrders,
       linkProps: {
         name: 'InboxPage',
@@ -163,9 +199,7 @@ export const InboxPageComponent = props => {
       },
     },
     {
-      text: intl.formatMessage({
-        id: 'InboxPage.salesTabTitle',
-      }),
+      text: <span><FormattedMessage id="InboxPage.salesTabTitle" /></span>,
       selected: !isOrders,
       linkProps: {
         name: 'InboxPage',
@@ -177,13 +211,15 @@ export const InboxPageComponent = props => {
 
   return (
     <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
-      <Topbar history={history} location={location} />
-      <h1 className={css.title}>
-        <FormattedMessage id="InboxPage.title" />
-      </h1>
-      {nav}
+      <Topbar mobileRootClassName={css.mobileTopbar} history={history} location={location} />
+      <div className={css.heading}>
+        <h1 className={css.title}>
+          <FormattedMessage id="InboxPage.title" />
+        </h1>
+        {nav}
+      </div>
       {error}
-      <ul>
+      <ul className={css.itemList}>
         {!fetchInProgress ? transactions.map(toTxItem) : null}
         {noResults}
       </ul>

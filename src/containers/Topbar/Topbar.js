@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
+import classNames from 'classnames';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling } from '../../ducks/UI.duck';
 import { Button, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
@@ -83,6 +84,9 @@ class TopbarComponent extends Component {
 
   render() {
     const {
+      className,
+      rootClassName,
+      mobileRootClassName,
       isAuthenticated,
       authInProgress,
       currentUser,
@@ -122,9 +126,11 @@ class TopbarComponent extends Component {
         : null,
     };
 
+    const classes = classNames(rootClassName || css.root, className);
+
     return (
-      <div className={css.root}>
-        <div className={css.container}>
+      <div className={classes}>
+        <div className={classNames(mobileRootClassName || css.container)}>
           <Button rootClassName={css.menu} onClick={this.handleMobileMenuOpen}>
             <MenuIcon
               className={css.menuIcon}
@@ -184,11 +190,19 @@ class TopbarComponent extends Component {
   }
 }
 
-TopbarComponent.defaultProps = { currentUser: null };
+TopbarComponent.defaultProps = {
+  className: null,
+  rootClassName: null,
+  mobileRootClassName: null,
+  currentUser: null,
+};
 
 const { arrayOf, bool, func, shape, string } = PropTypes;
 
 TopbarComponent.propTypes = {
+  className: string,
+  rootClassName: string,
+  mobileRootClassName: string,
   isAuthenticated: bool.isRequired,
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
