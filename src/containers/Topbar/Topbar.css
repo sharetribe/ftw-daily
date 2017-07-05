@@ -9,7 +9,6 @@
 }
 
 .container {
-
   /* Size */
   width: 100%;
   height: var(--topbarHeight);
@@ -24,7 +23,7 @@
   background-color: var(--matterColorLight);
 
   /* shadows */
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+  box-shadow: var(--boxShadow);
 
   @media (--desktopViewport) {
     display: none;
