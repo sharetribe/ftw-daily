@@ -1,6 +1,9 @@
 @import '../../marketplace.css';
 
 .root {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   overflow-x: auto;
 }
 
