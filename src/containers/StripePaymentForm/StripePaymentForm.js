@@ -42,12 +42,24 @@ const stripeErrorTranslation = (intl, stripeError) => {
   });
 };
 
+const stripeElementsOptions = {
+  fonts: [
+    {
+      family: 'sofiapro',
+      weight: 500,
+      src: 'local("sofiapro"), local("SofiaPro"), local("Sofia Pro"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2") format("woff2")',
+    },
+  ]
+};
+
 const cardStyles = {
   base: {
-    fontFamily: '"Chalkboard", "Comic Sans MS", sans-serif',
+    fontFamily: '"sofiapro", Helvetica, Arial, sans-serif',
+    fontWeight: 500,
+    fontSize: '18px',
+    lineHeight: '24px',
+    letterSpacing: '-0.1px',
     color: '#4A4A4A',
-    fontSize: '16px',
-    letterSpacing: '-0.4px',
   },
 };
 
@@ -72,7 +84,7 @@ class StripePaymentForm extends Component {
       throw new Error('Stripe must be loaded for StripePaymentForm');
     }
     this.stripe = window.Stripe(config.stripe.publishableKey);
-    const elements = this.stripe.elements();
+    const elements = this.stripe.elements(stripeElementsOptions);
     this.card = elements.create('card', { style: cardStyles });
     this.card.mount(this.cardContainer);
     this.card.addEventListener('change', this.handleCardValueChange);
