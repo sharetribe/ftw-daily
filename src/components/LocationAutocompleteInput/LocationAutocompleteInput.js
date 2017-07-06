@@ -379,11 +379,15 @@ class LocationAutocompleteInput extends Component {
       iconClassName,
       inputClassName,
       predictionsClassName,
+      validClassName,
       placeholder,
       input,
+      meta,
     } = this.props;
     const { name, onFocus } = input;
     const { search, predictions } = currentValue(this.props);
+    const { touched, valid } = meta || {};
+    const isValid = valid && touched;
 
     const handleOnFocus = e => {
       this.setState({ inputHasFocus: true });
@@ -392,7 +396,7 @@ class LocationAutocompleteInput extends Component {
 
     const rootClass = classNames(rootClassName || css.root, className);
     const iconClass = classNames(css.icon, iconClassName);
-    const inputClass = classNames(css.input, inputClassName);
+    const inputClass = classNames(css.input, inputClassName, { [validClassName]: isValid });
     const predictionsClass = classNames(predictionsClassName);
 
     // Only render predictions when the input has focus. For
@@ -442,7 +446,9 @@ LocationAutocompleteInput.defaultProps = {
   iconClassName: null,
   inputClassName: null,
   predictionsClassName: null,
+  validClassName: null,
   placeholder: '',
+  meta: null,
 };
 
 LocationAutocompleteInput.propTypes = {
@@ -453,6 +459,7 @@ LocationAutocompleteInput.propTypes = {
   iconClassName: string,
   inputClassName: string,
   predictionsClassName: string,
+  validClassName: string,
   placeholder: string,
   input: shape({
     name: string.isRequired,
@@ -465,6 +472,10 @@ LocationAutocompleteInput.propTypes = {
     onFocus: func.isRequired,
     onBlur: func.isRequired,
   }).isRequired,
+  meta: shape({
+    valid: bool.isRequired,
+    touched: bool.isRequired,
+  }),
 };
 
 export default LocationAutocompleteInput;
@@ -496,7 +507,13 @@ class LocationAutocompleteInputFieldComponent extends Component {
   }
 }
 
-LocationAutocompleteInputFieldComponent.defaultProps = { rootClassName: null, labelClassName: null, type: null, label: null, clearOnUnmount: false };
+LocationAutocompleteInputFieldComponent.defaultProps = {
+  rootClassName: null,
+  labelClassName: null,
+  type: null,
+  label: null,
+  clearOnUnmount: false,
+};
 
 LocationAutocompleteInputFieldComponent.propTypes = {
   rootClassName: string,
@@ -513,4 +530,3 @@ LocationAutocompleteInputFieldComponent.propTypes = {
 export const LocationAutocompleteInputField = props => {
   return <Field component={LocationAutocompleteInputFieldComponent} {...props} />;
 };
-

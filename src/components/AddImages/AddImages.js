@@ -58,7 +58,9 @@ class Thumbnail extends Component {
             </li>
           );
         }}
-        renderRejected={() => <li className={css.thumbnail}><FormattedMessage id="AddImages.couldNotReadFile" /></li>}
+        renderRejected={() => (
+          <li className={css.thumbnail}><FormattedMessage id="AddImages.couldNotReadFile" /></li>
+        )}
       />
     );
   }

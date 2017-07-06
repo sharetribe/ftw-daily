@@ -45,6 +45,8 @@ export const EditListingLocationFormComponent = props => {
       <LocationAutocompleteInputField
         inputClassName={css.locationAutocompleteInput}
         iconClassName={css.locationAutocompleteInputIcon}
+        predictionsClassName={css.predictionsRoot}
+        validClassName={css.validLocation}
         autoFocus
         name="location"
         label={titleRequiredMessage}
@@ -74,7 +76,7 @@ export const EditListingLocationFormComponent = props => {
       </PrimaryButton>
     </form>
   );
-}
+};
 
 EditListingLocationFormComponent.defaultProps = {
   saveActionMsg: 'Next: pricing', // TODO: i18n

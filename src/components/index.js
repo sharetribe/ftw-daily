@@ -18,7 +18,9 @@ import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
 import ListingCard from './ListingCard/ListingCard';
 import ListingCardSmall from './ListingCardSmall/ListingCardSmall';
-import LocationAutocompleteInput, { LocationAutocompleteInputField } from './LocationAutocompleteInput/LocationAutocompleteInput';
+import LocationAutocompleteInput, {
+  LocationAutocompleteInputField,
+} from './LocationAutocompleteInput/LocationAutocompleteInput';
 import Map from './Map/Map';
 import MapPanel from './MapPanel/MapPanel';
 import Menu from './Menu/Menu';
