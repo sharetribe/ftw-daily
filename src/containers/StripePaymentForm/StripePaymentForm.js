@@ -60,9 +60,6 @@ const cardStyles = {
     lineHeight: '24px',
     letterSpacing: '-0.1px',
     color: '#4A4A4A',
-    '::placeholder': {
-      color: '#B2B2B2',
-    },
   },
 };
 

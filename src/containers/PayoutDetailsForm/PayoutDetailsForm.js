@@ -217,7 +217,7 @@ const PayoutDetailsFormComponent = props => {
           <option value="">{countryPlaceholder}</option>
           {supportedCountries.map(c => (
             <option key={c} value={c}>
-              {intl.formatMessage({ id: `PayoutDetailsForm.countryNames.${c}` })}
+              {intl.formatMessage({ id: `PayoutDetailsForm.countryNames.${c}` })} /&gt;
             </option>
           ))}
         </SelectField>

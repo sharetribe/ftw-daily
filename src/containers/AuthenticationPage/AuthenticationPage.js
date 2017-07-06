@@ -79,7 +79,9 @@ export const AuthenticationPageComponent = props => {
 
   const tabs = [
     {
-      text: <h1 className={css.tab}><FormattedMessage id="AuthenticationPage.signupLinkText" /></h1>,
+      text: intl.formatMessage({
+        id: 'AuthenticationPage.signupLinkText',
+      }),
       selected: !isLogin,
       linkProps: {
         name: 'SignupPage',
@@ -87,7 +89,9 @@ export const AuthenticationPageComponent = props => {
       },
     },
     {
-      text: <h1 className={css.tab}><FormattedMessage id="AuthenticationPage.loginLinkText" /></h1>,
+      text: intl.formatMessage({
+        id: 'AuthenticationPage.loginLinkText',
+      }),
       selected: isLogin,
       linkProps: {
         name: 'LoginPage',
@@ -100,7 +104,7 @@ export const AuthenticationPageComponent = props => {
     <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
       <Topbar history={history} location={location} />
       <div className={css.root}>
-        <TabNav className={css.tabs} tabs={tabs} />
+        <TabNav tabs={tabs} />
         {loginError ? loginErrorMessage : null}
         {signupError ? signupErrorMessage : null}
         {isLogin
