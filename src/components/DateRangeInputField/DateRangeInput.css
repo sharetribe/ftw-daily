@@ -100,6 +100,7 @@
     width: 100%;
     height: var(--selectionHeight);
     background-color: var(--successColor);
+    transition: all 0.2s ease-out;
   }
   /* Remove default bg-color and use our extra span instead '.renderedDay' */
   & :global(.CalendarDay--selected-start) {

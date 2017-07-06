@@ -13,7 +13,7 @@
   @apply --marketplaceInputStyles;
 
   /* Layout */
-  padding: 9px 0 6px 0;
+  padding: 8px 0 6px 0;
   height: 36px;
 
   /* Border */
@@ -28,7 +28,6 @@
   border-bottom-color: var(--failColor);
 }
 
-
 .submitContainer {
   margin-top: auto;
 }
@@ -38,9 +37,8 @@
   color: var(--matterColorAnti);
   text-align: center;
   padding: 0 42px;
-
 }
 
 .submitButton {
-  margin-top: 24px;
+  margin-top: 21px;
 }
