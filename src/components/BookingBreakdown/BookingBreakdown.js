@@ -73,13 +73,26 @@ export const BookingBreakdownComponent = props => {
   const formattedUnitPrice = intl.formatNumber(unitPriceAsNumber, currencyConfig);
 
   // If commission is passed it will be shown as a fee already reduces from the total price
+  let subTotalInfo = null;
   let commissionInfo = null;
 
   if (userRole === 'provider') {
+    const subTotal = new Decimal(nightCount).times(unitPriceAsNumber);
+    const formattedSubTotal = intl.formatNumber(subTotal, currencyConfig);
+
+    subTotalInfo = (
+      <div className={css.lineItem}>
+        <span className={css.itemLabel}>
+          <FormattedMessage id="BookingBreakdown.subTotal" />
+        </span>
+        <span className={css.itemValue}>{formattedSubTotal}</span>
+      </div>
+    );
+
     const commission = providerCommission.lineTotal;
     const commissionAsNumber = commission ? convertMoneyToNumber(commission, subUnitDivisor) : 0;
     const formattedCommission = commission
-      ? intl.formatNumber(new Decimal(commissionAsNumber).negated().toNumber(), currencyConfig)
+      ? intl.formatNumber(new Decimal(commissionAsNumber).toNumber(), currencyConfig)
       : null;
 
     commissionInfo = (
@@ -114,11 +127,15 @@ export const BookingBreakdownComponent = props => {
         </span>
         <span className={css.itemValue}>{nightCountMessage}</span>
       </div>
+      {subTotalInfo}
       {commissionInfo}
       <hr className={css.totalDivider} />
       <div className={css.lineItem}>
         <div className={css.totalLabel}>
-          <FormattedMessage id="BookingBreakdown.total" />
+          {userRole === 'customer'
+            ? <FormattedMessage id="BookingBreakdown.total" />
+            : <FormattedMessage id="BookingBreakdown.providerTotal" />
+          }
         </div>
         <div className={css.totalPrice}>
           {formattedTotalPrice}

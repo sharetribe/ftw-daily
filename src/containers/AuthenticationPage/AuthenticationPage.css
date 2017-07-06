@@ -4,7 +4,16 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 35px 24px 98px 24px;
+  padding: 30px 24px 98px 24px;
+}
+
+.tabs {
+  width: 198px;
+}
+
+.tab {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .form {
