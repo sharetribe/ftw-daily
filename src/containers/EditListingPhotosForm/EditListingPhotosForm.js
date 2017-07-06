@@ -86,7 +86,7 @@ export class EditListingPhotosFormComponent extends Component {
           <FormattedMessage id="EditListingPhotosForm.imageTypes" />
         </span>
       </span>
-      );
+    );
 
     // TODO Add tip #2: re-order text
 

@@ -22,7 +22,9 @@ export const EditListingPricingFormComponent = props => {
 
   const pricePerNightMessage = intl.formatMessage({ id: 'EditListingPricingForm.pricePerNight' });
   const priceRequiredMessage = intl.formatMessage({ id: 'EditListingPricingForm.priceRequired' });
-  const pricePlaceholderMessage = intl.formatMessage({ id: 'EditListingPricingForm.priceInputPlaceholder' });
+  const pricePlaceholderMessage = intl.formatMessage({
+    id: 'EditListingPricingForm.priceInputPlaceholder',
+  });
 
   const classes = classNames(css.root, className);
 
