@@ -36,6 +36,16 @@ const stripeSupportedCountries = [
     payoutAddressRequired: false,
   },
   {
+    // Austria
+    code: 'AT',
+    payoutAddressRequired: true,
+  },
+  {
+    // Belgium
+    code: 'BE',
+    payoutAddressRequired: true,
+  },
+  {
     // Denmark
     code: 'DK',
     payoutAddressRequired: true,
@@ -51,43 +61,13 @@ const stripeSupportedCountries = [
     payoutAddressRequired: true,
   },
   {
-    // Ireland
-    code: 'IE',
-    payoutAddressRequired: true,
-  },
-  {
-    // Spain
-    code: 'ES',
-    payoutAddressRequired: true,
-  },
-  {
-    // Sweden
-    code: 'SE',
-    payoutAddressRequired: true,
-  },
-  {
-    // United Kingdom
-    code: 'GB',
-    payoutAddressRequired: true,
-  },
-  {
-    // United States
-    code: 'US',
-    payoutAddressRequired: false,
-  },
-  {
-    // Austria
-    code: 'AT',
-    payoutAddressRequired: true,
-  },
-  {
-    // Belgium
-    code: 'BE',
-    payoutAddressRequired: true,
-  },
-  {
     // Germany
     code: 'DE',
+    payoutAddressRequired: true,
+  },
+  {
+    // Ireland
+    code: 'IE',
     payoutAddressRequired: true,
   },
   {
@@ -109,6 +89,26 @@ const stripeSupportedCountries = [
     // Portugal
     code: 'PT',
     payoutAddressRequired: true,
+  },
+  {
+    // Spain
+    code: 'ES',
+    payoutAddressRequired: true,
+  },
+  {
+    // Sweden
+    code: 'SE',
+    payoutAddressRequired: true,
+  },
+  {
+    // United Kingdom
+    code: 'GB',
+    payoutAddressRequired: true,
+  },
+  {
+    // United States
+    code: 'US',
+    payoutAddressRequired: false,
   },
 ];
 

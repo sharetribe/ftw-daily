@@ -247,7 +247,7 @@ exports[`InboxPage matches snapshot 2`] = `
   </div>
   <div
     className="">
-    InboxPage.statePending
+    InboxPage.stateRequested
   </div>
 </a>
 `;
