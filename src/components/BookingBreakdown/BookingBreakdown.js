@@ -77,7 +77,7 @@ export const BookingBreakdownComponent = props => {
   let commissionInfo = null;
 
   if (userRole === 'provider') {
-    const subTotal = new Decimal(nightCount).times(unitPriceAsNumber);
+    const subTotal = new Decimal(nightCount).times(unitPriceAsNumber).toNumber();
     const formattedSubTotal = intl.formatNumber(subTotal, currencyConfig);
 
     subTotalInfo = (
@@ -134,8 +134,7 @@ export const BookingBreakdownComponent = props => {
         <div className={css.totalLabel}>
           {userRole === 'customer'
             ? <FormattedMessage id="BookingBreakdown.total" />
-            : <FormattedMessage id="BookingBreakdown.providerTotal" />
-          }
+            : <FormattedMessage id="BookingBreakdown.providerTotal" />}
         </div>
         <div className={css.totalPrice}>
           {formattedTotalPrice}

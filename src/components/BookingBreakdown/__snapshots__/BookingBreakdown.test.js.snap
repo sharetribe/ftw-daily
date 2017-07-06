@@ -165,12 +165,25 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
     <span
       className={undefined}>
       <span>
+        Subtotal:
+      </span>
+    </span>
+    <span
+      className={undefined}>
+      20
+    </span>
+  </div>
+  <div
+    className={undefined}>
+    <span
+      className={undefined}>
+      <span>
         Saunatime fee:
       </span>
     </span>
     <span
       className={undefined}>
-      2
+      -2
     </span>
   </div>
   <hr
@@ -180,7 +193,7 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
     <div
       className={undefined}>
       <span>
-        Total price
+        Happy days! You just made…
       </span>
     </div>
     <div

@@ -79,7 +79,9 @@ export const AuthenticationPageComponent = props => {
 
   const tabs = [
     {
-      text: <h1 className={css.tab}><FormattedMessage id="AuthenticationPage.signupLinkText" /></h1>,
+      text: (
+        <h1 className={css.tab}><FormattedMessage id="AuthenticationPage.signupLinkText" /></h1>
+      ),
       selected: !isLogin,
       linkProps: {
         name: 'SignupPage',

@@ -49,7 +49,7 @@ const stripeElementsOptions = {
       weight: 500,
       src: 'local("sofiapro"), local("SofiaPro"), local("Sofia Pro"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2") format("woff2")',
     },
-  ]
+  ],
 };
 
 const cardStyles = {
