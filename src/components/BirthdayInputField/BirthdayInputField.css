@@ -1,20 +1,43 @@
+@import '../../marketplace.css';
+
 .fieldRoot {
 
 }
 
 .inputRoot {
   display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
-.dropdown {
+.selectWrapper {
+  flex-basis: calc(33% - 12px);
+}
+
+.select {
   display: inline-block;
-  flex: 1;
 
   /* Border */
-  border: 1px solid #979797;
-  border-left-width: 0;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--attentionColor);
 
-  &:first-child {
-    border-left-width: 1px;
+  &:hover,
+  &:focus {
+    border-bottom-color: var(--matterColorDark);
+    outline: none;
   }
+}
+
+.notSet {
+  color: var(--matterColorAnti);
+}
+
+.selectSuccess {
+  color: var(--matterColor);
+  border-bottom-color: var(--successColor);
+}
+
+.selectError {
+  border-bottom-color: var(--failColor);
 }

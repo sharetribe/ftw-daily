@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Field } from 'redux-form';
+import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { range } from 'lodash';
-import { Select, ValidationError } from '../../components';
+import { ValidationError } from '../../components';
 
 import css from './BirthdayInputField.css';
 
@@ -70,7 +71,7 @@ const currentYear = new Date().getFullYear();
 const yearsToShow = 80;
 const years = range(currentYear, currentYear - yearsToShow, -1);
 
-class BirthdayInput extends Component {
+class BirthdayInputComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -123,74 +124,144 @@ class BirthdayInput extends Component {
     });
   }
   render() {
-    const { id } = this.props;
+    const {
+      selectClassName,
+      dateId,
+      monthId,
+      yearId,
+      dateLabel,
+      monthLabel,
+      yearLabel,
+      intl,
+    } = this.props;
 
     const selectedValue = n => {
       return typeof n === 'number' ? n : '';
     };
 
+    const datePlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayDatePlaceholder' });
+    const monthPlaceholder = intl.formatMessage({
+      id: 'PayoutDetailsForm.birthdayMonthPlaceholder',
+    });
+    const yearPlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayYearPlaceholder' });
+
     return (
       <div className={css.inputRoot}>
-        <Select
-          id={id}
-          value={selectedValue(this.state.selected.day)}
-          className={css.dropdown}
-          onFocus={() => this.handleSelectFocus()}
-          onBlur={() => this.handleSelectBlur()}
-          onChange={e => this.handleSelectChange('day', e.target.value)}
-        >
-          <option />
-          {days.map(d => <option key={d} value={d}>{pad(d)}</option>)}
-        </Select>
-        <Select
-          value={selectedValue(this.state.selected.month)}
-          className={css.dropdown}
-          onFocus={() => this.handleSelectFocus()}
-          onBlur={() => this.handleSelectBlur()}
-          onChange={e => this.handleSelectChange('month', e.target.value)}
-        >
-          <option />
-          {months.map(m => <option key={m} value={m}>{pad(m)}</option>)}
-        </Select>
-        <Select
-          value={selectedValue(this.state.selected.year)}
-          className={css.dropdown}
-          onFocus={() => this.handleSelectFocus()}
-          onBlur={() => this.handleSelectBlur()}
-          onChange={e => this.handleSelectChange('year', e.target.value)}
-        >
-          <option />
-          {years.map(y => <option key={y} value={y}>{y}</option>)}
-        </Select>
+        <div className={css.selectWrapper}>
+          {dateLabel}
+          <select
+            id={dateId}
+            value={selectedValue(this.state.selected.day)}
+            className={classNames(css.select, selectClassName, {
+              [css.notSet]: !parseNum(this.state.selected.day),
+            })}
+            onFocus={() => this.handleSelectFocus()}
+            onBlur={() => this.handleSelectBlur()}
+            onChange={e => this.handleSelectChange('day', e.target.value)}
+          >
+            <option>{datePlaceholder}</option>
+            {days.map(d => <option key={d} value={d}>{pad(d)}</option>)}
+          </select>
+        </div>
+        <div className={css.selectWrapper}>
+          {monthLabel}
+          <select
+            id={monthId}
+            value={selectedValue(this.state.selected.month)}
+            className={classNames(css.select, selectClassName, {
+              [css.notSet]: !parseNum(this.state.selected.month),
+            })}
+            onFocus={() => this.handleSelectFocus()}
+            onBlur={() => this.handleSelectBlur()}
+            onChange={e => this.handleSelectChange('month', e.target.value)}
+          >
+            <option>{monthPlaceholder}</option>
+            {months.map(m => <option key={m} value={m}>{pad(m)}</option>)}
+          </select>
+        </div>
+        <div className={css.selectWrapper}>
+          {yearLabel}
+          <select
+            id={yearId}
+            value={selectedValue(this.state.selected.year)}
+            className={classNames(css.select, selectClassName, {
+              [css.notSet]: !parseNum(this.state.selected.year),
+            })}
+            onFocus={() => this.handleSelectFocus()}
+            onBlur={() => this.handleSelectBlur()}
+            onChange={e => this.handleSelectChange('year', e.target.value)}
+          >
+            <option>{yearPlaceholder}</option>
+            {years.map(y => <option key={y} value={y}>{y}</option>)}
+          </select>
+        </div>
       </div>
     );
   }
 }
 
-BirthdayInput.defaultProps = { value: null };
+BirthdayInputComponent.defaultProps = {
+  selectClassName: null,
+  dateLabel: null,
+  monthLabel: null,
+  yearLabel: null,
+  value: null,
+};
 
-const { string, instanceOf, func, object } = PropTypes;
+const { func, instanceOf, object, node, string } = PropTypes;
 
-BirthdayInput.propTypes = {
-  id: string.isRequired,
+BirthdayInputComponent.propTypes = {
+  selectClassName: string,
+  dateId: string.isRequired,
+  monthId: string.isRequired,
+  yearId: string.isRequired,
+  dateLabel: node,
+  monthLabel: node,
+  yearLabel: node,
   value: instanceOf(Date),
   onChange: func.isRequired,
   onFocus: func.isRequired,
   onBlur: func.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
+const BirthdayInput = injectIntl(BirthdayInputComponent);
+
 const BirthdayInputFieldComponent = props => {
-  const { rootClassName, className, id, label, input, meta } = props;
+  const { rootClassName, className, id, label, labelForMonth, labelForYear, input, meta } = props;
+  const { valid, invalid, touched, error } = meta;
 
-  if (label && !id) {
-    throw new Error('id required when a label is given');
-  }
+  // Error message and input error styles are only shown if the
+  // field has been touched and the validation has failed.
+  const hasError = touched && invalid && error;
 
+  const dateId = id;
+  const monthId = `${id}-month`;
+  const yearId = `${id}-year`;
+  const dateLabel = label ? <label htmlFor={dateId}>{label}</label> : null;
+  const monthLabel = labelForMonth ? <label htmlFor={monthId}>{labelForMonth}</label> : null;
+  const yearLabel = labelForYear ? <label htmlFor={yearId}>{labelForYear}</label> : null;
+
+  const selectClassName = classNames({
+    [css.selectSuccess]: valid,
+    [css.selectError]: hasError,
+  });
+
+  const inputProps = {
+    selectClassName,
+    dateId,
+    monthId,
+    yearId,
+    dateLabel,
+    monthLabel,
+    yearLabel,
+    ...input,
+  };
   const classes = classNames(rootClassName || css.fieldRoot, className);
-  const inputProps = { id, ...input };
   return (
     <div className={classes}>
-      {label ? <label htmlFor={id}>{label}</label> : null}
       <BirthdayInput {...inputProps} />
       <ValidationError fieldMeta={meta} />
     </div>
@@ -200,15 +271,18 @@ const BirthdayInputFieldComponent = props => {
 BirthdayInputFieldComponent.defaultProps = {
   rootClassName: null,
   className: null,
-  id: null,
   label: null,
+  labelForMonth: null,
+  labelForYear: null,
 };
 
 BirthdayInputFieldComponent.propTypes = {
   rootClassName: string,
   className: string,
-  id: string,
+  id: string.isRequired,
   label: string,
+  labelForMonth: string,
+  labelForYear: string,
   input: object.isRequired,
   meta: object.isRequired,
 };
