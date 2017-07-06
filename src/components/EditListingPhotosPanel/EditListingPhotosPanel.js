@@ -101,6 +101,16 @@ class EditListingPhotosPanel extends Component {
           onClose={this.handlePayoutModalClose}
           onManageDisableScrolling={onManageDisableScrolling}
         >
+          <div className={css.modalHeading}>
+            <h1 className={css.payoutModalTitle}>
+              <FormattedMessage id="EditListingPhotosPanel.payoutModalTitleOneMoreThing" />
+              <br />
+              <FormattedMessage id="EditListingPhotosPanel.payoutModalTitlePayoutPreferences" />
+            </h1>
+            <p>
+              <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
+            </p>
+          </div>
           <PayoutDetailsForm
             className={css.payoutDetails}
             currency={currency}

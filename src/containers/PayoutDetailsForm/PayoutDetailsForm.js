@@ -6,7 +6,7 @@ import { reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-
 import classNames from 'classnames';
 import config from '../../config';
 import {
-  Button,
+  PrimaryButton,
   StripeBankAccountTokenInputField,
   SelectField,
   BirthdayInputField,
@@ -36,10 +36,12 @@ const PayoutDetailsFormComponent = props => {
     handleSubmit,
     pristine,
     submitting,
+    invalid,
     intl,
   } = props;
 
   const firstNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.firstNameLabel' });
+  const firstNamePlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.firstNamePlaceholder' });
   const firstNameRequired = validators.required(
     intl.formatMessage({
       id: 'PayoutDetailsForm.firstNameRequired',
@@ -47,6 +49,7 @@ const PayoutDetailsFormComponent = props => {
   );
 
   const lastNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.lastNameLabel' });
+  const lastNamePlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.lastNamePlaceholder' });
   const lastNameRequired = validators.required(
     intl.formatMessage({
       id: 'PayoutDetailsForm.lastNameRequired',
@@ -55,6 +58,8 @@ const PayoutDetailsFormComponent = props => {
 
   const birthdayId = `${form}.birthday`;
   const birthdayLabel = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayLabel' });
+  const birthdayLabelMonth = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayLabelMonth' });
+  const birthdayLabelYear = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayLabelYear' });
   const birthdayRequired = validators.required(
     intl.formatMessage({
       id: 'PayoutDetailsForm.birthdayRequired',
@@ -110,26 +115,28 @@ const PayoutDetailsFormComponent = props => {
           validate={streetAddressRequired}
           clearOnUnmount
         />
-        <TextInputField
-          className={css.field}
-          type="text"
-          name="postalCode"
-          id={`${form}.postalCode`}
-          label={postalCodeLabel}
-          placeholder={postalCodePlaceholder}
-          validate={postalCodeRequired}
-          clearOnUnmount
-        />
-        <TextInputField
-          className={css.field}
-          type="text"
-          name="city"
-          id={`${form}.city`}
-          label={cityLabel}
-          placeholder={cityPlaceholder}
-          validate={cityRequired}
-          clearOnUnmount
-        />
+        <div className={css.formRow}>
+          <TextInputField
+            className={css.postalCode}
+            type="text"
+            name="postalCode"
+            id={`${form}.postalCode`}
+            label={postalCodeLabel}
+            placeholder={postalCodePlaceholder}
+            validate={postalCodeRequired}
+            clearOnUnmount
+          />
+          <TextInputField
+            className={css.city}
+            type="text"
+            name="city"
+            id={`${form}.city`}
+            label={cityLabel}
+            placeholder={cityPlaceholder}
+            validate={cityRequired}
+            clearOnUnmount
+          />
+        </div>
       </div>
     : null;
 
@@ -139,10 +146,10 @@ const PayoutDetailsFormComponent = props => {
   const bankAccountRequired = validators.required(' ');
 
   const bankAccountSection = country
-    ? <div>
-        <h2 className={css.subTitle}>
+    ? <div className={css.sectionContainer}>
+        <h3 className={css.subTitle}>
           <FormattedMessage id="PayoutDetailsForm.bankDetails" />
-        </h2>
+        </h3>
         <StripeBankAccountTokenInputField
           name="bankAccountToken"
           routingNumberId={`${form}.bankAccountToken.routingNumber`}
@@ -155,60 +162,67 @@ const PayoutDetailsFormComponent = props => {
     : null;
 
   const classes = classNames(css.root, className);
-  const submitDisabled = pristine || submitting || disabled;
+  const submitDisabled = pristine || submitting || invalid || disabled;
 
   return (
     <form className={classes} onSubmit={handleSubmit}>
-      <h2 className={css.formTitle}>
-        <FormattedMessage id="PayoutDetailsForm.title" />
-      </h2>
-      <p>
-        <FormattedMessage id="PayoutDetailsForm.information" />
-      </p>
-      <h2 className={css.subTitle}>
-        <FormattedMessage id="PayoutDetailsForm.personalDetailsTitle" />
-      </h2>
-      <TextInputField
-        className={css.field}
-        type="text"
-        name="firstName"
-        id={`${form}.firstName`}
-        label={firstNameLabel}
-        validate={firstNameRequired}
-      />
-      <TextInputField
-        className={css.field}
-        type="text"
-        name="lastName"
-        id={`${form}.lastName`}
-        label={lastNameLabel}
-        validate={lastNameRequired}
-      />
-      <BirthdayInputField
-        className={css.field}
-        id={birthdayId}
-        name="birthDate"
-        label={birthdayLabel}
-        format={null}
-        validate={birthdayRequired}
-      />
-      <h2 className={css.subTitle}>
-        <FormattedMessage id="PayoutDetailsForm.addressTitle" />
-      </h2>
-      <SelectField
-        name="country"
-        id={`${form}.country`}
-        label={countryLabel}
-        validate={countryRequired}
-      >
-        <option value="">{countryPlaceholder}</option>
-        {supportedCountries.map(c => <option key={c} value={c}>{c}</option>)}
-      </SelectField>
-      {addressSection}
+
+      <div className={css.sectionContainer}>
+        <h3 className={css.subTitle}>
+          <FormattedMessage id="PayoutDetailsForm.personalDetailsTitle" />
+        </h3>
+        <div className={css.formRow}>
+          <TextInputField
+            className={css.field}
+            type="text"
+            name="firstName"
+            id={`${form}.firstName`}
+            label={firstNameLabel}
+            placeholder={firstNamePlaceholder}
+            validate={firstNameRequired}
+          />
+          <TextInputField
+            className={css.field}
+            type="text"
+            name="lastName"
+            id={`${form}.lastName`}
+            label={lastNameLabel}
+            placeholder={lastNamePlaceholder}
+            validate={lastNameRequired}
+          />
+        </div>
+        <BirthdayInputField
+          className={css.field}
+          id={birthdayId}
+          name="birthDate"
+          label={birthdayLabel}
+          labelForMonth={birthdayLabelMonth}
+          labelForYear={birthdayLabelYear}
+          format={null}
+          validate={birthdayRequired}
+        />
+      </div>
+
+      <div className={css.sectionContainer}>
+        <h3 className={css.subTitle}>
+          <FormattedMessage id="PayoutDetailsForm.addressTitle" />
+        </h3>
+        <SelectField
+          className={css.selectCountry}
+          name="country"
+          id={`${form}.country`}
+          label={countryLabel}
+          validate={countryRequired}
+        >
+          <option value="">{countryPlaceholder}</option>
+          {supportedCountries.map(c => <option key={c} value={c}>{c}</option>)}
+        </SelectField>
+        {addressSection}
+      </div>
       {bankAccountSection}
-      <Button className={css.submitButton} type="submit" disabled={submitDisabled}>
+      <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
         <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
-      </Button>
+      </PrimaryButton>
     </form>
   );
 };

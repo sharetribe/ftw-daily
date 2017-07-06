@@ -203,7 +203,7 @@
     display: block;
     width: 100%;
     margin: 0;
-    padding: 5px 0 4px 0;
+    padding: 5px 0 5px 0;
 
     /* Unset user agent styles */
     appearance: none;
@@ -216,7 +216,7 @@
     border-radius: 0;
 
     /* Background */
-    background-image: url('data:image/svg+xml;utf8,<svg width="16" height="10" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg"><path d="M15.027 2.5a.577.577 0 0 0 0-.813L13.545.214a.566.566 0 0 0-.804 0L8 4.955 3.259.215a.566.566 0 0 0-.804 0L.973 1.686a.577.577 0 0 0 0 .813l6.625 6.616c.223.223.58.223.804 0L15.027 2.5z" fill="#4A4A4A" fill-rule="evenodd"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg width="14" height="9" viewBox="0 0 14 9" xmlns="http://www.w3.org/2000/svg"><path d="M6.53 7.472c.26.26.68.26.94 0l5.335-5.333c.26-.263.26-.684 0-.944-.26-.26-.683-.26-.943 0L7 6.056l-4.862-4.86c-.26-.26-.683-.26-.943 0-.26.26-.26.68 0 .943L6.53 7.47z" stroke="#4A4A4A" fill="#4A4A4A" fill-rule="evenodd"/></svg>');
     background-size: 16px 16px;
     background-position: center right;
 

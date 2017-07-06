@@ -5,10 +5,12 @@
 }
 
 .select {
+  color: var(--matterColorAnti);
   border-bottom-color: var(--attentionColor);
 }
 
 .selectSuccess {
+  color: var(--matterColor);
   border-bottom-color: var(--successColor);
 }
 
