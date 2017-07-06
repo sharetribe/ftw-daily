@@ -6,7 +6,7 @@ import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { noEmptyArray } from '../../util/validators';
-import { AddImages, PrimaryButton, ValidationError } from '../../components';
+import { AddImages, Button, ValidationError } from '../../components';
 
 import css from './EditListingPhotosForm.css';
 
@@ -128,13 +128,13 @@ export class EditListingPhotosFormComponent extends Component {
           <FormattedMessage id="EditListingPhotosForm.addImagesTip" />
         </p>
 
-        <PrimaryButton
+        <Button
           className={css.submitButton}
           type="submit"
           disabled={invalid || submitting || disabled}
         >
           {saveActionMsg}
-        </PrimaryButton>
+        </Button>
       </form>
     );
   }

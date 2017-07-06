@@ -29,7 +29,10 @@ Button.propTypes = {
 export default Button;
 
 export const PrimaryButton = props => <Button {...props} rootClassName={css.primaryButton} />;
+PrimaryButton.displayName = 'PrimaryButton';
 
 export const SecondaryButton = props => <Button {...props} rootClassName={css.secondaryButton} />;
+SecondaryButton.displayName = 'SecondaryButton';
 
 export const InlineTextButton = props => <Button {...props} rootClassName={css.inlineTextButton} />;
+InlineTextButton.displayName = 'InlineTextButton';

@@ -6,7 +6,7 @@ import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../util/validators';
-import { LocationAutocompleteInputField, PrimaryButton, TextInputField } from '../../components';
+import { LocationAutocompleteInputField, Button, TextInputField } from '../../components';
 
 import css from './EditListingLocationForm.css';
 
@@ -67,13 +67,13 @@ export const EditListingLocationFormComponent = props => {
         placeholder={buildingPlaceholderMessage}
       />
 
-      <PrimaryButton
+      <Button
         className={css.submitButton}
         type="submit"
         disabled={invalid || submitting || disabled}
       >
         {saveActionMsg}
-      </PrimaryButton>
+      </Button>
     </form>
   );
 };

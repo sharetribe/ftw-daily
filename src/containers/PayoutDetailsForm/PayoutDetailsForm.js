@@ -6,7 +6,7 @@ import { reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-
 import classNames from 'classnames';
 import config from '../../config';
 import {
-  PrimaryButton,
+  Button,
   StripeBankAccountTokenInputField,
   SelectField,
   BirthdayInputField,
@@ -220,9 +220,9 @@ const PayoutDetailsFormComponent = props => {
         {addressSection}
       </div>
       {bankAccountSection}
-      <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
+      <Button className={css.submitButton} type="submit" disabled={submitDisabled}>
         <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
-      </PrimaryButton>
+      </Button>
     </form>
   );
 };

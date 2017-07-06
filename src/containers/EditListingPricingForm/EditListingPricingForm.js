@@ -5,7 +5,7 @@ import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import config from '../../config';
 import { required } from '../../util/validators';
-import { PrimaryButton, CurrencyInputField } from '../../components';
+import { Button, CurrencyInputField } from '../../components';
 
 import css from './EditListingPricingForm.css';
 
@@ -41,13 +41,13 @@ export const EditListingPricingFormComponent = props => {
         validate={[required(priceRequiredMessage)]}
       />
 
-      <PrimaryButton
+      <Button
         className={css.submitButton}
         type="submit"
         disabled={invalid || submitting || disabled}
       >
         {saveActionMsg}
-      </PrimaryButton>
+      </Button>
     </form>
   );
 };

@@ -119,18 +119,18 @@ exports[`SalePage matches snapshot 1`] = `
         }
       } />
     <div>
-      <Component
+      <SecondaryButton
         onClick={[Function]}>
         <FormattedMessage
           id="SalePage.rejectButton"
           values={Object {}} />
-      </Component>
-      <Component
+      </SecondaryButton>
+      <PrimaryButton
         onClick={[Function]}>
         <FormattedMessage
           id="SalePage.acceptButton"
           values={Object {}} />
-      </Component>
+      </PrimaryButton>
     </div>
   </div>
 </Connect(withRouter(PageLayout))>
