@@ -13,8 +13,6 @@
   "BookingBreakdown.commission": "Saunatime fee:",
   "BookingBreakdown.nightCount": "&times; {count, number} {count, plural, one {night} other {nights}}",
   "BookingBreakdown.pricePerNight": "Price per night",
-  "BookingBreakdown.providerTotal":"Happy days! You just made…",
-  "BookingBreakdown.subTotal": "Subtotal:",
   "BookingBreakdown.total": "Total price",
   "BookingDatesForm.bookingEndTitle": "End date",
   "BookingDatesForm.bookingStartTitle": "Start date",
