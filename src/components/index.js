@@ -41,7 +41,6 @@ import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
 import SearchIcon from './SearchIcon/SearchIcon';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
-import Select from './Select/Select';
 import SelectField from './SelectField/SelectField';
 import StripeBankAccountTokenInputField
   from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';
@@ -100,7 +99,6 @@ export {
   SearchIcon,
   SearchResultsPanel,
   SecondaryButton,
-  Select,
   SelectField,
   StripeBankAccountTokenInputField,
   TabNav,
