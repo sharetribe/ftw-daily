@@ -32,6 +32,14 @@
   width: 100%;
 }
 
+.firstName {
+  width: calc(50% - 9px);
+}
+
+.lastName {
+  width: calc(50% - 9px);
+}
+
 .selectCountry {
   margin-bottom: 24px;
 }

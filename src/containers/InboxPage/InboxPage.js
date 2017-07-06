@@ -49,7 +49,7 @@ const timestamp = (intl, tx) => {
 };
 
 // Translated name of the state of the given transaction
-const txState = (intl, tx) => {
+const txState = (intl, tx, isOrder) => {
   const { attributes: { state } } = tx;
   if (state === propTypes.TX_STATE_ACCEPTED) {
     return {
@@ -80,12 +80,16 @@ const txState = (intl, tx) => {
     };
   }
   return {
-    nameClassName: css.namePending,
-    timeClassName: css.timePending,
-    stateClassName: css.statePending,
-    state: intl.formatMessage({
-      id: 'InboxPage.statePending',
-    }),
+    nameClassName: isOrder ? css.nameRequested : css.namePending,
+    timeClassName: isOrder ? css.timeRequested : css.timePending,
+    stateClassName: isOrder ? css.stateRequested : css.statePending,
+    state: isOrder
+      ? intl.formatMessage({
+          id: 'InboxPage.stateRequested',
+        })
+      : intl.formatMessage({
+          id: 'InboxPage.statePending',
+        }),
   };
 };
 
@@ -95,7 +99,7 @@ export const InboxItem = props => {
   const isOrder = type === 'order';
   const otherUser = username(isOrder ? provider : customer);
   const changedDate = timestamp(intl, tx);
-  const stateData = txState(intl, tx);
+  const stateData = txState(intl, tx, isOrder);
   const isOrderOrSaleNotification = (isOrder &&
     tx.attributes.state === propTypes.TX_STATE_ACCEPTED) ||
     (!isOrder && tx.attributes.state === propTypes.TX_STATE_PREAUTHORIZED);

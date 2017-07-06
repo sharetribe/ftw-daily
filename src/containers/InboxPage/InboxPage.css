@@ -199,32 +199,36 @@
 /* Transaction status affects to certain font colors and weights */
 
 .namePending {
-  font-weight: var(--fontWeightRegular);
+  font-weight: var(--fontWeightBold);
 }
 
 .timePending {
   color: var(--matterColor);
 }
 
+.stateRequested,
 .statePending {
   font-weight: var(--fontWeightSemiBold);
   color: var(--attentionColor);
 }
 
-.stateAccepted,
-.stateDelivered {
+.stateAccepted {
+  font-weight: var(--fontWeightSemiBold);
   color: var(--successColor);
 }
-.stateDeclined {
+.stateDeclined,
+.stateDelivered {
   color: var(--matterColorAnti);
 }
 
+.nameRequested,
 .nameDeclined,
 .nameAccepted,
 .nameDelivered {
   font-weight: var(--fontWeightMedium);
 }
 
+.timeRequested,
 .timeDeclined,
 .timeAccepted,
 .timeDelivered {

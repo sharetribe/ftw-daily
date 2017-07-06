@@ -173,7 +173,7 @@ const PayoutDetailsFormComponent = props => {
         </h3>
         <div className={css.formRow}>
           <TextInputField
-            className={css.field}
+            className={css.firstName}
             type="text"
             name="firstName"
             id={`${form}.firstName`}
@@ -182,7 +182,7 @@ const PayoutDetailsFormComponent = props => {
             validate={firstNameRequired}
           />
           <TextInputField
-            className={css.field}
+            className={css.lastName}
             type="text"
             name="lastName"
             id={`${form}.lastName`}
@@ -215,7 +215,11 @@ const PayoutDetailsFormComponent = props => {
           validate={countryRequired}
         >
           <option value="">{countryPlaceholder}</option>
-          {supportedCountries.map(c => <option key={c} value={c}>{c}</option>)}
+          {supportedCountries.map(c => (
+            <option key={c} value={c}>
+              {intl.formatMessage({ id: `PayoutDetailsForm.countryNames.${c}` })} /&gt;
+            </option>
+          ))}
         </SelectField>
         {addressSection}
       </div>
