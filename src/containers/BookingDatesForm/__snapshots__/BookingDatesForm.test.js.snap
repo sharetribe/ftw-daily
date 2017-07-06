@@ -62,13 +62,13 @@ exports[`BookingDatesForm matches snapshot with selected dates 1`] = `
       id="BookingDatesForm.youWontBeChargedInfo"
       values={Object {}} />
   </p>
-  <Component
+  <PrimaryButton
     disabled={false}
     type="submit">
     <FormattedMessage
       id="BookingDatesForm.requestToBook"
       values={Object {}} />
-  </Component>
+  </PrimaryButton>
 </form>
 `;
 
@@ -97,12 +97,12 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
       id="BookingDatesForm.youWontBeChargedInfo"
       values={Object {}} />
   </p>
-  <Component
+  <PrimaryButton
     disabled={true}
     type="submit">
     <FormattedMessage
       id="BookingDatesForm.requestToBook"
       values={Object {}} />
-  </Component>
+  </PrimaryButton>
 </form>
 `;

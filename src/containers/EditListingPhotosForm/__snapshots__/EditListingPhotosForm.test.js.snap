@@ -42,9 +42,11 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
       id="EditListingPhotosForm.addImagesTip"
       values={Object {}} />
   </p>
-  <Component
+  <Button
+    className={null}
+    rootClassName={null}
     type="submit">
     Publish listing
-  </Component>
+  </Button>
 </form>
 `;

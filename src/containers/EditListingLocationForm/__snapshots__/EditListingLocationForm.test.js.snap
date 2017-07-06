@@ -20,9 +20,11 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
     name="building"
     placeholder="EditListingLocationForm.buildingPlaceholder"
     type="text" />
-  <Component
+  <Button
+    className={null}
+    rootClassName={null}
     type="submit">
     Next: pricing
-  </Component>
+  </Button>
 </form>
 `;
