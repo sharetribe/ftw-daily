@@ -1,25 +1,53 @@
+@import '../../marketplace.css';
+
 .root {
 
 }
 
-.field {
-  margin-top: 24px;
+.sectionContainer {
+  margin-bottom: 35px;
 }
 
-.countries {
-  border: 1px solid #979797;
+.subTitle {
+  /* Font */
+  color: var(--matterColorAnti);
+
+  margin-top: 0;
+  margin-bottom: 13px;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 13px;
+  }
+}
+
+.formRow {
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.field {
+  width: 100%;
+}
+
+.selectCountry {
+  margin-bottom: 24px;
+}
+
+.postalCode {
+  margin-top: 24px;
+  width: calc(40% - 9px);
+}
+
+.city {
+  margin-top: 24px;
+  width: calc(60% - 9px);
 }
 
 .error {
   color: red;
-}
-
-.formTitle {
-  margin-top: 0;
-}
-
-.subTitle {
-  margin-top: 60px;
 }
 
 .submitButton {
