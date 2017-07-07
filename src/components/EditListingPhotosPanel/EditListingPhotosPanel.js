@@ -62,6 +62,7 @@ class EditListingPhotosPanel extends Component {
       address: omitBy(address, isUndefined),
     };
     this.props.onPayoutDetailsSubmit(params).then(() => {
+      this.props.onManageDisableScrolling("EditListingPhotosPanel.payoutModal", false);
       this.props.onSubmit(this.state.submittedValues);
     });
   }
