@@ -100,11 +100,9 @@ export const InboxItem = props => {
   const otherUser = username(isOrder ? provider : customer);
   const changedDate = timestamp(intl, tx);
   const stateData = txState(intl, tx, isOrder);
-  const isOrderOrSaleNotification = (isOrder &&
-    tx.attributes.state === propTypes.TX_STATE_ACCEPTED) ||
-    (!isOrder && tx.attributes.state === propTypes.TX_STATE_PREAUTHORIZED);
+  const isSaleNotification = !isOrder && tx.attributes.state === propTypes.TX_STATE_PREAUTHORIZED;
 
-  const rowNotificationBadge = isOrderOrSaleNotification
+  const rowNotificationBadge = isSaleNotification
     ? <div className={css.notificationBadge} />
     : null;
 
