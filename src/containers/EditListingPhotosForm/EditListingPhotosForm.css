@@ -5,10 +5,12 @@
   height: auto;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 0;
 }
 
 .imagesField {
+  flex-shrink: 0;
 }
 
 .addImageWrapper {
@@ -97,10 +99,12 @@
 }
 
 .tip {
+  flex-shrink: 0;
   color: var(--matterColorAnti);
 }
 
 .submitButton {
+  flex-shrink: 0;
   margin-top: auto;
   margin-bottom: 24px;
 }
