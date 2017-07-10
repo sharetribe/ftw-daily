@@ -62,3 +62,15 @@
   background-color: var(--matterColorAnti);
   color: var(--matterColorLight);
 }
+
+span {
+  padding-bottom: 4px;
+}
+
+.mediumAvatar span {
+  padding-bottom: 5px;
+}
+
+.largeAvatar span {
+  padding-bottom: 6px;
+}

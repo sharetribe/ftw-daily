@@ -10,8 +10,7 @@
   /* Layout */
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  padding: 11px 24px 0 24px;
+  padding: 10px 24px 0 24px;
 
   border-top-width: 1px;
   border-top-color: var(--matterColorNegative);
@@ -22,4 +21,8 @@
 
 .panel {
   flex-grow: 1;
+}
+
+h1 {
+  padding-bottom: 1px;
 }

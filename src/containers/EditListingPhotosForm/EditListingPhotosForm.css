@@ -11,6 +11,7 @@
 
 .imagesField {
   flex-shrink: 0;
+  margin: 1px 0 11px 0;
 }
 
 .addImageWrapper {
@@ -50,10 +51,11 @@
   margin-top: 0;
 
   /* Colors */
-  background-color: #F2F2F2;
+  background-color: #F7F7F7;
   border-style: dashed;
   border-color: #E6E6E6;
   border-width: 2px;
+  border-radius: 2px;
 
   /* Behaviour */
   cursor: pointer;
@@ -68,6 +70,7 @@
 .chooseImage {
   @apply --marketplaceH4FontStyles;
   color: var(--matterColor);
+  font-weight: var(--fontWeightSemiBold);
 
   margin-top: 0;
   margin-bottom: 0;
@@ -101,10 +104,11 @@
 .tip {
   flex-shrink: 0;
   color: var(--matterColorAnti);
+  margin-top: 0;
 }
 
 .submitButton {
   flex-shrink: 0;
-  margin-top: auto;
+  margin-top: 60px;
   margin-bottom: 24px;
 }

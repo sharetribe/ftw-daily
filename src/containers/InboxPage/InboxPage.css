@@ -159,8 +159,9 @@
   /* Font */
   @apply --marketplaceH4FontStyles;
   color: var(--matterColor);
+  line-height: 20px;
 
-  margin-top: 0;
+  margin-top: 2px;
   margin-bottom: 0px;
   @media (--desktopViewport) {
     margin-top: 0;
@@ -172,7 +173,7 @@
   /* Font */
   @apply --marketplaceH5FontStyles;
 
-  margin-top: 4px;
+  margin-top: 0px;
   margin-bottom: 0px;
   @media (--desktopViewport) {
     margin-top: 4px;
@@ -200,6 +201,8 @@
 
 .namePending {
   font-weight: var(--fontWeightBold);
+  margin-top: 1px;
+  line-height: 21px;
 }
 
 .timePending {
