@@ -3,12 +3,11 @@
 .root {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   overflow-x: auto;
 }
 
 .tab {
-  margin-left: 24px;
+  margin-left: 16px;
 
   &:first-child {
     margin-left: 0;
@@ -39,10 +38,11 @@
 
 .selectedLink {
   border-bottom: 2px solid var(--matterColorDark);
+  color: var(--matterColorDark);
 }
 
 .disabled {
   pointer-events: none;
-  color: #999;
+  color: var(--matterColorAnti);
   text-decoration: none;
 }

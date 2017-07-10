@@ -13,7 +13,7 @@ const EditListingDescriptionPanel = props => {
 
   return (
     <div className={classes}>
-      <h1><FormattedMessage id="EditListingDescriptionPanel.title" /></h1>
+      <h1 className={css.title}><FormattedMessage id="EditListingDescriptionPanel.title" /></h1>
       <EditListingDescriptionForm
         className={css.form}
         initialValues={{ title, description }}

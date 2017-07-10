@@ -226,7 +226,8 @@ exports[`InboxPage matches snapshot 2`] = `
     <div
       className=""
       title="provider-user-id first name provider-user-id last name">
-      <span>
+      <span
+        className={undefined}>
         pp
       </span>
     </div>
@@ -480,7 +481,8 @@ exports[`InboxPage matches snapshot 4`] = `
     <div
       className=""
       title="customer-user-id first name customer-user-id last name">
-      <span>
+      <span
+        className={undefined}>
         cc
       </span>
     </div>

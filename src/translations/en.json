@@ -45,7 +45,7 @@
   "DateRangeInputField.screenReaderInputMessage": "Date input",
   "DateRangeInputField.startDatePlaceholderText": "Add start date",
   "EditListingDescriptionForm.description": "Describe your sauna",
-  "EditListingDescriptionForm.descriptionPlaceholder": " ",
+  "EditListingDescriptionForm.descriptionPlaceholder": "How many people can fit in at once? Does the sauna come with towels?",
   "EditListingDescriptionForm.descriptionRequired": "You need to add a description.",
   "EditListingDescriptionForm.maxLength": "Must be {maxLength} characters or less",
   "EditListingDescriptionForm.title": "Name of your sauna",

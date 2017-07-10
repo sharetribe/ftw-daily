@@ -12,7 +12,7 @@ const Avatar = props => {
 
   const placeHolderAvatar = (
     <div className={classes} title={authorName}>
-      <span>{initials}</span>
+      <span className={css.initials}>{initials}</span>
     </div>
   );
 

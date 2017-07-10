@@ -90,7 +90,7 @@ class EditListingPhotosPanel extends Component {
 
     return (
       <div className={classes}>
-        <h1><FormattedMessage id="EditListingPhotosPanel.title" /></h1>
+        <h1 className={css.title}><FormattedMessage id="EditListingPhotosPanel.title" /></h1>
         <EditListingPhotosForm
           className={css.form}
           disabled={fetchInProgress}

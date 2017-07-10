@@ -62,3 +62,15 @@
   background-color: var(--matterColorAnti);
   color: var(--matterColorLight);
 }
+
+.initials {
+  padding-bottom: 4px;
+}
+
+.mediumAvatar .initials {
+  padding-bottom: 5px;
+}
+
+.largeAvatar .initials {
+  padding-bottom: 6px;
+}
