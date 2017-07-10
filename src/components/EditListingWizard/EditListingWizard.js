@@ -58,6 +58,7 @@ TestPanel.propTypes = {
 const EditListingWizard = props => {
   const {
     className,
+    errors,
     fetchInProgress,
     flattenedRoutes,
     history,
@@ -161,6 +162,7 @@ const EditListingWizard = props => {
         tabLinkProps={{ name: 'EditListingPhotosPage' }}
         selected={selectedTab === PHOTOS}
         disabled={!stepsStatus[PHOTOS]}
+        errors={errors}
         fetchInProgress={fetchInProgress}
         listing={listing}
         images={images}
@@ -180,6 +182,7 @@ const EditListingWizard = props => {
 
 EditListingWizard.defaultProps = {
   className: null,
+  errors: null,
   listing: null,
   rootClassName: null,
   currentUser: null,
@@ -189,6 +192,11 @@ const { array, arrayOf, bool, func, object, oneOf, shape, string } = PropTypes;
 
 EditListingWizard.propTypes = {
   className: string,
+  errors: shape({
+    createListingsError: object,
+    showListingsError: object,
+    uploadImageError: object,
+  }),
   fetchInProgress: bool.isRequired,
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
   history: shape({

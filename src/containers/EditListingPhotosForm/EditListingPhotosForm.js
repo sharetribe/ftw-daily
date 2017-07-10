@@ -69,6 +69,7 @@ export class EditListingPhotosFormComponent extends Component {
     const {
       className,
       disabled,
+      errors,
       handleSubmit,
       images,
       intl,
@@ -91,6 +92,28 @@ export class EditListingPhotosFormComponent extends Component {
     // TODO Add tip #2: re-order text
 
     const imageRequiredMessage = intl.formatMessage({ id: 'EditListingPhotosForm.imageRequired' });
+
+    const { createListingsError, showListingsError, uploadImageError } = errors;
+    const uploadOverLimit = uploadImageError &&
+      uploadImageError.data.errors.length > 0 &&
+      uploadImageError.data.errors[0].code === 'upload-over-limit';
+    const uploadImageFailed = uploadOverLimit
+      ? <p className={css.error}>
+          <FormattedMessage id="EditListingPhotosForm.imageUploadFailed.uploadOverLimit" />
+        </p>
+      : null;
+
+    // Create and show listing errors are shown above submit button
+    const createListingFailed = createListingsError
+      ? <p className={css.error}>
+          <FormattedMessage id="EditListingPhotosForm.createListingFailed" />
+        </p>
+      : null;
+    const showListingFailed = showListingsError
+      ? <p className={css.error}>
+          <FormattedMessage id="EditListingPhotosForm.showListingFailed" />
+        </p>
+      : null;
 
     const classes = classNames(css.root, className);
 
@@ -123,10 +146,13 @@ export class EditListingPhotosFormComponent extends Component {
             validate={[noEmptyArray(imageRequiredMessage)]}
           />
         </AddImages>
+        {uploadImageFailed}
 
         <p className={css.tip}>
           <FormattedMessage id="EditListingPhotosForm.addImagesTip" />
         </p>
+        {createListingFailed}
+        {showListingFailed}
 
         <Button
           className={css.submitButton}
@@ -140,15 +166,20 @@ export class EditListingPhotosFormComponent extends Component {
   }
 }
 
-EditListingPhotosFormComponent.defaultProps = { saveActionMsg: 'Publish listing' };
+EditListingPhotosFormComponent.defaultProps = { saveActionMsg: 'Publish listing', errors: {} };
 
 EditListingPhotosFormComponent.propTypes = {
   ...formPropTypes,
+  errors: shape({
+    createListingsError: object,
+    showListingsError: object,
+    uploadImageError: object,
+  }),
   intl: intlShape.isRequired,
   onImageUpload: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,
-  saveActionMsg: string,
+  saveActionMsg: node,
 };
 
 const formName = 'EditListingPhotosForm';

@@ -20,6 +20,7 @@ class EditListingPhotosPanel extends Component {
     this.handlePayoutModalClose = this.handlePayoutModalClose.bind(this);
     this.handlePayoutSubmit = this.handlePayoutSubmit.bind(this);
   }
+
   handlePhotosSubmit(values) {
     const { onSubmit, currentUser } = this.props;
     const stripeConnected = currentUser &&
@@ -34,9 +35,11 @@ class EditListingPhotosPanel extends Component {
       });
     }
   }
+
   handlePayoutModalClose() {
     this.setState({ showPayoutDetails: false });
   }
+
   handlePayoutSubmit(values) {
     const {
       firstName,
@@ -62,14 +65,16 @@ class EditListingPhotosPanel extends Component {
       address: omitBy(address, isUndefined),
     };
     this.props.onPayoutDetailsSubmit(params).then(() => {
-      this.props.onManageDisableScrolling("EditListingPhotosPanel.payoutModal", false);
+      this.props.onManageDisableScrolling('EditListingPhotosPanel.payoutModal', false);
       this.props.onSubmit(this.state.submittedValues);
     });
   }
+
   render() {
     const {
       className,
       rootClassName,
+      errors,
       fetchInProgress,
       images,
       onImageUpload,
@@ -89,11 +94,13 @@ class EditListingPhotosPanel extends Component {
         <EditListingPhotosForm
           className={css.form}
           disabled={fetchInProgress}
+          errors={errors}
           initialValues={{ images }}
           images={images}
           onImageUpload={onImageUpload}
           onSubmit={this.handlePhotosSubmit}
           onUpdateImageOrder={onUpdateImageOrder}
+          saveActionMsg={<FormattedMessage id="EditListingPhotosPanel.publishListing" />}
         />
         <Modal
           id="EditListingPhotosPanel.payoutModal"
@@ -124,11 +131,12 @@ class EditListingPhotosPanel extends Component {
   }
 }
 
-const { array, bool, func, string } = PropTypes;
+const { array, bool, func, object, shape, string } = PropTypes;
 
 EditListingPhotosPanel.defaultProps = {
   className: null,
   rootClassName: null,
+  errors: null,
   images: [],
   currentUser: null,
 };
@@ -137,6 +145,11 @@ EditListingPhotosPanel.propTypes = {
   className: string,
   rootClassName: string,
   currentUser: propTypes.currentUser,
+  errors: shape({
+    createListingsError: object,
+    showListingsError: object,
+    uploadImageError: object,
+  }),
   fetchInProgress: bool.isRequired,
   images: array,
   onImageUpload: func.isRequired,

@@ -1,4 +1,4 @@
-import { omitBy, isUndefined } from 'lodash';
+import { omit, omitBy, isUndefined } from 'lodash';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserHasListingsSuccess } from '../../ducks/user.duck';
 
@@ -33,6 +33,7 @@ const initialState = {
   // Error instance placeholders for each endpoint
   createListingsError: null,
   showListingsError: null,
+  uploadImageError: null,
   submittedListingId: null,
   redirectToListing: false,
   images: {},
@@ -70,27 +71,28 @@ export default function reducer(state = initialState, action = {}) {
       // payload.params: { id: 'tempId', file }
       const images = {
         ...state.images,
-        [payload.params.id]: { ...payload.params, uploadImageError: false },
+        [payload.params.id]: { ...payload.params },
       };
-      return { ...state, images, imageOrder: state.imageOrder.concat([payload.params.id]) };
+      return {
+        ...state,
+        images,
+        imageOrder: state.imageOrder.concat([payload.params.id]),
+        uploadImageError: null,
+      };
     }
     case UPLOAD_IMAGE_SUCCESS: {
       // payload.params: { id: 'tempId', imageId: 'some-real-id'}
       const { id, imageId } = payload;
       const file = state.images[id].file;
-      const images = { ...state.images, [id]: { id, imageId, file, uploadImageError: false } };
+      const images = { ...state.images, [id]: { id, imageId, file } };
       return { ...state, images };
     }
     case UPLOAD_IMAGE_ERROR: {
       // eslint-disable-next-line no-console
-      console.error(payload);
       const { id, error } = payload;
-      const { file } = state.images[id];
-      const images = {
-        ...state.images,
-        [id]: { id, file, imageId: null, uploadImageError: error },
-      };
-      return { ...state, images };
+      const imageOrder = state.imageOrder.filter(i => i !== id);
+      const images = omit(state.images, id);
+      return { ...state, imageOrder, images, uploadImageError: error };
     }
     case UPDATE_IMAGE_ORDER:
       return { ...state, imageOrder: payload.imageOrder };
@@ -207,6 +209,6 @@ export function requestImageUpload(actionPayload) {
     return sdk.listings
       .uploadImage({ image: actionPayload.file })
       .then(resp => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } })))
-      .catch(e => dispatch(uploadImageError({ data: { id, error: e } })));
+      .catch(e => dispatch(uploadImageError({ id, error: e })));
   };
 }

@@ -79,8 +79,11 @@ export const EditListingPageComponent = props => {
     const slug = currentListing ? createSlug(currentListing.attributes.title) : null;
     return <NamedRedirect name="ListingPage" params={{ id: id.uuid, slug }} />;
   } else if (showForm) {
+    const { createListingsError = null, showListingsError = null, uploadImageError = null } = page;
+    const errors = { createListingsError, showListingsError, uploadImageError };
+
     // Show form if user is posting a new listing or editing existing one
-    const disableForm = page.redirectToListing && !page.showListingsError;
+    const disableForm = page.redirectToListing && !showListingsError;
 
     // Images are passed to EditListingForm so that it can generate thumbnails out of them
     const images = page.imageOrder.map(i => page.images[i]);
@@ -95,6 +98,7 @@ export const EditListingPageComponent = props => {
         <EditListingWizard
           className={css.wizard}
           disabled={disableForm}
+          errors={errors}
           fetchInProgress={fetchInProgress}
           flattenedRoutes={flattenedRoutes}
           history={history}
