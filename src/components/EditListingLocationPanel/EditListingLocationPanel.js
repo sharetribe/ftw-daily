@@ -39,7 +39,7 @@ const EditListingLocationPanel = props => {
 
   return (
     <div className={classes}>
-      <h1><FormattedMessage id="EditListingLocationPanel.title" /></h1>
+      <h1 className={css.title}><FormattedMessage id="EditListingLocationPanel.title" /></h1>
       <EditListingLocationForm
         className={css.form}
         initialValues={initialSearchFormValues}

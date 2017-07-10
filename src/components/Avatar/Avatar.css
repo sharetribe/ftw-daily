@@ -63,14 +63,14 @@
   color: var(--matterColorLight);
 }
 
-span {
+.initials {
   padding-bottom: 4px;
 }
 
-.mediumAvatar span {
+.mediumAvatar .initials {
   padding-bottom: 5px;
 }
 
-.largeAvatar span {
+.largeAvatar .initials {
   padding-bottom: 6px;
 }
