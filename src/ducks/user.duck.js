@@ -1,3 +1,5 @@
+import { TX_STATE_PREAUTHORIZED } from '../util/propTypes';
+
 // ================ Action types ================ //
 
 export const USERS_ME_REQUEST = 'app/user/USERS_ME_REQUEST';
@@ -14,6 +16,10 @@ export const FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST = 'app/user/FETCH_CURRENT_U
 export const FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS = 'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS';
 export const FETCH_CURRENT_USER_HAS_LISTINGS_ERROR = 'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_ERROR';
 
+export const FETCH_CURRENT_USER_NOTIFICATIONS_REQUEST = 'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_REQUEST';
+export const FETCH_CURRENT_USER_NOTIFICATIONS_SUCCESS = 'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_SUCCESS';
+export const FETCH_CURRENT_USER_NOTIFICATIONS_ERROR = 'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -23,6 +29,8 @@ const initialState = {
   createStripeAccountError: null,
   currentUserHasListings: false,
   currentUserHasListingsError: null,
+  currentUserNotificationCount: 0,
+  currentUserNotificationCountError: null,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -44,6 +52,8 @@ export default function reducer(state = initialState, action = {}) {
         usersMeError: null,
         currentUserHasListings: false,
         currentUserHasListingsError: null,
+        currentUserNotificationCount: 0,
+        currentUserNotificationCountError: null,
       };
 
     case FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST:
@@ -53,6 +63,14 @@ export default function reducer(state = initialState, action = {}) {
     case FETCH_CURRENT_USER_HAS_LISTINGS_ERROR:
       console.error(payload); // eslint-disable-line
       return { ...state, currentUserHasListingsError: payload };
+
+    case FETCH_CURRENT_USER_NOTIFICATIONS_REQUEST:
+      return { ...state, currentUserNotificationCountError: null };
+    case FETCH_CURRENT_USER_NOTIFICATIONS_SUCCESS:
+      return { ...state, currentUserNotificationCount: payload.transactions.length };
+    case FETCH_CURRENT_USER_NOTIFICATIONS_ERROR:
+      console.error(payload); // eslint-disable-line
+      return { ...state, currentUserNotificationCountError: payload };
 
     case STRIPE_ACCOUNT_CREATE_REQUEST:
       return { ...state, createStripeAccountError: null, createStripeAccountInProgress: true };
@@ -113,6 +131,21 @@ const fetchCurrentUserHasListingsError = e => ({
   payload: e,
 });
 
+const fetchCurrentUserNotificationsRequest = () => ({
+  type: FETCH_CURRENT_USER_NOTIFICATIONS_REQUEST,
+});
+
+export const fetchCurrentUserNotificationsSuccess = transactions => ({
+  type: FETCH_CURRENT_USER_NOTIFICATIONS_SUCCESS,
+  payload: { transactions },
+});
+
+const fetchCurrentUserNotificationsError = e => ({
+  type: FETCH_CURRENT_USER_NOTIFICATIONS_ERROR,
+  error: true,
+  payload: e,
+});
+
 // ================ Thunks ================ //
 
 export const fetchCurrentUserHasListings = () =>
@@ -147,6 +180,32 @@ export const fetchCurrentUserHasListings = () =>
       });
   };
 
+// Notificaiton page size is max (100 items on page)
+const NOTIFICATION_PAGE_SIZE = 100;
+
+export const fetchCurrentUserHasNotifications = () =>
+  (dispatch, getState, sdk) => {
+    dispatch(fetchCurrentUserNotificationsRequest());
+
+    const apiQueryParams = {
+      only: 'sale',
+      states: [TX_STATE_PREAUTHORIZED],
+      page: 1,
+      per_page: NOTIFICATION_PAGE_SIZE,
+    };
+
+    sdk.transactions
+      .query(apiQueryParams)
+      .then(response => {
+        const transactions = response.data.data;
+        dispatch(fetchCurrentUserNotificationsSuccess(transactions));
+      })
+      .catch(e => {
+        dispatch(fetchCurrentUserNotificationsError(e));
+        throw e;
+      });
+  };
+
 export const fetchCurrentUser = () =>
   (dispatch, getState, sdk) => {
     dispatch(usersMeRequest());
@@ -164,6 +223,7 @@ export const fetchCurrentUser = () =>
       })
       .then(() => {
         dispatch(fetchCurrentUserHasListings());
+        dispatch(fetchCurrentUserHasNotifications());
       })
       .catch(e => {
         // TODO: dispatch flash message
