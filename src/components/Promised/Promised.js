@@ -6,6 +6,7 @@
  * <Promised promise={givenPromise} renderFulfilled={v => <b>{v}</b>} renderRejected={v => <b>v</b>} />
  */
 
+/* eslint-disable no-underscore-dangle */
 import { Component, PropTypes } from 'react';
 
 class Promised extends Component {
@@ -17,16 +18,26 @@ class Promised extends Component {
       value: '',
       error: null,
     };
+    this._isMounted = false;
   }
 
   componentDidMount() {
+    this._isMounted = true;
     this.props.promise
       .then(value => {
-        this.setState({ value });
+        if (this._isMounted) {
+          this.setState({ value });
+        }
       })
       .catch(error => {
-        this.setState({ error });
+        if (this._isMounted) {
+          this.setState({ error });
+        }
       });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
