@@ -103,6 +103,10 @@
   color: var(--matterColorAnti);
 }
 
+.error {
+  color: var(--failColor);
+}
+
 .submitButton {
   flex-shrink: 0;
   margin-top: auto;

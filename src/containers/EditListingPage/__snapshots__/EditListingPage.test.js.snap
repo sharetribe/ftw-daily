@@ -16,6 +16,13 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
   <EditListingWizard
     className={null}
     currentUser={null}
+    errors={
+      Object {
+        "createListingsError": null,
+        "showListingsError": null,
+        "uploadImageError": null,
+      }
+    }
     fetchInProgress={false}
     flattenedRoutes={Array []}
     history={
