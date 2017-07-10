@@ -97,7 +97,9 @@ const SortableImages = SortableContainer(props => {
   const classes = classNames(css.root, className);
   return (
     <ol className={classes}>
-      {images.map((image, index) => <SortableImage {...image} index={index} key={image.id} />)}
+      {images.map((image, index) => {
+        return <SortableImage {...image} index={index} key={image.id} />;
+      })}
       {children}
     </ol>
   );
