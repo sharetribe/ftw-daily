@@ -37,7 +37,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
       onDragStart={[Function]}
       onDrop={[Function]}
       onFocus={[Function]}
-      placeholder=" "
+      placeholder="How many people can fit in at once? Does the sauna come with towels?"
       value="" />
   </div>
   <button
