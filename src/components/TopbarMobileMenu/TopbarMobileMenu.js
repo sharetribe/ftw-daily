@@ -9,7 +9,14 @@ import { AvatarLarge, InlineTextButton, NamedLink } from '../../components';
 import css from './TopbarMobileMenu.css';
 
 const TopbarMobileMenu = props => {
-  const { isAuthenticated, currentUserHasListings, firstName, lastName, onLogout } = props;
+  const {
+    isAuthenticated,
+    currentUserHasListings,
+    firstName,
+    lastName,
+    notificationCount,
+    onLogout,
+  } = props;
 
   if (!isAuthenticated) {
     const signup = (
@@ -48,6 +55,9 @@ const TopbarMobileMenu = props => {
     );
   }
 
+  const notificationCountBadge = notificationCount > 0
+    ? <span className={css.notificationCount}>{notificationCount}</span>
+    : null;
   const inboxLink = (
     <NamedLink
       className={css.inbox}
@@ -55,6 +65,7 @@ const TopbarMobileMenu = props => {
       params={{ tab: currentUserHasListings ? 'sales' : 'orders' }}
     >
       <FormattedMessage id="TopbarMobileMenu.inboxLink" />
+      {notificationCountBadge}
     </NamedLink>
   );
 
@@ -79,15 +90,16 @@ const TopbarMobileMenu = props => {
   );
 };
 
-TopbarMobileMenu.defaultProps = { firstName: '', lastName: '' };
+TopbarMobileMenu.defaultProps = { firstName: '', lastName: '', notificationCount: 0 };
 
-const { bool, func, string } = PropTypes;
+const { bool, func, number, string } = PropTypes;
 
 TopbarMobileMenu.propTypes = {
   isAuthenticated: bool.isRequired,
   currentUserHasListings: bool.isRequired,
   firstName: string,
   lastName: string,
+  notificationCount: number,
   onLogout: func.isRequired,
 };
 

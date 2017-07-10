@@ -91,6 +91,7 @@ class TopbarComponent extends Component {
       authInProgress,
       currentUser,
       currentUserHasListings,
+      notificationCount,
       intl,
       location,
       onManageDisableScrolling,
@@ -103,6 +104,8 @@ class TopbarComponent extends Component {
       latlngBounds: ['bounds'],
     });
 
+    const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null;
+
     const isMobileMenuOpen = mobilemenu === 'open';
     const isMobileSearchOpen = mobilesearch === 'open';
     const mobileMenu = (
@@ -112,6 +115,7 @@ class TopbarComponent extends Component {
         firstName={profile.firstName}
         lastName={profile.lastName}
         onLogout={this.handleLogout}
+        notificationCount={notificationCount}
       />
     );
 
@@ -136,6 +140,7 @@ class TopbarComponent extends Component {
               className={css.menuIcon}
               title={intl.formatMessage({ id: 'Topbar.menuIcon' })}
             />
+            {notificationDot}
           </Button>
           <NamedLink className={css.home} name="LandingPage">
             <LogoIcon title={intl.formatMessage({ id: 'Topbar.logoIcon' })} />
@@ -150,13 +155,14 @@ class TopbarComponent extends Component {
         <div className={css.desktop}>
           <TopbarDesktop
             currentUserHasListings={currentUserHasListings}
-            intl={intl}
-            isAuthenticated={isAuthenticated}
-            onLogout={this.handleLogout}
             firstName={profile.firstName}
             lastName={profile.lastName}
-            onSearchSubmit={this.handleSubmit}
             initialSearchFormValues={initialSearchFormValues}
+            intl={intl}
+            isAuthenticated={isAuthenticated}
+            notificationCount={notificationCount}
+            onLogout={this.handleLogout}
+            onSearchSubmit={this.handleSubmit}
           />
         </div>
         <Modal
@@ -194,10 +200,11 @@ TopbarComponent.defaultProps = {
   className: null,
   rootClassName: null,
   mobileRootClassName: null,
+  notificationCount: 0,
   currentUser: null,
 };
 
-const { arrayOf, bool, func, shape, string } = PropTypes;
+const { arrayOf, bool, func, number, shape, string } = PropTypes;
 
 TopbarComponent.propTypes = {
   className: string,
@@ -207,6 +214,7 @@ TopbarComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
 
@@ -227,12 +235,17 @@ TopbarComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { isAuthenticated } = state.Auth;
-  const { currentUser, currentUserHasListings } = state.user;
+  const {
+    currentUser,
+    currentUserHasListings,
+    currentUserNotificationCount: notificationCount,
+  } = state.user;
   return {
     isAuthenticated,
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    notificationCount,
   };
 };
 

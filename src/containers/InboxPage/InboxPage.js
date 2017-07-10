@@ -20,7 +20,7 @@ import { loadData } from './InboxPage.duck';
 
 import css from './InboxPage.css';
 
-const { arrayOf, bool, func, instanceOf, object, oneOf, shape, string } = PropTypes;
+const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
 
 // Formatted username
 const username = user => {
@@ -102,9 +102,7 @@ export const InboxItem = props => {
   const stateData = txState(intl, tx, isOrder);
   const isSaleNotification = !isOrder && tx.attributes.state === propTypes.TX_STATE_PREAUTHORIZED;
 
-  const rowNotificationBadge = isSaleNotification
-    ? <div className={css.notificationBadge} />
-    : null;
+  const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
 
   return (
     <NamedLink
@@ -115,8 +113,8 @@ export const InboxItem = props => {
       <div className={css.itemAvatar}>
         <Avatar firstName={otherUser.firstName} lastName={otherUser.lastName} />
       </div>
-      <div className={css.rowNotificationBadge}>
-        {rowNotificationBadge}
+      <div className={css.rowNotificationDot}>
+        {rowNotificationDot}
       </div>
       <div className={css.itemInfo}>
         <div className={classNames(css.itemUsername, stateData.nameClassName)}>
@@ -147,6 +145,7 @@ export const InboxPageComponent = props => {
     history,
     location,
     pagination,
+    providerNotificationCount,
     scrollingDisabled,
     transactions,
     intl,
@@ -195,6 +194,9 @@ export const InboxPageComponent = props => {
       />
     : null;
 
+  const providerNotificationBadge = providerNotificationCount > 0
+    ? <span className={css.notificationBadge}>{providerNotificationCount}</span>
+    : null;
   const tabs = [
     {
       text: <span><FormattedMessage id="InboxPage.ordersTabTitle" /></span>,
@@ -205,7 +207,9 @@ export const InboxPageComponent = props => {
       },
     },
     {
-      text: <span><FormattedMessage id="InboxPage.salesTabTitle" /></span>,
+      text: (
+        <span><FormattedMessage id="InboxPage.salesTabTitle" />{providerNotificationBadge}</span>
+      ),
       selected: !isOrders,
       linkProps: {
         name: 'InboxPage',
@@ -237,6 +241,7 @@ export const InboxPageComponent = props => {
 InboxPageComponent.defaultProps = {
   fetchOrdersOrSalesError: null,
   pagination: null,
+  providerNotificationCount: 0,
 };
 
 InboxPageComponent.propTypes = {
@@ -247,6 +252,7 @@ InboxPageComponent.propTypes = {
   fetchInProgress: bool.isRequired,
   fetchOrdersOrSalesError: instanceOf(Error),
   pagination: propTypes.pagination,
+  providerNotificationCount: number,
   scrollingDisabled: bool.isRequired,
   transactions: arrayOf(propTypes.transaction).isRequired,
 
@@ -267,10 +273,12 @@ const mapStateToProps = state => {
     pagination,
     transactionRefs,
   } = state.InboxPage;
+  const providerNotificationCount = state.user.currentUserNotificationCount;
   return {
     fetchInProgress,
     fetchOrdersOrSalesError,
     pagination,
+    providerNotificationCount,
     transactions: getMarketplaceEntities(state, transactionRefs),
     scrollingDisabled: isScrollingDisabled(state),
   };

@@ -105,14 +105,14 @@
   border-radius: 50%;
 }
 
-.rowNotificationBadge {
+.rowNotificationDot {
   width: 6px;
   height: 6px;
   margin-top: 10px;
   margin-right: 8px;
 }
 
-.notificationBadge {
+.notificationDot {
   color: var(--matterColorLight);
 
   width: 100%;
@@ -121,7 +121,7 @@
   background-color: var(--failColor);
 }
 
-.notificationCount {
+.notificationBadge {
   /* Font */
   @apply --marketplaceH6FontStyles;
   color: var(--matterColorLight);
