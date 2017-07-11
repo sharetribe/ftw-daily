@@ -8,6 +8,7 @@ import {
   Avatar,
   NamedLink,
   NamedRedirect,
+  NotificationBadge,
   PageLayout,
   PaginationLinks,
   TabNav,
@@ -195,7 +196,7 @@ export const InboxPageComponent = props => {
     : null;
 
   const providerNotificationBadge = providerNotificationCount > 0
-    ? <span className={css.notificationBadge}>{providerNotificationCount}</span>
+    ? <NotificationBadge count={providerNotificationCount} />
     : null;
   const tabs = [
     {
