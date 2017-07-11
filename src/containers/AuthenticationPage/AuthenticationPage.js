@@ -27,6 +27,7 @@ const isEmailTakenApiError = error => {
 
 export const AuthenticationPageComponent = props => {
   const {
+    authInfoError,
     authInProgress,
     currentUser,
     currentUserHasListings,
@@ -35,6 +36,7 @@ export const AuthenticationPageComponent = props => {
     isAuthenticated,
     location,
     loginError,
+    logoutError,
     notificationCount,
     onLogout,
     onManageDisableScrolling,
@@ -111,7 +113,12 @@ export const AuthenticationPageComponent = props => {
   ];
 
   return (
-    <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
+    <PageLayout
+      authInfoError={authInfoError}
+      logoutError={logoutError}
+      title={title}
+      scrollingDisabled={scrollingDisabled}
+    >
       <Topbar
         isAuthenticated={isAuthenticated}
         authInProgress={authInProgress}
@@ -135,8 +142,10 @@ export const AuthenticationPageComponent = props => {
 };
 
 AuthenticationPageComponent.defaultProps = {
+  authInfoError: null,
   currentUser: null,
   loginError: null,
+  logoutError: null,
   notificationCount: 0,
   signupError: null,
   tab: 'signup',
@@ -145,11 +154,13 @@ AuthenticationPageComponent.defaultProps = {
 const { bool, func, instanceOf, number, object, oneOf, shape } = PropTypes;
 
 AuthenticationPageComponent.propTypes = {
+  authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   isAuthenticated: bool.isRequired,
   loginError: instanceOf(Error),
+  logoutError: instanceOf(Error),
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
@@ -170,21 +181,23 @@ AuthenticationPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { isAuthenticated, loginError, signupError } = state.Auth;
+  const { authInfoError, isAuthenticated, loginError, logoutError, signupError } = state.Auth;
   const {
     currentUser,
     currentUserHasListings,
     currentUserNotificationCount: notificationCount,
   } = state.user;
   return {
+    authInfoError,
     authInProgress: authenticationInProgress(state),
-    isAuthenticated,
-    loginError,
-    signupError,
     currentUser,
     currentUserHasListings,
+    isAuthenticated,
+    loginError,
+    logoutError,
     notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
+    signupError,
   };
 };
 
