@@ -142,6 +142,7 @@ InboxItem.propTypes = {
 
 export const InboxPageComponent = props => {
   const {
+    authInfoError,
     authInProgress,
     currentUser,
     currentUserHasListings,
@@ -151,6 +152,7 @@ export const InboxPageComponent = props => {
     intl,
     isAuthenticated,
     location,
+    logoutError,
     onLogout,
     onManageDisableScrolling,
     pagination,
@@ -196,6 +198,8 @@ export const InboxPageComponent = props => {
   const pagingLinks = hasTransactions && pagination && pagination.totalPages > 1
     ? <PaginationLinks
         className={css.pagination}
+        authInfoError={authInfoError}
+        logoutError={logoutError}
         pageName="InboxPage"
         pagePathParams={params}
         pagination={pagination}
@@ -228,7 +232,12 @@ export const InboxPageComponent = props => {
   const nav = <TabNav className={css.tabs} tabs={tabs} />;
 
   return (
-    <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
+    <PageLayout
+      authInfoError={authInfoError}
+      logoutError={logoutError}
+      title={title}
+      scrollingDisabled={scrollingDisabled}
+    >
       <Topbar
         mobileRootClassName={css.mobileTopbar}
         isAuthenticated={isAuthenticated}
@@ -258,8 +267,10 @@ export const InboxPageComponent = props => {
 };
 
 InboxPageComponent.defaultProps = {
+  authInfoError: null,
   currentUser: null,
   fetchOrdersOrSalesError: null,
+  logoutError: null,
   pagination: null,
   providerNotificationCount: 0,
 };
@@ -269,12 +280,14 @@ InboxPageComponent.propTypes = {
     tab: string.isRequired,
   }).isRequired,
 
+  authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   fetchInProgress: bool.isRequired,
   fetchOrdersOrSalesError: instanceOf(Error),
   isAuthenticated: bool.isRequired,
+  logoutError: instanceOf(Error),
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   pagination: propTypes.pagination,
@@ -299,23 +312,25 @@ const mapStateToProps = state => {
     pagination,
     transactionRefs,
   } = state.InboxPage;
-  const { isAuthenticated } = state.Auth;
+  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   const {
     currentUser,
     currentUserHasListings,
     currentUserNotificationCount: providerNotificationCount,
   } = state.user;
   return {
-    fetchInProgress,
-    fetchOrdersOrSalesError,
-    isAuthenticated,
+    authInfoError,
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    fetchInProgress,
+    fetchOrdersOrSalesError,
+    isAuthenticated,
+    logoutError,
     pagination,
     providerNotificationCount,
-    transactions: getMarketplaceEntities(state, transactionRefs),
     scrollingDisabled: isScrollingDisabled(state),
+    transactions: getMarketplaceEntities(state, transactionRefs),
   };
 };
 
