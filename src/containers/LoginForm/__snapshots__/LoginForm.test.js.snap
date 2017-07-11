@@ -37,7 +37,7 @@ exports[`LoginForm matches snapshot 1`] = `
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder="Enter your password..."
+        placeholder="Enter your password…"
         type="password"
         value="" />
     </div>

@@ -19,18 +19,29 @@
 
 .message {
   display: flex;
-  margin: 24px 24px 0 24px;
+  margin: 24px 24px 47px 24px;
 }
 
 .transitionDate {
   white-space: nowrap;
 }
 
+.bookingBreakdownContainer {
+  margin-bottom: 40px;
+  padding: 0 24px;
+}
+
 .bookingBreakdownTitle {
-  margin: 47px 24px 0 24px;
+  /* Font */
   color: var(--matterColorAnti);
+
+  margin-top: 5px;
+  margin-bottom: 14px;
+  @media (--desktopViewport) {
+    margin-top: 5px;
+    margin-bottom: 14px;
+  }
 }
 
 .receipt {
-  margin: 14px 24px 0 24px;
 }

@@ -80,7 +80,7 @@ exports[`HeroSection matches snapshot 1`] = `
         onChange={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
-        placeholder="Search saunas..."
+        placeholder="Search saunas…"
         type="search"
         value="" />
     </div>
