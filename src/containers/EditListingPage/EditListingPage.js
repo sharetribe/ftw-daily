@@ -8,6 +8,7 @@ import { createSlug } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import { EditListingWizard, NamedRedirect, PageLayout, Topbar } from '../../components';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
+import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { createStripeAccount } from '../../ducks/user.duck';
 import {
@@ -44,25 +45,30 @@ const formatRequestData = values => {
 // N.B. All the presentational content needs to be extracted to their own components
 export const EditListingPageComponent = props => {
   const {
+    authInProgress,
+    currentUser,
+    currentUserHasListings,
     fetchInProgress,
     flattenedRoutes,
+    getListing,
     history,
     intl,
+    isAuthenticated,
     location,
+    notificationCount,
     onCreateListing,
+    onCreateListingDraft,
     onImageUpload,
+    onLogout,
+    onManageDisableScrolling,
     onPayoutDetailsSubmit,
     onUpdateImageOrder,
+    onUpdateListingDraft,
     page,
     params,
+    scrollingDisabled,
     tab,
     type,
-    currentUser,
-    getListing,
-    onCreateListingDraft,
-    onManageDisableScrolling,
-    onUpdateListingDraft,
-    scrollingDisabled,
   } = props;
   const isNew = type === 'new';
   const hasIdParam = params && params.id;
@@ -93,7 +99,18 @@ export const EditListingPageComponent = props => {
 
     return (
       <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
-        <Topbar mobileRootClassName={css.mobileTopbar} history={history} location={location} />
+        <Topbar
+          mobileRootClassName={css.mobileTopbar}
+          isAuthenticated={isAuthenticated}
+          authInProgress={authInProgress}
+          currentUser={currentUser}
+          currentUserHasListings={currentUserHasListings}
+          notificationCount={notificationCount}
+          history={history}
+          location={location}
+          onLogout={onLogout}
+          onManageDisableScrolling={onManageDisableScrolling}
+        />
         <EditListingWizard
           className={css.wizard}
           disabled={disableForm}
@@ -130,45 +147,61 @@ EditListingPageComponent.loadData = id => {
 };
 
 EditListingPageComponent.defaultProps = {
+  currentUser: null,
   listing: null,
   listingDraft: null,
+  notificationCount: 0,
   params: null,
   type: 'edit',
-  currentUser: null,
 };
 
-const { arrayOf, bool, func, object, shape, string } = PropTypes;
+const { arrayOf, bool, func, number, object, shape, string } = PropTypes;
 
 EditListingPageComponent.propTypes = {
+  authInProgress: bool.isRequired,
+  currentUser: propTypes.currentUser,
+  currentUserHasListings: bool.isRequired,
   fetchInProgress: bool.isRequired,
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
-  history: shape({
-    push: func.isRequired,
-  }).isRequired,
-  location: object.isRequired,
-  intl: intlShape.isRequired,
+  getListing: func.isRequired,
+  isAuthenticated: bool.isRequired,
+  notificationCount: number,
   onCreateListing: func.isRequired,
+  onCreateListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
+  onLogout: func.isRequired,
+  onManageDisableScrolling: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
+  onUpdateListingDraft: func.isRequired,
   page: object.isRequired,
   params: shape({
     id: string,
     slug: string,
   }),
+  scrollingDisabled: bool.isRequired,
   tab: string.isRequired,
   type: string,
-  currentUser: propTypes.currentUser,
-  getListing: func.isRequired,
-  onCreateListingDraft: func.isRequired,
-  onManageDisableScrolling: func.isRequired,
-  onUpdateListingDraft: func.isRequired,
-  scrollingDisabled: bool.isRequired,
+
+  /* from withRouter */
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
+  location: object.isRequired,
+  /* from injectIntl */
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
   const page = state.EditListingPage;
-  const { currentUser, createStripeAccountInProgress } = state.user;
+  const { isAuthenticated } = state.Auth;
+  const {
+    createStripeAccountInProgress,
+    currentUser,
+    currentUserHasListings,
+    currentUserNotificationCount: notificationCount,
+  } = state.user;
+
   const fetchInProgress = createStripeAccountInProgress;
 
   const getListing = id => {
@@ -177,25 +210,28 @@ const mapStateToProps = state => {
   };
   return {
     page,
+    isAuthenticated,
+    authInProgress: authenticationInProgress(state),
     currentUser,
+    currentUserHasListings,
+    notificationCount,
     getListing,
     fetchInProgress,
     scrollingDisabled: isScrollingDisabled(state),
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onCreateListing: values => dispatch(requestCreateListing(formatRequestData(values))),
-    onImageUpload: data => dispatch(requestImageUpload(data)),
-    onPayoutDetailsSubmit: values => dispatch(createStripeAccount(values)),
-    onUpdateImageOrder: imageOrder => dispatch(updateImageOrder(imageOrder)),
-    onCreateListingDraft: values => dispatch(createListingDraft(values)),
-    onUpdateListingDraft: values => dispatch(updateListingDraft(values)),
-    onManageDisableScrolling: (componentId, disableScrolling) =>
-      dispatch(manageDisableScrolling(componentId, disableScrolling)),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  onCreateListing: values => dispatch(requestCreateListing(formatRequestData(values))),
+  onCreateListingDraft: values => dispatch(createListingDraft(values)),
+  onImageUpload: data => dispatch(requestImageUpload(data)),
+  onLogout: historyPush => dispatch(logout(historyPush)),
+  onManageDisableScrolling: (componentId, disableScrolling) =>
+    dispatch(manageDisableScrolling(componentId, disableScrolling)),
+  onPayoutDetailsSubmit: values => dispatch(createStripeAccount(values)),
+  onUpdateImageOrder: imageOrder => dispatch(updateImageOrder(imageOrder)),
+  onUpdateListingDraft: values => dispatch(updateListingDraft(values)),
+});
 
 const EditListingPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
   injectIntl(EditListingPageComponent)
