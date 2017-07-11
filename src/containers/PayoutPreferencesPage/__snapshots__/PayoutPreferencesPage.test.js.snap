@@ -1,4 +1,25 @@
 exports[`PayoutPreferencesPage matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
-  title="Payout preferences" />
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
+  title="Payout preferences">
+  <Topbar
+    authInProgress={false}
+    currentUser={null}
+    currentUserHasListings={false}
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    isAuthenticated={false}
+    location={
+      Object {
+        "search": "",
+      }
+    }
+    notificationCount={0}
+    onLogout={[Function]}
+    onManageDisableScrolling={[Function]} />
+</withRouter(PageLayout)>
 `;
