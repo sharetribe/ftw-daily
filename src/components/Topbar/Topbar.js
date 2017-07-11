@@ -1,11 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
 import classNames from 'classnames';
-import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { manageDisableScrolling } from '../../ducks/UI.duck';
 import { Button, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
 import { TopbarSearchForm } from '../../containers';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
@@ -233,30 +230,7 @@ TopbarComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const mapStateToProps = state => {
-  const { isAuthenticated } = state.Auth;
-  const {
-    currentUser,
-    currentUserHasListings,
-    currentUserNotificationCount: notificationCount,
-  } = state.user;
-  return {
-    isAuthenticated,
-    authInProgress: authenticationInProgress(state),
-    currentUser,
-    currentUserHasListings,
-    notificationCount,
-  };
-};
-
-const mapDispatchToProps = dispatch => ({
-  onManageDisableScrolling: (componentId, disableScrolling) =>
-    dispatch(manageDisableScrolling(componentId, disableScrolling)),
-  onLogout: historyPush => dispatch(logout(historyPush)),
-});
-
 const Topbar = compose(
-  connect(mapStateToProps, mapDispatchToProps),
   withFlattenedRoutes,
   injectIntl
 )(TopbarComponent);
