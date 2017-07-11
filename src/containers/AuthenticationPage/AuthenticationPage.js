@@ -75,6 +75,12 @@ export const AuthenticationPageComponent = props => {
     </div>
   );
 
+  // eslint-disable-next-line no-confusing-arrow
+  const errorMessage = (error, message) => error ? message : null;
+  const loginOrSignupError = isLogin
+    ? errorMessage(loginError, loginErrorMessage)
+    : errorMessage(signupError, signupErrorMessage);
+
   const fromState = { state: from ? { from } : null };
 
   const tabs = [
@@ -103,8 +109,7 @@ export const AuthenticationPageComponent = props => {
       <Topbar history={history} location={location} />
       <div className={css.root}>
         <TabNav className={css.tabs} tabs={tabs} />
-        {loginError ? loginErrorMessage : null}
-        {signupError ? signupErrorMessage : null}
+        {loginOrSignupError}
         {isLogin
           ? <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
           : <SignupForm className={css.form} onSubmit={submitSignup} inProgress={authInProgress} />}
