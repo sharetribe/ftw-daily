@@ -1,5 +1,7 @@
 exports[`ListingPage matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
   scrollingDisabled={false}
   title="listing1 title 55">
   <Topbar
@@ -164,5 +166,5 @@ exports[`ListingPage matches snapshot 1`] = `
       </Button>
     </div>
   </div>
-</Connect(withRouter(PageLayout))>
+</withRouter(PageLayout)>
 `;

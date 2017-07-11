@@ -86,6 +86,7 @@ export class ListingPageComponent extends Component {
 
   render() {
     const {
+      authInfoError,
       authInProgress,
       currentUser,
       currentUserHasListings,
@@ -94,6 +95,7 @@ export class ListingPageComponent extends Component {
       intl,
       isAuthenticated,
       location,
+      logoutError,
       notificationCount,
       onLogout,
       onManageDisableScrolling,
@@ -157,7 +159,12 @@ export class ListingPageComponent extends Component {
     const listingClasses = classNames(css.listing, { [css.bookable]: showBookButton });
 
     return (
-      <PageLayout title={`${title} ${formattedPrice}`} scrollingDisabled={scrollingDisabled}>
+      <PageLayout
+        authInfoError={authInfoError}
+        logoutError={logoutError}
+        title={`${title} ${formattedPrice}`}
+        scrollingDisabled={scrollingDisabled}
+      >
         <Topbar
           isAuthenticated={isAuthenticated}
           authInProgress={authInProgress}
@@ -254,7 +261,9 @@ export class ListingPageComponent extends Component {
 }
 
 ListingPageComponent.defaultProps = {
+  authInfoError: null,
   currentUser: null,
+  logoutError: null,
   notificationCount: 0,
   showListingError: null,
   tab: 'listing',
@@ -275,11 +284,13 @@ ListingPageComponent.propTypes = {
     id: string.isRequired,
     slug: string.isRequired,
   }).isRequired,
+  authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   getListing: func.isRequired,
   isAuthenticated: bool.isRequired,
+  logoutError: instanceOf(Error),
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
@@ -291,7 +302,7 @@ ListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { showListingError } = state.ListingPage;
-  const { isAuthenticated } = state.Auth;
+  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   const {
     currentUser,
     currentUserHasListings,
@@ -304,14 +315,16 @@ const mapStateToProps = state => {
   };
 
   return {
-    showListingError,
-    isAuthenticated,
+    authInfoError,
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
-    notificationCount,
     getListing,
+    isAuthenticated,
+    logoutError,
+    notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
+    showListingError,
   };
 };
 
