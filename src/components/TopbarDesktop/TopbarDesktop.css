@@ -42,6 +42,10 @@
   padding: 21px 0;
   height: 100%;
   margin-right: 24px;
+
+  @media (min-width: 1024px) {
+    margin-right: 36px;
+  }
 }
 
 .logo {
@@ -54,6 +58,14 @@
   flex-grow: 1;
   height: 100%;
   margin-right: 24px;
+  padding-left: 24px;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left-color: var(--matterColorNegative);
+
+  @media (min-width: 1024px) {
+    padding-left: 36px;
+  }
 }
 
 .search {
