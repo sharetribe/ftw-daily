@@ -30,7 +30,6 @@ import SecurityPage from './SecurityPage/SecurityPage';
 import SignupForm from './SignupForm/SignupForm';
 import StripePaymentForm from './StripePaymentForm/StripePaymentForm';
 import StyleguidePage from './StyleguidePage/StyleguidePage';
-import Topbar from './Topbar/Topbar';
 import TopbarSearchForm from './TopbarSearchForm/TopbarSearchForm';
 
 export {
@@ -66,6 +65,5 @@ export {
   SignupForm,
   StripePaymentForm,
   StyleguidePage,
-  Topbar,
   TopbarSearchForm,
 };
