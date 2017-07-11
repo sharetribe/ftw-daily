@@ -167,10 +167,12 @@ const OrderDetailsPanel = props => {
       <div className={css.message}>
         {message}
       </div>
-      <h3 className={css.bookingBreakdownTitle}>
-        <FormattedMessage id="OrderDetailsPanel.bookingBreakdownTitle" />
-      </h3>
-      {bookingInfo}
+      <div className={css.bookingBreakdownContainer}>
+        <h3 className={css.bookingBreakdownTitle}>
+          <FormattedMessage id="OrderDetailsPanel.bookingBreakdownTitle" />
+        </h3>
+        {bookingInfo}
+      </div>
     </div>
   );
 };
