@@ -20,6 +20,7 @@ export const BookingBreakdownComponent = props => {
     bookingEnd,
     payinTotal,
     payoutTotal,
+    totalLabelMessage,
     lineItems,
     userRole,
     intl,
@@ -54,8 +55,7 @@ export const BookingBreakdownComponent = props => {
             {intl.formatDate(bookingEnd, dateFormatOptions)}
           </span>
         ),
-      }}
-    />
+      }} />
   );
 
   const nightPurchase = lineItems.find(item => item.code === 'line-item/night');
@@ -105,6 +105,11 @@ export const BookingBreakdownComponent = props => {
     );
   }
 
+  const defaultTotalLabel = userRole === 'customer'
+    ? <FormattedMessage id="BookingBreakdown.total" />
+    : <FormattedMessage id="BookingBreakdown.providerTotal" />;
+  const totalLabel = totalLabelMessage || defaultTotalLabel;
+
   const totalPriceAsNumber = convertMoneyToNumber(
     userRole === 'customer' ? payinTotal : payoutTotal,
     subUnitDivisor
@@ -132,9 +137,7 @@ export const BookingBreakdownComponent = props => {
       <hr className={css.totalDivider} />
       <div className={css.lineItem}>
         <div className={css.totalLabel}>
-          {userRole === 'customer'
-            ? <FormattedMessage id="BookingBreakdown.total" />
-            : <FormattedMessage id="BookingBreakdown.providerTotal" />}
+          {totalLabel}
         </div>
         <div className={css.totalPrice}>
           {formattedTotalPrice}
@@ -149,9 +152,10 @@ BookingBreakdownComponent.defaultProps = {
   className: null,
   payinTotal: null,
   payoutTotal: null,
+  totalLabelMessage: null,
 };
 
-const { string, instanceOf, arrayOf, oneOf, shape } = PropTypes;
+const { arrayOf, instanceOf, node, oneOf, shape, string } = PropTypes;
 
 const lineItem = shape({
   code: string.isRequired,
@@ -170,6 +174,7 @@ BookingBreakdownComponent.propTypes = {
   userRole: oneOf(['customer', 'provider']).isRequired,
   payinTotal: propTypes.money, // required if userRole === customer
   payoutTotal: propTypes.money, // required if userRole === provider
+  totalLabelMessage: node,
 
   // from injectIntl
   intl: intlShape.isRequired,
