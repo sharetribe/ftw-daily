@@ -7,9 +7,9 @@ import config from '../../config';
 import { parse, stringify } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
+import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { PageLayout, SearchResultsPanel } from '../../components';
-import { Topbar } from '../../containers';
+import { PageLayout, SearchResultsPanel, Topbar } from '../../components';
 import { searchListings } from './SearchPage.duck';
 import css from './SearchPage.css';
 
@@ -23,9 +23,16 @@ const pickSearchParamsOnly = params => {
 
 export const SearchPageComponent = props => {
   const {
+    authInProgress,
+    currentUser,
+    currentUserHasListings,
     history,
+    isAuthenticated,
     listings,
     location,
+    notificationCount,
+    onLogout,
+    onManageDisableScrolling,
     pagination,
     scrollingDisabled,
     searchInProgress,
@@ -89,7 +96,17 @@ export const SearchPageComponent = props => {
 
   return (
     <PageLayout title={`Search page: ${tab}`} scrollingDisabled={scrollingDisabled}>
-      <Topbar history={history} location={location} />
+      <Topbar
+        isAuthenticated={isAuthenticated}
+        authInProgress={authInProgress}
+        currentUser={currentUser}
+        currentUserHasListings={currentUserHasListings}
+        notificationCount={notificationCount}
+        history={history}
+        location={location}
+        onLogout={onLogout}
+        onManageDisableScrolling={onManageDisableScrolling}
+      />
       <div className={css.searchResultSummary}>
         {searchListingsError ? searchError : null}
         {listingsAreLoaded && totalItems > 0 ? resultsFound : null}
@@ -112,22 +129,31 @@ export const SearchPageComponent = props => {
 };
 
 SearchPageComponent.defaultProps = {
-  tab: 'listings',
+  currentUser: null,
   listings: [],
+  notificationCount: 0,
   pagination: null,
-  searchParams: {},
   searchListingsError: null,
+  searchParams: {},
+  tab: 'listings',
 };
 
-const { array, bool, func, instanceOf, oneOf, object, shape, string } = PropTypes;
+const { array, bool, func, instanceOf, number, oneOf, object, shape, string } = PropTypes;
 
 SearchPageComponent.propTypes = {
+  authInProgress: bool.isRequired,
+  currentUser: propTypes.currentUser,
+  currentUserHasListings: bool.isRequired,
+  isAuthenticated: bool.isRequired,
   listings: array,
+  notificationCount: number,
+  onLogout: func.isRequired,
+  onManageDisableScrolling: func.isRequired,
   pagination: propTypes.pagination,
   scrollingDisabled: bool.isRequired,
-  searchParams: object,
   searchInProgress: bool.isRequired,
   searchListingsError: instanceOf(Error),
+  searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
 
   // from withRouter
@@ -147,6 +173,12 @@ const mapStateToProps = state => {
     searchListingsError,
     searchParams,
   } = state.SearchPage;
+  const { isAuthenticated } = state.Auth;
+  const {
+    currentUser,
+    currentUserHasListings,
+    currentUserNotificationCount: notificationCount,
+  } = state.user;
   return {
     listings: getListingsById(state, currentPageResultIds),
     pagination,
@@ -154,10 +186,16 @@ const mapStateToProps = state => {
     searchListingsError,
     searchParams,
     scrollingDisabled: isScrollingDisabled(state),
+    isAuthenticated,
+    authInProgress: authenticationInProgress(state),
+    currentUser,
+    currentUserHasListings,
+    notificationCount,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
+  onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
 });

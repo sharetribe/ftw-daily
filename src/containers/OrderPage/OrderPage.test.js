@@ -10,6 +10,8 @@ import {
 import { renderShallow } from '../../util/test-helpers';
 import { OrderPageComponent } from './OrderPage';
 
+const noop = () => null;
+
 describe('OrderPage', () => {
   it('matches snapshot', () => {
     const txId = 'tx-order-1';
@@ -27,6 +29,11 @@ describe('OrderPage', () => {
     });
 
     const props = {
+      authInProgress: false,
+      currentUserHasListings: false,
+      isAuthenticated: false,
+      onLogout: noop,
+      onManageDisableScrolling: noop,
       currentUser: createCurrentUser('customer1'),
       params: { id: txId },
       transaction,

@@ -3,16 +3,23 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
   scrollingDisabled={false}
   title="EditListingPage.titleCreateListing">
   <Topbar
+    authInProgress={false}
+    currentUser={null}
+    currentUserHasListings={false}
     history={
       Object {
         "push": [Function],
       }
     }
+    isAuthenticated={false}
     location={
       Object {
         "search": "",
       }
-    } />
+    }
+    notificationCount={0}
+    onLogout={[Function]}
+    onManageDisableScrolling={[Function]} />
   <EditListingWizard
     className={null}
     currentUser={null}

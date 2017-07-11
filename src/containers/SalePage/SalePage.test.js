@@ -10,6 +10,8 @@ import {
 import { renderShallow } from '../../util/test-helpers';
 import { SalePageComponent } from './SalePage';
 
+const noop = () => null;
+
 describe('SalePage', () => {
   it('matches snapshot', () => {
     const txId = 'tx-sale-1';
@@ -32,8 +34,13 @@ describe('SalePage', () => {
       history: {
         push: () => console.log('HistoryPush called'),
       },
-      onAcceptSale: () => {},
-      onRejectSale: () => {},
+      authInProgress: false,
+      currentUserHasListings: false,
+      isAuthenticated: false,
+      onLogout: noop,
+      onManageDisableScrolling: noop,
+      onAcceptSale: noop,
+      onRejectSale: noop,
       params: { id: txId },
       scrollingDisabled: false,
       transaction,

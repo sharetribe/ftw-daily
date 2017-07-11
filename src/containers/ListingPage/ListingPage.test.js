@@ -7,6 +7,7 @@ import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { showListingRequest, showListingError, showListing } from './ListingPage.duck';
 
 const { UUID } = types;
+const noop = () => null;
 
 describe('ListingPage', () => {
   it('matches snapshot', () => {
@@ -23,10 +24,14 @@ describe('ListingPage', () => {
       currentUser,
       getListing: getListing,
       intl: fakeIntl,
-      onLoadListing: () => {},
-      onManageDisableScrolling: () => {},
+      authInProgress: false,
+      currentUserHasListings: false,
+      isAuthenticated: false,
+      onLogout: noop,
+      onLoadListing: noop,
+      onManageDisableScrolling: noop,
       scrollingDisabled: false,
-      useInitialValues: () => {},
+      useInitialValues: noop,
     };
 
     const tree = renderShallow(<ListingPageComponent {...props} />);

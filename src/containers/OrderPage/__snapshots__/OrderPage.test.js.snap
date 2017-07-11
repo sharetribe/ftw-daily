@@ -3,16 +3,38 @@ exports[`OrderPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="OrderPage.title">
   <Topbar
+    authInProgress={false}
+    currentUser={
+      Object {
+        "attributes": Object {
+          "email": "customer1@example.com",
+          "profile": Object {
+            "firstName": "customer1 first name",
+            "lastName": "customer1 last name",
+          },
+          "stripeConnected": true,
+        },
+        "id": UUID {
+          "uuid": "customer1",
+        },
+        "type": "user",
+      }
+    }
+    currentUserHasListings={false}
     history={
       Object {
         "push": [Function],
       }
     }
+    isAuthenticated={false}
     location={
       Object {
         "search": "",
       }
-    } />
+    }
+    notificationCount={0}
+    onLogout={[Function]}
+    onManageDisableScrolling={[Function]} />
   <OrderDetailsPanel
     className="undefined"
     lastTransition={null}

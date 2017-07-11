@@ -3,16 +3,38 @@ exports[`ListingPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="listing1 title 55">
   <Topbar
+    authInProgress={false}
+    currentUser={
+      Object {
+        "attributes": Object {
+          "email": "user-2@example.com",
+          "profile": Object {
+            "firstName": "user-2 first name",
+            "lastName": "user-2 last name",
+          },
+          "stripeConnected": true,
+        },
+        "id": UUID {
+          "uuid": "user-2",
+        },
+        "type": "user",
+      }
+    }
+    currentUserHasListings={false}
     history={
       Object {
         "push": [Function],
       }
     }
+    isAuthenticated={false}
     location={
       Object {
         "search": "",
       }
-    } />
+    }
+    notificationCount={0}
+    onLogout={[Function]}
+    onManageDisableScrolling={[Function]} />
   <div
     className="undefined">
     <div>

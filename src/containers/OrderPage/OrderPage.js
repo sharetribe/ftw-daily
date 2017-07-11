@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
-import { Topbar } from '../../containers';
-import { NamedRedirect, OrderDetailsPanel, PageLayout } from '../../components';
+import { NamedRedirect, OrderDetailsPanel, PageLayout, Topbar } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { loadData } from './OrderPage.duck';
 
@@ -18,14 +18,20 @@ import css from './OrderPage.css';
 // It show loading data text or OrderDetailsPanel (and later also another panel for messages).
 export const OrderPageComponent = props => {
   const {
+    authInProgress,
     currentUser,
+    currentUserHasListings,
     fetchOrderError,
-    intl,
-    params,
-    transaction,
-    scrollingDisabled,
     history,
+    intl,
+    isAuthenticated,
     location,
+    notificationCount,
+    onLogout,
+    onManageDisableScrolling,
+    params,
+    scrollingDisabled,
+    transaction,
   } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
@@ -61,20 +67,41 @@ export const OrderPageComponent = props => {
       title={intl.formatMessage({ id: 'OrderPage.title' }, { listingTitle })}
       scrollingDisabled={scrollingDisabled}
     >
-      <Topbar history={history} location={location} />
+      <Topbar
+        isAuthenticated={isAuthenticated}
+        authInProgress={authInProgress}
+        currentUser={currentUser}
+        currentUserHasListings={currentUserHasListings}
+        notificationCount={notificationCount}
+        history={history}
+        location={location}
+        onLogout={onLogout}
+        onManageDisableScrolling={onManageDisableScrolling}
+      />
       {panel}
     </PageLayout>
   );
 };
 
-OrderPageComponent.defaultProps = { transaction: null, currentUser: null, fetchOrderError: null };
+OrderPageComponent.defaultProps = {
+  currentUser: null,
+  fetchOrderError: null,
+  notificationCount: 0,
+  transaction: null,
+};
 
-const { bool, func, instanceOf, oneOf, shape, string } = PropTypes;
+const { bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
 
 OrderPageComponent.propTypes = {
+  authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
+  currentUserHasListings: bool.isRequired,
   fetchOrderError: instanceOf(Error),
   intl: intlShape.isRequired,
+  isAuthenticated: bool.isRequired,
+  notificationCount: number,
+  onLogout: func.isRequired,
+  onManageDisableScrolling: func.isRequired,
   params: shape({ id: string }).isRequired,
   scrollingDisabled: bool.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
@@ -91,7 +118,12 @@ OrderPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { fetchOrderError, transactionRef } = state.OrderPage;
-  const { currentUser } = state.user;
+  const { isAuthenticated } = state.Auth;
+  const {
+    currentUser,
+    currentUserHasListings,
+    currentUserNotificationCount: notificationCount,
+  } = state.user;
 
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
@@ -99,12 +131,17 @@ const mapStateToProps = state => {
   return {
     transaction,
     fetchOrderError,
+    isAuthenticated,
+    authInProgress: authenticationInProgress(state),
     currentUser,
+    currentUserHasListings,
+    notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
   };
 };
 
 const mapDispatchToProps = dispatch => ({
+  onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
 });
