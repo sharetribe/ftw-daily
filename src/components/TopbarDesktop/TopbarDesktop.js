@@ -22,6 +22,7 @@ const TopbarDesktop = props => {
     lastName,
     rootClassName,
     currentUserHasListings,
+    notificationCount,
     intl,
     isAuthenticated,
     onLogout,
@@ -41,13 +42,18 @@ const TopbarDesktop = props => {
     />
   );
 
+  const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null;
+
   const inboxLink = isAuthenticated
     ? <NamedLink
         className={css.inboxLink}
         name="InboxPage"
         params={{ tab: currentUserHasListings ? 'sales' : 'orders' }}
       >
-        <span className={css.inbox}><FormattedMessage id="TopbarDesktop.inbox" /></span>
+        <span className={css.inbox}>
+          <FormattedMessage id="TopbarDesktop.inbox" />
+          {notificationDot}
+        </span>
       </NamedLink>
     : null;
 
@@ -101,11 +107,12 @@ const TopbarDesktop = props => {
   );
 };
 
-const { bool, func, string, object } = PropTypes;
+const { bool, func, object, number, string } = PropTypes;
 
 TopbarDesktop.defaultProps = {
   firstName: '',
   lastName: '',
+  notificationCount: 0,
   className: null,
   rootClassName: null,
   initialSearchFormValues: {},
@@ -118,6 +125,7 @@ TopbarDesktop.propTypes = {
   onLogout: func.isRequired,
   firstName: string,
   lastName: string,
+  notificationCount: number,
   rootClassName: string,
   onSearchSubmit: func.isRequired,
   initialSearchFormValues: object,
