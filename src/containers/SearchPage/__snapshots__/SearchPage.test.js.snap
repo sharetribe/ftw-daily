@@ -3,16 +3,23 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   scrollingDisabled={false}
   title="Search page: listings">
   <Topbar
+    authInProgress={false}
+    currentUser={null}
+    currentUserHasListings={false}
     history={
       Object {
         "push": [Function],
       }
     }
+    isAuthenticated={false}
     location={
       Object {
         "search": "",
       }
-    } />
+    }
+    notificationCount={0}
+    onLogout={[Function]}
+    onManageDisableScrolling={[Function]} />
   <div>
     <h2>
       <FormattedMessage

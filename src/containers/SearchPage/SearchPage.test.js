@@ -14,6 +14,7 @@ import reducer, {
 } from './SearchPage.duck';
 
 const { LatLng } = types;
+const noop = () => null;
 
 describe('SearchPageComponent', () => {
   it('matches snapshot', () => {
@@ -31,6 +32,11 @@ describe('SearchPageComponent', () => {
       tab: 'listings',
       scrollingDisabled: false,
       searchInProgress: false,
+      authInProgress: false,
+      currentUserHasListings: false,
+      isAuthenticated: false,
+      onLogout: noop,
+      onManageDisableScrolling: noop,
     };
     const tree = renderShallow(<SearchPageComponent {...props} />);
     expect(tree).toMatchSnapshot();
