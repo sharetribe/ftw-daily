@@ -3,16 +3,23 @@ exports[`InboxPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="InboxPage.ordersTitle">
   <Topbar
+    authInProgress={false}
+    currentUser={null}
+    currentUserHasListings={false}
     history={
       Object {
         "push": [Function],
       }
     }
+    isAuthenticated={false}
     location={
       Object {
         "search": "",
       }
-    } />
+    }
+    notificationCount={0}
+    onLogout={[Function]}
+    onManageDisableScrolling={[Function]} />
   <div>
     <h1>
       <FormattedMessage
@@ -258,16 +265,23 @@ exports[`InboxPage matches snapshot 3`] = `
   scrollingDisabled={false}
   title="InboxPage.salesTitle">
   <Topbar
+    authInProgress={false}
+    currentUser={null}
+    currentUserHasListings={false}
     history={
       Object {
         "push": [Function],
       }
     }
+    isAuthenticated={false}
     location={
       Object {
         "search": "",
       }
-    } />
+    }
+    notificationCount={0}
+    onLogout={[Function]}
+    onManageDisableScrolling={[Function]} />
   <div>
     <h1>
       <FormattedMessage

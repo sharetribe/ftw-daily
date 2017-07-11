@@ -22,7 +22,12 @@ describe('InboxPage', () => {
       params: {
         tab: 'orders',
       },
+      authInProgress: false,
+      currentUserHasListings: false,
+      isAuthenticated: false,
       fetchInProgress: false,
+      onLogout: noop,
+      onManageDisableScrolling: noop,
       transactions: [
         createTransaction({
           id: 'order-1',
@@ -60,7 +65,12 @@ describe('InboxPage', () => {
       params: {
         tab: 'sales',
       },
+      authInProgress: false,
+      currentUserHasListings: false,
+      isAuthenticated: false,
       fetchInProgress: false,
+      onLogout: noop,
+      onManageDisableScrolling: noop,
       transactions: [
         createTransaction({
           id: 'sale-1',

@@ -16,6 +16,7 @@ import {
 } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { loadData } from './InboxPage.duck';
 
@@ -141,16 +142,22 @@ InboxItem.propTypes = {
 
 export const InboxPageComponent = props => {
   const {
+    authInProgress,
+    currentUser,
+    currentUserHasListings,
     fetchInProgress,
     fetchOrdersOrSalesError,
     history,
+    intl,
+    isAuthenticated,
     location,
+    onLogout,
+    onManageDisableScrolling,
     pagination,
+    params,
     providerNotificationCount,
     scrollingDisabled,
     transactions,
-    intl,
-    params,
   } = props;
   const { tab } = params;
 
@@ -222,7 +229,18 @@ export const InboxPageComponent = props => {
 
   return (
     <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
-      <Topbar mobileRootClassName={css.mobileTopbar} history={history} location={location} />
+      <Topbar
+        mobileRootClassName={css.mobileTopbar}
+        isAuthenticated={isAuthenticated}
+        authInProgress={authInProgress}
+        currentUser={currentUser}
+        currentUserHasListings={currentUserHasListings}
+        notificationCount={providerNotificationCount}
+        history={history}
+        location={location}
+        onLogout={onLogout}
+        onManageDisableScrolling={onManageDisableScrolling}
+      />
       <div className={css.heading}>
         <h1 className={css.title}>
           <FormattedMessage id="InboxPage.title" />
@@ -240,6 +258,7 @@ export const InboxPageComponent = props => {
 };
 
 InboxPageComponent.defaultProps = {
+  currentUser: null,
   fetchOrdersOrSalesError: null,
   pagination: null,
   providerNotificationCount: 0,
@@ -250,8 +269,14 @@ InboxPageComponent.propTypes = {
     tab: string.isRequired,
   }).isRequired,
 
+  authInProgress: bool.isRequired,
+  currentUser: propTypes.currentUser,
+  currentUserHasListings: bool.isRequired,
   fetchInProgress: bool.isRequired,
   fetchOrdersOrSalesError: instanceOf(Error),
+  isAuthenticated: bool.isRequired,
+  onLogout: func.isRequired,
+  onManageDisableScrolling: func.isRequired,
   pagination: propTypes.pagination,
   providerNotificationCount: number,
   scrollingDisabled: bool.isRequired,
@@ -274,10 +299,19 @@ const mapStateToProps = state => {
     pagination,
     transactionRefs,
   } = state.InboxPage;
-  const providerNotificationCount = state.user.currentUserNotificationCount;
+  const { isAuthenticated } = state.Auth;
+  const {
+    currentUser,
+    currentUserHasListings,
+    currentUserNotificationCount: providerNotificationCount,
+  } = state.user;
   return {
     fetchInProgress,
     fetchOrdersOrSalesError,
+    isAuthenticated,
+    authInProgress: authenticationInProgress(state),
+    currentUser,
+    currentUserHasListings,
     pagination,
     providerNotificationCount,
     transactions: getMarketplaceEntities(state, transactionRefs),
@@ -286,6 +320,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+  onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
 });
