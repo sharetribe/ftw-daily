@@ -15,7 +15,7 @@ exports[`EditListingPricingForm matches snapshot 1`] = `
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
-      placeholder="Choose your price..."
+      placeholder="Choose your price…"
       type="text"
       value="" />
   </div>
