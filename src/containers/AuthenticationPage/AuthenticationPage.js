@@ -3,8 +3,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { PageLayout, NamedRedirect, TabNav } from '../../components';
-import { LoginForm, SignupForm, Topbar } from '../../containers';
+import { PageLayout, NamedRedirect, TabNav, Topbar } from '../../components';
+import { LoginForm, SignupForm } from '../../containers';
 import { login, authenticationInProgress, signup } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 

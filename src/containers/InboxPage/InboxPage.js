@@ -12,8 +12,8 @@ import {
   PageLayout,
   PaginationLinks,
   TabNav,
+  Topbar,
 } from '../../components';
-import { Topbar } from '../../containers';
 import * as propTypes from '../../util/propTypes';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';

@@ -6,13 +6,13 @@ import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
-import { Topbar } from '../../containers';
 import {
   PrimaryButton,
   SecondaryButton,
   NamedRedirect,
   SaleDetailsPanel,
   PageLayout,
+  Topbar,
 } from '../../components';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';

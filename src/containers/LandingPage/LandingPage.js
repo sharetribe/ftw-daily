@@ -3,8 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { PageLayout, HeroSection } from '../../components';
-import { Topbar } from '../../containers';
+import { PageLayout, HeroSection, Topbar } from '../../components';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 
 import css from './LandingPage.css';

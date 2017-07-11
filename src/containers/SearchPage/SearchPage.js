@@ -8,8 +8,7 @@ import { parse, stringify } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { PageLayout, SearchResultsPanel } from '../../components';
-import { Topbar } from '../../containers';
+import { PageLayout, SearchResultsPanel, Topbar } from '../../components';
 import { searchListings } from './SearchPage.duck';
 import css from './SearchPage.css';
 
