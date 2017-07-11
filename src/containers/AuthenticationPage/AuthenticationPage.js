@@ -3,9 +3,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import * as propTypes from '../../util/propTypes';
 import { PageLayout, NamedRedirect, TabNav, Topbar } from '../../components';
 import { LoginForm, SignupForm } from '../../containers';
-import { login, authenticationInProgress, signup } from '../../ducks/Auth.duck';
+import { login, logout, authenticationInProgress, signup } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 
 import css from './AuthenticationPage.css';
@@ -26,17 +27,22 @@ const isEmailTakenApiError = error => {
 
 export const AuthenticationPageComponent = props => {
   const {
-    history,
-    location,
-    tab,
-    isAuthenticated,
-    loginError,
-    signupError,
     authInProgress,
+    currentUser,
+    currentUserHasListings,
+    history,
+    intl,
+    isAuthenticated,
+    location,
+    loginError,
+    notificationCount,
+    onLogout,
+    onManageDisableScrolling,
     scrollingDisabled,
+    signupError,
     submitLogin,
     submitSignup,
-    intl,
+    tab,
   } = props;
   const isLogin = tab === 'login';
   const from = location.state && location.state.from ? location.state.from : null;
@@ -106,7 +112,17 @@ export const AuthenticationPageComponent = props => {
 
   return (
     <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
-      <Topbar history={history} location={location} />
+      <Topbar
+        isAuthenticated={isAuthenticated}
+        authInProgress={authInProgress}
+        currentUser={currentUser}
+        currentUserHasListings={currentUserHasListings}
+        notificationCount={notificationCount}
+        history={history}
+        location={location}
+        onLogout={onLogout}
+        onManageDisableScrolling={onManageDisableScrolling}
+      />
       <div className={css.root}>
         <TabNav className={css.tabs} tabs={tabs} />
         {loginOrSignupError}
@@ -119,24 +135,29 @@ export const AuthenticationPageComponent = props => {
 };
 
 AuthenticationPageComponent.defaultProps = {
-  tab: 'signup',
+  currentUser: null,
   loginError: null,
+  notificationCount: 0,
   signupError: null,
+  tab: 'signup',
 };
 
-const { bool, func, instanceOf, object, oneOf, shape } = PropTypes;
+const { bool, func, instanceOf, number, object, oneOf, shape } = PropTypes;
 
 AuthenticationPageComponent.propTypes = {
-  tab: oneOf(['login', 'signup']),
-
+  authInProgress: bool.isRequired,
+  currentUser: propTypes.currentUser,
+  currentUserHasListings: bool.isRequired,
   isAuthenticated: bool.isRequired,
   loginError: instanceOf(Error),
-  signupError: instanceOf(Error),
-  authInProgress: bool.isRequired,
+  notificationCount: number,
+  onLogout: func.isRequired,
+  onManageDisableScrolling: func.isRequired,
   scrollingDisabled: bool.isRequired,
-
+  signupError: instanceOf(Error),
   submitLogin: func.isRequired,
   submitSignup: func.isRequired,
+  tab: oneOf(['login', 'signup']),
 
   // from withRouter
   history: shape({
@@ -150,20 +171,29 @@ AuthenticationPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { isAuthenticated, loginError, signupError } = state.Auth;
+  const {
+    currentUser,
+    currentUserHasListings,
+    currentUserNotificationCount: notificationCount,
+  } = state.user;
   return {
+    authInProgress: authenticationInProgress(state),
     isAuthenticated,
     loginError,
     signupError,
-    authInProgress: authenticationInProgress(state),
+    currentUser,
+    currentUserHasListings,
+    notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  submitLogin: ({ email, password }) => dispatch(login(email, password)),
-  submitSignup: params => dispatch(signup(params)),
+  onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
+  submitLogin: ({ email, password }) => dispatch(login(email, password)),
+  submitSignup: params => dispatch(signup(params)),
 });
 
 const AuthenticationPage = compose(
