@@ -85,6 +85,23 @@
   @apply --marketplaceH4FontStyles;
   @apply --topbarDesktopLabelStyles;
   color: var(--matterColor);
+  position: relative;
+}
+
+.notificationDot {
+  /* Dimensions */
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+
+  /* Position */
+  position: absolute;
+  top: 2px;
+  right: -10px;
+
+  /* Style: red dot with white border */
+  background-color: var(--failColor);
+  border: 2px solid var(--matterColorLight);
 }
 
 /* Profile menu */

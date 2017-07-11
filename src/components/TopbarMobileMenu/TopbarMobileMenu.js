@@ -4,7 +4,7 @@
  */
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { AvatarLarge, InlineTextButton, NamedLink } from '../../components';
+import { AvatarLarge, InlineTextButton, NamedLink, NotificationBadge } from '../../components';
 
 import css from './TopbarMobileMenu.css';
 
@@ -56,7 +56,7 @@ const TopbarMobileMenu = props => {
   }
 
   const notificationCountBadge = notificationCount > 0
-    ? <span className={css.notificationCount}>{notificationCount}</span>
+    ? <NotificationBadge className={css.notificationBadge} count={notificationCount} />
     : null;
   const inboxLink = (
     <NamedLink

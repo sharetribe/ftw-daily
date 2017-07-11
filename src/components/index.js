@@ -31,6 +31,7 @@ import Modal from './Modal/Modal';
 import ModalInMobile from './ModalInMobile/ModalInMobile';
 import NamedLink from './NamedLink/NamedLink';
 import NamedRedirect from './NamedRedirect/NamedRedirect';
+import NotificationBadge from './NotificationBadge/NotificationBadge';
 import OrderDetailsPanel from './OrderDetailsPanel/OrderDetailsPanel';
 import OrderDiscussionPanel from './OrderDiscussionPanel/OrderDiscussionPanel';
 import PageLayout from './PageLayout/PageLayout';
@@ -87,6 +88,7 @@ export {
   ModalInMobile,
   NamedLink,
   NamedRedirect,
+  NotificationBadge,
   OrderDetailsPanel,
   OrderDiscussionPanel,
   PageLayout,
