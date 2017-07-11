@@ -18,6 +18,7 @@ import css from './OrderPage.css';
 // It show loading data text or OrderDetailsPanel (and later also another panel for messages).
 export const OrderPageComponent = props => {
   const {
+    authInfoError,
     authInProgress,
     currentUser,
     currentUserHasListings,
@@ -26,6 +27,7 @@ export const OrderPageComponent = props => {
     intl,
     isAuthenticated,
     location,
+    logoutError,
     notificationCount,
     onLogout,
     onManageDisableScrolling,
@@ -64,6 +66,8 @@ export const OrderPageComponent = props => {
 
   return (
     <PageLayout
+      authInfoError={authInfoError}
+      logoutError={logoutError}
       title={intl.formatMessage({ id: 'OrderPage.title' }, { listingTitle })}
       scrollingDisabled={scrollingDisabled}
     >
@@ -84,8 +88,10 @@ export const OrderPageComponent = props => {
 };
 
 OrderPageComponent.defaultProps = {
+  authInfoError: null,
   currentUser: null,
   fetchOrderError: null,
+  logoutError: null,
   notificationCount: 0,
   transaction: null,
 };
@@ -93,12 +99,14 @@ OrderPageComponent.defaultProps = {
 const { bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
 
 OrderPageComponent.propTypes = {
+  authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   fetchOrderError: instanceOf(Error),
   intl: intlShape.isRequired,
   isAuthenticated: bool.isRequired,
+  logoutError: instanceOf(Error),
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
@@ -118,7 +126,7 @@ OrderPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { fetchOrderError, transactionRef } = state.OrderPage;
-  const { isAuthenticated } = state.Auth;
+  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   const {
     currentUser,
     currentUserHasListings,
@@ -129,14 +137,16 @@ const mapStateToProps = state => {
   const transaction = transactions.length > 0 ? transactions[0] : null;
 
   return {
-    transaction,
-    fetchOrderError,
-    isAuthenticated,
+    authInfoError,
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    fetchOrderError,
+    isAuthenticated,
+    logoutError,
     notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
+    transaction,
   };
 };
 

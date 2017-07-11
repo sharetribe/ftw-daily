@@ -1,5 +1,7 @@
 exports[`OrderPage matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
   scrollingDisabled={false}
   title="OrderPage.title">
   <Topbar
@@ -139,5 +141,5 @@ exports[`OrderPage matches snapshot 1`] = `
         "type": "transaction",
       }
     } />
-</Connect(withRouter(PageLayout))>
+</withRouter(PageLayout)>
 `;
