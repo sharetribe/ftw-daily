@@ -23,6 +23,7 @@ const pickSearchParamsOnly = params => {
 
 export const SearchPageComponent = props => {
   const {
+    authInfoError,
     authInProgress,
     currentUser,
     currentUserHasListings,
@@ -30,6 +31,7 @@ export const SearchPageComponent = props => {
     isAuthenticated,
     listings,
     location,
+    logoutError,
     notificationCount,
     onLogout,
     onManageDisableScrolling,
@@ -95,7 +97,12 @@ export const SearchPageComponent = props => {
   const searchParamsForPagination = parse(location.search);
 
   return (
-    <PageLayout title={`Search page: ${tab}`} scrollingDisabled={scrollingDisabled}>
+    <PageLayout
+      authInfoError={authInfoError}
+      logoutError={logoutError}
+      title={`Search page: ${tab}`}
+      scrollingDisabled={scrollingDisabled}
+    >
       <Topbar
         isAuthenticated={isAuthenticated}
         authInProgress={authInProgress}
@@ -129,8 +136,10 @@ export const SearchPageComponent = props => {
 };
 
 SearchPageComponent.defaultProps = {
+  authInfoError: null,
   currentUser: null,
   listings: [],
+  logoutError: null,
   notificationCount: 0,
   pagination: null,
   searchListingsError: null,
@@ -141,11 +150,13 @@ SearchPageComponent.defaultProps = {
 const { array, bool, func, instanceOf, number, oneOf, object, shape, string } = PropTypes;
 
 SearchPageComponent.propTypes = {
+  authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   isAuthenticated: bool.isRequired,
   listings: array,
+  logoutError: instanceOf(Error),
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
@@ -173,13 +184,15 @@ const mapStateToProps = state => {
     searchListingsError,
     searchParams,
   } = state.SearchPage;
-  const { isAuthenticated } = state.Auth;
+  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   const {
     currentUser,
     currentUserHasListings,
     currentUserNotificationCount: notificationCount,
   } = state.user;
   return {
+    authInfoError,
+    logoutError,
     listings: getListingsById(state, currentPageResultIds),
     pagination,
     searchInProgress,

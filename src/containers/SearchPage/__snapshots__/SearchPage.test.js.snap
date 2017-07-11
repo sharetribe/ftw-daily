@@ -1,5 +1,7 @@
 exports[`SearchPageComponent matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
   scrollingDisabled={false}
   title="Search page: listings">
   <Topbar
@@ -59,5 +61,5 @@ exports[`SearchPageComponent matches snapshot 1`] = `
         search={Object {}} />
     </div>
   </div>
-</Connect(withRouter(PageLayout))>
+</withRouter(PageLayout)>
 `;
