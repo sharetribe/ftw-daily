@@ -25,6 +25,7 @@ import css from './SalePage.css';
 // It show loading data text or SaleDetailsPanel (and later also another panel for messages).
 export const SalePageComponent = props => {
   const {
+    authInfoError,
     authInProgress,
     currentUser,
     currentUserHasListings,
@@ -33,6 +34,7 @@ export const SalePageComponent = props => {
     intl,
     isAuthenticated,
     location,
+    logoutError,
     notificationCount,
     onAcceptSale,
     onLogout,
@@ -91,6 +93,8 @@ export const SalePageComponent = props => {
 
   return (
     <PageLayout
+      authInfoError={authInfoError}
+      logoutError={logoutError}
       title={intl.formatMessage({ id: 'SalePage.title' }, { title: listingTitle })}
       scrollingDisabled={scrollingDisabled}
     >
@@ -114,8 +118,10 @@ export const SalePageComponent = props => {
 };
 
 SalePageComponent.defaultProps = {
+  authInfoError: null,
   currentUser: null,
   fetchSaleError: null,
+  logoutError: null,
   notificationCount: 0,
   transaction: null,
 };
@@ -123,12 +129,14 @@ SalePageComponent.defaultProps = {
 const { bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
 
 SalePageComponent.propTypes = {
+  authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   fetchSaleError: instanceOf(Error),
   intl: intlShape.isRequired,
   isAuthenticated: bool.isRequired,
+  logoutError: instanceOf(Error),
   notificationCount: number,
   onAcceptSale: func.isRequired,
   onLogout: func.isRequired,
@@ -150,7 +158,7 @@ SalePageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { fetchSaleError, transactionRef } = state.SalePage;
-  const { isAuthenticated } = state.Auth;
+  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   const {
     currentUser,
     currentUserHasListings,
@@ -161,14 +169,16 @@ const mapStateToProps = state => {
   const transaction = transactions.length > 0 ? transactions[0] : null;
 
   return {
-    transaction,
-    fetchSaleError,
-    isAuthenticated,
+    authInfoError,
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    fetchSaleError,
+    isAuthenticated,
+    logoutError,
     notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
+    transaction,
   };
 };
 
