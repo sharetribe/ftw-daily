@@ -1,4 +1,25 @@
 exports[`ContactDetailsPage matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
-  title="Contact details" />
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
+  title="Contact details">
+  <Topbar
+    authInProgress={false}
+    currentUser={null}
+    currentUserHasListings={false}
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    isAuthenticated={false}
+    location={
+      Object {
+        "search": "",
+      }
+    }
+    notificationCount={0}
+    onLogout={[Function]}
+    onManageDisableScrolling={[Function]} />
+</withRouter(PageLayout)>
 `;
