@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -98,9 +97,4 @@ PageLayout.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = state => {
-  const { authInfoError, logoutError } = state.Auth;
-  return { authInfoError, logoutError };
-};
-
-export default connect(mapStateToProps)(withRouter(PageLayout));
+export default withRouter(PageLayout);
