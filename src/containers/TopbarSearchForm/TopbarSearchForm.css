@@ -43,10 +43,30 @@
 }
 
 .desktopInput {
+  /* Font */
+  @apply --marketplaceH4FontStyles;
+
   height: var(--topbarHeightDesktop);
   border: none;
   padding-top: 0;
-  padding-bottom: 2px;
+  padding-bottom: 0;
+
+  /* Search text gets ellipsis if it's too wide */
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+
+  /* Placeholder text might be too wide */
+  &::placeholder {
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+  }
+
+  margin-top: 0;
+  margin-bottom: 0;
+  @media (--desktopViewport) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .mobilePredictions {
