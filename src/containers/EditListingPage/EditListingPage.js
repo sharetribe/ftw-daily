@@ -45,6 +45,7 @@ const formatRequestData = values => {
 // N.B. All the presentational content needs to be extracted to their own components
 export const EditListingPageComponent = props => {
   const {
+    authInfoError,
     authInProgress,
     currentUser,
     currentUserHasListings,
@@ -55,6 +56,7 @@ export const EditListingPageComponent = props => {
     intl,
     isAuthenticated,
     location,
+    logoutError,
     notificationCount,
     onCreateListing,
     onCreateListingDraft,
@@ -98,7 +100,12 @@ export const EditListingPageComponent = props => {
       : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
 
     return (
-      <PageLayout title={title} scrollingDisabled={scrollingDisabled}>
+      <PageLayout
+        authInfoError={authInfoError}
+        logoutError={logoutError}
+        title={title}
+        scrollingDisabled={scrollingDisabled}
+      >
         <Topbar
           mobileRootClassName={css.mobileTopbar}
           isAuthenticated={isAuthenticated}
@@ -147,17 +154,20 @@ EditListingPageComponent.loadData = id => {
 };
 
 EditListingPageComponent.defaultProps = {
+  authInfoError: null,
   currentUser: null,
   listing: null,
   listingDraft: null,
+  logoutError: null,
   notificationCount: 0,
   params: null,
   type: 'edit',
 };
 
-const { arrayOf, bool, func, number, object, shape, string } = PropTypes;
+const { arrayOf, bool, func, instanceOf, number, object, shape, string } = PropTypes;
 
 EditListingPageComponent.propTypes = {
+  authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
@@ -165,6 +175,7 @@ EditListingPageComponent.propTypes = {
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
   getListing: func.isRequired,
   isAuthenticated: bool.isRequired,
+  logoutError: instanceOf(Error),
   notificationCount: number,
   onCreateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
@@ -194,7 +205,7 @@ EditListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const page = state.EditListingPage;
-  const { isAuthenticated } = state.Auth;
+  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   const {
     createStripeAccountInProgress,
     currentUser,
@@ -209,14 +220,16 @@ const mapStateToProps = state => {
     return listings.length === 1 ? listings[0] : null;
   };
   return {
-    page,
-    isAuthenticated,
+    authInfoError,
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
-    notificationCount,
-    getListing,
     fetchInProgress,
+    getListing,
+    isAuthenticated,
+    logoutError,
+    notificationCount,
+    page,
     scrollingDisabled: isScrollingDisabled(state),
   };
 };
