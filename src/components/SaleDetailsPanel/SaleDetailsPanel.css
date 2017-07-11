@@ -11,6 +11,7 @@
 .header {
   display: flex;
   margin-top: 28px;
+  margin-bottom: 24px;
 }
 
 .title {
@@ -23,7 +24,7 @@
 }
 
 .message {
-  margin: 24px 0 0 0;
+  margin: 0 0 47px 0;
 }
 
 .avatarWrapper {
@@ -35,11 +36,18 @@
   margin-bottom: 5px;
 }
 
-.breakdownTitle {
-  color: var(--matterColorAnti);
-  margin-top: 47px;
+.bookingBreakdownContainer {
+  margin-bottom: 40px;
 }
 
-.breakdown {
+.bookingBreakdownTitle {
+  /* Font */
+  color: var(--matterColorAnti);
 
+  margin-top: 5px;
+  margin-bottom: 14px;
+  @media (--desktopViewport) {
+    margin-top: 5px;
+    margin-bottom: 14px;
+  }
 }

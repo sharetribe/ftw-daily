@@ -8,7 +8,7 @@ import { AvatarMedium, BookingBreakdown, NamedLink } from '../../components';
 
 import css from './SaleDetailsPanel.css';
 
-const breakdown = transaction => {
+const breakdown = (transaction, totalLabelMessage) => {
   const tx = ensureTransaction(transaction);
   const booking = ensureBooking(tx.booking);
   const bookingStart = booking.attributes.start;
@@ -30,6 +30,7 @@ const breakdown = transaction => {
       payoutTotal={payoutTotal}
       lineItems={lineItems}
       userRole="provider"
+      totalLabelMessage={totalLabelMessage}
     />
   );
 };
@@ -133,7 +134,13 @@ const SaleDetailsPanel = props => {
     );
   }
 
-  const bookingInfo = breakdown(currentTransaction);
+  const wasRejected = transactionState === propTypes.TX_STATE_REJECTED;
+  const totalMessage = wasRejected
+    ? <FormattedMessage id="SaleDetailsPanel.providerRejectedTotal" />
+    : <FormattedMessage id="SaleDetailsPanel.providerTotal" />;
+
+  const bookingInfo = breakdown(currentTransaction, totalMessage);
+
   const title = saleTitle(transactionState, listingLink, customerFirstName, lastTransition);
   const message = saleMessage(
     transactionState,
@@ -155,10 +162,12 @@ const SaleDetailsPanel = props => {
         </div>
       </div>
       <p className={css.message}>{message}</p>
-      <h3 className={css.breakdownTitle}>
-        <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
-      </h3>
-      {bookingInfo}
+      <div className={css.bookingBreakdownContainer}>
+        <h3 className={css.bookingBreakdownTitle}>
+          <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
+        </h3>
+        {bookingInfo}
+      </div>
     </div>
   );
 };

@@ -188,6 +188,8 @@
   "SaleDetailsPanel.listingDeliveredTitle": "{customerName} booked {listingLink}",
   "SaleDetailsPanel.listingRejectedTitle": "{customerName} requested to book {listingLink}",
   "SaleDetailsPanel.listingRequestedTitle": "{customerName} has requested to book {listingLink}",
+  "SaleDetailsPanel.providerRejectedTotal": "You would have made:",
+  "SaleDetailsPanel.providerTotal": "Happy days! You just made…",
   "SaleDetailsPanel.saleAcceptedStatus": "You accepted the request on {formattedDate}.",
   "SaleDetailsPanel.saleAutoRejectedStatus": "You did not react to the request on time. The request expired on {formattedDate}.",
   "SaleDetailsPanel.saleDeliveredStatus": "You delivered the order on {formattedDate}.",
