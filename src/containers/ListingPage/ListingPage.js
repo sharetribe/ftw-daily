@@ -11,9 +11,18 @@ import { createSlug } from '../../util/urlHelpers';
 import { convertMoneyToNumber } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import { ensureListing, ensureUser } from '../../util/data';
-import { Avatar, Button, Map, ModalInMobile, PageLayout, ResponsiveImage, Topbar } from '../../components';
+import {
+  Avatar,
+  Button,
+  Map,
+  ModalInMobile,
+  PageLayout,
+  ResponsiveImage,
+  Topbar,
+} from '../../components';
 import { BookingDatesForm } from '../../containers';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
+import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { showListing } from './ListingPage.duck';
 
@@ -77,15 +86,20 @@ export class ListingPageComponent extends Component {
 
   render() {
     const {
-      history,
-      location,
-      params,
-      showListingError,
-      intl,
+      authInProgress,
       currentUser,
+      currentUserHasListings,
       getListing,
+      history,
+      intl,
+      isAuthenticated,
+      location,
+      notificationCount,
+      onLogout,
       onManageDisableScrolling,
+      params,
       scrollingDisabled,
+      showListingError,
     } = this.props;
     const currencyConfig = config.currencyConfig;
     const currentListing = ensureListing(getListing(new UUID(params.id)));
@@ -144,7 +158,17 @@ export class ListingPageComponent extends Component {
 
     return (
       <PageLayout title={`${title} ${formattedPrice}`} scrollingDisabled={scrollingDisabled}>
-        <Topbar history={history} location={location} />
+        <Topbar
+          isAuthenticated={isAuthenticated}
+          authInProgress={authInProgress}
+          currentUser={currentUser}
+          currentUserHasListings={currentUserHasListings}
+          notificationCount={notificationCount}
+          history={history}
+          location={location}
+          onLogout={onLogout}
+          onManageDisableScrolling={onManageDisableScrolling}
+        />
         <div className={listingClasses}>
           <div className={css.threeToTwoWrapper}>
             <div className={css.aspectWrapper}>
@@ -230,12 +254,13 @@ export class ListingPageComponent extends Component {
 }
 
 ListingPageComponent.defaultProps = {
+  currentUser: null,
+  notificationCount: 0,
   showListingError: null,
   tab: 'listing',
-  currentUser: null,
 };
 
-const { arrayOf, bool, func, instanceOf, object, oneOf, shape, string } = PropTypes;
+const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
 
 ListingPageComponent.propTypes = {
   // from withRouter
@@ -250,18 +275,28 @@ ListingPageComponent.propTypes = {
     id: string.isRequired,
     slug: string.isRequired,
   }).isRequired,
-  showListingError: instanceOf(Error),
+  authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
+  currentUserHasListings: bool.isRequired,
   getListing: func.isRequired,
-  tab: oneOf(['book', 'listing']),
-  scrollingDisabled: bool.isRequired,
+  isAuthenticated: bool.isRequired,
+  notificationCount: number,
+  onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  scrollingDisabled: bool.isRequired,
+  showListingError: instanceOf(Error),
+  tab: oneOf(['book', 'listing']),
   useInitialValues: func.isRequired,
 };
 
 const mapStateToProps = state => {
   const { showListingError } = state.ListingPage;
-  const { currentUser } = state.user;
+  const { isAuthenticated } = state.Auth;
+  const {
+    currentUser,
+    currentUserHasListings,
+    currentUserNotificationCount: notificationCount,
+  } = state.user;
 
   const getListing = id => {
     const listings = getListingsById(state, [id]);
@@ -270,13 +305,18 @@ const mapStateToProps = state => {
 
   return {
     showListingError,
+    isAuthenticated,
+    authInProgress: authenticationInProgress(state),
     currentUser,
+    currentUserHasListings,
+    notificationCount,
     getListing,
     scrollingDisabled: isScrollingDisabled(state),
   };
 };
 
 const mapDispatchToProps = dispatch => ({
+  onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   useInitialValues: (setInitialValues, { listing, bookingDates, initiateOrderError }) =>
