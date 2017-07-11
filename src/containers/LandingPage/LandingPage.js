@@ -12,6 +12,7 @@ import css from './LandingPage.css';
 
 export const LandingPageComponent = props => {
   const {
+    authInfoError,
     authInProgress,
     currentUser,
     currentUserHasListings,
@@ -19,13 +20,20 @@ export const LandingPageComponent = props => {
     history,
     isAuthenticated,
     location,
+    logoutError,
     notificationCount,
     onLogout,
     onManageDisableScrolling,
     scrollingDisabled,
   } = props;
   return (
-    <PageLayout title="Landing page" className={css.root} scrollingDisabled={scrollingDisabled}>
+    <PageLayout
+      className={css.root}
+      authInfoError={authInfoError}
+      logoutError={logoutError}
+      scrollingDisabled={scrollingDisabled}
+      title="Landing page"
+    >
       <Topbar
         isAuthenticated={isAuthenticated}
         authInProgress={authInProgress}
@@ -48,17 +56,21 @@ export const LandingPageComponent = props => {
 };
 
 LandingPageComponent.defaultProps = {
+  authInfoError: null,
   currentUser: null,
+  logoutError: null,
   notificationCount: 0,
 };
 
-const { array, bool, func, number, object } = PropTypes;
+const { array, bool, func, instanceOf, number, object } = PropTypes;
 
 LandingPageComponent.propTypes = {
+  authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   isAuthenticated: bool.isRequired,
+  logoutError: instanceOf(Error),
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
@@ -73,17 +85,19 @@ LandingPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { isAuthenticated } = state.Auth;
+  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   const {
     currentUser,
     currentUserHasListings,
     currentUserNotificationCount: notificationCount,
   } = state.user;
   return {
-    isAuthenticated,
+    authInfoError,
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    isAuthenticated,
+    logoutError,
     notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
   };

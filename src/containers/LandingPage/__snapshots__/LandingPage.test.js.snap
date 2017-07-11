@@ -1,5 +1,7 @@
 exports[`LandingPage matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
   scrollingDisabled={false}
   title="Landing page">
   <Topbar
@@ -34,5 +36,5 @@ exports[`LandingPage matches snapshot 1`] = `
       }
     }
     rootClassName={null} />
-</Connect(withRouter(PageLayout))>
+</withRouter(PageLayout)>
 `;

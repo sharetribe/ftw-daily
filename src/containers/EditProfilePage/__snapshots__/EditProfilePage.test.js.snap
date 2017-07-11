@@ -1,4 +1,25 @@
-exports[`EditProfilePage matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
-  title="Edit profile page with display name: my-shop" />
+exports[`ContactDetailsPage matches snapshot 1`] = `
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
+  title="Edit profile page with display name: my-shop">
+  <Topbar
+    authInProgress={false}
+    currentUser={null}
+    currentUserHasListings={false}
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    isAuthenticated={false}
+    location={
+      Object {
+        "search": "",
+      }
+    }
+    notificationCount={0}
+    onLogout={[Function]}
+    onManageDisableScrolling={[Function]} />
+</withRouter(PageLayout)>
 `;

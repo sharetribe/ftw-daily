@@ -1,5 +1,7 @@
 exports[`CheckoutPage matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
   title="CheckoutPage.title">
   <div>
     <withFlattenedRoutes(withRouter(NamedLink))
@@ -70,5 +72,5 @@ exports[`CheckoutPage matches snapshot 1`] = `
       onSubmit={[Function]}
       paymentInfo="CheckoutPage.paymentInfo" />
   </section>
-</Connect(withRouter(PageLayout))>
+</withRouter(PageLayout)>
 `;

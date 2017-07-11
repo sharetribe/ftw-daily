@@ -189,7 +189,16 @@ export class CheckoutPageComponent extends Component {
   }
 
   render() {
-    const { bookingDates, initiateOrderError, intl, listing, params, currentUser } = this.props;
+    const {
+      authInfoError,
+      logoutError,
+      bookingDates,
+      initiateOrderError,
+      intl,
+      listing,
+      params,
+      currentUser,
+    } = this.props;
 
     // Get page data from passed-in props or from storage
     const pageData = bookingDates && listing ? { bookingDates, listing } : storedData();
@@ -261,7 +270,7 @@ export class CheckoutPageComponent extends Component {
     );
 
     return (
-      <PageLayout title={title}>
+      <PageLayout authInfoError={authInfoError} logoutError={logoutError} title={title}>
         {topbar}
         <div className={css.heading}>
           <h1 className={css.title}>{title}</h1>
@@ -295,21 +304,25 @@ export class CheckoutPageComponent extends Component {
 }
 
 CheckoutPageComponent.defaultProps = {
+  authInfoError: null,
   bookingDates: null,
   initiateOrderError: null,
   listing: null,
+  logoutError: null,
   currentUser: null,
 };
 
 const { arrayOf, func, instanceOf, shape, string } = PropTypes;
 
 CheckoutPageComponent.propTypes = {
+  authInfoError: instanceOf(Error),
   bookingDates: shape({
     bookingStart: instanceOf(Date).isRequired,
     bookingEnd: instanceOf(Date).isRequired,
   }),
   initiateOrderError: instanceOf(Error),
   listing: propTypes.listing,
+  logoutError: instanceOf(Error),
   currentUser: propTypes.currentUser,
   params: shape({
     id: string,
@@ -332,7 +345,8 @@ CheckoutPageComponent.propTypes = {
 const mapStateToProps = state => {
   const { initiateOrderError, listing, bookingDates } = state.CheckoutPage;
   const { currentUser } = state.user;
-  return { initiateOrderError, listing, bookingDates, currentUser };
+  const { authInfoError, logoutError } = state.Auth;
+  return { authInfoError, initiateOrderError, listing, logoutError, bookingDates, currentUser };
 };
 
 const mapDispatchToProps = dispatch => ({

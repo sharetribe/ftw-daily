@@ -1,19 +1,25 @@
-exports[`ManageListingsPage matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
+exports[`ContactDetailsPage matches snapshot 1`] = `
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
   title="Manage listings">
-  <ul>
-    <li>
-      <withFlattenedRoutes(withRouter(NamedLink))
-        name="ListingPage"
-        params={
-          Object {
-            "id": "some-id",
-            "slug": "some-slug",
-          }
-        }>
-        Listing some-id
-      </withFlattenedRoutes(withRouter(NamedLink))>
-    </li>
-  </ul>
-</Connect(withRouter(PageLayout))>
+  <Topbar
+    authInProgress={false}
+    currentUser={null}
+    currentUserHasListings={false}
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    isAuthenticated={false}
+    location={
+      Object {
+        "search": "",
+      }
+    }
+    notificationCount={0}
+    onLogout={[Function]}
+    onManageDisableScrolling={[Function]} />
+</withRouter(PageLayout)>
 `;

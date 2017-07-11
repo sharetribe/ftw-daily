@@ -1,9 +1,29 @@
-exports[`NotFoundPage matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
+exports[`NotFoundPageComponent matches snapshot 1`] = `
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
   title="Page not found">
+  <Topbar
+    authInProgress={false}
+    currentUser={null}
+    currentUserHasListings={false}
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    isAuthenticated={false}
+    location={
+      Object {
+        "search": "",
+      }
+    }
+    notificationCount={0}
+    onLogout={[Function]}
+    onManageDisableScrolling={[Function]} />
   <withFlattenedRoutes(withRouter(NamedLink))
     name="LandingPage">
     Home
   </withFlattenedRoutes(withRouter(NamedLink))>
-</Connect(withRouter(PageLayout))>
+</withRouter(PageLayout)>
 `;

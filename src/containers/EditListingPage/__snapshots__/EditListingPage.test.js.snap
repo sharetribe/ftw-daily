@@ -1,5 +1,7 @@
 exports[`EditListingPageComponent matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
   scrollingDisabled={false}
   title="EditListingPage.titleCreateListing">
   <Topbar
@@ -48,5 +50,5 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     onUpdateListingDraft={[Function]}
     rootClassName={null}
     selectedTab="description" />
-</Connect(withRouter(PageLayout))>
+</withRouter(PageLayout)>
 `;

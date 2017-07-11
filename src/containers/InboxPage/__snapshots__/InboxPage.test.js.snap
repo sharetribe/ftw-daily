@@ -1,5 +1,7 @@
 exports[`InboxPage matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
   scrollingDisabled={false}
   title="InboxPage.ordersTitle">
   <Topbar
@@ -218,7 +220,7 @@ exports[`InboxPage matches snapshot 1`] = `
         type="order" />
     </li>
   </ul>
-</Connect(withRouter(PageLayout))>
+</withRouter(PageLayout)>
 `;
 
 exports[`InboxPage matches snapshot 2`] = `
@@ -261,7 +263,9 @@ exports[`InboxPage matches snapshot 2`] = `
 `;
 
 exports[`InboxPage matches snapshot 3`] = `
-<Connect(withRouter(PageLayout))
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
   scrollingDisabled={false}
   title="InboxPage.salesTitle">
   <Topbar
@@ -480,7 +484,7 @@ exports[`InboxPage matches snapshot 3`] = `
         type="sale" />
     </li>
   </ul>
-</Connect(withRouter(PageLayout))>
+</withRouter(PageLayout)>
 `;
 
 exports[`InboxPage matches snapshot 4`] = `

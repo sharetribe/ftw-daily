@@ -1,7 +1,25 @@
 exports[`SecurityPage matches snapshot 1`] = `
-<Connect(withRouter(PageLayout))
+<withRouter(PageLayout)
+  authInfoError={null}
+  logoutError={null}
   title="Security">
-  <ReduxForm
-    onSubmit={[Function]} />
-</Connect(withRouter(PageLayout))>
+  <Topbar
+    authInProgress={false}
+    currentUser={null}
+    currentUserHasListings={false}
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    isAuthenticated={false}
+    location={
+      Object {
+        "search": "",
+      }
+    }
+    notificationCount={0}
+    onLogout={[Function]}
+    onManageDisableScrolling={[Function]} />
+</withRouter(PageLayout)>
 `;
