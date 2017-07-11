@@ -55,7 +55,8 @@ export const BookingBreakdownComponent = props => {
             {intl.formatDate(bookingEnd, dateFormatOptions)}
           </span>
         ),
-      }} />
+      }}
+    />
   );
 
   const nightPurchase = lineItems.find(item => item.code === 'line-item/night');

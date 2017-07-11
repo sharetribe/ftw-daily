@@ -230,10 +230,7 @@ TopbarComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const Topbar = compose(
-  withFlattenedRoutes,
-  injectIntl
-)(TopbarComponent);
+const Topbar = compose(withFlattenedRoutes, injectIntl)(TopbarComponent);
 
 Topbar.displayName = 'Topbar';
 
