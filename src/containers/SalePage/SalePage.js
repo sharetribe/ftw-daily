@@ -15,6 +15,7 @@ import {
   Topbar,
 } from '../../components';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { acceptSale, rejectSale, loadData } from './SalePage.duck';
 
@@ -24,16 +25,22 @@ import css from './SalePage.css';
 // It show loading data text or SaleDetailsPanel (and later also another panel for messages).
 export const SalePageComponent = props => {
   const {
+    authInProgress,
     currentUser,
+    currentUserHasListings,
     fetchSaleError,
+    history,
     intl,
+    isAuthenticated,
+    location,
+    notificationCount,
     onAcceptSale,
+    onLogout,
+    onManageDisableScrolling,
     onRejectSale,
     params,
     scrollingDisabled,
     transaction,
-    history,
-    location,
   } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
@@ -87,7 +94,17 @@ export const SalePageComponent = props => {
       title={intl.formatMessage({ id: 'SalePage.title' }, { title: listingTitle })}
       scrollingDisabled={scrollingDisabled}
     >
-      <Topbar history={history} location={location} />
+      <Topbar
+        isAuthenticated={isAuthenticated}
+        authInProgress={authInProgress}
+        currentUser={currentUser}
+        currentUserHasListings={currentUserHasListings}
+        notificationCount={notificationCount}
+        history={history}
+        location={location}
+        onLogout={onLogout}
+        onManageDisableScrolling={onManageDisableScrolling}
+      />
       <div className={css.root}>
         {panel}
         {actionButtons}
@@ -96,15 +113,26 @@ export const SalePageComponent = props => {
   );
 };
 
-SalePageComponent.defaultProps = { transaction: null, currentUser: null, fetchSaleError: null };
+SalePageComponent.defaultProps = {
+  currentUser: null,
+  fetchSaleError: null,
+  notificationCount: 0,
+  transaction: null,
+};
 
-const { bool, func, instanceOf, oneOf, shape, string } = PropTypes;
+const { bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
 
 SalePageComponent.propTypes = {
+  authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
+  currentUserHasListings: bool.isRequired,
   fetchSaleError: instanceOf(Error),
   intl: intlShape.isRequired,
+  isAuthenticated: bool.isRequired,
+  notificationCount: number,
   onAcceptSale: func.isRequired,
+  onLogout: func.isRequired,
+  onManageDisableScrolling: func.isRequired,
   onRejectSale: func.isRequired,
   params: shape({ id: string }).isRequired,
   scrollingDisabled: bool.isRequired,
@@ -122,7 +150,12 @@ SalePageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { fetchSaleError, transactionRef } = state.SalePage;
-  const { currentUser } = state.user;
+  const { isAuthenticated } = state.Auth;
+  const {
+    currentUser,
+    currentUserHasListings,
+    currentUserNotificationCount: notificationCount,
+  } = state.user;
 
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
@@ -130,7 +163,11 @@ const mapStateToProps = state => {
   return {
     transaction,
     fetchSaleError,
+    isAuthenticated,
+    authInProgress: authenticationInProgress(state),
     currentUser,
+    currentUserHasListings,
+    notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
   };
 };
@@ -139,6 +176,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onAcceptSale: transactionId => dispatch(acceptSale(transactionId)),
     onRejectSale: transactionId => dispatch(rejectSale(transactionId)),
+    onLogout: historyPush => dispatch(logout(historyPush)),
     onManageDisableScrolling: (componentId, disableScrolling) =>
       dispatch(manageDisableScrolling(componentId, disableScrolling)),
   };

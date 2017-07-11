@@ -3,16 +3,38 @@ exports[`SalePage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="SalePage.title">
   <Topbar
+    authInProgress={false}
+    currentUser={
+      Object {
+        "attributes": Object {
+          "email": "provider1@example.com",
+          "profile": Object {
+            "firstName": "provider1 first name",
+            "lastName": "provider1 last name",
+          },
+          "stripeConnected": true,
+        },
+        "id": UUID {
+          "uuid": "provider1",
+        },
+        "type": "user",
+      }
+    }
+    currentUserHasListings={false}
     history={
       Object {
         "push": [Function],
       }
     }
+    isAuthenticated={false}
     location={
       Object {
         "search": "",
       }
-    } />
+    }
+    notificationCount={0}
+    onLogout={[Function]}
+    onManageDisableScrolling={[Function]} />
   <div>
     <SaleDetailsPanel
       className="undefined"
