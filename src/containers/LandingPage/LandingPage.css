@@ -4,10 +4,18 @@
 
 }
 
-.hero {
+/* heroContainer gives the height for HeroSection */
+/* Safari has a bug with vw padding inside flexbox. Therefore we need an extra div (container) */
+.heroContainer {
+  display: flex;
+  flex-direction: column;
   min-height: calc(100vh - var(--topbarHeight));
 
   @media (--desktopViewport) {
     min-height: calc(100vh - var(--topbarHeightDesktop));
   }
+}
+
+.hero {
+  flex-grow: 1;
 }

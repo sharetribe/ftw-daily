@@ -22,19 +22,21 @@ exports[`LandingPage matches snapshot 1`] = `
     notificationCount={0}
     onLogout={[Function]}
     onManageDisableScrolling={[Function]} />
-  <HeroSection
-    className={null}
-    flattenedRoutes={Array []}
-    history={
-      Object {
-        "push": [Function],
+  <div>
+    <HeroSection
+      className={null}
+      flattenedRoutes={Array []}
+      history={
+        Object {
+          "push": [Function],
+        }
       }
-    }
-    location={
-      Object {
-        "search": "",
+      location={
+        Object {
+          "search": "",
+        }
       }
-    }
-    rootClassName={null} />
+      rootClassName={null} />
+  </div>
 </withRouter(PageLayout)>
 `;

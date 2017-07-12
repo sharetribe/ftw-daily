@@ -7,6 +7,8 @@
 .root {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
   background-color: var(--matterColor);
   background-image: url(./background.jpg);
   background-size: cover;
