@@ -45,12 +45,14 @@ export const LandingPageComponent = props => {
         onLogout={onLogout}
         onManageDisableScrolling={onManageDisableScrolling}
       />
-      <HeroSection
-        className={css.hero}
-        flattenedRoutes={flattenedRoutes}
-        history={history}
-        location={location}
-      />
+      <div className={css.heroContainer}>
+        <HeroSection
+          className={css.hero}
+          flattenedRoutes={flattenedRoutes}
+          history={history}
+          location={location}
+        />
+      </div>
     </PageLayout>
   );
 };
