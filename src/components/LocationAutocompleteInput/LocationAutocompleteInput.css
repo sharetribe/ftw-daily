@@ -27,12 +27,17 @@
 .iconSvgGroup {
   stroke: var(--marketplaceColor);
   stroke-width: 2.5px;
+
+  @media (--desktopViewport) {
+    stroke-width: 2px;
+  }
+
 }
 
 .input {
   flex-grow: 1;
   height: var(--inputHeight);
-  padding-left: 18px;
+  padding-left: 10px;
   margin: 0;
   line-height: unset;
 
