@@ -88,6 +88,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     onKeyDown={[Function]}>
     <button
       className=""
+      onBlur={[Function]}
       onClick={[Function]}>
       <div
         className=""
