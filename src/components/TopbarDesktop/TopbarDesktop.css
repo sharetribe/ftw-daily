@@ -104,11 +104,6 @@
   margin-top: 0;
   margin-bottom: 0;
 
-  &:focus {
-    outline: none;
-    text-decoration: underline;
-  }
-
   &:hover {
     color: var(--marketplaceColorDark);
   }
@@ -132,11 +127,6 @@
   margin-top: 0;
   margin-bottom: 0;
   color: var(--matterColor);
-
-  &:focus {
-    outline: none;
-    text-decoration: underline;
-  }
 
   &:hover {
     color: var(--matterColorDark);
@@ -177,12 +167,6 @@
   height: 100%;
   margin: 0;
   padding: 0 12px 0 12px;
-
-  &:focus {
-    outline-color: var(--matterColorAnti);
-    outline-width: 1px;
-    outline-style: dashed;
-  }
 }
 
 .avatar {
