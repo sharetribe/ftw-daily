@@ -6,17 +6,8 @@
 
 .hero {
   min-height: calc(100vh - var(--topbarHeight));
-  padding: 0 24px 98px 24px;
 
   @media (--desktopViewport) {
     min-height: calc(100vh - var(--topbarHeightDesktop));
-  }
-
-  @media (min-width: 768px) {
-    padding: 0 24px 26px 24px;
-  }
-
-  @media (min-width: 1024px){
-    padding: 0 0 195px 192px;
   }
 }

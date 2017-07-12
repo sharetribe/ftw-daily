@@ -22,6 +22,17 @@
    the viewport when the browser width changes.
   */
   background-position-x: 80%;
+
+  /* Text positioning is done with paddings */
+  padding: 0 24px 98px 24px;
+
+  @media (min-width: 768px) {
+    padding: 0 24px 15vw 15vw;
+  }
+
+  @media (min-width: 1024px){
+    padding: 0 0 195px 192px;
+  }
 }
 
 .heroMainTitle {
