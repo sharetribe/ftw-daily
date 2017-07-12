@@ -43,6 +43,12 @@
   height: 100%;
   margin-right: 24px;
 
+  &:focus {
+    outline-color: var(--matterColorAnti);
+    outline-width: 1px;
+    outline-style: dashed;
+  }
+
   @media (min-width: 1024px) {
     margin-right: 36px;
   }
@@ -79,6 +85,11 @@
   flex-shrink: 0;
   height: 100%;
   margin-right: 24px;
+
+  &:focus {
+    outline: none;
+    text-decoration: underline;
+  }
 }
 
 .createListing {
@@ -91,6 +102,11 @@
 .inboxLink {
   height: 100%;
   margin-right: 24px;
+
+  &:focus {
+    outline: none;
+    text-decoration: underline;
+  }
 }
 
 .inbox {
@@ -124,6 +140,12 @@
   height: 100%;
   margin: 0;
   padding: 0;
+
+  &:focus {
+    outline-color: var(--matterColorAnti);
+    outline-width: 1px;
+    outline-style: dashed;
+  }
 }
 
 .avatar {
