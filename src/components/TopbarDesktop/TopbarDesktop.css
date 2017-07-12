@@ -14,6 +14,16 @@
       margin: 24px 0;
     }
   }
+
+  --linkHoverState: {
+    border-bottom: 0px solid;
+    transition: var(--transitionStyleButton);
+
+    &:hover {
+      border-bottom: 4px solid var(--marketplaceColor);
+      text-decoration: none;
+    }
+  }
 }
 
 /* Desktop */
@@ -27,7 +37,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 0 36px;
+  padding: 0 24px 0 0;
 
   /* fill */
   background-color: var(--matterColorLight);
@@ -38,13 +48,13 @@
 
 /* logo */
 .logoLink {
+  @apply --linkHoverState;
   flex-shrink: 0;
-  padding: 21px 0;
+  padding: 21px 24px 21px 24px;
   height: 100%;
-  margin-right: 24px;
 
   @media (min-width: 1024px) {
-    margin-right: 36px;
+    padding: 21px 36px 21px 36px;
   }
 }
 
@@ -58,13 +68,12 @@
   flex-grow: 1;
   height: 100%;
   margin-right: 24px;
-  padding-left: 24px;
   border-left-style: solid;
   border-left-width: 1px;
   border-left-color: var(--matterColorNegative);
 
   @media (min-width: 1024px) {
-    padding-left: 36px;
+    padding-left: 0;
   }
 }
 
@@ -74,56 +83,90 @@
   color: var(--matterColor);
 }
 
+.topbarSearchWithLeftPadding {
+  padding-left: 24px;
+  height: var(--topbarHeightDesktop);
+
+  @media (min-width: 1024px) {
+    padding-left: 34px;
+  }
+}
+
 /* Create listing (CTA for providers) */
 .createListingLink {
+  @apply --linkHoverState;
+  @apply --marketplaceH4FontStyles;
+
   flex-shrink: 0;
   height: 100%;
-  margin-right: 24px;
+  padding: 0 12px 0 12px;
+  color: var(--marketplaceColor);
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:hover {
+    color: var(--marketplaceColorDark);
+  }
+
+  @media (--desktopViewport) {
+   margin-top: 0;
+   margin-bottom: 0;
+  }
 }
 
 .createListing {
-  @apply --marketplaceH4FontStyles;
   @apply --topbarDesktopLabelStyles;
-  color: var(--marketplaceColor);
 }
 
 /* Inbox */
 .inboxLink {
+  @apply --linkHoverState;
+  @apply --marketplaceH4FontStyles;
   height: 100%;
-  margin-right: 24px;
+  padding: 0 12px 0 12px;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--matterColor);
+
+  &:hover {
+    color: var(--matterColorDark);
+  }
+
+  @media (--desktopViewport) {
+   margin-top: 0;
+   margin-bottom: 0;
+  }
 }
 
 .inbox {
-  @apply --marketplaceH4FontStyles;
   @apply --topbarDesktopLabelStyles;
-  color: var(--matterColor);
   position: relative;
 }
 
 .notificationDot {
   /* Dimensions */
-  width: 12px;
-  height: 12px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
 
   /* Position */
   position: absolute;
-  top: 2px;
-  right: -10px;
+  top: 3px;
+  right: -9px;
 
-  /* Style: red dot with white border */
+  /* Style: red dot */
   background-color: var(--failColor);
-  border: 2px solid var(--matterColorLight);
 }
 
 /* Profile menu */
 .profileMenuLabel {
+  @apply --linkHoverState;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0 12px 0 12px;
 }
 
 .avatar {

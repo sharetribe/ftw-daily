@@ -40,12 +40,12 @@
 .desktopIcon {
   height: var(--topbarHeightDesktop);
   border: none;
+  padding-top: 3px;
 }
 
 .desktopInput {
   /* Font */
   @apply --marketplaceH4FontStyles;
-
   height: var(--topbarHeightDesktop);
   border: none;
   padding-top: 0;
@@ -55,10 +55,17 @@
   text-overflow: ellipsis;
   overflow-x: hidden;
 
+  &:hover::placeholder,
+  &:focus::placeholder {
+    color: var(--matterColor);
+  }
+
   /* Placeholder text might be too wide */
   &::placeholder {
     text-overflow: ellipsis;
     overflow-x: hidden;
+    font-weight: var(--fontWeightRegular);
+    transition: var(--transitionStyleButton);
   }
 
   margin-top: 0;
@@ -66,6 +73,7 @@
   @media (--desktopViewport) {
     margin-top: 0;
     margin-bottom: 0;
+    font-weight: var(--fontWeightSemiBold);
   }
 }
 
