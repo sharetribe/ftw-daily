@@ -1,5 +1,6 @@
 import { types } from '../../util/sdkLoader';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
 
 // Transition-to keys
 const TRANSITION_ACCEPT = 'transition/accept';
@@ -106,6 +107,7 @@ export const acceptSale = id =>
       .then(response => {
         dispatch(addMarketplaceEntities(response));
         dispatch(acceptSaleSuccess());
+        dispatch(fetchCurrentUserNotifications());
         return response;
       })
       .catch(e => {
@@ -123,6 +125,7 @@ export const rejectSale = id =>
       .then(response => {
         dispatch(addMarketplaceEntities(response));
         dispatch(rejectSaleSuccess());
+        dispatch(fetchCurrentUserNotifications());
         return response;
       })
       .catch(e => {

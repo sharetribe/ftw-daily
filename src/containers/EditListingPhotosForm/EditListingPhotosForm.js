@@ -43,6 +43,7 @@ RenderAddImage.propTypes = {
 export class EditListingPhotosFormComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = { imageUploadRequested: false };
     this.onImageUploadHandler = this.onImageUploadHandler.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
   }
@@ -56,7 +57,14 @@ export class EditListingPhotosFormComponent extends Component {
   onImageUploadHandler(event) {
     const file = event.target.files[0];
     if (file) {
-      this.props.onImageUpload({ id: `${file.name}_${Date.now()}`, file });
+      this.setState({ imageUploadRequested: true });
+      this.props.onImageUpload({ id: `${file.name}_${Date.now()}`, file })
+        .then(() => {
+          this.setState({ imageUploadRequested: false });
+        })
+        .catch(() => {
+          this.setState({ imageUploadRequested: false });
+        });
     }
   }
 
@@ -117,6 +125,8 @@ export class EditListingPhotosFormComponent extends Component {
 
     const classes = classNames(css.root, className);
 
+    const disableForm = invalid || submitting || disabled || this.state.imageUploadRequested;
+
     return (
       <form className={classes} onSubmit={handleSubmit}>
 
@@ -157,7 +167,7 @@ export class EditListingPhotosFormComponent extends Component {
         <Button
           className={css.submitButton}
           type="submit"
-          disabled={invalid || submitting || disabled}
+          disabled={disableForm}
         >
           {saveActionMsg}
         </Button>
