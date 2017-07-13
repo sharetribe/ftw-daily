@@ -183,7 +183,7 @@ export const fetchCurrentUserHasListings = () =>
 // Notificaiton page size is max (100 items on page)
 const NOTIFICATION_PAGE_SIZE = 100;
 
-export const fetchCurrentUserHasNotifications = () =>
+export const fetchCurrentUserNotifications = () =>
   (dispatch, getState, sdk) => {
     dispatch(fetchCurrentUserNotificationsRequest());
 
@@ -223,7 +223,7 @@ export const fetchCurrentUser = () =>
       })
       .then(() => {
         dispatch(fetchCurrentUserHasListings());
-        dispatch(fetchCurrentUserHasNotifications());
+        dispatch(fetchCurrentUserNotifications());
       })
       .catch(e => {
         // TODO: dispatch flash message
