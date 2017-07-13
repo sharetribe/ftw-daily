@@ -1,5 +1,5 @@
 {
-  "AddImages.upload": "Upload",
+  "AddImages.upload": "Uploading",
   "AddImages.couldNotReadFile": "Could not read file",
   "AuthenticationPage.emailAlreadyInUse": "An account already exists with this email address. Try logging in instead.",
   "AuthenticationPage.loginFailed": "The email and password you entered did not match our records. Please double-check and try again.",
@@ -64,7 +64,7 @@
   "EditListingPhotosForm.addImagesTip": "Tip: Choose 2-3 best photos of your sauna from different angles in a good light that really show the space.",
   "EditListingPhotosForm.bankAccountNumberRequired": "You need to add a bank account number.",
   "EditListingPhotosForm.chooseImage": "+ Choose an image…",
-  "EditListingPhotosForm.createListingFailed": "reating a new sauna failed",
+  "EditListingPhotosForm.createListingFailed": "Creating a new sauna failed",
   "EditListingPhotosForm.imageRequired": "You need to add at least one image.",
   "EditListingPhotosForm.imageTypes": ".JPG, .GIF or .PNG max. 10 MB",
   "EditListingPhotosForm.imageUploadFailed.uploadOverLimit": " Image was too big. Maximum size is 10 MB.",
