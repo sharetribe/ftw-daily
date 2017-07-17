@@ -1,7 +1,7 @@
 @import '../../marketplace.css';
 
 .root {
-  visibility: hidden;
+  opacity: 0;
   pointer-events: none;
 
   position: absolute;
@@ -10,10 +10,12 @@
   background-color: var(--matterColorLight);
   border: 1px solid var(--matterColorAnti);
   box-shadow: var(--boxShadowPopup);
+  border-radius: 0 0 2px 2px;
+  transition: var(--transitionStyleButton);
 }
 
 .isOpen {
-  visibility: visible;
+  opacity: 1;
   pointer-events: auto;
 }
 

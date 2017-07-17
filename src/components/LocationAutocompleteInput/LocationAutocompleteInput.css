@@ -16,7 +16,7 @@
   display: flex;
   width: 24px;
   align-self: stretch;
-  border-bottom: 2px solid var(--marketplaceColor);
+  border-bottom: 4px solid var(--marketplaceColor);
   background-color: var(--matterColorLight);
 }
 
@@ -40,6 +40,7 @@
   padding-left: 10px;
   margin: 0;
   line-height: unset;
+  border-bottom-width: 4px;
 
   /* Safari bugfix: without this Safari will print placeholder to a wrong place */
   &::-webkit-input-placeholder {

@@ -1,15 +1,31 @@
-.root {
+@import '../../marketplace.css';
 
+.root {
+  border-radius: 2px;
 }
 
 .searchInputIcon {
   box-sizing: content-box;
   padding-left: 24px;
   margin-top: 2px;
+  border-bottom-left-radius: 2px;
 }
 
 .searchInput {
   height: 69px;
+  border-bottom-right-radius: 2px;
+
+  &:hover::placeholder,
+  &:focus::placeholder {
+    color: var(--matterColor);
+  }
+
+  &::placeholder {
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    font-weight: var(--fontWeightRegular);
+    transition: var(--transitionStyleButton);
+  }
 }
 
 .searchPredictions {
