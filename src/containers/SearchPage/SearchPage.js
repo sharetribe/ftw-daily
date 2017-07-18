@@ -47,6 +47,7 @@ export class SearchPageComponent extends Component {
       })
       .catch(error => {
         // In case of error, stop recursive loop and report error.
+        // eslint-disable-next-line no-console
         console.error(`An error (${error} occured while trying to retrieve map listings`);
       });
   }
