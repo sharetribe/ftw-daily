@@ -6,6 +6,10 @@ export const SEARCH_LISTINGS_REQUEST = 'app/SearchPage/SEARCH_LISTINGS_REQUEST';
 export const SEARCH_LISTINGS_SUCCESS = 'app/SearchPage/SEARCH_LISTINGS_SUCCESS';
 export const SEARCH_LISTINGS_ERROR = 'app/SearchPage/SEARCH_LISTINGS_ERROR';
 
+export const SEARCH_MAP_LISTINGS_REQUEST = 'app/SearchPage/SEARCH_MAP_LISTINGS_REQUEST';
+export const SEARCH_MAP_LISTINGS_SUCCESS = 'app/SearchPage/SEARCH_MAP_LISTINGS_SUCCESS';
+export const SEARCH_MAP_LISTINGS_ERROR = 'app/SearchPage/SEARCH_MAP_LISTINGS_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -14,6 +18,8 @@ const initialState = {
   searchInProgress: false,
   searchListingsError: null,
   currentPageResultIds: [],
+  searchMapListingIds: [],
+  searchMapListingsError: null,
 };
 
 const resultIds = data => data.data.map(l => l.id);
@@ -40,6 +46,23 @@ const listingPageReducer = (state = initialState, action = {}) => {
       // eslint-disable-next-line no-console
       console.error(payload);
       return { ...state, searchInProgress: false, searchListingsError: payload };
+
+    case SEARCH_MAP_LISTINGS_REQUEST:
+      return {
+        ...state,
+        //searchMapListingIds: [],
+        searchMapListingsError: null,
+      };
+    case SEARCH_MAP_LISTINGS_SUCCESS:
+      return {
+        ...state,
+        searchMapListingIds: state.searchMapListingIds.concat(resultIds(payload.data)),
+      };
+    case SEARCH_MAP_LISTINGS_ERROR:
+      // eslint-disable-next-line no-console
+      console.error(payload);
+      return { ...state, searchMapListingsError: payload };
+
     default:
       return state;
   }
@@ -65,6 +88,19 @@ export const searchListingsError = e => ({
   payload: e,
 });
 
+export const searchMapListingsRequest = () => ({ type: SEARCH_MAP_LISTINGS_REQUEST });
+
+export const searchMapListingsSuccess = response => ({
+  type: SEARCH_MAP_LISTINGS_SUCCESS,
+  payload: { data: response.data },
+});
+
+export const searchMapListingsError = e => ({
+  type: SEARCH_MAP_LISTINGS_ERROR,
+  error: true,
+  payload: e,
+});
+
 export const searchListings = searchParams =>
   (dispatch, getState, sdk) => {
     dispatch(searchListingsRequest(searchParams));
@@ -84,6 +120,29 @@ export const searchListings = searchParams =>
       })
       .catch(e => {
         dispatch(searchListingsError(e));
+        throw e;
+      });
+  };
+
+export const searchMapListings = searchParams =>
+  (dispatch, getState, sdk) => {
+    dispatch(searchMapListingsRequest(searchParams));
+
+    const { origin, include = [], page = 1, perPage } = searchParams;
+
+    // TODO: API can't handle camelCase request parameter yet.
+    const searchOrQuery = origin
+      ? sdk.listings.search({ ...searchParams, page, per_page: perPage })
+      : sdk.listings.query({ include, page, per_page: perPage });
+
+    return searchOrQuery
+      .then(response => {
+        dispatch(addMarketplaceEntities(response));
+        dispatch(searchMapListingsSuccess(response));
+        return response;
+      })
+      .catch(e => {
+        dispatch(searchMapListingsError(e));
         throw e;
       });
   };

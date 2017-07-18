@@ -23,43 +23,67 @@ exports[`SearchPageComponent matches snapshot 1`] = `
     onLogout={[Function]}
     onManageDisableScrolling={[Function]} />
   <div>
-    <h2>
-      <FormattedMessage
-        id="SearchPage.foundResults"
-        values={
-          Object {
-            "count": 22,
-          }
-        } />
-    </h2>
-  </div>
-  <div>
     <div>
-      <SearchResultsPanel
-        className={null}
-        currencyConfig={
-          Object {
-            "currency": "USD",
-            "currencyDisplay": "symbol",
-            "maximumFractionDigits": 2,
-            "minimumFractionDigits": 2,
-            "style": "currency",
-            "subUnitDivisor": 100,
-            "useGrouping": true,
+      <div>
+        <h2>
+          <FormattedMessage
+            id="SearchPage.foundResults"
+            values={
+              Object {
+                "count": 22,
+              }
+            } />
+        </h2>
+      </div>
+      <div>
+        <SearchResultsPanel
+          className={null}
+          currencyConfig={
+            Object {
+              "currency": "USD",
+              "currencyDisplay": "symbol",
+              "maximumFractionDigits": 2,
+              "minimumFractionDigits": 2,
+              "style": "currency",
+              "subUnitDivisor": 100,
+              "useGrouping": true,
+            }
           }
-        }
-        listings={Array []}
-        pagination={
-          Object {
-            "page": 1,
-            "perPage": 12,
-            "totalItems": 22,
-            "totalPages": 2,
+          listings={Array []}
+          pagination={
+            Object {
+              "page": 1,
+              "perPage": 12,
+              "totalItems": 22,
+              "totalPages": 2,
+            }
           }
-        }
-        rootClassName={null}
-        search={Object {}} />
+          rootClassName={null}
+          search={Object {}} />
+      </div>
     </div>
+    <ModalInMobile
+      className=""
+      id="SearchPage.map"
+      isModalOpenOnMobile={false}
+      onClose={null}
+      onManageDisableScrolling={[Function]}
+      showAsModalMaxWidth={0}>
+      <div>
+        <SearchMap
+          bounds={null}
+          center={
+            LatLng {
+              "lat": 0,
+              "lng": 0,
+            }
+          }
+          className=""
+          listings={Array []}
+          rootClassName={null}
+          zoom={11} />
+      </div>
+    </ModalInMobile>
   </div>
 </withRouter(PageLayout)>
 `;

@@ -1,10 +1,44 @@
 @import '../../marketplace.css';
 
+:root {
+  --containerHeight: calc(100vh - var(--topbarHeightDesktop));
+}
+
+.topbar {
+  @media (--desktopViewport) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* We need to raise Topbar above .container */
+    z-index: 1;
+  }
+}
+
 .container {
   /* Layout */
   width: 100%;
   flex-grow: 1;
   display: flex;
+
+  @media (--desktopViewport) {
+    position: relative;
+    padding-top: var(--topbarHeightDesktop);
+    min-height: var(--containerHeight);
+  }
+}
+
+.searchResultContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  @media (--desktopViewport) {
+    /**
+     * .container is using flexbox,
+     * This specifies that searchResultContainer is taking 60% from the viewport width
+     */
+    flex-basis: 60%;
+  }
 }
 
 .searchResultSummary {
@@ -17,6 +51,7 @@
 }
 
 .searchString {
+  /* Search string should not break on white spaces - i.e. line-break should happen before. */
   white-space: nowrap;
 }
 
@@ -28,4 +63,34 @@
 
 .searchListingsPanel {
   flex-grow: 1;
+}
+
+.mapPanel {
+  display: none;
+
+  @media (--desktopViewport) {
+    /**
+     * .container is using flexbox,
+     * This specifies that mapPanel is taking 40% from the viewport width
+     */
+    flex-basis: 40%;
+
+    /* Own layout settings */
+    display: flex;
+    height: 100%;
+  }
+}
+
+.map {
+  @media (--desktopViewport) {
+    /* Map is fixed so that it doesn't scroll along search results */
+    position: fixed;
+    top: var(--topbarHeightDesktop);
+    right: 0;
+
+    /* Fixed content needs width relative to viewport */
+    width: 40vw;
+    height: var(--containerHeight);
+
+  }
 }

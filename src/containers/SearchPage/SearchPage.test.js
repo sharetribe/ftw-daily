@@ -37,6 +37,7 @@ describe('SearchPageComponent', () => {
       isAuthenticated: false,
       onLogout: noop,
       onManageDisableScrolling: noop,
+      onSearchMapListings: noop,
     };
     const tree = renderShallow(<SearchPageComponent {...props} />);
     expect(tree).toMatchSnapshot();
