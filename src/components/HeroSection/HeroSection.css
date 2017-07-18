@@ -52,7 +52,7 @@
 
 .heroSubTitle {
   color: var(--matterColorLight);
-  margin-bottom: 47px;
+  margin-bottom: 63px;
   margin-top: 0;
 
   @media (--desktopViewport) {

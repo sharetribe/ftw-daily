@@ -9,7 +9,7 @@
   z-index: var(--zIndexPopup);
 
   background-color: var(--matterColorLight);
-  border: 1px solid var(--matterColorAnti);
+  border-top: 1px solid var(--matterColorAnti);
   box-shadow: var(--boxShadowPopup);
   border-radius: 0 0 2px 2px;
   transition: var(--transitionStyleButton);

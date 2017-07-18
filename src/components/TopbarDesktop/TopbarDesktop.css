@@ -230,6 +230,7 @@
   &:hover {
     color: var(--matterColorDark);
     text-decoration: none;
+    border-left: 6px solid var(--marketplaceColor);
   }
 
   @media (--desktopViewport) {

@@ -99,20 +99,25 @@ bottom of the container.
 
   & li {
     color: var(--matterColorLight);
+    transition: var(--transitionStyleButton);
     margin: 0; /* Remove the double white space */
 
     /* Assign enough vertical padding to make the element at least 44px high */
     padding: 9px var(--sidePadding);
 
     @media (--desktopViewport) {
-      padding: 8px var(--sidePaddingDesktop);
+      color: rgba(255,255,255,0.65);
+      padding: 10px var(--sidePaddingDesktop);
       margin: 0;
     }
 
     &:hover,
     &.highlighted {
-      text-decoration: underline;
       cursor: pointer;
+      border-left: 6px solid #FFF;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      color: var(--matterColorLight);
     }
   }
 }
