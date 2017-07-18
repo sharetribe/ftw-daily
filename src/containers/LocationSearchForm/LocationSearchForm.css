@@ -8,12 +8,10 @@
   box-sizing: content-box;
   padding-left: 24px;
   margin-top: 2px;
-  border-bottom-left-radius: 2px;
 }
 
 .searchInput {
   height: 69px;
-  border-bottom-right-radius: 2px;
 
   &:hover::placeholder,
   &:focus::placeholder {

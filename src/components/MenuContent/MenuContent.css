@@ -1,6 +1,7 @@
 @import '../../marketplace.css';
 
 .root {
+  visibility:hidden;
   opacity: 0;
   pointer-events: none;
 
@@ -15,6 +16,7 @@
 }
 
 .isOpen {
+  visibility:visible;
   opacity: 1;
   pointer-events: auto;
 }
