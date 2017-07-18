@@ -29,6 +29,8 @@
   --matterColorBright: #FDFDFD;
   --matterColorLight: #FFFFFF;
 
+  --matterColorLightTransparent: rgba(255,255,255,0.65);
+
   /* Spacing units */
   /* Multiples of mobile and desktop spacing units should be used with margins and paddings. */
   --spacingUnit: 6px;
