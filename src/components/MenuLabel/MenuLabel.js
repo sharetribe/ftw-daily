@@ -38,7 +38,9 @@ class MenuLabel extends Component {
     const { children, className, rootClassName } = this.props;
 
     const rootClass = rootClassName || css.root;
-    const classes = classNames(rootClass, className, { [css.clickedWithMouse]: this.state.clickedWithMouse });
+    const classes = classNames(rootClass, className, {
+      [css.clickedWithMouse]: this.state.clickedWithMouse,
+    });
 
     return (
       <button className={classes} onClick={this.onClick} onBlur={this.onBlur}>
@@ -49,7 +51,12 @@ class MenuLabel extends Component {
 }
 /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-MenuLabel.defaultProps = { className: null, isOpen: false, onToggleActive: null, rootClassName: '' };
+MenuLabel.defaultProps = {
+  className: null,
+  isOpen: false,
+  onToggleActive: null,
+  rootClassName: '',
+};
 
 const { func, node, string } = PropTypes;
 

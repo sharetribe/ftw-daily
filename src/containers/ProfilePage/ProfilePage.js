@@ -24,7 +24,11 @@ export const ProfilePageComponent = props => {
   } = props;
 
   return (
-    <PageLayout authInfoError={authInfoError} logoutError={logoutError} title={`Profile page with display name: ${params.displayName}`}>
+    <PageLayout
+      authInfoError={authInfoError}
+      logoutError={logoutError}
+      title={`Profile page with display name: ${params.displayName}`}
+    >
       <Topbar
         authInProgress={authInProgress}
         currentUser={currentUser}
