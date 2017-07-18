@@ -23,6 +23,7 @@ import LocationAutocompleteInput, {
 } from './LocationAutocompleteInput/LocationAutocompleteInput';
 import Map from './Map/Map';
 import MapPanel from './MapPanel/MapPanel';
+import MapPriceMarker from './MapPriceMarker/MapPriceMarker';
 import Menu from './Menu/Menu';
 import MenuContent from './MenuContent/MenuContent';
 import MenuItem from './MenuItem/MenuItem';
@@ -81,6 +82,7 @@ export {
   LocationAutocompleteInputField,
   Map,
   MapPanel,
+  MapPriceMarker,
   Menu,
   MenuContent,
   MenuItem,

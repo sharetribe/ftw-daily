@@ -112,6 +112,7 @@
   "LoginForm.passwordLabel": "Password",
   "LoginForm.passwordPlaceholder": "Enter your password…",
   "LoginForm.passwordRequired": "This field is required",
+  "MapPriceMarker.unsupportedPrice": "({currency})",
   "Modal.close": "CLOSE",
   "Modal.closeModal": "Close modal",
   "OrderDetailsPanel.bookingBreakdownTitle": "Booking breakdown",
