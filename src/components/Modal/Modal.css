@@ -3,7 +3,6 @@
 /* Content is visible as modal layer */
 .isOpen {
   display: flex;
-  flex: 1;
   flex-direction: column;
   position: fixed;
   top: 0;
