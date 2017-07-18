@@ -7,10 +7,69 @@
 
 .listingCards {
   padding: 0 24px 24px 24px;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
 
 .listingCard {
   margin-bottom: 36px;
+
+  @media screen and (min-width: 768px) {
+    flex-basis: calc(100%);
+    /* ListingCard's minimum width on desktop */
+    min-width: 264px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    /**
+     * resultPanelWidthRatio = 0.6 aka 60%
+     * ((columnCount * ListingCardWidth + gutter * (columnCount + 1)) / resultPanelWidthRatio = 1000
+     * min-width: (2 * 264 + 24 * 3) / 0.6 = 1000
+     * flex-basis: calc((100%/columnCount) - (guttersBetweenColumns * gutterWidth / columnCount))
+     */
+    flex-basis: calc(50% - 12px);
+    margin-right: 24px;
+    min-width: 264px;
+  }
+
+  @media screen and (min-width: 1480px) {
+    /* (3*264 + 24 * 4) / 0.6 = 1420 */
+
+    flex-basis: calc(33.33% - 16px);
+    margin-right: 24px;
+    min-width: 264px;
+  }
+
+  @media screen and (min-width: 1960px) {
+    /* (4*264 + 24 * 5) / 0.6 = 1960 */
+
+    flex-basis: calc(25% - 18px);
+    margin-right: 24px;
+    min-width: 264px;
+  }
+}
+
+/* Remove margin-right from listingCards on the last column */
+.listingCard:nth-of-type(2n) {
+  @media screen and (min-width: 1000px) and (max-width: 1479px) {
+    margin-right: 0;
+  }
+}
+
+.listingCard:nth-of-type(3n) {
+  @media screen and (min-width: 1480px) and (max-width: 1959px) {
+    margin-right: 0;
+  }
+}
+
+.listingCard:nth-of-type(4n) {
+  @media screen and (min-width: 1960px) {
+    margin-right: 0;
+  }
 }
 
 .pagination {

@@ -23,6 +23,7 @@ import LocationAutocompleteInput, {
 } from './LocationAutocompleteInput/LocationAutocompleteInput';
 import Map from './Map/Map';
 import MapPanel from './MapPanel/MapPanel';
+import MapPriceMarker from './MapPriceMarker/MapPriceMarker';
 import Menu from './Menu/Menu';
 import MenuContent from './MenuContent/MenuContent';
 import MenuItem from './MenuItem/MenuItem';
@@ -41,6 +42,7 @@ import ResponsiveImage from './ResponsiveImage/ResponsiveImage';
 import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
 import SearchIcon from './SearchIcon/SearchIcon';
+import SearchMap from './SearchMap/SearchMap';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import SelectField from './SelectField/SelectField';
 import StripeBankAccountTokenInputField
@@ -81,6 +83,7 @@ export {
   LocationAutocompleteInputField,
   Map,
   MapPanel,
+  MapPriceMarker,
   Menu,
   MenuContent,
   MenuItem,
@@ -100,6 +103,7 @@ export {
   RoutesProvider,
   SaleDetailsPanel,
   SearchIcon,
+  SearchMap,
   SearchResultsPanel,
   SecondaryButton,
   SelectField,

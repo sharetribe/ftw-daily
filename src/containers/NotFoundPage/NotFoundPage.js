@@ -48,7 +48,7 @@ export class NotFoundPageComponent extends Component {
       </PageLayout>
     );
   }
-};
+}
 
 NotFoundPageComponent.defaultProps = {
   authInfoError: null,

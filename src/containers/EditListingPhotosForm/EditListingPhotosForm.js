@@ -58,7 +58,8 @@ export class EditListingPhotosFormComponent extends Component {
     const file = event.target.files[0];
     if (file) {
       this.setState({ imageUploadRequested: true });
-      this.props.onImageUpload({ id: `${file.name}_${Date.now()}`, file })
+      this.props
+        .onImageUpload({ id: `${file.name}_${Date.now()}`, file })
         .then(() => {
           this.setState({ imageUploadRequested: false });
         })
@@ -164,11 +165,7 @@ export class EditListingPhotosFormComponent extends Component {
         {createListingFailed}
         {showListingFailed}
 
-        <Button
-          className={css.submitButton}
-          type="submit"
-          disabled={disableForm}
-        >
+        <Button className={css.submitButton} type="submit" disabled={disableForm}>
           {saveActionMsg}
         </Button>
       </form>

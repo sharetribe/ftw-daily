@@ -29,7 +29,11 @@ export const PasswordForgottenPageComponent = props => {
   } = props;
 
   return (
-    <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Request new password">
+    <PageLayout
+      authInfoError={authInfoError}
+      logoutError={logoutError}
+      title="Request new password"
+    >
       <Topbar
         authInProgress={authInProgress}
         currentUser={currentUser}

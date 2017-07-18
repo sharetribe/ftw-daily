@@ -47,7 +47,12 @@ const TopbarSearchFormComponent = props => {
 
 const { func, string, bool } = PropTypes;
 
-TopbarSearchFormComponent.defaultProps = { rootClassName: null, className: null, desktopInputRoot: null, isMobile: false };
+TopbarSearchFormComponent.defaultProps = {
+  rootClassName: null,
+  className: null,
+  desktopInputRoot: null,
+  isMobile: false,
+};
 
 TopbarSearchFormComponent.propTypes = {
   ...formPropTypes,
