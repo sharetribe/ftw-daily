@@ -1,5 +1,7 @@
-.root {
+@import '../../marketplace.css';
 
+.root {
+  border-radius: 2px;
 }
 
 .searchInputIcon {
@@ -10,6 +12,18 @@
 
 .searchInput {
   height: 69px;
+
+  &:hover::placeholder,
+  &:focus::placeholder {
+    color: var(--matterColor);
+  }
+
+  &::placeholder {
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    font-weight: var(--fontWeightRegular);
+    transition: var(--transitionStyleButton);
+  }
 }
 
 .searchPredictions {

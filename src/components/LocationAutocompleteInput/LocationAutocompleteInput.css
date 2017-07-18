@@ -40,6 +40,7 @@
   padding-left: 10px;
   margin: 0;
   line-height: unset;
+  border-bottom-width: 2px;
 
   /* Safari bugfix: without this Safari will print placeholder to a wrong place */
   &::-webkit-input-placeholder {
@@ -98,20 +99,25 @@ bottom of the container.
 
   & li {
     color: var(--matterColorLight);
+    transition: var(--transitionStyleButton);
     margin: 0; /* Remove the double white space */
 
     /* Assign enough vertical padding to make the element at least 44px high */
     padding: 9px var(--sidePadding);
 
     @media (--desktopViewport) {
-      padding: 8px var(--sidePaddingDesktop);
+      color: var(--matterColorLightTransparent);
+      padding: 10px var(--sidePaddingDesktop);
       margin: 0;
     }
 
     &:hover,
     &.highlighted {
-      text-decoration: underline;
       cursor: pointer;
+      border-left: 6px solid var(--matterColorLight);
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      color: var(--matterColorLight);
     }
   }
 }

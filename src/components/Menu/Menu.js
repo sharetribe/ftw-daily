@@ -23,7 +23,7 @@ import { MenuContent, MenuLabel } from '../../components';
 import css from './Menu.css';
 
 const KEY_CODE_ESCAPE = 27;
-const CONTENT_PLACEMENT_OFFSET = 22;
+const CONTENT_PLACEMENT_OFFSET = 0;
 
 // This should work, but it doesn't <div className="foo" onClick={() => {}} role="button" />
 /* eslint-disable jsx-a11y/no-static-element-interactions */
