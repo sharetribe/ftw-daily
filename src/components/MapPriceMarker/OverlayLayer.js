@@ -8,29 +8,28 @@ class OverlayLayer extends Component {
     this.onAdd = this.onAdd.bind(this);
     this.onRemove = this.onRemove.bind(this);
     this.draw = this.draw.bind(this);
+    this.overlayView = null;
     this.overlayContainer = null;
+  }
 
+  componentDidMount() {
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#OverlayView
-    const overlayView = new window.google.maps.OverlayView();
+    this.overlayView = new window.google.maps.OverlayView();
 
     // As stated by Google these three methods must implemented: onAdd(), draw(), and onRemove().
-    overlayView.onAdd = this.onAdd;
-    overlayView.draw = this.draw;
-    overlayView.onRemove = this.onRemove;
+    this.overlayView.onAdd = this.onAdd;
+    this.overlayView.draw = this.draw;
+    this.overlayView.onRemove = this.onRemove;
 
     // You must call setMap() with a valid Map object to trigger the call to
     // the onAdd() method and setMap(null) in order to trigger the onRemove() method.
-    overlayView.setMap(props.map);
+    this.overlayView.setMap(this.props.map);
 
-    this.state = { overlayView };
-  }
-
-  componentWillMount() {
     const onAddOverlay = this.props.onAddOverlay;
     if (onAddOverlay) {
       // If onAddOverlay is saving anything to parent component's state,
       // it must be called here to avoid warnings.
-      onAddOverlay(this.state.overlayView);
+      onAddOverlay(this.overlayView);
     }
   }
 
@@ -39,7 +38,7 @@ class OverlayLayer extends Component {
   }
 
   componentWillUnmount() {
-    const overlayView = this.state.overlayView;
+    const overlayView = this.overlayView;
     if (overlayView) {
       overlayView.setMap(null);
       overlayView.onAdd = null;
@@ -62,9 +61,8 @@ class OverlayLayer extends Component {
   }
 
   draw() {
-    const overlayView = this.state.overlayView;
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapCanvasProjection
-    const overlayProjection = overlayView.getProjection();
+    const overlayProjection = this.overlayView.getProjection();
 
     // render children to overlayContainer.
     if (this.overlayContainer) {
@@ -74,7 +72,7 @@ class OverlayLayer extends Component {
 
     // Add the element to the "overlayMouseTarget" pane.
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapPanes
-    const mapPanes = this.state.overlayView.getPanes();
+    const mapPanes = this.overlayView.getPanes();
 
     if (mapPanes && this.overlayContainer) {
       const geolocation = this.props.geolocation;
