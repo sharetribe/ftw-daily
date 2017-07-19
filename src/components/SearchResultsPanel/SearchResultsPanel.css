@@ -25,11 +25,19 @@
 
   @media screen and (min-width: 1024px) {
     /**
-     * resultPanelWidthRatio = 0.625 aka 62.5%
-     * ((columnCount * ListingCardWidth + gutter * (columnCount + 1)) / resultPanelWidthRatio = 1000
-     * min-width: (2 * 296 + 24 * 2) / 0.625 = 1024
-     * flex-basis: calc((100%/columnCount) - (guttersBetweenColumns * gutterWidth / columnCount))
-     */
+      * resultPanelWidthRatio = 0.625 aka 62.5%
+
+      resultPanel: 62.5vw from 1024px = 640px
+      panelPaddings: - 2*36px = 72px
+
+      columnCount: 2
+      guttersBetweenColumns: 24px
+
+      (resultPanel - (panelPaddings + guttersBetweenColumns)) / columnCount = listingCardWidth
+      ergo => listingCardWidth: 272px
+
+      * flex-basis: calc((100%/columnCount) - (guttersBetweenColumns / columnCount))
+    */
     flex-basis: calc(50% - 12px);
     margin-right: 24px;
   }
@@ -37,9 +45,17 @@
   @media screen and (min-width: 1921px) {
     /**
      * resultPanelWidthRatio = 0.625 aka 62.5%
-     * ((columnCount * ListingCardWidth + gutter * (columnCount + 1)) / resultPanelWidthRatio = 1000
-     * min-width: (3 * 368 + 24 * 4) / 0.625 = 1920
-     * flex-basis: calc((100%/columnCount) - (guttersBetweenColumns * gutterWidth / columnCount))
+
+      resultPanel: 62.5vw from 1920px = 1200px
+      panelPaddings: - 2*36px = 72px
+
+      columnCount: 3
+      guttersBetweenColumns: 2*24px = 48px
+
+      (resultPanel - (panelPaddings + guttersBetweenColumns)) / columnCount = listingCardWidth
+      ergo => listingCardWidth: 360px
+
+     * flex-basis: calc((100%/columnCount) - (guttersBetweenColumns / columnCount))
      */
 
     flex-basis: calc(33.33% - 16px);
