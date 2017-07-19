@@ -4,7 +4,7 @@
 .root {
   position: relative;
 
-  transform: translate( -50%, -33px);
+  transform: translate( -50%, -31px);
   width: auto;
   height: auto;
 }
@@ -52,8 +52,8 @@
 
 .caretShadow {
   /* Caret / arrow dimensions and position */
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
   position: absolute;
   bottom: -3px;
   left: 50%;
@@ -67,8 +67,8 @@
 .caret {
 
   /* Caret / arrow dimensions and position */
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
   position: absolute;
   bottom: -3px;
   left: 50%;

@@ -25,9 +25,9 @@
 
   @media screen and (min-width: 1024px) {
     /**
-     * resultPanelWidthRatio = 0.6 aka 60%
+     * resultPanelWidthRatio = 0.625 aka 62.5%
      * ((columnCount * ListingCardWidth + gutter * (columnCount + 1)) / resultPanelWidthRatio = 1000
-     * min-width: (2 * 264 + 24 * 3) / 0.6 = 1000
+     * min-width: (2 * 296 + 24 * 2) / 0.625 = 1024
      * flex-basis: calc((100%/columnCount) - (guttersBetweenColumns * gutterWidth / columnCount))
      */
     flex-basis: calc(50% - 12px);
@@ -35,20 +35,15 @@
   }
 
   @media screen and (min-width: 1921px) {
-    /* (3*264 + 24 * 4) / 0.6 = 1420 */
+    /**
+     * resultPanelWidthRatio = 0.625 aka 62.5%
+     * ((columnCount * ListingCardWidth + gutter * (columnCount + 1)) / resultPanelWidthRatio = 1000
+     * min-width: (3 * 368 + 24 * 4) / 0.625 = 1920
+     * flex-basis: calc((100%/columnCount) - (guttersBetweenColumns * gutterWidth / columnCount))
+     */
 
     flex-basis: calc(33.33% - 16px);
     margin-right: 24px;
-  }
-
-  & img {
-    transition: var(--transitionStyleButton);
-  }
-
-  &:hover img {
-    transform: scale(1.02);
-    box-shadow: 0 0 50px 0 rgba(0,0,0,0.1);
-    transition: var(--transitionStyleButton);
   }
 }
 
