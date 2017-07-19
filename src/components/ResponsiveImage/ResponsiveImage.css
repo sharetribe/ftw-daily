@@ -30,7 +30,7 @@
   padding-bottom: 24px;
 
   margin-bottom: 0;
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     margin-bottom: 0;
   }
 }

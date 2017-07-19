@@ -37,7 +37,7 @@
 
   margin-top: 5px;
   margin-bottom: 14px;
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     margin-top: 5px;
     margin-bottom: 14px;
   }

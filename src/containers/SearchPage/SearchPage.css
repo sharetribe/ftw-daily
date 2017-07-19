@@ -5,7 +5,7 @@
 }
 
 .topbar {
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     position: fixed;
     top: 0;
     left: 0;
@@ -20,7 +20,7 @@
   flex-grow: 1;
   display: flex;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     position: relative;
     padding-top: var(--topbarHeightDesktop);
     min-height: var(--containerHeight);
@@ -32,7 +32,7 @@
   display: flex;
   flex-direction: column;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     /**
      * .container is using flexbox,
      * This specifies that searchResultContainer is taking 60% from the viewport width
@@ -76,7 +76,7 @@
 .mapPanel {
   display: none;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     /**
      * .container is using flexbox,
      * This specifies that mapPanel is taking 34% from the viewport width
@@ -94,7 +94,9 @@
 }
 
 .map {
-  @media (--desktopViewport) {
+  
+  @media (--viewportMedium) {
+    /* Map is fixed so that it doesn't scroll along search results */
     position: fixed;
     top: var(--topbarHeightDesktop);
     right: 0;

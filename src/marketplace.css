@@ -94,7 +94,7 @@
     line-height: 24px;
     letter-spacing: -0.3px;
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       /* TODO: Make sure button text aligns with the baseline */
     }
   }
@@ -238,7 +238,9 @@
 
 /* ================ Custom media queries ================ */
 
-@custom-media --desktopViewport (min-width: 768px);
+@custom-media --viewportMedium (min-width: 768px);
+@custom-media --viewportLarge (min-width: 1024px);
+@custom-media --viewportXLarge (min-width: 1921px);
 
 /* ================ Fonts ================ */
 
@@ -299,7 +301,7 @@ label {
   margin-top: 0;
   margin-bottom: 0;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
   }

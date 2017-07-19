@@ -15,7 +15,7 @@
     letter-spacing: -0.1px;
     /* No margins for default font */
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       font-size: 20px;
       line-height: 24px;
     }
@@ -31,7 +31,7 @@
     margin-top: 12px;
     margin-bottom: 12px;
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       font-size: 20px;
       line-height: 24px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
@@ -50,7 +50,7 @@
     margin-top: 25px;
     margin-bottom: 29px;
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       font-size: 90px;
       line-height: 96px;
       letter-spacing: -2px;
@@ -69,7 +69,7 @@
     margin-top: 18px;
     margin-bottom: 18px;
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       font-size: 48px;
       line-height: 56px;
       letter-spacing: -1px;
@@ -88,7 +88,7 @@
     margin-top: 21px;
     margin-bottom: 17px;
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       line-height: 32px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 21px;
@@ -105,7 +105,7 @@
     margin-top: 16px;
     margin-bottom: 14px;
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 16px;
       margin-bottom: 16px;
@@ -121,7 +121,7 @@
     margin-top: 12px;
     margin-bottom: 12px;
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       font-weight: var(--fontWeightMedium);
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 17px;
@@ -138,7 +138,7 @@
     margin-top: 10px;
     margin-bottom: 8px;
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       font-size: 16px;
       line-height: 20px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
@@ -157,7 +157,7 @@
     margin-top: 10px;
     margin-bottom: 8px;
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       line-height: 16px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 10px;
@@ -174,7 +174,7 @@
     margin-top: 9.5px;
     margin-bottom: 8.5px;
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       line-height: 16px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 10.5px;

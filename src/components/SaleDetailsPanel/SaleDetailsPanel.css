@@ -18,7 +18,7 @@
   flex: 1;
   margin: 0 12px 0 0;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     margin: 0 12px 0 0;
   }
 }
@@ -46,7 +46,7 @@
 
   margin-top: 5px;
   margin-bottom: 14px;
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     margin-top: 5px;
     margin-bottom: 14px;
   }

@@ -43,7 +43,7 @@
   margin-top: auto;
   margin-bottom: 22px;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     max-width: var(--desktopTitleMaxWidth);
     margin-top: auto;
     margin-bottom: 22px;
@@ -55,7 +55,7 @@
   margin-bottom: 63px;
   margin-top: 0;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     max-width: var(--desktopTitleMaxWidth);
   }
 }
@@ -64,7 +64,7 @@
   border-radius: 4px;
   flex-shrink: 0;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     display: none;
   }
 }
@@ -85,7 +85,7 @@
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     display: block;
     width: 400px;
   }
