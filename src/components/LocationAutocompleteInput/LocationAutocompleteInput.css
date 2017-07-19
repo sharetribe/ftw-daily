@@ -28,7 +28,7 @@
   stroke: var(--marketplaceColor);
   stroke-width: 2.5px;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     stroke-width: 2px;
   }
 
@@ -85,7 +85,7 @@ bottom of the container.
   background-size: auto var(--poweredImageHeight);
   background-position: center;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     background-position: center left var(--sidePaddingDesktop);
   }
 }
@@ -105,7 +105,7 @@ bottom of the container.
     /* Assign enough vertical padding to make the element at least 44px high */
     padding: 9px var(--sidePadding);
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       color: var(--matterColorLightTransparent);
       padding: 10px var(--sidePaddingDesktop);
       margin: 0;

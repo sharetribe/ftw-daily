@@ -11,7 +11,7 @@
   flex-direction: column;
   min-height: calc(100vh - var(--topbarHeight));
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     min-height: calc(100vh - var(--topbarHeightDesktop));
   }
 }

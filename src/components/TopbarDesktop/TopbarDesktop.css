@@ -10,7 +10,7 @@
     margin: 24px 0;
     text-decoration: inherit;
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       margin: 24px 0;
     }
   }
@@ -108,7 +108,7 @@
     color: var(--marketplaceColorDark);
   }
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
    margin-top: 0;
    margin-bottom: 0;
   }
@@ -132,7 +132,7 @@
     color: var(--matterColorDark);
   }
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
    margin-top: 0;
    margin-bottom: 0;
   }
@@ -233,7 +233,7 @@
     border-left: 6px solid var(--marketplaceColor);
   }
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     margin: 0;
   }
 

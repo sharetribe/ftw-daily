@@ -39,7 +39,7 @@
   }
 
   /* Overwrite dimensions from font styles */
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
   }
