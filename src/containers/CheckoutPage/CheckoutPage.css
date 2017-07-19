@@ -19,7 +19,7 @@
   width: 100%;
   margin-top: 0;
   margin-bottom: 7px;
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 7px;
   }
@@ -43,7 +43,7 @@
 
   margin-top: 0;
   margin-bottom: 14px;
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 14px;
   }
@@ -63,7 +63,7 @@
 
   margin-top: 0;
   margin-bottom: 14px;
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 14px;
   }
@@ -97,7 +97,7 @@
   /* shadows */
   box-shadow: var(--boxShadow);
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     display: none;
   }
 }

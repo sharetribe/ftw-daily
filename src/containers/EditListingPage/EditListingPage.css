@@ -17,7 +17,7 @@
   /* shadows */
   box-shadow: none;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     display: none;
   }
 }
