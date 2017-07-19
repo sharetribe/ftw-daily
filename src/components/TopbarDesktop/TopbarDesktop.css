@@ -37,13 +37,17 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 0 24px 0 0;
+  padding: 0 12px 0 0;
 
   /* fill */
   background-color: var(--matterColorLight);
 
   /* shadows */
   box-shadow: var(--boxShadowLight);
+
+  @media (min-width: 1024px) {
+    padding: 0 24px 0 0;
+  }
 }
 
 /* logo */
@@ -235,9 +239,5 @@
 
   @media (--viewportMedium) {
     margin: 0;
-  }
-
-  &:focus {
-    outline: none;
   }
 }

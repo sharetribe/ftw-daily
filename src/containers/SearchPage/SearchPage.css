@@ -37,13 +37,21 @@
      * .container is using flexbox,
      * This specifies that searchResultContainer is taking 60% from the viewport width
      */
-    flex-basis: 60%;
+    flex-basis: 50%;
+  }
+
+  @media screen and (min-width: 1024px) {
+    flex-basis: 62.5%;
   }
 }
 
 .searchResultSummary {
   /* Layout */
   margin: 8px 24px 14px 24px;
+
+  @media screen and (min-width: 1024px) {
+    margin: 8px 36px 14px 36px;
+  }
 }
 
 .error {
@@ -71,17 +79,22 @@
   @media (--viewportMedium) {
     /**
      * .container is using flexbox,
-     * This specifies that mapPanel is taking 40% from the viewport width
+     * This specifies that mapPanel is taking 34% from the viewport width
      */
-    flex-basis: 40%;
+    flex-basis: 50%;
 
     /* Own layout settings */
     display: flex;
     height: 100%;
   }
+
+  @media screen and (min-width: 1024px) {
+    flex-basis: 37.5%;
+  }
 }
 
 .map {
+  
   @media (--viewportMedium) {
     /* Map is fixed so that it doesn't scroll along search results */
     position: fixed;
@@ -89,8 +102,11 @@
     right: 0;
 
     /* Fixed content needs width relative to viewport */
-    width: 40vw;
+    width: 50vw;
     height: var(--containerHeight);
+  }
 
+  @media screen and (min-width: 1024px) {
+    width: 37.5vw;
   }
 }

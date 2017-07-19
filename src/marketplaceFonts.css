@@ -139,7 +139,8 @@
     margin-bottom: 8px;
 
     @media (--viewportMedium) {
-      line-height: 16px;
+      font-size: 16px;
+      line-height: 20px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 10px;
       margin-bottom: 14px;

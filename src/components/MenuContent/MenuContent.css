@@ -9,7 +9,7 @@
   z-index: var(--zIndexPopup);
 
   background-color: var(--matterColorLight);
-  border-top: 1px solid var(--matterColorAnti);
+  border-top: 1px solid var(--matterColorNegative);
   box-shadow: var(--boxShadowPopup);
   border-radius: 0 0 2px 2px;
   transition: var(--transitionStyleButton);
@@ -46,7 +46,7 @@
 }
 
 .arrowBelow {
-  border-bottom-color: var(--matterColorAnti);
+  border-bottom-color: var(--matterColorNegative);
   border-width: 9px;
   margin-left: -9px;
 }

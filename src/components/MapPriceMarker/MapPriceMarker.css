@@ -1,9 +1,10 @@
 @import '../../marketplace.css';
+@import "../../marketplaceFonts.css";
 
 .root {
   position: relative;
 
-  transform: translate( -50%, -33px);
+  transform: translate( -50%, -31px);
   width: auto;
   height: auto;
 }
@@ -19,6 +20,7 @@
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightSemiBold);
   color: var(--matterColor);
+  letter-spacing: 0.1px;
 
   background-color: var(--matterColorLight);
 
@@ -30,12 +32,15 @@
   box-shadow: var(--boxShadowPopupLight);
 
   /* Dimensions */
-  padding: 10px 10px 8px 10px;
+  padding: 8px 10px;
   margin-top: 0;
   margin-bottom: 0;
+  transition: var(--transitionStyleButton);
 
   &:hover {
     color: var(--marketplaceColor);
+    cursor: pointer;
+    box-shadow: var(--boxShadowPopup);
   }
 
   /* Overwrite dimensions from font styles */
@@ -47,12 +52,12 @@
 
 .caretShadow {
   /* Caret / arrow dimensions and position */
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
   position: absolute;
-  bottom: -5px;
+  bottom: -3px;
   left: 50%;
-  margin-left: -5px;
+  margin-left: -3px;
   transform: rotate(45deg);
 
   /* Caret should have same box-shadow as label */
@@ -62,12 +67,12 @@
 .caret {
 
   /* Caret / arrow dimensions and position */
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
   position: absolute;
-  bottom: -5px;
+  bottom: -3px;
   left: 50%;
-  margin-left: -5px;
+  margin-left: -3px;
   transform: rotate(45deg);
 
   /* Caret should have same bg-color and border as label */
