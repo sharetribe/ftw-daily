@@ -131,11 +131,13 @@ export const AuthenticationPageComponent = props => {
         onManageDisableScrolling={onManageDisableScrolling}
       />
       <div className={css.root}>
-        <TabNav className={css.tabs} tabs={tabs} />
-        {loginOrSignupError}
-        {isLogin
-          ? <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
-          : <SignupForm className={css.form} onSubmit={submitSignup} inProgress={authInProgress} />}
+        <div className={css.content}>
+          <TabNav className={css.tabs} tabs={tabs} />
+          {loginOrSignupError}
+          {isLogin
+            ? <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
+            : <SignupForm className={css.form} onSubmit={submitSignup} inProgress={authInProgress} />}
+        </div>
       </div>
     </PageLayout>
   );

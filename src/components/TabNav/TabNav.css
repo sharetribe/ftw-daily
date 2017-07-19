@@ -33,6 +33,7 @@
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
+    padding-bottom: 7px;
   }
 }
 
