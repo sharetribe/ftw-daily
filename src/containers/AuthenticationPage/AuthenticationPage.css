@@ -1,23 +1,61 @@
+@import '../../marketplaceFonts.css';
 @import '../../marketplace.css';
 
 .root {
+  /* PageLayout is using flex: AuthenticationPage's .root takes all available space */
+  flex-grow: 1;
+
+  /* AuthenticationPage's root uses flexbox */
+  display: flex;
+
+  @media (--viewportMedium) {
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 12.5vh;
+    margin-bottom: 12.5vh;
+  }
+}
+
+.content {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  flex: 1;
   padding: 30px 24px 98px 24px;
+  background-color: var(--matterColorLight);
+
+  @media (--viewportMedium) {
+    flex-basis: 480px;
+    flex-grow: 0;
+    min-height: 573px;
+    padding: 60px 60px 48px 60px;
+
+  }
 }
 
 .tabs {
   width: 200px;
 }
 
+.tabH2 {
+  /* Text works as main Heading (H1), but text style is dropped to H2 */
+  @media (--viewportMedium) {
+    @apply --marketplaceH2FontStyles;
+  }
+}
+
 .tab {
+  /* Text works as main Heading (H1), but text style is dropped to H2 */
+  composes: tabH2;
   margin-top: 0;
   margin-bottom: 0;
 }
 
 .form {
   margin-top: 49px;
+
+  @media (--viewportMedium) {
+    margin-top: 38px;
+  }
 }
 
 .error {

@@ -25,48 +25,50 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
     onLogout={[Function]}
     onManageDisableScrolling={[Function]} />
   <div>
-    <TabNav
-      className={null}
-      rootClassName={null}
-      tabs={
-        Array [
-          Object {
-            "linkProps": Object {
-              "name": "SignupPage",
-              "to": Object {
-                "state": Object {
-                  "from": "/protected",
+    <div>
+      <TabNav
+        className={null}
+        rootClassName={null}
+        tabs={
+          Array [
+            Object {
+              "linkProps": Object {
+                "name": "SignupPage",
+                "to": Object {
+                  "state": Object {
+                    "from": "/protected",
+                  },
                 },
               },
+              "selected": false,
+              "text": <h1>
+                <FormattedMessage
+                      id="AuthenticationPage.signupLinkText"
+                      values={Object {}} />
+          </h1>,
             },
-            "selected": false,
-            "text": <h1>
-              <FormattedMessage
-                    id="AuthenticationPage.signupLinkText"
-                    values={Object {}} />
-        </h1>,
-          },
-          Object {
-            "linkProps": Object {
-              "name": "LoginPage",
-              "to": Object {
-                "state": Object {
-                  "from": "/protected",
+            Object {
+              "linkProps": Object {
+                "name": "LoginPage",
+                "to": Object {
+                  "state": Object {
+                    "from": "/protected",
+                  },
                 },
               },
+              "selected": true,
+              "text": <h1>
+                <FormattedMessage
+                      id="AuthenticationPage.loginLinkText"
+                      values={Object {}} />
+          </h1>,
             },
-            "selected": true,
-            "text": <h1>
-              <FormattedMessage
-                    id="AuthenticationPage.loginLinkText"
-                    values={Object {}} />
-        </h1>,
-          },
-        ]
-      } />
-    <ReduxForm
-      inProgress={false}
-      onSubmit={[Function]} />
+          ]
+        } />
+      <ReduxForm
+        inProgress={false}
+        onSubmit={[Function]} />
+    </div>
   </div>
 </withRouter(PageLayout)>
 `;
