@@ -11,7 +11,7 @@
 .password {
   margin-top: 24px;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     margin-top: 30px;
   }
 }

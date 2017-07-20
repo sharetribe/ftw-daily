@@ -8,7 +8,7 @@
   /* AuthenticationPage's root uses flexbox */
   display: flex;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     justify-content: center;
     align-items: flex-start;
     margin-top: 12.5vh;
@@ -23,7 +23,7 @@
   padding: 30px 24px 98px 24px;
   background-color: var(--matterColorLight);
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     flex-basis: 480px;
     flex-grow: 0;
     min-height: 573px;
@@ -38,7 +38,7 @@
 
 .tabH2 {
   /* Text works as main Heading (H1), but text style is dropped to H2 */
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     @apply --marketplaceH2FontStyles;
   }
 }
@@ -53,7 +53,7 @@
 .form {
   margin-top: 49px;
 
-  @media (--desktopViewport) {
+  @media (--viewportMedium) {
     margin-top: 38px;
   }
 }

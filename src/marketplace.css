@@ -199,7 +199,7 @@
       outline: none;
     }
 
-    @media (--desktopViewport) {
+    @media (--viewportMedium) {
       padding: 6px 0 10px 0;
     }
   }
