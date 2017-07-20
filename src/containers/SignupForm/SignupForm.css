@@ -1,3 +1,5 @@
+@import '../../marketplace.css';
+
 .root {
   display: flex;
   flex-direction: column;
@@ -10,6 +12,10 @@
   display: flex;
   justify-content: space-between;
   margin-top: 24px;
+
+  @media (--desktopViewport) {
+    margin-top: 30px;
+  }
 }
 
 .firstNameRoot {
@@ -22,6 +28,10 @@
 
 .password {
   margin-top: 24px;
+
+  @media (--desktopViewport) {
+    margin-top: 30px;
+  }
 }
 
 .button {
