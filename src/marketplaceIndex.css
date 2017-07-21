@@ -1,0 +1,78 @@
+@import "sanitize.css";
+@import "./marketplace.css";
+
+/* ================ Fonts ================ */
+
+body {
+  -webkit-font-smoothing: antialiased; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
+  -moz-osx-font-smoothing: grayscale; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
+  text-rendering: optimizeSpeed;
+
+  background-color: var(--matterColorBright);
+}
+
+a {
+  @apply --marketplaceLinkStyles;
+}
+
+h1 { @apply --marketplaceH1FontStyles; }
+h2 { @apply --marketplaceH2FontStyles; }
+h3 { @apply --marketplaceH3FontStyles; }
+h4 { @apply --marketplaceH4FontStyles; }
+h5 { @apply --marketplaceH5FontStyles; }
+h6 { @apply --marketplaceH6FontStyles; }
+
+input,
+textarea,
+select,
+li {
+  @apply --marketplaceDefaultFontStyles
+}
+
+p,
+pre {
+  @apply --marketplaceBodyFontStyles;
+}
+
+/* ================ Normalisations ================ */
+/* TODO */
+
+html {
+  @apply --marketplaceDefaultFontStyles
+  color: var(--matterColor);
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+label {
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightSemiBold);
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightSemiBold);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+select {
+  @apply --marketplaceSelectStyles;
+}
+
+input {
+  @apply --marketplaceInputStyles;
+}
+
+textarea {
+  @apply --marketplaceInputStyles;
+  min-height: 48px;
+  padding: 0 0 5px 0;
+}
