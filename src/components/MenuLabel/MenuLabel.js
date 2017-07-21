@@ -35,11 +35,13 @@ class MenuLabel extends Component {
   }
 
   render() {
-    const { children, className, rootClassName } = this.props;
+    const { children, className, rootClassName, isOpen, isOpenClassName } = this.props;
 
     const rootClass = rootClassName || css.root;
+    const isOpenClass = isOpenClassName || css.isOpen;
     const classes = classNames(rootClass, className, {
       [css.clickedWithMouse]: this.state.clickedWithMouse,
+      [isOpenClass]: isOpen,
     });
 
     return (
@@ -58,11 +60,13 @@ MenuLabel.defaultProps = {
   rootClassName: '',
 };
 
-const { func, node, string } = PropTypes;
+const { bool, func, node, string } = PropTypes;
 
 MenuLabel.propTypes = {
   children: node.isRequired,
   className: string,
+  isOpenClassName: string,
+  isOpen: bool,
   onToggleActive: func,
   rootClassName: string,
 };
