@@ -30,16 +30,8 @@
   margin-top: 1px; /* align with baseline */
 }
 
-.itemValueFont {
-  @apply --marketplaceDefaultFontStyles;
-
-  @media (--viewportMedium) {
-    @apply --marketplaceH4FontStyles;
-  }
-}
-
 .itemValue {
-  composes: itemValueFont;
+  @apply --marketplaceDefaultFontStyles;
   font-weight: 600;
   margin: 0;
 
@@ -48,10 +40,6 @@
     margin-top: 1px; /* align with baseline */
     margin-bottom: 0;
   }
-}
-
-.itemValueDesktop {
-  @apply --marketplaceH4FontStyles;
 }
 
 .totalDivider {

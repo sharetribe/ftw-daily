@@ -16,11 +16,11 @@
   position: relative;
 
   @media (--viewportMedium) {
-    padding: 0 24px;
+    padding: 0;
   }
 
-  @media only screen and (min-width: 768px) and (max-width: 1110px) {
-    padding: 0;
+  @media (--viewportLarge) {
+    padding: 36px 36px 0 36px;
   }
 }
 
@@ -50,30 +50,36 @@
     left: auto;
     right: auto;
     height: calc(0.41 * 100vw);
-    max-height: 569px;
+    max-height: 50vh;
     object-fit: cover;
+    border-radius: 2px;
   }
 }
 
 .contentContainer {
   @media (--viewportMedium) {
-    max-width: 1056px;
+    max-width: 1280px;
     margin: 0 auto;
+    padding: 0 60px;
     display: flex;
     position: relative;
-    padding: 0 24px;
   }
 }
 
 .mainContent {
+  flex-basis: 100%;
+
   @media (--viewportMedium) {
     margin-top: 51px;
-    flex-basis: calc(0.591856 * 100%);
+    margin-bottom: 51px;
     flex-shrink: 0;
   }
-  @media only screen and (min-width: 768px) and (max-width: 1110px) {
-    flex-basis: 50%;
-    flex-grow: 1;
+
+  @media (--viewportLarge) {
+    margin-top: 51px;
+    /* contentContainer's full width - (bookingColumn + gutters) */
+    flex-basis: calc(100% - 431px);
+    flex-shrink: 0;
   }
 }
 
@@ -94,7 +100,7 @@
     width: 96px;
     height: 96px;
     position: absolute;
-    left: 24px;
+    left: 60px;
     top: -48px;
     margin-left: 0;
     margin-top: 0;
@@ -136,17 +142,13 @@
 
   @media (--viewportMedium) {
     display: flex;
-    margin-bottom: 53px;
-  }
-
-  @media only screen and (min-width: 768px) and (max-width: 1110px) {
-    flex-direction: column-reverse;
+    margin-bottom: 55px;
   }
 }
 .desktopPriceContainer {
   display: none;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     /* Layout */
     display: flex;
     flex-direction: column;
@@ -154,11 +156,6 @@
     flex-shrink: 0;
     margin: 0 48px 0 0;
     padding: 0;
-  }
-
-  @media only screen and (min-width: 768px) and (max-width: 1110px) {
-    margin-top: 12px;
-    margin-bottom: 2px;
   }
 }
 
@@ -169,13 +166,7 @@
 
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 6px;
-  }
-
-  @media only screen and (min-width: 768px) and (max-width: 1110px) {
-    font-size: 32px;
-    line-height: 32px;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
   }
 }
 
@@ -212,7 +203,7 @@
   margin-bottom: 0;
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 }
 
@@ -233,7 +224,7 @@
 
   @media (--viewportMedium) {
     padding: 0;
-    margin-bottom: 56px;
+    margin-bottom: 52px;
   }
 }
 
@@ -245,7 +236,7 @@
   margin-bottom: 13px;
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 }
 
@@ -287,6 +278,10 @@
   background-color: #eee;
 
   @media (--viewportMedium) {
+    height: 75vh;
+  }
+
+  @media (--viewportLarge) {
     height: 417px;
   }
 }
@@ -296,7 +291,7 @@
   bottom: 0;
   left: 0;
   width: 100vw;
-  padding: 18px 24px;
+  padding: 18px 24px 18px 16px;
   background-color: var(--matterColorLight);
   box-shadow: var(--boxShadowTop);
   display: flex;
@@ -306,6 +301,10 @@
   transform: translate3d(0,0,0);
 
   @media (--viewportMedium) {
+    padding: 18px 60px 18px 60px;
+  }
+
+  @media (--viewportLarge) {
     display: none;
   }
 }
@@ -347,26 +346,19 @@
 }
 
 .modalInMobile {
-  @media (--viewportMedium) {
+
+  @media (--viewportLarge) {
+    display: block;
     margin-top: 88px;
-    margin-left: 58px;
+    margin-left: 60px;
     border-left-style: solid;
     border-left-width: 1px;
     border-left-color: var(--matterColorNegative);
 
     /* Calendar needs 311px width and therefore padding can't be wider than 58px */
-    padding-left: 58px;
-    flex-basis: 369px;
-    flex-shrink: 0;
-  }
-
-  @media only screen and (min-width: 768px) and (max-width: 1110px) {
-    margin-left: 24px;
-    border-left: none;
-
-    /* Calendar needs 311px width and therefore padding can't be wider than 58px */
-    padding-left: 0;
+    padding-left: 60px;
     flex-basis: 311px;
+    flex-shrink: 0;
   }
 }
 
@@ -375,7 +367,7 @@
   margin-bottom: 36px;
   padding: 0 24px;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: none;
   }
 }
@@ -385,7 +377,7 @@
 
   @media (--viewportMedium) {
     display: block;
-    margin-top: 13px;
+    margin-top: 11px;
     margin-bottom: 42px;
   }
 }

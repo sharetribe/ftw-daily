@@ -56,7 +56,7 @@
   flex-shrink: 0;
 
   @media (--viewportMedium) {
-    margin-top: 58px;
+    margin-top: 50px;
     margin-bottom: 22px;
   }
 }

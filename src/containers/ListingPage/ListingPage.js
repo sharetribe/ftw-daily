@@ -29,7 +29,7 @@ import { showListing } from './ListingPage.duck';
 import css from './ListingPage.css';
 
 // This defines when ModalInMobile shows content as Modal
-const MODAL_BREAKPOINT = 767;
+const MODAL_BREAKPOINT = 1023;
 
 const { UUID } = types;
 
