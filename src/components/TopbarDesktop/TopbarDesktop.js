@@ -60,7 +60,7 @@ const TopbarDesktop = props => {
 
   const profileMenu = isAuthenticated
     ? <Menu>
-        <MenuLabel className={css.profileMenuLabel}>
+        <MenuLabel className={css.profileMenuLabel} isOpenClassName={css.profileMenuIsOpen}>
           <Avatar className={css.avatar} firstName={firstName} lastName={lastName} />
         </MenuLabel>
         <MenuContent className={css.profileMenuContent}>
