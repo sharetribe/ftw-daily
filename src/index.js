@@ -24,7 +24,7 @@ import { authInfo } from './ducks/Auth.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
 import routeConfiguration from './routesConfiguration';
 
-import './marketplace.css';
+import './marketplaceIndex.css';
 
 const { BigDecimal } = types;
 
