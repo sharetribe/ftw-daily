@@ -55,6 +55,7 @@ class MenuLabel extends Component {
 
 MenuLabel.defaultProps = {
   className: null,
+  isOpenClassName: null,
   isOpen: false,
   onToggleActive: null,
   rootClassName: '',
