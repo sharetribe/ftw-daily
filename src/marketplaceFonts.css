@@ -71,6 +71,7 @@
 
     @media (--viewportMedium) {
       font-size: 48px;
+      font-weight: var(--fontWeightSemiBold);
       line-height: 56px;
       letter-spacing: -1px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
@@ -182,6 +183,19 @@
     }
   }
 
+  /* This font is specific to Avatar component only */
+  --marketplaceAvatarFontStyles: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+
+    @media (--viewportMedium) {
+      font-size: 30px;
+      line-height: 48px;
+    }
+  }
   /* This font is specific to Avatar component only */
   --marketplaceSmallAvatarFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
