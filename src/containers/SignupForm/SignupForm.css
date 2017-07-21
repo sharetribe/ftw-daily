@@ -37,4 +37,8 @@
 .button {
   margin-top: 24px;
   align-self: stretch;
+
+  @media (--viewportMedium) {
+    margin-top: 72px;
+  }
 }

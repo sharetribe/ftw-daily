@@ -2,6 +2,8 @@
 @import '../../marketplace.css';
 
 .root {
+  @apply --backgroundImage;
+
   /* PageLayout is using flex: AuthenticationPage's .root takes all available space */
   flex-grow: 1;
 
@@ -11,8 +13,6 @@
   @media (--viewportMedium) {
     justify-content: center;
     align-items: flex-start;
-    margin-top: 12.5vh;
-    margin-bottom: 12.5vh;
   }
 }
 
@@ -22,13 +22,15 @@
   flex-direction: column;
   padding: 30px 24px 98px 24px;
   background-color: var(--matterColorLight);
+  border-radius: 2px;
 
   @media (--viewportMedium) {
     flex-basis: 480px;
     flex-grow: 0;
     min-height: 573px;
-    padding: 60px 60px 48px 60px;
-
+    padding: 60px;
+    margin-top: 7.5vh;
+    margin-bottom: 7.5vh;
   }
 }
 

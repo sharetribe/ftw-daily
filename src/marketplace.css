@@ -12,6 +12,25 @@
    * Usage example: .root { @apply --marketplaceH1FontStyles; }
    */
 
+  /* Full screen Background image located in root-folder/src/assets */
+  --backgroundImage: {
+      background-image: url("../../assets/background.jpg");
+      background-color: var(--matterColor);
+      background-size: cover;
+      background-position-y: center;
+
+      /*
+       This value is specific to the given image. The value is the
+       relative position of the interesting area in the x axis, counted
+       from the left side of the image.
+
+       In the default image, this means the person sitting in the
+       sauna. This value ensures the person is approximately centered in
+       the viewport when the browser width changes.
+      */
+      background-position-x: 80%;
+  }
+
   /* Colors */
   --marketplaceColor: #C0392B;
   --marketplaceColorLight: #FF4C38;
@@ -132,6 +151,7 @@
     &:disabled {
       background-color: var(--matterColorNegative);
       color: var(--matterColorLight);
+      cursor: not-allowed;
     }
     &:enabled {
       cursor: pointer;
@@ -308,6 +328,7 @@ label {
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
+    font-weight: var(--fontWeightSemiBold);
   }
 }
 
