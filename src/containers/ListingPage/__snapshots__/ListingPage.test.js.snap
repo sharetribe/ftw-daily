@@ -62,108 +62,141 @@ exports[`ListingPage matches snapshot 1`] = `
       </div>
     </div>
     <div>
-      <Avatar
-        className={null}
-        firstName="user-1 first name"
-        lastName="user-1 last name"
-        rootClassName={null} />
-    </div>
-    <div>
-      <h1>
-        listing1 title
-      </h1>
       <div>
-        <span>
-          <FormattedMessage
-            id="ListingPage.hostedBy"
-            values={
-              Object {
-                "name": "user-1 first name",
-              }
-            } />
-        </span>
+        <Avatar
+          className={null}
+          firstName="user-1 first name"
+          lastName="user-1 last name"
+          rootClassName={null} />
       </div>
-    </div>
-    <div>
-      <h3>
-        <FormattedMessage
-          id="ListingPage.descriptionTitle"
-          values={Object {}} />
-      </h3>
-      <p>
-        listing1 description
-      </p>
-    </div>
-    <div>
-      <h3>
-        <FormattedMessage
-          id="ListingPage.locationTitle"
-          values={Object {}} />
-      </h3>
       <div>
-        <Map
-          address="listing1 address"
-          center={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
-          className=""
-          rootClassName={null}
-          zoom={11} />
-      </div>
-    </div>
-    <ModalInMobile
-      className=""
-      id="BookingDatesFormInModal"
-      isModalOpenOnMobile={false}
-      onClose={[Function]}
-      onManageDisableScrolling={[Function]}
-      showAsModalMaxWidth={2500}>
-      <div>
-        <h1>
-          listing1 title
-        </h1>
         <div>
-          <span>
+          <div>
+            <div
+              title={55}>
+              55
+            </div>
+            <div>
+              <FormattedMessage
+                id="ListingPage.perNight"
+                values={Object {}} />
+            </div>
+          </div>
+          <div>
+            <h1>
+              listing1 title
+            </h1>
+            <div>
+              <span>
+                <FormattedMessage
+                  id="ListingPage.hostedBy"
+                  values={
+                    Object {
+                      "name": "user-1 first name",
+                    }
+                  } />
+              </span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>
             <FormattedMessage
-              id="ListingPage.hostedBy"
+              id="ListingPage.descriptionTitle"
+              values={Object {}} />
+          </h3>
+          <p>
+            listing1 description
+          </p>
+        </div>
+        <div>
+          <h3>
+            <FormattedMessage
+              id="ListingPage.locationTitle"
+              values={Object {}} />
+          </h3>
+          <div>
+            <Map
+              address="listing1 address"
+              center={
+                LatLng {
+                  "lat": 40,
+                  "lng": 60,
+                }
+              }
+              className=""
+              rootClassName={null}
+              zoom={11} />
+          </div>
+        </div>
+      </div>
+      <ModalInMobile
+        className=""
+        id="BookingDatesFormInModal"
+        isModalOpenOnMobile={false}
+        onClose={[Function]}
+        onManageDisableScrolling={[Function]}
+        showAsModalMaxWidth={767}>
+        <div>
+          <h1>
+            listing1 title
+          </h1>
+          <div>
+            <span>
+              <FormattedMessage
+                id="ListingPage.hostedBy"
+                values={
+                  Object {
+                    "name": "user-1 first name",
+                  }
+                } />
+            </span>
+          </div>
+        </div>
+        <div>
+          <h3>
+            <FormattedMessage
+              id="ListingPage.bookingTitle"
               values={
                 Object {
-                  "name": "user-1 first name",
+                  "title": "listing1 title",
                 }
               } />
-          </span>
+          </h3>
+          <div>
+            <FormattedMessage
+              id="ListingPage.bookingHelp"
+              values={Object {}} />
+          </div>
         </div>
-      </div>
-      <BookingDatesForm
-        onSubmit={[Function]}
-        price={
-          Money {
-            "amount": 5500,
-            "currency": "USD",
-          }
-        } />
-    </ModalInMobile>
-    <div>
+        <BookingDatesForm
+          onSubmit={[Function]}
+          price={
+            Money {
+              "amount": 5500,
+              "currency": "USD",
+            }
+          } />
+      </ModalInMobile>
       <div>
-        <div
-          title={55}>
-          55
-        </div>
         <div>
-          <FormattedMessage
-            id="ListingPage.perNight"
-            values={Object {}} />
+          <div
+            title={55}>
+            55
+          </div>
+          <div>
+            <FormattedMessage
+              id="ListingPage.perNight"
+              values={Object {}} />
+          </div>
         </div>
+        <Button
+          className={null}
+          onClick={[Function]}
+          rootClassName={null}>
+          ListingPage.ctaButtonMessage
+        </Button>
       </div>
-      <Button
-        className={null}
-        onClick={[Function]}
-        rootClassName={null}>
-        ListingPage.ctaButtonMessage
-      </Button>
     </div>
   </div>
 </withRouter(PageLayout)>
