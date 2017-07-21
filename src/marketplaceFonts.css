@@ -176,7 +176,7 @@
     margin-bottom: 8.5px;
 
     @media (--viewportMedium) {
-      line-height: 16px;
+      line-height: 18px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 10.5px;
       margin-bottom: 13.5px;
@@ -211,5 +211,19 @@
     font-size: 20px;
     line-height: 24px;
     letter-spacing: -0.2px;
+  }
+
+  /* This font is specific to Modal's (Lightbox) titles */
+  --marketplaceModalTitle: {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -0.5px;
+
+    @media (--viewportMedium) {
+      line-height: 40px;
+      letter-spacing: -0.9px;
+    }
   }
 }

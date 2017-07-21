@@ -32,20 +32,10 @@
   }
 }
 
-.tabs {
-  width: 200px;
-}
-
-.tabH2 {
-  /* Text works as main Heading (H1), but text style is dropped to H2 */
-  @media (--viewportMedium) {
-    @apply --marketplaceH2FontStyles;
-  }
-}
+.tabs {}
 
 .tab {
-  /* Text works as main Heading (H1), but text style is dropped to H2 */
-  composes: tabH2;
+  @apply --marketplaceModalTitle;
   margin-top: 0;
   margin-bottom: 0;
 }
