@@ -98,7 +98,10 @@ class Menu extends Component {
       if (child.type === MenuLabel) {
         // MenuLabel needs toggleOpen function
         // We pass that directly  so that component user doesn't need to worry about that
-        return React.cloneElement(child, { onToggleActive: this.toggleOpen });
+        return React.cloneElement(child, {
+          isOpen: this.state.isOpen,
+          onToggleActive: this.toggleOpen,
+        });
       } else if (child.type === MenuContent) {
         // MenuContent needs some styling data (width, arrowPosition, and isOpen info)
         // We pass those directly so that component user doesn't need to worry about those.

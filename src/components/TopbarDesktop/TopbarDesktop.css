@@ -177,6 +177,12 @@
   }
 }
 
+.profileMenuIsOpen {
+  &:hover {
+    border-bottom: 0;
+  }
+}
+
 .avatar {
   margin: 16px 0;
   width: 41px;
