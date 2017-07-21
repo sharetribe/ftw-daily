@@ -5,25 +5,11 @@
 }
 
 .root {
+  @apply --backgroundImage;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: var(--matterColor);
-  background-image: url(./background.jpg);
-  background-size: cover;
-  background-position-y: center;
-
-  /*
-   This value is specific to the given image. The value is the
-   relative position of the interesting area in the x axis, counted
-   from the left side of the image.
-
-   In the default image, this means the person sitting in the
-   sauna. This value ensures the person is approximately centered in
-   the viewport when the browser width changes.
-  */
-  background-position-x: 80%;
 
   /* Text positioning is done with paddings */
   padding: 0 24px 98px 24px;

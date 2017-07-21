@@ -12,6 +12,10 @@
   &:first-child {
     margin-left: 0;
   }
+
+  @media (--viewportMedium) {
+    margin-left: 24px;
+  }
 }
 
 .link {
@@ -40,6 +44,10 @@
 .selectedLink {
   border-bottom: 2px solid var(--matterColorDark);
   color: var(--matterColorDark);
+
+  @media (--viewportMedium) {
+    border-bottom: 3px solid var(--matterColorDark);
+  }
 }
 
 .disabled {
