@@ -43,6 +43,7 @@ export class ModalComponent extends Component {
     const {
       children,
       className,
+      contentClassName,
       intl,
       isClosedClassName,
       isOpen,
@@ -65,7 +66,7 @@ export class ModalComponent extends Component {
     return (
       <div className={classes}>
         {closeBtn}
-        <div className={css.content}>
+        <div className={classNames(css.content, contentClassName)}>
           {children}
         </div>
       </div>
@@ -75,7 +76,8 @@ export class ModalComponent extends Component {
 
 ModalComponent.defaultProps = {
   children: null,
-  className: '',
+  className: null,
+  contentClassName: null,
   isClosedClassName: css.isClosed,
   isOpen: false,
   onClose: null,
@@ -86,6 +88,7 @@ const { bool, func, node, string } = PropTypes;
 ModalComponent.propTypes = {
   children: node,
   className: string,
+  contentClassName: string,
   id: string.isRequired,
   intl: intlShape.isRequired,
   isClosedClassName: string,

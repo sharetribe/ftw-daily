@@ -29,7 +29,7 @@ import { showListing } from './ListingPage.duck';
 import css from './ListingPage.css';
 
 // This defines when ModalInMobile shows content as Modal
-const MODAL_BREAKPOINT = 2500;
+const MODAL_BREAKPOINT = 767;
 
 const { UUID } = types;
 
@@ -156,7 +156,7 @@ export class ListingPageComponent extends Component {
         </div>
       : null;
 
-    const listingClasses = classNames(css.listing, { [css.bookable]: showBookButton });
+    const listingClasses = classNames(css.pageRoot, { [css.bookable]: showBookButton });
 
     return (
       <PageLayout
@@ -192,68 +192,103 @@ export class ListingPageComponent extends Component {
             </div>
           </div>
 
-          <div className={css.avatarWrapper}>
-            <Avatar
-              rootClassName={css.avatar}
-              firstName={authorFirstName}
-              lastName={authorLastName}
-            />
-          </div>
-
-          <div className={css.heading}>
-            <h1 className={css.title}>{title}</h1>
-            <div className={css.author}>
-              <span className={css.authorName}>
-                <FormattedMessage id="ListingPage.hostedBy" values={{ name: authorFirstName }} />
-              </span>
+          <div className={css.contentContainer}>
+            <div className={css.avatarWrapper}>
+              <Avatar
+                rootClassName={css.avatar}
+                firstName={authorFirstName}
+                lastName={authorLastName}
+              />
             </div>
-          </div>
 
-          <div className={css.descriptionContainer}>
-            <h3 className={css.descriptionTitle}>
-              <FormattedMessage id="ListingPage.descriptionTitle" />
-            </h3>
-            <p className={css.description}>{description}</p>
-          </div>
-
-          {map}
-
-          <ModalInMobile
-            id="BookingDatesFormInModal"
-            isModalOpenOnMobile={this.state.isBookingModalOpenOnMobile}
-            onClose={() => this.setState({ isBookingModalOpenOnMobile: false })}
-            showAsModalMaxWidth={MODAL_BREAKPOINT}
-            onManageDisableScrolling={onManageDisableScrolling}
-          >
-            <div className={css.modalHeading}>
-              <h1 className={css.title}>{title}</h1>
-              <div className={css.author}>
-                <span className={css.authorName}>
-                  <FormattedMessage id="ListingPage.hostedBy" values={{ name: authorFirstName }} />
-                </span>
-              </div>
-            </div>
-            <BookingDatesForm className={css.bookingForm} onSubmit={this.onSubmit} price={price} />
-          </ModalInMobile>
-          {showBookButton
-            ? <div className={css.openBookingForm}>
-                <div className={css.priceContainer}>
-                  <div className={css.priceValue} title={priceTitle}>
+            <div className={css.mainContent}>
+              <div className={css.headingContainer}>
+                <div className={css.desktopPriceContainer}>
+                  <div className={css.desktopPriceValue} title={priceTitle}>
                     {formattedPrice}
                   </div>
-                  <div className={css.perNight}>
+                  <div className={css.desktopPerNight}>
                     <FormattedMessage id="ListingPage.perNight" />
                   </div>
                 </div>
-
-                <Button
-                  rootClassName={css.bookButton}
-                  onClick={() => this.setState({ isBookingModalOpenOnMobile: true })}
-                >
-                  {bookBtnMessage}
-                </Button>
+                <div className={css.heading}>
+                  <h1 className={css.title}>{title}</h1>
+                  <div className={css.author}>
+                    <span className={css.authorName}>
+                      <FormattedMessage
+                        id="ListingPage.hostedBy"
+                        values={{ name: authorFirstName }}
+                      />
+                    </span>
+                  </div>
+                </div>
               </div>
-            : null}
+
+              <div className={css.descriptionContainer}>
+                <h3 className={css.descriptionTitle}>
+                  <FormattedMessage id="ListingPage.descriptionTitle" />
+                </h3>
+                <p className={css.description}>{description}</p>
+              </div>
+
+              {map}
+            </div>
+
+            <ModalInMobile
+              className={css.modalInMobile}
+              id="BookingDatesFormInModal"
+              isModalOpenOnMobile={this.state.isBookingModalOpenOnMobile}
+              onClose={() => this.setState({ isBookingModalOpenOnMobile: false })}
+              showAsModalMaxWidth={MODAL_BREAKPOINT}
+              onManageDisableScrolling={onManageDisableScrolling}
+            >
+              <div className={css.modalHeading}>
+                <h1 className={css.title}>{title}</h1>
+                <div className={css.author}>
+                  <span className={css.authorName}>
+                    <FormattedMessage
+                      id="ListingPage.hostedBy"
+                      values={{ name: authorFirstName }}
+                    />
+                  </span>
+                </div>
+              </div>
+
+              <div className={css.bookingHeading}>
+                <h3 className={css.bookingTitle}>
+                  <FormattedMessage id="ListingPage.bookingTitle" values={{ title }} />
+                </h3>
+                <div className={css.bookingHelp}>
+                  <FormattedMessage id="ListingPage.bookingHelp" />
+                </div>
+              </div>
+
+              <BookingDatesForm
+                className={css.bookingForm}
+                onSubmit={this.onSubmit}
+                price={price}
+              />
+            </ModalInMobile>
+            {showBookButton
+              ? <div className={css.openBookingForm}>
+                  <div className={css.priceContainer}>
+                    <div className={css.priceValue} title={priceTitle}>
+                      {formattedPrice}
+                    </div>
+                    <div className={css.perNight}>
+                      <FormattedMessage id="ListingPage.perNight" />
+                    </div>
+                  </div>
+
+                  <Button
+                    rootClassName={css.bookButton}
+                    onClick={() => this.setState({ isBookingModalOpenOnMobile: true })}
+                  >
+                    {bookBtnMessage}
+                  </Button>
+                </div>
+              : null}
+          </div>
         </div>
       </PageLayout>
     );

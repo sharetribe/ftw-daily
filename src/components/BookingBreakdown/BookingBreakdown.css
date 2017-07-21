@@ -18,7 +18,7 @@
   margin: -1px 0 0 0;
 
   @media (--viewportMedium) {
-    margin: -1px 0 0 0;
+    margin: -1px 0 8px 0;
   }
 
   display: flex;
@@ -30,9 +30,28 @@
   margin-top: 1px; /* align with baseline */
 }
 
-.itemValue {
+.itemValueFont {
   @apply --marketplaceDefaultFontStyles;
+
+  @media (--viewportMedium) {
+    @apply --marketplaceH4FontStyles;
+  }
+}
+
+.itemValue {
+  composes: itemValueFont;
   font-weight: 600;
+  margin: 0;
+
+  @media (--viewportMedium) {
+    font-weight: 700;
+    margin-top: 1px; /* align with baseline */
+    margin-bottom: 0;
+  }
+}
+
+.itemValueDesktop {
+  @apply --marketplaceH4FontStyles;
 }
 
 .totalDivider {
@@ -43,6 +62,10 @@
 
   border: none;
   background-color: var(--matterColorNegative);
+
+  @media (--viewportMedium) {
+    margin: 2px 0 8px 0;
+  }
 }
 
 .totalLabel {

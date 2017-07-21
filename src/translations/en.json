@@ -98,6 +98,8 @@
   "ListingCard.perNight": "per night",
   "ListingCard.unsupportedPrice": "({currency})",
   "ListingCard.unsupportedPriceTitle": "Unsupported currency ({currency})",
+  "ListingPage.bookingTitle": "Book {title}",
+  "ListingPage.bookingHelp": "Start by choosing your dates.",
   "ListingPage.ctaButtonMessage": "Request to book",
   "ListingPage.descriptionTitle": "About this sauna",
   "ListingPage.hostedBy": "Hosted by {name}",

@@ -85,11 +85,12 @@ class ModalInMobile extends Component {
     // - mobile layout: content visible inside modal popup
     // - mobile layout: content hidden
     const closedClassName = isClosedInMobile ? css.modalHidden : null;
-    const classes = classNames({ [css.modalInMobile]: isOpenInMobile }, className);
+    const classes = classNames({ [css.modalInMobile]: isOpenInMobile }, css.root, className);
 
     return (
       <Modal
         className={classes}
+        contentClassName={css.modalContent}
         id={id}
         isOpen={isOpenInMobile}
         isClosedClassName={closedClassName}

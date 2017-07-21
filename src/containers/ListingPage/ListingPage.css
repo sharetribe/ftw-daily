@@ -1,9 +1,8 @@
 @import '../../marketplace.css';
 
-.pageRoot {}
-
-.listing {
+.pageRoot {
   display: block;
+
 }
 
 .bookable {
@@ -15,13 +14,24 @@
   display: block;
   width: 100%;
   position: relative;
+
+  @media (--viewportMedium) {
+    padding: 0 24px;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1110px) {
+    padding: 0;
+  }
 }
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
   padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
   background-color: var(--matterColorNegative); /* Loading BG color */
-  background-image:
+
+  @media (--viewportMedium) {
+    padding-bottom: 0; /* No fixed aspect on desktop layouts */
+  }
 }
 
 .rootForImage {
@@ -32,6 +42,39 @@
   left: 0;
   right: 0;
   width: 100%;
+
+  @media (--viewportMedium) {
+    position: static;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    height: calc(0.41 * 100vw);
+    max-height: 569px;
+    object-fit: cover;
+  }
+}
+
+.contentContainer {
+  @media (--viewportMedium) {
+    max-width: 1056px;
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+    padding: 0 24px;
+  }
+}
+
+.mainContent {
+  @media (--viewportMedium) {
+    margin-top: 51px;
+    flex-basis: calc(0.591856 * 100%);
+    flex-shrink: 0;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1110px) {
+    flex-basis: 50%;
+    flex-grow: 1;
+  }
 }
 
 .avatarWrapper {
@@ -46,11 +89,21 @@
   display: block;
   width: 61px;
   height: 61px;
+
+  @media (--viewportMedium) {
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    left: 24px;
+    top: -48px;
+    margin-left: 0;
+    margin-top: 0;
+  }
 }
 
 .avatar {
   /* Font */
-  @apply --marketplaceH3FontStyles;
+  @apply --marketplaceAvatarFontStyles;
 
   /* Layout */
   width: 100%;
@@ -67,6 +120,69 @@
   /* Colors */
   background-color: var(--matterColorAnti);
   color: var(--matterColorLight);
+}
+
+/* Align the avatar initials properly within the circle */
+.avatar span {
+  margin-bottom: 5px;
+  @media (--viewportMedium) {
+    margin-bottom: 0;
+  }
+}
+
+.headingContainer {
+  margin-top: 22px;
+  margin-bottom: 33px;
+
+  @media (--viewportMedium) {
+    display: flex;
+    margin-bottom: 53px;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1110px) {
+    flex-direction: column-reverse;
+  }
+}
+.desktopPriceContainer {
+  display: none;
+
+  @media (--viewportMedium) {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    margin: 0 48px 0 0;
+    padding: 0;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1110px) {
+    margin-top: 12px;
+    margin-bottom: 2px;
+  }
+}
+
+.desktopPriceValue {
+  /* Font */
+  @apply --marketplaceH1FontStyles;
+  color: var(--marketplaceColor);
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 6px;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1110px) {
+    font-size: 32px;
+    line-height: 32px;
+    margin-bottom: 3px;
+  }
+}
+
+.desktopPerNight {
+  /* Font */
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColor);
 
   @media (--viewportMedium) {
     margin-top: 0;
@@ -74,15 +190,15 @@
   }
 }
 
-/* Align the avatar initials properly within the circle */
-.avatar span {
-  margin-bottom: 5px;
-}
 
 .heading {
-  margin-top: 22px;
   margin-bottom: 33px;
   padding: 0 24px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 0;
+    padding: 0;
+  }
 }
 
 .title {
@@ -96,7 +212,7 @@
   margin-bottom: 0;
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 6px;
   }
 }
 
@@ -114,6 +230,11 @@
 .descriptionContainer {
   padding: 0 24px;
   margin-bottom: 35px;
+
+  @media (--viewportMedium) {
+    padding: 0;
+    margin-bottom: 56px;
+  }
 }
 
 .descriptionTitle {
@@ -124,7 +245,7 @@
   margin-bottom: 13px;
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 13px;
+    margin-bottom: 24px;
   }
 }
 
@@ -140,6 +261,11 @@
 .locationContainer {
   padding: 0 24px;
   margin-bottom: 35px;
+
+  @media (--viewportMedium) {
+    padding: 0;
+    margin-bottom: 0;
+  }
 }
 
 .locationTitle {
@@ -150,7 +276,7 @@
   margin-bottom: 20px;
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }
 }
 
@@ -159,6 +285,10 @@
   height: calc(100vh - 193px);
   width: 100%;
   background-color: #eee;
+
+  @media (--viewportMedium) {
+    height: 417px;
+  }
 }
 
 .openBookingForm {
@@ -174,6 +304,10 @@
   /* Contain repainting to this component only */
   /* 3D painting container helps scrolling */
   transform: translate3d(0,0,0);
+
+  @media (--viewportMedium) {
+    display: none;
+  }
 }
 
 .priceContainer {
@@ -212,10 +346,67 @@
   }
 }
 
+.modalInMobile {
+  @media (--viewportMedium) {
+    margin-top: 88px;
+    margin-left: 58px;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-left-color: var(--matterColorNegative);
+
+    /* Calendar needs 311px width and therefore padding can't be wider than 58px */
+    padding-left: 58px;
+    flex-basis: 369px;
+    flex-shrink: 0;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1110px) {
+    margin-left: 24px;
+    border-left: none;
+
+    /* Calendar needs 311px width and therefore padding can't be wider than 58px */
+    padding-left: 0;
+    flex-basis: 311px;
+  }
+}
+
 .modalHeading {
   margin-top: 89px;
   margin-bottom: 36px;
   padding: 0 24px;
+
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.bookingHeading {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: block;
+    margin-top: 13px;
+    margin-bottom: 42px;
+  }
+}
+
+.bookingTitle {
+  @media (--viewportMedium) {
+    /* Font */
+    color: var(--matterColorAnti);
+
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.bookingHelp {
+  display: none;
+  @apply --marketplaceH5FontStyles;
+
+  @media (--viewportMedium) {
+    display: block;
+  }
 }
 
 .bookingForm {
@@ -223,6 +414,10 @@
   display: flex;
   flex-direction: column;
   margin: 0;
+
+  @media (--viewportMedium) {
+    min-width: 311px;
+  }
 }
 
 .bookButton {
