@@ -215,7 +215,10 @@ export class ListingPageComponent extends Component {
                   <h1 className={css.title}>{title}</h1>
                   <div className={css.author}>
                     <span className={css.authorName}>
-                      <FormattedMessage id="ListingPage.hostedBy" values={{ name: authorFirstName }} />
+                      <FormattedMessage
+                        id="ListingPage.hostedBy"
+                        values={{ name: authorFirstName }}
+                      />
                     </span>
                   </div>
                 </div>
@@ -243,19 +246,28 @@ export class ListingPageComponent extends Component {
                 <h1 className={css.title}>{title}</h1>
                 <div className={css.author}>
                   <span className={css.authorName}>
-                    <FormattedMessage id="ListingPage.hostedBy" values={{ name: authorFirstName }} />
+                    <FormattedMessage
+                      id="ListingPage.hostedBy"
+                      values={{ name: authorFirstName }}
+                    />
                   </span>
                 </div>
               </div>
 
               <div className={css.bookingHeading}>
-                <h3 className={css.bookingTitle}><FormattedMessage id="ListingPage.bookingTitle" values={{ title }} /></h3>
+                <h3 className={css.bookingTitle}>
+                  <FormattedMessage id="ListingPage.bookingTitle" values={{ title }} />
+                </h3>
                 <div className={css.bookingHelp}>
                   <FormattedMessage id="ListingPage.bookingHelp" />
                 </div>
               </div>
 
-              <BookingDatesForm className={css.bookingForm} onSubmit={this.onSubmit} price={price} />
+              <BookingDatesForm
+                className={css.bookingForm}
+                onSubmit={this.onSubmit}
+                price={price}
+              />
             </ModalInMobile>
             {showBookButton
               ? <div className={css.openBookingForm}>
