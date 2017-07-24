@@ -77,6 +77,7 @@
 
   @media (--viewportLarge) {
     margin-top: 51px;
+    margin-bottom: 0px;
     /* contentContainer's full width - (bookingColumn + gutters) */
     flex-basis: calc(100% - 431px);
     flex-shrink: 0;
@@ -212,9 +213,11 @@
   @apply --marketplaceH4FontStyles;
   margin-top: 7px;
   margin-bottom: 0;
+
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
+    color: var(--matterColor);
   }
 }
 
@@ -375,9 +378,9 @@
 .bookingHeading {
   display: none;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: block;
-    margin-top: 11px;
+    margin-top: 6px;
     margin-bottom: 42px;
   }
 }
@@ -385,10 +388,10 @@
 .bookingTitle {
   @media (--viewportMedium) {
     /* Font */
-    color: var(--matterColorAnti);
+    color: var(--matterColor);
 
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
   }
 }
 
@@ -397,7 +400,9 @@
   @apply --marketplaceH5FontStyles;
 
   @media (--viewportMedium) {
+    color: var(--matterColor);
     display: block;
+    margin-top: 0;
   }
 }
 
@@ -407,7 +412,7 @@
   flex-direction: column;
   margin: 0;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     min-width: 311px;
   }
 }

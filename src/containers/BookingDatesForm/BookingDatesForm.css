@@ -8,20 +8,16 @@
 .bookingDates {
   flex-shrink: 0;
   margin-bottom: 46px;
-
-  @media (--viewportMedium) {
-    margin-bottom: 64px;
-  }
 }
 
 .priceBreakdownContainer {
   padding: 0 24px;
   margin-bottom: 40px;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     padding: 0;
     margin-bottom: 0;
-    margin-top: 7px;
+    margin-top: 1px;
   }
 }
 
@@ -31,9 +27,9 @@
 
   margin-top: 5px;
   margin-bottom: 14px;
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     margin-top: 5px;
-    margin-bottom: 25px;
+    margin-bottom: 26px;
   }
 }
 
@@ -56,7 +52,12 @@
   flex-shrink: 0;
 
   @media (--viewportMedium) {
-    margin-top: 50px;
+    margin-top: auto;
+    margin-bottom: 20px;
+  }
+
+  @media (--viewportLarge) {
+    margin-top: 4px;
     margin-bottom: 22px;
   }
 }
@@ -66,7 +67,7 @@
   margin: 0 24px 24px 24px;
   width: calc(100% - 48px);
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     margin: 0;
     width: 100%;
   }

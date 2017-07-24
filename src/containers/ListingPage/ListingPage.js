@@ -255,9 +255,9 @@ export class ListingPageComponent extends Component {
               </div>
 
               <div className={css.bookingHeading}>
-                <h3 className={css.bookingTitle}>
+                <h2 className={css.bookingTitle}>
                   <FormattedMessage id="ListingPage.bookingTitle" values={{ title }} />
-                </h3>
+                </h2>
                 <div className={css.bookingHelp}>
                   <FormattedMessage id="ListingPage.bookingHelp" />
                 </div>

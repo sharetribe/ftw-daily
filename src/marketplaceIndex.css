@@ -11,6 +11,16 @@ body {
   background-color: var(--matterColorBright);
 }
 
+::selection {
+  background: var(--marketplaceColor); /* WebKit/Blink Browsers */
+  color: var(--matterColorLight);
+}
+
+::-moz-selection {
+  background: var(--marketplaceColor); /* Gecko Browsers */
+  color: var(--matterColorLight);
+}
+
 a {
   @apply --marketplaceLinkStyles;
 }
