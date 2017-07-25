@@ -136,7 +136,7 @@ exports[`ListingPage matches snapshot 1`] = `
         isModalOpenOnMobile={false}
         onClose={[Function]}
         onManageDisableScrolling={[Function]}
-        showAsModalMaxWidth={767}>
+        showAsModalMaxWidth={1023}>
         <div>
           <h1>
             listing1 title
@@ -154,7 +154,7 @@ exports[`ListingPage matches snapshot 1`] = `
           </div>
         </div>
         <div>
-          <h3>
+          <h2>
             <FormattedMessage
               id="ListingPage.bookingTitle"
               values={
@@ -162,7 +162,7 @@ exports[`ListingPage matches snapshot 1`] = `
                   "title": "listing1 title",
                 }
               } />
-          </h3>
+          </h2>
           <div>
             <FormattedMessage
               id="ListingPage.bookingHelp"
