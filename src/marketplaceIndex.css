@@ -26,7 +26,7 @@ input,
 textarea,
 select,
 li {
-  @apply --marketplaceDefaultFontStyles
+  @apply --marketplaceDefaultFontStyles;
 }
 
 p,
@@ -38,7 +38,7 @@ pre {
 /* TODO */
 
 html {
-  @apply --marketplaceDefaultFontStyles
+  @apply --marketplaceDefaultFontStyles;
   color: var(--matterColor);
   padding: 0;
   margin: 0;
