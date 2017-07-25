@@ -23,9 +23,14 @@
     background-color: var(--marketplaceColor);
 
     @media (--viewportMedium) {
-      top: 41px;
+      top: 45px;
+    }
+
+    @media (--viewportLarge) {
+      top: 42px;
       min-height: auto;
       box-shadow: var(--boxShadowPopup);
+      border-radius: 0 0 2px 2px;
     }
   }
   & :global(.DateRangePickerInput) {
@@ -207,7 +212,7 @@
     width: calc(100% - 48px);
     margin: 0 24px 3px 24px;
 
-    @media (--viewportMedium) {
+    @media (--viewportLarge) {
       width: 100%;
       margin: 0;
     }
@@ -225,7 +230,7 @@
   & :global(.DateInput:first-of-type) {
     margin-right: 12px;
 
-    @media (--viewportMedium) {
+    @media (--viewportLarge) {
       margin-right: 24px;
     }
   }

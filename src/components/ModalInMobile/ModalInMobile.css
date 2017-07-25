@@ -11,6 +11,8 @@
 }
 
 .modalContent {
+  width: 100%;
+
   @media (--viewportMedium) {
     height: 100%;
 

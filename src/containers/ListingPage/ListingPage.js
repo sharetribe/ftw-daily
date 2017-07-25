@@ -29,7 +29,7 @@ import { showListing } from './ListingPage.duck';
 import css from './ListingPage.css';
 
 // This defines when ModalInMobile shows content as Modal
-const MODAL_BREAKPOINT = 767;
+const MODAL_BREAKPOINT = 1023;
 
 const { UUID } = types;
 
@@ -156,6 +156,25 @@ export class ListingPageComponent extends Component {
         </div>
       : null;
 
+    const bookingHeading = !isOwnListing
+      ? <div className={css.bookingHeading}>
+          <h2 className={css.bookingTitle}>
+            <FormattedMessage id="ListingPage.bookingTitle" values={{ title }} />
+          </h2>
+          <div className={css.bookingHelp}>
+            <FormattedMessage id="ListingPage.bookingHelp" />
+          </div>
+        </div>
+      : null;
+
+    const bookingDatesForm = !isOwnListing
+      ? <BookingDatesForm
+          className={css.bookingForm}
+          onSubmit={this.onSubmit}
+          price={price}
+        />
+      : null;
+
     const listingClasses = classNames(css.pageRoot, { [css.bookable]: showBookButton });
 
     return (
@@ -254,20 +273,8 @@ export class ListingPageComponent extends Component {
                 </div>
               </div>
 
-              <div className={css.bookingHeading}>
-                <h3 className={css.bookingTitle}>
-                  <FormattedMessage id="ListingPage.bookingTitle" values={{ title }} />
-                </h3>
-                <div className={css.bookingHelp}>
-                  <FormattedMessage id="ListingPage.bookingHelp" />
-                </div>
-              </div>
-
-              <BookingDatesForm
-                className={css.bookingForm}
-                onSubmit={this.onSubmit}
-                price={price}
-              />
+              {bookingHeading}
+              {bookingDatesForm}
             </ModalInMobile>
             {showBookButton
               ? <div className={css.openBookingForm}>
