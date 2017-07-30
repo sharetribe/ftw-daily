@@ -3,8 +3,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
-import { reduce } from 'lodash';
-import moment from 'moment';
 import Decimal from 'decimal.js';
 import config from '../../config';
 import { types } from '../../util/sdkLoader';
@@ -18,6 +16,7 @@ import { BookingBreakdown, NamedLink, NamedRedirect, PageLayout } from '../../co
 import { StripePaymentForm } from '../../containers';
 import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
 
+import { storeData, storedData } from './CheckoutPageSessionHelpers';
 import LogoIcon from './LogoIcon';
 import css from './CheckoutPage.css';
 
@@ -63,101 +62,13 @@ const breakdown = (bookingStart, bookingEnd, unitPrice) => {
   );
 };
 
-// Validate that given 'obj' has all the keys of defined by validPropTypes parameter
-// and values must pass related test-value-format function.
-const validateProperties = (obj, validPropTypes) => {
-  return reduce(
-    Object.entries(validPropTypes),
-    (acc, [prop, fn]) => {
-      if (Object.prototype.hasOwnProperty.call(obj, prop) && fn(obj[prop])) {
-        return acc;
-      }
-      return false;
-    },
-    true
-  );
-};
-
-// Validate content of booking dates object received from SessionStore
-const isValidBookingDates = bookingDates => {
-  const props = {
-    bookingStart: d => d instanceof Date,
-    bookingEnd: d => d instanceof Date,
-  };
-  return validateProperties(bookingDates, props);
-};
-
-// Validate content of listing object received from SessionStore.
-// Currently only id & attributes.price are needed.
-const isValidListing = listing => {
-  const props = {
-    id: id => id instanceof types.UUID,
-    attributes: v => {
-      return typeof v === 'object' && v.price instanceof types.Money;
-    },
-  };
-  return validateProperties(listing, props);
-};
-
-// Stores given bookingDates and listing to sessionStorage
-const storeData = (bookingDates, listing) => {
-  if (window && window.sessionStorage && listing && bookingDates) {
-    // TODO: How should we deal with Dates when data is serialized?
-    // Hard coded serializable date objects atm.
-    /* eslint-disable no-underscore-dangle */
-    const data = {
-      bookingDates: {
-        bookingStart: { date: bookingDates.bookingStart, _serializedType: 'SerializableDate' },
-        bookingEnd: { date: bookingDates.bookingEnd, _serializedType: 'SerializableDate' },
-      },
-      listing,
-      storedAt: { date: new Date(), _serializedType: 'SerializableDate' },
-    };
-    /* eslint-enable no-underscore-dangle */
-
-    const storableData = JSON.stringify(data, types.replacer);
-    window.sessionStorage.setItem(STORAGE_KEY, storableData);
-  }
-};
-
-// Get stored data
-const storedData = () => {
-  if (window && window.sessionStorage) {
-    const checkoutPageData = window.sessionStorage.getItem(STORAGE_KEY);
-
-    // TODO How should we deal with Dates when data is serialized?
-    // Dates are expected to be in format: { date: new Date(), _serializedType: 'SerializableDate' }
-    const reviver = (k, v) => {
-      // eslint-disable-next-line no-underscore-dangle
-      if (typeof v === 'object' && v._serializedType === 'SerializableDate') {
-        return new Date(v.date);
-      }
-      return types.reviver(k, v);
-    };
-
-    const { bookingDates, listing, storedAt } = checkoutPageData
-      ? JSON.parse(checkoutPageData, reviver)
-      : {};
-
-    // If sessionStore contains freshly saved data (max 1 day old), use it
-    const isFreshlySaved = storedAt
-      ? moment(storedAt).isAfter(moment().subtract(1, 'days'))
-      : false;
-
-    if (isFreshlySaved && isValidBookingDates(bookingDates) && isValidListing(listing)) {
-      return { bookingDates, listing };
-    }
-  }
-  return {};
-};
-
 export class CheckoutPageComponent extends Component {
   constructor(props) {
     super(props);
     const { bookingDates, listing } = props;
 
     // Store received data
-    storeData(bookingDates, listing);
+    storeData(bookingDates, listing, STORAGE_KEY);
 
     this.state = { submitting: false };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -170,7 +81,7 @@ export class CheckoutPageComponent extends Component {
     this.setState({ submitting: true });
     const { bookingDates, flattenedRoutes, history, sendOrderRequest, listing } = this.props;
     // Get page data from passed-in props or from storage
-    const pageData = bookingDates && listing ? { bookingDates, listing } : storedData();
+    const pageData = bookingDates && listing ? { bookingDates, listing } : storedData(STORAGE_KEY);
     const { bookingStart, bookingEnd } = pageData.bookingDates || {};
     const requestParams = { listingId: pageData.listing.id, cardToken, bookingStart, bookingEnd };
 
@@ -201,7 +112,7 @@ export class CheckoutPageComponent extends Component {
     } = this.props;
 
     // Get page data from passed-in props or from storage
-    const pageData = bookingDates && listing ? { bookingDates, listing } : storedData();
+    const pageData = bookingDates && listing ? { bookingDates, listing } : storedData(STORAGE_KEY);
     const { bookingStart, bookingEnd } = pageData.bookingDates || {};
     const currentListing = ensureListing(pageData.listing);
     const currentAuthor = ensureUser(currentListing.author);
