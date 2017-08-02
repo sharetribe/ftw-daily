@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: column;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     flex-direction: row;
     justify-content: center;
   }
@@ -46,12 +46,17 @@
   display: flex;
   flex-direction: column;
 
-  @media (--viewportMedium) {
-    padding: 116px 0 0 85px;
+
+  @media (--viewportLarge) {
+    padding: 118px 15vw 82px 82px;
     background-color: var(--matterColorLight);
     border-left-width: 1px;
     border-left-style: solid;
     border-left-color: var(--matterColorNegative);
+  }
+
+  @media (--viewportXLarge) {
+    padding-right: 25vw;
   }
 }
 
@@ -69,15 +74,17 @@
   background-color: var(--matterColorLight);
   box-shadow: var(--boxShadow);
 
-  @media (--viewportMedium) {
-    width: 30%;
-    padding: 111px 100px 0 0;
+  @media (--viewportLarge) {
+    padding: 113px 82px 82px 15vw;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-end;
     border: none;
     box-shadow: none;
     background-color: transparent;
+  }
+
+  @media (--viewportXLarge) {
+    padding-left: 25vw;
   }
 }
 
@@ -90,6 +97,8 @@
   /* Layout */
   margin-top: 0;
   margin-bottom: 0;
+
+
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
@@ -104,7 +113,11 @@
   overflow-x: auto;
 
   @media (--viewportMedium) {
-    padding-top: 37px;
+    padding-top: 21px;
+  }
+
+  @media (--viewportLarge) {
+    padding-top: 53px;
     flex-direction: column;
   }
 }
@@ -116,9 +129,9 @@
     margin-left: 0;
   }
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     margin-left: 0;
-    margin-bottom: 6px;
+    margin-bottom: 22px;
   }
 }
 
@@ -126,7 +139,7 @@
   color: var(--failColor);
   margin: 23px 24px 24px 24px;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     margin-top: 18px;
   }
 }
@@ -136,7 +149,7 @@
   margin-right: 24px;
   margin-top: 1px;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     margin-top: 6px;
   }
 }
@@ -145,8 +158,8 @@
   margin: 0;
   padding: 16px 24px;
 
-  @media (--viewportMedium) {
-    max-width: 756px;
+  @media (--viewportLarge) {
+    padding: 0;
   }
 }
 
@@ -163,8 +176,13 @@
     border-bottom: none;
   }
 
-  @media (--viewportMedium) {
-    margin-bottom: 19px;
+  &:hover .itemUsername {
+    color: var(--marketplaceColor);
+  }
+
+  @media (--viewportLarge) {
+    margin-bottom: 21px;
+    padding-bottom: 18px;
   }
 }
 
@@ -183,6 +201,13 @@
   margin-right: 8px;
   width: 43px;
   height: 43px;
+
+  @media (--viewportLarge) {
+    margin-top: 2px;
+    margin-right: 15px;
+    width: 41px;
+    height: 41px;
+  }
 }
 
 .itemAvatarImage {
@@ -194,6 +219,12 @@
   height: 6px;
   margin-top: 10px;
   margin-right: 8px;
+
+  @media (--viewportLarge) {
+    margin-right: 13px;
+    width: 9px;
+    height: 9px;
+  }
 }
 
 .notificationDot {
@@ -207,6 +238,7 @@
 
 .itemInfo {
   @apply --marketplaceH5FontStyles;
+  font-weight: var(--fontWeightSemiBold);
 
   /* Layout */
   flex-grow: 1;
@@ -240,11 +272,12 @@
 }
 
 .bookingInfo {
+  font-size: 14px;
   line-height: 14px;
-  margin-top: -1px; /* align to baseline */
+  margin-top: 3px;
 
   @media (--viewportMedium) {
-    margin-top: 5px;
+    margin-top: 8px;
     line-height: 16px;
   }
 }
@@ -263,10 +296,10 @@
 
 .itemPrice {
   &::before {
-    font-size: 24px;
+    font-size: 10px;
     margin: 0 6px;
     display: inline-block;
-    content: '\00B7'; /* middot */
+    content: '\25CF'; /* middot */
   }
 }
 
@@ -274,6 +307,7 @@
   /* Font */
   @apply --marketplaceH5FontStyles;
 
+  font-weight: var(--fontWeightMedium);
   margin-top: 6px;
   margin-bottom: 0px;
 
@@ -326,6 +360,7 @@
 
 .bookingPending {
   color: var(--matterColor);
+  margin-top: 9px;
 }
 
 .bookingRequested,
@@ -338,6 +373,7 @@
 .lastTransitionedAtPending,
 .lastTransitionedAtRequested {
   color: var(--matterColor);
+  font-weight: var(--fontWeightMedium);
 }
 
 .lastTransitionedAtAccepted,
