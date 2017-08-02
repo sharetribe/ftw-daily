@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { unmountComponentAtNode } from 'react-dom';
+import { injectIntl, intlShape } from 'react-intl';
 import { isEqualWith } from 'lodash';
 import classNames from 'classnames';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import * as propTypes from '../../util/propTypes';
+import { formatMoney } from '../../util/currency';
+import config from '../../config';
 
 import css from './SearchMap.css';
 
@@ -26,7 +29,7 @@ const createDiv = (className, text) => {
   return d;
 };
 
-class SearchMap extends Component {
+class SearchMapComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -40,7 +43,7 @@ class SearchMap extends Component {
       throw new Error('Google Maps API must be loaded for the SearchMap component');
     }
 
-    const { bounds, center, zoom } = this.props;
+    const { intl, bounds, center, zoom } = this.props;
     const centerLocation = { lat: center.lat, lng: center.lng };
     const mapOptions = {
       center: centerLocation,
@@ -63,11 +66,11 @@ class SearchMap extends Component {
     // https://developers.google.com/maps/documentation/javascript/examples/overlay-simple
     // TODO It should be possible to do this more React way, but that enhancement must be done later
     this.MapPriceOverlayMarker = class extends window.google.maps.OverlayView {
-      constructor(id, origin, map) {
+      constructor(listing, origin, map) {
         super();
 
         // Initialize all properties.
-        this.id = id;
+        this.listing = listing;
         this.origin = origin;
         this.map = map;
 
@@ -87,15 +90,17 @@ class SearchMap extends Component {
       onAdd() {
         const overlayDiv = document.createElement(`div`);
         overlayDiv.style.position = `absolute`;
-        overlayDiv.dataset.overlayId = this.id;
+        overlayDiv.dataset.overlayId = this.listing.id.uuid;
         this.overlayContainer = overlayDiv;
+
+        const price = formatMoney(intl, config.currencyConfig, this.listing.attributes.price);
 
         // Create price label
         // TODO this should be possible with React too,
         // but life-cycle management needs some some extra research
         const root = createDiv(css.labelRoot);
         root.appendChild(createDiv(css.caretShadow));
-        root.appendChild(createDiv(css.priceLabel, 'asdf'));
+        root.appendChild(createDiv(css.priceLabel, price));
         root.appendChild(createDiv(css.caret));
         this.overlayContainer.appendChild(root);
 
@@ -152,14 +157,14 @@ class SearchMap extends Component {
       this.priceLabelOverlays.forEach(o => o.setMap(null));
       this.priceLabelOverlays = [];
 
-      this.priceLabelOverlays = listings.reverse().map(l => {
-        const geolocation = l.attributes.geolocation;
+      this.priceLabelOverlays = listings.reverse().map(listing => {
+        const geolocation = listing.attributes.geolocation;
         const googleLatLng = new window.google.maps.LatLng({
           lat: geolocation.lat,
           lng: geolocation.lng,
         });
 
-        return new this.MapPriceOverlayMarker(l.id.uuid, googleLatLng, this.map);
+        return new this.MapPriceOverlayMarker(listing, googleLatLng, this.map);
       });
     }
   }
@@ -179,7 +184,7 @@ class SearchMap extends Component {
   }
 }
 
-SearchMap.defaultProps = {
+SearchMapComponent.defaultProps = {
   className: '',
   rootClassName: null,
   bounds: null,
@@ -190,13 +195,18 @@ SearchMap.defaultProps = {
 
 const { arrayOf, number, string } = PropTypes;
 
-SearchMap.propTypes = {
+SearchMapComponent.propTypes = {
   bounds: propTypes.latlngBounds,
   center: propTypes.latlng,
   className: string,
   listings: arrayOf(propTypes.listing),
   rootClassName: string,
   zoom: number,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
+
+const SearchMap = injectIntl(SearchMapComponent);
 
 export default SearchMap;
