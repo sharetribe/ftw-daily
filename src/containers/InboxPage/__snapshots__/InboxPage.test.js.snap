@@ -23,203 +23,226 @@ exports[`InboxPage matches snapshot 1`] = `
     onLogout={[Function]}
     onManageDisableScrolling={[Function]} />
   <div>
-    <h1>
-      <FormattedMessage
-        id="InboxPage.title"
-        values={Object {}} />
-    </h1>
-    <TabNav
-      className={null}
-      rootClassName={null}
-      tabs={
-        Array [
-          Object {
-            "linkProps": Object {
-              "name": "InboxPage",
-              "params": Object {
-                "tab": "orders",
+    <div>
+      <h1>
+        <FormattedMessage
+          id="InboxPage.title"
+          values={Object {}} />
+      </h1>
+      <TabNav
+        className={null}
+        rootClassName={null}
+        tabRootClassName={null}
+        tabs={
+          Array [
+            Object {
+              "linkProps": Object {
+                "name": "InboxPage",
+                "params": Object {
+                  "tab": "orders",
+                },
               },
+              "selected": true,
+              "text": <span>
+                <FormattedMessage
+                      id="InboxPage.ordersTabTitle"
+                      values={Object {}} />
+          </span>,
             },
-            "selected": true,
-            "text": <span>
-              <FormattedMessage
-                    id="InboxPage.ordersTabTitle"
-                    values={Object {}} />
-        </span>,
-          },
-          Object {
-            "linkProps": Object {
-              "name": "InboxPage",
-              "params": Object {
-                "tab": "sales",
+            Object {
+              "linkProps": Object {
+                "name": "InboxPage",
+                "params": Object {
+                  "tab": "sales",
+                },
               },
+              "selected": false,
+              "text": <span>
+                <FormattedMessage
+                      id="InboxPage.salesTabTitle"
+                      values={Object {}} />
+          </span>,
             },
-            "selected": false,
-            "text": <span>
-              <FormattedMessage
-                    id="InboxPage.salesTabTitle"
-                    values={Object {}} />
-        </span>,
-          },
-        ]
-      } />
+          ]
+        } />
+    </div>
+    <div>
+      <ul>
+        <li>
+          <Component
+            intl={
+              Object {
+                "formatDate": [Function],
+                "formatHTMLMessage": [Function],
+                "formatMessage": [Function],
+                "formatNumber": [Function],
+                "formatPlural": [Function],
+                "formatRelative": [Function],
+                "formatTime": [Function],
+                "now": [Function],
+              }
+            }
+            tx={
+              Object {
+                "attributes": Object {
+                  "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
+                  "lineItems": Array [
+                    Object {
+                      "code": "line-item/night",
+                      "lineTotal": Money {
+                        "amount": 1000,
+                        "currency": "USD",
+                      },
+                      "quantity": "1",
+                      "unitPrice": Money {
+                        "amount": 1000,
+                        "currency": "USD",
+                      },
+                    },
+                    Object {
+                      "code": "line-item/provider-commission",
+                      "lineTotal": Money {
+                        "amount": -100,
+                        "currency": "USD",
+                      },
+                      "unitPrice": Money {
+                        "amount": -100,
+                        "currency": "USD",
+                      },
+                    },
+                  ],
+                  "payinTotal": Money {
+                    "amount": 1000,
+                    "currency": "USD",
+                  },
+                  "payoutTotal": Money {
+                    "amount": 900,
+                    "currency": "USD",
+                  },
+                  "state": "state/preauthorized",
+                },
+                "booking": Object {
+                  "attributes": Object {
+                    "end": 2017-02-16T00:00:00.000Z,
+                    "start": 2017-02-15T00:00:00.000Z,
+                  },
+                  "id": UUID {
+                    "uuid": "booking1",
+                  },
+                  "type": "booking",
+                },
+                "customer": null,
+                "id": UUID {
+                  "uuid": "order-1",
+                },
+                "listing": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "profile": Object {
+                      "firstName": "provider-user-id first name",
+                      "lastName": "provider-user-id last name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider-user-id",
+                  },
+                  "type": "user",
+                },
+                "type": "transaction",
+              }
+            }
+            type="order" />
+        </li>
+        <li>
+          <Component
+            intl={
+              Object {
+                "formatDate": [Function],
+                "formatHTMLMessage": [Function],
+                "formatMessage": [Function],
+                "formatNumber": [Function],
+                "formatPlural": [Function],
+                "formatRelative": [Function],
+                "formatTime": [Function],
+                "now": [Function],
+              }
+            }
+            tx={
+              Object {
+                "attributes": Object {
+                  "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
+                  "lineItems": Array [
+                    Object {
+                      "code": "line-item/night",
+                      "lineTotal": Money {
+                        "amount": 1000,
+                        "currency": "USD",
+                      },
+                      "quantity": "1",
+                      "unitPrice": Money {
+                        "amount": 1000,
+                        "currency": "USD",
+                      },
+                    },
+                    Object {
+                      "code": "line-item/provider-commission",
+                      "lineTotal": Money {
+                        "amount": -100,
+                        "currency": "USD",
+                      },
+                      "unitPrice": Money {
+                        "amount": -100,
+                        "currency": "USD",
+                      },
+                    },
+                  ],
+                  "payinTotal": Money {
+                    "amount": 1000,
+                    "currency": "USD",
+                  },
+                  "payoutTotal": Money {
+                    "amount": 900,
+                    "currency": "USD",
+                  },
+                  "state": "state/preauthorized",
+                },
+                "booking": Object {
+                  "attributes": Object {
+                    "end": 2017-03-16T00:00:00.000Z,
+                    "start": 2017-03-15T00:00:00.000Z,
+                  },
+                  "id": UUID {
+                    "uuid": "booking2",
+                  },
+                  "type": "booking",
+                },
+                "customer": null,
+                "id": UUID {
+                  "uuid": "order-2",
+                },
+                "listing": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "profile": Object {
+                      "firstName": "provider-user-id first name",
+                      "lastName": "provider-user-id last name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider-user-id",
+                  },
+                  "type": "user",
+                },
+                "type": "transaction",
+              }
+            }
+            type="order" />
+        </li>
+      </ul>
+    </div>
   </div>
-  <ul>
-    <li>
-      <Component
-        intl={
-          Object {
-            "formatDate": [Function],
-            "formatHTMLMessage": [Function],
-            "formatMessage": [Function],
-            "formatNumber": [Function],
-            "formatPlural": [Function],
-            "formatRelative": [Function],
-            "formatTime": [Function],
-            "now": [Function],
-          }
-        }
-        tx={
-          Object {
-            "attributes": Object {
-              "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
-              "lineItems": Array [
-                Object {
-                  "code": "line-item/night",
-                  "lineTotal": Money {
-                    "amount": 1000,
-                    "currency": "USD",
-                  },
-                  "quantity": "1",
-                  "unitPrice": Money {
-                    "amount": 1000,
-                    "currency": "USD",
-                  },
-                },
-                Object {
-                  "code": "line-item/provider-commission",
-                  "lineTotal": Money {
-                    "amount": -100,
-                    "currency": "USD",
-                  },
-                  "unitPrice": Money {
-                    "amount": -100,
-                    "currency": "USD",
-                  },
-                },
-              ],
-              "payinTotal": Money {
-                "amount": 1000,
-                "currency": "USD",
-              },
-              "payoutTotal": Money {
-                "amount": 900,
-                "currency": "USD",
-              },
-              "state": "state/preauthorized",
-            },
-            "booking": null,
-            "customer": null,
-            "id": UUID {
-              "uuid": "order-1",
-            },
-            "listing": null,
-            "provider": Object {
-              "attributes": Object {
-                "profile": Object {
-                  "firstName": "provider-user-id first name",
-                  "lastName": "provider-user-id last name",
-                },
-              },
-              "id": UUID {
-                "uuid": "provider-user-id",
-              },
-              "type": "user",
-            },
-            "type": "transaction",
-          }
-        }
-        type="order" />
-    </li>
-    <li>
-      <Component
-        intl={
-          Object {
-            "formatDate": [Function],
-            "formatHTMLMessage": [Function],
-            "formatMessage": [Function],
-            "formatNumber": [Function],
-            "formatPlural": [Function],
-            "formatRelative": [Function],
-            "formatTime": [Function],
-            "now": [Function],
-          }
-        }
-        tx={
-          Object {
-            "attributes": Object {
-              "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
-              "lineItems": Array [
-                Object {
-                  "code": "line-item/night",
-                  "lineTotal": Money {
-                    "amount": 1000,
-                    "currency": "USD",
-                  },
-                  "quantity": "1",
-                  "unitPrice": Money {
-                    "amount": 1000,
-                    "currency": "USD",
-                  },
-                },
-                Object {
-                  "code": "line-item/provider-commission",
-                  "lineTotal": Money {
-                    "amount": -100,
-                    "currency": "USD",
-                  },
-                  "unitPrice": Money {
-                    "amount": -100,
-                    "currency": "USD",
-                  },
-                },
-              ],
-              "payinTotal": Money {
-                "amount": 1000,
-                "currency": "USD",
-              },
-              "payoutTotal": Money {
-                "amount": 900,
-                "currency": "USD",
-              },
-              "state": "state/preauthorized",
-            },
-            "booking": null,
-            "customer": null,
-            "id": UUID {
-              "uuid": "order-2",
-            },
-            "listing": null,
-            "provider": Object {
-              "attributes": Object {
-                "profile": Object {
-                  "firstName": "provider-user-id first name",
-                  "lastName": "provider-user-id last name",
-                },
-              },
-              "id": UUID {
-                "uuid": "provider-user-id",
-              },
-              "type": "user",
-            },
-            "type": "transaction",
-          }
-        }
-        type="order" />
-    </li>
-  </ul>
 </withRouter(PageLayout)>
 `;
 
@@ -250,14 +273,27 @@ exports[`InboxPage matches snapshot 2`] = `
       provider-user-id first name provider-user-id last name
     </div>
     <div
+      className="">
+      2017-02-15
+       - 
+      2017-02-16
+      <span
+        className={undefined}>
+        10
+      </span>
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      InboxPage.stateRequested
+    </div>
+    <div
       className=""
       title="2017-01-15 00:00">
       2017-01-15
     </div>
-  </div>
-  <div
-    className="">
-    InboxPage.stateRequested
   </div>
 </a>
 `;
@@ -287,203 +323,226 @@ exports[`InboxPage matches snapshot 3`] = `
     onLogout={[Function]}
     onManageDisableScrolling={[Function]} />
   <div>
-    <h1>
-      <FormattedMessage
-        id="InboxPage.title"
-        values={Object {}} />
-    </h1>
-    <TabNav
-      className={null}
-      rootClassName={null}
-      tabs={
-        Array [
-          Object {
-            "linkProps": Object {
-              "name": "InboxPage",
-              "params": Object {
-                "tab": "orders",
+    <div>
+      <h1>
+        <FormattedMessage
+          id="InboxPage.title"
+          values={Object {}} />
+      </h1>
+      <TabNav
+        className={null}
+        rootClassName={null}
+        tabRootClassName={null}
+        tabs={
+          Array [
+            Object {
+              "linkProps": Object {
+                "name": "InboxPage",
+                "params": Object {
+                  "tab": "orders",
+                },
               },
+              "selected": false,
+              "text": <span>
+                <FormattedMessage
+                      id="InboxPage.ordersTabTitle"
+                      values={Object {}} />
+          </span>,
             },
-            "selected": false,
-            "text": <span>
-              <FormattedMessage
-                    id="InboxPage.ordersTabTitle"
-                    values={Object {}} />
-        </span>,
-          },
-          Object {
-            "linkProps": Object {
-              "name": "InboxPage",
-              "params": Object {
-                "tab": "sales",
+            Object {
+              "linkProps": Object {
+                "name": "InboxPage",
+                "params": Object {
+                  "tab": "sales",
+                },
               },
+              "selected": true,
+              "text": <span>
+                <FormattedMessage
+                      id="InboxPage.salesTabTitle"
+                      values={Object {}} />
+          </span>,
             },
-            "selected": true,
-            "text": <span>
-              <FormattedMessage
-                    id="InboxPage.salesTabTitle"
-                    values={Object {}} />
-        </span>,
-          },
-        ]
-      } />
+          ]
+        } />
+    </div>
+    <div>
+      <ul>
+        <li>
+          <Component
+            intl={
+              Object {
+                "formatDate": [Function],
+                "formatHTMLMessage": [Function],
+                "formatMessage": [Function],
+                "formatNumber": [Function],
+                "formatPlural": [Function],
+                "formatRelative": [Function],
+                "formatTime": [Function],
+                "now": [Function],
+              }
+            }
+            tx={
+              Object {
+                "attributes": Object {
+                  "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
+                  "lineItems": Array [
+                    Object {
+                      "code": "line-item/night",
+                      "lineTotal": Money {
+                        "amount": 1000,
+                        "currency": "USD",
+                      },
+                      "quantity": "1",
+                      "unitPrice": Money {
+                        "amount": 1000,
+                        "currency": "USD",
+                      },
+                    },
+                    Object {
+                      "code": "line-item/provider-commission",
+                      "lineTotal": Money {
+                        "amount": -100,
+                        "currency": "USD",
+                      },
+                      "unitPrice": Money {
+                        "amount": -100,
+                        "currency": "USD",
+                      },
+                    },
+                  ],
+                  "payinTotal": Money {
+                    "amount": 1000,
+                    "currency": "USD",
+                  },
+                  "payoutTotal": Money {
+                    "amount": 900,
+                    "currency": "USD",
+                  },
+                  "state": "state/preauthorized",
+                },
+                "booking": Object {
+                  "attributes": Object {
+                    "end": 2017-02-16T00:00:00.000Z,
+                    "start": 2017-02-15T00:00:00.000Z,
+                  },
+                  "id": UUID {
+                    "uuid": "booking1",
+                  },
+                  "type": "booking",
+                },
+                "customer": Object {
+                  "attributes": Object {
+                    "profile": Object {
+                      "firstName": "customer-user-id first name",
+                      "lastName": "customer-user-id last name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "customer-user-id",
+                  },
+                  "type": "user",
+                },
+                "id": UUID {
+                  "uuid": "sale-1",
+                },
+                "listing": null,
+                "provider": null,
+                "type": "transaction",
+              }
+            }
+            type="sale" />
+        </li>
+        <li>
+          <Component
+            intl={
+              Object {
+                "formatDate": [Function],
+                "formatHTMLMessage": [Function],
+                "formatMessage": [Function],
+                "formatNumber": [Function],
+                "formatPlural": [Function],
+                "formatRelative": [Function],
+                "formatTime": [Function],
+                "now": [Function],
+              }
+            }
+            tx={
+              Object {
+                "attributes": Object {
+                  "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
+                  "lineItems": Array [
+                    Object {
+                      "code": "line-item/night",
+                      "lineTotal": Money {
+                        "amount": 1000,
+                        "currency": "USD",
+                      },
+                      "quantity": "1",
+                      "unitPrice": Money {
+                        "amount": 1000,
+                        "currency": "USD",
+                      },
+                    },
+                    Object {
+                      "code": "line-item/provider-commission",
+                      "lineTotal": Money {
+                        "amount": -100,
+                        "currency": "USD",
+                      },
+                      "unitPrice": Money {
+                        "amount": -100,
+                        "currency": "USD",
+                      },
+                    },
+                  ],
+                  "payinTotal": Money {
+                    "amount": 1000,
+                    "currency": "USD",
+                  },
+                  "payoutTotal": Money {
+                    "amount": 900,
+                    "currency": "USD",
+                  },
+                  "state": "state/preauthorized",
+                },
+                "booking": Object {
+                  "attributes": Object {
+                    "end": 2017-03-16T00:00:00.000Z,
+                    "start": 2017-03-15T00:00:00.000Z,
+                  },
+                  "id": UUID {
+                    "uuid": "booking2",
+                  },
+                  "type": "booking",
+                },
+                "customer": Object {
+                  "attributes": Object {
+                    "profile": Object {
+                      "firstName": "customer-user-id first name",
+                      "lastName": "customer-user-id last name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "customer-user-id",
+                  },
+                  "type": "user",
+                },
+                "id": UUID {
+                  "uuid": "sale-2",
+                },
+                "listing": null,
+                "provider": null,
+                "type": "transaction",
+              }
+            }
+            type="sale" />
+        </li>
+      </ul>
+    </div>
   </div>
-  <ul>
-    <li>
-      <Component
-        intl={
-          Object {
-            "formatDate": [Function],
-            "formatHTMLMessage": [Function],
-            "formatMessage": [Function],
-            "formatNumber": [Function],
-            "formatPlural": [Function],
-            "formatRelative": [Function],
-            "formatTime": [Function],
-            "now": [Function],
-          }
-        }
-        tx={
-          Object {
-            "attributes": Object {
-              "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
-              "lineItems": Array [
-                Object {
-                  "code": "line-item/night",
-                  "lineTotal": Money {
-                    "amount": 1000,
-                    "currency": "USD",
-                  },
-                  "quantity": "1",
-                  "unitPrice": Money {
-                    "amount": 1000,
-                    "currency": "USD",
-                  },
-                },
-                Object {
-                  "code": "line-item/provider-commission",
-                  "lineTotal": Money {
-                    "amount": -100,
-                    "currency": "USD",
-                  },
-                  "unitPrice": Money {
-                    "amount": -100,
-                    "currency": "USD",
-                  },
-                },
-              ],
-              "payinTotal": Money {
-                "amount": 1000,
-                "currency": "USD",
-              },
-              "payoutTotal": Money {
-                "amount": 900,
-                "currency": "USD",
-              },
-              "state": "state/preauthorized",
-            },
-            "booking": null,
-            "customer": Object {
-              "attributes": Object {
-                "profile": Object {
-                  "firstName": "customer-user-id first name",
-                  "lastName": "customer-user-id last name",
-                },
-              },
-              "id": UUID {
-                "uuid": "customer-user-id",
-              },
-              "type": "user",
-            },
-            "id": UUID {
-              "uuid": "sale-1",
-            },
-            "listing": null,
-            "provider": null,
-            "type": "transaction",
-          }
-        }
-        type="sale" />
-    </li>
-    <li>
-      <Component
-        intl={
-          Object {
-            "formatDate": [Function],
-            "formatHTMLMessage": [Function],
-            "formatMessage": [Function],
-            "formatNumber": [Function],
-            "formatPlural": [Function],
-            "formatRelative": [Function],
-            "formatTime": [Function],
-            "now": [Function],
-          }
-        }
-        tx={
-          Object {
-            "attributes": Object {
-              "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
-              "lineItems": Array [
-                Object {
-                  "code": "line-item/night",
-                  "lineTotal": Money {
-                    "amount": 1000,
-                    "currency": "USD",
-                  },
-                  "quantity": "1",
-                  "unitPrice": Money {
-                    "amount": 1000,
-                    "currency": "USD",
-                  },
-                },
-                Object {
-                  "code": "line-item/provider-commission",
-                  "lineTotal": Money {
-                    "amount": -100,
-                    "currency": "USD",
-                  },
-                  "unitPrice": Money {
-                    "amount": -100,
-                    "currency": "USD",
-                  },
-                },
-              ],
-              "payinTotal": Money {
-                "amount": 1000,
-                "currency": "USD",
-              },
-              "payoutTotal": Money {
-                "amount": 900,
-                "currency": "USD",
-              },
-              "state": "state/preauthorized",
-            },
-            "booking": null,
-            "customer": Object {
-              "attributes": Object {
-                "profile": Object {
-                  "firstName": "customer-user-id first name",
-                  "lastName": "customer-user-id last name",
-                },
-              },
-              "id": UUID {
-                "uuid": "customer-user-id",
-              },
-              "type": "user",
-            },
-            "id": UUID {
-              "uuid": "sale-2",
-            },
-            "listing": null,
-            "provider": null,
-            "type": "transaction",
-          }
-        }
-        type="sale" />
-    </li>
-  </ul>
 </withRouter(PageLayout)>
 `;
 
@@ -517,14 +576,27 @@ exports[`InboxPage matches snapshot 4`] = `
       customer-user-id first name customer-user-id last name
     </div>
     <div
+      className="">
+      2017-02-15
+       - 
+      2017-02-16
+      <span
+        className={undefined}>
+        9
+      </span>
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      InboxPage.statePending
+    </div>
+    <div
       className=""
       title="2017-01-15 00:00">
       2017-01-15
     </div>
-  </div>
-  <div
-    className="">
-    InboxPage.statePending
   </div>
 </a>
 `;

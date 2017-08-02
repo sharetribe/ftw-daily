@@ -1,7 +1,7 @@
 import React from 'react';
 import { RoutesProvider } from '../../components';
 import { renderShallow, renderDeep } from '../../util/test-helpers';
-import { fakeIntl, createUser, createTransaction } from '../../util/test-data';
+import { fakeIntl, createUser, createTransaction, createBooking } from '../../util/test-data';
 import { InboxPageComponent, InboxItem } from './InboxPage';
 import routesConfiguration from '../../routesConfiguration';
 import { flattenRoutes } from '../../util/routes';
@@ -13,6 +13,16 @@ describe('InboxPage', () => {
     const flattenedRoutes = flattenRoutes(routesConfiguration);
     const provider = createUser('provider-user-id');
     const customer = createUser('customer-user-id');
+    const booking1 = createBooking(
+      'booking1',
+      new Date(Date.UTC(2017, 1, 15)),
+      new Date(Date.UTC(2017, 1, 16))
+    );
+    const booking2 = createBooking(
+      'booking2',
+      new Date(Date.UTC(2017, 2, 15)),
+      new Date(Date.UTC(2017, 2, 16))
+    );
 
     const ordersProps = {
       location: { search: '' },
@@ -34,12 +44,14 @@ describe('InboxPage', () => {
           state: 'state/preauthorized',
           provider,
           lastTransitionedAt: new Date(Date.UTC(2017, 0, 15)),
+          booking: booking1,
         }),
         createTransaction({
           id: 'order-2',
           state: 'state/preauthorized',
           provider,
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
+          booking: booking2,
         }),
       ],
       intl: fakeIntl,
@@ -77,12 +89,14 @@ describe('InboxPage', () => {
           state: 'state/preauthorized',
           customer,
           lastTransitionedAt: new Date(Date.UTC(2017, 0, 15)),
+          booking: booking1,
         }),
         createTransaction({
           id: 'sale-2',
           state: 'state/preauthorized',
           customer,
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
+          booking: booking2,
         }),
       ],
       intl: fakeIntl,

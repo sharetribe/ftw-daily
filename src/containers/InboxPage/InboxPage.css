@@ -1,5 +1,9 @@
 @import '../../marketplace.css';
 
+.topbar {
+  z-index: 1; /* ensure that Topbar shadow overlays content background */
+}
+
 .mobileTopbar {
   /* Size */
   width: 100%;
@@ -22,19 +26,59 @@
   }
 }
 
-.heading {
+.container {
+  width: 100%;
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  @media (--viewportMedium) {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.content {
+
+  /* Expand to the full remaining width of the viewport */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  @media (--viewportMedium) {
+    padding: 116px 0 0 85px;
+    background-color: var(--matterColorLight);
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: var(--matterColorNegative);
+  }
+}
+
+.navigation {
 
   /* Layout */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 29px 24px 0 24px;
+  padding: 28px 24px 0 24px;
 
   border-top-width: 1px;
   border-top-color: var(--matterColorNegative);
   border-top-style: solid;
   background-color: var(--matterColorLight);
   box-shadow: var(--boxShadow);
+
+  @media (--viewportMedium) {
+    width: 30%;
+    padding: 111px 100px 0 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
 }
 
 .title {
@@ -53,26 +97,63 @@
 }
 
 .tabs {
-  padding-top: 11px;
+  padding-top: 12px;
+
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+
+  @media (--viewportMedium) {
+    padding-top: 37px;
+    flex-direction: column;
+  }
+}
+
+.tab {
+  margin-left: 16px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  @media (--viewportMedium) {
+    margin-left: 0;
+    margin-bottom: 6px;
+  }
 }
 
 .error {
-  color: red;
-  margin: 24px;
+  color: var(--failColor);
+  margin: 23px 24px 24px 24px;
+
+  @media (--viewportMedium) {
+    margin-top: 18px;
+  }
 }
 
 .noResults {
-  margin: 0 24px;
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 1px;
+
+  @media (--viewportMedium) {
+    margin-top: 6px;
+  }
 }
 
 .itemList {
   margin: 0;
-  padding: 18px 24px;
+  padding: 16px 24px;
+
+  @media (--viewportMedium) {
+    max-width: 756px;
+  }
 }
 
 .listItem {
   /* Layout */
-  margin-bottom: 11px;
+  margin-bottom: 10px;
+  padding-bottom: 12px;
 
   border-bottom-style: solid;
   border-bottom-width: 1px;
@@ -81,12 +162,15 @@
   &:last-child {
     border-bottom: none;
   }
+
+  @media (--viewportMedium) {
+    margin-bottom: 19px;
+  }
 }
 
 .itemLink {
   /* Layout */
   display: flex;
-  padding-bottom: 11px;
 
   /* Remove text underline from this link */
   text-decoration: none;
@@ -122,10 +206,22 @@
 }
 
 .itemInfo {
+  @apply --marketplaceH5FontStyles;
+
   /* Layout */
   flex-grow: 1;
   flex: 1;
   flex-direction: column;
+
+  margin-top: 5px;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    margin-top: 3px;
+    margin-bottom: 0;
+  }
+
+  color: var(--matterColor);
 }
 
 .itemUsername {
@@ -134,11 +230,22 @@
   color: var(--matterColor);
   line-height: 18px;
 
-  margin-top: 3px;
-  margin-bottom: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
+
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
+  }
+}
+
+.bookingInfo {
+  line-height: 14px;
+  margin-top: -1px; /* align to baseline */
+
+  @media (--viewportMedium) {
+    margin-top: 5px;
+    line-height: 16px;
   }
 }
 
@@ -154,16 +261,31 @@
   }
 }
 
+.itemPrice {
+  &::before {
+    font-size: 24px;
+    margin: 0 6px;
+    display: inline-block;
+    content: '\00B7'; /* middot */
+  }
+}
+
 .itemState {
   /* Font */
   @apply --marketplaceH5FontStyles;
 
-  margin-top: 4px;
+  margin-top: 6px;
   margin-bottom: 0px;
+
   @media (--viewportMedium) {
-    margin-top: 4px;
+    margin-top: 0;
     margin-bottom: 0;
   }
+}
+
+.lastTransitionedAt {
+  text-align: right;
+  color: var(--matterColor);
 }
 
 .pagination {
@@ -174,13 +296,10 @@
 
 .namePending {
   font-weight: var(--fontWeightBold);
-  margin-top: 1px;
-  line-height: 18px;
-  margin-bottom: 3px;
-}
 
-.timePending {
-  color: var(--matterColor);
+  /* baseline alignment fixes */
+  margin-top: -1px;
+  margin-bottom: 1px;
 }
 
 .stateRequested,
@@ -205,9 +324,24 @@
   font-weight: var(--fontWeightMedium);
 }
 
-.timeRequested,
-.timeDeclined,
-.timeAccepted,
-.timeDelivered {
+.bookingPending {
+  color: var(--matterColor);
+}
+
+.bookingRequested,
+.bookingDeclined,
+.bookingAccepted,
+.bookingDelivered {
+  color: var(--matterColorAnti);
+}
+
+.lastTransitionedAtPending,
+.lastTransitionedAtRequested {
+  color: var(--matterColor);
+}
+
+.lastTransitionedAtAccepted,
+.lastTransitionedAtRejected,
+.lastTransitionedAtDelivered {
   color: var(--matterColorAnti);
 }
