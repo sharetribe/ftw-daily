@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
 import { ensureListing, ensureTransaction, ensureBooking, ensureUser } from '../../util/data';
-import { BookingBreakdown, NamedLink } from '../../components';
+import { BookingBreakdown, NamedLink, ResponsiveImage, AvatarMedium } from '../../components';
 
 import css from './OrderDetailsPanel.css';
 
@@ -131,7 +131,9 @@ const OrderDetailsPanel = props => {
   const currentProvider = ensureUser(currentTransaction.provider);
   const currentCustomer = ensureUser(currentTransaction.customer);
 
-  const providerName = currentProvider.attributes.profile.firstName;
+  const providerProfile = currentProvider.attributes.profile;
+  const authorFirstName = providerProfile.firstName;
+  const authorLastName = providerProfile.lastName;
   const customerName = currentCustomer.attributes.profile.firstName;
   const transactionState = currentTransaction.attributes.state;
   const lastTransitionedAt = currentTransaction.attributes.lastTransitionedAt;
@@ -149,29 +151,86 @@ const OrderDetailsPanel = props => {
     );
   }
 
+  const listingTitle = currentListing.attributes.title;
+
   const bookingInfo = breakdown(currentTransaction);
   const title = orderTitle(transactionState, listingLink, customerName, lastTransition);
   const message = orderMessage(
     transactionState,
     listingLink,
-    providerName,
+    authorFirstName,
     lastTransitionedAt,
     lastTransition
   );
+
+  const firstImage = currentListing.images && currentListing.images.length > 0
+    ? currentListing.images[0]
+    : null;
 
   const classes = classNames(rootClassName || css.root, className);
 
   return (
     <div className={classes}>
-      <h1 className={css.title}>{title}</h1>
-      <div className={css.message}>
-        {message}
-      </div>
-      <div className={css.bookingBreakdownContainer}>
-        <h3 className={css.bookingBreakdownTitle}>
-          <FormattedMessage id="OrderDetailsPanel.bookingBreakdownTitle" />
-        </h3>
-        {bookingInfo}
+      <div className={css.container}>
+        <div className={css.aspectWrapper}>
+          <ResponsiveImage
+            rootClassName={css.rootForImage}
+            alt={listingTitle}
+            image={firstImage}
+            nameSet={[
+              { name: 'landscape-crop', size: '400w' },
+              { name: 'landscape-crop2x', size: '800w' },
+            ]}
+            sizes="100vw"
+          />
+        </div>
+        <div className={classNames(css.avatarWrapper, css.avatarMobile)}>
+          <AvatarMedium firstName={authorFirstName} lastName={authorLastName} />
+        </div>
+        <div className={css.orderInfo}>
+          <h1 className={css.title}>{title}</h1>
+          <div className={css.message}>
+            {message}
+          </div>
+        </div>
+        <div className={css.bookingBreakdownContainer}>
+          <div className={css.breakdownMobile}>
+            <h3 className={css.bookingBreakdownTitle}>
+              <FormattedMessage id="OrderDetailsPanel.bookingBreakdownTitle" />
+            </h3>
+            {bookingInfo}
+          </div>
+          <div className={css.breakdownDesktop}>
+            <div className={css.breakdownAspectWrapper}>
+              <ResponsiveImage
+                rootClassName={css.rootForImage}
+                alt={listingTitle}
+                image={firstImage}
+                nameSet={[
+                  { name: 'landscape-crop', size: '400w' },
+                  { name: 'landscape-crop2x', size: '800w' },
+                ]}
+                sizes="100%"
+              />
+            </div>
+            <div className={css.avatarWrapper}>
+              <AvatarMedium firstName={authorFirstName} lastName={authorLastName} />
+            </div>
+            <div className={css.breakdownHeadings}>
+              <h2 className={css.breakdownTitle}>{listingTitle}</h2>
+              <p className={css.breakdownSubtitle}>
+                <FormattedMessage
+                  id="OrderDetailsPanel.hostedBy"
+                  values={{ name: authorFirstName }}
+                />
+              </p>
+            </div>
+            <h3 className={css.bookingBreakdownTitle}>
+              <FormattedMessage id="OrderDetailsPanel.bookingBreakdownTitle" />
+            </h3>
+            {bookingInfo}
+          </div>
+        </div>
       </div>
     </div>
   );

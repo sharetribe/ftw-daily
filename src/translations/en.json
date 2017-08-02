@@ -130,6 +130,7 @@
   "OrderDetailsPanel.orderPreauthorizedTitle": "Great success, {customerName}!",
   "OrderDetailsPanel.orderRejectedStatus": "Unfortunately {providerName} declined the request on {transitionDate}.",
   "OrderDetailsPanel.orderRejectedTitle": "You requested to book {listingLink}",
+  "OrderDetailsPanel.hostedBy": "Hosted by {name}",
   "OrderPage.fetchOrderFailed": "Fetching order data failed.",
   "OrderPage.loadingData": "Loading order data.",
   "OrderPage.title": "Order details: {listingTitle}",
