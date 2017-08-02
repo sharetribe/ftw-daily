@@ -226,4 +226,18 @@
       letter-spacing: -0.9px;
     }
   }
+
+  --marketplaceInboxLinkFontStyles {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-weight: var(--fontWeightMedium);
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+
+    @media (--viewportMedium) {
+      font-weight: var(--fontWeightSemiBold);
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
 }

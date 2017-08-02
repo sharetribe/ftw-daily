@@ -168,11 +168,7 @@ export class ListingPageComponent extends Component {
       : null;
 
     const bookingDatesForm = !isOwnListing
-      ? <BookingDatesForm
-          className={css.bookingForm}
-          onSubmit={this.onSubmit}
-          price={price}
-        />
+      ? <BookingDatesForm className={css.bookingForm} onSubmit={this.onSubmit} price={price} />
       : null;
 
     const listingClasses = classNames(css.pageRoot, { [css.bookable]: showBookButton });

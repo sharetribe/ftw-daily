@@ -7,6 +7,7 @@ import {
   convertUnitToSubUnit,
   ensureSeparator,
   truncateToSubUnitPrecision,
+  formatMoney,
 } from './currency';
 
 describe('currency utils', () => {
@@ -213,5 +214,28 @@ describe('currency utils', () => {
         '[DecimalError] Invalid argument'
       );
     });
+  });
+
+  describe('formatMoney', () => {
+    it('complains about incorrect value type', () => {
+      const intl = null;
+      const currencyConfig = {};
+      const value = null;
+      expect(() => formatMoney(intl, currencyConfig, value)).toThrowError(
+        'Value must be a Money type'
+      );
+    });
+    it('complains about mismatching currencies', () => {
+      const intl = null;
+      const currencyConfig = { currency: 'USD' };
+      const value = new types.Money(100, 'EUR');
+      expect(() => formatMoney(intl, currencyConfig, value)).toThrowError(
+        'Given currency different from marketplace currency'
+      );
+    });
+
+    // No test for that actual formatting for now. It depends on the
+    // locale, and it doesn't really make sense to test the fake intl
+    // implementation in the tests.
   });
 });

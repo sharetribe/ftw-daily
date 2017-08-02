@@ -14,7 +14,9 @@ import {
   TabNav,
   Topbar,
 } from '../../components';
+import config from '../../config';
 import * as propTypes from '../../util/propTypes';
+import { formatMoney } from '../../util/currency';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
@@ -24,30 +26,25 @@ import css from './InboxPage.css';
 
 const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
 
-// Formatted username
-const username = user => {
-  const profile = user && user.attributes && user.attributes.profile ? user.attributes.profile : {};
+const formatUser = user => {
+  const profile = user && user.attributes && user.attributes.profile
+    ? user.attributes.profile
+    : null;
   return {
+    name: `${profile.firstName} ${profile.lastName}`,
     firstName: profile.firstName,
     lastName: profile.lastName,
-    name: profile.firstName ? `${profile.firstName} ${profile.lastName}` : '',
   };
 };
 
-// Localised timestamp when the given transaction was updated
-const timestamp = (intl, tx) => {
-  const defaultValue = { datetime: '', date: '' };
-  const date = tx.attributes ? tx.attributes.lastTransitionedAt : null;
-  const dateFormatOptions = {
-    month: 'long',
-    day: 'numeric',
+const formatDate = (intl, date) => {
+  return {
+    short: intl.formatDate(date, {
+      month: 'short',
+      day: 'numeric',
+    }),
+    long: `${intl.formatDate(date)} ${intl.formatTime(date)}`,
   };
-  return date
-    ? {
-        datetime: `${intl.formatDate(date)} ${intl.formatTime(date)}`,
-        date: intl.formatDate(date, dateFormatOptions),
-      }
-    : defaultValue;
 };
 
 // Translated name of the state of the given transaction
@@ -56,7 +53,8 @@ const txState = (intl, tx, isOrder) => {
   if (state === propTypes.TX_STATE_ACCEPTED) {
     return {
       nameClassName: css.nameAccepted,
-      timeClassName: css.timeAccepted,
+      bookingClassName: css.bookingAccepted,
+      lastTransitionedAtClassName: css.lastTransitionedAtAccepted,
       stateClassName: css.stateAccepted,
       state: intl.formatMessage({
         id: 'InboxPage.stateAccepted',
@@ -65,7 +63,8 @@ const txState = (intl, tx, isOrder) => {
   } else if (state === propTypes.TX_STATE_REJECTED) {
     return {
       nameClassName: css.nameDeclined,
-      timeClassName: css.timeDeclined,
+      bookingClassName: css.bookingDeclined,
+      lastTransitionedAtClassName: css.lastTransitionedAtRejected,
       stateClassName: css.stateDeclined,
       state: intl.formatMessage({
         id: 'InboxPage.stateDeclined',
@@ -74,7 +73,8 @@ const txState = (intl, tx, isOrder) => {
   } else if (state === propTypes.TX_STATE_DELIVERED) {
     return {
       nameClassName: css.nameDelivered,
-      timeClassName: css.timeDelivered,
+      bookingClassName: css.bookingDelivered,
+      lastTransitionedAtClassName: css.lastTransitionedAtDelivered,
       stateClassName: css.stateDelivered,
       state: intl.formatMessage({
         id: 'InboxPage.stateDelivered',
@@ -83,7 +83,10 @@ const txState = (intl, tx, isOrder) => {
   }
   return {
     nameClassName: isOrder ? css.nameRequested : css.namePending,
-    timeClassName: isOrder ? css.timeRequested : css.timePending,
+    bookingClassName: isOrder ? css.bookingRequested : css.bookingPending,
+    lastTransitionedAtClassName: isOrder
+      ? css.lastTransitionedAtRequested
+      : css.lastTransitionedAtPending,
     stateClassName: isOrder ? css.stateRequested : css.statePending,
     state: isOrder
       ? intl.formatMessage({
@@ -97,14 +100,19 @@ const txState = (intl, tx, isOrder) => {
 
 export const InboxItem = props => {
   const { type, tx, intl } = props;
-  const { customer, provider } = tx;
+  const { customer, provider, booking } = tx;
   const isOrder = type === 'order';
-  const otherUser = username(isOrder ? provider : customer);
-  const changedDate = timestamp(intl, tx);
+
+  const otherUser = formatUser(isOrder ? provider : customer);
+
   const stateData = txState(intl, tx, isOrder);
   const isSaleNotification = !isOrder && tx.attributes.state === propTypes.TX_STATE_PREAUTHORIZED;
-
   const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
+  const lastTransitionedAt = formatDate(intl, tx.attributes.lastTransitionedAt);
+  const bookingStart = formatDate(intl, booking.attributes.start);
+  const bookingEnd = formatDate(intl, booking.attributes.end);
+  const bookingPrice = isOrder ? tx.attributes.payinTotal : tx.attributes.payoutTotal;
+  const price = formatMoney(intl, config.currencyConfig, bookingPrice);
 
   return (
     <NamedLink
@@ -122,14 +130,20 @@ export const InboxItem = props => {
         <div className={classNames(css.itemUsername, stateData.nameClassName)}>
           {otherUser.name}
         </div>
-        <div
-          className={classNames(css.itemTimestamp, stateData.timeClassName)}
-          title={changedDate.datetime}
-        >
-          {changedDate.date}
+        <div className={classNames(css.bookingInfo, stateData.bookingClassName)}>
+          {bookingStart.short} - {bookingEnd.short}
+          <span className={css.itemPrice}>{price}</span>
         </div>
       </div>
-      <div className={classNames(css.itemState, stateData.stateClassName)}>{stateData.state}</div>
+      <div className={css.itemState}>
+        <div className={stateData.stateClassName}>{stateData.state}</div>
+        <div
+          className={classNames(css.lastTransitionedAt, stateData.lastTransitionedAtClassName)}
+          title={lastTransitionedAt.long}
+        >
+          {lastTransitionedAt.short}
+        </div>
+      </div>
     </NamedLink>
   );
 };
@@ -229,7 +243,7 @@ export const InboxPageComponent = props => {
       },
     },
   ];
-  const nav = <TabNav className={css.tabs} tabs={tabs} />;
+  const nav = <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />;
 
   return (
     <PageLayout
@@ -239,6 +253,7 @@ export const InboxPageComponent = props => {
       scrollingDisabled={scrollingDisabled}
     >
       <Topbar
+        className={css.topbar}
         mobileRootClassName={css.mobileTopbar}
         isAuthenticated={isAuthenticated}
         authInProgress={authInProgress}
@@ -250,18 +265,22 @@ export const InboxPageComponent = props => {
         onLogout={onLogout}
         onManageDisableScrolling={onManageDisableScrolling}
       />
-      <div className={css.heading}>
-        <h1 className={css.title}>
-          <FormattedMessage id="InboxPage.title" />
-        </h1>
-        {nav}
+      <div className={css.container}>
+        <div className={css.navigation}>
+          <h1 className={css.title}>
+            <FormattedMessage id="InboxPage.title" />
+          </h1>
+          {nav}
+        </div>
+        <div className={css.content}>
+          {error}
+          <ul className={css.itemList}>
+            {!fetchInProgress ? transactions.map(toTxItem) : null}
+            {noResults}
+          </ul>
+          {pagingLinks}
+        </div>
       </div>
-      {error}
-      <ul className={css.itemList}>
-        {!fetchInProgress ? transactions.map(toTxItem) : null}
-        {noResults}
-      </ul>
-      {pagingLinks}
     </PageLayout>
   );
 };
