@@ -168,3 +168,23 @@ export const convertMoneyToNumber = (value, subUnitDivisor) => {
   const amount = new Decimal(value.amount);
   return amount.dividedBy(subUnitDivisorAsDecimal).toNumber();
 };
+
+/**
+ * Format the given money to a string
+ *
+ * @param {Object} intl
+ * @param {Object} currencyConfig
+ * @param {Money} value
+ *
+ * @return {String} formatted money value
+ */
+export const formatMoney = (intl, currencyConfig, value) => {
+  if (!(value instanceof types.Money)) {
+    throw new Error('Value must be a Money type');
+  }
+  if (value.currency !== currencyConfig.currency) {
+    throw new Error('Given currency different from marketplace currency');
+  }
+  const valueAsNumber = convertMoneyToNumber(value, currencyConfig.subUnitDivisor);
+  return intl.formatNumber(valueAsNumber, currencyConfig);
+};
