@@ -421,3 +421,6 @@
   @apply --marketplaceButtonStylesPrimary;
 }
 
+.ownListingText {
+  margin-top: 15px; /* align to baseline */
+}
