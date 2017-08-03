@@ -165,7 +165,7 @@ export class ListingPageComponent extends Component {
             <FormattedMessage id="ListingPage.bookingHelp" />
           </div>
         </div>
-      : null;
+      : <p className={css.ownListingText}><FormattedMessage id="ListingPage.ownListing" /></p>;
 
     const bookingDatesForm = !isOwnListing
       ? <BookingDatesForm className={css.bookingForm} onSubmit={this.onSubmit} price={price} />
