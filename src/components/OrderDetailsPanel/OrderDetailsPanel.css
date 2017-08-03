@@ -41,9 +41,6 @@
   left: 0;
   right: 0;
   width: 100%;
-}
-
-img.rootForImage {
 
   @media (--viewportLarge) {
     border-radius: 2px 2px 0 0;
