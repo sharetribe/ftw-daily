@@ -60,6 +60,7 @@
   --boxShadowLight: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   --boxShadowPopup: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
   --boxShadowPopupLight: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+  --boxShadowBreakdown: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
   --boxShadowButton: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
   --boxShadowListingCard: 0 0 50px 0 rgba(0,0,0,0.1);
 

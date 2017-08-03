@@ -41,15 +41,29 @@ const fetchOrderError = e => ({ type: FETCH_ORDER_ERROR, error: true, payload: e
 
 // ================ Thunks ================ //
 
+const listingRelationship = txResponse => {
+  return txResponse.data.data.relationships.listing.data;
+};
+
 export const fetchOrder = id =>
   (dispatch, getState, sdk) => {
     dispatch(fetchOrderRequest());
 
+    let txResponse = null;
+
     return sdk.transactions
       .show({ id, include: ['customer', 'provider', 'listing', 'booking'] }, { expand: true })
       .then(response => {
+        txResponse = response;
+        const listingId = listingRelationship(response).id;
+
+        return sdk.listings.show({ id: listingId, include: ['author', 'images'] });
+      })
+      .then(response => {
+        dispatch(addMarketplaceEntities(txResponse));
         dispatch(addMarketplaceEntities(response));
-        dispatch(fetchOrderSuccess(response));
+        dispatch(fetchOrderSuccess(txResponse));
+
         return response;
       })
       .catch(e => {

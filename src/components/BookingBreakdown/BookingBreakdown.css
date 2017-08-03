@@ -37,7 +37,7 @@
 
   @media (--viewportMedium) {
     font-weight: 700;
-    margin-top: 1px; /* align with baseline */
+    margin-top: -1px;
     margin-bottom: 0;
   }
 }
@@ -52,7 +52,7 @@
   background-color: var(--matterColorNegative);
 
   @media (--viewportMedium) {
-    margin: 2px 0 8px 0;
+    margin: 2px 0 14px 0;
   }
 }
 
@@ -61,6 +61,10 @@
 
   /* Move so that baseline aligns with the total price */
   padding-top: 7px;
+
+  @media (--viewportMedium) {
+    padding-top: 8px;
+  }
 }
 
 .totalPrice {
