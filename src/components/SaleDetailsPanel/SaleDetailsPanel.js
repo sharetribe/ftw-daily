@@ -4,7 +4,14 @@ import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
 import { ensureListing, ensureTransaction, ensureBooking, ensureUser } from '../../util/data';
-import { AvatarMedium, BookingBreakdown, NamedLink } from '../../components';
+import {
+  AvatarMedium,
+  BookingBreakdown,
+  NamedLink,
+  ResponsiveImage,
+  PrimaryButton,
+  SecondaryButton,
+} from '../../components';
 
 import css from './SaleDetailsPanel.css';
 
@@ -23,7 +30,6 @@ const breakdown = (transaction, totalLabelMessage) => {
 
   return (
     <BookingBreakdown
-      className={css.breakdown}
       bookingStart={bookingStart}
       bookingEnd={bookingEnd}
       payinTotal={payinTotal}
@@ -111,6 +117,9 @@ const SaleDetailsPanel = props => {
     rootClassName,
     className,
     transaction,
+    onAcceptSale,
+    onRejectSale,
+    acceptOrRejectInProgress,
   } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
@@ -149,24 +158,86 @@ const SaleDetailsPanel = props => {
     lastTransition
   );
 
+  const listingTitle = currentListing.attributes.title;
+  const firstImage = currentListing.images && currentListing.images.length > 0
+    ? currentListing.images[0]
+    : null;
+
+  const isPreauthorizedState = currentTransaction.attributes.state ===
+    propTypes.TX_STATE_PREAUTHORIZED;
+  const actionButtons = isPreauthorizedState
+    ? <div className={css.actionButtons}>
+        <SecondaryButton
+          className={css.rejectButton}
+          disabled={acceptOrRejectInProgress}
+          onClick={() => onRejectSale(currentTransaction.id)}
+        >
+          <FormattedMessage id="SalePage.rejectButton" />
+        </SecondaryButton>
+        <PrimaryButton
+          className={css.acceptButton}
+          disabled={acceptOrRejectInProgress}
+          onClick={() => onAcceptSale(currentTransaction.id)}
+        >
+          <FormattedMessage id="SalePage.acceptButton" />
+        </PrimaryButton>
+      </div>
+    : null;
+
   const classes = classNames(rootClassName || css.root, className);
 
   return (
     <div className={classes}>
-      <div className={css.header}>
-        <h1 className={css.title}>
-          {title}
-        </h1>
-        <div className={css.avatarWrapper}>
+      <div className={css.container}>
+        <div className={css.aspectWrapperMobile}>
+          <ResponsiveImage
+            rootClassName={css.rootForImage}
+            alt={listingTitle}
+            image={firstImage}
+            nameSet={[
+              { name: 'landscape-crop', size: '400w' },
+              { name: 'landscape-crop2x', size: '800w' },
+            ]}
+            sizes="100vw"
+          />
+        </div>
+        <div className={css.avatarWrapperMobile}>
           <AvatarMedium firstName={customerFirstName} lastName={customerLastName} />
         </div>
-      </div>
-      <p className={css.message}>{message}</p>
-      <div className={css.bookingBreakdownContainer}>
-        <h3 className={css.bookingBreakdownTitle}>
-          <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
-        </h3>
-        {bookingInfo}
+        <div className={css.info}>
+          <div className={css.avatarWrapperDesktop}>
+            <AvatarMedium firstName={customerFirstName} lastName={customerLastName} />
+          </div>
+          <h1 className={css.title}>{title}</h1>
+          <p className={css.message}>{message}</p>
+          {actionButtons}
+        </div>
+        <div className={css.breakdownContainerMobile}>
+          <h3 className={css.breakdownTitleMobile}>
+            <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
+          </h3>
+          {bookingInfo}
+        </div>
+        <div className={css.breakdownContainerDesktop}>
+          <div className={css.aspectWrapperDesktop}>
+            <ResponsiveImage
+              rootClassName={css.rootForImage}
+              alt={listingTitle}
+              image={firstImage}
+              nameSet={[
+                { name: 'landscape-crop', size: '400w' },
+                { name: 'landscape-crop2x', size: '800w' },
+              ]}
+              sizes="100%"
+            />
+          </div>
+          <h3 className={css.breakdownTitleDesktop}>
+            <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
+          </h3>
+          <div className={css.breakdownDesktop}>
+            {bookingInfo}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -178,12 +249,15 @@ SaleDetailsPanel.defaultProps = {
   lastTransition: null,
 };
 
-const { string } = PropTypes;
+const { string, func, bool } = PropTypes;
 
 SaleDetailsPanel.propTypes = {
   rootClassName: string,
   className: string,
   transaction: propTypes.transaction.isRequired,
+  onAcceptSale: func.isRequired,
+  onRejectSale: func.isRequired,
+  acceptOrRejectInProgress: bool,
 };
 
 export default SaleDetailsPanel;
