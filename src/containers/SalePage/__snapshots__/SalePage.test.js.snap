@@ -41,6 +41,8 @@ exports[`SalePage matches snapshot 1`] = `
     <SaleDetailsPanel
       className="undefined"
       lastTransition={null}
+      onAcceptSale={[Function]}
+      onRejectSale={[Function]}
       rootClassName={null}
       transaction={
         Object {
@@ -142,20 +144,6 @@ exports[`SalePage matches snapshot 1`] = `
           "type": "transaction",
         }
       } />
-    <div>
-      <SecondaryButton
-        onClick={[Function]}>
-        <FormattedMessage
-          id="SalePage.rejectButton"
-          values={Object {}} />
-      </SecondaryButton>
-      <PrimaryButton
-        onClick={[Function]}>
-        <FormattedMessage
-          id="SalePage.acceptButton"
-          values={Object {}} />
-      </PrimaryButton>
-    </div>
   </div>
 </withRouter(PageLayout)>
 `;

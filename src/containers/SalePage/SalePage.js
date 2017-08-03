@@ -6,14 +6,7 @@ import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
-import {
-  PrimaryButton,
-  SecondaryButton,
-  NamedRedirect,
-  SaleDetailsPanel,
-  PageLayout,
-  Topbar,
-} from '../../components';
+import { NamedRedirect, SaleDetailsPanel, PageLayout, Topbar } from '../../components';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
@@ -30,6 +23,9 @@ export const SalePageComponent = props => {
     currentUser,
     currentUserHasListings,
     fetchSaleError,
+    acceptSaleError,
+    rejectSaleError,
+    acceptOrRejectInProgress,
     history,
     intl,
     isAuthenticated,
@@ -68,28 +64,22 @@ export const SalePageComponent = props => {
     ? <p className={css.error}><FormattedMessage id="SalePage.fetchSaleFailed" /></p>
     : <p className={css.loading}><FormattedMessage id="SalePage.loadingData" /></p>;
 
-  const panel = isDataAvailable && currentTransaction.id
-    ? <SaleDetailsPanel className={detailsClassName} transaction={currentTransaction} />
-    : loadingOrFailedFetching;
-
-  const isPreauthorizedState = currentTransaction.attributes.state ===
-    propTypes.TX_STATE_PREAUTHORIZED;
-  const actionButtons = isDataAvailable && isPreauthorizedState
-    ? <div className={css.actionButtons}>
-        <SecondaryButton
-          className={css.rejectButton}
-          onClick={() => onRejectSale(currentTransaction.id)}
-        >
-          <FormattedMessage id="SalePage.rejectButton" />
-        </SecondaryButton>
-        <PrimaryButton
-          className={css.acceptButton}
-          onClick={() => onAcceptSale(currentTransaction.id)}
-        >
-          <FormattedMessage id="SalePage.acceptButton" />
-        </PrimaryButton>
-      </div>
+  const acceptError = acceptSaleError
+    ? <p className={css.error}><FormattedMessage id="SalePage.acceptSaleFailed" /></p>
     : null;
+  const rejectError = rejectSaleError
+    ? <p className={css.error}><FormattedMessage id="SalePage.rejectSaleFailed" /></p>
+    : null;
+
+  const panel = isDataAvailable && currentTransaction.id
+    ? <SaleDetailsPanel
+        className={detailsClassName}
+        transaction={currentTransaction}
+        onAcceptSale={onAcceptSale}
+        onRejectSale={onRejectSale}
+        acceptOrRejectInProgress={acceptOrRejectInProgress}
+      />
+    : loadingOrFailedFetching;
 
   return (
     <PageLayout
@@ -109,9 +99,10 @@ export const SalePageComponent = props => {
         onLogout={onLogout}
         onManageDisableScrolling={onManageDisableScrolling}
       />
+      {acceptError}
+      {rejectError}
       <div className={css.root}>
         {panel}
-        {actionButtons}
       </div>
     </PageLayout>
   );
@@ -121,6 +112,8 @@ SalePageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
   fetchSaleError: null,
+  acceptSaleError: null,
+  rejectSaleError: null,
   logoutError: null,
   notificationCount: 0,
   transaction: null,
@@ -134,6 +127,9 @@ SalePageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   fetchSaleError: instanceOf(Error),
+  acceptSaleError: instanceOf(Error),
+  rejectSaleError: instanceOf(Error),
+  acceptOrRejectInProgress: bool.isRequired,
   intl: intlShape.isRequired,
   isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
@@ -157,7 +153,13 @@ SalePageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { fetchSaleError, transactionRef } = state.SalePage;
+  const {
+    fetchSaleError,
+    acceptSaleError,
+    rejectSaleError,
+    acceptOrRejectInProgress,
+    transactionRef,
+  } = state.SalePage;
   const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   const {
     currentUser,
@@ -174,6 +176,9 @@ const mapStateToProps = state => {
     currentUser,
     currentUserHasListings,
     fetchSaleError,
+    acceptSaleError,
+    rejectSaleError,
+    acceptOrRejectInProgress,
     isAuthenticated,
     logoutError,
     notificationCount,

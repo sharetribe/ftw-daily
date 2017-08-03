@@ -17,21 +17,6 @@
   color: var(--failColor);
 }
 
-.actionButtons {
-  display: flex;
-  justify-content: space-between;
-  margin: auto 24px 96px 24px;
-  padding-top: 24px;
-}
-
-.rejectButton {
-  margin-right: 6.5px;
-}
-
-.acceptButton {
-  margin-left: 6.5px;
-}
-
 .tabContent {
   display: none;
 }
