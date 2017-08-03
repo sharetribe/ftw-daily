@@ -1,7 +1,6 @@
 @import '../../marketplace.css';
 
 .root {
-
 }
 
 .container {
@@ -9,9 +8,12 @@
   display: flex;
   flex-direction: column;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     flex-direction: row;
     justify-content: center;
+    max-width: 1156px; /* 1060 + (paddingLeft + paddingRight */
+    margin: 0 auto;
+    padding: 0 48px;
   }
 }
 
@@ -20,7 +22,7 @@
   padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
   background-color: var(--matterColorNegative); /* Loading BG color */
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: none;
   }
 }
@@ -39,6 +41,10 @@
   left: 0;
   right: 0;
   width: 100%;
+
+  @media (--viewportLarge) {
+    border-radius: 2px 2px 0 0;
+  }
 }
 
 .avatarWrapper {
@@ -53,17 +59,22 @@
   display: block;
   width: 61px;
   height: 61px;
+
+  @media (--viewportLarge) {
+    margin-left: 48px;
+  }
 }
 
 .avatarMobile {
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: none;
   }
 }
 
 .orderInfo {
-  @media (--viewportMedium) {
-    max-width: 517px;
+  @media (--viewportLarge) {
+    max-width: 516px;
+    margin-right: 132px;
   }
 }
 
@@ -71,7 +82,12 @@
   margin: 28px 24px 0 24px;
 
   @media (--viewportMedium) {
-    margin-top: 177px;
+    max-width: 80%;
+  }
+
+  @media (--viewportLarge) {
+    max-width: 100%;
+    margin: 177px 0 0 0;
   }
 }
 
@@ -88,8 +104,9 @@
   display: flex;
   margin: 24px 24px 47px 24px;
 
-  @media (--viewportMedium) {
-    margin-top: 27px;
+  @media (--viewportLarge) {
+    margin: 31px 0 0 0;
+    line-height: 32px;
   }
 }
 
@@ -98,7 +115,7 @@
 }
 
 .breakdownMobile {
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: none;
   }
 }
@@ -106,7 +123,8 @@
 .breakdownDesktop {
   display: none;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
+    width: 409px;
     display: block;
     padding-bottom: 55px;
   }
@@ -115,32 +133,31 @@
 .bookingBreakdownContainer {
   margin: 1px 0 40px 0;
 
-  @media (--viewportMedium) {
-    width: 409px;
-    margin-top: 122px;
-    margin-left: 24px;
-    margin-right: 24px;
-    box-shadow: var(--boxShadowBreakdown);
-  }
   @media (--viewportLarge) {
-    margin-left: 131px;
+
+    margin-top: 122px;
+    margin-left: 0;
+    margin-right: 0;
+    background-color: var(--matterColorLight);
+    border: 1px solid var(--matterColorNegative);
+    border-radius: 2px;
   }
 }
 
 .breakdownHeadings {
   display: none;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: block;
-    margin-left: 24px;
-    margin-right: 24px;
+    margin-left: 48px;
+    margin-right: 48px;
   }
 }
 
 .breakdownTitle {
   margin-bottom: 10px;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     margin-top: 13px;
     margin-bottom: 0;
   }
@@ -153,7 +170,7 @@
   margin-top: 0;
   margin-bottom: 0;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -168,13 +185,20 @@
   margin-left: 24px;
   margin-right: 24px;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     margin-top: 38px;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
+    margin-left: 48px;
+    margin-right: 48px;
   }
 }
 
 .receipt {
   margin-left: 24px;
   margin-right: 24px;
+
+  @media (--viewportLarge) {
+    margin-left: 48px;
+    margin-right: 48px;
+  }
 }
