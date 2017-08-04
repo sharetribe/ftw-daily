@@ -10,6 +10,8 @@ import EditListingPage from './EditListingPage/EditListingPage';
 import EditListingPhotosForm from './EditListingPhotosForm/EditListingPhotosForm';
 import EditListingPricingForm from './EditListingPricingForm/EditListingPricingForm';
 import EditProfilePage from './EditProfilePage/EditProfilePage';
+import EmailVerificationPage from './EmailVerificationPage/EmailVerificationPage';
+import EmailVerificationForm from './EmailVerificationForm/EmailVerificationForm';
 import InboxPage from './InboxPage/InboxPage';
 import LandingPage from './LandingPage/LandingPage';
 import ListingPage from './ListingPage/ListingPage';
@@ -45,6 +47,8 @@ export {
   EditListingPhotosForm,
   EditListingPricingForm,
   EditProfilePage,
+  EmailVerificationPage,
+  EmailVerificationForm,
   InboxPage,
   LandingPage,
   ListingPage,

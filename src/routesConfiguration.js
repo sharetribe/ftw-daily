@@ -20,6 +20,7 @@ import {
   SearchPage,
   SecurityPage,
   StyleguidePage,
+  EmailVerificationPage,
 } from './containers';
 
 const RedirectToLandingPage = () => <NamedRedirect name="LandingPage" />;
@@ -318,6 +319,17 @@ const routesConfiguration = [
     exact: true,
     name: 'NotFoundPage',
     component: props => <NotFoundPage {...props} />,
+  },
+
+  // Do not change this path!
+  //
+  // The API expects that the Starter App implements /email_verification endpoint
+  {
+    path: '/email_verification',
+    auth: true,
+    exact: true,
+    name: 'EmailVerificationPage',
+    component: props => <EmailVerificationPage {...props} />,
   },
 ];
 
