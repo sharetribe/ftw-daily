@@ -23,7 +23,7 @@ const DEBOUNCE_WAIT_TIME = 1000;
 
 // Remove all whitespace from the given string
 const cleanedString = str => {
-  return str.replace(/\s/g, '');
+  return str ? str.replace(/\s/g, '') : '';
 };
 
 /**
@@ -211,7 +211,8 @@ class TokenInputFieldComponent extends Component {
   }
   handleRoutingNumberChange(e) {
     const { country, intl } = this.props;
-    const value = e.target.value.trim();
+    const rawValue = e.target.value;
+    const value = cleanedString(rawValue);
     let routingNumberError = null;
 
     // Validate the changed routing number
@@ -227,7 +228,7 @@ class TokenInputFieldComponent extends Component {
     }
 
     this.setState({
-      routingNumber: value,
+      routingNumber: rawValue,
       routingNumberError,
       stripeError: null,
     });
@@ -243,7 +244,8 @@ class TokenInputFieldComponent extends Component {
   }
   handleAccountNumberChange(e) {
     const { country, intl } = this.props;
-    const value = e.target.value.trim();
+    const rawValue = e.target.value;
+    const value = cleanedString(rawValue);
     let accountNumberError = null;
 
     // Validate the changed account number
@@ -259,7 +261,7 @@ class TokenInputFieldComponent extends Component {
     }
 
     this.setState({
-      accountNumber: value,
+      accountNumber: rawValue,
       accountNumberError,
       stripeError: null,
     });
