@@ -22,7 +22,6 @@ const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const enforceSsl = require('express-enforces-ssl');
 const path = require('path');
-const qs = require('qs');
 const sharetribeSdk = require('sharetribe-sdk');
 const Decimal = require('decimal.js');
 const auth = require('./auth');
@@ -80,7 +79,6 @@ app.use(cookieParser());
 
 app.get('*', (req, res) => {
   const context = {};
-  const filters = qs.parse(req.query);
 
   const sdk = sharetribeSdk.createInstance({
     clientId: CLIENT_ID,
