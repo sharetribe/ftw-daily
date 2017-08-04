@@ -21,6 +21,11 @@ const BLUR_TIMEOUT = 100;
 
 const DEBOUNCE_WAIT_TIME = 1000;
 
+// Remove all whitespace from the given string
+const cleanedString = str => {
+  return str.replace(/\s/g, '');
+};
+
 /**
  * Create a single-use token from the given bank account data
  *
@@ -173,10 +178,13 @@ class TokenInputFieldComponent extends Component {
     const accountData = {
       country: this.props.country,
       currency: this.props.currency,
-      account_number: accountNumber,
+
+      // Stripe fails if there are spaces within the number, this is
+      // why we have to clean it up first.
+      account_number: cleanedString(accountNumber),
     };
     if (routingNumberRequired) {
-      accountData.routing_number = routingNumber;
+      accountData.routing_number = cleanedString(routingNumber);
     }
     createToken(accountData)
       .then(token => {
