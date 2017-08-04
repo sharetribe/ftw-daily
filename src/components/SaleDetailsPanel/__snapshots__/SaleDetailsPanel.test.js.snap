@@ -63,12 +63,14 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
       </p>
       <div>
         <SecondaryButton
+          disabled={false}
           onClick={[Function]}>
           <FormattedMessage
             id="SalePage.rejectButton"
             values={Object {}} />
         </SecondaryButton>
         <PrimaryButton
+          disabled={false}
           onClick={[Function]}>
           <FormattedMessage
             id="SalePage.acceptButton"

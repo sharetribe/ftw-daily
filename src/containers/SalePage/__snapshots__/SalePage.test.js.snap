@@ -39,6 +39,7 @@ exports[`SalePage matches snapshot 1`] = `
     onManageDisableScrolling={[Function]} />
   <div>
     <SaleDetailsPanel
+      acceptOrRejectInProgress={false}
       className="undefined"
       lastTransition={null}
       onAcceptSale={[Function]}
