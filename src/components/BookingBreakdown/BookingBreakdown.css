@@ -27,6 +27,7 @@
 }
 
 .itemLabel {
+  flex: 1;
   margin-top: 1px; /* align with baseline */
 }
 
