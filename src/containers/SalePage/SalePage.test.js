@@ -35,6 +35,7 @@ describe('SalePage', () => {
         push: () => console.log('HistoryPush called'),
       },
       authInProgress: false,
+      acceptOrRejectInProgress: false,
       currentUserHasListings: false,
       isAuthenticated: false,
       onLogout: noop,

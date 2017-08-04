@@ -6,10 +6,12 @@ import { renderShallow } from '../../util/test-helpers';
 import { BookingBreakdown } from '../../components';
 import SaleDetailsPanel from './SaleDetailsPanel.js';
 
+const noop = () => null;
+
 describe('SaleDetailsPanel', () => {
   it('matches snapshot', () => {
     const { Money } = types;
-    const tx = createTransaction({
+    const transaction = createTransaction({
       id: 'sale-tx',
       state: 'state/preauthorized',
       total: new Money(16500, 'USD'),
@@ -23,12 +25,18 @@ describe('SaleDetailsPanel', () => {
       customer: createUser('customer1'),
       lastTransitionedAt: new Date(Date.UTC(2017, 5, 10)),
     });
-    const tree = renderShallow(<SaleDetailsPanel transaction={tx} />);
+    const props = {
+      transaction,
+      onAcceptSale: noop,
+      onRejectSale: noop,
+      acceptOrRejectInProgress: false,
+    };
+    const tree = renderShallow(<SaleDetailsPanel {...props} />);
     expect(tree).toMatchSnapshot();
   });
   it('renders correct total price', () => {
     const { Money } = types;
-    const tx = createTransaction({
+    const transaction = createTransaction({
       id: 'sale-tx',
       state: 'state/preauthorized',
       total: new Money(16500, 'USD'),
@@ -42,7 +50,13 @@ describe('SaleDetailsPanel', () => {
       customer: createUser('customer1'),
       lastTransitionedAt: new Date(Date.UTC(2017, 5, 10)),
     });
-    const panel = shallow(<SaleDetailsPanel transaction={tx} />);
+    const props = {
+      transaction,
+      onAcceptSale: noop,
+      onRejectSale: noop,
+      acceptOrRejectInProgress: false,
+    };
+    const panel = shallow(<SaleDetailsPanel {...props} />);
     const breakdownProps = panel.find(BookingBreakdown).props();
 
     // Total price for the provider should be transaction total minus the commission.

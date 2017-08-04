@@ -257,7 +257,7 @@ SaleDetailsPanel.propTypes = {
   transaction: propTypes.transaction.isRequired,
   onAcceptSale: func.isRequired,
   onRejectSale: func.isRequired,
-  acceptOrRejectInProgress: bool,
+  acceptOrRejectInProgress: bool.isRequired,
 };
 
 export default SaleDetailsPanel;
