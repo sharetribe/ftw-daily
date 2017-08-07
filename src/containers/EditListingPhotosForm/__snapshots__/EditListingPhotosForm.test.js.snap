@@ -5,7 +5,8 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
   <AddImages
     className={null}
     images={Array []}
-    onSortEnd={[Function]}>
+    onSortEnd={[Function]}
+    thumbnailClassName={null}>
     <Field
       accept="image/*"
       component={[Function]}

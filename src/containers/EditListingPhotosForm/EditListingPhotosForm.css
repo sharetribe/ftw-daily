@@ -1,5 +1,9 @@
 @import '../../marketplace.css';
 
+:root {
+  --imageWidth: calc(50% - 12px);
+}
+
 .root {
   width: 100%;
   height: auto;
@@ -11,14 +15,27 @@
 
 .imagesField {
   flex-shrink: 0;
-  margin: 1px 0 11px 0;
+  margin: 0;
+}
+
+.thumbnail {
+  margin: 24px 0 0 0;
+
+  @media (--viewportMedium) {
+    width: var(--imageWidth);
+    margin: 0 24px 24px 0;
+
+    &:nth-child(even) {
+      margin: 0 0 24px 0;
+    }
+  }
 }
 
 .addImageWrapper {
   float: left;
   position: relative;
   width: 100%;
-  margin: 5px 0;
+  margin: 24px 0 0 0;
   overflow: hidden;
 
   &::after {
@@ -27,6 +44,11 @@
     display: block;
     height: 0;
     clear: both;
+  }
+
+  @media (--viewportMedium) {
+    width: var(--imageWidth);
+    margin: 0 0 24px 0;
   }
 }
 
@@ -104,8 +126,13 @@
 .tip {
   flex-shrink: 0;
   color: var(--matterColorAnti);
-  margin-top: 0;
+  margin-top: 24px;
   margin-bottom: 60px;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .error {
@@ -116,4 +143,10 @@
   flex-shrink: 0;
   margin-top: auto;
   margin-bottom: 24px;
+
+  @media (--viewportMedium) {
+    display: inline-block;
+    width: 241px;
+    margin-top: 100px;
+  }
 }
