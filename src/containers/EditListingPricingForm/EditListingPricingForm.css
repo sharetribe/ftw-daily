@@ -1,3 +1,5 @@
+@import '../../marketplace.css';
+
 .root {
   width: 100%;
   height: auto;
@@ -15,4 +17,10 @@
 .submitButton {
   margin-top: auto;
   margin-bottom: 24px;
+
+  @media (--viewportMedium) {
+    display: inline-block;
+    width: 241px;
+    margin-top: 100px;
+  }
 }

@@ -39,38 +39,40 @@ class Thumbnail extends Component {
   }
 
   render() {
-    const { file, id, imageId } = this.props;
+    const { className, file, id, imageId } = this.props;
     // While image is uploading we show overlay on top of thumbnail
     const uploadingOverlay = !imageId
       ? <div className={css.thumbnailLoading}><FormattedMessage id="AddImages.upload" /></div>
       : null;
+    const classes = classNames(css.thumbnail, className);
     return (
       <Promised
         key={id}
         promise={this.state.promisedImage}
         renderFulfilled={dataURL => {
           return (
-            <li className={css.thumbnail}>
+            <div className={classes}>
               <div className={css.aspectRatioWrapper}>
                 <img src={dataURL} alt={file.name} className={css.thumbnailImage} />
               </div>
               {uploadingOverlay}
-            </li>
+            </div>
           );
         }}
         renderRejected={() => (
-          <li className={css.thumbnail}><FormattedMessage id="AddImages.couldNotReadFile" /></li>
+          <div className={css.thumbnail}><FormattedMessage id="AddImages.couldNotReadFile" /></div>
         )}
       />
     );
   }
 }
 
-Thumbnail.defaultProps = { imageId: null };
+Thumbnail.defaultProps = { className: null, imageId: null };
 
 const { any, array, func, node, string } = PropTypes;
 
 Thumbnail.propTypes = {
+  className: string,
   file: any.isRequired,
   id: string.isRequired,
   imageId: uuid,
@@ -93,15 +95,17 @@ const SortableImage = Thumbnail;
 
 // Create container where there are sortable images and passed children like "Add image" input etc.
 const SortableImages = SortableContainer(props => {
-  const { children, className, images } = props;
+  const { children, className, thumbnailClassName, images } = props;
   const classes = classNames(css.root, className);
   return (
-    <ol className={classes}>
+    <div className={classes}>
       {images.map((image, index) => {
-        return <SortableImage {...image} index={index} key={image.id} />;
+        return (
+          <SortableImage {...image} index={index} key={image.id} className={thumbnailClassName} />
+        );
       })}
       {children}
-    </ol>
+    </div>
   );
 });
 
@@ -112,12 +116,13 @@ const AddImages = props => {
   return <SortableImages axis="xy" {...props} />;
 };
 
-AddImages.defaultProps = { className: null, images: [] };
+AddImages.defaultProps = { className: null, thumbnailClassName: null, images: [] };
 
 AddImages.propTypes = {
   images: array,
   children: node.isRequired,
   className: string,
+  thumbnailClassName: string,
   onSortEnd: func.isRequired,
 };
 

@@ -22,7 +22,7 @@ import { TabNav } from '../../components';
 import css from './Tabs.css';
 
 const Tabs = props => {
-  const { children, className, rootClassName, navClassName } = props;
+  const { children, className, rootClassName, navRootClassName, tabRootClassName } = props;
   const rootClasses = rootClassName || css.root;
   const classes = classNames(rootClasses, className);
 
@@ -56,7 +56,11 @@ const Tabs = props => {
 
   return (
     <div className={classes}>
-      <TabNav className={navClassName} tabs={tabNavTabs} />
+      <TabNav
+        rootClassName={navRootClassName}
+        tabs={tabNavTabs}
+        tabRootClassName={tabRootClassName}
+      />
       {selectedTabPanel}
     </div>
   );
@@ -67,14 +71,16 @@ const { node, string } = PropTypes;
 Tabs.defaultProps = {
   className: null,
   rootClassName: null,
-  navClassName: null,
+  navRootClassName: null,
+  tabRootClassName: null,
 };
 
 Tabs.propTypes = {
   children: node.isRequired,
   className: string,
   rootClassName: string,
-  navClassName: string,
+  navRootClassName: string,
+  tabRootClassName: string,
 };
 
 export default Tabs;

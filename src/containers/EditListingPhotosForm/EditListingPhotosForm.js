@@ -131,7 +131,12 @@ export class EditListingPhotosFormComponent extends Component {
     return (
       <form className={classes} onSubmit={handleSubmit}>
 
-        <AddImages className={css.imagesField} images={images} onSortEnd={this.onSortEnd}>
+        <AddImages
+          className={css.imagesField}
+          images={images}
+          onSortEnd={this.onSortEnd}
+          thumbnailClassName={css.thumbnail}
+        >
           <Field
             id="EditListingPhotosForm.AddImages"
             accept={ACCEPT_IMAGES}

@@ -1,3 +1,5 @@
+@import '../../marketplace.css';
+
 .root {
   flex-grow: 1;
   width: 100%;
@@ -13,4 +15,8 @@
 
 .title {
   margin-bottom: 19px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 21px;
+  }
 }

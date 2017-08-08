@@ -44,7 +44,12 @@ const TabNav = props => {
   );
 };
 
-TabNav.defaultProps = { className: null, rootClassName: null, tabRootClassName: null };
+TabNav.defaultProps = {
+  className: null,
+  rootClassName: null,
+  tabRootClassName: null,
+  tabClassName: null,
+};
 
 TabNav.propTypes = {
   className: string,
