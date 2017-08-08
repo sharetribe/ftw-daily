@@ -61,9 +61,8 @@ export const verify = verificationToken =>
 
     // Note that the thunk does not reject when the verification fails, it
     // just dispatches the login error action.
-    const verifyParams = { verificationToken: `${verificationToken}` };
     return sdk.users
-      .verifyEmail(verifyParams)
+      .verifyEmail({ verificationToken })
       .then(() => dispatch(verificationSuccess()))
       .then(() => dispatch(fetchCurrentUser()))
       .catch(e => dispatch(verificationError(e)));

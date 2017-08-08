@@ -11,6 +11,29 @@ import { verify, verificationInProgress } from '../../ducks/EmailVerification.du
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { parse } from '../../util/urlHelpers';
 import css from './EmailVerificationPage.css';
+
+/**
+  Parse verification token from URL
+
+  Returns stringified token, if the token is provided.
+
+  Returns `null` if verification token is not provided.
+
+  Please note that we need to explicitely stringify the token, because
+  the unwanted result of the `parse` method is that it automatically
+  parses the token to number.
+*/
+const parseVerificationToken = location => {
+  const urlParams = parse(location.search);
+  const verificationToken = urlParams.t;
+
+  if (verificationToken) {
+    return `${verificationToken}`;
+  }
+
+  return null;
+};
+
 export const EmailVerificationPageComponent = props => {
   const {
     authInfoError,
@@ -25,16 +48,14 @@ export const EmailVerificationPageComponent = props => {
     onManageDisableScrolling,
     scrollingDisabled,
     submitVerification,
-    verifInProgress,
+    emailVerificationInProgress,
     verificationError,
   } = props;
   const title = intl.formatMessage({
     id: 'EmailVerificationPage.title',
   });
 
-  const urlParams = parse(location.search);
-
-  const initialValues = { verificationToken: urlParams.t };
+  const initialValues = { verificationToken: parseVerificationToken(location) };
 
   return (
     <PageLayout
@@ -62,7 +83,7 @@ export const EmailVerificationPageComponent = props => {
                 initialValues={initialValues}
                 onSubmit={submitVerification}
                 currentUser={currentUser}
-                inProgress={verifInProgress}
+                inProgress={emailVerificationInProgress}
                 verificationError={verificationError}
               />
             : <FormattedMessage id="EmailVerificationPage.loadingUserInformation" />}
@@ -80,7 +101,9 @@ EmailVerificationPageComponent.defaultProps = {
   notificationCount: 0,
   verificationError: null,
 };
+
 const { bool, func, instanceOf, number } = PropTypes;
+
 EmailVerificationPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
@@ -93,10 +116,11 @@ EmailVerificationPageComponent.propTypes = {
   onManageDisableScrolling: func.isRequired,
   scrollingDisabled: bool.isRequired,
   submitVerification: func.isRequired,
-  verifInProgress: bool.isRequired,
+  emailVerificationInProgress: bool.isRequired,
   verificationError: instanceOf(Error),
   intl: intlShape.isRequired,
 };
+
 const mapStateToProps = state => {
   const {
     authInfoError,
@@ -114,7 +138,7 @@ const mapStateToProps = state => {
   return {
     authInfoError,
     authInProgress: authenticationInProgress(state),
-    verifInProgress: verificationInProgress(state),
+    emailVerificationInProgress: verificationInProgress(state),
     verificationError,
     currentUser,
     currentUserHasListings,
