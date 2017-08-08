@@ -11,5 +11,15 @@ import LocationFilter from './LocationFilter.duck';
 import UI from './UI.duck';
 import marketplaceData from './marketplaceData.duck';
 import user from './user.duck';
+import EmailVerification from './EmailVerification.duck';
 
-export { form, Auth, FlashNotification, LocationFilter, UI, marketplaceData, user };
+export {
+  form,
+  Auth,
+  FlashNotification,
+  LocationFilter,
+  UI,
+  marketplaceData,
+  user,
+  EmailVerification,
+};
