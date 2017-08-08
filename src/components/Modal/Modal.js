@@ -15,21 +15,36 @@ import { Button, CloseIcon } from '../../components';
 
 import css from './Modal.css';
 
+const KEY_CODE_ESCAPE = 27;
+
 export class ModalComponent extends Component {
   constructor(props) {
     super(props);
+    this.handleBodyKeyUp = this.handleBodyKeyUp.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
   componentDidMount() {
     const { id, isOpen, onManageDisableScrolling } = this.props;
     onManageDisableScrolling(id, isOpen);
+    document.body.addEventListener('keyup', this.handleBodyKeyUp);
   }
 
   componentWillReceiveProps(nextProps) {
     const { id, isOpen, onManageDisableScrolling } = this.props;
     if (nextProps.isOpen !== isOpen) {
       onManageDisableScrolling(id, nextProps.isOpen);
+    }
+  }
+
+  componentWillUnmount() {
+    document.body.removeEventListener('keyup', this.handleBodyKeyUp);
+  }
+
+  handleBodyKeyUp(event) {
+    const { isOpen } = this.props;
+    if (event.keyCode === KEY_CODE_ESCAPE && isOpen) {
+      this.handleClose(event);
     }
   }
 
@@ -65,9 +80,13 @@ export class ModalComponent extends Component {
     const classes = classNames(modalClass, className);
     return (
       <div className={classes}>
-        {closeBtn}
-        <div className={classNames(css.content, contentClassName)}>
-          {children}
+        <div className={css.scrollLayer}>
+          <div className={css.container}>
+            {closeBtn}
+            <div className={classNames(css.content, contentClassName)}>
+              {children}
+            </div>
+          </div>
         </div>
       </div>
     );
