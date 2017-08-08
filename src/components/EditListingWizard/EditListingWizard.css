@@ -1,5 +1,7 @@
 @import '../../marketplace.css';
 
+@custom-media --viewportPhotosLarger (min-width: 1200px);
+
 .root {
   /* Layout */
   width: 100%;
@@ -31,7 +33,7 @@
     flex-direction: column;
     box-shadow: none;
   }
-  @media (--viewportLarger) {
+  @media (--viewportPhotosLarger) {
     padding: 109px 93px 93px 15vw;
   }
   @media (--viewportXLarge) {
@@ -61,7 +63,7 @@
     border-left-style: solid;
     border-left-color: var(--matterColorNegative);
   }
-  @media (--viewportLarger) {
+  @media (--viewportPhotosLarger) {
     padding: 113px 15vw 82px 82px;
   }
   @media (--viewportXLarge) {
