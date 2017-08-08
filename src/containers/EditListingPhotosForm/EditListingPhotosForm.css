@@ -1,7 +1,7 @@
 @import '../../marketplace.css';
 
 :root {
-  --imageWidth: calc(50% - 12px);
+  --imageWidthDesktop: calc(50% - 12px);
 }
 
 .root {
@@ -22,7 +22,7 @@
   margin: 24px 0 0 0;
 
   @media (--viewportMedium) {
-    width: var(--imageWidth);
+    width: var(--imageWidthDesktop);
     margin: 0 24px 24px 0;
 
     &:nth-child(even) {
@@ -47,7 +47,7 @@
   }
 
   @media (--viewportMedium) {
-    width: var(--imageWidth);
+    width: var(--imageWidthDesktop);
     margin: 0 0 24px 0;
   }
 }
