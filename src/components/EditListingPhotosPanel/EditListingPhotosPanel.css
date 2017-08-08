@@ -1,3 +1,5 @@
+@import '../../marketplace.css';
+
 .root {
   flex-grow: 1;
   width: 100%;
@@ -23,6 +25,14 @@
   margin-top: 89px;
   margin-bottom: 36px;
   padding: 0 24px;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+
+    & h1 {
+      margin-top: 0;
+    }
+  }
 }
 
 .title {
