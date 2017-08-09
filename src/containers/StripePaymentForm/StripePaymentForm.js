@@ -91,6 +91,15 @@ class StripePaymentForm extends Component {
     this.card = elements.create('card', { style: cardStyles });
     this.card.mount(this.cardContainer);
     this.card.addEventListener('change', this.handleCardValueChange);
+
+    // EventListener is the only way to simulate breakpoints with Stripe.
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 1024) {
+        this.card.update({ style: { base: { fontSize: '18px', lineHeight: '24px' } } });
+      } else {
+        this.card.update({ style: { base: { fontSize: '20px', lineHeight: '32px' } } });
+      }
+    });
   }
   componentWillUnmount() {
     if (this.card) {

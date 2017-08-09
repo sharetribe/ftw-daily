@@ -7,70 +7,178 @@ exports[`CheckoutPage matches snapshot 1`] = `
     <withFlattenedRoutes(withRouter(NamedLink))
       name="LandingPage">
       <LogoIcon
+        alt="Logo"
         className={null}
+        isMobile={true}
         title="CheckoutPage.goToLandingPage" />
+      <LogoIcon
+        alt="CheckoutPage.goToLandingPage"
+        className={null}
+        isMobile={false} />
     </withFlattenedRoutes(withRouter(NamedLink))>
   </div>
   <div>
-    <h1>
-      CheckoutPage.title
-    </h1>
     <div>
-      <span>
-        <FormattedMessage
-          id="ListingPage.hostedBy"
-          values={
+      <ResponsiveImage
+        alt="listing1 title"
+        className={null}
+        image={null}
+        nameSet={
+          Array [
             Object {
-              "name": "author first name",
-            }
-          } />
-      </span>
+              "name": "landscape-crop",
+              "size": "400w",
+            },
+            Object {
+              "name": "landscape-crop2x",
+              "size": "800w",
+            },
+          ]
+        }
+        rootClassName={null}
+        sizes="100vw" />
     </div>
-  </div>
-  <div>
-    <h3>
-      <FormattedMessage
-        id="CheckoutPage.priceBreakdownTitle"
-        values={Object {}} />
-    </h3>
-    <BookingBreakdown
-      bookingEnd={2017-04-16T00:00:00.000Z}
-      bookingStart={2017-04-14T00:00:00.000Z}
-      lineItems={
-        Array [
-          Object {
-            "code": "line-item/night",
-            "lineTotal": Money {
+    <div
+      className="">
+      <AvatarMedium
+        firstName="author first name"
+        lastName="author last name" />
+    </div>
+    <div>
+      <div>
+        <h1>
+          CheckoutPage.title
+        </h1>
+        <div>
+          <span>
+            <FormattedMessage
+              id="ListingPage.hostedBy"
+              values={
+                Object {
+                  "name": "author first name",
+                }
+              } />
+          </span>
+        </div>
+      </div>
+      <div>
+        <h3>
+          <FormattedMessage
+            id="CheckoutPage.priceBreakdownTitle"
+            values={Object {}} />
+        </h3>
+        <BookingBreakdown
+          bookingEnd={2017-04-16T00:00:00.000Z}
+          bookingStart={2017-04-14T00:00:00.000Z}
+          lineItems={
+            Array [
+              Object {
+                "code": "line-item/night",
+                "lineTotal": Money {
+                  "amount": 11000,
+                  "currency": "USD",
+                },
+                "quantity": "2",
+                "unitPrice": Money {
+                  "amount": 5500,
+                  "currency": "USD",
+                },
+              },
+            ]
+          }
+          payinTotal={
+            Money {
               "amount": 11000,
               "currency": "USD",
+            }
+          }
+          userRole="customer" />
+      </div>
+      <section>
+        <h3>
+          <FormattedMessage
+            id="CheckoutPage.paymentTitle"
+            values={Object {}} />
+        </h3>
+        <InjectIntl(StripePaymentForm)
+          disableSubmit={false}
+          formId="CheckoutPagePaymentForm"
+          onSubmit={[Function]}
+          paymentInfo="CheckoutPage.paymentInfo" />
+      </section>
+    </div>
+    <div>
+      <div>
+        <ResponsiveImage
+          alt="listing1 title"
+          className={null}
+          image={null}
+          nameSet={
+            Array [
+              Object {
+                "name": "landscape-crop",
+                "size": "400w",
+              },
+              Object {
+                "name": "landscape-crop2x",
+                "size": "800w",
+              },
+            ]
+          }
+          rootClassName={null}
+          sizes="100%" />
+      </div>
+      <div>
+        <AvatarMedium
+          firstName="author first name"
+          lastName="author last name" />
+      </div>
+      <div>
+        <h2>
+          listing1 title
+        </h2>
+        <p>
+          <FormattedMessage
+            id="CheckoutPage.hostedBy"
+            values={
+              Object {
+                "name": "author first name",
+              }
+            } />
+        </p>
+      </div>
+      <h3>
+        <FormattedMessage
+          id="CheckoutPage.priceBreakdownTitle"
+          values={Object {}} />
+      </h3>
+      <BookingBreakdown
+        bookingEnd={2017-04-16T00:00:00.000Z}
+        bookingStart={2017-04-14T00:00:00.000Z}
+        lineItems={
+          Array [
+            Object {
+              "code": "line-item/night",
+              "lineTotal": Money {
+                "amount": 11000,
+                "currency": "USD",
+              },
+              "quantity": "2",
+              "unitPrice": Money {
+                "amount": 5500,
+                "currency": "USD",
+              },
             },
-            "quantity": "2",
-            "unitPrice": Money {
-              "amount": 5500,
-              "currency": "USD",
-            },
-          },
-        ]
-      }
-      payinTotal={
-        Money {
-          "amount": 11000,
-          "currency": "USD",
+          ]
         }
-      }
-      userRole="customer" />
+        payinTotal={
+          Money {
+            "amount": 11000,
+            "currency": "USD",
+          }
+        }
+        userRole="customer" />
+    </div>
   </div>
-  <section>
-    <h3>
-      <FormattedMessage
-        id="CheckoutPage.paymentTitle"
-        values={Object {}} />
-    </h3>
-    <InjectIntl(StripePaymentForm)
-      disableSubmit={false}
-      formId="CheckoutPagePaymentForm"
-      onSubmit={[Function]}
-      paymentInfo="CheckoutPage.paymentInfo" />
-  </section>
 </withRouter(PageLayout)>
 `;

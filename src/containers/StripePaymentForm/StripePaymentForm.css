@@ -18,6 +18,16 @@
 
   /* Border */
   border-bottom-color: var(--attentionColor);
+
+  @media (--viewportMedium) {
+    height: 35px;
+    margin-bottom: 24px;
+  }
+  @media (--viewportLarge) {
+    height: 42px;
+    padding: 6px 0 14px 0;
+    margin-bottom: 0;
+  }
 }
 
 .cardSuccess {
@@ -30,6 +40,10 @@
 
 .submitContainer {
   margin-top: auto;
+
+  @media (--viewportLarge) {
+    margin-top: 132px;
+  }
 }
 
 .paymentInfo {
@@ -37,8 +51,18 @@
   color: var(--matterColorAnti);
   text-align: center;
   padding: 0 42px;
+
+  @media (--viewportLarge) {
+    /* TODO this is ugly overwrite to fix unconsistent font styles */
+    font-size: 14px;
+    padding: 0;
+  }
 }
 
 .submitButton {
   margin-top: 21px;
+
+  @media (--viewportLarge) {
+    margin-top: 18px;
+  }
 }

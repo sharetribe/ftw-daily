@@ -3,9 +3,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
-import { reduce } from 'lodash';
-import moment from 'moment';
 import Decimal from 'decimal.js';
+import classNames from 'classnames';
 import config from '../../config';
 import { types } from '../../util/sdkLoader';
 import { pathByRouteName } from '../../util/routes';
@@ -14,10 +13,18 @@ import { ensureListing, ensureUser } from '../../util/data';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { nightsBetween } from '../../util/dates';
 import { convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
-import { BookingBreakdown, NamedLink, NamedRedirect, PageLayout } from '../../components';
+import {
+  AvatarMedium,
+  BookingBreakdown,
+  NamedLink,
+  NamedRedirect,
+  PageLayout,
+  ResponsiveImage,
+} from '../../components';
 import { StripePaymentForm } from '../../containers';
 import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
 
+import { storeData, storedData } from './CheckoutPageSessionHelpers';
 import LogoIcon from './LogoIcon';
 import css from './CheckoutPage.css';
 
@@ -46,7 +53,7 @@ const breakdown = (bookingStart, bookingEnd, unitPrice) => {
 
   return (
     <BookingBreakdown
-      className={css.receipt}
+      className={css.bookingBreakdown}
       bookingStart={bookingStart}
       bookingEnd={bookingEnd}
       userRole="customer"
@@ -63,101 +70,13 @@ const breakdown = (bookingStart, bookingEnd, unitPrice) => {
   );
 };
 
-// Validate that given 'obj' has all the keys of defined by validPropTypes parameter
-// and values must pass related test-value-format function.
-const validateProperties = (obj, validPropTypes) => {
-  return reduce(
-    Object.entries(validPropTypes),
-    (acc, [prop, fn]) => {
-      if (Object.prototype.hasOwnProperty.call(obj, prop) && fn(obj[prop])) {
-        return acc;
-      }
-      return false;
-    },
-    true
-  );
-};
-
-// Validate content of booking dates object received from SessionStore
-const isValidBookingDates = bookingDates => {
-  const props = {
-    bookingStart: d => d instanceof Date,
-    bookingEnd: d => d instanceof Date,
-  };
-  return validateProperties(bookingDates, props);
-};
-
-// Validate content of listing object received from SessionStore.
-// Currently only id & attributes.price are needed.
-const isValidListing = listing => {
-  const props = {
-    id: id => id instanceof types.UUID,
-    attributes: v => {
-      return typeof v === 'object' && v.price instanceof types.Money;
-    },
-  };
-  return validateProperties(listing, props);
-};
-
-// Stores given bookingDates and listing to sessionStorage
-const storeData = (bookingDates, listing) => {
-  if (window && window.sessionStorage && listing && bookingDates) {
-    // TODO: How should we deal with Dates when data is serialized?
-    // Hard coded serializable date objects atm.
-    /* eslint-disable no-underscore-dangle */
-    const data = {
-      bookingDates: {
-        bookingStart: { date: bookingDates.bookingStart, _serializedType: 'SerializableDate' },
-        bookingEnd: { date: bookingDates.bookingEnd, _serializedType: 'SerializableDate' },
-      },
-      listing,
-      storedAt: { date: new Date(), _serializedType: 'SerializableDate' },
-    };
-    /* eslint-enable no-underscore-dangle */
-
-    const storableData = JSON.stringify(data, types.replacer);
-    window.sessionStorage.setItem(STORAGE_KEY, storableData);
-  }
-};
-
-// Get stored data
-const storedData = () => {
-  if (window && window.sessionStorage) {
-    const checkoutPageData = window.sessionStorage.getItem(STORAGE_KEY);
-
-    // TODO How should we deal with Dates when data is serialized?
-    // Dates are expected to be in format: { date: new Date(), _serializedType: 'SerializableDate' }
-    const reviver = (k, v) => {
-      // eslint-disable-next-line no-underscore-dangle
-      if (typeof v === 'object' && v._serializedType === 'SerializableDate') {
-        return new Date(v.date);
-      }
-      return types.reviver(k, v);
-    };
-
-    const { bookingDates, listing, storedAt } = checkoutPageData
-      ? JSON.parse(checkoutPageData, reviver)
-      : {};
-
-    // If sessionStore contains freshly saved data (max 1 day old), use it
-    const isFreshlySaved = storedAt
-      ? moment(storedAt).isAfter(moment().subtract(1, 'days'))
-      : false;
-
-    if (isFreshlySaved && isValidBookingDates(bookingDates) && isValidListing(listing)) {
-      return { bookingDates, listing };
-    }
-  }
-  return {};
-};
-
 export class CheckoutPageComponent extends Component {
   constructor(props) {
     super(props);
     const { bookingDates, listing } = props;
 
     // Store received data
-    storeData(bookingDates, listing);
+    storeData(bookingDates, listing, STORAGE_KEY);
 
     this.state = { submitting: false };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -170,7 +89,7 @@ export class CheckoutPageComponent extends Component {
     this.setState({ submitting: true });
     const { bookingDates, flattenedRoutes, history, sendOrderRequest, listing } = this.props;
     // Get page data from passed-in props or from storage
-    const pageData = bookingDates && listing ? { bookingDates, listing } : storedData();
+    const pageData = bookingDates && listing ? { bookingDates, listing } : storedData(STORAGE_KEY);
     const { bookingStart, bookingEnd } = pageData.bookingDates || {};
     const requestParams = { listingId: pageData.listing.id, cardToken, bookingStart, bookingEnd };
 
@@ -201,10 +120,13 @@ export class CheckoutPageComponent extends Component {
     } = this.props;
 
     // Get page data from passed-in props or from storage
-    const pageData = bookingDates && listing ? { bookingDates, listing } : storedData();
+    const pageData = bookingDates && listing ? { bookingDates, listing } : storedData(STORAGE_KEY);
     const { bookingStart, bookingEnd } = pageData.bookingDates || {};
     const currentListing = ensureListing(pageData.listing);
     const currentAuthor = ensureUser(currentListing.author);
+    const authorProfile = currentAuthor.attributes.profile;
+    const authorFirstName = authorProfile.firstName;
+    const authorLastName = authorProfile.lastName;
 
     const isOwnListing = currentListing.id &&
       currentUser &&
@@ -244,16 +166,10 @@ export class CheckoutPageComponent extends Component {
 
     const listingTitle = currentListing.attributes.title;
     const title = intl.formatMessage({ id: 'CheckoutPage.title' }, { listingTitle });
-    const authorFirstName = currentAuthor.attributes.profile.firstName;
 
-    const priceBreakdown = (
-      <div className={css.priceBreakdownContainer}>
-        <h3 className={css.priceBreakdownTitle}>
-          <FormattedMessage id="CheckoutPage.priceBreakdownTitle" />
-        </h3>
-        {breakdown(bookingStart, bookingEnd, unitPrice)}
-      </div>
-    );
+    const firstImage = currentListing.images && currentListing.images.length > 0
+      ? currentListing.images[0]
+      : null;
 
     const errorMessage = initiateOrderError
       ? <p className={css.orderError}>
@@ -261,43 +177,104 @@ export class CheckoutPageComponent extends Component {
         </p>
       : null;
 
-    const topbar = (
-      <div className={css.topbar}>
-        <NamedLink className={css.home} name="LandingPage">
-          <LogoIcon title={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })} />
-        </NamedLink>
-      </div>
-    );
-
     return (
       <PageLayout authInfoError={authInfoError} logoutError={logoutError} title={title}>
-        {topbar}
-        <div className={css.heading}>
-          <h1 className={css.title}>{title}</h1>
-          <div className={css.author}>
-            <span className={css.authorName}>
-              <FormattedMessage id="ListingPage.hostedBy" values={{ name: authorFirstName }} />
-            </span>
-          </div>
+        <div className={css.topbar}>
+          <NamedLink className={css.home} name="LandingPage">
+            <LogoIcon
+              className={css.logoMobile}
+              title={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })}
+            />
+            <LogoIcon
+              className={css.logoDesktop}
+              alt={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })}
+              isMobile={false}
+            />
+          </NamedLink>
         </div>
 
-        {priceBreakdown}
+        <div className={css.contentContainer}>
+          <div className={css.aspectWrapper}>
+            <ResponsiveImage
+              rootClassName={css.rootForImage}
+              alt={listingTitle}
+              image={firstImage}
+              nameSet={[
+                { name: 'landscape-crop', size: '400w' },
+                { name: 'landscape-crop2x', size: '800w' },
+              ]}
+              sizes="100vw"
+            />
+          </div>
+          <div className={classNames(css.avatarWrapper, css.avatarMobile)}>
+            <AvatarMedium firstName={authorFirstName} lastName={authorLastName} />
+          </div>
+          <div className={css.bookListingContainer}>
+            <div className={css.heading}>
+              <h1 className={css.title}>{title}</h1>
+              <div className={css.author}>
+                <span className={css.authorName}>
+                  <FormattedMessage id="ListingPage.hostedBy" values={{ name: authorFirstName }} />
+                </span>
+              </div>
+            </div>
 
-        <section className={css.paymentContainer}>
-          <h3 className={css.paymentTitle}>
-            <FormattedMessage id="CheckoutPage.paymentTitle" />
-          </h3>
-          {errorMessage}
-          {showPaymentForm
-            ? <StripePaymentForm
-                className={css.paymentForm}
-                onSubmit={this.handleSubmit}
-                disableSubmit={this.state.submitting}
-                formId="CheckoutPagePaymentForm"
-                paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo' })}
+            <div className={css.priceBreakdownContainer}>
+              <h3 className={css.priceBreakdownTitle}>
+                <FormattedMessage id="CheckoutPage.priceBreakdownTitle" />
+              </h3>
+              {breakdown(bookingStart, bookingEnd, unitPrice)}
+            </div>
+
+            <section className={css.paymentContainer}>
+              <h3 className={css.paymentTitle}>
+                <FormattedMessage id="CheckoutPage.paymentTitle" />
+              </h3>
+              {errorMessage}
+              {showPaymentForm
+                ? <StripePaymentForm
+                    className={css.paymentForm}
+                    onSubmit={this.handleSubmit}
+                    disableSubmit={this.state.submitting}
+                    formId="CheckoutPagePaymentForm"
+                    paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo' })}
+                  />
+                : null}
+            </section>
+          </div>
+
+          <div className={css.detailsContainerDesktop}>
+            <div className={css.detailsAspectWrapper}>
+              <ResponsiveImage
+                rootClassName={css.rootForImage}
+                alt={listingTitle}
+                image={firstImage}
+                nameSet={[
+                  { name: 'landscape-crop', size: '400w' },
+                  { name: 'landscape-crop2x', size: '800w' },
+                ]}
+                sizes="100%"
               />
-            : null}
-        </section>
+            </div>
+            <div className={css.avatarWrapper}>
+              <AvatarMedium firstName={authorFirstName} lastName={authorLastName} />
+            </div>
+            <div className={css.detailsHeadings}>
+              <h2 className={css.detailsTitle}>{listingTitle}</h2>
+              <p className={css.detailsSubtitle}>
+                <FormattedMessage
+                  id="CheckoutPage.hostedBy"
+                  values={{ name: authorFirstName }}
+                />
+              </p>
+            </div>
+            <h3 className={css.bookingBreakdownTitle}>
+              <FormattedMessage id="CheckoutPage.priceBreakdownTitle" />
+            </h3>
+            {breakdown(bookingStart, bookingEnd, unitPrice)}
+          </div>
+
+        </div>
       </PageLayout>
     );
   }
