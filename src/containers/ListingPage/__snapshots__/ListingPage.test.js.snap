@@ -19,7 +19,7 @@ exports[`ListingPage matches snapshot 1`] = `
         "id": UUID {
           "uuid": "user-2",
         },
-        "type": "user",
+        "type": "current-user",
       }
     }
     currentUserHasListings={false}
