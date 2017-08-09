@@ -206,8 +206,8 @@ export function requestImageUpload(actionPayload) {
   return (dispatch, getState, sdk) => {
     const id = actionPayload.id;
     dispatch(uploadImage(actionPayload));
-    return sdk.listings
-      .uploadImage({ image: actionPayload.file })
+    return sdk.images
+      .uploadListingImage({ image: actionPayload.file })
       .then(resp => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } })))
       .catch(e => dispatch(uploadImageError({ id, error: e })));
   };

@@ -163,7 +163,7 @@ export const signup = params =>
 
     // We must login the user if signup succeeds since the API doesn't
     // do that automatically.
-    return sdk.users
+    return sdk.currentUser
       .create(params)
       .then(() => dispatch(signupSuccess()))
       .then(() => dispatch(login(email, password)))
