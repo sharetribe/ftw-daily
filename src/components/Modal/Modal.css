@@ -19,19 +19,20 @@
     background-color: var(--matterColorBright);
 
     @media (--viewportMedium) {
+      padding: 126px 0;
       background-color: rgba(0, 0, 0, 0.4);
     }
   }
 
   & .container {
     position: relative;
-    padding-top: 67px;
+    height: 100vh;
 
     @media (--viewportMedium) {
       -webkit-overflow-scrolling: auto;
       width: 576px;
-      min-height: 100%;
-      margin: 126px auto;
+      height: auto;
+      margin: 0 auto;
       background-color: var(--matterColorBright);
     }
   }
@@ -103,4 +104,5 @@
   flex: 1;
   flex-direction: column;
   overflow: auto;
+  height: 100%;
 }
