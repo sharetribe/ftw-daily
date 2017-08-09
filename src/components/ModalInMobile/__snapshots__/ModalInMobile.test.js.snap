@@ -2,8 +2,14 @@ exports[`ModalInMobile no extra classes when window is missing 1`] = `
 <div
   className="test-class-from-props">
   <div
-    className="">
-    Content
+    className={undefined}>
+    <div
+      className={undefined}>
+      <div
+        className="">
+        Content
+      </div>
+    </div>
   </div>
 </div>
 `;

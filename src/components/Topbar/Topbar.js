@@ -5,7 +5,7 @@ import { pickBy } from 'lodash';
 import classNames from 'classnames';
 import { Button, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
 import { TopbarSearchForm } from '../../containers';
-import { withFlattenedRoutes } from '../../util/contextHelpers';
+import { withFlattenedRoutes, withViewport } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
 import { ensureUser } from '../../util/data';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
@@ -15,6 +15,8 @@ import MenuIcon from './MenuIcon';
 import LogoIcon from './LogoIcon';
 import SearchIcon from './SearchIcon';
 import css from './Topbar.css';
+
+const maxMobileScreenWidth = 768;
 
 const redirectToURLWithModalState = (props, modalStateParam) => {
   const { history, location } = props;
@@ -89,6 +91,7 @@ class TopbarComponent extends Component {
       currentUser,
       currentUserHasListings,
       notificationCount,
+      viewport,
       intl,
       location,
       onManageDisableScrolling,
@@ -103,8 +106,10 @@ class TopbarComponent extends Component {
 
     const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null;
 
-    const isMobileMenuOpen = mobilemenu === 'open';
-    const isMobileSearchOpen = mobilesearch === 'open';
+    const isMobileLayout = viewport.width < maxMobileScreenWidth;
+    const isMobileMenuOpen = isMobileLayout && mobilemenu === 'open';
+    const isMobileSearchOpen = isMobileLayout && mobilesearch === 'open';
+
     const mobileMenu = (
       <TopbarMobileMenu
         isAuthenticated={isAuthenticated}
@@ -223,6 +228,12 @@ TopbarComponent.propTypes = {
     search: string.isRequired,
   }).isRequired,
 
+  // from withViewport
+  viewport: shape({
+    width: number.isRequired,
+    height: number.isRequired,
+  }).isRequired,
+
   // from withFlattenedRoutes
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
 
@@ -230,7 +241,7 @@ TopbarComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const Topbar = compose(withFlattenedRoutes, injectIntl)(TopbarComponent);
+const Topbar = compose(withViewport, withFlattenedRoutes, injectIntl)(TopbarComponent);
 
 Topbar.displayName = 'Topbar';
 

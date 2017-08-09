@@ -11,8 +11,31 @@
   left: 0;
   width: 100%;
   z-index: 100;
-  background-color: var(--matterColorBright);
-  margin: 0 auto;
+
+  & .scrollLayer {
+    min-height: 100vh;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    background-color: var(--matterColorBright);
+
+    @media (--viewportMedium) {
+      padding: 126px 0;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  & .container {
+    position: relative;
+    height: 100vh;
+
+    @media (--viewportMedium) {
+      -webkit-overflow-scrolling: auto;
+      width: 576px;
+      height: auto;
+      margin: 0 auto;
+      background-color: var(--matterColorBright);
+    }
+  }
 }
 
 /* Content is explicitly hidden (this default can be overridden with passed-in class) */
@@ -81,4 +104,5 @@
   flex: 1;
   flex-direction: column;
   overflow: auto;
+  height: 100%;
 }

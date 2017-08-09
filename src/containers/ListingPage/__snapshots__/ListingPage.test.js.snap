@@ -130,8 +130,7 @@ exports[`ListingPage matches snapshot 1`] = `
           </div>
         </div>
       </div>
-      <ModalInMobile
-        className=""
+      <withViewport(ModalInMobileComponent)
         id="BookingDatesFormInModal"
         isModalOpenOnMobile={false}
         onClose={[Function]}
@@ -177,7 +176,7 @@ exports[`ListingPage matches snapshot 1`] = `
               "currency": "USD",
             }
           } />
-      </ModalInMobile>
+      </withViewport(ModalInMobileComponent)>
       <div>
         <div>
           <div
