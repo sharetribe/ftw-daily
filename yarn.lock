@@ -6170,9 +6170,9 @@ sharetribe-scripts@0.9.2:
   optionalDependencies:
     fsevents "1.0.17"
 
-"sharetribe-sdk@git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#bb03aefbb50afbb05b3a3592f434b52e383255df":
+"sharetribe-sdk@git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#7bb372b578794423e5998f27def50ceb8405aa51":
   version "0.0.1"
-  resolved "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#bb03aefbb50afbb05b3a3592f434b52e383255df"
+  resolved "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#7bb372b578794423e5998f27def50ceb8405aa51"
   dependencies:
     axios "^0.15.3"
     js-cookie "^2.1.3"
