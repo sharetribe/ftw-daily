@@ -2,9 +2,9 @@ import { TX_STATE_PREAUTHORIZED } from '../util/propTypes';
 
 // ================ Action types ================ //
 
-export const USERS_ME_REQUEST = 'app/user/USERS_ME_REQUEST';
-export const USERS_ME_SUCCESS = 'app/user/USERS_ME_SUCCESS';
-export const USERS_ME_ERROR = 'app/user/USERS_ME_ERROR';
+export const CURRENT_USER_SHOW_REQUEST = 'app/user/CURRENT_USER_SHOW_REQUEST';
+export const CURRENT_USER_SHOW_SUCCESS = 'app/user/CURRENT_USER_SHOW_SUCCESS';
+export const CURRENT_USER_SHOW_ERROR = 'app/user/CURRENT_USER_SHOW_ERROR';
 
 export const CLEAR_CURRENT_USER = 'app/user/CLEAR_CURRENT_USER';
 
@@ -24,7 +24,7 @@ export const FETCH_CURRENT_USER_NOTIFICATIONS_ERROR = 'app/user/FETCH_CURRENT_US
 
 const initialState = {
   currentUser: null,
-  usersMeError: null,
+  currentUserShowError: null,
   createStripeAccountInProgress: false,
   createStripeAccountError: null,
   currentUserHasListings: false,
@@ -36,20 +36,20 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
-    case USERS_ME_REQUEST:
-      return { ...state, usersMeError: null };
-    case USERS_ME_SUCCESS:
+    case CURRENT_USER_SHOW_REQUEST:
+      return { ...state, currentUserShowError: null };
+    case CURRENT_USER_SHOW_SUCCESS:
       return { ...state, currentUser: payload };
-    case USERS_ME_ERROR:
+    case CURRENT_USER_SHOW_ERROR:
       // eslint-disable-next-line no-console
       console.error(payload);
-      return { ...state, usersMeError: payload };
+      return { ...state, currentUserShowError: payload };
 
     case CLEAR_CURRENT_USER:
       return {
         ...state,
         currentUser: null,
-        usersMeError: null,
+        currentUserShowError: null,
         currentUserHasListings: false,
         currentUserHasListingsError: null,
         currentUserNotificationCount: 0,
@@ -88,15 +88,15 @@ export default function reducer(state = initialState, action = {}) {
 
 // ================ Action creators ================ //
 
-export const usersMeRequest = () => ({ type: USERS_ME_REQUEST });
+export const currentUserShowRequest = () => ({ type: CURRENT_USER_SHOW_REQUEST });
 
-export const usersMeSuccess = user => ({
-  type: USERS_ME_SUCCESS,
+export const currentUserShowSuccess = user => ({
+  type: CURRENT_USER_SHOW_SUCCESS,
   payload: user,
 });
 
-export const usersMeError = e => ({
-  type: USERS_ME_ERROR,
+export const currentUserShowError = e => ({
+  type: CURRENT_USER_SHOW_ERROR,
   payload: e,
   error: true,
 });
@@ -208,7 +208,7 @@ export const fetchCurrentUserNotifications = () =>
 
 export const fetchCurrentUser = () =>
   (dispatch, getState, sdk) => {
-    dispatch(usersMeRequest());
+    dispatch(currentUserShowRequest());
     const { isAuthenticated } = getState().Auth;
 
     if (!isAuthenticated) {
@@ -216,10 +216,10 @@ export const fetchCurrentUser = () =>
       return Promise.resolve({});
     }
 
-    return sdk.users
-      .me()
+    return sdk.currentUser
+      .show()
       .then(response => {
-        dispatch(usersMeSuccess(response.data.data));
+        dispatch(currentUserShowSuccess(response.data.data));
       })
       .then(() => {
         dispatch(fetchCurrentUserHasListings());
@@ -227,14 +227,14 @@ export const fetchCurrentUser = () =>
       })
       .catch(e => {
         // TODO: dispatch flash message
-        dispatch(usersMeError(e));
+        dispatch(currentUserShowError(e));
       });
   };
 
 export const createStripeAccount = payoutDetails =>
   (dispatch, getState, sdk) => {
     dispatch(stripeAccountCreateRequest());
-    return sdk.users
+    return sdk.currentUser
       .createStripeAccount(payoutDetails)
       .then(response => {
         dispatch(stripeAccountCreateSuccess(response));

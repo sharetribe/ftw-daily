@@ -1,4 +1,4 @@
-import { clearCurrentUser, usersMeRequest } from './user.duck';
+import { clearCurrentUser, currentUserShowRequest } from './user.duck';
 import reducer, {
   authenticationInProgress,
   authInfoSuccess,
@@ -203,7 +203,7 @@ describe('Auth duck', () => {
         expect(dispatchedActions(dispatch)).toEqual([
           loginRequest(),
           loginSuccess(),
-          usersMeRequest(),
+          currentUserShowRequest(),
         ]);
       });
     });
@@ -332,7 +332,7 @@ describe('Auth duck', () => {
   describe('signup thunk', () => {
     it('should dispatch success and login', () => {
       const sdk = {
-        users: {
+        currentUser: {
           create: jest.fn(() => Promise.resolve({})),
         },
         login: jest.fn(() => Promise.resolve({})),
@@ -345,21 +345,21 @@ describe('Auth duck', () => {
       const params = { email, password, firstName: 'Pekka', lastName: 'Pohjola' };
 
       return signup(params)(dispatch, getState, sdk).then(() => {
-        expect(sdk.users.create.mock.calls).toEqual([[params]]);
+        expect(sdk.currentUser.create.mock.calls).toEqual([[params]]);
         expect(sdk.login.mock.calls).toEqual([[{ username: email, password }]]);
         expect(dispatchedActions(dispatch)).toEqual([
           signupRequest(),
           signupSuccess(),
           loginRequest(),
           loginSuccess(),
-          usersMeRequest(),
+          currentUserShowRequest(),
         ]);
       });
     });
     it('should dispatch error', () => {
       const error = new Error('test signup error');
       const sdk = {
-        users: {
+        currentUser: {
           create: jest.fn(() => Promise.reject(error)),
         },
       };
@@ -371,7 +371,7 @@ describe('Auth duck', () => {
       const params = { email, password, firstName: 'Pekka', lastName: 'Pohjola' };
 
       return signup(params)(dispatch, getState, sdk).then(() => {
-        expect(sdk.users.create.mock.calls).toEqual([[params]]);
+        expect(sdk.currentUser.create.mock.calls).toEqual([[params]]);
         expect(dispatchedActions(dispatch)).toEqual([signupRequest(), signupError(error)]);
       });
     });

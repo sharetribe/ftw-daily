@@ -19,7 +19,7 @@ exports[`OrderPage matches snapshot 1`] = `
         "id": UUID {
           "uuid": "customer1",
         },
-        "type": "user",
+        "type": "current-user",
       }
     }
     currentUserHasListings={false}

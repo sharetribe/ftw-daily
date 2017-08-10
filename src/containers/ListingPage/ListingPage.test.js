@@ -44,8 +44,7 @@ describe('ListingPage', () => {
       const dispatch = jest.fn(action => action);
       const response = { status: 200 };
       const show = jest.fn(() => Promise.resolve(response));
-      const me = jest.fn(() => Promise.resolve(response));
-      const sdk = { listings: { show }, users: { me } };
+      const sdk = { listings: { show }, currentUser: { show } };
 
       return showListing(id)(dispatch, null, sdk).then(data => {
         expect(data).toEqual(response);
