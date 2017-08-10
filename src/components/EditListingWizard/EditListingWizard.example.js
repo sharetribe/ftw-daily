@@ -8,10 +8,15 @@ const noop = () => null;
 export const NoPhotos = {
   component: EditListingWizard,
   props: {
+    params: {
+      id: 'some-id',
+      slug: 'some-slug',
+      type: 'edit',
+      tab: 'pricing',
+    },
     fetchInProgress: false,
     flattenedRoutes: flattenRoutes(routesConfiguration),
     history: { push: noop },
-    selectedTab: 'pricing',
     images: [],
     listing: createListing('listing1'),
     stripeConnected: true,

@@ -63,7 +63,7 @@ describe('Application', () => {
     const defaultAuthPath = '/signup';
     const urlRedirects = {
       '/l/new': defaultAuthPath,
-      '/l/listing-title-slug/1234/edit': defaultAuthPath,
+      '/l/listing-title-slug/1234/new/description': defaultAuthPath,
       '/l/listing-title-slug/1234/checkout': defaultAuthPath,
       '/u/1234/edit': defaultAuthPath,
       '/inbox': defaultAuthPath,

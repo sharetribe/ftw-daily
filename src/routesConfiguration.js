@@ -23,6 +23,10 @@ import {
   EmailVerificationPage,
 } from './containers';
 
+// https://en.wikipedia.org/wiki/Universally_unique_identifier#Nil_UUID
+const draftId = '00000000-0000-0000-0000-000000000000';
+const draftSlug = 'draft';
+
 const RedirectToLandingPage = () => <NamedRedirect name="LandingPage" />;
 
 const routesConfiguration = [
@@ -90,42 +94,19 @@ const routesConfiguration = [
         path: '/l/new',
         exact: true,
         name: 'NewListingPage',
-        component: props => <EditListingPage {...props} type={'new'} tab={'description'} />,
+        component: () => (
+          <NamedRedirect
+            name="EditListingPage"
+            params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'description' }}
+          />
+        ),
       },
       {
         auth: true,
-        path: '/l/new-description', // TODO should be l/:slug/:id/description
-        exact: true,
-        name: 'EditListingDescriptionPage',
-        component: props => <EditListingPage {...props} type={'new'} tab={'description'} />,
-      },
-      {
-        auth: true,
-        path: '/l/new-location', // TODO should be l/:slug/:id/location
-        exact: true,
-        name: 'EditListingLocationPage',
-        component: props => <EditListingPage {...props} type={'new'} tab={'location'} />,
-      },
-      {
-        auth: true,
-        path: '/l/new-pricing', // TODO should be l/:slug/:id/pricing
-        exact: true,
-        name: 'EditListingPricingPage',
-        component: props => <EditListingPage {...props} type={'new'} tab={'pricing'} />,
-      },
-      {
-        auth: true,
-        path: '/l/new-photos', // TODO should be l/:slug/:id/photos
-        exact: true,
-        name: 'EditListingPhotosPage',
-        component: props => <EditListingPage {...props} type={'new'} tab={'photos'} />,
-      },
-      {
-        auth: true,
-        path: '/l/:slug/:id/edit',
+        path: '/l/:slug/:id/:type/:tab',
         exact: true,
         name: 'EditListingPage',
-        component: props => <EditListingPage {...props} type={'edit'} />,
+        component: props => <EditListingPage {...props} />,
       },
     ],
   },

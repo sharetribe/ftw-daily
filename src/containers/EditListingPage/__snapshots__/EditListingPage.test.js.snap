@@ -48,7 +48,14 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     onPayoutDetailsSubmit={[Function]}
     onUpdateImageOrder={[Function]}
     onUpdateListingDraft={[Function]}
-    rootClassName={null}
-    selectedTab="description" />
+    params={
+      Object {
+        "id": "id",
+        "slug": "slug",
+        "tab": "description",
+        "type": "new",
+      }
+    }
+    rootClassName={null} />
 </withRouter(PageLayout)>
 `;
