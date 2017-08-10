@@ -8,7 +8,7 @@ import css from './SearchMapPriceLabel.css';
 // Center label so that caret is pointing to correct pixel.
 // (vertical positioning: height + arrow) */
 const getPixelPositionOffset = (width, height) => {
-  return { x: -(width / 2), y: -(height + 3) };
+  return { x: -1 * (width / 2), y: -1 * (height + 3) };
 };
 
 const SearchMapPriceLabel = props => {
