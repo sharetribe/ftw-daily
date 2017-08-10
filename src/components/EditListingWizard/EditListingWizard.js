@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing } from '../../util/data';
-import { createSlug } from '../../util/urlHelpers';
 import { createResourceLocatorString } from '../../util/routes';
 import {
   EditListingDescriptionPanel,
@@ -58,6 +57,7 @@ TestPanel.propTypes = {
 const EditListingWizard = props => {
   const {
     className,
+    params,
     errors,
     fetchInProgress,
     flattenedRoutes,
@@ -71,33 +71,27 @@ const EditListingWizard = props => {
     onUpdateImageOrder,
     onUpdateListingDraft,
     rootClassName,
-    selectedTab,
     currentUser,
     onManageDisableScrolling,
   } = props;
 
+  const selectedTab = params.tab;
   const rootClasses = rootClassName || css.root;
   const classes = classNames(rootClasses, className);
   const currentListing = ensureListing(listing);
   const stepsStatus = stepsActive(currentListing);
 
+  const tabParams = tab => {
+    return { ...params, tab };
+  };
+  const tabLink = tab => {
+    return { name: 'EditListingPage', params: tabParams(tab) };
+  };
+
   // If selectedStep is not active, redirect to the beginning of wizard
   if (!stepsStatus[selectedTab]) {
-    if (currentListing.id) {
-      const slug = currentListing.id ? createSlug(currentListing.attributes.title) : null;
-      return (
-        <NamedRedirect
-          name="EditListingDescriptionPage"
-          params={{ id: currentListing.id.uuid, slug }}
-        />
-      );
-    }
-    return <NamedRedirect name="NewListingPage" />;
+    return <NamedRedirect name="EditListingPage" params={tabParams(DESCRIPTION)} />;
   }
-
-  const descriptionLinkProps = currentListing.id
-    ? { name: 'EditListingDescriptionPage' }
-    : { name: 'NewListingPage' };
 
   const onUpsertListingDraft = currentListing.id ? onUpdateListingDraft : onCreateListingDraft;
 
@@ -106,22 +100,24 @@ const EditListingWizard = props => {
       <EditListingDescriptionPanel
         className={css.panel}
         tabLabel="Description"
-        tabLinkProps={descriptionLinkProps}
+        tabLinkProps={tabLink(DESCRIPTION)}
         selected={selectedTab === DESCRIPTION}
         disabled={!stepsStatus[DESCRIPTION]}
         listing={listing}
         onSubmit={values => {
           onUpsertListingDraft(values);
-          // Redirect to EditListingLocationPage
+
+          const pathParams = tabParams(LOCATION);
+          // Redirect to location tab
           history.push(
-            createResourceLocatorString('EditListingLocationPage', flattenedRoutes, {}, {})
+            createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
           );
         }}
       />
       <EditListingLocationPanel
         className={css.panel}
         tabLabel="Location"
-        tabLinkProps={{ name: 'EditListingLocationPage' }}
+        tabLinkProps={tabLink(LOCATION)}
         selected={selectedTab === LOCATION}
         disabled={!stepsStatus[LOCATION]}
         listing={listing}
@@ -135,31 +131,34 @@ const EditListingWizard = props => {
             geolocation: origin,
           });
 
-          // Redirect to EditListingPricingPage
+          const pathParams = tabParams(PRICING);
+          // Redirect to pricing tab
           history.push(
-            createResourceLocatorString('EditListingPricingPage', flattenedRoutes, {}, {})
+            createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
           );
         }}
       />
       <EditListingPricingPanel
         className={css.panel}
         tabLabel="Pricing"
-        tabLinkProps={{ name: 'EditListingPricingPage' }}
+        tabLinkProps={tabLink(PRICING)}
         selected={selectedTab === PRICING}
         disabled={!stepsStatus[PRICING]}
         listing={listing}
         onSubmit={values => {
           onUpdateListingDraft(values);
-          // Redirect to EditListingPhotosPage
+
+          const pathParams = tabParams(PHOTOS);
+          // Redirect to photos tab
           history.push(
-            createResourceLocatorString('EditListingPhotosPage', flattenedRoutes, {}, {})
+            createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
           );
         }}
       />
       <EditListingPhotosPanel
         className={css.panel}
         tabLabel="Photos"
-        tabLinkProps={{ name: 'EditListingPhotosPage' }}
+        tabLinkProps={tabLink(PHOTOS)}
         selected={selectedTab === PHOTOS}
         disabled={!stepsStatus[PHOTOS]}
         errors={errors}
@@ -192,6 +191,12 @@ const { array, arrayOf, bool, func, object, oneOf, shape, string } = PropTypes;
 
 EditListingWizard.propTypes = {
   className: string,
+  params: shape({
+    id: string.isRequired,
+    slug: string.isRequired,
+    type: oneOf(['new', 'edit']).isRequired,
+    tab: oneOf(STEPS).isRequired,
+  }).isRequired,
   errors: shape({
     createListingsError: object,
     showListingsError: object,
@@ -221,7 +226,6 @@ EditListingWizard.propTypes = {
   onUpdateImageOrder: func.isRequired,
   onUpdateListingDraft: func.isRequired,
   rootClassName: string,
-  selectedTab: oneOf(STEPS).isRequired,
   currentUser: propTypes.currentUser,
   onManageDisableScrolling: func.isRequired,
 };

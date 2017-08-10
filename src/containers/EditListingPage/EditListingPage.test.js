@@ -10,6 +10,7 @@ describe('EditListingPageComponent', () => {
     const getListing = () => null;
     const tree = renderShallow(
       <EditListingPageComponent
+        params={{ id: 'id', slug: 'slug', type: 'new', tab: 'description' }}
         currentUserHasListings={false}
         isAuthenticated={false}
         authInProgress={false}

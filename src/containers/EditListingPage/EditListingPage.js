@@ -69,13 +69,13 @@ export const EditListingPageComponent = props => {
     page,
     params,
     scrollingDisabled,
-    tab,
-    type,
   } = props;
+
+  const { id, type } = params;
+
   const isNew = type === 'new';
-  const hasIdParam = params && params.id;
-  const id = page.submittedListingId || (hasIdParam ? new types.UUID(params.id) : null);
-  const currentListing = getListing(id);
+  const listingId = page.submittedListingId || (id ? new types.UUID(id) : null);
+  const currentListing = getListing(listingId);
 
   const shouldRedirect = page.submittedListingId && currentListing;
   const showForm = isNew || currentListing;
@@ -83,8 +83,8 @@ export const EditListingPageComponent = props => {
   if (shouldRedirect) {
     // If page has already listingId (after submit) and current listings exist
     // redirect to listing page
-    const slug = currentListing ? createSlug(currentListing.attributes.title) : null;
-    return <NamedRedirect name="ListingPage" params={{ id: id.uuid, slug }} />;
+    const listingSlug = currentListing ? createSlug(currentListing.attributes.title) : null;
+    return <NamedRedirect name="ListingPage" params={{ id: listingId.uuid, slug: listingSlug }} />;
   } else if (showForm) {
     const { createListingsError = null, showListingsError = null, uploadImageError = null } = page;
     const errors = { createListingsError, showListingsError, uploadImageError };
@@ -120,6 +120,7 @@ export const EditListingPageComponent = props => {
         />
         <EditListingWizard
           className={css.wizard}
+          params={params}
           disabled={disableForm}
           errors={errors}
           fetchInProgress={fetchInProgress}
@@ -133,7 +134,6 @@ export const EditListingPageComponent = props => {
           onPayoutDetailsSubmit={onPayoutDetailsSubmit}
           onImageUpload={onImageUpload}
           onUpdateImageOrder={onUpdateImageOrder}
-          selectedTab={tab}
           currentUser={currentUser}
           onManageDisableScrolling={onManageDisableScrolling}
         />
@@ -160,11 +160,9 @@ EditListingPageComponent.defaultProps = {
   listingDraft: null,
   logoutError: null,
   notificationCount: 0,
-  params: null,
-  type: 'edit',
 };
 
-const { arrayOf, bool, func, instanceOf, number, object, shape, string } = PropTypes;
+const { arrayOf, bool, func, instanceOf, number, object, shape, string, oneOf } = PropTypes;
 
 EditListingPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
@@ -187,12 +185,12 @@ EditListingPageComponent.propTypes = {
   onUpdateListingDraft: func.isRequired,
   page: object.isRequired,
   params: shape({
-    id: string,
-    slug: string,
-  }),
+    id: string.isRequired,
+    slug: string.isRequired,
+    type: oneOf(['new', 'edit']).isRequired,
+    tab: string.isRequired,
+  }).isRequired,
   scrollingDisabled: bool.isRequired,
-  tab: string.isRequired,
-  type: string,
 
   /* from withRouter */
   history: shape({
