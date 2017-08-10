@@ -22,8 +22,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     notificationCount={0}
     onLogout={[Function]}
     onManageDisableScrolling={[Function]} />
-  <EditListingWizard
-    className={null}
+  <InjectIntl(EditListingWizard)
     currentUser={null}
     errors={
       Object {
@@ -40,7 +39,6 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
       }
     }
     images={Array []}
-    listing={null}
     onCreateListing={[Function]}
     onCreateListingDraft={[Function]}
     onImageUpload={[Function]}
@@ -55,7 +53,6 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
         "tab": "description",
         "type": "new",
       }
-    }
-    rootClassName={null} />
+    } />
 </withRouter(PageLayout)>
 `;

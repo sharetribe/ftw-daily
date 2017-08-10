@@ -12,6 +12,7 @@ export const Empty = {
     onSubmit: values => {
       console.log('Submit EditListingPhotosForm with (unformatted) values:', values);
     },
+    saveActionMsg: 'Save photos',
     onUpdateImageOrder: imageOrder => {
       console.log('onUpdateImageOrder with new imageOrder:', imageOrder);
     },

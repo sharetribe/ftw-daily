@@ -7,6 +7,7 @@ export const Empty = {
     onSubmit: values => {
       console.log('Submit EditListingPricingForm with (unformatted) values:', values);
     },
+    saveActionMsg: 'Save price',
   },
   group: 'forms',
 };

@@ -6,7 +6,7 @@ import { EditListingDescriptionForm } from '../../containers';
 import css from './EditListingDescriptionPanel.css';
 
 const EditListingDescriptionPanel = props => {
-  const { className, rootClassName, listing, onSubmit } = props;
+  const { className, rootClassName, listing, onSubmit, submitButtonText } = props;
 
   const classes = classNames(rootClassName || css.root, className);
   const { attributes: { description, title } } = listing || { attributes: {} };
@@ -17,6 +17,7 @@ const EditListingDescriptionPanel = props => {
       <EditListingDescriptionForm
         className={css.form}
         initialValues={{ title, description }}
+        saveActionMsg={submitButtonText}
         onSubmit={onSubmit}
       />
     </div>
@@ -36,6 +37,7 @@ EditListingDescriptionPanel.propTypes = {
   rootClassName: string,
   listing: object, // TODO Should be propTypes.listing after API support is added.
   onSubmit: func.isRequired,
+  submitButtonText: string.isRequired,
 };
 
 export default EditListingDescriptionPanel;

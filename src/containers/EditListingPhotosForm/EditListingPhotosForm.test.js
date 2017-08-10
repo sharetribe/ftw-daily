@@ -19,6 +19,7 @@ describe('EditListingPhotosForm', () => {
         dispatch={noop}
         onImageUpload={v => v}
         onSubmit={v => v}
+        saveActionMsg="Save photos"
         onUpdateImageOrder={v => v}
         stripeConnected={false}
       />

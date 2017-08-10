@@ -15,9 +15,9 @@ import {
   createListingDraft,
   updateListingDraft,
   requestCreateListing,
-  requestShowListing,
   requestImageUpload,
   updateImageOrder,
+  loadData,
 } from './EditListingPage.duck';
 
 import css from './EditListingPage.css';
@@ -245,9 +245,6 @@ const EditListingPage = compose(connect(mapStateToProps, mapDispatchToProps), wi
   injectIntl(EditListingPageComponent)
 );
 
-EditListingPage.loadData = params => {
-  const id = new types.UUID(params.id);
-  return requestShowListing({ id, include: ['author', 'images'] });
-};
+EditListingPage.loadData = loadData;
 
 export default EditListingPage;

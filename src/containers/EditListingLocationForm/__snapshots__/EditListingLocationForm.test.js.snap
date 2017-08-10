@@ -24,7 +24,7 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
     className={null}
     rootClassName={null}
     type="submit">
-    Next: pricing
+    Save location
   </Button>
 </form>
 `;

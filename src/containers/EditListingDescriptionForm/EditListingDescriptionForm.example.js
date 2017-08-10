@@ -7,6 +7,7 @@ export const Empty = {
     onSubmit: values => {
       console.log('Submit EditListingDescriptionForm with (unformatted) values:', values);
     },
+    saveActionMsg: 'Save description',
   },
   group: 'forms',
 };

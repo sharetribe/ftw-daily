@@ -1,4 +1,5 @@
 import { omit, omitBy, isUndefined } from 'lodash';
+import { types } from '../../util/sdkLoader';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserHasListingsSuccess } from '../../ducks/user.duck';
 
@@ -210,5 +211,19 @@ export function requestImageUpload(actionPayload) {
       .uploadListingImage({ image: actionPayload.file })
       .then(resp => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } })))
       .catch(e => dispatch(uploadImageError({ id, error: e })));
+  };
+}
+
+export function loadData(params) {
+  return dispatch => {
+    const { id, type } = params;
+    if (type === 'new') {
+      return Promise.resolve(null);
+    }
+    const payload = {
+      id: new types.UUID(id),
+      include: ['author', 'images'],
+    };
+    return dispatch(requestShowListing(payload));
   };
 }

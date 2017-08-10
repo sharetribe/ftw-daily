@@ -79,10 +79,7 @@ const EditListingDescriptionFormComponent = props => {
   );
 };
 
-EditListingDescriptionFormComponent.defaultProps = {
-  className: null,
-  saveActionMsg: 'Next: location',
-};
+EditListingDescriptionFormComponent.defaultProps = { className: null };
 
 const { func, string } = PropTypes;
 
@@ -91,7 +88,7 @@ EditListingDescriptionFormComponent.propTypes = {
   className: string,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
-  saveActionMsg: string,
+  saveActionMsg: string.isRequired,
 };
 
 const formName = 'EditListingDescriptionForm';

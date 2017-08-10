@@ -178,7 +178,7 @@ export class EditListingPhotosFormComponent extends Component {
   }
 }
 
-EditListingPhotosFormComponent.defaultProps = { saveActionMsg: 'Publish listing', errors: {} };
+EditListingPhotosFormComponent.defaultProps = { errors: {} };
 
 EditListingPhotosFormComponent.propTypes = {
   ...formPropTypes,
@@ -191,7 +191,7 @@ EditListingPhotosFormComponent.propTypes = {
   onImageUpload: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,
-  saveActionMsg: node,
+  saveActionMsg: string.isRequired,
 };
 
 const formName = 'EditListingPhotosForm';

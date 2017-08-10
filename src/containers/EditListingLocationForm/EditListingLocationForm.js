@@ -79,7 +79,6 @@ export const EditListingLocationFormComponent = props => {
 };
 
 EditListingLocationFormComponent.defaultProps = {
-  saveActionMsg: 'Next: pricing', // TODO: i18n
   selectedPlace: null,
 };
 
@@ -89,7 +88,7 @@ EditListingLocationFormComponent.propTypes = {
   ...formPropTypes,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
-  saveActionMsg: string,
+  saveActionMsg: string.isRequired,
   selectedPlace: propTypes.place,
 };
 

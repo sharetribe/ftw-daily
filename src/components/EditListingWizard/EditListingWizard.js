@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing } from '../../util/data';
@@ -19,6 +20,20 @@ const LOCATION = 'location';
 const PRICING = 'pricing';
 const PHOTOS = 'photos';
 const STEPS = [DESCRIPTION, LOCATION, PRICING, PHOTOS];
+
+const submitText = (intl, isNew, step) => {
+  let key = null;
+  if (step === DESCRIPTION) {
+    key = isNew ? 'EditListingWizard.saveNewDescription' : 'EditListingWizard.saveEditDescription';
+  } else if (step === LOCATION) {
+    key = isNew ? 'EditListingWizard.saveNewLocation' : 'EditListingWizard.saveEditLocation';
+  } else if (step === PRICING) {
+    key = isNew ? 'EditListingWizard.saveNewPricing' : 'EditListingWizard.saveEditPricing';
+  } else if (step === PHOTOS) {
+    key = isNew ? 'EditListingWizard.saveNewPhotos' : 'EditListingWizard.saveEditPhotos';
+  }
+  return intl.formatMessage({ id: key });
+};
 
 /**
  * Check which wizard steps are active and which are not yet available. Step is active is previous
@@ -73,8 +88,10 @@ const EditListingWizard = props => {
     rootClassName,
     currentUser,
     onManageDisableScrolling,
+    intl,
   } = props;
 
+  const isNew = params.type === 'new';
   const selectedTab = params.tab;
   const rootClasses = rootClassName || css.root;
   const classes = classNames(rootClasses, className);
@@ -104,6 +121,7 @@ const EditListingWizard = props => {
         selected={selectedTab === DESCRIPTION}
         disabled={!stepsStatus[DESCRIPTION]}
         listing={listing}
+        submitButtonText={submitText(intl, isNew, DESCRIPTION)}
         onSubmit={values => {
           onUpsertListingDraft(values);
 
@@ -121,6 +139,7 @@ const EditListingWizard = props => {
         selected={selectedTab === LOCATION}
         disabled={!stepsStatus[LOCATION]}
         listing={listing}
+        submitButtonText={submitText(intl, isNew, LOCATION)}
         onSubmit={values => {
           const { building, location } = values;
           const { selectedPlace: { address, origin } } = location;
@@ -145,6 +164,7 @@ const EditListingWizard = props => {
         selected={selectedTab === PRICING}
         disabled={!stepsStatus[PRICING]}
         listing={listing}
+        submitButtonText={submitText(intl, isNew, PRICING)}
         onSubmit={values => {
           onUpdateListingDraft(values);
 
@@ -167,6 +187,7 @@ const EditListingWizard = props => {
         images={images}
         onImageUpload={onImageUpload}
         onPayoutDetailsSubmit={onPayoutDetailsSubmit}
+        submitButtonText={submitText(intl, isNew, PHOTOS)}
         onSubmit={values => {
           const { country, images: updatedImages } = values;
           onCreateListing({ ...listing.attributes, country, images: updatedImages });
@@ -228,6 +249,9 @@ EditListingWizard.propTypes = {
   rootClassName: string,
   currentUser: propTypes.currentUser,
   onManageDisableScrolling: func.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
-export default EditListingWizard;
+export default injectIntl(EditListingWizard);

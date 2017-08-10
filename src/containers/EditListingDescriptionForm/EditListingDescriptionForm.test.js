@@ -13,6 +13,7 @@ describe('EditListingDescriptionForm', () => {
         intl={fakeIntl}
         dispatch={noop}
         onSubmit={v => v}
+        saveActionMsg="Save description"
       />
     );
     expect(tree).toMatchSnapshot();

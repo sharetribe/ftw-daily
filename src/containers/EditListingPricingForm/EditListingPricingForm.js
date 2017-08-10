@@ -52,15 +52,13 @@ export const EditListingPricingFormComponent = props => {
   );
 };
 
-EditListingPricingFormComponent.defaultProps = { saveActionMsg: 'Next: photos' };
-
 const { func, string } = PropTypes;
 
 EditListingPricingFormComponent.propTypes = {
   ...formPropTypes,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
-  saveActionMsg: string,
+  saveActionMsg: string.isRequired,
 };
 
 const formName = 'EditListingPricingForm';

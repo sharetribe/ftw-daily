@@ -48,7 +48,7 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
     disabled={false}
     rootClassName={null}
     type="submit">
-    Publish listing
+    Save photos
   </Button>
 </form>
 `;

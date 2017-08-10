@@ -6,7 +6,7 @@ import { EditListingLocationForm } from '../../containers';
 import css from './EditListingLocationPanel.css';
 
 const EditListingLocationPanel = props => {
-  const { className, rootClassName, listing, onSubmit } = props;
+  const { className, rootClassName, listing, onSubmit, submitButtonText } = props;
 
   const classes = classNames(rootClassName || css.root, className);
   const { attributes: { address, geolocation } } = listing || { attributes: {} };
@@ -44,6 +44,7 @@ const EditListingLocationPanel = props => {
         className={css.form}
         initialValues={initialSearchFormValues}
         onSubmit={onSubmit}
+        saveActionMsg={submitButtonText}
       />
     </div>
   );
@@ -62,6 +63,7 @@ EditListingLocationPanel.propTypes = {
   rootClassName: string,
   listing: object, // TODO Should be propTypes.listing after API support is added.
   onSubmit: func.isRequired,
+  submitButtonText: string.isRequired,
 };
 
 export default EditListingLocationPanel;
