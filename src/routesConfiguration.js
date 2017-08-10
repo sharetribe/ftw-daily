@@ -107,6 +107,7 @@ const routesConfiguration = [
         exact: true,
         name: 'EditListingPage',
         component: props => <EditListingPage {...props} />,
+        loadData: (params, search) => EditListingPage.loadData(params, search),
       },
     ],
   },

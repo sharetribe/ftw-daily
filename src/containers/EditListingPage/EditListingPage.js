@@ -150,10 +150,6 @@ export const EditListingPageComponent = props => {
   }
 };
 
-EditListingPageComponent.loadData = id => {
-  requestShowListing({ id, include: ['author', 'images'] });
-};
-
 EditListingPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
@@ -248,5 +244,10 @@ const mapDispatchToProps = dispatch => ({
 const EditListingPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
   injectIntl(EditListingPageComponent)
 );
+
+EditListingPage.loadData = params => {
+  const id = new types.UUID(params.id);
+  return requestShowListing({ id, include: ['author', 'images'] });
+};
 
 export default EditListingPage;
