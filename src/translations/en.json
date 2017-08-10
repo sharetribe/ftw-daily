@@ -118,6 +118,7 @@
   "ListingPage.noListingData": "Could not find listing data",
   "ListingPage.ownListing": "This is your own listing.",
   "ListingPage.perNight": "per night",
+  "ListingPage.editListing": "edit",
   "LoginForm.emailLabel": "Email",
   "LoginForm.emailPlaceholder": "john.doe@example.com",
   "LoginForm.emailRequired": "This field is required",
