@@ -93,7 +93,8 @@ export const EditListingPageComponent = props => {
     const disableForm = page.redirectToListing && !showListingsError;
 
     // Images are passed to EditListingForm so that it can generate thumbnails out of them
-    const images = page.imageOrder.map(i => page.images[i]);
+    const currentListingImages = currentListing ? currentListing.images : [];
+    const images = isNew ? page.imageOrder.map(i => page.images[i]) : currentListingImages;
 
     const title = isNew
       ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
@@ -127,7 +128,7 @@ export const EditListingPageComponent = props => {
           flattenedRoutes={flattenedRoutes}
           history={history}
           images={images}
-          listing={page.listingDraft}
+          listing={isNew ? page.listingDraft : currentListing}
           onCreateListing={onCreateListing}
           onCreateListingDraft={onCreateListingDraft}
           onUpdateListingDraft={onUpdateListingDraft}
