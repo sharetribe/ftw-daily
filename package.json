@@ -21,6 +21,7 @@
     "react-addons-shallow-compare": ">=0.14",
     "react-dates": "^9.0.1",
     "react-dom": "^15.4.2",
+    "react-google-maps": "^7.2.0",
     "react-helmet": "^5.0.2",
     "react-intl": "^2.2.3",
     "react-moment-proptypes": "^1.4.0",
