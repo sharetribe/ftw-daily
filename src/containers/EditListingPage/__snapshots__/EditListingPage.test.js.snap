@@ -28,6 +28,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
       Object {
         "createListingsError": null,
         "showListingsError": null,
+        "updateListingError": null,
         "uploadImageError": null,
       }
     }
@@ -39,12 +40,14 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
       }
     }
     images={Array []}
+    onChange={[Function]}
     onCreateListing={[Function]}
     onCreateListingDraft={[Function]}
     onImageUpload={[Function]}
     onManageDisableScrolling={[Function]}
     onPayoutDetailsSubmit={[Function]}
     onUpdateImageOrder={[Function]}
+    onUpdateListing={[Function]}
     onUpdateListingDraft={[Function]}
     params={
       Object {

@@ -8,6 +8,7 @@ export const Empty = {
       console.log('Submit EditListingDescriptionForm with (unformatted) values:', values);
     },
     saveActionMsg: 'Save description',
+    updated: false,
   },
   group: 'forms',
 };

@@ -8,6 +8,10 @@
   flex-direction: column;
 }
 
+.error {
+  color: var(--failColor);
+}
+
 .locationAutocompleteInput {
   height: 36px;
   padding-left: 0;

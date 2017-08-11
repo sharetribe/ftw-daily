@@ -11,9 +11,16 @@ const errorAction = actionType => error => ({ type: actionType, payload: error, 
 
 // ================ Action types ================ //
 
+export const MARK_TAB_UPDATED = 'app/EditListingPage/MARK_TAB_UPDATED';
+export const CLEAR_UPDATED_TAB = 'app/EditListingPage/CLEAR_UPDATED_TAB';
+
 export const CREATE_LISTING_REQUEST = 'app/EditListingPage/CREATE_LISTING_REQUEST';
 export const CREATE_LISTING_SUCCESS = 'app/EditListingPage/CREATE_LISTING_SUCCESS';
 export const CREATE_LISTING_ERROR = 'app/EditListingPage/CREATE_LISTING_ERROR';
+
+export const UPDATE_LISTING_REQUEST = 'app/EditListingPage/UPDATE_LISTING_REQUEST';
+export const UPDATE_LISTING_SUCCESS = 'app/EditListingPage/UPDATE_LISTING_SUCCESS';
+export const UPDATE_LISTING_ERROR = 'app/EditListingPage/UPDATE_LISTING_ERROR';
 
 export const SHOW_LISTINGS_REQUEST = 'app/EditListingPage/SHOW_LISTINGS_REQUEST';
 export const SHOW_LISTINGS_SUCCESS = 'app/EditListingPage/SHOW_LISTINGS_SUCCESS';
@@ -33,6 +40,7 @@ export const UPDATE_LISTING_DRAFT = 'app/EditListingPage/UPDATE_LISTING_DRAFT';
 const initialState = {
   // Error instance placeholders for each endpoint
   createListingsError: null,
+  updateListingError: null,
   showListingsError: null,
   uploadImageError: null,
   submittedListingId: null,
@@ -40,11 +48,17 @@ const initialState = {
   images: {},
   imageOrder: [],
   listingDraft: null,
+  updatedTab: null,
 };
 
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
+    case MARK_TAB_UPDATED:
+      return { ...state, updatedTab: payload };
+    case CLEAR_UPDATED_TAB:
+      return { ...state, updatedTab: null, updateListingError: null };
+
     case CREATE_LISTING_REQUEST:
       return {
         ...state,
@@ -58,6 +72,15 @@ export default function reducer(state = initialState, action = {}) {
       // eslint-disable-next-line no-console
       console.error(payload);
       return { ...state, createListingsError: payload, redirectToListing: false };
+
+    case UPDATE_LISTING_REQUEST:
+      return { ...state, updateListingError: null };
+    case UPDATE_LISTING_SUCCESS:
+      return state;
+    case UPDATE_LISTING_ERROR:
+      // eslint-disable-next-line no-console
+      console.error(payload);
+      return { ...state, updateListingError: payload };
 
     case SHOW_LISTINGS_REQUEST:
       return { ...state, showListingsError: null };
@@ -118,6 +141,15 @@ export default function reducer(state = initialState, action = {}) {
 
 // ================ Action creators ================ //
 
+export const markTabUpdated = tab => ({
+  type: MARK_TAB_UPDATED,
+  payload: tab,
+});
+
+export const clearUpdatedTab = () => ({
+  type: CLEAR_UPDATED_TAB,
+});
+
 export const updateImageOrder = imageOrder => ({
   type: UPDATE_IMAGE_ORDER,
   payload: { imageOrder },
@@ -148,6 +180,11 @@ export const updateListingDraft = listingData => {
 export const createListing = requestAction(CREATE_LISTING_REQUEST);
 export const createListingSuccess = successAction(CREATE_LISTING_SUCCESS);
 export const createListingError = errorAction(CREATE_LISTING_ERROR);
+
+// SDK method: listings.update
+export const updateListing = requestAction(UPDATE_LISTING_REQUEST);
+export const updateListingSuccess = successAction(UPDATE_LISTING_SUCCESS);
+export const updateListingError = errorAction(UPDATE_LISTING_ERROR);
 
 // SDK method: listings.show
 export const showListings = requestAction(SHOW_LISTINGS_REQUEST);
@@ -214,8 +251,29 @@ export function requestImageUpload(actionPayload) {
   };
 }
 
+export function requestUpdateListing(tab, data) {
+  return (dispatch, getState, sdk) => {
+    dispatch(updateListing(data));
+    const { id } = data;
+    let updateResponse;
+    return sdk.listings
+      .update(data)
+      .then(response => {
+        updateResponse = response;
+        const payload = { id, include: ['author', 'images'] };
+        return dispatch(requestShowListing(payload));
+      })
+      .then(() => {
+        dispatch(markTabUpdated(tab));
+        dispatch(updateListingSuccess(updateResponse));
+      })
+      .catch(e => dispatch(updateListingError(e)));
+  };
+}
+
 export function loadData(params) {
   return dispatch => {
+    dispatch(clearUpdatedTab());
     const { id, type } = params;
     if (type === 'new') {
       return Promise.resolve(null);

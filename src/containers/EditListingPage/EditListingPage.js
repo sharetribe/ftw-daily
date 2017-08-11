@@ -15,9 +15,11 @@ import {
   createListingDraft,
   updateListingDraft,
   requestCreateListing,
+  requestUpdateListing,
   requestImageUpload,
   updateImageOrder,
   loadData,
+  clearUpdatedTab,
 } from './EditListingPage.duck';
 
 import css from './EditListingPage.css';
@@ -59,6 +61,7 @@ export const EditListingPageComponent = props => {
     logoutError,
     notificationCount,
     onCreateListing,
+    onUpdateListing,
     onCreateListingDraft,
     onImageUpload,
     onLogout,
@@ -66,6 +69,7 @@ export const EditListingPageComponent = props => {
     onPayoutDetailsSubmit,
     onUpdateImageOrder,
     onUpdateListingDraft,
+    onChange,
     page,
     params,
     scrollingDisabled,
@@ -86,15 +90,21 @@ export const EditListingPageComponent = props => {
     const listingSlug = currentListing ? createSlug(currentListing.attributes.title) : null;
     return <NamedRedirect name="ListingPage" params={{ id: listingId.uuid, slug: listingSlug }} />;
   } else if (showForm) {
-    const { createListingsError = null, showListingsError = null, uploadImageError = null } = page;
-    const errors = { createListingsError, showListingsError, uploadImageError };
+    const {
+      createListingsError = null,
+      updateListingError = null,
+      showListingsError = null,
+      uploadImageError = null,
+    } = page;
+    const errors = { createListingsError, updateListingError, showListingsError, uploadImageError };
 
     // Show form if user is posting a new listing or editing existing one
     const disableForm = page.redirectToListing && !showListingsError;
 
     // Images are passed to EditListingForm so that it can generate thumbnails out of them
     const currentListingImages = currentListing ? currentListing.images : [];
-    const images = isNew ? page.imageOrder.map(i => page.images[i]) : currentListingImages;
+    const draftImages = page.imageOrder.map(i => page.images[i]);
+    const images = currentListingImages.concat(draftImages);
 
     const title = isNew
       ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
@@ -130,13 +140,16 @@ export const EditListingPageComponent = props => {
           images={images}
           listing={isNew ? page.listingDraft : currentListing}
           onCreateListing={onCreateListing}
+          onUpdateListing={onUpdateListing}
           onCreateListingDraft={onCreateListingDraft}
           onUpdateListingDraft={onUpdateListingDraft}
           onPayoutDetailsSubmit={onPayoutDetailsSubmit}
           onImageUpload={onImageUpload}
           onUpdateImageOrder={onUpdateImageOrder}
+          onChange={onChange}
           currentUser={currentUser}
           onManageDisableScrolling={onManageDisableScrolling}
+          updatedTab={page.updatedTab}
         />
       </PageLayout>
     );
@@ -180,6 +193,8 @@ EditListingPageComponent.propTypes = {
   onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onUpdateListingDraft: func.isRequired,
+  onUpdateListing: func.isRequired,
+  onChange: func.isRequired,
   page: object.isRequired,
   params: shape({
     id: string.isRequired,
@@ -231,6 +246,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onCreateListing: values => dispatch(requestCreateListing(formatRequestData(values))),
+  onUpdateListing: (tab, values) => dispatch(requestUpdateListing(tab, values)),
   onCreateListingDraft: values => dispatch(createListingDraft(values)),
   onImageUpload: data => dispatch(requestImageUpload(data)),
   onLogout: historyPush => dispatch(logout(historyPush)),
@@ -239,6 +255,7 @@ const mapDispatchToProps = dispatch => ({
   onPayoutDetailsSubmit: values => dispatch(createStripeAccount(values)),
   onUpdateImageOrder: imageOrder => dispatch(updateImageOrder(imageOrder)),
   onUpdateListingDraft: values => dispatch(updateListingDraft(values)),
+  onChange: () => dispatch(clearUpdatedTab()),
 });
 
 const EditListingPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(

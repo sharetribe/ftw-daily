@@ -22,6 +22,7 @@ describe('EditListingPhotosForm', () => {
         saveActionMsg="Save photos"
         onUpdateImageOrder={v => v}
         stripeConnected={false}
+        updated={false}
       />
     );
     expect(tree).toMatchSnapshot();

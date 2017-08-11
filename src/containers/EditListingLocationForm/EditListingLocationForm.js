@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
-import { intlShape, injectIntl } from 'react-intl';
+import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../util/validators';
@@ -20,6 +20,8 @@ export const EditListingLocationFormComponent = props => {
     invalid,
     saveActionMsg,
     submitting,
+    updated,
+    updateError,
   } = props;
 
   const titleRequiredMessage = intl.formatMessage({ id: 'EditListingLocationForm.address' });
@@ -38,10 +40,17 @@ export const EditListingLocationFormComponent = props => {
     id: 'EditListingLocationForm.buildingPlaceholder',
   });
 
+  const errorMessage = updateError
+    ? <p className={css.error}>
+        <FormattedMessage id="EditListingLocationForm.updateFailed" />
+      </p>
+    : null;
+
   const classes = classNames(css.root, className);
 
   return (
     <form className={classes} onSubmit={handleSubmit}>
+      {errorMessage}
       <LocationAutocompleteInputField
         inputClassName={css.locationAutocompleteInput}
         iconClassName={css.locationAutocompleteInputIcon}
@@ -72,7 +81,7 @@ export const EditListingLocationFormComponent = props => {
         type="submit"
         disabled={invalid || submitting || disabled}
       >
-        {saveActionMsg}
+        {updated ? <FormattedMessage id="EditListingLocationForm.updated" /> : saveActionMsg}
       </Button>
     </form>
   );
@@ -80,9 +89,10 @@ export const EditListingLocationFormComponent = props => {
 
 EditListingLocationFormComponent.defaultProps = {
   selectedPlace: null,
+  updateError: null,
 };
 
-const { func, string } = PropTypes;
+const { func, string, bool, instanceOf } = PropTypes;
 
 EditListingLocationFormComponent.propTypes = {
   ...formPropTypes,
@@ -90,6 +100,8 @@ EditListingLocationFormComponent.propTypes = {
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   selectedPlace: propTypes.place,
+  updated: bool.isRequired,
+  updateError: instanceOf(Error),
 };
 
 const formName = 'EditListingLocationForm';

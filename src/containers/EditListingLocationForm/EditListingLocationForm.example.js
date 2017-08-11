@@ -8,6 +8,7 @@ export const Empty = {
       console.log('Submit EditListingLocationForm with (unformatted) values:', values);
     },
     saveActionMsg: 'Save location',
+    updated: false,
   },
   group: 'forms',
 };

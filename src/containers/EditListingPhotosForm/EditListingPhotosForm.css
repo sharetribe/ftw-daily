@@ -54,7 +54,7 @@
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectRatioWrapper {
-  padding-bottom: 60%; /* 5:3 Aspect Ratio = 100% / (w / h) */
+  padding-bottom: calc(100% * (2 / 3));
 }
 
 .addImage {

@@ -15,6 +15,7 @@ describe('EditListingLocationForm', () => {
         dispatch={noop}
         onSubmit={v => v}
         saveActionMsg="Save location"
+        updated={false}
       />
     );
     expect(tree).toMatchSnapshot();

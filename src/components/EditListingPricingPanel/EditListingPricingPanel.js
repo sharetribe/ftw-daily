@@ -6,7 +6,16 @@ import { EditListingPricingForm } from '../../containers';
 import css from './EditListingPricingPanel.css';
 
 const EditListingPricingPanel = props => {
-  const { className, rootClassName, listing, onSubmit, submitButtonText } = props;
+  const {
+    className,
+    rootClassName,
+    listing,
+    onSubmit,
+    onChange,
+    submitButtonText,
+    panelUpdated,
+    errors,
+  } = props;
 
   const classes = classNames(rootClassName || css.root, className);
   const { attributes: { price } } = listing || { attributes: {} };
@@ -18,13 +27,16 @@ const EditListingPricingPanel = props => {
         className={css.form}
         initialValues={{ price }}
         onSubmit={onSubmit}
+        onChange={onChange}
         saveActionMsg={submitButtonText}
+        updated={panelUpdated}
+        updateError={errors.updateListingError}
       />
     </div>
   );
 };
 
-const { func, object, string } = PropTypes;
+const { func, object, string, bool } = PropTypes;
 
 EditListingPricingPanel.defaultProps = {
   className: null,
@@ -37,7 +49,10 @@ EditListingPricingPanel.propTypes = {
   rootClassName: string,
   listing: object, // TODO Should be propTypes.listing after API support is added.
   onSubmit: func.isRequired,
+  onChange: func.isRequired,
   submitButtonText: string.isRequired,
+  panelUpdated: bool.isRequired,
+  errors: object.isRequired,
 };
 
 export default EditListingPricingPanel;

@@ -80,14 +80,17 @@ const EditListingWizard = props => {
     images,
     listing,
     onCreateListing,
+    onUpdateListing,
     onCreateListingDraft,
     onImageUpload,
     onPayoutDetailsSubmit,
     onUpdateImageOrder,
     onUpdateListingDraft,
+    onChange,
     rootClassName,
     currentUser,
     onManageDisableScrolling,
+    updatedTab,
     intl,
   } = props;
 
@@ -111,6 +114,9 @@ const EditListingWizard = props => {
   }
 
   const onUpsertListingDraft = currentListing.id ? onUpdateListingDraft : onCreateListingDraft;
+  const update = (tab, values) => {
+    onUpdateListing(tab, { ...values, id: currentListing.id });
+  };
 
   return (
     <Tabs rootClassName={classes} navRootClassName={css.nav} tabRootClassName={css.tab}>
@@ -119,17 +125,23 @@ const EditListingWizard = props => {
         tabLabel="Description"
         tabLinkProps={tabLink(DESCRIPTION)}
         selected={selectedTab === DESCRIPTION}
+        panelUpdated={updatedTab === DESCRIPTION}
         disabled={!stepsStatus[DESCRIPTION]}
+        errors={errors}
         listing={listing}
         submitButtonText={submitText(intl, isNew, DESCRIPTION)}
+        onChange={onChange}
         onSubmit={values => {
-          onUpsertListingDraft(values);
-
-          const pathParams = tabParams(LOCATION);
-          // Redirect to location tab
-          history.push(
-            createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
-          );
+          if (isNew) {
+            onUpsertListingDraft(values);
+            const pathParams = tabParams(LOCATION);
+            // Redirect to location tab
+            history.push(
+              createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
+            );
+          } else {
+            update(DESCRIPTION, values);
+          }
         }}
       />
       <EditListingLocationPanel
@@ -137,24 +149,31 @@ const EditListingWizard = props => {
         tabLabel="Location"
         tabLinkProps={tabLink(LOCATION)}
         selected={selectedTab === LOCATION}
+        panelUpdated={updatedTab === LOCATION}
         disabled={!stepsStatus[LOCATION]}
+        errors={errors}
         listing={listing}
         submitButtonText={submitText(intl, isNew, LOCATION)}
+        onChange={onChange}
         onSubmit={values => {
           const { building, location } = values;
           const { selectedPlace: { address, origin } } = location;
-
-          // TODO When API supports building number, etc. change this to use those fields instead.
-          onUpdateListingDraft({
+          const updateValues = {
             address: JSON.stringify({ locationAddress: address, building }),
             geolocation: origin,
-          });
+          };
 
-          const pathParams = tabParams(PRICING);
-          // Redirect to pricing tab
-          history.push(
-            createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
-          );
+          if (isNew) {
+            // TODO When API supports building number, etc. change this to use those fields instead.
+            onUpdateListingDraft(updateValues);
+            const pathParams = tabParams(PRICING);
+            // Redirect to pricing tab
+            history.push(
+              createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
+            );
+          } else {
+            update(LOCATION, updateValues);
+          }
         }}
       />
       <EditListingPricingPanel
@@ -162,17 +181,23 @@ const EditListingWizard = props => {
         tabLabel="Pricing"
         tabLinkProps={tabLink(PRICING)}
         selected={selectedTab === PRICING}
+        panelUpdated={updatedTab === PRICING}
         disabled={!stepsStatus[PRICING]}
+        errors={errors}
         listing={listing}
         submitButtonText={submitText(intl, isNew, PRICING)}
+        onChange={onChange}
         onSubmit={values => {
-          onUpdateListingDraft(values);
-
-          const pathParams = tabParams(PHOTOS);
-          // Redirect to photos tab
-          history.push(
-            createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
-          );
+          if (isNew) {
+            onUpdateListingDraft(values);
+            const pathParams = tabParams(PHOTOS);
+            // Redirect to photos tab
+            history.push(
+              createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
+            );
+          } else {
+            update(PRICING, values);
+          }
         }}
       />
       <EditListingPhotosPanel
@@ -181,6 +206,7 @@ const EditListingWizard = props => {
         tabLinkProps={tabLink(PHOTOS)}
         selected={selectedTab === PHOTOS}
         disabled={!stepsStatus[PHOTOS]}
+        panelUpdated={updatedTab === PHOTOS}
         errors={errors}
         fetchInProgress={fetchInProgress}
         listing={listing}
@@ -188,9 +214,16 @@ const EditListingWizard = props => {
         onImageUpload={onImageUpload}
         onPayoutDetailsSubmit={onPayoutDetailsSubmit}
         submitButtonText={submitText(intl, isNew, PHOTOS)}
+        onChange={onChange}
         onSubmit={values => {
           const { country, images: updatedImages } = values;
-          onCreateListing({ ...listing.attributes, country, images: updatedImages });
+          const updateValues = { ...listing.attributes, country, images: updatedImages };
+          if (isNew) {
+            onCreateListing(updateValues);
+          } else {
+            const imageIds = updatedImages.map(img => img.imageId || img.id);
+            update(PHOTOS, { images: imageIds });
+          }
         }}
         onUpdateImageOrder={onUpdateImageOrder}
         currentUser={currentUser}
@@ -206,6 +239,7 @@ EditListingWizard.defaultProps = {
   listing: null,
   rootClassName: null,
   currentUser: null,
+  updatedTab: null,
 };
 
 const { array, arrayOf, bool, func, object, oneOf, shape, string } = PropTypes;
@@ -220,9 +254,10 @@ EditListingWizard.propTypes = {
   }).isRequired,
   errors: shape({
     createListingsError: object,
+    updateListingError: object,
     showListingsError: object,
     uploadImageError: object,
-  }),
+  }).isRequired,
   fetchInProgress: bool.isRequired,
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
   history: shape({
@@ -241,14 +276,17 @@ EditListingWizard.propTypes = {
     images: array,
   }),
   onCreateListing: func.isRequired,
+  onUpdateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onUpdateListingDraft: func.isRequired,
+  onChange: func.isRequired,
   rootClassName: string,
   currentUser: propTypes.currentUser,
   onManageDisableScrolling: func.isRequired,
+  updatedTab: string,
 
   // from injectIntl
   intl: intlShape.isRequired,

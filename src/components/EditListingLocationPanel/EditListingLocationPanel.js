@@ -6,7 +6,16 @@ import { EditListingLocationForm } from '../../containers';
 import css from './EditListingLocationPanel.css';
 
 const EditListingLocationPanel = props => {
-  const { className, rootClassName, listing, onSubmit, submitButtonText } = props;
+  const {
+    className,
+    rootClassName,
+    listing,
+    onSubmit,
+    onChange,
+    submitButtonText,
+    panelUpdated,
+    errors,
+  } = props;
 
   const classes = classNames(rootClassName || css.root, className);
   const { attributes: { address, geolocation } } = listing || { attributes: {} };
@@ -44,13 +53,16 @@ const EditListingLocationPanel = props => {
         className={css.form}
         initialValues={initialSearchFormValues}
         onSubmit={onSubmit}
+        onChange={onChange}
         saveActionMsg={submitButtonText}
+        updated={panelUpdated}
+        updateError={errors.updateListingError}
       />
     </div>
   );
 };
 
-const { func, object, string } = PropTypes;
+const { func, object, string, bool } = PropTypes;
 
 EditListingLocationPanel.defaultProps = {
   className: null,
@@ -63,7 +75,10 @@ EditListingLocationPanel.propTypes = {
   rootClassName: string,
   listing: object, // TODO Should be propTypes.listing after API support is added.
   onSubmit: func.isRequired,
+  onChange: func.isRequired,
   submitButtonText: string.isRequired,
+  panelUpdated: bool.isRequired,
+  errors: object.isRequired,
 };
 
 export default EditListingLocationPanel;
