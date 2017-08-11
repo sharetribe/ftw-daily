@@ -257,6 +257,9 @@ export class ListingPageComponent extends Component {
               </div>
 
               {map}
+              <div className={css.editListingMobile}>
+                {editListingLink}
+              </div>
             </div>
 
             <ModalInMobile

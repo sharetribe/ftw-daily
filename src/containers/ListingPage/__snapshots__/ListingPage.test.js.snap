@@ -129,6 +129,7 @@ exports[`ListingPage matches snapshot 1`] = `
               zoom={11} />
           </div>
         </div>
+        <div />
       </div>
       <withViewport(ModalInMobileComponent)
         id="BookingDatesFormInModal"
