@@ -26,9 +26,9 @@ const EmailVerificationFormComponent = props => {
   const verifyEmail = (
     <div className={css.root}>
       <div>
-        <h2>
+        <h1 className={css.title}>
           <FormattedMessage id="EmailVerificationForm.verifyEmailAddress" />
-        </h2>
+        </h1>
 
         <p>
           <FormattedMessage id="EmailVerificationForm.finishAccountSetup" values={{ email }} />
@@ -54,9 +54,9 @@ const EmailVerificationFormComponent = props => {
   const alreadyVerified = (
     <div className={css.root}>
       <div>
-        <h2>
+        <h1 className={css.title}>
           <FormattedMessage id="EmailVerificationForm.emailVerified" />
-        </h2>
+        </h1>
 
         <p>
           <FormattedMessage

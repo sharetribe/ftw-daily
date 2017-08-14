@@ -8,6 +8,10 @@
   height: 100%;
 }
 
+.title {
+  @apply --marketplaceModalTitle;
+}
+
 .button {
   @apply --marketplaceButtonStyles;
 
