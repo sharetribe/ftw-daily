@@ -81,7 +81,7 @@
   "EmailVerificationPage.title": "Verify your email address",
   "EmailVerificationPage.loadingUserInformation": "Loading user information…",
   "EmailVerificationForm.verifyEmailAddress": "Verify your email address",
-  "EmailVerificationForm.finishAccountSetup": "To finish setting up your Saunatime account, we sent an email to {email} to make sure this email is yours.",
+  "EmailVerificationForm.finishAccountSetup": "To finish setting up your Saunatime account, we sent an email to {email} to make sure this email is yours, so we can reach your later.",
   "EmailVerificationForm.verify": "Verify my email",
   "EmailVerificationForm.verifying": "Verifying…",
   "EmailVerificationForm.emailVerified": "Your email address is verified",
