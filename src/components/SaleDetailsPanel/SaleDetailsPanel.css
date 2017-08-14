@@ -10,7 +10,7 @@
 
   @media (--viewportLarge) {
     flex-direction: row;
-    max-width: 1156px; /* 1060 + (paddingLeft + paddingRight */
+    max-width: 1156px; /* 1060 + (paddingLeft + paddingRight) */
     margin: 0 auto;
     padding: 0 48px;
   }
@@ -123,8 +123,8 @@
     display: block;
     margin: 122px 0 0 0;
 
-    background-color: #FFFFFF;
-    border: 1px solid #E7E7E7;
+    background-color: var(--matterColorLight);
+    border: 1px solid var(--matterColorNegative);
     border-radius: 2px;
 
     width: 409px;

@@ -11,7 +11,7 @@
   @media (--viewportLarge) {
     flex-direction: row;
     justify-content: center;
-    max-width: 1156px; /* 1060 + (paddingLeft + paddingRight */
+    max-width: 1156px; /* 1060 + (paddingLeft + paddingRight) */
     margin: 0 auto;
     padding: 0 48px;
   }
