@@ -122,7 +122,6 @@
   @media (--viewportLarge) {
     display: block;
     margin: 122px 0 0 0;
-
     background-color: var(--matterColorLight);
     border: 1px solid var(--matterColorNegative);
     border-radius: 2px;
