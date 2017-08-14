@@ -1,10 +1,10 @@
 @import '../../marketplace.css';
 
 .root {
+  position: relative;
 }
 
 .container {
-  position: relative;
   display: flex;
   flex-direction: column;
 
@@ -73,7 +73,7 @@
 
 .orderInfo {
   @media (--viewportLarge) {
-    max-width: 516px;
+    max-width: 519px;
     margin-right: 132px;
   }
 }
