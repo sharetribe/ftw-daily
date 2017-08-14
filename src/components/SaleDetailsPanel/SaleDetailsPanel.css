@@ -8,9 +8,11 @@
   display: flex;
   flex-direction: column;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     flex-direction: row;
-    justify-content: center;
+    max-width: 1156px; /* 1060 + (paddingLeft + paddingRight) */
+    margin: 0 auto;
+    padding: 0 48px;
   }
 }
 
@@ -26,7 +28,7 @@
 }
 
 .aspectWrapperMobile {
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: none;
   }
 }
@@ -34,7 +36,7 @@
 .aspectWrapperDesktop {
   display: none;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: block;
   }
 }
@@ -50,9 +52,9 @@
 }
 
 .info {
-  @media (--viewportMedium) {
-    margin-top: 100px;
-    max-width: 517px;
+  @media (--viewportLarge) {
+    margin-right: 132px;
+    max-width: 519px;
   }
 }
 
@@ -60,15 +62,21 @@
   margin: 22px 24px 0 24px;
 
   @media (--viewportMedium) {
-    margin: 16px 24px 0 24px;
+    max-width: 80%;
+  }
+
+  @media (--viewportLarge) {
+    max-width: 100%;
+    margin: 42px 0 0 0;
   }
 }
 
 .message {
   margin: 24px 24px 0 24px;
 
-  @media (--viewportMedium) {
-    margin: 23px 24px 0 24px;
+  @media (--viewportLarge) {
+    margin: 31px 0 0 0;
+    line-height: 32px;
   }
 }
 
@@ -84,7 +92,7 @@
   justify-content: center;
   width: 100%;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: none;
   }
 }
@@ -92,16 +100,16 @@
 .avatarWrapperDesktop {
   display: none;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: block;
-    margin-left: 24px;
+    margin-top: 122px;
   }
 }
 
 .breakdownContainerMobile {
   margin: 0 24px 122px 24px;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: none;
   }
 }
@@ -110,10 +118,15 @@
   display: none;
 
   margin: 119px 24px 24px 24px;
-  box-shadow: var(--boxShadowBreakdown);
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: block;
+    margin: 122px 0 0 0;
+    background-color: var(--matterColorLight);
+    border: 1px solid var(--matterColorNegative);
+    border-radius: 2px;
+
+    width: 409px;
   }
 }
 
@@ -137,7 +150,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  padding: 19px 24px 18px 24px;
+  padding: 18px 24px 18px 24px;
 
   display: flex;
 
@@ -148,11 +161,11 @@
   box-shadow: var(--boxShadowTop);
   background-color: white;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     position: static;
     box-shadow: none;
     width: auto;
-    margin: 100px 24px 0 24px;
+    margin: 104px 0 0 0;
     padding: 0;
   }
 }
