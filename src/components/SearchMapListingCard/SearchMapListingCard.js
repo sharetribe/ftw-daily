@@ -9,6 +9,7 @@ import { formatMoney } from '../../util/currency';
 import config from '../../config';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { createResourceLocatorString } from '../../util/routes';
+import { createSlug } from '../../util/urlHelpers';
 import { ResponsiveImage } from '../../components';
 
 import css from './SearchMapListingCard.css';
@@ -21,7 +22,7 @@ const getPixelPositionOffset = (width, height) => {
 
 const createURL = (flattenedRoutes, history, listing) => {
   const id = listing.id.uuid;
-  const slug = encodeURIComponent(listing.attributes.title.split(' ').join('-'));
+  const slug = createSlug(listing.attributes.title);
   const pathParams = { id, slug };
   return createResourceLocatorString('ListingPage', flattenedRoutes, pathParams, {});
 };
