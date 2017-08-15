@@ -11,7 +11,7 @@ import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { SortableContainer } from 'react-sortable-hoc';
 import classNames from 'classnames';
-import { Promised } from '../../components';
+import { Promised, ResponsiveImage } from '../../components';
 import { uuid } from '../../util/propTypes';
 import css from './AddImages.css';
 
@@ -52,8 +52,8 @@ class Thumbnail extends Component {
         renderFulfilled={dataURL => {
           return (
             <div className={classes}>
-              <div className={css.aspectRatioWrapper}>
-                <img src={dataURL} alt={file.name} className={css.thumbnailImage} />
+              <div className={css.aspectWrapper}>
+                <img src={dataURL} alt={file.name} className={css.rootForImage} />
               </div>
               {uploadingOverlay}
             </div>
@@ -69,13 +69,48 @@ class Thumbnail extends Component {
 
 Thumbnail.defaultProps = { className: null, imageId: null };
 
-const { any, array, func, node, string } = PropTypes;
+const { any, array, func, node, string, object } = PropTypes;
 
 Thumbnail.propTypes = {
   className: string,
   file: any.isRequired,
   id: string.isRequired,
   imageId: uuid,
+};
+
+const ThumbnailWrapper = props => {
+  const { className, image, savedImageAltText } = props;
+  if (image.file) {
+    return <Thumbnail className={className} {...image} />;
+  } else {
+    const classes = classNames(css.thumbnail, className);
+    return (
+      <div className={classes}>
+        <div className={css.threeToTwoWrapper}>
+          <div className={css.aspectWrapper}>
+            <ResponsiveImage
+              rootClassName={css.rootForImage}
+              image={image}
+              alt={savedImageAltText}
+              nameSet={[
+                { name: 'landscape-crop', size: '400w' },
+                { name: 'landscape-crop2x', size: '800w' },
+              ]}
+              sizes="100%"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+};
+
+ThumbnailWrapper.defaultProps = { className: null };
+
+ThumbnailWrapper.propTypes = {
+  className: string,
+  image: object.isRequired,
+  savedImageAltText: string.isRequired,
 };
 
 // Sorting is disabled temporarily.
@@ -89,19 +124,23 @@ Thumbnail.propTypes = {
 //
 // TODO Think what to do with the scrolling issue when sorting is in use
 //
-// TODO Enable me:
-// const SortableImage = SortableElement(Thumbnail);
-const SortableImage = Thumbnail;
+const SortableImage = ThumbnailWrapper;
 
 // Create container where there are sortable images and passed children like "Add image" input etc.
 const SortableImages = SortableContainer(props => {
-  const { children, className, thumbnailClassName, images } = props;
+  const { children, className, thumbnailClassName, images, savedImageAltText } = props;
   const classes = classNames(css.root, className);
   return (
     <div className={classes}>
       {images.map((image, index) => {
         return (
-          <SortableImage {...image} index={index} key={image.id} className={thumbnailClassName} />
+          <SortableImage
+            image={image}
+            index={index}
+            key={image.id.uuid || image.id}
+            className={thumbnailClassName}
+            savedImageAltText={savedImageAltText}
+          />
         );
       })}
       {children}
@@ -124,6 +163,7 @@ AddImages.propTypes = {
   className: string,
   thumbnailClassName: string,
   onSortEnd: func.isRequired,
+  savedImageAltText: string.isRequired,
 };
 
 export default AddImages;

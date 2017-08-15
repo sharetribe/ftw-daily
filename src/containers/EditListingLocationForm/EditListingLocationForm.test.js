@@ -14,6 +14,9 @@ describe('EditListingLocationForm', () => {
         intl={fakeIntl}
         dispatch={noop}
         onSubmit={v => v}
+        saveActionMsg="Save location"
+        updated={false}
+        updateInProgress={false}
       />
     );
     expect(tree).toMatchSnapshot();

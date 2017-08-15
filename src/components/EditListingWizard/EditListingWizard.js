@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing } from '../../util/data';
@@ -19,6 +20,20 @@ const LOCATION = 'location';
 const PRICING = 'pricing';
 const PHOTOS = 'photos';
 const STEPS = [DESCRIPTION, LOCATION, PRICING, PHOTOS];
+
+const submitText = (intl, isNew, step) => {
+  let key = null;
+  if (step === DESCRIPTION) {
+    key = isNew ? 'EditListingWizard.saveNewDescription' : 'EditListingWizard.saveEditDescription';
+  } else if (step === LOCATION) {
+    key = isNew ? 'EditListingWizard.saveNewLocation' : 'EditListingWizard.saveEditLocation';
+  } else if (step === PRICING) {
+    key = isNew ? 'EditListingWizard.saveNewPricing' : 'EditListingWizard.saveEditPricing';
+  } else if (step === PHOTOS) {
+    key = isNew ? 'EditListingWizard.saveNewPhotos' : 'EditListingWizard.saveEditPhotos';
+  }
+  return intl.formatMessage({ id: key });
+};
 
 /**
  * Check which wizard steps are active and which are not yet available. Step is active is previous
@@ -65,16 +80,22 @@ const EditListingWizard = props => {
     images,
     listing,
     onCreateListing,
+    onUpdateListing,
     onCreateListingDraft,
     onImageUpload,
     onPayoutDetailsSubmit,
     onUpdateImageOrder,
     onUpdateListingDraft,
+    onChange,
     rootClassName,
     currentUser,
     onManageDisableScrolling,
+    updatedTab,
+    updateInProgress,
+    intl,
   } = props;
 
+  const isNew = params.type === 'new';
   const selectedTab = params.tab;
   const rootClasses = rootClassName || css.root;
   const classes = classNames(rootClasses, className);
@@ -94,6 +115,9 @@ const EditListingWizard = props => {
   }
 
   const onUpsertListingDraft = currentListing.id ? onUpdateListingDraft : onCreateListingDraft;
+  const update = (tab, values) => {
+    onUpdateListing(tab, { ...values, id: currentListing.id });
+  };
 
   return (
     <Tabs rootClassName={classes} navRootClassName={css.nav} tabRootClassName={css.tab}>
@@ -102,16 +126,24 @@ const EditListingWizard = props => {
         tabLabel="Description"
         tabLinkProps={tabLink(DESCRIPTION)}
         selected={selectedTab === DESCRIPTION}
+        panelUpdated={updatedTab === DESCRIPTION}
+        updateInProgress={updateInProgress}
         disabled={!stepsStatus[DESCRIPTION]}
+        errors={errors}
         listing={listing}
+        submitButtonText={submitText(intl, isNew, DESCRIPTION)}
+        onChange={onChange}
         onSubmit={values => {
-          onUpsertListingDraft(values);
-
-          const pathParams = tabParams(LOCATION);
-          // Redirect to location tab
-          history.push(
-            createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
-          );
+          if (isNew) {
+            onUpsertListingDraft(values);
+            const pathParams = tabParams(LOCATION);
+            // Redirect to location tab
+            history.push(
+              createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
+            );
+          } else {
+            update(DESCRIPTION, values);
+          }
         }}
       />
       <EditListingLocationPanel
@@ -119,23 +151,32 @@ const EditListingWizard = props => {
         tabLabel="Location"
         tabLinkProps={tabLink(LOCATION)}
         selected={selectedTab === LOCATION}
+        panelUpdated={updatedTab === LOCATION}
+        updateInProgress={updateInProgress}
         disabled={!stepsStatus[LOCATION]}
+        errors={errors}
         listing={listing}
+        submitButtonText={submitText(intl, isNew, LOCATION)}
+        onChange={onChange}
         onSubmit={values => {
           const { building, location } = values;
           const { selectedPlace: { address, origin } } = location;
-
-          // TODO When API supports building number, etc. change this to use those fields instead.
-          onUpdateListingDraft({
+          const updateValues = {
             address: JSON.stringify({ locationAddress: address, building }),
             geolocation: origin,
-          });
+          };
 
-          const pathParams = tabParams(PRICING);
-          // Redirect to pricing tab
-          history.push(
-            createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
-          );
+          if (isNew) {
+            // TODO When API supports building number, etc. change this to use those fields instead.
+            onUpdateListingDraft(updateValues);
+            const pathParams = tabParams(PRICING);
+            // Redirect to pricing tab
+            history.push(
+              createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
+            );
+          } else {
+            update(LOCATION, updateValues);
+          }
         }}
       />
       <EditListingPricingPanel
@@ -143,16 +184,24 @@ const EditListingWizard = props => {
         tabLabel="Pricing"
         tabLinkProps={tabLink(PRICING)}
         selected={selectedTab === PRICING}
+        panelUpdated={updatedTab === PRICING}
+        updateInProgress={updateInProgress}
         disabled={!stepsStatus[PRICING]}
+        errors={errors}
         listing={listing}
+        submitButtonText={submitText(intl, isNew, PRICING)}
+        onChange={onChange}
         onSubmit={values => {
-          onUpdateListingDraft(values);
-
-          const pathParams = tabParams(PHOTOS);
-          // Redirect to photos tab
-          history.push(
-            createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
-          );
+          if (isNew) {
+            onUpdateListingDraft(values);
+            const pathParams = tabParams(PHOTOS);
+            // Redirect to photos tab
+            history.push(
+              createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
+            );
+          } else {
+            update(PRICING, values);
+          }
         }}
       />
       <EditListingPhotosPanel
@@ -161,15 +210,25 @@ const EditListingWizard = props => {
         tabLinkProps={tabLink(PHOTOS)}
         selected={selectedTab === PHOTOS}
         disabled={!stepsStatus[PHOTOS]}
+        panelUpdated={updatedTab === PHOTOS}
+        updateInProgress={updateInProgress}
         errors={errors}
         fetchInProgress={fetchInProgress}
         listing={listing}
         images={images}
         onImageUpload={onImageUpload}
         onPayoutDetailsSubmit={onPayoutDetailsSubmit}
+        submitButtonText={submitText(intl, isNew, PHOTOS)}
+        onChange={onChange}
         onSubmit={values => {
           const { country, images: updatedImages } = values;
-          onCreateListing({ ...listing.attributes, country, images: updatedImages });
+          const updateValues = { ...listing.attributes, country, images: updatedImages };
+          if (isNew) {
+            onCreateListing(updateValues);
+          } else {
+            const imageIds = updatedImages.map(img => img.imageId || img.id);
+            update(PHOTOS, { images: imageIds });
+          }
         }}
         onUpdateImageOrder={onUpdateImageOrder}
         currentUser={currentUser}
@@ -185,6 +244,7 @@ EditListingWizard.defaultProps = {
   listing: null,
   rootClassName: null,
   currentUser: null,
+  updatedTab: null,
 };
 
 const { array, arrayOf, bool, func, object, oneOf, shape, string } = PropTypes;
@@ -199,9 +259,10 @@ EditListingWizard.propTypes = {
   }).isRequired,
   errors: shape({
     createListingsError: object,
+    updateListingError: object,
     showListingsError: object,
     uploadImageError: object,
-  }),
+  }).isRequired,
   fetchInProgress: bool.isRequired,
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
   history: shape({
@@ -220,14 +281,21 @@ EditListingWizard.propTypes = {
     images: array,
   }),
   onCreateListing: func.isRequired,
+  onUpdateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onUpdateListingDraft: func.isRequired,
+  onChange: func.isRequired,
   rootClassName: string,
   currentUser: propTypes.currentUser,
   onManageDisableScrolling: func.isRequired,
+  updatedTab: string,
+  updateInProgress: bool.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
-export default EditListingWizard;
+export default injectIntl(EditListingWizard);

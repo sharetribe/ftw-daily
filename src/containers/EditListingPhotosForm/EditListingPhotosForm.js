@@ -27,7 +27,7 @@ const RenderAddImage = props => {
   );
 };
 
-const { func, node, object, shape, string } = PropTypes;
+const { func, node, object, shape, string, bool, instanceOf } = PropTypes;
 
 RenderAddImage.propTypes = {
   accept: string.isRequired,
@@ -85,6 +85,9 @@ export class EditListingPhotosFormComponent extends Component {
       invalid,
       saveActionMsg,
       submitting,
+      updated,
+      updateError,
+      updateInProgress,
     } = this.props;
 
     const chooseImageText = (
@@ -124,18 +127,29 @@ export class EditListingPhotosFormComponent extends Component {
         </p>
       : null;
 
+    const errorMessage = updateError
+      ? <p className={css.error}>
+          <FormattedMessage id="EditListingPhotosForm.updateFailed" />
+        </p>
+      : null;
+
     const classes = classNames(css.root, className);
 
-    const disableForm = invalid || submitting || disabled || this.state.imageUploadRequested;
+    const disableForm = invalid ||
+      submitting ||
+      disabled ||
+      this.state.imageUploadRequested ||
+      updateInProgress;
 
     return (
       <form className={classes} onSubmit={handleSubmit}>
-
+        {errorMessage}
         <AddImages
           className={css.imagesField}
           images={images}
           onSortEnd={this.onSortEnd}
           thumbnailClassName={css.thumbnail}
+          savedImageAltText={intl.formatMessage({ id: 'EditListingPhotosForm.savedImageAltText' })}
         >
           <Field
             id="EditListingPhotosForm.AddImages"
@@ -171,14 +185,14 @@ export class EditListingPhotosFormComponent extends Component {
         {showListingFailed}
 
         <Button className={css.submitButton} type="submit" disabled={disableForm}>
-          {saveActionMsg}
+          {updated ? <FormattedMessage id="EditListingPhotosForm.updated" /> : saveActionMsg}
         </Button>
       </form>
     );
   }
 }
 
-EditListingPhotosFormComponent.defaultProps = { saveActionMsg: 'Publish listing', errors: {} };
+EditListingPhotosFormComponent.defaultProps = { errors: {}, updateError: null };
 
 EditListingPhotosFormComponent.propTypes = {
   ...formPropTypes,
@@ -191,7 +205,10 @@ EditListingPhotosFormComponent.propTypes = {
   onImageUpload: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,
-  saveActionMsg: node,
+  saveActionMsg: string.isRequired,
+  updated: bool.isRequired,
+  updateError: instanceOf(Error),
+  updateInProgress: bool.isRequired,
 };
 
 const formName = 'EditListingPhotosForm';

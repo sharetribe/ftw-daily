@@ -424,3 +424,13 @@
 .ownListingText {
   margin-top: 15px; /* align to baseline */
 }
+
+.editListingMobile {
+  margin: 0 24px;
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+  @media (--viewportLarge) {
+    display: none;
+  }
+}

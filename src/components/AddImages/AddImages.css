@@ -23,12 +23,16 @@
   overflow: hidden;
 }
 
-/* Firefox doesn't support image aspect ratio inside flexbox */
-.aspectRatioWrapper {
-  padding-bottom: 60%; /* 5:3 Aspect Ratio = 100% / (w / h) */
+.threeToTwoWrapper {
+  position: relative;
 }
 
-.thumbnailImage {
+.aspectWrapper {
+  padding-bottom: calc(100% * (2 / 3));
+}
+
+.rootForImage {
+  /* Layout - image will take space defined by aspect ratio wrapper */
   position: absolute;
   top: 0;
   bottom: 0;

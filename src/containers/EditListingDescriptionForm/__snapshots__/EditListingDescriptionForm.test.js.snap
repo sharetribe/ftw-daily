@@ -44,7 +44,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
     className=""
     disabled={true}
     type="submit">
-    Next: location
+    Save description
   </button>
 </form>
 `;

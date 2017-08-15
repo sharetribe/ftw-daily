@@ -19,6 +19,7 @@ import {
   PageLayout,
   ResponsiveImage,
   Topbar,
+  NamedLink,
 } from '../../components';
 import { BookingDatesForm } from '../../containers';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
@@ -171,6 +172,15 @@ export class ListingPageComponent extends Component {
       ? <BookingDatesForm className={css.bookingForm} onSubmit={this.onSubmit} price={price} />
       : null;
 
+    const editParams = { ...params, type: 'edit', tab: 'description' };
+    const editListingLink = isOwnListing
+      ? <p>
+          <NamedLink name="EditListingPage" params={editParams}>
+            <FormattedMessage id="ListingPage.editListing" />
+          </NamedLink>
+        </p>
+      : null;
+
     const listingClasses = classNames(css.pageRoot, { [css.bookable]: showBookButton });
 
     return (
@@ -247,6 +257,9 @@ export class ListingPageComponent extends Component {
               </div>
 
               {map}
+              <div className={css.editListingMobile}>
+                {editListingLink}
+              </div>
             </div>
 
             <ModalInMobile
@@ -270,6 +283,7 @@ export class ListingPageComponent extends Component {
               </div>
 
               {bookingHeading}
+              {editListingLink}
               {bookingDatesForm}
             </ModalInMobile>
             {showBookButton

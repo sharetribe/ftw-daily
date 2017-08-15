@@ -6,7 +6,17 @@ import { EditListingDescriptionForm } from '../../containers';
 import css from './EditListingDescriptionPanel.css';
 
 const EditListingDescriptionPanel = props => {
-  const { className, rootClassName, listing, onSubmit } = props;
+  const {
+    className,
+    rootClassName,
+    listing,
+    onSubmit,
+    onChange,
+    submitButtonText,
+    panelUpdated,
+    updateInProgress,
+    errors,
+  } = props;
 
   const classes = classNames(rootClassName || css.root, className);
   const { attributes: { description, title } } = listing || { attributes: {} };
@@ -17,13 +27,18 @@ const EditListingDescriptionPanel = props => {
       <EditListingDescriptionForm
         className={css.form}
         initialValues={{ title, description }}
+        saveActionMsg={submitButtonText}
         onSubmit={onSubmit}
+        onChange={onChange}
+        updated={panelUpdated}
+        updateError={errors.updateListingError}
+        updateInProgress={updateInProgress}
       />
     </div>
   );
 };
 
-const { func, object, string } = PropTypes;
+const { func, object, string, bool } = PropTypes;
 
 EditListingDescriptionPanel.defaultProps = {
   className: null,
@@ -36,6 +51,11 @@ EditListingDescriptionPanel.propTypes = {
   rootClassName: string,
   listing: object, // TODO Should be propTypes.listing after API support is added.
   onSubmit: func.isRequired,
+  onChange: func.isRequired,
+  submitButtonText: string.isRequired,
+  panelUpdated: bool.isRequired,
+  updateInProgress: bool.isRequired,
+  errors: object.isRequired,
 };
 
 export default EditListingDescriptionPanel;

@@ -9,6 +9,10 @@
   flex-grow: 1;
 }
 
+.error {
+  color: var(--failColor);
+}
+
 .priceInput {
   flex-shrink: 0;
   width: 100%;

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
-import { intlShape, injectIntl } from 'react-intl';
+import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { maxLength, required } from '../../util/validators';
 import { Button, TextInputField } from '../../components';
@@ -20,6 +20,9 @@ const EditListingDescriptionFormComponent = props => {
     invalid,
     saveActionMsg,
     submitting,
+    updated,
+    updateError,
+    updateInProgress,
   } = props;
 
   const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
@@ -45,9 +48,22 @@ const EditListingDescriptionFormComponent = props => {
     id: 'EditListingDescriptionForm.descriptionRequired',
   });
 
+  const errorMessage = updateError
+    ? <p className={css.error}>
+        <FormattedMessage id="EditListingDescriptionForm.updateFailed" />
+      </p>
+    : null;
+
+  const buttonContent = updated
+    ? <FormattedMessage id="EditListingDescriptionForm.updated" />
+    : saveActionMsg;
+
   const classes = classNames(css.root, className);
+  const buttonDisabled = invalid || submitting || disabled || updateInProgress;
+
   return (
     <form className={classes} onSubmit={handleSubmit}>
+      {errorMessage}
       <TextInputField
         type="text"
         name="title"
@@ -68,30 +84,26 @@ const EditListingDescriptionFormComponent = props => {
         validate={[required(descriptionRequiredMessage)]}
       />
 
-      <Button
-        className={css.submitButton}
-        type="submit"
-        disabled={invalid || submitting || disabled}
-      >
-        {saveActionMsg}
+      <Button className={css.submitButton} type="submit" disabled={buttonDisabled}>
+        {buttonContent}
       </Button>
     </form>
   );
 };
 
-EditListingDescriptionFormComponent.defaultProps = {
-  className: null,
-  saveActionMsg: 'Next: location',
-};
+EditListingDescriptionFormComponent.defaultProps = { className: null, updateError: null };
 
-const { func, string } = PropTypes;
+const { func, string, bool, instanceOf } = PropTypes;
 
 EditListingDescriptionFormComponent.propTypes = {
   ...formPropTypes,
   className: string,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
-  saveActionMsg: string,
+  saveActionMsg: string.isRequired,
+  updated: bool.isRequired,
+  updateError: instanceOf(Error),
+  updateInProgress: bool.isRequired,
 };
 
 const formName = 'EditListingDescriptionForm';

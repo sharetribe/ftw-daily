@@ -80,6 +80,10 @@ class EditListingPhotosPanel extends Component {
       onImageUpload,
       onUpdateImageOrder,
       onManageDisableScrolling,
+      submitButtonText,
+      panelUpdated,
+      updateInProgress,
+      onChange,
     } = this.props;
 
     const rootClass = rootClassName || css.root;
@@ -99,8 +103,12 @@ class EditListingPhotosPanel extends Component {
           images={images}
           onImageUpload={onImageUpload}
           onSubmit={this.handlePhotosSubmit}
+          onChange={onChange}
           onUpdateImageOrder={onUpdateImageOrder}
-          saveActionMsg={<FormattedMessage id="EditListingPhotosPanel.publishListing" />}
+          saveActionMsg={submitButtonText}
+          updated={panelUpdated}
+          updateError={errors.updateListingError}
+          updateInProgress={updateInProgress}
         />
         <Modal
           id="EditListingPhotosPanel.payoutModal"
@@ -147,6 +155,7 @@ EditListingPhotosPanel.propTypes = {
   currentUser: propTypes.currentUser,
   errors: shape({
     createListingsError: object,
+    updateListingError: object,
     showListingsError: object,
     uploadImageError: object,
   }),
@@ -156,7 +165,11 @@ EditListingPhotosPanel.propTypes = {
   onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,
+  onChange: func.isRequired,
+  submitButtonText: string.isRequired,
   onManageDisableScrolling: func.isRequired,
+  panelUpdated: bool.isRequired,
+  updateInProgress: bool.isRequired,
 };
 
 export default EditListingPhotosPanel;

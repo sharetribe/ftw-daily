@@ -13,6 +13,9 @@ describe('EditListingPricingForm', () => {
         intl={fakeIntl}
         dispatch={noop}
         onSubmit={v => v}
+        saveActionMsg="Save price"
+        updated={false}
+        updateInProgress={false}
       />
     );
     expect(tree).toMatchSnapshot();

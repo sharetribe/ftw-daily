@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
-import { intlShape, injectIntl } from 'react-intl';
+import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import config from '../../config';
 import { required } from '../../util/validators';
@@ -18,6 +18,9 @@ export const EditListingPricingFormComponent = props => {
     invalid,
     saveActionMsg,
     submitting,
+    updated,
+    updateError,
+    updateInProgress,
   } = props;
 
   const pricePerNightMessage = intl.formatMessage({ id: 'EditListingPricingForm.pricePerNight' });
@@ -26,10 +29,18 @@ export const EditListingPricingFormComponent = props => {
     id: 'EditListingPricingForm.priceInputPlaceholder',
   });
 
+  const errorMessage = updateError
+    ? <p className={css.error}>
+        <FormattedMessage id="EditListingPricingForm.updateFailed" />
+      </p>
+    : null;
+
   const classes = classNames(css.root, className);
+  const buttonDisabled = invalid || submitting || disabled || updateInProgress;
 
   return (
     <form className={classes} onSubmit={handleSubmit}>
+      {errorMessage}
       <CurrencyInputField
         id="EditListingPricingForm.CurrencyInputField"
         className={css.priceInput}
@@ -41,26 +52,25 @@ export const EditListingPricingFormComponent = props => {
         validate={[required(priceRequiredMessage)]}
       />
 
-      <Button
-        className={css.submitButton}
-        type="submit"
-        disabled={invalid || submitting || disabled}
-      >
-        {saveActionMsg}
+      <Button className={css.submitButton} type="submit" disabled={buttonDisabled}>
+        {updated ? <FormattedMessage id="EditListingPricingForm.updated" /> : saveActionMsg}
       </Button>
     </form>
   );
 };
 
-EditListingPricingFormComponent.defaultProps = { saveActionMsg: 'Next: photos' };
+EditListingPricingFormComponent.defaultProps = { updateError: null };
 
-const { func, string } = PropTypes;
+const { func, string, bool, instanceOf } = PropTypes;
 
 EditListingPricingFormComponent.propTypes = {
   ...formPropTypes,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
-  saveActionMsg: string,
+  saveActionMsg: string.isRequired,
+  updated: bool.isRequired,
+  updateError: instanceOf(Error),
+  updateInProgress: bool.isRequired,
 };
 
 const formName = 'EditListingPricingForm';

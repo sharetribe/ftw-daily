@@ -23,7 +23,7 @@ exports[`EditListingPricingForm matches snapshot 1`] = `
     className=""
     disabled={true}
     type="submit">
-    Next: photos
+    Save price
   </button>
 </form>
 `;

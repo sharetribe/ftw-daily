@@ -7,6 +7,9 @@ export const Empty = {
     onSubmit: values => {
       console.log('Submit EditListingLocationForm with (unformatted) values:', values);
     },
+    saveActionMsg: 'Save location',
+    updated: false,
+    updateInProgress: false,
   },
   group: 'forms',
 };
