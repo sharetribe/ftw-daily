@@ -26,6 +26,7 @@ exports[`ListingCard matches snapshot 1`] = `
             },
           ]
         }
+        noImageMessage={null}
         rootClassName={null}
         sizes={null} />
     </div>

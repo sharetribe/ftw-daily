@@ -5,6 +5,7 @@ import { NamedLink, ResponsiveImage } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { convertMoneyToNumber } from '../../util/currency';
 import { ensureListing, ensureUser } from '../../util/data';
+import { createSlug } from '../../util/urlHelpers';
 
 import css from './ListingCard.css';
 
@@ -34,7 +35,7 @@ export const ListingCardComponent = props => {
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
   const { title = '', price } = currentListing.attributes;
-  const slug = encodeURIComponent(title.split(' ').join('-'));
+  const slug = createSlug(title);
   const author = ensureUser(listing.author);
   const authorName = `${author.attributes.profile.firstName} ${author.attributes.profile.lastName}`;
   const firstImage = currentListing.images && currentListing.images.length > 0

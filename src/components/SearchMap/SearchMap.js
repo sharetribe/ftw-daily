@@ -1,38 +1,68 @@
 import React, { Component, PropTypes } from 'react';
-import { injectIntl, intlShape } from 'react-intl';
 import { withGoogleMap, GoogleMap } from 'react-google-maps';
 import classNames from 'classnames';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import * as propTypes from '../../util/propTypes';
-import { formatMoney } from '../../util/currency';
-import config from '../../config';
-import { SearchMapPriceLabel } from '../../components';
+import { SearchMapListingCard, SearchMapPriceLabel } from '../../components';
 
 import css from './SearchMap.css';
 
+const PRICE_LABEL_HANDLE = 'SearchMapPriceLabel';
+
+/**
+ * Fit part of map (descriped with bounds) to visible map-viewport
+ *
+ * @param {Object} map - map that needs to be centered with given bounds
+ * @param {SDK.LatLngBounds} bounds - the area that needs to be visible when map loads.
+ */
 const fitMapToBounds = (map, bounds) => {
   const { ne, sw } = bounds || {};
   // map bounds as string literal for google.maps
   const mapBounds = bounds ? { north: ne.lat, east: ne.lng, south: sw.lat, west: sw.lng } : null;
 
   // If bounds are given, use it (defaults to center & zoom).
-  if (mapBounds) {
+  if (map && mapBounds) {
     map.fitBounds(mapBounds);
   }
 };
 
-// withGoogleMap HOC handles some of the google map initialization states.
+/**
+ * hasParentWithClassName searches class name from parent elements of given target
+ * @param {Node} target - element whose parent might contain given class.
+ * @param {String} className - class name string to be found
+ */
+const hasParentWithClassName = (target, className) => {
+  return [...document.querySelectorAll(`.${className}`)].some(
+    el => el !== target && el.contains(target)
+  );
+};
+
+/**
+ * MapWithGoogleMap uses withGoogleMap HOC.
+ * It handles some of the google map initialization states.
+ */
 const MapWithGoogleMap = withGoogleMap(props => {
-  const { center, intl, listings, mapRef, zoom } = props;
+  const { center, listings, listingOpen, onListingClicked, onMapLoad, zoom } = props;
 
   const priceLabels = listings.reverse().map(listing => {
-    // Create formatted price if currency is known or alternatively show just the unknown currency.
-    const price = listing.attributes.price;
-    const formattedPrice = price && price.currency === config.currencyConfig.currency
-      ? formatMoney(intl, config.currencyConfig, price)
-      : price.currency;
-    return <SearchMapPriceLabel key={listing.id.uuid} price={formattedPrice} listing={listing} />;
+
+    // if the listing is open, don't print price label
+    if (listingOpen && listingOpen.id.uuid === listing.id.uuid) {
+      return null;
+    }
+    return (
+      <SearchMapPriceLabel
+        key={listing.id.uuid}
+        className={PRICE_LABEL_HANDLE}
+        listing={listing}
+        onListingClicked={onListingClicked}
+      />
+    );
   });
+
+  const openedCard = listingOpen
+    ? <SearchMapListingCard key={listingOpen.id.uuid} listing={listingOpen} />
+    : null;
 
   return (
     <GoogleMap
@@ -44,9 +74,10 @@ const MapWithGoogleMap = withGoogleMap(props => {
         // Disable zooming by scrolling
         scrollwheel: false,
       }}
-      ref={mapRef}
+      ref={onMapLoad}
     >
       {priceLabels}
+      {openedCard}
     </GoogleMap>
   );
 });
@@ -54,7 +85,12 @@ const MapWithGoogleMap = withGoogleMap(props => {
 export class SearchMapComponent extends Component {
   constructor(props) {
     super(props);
+
     this.googleMap = null;
+    this.state = { listingOpen: null };
+    this.onListingClicked = this.onListingClicked.bind(this);
+    this.onMapClicked = this.onMapClicked.bind(this);
+    this.onMapLoadHandler = this.onMapLoadHandler.bind(this);
   }
 
   componentDidMount() {
@@ -64,38 +100,51 @@ export class SearchMapComponent extends Component {
     }
   }
 
+  onListingClicked(listing) {
+    this.setState({ listingOpen: listing });
+  }
+
+  onMapClicked(e) {
+
+    // Close open listing popup / infobox, unless the click is attached to a price label
+    const labelClicked = hasParentWithClassName(e.nativeEvent.target, PRICE_LABEL_HANDLE);
+    if (this.state.listingOpen != null && !labelClicked) {
+      this.setState({ listingOpen: null });
+    }
+  }
+
+  onMapLoadHandler(map) {
+    this.googleMap = map;
+    fitMapToBounds(this.googleMap, this.props.bounds);
+  }
+
   render() {
     const {
       className,
       rootClassName,
       mapRootClassName,
-      bounds,
       center,
-      intl,
       listings,
       zoom,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
     const mapClasses = mapRootClassName || css.mapRoot;
 
-    // Fit map to bounds if given
-    if (this.googleMap) {
-      fitMapToBounds(this.googleMap, bounds);
-    }
-
+    // container element listens clicks so that opened SearchMapListingCards can be closed
+    /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <MapWithGoogleMap
-        containerElement={<div className={classes} />}
+        containerElement={<div className={classes} onClick={this.onMapClicked} />}
         mapElement={<div className={mapClasses} />}
         center={center}
-        intl={intl}
         listings={listings}
-        mapRef={map => {
-          this.googleMap = map;
-        }}
+        listingOpen={this.state.listingOpen}
+        onListingClicked={this.onListingClicked}
+        onMapLoad={this.onMapLoadHandler}
         zoom={zoom}
       />
     );
+    /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
 
@@ -119,11 +168,8 @@ SearchMapComponent.propTypes = {
   mapRootClassName: string,
   rootClassName: string,
   zoom: number,
-
-  // from injectIntl
-  intl: intlShape.isRequired,
 };
 
-const SearchMap = injectIntl(SearchMapComponent);
+const SearchMap = SearchMapComponent;
 
 export default SearchMap;

@@ -19,6 +19,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
             },
           ]
         }
+        noImageMessage={null}
         rootClassName={null}
         sizes="100vw" />
     </div>
@@ -131,6 +132,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
                 },
               ]
             }
+            noImageMessage={null}
             rootClassName={null}
             sizes="100%" />
         </div>

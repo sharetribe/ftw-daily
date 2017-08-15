@@ -1,25 +1,32 @@
 @import '../../marketplace.css';
 
 .root {
+  display: block;
   position: relative;
-  width: auto;
   height: auto;
   border: 0;
   padding: 0;
 }
 
-.priceLabel {
+.anchor {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.card {
   /**
    * Since caret is absolutely positioned,
    * label must have relative to be included to the same rendering layer
    */
   position: relative;
 
+  width: 250px;
+  min-height: 207px;
+
   /* Font */
   @apply --marketplaceH5FontStyles;
-  font-weight: var(--fontWeightSemiBold);
   color: var(--matterColor);
-  letter-spacing: 0.1px;
 
   background-color: var(--matterColorLight);
 
@@ -31,13 +38,11 @@
   box-shadow: var(--boxShadowPopupLight);
 
   /* Dimensions */
-  padding: 6px 10px;
   margin-top: 0;
   margin-bottom: 0;
   transition: var(--transitionStyleButton);
 
   &:hover {
-    color: var(--marketplaceColor);
     cursor: pointer;
     box-shadow: var(--boxShadowPopup);
   }
@@ -47,6 +52,47 @@
     margin-top: 0;
     margin-bottom: 0;
   }
+}
+
+.threeToTwoWrapper {
+  /* Layout */
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+/* Firefox doesn't support image aspect ratio inside flexbox */
+.aspectWrapper {
+  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
+  background: var(--matterColorNegative); /* Loading BG color */
+}
+
+.rootForImage {
+  /* Layout - image will take space defined by aspect ratio wrapper */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  border-radius: 2px;
+}
+
+.info {
+  display: flex;
+  padding: 8px 16px;
+}
+
+.price {
+  flex-shrink: 0;
+  font-weight: var(--fontWeightSemiBold);
+  color: var(--marketplaceColor);
+
+  margin-right: 10px;
+  }
+
+.name {
+  flex-grow: 1;
 }
 
 .caretShadow {

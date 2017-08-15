@@ -17,7 +17,6 @@ import ExternalLink from './ExternalLink/ExternalLink';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
 import ListingCard from './ListingCard/ListingCard';
-import ListingCardSmall from './ListingCardSmall/ListingCardSmall';
 import LocationAutocompleteInput, {
   LocationAutocompleteInputField,
 } from './LocationAutocompleteInput/LocationAutocompleteInput';
@@ -42,6 +41,7 @@ import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
 import SearchIcon from './SearchIcon/SearchIcon';
 import SearchMap from './SearchMap/SearchMap';
+import SearchMapListingCard from './SearchMapListingCard/SearchMapListingCard';
 import SearchMapPriceLabel from './SearchMapPriceLabel/SearchMapPriceLabel';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import SelectField from './SelectField/SelectField';
@@ -78,7 +78,6 @@ export {
   HeroSection,
   InlineTextButton,
   ListingCard,
-  ListingCardSmall,
   LocationAutocompleteInput,
   LocationAutocompleteInputField,
   Map,
@@ -103,6 +102,7 @@ export {
   SaleDetailsPanel,
   SearchIcon,
   SearchMap,
+  SearchMapListingCard,
   SearchMapPriceLabel,
   SearchResultsPanel,
   SecondaryButton,
