@@ -39,17 +39,21 @@ import NoImageIcon from './NoImageIcon';
 import css from './ResponsiveImage.css';
 
 const ResponsiveImage = props => {
-  const { className, rootClassName, alt, image, nameSet, sizes } = props;
+  const { className, rootClassName, alt, noImageMessage, image, nameSet, sizes } = props;
   const classes = classNames(rootClassName || css.root, className);
 
   if (image == null || nameSet.length === 0) {
     const noImageClasses = classNames(rootClassName || css.root, css.noImageContainer, className);
+
+    // NoImageMessage is needed for listing images on top the map (those component lose context)
+    // https://github.com/tomchentw/react-google-maps/issues/578
+    const noImageMessageText = noImageMessage || <FormattedMessage id="ResponsiveImage.noImage" />;
     /* eslint-disable jsx-a11y/img-redundant-alt */
     return (
       <div className={noImageClasses}>
         <div className={css.noImageWrapper}>
           <NoImageIcon className={css.noImageIcon} />
-          <div className={css.noImageText}><FormattedMessage id="ResponsiveImage.noImage" /></div>
+          <div className={css.noImageText}>{noImageMessageText}</div>
         </div>
       </div>
     );
@@ -79,6 +83,7 @@ ResponsiveImage.defaultProps = {
   image: null,
   nameSet: [],
   sizes: null,
+  noImageMessage: null,
 };
 
 ResponsiveImage.propTypes = {
@@ -93,6 +98,7 @@ ResponsiveImage.propTypes = {
     })
   ),
   sizes: string,
+  noImageMessage: string,
 };
 
 export default ResponsiveImage;
