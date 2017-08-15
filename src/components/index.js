@@ -17,7 +17,6 @@ import ExternalLink from './ExternalLink/ExternalLink';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
 import ListingCard from './ListingCard/ListingCard';
-import ListingCardSmall from './ListingCardSmall/ListingCardSmall';
 import LocationAutocompleteInput, {
   LocationAutocompleteInputField,
 } from './LocationAutocompleteInput/LocationAutocompleteInput';
@@ -79,7 +78,6 @@ export {
   HeroSection,
   InlineTextButton,
   ListingCard,
-  ListingCardSmall,
   LocationAutocompleteInput,
   LocationAutocompleteInputField,
   Map,
