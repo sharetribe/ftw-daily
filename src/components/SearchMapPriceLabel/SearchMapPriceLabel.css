@@ -4,6 +4,8 @@
   position: relative;
   width: auto;
   height: auto;
+  border: 0;
+  padding: 0;
 }
 
 .priceLabel {
