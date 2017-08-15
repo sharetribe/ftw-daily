@@ -4,9 +4,10 @@ import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import config from '../../config';
 import * as propTypes from '../../util/propTypes';
 import { formatMoney } from '../../util/currency';
-import config from '../../config';
+import { ensureListing } from '../../util/data';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { createResourceLocatorString } from '../../util/routes';
 import { createSlug } from '../../util/urlHelpers';
@@ -38,18 +39,20 @@ class SearchMapListingCard extends Component {
 
     // To avoid full page refresh we need to use internal router
     const { flattenedRoutes, history, listing } = this.props;
-    history.push(createURL(flattenedRoutes, history, listing));
+    history.push(createURL(flattenedRoutes, history, ensureListing(listing)));
   }
 
   render() {
     const { className, rootClassName, intl, flattenedRoutes, history, listing } = this.props;
-    const { title, price } = listing.attributes;
+    const currentListing = ensureListing(listing);
+    const { geolocation, title, price } = currentListing.attributes;
     const formattedPrice = price && price.currency === config.currencyConfig.currency
       ? formatMoney(intl, config.currencyConfig, price)
       : price.currency;
-    const firstImage = listing.images && listing.images.length > 0 ? listing.images[0] : null;
-    const geolocation = listing.attributes.geolocation;
-    const urlToListing = createURL(flattenedRoutes, history, listing);
+    const firstImage = currentListing.images && currentListing.images.length > 0
+      ? currentListing.images[0]
+      : null;
+    const urlToListing = createURL(flattenedRoutes, history, currentListing);
 
     // Explicit type change to object literal for Google OverlayViews (geolocation is SDK type)
     const latLngLiteral = { lat: geolocation.lat, lng: geolocation.lng };

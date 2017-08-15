@@ -4,6 +4,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { formatMoney } from '../../util/currency';
+import { ensureListing } from '../../util/data';
 import config from '../../config';
 
 import css from './SearchMapPriceLabel.css';
@@ -16,8 +17,8 @@ const getPixelPositionOffset = (width, height) => {
 
 class SearchMapPriceLabel extends Component {
   shouldComponentUpdate(nextProps) {
-    const { listing: currentListing } = this.props;
-    const { listing: nextListing } = nextProps;
+    const currentListing = ensureListing(this.props.listing);
+    const nextListing = ensureListing(nextProps.listing);
     const isSameListing = currentListing.id.uuid === nextListing.id.uuid;
     const hasSamePrice = currentListing.attributes.price === nextListing.attributes.price;
     return !(isSameListing && hasSamePrice);
@@ -25,10 +26,10 @@ class SearchMapPriceLabel extends Component {
 
   render() {
     const { className, rootClassName, intl, listing, onListingClicked } = this.props;
-    const geolocation = listing.attributes.geolocation;
+    const currentListing = ensureListing(listing);
+    const { geolocation, price } = currentListing.attributes;
 
     // Create formatted price if currency is known or alternatively show just the unknown currency.
-    const price = listing.attributes.price;
     const formattedPrice = price && price.currency === config.currencyConfig.currency
       ? formatMoney(intl, config.currencyConfig, price)
       : price.currency;
@@ -43,7 +44,7 @@ class SearchMapPriceLabel extends Component {
         mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
         getPixelPositionOffset={getPixelPositionOffset}
       >
-        <button className={classes} onClick={() => onListingClicked(listing)}>
+        <button className={classes} onClick={() => onListingClicked(currentListing)}>
           <div className={css.caretShadow} />
           <div className={css.priceLabel}>
             {formattedPrice}
