@@ -6,7 +6,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { PageLayout, Topbar } from '../../components';
 import { EmailVerificationForm } from '../../containers';
-import { authenticationInProgress } from '../../ducks/Auth.duck';
+import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { verify, verificationInProgress } from '../../ducks/EmailVerification.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { parse } from '../../util/urlHelpers';
@@ -50,6 +50,8 @@ export const EmailVerificationPageComponent = props => {
     submitVerification,
     emailVerificationInProgress,
     verificationError,
+    location,
+    history,
   } = props;
   const title = intl.formatMessage({
     id: 'EmailVerificationPage.title',
@@ -102,7 +104,7 @@ EmailVerificationPageComponent.defaultProps = {
   verificationError: null,
 };
 
-const { bool, func, instanceOf, number } = PropTypes;
+const { bool, func, instanceOf, number, object, shape, string } = PropTypes;
 
 EmailVerificationPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
@@ -118,6 +120,14 @@ EmailVerificationPageComponent.propTypes = {
   submitVerification: func.isRequired,
   emailVerificationInProgress: bool.isRequired,
   verificationError: instanceOf(Error),
+
+  // from withRouter
+  history: object.isRequired,
+  location: shape({
+    search: string,
+  }).isRequired,
+
+  // from injectIntl
   intl: intlShape.isRequired,
 };
 
@@ -150,6 +160,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+  onLogout: () => dispatch(logout()),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   submitVerification: ({ verificationToken }) => {
