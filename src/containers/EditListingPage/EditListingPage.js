@@ -103,8 +103,11 @@ export const EditListingPageComponent = props => {
 
     // Images are passed to EditListingForm so that it can generate thumbnails out of them
     const currentListingImages = currentListing ? currentListing.images : [];
-    const draftImages = page.imageOrder.map(i => page.images[i]);
-    const images = currentListingImages.concat(draftImages);
+
+    // Images not yet connected to the listing
+    const unattachedImages = page.imageOrder.map(i => page.images[i]);
+
+    const images = currentListingImages.concat(unattachedImages);
 
     const title = isNew
       ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })

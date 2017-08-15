@@ -251,6 +251,9 @@ export function requestImageUpload(actionPayload) {
   };
 }
 
+// Update the given tab of the wizard with the given data. This saves
+// the data to the listing, and marks the tab updated so the UI can
+// display the state.
 export function requestUpdateListing(tab, data) {
   return (dispatch, getState, sdk) => {
     dispatch(updateListing(data));
@@ -271,11 +274,14 @@ export function requestUpdateListing(tab, data) {
   };
 }
 
+// loadData is run for each tab of the wizard. When editing an
+// existing listing, the listing must be fetched first.
 export function loadData(params) {
   return dispatch => {
     dispatch(clearUpdatedTab());
     const { id, type } = params;
     if (type === 'new') {
+      // No need to fetch anything when creating a new listing
       return Promise.resolve(null);
     }
     const payload = {
