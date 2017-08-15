@@ -22,6 +22,7 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
     type="text" />
   <Button
     className={null}
+    disabled={false}
     rootClassName={null}
     type="submit">
     Save location

@@ -9,6 +9,7 @@ export const Empty = {
     },
     saveActionMsg: 'Save description',
     updated: false,
+    updateInProgress: false,
   },
   group: 'forms',
 };

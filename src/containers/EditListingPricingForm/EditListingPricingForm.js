@@ -20,6 +20,7 @@ export const EditListingPricingFormComponent = props => {
     submitting,
     updated,
     updateError,
+    updateInProgress,
   } = props;
 
   const pricePerNightMessage = intl.formatMessage({ id: 'EditListingPricingForm.pricePerNight' });
@@ -35,6 +36,7 @@ export const EditListingPricingFormComponent = props => {
     : null;
 
   const classes = classNames(css.root, className);
+  const buttonDisabled = invalid || submitting || disabled || updateInProgress;
 
   return (
     <form className={classes} onSubmit={handleSubmit}>
@@ -50,11 +52,7 @@ export const EditListingPricingFormComponent = props => {
         validate={[required(priceRequiredMessage)]}
       />
 
-      <Button
-        className={css.submitButton}
-        type="submit"
-        disabled={invalid || submitting || disabled}
-      >
+      <Button className={css.submitButton} type="submit" disabled={buttonDisabled}>
         {updated ? <FormattedMessage id="EditListingPricingForm.updated" /> : saveActionMsg}
       </Button>
     </form>
@@ -72,6 +70,7 @@ EditListingPricingFormComponent.propTypes = {
   saveActionMsg: string.isRequired,
   updated: bool.isRequired,
   updateError: instanceOf(Error),
+  updateInProgress: bool.isRequired,
 };
 
 const formName = 'EditListingPricingForm';

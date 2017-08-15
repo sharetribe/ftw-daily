@@ -15,6 +15,7 @@ describe('EditListingDescriptionForm', () => {
         onSubmit={v => v}
         saveActionMsg="Save description"
         updated={false}
+        updateInProgress={false}
       />
     );
     expect(tree).toMatchSnapshot();

@@ -91,6 +91,7 @@ const EditListingWizard = props => {
     currentUser,
     onManageDisableScrolling,
     updatedTab,
+    updateInProgress,
     intl,
   } = props;
 
@@ -126,6 +127,7 @@ const EditListingWizard = props => {
         tabLinkProps={tabLink(DESCRIPTION)}
         selected={selectedTab === DESCRIPTION}
         panelUpdated={updatedTab === DESCRIPTION}
+        updateInProgress={updateInProgress}
         disabled={!stepsStatus[DESCRIPTION]}
         errors={errors}
         listing={listing}
@@ -150,6 +152,7 @@ const EditListingWizard = props => {
         tabLinkProps={tabLink(LOCATION)}
         selected={selectedTab === LOCATION}
         panelUpdated={updatedTab === LOCATION}
+        updateInProgress={updateInProgress}
         disabled={!stepsStatus[LOCATION]}
         errors={errors}
         listing={listing}
@@ -182,6 +185,7 @@ const EditListingWizard = props => {
         tabLinkProps={tabLink(PRICING)}
         selected={selectedTab === PRICING}
         panelUpdated={updatedTab === PRICING}
+        updateInProgress={updateInProgress}
         disabled={!stepsStatus[PRICING]}
         errors={errors}
         listing={listing}
@@ -207,6 +211,7 @@ const EditListingWizard = props => {
         selected={selectedTab === PHOTOS}
         disabled={!stepsStatus[PHOTOS]}
         panelUpdated={updatedTab === PHOTOS}
+        updateInProgress={updateInProgress}
         errors={errors}
         fetchInProgress={fetchInProgress}
         listing={listing}
@@ -287,6 +292,7 @@ EditListingWizard.propTypes = {
   currentUser: propTypes.currentUser,
   onManageDisableScrolling: func.isRequired,
   updatedTab: string,
+  updateInProgress: bool.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,

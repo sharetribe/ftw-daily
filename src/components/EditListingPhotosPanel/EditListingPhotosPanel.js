@@ -82,6 +82,7 @@ class EditListingPhotosPanel extends Component {
       onManageDisableScrolling,
       submitButtonText,
       panelUpdated,
+      updateInProgress,
       onChange,
     } = this.props;
 
@@ -107,6 +108,7 @@ class EditListingPhotosPanel extends Component {
           saveActionMsg={submitButtonText}
           updated={panelUpdated}
           updateError={errors.updateListingError}
+          updateInProgress={updateInProgress}
         />
         <Modal
           id="EditListingPhotosPanel.payoutModal"
@@ -167,6 +169,7 @@ EditListingPhotosPanel.propTypes = {
   submitButtonText: string.isRequired,
   onManageDisableScrolling: func.isRequired,
   panelUpdated: bool.isRequired,
+  updateInProgress: bool.isRequired,
 };
 
 export default EditListingPhotosPanel;

@@ -22,6 +22,7 @@ export const EditListingLocationFormComponent = props => {
     submitting,
     updated,
     updateError,
+    updateInProgress,
   } = props;
 
   const titleRequiredMessage = intl.formatMessage({ id: 'EditListingLocationForm.address' });
@@ -47,6 +48,7 @@ export const EditListingLocationFormComponent = props => {
     : null;
 
   const classes = classNames(css.root, className);
+  const buttonDisabled = invalid || submitting || disabled || updateInProgress;
 
   return (
     <form className={classes} onSubmit={handleSubmit}>
@@ -76,11 +78,7 @@ export const EditListingLocationFormComponent = props => {
         placeholder={buildingPlaceholderMessage}
       />
 
-      <Button
-        className={css.submitButton}
-        type="submit"
-        disabled={invalid || submitting || disabled}
-      >
+      <Button className={css.submitButton} type="submit" disabled={buttonDisabled}>
         {updated ? <FormattedMessage id="EditListingLocationForm.updated" /> : saveActionMsg}
       </Button>
     </form>
@@ -102,6 +100,7 @@ EditListingLocationFormComponent.propTypes = {
   selectedPlace: propTypes.place,
   updated: bool.isRequired,
   updateError: instanceOf(Error),
+  updateInProgress: bool.isRequired,
 };
 
 const formName = 'EditListingLocationForm';

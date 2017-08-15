@@ -14,6 +14,7 @@ const EditListingPricingPanel = props => {
     onChange,
     submitButtonText,
     panelUpdated,
+    updateInProgress,
     errors,
   } = props;
 
@@ -31,6 +32,7 @@ const EditListingPricingPanel = props => {
         saveActionMsg={submitButtonText}
         updated={panelUpdated}
         updateError={errors.updateListingError}
+        updateInProgress={updateInProgress}
       />
     </div>
   );
@@ -52,6 +54,7 @@ EditListingPricingPanel.propTypes = {
   onChange: func.isRequired,
   submitButtonText: string.isRequired,
   panelUpdated: bool.isRequired,
+  updateInProgress: bool.isRequired,
   errors: object.isRequired,
 };
 

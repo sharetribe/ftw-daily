@@ -22,6 +22,7 @@ const EditListingDescriptionFormComponent = props => {
     submitting,
     updated,
     updateError,
+    updateInProgress,
   } = props;
 
   const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
@@ -58,6 +59,8 @@ const EditListingDescriptionFormComponent = props => {
     : saveActionMsg;
 
   const classes = classNames(css.root, className);
+  const buttonDisabled = invalid || submitting || disabled || updateInProgress;
+
   return (
     <form className={classes} onSubmit={handleSubmit}>
       {errorMessage}
@@ -81,11 +84,7 @@ const EditListingDescriptionFormComponent = props => {
         validate={[required(descriptionRequiredMessage)]}
       />
 
-      <Button
-        className={css.submitButton}
-        type="submit"
-        disabled={invalid || submitting || disabled}
-      >
+      <Button className={css.submitButton} type="submit" disabled={buttonDisabled}>
         {buttonContent}
       </Button>
     </form>
@@ -104,6 +103,7 @@ EditListingDescriptionFormComponent.propTypes = {
   saveActionMsg: string.isRequired,
   updated: bool.isRequired,
   updateError: instanceOf(Error),
+  updateInProgress: bool.isRequired,
 };
 
 const formName = 'EditListingDescriptionForm';

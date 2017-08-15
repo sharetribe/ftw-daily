@@ -49,6 +49,7 @@ const initialState = {
   imageOrder: [],
   listingDraft: null,
   updatedTab: null,
+  updateInProgress: false,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -74,13 +75,13 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, createListingsError: payload, redirectToListing: false };
 
     case UPDATE_LISTING_REQUEST:
-      return { ...state, updateListingError: null };
+      return { ...state, updateInProgress: true, updateListingError: null };
     case UPDATE_LISTING_SUCCESS:
-      return state;
+      return { ...state, updateInProgress: false };
     case UPDATE_LISTING_ERROR:
       // eslint-disable-next-line no-console
       console.error(payload);
-      return { ...state, updateListingError: payload };
+      return { ...state, updateInProgress: false, updateListingError: payload };
 
     case SHOW_LISTINGS_REQUEST:
       return { ...state, showListingsError: null };

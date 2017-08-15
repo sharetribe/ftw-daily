@@ -153,6 +153,7 @@ export const EditListingPageComponent = props => {
           currentUser={currentUser}
           onManageDisableScrolling={onManageDisableScrolling}
           updatedTab={page.updatedTab}
+          updateInProgress={page.updateInProgress}
         />
       </PageLayout>
     );

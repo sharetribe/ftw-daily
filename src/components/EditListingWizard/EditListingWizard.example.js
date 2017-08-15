@@ -30,6 +30,7 @@ export const NoPhotos = {
     onManageDisableScrolling: noop,
     onChange: noop,
     errors: {},
+    updateInProgress: false,
   },
   useDefaultWrapperStyles: false,
 };

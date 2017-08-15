@@ -14,6 +14,7 @@ const EditListingLocationPanel = props => {
     onChange,
     submitButtonText,
     panelUpdated,
+    updateInProgress,
     errors,
   } = props;
 
@@ -57,6 +58,7 @@ const EditListingLocationPanel = props => {
         saveActionMsg={submitButtonText}
         updated={panelUpdated}
         updateError={errors.updateListingError}
+        updateInProgress={updateInProgress}
       />
     </div>
   );
@@ -78,6 +80,7 @@ EditListingLocationPanel.propTypes = {
   onChange: func.isRequired,
   submitButtonText: string.isRequired,
   panelUpdated: bool.isRequired,
+  updateInProgress: bool.isRequired,
   errors: object.isRequired,
 };
 

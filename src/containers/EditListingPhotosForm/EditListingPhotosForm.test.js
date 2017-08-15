@@ -23,6 +23,7 @@ describe('EditListingPhotosForm', () => {
         onUpdateImageOrder={v => v}
         stripeConnected={false}
         updated={false}
+        updateInProgress={false}
       />
     );
     expect(tree).toMatchSnapshot();
