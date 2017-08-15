@@ -46,7 +46,7 @@ const stripeElementsOptions = {
   fonts: [
     {
       family: 'sofiapro',
-      weight: 500,
+      fontSmoothing: 'antialiased',
       src: 'local("sofiapro"), local("SofiaPro"), local("Sofia Pro"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2") format("woff2")',
     },
   ],
@@ -55,8 +55,8 @@ const stripeElementsOptions = {
 const cardStyles = {
   base: {
     fontFamily: '"sofiapro", Helvetica, Arial, sans-serif',
-    fontWeight: 500,
     fontSize: '18px',
+    fontSmoothing: 'antialiased',
     lineHeight: '24px',
     letterSpacing: '-0.1px',
     color: '#4A4A4A',
