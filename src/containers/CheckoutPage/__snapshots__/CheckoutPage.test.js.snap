@@ -35,6 +35,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
             },
           ]
         }
+        noImageMessage={null}
         rootClassName={null}
         sizes="100vw" />
     </div>
@@ -125,6 +126,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
               },
             ]
           }
+          noImageMessage={null}
           rootClassName={null}
           sizes="100%" />
       </div>

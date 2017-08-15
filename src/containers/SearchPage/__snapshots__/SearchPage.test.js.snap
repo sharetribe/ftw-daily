@@ -67,8 +67,19 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       isModalOpenOnMobile={false}
       onManageDisableScrolling={[Function]}>
       <div>
-        <InjectIntl(SearchMapComponent)
-          listings={Array []} />
+        <SearchMapComponent
+          bounds={null}
+          center={
+            LatLng {
+              "lat": 0,
+              "lng": 0,
+            }
+          }
+          className=""
+          listings={Array []}
+          mapRootClassName={null}
+          rootClassName={null}
+          zoom={11} />
       </div>
     </withViewport(ModalInMobileComponent)>
   </div>
