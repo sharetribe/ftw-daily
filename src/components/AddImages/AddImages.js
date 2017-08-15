@@ -79,7 +79,7 @@ Thumbnail.propTypes = {
 };
 
 const ThumbnailWrapper = props => {
-  const { className, image } = props;
+  const { className, image, savedImageAltText } = props;
   if (image.file) {
     return <Thumbnail className={className} {...image} />;
   } else {
@@ -91,7 +91,7 @@ const ThumbnailWrapper = props => {
             <ResponsiveImage
               rootClassName={css.rootForImage}
               image={image}
-              alt="TODO: alt text"
+              alt={savedImageAltText}
               nameSet={[
                 { name: 'landscape-crop', size: '400w' },
                 { name: 'landscape-crop2x', size: '800w' },
@@ -110,6 +110,7 @@ ThumbnailWrapper.defaultProps = { className: null };
 ThumbnailWrapper.propTypes = {
   className: string,
   image: object.isRequired,
+  savedImageAltText: string.isRequired,
 };
 
 // Sorting is disabled temporarily.
@@ -127,7 +128,7 @@ const SortableImage = ThumbnailWrapper;
 
 // Create container where there are sortable images and passed children like "Add image" input etc.
 const SortableImages = SortableContainer(props => {
-  const { children, className, thumbnailClassName, images } = props;
+  const { children, className, thumbnailClassName, images, savedImageAltText } = props;
   const classes = classNames(css.root, className);
   return (
     <div className={classes}>
@@ -138,6 +139,7 @@ const SortableImages = SortableContainer(props => {
             index={index}
             key={image.id.uuid || image.id}
             className={thumbnailClassName}
+            savedImageAltText={savedImageAltText}
           />
         );
       })}
@@ -161,6 +163,7 @@ AddImages.propTypes = {
   className: string,
   thumbnailClassName: string,
   onSortEnd: func.isRequired,
+  savedImageAltText: string.isRequired,
 };
 
 export default AddImages;

@@ -6,6 +6,7 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
     className={null}
     images={Array []}
     onSortEnd={[Function]}
+    savedImageAltText="EditListingPhotosForm.savedImageAltText"
     thumbnailClassName={null}>
     <Field
       accept="image/*"

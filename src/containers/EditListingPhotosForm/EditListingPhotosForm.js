@@ -144,6 +144,7 @@ export class EditListingPhotosFormComponent extends Component {
           images={images}
           onSortEnd={this.onSortEnd}
           thumbnailClassName={css.thumbnail}
+          savedImageAltText={intl.formatMessage({ id: 'EditListingPhotosForm.savedImageAltText' })}
         >
           <Field
             id="EditListingPhotosForm.AddImages"

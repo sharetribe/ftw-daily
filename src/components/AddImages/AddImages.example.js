@@ -61,7 +61,11 @@ class AddImagesTest extends Component {
   render() {
     return (
       <div>
-        <AddImages images={this.state.images} onSortEnd={this.onSortEnd}>
+        <AddImages
+          images={this.state.images}
+          onSortEnd={this.onSortEnd}
+          savedImageAltText="Saved image"
+        >
           <div className={css.addImageWrapper}>
             <div className={css.aspectRatioWrapper}>
               <label className={css.addImage} htmlFor="addImageExampleInput">+ Add image</label>
