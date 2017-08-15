@@ -60,7 +60,9 @@ describe('Application', () => {
   });
 
   it('server renders redirects for pages that require authentication', () => {
-    const defaultAuthPath = '/signup';
+    const loginPath = '/login';
+    const signupPath = '/signup';
+    const defaultAuthPath = signupPath;
     const urlRedirects = {
       '/l/new': defaultAuthPath,
       '/l/listing-title-slug/1234/new/description': defaultAuthPath,
@@ -80,7 +82,7 @@ describe('Application', () => {
       '/account/contact-details': defaultAuthPath,
       '/account/payout-preferences': defaultAuthPath,
       '/account/security': defaultAuthPath,
-      '/email_verification': defaultAuthPath,
+      '/email_verification': loginPath,
     };
     forEach(urlRedirects, (redirectPath, url) => {
       const context = {};
