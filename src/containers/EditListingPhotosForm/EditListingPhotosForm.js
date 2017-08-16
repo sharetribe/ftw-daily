@@ -88,6 +88,7 @@ export class EditListingPhotosFormComponent extends Component {
       updated,
       updateError,
       updateInProgress,
+      onRemoveImage,
     } = this.props;
 
     const chooseImageText = (
@@ -150,6 +151,7 @@ export class EditListingPhotosFormComponent extends Component {
           onSortEnd={this.onSortEnd}
           thumbnailClassName={css.thumbnail}
           savedImageAltText={intl.formatMessage({ id: 'EditListingPhotosForm.savedImageAltText' })}
+          onRemoveImage={onRemoveImage}
         >
           <Field
             id="EditListingPhotosForm.AddImages"
@@ -209,6 +211,7 @@ EditListingPhotosFormComponent.propTypes = {
   updated: bool.isRequired,
   updateError: instanceOf(Error),
   updateInProgress: bool.isRequired,
+  onRemoveImage: func.isRequired,
 };
 
 const formName = 'EditListingPhotosForm';

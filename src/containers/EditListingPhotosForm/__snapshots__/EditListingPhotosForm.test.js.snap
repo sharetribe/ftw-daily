@@ -5,6 +5,7 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
   <AddImages
     className={null}
     images={Array []}
+    onRemoveImage={[Function]}
     onSortEnd={[Function]}
     savedImageAltText="EditListingPhotosForm.savedImageAltText"
     thumbnailClassName={null}>

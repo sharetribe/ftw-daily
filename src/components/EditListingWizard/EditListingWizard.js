@@ -85,6 +85,7 @@ const EditListingWizard = props => {
     onImageUpload,
     onPayoutDetailsSubmit,
     onUpdateImageOrder,
+    onRemoveImage,
     onUpdateListingDraft,
     onChange,
     rootClassName,
@@ -217,6 +218,7 @@ const EditListingWizard = props => {
         listing={listing}
         images={images}
         onImageUpload={onImageUpload}
+        onRemoveImage={onRemoveImage}
         onPayoutDetailsSubmit={onPayoutDetailsSubmit}
         submitButtonText={submitText(intl, isNew, PHOTOS)}
         onChange={onChange}
@@ -286,6 +288,7 @@ EditListingWizard.propTypes = {
   onImageUpload: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
+  onRemoveImage: func.isRequired,
   onUpdateListingDraft: func.isRequired,
   onChange: func.isRequired,
   rootClassName: string,

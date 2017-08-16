@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { Component } from 'react';
 import { findIndex, uniqueId } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
@@ -65,6 +66,7 @@ class AddImagesTest extends Component {
           images={this.state.images}
           onSortEnd={this.onSortEnd}
           savedImageAltText="Saved image"
+          onRemoveImage={imageId => console.log('remove image:', imageId)}
         >
           <div className={css.addImageWrapper}>
             <div className={css.aspectRatioWrapper}>

@@ -27,6 +27,35 @@
   position: relative;
 }
 
+.removeImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 33px;
+  height: 33px;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 0;
+  border-bottom-left-radius: 2px;
+  cursor: pointer;
+
+  & svg {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 10px;
+    height: 10px;
+    fill: var(--matterColorLight);
+    stroke: var(--matterColorLight);
+  }
+
+  &:hover svg {
+    fill: var(--matterColorAnti);
+    stroke: var(--matterColorAnti);
+  }
+}
+
 .aspectWrapper {
   padding-bottom: calc(100% * (2 / 3));
 }

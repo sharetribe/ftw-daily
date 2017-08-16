@@ -15,6 +15,36 @@ import { Promised, ResponsiveImage } from '../../components';
 import { uuid } from '../../util/propTypes';
 import css from './AddImages.css';
 
+const RemoveImageButton = props => {
+  const { onClick } = props;
+  return (
+    <button className={css.removeImage} onClick={onClick}>
+      <svg
+        width="10px"
+        height="10px"
+        viewBox="0 0 10 10"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g strokeWidth="1" fillRule="evenodd">
+          <g transform="translate(-821.000000, -311.000000)">
+            <g transform="translate(809.000000, 299.000000)">
+              <path
+                d="M21.5833333,16.5833333 L17.4166667,16.5833333 L17.4166667,12.4170833 C17.4166667,12.1866667 17.2391667,12 17.00875,12 C16.77875,12 16.5920833,12.18625 16.5920833,12.41625 L16.5883333,16.5833333 L12.4166667,16.5833333 C12.18625,16.5833333 12,16.7695833 12,17 C12,17.23 12.18625,17.4166667 12.4166667,17.4166667 L16.5875,17.4166667 L16.5833333,21.5829167 C16.5829167,21.8129167 16.7691667,21.9995833 16.9991667,22 L16.9995833,22 C17.2295833,22 17.41625,21.81375 17.4166667,21.58375 L17.4166667,17.4166667 L21.5833333,17.4166667 C21.8133333,17.4166667 22,17.23 22,17 C22,16.7695833 21.8133333,16.5833333 21.5833333,16.5833333"
+                transform="translate(17.000000, 17.000000) rotate(-45.000000) translate(-17.000000, -17.000000) "
+              />
+            </g>
+          </g>
+        </g>
+      </svg>
+    </button>
+  );
+};
+
+const { any, array, func, node, string, object } = PropTypes;
+
+RemoveImageButton.propTypes = { onClick: func.isRequired };
+
 // readImage returns a promise which is resolved
 // when FileReader has loaded given file as dataURL
 const readImage = file =>
@@ -39,11 +69,18 @@ class Thumbnail extends Component {
   }
 
   render() {
-    const { className, file, id, imageId } = this.props;
+    const { className, file, id, imageId, onRemoveImage } = this.props;
+
+    const handleRemoveClick = e => {
+      e.preventDefault();
+      onRemoveImage(id);
+    };
+
     // While image is uploading we show overlay on top of thumbnail
     const uploadingOverlay = !imageId
       ? <div className={css.thumbnailLoading}><FormattedMessage id="AddImages.upload" /></div>
       : null;
+    const removeButton = imageId ? <RemoveImageButton onClick={handleRemoveClick} /> : null;
     const classes = classNames(css.thumbnail, className);
     return (
       <Promised
@@ -55,6 +92,7 @@ class Thumbnail extends Component {
               <div className={css.aspectWrapper}>
                 <img src={dataURL} alt={file.name} className={css.rootForImage} />
               </div>
+              {removeButton}
               {uploadingOverlay}
             </div>
           );
@@ -69,20 +107,23 @@ class Thumbnail extends Component {
 
 Thumbnail.defaultProps = { className: null, imageId: null };
 
-const { any, array, func, node, string, object } = PropTypes;
-
 Thumbnail.propTypes = {
   className: string,
   file: any.isRequired,
   id: string.isRequired,
   imageId: uuid,
+  onRemoveImage: func.isRequired,
 };
 
 const ThumbnailWrapper = props => {
-  const { className, image, savedImageAltText } = props;
+  const { className, image, savedImageAltText, onRemoveImage } = props;
   if (image.file) {
-    return <Thumbnail className={className} {...image} />;
+    return <Thumbnail className={className} onRemoveImage={onRemoveImage} {...image} />;
   } else {
+    const handleRemoveClick = e => {
+      e.preventDefault();
+      onRemoveImage(image.id);
+    };
     const classes = classNames(css.thumbnail, className);
     return (
       <div className={classes}>
@@ -99,6 +140,7 @@ const ThumbnailWrapper = props => {
               sizes="100%"
             />
           </div>
+          <RemoveImageButton onClick={handleRemoveClick} />
         </div>
       </div>
     );
@@ -111,6 +153,7 @@ ThumbnailWrapper.propTypes = {
   className: string,
   image: object.isRequired,
   savedImageAltText: string.isRequired,
+  onRemoveImage: func.isRequired,
 };
 
 // Sorting is disabled temporarily.
@@ -128,7 +171,14 @@ const SortableImage = ThumbnailWrapper;
 
 // Create container where there are sortable images and passed children like "Add image" input etc.
 const SortableImages = SortableContainer(props => {
-  const { children, className, thumbnailClassName, images, savedImageAltText } = props;
+  const {
+    children,
+    className,
+    thumbnailClassName,
+    images,
+    savedImageAltText,
+    onRemoveImage,
+  } = props;
   const classes = classNames(css.root, className);
   return (
     <div className={classes}>
@@ -140,6 +190,7 @@ const SortableImages = SortableContainer(props => {
             key={image.id.uuid || image.id}
             className={thumbnailClassName}
             savedImageAltText={savedImageAltText}
+            onRemoveImage={onRemoveImage}
           />
         );
       })}
@@ -164,6 +215,7 @@ AddImages.propTypes = {
   thumbnailClassName: string,
   onSortEnd: func.isRequired,
   savedImageAltText: string.isRequired,
+  onRemoveImage: func.isRequired,
 };
 
 export default AddImages;
