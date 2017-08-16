@@ -27,7 +27,6 @@
   @media (--viewportLarge) {
     padding: 126px 0 82px 15vw;
     flex-direction: column;
-    box-shadow: none;
 
     background-color: var(--matterColorBright);
     box-shadow: none;
@@ -53,8 +52,6 @@
 
 .panel {
   flex-grow: 1;
-  position: relative;
-  z-index: 1;
 
   @media (--viewportLarge) {
     padding: 90px 15vw 82px 82px;

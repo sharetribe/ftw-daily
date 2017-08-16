@@ -6,7 +6,6 @@ import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../util/validators';
-import { ensureListing } from '../../util/data';
 import { LocationAutocompleteInputField, Button, TextInputField } from '../../components';
 
 import css from './EditListingLocationForm.css';

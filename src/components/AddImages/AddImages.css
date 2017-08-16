@@ -21,6 +21,7 @@
   width: 100%;
   margin: 0;
   overflow: hidden;
+  background-color: var(--matterColorNegative); /* Loading BG color */
 }
 
 .threeToTwoWrapper {
@@ -29,7 +30,6 @@
 
 .aspectWrapper {
   padding-bottom: calc(100% * (2 / 3));
-  background-color: var(--matterColorNegative); /* Loading BG color */
 }
 
 .rootForImage {

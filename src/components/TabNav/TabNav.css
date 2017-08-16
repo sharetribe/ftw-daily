@@ -1,5 +1,10 @@
 @import '../../marketplace.css';
 
+:root {
+  --linkWidth: 200px;
+  --linkBorderWidth: 4px;
+}
+
 .root {
   display: flex;
   flex-direction: row;
@@ -33,7 +38,7 @@
 
   transition: var(--transitionStyleButton);
   background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='#C0392B' fill-rule='evenodd'/></svg>");
-  background-position: 204px center; /* SelectedLink's width (200px) + border thickness (4px) = 204px */
+  background-position: calc(var(--linkWidth) + var(--linkBorderWidth)) center; /* SelectedLink's width (200px) + border thickness (4px) = 204px */
 
   &:hover {
     text-decoration: none;
@@ -43,7 +48,7 @@
   @media (--viewportLarge) {
     border-bottom-width: 0px;
     margin-bottom: 14px;
-    width: 200px;
+    width: var(--linkWidth);
 
     &:hover {
       background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='#C0392B' fill-rule='evenodd'/></svg>");
@@ -57,7 +62,7 @@
   color: var(--matterColorDark);
 
   @media (--viewportLarge) {
-    width: 200px;
+    width: var(--linkWidth);
     background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='#000' fill-rule='evenodd'/></svg>");
     background-position: right center;
 
