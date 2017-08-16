@@ -1,7 +1,5 @@
 @import '../../marketplace.css';
 
-@custom-media --viewportPhotosLarger (min-width: 1200px);
-
 .root {
   /* Layout */
   width: 100%;
@@ -10,7 +8,7 @@
   display: flex;
   flex-direction: column;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     flex-direction: row;
     justify-content: center;
   }
@@ -22,23 +20,22 @@
   flex-direction: row;
   padding: 10px 24px 0 24px;
   flex-shrink: 0;
-
-  border-top-width: 1px;
-  border-top-color: var(--matterColorNegative);
-  border-top-style: solid;
   background-color: var(--matterColorLight);
-  box-shadow: var(--boxShadow);
+  box-shadow: var(--boxShadowLight);
+  border-top: 1px solid var(--matterColorNegative);
 
-  @media (--viewportMedium) {
-    padding: 109px 48px 48px 48px;
+  @media (--viewportLarge) {
+    padding: 126px 0 82px 15vw;
     flex-direction: column;
     box-shadow: none;
+
+    background-color: var(--matterColorBright);
+    box-shadow: none;
+    border-top: none;
   }
-  @media (--viewportPhotosLarger) {
-    padding: 109px 93px 93px 15vw;
-  }
+
   @media (--viewportXLarge) {
-    padding: 109px 93px 93px 25vw;
+    padding-left: 25vw;
   }
 }
 
@@ -49,25 +46,23 @@
     margin-left: 0;
   }
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     margin-left: 0;
-    margin-bottom: 14px;
   }
 }
 
 .panel {
   flex-grow: 1;
+  position: relative;
+  z-index: 1;
 
-  @media (--viewportMedium) {
-    padding: 113px 24px 24px 24px;
-    border-left-width: 1px;
-    border-left-style: solid;
-    border-left-color: var(--matterColorNegative);
+  @media (--viewportLarge) {
+    padding: 90px 15vw 82px 82px;
+    border-left: 1px solid var(--matterColorNegative);
+    background-color: var(--matterColorLight);
   }
-  @media (--viewportPhotosLarger) {
-    padding: 113px 15vw 82px 82px;
-  }
+
   @media (--viewportXLarge) {
-    padding: 113px 25vw 82px 82px;
+    padding-right: 25vw;
   }
 }

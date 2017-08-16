@@ -19,6 +19,10 @@
 
 .payoutDetails {
   margin: 24px;
+
+  @media (--viewportLarge) {
+    margin: 0 60px 60px;
+  }
 }
 
 .modalHeading {
@@ -26,17 +30,24 @@
   margin-bottom: 36px;
   padding: 0 24px;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     margin-top: 67px;
+    padding: 0 60px;
   }
 }
 
 .payoutModalTitle {
-  @media (--viewportMedium) {
+  @apply --marketplaceModalTitle;
+
+  @media (--viewportLarge) {
     margin-top: 0;
   }
 }
 
 .title {
   margin-bottom: 19px;
+
+  @media (--viewportLarge) {
+    margin-bottom: 47px;
+  }
 }

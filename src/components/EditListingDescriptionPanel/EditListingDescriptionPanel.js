@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
+import { ensureListing } from '../../util/data';
 import { EditListingDescriptionForm } from '../../containers';
 
 import css from './EditListingDescriptionPanel.css';
@@ -19,11 +20,14 @@ const EditListingDescriptionPanel = props => {
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
-  const { attributes: { description, title } } = listing || { attributes: {} };
+  const currentListing = ensureListing(listing);
+  const { description, title } = currentListing.attributes;
+  const listingTitle = title || '';
+
 
   return (
     <div className={classes}>
-      <h1 className={css.title}><FormattedMessage id="EditListingDescriptionPanel.title" /></h1>
+      <h1 className={css.title}><FormattedMessage id="EditListingDescriptionPanel.title" values={{ listingTitle }} /></h1>
       <EditListingDescriptionForm
         className={css.form}
         initialValues={{ title, description }}

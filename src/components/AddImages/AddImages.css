@@ -29,6 +29,7 @@
 
 .aspectWrapper {
   padding-bottom: calc(100% * (2 / 3));
+  background-color: var(--matterColorNegative); /* Loading BG color */
 }
 
 .rootForImage {
