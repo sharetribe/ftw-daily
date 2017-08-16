@@ -121,6 +121,7 @@ export const EditListingPageComponent = props => {
         scrollingDisabled={scrollingDisabled}
       >
         <Topbar
+          className={css.topbar}
           mobileRootClassName={css.mobileTopbar}
           isAuthenticated={isAuthenticated}
           authInProgress={authInProgress}

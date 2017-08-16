@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { EditListingPricingForm } from '../../containers';
+import { ensureListing } from '../../util/data';
 
 import css from './EditListingPricingPanel.css';
 
@@ -19,11 +20,13 @@ const EditListingPricingPanel = props => {
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
-  const { attributes: { price } } = listing || { attributes: {} };
+  const currentListing = ensureListing(listing);
+  const { price, title } = currentListing.attributes ;
+  const listingTitle = title || '';
 
   return (
     <div className={classes}>
-      <h1 className={css.title}><FormattedMessage id="EditListingPricingPanel.title" /></h1>
+      <h1 className={css.title}><FormattedMessage id="EditListingPricingPanel.title" values={{ listingTitle }} /></h1>
       <EditListingPricingForm
         className={css.form}
         initialValues={{ price }}

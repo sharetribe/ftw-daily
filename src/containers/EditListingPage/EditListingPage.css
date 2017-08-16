@@ -1,5 +1,9 @@
 @import '../../marketplace.css';
 
+.topbar {
+  z-index: 1;
+}
+
 .mobileTopbar {
   /* Size */
   width: 100%;

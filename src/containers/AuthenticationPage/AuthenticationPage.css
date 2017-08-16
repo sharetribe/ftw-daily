@@ -34,7 +34,9 @@
   }
 }
 
-.tabs {}
+.tabs {
+
+}
 
 .tab {
   @apply --marketplaceModalTitle;

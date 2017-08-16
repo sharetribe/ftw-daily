@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { EditListingLocationForm } from '../../containers';
+import { ensureListing } from '../../util/data';
 
 import css from './EditListingLocationPanel.css';
 
@@ -19,7 +20,9 @@ const EditListingLocationPanel = props => {
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
-  const { attributes: { address, geolocation } } = listing || { attributes: {} };
+  const currentListing = ensureListing(listing);
+  const { address, geolocation, title } = currentListing.attributes;
+  const listingTitle = title || '';
 
   // Only render current search if full place object is available in the URL params
   // TODO bounds and country are missing - those need to be queried directly from Google Places
@@ -49,7 +52,7 @@ const EditListingLocationPanel = props => {
 
   return (
     <div className={classes}>
-      <h1 className={css.title}><FormattedMessage id="EditListingLocationPanel.title" /></h1>
+      <h1 className={css.title}><FormattedMessage id="EditListingLocationPanel.title" values={{ listingTitle }} /></h1>
       <EditListingLocationForm
         className={css.form}
         initialValues={initialSearchFormValues}

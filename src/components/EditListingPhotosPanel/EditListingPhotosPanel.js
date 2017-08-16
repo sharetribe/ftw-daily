@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { omitBy, isUndefined } from 'lodash';
 import { EditListingPhotosForm, PayoutDetailsForm } from '../../containers';
+import { ensureListing } from '../../util/data';
 import { Modal } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import config from '../../config';
@@ -77,6 +78,7 @@ class EditListingPhotosPanel extends Component {
       errors,
       fetchInProgress,
       images,
+      listing,
       onImageUpload,
       onUpdateImageOrder,
       onManageDisableScrolling,
@@ -91,10 +93,13 @@ class EditListingPhotosPanel extends Component {
       [css.payoutModalOpen]: this.state.showPayoutDetails,
     });
     const currency = config.currencyConfig.currency;
+    const currentListing = ensureListing(listing);
+    const { title } = currentListing.attributes;
+    const listingTitle = title || '';
 
     return (
       <div className={classes}>
-        <h1 className={css.title}><FormattedMessage id="EditListingPhotosPanel.title" /></h1>
+        <h1 className={css.title}><FormattedMessage id="EditListingPhotosPanel.title" values={{ listingTitle }} /></h1>
         <EditListingPhotosForm
           className={css.form}
           disabled={fetchInProgress}
@@ -146,6 +151,7 @@ EditListingPhotosPanel.defaultProps = {
   rootClassName: null,
   errors: null,
   images: [],
+  listing: null,
   currentUser: null,
 };
 
@@ -161,6 +167,7 @@ EditListingPhotosPanel.propTypes = {
   }),
   fetchInProgress: bool.isRequired,
   images: array,
+  listing: object, // TODO Should be propTypes.listing after API support is added.
   onImageUpload: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,

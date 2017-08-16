@@ -21,7 +21,7 @@
 .thumbnail {
   margin: 24px 0 0 0;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     width: var(--imageWidthDesktop);
     margin: 0 24px 24px 0;
 
@@ -46,7 +46,7 @@
     clear: both;
   }
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     width: var(--imageWidthDesktop);
     margin: 0 0 24px 0;
   }
@@ -73,14 +73,24 @@
   margin-top: 0;
 
   /* Colors */
-  background-color: #F7F7F7;
+  background-color: var(--matterColorLight);
+
+  @media (--viewportLarge) {
+    background-color: var(--matterColorBright);
+  }
+
   border-style: dashed;
-  border-color: #E6E6E6;
+  border-color: var(--matterColorNegative);
   border-width: 2px;
   border-radius: 2px;
 
   /* Behaviour */
   cursor: pointer;
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    border-color: var(--matterColorAnti);
+  }
 }
 
 .chooseImageText {
@@ -96,19 +106,22 @@
 
   margin-top: 0;
   margin-bottom: 0;
-  @media (--viewportMedium) {
+
+  @media (--viewportLarge) {
+    font-weight: var(--fontWeightSemiBold);
     margin-top: 0;
     margin-bottom: 0;
    }
  }
 
 .imageTypes {
-  @apply --marketplaceH5FontStyles;
+  @apply --marketplaceTinyFontStyles;
   color: var(--matterColorAnti);
 
   margin-top: 0;
   margin-bottom: 0;
-  @media (--viewportMedium) {
+
+  @media (--viewportLarge) {
     margin-top: 0;
     margin-bottom: 0;
    }
@@ -124,12 +137,13 @@
 }
 
 .tip {
+  @apply --marketplaceH5FontStyles;
   flex-shrink: 0;
   color: var(--matterColorAnti);
   margin-top: 24px;
   margin-bottom: 60px;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -144,7 +158,7 @@
   margin-top: auto;
   margin-bottom: 24px;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: inline-block;
     width: 241px;
     margin-top: 100px;
