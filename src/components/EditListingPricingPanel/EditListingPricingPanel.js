@@ -23,10 +23,13 @@ const EditListingPricingPanel = props => {
   const currentListing = ensureListing(listing);
   const { price, title } = currentListing.attributes ;
   const listingTitle = title || '';
+  const panelTitle = currentListing.id
+    ? <FormattedMessage id="EditListingPricingPanel.title" values={{ listingTitle }} />
+    : <FormattedMessage id="EditListingPricingPanel.createListingTitle" />
 
   return (
     <div className={classes}>
-      <h1 className={css.title}><FormattedMessage id="EditListingPricingPanel.title" values={{ listingTitle }} /></h1>
+      <h1 className={css.title}>{panelTitle}</h1>
       <EditListingPricingForm
         className={css.form}
         initialValues={{ price }}

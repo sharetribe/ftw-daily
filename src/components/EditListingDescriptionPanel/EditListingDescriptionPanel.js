@@ -23,11 +23,13 @@ const EditListingDescriptionPanel = props => {
   const currentListing = ensureListing(listing);
   const { description, title } = currentListing.attributes;
   const listingTitle = title || '';
-
+  const panelTitle = currentListing.id
+    ? <FormattedMessage id="EditListingDescriptionPanel.title" values={{ listingTitle }} />
+    : <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
 
   return (
     <div className={classes}>
-      <h1 className={css.title}><FormattedMessage id="EditListingDescriptionPanel.title" values={{ listingTitle }} /></h1>
+      <h1 className={css.title}>{panelTitle}</h1>
       <EditListingDescriptionForm
         className={css.form}
         initialValues={{ title, description }}

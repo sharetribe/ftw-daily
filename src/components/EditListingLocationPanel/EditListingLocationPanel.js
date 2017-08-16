@@ -23,6 +23,9 @@ const EditListingLocationPanel = props => {
   const currentListing = ensureListing(listing);
   const { address, geolocation, title } = currentListing.attributes;
   const listingTitle = title || '';
+  const panelTitle = currentListing.id
+    ? <FormattedMessage id="EditListingLocationPanel.title" values={{ listingTitle }} />
+    : <FormattedMessage id="EditListingLocationPanel.createListingTitle" />
 
   // Only render current search if full place object is available in the URL params
   // TODO bounds and country are missing - those need to be queried directly from Google Places
@@ -52,7 +55,7 @@ const EditListingLocationPanel = props => {
 
   return (
     <div className={classes}>
-      <h1 className={css.title}><FormattedMessage id="EditListingLocationPanel.title" values={{ listingTitle }} /></h1>
+      <h1 className={css.title}>{panelTitle}</h1>
       <EditListingLocationForm
         className={css.form}
         initialValues={initialSearchFormValues}

@@ -96,10 +96,13 @@ class EditListingPhotosPanel extends Component {
     const currentListing = ensureListing(listing);
     const { title } = currentListing.attributes;
     const listingTitle = title || '';
+    const panelTitle = currentListing.id
+      ? <FormattedMessage id="EditListingPhotosPanel.title" values={{ listingTitle }} />
+      : <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />
 
     return (
       <div className={classes}>
-        <h1 className={css.title}><FormattedMessage id="EditListingPhotosPanel.title" values={{ listingTitle }} /></h1>
+        <h1 className={css.title}>{panelTitle}</h1>
         <EditListingPhotosForm
           className={css.form}
           disabled={fetchInProgress}
