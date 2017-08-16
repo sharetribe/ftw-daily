@@ -45,7 +45,6 @@ const MapWithGoogleMap = withGoogleMap(props => {
   const { center, listings, listingOpen, onListingClicked, onMapLoad, zoom } = props;
 
   const priceLabels = listings.reverse().map(listing => {
-
     // if the listing is open, don't print price label
     if (listingOpen && listingOpen.id.uuid === listing.id.uuid) {
       return null;
@@ -105,7 +104,6 @@ export class SearchMapComponent extends Component {
   }
 
   onMapClicked(e) {
-
     // Close open listing popup / infobox, unless the click is attached to a price label
     const labelClicked = hasParentWithClassName(e.nativeEvent.target, PRICE_LABEL_HANDLE);
     if (this.state.listingOpen != null && !labelClicked) {
