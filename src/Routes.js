@@ -54,12 +54,11 @@ class RouteComponentRenderer extends Component {
 
   render() {
     const { route, match, location, staticContext, flattenedRoutes } = this.props;
-    const { component: RouteComponent, preferLogin = false } = route;
+    const { component: RouteComponent, authPage = 'SignupPage' } = route;
     const canShow = this.canShowComponent();
     if (!canShow) {
       staticContext.forbidden = true;
     }
-    const authPageName = preferLogin ? 'LoginPage' : 'SignupPage';
     return canShow
       ? <RouteComponent
           params={match.params}
@@ -67,8 +66,8 @@ class RouteComponentRenderer extends Component {
           flattenedRoutes={flattenedRoutes}
         />
       : <NamedRedirect
-          name={authPageName}
-          state={{ from: `${location.pathname}${location.search}` }}
+          name={authPage}
+          state={{ from: `${location.pathname}${location.search}${location.hash}` }}
         />;
   }
 }

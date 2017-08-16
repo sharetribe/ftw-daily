@@ -309,7 +309,7 @@ const routesConfiguration = [
   {
     path: '/email_verification',
     auth: true,
-    preferLogin: true,
+    authPage: 'LoginPage',
     exact: true,
     name: 'EmailVerificationPage',
     component: props => <EmailVerificationPage {...props} />,
