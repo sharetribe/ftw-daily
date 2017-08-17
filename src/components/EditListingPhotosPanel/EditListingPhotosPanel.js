@@ -98,7 +98,7 @@ class EditListingPhotosPanel extends Component {
     const listingTitle = title || '';
     const panelTitle = currentListing.id
       ? <FormattedMessage id="EditListingPhotosPanel.title" values={{ listingTitle }} />
-      : <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />
+      : <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />;
 
     return (
       <div className={classes}>
