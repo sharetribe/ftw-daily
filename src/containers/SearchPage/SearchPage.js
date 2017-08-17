@@ -23,7 +23,7 @@ import css from './SearchPage.css';
 const RESULT_PAGE_SIZE = 12;
 const SHARETRIBE_API_MAX_PAGE_SIZE = 100;
 const MAX_SEARCH_RESULT_PAGES_ON_MAP = 5; // 100 * 5 = 500 listings are shown on a map.
-const DEBOUNCE_MAP_BOUNDS_CHANGE = 500;   // bounds_change event is fired too often while dragging
+const DEBOUNCE_MAP_BOUNDS_CHANGE = 500; // bounds_change event is fired too often while dragging
 
 const pickSearchParamsOnly = params => {
   const { address, origin, bounds } = params || {};
@@ -33,50 +33,82 @@ const pickSearchParamsOnly = params => {
 export class SearchPageComponent extends Component {
   constructor(props) {
     super(props);
+
+    // Initiating map creates 'bounds_changes' event
+    // we listen to that event to make new searches
+    // So, if the search comes from location search input,
+    // we need to by pass 2nd search created by initial 'bounds_changes' event
+    this.useLocationSearchBounds = true;
+
     this.onBoundsChanged = debounce(this.onBoundsChanged.bind(this), DEBOUNCE_MAP_BOUNDS_CHANGE);
+    this.fetchMoreListingsToMap = this.fetchMoreListingsToMap.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchMoreListingsToMap(this.props.location);
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(this.props.location, nextProps.location)) {
-      const { onSearchMapListings } = this.props;
-      const searchInURL = parse(nextProps.location.search, {
+      this.fetchMoreListingsToMap(nextProps.location);
+
+      // If no boundsChanged url parameter is given, this is original location search
+      const { boundsChanged } = parse(location.search, {
         latlng: ['origin'],
         latlngBounds: ['bounds'],
       });
-      const perPage = SHARETRIBE_API_MAX_PAGE_SIZE;
-      const page = 1;
-      const searchParamsForMapResults = { ...searchInURL, page, perPage };
-
-      // Search more listings for map
-      onSearchMapListings(searchParamsForMapResults)
-        .then(response => {
-          const hasNextPage = page < response.data.meta.totalPages &&
-            page < MAX_SEARCH_RESULT_PAGES_ON_MAP;
-          if (hasNextPage) {
-            onSearchMapListings({ ...searchParamsForMapResults, page: page + 1 });
-          }
-        })
-        .catch(error => {
-          // In case of error, stop recursive loop and report error.
-          // eslint-disable-next-line no-console
-          console.error(`An error (${error} occured while trying to retrieve map listings`);
-        });
+      if (!boundsChanged) {
+        this.useLocationSearchBounds = true;
+      }
     }
   }
 
   onBoundsChanged(googleMap) {
     const { flattenedRoutes, history, location } = this.props;
-    const { address, country } = parse(location.search, {
+
+    const { address, country, boundsChanged } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
 
-    const viewportBounds = googleMap.getBounds();
-    const bounds = googleBoundsToSDKBounds(viewportBounds);
-    const origin = googleLatLngToSDKLatLng(viewportBounds.getCenter());
+    // If boundsChanged url param is given or original location search is rendered once,
+    // we start to react to 'bounds_changed' event by generating new searches
+    if (boundsChanged || (!this.useLocationSearchBounds && !boundsChanged)) {
+      const viewportBounds = googleMap.getBounds();
+      const bounds = googleBoundsToSDKBounds(viewportBounds);
+      const origin = googleLatLngToSDKLatLng(viewportBounds.getCenter());
 
-    const searchParams = { address, origin, bounds, country };
-    history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
+      const searchParams = { address, origin, bounds, country, boundsChanged: true };
+      history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
+    } else {
+      this.useLocationSearchBounds = false;
+    }
+  }
+
+  fetchMoreListingsToMap(location) {
+    const { onSearchMapListings } = this.props;
+    const searchInURL = parse(location.search, {
+      latlng: ['origin'],
+      latlngBounds: ['bounds'],
+    });
+    const perPage = SHARETRIBE_API_MAX_PAGE_SIZE;
+    const page = 1;
+    const searchParamsForMapResults = { ...searchInURL, page, perPage };
+
+    // Search more listings for map
+    onSearchMapListings(searchParamsForMapResults)
+      .then(response => {
+        const hasNextPage = page < response.data.meta.totalPages &&
+          page < MAX_SEARCH_RESULT_PAGES_ON_MAP;
+        if (hasNextPage) {
+          onSearchMapListings({ ...searchParamsForMapResults, page: page + 1 });
+        }
+      })
+      .catch(error => {
+        // In case of error, stop recursive loop and report error.
+        // eslint-disable-next-line no-console
+        console.error(`An error (${error} occured while trying to retrieve map listings`);
+      });
   }
 
   render() {
@@ -103,7 +135,7 @@ export class SearchPageComponent extends Component {
     } = this.props;
 
     // eslint-disable-next-line no-unused-vars
-    const { page, ...searchInURL } = parse(location.search, {
+    const { boundsChanged, page, ...searchInURL } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
@@ -141,7 +173,9 @@ export class SearchPageComponent extends Component {
         />
       </h2>
     );
-    const resultsFound = address ? resultsFoundWithAddress : resultsFoundNoAddress;
+    const resultsFound = address && !boundsChanged
+      ? resultsFoundWithAddress
+      : resultsFoundNoAddress;
 
     const noResults = (
       <h2>
