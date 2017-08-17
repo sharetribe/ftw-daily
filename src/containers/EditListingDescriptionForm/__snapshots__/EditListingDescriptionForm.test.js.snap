@@ -12,6 +12,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
       autoFocus={true}
       className=""
       id="fakeTestForm.title"
+      maxLength={60}
       name="title"
       onBlur={[Function]}
       onChange={[Function]}
