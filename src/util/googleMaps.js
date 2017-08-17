@@ -112,6 +112,9 @@ export const googleLatLngToSDKLatLng = googleLatLng => {
  * @return {SDKLatLngBounds} - Converted bounds
  */
 export const googleBoundsToSDKBounds = googleBounds => {
+  if (!googleBounds) {
+    return null;
+  }
   const ne = googleBounds.getNorthEast();
   const sw = googleBounds.getSouthWest();
   return new SDKLatLngBounds(new SDKLatLng(ne.lat(), ne.lng()), new SDKLatLng(sw.lat(), sw.lng()));
