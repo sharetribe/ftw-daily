@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Field } from 'redux-form';
 import classNames from 'classnames';
-import { ValidationError } from '../../components';
+import { ValidationError, ExpandingTextarea } from '../../components';
 
 import css from './TextInputField.css';
 
@@ -49,7 +49,7 @@ class TextInputFieldComponent extends Component {
     return (
       <div className={classes}>
         {label ? <label htmlFor={id}>{label}</label> : null}
-        {isTextarea ? <textarea {...inputProps} /> : <input {...inputProps} />}
+        {isTextarea ? <ExpandingTextarea {...inputProps} /> : <input {...inputProps} />}
         <ValidationError fieldMeta={meta} />
       </div>
     );

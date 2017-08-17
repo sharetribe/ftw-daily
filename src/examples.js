@@ -7,6 +7,7 @@ import * as CurrencyInputField from './components/CurrencyInputField/CurrencyInp
 import * as DateInputField from './components/DateInputField/DateInputField.example';
 import * as DateRangeInputField from './components/DateRangeInputField/DateRangeInputField.example';
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
+import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as Map from './components/Map/Map.example';
 import * as Menu from './components/Menu/Menu.example';
@@ -50,8 +51,8 @@ import * as Typography from './containers/StyleguidePage/Typography.example';
 export {
   AddImages,
   BirthdayInputField,
-  BookingDatesForm,
   BookingBreakdown,
+  BookingDatesForm,
   Button,
   ChangeAccountPasswordForm,
   ChangePasswordForm,
@@ -64,6 +65,7 @@ export {
   EditListingPhotosForm,
   EditListingPricingForm,
   EditListingWizard,
+  ExpandingTextarea,
   ListingCard,
   LocationAutocompleteInput,
   LoginForm,
