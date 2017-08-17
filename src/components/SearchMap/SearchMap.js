@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { withGoogleMap, GoogleMap } from 'react-google-maps';
 import classNames from 'classnames';
+import { isEqual } from 'lodash';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import * as propTypes from '../../util/propTypes';
+import { googleBoundsToSDKBounds } from '../../util/googleMaps';
 import { SearchMapListingCard, SearchMapPriceLabel } from '../../components';
 
 import css from './SearchMap.css';
@@ -42,7 +44,15 @@ const hasParentWithClassName = (target, className) => {
  * It handles some of the google map initialization states.
  */
 const MapWithGoogleMap = withGoogleMap(props => {
-  const { center, listings, listingOpen, onListingClicked, onMapLoad, zoom } = props;
+  const {
+    center,
+    listings,
+    listingOpen,
+    onBoundsChanged,
+    onListingClicked,
+    onMapLoad,
+    zoom,
+  } = props;
 
   const priceLabels = listings.reverse().map(listing => {
     // if the listing is open, don't print price label
@@ -74,6 +84,7 @@ const MapWithGoogleMap = withGoogleMap(props => {
         scrollwheel: false,
       }}
       ref={onMapLoad}
+      onBoundsChanged={onBoundsChanged}
     >
       {priceLabels}
       {openedCard}
@@ -85,6 +96,7 @@ export class SearchMapComponent extends Component {
   constructor(props) {
     super(props);
 
+    this.listings = [];
     this.googleMap = null;
     this.state = { listingOpen: null };
     this.onListingClicked = this.onListingClicked.bind(this);
@@ -97,6 +109,23 @@ export class SearchMapComponent extends Component {
     if (!mapsLibLoaded) {
       throw new Error('Google Maps API must be loaded for the SearchMap component');
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.googleMap) {
+      const currentBounds = googleBoundsToSDKBounds(this.googleMap.getBounds());
+
+      // Do not call fitMapToBounds if bounds are the same.
+      // Our bounds are viewport bounds, and fitBounds will try to add margins around those bounds
+      // that would result to zoom-loop (bound change -> fitmap -> bounds change -> ...)
+      if (!isEqual(nextProps.bounds, currentBounds)) {
+        fitMapToBounds(this.googleMap, nextProps.bounds);
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    this.listings = [];
   }
 
   onListingClicked(listing) {
@@ -113,6 +142,7 @@ export class SearchMapComponent extends Component {
 
   onMapLoadHandler(map) {
     this.googleMap = map;
+    // map is ready, let's fit search area's bounds to map's viewport
     fitMapToBounds(this.googleMap, this.props.bounds);
   }
 
@@ -123,6 +153,7 @@ export class SearchMapComponent extends Component {
       mapRootClassName,
       center,
       listings,
+      onBoundsChanged,
       zoom,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
@@ -139,6 +170,9 @@ export class SearchMapComponent extends Component {
         listingOpen={this.state.listingOpen}
         onListingClicked={this.onListingClicked}
         onMapLoad={this.onMapLoadHandler}
+        onBoundsChanged={() => {
+          onBoundsChanged(this.googleMap);
+        }}
         zoom={zoom}
       />
     );
@@ -156,7 +190,7 @@ SearchMapComponent.defaultProps = {
   zoom: 11,
 };
 
-const { arrayOf, number, string } = PropTypes;
+const { arrayOf, func, number, string } = PropTypes;
 
 SearchMapComponent.propTypes = {
   bounds: propTypes.latlngBounds,
@@ -164,6 +198,7 @@ SearchMapComponent.propTypes = {
   className: string,
   listings: arrayOf(propTypes.listing),
   mapRootClassName: string,
+  onBoundsChanged: func.isRequired,
   rootClassName: string,
   zoom: number,
 };
