@@ -92,3 +92,16 @@ export const getPlacePredictions = search =>
       }
     });
   });
+
+/**
+ * Convert Google formatted bounds object to Sharetribe SDK's bounds format
+ *
+ * @param {LatLngBounds} googleBounds - Google Maps LatLngBounds
+ *
+ * @return {SDKLatLngBounds} - Converted bounds
+ */
+export const googleBoundsToSDKBounds = googleBounds => {
+  const ne = googleBounds.getNorthEast();
+  const sw = googleBounds.getSouthWest();
+  return new SDKLatLngBounds(new SDKLatLng(ne.lat(), ne.lng()), new SDKLatLng(sw.lat(), sw.lng()));
+};
