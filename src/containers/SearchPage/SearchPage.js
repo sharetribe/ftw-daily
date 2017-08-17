@@ -3,8 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { unionWith } from 'lodash';
+import { debounce, isEqual, unionWith } from 'lodash';
 import config from '../../config';
+import { withFlattenedRoutes } from '../../util/contextHelpers';
+import { googleLatLngToSDKLatLng, googleBoundsToSDKBounds } from '../../util/googleMaps';
+import { createResourceLocatorString } from '../../util/routes';
 import { parse, stringify } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
@@ -14,11 +17,13 @@ import { SearchMap, ModalInMobile, PageLayout, SearchResultsPanel, Topbar } from
 import { searchListings, searchMapListings } from './SearchPage.duck';
 import css from './SearchPage.css';
 
-// TODO Pagination page size might need to be dynamic on responsive page layouts
+// Pagination page size might need to be dynamic on responsive page layouts
+// Current design has max 3 columns 12 is divisible by 2 and 3
+// So, there's enough cards to fill all columns on full pagination pages
 const RESULT_PAGE_SIZE = 12;
 const SHARETRIBE_API_MAX_PAGE_SIZE = 100;
-const MAX_SEARCH_RESULT_PAGES_ON_MAP = 5;
-// 100 * 5 = 500 listings are shown on a map.
+const MAX_SEARCH_RESULT_PAGES_ON_MAP = 5; // 100 * 5 = 500 listings are shown on a map.
+const DEBOUNCE_MAP_BOUNDS_CHANGE = 500;   // bounds_change event is fired too often while dragging
 
 const pickSearchParamsOnly = params => {
   const { address, origin, bounds } = params || {};
@@ -26,30 +31,52 @@ const pickSearchParamsOnly = params => {
 };
 
 export class SearchPageComponent extends Component {
-  componentDidMount() {
-    const { location, onSearchMapListings } = this.props;
-    const searchInURL = parse(location.search, {
+  constructor(props) {
+    super(props);
+    this.onBoundsChanged = debounce(this.onBoundsChanged.bind(this), DEBOUNCE_MAP_BOUNDS_CHANGE);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!isEqual(this.props.location, nextProps.location)) {
+      const { onSearchMapListings } = this.props;
+      const searchInURL = parse(nextProps.location.search, {
+        latlng: ['origin'],
+        latlngBounds: ['bounds'],
+      });
+      const perPage = SHARETRIBE_API_MAX_PAGE_SIZE;
+      const page = 1;
+      const searchParamsForMapResults = { ...searchInURL, page, perPage };
+
+      // Search more listings for map
+      onSearchMapListings(searchParamsForMapResults)
+        .then(response => {
+          const hasNextPage = page < response.data.meta.totalPages &&
+            page < MAX_SEARCH_RESULT_PAGES_ON_MAP;
+          if (hasNextPage) {
+            onSearchMapListings({ ...searchParamsForMapResults, page: page + 1 });
+          }
+        })
+        .catch(error => {
+          // In case of error, stop recursive loop and report error.
+          // eslint-disable-next-line no-console
+          console.error(`An error (${error} occured while trying to retrieve map listings`);
+        });
+    }
+  }
+
+  onBoundsChanged(googleMap) {
+    const { flattenedRoutes, history, location } = this.props;
+    const { address, country } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
-    const perPage = SHARETRIBE_API_MAX_PAGE_SIZE;
-    const page = 1;
-    const searchParamsForMapResults = { ...searchInURL, page, perPage };
 
-    // Search more listings
-    onSearchMapListings(searchParamsForMapResults)
-      .then(response => {
-        const hasNextPage = page < response.data.meta.totalPages &&
-          page < MAX_SEARCH_RESULT_PAGES_ON_MAP;
-        if (hasNextPage) {
-          onSearchMapListings({ ...searchParamsForMapResults, page: page + 1 });
-        }
-      })
-      .catch(error => {
-        // In case of error, stop recursive loop and report error.
-        // eslint-disable-next-line no-console
-        console.error(`An error (${error} occured while trying to retrieve map listings`);
-      });
+    const viewportBounds = googleMap.getBounds();
+    const bounds = googleBoundsToSDKBounds(viewportBounds);
+    const origin = googleLatLngToSDKLatLng(viewportBounds.getCenter());
+
+    const searchParams = { address, origin, bounds, country };
+    history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
   }
 
   render() {
@@ -174,7 +201,12 @@ export class SearchPageComponent extends Component {
             onManageDisableScrolling={onManageDisableScrolling}
           >
             <div className={css.map}>
-              <SearchMap bounds={bounds} center={origin} listings={mapListings || []} />
+              <SearchMap
+                bounds={bounds}
+                center={origin}
+                listings={mapListings || []}
+                onBoundsChanged={this.onBoundsChanged}
+              />
             </div>
           </ModalInMobile>
         </div>
@@ -196,7 +228,7 @@ SearchPageComponent.defaultProps = {
   tab: 'listings',
 };
 
-const { array, bool, func, instanceOf, number, oneOf, object, shape, string } = PropTypes;
+const { array, arrayOf, bool, func, instanceOf, number, oneOf, object, shape, string } = PropTypes;
 
 SearchPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
@@ -217,6 +249,9 @@ SearchPageComponent.propTypes = {
   searchListingsError: instanceOf(Error),
   searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
+
+  // from withFlattenedRoutes
+  flattenedRoutes: arrayOf(propTypes.route).isRequired,
 
   // from withRouter
   history: shape({
@@ -273,9 +308,11 @@ const mapDispatchToProps = dispatch => ({
   onSearchMapListings: searchParams => dispatch(searchMapListings(searchParams)),
 });
 
-const SearchPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
-  SearchPageComponent
-);
+const SearchPage = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withFlattenedRoutes,
+  withRouter
+)(SearchPageComponent);
 
 SearchPage.loadData = (params, search) => {
   const queryParams = parse(search, {
