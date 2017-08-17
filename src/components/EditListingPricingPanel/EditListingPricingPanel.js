@@ -21,11 +21,11 @@ const EditListingPricingPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
-  const { price, title } = currentListing.attributes ;
+  const { price, title } = currentListing.attributes;
   const listingTitle = title || '';
   const panelTitle = currentListing.id
     ? <FormattedMessage id="EditListingPricingPanel.title" values={{ listingTitle }} />
-    : <FormattedMessage id="EditListingPricingPanel.createListingTitle" />
+    : <FormattedMessage id="EditListingPricingPanel.createListingTitle" />;
 
   return (
     <div className={classes}>

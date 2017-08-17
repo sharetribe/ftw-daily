@@ -25,7 +25,7 @@ const EditListingDescriptionPanel = props => {
   const listingTitle = title || '';
   const panelTitle = currentListing.id
     ? <FormattedMessage id="EditListingDescriptionPanel.title" values={{ listingTitle }} />
-    : <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
+    : <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />;
 
   return (
     <div className={classes}>
