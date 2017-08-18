@@ -18,6 +18,7 @@ import {
   requestUpdateListing,
   requestImageUpload,
   updateImageOrder,
+  removeListingImage,
   loadData,
   clearUpdatedTab,
 } from './EditListingPage.duck';
@@ -64,6 +65,7 @@ export const EditListingPageComponent = props => {
     onUpdateListing,
     onCreateListingDraft,
     onImageUpload,
+    onRemoveListingImage,
     onLogout,
     onManageDisableScrolling,
     onPayoutDetailsSubmit,
@@ -107,7 +109,10 @@ export const EditListingPageComponent = props => {
     // Images not yet connected to the listing
     const unattachedImages = page.imageOrder.map(i => page.images[i]);
 
-    const images = currentListingImages.concat(unattachedImages);
+    const allImages = currentListingImages.concat(unattachedImages);
+    const images = allImages.filter(img => {
+      return !page.removedImageIds.includes(img.id);
+    });
 
     const title = isNew
       ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
@@ -150,6 +155,7 @@ export const EditListingPageComponent = props => {
           onPayoutDetailsSubmit={onPayoutDetailsSubmit}
           onImageUpload={onImageUpload}
           onUpdateImageOrder={onUpdateImageOrder}
+          onRemoveImage={onRemoveListingImage}
           onChange={onChange}
           currentUser={currentUser}
           onManageDisableScrolling={onManageDisableScrolling}
@@ -197,6 +203,7 @@ EditListingPageComponent.propTypes = {
   onManageDisableScrolling: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
+  onRemoveListingImage: func.isRequired,
   onUpdateListingDraft: func.isRequired,
   onUpdateListing: func.isRequired,
   onChange: func.isRequired,
@@ -259,6 +266,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onPayoutDetailsSubmit: values => dispatch(createStripeAccount(values)),
   onUpdateImageOrder: imageOrder => dispatch(updateImageOrder(imageOrder)),
+  onRemoveListingImage: imageId => dispatch(removeListingImage(imageId)),
   onUpdateListingDraft: values => dispatch(updateListingDraft(values)),
   onChange: () => dispatch(clearUpdatedTab()),
 });

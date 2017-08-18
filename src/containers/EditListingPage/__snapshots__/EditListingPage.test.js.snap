@@ -46,6 +46,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     onImageUpload={[Function]}
     onManageDisableScrolling={[Function]}
     onPayoutDetailsSubmit={[Function]}
+    onRemoveImage={[Function]}
     onUpdateImageOrder={[Function]}
     onUpdateListing={[Function]}
     onUpdateListingDraft={[Function]}

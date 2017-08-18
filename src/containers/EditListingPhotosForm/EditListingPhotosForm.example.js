@@ -18,6 +18,9 @@ export const Empty = {
     onUpdateImageOrder: imageOrder => {
       console.log('onUpdateImageOrder with new imageOrder:', imageOrder);
     },
+    onRemoveImage: imageId => {
+      console.log('remove image:', imageId);
+    },
   },
   group: 'forms',
 };

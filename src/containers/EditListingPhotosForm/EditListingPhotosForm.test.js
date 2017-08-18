@@ -24,6 +24,7 @@ describe('EditListingPhotosForm', () => {
         stripeConnected={false}
         updated={false}
         updateInProgress={false}
+        onRemoveImage={noop}
       />
     );
     expect(tree).toMatchSnapshot();

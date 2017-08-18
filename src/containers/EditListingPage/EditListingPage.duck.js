@@ -35,6 +35,8 @@ export const UPDATE_IMAGE_ORDER = 'app/EditListingPage/UPDATE_IMAGE_ORDER';
 export const CREATE_LISTING_DRAFT = 'app/EditListingPage/CREATE_LISTING_DRAFT';
 export const UPDATE_LISTING_DRAFT = 'app/EditListingPage/UPDATE_LISTING_DRAFT';
 
+export const REMOVE_LISTING_IMAGE = 'app/EditListingPage/REMOVE_LISTING_IMAGE';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -47,6 +49,7 @@ const initialState = {
   redirectToListing: false,
   images: {},
   imageOrder: [],
+  removedImageIds: [],
   listingDraft: null,
   updatedTab: null,
   updateInProgress: false,
@@ -133,6 +136,23 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, listingDraft };
     }
 
+    case REMOVE_LISTING_IMAGE: {
+      const id = payload.imageId;
+
+      // Only mark the image removed if it hasn't been added to the
+      // listing already
+      const removedImageIds = state.images[id]
+        ? state.removedImageIds
+        : state.removedImageIds.concat(id);
+
+      // Always remove from the draft since it might be a new image to
+      // an existing listing.
+      const images = omit(state.images, id);
+      const imageOrder = state.imageOrder.filter(i => i !== id);
+
+      return { ...state, images, imageOrder, removedImageIds };
+    }
+
     default:
       return state;
   }
@@ -172,6 +192,11 @@ export const updateListingDraft = listingData => {
     payload: { attributes: { address, description, geolocation, price, title }, images },
   };
 };
+
+export const removeListingImage = imageId => ({
+  type: REMOVE_LISTING_IMAGE,
+  payload: { imageId },
+});
 
 // All the action creators that don't have the {Success, Error} suffix
 // take the params object that the corresponding SDK endpoint method

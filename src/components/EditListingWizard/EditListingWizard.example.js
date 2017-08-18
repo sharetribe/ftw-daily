@@ -22,6 +22,7 @@ export const NoPhotos = {
     stripeConnected: true,
     onImageUpload: noop,
     onUpdateImageOrder: noop,
+    onRemoveImage: noop,
     onUpdateListing: noop,
     onCreateListing: noop,
     onCreateListingDraft: noop,
