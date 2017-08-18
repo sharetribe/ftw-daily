@@ -54,6 +54,7 @@ const MapWithGoogleMap = withGoogleMap(props => {
     listings,
     listingOpen,
     onBoundsChanged,
+    onCloseAsModal,
     onListingClicked,
     onMapLoad,
     zoom,
@@ -75,7 +76,7 @@ const MapWithGoogleMap = withGoogleMap(props => {
   });
 
   const openedCard = listingOpen
-    ? <SearchMapListingCard key={listingOpen.id.uuid} listing={listingOpen} />
+    ? <SearchMapListingCard key={listingOpen.id.uuid} listing={listingOpen} onClickCallback={onCloseAsModal} />
     : null;
 
   return (
@@ -166,6 +167,7 @@ export class SearchMapComponent extends Component {
       isOpenOnModal,
       listings,
       onBoundsChanged,
+      onCloseAsModal,
       zoom,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
@@ -186,6 +188,11 @@ export class SearchMapComponent extends Component {
         onBoundsChanged={() => {
           onBoundsChanged(this.googleMap);
         }}
+        onCloseAsModal={() => {
+          if (onCloseAsModal) {
+            onCloseAsModal();
+          }
+        }}
         zoom={zoom}
       />
     );
@@ -200,6 +207,7 @@ SearchMapComponent.defaultProps = {
   bounds: null,
   center: new sdkTypes.LatLng(0, 0),
   isOpenOnModal: false,
+  onCloseAsModal: null,
   listings: [],
   zoom: 11,
 };
@@ -214,6 +222,7 @@ SearchMapComponent.propTypes = {
   listings: arrayOf(propTypes.listing),
   mapRootClassName: string,
   onBoundsChanged: func.isRequired,
+  onCloseAsModal: func,
   rootClassName: string,
   zoom: number,
 };

@@ -37,6 +37,10 @@ class SearchMapListingCard extends Component {
   clickHandler(e) {
     e.preventDefault();
 
+    if (this.props.onClickCallback) {
+      this.props.onClickCallback();
+    }
+
     // To avoid full page refresh we need to use internal router
     const { flattenedRoutes, history, listing } = this.props;
     history.push(createURL(flattenedRoutes, history, ensureListing(listing)));
@@ -103,6 +107,7 @@ class SearchMapListingCard extends Component {
 SearchMapListingCard.defaultProps = {
   className: null,
   rootClassName: null,
+  onClickCallback: null,
 };
 
 const { arrayOf, func, shape, string } = PropTypes;
@@ -111,6 +116,7 @@ SearchMapListingCard.propTypes = {
   className: string,
   rootClassName: string,
   listing: propTypes.listing.isRequired,
+  onClickCallback: func,
 
   // from withFlattenedRoutes
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
