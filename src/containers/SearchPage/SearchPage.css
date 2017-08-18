@@ -73,8 +73,46 @@
   flex-grow: 1;
 }
 
+.openMobileMap {
+  /* Font */
+  @apply --marketplaceH4FontStyles;
+
+  /* Positioning */
+  position: fixed;
+  bottom: 48px;
+  left: 50vw;
+  transform: translateX(-50%);
+  margin-top: 0;
+  margin-bottom: 0;
+
+  /* Button's layout */
+  padding: 12px 24px;
+  background-color: var(--matterColorLight);
+  border-radius: 24px;
+  border: 0;
+  box-shadow: var(--boxShadow);
+  cursor: pointer;
+  transition: var(--transitionStyleButton);
+
+  & .openMobileMapIcon {
+    stroke: var(--matterColor);
+  }
+
+  &:hover {
+    color: var(--marketplaceColor);
+    box-shadow: var(--boxShadowPopupLight);
+
+    & .openMobileMapIcon {
+      stroke: var(--marketplaceColor);
+    }
+  }
+
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
 .mapPanel {
-  display: none;
 
   @media (--viewportMedium) {
     /**
@@ -94,6 +132,8 @@
 }
 
 .map {
+  width: 100vw;
+  height: 100vh;
 
   @media (--viewportMedium) {
     /* Map is fixed so that it doesn't scroll along search results */
