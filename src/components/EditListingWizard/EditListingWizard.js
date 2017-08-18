@@ -124,7 +124,7 @@ const EditListingWizard = props => {
     <Tabs rootClassName={classes} navRootClassName={css.nav} tabRootClassName={css.tab}>
       <EditListingDescriptionPanel
         className={css.panel}
-        tabLabel="Description"
+        tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelDescription' })}
         tabLinkProps={tabLink(DESCRIPTION)}
         selected={selectedTab === DESCRIPTION}
         panelUpdated={updatedTab === DESCRIPTION}
@@ -149,7 +149,7 @@ const EditListingWizard = props => {
       />
       <EditListingLocationPanel
         className={css.panel}
-        tabLabel="Location"
+        tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelLocation' })}
         tabLinkProps={tabLink(LOCATION)}
         selected={selectedTab === LOCATION}
         panelUpdated={updatedTab === LOCATION}
@@ -182,7 +182,7 @@ const EditListingWizard = props => {
       />
       <EditListingPricingPanel
         className={css.panel}
-        tabLabel="Pricing"
+        tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelPricing' })}
         tabLinkProps={tabLink(PRICING)}
         selected={selectedTab === PRICING}
         panelUpdated={updatedTab === PRICING}
@@ -207,7 +207,7 @@ const EditListingWizard = props => {
       />
       <EditListingPhotosPanel
         className={css.panel}
-        tabLabel="Photos"
+        tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelPhotos' })}
         tabLinkProps={tabLink(PHOTOS)}
         selected={selectedTab === PHOTOS}
         disabled={!stepsStatus[PHOTOS]}
