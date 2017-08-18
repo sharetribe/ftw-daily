@@ -78,6 +78,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           className=""
           listings={Array []}
           mapRootClassName={null}
+          onBoundsChanged={[Function]}
           rootClassName={null}
           zoom={11} />
       </div>

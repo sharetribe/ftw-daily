@@ -1,3 +1,4 @@
+import { unionWith } from 'lodash';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 
 // ================ Action types ================ //
@@ -33,6 +34,7 @@ const listingPageReducer = (state = initialState, action = {}) => {
         searchParams: payload.searchParams,
         searchInProgress: true,
         currentPageResultIds: [],
+        searchMapListingIds: [],
         searchListingsError: null,
       };
     case SEARCH_LISTINGS_SUCCESS:
@@ -50,14 +52,19 @@ const listingPageReducer = (state = initialState, action = {}) => {
     case SEARCH_MAP_LISTINGS_REQUEST:
       return {
         ...state,
-        //searchMapListingIds: [],
         searchMapListingsError: null,
       };
-    case SEARCH_MAP_LISTINGS_SUCCESS:
+    case SEARCH_MAP_LISTINGS_SUCCESS: {
+      const searchMapListingIds = unionWith(
+        state.searchMapListingIds,
+        resultIds(payload.data),
+        (id1, id2) => id1.uuid === id2.uuid
+      );
       return {
         ...state,
-        searchMapListingIds: state.searchMapListingIds.concat(resultIds(payload.data)),
+        searchMapListingIds,
       };
+    }
     case SEARCH_MAP_LISTINGS_ERROR:
       // eslint-disable-next-line no-console
       console.error(payload);
