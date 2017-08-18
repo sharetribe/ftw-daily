@@ -61,11 +61,21 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           rootClassName={null}
           search={Object {}} />
       </div>
+      <button
+        onClick={[Function]}>
+        <MapIcon
+          className={null} />
+        <FormattedMessage
+          id="SearchPage.openMapView"
+          values={Object {}} />
+      </button>
     </div>
     <withViewport(ModalInMobileComponent)
       id="SearchPage.map"
       isModalOpenOnMobile={false}
-      onManageDisableScrolling={[Function]}>
+      onClose={[Function]}
+      onManageDisableScrolling={[Function]}
+      showAsModalMaxWidth={768}>
       <div>
         <SearchMapComponent
           bounds={null}
@@ -76,6 +86,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             }
           }
           className=""
+          isOpenOnModal={false}
           listings={Array []}
           mapRootClassName={null}
           onBoundsChanged={[Function]}

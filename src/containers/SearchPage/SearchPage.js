@@ -14,7 +14,9 @@ import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { SearchMap, ModalInMobile, PageLayout, SearchResultsPanel, Topbar } from '../../components';
+
 import { searchListings, searchMapListings } from './SearchPage.duck';
+import MapIcon from './MapIcon';
 import css from './SearchPage.css';
 
 // Pagination page size might need to be dynamic on responsive page layouts
@@ -24,6 +26,7 @@ const RESULT_PAGE_SIZE = 12;
 const SHARETRIBE_API_MAX_PAGE_SIZE = 100;
 const MAX_SEARCH_RESULT_PAGES_ON_MAP = 5; // 100 * 5 = 500 listings are shown on a map.
 const DEBOUNCE_MAP_BOUNDS_CHANGE = 500; // bounds_change event is fired too often while dragging
+const MODAL_BREAKPOINT = 768; /* Search is in modal on mobile layout */
 
 const pickSearchParamsOnly = params => {
   const { address, origin, bounds } = params || {};
@@ -34,11 +37,16 @@ export class SearchPageComponent extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      isSearchMapOpenOnMobile: false,
+    };
+
     // Initiating map creates 'bounds_changes' event
     // we listen to that event to make new searches
     // So, if the search comes from location search input,
     // we need to by pass 2nd search created by initial 'bounds_changes' event
     this.useLocationSearchBounds = true;
+    this.modalOpenedBoundsChange = false;
 
     this.onBoundsChanged = debounce(this.onBoundsChanged.bind(this), DEBOUNCE_MAP_BOUNDS_CHANGE);
     this.fetchMoreListingsToMap = this.fetchMoreListingsToMap.bind(this);
@@ -71,9 +79,10 @@ export class SearchPageComponent extends Component {
       latlngBounds: ['bounds'],
     });
 
-    // If boundsChanged url param is given or original location search is rendered once,
+    // If boundsChanged url param is given (and we have not just opened mobile map modal)
+    // or original location search is rendered once,
     // we start to react to 'bounds_changed' event by generating new searches
-    if (boundsChanged || (!this.useLocationSearchBounds && !boundsChanged)) {
+    if ((boundsChanged && !this.modalOpenedBoundsChange) || !this.useLocationSearchBounds) {
       const viewportBounds = googleMap.getBounds();
       const bounds = googleBoundsToSDKBounds(viewportBounds);
       const origin = googleLatLngToSDKLatLng(viewportBounds.getCenter());
@@ -82,6 +91,7 @@ export class SearchPageComponent extends Component {
       history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
     } else {
       this.useLocationSearchBounds = false;
+      this.modalOpenedBoundsChange = false;
     }
   }
 
@@ -189,6 +199,18 @@ export class SearchPageComponent extends Component {
       </h2>
     );
 
+    const searchMap = (
+      <SearchMap
+        bounds={bounds}
+        center={origin}
+        listings={mapListings || []}
+        onBoundsChanged={this.onBoundsChanged}
+        isOpenOnModal={this.state.isSearchMapOpenOnMobile}
+      />
+    );
+    const showSearchMapInMobile = this.state.isSearchMapOpenOnMobile ? searchMap : null;
+    const searchMapMaybe = window.innerWidth < MODAL_BREAKPOINT ? showSearchMapInMobile : searchMap;
+
     const searchParamsForPagination = parse(location.search);
 
     return (
@@ -227,20 +249,28 @@ export class SearchPageComponent extends Component {
                 search={searchParamsForPagination}
               />
             </div>
+            <button
+              className={css.openMobileMap}
+              onClick={() => {
+                this.useLocationSearchBounds = true;
+                this.modalOpenedBoundsChange = true;
+                this.setState({ isSearchMapOpenOnMobile: true });
+              }}
+            >
+              <MapIcon className={css.openMobileMapIcon} />
+              <FormattedMessage id="SearchPage.openMapView" />
+            </button>
           </div>
           <ModalInMobile
             className={css.mapPanel}
             id="SearchPage.map"
-            isModalOpenOnMobile={false}
+            isModalOpenOnMobile={this.state.isSearchMapOpenOnMobile}
+            onClose={() => this.setState({ isSearchMapOpenOnMobile: false })}
+            showAsModalMaxWidth={MODAL_BREAKPOINT}
             onManageDisableScrolling={onManageDisableScrolling}
           >
             <div className={css.map}>
-              <SearchMap
-                bounds={bounds}
-                center={origin}
-                listings={mapListings || []}
-                onBoundsChanged={this.onBoundsChanged}
-              />
+              {searchMapMaybe}
             </div>
           </ModalInMobile>
         </div>

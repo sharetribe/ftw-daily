@@ -251,6 +251,7 @@
   "SearchPage.loadingResults": "Loading search results…",
   "SearchPage.loadingResults": "Loading search results…",
   "SearchPage.noResults": "Could not find any listings.",
+  "SearchPage.openMapView": "Map view",
   "SearchPage.searchError": "Search failed. Please try again.",
   "SearchResultsPanel.nextPage": "Next page",
   "SearchResultsPanel.previousPage": "Previous page",
