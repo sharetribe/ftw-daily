@@ -52,6 +52,9 @@
   top: 0;
   right: 0;
 
+  /* Some content (like map) is positioning itself on top of close button without z-index handling */
+  z-index: calc(var(--zIndexModal) + 1);
+
   /* Safari didn't know how to baseline-align svg icon and text */
   display: flex;
   align-items: flex-start;
