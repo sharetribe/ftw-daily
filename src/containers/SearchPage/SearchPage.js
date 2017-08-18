@@ -209,7 +209,10 @@ export class SearchPageComponent extends Component {
       />
     );
     const showSearchMapInMobile = this.state.isSearchMapOpenOnMobile ? searchMap : null;
-    const searchMapMaybe = window.innerWidth < MODAL_BREAKPOINT ? showSearchMapInMobile : searchMap;
+    const isWindowDefined = typeof window !== 'undefined';
+    const searchMapMaybe = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT
+      ? showSearchMapInMobile
+      : searchMap;
 
     const searchParamsForPagination = parse(location.search);
 
