@@ -206,6 +206,9 @@ export class SearchPageComponent extends Component {
         listings={mapListings || []}
         onBoundsChanged={this.onBoundsChanged}
         isOpenOnModal={this.state.isSearchMapOpenOnMobile}
+        onCloseAsModal={() => {
+          onManageDisableScrolling('SearchPage.map', false);
+        }}
       />
     );
     const showSearchMapInMobile = this.state.isSearchMapOpenOnMobile ? searchMap : null;
