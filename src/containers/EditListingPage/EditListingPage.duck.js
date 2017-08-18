@@ -240,12 +240,21 @@ export function requestShowListing(actionPayload) {
   };
 }
 
+const cleanUpListingData = data => {
+  // Since we display the line breaks in the listing description, we
+  // should trim the extra whitespace from the start and the end of
+  // the description.
+  return data.description ? { ...data, description: data.description.trim() } : data;
+};
+
 export function requestCreateListing(data) {
   return (dispatch, getState, sdk) => {
-    dispatch(createListing(data));
+    const cleanedData = cleanUpListingData(data);
+
+    dispatch(createListing(cleanedData));
 
     return sdk.listings
-      .create(data)
+      .create(cleanedData)
       .then(response => {
         const id = response.data.data.id.uuid;
         // Modify store to understand that we have created listing and can redirect away
@@ -282,11 +291,12 @@ export function requestImageUpload(actionPayload) {
 // display the state.
 export function requestUpdateListing(tab, data) {
   return (dispatch, getState, sdk) => {
-    dispatch(updateListing(data));
-    const { id } = data;
+    const cleanedData = cleanUpListingData(data);
+    dispatch(updateListing(cleanedData));
+    const { id } = cleanedData;
     let updateResponse;
     return sdk.listings
-      .update(data)
+      .update(cleanedData)
       .then(response => {
         updateResponse = response;
         const payload = { id, include: ['author', 'images'] };

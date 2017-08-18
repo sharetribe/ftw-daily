@@ -70,6 +70,7 @@ const EditListingDescriptionFormComponent = props => {
         id={`${form}.title`}
         label={titleMessage}
         placeholder={titlePlaceholderMessage}
+        maxLength={TITLE_MAX_LENGTH}
         validate={[required(titleRequiredMessage), maxLength60Message]}
         autoFocus
       />

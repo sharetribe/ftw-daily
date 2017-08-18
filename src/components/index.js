@@ -14,6 +14,7 @@ import EditListingPhotosPanel from './EditListingPhotosPanel/EditListingPhotosPa
 import EditListingPricingPanel from './EditListingPricingPanel/EditListingPricingPanel';
 import EditListingWizard from './EditListingWizard/EditListingWizard';
 import ExternalLink from './ExternalLink/ExternalLink';
+import ExpandingTextarea from './ExpandingTextarea/ExpandingTextarea';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
 import ListingCard from './ListingCard/ListingCard';
@@ -58,8 +59,8 @@ import ValidationError from './ValidationError/ValidationError';
 export {
   AddImages,
   Avatar,
-  AvatarMedium,
   AvatarLarge,
+  AvatarMedium,
   BirthdayInputField,
   BookingBreakdown,
   Button,
@@ -73,6 +74,7 @@ export {
   EditListingPhotosPanel,
   EditListingPricingPanel,
   EditListingWizard,
+  ExpandingTextarea,
   ExternalLink,
   FilterPanel,
   HeroSection,
