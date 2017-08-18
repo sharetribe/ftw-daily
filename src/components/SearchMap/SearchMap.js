@@ -17,14 +17,18 @@ const PRICE_LABEL_HANDLE = 'SearchMapPriceLabel';
  * @param {Object} map - map that needs to be centered with given bounds
  * @param {SDK.LatLngBounds} bounds - the area that needs to be visible when map loads.
  */
-const fitMapToBounds = (map, bounds) => {
+const fitMapToBounds = (map, bounds, padding) => {
   const { ne, sw } = bounds || {};
   // map bounds as string literal for google.maps
   const mapBounds = bounds ? { north: ne.lat, east: ne.lng, south: sw.lat, west: sw.lng } : null;
 
   // If bounds are given, use it (defaults to center & zoom).
   if (map && mapBounds) {
-    map.fitBounds(mapBounds);
+    if (padding == null) {
+      map.fitBounds(mapBounds);
+    } else {
+      map.fitBounds(mapBounds, padding);
+    }
   }
 };
 
@@ -46,6 +50,7 @@ const hasParentWithClassName = (target, className) => {
 const MapWithGoogleMap = withGoogleMap(props => {
   const {
     center,
+    isOpenOnModal,
     listings,
     listingOpen,
     onBoundsChanged,
@@ -82,6 +87,9 @@ const MapWithGoogleMap = withGoogleMap(props => {
         mapTypeControl: false,
         // Disable zooming by scrolling
         scrollwheel: false,
+        // Disable fullscreen control: this won't work with mobile close-modal button
+        // since they are on top of each others.
+        fullscreenControl: !isOpenOnModal,
       }}
       ref={onMapLoad}
       onBoundsChanged={onBoundsChanged}
@@ -142,8 +150,11 @@ export class SearchMapComponent extends Component {
 
   onMapLoadHandler(map) {
     this.googleMap = map;
-    // map is ready, let's fit search area's bounds to map's viewport
-    fitMapToBounds(this.googleMap, this.props.bounds);
+
+    if (this.googleMap) {
+      // map is ready, let's fit search area's bounds to map's viewport
+      fitMapToBounds(this.googleMap, this.props.bounds, 0);
+    }
   }
 
   render() {
@@ -152,6 +163,7 @@ export class SearchMapComponent extends Component {
       rootClassName,
       mapRootClassName,
       center,
+      isOpenOnModal,
       listings,
       onBoundsChanged,
       zoom,
@@ -166,6 +178,7 @@ export class SearchMapComponent extends Component {
         containerElement={<div className={classes} onClick={this.onMapClicked} />}
         mapElement={<div className={mapClasses} />}
         center={center}
+        isOpenOnModal={isOpenOnModal}
         listings={listings}
         listingOpen={this.state.listingOpen}
         onListingClicked={this.onListingClicked}
@@ -186,16 +199,18 @@ SearchMapComponent.defaultProps = {
   mapRootClassName: null,
   bounds: null,
   center: new sdkTypes.LatLng(0, 0),
+  isOpenOnModal: false,
   listings: [],
   zoom: 11,
 };
 
-const { arrayOf, func, number, string } = PropTypes;
+const { arrayOf, bool, func, number, string } = PropTypes;
 
 SearchMapComponent.propTypes = {
   bounds: propTypes.latlngBounds,
   center: propTypes.latlng,
   className: string,
+  isOpenOnModal: bool,
   listings: arrayOf(propTypes.listing),
   mapRootClassName: string,
   onBoundsChanged: func.isRequired,
