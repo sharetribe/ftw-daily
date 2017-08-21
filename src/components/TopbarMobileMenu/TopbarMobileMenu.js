@@ -5,6 +5,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
+import { ensureCurrentUser } from '../../util/data';
 import { AvatarLarge, InlineTextButton, NamedLink, NotificationBadge } from '../../components';
 
 import css from './TopbarMobileMenu.css';
@@ -13,10 +14,12 @@ const TopbarMobileMenu = props => {
   const {
     isAuthenticated,
     currentUserHasListings,
-    user,
+    currentUser,
     notificationCount,
     onLogout,
   } = props;
+
+  const user = ensureCurrentUser(currentUser);
 
   if (!isAuthenticated) {
     const signup = (
@@ -73,7 +76,7 @@ const TopbarMobileMenu = props => {
 
   return (
     <div className={css.root}>
-      <AvatarLarge className={css.avatar} user={user} />
+      <AvatarLarge className={css.avatar} user={currentUser} />
       <div className={css.content}>
         <span className={css.greeting}>
           <FormattedMessage id="TopbarMobileMenu.greeting" values={{ displayName }} />
@@ -92,14 +95,14 @@ const TopbarMobileMenu = props => {
   );
 };
 
-TopbarMobileMenu.defaultProps = { notificationCount: 0 };
+TopbarMobileMenu.defaultProps = { currentUser: null, notificationCount: 0 };
 
 const { bool, func, number } = PropTypes;
 
 TopbarMobileMenu.propTypes = {
   isAuthenticated: bool.isRequired,
   currentUserHasListings: bool.isRequired,
-  user: propTypes.currentUser.isRequired,
+  currentUser: propTypes.currentUser,
   notificationCount: number,
   onLogout: func.isRequired,
 };
