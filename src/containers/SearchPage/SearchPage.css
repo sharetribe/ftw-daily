@@ -81,6 +81,7 @@
 .openMobileMap {
   /* Font */
   @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightSemiBold);
 
   /* Positioning */
   /* Safari didn't like bottom: 48px; -> hence calc from top */
@@ -93,9 +94,9 @@
   margin-bottom: 0;
 
   /* Button's layout */
-  padding: 12px 24px;
+  padding: 12px 36px;
   background-color: var(--matterColorLight);
-  border-radius: 24px;
+  border-radius: 30px;
   border: 0;
   box-shadow: var(--boxShadow);
   cursor: pointer;
@@ -103,6 +104,7 @@
 
   & .openMobileMapIcon {
     stroke: var(--matterColor);
+    margin-right: 4px;
   }
 
   &:hover {
