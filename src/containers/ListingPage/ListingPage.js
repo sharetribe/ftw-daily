@@ -132,9 +132,8 @@ export class ListingPageComponent extends Component {
       currentListing.author.id.uuid === currentUser.id.uuid;
     const showBookButton = !isOwnListing;
 
-    const { firstName: authorFirstName, lastName: authorLastName } = authorAvailable
-      ? ensureUser(currentListing.author).attributes.profile
-      : { firstName: '', lastName: '' };
+    const currentAuthor = ensureUser(authorAvailable ? currentListing.author : {});
+    const currentAuthorDisplayName = currentAuthor.attributes.profile.displayName;
 
     // TODO location address is currently serialized inside address field (API will change later)
     // Content is something like { locationAddress: 'Street, Province, Country', building: 'A 42' };
@@ -219,11 +218,7 @@ export class ListingPageComponent extends Component {
 
           <div className={css.contentContainer}>
             <div className={css.avatarWrapper}>
-              <Avatar
-                rootClassName={css.avatar}
-                firstName={authorFirstName}
-                lastName={authorLastName}
-              />
+              <Avatar rootClassName={css.avatar} user={currentAuthor} />
             </div>
 
             <div className={css.mainContent}>
@@ -242,7 +237,7 @@ export class ListingPageComponent extends Component {
                     <span className={css.authorName}>
                       <FormattedMessage
                         id="ListingPage.hostedBy"
-                        values={{ name: authorFirstName }}
+                        values={{ name: currentAuthorDisplayName }}
                       />
                     </span>
                   </div>
@@ -276,7 +271,7 @@ export class ListingPageComponent extends Component {
                   <span className={css.authorName}>
                     <FormattedMessage
                       id="ListingPage.hostedBy"
-                      values={{ name: authorFirstName }}
+                      values={{ name: currentAuthorDisplayName }}
                     />
                   </span>
                 </div>

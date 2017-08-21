@@ -317,7 +317,7 @@
   "TopbarDesktop.logo": "Logo",
   "TopbarDesktop.logout": "Log out",
   "TopbarDesktop.signup": "Sign up",
-  "TopbarMobileMenu.greeting": "Hello {firstName}",
+  "TopbarMobileMenu.greeting": "Hello {displayName}",
   "TopbarMobileMenu.inboxLink": "Inbox",
   "TopbarMobileMenu.loginLink": "Log in",
   "TopbarMobileMenu.logoutLink": "Log out",

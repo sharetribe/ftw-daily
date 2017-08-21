@@ -132,9 +132,8 @@ const OrderDetailsPanel = props => {
   const currentCustomer = ensureUser(currentTransaction.customer);
 
   const providerProfile = currentProvider.attributes.profile;
-  const authorFirstName = providerProfile.firstName;
-  const authorLastName = providerProfile.lastName;
-  const customerName = currentCustomer.attributes.profile.firstName;
+  const authorDisplayName = providerProfile.displayName;
+  const customerDisplayName = currentCustomer.attributes.profile.displayName;
   const transactionState = currentTransaction.attributes.state;
   const lastTransitionedAt = currentTransaction.attributes.lastTransitionedAt;
   const lastTransition = currentTransaction.attributes.lastTransitione;
@@ -154,11 +153,11 @@ const OrderDetailsPanel = props => {
   const listingTitle = currentListing.attributes.title;
 
   const bookingInfo = breakdown(currentTransaction);
-  const title = orderTitle(transactionState, listingLink, customerName, lastTransition);
+  const title = orderTitle(transactionState, listingLink, customerDisplayName, lastTransition);
   const message = orderMessage(
     transactionState,
     listingLink,
-    authorFirstName,
+    authorDisplayName,
     lastTransitionedAt,
     lastTransition
   );
@@ -185,7 +184,7 @@ const OrderDetailsPanel = props => {
           />
         </div>
         <div className={classNames(css.avatarWrapper, css.avatarMobile)}>
-          <AvatarMedium firstName={authorFirstName} lastName={authorLastName} />
+          <AvatarMedium user={currentProvider} />
         </div>
         <div className={css.orderInfo}>
           <h1 className={css.title}>{title}</h1>
@@ -214,14 +213,14 @@ const OrderDetailsPanel = props => {
               />
             </div>
             <div className={css.avatarWrapper}>
-              <AvatarMedium firstName={authorFirstName} lastName={authorLastName} />
+              <AvatarMedium user={currentProvider} />
             </div>
             <div className={css.breakdownHeadings}>
               <h2 className={css.breakdownTitle}>{listingTitle}</h2>
               <p className={css.breakdownSubtitle}>
                 <FormattedMessage
                   id="OrderDetailsPanel.hostedBy"
-                  values={{ name: authorFirstName }}
+                  values={{ name: authorDisplayName }}
                 />
               </p>
             </div>

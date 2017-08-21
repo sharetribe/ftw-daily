@@ -124,9 +124,7 @@ export class CheckoutPageComponent extends Component {
     const { bookingStart, bookingEnd } = pageData.bookingDates || {};
     const currentListing = ensureListing(pageData.listing);
     const currentAuthor = ensureUser(currentListing.author);
-    const authorProfile = currentAuthor.attributes.profile;
-    const authorFirstName = authorProfile.firstName;
-    const authorLastName = authorProfile.lastName;
+    const authorDisplayName = currentAuthor.attributes.profile.displayName;
 
     const isOwnListing = currentListing.id &&
       currentUser &&
@@ -207,14 +205,17 @@ export class CheckoutPageComponent extends Component {
             />
           </div>
           <div className={classNames(css.avatarWrapper, css.avatarMobile)}>
-            <AvatarMedium firstName={authorFirstName} lastName={authorLastName} />
+            <AvatarMedium user={currentAuthor} />
           </div>
           <div className={css.bookListingContainer}>
             <div className={css.heading}>
               <h1 className={css.title}>{title}</h1>
               <div className={css.author}>
                 <span className={css.authorName}>
-                  <FormattedMessage id="ListingPage.hostedBy" values={{ name: authorFirstName }} />
+                  <FormattedMessage
+                    id="ListingPage.hostedBy"
+                    values={{ name: authorDisplayName }}
+                  />
                 </span>
               </div>
             </div>
@@ -257,12 +258,12 @@ export class CheckoutPageComponent extends Component {
               />
             </div>
             <div className={css.avatarWrapper}>
-              <AvatarMedium firstName={authorFirstName} lastName={authorLastName} />
+              <AvatarMedium user={currentAuthor} />
             </div>
             <div className={css.detailsHeadings}>
               <h2 className={css.detailsTitle}>{listingTitle}</h2>
               <p className={css.detailsSubtitle}>
-                <FormattedMessage id="CheckoutPage.hostedBy" values={{ name: authorFirstName }} />
+                <FormattedMessage id="CheckoutPage.hostedBy" values={{ name: authorDisplayName }} />
               </p>
             </div>
             <h3 className={css.bookingBreakdownTitle}>

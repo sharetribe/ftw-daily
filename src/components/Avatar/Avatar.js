@@ -1,18 +1,16 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import * as propTypes from '../../util/propTypes';
 
 import css from './Avatar.css';
 
 const Avatar = props => {
-  const { className, firstName, lastName, rootClassName } = props;
+  const { rootClassName, className, user } = props;
   const classes = classNames(rootClassName || css.root, className);
-
-  const authorName = lastName ? `${firstName} ${lastName}` : firstName;
-  const initials = lastName ? firstName.charAt(0) + lastName.charAt(0) : firstName.charAt(0);
-
+  const { displayName, abbreviatedName } = user.profile;
   const placeHolderAvatar = (
-    <div className={classes} title={authorName}>
-      <span className={css.initials}>{initials}</span>
+    <div className={classes} title={displayName}>
+      <span className={css.initials}>{abbreviatedName}</span>
     </div>
   );
 
@@ -23,14 +21,12 @@ const { string } = PropTypes;
 
 Avatar.defaultProps = {
   className: null,
-  lastName: null,
   rootClassName: null,
 };
 
 Avatar.propTypes = {
   className: string,
-  firstName: string.isRequired,
-  lastName: string,
+  user: propTypes.user.isRequired,
   rootClassName: string,
 };
 

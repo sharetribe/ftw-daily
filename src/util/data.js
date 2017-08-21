@@ -153,3 +153,13 @@ export const ensureUser = user => {
   const empty = { id: null, type: 'user', attributes: { profile: {} } };
   return { ...empty, ...user };
 };
+
+/**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} current user entity object, which is to be ensured agains null values
+ */
+export const ensureCurrentUser = user => {
+  const empty = { id: null, type: 'current-user', attributes: { profile: {} } };
+  return { ...empty, ...user };
+};

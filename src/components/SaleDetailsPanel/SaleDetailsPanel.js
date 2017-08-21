@@ -125,8 +125,7 @@ const SaleDetailsPanel = props => {
   const currentListing = ensureListing(currentTransaction.listing);
   const currentCustomer = ensureUser(currentTransaction.customer);
 
-  const customerFirstName = currentCustomer.attributes.profile.firstName;
-  const customerLastName = currentCustomer.attributes.profile.lastName;
+  const customerDisplayName = currentCustomer.attributes.profile.displayName;
   const transactionState = currentTransaction.attributes.state;
   const lastTransitionedAt = currentTransaction.attributes.lastTransitionedAt;
   const lastTransition = currentTransaction.attributes.lastTransition;
@@ -150,10 +149,10 @@ const SaleDetailsPanel = props => {
 
   const bookingInfo = breakdown(currentTransaction, totalMessage);
 
-  const title = saleTitle(transactionState, listingLink, customerFirstName, lastTransition);
+  const title = saleTitle(transactionState, listingLink, customerDisplayName, lastTransition);
   const message = saleMessage(
     transactionState,
-    customerFirstName,
+    customerDisplayName,
     lastTransitionedAt,
     lastTransition
   );
@@ -202,11 +201,11 @@ const SaleDetailsPanel = props => {
           />
         </div>
         <div className={css.avatarWrapperMobile}>
-          <AvatarMedium firstName={customerFirstName} lastName={customerLastName} />
+          <AvatarMedium user={currentCustomer} />
         </div>
         <div className={css.info}>
           <div className={css.avatarWrapperDesktop}>
-            <AvatarMedium firstName={customerFirstName} lastName={customerLastName} />
+            <AvatarMedium user={currentCustomer} />
           </div>
           <h1 className={css.title}>{title}</h1>
           <p className={css.message}>{message}</p>
