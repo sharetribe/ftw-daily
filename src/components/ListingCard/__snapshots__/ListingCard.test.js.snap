@@ -52,7 +52,7 @@ exports[`ListingCard matches snapshot 1`] = `
           id="ListingCard.hostedBy"
           values={
             Object {
-              "authorName": "user1 first name user1 last name",
+              "authorName": "user1 display name",
             }
           } />
       </div>

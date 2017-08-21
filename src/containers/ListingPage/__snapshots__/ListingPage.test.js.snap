@@ -11,6 +11,8 @@ exports[`ListingPage matches snapshot 1`] = `
         "attributes": Object {
           "email": "user-2@example.com",
           "profile": Object {
+            "abbreviatedName": "user-2 abbreviated name",
+            "displayName": "user-2 display name",
             "firstName": "user-2 first name",
             "lastName": "user-2 last name",
           },
@@ -66,9 +68,21 @@ exports[`ListingPage matches snapshot 1`] = `
       <div>
         <Avatar
           className={null}
-          firstName="user-1 first name"
-          lastName="user-1 last name"
-          rootClassName={null} />
+          rootClassName={null}
+          user={
+            Object {
+              "attributes": Object {
+                "profile": Object {
+                  "abbreviatedName": "user-1 abbreviated name",
+                  "displayName": "user-1 display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "user-1",
+              },
+              "type": "user",
+            }
+          } />
       </div>
       <div>
         <div>
@@ -93,7 +107,7 @@ exports[`ListingPage matches snapshot 1`] = `
                   id="ListingPage.hostedBy"
                   values={
                     Object {
-                      "name": "user-1 first name",
+                      "name": "user-1 display name",
                     }
                   } />
               </span>
@@ -148,7 +162,7 @@ exports[`ListingPage matches snapshot 1`] = `
                 id="ListingPage.hostedBy"
                 values={
                   Object {
-                    "name": "user-1 first name",
+                    "name": "user-1 display name",
                   }
                 } />
             </span>

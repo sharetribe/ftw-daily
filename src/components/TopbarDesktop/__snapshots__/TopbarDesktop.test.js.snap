@@ -92,11 +92,9 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
       onClick={[Function]}>
       <div
         className=""
-        title="">
+        title={undefined}>
         <span
-          className={undefined}>
-          
-        </span>
+          className={undefined} />
       </div>
     </button>
     <div

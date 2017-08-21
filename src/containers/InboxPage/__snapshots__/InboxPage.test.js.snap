@@ -141,8 +141,8 @@ exports[`InboxPage matches snapshot 1`] = `
                 "provider": Object {
                   "attributes": Object {
                     "profile": Object {
-                      "firstName": "provider-user-id first name",
-                      "lastName": "provider-user-id last name",
+                      "abbreviatedName": "provider-user-id abbreviated name",
+                      "displayName": "provider-user-id display name",
                     },
                   },
                   "id": UUID {
@@ -227,8 +227,8 @@ exports[`InboxPage matches snapshot 1`] = `
                 "provider": Object {
                   "attributes": Object {
                     "profile": Object {
-                      "firstName": "provider-user-id first name",
-                      "lastName": "provider-user-id last name",
+                      "abbreviatedName": "provider-user-id abbreviated name",
+                      "displayName": "provider-user-id display name",
                     },
                   },
                   "id": UUID {
@@ -258,10 +258,10 @@ exports[`InboxPage matches snapshot 2`] = `
     className={undefined}>
     <div
       className=""
-      title="provider-user-id first name provider-user-id last name">
+      title="provider-user-id display name">
       <span
         className={undefined}>
-        pp
+        provider-user-id abbreviated name
       </span>
     </div>
   </div>
@@ -271,7 +271,7 @@ exports[`InboxPage matches snapshot 2`] = `
     className={undefined}>
     <div
       className="">
-      provider-user-id first name provider-user-id last name
+      provider-user-id display name
     </div>
     <div
       className="">
@@ -437,8 +437,8 @@ exports[`InboxPage matches snapshot 3`] = `
                 "customer": Object {
                   "attributes": Object {
                     "profile": Object {
-                      "firstName": "customer-user-id first name",
-                      "lastName": "customer-user-id last name",
+                      "abbreviatedName": "customer-user-id abbreviated name",
+                      "displayName": "customer-user-id display name",
                     },
                   },
                   "id": UUID {
@@ -523,8 +523,8 @@ exports[`InboxPage matches snapshot 3`] = `
                 "customer": Object {
                   "attributes": Object {
                     "profile": Object {
-                      "firstName": "customer-user-id first name",
-                      "lastName": "customer-user-id last name",
+                      "abbreviatedName": "customer-user-id abbreviated name",
+                      "displayName": "customer-user-id display name",
                     },
                   },
                   "id": UUID {
@@ -559,10 +559,10 @@ exports[`InboxPage matches snapshot 4`] = `
     className={undefined}>
     <div
       className=""
-      title="customer-user-id first name customer-user-id last name">
+      title="customer-user-id display name">
       <span
         className={undefined}>
-        cc
+        customer-user-id abbreviated name
       </span>
     </div>
   </div>
@@ -575,7 +575,7 @@ exports[`InboxPage matches snapshot 4`] = `
     className={undefined}>
     <div
       className="">
-      customer-user-id first name customer-user-id last name
+      customer-user-id display name
     </div>
     <div
       className="">

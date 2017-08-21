@@ -26,8 +26,20 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
     <div
       className="">
       <AvatarMedium
-        firstName="provider first name"
-        lastName="provider last name" />
+        user={
+          Object {
+            "attributes": Object {
+              "profile": Object {
+                "abbreviatedName": "provider abbreviated name",
+                "displayName": "provider display name",
+              },
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
+          }
+        } />
     </div>
     <div>
       <h1>
@@ -37,7 +49,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
               id="OrderDetailsPanel.orderPreauthorizedTitle"
               values={
                 Object {
-                  "customerName": "customer first name",
+                  "customerName": "customer display name",
                 }
               } />
           </span>
@@ -64,7 +76,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
           id="OrderDetailsPanel.orderPreauthorizedStatus"
           values={
             Object {
-              "providerName": "provider first name",
+              "providerName": "provider display name",
             }
           } />
       </div>
@@ -138,8 +150,20 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
         </div>
         <div>
           <AvatarMedium
-            firstName="provider first name"
-            lastName="provider last name" />
+            user={
+              Object {
+                "attributes": Object {
+                  "profile": Object {
+                    "abbreviatedName": "provider abbreviated name",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              }
+            } />
         </div>
         <div>
           <h2>
@@ -150,7 +174,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
               id="OrderDetailsPanel.hostedBy"
               values={
                 Object {
-                  "name": "provider first name",
+                  "name": "provider display name",
                 }
               } />
           </p>
