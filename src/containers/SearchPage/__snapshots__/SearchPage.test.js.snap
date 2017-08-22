@@ -92,10 +92,10 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           isOpenOnModal={false}
           listings={Array []}
           mapRootClassName={null}
-          mapSearchInProgress={false}
           onCloseAsModal={[Function]}
           onIdle={[Function]}
           rootClassName={null}
+          useLocationSearchBounds={true}
           zoom={11} />
       </div>
     </withViewport(ModalInMobileComponent)>
