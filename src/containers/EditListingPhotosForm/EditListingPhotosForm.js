@@ -11,6 +11,13 @@ import { AddImages, Button, ValidationError } from '../../components';
 import css from './EditListingPhotosForm.css';
 
 const ACCEPT_IMAGES = 'image/*';
+const UPLOAD_OVER_LIMIT_ERROR_CODE = 'upload-over-limit';
+
+// Detect if the given error has the upload-over-limit error code
+const isUploadOverLimit = error => {
+  const hasErrors = error && error.data && error.data.errors && error.data.errors.length > 0;
+  return hasErrors && error.data.errors.some(e => e.code === UPLOAD_OVER_LIMIT_ERROR_CODE);
+};
 
 // Add image wrapper. Label is the only visible element, file input is hidden.
 const RenderAddImage = props => {
@@ -107,14 +114,23 @@ export class EditListingPhotosFormComponent extends Component {
     const imageRequiredMessage = intl.formatMessage({ id: 'EditListingPhotosForm.imageRequired' });
 
     const { createListingsError, showListingsError, uploadImageError } = errors;
-    const uploadOverLimit = uploadImageError &&
-      uploadImageError.data.errors.length > 0 &&
-      uploadImageError.data.errors[0].code === 'upload-over-limit';
-    const uploadImageFailed = uploadOverLimit
-      ? <p className={css.error}>
+    const uploadOverLimit = isUploadOverLimit(uploadImageError);
+
+    let uploadImageFailed = null;
+
+    if (uploadOverLimit) {
+      uploadImageFailed = (
+        <p className={css.error}>
           <FormattedMessage id="EditListingPhotosForm.imageUploadFailed.uploadOverLimit" />
         </p>
-      : null;
+      );
+    } else if (uploadImageError) {
+      uploadImageFailed = (
+        <p className={css.error}>
+          <FormattedMessage id="EditListingPhotosForm.imageUploadFailed.uploadFailed" />
+        </p>
+      );
+    }
 
     // Create and show listing errors are shown above submit button
     const createListingFailed = createListingsError
