@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import * as propTypes from '../../util/propTypes';
 import {
   Avatar,
   InlineTextButton,
@@ -18,8 +19,7 @@ import css from './TopbarDesktop.css';
 const TopbarDesktop = props => {
   const {
     className,
-    firstName,
-    lastName,
+    currentUser,
     rootClassName,
     currentUserHasListings,
     notificationCount,
@@ -61,7 +61,7 @@ const TopbarDesktop = props => {
   const profileMenu = isAuthenticated
     ? <Menu>
         <MenuLabel className={css.profileMenuLabel} isOpenClassName={css.profileMenuIsOpen}>
-          <Avatar className={css.avatar} firstName={firstName} lastName={lastName} />
+          <Avatar className={css.avatar} user={currentUser} />
         </MenuLabel>
         <MenuContent className={css.profileMenuContent}>
           <MenuItem key="logout">
@@ -111,23 +111,21 @@ const TopbarDesktop = props => {
 const { bool, func, object, number, string } = PropTypes;
 
 TopbarDesktop.defaultProps = {
-  firstName: '',
-  lastName: '',
-  notificationCount: 0,
-  className: null,
   rootClassName: null,
+  className: null,
+  currentUser: null,
+  notificationCount: 0,
   initialSearchFormValues: {},
 };
 
 TopbarDesktop.propTypes = {
+  rootClassName: string,
   className: string,
   currentUserHasListings: bool.isRequired,
+  currentUser: propTypes.currentUser,
   isAuthenticated: bool.isRequired,
   onLogout: func.isRequired,
-  firstName: string,
-  lastName: string,
   notificationCount: number,
-  rootClassName: string,
   onSearchSubmit: func.isRequired,
   initialSearchFormValues: object,
   intl: intlShape.isRequired,

@@ -7,7 +7,6 @@ import { Button, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../..
 import { TopbarSearchForm } from '../../containers';
 import { withFlattenedRoutes, withViewport } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
-import { ensureUser } from '../../util/data';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 
@@ -96,8 +95,6 @@ class TopbarComponent extends Component {
       location,
       onManageDisableScrolling,
     } = this.props;
-    const me = ensureUser(currentUser);
-    const profile = me.attributes.profile;
 
     const { mobilemenu, mobilesearch, address, origin, bounds, country } = parse(location.search, {
       latlng: ['origin'],
@@ -114,8 +111,7 @@ class TopbarComponent extends Component {
       <TopbarMobileMenu
         isAuthenticated={isAuthenticated}
         currentUserHasListings={currentUserHasListings}
-        firstName={profile.firstName}
-        lastName={profile.lastName}
+        currentUser={currentUser}
         onLogout={this.handleLogout}
         notificationCount={notificationCount}
       />
@@ -157,8 +153,7 @@ class TopbarComponent extends Component {
         <div className={css.desktop}>
           <TopbarDesktop
             currentUserHasListings={currentUserHasListings}
-            firstName={profile.firstName}
-            lastName={profile.lastName}
+            currentUser={currentUser}
             initialSearchFormValues={initialSearchFormValues}
             intl={intl}
             isAuthenticated={isAuthenticated}

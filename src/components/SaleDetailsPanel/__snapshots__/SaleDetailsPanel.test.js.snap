@@ -25,21 +25,45 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
     </div>
     <div>
       <AvatarMedium
-        firstName="customer1 first name"
-        lastName="customer1 last name" />
+        user={
+          Object {
+            "attributes": Object {
+              "profile": Object {
+                "abbreviatedName": "customer1 abbreviated name",
+                "displayName": "customer1 display name",
+              },
+            },
+            "id": UUID {
+              "uuid": "customer1",
+            },
+            "type": "user",
+          }
+        } />
     </div>
     <div>
       <div>
         <AvatarMedium
-          firstName="customer1 first name"
-          lastName="customer1 last name" />
+          user={
+            Object {
+              "attributes": Object {
+                "profile": Object {
+                  "abbreviatedName": "customer1 abbreviated name",
+                  "displayName": "customer1 display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "customer1",
+              },
+              "type": "user",
+            }
+          } />
       </div>
       <h1>
         <FormattedMessage
           id="SaleDetailsPanel.listingRequestedTitle"
           values={
             Object {
-              "customerName": "customer1 first name",
+              "customerName": "customer1 display name",
               "listingLink": <withFlattenedRoutes(withRouter(NamedLink))
                 name="ListingPage"
                 params={
@@ -58,7 +82,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
           id="SaleDetailsPanel.saleRequestedStatus"
           values={
             Object {
-              "customerName": "customer1 first name",
+              "customerName": "customer1 display name",
             }
           } />
       </p>

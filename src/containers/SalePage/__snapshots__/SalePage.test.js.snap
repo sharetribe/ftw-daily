@@ -11,6 +11,8 @@ exports[`SalePage matches snapshot 1`] = `
         "attributes": Object {
           "email": "provider1@example.com",
           "profile": Object {
+            "abbreviatedName": "provider1 abbreviated name",
+            "displayName": "provider1 display name",
             "firstName": "provider1 first name",
             "lastName": "provider1 last name",
           },
@@ -98,8 +100,8 @@ exports[`SalePage matches snapshot 1`] = `
           "customer": Object {
             "attributes": Object {
               "profile": Object {
-                "firstName": "customer1 first name",
-                "lastName": "customer1 last name",
+                "abbreviatedName": "customer1 abbreviated name",
+                "displayName": "customer1 display name",
               },
             },
             "id": UUID {
@@ -133,8 +135,8 @@ exports[`SalePage matches snapshot 1`] = `
           "provider": Object {
             "attributes": Object {
               "profile": Object {
-                "firstName": "provider1 first name",
-                "lastName": "provider1 last name",
+                "abbreviatedName": "provider1 abbreviated name",
+                "displayName": "provider1 display name",
               },
             },
             "id": UUID {

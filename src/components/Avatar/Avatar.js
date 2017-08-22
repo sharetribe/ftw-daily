@@ -1,37 +1,35 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import * as propTypes from '../../util/propTypes';
+import { ensureUser } from '../../util/data';
 
 import css from './Avatar.css';
 
 const Avatar = props => {
-  const { className, firstName, lastName, rootClassName } = props;
+  const { rootClassName, className, user } = props;
   const classes = classNames(rootClassName || css.root, className);
-
-  const authorName = lastName ? `${firstName} ${lastName}` : firstName;
-  const initials = lastName ? firstName.charAt(0) + lastName.charAt(0) : firstName.charAt(0);
-
+  const { displayName, abbreviatedName } = ensureUser(user).attributes.profile;
   const placeHolderAvatar = (
-    <div className={classes} title={authorName}>
-      <span className={css.initials}>{initials}</span>
+    <div className={classes} title={displayName}>
+      <span className={css.initials}>{abbreviatedName}</span>
     </div>
   );
 
   return placeHolderAvatar;
 };
 
-const { string } = PropTypes;
+const { string, oneOfType } = PropTypes;
 
 Avatar.defaultProps = {
   className: null,
-  lastName: null,
   rootClassName: null,
+  user: null,
 };
 
 Avatar.propTypes = {
-  className: string,
-  firstName: string.isRequired,
-  lastName: string,
   rootClassName: string,
+  className: string,
+  user: oneOfType([propTypes.user, propTypes.currentUser]),
 };
 
 export default Avatar;

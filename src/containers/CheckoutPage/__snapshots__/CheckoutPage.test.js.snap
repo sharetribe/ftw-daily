@@ -42,8 +42,20 @@ exports[`CheckoutPage matches snapshot 1`] = `
     <div
       className="">
       <AvatarMedium
-        firstName="author first name"
-        lastName="author last name" />
+        user={
+          Object {
+            "attributes": Object {
+              "profile": Object {
+                "abbreviatedName": "author abbreviated name",
+                "displayName": "author display name",
+              },
+            },
+            "id": UUID {
+              "uuid": "author",
+            },
+            "type": "user",
+          }
+        } />
     </div>
     <div>
       <div>
@@ -56,7 +68,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
               id="ListingPage.hostedBy"
               values={
                 Object {
-                  "name": "author first name",
+                  "name": "author display name",
                 }
               } />
           </span>
@@ -132,8 +144,20 @@ exports[`CheckoutPage matches snapshot 1`] = `
       </div>
       <div>
         <AvatarMedium
-          firstName="author first name"
-          lastName="author last name" />
+          user={
+            Object {
+              "attributes": Object {
+                "profile": Object {
+                  "abbreviatedName": "author abbreviated name",
+                  "displayName": "author display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "author",
+              },
+              "type": "user",
+            }
+          } />
       </div>
       <div>
         <h2>
@@ -144,7 +168,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
             id="CheckoutPage.hostedBy"
             values={
               Object {
-                "name": "author first name",
+                "name": "author display name",
               }
             } />
         </p>

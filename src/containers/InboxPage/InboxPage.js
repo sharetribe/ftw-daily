@@ -26,17 +26,6 @@ import css from './InboxPage.css';
 
 const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
 
-const formatUser = user => {
-  const profile = user && user.attributes && user.attributes.profile
-    ? user.attributes.profile
-    : null;
-  return {
-    name: `${profile.firstName} ${profile.lastName}`,
-    firstName: profile.firstName,
-    lastName: profile.lastName,
-  };
-};
-
 const formatDate = (intl, date) => {
   return {
     short: intl.formatDate(date, {
@@ -103,7 +92,8 @@ export const InboxItem = props => {
   const { customer, provider, booking } = tx;
   const isOrder = type === 'order';
 
-  const otherUser = formatUser(isOrder ? provider : customer);
+  const otherUser = isOrder ? provider : customer;
+  const otherUserDisplayName = otherUser.attributes.profile.displayName;
 
   const stateData = txState(intl, tx, isOrder);
   const isSaleNotification = !isOrder && tx.attributes.state === propTypes.TX_STATE_PREAUTHORIZED;
@@ -121,14 +111,14 @@ export const InboxItem = props => {
       params={{ id: tx.id.uuid }}
     >
       <div className={css.itemAvatar}>
-        <Avatar firstName={otherUser.firstName} lastName={otherUser.lastName} />
+        <Avatar user={otherUser} />
       </div>
       <div className={css.rowNotificationDot}>
         {rowNotificationDot}
       </div>
       <div className={css.itemInfo}>
         <div className={classNames(css.itemUsername, stateData.nameClassName)}>
-          {otherUser.name}
+          {otherUserDisplayName}
         </div>
         <div className={classNames(css.bookingInfo, stateData.bookingClassName)}>
           {bookingStart.short} - {bookingEnd.short}
