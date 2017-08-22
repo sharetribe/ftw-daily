@@ -7,9 +7,11 @@ import React, { Component, PropTypes } from 'react';
 import { intlShape, injectIntl } from 'react-intl';
 import { Field } from 'redux-form';
 import classNames from 'classnames';
+import Decimal from 'decimal.js';
 import { ValidationError } from '../../components';
 import { types } from '../../util/sdkLoader';
 import {
+  isSafeNumber,
   convertUnitToSubUnit,
   convertMoneyToNumber,
   ensureDotSeparator,
@@ -134,9 +136,17 @@ class CurrencyInputComponent extends Component {
   updateValues(event) {
     try {
       const { currencyConfig, intl } = this.props;
-      const targetValue = event.target.value;
+      const targetValue = event.target.value.trim();
       const isEmptyString = targetValue === '';
       const valueOrZero = isEmptyString ? '0' : targetValue;
+
+      const targetDecimalValue = isEmptyString ? null : new Decimal(targetValue);
+
+      const isSafeValue = isEmptyString ||
+        (targetDecimalValue.isPositive() && isSafeNumber(targetDecimalValue));
+      if (!isSafeValue) {
+        throw new Error(`Unsafe money value: ${targetValue}`);
+      }
 
       // truncate decimals to subunit precision: 10000.999 => 10000.99
       const truncatedValueString = truncateToSubUnitPrecision(

@@ -1,6 +1,9 @@
 import Decimal from 'decimal.js';
 import { types } from './sdkLoader';
 import {
+  MIN_SAFE_INTEGER,
+  MAX_SAFE_INTEGER,
+  isSafeNumber,
   convertDecimalToString,
   convertMoneyToNumber,
   convertToDecimal,
@@ -11,6 +14,28 @@ import {
 } from './currency';
 
 describe('currency utils', () => {
+  describe('isSafeNumber()', () => {
+    it('only accepts Decimal instances', () => {
+      expect(() => isSafeNumber(-1)).toThrowError('Value must be a Decimal');
+      expect(() => isSafeNumber(0)).toThrowError('Value must be a Decimal');
+      expect(() => isSafeNumber(1)).toThrowError('Value must be a Decimal');
+      expect(() => isSafeNumber(MIN_SAFE_INTEGER)).toThrowError('Value must be a Decimal');
+      expect(() => isSafeNumber(MAX_SAFE_INTEGER)).toThrowError('Value must be a Decimal');
+      expect(() => isSafeNumber('abc')).toThrowError('Value must be a Decimal');
+      expect(() => isSafeNumber('123')).toThrowError('Value must be a Decimal');
+    });
+    it('handles number bounds properly', () => {
+      expect(isSafeNumber(new Decimal(NaN))).toBe(false);
+      expect(isSafeNumber(new Decimal(-Infinity))).toBe(false);
+      expect(isSafeNumber(new Decimal(MIN_SAFE_INTEGER).minus(1))).toBe(false);
+      expect(isSafeNumber(new Decimal(MIN_SAFE_INTEGER))).toBe(true);
+      expect(isSafeNumber(new Decimal(0))).toBe(true);
+      expect(isSafeNumber(new Decimal(MAX_SAFE_INTEGER))).toBe(true);
+      expect(isSafeNumber(new Decimal(MAX_SAFE_INTEGER).plus(1))).toBe(false);
+      expect(isSafeNumber(new Decimal(Infinity))).toBe(false);
+    });
+  });
+
   describe('ensureSeparator(str)', () => {
     it('changes commas in string to dots ', () => {
       expect(ensureSeparator('0')).toEqual('0');
