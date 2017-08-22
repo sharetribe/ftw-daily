@@ -28,6 +28,7 @@ const SearchResultsPanel = props => {
             currencyConfig={currencyConfig}
           />
         ))}
+        {props.children}
       </div>
       {paginationLinks}
     </div>
@@ -35,6 +36,7 @@ const SearchResultsPanel = props => {
 };
 
 SearchResultsPanel.defaultProps = {
+  children: null,
   className: null,
   listings: [],
   pagination: null,
@@ -42,9 +44,10 @@ SearchResultsPanel.defaultProps = {
   search: null,
 };
 
-const { array, object, string } = PropTypes;
+const { array, node, object, string } = PropTypes;
 
 SearchResultsPanel.propTypes = {
+  children: node,
   className: string,
   currencyConfig: propTypes.currencyConfig.isRequired,
   listings: array,

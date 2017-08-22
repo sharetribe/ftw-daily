@@ -254,19 +254,20 @@ export class SearchPageComponent extends Component {
                 listings={listings}
                 pagination={listingsAreLoaded ? pagination : null}
                 search={searchParamsForPagination}
-              />
+              >
+                <button
+                  className={classNames(css.openMobileMap, { [css.openMobileMapSticky] : listings.length > 0 })}
+                  onClick={() => {
+                    this.useLocationSearchBounds = true;
+                    this.modalOpenedBoundsChange = true;
+                    this.setState({ isSearchMapOpenOnMobile: true });
+                  }}
+                >
+                  <MapIcon className={css.openMobileMapIcon} />
+                  <FormattedMessage id="SearchPage.openMapView" />
+                </button>
+              </SearchResultsPanel>
             </div>
-            <button
-              className={css.openMobileMap}
-              onClick={() => {
-                this.useLocationSearchBounds = true;
-                this.modalOpenedBoundsChange = true;
-                this.setState({ isSearchMapOpenOnMobile: true });
-              }}
-            >
-              <MapIcon className={css.openMobileMapIcon} />
-              <FormattedMessage id="SearchPage.openMapView" />
-            </button>
           </div>
           <ModalInMobile
             className={css.mapPanel}
