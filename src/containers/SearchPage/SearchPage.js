@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { debounce, isEqual, unionWith } from 'lodash';
+import classNames from 'classnames';
 import config from '../../config';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { googleLatLngToSDKLatLng, googleBoundsToSDKBounds } from '../../util/googleMaps';
@@ -246,11 +247,11 @@ export class SearchPageComponent extends Component {
               {listingsAreLoaded && totalItems === 0 ? noResults : null}
               {searchInProgress ? loadingResults : null}
             </div>
-            <div className={css.listings}>
+            <div className={classNames(css.listings, { [css.newSearchInProgress]: !listingsAreLoaded })}>
               <SearchResultsPanel
                 className={css.searchListingsPanel}
                 currencyConfig={config.currencyConfig}
-                listings={listingsAreLoaded ? listings : []}
+                listings={listings}
                 pagination={listingsAreLoaded ? pagination : null}
                 search={searchParamsForPagination}
               />
