@@ -13,7 +13,7 @@ import { createResourceLocatorString } from '../../util/routes';
 import { createSlug } from '../../util/urlHelpers';
 import { ResponsiveImage } from '../../components';
 
-import css from './SearchMapListingCard.css';
+import css from './SearchMapInfoCard.css';
 
 // Center label so that caret is pointing to correct pixel.
 // (vertical positioning: height + arrow) */
@@ -68,7 +68,7 @@ const ListingCard = props => {
             <ResponsiveImage
               rootClassName={classNames(css.rootForImage, css.borderRadiusInheritTop)}
               alt={title}
-              noImageMessage={intl.formatMessage({ id: 'SearchMapListingCard.noImage' })}
+              noImageMessage={intl.formatMessage({ id: 'SearchMapInfoCard.noImage' })}
               image={firstImage}
               nameSet={[
                 { name: 'landscape-crop', size: '1x' },
@@ -108,7 +108,7 @@ ListingCard.propTypes = {
   isInCarousel: bool.isRequired,
 };
 
-class SearchMapListingCard extends Component {
+class SearchMapInfoCard extends Component {
   constructor(props) {
     super(props);
 
@@ -192,13 +192,13 @@ class SearchMapListingCard extends Component {
   }
 }
 
-SearchMapListingCard.defaultProps = {
+SearchMapInfoCard.defaultProps = {
   className: null,
   rootClassName: null,
   onClickCallback: null,
 };
 
-SearchMapListingCard.propTypes = {
+SearchMapInfoCard.propTypes = {
   className: string,
   rootClassName: string,
   listings: arrayOf(propTypes.listing).isRequired,
@@ -216,4 +216,4 @@ SearchMapListingCard.propTypes = {
   intl: intlShape.isRequired,
 };
 
-export default compose(withRouter, withFlattenedRoutes, injectIntl)(SearchMapListingCard);
+export default compose(withRouter, withFlattenedRoutes, injectIntl)(SearchMapInfoCard);

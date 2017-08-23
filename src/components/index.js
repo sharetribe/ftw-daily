@@ -43,7 +43,7 @@ import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
 import SearchIcon from './SearchIcon/SearchIcon';
 import SearchMap from './SearchMap/SearchMap';
 import SearchMapGroupLabel from './SearchMapGroupLabel/SearchMapGroupLabel';
-import SearchMapListingCard from './SearchMapListingCard/SearchMapListingCard';
+import SearchMapInfoCard from './SearchMapInfoCard/SearchMapInfoCard';
 import SearchMapPriceLabel from './SearchMapPriceLabel/SearchMapPriceLabel';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import SelectField from './SelectField/SelectField';
@@ -106,7 +106,7 @@ export {
   SearchIcon,
   SearchMap,
   SearchMapGroupLabel,
-  SearchMapListingCard,
+  SearchMapInfoCard,
   SearchMapPriceLabel,
   SearchResultsPanel,
   SecondaryButton,

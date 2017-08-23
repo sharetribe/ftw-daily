@@ -5,7 +5,7 @@ import { groupBy, isEqual, reduce } from 'lodash';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import * as propTypes from '../../util/propTypes';
 import { googleBoundsToSDKBounds } from '../../util/googleMaps';
-import { SearchMapListingCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
+import { SearchMapInfoCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
 
 import css from './SearchMap.css';
 
@@ -115,7 +115,7 @@ const MapWithGoogleMap = withGoogleMap(props => {
 
   const listingsArray = Array.isArray(infoCardOpen) ? infoCardOpen : [infoCardOpen];
   const openedCard = infoCardOpen
-    ? <SearchMapListingCard
+    ? <SearchMapInfoCard
         key={listingsArray[0].id.uuid}
         className={INFO_CARD_HANDLE}
         listings={listingsArray}
@@ -222,7 +222,7 @@ export class SearchMapComponent extends Component {
     const classes = classNames(rootClassName || css.root, className);
     const mapClasses = mapRootClassName || css.mapRoot;
 
-    // container element listens clicks so that opened SearchMapListingCards can be closed
+    // container element listens clicks so that opened SearchMapInfoCard can be closed
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <MapWithGoogleMap
