@@ -1,15 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { withGoogleMap, GoogleMap } from 'react-google-maps';
 import classNames from 'classnames';
-import { isEqual } from 'lodash';
+import { groupBy, isEqual, reduce } from 'lodash';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import * as propTypes from '../../util/propTypes';
 import { googleBoundsToSDKBounds } from '../../util/googleMaps';
-import { SearchMapListingCard, SearchMapPriceLabel } from '../../components';
+import { SearchMapListingCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
 
 import css from './SearchMap.css';
 
-const PRICE_LABEL_HANDLE = 'SearchMapPriceLabel';
+const LABEL_HANDLE = 'SearchMapLabel';
+const INFO_CARD_HANDLE = 'SearchMapInfoCard';
 
 /**
  * Fit part of map (descriped with bounds) to visible map-viewport
@@ -44,41 +45,80 @@ const hasParentWithClassName = (target, className) => {
 };
 
 /**
+ * Listings array grouped by geolocation
+ * @param {Array} mapListings - listings to be grouped on map
+ * @return {Object} - Object where coordinate pair is the key to different listings
+ */
+const groupedByCoordinates = mapListings => {
+  return groupBy(mapListings, l => {
+    const g = l.attributes.geolocation;
+    return `${g.lat}-${g.lng}`;
+  });
+};
+
+/**
+ * Listings (in location based object literal) is mapped to array
+ * @param {Object} mapListings - listings to be grouped on map
+ * @return {Array} - An array where items are arrays of listings
+ *   (They are arrays containing all the listings in that location)
+ */
+const reducedToArray = mapListings => {
+  return reduce(mapListings, (acc, listing) => acc.concat([listing]), []);
+};
+
+/**
  * MapWithGoogleMap uses withGoogleMap HOC.
  * It handles some of the google map initialization states.
  */
 const MapWithGoogleMap = withGoogleMap(props => {
   const {
     center,
+    infoCardOpen,
     isOpenOnModal,
     listings,
-    listingOpen,
-    onIdle,
     onCloseAsModal,
+    onIdle,
     onListingClicked,
     onMapLoad,
     zoom,
   } = props;
 
-  const priceLabels = listings.reverse().map(listing => {
-    // if the listing is open, don't print price label
-    if (listingOpen && listingOpen.id.uuid === listing.id.uuid) {
-      return null;
+  const listingArraysInLocations = reducedToArray(groupedByCoordinates(listings));
+  const priceLabels = listingArraysInLocations.reverse().map(listingArr => {
+    // If location contains only one listing, print price label
+    if (listingArr.length === 1) {
+      const listing = listingArr[0];
+      const infoCardOpenIds = Array.isArray(infoCardOpen) ? infoCardOpen.map(l => l.id.uuid) : [];
+
+      // if the listing is open, don't print price label
+      if (infoCardOpen != null && infoCardOpenIds.includes(listing.id.uuid)) {
+        return null;
+      }
+      return (
+        <SearchMapPriceLabel
+          key={listing.id.uuid}
+          className={LABEL_HANDLE}
+          listing={listing}
+          onListingClicked={onListingClicked}
+        />
+      );
     }
     return (
-      <SearchMapPriceLabel
-        key={listing.id.uuid}
-        className={PRICE_LABEL_HANDLE}
-        listing={listing}
+      <SearchMapGroupLabel
+        key={listingArr[0].id.uuid}
+        className={LABEL_HANDLE}
+        listings={listingArr}
         onListingClicked={onListingClicked}
       />
     );
   });
 
-  const openedCard = listingOpen
+  const listingsArray = Array.isArray(infoCardOpen) ? infoCardOpen : [infoCardOpen];
+  const openedCard = infoCardOpen
     ? <SearchMapListingCard
-        key={listingOpen.id.uuid}
-        listing={listingOpen}
+        key={listingsArray[0].id.uuid}
+        className={INFO_CARD_HANDLE}
+        listings={listingsArray}
         onClickCallback={onCloseAsModal}
       />
     : null;
@@ -97,6 +137,8 @@ const MapWithGoogleMap = withGoogleMap(props => {
         fullscreenControl: !isOpenOnModal,
         // Click disabled for point-of-interests
         clickableIcons: false,
+        // When infoCard is open, we can't differentiate double click on top of card vs map.
+        disableDoubleClickZoom: !!infoCardOpen,
       }}
       ref={onMapLoad}
       onIdle={onIdle}
@@ -113,7 +155,7 @@ export class SearchMapComponent extends Component {
 
     this.listings = [];
     this.googleMap = null;
-    this.state = { listingOpen: null };
+    this.state = { infoCardOpen: null };
     this.onListingClicked = this.onListingClicked.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
     this.onMapLoadHandler = this.onMapLoadHandler.bind(this);
@@ -143,15 +185,16 @@ export class SearchMapComponent extends Component {
     this.listings = [];
   }
 
-  onListingClicked(listing) {
-    this.setState({ listingOpen: listing });
+  onListingClicked(listings) {
+    this.setState({ infoCardOpen: listings });
   }
 
   onMapClicked(e) {
     // Close open listing popup / infobox, unless the click is attached to a price label
-    const labelClicked = hasParentWithClassName(e.nativeEvent.target, PRICE_LABEL_HANDLE);
-    if (this.state.listingOpen != null && !labelClicked) {
-      this.setState({ listingOpen: null });
+    const labelClicked = hasParentWithClassName(e.nativeEvent.target, LABEL_HANDLE);
+    const infoCardClicked = hasParentWithClassName(e.nativeEvent.target, INFO_CARD_HANDLE);
+    if (this.state.infoCardOpen != null && !labelClicked && !infoCardClicked) {
+      this.setState({ infoCardOpen: null });
     }
   }
 
@@ -168,12 +211,12 @@ export class SearchMapComponent extends Component {
     const {
       className,
       rootClassName,
-      mapRootClassName,
       center,
       isOpenOnModal,
       listings,
-      onIdle,
+      mapRootClassName,
       onCloseAsModal,
+      onIdle,
       zoom,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
@@ -188,7 +231,7 @@ export class SearchMapComponent extends Component {
         center={center}
         isOpenOnModal={isOpenOnModal}
         listings={listings}
-        listingOpen={this.state.listingOpen}
+        infoCardOpen={this.state.infoCardOpen}
         onListingClicked={this.onListingClicked}
         onMapLoad={this.onMapLoadHandler}
         onIdle={() => {
@@ -207,15 +250,15 @@ export class SearchMapComponent extends Component {
 }
 
 SearchMapComponent.defaultProps = {
-  className: '',
-  rootClassName: null,
-  mapRootClassName: null,
-  useLocationSearchBounds: true,
   bounds: null,
   center: new sdkTypes.LatLng(0, 0),
+  className: '',
   isOpenOnModal: false,
-  onCloseAsModal: null,
   listings: [],
+  mapRootClassName: null,
+  onCloseAsModal: null,
+  rootClassName: null,
+  useLocationSearchBounds: true,
   zoom: 11,
 };
 
@@ -228,10 +271,10 @@ SearchMapComponent.propTypes = {
   isOpenOnModal: bool,
   listings: arrayOf(propTypes.listing),
   mapRootClassName: string,
-  useLocationSearchBounds: bool, // eslint-disable-line react/no-unused-prop-types
-  onIdle: func.isRequired,
   onCloseAsModal: func,
+  onIdle: func.isRequired,
   rootClassName: string,
+  useLocationSearchBounds: bool, // eslint-disable-line react/no-unused-prop-types
   zoom: number,
 };
 
