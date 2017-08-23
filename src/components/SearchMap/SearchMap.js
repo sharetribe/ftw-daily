@@ -176,7 +176,7 @@ export class SearchMapComponent extends Component {
       // Our bounds are viewport bounds, and fitBounds will try to add margins around those bounds
       // that would result to zoom-loop (bound change -> fitmap -> bounds change -> ...)
       if (!isEqual(nextProps.bounds, currentBounds) && nextProps.useLocationSearchBounds) {
-        fitMapToBounds(this.googleMap, nextProps.bounds);
+        fitMapToBounds(this.googleMap, nextProps.bounds, 0);
       }
     }
   }
