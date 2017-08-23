@@ -28,39 +28,144 @@ const createURL = (flattenedRoutes, history, listing) => {
   return createResourceLocatorString('ListingPage', flattenedRoutes, pathParams, {});
 };
 
+// ListingCard is the listing info without overlayview or carousel controls
+const ListingCard = props => {
+  const { className, clickHandler, flattenedRoutes, history, intl, isInCarousel, listing } = props;
+
+  const { title, price } = listing.attributes;
+  const formattedPrice = price && price.currency === config.currencyConfig.currency
+    ? formatMoney(intl, config.currencyConfig, price)
+    : price.currency;
+  const firstImage = listing.images && listing.images.length > 0 ? listing.images[0] : null;
+  const urlToListing = createURL(flattenedRoutes, history, listing);
+
+  // listing card anchor needs sometimes inherited border radius.
+  const classes = classNames(
+    css.anchor,
+    css.borderRadiusInheritTop,
+    { [css.borderRadiusInheritBottom]: !isInCarousel },
+    className
+  );
+
+  return (
+    <a
+      alt={title}
+      className={classes}
+      href={urlToListing}
+      onClick={e => {
+        e.preventDefault();
+        // Handle click callbacks and use internal router
+        clickHandler(urlToListing);
+      }}
+    >
+      <div
+        className={classNames(css.card, css.borderRadiusInheritTop, {
+          [css.borderRadiusInheritBottom]: !isInCarousel,
+        })}
+      >
+        <div className={classNames(css.threeToTwoWrapper, css.borderRadiusInheritTop)}>
+          <div className={classNames(css.aspectWrapper, css.borderRadiusInheritTop)}>
+            <ResponsiveImage
+              rootClassName={classNames(css.rootForImage, css.borderRadiusInheritTop)}
+              alt={title}
+              noImageMessage={intl.formatMessage({ id: 'SearchMapListingCard.noImage' })}
+              image={firstImage}
+              nameSet={[
+                { name: 'landscape-crop', size: '1x' },
+                { name: 'landscape-crop2x', size: '2x' },
+              ]}
+            />
+          </div>
+        </div>
+        <div className={classNames(css.info, { [css.borderRadiusInheritBottom]: !isInCarousel })}>
+          <div className={css.price}>
+            {formattedPrice}
+          </div>
+          <div className={css.name}>
+            {title}
+          </div>
+        </div>
+      </div>
+    </a>
+  );
+};
+
+ListingCard.defaultProps = {
+  className: null,
+};
+
+const { arrayOf, bool, func, shape, string } = PropTypes;
+
+ListingCard.propTypes = {
+  className: string,
+  listing: propTypes.listing.isRequired,
+  clickHandler: func.isRequired,
+  flattenedRoutes: arrayOf(propTypes.route).isRequired,
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
+  intl: intlShape.isRequired,
+  isInCarousel: bool.isRequired,
+};
+
 class SearchMapListingCard extends Component {
   constructor(props) {
     super(props);
+
+    this.state = { currentListingIndex: 0 };
     this.clickHandler = this.clickHandler.bind(this);
   }
 
-  clickHandler(e) {
-    e.preventDefault();
-
+  clickHandler(urlToListing) {
     if (this.props.onClickCallback) {
       this.props.onClickCallback();
     }
 
     // To avoid full page refresh we need to use internal router
-    const { flattenedRoutes, history, listing } = this.props;
-    history.push(createURL(flattenedRoutes, history, ensureListing(listing)));
+    const history = this.props.history;
+    history.push(urlToListing);
   }
 
   render() {
-    const { className, rootClassName, intl, flattenedRoutes, history, listing } = this.props;
-    const currentListing = ensureListing(listing);
-    const { geolocation, title, price } = currentListing.attributes;
-    const formattedPrice = price && price.currency === config.currencyConfig.currency
-      ? formatMoney(intl, config.currencyConfig, price)
-      : price.currency;
-    const firstImage = currentListing.images && currentListing.images.length > 0
-      ? currentListing.images[0]
-      : null;
-    const urlToListing = createURL(flattenedRoutes, history, currentListing);
+    const { className, rootClassName, intl, flattenedRoutes, history, listings } = this.props;
+    const currentListing = ensureListing(listings[this.state.currentListingIndex]);
+    const geolocation = currentListing.attributes.geolocation;
 
     // Explicit type change to object literal for Google OverlayViews (geolocation is SDK type)
     const latLngLiteral = { lat: geolocation.lat, lng: geolocation.lng };
+    const hasCarousel = listings.length > 1;
+    const pagination = hasCarousel
+      ? <div className={classNames(css.paginationInfo, css.borderRadiusInheritBottom)}>
+          <button
+            className={css.paginationPrev}
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+              this.setState(prevState => ({
+                currentListingIndex: (prevState.currentListingIndex + listings.length - 1) %
+                  listings.length,
+              }));
+            }}
+          />
+          <div className={css.paginationPage}>
+            {`${this.state.currentListingIndex + 1}/${listings.length}`}
+          </div>
+          <button
+            className={css.paginationNext}
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+              this.setState(prevState => ({
+                currentListingIndex: (prevState.currentListingIndex + listings.length + 1) %
+                  listings.length,
+              }));
+            }}
+          />
+        </div>
+      : null;
+
     const classes = classNames(rootClassName || css.root, className);
+    const caretClass = classNames(css.caret, { [css.caretWithCarousel]: hasCarousel });
 
     return (
       <OverlayView
@@ -70,34 +175,17 @@ class SearchMapListingCard extends Component {
         styles={{ zIndex: 1 }}
       >
         <div className={classes}>
-          <a alt={title} className={css.anchor} href={urlToListing} onClick={this.clickHandler}>
-            <div className={css.caretShadow} />
-            <div className={css.card}>
-              <div className={css.threeToTwoWrapper}>
-                <div className={css.aspectWrapper}>
-                  <ResponsiveImage
-                    rootClassName={css.rootForImage}
-                    alt={title}
-                    noImageMessage={intl.formatMessage({ id: 'SearchMapListingCard.noImage' })}
-                    image={firstImage}
-                    nameSet={[
-                      { name: 'landscape-crop', size: '1x' },
-                      { name: 'landscape-crop2x', size: '2x' },
-                    ]}
-                  />
-                </div>
-              </div>
-              <div className={css.info}>
-                <div className={css.price}>
-                  {formattedPrice}
-                </div>
-                <div className={css.name}>
-                  {title}
-                </div>
-              </div>
-            </div>
-            <div className={css.caret} />
-          </a>
+          <div className={css.caretShadow} />
+          <ListingCard
+            clickHandler={this.clickHandler}
+            listing={currentListing}
+            flattenedRoutes={flattenedRoutes}
+            history={history}
+            intl={intl}
+            isInCarousel={hasCarousel}
+          />
+          {pagination}
+          <div className={caretClass} />
         </div>
       </OverlayView>
     );
@@ -110,12 +198,10 @@ SearchMapListingCard.defaultProps = {
   onClickCallback: null,
 };
 
-const { arrayOf, func, shape, string } = PropTypes;
-
 SearchMapListingCard.propTypes = {
   className: string,
   rootClassName: string,
-  listing: propTypes.listing.isRequired,
+  listings: arrayOf(propTypes.listing).isRequired,
   onClickCallback: func,
 
   // from withFlattenedRoutes

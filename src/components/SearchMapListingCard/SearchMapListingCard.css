@@ -6,6 +6,15 @@
   height: auto;
   border: 0;
   padding: 0;
+
+  /* Borders */
+  border-radius: 4px;
+  box-shadow: var(--boxShadowPopupLight);
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: var(--boxShadowPopup);
+  }
 }
 
 .anchor {
@@ -30,22 +39,15 @@
 
   background-color: var(--matterColorLight);
 
-  /* Borders */
-  border-style: solid;
-  border-color: var(--matterColorNegative);
-  border-width: 1px;
-  border-radius: 4px;
-  box-shadow: var(--boxShadowPopupLight);
-
   /* Dimensions */
   margin-top: 0;
   margin-bottom: 0;
   transition: var(--transitionStyleButton);
 
-  &:hover {
-    cursor: pointer;
-    box-shadow: var(--boxShadowPopup);
-  }
+  /* Borders */
+  border-style: solid;
+  border-color: var(--matterColorNegative);
+  border-width: 1px;
 
   /* Overwrite dimensions from font styles */
   @media (--viewportMedium) {
@@ -75,7 +77,6 @@
   left: 0;
   right: 0;
   width: 100%;
-  border-radius: 2px;
 }
 
 .info {
@@ -93,6 +94,51 @@
 
 .name {
   flex-grow: 1;
+}
+
+.paginationInfo {
+  background-color: var(--marketplaceColor);
+  color: var(--matterColorLight);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default;
+}
+
+.paginationPage {
+  /* Font */
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightSemiBold);
+  margin-top: 0;
+  margin-bottom: 0;
+
+  /* Overwrite dimensions from font styles */
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.paginationPrev {
+  display: inline-block;
+  width: 36px;
+  height: 40px;
+  border: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg width="7" height="10" viewBox="0 0 7 10" xmlns="http://www.w3.org/2000/svg"><path d="M5.667 1c.094 0 .188.04.254.118.12.14.102.35-.038.47L1.85 5l4.032 3.412c.14.12.158.33.04.47-.12.14-.33.158-.47.04L1.117 5.254C1.043 5.19 1 5.098 1 5s.043-.19.118-.255L5.45 1.08c.064-.054.14-.08.217-.08" stroke="#FFF" fill="#FFF" fill-rule="evenodd"/></svg>');
+  background-position: center;
+  border-bottom-left-radius: inherit;
+  cursor: pointer;
+}
+
+.paginationNext {
+  display: inline-block;
+  width: 36px;
+  height: 40px;
+  border: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg width="7" height="10" viewBox="0 0 7 10" xmlns="http://www.w3.org/2000/svg"><path d="M1.333 9c-.094 0-.188-.04-.254-.118-.12-.14-.102-.35.038-.47L5.15 5 1.118 1.588c-.14-.12-.158-.33-.04-.47.12-.14.33-.158.47-.04l4.334 3.667C5.957 4.81 6 4.902 6 5s-.043.19-.118.255L1.55 8.92c-.064.054-.14.08-.217.08" stroke="#FFF" fill="#FFF" fill-rule="evenodd"/></svg>');
+  background-position: center;
+  border-bottom-right-radius: inherit;
+  cursor: pointer;
 }
 
 .caretShadow {
@@ -128,5 +174,21 @@
   border-bottom-style: solid;
   border-bottom-color: var(--matterColorNegative);
   border-bottom-width: 1px;
-
 }
+
+.caretWithCarousel {
+  background-color: var(--marketplaceColor);
+  border-right-color: var(--marketplaceColor);
+  border-bottom-color: var(--marketplaceColor);
+}
+
+.borderRadiusInheritTop {
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+}
+
+.borderRadiusInheritBottom {
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
