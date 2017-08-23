@@ -33,7 +33,6 @@ const listingPageReducer = (state = initialState, action = {}) => {
         ...state,
         searchParams: payload.searchParams,
         searchInProgress: true,
-        currentPageResultIds: [],
         searchMapListingIds: [],
         searchListingsError: null,
       };

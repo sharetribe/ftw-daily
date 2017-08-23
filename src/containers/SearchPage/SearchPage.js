@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { debounce, isEqual, unionWith } from 'lodash';
+import classNames from 'classnames';
 import config from '../../config';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { googleLatLngToSDKLatLng, googleBoundsToSDKBounds } from '../../util/googleMaps';
@@ -25,8 +26,8 @@ import css from './SearchPage.css';
 const RESULT_PAGE_SIZE = 12;
 const SHARETRIBE_API_MAX_PAGE_SIZE = 100;
 const MAX_SEARCH_RESULT_PAGES_ON_MAP = 5; // 100 * 5 = 500 listings are shown on a map.
-const DEBOUNCE_MAP_BOUNDS_CHANGE = 500; // bounds_change event is fired too often while dragging
-const MODAL_BREAKPOINT = 768; /* Search is in modal on mobile layout */
+const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
+const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
 
 const pickSearchParamsOnly = params => {
   const { address, origin, bounds } = params || {};
@@ -47,8 +48,9 @@ export class SearchPageComponent extends Component {
     // we need to by pass 2nd search created by initial 'bounds_changes' event
     this.useLocationSearchBounds = true;
     this.modalOpenedBoundsChange = false;
+    this.searchMapListingsInProgress = false;
 
-    this.onBoundsChanged = debounce(this.onBoundsChanged.bind(this), DEBOUNCE_MAP_BOUNDS_CHANGE);
+    this.onIdle = debounce(this.onIdle.bind(this), SEARCH_WITH_MAP_DEBOUNCE);
     this.fetchMoreListingsToMap = this.fetchMoreListingsToMap.bind(this);
   }
 
@@ -71,7 +73,9 @@ export class SearchPageComponent extends Component {
     }
   }
 
-  onBoundsChanged(googleMap) {
+  // We are using Google Maps idle event instead of bounds_changed, since it will not be fired
+  // too often (in the middle of map's pan or zoom activity)
+  onIdle(googleMap) {
     const { flattenedRoutes, history, location } = this.props;
 
     const { address, country, boundsChanged } = parse(location.search, {
@@ -104,6 +108,7 @@ export class SearchPageComponent extends Component {
     const perPage = SHARETRIBE_API_MAX_PAGE_SIZE;
     const page = 1;
     const searchParamsForMapResults = { ...searchInURL, page, perPage };
+    this.searchMapListingsInProgress = true;
 
     // Search more listings for map
     onSearchMapListings(searchParamsForMapResults)
@@ -112,6 +117,8 @@ export class SearchPageComponent extends Component {
           page < MAX_SEARCH_RESULT_PAGES_ON_MAP;
         if (hasNextPage) {
           onSearchMapListings({ ...searchParamsForMapResults, page: page + 1 });
+        } else {
+          this.searchMapListingsInProgress = false;
         }
       })
       .catch(error => {
@@ -204,11 +211,12 @@ export class SearchPageComponent extends Component {
         bounds={bounds}
         center={origin}
         listings={mapListings || []}
-        onBoundsChanged={this.onBoundsChanged}
+        onIdle={this.onIdle}
         isOpenOnModal={this.state.isSearchMapOpenOnMobile}
         onCloseAsModal={() => {
           onManageDisableScrolling('SearchPage.map', false);
         }}
+        useLocationSearchBounds={this.useLocationSearchBounds}
       />
     );
     const showSearchMapInMobile = this.state.isSearchMapOpenOnMobile ? searchMap : null;
@@ -246,26 +254,33 @@ export class SearchPageComponent extends Component {
               {listingsAreLoaded && totalItems === 0 ? noResults : null}
               {searchInProgress ? loadingResults : null}
             </div>
-            <div className={css.listings}>
+            <div
+              className={classNames(css.listings, {
+                [css.newSearchInProgress]: !listingsAreLoaded,
+              })}
+            >
               <SearchResultsPanel
                 className={css.searchListingsPanel}
                 currencyConfig={config.currencyConfig}
-                listings={listingsAreLoaded ? listings : []}
+                listings={listings}
                 pagination={listingsAreLoaded ? pagination : null}
                 search={searchParamsForPagination}
-              />
+              >
+                <button
+                  className={classNames(css.openMobileMap, {
+                    [css.openMobileMapSticky]: listings.length > 0,
+                  })}
+                  onClick={() => {
+                    this.useLocationSearchBounds = true;
+                    this.modalOpenedBoundsChange = true;
+                    this.setState({ isSearchMapOpenOnMobile: true });
+                  }}
+                >
+                  <MapIcon className={css.openMobileMapIcon} />
+                  <FormattedMessage id="SearchPage.openMapView" />
+                </button>
+              </SearchResultsPanel>
             </div>
-            <button
-              className={css.openMobileMap}
-              onClick={() => {
-                this.useLocationSearchBounds = true;
-                this.modalOpenedBoundsChange = true;
-                this.setState({ isSearchMapOpenOnMobile: true });
-              }}
-            >
-              <MapIcon className={css.openMobileMapIcon} />
-              <FormattedMessage id="SearchPage.openMapView" />
-            </button>
           </div>
           <ModalInMobile
             className={css.mapPanel}

@@ -69,6 +69,11 @@
   flex-direction: column;
 }
 
+.newSearchInProgress {
+  opacity: 0.1;
+  transition: opacity var(--transitionStyleButton);
+}
+
 .searchListingsPanel {
   flex-grow: 1;
 }
@@ -110,6 +115,10 @@
   @media (--viewportMedium) {
     display: none;
   }
+}
+
+.openMobileMapSticky {
+  position: sticky;
 }
 
 .mapPanel {

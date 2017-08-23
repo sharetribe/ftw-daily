@@ -35,7 +35,8 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             } />
         </h2>
       </div>
-      <div>
+      <div
+        className="">
         <SearchResultsPanel
           className={null}
           currencyConfig={
@@ -59,16 +60,18 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             }
           }
           rootClassName={null}
-          search={Object {}} />
+          search={Object {}}>
+          <button
+            className=""
+            onClick={[Function]}>
+            <MapIcon
+              className={null} />
+            <FormattedMessage
+              id="SearchPage.openMapView"
+              values={Object {}} />
+          </button>
+        </SearchResultsPanel>
       </div>
-      <button
-        onClick={[Function]}>
-        <MapIcon
-          className={null} />
-        <FormattedMessage
-          id="SearchPage.openMapView"
-          values={Object {}} />
-      </button>
     </div>
     <withViewport(ModalInMobileComponent)
       id="SearchPage.map"
@@ -89,9 +92,10 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           isOpenOnModal={false}
           listings={Array []}
           mapRootClassName={null}
-          onBoundsChanged={[Function]}
           onCloseAsModal={[Function]}
+          onIdle={[Function]}
           rootClassName={null}
+          useLocationSearchBounds={true}
           zoom={11} />
       </div>
     </withViewport(ModalInMobileComponent)>

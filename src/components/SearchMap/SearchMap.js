@@ -53,7 +53,7 @@ const MapWithGoogleMap = withGoogleMap(props => {
     isOpenOnModal,
     listings,
     listingOpen,
-    onBoundsChanged,
+    onIdle,
     onCloseAsModal,
     onListingClicked,
     onMapLoad,
@@ -76,7 +76,11 @@ const MapWithGoogleMap = withGoogleMap(props => {
   });
 
   const openedCard = listingOpen
-    ? <SearchMapListingCard key={listingOpen.id.uuid} listing={listingOpen} onClickCallback={onCloseAsModal} />
+    ? <SearchMapListingCard
+        key={listingOpen.id.uuid}
+        listing={listingOpen}
+        onClickCallback={onCloseAsModal}
+      />
     : null;
 
   return (
@@ -93,7 +97,7 @@ const MapWithGoogleMap = withGoogleMap(props => {
         fullscreenControl: !isOpenOnModal,
       }}
       ref={onMapLoad}
-      onBoundsChanged={onBoundsChanged}
+      onIdle={onIdle}
     >
       {priceLabels}
       {openedCard}
@@ -127,7 +131,7 @@ export class SearchMapComponent extends Component {
       // Do not call fitMapToBounds if bounds are the same.
       // Our bounds are viewport bounds, and fitBounds will try to add margins around those bounds
       // that would result to zoom-loop (bound change -> fitmap -> bounds change -> ...)
-      if (!isEqual(nextProps.bounds, currentBounds)) {
+      if (!isEqual(nextProps.bounds, currentBounds) && nextProps.useLocationSearchBounds) {
         fitMapToBounds(this.googleMap, nextProps.bounds);
       }
     }
@@ -166,7 +170,7 @@ export class SearchMapComponent extends Component {
       center,
       isOpenOnModal,
       listings,
-      onBoundsChanged,
+      onIdle,
       onCloseAsModal,
       zoom,
     } = this.props;
@@ -185,8 +189,8 @@ export class SearchMapComponent extends Component {
         listingOpen={this.state.listingOpen}
         onListingClicked={this.onListingClicked}
         onMapLoad={this.onMapLoadHandler}
-        onBoundsChanged={() => {
-          onBoundsChanged(this.googleMap);
+        onIdle={() => {
+          onIdle(this.googleMap);
         }}
         onCloseAsModal={() => {
           if (onCloseAsModal) {
@@ -204,6 +208,7 @@ SearchMapComponent.defaultProps = {
   className: '',
   rootClassName: null,
   mapRootClassName: null,
+  useLocationSearchBounds: true,
   bounds: null,
   center: new sdkTypes.LatLng(0, 0),
   isOpenOnModal: false,
@@ -221,7 +226,8 @@ SearchMapComponent.propTypes = {
   isOpenOnModal: bool,
   listings: arrayOf(propTypes.listing),
   mapRootClassName: string,
-  onBoundsChanged: func.isRequired,
+  useLocationSearchBounds: bool, // eslint-disable-line react/no-unused-prop-types
+  onIdle: func.isRequired,
   onCloseAsModal: func,
   rootClassName: string,
   zoom: number,
