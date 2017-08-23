@@ -95,6 +95,8 @@ const MapWithGoogleMap = withGoogleMap(props => {
         // Disable fullscreen control: this won't work with mobile close-modal button
         // since they are on top of each others.
         fullscreenControl: !isOpenOnModal,
+        // Click disabled for point-of-interests
+        clickableIcons: false,
       }}
       ref={onMapLoad}
       onIdle={onIdle}
