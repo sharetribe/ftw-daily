@@ -107,7 +107,7 @@ export class SearchPageComponent extends Component {
     });
     const perPage = SHARETRIBE_API_MAX_PAGE_SIZE;
     const page = 1;
-    const searchParamsForMapResults = { ...searchInURL, page, perPage };
+    const searchParamsForMapResults = { ...searchInURL, include: ['images'], page, perPage };
     this.searchMapListingsInProgress = true;
 
     // Search more listings for map
