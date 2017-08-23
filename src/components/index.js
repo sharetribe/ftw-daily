@@ -42,6 +42,7 @@ import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
 import SearchIcon from './SearchIcon/SearchIcon';
 import SearchMap from './SearchMap/SearchMap';
+import SearchMapGroupLabel from './SearchMapGroupLabel/SearchMapGroupLabel';
 import SearchMapListingCard from './SearchMapListingCard/SearchMapListingCard';
 import SearchMapPriceLabel from './SearchMapPriceLabel/SearchMapPriceLabel';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
@@ -104,6 +105,7 @@ export {
   SaleDetailsPanel,
   SearchIcon,
   SearchMap,
+  SearchMapGroupLabel,
   SearchMapListingCard,
   SearchMapPriceLabel,
   SearchResultsPanel,
