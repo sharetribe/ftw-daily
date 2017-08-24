@@ -252,7 +252,7 @@ export class SearchMapComponent extends Component {
 SearchMapComponent.defaultProps = {
   bounds: null,
   center: new sdkTypes.LatLng(0, 0),
-  className: '',
+  className: null,
   isOpenOnModal: false,
   listings: [],
   mapRootClassName: null,
