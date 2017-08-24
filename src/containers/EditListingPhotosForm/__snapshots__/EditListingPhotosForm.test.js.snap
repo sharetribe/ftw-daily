@@ -12,6 +12,7 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
     <Field
       accept="image/*"
       component={[Function]}
+      disabled={false}
       id="EditListingPhotosForm.AddImages"
       label={
         <span>

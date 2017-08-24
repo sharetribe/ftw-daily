@@ -51,6 +51,7 @@ class CurrencyInputComponent extends Component {
     const initialValue = input.value instanceof types.Money
       ? convertMoneyToNumber(input.value, currencyConfig.subUnitDivisor)
       : defaultValue;
+    const hasInitialValue = typeof initialValue === 'number' && !isNaN(initialValue);
 
     // We need to handle number format - some locales use dots and some commas as decimal separator
     // TODO Figure out if this could be digged from React-Intl directly somehow
@@ -60,7 +61,7 @@ class CurrencyInputComponent extends Component {
     try {
       // whatever is passed as a default value, will be converted to currency string
       // Unformatted value is digits + localized sub unit separator ("9,99")
-      const unformattedValue = initialValue
+      const unformattedValue = hasInitialValue
         ? truncateToSubUnitPrecision(
             ensureSeparator(initialValue.toString(), usesComma),
             currencyConfig.subUnitDivisor,
@@ -68,7 +69,7 @@ class CurrencyInputComponent extends Component {
           )
         : '';
       // Formatted value fully localized currency string ("$1,000.99")
-      const formattedValue = initialValue
+      const formattedValue = hasInitialValue
         ? intl.formatNumber(ensureDotSeparator(unformattedValue), currencyConfig)
         : '';
 
@@ -198,7 +199,7 @@ class CurrencyInputComponent extends Component {
 CurrencyInputComponent.defaultProps = {
   className: null,
   currencyConfig: null,
-  defaultValue: 0,
+  defaultValue: null,
   input: null,
   placeholder: null,
 };
