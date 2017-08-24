@@ -61,7 +61,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           }
           rootClassName={null}
           search={Object {}}>
-          <button
+          <div
             className=""
             onClick={[Function]}>
             <MapIcon
@@ -69,7 +69,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             <FormattedMessage
               id="SearchPage.openMapView"
               values={Object {}} />
-          </button>
+          </div>
         </SearchResultsPanel>
       </div>
     </div>
