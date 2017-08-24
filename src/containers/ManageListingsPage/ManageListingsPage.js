@@ -1,11 +1,14 @@
 import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import * as propTypes from '../../util/propTypes';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { PageLayout, Topbar } from '../../components';
+import { PageLayout, Topbar, TabNavHorizontal } from '../../components';
+
+import css from './ManageListingsPage.css';
 
 export const ManageListingsPageComponent = props => {
   const {
@@ -22,12 +25,40 @@ export const ManageListingsPageComponent = props => {
     onManageDisableScrolling,
   } = props;
 
+  const tabs = [
+    {
+      text: <FormattedMessage id="ManageListingsPage.profileSettings" />,
+      selected: false,
+      disabled: true,
+      linkProps: {
+        name: 'EditProfilePage',
+        params: { displayName: 'testinglink' },
+      },
+    },
+    {
+      text: <FormattedMessage id="ManageListingsPage.accountSettings" />,
+      selected: false,
+      disabled: true,
+      linkProps: {
+        name: 'AccountPage',
+      },
+    },
+    {
+      text: <FormattedMessage id="ManageListingsPage.yourListings" />,
+      selected: true,
+      linkProps: {
+        name: 'ManageListingsPage',
+      },
+    },
+  ];
+
   return (
     <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Manage listings">
       <Topbar
         authInProgress={authInProgress}
         currentUser={currentUser}
         currentUserHasListings={currentUserHasListings}
+        currentPage="ManageListingsPage"
         history={history}
         isAuthenticated={isAuthenticated}
         location={location}
@@ -35,6 +66,8 @@ export const ManageListingsPageComponent = props => {
         onLogout={onLogout}
         onManageDisableScrolling={onManageDisableScrolling}
       />
+      <TabNavHorizontal className={css.tabs} tabRootClassName={css.tab} tabs={tabs} skin="dark" />
+
     </PageLayout>
   );
 };

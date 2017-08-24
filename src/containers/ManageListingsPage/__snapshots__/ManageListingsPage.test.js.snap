@@ -5,6 +5,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
   title="Manage listings">
   <Topbar
     authInProgress={false}
+    currentPage="ManageListingsPage"
     currentUser={null}
     currentUserHasListings={false}
     history={
@@ -21,5 +22,47 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
     notificationCount={0}
     onLogout={[Function]}
     onManageDisableScrolling={[Function]} />
+  <TabNavHorizontal
+    className={null}
+    rootClassName={null}
+    skin="dark"
+    tabClassName={null}
+    tabRootClassName={null}
+    tabs={
+      Array [
+        Object {
+          "disabled": true,
+          "linkProps": Object {
+            "name": "EditProfilePage",
+            "params": Object {
+              "displayName": "testinglink",
+            },
+          },
+          "selected": false,
+          "text": <FormattedMessage
+            id="ManageListingsPage.profileSettings"
+            values={Object {}} />,
+        },
+        Object {
+          "disabled": true,
+          "linkProps": Object {
+            "name": "AccountPage",
+          },
+          "selected": false,
+          "text": <FormattedMessage
+            id="ManageListingsPage.accountSettings"
+            values={Object {}} />,
+        },
+        Object {
+          "linkProps": Object {
+            "name": "ManageListingsPage",
+          },
+          "selected": true,
+          "text": <FormattedMessage
+            id="ManageListingsPage.yourListings"
+            values={Object {}} />,
+        },
+      ]
+    } />
 </withRouter(PageLayout)>
 `;
