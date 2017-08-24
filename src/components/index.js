@@ -50,6 +50,7 @@ import SelectField from './SelectField/SelectField';
 import StripeBankAccountTokenInputField
   from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';
 import TabNav from './TabNav/TabNav';
+import TabNavHorizontal from './TabNavHorizontal/TabNavHorizontal';
 import Tabs from './Tabs/Tabs';
 import TextInputField from './TextInputField/TextInputField';
 import Topbar from './Topbar/Topbar';
@@ -113,6 +114,7 @@ export {
   SelectField,
   StripeBankAccountTokenInputField,
   TabNav,
+  TabNavHorizontal,
   Tabs,
   TextInputField,
   Topbar,
