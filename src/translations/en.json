@@ -318,6 +318,7 @@
   "TopbarDesktop.logo": "Logo",
   "TopbarDesktop.logout": "Log out",
   "TopbarDesktop.signup": "Sign up",
+  "TopbarDesktop.yourListingsLink": "Your listings",
   "TopbarMobileMenu.greeting": "Hello {displayName}",
   "TopbarMobileMenu.inboxLink": "Inbox",
   "TopbarMobileMenu.loginLink": "Log in",

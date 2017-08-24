@@ -191,6 +191,7 @@
 
 .profileMenuContent {
   min-width: 276px;
+  padding-top: 20px;
 }
 
 /* Authentication */
@@ -226,24 +227,97 @@
   @apply --topbarDesktopLabelStyles;
 }
 
-.logoutButton {
+/* left animated "border" like hover element */
+.menuItemBorder {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  height: calc(100% - 4px);
+  width: 0;
+  transition: width var(--transitionStyleButton);
+}
+
+.yourListingsLink {
   @apply --marketplaceH4FontStyles;
+  position: relative;
+  display: block;
+
+  /* Dimensions */
   width: 100%;
-  min-width: 276px;
   margin: 0;
-  padding: 20px 24px;
+  padding: 4px 24px;
+
+  /* Layout details */
   color: var(--matterColor);
   text-align: left;
-  white-space: nowrap;
   transition: var(--transitionStyleButton);
 
   &:hover {
     color: var(--matterColorDark);
     text-decoration: none;
-    border-left: 6px solid var(--marketplaceColor);
+
+    & .menuItemBorder {
+      width: 6px;
+      background-color: var(--marketplaceColor);
+    }
   }
 
   @media (--viewportMedium) {
     margin: 0;
+  }
+}
+
+.logoutButton {
+  /* Font is specific to this component */
+  @apply --marketplaceH4FontStyles;
+  font-size: 14px;
+
+  /* Dimensions */
+  position: relative;
+  width: 100%;
+  min-width: 276px;
+  margin: 0;
+  padding: 20px 24px;
+
+  /* Layout details */
+  color: var(--matterColorAnti);
+  text-align: left;
+  white-space: nowrap;
+  transition: var(--transitionStyleButton);
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: var(--matterColorNegative);
+
+  &:hover {
+    color: var(--matterColorDark);
+    text-decoration: none;
+
+    & .menuItemBorder {
+      height: 100%;
+      width: 6px;
+      top: 0;
+      background-color: var(--marketplaceColor);
+    }
+  }
+
+  @media (--viewportMedium) {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+}
+
+.currentPage {
+  color: var(--matterColorDark);
+  position: relative;
+
+  & .menuItemBorder {
+    width: 6px;
+    background-color: var(--matterColorDark);
+  }
+
+  &:hover {
+    & .menuItemBorder {
+      background-color: var(--matterColorDark);
+    }
   }
 }
