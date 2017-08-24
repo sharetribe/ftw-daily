@@ -6,8 +6,7 @@
 }
 
 .listingCards {
-  flex-grow: 1;
-  padding: 0 24px 96px 24px;
+  padding: 0 24px 30px 24px;
 
   @media (--viewportMedium) {
     display: flex;
@@ -83,7 +82,8 @@
 }
 
 .pagination {
-  margin-top: -66px; /* Needs to be negative value so there isn't too much white space between the map button and the listing. */
+  /* margin-top: auto; pushes pagination to the end of the page. */
+  margin-top: auto;
   background-color: var(--matterColorLight);
   padding: 0 24px;
 }
