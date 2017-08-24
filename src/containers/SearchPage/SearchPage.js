@@ -227,6 +227,9 @@ export class SearchPageComponent extends Component {
 
     const searchParamsForPagination = parse(location.search);
 
+    // N.B. openMobileMap button is sticky.
+    // For some reason, stickyness doesn't work on Safari, if the element is <button>
+    /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <PageLayout
         authInfoError={authInfoError}
@@ -266,7 +269,7 @@ export class SearchPageComponent extends Component {
                 pagination={listingsAreLoaded ? pagination : null}
                 search={searchParamsForPagination}
               >
-                <button
+                <div
                   className={classNames(css.openMobileMap, {
                     [css.openMobileMapSticky]: listings.length > 0,
                   })}
@@ -278,7 +281,7 @@ export class SearchPageComponent extends Component {
                 >
                   <MapIcon className={css.openMobileMapIcon} />
                   <FormattedMessage id="SearchPage.openMapView" />
-                </button>
+                </div>
               </SearchResultsPanel>
             </div>
           </div>
@@ -297,6 +300,7 @@ export class SearchPageComponent extends Component {
         </div>
       </PageLayout>
     );
+    /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
 

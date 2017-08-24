@@ -83,9 +83,11 @@
   @apply --marketplaceH4FontStyles;
 
   /* Positioning */
+  /* Safari didn't like bottom: 48px; -> hence calc from top */
   position: fixed;
-  bottom: 48px;
+  top: calc(100vh - 100px);
   left: 50vw;
+  width: 150px;
   transform: translateX(-50%);
   margin-top: 0;
   margin-bottom: 0;
@@ -119,6 +121,7 @@
 
 .openMobileMapSticky {
   position: sticky;
+  z-index: 1;
 }
 
 .mapPanel {
