@@ -21,13 +21,13 @@ const isUploadOverLimit = error => {
 
 // Add image wrapper. Label is the only visible element, file input is hidden.
 const RenderAddImage = props => {
-  const { accept, input, label, type } = props;
+  const { accept, input, label, type, disabled } = props;
   const { name, onChange } = input;
   const inputProps = { accept, id: name, name, onChange, type };
   return (
     <div className={css.addImageWrapper}>
       <div className={css.aspectRatioWrapper}>
-        <input {...inputProps} className={css.addImageInput} />
+        {disabled ? null : <input {...inputProps} className={css.addImageInput} />}
         <label htmlFor={name} className={css.addImage}>{label}</label>
       </div>
     </div>
@@ -45,6 +45,7 @@ RenderAddImage.propTypes = {
   }).isRequired,
   label: node.isRequired,
   type: string.isRequired,
+  disabled: bool.isRequired,
 };
 
 export class EditListingPhotosFormComponent extends Component {
@@ -177,6 +178,7 @@ export class EditListingPhotosFormComponent extends Component {
             name="addImage"
             onChange={this.onImageUploadHandler}
             type="file"
+            disabled={this.state.imageUploadRequested}
           />
 
           <Field
