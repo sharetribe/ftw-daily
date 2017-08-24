@@ -246,7 +246,7 @@
   "SalePage.rejectButton": "Decline",
   "SalePage.rejectSaleFailed": "Rejecting sale failed.",
   "SalePage.title": "Sale details: {title}",
-  "SearchMapListingCard.noImage": "No image",
+  "SearchMapInfoCard.noImage": "No image",
   "SearchPage.foundResults": "{count, number} {count, plural, one {sauna} other {saunas}} found",
   "SearchPage.foundResultsWithAddress": "{count, number} {count, plural, one {sauna} other {saunas}} around {address}",
   "SearchPage.loadingResults": "Loading search results…",

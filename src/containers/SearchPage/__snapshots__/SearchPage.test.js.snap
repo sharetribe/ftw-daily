@@ -88,7 +88,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
               "lng": 0,
             }
           }
-          className=""
+          className={null}
           isOpenOnModal={false}
           listings={Array []}
           mapRootClassName={null}

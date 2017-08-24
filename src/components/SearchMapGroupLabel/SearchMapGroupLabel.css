@@ -1,0 +1,66 @@
+@import '../../marketplace.css';
+
+.root {
+
+  /* Size from content */
+  position: relative;
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: 0;
+}
+
+.details {
+  /* Font */
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightSemiBold);
+  margin-top: 0;
+  margin-bottom: 0;
+
+  /* Coloring */
+  border: 0;
+  padding: 6px 14px;
+  border-radius: 17px;
+  background-color: var(--marketplaceColor);
+  color: var(--matterColorLight);
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: var(--boxShadowPopup);
+  }
+
+  /* Overwrite dimensions from font styles */
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.caretShadow {
+  /* Caret / arrow dimensions and position */
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  margin-left: -3px;
+  transform: rotate(45deg);
+
+  /* Caret should have same box-shadow as label */
+  box-shadow: var(--boxShadowPopupLight);
+}
+
+.caret {
+
+  /* Caret / arrow dimensions and position */
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  margin-left: -3px;
+  transform: rotate(45deg);
+
+  /* Caret should have same bg-color as label */
+  background-color: var(--marketplaceColor);
+}
