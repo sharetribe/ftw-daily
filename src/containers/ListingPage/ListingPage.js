@@ -29,6 +29,47 @@ import { showListing } from './ListingPage.duck';
 
 import css from './ListingPage.css';
 
+const EditIcon = props => {
+  const { className } = props;
+  return (
+    <svg
+      className={className}
+      width="16px"
+      height="16px"
+      viewBox="0 0 16 16"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        stroke="none"
+        strokeWidth="1"
+        fill="none"
+        fillRule="evenodd"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <g transform="translate(-255.000000, -76.000000)" stroke="#FFFFFF">
+          <g transform="translate(0.000000, 60.000000)">
+            <g transform="translate(256.000000, 16.000000)">
+              <polygon
+                points="5.1611 12.8804 0.2121 15.0004 2.3331 10.0504 11.1721 1.2124 14.0001 4.0404"
+              />
+              <path d="M12.1641,5.876 L9.3361,3.048" />
+              <path d="M5.1611,12.8804 L2.3331,10.0504" />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+EditIcon.defaultProps = { className: null };
+
+const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
+
+EditIcon.propTypes = { className: string };
+
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;
 
@@ -130,7 +171,6 @@ export class ListingPageComponent extends Component {
     const userAndListingAuthorAvailable = currentUser && authorAvailable;
     const isOwnListing = userAndListingAuthorAvailable &&
       currentListing.author.id.uuid === currentUser.id.uuid;
-    const showBookButton = !isOwnListing;
 
     const currentAuthor = ensureUser(authorAvailable ? currentListing.author : {});
     const currentAuthorDisplayName = currentAuthor.attributes.profile.displayName;
@@ -156,31 +196,51 @@ export class ListingPageComponent extends Component {
         </div>
       : null;
 
-    const bookingHeading = !isOwnListing
-      ? <div className={css.bookingHeading}>
-          <h2 className={css.bookingTitle}>
-            <FormattedMessage id="ListingPage.bookingTitle" values={{ title }} />
-          </h2>
-          <div className={css.bookingHelp}>
-            <FormattedMessage id="ListingPage.bookingHelp" />
-          </div>
+    const bookingHeading = (
+      <div className={css.bookingHeading}>
+        <h2 className={css.bookingTitle}>
+          <FormattedMessage id="ListingPage.bookingTitle" values={{ title }} />
+        </h2>
+        <div className={css.bookingHelp}>
+          <FormattedMessage id="ListingPage.bookingHelp" />
         </div>
-      : <p className={css.ownListingText}><FormattedMessage id="ListingPage.ownListing" /></p>;
+      </div>
+    );
 
-    const bookingDatesForm = !isOwnListing
-      ? <BookingDatesForm className={css.bookingForm} onSubmit={this.onSubmit} price={price} />
-      : null;
+    const handleBookingSubmit = values => {
+      if (!isOwnListing) {
+        this.onSubmit(values);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    };
+
+    const bookingDatesForm = (
+      <BookingDatesForm className={css.bookingForm} onSubmit={handleBookingSubmit} price={price} />
+    );
 
     const editParams = { ...params, type: 'edit', tab: 'description' };
-    const editListingLink = isOwnListing
-      ? <p>
-          <NamedLink name="EditListingPage" params={editParams}>
+    const ownListingActionBar = isOwnListing
+      ? <div className={css.ownListingActionBar}>
+          <p className={css.ownListingText}>
+            <FormattedMessage id="ListingPage.ownListing" />
+          </p>
+          <NamedLink className={css.editListingLink} name="EditListingPage" params={editParams}>
+            <EditIcon className={css.editIcon} />
             <FormattedMessage id="ListingPage.editListing" />
           </NamedLink>
-        </p>
+        </div>
       : null;
 
-    const listingClasses = classNames(css.pageRoot, { [css.bookable]: showBookButton });
+    const listingClasses = classNames(css.pageRoot);
+
+    const handleBookButtonClick = () => {
+      if (!isOwnListing) {
+        this.setState({ isBookingModalOpenOnMobile: true });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    };
 
     return (
       <PageLayout
@@ -203,6 +263,7 @@ export class ListingPageComponent extends Component {
         <div className={listingClasses}>
           <div className={css.threeToTwoWrapper}>
             <div className={css.aspectWrapper}>
+              {ownListingActionBar}
               <ResponsiveImage
                 rootClassName={css.rootForImage}
                 alt={title}
@@ -252,9 +313,6 @@ export class ListingPageComponent extends Component {
               </div>
 
               {map}
-              <div className={css.editListingMobile}>
-                {editListingLink}
-              </div>
             </div>
 
             <ModalInMobile
@@ -278,28 +336,22 @@ export class ListingPageComponent extends Component {
               </div>
 
               {bookingHeading}
-              {editListingLink}
               {bookingDatesForm}
             </ModalInMobile>
-            {showBookButton
-              ? <div className={css.openBookingForm}>
-                  <div className={css.priceContainer}>
-                    <div className={css.priceValue} title={priceTitle}>
-                      {formattedPrice}
-                    </div>
-                    <div className={css.perNight}>
-                      <FormattedMessage id="ListingPage.perNight" />
-                    </div>
-                  </div>
-
-                  <Button
-                    rootClassName={css.bookButton}
-                    onClick={() => this.setState({ isBookingModalOpenOnMobile: true })}
-                  >
-                    {bookBtnMessage}
-                  </Button>
+            <div className={css.openBookingForm}>
+              <div className={css.priceContainer}>
+                <div className={css.priceValue} title={priceTitle}>
+                  {formattedPrice}
                 </div>
-              : null}
+                <div className={css.perNight}>
+                  <FormattedMessage id="ListingPage.perNight" />
+                </div>
+              </div>
+
+              <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
+                {bookBtnMessage}
+              </Button>
+            </div>
           </div>
         </div>
       </PageLayout>
@@ -315,8 +367,6 @@ ListingPageComponent.defaultProps = {
   showListingError: null,
   tab: 'listing',
 };
-
-const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
 
 ListingPageComponent.propTypes = {
   // from withRouter

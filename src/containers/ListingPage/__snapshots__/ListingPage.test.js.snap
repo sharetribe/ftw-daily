@@ -40,7 +40,7 @@ exports[`ListingPage matches snapshot 1`] = `
     onLogout={[Function]}
     onManageDisableScrolling={[Function]} />
   <div
-    className="undefined">
+    className="">
     <div>
       <div>
         <ResponsiveImage
@@ -144,7 +144,6 @@ exports[`ListingPage matches snapshot 1`] = `
               zoom={11} />
           </div>
         </div>
-        <div />
       </div>
       <withViewport(ModalInMobileComponent)
         id="BookingDatesFormInModal"
