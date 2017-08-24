@@ -8,7 +8,7 @@ import config from '../../config';
 import * as propTypes from '../../util/propTypes';
 import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
-import { convertMoneyToNumber } from '../../util/currency';
+import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import { ensureListing, ensureUser } from '../../util/data';
 import {
@@ -36,8 +36,7 @@ const { UUID } = types;
 
 const priceData = (price, currencyConfig, intl) => {
   if (price && price.currency === currencyConfig.currency) {
-    const priceAsNumber = convertMoneyToNumber(price, currencyConfig.subUnitDivisor);
-    const formattedPrice = intl.formatNumber(priceAsNumber, currencyConfig);
+    const formattedPrice = formatMoney(intl, currencyConfig, price);
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
     return {

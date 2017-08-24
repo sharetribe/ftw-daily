@@ -7,7 +7,7 @@ import { FormattedMessage, FormattedHTMLMessage, intlShape, injectIntl } from 'r
 import Decimal from 'decimal.js';
 import classNames from 'classnames';
 import config from '../../config';
-import { convertMoneyToNumber } from '../../util/currency';
+import { convertMoneyToNumber, formatMoney } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
 
 import css from './BookingBreakdown.css';
@@ -70,14 +70,15 @@ export const BookingBreakdownComponent = props => {
   const currencyConfig = config.currencyConfig;
   const subUnitDivisor = currencyConfig.subUnitDivisor;
 
-  const unitPriceAsNumber = convertMoneyToNumber(nightPurchase.unitPrice, subUnitDivisor);
-  const formattedUnitPrice = intl.formatNumber(unitPriceAsNumber, currencyConfig);
+  const formattedUnitPrice = formatMoney(intl, currencyConfig, nightPurchase.unitPrice);
 
   // If commission is passed it will be shown as a fee already reduces from the total price
   let subTotalInfo = null;
   let commissionInfo = null;
 
   if (userRole === 'provider') {
+    // TODO: Calculate subtotal from provider total and the commission
+    const unitPriceAsNumber = convertMoneyToNumber(nightPurchase.unitPrice, subUnitDivisor);
     const subTotal = new Decimal(nightCount).times(unitPriceAsNumber).toNumber();
     const formattedSubTotal = intl.formatNumber(subTotal, currencyConfig);
 
@@ -91,10 +92,7 @@ export const BookingBreakdownComponent = props => {
     );
 
     const commission = providerCommission.lineTotal;
-    const commissionAsNumber = commission ? convertMoneyToNumber(commission, subUnitDivisor) : 0;
-    const formattedCommission = commission
-      ? intl.formatNumber(new Decimal(commissionAsNumber).toNumber(), currencyConfig)
-      : null;
+    const formattedCommission = commission ? formatMoney(intl, currencyConfig, commission) : null;
 
     commissionInfo = (
       <div className={css.lineItem}>
@@ -111,13 +109,8 @@ export const BookingBreakdownComponent = props => {
     : <FormattedMessage id="BookingBreakdown.providerTotal" />;
   const totalLabel = totalLabelMessage || defaultTotalLabel;
 
-  const totalPriceAsNumber = convertMoneyToNumber(
-    userRole === 'customer' ? payinTotal : payoutTotal,
-    subUnitDivisor
-  );
-  const formattedTotalPrice = totalPriceAsNumber
-    ? intl.formatNumber(totalPriceAsNumber, currencyConfig)
-    : null;
+  const totalPrice = userRole === 'customer' ? payinTotal : payoutTotal;
+  const formattedTotalPrice = formatMoney(intl, currencyConfig, totalPrice);
 
   return (
     <div className={classes}>

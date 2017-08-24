@@ -3,7 +3,7 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import { NamedLink, ResponsiveImage } from '../../components';
 import * as propTypes from '../../util/propTypes';
-import { convertMoneyToNumber } from '../../util/currency';
+import { formatMoney } from '../../util/currency';
 import { ensureListing, ensureUser } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
 
@@ -11,8 +11,7 @@ import css from './ListingCard.css';
 
 const priceData = (price, currencyConfig, intl) => {
   if (price && price.currency === currencyConfig.currency) {
-    const priceAsNumber = convertMoneyToNumber(price, currencyConfig.subUnitDivisor);
-    const formattedPrice = intl.formatNumber(priceAsNumber, currencyConfig);
+    const formattedPrice = formatMoney(intl, currencyConfig, price);
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
     return {
