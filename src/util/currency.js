@@ -2,6 +2,19 @@ import { trimEnd } from 'lodash';
 import Decimal from 'decimal.js';
 import { types } from './sdkLoader';
 
+// https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
+// https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER
+// https://stackoverflow.com/questions/26380364/why-is-number-max-safe-integer-9-007-199-254-740-991-and-not-9-007-199-254-740-9
+export const MIN_SAFE_INTEGER = Number.MIN_SAFE_INTEGER || -1 * (2 ** 53 - 1);
+export const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || 2 ** 53 - 1;
+
+export const isSafeNumber = decimalValue => {
+  if (!(decimalValue instanceof Decimal)) {
+    throw new Error('Value must be a Decimal');
+  }
+  return decimalValue.gte(MIN_SAFE_INTEGER) && decimalValue.lte(MAX_SAFE_INTEGER);
+};
+
 ////////// Currency manipulation in string format //////////
 
 /**
@@ -102,6 +115,12 @@ export const truncateToSubUnitPrecision = (inputString, subUnitDivisor, useComma
   // E.g. $10 => 1000¢
   const amount = value.times(subUnitDivisorAsDecimal);
 
+  if (!isSafeNumber(amount)) {
+    throw new Error(
+      `Cannot represent money minor unit value ${amount.toString()} safely as a number`
+    );
+  }
+
   // Amount must be integer
   // We don't deal with subunit fragments like 1000.345¢
   if (amount.isInteger()) {
@@ -143,12 +162,28 @@ export const convertUnitToSubUnit = (value, subUnitDivisor, useComma = false) =>
   const val = typeof value === 'string' ? convertToDecimal(value, useComma) : new Decimal(value);
   const amount = val.times(subUnitDivisorAsDecimal);
 
-  if (amount.isInteger()) {
+  if (!isSafeNumber(amount)) {
+    throw new Error(
+      `Cannot represent money minor unit value ${amount.toString()} safely as a number`
+    );
+  } else if (amount.isInteger()) {
     return amount.toNumber();
   } else {
     throw new Error(`value must divisible by ${subUnitDivisor}`);
   }
 };
+
+const isNumber = value => {
+  return typeof value === 'number' && !isNaN(value);
+};
+
+/* eslint-disable no-underscore-dangle */
+// Detect if the given value is a goog.math.Long object
+// See: https://google.github.io/closure-library/api/goog.math.Long.html
+const isGoogleMathLong = value => {
+  return typeof value === 'object' && isNumber(value.low_) && isNumber(value.high_);
+};
+/* eslint-enable no-underscore-dangle */
 
 /**
  * Convert Money to a number
@@ -165,7 +200,27 @@ export const convertMoneyToNumber = (value, subUnitDivisor) => {
     throw new Error('Value must be a Money type');
   }
   const subUnitDivisorAsDecimal = convertDivisorToDecimal(subUnitDivisor);
-  const amount = new Decimal(value.amount);
+  let amount;
+
+  if (isGoogleMathLong(value.amount)) {
+    // TODO: temporarily also handle goog.math.Long values created by
+    // the Transit tooling in the Sharetribe JS SDK. This should be
+    // removed when the value.amount will be a proper Decimal type.
+
+    // eslint-disable-next-line no-console
+    console.warn('goog.math.Long value in money amount:', value.amount, value.amount.toString());
+
+    amount = new Decimal(value.amount.toString());
+  } else {
+    amount = new Decimal(value.amount);
+  }
+
+  if (!isSafeNumber(amount)) {
+    throw new Error(
+      `Cannot represent money minor unit value ${amount.toString()} safely as a number`
+    );
+  }
+
   return amount.dividedBy(subUnitDivisorAsDecimal).toNumber();
 };
 
