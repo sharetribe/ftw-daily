@@ -249,6 +249,7 @@ export const InboxPageComponent = props => {
         authInProgress={authInProgress}
         currentUser={currentUser}
         currentUserHasListings={currentUserHasListings}
+        currentPage="InboxPage"
         notificationCount={providerNotificationCount}
         history={history}
         location={location}

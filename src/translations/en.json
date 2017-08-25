@@ -154,6 +154,9 @@
   "LoginForm.passwordLabel": "Password",
   "LoginForm.passwordPlaceholder": "Enter your password…",
   "LoginForm.passwordRequired": "This field is required",
+  "ManageListingsPage.accountSettings": "Account settings",
+  "ManageListingsPage.profileSettings": "Profile settings",
+  "ManageListingsPage.yourListings": "Your listings",
   "MapPriceMarker.unsupportedPrice": "({currency})",
   "Modal.close": "CLOSE",
   "Modal.closeModal": "Close modal",
@@ -318,6 +321,7 @@
   "TopbarDesktop.logo": "Logo",
   "TopbarDesktop.logout": "Log out",
   "TopbarDesktop.signup": "Sign up",
+  "TopbarDesktop.yourListingsLink": "Your listings",
   "TopbarMobileMenu.greeting": "Hello {displayName}",
   "TopbarMobileMenu.inboxLink": "Inbox",
   "TopbarMobileMenu.loginLink": "Log in",
@@ -326,6 +330,7 @@
   "TopbarMobileMenu.signupLink": "Sign up",
   "TopbarMobileMenu.signupOrLogin": "{signup} or {login}",
   "TopbarMobileMenu.unauthorizedGreeting": "Hello there,{lineBreak}would you like to {signupOrLogin}?",
+  "TopbarMobileMenu.yourListingsLink": "Your listings",
   "TopbarSearchForm.placeholder": "Search saunas…",
   "TopbarSearchForm.searchHelp": "Tip: You can also search saunas by zip code, for example \"00500\" or city district \"Sörnäinen\"."
 }

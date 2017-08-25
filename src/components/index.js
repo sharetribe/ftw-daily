@@ -50,11 +50,13 @@ import SelectField from './SelectField/SelectField';
 import StripeBankAccountTokenInputField
   from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';
 import TabNav from './TabNav/TabNav';
+import TabNavHorizontal from './TabNavHorizontal/TabNavHorizontal';
 import Tabs from './Tabs/Tabs';
 import TextInputField from './TextInputField/TextInputField';
 import Topbar from './Topbar/Topbar';
 import TopbarDesktop from './TopbarDesktop/TopbarDesktop';
 import TopbarMobileMenu from './TopbarMobileMenu/TopbarMobileMenu';
+import UserNav from './UserNav/UserNav';
 import ValidationError from './ValidationError/ValidationError';
 
 export {
@@ -113,10 +115,12 @@ export {
   SelectField,
   StripeBankAccountTokenInputField,
   TabNav,
+  TabNavHorizontal,
   Tabs,
   TextInputField,
   Topbar,
   TopbarDesktop,
   TopbarMobileMenu,
+  UserNav,
   ValidationError,
 };

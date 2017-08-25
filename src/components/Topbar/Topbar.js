@@ -89,6 +89,7 @@ class TopbarComponent extends Component {
       authInProgress,
       currentUser,
       currentUserHasListings,
+      currentPage,
       notificationCount,
       viewport,
       intl,
@@ -114,6 +115,7 @@ class TopbarComponent extends Component {
         currentUser={currentUser}
         onLogout={this.handleLogout}
         notificationCount={notificationCount}
+        currentPage={currentPage}
       />
     );
 
@@ -154,6 +156,7 @@ class TopbarComponent extends Component {
           <TopbarDesktop
             currentUserHasListings={currentUserHasListings}
             currentUser={currentUser}
+            currentPage={currentPage}
             initialSearchFormValues={initialSearchFormValues}
             intl={intl}
             isAuthenticated={isAuthenticated}
@@ -199,6 +202,7 @@ TopbarComponent.defaultProps = {
   mobileRootClassName: null,
   notificationCount: 0,
   currentUser: null,
+  currentPage: null,
 };
 
 const { arrayOf, bool, func, number, shape, string } = PropTypes;
@@ -211,6 +215,7 @@ TopbarComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentPage: string,
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,

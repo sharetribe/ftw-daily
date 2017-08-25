@@ -35,7 +35,9 @@
 }
 
 .tabs {
-
+  @media (--viewportMedium) {
+    margin-top: 6px;
+  }
 }
 
 .tab {

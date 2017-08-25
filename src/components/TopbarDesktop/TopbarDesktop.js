@@ -20,6 +20,7 @@ const TopbarDesktop = props => {
   const {
     className,
     currentUser,
+    currentPage,
     rootClassName,
     currentUserHasListings,
     notificationCount,
@@ -58,14 +59,27 @@ const TopbarDesktop = props => {
       </NamedLink>
     : null;
 
+  const currentPageClass = page => {
+    return currentPage === page ? css.currentPage : null;
+  };
   const profileMenu = isAuthenticated
     ? <Menu>
         <MenuLabel className={css.profileMenuLabel} isOpenClassName={css.profileMenuIsOpen}>
           <Avatar className={css.avatar} user={currentUser} />
         </MenuLabel>
         <MenuContent className={css.profileMenuContent}>
+          <MenuItem key="manageListings">
+            <NamedLink
+              className={classNames(css.yourListingsLink, currentPageClass('ManageListingsPage'))}
+              name="ManageListingsPage"
+            >
+              <span className={css.menuItemBorder} />
+              <FormattedMessage id="TopbarDesktop.yourListingsLink" />
+            </NamedLink>
+          </MenuItem>
           <MenuItem key="logout">
             <InlineTextButton className={css.logoutButton} onClick={onLogout}>
+              <span className={css.menuItemBorder} />
               <FormattedMessage id="TopbarDesktop.logout" />
             </InlineTextButton>
           </MenuItem>
@@ -114,6 +128,7 @@ TopbarDesktop.defaultProps = {
   rootClassName: null,
   className: null,
   currentUser: null,
+  currentPage: null,
   notificationCount: 0,
   initialSearchFormValues: {},
 };
@@ -123,6 +138,7 @@ TopbarDesktop.propTypes = {
   className: string,
   currentUserHasListings: bool.isRequired,
   currentUser: propTypes.currentUser,
+  currentPage: string,
   isAuthenticated: bool.isRequired,
   onLogout: func.isRequired,
   notificationCount: number,

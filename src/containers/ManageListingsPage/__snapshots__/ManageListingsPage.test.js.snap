@@ -5,6 +5,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
   title="Manage listings">
   <Topbar
     authInProgress={false}
+    currentPage="ManageListingsPage"
     currentUser={null}
     currentUserHasListings={false}
     history={
@@ -21,5 +22,9 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
     notificationCount={0}
     onLogout={[Function]}
     onManageDisableScrolling={[Function]} />
+  <UserNav
+    className={null}
+    rootClassName={null}
+    selectedPageName="ManageListingsPage" />
 </withRouter(PageLayout)>
 `;

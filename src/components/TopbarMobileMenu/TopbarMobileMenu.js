@@ -4,6 +4,7 @@
  */
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { ensureCurrentUser } from '../../util/data';
 import { AvatarLarge, InlineTextButton, NamedLink, NotificationBadge } from '../../components';
@@ -13,6 +14,7 @@ import css from './TopbarMobileMenu.css';
 const TopbarMobileMenu = props => {
   const {
     isAuthenticated,
+    currentPage,
     currentUserHasListings,
     currentUser,
     notificationCount,
@@ -61,18 +63,11 @@ const TopbarMobileMenu = props => {
   const notificationCountBadge = notificationCount > 0
     ? <NotificationBadge className={css.notificationBadge} count={notificationCount} />
     : null;
-  const inboxLink = (
-    <NamedLink
-      className={css.inbox}
-      name="InboxPage"
-      params={{ tab: currentUserHasListings ? 'sales' : 'orders' }}
-    >
-      <FormattedMessage id="TopbarMobileMenu.inboxLink" />
-      {notificationCountBadge}
-    </NamedLink>
-  );
 
   const displayName = user.attributes.profile.displayName;
+  const currentPageClass = page => {
+    return currentPage === page ? css.currentPageLink : null;
+  };
 
   return (
     <div className={css.root}>
@@ -84,7 +79,21 @@ const TopbarMobileMenu = props => {
         <InlineTextButton className={css.logoutButton} onClick={onLogout}>
           <FormattedMessage id="TopbarMobileMenu.logoutLink" />
         </InlineTextButton>
-        {inboxLink}
+        <NamedLink
+          className={classNames(css.inbox, currentPageClass('InboxPage'))}
+          name="InboxPage"
+          params={{ tab: currentUserHasListings ? 'sales' : 'orders' }}
+        >
+          <FormattedMessage id="TopbarMobileMenu.inboxLink" />
+          {notificationCountBadge}
+        </NamedLink>
+        <NamedLink
+          className={classNames(css.navigationLink, currentPageClass('ManageListingsPage'))}
+          name="ManageListingsPage"
+        >
+          <FormattedMessage id="TopbarMobileMenu.yourListingsLink" />
+        </NamedLink>
+
       </div>
       <div className={css.footer}>
         <NamedLink className={css.createNewListingLink} name="NewListingPage">
@@ -95,14 +104,15 @@ const TopbarMobileMenu = props => {
   );
 };
 
-TopbarMobileMenu.defaultProps = { currentUser: null, notificationCount: 0 };
+TopbarMobileMenu.defaultProps = { currentUser: null, notificationCount: 0, currentPage: null };
 
-const { bool, func, number } = PropTypes;
+const { bool, func, number, string } = PropTypes;
 
 TopbarMobileMenu.propTypes = {
   isAuthenticated: bool.isRequired,
   currentUserHasListings: bool.isRequired,
   currentUser: propTypes.currentUser,
+  currentPage: string,
   notificationCount: number,
   onLogout: func.isRequired,
 };

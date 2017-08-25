@@ -57,7 +57,20 @@
   position: relative;
 
   margin-top: auto;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
+}
+
+.navigationLink {
+  /* Font */
+  @apply --marketplaceH1FontStyles;
+  color: var(--marketplaceColor);
+
+  /* Layout */
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+.currentPageLink {
+  color: var(--marketplaceColorDark);
 }
 
 .notificationBadge {

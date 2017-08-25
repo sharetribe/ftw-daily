@@ -26,9 +26,10 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
     onManageDisableScrolling={[Function]} />
   <div>
     <div>
-      <TabNav
+      <TabNavHorizontal
         className={null}
         rootClassName={null}
+        skin="light"
         tabClassName={null}
         tabRootClassName={null}
         tabs={

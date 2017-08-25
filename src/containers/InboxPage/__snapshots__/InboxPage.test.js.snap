@@ -6,6 +6,7 @@ exports[`InboxPage matches snapshot 1`] = `
   title="InboxPage.ordersTitle">
   <Topbar
     authInProgress={false}
+    currentPage="InboxPage"
     currentUser={null}
     currentUserHasListings={false}
     history={
@@ -307,6 +308,7 @@ exports[`InboxPage matches snapshot 3`] = `
   title="InboxPage.salesTitle">
   <Topbar
     authInProgress={false}
+    currentPage="InboxPage"
     currentUser={null}
     currentUserHasListings={false}
     history={

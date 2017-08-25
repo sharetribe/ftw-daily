@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
-import { PageLayout, NamedRedirect, TabNav, Topbar } from '../../components';
+import { PageLayout, NamedRedirect, TabNavHorizontal, Topbar } from '../../components';
 import { LoginForm, SignupForm } from '../../containers';
 import { login, logout, authenticationInProgress, signup } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
@@ -132,7 +132,7 @@ export const AuthenticationPageComponent = props => {
       />
       <div className={css.root}>
         <div className={css.content}>
-          <TabNav className={css.tabs} tabs={tabs} />
+          <TabNavHorizontal className={css.tabs} tabs={tabs} />
           {loginOrSignupError}
           {isLogin
             ? <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
