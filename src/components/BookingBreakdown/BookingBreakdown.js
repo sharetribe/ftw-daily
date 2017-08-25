@@ -68,7 +68,7 @@ export const BookingBreakdownComponent = props => {
   );
 
   const currencyConfig = config.currencyConfig;
-  const formattedUnitPrice = formatMoney(intl, currencyConfig, nightPurchase.unitPrice);
+  const formattedUnitPrice = formatMoney(intl, nightPurchase.unitPrice);
 
   // If commission is passed it will be shown as a fee already reduces from the total price
   let subTotalInfo = null;
@@ -90,7 +90,7 @@ export const BookingBreakdownComponent = props => {
     );
 
     const commission = providerCommission.lineTotal;
-    const formattedCommission = commission ? formatMoney(intl, currencyConfig, commission) : null;
+    const formattedCommission = commission ? formatMoney(intl, commission) : null;
 
     commissionInfo = (
       <div className={css.lineItem}>
@@ -108,7 +108,7 @@ export const BookingBreakdownComponent = props => {
   const totalLabel = totalLabelMessage || defaultTotalLabel;
 
   const totalPrice = userRole === 'customer' ? payinTotal : payoutTotal;
-  const formattedTotalPrice = formatMoney(intl, currencyConfig, totalPrice);
+  const formattedTotalPrice = formatMoney(intl, totalPrice);
 
   return (
     <div className={classes}>

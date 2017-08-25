@@ -229,18 +229,17 @@ export const convertMoneyToNumber = value => {
  * Format the given money to a string
  *
  * @param {Object} intl
- * @param {Object} currencyConfig
  * @param {Money} value
  *
  * @return {String} formatted money value
  */
-export const formatMoney = (intl, currencyConfig, value) => {
+export const formatMoney = (intl, value) => {
   if (!(value instanceof types.Money)) {
     throw new Error('Value must be a Money type');
   }
-  if (value.currency !== currencyConfig.currency) {
+  if (value.currency !== config.currencyConfig.currency) {
     throw new Error('Given currency different from marketplace currency');
   }
   const valueAsNumber = convertMoneyToNumber(value);
-  return intl.formatNumber(valueAsNumber, currencyConfig);
+  return intl.formatNumber(valueAsNumber, config.currencyConfig);
 };

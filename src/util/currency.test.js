@@ -222,18 +222,10 @@ describe('currency utils', () => {
     });
 
     it('Wrong type of a parameter', () => {
-      expect(() => convertMoneyToNumber(10)).toThrowError(
-        'Value must be a Money type'
-      );
-      expect(() => convertMoneyToNumber('10')).toThrowError(
-        'Value must be a Money type'
-      );
-      expect(() => convertMoneyToNumber(true)).toThrowError(
-        'Value must be a Money type'
-      );
-      expect(() => convertMoneyToNumber({})).toThrowError(
-        'Value must be a Money type'
-      );
+      expect(() => convertMoneyToNumber(10)).toThrowError('Value must be a Money type');
+      expect(() => convertMoneyToNumber('10')).toThrowError('Value must be a Money type');
+      expect(() => convertMoneyToNumber(true)).toThrowError('Value must be a Money type');
+      expect(() => convertMoneyToNumber({})).toThrowError('Value must be a Money type');
       expect(() => convertMoneyToNumber(new Money('asdf', 'USD'))).toThrowError(
         '[DecimalError] Invalid argument'
       );
@@ -243,17 +235,13 @@ describe('currency utils', () => {
   describe('formatMoney', () => {
     it('complains about incorrect value type', () => {
       const intl = null;
-      const currencyConfig = {};
       const value = null;
-      expect(() => formatMoney(intl, currencyConfig, value)).toThrowError(
-        'Value must be a Money type'
-      );
+      expect(() => formatMoney(intl, value)).toThrowError('Value must be a Money type');
     });
     it('complains about mismatching currencies', () => {
       const intl = null;
-      const currencyConfig = { currency: 'USD' };
       const value = new types.Money(100, 'EUR');
-      expect(() => formatMoney(intl, currencyConfig, value)).toThrowError(
+      expect(() => formatMoney(intl, value)).toThrowError(
         'Given currency different from marketplace currency'
       );
     });

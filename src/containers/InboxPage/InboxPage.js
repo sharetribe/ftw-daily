@@ -14,7 +14,6 @@ import {
   TabNav,
   Topbar,
 } from '../../components';
-import config from '../../config';
 import * as propTypes from '../../util/propTypes';
 import { formatMoney } from '../../util/currency';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
@@ -102,7 +101,7 @@ export const InboxItem = props => {
   const bookingStart = formatDate(intl, booking.attributes.start);
   const bookingEnd = formatDate(intl, booking.attributes.end);
   const bookingPrice = isOrder ? tx.attributes.payinTotal : tx.attributes.payoutTotal;
-  const price = formatMoney(intl, config.currencyConfig, bookingPrice);
+  const price = formatMoney(intl, bookingPrice);
 
   return (
     <NamedLink

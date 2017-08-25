@@ -36,7 +36,7 @@ const { UUID } = types;
 
 const priceData = (price, currencyConfig, intl) => {
   if (price && price.currency === currencyConfig.currency) {
-    const formattedPrice = formatMoney(intl, currencyConfig, price);
+    const formattedPrice = formatMoney(intl, price);
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
     return {

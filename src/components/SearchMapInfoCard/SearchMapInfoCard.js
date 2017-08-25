@@ -34,7 +34,7 @@ const ListingCard = props => {
 
   const { title, price } = listing.attributes;
   const formattedPrice = price && price.currency === config.currencyConfig.currency
-    ? formatMoney(intl, config.currencyConfig, price)
+    ? formatMoney(intl, price)
     : price.currency;
   const firstImage = listing.images && listing.images.length > 0 ? listing.images[0] : null;
   const urlToListing = createURL(flattenedRoutes, history, listing);
