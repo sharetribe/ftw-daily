@@ -34,8 +34,8 @@ const MODAL_BREAKPOINT = 1023;
 
 const { UUID } = types;
 
-const priceData = (price, currencyConfig, intl) => {
-  if (price && price.currency === currencyConfig.currency) {
+const priceData = (price, intl) => {
+  if (price && price.currency === config.currency) {
     const formattedPrice = formatMoney(intl, price);
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
@@ -103,7 +103,6 @@ export class ListingPageComponent extends Component {
       scrollingDisabled,
       showListingError,
     } = this.props;
-    const currencyConfig = config.currencyConfig;
     const currentListing = ensureListing(getListing(new UUID(params.id)));
     const {
       address = '',
@@ -145,7 +144,7 @@ export class ListingPageComponent extends Component {
     }
 
     const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' });
-    const { formattedPrice, priceTitle } = priceData(price, currencyConfig, intl);
+    const { formattedPrice, priceTitle } = priceData(price, intl);
     const map = geolocation
       ? <div className={css.locationContainer}>
           <h3 className={css.locationTitle}>

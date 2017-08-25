@@ -146,13 +146,12 @@ export class CheckoutPageComponent extends Component {
 
     // Estimate total price. NOTE: this will change when we can do a
     // dry-run to the API and get a proper breakdown of the price.
-    const { currency: marketplaceCurrency } = config.currencyConfig;
     const unitPrice = currentListing.attributes.price;
 
     if (!unitPrice) {
       throw new Error('Listing has no price');
     }
-    if (unitPrice.currency !== marketplaceCurrency) {
+    if (unitPrice.currency !== config.currency) {
       throw new Error(
         `Listing currency different from marketplace currency: ${unitPrice.currency}`
       );

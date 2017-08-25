@@ -7,7 +7,6 @@ import SearchResultsPanel from './SearchResultsPanel';
 describe('SearchResultsPanel', () => {
   it('matches snapshot', () => {
     const props = {
-      currencyConfig,
       intl: fakeIntl,
     };
     const tree = renderShallow(<SearchResultsPanel {...props} />);

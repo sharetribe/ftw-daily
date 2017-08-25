@@ -73,7 +73,6 @@ export const BookingDatesFormComponent = props => {
 
   const { startDate, endDate } = bookingDates;
   const classes = classNames(rootClassName || css.root, className);
-  const { currency: marketplaceCurrency } = config.currencyConfig;
 
   if (!unitPrice) {
     return (
@@ -84,7 +83,7 @@ export const BookingDatesFormComponent = props => {
       </div>
     );
   }
-  if (unitPrice.currency !== marketplaceCurrency) {
+  if (unitPrice.currency !== config.currency) {
     return (
       <div className={classes}>
         <p className={css.error}>

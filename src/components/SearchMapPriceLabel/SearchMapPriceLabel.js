@@ -30,7 +30,7 @@ class SearchMapPriceLabel extends Component {
     const { geolocation, price } = currentListing.attributes;
 
     // Create formatted price if currency is known or alternatively show just the unknown currency.
-    const formattedPrice = price && price.currency === config.currencyConfig.currency
+    const formattedPrice = price && price.currency === config.currency
       ? formatMoney(intl, price)
       : price.currency;
 

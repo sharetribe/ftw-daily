@@ -197,7 +197,7 @@ export const convertMoneyToNumber = value => {
   if (!(value instanceof types.Money)) {
     throw new Error('Value must be a Money type');
   }
-  if (value.currency !== config.currencyConfig.currency) {
+  if (value.currency !== config.currency) {
     throw new Error('Given currency different from marketplace currency');
   }
   const subUnitDivisorAsDecimal = convertDivisorToDecimal(config.currencyConfig.subUnitDivisor);
@@ -237,7 +237,7 @@ export const formatMoney = (intl, value) => {
   if (!(value instanceof types.Money)) {
     throw new Error('Value must be a Money type');
   }
-  if (value.currency !== config.currencyConfig.currency) {
+  if (value.currency !== config.currency) {
     throw new Error('Given currency different from marketplace currency');
   }
   const valueAsNumber = convertMoneyToNumber(value);
