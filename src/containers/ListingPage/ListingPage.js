@@ -21,6 +21,7 @@ import {
   Topbar,
   NamedLink,
 } from '../../components';
+import EditIcon from './EditIcon';
 import { BookingDatesForm } from '../../containers';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
@@ -130,7 +131,6 @@ export class ListingPageComponent extends Component {
     const userAndListingAuthorAvailable = currentUser && authorAvailable;
     const isOwnListing = userAndListingAuthorAvailable &&
       currentListing.author.id.uuid === currentUser.id.uuid;
-    const showBookButton = !isOwnListing;
 
     const currentAuthor = ensureUser(authorAvailable ? currentListing.author : {});
     const currentAuthorDisplayName = currentAuthor.attributes.profile.displayName;
@@ -156,31 +156,47 @@ export class ListingPageComponent extends Component {
         </div>
       : null;
 
-    const bookingHeading = !isOwnListing
-      ? <div className={css.bookingHeading}>
-          <h2 className={css.bookingTitle}>
-            <FormattedMessage id="ListingPage.bookingTitle" values={{ title }} />
-          </h2>
-          <div className={css.bookingHelp}>
-            <FormattedMessage id="ListingPage.bookingHelp" />
-          </div>
+    const bookingHeading = (
+      <div className={css.bookingHeading}>
+        <h2 className={css.bookingTitle}>
+          <FormattedMessage id="ListingPage.bookingTitle" values={{ title }} />
+        </h2>
+        <div className={css.bookingHelp}>
+          <FormattedMessage id="ListingPage.bookingHelp" />
         </div>
-      : <p className={css.ownListingText}><FormattedMessage id="ListingPage.ownListing" /></p>;
+      </div>
+    );
 
-    const bookingDatesForm = !isOwnListing
-      ? <BookingDatesForm className={css.bookingForm} onSubmit={this.onSubmit} price={price} />
-      : null;
+    const handleBookingSubmit = values => {
+      if (!isOwnListing) {
+        this.onSubmit(values);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    };
 
     const editParams = { ...params, type: 'edit', tab: 'description' };
-    const editListingLink = isOwnListing
-      ? <p>
-          <NamedLink name="EditListingPage" params={editParams}>
+    const ownListingActionBar = isOwnListing
+      ? <div className={css.ownListingActionBar}>
+          <p className={css.ownListingText}>
+            <FormattedMessage id="ListingPage.ownListing" />
+          </p>
+          <NamedLink className={css.editListingLink} name="EditListingPage" params={editParams}>
+            <EditIcon className={css.editIcon} />
             <FormattedMessage id="ListingPage.editListing" />
           </NamedLink>
-        </p>
+        </div>
       : null;
 
-    const listingClasses = classNames(css.pageRoot, { [css.bookable]: showBookButton });
+    const listingClasses = classNames(css.pageRoot);
+
+    const handleBookButtonClick = () => {
+      if (!isOwnListing) {
+        this.setState({ isBookingModalOpenOnMobile: true });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    };
 
     return (
       <PageLayout
@@ -203,6 +219,7 @@ export class ListingPageComponent extends Component {
         <div className={listingClasses}>
           <div className={css.threeToTwoWrapper}>
             <div className={css.aspectWrapper}>
+              {ownListingActionBar}
               <ResponsiveImage
                 rootClassName={css.rootForImage}
                 alt={title}
@@ -252,9 +269,6 @@ export class ListingPageComponent extends Component {
               </div>
 
               {map}
-              <div className={css.editListingMobile}>
-                {editListingLink}
-              </div>
             </div>
 
             <ModalInMobile
@@ -278,28 +292,26 @@ export class ListingPageComponent extends Component {
               </div>
 
               {bookingHeading}
-              {editListingLink}
-              {bookingDatesForm}
+              <BookingDatesForm
+                className={css.bookingForm}
+                onSubmit={handleBookingSubmit}
+                price={price}
+              />
             </ModalInMobile>
-            {showBookButton
-              ? <div className={css.openBookingForm}>
-                  <div className={css.priceContainer}>
-                    <div className={css.priceValue} title={priceTitle}>
-                      {formattedPrice}
-                    </div>
-                    <div className={css.perNight}>
-                      <FormattedMessage id="ListingPage.perNight" />
-                    </div>
-                  </div>
-
-                  <Button
-                    rootClassName={css.bookButton}
-                    onClick={() => this.setState({ isBookingModalOpenOnMobile: true })}
-                  >
-                    {bookBtnMessage}
-                  </Button>
+            <div className={css.openBookingForm}>
+              <div className={css.priceContainer}>
+                <div className={css.priceValue} title={priceTitle}>
+                  {formattedPrice}
                 </div>
-              : null}
+                <div className={css.perNight}>
+                  <FormattedMessage id="ListingPage.perNight" />
+                </div>
+              </div>
+
+              <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
+                {bookBtnMessage}
+              </Button>
+            </div>
           </div>
         </div>
       </PageLayout>
