@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import * as propTypes from '../../util/propTypes';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { PageLayout, Topbar, TabNavHorizontal } from '../../components';
+import { PageLayout, Topbar, UserNav } from '../../components';
 
 import css from './ManageListingsPage.css';
 
@@ -25,33 +25,6 @@ export const ManageListingsPageComponent = props => {
     onManageDisableScrolling,
   } = props;
 
-  const tabs = [
-    {
-      text: <FormattedMessage id="ManageListingsPage.profileSettings" />,
-      selected: false,
-      disabled: true,
-      linkProps: {
-        name: 'EditProfilePage',
-        params: { displayName: 'testinglink' },
-      },
-    },
-    {
-      text: <FormattedMessage id="ManageListingsPage.accountSettings" />,
-      selected: false,
-      disabled: true,
-      linkProps: {
-        name: 'AccountPage',
-      },
-    },
-    {
-      text: <FormattedMessage id="ManageListingsPage.yourListings" />,
-      selected: true,
-      linkProps: {
-        name: 'ManageListingsPage',
-      },
-    },
-  ];
-
   return (
     <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Manage listings">
       <Topbar
@@ -66,8 +39,7 @@ export const ManageListingsPageComponent = props => {
         onLogout={onLogout}
         onManageDisableScrolling={onManageDisableScrolling}
       />
-      <TabNavHorizontal className={css.tabs} tabRootClassName={css.tab} tabs={tabs} skin="dark" />
-
+      <UserNav selectedPageName="ManageListingsPage" />
     </PageLayout>
   );
 };

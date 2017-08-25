@@ -56,6 +56,7 @@ import TextInputField from './TextInputField/TextInputField';
 import Topbar from './Topbar/Topbar';
 import TopbarDesktop from './TopbarDesktop/TopbarDesktop';
 import TopbarMobileMenu from './TopbarMobileMenu/TopbarMobileMenu';
+import UserNav from './UserNav/UserNav';
 import ValidationError from './ValidationError/ValidationError';
 
 export {
@@ -120,5 +121,6 @@ export {
   Topbar,
   TopbarDesktop,
   TopbarMobileMenu,
+  UserNav,
   ValidationError,
 };
