@@ -20,7 +20,6 @@ const SearchResultsPanel = props => {
   return (
     <div className={classes}>
       <div className={css.listingCards}>
-        {props.children}
         {listings.map(l => (
           <ListingCard
             className={css.listingCard}
@@ -29,6 +28,7 @@ const SearchResultsPanel = props => {
             currencyConfig={currencyConfig}
           />
         ))}
+        {props.children}
       </div>
       {paginationLinks}
     </div>

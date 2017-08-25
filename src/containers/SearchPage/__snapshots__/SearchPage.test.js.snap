@@ -62,7 +62,6 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           rootClassName={null}
           search={Object {}}>
           <div
-            className=""
             onClick={[Function]}>
             <MapIcon
               className={null} />

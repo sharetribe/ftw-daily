@@ -270,9 +270,7 @@ export class SearchPageComponent extends Component {
                 search={searchParamsForPagination}
               >
                 <div
-                  className={classNames(css.openMobileMap, {
-                    [css.openMobileMapSticky]: listings.length > 0,
-                  })}
+                  className={css.openMobileMap}
                   onClick={() => {
                     this.useLocationSearchBounds = true;
                     this.modalOpenedBoundsChange = true;
