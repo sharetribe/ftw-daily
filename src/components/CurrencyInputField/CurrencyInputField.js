@@ -49,7 +49,7 @@ class CurrencyInputComponent extends Component {
     super(props);
     const { currencyConfig, defaultValue, input, intl } = props;
     const initialValue = input.value instanceof types.Money
-      ? convertMoneyToNumber(input.value, currencyConfig.subUnitDivisor)
+      ? convertMoneyToNumber(input.value)
       : defaultValue;
     const hasInitialValue = typeof initialValue === 'number' && !isNaN(initialValue);
 

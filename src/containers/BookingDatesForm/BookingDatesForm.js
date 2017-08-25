@@ -20,7 +20,7 @@ import css from './BookingDatesForm.css';
 // can take the total price from the transaction itself.
 const estimatedTotalPrice = (unitPrice, nightCount) => {
   const { subUnitDivisor } = config.currencyConfig;
-  const numericPrice = convertMoneyToNumber(unitPrice, subUnitDivisor);
+  const numericPrice = convertMoneyToNumber(unitPrice);
   const numericTotalPrice = new Decimal(numericPrice).times(nightCount).toNumber();
   return new types.Money(
     convertUnitToSubUnit(numericTotalPrice, subUnitDivisor),

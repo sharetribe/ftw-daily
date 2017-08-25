@@ -68,8 +68,6 @@ export const BookingBreakdownComponent = props => {
   );
 
   const currencyConfig = config.currencyConfig;
-  const subUnitDivisor = currencyConfig.subUnitDivisor;
-
   const formattedUnitPrice = formatMoney(intl, currencyConfig, nightPurchase.unitPrice);
 
   // If commission is passed it will be shown as a fee already reduces from the total price
@@ -78,7 +76,7 @@ export const BookingBreakdownComponent = props => {
 
   if (userRole === 'provider') {
     // TODO: Calculate subtotal from provider total and the commission
-    const unitPriceAsNumber = convertMoneyToNumber(nightPurchase.unitPrice, subUnitDivisor);
+    const unitPriceAsNumber = convertMoneyToNumber(nightPurchase.unitPrice);
     const subTotal = new Decimal(nightCount).times(unitPriceAsNumber).toNumber();
     const formattedSubTotal = intl.formatNumber(subTotal, currencyConfig);
 

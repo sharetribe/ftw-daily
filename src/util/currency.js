@@ -1,6 +1,7 @@
 import { trimEnd } from 'lodash';
 import Decimal from 'decimal.js';
 import { types } from './sdkLoader';
+import config from '../config';
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER
@@ -190,16 +191,16 @@ const isGoogleMathLong = value => {
  *
  * @param {Money} value
  *
- * @param {Decimal|Number|String} subUnitDivisor - should be something that can be converted to
- * Decimal. (This is a ratio between currency's main unit and sub units.)
- *
  * @return {Number} converted value
  */
-export const convertMoneyToNumber = (value, subUnitDivisor) => {
+export const convertMoneyToNumber = value => {
   if (!(value instanceof types.Money)) {
     throw new Error('Value must be a Money type');
   }
-  const subUnitDivisorAsDecimal = convertDivisorToDecimal(subUnitDivisor);
+  if (value.currency !== config.currencyConfig.currency) {
+    throw new Error('Given currency different from marketplace currency');
+  }
+  const subUnitDivisorAsDecimal = convertDivisorToDecimal(config.currencyConfig.subUnitDivisor);
   let amount;
 
   if (isGoogleMathLong(value.amount)) {
@@ -240,6 +241,6 @@ export const formatMoney = (intl, currencyConfig, value) => {
   if (value.currency !== currencyConfig.currency) {
     throw new Error('Given currency different from marketplace currency');
   }
-  const valueAsNumber = convertMoneyToNumber(value, currencyConfig.subUnitDivisor);
+  const valueAsNumber = convertMoneyToNumber(value);
   return intl.formatNumber(valueAsNumber, currencyConfig);
 };

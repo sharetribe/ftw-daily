@@ -35,7 +35,7 @@ const STORAGE_KEY = 'CheckoutPage';
 // can take the total price from the transaction itself.
 const estimatedTotalPrice = (startDate, endDate, unitPrice) => {
   const { subUnitDivisor } = config.currencyConfig;
-  const numericPrice = convertMoneyToNumber(unitPrice, subUnitDivisor);
+  const numericPrice = convertMoneyToNumber(unitPrice);
   const nightCount = nightsBetween(startDate, endDate);
   const numericTotalPrice = new Decimal(numericPrice).times(nightCount).toNumber();
   return new types.Money(
