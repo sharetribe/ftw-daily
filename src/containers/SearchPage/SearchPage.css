@@ -84,9 +84,10 @@
   font-weight: var(--fontWeightSemiBold);
 
   /* Positioning */
-  /* Safari didn't like bottom: 48px; -> hence calc from top */
+  /* Positioning from top to place button just above Safari's bottom toolbar
+  /* 120px = button height + toolbar height (68px) */
   position: fixed;
-  top: calc(100vh - 100px);
+  top: calc(100vh - 120px);
   left: 50vw;
   width: 175px;
   transform: translateX(-50%);
@@ -119,11 +120,6 @@
   @media (--viewportMedium) {
     display: none;
   }
-}
-
-.openMobileMapSticky {
-  position: sticky;
-  z-index: 1;
 }
 
 .mapPanel {
