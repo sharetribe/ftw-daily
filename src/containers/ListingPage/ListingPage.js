@@ -175,10 +175,6 @@ export class ListingPageComponent extends Component {
       }
     };
 
-    const bookingDatesForm = (
-      <BookingDatesForm className={css.bookingForm} onSubmit={handleBookingSubmit} price={price} />
-    );
-
     const editParams = { ...params, type: 'edit', tab: 'description' };
     const ownListingActionBar = isOwnListing
       ? <div className={css.ownListingActionBar}>
@@ -296,7 +292,11 @@ export class ListingPageComponent extends Component {
               </div>
 
               {bookingHeading}
-              {bookingDatesForm}
+              <BookingDatesForm
+                className={css.bookingForm}
+                onSubmit={handleBookingSubmit}
+                price={price}
+              />
             </ModalInMobile>
             <div className={css.openBookingForm}>
               <div className={css.priceContainer}>
