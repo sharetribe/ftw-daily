@@ -1,14 +1,11 @@
 import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import * as propTypes from '../../util/propTypes';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { PageLayout, Topbar, UserNav } from '../../components';
-
-import css from './ManageListingsPage.css';
 
 export const ManageListingsPageComponent = props => {
   const {

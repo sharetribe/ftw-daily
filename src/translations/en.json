@@ -154,7 +154,7 @@
   "LoginForm.passwordLabel": "Password",
   "LoginForm.passwordPlaceholder": "Enter your password…",
   "LoginForm.passwordRequired": "This field is required",
-  "ManageListingsPage.accountSettings": "Acccount settings",
+  "ManageListingsPage.accountSettings": "Account settings",
   "ManageListingsPage.profileSettings": "Profile settings",
   "ManageListingsPage.yourListings": "Your listings",
   "MapPriceMarker.unsupportedPrice": "({currency})",
