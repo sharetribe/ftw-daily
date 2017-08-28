@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
-import { createUser, createListing, currencyConfig, fakeIntl } from '../../util/test-data';
+import { createUser, createListing, fakeIntl } from '../../util/test-data';
 import { ListingCardComponent } from './ListingCard';
 
 describe('ListingCard', () => {

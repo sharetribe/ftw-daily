@@ -1,0 +1,59 @@
+exports[`ListingCard matches snapshot 1`] = `
+<withFlattenedRoutes(withRouter(NamedLink))
+  className=""
+  name="ListingPage"
+  params={
+    Object {
+      "id": "listing1",
+      "slug": "listing1-title",
+    }
+  }>
+  <div>
+    <div>
+      <ResponsiveImage
+        alt="listing1 title"
+        className={null}
+        image={null}
+        nameSet={
+          Array [
+            Object {
+              "name": "landscape-crop",
+              "size": "1x",
+            },
+            Object {
+              "name": "landscape-crop2x",
+              "size": "2x",
+            },
+          ]
+        }
+        noImageMessage={null}
+        rootClassName={null}
+        sizes={null} />
+    </div>
+  </div>
+  <div>
+    <div>
+      <div
+        title={55}>
+        55
+      </div>
+      <div>
+        <FormattedMessage
+          id="ManageListingCard.perNight"
+          values={Object {}} />
+      </div>
+    </div>
+    <div>
+      <div>
+        listing1 title
+      </div>
+    </div>
+    <SecondaryButton
+      onClick={[Function]}>
+      <FormattedMessage
+        id="ManageListingCard.edit"
+        values={Object {}} />
+    </SecondaryButton>
+  </div>
+</withFlattenedRoutes(withRouter(NamedLink))>
+`;
