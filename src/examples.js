@@ -8,6 +8,7 @@ import * as DateInputField from './components/DateInputField/DateInputField.exam
 import * as DateRangeInputField from './components/DateRangeInputField/DateRangeInputField.example';
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
+import * as ImageCarousel from './components/ImageCarousel/ImageCarousel.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as Map from './components/Map/Map.example';
 import * as Menu from './components/Menu/Menu.example';
@@ -66,6 +67,7 @@ export {
   EditListingPricingForm,
   EditListingWizard,
   ExpandingTextarea,
+  ImageCarousel,
   ListingCard,
   LocationAutocompleteInput,
   LoginForm,

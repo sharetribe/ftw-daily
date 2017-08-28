@@ -17,6 +17,7 @@ import ExternalLink from './ExternalLink/ExternalLink';
 import ExpandingTextarea from './ExpandingTextarea/ExpandingTextarea';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
+import ImageCarousel from './ImageCarousel/ImageCarousel';
 import ListingCard from './ListingCard/ListingCard';
 import LocationAutocompleteInput, {
   LocationAutocompleteInputField,
@@ -81,6 +82,7 @@ export {
   ExternalLink,
   FilterPanel,
   HeroSection,
+  ImageCarousel,
   InlineTextButton,
   ListingCard,
   LocationAutocompleteInput,
