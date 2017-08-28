@@ -9,7 +9,7 @@ import Decimal from 'decimal.js';
 import { types } from '../../util/sdkLoader';
 import { required, bookingDatesRequired } from '../../util/validators';
 import { nightsBetween } from '../../util/dates';
-import { convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
+import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import config from '../../config';
 import { PrimaryButton, BookingBreakdown, DateRangeInputField } from '../../components';
 
@@ -19,11 +19,10 @@ import css from './BookingDatesForm.css';
 // price. This should be removed when the API supports dry-runs and we
 // can take the total price from the transaction itself.
 const estimatedTotalPrice = (unitPrice, nightCount) => {
-  const { subUnitDivisor } = config.currencyConfig;
   const numericPrice = convertMoneyToNumber(unitPrice);
   const numericTotalPrice = new Decimal(numericPrice).times(nightCount).toNumber();
   return new types.Money(
-    convertUnitToSubUnit(numericTotalPrice, subUnitDivisor),
+    convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
     unitPrice.currency
   );
 };

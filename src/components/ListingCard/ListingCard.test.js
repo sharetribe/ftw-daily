@@ -7,9 +7,7 @@ describe('ListingCard', () => {
   it('matches snapshot', () => {
     const author = createUser('user1');
     const listing = { ...createListing('listing1'), author };
-    const tree = renderShallow(
-      <ListingCardComponent listing={listing} intl={fakeIntl} />
-    );
+    const tree = renderShallow(<ListingCardComponent listing={listing} intl={fakeIntl} />);
     expect(tree).toMatchSnapshot();
   });
 });

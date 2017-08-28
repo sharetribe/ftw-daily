@@ -40,7 +40,6 @@ export const currencyConfig = shape({
   useGrouping: bool,
   minimumFractionDigits: number,
   maximumFractionDigits: number,
-  subUnitDivisor: number,
 });
 
 // Configuration for a single route

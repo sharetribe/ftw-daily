@@ -1,7 +1,8 @@
-import { trimEnd } from 'lodash';
+import { has, trimEnd } from 'lodash';
 import Decimal from 'decimal.js';
 import { types } from './sdkLoader';
 import config from '../config';
+import { minorUnitDivisors } from './currencyConfig';
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER
@@ -14,6 +15,14 @@ export const isSafeNumber = decimalValue => {
     throw new Error('Value must be a Decimal');
   }
   return decimalValue.gte(MIN_SAFE_INTEGER) && decimalValue.lte(MAX_SAFE_INTEGER);
+};
+
+// Get the minor unit divisor for the given currency
+export const unitDivisor = currency => {
+  if (!has(minorUnitDivisors, currency)) {
+    throw new Error(`No minor unit divisor defined for currency: ${currency}`);
+  }
+  return minorUnitDivisors[currency];
 };
 
 ////////// Currency manipulation in string format //////////
@@ -200,7 +209,7 @@ export const convertMoneyToNumber = value => {
   if (value.currency !== config.currency) {
     throw new Error('Given currency different from marketplace currency');
   }
-  const subUnitDivisorAsDecimal = convertDivisorToDecimal(config.currencyConfig.subUnitDivisor);
+  const subUnitDivisorAsDecimal = convertDivisorToDecimal(unitDivisor(value.currency));
   let amount;
 
   if (isGoogleMathLong(value.amount)) {
@@ -241,5 +250,16 @@ export const formatMoney = (intl, value) => {
     throw new Error('Given currency different from marketplace currency');
   }
   const valueAsNumber = convertMoneyToNumber(value);
-  return intl.formatNumber(valueAsNumber, config.currencyConfig);
+
+  // See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
+  const numberFormatOptions = {
+    style: 'currency',
+    currency: value.currency,
+    currencyDisplay: 'symbol',
+    useGrouping: true,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  };
+
+  return intl.formatNumber(valueAsNumber, numberFormatOptions);
 };

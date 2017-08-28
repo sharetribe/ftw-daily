@@ -11,9 +11,6 @@ const sdkBaseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'http://loca
 
 const currency = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY || 'USD';
 
-// Currency configuration contains subUnitsDivisor and formatting for React-Intl
-// SubUnitDivisor is used to convert Money.amount to presentational value
-// E.g. 1099¢ / subUnitDivisor = $10.99
 const currencyConfig = {
   style: 'currency',
   currency,
@@ -21,7 +18,6 @@ const currencyConfig = {
   useGrouping: true,
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-  subUnitDivisor: 100,
 };
 
 const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY ||
