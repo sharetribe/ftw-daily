@@ -235,6 +235,7 @@ const routesConfiguration = [
     exact: true,
     name: 'ManageListingsPage',
     component: props => <ManageListingsPage {...props} />,
+    loadData: (params, search) => ManageListingsPage.loadData(params, search),
   },
   {
     path: '/account',

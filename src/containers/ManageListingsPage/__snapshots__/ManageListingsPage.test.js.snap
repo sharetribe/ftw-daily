@@ -26,5 +26,8 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
     className={null}
     rootClassName={null}
     selectedPageName="ManageListingsPage" />
+  <div>
+    <div />
+  </div>
 </withRouter(PageLayout)>
 `;
