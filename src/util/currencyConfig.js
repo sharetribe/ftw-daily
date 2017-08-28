@@ -1,6 +1,6 @@
 // See: https://en.wikipedia.org/wiki/ISO_4217
 // See: https://stripe.com/docs/currencies
-export const minorUnitDivisors = {
+export const subUnitDivisors = {
   EUR: 100,
   USD: 100,
   GBP: 100,

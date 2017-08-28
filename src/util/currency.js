@@ -2,7 +2,7 @@ import { has, trimEnd } from 'lodash';
 import Decimal from 'decimal.js';
 import { types } from './sdkLoader';
 import config from '../config';
-import { minorUnitDivisors } from './currencyConfig';
+import { subUnitDivisors } from './currencyConfig';
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER
@@ -19,10 +19,10 @@ export const isSafeNumber = decimalValue => {
 
 // Get the minor unit divisor for the given currency
 export const unitDivisor = currency => {
-  if (!has(minorUnitDivisors, currency)) {
+  if (!has(subUnitDivisors, currency)) {
     throw new Error(`No minor unit divisor defined for currency: ${currency}`);
   }
-  return minorUnitDivisors[currency];
+  return subUnitDivisors[currency];
 };
 
 ////////// Currency manipulation in string format //////////
