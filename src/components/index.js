@@ -21,6 +21,7 @@ import ListingCard from './ListingCard/ListingCard';
 import LocationAutocompleteInput, {
   LocationAutocompleteInputField,
 } from './LocationAutocompleteInput/LocationAutocompleteInput';
+import ManageListingCard from './ManageListingCard/ManageListingCard';
 import Map from './Map/Map';
 import MapPanel from './MapPanel/MapPanel';
 import Menu from './Menu/Menu';
@@ -85,6 +86,7 @@ export {
   ListingCard,
   LocationAutocompleteInput,
   LocationAutocompleteInputField,
+  ManageListingCard,
   Map,
   MapPanel,
   Menu,
