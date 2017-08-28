@@ -1,4 +1,4 @@
-exports[`ListingCard matches snapshot 1`] = `
+exports[`ManageListingCard matches snapshot 1`] = `
 <withFlattenedRoutes(withRouter(NamedLink))
   className=""
   name="ListingPage"

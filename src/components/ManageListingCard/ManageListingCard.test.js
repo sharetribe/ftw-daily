@@ -5,7 +5,7 @@ import { ManageListingCardComponent } from './ManageListingCard';
 
 const noop = () => null;
 
-describe('ListingCard', () => {
+describe('ManageListingCard', () => {
   it('matches snapshot', () => {
     const listing = { ...createOwnListing('listing1') };
     const tree = renderShallow(
