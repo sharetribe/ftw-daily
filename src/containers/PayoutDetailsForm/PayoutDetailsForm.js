@@ -30,7 +30,6 @@ const PayoutDetailsFormComponent = props => {
   const {
     className,
     country,
-    currency,
     form,
     disabled,
     handleSubmit,
@@ -155,7 +154,7 @@ const PayoutDetailsFormComponent = props => {
           routingNumberId={`${form}.bankAccountToken.routingNumber`}
           accountNumberId={`${form}.bankAccountToken.accountNumber`}
           country={country}
-          currency={currency}
+          currency={config.currency}
           validate={bankAccountRequired}
         />
       </div>
@@ -239,7 +238,6 @@ PayoutDetailsFormComponent.propTypes = {
   ...formPropTypes,
   className: string,
   disabled: bool,
-  currency: string.isRequired,
 
   // from mapStateToProps
   country: string,

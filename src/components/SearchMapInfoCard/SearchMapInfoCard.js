@@ -33,8 +33,8 @@ const ListingCard = props => {
   const { className, clickHandler, flattenedRoutes, history, intl, isInCarousel, listing } = props;
 
   const { title, price } = listing.attributes;
-  const formattedPrice = price && price.currency === config.currencyConfig.currency
-    ? formatMoney(intl, config.currencyConfig, price)
+  const formattedPrice = price && price.currency === config.currency
+    ? formatMoney(intl, price)
     : price.currency;
   const firstImage = listing.images && listing.images.length > 0 ? listing.images[0] : null;
   const urlToListing = createURL(flattenedRoutes, history, listing);

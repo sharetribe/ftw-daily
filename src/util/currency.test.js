@@ -211,31 +211,22 @@ describe('currency utils', () => {
     });
   });
 
-  describe('convertMoneyToNumber(value, subUnitDivisor)', () => {
-    const subUnitDivisor = 100;
+  describe('convertMoneyToNumber(value)', () => {
     const Money = types.Money;
 
     it('Money as value', () => {
-      expect(convertMoneyToNumber(new Money(10, 'USD'), subUnitDivisor)).toBeCloseTo(0.1);
-      expect(convertMoneyToNumber(new Money(1000, 'USD'), subUnitDivisor)).toBeCloseTo(10);
-      expect(convertMoneyToNumber(new Money(9900, 'USD'), subUnitDivisor)).toBeCloseTo(99);
-      expect(convertMoneyToNumber(new Money(10099, 'USD'), subUnitDivisor)).toBeCloseTo(100.99);
+      expect(convertMoneyToNumber(new Money(10, 'USD'))).toBeCloseTo(0.1);
+      expect(convertMoneyToNumber(new Money(1000, 'USD'))).toBeCloseTo(10);
+      expect(convertMoneyToNumber(new Money(9900, 'USD'))).toBeCloseTo(99);
+      expect(convertMoneyToNumber(new Money(10099, 'USD'))).toBeCloseTo(100.99);
     });
 
     it('Wrong type of a parameter', () => {
-      expect(() => convertMoneyToNumber(10, subUnitDivisor)).toThrowError(
-        'Value must be a Money type'
-      );
-      expect(() => convertMoneyToNumber('10', subUnitDivisor)).toThrowError(
-        'Value must be a Money type'
-      );
-      expect(() => convertMoneyToNumber(true, subUnitDivisor)).toThrowError(
-        'Value must be a Money type'
-      );
-      expect(() => convertMoneyToNumber({}, subUnitDivisor)).toThrowError(
-        'Value must be a Money type'
-      );
-      expect(() => convertMoneyToNumber(new Money('asdf', 'USD'), subUnitDivisor)).toThrowError(
+      expect(() => convertMoneyToNumber(10)).toThrowError('Value must be a Money type');
+      expect(() => convertMoneyToNumber('10')).toThrowError('Value must be a Money type');
+      expect(() => convertMoneyToNumber(true)).toThrowError('Value must be a Money type');
+      expect(() => convertMoneyToNumber({})).toThrowError('Value must be a Money type');
+      expect(() => convertMoneyToNumber(new Money('asdf', 'USD'))).toThrowError(
         '[DecimalError] Invalid argument'
       );
     });
@@ -244,17 +235,13 @@ describe('currency utils', () => {
   describe('formatMoney', () => {
     it('complains about incorrect value type', () => {
       const intl = null;
-      const currencyConfig = {};
       const value = null;
-      expect(() => formatMoney(intl, currencyConfig, value)).toThrowError(
-        'Value must be a Money type'
-      );
+      expect(() => formatMoney(intl, value)).toThrowError('Value must be a Money type');
     });
     it('complains about mismatching currencies', () => {
       const intl = null;
-      const currencyConfig = { currency: 'USD' };
       const value = new types.Money(100, 'EUR');
-      expect(() => formatMoney(intl, currencyConfig, value)).toThrowError(
+      expect(() => formatMoney(intl, value)).toThrowError(
         'Given currency different from marketplace currency'
       );
     });

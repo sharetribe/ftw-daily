@@ -12,6 +12,7 @@ import { ValidationError } from '../../components';
 import { types } from '../../util/sdkLoader';
 import {
   isSafeNumber,
+  unitDivisor,
   convertUnitToSubUnit,
   convertMoneyToNumber,
   ensureDotSeparator,
@@ -36,7 +37,7 @@ const getPrice = (unformattedValue, currencyConfig) => {
     return isEmptyString
       ? null
       : new types.Money(
-          convertUnitToSubUnit(unformattedValue, currencyConfig.subUnitDivisor),
+          convertUnitToSubUnit(unformattedValue, unitDivisor(currencyConfig.currency)),
           currencyConfig.currency
         );
   } catch (e) {
@@ -49,7 +50,7 @@ class CurrencyInputComponent extends Component {
     super(props);
     const { currencyConfig, defaultValue, input, intl } = props;
     const initialValue = input.value instanceof types.Money
-      ? convertMoneyToNumber(input.value, currencyConfig.subUnitDivisor)
+      ? convertMoneyToNumber(input.value)
       : defaultValue;
     const hasInitialValue = typeof initialValue === 'number' && !isNaN(initialValue);
 
@@ -64,7 +65,7 @@ class CurrencyInputComponent extends Component {
       const unformattedValue = hasInitialValue
         ? truncateToSubUnitPrecision(
             ensureSeparator(initialValue.toString(), usesComma),
-            currencyConfig.subUnitDivisor,
+            unitDivisor(currencyConfig.currency),
             usesComma
           )
         : '';
@@ -152,7 +153,7 @@ class CurrencyInputComponent extends Component {
       // truncate decimals to subunit precision: 10000.999 => 10000.99
       const truncatedValueString = truncateToSubUnitPrecision(
         valueOrZero,
-        currencyConfig.subUnitDivisor,
+        unitDivisor(currencyConfig.currency),
         this.state.usesComma
       );
       const unformattedValue = !isEmptyString ? truncatedValueString : '';

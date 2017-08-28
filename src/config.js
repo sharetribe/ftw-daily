@@ -9,17 +9,19 @@ const sdkClientId = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID ||
   '08ec69f6-d37e-414d-83eb-324e94afddf0';
 const sdkBaseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'http://localhost:8088';
 
-// Currency configuration contains subUnitsDivisor and formatting for React-Intl
-// SubUnitDivisor is used to convert Money.amount to presentational value
-// E.g. 1099¢ / subUnitDivisor = $10.99
+const currency = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY || 'USD';
+
+// Currency formatting options.
+// See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
+//
+// TODO: Remove this and hide formating within the util/currency module
 const currencyConfig = {
   style: 'currency',
-  currency: process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY || 'USD',
+  currency,
   currencyDisplay: 'symbol',
   useGrouping: true,
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-  subUnitDivisor: 100,
 };
 
 const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY ||
@@ -118,6 +120,7 @@ const config = {
   env,
   dev,
   sdk: { clientId: sdkClientId, baseUrl: sdkBaseUrl },
+  currency,
   currencyConfig,
   stripe: { publishableKey: stripePublishableKey, supportedCountries: stripeSupportedCountries },
 };

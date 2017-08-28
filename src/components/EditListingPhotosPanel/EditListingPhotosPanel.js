@@ -6,7 +6,6 @@ import { EditListingPhotosForm, PayoutDetailsForm } from '../../containers';
 import { ensureListing } from '../../util/data';
 import { Modal } from '../../components';
 import * as propTypes from '../../util/propTypes';
-import config from '../../config';
 
 import css from './EditListingPhotosPanel.css';
 
@@ -93,7 +92,6 @@ class EditListingPhotosPanel extends Component {
     const classes = classNames(rootClass, className, {
       [css.payoutModalOpen]: this.state.showPayoutDetails,
     });
-    const currency = config.currencyConfig.currency;
     const currentListing = ensureListing(listing);
     const { title } = currentListing.attributes;
     const listingTitle = title || '';
@@ -139,7 +137,6 @@ class EditListingPhotosPanel extends Component {
           </div>
           <PayoutDetailsForm
             className={css.payoutDetails}
-            currency={currency}
             disabled={fetchInProgress}
             onSubmit={this.handlePayoutSubmit}
           />

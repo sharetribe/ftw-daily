@@ -30,8 +30,8 @@ class SearchMapPriceLabel extends Component {
     const { geolocation, price } = currentListing.attributes;
 
     // Create formatted price if currency is known or alternatively show just the unknown currency.
-    const formattedPrice = price && price.currency === config.currencyConfig.currency
-      ? formatMoney(intl, config.currencyConfig, price)
+    const formattedPrice = price && price.currency === config.currency
+      ? formatMoney(intl, price)
       : price.currency;
 
     // Explicit type change to object literal for Google OverlayViews (geolocation is SDK type)

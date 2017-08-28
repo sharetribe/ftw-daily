@@ -1,6 +1,8 @@
-import { trimEnd } from 'lodash';
+import { has, trimEnd } from 'lodash';
 import Decimal from 'decimal.js';
 import { types } from './sdkLoader';
+import config from '../config';
+import { subUnitDivisors } from './currencyConfig';
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER
@@ -13,6 +15,14 @@ export const isSafeNumber = decimalValue => {
     throw new Error('Value must be a Decimal');
   }
   return decimalValue.gte(MIN_SAFE_INTEGER) && decimalValue.lte(MAX_SAFE_INTEGER);
+};
+
+// Get the minor unit divisor for the given currency
+export const unitDivisor = currency => {
+  if (!has(subUnitDivisors, currency)) {
+    throw new Error(`No minor unit divisor defined for currency: ${currency}`);
+  }
+  return subUnitDivisors[currency];
 };
 
 ////////// Currency manipulation in string format //////////
@@ -190,16 +200,16 @@ const isGoogleMathLong = value => {
  *
  * @param {Money} value
  *
- * @param {Decimal|Number|String} subUnitDivisor - should be something that can be converted to
- * Decimal. (This is a ratio between currency's main unit and sub units.)
- *
  * @return {Number} converted value
  */
-export const convertMoneyToNumber = (value, subUnitDivisor) => {
+export const convertMoneyToNumber = value => {
   if (!(value instanceof types.Money)) {
     throw new Error('Value must be a Money type');
   }
-  const subUnitDivisorAsDecimal = convertDivisorToDecimal(subUnitDivisor);
+  if (value.currency !== config.currency) {
+    throw new Error('Given currency different from marketplace currency');
+  }
+  const subUnitDivisorAsDecimal = convertDivisorToDecimal(unitDivisor(value.currency));
   let amount;
 
   if (isGoogleMathLong(value.amount)) {
@@ -228,18 +238,28 @@ export const convertMoneyToNumber = (value, subUnitDivisor) => {
  * Format the given money to a string
  *
  * @param {Object} intl
- * @param {Object} currencyConfig
  * @param {Money} value
  *
  * @return {String} formatted money value
  */
-export const formatMoney = (intl, currencyConfig, value) => {
+export const formatMoney = (intl, value) => {
   if (!(value instanceof types.Money)) {
     throw new Error('Value must be a Money type');
   }
-  if (value.currency !== currencyConfig.currency) {
+  if (value.currency !== config.currency) {
     throw new Error('Given currency different from marketplace currency');
   }
-  const valueAsNumber = convertMoneyToNumber(value, currencyConfig.subUnitDivisor);
-  return intl.formatNumber(valueAsNumber, currencyConfig);
+  const valueAsNumber = convertMoneyToNumber(value);
+
+  // See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
+  const numberFormatOptions = {
+    style: 'currency',
+    currency: value.currency,
+    currencyDisplay: 'symbol',
+    useGrouping: true,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  };
+
+  return intl.formatNumber(valueAsNumber, numberFormatOptions);
 };

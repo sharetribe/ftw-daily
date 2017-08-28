@@ -8,7 +8,7 @@ import config from '../../config';
 import * as propTypes from '../../util/propTypes';
 import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
-import { convertMoneyToNumber } from '../../util/currency';
+import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import { ensureListing, ensureUser } from '../../util/data';
 import {
@@ -35,10 +35,9 @@ const MODAL_BREAKPOINT = 1023;
 
 const { UUID } = types;
 
-const priceData = (price, currencyConfig, intl) => {
-  if (price && price.currency === currencyConfig.currency) {
-    const priceAsNumber = convertMoneyToNumber(price, currencyConfig.subUnitDivisor);
-    const formattedPrice = intl.formatNumber(priceAsNumber, currencyConfig);
+const priceData = (price, intl) => {
+  if (price && price.currency === config.currency) {
+    const formattedPrice = formatMoney(intl, price);
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
     return {
@@ -105,7 +104,6 @@ export class ListingPageComponent extends Component {
       scrollingDisabled,
       showListingError,
     } = this.props;
-    const currencyConfig = config.currencyConfig;
     const currentListing = ensureListing(getListing(new UUID(params.id)));
     const {
       address = '',
@@ -146,7 +144,7 @@ export class ListingPageComponent extends Component {
     }
 
     const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' });
-    const { formattedPrice, priceTitle } = priceData(price, currencyConfig, intl);
+    const { formattedPrice, priceTitle } = priceData(price, intl);
     const map = geolocation
       ? <div className={css.locationContainer}>
           <h3 className={css.locationTitle}>

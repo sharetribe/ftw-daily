@@ -12,7 +12,7 @@ import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureUser } from '../../util/data';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { nightsBetween } from '../../util/dates';
-import { convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
+import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import {
   AvatarMedium,
   BookingBreakdown,
@@ -34,12 +34,11 @@ const STORAGE_KEY = 'CheckoutPage';
 // price. This should be removed when the API supports dry-runs and we
 // can take the total price from the transaction itself.
 const estimatedTotalPrice = (startDate, endDate, unitPrice) => {
-  const { subUnitDivisor } = config.currencyConfig;
-  const numericPrice = convertMoneyToNumber(unitPrice, subUnitDivisor);
+  const numericPrice = convertMoneyToNumber(unitPrice);
   const nightCount = nightsBetween(startDate, endDate);
   const numericTotalPrice = new Decimal(numericPrice).times(nightCount).toNumber();
   return new types.Money(
-    convertUnitToSubUnit(numericTotalPrice, subUnitDivisor),
+    convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
     unitPrice.currency
   );
 };
@@ -146,13 +145,12 @@ export class CheckoutPageComponent extends Component {
 
     // Estimate total price. NOTE: this will change when we can do a
     // dry-run to the API and get a proper breakdown of the price.
-    const { currency: marketplaceCurrency } = config.currencyConfig;
     const unitPrice = currentListing.attributes.price;
 
     if (!unitPrice) {
       throw new Error('Listing has no price');
     }
-    if (unitPrice.currency !== marketplaceCurrency) {
+    if (unitPrice.currency !== config.currency) {
       throw new Error(
         `Listing currency different from marketplace currency: ${unitPrice.currency}`
       );

@@ -5,7 +5,6 @@ import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { debounce, isEqual, unionWith } from 'lodash';
 import classNames from 'classnames';
-import config from '../../config';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { googleLatLngToSDKLatLng, googleBoundsToSDKBounds } from '../../util/googleMaps';
 import { createResourceLocatorString } from '../../util/routes';
@@ -264,7 +263,6 @@ export class SearchPageComponent extends Component {
             >
               <SearchResultsPanel
                 className={css.searchListingsPanel}
-                currencyConfig={config.currencyConfig}
                 listings={listings}
                 pagination={listingsAreLoaded ? pagination : null}
                 search={searchParamsForPagination}

@@ -3,16 +3,16 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import { NamedLink, ResponsiveImage } from '../../components';
 import * as propTypes from '../../util/propTypes';
-import { convertMoneyToNumber } from '../../util/currency';
+import { formatMoney } from '../../util/currency';
 import { ensureListing, ensureUser } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
+import config from '../../config';
 
 import css from './ListingCard.css';
 
-const priceData = (price, currencyConfig, intl) => {
-  if (price && price.currency === currencyConfig.currency) {
-    const priceAsNumber = convertMoneyToNumber(price, currencyConfig.subUnitDivisor);
-    const formattedPrice = intl.formatNumber(priceAsNumber, currencyConfig);
+const priceData = (price, intl) => {
+  if (price && price.currency === config.currency) {
+    const formattedPrice = formatMoney(intl, price);
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
     return {
@@ -30,7 +30,7 @@ const priceData = (price, currencyConfig, intl) => {
 };
 
 export const ListingCardComponent = props => {
-  const { className, rootClassName, currencyConfig, intl, listing } = props;
+  const { className, rootClassName, intl, listing } = props;
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
@@ -43,7 +43,7 @@ export const ListingCardComponent = props => {
     : null;
 
   // TODO: Currently, API can return currencies that are not supported by starter app.
-  const { formattedPrice, priceTitle } = priceData(price, currencyConfig, intl);
+  const { formattedPrice, priceTitle } = priceData(price, intl);
 
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
@@ -96,7 +96,6 @@ const { string } = PropTypes;
 ListingCardComponent.propTypes = {
   className: string,
   rootClassName: string,
-  currencyConfig: propTypes.currencyConfig.isRequired,
   intl: intlShape.isRequired,
   listing: propTypes.listing.isRequired,
 };
