@@ -11,6 +11,10 @@ const sdkBaseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'http://loca
 
 const currency = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY || 'USD';
 
+// Currency formatting options.
+// See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
+//
+// TODO: Remove this and hide formating within the util/currency module
 const currencyConfig = {
   style: 'currency',
   currency,
