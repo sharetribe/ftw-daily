@@ -20,6 +20,8 @@ import {
   ResponsiveImage,
   Topbar,
   NamedLink,
+  Modal,
+  ImageCarousel,
 } from '../../components';
 import EditIcon from './EditIcon';
 import { BookingDatesForm } from '../../containers';
@@ -57,6 +59,7 @@ export class ListingPageComponent extends Component {
     this.state = {
       isBookingModalOpenOnMobile: tab && tab === 'book',
       pageClassNames: [],
+      imageCarouselOpen: false,
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -121,8 +124,21 @@ export class ListingPageComponent extends Component {
       return <PageLayout title={intl.formatMessage(loadingPageMsg)} />;
     }
 
-    const firstImage = currentListing.images && currentListing.images.length > 0
-      ? currentListing.images[0]
+    const hasImages = currentListing.images && currentListing.images.length > 0;
+    const firstImage = hasImages ? currentListing.images[0] : null;
+
+    const handleViewPhotosClick = () => {
+      this.setState({
+        imageCarouselOpen: true,
+      });
+    };
+    const viewPhotosButton = hasImages
+      ? <button className={css.viewPhotos} onClick={handleViewPhotosClick}>
+          <FormattedMessage
+            id="ListingPage.viewImagesButton"
+            values={{ count: currentListing.images.length }}
+          />
+        </button>
       : null;
 
     const authorAvailable = currentListing && currentListing.author;
@@ -218,6 +234,7 @@ export class ListingPageComponent extends Component {
           <div className={css.threeToTwoWrapper}>
             <div className={css.aspectWrapper}>
               {ownListingActionBar}
+              {viewPhotosButton}
               <ResponsiveImage
                 rootClassName={css.rootForImage}
                 alt={title}
@@ -230,7 +247,14 @@ export class ListingPageComponent extends Component {
               />
             </div>
           </div>
-
+          <Modal
+            id="ListingPage.imageCarousel"
+            isOpen={this.state.imageCarouselOpen}
+            onClose={() => this.setState({ imageCarouselOpen: false })}
+            onManageDisableScrolling={onManageDisableScrolling}
+          >
+            <ImageCarousel images={currentListing.images} />
+          </Modal>
           <div className={css.contentContainer}>
             <div className={css.avatarWrapper}>
               <Avatar rootClassName={css.avatar} user={currentAuthor} />

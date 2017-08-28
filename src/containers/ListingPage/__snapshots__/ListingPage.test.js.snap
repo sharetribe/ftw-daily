@@ -64,6 +64,16 @@ exports[`ListingPage matches snapshot 1`] = `
           sizes="100vw" />
       </div>
     </div>
+    <InjectIntl(ModalComponent)
+      id="ListingPage.imageCarousel"
+      isOpen={false}
+      onClose={[Function]}
+      onManageDisableScrolling={[Function]}>
+      <ImageCarousel
+        className={null}
+        images={Array []}
+        rootClassName={null} />
+    </InjectIntl(ModalComponent)>
     <div>
       <div>
         <Avatar
