@@ -107,14 +107,22 @@
   border-color: var(--matterColorAnti);
   border-radius: 2px;
 
-  /* Bring on top of image */
-  z-index: 1;
-
   cursor: pointer;
 
   @media (--viewportMedium) {
     margin: 0;
   }
+}
+
+.carouselModalScrollLayer {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(1, 1, 1, 0.92);
+}
+
+.carouselModalContainer {
+  width: 100%;
+  height: 100%;
 }
 
 .contentContainer {

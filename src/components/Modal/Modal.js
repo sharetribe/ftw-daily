@@ -58,15 +58,25 @@ export class ModalComponent extends Component {
     const {
       children,
       className,
+      scrollLayerClassName,
+      containerClassName,
       contentClassName,
+      lightCloseButton,
       intl,
       isClosedClassName,
       isOpen,
     } = this.props;
 
     const closeModalMessage = intl.formatMessage({ id: 'Modal.closeModal' });
+    const closeButtonClasses = classNames(css.close, {
+      [css.closeLight]: lightCloseButton,
+    });
     const closeBtn = isOpen
-      ? <Button onClick={this.handleClose} rootClassName={css.close} title={closeModalMessage}>
+      ? <Button
+          onClick={this.handleClose}
+          rootClassName={closeButtonClasses}
+          title={closeModalMessage}
+        >
           <span className={css.closeText}><FormattedMessage id="Modal.close" /></span>
           <CloseIcon rootClassName={css.closeIcon} />
         </Button>
@@ -78,10 +88,12 @@ export class ModalComponent extends Component {
     // visible, hidden, or none (ModalInMobile's children are always visible on desktop layout.)
     const modalClass = isOpen ? css.isOpen : isClosedClassName;
     const classes = classNames(modalClass, className);
+    const scrollLayerClasses = scrollLayerClassName || css.scrollLayer;
+    const containerClasses = containerClassName || css.container;
     return (
       <div className={classes}>
-        <div className={css.scrollLayer}>
-          <div className={css.container}>
+        <div className={scrollLayerClasses}>
+          <div className={containerClasses}>
             {closeBtn}
             <div className={classNames(css.content, contentClassName)}>
               {children}
@@ -96,7 +108,10 @@ export class ModalComponent extends Component {
 ModalComponent.defaultProps = {
   children: null,
   className: null,
+  scrollLayerClassName: null,
+  containerClassName: null,
   contentClassName: null,
+  lightCloseButton: false,
   isClosedClassName: css.isClosed,
   isOpen: false,
   onClose: null,
@@ -107,7 +122,10 @@ const { bool, func, node, string } = PropTypes;
 ModalComponent.propTypes = {
   children: node,
   className: string,
+  scrollLayerClassName: string,
+  containerClassName: string,
   contentClassName: string,
+  lightCloseButton: bool,
   id: string.isRequired,
   intl: intlShape.isRequired,
   isClosedClassName: string,

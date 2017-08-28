@@ -67,12 +67,11 @@ exports[`ListingPage matches snapshot 1`] = `
     <InjectIntl(ModalComponent)
       id="ListingPage.imageCarousel"
       isOpen={false}
+      lightCloseButton={true}
       onClose={[Function]}
       onManageDisableScrolling={[Function]}>
-      <ImageCarousel
-        className={null}
-        images={Array []}
-        rootClassName={null} />
+      <InjectIntl(ImageCarousel)
+        images={Array []} />
     </InjectIntl(ModalComponent)>
     <div>
       <div>

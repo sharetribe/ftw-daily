@@ -234,7 +234,6 @@ export class ListingPageComponent extends Component {
           <div className={css.threeToTwoWrapper}>
             <div className={css.aspectWrapper}>
               {ownListingActionBar}
-              {viewPhotosButton}
               <ResponsiveImage
                 rootClassName={css.rootForImage}
                 alt={title}
@@ -245,10 +244,14 @@ export class ListingPageComponent extends Component {
                 ]}
                 sizes="100vw"
               />
+              {viewPhotosButton}
             </div>
           </div>
           <Modal
             id="ListingPage.imageCarousel"
+            scrollLayerClassName={css.carouselModalScrollLayer}
+            containerClassName={css.carouselModalContainer}
+            lightCloseButton
             isOpen={this.state.imageCarouselOpen}
             onClose={() => this.setState({ imageCarouselOpen: false })}
             onManageDisableScrolling={onManageDisableScrolling}
