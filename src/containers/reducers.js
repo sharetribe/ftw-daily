@@ -10,5 +10,15 @@ import ListingPage from './ListingPage/ListingPage.duck';
 import OrderPage from './OrderPage/OrderPage.duck';
 import SalePage from './SalePage/SalePage.duck';
 import SearchPage from './SearchPage/SearchPage.duck';
+import ManageListingsPage from './ManageListingsPage/ManageListingsPage.duck';
 
-export { CheckoutPage, EditListingPage, InboxPage, ListingPage, OrderPage, SalePage, SearchPage };
+export {
+  CheckoutPage,
+  EditListingPage,
+  InboxPage,
+  ListingPage,
+  ManageListingsPage,
+  OrderPage,
+  SalePage,
+  SearchPage,
+};
