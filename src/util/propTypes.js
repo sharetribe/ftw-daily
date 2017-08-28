@@ -119,6 +119,21 @@ export const listing = shape({
   images: arrayOf(image),
 });
 
+// Denormalised listing object
+export const ownListing = shape({
+  id: uuid.isRequired,
+  type: value('listing').isRequired,
+  attributes: shape({
+    title: string.isRequired,
+    description: string.isRequired,
+    address: string.isRequired,
+    geolocation: latlng.isRequired,
+    open: bool.isRequired,
+    price: money,
+  }),
+  images: arrayOf(image),
+});
+
 // Denormalised booking object
 export const booking = shape({
   id: uuid.isRequired,

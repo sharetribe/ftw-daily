@@ -13,6 +13,7 @@ describe('ContactDetailsPage', () => {
         location={{ search: '' }}
         scrollingDisabled={false}
         authInProgress={false}
+        queryInProgress={false}
         currentUserHasListings={false}
         isAuthenticated={false}
         onLogout={noop}

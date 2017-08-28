@@ -9,6 +9,7 @@ import * as DateRangeInputField from './components/DateRangeInputField/DateRange
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
+import * as ManageListingCard from './components/ManageListingCard/ManageListingCard.example';
 import * as Map from './components/Map/Map.example';
 import * as Menu from './components/Menu/Menu.example';
 import * as Modal from './components/Modal/Modal.example';
@@ -69,6 +70,7 @@ export {
   ListingCard,
   LocationAutocompleteInput,
   LoginForm,
+  ManageListingCard,
   Map,
   Menu,
   Modal,
