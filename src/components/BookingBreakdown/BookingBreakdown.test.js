@@ -3,12 +3,14 @@ import Decimal from 'decimal.js';
 import { fakeIntl } from '../../util/test-data';
 import { renderDeep } from '../../util/test-helpers';
 import { types } from '../../util/sdkLoader';
+import * as propTypes from '../../util/propTypes';
 import { BookingBreakdownComponent } from './BookingBreakdown';
 
 describe('BookingBreakdown', () => {
   it('pretransaction data matches snapshot', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
+        transactionState={propTypes.TX_STATE_PREAUTHORIZED}
         bookingStart={new Date(Date.UTC(2017, 3, 14))}
         bookingEnd={new Date(Date.UTC(2017, 3, 16))}
         payinTotal={new types.Money(2000, 'USD')}
@@ -30,6 +32,7 @@ describe('BookingBreakdown', () => {
   it('customer transaction data matches snapshot', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
+        transactionState={propTypes.TX_STATE_PREAUTHORIZED}
         bookingStart={new Date(Date.UTC(2017, 3, 14))}
         bookingEnd={new Date(Date.UTC(2017, 3, 16))}
         userRole="customer"
@@ -51,6 +54,7 @@ describe('BookingBreakdown', () => {
   it('provider transaction data matches snapshot', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
+        transactionState={propTypes.TX_STATE_PREAUTHORIZED}
         bookingStart={new Date(Date.UTC(2017, 3, 14))}
         bookingEnd={new Date(Date.UTC(2017, 3, 16))}
         commission={new types.Money(200, 'USD')}

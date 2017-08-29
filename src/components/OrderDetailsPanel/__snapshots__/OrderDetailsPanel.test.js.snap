@@ -124,6 +124,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
               "currency": "USD",
             }
           }
+          transactionState="state/preauthorized"
           userRole="customer" />
       </div>
       <div>
@@ -220,6 +221,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
               "currency": "USD",
             }
           }
+          transactionState="state/preauthorized"
           userRole="customer" />
       </div>
     </div>

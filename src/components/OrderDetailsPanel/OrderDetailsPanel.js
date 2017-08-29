@@ -21,6 +21,7 @@ const breakdown = transaction => {
   }
   return (
     <BookingBreakdown
+      transactionState={tx.attributes.state}
       className={css.receipt}
       bookingStart={bookingStart}
       bookingEnd={bookingEnd}
