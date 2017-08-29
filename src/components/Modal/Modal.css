@@ -85,6 +85,15 @@
   }
 }
 
+.closeLight {
+  color: var(--matterColorAnti);
+
+  &:enabled:hover,
+  &:enabled:active {
+    color: var(--matterColor);
+  }
+}
+
 .closeText {
   /* Font */
   @apply --marketplaceH6FontStyles;
