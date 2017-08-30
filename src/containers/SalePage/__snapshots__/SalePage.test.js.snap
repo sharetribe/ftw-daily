@@ -120,6 +120,7 @@ exports[`SalePage matches snapshot 1`] = `
                 "lat": 40,
                 "lng": 60,
               },
+              "open": true,
               "price": Money {
                 "amount": 5500,
                 "currency": "USD",

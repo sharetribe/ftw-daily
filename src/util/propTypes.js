@@ -113,24 +113,10 @@ export const listing = shape({
     description: string.isRequired,
     address: string.isRequired,
     geolocation: latlng.isRequired,
-    price: money,
-  }),
-  author: user,
-  images: arrayOf(image),
-});
-
-// Denormalised listing object
-export const ownListing = shape({
-  id: uuid.isRequired,
-  type: value('listing').isRequired,
-  attributes: shape({
-    title: string.isRequired,
-    description: string.isRequired,
-    address: string.isRequired,
-    geolocation: latlng.isRequired,
     open: bool.isRequired,
     price: money,
   }),
+  author: user,
   images: arrayOf(image),
 });
 
