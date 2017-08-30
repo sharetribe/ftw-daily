@@ -151,11 +151,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
             "currency": "USD",
           }
         }
-        totalLabelMessage={
-          <FormattedMessage
-            id="SaleDetailsPanel.providerTotal"
-            values={Object {}} />
-        }
+        transactionState="state/preauthorized"
         userRole="provider" />
     </div>
     <div>
@@ -228,11 +224,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
               "currency": "USD",
             }
           }
-          totalLabelMessage={
-            <FormattedMessage
-              id="SaleDetailsPanel.providerTotal"
-              values={Object {}} />
-          }
+          transactionState="state/preauthorized"
           userRole="provider" />
       </div>
     </div>

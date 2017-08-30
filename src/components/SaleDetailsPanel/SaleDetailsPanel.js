@@ -15,7 +15,7 @@ import {
 
 import css from './SaleDetailsPanel.css';
 
-const breakdown = (transaction, totalLabelMessage) => {
+const breakdown = transaction => {
   const tx = ensureTransaction(transaction);
   const booking = ensureBooking(tx.booking);
   const bookingStart = booking.attributes.start;
@@ -27,16 +27,15 @@ const breakdown = (transaction, totalLabelMessage) => {
   if (!bookingStart || !bookingEnd || !payinTotal || !payoutTotal || !lineItems) {
     return null;
   }
-
   return (
     <BookingBreakdown
+      transactionState={tx.attributes.state}
       bookingStart={bookingStart}
       bookingEnd={bookingEnd}
       payinTotal={payinTotal}
       payoutTotal={payoutTotal}
       lineItems={lineItems}
       userRole="provider"
-      totalLabelMessage={totalLabelMessage}
     />
   );
 };
@@ -142,12 +141,7 @@ const SaleDetailsPanel = props => {
     );
   }
 
-  const wasRejected = transactionState === propTypes.TX_STATE_REJECTED;
-  const totalMessage = wasRejected
-    ? <FormattedMessage id="SaleDetailsPanel.providerRejectedTotal" />
-    : <FormattedMessage id="SaleDetailsPanel.providerTotal" />;
-
-  const bookingInfo = breakdown(currentTransaction, totalMessage);
+  const bookingInfo = breakdown(currentTransaction);
 
   const title = saleTitle(transactionState, listingLink, customerDisplayName, lastTransition);
   const message = saleMessage(

@@ -16,11 +16,11 @@ export const BookingBreakdownComponent = props => {
   const {
     rootClassName,
     className,
+    transactionState,
     bookingStart,
     bookingEnd,
     payinTotal,
     payoutTotal,
-    totalLabelMessage,
     lineItems,
     userRole,
     intl,
@@ -38,7 +38,7 @@ export const BookingBreakdownComponent = props => {
 
   const dateFormatOptions = {
     weekday: 'short',
-    month: 'long',
+    month: 'short',
     day: 'numeric',
   };
   const bookingPeriod = (
@@ -102,10 +102,16 @@ export const BookingBreakdownComponent = props => {
     );
   }
 
-  const defaultTotalLabel = userRole === 'customer'
+  let providerTotalMessageId = 'BookingBreakdown.providerTotalDefault';
+  if (transactionState === propTypes.TX_STATE_DELIVERED) {
+    providerTotalMessageId = 'BookingBreakdown.providerTotalDelivered';
+  } else if (transactionState === propTypes.TX_STATE_REJECTED) {
+    providerTotalMessageId = 'BookingBreakdown.providerTotalRejected';
+  }
+
+  const totalLabel = userRole === 'customer'
     ? <FormattedMessage id="BookingBreakdown.total" />
-    : <FormattedMessage id="BookingBreakdown.providerTotal" />;
-  const totalLabel = totalLabelMessage || defaultTotalLabel;
+    : <FormattedMessage id={providerTotalMessageId} />;
 
   const totalPrice = userRole === 'customer' ? payinTotal : payoutTotal;
   const formattedTotalPrice = formatMoney(intl, totalPrice);
@@ -144,10 +150,9 @@ BookingBreakdownComponent.defaultProps = {
   className: null,
   payinTotal: null,
   payoutTotal: null,
-  totalLabelMessage: null,
 };
 
-const { arrayOf, instanceOf, node, oneOf, shape, string } = PropTypes;
+const { arrayOf, instanceOf, oneOf, shape, string } = PropTypes;
 
 const lineItem = shape({
   code: string.isRequired,
@@ -160,13 +165,13 @@ BookingBreakdownComponent.propTypes = {
   rootClassName: string,
   className: string,
 
+  transactionState: oneOf(propTypes.TX_STATES).isRequired,
   bookingStart: instanceOf(Date).isRequired,
   bookingEnd: instanceOf(Date).isRequired,
   lineItems: arrayOf(lineItem).isRequired,
   userRole: oneOf(['customer', 'provider']).isRequired,
   payinTotal: propTypes.money, // required if userRole === customer
   payoutTotal: propTypes.money, // required if userRole === provider
-  totalLabelMessage: node,
 
   // from injectIntl
   intl: intlShape.isRequired,

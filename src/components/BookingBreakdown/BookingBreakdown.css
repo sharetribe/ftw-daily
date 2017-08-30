@@ -34,12 +34,11 @@
 .itemValue {
   @apply --marketplaceDefaultFontStyles;
   font-weight: 600;
-  margin: 0;
+  margin: 0 0 0 10px;
 
   @media (--viewportMedium) {
     font-weight: 700;
-    margin-top: -1px;
-    margin-bottom: 0;
+    margin: -1px 0 0 10px;
   }
 }
 
@@ -70,9 +69,9 @@
 
 .totalPrice {
   @apply --marketplaceH2FontStyles;
-  margin: 0;
+  margin: 0 0 0 10px;
 
   @media (--viewportMedium) {
-    margin: 0;
+    margin: 0 0 0 10px;
   }
 }
