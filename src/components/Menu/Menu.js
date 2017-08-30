@@ -24,6 +24,12 @@ import css from './Menu.css';
 
 const KEY_CODE_ESCAPE = 27;
 const CONTENT_PLACEMENT_OFFSET = 0;
+const CONTENT_TO_LEFT = 'left';
+const CONTENT_TO_RIGHT = 'right';
+
+const isControlledMenu = (isOpenProp, onToggleActiveProp) => {
+  return isOpenProp !== null && onToggleActiveProp !== null;
+};
 
 // This should work, but it doesn't <div className="foo" onClick={() => {}} role="button" />
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -32,6 +38,15 @@ class Menu extends Component {
     super(props);
 
     this.state = { isOpen: false };
+
+    const { isOpen, onToggleActive } = props;
+    if ((isOpen !== null || onToggleActive !== null) && !isControlledMenu(isOpen, onToggleActive)) {
+      throw new Error(
+        `Menu has invalid props:
+          Both isOpen and onToggleActive need to be defined (controlled menu),
+          or neither of them (menu uses its own state management).`
+      );
+    }
 
     this.onBlur = this.onBlur.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
@@ -60,20 +75,30 @@ class Menu extends Component {
   }
 
   toggleOpen(enforcedState) {
-    this.setState(prevState => {
-      const isOpen = enforcedState != null ? enforcedState : !prevState.isOpen;
-      return { isOpen };
-    });
+    // If state is handled outside of Menu component, we call a passed in onToggleActive func
+    const { isOpen, onToggleActive } = this.props;
+    if (isControlledMenu(isOpen, onToggleActive)) {
+      const isMenuOpen = enforcedState != null ? enforcedState : !isOpen;
+      onToggleActive(isMenuOpen);
+    } else {
+      // If state is handled inside of Menu component, set state
+      this.setState(prevState => {
+        const isMenuOpen = enforcedState != null ? enforcedState : !prevState.isOpen;
+        return { isOpen: isMenuOpen };
+      });
+    }
   }
 
-  positionStyleForMenuContent() {
+  positionStyleForMenuContent(contentPosition) {
     if (this.menu && this.menuContent) {
       // Calculate wether we should show the menu to the left of the component or right
       const distanceToRight = window.innerWidth - this.menu.getBoundingClientRect().right;
       const menuWidth = this.menu.offsetWidth;
       const contentWidthBiggerThanLabel = this.menuContent.offsetWidth - menuWidth;
-      return distanceToRight < contentWidthBiggerThanLabel
-        ? { right: -1 * CONTENT_PLACEMENT_OFFSET, minWidth: menuWidth }
+      const usePositionRightFromLabel = contentPosition === CONTENT_TO_LEFT;
+      const contentPlacementOffset = this.props.contentPlacementOffset;
+      return usePositionRightFromLabel || distanceToRight < contentWidthBiggerThanLabel
+        ? { right: contentPlacementOffset, minWidth: menuWidth }
         : { left: 0, minWidth: menuWidth };
     }
     return {};
@@ -82,8 +107,9 @@ class Menu extends Component {
   positionStyleForArrow(isPositionedRight) {
     if (this.menu) {
       const menuWidth = this.menu.offsetWidth;
+      const contentPlacementOffset = this.props.contentPlacementOffset;
       return isPositionedRight
-        ? Math.floor(menuWidth / 2) + CONTENT_PLACEMENT_OFFSET
+        ? Math.floor(menuWidth / 2) - contentPlacementOffset
         : Math.floor(menuWidth / 2);
     }
     return 0;
@@ -95,23 +121,30 @@ class Menu extends Component {
     }
 
     return React.Children.map(this.props.children, child => {
+      const { isOpen: isOpenProp, onToggleActive } = this.props;
+      const isOpen = isControlledMenu(isOpenProp, onToggleActive) ? isOpenProp : this.state.isOpen;
+
       if (child.type === MenuLabel) {
         // MenuLabel needs toggleOpen function
         // We pass that directly  so that component user doesn't need to worry about that
         return React.cloneElement(child, {
-          isOpen: this.state.isOpen,
+          isOpen,
           onToggleActive: this.toggleOpen,
         });
       } else if (child.type === MenuContent) {
         // MenuContent needs some styling data (width, arrowPosition, and isOpen info)
         // We pass those directly so that component user doesn't need to worry about those.
-        const positionStyles = this.positionStyleForMenuContent();
+        const { contentPosition, useArrow } = this.props;
+        const positionStyles = this.positionStyleForMenuContent(contentPosition);
+        const arrowPosition = useArrow
+          ? this.positionStyleForArrow(positionStyles.right != null)
+          : null;
         return React.cloneElement(child, {
-          arrowPosition: this.positionStyleForArrow(positionStyles.right != null),
+          arrowPosition,
           contentRef: node => {
             this.menuContent = node;
           },
-          isOpen: this.state.isOpen,
+          isOpen,
           style: { ...child.props.style, ...positionStyles },
         });
       } else {
@@ -142,14 +175,27 @@ class Menu extends Component {
 }
 /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-Menu.defaultProps = { className: null, rootClassName: '' };
+Menu.defaultProps = {
+  className: null,
+  rootClassName: '',
+  contentPlacementOffset: CONTENT_PLACEMENT_OFFSET,
+  contentPosition: CONTENT_TO_RIGHT,
+  isOpen: null,
+  onToggleActive: null,
+  useArrow: true,
+};
 
-const { node, string } = PropTypes;
+const { bool, func, node, number, string } = PropTypes;
 
 Menu.propTypes = {
   children: node.isRequired,
   className: string,
   rootClassName: string,
+  contentPosition: string,
+  contentPlacementOffset: number,
+  useArrow: bool,
+  isOpen: bool,
+  onToggleActive: func,
 };
 
 export default Menu;
