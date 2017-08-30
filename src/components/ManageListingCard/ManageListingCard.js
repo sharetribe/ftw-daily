@@ -9,10 +9,25 @@ import { ensureListing } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { createResourceLocatorString } from '../../util/routes';
-import { NamedLink, SecondaryButton, ResponsiveImage } from '../../components';
+import {
+  InlineTextButton,
+  Menu,
+  MenuLabel,
+  MenuContent,
+  MenuItem,
+  NamedLink,
+  PrimaryButton,
+  SecondaryButton,
+  SpinnerIcon,
+  ResponsiveImage,
+} from '../../components';
 import config from '../../config';
 
+import MenuIcon from './MenuIcon';
 import css from './ManageListingCard.css';
+
+// Menu content needs the same padding
+const MENU_CONTENT_OFFSET = 8;
 
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {
@@ -48,19 +63,76 @@ export const ManageListingCardComponent = props => {
     flattenedRoutes,
     history,
     intl,
+    isMenuOpen,
+    actionsInProgressListingId,
     listing,
+    onCloseListing,
+    onOpenListing,
+    onToggleMenu,
   } = props;
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
-  const { title = '', price } = currentListing.attributes;
+  const { title = '', price, open } = currentListing.attributes;
   const slug = createSlug(title);
   const firstImage = currentListing.images && currentListing.images.length > 0
     ? currentListing.images[0]
     : null;
 
+  const menuItemClasses = classNames(css.menuItem, {
+    [css.menuItemDisabled]: !!actionsInProgressListingId,
+  });
+
   // TODO: Currently, API can return currencies that are not supported by starter app.
   const { formattedPrice, priceTitle } = priceData(price, intl);
+
+  /* eslint-disable jsx-a11y/no-static-element-interactions */
+  const closedOverlay = open
+    ? null
+    : <div
+        className={css.closedOverlayWrapper}
+        onClick={event => {
+          event.preventDefault();
+          event.stopPropagation();
+        }}
+      >
+        <div className={css.closedOverlay} />
+        <div className={css.closedOverlayContent}>
+          <div className={css.closedMessage}>
+            <FormattedMessage id="ManageListingCard.closedListing" />
+          </div>
+          <PrimaryButton
+            className={css.openListingButton}
+            disabled={!!actionsInProgressListingId}
+            onClick={event => {
+              event.preventDefault();
+              event.stopPropagation();
+              if (!actionsInProgressListingId) {
+                onOpenListing(currentListing.id);
+              }
+            }}
+          >
+            <FormattedMessage id="ManageListingCard.openListing" />
+          </PrimaryButton>
+        </div>
+      </div>;
+
+  const thisInProgress = actionsInProgressListingId && actionsInProgressListingId.uuid === id;
+  const loadingOrClosedOverlay = thisInProgress
+    ? <div
+        className={css.loadingOverlayWrapper}
+        onClick={event => {
+          event.preventDefault();
+          event.stopPropagation();
+        }}
+      >
+        <div className={css.loadingOverlay} />
+        <div className={css.loadingOverlayContent}>
+          <SpinnerIcon />
+        </div>
+      </div>
+    : closedOverlay;
+  /* eslint-enable jsx-a11y/no-static-element-interactions */
 
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
@@ -75,6 +147,50 @@ export const ManageListingCardComponent = props => {
               { name: 'landscape-crop2x', size: '2x' },
             ]}
           />
+        </div>
+        <div className={classNames(css.menuOverlayWrapper, { [css.menuOverlayOpen]: isMenuOpen })}>
+          <div className={classNames(css.menuOverlay)} />
+          <div className={css.menuOverlayContent}>
+            <FormattedMessage id="ManageListingCard.viewListing" />
+          </div>
+        </div>
+        <div className={css.menubarWrapper}>
+          <div className={css.menubarGradient} />
+          <div className={css.menubar}>
+            <Menu
+              contentPlacementOffset={MENU_CONTENT_OFFSET}
+              contentPosition="left"
+              useArrow={false}
+              onToggleActive={isOpen => {
+                const listingOpen = isOpen ? currentListing : null;
+                onToggleMenu(listingOpen);
+              }}
+              isOpen={isMenuOpen}
+            >
+              <MenuLabel className={css.menuLabel} isOpenClassName={css.listingMenuIsOpen}>
+                <div className={css.iconWrapper}>
+                  <MenuIcon className={css.menuIcon} isActive={isMenuOpen} />
+                </div>
+              </MenuLabel>
+              <MenuContent rootClassName={css.menuContent}>
+                <MenuItem key="close-listing">
+                  <InlineTextButton
+                    className={menuItemClasses}
+                    onClick={event => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      if (!actionsInProgressListingId) {
+                        onToggleMenu(null);
+                        onCloseListing(currentListing.id);
+                      }
+                    }}
+                  >
+                    <FormattedMessage id="ManageListingCard.closeListing" />
+                  </InlineTextButton>
+                </MenuItem>
+              </MenuContent>
+            </Menu>
+          </div>
         </div>
       </div>
       <div className={css.info}>
@@ -102,6 +218,7 @@ export const ManageListingCardComponent = props => {
           <FormattedMessage id="ManageListingCard.edit" />
         </SecondaryButton>
       </div>
+      {loadingOrClosedOverlay}
     </NamedLink>
   );
 };
@@ -109,15 +226,21 @@ export const ManageListingCardComponent = props => {
 ManageListingCardComponent.defaultProps = {
   className: null,
   rootClassName: null,
+  actionsInProgressListingId: null,
 };
 
-const { arrayOf, func, shape, string } = PropTypes;
+const { arrayOf, bool, func, shape, string } = PropTypes;
 
 ManageListingCardComponent.propTypes = {
   className: string,
   rootClassName: string,
   intl: intlShape.isRequired,
   listing: propTypes.listing.isRequired,
+  isMenuOpen: bool.isRequired,
+  actionsInProgressListingId: shape({ uuid: string.isRequired }),
+  onCloseListing: func.isRequired,
+  onOpenListing: func.isRequired,
+  onToggleMenu: func.isRequired,
 
   // from withFlattenedRoutes
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
