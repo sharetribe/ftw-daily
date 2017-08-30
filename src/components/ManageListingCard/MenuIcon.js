@@ -27,10 +27,14 @@ const MenuIcon = props => {
           <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1" />
           <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
           <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1" />
-          <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
         </filter>
       </defs>
       <g transform="translate(-342 -18)" filter={filter}>
+        <path
+          d="M348 24c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2zm7 0c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2zm7 0c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2z"
+        />
+      </g>
+      <g transform="translate(-342 -18)">
         <path
           d="M348 24c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2zm7 0c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2zm7 0c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2z"
         />
