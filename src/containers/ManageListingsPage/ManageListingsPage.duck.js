@@ -231,6 +231,7 @@ export const queryListingsError = e => ({
   payload: e,
 });
 
+// Throwing error for new (loadData may need that info)
 export const queryOwnListings = queryParams =>
   (dispatch, getState, sdk) => {
     dispatch(queryListingsRequest(queryParams));
@@ -263,7 +264,6 @@ export const closeListing = listingId =>
       })
       .catch(e => {
         dispatch(closeListingError(e));
-        throw e;
       });
   };
 
@@ -279,6 +279,5 @@ export const openListing = listingId =>
       })
       .catch(e => {
         dispatch(openListingError(e));
-        throw e;
       });
   };

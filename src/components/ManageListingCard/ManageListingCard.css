@@ -1,5 +1,15 @@
 @import '../../marketplace.css';
 
+:root {
+  --coverEverything: {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
 .root {
   /* Layout */
   display: flex;
@@ -14,20 +24,12 @@
 
 .menuOverlayWrapper {
   /* Positioning */
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  @apply --coverEverything;
 }
 
 .menuOverlay {
   /* Positioning */
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  @apply --coverEverything;
 
   /* Overlay */
   background-color: var(--matterColorAnti);
@@ -37,6 +39,8 @@
 }
 
 .menuOverlayContent {
+  /* Positioning */
+  @apply --coverEverything;
   /* Fonts */
   @apply --marketplaceH4FontStyles;
   font-weight: var(--fontWeightSemiBold);
@@ -49,13 +53,6 @@
   margin-top: 0;
   margin-bottom: 0;
   opacity: 0;
-
-  /* Positioning */
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
 
   @media (--viewportMedium) {
     font-weight: var(--fontWeightSemiBold);
@@ -97,11 +94,7 @@
 
 .rootForImage {
   /* Layout - image will take space defined by aspect ratio wrapper */
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  @apply --coverEverything;
   width: 100%;
   border-radius: 2px;
 }
@@ -285,22 +278,14 @@
 
 .loadingOverlayWrapper,
 .closedOverlayWrapper {
-  /* Position: cover everything */
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  /* Positioning */
+  @apply --coverEverything;
 }
 
 .loadingOverlay,
 .closedOverlay {
-  /* Position: cover everything */
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  /* Positioning */
+  @apply --coverEverything;
 
   /* Overlay background style */
   background-color: var(--matterColorLight);
@@ -312,12 +297,8 @@
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColor);
 
-  /* Position: cover everything */
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  /* Positioning */
+  @apply --coverEverything;
 
   /* Layout */
   display: flex;

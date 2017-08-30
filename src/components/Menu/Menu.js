@@ -40,7 +40,8 @@ class Menu extends Component {
     this.state = { isOpen: false };
 
     const { isOpen, onToggleActive } = props;
-    if ((isOpen !== null || onToggleActive !== null) && !isControlledMenu(isOpen, onToggleActive)) {
+    const isIndependentMenu = isOpen === null && onToggleActive === null;
+    if (!(isIndependentMenu || isControlledMenu(isOpen, onToggleActive))) {
       throw new Error(
         `Menu has invalid props:
           Both isOpen and onToggleActive need to be defined (controlled menu),
