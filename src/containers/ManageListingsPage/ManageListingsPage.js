@@ -18,9 +18,9 @@ import {
 import css from './ManageListingsPage.css';
 
 // Pagination page size might need to be dynamic on responsive page layouts
-// Current design has max 3 columns 96 is divisible by 2 and 3
+// Current design has max 3 columns 42 is divisible by 2 and 3
 // So, there's enough cards to fill all columns on full pagination pages
-const RESULT_PAGE_SIZE = 96;
+const RESULT_PAGE_SIZE = 42;
 
 export class ManageListingsPageComponent extends Component {
   constructor(props) {
