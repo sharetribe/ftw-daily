@@ -10,6 +10,7 @@ import { types } from '../../util/sdkLoader';
 import { required, bookingDatesRequired } from '../../util/validators';
 import { nightsBetween } from '../../util/dates';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
+import * as propTypes from '../../util/propTypes';
 import config from '../../config';
 import { PrimaryButton, BookingBreakdown, DateRangeInputField } from '../../components';
 
@@ -44,6 +45,7 @@ const breakdown = (bookingStart, bookingEnd, unitPrice) => {
 
   return (
     <BookingBreakdown
+      transactionState={propTypes.TX_STATE_PREAUTHORIZED}
       className={css.receipt}
       bookingStart={bookingStart}
       bookingEnd={bookingEnd}

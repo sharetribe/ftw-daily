@@ -49,6 +49,7 @@ exports[`BookingDatesForm matches snapshot with selected dates 1`] = `
           "currency": "USD",
         }
       }
+      transactionState="state/preauthorized"
       unitPrice={
         Money {
           "amount": 1099,
