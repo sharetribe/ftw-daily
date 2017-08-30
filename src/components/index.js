@@ -49,6 +49,7 @@ import SearchMapInfoCard from './SearchMapInfoCard/SearchMapInfoCard';
 import SearchMapPriceLabel from './SearchMapPriceLabel/SearchMapPriceLabel';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import SelectField from './SelectField/SelectField';
+import SpinnerIcon from './SpinnerIcon/SpinnerIcon';
 import StripeBankAccountTokenInputField
   from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';
 import TabNav from './TabNav/TabNav';
@@ -117,6 +118,7 @@ export {
   SearchResultsPanel,
   SecondaryButton,
   SelectField,
+  SpinnerIcon,
   StripeBankAccountTokenInputField,
   TabNav,
   TabNavHorizontal,

@@ -17,6 +17,8 @@ class MenuLabel extends Component {
   }
 
   onClick(e) {
+    e.stopPropagation();
+    e.preventDefault();
     this.props.onToggleActive();
 
     // Don't show focus outline if user just clicked the element with mouse

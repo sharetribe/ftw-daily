@@ -14,6 +14,10 @@ describe('ManageListingCard', () => {
         history={{ push: noop }}
         listing={listing}
         intl={fakeIntl}
+        isMenuOpen={false}
+        onCloseListing={noop}
+        onOpenListing={noop}
+        onToggleMenu={noop}
       />
     );
     expect(tree).toMatchSnapshot();

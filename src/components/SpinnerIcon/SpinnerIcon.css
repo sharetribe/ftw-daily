@@ -1,0 +1,7 @@
+@import '../../marketplace.css';
+
+.root {
+  width: 100px;
+  height: 100px;
+  stroke: var(--marketplaceColor);
+}

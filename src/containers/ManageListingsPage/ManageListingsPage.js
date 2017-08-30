@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -9,104 +9,139 @@ import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { ManageListingCard, PageLayout, PaginationLinks, Topbar, UserNav } from '../../components';
 
-import { getListingsById, queryOwnListings } from './ManageListingsPage.duck';
+import {
+  closeListing,
+  openListing,
+  getListingsById,
+  queryOwnListings,
+} from './ManageListingsPage.duck';
 import css from './ManageListingsPage.css';
 
 // Pagination page size might need to be dynamic on responsive page layouts
-// Current design has max 3 columns 96 is divisible by 2 and 3
+// Current design has max 3 columns 42 is divisible by 2 and 3
 // So, there's enough cards to fill all columns on full pagination pages
-const RESULT_PAGE_SIZE = 96;
+const RESULT_PAGE_SIZE = 42;
 
-export const ManageListingsPageComponent = props => {
-  const {
-    authInfoError,
-    authInProgress,
-    currentUser,
-    currentUserHasListings,
-    history,
-    isAuthenticated,
-    listings,
-    location,
-    logoutError,
-    notificationCount,
-    onLogout,
-    onManageDisableScrolling,
-    pagination,
-    queryInProgress,
-    queryListingsError,
-    queryParams,
-  } = props;
+export class ManageListingsPageComponent extends Component {
+  constructor(props) {
+    super(props);
 
-  const hasPaginationInfo = !!pagination && pagination.totalItems != null;
-  const listingsAreLoaded = !queryInProgress && hasPaginationInfo;
+    this.state = { listingMenuOpen: null };
+    this.onToggleMenu = this.onToggleMenu.bind(this);
+  }
 
-  const loadingResults = (
-    <h2>
-      <FormattedMessage id="ManageListingsPage.loadingOwnListings" />
-    </h2>
-  );
+  onToggleMenu(listing) {
+    this.setState({ listingMenuOpen: listing });
+  }
 
-  const noResults = (
-    <h2>
-      <FormattedMessage id="ManageListingsPage.noResults" />
-    </h2>
-  );
+  render() {
+    const {
+      authInfoError,
+      authInProgress,
+      currentUser,
+      currentUserHasListings,
+      history,
+      isAuthenticated,
+      listings,
+      location,
+      logoutError,
+      notificationCount,
+      onCloseListing,
+      onOpenListing,
+      onLogout,
+      onManageDisableScrolling,
+      pagination,
+      queryInProgress,
+      queryListingsError,
+      queryParams,
+      openingListing,
+      closingListing,
+    } = this.props;
 
-  const queryError = (
-    <h2 className={css.error}>
-      <FormattedMessage id="ManageListingsPage.queryError" />
-    </h2>
-  );
+    // TODO Handle openingListingError, closingListingError,
 
-  const title = listingsAreLoaded
-    ? <h1 className={css.title}>
-        <FormattedMessage
-          id="ManageListingsPage.youHaveListings"
-          values={{ count: pagination.totalItems }}
+    const hasPaginationInfo = !!pagination && pagination.totalItems != null;
+    const listingsAreLoaded = !queryInProgress && hasPaginationInfo;
+
+    const loadingResults = (
+      <h2>
+        <FormattedMessage id="ManageListingsPage.loadingOwnListings" />
+      </h2>
+    );
+
+    const queryError = (
+      <h2 className={css.error}>
+        <FormattedMessage id="ManageListingsPage.queryError" />
+      </h2>
+    );
+
+    const noResults = listingsAreLoaded && pagination.totalItems === 0
+      ? <h1 className={css.title}>
+          <FormattedMessage id="ManageListingsPage.noResults" />
+        </h1>
+      : null;
+
+    const title = listingsAreLoaded && pagination.totalItems > 0
+      ? <h1 className={css.title}>
+          <FormattedMessage
+            id="ManageListingsPage.youHaveListings"
+            values={{ count: pagination.totalItems }}
+          />
+        </h1>
+      : noResults;
+
+    const page = queryParams ? queryParams.page : 1;
+    const paginationLinks = listingsAreLoaded && pagination && pagination.totalPages > 1
+      ? <PaginationLinks
+          className={css.pagination}
+          pageName="ManageListingsPage"
+          pageSearchParams={{ page }}
+          pagination={pagination}
         />
-      </h1>
-    : null;
-  const page = queryParams ? queryParams.page : 1;
-  const paginationLinks = listingsAreLoaded && pagination && pagination.totalPages > 1
-    ? <PaginationLinks
-        className={css.pagination}
-        pageName="ManageListingsPage"
-        pageSearchParams={{ page }}
-        pagination={pagination}
-      />
-    : null;
+      : null;
 
-  return (
-    <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Manage listings">
-      <Topbar
-        authInProgress={authInProgress}
-        currentUser={currentUser}
-        currentUserHasListings={currentUserHasListings}
-        currentPage="ManageListingsPage"
-        history={history}
-        isAuthenticated={isAuthenticated}
-        location={location}
-        notificationCount={notificationCount}
-        onLogout={onLogout}
-        onManageDisableScrolling={onManageDisableScrolling}
-      />
-      <UserNav selectedPageName="ManageListingsPage" />
-      {queryInProgress ? loadingResults : null}
-      {queryListingsError ? queryError : null}
-      {listingsAreLoaded && pagination.totalItems === 0 ? noResults : null}
-      <div className={css.listingPanel}>
-        {title}
-        <div className={css.listingCards}>
-          {listings.map(l => (
-            <ManageListingCard className={css.listingCard} key={l.id.uuid} listing={l} />
-          ))}
+    const listingMenuOpen = this.state.listingMenuOpen;
+
+    return (
+      <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Manage listings">
+        <Topbar
+          authInProgress={authInProgress}
+          currentUser={currentUser}
+          currentUserHasListings={currentUserHasListings}
+          currentPage="ManageListingsPage"
+          history={history}
+          isAuthenticated={isAuthenticated}
+          location={location}
+          notificationCount={notificationCount}
+          onLogout={onLogout}
+          onManageDisableScrolling={onManageDisableScrolling}
+        />
+        <UserNav selectedPageName="ManageListingsPage" />
+        {queryInProgress ? loadingResults : null}
+        {queryListingsError ? queryError : null}
+        <div className={css.listingPanel}>
+          {title}
+          <div className={css.listingCards}>
+            {listings.map(l => (
+              <ManageListingCard
+                className={css.listingCard}
+                key={l.id.uuid}
+                listing={l}
+                isMenuOpen={!!listingMenuOpen && listingMenuOpen.id.uuid === l.id.uuid}
+                actionsInProgressListingId={openingListing || closingListing}
+                onToggleMenu={this.onToggleMenu}
+                onCloseListing={onCloseListing}
+                onOpenListing={onOpenListing}
+              />
+            ))}
+          </div>
+          {paginationLinks}
         </div>
-        {paginationLinks}
-      </div>
 
-    </PageLayout>
-  );
-};
+      </PageLayout>
+    );
+  }
+}
 
 ManageListingsPageComponent.defaultProps = {
   authInfoError: null,
@@ -117,9 +152,11 @@ ManageListingsPageComponent.defaultProps = {
   pagination: null,
   queryListingsError: null,
   queryParams: null,
+  closingListing: null,
+  openingListing: null,
 };
 
-const { arrayOf, bool, func, instanceOf, number, object, shape } = PropTypes;
+const { arrayOf, bool, func, instanceOf, number, object, shape, string } = PropTypes;
 
 ManageListingsPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
@@ -130,12 +167,16 @@ ManageListingsPageComponent.propTypes = {
   listings: arrayOf(propTypes.ownListing),
   logoutError: instanceOf(Error),
   notificationCount: number,
+  onCloseListing: func.isRequired,
+  onOpenListing: func.isRequired,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   pagination: propTypes.pagination,
   queryInProgress: bool.isRequired,
   queryListingsError: instanceOf(Error),
   queryParams: object,
+  closingListing: shape({ uuid: string.isRequired }),
+  openingListing: shape({ uuid: string.isRequired }),
 
   // from withRouter
   history: shape({
@@ -151,6 +192,10 @@ const mapStateToProps = state => {
     queryInProgress,
     queryListingsError,
     queryParams,
+    openingListing,
+    openingListingError,
+    closingListing,
+    closingListingError,
   } = state.ManageListingsPage;
   const listings = getListingsById(state, currentPageResultIds);
   // PageLayout needs authInfoError and logoutError, Topbar needs isAuthenticated
@@ -176,10 +221,16 @@ const mapStateToProps = state => {
     queryListingsError,
     queryParams,
     scrollingDisabled: isScrollingDisabled(state),
+    openingListing,
+    openingListingError,
+    closingListing,
+    closingListingError,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
+  onCloseListing: listingId => dispatch(closeListing(listingId)),
+  onOpenListing: listingId => dispatch(openListing(listingId)),
   onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),

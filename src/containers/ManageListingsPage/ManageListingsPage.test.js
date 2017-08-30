@@ -18,6 +18,8 @@ describe('ContactDetailsPage', () => {
         isAuthenticated={false}
         onLogout={noop}
         onManageDisableScrolling={noop}
+        onCloseListing={noop}
+        onOpenListing={noop}
       />
     );
     expect(tree).toMatchSnapshot();

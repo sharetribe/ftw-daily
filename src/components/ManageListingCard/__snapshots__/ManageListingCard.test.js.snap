@@ -30,6 +30,62 @@ exports[`ManageListingCard matches snapshot 1`] = `
         rootClassName={null}
         sizes={null} />
     </div>
+    <div
+      className="">
+      <div
+        className="" />
+      <div>
+        <FormattedMessage
+          id="ManageListingCard.viewListing"
+          values={Object {}} />
+      </div>
+    </div>
+    <div>
+      <div />
+      <div>
+        <Menu
+          className={null}
+          contentPlacementOffset={8}
+          contentPosition="left"
+          isOpen={false}
+          onToggleActive={[Function]}
+          rootClassName=""
+          useArrow={false}>
+          <MenuLabel
+            className={null}
+            isOpen={false}
+            isOpenClassName={null}
+            onToggleActive={null}
+            rootClassName="">
+            <div>
+              <MenuIcon
+                className={null}
+                isActive={false} />
+            </div>
+          </MenuLabel>
+          <MenuContent
+            arrowPosition={null}
+            className={null}
+            contentClassName={null}
+            contentRef={null}
+            isOpen={false}
+            rootClassName=""
+            style={null}>
+            <MenuItem
+              className={null}
+              rootClassName="">
+              <InlineTextButton
+                className=""
+                onClick={[Function]}>
+                <FormattedMessage
+                  id="ManageListingCard.closeListing"
+                  values={Object {}} />
+              </InlineTextButton>
+            </MenuItem>
+          </MenuContent>
+        </Menu>
+      </div>
+    </div>
   </div>
   <div>
     <div>

@@ -1,13 +1,63 @@
 @import '../../marketplace.css';
 
+:root {
+  --coverEverything: {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
 .root {
   /* Layout */
   display: flex;
   flex-direction: column;
+  position: relative;
 
   /* Remove link's hover effect */
   &:hover {
     text-decoration: none;
+  }
+}
+
+.menuOverlayWrapper {
+  /* Positioning */
+  @apply --coverEverything;
+}
+
+.menuOverlay {
+  /* Positioning */
+  @apply --coverEverything;
+
+  /* Overlay */
+  background-color: var(--matterColorAnti);
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: var(--transitionStyleButton);
+}
+
+.menuOverlayContent {
+  /* Positioning */
+  @apply --coverEverything;
+  /* Fonts */
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightSemiBold);
+  color: var(--matterColorLight);
+
+  /* Layout */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  opacity: 0;
+
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightSemiBold);
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 
@@ -16,30 +66,130 @@
   display: block;
   width: 100%;
   position: relative;
+
+  &:hover .menuOverlay {
+    opacity: 0.8;
+  }
+
+  &:hover .menuOverlayContent {
+    opacity: 1.0;
+  }
+}
+
+.menuOverlayOpen {
+  & .menuOverlay {
+    opacity: 0.8;
+  }
+
+  & .menuOverlayContent {
+    opacity: 0.8;
+  }
 }
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
   padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
   background: var(--matterColorNegative); /* Loading BG color */
-  transition: var(--transitionStyleButton);
-
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: var(--boxShadowListingCard);
-    transition: var(--transitionStyleButton);
-  }
 }
 
 .rootForImage {
   /* Layout - image will take space defined by aspect ratio wrapper */
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  @apply --coverEverything;
   width: 100%;
   border-radius: 2px;
+}
+
+.menubarWrapper {
+  /* Position */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 42px;
+}
+
+.menubarGradient {
+  /* Position */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Gradient */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAqCAYAAACUV/o4AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KTMInWQAAAGhJREFUKBVjZGBgKANibiAGga8sQAKEf4N4QMAC4vwH4r8gHgiABOAcmMAfEAMGsKrA0DIqAAsvHGFKkwACRRQjzGJQRP2DcUA0LOZAEQ5S9R8mAJIEA6wCyIYSqYVSz4FcxwR1E5gCAD7HLabS/HFUAAAAAElFTkSuQmCC');
+  background-repeat: repeat;
+  opacity: 0.5;
+}
+
+.menubar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menuLabel {
+  padding: 8px 8px 0 8px;
+}
+
+.iconWrapper {
+  padding: 2px 10px 8px 10px;
+  color: var(--matterColorLight);
+  border-radius: 2px 2px 0 0;
+}
+
+.listingMenuIsOpen {
+  & .iconWrapper {
+    background-color: var(--matterColorLight);
+    color: var(--matterColor);
+  }
+}
+
+.menuContent {
+  visibility:hidden;
+  opacity: 0;
+  pointer-events: none;
+
+  position: absolute;
+  z-index: var(--zIndexPopup);
+
+  background-color: var(--matterColorLight);
+  border-radius: 2px 0 2px 2px;
+}
+
+.menuItem {
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColor);
+  white-space: nowrap;
+  text-align: left;
+  min-width: 175px;
+  padding: 8px 14px;
+
+  /* Remove default margins from font */
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:hover {
+    color: var(--failColor);
+    text-decoration: none;
+  }
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.menuItemDisabled {
+  color: var(--matterColorNegative);
+
+  &:hover {
+    color: var(--matterColorNegative);
+  }
 }
 
 .info {
@@ -124,4 +274,58 @@
   background-image: url('data:image/svg+xml;utf8,<svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g stroke="#4A4A4A" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><path d="M5.307 11.155L1 13l1.846-4.308L10.54 1 13 3.46zM11 5L9 3M5 11L3 9"/></g></svg>');
   background-repeat: no-repeat;
   background-position: 15px center;
+}
+
+.loadingOverlayWrapper,
+.closedOverlayWrapper {
+  /* Positioning */
+  @apply --coverEverything;
+}
+
+.loadingOverlay,
+.closedOverlay {
+  /* Positioning */
+  @apply --coverEverything;
+
+  /* Overlay background style */
+  background-color: var(--matterColorLight);
+  opacity: 0.9;
+}
+
+.loadingOverlayContent,
+.closedOverlayContent {
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColor);
+
+  /* Positioning */
+  @apply --coverEverything;
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+
+  /* Remove default margins from font */
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.closedMessage {
+  max-width: 180px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.openListingButton {
+  @apply --marketplaceH5FontStyles;
+  width: 114px;
+  height: 41px;
+  padding: 8px 0;
 }

@@ -6,6 +6,14 @@ export const FETCH_LISTINGS_REQUEST = 'app/ManageListingsPage/FETCH_LISTINGS_REQ
 export const FETCH_LISTINGS_SUCCESS = 'app/ManageListingsPage/FETCH_LISTINGS_SUCCESS';
 export const FETCH_LISTINGS_ERROR = 'app/ManageListingsPage/FETCH_LISTINGS_ERROR';
 
+export const OPEN_LISTING_REQUEST = 'app/ManageListingsPage/OPEN_LISTING_REQUEST';
+export const OPEN_LISTING_SUCCESS = 'app/ManageListingsPage/OPEN_LISTING_SUCCESS';
+export const OPEN_LISTING_ERROR = 'app/ManageListingsPage/OPEN_LISTING_ERROR';
+
+export const CLOSE_LISTING_REQUEST = 'app/ManageListingsPage/CLOSE_LISTING_REQUEST';
+export const CLOSE_LISTING_SUCCESS = 'app/ManageListingsPage/CLOSE_LISTING_SUCCESS';
+export const CLOSE_LISTING_ERROR = 'app/ManageListingsPage/CLOSE_LISTING_ERROR';
+
 export const ADD_OWN_ENTITIES = 'app/ManageListingsPage/ADD_OWN_ENTITIES';
 
 // ================ Reducer ================ //
@@ -17,6 +25,10 @@ const initialState = {
   queryListingsError: null,
   currentPageResultIds: [],
   ownEntities: {},
+  openingListing: null,
+  openingListingError: null,
+  closingListing: null,
+  closingListingError: null,
 };
 
 const resultIds = data => data.data.map(l => l.id);
@@ -25,6 +37,19 @@ const merge = (state, apiResponse) => {
   return {
     ...state,
     ownEntities: updatedEntities(state.ownEntities, apiResponse.data),
+  };
+};
+
+const updateListingAttributes = (state, listingEntity) => {
+  const oldListing = state.ownEntities.listing[listingEntity.id.uuid];
+  const updatedListing = { ...oldListing, attributes: listingEntity.attributes };
+  const ownListingEntities = {
+    ...state.ownEntities.listing,
+    [listingEntity.id.uuid]: updatedListing,
+  };
+  return {
+    ...state,
+    ownEntities: { ...state.ownEntities, listing: ownListingEntities },
   };
 };
 
@@ -50,6 +75,54 @@ const manageListingsPageReducer = (state = initialState, action = {}) => {
       // eslint-disable-next-line no-console
       console.error(payload);
       return { ...state, queryInProgress: false, queryListingsError: payload };
+
+    case OPEN_LISTING_REQUEST:
+      return {
+        ...state,
+        openingListing: payload.listingId,
+        openingListingError: null,
+      };
+    case OPEN_LISTING_SUCCESS:
+      return {
+        ...updateListingAttributes(state, payload.data),
+        openingListing: null,
+      };
+    case OPEN_LISTING_ERROR: {
+      // eslint-disable-next-line no-console
+      console.error(payload);
+      return {
+        ...state,
+        openingListing: null,
+        openingListingError: {
+          listingId: state.openingListing,
+          error: payload,
+        },
+      };
+    }
+
+    case CLOSE_LISTING_REQUEST:
+      return {
+        ...state,
+        closingListing: payload.listingId,
+        closingListingError: null,
+      };
+    case CLOSE_LISTING_SUCCESS:
+      return {
+        ...updateListingAttributes(state, payload.data),
+        closingListing: null,
+      };
+    case CLOSE_LISTING_ERROR: {
+      // eslint-disable-next-line no-console
+      console.error(payload);
+      return {
+        ...state,
+        closingListing: null,
+        closingListingError: {
+          listingId: state.closingListing,
+          error: payload,
+        },
+      };
+    }
 
     case ADD_OWN_ENTITIES:
       return merge(state, payload);
@@ -110,6 +183,38 @@ export const addOwnEntities = apiResponse => ({
   payload: apiResponse,
 });
 
+export const openListingRequest = listingId => ({
+  type: OPEN_LISTING_REQUEST,
+  payload: { listingId },
+});
+
+export const openListingSuccess = response => ({
+  type: OPEN_LISTING_SUCCESS,
+  payload: response.data,
+});
+
+export const openListingError = e => ({
+  type: OPEN_LISTING_ERROR,
+  error: true,
+  payload: e,
+});
+
+export const closeListingRequest = listingId => ({
+  type: CLOSE_LISTING_REQUEST,
+  payload: { listingId },
+});
+
+export const closeListingSuccess = response => ({
+  type: CLOSE_LISTING_SUCCESS,
+  payload: response.data,
+});
+
+export const closeListingError = e => ({
+  type: CLOSE_LISTING_ERROR,
+  error: true,
+  payload: e,
+});
+
 export const queryListingsRequest = queryParams => ({
   type: FETCH_LISTINGS_REQUEST,
   payload: { queryParams },
@@ -126,6 +231,7 @@ export const queryListingsError = e => ({
   payload: e,
 });
 
+// Throwing error for new (loadData may need that info)
 export const queryOwnListings = queryParams =>
   (dispatch, getState, sdk) => {
     dispatch(queryListingsRequest(queryParams));
@@ -143,5 +249,35 @@ export const queryOwnListings = queryParams =>
       .catch(e => {
         dispatch(queryListingsError(e));
         throw e;
+      });
+  };
+
+export const closeListing = listingId =>
+  (dispatch, getState, sdk) => {
+    dispatch(closeListingRequest(listingId));
+
+    return sdk.listings
+      .close({ id: listingId }, { expand: true })
+      .then(response => {
+        dispatch(closeListingSuccess(response));
+        return response;
+      })
+      .catch(e => {
+        dispatch(closeListingError(e));
+      });
+  };
+
+export const openListing = listingId =>
+  (dispatch, getState, sdk) => {
+    dispatch(openListingRequest(listingId));
+
+    return sdk.listings
+      .open({ id: listingId }, { expand: true })
+      .then(response => {
+        dispatch(openListingSuccess(response));
+        return response;
+      })
+      .catch(e => {
+        dispatch(openListingError(e));
       });
   };
