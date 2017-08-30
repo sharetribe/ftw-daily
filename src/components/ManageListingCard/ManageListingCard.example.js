@@ -3,6 +3,7 @@ import React from 'react';
 import ManageListingCard from './ManageListingCard';
 import { createOwnListing, fakeIntl } from '../../util/test-data';
 
+const noop = () => null;
 const listing = { ...createOwnListing('listing1') };
 
 const ManageListingCardWrapper = props => (
@@ -16,5 +17,11 @@ export const ManageListingCardWrapped = {
   props: {
     intl: fakeIntl,
     listing,
+    isMenuOpen: false,
+    onCloseListing: noop,
+    onOpenListing: noop,
+    onToggleMenu: noop,
+    flattenedRoutes: [],
+    history: { push: noop },
   },
 };
