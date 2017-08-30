@@ -156,6 +156,7 @@ export const TX_STATES = [
   TX_STATE_DELIVERED,
 ];
 
+export const TX_TRANSITION_PREAUTHORIZE = 'transition/preauthorize';
 export const TX_TRANSITION_AUTO_REJECT = 'transition/auto-reject';
 
 // Denormalised transaction object
