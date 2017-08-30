@@ -165,6 +165,7 @@
   "ManageListingCard.perNight": "per night",
   "ManageListingCard.unsupportedPrice": "({currency})",
   "ManageListingCard.unsupportedPriceTitle": "Unsupported currency ({currency})",
+  "ManageListingCard.viewListing": "View listing",
   "ManageListingsPage.accountSettings": "Account settings",
   "ManageListingsPage.loadingOwnListings": "Loading listings…",
   "ManageListingsPage.noResults": "You don't have any listings.",
