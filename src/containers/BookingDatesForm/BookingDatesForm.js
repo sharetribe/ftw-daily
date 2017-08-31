@@ -112,14 +112,18 @@ export const BookingDatesFormComponent = props => {
 
   const submitDisabled = submitting || invalid || !hasBookingInfo;
 
-  // Multilocale support can be achieved with formatting like
-  // moment().format('LL');  => e.g. 'June 29, 2017' in en-US, '29. kesäkuuta 2017' in fi-FI.
-  // https://momentjs.com/
-  const dateFormatString = 'ddd, MMMM D';
+  const dateFormatOptions = {
+    weekday: 'short',
+    month: 'long',
+    day: 'numeric',
+  };
 
-  const startDatePlaceholderText = startDatePlaceholder || moment().format(dateFormatString);
-  const endDatePlaceholderText = endDatePlaceholder ||
-    moment().add(1, 'days').format(dateFormatString);
+  const now = moment();
+  const today = now.startOf('day').toDate();
+  const tomorrow = now.startOf('day').add(1, 'days').toDate();
+  const startDatePlaceholderText = startDatePlaceholder ||
+    intl.formatDate(today, dateFormatOptions);
+  const endDatePlaceholderText = endDatePlaceholder || intl.formatDate(tomorrow, dateFormatOptions);
 
   return (
     <form className={className} onSubmit={handleSubmit}>
