@@ -155,6 +155,7 @@
   pointer-events: none;
 
   position: absolute;
+  right: 0;
   z-index: var(--zIndexPopup);
 
   background-color: var(--matterColorLight);
