@@ -182,10 +182,11 @@ export class ListingPageComponent extends Component {
     );
 
     const handleBookingSubmit = values => {
-      if (!isOwnListing) {
-        this.onSubmit(values);
-      } else {
+      const isClosed = !currentListing.attributes.open;
+      if (isOwnListing || isClosed) {
         window.scrollTo(0, 0);
+      } else {
+        this.onSubmit(values);
       }
     };
 
@@ -205,10 +206,11 @@ export class ListingPageComponent extends Component {
     const listingClasses = classNames(css.pageRoot);
 
     const handleBookButtonClick = () => {
-      if (!isOwnListing) {
-        this.setState({ isBookingModalOpenOnMobile: true });
-      } else {
+      const isClosed = !currentListing.attributes.open;
+      if (isOwnListing || isClosed) {
         window.scrollTo(0, 0);
+      } else {
+        this.setState({ isBookingModalOpenOnMobile: true });
       }
     };
 
