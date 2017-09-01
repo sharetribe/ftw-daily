@@ -16,9 +16,6 @@ import { PrimaryButton, BookingBreakdown, DateRangeInputField } from '../../comp
 
 import css from './BookingDatesForm.css';
 
-// TODO: This is a temporary function to calculate the booking
-// price. This should be removed when the API supports dry-runs and we
-// can take the total price from the transaction itself.
 const estimatedTotalPrice = (unitPrice, nightCount) => {
   const numericPrice = convertMoneyToNumber(unitPrice);
   const numericTotalPrice = new Decimal(numericPrice).times(nightCount).toNumber();
@@ -28,31 +25,61 @@ const estimatedTotalPrice = (unitPrice, nightCount) => {
   );
 };
 
-const breakdown = (bookingStart, bookingEnd, unitPrice) => {
-  if (!bookingStart || !bookingEnd || !unitPrice) {
-    return null;
-  }
+// When we cannot speculatively initiate a transaction (i.e. logged
+// out), we must estimate the booking breakdown. This function creates
+// an estimated transaction object for that use case.
+const estimatedTransaction = (bookingStart, bookingEnd, unitPrice) => {
+  const now = new Date();
   const nightCount = nightsBetween(bookingStart, bookingEnd);
   const totalPrice = estimatedTotalPrice(unitPrice, nightCount);
-  const lineItems = [
-    {
-      code: 'line-item/night',
-      unitPrice: unitPrice,
-      quantity: new Decimal(nightCount),
-      lineTotal: totalPrice,
+
+  return {
+    id: new types.UUID('estimated-transaction'),
+    type: 'transaction',
+    attributes: {
+      createdAt: now,
+      lastTransitionedAt: now,
+      lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+      state: propTypes.TX_STATE_PREAUTHORIZED,
+      payinTotal: totalPrice,
+      payoutTotal: totalPrice,
+      lineItems: [
+        {
+          code: 'line-item/night',
+          unitPrice: unitPrice,
+          quantity: new Decimal(nightCount),
+          lineTotal: totalPrice,
+        },
+      ],
     },
-  ];
+    booking: {
+      id: new types.UUID('estimated-booking'),
+      type: 'booking',
+      attributes: {
+        start: bookingStart,
+        end: bookingEnd,
+      },
+    },
+  };
+};
+
+const estimatedBreakdown = (bookingStart, bookingEnd, unitPrice) => {
+  const canEstimatePrice = bookingStart && bookingEnd && unitPrice;
+  if (!canEstimatePrice) {
+    return null;
+  }
+
+  const tx = estimatedTransaction(bookingStart, bookingEnd, unitPrice);
 
   return (
     <BookingBreakdown
-      transactionState={propTypes.TX_STATE_PREAUTHORIZED}
       className={css.receipt}
-      bookingStart={bookingStart}
-      bookingEnd={bookingEnd}
-      unitPrice={unitPrice}
       userRole="customer"
-      payinTotal={totalPrice}
-      lineItems={lineItems}
+      bookingStart={tx.booking.attributes.start}
+      bookingEnd={tx.booking.attributes.end}
+      transactionState={tx.attributes.state}
+      payinTotal={tx.attributes.payinTotal}
+      lineItems={tx.attributes.lineItems}
     />
   );
 };
@@ -106,7 +133,7 @@ export const BookingDatesFormComponent = props => {
         <h3 className={css.priceBreakdownTitle}>
           <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
         </h3>
-        {breakdown(startDate, endDate, unitPrice)}
+        {estimatedBreakdown(startDate, endDate, unitPrice)}
       </div>
     : null;
 
@@ -177,7 +204,7 @@ BookingDatesFormComponent.propTypes = {
     endDate: instanceOf(Date),
   }).isRequired,
 
-  // from inejctIntl
+  // from injectIntl
   intl: intlShape.isRequired,
 
   // for tests
