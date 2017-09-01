@@ -95,3 +95,9 @@ export const storedData = storageKey => {
   }
   return {};
 };
+
+export const clearData = storageKey => {
+  if (window && window.sessionStorage) {
+    window.sessionStorage.removeItem(storageKey);
+  }
+};
