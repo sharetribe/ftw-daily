@@ -5,6 +5,10 @@
   --logoHeightDesktop: 27px;
 }
 
+.loading {
+  margin: 24px;
+}
+
 /* Dummy Topbar */
 
 .topbar {
@@ -248,6 +252,14 @@
 .orderError {
   /* Font */
   color: var(--failColor);
+}
+
+.speculateError {
+  color: var(--failColor);
+
+  @media (--viewportLarge) {
+    margin: 0 48px;
+  }
 }
 
 .paymentForm {
