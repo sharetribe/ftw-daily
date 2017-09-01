@@ -42,9 +42,11 @@ class TokenInputFieldComponent extends Component {
 
     // Fill initialState with input type specific data
     BANK_ACCOUNT_INPUTS.forEach(inputType => {
-      this.initialState[inputType] = '';
-      this.initialState[`${inputType}Touched`] = false;
-      this.initialState[`${inputType}Error`] = formatFieldMessage(intl, inputType, 'required');
+      this.initialState[inputType] = {
+        value: '',
+        touched: false,
+        error: formatFieldMessage(intl, inputType, 'required'),
+      };
     });
 
     this.state = this.initialState;
@@ -111,7 +113,7 @@ class TokenInputFieldComponent extends Component {
 
     const inputsNeeded = requiredInputs(country);
     const missingValues = inputsNeeded.filter(inputType => !values[inputType]);
-    const invalidValues = inputsNeeded.filter(inputType => !!this.state[`${inputType}Error`]);
+    const invalidValues = inputsNeeded.filter(inputType => !!this.state[inputType].error);
 
     const numbersMissing = missingValues.length > 0;
     const numbersInvalid = invalidValues.lenght > 0;
@@ -147,8 +149,13 @@ class TokenInputFieldComponent extends Component {
 
         // Handle response only if the input values haven't changed
         if (this._isMounted && valuesAreUnchanged) {
-          const errorsCleared = inputsNeeded.map(inputType => ({ [`${inputType}Error`]: null }));
-          this.setState({ ...errorsCleared, stripeError: null });
+          this.setState(prevState => {
+            const errorsClearedFromInputs = inputsNeeded.map(inputType => {
+              const input = prevState[inputType];
+              return { ...input, error: null };
+            });
+            return { ...errorsClearedFromInputs, stripeError: null };
+          });
 
           onChange(token);
         }
@@ -185,15 +192,17 @@ class TokenInputFieldComponent extends Component {
     }
 
     // Save changes to the state
-    this.setState({
-      [inputType]: rawValue,
-      [`${inputType}Error`]: inputError,
-      stripeError: null,
+    this.setState(prevState => {
+      const input = { ...prevState[inputType], value: rawValue, error: inputError };
+      return {
+        [inputType]: input,
+        stripeError: null,
+      };
     });
 
     // Request new bank account token
     const unChangedValues = requiredInputs(country).reduce(
-      (acc, iType) => ({ ...acc, [iType]: this.state[iType] }),
+      (acc, iType) => ({ ...acc, [iType]: this.state[iType].value }),
       {}
     );
     this.requestToken({ ...unChangedValues, [inputType]: value });
@@ -204,7 +213,10 @@ class TokenInputFieldComponent extends Component {
   }
 
   handleInputBlur(inputType) {
-    this.setState({ [`${inputType}Touched`]: true });
+    this.setState(prevState => {
+      const inputData = { ...prevState[inputType], touched: true };
+      return { [inputType]: inputData };
+    });
     window.clearTimeout(this.blurTimeoutId);
     this.blurTimeoutId = window.setTimeout(this.props.input.onBlur, BLUR_TIMEOUT);
   }
@@ -231,8 +243,8 @@ class TokenInputFieldComponent extends Component {
     }
 
     const inputErrors = requiredInputs(country).map(inputType => {
-      return (this.state[`${inputType}Touched`] || formMeta.touched) &&
-        !!this.state[`${inputType}Error`];
+      return (this.state[inputType].touched || formMeta.touched) &&
+        !!this.state[inputType].error;
     });
 
     // Only show Stripe and form errors when the fields don't have
@@ -255,14 +267,14 @@ class TokenInputFieldComponent extends Component {
               key={inputType}
               inputType={inputType}
               formName={formName}
-              value={this.state[inputType]}
+              value={this.state[inputType].value}
               placeholder={formatFieldMessage(intl, inputType, 'placeholder')}
               onChange={e => this.handleInputChange(e, inputType, country, intl)}
               onFocus={this.handleInputFocus}
               onBlur={() => this.handleInputBlur(inputType)}
-              isTouched={this.state[`${inputType}Touched`] || formMeta.touched}
+              isTouched={this.state[inputType].touched || formMeta.touched}
               showStripeError={showStripeError}
-              inputError={this.state[`${inputType}Error`]}
+              inputError={this.state[inputType].error}
             />
           );
         })}
