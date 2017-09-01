@@ -6,9 +6,19 @@ import classNames from 'classnames';
 import { debounce } from 'lodash';
 import config from '../../config';
 
+import {
+  BANK_ACCOUNT_INPUTS,
+  cleanedString,
+  createToken,
+  formatFieldMessage,
+  requiredInputs,
+  mapInputsToStripeAccountKeys,
+  supportedCountries,
+  translateStripeError,
+  validateInput,
+} from './StripeBankAccountTokenInputField.util';
+import StripeBankAccountRequiredInput from './StripeBankAccountRequiredInput';
 import css from './StripeBankAccountTokenInputField.css';
-
-const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
 
 // Since redux-form tracks the onBlur event for marking the field as
 // touched (which triggers possible error validation rendering), only
@@ -18,89 +28,24 @@ const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
 // This prevents showing the validation error when the user selects a
 // value and moves on to another input within this component.
 const BLUR_TIMEOUT = 100;
-
 const DEBOUNCE_WAIT_TIME = 1000;
-
-// Remove all whitespace from the given string
-const cleanedString = str => {
-  return str ? str.replace(/\s/g, '') : '';
-};
-
-/**
- * Create a single-use token from the given bank account data
- *
- * See: https://stripe.com/docs/stripe.js#collecting-bank-account-details
- *
- * @param {Object} data - bank account data sent to Stripe
- *
- * @return {Promise<String>} Promise that resolves with the bank
- * account token or rejects when the token creation fails
- */
-const createToken = data =>
-  new Promise((resolve, reject) => {
-    window.Stripe.bankAccount.createToken(data, (status, response) => {
-      if (response.error) {
-        const e = new Error(response.error.message);
-        e.stripeError = response.error;
-        reject(e);
-      } else {
-        resolve(response.id);
-      }
-    });
-  });
-
-// In addition to the bank account number, Stripe requires a routing
-// number when the currency is not EUR. When it is EUR, the account
-// number is expected to be an IBAN number.
-//
-// See: https://stripe.com/docs/stripe.js#bank-account-createToken
-const requiresRoutingNumber = currency => currency !== 'EUR';
-
-const stripeErrorTranslation = (country, currency, intl, stripeError) => {
-  console.error('Stripe error:', stripeError); // eslint-disable-line no-console
-  const routingNumberRequired = requiresRoutingNumber(currency);
-
-  const translationId = routingNumberRequired
-    ? 'StripeBankAccountTokenInputField.genericStripeError'
-    : 'StripeBankAccountTokenInputField.genericStripeErrorIban';
-
-  return intl.formatMessage(
-    {
-      id: translationId,
-      defaultMessage: stripeError.message,
-    },
-    { country, currency }
-  );
-};
-
-const isRoutingNumberValid = (routingNumber, country) =>
-  window.Stripe.bankAccount.validateRoutingNumber(routingNumber, country);
-
-const isBankAccountNumberValid = (accountNumber, country) =>
-  window.Stripe.bankAccount.validateAccountNumber(accountNumber, country);
 
 class TokenInputFieldComponent extends Component {
   constructor(props) {
     super(props);
-    const { currency, intl } = props;
-    const routingNumberRequired = requiresRoutingNumber(currency);
-    this.routingNumberRequiredMessage = intl.formatMessage({
-      id: 'StripeBankAccountTokenInputField.routingNumberRequired',
-    });
-    this.accountNumberRequiredMessage = intl.formatMessage({
-      id: routingNumberRequired
-        ? 'StripeBankAccountTokenInputField.accountNumberRequired'
-        : 'StripeBankAccountTokenInputField.accountNumberRequiredIban',
-    });
+    const intl = props.intl;
+
+    // Initial state is needed when country (and currency) changes and values need to be cleared.
     this.initialState = {
-      routingNumber: '',
-      routingNumberTouched: false,
-      routingNumberError: this.routingNumberRequiredMessage,
-      accountNumber: '',
-      accountNumberTouched: false,
-      accountNumberError: this.accountNumberRequiredMessage,
       stripeError: null,
     };
+
+    // Fill initialState with input type specific data
+    BANK_ACCOUNT_INPUTS.forEach(inputType => {
+      this.initialState[inputType] = '';
+      this.initialState[`${inputType}Touched`] = false;
+      this.initialState[`${inputType}Error`] = formatFieldMessage(intl, inputType, 'required');
+    });
 
     this.state = this.initialState;
     this.blurTimeoutId = null;
@@ -119,13 +64,11 @@ class TokenInputFieldComponent extends Component {
 
     this.requestToken = debounce(this.requestToken.bind(this), DEBOUNCE_WAIT_TIME);
 
-    this.handleRoutingNumberChange = this.handleRoutingNumberChange.bind(this);
-    this.handleRoutingNumberFocus = this.handleRoutingNumberFocus.bind(this);
-    this.handleRoutingNumberBlur = this.handleRoutingNumberBlur.bind(this);
-    this.handleAccountNumberChange = this.handleAccountNumberChange.bind(this);
-    this.handleAccountNumberFocus = this.handleAccountNumberFocus.bind(this);
-    this.handleAccountNumberBlur = this.handleAccountNumberBlur.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputFocus = this.handleInputFocus.bind(this);
+    this.handleInputBlur = this.handleInputBlur.bind(this);
   }
+
   componentDidMount() {
     if (!window.Stripe) {
       throw new Error('Stripe must be loaded for StripeBankAccountTokenInputField');
@@ -133,16 +76,18 @@ class TokenInputFieldComponent extends Component {
     this.stripe = window.Stripe(config.stripe.publishableKey);
     this._isMounted = true;
   }
+
   componentWillReceiveProps(nextProps) {
     const countryChanged = nextProps.country !== this.props.country;
     const currencyChanged = nextProps.currency !== this.props.currency;
     if (countryChanged || currencyChanged) {
-      // Clear the possible routing and bank account numbers from the
-      // state if the given country or currency changes.
+      // Clear the possible input values from the state
+      // if the given country or currency changes.
       this.setState(this.initialState);
       nextProps.input.onChange('');
     }
   }
+
   componentWillUnmount() {
     this._isMounted = false;
     window.clearTimeout(this.blurTimeoutId);
@@ -155,46 +100,56 @@ class TokenInputFieldComponent extends Component {
    * events for the parent form to handle.
    *
    *
-   * @param {String} accountNumber - bank account number
-   * @param {String} routingNumber - routing number for non-IBAN bank accounts
+   * @param {Object} values - values from different input types
    */
-  requestToken(accountNumber, routingNumber) {
+  requestToken(values) {
     const { country, currency, input: { onChange }, intl } = this.props;
-    const routingNumberRequired = requiresRoutingNumber(currency);
 
     // First we have to clear the current token value so the parent
     // form doesn't submit with an old value.
     onChange('');
 
-    const numbersMissing = !accountNumber || (routingNumberRequired && !routingNumber);
-    const numbersInvalid = this.state.accountNumberError ||
-      (routingNumberRequired && this.state.routingNumberError);
+    const inputsNeeded = requiredInputs(country);
+    const missingValues = inputsNeeded.filter(inputType => !values[inputType]);
+    const invalidValues = inputsNeeded.filter(inputType => !!this.state[`${inputType}Error`]);
+
+    const numbersMissing = missingValues.length > 0;
+    const numbersInvalid = invalidValues.lenght > 0;
 
     if (numbersMissing || numbersInvalid) {
       // Incomplete/invalid info, not requesting token
       return;
     }
 
-    const accountData = {
-      country: this.props.country,
-      currency: this.props.currency,
-
-      // Stripe fails if there are spaces within the number, this is
-      // why we have to clean it up first.
-      account_number: cleanedString(accountNumber),
+    // Gather data to be sent to Stripe (to create bank account)
+    let accountData = {
+      country,
+      currency,
     };
-    if (routingNumberRequired) {
-      accountData.routing_number = cleanedString(routingNumber);
-    }
+
+    // Include input values with correct stripe keys
+    inputsNeeded.forEach(inputType => {
+      // Stripe fails if there are spaces within the number, this is
+      // why we have to clean value up first.
+      const inputValueObj = mapInputsToStripeAccountKeys(
+        inputType,
+        cleanedString(values[inputType])
+      );
+      accountData = { ...accountData, ...inputValueObj };
+    });
+
     createToken(accountData)
       .then(token => {
-        if (this._isMounted && accountNumber === this.state.accountNumber) {
-          // Handle response only if the current number hasn't changed
-          this.setState({
-            routingNumberError: null,
-            accountNumberError: null,
-            stripeError: null,
-          });
+        const changedValues = inputsNeeded.filter(
+          inputType => values[inputType] !== this.state[inputType]
+        );
+        const valuesAreUnchanged = changedValues.length === 0;
+
+        // Handle response only if the input values haven't changed
+        if (this._isMounted && valuesAreUnchanged) {
+          const errorsCleared = inputsNeeded.map(inputType => ({ [`${inputType}Error`]: null }));
+          this.setState({ ...errorsCleared, stripeError: null });
+
           onChange(token);
         }
       })
@@ -204,91 +159,65 @@ class TokenInputFieldComponent extends Component {
         }
         if (this._isMounted) {
           this.setState({
-            stripeError: stripeErrorTranslation(country, currency, intl, e.stripeError),
+            stripeError: translateStripeError(country, intl, e.stripeError),
           });
         }
       });
   }
-  handleRoutingNumberChange(e) {
-    const { country, intl } = this.props;
+
+  handleInputChange(e, inputType, country, intl) {
     const rawValue = e.target.value;
     const value = cleanedString(rawValue);
-    let routingNumberError = null;
+    let inputError = null;
 
     // Validate the changed routing number
     if (!value) {
-      routingNumberError = this.routingNumberRequiredMessage;
-    } else if (!isRoutingNumberValid(value, country)) {
-      routingNumberError = intl.formatMessage(
+      inputError = intl.formatMessage({
+        id: `StripeBankAccountTokenInputField.${inputType}.required`,
+      });
+    } else if (!validateInput(inputType, value, country)) {
+      inputError = intl.formatMessage(
         {
-          id: 'StripeBankAccountTokenInputField.routingNumberInvalid',
+          id: `StripeBankAccountTokenInputField.${inputType}.invalid`,
         },
         { country }
       );
     }
 
+    // Save changes to the state
     this.setState({
-      routingNumber: rawValue,
-      routingNumberError,
+      [inputType]: rawValue,
+      [`${inputType}Error`]: inputError,
       stripeError: null,
     });
-    this.requestToken(this.state.accountNumber, value);
+
+    // Request new bank account token
+    const unChangedValues = requiredInputs(country).reduce(
+      (acc, iType) => ({ ...acc, [iType]: this.state[iType] }),
+      {}
+    );
+    this.requestToken({ ...unChangedValues, [inputType]: value });
   }
-  handleRoutingNumberFocus() {
+
+  handleInputFocus() {
     window.clearTimeout(this.blurTimeoutId);
   }
-  handleRoutingNumberBlur() {
-    this.setState({ routingNumberTouched: true });
+
+  handleInputBlur(inputType) {
+    this.setState({ [`${inputType}Touched`]: true });
     window.clearTimeout(this.blurTimeoutId);
     this.blurTimeoutId = window.setTimeout(this.props.input.onBlur, BLUR_TIMEOUT);
   }
-  handleAccountNumberChange(e) {
-    const { country, intl } = this.props;
-    const rawValue = e.target.value;
-    const value = cleanedString(rawValue);
-    let accountNumberError = null;
 
-    // Validate the changed account number
-    if (!value) {
-      accountNumberError = this.accountNumberRequiredMessage;
-    } else if (!isBankAccountNumberValid(value, country)) {
-      accountNumberError = intl.formatMessage(
-        {
-          id: 'StripeBankAccountTokenInputField.accountNumberInvalid',
-        },
-        { country }
-      );
-    }
-
-    this.setState({
-      accountNumber: rawValue,
-      accountNumberError,
-      stripeError: null,
-    });
-    this.requestToken(value, this.state.routingNumber);
-  }
-  handleAccountNumberFocus() {
-    window.clearTimeout(this.blurTimeoutId);
-  }
-  handleAccountNumberBlur() {
-    this.setState({ accountNumberTouched: true });
-    window.clearTimeout(this.blurTimeoutId);
-    this.blurTimeoutId = window.setTimeout(this.props.input.onBlur, BLUR_TIMEOUT);
-  }
   render() {
     const {
       rootClassName,
       className,
       country,
-      currency,
-      routingNumberId,
-      accountNumberId,
-      input,
+      formName,
       meta: formMeta,
       intl,
     } = this.props;
-
-    const routingNumberRequired = requiresRoutingNumber(currency);
 
     if (!supportedCountries.includes(country)) {
       return (
@@ -301,80 +230,42 @@ class TokenInputFieldComponent extends Component {
       );
     }
 
-    const showRoutingNumberError = routingNumberRequired &&
-      (this.state.routingNumberTouched || formMeta.touched) &&
-      !!this.state.routingNumberError;
-    const showAccountNumberError = (this.state.accountNumberTouched || formMeta.touched) &&
-      !!this.state.accountNumberError;
+    const inputErrors = requiredInputs(country).map(inputType => {
+      return (this.state[`${inputType}Touched`] || formMeta.touched) &&
+        !!this.state[`${inputType}Error`];
+    });
 
     // Only show Stripe and form errors when the fields don't have
     // more specific errors.
-    const showingFieldErrors = showRoutingNumberError || showAccountNumberError;
+    const showingFieldErrors = inputErrors.includes(true);
     const showStripeError = !!(this.state.stripeError && !showingFieldErrors && formMeta.touched);
     const showFormError = !!(formMeta.touched &&
       formMeta.error &&
       !showingFieldErrors &&
       !showStripeError);
 
-    const routingNumberPlaceholder = intl.formatMessage({
-      id: 'StripeBankAccountTokenInputField.routingNumberPlaceholder',
-    });
-    const routingInputClasses = classNames(css.input, {
-      [css.inputSuccess]: !!this.state.routingNumber,
-      [css.inputError]: showRoutingNumberError || showStripeError,
-    });
-    const routingNumberInputProps = {
-      className: routingInputClasses,
-      id: routingNumberId,
-      value: this.state.routingNumber,
-      placeholder: routingNumberPlaceholder,
-      onChange: this.handleRoutingNumberChange,
-      onFocus: this.handleRoutingNumberFocus,
-      onBlur: this.handleRoutingNumberBlur,
-    };
-    const routingNumberError = <p className={css.error}>{this.state.routingNumberError}</p>;
-    const routingNumberField = (
-      <div>
-        <label htmlFor={routingNumberId}>
-          <FormattedMessage id="StripeBankAccountTokenInputField.routingNumberLabel" />
-        </label>
-        <input {...routingNumberInputProps} />
-        {showRoutingNumberError ? routingNumberError : null}
-      </div>
-    );
-
-    const accountNumberPlaceholder = routingNumberRequired
-      ? intl.formatMessage({ id: 'StripeBankAccountTokenInputField.accountNumberPlaceholder' })
-      : intl.formatMessage({ id: 'StripeBankAccountTokenInputField.accountNumberPlaceholderIban' });
-    const accountInputClasses = classNames(css.input, {
-      [css.inputSuccess]: !!this.state.accountNumber,
-      [css.inputError]: showAccountNumberError || showStripeError,
-    });
-    const accountNumberInputProps = {
-      className: accountInputClasses,
-      id: accountNumberId,
-      value: this.state.accountNumber,
-      placeholder: accountNumberPlaceholder,
-      onChange: this.handleAccountNumberChange,
-      onFocus: this.handleAccountNumberFocus,
-      onBlur: this.handleAccountNumberBlur,
-    };
-    const accountNumberLabel = routingNumberRequired
-      ? <label className={css.withTopMargin} htmlFor={accountNumberId}>
-          <FormattedMessage id="StripeBankAccountTokenInputField.accountNumberLabel" />
-        </label>
-      : <label htmlFor={accountNumberId}>
-          <FormattedMessage id="StripeBankAccountTokenInputField.accountNumberLabelIban" />
-        </label>;
-    const accountNumberError = <p className={css.error}>{this.state.accountNumberError}</p>;
+    const inputConfiguration = requiredInputs(country);
 
     return (
       <div className={classNames(rootClassName || css.root, className)}>
-        {routingNumberRequired ? routingNumberField : null}
 
-        {accountNumberLabel}
-        <input {...accountNumberInputProps} />
-        {showAccountNumberError ? accountNumberError : null}
+        {inputConfiguration.map(inputType => {
+          return (
+            <StripeBankAccountRequiredInput
+              key={inputType}
+              inputType={inputType}
+              formName={formName}
+              value={this.state[inputType]}
+              placeholder={formatFieldMessage(intl, inputType, 'placeholder')}
+              onChange={e => this.handleInputChange(e, inputType, country, intl)}
+              onFocus={this.handleInputFocus}
+              onBlur={() => this.handleInputBlur(inputType)}
+              isTouched={this.state[`${inputType}Touched`] || formMeta.touched}
+              showStripeError={showStripeError}
+              inputError={this.state[`${inputType}Error`]}
+            />
+          );
+        })}
 
         {showStripeError ? <p className={css.error}>{this.state.stripeError}</p> : null}
         {showFormError ? <p className={css.error}>{formMeta.error}</p> : null}
@@ -390,12 +281,9 @@ const { string, shape, func, bool } = PropTypes;
 TokenInputFieldComponent.propTypes = {
   rootClassName: string,
   className: string,
-
   country: string.isRequired,
   currency: string.isRequired,
-
-  routingNumberId: string.isRequired,
-  accountNumberId: string.isRequired,
+  formName: string.isRequired,
 
   input: shape({
     onChange: func.isRequired,
