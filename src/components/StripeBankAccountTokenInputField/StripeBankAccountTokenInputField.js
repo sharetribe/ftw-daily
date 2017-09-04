@@ -116,7 +116,7 @@ class TokenInputFieldComponent extends Component {
     const invalidValues = inputsNeeded.filter(inputType => !!this.state[inputType].error);
 
     const numbersMissing = missingValues.length > 0;
-    const numbersInvalid = invalidValues.lenght > 0;
+    const numbersInvalid = invalidValues.length > 0;
 
     if (numbersMissing || numbersInvalid) {
       // Incomplete/invalid info, not requesting token
@@ -143,7 +143,7 @@ class TokenInputFieldComponent extends Component {
     createToken(accountData)
       .then(token => {
         const changedValues = inputsNeeded.filter(
-          inputType => values[inputType] !== this.state[inputType]
+          inputType => values[inputType] !== this.state[inputType].value
         );
         const valuesAreUnchanged = changedValues.length === 0;
 
@@ -182,7 +182,7 @@ class TokenInputFieldComponent extends Component {
       inputError = intl.formatMessage({
         id: `StripeBankAccountTokenInputField.${inputType}.required`,
       });
-    } else if (!validateInput(inputType, value, country)) {
+    } else if (!validateInput(inputType, value, country, window.Stripe)) {
       inputError = intl.formatMessage(
         {
           id: `StripeBankAccountTokenInputField.${inputType}.invalid`,
@@ -242,14 +242,13 @@ class TokenInputFieldComponent extends Component {
       );
     }
 
-    const inputErrors = requiredInputs(country).map(inputType => {
-      return (this.state[inputType].touched || formMeta.touched) &&
-        !!this.state[inputType].error;
+    const hasInputErrors = requiredInputs(country).some(inputType => {
+      return (this.state[inputType].touched || formMeta.touched) && !!this.state[inputType].error;
     });
 
     // Only show Stripe and form errors when the fields don't have
     // more specific errors.
-    const showingFieldErrors = inputErrors.includes(true);
+    const showingFieldErrors = hasInputErrors;
     const showStripeError = !!(this.state.stripeError && !showingFieldErrors && formMeta.touched);
     const showFormError = !!(formMeta.touched &&
       formMeta.error &&

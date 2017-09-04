@@ -23,7 +23,7 @@ const formComponent = country => {
         <Button style={{ marginTop: 24 }} type="submit">Submit</Button>
       </form>
     );
-  }
+  };
   FormComponent.propTypes = formPropTypes;
   return FormComponent;
 };
@@ -40,7 +40,7 @@ export const DE_EUR = {
       console.log('values changed to:', values);
     },
     onSubmit: values => {
-      console.log('values changed to:', values);
+      console.log('values submitted:', values);
     },
   },
   group: 'custom inputs',
@@ -58,7 +58,7 @@ export const US_USD = {
       console.log('values changed to:', values);
     },
     onSubmit: values => {
-      console.log('values changed to:', values);
+      console.log('values submitted:', values);
     },
   },
   group: 'custom inputs',
@@ -76,7 +76,7 @@ export const GB_GBP = {
       console.log('values changed to:', values);
     },
     onSubmit: values => {
-      console.log('values changed to:', values);
+      console.log('values submitted:', values);
     },
   },
   group: 'custom inputs',
@@ -94,7 +94,7 @@ export const AU_AUD = {
       console.log('values changed to:', values);
     },
     onSubmit: values => {
-      console.log('values changed to:', values);
+      console.log('values submitted:', values);
     },
   },
   group: 'custom inputs',

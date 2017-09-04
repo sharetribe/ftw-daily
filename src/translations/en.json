@@ -294,6 +294,7 @@
   "StripeBankAccountTokenInputField.accountNumber.label": "Bank account number",
   "StripeBankAccountTokenInputField.accountNumber.placeholder": "Type in bank account number…",
   "StripeBankAccountTokenInputField.accountNumber.required": "Bank account number is required",
+  "StripeBankAccountTokenInputField.andBeforeLastItemInAList": " and",
   "StripeBankAccountTokenInputField.bsb.inline": "BSB",
   "StripeBankAccountTokenInputField.bsb.invalid": "Invalid {country} BSB",
   "StripeBankAccountTokenInputField.bsb.label": "BSB",
