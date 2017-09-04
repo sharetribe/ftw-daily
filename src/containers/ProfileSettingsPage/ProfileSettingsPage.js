@@ -7,7 +7,7 @@ import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { PageLayout, Topbar } from '../../components';
 
-export const EditProfilePageComponent = props => {
+export const ProfileSettingsPageComponent = props => {
   const {
     authInfoError,
     authInProgress,
@@ -20,14 +20,13 @@ export const EditProfilePageComponent = props => {
     notificationCount,
     onLogout,
     onManageDisableScrolling,
-    params,
   } = props;
 
   return (
     <PageLayout
       authInfoError={authInfoError}
       logoutError={logoutError}
-      title={`Edit profile page with display name: ${params.displayName}`}
+      title="Profile settings"
     >
       <Topbar
         authInProgress={authInProgress}
@@ -44,16 +43,16 @@ export const EditProfilePageComponent = props => {
   );
 };
 
-EditProfilePageComponent.defaultProps = {
+ProfileSettingsPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
   logoutError: null,
   notificationCount: 0,
 };
 
-const { bool, func, instanceOf, number, object, shape, string } = PropTypes;
+const { bool, func, instanceOf, number, object, shape } = PropTypes;
 
-EditProfilePageComponent.propTypes = {
+ProfileSettingsPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
@@ -63,7 +62,6 @@ EditProfilePageComponent.propTypes = {
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
-  params: shape({ displayName: string.isRequired }).isRequired,
 
   // from withRouter
   history: shape({
@@ -99,8 +97,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
 });
 
-const EditProfilePage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
-  EditProfilePageComponent
+const ProfileSettingsPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
+  ProfileSettingsPageComponent
 );
 
-export default EditProfilePage;
+export default ProfileSettingsPage;

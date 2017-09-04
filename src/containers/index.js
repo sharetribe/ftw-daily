@@ -9,7 +9,6 @@ import EditListingLocationForm from './EditListingLocationForm/EditListingLocati
 import EditListingPage from './EditListingPage/EditListingPage';
 import EditListingPhotosForm from './EditListingPhotosForm/EditListingPhotosForm';
 import EditListingPricingForm from './EditListingPricingForm/EditListingPricingForm';
-import EditProfilePage from './EditProfilePage/EditProfilePage';
 import EmailVerificationPage from './EmailVerificationPage/EmailVerificationPage';
 import EmailVerificationForm from './EmailVerificationForm/EmailVerificationForm';
 import InboxPage from './InboxPage/InboxPage';
@@ -26,6 +25,7 @@ import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage
 import PayoutDetailsForm from './PayoutDetailsForm/PayoutDetailsForm';
 import PayoutPreferencesPage from './PayoutPreferencesPage/PayoutPreferencesPage';
 import ProfilePage from './ProfilePage/ProfilePage';
+import ProfileSettingsPage from './ProfileSettingsPage/ProfileSettingsPage';
 import SalePage from './SalePage/SalePage';
 import SearchPage from './SearchPage/SearchPage';
 import SecurityPage from './SecurityPage/SecurityPage';
@@ -46,7 +46,6 @@ export {
   EditListingPage,
   EditListingPhotosForm,
   EditListingPricingForm,
-  EditProfilePage,
   EmailVerificationPage,
   EmailVerificationForm,
   InboxPage,
@@ -63,6 +62,7 @@ export {
   PayoutDetailsForm,
   PayoutPreferencesPage,
   ProfilePage,
+  ProfileSettingsPage,
   SalePage,
   SearchPage,
   SecurityPage,

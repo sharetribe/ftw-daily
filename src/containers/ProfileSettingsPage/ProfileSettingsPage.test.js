@@ -1,13 +1,13 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
-import { EditProfilePageComponent } from './EditProfilePage';
+import { ProfileSettingsPageComponent } from './ProfileSettingsPage';
 
 const noop = () => null;
 
 describe('ContactDetailsPage', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
-      <EditProfilePageComponent
+      <ProfileSettingsPageComponent
         params={{ displayName: 'my-shop' }}
         history={{ push: noop }}
         location={{ search: '' }}

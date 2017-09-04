@@ -67,7 +67,7 @@ describe('Application', () => {
       '/l/new': defaultAuthPath,
       '/l/listing-title-slug/1234/new/description': defaultAuthPath,
       '/l/listing-title-slug/1234/checkout': defaultAuthPath,
-      '/u/1234/edit': defaultAuthPath,
+      '/profile-settings': defaultAuthPath,
       '/inbox': defaultAuthPath,
       '/inbox/orders': defaultAuthPath,
       '/inbox/sales': defaultAuthPath,

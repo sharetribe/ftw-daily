@@ -2,7 +2,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
 <withRouter(PageLayout)
   authInfoError={null}
   logoutError={null}
-  title="Edit profile page with display name: my-shop">
+  title="Profile settings">
   <Topbar
     authInProgress={false}
     currentUser={null}
