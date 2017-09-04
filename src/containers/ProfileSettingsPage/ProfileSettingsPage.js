@@ -30,6 +30,7 @@ export const ProfileSettingsPageComponent = props => {
     >
       <Topbar
         authInProgress={authInProgress}
+        currentPage="ProfileSettingsPage"
         currentUser={currentUser}
         currentUserHasListings={currentUserHasListings}
         history={history}
