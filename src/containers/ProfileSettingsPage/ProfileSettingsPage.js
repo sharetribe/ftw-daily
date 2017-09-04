@@ -20,6 +20,7 @@ export const ProfileSettingsPageComponent = props => {
     notificationCount,
     onLogout,
     onManageDisableScrolling,
+    scrollingDisabled,
   } = props;
 
   return (
@@ -27,6 +28,7 @@ export const ProfileSettingsPageComponent = props => {
       authInfoError={authInfoError}
       logoutError={logoutError}
       title="Profile settings"
+      scrollingDisabled={scrollingDisabled}
     >
       <Topbar
         authInProgress={authInProgress}
@@ -64,6 +66,7 @@ ProfileSettingsPageComponent.propTypes = {
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  scrollingDisabled: bool.isRequired,
 
   // from withRouter
   history: shape({

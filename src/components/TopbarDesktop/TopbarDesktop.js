@@ -70,7 +70,10 @@ const TopbarDesktop = props => {
         <MenuContent className={css.profileMenuContent}>
           <MenuItem key="ProfileSettingsPage">
             <NamedLink
-              className={classNames(css.profileSettingsLink, currentPageClass('ProfileSettingsPage'))}
+              className={classNames(
+                css.profileSettingsLink,
+                currentPageClass('ProfileSettingsPage')
+              )}
               name="ProfileSettingsPage"
             >
               <span className={css.menuItemBorder} />
