@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import * as propTypes from '../../util/propTypes';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { PageLayout, Topbar } from '../../components';
+import { PageLayout, Topbar, UserNav } from '../../components';
 
 export const ProfileSettingsPageComponent = props => {
   const {
@@ -39,6 +39,7 @@ export const ProfileSettingsPageComponent = props => {
         onLogout={onLogout}
         onManageDisableScrolling={onManageDisableScrolling}
       />
+      <UserNav selectedPageName="ProfileSettingsPage" />
     </PageLayout>
   );
 };
