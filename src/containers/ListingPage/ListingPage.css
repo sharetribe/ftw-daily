@@ -90,28 +90,35 @@
 
 .viewPhotos {
   @apply --marketplaceTinyFontStyles;
+  font-weight: var(--fontWeightMedium);
 
   /* Position and dimensions */
   position: absolute;
   bottom: 19px;
   right: 24px;
   margin: 0;
-  padding: 6px 8px 6px 11px;
+  padding: 6px 13px 8px 13px;
 
   /* Colors */
   background-color: var(--matterColorLight);
 
   /* Borders */
-  border-style: solid;
-  border-width: 1px;
-  border-color: var(--matterColorAnti);
-  border-radius: 2px;
+  border: none;
+  border-radius: var(--borderRadius);
 
   cursor: pointer;
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    background-color: var(--marketplaceColor);
+    color: var(--matterColorLight);
+  }
 
   @media (--viewportMedium) {
     margin: 0;
   }
+
+
 }
 
 .carouselModalScrollLayer {
@@ -132,6 +139,10 @@
     padding: 0 60px;
     display: flex;
     position: relative;
+  }
+
+  @media (--viewportLarge) {
+    margin: 0 auto 117px;
   }
 }
 
