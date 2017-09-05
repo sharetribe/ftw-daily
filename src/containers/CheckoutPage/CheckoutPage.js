@@ -29,9 +29,6 @@ export class CheckoutPageComponent extends Component {
   constructor(props) {
     super(props);
 
-    // Store received data
-    // storeData(props.bookingDates, props.listing, STORAGE_KEY);
-
     this.state = {
       pageData: {},
       dataLoaded: false,
@@ -42,10 +39,28 @@ export class CheckoutPageComponent extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    this.loadInitialData();
+  componentWillMount() {
+    if (window) {
+      this.loadInitialData();
+    }
   }
 
+  /**
+   * Load initial data for the page
+   *
+   * Since the data for the checkout is not passed in the URL (there
+   * might be lots of options in the future), we must pass in the data
+   * some other way. Currently the ListingPage sets the initial data
+   * for the CheckoutPage's Redux store.
+   *
+   * For some cases (e.g. a refresh in the CheckoutPage), the Redux
+   * store is empty. To handle that case, we store the received data
+   * to window.sessionStorage and read it from there if no props from
+   * the store exist.
+   *
+   * This function also sets of fetching the speculative transaction
+   * based on this initial data.
+   */
   loadInitialData() {
     const { bookingDates, listing } = this.props;
     const hasDataInProps = !!(bookingDates && listing);
