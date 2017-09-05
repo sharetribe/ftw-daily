@@ -6,11 +6,22 @@ import React, { PropTypes } from 'react';
 import { FormattedMessage, FormattedHTMLMessage, intlShape, injectIntl } from 'react-intl';
 import Decimal from 'decimal.js';
 import classNames from 'classnames';
+import { types } from '../../util/sdkLoader';
 import config from '../../config';
 import { convertMoneyToNumber, formatMoney } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
 
 import css from './BookingBreakdown.css';
+
+const { Money } = types;
+
+// Validate the assumption that the commission exists and the amount
+// is zero or negative.
+const isValidCommission = commissionLineItem => {
+  return commissionLineItem &&
+    commissionLineItem.lineTotal instanceof Money &&
+    commissionLineItem.lineTotal.amount <= 0;
+};
 
 export const BookingBreakdownComponent = props => {
   const {
@@ -51,7 +62,7 @@ export const BookingBreakdownComponent = props => {
   const nightPurchase = transaction.attributes.lineItems.find(
     item => item.code === 'line-item/night'
   );
-  const providerCommission = transaction.attributes.lineItems.find(
+  const providerCommissionLineItem = transaction.attributes.lineItems.find(
     item => item.code === 'line-item/provider-commission'
   );
 
@@ -68,10 +79,28 @@ export const BookingBreakdownComponent = props => {
   let commissionInfo = null;
 
   if (isProvider) {
-    // TODO: Calculate subtotal from provider total and the commission
-    const unitPriceAsNumber = convertMoneyToNumber(nightPurchase.unitPrice);
-    const subTotal = new Decimal(nightCount).times(unitPriceAsNumber).toNumber();
-    const formattedSubTotal = intl.formatNumber(subTotal, currencyConfig);
+    if (!isValidCommission(providerCommissionLineItem)) {
+      // eslint-disable-next-line no-console
+      console.error('invalid commission line item:', providerCommissionLineItem);
+      throw new Error('Commission should be present and the value should be zero or negative');
+    }
+
+    // Since the API doesn't have a concept of a subtotal, we must
+    // calculate it here. The subtotal means the total amount before
+    // commission.
+
+    const payoutTotalAsNumber = convertMoneyToNumber(transaction.attributes.payoutTotal);
+    const commission = providerCommissionLineItem.lineTotal;
+    const commissionAsNumber = convertMoneyToNumber(commission);
+
+    // Since the commission is zero or negative (as validated above),
+    // we must substract the value from the payout (total amount paid
+    // to the provider).
+    const subTotalAsNumber = new Decimal(payoutTotalAsNumber)
+      .minus(new Decimal(commissionAsNumber))
+      .toNumber();
+
+    const formattedSubTotal = intl.formatNumber(subTotalAsNumber, currencyConfig);
 
     subTotalInfo = (
       <div className={css.lineItem}>
@@ -82,7 +111,6 @@ export const BookingBreakdownComponent = props => {
       </div>
     );
 
-    const commission = providerCommission.lineTotal;
     const formattedCommission = commission ? formatMoney(intl, commission) : null;
 
     commissionInfo = (
