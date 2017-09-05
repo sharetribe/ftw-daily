@@ -82,20 +82,6 @@ export const createListing = (id, attributes = {}, includes = {}) => ({
   ...includes,
 });
 
-// Create a user that conforms to the util/propTypes listing schema
-export const createOwnListing = (id, open = true, price = new Money(5500, 'USD')) => ({
-  id: new UUID(id),
-  type: 'listing',
-  attributes: {
-    title: `${id} title`,
-    price,
-    description: `${id} description`,
-    address: `${id} address`,
-    geolocation: new LatLng(40, 60),
-    open,
-  },
-});
-
 export const createTransaction = options => {
   const {
     id,
