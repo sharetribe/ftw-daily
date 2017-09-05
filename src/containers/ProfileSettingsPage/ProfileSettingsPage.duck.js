@@ -71,7 +71,7 @@ export function requestImageUpload(actionPayload) {
     dispatch(uploadImage(actionPayload));
 
     return sdk.images
-      .uploadListingImage({ image: actionPayload.file })
+      .uploadProfileImage({ image: actionPayload.file })
       .then(resp => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } })))
       .catch(e => dispatch(uploadImageError({ id, error: e })));
   };
