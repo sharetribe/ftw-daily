@@ -135,7 +135,6 @@ export const currencyConfig = {
   useGrouping: true,
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-  subUnitDivisor: 100,
 };
 
 const pad = num => {
