@@ -3,7 +3,7 @@ import { FormattedDate, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
-import { ensureListing, ensureTransaction, ensureBooking, ensureUser } from '../../util/data';
+import { ensureListing, ensureTransaction, ensureUser } from '../../util/data';
 import {
   AvatarMedium,
   BookingBreakdown,
@@ -16,28 +16,15 @@ import {
 import css from './SaleDetailsPanel.css';
 
 const breakdown = transaction => {
-  const tx = ensureTransaction(transaction);
-  const booking = ensureBooking(tx.booking);
-  const bookingStart = booking.attributes.start;
-  const bookingEnd = booking.attributes.end;
-  const payinTotal = tx.attributes.payinTotal;
-  const payoutTotal = tx.attributes.payoutTotal;
-  const lineItems = tx.attributes.lineItems;
+  const loaded = transaction && transaction.id && transaction.booking && transaction.booking.id;
 
-  if (!bookingStart || !bookingEnd || !payinTotal || !payoutTotal || !lineItems) {
-    return null;
-  }
-  return (
-    <BookingBreakdown
-      transactionState={tx.attributes.state}
-      bookingStart={bookingStart}
-      bookingEnd={bookingEnd}
-      payinTotal={payinTotal}
-      payoutTotal={payoutTotal}
-      lineItems={lineItems}
-      userRole="provider"
-    />
-  );
+  return loaded
+    ? <BookingBreakdown
+        userRole="provider"
+        transaction={transaction}
+        booking={transaction.booking}
+      />
+    : null;
 };
 
 const saleTitle = (saleState, listingLink, customerName) => {

@@ -1,6 +1,7 @@
 import Decimal from 'decimal.js';
 import { types } from './sdkLoader';
 import { nightsBetween } from '../util/dates';
+import * as propTypes from '../util/propTypes';
 
 const { UUID, LatLng, Money } = types;
 
@@ -96,7 +97,8 @@ export const createOwnListing = (id, open = true, price = new Money(5500, 'USD')
 export const createTransaction = options => {
   const {
     id,
-    state = 'state/preauthorized',
+    state = propTypes.TX_STATE_PREAUTHORIZED,
+    lastTransition = propTypes.TX_TRANSITION_PREAUTHORIZE,
     total = new Money(1000, 'USD'),
     commission = new Money(100, 'USD'),
     booking = null,
@@ -113,6 +115,7 @@ export const createTransaction = options => {
       createdAt: new Date(Date.UTC(2017, 4, 1)),
       lastTransitionedAt,
       state,
+      lastTransition,
       payinTotal: total,
       payoutTotal: new Money(total.amount - commission.amount, total.currency),
       lineItems: [

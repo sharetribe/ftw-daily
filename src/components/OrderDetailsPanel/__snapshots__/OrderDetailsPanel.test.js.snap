@@ -89,42 +89,120 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
             values={Object {}} />
         </h3>
         <BookingBreakdown
-          bookingEnd={2017-06-13T00:00:00.000Z}
-          bookingStart={2017-06-10T00:00:00.000Z}
-          lineItems={
-            Array [
-              Object {
-                "code": "line-item/night",
-                "lineTotal": Money {
+          booking={
+            Object {
+              "attributes": Object {
+                "end": 2017-06-13T00:00:00.000Z,
+                "start": 2017-06-10T00:00:00.000Z,
+              },
+              "id": UUID {
+                "uuid": "booking1",
+              },
+              "type": "booking",
+            }
+          }
+          transaction={
+            Object {
+              "attributes": Object {
+                "createdAt": 2017-05-01T00:00:00.000Z,
+                "lastTransition": "transition/preauthorize",
+                "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
+                "lineItems": Array [
+                  Object {
+                    "code": "line-item/night",
+                    "lineTotal": Money {
+                      "amount": 16500,
+                      "currency": "USD",
+                    },
+                    "quantity": "3",
+                    "unitPrice": Money {
+                      "amount": 5500,
+                      "currency": "USD",
+                    },
+                  },
+                  Object {
+                    "code": "line-item/provider-commission",
+                    "lineTotal": Money {
+                      "amount": -100,
+                      "currency": "USD",
+                    },
+                    "unitPrice": Money {
+                      "amount": -100,
+                      "currency": "USD",
+                    },
+                  },
+                ],
+                "payinTotal": Money {
                   "amount": 16500,
                   "currency": "USD",
                 },
-                "quantity": "3",
-                "unitPrice": Money {
-                  "amount": 5500,
+                "payoutTotal": Money {
+                  "amount": 16400,
                   "currency": "USD",
                 },
+                "state": "state/preauthorized",
               },
-              Object {
-                "code": "line-item/provider-commission",
-                "lineTotal": Money {
-                  "amount": -100,
-                  "currency": "USD",
+              "booking": Object {
+                "attributes": Object {
+                  "end": 2017-06-13T00:00:00.000Z,
+                  "start": 2017-06-10T00:00:00.000Z,
                 },
-                "unitPrice": Money {
-                  "amount": -100,
-                  "currency": "USD",
+                "id": UUID {
+                  "uuid": "booking1",
                 },
+                "type": "booking",
               },
-            ]
-          }
-          payinTotal={
-            Money {
-              "amount": 16500,
-              "currency": "USD",
+              "customer": Object {
+                "attributes": Object {
+                  "profile": Object {
+                    "abbreviatedName": "customer abbreviated name",
+                    "displayName": "customer display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "customer",
+                },
+                "type": "user",
+              },
+              "id": UUID {
+                "uuid": "order-tx",
+              },
+              "listing": Object {
+                "attributes": Object {
+                  "address": "listing1 address",
+                  "description": "listing1 description",
+                  "geolocation": LatLng {
+                    "lat": 40,
+                    "lng": 60,
+                  },
+                  "open": true,
+                  "price": Money {
+                    "amount": 5500,
+                    "currency": "USD",
+                  },
+                  "title": "listing1 title",
+                },
+                "author": null,
+                "id": UUID {
+                  "uuid": "listing1",
+                },
+                "type": "listing",
+              },
+              "provider": Object {
+                "attributes": Object {
+                  "profile": Object {
+                    "abbreviatedName": "provider abbreviated name",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
+              "type": "transaction",
             }
           }
-          transactionState="state/preauthorized"
           userRole="customer" />
       </div>
       <div>
@@ -186,42 +264,120 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
             values={Object {}} />
         </h3>
         <BookingBreakdown
-          bookingEnd={2017-06-13T00:00:00.000Z}
-          bookingStart={2017-06-10T00:00:00.000Z}
-          lineItems={
-            Array [
-              Object {
-                "code": "line-item/night",
-                "lineTotal": Money {
+          booking={
+            Object {
+              "attributes": Object {
+                "end": 2017-06-13T00:00:00.000Z,
+                "start": 2017-06-10T00:00:00.000Z,
+              },
+              "id": UUID {
+                "uuid": "booking1",
+              },
+              "type": "booking",
+            }
+          }
+          transaction={
+            Object {
+              "attributes": Object {
+                "createdAt": 2017-05-01T00:00:00.000Z,
+                "lastTransition": "transition/preauthorize",
+                "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
+                "lineItems": Array [
+                  Object {
+                    "code": "line-item/night",
+                    "lineTotal": Money {
+                      "amount": 16500,
+                      "currency": "USD",
+                    },
+                    "quantity": "3",
+                    "unitPrice": Money {
+                      "amount": 5500,
+                      "currency": "USD",
+                    },
+                  },
+                  Object {
+                    "code": "line-item/provider-commission",
+                    "lineTotal": Money {
+                      "amount": -100,
+                      "currency": "USD",
+                    },
+                    "unitPrice": Money {
+                      "amount": -100,
+                      "currency": "USD",
+                    },
+                  },
+                ],
+                "payinTotal": Money {
                   "amount": 16500,
                   "currency": "USD",
                 },
-                "quantity": "3",
-                "unitPrice": Money {
-                  "amount": 5500,
+                "payoutTotal": Money {
+                  "amount": 16400,
                   "currency": "USD",
                 },
+                "state": "state/preauthorized",
               },
-              Object {
-                "code": "line-item/provider-commission",
-                "lineTotal": Money {
-                  "amount": -100,
-                  "currency": "USD",
+              "booking": Object {
+                "attributes": Object {
+                  "end": 2017-06-13T00:00:00.000Z,
+                  "start": 2017-06-10T00:00:00.000Z,
                 },
-                "unitPrice": Money {
-                  "amount": -100,
-                  "currency": "USD",
+                "id": UUID {
+                  "uuid": "booking1",
                 },
+                "type": "booking",
               },
-            ]
-          }
-          payinTotal={
-            Money {
-              "amount": 16500,
-              "currency": "USD",
+              "customer": Object {
+                "attributes": Object {
+                  "profile": Object {
+                    "abbreviatedName": "customer abbreviated name",
+                    "displayName": "customer display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "customer",
+                },
+                "type": "user",
+              },
+              "id": UUID {
+                "uuid": "order-tx",
+              },
+              "listing": Object {
+                "attributes": Object {
+                  "address": "listing1 address",
+                  "description": "listing1 description",
+                  "geolocation": LatLng {
+                    "lat": 40,
+                    "lng": 60,
+                  },
+                  "open": true,
+                  "price": Money {
+                    "amount": 5500,
+                    "currency": "USD",
+                  },
+                  "title": "listing1 title",
+                },
+                "author": null,
+                "id": UUID {
+                  "uuid": "listing1",
+                },
+                "type": "listing",
+              },
+              "provider": Object {
+                "attributes": Object {
+                  "profile": Object {
+                    "abbreviatedName": "provider abbreviated name",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
+              "type": "transaction",
             }
           }
-          transactionState="state/preauthorized"
           userRole="customer" />
       </div>
     </div>

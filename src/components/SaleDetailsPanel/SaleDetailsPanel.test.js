@@ -60,6 +60,6 @@ describe('SaleDetailsPanel', () => {
     const breakdownProps = panel.find(BookingBreakdown).props();
 
     // Total price for the provider should be transaction total minus the commission.
-    expect(breakdownProps.payoutTotal).toEqual(new Money(15500, 'USD'));
+    expect(breakdownProps.transaction.attributes.payoutTotal).toEqual(new Money(15500, 'USD'));
   });
 });

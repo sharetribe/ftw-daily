@@ -42,6 +42,6 @@ describe('OrderDetailsPanel', () => {
     });
     const panel = shallow(<OrderDetailsPanel transaction={tx} />);
     const breakdownProps = panel.find(BookingBreakdown).props();
-    expect(breakdownProps.payinTotal).toEqual(new Money(16500, 'USD'));
+    expect(breakdownProps.transaction.attributes.payinTotal).toEqual(new Money(16500, 'USD'));
   });
 });
