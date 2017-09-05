@@ -125,7 +125,7 @@ export const initiateOrder = params =>
  * Initiate the speculative transaction with the given booking details
  *
  * The API allows us to do speculative transaction initiation and
- * transitions. This way we can make create a transaction and get the
+ * transitions. This way we can create a test transaction and get the
  * actual pricing information as if the transaction had been started,
  * without affecting the actual data.
  *
