@@ -65,6 +65,15 @@
   @media (--viewportMedium) {
     background-size: 20px auto;
   }
+
+  @media (--viewportLarge) {
+    opacity: 0.5;
+    transition: var(--transitionStyleButton);
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 
 .prev {
