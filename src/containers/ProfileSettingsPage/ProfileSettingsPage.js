@@ -5,7 +5,23 @@ import { withRouter } from 'react-router-dom';
 import * as propTypes from '../../util/propTypes';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
+import { requestImageUpload } from './ProfileSettingsPage.duck';
 import { PageLayout, Topbar, UserNav } from '../../components';
+
+const ACCEPT_IMAGES = 'image/*';
+
+const onImageUploadHandler = (event, fn) => {
+  const file = event.target.files[0];
+  if (file) {
+    fn({ id: `${file.name}_${Date.now()}`, file })
+      .then(response => {
+        console.log('Response:', response);
+      })
+      .catch(error => {
+        console.log('Error:', error);
+      });
+  }
+}
 
 export const ProfileSettingsPageComponent = props => {
   const {
@@ -18,6 +34,7 @@ export const ProfileSettingsPageComponent = props => {
     location,
     logoutError,
     notificationCount,
+    onImageUpload,
     onLogout,
     onManageDisableScrolling,
     scrollingDisabled,
@@ -43,6 +60,16 @@ export const ProfileSettingsPageComponent = props => {
         onManageDisableScrolling={onManageDisableScrolling}
       />
       <UserNav selectedPageName="ProfileSettingsPage" />
+      <label htmlFor="EditListingPhotosForm.AddImages">Add profile image</label>
+      <input
+        id="EditListingPhotosForm.AddImages"
+        accept={ACCEPT_IMAGES}
+        name="addImage"
+        onChange={(e) => onImageUploadHandler(e, onImageUpload)}
+        type="file"
+        disabled={false}
+
+      />
     </PageLayout>
   );
 };
@@ -64,6 +91,7 @@ ProfileSettingsPageComponent.propTypes = {
   isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
   notificationCount: number,
+  onImageUpload: func.isRequired,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   scrollingDisabled: bool.isRequired,
@@ -97,6 +125,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+  onImageUpload: data => dispatch(requestImageUpload(data)),
   onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
