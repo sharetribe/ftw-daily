@@ -28,7 +28,7 @@ const estimatedTotalPrice = (unitPrice, nightCount) => {
 // When we cannot speculatively initiate a transaction (i.e. logged
 // out), we must estimate the booking breakdown. This function creates
 // an estimated transaction object for that use case.
-const estimatedTransaction = (bookingStart, bookingEnd, unitPrice) => {
+const estimatedNightlyTransaction = (bookingStart, bookingEnd, unitPrice) => {
   const now = new Date();
   const nightCount = nightsBetween(bookingStart, bookingEnd);
   const totalPrice = estimatedTotalPrice(unitPrice, nightCount);
@@ -69,7 +69,7 @@ const estimatedBreakdown = (bookingStart, bookingEnd, unitPrice) => {
     return null;
   }
 
-  const tx = estimatedTransaction(bookingStart, bookingEnd, unitPrice);
+  const tx = estimatedNightlyTransaction(bookingStart, bookingEnd, unitPrice);
 
   return (
     <BookingBreakdown
