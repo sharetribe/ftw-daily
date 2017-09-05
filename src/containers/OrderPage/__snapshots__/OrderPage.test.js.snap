@@ -124,7 +124,6 @@ exports[`OrderPage matches snapshot 1`] = `
             },
             "title": "listing1 title",
           },
-          "author": null,
           "id": UUID {
             "uuid": "listing1",
           },

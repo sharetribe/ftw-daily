@@ -203,7 +203,6 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
                 },
                 "title": "listing1 title",
               },
-              "author": null,
               "id": UUID {
                 "uuid": "listing1",
               },
@@ -337,7 +336,6 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
                   },
                   "title": "listing1 title",
                 },
-                "author": null,
                 "id": UUID {
                   "uuid": "listing1",
                 },

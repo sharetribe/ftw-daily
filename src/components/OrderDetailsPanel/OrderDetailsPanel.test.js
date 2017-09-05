@@ -13,11 +13,10 @@ describe('OrderDetailsPanel', () => {
       id: 'order-tx',
       state: 'state/preauthorized',
       total: new Money(16500, 'USD'),
-      booking: createBooking(
-        'booking1',
-        new Date(Date.UTC(2017, 5, 10)),
-        new Date(Date.UTC(2017, 5, 13))
-      ),
+      booking: createBooking('booking1', {
+        start: new Date(Date.UTC(2017, 5, 10)),
+        end: new Date(Date.UTC(2017, 5, 13)),
+      }),
       listing: createListing('listing1'),
       provider: createUser('provider'),
       customer: createUser('customer'),
@@ -31,11 +30,10 @@ describe('OrderDetailsPanel', () => {
       id: 'order-tx',
       state: 'state/preauthorized',
       total: new Money(16500, 'USD'),
-      booking: createBooking(
-        'booking1',
-        new Date(Date.UTC(2017, 5, 10)),
-        new Date(Date.UTC(2017, 5, 13))
-      ),
+      booking: createBooking('booking1', {
+        start: new Date(Date.UTC(2017, 5, 10)),
+        end: new Date(Date.UTC(2017, 5, 13)),
+      }),
       listing: createListing('listing1'),
       provider: createUser('provider'),
       customer: createUser('customer'),

@@ -12,7 +12,7 @@ const noop = () => null;
 describe('ListingPage', () => {
   it('matches snapshot', () => {
     const currentUser = createCurrentUser('user-2');
-    const listing1 = createListing('listing1', createUser('user-1'));
+    const listing1 = createListing('listing1', {}, { author: createUser('user-1') });
     const getListing = () => listing1;
     const props = {
       flattenedRoutes: [],

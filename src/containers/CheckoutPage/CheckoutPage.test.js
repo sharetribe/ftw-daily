@@ -8,7 +8,7 @@ const noop = () => null;
 
 describe('CheckoutPage', () => {
   it('matches snapshot', () => {
-    const listing = createListing('listing1', createUser('author'));
+    const listing = createListing('listing1', {}, { author: createUser('author') });
     const props = {
       bookingDates: {
         bookingStart: new Date(Date.UTC(2017, 3, 14)),
@@ -30,8 +30,13 @@ describe('CheckoutPage', () => {
 
   describe('Duck', () => {
     it('ActionCreator: setInitialValues(initialValues)', () => {
-      const author = createUser('author1');
-      const listing = { ...createListing('00000000-0000-0000-0000-000000000000'), author };
+      const listing = createListing(
+        '00000000-0000-0000-0000-000000000000',
+        {},
+        {
+          author: createUser('author1'),
+        }
+      );
       const bookingDates = {
         bookingStart: new Date(Date.UTC(2017, 3, 14)),
         bookingEnd: new Date(Date.UTC(2017, 3, 16)),
@@ -59,8 +64,13 @@ describe('CheckoutPage', () => {
       });
 
       it('should handle SET_INITAL_VALUES', () => {
-        const author = createUser('author1');
-        const listing = { ...createListing('00000000-0000-0000-0000-000000000000'), author };
+        const listing = createListing(
+          '00000000-0000-0000-0000-000000000000',
+          {},
+          {
+            author: createUser('author1'),
+          }
+        );
         const bookingDates = {
           bookingStart: new Date(Date.UTC(2017, 3, 14)),
           bookingEnd: new Date(Date.UTC(2017, 3, 16)),
