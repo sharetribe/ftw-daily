@@ -24,6 +24,10 @@
   background-color: var(--marketplaceColor);
   color: var(--matterColorLight);
 
+  box-shadow: var(--boxShadowPopupLight);
+  transition: var(--transitionStyleButton);
+
+
   &:hover {
     cursor: pointer;
     box-shadow: var(--boxShadowPopup);
