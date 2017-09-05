@@ -18,6 +18,7 @@
  * specific place and avoid duplicate errros.
  */
 import { PropTypes } from 'react';
+import Decimal from 'decimal.js';
 import { types as sdkTypes } from './sdkLoader';
 
 const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
@@ -143,7 +144,18 @@ export const TX_STATES = [
 ];
 
 export const TX_TRANSITION_PREAUTHORIZE = 'transition/preauthorize';
+export const TX_TRANSITION_ACCEPT = 'transition/accept';
+export const TX_TRANSITION_REJECT = 'transition/reject';
 export const TX_TRANSITION_AUTO_REJECT = 'transition/auto-reject';
+export const TX_TRANSITION_MARK_DELIVERED = 'transition/mark-delivered';
+
+export const TX_TRANSITIONS = [
+  TX_TRANSITION_PREAUTHORIZE,
+  TX_TRANSITION_ACCEPT,
+  TX_TRANSITION_REJECT,
+  TX_TRANSITION_AUTO_REJECT,
+  TX_TRANSITION_MARK_DELIVERED,
+];
 
 // Denormalised transaction object
 export const transaction = shape({
@@ -152,10 +164,18 @@ export const transaction = shape({
   attributes: shape({
     createdAt: instanceOf(Date).isRequired,
     lastTransitionedAt: instanceOf(Date).isRequired,
-    lastTransition: string,
+    lastTransition: oneOf(TX_TRANSITIONS).isRequired,
     state: oneOf(TX_STATES).isRequired,
     payinTotal: money.isRequired,
     payoutTotal: money.isRequired,
+    lineItems: arrayOf(
+      shape({
+        code: string.isRequired,
+        quantity: instanceOf(Decimal),
+        unitPrice: money,
+        lineTotal: money,
+      })
+    ).isRequired,
   }),
   booking,
   listing,
