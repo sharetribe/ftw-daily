@@ -44,6 +44,8 @@
   color: var(--matterColorNegative);
   background-color: var(--matterColor);
   z-index: 1; /* bring on top of mobile image */
+
+  border-radius: 2px 2px 0 0;
 }
 
 .ownListingText {
@@ -57,6 +59,14 @@
   margin: 0;
   padding: 16px 24px 13px 12px;
   color: var(--matterColorNegative);
+
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    color: var(--matterColorLight);
+    text-decoration: none;
+  }
+
   @media (--viewportMedium) {
     margin: 0;
   }
