@@ -70,6 +70,7 @@ export const createListing = (id, author = null, price = new Money(5500, 'USD'))
   type: 'listing',
   attributes: {
     title: `${id} title`,
+    open: true,
     price,
     description: `${id} description`,
     address: `${id} address`,

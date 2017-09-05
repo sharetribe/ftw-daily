@@ -3,16 +3,11 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
-import Decimal from 'decimal.js';
 import classNames from 'classnames';
-import config from '../../config';
-import { types } from '../../util/sdkLoader';
 import { pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
-import { ensureListing, ensureUser } from '../../util/data';
+import { ensureListing, ensureUser, ensureTransaction, ensureBooking } from '../../util/data';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
-import { nightsBetween } from '../../util/dates';
-import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import {
   AvatarMedium,
   BookingBreakdown,
@@ -22,63 +17,75 @@ import {
   ResponsiveImage,
 } from '../../components';
 import { StripePaymentForm } from '../../containers';
-import { initiateOrder, setInitialValues } from './CheckoutPage.duck';
+import { initiateOrder, setInitialValues, speculateTransaction } from './CheckoutPage.duck';
 
-import { storeData, storedData } from './CheckoutPageSessionHelpers';
+import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import LogoIcon from './LogoIcon';
 import css from './CheckoutPage.css';
 
 const STORAGE_KEY = 'CheckoutPage';
 
-// TODO: This is a temporary function to calculate the booking
-// price. This should be removed when the API supports dry-runs and we
-// can take the total price from the transaction itself.
-const estimatedTotalPrice = (startDate, endDate, unitPrice) => {
-  const numericPrice = convertMoneyToNumber(unitPrice);
-  const nightCount = nightsBetween(startDate, endDate);
-  const numericTotalPrice = new Decimal(numericPrice).times(nightCount).toNumber();
-  return new types.Money(
-    convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
-    unitPrice.currency
-  );
-};
-
-const breakdown = (bookingStart, bookingEnd, unitPrice) => {
-  if (!bookingStart || !bookingEnd || !unitPrice) {
-    return null;
-  }
-  const totalPrice = estimatedTotalPrice(bookingStart, bookingEnd, unitPrice);
-  const nightCount = nightsBetween(bookingStart, bookingEnd);
-
-  return (
-    <BookingBreakdown
-      className={css.bookingBreakdown}
-      bookingStart={bookingStart}
-      bookingEnd={bookingEnd}
-      userRole="customer"
-      lineItems={[
-        {
-          code: 'line-item/night',
-          quantity: new Decimal(nightCount),
-          unitPrice: unitPrice,
-          lineTotal: totalPrice,
-        },
-      ]}
-      payinTotal={totalPrice}
-    />
-  );
-};
-
 export class CheckoutPageComponent extends Component {
   constructor(props) {
     super(props);
-    const { bookingDates, listing } = props;
 
-    // Store received data
-    storeData(bookingDates, listing, STORAGE_KEY);
+    this.state = {
+      pageData: {},
+      dataLoaded: false,
+      submitting: false,
+    };
 
-    this.state = { submitting: false };
+    this.loadInitialData = this.loadInitialData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    if (window) {
+      this.loadInitialData();
+    }
+  }
+
+  /**
+   * Load initial data for the page
+   *
+   * Since the data for the checkout is not passed in the URL (there
+   * might be lots of options in the future), we must pass in the data
+   * some other way. Currently the ListingPage sets the initial data
+   * for the CheckoutPage's Redux store.
+   *
+   * For some cases (e.g. a refresh in the CheckoutPage), the Redux
+   * store is empty. To handle that case, we store the received data
+   * to window.sessionStorage and read it from there if no props from
+   * the store exist.
+   *
+   * This function also sets of fetching the speculative transaction
+   * based on this initial data.
+   */
+  loadInitialData() {
+    const { bookingDates, listing } = this.props;
+    const hasDataInProps = !!(bookingDates && listing);
+    const pageData = hasDataInProps ? { bookingDates, listing } : storedData(STORAGE_KEY);
+
+    if (hasDataInProps) {
+      storeData(bookingDates, listing, STORAGE_KEY);
+    }
+
+    const hasData = pageData &&
+      pageData.listing &&
+      pageData.listing.id &&
+      pageData.bookingDates &&
+      pageData.bookingDates.bookingStart &&
+      pageData.bookingDates.bookingEnd;
+
+    if (hasData) {
+      this.props.fetchSpeculatedTransaction(
+        pageData.listing.id,
+        pageData.bookingDates.bookingStart,
+        pageData.bookingDates.bookingEnd
+      );
+    }
+
+    this.setState({ pageData: pageData || {}, dataLoaded: true });
   }
 
   handleSubmit(cardToken) {
@@ -86,11 +93,14 @@ export class CheckoutPageComponent extends Component {
       return;
     }
     this.setState({ submitting: true });
-    const { bookingDates, flattenedRoutes, history, sendOrderRequest, listing } = this.props;
-    // Get page data from passed-in props or from storage
-    const pageData = bookingDates && listing ? { bookingDates, listing } : storedData(STORAGE_KEY);
-    const { bookingStart, bookingEnd } = pageData.bookingDates || {};
-    const requestParams = { listingId: pageData.listing.id, cardToken, bookingStart, bookingEnd };
+
+    const { flattenedRoutes, history, sendOrderRequest, speculatedTransaction } = this.props;
+    const requestParams = {
+      listingId: this.state.pageData.listing.id,
+      cardToken,
+      bookingStart: speculatedTransaction.booking.attributes.start,
+      bookingEnd: speculatedTransaction.booking.attributes.end,
+    };
 
     sendOrderRequest(requestParams)
       .then(orderId => {
@@ -98,7 +108,7 @@ export class CheckoutPageComponent extends Component {
         const orderDetailsPath = pathByRouteName('OrderDetailsPage', flattenedRoutes, {
           id: orderId.uuid,
         });
-        window.sessionStorage.removeItem(STORAGE_KEY);
+        clearData(STORAGE_KEY);
         history.push(orderDetailsPath);
       })
       .catch(() => {
@@ -110,55 +120,65 @@ export class CheckoutPageComponent extends Component {
     const {
       authInfoError,
       logoutError,
-      bookingDates,
+      speculateTransactionInProgress,
+      speculateTransactionError,
+      speculatedTransaction,
       initiateOrderError,
       intl,
-      listing,
       params,
       currentUser,
     } = this.props;
 
-    // Get page data from passed-in props or from storage
-    const pageData = bookingDates && listing ? { bookingDates, listing } : storedData(STORAGE_KEY);
-    const { bookingStart, bookingEnd } = pageData.bookingDates || {};
-    const currentListing = ensureListing(pageData.listing);
+    const isLoading = !this.state.dataLoaded || speculateTransactionInProgress;
+
+    const { listing, bookingDates } = this.state.pageData;
+    const currentTransaction = ensureTransaction(speculatedTransaction);
+    const currentBooking = ensureBooking(currentTransaction.booking);
+    const currentListing = ensureListing(listing);
     const currentAuthor = ensureUser(currentListing.author);
-    const authorDisplayName = currentAuthor.attributes.profile.displayName;
 
-    const isOwnListing = currentListing.id &&
-      currentUser &&
+    const isOwnListing = currentUser &&
+      currentUser.id &&
+      currentAuthor &&
       currentAuthor.id &&
-      currentListing.author.id.uuid === currentUser.id.uuid;
+      currentAuthor.id.uuid === currentUser.id.uuid;
+    const listingIsOpen = currentListing.id && currentListing.attributes.open;
 
-    const hasBookingInfo = bookingStart && bookingEnd;
+    const hasListingAndAuthor = !!(currentListing.id && currentAuthor.id);
+    const hasBookingDates = !!(bookingDates &&
+      bookingDates.bookingStart &&
+      bookingDates.bookingEnd);
+    const hasRequiredData = hasListingAndAuthor && hasBookingDates;
+    const canShowPage = hasRequiredData && listingIsOpen && !isOwnListing;
+    const shouldRedirect = !isLoading && !canShowPage;
 
     // Redirect back to ListingPage if data is missing.
     // Redirection must happen before any data format error is thrown (e.g. wrong currency)
-    if (!currentListing.id || isOwnListing || !hasBookingInfo) {
+    if (shouldRedirect) {
       // eslint-disable-next-line no-console
-      console.error(
-        'Listing, user, or dates invalid for checkout, redirecting back to listing page.',
-        { currentListing, isOwnListing, hasBookingInfo, bookingStart, bookingEnd }
-      );
+      console.error('Missing or invalid data for checkout, redirecting back to listing page.', {
+        transaction: currentTransaction,
+        bookingDates,
+        listing,
+      });
       return <NamedRedirect name="ListingPage" params={params} />;
     }
 
-    // Estimate total price. NOTE: this will change when we can do a
-    // dry-run to the API and get a proper breakdown of the price.
-    const unitPrice = currentListing.attributes.price;
-
-    if (!unitPrice) {
-      throw new Error('Listing has no price');
-    }
-    if (unitPrice.currency !== config.currency) {
-      throw new Error(
-        `Listing currency different from marketplace currency: ${unitPrice.currency}`
-      );
-    }
+    const breakdown = currentTransaction.id
+      ? <BookingBreakdown
+          className={css.bookingBreakdown}
+          userRole="customer"
+          transactionState={currentTransaction.attributes.state}
+          bookingStart={currentBooking.attributes.start}
+          bookingEnd={currentBooking.attributes.end}
+          lineItems={currentTransaction.attributes.lineItems}
+          payinTotal={currentTransaction.attributes.payinTotal}
+        />
+      : null;
 
     // Allow showing page when currentUser is still being downloaded,
     // but show payment form only when user info is loaded.
-    const showPaymentForm = currentUser && !isOwnListing;
+    const showPaymentForm = !!(currentUser && hasRequiredData);
 
     const listingTitle = currentListing.attributes.title;
     const title = intl.formatMessage({ id: 'CheckoutPage.title' }, { listingTitle });
@@ -167,28 +187,49 @@ export class CheckoutPageComponent extends Component {
       ? currentListing.images[0]
       : null;
 
-    const errorMessage = initiateOrderError
+    const initiateOrderErrorMessage = initiateOrderError
       ? <p className={css.orderError}>
           <FormattedMessage id="CheckoutPage.initiateOrderError" />
         </p>
       : null;
+    const speculateTransactionErrorMessage = speculateTransactionError
+      ? <p className={css.speculateError}>
+          <FormattedMessage id="CheckoutPage.speculateTransactionError" />
+        </p>
+      : null;
+
+    const topbar = (
+      <div className={css.topbar}>
+        <NamedLink className={css.home} name="LandingPage">
+          <LogoIcon
+            className={css.logoMobile}
+            title={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })}
+          />
+          <LogoIcon
+            className={css.logoDesktop}
+            alt={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })}
+            isMobile={false}
+          />
+        </NamedLink>
+      </div>
+    );
+
+    const pageLayoutProps = { authInfoError, logoutError, title };
+
+    if (isLoading) {
+      return (
+        <PageLayout {...pageLayoutProps}>
+          {topbar}
+          <div className={css.loading}>
+            <FormattedMessage id="CheckoutPage.loadingData" />
+          </div>
+        </PageLayout>
+      );
+    }
 
     return (
-      <PageLayout authInfoError={authInfoError} logoutError={logoutError} title={title}>
-        <div className={css.topbar}>
-          <NamedLink className={css.home} name="LandingPage">
-            <LogoIcon
-              className={css.logoMobile}
-              title={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })}
-            />
-            <LogoIcon
-              className={css.logoDesktop}
-              alt={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })}
-              isMobile={false}
-            />
-          </NamedLink>
-        </div>
-
+      <PageLayout {...pageLayoutProps}>
+        {topbar}
         <div className={css.contentContainer}>
           <div className={css.aspectWrapper}>
             <ResponsiveImage
@@ -212,7 +253,7 @@ export class CheckoutPageComponent extends Component {
                 <span className={css.authorName}>
                   <FormattedMessage
                     id="ListingPage.hostedBy"
-                    values={{ name: authorDisplayName }}
+                    values={{ name: currentAuthor.attributes.profile.displayName }}
                   />
                 </span>
               </div>
@@ -222,14 +263,15 @@ export class CheckoutPageComponent extends Component {
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="CheckoutPage.priceBreakdownTitle" />
               </h3>
-              {breakdown(bookingStart, bookingEnd, unitPrice)}
+              {speculateTransactionErrorMessage}
+              {breakdown}
             </div>
 
             <section className={css.paymentContainer}>
               <h3 className={css.paymentTitle}>
                 <FormattedMessage id="CheckoutPage.paymentTitle" />
               </h3>
-              {errorMessage}
+              {initiateOrderErrorMessage}
               {showPaymentForm
                 ? <StripePaymentForm
                     className={css.paymentForm}
@@ -261,13 +303,17 @@ export class CheckoutPageComponent extends Component {
             <div className={css.detailsHeadings}>
               <h2 className={css.detailsTitle}>{listingTitle}</h2>
               <p className={css.detailsSubtitle}>
-                <FormattedMessage id="CheckoutPage.hostedBy" values={{ name: authorDisplayName }} />
+                <FormattedMessage
+                  id="CheckoutPage.hostedBy"
+                  values={{ name: currentAuthor.attributes.profile.displayName }}
+                />
               </p>
             </div>
             <h3 className={css.bookingBreakdownTitle}>
               <FormattedMessage id="CheckoutPage.priceBreakdownTitle" />
             </h3>
-            {breakdown(bookingStart, bookingEnd, unitPrice)}
+            {speculateTransactionErrorMessage}
+            {breakdown}
           </div>
 
         </div>
@@ -278,23 +324,29 @@ export class CheckoutPageComponent extends Component {
 
 CheckoutPageComponent.defaultProps = {
   authInfoError: null,
-  bookingDates: null,
   initiateOrderError: null,
   listing: null,
+  bookingDates: null,
+  speculateTransactionError: null,
+  speculatedTransaction: null,
   logoutError: null,
   currentUser: null,
 };
 
-const { arrayOf, func, instanceOf, shape, string } = PropTypes;
+const { arrayOf, func, instanceOf, shape, string, bool } = PropTypes;
 
 CheckoutPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
+  listing: propTypes.listing,
   bookingDates: shape({
     bookingStart: instanceOf(Date).isRequired,
     bookingEnd: instanceOf(Date).isRequired,
   }),
+  fetchSpeculatedTransaction: func.isRequired,
+  speculateTransactionInProgress: bool.isRequired,
+  speculateTransactionError: instanceOf(Error),
+  speculatedTransaction: propTypes.transaction,
   initiateOrderError: instanceOf(Error),
-  listing: propTypes.listing,
   logoutError: instanceOf(Error),
   currentUser: propTypes.currentUser,
   params: shape({
@@ -316,14 +368,33 @@ CheckoutPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { initiateOrderError, listing, bookingDates } = state.CheckoutPage;
+  const {
+    listing,
+    bookingDates,
+    speculateTransactionInProgress,
+    speculateTransactionError,
+    speculatedTransaction,
+    initiateOrderError,
+  } = state.CheckoutPage;
   const { currentUser } = state.user;
   const { authInfoError, logoutError } = state.Auth;
-  return { authInfoError, initiateOrderError, listing, logoutError, bookingDates, currentUser };
+  return {
+    currentUser,
+    authInfoError,
+    logoutError,
+    bookingDates,
+    speculateTransactionInProgress,
+    speculateTransactionError,
+    speculatedTransaction,
+    listing,
+    initiateOrderError,
+  };
 };
 
 const mapDispatchToProps = dispatch => ({
   sendOrderRequest: params => dispatch(initiateOrder(params)),
+  fetchSpeculatedTransaction: (listingId, bookingStart, bookingEnd) =>
+    dispatch(speculateTransaction(listingId, bookingStart, bookingEnd)),
 });
 
 const CheckoutPage = compose(

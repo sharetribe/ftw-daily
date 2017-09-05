@@ -10,14 +10,12 @@ import { types } from '../../util/sdkLoader';
 import { required, bookingDatesRequired } from '../../util/validators';
 import { nightsBetween } from '../../util/dates';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
+import * as propTypes from '../../util/propTypes';
 import config from '../../config';
 import { PrimaryButton, BookingBreakdown, DateRangeInputField } from '../../components';
 
 import css from './BookingDatesForm.css';
 
-// TODO: This is a temporary function to calculate the booking
-// price. This should be removed when the API supports dry-runs and we
-// can take the total price from the transaction itself.
 const estimatedTotalPrice = (unitPrice, nightCount) => {
   const numericPrice = convertMoneyToNumber(unitPrice);
   const numericTotalPrice = new Decimal(numericPrice).times(nightCount).toNumber();
@@ -27,30 +25,61 @@ const estimatedTotalPrice = (unitPrice, nightCount) => {
   );
 };
 
-const breakdown = (bookingStart, bookingEnd, unitPrice) => {
-  if (!bookingStart || !bookingEnd || !unitPrice) {
-    return null;
-  }
+// When we cannot speculatively initiate a transaction (i.e. logged
+// out), we must estimate the booking breakdown. This function creates
+// an estimated transaction object for that use case.
+const estimatedNightlyTransaction = (bookingStart, bookingEnd, unitPrice) => {
+  const now = new Date();
   const nightCount = nightsBetween(bookingStart, bookingEnd);
   const totalPrice = estimatedTotalPrice(unitPrice, nightCount);
-  const lineItems = [
-    {
-      code: 'line-item/night',
-      unitPrice: unitPrice,
-      quantity: new Decimal(nightCount),
-      lineTotal: totalPrice,
+
+  return {
+    id: new types.UUID('estimated-transaction'),
+    type: 'transaction',
+    attributes: {
+      createdAt: now,
+      lastTransitionedAt: now,
+      lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+      state: propTypes.TX_STATE_PREAUTHORIZED,
+      payinTotal: totalPrice,
+      payoutTotal: totalPrice,
+      lineItems: [
+        {
+          code: 'line-item/night',
+          unitPrice: unitPrice,
+          quantity: new Decimal(nightCount),
+          lineTotal: totalPrice,
+        },
+      ],
     },
-  ];
+    booking: {
+      id: new types.UUID('estimated-booking'),
+      type: 'booking',
+      attributes: {
+        start: bookingStart,
+        end: bookingEnd,
+      },
+    },
+  };
+};
+
+const estimatedBreakdown = (bookingStart, bookingEnd, unitPrice) => {
+  const canEstimatePrice = bookingStart && bookingEnd && unitPrice;
+  if (!canEstimatePrice) {
+    return null;
+  }
+
+  const tx = estimatedNightlyTransaction(bookingStart, bookingEnd, unitPrice);
 
   return (
     <BookingBreakdown
       className={css.receipt}
-      bookingStart={bookingStart}
-      bookingEnd={bookingEnd}
-      unitPrice={unitPrice}
       userRole="customer"
-      payinTotal={totalPrice}
-      lineItems={lineItems}
+      bookingStart={tx.booking.attributes.start}
+      bookingEnd={tx.booking.attributes.end}
+      transactionState={tx.attributes.state}
+      payinTotal={tx.attributes.payinTotal}
+      lineItems={tx.attributes.lineItems}
     />
   );
 };
@@ -104,20 +133,24 @@ export const BookingDatesFormComponent = props => {
         <h3 className={css.priceBreakdownTitle}>
           <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
         </h3>
-        {breakdown(startDate, endDate, unitPrice)}
+        {estimatedBreakdown(startDate, endDate, unitPrice)}
       </div>
     : null;
 
   const submitDisabled = submitting || invalid || !hasBookingInfo;
 
-  // Multilocale support can be achieved with formatting like
-  // moment().format('LL');  => e.g. 'June 29, 2017' in en-US, '29. kesäkuuta 2017' in fi-FI.
-  // https://momentjs.com/
-  const dateFormatString = 'ddd, MMMM D';
+  const dateFormatOptions = {
+    weekday: 'short',
+    month: 'long',
+    day: 'numeric',
+  };
 
-  const startDatePlaceholderText = startDatePlaceholder || moment().format(dateFormatString);
-  const endDatePlaceholderText = endDatePlaceholder ||
-    moment().add(1, 'days').format(dateFormatString);
+  const now = moment();
+  const today = now.startOf('day').toDate();
+  const tomorrow = now.startOf('day').add(1, 'days').toDate();
+  const startDatePlaceholderText = startDatePlaceholder ||
+    intl.formatDate(today, dateFormatOptions);
+  const endDatePlaceholderText = endDatePlaceholder || intl.formatDate(tomorrow, dateFormatOptions);
 
   return (
     <form className={className} onSubmit={handleSubmit}>
@@ -171,7 +204,7 @@ BookingDatesFormComponent.propTypes = {
     endDate: instanceOf(Date),
   }).isRequired,
 
-  // from inejctIntl
+  // from injectIntl
   intl: intlShape.isRequired,
 
   // for tests

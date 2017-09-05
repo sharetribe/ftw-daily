@@ -17,9 +17,9 @@ const listingPageReducer = (state = initialState, action = {}) => {
   const { type, payload } = action;
   switch (type) {
     case SHOW_LISTING_REQUEST:
-      return { id: payload.id, showListingError: null };
+      return { ...state, id: payload.id, showListingError: null };
     case SHOW_LISTING_ERROR:
-      return { showListingError: payload };
+      return { ...state, showListingError: payload };
     default:
       return state;
   }

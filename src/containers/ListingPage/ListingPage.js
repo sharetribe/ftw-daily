@@ -62,20 +62,28 @@ export class ListingPageComponent extends Component {
       imageCarouselOpen: false,
     };
 
-    this.onSubmit = this.onSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onSubmit(values) {
+  handleSubmit(values) {
     const { flattenedRoutes, history, getListing, params, useInitialValues } = this.props;
     const listing = getListing(new UUID(params.id));
 
     this.setState({ isBookingModalOpenOnMobile: false });
 
+    const { bookingDates } = values;
+
+    const initialValues = {
+      listing,
+      bookingDates: {
+        bookingStart: bookingDates.startDate,
+        bookingEnd: bookingDates.endDate,
+      },
+    };
+
     // Customize checkout page state with current listing and selected bookingDates
     const { setInitialValues } = findRouteByRouteName('CheckoutPage', flattenedRoutes);
-    const { startDate: bookingStart, endDate: bookingEnd } = values.bookingDates;
-    const bookingDates = { bookingStart, bookingEnd };
-    useInitialValues(setInitialValues, { listing, bookingDates, initiateOrderError: null });
+    useInitialValues(setInitialValues, initialValues);
 
     // Redirect to CheckoutPage
     history.push(
@@ -182,10 +190,11 @@ export class ListingPageComponent extends Component {
     );
 
     const handleBookingSubmit = values => {
-      if (!isOwnListing) {
-        this.onSubmit(values);
-      } else {
+      const isClosed = !currentListing.attributes.open;
+      if (isOwnListing || isClosed) {
         window.scrollTo(0, 0);
+      } else {
+        this.handleSubmit(values);
       }
     };
 
@@ -205,10 +214,11 @@ export class ListingPageComponent extends Component {
     const listingClasses = classNames(css.pageRoot);
 
     const handleBookButtonClick = () => {
-      if (!isOwnListing) {
-        this.setState({ isBookingModalOpenOnMobile: true });
-      } else {
+      const isClosed = !currentListing.attributes.open;
+      if (isOwnListing || isClosed) {
         window.scrollTo(0, 0);
+      } else {
+        this.setState({ isBookingModalOpenOnMobile: true });
       }
     };
 
@@ -416,8 +426,7 @@ const mapDispatchToProps = dispatch => ({
   onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
-  useInitialValues: (setInitialValues, { listing, bookingDates, initiateOrderError }) =>
-    dispatch(setInitialValues({ listing, bookingDates, initiateOrderError })),
+  useInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
 });
 
 const ListingPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(

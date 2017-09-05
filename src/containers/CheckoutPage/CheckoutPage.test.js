@@ -21,6 +21,8 @@ describe('CheckoutPage', () => {
       currentUser: createCurrentUser('current-user'),
       params: { id: 'listing1', slug: 'listing1' },
       sendOrderRequest: noop,
+      fetchSpeculatedTransaction: noop,
+      speculateTransactionInProgress: false,
     };
     const tree = renderShallow(<CheckoutPageComponent {...props} />);
     expect(tree).toMatchSnapshot();
@@ -43,12 +45,16 @@ describe('CheckoutPage', () => {
     });
 
     describe('Reducer', () => {
+      const initialValues = {
+        initiateOrderError: null,
+        listing: null,
+        bookingDates: null,
+        speculateTransactionError: null,
+        speculateTransactionInProgress: false,
+        speculatedTransaction: null,
+      };
+
       it('should return the initial state', () => {
-        const initialValues = {
-          initiateOrderError: null,
-          listing: null,
-          bookingDates: null,
-        };
         expect(checkoutPageReducer(undefined, {})).toEqual(initialValues);
       });
 
@@ -60,7 +66,8 @@ describe('CheckoutPage', () => {
           bookingEnd: new Date(Date.UTC(2017, 3, 16)),
         };
         const payload = { listing, bookingDates };
-        expect(checkoutPageReducer({}, { type: SET_INITAL_VALUES, payload })).toEqual(payload);
+        const expected = { ...initialValues, ...payload };
+        expect(checkoutPageReducer({}, { type: SET_INITAL_VALUES, payload })).toEqual(expected);
       });
     });
   });

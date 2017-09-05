@@ -164,7 +164,7 @@ ManageListingsPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   isAuthenticated: bool.isRequired,
-  listings: arrayOf(propTypes.ownListing),
+  listings: arrayOf(propTypes.listing),
   logoutError: instanceOf(Error),
   notificationCount: number,
   onCloseListing: func.isRequired,
