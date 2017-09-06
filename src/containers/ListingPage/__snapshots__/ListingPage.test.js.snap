@@ -204,6 +204,7 @@ exports[`ListingPage matches snapshot 1`] = `
           </div>
         </div>
         <BookingDatesForm
+          isOwnListing={false}
           onSubmit={[Function]}
           price={
             Money {

@@ -370,6 +370,7 @@ export class ListingPageComponent extends Component {
                 className={css.bookingForm}
                 onSubmit={handleBookingSubmit}
                 price={price}
+                isOwnListing={isOwnListing}
               />
             </ModalInMobile>
             <div className={css.openBookingForm}>

@@ -22,6 +22,7 @@
   "BookingDatesForm.bookingStartTitle": "Start date",
   "BookingDatesForm.listingCurrencyInvalid": "Oops, the currency of the listing doesn't match the currency of the marketplace.",
   "BookingDatesForm.listingPriceMissing": "Oops, this listing has no price!",
+  "BookingDatesForm.ownListing": "You won't be able to book your own listing.",
   "BookingDatesForm.placeholder": "mm/dd/yyyy",
   "BookingDatesForm.priceBreakdownTitle": "Booking breakdown",
   "BookingDatesForm.requestToBook": "Request to book",

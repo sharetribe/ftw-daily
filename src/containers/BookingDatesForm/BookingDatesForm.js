@@ -97,6 +97,7 @@ export const BookingDatesFormComponent = props => {
     intl,
     startDatePlaceholder,
     endDatePlaceholder,
+    isOwnListing,
   } = props;
 
   const { startDate, endDate } = bookingDates;
@@ -172,7 +173,11 @@ export const BookingDatesFormComponent = props => {
       />
       {bookingInfo}
       <p className={css.smallPrint}>
-        <FormattedMessage id="BookingDatesForm.youWontBeChargedInfo" />
+        <FormattedMessage
+          id={
+            isOwnListing ? 'BookingDatesForm.ownListing' : 'BookingDatesForm.youWontBeChargedInfo'
+          }
+        />
       </p>
       <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
         <FormattedMessage id="BookingDatesForm.requestToBook" />
@@ -185,11 +190,12 @@ BookingDatesFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
   price: null,
+  isOwnListing: false,
   startDatePlaceholder: null,
   endDatePlaceholder: null,
 };
 
-const { instanceOf, shape, string } = PropTypes;
+const { instanceOf, shape, string, bool } = PropTypes;
 
 BookingDatesFormComponent.propTypes = {
   ...formPropTypes,
@@ -197,6 +203,7 @@ BookingDatesFormComponent.propTypes = {
   rootClassName: string,
   className: string,
   price: instanceOf(types.Money),
+  isOwnListing: bool,
 
   // from formValueSelector
   bookingDates: shape({
