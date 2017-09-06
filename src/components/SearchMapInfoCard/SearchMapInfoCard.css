@@ -126,10 +126,10 @@
   border-bottom-left-radius: inherit;
   cursor: pointer;
   opacity: 0.5;
+  transition: var(--transitionStyleButton);
 
   &:hover {
     opacity: 1;
-    transition: var(--transitionStyleButton);
   }
 }
 
@@ -144,10 +144,10 @@
   cursor: pointer;
 
   opacity: 0.5;
+  transition: var(--transitionStyleButton);
 
   &:hover {
     opacity: 1;
-    transition: var(--transitionStyleButton);
   }
 }
 
