@@ -4,11 +4,9 @@
  */
 import React, { PropTypes } from 'react';
 import { FormattedMessage, FormattedHTMLMessage, intlShape, injectIntl } from 'react-intl';
-import Decimal from 'decimal.js';
 import classNames from 'classnames';
 import { types } from '../../util/sdkLoader';
-import config from '../../config';
-import { convertMoneyToNumber, formatMoney } from '../../util/currency';
+import { formatMoney } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
 
 import css from './BookingBreakdown.css';
@@ -71,7 +69,6 @@ export const BookingBreakdownComponent = props => {
     <FormattedHTMLMessage id="BookingBreakdown.nightCount" values={{ count: nightCount }} />
   );
 
-  const currencyConfig = config.currencyConfig;
   const formattedUnitPrice = formatMoney(intl, nightPurchase.unitPrice);
 
   // If commission is passed it will be shown as a fee already reduces from the total price
@@ -85,23 +82,12 @@ export const BookingBreakdownComponent = props => {
       throw new Error('Commission should be present and the value should be zero or negative');
     }
 
-    // Since the API doesn't have a concept of a subtotal, we must
-    // calculate it here. The subtotal means the total amount before
-    // commission.
-
-    const payoutTotalAsNumber = convertMoneyToNumber(transaction.attributes.payoutTotal);
-    const commission = providerCommissionLineItem.lineTotal;
-    const commissionAsNumber = convertMoneyToNumber(commission);
-
-    // Since the commission is zero or negative (as validated above),
-    // we must substract the value from the payout (total amount paid
-    // to the provider).
-    const subTotalAsNumber = new Decimal(payoutTotalAsNumber)
-      .minus(new Decimal(commissionAsNumber))
-      .toNumber();
-
-    const formattedSubTotal = intl.formatNumber(subTotalAsNumber, currencyConfig);
-
+    // The total sum that the customer pays is the payinTotal. We use
+    // this amount as the subtotal information for the provider
+    // breakdown.
+    //
+    // NOTE: this might break if the API hides the payinTotal from the provider
+    const formattedSubTotal = formatMoney(intl, transaction.attributes.payinTotal);
     subTotalInfo = (
       <div className={css.lineItem}>
         <span className={css.itemLabel}>
@@ -111,6 +97,7 @@ export const BookingBreakdownComponent = props => {
       </div>
     );
 
+    const commission = providerCommissionLineItem.lineTotal;
     const formattedCommission = commission ? formatMoney(intl, commission) : null;
 
     commissionInfo = (
