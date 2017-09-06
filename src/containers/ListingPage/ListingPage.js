@@ -84,6 +84,14 @@ const ActionBar = props => {
   }
 };
 
+const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
+
+ActionBar.propTypes = {
+  isOwnListing: bool.isRequired,
+  isClosed: bool.isRequired,
+  editParams: object.isRequired,
+}
+
 // TODO: price unit (per x), custom fields, contact, reviews
 // N.B. All the presentational content needs to be extracted to their own components
 export class ListingPageComponent extends Component {
@@ -391,8 +399,6 @@ ListingPageComponent.defaultProps = {
   showListingError: null,
   tab: 'listing',
 };
-
-const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
 
 ListingPageComponent.propTypes = {
   // from withRouter
