@@ -43,6 +43,17 @@ exports[`ListingPage matches snapshot 1`] = `
     className="">
     <div>
       <div>
+        <ActionBar
+          editParams={
+            Object {
+              "id": "listing1",
+              "slug": "listing1-title",
+              "tab": "description",
+              "type": "edit",
+            }
+          }
+          isClosed={false}
+          isOwnListing={false} />
         <ResponsiveImage
           alt="listing1 title"
           className={null}
