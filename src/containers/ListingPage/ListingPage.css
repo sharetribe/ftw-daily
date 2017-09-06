@@ -510,3 +510,10 @@
 .bookButton {
   @apply --marketplaceButtonStylesPrimary;
 }
+
+.closedListingButton {
+  border-left: 1px solid var(--matterColorNegative);
+  width: 100%;
+  padding: 15px 24px 15px 24px;
+  text-align: center;
+}

@@ -194,7 +194,7 @@ export class ListingPageComponent extends Component {
       : null;
 
     const authorAvailable = currentListing && currentListing.author;
-    const userAndListingAuthorAvailable = currentUser && authorAvailable;
+    const userAndListingAuthorAvailable = !!(currentUser && authorAvailable);
     const isOwnListing = userAndListingAuthorAvailable &&
       currentListing.author.id.uuid === currentUser.id.uuid;
 
@@ -392,9 +392,13 @@ export class ListingPageComponent extends Component {
                 </div>
               </div>
 
-              <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
-                {bookBtnMessage}
-              </Button>
+              {currentListing.attributes.open
+                ? <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
+                    {bookBtnMessage}
+                  </Button>
+                : <div className={css.closedListingButton}>
+                    <FormattedMessage id="ListingPage.closedListingButtonText" />
+                  </div>}
             </div>
           </div>
         </div>
