@@ -50,6 +50,40 @@ const priceData = (price, intl) => {
   return {};
 };
 
+const ActionBar = props => {
+  const {
+    isOwnListing,
+    isClosed,
+    editParams,
+  } = props;
+
+  if (isOwnListing) {
+    return (
+      <div className={css.actionBar}>
+        <p className={css.ownListingText}>
+          <FormattedMessage
+            id={isClosed ? 'ListingPage.ownClosedListing' : 'ListingPage.ownListing'}
+          />
+        </p>
+        <NamedLink className={css.editListingLink} name="EditListingPage" params={editParams}>
+          <EditIcon className={css.editIcon} />
+          <FormattedMessage id="ListingPage.editListing" />
+        </NamedLink>
+      </div>
+    );
+  } else if (isClosed) {
+    return (
+      <div className={css.actionBar}>
+        <p className={css.closedListingText}>
+          <FormattedMessage id="ListingPage.closedListing" />
+        </p>
+      </div>
+    );
+  } else {
+    return null;
+  }
+};
+
 // TODO: price unit (per x), custom fields, contact, reviews
 // N.B. All the presentational content needs to be extracted to their own components
 export class ListingPageComponent extends Component {
@@ -199,17 +233,6 @@ export class ListingPageComponent extends Component {
     };
 
     const editParams = { ...params, type: 'edit', tab: 'description' };
-    const ownListingActionBar = isOwnListing
-      ? <div className={css.ownListingActionBar}>
-          <p className={css.ownListingText}>
-            <FormattedMessage id="ListingPage.ownListing" />
-          </p>
-          <NamedLink className={css.editListingLink} name="EditListingPage" params={editParams}>
-            <EditIcon className={css.editIcon} />
-            <FormattedMessage id="ListingPage.editListing" />
-          </NamedLink>
-        </div>
-      : null;
 
     const listingClasses = classNames(css.pageRoot);
 
@@ -243,7 +266,13 @@ export class ListingPageComponent extends Component {
         <div className={listingClasses}>
           <div className={css.threeToTwoWrapper}>
             <div className={css.aspectWrapper}>
-              {ownListingActionBar}
+              {currentListing.id
+                ? <ActionBar
+                    isOwnListing={isOwnListing}
+                    isClosed={!currentListing.attributes.open}
+                    editParams={editParams}
+                  />
+                : null}
               <ResponsiveImage
                 rootClassName={css.rootForImage}
                 alt={title}
