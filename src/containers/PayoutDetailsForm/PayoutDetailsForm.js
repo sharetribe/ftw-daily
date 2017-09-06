@@ -18,12 +18,23 @@ import css from './PayoutDetailsForm.css';
 
 const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
 
-const requiresAddress = countryCode => {
+export const stripeCountryConfigs = countryCode => {
   const country = config.stripe.supportedCountries.find(c => c.code === countryCode);
+
   if (!country) {
     throw new Error(`Country code not found in Stripe config ${countryCode}`);
   }
+  return country;
+};
+
+const requiresAddress = countryCode => {
+  const country = stripeCountryConfigs(countryCode);
   return country.payoutAddressRequired;
+};
+
+const countryCurrency = countryCode => {
+  const country = stripeCountryConfigs(countryCode);
+  return country.currency;
 };
 
 const PayoutDetailsFormComponent = props => {
@@ -151,10 +162,9 @@ const PayoutDetailsFormComponent = props => {
         </h3>
         <StripeBankAccountTokenInputField
           name="bankAccountToken"
-          routingNumberId={`${form}.bankAccountToken.routingNumber`}
-          accountNumberId={`${form}.bankAccountToken.accountNumber`}
+          formName={form}
           country={country}
-          currency={config.currency}
+          currency={countryCurrency(country)}
           validate={bankAccountRequired}
         />
       </div>
