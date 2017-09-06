@@ -143,6 +143,7 @@
   "ListingCard.unsupportedPrice": "({currency})",
   "ListingCard.unsupportedPriceTitle": "Unsupported currency ({currency})",
   "ListingPage.bookingHelp": "Start by choosing your dates.",
+  "ListingPage.bookingHelpClosedListing": "Sorry, this listing has been closed.",
   "ListingPage.bookingTitle": "Book {title}",
   "ListingPage.closedListing": "This listing has been closed and can't be booked.",
   "ListingPage.ctaButtonMessage": "Request to book",

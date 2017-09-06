@@ -222,13 +222,20 @@ export class ListingPageComponent extends Component {
         </div>
       : null;
 
+    const showClosedListingHelpText = currentListing.id && !currentListing.attributes.open;
     const bookingHeading = (
       <div className={css.bookingHeading}>
         <h2 className={css.bookingTitle}>
           <FormattedMessage id="ListingPage.bookingTitle" values={{ title }} />
         </h2>
         <div className={css.bookingHelp}>
-          <FormattedMessage id="ListingPage.bookingHelp" />
+          <FormattedMessage
+            id={
+              showClosedListingHelpText
+                ? 'ListingPage.bookingHelpClosedListing'
+                : 'ListingPage.bookingHelp'
+            }
+          />
         </div>
       </div>
     );
@@ -366,12 +373,14 @@ export class ListingPageComponent extends Component {
               </div>
 
               {bookingHeading}
-              <BookingDatesForm
-                className={css.bookingForm}
-                onSubmit={handleBookingSubmit}
-                price={price}
-                isOwnListing={isOwnListing}
-              />
+              {currentListing.attributes.open
+                ? <BookingDatesForm
+                    className={css.bookingForm}
+                    onSubmit={handleBookingSubmit}
+                    price={price}
+                    isOwnListing={isOwnListing}
+                  />
+                : null}
             </ModalInMobile>
             <div className={css.openBookingForm}>
               <div className={css.priceContainer}>
