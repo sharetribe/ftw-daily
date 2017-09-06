@@ -87,10 +87,11 @@
 
 .closeLight {
   color: var(--matterColorAnti);
+  transition: var(--transitionStyleButton);
 
   &:enabled:hover,
   &:enabled:active {
-    color: var(--matterColor);
+    color: var(--matterColorLight);
   }
 }
 
