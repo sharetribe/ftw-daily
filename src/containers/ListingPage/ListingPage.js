@@ -50,7 +50,7 @@ const priceData = (price, intl) => {
   return {};
 };
 
-const ActionBar = props => {
+export const ActionBar = props => {
   const {
     isOwnListing,
     isClosed,
@@ -90,7 +90,9 @@ ActionBar.propTypes = {
   isOwnListing: bool.isRequired,
   isClosed: bool.isRequired,
   editParams: object.isRequired,
-}
+};
+
+ActionBar.displayName = 'ActionBar';
 
 // TODO: price unit (per x), custom fields, contact, reviews
 // N.B. All the presentational content needs to be extracted to their own components

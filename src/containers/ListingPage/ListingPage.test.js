@@ -1,8 +1,10 @@
 import React from 'react';
+import { shallow } from 'enzyme';
+import { FormattedMessage } from 'react-intl';
 import { types } from '../../util/sdkLoader';
 import { createUser, createCurrentUser, createListing, fakeIntl } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
-import { ListingPageComponent } from './ListingPage';
+import { ListingPageComponent, ActionBar } from './ListingPage';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { showListingRequest, showListingError, showListing } from './ListingPage.duck';
 
@@ -80,6 +82,35 @@ describe('ListingPage', () => {
           ]);
         }
       );
+    });
+  });
+
+  describe('ActionBar', () => {
+    it('shows users own listing status', () => {
+      const actionBar = shallow(<ActionBar isOwnListing isClosed={false} editParams={{}} />);
+      const formattedMessages = actionBar.find(FormattedMessage);
+      expect(formattedMessages.length).toEqual(2);
+      expect(formattedMessages.at(0).props().id).toEqual('ListingPage.ownListing');
+      expect(formattedMessages.at(1).props().id).toEqual('ListingPage.editListing');
+    });
+    it('shows users own closed listing status', () => {
+      const actionBar = shallow(<ActionBar isOwnListing isClosed editParams={{}} />);
+      const formattedMessages = actionBar.find(FormattedMessage);
+      expect(formattedMessages.length).toEqual(2);
+      expect(formattedMessages.at(0).props().id).toEqual('ListingPage.ownClosedListing');
+      expect(formattedMessages.at(1).props().id).toEqual('ListingPage.editListing');
+    });
+    it('shows closed listing status', () => {
+      const actionBar = shallow(<ActionBar isOwnListing={false} isClosed editParams={{}} />);
+      const formattedMessages = actionBar.find(FormattedMessage);
+      expect(formattedMessages.length).toEqual(1);
+      expect(formattedMessages.at(0).props().id).toEqual('ListingPage.closedListing');
+    });
+    it("is missing if listing is not closed or user's own", () => {
+      const actionBar = shallow(
+        <ActionBar isOwnListing={false} isClosed={false} editParams={{}} />
+      );
+      expect(actionBar.equals(null)).toEqual(true);
     });
   });
 });
