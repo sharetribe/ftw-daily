@@ -143,10 +143,24 @@ export const TX_STATES = [
   TX_STATE_DELIVERED,
 ];
 
+// When the customer requests a booking, a transaction is created. The
+// initial state is preauthorized that is transitioned with the
+// initial preauthorize transition. The customer can see this
+// transaction in the OrderPage that is linked from the InboxPage. The
+// provider sees the transaction in the SalePage.
 export const TX_TRANSITION_PREAUTHORIZE = 'transition/preauthorize';
+
+// When the provider accepts or rejects a transaction from the
+// SalePage, it is transitioned with the accept or reject transition.
 export const TX_TRANSITION_ACCEPT = 'transition/accept';
 export const TX_TRANSITION_REJECT = 'transition/reject';
+
+// If the backend automatically rejects the transaction, it is
+// transitioned with the auto-reject transition.
 export const TX_TRANSITION_AUTO_REJECT = 'transition/auto-reject';
+
+// If the is marked as delivered in the backend, it is transitioned
+// with the mark-delivered transition.
 export const TX_TRANSITION_MARK_DELIVERED = 'transition/mark-delivered';
 
 export const TX_TRANSITIONS = [
