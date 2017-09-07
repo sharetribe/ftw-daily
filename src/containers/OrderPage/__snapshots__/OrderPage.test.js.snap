@@ -47,6 +47,7 @@ exports[`OrderPage matches snapshot 1`] = `
       Object {
         "attributes": Object {
           "createdAt": 2017-05-01T00:00:00.000Z,
+          "lastTransition": "transition/preauthorize",
           "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
           "lineItems": Array [
             Object {
@@ -123,7 +124,6 @@ exports[`OrderPage matches snapshot 1`] = `
             },
             "title": "listing1 title",
           },
-          "author": null,
           "id": UUID {
             "uuid": "listing1",
           },

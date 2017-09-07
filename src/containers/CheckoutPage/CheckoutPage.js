@@ -164,15 +164,14 @@ export class CheckoutPageComponent extends Component {
       return <NamedRedirect name="ListingPage" params={params} />;
     }
 
-    const breakdown = currentTransaction.id
+    // Show breakdown only when transaction and booking are loaded
+    // (i.e. have an id)
+    const breakdown = currentTransaction.id && currentBooking.id
       ? <BookingBreakdown
           className={css.bookingBreakdown}
           userRole="customer"
-          transactionState={currentTransaction.attributes.state}
-          bookingStart={currentBooking.attributes.start}
-          bookingEnd={currentBooking.attributes.end}
-          lineItems={currentTransaction.attributes.lineItems}
-          payinTotal={currentTransaction.attributes.payinTotal}
+          transaction={currentTransaction}
+          booking={currentBooking}
         />
       : null;
 

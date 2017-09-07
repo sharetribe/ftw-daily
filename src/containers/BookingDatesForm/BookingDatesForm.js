@@ -75,11 +75,8 @@ const estimatedBreakdown = (bookingStart, bookingEnd, unitPrice) => {
     <BookingBreakdown
       className={css.receipt}
       userRole="customer"
-      bookingStart={tx.booking.attributes.start}
-      bookingEnd={tx.booking.attributes.end}
-      transactionState={tx.attributes.state}
-      payinTotal={tx.attributes.payinTotal}
-      lineItems={tx.attributes.lineItems}
+      transaction={tx}
+      booking={tx.booking}
     />
   );
 };

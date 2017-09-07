@@ -4,37 +4,35 @@
  */
 import React, { PropTypes } from 'react';
 import { FormattedMessage, FormattedHTMLMessage, intlShape, injectIntl } from 'react-intl';
-import Decimal from 'decimal.js';
 import classNames from 'classnames';
-import config from '../../config';
-import { convertMoneyToNumber, formatMoney } from '../../util/currency';
+import { types } from '../../util/sdkLoader';
+import { formatMoney } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
 
 import css from './BookingBreakdown.css';
+
+const { Money } = types;
+
+// Validate the assumption that the commission exists and the amount
+// is zero or negative.
+const isValidCommission = commissionLineItem => {
+  return commissionLineItem &&
+    commissionLineItem.lineTotal instanceof Money &&
+    commissionLineItem.lineTotal.amount <= 0;
+};
 
 export const BookingBreakdownComponent = props => {
   const {
     rootClassName,
     className,
-    transactionState,
-    bookingStart,
-    bookingEnd,
-    payinTotal,
-    payoutTotal,
-    lineItems,
     userRole,
+    transaction,
+    booking,
     intl,
   } = props;
 
+  const isProvider = userRole === 'provider';
   const classes = classNames(rootClassName || css.root, className);
-
-  if (userRole === 'customer' && !payinTotal) {
-    throw new Error('payinTotal is required for customer breakdown');
-  }
-
-  if (userRole === 'provider' && !payoutTotal) {
-    throw new Error('payoutTotal is required for provider breakdown');
-  }
 
   const dateFormatOptions = {
     weekday: 'short',
@@ -47,39 +45,49 @@ export const BookingBreakdownComponent = props => {
       values={{
         bookingStart: (
           <span className={css.nowrap}>
-            {intl.formatDate(bookingStart, dateFormatOptions)}
+            {intl.formatDate(booking.attributes.start, dateFormatOptions)}
           </span>
         ),
         bookingEnd: (
           <span className={css.nowrap}>
-            {intl.formatDate(bookingEnd, dateFormatOptions)}
+            {intl.formatDate(booking.attributes.end, dateFormatOptions)}
           </span>
         ),
       }}
     />
   );
 
-  const nightPurchase = lineItems.find(item => item.code === 'line-item/night');
-  const providerCommission = lineItems.find(item => item.code === 'line-item/provider-commission');
+  const nightPurchase = transaction.attributes.lineItems.find(
+    item => item.code === 'line-item/night'
+  );
+  const providerCommissionLineItem = transaction.attributes.lineItems.find(
+    item => item.code === 'line-item/provider-commission'
+  );
 
   const nightCount = nightPurchase.quantity.toFixed();
   const nightCountMessage = (
     <FormattedHTMLMessage id="BookingBreakdown.nightCount" values={{ count: nightCount }} />
   );
 
-  const currencyConfig = config.currencyConfig;
   const formattedUnitPrice = formatMoney(intl, nightPurchase.unitPrice);
 
   // If commission is passed it will be shown as a fee already reduces from the total price
   let subTotalInfo = null;
   let commissionInfo = null;
 
-  if (userRole === 'provider') {
-    // TODO: Calculate subtotal from provider total and the commission
-    const unitPriceAsNumber = convertMoneyToNumber(nightPurchase.unitPrice);
-    const subTotal = new Decimal(nightCount).times(unitPriceAsNumber).toNumber();
-    const formattedSubTotal = intl.formatNumber(subTotal, currencyConfig);
+  if (isProvider) {
+    if (!isValidCommission(providerCommissionLineItem)) {
+      // eslint-disable-next-line no-console
+      console.error('invalid commission line item:', providerCommissionLineItem);
+      throw new Error('Commission should be present and the value should be zero or negative');
+    }
 
+    // The total sum that the customer pays is the payinTotal. We use
+    // this amount as the subtotal information for the provider
+    // breakdown.
+    //
+    // NOTE: this might break if the API hides the payinTotal from the provider
+    const formattedSubTotal = formatMoney(intl, transaction.attributes.payinTotal);
     subTotalInfo = (
       <div className={css.lineItem}>
         <span className={css.itemLabel}>
@@ -89,7 +97,7 @@ export const BookingBreakdownComponent = props => {
       </div>
     );
 
-    const commission = providerCommission.lineTotal;
+    const commission = providerCommissionLineItem.lineTotal;
     const formattedCommission = commission ? formatMoney(intl, commission) : null;
 
     commissionInfo = (
@@ -103,17 +111,19 @@ export const BookingBreakdownComponent = props => {
   }
 
   let providerTotalMessageId = 'BookingBreakdown.providerTotalDefault';
-  if (transactionState === propTypes.TX_STATE_DELIVERED) {
+  if (transaction.attributes.state === propTypes.TX_STATE_DELIVERED) {
     providerTotalMessageId = 'BookingBreakdown.providerTotalDelivered';
-  } else if (transactionState === propTypes.TX_STATE_REJECTED) {
+  } else if (transaction.attributes.state === propTypes.TX_STATE_REJECTED) {
     providerTotalMessageId = 'BookingBreakdown.providerTotalRejected';
   }
 
-  const totalLabel = userRole === 'customer'
-    ? <FormattedMessage id="BookingBreakdown.total" />
-    : <FormattedMessage id={providerTotalMessageId} />;
+  const totalLabel = isProvider
+    ? <FormattedMessage id={providerTotalMessageId} />
+    : <FormattedMessage id="BookingBreakdown.total" />;
 
-  const totalPrice = userRole === 'customer' ? payinTotal : payoutTotal;
+  const totalPrice = isProvider
+    ? transaction.attributes.payoutTotal
+    : transaction.attributes.payinTotal;
   const formattedTotalPrice = formatMoney(intl, totalPrice);
 
   return (
@@ -145,33 +155,17 @@ export const BookingBreakdownComponent = props => {
   );
 };
 
-BookingBreakdownComponent.defaultProps = {
-  rootClassName: null,
-  className: null,
-  payinTotal: null,
-  payoutTotal: null,
-};
+BookingBreakdownComponent.defaultProps = { rootClassName: null, className: null };
 
-const { arrayOf, instanceOf, oneOf, shape, string } = PropTypes;
-
-const lineItem = shape({
-  code: string.isRequired,
-  quantity: instanceOf(Decimal),
-  unitPrice: propTypes.money,
-  lineTotal: propTypes.money,
-});
+const { oneOf, string } = PropTypes;
 
 BookingBreakdownComponent.propTypes = {
   rootClassName: string,
   className: string,
 
-  transactionState: oneOf(propTypes.TX_STATES).isRequired,
-  bookingStart: instanceOf(Date).isRequired,
-  bookingEnd: instanceOf(Date).isRequired,
-  lineItems: arrayOf(lineItem).isRequired,
   userRole: oneOf(['customer', 'provider']).isRequired,
-  payinTotal: propTypes.money, // required if userRole === customer
-  payoutTotal: propTypes.money, // required if userRole === provider
+  transaction: propTypes.transaction.isRequired,
+  booking: propTypes.booking.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,

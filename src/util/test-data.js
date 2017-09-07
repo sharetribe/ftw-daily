@@ -1,16 +1,18 @@
 import Decimal from 'decimal.js';
 import { types } from './sdkLoader';
 import { nightsBetween } from '../util/dates';
+import * as propTypes from '../util/propTypes';
 
 const { UUID, LatLng, Money } = types;
 
 // Create a booking that conforms to the util/propTypes booking schema
-export const createBooking = (id, startDateInUTC, endDateInUTC) => ({
+export const createBooking = (id, attributes = {}) => ({
   id: new UUID(id),
   type: 'booking',
   attributes: {
-    start: startDateInUTC,
-    end: endDateInUTC,
+    start: new Date(Date.UTC(2017, 5, 10)),
+    end: new Date(Date.UTC(2017, 5, 10)),
+    ...attributes,
   },
 });
 
@@ -65,38 +67,26 @@ export const createImage = id => ({
 });
 
 // Create a user that conforms to the util/propTypes listing schema
-export const createListing = (id, author = null, price = new Money(5500, 'USD')) => ({
+export const createListing = (id, attributes = {}, includes = {}) => ({
   id: new UUID(id),
   type: 'listing',
   attributes: {
     title: `${id} title`,
+    description: `${id} description`,
+    address: `${id} address`,
+    geolocation: new LatLng(40, 60),
     open: true,
-    price,
-    description: `${id} description`,
-    address: `${id} address`,
-    geolocation: new LatLng(40, 60),
+    price: new Money(5500, 'USD'),
+    ...attributes,
   },
-  author,
-});
-
-// Create a user that conforms to the util/propTypes listing schema
-export const createOwnListing = (id, open = true, price = new Money(5500, 'USD')) => ({
-  id: new UUID(id),
-  type: 'listing',
-  attributes: {
-    title: `${id} title`,
-    price,
-    description: `${id} description`,
-    address: `${id} address`,
-    geolocation: new LatLng(40, 60),
-    open,
-  },
+  ...includes,
 });
 
 export const createTransaction = options => {
   const {
     id,
-    state = 'state/preauthorized',
+    state = propTypes.TX_STATE_PREAUTHORIZED,
+    lastTransition = propTypes.TX_TRANSITION_PREAUTHORIZE,
     total = new Money(1000, 'USD'),
     commission = new Money(100, 'USD'),
     booking = null,
@@ -113,6 +103,7 @@ export const createTransaction = options => {
       createdAt: new Date(Date.UTC(2017, 4, 1)),
       lastTransitionedAt,
       state,
+      lastTransition,
       payinTotal: total,
       payoutTotal: new Money(total.amount - commission.amount, total.currency),
       lineItems: [
@@ -144,7 +135,6 @@ export const currencyConfig = {
   useGrouping: true,
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-  subUnitDivisor: 100,
 };
 
 const pad = num => {
