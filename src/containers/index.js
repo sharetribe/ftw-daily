@@ -25,6 +25,7 @@ import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage
 import PayoutDetailsForm from './PayoutDetailsForm/PayoutDetailsForm';
 import PayoutPreferencesPage from './PayoutPreferencesPage/PayoutPreferencesPage';
 import ProfilePage from './ProfilePage/ProfilePage';
+import ProfileSettingsForm from './ProfileSettingsForm/ProfileSettingsForm';
 import ProfileSettingsPage from './ProfileSettingsPage/ProfileSettingsPage';
 import SalePage from './SalePage/SalePage';
 import SearchPage from './SearchPage/SearchPage';
@@ -62,6 +63,7 @@ export {
   PayoutDetailsForm,
   PayoutPreferencesPage,
   ProfilePage,
+  ProfileSettingsForm,
   ProfileSettingsPage,
   SalePage,
   SearchPage,
