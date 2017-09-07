@@ -8,15 +8,20 @@ describe('ContactDetailsPage', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
       <ProfileSettingsPageComponent
-        params={{ displayName: 'my-shop' }}
-        history={{ push: noop }}
-        location={{ search: '' }}
-        scrollingDisabled={false}
         authInProgress={false}
         currentUserHasListings={false}
+        history={{ push: noop }}
         isAuthenticated={false}
+        location={{ search: '' }}
+        onChange={noop}
+        onImageUpload={noop}
         onLogout={noop}
         onManageDisableScrolling={noop}
+        onUpdateProfile={noop}
+        params={{ displayName: 'my-shop' }}
+        scrollingDisabled={false}
+        updateInProgress={false}
+        uploadInProgress={false}
       />
     );
     expect(tree).toMatchSnapshot();

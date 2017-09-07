@@ -2,9 +2,11 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
 <withRouter(PageLayout)
   authInfoError={null}
   logoutError={null}
+  scrollingDisabled={false}
   title="Profile settings">
   <Topbar
     authInProgress={false}
+    currentPage="ProfileSettingsPage"
     currentUser={null}
     currentUserHasListings={false}
     history={
@@ -21,5 +23,16 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
     notificationCount={0}
     onLogout={[Function]}
     onManageDisableScrolling={[Function]} />
+  <UserNav
+    className={null}
+    rootClassName={null}
+    selectedPageName="ProfileSettingsPage" />
+  <div>
+    <h1>
+      <FormattedMessage
+        id="ProfileSettingsPage.title"
+        values={Object {}} />
+    </h1>
+  </div>
 </withRouter(PageLayout)>
 `;

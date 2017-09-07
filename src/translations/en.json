@@ -267,6 +267,7 @@
   "ProfileSettingsForm.updateProfileFailed": "Whoopsie, something went wrong - please try again.",
   "ProfileSettingsForm.yourName": "Your name",
   "ProfileSettingsForm.yourProfilePicture": "Your profile picture",
+  "ProfileSettingsPage.title": "Profile settings",
   "ResponsiveImage.noImage": "No image",
   "SaleDetailsPanel.bookingBreakdownTitle": "Booking breakdown",
   "SaleDetailsPanel.listingAcceptedTitle": "Woohoo! You accepted a request from {customerName} for {listingLink}",
