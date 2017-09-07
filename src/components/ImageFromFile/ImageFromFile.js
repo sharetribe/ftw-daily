@@ -29,8 +29,9 @@ class ImageFromFile extends Component {
   }
 
   render() {
-    const { className, rootClassName, file, id, children } = this.props;
+    const { className, rootClassName, aspectRatioClassName, file, id, children } = this.props;
     const classes = classNames(rootClassName || css.root, className);
+    const aspectRatioClasses = aspectRatioClassName || css.aspectWrapper;
     return (
       <Promised
         key={id}
@@ -39,7 +40,7 @@ class ImageFromFile extends Component {
           return (
             <div className={classes}>
               <div className={css.threeToTwoWrapper}>
-                <div className={css.aspectWrapper}>
+                <div className={aspectRatioClasses}>
                   <img src={dataURL} alt={file.name} className={css.rootForImage} />
                 </div>
               </div>
@@ -55,13 +56,19 @@ class ImageFromFile extends Component {
   }
 }
 
-ImageFromFile.defaultProps = { className: null, children: null, rootClassName: null };
+ImageFromFile.defaultProps = {
+  className: null,
+  children: null,
+  rootClassName: null,
+  aspectRatioClassName: null,
+};
 
 const { any, node, string } = PropTypes;
 
 ImageFromFile.propTypes = {
   className: string,
   rootClassName: string,
+  aspectRatioClassName: string,
   file: any.isRequired,
   id: string.isRequired,
   children: node,
