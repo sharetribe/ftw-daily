@@ -7,12 +7,10 @@
  *   <input type="file" accept="images/*" onChange={handleChange} />
  * </AddImages>
  */
-import React, { Component, PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, { PropTypes } from 'react';
 import { SortableContainer } from 'react-sortable-hoc';
 import classNames from 'classnames';
-import { Promised, ResponsiveImage } from '../../components';
-import { uuid } from '../../util/propTypes';
+import { ImageFromFile, ResponsiveImage, SpinnerIcon } from '../../components';
 import css from './AddImages.css';
 
 const RemoveImageButton = props => {
@@ -41,89 +39,38 @@ const RemoveImageButton = props => {
   );
 };
 
-const { any, array, func, node, string, object } = PropTypes;
+const { array, func, node, string, object } = PropTypes;
 
 RemoveImageButton.propTypes = { onClick: func.isRequired };
 
-// readImage returns a promise which is resolved
-// when FileReader has loaded given file as dataURL
-const readImage = file =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = e => resolve(e.target.result);
-    reader.onerror = e => {
-      // eslint-disable-next-line
-      console.error('Error (', e, `) happened while reading ${file.name}: ${e.target.result}`);
-      reject(new Error(`Error reading ${file.name}: ${e.target.result}`));
-    };
-    reader.readAsDataURL(file);
-  });
-
-// Create sortable elments out of given thumbnail file
-class Thumbnail extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      promisedImage: readImage(this.props.file),
-    };
-  }
-
-  render() {
-    const { className, file, id, imageId, onRemoveImage } = this.props;
-
-    const handleRemoveClick = e => {
-      e.preventDefault();
-      onRemoveImage(id);
-    };
-
-    // While image is uploading we show overlay on top of thumbnail
-    const uploadingOverlay = !imageId
-      ? <div className={css.thumbnailLoading}><FormattedMessage id="AddImages.upload" /></div>
-      : null;
-    const removeButton = imageId ? <RemoveImageButton onClick={handleRemoveClick} /> : null;
-    const classes = classNames(css.thumbnail, className);
-    return (
-      <Promised
-        key={id}
-        promise={this.state.promisedImage}
-        renderFulfilled={dataURL => {
-          return (
-            <div className={classes}>
-              <div className={css.aspectWrapper}>
-                <img src={dataURL} alt={file.name} className={css.rootForImage} />
-              </div>
-              {removeButton}
-              {uploadingOverlay}
-            </div>
-          );
-        }}
-        renderRejected={() => (
-          <div className={css.thumbnail}><FormattedMessage id="AddImages.couldNotReadFile" /></div>
-        )}
-      />
-    );
-  }
-}
-
-Thumbnail.defaultProps = { className: null, imageId: null };
-
-Thumbnail.propTypes = {
-  className: string,
-  file: any.isRequired,
-  id: string.isRequired,
-  imageId: uuid,
-  onRemoveImage: func.isRequired,
-};
-
 const ThumbnailWrapper = props => {
   const { className, image, savedImageAltText, onRemoveImage } = props;
+  const handleRemoveClick = e => {
+    e.preventDefault();
+    onRemoveImage(image.id);
+  };
+
   if (image.file) {
-    return <Thumbnail className={className} onRemoveImage={onRemoveImage} {...image} />;
+    // Remove this image if file has been uploaded
+    const removeButton = image.imageId ? <RemoveImageButton onClick={handleRemoveClick} /> : null;
+
+    // While image is uploading we show overlay on top of thumbnail
+    const uploadingOverlay = !image.imageId
+      ? <div className={css.thumbnailLoading}><SpinnerIcon /></div>
+      : null;
+
+    return (
+      <ImageFromFile
+        id={image.id}
+        className={className}
+        rootClassName={css.thumbnail}
+        file={image.file}
+      >
+        {removeButton}
+        {uploadingOverlay}
+      </ImageFromFile>
+    );
   } else {
-    const handleRemoveClick = e => {
-      e.preventDefault();
-      onRemoveImage(image.id);
-    };
     const classes = classNames(css.thumbnail, className);
     return (
       <div className={classes}>

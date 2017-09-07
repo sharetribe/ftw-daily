@@ -1,6 +1,4 @@
 {
-  "AddImages.couldNotReadFile": "Could not read file",
-  "AddImages.upload": "Uploading",
   "AuthenticationPage.emailAlreadyInUse": "An account already exists with this email address. Try logging in instead.",
   "AuthenticationPage.loginFailed": "The email and password you entered did not match our records. Please double-check and try again.",
   "AuthenticationPage.loginLinkText": "Login",
@@ -125,6 +123,7 @@
   "HeroSection.subTitle": "The largest online community to rent saunas in Finland.",
   "HeroSection.title": "Book saunas everywhere.",
   "ImageCarousel.imageAltText": "Image {index}/{count}",
+  "ImageFromFile.couldNotReadFile": "Could not read file",
   "InboxPage.fetchFailed": "Could not load all messages. Please try again.",
   "InboxPage.noOrdersFound": "You haven't made any bookings.",
   "InboxPage.noSalesFound": "Nobody has booked anything from you yet.",
