@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { compose } from 'redux';
@@ -179,7 +180,10 @@ export class ListingPageComponent extends Component {
     const hasImages = currentListing.images && currentListing.images.length > 0;
     const firstImage = hasImages ? currentListing.images[0] : null;
 
-    const handleViewPhotosClick = () => {
+    const handleViewPhotosClick = e => {
+      // Stop event from bubbling up to prevent image click handler
+      // trying to open the carousel as well.
+      e.stopPropagation();
       this.setState({
         imageCarouselOpen: true,
       });
@@ -262,6 +266,18 @@ export class ListingPageComponent extends Component {
       }
     };
 
+    // Action bar is wrapped with a div that prevents the click events
+    // to the parent that would otherwise open the image carousel
+    const actionBar = currentListing.id
+      ? <div onClick={e => e.stopPropagation()}>
+          <ActionBar
+            isOwnListing={isOwnListing}
+            isClosed={!currentListing.attributes.open}
+            editParams={editParams}
+          />
+        </div>
+      : null;
+
     return (
       <PageLayout
         authInfoError={authInfoError}
@@ -282,14 +298,8 @@ export class ListingPageComponent extends Component {
         />
         <div className={listingClasses}>
           <div className={css.threeToTwoWrapper}>
-            <div className={css.aspectWrapper}>
-              {currentListing.id
-                ? <ActionBar
-                    isOwnListing={isOwnListing}
-                    isClosed={!currentListing.attributes.open}
-                    editParams={editParams}
-                  />
-                : null}
+            <div className={css.aspectWrapper} onClick={handleViewPhotosClick}>
+              {actionBar}
               <ResponsiveImage
                 rootClassName={css.rootForImage}
                 alt={title}
