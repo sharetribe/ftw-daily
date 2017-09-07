@@ -50,6 +50,50 @@ const priceData = (price, intl) => {
   return {};
 };
 
+export const ActionBar = props => {
+  const {
+    isOwnListing,
+    isClosed,
+    editParams,
+  } = props;
+
+  if (isOwnListing) {
+    return (
+      <div className={css.actionBar}>
+        <p className={css.ownListingText}>
+          <FormattedMessage
+            id={isClosed ? 'ListingPage.ownClosedListing' : 'ListingPage.ownListing'}
+          />
+        </p>
+        <NamedLink className={css.editListingLink} name="EditListingPage" params={editParams}>
+          <EditIcon className={css.editIcon} />
+          <FormattedMessage id="ListingPage.editListing" />
+        </NamedLink>
+      </div>
+    );
+  } else if (isClosed) {
+    return (
+      <div className={css.actionBar}>
+        <p className={css.closedListingText}>
+          <FormattedMessage id="ListingPage.closedListing" />
+        </p>
+      </div>
+    );
+  } else {
+    return null;
+  }
+};
+
+const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
+
+ActionBar.propTypes = {
+  isOwnListing: bool.isRequired,
+  isClosed: bool.isRequired,
+  editParams: object.isRequired,
+};
+
+ActionBar.displayName = 'ActionBar';
+
 // TODO: price unit (per x), custom fields, contact, reviews
 // N.B. All the presentational content needs to be extracted to their own components
 export class ListingPageComponent extends Component {
@@ -150,7 +194,7 @@ export class ListingPageComponent extends Component {
       : null;
 
     const authorAvailable = currentListing && currentListing.author;
-    const userAndListingAuthorAvailable = currentUser && authorAvailable;
+    const userAndListingAuthorAvailable = !!(currentUser && authorAvailable);
     const isOwnListing = userAndListingAuthorAvailable &&
       currentListing.author.id.uuid === currentUser.id.uuid;
 
@@ -178,13 +222,20 @@ export class ListingPageComponent extends Component {
         </div>
       : null;
 
+    const showClosedListingHelpText = currentListing.id && !currentListing.attributes.open;
     const bookingHeading = (
       <div className={css.bookingHeading}>
         <h2 className={css.bookingTitle}>
           <FormattedMessage id="ListingPage.bookingTitle" values={{ title }} />
         </h2>
         <div className={css.bookingHelp}>
-          <FormattedMessage id="ListingPage.bookingHelp" />
+          <FormattedMessage
+            id={
+              showClosedListingHelpText
+                ? 'ListingPage.bookingHelpClosedListing'
+                : 'ListingPage.bookingHelp'
+            }
+          />
         </div>
       </div>
     );
@@ -199,17 +250,6 @@ export class ListingPageComponent extends Component {
     };
 
     const editParams = { ...params, type: 'edit', tab: 'description' };
-    const ownListingActionBar = isOwnListing
-      ? <div className={css.ownListingActionBar}>
-          <p className={css.ownListingText}>
-            <FormattedMessage id="ListingPage.ownListing" />
-          </p>
-          <NamedLink className={css.editListingLink} name="EditListingPage" params={editParams}>
-            <EditIcon className={css.editIcon} />
-            <FormattedMessage id="ListingPage.editListing" />
-          </NamedLink>
-        </div>
-      : null;
 
     const listingClasses = classNames(css.pageRoot);
 
@@ -243,7 +283,13 @@ export class ListingPageComponent extends Component {
         <div className={listingClasses}>
           <div className={css.threeToTwoWrapper}>
             <div className={css.aspectWrapper}>
-              {ownListingActionBar}
+              {currentListing.id
+                ? <ActionBar
+                    isOwnListing={isOwnListing}
+                    isClosed={!currentListing.attributes.open}
+                    editParams={editParams}
+                  />
+                : null}
               <ResponsiveImage
                 rootClassName={css.rootForImage}
                 alt={title}
@@ -327,11 +373,14 @@ export class ListingPageComponent extends Component {
               </div>
 
               {bookingHeading}
-              <BookingDatesForm
-                className={css.bookingForm}
-                onSubmit={handleBookingSubmit}
-                price={price}
-              />
+              {currentListing.attributes.open
+                ? <BookingDatesForm
+                    className={css.bookingForm}
+                    onSubmit={handleBookingSubmit}
+                    price={price}
+                    isOwnListing={isOwnListing}
+                  />
+                : null}
             </ModalInMobile>
             <div className={css.openBookingForm}>
               <div className={css.priceContainer}>
@@ -343,9 +392,13 @@ export class ListingPageComponent extends Component {
                 </div>
               </div>
 
-              <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
-                {bookBtnMessage}
-              </Button>
+              {currentListing.attributes.open
+                ? <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
+                    {bookBtnMessage}
+                  </Button>
+                : <div className={css.closedListingButton}>
+                    <FormattedMessage id="ListingPage.closedListingButtonText" />
+                  </div>}
             </div>
           </div>
         </div>
@@ -362,8 +415,6 @@ ListingPageComponent.defaultProps = {
   showListingError: null,
   tab: 'listing',
 };
-
-const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
 
 ListingPageComponent.propTypes = {
   // from withRouter

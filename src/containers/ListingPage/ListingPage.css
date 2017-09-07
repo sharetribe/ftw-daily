@@ -34,7 +34,7 @@
   }
 }
 
-.ownListingActionBar {
+.actionBar {
   position: absolute;
   display: flex;
   justify-content: space-between;
@@ -51,6 +51,13 @@
 .ownListingText {
   @apply --marketplaceH4FontStyles;
   margin: 16px 12px 13px 24px;
+}
+
+.closedListingText {
+  @apply --marketplaceH4FontStyles;
+  margin: 16px 12px 13px 24px;
+  text-align: center;
+  width: 100%;
 }
 
 .editListingLink {
@@ -513,4 +520,11 @@
 
 .bookButton {
   @apply --marketplaceButtonStylesPrimary;
+}
+
+.closedListingButton {
+  border-left: 1px solid var(--matterColorNegative);
+  width: 100%;
+  padding: 15px 24px 15px 24px;
+  text-align: center;
 }
