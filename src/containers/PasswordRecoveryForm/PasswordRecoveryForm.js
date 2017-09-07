@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { Button } from '../../components';
 
-const PasswordForgottenForm = props => {
+const PasswordRecoveryForm = props => {
   const { handleSubmit, pristine, submitting } = props;
   return (
     <form onSubmit={handleSubmit}>
@@ -14,8 +14,8 @@ const PasswordForgottenForm = props => {
   );
 };
 
-PasswordForgottenForm.propTypes = { ...formPropTypes };
+PasswordRecoveryForm.propTypes = { ...formPropTypes };
 
-const defaultFormName = 'PasswordForgottenForm';
+const defaultFormName = 'PasswordRecoveryForm';
 
-export default reduxForm({ form: defaultFormName })(PasswordForgottenForm);
+export default reduxForm({ form: defaultFormName })(PasswordRecoveryForm);

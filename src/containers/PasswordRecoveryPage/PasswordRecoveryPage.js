@@ -7,14 +7,14 @@ import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { PageLayout, Topbar } from '../../components';
-import { PasswordForgottenForm } from '../../containers';
+import { PasswordRecoveryForm } from '../../containers';
 
 const sendPasswordResetEmail = values => {
   // eslint-disable-next-line no-console
   console.log('submit with values:', values);
 };
 
-export const PasswordForgottenPageComponent = props => {
+export const PasswordRecoveryPageComponent = props => {
   const {
     authInfoError,
     authInProgress,
@@ -54,12 +54,12 @@ export const PasswordForgottenPageComponent = props => {
         sendVerificationEmailInProgress={sendVerificationEmailInProgress}
         sendVerificationEmailError={sendVerificationEmailError}
       />
-      <PasswordForgottenForm onSubmit={sendPasswordResetEmail} />
+      <PasswordRecoveryForm onSubmit={sendPasswordResetEmail} />
     </PageLayout>
   );
 };
 
-PasswordForgottenPageComponent.defaultProps = {
+PasswordRecoveryPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
   currentUserHasOrders: null,
@@ -70,7 +70,7 @@ PasswordForgottenPageComponent.defaultProps = {
 
 const { bool, func, instanceOf, number, object, shape } = PropTypes;
 
-PasswordForgottenPageComponent.propTypes = {
+PasswordRecoveryPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
@@ -126,8 +126,8 @@ const mapDispatchToProps = dispatch => ({
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
-const PasswordForgottenPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
-  PasswordForgottenPageComponent
+const PasswordRecoveryPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
+  PasswordRecoveryPageComponent
 );
 
-export default PasswordForgottenPage;
+export default PasswordRecoveryPage;

@@ -1,10 +1,10 @@
 import React from 'react';
 import { renderDeep } from '../../util/test-helpers';
-import PasswordForgottenForm from './PasswordForgottenForm';
+import PasswordRecoveryForm from './PasswordRecoveryForm';
 
-describe('PasswordForgottenForm', () => {
+describe('PasswordRecoveryForm', () => {
   it('matches snapshot', () => {
-    const tree = renderDeep(<PasswordForgottenForm />);
+    const tree = renderDeep(<PasswordRecoveryForm />);
     expect(tree).toMatchSnapshot();
   });
 });

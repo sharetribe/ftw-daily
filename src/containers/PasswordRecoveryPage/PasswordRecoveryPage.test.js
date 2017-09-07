@@ -1,13 +1,13 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
-import { PasswordForgottenPageComponent } from './PasswordForgottenPage';
+import { PasswordRecoveryPageComponent } from './PasswordRecoveryPage';
 
 const noop = () => null;
 
 describe('ContactDetailsPage', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
-      <PasswordForgottenPageComponent
+      <PasswordRecoveryPageComponent
         params={{ displayName: 'my-shop' }}
         history={{ push: noop }}
         location={{ search: '' }}
