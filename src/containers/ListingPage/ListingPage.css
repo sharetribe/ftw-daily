@@ -29,6 +29,9 @@
   padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
   background-color: var(--matterColorNegative); /* Loading BG color */
 
+  /* Image carousel can be opened from the image, therefore we should show a pointer */
+  cursor: pointer;
+
   @media (--viewportMedium) {
     padding-bottom: 0; /* No fixed aspect on desktop layouts */
   }
@@ -44,6 +47,10 @@
   color: var(--matterColorNegative);
   background-color: var(--matterColor);
   z-index: 1; /* bring on top of mobile image */
+
+  /* Action bar prevents the image click events going to the parent and
+   should not show a pointer */
+  cursor: initial;
 
   border-radius: 2px 2px 0 0;
 }
