@@ -42,6 +42,26 @@ exports[`LoginForm matches snapshot 1`] = `
         value="" />
     </div>
   </div>
+  <p
+    className={undefined}>
+    <a
+      className=""
+      href="/recover_password"
+      onClick={[Function]}
+      style={Object {}}
+      title={null}>
+      <span>
+        Forgot your password?
+      </span>
+       
+      <span
+        className={undefined}>
+        <span>
+          No problem.
+        </span>
+      </span>
+    </a>
+  </p>
   <button
     className=""
     disabled={true}
