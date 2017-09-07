@@ -13,6 +13,7 @@ import PasswordResetPage from './PasswordResetPage/PasswordResetPage.duck';
 import ProfileSettingsPage from './ProfileSettingsPage/ProfileSettingsPage.duck';
 import SalePage from './SalePage/SalePage.duck';
 import SearchPage from './SearchPage/SearchPage.duck';
+import PasswordRecoveryPage from './PasswordRecoveryPage/PasswordRecoveryPage.duck';
 
 export {
   CheckoutPage,
@@ -25,4 +26,5 @@ export {
   ProfileSettingsPage,
   SalePage,
   SearchPage,
+  PasswordRecoveryPage,
 };

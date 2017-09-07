@@ -6,13 +6,9 @@ import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
+import { recoverPassword } from './PasswordRecoveryPage.duck';
 import { PageLayout, Topbar } from '../../components';
 import { PasswordRecoveryForm } from '../../containers';
-
-const sendPasswordResetEmail = values => {
-  // eslint-disable-next-line no-console
-  console.log('submit with values:', values);
-};
 
 export const PasswordRecoveryPageComponent = props => {
   const {
@@ -31,6 +27,11 @@ export const PasswordRecoveryPageComponent = props => {
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
     onResendVerificationEmail,
+    initialEmail,
+    submittedEmail,
+    recoveryInProgress,
+    recoveryError,
+    onSubmitEmail,
   } = props;
 
   return (
@@ -54,7 +55,7 @@ export const PasswordRecoveryPageComponent = props => {
         sendVerificationEmailInProgress={sendVerificationEmailInProgress}
         sendVerificationEmailError={sendVerificationEmailError}
       />
-      <PasswordRecoveryForm onSubmit={sendPasswordResetEmail} />
+      <PasswordRecoveryForm onSubmit={values => onSubmitEmail(values.email)} />
     </PageLayout>
   );
 };
@@ -66,9 +67,12 @@ PasswordRecoveryPageComponent.defaultProps = {
   logoutError: null,
   notificationCount: 0,
   sendVerificationEmailError: null,
+  initialEmail: null,
+  submittedEmail: null,
+  recoveryError: null,
 };
 
-const { bool, func, instanceOf, number, object, shape } = PropTypes;
+const { bool, func, instanceOf, number, object, shape, string } = PropTypes;
 
 PasswordRecoveryPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
@@ -84,6 +88,11 @@ PasswordRecoveryPageComponent.propTypes = {
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: instanceOf(Error),
   onResendVerificationEmail: func.isRequired,
+  initialEmail: string,
+  submittedEmail: string,
+  recoveryInProgress: bool.isRequired,
+  recoveryError: instanceOf(Error),
+  onSubmitEmail: func.isRequired,
 
   // from withRouter
   history: shape({
@@ -104,6 +113,13 @@ const mapStateToProps = state => {
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
   } = state.user;
+
+  const {
+    initialEmail,
+    submittedEmail,
+    recoveryError,
+    recoveryInProgress,
+  } = state.PasswordRecoveryPage;
   return {
     authInfoError,
     authInProgress: authenticationInProgress(state),
@@ -116,6 +132,10 @@ const mapStateToProps = state => {
     scrollingDisabled: isScrollingDisabled(state),
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
+    initialEmail,
+    submittedEmail,
+    recoveryError,
+    recoveryInProgress,
   };
 };
 
@@ -124,6 +144,8 @@ const mapDispatchToProps = dispatch => ({
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
+  onChange: () => dispatch(clearRecoveryError()),
+  onSubmitEmail: email => dispatch(recoverPassword(email)),
 });
 
 const PasswordRecoveryPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(

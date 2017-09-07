@@ -19,6 +19,8 @@ describe('ContactDetailsPage', () => {
         onManageDisableScrolling={noop}
         sendVerificationEmailInProgress={false}
         onResendVerificationEmail={noop}
+        recoveryInProgress={false}
+        onSubmitEmail={noop}
       />
     );
     expect(tree).toMatchSnapshot();
