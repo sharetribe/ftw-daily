@@ -108,6 +108,7 @@
   display: none;
 
   @media (--viewportMedium) {
+    display: block;
     max-width: 130px;
     text-align: center;
   }
