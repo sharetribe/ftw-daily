@@ -1,13 +1,8 @@
 import { updatedEntities, denormalisedEntities } from '../../util/data';
 import { currentUserShowSuccess } from '../../ducks/user.duck';
 
-const requestAction = actionType => params => ({ type: actionType, payload: { params } });
-const successAction = actionType => result => ({ type: actionType, payload: result.data });
-const errorAction = actionType => error => ({ type: actionType, payload: error, error: true });
-
 // ================ Action types ================ //
 
-export const MARK_FORM_UPDATED = 'app/EditListingPage/MARK_FORM_UPDATED';
 export const CLEAR_UPDATED_FORM = 'app/EditListingPage/CLEAR_UPDATED_FORM';
 
 export const UPLOAD_IMAGE_REQUEST = 'app/ProfileSettingsPage/UPLOAD_IMAGE_REQUEST';
@@ -21,7 +16,6 @@ export const UPDATE_PROFILE_ERROR = 'app/ProfileSettingsPage/UPDATE_PROFILE_ERRO
 // ================ Reducer ================ //
 
 const initialState = {
-  formUpdated: false,
   image: null,
   uploadImageError: null,
   uploadInProgress: false,
@@ -70,10 +64,8 @@ export default function reducer(state = initialState, action = {}) {
         updateProfileError: payload,
       };
 
-    case MARK_FORM_UPDATED:
-      return { ...state, formUpdated: payload };
     case CLEAR_UPDATED_FORM:
-      return { ...state, formUpdated: null, updateProfileError: null, uploadImageError: null };
+      return { ...state, updateProfileError: null, uploadImageError: null };
 
     default:
       return state;
@@ -84,24 +76,33 @@ export default function reducer(state = initialState, action = {}) {
 
 // ================ Action creators ================ //
 
-export const markFormUpdated = tab => ({
-  type: MARK_FORM_UPDATED,
-  payload: tab,
-});
-
 export const clearUpdatedForm = () => ({
   type: CLEAR_UPDATED_FORM,
 });
 
 // SDK method: images.uploadListingImage
-export const uploadImageRequest = requestAction(UPLOAD_IMAGE_REQUEST);
-export const uploadImageSuccess = successAction(UPLOAD_IMAGE_SUCCESS);
-export const uploadImageError = errorAction(UPLOAD_IMAGE_ERROR);
+export const uploadImageRequest = params => ({ type: UPLOAD_IMAGE_REQUEST, payload: { params } });
+export const uploadImageSuccess = result => ({ type: UPLOAD_IMAGE_SUCCESS, payload: result.data });
+export const uploadImageError = error => ({
+  type: UPLOAD_IMAGE_ERROR,
+  payload: error,
+  error: true,
+});
 
 // SDK method: sdk.currentUser.updateProfile
-export const updateProfileRequest = requestAction(UPDATE_PROFILE_REQUEST);
-export const updateProfileSuccess = successAction(UPDATE_PROFILE_SUCCESS);
-export const updateProfileError = errorAction(UPDATE_PROFILE_ERROR);
+export const updateProfileRequest = params => ({
+  type: UPDATE_PROFILE_REQUEST,
+  payload: { params },
+});
+export const updateProfileSuccess = result => ({
+  type: UPDATE_PROFILE_SUCCESS,
+  payload: result.data,
+});
+export const updateProfileError = error => ({
+  type: UPDATE_PROFILE_ERROR,
+  payload: error,
+  error: true,
+});
 
 // ================ Thunk ================ //
 

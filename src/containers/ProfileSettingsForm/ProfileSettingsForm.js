@@ -67,6 +67,7 @@ const ProfileSettingsFormComponent = props => {
     intl,
     invalid,
     onImageUpload,
+    pristine,
     profileImage,
     rootClassName,
     submitting,
@@ -143,7 +144,8 @@ const ProfileSettingsFormComponent = props => {
     : null;
 
   const classes = classNames(rootClassName || css.root, className);
-  const submitDisabled = invalid || submitting || uploadInProgress || updateInProgress;
+  const inProgress = uploadInProgress || updateInProgress;
+  const submitDisabled = invalid || submitting || inProgress || pristine;
 
   return (
     <form className={classes} onSubmit={handleSubmit}>
