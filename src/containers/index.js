@@ -20,6 +20,7 @@ import NotFoundPage from './NotFoundPage/NotFoundPage';
 import OrderPage from './OrderPage/OrderPage';
 import PasswordForgottenForm from './PasswordForgottenForm/PasswordForgottenForm';
 import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage';
+import PasswordResetPage from './PasswordResetPage/PasswordResetPage';
 import PayoutDetailsForm from './PayoutDetailsForm/PayoutDetailsForm';
 import PayoutPreferencesPage from './PayoutPreferencesPage/PayoutPreferencesPage';
 import ProfilePage from './ProfilePage/ProfilePage';
@@ -56,6 +57,7 @@ export {
   OrderPage,
   PasswordForgottenForm,
   PasswordForgottenPage,
+  PasswordResetPage,
   PayoutDetailsForm,
   PayoutPreferencesPage,
   ProfilePage,

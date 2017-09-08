@@ -12,6 +12,7 @@ import {
   NotFoundPage,
   OrderPage,
   PasswordForgottenPage,
+  PasswordResetPage,
   PayoutPreferencesPage,
   ProfilePage,
   ProfileSettingsPage,
@@ -154,6 +155,12 @@ const routesConfiguration = [
     exact: true,
     name: 'PasswordForgottenPage',
     component: props => <PasswordForgottenPage {...props} />,
+  },
+  {
+    path: '/reset-password',
+    exact: true,
+    name: 'PasswordResetPage',
+    component: props => <PasswordResetPage {...props} />,
   },
   {
     path: '/inbox',
