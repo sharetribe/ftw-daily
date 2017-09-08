@@ -2,13 +2,25 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { recoverPassword } from './PasswordRecoveryPage.duck';
-import { PageLayout, Topbar } from '../../components';
+import { PageLayout, Topbar, NamedLink } from '../../components';
 import { PasswordRecoveryForm } from '../../containers';
+
+import css from './PasswordRecoveryPage.css';
+
+const recoveryMessage = submittedEmail => {
+  if (submittedEmail) {
+    const email = <span className={css.submittedEmail}>{submittedEmail}</span>;
+    return <FormattedMessage id="PasswordRecoveryPage.emailSubmittedMessage" values={{ email }} />;
+  } else {
+    return <FormattedMessage id="PasswordRecoveryPage.forgotPasswordMessage" />;
+  }
+};
 
 export const PasswordRecoveryPageComponent = props => {
   const {
@@ -34,6 +46,38 @@ export const PasswordRecoveryPageComponent = props => {
     onSubmitEmail,
   } = props;
 
+  const title = submittedEmail
+    ? <FormattedMessage id="PasswordRecoveryPage.emailSubmittedTitle" />
+    : <FormattedMessage id="PasswordRecoveryPage.forgotPasswordTitle" />;
+
+  const message = recoveryMessage(submittedEmail);
+
+  const sendAnotherHelp = (
+    <span className={css.emailSubmittedLinkHelp}>
+      <FormattedMessage id="PasswordRecoveryPage.sendAnotherHelp" />
+    </span>
+  );
+  const fixEmailHelp = (
+    <span className={css.emailSubmittedLinkHelp}>
+      <FormattedMessage id="PasswordRecoveryPage.fixEmailHelp" />
+    </span>
+  );
+
+  const emailSubmittedLinks = (
+    <div>
+      <p>
+        <NamedLink className={css.emailSubmittedLink} name="PasswordRecoveryPage">
+          <FormattedMessage id="PasswordRecoveryPage.sendAnother" values={{ sendAnotherHelp }} />
+        </NamedLink>
+      </p>
+      <p>
+        <NamedLink className={css.emailSubmittedLink} name="PasswordRecoveryPage">
+          <FormattedMessage id="PasswordRecoveryPage.fixEmail" values={{ fixEmailHelp }} />
+        </NamedLink>
+      </p>
+    </div>
+  );
+
   return (
     <PageLayout
       authInfoError={authInfoError}
@@ -55,7 +99,14 @@ export const PasswordRecoveryPageComponent = props => {
         sendVerificationEmailInProgress={sendVerificationEmailInProgress}
         sendVerificationEmailError={sendVerificationEmailError}
       />
-      <PasswordRecoveryForm onSubmit={values => onSubmitEmail(values.email)} />
+      <div>
+        <h1 className={css.title}>{title}</h1>
+        <p>{message}</p>
+        {submittedEmail
+          ? emailSubmittedLinks
+          : <PasswordRecoveryForm onSubmit={values => onSubmitEmail(values.email)} />}
+      </div>
+
     </PageLayout>
   );
 };
