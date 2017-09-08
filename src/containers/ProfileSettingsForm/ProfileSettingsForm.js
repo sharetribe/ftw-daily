@@ -109,6 +109,8 @@ const ProfileSettingsFormComponent = props => {
 
   const hasUploadError = !!uploadImageError && !uploadInProgress;
   const errorClasses = classNames({ [css.avatarUploadError]: hasUploadError });
+  const transientUserProfileImage = profileImage.uploadedImage || user.profileImage;
+  const transientUser = { ...user, profileImage: transientUserProfileImage };
   const avatarImage = uploadInProgress && profileImage.file
     ? <ImageFromFile
         id={profileImage.id}
@@ -119,7 +121,7 @@ const ProfileSettingsFormComponent = props => {
       >
         {uploadingOverlay}
       </ImageFromFile>
-    : <Avatar className={errorClasses} user={user} />;
+    : <Avatar className={errorClasses} user={transientUser} />;
 
   const chooseAvatarLabel = profileImage.imageId || (uploadInProgress && profileImage.file)
     ? <div className={css.avatarContainer}>
