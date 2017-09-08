@@ -46,8 +46,8 @@
   }
 
   @media (--viewportMedium) {
-    border-bottom-width: 3px;
-    padding-bottom: 13px;
+    border-bottom-width: 4px;
+    padding: 0 10px 14px 10px;
   }
 }
 
