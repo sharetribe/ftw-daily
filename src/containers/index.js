@@ -8,8 +8,8 @@ import EditListingLocationForm from './EditListingLocationForm/EditListingLocati
 import EditListingPage from './EditListingPage/EditListingPage';
 import EditListingPhotosForm from './EditListingPhotosForm/EditListingPhotosForm';
 import EditListingPricingForm from './EditListingPricingForm/EditListingPricingForm';
-import EmailVerificationPage from './EmailVerificationPage/EmailVerificationPage';
 import EmailVerificationForm from './EmailVerificationForm/EmailVerificationForm';
+import EmailVerificationPage from './EmailVerificationPage/EmailVerificationPage';
 import InboxPage from './InboxPage/InboxPage';
 import LandingPage from './LandingPage/LandingPage';
 import ListingPage from './ListingPage/ListingPage';
@@ -20,6 +20,7 @@ import NotFoundPage from './NotFoundPage/NotFoundPage';
 import OrderPage from './OrderPage/OrderPage';
 import PasswordForgottenForm from './PasswordForgottenForm/PasswordForgottenForm';
 import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage';
+import PasswordResetForm from './PasswordResetForm/PasswordResetForm';
 import PasswordResetPage from './PasswordResetPage/PasswordResetPage';
 import PayoutDetailsForm from './PayoutDetailsForm/PayoutDetailsForm';
 import PayoutPreferencesPage from './PayoutPreferencesPage/PayoutPreferencesPage';
@@ -45,8 +46,8 @@ export {
   EditListingPage,
   EditListingPhotosForm,
   EditListingPricingForm,
-  EmailVerificationPage,
   EmailVerificationForm,
+  EmailVerificationPage,
   InboxPage,
   LandingPage,
   ListingPage,
@@ -57,6 +58,7 @@ export {
   OrderPage,
   PasswordForgottenForm,
   PasswordForgottenPage,
+  PasswordResetForm,
   PasswordResetPage,
   PayoutDetailsForm,
   PayoutPreferencesPage,

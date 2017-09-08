@@ -44,6 +44,7 @@ import * as EditListingPricingForm
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
 import * as PasswordForgottenForm
   from './containers/PasswordForgottenForm/PasswordForgottenForm.example';
+import * as PasswordResetForm from './containers/PasswordResetForm/PasswordResetForm.example';
 import * as PayoutDetailsForm from './containers/PayoutDetailsForm/PayoutDetailsForm.example';
 import * as SignupForm from './containers/SignupForm/SignupForm.example';
 import * as StripePaymentForm from './containers/StripePaymentForm/StripePaymentForm.example';
@@ -78,6 +79,7 @@ export {
   NamedLink,
   PaginationLinks,
   PasswordForgottenForm,
+  PasswordResetForm,
   PayoutDetailsForm,
   ResponsiveImage,
   SelectField,
