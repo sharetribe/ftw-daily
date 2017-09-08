@@ -11,6 +11,7 @@ import { recoverPassword } from './PasswordRecoveryPage.duck';
 import { PageLayout, Topbar, NamedLink } from '../../components';
 import { PasswordRecoveryForm } from '../../containers';
 
+import KeysIcon from './KeysIcon';
 import css from './PasswordRecoveryPage.css';
 
 const recoveryMessage = submittedEmail => {
@@ -100,6 +101,7 @@ export const PasswordRecoveryPageComponent = props => {
         sendVerificationEmailError={sendVerificationEmailError}
       />
       <div>
+        <KeysIcon />
         <h1 className={css.title}>{title}</h1>
         <p>{message}</p>
         {submittedEmail
