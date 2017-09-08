@@ -99,6 +99,8 @@
   right: 0;
   width: 100%;
 
+  transition: var(--transitionStyleButton);
+
   @media (--viewportMedium) {
     position: static;
     top: auto;
@@ -109,6 +111,10 @@
     max-height: 50vh;
     object-fit: cover;
     border-radius: 2px;
+  }
+
+  &:hover {
+    opacity: 0.85;
   }
 }
 
@@ -141,8 +147,6 @@
   @media (--viewportMedium) {
     margin: 0;
   }
-
-
 }
 
 .carouselModalScrollLayer {
