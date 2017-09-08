@@ -14,6 +14,8 @@ const ManageListingCardWrapper = props => (
 export const ManageListingCardWrapped = {
   component: ManageListingCardWrapper,
   props: {
+    hasClosingError: false,
+    hasOpeningError: false,
     intl: fakeIntl,
     listing: createListing('listing1'),
     isMenuOpen: false,

@@ -61,6 +61,8 @@ export const ManageListingCardComponent = props => {
     className,
     rootClassName,
     flattenedRoutes,
+    hasClosingError,
+    hasOpeningError,
     history,
     intl,
     isMenuOpen,
@@ -117,8 +119,25 @@ export const ManageListingCardComponent = props => {
         </div>
       </div>;
 
+  const errorOverlay = hasOpeningError || hasClosingError
+    ? <div
+        className={css.errorOverlayWrapper}
+        onClick={event => {
+          event.preventDefault();
+          event.stopPropagation();
+        }}
+      >
+        <div className={css.errorOverlay} />
+        <div className={css.errorOverlayContent}>
+          <div className={css.closedMessage}>
+            <FormattedMessage id="ManageListingCard.actionFailed" />
+          </div>
+        </div>
+      </div>
+    : null;
+
   const thisInProgress = actionsInProgressListingId && actionsInProgressListingId.uuid === id;
-  const loadingOrClosedOverlay = thisInProgress
+  const loadingOrErrorOverlay = thisInProgress
     ? <div
         className={css.loadingOverlayWrapper}
         onClick={event => {
@@ -131,7 +150,7 @@ export const ManageListingCardComponent = props => {
           <SpinnerIcon />
         </div>
       </div>
-    : closedOverlay;
+    : errorOverlay;
   /* eslint-enable jsx-a11y/no-static-element-interactions */
 
   return (
@@ -192,6 +211,7 @@ export const ManageListingCardComponent = props => {
             </Menu>
           </div>
         </div>
+        {closedOverlay}
       </div>
       <div className={css.info}>
         <div className={css.price}>
@@ -218,7 +238,7 @@ export const ManageListingCardComponent = props => {
           <FormattedMessage id="ManageListingCard.edit" />
         </SecondaryButton>
       </div>
-      {loadingOrClosedOverlay}
+      {loadingOrErrorOverlay}
     </NamedLink>
   );
 };
@@ -234,6 +254,8 @@ const { arrayOf, bool, func, shape, string } = PropTypes;
 ManageListingCardComponent.propTypes = {
   className: string,
   rootClassName: string,
+  hasClosingError: bool.isRequired,
+  hasOpeningError: bool.isRequired,
   intl: intlShape.isRequired,
   listing: propTypes.listing.isRequired,
   isMenuOpen: bool.isRequired,

@@ -164,6 +164,7 @@
   "LoginForm.passwordLabel": "Password",
   "LoginForm.passwordPlaceholder": "Enter your password…",
   "LoginForm.passwordRequired": "This field is required",
+  "ManageListingCard.actionFailed": "Whoops, something went wrong. Please refresh the page and try again.",
   "ManageListingCard.closeListing": "Close listing",
   "ManageListingCard.closedListing": "This listing is closed and hidden from the marketplace.",
   "ManageListingCard.edit": "Edit",

@@ -116,7 +116,7 @@ export function uploadImage(actionPayload) {
       .uploadProfileImage({ image: actionPayload.file }, { expand: true })
       .then(resp => {
         const uploadedImage = resp.data.data;
-        dispatch(uploadImageSuccess({ data: { id, uploadedImage  } }))
+        dispatch(uploadImageSuccess({ data: { id, uploadedImage } }));
       })
       .catch(e => dispatch(uploadImageError({ id, error: e })));
   };
