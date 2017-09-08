@@ -1,7 +1,6 @@
 import AuthenticationPage from './AuthenticationPage/AuthenticationPage';
 import BookingDatesForm from './BookingDatesForm/BookingDatesForm';
 import ChangeAccountPasswordForm from './ChangeAccountPasswordForm/ChangeAccountPasswordForm';
-import ChangePasswordForm from './ChangePasswordForm/ChangePasswordForm';
 import CheckoutPage from './CheckoutPage/CheckoutPage';
 import ContactDetailsPage from './ContactDetailsPage/ContactDetailsPage';
 import EditListingDescriptionForm from './EditListingDescriptionForm/EditListingDescriptionForm';
@@ -19,7 +18,6 @@ import LoginForm from './LoginForm/LoginForm';
 import ManageListingsPage from './ManageListingsPage/ManageListingsPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import OrderPage from './OrderPage/OrderPage';
-import PasswordChangePage from './PasswordChangePage/PasswordChangePage';
 import PasswordForgottenForm from './PasswordForgottenForm/PasswordForgottenForm';
 import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage';
 import PayoutDetailsForm from './PayoutDetailsForm/PayoutDetailsForm';
@@ -39,7 +37,6 @@ export {
   AuthenticationPage,
   BookingDatesForm,
   ChangeAccountPasswordForm,
-  ChangePasswordForm,
   CheckoutPage,
   ContactDetailsPage,
   EditListingDescriptionForm,
@@ -57,7 +54,6 @@ export {
   ManageListingsPage,
   NotFoundPage,
   OrderPage,
-  PasswordChangePage,
   PasswordForgottenForm,
   PasswordForgottenPage,
   PayoutDetailsForm,

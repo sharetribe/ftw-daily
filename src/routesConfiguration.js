@@ -11,7 +11,6 @@ import {
   ManageListingsPage,
   NotFoundPage,
   OrderPage,
-  PasswordChangePage,
   PasswordForgottenPage,
   PayoutPreferencesPage,
   ProfilePage,
@@ -155,12 +154,6 @@ const routesConfiguration = [
     exact: true,
     name: 'PasswordForgottenPage',
     component: props => <PasswordForgottenPage {...props} />,
-  },
-  {
-    path: '/password/change',
-    exact: true,
-    name: 'PasswordChangePage',
-    component: props => <PasswordChangePage {...props} />,
   },
   {
     path: '/inbox',

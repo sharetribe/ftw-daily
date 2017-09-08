@@ -32,7 +32,6 @@ import * as TopbarDesktop from './components/TopbarDesktop/TopbarDesktop.example
 import * as BookingDatesForm from './containers/BookingDatesForm/BookingDatesForm.example';
 import * as ChangeAccountPasswordForm
   from './containers/ChangeAccountPasswordForm/ChangeAccountPasswordForm.example';
-import * as ChangePasswordForm from './containers/ChangePasswordForm/ChangePasswordForm.example';
 import * as Colors from './containers/StyleguidePage/Colors.example';
 import * as EditListingDescriptionForm
   from './containers/EditListingDescriptionForm/EditListingDescriptionForm.example';
@@ -57,7 +56,6 @@ export {
   BookingDatesForm,
   Button,
   ChangeAccountPasswordForm,
-  ChangePasswordForm,
   Colors,
   CurrencyInputField,
   DateInputField,
