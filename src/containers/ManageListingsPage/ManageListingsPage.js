@@ -39,6 +39,7 @@ export class ManageListingsPageComponent extends Component {
       authInfoError,
       authInProgress,
       closingListing,
+      closingListingError,
       currentUser,
       currentUserHasListings,
       history,
@@ -52,6 +53,7 @@ export class ManageListingsPageComponent extends Component {
       onManageDisableScrolling,
       onOpenListing,
       openingListing,
+      openingListingError,
       pagination,
       queryInProgress,
       queryListingsError,
@@ -102,6 +104,8 @@ export class ManageListingsPageComponent extends Component {
       : null;
 
     const listingMenuOpen = this.state.listingMenuOpen;
+    const closingErrorListingId = !!closingListingError && closingListingError.listingId;
+    const openingErrorListingId = !!openingListingError && openingListingError.listingId;
 
     return (
       <PageLayout
@@ -139,6 +143,8 @@ export class ManageListingsPageComponent extends Component {
                 onToggleMenu={this.onToggleMenu}
                 onCloseListing={onCloseListing}
                 onOpenListing={onOpenListing}
+                hasOpeningError={openingErrorListingId.uuid === l.id.uuid}
+                hasClosingError={closingErrorListingId.uuid === l.id.uuid}
               />
             ))}
           </div>
@@ -160,7 +166,9 @@ ManageListingsPageComponent.defaultProps = {
   queryListingsError: null,
   queryParams: null,
   closingListing: null,
+  closingListingError: null,
   openingListing: null,
+  openingListingError: null,
 };
 
 const { arrayOf, bool, func, instanceOf, number, object, shape, string } = PropTypes;
@@ -169,6 +177,10 @@ ManageListingsPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
   closingListing: shape({ uuid: string.isRequired }),
+  closingListingError: shape({
+    listingId: propTypes.uuid.isRequired,
+    error: instanceOf(Error).isRequired,
+  }),
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   isAuthenticated: bool.isRequired,
@@ -180,6 +192,10 @@ ManageListingsPageComponent.propTypes = {
   onManageDisableScrolling: func.isRequired,
   onOpenListing: func.isRequired,
   openingListing: shape({ uuid: string.isRequired }),
+  openingListingError: shape({
+    listingId: propTypes.uuid.isRequired,
+    error: instanceOf(Error).isRequired,
+  }),
   pagination: propTypes.pagination,
   queryInProgress: bool.isRequired,
   queryListingsError: instanceOf(Error),
