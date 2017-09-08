@@ -21,14 +21,10 @@ const Avatar = props => {
           rootClassName={css.avatarImage}
           alt={displayName}
           image={avatarUser.profileImage}
-          nameSet={[
-            { name: 'square-xlarge', size: '1x' },
-            { name: 'square-xlarge2x', size: '2x' },
-          ]}
+          nameSet={[{ name: 'square-xlarge', size: '1x' }, { name: 'square-xlarge2x', size: '2x' }]}
         />
       </div>
     );
-
   } else {
     // Placeholder avatar (initials)
     return (
