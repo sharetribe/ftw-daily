@@ -1,0 +1,14 @@
+@import '../../marketplace.css';
+
+.root {
+  background-color: var(--matterColorLight);
+}
+.content {
+  width: calc(100% - 48px);
+  margin: 12px 24px;
+
+  @media (--viewportMedium) {
+    max-width: 565px;
+    margin: 89px auto;
+  }
+}

@@ -107,6 +107,22 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
           role="menuitem">
           <a
             className=""
+            href="/profile-settings"
+            onClick={[Function]}
+            style={Object {}}
+            title={null}>
+            <span
+              className={undefined} />
+            <span>
+              Profile settings
+            </span>
+          </a>
+        </li>
+        <li
+          className=""
+          role="menuitem">
+          <a
+            className=""
             href="/listings"
             onClick={[Function]}
             style={Object {}}

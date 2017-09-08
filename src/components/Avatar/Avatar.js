@@ -2,20 +2,41 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { ensureUser } from '../../util/data';
+import { ResponsiveImage } from '../../components/';
 
 import css from './Avatar.css';
 
 const Avatar = props => {
   const { rootClassName, className, user } = props;
   const classes = classNames(rootClassName || css.root, className);
-  const { displayName, abbreviatedName } = ensureUser(user).attributes.profile;
-  const placeHolderAvatar = (
-    <div className={classes} title={displayName}>
-      <span className={css.initials}>{abbreviatedName}</span>
-    </div>
-  );
+  const avatarUser = ensureUser(user);
+  const { displayName, abbreviatedName } = avatarUser.attributes.profile;
 
-  return placeHolderAvatar;
+  // TODO this is a temporary avatar fix for currentUser's profile data.
+  // Avatar images should be included to all user's attributes in the future.
+  if (avatarUser.profileImage) {
+    return (
+      <div className={classes} title={displayName}>
+        <ResponsiveImage
+          rootClassName={css.avatarImage}
+          alt={displayName}
+          image={avatarUser.profileImage}
+          nameSet={[
+            { name: 'square-xlarge', size: '1x' },
+            { name: 'square-xlarge2x', size: '2x' },
+          ]}
+        />
+      </div>
+    );
+
+  } else {
+    // Placeholder avatar (initials)
+    return (
+      <div className={classes} title={displayName}>
+        <span className={css.initials}>{abbreviatedName}</span>
+      </div>
+    );
+  }
 };
 
 const { string, oneOfType } = PropTypes;

@@ -2,6 +2,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
 <withRouter(PageLayout)
   authInfoError={null}
   logoutError={null}
+  scrollingDisabled={false}
   title="Manage listings">
   <Topbar
     authInProgress={false}
@@ -21,7 +22,8 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
     }
     notificationCount={0}
     onLogout={[Function]}
-    onManageDisableScrolling={[Function]} />
+    onManageDisableScrolling={[Function]}
+    scrollingDisabled={false} />
   <UserNav
     className={null}
     rootClassName={null}

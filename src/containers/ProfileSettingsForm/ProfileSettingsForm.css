@@ -1,0 +1,260 @@
+@import '../../marketplace.css';
+
+:root {
+  --avatarSize: 96px;
+  --avatarSizeDesktop: 240px;
+}
+
+.root {
+  margin-top: 23px;
+
+  @media (--viewportMedium) {
+    margin-top: 35px;
+  }
+}
+
+.sectionContainer {
+  padding: 0;
+  margin-bottom: 34px;
+
+  @media (--viewportMedium) {
+    padding: 0;
+    margin-bottom: 54px;
+  }
+}
+
+.sectionTitle {
+  /* Font */
+  color: var(--matterColorAnti);
+
+  margin-top: 0;
+  margin-bottom: 13px;
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+}
+
+.lastSection {
+  margin-bottom: 66px;
+  @media (--viewportMedium) {
+    margin-bottom: 111px;
+  }
+}
+
+.uploadAvatarInput {
+  display: none;
+}
+
+.uploadAvatarWrapper {
+  margin-top: 19px;
+  margin-bottom: 18px;
+
+  @media (--viewportMedium) {
+    margin-top: 44px;
+    margin-bottom: 20px;
+  }
+}
+
+.label {
+  width: var(--avatarSize);
+  @media (--viewportMedium) {
+    width: var(--avatarSizeDesktop);
+  }
+}
+
+.avatarPlaceholder,
+.avatarContainer {
+  /* Dimension */
+  position: relative;
+  width: var(--avatarSize);
+  height: var(--avatarSize);
+
+  /* Center content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Initial coloring */
+  background-color: var(--matterColorBright);
+  border-radius: calc(var(--avatarSize) / 2);
+  cursor: pointer;
+
+  @media (--viewportMedium) {
+    width: var(--avatarSizeDesktop);
+    height: var(--avatarSizeDesktop);
+    border-radius: calc(var(--avatarSizeDesktop) / 2);
+  }
+
+}
+
+.avatarPlaceholder {
+  /* Placeholder border */
+  border-style: dashed;
+  border-color: var(--matterColorNegative);
+  border-width: 2px;
+
+  &:hover {
+    border-color: var(--matterColorAnti);
+  }
+}
+
+.avatarPlaceholderTextMobile {
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+.avatarPlaceholderText {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: block;
+    max-width: 130px;
+    text-align: center;
+  }
+}
+
+.avatarUploadError {
+  /* Placeholder border */
+  border-style: dashed;
+  border-color: var(--failColor);
+  border-width: 2px;
+}
+
+.error {
+  /* Font */
+  @apply --marketplaceH4FontStyles;
+  color: var(--failColor);
+  margin-top: 18px;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    margin-top: 22px;
+    margin-bottom: 2px;
+  }
+}
+
+.changeAvatar {
+  /* Font */
+  @apply --marketplaceH5FontStyles;
+
+  /* Positioning: right */
+  position: absolute;
+  bottom: 27px;
+  right: -129px;
+  /* Dimensions */
+  width: 105px;
+  height: 41px;
+  padding: 9px 10px 9px 35px;
+
+  /* Look and feel (buttonish) */
+  background-color: var(--matterColorLight);
+  background-image: url('data:image/svg+xml;utf8,<svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g stroke="#4A4A4A" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><path d="M5.307 11.155L1 13l1.846-4.308L10.54 1 13 3.46zM11 5L9 3M5 11L3 9"/></g></svg>');
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  border: solid 1px var(--matterColorNegative);
+
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    /* Position: under */
+    bottom: -8px;
+    right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.uploadingImage {
+  /* Dimensions */
+  width: var(--avatarSize);
+  height: var(--avatarSize);
+
+  /* Image fitted to container */
+  object-fit: cover;
+  background-color: var(--matterColorNegative); /* Loading BG color */
+  border-radius: calc(var(--avatarSize) / 2);
+  overflow: hidden;
+
+  display: block;
+  position: relative;
+  margin: 0;
+
+  @media (--viewportMedium) {
+    width: var(--avatarSizeDesktop);
+    height: var(--avatarSizeDesktop);
+    border-radius: calc(var(--avatarSizeDesktop) / 2);
+  }
+}
+
+.uploadingImageOverlay {
+  /* Cover everything (overlay) */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* Overlay style */
+  background-color: var(--matterColorLight);
+  opacity: 0.8;
+
+  /* Center content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Avatar has square aspect ratio */
+/* Default is 3:2 */
+.squareAspectRatio {
+  padding-bottom: 100%;
+}
+
+.tip {
+  @apply --marketplaceDefaultFontStyles;
+  color: var(--matterColorAnti);
+  margin-top: 0;
+  margin-bottom: 13px;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+}
+
+.fileInfo {
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColorAnti);
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.nameContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+
+  @media (--viewportMedium) {
+    margin-top: 26px;
+  }
+}
+
+.firstName {
+  width: calc(34% - 9px);
+}
+
+.lastName {
+  width: calc(66% - 9px);
+}
+
+.submitButton {
+  margin-top: 24px;
+}

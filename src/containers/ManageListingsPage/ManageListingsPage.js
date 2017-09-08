@@ -38,6 +38,7 @@ export class ManageListingsPageComponent extends Component {
     const {
       authInfoError,
       authInProgress,
+      closingListing,
       currentUser,
       currentUserHasListings,
       history,
@@ -47,15 +48,15 @@ export class ManageListingsPageComponent extends Component {
       logoutError,
       notificationCount,
       onCloseListing,
-      onOpenListing,
       onLogout,
       onManageDisableScrolling,
+      onOpenListing,
+      openingListing,
       pagination,
       queryInProgress,
       queryListingsError,
       queryParams,
-      openingListing,
-      closingListing,
+      scrollingDisabled,
     } = this.props;
 
     // TODO Handle openingListingError, closingListingError,
@@ -103,7 +104,12 @@ export class ManageListingsPageComponent extends Component {
     const listingMenuOpen = this.state.listingMenuOpen;
 
     return (
-      <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Manage listings">
+      <PageLayout
+        authInfoError={authInfoError}
+        logoutError={logoutError}
+        scrollingDisabled={scrollingDisabled}
+        title="Manage listings"
+      >
         <Topbar
           authInProgress={authInProgress}
           currentUser={currentUser}
@@ -115,6 +121,7 @@ export class ManageListingsPageComponent extends Component {
           notificationCount={notificationCount}
           onLogout={onLogout}
           onManageDisableScrolling={onManageDisableScrolling}
+          scrollingDisabled={scrollingDisabled}
         />
         <UserNav selectedPageName="ManageListingsPage" />
         {queryInProgress ? loadingResults : null}
@@ -161,6 +168,7 @@ const { arrayOf, bool, func, instanceOf, number, object, shape, string } = PropT
 ManageListingsPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
+  closingListing: shape({ uuid: string.isRequired }),
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   isAuthenticated: bool.isRequired,
@@ -168,15 +176,15 @@ ManageListingsPageComponent.propTypes = {
   logoutError: instanceOf(Error),
   notificationCount: number,
   onCloseListing: func.isRequired,
-  onOpenListing: func.isRequired,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  onOpenListing: func.isRequired,
+  openingListing: shape({ uuid: string.isRequired }),
   pagination: propTypes.pagination,
   queryInProgress: bool.isRequired,
   queryListingsError: instanceOf(Error),
   queryParams: object,
-  closingListing: shape({ uuid: string.isRequired }),
-  openingListing: shape({ uuid: string.isRequired }),
+  scrollingDisabled: bool.isRequired,
 
   // from withRouter
   history: shape({
