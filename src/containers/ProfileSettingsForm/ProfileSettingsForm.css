@@ -15,7 +15,7 @@
 
 .sectionContainer {
   padding: 0;
-  margin-bottom: 34px;
+  margin-bottom: 36px;
 
   @media (--viewportMedium) {
     padding: 0;
@@ -227,11 +227,11 @@
   @apply --marketplaceDefaultFontStyles;
   color: var(--matterColorAnti);
   margin-top: 0;
-  margin-bottom: 13px;
+  margin-bottom: 16px;
 
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 11px;
   }
 
 }
