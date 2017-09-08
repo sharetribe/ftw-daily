@@ -35,10 +35,10 @@ export default function reducer(state = initialState, action = {}) {
         uploadImageError: null,
       };
     case UPLOAD_IMAGE_SUCCESS: {
-      // payload: { id: 'tempId', imageId: 'some-real-id'}
-      const { id, imageId } = payload;
+      // payload: { id: 'tempId', uploadedImage }
+      const { id, uploadedImage } = payload;
       const { file } = state.image || {};
-      const image = { id, imageId, file };
+      const image = { id, imageId: uploadedImage.id, file, uploadedImage };
       return { ...state, image, uploadInProgress: false };
     }
     case UPLOAD_IMAGE_ERROR: {
@@ -113,8 +113,11 @@ export function uploadImage(actionPayload) {
     dispatch(uploadImageRequest(actionPayload));
 
     return sdk.images
-      .uploadProfileImage({ image: actionPayload.file })
-      .then(resp => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } })))
+      .uploadProfileImage({ image: actionPayload.file }, { expand: true })
+      .then(resp => {
+        const uploadedImage = resp.data.data;
+        dispatch(uploadImageSuccess({ data: { id, uploadedImage  } }))
+      })
       .catch(e => dispatch(uploadImageError({ id, error: e })));
   };
 }

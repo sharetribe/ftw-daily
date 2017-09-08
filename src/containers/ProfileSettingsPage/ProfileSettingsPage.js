@@ -128,6 +128,7 @@ ProfileSettingsPageComponent.propTypes = {
     id: string,
     imageId: propTypes.uuid,
     file: object,
+    uploadedImage: propTypes.image,
   }),
   logoutError: instanceOf(Error),
   notificationCount: number,
