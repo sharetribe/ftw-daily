@@ -127,7 +127,7 @@ ProfileSettingsPageComponent.propTypes = {
   image: shape({
     id: string,
     imageId: propTypes.uuid,
-    file: instanceOf(File),
+    file: object,
   }),
   logoutError: instanceOf(Error),
   notificationCount: number,
