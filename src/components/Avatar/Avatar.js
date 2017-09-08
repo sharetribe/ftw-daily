@@ -14,7 +14,7 @@ const Avatar = props => {
 
   // TODO this is a temporary avatar fix for currentUser's profile data.
   // Avatar images should be included to all user's attributes in the future.
-  if (avatarUser.profileImage) {
+  if (avatarUser.profileImage && avatarUser.profileImage.id) {
     return (
       <div className={classes} title={displayName}>
         <ResponsiveImage
