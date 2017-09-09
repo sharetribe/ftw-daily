@@ -27,7 +27,7 @@ import MenuIcon from './MenuIcon';
 import css from './ManageListingCard.css';
 
 // Menu content needs the same padding
-const MENU_CONTENT_OFFSET = 8;
+const MENU_CONTENT_OFFSET = -12;
 
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {
