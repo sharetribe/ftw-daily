@@ -304,9 +304,9 @@ const routesConfiguration = [
 
   // Do not change this path!
   //
-  // The API expects that the Starter App implements /email_verification endpoint
+  // The API expects that the Starter App implements /verify-email endpoint
   {
-    path: '/email_verification',
+    path: '/verify-email',
     auth: true,
     authPage: 'LoginPage',
     exact: true,
