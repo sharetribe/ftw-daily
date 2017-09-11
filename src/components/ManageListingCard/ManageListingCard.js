@@ -177,7 +177,7 @@ export const ManageListingCardComponent = props => {
           <div className={css.menubarGradient} />
           <div className={css.menubar}>
             <Menu
-              className={classNames(css.menu, { [css.cardIsOpen]: open }) }
+              className={classNames(css.menu, { [css.cardIsOpen]: open })}
               contentPlacementOffset={MENU_CONTENT_OFFSET}
               contentPosition="left"
               useArrow={false}
