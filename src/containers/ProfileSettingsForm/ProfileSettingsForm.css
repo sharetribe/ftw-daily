@@ -15,7 +15,7 @@
 
 .sectionContainer {
   padding: 0;
-  margin-bottom: 34px;
+  margin-bottom: 36px;
 
   @media (--viewportMedium) {
     padding: 0;
@@ -94,6 +94,8 @@
   border-color: var(--matterColorNegative);
   border-width: 2px;
 
+  transition: var(--transitionStyleButton);
+
   &:hover {
     border-color: var(--matterColorAnti);
   }
@@ -138,6 +140,8 @@
   /* Font */
   @apply --marketplaceH5FontStyles;
 
+  font-weight: var(--fontWeightMedium);
+
   /* Positioning: right */
   position: absolute;
   bottom: 27px;
@@ -145,24 +149,31 @@
   /* Dimensions */
   width: 105px;
   height: 41px;
-  padding: 9px 10px 9px 35px;
+  padding: 10px 10px 11px 35px;
 
   /* Look and feel (buttonish) */
   background-color: var(--matterColorLight);
   background-image: url('data:image/svg+xml;utf8,<svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g stroke="#4A4A4A" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><path d="M5.307 11.155L1 13l1.846-4.308L10.54 1 13 3.46zM11 5L9 3M5 11L3 9"/></g></svg>');
   background-repeat: no-repeat;
-  background-position: 15px center;
+  background-position: 15px 12px;
   border: solid 1px var(--matterColorNegative);
+  border-radius: 2px;
 
   margin-top: 0;
   margin-bottom: 0;
 
   @media (--viewportMedium) {
     /* Position: under */
-    bottom: -8px;
+    bottom: -10px;
     right: auto;
     margin-top: 0;
     margin-bottom: 0;
+    transition: var(--transitionStyleButton);
+    padding: 7px 10px 11px 35px;
+  }
+
+  &:hover {
+    border: solid 1px var(--matterColorAnti);
   }
 }
 
@@ -216,17 +227,17 @@
   @apply --marketplaceDefaultFontStyles;
   color: var(--matterColorAnti);
   margin-top: 0;
-  margin-bottom: 13px;
+  margin-bottom: 16px;
 
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 11px;
   }
 
 }
 
 .fileInfo {
-  @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH5FontStyles;
   color: var(--matterColorAnti);
   margin-top: 0;
   margin-bottom: 0;
