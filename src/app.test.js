@@ -82,7 +82,7 @@ describe('Application', () => {
       '/account/contact-details': defaultAuthPath,
       '/account/payout-preferences': defaultAuthPath,
       '/account/security': defaultAuthPath,
-      '/email_verification': loginPath,
+      '/verify-email': loginPath,
     };
     forEach(urlRedirects, (redirectPath, url) => {
       const context = {};
