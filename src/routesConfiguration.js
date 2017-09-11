@@ -157,12 +157,6 @@ const routesConfiguration = [
     component: props => <PasswordForgottenPage {...props} />,
   },
   {
-    path: '/reset-password',
-    exact: true,
-    name: 'PasswordResetPage',
-    component: props => <PasswordResetPage {...props} />,
-  },
-  {
     path: '/inbox',
     auth: true,
     exact: true,
@@ -300,6 +294,16 @@ const routesConfiguration = [
     exact: true,
     name: 'NotFoundPage',
     component: props => <NotFoundPage {...props} />,
+  },
+
+  // Do not change this path!
+  //
+  // The API expects that the Starter App implements /reset-password endpoint
+  {
+    path: '/reset-password',
+    exact: true,
+    name: 'PasswordResetPage',
+    component: props => <PasswordResetPage {...props} />,
   },
 
   // Do not change this path!
