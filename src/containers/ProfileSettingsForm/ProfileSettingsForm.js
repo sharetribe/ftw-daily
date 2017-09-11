@@ -10,6 +10,7 @@ import { Avatar, Button, ImageFromFile, SpinnerIcon, TextInputField } from '../.
 import css from './ProfileSettingsForm.css';
 
 const ACCEPT_IMAGES = 'image/*';
+const UPLOAD_CHANGE_DELAY = 2000; // Show spinner so that browser has time to load img srcset
 
 const RenderAvatar = props => {
   const { accept, id, input, label, type, disabled, uploadImageError } = props;
@@ -59,6 +60,31 @@ RenderAvatar.propTypes = {
 };
 
 class ProfileSettingsFormComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.uploadDelayTimeoutId = null;
+    this.state = { uploadDelay: false };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // Upload delay is additional time window where Avatar is added to the DOM,
+    // but not yet visible (time to load image URL from srcset)
+    if (this.props.uploadInProgress && !nextProps.uploadInProgress) {
+      this.setState({ uploadDelay: true });
+      this.uploadDelayTimeoutId = window.setTimeout(
+        () => {
+          this.setState({ uploadDelay: false });
+        },
+        UPLOAD_CHANGE_DELAY
+      );
+    }
+  }
+
+  componentWillUnmount() {
+    window.clearTimeout(this.blurTimeoutId);
+  }
+
   render() {
     const {
       className,
@@ -104,7 +130,7 @@ class ProfileSettingsFormComponent extends Component {
     });
     const lastNameRequired = validators.required(lastNameRequiredMessage);
 
-    const uploadingOverlay = uploadInProgress
+    const uploadingOverlay = uploadInProgress || this.state.uploadDelay
       ? <div className={css.uploadingImageOverlay}><SpinnerIcon /></div>
       : null;
 
@@ -112,7 +138,10 @@ class ProfileSettingsFormComponent extends Component {
     const errorClasses = classNames({ [css.avatarUploadError]: hasUploadError });
     const transientUserProfileImage = profileImage.uploadedImage || user.profileImage;
     const transientUser = { ...user, profileImage: transientUserProfileImage };
-    const avatarImage = uploadInProgress && profileImage.file
+
+    const fileUploadInProgress = uploadInProgress && profileImage.file;
+    const delayAfterUpload = profileImage.imageId && this.state.uploadDelay;
+    const imageFromFile = fileUploadInProgress || delayAfterUpload
       ? <ImageFromFile
           id={profileImage.id}
           className={errorClasses}
@@ -122,11 +151,22 @@ class ProfileSettingsFormComponent extends Component {
         >
           {uploadingOverlay}
         </ImageFromFile>
-      : <Avatar className={errorClasses} user={transientUser} />;
+      : null;
 
-    const chooseAvatarLabel = profileImage.imageId || (uploadInProgress && profileImage.file)
+    // Avatar is rendered in hidden during the upload delay
+    // Upload delay smoothes image change process:
+    // responsive img has time to load srcset stuff before it is shown to user.
+    const avatarClasses = classNames(errorClasses, {
+      [css.avatarInvisible]: this.state.uploadDelay,
+    });
+    const avatarComponent = !fileUploadInProgress && profileImage.imageId
+      ? <Avatar className={avatarClasses} user={transientUser} />
+      : null;
+
+    const chooseAvatarLabel = profileImage.imageId || fileUploadInProgress
       ? <div className={css.avatarContainer}>
-          {avatarImage}
+          {imageFromFile}
+          {avatarComponent}
           <div className={css.changeAvatar}>
             <FormattedMessage id="ProfileSettingsForm.changeAvatar" />
           </div>
@@ -202,7 +242,7 @@ class ProfileSettingsFormComponent extends Component {
       </form>
     );
   }
-};
+}
 
 ProfileSettingsFormComponent.defaultProps = {
   rootClassName: null,
