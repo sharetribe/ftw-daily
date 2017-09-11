@@ -19,6 +19,8 @@ import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
 import ImageCarousel from './ImageCarousel/ImageCarousel';
 import ImageFromFile from './ImageFromFile/ImageFromFile';
+import KeysIcon from './KeysIcon/KeysIcon';
+import KeysIconSuccess from './KeysIconSuccess/KeysIconSuccess';
 import ListingCard from './ListingCard/ListingCard';
 import LocationAutocompleteInput, {
   LocationAutocompleteInputField,
@@ -88,6 +90,8 @@ export {
   ImageCarousel,
   ImageFromFile,
   InlineTextButton,
+  KeysIcon,
+  KeysIconSuccess,
   ListingCard,
   LocationAutocompleteInput,
   LocationAutocompleteInputField,

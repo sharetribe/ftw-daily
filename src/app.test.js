@@ -45,8 +45,8 @@ describe('Application', () => {
       '/signup': 'Sign up',
       '/password': 'Request new password',
       '/password/forgotten': 'Request new password',
-      '/password/change': 'Type new password',
       '/this-url-should-not-be-found': 'Page not found',
+      '/reset-password?t=token&e=email': 'Reset password',
     };
     forEach(urlTitles, (title, url) => {
       const context = {};

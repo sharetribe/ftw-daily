@@ -32,7 +32,6 @@ import * as TopbarDesktop from './components/TopbarDesktop/TopbarDesktop.example
 import * as BookingDatesForm from './containers/BookingDatesForm/BookingDatesForm.example';
 import * as ChangeAccountPasswordForm
   from './containers/ChangeAccountPasswordForm/ChangeAccountPasswordForm.example';
-import * as ChangePasswordForm from './containers/ChangePasswordForm/ChangePasswordForm.example';
 import * as Colors from './containers/StyleguidePage/Colors.example';
 import * as EditListingDescriptionForm
   from './containers/EditListingDescriptionForm/EditListingDescriptionForm.example';
@@ -45,6 +44,7 @@ import * as EditListingPricingForm
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
 import * as PasswordForgottenForm
   from './containers/PasswordForgottenForm/PasswordForgottenForm.example';
+import * as PasswordResetForm from './containers/PasswordResetForm/PasswordResetForm.example';
 import * as PayoutDetailsForm from './containers/PayoutDetailsForm/PayoutDetailsForm.example';
 import * as SignupForm from './containers/SignupForm/SignupForm.example';
 import * as StripePaymentForm from './containers/StripePaymentForm/StripePaymentForm.example';
@@ -57,7 +57,6 @@ export {
   BookingDatesForm,
   Button,
   ChangeAccountPasswordForm,
-  ChangePasswordForm,
   Colors,
   CurrencyInputField,
   DateInputField,
@@ -80,6 +79,7 @@ export {
   NamedLink,
   PaginationLinks,
   PasswordForgottenForm,
+  PasswordResetForm,
   PayoutDetailsForm,
   ResponsiveImage,
   SelectField,
