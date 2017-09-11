@@ -66,30 +66,20 @@
   display: block;
   width: 100%;
   position: relative;
+  transition: var(--transitionStyleButton);
 
-  &:hover .menuOverlay {
-    opacity: 0.8;
-  }
-
-  &:hover .menuOverlayContent {
-    opacity: 1.0;
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: var(--boxShadowListingCard);
   }
 }
 
-.menuOverlayOpen {
-  & .menuOverlay {
-    opacity: 0.8;
-  }
-
-  & .menuOverlayContent {
-    opacity: 0.8;
-  }
-}
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
   padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
   background: var(--matterColorNegative); /* Loading BG color */
+  margin-bottom: 1px; /* Fix 1px bug */
 }
 
 .rootForImage {
@@ -133,19 +123,24 @@
 }
 
 .menuLabel {
-  padding: 8px 8px 0 8px;
+  padding: 0px 9px 0 8px;
 }
 
 .iconWrapper {
-  padding: 2px 10px 8px 10px;
+  padding: 2px 10px 0 10px;
   color: var(--matterColorLight);
-  border-radius: 2px 2px 0 0;
+  border-radius: 4px;
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    background-color: rgba(0,0,0,0.7);
+  }
 }
 
 .listingMenuIsOpen {
   & .iconWrapper {
-    background-color: var(--matterColorLight);
-    color: var(--matterColor);
+    background-color: rgba(0,0,0,0.7);
+    color: var(--matterColorLight);
   }
 }
 
@@ -158,25 +153,28 @@
   right: 0;
   z-index: var(--zIndexPopup);
 
-  background-color: var(--matterColorLight);
-  border-radius: 2px 0 2px 2px;
+  background-color: var(--matterColor);
+  border-radius: 4px;
+  box-shadow: var(--boxShadowPopup);
 }
 
 .menuItem {
-  @apply --marketplaceH4FontStyles;
-  color: var(--matterColor);
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorLight);
+  font-weight: var(--fontWeightMedium);
   white-space: nowrap;
   text-align: left;
-  min-width: 175px;
   padding: 8px 14px;
+  border-radius: 4px;
 
   /* Remove default margins from font */
   margin-top: 0;
   margin-bottom: 0;
+  transition: var(--transitionStyleButton);
 
   &:hover {
-    color: var(--failColor);
     text-decoration: none;
+    background-color: var(--failColor);
   }
 
   @media (--viewportMedium) {
@@ -336,5 +334,14 @@
   @apply --marketplaceH5FontStyles;
   width: 114px;
   height: 41px;
-  padding: 8px 0;
+  padding: 6px 0 8px;
+  border-radius: 4px;
+}
+
+.menu {
+  display: none;
+}
+
+.cardIsOpen {
+  display: block;
 }

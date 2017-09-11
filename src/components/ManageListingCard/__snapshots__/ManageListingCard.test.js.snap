@@ -44,8 +44,8 @@ exports[`ManageListingCard matches snapshot 1`] = `
       <div />
       <div>
         <Menu
-          className={null}
-          contentPlacementOffset={8}
+          className="undefined"
+          contentPlacementOffset={-12}
           contentPosition="left"
           isOpen={false}
           onToggleActive={[Function]}
