@@ -177,6 +177,7 @@ export const ManageListingCardComponent = props => {
           <div className={css.menubarGradient} />
           <div className={css.menubar}>
             <Menu
+              className={classNames(css.menu, { [css.cardIsOpen]: open }) }
               contentPlacementOffset={MENU_CONTENT_OFFSET}
               contentPosition="left"
               useArrow={false}
@@ -212,6 +213,7 @@ export const ManageListingCardComponent = props => {
           </div>
         </div>
         {closedOverlay}
+        {loadingOrErrorOverlay}
       </div>
       <div className={css.info}>
         <div className={css.price}>
@@ -238,7 +240,6 @@ export const ManageListingCardComponent = props => {
           <FormattedMessage id="ManageListingCard.edit" />
         </SecondaryButton>
       </div>
-      {loadingOrErrorOverlay}
     </NamedLink>
   );
 };
