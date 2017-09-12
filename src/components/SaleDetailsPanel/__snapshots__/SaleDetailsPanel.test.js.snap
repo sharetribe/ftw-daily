@@ -24,7 +24,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
         sizes="100vw" />
     </div>
     <div>
-      <AvatarLarge
+      <AvatarMedium
         user={
           Object {
             "attributes": Object {
