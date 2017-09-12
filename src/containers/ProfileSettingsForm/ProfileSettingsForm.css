@@ -136,6 +136,11 @@
   }
 }
 
+.avatar {
+  width: 100%;
+  height: 100%;
+}
+
 .changeAvatar {
   /* Font */
   @apply --marketplaceH5FontStyles;
