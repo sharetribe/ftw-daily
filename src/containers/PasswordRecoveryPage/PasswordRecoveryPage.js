@@ -7,8 +7,8 @@ import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { recoverPassword } from './PasswordRecoveryPage.duck';
-import { PageLayout, Topbar, NamedLink } from '../../components';
+import { recoverPassword, retypeEmail } from './PasswordRecoveryPage.duck';
+import { PageLayout, Topbar, NamedLink, InlineTextButton } from '../../components';
 import { PasswordRecoveryForm } from '../../containers';
 
 import KeysIcon from './KeysIcon';
@@ -45,6 +45,7 @@ export const PasswordRecoveryPageComponent = props => {
     recoveryInProgress,
     recoveryError,
     onSubmitEmail,
+    onRetypeEmail,
   } = props;
 
   const title = submittedEmail
@@ -72,9 +73,14 @@ export const PasswordRecoveryPageComponent = props => {
         </NamedLink>
       </p>
       <p>
-        <NamedLink className={css.emailSubmittedLink} name="PasswordRecoveryPage">
+
+        <InlineTextButton
+          className={css.emailSubmittedLink}
+          onClick={onRetypeEmail}
+        >
           <FormattedMessage id="PasswordRecoveryPage.fixEmail" values={{ fixEmailHelp }} />
-        </NamedLink>
+        </InlineTextButton>
+
       </p>
     </div>
   );
@@ -106,7 +112,10 @@ export const PasswordRecoveryPageComponent = props => {
         <p>{message}</p>
         {submittedEmail
           ? emailSubmittedLinks
-          : <PasswordRecoveryForm onSubmit={values => onSubmitEmail(values.email)} />}
+          : <PasswordRecoveryForm
+              onSubmit={values => onSubmitEmail(values.email)}
+              initialValues={{ email: initialEmail }}
+            />}
       </div>
 
     </PageLayout>
@@ -146,6 +155,7 @@ PasswordRecoveryPageComponent.propTypes = {
   recoveryInProgress: bool.isRequired,
   recoveryError: instanceOf(Error),
   onSubmitEmail: func.isRequired,
+  onRetypeEmail: func.isRequired,
 
   // from withRouter
   history: shape({
@@ -199,6 +209,7 @@ const mapDispatchToProps = dispatch => ({
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   onChange: () => dispatch(clearRecoveryError()),
   onSubmitEmail: email => dispatch(recoverPassword(email)),
+  onRetypeEmail: () => dispatch(retypeEmail()),
 });
 
 const PasswordRecoveryPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(

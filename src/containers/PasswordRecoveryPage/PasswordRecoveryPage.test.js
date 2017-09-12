@@ -21,6 +21,7 @@ describe('ContactDetailsPage', () => {
         onResendVerificationEmail={noop}
         recoveryInProgress={false}
         onSubmitEmail={noop}
+        onRetypeEmail={noop}
       />
     );
     expect(tree).toMatchSnapshot();
