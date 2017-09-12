@@ -8,7 +8,7 @@ import * as validators from '../../util/validators';
 import css from './PasswordRecoveryForm.css';
 
 const PasswordRecoveryFormComponent = props => {
-  const { handleSubmit, pristine, submitting, form, intl } = props;
+  const { handleSubmit, pristine, submitting, form, initialValues, intl } = props;
 
   // email
   const emailLabel = intl.formatMessage({
@@ -21,6 +21,8 @@ const PasswordRecoveryFormComponent = props => {
     id: 'PasswordRecoveryForm.emailRequired',
   });
   const emailRequired = validators.required(emailRequiredMessage);
+  const initialEmail = initialValues ? initialValues.email : null;
+  const buttonDisabled = (pristine && !initialEmail) || submitting;
   return (
     <form onSubmit={handleSubmit}>
       <TextInputField
@@ -41,7 +43,7 @@ const PasswordRecoveryFormComponent = props => {
           <FormattedMessage id="PasswordRecoveryForm.goToLogin" />
         </NamedLink>
       </p>
-      <PrimaryButton type="submit" disabled={pristine || submitting}>
+      <PrimaryButton type="submit" disabled={buttonDisabled}>
         <FormattedMessage id="PasswordRecoveryForm.sendInstructions" />
       </PrimaryButton>
     </form>

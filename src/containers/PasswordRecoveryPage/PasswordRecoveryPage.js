@@ -73,10 +73,7 @@ export const PasswordRecoveryPageComponent = props => {
       </p>
       <p>
 
-        <InlineTextButton
-          className={css.emailSubmittedLink}
-          onClick={onRetypeEmail}
-        >
+        <InlineTextButton className={css.emailSubmittedLink} onClick={onRetypeEmail}>
           <FormattedMessage id="PasswordRecoveryPage.fixEmail" values={{ fixEmailHelp }} />
         </InlineTextButton>
 
