@@ -156,7 +156,7 @@ class ProfileSettingsFormComponent extends Component {
     // Avatar is rendered in hidden during the upload delay
     // Upload delay smoothes image change process:
     // responsive img has time to load srcset stuff before it is shown to user.
-    const avatarClasses = classNames(errorClasses, {
+    const avatarClasses = classNames(errorClasses, css.avatar, {
       [css.avatarInvisible]: this.state.uploadDelay,
     });
     const avatarComponent = !fileUploadInProgress && profileImage.imageId
