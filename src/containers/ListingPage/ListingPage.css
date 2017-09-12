@@ -161,14 +161,7 @@
   /* Rendering context to the same lavel as listing image */
   position: relative;
 
-  /* Layout */
-  display: block;
-  width: 61px;
-  height: 61px;
-
   @media (--viewportMedium) {
-    width: 96px;
-    height: 96px;
     position: absolute;
     left: 60px;
     top: -48px;
@@ -177,32 +170,17 @@
   }
 }
 
-.avatar {
-  /* Font */
-  @apply --marketplaceAvatarFontStyles;
-
-  /* Layout */
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  margin-top: 0;
-  margin-bottom: 0;
-
-  /* Position possible initials to the center of the component */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* Colors */
-  background-color: var(--matterColorAnti);
-  color: var(--matterColorLight);
+.responsiveAvatarMedium {
+  display: none; /* Hide the medium avatar from the bigger screens */
+  @media screen and (max-width: 767px) {
+    display: flex;
+  }
 }
 
-/* Align the avatar initials properly within the circle */
-.avatar span {
-  margin-bottom: 5px;
+.responsiveAvatarLarge {
+  display: none; /* Hide the large avatar from the smaller screens */
   @media (--viewportMedium) {
-    margin-bottom: 0;
+    display: flex;
   }
 }
 

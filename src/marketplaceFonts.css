@@ -7,6 +7,9 @@
   --fontWeightSemiBold: 600;
   --fontWeightBold: 700;
 
+
+/* ================ Default font ================ */
+
   --marketplaceDefaultFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
@@ -20,6 +23,9 @@
       line-height: 24px;
     }
   }
+
+
+/* ================ Body font ================ */
 
   --marketplaceBodyFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
@@ -40,8 +46,10 @@
     }
   }
 
+
+/* ================ Hero title ================ */
+
   --marketplaceHeroTitleFontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightBold);
     font-size: 48px;
     line-height: 54px;
@@ -59,8 +67,11 @@
       margin-bottom: 31px;
     }
   }
+
+
+/* ================ H1, H2, H3, H4, H5 & H6 ================ */
+
   --marketplaceH1FontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightBold);
     font-size: 30px;
     line-height: 36px;
@@ -79,8 +90,8 @@
       margin-bottom: 24px;
     }
   }
+
   --marketplaceH2FontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 24px;
     line-height: 30px;
@@ -96,8 +107,8 @@
       margin-bottom: 19px;
     }
   }
+
   --marketplaceH3FontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 20px;
     line-height: 24px;
@@ -112,8 +123,8 @@
       margin-bottom: 16px;
     }
   }
+
   --marketplaceH4FontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 24px;
@@ -129,8 +140,8 @@
       margin-bottom: 15px;
     }
   }
+
   --marketplaceH5FontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
     font-size: 14px;
     line-height: 18px;
@@ -140,15 +151,14 @@
     margin-bottom: 8px;
 
     @media (--viewportMedium) {
-      font-size: 16px;
       line-height: 24px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 10px;
       margin-bottom: 14px;
     }
   }
+
   --marketplaceH6FontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightBold);
     font-size: 12px;
     line-height: 18px;
@@ -165,6 +175,10 @@
       margin-bottom: 6px;
     }
   }
+
+
+/* ================ Other fonts ================ */
+
   --marketplaceTinyFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
@@ -183,39 +197,9 @@
     }
   }
 
-  /* This font is specific to Avatar component only */
-  --marketplaceAvatarFontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: var(--fontWeightSemiBold);
-    font-size: 20px;
-    line-height: 24px;
-    letter-spacing: -0.2px;
-
-    @media (--viewportMedium) {
-      font-size: 30px;
-      line-height: 48px;
-    }
-  }
-  /* This font is specific to Avatar component only */
-  --marketplaceSmallAvatarFontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: var(--fontWeightBold);
-    font-size: 14px;
-    line-height: 18px;
-    letter-spacing: 0.1px;
-  }
-  /* This font is specific to Avatar component only */
-  --marketplaceMediumAvatarFontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
-    font-weight: var(--fontWeightSemiBold);
-    font-size: 20px;
-    line-height: 24px;
-    letter-spacing: -0.2px;
-  }
 
   /* This font is specific to Modal's (Lightbox) titles */
   --marketplaceModalTitle: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 30px;
     line-height: 36px;
@@ -227,8 +211,10 @@
     }
   }
 
+
+/* ================ Tabbed navigation font styles ================ */
+
   --marketplaceTabNavFontStyles {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 24px;
@@ -242,7 +228,6 @@
   }
 
   --marketplaceTabNavHorizontalFontStyles {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 24px;

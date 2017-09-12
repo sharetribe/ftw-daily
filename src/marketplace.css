@@ -30,7 +30,10 @@
       background-position-x: 80%;
   }
 
-  /* Colors */
+
+
+/* ================ Colors ================ */
+
   --marketplaceColor: #C0392B;
   --marketplaceColorLight: #FF4C38;
   --marketplaceColorDark: #8C291E;
@@ -49,7 +52,10 @@
 
   --matterColorLightTransparent: rgba(255,255,255,0.65);
 
-  /* Spacing units */
+
+
+/* ================ Spacing unites ================ */
+
   /* Multiples of mobile and desktop spacing units should be used with margins and paddings. */
   --spacingUnit: 6px;
   --spacingUnitDesktop: 8px;
@@ -64,25 +70,40 @@
   --boxShadowButton: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
   --boxShadowListingCard: 0 0 50px 0 rgba(0,0,0,0.1);
 
-  /* z-index base levels */
+
+
+/* ================ Z-index base levels ================ */
+
   /* small popups on UI should use z-indexes above 50 */
   --zIndexPopup: 50;
   /* modals and UI overlays should use z-indexes above 100 */
   --zIndexModal: 100;
 
-  /* Border radius */
+
+
+/* ================ Border radius ================ */
+
   --borderRadius: 2px;
   --borderRadiusMobileSearch: 3px;
 
-  /* Transitions */
+
+
+/* ================ Transition styles ================ */
+
   --transitionStyle: ease-in 0.2s;
   --transitionStyleButton: ease-in-out 0.1s;
 
-  /* Topbar */
+
+
+/* ================ Topbar heights ================ */
+
   --topbarHeight: 60px;
   --topbarHeightDesktop: 72px;
 
-  /* Links */
+
+
+/* ================ Links ================ */
+
   --marketplaceLinkStyles: {
 
     /* Position and dimensions */
@@ -105,7 +126,10 @@
     }
   }
 
-  /* Buttons */
+
+
+/* ================ Buttons ================ */
+
   --marketplaceButtonFontStyles: {
     font-family: "sofiapro", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
@@ -189,7 +213,10 @@
     }
   }
 
-  /* Inputs */
+
+
+/* ================ Inputs ================ */
+
   --marketplaceInputStyles: {
 
     /* Dimensions */
@@ -259,6 +286,8 @@
     }
   }
 }
+
+
 
 /* ================ Custom media queries ================ */
 

@@ -5,7 +5,7 @@ import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
 import { ensureListing, ensureTransaction, ensureBooking, ensureUser } from '../../util/data';
 import {
-  AvatarMedium,
+  AvatarLarge,
   BookingBreakdown,
   NamedLink,
   ResponsiveImage,
@@ -195,11 +195,11 @@ const SaleDetailsPanel = props => {
           />
         </div>
         <div className={css.avatarWrapperMobile}>
-          <AvatarMedium user={currentCustomer} />
+          <AvatarLarge user={currentCustomer} />
         </div>
         <div className={css.info}>
           <div className={css.avatarWrapperDesktop}>
-            <AvatarMedium user={currentCustomer} />
+            <AvatarLarge user={currentCustomer} />
           </div>
           <h1 className={css.title}>{title}</h1>
           <p className={css.message}>{message}</p>
