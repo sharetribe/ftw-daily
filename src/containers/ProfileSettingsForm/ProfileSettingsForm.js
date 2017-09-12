@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
@@ -10,6 +10,7 @@ import { Avatar, Button, ImageFromFile, SpinnerIcon, TextInputField } from '../.
 import css from './ProfileSettingsForm.css';
 
 const ACCEPT_IMAGES = 'image/*';
+const UPLOAD_CHANGE_DELAY = 2000; // Show spinner so that browser has time to load img srcset
 
 const RenderAvatar = props => {
   const { accept, id, input, label, type, disabled, uploadImageError } = props;
@@ -58,149 +59,190 @@ RenderAvatar.propTypes = {
   uploadImageError: instanceOf(Error),
 };
 
-const ProfileSettingsFormComponent = props => {
-  const {
-    className,
-    currentUser,
-    form,
-    handleSubmit,
-    intl,
-    invalid,
-    onImageUpload,
-    pristine,
-    profileImage,
-    rootClassName,
-    submitting,
-    updateInProgress,
-    updateProfileError,
-    uploadImageError,
-    uploadInProgress,
-  } = props;
+class ProfileSettingsFormComponent extends Component {
+  constructor(props) {
+    super(props);
 
-  const user = ensureCurrentUser(currentUser);
+    this.uploadDelayTimeoutId = null;
+    this.state = { uploadDelay: false };
+  }
 
-  // First name
-  const firstNameLabel = intl.formatMessage({
-    id: 'ProfileSettingsForm.firstNameLabel',
-  });
-  const firstNamePlaceholder = intl.formatMessage({
-    id: 'ProfileSettingsForm.firstNamePlaceholder',
-  });
-  const firstNameRequiredMessage = intl.formatMessage({
-    id: 'ProfileSettingsForm.firstNameRequired',
-  });
-  const firstNameRequired = validators.required(firstNameRequiredMessage);
+  componentWillReceiveProps(nextProps) {
+    // Upload delay is additional time window where Avatar is added to the DOM,
+    // but not yet visible (time to load image URL from srcset)
+    if (this.props.uploadInProgress && !nextProps.uploadInProgress) {
+      this.setState({ uploadDelay: true });
+      this.uploadDelayTimeoutId = window.setTimeout(
+        () => {
+          this.setState({ uploadDelay: false });
+        },
+        UPLOAD_CHANGE_DELAY
+      );
+    }
+  }
 
-  // Last name
-  const lastNameLabel = intl.formatMessage({
-    id: 'ProfileSettingsForm.lastNameLabel',
-  });
-  const lastNamePlaceholder = intl.formatMessage({
-    id: 'ProfileSettingsForm.lastNamePlaceholder',
-  });
-  const lastNameRequiredMessage = intl.formatMessage({
-    id: 'ProfileSettingsForm.lastNameRequired',
-  });
-  const lastNameRequired = validators.required(lastNameRequiredMessage);
+  componentWillUnmount() {
+    window.clearTimeout(this.blurTimeoutId);
+  }
 
-  const uploadingOverlay = uploadInProgress
-    ? <div className={css.uploadingImageOverlay}><SpinnerIcon /></div>
-    : null;
+  render() {
+    const {
+      className,
+      currentUser,
+      form,
+      handleSubmit,
+      intl,
+      invalid,
+      onImageUpload,
+      pristine,
+      profileImage,
+      rootClassName,
+      submitting,
+      updateInProgress,
+      updateProfileError,
+      uploadImageError,
+      uploadInProgress,
+    } = this.props;
 
-  const hasUploadError = !!uploadImageError && !uploadInProgress;
-  const errorClasses = classNames({ [css.avatarUploadError]: hasUploadError });
-  const transientUserProfileImage = profileImage.uploadedImage || user.profileImage;
-  const transientUser = { ...user, profileImage: transientUserProfileImage };
-  const avatarImage = uploadInProgress && profileImage.file
-    ? <ImageFromFile
-        id={profileImage.id}
-        className={errorClasses}
-        rootClassName={css.uploadingImage}
-        aspectRatioClassName={css.squareAspectRatio}
-        file={profileImage.file}
-      >
-        {uploadingOverlay}
-      </ImageFromFile>
-    : <Avatar className={errorClasses} user={transientUser} />;
+    const user = ensureCurrentUser(currentUser);
 
-  const chooseAvatarLabel = profileImage.imageId || (uploadInProgress && profileImage.file)
-    ? <div className={css.avatarContainer}>
-        {avatarImage}
-        <div className={css.changeAvatar}>
-          <FormattedMessage id="ProfileSettingsForm.changeAvatar" />
+    // First name
+    const firstNameLabel = intl.formatMessage({
+      id: 'ProfileSettingsForm.firstNameLabel',
+    });
+    const firstNamePlaceholder = intl.formatMessage({
+      id: 'ProfileSettingsForm.firstNamePlaceholder',
+    });
+    const firstNameRequiredMessage = intl.formatMessage({
+      id: 'ProfileSettingsForm.firstNameRequired',
+    });
+    const firstNameRequired = validators.required(firstNameRequiredMessage);
+
+    // Last name
+    const lastNameLabel = intl.formatMessage({
+      id: 'ProfileSettingsForm.lastNameLabel',
+    });
+    const lastNamePlaceholder = intl.formatMessage({
+      id: 'ProfileSettingsForm.lastNamePlaceholder',
+    });
+    const lastNameRequiredMessage = intl.formatMessage({
+      id: 'ProfileSettingsForm.lastNameRequired',
+    });
+    const lastNameRequired = validators.required(lastNameRequiredMessage);
+
+    const uploadingOverlay = uploadInProgress || this.state.uploadDelay
+      ? <div className={css.uploadingImageOverlay}><SpinnerIcon /></div>
+      : null;
+
+    const hasUploadError = !!uploadImageError && !uploadInProgress;
+    const errorClasses = classNames({ [css.avatarUploadError]: hasUploadError });
+    const transientUserProfileImage = profileImage.uploadedImage || user.profileImage;
+    const transientUser = { ...user, profileImage: transientUserProfileImage };
+
+    const fileUploadInProgress = uploadInProgress && profileImage.file;
+    const delayAfterUpload = profileImage.imageId && this.state.uploadDelay;
+    const imageFromFile = fileUploadInProgress || delayAfterUpload
+      ? <ImageFromFile
+          id={profileImage.id}
+          className={errorClasses}
+          rootClassName={css.uploadingImage}
+          aspectRatioClassName={css.squareAspectRatio}
+          file={profileImage.file}
+        >
+          {uploadingOverlay}
+        </ImageFromFile>
+      : null;
+
+    // Avatar is rendered in hidden during the upload delay
+    // Upload delay smoothes image change process:
+    // responsive img has time to load srcset stuff before it is shown to user.
+    const avatarClasses = classNames(errorClasses, {
+      [css.avatarInvisible]: this.state.uploadDelay,
+    });
+    const avatarComponent = !fileUploadInProgress && profileImage.imageId
+      ? <Avatar className={avatarClasses} user={transientUser} />
+      : null;
+
+    const chooseAvatarLabel = profileImage.imageId || fileUploadInProgress
+      ? <div className={css.avatarContainer}>
+          {imageFromFile}
+          {avatarComponent}
+          <div className={css.changeAvatar}>
+            <FormattedMessage id="ProfileSettingsForm.changeAvatar" />
+          </div>
         </div>
-      </div>
-    : <div className={css.avatarPlaceholder}>
-        <div className={css.avatarPlaceholderText}>
-          <FormattedMessage id="ProfileSettingsForm.addYourProfilePicture" />
+      : <div className={css.avatarPlaceholder}>
+          <div className={css.avatarPlaceholderText}>
+            <FormattedMessage id="ProfileSettingsForm.addYourProfilePicture" />
+          </div>
+          <div className={css.avatarPlaceholderTextMobile}>
+            <FormattedMessage id="ProfileSettingsForm.addYourProfilePictureMobile" />
+          </div>
+        </div>;
+
+    const submitError = updateProfileError
+      ? <div className={css.error}>
+          <FormattedMessage id="ProfileSettingsForm.updateProfileFailed" />
         </div>
-        <div className={css.avatarPlaceholderTextMobile}>
-          <FormattedMessage id="ProfileSettingsForm.addYourProfilePictureMobile" />
-        </div>
-      </div>;
+      : null;
 
-  const submitError = updateProfileError
-    ? <div className={css.error}>
-        <FormattedMessage id="ProfileSettingsForm.updateProfileFailed" />
-      </div>
-    : null;
+    const classes = classNames(rootClassName || css.root, className);
+    const inProgress = uploadInProgress || updateInProgress;
+    const submitDisabled = invalid || submitting || inProgress || pristine;
 
-  const classes = classNames(rootClassName || css.root, className);
-  const inProgress = uploadInProgress || updateInProgress;
-  const submitDisabled = invalid || submitting || inProgress || pristine;
-
-  return (
-    <form className={classes} onSubmit={handleSubmit}>
-      <div className={css.sectionContainer}>
-        <h3 className={css.sectionTitle}>
-          <FormattedMessage id="ProfileSettingsForm.yourProfilePicture" />
-        </h3>
-        <Field
-          accept={ACCEPT_IMAGES}
-          component={RenderAvatar}
-          disabled={uploadInProgress}
-          id="ProfileSettingsForm.changeAvatar"
-          label={chooseAvatarLabel}
-          name="profileImage"
-          onChange={onImageUpload}
-          type="file"
-          uploadImageError={uploadImageError}
-        />
-        <div className={css.tip}><FormattedMessage id="ProfileSettingsForm.tip" /></div>
-        <div className={css.fileInfo}><FormattedMessage id="ProfileSettingsForm.fileInfo" /></div>
-      </div>
-      <div className={classNames(css.sectionContainer, css.lastSection)}>
-        <h3 className={css.sectionTitle}>
-          <FormattedMessage id="ProfileSettingsForm.yourName" />
-        </h3>
-        <div className={css.nameContainer}>
-          <TextInputField
-            className={css.firstName}
-            type="text"
-            name="firstName"
-            id={`${form}.firstName`}
-            label={firstNameLabel}
-            placeholder={firstNamePlaceholder}
-            validate={firstNameRequired}
+    return (
+      <form className={classes} onSubmit={handleSubmit}>
+        <div className={css.sectionContainer}>
+          <h3 className={css.sectionTitle}>
+            <FormattedMessage id="ProfileSettingsForm.yourProfilePicture" />
+          </h3>
+          <Field
+            accept={ACCEPT_IMAGES}
+            component={RenderAvatar}
+            disabled={uploadInProgress}
+            id="ProfileSettingsForm.changeAvatar"
+            label={chooseAvatarLabel}
+            name="profileImage"
+            onChange={onImageUpload}
+            type="file"
+            uploadImageError={uploadImageError}
           />
-          <TextInputField
-            className={css.lastName}
-            type="text"
-            name="lastName"
-            id={`${form}.lastName`}
-            label={lastNameLabel}
-            placeholder={lastNamePlaceholder}
-            validate={lastNameRequired}
-          />
+          <div className={css.tip}><FormattedMessage id="ProfileSettingsForm.tip" /></div>
+          <div className={css.fileInfo}><FormattedMessage id="ProfileSettingsForm.fileInfo" /></div>
         </div>
-      </div>
-      {submitError}
-      <Button className={css.submitButton} type="submit" disabled={submitDisabled}>
-        <FormattedMessage id="ProfileSettingsForm.saveChanges" />
-      </Button>
-    </form>
-  );
-};
+        <div className={classNames(css.sectionContainer, css.lastSection)}>
+          <h3 className={css.sectionTitle}>
+            <FormattedMessage id="ProfileSettingsForm.yourName" />
+          </h3>
+          <div className={css.nameContainer}>
+            <TextInputField
+              className={css.firstName}
+              type="text"
+              name="firstName"
+              id={`${form}.firstName`}
+              label={firstNameLabel}
+              placeholder={firstNamePlaceholder}
+              validate={firstNameRequired}
+            />
+            <TextInputField
+              className={css.lastName}
+              type="text"
+              name="lastName"
+              id={`${form}.lastName`}
+              label={lastNameLabel}
+              placeholder={lastNamePlaceholder}
+              validate={lastNameRequired}
+            />
+          </div>
+        </div>
+        {submitError}
+        <Button className={css.submitButton} type="submit" disabled={submitDisabled}>
+          <FormattedMessage id="ProfileSettingsForm.saveChanges" />
+        </Button>
+      </form>
+    );
+  }
+}
 
 ProfileSettingsFormComponent.defaultProps = {
   rootClassName: null,

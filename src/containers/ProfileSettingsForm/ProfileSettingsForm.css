@@ -223,6 +223,13 @@
   padding-bottom: 100%;
 }
 
+.avatarInvisible {
+  visibility: hidden;
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+}
+
 .tip {
   @apply --marketplaceDefaultFontStyles;
   color: var(--matterColorAnti);

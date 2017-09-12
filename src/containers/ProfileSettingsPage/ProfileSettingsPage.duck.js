@@ -3,7 +3,7 @@ import { currentUserShowSuccess } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
 
-export const CLEAR_UPDATED_FORM = 'app/EditListingPage/CLEAR_UPDATED_FORM';
+export const CLEAR_UPDATED_FORM = 'app/ProfileSettingsPage/CLEAR_UPDATED_FORM';
 
 export const UPLOAD_IMAGE_REQUEST = 'app/ProfileSettingsPage/UPLOAD_IMAGE_REQUEST';
 export const UPLOAD_IMAGE_SUCCESS = 'app/ProfileSettingsPage/UPLOAD_IMAGE_SUCCESS';
@@ -55,11 +55,13 @@ export default function reducer(state = initialState, action = {}) {
     case UPDATE_PROFILE_SUCCESS:
       return {
         ...state,
+        image: null,
         updateInProgress: false,
       };
     case UPDATE_PROFILE_ERROR:
       return {
         ...state,
+        image: null,
         updateInProgress: false,
         updateProfileError: payload,
       };

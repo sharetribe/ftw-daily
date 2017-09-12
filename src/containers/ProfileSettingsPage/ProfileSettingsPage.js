@@ -23,7 +23,9 @@ const onImageUploadHandler = (values, fn) => {
 const onSubmit = (values, fn) => {
   const { firstName, lastName, profileImage } = values;
   const name = { firstName, lastName };
-  const updatedValues = profileImage.imageId
+
+  // Update profileImage only if file system has been accessed
+  const updatedValues = profileImage.imageId && profileImage.file
     ? { ...name, profileImageId: profileImage.imageId }
     : name;
 
