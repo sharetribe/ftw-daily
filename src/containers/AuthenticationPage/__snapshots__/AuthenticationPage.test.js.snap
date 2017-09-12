@@ -6,6 +6,7 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
   title="AuthenticationPage.loginPageTitle">
   <Topbar
     authInProgress={false}
+    className=""
     currentUser={null}
     currentUserHasListings={false}
     history={
