@@ -8,10 +8,9 @@ import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { recoverPassword, retypeEmail } from './PasswordRecoveryPage.duck';
-import { PageLayout, Topbar, NamedLink, InlineTextButton } from '../../components';
+import { PageLayout, Topbar, NamedLink, InlineTextButton, KeysIcon } from '../../components';
 import { PasswordRecoveryForm } from '../../containers';
 
-import KeysIcon from './KeysIcon';
 import css from './PasswordRecoveryPage.css';
 
 const recoveryMessage = submittedEmail => {
