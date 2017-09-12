@@ -201,8 +201,6 @@ export const InboxPageComponent = props => {
   const pagingLinks = hasTransactions && pagination && pagination.totalPages > 1
     ? <PaginationLinks
         className={css.pagination}
-        authInfoError={authInfoError}
-        logoutError={logoutError}
         pageName="InboxPage"
         pagePathParams={params}
         pagination={pagination}
