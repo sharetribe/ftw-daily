@@ -41,6 +41,12 @@
   padding-bottom: 4px;
 }
 
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
 
 /* Medium Avatar */
 
@@ -67,12 +73,6 @@
   /* Fixed dimensions */
   width: var(--avatarSizeLarge);
   height: var(--avatarSizeLarge);
-}
-
-.avatarImage {
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
 }
 
 .largeAvatar .initials {

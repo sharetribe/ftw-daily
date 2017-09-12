@@ -67,7 +67,7 @@
 
   @media (--viewportLarge) {
     max-width: 100%;
-    margin: 42px 0 0 0;
+    margin: 40px 0 0 0;
   }
 }
 
@@ -98,7 +98,7 @@
 
   @media (--viewportLarge) {
     display: flex;
-    margin-top: 122px;
+    margin-top: 121px;
   }
 }
 
@@ -117,7 +117,7 @@
 
   @media (--viewportLarge) {
     display: block;
-    margin: 122px 0 0 0;
+    margin: 116px 0 0 0;
     background-color: var(--matterColorLight);
     border: 1px solid var(--matterColorNegative);
     border-radius: 2px;

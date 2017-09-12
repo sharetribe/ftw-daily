@@ -29,7 +29,7 @@
 .avatar {
   /* Layout */
   flex-shrink: 0;
-  margin: var(--topMarginMobileMenu) 0 24px 0;
+  margin: var(--topMarginMobileMenu) 0 0 0;
 }
 
 .greeting {
