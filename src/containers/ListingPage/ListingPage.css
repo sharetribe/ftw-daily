@@ -209,15 +209,17 @@
   }
 }
 
-.responsiveAvatarMedium {
-  display: none; /* Hide the medium avatar from the bigger screens */
-  @media screen and (max-width: 767px) {
-    display: flex;
+.avatarMobile {
+  display: flex;
+
+  @media (--viewportMedium) {
+    display: none; /* Hide the medium avatar from the bigger screens */
   }
 }
 
-.responsiveAvatarLarge {
+.avatarDesktop {
   display: none; /* Hide the large avatar from the smaller screens */
+
   @media (--viewportMedium) {
     display: flex;
   }

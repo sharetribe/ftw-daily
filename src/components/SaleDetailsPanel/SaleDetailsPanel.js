@@ -6,6 +6,7 @@ import { createSlug } from '../../util/urlHelpers';
 import { ensureListing, ensureTransaction, ensureUser } from '../../util/data';
 import {
   AvatarLarge,
+  AvatarMedium,
   BookingBreakdown,
   NamedLink,
   ResponsiveImage,
@@ -181,12 +182,12 @@ const SaleDetailsPanel = props => {
             sizes="100vw"
           />
         </div>
-        <div className={css.avatarWrapperMobile}>
-          <AvatarLarge user={currentCustomer} />
+        <div className={css.avatarWrapper}>
+          <AvatarMedium user={currentCustomer} className={css.avatarMobile}/>
         </div>
         <div className={css.info}>
-          <div className={css.avatarWrapperDesktop}>
-            <AvatarLarge user={currentCustomer} />
+          <div className={css.avatarWrapper}>
+            <AvatarLarge user={currentCustomer} className={css.avatarDesktop}/>
           </div>
           <h1 className={css.title}>{title}</h1>
           <p className={css.message}>{message}</p>
