@@ -3,33 +3,22 @@ import { FormattedDate, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
-import { ensureListing, ensureTransaction, ensureBooking, ensureUser } from '../../util/data';
+import { ensureListing, ensureTransaction, ensureUser } from '../../util/data';
 import { BookingBreakdown, NamedLink, ResponsiveImage, AvatarMedium } from '../../components';
 
 import css from './OrderDetailsPanel.css';
 
 const breakdown = transaction => {
-  const tx = ensureTransaction(transaction);
-  const booking = ensureBooking(tx.booking);
-  const bookingStart = booking.attributes.start;
-  const bookingEnd = booking.attributes.end;
-  const payinTotal = tx.attributes.payinTotal;
-  const lineItems = tx.attributes.lineItems;
+  const loaded = transaction && transaction.id && transaction.booking && transaction.booking.id;
 
-  if (!bookingStart || !bookingEnd || !payinTotal || !lineItems) {
-    return null;
-  }
-  return (
-    <BookingBreakdown
-      transactionState={tx.attributes.state}
-      className={css.receipt}
-      bookingStart={bookingStart}
-      bookingEnd={bookingEnd}
-      payinTotal={payinTotal}
-      lineItems={lineItems}
-      userRole="customer"
-    />
-  );
+  return loaded
+    ? <BookingBreakdown
+        className={css.receipt}
+        userRole="customer"
+        transaction={transaction}
+        booking={transaction.booking}
+      />
+    : null;
 };
 
 const orderTitle = (orderState, listingLink, customerName, lastTransition) => {

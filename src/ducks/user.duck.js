@@ -1,3 +1,4 @@
+import { updatedEntities, denormalisedEntities } from '../util/data';
 import { TX_STATE_PREAUTHORIZED } from '../util/propTypes';
 
 // ================ Action types ================ //
@@ -217,9 +218,15 @@ export const fetchCurrentUser = () =>
     }
 
     return sdk.currentUser
-      .show()
+      .show({ include: ['profileImage'] })
       .then(response => {
-        dispatch(currentUserShowSuccess(response.data.data));
+        // Temporary denormalization for profileImage
+        // Profile image will be included to users
+        const currentUserId = response.data.data.id;
+        const entities = updatedEntities({}, response.data);
+        const denormalised = denormalisedEntities(entities, 'current-user', [currentUserId]);
+        const currentUser = denormalised[0];
+        dispatch(currentUserShowSuccess(currentUser));
       })
       .then(() => {
         dispatch(fetchCurrentUserHasListings());

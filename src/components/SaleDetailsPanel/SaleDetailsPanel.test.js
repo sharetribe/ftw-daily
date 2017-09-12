@@ -16,11 +16,10 @@ describe('SaleDetailsPanel', () => {
       state: 'state/preauthorized',
       total: new Money(16500, 'USD'),
       commission: new Money(1000, 'USD'),
-      booking: createBooking(
-        'booking1',
-        new Date(Date.UTC(2017, 5, 10)),
-        new Date(Date.UTC(2017, 5, 13))
-      ),
+      booking: createBooking('booking1', {
+        start: new Date(Date.UTC(2017, 5, 10)),
+        end: new Date(Date.UTC(2017, 5, 13)),
+      }),
       listing: createListing('listing1'),
       customer: createUser('customer1'),
       lastTransitionedAt: new Date(Date.UTC(2017, 5, 10)),
@@ -41,11 +40,10 @@ describe('SaleDetailsPanel', () => {
       state: 'state/preauthorized',
       total: new Money(16500, 'USD'),
       commission: new Money(1000, 'USD'),
-      booking: createBooking(
-        'booking1',
-        new Date(Date.UTC(2017, 5, 10)),
-        new Date(Date.UTC(2017, 5, 13))
-      ),
+      booking: createBooking('booking1', {
+        start: new Date(Date.UTC(2017, 5, 10)),
+        end: new Date(Date.UTC(2017, 5, 13)),
+      }),
       listing: createListing('listing1'),
       customer: createUser('customer1'),
       lastTransitionedAt: new Date(Date.UTC(2017, 5, 10)),
@@ -60,6 +58,6 @@ describe('SaleDetailsPanel', () => {
     const breakdownProps = panel.find(BookingBreakdown).props();
 
     // Total price for the provider should be transaction total minus the commission.
-    expect(breakdownProps.payoutTotal).toEqual(new Money(15500, 'USD'));
+    expect(breakdownProps.transaction.attributes.payoutTotal).toEqual(new Money(15500, 'USD'));
   });
 });

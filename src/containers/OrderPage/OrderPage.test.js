@@ -18,11 +18,10 @@ describe('OrderPage', () => {
     const transaction = createTransaction({
       id: txId,
       state: 'state/preauthorized',
-      booking: createBooking(
-        'booking1',
-        new Date(Date.UTC(2017, 5, 10)),
-        new Date(Date.UTC(2017, 5, 13))
-      ),
+      booking: createBooking('booking1', {
+        start: new Date(Date.UTC(2017, 5, 10)),
+        end: new Date(Date.UTC(2017, 5, 13)),
+      }),
       listing: createListing('listing1'),
       customer: createUser('customer1'),
       provider: createUser('provider1'),

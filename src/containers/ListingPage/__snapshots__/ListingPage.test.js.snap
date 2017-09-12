@@ -42,7 +42,22 @@ exports[`ListingPage matches snapshot 1`] = `
   <div
     className="">
     <div>
-      <div>
+      <div
+        onClick={[Function]}>
+        <div
+          onClick={[Function]}>
+          <ActionBar
+            editParams={
+              Object {
+                "id": "listing1",
+                "slug": "listing1-title",
+                "tab": "description",
+                "type": "edit",
+              }
+            }
+            isClosed={false}
+            isOwnListing={false} />
+        </div>
         <ResponsiveImage
           alt="listing1 title"
           className={null}
@@ -193,6 +208,7 @@ exports[`ListingPage matches snapshot 1`] = `
           </div>
         </div>
         <BookingDatesForm
+          isOwnListing={false}
           onSubmit={[Function]}
           price={
             Money {

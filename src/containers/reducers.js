@@ -7,10 +7,12 @@ import CheckoutPage from './CheckoutPage/CheckoutPage.duck';
 import EditListingPage from './EditListingPage/EditListingPage.duck';
 import InboxPage from './InboxPage/InboxPage.duck';
 import ListingPage from './ListingPage/ListingPage.duck';
+import ManageListingsPage from './ManageListingsPage/ManageListingsPage.duck';
 import OrderPage from './OrderPage/OrderPage.duck';
+import PasswordResetPage from './PasswordResetPage/PasswordResetPage.duck';
+import ProfileSettingsPage from './ProfileSettingsPage/ProfileSettingsPage.duck';
 import SalePage from './SalePage/SalePage.duck';
 import SearchPage from './SearchPage/SearchPage.duck';
-import ManageListingsPage from './ManageListingsPage/ManageListingsPage.duck';
 
 export {
   CheckoutPage,
@@ -19,6 +21,8 @@ export {
   ListingPage,
   ManageListingsPage,
   OrderPage,
+  PasswordResetPage,
+  ProfileSettingsPage,
   SalePage,
   SearchPage,
 };

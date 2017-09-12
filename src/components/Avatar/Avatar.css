@@ -69,6 +69,12 @@
   height: var(--avatarSizeLarge);
 }
 
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
 .largeAvatar .initials {
   font-size: 30px;
   font-weight: var(--fontWeightSemiBold);

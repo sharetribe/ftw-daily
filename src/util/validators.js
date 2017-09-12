@@ -14,6 +14,11 @@ export const required = message =>
     return value ? VALID : message;
   };
 
+export const minLength = (message, minimumLength) =>
+  value => {
+    return value && value.length >= minimumLength ? VALID : message;
+  };
+
 export const maxLength = (message, maximumLength) =>
   value => {
     return !value || value.length <= maximumLength ? VALID : message;

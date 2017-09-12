@@ -6,23 +6,54 @@ import { types } from '../../util/sdkLoader';
 import * as propTypes from '../../util/propTypes';
 import { BookingBreakdownComponent } from './BookingBreakdown';
 
+const { UUID, Money } = types;
+
+const exampleBooking = attributes => {
+  return {
+    id: new UUID('example-booking'),
+    type: 'booking',
+    attributes,
+  };
+};
+
+const exampleTransaction = params => {
+  const created = new Date(Date.UTC(2017, 1, 1));
+  return {
+    id: new UUID('example-transaction'),
+    type: 'transaction',
+    attributes: {
+      createdAt: created,
+      lastTransitionedAt: created,
+      lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+      state: propTypes.TX_STATE_PREAUTHORIZED,
+
+      // payinTotal, payoutTotal, and lineItems required in params
+      ...params,
+    },
+  };
+};
+
 describe('BookingBreakdown', () => {
   it('pretransaction data matches snapshot', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
-        transactionState={propTypes.TX_STATE_PREAUTHORIZED}
-        bookingStart={new Date(Date.UTC(2017, 3, 14))}
-        bookingEnd={new Date(Date.UTC(2017, 3, 16))}
-        payinTotal={new types.Money(2000, 'USD')}
         userRole="customer"
-        lineItems={[
-          {
-            code: 'line-item/night',
-            quantity: new Decimal(2),
-            lineTotal: new types.Money(2000, 'USD'),
-            unitPrice: new types.Money(1000, 'USD'),
-          },
-        ]}
+        transaction={exampleTransaction({
+          payinTotal: new Money(2000, 'USD'),
+          payoutTotal: new Money(2000, 'USD'),
+          lineItems: [
+            {
+              code: 'line-item/night',
+              quantity: new Decimal(2),
+              lineTotal: new Money(2000, 'USD'),
+              unitPrice: new Money(1000, 'USD'),
+            },
+          ],
+        })}
+        booking={exampleBooking({
+          start: new Date(Date.UTC(2017, 3, 14)),
+          end: new Date(Date.UTC(2017, 3, 16)),
+        })}
         intl={fakeIntl}
       />
     );
@@ -32,19 +63,23 @@ describe('BookingBreakdown', () => {
   it('customer transaction data matches snapshot', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
-        transactionState={propTypes.TX_STATE_PREAUTHORIZED}
-        bookingStart={new Date(Date.UTC(2017, 3, 14))}
-        bookingEnd={new Date(Date.UTC(2017, 3, 16))}
         userRole="customer"
-        payinTotal={new types.Money(2000, 'USD')}
-        lineItems={[
-          {
-            code: 'line-item/night',
-            quantity: new Decimal(2),
-            lineTotal: new types.Money(2000, 'USD'),
-            unitPrice: new types.Money(1000, 'USD'),
-          },
-        ]}
+        transaction={exampleTransaction({
+          payinTotal: new Money(2000, 'USD'),
+          payoutTotal: new Money(2000, 'USD'),
+          lineItems: [
+            {
+              code: 'line-item/night',
+              quantity: new Decimal(2),
+              lineTotal: new Money(2000, 'USD'),
+              unitPrice: new Money(1000, 'USD'),
+            },
+          ],
+        })}
+        booking={exampleBooking({
+          start: new Date(Date.UTC(2017, 3, 14)),
+          end: new Date(Date.UTC(2017, 3, 16)),
+        })}
         intl={fakeIntl}
       />
     );
@@ -54,25 +89,28 @@ describe('BookingBreakdown', () => {
   it('provider transaction data matches snapshot', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
-        transactionState={propTypes.TX_STATE_PREAUTHORIZED}
-        bookingStart={new Date(Date.UTC(2017, 3, 14))}
-        bookingEnd={new Date(Date.UTC(2017, 3, 16))}
-        commission={new types.Money(200, 'USD')}
-        payoutTotal={new types.Money(1800, 'USD')}
         userRole="provider"
-        lineItems={[
-          {
-            code: 'line-item/night',
-            quantity: new Decimal(2),
-            lineTotal: new types.Money(2000, 'USD'),
-            unitPrice: new types.Money(1000, 'USD'),
-          },
-          {
-            code: 'line-item/provider-commission',
-            lineTotal: new types.Money(-200, 'USD'),
-            unitPrice: new types.Money(-200, 'USD'),
-          },
-        ]}
+        transaction={exampleTransaction({
+          payinTotal: new Money(2000, 'USD'),
+          payoutTotal: new Money(1800, 'USD'),
+          lineItems: [
+            {
+              code: 'line-item/night',
+              quantity: new Decimal(2),
+              lineTotal: new Money(2000, 'USD'),
+              unitPrice: new Money(1000, 'USD'),
+            },
+            {
+              code: 'line-item/provider-commission',
+              lineTotal: new Money(-200, 'USD'),
+              unitPrice: new Money(-200, 'USD'),
+            },
+          ],
+        })}
+        booking={exampleBooking({
+          start: new Date(Date.UTC(2017, 3, 14)),
+          end: new Date(Date.UTC(2017, 3, 16)),
+        })}
         intl={fakeIntl}
       />
     );

@@ -235,6 +235,7 @@
   transition: width var(--transitionStyleButton);
 }
 
+.profileSettingsLink,
 .yourListingsLink {
   @apply --marketplaceH4FontStyles;
   position: relative;

@@ -1,10 +1,12 @@
 /**
  * DateRangeInput wraps DateRangePicker from React-dates and gives a list of all default props we use.
  * Styles for DateRangePicker can be found from 'public/reactDates.css'.
+ *
+ * N.B. *isOutsideRange* in defaultProps is defining what dates are available to booking.
  */
 import React, { Component, PropTypes } from 'react';
 import { intlShape, injectIntl } from 'react-intl';
-import { DateRangePicker, isInclusivelyAfterDay } from 'react-dates';
+import { DateRangePicker, isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
 import classNames from 'classnames';
 import moment from 'moment';
 
@@ -71,7 +73,15 @@ const defaultProps = {
   minimumNights: 1,
   enableOutsideDays: false,
   isDayBlocked: () => false,
-  isOutsideRange: day => !isInclusivelyAfterDay(day, moment()),
+
+  // Stripe holds funds in a reserve for up to 90 days from charge creation.
+  // outside range -><- today ... today+89 days -><- outside range
+  isOutsideRange: day => {
+    const daysCountAvailableToBook = 90;
+    const endOfRange = daysCountAvailableToBook - 1;
+    return !isInclusivelyAfterDay(day, moment()) ||
+      !isInclusivelyBeforeDay(day, moment().add(endOfRange, 'days'));
+  },
   isDayHighlighted: () => {},
 
   // Internationalization props

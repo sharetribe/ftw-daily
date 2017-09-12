@@ -27,7 +27,7 @@ import MenuIcon from './MenuIcon';
 import css from './ManageListingCard.css';
 
 // Menu content needs the same padding
-const MENU_CONTENT_OFFSET = 8;
+const MENU_CONTENT_OFFSET = -12;
 
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {
@@ -61,6 +61,8 @@ export const ManageListingCardComponent = props => {
     className,
     rootClassName,
     flattenedRoutes,
+    hasClosingError,
+    hasOpeningError,
     history,
     intl,
     isMenuOpen,
@@ -117,8 +119,25 @@ export const ManageListingCardComponent = props => {
         </div>
       </div>;
 
+  const errorOverlay = hasOpeningError || hasClosingError
+    ? <div
+        className={css.errorOverlayWrapper}
+        onClick={event => {
+          event.preventDefault();
+          event.stopPropagation();
+        }}
+      >
+        <div className={css.errorOverlay} />
+        <div className={css.errorOverlayContent}>
+          <div className={css.closedMessage}>
+            <FormattedMessage id="ManageListingCard.actionFailed" />
+          </div>
+        </div>
+      </div>
+    : null;
+
   const thisInProgress = actionsInProgressListingId && actionsInProgressListingId.uuid === id;
-  const loadingOrClosedOverlay = thisInProgress
+  const loadingOrErrorOverlay = thisInProgress
     ? <div
         className={css.loadingOverlayWrapper}
         onClick={event => {
@@ -131,7 +150,7 @@ export const ManageListingCardComponent = props => {
           <SpinnerIcon />
         </div>
       </div>
-    : closedOverlay;
+    : errorOverlay;
   /* eslint-enable jsx-a11y/no-static-element-interactions */
 
   return (
@@ -158,6 +177,7 @@ export const ManageListingCardComponent = props => {
           <div className={css.menubarGradient} />
           <div className={css.menubar}>
             <Menu
+              className={classNames(css.menu, { [css.cardIsOpen]: open })}
               contentPlacementOffset={MENU_CONTENT_OFFSET}
               contentPosition="left"
               useArrow={false}
@@ -192,6 +212,8 @@ export const ManageListingCardComponent = props => {
             </Menu>
           </div>
         </div>
+        {closedOverlay}
+        {loadingOrErrorOverlay}
       </div>
       <div className={css.info}>
         <div className={css.price}>
@@ -218,7 +240,6 @@ export const ManageListingCardComponent = props => {
           <FormattedMessage id="ManageListingCard.edit" />
         </SecondaryButton>
       </div>
-      {loadingOrClosedOverlay}
     </NamedLink>
   );
 };
@@ -234,6 +255,8 @@ const { arrayOf, bool, func, shape, string } = PropTypes;
 ManageListingCardComponent.propTypes = {
   className: string,
   rootClassName: string,
+  hasClosingError: bool.isRequired,
+  hasOpeningError: bool.isRequired,
   intl: intlShape.isRequired,
   listing: propTypes.listing.isRequired,
   isMenuOpen: bool.isRequired,

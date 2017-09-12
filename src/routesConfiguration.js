@@ -5,17 +5,17 @@ import {
   CheckoutPage,
   ContactDetailsPage,
   EditListingPage,
-  EditProfilePage,
   InboxPage,
   LandingPage,
   ListingPage,
   ManageListingsPage,
   NotFoundPage,
   OrderPage,
-  PasswordChangePage,
   PasswordForgottenPage,
+  PasswordResetPage,
   PayoutPreferencesPage,
   ProfilePage,
+  ProfileSettingsPage,
   SalePage,
   SearchPage,
   SecurityPage,
@@ -122,17 +122,15 @@ const routesConfiguration = [
         exact: true,
         name: 'ProfilePage',
         component: props => <ProfilePage {...props} />,
-        routes: [
-          {
-            path: '/u/:displayName/edit',
-            auth: true,
-            exact: true,
-            name: 'EditProfilePage',
-            component: props => <EditProfilePage {...props} />,
-          },
-        ],
       },
     ],
+  },
+  {
+    path: '/profile-settings',
+    auth: true,
+    exact: true,
+    name: 'ProfileSettingsPage',
+    component: props => <ProfileSettingsPage {...props} />,
   },
   {
     path: '/login',
@@ -157,12 +155,6 @@ const routesConfiguration = [
     exact: true,
     name: 'PasswordForgottenPage',
     component: props => <PasswordForgottenPage {...props} />,
-  },
-  {
-    path: '/password/change',
-    exact: true,
-    name: 'PasswordChangePage',
-    component: props => <PasswordChangePage {...props} />,
   },
   {
     path: '/inbox',
@@ -306,9 +298,19 @@ const routesConfiguration = [
 
   // Do not change this path!
   //
-  // The API expects that the Starter App implements /email_verification endpoint
+  // The API expects that the Starter App implements /reset-password endpoint
   {
-    path: '/email_verification',
+    path: '/reset-password',
+    exact: true,
+    name: 'PasswordResetPage',
+    component: props => <PasswordResetPage {...props} />,
+  },
+
+  // Do not change this path!
+  //
+  // The API expects that the Starter App implements /verify-email endpoint
+  {
+    path: '/verify-email',
     auth: true,
     authPage: 'LoginPage',
     exact: true,

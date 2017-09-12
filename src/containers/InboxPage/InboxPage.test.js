@@ -13,16 +13,14 @@ describe('InboxPage', () => {
     const flattenedRoutes = flattenRoutes(routesConfiguration);
     const provider = createUser('provider-user-id');
     const customer = createUser('customer-user-id');
-    const booking1 = createBooking(
-      'booking1',
-      new Date(Date.UTC(2017, 1, 15)),
-      new Date(Date.UTC(2017, 1, 16))
-    );
-    const booking2 = createBooking(
-      'booking2',
-      new Date(Date.UTC(2017, 2, 15)),
-      new Date(Date.UTC(2017, 2, 16))
-    );
+    const booking1 = createBooking('booking1', {
+      start: new Date(Date.UTC(2017, 1, 15)),
+      end: new Date(Date.UTC(2017, 1, 16)),
+    });
+    const booking2 = createBooking('booking2', {
+      start: new Date(Date.UTC(2017, 2, 15)),
+      end: new Date(Date.UTC(2017, 2, 16)),
+    });
 
     const ordersProps = {
       location: { search: '' },

@@ -3,8 +3,7 @@ import React from 'react';
 import ListingCard from './ListingCard';
 import { createUser, createListing, fakeIntl } from '../../util/test-data';
 
-const author = createUser('user1');
-const listing = { ...createListing('listing1'), author };
+const listing = createListing('listing1', {}, { author: createUser('user1') });
 
 const ListingCardWrapper = props => (
   <div style={{ maxWidth: '400px' }}>

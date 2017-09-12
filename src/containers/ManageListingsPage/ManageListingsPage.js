@@ -38,6 +38,8 @@ export class ManageListingsPageComponent extends Component {
     const {
       authInfoError,
       authInProgress,
+      closingListing,
+      closingListingError,
       currentUser,
       currentUserHasListings,
       history,
@@ -47,15 +49,16 @@ export class ManageListingsPageComponent extends Component {
       logoutError,
       notificationCount,
       onCloseListing,
-      onOpenListing,
       onLogout,
       onManageDisableScrolling,
+      onOpenListing,
+      openingListing,
+      openingListingError,
       pagination,
       queryInProgress,
       queryListingsError,
       queryParams,
-      openingListing,
-      closingListing,
+      scrollingDisabled,
     } = this.props;
 
     // TODO Handle openingListingError, closingListingError,
@@ -101,9 +104,16 @@ export class ManageListingsPageComponent extends Component {
       : null;
 
     const listingMenuOpen = this.state.listingMenuOpen;
+    const closingErrorListingId = !!closingListingError && closingListingError.listingId;
+    const openingErrorListingId = !!openingListingError && openingListingError.listingId;
 
     return (
-      <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Manage listings">
+      <PageLayout
+        authInfoError={authInfoError}
+        logoutError={logoutError}
+        scrollingDisabled={scrollingDisabled}
+        title="Manage listings"
+      >
         <Topbar
           authInProgress={authInProgress}
           currentUser={currentUser}
@@ -115,6 +125,7 @@ export class ManageListingsPageComponent extends Component {
           notificationCount={notificationCount}
           onLogout={onLogout}
           onManageDisableScrolling={onManageDisableScrolling}
+          scrollingDisabled={scrollingDisabled}
         />
         <UserNav selectedPageName="ManageListingsPage" />
         {queryInProgress ? loadingResults : null}
@@ -132,6 +143,8 @@ export class ManageListingsPageComponent extends Component {
                 onToggleMenu={this.onToggleMenu}
                 onCloseListing={onCloseListing}
                 onOpenListing={onOpenListing}
+                hasOpeningError={openingErrorListingId.uuid === l.id.uuid}
+                hasClosingError={closingErrorListingId.uuid === l.id.uuid}
               />
             ))}
           </div>
@@ -153,7 +166,9 @@ ManageListingsPageComponent.defaultProps = {
   queryListingsError: null,
   queryParams: null,
   closingListing: null,
+  closingListingError: null,
   openingListing: null,
+  openingListingError: null,
 };
 
 const { arrayOf, bool, func, instanceOf, number, object, shape, string } = PropTypes;
@@ -161,6 +176,11 @@ const { arrayOf, bool, func, instanceOf, number, object, shape, string } = PropT
 ManageListingsPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
+  closingListing: shape({ uuid: string.isRequired }),
+  closingListingError: shape({
+    listingId: propTypes.uuid.isRequired,
+    error: instanceOf(Error).isRequired,
+  }),
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   isAuthenticated: bool.isRequired,
@@ -168,15 +188,19 @@ ManageListingsPageComponent.propTypes = {
   logoutError: instanceOf(Error),
   notificationCount: number,
   onCloseListing: func.isRequired,
-  onOpenListing: func.isRequired,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  onOpenListing: func.isRequired,
+  openingListing: shape({ uuid: string.isRequired }),
+  openingListingError: shape({
+    listingId: propTypes.uuid.isRequired,
+    error: instanceOf(Error).isRequired,
+  }),
   pagination: propTypes.pagination,
   queryInProgress: bool.isRequired,
   queryListingsError: instanceOf(Error),
   queryParams: object,
-  closingListing: shape({ uuid: string.isRequired }),
-  openingListing: shape({ uuid: string.isRequired }),
+  scrollingDisabled: bool.isRequired,
 
   // from withRouter
   history: shape({

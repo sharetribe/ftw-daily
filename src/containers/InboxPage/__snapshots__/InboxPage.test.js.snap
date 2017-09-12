@@ -88,6 +88,7 @@ exports[`InboxPage matches snapshot 1`] = `
               Object {
                 "attributes": Object {
                   "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransition": "transition/preauthorize",
                   "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
@@ -174,6 +175,7 @@ exports[`InboxPage matches snapshot 1`] = `
               Object {
                 "attributes": Object {
                   "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransition": "transition/preauthorize",
                   "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
@@ -390,6 +392,7 @@ exports[`InboxPage matches snapshot 3`] = `
               Object {
                 "attributes": Object {
                   "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransition": "transition/preauthorize",
                   "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
@@ -476,6 +479,7 @@ exports[`InboxPage matches snapshot 3`] = `
               Object {
                 "attributes": Object {
                   "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransition": "transition/preauthorize",
                   "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {

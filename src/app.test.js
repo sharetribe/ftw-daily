@@ -45,8 +45,8 @@ describe('Application', () => {
       '/signup': 'Sign up',
       '/password': 'Request new password',
       '/password/forgotten': 'Request new password',
-      '/password/change': 'Type new password',
       '/this-url-should-not-be-found': 'Page not found',
+      '/reset-password?t=token&e=email': 'Reset password',
     };
     forEach(urlTitles, (title, url) => {
       const context = {};
@@ -67,7 +67,7 @@ describe('Application', () => {
       '/l/new': defaultAuthPath,
       '/l/listing-title-slug/1234/new/description': defaultAuthPath,
       '/l/listing-title-slug/1234/checkout': defaultAuthPath,
-      '/u/1234/edit': defaultAuthPath,
+      '/profile-settings': defaultAuthPath,
       '/inbox': defaultAuthPath,
       '/inbox/orders': defaultAuthPath,
       '/inbox/sales': defaultAuthPath,
@@ -82,7 +82,7 @@ describe('Application', () => {
       '/account/contact-details': defaultAuthPath,
       '/account/payout-preferences': defaultAuthPath,
       '/account/security': defaultAuthPath,
-      '/email_verification': loginPath,
+      '/verify-email': loginPath,
     };
     forEach(urlRedirects, (redirectPath, url) => {
       const context = {};

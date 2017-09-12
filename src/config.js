@@ -35,82 +35,149 @@ const stripeSupportedCountries = [
   {
     // Australia
     code: 'AU',
+    currency: 'AUD',
     payoutAddressRequired: false,
+    accountConfig: {
+      bsb: true,
+      accountNumber: true,
+    },
   },
   {
     // Austria
     code: 'AT',
+    currency: 'EUR',
     payoutAddressRequired: true,
+    accountConfig: {
+      iban: true,
+    },
   },
   {
     // Belgium
     code: 'BE',
+    currency: 'EUR',
     payoutAddressRequired: true,
+    accountConfig: {
+      iban: true,
+    },
   },
   {
     // Denmark
     code: 'DK',
+    currency: 'DKK',
     payoutAddressRequired: true,
+    accountConfig: {
+      iban: true,
+    },
   },
   {
     // Finland
     code: 'FI',
+    currency: 'EUR',
     payoutAddressRequired: true,
+    accountConfig: {
+      iban: true,
+    },
   },
   {
     // France
     code: 'FR',
+    currency: 'EUR',
     payoutAddressRequired: true,
+    accountConfig: {
+      iban: true,
+    },
   },
   {
     // Germany
     code: 'DE',
+    currency: 'EUR',
     payoutAddressRequired: true,
+    accountConfig: {
+      iban: true,
+    },
   },
   {
     // Ireland
     code: 'IE',
+    currency: 'EUR',
     payoutAddressRequired: true,
+    accountConfig: {
+      iban: true,
+    },
   },
   {
     // Italy
     code: 'IT',
+    currency: 'EUR',
     payoutAddressRequired: true,
+    accountConfig: {
+      iban: true,
+    },
   },
   {
     // Luxembourg
     code: 'LU',
+    currency: 'EUR',
     payoutAddressRequired: true,
+    accountConfig: {
+      iban: true,
+    },
   },
   {
     // Netherlands
     code: 'NL',
+    currency: 'EUR',
     payoutAddressRequired: true,
+    accountConfig: {
+      iban: true,
+    },
   },
   {
     // Portugal
     code: 'PT',
+    currency: 'EUR',
     payoutAddressRequired: true,
+    accountConfig: {
+      iban: true,
+    },
   },
   {
     // Spain
     code: 'ES',
+    currency: 'EUR',
     payoutAddressRequired: true,
+    accountConfig: {
+      iban: true,
+    },
   },
   {
     // Sweden
     code: 'SE',
+    currency: 'SEK',
     payoutAddressRequired: true,
+    accountConfig: {
+      iban: true,
+    },
   },
   {
     // United Kingdom
     code: 'GB',
+    currency: 'GBP',
     payoutAddressRequired: true,
+    accountConfig: {
+      sortCode: true,
+      accountNumber: true,
+    },
   },
   {
     // United States
     code: 'US',
+    currency: 'USD',
     payoutAddressRequired: false,
+    accountConfig: {
+      routingNumber: true,
+      accountNumber: true,
+    },
   },
 ];
 

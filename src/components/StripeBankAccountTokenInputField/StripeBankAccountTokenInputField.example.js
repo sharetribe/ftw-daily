@@ -2,31 +2,34 @@
 import React from 'react';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { Button } from '../../components';
+import { stripeCountryConfigs } from './StripeBankAccountTokenInputField.util';
 import StripeBankAccountTokenInputField from './StripeBankAccountTokenInputField';
 import * as validators from '../../util/validators';
 
-const FormComponentEur = props => {
-  const { form, handleSubmit } = props;
-  const country = 'DE';
-  const currency = 'EUR';
-  return (
-    <form onSubmit={handleSubmit}>
-      <StripeBankAccountTokenInputField
-        id={`${form}.token`}
-        name="token"
-        country={country}
-        currency={currency}
-        routingNumberId={`${form}.routingNumber`}
-        accountNumberId={`${form}.accountNumber`}
-        validate={validators.required(' ')}
-      />
-      <Button style={{ marginTop: 24 }} type="submit">Submit</Button>
-    </form>
-  );
+const formComponent = country => {
+  const FormComponent = props => {
+    const { form, handleSubmit } = props;
+    const currency = stripeCountryConfigs(country).currency;
+    return (
+      <form onSubmit={handleSubmit}>
+        <StripeBankAccountTokenInputField
+          id={`${form}.token`}
+          name="token"
+          country={country}
+          currency={currency}
+          formName={form}
+          validate={validators.required(' ')}
+        />
+        <Button style={{ marginTop: 24 }} type="submit">Submit</Button>
+      </form>
+    );
+  };
+  FormComponent.propTypes = formPropTypes;
+  return FormComponent;
 };
 
-FormComponentEur.propTypes = formPropTypes;
-
+// DE
+const FormComponentEur = formComponent('DE');
 const formNameEur = 'Styleguide.StripeBankAccountTokenInputField.formEur';
 const FormEur = reduxForm({ form: formNameEur })(FormComponentEur);
 
@@ -37,34 +40,14 @@ export const DE_EUR = {
       console.log('values changed to:', values);
     },
     onSubmit: values => {
-      console.log('values changed to:', values);
+      console.log('values submitted:', values);
     },
   },
   group: 'custom inputs',
 };
 
-const FormComponentUsd = props => {
-  const { form, handleSubmit } = props;
-  const country = 'US';
-  const currency = 'USD';
-  return (
-    <form onSubmit={handleSubmit}>
-      <StripeBankAccountTokenInputField
-        id={`${form}.token`}
-        name="token"
-        country={country}
-        currency={currency}
-        routingNumberId={`${form}.routingNumber`}
-        accountNumberId={`${form}.accountNumber`}
-        validate={validators.required(' ')}
-      />
-      <Button style={{ marginTop: 24 }} type="submit">Submit</Button>
-    </form>
-  );
-};
-
-FormComponentUsd.propTypes = formPropTypes;
-
+// US
+const FormComponentUsd = formComponent('US');
 const formNameUsd = 'Styleguide.StripeBankAccountTokenInputField.formUsd';
 const FormUsd = reduxForm({ form: formNameUsd })(FormComponentUsd);
 
@@ -75,7 +58,43 @@ export const US_USD = {
       console.log('values changed to:', values);
     },
     onSubmit: values => {
+      console.log('values submitted:', values);
+    },
+  },
+  group: 'custom inputs',
+};
+
+// GB
+const FormComponentGbGbp = formComponent('GB');
+const formNameGbp = 'Styleguide.StripeBankAccountTokenInputField.formGbGbp';
+const formGbGbp = reduxForm({ form: formNameGbp })(FormComponentGbGbp);
+
+export const GB_GBP = {
+  component: formGbGbp,
+  props: {
+    onChange: values => {
       console.log('values changed to:', values);
+    },
+    onSubmit: values => {
+      console.log('values submitted:', values);
+    },
+  },
+  group: 'custom inputs',
+};
+
+// AU
+const FormComponentAuAud = formComponent('AU');
+const formNameAuAud = 'Styleguide.StripeBankAccountTokenInputField.formAuAud';
+const formAuAud = reduxForm({ form: formNameAuAud })(FormComponentAuAud);
+
+export const AU_AUD = {
+  component: formAuAud,
+  props: {
+    onChange: values => {
+      console.log('values changed to:', values);
+    },
+    onSubmit: values => {
+      console.log('values submitted:', values);
     },
   },
   group: 'custom inputs',

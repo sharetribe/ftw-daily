@@ -11,6 +11,8 @@
   border-radius: 4px;
   box-shadow: var(--boxShadowPopupLight);
 
+  transition: var(--transitionStyleButton);
+
   &:hover {
     cursor: pointer;
     box-shadow: var(--boxShadowPopup);
@@ -43,11 +45,6 @@
   margin-top: 0;
   margin-bottom: 0;
   transition: var(--transitionStyleButton);
-
-  /* Borders */
-  border-style: solid;
-  border-color: var(--matterColorNegative);
-  border-width: 1px;
 
   /* Overwrite dimensions from font styles */
   @media (--viewportMedium) {
@@ -128,6 +125,12 @@
   background-position: center;
   border-bottom-left-radius: inherit;
   cursor: pointer;
+  opacity: 0.5;
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .paginationNext {
@@ -139,6 +142,13 @@
   background-position: center;
   border-bottom-right-radius: inherit;
   cursor: pointer;
+
+  opacity: 0.5;
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .caretShadow {

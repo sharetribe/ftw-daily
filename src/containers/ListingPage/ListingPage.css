@@ -29,12 +29,15 @@
   padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
   background-color: var(--matterColorNegative); /* Loading BG color */
 
+  /* Image carousel can be opened from the image, therefore we should show a pointer */
+  cursor: pointer;
+
   @media (--viewportMedium) {
     padding-bottom: 0; /* No fixed aspect on desktop layouts */
   }
 }
 
-.ownListingActionBar {
+.actionBar {
   position: absolute;
   display: flex;
   justify-content: space-between;
@@ -44,11 +47,24 @@
   color: var(--matterColorNegative);
   background-color: var(--matterColor);
   z-index: 1; /* bring on top of mobile image */
+
+  /* Action bar prevents the image click events going to the parent and
+   should not show a pointer */
+  cursor: initial;
+
+  border-radius: 2px 2px 0 0;
 }
 
 .ownListingText {
   @apply --marketplaceH4FontStyles;
   margin: 16px 12px 13px 24px;
+}
+
+.closedListingText {
+  @apply --marketplaceH4FontStyles;
+  margin: 16px 12px 13px 24px;
+  text-align: center;
+  width: 100%;
 }
 
 .editListingLink {
@@ -57,6 +73,14 @@
   margin: 0;
   padding: 16px 24px 13px 12px;
   color: var(--matterColorNegative);
+
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    color: var(--matterColorLight);
+    text-decoration: none;
+  }
+
   @media (--viewportMedium) {
     margin: 0;
   }
@@ -75,6 +99,8 @@
   right: 0;
   width: 100%;
 
+  transition: var(--transitionStyleButton);
+
   @media (--viewportMedium) {
     position: static;
     top: auto;
@@ -86,28 +112,37 @@
     object-fit: cover;
     border-radius: 2px;
   }
+
+  &:hover {
+    opacity: 0.85;
+  }
 }
 
 .viewPhotos {
   @apply --marketplaceTinyFontStyles;
+  font-weight: var(--fontWeightMedium);
 
   /* Position and dimensions */
   position: absolute;
   bottom: 19px;
   right: 24px;
   margin: 0;
-  padding: 6px 8px 6px 11px;
+  padding: 6px 13px 8px 13px;
 
   /* Colors */
   background-color: var(--matterColorLight);
 
   /* Borders */
-  border-style: solid;
-  border-width: 1px;
-  border-color: var(--matterColorAnti);
-  border-radius: 2px;
+  border: none;
+  border-radius: var(--borderRadius);
 
   cursor: pointer;
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    background-color: var(--marketplaceColor);
+    color: var(--matterColorLight);
+  }
 
   @media (--viewportMedium) {
     margin: 0;
@@ -132,6 +167,10 @@
     padding: 0 60px;
     display: flex;
     position: relative;
+  }
+
+  @media (--viewportLarge) {
+    margin: 0 auto 117px;
   }
 }
 
@@ -470,4 +509,11 @@
 
 .bookButton {
   @apply --marketplaceButtonStylesPrimary;
+}
+
+.closedListingButton {
+  border-left: 1px solid var(--matterColorNegative);
+  width: 100%;
+  padding: 15px 24px 15px 24px;
+  text-align: center;
 }

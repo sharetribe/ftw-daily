@@ -12,11 +12,10 @@ const UserNav = props => {
   const tabs = [
     {
       text: <FormattedMessage id="ManageListingsPage.profileSettings" />,
-      selected: selectedPageName === 'EditProfilePage',
-      disabled: true,
+      selected: selectedPageName === 'ProfileSettingsPage',
+      disabled: false,
       linkProps: {
-        name: 'EditProfilePage',
-        params: { displayName: 'testinglink' },
+        name: 'ProfileSettingsPage',
       },
     },
     {

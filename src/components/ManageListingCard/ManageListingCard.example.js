@@ -1,10 +1,9 @@
 /* eslint-disable no-console */
 import React from 'react';
 import ManageListingCard from './ManageListingCard';
-import { createOwnListing, fakeIntl } from '../../util/test-data';
+import { createListing, fakeIntl } from '../../util/test-data';
 
 const noop = () => null;
-const listing = { ...createOwnListing('listing1') };
 
 const ManageListingCardWrapper = props => (
   <div style={{ maxWidth: '400px' }}>
@@ -15,8 +14,10 @@ const ManageListingCardWrapper = props => (
 export const ManageListingCardWrapped = {
   component: ManageListingCardWrapper,
   props: {
+    hasClosingError: false,
+    hasOpeningError: false,
     intl: fakeIntl,
-    listing,
+    listing: createListing('listing1'),
     isMenuOpen: false,
     onCloseListing: noop,
     onOpenListing: noop,
