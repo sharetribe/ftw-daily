@@ -10,10 +10,15 @@
 
 .title {
   @apply --marketplaceModalTitle;
+  margin: 28px 0 17px 0;
+
+  @media (--viewportMedium) {
+    margin: 28px 0 24px 0;
+  }
 }
 
 .button {
-  @apply --marketplaceButtonStyles;
+  @apply --marketplaceButtonStylesPrimary;
 
   margin-top: 24px;
   align-self: stretch;
@@ -24,6 +29,10 @@
 }
 
 .error {
-  margin-top: 24px;
   color: var(--failColor);
+  margin: 23px 0 24px 0;
+
+  @media (--viewportMedium) {
+    margin: 28px 0 24px 0;
+  }
 }
