@@ -1,66 +1,44 @@
 @import '../../marketplace.css';
 
 :root {
-  --avatarSize: 100%;
-  --avatarSizeMedium: 61px;
-  --avatarSizeLarge: 120px;
+  --avatarSize: 40px;
+  --avatarSizeMedium: 60px;
+  --avatarSizeLarge: 96px;
+
+  /* Base for all avatars */
+  --avatarBase: {
+      font-family: "sofiapro", Helvetica, Arial, sans-serif;
+      border-radius: 50%;
+
+      /* Position possible initials to the center of the component */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      /* Colors */
+      background-image: linear-gradient(-180deg, #E16B56 0%, #C0392B 100%);
+      color: var(--matterColorLight);
+  }
 }
+
+
+/* Small Avatar */
 
 .root {
   /* Font is specific to this component, but defining it in marketplace.css makes it easier
    * to change font if brand look-and-feel needs such changes.
    */
-  @apply --marketplaceSmallAvatarFontStyles;
+  @apply --avatarBase;
 
   /* Layout */
   width: var(--avatarSize);
   height: var(--avatarSize);
-  border-radius: 50%;
-
-  /* Position possible initials to the center of the component */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* Colors */
-  background-color: var(--matterColorAnti);
-  color: var(--matterColorLight);
 }
 
-.mediumAvatar {
-  @apply --marketplaceMediumAvatarFontStyles;
-
-  /* Fixed dimensions */
-  width: var(--avatarSizeMedium);
-  height: var(--avatarSizeMedium);
-  border-radius: 50%;
-
-  /* Position possible initials to the center of the component */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* Colors */
-  background-color: var(--matterColorAnti);
-  color: var(--matterColorLight);
-}
-
-.largeAvatar {
-  @apply --marketplaceH1FontStyles;
-
-  /* Fixed dimensions */
-  width: var(--avatarSizeLarge);
-  height: var(--avatarSizeLarge);
-  border-radius: 50%;
-
-  /* Position possible initials to the center of the component */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* Colors */
-  background-color: var(--matterColorAnti);
-  color: var(--matterColorLight);
+.initials {
+  font-size: 14px;
+  font-weight: var(--fontWeightBold);
+  padding-bottom: 4px;
 }
 
 .avatarImage {
@@ -69,14 +47,36 @@
   border-radius: inherit;
 }
 
-.initials {
-  padding-bottom: 4px;
+
+/* Medium Avatar */
+
+.mediumAvatar {
+  @apply --avatarBase;
+
+  /* Fixed dimensions */
+  width: var(--avatarSizeMedium);
+  height: var(--avatarSizeMedium);
 }
 
 .mediumAvatar .initials {
+  font-size: 20px;
+  font-weight: var(--fontWeightSemiBold);
   padding-bottom: 5px;
 }
 
+
+/* Large Avatar */
+
+.largeAvatar {
+  @apply --avatarBase;
+
+  /* Fixed dimensions */
+  width: var(--avatarSizeLarge);
+  height: var(--avatarSizeLarge);
+}
+
 .largeAvatar .initials {
+  font-size: 30px;
+  font-weight: var(--fontWeightSemiBold);
   padding-bottom: 6px;
 }

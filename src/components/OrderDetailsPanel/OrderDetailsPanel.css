@@ -57,8 +57,6 @@
 
   /* Layout */
   display: block;
-  width: 61px;
-  height: 61px;
 
   @media (--viewportLarge) {
     margin-left: 48px;

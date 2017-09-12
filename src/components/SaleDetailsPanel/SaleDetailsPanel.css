@@ -67,7 +67,7 @@
 
   @media (--viewportLarge) {
     max-width: 100%;
-    margin: 42px 0 0 0;
+    margin: 40px 0 0 0;
   }
 }
 
@@ -80,29 +80,25 @@
   }
 }
 
-.avatarWrapperMobile {
+.avatarMobile {
   /* Position (over the listing image)*/
   margin-top: -31px;
+  margin-left: 24px;
 
   /* Bring on top of image */
   position: relative;
-
-  /* Layout */
-  display: flex;
-  justify-content: center;
-  width: 100%;
 
   @media (--viewportLarge) {
     display: none;
   }
 }
 
-.avatarWrapperDesktop {
+.avatarDesktop {
   display: none;
 
   @media (--viewportLarge) {
-    display: block;
-    margin-top: 122px;
+    display: flex;
+    margin-top: 121px;
   }
 }
 
@@ -121,7 +117,7 @@
 
   @media (--viewportLarge) {
     display: block;
-    margin: 122px 0 0 0;
+    margin: 116px 0 0 0;
     background-color: var(--matterColorLight);
     border: 1px solid var(--matterColorNegative);
     border-radius: 2px;

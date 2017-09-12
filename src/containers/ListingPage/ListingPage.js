@@ -13,7 +13,8 @@ import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import { ensureListing, ensureUser } from '../../util/data';
 import {
-  Avatar,
+  AvatarLarge,
+  AvatarMedium,
   Button,
   Map,
   ModalInMobile,
@@ -324,9 +325,11 @@ export class ListingPageComponent extends Component {
           >
             <ImageCarousel images={currentListing.images} />
           </Modal>
+
           <div className={css.contentContainer}>
             <div className={css.avatarWrapper}>
-              <Avatar rootClassName={css.avatar} user={currentAuthor} />
+              <AvatarLarge user={currentAuthor} className={css.avatarDesktop}/>
+              <AvatarMedium user={currentAuthor} className={css.avatarMobile}/>
             </div>
 
             <div className={css.mainContent}>

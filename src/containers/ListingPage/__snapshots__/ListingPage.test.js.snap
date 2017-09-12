@@ -90,9 +90,22 @@ exports[`ListingPage matches snapshot 1`] = `
     </InjectIntl(ModalComponent)>
     <div>
       <div>
-        <Avatar
-          className={null}
-          rootClassName={null}
+        <AvatarLarge
+          user={
+            Object {
+              "attributes": Object {
+                "profile": Object {
+                  "abbreviatedName": "user-1 abbreviated name",
+                  "displayName": "user-1 display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "user-1",
+              },
+              "type": "user",
+            }
+          } />
+        <AvatarMedium
           user={
             Object {
               "attributes": Object {
