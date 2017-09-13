@@ -132,7 +132,7 @@ export class CheckoutPageComponent extends Component {
     const isLoading = !this.state.dataLoaded || speculateTransactionInProgress;
 
     const { listing, bookingDates } = this.state.pageData;
-    const currentTransaction = ensureTransaction(speculatedTransaction);
+    const currentTransaction = ensureTransaction(speculatedTransaction, {}, null);
     const currentBooking = ensureBooking(currentTransaction.booking);
     const currentListing = ensureListing(listing);
     const currentAuthor = ensureUser(currentListing.author);
