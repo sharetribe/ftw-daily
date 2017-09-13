@@ -18,7 +18,7 @@ import {
 import { LoginForm, SignupForm } from '../../containers';
 import { login, logout, authenticationInProgress, signup } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { sendVerificationEmail } from './AuthenticationPage.duck';
+import { sendVerificationEmail } from '../../ducks/user.duck';
 
 import css from './AuthenticationPage.css';
 
@@ -279,11 +279,9 @@ const mapStateToProps = state => {
     currentUser,
     currentUserHasListings,
     currentUserNotificationCount: notificationCount,
-  } = state.user;
-  const {
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
-  } = state.AuthenticationPage;
+  } = state.user;
   return {
     authInfoError,
     authInProgress: authenticationInProgress(state),
