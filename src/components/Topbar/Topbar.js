@@ -8,7 +8,15 @@ import { withFlattenedRoutes, withViewport } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
-import { Button, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
+import {
+  Button,
+  IconEmailAttention,
+  InlineTextButton,
+  Modal,
+  NamedLink,
+  TopbarDesktop,
+  TopbarMobileMenu,
+} from '../../components';
 import { TopbarSearchForm } from '../../containers';
 
 import MenuIcon from './MenuIcon';
@@ -16,6 +24,7 @@ import LogoIcon from './LogoIcon';
 import SearchIcon from './SearchIcon';
 import css from './Topbar.css';
 
+const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'too-many-verification-requests';
 const maxMobileScreenWidth = 768;
 
 const redirectToURLWithModalState = (props, modalStateParam) => {
@@ -34,6 +43,18 @@ const redirectToURLWithoutModalState = (props, modalStateParam) => {
   const stringified = stringify(queryParams);
   const searchString = stringified ? `?${stringified}` : '';
   history.push(`${pathname}${searchString}`, state);
+};
+
+const firstApiError = error => {
+  if (error && error.data && error.data.errors && error.data.errors.length > 0) {
+    return error.data.errors[0];
+  }
+  return null;
+};
+
+const isTooManyVerificationRequestsApiError = error => {
+  const apiError = firstApiError(error);
+  return apiError && apiError.code === ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS;
 };
 
 class TopbarComponent extends Component {
@@ -125,6 +146,9 @@ class TopbarComponent extends Component {
       intl,
       location,
       onManageDisableScrolling,
+      onResendVerificationEmail,
+      sendVerificationEmailInProgress,
+      sendVerificationEmailError,
     } = this.props;
 
     const { mobilemenu, mobilesearch, address, origin, bounds, country } = parse(location.search, {
@@ -159,6 +183,32 @@ class TopbarComponent extends Component {
           }
         : null,
     };
+
+    const user = ensureCurrentUser(currentUser);
+    const email = user.id ? <span className={css.email}>{user.attributes.email}</span> : '';
+
+    const resendEmailLink = (
+      <InlineTextButton className={css.verifyLink} onClick={onResendVerificationEmail}>
+        <FormattedMessage id="Topbar.resendEmailLinkText" />
+      </InlineTextButton>
+    );
+    const fixEmailLink = (
+      <NamedLink className={css.verifyLink} name="ProfileSettingsPage">
+        <FormattedMessage id="Topbar.fixEmailLinkText" />
+      </NamedLink>
+    );
+
+    const resendErrorTranslationId = isTooManyVerificationRequestsApiError(
+      sendVerificationEmailError
+    )
+      ? 'Topbar.resendFailedTooManyRequests'
+      : 'Topbar.resendFailed';
+    const resendErrorMessage = sendVerificationEmailError
+      ? <p className={css.resendError}>
+          <FormattedMessage id={resendErrorTranslationId} />
+        </p>
+      : null;
+    const closeButtonMessage = <FormattedMessage id="Topbar.closeVerifyEmailReminder" />;
 
     const classes = classNames(rootClassName || css.root, className);
 
@@ -223,13 +273,35 @@ class TopbarComponent extends Component {
         </Modal>
         <Modal
           id="EmailVerificationReminder"
+          containerClassName={css.verifyEmailModal}
           isOpen={this.state.showVerifyEmailReminder}
           onClose={() => {
             this.setState({ showVerifyEmailReminder: false, hasSeenEmailReminder: true });
           }}
           onManageDisableScrolling={onManageDisableScrolling}
+          closeButtonMessage={closeButtonMessage}
         >
-          <div style={{ width: '400px', height: '400px' }}>Nag nag naggity nag</div>
+          <div className={css.verifyEmailContent}>
+            <IconEmailAttention />
+            <h1 className={css.verifyTitle}>
+              <FormattedMessage id="Topbar.verifyEmailTitle" />
+            </h1>
+            <p className={css.verifyHelpText}>
+              <FormattedMessage id="Topbar.verifyEmailText" />
+            </p>
+            <p className={css.checkInboxText}>
+              <FormattedMessage id="Topbar.checkInbox" values={{ email }} />
+            </p>
+            {resendErrorMessage}
+            <p className={css.resendEmail}>
+              {sendVerificationEmailInProgress
+                ? <FormattedMessage id="Topbar.sendingEmail" />
+                : <FormattedMessage id="Topbar.resendEmail" values={{ resendEmailLink }} />}
+            </p>
+            <p className={css.fixEmail}>
+              <FormattedMessage id="Topbar.fixEmail" values={{ fixEmailLink }} />
+            </p>
+          </div>
         </Modal>
       </div>
     );
@@ -244,9 +316,10 @@ TopbarComponent.defaultProps = {
   currentUser: null,
   currentUserHasOrders: null,
   currentPage: null,
+  sendVerificationEmailError: null,
 };
 
-const { arrayOf, bool, func, number, shape, string } = PropTypes;
+const { arrayOf, bool, func, instanceOf, number, shape, string } = PropTypes;
 
 TopbarComponent.propTypes = {
   className: string,
@@ -261,6 +334,9 @@ TopbarComponent.propTypes = {
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  onResendVerificationEmail: func.isRequired,
+  sendVerificationEmailInProgress: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
 
   // These are passed from PageLayout to keep Topbar rendering aware of location changes
   history: shape({

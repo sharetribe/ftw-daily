@@ -131,3 +131,85 @@
   /* Pull text behind search suggestions */
   z-index: -1;
 }
+
+/* Verify email reminder (modal) */
+
+.verifyEmailModal {
+  position: relative;
+  height: 100vh;
+  padding: 24px 24px 98px 24px;
+
+  @media (--viewportMedium) {
+    -webkit-overflow-scrolling: auto;
+    width: 480px;
+    min-height: 573px;
+    height: auto;
+    margin: 7.5vh auto;
+    padding: 72px 66px;
+    background-color: var(--matterColorBright);
+    border-radius: 2px;
+  }
+}
+
+.verifyEmailContent {}
+
+.verifyTitle {
+  @apply --marketplaceModalTitle;
+  margin: 21px 0 0 0;
+
+  @media (--viewportMedium) {
+    margin: 22px 0 0 0;
+  }
+}
+
+.verifyHelpText {
+  margin: 17px 0 0 0;
+
+  @media (--viewportMedium) {
+    margin: 16px 0 0 0;
+  }
+}
+
+.email {
+  font-weight: bold;
+}
+
+.verifyLink {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColor);
+  margin: 0;
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}
+
+.resendEmail {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorAnti);
+  margin: 59px 0 0 0;
+
+  @media (--viewportMedium) {
+    margin: 63px 0 0 0;
+  }
+}
+
+.resendError {
+  color: var(--failColor);
+  margin: 66px 0 0 0;
+
+  @media (--viewportMedium) {
+    margin: 72px 0 0 0;
+  }
+}
+
+.fixEmail {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorAnti);
+  margin: 0;
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}
+
