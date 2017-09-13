@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as propTypes from '../../util/propTypes';
+import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { NamedLink, PageLayout, Topbar } from '../../components';
@@ -22,6 +23,7 @@ export class NotFoundPageComponent extends Component {
       authInProgress,
       currentUser,
       currentUserHasListings,
+      currentUserHasOrders,
       history,
       isAuthenticated,
       location,
@@ -29,6 +31,9 @@ export class NotFoundPageComponent extends Component {
       notificationCount,
       onLogout,
       onManageDisableScrolling,
+      sendVerificationEmailInProgress,
+      sendVerificationEmailError,
+      onResendVerificationEmail,
     } = this.props;
 
     return (
@@ -37,12 +42,16 @@ export class NotFoundPageComponent extends Component {
           authInProgress={authInProgress}
           currentUser={currentUser}
           currentUserHasListings={currentUserHasListings}
+          currentUserHasOrders={currentUserHasOrders}
           history={history}
           isAuthenticated={isAuthenticated}
           location={location}
           notificationCount={notificationCount}
           onLogout={onLogout}
           onManageDisableScrolling={onManageDisableScrolling}
+          onResendVerificationEmail={onResendVerificationEmail}
+          sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+          sendVerificationEmailError={sendVerificationEmailError}
         />
         <NamedLink name="LandingPage">Home</NamedLink>
       </PageLayout>
@@ -53,9 +62,11 @@ export class NotFoundPageComponent extends Component {
 NotFoundPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
+  currentUserHasOrders: null,
   logoutError: null,
   notificationCount: 0,
   staticContext: {},
+  sendVerificationEmailError: null,
 };
 
 const { bool, func, instanceOf, number, object, shape } = PropTypes;
@@ -65,11 +76,15 @@ NotFoundPageComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentUserHasOrders: bool,
   isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  sendVerificationEmailInProgress: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
+  onResendVerificationEmail: func.isRequired,
 
   // context object from StaticRouter, injected by the withRouter wrapper
   staticContext: object,
@@ -88,17 +103,23 @@ const mapStateToProps = state => {
   const {
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     currentUserNotificationCount: notificationCount,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   } = state.user;
   return {
     authInfoError,
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     currentUserNotificationCount: notificationCount,
     isAuthenticated,
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   };
 };
 
@@ -106,6 +127,7 @@ const mapDispatchToProps = dispatch => ({
   onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
+  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
 const NotFoundPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
