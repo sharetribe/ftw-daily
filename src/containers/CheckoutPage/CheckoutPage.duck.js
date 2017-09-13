@@ -1,6 +1,7 @@
 import { pick } from 'lodash';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
 import * as propTypes from '../../util/propTypes';
+import { fetchCurrentUserHasOrdersSuccess } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
 
@@ -113,6 +114,7 @@ export const initiateOrder = params =>
       .then(response => {
         const orderId = response.data.data.id;
         dispatch(initiateOrderSuccess(orderId));
+        dispatch(fetchCurrentUserHasOrdersSuccess(true));
         return orderId;
       })
       .catch(e => {
