@@ -8,6 +8,8 @@ import * as validators from '../../util/validators';
 
 import css from './PasswordRecoveryForm.css';
 
+const isNotFoundError = (error) => error && error.status === 404;
+
 const PasswordRecoveryFormComponent = props => {
   const {
     rootClassName,
@@ -18,6 +20,7 @@ const PasswordRecoveryFormComponent = props => {
     form,
     initialValues,
     intl,
+    recoveryError,
   } = props;
 
   // email
@@ -30,8 +33,12 @@ const PasswordRecoveryFormComponent = props => {
   const emailRequiredMessage = intl.formatMessage({
     id: 'PasswordRecoveryForm.emailRequired',
   });
-  const emailRequired = validators.required(emailRequiredMessage);
+  const emailNotFoundMessage = intl.formatMessage({
+    id: 'PasswordRecoveryForm.emailNotFound',
+  });
 
+  const emailRequired = validators.required(emailRequiredMessage);
+  const customErrorText = isNotFoundError(recoveryError) ? emailNotFoundMessage : null;
   const initialEmail = initialValues ? initialValues.email : null;
   const buttonDisabled = (pristine && !initialEmail) || submitting;
   const classes = classNames(rootClassName || css.root, className);
@@ -41,6 +48,7 @@ const PasswordRecoveryFormComponent = props => {
       <FormattedMessage id="PasswordRecoveryForm.goToLoginHelp" />
     </span>
   );
+
   return (
     <form className={classes} onSubmit={handleSubmit}>
       <TextInputField
@@ -51,6 +59,7 @@ const PasswordRecoveryFormComponent = props => {
         label={emailLabel}
         placeholder={emailPlaceholder}
         validate={emailRequired}
+        customErrorText={customErrorText}
       />
       <p className={css.bottomWrapper}>
         <NamedLink name="LoginPage" className={css.goToLoginLink}>
@@ -67,14 +76,16 @@ const PasswordRecoveryFormComponent = props => {
 PasswordRecoveryFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  recoveryError: null,
 };
 
-const { string } = PropTypes;
+const { instanceOf, string } = PropTypes;
 
 PasswordRecoveryFormComponent.propTypes = {
   ...formPropTypes,
   rootClassName: string,
   className: string,
+  recoveryError: instanceOf(Error),
   intl: intlShape.isRequired,
 };
 

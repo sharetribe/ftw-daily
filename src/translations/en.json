@@ -226,6 +226,7 @@
   "PasswordResetPage.resetFailed": "Reset failed. Please try again.",
   "PasswordResetPage.title": "Reset password",
   "PasswordRecoveryForm.emailLabel": "Email",
+  "PasswordRecoveryForm.emailNotFound": "Hmm. We didn't find an account with that email. Please double-check your email and try again.",
   "PasswordRecoveryForm.emailPlaceholder": "john.doe@example.com",
   "PasswordRecoveryForm.emailRequired": "This field is required",
   "PasswordRecoveryForm.goToLogin": "{goToLoginHelp} Go to log in.",

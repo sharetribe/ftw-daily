@@ -4,6 +4,7 @@ export const RECOVERY_REQUEST = 'app/PasswordRecoveryPage/RECOVERY_REQUEST';
 export const RECOVERY_SUCCESS = 'app/PasswordRecoveryPage/RECOVERY_SUCCESS';
 export const RECOVERY_ERROR = 'app/PasswordRecoveryPage/RECOVERY_ERROR';
 export const RETYPE_EMAIL = 'app/PasswordRecoveryPage/RETYPE_EMAIL';
+export const CLEAR_RECOVERY_ERROR = 'app/PasswordRecoveryPage/CLEAR_RECOVERY_ERROR';
 
 // ================ Reducer ================ //
 
@@ -31,6 +32,8 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, recoveryInProgress: false, recoveryError: payload };
     case RETYPE_EMAIL:
       return { ...state, submittedEmail: null, initialEmail: state.submittedEmail };
+    case CLEAR_RECOVERY_ERROR:
+      return { ...state, recoveryError: null };
     default:
       return state;
   }
@@ -46,6 +49,7 @@ export const recoveryError = error => ({
   error: true,
 });
 export const retypeEmail = () => ({ type: RETYPE_EMAIL });
+export const clearRecoveryError = () => ({ type: CLEAR_RECOVERY_ERROR });
 
 // ================ Thunks ================ //
 
