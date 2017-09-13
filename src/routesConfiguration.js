@@ -145,7 +145,7 @@ const routesConfiguration = [
     component: props => <AuthenticationPage {...props} tab="signup" />,
   },
   {
-    path: '/recover_password',
+    path: '/recover-password',
     exact: true,
     name: 'PasswordRecoveryPage',
     component: props => <PasswordRecoveryPage {...props} />,

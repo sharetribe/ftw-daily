@@ -46,7 +46,7 @@ exports[`LoginForm matches snapshot 1`] = `
     className={undefined}>
     <a
       className=""
-      href="/recover_password"
+      href="/recover-password"
       onClick={[Function]}
       style={Object {}}
       title={null}>
