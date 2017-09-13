@@ -63,7 +63,7 @@ export const PasswordRecoveryPageComponent = props => {
   );
 
   const emailSubmittedLinks = (
-    <div>
+    <div className={css.bottomWrapper}>
       <p>
         <InlineTextButton
           className={css.emailSubmittedLink}
@@ -101,16 +101,18 @@ export const PasswordRecoveryPageComponent = props => {
         sendVerificationEmailInProgress={sendVerificationEmailInProgress}
         sendVerificationEmailError={sendVerificationEmailError}
       />
-      <div>
-        <KeysIcon />
-        <h1 className={css.title}>{title}</h1>
-        <p>{message}</p>
-        {submittedEmail
-          ? emailSubmittedLinks
-          : <PasswordRecoveryForm
-              onSubmit={values => onSubmitEmail(values.email)}
-              initialValues={{ email: initialEmail }}
-            />}
+      <div className={css.root}>
+        <div className={css.content}>
+          <KeysIcon />
+          <h1 className={css.title}>{title}</h1>
+          <p>{message}</p>
+          {submittedEmail
+            ? emailSubmittedLinks
+            : <PasswordRecoveryForm
+                onSubmit={values => onSubmitEmail(values.email)}
+                initialValues={{ email: initialEmail }}
+              />}
+        </div>
       </div>
 
     </PageLayout>

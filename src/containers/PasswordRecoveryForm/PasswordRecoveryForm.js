@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import classNames from 'classnames';
 import { PrimaryButton, TextInputField, NamedLink } from '../../components';
 import * as validators from '../../util/validators';
 
 import css from './PasswordRecoveryForm.css';
 
 const PasswordRecoveryFormComponent = props => {
-  const { handleSubmit, pristine, submitting, form, initialValues, intl } = props;
+  const {
+    rootClassName,
+    className,
+    handleSubmit,
+    pristine,
+    submitting,
+    form,
+    initialValues,
+    intl,
+  } = props;
 
   // email
   const emailLabel = intl.formatMessage({
@@ -21,10 +31,18 @@ const PasswordRecoveryFormComponent = props => {
     id: 'PasswordRecoveryForm.emailRequired',
   });
   const emailRequired = validators.required(emailRequiredMessage);
+
   const initialEmail = initialValues ? initialValues.email : null;
   const buttonDisabled = (pristine && !initialEmail) || submitting;
+  const classes = classNames(rootClassName || css.root, className);
+
+  const goToLoginHelp = (
+    <span className={css.goToLoginLinkHelp}>
+      <FormattedMessage id="PasswordRecoveryForm.goToLoginHelp" />
+    </span>
+  );
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={classes} onSubmit={handleSubmit}>
       <TextInputField
         className={css.email}
         type="email"
@@ -36,11 +54,7 @@ const PasswordRecoveryFormComponent = props => {
       />
       <p className={css.bottomWrapper}>
         <NamedLink name="LoginPage" className={css.goToLoginLink}>
-          <span className={css.goToLoginLinkHelp}>
-            <FormattedMessage id="PasswordRecoveryForm.goToLoginHelp" />
-          </span>
-          {' '}
-          <FormattedMessage id="PasswordRecoveryForm.goToLogin" />
+          <FormattedMessage id="PasswordRecoveryForm.goToLogin" values={{ goToLoginHelp }} />
         </NamedLink>
       </p>
       <PrimaryButton type="submit" disabled={buttonDisabled}>
@@ -50,8 +64,17 @@ const PasswordRecoveryFormComponent = props => {
   );
 };
 
+PasswordRecoveryFormComponent.defaultProps = {
+  rootClassName: null,
+  className: null,
+};
+
+const { string } = PropTypes;
+
 PasswordRecoveryFormComponent.propTypes = {
   ...formPropTypes,
+  rootClassName: string,
+  className: string,
   intl: intlShape.isRequired,
 };
 

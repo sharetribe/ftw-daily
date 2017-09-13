@@ -228,7 +228,7 @@
   "PasswordRecoveryForm.emailLabel": "Email",
   "PasswordRecoveryForm.emailPlaceholder": "john.doe@example.com",
   "PasswordRecoveryForm.emailRequired": "This field is required",
-  "PasswordRecoveryForm.goToLogin": "Go to log in.",
+  "PasswordRecoveryForm.goToLogin": "{goToLoginHelp} Go to log in.",
   "PasswordRecoveryForm.goToLoginHelp": "Suddenly remembered your password?",
   "PasswordRecoveryForm.sendInstructions": "Send instructions",
   "PasswordRecoveryPage.emailSubmittedTitle": "Check your inbox",
