@@ -6,6 +6,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { PageLayout, Topbar, NamedLink, KeysIcon, KeysIconSuccess } from '../../components';
 import { PasswordResetForm } from '../../containers';
+import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { parse } from '../../util/urlHelpers';
@@ -32,6 +33,7 @@ export class PasswordResetPageComponent extends Component {
       authInProgress,
       currentUser,
       currentUserHasListings,
+      currentUserHasOrders,
       intl,
       isAuthenticated,
       logoutError,
@@ -44,6 +46,9 @@ export class PasswordResetPageComponent extends Component {
       resetPasswordInProgress,
       resetPasswordError,
       onSubmitPassword,
+      sendVerificationEmailInProgress,
+      sendVerificationEmailError,
+      onResendVerificationEmail,
     } = this.props;
 
     const title = intl.formatMessage({
@@ -128,11 +133,15 @@ export class PasswordResetPageComponent extends Component {
           authInProgress={authInProgress}
           currentUser={currentUser}
           currentUserHasListings={currentUserHasListings}
+          currentUserHasOrders={currentUserHasOrders}
           notificationCount={notificationCount}
           history={history}
           location={location}
           onLogout={onLogout}
           onManageDisableScrolling={onManageDisableScrolling}
+          onResendVerificationEmail={onResendVerificationEmail}
+          sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+          sendVerificationEmailError={sendVerificationEmailError}
         />
         <div className={css.root}>
           {content}
@@ -145,9 +154,11 @@ export class PasswordResetPageComponent extends Component {
 PasswordResetPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
+  currentUserHasOrders: null,
   logoutError: null,
   notificationCount: 0,
   resetPasswordError: null,
+  sendVerificationEmailError: null,
 };
 
 PasswordResetPageComponent.propTypes = {
@@ -155,12 +166,16 @@ PasswordResetPageComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentUserHasOrders: bool,
   isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   scrollingDisabled: bool.isRequired,
+  sendVerificationEmailInProgress: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
+  onResendVerificationEmail: func.isRequired,
 
   resetPasswordInProgress: bool.isRequired,
   resetPasswordError: instanceOf(Error),
@@ -185,7 +200,10 @@ const mapStateToProps = state => {
   const {
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     currentUserNotificationCount: notificationCount,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   } = state.user;
   const { resetPasswordInProgress, resetPasswordError } = state.PasswordResetPage;
   return {
@@ -193,12 +211,15 @@ const mapStateToProps = state => {
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     isAuthenticated,
     logoutError,
     notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
     resetPasswordInProgress,
     resetPasswordError,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   };
 };
 
@@ -206,6 +227,7 @@ const mapDispatchToProps = dispatch => ({
   onLogout: () => dispatch(logout()),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
+  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   onSubmitPassword: (email, token, password) => dispatch(resetPassword(email, token, password)),
 });
 
