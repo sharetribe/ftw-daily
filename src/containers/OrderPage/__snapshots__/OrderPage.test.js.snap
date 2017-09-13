@@ -25,6 +25,7 @@ exports[`OrderPage matches snapshot 1`] = `
       }
     }
     currentUserHasListings={false}
+    currentUserHasOrders={null}
     history={
       Object {
         "push": [Function],
@@ -38,7 +39,10 @@ exports[`OrderPage matches snapshot 1`] = `
     }
     notificationCount={0}
     onLogout={[Function]}
-    onManageDisableScrolling={[Function]} />
+    onManageDisableScrolling={[Function]}
+    onResendVerificationEmail={[Function]}
+    sendVerificationEmailError={null}
+    sendVerificationEmailInProgress={false} />
   <OrderDetailsPanel
     className="undefined"
     lastTransition={null}

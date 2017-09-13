@@ -7,6 +7,7 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { NamedRedirect, OrderDetailsPanel, PageLayout, Topbar } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
+import { sendVerificationEmail } from '../../ducks/user.duck';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
@@ -22,6 +23,7 @@ export const OrderPageComponent = props => {
     authInProgress,
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     fetchOrderError,
     history,
     intl,
@@ -34,6 +36,9 @@ export const OrderPageComponent = props => {
     params,
     scrollingDisabled,
     transaction,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
+    onResendVerificationEmail,
   } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
@@ -76,11 +81,15 @@ export const OrderPageComponent = props => {
         authInProgress={authInProgress}
         currentUser={currentUser}
         currentUserHasListings={currentUserHasListings}
+        currentUserHasOrders={currentUserHasOrders}
         notificationCount={notificationCount}
         history={history}
         location={location}
         onLogout={onLogout}
         onManageDisableScrolling={onManageDisableScrolling}
+        onResendVerificationEmail={onResendVerificationEmail}
+        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+        sendVerificationEmailError={sendVerificationEmailError}
       />
       {panel}
     </PageLayout>
@@ -90,10 +99,12 @@ export const OrderPageComponent = props => {
 OrderPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
+  currentUserHasOrders: null,
   fetchOrderError: null,
   logoutError: null,
   notificationCount: 0,
   transaction: null,
+  sendVerificationEmailError: null,
 };
 
 const { bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
@@ -103,6 +114,7 @@ OrderPageComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentUserHasOrders: bool,
   fetchOrderError: instanceOf(Error),
   intl: intlShape.isRequired,
   isAuthenticated: bool.isRequired,
@@ -114,6 +126,9 @@ OrderPageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
+  sendVerificationEmailInProgress: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
+  onResendVerificationEmail: func.isRequired,
 
   // from withRouter
   history: shape({
@@ -130,7 +145,10 @@ const mapStateToProps = state => {
   const {
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     currentUserNotificationCount: notificationCount,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   } = state.user;
 
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
@@ -141,11 +159,14 @@ const mapStateToProps = state => {
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     fetchOrderError,
     isAuthenticated,
     logoutError,
     notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
     transaction,
   };
 };
@@ -154,6 +175,7 @@ const mapDispatchToProps = dispatch => ({
   onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
+  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
 const OrderPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(
