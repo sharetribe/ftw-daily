@@ -3,12 +3,13 @@ import { compose } from 'redux';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
 import classNames from 'classnames';
-import { Button, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
-import { TopbarSearchForm } from '../../containers';
+import { ensureCurrentUser } from '../../util/data';
 import { withFlattenedRoutes, withViewport } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
+import { Button, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
+import { TopbarSearchForm } from '../../containers';
 
 import MenuIcon from './MenuIcon';
 import LogoIcon from './LogoIcon';
@@ -38,12 +39,41 @@ const redirectToURLWithoutModalState = (props, modalStateParam) => {
 class TopbarComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = { showVerifyEmailReminder: false, hasSeenEmailReminder: false };
+
+    this.onHistoryChanged = this.handleEmailReminder.bind(this);
     this.handleMobileMenuOpen = this.handleMobileMenuOpen.bind(this);
     this.handleMobileMenuClose = this.handleMobileMenuClose.bind(this);
     this.handleMobileSearchOpen = this.handleMobileSearchOpen.bind(this);
     this.handleMobileSearchClose = this.handleMobileSearchClose.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { currentUser, currentUserHasListings, currentUserHasOrders, location } = nextProps;
+    const user = ensureCurrentUser(currentUser);
+
+    // Track if path changes inside Page level component
+    const pathChanged = location.pathname !== this.props.location.pathname;
+    this.handleEmailReminder(user, currentUserHasListings, currentUserHasOrders, pathChanged);
+  }
+
+  handleEmailReminder(currentUser, currentUserHasListings, currentUserHasOrders, pathChanged) {
+    const emailUnverified = currentUser.id && !currentUser.attributes.emailVerified;
+    const notRemindedYet = !this.state.showVerifyEmailReminder && !this.state.hasSeenEmailReminder;
+    const showOnPathChange = notRemindedYet || pathChanged;
+
+    // Emails are sent when order is initiated
+    // Customer is likely to get email soon when she books something
+    // Provider email should work - she should get an email when someone books a listing
+    const hasOrders = currentUserHasOrders === true;
+    const hasListingsOrOrders = currentUserHasListings || hasOrders;
+
+    // Show reminder
+    if (emailUnverified && hasListingsOrOrders && showOnPathChange) {
+      this.setState({ showVerifyEmailReminder: true });
+    }
   }
 
   handleMobileMenuOpen() {
@@ -191,6 +221,16 @@ class TopbarComponent extends Component {
             </p>
           </div>
         </Modal>
+        <Modal
+          id="EmailVerificationReminder"
+          isOpen={this.state.showVerifyEmailReminder}
+          onClose={() => {
+            this.setState({ showVerifyEmailReminder: false, hasSeenEmailReminder: true });
+          }}
+          onManageDisableScrolling={onManageDisableScrolling}
+        >
+          <div style={{ width: '400px', height: '400px' }}>Nag nag naggity nag</div>
+        </Modal>
       </div>
     );
   }
@@ -202,6 +242,7 @@ TopbarComponent.defaultProps = {
   mobileRootClassName: null,
   notificationCount: 0,
   currentUser: null,
+  currentUserHasOrders: null,
   currentPage: null,
 };
 
@@ -215,6 +256,7 @@ TopbarComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentUserHasOrders: bool,
   currentPage: string,
   notificationCount: number,
   onLogout: func.isRequired,
