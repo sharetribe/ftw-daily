@@ -37,6 +37,8 @@ describe('EditListingPageComponent', () => {
         scrollingDisabled={false}
         tab="description"
         type="new"
+        sendVerificationEmailInProgress={false}
+        onResendVerificationEmail={noop}
       />
     );
     expect(tree).toMatchSnapshot();
