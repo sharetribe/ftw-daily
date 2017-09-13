@@ -9,6 +9,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
     currentPage="ManageListingsPage"
     currentUser={null}
     currentUserHasListings={false}
+    currentUserHasOrders={null}
     history={
       Object {
         "push": [Function],
@@ -23,7 +24,10 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
     notificationCount={0}
     onLogout={[Function]}
     onManageDisableScrolling={[Function]}
-    scrollingDisabled={false} />
+    onResendVerificationEmail={[Function]}
+    scrollingDisabled={false}
+    sendVerificationEmailError={null}
+    sendVerificationEmailInProgress={false} />
   <UserNav
     className={null}
     rootClassName={null}
