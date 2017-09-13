@@ -13,6 +13,7 @@ const initialState = {
   submittedEmail: null,
   recoveryError: null,
   recoveryInProgress: false,
+  passwordRequested: false,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -22,21 +23,31 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         submittedEmail: null,
-        initialEmail: null,
         recoveryInProgress: true,
         recoveryError: null,
       };
     case RECOVERY_SUCCESS:
-      return { ...state, submittedEmail: payload.email, recoveryInProgress: false };
+      return {
+        ...state,
+        submittedEmail: payload.email,
+        initialEmail: payload.email,
+        recoveryInProgress: false,
+        passwordRequested: true,
+      };
     case RECOVERY_ERROR:
       return {
         ...state,
         recoveryInProgress: false,
         recoveryError: payload.error,
-        submittedEmail: payload.email,
+        initialEmail: payload.email,
       };
     case RETYPE_EMAIL:
-      return { ...state, submittedEmail: null, initialEmail: state.submittedEmail };
+      return {
+        ...state,
+        initialEmail: state.submittedEmail,
+        submittedEmail: null,
+        passwordRequested: false,
+      };
     case CLEAR_RECOVERY_ERROR:
       return { ...state, recoveryError: null };
     default:

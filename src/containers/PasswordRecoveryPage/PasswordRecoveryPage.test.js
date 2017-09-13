@@ -21,6 +21,7 @@ describe('ContactDetailsPage', () => {
         sendVerificationEmailInProgress={false}
         onResendVerificationEmail={noop}
         recoveryInProgress={false}
+        passwordRequested={false}
         onChange={noop}
         onSubmitEmail={noop}
         onRetypeEmail={noop}
