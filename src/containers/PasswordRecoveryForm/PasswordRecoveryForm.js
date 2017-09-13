@@ -8,7 +8,7 @@ import * as validators from '../../util/validators';
 
 import css from './PasswordRecoveryForm.css';
 
-const isNotFoundError = (error) => error && error.status === 404;
+const isNotFoundError = error => error && error.status === 404;
 
 const PasswordRecoveryFormComponent = props => {
   const {
@@ -43,10 +43,10 @@ const PasswordRecoveryFormComponent = props => {
   const buttonDisabled = (pristine && !initialEmail) || submitting;
   const classes = classNames(rootClassName || css.root, className);
 
-  const goToLoginHelp = (
-    <span className={css.goToLoginLinkHelp}>
-      <FormattedMessage id="PasswordRecoveryForm.goToLoginHelp" />
-    </span>
+  const loginLink = (
+    <NamedLink name="LoginPage" className={css.loginLink}>
+      <FormattedMessage id="PasswordRecoveryForm.loginLinkText" />
+    </NamedLink>
   );
 
   return (
@@ -62,9 +62,7 @@ const PasswordRecoveryFormComponent = props => {
         customErrorText={customErrorText}
       />
       <p className={css.bottomWrapper}>
-        <NamedLink name="LoginPage" className={css.goToLoginLink}>
-          <FormattedMessage id="PasswordRecoveryForm.goToLogin" values={{ goToLoginHelp }} />
-        </NamedLink>
+        <FormattedMessage id="PasswordRecoveryForm.loginLinkInfo" values={{ loginLink }} />
       </p>
       <PrimaryButton type="submit" disabled={buttonDisabled}>
         <FormattedMessage id="PasswordRecoveryForm.sendInstructions" />

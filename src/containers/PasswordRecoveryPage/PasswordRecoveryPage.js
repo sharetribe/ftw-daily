@@ -53,31 +53,25 @@ export const PasswordRecoveryPageComponent = props => {
 
   const message = recoveryMessage(submittedEmail);
 
-  const sendAnotherHelp = (
-    <span className={css.emailSubmittedLinkHelp}>
-      <FormattedMessage id="PasswordRecoveryPage.sendAnotherHelp" />
-    </span>
+  const resendEmailLink = (
+    <InlineTextButton className={css.bottomLink} onClick={() => onSubmitEmail(submittedEmail)}>
+      <FormattedMessage id="PasswordRecoveryPage.resendEmailLinkText" />
+    </InlineTextButton>
   );
-  const fixEmailHelp = (
-    <span className={css.emailSubmittedLinkHelp}>
-      <FormattedMessage id="PasswordRecoveryPage.fixEmailHelp" />
-    </span>
+
+  const fixEmailLink = (
+    <InlineTextButton className={css.bottomLink} onClick={onRetypeEmail}>
+      <FormattedMessage id="PasswordRecoveryPage.fixEmailLinkText" />
+    </InlineTextButton>
   );
 
   const emailSubmittedLinks = (
     <div className={css.bottomWrapper}>
-      <p>
-        <InlineTextButton
-          className={css.emailSubmittedLink}
-          onClick={() => onSubmitEmail(submittedEmail)}
-        >
-          <FormattedMessage id="PasswordRecoveryPage.sendAnother" values={{ sendAnotherHelp }} />
-        </InlineTextButton>
+      <p className={css.bottomText}>
+        <FormattedMessage id="PasswordRecoveryPage.resendEmailInfo" values={{ resendEmailLink }} />
       </p>
-      <p>
-        <InlineTextButton className={css.emailSubmittedLink} onClick={onRetypeEmail}>
-          <FormattedMessage id="PasswordRecoveryPage.fixEmail" values={{ fixEmailHelp }} />
-        </InlineTextButton>
+      <p className={css.bottomText}>
+        <FormattedMessage id="PasswordRecoveryPage.fixEmailInfo" values={{ fixEmailLink }} />
       </p>
     </div>
   );
