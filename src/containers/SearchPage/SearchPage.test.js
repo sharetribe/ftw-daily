@@ -39,6 +39,8 @@ describe('SearchPageComponent', () => {
       onManageDisableScrolling: noop,
       onSearchMapListings: noop,
       flattenedRoutes: [],
+      sendVerificationEmailInProgress: false,
+      onResendVerificationEmail: noop,
     };
     const tree = renderShallow(<SearchPageComponent {...props} />);
     expect(tree).toMatchSnapshot();

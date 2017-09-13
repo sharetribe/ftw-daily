@@ -8,6 +8,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
     authInProgress={false}
     currentUser={null}
     currentUserHasListings={false}
+    currentUserHasOrders={null}
     history={
       Object {
         "push": [Function],
@@ -21,7 +22,10 @@ exports[`SearchPageComponent matches snapshot 1`] = `
     }
     notificationCount={0}
     onLogout={[Function]}
-    onManageDisableScrolling={[Function]} />
+    onManageDisableScrolling={[Function]}
+    onResendVerificationEmail={[Function]}
+    sendVerificationEmailError={null}
+    sendVerificationEmailInProgress={false} />
   <div>
     <div>
       <div>
