@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
@@ -12,15 +12,6 @@ import { PageLayout, Topbar, InlineTextButton, KeysIcon } from '../../components
 import { PasswordRecoveryForm } from '../../containers';
 
 import css from './PasswordRecoveryPage.css';
-
-const recoveryMessage = submittedEmail => {
-  if (submittedEmail) {
-    const email = <span className={css.submittedEmail}>{submittedEmail}</span>;
-    return <FormattedMessage id="PasswordRecoveryPage.emailSubmittedMessage" values={{ email }} />;
-  } else {
-    return <FormattedMessage id="PasswordRecoveryPage.forgotPasswordMessage" />;
-  }
-};
 
 export const PasswordRecoveryPageComponent = props => {
   const {
@@ -45,13 +36,12 @@ export const PasswordRecoveryPageComponent = props => {
     onChange,
     onSubmitEmail,
     onRetypeEmail,
+    intl,
   } = props;
 
-  const title = submittedEmail
-    ? <FormattedMessage id="PasswordRecoveryPage.emailSubmittedTitle" />
-    : <FormattedMessage id="PasswordRecoveryPage.forgotPasswordTitle" />;
-
-  const message = recoveryMessage(submittedEmail);
+  const title = intl.formatMessage({
+    id: 'PasswordRecoveryPage.title',
+  });
 
   const resendEmailLink = (
     <InlineTextButton className={css.bottomLink} onClick={() => onSubmitEmail(submittedEmail)}>
@@ -65,23 +55,88 @@ export const PasswordRecoveryPageComponent = props => {
     </InlineTextButton>
   );
 
-  const emailSubmittedLinks = (
-    <div className={css.bottomWrapper}>
-      <p className={css.bottomText}>
-        <FormattedMessage id="PasswordRecoveryPage.resendEmailInfo" values={{ resendEmailLink }} />
+  const submitEmailContent = (
+    <div className={css.content}>
+      <KeysIcon />
+      <h1 className={css.title}>
+        <FormattedMessage id="PasswordRecoveryPage.forgotPasswordTitle" />
+      </h1>
+      <p><FormattedMessage id="PasswordRecoveryPage.forgotPasswordMessage" /></p>
+      <PasswordRecoveryForm
+        onChange={onChange}
+        onSubmit={values => onSubmitEmail(values.email)}
+        initialValues={{ email: initialEmail }}
+        recoveryError={recoveryError}
+      />
+    </div>
+  );
+
+  const email = <span className={css.submittedEmail}>{submittedEmail}</span>;
+  const emailSubmittedContent = (
+    <div className={css.content}>
+      <KeysIcon />
+      <h1 className={css.title}>
+        <FormattedMessage id="PasswordRecoveryPage.emailSubmittedTitle" />
+      </h1>
+      <p>
+        <FormattedMessage id="PasswordRecoveryPage.emailSubmittedMessage" values={{ email }} />
       </p>
-      <p className={css.bottomText}>
-        <FormattedMessage id="PasswordRecoveryPage.fixEmailInfo" values={{ fixEmailLink }} />
+      <div className={css.bottomWrapper}>
+        <p className={css.bottomText}>
+          <FormattedMessage
+            id="PasswordRecoveryPage.resendEmailInfo"
+            values={{ resendEmailLink }}
+          />
+        </p>
+        <p className={css.bottomText}>
+          <FormattedMessage id="PasswordRecoveryPage.fixEmailInfo" values={{ fixEmailLink }} />
+        </p>
+      </div>
+    </div>
+  );
+
+  const emailNotVerifiedContent = (
+    <div className={css.content}>
+      <KeysIcon />
+      <h1 className={css.title}>
+        <FormattedMessage id="PasswordRecoveryPage.emailNotVerifiedTitle" />
+      </h1>
+      <p>
+        <FormattedMessage id="PasswordRecoveryPage.emailNotVerifiedMessage" values={{ email }} />
+      </p>
+      <p>
+        <FormattedMessage id="PasswordRecoveryPage.emailNotVerifiedContactAdmin" />
       </p>
     </div>
   );
 
+  const genericErrorContent = (
+    <div className={css.content}>
+      <KeysIcon />
+      <h1 className={css.title}>
+        <FormattedMessage id="PasswordRecoveryPage.actionFailedTitle" />
+      </h1>
+      <p>
+        <FormattedMessage id="PasswordRecoveryPage.actionFailedMessage" />
+      </p>
+    </div>
+  );
+
+  let content;
+  if (recoveryError && recoveryError.status === 409) {
+    content = emailNotVerifiedContent;
+  } else if (recoveryError && recoveryError.status === 404) {
+    content = submitEmailContent;
+  } else if (recoveryError) {
+    content = genericErrorContent;
+  } else if (submittedEmail) {
+    content = emailSubmittedContent;
+  } else {
+    content = submitEmailContent;
+  }
+
   return (
-    <PageLayout
-      authInfoError={authInfoError}
-      logoutError={logoutError}
-      title="Request new password"
-    >
+    <PageLayout authInfoError={authInfoError} logoutError={logoutError} title={title}>
       <Topbar
         authInProgress={authInProgress}
         currentUser={currentUser}
@@ -98,19 +153,7 @@ export const PasswordRecoveryPageComponent = props => {
         sendVerificationEmailError={sendVerificationEmailError}
       />
       <div className={css.root}>
-        <div className={css.content}>
-          <KeysIcon />
-          <h1 className={css.title}>{title}</h1>
-          <p>{message}</p>
-          {submittedEmail
-            ? emailSubmittedLinks
-            : <PasswordRecoveryForm
-                onChange={onChange}
-                onSubmit={values => onSubmitEmail(values.email)}
-                initialValues={{ email: initialEmail }}
-                recoveryError={recoveryError}
-              />}
-        </div>
+        {content}
       </div>
 
     </PageLayout>
@@ -151,6 +194,9 @@ PasswordRecoveryPageComponent.propTypes = {
   onChange: func.isRequired,
   onSubmitEmail: func.isRequired,
   onRetypeEmail: func.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 
   // from withRouter
   history: shape({
@@ -207,8 +253,10 @@ const mapDispatchToProps = dispatch => ({
   onRetypeEmail: () => dispatch(retypeEmail()),
 });
 
-const PasswordRecoveryPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
-  PasswordRecoveryPageComponent
-);
+const PasswordRecoveryPage = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter,
+  injectIntl
+)(PasswordRecoveryPageComponent);
 
 export default PasswordRecoveryPage;

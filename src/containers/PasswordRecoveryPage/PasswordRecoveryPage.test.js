@@ -1,5 +1,6 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
+import { fakeIntl } from '../../util/test-data';
 import { PasswordRecoveryPageComponent } from './PasswordRecoveryPage';
 
 const noop = () => null;
@@ -23,6 +24,7 @@ describe('ContactDetailsPage', () => {
         onChange={noop}
         onSubmitEmail={noop}
         onRetypeEmail={noop}
+        intl={fakeIntl}
       />
     );
     expect(tree).toMatchSnapshot();

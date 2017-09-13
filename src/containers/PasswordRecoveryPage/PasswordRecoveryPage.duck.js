@@ -29,7 +29,12 @@ export default function reducer(state = initialState, action = {}) {
     case RECOVERY_SUCCESS:
       return { ...state, submittedEmail: payload.email, recoveryInProgress: false };
     case RECOVERY_ERROR:
-      return { ...state, recoveryInProgress: false, recoveryError: payload };
+      return {
+        ...state,
+        recoveryInProgress: false,
+        recoveryError: payload.error,
+        submittedEmail: payload.email,
+      };
     case RETYPE_EMAIL:
       return { ...state, submittedEmail: null, initialEmail: state.submittedEmail };
     case CLEAR_RECOVERY_ERROR:
@@ -43,9 +48,9 @@ export default function reducer(state = initialState, action = {}) {
 
 export const recoveryRequest = () => ({ type: RECOVERY_REQUEST });
 export const recoverySuccess = email => ({ type: RECOVERY_SUCCESS, payload: { email } });
-export const recoveryError = error => ({
+export const recoveryError = (error, email) => ({
   type: RECOVERY_ERROR,
-  payload: error,
+  payload: { error, email },
   error: true,
 });
 export const retypeEmail = () => ({ type: RETYPE_EMAIL });
@@ -60,5 +65,5 @@ export const recoverPassword = email =>
     return sdk.passwordReset
       .request({ email })
       .then(() => dispatch(recoverySuccess(email)))
-      .catch(e => dispatch(recoveryError(e)));
+      .catch(error => dispatch(recoveryError(error, email)));
   };
