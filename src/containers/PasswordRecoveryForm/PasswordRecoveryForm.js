@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { PrimaryButton, TextInputField, NamedLink } from '../../components';
 import * as validators from '../../util/validators';
 

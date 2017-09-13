@@ -8,7 +8,7 @@ import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { recoverPassword, retypeEmail } from './PasswordRecoveryPage.duck';
-import { PageLayout, Topbar, NamedLink, InlineTextButton, KeysIcon } from '../../components';
+import { PageLayout, Topbar, InlineTextButton, KeysIcon } from '../../components';
 import { PasswordRecoveryForm } from '../../containers';
 
 import css from './PasswordRecoveryPage.css';
@@ -41,8 +41,6 @@ export const PasswordRecoveryPageComponent = props => {
     onResendVerificationEmail,
     initialEmail,
     submittedEmail,
-    recoveryInProgress,
-    recoveryError,
     onSubmitEmail,
     onRetypeEmail,
   } = props;
@@ -128,7 +126,6 @@ PasswordRecoveryPageComponent.defaultProps = {
   sendVerificationEmailError: null,
   initialEmail: null,
   submittedEmail: null,
-  recoveryError: null,
 };
 
 const { bool, func, instanceOf, number, object, shape, string } = PropTypes;
@@ -149,8 +146,6 @@ PasswordRecoveryPageComponent.propTypes = {
   onResendVerificationEmail: func.isRequired,
   initialEmail: string,
   submittedEmail: string,
-  recoveryInProgress: bool.isRequired,
-  recoveryError: instanceOf(Error),
   onSubmitEmail: func.isRequired,
   onRetypeEmail: func.isRequired,
 
