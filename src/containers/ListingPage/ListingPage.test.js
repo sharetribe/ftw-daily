@@ -34,6 +34,8 @@ describe('ListingPage', () => {
       onManageDisableScrolling: noop,
       scrollingDisabled: false,
       useInitialValues: noop,
+      sendVerificationEmailInProgress: false,
+      onResendVerificationEmail: noop,
     };
 
     const tree = renderShallow(<ListingPageComponent {...props} />);

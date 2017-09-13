@@ -28,6 +28,7 @@ import {
 import EditIcon from './EditIcon';
 import { BookingDatesForm } from '../../containers';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
+import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { showListing } from './ListingPage.duck';
@@ -148,6 +149,7 @@ export class ListingPageComponent extends Component {
       authInProgress,
       currentUser,
       currentUserHasListings,
+      currentUserHasOrders,
       getListing,
       history,
       intl,
@@ -160,6 +162,9 @@ export class ListingPageComponent extends Component {
       params,
       scrollingDisabled,
       showListingError,
+      sendVerificationEmailInProgress,
+      sendVerificationEmailError,
+      onResendVerificationEmail,
     } = this.props;
     const currentListing = ensureListing(getListing(new UUID(params.id)));
     const {
@@ -291,11 +296,15 @@ export class ListingPageComponent extends Component {
           authInProgress={authInProgress}
           currentUser={currentUser}
           currentUserHasListings={currentUserHasListings}
+          currentUserHasOrders={currentUserHasOrders}
           notificationCount={notificationCount}
           history={history}
           location={location}
           onLogout={onLogout}
           onManageDisableScrolling={onManageDisableScrolling}
+          onResendVerificationEmail={onResendVerificationEmail}
+          sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+          sendVerificationEmailError={sendVerificationEmailError}
         />
         <div className={listingClasses}>
           <div className={css.threeToTwoWrapper}>
@@ -423,10 +432,12 @@ export class ListingPageComponent extends Component {
 ListingPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
+  currentUserHasOrders: null,
   logoutError: null,
   notificationCount: 0,
   showListingError: null,
   tab: 'listing',
+  sendVerificationEmailError: null,
 };
 
 ListingPageComponent.propTypes = {
@@ -446,6 +457,7 @@ ListingPageComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentUserHasOrders: bool,
   getListing: func.isRequired,
   isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
@@ -456,6 +468,9 @@ ListingPageComponent.propTypes = {
   showListingError: instanceOf(Error),
   tab: oneOf(['book', 'listing']),
   useInitialValues: func.isRequired,
+  sendVerificationEmailInProgress: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
+  onResendVerificationEmail: func.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -464,7 +479,10 @@ const mapStateToProps = state => {
   const {
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     currentUserNotificationCount: notificationCount,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   } = state.user;
 
   const getListing = id => {
@@ -477,12 +495,15 @@ const mapStateToProps = state => {
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     getListing,
     isAuthenticated,
     logoutError,
     notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
     showListingError,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   };
 };
 
@@ -490,6 +511,7 @@ const mapDispatchToProps = dispatch => ({
   onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
+  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   useInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
 });
 
