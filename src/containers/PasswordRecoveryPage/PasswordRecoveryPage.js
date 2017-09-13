@@ -67,16 +67,17 @@ export const PasswordRecoveryPageComponent = props => {
   const emailSubmittedLinks = (
     <div>
       <p>
-        <NamedLink className={css.emailSubmittedLink} name="PasswordRecoveryPage">
+        <InlineTextButton
+          className={css.emailSubmittedLink}
+          onClick={() => onSubmitEmail(submittedEmail)}
+        >
           <FormattedMessage id="PasswordRecoveryPage.sendAnother" values={{ sendAnotherHelp }} />
-        </NamedLink>
+        </InlineTextButton>
       </p>
       <p>
-
         <InlineTextButton className={css.emailSubmittedLink} onClick={onRetypeEmail}>
           <FormattedMessage id="PasswordRecoveryPage.fixEmail" values={{ fixEmailHelp }} />
         </InlineTextButton>
-
       </p>
     </div>
   );
