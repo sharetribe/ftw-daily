@@ -85,7 +85,7 @@ export const user = shape({
     profile: shape({
       displayName: string.isRequired,
       abbreviatedName: string.isRequired,
-    }).isRequired,
+    }),
   }),
 });
 
