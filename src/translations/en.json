@@ -8,7 +8,7 @@
   "AuthenticationPage.resendEmail": "Didn't get the email? {resendEmailLink}.",
   "AuthenticationPage.resendEmailLinkText": "Resend it",
   "AuthenticationPage.resendFailed": "Resending verification email failed. Please try again.",
-  "AuthenticationPage.resendFailedTooManyRequests": "Resending verification email failed. You already have too many verification emails sent.",
+  "AuthenticationPage.resendFailedTooManyRequests": "Resending verification email failed, since you’ve already been sent 5 verification emails. Please try again tomorrow.",
   "AuthenticationPage.sendingEmail": "Sending verification email…",
   "AuthenticationPage.signupFailed": "Signup failed. Please make sure all the information you entered is correct and try again.",
   "AuthenticationPage.signupFailedEmailAlreadyTaken": "An account already exists with this email address. Try logging in instead.",
