@@ -25,7 +25,14 @@ import SearchIcon from './SearchIcon';
 import css from './Topbar.css';
 
 const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'too-many-verification-requests';
-const maxMobileScreenWidth = 768;
+const MAX_MOBILE_SCREEN_WIDTH = 768;
+const VERIFY_EMAIL_MODAL_WHITELIST = [
+  'LoginPage',
+  'SignupPage',
+  'ContactDetailsPage',
+  'EmailVerificationPage',
+  'PasswordResetPage',
+];
 
 const redirectToURLWithModalState = (props, modalStateParam) => {
   const { history, location } = props;
@@ -74,14 +81,13 @@ class TopbarComponent extends Component {
   componentWillReceiveProps(nextProps) {
     const { currentUser, currentUserHasListings, currentUserHasOrders, location } = nextProps;
     const user = ensureCurrentUser(currentUser);
-
-    // Track if path changes inside Page level component
-    const pathChanged = location.pathname !== this.props.location.pathname;
-    this.handleEmailReminder(user, currentUserHasListings, currentUserHasOrders, pathChanged);
+    this.handleEmailReminder(user, currentUserHasListings, currentUserHasOrders, location);
   }
 
-  handleEmailReminder(currentUser, currentUserHasListings, currentUserHasOrders, pathChanged) {
-    const emailUnverified = currentUser.id && !currentUser.attributes.emailVerified;
+  handleEmailReminder(currentUser, currentUserHasListings, currentUserHasOrders, newLocation) {
+    // Track if path changes inside Page level component
+    const pathChanged = newLocation.pathname !== this.props.location.pathname;
+    const emailUnverified = !!currentUser.id && !currentUser.attributes.emailVerified;
     const notRemindedYet = !this.state.showVerifyEmailReminder && !this.state.hasSeenEmailReminder;
     const showOnPathChange = notRemindedYet || pathChanged;
 
@@ -91,8 +97,12 @@ class TopbarComponent extends Component {
     const hasOrders = currentUserHasOrders === true;
     const hasListingsOrOrders = currentUserHasListings || hasOrders;
 
+    const whitelistedPaths = VERIFY_EMAIL_MODAL_WHITELIST.map(page =>
+      pathByRouteName(page, this.props.flattenedRoutes));
+    const isNotWhitelisted = !whitelistedPaths.includes(newLocation.pathname);
+
     // Show reminder
-    if (emailUnverified && hasListingsOrOrders && showOnPathChange) {
+    if (emailUnverified && isNotWhitelisted && hasListingsOrOrders && showOnPathChange) {
       this.setState({ showVerifyEmailReminder: true });
     }
   }
@@ -158,7 +168,7 @@ class TopbarComponent extends Component {
 
     const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null;
 
-    const isMobileLayout = viewport.width < maxMobileScreenWidth;
+    const isMobileLayout = viewport.width < MAX_MOBILE_SCREEN_WIDTH;
     const isMobileMenuOpen = isMobileLayout && mobilemenu === 'open';
     const isMobileSearchOpen = isMobileLayout && mobilesearch === 'open';
 
