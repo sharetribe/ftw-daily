@@ -17,6 +17,7 @@ import ExternalLink from './ExternalLink/ExternalLink';
 import ExpandingTextarea from './ExpandingTextarea/ExpandingTextarea';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
+import IconBannedUser from './IconBannedUser/IconBannedUser';
 import IconEmailAttention from './IconEmailAttention/IconEmailAttention';
 import IconEmailSent from './IconEmailSent/IconEmailSent';
 import IconEmailSuccess from './IconEmailSuccess/IconEmailSuccess';
@@ -90,6 +91,7 @@ export {
   ExternalLink,
   FilterPanel,
   HeroSection,
+  IconBannedUser,
   IconEmailAttention,
   IconEmailSent,
   IconEmailSuccess,

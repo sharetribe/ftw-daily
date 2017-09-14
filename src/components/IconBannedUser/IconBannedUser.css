@@ -1,0 +1,13 @@
+@import '../../marketplace.css';
+
+.backgroundFill {
+  fill: var(--failColor);
+}
+
+.foregroundFill {
+  fill: var(--matterColorLight);
+}
+
+.foregroundStroke {
+  stroke: var(--matterColorLight);
+}
