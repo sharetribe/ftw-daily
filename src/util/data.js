@@ -163,3 +163,54 @@ export const ensureCurrentUser = user => {
   const empty = { id: null, type: 'current-user', attributes: { profile: {} }, profileImage: {} };
   return { ...empty, ...user };
 };
+
+/**
+ * Get the display name of the given user. This function handles
+ * missing data (e.g. when the user object is still being downloaded),
+ * fully loaded users, as well as banned users.
+ *
+ * For banned users, a translated name should be provided.
+ *
+ * @param {propTypes.user} user
+ * @param {String} bannedUserDisplayName
+ *
+ * @return {String} display name that can be rendered in the UI
+ */
+export const userDisplayName = (user, bannedUserDisplayName) => {
+  const hasAttributes = user && user.attributes;
+  const hasProfile = hasAttributes && user.attributes.profile;
+
+  if (hasAttributes && user.attributes.banned) {
+    return bannedUserDisplayName;
+  } else if (hasProfile) {
+    return user.attributes.profile.displayName;
+  } else {
+    return '';
+  }
+};
+
+/**
+ * Get the abbreviated name of the given user. This function handles
+ * missing data (e.g. when the user object is still being downloaded),
+ * fully loaded users, as well as banned users.
+ *
+ * For banned users, a translated name should be provided.
+ *
+ * @param {propTypes.user} user
+ * @param {String} bannedUserAbbreviatedName
+ *
+ * @return {String} abbreviated name that can be rendered in the UI
+ * (e.g. in Avatar initials)
+ */
+export const userAbbreviatedName = (user, bannedUserAbbreviatedName) => {
+  const hasAttributes = user && user.attributes;
+  const hasProfile = hasAttributes && user.attributes.profile;
+
+  if (hasAttributes && user.attributes.banned) {
+    return bannedUserAbbreviatedName;
+  } else if (hasProfile) {
+    return user.attributes.profile.abbreviatedName;
+  } else {
+    return '';
+  }
+};
