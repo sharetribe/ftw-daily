@@ -12,8 +12,6 @@ const Avatar = props => {
   const avatarUser = ensureUser(user);
   const { displayName, abbreviatedName } = avatarUser.attributes.profile;
 
-  // TODO this is a temporary avatar fix for currentUser's profile data.
-  // Avatar images should be included to all user's attributes in the future.
   if (avatarUser.profileImage && avatarUser.profileImage.id) {
     return (
       <div className={classes} title={displayName}>
