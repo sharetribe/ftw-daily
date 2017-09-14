@@ -46,6 +46,8 @@ describe('SalePage', () => {
       transaction,
       tab: 'details',
       intl: fakeIntl,
+      sendVerificationEmailInProgress: false,
+      onResendVerificationEmail: noop,
     };
 
     const tree = renderShallow(<SalePageComponent {...props} />);

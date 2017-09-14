@@ -10,7 +10,7 @@ import { EditListingWizard, NamedRedirect, PageLayout, Topbar } from '../../comp
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { createStripeAccount } from '../../ducks/user.duck';
+import { createStripeAccount, sendVerificationEmail } from '../../ducks/user.duck';
 import {
   createListingDraft,
   updateListingDraft,
@@ -52,6 +52,7 @@ export const EditListingPageComponent = props => {
     authInProgress,
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     fetchInProgress,
     flattenedRoutes,
     getListing,
@@ -75,6 +76,9 @@ export const EditListingPageComponent = props => {
     page,
     params,
     scrollingDisabled,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
+    onResendVerificationEmail,
   } = props;
 
   const { id, type } = params;
@@ -132,11 +136,15 @@ export const EditListingPageComponent = props => {
           authInProgress={authInProgress}
           currentUser={currentUser}
           currentUserHasListings={currentUserHasListings}
+          currentUserHasOrders={currentUserHasOrders}
           notificationCount={notificationCount}
           history={history}
           location={location}
           onLogout={onLogout}
           onManageDisableScrolling={onManageDisableScrolling}
+          onResendVerificationEmail={onResendVerificationEmail}
+          sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+          sendVerificationEmailError={sendVerificationEmailError}
         />
         <EditListingWizard
           className={css.wizard}
@@ -177,10 +185,12 @@ export const EditListingPageComponent = props => {
 EditListingPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
+  currentUserHasOrders: null,
   listing: null,
   listingDraft: null,
   logoutError: null,
   notificationCount: 0,
+  sendVerificationEmailError: null,
 };
 
 const { arrayOf, bool, func, instanceOf, number, object, shape, string, oneOf } = PropTypes;
@@ -190,6 +200,7 @@ EditListingPageComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentUserHasOrders: bool,
   fetchInProgress: bool.isRequired,
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
   getListing: func.isRequired,
@@ -215,6 +226,9 @@ EditListingPageComponent.propTypes = {
     tab: string.isRequired,
   }).isRequired,
   scrollingDisabled: bool.isRequired,
+  sendVerificationEmailInProgress: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
+  onResendVerificationEmail: func.isRequired,
 
   /* from withRouter */
   history: shape({
@@ -232,7 +246,10 @@ const mapStateToProps = state => {
     createStripeAccountInProgress,
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     currentUserNotificationCount: notificationCount,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   } = state.user;
 
   const fetchInProgress = createStripeAccountInProgress;
@@ -246,6 +263,7 @@ const mapStateToProps = state => {
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     fetchInProgress,
     getListing,
     isAuthenticated,
@@ -253,6 +271,8 @@ const mapStateToProps = state => {
     notificationCount,
     page,
     scrollingDisabled: isScrollingDisabled(state),
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   };
 };
 
@@ -269,6 +289,7 @@ const mapDispatchToProps = dispatch => ({
   onRemoveListingImage: imageId => dispatch(removeListingImage(imageId)),
   onUpdateListingDraft: values => dispatch(updateListingDraft(values)),
   onChange: () => dispatch(clearUpdatedTab()),
+  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
 const EditListingPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(

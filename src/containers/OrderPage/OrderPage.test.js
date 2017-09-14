@@ -43,6 +43,8 @@ describe('OrderPage', () => {
       history: {
         push: () => console.log('HistoryPush called'),
       },
+      sendVerificationEmailInProgress: false,
+      onResendVerificationEmail: noop,
     };
 
     const tree = renderShallow(<OrderPageComponent {...props} />);

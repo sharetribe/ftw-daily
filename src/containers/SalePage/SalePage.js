@@ -8,6 +8,7 @@ import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
 import { NamedRedirect, SaleDetailsPanel, PageLayout, Topbar } from '../../components';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { acceptSale, rejectSale, loadData } from './SalePage.duck';
@@ -22,6 +23,7 @@ export const SalePageComponent = props => {
     authInProgress,
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     fetchSaleError,
     acceptSaleError,
     rejectSaleError,
@@ -39,6 +41,9 @@ export const SalePageComponent = props => {
     params,
     scrollingDisabled,
     transaction,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
+    onResendVerificationEmail,
   } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
@@ -93,11 +98,15 @@ export const SalePageComponent = props => {
         authInProgress={authInProgress}
         currentUser={currentUser}
         currentUserHasListings={currentUserHasListings}
+        currentUserHasOrders={currentUserHasOrders}
         notificationCount={notificationCount}
         history={history}
         location={location}
         onLogout={onLogout}
         onManageDisableScrolling={onManageDisableScrolling}
+        onResendVerificationEmail={onResendVerificationEmail}
+        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+        sendVerificationEmailError={sendVerificationEmailError}
       />
       {acceptError}
       {rejectError}
@@ -111,12 +120,14 @@ export const SalePageComponent = props => {
 SalePageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
+  currentUserHasOrders: null,
   fetchSaleError: null,
   acceptSaleError: null,
   rejectSaleError: null,
   logoutError: null,
   notificationCount: 0,
   transaction: null,
+  sendVerificationEmailError: null,
 };
 
 const { bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
@@ -126,6 +137,7 @@ SalePageComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentUserHasOrders: bool,
   fetchSaleError: instanceOf(Error),
   acceptSaleError: instanceOf(Error),
   rejectSaleError: instanceOf(Error),
@@ -142,6 +154,9 @@ SalePageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
+  sendVerificationEmailInProgress: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
+  onResendVerificationEmail: func.isRequired,
 
   // from withRouter
   history: shape({
@@ -164,7 +179,10 @@ const mapStateToProps = state => {
   const {
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     currentUserNotificationCount: notificationCount,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   } = state.user;
 
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
@@ -175,6 +193,7 @@ const mapStateToProps = state => {
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     fetchSaleError,
     acceptSaleError,
     rejectSaleError,
@@ -184,6 +203,8 @@ const mapStateToProps = state => {
     notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
     transaction,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   };
 };
 
@@ -194,6 +215,7 @@ const mapDispatchToProps = dispatch => {
     onLogout: historyPush => dispatch(logout(historyPush)),
     onManageDisableScrolling: (componentId, disableScrolling) =>
       dispatch(manageDisableScrolling(componentId, disableScrolling)),
+    onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   };
 };
 

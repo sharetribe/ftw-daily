@@ -6,6 +6,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { PageLayout, Topbar } from '../../components';
 import { EmailVerificationForm } from '../../containers';
+import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { verify, verificationInProgress } from '../../ducks/EmailVerification.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
@@ -40,6 +41,7 @@ export const EmailVerificationPageComponent = props => {
     authInProgress,
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     intl,
     isAuthenticated,
     logoutError,
@@ -52,6 +54,9 @@ export const EmailVerificationPageComponent = props => {
     verificationError,
     location,
     history,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
+    onResendVerificationEmail,
   } = props;
   const title = intl.formatMessage({
     id: 'EmailVerificationPage.title',
@@ -71,11 +76,15 @@ export const EmailVerificationPageComponent = props => {
         authInProgress={authInProgress}
         currentUser={currentUser}
         currentUserHasListings={currentUserHasListings}
+        currentUserHasOrders={currentUserHasOrders}
         notificationCount={notificationCount}
         history={history}
         location={location}
         onLogout={onLogout}
         onManageDisableScrolling={onManageDisableScrolling}
+        onResendVerificationEmail={onResendVerificationEmail}
+        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+        sendVerificationEmailError={sendVerificationEmailError}
       />
       <div className={css.root}>
         <div className={css.content}>
@@ -99,9 +108,11 @@ export const EmailVerificationPageComponent = props => {
 EmailVerificationPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
+  currentUserHasOrders: null,
   logoutError: null,
   notificationCount: 0,
   verificationError: null,
+  sendVerificationEmailError: null,
 };
 
 const { bool, func, instanceOf, number, object, shape, string } = PropTypes;
@@ -111,6 +122,7 @@ EmailVerificationPageComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentUserHasOrders: bool,
   isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
   notificationCount: number,
@@ -120,6 +132,9 @@ EmailVerificationPageComponent.propTypes = {
   submitVerification: func.isRequired,
   emailVerificationInProgress: bool.isRequired,
   verificationError: instanceOf(Error),
+  sendVerificationEmailInProgress: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
+  onResendVerificationEmail: func.isRequired,
 
   // from withRouter
   history: object.isRequired,
@@ -140,7 +155,10 @@ const mapStateToProps = state => {
   const {
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     currentUserNotificationCount: notificationCount,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   } = state.user;
   const {
     verificationError,
@@ -152,10 +170,13 @@ const mapStateToProps = state => {
     verificationError,
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     isAuthenticated,
     logoutError,
     notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   };
 };
 
@@ -163,6 +184,7 @@ const mapDispatchToProps = dispatch => ({
   onLogout: () => dispatch(logout()),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
+  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   submitVerification: ({ verificationToken }) => {
     return dispatch(verify(verificationToken));
   },

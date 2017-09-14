@@ -54,6 +54,8 @@ describe('InboxPage', () => {
       ],
       intl: fakeIntl,
       scrollingDisabled: false,
+      sendVerificationEmailInProgress: false,
+      onResendVerificationEmail: noop,
     };
 
     const ordersTree = renderShallow(<InboxPageComponent {...ordersProps} />);
@@ -99,6 +101,8 @@ describe('InboxPage', () => {
       ],
       intl: fakeIntl,
       scrollingDisabled: false,
+      sendVerificationEmailInProgress: false,
+      onResendVerificationEmail: noop,
     };
 
     const salesTree = renderShallow(<InboxPageComponent {...salesProps} />);

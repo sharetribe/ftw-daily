@@ -49,6 +49,7 @@ export const AuthenticationPageComponent = props => {
     authInProgress,
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     history,
     intl,
     isAuthenticated,
@@ -219,11 +220,15 @@ export const AuthenticationPageComponent = props => {
         authInProgress={authInProgress}
         currentUser={currentUser}
         currentUserHasListings={currentUserHasListings}
+        currentUserHasOrders={currentUserHasOrders}
         notificationCount={notificationCount}
         history={history}
         location={location}
         onLogout={onLogout}
         onManageDisableScrolling={onManageDisableScrolling}
+        onResendVerificationEmail={onResendVerificationEmail}
+        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+        sendVerificationEmailError={sendVerificationEmailError}
       />
       <div className={css.root}>
         {showEmailVerification ? emailVerificationContent : formContent}
@@ -235,6 +240,7 @@ export const AuthenticationPageComponent = props => {
 AuthenticationPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
+  currentUserHasOrders: null,
   loginError: null,
   logoutError: null,
   notificationCount: 0,
@@ -250,6 +256,7 @@ AuthenticationPageComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentUserHasOrders: bool,
   isAuthenticated: bool.isRequired,
   loginError: instanceOf(Error),
   logoutError: instanceOf(Error),
@@ -281,6 +288,7 @@ const mapStateToProps = state => {
   const {
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     currentUserNotificationCount: notificationCount,
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
@@ -290,6 +298,7 @@ const mapStateToProps = state => {
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     isAuthenticated,
     loginError,
     logoutError,

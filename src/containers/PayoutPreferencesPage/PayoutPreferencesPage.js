@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as propTypes from '../../util/propTypes';
+import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { PageLayout, Topbar } from '../../components';
@@ -13,6 +14,7 @@ export const PayoutPreferencesPageComponent = props => {
     authInProgress,
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     history,
     isAuthenticated,
     location,
@@ -20,6 +22,9 @@ export const PayoutPreferencesPageComponent = props => {
     notificationCount,
     onLogout,
     onManageDisableScrolling,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
+    onResendVerificationEmail,
   } = props;
 
   return (
@@ -28,12 +33,16 @@ export const PayoutPreferencesPageComponent = props => {
         authInProgress={authInProgress}
         currentUser={currentUser}
         currentUserHasListings={currentUserHasListings}
+        currentUserHasOrders={currentUserHasOrders}
         history={history}
         isAuthenticated={isAuthenticated}
         location={location}
         notificationCount={notificationCount}
         onLogout={onLogout}
         onManageDisableScrolling={onManageDisableScrolling}
+        onResendVerificationEmail={onResendVerificationEmail}
+        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+        sendVerificationEmailError={sendVerificationEmailError}
       />
     </PageLayout>
   );
@@ -42,8 +51,10 @@ export const PayoutPreferencesPageComponent = props => {
 PayoutPreferencesPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
+  currentUserHasOrders: null,
   logoutError: null,
   notificationCount: 0,
+  sendVerificationEmailError: null,
 };
 
 const { bool, func, instanceOf, number, object, shape } = PropTypes;
@@ -53,11 +64,15 @@ PayoutPreferencesPageComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentUserHasOrders: bool,
   isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  sendVerificationEmailInProgress: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
+  onResendVerificationEmail: func.isRequired,
 
   // from withRouter
   history: shape({
@@ -73,17 +88,23 @@ const mapStateToProps = state => {
   const {
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     currentUserNotificationCount: notificationCount,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   } = state.user;
   return {
     authInfoError,
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     currentUserNotificationCount: notificationCount,
     isAuthenticated,
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   };
 };
 
@@ -91,6 +112,7 @@ const mapDispatchToProps = dispatch => ({
   onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
+  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
 const PayoutPreferencesPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(

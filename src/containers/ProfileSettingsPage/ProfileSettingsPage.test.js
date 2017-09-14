@@ -22,6 +22,8 @@ describe('ContactDetailsPage', () => {
         scrollingDisabled={false}
         updateInProgress={false}
         uploadInProgress={false}
+        sendVerificationEmailInProgress={false}
+        onResendVerificationEmail={noop}
       />
     );
     expect(tree).toMatchSnapshot();

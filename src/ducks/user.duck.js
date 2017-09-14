@@ -21,6 +21,10 @@ export const FETCH_CURRENT_USER_NOTIFICATIONS_REQUEST = 'app/user/FETCH_CURRENT_
 export const FETCH_CURRENT_USER_NOTIFICATIONS_SUCCESS = 'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_SUCCESS';
 export const FETCH_CURRENT_USER_NOTIFICATIONS_ERROR = 'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_ERROR';
 
+export const FETCH_CURRENT_USER_HAS_ORDERS_REQUEST = 'app/user/FETCH_CURRENT_USER_HAS_ORDERS_REQUEST';
+export const FETCH_CURRENT_USER_HAS_ORDERS_SUCCESS = 'app/user/FETCH_CURRENT_USER_HAS_ORDERS_SUCCESS';
+export const FETCH_CURRENT_USER_HAS_ORDERS_ERROR = 'app/user/FETCH_CURRENT_USER_HAS_ORDERS_ERROR';
+
 export const SEND_VERIFICATION_EMAIL_REQUEST = 'app/user/SEND_VERIFICATION_EMAIL_REQUEST';
 export const SEND_VERIFICATION_EMAIL_SUCCESS = 'app/user/SEND_VERIFICATION_EMAIL_SUCCESS';
 export const SEND_VERIFICATION_EMAIL_ERROR = 'app/user/SEND_VERIFICATION_EMAIL_ERROR';
@@ -36,6 +40,8 @@ const initialState = {
   currentUserHasListingsError: null,
   currentUserNotificationCount: 0,
   currentUserNotificationCountError: null,
+  currentUserHasOrders: null, // This is not fetched unless unverified emails exist
+  currentUserHasOrdersError: null,
   sendVerificationEmailInProgress: false,
   sendVerificationEmailError: null,
 };
@@ -78,6 +84,14 @@ export default function reducer(state = initialState, action = {}) {
     case FETCH_CURRENT_USER_NOTIFICATIONS_ERROR:
       console.error(payload); // eslint-disable-line
       return { ...state, currentUserNotificationCountError: payload };
+
+    case FETCH_CURRENT_USER_HAS_ORDERS_REQUEST:
+      return { ...state, currentUserHasOrdersError: null };
+    case FETCH_CURRENT_USER_HAS_ORDERS_SUCCESS:
+      return { ...state, currentUserHasOrders: payload.hasOrders };
+    case FETCH_CURRENT_USER_HAS_ORDERS_ERROR:
+      console.error(payload); // eslint-disable-line
+      return { ...state, currentUserHasOrdersError: payload };
 
     case STRIPE_ACCOUNT_CREATE_REQUEST:
       return { ...state, createStripeAccountError: null, createStripeAccountInProgress: true };
@@ -177,6 +191,21 @@ const fetchCurrentUserNotificationsError = e => ({
   payload: e,
 });
 
+const fetchCurrentUserHasOrdersRequest = () => ({
+  type: FETCH_CURRENT_USER_HAS_ORDERS_REQUEST,
+});
+
+export const fetchCurrentUserHasOrdersSuccess = hasOrders => ({
+  type: FETCH_CURRENT_USER_HAS_ORDERS_SUCCESS,
+  payload: { hasOrders },
+});
+
+const fetchCurrentUserHasOrdersError = e => ({
+  type: FETCH_CURRENT_USER_HAS_ORDERS_ERROR,
+  error: true,
+  payload: e,
+});
+
 export const sendVerificationEmailRequest = () => ({
   type: SEND_VERIFICATION_EMAIL_REQUEST,
 });
@@ -220,8 +249,35 @@ export const fetchCurrentUserHasListings = () =>
         dispatch(fetchCurrentUserHasListingsSuccess(!!hasListings));
       })
       .catch(e => {
-        // TODO: dispatch flash message
+        // TODO: dispatch flash message: "Something went wrong while retrieving user info"
         dispatch(fetchCurrentUserHasListingsError(e));
+      });
+  };
+
+export const fetchCurrentUserHasOrders = () =>
+  (dispatch, getState, sdk) => {
+    dispatch(fetchCurrentUserHasOrdersRequest());
+
+    if (!getState().user.currentUser) {
+      dispatch(fetchCurrentUserHasOrdersSuccess(false));
+      return Promise.resolve(null);
+    }
+
+    const params = {
+      only: 'order',
+      page: 1,
+      per_page: 1,
+    };
+
+    return sdk.transactions
+      .query(params)
+      .then(response => {
+        const hasOrders = response.data.data && response.data.data.length > 0;
+        dispatch(fetchCurrentUserHasOrdersSuccess(!!hasOrders));
+      })
+      .catch(e => {
+        // TODO: dispatch flash message: "Something went wrong while retrieving user info"
+        dispatch(fetchCurrentUserHasOrdersError(e));
       });
   };
 
@@ -246,6 +302,7 @@ export const fetchCurrentUserNotifications = () =>
         dispatch(fetchCurrentUserNotificationsSuccess(transactions));
       })
       .catch(e => {
+        // TODO: dispatch flash message: "Something went wrong while retrieving user info"
         dispatch(fetchCurrentUserNotificationsError(e));
         throw e;
       });
@@ -271,13 +328,17 @@ export const fetchCurrentUser = () =>
         const denormalised = denormalisedEntities(entities, 'current-user', [currentUserId]);
         const currentUser = denormalised[0];
         dispatch(currentUserShowSuccess(currentUser));
+        return currentUser;
       })
-      .then(() => {
+      .then(currentUser => {
         dispatch(fetchCurrentUserHasListings());
         dispatch(fetchCurrentUserNotifications());
+        if (!currentUser.attributes.emailVerified) {
+          dispatch(fetchCurrentUserHasOrders());
+        }
       })
       .catch(e => {
-        // TODO: dispatch flash message
+        // TODO: dispatch flash message: "Something went wrong while retrieving user info"
         dispatch(currentUserShowError(e));
       });
   };

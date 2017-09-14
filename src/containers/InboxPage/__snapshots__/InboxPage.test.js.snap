@@ -9,6 +9,7 @@ exports[`InboxPage matches snapshot 1`] = `
     currentPage="InboxPage"
     currentUser={null}
     currentUserHasListings={false}
+    currentUserHasOrders={null}
     history={
       Object {
         "push": [Function],
@@ -22,7 +23,10 @@ exports[`InboxPage matches snapshot 1`] = `
     }
     notificationCount={0}
     onLogout={[Function]}
-    onManageDisableScrolling={[Function]} />
+    onManageDisableScrolling={[Function]}
+    onResendVerificationEmail={[Function]}
+    sendVerificationEmailError={null}
+    sendVerificationEmailInProgress={false} />
   <div>
     <div>
       <h1>
@@ -313,6 +317,7 @@ exports[`InboxPage matches snapshot 3`] = `
     currentPage="InboxPage"
     currentUser={null}
     currentUserHasListings={false}
+    currentUserHasOrders={null}
     history={
       Object {
         "push": [Function],
@@ -326,7 +331,10 @@ exports[`InboxPage matches snapshot 3`] = `
     }
     notificationCount={0}
     onLogout={[Function]}
-    onManageDisableScrolling={[Function]} />
+    onManageDisableScrolling={[Function]}
+    onResendVerificationEmail={[Function]}
+    sendVerificationEmailError={null}
+    sendVerificationEmailInProgress={false} />
   <div>
     <div>
       <h1>

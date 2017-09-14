@@ -3,18 +3,28 @@ import { compose } from 'redux';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
 import classNames from 'classnames';
-import { Button, Modal, NamedLink, TopbarDesktop, TopbarMobileMenu } from '../../components';
-import { TopbarSearchForm } from '../../containers';
+import { ensureCurrentUser } from '../../util/data';
 import { withFlattenedRoutes, withViewport } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
+import {
+  Button,
+  IconEmailAttention,
+  InlineTextButton,
+  Modal,
+  NamedLink,
+  TopbarDesktop,
+  TopbarMobileMenu,
+} from '../../components';
+import { TopbarSearchForm } from '../../containers';
 
 import MenuIcon from './MenuIcon';
 import LogoIcon from './LogoIcon';
 import SearchIcon from './SearchIcon';
 import css from './Topbar.css';
 
+const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'too-many-verification-requests';
 const maxMobileScreenWidth = 768;
 
 const redirectToURLWithModalState = (props, modalStateParam) => {
@@ -35,15 +45,56 @@ const redirectToURLWithoutModalState = (props, modalStateParam) => {
   history.push(`${pathname}${searchString}`, state);
 };
 
+const firstApiError = error => {
+  if (error && error.data && error.data.errors && error.data.errors.length > 0) {
+    return error.data.errors[0];
+  }
+  return null;
+};
+
+const isTooManyVerificationRequestsApiError = error => {
+  const apiError = firstApiError(error);
+  return apiError && apiError.code === ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS;
+};
+
 class TopbarComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = { showVerifyEmailReminder: false, hasSeenEmailReminder: false };
+
+    this.onHistoryChanged = this.handleEmailReminder.bind(this);
     this.handleMobileMenuOpen = this.handleMobileMenuOpen.bind(this);
     this.handleMobileMenuClose = this.handleMobileMenuClose.bind(this);
     this.handleMobileSearchOpen = this.handleMobileSearchOpen.bind(this);
     this.handleMobileSearchClose = this.handleMobileSearchClose.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { currentUser, currentUserHasListings, currentUserHasOrders, location } = nextProps;
+    const user = ensureCurrentUser(currentUser);
+
+    // Track if path changes inside Page level component
+    const pathChanged = location.pathname !== this.props.location.pathname;
+    this.handleEmailReminder(user, currentUserHasListings, currentUserHasOrders, pathChanged);
+  }
+
+  handleEmailReminder(currentUser, currentUserHasListings, currentUserHasOrders, pathChanged) {
+    const emailUnverified = currentUser.id && !currentUser.attributes.emailVerified;
+    const notRemindedYet = !this.state.showVerifyEmailReminder && !this.state.hasSeenEmailReminder;
+    const showOnPathChange = notRemindedYet || pathChanged;
+
+    // Emails are sent when order is initiated
+    // Customer is likely to get email soon when she books something
+    // Provider email should work - she should get an email when someone books a listing
+    const hasOrders = currentUserHasOrders === true;
+    const hasListingsOrOrders = currentUserHasListings || hasOrders;
+
+    // Show reminder
+    if (emailUnverified && hasListingsOrOrders && showOnPathChange) {
+      this.setState({ showVerifyEmailReminder: true });
+    }
   }
 
   handleMobileMenuOpen() {
@@ -95,6 +146,9 @@ class TopbarComponent extends Component {
       intl,
       location,
       onManageDisableScrolling,
+      onResendVerificationEmail,
+      sendVerificationEmailInProgress,
+      sendVerificationEmailError,
     } = this.props;
 
     const { mobilemenu, mobilesearch, address, origin, bounds, country } = parse(location.search, {
@@ -129,6 +183,32 @@ class TopbarComponent extends Component {
           }
         : null,
     };
+
+    const user = ensureCurrentUser(currentUser);
+    const email = user.id ? <span className={css.email}>{user.attributes.email}</span> : '';
+
+    const resendEmailLink = (
+      <InlineTextButton className={css.verifyLink} onClick={onResendVerificationEmail}>
+        <FormattedMessage id="Topbar.resendEmailLinkText" />
+      </InlineTextButton>
+    );
+    const fixEmailLink = (
+      <NamedLink className={css.verifyLink} name="ProfileSettingsPage">
+        <FormattedMessage id="Topbar.fixEmailLinkText" />
+      </NamedLink>
+    );
+
+    const resendErrorTranslationId = isTooManyVerificationRequestsApiError(
+      sendVerificationEmailError
+    )
+      ? 'Topbar.resendFailedTooManyRequests'
+      : 'Topbar.resendFailed';
+    const resendErrorMessage = sendVerificationEmailError
+      ? <p className={css.resendError}>
+          <FormattedMessage id={resendErrorTranslationId} />
+        </p>
+      : null;
+    const closeButtonMessage = <FormattedMessage id="Topbar.closeVerifyEmailReminder" />;
 
     const classes = classNames(rootClassName || css.root, className);
 
@@ -191,6 +271,38 @@ class TopbarComponent extends Component {
             </p>
           </div>
         </Modal>
+        <Modal
+          id="EmailVerificationReminder"
+          containerClassName={css.verifyEmailModal}
+          isOpen={this.state.showVerifyEmailReminder}
+          onClose={() => {
+            this.setState({ showVerifyEmailReminder: false, hasSeenEmailReminder: true });
+          }}
+          onManageDisableScrolling={onManageDisableScrolling}
+          closeButtonMessage={closeButtonMessage}
+        >
+          <div className={css.verifyEmailContent}>
+            <IconEmailAttention />
+            <h1 className={css.verifyTitle}>
+              <FormattedMessage id="Topbar.verifyEmailTitle" />
+            </h1>
+            <p className={css.verifyHelpText}>
+              <FormattedMessage id="Topbar.verifyEmailText" />
+            </p>
+            <p className={css.checkInboxText}>
+              <FormattedMessage id="Topbar.checkInbox" values={{ email }} />
+            </p>
+            {resendErrorMessage}
+            <p className={css.resendEmail}>
+              {sendVerificationEmailInProgress
+                ? <FormattedMessage id="Topbar.sendingEmail" />
+                : <FormattedMessage id="Topbar.resendEmail" values={{ resendEmailLink }} />}
+            </p>
+            <p className={css.fixEmail}>
+              <FormattedMessage id="Topbar.fixEmail" values={{ fixEmailLink }} />
+            </p>
+          </div>
+        </Modal>
       </div>
     );
   }
@@ -202,10 +314,12 @@ TopbarComponent.defaultProps = {
   mobileRootClassName: null,
   notificationCount: 0,
   currentUser: null,
+  currentUserHasOrders: null,
   currentPage: null,
+  sendVerificationEmailError: null,
 };
 
-const { arrayOf, bool, func, number, shape, string } = PropTypes;
+const { arrayOf, bool, func, instanceOf, number, shape, string } = PropTypes;
 
 TopbarComponent.propTypes = {
   className: string,
@@ -215,10 +329,14 @@ TopbarComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentUserHasOrders: bool,
   currentPage: string,
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  onResendVerificationEmail: func.isRequired,
+  sendVerificationEmailInProgress: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
 
   // These are passed from PageLayout to keep Topbar rendering aware of location changes
   history: shape({

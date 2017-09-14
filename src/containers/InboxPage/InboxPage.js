@@ -17,6 +17,7 @@ import {
 import * as propTypes from '../../util/propTypes';
 import { formatMoney } from '../../util/currency';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { loadData } from './InboxPage.duck';
@@ -149,6 +150,7 @@ export const InboxPageComponent = props => {
     authInProgress,
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     fetchInProgress,
     fetchOrdersOrSalesError,
     history,
@@ -163,6 +165,9 @@ export const InboxPageComponent = props => {
     providerNotificationCount,
     scrollingDisabled,
     transactions,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
+    onResendVerificationEmail,
   } = props;
   const { tab } = params;
 
@@ -246,12 +251,16 @@ export const InboxPageComponent = props => {
         authInProgress={authInProgress}
         currentUser={currentUser}
         currentUserHasListings={currentUserHasListings}
+        currentUserHasOrders={currentUserHasOrders}
         currentPage="InboxPage"
         notificationCount={providerNotificationCount}
         history={history}
         location={location}
         onLogout={onLogout}
         onManageDisableScrolling={onManageDisableScrolling}
+        onResendVerificationEmail={onResendVerificationEmail}
+        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+        sendVerificationEmailError={sendVerificationEmailError}
       />
       <div className={css.container}>
         <div className={css.navigation}>
@@ -276,10 +285,12 @@ export const InboxPageComponent = props => {
 InboxPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
+  currentUserHasOrders: null,
   fetchOrdersOrSalesError: null,
   logoutError: null,
   pagination: null,
   providerNotificationCount: 0,
+  sendVerificationEmailError: null,
 };
 
 InboxPageComponent.propTypes = {
@@ -291,6 +302,7 @@ InboxPageComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentUserHasOrders: bool,
   fetchInProgress: bool.isRequired,
   fetchOrdersOrSalesError: instanceOf(Error),
   isAuthenticated: bool.isRequired,
@@ -301,6 +313,9 @@ InboxPageComponent.propTypes = {
   providerNotificationCount: number,
   scrollingDisabled: bool.isRequired,
   transactions: arrayOf(propTypes.transaction).isRequired,
+  sendVerificationEmailInProgress: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
+  onResendVerificationEmail: func.isRequired,
 
   // from withRouter
   history: shape({
@@ -324,12 +339,16 @@ const mapStateToProps = state => {
     currentUser,
     currentUserHasListings,
     currentUserNotificationCount: providerNotificationCount,
+    currentUserHasOrders,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   } = state.user;
   return {
     authInfoError,
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     fetchInProgress,
     fetchOrdersOrSalesError,
     isAuthenticated,
@@ -338,6 +357,8 @@ const mapStateToProps = state => {
     providerNotificationCount,
     scrollingDisabled: isScrollingDisabled(state),
     transactions: getMarketplaceEntities(state, transactionRefs),
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   };
 };
 
@@ -345,6 +366,7 @@ const mapDispatchToProps = dispatch => ({
   onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
+  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
 const InboxPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(

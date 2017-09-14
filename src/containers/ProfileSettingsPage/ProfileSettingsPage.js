@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { ensureCurrentUser } from '../../util/data';
+import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { clearUpdatedForm, updateProfile, uploadImage } from './ProfileSettingsPage.duck';
@@ -38,6 +39,7 @@ export const ProfileSettingsPageComponent = props => {
     authInProgress,
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     history,
     image,
     isAuthenticated,
@@ -54,6 +56,9 @@ export const ProfileSettingsPageComponent = props => {
     updateProfileError,
     uploadImageError,
     uploadInProgress,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
+    onResendVerificationEmail,
   } = props;
 
   const user = ensureCurrentUser(currentUser);
@@ -91,12 +96,16 @@ export const ProfileSettingsPageComponent = props => {
         currentPage="ProfileSettingsPage"
         currentUser={currentUser}
         currentUserHasListings={currentUserHasListings}
+        currentUserHasOrders={currentUserHasOrders}
         history={history}
         isAuthenticated={isAuthenticated}
         location={location}
         notificationCount={notificationCount}
         onLogout={onLogout}
         onManageDisableScrolling={onManageDisableScrolling}
+        onResendVerificationEmail={onResendVerificationEmail}
+        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+        sendVerificationEmailError={sendVerificationEmailError}
       />
       <UserNav selectedPageName="ProfileSettingsPage" />
 
@@ -111,11 +120,13 @@ export const ProfileSettingsPageComponent = props => {
 ProfileSettingsPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
+  currentUserHasOrders: null,
   logoutError: null,
   notificationCount: 0,
   uploadImageError: null,
   updateProfileError: null,
   image: null,
+  sendVerificationEmailError: null,
 };
 
 const { bool, func, instanceOf, number, object, shape, string } = PropTypes;
@@ -125,6 +136,7 @@ ProfileSettingsPageComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
+  currentUserHasOrders: bool,
   isAuthenticated: bool.isRequired,
   image: shape({
     id: string,
@@ -144,6 +156,9 @@ ProfileSettingsPageComponent.propTypes = {
   updateProfileError: instanceOf(Error),
   uploadImageError: instanceOf(Error),
   uploadInProgress: bool.isRequired,
+  sendVerificationEmailInProgress: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
+  onResendVerificationEmail: func.isRequired,
 
   // from withRouter
   history: shape({
@@ -159,7 +174,10 @@ const mapStateToProps = state => {
   const {
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     currentUserNotificationCount: notificationCount,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   } = state.user;
   const {
     image,
@@ -173,6 +191,7 @@ const mapStateToProps = state => {
     authInProgress: authenticationInProgress(state),
     currentUser,
     currentUserHasListings,
+    currentUserHasOrders,
     currentUserNotificationCount: notificationCount,
     image,
     isAuthenticated,
@@ -182,6 +201,8 @@ const mapStateToProps = state => {
     updateProfileError,
     uploadImageError,
     uploadInProgress,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   };
 };
 
@@ -192,6 +213,7 @@ const mapDispatchToProps = dispatch => ({
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onUpdateProfile: data => dispatch(updateProfile(data)),
+  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
 const ProfileSettingsPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(

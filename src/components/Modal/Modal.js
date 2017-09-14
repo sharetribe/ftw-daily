@@ -59,6 +59,7 @@ export class ModalComponent extends Component {
       children,
       className,
       scrollLayerClassName,
+      closeButtonMessage,
       containerClassName,
       contentClassName,
       lightCloseButton,
@@ -77,7 +78,9 @@ export class ModalComponent extends Component {
           rootClassName={closeButtonClasses}
           title={closeModalMessage}
         >
-          <span className={css.closeText}><FormattedMessage id="Modal.close" /></span>
+          <span className={css.closeText}>
+            {closeButtonMessage || <FormattedMessage id="Modal.close" />}
+          </span>
           <CloseIcon rootClassName={css.closeIcon} />
         </Button>
       : null;
@@ -109,6 +112,7 @@ ModalComponent.defaultProps = {
   children: null,
   className: null,
   scrollLayerClassName: null,
+  closeButtonMessage: null,
   containerClassName: null,
   contentClassName: null,
   lightCloseButton: false,
@@ -123,6 +127,7 @@ ModalComponent.propTypes = {
   children: node,
   className: string,
   scrollLayerClassName: string,
+  closeButtonMessage: node,
   containerClassName: string,
   contentClassName: string,
   lightCloseButton: bool,
