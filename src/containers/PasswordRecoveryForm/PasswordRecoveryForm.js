@@ -61,12 +61,15 @@ const PasswordRecoveryFormComponent = props => {
         validate={emailRequired}
         customErrorText={customErrorText}
       />
-      <p className={css.bottomWrapper}>
-        <FormattedMessage id="PasswordRecoveryForm.loginLinkInfo" values={{ loginLink }} />
-      </p>
-      <PrimaryButton type="submit" disabled={buttonDisabled}>
-        <FormattedMessage id="PasswordRecoveryForm.sendInstructions" />
-      </PrimaryButton>
+
+      <div className={css.bottomWrapper}>
+        <p className={css.bottomText}>
+          <FormattedMessage id="PasswordRecoveryForm.loginLinkInfo" values={{ loginLink }} />
+        </p>
+        <PrimaryButton className={css.submitButton} type="submit" disabled={buttonDisabled}>
+          <FormattedMessage id="PasswordRecoveryForm.sendInstructions" />
+        </PrimaryButton>
+      </div>
     </form>
   );
 };

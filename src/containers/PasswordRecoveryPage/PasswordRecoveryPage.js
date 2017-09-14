@@ -59,12 +59,14 @@ export const PasswordRecoveryPageComponent = props => {
   );
 
   const submitEmailContent = (
-    <div className={css.content}>
+    <div className={css.submitEmailContent}>
       <KeysIcon />
       <h1 className={css.title}>
         <FormattedMessage id="PasswordRecoveryPage.forgotPasswordTitle" />
       </h1>
-      <p><FormattedMessage id="PasswordRecoveryPage.forgotPasswordMessage" /></p>
+      <p className={css.message}>
+        <FormattedMessage id="PasswordRecoveryPage.forgotPasswordMessage" />
+      </p>
       <PasswordRecoveryForm
         onChange={onChange}
         onSubmit={values => onSubmitEmail(values.email)}
@@ -77,20 +79,21 @@ export const PasswordRecoveryPageComponent = props => {
   const submittedEmailText = passwordRequested
     ? <span className={css.submittedEmail}>{initialEmail}</span>
     : <span className={css.submittedEmail}>{submittedEmail}</span>;
+
   const emailSubmittedContent = (
-    <div className={css.content}>
+    <div className={css.emailSubmittedContent}>
       <KeysIcon />
       <h1 className={css.title}>
         <FormattedMessage id="PasswordRecoveryPage.emailSubmittedTitle" />
       </h1>
-      <p>
+      <p className={css.message}>
         <FormattedMessage
           id="PasswordRecoveryPage.emailSubmittedMessage"
           values={{ submittedEmailText }}
         />
       </p>
       <div className={css.bottomWrapper}>
-        <p className={css.bottomText}>
+        <p className={css.bottomInfo}>
           {recoveryInProgress
             ? <FormattedMessage id="PasswordRecoveryPage.resendingEmailInfo" />
             : <FormattedMessage
@@ -98,7 +101,7 @@ export const PasswordRecoveryPageComponent = props => {
                 values={{ resendEmailLink }}
               />}
         </p>
-        <p className={css.bottomText}>
+        <p className={css.bottomInfo}>
           <FormattedMessage id="PasswordRecoveryPage.fixEmailInfo" values={{ fixEmailLink }} />
         </p>
       </div>
@@ -107,25 +110,25 @@ export const PasswordRecoveryPageComponent = props => {
 
   const initialEmailText = <span className={css.submittedEmail}>{initialEmail}</span>;
   const emailNotVerifiedContent = (
-    <div className={css.content}>
+    <div className={css.emailNotVerifiedContent}>
       <DoorIcon />
       <h1 className={css.title}>
         <FormattedMessage id="PasswordRecoveryPage.emailNotVerifiedTitle" />
       </h1>
-      <p>
+      <p className={css.message}>
         <FormattedMessage
           id="PasswordRecoveryPage.emailNotVerifiedMessage"
           values={{ initialEmailText }}
         />
       </p>
-      <p>
+      <p className={css.emailNotVerifiedBottomText}>
         <FormattedMessage id="PasswordRecoveryPage.emailNotVerifiedContactAdmin" />
       </p>
     </div>
   );
 
   const genericErrorContent = (
-    <div className={css.content}>
+    <div className={css.genericErrorContent}>
       <KeysIcon />
       <h1 className={css.title}>
         <FormattedMessage id="PasswordRecoveryPage.actionFailedTitle" />

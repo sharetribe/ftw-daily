@@ -242,7 +242,7 @@
   "PasswordRecoveryPage.fixEmailLinkText": "Fix it.",
   "PasswordRecoveryPage.fixEmailInfo": "Whoops, typo in your email? {fixEmailLink}",
   "PasswordRecoveryPage.forgotPasswordTitle": "Forgot your password?",
-  "PasswordRecoveryPage.forgotPasswordMessage": "No worries! Please enter the email address you used when signing up and we'll send you instructions on how to create a new password.",
+  "PasswordRecoveryPage.forgotPasswordMessage": "No worries! Please enter the email address you used when signing up and we'll send you instructions on how to set a new password.",
   "PasswordRecoveryPage.resendEmailLinkText": "Send another email.",
   "PasswordRecoveryPage.resendEmailInfo": "Didn't get the email? {resendEmailLink}",
   "PasswordRecoveryPage.resendingEmailInfo": "Resending instructions...",
