@@ -80,3 +80,8 @@
   font-weight: var(--fontWeightSemiBold);
   padding-bottom: 6px;
 }
+
+.bannedUserIcon {
+  width: 100%;
+  height: 100%;
+}

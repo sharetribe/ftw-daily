@@ -1,5 +1,6 @@
 // components
 import * as AddImages from './components/AddImages/AddImages.example';
+import * as Avatar from './components/Avatar/Avatar.example';
 import * as BirthdayInputField from './components/BirthdayInputField/BirthdayInputField.example';
 import * as BookingBreakdown from './components/BookingBreakdown/BookingBreakdown.example';
 import * as Button from './components/Button/Button.example';
@@ -52,6 +53,7 @@ import * as Typography from './containers/StyleguidePage/Typography.example';
 
 export {
   AddImages,
+  Avatar,
   BirthdayInputField,
   BookingBreakdown,
   BookingDatesForm,
