@@ -25,7 +25,7 @@ import SearchIcon from './SearchIcon';
 import css from './Topbar.css';
 
 const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'too-many-verification-requests';
-const maxMobileScreenWidth = 768;
+const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 const redirectToURLWithModalState = (props, modalStateParam) => {
   const { history, location } = props;
@@ -158,7 +158,7 @@ class TopbarComponent extends Component {
 
     const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null;
 
-    const isMobileLayout = viewport.width < maxMobileScreenWidth;
+    const isMobileLayout = viewport.width < MAX_MOBILE_SCREEN_WIDTH;
     const isMobileMenuOpen = isMobileLayout && mobilemenu === 'open';
     const isMobileSearchOpen = isMobileLayout && mobilesearch === 'open';
 
