@@ -183,11 +183,11 @@ const SaleDetailsPanel = props => {
           />
         </div>
         <div className={css.avatarWrapper}>
-          <AvatarMedium user={currentCustomer} className={css.avatarMobile}/>
+          <AvatarMedium user={currentCustomer} className={css.avatarMobile} />
         </div>
         <div className={css.info}>
           <div className={css.avatarWrapper}>
-            <AvatarLarge user={currentCustomer} className={css.avatarDesktop}/>
+            <AvatarLarge user={currentCustomer} className={css.avatarDesktop} />
           </div>
           <h1 className={css.title}>{title}</h1>
           <p className={css.message}>{message}</p>

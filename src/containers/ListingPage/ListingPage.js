@@ -337,8 +337,8 @@ export class ListingPageComponent extends Component {
 
           <div className={css.contentContainer}>
             <div className={css.avatarWrapper}>
-              <AvatarLarge user={currentAuthor} className={css.avatarDesktop}/>
-              <AvatarMedium user={currentAuthor} className={css.avatarMobile}/>
+              <AvatarLarge user={currentAuthor} className={css.avatarDesktop} />
+              <AvatarMedium user={currentAuthor} className={css.avatarMobile} />
             </div>
 
             <div className={css.mainContent}>
