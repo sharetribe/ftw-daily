@@ -17,11 +17,16 @@
 }
 
 .content {
-  position: relative;
   flex-grow: 1;
+
+  /* Create context so the close button can be positioned within it */
+  position: relative;
+
+  /* Display and dimensions */
   display: flex;
   flex-direction: column;
   padding: 30px 24px 98px 24px;
+
   background-color: var(--matterColorLight);
   border-radius: 2px;
 
@@ -69,16 +74,18 @@
 }
 
 .verifyClose {
-  display: flex;
-  align-items: flex-start;
-  width: auto;
-
+  /* Position */
   position: absolute;
   top: 0;
   right: 0;
 
+  /* Display and dimensions */
+  display: flex;
+  align-items: flex-start;
+  width: auto;
   padding: 23px 24px;
 
+  /* Colors */
   color: var(--matterColor);
 
   &:hover {
@@ -100,6 +107,8 @@
   display: inline-block;
   margin-left: 8px;
   padding: 2px 0 4px;
+
+  /* SVG elements work better as a content-box */
   box-sizing: content-box;
 }
 
