@@ -5,6 +5,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
+import { ensureCurrentUser } from '../../util/data';
 import {
   PageLayout,
   NamedLink,
@@ -69,12 +70,19 @@ export const AuthenticationPageComponent = props => {
   const isLogin = tab === 'login';
   const from = location.state && location.state.from ? location.state.from : null;
 
-  const showEmailVerification = !isLogin && currentUser && !currentUser.attributes.emailVerified;
+  const user = ensureCurrentUser(currentUser);
+  const currentUserLoaded = !!user.id;
+
+  // We only want to show the email verification dialog in the signup
+  // tab if the user isn't being redirected somewhere else
+  // (i.e. `from` is present). We must also check the `emailVerified`
+  // flag only when the current user is fully loaded.
+  const showEmailVerification = !isLogin && currentUserLoaded && !user.attributes.emailVerified;
 
   // Already authenticated, redirect away from auth page
   if (isAuthenticated && from) {
     return <Redirect to={from} />;
-  } else if (isAuthenticated && currentUser && !showEmailVerification) {
+  } else if (isAuthenticated && currentUserLoaded && !showEmailVerification) {
     return <NamedRedirect name="LandingPage" />;
   }
 
@@ -144,13 +152,8 @@ export const AuthenticationPageComponent = props => {
     </div>
   );
 
-  const currentUserHasAttributes = currentUser && currentUser.attributes;
-  const name = currentUserHasAttributes && currentUser.attributes.profile
-    ? currentUser.attributes.profile.displayName
-    : '';
-  const email = currentUserHasAttributes
-    ? <span className={css.email}>{currentUser.attributes.email}</span>
-    : '';
+  const name = user.attributes.profile.displayName;
+  const email = <span className={css.email}>{user.attributes.email}</span>;
 
   const resendEmailLink = (
     <InlineTextButton className={css.verifyLink} onClick={onResendVerificationEmail}>
