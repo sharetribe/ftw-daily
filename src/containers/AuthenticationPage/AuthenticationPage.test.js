@@ -20,6 +20,8 @@ describe('AuthenticationPageComponent', () => {
       submitLogin: noop,
       submitSignup: noop,
       intl: fakeIntl,
+      sendVerificationEmailInProgress: false,
+      onResendVerificationEmail: noop,
     };
     const tree = renderShallow(<AuthenticationPageComponent {...props} />);
     expect(tree).toMatchSnapshot();

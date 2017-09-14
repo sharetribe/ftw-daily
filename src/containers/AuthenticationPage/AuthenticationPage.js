@@ -3,15 +3,28 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
-import { PageLayout, NamedRedirect, TabNavHorizontal, Topbar } from '../../components';
+import { ensureCurrentUser } from '../../util/data';
+import {
+  PageLayout,
+  NamedLink,
+  NamedRedirect,
+  TabNavHorizontal,
+  Topbar,
+  IconEmailSent,
+  InlineTextButton,
+  CloseIcon,
+} from '../../components';
 import { LoginForm, SignupForm } from '../../containers';
 import { login, logout, authenticationInProgress, signup } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
+import { sendVerificationEmail } from '../../ducks/user.duck';
 
 import css from './AuthenticationPage.css';
 
 const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
+const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'too-many-verification-requests';
 
 const firstApiError = error => {
   if (error && error.data && error.data.errors && error.data.errors.length > 0) {
@@ -23,6 +36,11 @@ const firstApiError = error => {
 const isEmailTakenApiError = error => {
   const apiError = firstApiError(error);
   return apiError && apiError.code === ERROR_CODE_EMAIL_TAKEN;
+};
+
+const isTooManyVerificationRequestsApiError = error => {
+  const apiError = firstApiError(error);
+  return apiError && apiError.code === ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS;
 };
 
 export const AuthenticationPageComponent = props => {
@@ -45,14 +63,26 @@ export const AuthenticationPageComponent = props => {
     submitLogin,
     submitSignup,
     tab,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
+    onResendVerificationEmail,
   } = props;
   const isLogin = tab === 'login';
   const from = location.state && location.state.from ? location.state.from : null;
 
+  const user = ensureCurrentUser(currentUser);
+  const currentUserLoaded = !!user.id;
+
+  // We only want to show the email verification dialog in the signup
+  // tab if the user isn't being redirected somewhere else
+  // (i.e. `from` is present). We must also check the `emailVerified`
+  // flag only when the current user is fully loaded.
+  const showEmailVerification = !isLogin && currentUserLoaded && !user.attributes.emailVerified;
+
   // Already authenticated, redirect away from auth page
   if (isAuthenticated && from) {
     return <Redirect to={from} />;
-  } else if (isAuthenticated) {
+  } else if (isAuthenticated && currentUserLoaded && !showEmailVerification) {
     return <NamedRedirect name="LandingPage" />;
   }
 
@@ -112,6 +142,70 @@ export const AuthenticationPageComponent = props => {
     },
   ];
 
+  const formContent = (
+    <div className={css.content}>
+      <TabNavHorizontal className={css.tabs} tabs={tabs} />
+      {loginOrSignupError}
+      {isLogin
+        ? <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
+        : <SignupForm className={css.form} onSubmit={submitSignup} inProgress={authInProgress} />}
+    </div>
+  );
+
+  const name = user.attributes.profile.displayName;
+  const email = <span className={css.email}>{user.attributes.email}</span>;
+
+  const resendEmailLink = (
+    <InlineTextButton className={css.verifyLink} onClick={onResendVerificationEmail}>
+      <FormattedMessage id="AuthenticationPage.resendEmailLinkText" />
+    </InlineTextButton>
+  );
+  const fixEmailLink = (
+    <NamedLink className={css.verifyLink} name="ProfileSettingsPage">
+      <FormattedMessage id="AuthenticationPage.fixEmailLinkText" />
+    </NamedLink>
+  );
+
+  const resendErrorTranslationId = isTooManyVerificationRequestsApiError(sendVerificationEmailError)
+    ? 'AuthenticationPage.resendFailedTooManyRequests'
+    : 'AuthenticationPage.resendFailed';
+  const resendErrorMessage = sendVerificationEmailError
+    ? <p className={css.resendError}>
+        <FormattedMessage id={resendErrorTranslationId} />
+      </p>
+    : null;
+
+  const emailVerificationContent = (
+    <div className={css.content}>
+      <NamedLink className={css.verifyClose} name="ProfileSettingsPage">
+        <span className={css.closeText}>
+          <FormattedMessage id="AuthenticationPage.verifyEmailClose" />
+        </span>
+        <CloseIcon rootClassName={css.closeIcon} />
+      </NamedLink>
+      <IconEmailSent />
+      <h1 className={css.verifyTitle}>
+        <FormattedMessage id="AuthenticationPage.verifyEmailTitle" values={{ name }} />
+      </h1>
+      <p className={css.verifyHelpText}>
+        <FormattedMessage id="AuthenticationPage.verifyEmailText" values={{ email }} />
+      </p>
+      {resendErrorMessage}
+      <p className={css.resendEmail}>
+        {sendVerificationEmailInProgress
+          ? <FormattedMessage id="AuthenticationPage.sendingEmail" />
+          : <FormattedMessage id="AuthenticationPage.resendEmail" values={{ resendEmailLink }} />}
+      </p>
+      <p className={css.fixEmail}>
+        <FormattedMessage id="AuthenticationPage.fixEmail" values={{ fixEmailLink }} />
+      </p>
+    </div>
+  );
+
+  const topbarClasses = classNames({
+    [css.hideOnMobile]: showEmailVerification,
+  });
+
   return (
     <PageLayout
       authInfoError={authInfoError}
@@ -120,6 +214,7 @@ export const AuthenticationPageComponent = props => {
       scrollingDisabled={scrollingDisabled}
     >
       <Topbar
+        className={topbarClasses}
         isAuthenticated={isAuthenticated}
         authInProgress={authInProgress}
         currentUser={currentUser}
@@ -131,17 +226,7 @@ export const AuthenticationPageComponent = props => {
         onManageDisableScrolling={onManageDisableScrolling}
       />
       <div className={css.root}>
-        <div className={css.content}>
-          <TabNavHorizontal className={css.tabs} tabs={tabs} />
-          {loginOrSignupError}
-          {isLogin
-            ? <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
-            : <SignupForm
-                className={css.form}
-                onSubmit={submitSignup}
-                inProgress={authInProgress}
-              />}
-        </div>
+        {showEmailVerification ? emailVerificationContent : formContent}
       </div>
     </PageLayout>
   );
@@ -155,6 +240,7 @@ AuthenticationPageComponent.defaultProps = {
   notificationCount: 0,
   signupError: null,
   tab: 'signup',
+  sendVerificationEmailError: null,
 };
 
 const { bool, func, instanceOf, number, object, oneOf, shape } = PropTypes;
@@ -176,6 +262,10 @@ AuthenticationPageComponent.propTypes = {
   submitSignup: func.isRequired,
   tab: oneOf(['login', 'signup']),
 
+  sendVerificationEmailInProgress: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
+  onResendVerificationEmail: func.isRequired,
+
   // from withRouter
   history: shape({
     push: func.isRequired,
@@ -192,6 +282,8 @@ const mapStateToProps = state => {
     currentUser,
     currentUserHasListings,
     currentUserNotificationCount: notificationCount,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   } = state.user;
   return {
     authInfoError,
@@ -204,6 +296,8 @@ const mapStateToProps = state => {
     notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
     signupError,
+    sendVerificationEmailInProgress,
+    sendVerificationEmailError,
   };
 };
 
@@ -213,6 +307,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   submitLogin: ({ email, password }) => dispatch(login(email, password)),
   submitSignup: params => dispatch(signup(params)),
+  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
 const AuthenticationPage = compose(

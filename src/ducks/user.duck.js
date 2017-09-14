@@ -21,6 +21,10 @@ export const FETCH_CURRENT_USER_NOTIFICATIONS_REQUEST = 'app/user/FETCH_CURRENT_
 export const FETCH_CURRENT_USER_NOTIFICATIONS_SUCCESS = 'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_SUCCESS';
 export const FETCH_CURRENT_USER_NOTIFICATIONS_ERROR = 'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_ERROR';
 
+export const SEND_VERIFICATION_EMAIL_REQUEST = 'app/user/SEND_VERIFICATION_EMAIL_REQUEST';
+export const SEND_VERIFICATION_EMAIL_SUCCESS = 'app/user/SEND_VERIFICATION_EMAIL_SUCCESS';
+export const SEND_VERIFICATION_EMAIL_ERROR = 'app/user/SEND_VERIFICATION_EMAIL_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -32,6 +36,8 @@ const initialState = {
   currentUserHasListingsError: null,
   currentUserNotificationCount: 0,
   currentUserNotificationCountError: null,
+  sendVerificationEmailInProgress: false,
+  sendVerificationEmailError: null,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -82,10 +88,34 @@ export default function reducer(state = initialState, action = {}) {
       console.error(payload);
       return { ...state, createStripeAccountError: payload, createStripeAccountInProgress: false };
 
+    case SEND_VERIFICATION_EMAIL_REQUEST:
+      return {
+        ...state,
+        sendVerificationEmailInProgress: true,
+        sendVerificationEmailError: null,
+      };
+    case SEND_VERIFICATION_EMAIL_SUCCESS:
+      return {
+        ...state,
+        sendVerificationEmailInProgress: false,
+      };
+    case SEND_VERIFICATION_EMAIL_ERROR:
+      return {
+        ...state,
+        sendVerificationEmailInProgress: false,
+        sendVerificationEmailError: payload,
+      };
+
     default:
       return state;
   }
 }
+
+// ================ Selectors ================ //
+
+export const verificationSendingInProgress = state => {
+  return state.user.sendVerificationEmailInProgress;
+};
 
 // ================ Action creators ================ //
 
@@ -143,6 +173,20 @@ export const fetchCurrentUserNotificationsSuccess = transactions => ({
 
 const fetchCurrentUserNotificationsError = e => ({
   type: FETCH_CURRENT_USER_NOTIFICATIONS_ERROR,
+  error: true,
+  payload: e,
+});
+
+export const sendVerificationEmailRequest = () => ({
+  type: SEND_VERIFICATION_EMAIL_REQUEST,
+});
+
+export const sendVerificationEmailSuccess = () => ({
+  type: SEND_VERIFICATION_EMAIL_SUCCESS,
+});
+
+export const sendVerificationEmailError = e => ({
+  type: SEND_VERIFICATION_EMAIL_ERROR,
   error: true,
   payload: e,
 });
@@ -252,4 +296,16 @@ export const createStripeAccount = payoutDetails =>
         throw e;
       })
       .then(() => dispatch(fetchCurrentUser()));
+  };
+
+export const sendVerificationEmail = () =>
+  (dispatch, getState, sdk) => {
+    if (verificationSendingInProgress(getState())) {
+      return Promise.reject(new Error('Verification email sending already in progress'));
+    }
+    dispatch(sendVerificationEmailRequest());
+    return sdk.currentUser
+      .sendVerificationEmail()
+      .then(() => dispatch(sendVerificationEmailSuccess()))
+      .catch(e => dispatch(sendVerificationEmailError(e)));
   };
