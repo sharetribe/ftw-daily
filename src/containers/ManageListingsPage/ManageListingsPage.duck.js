@@ -36,7 +36,7 @@ const resultIds = data => data.data.map(l => l.id);
 const merge = (state, apiResponse) => {
   return {
     ...state,
-    ownEntities: updatedEntities(state.ownEntities, apiResponse.data),
+    ownEntities: updatedEntities({ ...state.ownEntities }, apiResponse.data),
   };
 };
 
