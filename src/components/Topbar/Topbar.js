@@ -133,9 +133,9 @@ class TopbarComponent extends Component {
 
   handleLogout() {
     const { onLogout, history, flattenedRoutes } = this.props;
-    const path = pathByRouteName('LandingPage', flattenedRoutes);
-    history.push(path);
     onLogout().then(() => {
+      const path = pathByRouteName('LandingPage', flattenedRoutes);
+      history.push(path);
       // TODO: show flash message
       console.log('logged out'); // eslint-disable-line
     });
