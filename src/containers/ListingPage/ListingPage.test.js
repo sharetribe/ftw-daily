@@ -52,7 +52,7 @@ describe('ListingPage', () => {
 
       return showListing(id)(dispatch, null, sdk).then(data => {
         expect(data).toEqual(response);
-        expect(show.mock.calls).toEqual([[{ id, include: ['author', 'images'] }]]);
+        expect(show.mock.calls).toEqual([[{ id, include: ['author', 'author.profileImage', 'images'] }]]);
         expect(dispatch.mock.calls).toEqual([
           [showListingRequest(id)],
           [expect.anything()], // fetchCurrentUser() call
@@ -76,7 +76,7 @@ describe('ListingPage', () => {
         },
         e => {
           expect(e).toEqual(error);
-          expect(show.mock.calls).toEqual([[{ id, include: ['author', 'images'] }]]);
+          expect(show.mock.calls).toEqual([[{ id, include: ['author', 'author.profileImage', 'images'] }]]);
           expect(dispatch.mock.calls).toEqual([
             [showListingRequest(id)],
             [expect.anything()], // fetchCurrentUser() call
