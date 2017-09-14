@@ -45,7 +45,7 @@ export const showListing = listingId =>
     dispatch(showListingRequest(listingId));
     dispatch(fetchCurrentUser());
     return sdk.listings
-      .show({ id: listingId, include: ['author', 'images'] })
+      .show({ id: listingId, include: ['author', 'author.profileImage', 'images'] })
       .then(data => {
         dispatch(addMarketplaceEntities(data));
         return data;

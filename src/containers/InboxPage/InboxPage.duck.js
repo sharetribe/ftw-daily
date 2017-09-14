@@ -90,7 +90,13 @@ export const loadData = (params, search) =>
 
     const apiQueryParams = {
       only: onlyFilter,
-      include: ['provider', 'customer', 'booking'],
+      include: [
+        'provider',
+        'provider.profileImage',
+        'customer',
+        'customer.profileImage',
+        'booking',
+      ],
       page,
       per_page: INBOX_PAGE_SIZE,
     };
