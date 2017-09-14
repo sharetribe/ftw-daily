@@ -11,6 +11,7 @@ import { recoverPassword, retypeEmail, clearRecoveryError } from './PasswordReco
 import { PageLayout, Topbar, InlineTextButton, KeysIcon } from '../../components';
 import { PasswordRecoveryForm } from '../../containers';
 
+import DoorIcon from './DoorIcon';
 import css from './PasswordRecoveryPage.css';
 
 export const PasswordRecoveryPageComponent = props => {
@@ -107,7 +108,7 @@ export const PasswordRecoveryPageComponent = props => {
   const initialEmailText = <span className={css.submittedEmail}>{initialEmail}</span>;
   const emailNotVerifiedContent = (
     <div className={css.content}>
-      <KeysIcon />
+      <DoorIcon />
       <h1 className={css.title}>
         <FormattedMessage id="PasswordRecoveryPage.emailNotVerifiedTitle" />
       </h1>
