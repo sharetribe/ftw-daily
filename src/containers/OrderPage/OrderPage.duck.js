@@ -1,5 +1,6 @@
 import { types } from '../../util/sdkLoader';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { updatedEntities, denormalisedEntities } from '../../util/data';
 
 // ================ Action types ================ //
 
@@ -56,11 +57,20 @@ export const fetchOrder = id =>
       .then(response => {
         txResponse = response;
         const listingId = listingRelationship(response).id;
+        const entities = updatedEntities({}, response.data);
+        const denormalised = denormalisedEntities(entities, 'listing', [listingId]);
+        const listing = denormalised[0];
 
-        return sdk.listings.show({
-          id: listingId,
-          include: ['author', 'author.profileImage', 'images'],
-        });
+        const canFetchListing = listing && listing.attributes && !listing.attributes.deleted;
+
+        if (canFetchListing) {
+          return sdk.listings.show({
+            id: listingId,
+            include: ['author', 'author.profileImage', 'images'],
+          });
+        } else {
+          return response;
+        }
       })
       .then(response => {
         dispatch(addMarketplaceEntities(txResponse));

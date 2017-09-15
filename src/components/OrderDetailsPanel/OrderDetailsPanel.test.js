@@ -3,8 +3,9 @@ import { shallow } from 'enzyme';
 import { types } from '../../util/sdkLoader';
 import { createBooking, createListing, createUser, createTransaction } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
+import { fakeIntl } from '../../util/test-data';
 import { BookingBreakdown } from '../../components';
-import OrderDetailsPanel from './OrderDetailsPanel.js';
+import { OrderDetailsPanelComponent } from './OrderDetailsPanel.js';
 
 describe('OrderDetailsPanel', () => {
   it('matches snapshot', () => {
@@ -21,7 +22,7 @@ describe('OrderDetailsPanel', () => {
       provider: createUser('provider'),
       customer: createUser('customer'),
     });
-    const tree = renderShallow(<OrderDetailsPanel transaction={tx} />);
+    const tree = renderShallow(<OrderDetailsPanelComponent transaction={tx} intl={fakeIntl} />);
     expect(tree).toMatchSnapshot();
   });
   it('renders correct total price', () => {
@@ -38,7 +39,7 @@ describe('OrderDetailsPanel', () => {
       provider: createUser('provider'),
       customer: createUser('customer'),
     });
-    const panel = shallow(<OrderDetailsPanel transaction={tx} />);
+    const panel = shallow(<OrderDetailsPanelComponent transaction={tx} intl={fakeIntl} />);
     const breakdownProps = panel.find(BookingBreakdown).props();
     expect(breakdownProps.transaction.attributes.payinTotal).toEqual(new Money(16500, 'USD'));
   });

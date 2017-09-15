@@ -76,7 +76,7 @@
   }
 }
 
-.title {
+.heading {
   margin: 28px 24px 0 24px;
 
   @media (--viewportMedium) {
