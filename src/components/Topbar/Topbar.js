@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
 import classNames from 'classnames';
+import config from '../../config';
 import { ensureCurrentUser } from '../../util/data';
 import { withFlattenedRoutes, withViewport } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
@@ -135,7 +136,15 @@ class TopbarComponent extends Component {
     const { onLogout, history, flattenedRoutes } = this.props;
     onLogout().then(() => {
       const path = pathByRouteName('LandingPage', flattenedRoutes);
-      history.push(path);
+
+      // In production we ensure that data is really lost,
+      // but in development mode we use stored values for debugging
+      if (config.dev) {
+        history.push(path);
+      } else if (typeof window !== 'undefined') {
+        window.location = path;
+      }
+
       // TODO: show flash message
       console.log('logged out'); // eslint-disable-line
     });
