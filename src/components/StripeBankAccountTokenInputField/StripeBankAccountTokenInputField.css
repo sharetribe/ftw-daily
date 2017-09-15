@@ -8,12 +8,13 @@
 
 }
 
-.withTopMargin {
-  margin-top: 24px;
-}
-
 .input {
   border-bottom-color: var(--attentionColor);
+  margin-bottom: 24px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
 .inputSuccess {
