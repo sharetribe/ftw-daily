@@ -22,6 +22,7 @@ import {
   ResponsiveImage,
   Topbar,
   NamedLink,
+  NamedRedirect,
   Modal,
   ImageCarousel,
 } from '../../components';
@@ -175,12 +176,57 @@ export class ListingPageComponent extends Component {
       title = '',
     } = currentListing.attributes;
 
-    if (!currentListing.id && showListingError) {
-      const noDataMsg = { id: 'ListingPage.noListingData' };
-      return <PageLayout title={intl.formatMessage(noDataMsg)} />;
+    const topbar = (
+      <Topbar
+        isAuthenticated={isAuthenticated}
+        authInProgress={authInProgress}
+        currentUser={currentUser}
+        currentUserHasListings={currentUserHasListings}
+        currentUserHasOrders={currentUserHasOrders}
+        notificationCount={notificationCount}
+        history={history}
+        location={location}
+        onLogout={onLogout}
+        onManageDisableScrolling={onManageDisableScrolling}
+        onResendVerificationEmail={onResendVerificationEmail}
+        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+        sendVerificationEmailError={sendVerificationEmailError}
+      />
+    );
+
+    const loadingTitle = intl.formatMessage({
+      id: 'ListingPage.loadingListingTitle',
+    });
+    const errorTitle = intl.formatMessage({
+      id: 'ListingPage.errorLoadingListingTitle',
+    });
+
+    if (showListingError && showListingError.status === 404) {
+      // 404 listing not found
+
+      return <NamedRedirect name="NotFoundPage" />;
+    } else if (showListingError) {
+      // Other error in fetching listing
+
+      return (
+        <PageLayout title={errorTitle}>
+          {topbar}
+          <p className={css.errorText}>
+            <FormattedMessage id="ListingPage.errorLoadingListingMessage" />
+          </p>
+        </PageLayout>
+      );
     } else if (!currentListing.id) {
-      const loadingPageMsg = { id: 'ListingPage.loadingListingData' };
-      return <PageLayout title={intl.formatMessage(loadingPageMsg)} />;
+      // Still loading the listing
+
+      return (
+        <PageLayout title={loadingTitle}>
+          {topbar}
+          <p className={css.loadingText}>
+            <FormattedMessage id="ListingPage.loadingListingMessage" />
+          </p>
+        </PageLayout>
+      );
     }
 
     const hasImages = currentListing.images && currentListing.images.length > 0;
@@ -291,21 +337,7 @@ export class ListingPageComponent extends Component {
         title={`${title} ${formattedPrice}`}
         scrollingDisabled={scrollingDisabled}
       >
-        <Topbar
-          isAuthenticated={isAuthenticated}
-          authInProgress={authInProgress}
-          currentUser={currentUser}
-          currentUserHasListings={currentUserHasListings}
-          currentUserHasOrders={currentUserHasOrders}
-          notificationCount={notificationCount}
-          history={history}
-          location={location}
-          onLogout={onLogout}
-          onManageDisableScrolling={onManageDisableScrolling}
-          onResendVerificationEmail={onResendVerificationEmail}
-          sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-          sendVerificationEmailError={sendVerificationEmailError}
-        />
+        {topbar}
         <div className={listingClasses}>
           <div className={css.threeToTwoWrapper}>
             <div className={css.aspectWrapper} onClick={handleViewPhotosClick}>

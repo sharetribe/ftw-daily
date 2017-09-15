@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -6,7 +7,9 @@ import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { NamedLink, PageLayout, Topbar } from '../../components';
+import { PageLayout, Topbar } from '../../components';
+
+import css from './NotFoundPage.css';
 
 export class NotFoundPageComponent extends Component {
   componentWillMount() {
@@ -34,10 +37,15 @@ export class NotFoundPageComponent extends Component {
       sendVerificationEmailInProgress,
       sendVerificationEmailError,
       onResendVerificationEmail,
+      intl,
     } = this.props;
 
+    const title = intl.formatMessage({
+      id: 'NotFoundPage.title',
+    });
+
     return (
-      <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Page not found">
+      <PageLayout authInfoError={authInfoError} logoutError={logoutError} title={title}>
         <Topbar
           authInProgress={authInProgress}
           currentUser={currentUser}
@@ -53,7 +61,11 @@ export class NotFoundPageComponent extends Component {
           sendVerificationEmailInProgress={sendVerificationEmailInProgress}
           sendVerificationEmailError={sendVerificationEmailError}
         />
-        <NamedLink name="LandingPage">Home</NamedLink>
+        <div className={css.root}>
+          <h1>
+            <FormattedMessage id="NotFoundPage.heading" />
+          </h1>
+        </div>
       </PageLayout>
     );
   }
@@ -88,6 +100,9 @@ NotFoundPageComponent.propTypes = {
 
   // context object from StaticRouter, injected by the withRouter wrapper
   staticContext: object,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 
   // from withRouter
   history: shape({
@@ -130,7 +145,7 @@ const mapDispatchToProps = dispatch => ({
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
-const NotFoundPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
+const NotFoundPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(
   NotFoundPageComponent
 );
 

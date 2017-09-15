@@ -2,7 +2,7 @@ exports[`NotFoundPageComponent matches snapshot 1`] = `
 <withRouter(PageLayout)
   authInfoError={null}
   logoutError={null}
-  title="Page not found">
+  title="NotFoundPage.title">
   <Topbar
     authInProgress={false}
     currentUser={null}
@@ -25,9 +25,12 @@ exports[`NotFoundPageComponent matches snapshot 1`] = `
     onResendVerificationEmail={[Function]}
     sendVerificationEmailError={null}
     sendVerificationEmailInProgress={false} />
-  <withFlattenedRoutes(withRouter(NamedLink))
-    name="LandingPage">
-    Home
-  </withFlattenedRoutes(withRouter(NamedLink))>
+  <div>
+    <h1>
+      <FormattedMessage
+        id="NotFoundPage.heading"
+        values={Object {}} />
+    </h1>
+  </div>
 </withRouter(PageLayout)>
 `;

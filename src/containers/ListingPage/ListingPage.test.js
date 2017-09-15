@@ -72,22 +72,16 @@ describe('ListingPage', () => {
 
       // Calling sdk.listings.show is expected to fail now
 
-      return showListing(id)(dispatch, null, sdk).then(
-        () => {
-          throw new Error('sdk.listings.show was supposed to fail!');
-        },
-        e => {
-          expect(e).toEqual(error);
-          expect(show.mock.calls).toEqual([
-            [{ id, include: ['author', 'author.profileImage', 'images'] }],
-          ]);
-          expect(dispatch.mock.calls).toEqual([
-            [showListingRequest(id)],
-            [expect.anything()], // fetchCurrentUser() call
-            [showListingError(e)],
-          ]);
-        }
-      );
+      return showListing(id)(dispatch, null, sdk).then(data => {
+        expect(show.mock.calls).toEqual([
+          [{ id, include: ['author', 'author.profileImage', 'images'] }],
+        ]);
+        expect(dispatch.mock.calls).toEqual([
+          [showListingRequest(id)],
+          [expect.anything()], // fetchCurrentUser() call
+          [showListingError(error)],
+        ]);
+      });
     });
   });
 
