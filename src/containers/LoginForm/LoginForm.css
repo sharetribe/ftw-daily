@@ -23,10 +23,10 @@
 }
 
 .recoveryLink {
-  @apply --marketplaceH5FontStyles;
   color: var(--matterColor);
 }
 
-.recoveryLinkHelp {
+.recoveryLinkInfo {
+  @apply --marketplaceH5FontStyles;
   color: var(--matterColorAnti);
 }
