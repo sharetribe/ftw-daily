@@ -10,17 +10,23 @@
 
 .password {
   margin-top: 24px;
+  margin-bottom: 24px;
 
   @media (--viewportMedium) {
     margin-top: 30px;
   }
 }
 
-.button {
-  margin-top: 24px;
-  align-self: stretch;
+.bottomWrapper {
+  margin-top: auto;
+  text-align: center;
+}
 
-  @media (--viewportMedium) {
-    margin-top: 72px;
-  }
+.recoveryLink {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColor);
+}
+
+.recoveryLinkHelp {
+  color: var(--matterColorAnti);
 }

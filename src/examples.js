@@ -42,9 +42,9 @@ import * as EditListingPhotosForm
 import * as EditListingPricingForm
   from './containers/EditListingPricingForm/EditListingPricingForm.example';
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
-import * as PasswordForgottenForm
-  from './containers/PasswordForgottenForm/PasswordForgottenForm.example';
 import * as PasswordResetForm from './containers/PasswordResetForm/PasswordResetForm.example';
+import * as PasswordRecoveryForm
+  from './containers/PasswordRecoveryForm/PasswordRecoveryForm.example';
 import * as PayoutDetailsForm from './containers/PayoutDetailsForm/PayoutDetailsForm.example';
 import * as SignupForm from './containers/SignupForm/SignupForm.example';
 import * as StripePaymentForm from './containers/StripePaymentForm/StripePaymentForm.example';
@@ -78,8 +78,8 @@ export {
   ModalInMobile,
   NamedLink,
   PaginationLinks,
-  PasswordForgottenForm,
   PasswordResetForm,
+  PasswordRecoveryForm,
   PayoutDetailsForm,
   ResponsiveImage,
   SelectField,

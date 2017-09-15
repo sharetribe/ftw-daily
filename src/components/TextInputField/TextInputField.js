@@ -17,6 +17,7 @@ class TextInputFieldComponent extends Component {
       rootClassName,
       className,
       clearOnUnmount,
+      customErrorText,
       id,
       label,
       type,
@@ -33,9 +34,13 @@ class TextInputFieldComponent extends Component {
     const { valid, invalid, touched, error } = meta;
     const isTextarea = type === 'textarea';
 
+    const errorText = customErrorText || error;
+
     // Error message and input error styles are only shown if the
     // field has been touched and the validation has failed.
-    const hasError = touched && invalid && error;
+    const hasError = touched && invalid && errorText;
+
+    const fieldMeta = { touched, error: errorText };
 
     const inputClasses = classNames(css.input, {
       [css.inputSuccess]: valid,
@@ -50,7 +55,7 @@ class TextInputFieldComponent extends Component {
       <div className={classes}>
         {label ? <label htmlFor={id}>{label}</label> : null}
         {isTextarea ? <ExpandingTextarea {...inputProps} /> : <input {...inputProps} />}
-        <ValidationError fieldMeta={meta} />
+        <ValidationError fieldMeta={fieldMeta} />
       </div>
     );
   }
@@ -60,6 +65,7 @@ TextInputFieldComponent.defaultProps = {
   rootClassName: null,
   className: null,
   clearOnUnmount: false,
+  customErrorText: null,
   id: null,
   label: null,
 };
@@ -71,6 +77,10 @@ TextInputFieldComponent.propTypes = {
   className: string,
 
   clearOnUnmount: bool,
+
+  // Error message that can be manually passed to input field,
+  // overrides default validation message
+  customErrorText: string,
 
   // Label is optional, but if it is given, an id is also required so
   // the label can reference the input in the `for` attribute

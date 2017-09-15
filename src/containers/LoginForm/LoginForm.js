@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
-import { Button, TextInputField } from '../../components';
+import { Button, TextInputField, NamedLink } from '../../components';
 import * as validators from '../../util/validators';
 
 import css from './LoginForm.css';
@@ -68,6 +68,15 @@ const LoginFormComponent = props => {
           validate={passwordRequired}
         />
       </div>
+      <p className={css.bottomWrapper}>
+        <NamedLink name="PasswordRecoveryPage" className={css.recoveryLink}>
+          <FormattedMessage id="LoginForm.forgotPassword" />
+          {' '}
+          <span className={css.recoveryLinkHelp}>
+            <FormattedMessage id="LoginForm.forgotPasswordHelp" />
+          </span>
+        </NamedLink>
+      </p>
       <Button className={css.button} type="submit" disabled={submitDisabled}>
         <FormattedMessage id="LoginForm.logIn" />
       </Button>

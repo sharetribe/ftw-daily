@@ -18,10 +18,10 @@ import LoginForm from './LoginForm/LoginForm';
 import ManageListingsPage from './ManageListingsPage/ManageListingsPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import OrderPage from './OrderPage/OrderPage';
-import PasswordForgottenForm from './PasswordForgottenForm/PasswordForgottenForm';
-import PasswordForgottenPage from './PasswordForgottenPage/PasswordForgottenPage';
 import PasswordResetForm from './PasswordResetForm/PasswordResetForm';
 import PasswordResetPage from './PasswordResetPage/PasswordResetPage';
+import PasswordRecoveryForm from './PasswordRecoveryForm/PasswordRecoveryForm';
+import PasswordRecoveryPage from './PasswordRecoveryPage/PasswordRecoveryPage';
 import PayoutDetailsForm from './PayoutDetailsForm/PayoutDetailsForm';
 import PayoutPreferencesPage from './PayoutPreferencesPage/PayoutPreferencesPage';
 import ProfilePage from './ProfilePage/ProfilePage';
@@ -56,10 +56,10 @@ export {
   ManageListingsPage,
   NotFoundPage,
   OrderPage,
-  PasswordForgottenForm,
-  PasswordForgottenPage,
   PasswordResetForm,
   PasswordResetPage,
+  PasswordRecoveryForm,
+  PasswordRecoveryPage,
   PayoutDetailsForm,
   PayoutPreferencesPage,
   ProfilePage,

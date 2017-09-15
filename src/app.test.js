@@ -43,8 +43,7 @@ describe('Application', () => {
       '/u/1234': 'Profile page with display name: 1234',
       '/login': 'Login',
       '/signup': 'Sign up',
-      '/password': 'Request new password',
-      '/password/forgotten': 'Request new password',
+      '/recover-password': 'Request a new password',
       '/this-url-should-not-be-found': 'Page not found',
       '/reset-password?t=token&e=email': 'Reset password',
     };
