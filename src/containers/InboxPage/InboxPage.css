@@ -329,7 +329,7 @@
 }
 
 .stateName {
-
+  /* This class is empty on purpose, it is used below for banned users */
 }
 
 .stateRequested,
