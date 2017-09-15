@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedDate, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
-import { ensureListing, ensureTransaction, ensureUser } from '../../util/data';
+import { ensureListing, ensureTransaction, ensureUser, userDisplayName } from '../../util/data';
 import { BookingBreakdown, NamedLink, ResponsiveImage, AvatarMedium } from '../../components';
 
 import css from './OrderDetailsPanel.css';
@@ -110,27 +110,43 @@ const orderMessage = (
   }
 };
 
-const OrderDetailsPanel = props => {
+export const OrderDetailsPanelComponent = props => {
   const {
     rootClassName,
     className,
     transaction,
+    intl,
   } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const currentProvider = ensureUser(currentTransaction.provider);
   const currentCustomer = ensureUser(currentTransaction.customer);
 
-  const providerProfile = currentProvider.attributes.profile;
-  const authorDisplayName = providerProfile.displayName;
-  const customerDisplayName = currentCustomer.attributes.profile.displayName;
+  const listingLoaded = !!currentListing.id;
+  const listingDeleted = listingLoaded && currentListing.attributes.deleted;
+
+  const bannedUserDisplayName = intl.formatMessage({
+    id: 'OrderDetailsPanel.bannedUserDisplayName',
+  });
+  const deletedListingTitle = intl.formatMessage({
+    id: 'OrderDetailsPanel.deletedListingTitle',
+  });
+  const deletedListingOrderTitle = intl.formatMessage({
+    id: 'OrderDetailsPanel.deletedListingOrderTitle',
+  });
+  const orderMessageDeletedListing = intl.formatMessage({
+    id: 'OrderDetailsPanel.messageDeletedListing',
+  });
+
+  const authorDisplayName = userDisplayName(currentProvider, bannedUserDisplayName);
+  const customerDisplayName = userDisplayName(currentCustomer, bannedUserDisplayName);
   const transactionState = currentTransaction.attributes.state;
   const lastTransitionedAt = currentTransaction.attributes.lastTransitionedAt;
   const lastTransition = currentTransaction.attributes.lastTransitione;
 
   let listingLink = null;
 
-  if (currentListing.id && currentListing.attributes.title) {
+  if (listingLoaded && currentListing.attributes.title) {
     const title = currentListing.attributes.title;
     const params = { id: currentListing.id.uuid, slug: createSlug(title) };
     listingLink = (
@@ -138,19 +154,30 @@ const OrderDetailsPanel = props => {
         {title}
       </NamedLink>
     );
+  } else {
+    listingLink = deletedListingOrderTitle;
   }
 
-  const listingTitle = currentListing.attributes.title;
+  const listingTitle = currentListing.attributes.deleted
+    ? deletedListingTitle
+    : currentListing.attributes.title;
 
   const bookingInfo = breakdown(currentTransaction);
-  const title = orderTitle(transactionState, listingLink, customerDisplayName, lastTransition);
-  const message = orderMessage(
+  const orderHeading = orderTitle(
     transactionState,
     listingLink,
-    authorDisplayName,
-    lastTransitionedAt,
+    customerDisplayName,
     lastTransition
   );
+  const message = listingDeleted
+    ? orderMessageDeletedListing
+    : orderMessage(
+        transactionState,
+        listingLink,
+        authorDisplayName,
+        lastTransitionedAt,
+        lastTransition
+      );
 
   const firstImage = currentListing.images && currentListing.images.length > 0
     ? currentListing.images[0]
@@ -177,7 +204,7 @@ const OrderDetailsPanel = props => {
           <AvatarMedium user={currentProvider} />
         </div>
         <div className={css.orderInfo}>
-          <h1 className={css.title}>{title}</h1>
+          <h1 className={css.heading}>{orderHeading}</h1>
           <div className={css.message}>
             {message}
           </div>
@@ -225,7 +252,7 @@ const OrderDetailsPanel = props => {
   );
 };
 
-OrderDetailsPanel.defaultProps = {
+OrderDetailsPanelComponent.defaultProps = {
   rootClassName: null,
   className: null,
   lastTransition: null,
@@ -233,10 +260,15 @@ OrderDetailsPanel.defaultProps = {
 
 const { string } = PropTypes;
 
-OrderDetailsPanel.propTypes = {
+OrderDetailsPanelComponent.propTypes = {
   rootClassName: string,
   className: string,
   transaction: propTypes.transaction.isRequired,
+
+  // from injectIntl
+  intl: intlShape,
 };
+
+const OrderDetailsPanel = injectIntl(OrderDetailsPanelComponent);
 
 export default OrderDetailsPanel;

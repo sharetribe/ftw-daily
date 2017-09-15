@@ -22,7 +22,7 @@ import Decimal from 'decimal.js';
 import { types as sdkTypes } from './sdkLoader';
 
 const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
-const { arrayOf, bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
+const { arrayOf, bool, func, instanceOf, number, oneOf, oneOfType, shape, string } = PropTypes;
 
 // Fixed value
 export const value = val => oneOf([val]);
@@ -85,7 +85,7 @@ export const user = shape({
     profile: shape({
       displayName: string.isRequired,
       abbreviatedName: string.isRequired,
-    }).isRequired,
+    }),
   }),
 });
 
@@ -105,18 +105,24 @@ export const image = shape({
   }),
 });
 
+const listingAttributes = shape({
+  title: string.isRequired,
+  description: string.isRequired,
+  address: string.isRequired,
+  geolocation: latlng.isRequired,
+  open: bool.isRequired,
+  price: money,
+});
+
+const deletedListingAttributes = shape({
+  deleted: value(true).isRequired,
+});
+
 // Denormalised listing object
 export const listing = shape({
   id: uuid.isRequired,
   type: value('listing').isRequired,
-  attributes: shape({
-    title: string.isRequired,
-    description: string.isRequired,
-    address: string.isRequired,
-    geolocation: latlng.isRequired,
-    open: bool.isRequired,
-    price: money,
-  }),
+  attributes: oneOfType([listingAttributes, deletedListingAttributes]).isRequired,
   author: user,
   images: arrayOf(image),
 });

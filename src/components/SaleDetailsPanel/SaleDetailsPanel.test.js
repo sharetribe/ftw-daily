@@ -3,8 +3,9 @@ import { shallow } from 'enzyme';
 import { types } from '../../util/sdkLoader';
 import { createTransaction, createBooking, createListing, createUser } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
+import { fakeIntl } from '../../util/test-data';
 import { BookingBreakdown } from '../../components';
-import SaleDetailsPanel from './SaleDetailsPanel.js';
+import { SaleDetailsPanelComponent } from './SaleDetailsPanel.js';
 
 const noop = () => null;
 
@@ -29,8 +30,9 @@ describe('SaleDetailsPanel', () => {
       onAcceptSale: noop,
       onRejectSale: noop,
       acceptOrRejectInProgress: false,
+      intl: fakeIntl,
     };
-    const tree = renderShallow(<SaleDetailsPanel {...props} />);
+    const tree = renderShallow(<SaleDetailsPanelComponent {...props} />);
     expect(tree).toMatchSnapshot();
   });
   it('renders correct total price', () => {
@@ -53,8 +55,9 @@ describe('SaleDetailsPanel', () => {
       onAcceptSale: noop,
       onRejectSale: noop,
       acceptOrRejectInProgress: false,
+      intl: fakeIntl,
     };
-    const panel = shallow(<SaleDetailsPanel {...props} />);
+    const panel = shallow(<SaleDetailsPanelComponent {...props} />);
     const breakdownProps = panel.find(BookingBreakdown).props();
 
     // Total price for the provider should be transaction total minus the commission.

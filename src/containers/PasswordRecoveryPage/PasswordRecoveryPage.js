@@ -7,7 +7,11 @@ import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { recoverPassword, retypePasswordRecoveryEmail, clearPasswordRecoveryError } from './PasswordRecoveryPage.duck';
+import {
+  recoverPassword,
+  retypePasswordRecoveryEmail,
+  clearPasswordRecoveryError,
+} from './PasswordRecoveryPage.duck';
 import { PageLayout, Topbar, InlineTextButton, KeysIcon } from '../../components';
 import { PasswordRecoveryForm } from '../../containers';
 

@@ -1,16 +1,25 @@
 import React, { PropTypes } from 'react';
+import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
-import { ensureUser } from '../../util/data';
-import { ResponsiveImage } from '../../components/';
+import { ensureUser, userDisplayName, userAbbreviatedName } from '../../util/data';
+import { ResponsiveImage, IconBannedUser } from '../../components/';
 
 import css from './Avatar.css';
 
-const Avatar = props => {
-  const { rootClassName, className, user } = props;
+export const AvatarComponent = props => {
+  const { rootClassName, className, user, intl } = props;
   const classes = classNames(rootClassName || css.root, className);
   const avatarUser = ensureUser(user);
-  const { displayName, abbreviatedName } = avatarUser.attributes.profile;
+  const isBannedUser = avatarUser.attributes.banned;
+
+  const bannedUserDisplayName = intl.formatMessage({
+    id: 'Avatar.bannedUserDisplayName',
+  });
+  const bannedUserAbbreviatedName = '';
+
+  const displayName = userDisplayName(avatarUser, bannedUserDisplayName);
+  const abbreviatedName = userAbbreviatedName(avatarUser, bannedUserAbbreviatedName);
 
   if (avatarUser.profileImage && avatarUser.profileImage.id) {
     return (
@@ -26,6 +35,12 @@ const Avatar = props => {
         />
       </div>
     );
+  } else if (isBannedUser) {
+    return (
+      <div className={classes} title={displayName}>
+        <IconBannedUser className={css.bannedUserIcon} />
+      </div>
+    );
   } else {
     // Placeholder avatar (initials)
     return (
@@ -38,17 +53,22 @@ const Avatar = props => {
 
 const { string, oneOfType } = PropTypes;
 
-Avatar.defaultProps = {
+AvatarComponent.defaultProps = {
   className: null,
   rootClassName: null,
   user: null,
 };
 
-Avatar.propTypes = {
+AvatarComponent.propTypes = {
   rootClassName: string,
   className: string,
   user: oneOfType([propTypes.user, propTypes.currentUser]),
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
+
+const Avatar = injectIntl(AvatarComponent);
 
 export default Avatar;
 

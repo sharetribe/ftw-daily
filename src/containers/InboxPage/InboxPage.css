@@ -175,10 +175,6 @@
     border-bottom: none;
   }
 
-  &:hover .itemUsername {
-    color: var(--marketplaceColor);
-  }
-
   @media (--viewportLarge) {
     margin-bottom: 21px;
     padding-bottom: 18px;
@@ -193,6 +189,11 @@
   text-decoration: none;
   &:hover {
     text-decoration: none;
+  }
+
+  &:hover .itemUsername {
+    /* Hightlight the username when the whole item is hovered */
+    color: var(--marketplaceColor);
   }
 }
 
@@ -327,6 +328,10 @@
   margin-bottom: 1px;
 }
 
+.stateName {
+  /* This class is empty on purpose, it is used below for banned users */
+}
+
 .stateRequested,
 .statePending {
   font-weight: var(--fontWeightSemiBold);
@@ -375,4 +380,14 @@
 .lastTransitionedAtRejected,
 .lastTransitionedAtDelivered {
   color: var(--matterColorAnti);
+}
+
+.bannedUserLink {
+  & .itemUsername,
+  &:hover .itemUsername,
+  & .bookingInfo,
+  & .stateName,
+  & .lastTransitionedAt {
+    color: var(--matterColorAnti);
+  }
 }
