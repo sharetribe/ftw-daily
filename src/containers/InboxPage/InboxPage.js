@@ -16,6 +16,7 @@ import {
 } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { formatMoney } from '../../util/currency';
+import { userDisplayName } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
@@ -93,7 +94,11 @@ export const InboxItem = props => {
   const isOrder = type === 'order';
 
   const otherUser = isOrder ? provider : customer;
-  const otherUserDisplayName = otherUser.attributes.profile.displayName;
+  const bannedUserDisplayName = intl.formatMessage({
+    id: 'InboxPage.bannedUserDisplayName',
+  });
+  const isOtherUserBanned = otherUser.attributes.banned;
+  const otherUserDisplayName = userDisplayName(otherUser, bannedUserDisplayName);
 
   const stateData = txState(intl, tx, isOrder);
   const isSaleNotification = !isOrder && tx.attributes.state === propTypes.TX_STATE_PREAUTHORIZED;
@@ -104,9 +109,13 @@ export const InboxItem = props => {
   const bookingPrice = isOrder ? tx.attributes.payinTotal : tx.attributes.payoutTotal;
   const price = formatMoney(intl, bookingPrice);
 
+  const linkClasses = classNames(css.itemLink, {
+    [css.bannedUserLink]: isOtherUserBanned,
+  });
+
   return (
     <NamedLink
-      className={css.itemLink}
+      className={linkClasses}
       name={isOrder ? 'OrderDetailsPage' : 'SaleDetailsPage'}
       params={{ id: tx.id.uuid }}
     >
@@ -126,7 +135,7 @@ export const InboxItem = props => {
         </div>
       </div>
       <div className={css.itemState}>
-        <div className={stateData.stateClassName}>{stateData.state}</div>
+        <div className={classNames(css.stateName, stateData.stateClassName)}>{stateData.state}</div>
         <div
           className={classNames(css.lastTransitionedAt, stateData.lastTransitionedAtClassName)}
           title={lastTransitionedAt.long}

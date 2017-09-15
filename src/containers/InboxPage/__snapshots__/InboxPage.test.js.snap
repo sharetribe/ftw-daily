@@ -294,7 +294,7 @@ exports[`InboxPage matches snapshot 2`] = `
   <div
     className={undefined}>
     <div
-      className={undefined}>
+      className="">
       InboxPage.stateRequested
     </div>
     <div
@@ -605,7 +605,7 @@ exports[`InboxPage matches snapshot 4`] = `
   <div
     className={undefined}>
     <div
-      className={undefined}>
+      className="">
       InboxPage.statePending
     </div>
     <div
