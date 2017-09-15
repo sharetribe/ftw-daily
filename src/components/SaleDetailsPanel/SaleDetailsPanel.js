@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedDate, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
-import { ensureListing, ensureTransaction, ensureUser } from '../../util/data';
+import { ensureListing, ensureTransaction, ensureUser, userDisplayName } from '../../util/data';
 import {
   AvatarLarge,
   AvatarMedium,
@@ -99,7 +99,7 @@ const saleMessage = (saleState, customerName, lastTransitionedAt, lastTransition
   }
 };
 
-const SaleDetailsPanel = props => {
+export const SaleDetailsPanelComponent = props => {
   const {
     rootClassName,
     className,
@@ -107,12 +107,19 @@ const SaleDetailsPanel = props => {
     onAcceptSale,
     onRejectSale,
     acceptOrRejectInProgress,
+    intl,
   } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const currentCustomer = ensureUser(currentTransaction.customer);
+  const customerLoaded = !!currentCustomer.id;
+  const isCustomerBanned = customerLoaded && currentCustomer.attributes.banned;
 
-  const customerDisplayName = currentCustomer.attributes.profile.displayName;
+  const bannedUserDisplayName = intl.formatMessage({
+    id: 'SaleDetailsPanel.bannedUserDisplayName',
+  });
+
+  const customerDisplayName = userDisplayName(currentCustomer, bannedUserDisplayName);
   const transactionState = currentTransaction.attributes.state;
   const lastTransitionedAt = currentTransaction.attributes.lastTransitionedAt;
   const lastTransition = currentTransaction.attributes.lastTransition;
@@ -132,12 +139,11 @@ const SaleDetailsPanel = props => {
   const bookingInfo = breakdown(currentTransaction);
 
   const title = saleTitle(transactionState, listingLink, customerDisplayName, lastTransition);
-  const message = saleMessage(
-    transactionState,
-    customerDisplayName,
-    lastTransitionedAt,
-    lastTransition
-  );
+  const message = isCustomerBanned
+    ? intl.formatMessage({
+        id: 'SaleDetailsPanel.customerBannedStatus',
+      })
+    : saleMessage(transactionState, customerDisplayName, lastTransitionedAt, lastTransition);
 
   const listingTitle = currentListing.attributes.title;
   const firstImage = currentListing.images && currentListing.images.length > 0
@@ -146,7 +152,8 @@ const SaleDetailsPanel = props => {
 
   const isPreauthorizedState = currentTransaction.attributes.state ===
     propTypes.TX_STATE_PREAUTHORIZED;
-  const actionButtons = isPreauthorizedState
+  const canShowButtons = isPreauthorizedState && !isCustomerBanned;
+  const actionButtons = canShowButtons
     ? <div className={css.actionButtons}>
         <SecondaryButton
           className={css.rejectButton}
@@ -224,7 +231,7 @@ const SaleDetailsPanel = props => {
   );
 };
 
-SaleDetailsPanel.defaultProps = {
+SaleDetailsPanelComponent.defaultProps = {
   rootClassName: null,
   className: null,
   lastTransition: null,
@@ -232,13 +239,18 @@ SaleDetailsPanel.defaultProps = {
 
 const { string, func, bool } = PropTypes;
 
-SaleDetailsPanel.propTypes = {
+SaleDetailsPanelComponent.propTypes = {
   rootClassName: string,
   className: string,
   transaction: propTypes.transaction.isRequired,
   onAcceptSale: func.isRequired,
   onRejectSale: func.isRequired,
   acceptOrRejectInProgress: bool.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
+
+const SaleDetailsPanel = injectIntl(SaleDetailsPanelComponent);
 
 export default SaleDetailsPanel;
