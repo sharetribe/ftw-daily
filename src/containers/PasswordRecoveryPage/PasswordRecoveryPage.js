@@ -7,7 +7,7 @@ import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { recoverPassword, retypeEmail, clearRecoveryError } from './PasswordRecoveryPage.duck';
+import { recoverPassword, retypePasswordRecoveryEmail, clearPasswordRecoveryError } from './PasswordRecoveryPage.duck';
 import { PageLayout, Topbar, InlineTextButton, KeysIcon } from '../../components';
 import { PasswordRecoveryForm } from '../../containers';
 
@@ -269,9 +269,9 @@ const mapDispatchToProps = dispatch => ({
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
-  onChange: () => dispatch(clearRecoveryError()),
+  onChange: () => dispatch(clearPasswordRecoveryError()),
   onSubmitEmail: email => dispatch(recoverPassword(email)),
-  onRetypeEmail: () => dispatch(retypeEmail()),
+  onRetypeEmail: () => dispatch(retypePasswordRecoveryEmail()),
 });
 
 const PasswordRecoveryPage = compose(

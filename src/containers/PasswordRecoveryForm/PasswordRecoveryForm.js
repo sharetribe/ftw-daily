@@ -38,6 +38,8 @@ const PasswordRecoveryFormComponent = props => {
   });
 
   const emailRequired = validators.required(emailRequiredMessage);
+  // In case a given email is not found, pass a custom error message
+  // to be rendered with the input component
   const customErrorText = isNotFoundError(recoveryError) ? emailNotFoundMessage : null;
   const initialEmail = initialValues ? initialValues.email : null;
   const buttonDisabled = (pristine && !initialEmail) || submitting;

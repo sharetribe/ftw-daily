@@ -57,24 +57,24 @@ export default function reducer(state = initialState, action = {}) {
 
 // ================ Action creators ================ //
 
-export const recoveryRequest = () => ({ type: RECOVERY_REQUEST });
-export const recoverySuccess = email => ({ type: RECOVERY_SUCCESS, payload: { email } });
-export const recoveryError = (error, email) => ({
+export const passwordRecoveryRequest = () => ({ type: RECOVERY_REQUEST });
+export const passwordRecoverySuccess = email => ({ type: RECOVERY_SUCCESS, payload: { email } });
+export const passwordRecoveryError = (error, email) => ({
   type: RECOVERY_ERROR,
   payload: { error, email },
   error: true,
 });
-export const retypeEmail = () => ({ type: RETYPE_EMAIL });
-export const clearRecoveryError = () => ({ type: CLEAR_RECOVERY_ERROR });
+export const retypePasswordRecoveryEmail = () => ({ type: RETYPE_EMAIL });
+export const clearPasswordRecoveryError = () => ({ type: CLEAR_RECOVERY_ERROR });
 
 // ================ Thunks ================ //
 
 export const recoverPassword = email =>
   (dispatch, getState, sdk) => {
-    dispatch(recoveryRequest());
+    dispatch(passwordRecoveryRequest());
 
     return sdk.passwordReset
       .request({ email })
-      .then(() => dispatch(recoverySuccess(email)))
-      .catch(error => dispatch(recoveryError(error, email)));
+      .then(() => dispatch(passwordRecoverySuccess(email)))
+      .catch(error => dispatch(passwordRecoveryError(error, email)));
   };
