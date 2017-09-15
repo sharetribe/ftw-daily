@@ -9,53 +9,49 @@ import * as propTypes from './util/propTypes';
 
 const { bool, arrayOf, object, func, shape, string, any } = PropTypes;
 
-class RouteComponentRenderer extends Component {
-  constructor(props) {
-    super(props);
-    this.canShowComponent = this.canShowComponent.bind(this);
-    this.callLoadData = this.callLoadData.bind(this);
-  }
+const canShowComponent = props => {
+  const { isAuthenticated, route } = props;
+  const { auth } = route;
+  return !auth || isAuthenticated;
+};
 
+const callLoadData = props => {
+  const { match, location, route, dispatch, logoutInProgress } = props;
+  const { loadData, name } = route;
+  const shouldLoadData = typeof loadData === 'function' &&
+    canShowComponent(props) &&
+    !logoutInProgress;
+
+  if (shouldLoadData) {
+    dispatch(loadData(match.params, location.search))
+      .then(() => {
+        // eslint-disable-next-line no-console
+        console.log(`loadData success for ${name} route`);
+      })
+      .catch(e => {
+        // eslint-disable-next-line no-console
+        console.error(`loadData error for ${name} route`, e);
+      });
+  }
+};
+
+class RouteComponentRenderer extends Component {
   componentDidMount() {
     // Calling loadData on initial rendering (on client side).
-    this.callLoadData(this.props);
+    callLoadData(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
     // Calling loadData after initial rendering (on client side).
     // This makes it possible to use loadData as default client side data loading technique.
     // However it is better to fetch data before location change to avoid "Loading data" state.
-    this.callLoadData(nextProps);
-  }
-
-  canShowComponent() {
-    const { isAuthenticated, route } = this.props;
-    const { auth } = route;
-    return !auth || isAuthenticated;
-  }
-
-  callLoadData(props) {
-    const { match, location, route, dispatch } = props;
-    const { loadData, name } = route;
-    const shouldLoadData = typeof loadData === 'function' && this.canShowComponent();
-
-    if (shouldLoadData) {
-      dispatch(loadData(match.params, location.search))
-        .then(() => {
-          // eslint-disable-next-line no-console
-          console.log(`loadData success for ${name} route`);
-        })
-        .catch(e => {
-          // eslint-disable-next-line no-console
-          console.error(`loadData error for ${name} route`, e);
-        });
-    }
+    callLoadData(nextProps);
   }
 
   render() {
     const { route, match, location, staticContext, flattenedRoutes } = this.props;
     const { component: RouteComponent, authPage = 'SignupPage' } = route;
-    const canShow = this.canShowComponent();
+    const canShow = canShowComponent(this.props);
     if (!canShow) {
       staticContext.forbidden = true;
     }
@@ -73,7 +69,8 @@ class RouteComponentRenderer extends Component {
 }
 
 RouteComponentRenderer.propTypes = {
-  isAuthenticated: bool.isRequired,
+  isAuthenticated: bool.isRequired, // eslint-disable-line react/no-unused-prop-types
+  logoutInProgress: bool.isRequired, // eslint-disable-line react/no-unused-prop-types
   flattenedRoutes: any.isRequired,
   route: propTypes.route.isRequired,
   match: shape({
@@ -89,10 +86,17 @@ RouteComponentRenderer.propTypes = {
 };
 
 const Routes = props => {
-  const { isAuthenticated, flattenedRoutes, staticContext, dispatch } = props;
+  const { isAuthenticated, logoutInProgress, flattenedRoutes, staticContext, dispatch } = props;
 
   const toRouteComponent = route => {
-    const renderProps = { isAuthenticated, route, staticContext, dispatch, flattenedRoutes };
+    const renderProps = {
+      isAuthenticated,
+      logoutInProgress,
+      route,
+      staticContext,
+      dispatch,
+      flattenedRoutes,
+    };
     return (
       <Route
         key={route.name}
@@ -121,6 +125,7 @@ Routes.defaultProps = { staticContext: {} };
 
 Routes.propTypes = {
   isAuthenticated: bool.isRequired,
+  logoutInProgress: bool.isRequired,
 
   // from withFlattenedRoutes
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
@@ -133,8 +138,8 @@ Routes.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { isAuthenticated } = state.Auth;
-  return { isAuthenticated };
+  const { isAuthenticated, logoutInProgress } = state.Auth;
+  return { isAuthenticated, logoutInProgress };
 };
 
 // Note: it is important that the withRouter HOC is **outside** the

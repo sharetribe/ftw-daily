@@ -15,6 +15,7 @@ import reducer, {
   signupRequest,
   signupSuccess,
   signupError,
+  userLogout,
 } from './Auth.duck';
 
 // Create a dispatch function that correctly calls the thunk functions
@@ -276,6 +277,7 @@ describe('Auth duck', () => {
           [logoutRequest()],
           [clearCurrentUser()],
           [logoutSuccess()],
+          [userLogout()],
         ]);
       });
     });

@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { USER_LOGOUT } from './ducks/Auth.duck';
 import * as globalReducers from './ducks';
 import * as pageReducers from './containers/reducers';
 
@@ -9,8 +10,13 @@ import * as pageReducers from './containers/reducers';
  * which is page specific.
  * Future: this structure could take in asyncReducers, which are changed when you navigate pages.
  */
-const createReducer = function createReducer() {
-  return combineReducers({ ...globalReducers, ...pageReducers });
+const appReducer = combineReducers({ ...globalReducers, ...pageReducers });
+
+const createReducer = () => {
+  return (state, action) => {
+    const appState = action.type === USER_LOGOUT ? undefined : state;
+    return appReducer(appState, action);
+  };
 };
 
 export default createReducer;

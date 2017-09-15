@@ -14,7 +14,7 @@ const initialState = {
 const merge = (state, apiResponse) => {
   return {
     ...state,
-    entities: updatedEntities(state.entities, apiResponse.data),
+    entities: updatedEntities({ ...state.entities }, apiResponse.data),
   };
 };
 

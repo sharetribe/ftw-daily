@@ -20,6 +20,10 @@ export const SIGNUP_REQUEST = 'app/Auth/SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'app/Auth/SIGNUP_SUCCESS';
 export const SIGNUP_ERROR = 'app/Auth/SIGNUP_ERROR';
 
+// Generic user_logout action that can be handled elsewhere
+// E.g. src/reducers.js clears store as a consequence
+export const USER_LOGOUT = 'app/USER_LOGOUT';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -110,6 +114,8 @@ export const signupRequest = () => ({ type: SIGNUP_REQUEST });
 export const signupSuccess = () => ({ type: SIGNUP_SUCCESS });
 export const signupError = error => ({ type: SIGNUP_ERROR, payload: error, error: true });
 
+export const userLogout = () => ({ type: USER_LOGOUT });
+
 // ================ Thunks ================ //
 
 export const authInfo = () =>
@@ -150,6 +156,7 @@ export const logout = () =>
       .logout()
       .then(() => dispatch(clearCurrentUser()))
       .then(() => dispatch(logoutSuccess()))
+      .then(() => dispatch(userLogout()))
       .catch(e => dispatch(logoutError(e)));
   };
 
