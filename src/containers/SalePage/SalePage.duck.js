@@ -91,11 +91,27 @@ export const fetchSale = id =>
     let txResponse = null;
 
     return sdk.transactions
-      .show({ id, include: ['customer', 'provider', 'listing', 'booking'] }, { expand: true })
+      .show(
+        {
+          id,
+          include: [
+            'customer',
+            'customer.profileImage',
+            'provider',
+            'provider.profileImage',
+            'listing',
+            'booking',
+          ],
+        },
+        { expand: true }
+      )
       .then(response => {
         txResponse = response;
         const listingId = listingRelationship(response).id;
-        return sdk.listings.show({ id: listingId, include: ['author', 'images'] });
+        return sdk.listings.show({
+          id: listingId,
+          include: ['author', 'author.profileImage', 'images'],
+        });
       })
       .then(response => {
         dispatch(addMarketplaceEntities(txResponse));

@@ -321,8 +321,7 @@ export const fetchCurrentUser = () =>
     return sdk.currentUser
       .show({ include: ['profileImage'] })
       .then(response => {
-        // Temporary denormalization for profileImage
-        // Profile image will be included to users
+        // Include profile image to denormalized user entity
         const currentUserId = response.data.data.id;
         const entities = updatedEntities({}, response.data);
         const denormalised = denormalisedEntities(entities, 'current-user', [currentUserId]);

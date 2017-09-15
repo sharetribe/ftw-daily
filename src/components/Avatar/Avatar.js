@@ -12,8 +12,6 @@ const Avatar = props => {
   const avatarUser = ensureUser(user);
   const { displayName, abbreviatedName } = avatarUser.attributes.profile;
 
-  // TODO this is a temporary avatar fix for currentUser's profile data.
-  // Avatar images should be included to all user's attributes in the future.
   if (avatarUser.profileImage && avatarUser.profileImage.id) {
     return (
       <div className={classes} title={displayName}>
@@ -21,7 +19,10 @@ const Avatar = props => {
           rootClassName={css.avatarImage}
           alt={displayName}
           image={avatarUser.profileImage}
-          nameSet={[{ name: 'square-xlarge', size: '1x' }, { name: 'square-xlarge2x', size: '2x' }]}
+          nameSet={[
+            { name: 'square-xlarge2x', size: '1x' },
+            { name: 'square-xlarge4x', size: '2x' },
+          ]}
         />
       </div>
     );

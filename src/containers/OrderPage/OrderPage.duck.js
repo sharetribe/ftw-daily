@@ -57,7 +57,10 @@ export const fetchOrder = id =>
         txResponse = response;
         const listingId = listingRelationship(response).id;
 
-        return sdk.listings.show({ id: listingId, include: ['author', 'images'] });
+        return sdk.listings.show({
+          id: listingId,
+          include: ['author', 'author.profileImage', 'images'],
+        });
       })
       .then(response => {
         dispatch(addMarketplaceEntities(txResponse));
