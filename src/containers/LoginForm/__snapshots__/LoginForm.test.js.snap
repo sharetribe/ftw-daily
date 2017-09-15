@@ -47,6 +47,7 @@ exports[`LoginForm matches snapshot 1`] = `
     <span
       className={undefined}>
       <span>
+        Forgot your password? 
         <a
           className=""
           href="/recover-password"
@@ -54,10 +55,9 @@ exports[`LoginForm matches snapshot 1`] = `
           style={Object {}}
           title={null}>
           <span>
-            Forgot your password?
+            Reset password.
           </span>
         </a>
-         No problem.
       </span>
     </span>
   </p>
