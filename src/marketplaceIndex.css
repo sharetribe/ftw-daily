@@ -74,6 +74,10 @@ label {
   }
 }
 
+button {
+  font-family: "sofiapro", Helvetica, Arial, sans-serif;
+}
+
 select {
   @apply --marketplaceSelectStyles;
 }

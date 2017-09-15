@@ -118,6 +118,7 @@ class EditListingPhotosPanel extends Component {
           updateError={errors.updateListingError}
           updateInProgress={updateInProgress}
         />
+
         <Modal
           id="EditListingPhotosPanel.payoutModal"
           className={css.payoutModal}
@@ -125,13 +126,13 @@ class EditListingPhotosPanel extends Component {
           onClose={this.handlePayoutModalClose}
           onManageDisableScrolling={onManageDisableScrolling}
         >
-          <div className={css.modalHeading}>
-            <h1 className={css.payoutModalTitle}>
+          <div className={css.modalHeaderWrapper}>
+            <h1 className={css.modalTitle}>
               <FormattedMessage id="EditListingPhotosPanel.payoutModalTitleOneMoreThing" />
               <br />
               <FormattedMessage id="EditListingPhotosPanel.payoutModalTitlePayoutPreferences" />
             </h1>
-            <p>
+            <p className={css.modalMessage}>
               <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
             </p>
           </div>
@@ -141,6 +142,7 @@ class EditListingPhotosPanel extends Component {
             onSubmit={this.handlePayoutSubmit}
           />
         </Modal>
+
       </div>
     );
   }

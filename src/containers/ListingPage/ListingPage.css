@@ -119,11 +119,12 @@
     height: calc(0.41 * 100vw);
     max-height: 50vh;
     object-fit: cover;
-    border-radius: 2px;
-  }
+    border-radius: var(--borderRadius);
 
-  &:hover {
-    opacity: 0.85;
+    &:hover {
+      transform: scale(1.005);
+      box-shadow: var(--boxShadowListingCard);
+    }
   }
 }
 

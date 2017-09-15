@@ -47,13 +47,13 @@
     left: 12px;
     width: 10px;
     height: 10px;
-    fill: var(--matterColorLight);
-    stroke: var(--matterColorLight);
+    fill: var(--matterColorAnti);
+    stroke: var(--matterColorAnti);
   }
 
   &:hover svg {
-    fill: var(--matterColorAnti);
-    stroke: var(--matterColorAnti);
+    fill: var(--matterColorLight);
+    stroke: var(--matterColorLight);
   }
 }
 

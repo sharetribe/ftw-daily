@@ -43,11 +43,11 @@ const PasswordRecoveryFormComponent = props => {
     ? emailNotFoundMessage
     : null;
   const initialEmail = initialValues ? initialValues.email : null;
-  const buttonDisabled = (pristine && !initialEmail) || submitting;
+  const submitDisabled = (pristine && !initialEmail) || submitting;
   const classes = classNames(rootClassName || css.root, className);
 
   const loginLink = (
-    <NamedLink name="LoginPage" className={css.loginLink}>
+    <NamedLink name="LoginPage" className={css.modalHelperLink}>
       <FormattedMessage id="PasswordRecoveryForm.loginLinkText" />
     </NamedLink>
   );
@@ -66,16 +66,21 @@ const PasswordRecoveryFormComponent = props => {
       />
 
       <div className={css.bottomWrapper}>
-        <p className={css.bottomText}>
-          <FormattedMessage id="PasswordRecoveryForm.loginLinkInfo" values={{ loginLink }} />
+        <p className={css.bottomWrapperText}>
+          <span className={css.modalHelperText}>
+            <FormattedMessage id="PasswordRecoveryForm.loginLinkInfo" values={{ loginLink }} />
+          </span>
         </p>
-        <PrimaryButton className={css.submitButton} type="submit" disabled={buttonDisabled}>
+
+        <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
           <FormattedMessage id="PasswordRecoveryForm.sendInstructions" />
         </PrimaryButton>
       </div>
+
     </form>
   );
 };
+
 
 PasswordRecoveryFormComponent.defaultProps = {
   rootClassName: null,

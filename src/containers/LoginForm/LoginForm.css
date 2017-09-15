@@ -1,32 +1,26 @@
 @import '../../marketplace.css';
 
 .root {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: space-between;
-  height: 100%;
+  @apply --marketplaceModalFormRootStyles;
 }
 
 .password {
-  margin-top: 24px;
-  margin-bottom: 24px;
-
-  @media (--viewportMedium) {
-    margin-top: 30px;
-  }
+  @apply --marketplaceModalPasswordMargins;
 }
 
 .bottomWrapper {
-  margin-top: auto;
-  text-align: center;
+  @apply --marketplaceModalBottomWrapper;
+}
+
+/* Adjust the bottomWrapper's margin to match modals without the helper text */
+.bottomWrapperText {
+  @apply --marketplaceModalBottomWrapperText;
 }
 
 .recoveryLink {
-  color: var(--matterColor);
+  @apply --marketplaceModalHelperLink;
 }
 
 .recoveryLinkInfo {
-  @apply --marketplaceH5FontStyles;
-  color: var(--matterColorAnti);
+  @apply --marketplaceModalHelperText;
 }

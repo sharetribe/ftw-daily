@@ -198,20 +198,6 @@
   }
 
 
-  /* This font is specific to Modal's (Lightbox) titles */
-  --marketplaceModalTitle: {
-    font-weight: var(--fontWeightSemiBold);
-    font-size: 30px;
-    line-height: 36px;
-    letter-spacing: -0.5px;
-
-    @media (--viewportMedium) {
-      line-height: 40px;
-      letter-spacing: -0.9px;
-    }
-  }
-
-
 /* ================ Tabbed navigation font styles ================ */
 
   --marketplaceTabNavFontStyles {

@@ -1,44 +1,16 @@
-@import '../../marketplaceFonts.css';
 @import '../../marketplace.css';
 
 .root {
-  @apply --backgroundImage;
-
-  /* PageLayout is using flex: AuthenticationPage's .root takes all available space */
-  flex-grow: 1;
-
-  /* AuthenticationPage's root uses flexbox */
-  display: flex;
-
-  @media (--viewportMedium) {
-    justify-content: center;
-    align-items: flex-start;
-  }
+  @apply --marketplaceModalRootStyles;
 }
 
 .content {
-  flex-grow: 1;
-
-  /* Create context so the close button can be positioned within it */
-  position: relative;
-
-  /* Display and dimensions */
-  display: flex;
-  flex-direction: column;
-  padding: 30px 24px 98px 24px;
-
-  background-color: var(--matterColorLight);
-  border-radius: 2px;
-
-  @media (--viewportMedium) {
-    flex-basis: 480px;
-    flex-grow: 0;
-    min-height: 573px;
-    padding: 60px;
-    margin-top: 7.5vh;
-    margin-bottom: 7.5vh;
-  }
+  @apply --marketplaceModalBaseStyles;
+  padding-top: 29px;
 }
+
+
+/* ================ Tabs & Form ================ */
 
 .tabs {
   @media (--viewportMedium) {
@@ -47,23 +19,32 @@
 }
 
 .tab {
-  @apply --marketplaceModalTitle;
+  @apply --marketplaceModalTitleStyles;
   margin-top: 0;
   margin-bottom: 0;
-}
-
-.form {
-  margin-top: 49px;
 
   @media (--viewportMedium) {
-    margin-top: 38px;
+    margin-top: 0;
   }
 }
 
-.error {
+.form {
   margin-top: 24px;
-  color: var(--failColor);
+
+  @media (--viewportMedium) {
+    margin-top: 30px;
+  }
 }
+
+.bottomWrapper {
+  @apply --marketplaceModalBottomWrapper;
+
+  /* Align the helper links to the left since there isn't a Primary Button anymore */
+  text-align: left;
+}
+
+
+/* ================ Hide Top bar in screens smaller than 768px  ================ */
 
 .hideOnMobile {
   display: none;
@@ -73,101 +54,64 @@
   }
 }
 
+
+/* ================ Close icon ================ */
+
 .verifyClose {
-  /* Position */
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  /* Display and dimensions */
-  display: flex;
-  align-items: flex-start;
-  width: auto;
-  padding: 23px 24px;
-
-  /* Colors */
-  color: var(--matterColor);
-
-  &:hover {
-    color: var(--matterColorDark);
-    text-decoration: none;
-  }
+  @apply --marketplaceModalCloseStyles;
 }
 
 .closeText {
-  @apply --marketplaceH6FontStyles;
-  margin: -2.5px 0 0 0;
-
-  @media (--viewportMedium) {
-    margin-top: -1px;
-  }
+  @apply --marketplaceModalCloseText;
 }
 
 .closeIcon {
-  display: inline-block;
-  margin-left: 8px;
-  padding: 2px 0 4px;
-
-  /* SVG elements work better as a content-box */
-  box-sizing: content-box;
+  @apply --marketplaceModalCloseIcon;
 }
 
-.verifyTitle {
-  @apply --marketplaceModalTitle;
-  margin: 21px 0 0 0;
 
-  @media (--viewportMedium) {
-    margin: 22px 0 0 0;
-  }
+/* ================ Typography ================ */
+
+
+/* Title of the modal */
+.modalTitle {
+  @apply --marketplaceModalTitleStyles;
 }
 
-.verifyHelpText {
-  margin: 17px 0 0 0;
-
-  @media (--viewportMedium) {
-    margin: 16px 0 0 0;
-  }
+/* Paragraph for the Modal */
+.modalMessage {
+  @apply --marketplaceModalParagraphStyles;
 }
 
+/* Make the email pop */
 .email {
-  font-weight: bold;
+  @apply --marketplaceModalHighlightEmail;
 }
 
-.verifyLink {
-  @apply --marketplaceH5FontStyles;
-  color: var(--matterColor);
-  margin: 0;
+/* Helper links */
+.modalHelperLink {
+  @apply --marketplaceModalHelperLink;
+}
+
+/* Helper texts for the links, not the actual links */
+.modalHelperText {
+  @apply --marketplaceModalHelperText;
+}
+
+.modalIcon {
+  @apply --marketplaceModalIconStyles;
+
+  /* Align the icon and rest of the content in the modal. Sign & Login doesn't use an icon, maybe we should add one? */
+  margin-top: 47px;
 
   @media (--viewportMedium) {
-    margin: 0;
+    margin-top: 0;
   }
 }
 
-.resendEmail {
-  @apply --marketplaceH5FontStyles;
-  color: var(--matterColorAnti);
-  margin: 59px 0 0 0;
 
-  @media (--viewportMedium) {
-    margin: 63px 0 0 0;
-  }
-}
+/* ================ Errors ================ */
 
-.resendError {
-  color: var(--failColor);
-  margin: 66px 0 0 0;
-
-  @media (--viewportMedium) {
-    margin: 72px 0 0 0;
-  }
-}
-
-.fixEmail {
-  @apply --marketplaceH5FontStyles;
-  color: var(--matterColorAnti);
-  margin: 0;
-
-  @media (--viewportMedium) {
-    margin: 0;
-  }
+.error {
+  @apply --marketplaceModalErrorStyles;
 }

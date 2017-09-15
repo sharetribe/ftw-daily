@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
-import { Button, TextInputField } from '../../components';
+import { PrimaryButton, TextInputField } from '../../components';
 import * as validators from '../../util/validators';
 
 import css from './SignupForm.css';
@@ -137,9 +137,13 @@ const SignupFormComponent = props => {
           validate={passwordValidators}
         />
       </div>
-      <Button className={css.button} type="submit" disabled={submitDisabled}>
-        <FormattedMessage id="SignupForm.signUp" />
-      </Button>
+
+      <div className={css.bottomWrapper}>
+        <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
+          <FormattedMessage id="SignupForm.signUp" />
+        </PrimaryButton>
+      </div>
+
     </form>
   );
 };

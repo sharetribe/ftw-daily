@@ -55,24 +55,24 @@ export const PasswordRecoveryPageComponent = props => {
   });
 
   const resendEmailLink = (
-    <InlineTextButton className={css.bottomLink} onClick={() => onSubmitEmail(submittedEmail)}>
+    <InlineTextButton className={css.helperLink} onClick={() => onSubmitEmail(submittedEmail)}>
       <FormattedMessage id="PasswordRecoveryPage.resendEmailLinkText" />
     </InlineTextButton>
   );
 
   const fixEmailLink = (
-    <InlineTextButton className={css.bottomLink} onClick={onRetypeEmail}>
+    <InlineTextButton className={css.helperLink} onClick={onRetypeEmail}>
       <FormattedMessage id="PasswordRecoveryPage.fixEmailLinkText" />
     </InlineTextButton>
   );
 
   const submitEmailContent = (
     <div className={css.submitEmailContent}>
-      <IconKeys />
-      <h1 className={css.title}>
+      <IconKeys className={css.modalIcon} />
+      <h1 className={css.modalTitle}>
         <FormattedMessage id="PasswordRecoveryPage.forgotPasswordTitle" />
       </h1>
-      <p className={css.message}>
+      <p className={css.modalMessage}>
         <FormattedMessage id="PasswordRecoveryPage.forgotPasswordMessage" />
       </p>
       <PasswordRecoveryForm
@@ -85,23 +85,23 @@ export const PasswordRecoveryPageComponent = props => {
   );
 
   const submittedEmailText = passwordRequested
-    ? <span className={css.submittedEmail}>{initialEmail}</span>
-    : <span className={css.submittedEmail}>{submittedEmail}</span>;
+    ? <span className={css.email}>{initialEmail}</span>
+    : <span className={css.email}>{submittedEmail}</span>;
 
   const emailSubmittedContent = (
     <div className={css.emailSubmittedContent}>
-      <IconKeys />
-      <h1 className={css.title}>
+      <IconKeys className={css.modalIcon} />
+      <h1 className={css.modalTitle}>
         <FormattedMessage id="PasswordRecoveryPage.emailSubmittedTitle" />
       </h1>
-      <p className={css.message}>
+      <p className={css.modalMessage}>
         <FormattedMessage
           id="PasswordRecoveryPage.emailSubmittedMessage"
           values={{ submittedEmailText }}
         />
       </p>
       <div className={css.bottomWrapper}>
-        <p className={css.bottomInfo}>
+        <p className={css.helperText}>
           {recoveryInProgress
             ? <FormattedMessage id="PasswordRecoveryPage.resendingEmailInfo" />
             : <FormattedMessage
@@ -109,27 +109,27 @@ export const PasswordRecoveryPageComponent = props => {
                 values={{ resendEmailLink }}
               />}
         </p>
-        <p className={css.bottomInfo}>
-          <FormattedMessage id="PasswordRecoveryPage.fixEmailInfo" values={{ fixEmailLink }} />
+        <p className={css.helperText}>
+            <FormattedMessage id="PasswordRecoveryPage.fixEmailInfo" values={{ fixEmailLink }} />
         </p>
       </div>
     </div>
   );
 
-  const initialEmailText = <span className={css.submittedEmail}>{initialEmail}</span>;
+  const initialEmailText = <span className={css.email}>{initialEmail}</span>;
   const emailNotVerifiedContent = (
     <div className={css.emailNotVerifiedContent}>
-      <DoorIcon />
-      <h1 className={css.title}>
+      <DoorIcon className={css.modalIcon}/>
+      <h1 className={css.modalTitle}>
         <FormattedMessage id="PasswordRecoveryPage.emailNotVerifiedTitle" />
       </h1>
-      <p className={css.message}>
+      <p className={css.modalMessage}>
         <FormattedMessage
           id="PasswordRecoveryPage.emailNotVerifiedMessage"
           values={{ initialEmailText }}
         />
       </p>
-      <p className={css.emailNotVerifiedBottomText}>
+      <p className={css.modalMessage}>
         <FormattedMessage id="PasswordRecoveryPage.emailNotVerifiedContactAdmin" />
       </p>
     </div>
@@ -137,11 +137,11 @@ export const PasswordRecoveryPageComponent = props => {
 
   const genericErrorContent = (
     <div className={css.genericErrorContent}>
-      <IconKeys />
-      <h1 className={css.title}>
+      <IconKeys className={css.modalIcon} />
+      <h1 className={css.modalTitle}>
         <FormattedMessage id="PasswordRecoveryPage.actionFailedTitle" />
       </h1>
-      <p>
+      <p className={css.modalMessage}>
         <FormattedMessage id="PasswordRecoveryPage.actionFailedMessage" />
       </p>
     </div>

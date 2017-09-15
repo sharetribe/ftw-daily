@@ -62,7 +62,7 @@ const PasswordResetFormComponent = props => {
   return (
     <form className={classes} onSubmit={handleSubmit}>
       <TextInputField
-        className={css.passwordInput}
+        className={css.password}
         type="password"
         name="password"
         id={`${form}.password`}

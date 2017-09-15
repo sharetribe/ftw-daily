@@ -6,6 +6,10 @@
 
 .root {
   width: 100%;
+
+  /* Top Bar's drop shadow should always be visible */
+  z-index: 10;
+  position: relative;
 }
 
 .container {
@@ -132,84 +136,48 @@
   z-index: -1;
 }
 
-/* Verify email reminder (modal) */
+
+/* ================ Modal ================ */
 
 .verifyEmailModal {
-  position: relative;
-  height: 100vh;
-  padding: 24px 24px 98px 24px;
-
-  @media (--viewportMedium) {
-    -webkit-overflow-scrolling: auto;
-    width: 480px;
-    min-height: 573px;
-    height: auto;
-    margin: 7.5vh auto;
-    padding: 72px 64px;
-    background-color: var(--matterColorBright);
-    border-radius: 2px;
-  }
+  @apply --marketplaceModalBaseStyles;
+  padding-top: 70px;
 }
 
-.verifyEmailContent {}
-
-.verifyTitle {
-  @apply --marketplaceModalTitle;
-  margin: 21px 0 0 0;
-
-  @media (--viewportMedium) {
-    margin: 22px 0 0 0;
-  }
+/* Title of the modal */
+.modalTitle {
+  @apply --marketplaceModalTitleStyles;
 }
 
-.verifyHelpText {
-  margin: 17px 0 0 0;
-
-  @media (--viewportMedium) {
-    margin: 16px 0 0 0;
-  }
+/* Paragraph for the Modal */
+.modalMessage {
+  @apply --marketplaceModalParagraphStyles;
 }
 
+/* Make the email pop */
 .email {
-  font-weight: bold;
+  @apply --marketplaceModalHighlightEmail;
 }
 
-.verifyLink {
-  @apply --marketplaceH5FontStyles;
-  color: var(--matterColor);
-  margin: 0;
-
-  @media (--viewportMedium) {
-    margin: 0;
-  }
+.helperLink {
+  @apply --marketplaceModalHelperLink;
 }
 
-.resendEmail {
-  @apply --marketplaceH5FontStyles;
-  color: var(--matterColorAnti);
-  margin: 59px 0 0 0;
-
-  @media (--viewportMedium) {
-    margin: 63px 0 0 0;
-  }
+.helperText {
+  @apply --marketplaceModalHelperText;
 }
 
-.resendError {
-  color: var(--failColor);
-  margin: 66px 0 0 0;
-
-  @media (--viewportMedium) {
-    margin: 72px 0 0 0;
-  }
+.error {
+  @apply --marketplaceModalErrorStyles;
 }
 
-.fixEmail {
-  @apply --marketplaceH5FontStyles;
-  color: var(--matterColorAnti);
-  margin: 0;
+.bottomWrapper {
+  @apply --marketplaceModalBottomWrapper;
 
-  @media (--viewportMedium) {
-    margin: 0;
-  }
+  /* Align the helper links to the left since there isn't a Primary Button anymore */
+  text-align: left;
 }
 
+.modalIcon {
+  @apply --marketplaceModalIconStyles;
+}
