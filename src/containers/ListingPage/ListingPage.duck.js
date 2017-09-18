@@ -52,6 +52,5 @@ export const showListing = listingId =>
       })
       .catch(e => {
         dispatch(showListingError(e));
-        throw e;
       });
   };

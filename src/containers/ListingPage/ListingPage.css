@@ -8,6 +8,15 @@
   }
 }
 
+.loadingText {
+  margin: 24px;
+}
+
+.errorText {
+  color: var(--failColor);
+  margin: 24px;
+}
+
 .threeToTwoWrapper {
   /* Layout */
   display: block;

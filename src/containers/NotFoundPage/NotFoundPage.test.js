@@ -1,5 +1,6 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
+import { fakeIntl } from '../../util/test-data';
 import { NotFoundPageComponent } from './NotFoundPage';
 
 const noop = () => null;
@@ -19,6 +20,7 @@ describe('NotFoundPageComponent', () => {
         onManageDisableScrolling={noop}
         sendVerificationEmailInProgress={false}
         onResendVerificationEmail={noop}
+        intl={fakeIntl}
       />
     );
     expect(tree).toMatchSnapshot();

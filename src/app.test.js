@@ -39,7 +39,7 @@ describe('Application', () => {
       '/s/listings': 'Search page: listings',
       '/s/filters': 'Search page: filters',
       '/s/map': 'Search page: map',
-      '/l/listing-title-slug/1234': 'Loading listing data',
+      '/l/listing-title-slug/1234': 'Loading listing…',
       '/u/1234': 'Profile page with display name: 1234',
       '/login': 'Login',
       '/signup': 'Sign up',
