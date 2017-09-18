@@ -31,10 +31,12 @@
 
   & .container {
     @apply --marketplaceModalBaseStyles;
+    min-height: 100vh;
     height: 100%;
 
     @media (--viewportMedium) {
       flex-basis: 576px;
+      min-height: auto;
     }
   }
 }

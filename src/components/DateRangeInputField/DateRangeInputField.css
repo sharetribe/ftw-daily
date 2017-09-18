@@ -88,7 +88,7 @@
     transition: all 0.15s ease-out;
   }
 
-  @media (--viewportLarge) {
+  @media (--viewportMedium) {
     width: 100%;
     margin: 0;
 

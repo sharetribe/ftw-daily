@@ -14,7 +14,7 @@
   padding: 0 24px;
   margin-bottom: 40px;
 
-  @media (--viewportLarge) {
+  @media (--viewportMedium) {
     padding: 0;
     margin-bottom: 0;
     margin-top: 1px;
@@ -27,7 +27,7 @@
 
   margin-top: 5px;
   margin-bottom: 14px;
-  @media (--viewportLarge) {
+  @media (--viewportMedium) {
     margin-top: 5px;
     margin-bottom: 26px;
   }
@@ -67,7 +67,7 @@
   margin: 0 24px 24px 24px;
   width: calc(100% - 48px);
 
-  @media (--viewportLarge) {
+  @media (--viewportMedium) {
     margin: 0;
     width: 100%;
   }

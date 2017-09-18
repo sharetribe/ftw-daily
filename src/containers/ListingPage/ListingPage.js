@@ -410,6 +410,7 @@ export class ListingPageComponent extends Component {
 
             <ModalInMobile
               className={css.modalInMobile}
+              containerClassName={css.modalContainer}
               id="BookingDatesFormInModal"
               isModalOpenOnMobile={this.state.isBookingModalOpenOnMobile}
               onClose={() => this.setState({ isBookingModalOpenOnMobile: false })}

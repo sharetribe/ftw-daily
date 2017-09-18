@@ -16,10 +16,6 @@
 
 /* ================ Modal ================ */
 
-.error {
-  @apply --marketplaceModalErrorStyles;
-}
-
 .modalHeaderWrapper {
   margin-top: 58px;
   margin-bottom: 36px;

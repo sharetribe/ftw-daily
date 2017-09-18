@@ -101,6 +101,11 @@
   --topbarHeightDesktop: 72px;
 
 
+/* ================ Modal default padding ================ */
+
+  --modalPadding: 24px 24px 48px 24px;
+  --modalPaddingMedium: 55px 60px 55px 60px;
+
 
 /* ================ Links ================ */
 
@@ -323,7 +328,7 @@
     /* Display and dimensions */
     display: flex;
     flex-direction: column;
-    padding: 24px 24px 48px 24px;
+    padding: var(--modalPadding);
 
     background-color: var(--matterColorLight);
     border-radius: var(--borderRadius);
@@ -332,12 +337,36 @@
       flex-basis: 480px;
       flex-grow: 0;
       /* min-height: 568px; */
-      padding: 55px 60px 55px 60px;
+      padding: var(--modalPaddingMedium);
       margin-top: 12.5vh;
       margin-bottom: 12.5vh;
     }
   }
 
+  --marketplaceModalInMobileBaseStyles {
+    flex-grow: 1;
+
+    /* Create context so the close button can be positioned within it */
+    position: relative;
+
+    /* Display and dimensions */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 0;
+
+    background-color: var(--matterColorLight);
+    border-radius: var(--borderRadius);
+
+    @media (--viewportMedium) {
+      flex-basis: 480px;
+      flex-grow: 0;
+      height: 100%;
+      padding: 0;
+      background-color: transparent;
+      border-radius: 0;
+    }
+  }
 
   /* Modal title */
 

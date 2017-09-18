@@ -468,10 +468,38 @@
   }
 }
 
+/* Booking form inside modalContainer needs special handling */
+/* since "inMobile" breakpoint is actually --viewportLarge */
+.modalContainer {
+  @apply --marketplaceModalInMobileBaseStyles;
+
+  height: 100vh;
+
+  @media (--viewportMedium) {
+    flex-basis: 576px;
+    height: 100%;
+    padding: var(--modalPaddingMedium);
+    background-color: var(--matterColorLight);
+    margin-top: 12.5vh;
+    margin-bottom: 12.5vh;
+  }
+
+  @media (--viewportLarge) {
+    padding: 0;
+    background-color: transparent;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
 .modalHeading {
   margin-top: 89px;
   margin-bottom: 36px;
   padding: 0 24px;
+
+  @media (--viewportMedium) {
+    padding: 0;
+  }
 
   @media (--viewportLarge) {
     display: none;
@@ -515,8 +543,13 @@
   flex-direction: column;
   margin: 0;
 
+  @media (--viewportMedium) {
+    min-height: 400px;
+  }
+
   @media (--viewportLarge) {
     min-width: 311px;
+    min-height: auto;
   }
 }
 

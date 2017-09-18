@@ -68,6 +68,7 @@ class ModalInMobileComponent extends Component {
     const {
       children,
       className,
+      containerClassName,
       id,
       showAsModalMaxWidth,
       onManageDisableScrolling,
@@ -89,6 +90,7 @@ class ModalInMobileComponent extends Component {
     return (
       <Modal
         className={classes}
+        containerClassName={containerClassName || css.modalContainer}
         contentClassName={css.modalContent}
         id={id}
         isOpen={isOpen}
@@ -105,6 +107,7 @@ class ModalInMobileComponent extends Component {
 ModalInMobileComponent.defaultProps = {
   children: null,
   className: '',
+  containerClassName: null,
   onClose: null,
   showAsModalMaxWidth: 0,
 };
@@ -114,6 +117,7 @@ const { bool, func, node, number, string, shape } = PropTypes;
 ModalInMobileComponent.propTypes = {
   children: node,
   className: string,
+  containerClassName: string,
   id: string.isRequired,
   isModalOpenOnMobile: bool.isRequired,
   onClose: func,
