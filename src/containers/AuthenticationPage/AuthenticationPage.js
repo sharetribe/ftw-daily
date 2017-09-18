@@ -170,7 +170,7 @@ export const AuthenticationPageComponent = props => {
         </span>
         <IconClose rootClassName={css.closeIcon} />
       </NamedLink>
-      <IconEmailSent className={css.modalIcon}/>
+      <IconEmailSent className={css.modalIcon} />
       <h1 className={css.modalTitle}>
         <FormattedMessage id="AuthenticationPage.verifyEmailTitle" values={{ name }} />
       </h1>
@@ -189,7 +189,6 @@ export const AuthenticationPageComponent = props => {
           <FormattedMessage id="AuthenticationPage.fixEmail" values={{ fixEmailLink }} />
         </p>
       </div>
-
 
     </div>
   );

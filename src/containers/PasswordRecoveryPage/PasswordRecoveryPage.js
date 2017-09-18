@@ -110,7 +110,7 @@ export const PasswordRecoveryPageComponent = props => {
               />}
         </p>
         <p className={css.helperText}>
-            <FormattedMessage id="PasswordRecoveryPage.fixEmailInfo" values={{ fixEmailLink }} />
+          <FormattedMessage id="PasswordRecoveryPage.fixEmailInfo" values={{ fixEmailLink }} />
         </p>
       </div>
     </div>
@@ -119,7 +119,7 @@ export const PasswordRecoveryPageComponent = props => {
   const initialEmailText = <span className={css.email}>{initialEmail}</span>;
   const emailNotVerifiedContent = (
     <div className={css.emailNotVerifiedContent}>
-      <DoorIcon className={css.modalIcon}/>
+      <DoorIcon className={css.modalIcon} />
       <h1 className={css.modalTitle}>
         <FormattedMessage id="PasswordRecoveryPage.emailNotVerifiedTitle" />
       </h1>

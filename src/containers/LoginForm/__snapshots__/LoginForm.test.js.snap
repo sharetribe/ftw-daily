@@ -42,32 +42,35 @@ exports[`LoginForm matches snapshot 1`] = `
         value="" />
     </div>
   </div>
-  <p
+  <div
     className={undefined}>
-    <span
+    <p
       className={undefined}>
-      <span>
-        Forgot your password? 
-        <a
-          className=""
-          href="/recover-password"
-          onClick={[Function]}
-          style={Object {}}
-          title={null}>
-          <span>
-            Reset password.
-          </span>
-        </a>
+      <span
+        className={undefined}>
+        <span>
+          Forgot your password? 
+          <a
+            className=""
+            href="/recover-password"
+            onClick={[Function]}
+            style={Object {}}
+            title={null}>
+            <span>
+              Reset password.
+            </span>
+          </a>
+        </span>
       </span>
-    </span>
-  </p>
-  <button
-    className=""
-    disabled={true}
-    type="submit">
-    <span>
-      Log in
-    </span>
-  </button>
+    </p>
+    <button
+      className=""
+      disabled={true}
+      type="submit">
+      <span>
+        Log in
+      </span>
+    </button>
+  </div>
 </form>
 `;

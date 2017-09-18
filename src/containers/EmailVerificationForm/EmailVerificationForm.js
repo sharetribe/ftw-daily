@@ -28,7 +28,7 @@ const EmailVerificationFormComponent = props => {
   const verifyEmail = (
     <div className={css.root}>
       <div>
-        <IconEmailAttention className={css.modalIcon}/>
+        <IconEmailAttention className={css.modalIcon} />
         <h1 className={css.modalTitle}>
           <FormattedMessage id="EmailVerificationForm.verifyEmailAddress" />
         </h1>
@@ -60,7 +60,7 @@ const EmailVerificationFormComponent = props => {
   const alreadyVerified = (
     <div className={css.root}>
       <div>
-        <IconEmailSuccess className={css.modalIcon}/>
+        <IconEmailSuccess className={css.modalIcon} />
         <h1 className={css.modalTitle}>
           <FormattedMessage id="EmailVerificationForm.successTitle" values={{ name }} />
         </h1>

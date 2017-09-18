@@ -81,7 +81,6 @@ const PasswordRecoveryFormComponent = props => {
   );
 };
 
-
 PasswordRecoveryFormComponent.defaultProps = {
   rootClassName: null,
   className: null,

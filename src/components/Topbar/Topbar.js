@@ -302,7 +302,7 @@ class TopbarComponent extends Component {
           closeButtonMessage={closeButtonMessage}
         >
           <div className={css.verifyEmailContent}>
-            <IconEmailAttention className={css.modalIcon}/>
+            <IconEmailAttention className={css.modalIcon} />
             <h1 className={css.modalTitle}>
               <FormattedMessage id="Topbar.verifyEmailTitle" />
             </h1>
@@ -324,7 +324,6 @@ class TopbarComponent extends Component {
                 <FormattedMessage id="Topbar.fixEmail" values={{ fixEmailLink }} />
               </p>
             </div>
-
 
           </div>
         </Modal>
