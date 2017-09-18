@@ -320,7 +320,7 @@
   "ResponsiveImage.noImage": "No image",
   "SaleDetailsPanel.bannedUserDisplayName": "Banned user",
   "SaleDetailsPanel.bookingBreakdownTitle": "Booking breakdown",
-  "SaleDetailsPanel.customerBannedStatus": "The user made the request, but was later banned. You cannot accept or reject the request.",
+  "SaleDetailsPanel.customerBannedStatus": "The user made the request, but was later banned.",
   "SaleDetailsPanel.listingAcceptedTitle": "Woohoo! You accepted a request from {customerName} for {listingLink}",
   "SaleDetailsPanel.listingDeliveredTitle": "{customerName} booked {listingLink}",
   "SaleDetailsPanel.listingRejectedTitle": "{customerName} requested to book {listingLink}",
