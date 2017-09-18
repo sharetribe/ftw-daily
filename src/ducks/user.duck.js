@@ -13,6 +13,8 @@ export const STRIPE_ACCOUNT_CREATE_REQUEST = 'app/user/STRIPE_ACCOUNT_CREATE_REQ
 export const STRIPE_ACCOUNT_CREATE_SUCCESS = 'app/user/STRIPE_ACCOUNT_CREATE_SUCCESS';
 export const STRIPE_ACCOUNT_CREATE_ERROR = 'app/user/STRIPE_ACCOUNT_CREATE_ERROR';
 
+export const STRIPE_ACCOUNT_CLEAR_ERROR = 'app/user/STRIPE_ACCOUNT_CLEAR_ERROR';
+
 export const FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST = 'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST';
 export const FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS = 'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS';
 export const FETCH_CURRENT_USER_HAS_LISTINGS_ERROR = 'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_ERROR';
@@ -102,6 +104,9 @@ export default function reducer(state = initialState, action = {}) {
       console.error(payload);
       return { ...state, createStripeAccountError: payload, createStripeAccountInProgress: false };
 
+    case STRIPE_ACCOUNT_CLEAR_ERROR:
+      return { ...state, createStripeAccountError: null, createStripeAccountInProgress: false };
+
     case SEND_VERIFICATION_EMAIL_REQUEST:
       return {
         ...state,
@@ -159,6 +164,10 @@ export const stripeAccountCreateError = e => ({
   type: STRIPE_ACCOUNT_CREATE_ERROR,
   payload: e,
   error: true,
+});
+
+export const stripeAccountClearError = () => ({
+  type: STRIPE_ACCOUNT_CLEAR_ERROR,
 });
 
 const fetchCurrentUserHasListingsRequest = () => ({

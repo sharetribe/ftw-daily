@@ -81,6 +81,7 @@ class EditListingPhotosPanel extends Component {
       onImageUpload,
       onUpdateImageOrder,
       onManageDisableScrolling,
+      onPayoutDetailsFormChange,
       submitButtonText,
       panelUpdated,
       updateInProgress,
@@ -139,6 +140,8 @@ class EditListingPhotosPanel extends Component {
           <PayoutDetailsForm
             className={css.payoutDetails}
             disabled={fetchInProgress}
+            createStripeAccountError={errors ? errors.createStripeAccountError : null}
+            onChange={onPayoutDetailsFormChange}
             onSubmit={this.handlePayoutSubmit}
           />
         </Modal>
@@ -168,11 +171,13 @@ EditListingPhotosPanel.propTypes = {
     updateListingError: object,
     showListingsError: object,
     uploadImageError: object,
+    createStripeAccountError: object,
   }),
   fetchInProgress: bool.isRequired,
   images: array,
   listing: object, // TODO Should be propTypes.listing after API support is added.
   onImageUpload: func.isRequired,
+  onPayoutDetailsFormChange: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,

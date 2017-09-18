@@ -10,7 +10,11 @@ import { EditListingWizard, NamedRedirect, PageLayout, Topbar } from '../../comp
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { createStripeAccount, sendVerificationEmail } from '../../ducks/user.duck';
+import {
+  stripeAccountClearError,
+  createStripeAccount,
+  sendVerificationEmail,
+} from '../../ducks/user.duck';
 import {
   createListingDraft,
   updateListingDraft,
@@ -53,6 +57,7 @@ export const EditListingPageComponent = props => {
     currentUser,
     currentUserHasListings,
     currentUserHasOrders,
+    createStripeAccountError,
     fetchInProgress,
     flattenedRoutes,
     getListing,
@@ -70,6 +75,7 @@ export const EditListingPageComponent = props => {
     onLogout,
     onManageDisableScrolling,
     onPayoutDetailsSubmit,
+    onPayoutDetailsFormChange,
     onUpdateImageOrder,
     onUpdateListingDraft,
     onChange,
@@ -102,7 +108,13 @@ export const EditListingPageComponent = props => {
       showListingsError = null,
       uploadImageError = null,
     } = page;
-    const errors = { createListingsError, updateListingError, showListingsError, uploadImageError };
+    const errors = {
+      createListingsError,
+      updateListingError,
+      showListingsError,
+      uploadImageError,
+      createStripeAccountError,
+    };
 
     // Show form if user is posting a new listing or editing existing one
     const disableForm = page.redirectToListing && !showListingsError;
@@ -160,6 +172,7 @@ export const EditListingPageComponent = props => {
           onUpdateListing={onUpdateListing}
           onCreateListingDraft={onCreateListingDraft}
           onUpdateListingDraft={onUpdateListingDraft}
+          onPayoutDetailsFormChange={onPayoutDetailsFormChange}
           onPayoutDetailsSubmit={onPayoutDetailsSubmit}
           onImageUpload={onImageUpload}
           onUpdateImageOrder={onUpdateImageOrder}
@@ -184,6 +197,7 @@ export const EditListingPageComponent = props => {
 
 EditListingPageComponent.defaultProps = {
   authInfoError: null,
+  createStripeAccountError: null,
   currentUser: null,
   currentUserHasOrders: null,
   listing: null,
@@ -198,6 +212,7 @@ const { arrayOf, bool, func, instanceOf, number, object, shape, string, oneOf } 
 EditListingPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
+  createStripeAccountError: PropTypes.instanceOf(Error),
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   currentUserHasOrders: bool,
@@ -212,6 +227,7 @@ EditListingPageComponent.propTypes = {
   onImageUpload: func.isRequired,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  onPayoutDetailsFormChange: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onRemoveListingImage: func.isRequired,
@@ -244,6 +260,7 @@ const mapStateToProps = state => {
   const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   const {
     createStripeAccountInProgress,
+    createStripeAccountError,
     currentUser,
     currentUserHasListings,
     currentUserHasOrders,
@@ -261,6 +278,7 @@ const mapStateToProps = state => {
   return {
     authInfoError,
     authInProgress: authenticationInProgress(state),
+    createStripeAccountError,
     currentUser,
     currentUserHasListings,
     currentUserHasOrders,
@@ -284,6 +302,7 @@ const mapDispatchToProps = dispatch => ({
   onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
+  onPayoutDetailsFormChange: () => dispatch(stripeAccountClearError()),
   onPayoutDetailsSubmit: values => dispatch(createStripeAccount(values)),
   onUpdateImageOrder: imageOrder => dispatch(updateImageOrder(imageOrder)),
   onRemoveListingImage: imageId => dispatch(removeListingImage(imageId)),
