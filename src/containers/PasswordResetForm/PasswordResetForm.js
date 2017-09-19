@@ -8,8 +8,6 @@ import * as validators from '../../util/validators';
 
 import css from './PasswordResetForm.css';
 
-const PASSWORD_MIN_LENGTH = 8;
-
 const PasswordResetFormComponent = props => {
   const {
     rootClassName,
@@ -37,11 +35,26 @@ const PasswordResetFormComponent = props => {
       id: 'PasswordResetForm.passwordTooShort',
     },
     {
-      minLength: PASSWORD_MIN_LENGTH,
+      minLength: validators.PASSWORD_MIN_LENGTH,
+    }
+  );
+  const passwordMaxLengthMessage = intl.formatMessage(
+    {
+      id: 'PasswordResetForm.passwordTooLong',
+    },
+    {
+      maxLength: validators.PASSWORD_MAX_LENGTH,
     }
   );
   const passwordRequired = validators.required(passwordRequiredMessage);
-  const passwordMinLength = validators.minLength(passwordMinLengthMessage, PASSWORD_MIN_LENGTH);
+  const passwordMinLength = validators.minLength(
+    passwordMinLengthMessage,
+    validators.PASSWORD_MIN_LENGTH
+  );
+  const passwordMaxLength = validators.maxLength(
+    passwordMaxLengthMessage,
+    validators.PASSWORD_MAX_LENGTH
+  );
 
   const classes = classNames(rootClassName || css.root, className);
   const submitDisabled = invalid || submitting || inProgress;
@@ -55,7 +68,7 @@ const PasswordResetFormComponent = props => {
         id={`${form}.password`}
         label={passwordLabel}
         placeholder={passwordPlaceholder}
-        validate={[passwordRequired, passwordMinLength]}
+        validate={[passwordRequired, passwordMinLength, passwordMaxLength]}
       />
       <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
         <FormattedMessage id="PasswordResetForm.submitButtonText" />
