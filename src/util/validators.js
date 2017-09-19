@@ -2,6 +2,9 @@ import { types } from 'sharetribe-sdk';
 
 const { LatLng } = types;
 
+export const PASSWORD_MIN_LENGTH = 8;
+export const PASSWORD_MAX_LENGTH = 256;
+
 /**
  * Validator functions and helpers for Redux Forms
  */
