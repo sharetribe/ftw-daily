@@ -5,10 +5,9 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
 import { PrimaryButton, TextInputField, NamedLink } from '../../components';
 import * as validators from '../../util/validators';
+import { isPasswordRecoveryEmailNotFoundError } from '../../util/errors';
 
 import css from './PasswordRecoveryForm.css';
-
-const isNotFoundError = error => error && error.status === 404;
 
 const PasswordRecoveryFormComponent = props => {
   const {
@@ -40,7 +39,9 @@ const PasswordRecoveryFormComponent = props => {
   const emailRequired = validators.required(emailRequiredMessage);
   // In case a given email is not found, pass a custom error message
   // to be rendered with the input component
-  const customErrorText = isNotFoundError(recoveryError) ? emailNotFoundMessage : null;
+  const customErrorText = isPasswordRecoveryEmailNotFoundError(recoveryError)
+    ? emailNotFoundMessage
+    : null;
   const initialEmail = initialValues ? initialValues.email : null;
   const buttonDisabled = (pristine && !initialEmail) || submitting;
   const classes = classNames(rootClassName || css.root, className);

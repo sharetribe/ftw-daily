@@ -7,6 +7,10 @@ import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { ensureCurrentUser } from '../../util/data';
 import {
+  isSignupEmailTakenError,
+  isTooManyEmailVerificationRequestsError,
+} from '../../util/errors';
+import {
   PageLayout,
   NamedLink,
   NamedRedirect,
@@ -22,26 +26,6 @@ import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck
 import { sendVerificationEmail } from '../../ducks/user.duck';
 
 import css from './AuthenticationPage.css';
-
-const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
-const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'too-many-verification-requests';
-
-const firstApiError = error => {
-  if (error && error.data && error.data.errors && error.data.errors.length > 0) {
-    return error.data.errors[0];
-  }
-  return null;
-};
-
-const isEmailTakenApiError = error => {
-  const apiError = firstApiError(error);
-  return apiError && apiError.code === ERROR_CODE_EMAIL_TAKEN;
-};
-
-const isTooManyVerificationRequestsApiError = error => {
-  const apiError = firstApiError(error);
-  return apiError && apiError.code === ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS;
-};
 
 export const AuthenticationPageComponent = props => {
   const {
@@ -108,7 +92,7 @@ export const AuthenticationPageComponent = props => {
 
   const signupErrorMessage = (
     <div className={css.error}>
-      {isEmailTakenApiError(signupError)
+      {isSignupEmailTakenError(signupError)
         ? <FormattedMessage id="AuthenticationPage.signupFailedEmailAlreadyTaken" />
         : <FormattedMessage id="AuthenticationPage.signupFailed" />}
     </div>
@@ -167,7 +151,9 @@ export const AuthenticationPageComponent = props => {
     </NamedLink>
   );
 
-  const resendErrorTranslationId = isTooManyVerificationRequestsApiError(sendVerificationEmailError)
+  const resendErrorTranslationId = isTooManyEmailVerificationRequestsError(
+    sendVerificationEmailError
+  )
     ? 'AuthenticationPage.resendFailedTooManyRequests'
     : 'AuthenticationPage.resendFailed';
   const resendErrorMessage = sendVerificationEmailError

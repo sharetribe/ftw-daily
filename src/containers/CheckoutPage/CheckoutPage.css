@@ -247,16 +247,27 @@
   }
 }
 
+.orderError,
+.notFoundError {
+  margin: 11px 0 12px 0;
+
+  @media (--viewportMedium) {
+    margin: 10px 0 12px 0;
+  }
+}
 .orderError {
-  /* Font */
   color: var(--failColor);
+}
+.notFoundError {
+  color: var(--attentionColor);
 }
 
 .speculateError {
   color: var(--failColor);
+  margin: 19px 0 1px 0;
 
   @media (--viewportLarge) {
-    margin: 0 48px;
+    margin: 28px 48px 0 48px;
   }
 }
 
@@ -276,9 +287,7 @@
     padding-bottom: 55px;
 
     /* Position */
-    margin-top: 120px;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 120px 0 24px 0;
 
     /* Coloring */
     background-color: var(--matterColorLight);

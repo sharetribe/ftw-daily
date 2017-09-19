@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
+import {
+  isPasswordRecoveryEmailNotFoundError,
+  isPasswordRecoveryEmailNotVerifiedError,
+} from '../../util/errors';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
@@ -144,9 +148,9 @@ export const PasswordRecoveryPageComponent = props => {
   );
 
   let content;
-  if (recoveryError && recoveryError.status === 409) {
+  if (isPasswordRecoveryEmailNotVerifiedError(recoveryError)) {
     content = emailNotVerifiedContent;
-  } else if (recoveryError && recoveryError.status === 404) {
+  } else if (isPasswordRecoveryEmailNotFoundError(recoveryError)) {
     content = submitEmailContent;
   } else if (recoveryError) {
     content = genericErrorContent;
