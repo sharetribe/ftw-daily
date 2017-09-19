@@ -195,14 +195,14 @@ export class CheckoutPageComponent extends Component {
       ? currentListing.images[0]
       : null;
 
-    const initiateOrderErrorMessage = initiateOrderError
-      ? <p className={css.orderError}>
-          <FormattedMessage id="CheckoutPage.initiateOrderError" />
-        </p>
-      : null;
     const listingNotFoundErrorMessage = listingNotFound
       ? <p className={css.notFoundError}>
           <FormattedMessage id="CheckoutPage.listingNotFoundError" />
+        </p>
+      : null;
+    const initiateOrderErrorMessage = !listingNotFound && initiateOrderError
+      ? <p className={css.orderError}>
+          <FormattedMessage id="CheckoutPage.initiateOrderError" />
         </p>
       : null;
     const speculateTransactionErrorMessage = speculateTransactionError

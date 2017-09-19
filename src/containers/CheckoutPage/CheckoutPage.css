@@ -287,9 +287,7 @@
     padding-bottom: 55px;
 
     /* Position */
-    margin-top: 120px;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 120px 0 24px 0;
 
     /* Coloring */
     background-color: var(--matterColorLight);

@@ -39,7 +39,7 @@
   "BookingDatesForm.youWontBeChargedInfo": "You won't be charged yet",
   "CheckoutPage.goToLandingPage": "Go to homepage",
   "CheckoutPage.hostedBy": "Hosted by {name}",
-  "CheckoutPage.initiateOrderError": "Payment request failed. Please try again.",
+  "CheckoutPage.initiateOrderError": "Payment request failed. Please refresh the page and try again.",
   "CheckoutPage.listingNotFoundError": "Unfortunately the listing is not available anymore.",
   "CheckoutPage.loadingData": "Loading checkout data...",
   "CheckoutPage.paymentInfo": "You'll only be charged if your request is accepted by the provider.",
