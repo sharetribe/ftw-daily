@@ -27,6 +27,7 @@ import IconSearch from './IconSearch/IconSearch';
 import IconSpinner from './IconSpinner/IconSpinner';
 import ImageCarousel from './ImageCarousel/ImageCarousel';
 import ImageFromFile from './ImageFromFile/ImageFromFile';
+import LayoutSideNavigation from './LayoutSideNavigation/LayoutSideNavigation';
 import ListingCard from './ListingCard/ListingCard';
 import LocationAutocompleteInput, {
   LocationAutocompleteInputField,
@@ -102,6 +103,7 @@ export {
   ImageCarousel,
   ImageFromFile,
   InlineTextButton,
+  LayoutSideNavigation,
   ListingCard,
   LocationAutocompleteInput,
   LocationAutocompleteInputField,
