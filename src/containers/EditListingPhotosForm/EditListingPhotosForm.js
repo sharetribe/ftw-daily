@@ -6,18 +6,12 @@ import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { noEmptyArray } from '../../util/validators';
+import { isUploadListingImageOverLimitError } from '../../util/errors';
 import { AddImages, Button, ValidationError } from '../../components';
 
 import css from './EditListingPhotosForm.css';
 
 const ACCEPT_IMAGES = 'image/*';
-const UPLOAD_OVER_LIMIT_ERROR_CODE = 'upload-over-limit';
-
-// Detect if the given error has the upload-over-limit error code
-const isUploadOverLimit = error => {
-  const hasErrors = error && error.data && error.data.errors && error.data.errors.length > 0;
-  return hasErrors && error.data.errors.some(e => e.code === UPLOAD_OVER_LIMIT_ERROR_CODE);
-};
 
 // Add image wrapper. Label is the only visible element, file input is hidden.
 const RenderAddImage = props => {
@@ -115,7 +109,7 @@ export class EditListingPhotosFormComponent extends Component {
     const imageRequiredMessage = intl.formatMessage({ id: 'EditListingPhotosForm.imageRequired' });
 
     const { createListingsError, showListingsError, uploadImageError } = errors;
-    const uploadOverLimit = isUploadOverLimit(uploadImageError);
+    const uploadOverLimit = isUploadListingImageOverLimitError(uploadImageError);
 
     let uploadImageFailed = null;
 
