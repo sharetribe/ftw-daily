@@ -42,7 +42,32 @@ const SignupFormComponent = props => {
   const passwordRequiredMessage = intl.formatMessage({
     id: 'SignupForm.passwordRequired',
   });
+  const passwordMinLengthMessage = intl.formatMessage(
+    {
+      id: 'SignupForm.passwordTooShort',
+    },
+    {
+      minLength: validators.PASSWORD_MIN_LENGTH,
+    }
+  );
+  const passwordMaxLengthMessage = intl.formatMessage(
+    {
+      id: 'SignupForm.passwordTooLong',
+    },
+    {
+      maxLength: validators.PASSWORD_MAX_LENGTH,
+    }
+  );
+  const passwordMinLength = validators.minLength(
+    passwordMinLengthMessage,
+    validators.PASSWORD_MIN_LENGTH
+  );
+  const passwordMaxLength = validators.maxLength(
+    passwordMaxLengthMessage,
+    validators.PASSWORD_MAX_LENGTH
+  );
   const passwordRequired = validators.required(passwordRequiredMessage);
+  const passwordValidators = [passwordRequired, passwordMinLength, passwordMaxLength];
 
   // firstName
   const firstNameLabel = intl.formatMessage({
@@ -109,7 +134,7 @@ const SignupFormComponent = props => {
           id={`${form}.password`}
           label={passwordLabel}
           placeholder={passwordPlaceholder}
-          validate={passwordRequired}
+          validate={passwordValidators}
         />
       </div>
       <Button className={css.button} type="submit" disabled={submitDisabled}>
