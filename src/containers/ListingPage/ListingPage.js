@@ -349,6 +349,8 @@ export class ListingPageComponent extends Component {
                 nameSet={[
                   { name: 'landscape-crop', size: '400w' },
                   { name: 'landscape-crop2x', size: '800w' },
+                  { name: 'landscape-crop4x', size: '1600w' },
+                  { name: 'landscape-crop6x', size: '2400w' },
                 ]}
                 sizes="100vw"
               />

@@ -4,9 +4,10 @@ import ImageCarousel from './ImageCarousel';
 
 const { UUID } = sdkTypes;
 
-// TODO: change these when the API returns images with the original aspect ratio
-const imageName = 'landscape-crop';
-const imageName2x = 'landscape-crop2x';
+const imageName = 'scaled-small';
+const imageName2x = 'scaled-medium';
+const imageName4x = 'scaled-large';
+const imageName6x = 'scaled-xlarge';
 
 const imageSquare = {
   id: new UUID('image-square'),
@@ -24,6 +25,18 @@ const imageSquare = {
         width: 800,
         height: 800,
         url: 'https://via.placeholder.com/800x800',
+      },
+      {
+        name: imageName4x,
+        width: 1600,
+        height: 1600,
+        url: 'https://via.placeholder.com/1600x1600',
+      },
+      {
+        name: imageName6x,
+        width: 2400,
+        height: 2400,
+        url: 'https://via.placeholder.com/2400x2400',
       },
     ],
   },
@@ -46,6 +59,18 @@ const imagePortrait = {
         height: 1600,
         url: 'https://via.placeholder.com/800x1600',
       },
+      {
+        name: imageName4x,
+        width: 800,
+        height: 1600,
+        url: 'https://via.placeholder.com/800x1600',
+      },
+      {
+        name: imageName6x,
+        width: 1200,
+        height: 2400,
+        url: 'https://via.placeholder.com/1200x2400',
+      },
     ],
   },
 };
@@ -65,6 +90,18 @@ const imageLandscape = {
         width: 800,
         height: 400,
         url: 'https://via.placeholder.com/800x400',
+      },
+      {
+        name: imageName4x,
+        width: 1600,
+        height: 800,
+        url: 'https://via.placeholder.com/1600x800',
+      },
+      {
+        name: imageName6x,
+        width: 2400,
+        height: 1200,
+        url: 'https://via.placeholder.com/2400x1200',
       },
     ],
   },
