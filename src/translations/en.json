@@ -48,6 +48,8 @@
   "CheckoutPage.priceBreakdownTitle": "Booking breakdown",
   "CheckoutPage.speculateTransactionError": "Failed to fetch breakdown information.",
   "CheckoutPage.title": "Book {listingTitle}",
+  "ContactDetailsPage.emailTabTitle": "Email",
+  "ContactDetailsPage.passwordTabTitle": "Password",
   "DateInput.clearDate": "Clear Date",
   "DateInput.closeDatePicker": "Close",
   "DateInput.defaultPlaceholder": "Date input",

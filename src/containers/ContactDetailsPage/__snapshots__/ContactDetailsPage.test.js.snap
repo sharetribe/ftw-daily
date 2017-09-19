@@ -5,6 +5,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
   title="Contact details">
   <Topbar
     authInProgress={false}
+    currentPage="ContactDetailsPage"
     currentUser={null}
     currentUserHasListings={false}
     currentUserHasOrders={null}
@@ -25,5 +26,43 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
     onResendVerificationEmail={[Function]}
     sendVerificationEmailError={null}
     sendVerificationEmailInProgress={false} />
+  <UserNav
+    className={null}
+    rootClassName={null}
+    selectedPageName="ContactDetailsPage" />
+  <LayoutSideNavigation
+    className={null}
+    rootClassName="">
+    <TabNav
+      className={null}
+      rootClassName={null}
+      tabClassName={null}
+      tabRootClassName={null}
+      tabs={
+        Array [
+          Object {
+            "linkProps": Object {
+              "name": "ContactDetailsPage",
+            },
+            "selected": true,
+            "text": <FormattedMessage
+              id="ContactDetailsPage.emailTabTitle"
+              values={Object {}} />,
+          },
+          Object {
+            "linkProps": Object {
+              "name": "PasswordChangePage",
+            },
+            "selected": false,
+            "text": <FormattedMessage
+              id="ContactDetailsPage.passwordTabTitle"
+              values={Object {}} />,
+          },
+        ]
+      } />
+    <div>
+      Main content
+    </div>
+  </LayoutSideNavigation>
 </withRouter(PageLayout)>
 `;

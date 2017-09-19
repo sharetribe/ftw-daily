@@ -2,11 +2,14 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { PageLayout, Topbar } from '../../components';
+import { LayoutSideNavigation, PageLayout, Topbar, UserNav, TabNav } from '../../components';
+
+import css from './ContactDetailsPage.css';
 
 export const ContactDetailsPageComponent = props => {
   const {
@@ -27,10 +30,28 @@ export const ContactDetailsPageComponent = props => {
     onResendVerificationEmail,
   } = props;
 
+  const tabs = [
+    {
+      text: <FormattedMessage id="ContactDetailsPage.emailTabTitle" />,
+      selected: true,
+      linkProps: {
+        name: 'ContactDetailsPage',
+      },
+    },
+    {
+      text: <FormattedMessage id="ContactDetailsPage.passwordTabTitle" />,
+      selected: false,
+      linkProps: {
+        name: 'PasswordChangePage',
+      },
+    },
+  ];
+
   return (
     <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Contact details">
       <Topbar
         authInProgress={authInProgress}
+        currentPage="ContactDetailsPage"
         currentUser={currentUser}
         currentUserHasListings={currentUserHasListings}
         currentUserHasOrders={currentUserHasOrders}
@@ -44,6 +65,11 @@ export const ContactDetailsPageComponent = props => {
         sendVerificationEmailInProgress={sendVerificationEmailInProgress}
         sendVerificationEmailError={sendVerificationEmailError}
       />
+      <UserNav selectedPageName="ContactDetailsPage" />
+      <LayoutSideNavigation>
+        <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />
+        <div>Main content</div>
+      </LayoutSideNavigation>
     </PageLayout>
   );
 };
@@ -99,7 +125,7 @@ const mapStateToProps = state => {
     currentUser,
     currentUserHasListings,
     currentUserHasOrders,
-    currentUserNotificationCount: notificationCount,
+    notificationCount,
     isAuthenticated,
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
