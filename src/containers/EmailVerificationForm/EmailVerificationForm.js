@@ -17,7 +17,7 @@ const EmailVerificationFormComponent = props => {
   } = props;
 
   const email = <strong>{currentUser.attributes.email}</strong>;
-  const name = currentUser.attributes.profile.displayName;
+  const name = currentUser.attributes.profile.firstName;
 
   const errorMessage = (
     <div className={css.error}>

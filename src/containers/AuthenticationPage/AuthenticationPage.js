@@ -137,7 +137,7 @@ export const AuthenticationPageComponent = props => {
     </div>
   );
 
-  const name = user.attributes.profile.displayName;
+  const name = user.attributes.profile.firstName;
   const email = <span className={css.email}>{user.attributes.email}</span>;
 
   const resendEmailLink = (

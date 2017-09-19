@@ -64,7 +64,7 @@ const TopbarMobileMenu = props => {
     ? <NotificationBadge className={css.notificationBadge} count={notificationCount} />
     : null;
 
-  const displayName = user.attributes.profile.displayName;
+  const displayName = user.attributes.profile.firstName;
   const currentPageClass = page => {
     return currentPage === page ? css.currentPageLink : null;
   };
