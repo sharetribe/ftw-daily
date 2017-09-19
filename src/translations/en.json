@@ -227,6 +227,8 @@
   "PaginationLinks.next": "Next page",
   "PaginationLinks.previous": "Previous page",
   "PaginationLinks.toPage": "Go to page {page}",
+  "PasswordChangePage.emailTabTitle": "Email",
+  "PasswordChangePage.passwordTabTitle": "Password",
   "PasswordRecoveryForm.emailLabel": "Email",
   "PasswordRecoveryForm.emailNotFound": "Hmm. We didn't find an account with that email. Please double-check your email and try again.",
   "PasswordRecoveryForm.emailPlaceholder": "john.doe@example.com",
