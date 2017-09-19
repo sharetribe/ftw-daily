@@ -137,6 +137,22 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
         <li
           className=""
           role="menuitem">
+          <a
+            className=""
+            href="/account"
+            onClick={[Function]}
+            style={Object {}}
+            title={null}>
+            <span
+              className={undefined} />
+            <span>
+              Account settings
+            </span>
+          </a>
+        </li>
+        <li
+          className=""
+          role="menuitem">
           <button
             className=""
             onClick={[Function]}>

@@ -5,6 +5,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
+import { ACCOUNT_SETTING_PAGES } from '../../routesConfiguration';
 import * as propTypes from '../../util/propTypes';
 import { ensureCurrentUser } from '../../util/data';
 import { AvatarLarge, InlineTextButton, NamedLink, NotificationBadge } from '../../components';
@@ -66,7 +67,9 @@ const TopbarMobileMenu = props => {
 
   const displayName = user.attributes.profile.firstName;
   const currentPageClass = page => {
-    return currentPage === page ? css.currentPageLink : null;
+    const isAccountSettingsPage = page === 'AccountSettingsPage' &&
+      ACCOUNT_SETTING_PAGES.includes(currentPage);
+    return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
   };
 
   return (
@@ -98,6 +101,12 @@ const TopbarMobileMenu = props => {
           name="ProfileSettingsPage"
         >
           <FormattedMessage id="TopbarMobileMenu.profileSettingsLink" />
+        </NamedLink>
+        <NamedLink
+          className={classNames(css.navigationLink, currentPageClass('AccountSettingsPage'))}
+          name="AccountSettingsPage"
+        >
+          <FormattedMessage id="TopbarMobileMenu.accountSettingsLink" />
         </NamedLink>
 
       </div>

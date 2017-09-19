@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import { ACCOUNT_SETTING_PAGES } from '../../routesConfiguration';
 import * as propTypes from '../../util/propTypes';
 import {
   Avatar,
@@ -60,8 +61,11 @@ const TopbarDesktop = props => {
     : null;
 
   const currentPageClass = page => {
-    return currentPage === page ? css.currentPage : null;
+    const isAccountSettingsPage = page === 'AccountSettingsPage' &&
+      ACCOUNT_SETTING_PAGES.includes(currentPage);
+    return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
   };
+
   const profileMenu = isAuthenticated
     ? <Menu>
         <MenuLabel className={css.profileMenuLabel} isOpenClassName={css.profileMenuIsOpen}>
@@ -87,6 +91,15 @@ const TopbarDesktop = props => {
             >
               <span className={css.menuItemBorder} />
               <FormattedMessage id="TopbarDesktop.yourListingsLink" />
+            </NamedLink>
+          </MenuItem>
+          <MenuItem key="AccountSettingsPage">
+            <NamedLink
+              className={classNames(css.yourListingsLink, currentPageClass('AccountSettingsPage'))}
+              name="AccountSettingsPage"
+            >
+              <span className={css.menuItemBorder} />
+              <FormattedMessage id="TopbarDesktop.accountSettingsLink" />
             </NamedLink>
           </MenuItem>
           <MenuItem key="logout">
