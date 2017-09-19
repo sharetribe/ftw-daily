@@ -8,6 +8,7 @@ import { pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureUser, ensureTransaction, ensureBooking } from '../../util/data';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
+import { isTransactionInitiateListingNotFoundError } from '../../util/errors';
 import {
   AvatarMedium,
   BookingBreakdown,
@@ -129,6 +130,15 @@ export class CheckoutPageComponent extends Component {
       currentUser,
     } = this.props;
 
+    // Since the listing data is already given from the ListingPage
+    // and stored to handle refreshes, it might not have the possible
+    // deleted or closed information in it. If the transaction
+    // initiate or the speculative initiate fail due to the listing
+    // being deleted or closec, we should dig the information from the
+    // errors and not the listing data.
+    const listingNotFound = isTransactionInitiateListingNotFoundError(speculateTransactionError) ||
+      isTransactionInitiateListingNotFoundError(initiateOrderError);
+
     const isLoading = !this.state.dataLoaded || speculateTransactionInProgress;
 
     const { listing, bookingDates } = this.state.pageData;
@@ -142,14 +152,13 @@ export class CheckoutPageComponent extends Component {
       currentAuthor &&
       currentAuthor.id &&
       currentAuthor.id.uuid === currentUser.id.uuid;
-    const listingIsOpen = currentListing.id && currentListing.attributes.open;
 
     const hasListingAndAuthor = !!(currentListing.id && currentAuthor.id);
     const hasBookingDates = !!(bookingDates &&
       bookingDates.bookingStart &&
       bookingDates.bookingEnd);
     const hasRequiredData = hasListingAndAuthor && hasBookingDates;
-    const canShowPage = hasRequiredData && listingIsOpen && !isOwnListing;
+    const canShowPage = hasRequiredData && !isOwnListing;
     const shouldRedirect = !isLoading && !canShowPage;
 
     // Redirect back to ListingPage if data is missing.
@@ -177,7 +186,7 @@ export class CheckoutPageComponent extends Component {
 
     // Allow showing page when currentUser is still being downloaded,
     // but show payment form only when user info is loaded.
-    const showPaymentForm = !!(currentUser && hasRequiredData);
+    const showPaymentForm = !!(currentUser && hasRequiredData && !listingNotFound);
 
     const listingTitle = currentListing.attributes.title;
     const title = intl.formatMessage({ id: 'CheckoutPage.title' }, { listingTitle });
@@ -189,6 +198,11 @@ export class CheckoutPageComponent extends Component {
     const initiateOrderErrorMessage = initiateOrderError
       ? <p className={css.orderError}>
           <FormattedMessage id="CheckoutPage.initiateOrderError" />
+        </p>
+      : null;
+    const listingNotFoundErrorMessage = listingNotFound
+      ? <p className={css.notFoundError}>
+          <FormattedMessage id="CheckoutPage.listingNotFoundError" />
         </p>
       : null;
     const speculateTransactionErrorMessage = speculateTransactionError
@@ -271,6 +285,7 @@ export class CheckoutPageComponent extends Component {
                 <FormattedMessage id="CheckoutPage.paymentTitle" />
               </h3>
               {initiateOrderErrorMessage}
+              {listingNotFoundErrorMessage}
               {showPaymentForm
                 ? <StripePaymentForm
                     className={css.paymentForm}
