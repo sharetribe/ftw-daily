@@ -66,10 +66,15 @@ export class PasswordResetPageComponent extends Component {
       });
     };
 
+    const recoveryLink = (
+      <NamedLink name="PasswordRecoveryPage">
+        <FormattedMessage id="PasswordResetPage.recoveryLinkText" />
+      </NamedLink>
+    );
     const paramsErrorContent = (
       <div className={css.content}>
-        <p className={css.error}>
-          <FormattedMessage id="PasswordResetPage.invalidUrlParams" />
+        <p>
+          <FormattedMessage id="PasswordResetPage.invalidUrlParams" values={{ recoveryLink }} />
         </p>
       </div>
     );
