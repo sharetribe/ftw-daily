@@ -151,12 +151,14 @@
 
     /* Dimensions */
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     min-height: 65px;
     margin: 0;
+
+    /* Center contents within flexbox */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     /* Push the text up from center */
     padding-bottom: 2px;
