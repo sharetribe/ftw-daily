@@ -1,0 +1,32 @@
+@import '../../marketplace.css';
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  min-height: 48px;
+
+  @media (--viewportMedium) {
+    min-height: 56px;
+  }
+
+  @media (--viewportLarge) {
+    min-height: auto;
+    flex-direction: column;
+  }
+}
+
+.tab {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  margin-left: 16px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  @media (--viewportLarge) {
+    margin-left: 0;
+  }
+}

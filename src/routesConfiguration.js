@@ -11,6 +11,7 @@ import {
   ManageListingsPage,
   NotFoundPage,
   OrderPage,
+  PasswordChangePage,
   PasswordResetPage,
   PasswordRecoveryPage,
   PayoutPreferencesPage,
@@ -22,6 +23,8 @@ import {
   StyleguidePage,
   EmailVerificationPage,
 } from './containers';
+
+export const ACCOUNT_SETTINGS_PAGES = ['ContactDetailsPage', 'PasswordChangePage'];
 
 // https://en.wikipedia.org/wiki/Universally_unique_identifier#Nil_UUID
 const draftId = '00000000-0000-0000-0000-000000000000';
@@ -227,7 +230,7 @@ const routesConfiguration = [
     path: '/account',
     auth: true,
     exact: true,
-    name: 'AccountPage',
+    name: 'AccountSettingsPage',
     component: () => <NamedRedirect name="ContactDetailsPage" />,
     routes: [
       {
@@ -236,6 +239,13 @@ const routesConfiguration = [
         exact: true,
         name: 'ContactDetailsPage',
         component: props => <ContactDetailsPage {...props} />,
+      },
+      {
+        path: '/account/change-password',
+        auth: true,
+        exact: true,
+        name: 'PasswordChangePage',
+        component: props => <PasswordChangePage {...props} />,
       },
       {
         path: '/account/payout-preferences',

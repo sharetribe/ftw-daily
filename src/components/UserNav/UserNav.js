@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
+import { ACCOUNT_SETTINGS_PAGES } from '../../routesConfiguration';
 import { TabNavHorizontal } from '../../components';
 
 import css from './UserNav.css';
@@ -20,10 +21,10 @@ const UserNav = props => {
     },
     {
       text: <FormattedMessage id="ManageListingsPage.accountSettings" />,
-      selected: selectedPageName === 'AccountPage',
-      disabled: true,
+      selected: ACCOUNT_SETTINGS_PAGES.includes(selectedPageName),
+      disabled: false,
       linkProps: {
-        name: 'AccountPage',
+        name: 'ContactDetailsPage',
       },
     },
     {

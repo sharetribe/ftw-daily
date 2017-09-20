@@ -74,6 +74,8 @@
 
 /* ================ Z-index base levels ================ */
 
+  /* topbar is positioned slightly above content */
+  --zIndexTopbar: 10;
   /* small popups on UI should use z-indexes above 50 */
   --zIndexPopup: 50;
   /* modals and UI overlays should use z-indexes above 100 */

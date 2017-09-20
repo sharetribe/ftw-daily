@@ -8,7 +8,7 @@
   width: 100%;
 
   /* Top Bar's drop shadow should always be visible */
-  z-index: 10;
+  z-index: var(--zIndexTopbar);
   position: relative;
 }
 

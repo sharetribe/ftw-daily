@@ -27,6 +27,11 @@ import IconSearch from './IconSearch/IconSearch';
 import IconSpinner from './IconSpinner/IconSpinner';
 import ImageCarousel from './ImageCarousel/ImageCarousel';
 import ImageFromFile from './ImageFromFile/ImageFromFile';
+import LayoutSideNavigation, {
+  ContentWrapper,
+  SideNavWrapper,
+  TopbarWrapper,
+} from './LayoutSideNavigation/LayoutSideNavigation';
 import ListingCard from './ListingCard/ListingCard';
 import LocationAutocompleteInput, {
   LocationAutocompleteInputField,
@@ -77,6 +82,7 @@ export {
   BirthdayInputField,
   BookingBreakdown,
   Button,
+  ContentWrapper,
   CurrencyInputField,
   DateInputField,
   DateRangeInputField,
@@ -102,6 +108,7 @@ export {
   ImageCarousel,
   ImageFromFile,
   InlineTextButton,
+  LayoutSideNavigation,
   ListingCard,
   LocationAutocompleteInput,
   LocationAutocompleteInputField,
@@ -133,6 +140,7 @@ export {
   SearchResultsPanel,
   SecondaryButton,
   SelectField,
+  SideNavWrapper,
   StripeBankAccountTokenInputField,
   TabNav,
   TabNavHorizontal,
@@ -141,6 +149,7 @@ export {
   Topbar,
   TopbarDesktop,
   TopbarMobileMenu,
+  TopbarWrapper,
   UserNav,
   ValidationError,
 };

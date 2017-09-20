@@ -18,9 +18,10 @@ import {
   UserNav,
 } from '../../components';
 
-import css from './ContactDetailsPage.css';
 
-export const ContactDetailsPageComponent = props => {
+import css from './PasswordChangePage.css';
+
+export const PasswordChangePageComponent = props => {
   const {
     authInfoError,
     authInProgress,
@@ -41,15 +42,15 @@ export const ContactDetailsPageComponent = props => {
 
   const tabs = [
     {
-      text: <FormattedMessage id="ContactDetailsPage.emailTabTitle" />,
-      selected: true,
+      text: <FormattedMessage id="PasswordChangePage.emailTabTitle" />,
+      selected: false,
       linkProps: {
         name: 'ContactDetailsPage',
       },
     },
     {
-      text: <FormattedMessage id="ContactDetailsPage.passwordTabTitle" />,
-      selected: false,
+      text: <FormattedMessage id="PasswordChangePage.passwordTabTitle" />,
+      selected: true,
       linkProps: {
         name: 'PasswordChangePage',
       },
@@ -62,7 +63,7 @@ export const ContactDetailsPageComponent = props => {
         <TopbarWrapper>
           <Topbar
             authInProgress={authInProgress}
-            currentPage="ContactDetailsPage"
+            currentPage="PasswordChangePage"
             currentUser={currentUser}
             currentUserHasListings={currentUserHasListings}
             currentUserHasOrders={currentUserHasOrders}
@@ -76,7 +77,7 @@ export const ContactDetailsPageComponent = props => {
             sendVerificationEmailInProgress={sendVerificationEmailInProgress}
             sendVerificationEmailError={sendVerificationEmailError}
           />
-          <UserNav selectedPageName="ContactDetailsPage" />
+          <UserNav selectedPageName="PasswordChangePage" />
         </TopbarWrapper>
         <SideNavWrapper>
           <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />
@@ -89,7 +90,7 @@ export const ContactDetailsPageComponent = props => {
   );
 };
 
-ContactDetailsPageComponent.defaultProps = {
+PasswordChangePageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
   currentUserHasOrders: null,
@@ -100,7 +101,7 @@ ContactDetailsPageComponent.defaultProps = {
 
 const { bool, func, instanceOf, number, object, shape } = PropTypes;
 
-ContactDetailsPageComponent.propTypes = {
+PasswordChangePageComponent.propTypes = {
   authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
@@ -156,8 +157,8 @@ const mapDispatchToProps = dispatch => ({
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
-const ContactDetailsPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
-  ContactDetailsPageComponent
+const PasswordChangePage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
+  PasswordChangePageComponent
 );
 
-export default ContactDetailsPage;
+export default PasswordChangePage;
