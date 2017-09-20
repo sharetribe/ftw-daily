@@ -37,7 +37,7 @@
   "BookingDatesForm.requestToBook": "Request to book",
   "BookingDatesForm.requiredDate": "Oops, make sure your date is correct!",
   "BookingDatesForm.youWontBeChargedInfo": "You won't be charged yet",
-  "CheckoutPage.errorlistingLinkText": "the listing page",
+  "CheckoutPage.errorlistingLinkText": "the sauna page",
   "CheckoutPage.goToLandingPage": "Go to homepage",
   "CheckoutPage.hostedBy": "Hosted by {name}",
   "CheckoutPage.initiateOrderError": "Payment request failed. Please go back to {listingLink} and try again. If the error persists, try refreshing the page or contacting the marketplace admin.",
