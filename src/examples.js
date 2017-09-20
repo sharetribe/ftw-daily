@@ -9,6 +9,15 @@ import * as DateInputField from './components/DateInputField/DateInputField.exam
 import * as DateRangeInputField from './components/DateRangeInputField/DateRangeInputField.example';
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
+import * as IconBannedUser from './components/IconBannedUser/IconBannedUser.example';
+import * as IconClose from './components/IconClose/IconClose.example';
+import * as IconEmailAttention from './components/IconEmailAttention/IconEmailAttention.example';
+import * as IconEmailSent from './components/IconEmailSent/IconEmailSent.example';
+import * as IconEmailSuccess from './components/IconEmailSuccess/IconEmailSuccess.example';
+import * as IconKeys from './components/IconKeys/IconKeys.example';
+import * as IconKeysSuccess from './components/IconKeysSuccess/IconKeysSuccess.example';
+import * as IconSearch from './components/IconSearch/IconSearch.example';
+import * as IconSpinner from './components/IconSpinner/IconSpinner.example';
 import * as ImageCarousel from './components/ImageCarousel/ImageCarousel.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as LocationAutocompleteInput
@@ -69,6 +78,15 @@ export {
   EditListingPricingForm,
   EditListingWizard,
   ExpandingTextarea,
+  IconBannedUser,
+  IconClose,
+  IconEmailAttention,
+  IconEmailSent,
+  IconEmailSuccess,
+  IconKeys,
+  IconKeysSuccess,
+  IconSearch,
+  IconSpinner,
   ImageCarousel,
   ListingCard,
   LocationAutocompleteInput,
