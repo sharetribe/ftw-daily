@@ -10,7 +10,6 @@
   flex-direction: column;
   min-height: 100vh;
   height: auto;
-  padding: 0 24px;
 }
 
 .content {
@@ -42,8 +41,8 @@
 .greeting {
   /* Font */
   @apply --marketplaceH1FontStyles;
-
-  margin-bottom: 12px;
+  margin-bottom: 1px;
+  margin-top: 16px;
 }
 
 .logoutButton {
@@ -59,22 +58,22 @@
 
 .inbox {
   /* Font */
-  @apply --marketplaceH1FontStyles;
+  @apply --marketplaceH2FontStyles;
   color: var(--marketplaceColor);
   position: relative;
 
   margin-top: auto;
-  margin-bottom: 18px;
+  margin-bottom: 13px;
 }
 
 .navigationLink {
   /* Font */
-  @apply --marketplaceH1FontStyles;
+  @apply --marketplaceH2FontStyles;
   color: var(--marketplaceColor);
 
   /* Layout */
   margin-top: 0;
-  margin-bottom: 25px;
+  margin-bottom: 11px;
 }
 .currentPageLink {
   color: var(--marketplaceColorDark);

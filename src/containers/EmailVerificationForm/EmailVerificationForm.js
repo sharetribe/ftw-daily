@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { reduxForm, Field, propTypes as formPropTypes } from 'redux-form';
-import { PrimaryButton, NamedLink, IconEmailAttention, IconEmailSuccess } from '../../components';
+import { NamedLink, IconEmailAttention, IconEmailSuccess } from '../../components';
 import * as propTypes from '../../util/propTypes';
 
 import css from './EmailVerificationForm.css';
@@ -28,12 +28,12 @@ const EmailVerificationFormComponent = props => {
   const verifyEmail = (
     <div className={css.root}>
       <div>
-        <IconEmailAttention />
-        <h1 className={css.title}>
+        <IconEmailAttention className={css.modalIcon} />
+        <h1 className={css.modalTitle}>
           <FormattedMessage id="EmailVerificationForm.verifyEmailAddress" />
         </h1>
 
-        <p>
+        <p className={css.modalMessage}>
           <FormattedMessage id="EmailVerificationForm.finishAccountSetup" values={{ email }} />
         </p>
 
@@ -44,12 +44,15 @@ const EmailVerificationFormComponent = props => {
       <form onSubmit={handleSubmit}>
         <Field component="input" type="hidden" name="verificationToken" />
 
-        <PrimaryButton className={css.button} type="submit" disabled={submitting || inProgress}>
+        <div className={css.bottomWrapper}>
+          <NamedLink className={css.submitButton} type="submit" disabled={submitting || inProgress}>
 
-          {submitting || inProgress
-            ? <FormattedMessage id="EmailVerificationForm.verifying" />
-            : <FormattedMessage id="EmailVerificationForm.verify" />}
-        </PrimaryButton>
+            {submitting || inProgress
+              ? <FormattedMessage id="EmailVerificationForm.verifying" />
+              : <FormattedMessage id="EmailVerificationForm.verify" />}
+          </NamedLink>
+
+        </div>
       </form>
     </div>
   );
@@ -57,20 +60,22 @@ const EmailVerificationFormComponent = props => {
   const alreadyVerified = (
     <div className={css.root}>
       <div>
-        <IconEmailSuccess />
-        <h1 className={css.title}>
+        <IconEmailSuccess className={css.modalIcon} />
+        <h1 className={css.modalTitle}>
           <FormattedMessage id="EmailVerificationForm.successTitle" values={{ name }} />
         </h1>
 
-        <p>
+        <p className={css.modalMessage}>
           <FormattedMessage id="EmailVerificationForm.successText" />
         </p>
 
       </div>
 
-      <NamedLink className={css.button} name="LandingPage">
-        <FormattedMessage id="EmailVerificationForm.successButtonText" />
-      </NamedLink>
+      <div className={css.bottomWrapper}>
+        <NamedLink className={css.submitButton} name="LandingPage">
+          <FormattedMessage id="EmailVerificationForm.successButtonText" />
+        </NamedLink>
+      </div>
     </div>
   );
 

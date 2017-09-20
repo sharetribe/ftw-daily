@@ -60,9 +60,5 @@
 }
 
 .error {
-  color: red;
-}
-
-.submitButton {
-  margin-top: 40px;
+  @apply --marketplaceModalErrorStyles;
 }

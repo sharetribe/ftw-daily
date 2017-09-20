@@ -30,6 +30,7 @@ describe('EditListingPageComponent', () => {
         onImageUpload={noop}
         onRemoveListingImage={noop}
         onManageDisableScrolling={noop}
+        onPayoutDetailsFormChange={noop}
         onPayoutDetailsSubmit={noop}
         onUpdateImageOrder={noop}
         onChange={noop}

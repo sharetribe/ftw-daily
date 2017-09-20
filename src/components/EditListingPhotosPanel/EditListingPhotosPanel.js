@@ -81,6 +81,7 @@ class EditListingPhotosPanel extends Component {
       onImageUpload,
       onUpdateImageOrder,
       onManageDisableScrolling,
+      onPayoutDetailsFormChange,
       submitButtonText,
       panelUpdated,
       updateInProgress,
@@ -118,6 +119,7 @@ class EditListingPhotosPanel extends Component {
           updateError={errors.updateListingError}
           updateInProgress={updateInProgress}
         />
+
         <Modal
           id="EditListingPhotosPanel.payoutModal"
           className={css.payoutModal}
@@ -125,22 +127,25 @@ class EditListingPhotosPanel extends Component {
           onClose={this.handlePayoutModalClose}
           onManageDisableScrolling={onManageDisableScrolling}
         >
-          <div className={css.modalHeading}>
-            <h1 className={css.payoutModalTitle}>
+          <div className={css.modalHeaderWrapper}>
+            <h1 className={css.modalTitle}>
               <FormattedMessage id="EditListingPhotosPanel.payoutModalTitleOneMoreThing" />
               <br />
               <FormattedMessage id="EditListingPhotosPanel.payoutModalTitlePayoutPreferences" />
             </h1>
-            <p>
+            <p className={css.modalMessage}>
               <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
             </p>
           </div>
           <PayoutDetailsForm
             className={css.payoutDetails}
             disabled={fetchInProgress}
+            createStripeAccountError={errors ? errors.createStripeAccountError : null}
+            onChange={onPayoutDetailsFormChange}
             onSubmit={this.handlePayoutSubmit}
           />
         </Modal>
+
       </div>
     );
   }
@@ -166,11 +171,13 @@ EditListingPhotosPanel.propTypes = {
     updateListingError: object,
     showListingsError: object,
     uploadImageError: object,
+    createStripeAccountError: object,
   }),
   fetchInProgress: bool.isRequired,
   images: array,
   listing: object, // TODO Should be propTypes.listing after API support is added.
   onImageUpload: func.isRequired,
+  onPayoutDetailsFormChange: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,

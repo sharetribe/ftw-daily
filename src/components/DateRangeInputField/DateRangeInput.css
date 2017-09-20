@@ -26,7 +26,7 @@
       top: 45px;
     }
 
-    @media (--viewportLarge) {
+    @media (--viewportMedium) {
       top: 42px;
       min-height: auto;
       box-shadow: var(--boxShadowPopup);
@@ -209,10 +209,10 @@
  */
 .withMobileMargins {
   & :global(.DateRangePickerInput) {
-    width: calc(100% - 48px);
+    width: calc(100vw - 48px);
     margin: 0 24px 3px 24px;
 
-    @media (--viewportLarge) {
+    @media (--viewportMedium) {
       width: 100%;
       margin: 0;
     }
@@ -220,17 +220,17 @@
 
   /* Create gutter between inputs */
   & :global(.DateInput) {
-    width: calc(100% - 6px);
+    width: calc(50% - 6px);
 
     @media (--viewportMedium) {
-      width: calc(100% - 12px);
+      width: calc(50% - 12px);
     }
   }
 
   & :global(.DateInput:first-of-type) {
     margin-right: 12px;
 
-    @media (--viewportLarge) {
+    @media (--viewportMedium) {
       margin-right: 24px;
     }
   }

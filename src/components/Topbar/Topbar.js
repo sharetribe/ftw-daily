@@ -207,12 +207,12 @@ class TopbarComponent extends Component {
     const email = user.id ? <span className={css.email}>{user.attributes.email}</span> : '';
 
     const resendEmailLink = (
-      <InlineTextButton className={css.verifyLink} onClick={onResendVerificationEmail}>
+      <InlineTextButton className={css.helperLink} onClick={onResendVerificationEmail}>
         <FormattedMessage id="Topbar.resendEmailLinkText" />
       </InlineTextButton>
     );
     const fixEmailLink = (
-      <NamedLink className={css.verifyLink} name="ProfileSettingsPage">
+      <NamedLink className={css.helperLink} name="ProfileSettingsPage">
         <FormattedMessage id="Topbar.fixEmailLinkText" />
       </NamedLink>
     );
@@ -223,7 +223,7 @@ class TopbarComponent extends Component {
       ? 'Topbar.resendFailedTooManyRequests'
       : 'Topbar.resendFailed';
     const resendErrorMessage = sendVerificationEmailError
-      ? <p className={css.resendError}>
+      ? <p className={css.error}>
           <FormattedMessage id={resendErrorTranslationId} />
         </p>
       : null;
@@ -274,6 +274,7 @@ class TopbarComponent extends Component {
         </Modal>
         <Modal
           id="TopbarMobileSearch"
+          containerClassName={css.modalContainer}
           isOpen={isMobileSearchOpen}
           onClose={this.handleMobileSearchClose}
           onManageDisableScrolling={onManageDisableScrolling}
@@ -290,6 +291,7 @@ class TopbarComponent extends Component {
             </p>
           </div>
         </Modal>
+
         <Modal
           id="EmailVerificationReminder"
           containerClassName={css.verifyEmailModal}
@@ -301,25 +303,29 @@ class TopbarComponent extends Component {
           closeButtonMessage={closeButtonMessage}
         >
           <div className={css.verifyEmailContent}>
-            <IconEmailAttention />
-            <h1 className={css.verifyTitle}>
+            <IconEmailAttention className={css.modalIcon} />
+            <h1 className={css.modalTitle}>
               <FormattedMessage id="Topbar.verifyEmailTitle" />
             </h1>
-            <p className={css.verifyHelpText}>
+            <p className={css.modalMessage}>
               <FormattedMessage id="Topbar.verifyEmailText" />
             </p>
-            <p className={css.checkInboxText}>
+            <p className={css.modalMessage}>
               <FormattedMessage id="Topbar.checkInbox" values={{ email }} />
             </p>
             {resendErrorMessage}
-            <p className={css.resendEmail}>
-              {sendVerificationEmailInProgress
-                ? <FormattedMessage id="Topbar.sendingEmail" />
-                : <FormattedMessage id="Topbar.resendEmail" values={{ resendEmailLink }} />}
-            </p>
-            <p className={css.fixEmail}>
-              <FormattedMessage id="Topbar.fixEmail" values={{ fixEmailLink }} />
-            </p>
+
+            <div className={css.bottomWrapper}>
+              <p className={css.helperText}>
+                {sendVerificationEmailInProgress
+                  ? <FormattedMessage id="Topbar.sendingEmail" />
+                  : <FormattedMessage id="Topbar.resendEmail" values={{ resendEmailLink }} />}
+              </p>
+              <p className={css.helperText}>
+                <FormattedMessage id="Topbar.fixEmail" values={{ fixEmailLink }} />
+              </p>
+            </div>
+
           </div>
         </Modal>
       </div>

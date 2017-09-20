@@ -101,6 +101,11 @@
   --topbarHeightDesktop: 72px;
 
 
+/* ================ Modal default padding ================ */
+
+  --modalPadding: 24px 24px 48px 24px;
+  --modalPaddingMedium: 55px 60px 55px 60px;
+
 
 /* ================ Links ================ */
 
@@ -284,6 +289,248 @@
     &:focus {
       border-bottom-color: var(--matterColor);
       outline: none;
+    }
+  }
+
+
+
+
+/* ================ Modals ================ */
+
+  --marketplaceModalRootStyles {
+    /* PageLayout is using flex: AuthenticationPage's .root takes all available space */
+    flex-grow: 1;
+
+    /* AuthenticationPage's root uses flexbox */
+    display: flex;
+
+    @media (--viewportMedium) {
+      justify-content: center;
+      align-items: flex-start;
+      @apply --backgroundImage;
+    }
+  }
+
+  --marketplaceModalFormRootStyles {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  --marketplaceModalBaseStyles {
+    flex-grow: 1;
+
+    /* Create context so the close button can be positioned within it */
+    position: relative;
+
+    /* Display and dimensions */
+    display: flex;
+    flex-direction: column;
+    padding: var(--modalPadding);
+
+    background-color: var(--matterColorLight);
+    border-radius: var(--borderRadius);
+
+    @media (--viewportMedium) {
+      flex-basis: 480px;
+      flex-grow: 0;
+      /* min-height: 568px; */
+      padding: var(--modalPaddingMedium);
+      margin-top: 12.5vh;
+      margin-bottom: 12.5vh;
+    }
+  }
+
+  --marketplaceModalInMobileBaseStyles {
+    flex-grow: 1;
+
+    /* Create context so the close button can be positioned within it */
+    position: relative;
+
+    /* Display and dimensions */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 0;
+
+    background-color: var(--matterColorLight);
+    border-radius: var(--borderRadius);
+
+    @media (--viewportMedium) {
+      flex-basis: 480px;
+      flex-grow: 0;
+      height: 100%;
+      padding: 0;
+      background-color: transparent;
+      border-radius: 0;
+    }
+  }
+
+  /* Modal title */
+
+  --marketplaceModalTitleStyles {
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -0.5px;
+    margin: 0;
+    font-weight: var(--fontWeightBold);
+
+    @media (--viewportMedium) {
+      font-weight: var(--fontWeightSemiBold);
+      line-height: 40px;
+      letter-spacing: -0.9px;
+      margin: 0;
+    }
+  }
+
+
+  /* Modal message */
+
+  --marketplaceModalParagraphStyles {
+    margin: 18px 0 0 0;
+
+    @media (--viewportMedium) {
+      margin: 24px 0 0 0;
+    }
+  }
+
+
+  /* Bottom wrapper for the modal */
+
+  --marketplaceModalBottomWrapper {
+    text-align: center;
+    margin-top: 60px;
+    align-self: stretch;
+
+    @media (--viewportMedium) {
+      margin-top: 96px;
+    }
+  }
+
+  /* Adjust the bottomWrapper's margin to match modals without the helper text */
+  --marketplaceModalBottomWrapperText {
+    margin-top: -24px;
+    padding-bottom: 8px;
+
+    @media (--viewportMedium) {
+      padding-bottom: 0;
+    }
+  }
+
+  --marketplaceModalHelperText {
+    @apply --marketplaceH5FontStyles;
+    color: var(--matterColorAnti);
+    margin: 0;
+
+    @media (--viewportMedium) {
+      margin: 0;
+    }
+  }
+
+  --marketplaceModalHelperLink {
+    @apply --marketplaceH5FontStyles;
+    color: var(--matterColor);
+    margin: 0;
+
+    @media (--viewportMedium) {
+      margin: 0;
+    }
+  }
+
+  /* Modal Close icon */
+
+  --marketplaceModalCloseStyles {
+
+    /* Position inside modal */
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    /* Some content (like map) is positioning itself on top of close button without z-index handling */
+    z-index: calc(var(--zIndexModal) + 1);
+
+    /* Safari didn't know how to baseline-align svg icon and text */
+    display: flex;
+    align-items: flex-start;
+    width: auto;
+
+    /* Sizing (touch area) */
+    padding: 24px 30px;
+    margin: 0;
+    border: 0;
+
+    @media (--viewportMedium) {
+      padding: 27px 30px;
+    }
+
+    /* Colors */
+    background-color: transparent;
+    color: var(--matterColor);
+
+    cursor: pointer;
+
+    &:enabled:hover {
+      background-color: transparent;
+      color: var(--matterColorDark);
+      box-shadow: none;
+      text-decoration: none;
+    }
+    &:enabled:active {
+      background-color: transparent;
+      color: var(--matterColorDark);
+    }
+    &:disabled {
+      background-color: transparent;
+    }
+  }
+
+  --marketplaceModalIconStyles {
+    height: 48px;
+    margin-bottom: 12px;
+
+    @media (--viewportMedium) {
+      height: 64px;
+      margin-bottom: 23px;
+    }
+  }
+
+  --marketplaceModalCloseText {
+    /* Font */
+    @apply --marketplaceH6FontStyles;
+    margin: -2.5px 0 0 0;
+
+    @media (--viewportMedium) {
+      margin-top: -1px;
+    }
+  }
+
+  --marketplaceModalCloseIcon {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 0 4px;
+    box-sizing: content-box;
+  }
+
+  --marketplaceModalErrorStyles {
+    @apply --marketplaceH4FontStyles;
+    margin-top: 24px;
+    color: var(--failColor);
+  }
+
+  --marketplaceModalHighlightEmail {
+    font-weight: var(--fontWeightBold);
+  }
+
+  --marketplaceModalPasswordMargins {
+    /* Leave space between the input and the button below when the
+    viewport height is small */
+    margin-top: 24px;
+
+    @media (--viewportMedium) {
+      margin-top: 30px;
     }
   }
 }

@@ -81,11 +81,11 @@ export class PasswordResetPageComponent extends Component {
 
     const resetFormContent = (
       <div className={css.content}>
-        <IconKeys />
-        <h1 className={css.mainHeading}>
+        <IconKeys className={css.modalIcon} />
+        <h1 className={css.modalTitle}>
           <FormattedMessage id="PasswordResetPage.mainHeading" />
         </h1>
-        <p className={css.helpText}>
+        <p className={css.modalMessage}>
           <FormattedMessage id="PasswordResetPage.helpText" />
         </p>
         {resetPasswordError
@@ -103,14 +103,14 @@ export class PasswordResetPageComponent extends Component {
 
     const resetDoneContent = (
       <div className={css.content}>
-        <IconKeysSuccess />
-        <h1 className={css.mainHeading}>
+        <IconKeysSuccess className={css.modalIcon} />
+        <h1 className={css.modalTitle}>
           <FormattedMessage id="PasswordResetPage.passwordChangedHeading" />
         </h1>
-        <p className={css.helpText}>
+        <p className={css.modalMessage}>
           <FormattedMessage id="PasswordResetPage.passwordChangedHelpText" />
         </p>
-        <NamedLink name="LoginPage" className={css.buttonLink}>
+        <NamedLink name="LoginPage" className={css.submitButton}>
           <FormattedMessage id="PasswordResetPage.loginButtonText" />
         </NamedLink>
       </div>

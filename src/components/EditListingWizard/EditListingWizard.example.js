@@ -26,6 +26,7 @@ export const NoPhotos = {
     onUpdateListing: noop,
     onCreateListing: noop,
     onCreateListingDraft: noop,
+    onPayoutDetailsFormChange: noop,
     onPayoutDetailsSubmit: noop,
     onUpdateListingDraft: noop,
     onManageDisableScrolling: noop,

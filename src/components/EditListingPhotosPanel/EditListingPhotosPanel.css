@@ -13,37 +13,33 @@
   flex-grow: 1;
 }
 
-.payoutModalOpen {
-  padding: 0;
-}
 
-.payoutDetails {
-  margin: 24px;
+/* ================ Modal ================ */
 
-  @media (--viewportLarge) {
-    margin: 0 60px 60px;
-  }
-}
-
-.modalHeading {
-  margin-top: 89px;
+.modalHeaderWrapper {
+  margin-top: 58px;
   margin-bottom: 36px;
-  padding: 0 24px;
+  padding: 0;
 
-  @media (--viewportLarge) {
-    margin-top: 67px;
-    padding: 0 60px;
-  }
-}
-
-.payoutModalTitle {
-  @apply --marketplaceModalTitle;
-
-  @media (--viewportLarge) {
+  @media (--viewportMedium) {
     margin-top: 0;
+    padding: 0;
   }
 }
 
+/* ================ Typography ================ */
+
+/* Title of the modal */
+.modalTitle {
+  @apply --marketplaceModalTitleStyles;
+}
+
+/* Paragraph for the Modal */
+.modalMessage {
+  @apply --marketplaceModalParagraphStyles;
+}
+
+/* This is the title for the Edit Photos component */
 .title {
   margin-bottom: 19px;
 

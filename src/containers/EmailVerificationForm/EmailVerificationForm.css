@@ -1,38 +1,34 @@
 @import '../../marketplace.css';
 
 .root {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: space-between;
-  height: 100%;
+  @apply --marketplaceModalFormRootStyles;
 }
 
-.title {
-  @apply --marketplaceModalTitle;
-  margin: 28px 0 17px 0;
-
-  @media (--viewportMedium) {
-    margin: 28px 0 24px 0;
-  }
+.bottomWrapper {
+  @apply --marketplaceModalBottomWrapper;
 }
 
-.button {
-  @apply --marketplaceButtonStylesPrimary;
 
-  margin-top: 24px;
-  align-self: stretch;
+/* ================ Typography ================ */
 
-  @media (--viewportMedium) {
-    margin-top: 72px;
-  }
+/* Title of the modal */
+.modalTitle {
+  @apply --marketplaceModalTitleStyles;
+}
+
+/* Paragraph for the Modal */
+.modalMessage {
+  @apply --marketplaceModalParagraphStyles;
 }
 
 .error {
-  color: var(--failColor);
-  margin: 23px 0 24px 0;
+  @apply --marketplaceModalErrorStyles;
+}
 
-  @media (--viewportMedium) {
-    margin: 28px 0 24px 0;
-  }
+.submitButton {
+  @apply --marketplaceButtonStylesPrimary;
+}
+
+.modalIcon {
+  @apply --marketplaceModalIconStyles;
 }

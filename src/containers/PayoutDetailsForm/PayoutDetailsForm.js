@@ -41,6 +41,7 @@ const PayoutDetailsFormComponent = props => {
   const {
     className,
     country,
+    createStripeAccountError,
     form,
     disabled,
     handleSubmit,
@@ -172,6 +173,11 @@ const PayoutDetailsFormComponent = props => {
 
   const classes = classNames(css.root, className);
   const submitDisabled = pristine || submitting || invalid || disabled;
+  const error = createStripeAccountError
+    ? <div className={css.error}>
+        <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailed" />
+      </div>
+    : null;
 
   return (
     <form className={classes} onSubmit={handleSubmit}>
@@ -233,6 +239,7 @@ const PayoutDetailsFormComponent = props => {
         {addressSection}
       </div>
       {bankAccountSection}
+      {error}
       <Button className={css.submitButton} type="submit" disabled={submitDisabled}>
         <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
       </Button>
@@ -240,13 +247,19 @@ const PayoutDetailsFormComponent = props => {
   );
 };
 
-PayoutDetailsFormComponent.defaultProps = { className: null, country: null, disabled: false };
+PayoutDetailsFormComponent.defaultProps = {
+  className: null,
+  country: null,
+  createStripeAccountError: null,
+  disabled: false,
+};
 
-const { string, bool } = PropTypes;
+const { bool, object, string } = PropTypes;
 
 PayoutDetailsFormComponent.propTypes = {
   ...formPropTypes,
   className: string,
+  createStripeAccountError: object,
   disabled: bool,
 
   // from mapStateToProps

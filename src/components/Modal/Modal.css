@@ -12,29 +12,31 @@
   width: 100%;
   z-index: 100;
 
+
+/* scrollLayer is the .root for the Modal */
   & .scrollLayer {
+    @apply --marketplaceModalRootStyles;
+
+    /* Additional styles for the modal window, dimming the background and positioning the modal */
     min-height: 100vh;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-    background-color: var(--matterColorBright);
 
     @media (--viewportMedium) {
-      padding: 126px 0;
+      padding: 0;
       background-color: rgba(0, 0, 0, 0.4);
+      background-image: none;
     }
   }
 
   & .container {
-    position: relative;
-    height: 100vh;
+    @apply --marketplaceModalBaseStyles;
+    min-height: 100vh;
+    height: 100%;
 
     @media (--viewportMedium) {
-      -webkit-overflow-scrolling: auto;
-      width: 576px;
-      height: auto;
-      margin: 0 auto;
-      background-color: var(--matterColorBright);
-      border-radius: 2px;
+      flex-basis: 576px;
+      min-height: auto;
     }
   }
 }
@@ -47,42 +49,15 @@
 }
 
 .close {
-  /* Position inside modal */
-  position: absolute;
-  top: 0;
-  right: 0;
+  @apply --marketplaceModalCloseStyles;
+}
 
-  /* Some content (like map) is positioning itself on top of close button without z-index handling */
-  z-index: calc(var(--zIndexModal) + 1);
+.closeText {
+  @apply --marketplaceModalCloseText;
+}
 
-  /* Safari didn't know how to baseline-align svg icon and text */
-  display: flex;
-  align-items: flex-start;
-  width: auto;
-
-  /* Sizing (touch area) */
-  padding: 23px 24px;
-  margin: 0;
-  border: 0;
-
-  /* Colors */
-  background-color: transparent;
-  color: var(--matterColor);
-
-  cursor: pointer;
-
-  &:enabled:hover {
-    background-color: transparent;
-    color: var(--matterColorDark);
-    box-shadow: none;
-  }
-  &:enabled:active {
-    background-color: transparent;
-    color: var(--matterColorDark);
-  }
-  &:disabled {
-    background-color: transparent;
-  }
+.closeIcon {
+  @apply --marketplaceModalCloseIcon;
 }
 
 .closeLight {
@@ -93,30 +68,4 @@
   &:enabled:active {
     color: var(--matterColorLight);
   }
-}
-
-.closeText {
-  /* Font */
-  @apply --marketplaceH6FontStyles;
-  margin: -2.5px 0 0 0;
-
-  @media (--viewportMedium) {
-    margin-top: -1px;
-  }
-}
-
-.closeIcon {
-  display: inline-block;
-  margin-left: 8px;
-  padding: 2px 0 4px;
-  box-sizing: content-box;
-}
-
-.content {
-  flex-grow: 1;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  overflow: auto;
-  height: 100%;
 }

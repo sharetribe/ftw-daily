@@ -31,6 +31,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     errors={
       Object {
         "createListingsError": null,
+        "createStripeAccountError": null,
         "showListingsError": null,
         "updateListingError": null,
         "uploadImageError": null,
@@ -49,6 +50,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     onCreateListingDraft={[Function]}
     onImageUpload={[Function]}
     onManageDisableScrolling={[Function]}
+    onPayoutDetailsFormChange={[Function]}
     onPayoutDetailsSubmit={[Function]}
     onRemoveImage={[Function]}
     onUpdateImageOrder={[Function]}
