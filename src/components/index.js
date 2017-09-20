@@ -22,9 +22,9 @@ import IconEmailAttention from './IconEmailAttention/IconEmailAttention';
 import IconEmailSent from './IconEmailSent/IconEmailSent';
 import IconEmailSuccess from './IconEmailSuccess/IconEmailSuccess';
 import IconKeys from './IconKeys/IconKeys';
+import IconKeysSuccess from './IconKeysSuccess/IconKeysSuccess';
 import ImageCarousel from './ImageCarousel/ImageCarousel';
 import ImageFromFile from './ImageFromFile/ImageFromFile';
-import KeysIconSuccess from './KeysIconSuccess/KeysIconSuccess';
 import ListingCard from './ListingCard/ListingCard';
 import LocationAutocompleteInput, {
   LocationAutocompleteInputField,
@@ -96,10 +96,10 @@ export {
   IconEmailSent,
   IconEmailSuccess,
   IconKeys,
+  IconKeysSuccess,
   ImageCarousel,
   ImageFromFile,
   InlineTextButton,
-  KeysIconSuccess,
   ListingCard,
   LocationAutocompleteInput,
   LocationAutocompleteInputField,
