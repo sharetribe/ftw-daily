@@ -274,6 +274,7 @@ class TopbarComponent extends Component {
         </Modal>
         <Modal
           id="TopbarMobileSearch"
+          containerClassName={css.modalContainer}
           isOpen={isMobileSearchOpen}
           onClose={this.handleMobileSearchClose}
           onManageDisableScrolling={onManageDisableScrolling}

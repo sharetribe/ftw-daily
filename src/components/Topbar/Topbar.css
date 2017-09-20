@@ -139,6 +139,15 @@
 
 /* ================ Modal ================ */
 
+.modalContainer {
+  @apply --marketplaceModalInMobileBaseStyles;
+  padding: 0;
+
+  @media (--viewportMedium) {
+    flex-basis: 576px;
+  }
+}
+
 .verifyEmailModal {
   @apply --marketplaceModalBaseStyles;
   padding-top: 70px;
