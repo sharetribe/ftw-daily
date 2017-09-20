@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/href-no-hash */
-import React from 'react';
+import React, { Component } from 'react';
 import Button, { PrimaryButton, SecondaryButton, InlineTextButton } from './Button';
 
 import css from './Button.example.css';
@@ -8,9 +8,44 @@ const preventDefault = e => {
   e.preventDefault();
 };
 
+class InteractiveButton extends Component {
+  constructor(props) {
+    super(props);
+    this.inProgressTimeoutId = null;
+    this.readyTimeoutId = null;
+    this.state = { inProgress: false, disabled: false, ready: false };
+  }
+  componentWillUnmount() {
+    window.clearTimeout(this.inProgressTimeoutId);
+    window.clearTimeout(this.readyTimeoutId);
+  }
+  render() {
+    const handleClick = () => {
+      this.setState({ inProgress: true, disabled: true });
+      this.inProgressTimeoutId = window.setTimeout(
+        () => {
+          this.setState({ inProgress: false, disabled: false, ready: true });
+          this.readyTimeoutId = window.setTimeout(
+            () => {
+              this.setState({ inProgress: false, disabled: false, ready: false });
+            },
+            2000
+          );
+        },
+        2000
+      );
+    };
+
+    return <Button {...this.state} onClick={handleClick}>Click me</Button>;
+  }
+}
+
 const ButtonsComponent = () => {
   return (
     <div>
+      <h3>Interactive button:</h3>
+      <InteractiveButton />
+
       <h3>Default button:</h3>
       <Button>Click me</Button>
 
