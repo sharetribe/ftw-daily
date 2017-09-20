@@ -258,7 +258,7 @@ const mapStateToProps = state => {
     currentUser,
     currentUserHasListings,
     currentUserHasOrders,
-    currentUserNotificationCount: notificationCount,
+    notificationCount,
     isAuthenticated,
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
