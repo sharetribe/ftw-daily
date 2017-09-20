@@ -16,7 +16,7 @@ import {
   retypePasswordRecoveryEmail,
   clearPasswordRecoveryError,
 } from './PasswordRecoveryPage.duck';
-import { PageLayout, Topbar, InlineTextButton, KeysIcon } from '../../components';
+import { PageLayout, Topbar, InlineTextButton, IconKeys } from '../../components';
 import { PasswordRecoveryForm } from '../../containers';
 
 import DoorIcon from './DoorIcon';
@@ -68,7 +68,7 @@ export const PasswordRecoveryPageComponent = props => {
 
   const submitEmailContent = (
     <div className={css.submitEmailContent}>
-      <KeysIcon />
+      <IconKeys />
       <h1 className={css.title}>
         <FormattedMessage id="PasswordRecoveryPage.forgotPasswordTitle" />
       </h1>
@@ -90,7 +90,7 @@ export const PasswordRecoveryPageComponent = props => {
 
   const emailSubmittedContent = (
     <div className={css.emailSubmittedContent}>
-      <KeysIcon />
+      <IconKeys />
       <h1 className={css.title}>
         <FormattedMessage id="PasswordRecoveryPage.emailSubmittedTitle" />
       </h1>
@@ -137,7 +137,7 @@ export const PasswordRecoveryPageComponent = props => {
 
   const genericErrorContent = (
     <div className={css.genericErrorContent}>
-      <KeysIcon />
+      <IconKeys />
       <h1 className={css.title}>
         <FormattedMessage id="PasswordRecoveryPage.actionFailedTitle" />
       </h1>

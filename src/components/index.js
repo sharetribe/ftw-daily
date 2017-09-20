@@ -12,8 +12,8 @@ import EditListingLocationPanel from './EditListingLocationPanel/EditListingLoca
 import EditListingPhotosPanel from './EditListingPhotosPanel/EditListingPhotosPanel';
 import EditListingPricingPanel from './EditListingPricingPanel/EditListingPricingPanel';
 import EditListingWizard from './EditListingWizard/EditListingWizard';
-import ExternalLink from './ExternalLink/ExternalLink';
 import ExpandingTextarea from './ExpandingTextarea/ExpandingTextarea';
+import ExternalLink from './ExternalLink/ExternalLink';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
 import IconBannedUser from './IconBannedUser/IconBannedUser';
@@ -21,9 +21,9 @@ import IconClose from './IconClose/IconClose';
 import IconEmailAttention from './IconEmailAttention/IconEmailAttention';
 import IconEmailSent from './IconEmailSent/IconEmailSent';
 import IconEmailSuccess from './IconEmailSuccess/IconEmailSuccess';
+import IconKeys from './IconKeys/IconKeys';
 import ImageCarousel from './ImageCarousel/ImageCarousel';
 import ImageFromFile from './ImageFromFile/ImageFromFile';
-import KeysIcon from './KeysIcon/KeysIcon';
 import KeysIconSuccess from './KeysIconSuccess/KeysIconSuccess';
 import ListingCard from './ListingCard/ListingCard';
 import LocationAutocompleteInput, {
@@ -95,10 +95,10 @@ export {
   IconEmailAttention,
   IconEmailSent,
   IconEmailSuccess,
+  IconKeys,
   ImageCarousel,
   ImageFromFile,
   InlineTextButton,
-  KeysIcon,
   KeysIconSuccess,
   ListingCard,
   LocationAutocompleteInput,

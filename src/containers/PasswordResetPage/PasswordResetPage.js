@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
-import { PageLayout, Topbar, NamedLink, KeysIcon, KeysIconSuccess } from '../../components';
+import { PageLayout, Topbar, NamedLink, IconKeys, KeysIconSuccess } from '../../components';
 import { PasswordResetForm } from '../../containers';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
@@ -81,7 +81,7 @@ export class PasswordResetPageComponent extends Component {
 
     const resetFormContent = (
       <div className={css.content}>
-        <KeysIcon />
+        <IconKeys />
         <h1 className={css.mainHeading}>
           <FormattedMessage id="PasswordResetPage.mainHeading" />
         </h1>
