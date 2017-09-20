@@ -24,6 +24,7 @@ import IconEmailSuccess from './IconEmailSuccess/IconEmailSuccess';
 import IconKeys from './IconKeys/IconKeys';
 import IconKeysSuccess from './IconKeysSuccess/IconKeysSuccess';
 import IconSearch from './IconSearch/IconSearch';
+import IconSpinner from './IconSpinner/IconSpinner';
 import ImageCarousel from './ImageCarousel/ImageCarousel';
 import ImageFromFile from './ImageFromFile/ImageFromFile';
 import ListingCard from './ListingCard/ListingCard';
@@ -56,7 +57,6 @@ import SearchMapInfoCard from './SearchMapInfoCard/SearchMapInfoCard';
 import SearchMapPriceLabel from './SearchMapPriceLabel/SearchMapPriceLabel';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import SelectField from './SelectField/SelectField';
-import SpinnerIcon from './SpinnerIcon/SpinnerIcon';
 import StripeBankAccountTokenInputField
   from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';
 import TabNav from './TabNav/TabNav';
@@ -98,6 +98,7 @@ export {
   IconKeys,
   IconKeysSuccess,
   IconSearch,
+  IconSpinner,
   ImageCarousel,
   ImageFromFile,
   InlineTextButton,
@@ -132,7 +133,6 @@ export {
   SearchResultsPanel,
   SecondaryButton,
   SelectField,
-  SpinnerIcon,
   StripeBankAccountTokenInputField,
   TabNav,
   TabNavHorizontal,
