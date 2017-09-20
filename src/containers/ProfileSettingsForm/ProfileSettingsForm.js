@@ -5,7 +5,7 @@ import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
 import { ensureCurrentUser } from '../../util/data';
 import * as validators from '../../util/validators';
-import { Avatar, Button, ImageFromFile, SpinnerIcon, TextInputField } from '../../components';
+import { Avatar, Button, ImageFromFile, IconSpinner, TextInputField } from '../../components';
 
 import css from './ProfileSettingsForm.css';
 
@@ -131,7 +131,7 @@ class ProfileSettingsFormComponent extends Component {
     const lastNameRequired = validators.required(lastNameRequiredMessage);
 
     const uploadingOverlay = uploadInProgress || this.state.uploadDelay
-      ? <div className={css.uploadingImageOverlay}><SpinnerIcon /></div>
+      ? <div className={css.uploadingImageOverlay}><IconSpinner /></div>
       : null;
 
     const hasUploadError = !!uploadImageError && !uploadInProgress;

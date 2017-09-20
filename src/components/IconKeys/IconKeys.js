@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const KeysIcon = props => {
+const IconKeys = props => {
   const { className } = props;
   return (
     <svg
@@ -46,12 +46,12 @@ const KeysIcon = props => {
   );
 };
 
-KeysIcon.defaultProps = { className: null };
+IconKeys.defaultProps = { className: null };
 
 const { string } = PropTypes;
 
-KeysIcon.propTypes = {
+IconKeys.propTypes = {
   className: string,
 };
 
-export default KeysIcon;
+export default IconKeys;

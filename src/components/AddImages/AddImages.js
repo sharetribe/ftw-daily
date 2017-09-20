@@ -10,7 +10,7 @@
 import React, { PropTypes } from 'react';
 import { SortableContainer } from 'react-sortable-hoc';
 import classNames from 'classnames';
-import { ImageFromFile, ResponsiveImage, SpinnerIcon } from '../../components';
+import { ImageFromFile, ResponsiveImage, IconSpinner } from '../../components';
 
 import css from './AddImages.css';
 import RemoveImageButton from './RemoveImageButton';
@@ -28,7 +28,7 @@ const ThumbnailWrapper = props => {
 
     // While image is uploading we show overlay on top of thumbnail
     const uploadingOverlay = !image.imageId
-      ? <div className={css.thumbnailLoading}><SpinnerIcon /></div>
+      ? <div className={css.thumbnailLoading}><IconSpinner /></div>
       : null;
 
     return (

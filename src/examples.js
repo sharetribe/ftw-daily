@@ -9,16 +9,25 @@ import * as DateInputField from './components/DateInputField/DateInputField.exam
 import * as DateRangeInputField from './components/DateRangeInputField/DateRangeInputField.example';
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
+import * as IconBannedUser from './components/IconBannedUser/IconBannedUser.example';
+import * as IconClose from './components/IconClose/IconClose.example';
+import * as IconEmailAttention from './components/IconEmailAttention/IconEmailAttention.example';
+import * as IconEmailSent from './components/IconEmailSent/IconEmailSent.example';
+import * as IconEmailSuccess from './components/IconEmailSuccess/IconEmailSuccess.example';
+import * as IconKeys from './components/IconKeys/IconKeys.example';
+import * as IconKeysSuccess from './components/IconKeysSuccess/IconKeysSuccess.example';
+import * as IconSearch from './components/IconSearch/IconSearch.example';
+import * as IconSpinner from './components/IconSpinner/IconSpinner.example';
 import * as ImageCarousel from './components/ImageCarousel/ImageCarousel.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
+import * as LocationAutocompleteInput
+  from './components/LocationAutocompleteInput/LocationAutocompleteInput.example';
 import * as ManageListingCard from './components/ManageListingCard/ManageListingCard.example';
 import * as Map from './components/Map/Map.example';
 import * as Menu from './components/Menu/Menu.example';
 import * as Modal from './components/Modal/Modal.example';
 import * as ModalInMobile from './components/ModalInMobile/ModalInMobile.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
-import * as LocationAutocompleteInput
-  from './components/LocationAutocompleteInput/LocationAutocompleteInput.example';
 import * as PaginationLinks from './components/PaginationLinks/PaginationLinks.example';
 import * as ResponsiveImage from './components/ResponsiveImage/ResponsiveImage.example';
 import * as SelectField from './components/SelectField/SelectField.example';
@@ -43,9 +52,9 @@ import * as EditListingPhotosForm
 import * as EditListingPricingForm
   from './containers/EditListingPricingForm/EditListingPricingForm.example';
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
-import * as PasswordResetForm from './containers/PasswordResetForm/PasswordResetForm.example';
 import * as PasswordRecoveryForm
   from './containers/PasswordRecoveryForm/PasswordRecoveryForm.example';
+import * as PasswordResetForm from './containers/PasswordResetForm/PasswordResetForm.example';
 import * as PayoutDetailsForm from './containers/PayoutDetailsForm/PayoutDetailsForm.example';
 import * as SignupForm from './containers/SignupForm/SignupForm.example';
 import * as StripePaymentForm from './containers/StripePaymentForm/StripePaymentForm.example';
@@ -69,6 +78,15 @@ export {
   EditListingPricingForm,
   EditListingWizard,
   ExpandingTextarea,
+  IconBannedUser,
+  IconClose,
+  IconEmailAttention,
+  IconEmailSent,
+  IconEmailSuccess,
+  IconKeys,
+  IconKeysSuccess,
+  IconSearch,
+  IconSpinner,
   ImageCarousel,
   ListingCard,
   LocationAutocompleteInput,
@@ -80,8 +98,8 @@ export {
   ModalInMobile,
   NamedLink,
   PaginationLinks,
-  PasswordResetForm,
   PasswordRecoveryForm,
+  PasswordResetForm,
   PayoutDetailsForm,
   ResponsiveImage,
   SelectField,

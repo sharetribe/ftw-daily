@@ -3,7 +3,6 @@ import Avatar, { AvatarMedium, AvatarLarge } from './Avatar/Avatar';
 import BirthdayInputField from './BirthdayInputField/BirthdayInputField';
 import BookingBreakdown from './BookingBreakdown/BookingBreakdown';
 import Button, { PrimaryButton, SecondaryButton, InlineTextButton } from './Button/Button';
-import CloseIcon from './CloseIcon/CloseIcon';
 import CurrencyInputField from './CurrencyInputField/CurrencyInputField';
 import DateInputField from './DateInputField/DateInputField';
 import DateRangeInputField from './DateRangeInputField/DateRangeInputField';
@@ -13,18 +12,21 @@ import EditListingLocationPanel from './EditListingLocationPanel/EditListingLoca
 import EditListingPhotosPanel from './EditListingPhotosPanel/EditListingPhotosPanel';
 import EditListingPricingPanel from './EditListingPricingPanel/EditListingPricingPanel';
 import EditListingWizard from './EditListingWizard/EditListingWizard';
-import ExternalLink from './ExternalLink/ExternalLink';
 import ExpandingTextarea from './ExpandingTextarea/ExpandingTextarea';
+import ExternalLink from './ExternalLink/ExternalLink';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
 import IconBannedUser from './IconBannedUser/IconBannedUser';
+import IconClose from './IconClose/IconClose';
 import IconEmailAttention from './IconEmailAttention/IconEmailAttention';
 import IconEmailSent from './IconEmailSent/IconEmailSent';
 import IconEmailSuccess from './IconEmailSuccess/IconEmailSuccess';
+import IconKeys from './IconKeys/IconKeys';
+import IconKeysSuccess from './IconKeysSuccess/IconKeysSuccess';
+import IconSearch from './IconSearch/IconSearch';
+import IconSpinner from './IconSpinner/IconSpinner';
 import ImageCarousel from './ImageCarousel/ImageCarousel';
 import ImageFromFile from './ImageFromFile/ImageFromFile';
-import KeysIcon from './KeysIcon/KeysIcon';
-import KeysIconSuccess from './KeysIconSuccess/KeysIconSuccess';
 import ListingCard from './ListingCard/ListingCard';
 import LocationAutocompleteInput, {
   LocationAutocompleteInputField,
@@ -49,14 +51,12 @@ import Promised from './Promised/Promised';
 import ResponsiveImage from './ResponsiveImage/ResponsiveImage';
 import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
-import SearchIcon from './SearchIcon/SearchIcon';
 import SearchMap from './SearchMap/SearchMap';
 import SearchMapGroupLabel from './SearchMapGroupLabel/SearchMapGroupLabel';
 import SearchMapInfoCard from './SearchMapInfoCard/SearchMapInfoCard';
 import SearchMapPriceLabel from './SearchMapPriceLabel/SearchMapPriceLabel';
 import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import SelectField from './SelectField/SelectField';
-import SpinnerIcon from './SpinnerIcon/SpinnerIcon';
 import StripeBankAccountTokenInputField
   from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';
 import TabNav from './TabNav/TabNav';
@@ -77,7 +77,6 @@ export {
   BirthdayInputField,
   BookingBreakdown,
   Button,
-  CloseIcon,
   CurrencyInputField,
   DateInputField,
   DateRangeInputField,
@@ -92,14 +91,17 @@ export {
   FilterPanel,
   HeroSection,
   IconBannedUser,
+  IconClose,
   IconEmailAttention,
   IconEmailSent,
   IconEmailSuccess,
+  IconKeys,
+  IconKeysSuccess,
+  IconSearch,
+  IconSpinner,
   ImageCarousel,
   ImageFromFile,
   InlineTextButton,
-  KeysIcon,
-  KeysIconSuccess,
   ListingCard,
   LocationAutocompleteInput,
   LocationAutocompleteInputField,
@@ -124,7 +126,6 @@ export {
   ResponsiveImage,
   RoutesProvider,
   SaleDetailsPanel,
-  SearchIcon,
   SearchMap,
   SearchMapGroupLabel,
   SearchMapInfoCard,
@@ -132,7 +133,6 @@ export {
   SearchResultsPanel,
   SecondaryButton,
   SelectField,
-  SpinnerIcon,
   StripeBankAccountTokenInputField,
   TabNav,
   TabNavHorizontal,
