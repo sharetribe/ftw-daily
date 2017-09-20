@@ -88,7 +88,7 @@ class ImageCarousel extends Component {
               { name: imageScaledMedium, size: '750w' },
               { name: imageScaledLarge, size: '1024w' },
               { name: imageScaledXLarge, size: '2400w' },
-              ]}
+            ]}
             sizes="(max-width: 767px) 100vw, 80vw"
           />
         </div>
