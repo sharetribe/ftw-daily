@@ -2,13 +2,14 @@
 
 :root{
   --topMarginMobileMenu: 96px;
-  --buttonHeight: 61px;
 }
 
 .root {
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   padding: 0 24px;
 }
 
@@ -18,12 +19,18 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  /* 113 for footer and an extra 67 to get scrolling work in mobile safari */
+  margin-bottom: 180px;
 }
 
 .footer {
-  flex-basis: var(--buttonHeight);
-  flex-shrink: 0;
-  padding-bottom: 24px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding: 24px;
+  background-color: var(--matterColorLight);
+  box-shadow: var(--boxShadowTop);
 }
 
 .avatar {
