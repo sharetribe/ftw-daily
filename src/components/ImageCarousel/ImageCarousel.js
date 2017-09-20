@@ -9,9 +9,10 @@ import css from './ImageCarousel.css';
 const KEY_CODE_LEFT_ARROW = 37;
 const KEY_CODE_RIGHT_ARROW = 39;
 
-// TODO: change these when the API returns images with the original aspect ratio
-const imageName = 'landscape-crop';
-const imageName2x = 'landscape-crop2x';
+const imageScaledSmall = 'scaled-small'; // width 320
+const imageScaledMedium = 'scaled-medium'; // width 750
+const imageScaledLarge = 'scaled-large'; // width 1024
+const imageScaledXLarge = 'scaled-xlarge'; // width 2400
 
 class ImageCarousel extends Component {
   constructor(props) {
@@ -82,8 +83,13 @@ class ImageCarousel extends Component {
             className={css.image}
             alt={imageAltText}
             image={images[this.state.selectedImageIndex]}
-            nameSet={[{ name: imageName, size: '400w' }, { name: imageName2x, size: '800w' }]}
-            sizes="100%"
+            nameSet={[
+              { name: imageScaledSmall, size: '320w' },
+              { name: imageScaledMedium, size: '750w' },
+              { name: imageScaledLarge, size: '1024w' },
+              { name: imageScaledXLarge, size: '2400w' },
+              ]}
+            sizes="(max-width: 767px) 100vw, 80vw"
           />
         </div>
         {imageIndex}

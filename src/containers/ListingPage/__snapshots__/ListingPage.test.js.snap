@@ -76,6 +76,14 @@ exports[`ListingPage matches snapshot 1`] = `
                 "name": "landscape-crop2x",
                 "size": "800w",
               },
+              Object {
+                "name": "landscape-crop4x",
+                "size": "1600w",
+              },
+              Object {
+                "name": "landscape-crop6x",
+                "size": "2400w",
+              },
             ]
           }
           noImageMessage={null}
