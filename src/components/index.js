@@ -23,6 +23,7 @@ import IconEmailSent from './IconEmailSent/IconEmailSent';
 import IconEmailSuccess from './IconEmailSuccess/IconEmailSuccess';
 import IconKeys from './IconKeys/IconKeys';
 import IconKeysSuccess from './IconKeysSuccess/IconKeysSuccess';
+import IconSearch from './IconSearch/IconSearch';
 import ImageCarousel from './ImageCarousel/ImageCarousel';
 import ImageFromFile from './ImageFromFile/ImageFromFile';
 import ListingCard from './ListingCard/ListingCard';
@@ -49,7 +50,6 @@ import Promised from './Promised/Promised';
 import ResponsiveImage from './ResponsiveImage/ResponsiveImage';
 import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
-import SearchIcon from './SearchIcon/SearchIcon';
 import SearchMap from './SearchMap/SearchMap';
 import SearchMapGroupLabel from './SearchMapGroupLabel/SearchMapGroupLabel';
 import SearchMapInfoCard from './SearchMapInfoCard/SearchMapInfoCard';
@@ -97,6 +97,7 @@ export {
   IconEmailSuccess,
   IconKeys,
   IconKeysSuccess,
+  IconSearch,
   ImageCarousel,
   ImageFromFile,
   InlineTextButton,
@@ -124,7 +125,6 @@ export {
   ResponsiveImage,
   RoutesProvider,
   SaleDetailsPanel,
-  SearchIcon,
   SearchMap,
   SearchMapGroupLabel,
   SearchMapInfoCard,

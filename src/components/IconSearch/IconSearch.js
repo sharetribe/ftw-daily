@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
-import css from './SearchIcon.css';
+import css from './IconSearch.css';
 
-const SearchIcon = props => {
+const IconSearch = props => {
   const { rootClassName, className } = props;
   const classes = classNames(rootClassName || css.root, className);
   return (
@@ -28,16 +28,16 @@ const SearchIcon = props => {
   );
 };
 
-SearchIcon.defaultProps = {
+IconSearch.defaultProps = {
   rootClassName: null,
   className: null,
 };
 
 const { string } = PropTypes;
 
-SearchIcon.propTypes = {
+IconSearch.propTypes = {
   rootClassName: string,
   className: string,
 };
 
-export default SearchIcon;
+export default IconSearch;
