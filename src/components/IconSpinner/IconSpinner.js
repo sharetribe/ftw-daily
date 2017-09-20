@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
-import css from './SpinnerIcon.css';
+import css from './IconSpinner.css';
 
 // TODO: SVG needs to be changed so that it doesn't take 100x100 area,
 // but just a little bit more than what actual spinner takes (~26px)
-const SpinnerIcon = props => {
+const IconSpinner = props => {
   const { rootClassName, className } = props;
   const classes = classNames(rootClassName || css.root, className);
   return (
@@ -40,16 +40,16 @@ const SpinnerIcon = props => {
   );
 };
 
-SpinnerIcon.defaultProps = {
+IconSpinner.defaultProps = {
   rootClassName: null,
   className: null,
 };
 
 const { string } = PropTypes;
 
-SpinnerIcon.propTypes = {
+IconSpinner.propTypes = {
   rootClassName: string,
   className: string,
 };
 
-export default SpinnerIcon;
+export default IconSpinner;

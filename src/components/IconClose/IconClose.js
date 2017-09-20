@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
-import css from './CloseIcon.css';
+import css from './IconClose.css';
 
-const CloseIcon = props => {
+const IconClose = props => {
   const { className, rootClassName } = props;
   const classes = classNames(rootClassName || css.root, className);
 
@@ -25,14 +25,14 @@ const CloseIcon = props => {
 
 const { string } = PropTypes;
 
-CloseIcon.defaultProps = {
+IconClose.defaultProps = {
   className: null,
   rootClassName: null,
 };
 
-CloseIcon.propTypes = {
+IconClose.propTypes = {
   className: string,
   rootClassName: string,
 };
 
-export default CloseIcon;
+export default IconClose;

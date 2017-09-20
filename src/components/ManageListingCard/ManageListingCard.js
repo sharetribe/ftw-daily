@@ -18,7 +18,7 @@ import {
   NamedLink,
   PrimaryButton,
   SecondaryButton,
-  SpinnerIcon,
+  IconSpinner,
   ResponsiveImage,
 } from '../../components';
 import config from '../../config';
@@ -147,7 +147,7 @@ export const ManageListingCardComponent = props => {
       >
         <div className={css.loadingOverlay} />
         <div className={css.loadingOverlayContent}>
-          <SpinnerIcon />
+          <IconSpinner />
         </div>
       </div>
     : errorOverlay;
