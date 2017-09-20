@@ -43,3 +43,43 @@
     cursor: auto;
   }
 }
+
+.inProgress {
+  padding: 0;
+
+  &:disabled {
+    background-color: var(--marketplaceColor);
+  }
+}
+
+.primaryButton.inProgress:disabled {
+  background-color: var(--successColor);
+}
+
+.secondaryButton.inProgress:disabled {
+  background-color: var(--matterColorLight);
+}
+
+.ready {
+  padding: 0;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  stroke: var(--matterColorLight);
+}
+
+.checkmark {
+  width: 24px;
+  height: 24px;
+  stroke: var(--matterColorLight);
+}
+
+.secondaryButton .spinner {
+  stroke: var(--matterColorAnti);
+}
+
+.secondaryButton .checkmark {
+  stroke: var(--matterColorAnti);
+}

@@ -3,35 +3,34 @@ import classNames from 'classnames';
 
 import css from './IconSpinner.css';
 
-// TODO: SVG needs to be changed so that it doesn't take 100x100 area,
-// but just a little bit more than what actual spinner takes (~26px)
 const IconSpinner = props => {
   const { rootClassName, className } = props;
   const classes = classNames(rootClassName || css.root, className);
   return (
     <svg
       className={classes}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 100 100"
+      viewBox="0 0 30 30"
+      strokeWidth="3"
       preserveAspectRatio="xMidYMid"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="50" cy="50" fill="none" r="10" strokeWidth="3" strokeLinecap="round">
+      <circle cx="15" cy="15" r="12" fill="none" strokeLinecap="round">
         <animateTransform
           attributeName="transform"
           type="rotate"
           calcMode="linear"
-          values="0 50 50;180 50 50;720 50 50"
+          values="0 15 15;180 15 15;720 15 15"
           keyTimes="0;0.5;1"
-          dur="1s"
+          dur=".9"
           begin="0s"
           repeatCount="indefinite"
         />
         <animate
           attributeName="stroke-dasharray"
           calcMode="linear"
-          values="6 56;46 14;6 56"
+          values="9 56;46 14;9 56"
           keyTimes="0;0.5;1"
-          dur="1"
+          dur=".9"
           begin="0s"
           repeatCount="indefinite"
         />
