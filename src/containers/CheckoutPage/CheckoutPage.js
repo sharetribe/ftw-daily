@@ -8,6 +8,7 @@ import { pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureUser, ensureTransaction, ensureBooking } from '../../util/data';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
+import { createSlug } from '../../util/urlHelpers';
 import { isTransactionInitiateListingNotFoundError } from '../../util/errors';
 import {
   AvatarMedium,
@@ -186,7 +187,10 @@ export class CheckoutPageComponent extends Component {
 
     // Allow showing page when currentUser is still being downloaded,
     // but show payment form only when user info is loaded.
-    const showPaymentForm = !!(currentUser && hasRequiredData && !listingNotFound);
+    const showPaymentForm = !!(currentUser &&
+      hasRequiredData &&
+      !listingNotFound &&
+      !initiateOrderError);
 
     const listingTitle = currentListing.attributes.title;
     const title = intl.formatMessage({ id: 'CheckoutPage.title' }, { listingTitle });
@@ -200,9 +204,17 @@ export class CheckoutPageComponent extends Component {
           <FormattedMessage id="CheckoutPage.listingNotFoundError" />
         </p>
       : null;
+    const listingLink = (
+      <NamedLink
+        name="ListingPage"
+        params={{ id: currentListing.id.uuid, slug: createSlug(listingTitle) }}
+      >
+        <FormattedMessage id="CheckoutPage.errorlistingLinkText" />
+      </NamedLink>
+    );
     const initiateOrderErrorMessage = !listingNotFound && initiateOrderError
       ? <p className={css.orderError}>
-          <FormattedMessage id="CheckoutPage.initiateOrderError" />
+          <FormattedMessage id="CheckoutPage.initiateOrderError" values={{ listingLink }} />
         </p>
       : null;
     const speculateTransactionErrorMessage = speculateTransactionError
