@@ -11,7 +11,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
-import { Button, CloseIcon } from '../../components';
+import { Button, IconClose } from '../../components';
 
 import css from './Modal.css';
 
@@ -81,7 +81,7 @@ export class ModalComponent extends Component {
           <span className={css.closeText}>
             {closeButtonMessage || <FormattedMessage id="Modal.close" />}
           </span>
-          <CloseIcon rootClassName={css.closeIcon} />
+          <IconClose rootClassName={css.closeIcon} />
         </Button>
       : null;
 

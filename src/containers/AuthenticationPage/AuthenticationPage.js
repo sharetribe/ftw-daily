@@ -18,7 +18,7 @@ import {
   Topbar,
   IconEmailSent,
   InlineTextButton,
-  CloseIcon,
+  IconClose,
 } from '../../components';
 import { LoginForm, SignupForm } from '../../containers';
 import { login, logout, authenticationInProgress, signup } from '../../ducks/Auth.duck';
@@ -168,7 +168,7 @@ export const AuthenticationPageComponent = props => {
         <span className={css.closeText}>
           <FormattedMessage id="AuthenticationPage.verifyEmailClose" />
         </span>
-        <CloseIcon rootClassName={css.closeIcon} />
+        <IconClose rootClassName={css.closeIcon} />
       </NamedLink>
       <IconEmailSent />
       <h1 className={css.verifyTitle}>

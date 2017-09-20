@@ -3,7 +3,6 @@ import Avatar, { AvatarMedium, AvatarLarge } from './Avatar/Avatar';
 import BirthdayInputField from './BirthdayInputField/BirthdayInputField';
 import BookingBreakdown from './BookingBreakdown/BookingBreakdown';
 import Button, { PrimaryButton, SecondaryButton, InlineTextButton } from './Button/Button';
-import CloseIcon from './CloseIcon/CloseIcon';
 import CurrencyInputField from './CurrencyInputField/CurrencyInputField';
 import DateInputField from './DateInputField/DateInputField';
 import DateRangeInputField from './DateRangeInputField/DateRangeInputField';
@@ -18,6 +17,7 @@ import ExpandingTextarea from './ExpandingTextarea/ExpandingTextarea';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
 import IconBannedUser from './IconBannedUser/IconBannedUser';
+import IconClose from './IconClose/IconClose';
 import IconEmailAttention from './IconEmailAttention/IconEmailAttention';
 import IconEmailSent from './IconEmailSent/IconEmailSent';
 import IconEmailSuccess from './IconEmailSuccess/IconEmailSuccess';
@@ -77,7 +77,6 @@ export {
   BirthdayInputField,
   BookingBreakdown,
   Button,
-  CloseIcon,
   CurrencyInputField,
   DateInputField,
   DateRangeInputField,
@@ -92,6 +91,7 @@ export {
   FilterPanel,
   HeroSection,
   IconBannedUser,
+  IconClose,
   IconEmailAttention,
   IconEmailSent,
   IconEmailSuccess,
