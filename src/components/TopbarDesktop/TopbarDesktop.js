@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { ACCOUNT_SETTING_PAGES } from '../../routesConfiguration';
+import { ACCOUNT_SETTINGS_PAGES } from '../../routesConfiguration';
 import * as propTypes from '../../util/propTypes';
 import {
   Avatar,
@@ -62,7 +62,7 @@ const TopbarDesktop = props => {
 
   const currentPageClass = page => {
     const isAccountSettingsPage = page === 'AccountSettingsPage' &&
-      ACCOUNT_SETTING_PAGES.includes(currentPage);
+      ACCOUNT_SETTINGS_PAGES.includes(currentPage);
     return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
   };
 

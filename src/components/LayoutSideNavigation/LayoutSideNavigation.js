@@ -1,29 +1,59 @@
 /**
- * LayoutSideNavigation needs to have 2 children: content for a secondary side navigation
- * and main content. Side navigation (first child) will be shown aside on Desktop and
- * as sub bar under Topbar on mobile screens.
+ * LayoutSideNavigation needs to have 3 children: TopbarWrapper, SideNavWrapper and ContentWrapper.
+ * SideNavWrapper will be shown aside on Desktop layout and
+ * as a sub bar under Topbar on mobile screens.
  */
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import TopbarWrapper from './TopbarWrapper';
+import SideNavWrapper from './SideNavWrapper';
+import ContentWrapper from './ContentWrapper';
 
 import css from './LayoutSideNavigation.css';
 
-const LayoutSideNavigation = props => {
-  const { className, rootClassName, children } = props;
-
-  if (React.Children.count(children) !== 2) {
-    throw new Error('Menu needs to have two children: side navigation and main content.');
+const prepareChildren = children => {
+  if (React.Children.count(children) !== 3) {
+    throw new Error(
+      'Menu needs to have 3 children: TopbarWrapper, SideNavWrapper and ContentWrapper.'
+    );
   }
 
+  const childrenMap = {};
+
+  React.Children.forEach(children, child => {
+    if (child.type === TopbarWrapper) {
+      // return React.cloneElement(child, {
+      //   isOpen,
+      //   onToggleActive: this.toggleOpen,
+      // });
+      childrenMap.topbarWrapper = child;
+    } else if (child.type === SideNavWrapper) {
+      childrenMap.sideNavWrapper = child;
+    } else if (child.type === ContentWrapper) {
+      childrenMap.contentWrapper = child;
+    } else {
+      throw new Error(
+        `LayoutSideNavigation has an unknown child.
+      Only TopbarWrapper, SideNavWrapper, and ContentWrapper are allowed.`
+      );
+    }
+  });
+  return childrenMap;
+};
+
+const LayoutSideNavigation = props => {
+  const { className, rootClassName, containerClassName, children } = props;
+
+  const preparedChildren = prepareChildren(children);
   const classes = classNames(rootClassName || css.root, className);
+  const containerClasses = containerClassName || css.container;
 
   return (
     <div className={classes}>
-      <aside className={css.navigation}>
-        {children[0]}
-      </aside>
-      <div className={css.content}>
-        {children[1]}
+      {preparedChildren.topbarWrapper}
+      <div className={containerClasses}>
+        {preparedChildren.sideNavWrapper}
+        {preparedChildren.contentWrapper}
       </div>
     </div>
   );
@@ -31,7 +61,8 @@ const LayoutSideNavigation = props => {
 
 LayoutSideNavigation.defaultProps = {
   className: null,
-  rootClassName: '',
+  rootClassName: null,
+  containerClassName: null,
 };
 
 const { node, string } = PropTypes;
@@ -40,6 +71,9 @@ LayoutSideNavigation.propTypes = {
   children: node.isRequired,
   className: string,
   rootClassName: string,
+  containerClassName: string,
 };
+
+export { ContentWrapper, SideNavWrapper, TopbarWrapper };
 
 export default LayoutSideNavigation;

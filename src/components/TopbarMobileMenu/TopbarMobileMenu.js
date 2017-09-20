@@ -5,7 +5,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { ACCOUNT_SETTING_PAGES } from '../../routesConfiguration';
+import { ACCOUNT_SETTINGS_PAGES } from '../../routesConfiguration';
 import * as propTypes from '../../util/propTypes';
 import { ensureCurrentUser } from '../../util/data';
 import { AvatarLarge, InlineTextButton, NamedLink, NotificationBadge } from '../../components';
@@ -68,7 +68,7 @@ const TopbarMobileMenu = props => {
   const displayName = user.attributes.profile.firstName;
   const currentPageClass = page => {
     const isAccountSettingsPage = page === 'AccountSettingsPage' &&
-      ACCOUNT_SETTING_PAGES.includes(currentPage);
+      ACCOUNT_SETTINGS_PAGES.includes(currentPage);
     return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
   };
 

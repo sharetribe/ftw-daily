@@ -3,66 +3,77 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
   authInfoError={null}
   logoutError={null}
   title="Contact details">
-  <Topbar
-    authInProgress={false}
-    currentPage="ContactDetailsPage"
-    currentUser={null}
-    currentUserHasListings={false}
-    currentUserHasOrders={null}
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
-    isAuthenticated={false}
-    location={
-      Object {
-        "search": "",
-      }
-    }
-    notificationCount={0}
-    onLogout={[Function]}
-    onManageDisableScrolling={[Function]}
-    onResendVerificationEmail={[Function]}
-    sendVerificationEmailError={null}
-    sendVerificationEmailInProgress={false} />
-  <UserNav
-    className={null}
-    rootClassName={null}
-    selectedPageName="ContactDetailsPage" />
   <LayoutSideNavigation
     className={null}
-    rootClassName="">
-    <TabNav
+    containerClassName={null}
+    rootClassName={null}>
+    <TopbarWrapper
       className={null}
-      rootClassName={null}
-      tabClassName={null}
-      tabRootClassName={null}
-      tabs={
-        Array [
+      rootClassName={null}>
+      <Topbar
+        authInProgress={false}
+        currentPage="ContactDetailsPage"
+        currentUser={null}
+        currentUserHasListings={false}
+        currentUserHasOrders={null}
+        history={
           Object {
-            "linkProps": Object {
-              "name": "ContactDetailsPage",
-            },
-            "selected": true,
-            "text": <FormattedMessage
-              id="ContactDetailsPage.emailTabTitle"
-              values={Object {}} />,
-          },
+            "push": [Function],
+          }
+        }
+        isAuthenticated={false}
+        location={
           Object {
-            "linkProps": Object {
-              "name": "PasswordChangePage",
+            "search": "",
+          }
+        }
+        notificationCount={0}
+        onLogout={[Function]}
+        onManageDisableScrolling={[Function]}
+        onResendVerificationEmail={[Function]}
+        sendVerificationEmailError={null}
+        sendVerificationEmailInProgress={false} />
+      <UserNav
+        className={null}
+        rootClassName={null}
+        selectedPageName="ContactDetailsPage" />
+    </TopbarWrapper>
+    <SideNavWrapper
+      className={null}
+      rootClassName={null}>
+      <TabNav
+        className={null}
+        rootClassName={null}
+        tabClassName={null}
+        tabRootClassName={null}
+        tabs={
+          Array [
+            Object {
+              "linkProps": Object {
+                "name": "ContactDetailsPage",
+              },
+              "selected": true,
+              "text": <FormattedMessage
+                id="ContactDetailsPage.emailTabTitle"
+                values={Object {}} />,
             },
-            "selected": false,
-            "text": <FormattedMessage
-              id="ContactDetailsPage.passwordTabTitle"
-              values={Object {}} />,
-          },
-        ]
-      } />
-    <div>
+            Object {
+              "linkProps": Object {
+                "name": "PasswordChangePage",
+              },
+              "selected": false,
+              "text": <FormattedMessage
+                id="ContactDetailsPage.passwordTabTitle"
+                values={Object {}} />,
+            },
+          ]
+        } />
+    </SideNavWrapper>
+    <ContentWrapper
+      className={null}
+      rootClassName={null}>
       Main content
-    </div>
+    </ContentWrapper>
   </LayoutSideNavigation>
 </withRouter(PageLayout)>
 `;

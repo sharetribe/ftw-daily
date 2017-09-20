@@ -7,7 +7,16 @@ import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { LayoutSideNavigation, PageLayout, Topbar, UserNav, TabNav } from '../../components';
+import {
+  ContentWrapper,
+  LayoutSideNavigation,
+  PageLayout,
+  SideNavWrapper,
+  TabNav,
+  Topbar,
+  TopbarWrapper,
+  UserNav,
+} from '../../components';
 
 import css from './ContactDetailsPage.css';
 
@@ -49,26 +58,32 @@ export const ContactDetailsPageComponent = props => {
 
   return (
     <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Contact details">
-      <Topbar
-        authInProgress={authInProgress}
-        currentPage="ContactDetailsPage"
-        currentUser={currentUser}
-        currentUserHasListings={currentUserHasListings}
-        currentUserHasOrders={currentUserHasOrders}
-        history={history}
-        isAuthenticated={isAuthenticated}
-        location={location}
-        notificationCount={notificationCount}
-        onLogout={onLogout}
-        onManageDisableScrolling={onManageDisableScrolling}
-        onResendVerificationEmail={onResendVerificationEmail}
-        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-        sendVerificationEmailError={sendVerificationEmailError}
-      />
-      <UserNav selectedPageName="ContactDetailsPage" />
       <LayoutSideNavigation>
-        <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />
-        <div>Main content</div>
+        <TopbarWrapper>
+          <Topbar
+            authInProgress={authInProgress}
+            currentPage="ContactDetailsPage"
+            currentUser={currentUser}
+            currentUserHasListings={currentUserHasListings}
+            currentUserHasOrders={currentUserHasOrders}
+            history={history}
+            isAuthenticated={isAuthenticated}
+            location={location}
+            notificationCount={notificationCount}
+            onLogout={onLogout}
+            onManageDisableScrolling={onManageDisableScrolling}
+            onResendVerificationEmail={onResendVerificationEmail}
+            sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+            sendVerificationEmailError={sendVerificationEmailError}
+          />
+          <UserNav selectedPageName="ContactDetailsPage" />
+        </TopbarWrapper>
+        <SideNavWrapper>
+          <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />
+        </SideNavWrapper>
+        <ContentWrapper>
+          Main content
+        </ContentWrapper>
       </LayoutSideNavigation>
     </PageLayout>
   );

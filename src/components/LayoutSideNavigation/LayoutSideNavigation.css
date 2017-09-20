@@ -1,19 +1,39 @@
 @import '../../marketplace.css';
 
 .root {
-  width: 100%;
-
-  flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbarWrapper {
+  width: 100%;
+  position: relative;
+}
+
+/* Container for side and content */
+.container {
+  /* parent aka root is flexbox, this container takes all available space */
+  flex-grow: 1;
+
+  /* This container uses flexbox layout */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  /* Hide Topbar's box-shadow when side nav is stacked below Topbar as a new bar */
+  z-index: calc(var(--zIndexTopbar));
 
   @media (--viewportLarge) {
     flex-direction: row;
     justify-content: center;
+
+    /* When side nav is shown as a column, Topbar's box-shadow should be visible */
+    z-index: calc(var(--zIndexTopbar) - 1);
   }
 }
 
-.content {
+.contentWrapper {
 
   /* Expand to the full remaining width of the viewport */
   flex: 1;
@@ -35,7 +55,7 @@
 }
 
 /* Navigation between /account sub pages */
-.navigation {
+.sideNavWrapper {
 
   /* Layout */
   display: flex;
