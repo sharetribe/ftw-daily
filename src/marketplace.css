@@ -150,10 +150,16 @@
     @apply --marketplaceButtonFontStyles;
 
     /* Dimensions */
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    min-height: 65px;
     margin: 0;
-    padding: 19px 0 22px 0;
+
+    /* Push the text up from center */
+    padding-bottom: 2px;
 
     /* Borders */
     border: none;
@@ -200,10 +206,6 @@
   }
   --marketplaceButtonStylesSecondary {
     @apply --marketplaceButtonStyles;
-
-    /* We must reduce the padding since the border takes space from the
-       full height that should match the default button height */
-    padding: 16px 0 19px 0;
 
     background-color: var(--matterColorLight);
     color: var(--matterColor);

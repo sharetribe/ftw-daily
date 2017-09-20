@@ -49,6 +49,8 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
   <Button
     className={null}
     disabled={false}
+    inProgress={false}
+    ready={false}
     rootClassName={null}
     type="submit">
     Save photos

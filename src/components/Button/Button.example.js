@@ -17,17 +17,53 @@ const ButtonsComponent = () => {
       <h3>Default button disabled:</h3>
       <Button disabled>Click me</Button>
 
+      <h3>Default button in progress:</h3>
+      <Button inProgress>Click me</Button>
+
+      <h3>Default button ready:</h3>
+      <Button ready>Click me</Button>
+
+      <h3>Default button disabled and in progress:</h3>
+      <Button disabled inProgress>Click me</Button>
+
+      <h3>Default button disabled and ready:</h3>
+      <Button disabled ready>Click me</Button>
+
       <h3>Primary button:</h3>
       <PrimaryButton>Click me</PrimaryButton>
 
       <h3>Primary button disabled:</h3>
       <PrimaryButton disabled>Click me</PrimaryButton>
 
+      <h3>Primary button in progress:</h3>
+      <PrimaryButton inProgress>Click me</PrimaryButton>
+
+      <h3>Primary button ready:</h3>
+      <PrimaryButton ready>Click me</PrimaryButton>
+
+      <h3>Primary button disabled and in progress:</h3>
+      <PrimaryButton disabled inProgress>Click me</PrimaryButton>
+
+      <h3>Primary button disabled ready:</h3>
+      <PrimaryButton disabled ready>Click me</PrimaryButton>
+
       <h3>Secondary button:</h3>
       <SecondaryButton>Click me</SecondaryButton>
 
       <h3>Secondary button disabled:</h3>
       <SecondaryButton disabled>Click me</SecondaryButton>
+
+      <h3>Secondary button in progress:</h3>
+      <SecondaryButton inProgress>Click me</SecondaryButton>
+
+      <h3>Secondary button ready:</h3>
+      <SecondaryButton ready>Click me</SecondaryButton>
+
+      <h3>Secondary button disabled and in progress:</h3>
+      <SecondaryButton disabled inProgress>Click me</SecondaryButton>
+
+      <h3>Secondary button disabled ready:</h3>
+      <SecondaryButton disabled ready>Click me</SecondaryButton>
 
       <h3>Inline text button:</h3>
       <p>

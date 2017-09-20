@@ -17,6 +17,7 @@ import ExternalLink from './ExternalLink/ExternalLink';
 import FilterPanel from './FilterPanel/FilterPanel';
 import HeroSection from './HeroSection/HeroSection';
 import IconBannedUser from './IconBannedUser/IconBannedUser';
+import IconCheckmark from './IconCheckmark/IconCheckmark';
 import IconClose from './IconClose/IconClose';
 import IconEmailAttention from './IconEmailAttention/IconEmailAttention';
 import IconEmailSent from './IconEmailSent/IconEmailSent';
@@ -91,6 +92,7 @@ export {
   FilterPanel,
   HeroSection,
   IconBannedUser,
+  IconCheckmark,
   IconClose,
   IconEmailAttention,
   IconEmailSent,

@@ -10,6 +10,7 @@ import * as DateRangeInputField from './components/DateRangeInputField/DateRange
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
 import * as IconBannedUser from './components/IconBannedUser/IconBannedUser.example';
+import * as IconCheckmark from './components/IconCheckmark/IconCheckmark.example';
 import * as IconClose from './components/IconClose/IconClose.example';
 import * as IconEmailAttention from './components/IconEmailAttention/IconEmailAttention.example';
 import * as IconEmailSent from './components/IconEmailSent/IconEmailSent.example';
@@ -79,6 +80,7 @@ export {
   EditListingWizard,
   ExpandingTextarea,
   IconBannedUser,
+  IconCheckmark,
   IconClose,
   IconEmailAttention,
   IconEmailSent,

@@ -1,28 +1,48 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import { IconSpinner, IconCheckmark } from '../../components';
 
 import css from './Button.css';
 
 const Button = props => {
-  const { children, className, rootClassName, ...rest } = props;
+  const { children, className, rootClassName, inProgress, ready, ...rest } = props;
 
   const rootClass = rootClassName || css.root;
-  const classes = classNames(rootClass, className);
+  const classes = classNames(rootClass, className, {
+    [css.ready]: ready,
+    [css.inProgress]: inProgress,
+  });
 
-  return <button className={classes} {...rest}>{children}</button>;
+  let content;
+
+  if (inProgress) {
+    content = <IconSpinner rootClassName={css.spinner} />;
+  } else if (ready) {
+    content = <IconCheckmark rootClassName={css.checkmark} />;
+  } else {
+    content = children;
+  }
+
+  return <button className={classes} {...rest}>{content}</button>;
 };
 
-const { node, string } = PropTypes;
+const { node, string, bool } = PropTypes;
 
 Button.defaultProps = {
   rootClassName: null,
   className: null,
+  inProgress: false,
+  ready: false,
   children: null,
 };
 
 Button.propTypes = {
   rootClassName: string,
   className: string,
+
+  inProgress: bool,
+  ready: bool,
+
   children: node,
 };
 
