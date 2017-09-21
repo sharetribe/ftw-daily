@@ -94,7 +94,8 @@ const SignupFormComponent = props => {
   const lastNameRequired = validators.required(lastNameRequiredMessage);
 
   const classes = classNames(rootClassName || css.root, className);
-  const submitDisabled = invalid || submitting || inProgress;
+  const submitInProgress = submitting || inProgress;
+  const submitDisabled = invalid || submitInProgress;
 
   return (
     <form className={classes} onSubmit={handleSubmit}>
@@ -139,7 +140,12 @@ const SignupFormComponent = props => {
       </div>
 
       <div className={css.bottomWrapper}>
-        <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
+        <PrimaryButton
+          className={css.submitButton}
+          type="submit"
+          inProgress={submitInProgress}
+          disabled={submitDisabled}
+        >
           <FormattedMessage id="SignupForm.signUp" />
         </PrimaryButton>
       </div>
