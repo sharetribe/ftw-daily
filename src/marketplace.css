@@ -158,7 +158,7 @@
     margin: 0;
 
     /* Center contents within flexbox */
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 
