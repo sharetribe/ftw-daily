@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { reduxForm, Field, propTypes as formPropTypes } from 'redux-form';
-import { NamedLink, IconEmailAttention, IconEmailSuccess } from '../../components';
+import { NamedLink, IconEmailAttention, IconEmailSuccess, PrimaryButton } from '../../components';
 import * as propTypes from '../../util/propTypes';
 
 import css from './EmailVerificationForm.css';
@@ -45,12 +45,12 @@ const EmailVerificationFormComponent = props => {
         <Field component="input" type="hidden" name="verificationToken" />
 
         <div className={css.bottomWrapper}>
-          <NamedLink className={css.submitButton} type="submit" disabled={submitting || inProgress}>
+          <PrimaryButton type="submit" disabled={submitting || inProgress}>
 
             {submitting || inProgress
               ? <FormattedMessage id="EmailVerificationForm.verifying" />
               : <FormattedMessage id="EmailVerificationForm.verify" />}
-          </NamedLink>
+          </PrimaryButton>
 
         </div>
       </form>
