@@ -94,7 +94,6 @@
   "EditListingPhotosForm.savedImageAltText": "Saved listing image",
   "EditListingPhotosForm.showListingFailed": "Fetching listing data failed",
   "EditListingPhotosForm.updateFailed": "Failed to update listing. Please try again.",
-  "EditListingPhotosForm.updated": "Updated!",
   "EditListingPhotosPanel.createListingTitle": "Add a few photos",
   "EditListingPhotosPanel.payoutModalInfo": "Since this was the first listing you created, we need to know bit more information about you in order to send you money. We only ask these once.",
   "EditListingPhotosPanel.payoutModalTitleOneMoreThing": "One more thing:",

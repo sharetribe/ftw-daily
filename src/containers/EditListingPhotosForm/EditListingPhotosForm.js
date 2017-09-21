@@ -147,11 +147,12 @@ export class EditListingPhotosFormComponent extends Component {
 
     const classes = classNames(css.root, className);
 
-    const disableForm = invalid ||
-      submitting ||
+    const submitReady = updated;
+    const submitInProgress = submitting || updateInProgress;
+    const submitDisabled = invalid ||
       disabled ||
-      this.state.imageUploadRequested ||
-      updateInProgress;
+      submitInProgress ||
+      this.state.imageUploadRequested;
 
     return (
       <form className={classes} onSubmit={handleSubmit}>
@@ -198,8 +199,14 @@ export class EditListingPhotosFormComponent extends Component {
         {createListingFailed}
         {showListingFailed}
 
-        <Button className={css.submitButton} type="submit" disabled={disableForm}>
-          {updated ? <FormattedMessage id="EditListingPhotosForm.updated" /> : saveActionMsg}
+        <Button
+          className={css.submitButton}
+          type="submit"
+          inProgress={submitInProgress}
+          disabled={submitDisabled}
+          ready={submitReady}
+        >
+          {saveActionMsg}
         </Button>
       </form>
     );
