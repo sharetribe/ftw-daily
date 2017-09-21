@@ -69,7 +69,6 @@
   "EditListingDescriptionForm.titlePlaceholder": "What's the name of your sauna?",
   "EditListingDescriptionForm.titleRequired": "You need to add a name.",
   "EditListingDescriptionForm.updateFailed": "Failed to update listing. Please try again.",
-  "EditListingDescriptionForm.updated": "Updated!",
   "EditListingDescriptionPanel.createListingTitle": "Add your sauna",
   "EditListingDescriptionPanel.title": "Edit details of {listingTitle}",
   "EditListingLocationForm.address": "Address",
