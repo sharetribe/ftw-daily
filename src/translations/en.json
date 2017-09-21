@@ -78,7 +78,6 @@
   "EditListingLocationForm.building": "Apt, suite, building # (optional)",
   "EditListingLocationForm.buildingPlaceholder": "E.g. A 42",
   "EditListingLocationForm.updateFailed": "Failed to update listing. Please try again.",
-  "EditListingLocationForm.updated": "Updated!",
   "EditListingLocationPanel.createListingTitle": "Where's your sauna?",
   "EditListingLocationPanel.title": "Edit location of {listingTitle}",
   "EditListingPage.loadingListingData": "Loading listing data…",
