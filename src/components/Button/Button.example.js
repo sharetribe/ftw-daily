@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component } from 'react';
-import { IconSearch } from '../../components';
+import { IconCheckmark } from '../../components';
 import Button, { PrimaryButton, SecondaryButton, InlineTextButton } from './Button';
 
 import css from './Button.example.css';
@@ -54,8 +54,8 @@ const ButtonsComponent = () => {
 
       <h3>Button with an icon and a text:</h3>
       <Button>
-        <IconSearch rootClassName={css.searchIcon} />
-        <span>Search saunas</span>
+        <IconCheckmark rootClassName={css.customIcon} />
+        <span>Custom text</span>
       </Button>
 
       <h3>Default button:</h3>

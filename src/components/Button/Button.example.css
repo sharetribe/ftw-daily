@@ -19,9 +19,9 @@
   height: 100px;
 }
 
-.searchIcon {
-  width: 16px;
-  height: 16px;
+.customIcon {
+  width: 24px;
+  height: 24px;
   stroke: #fff;
   margin-right: 10px;
 }
