@@ -90,6 +90,7 @@ export const EditListingPageComponent = props => {
   const { id, type } = params;
 
   const isNew = type === 'new';
+  const newListingCreated = isNew && !!page.submittedListingId;
   const listingId = page.submittedListingId || (id ? new types.UUID(id) : null);
   const currentListing = getListing(listingId);
 
@@ -164,6 +165,7 @@ export const EditListingPageComponent = props => {
           disabled={disableForm}
           errors={errors}
           fetchInProgress={fetchInProgress}
+          newListingCreated={newListingCreated}
           flattenedRoutes={flattenedRoutes}
           history={history}
           images={images}
@@ -181,7 +183,7 @@ export const EditListingPageComponent = props => {
           currentUser={currentUser}
           onManageDisableScrolling={onManageDisableScrolling}
           updatedTab={page.updatedTab}
-          updateInProgress={page.updateInProgress}
+          updateInProgress={page.updateInProgress || page.createListingInProgress}
         />
       </PageLayout>
     );

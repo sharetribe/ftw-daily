@@ -44,6 +44,7 @@ const PayoutDetailsFormComponent = props => {
     createStripeAccountError,
     form,
     disabled,
+    inProgress,
     handleSubmit,
     pristine,
     submitting,
@@ -172,7 +173,9 @@ const PayoutDetailsFormComponent = props => {
     : null;
 
   const classes = classNames(css.root, className);
-  const submitDisabled = pristine || submitting || invalid || disabled;
+  const submitReady = false;
+  const submitInProgress = submitting || inProgress;
+  const submitDisabled = pristine || invalid || disabled || submitInProgress;
   const error = createStripeAccountError
     ? <div className={css.error}>
         <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailed" />
@@ -240,7 +243,13 @@ const PayoutDetailsFormComponent = props => {
       </div>
       {bankAccountSection}
       {error}
-      <Button className={css.submitButton} type="submit" disabled={submitDisabled}>
+      <Button
+        className={css.submitButton}
+        type="submit"
+        inProgress={submitInProgress}
+        disabled={submitDisabled}
+        ready={submitReady}
+      >
         <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
       </Button>
     </form>
@@ -252,6 +261,7 @@ PayoutDetailsFormComponent.defaultProps = {
   country: null,
   createStripeAccountError: null,
   disabled: false,
+  inProgress: false,
 };
 
 const { bool, object, string } = PropTypes;
@@ -261,6 +271,7 @@ PayoutDetailsFormComponent.propTypes = {
   className: string,
   createStripeAccountError: object,
   disabled: bool,
+  inProgress: bool,
 
   // from mapStateToProps
   country: string,

@@ -354,17 +354,22 @@ export const fetchCurrentUser = () =>
 export const createStripeAccount = payoutDetails =>
   (dispatch, getState, sdk) => {
     dispatch(stripeAccountCreateRequest());
+
+    let accountResponse;
+
     return sdk.currentUser
       .createStripeAccount(payoutDetails)
       .then(response => {
-        dispatch(stripeAccountCreateSuccess(response));
-        return response;
+        accountResponse = response;
+        return dispatch(fetchCurrentUser());
+      })
+      .then(() => {
+        dispatch(stripeAccountCreateSuccess(accountResponse));
       })
       .catch(e => {
         dispatch(stripeAccountCreateError(e));
         throw e;
-      })
-      .then(() => dispatch(fetchCurrentUser()));
+      });
   };
 
 export const sendVerificationEmail = () =>

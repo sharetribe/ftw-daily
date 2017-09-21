@@ -15,6 +15,7 @@ export const NoPhotos = {
       tab: 'pricing',
     },
     fetchInProgress: false,
+    newListingCreated: false,
     flattenedRoutes: flattenRoutes(routesConfiguration),
     history: { push: noop },
     images: [],

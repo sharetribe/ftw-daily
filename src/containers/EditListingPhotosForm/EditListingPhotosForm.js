@@ -88,6 +88,7 @@ export class EditListingPhotosFormComponent extends Component {
       saveActionMsg,
       submitting,
       updated,
+      ready,
       updateError,
       updateInProgress,
       onRemoveImage,
@@ -147,12 +148,13 @@ export class EditListingPhotosFormComponent extends Component {
 
     const classes = classNames(css.root, className);
 
-    const submitReady = updated;
+    const submitReady = updated || ready;
     const submitInProgress = submitting || updateInProgress;
     const submitDisabled = invalid ||
       disabled ||
       submitInProgress ||
-      this.state.imageUploadRequested;
+      this.state.imageUploadRequested ||
+      ready;
 
     return (
       <form className={classes} onSubmit={handleSubmit}>
@@ -228,6 +230,7 @@ EditListingPhotosFormComponent.propTypes = {
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   updated: bool.isRequired,
+  ready: bool.isRequired,
   updateError: instanceOf(Error),
   updateInProgress: bool.isRequired,
   onRemoveImage: func.isRequired,
