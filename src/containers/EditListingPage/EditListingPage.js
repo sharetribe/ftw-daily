@@ -189,7 +189,7 @@ export const EditListingPageComponent = props => {
     // If user has come to this page through a direct linkto edit existing listing,
     // we need to load it first.
     const loadingPageMsg = {
-      id: 'ListingPage.loadingListingData',
+      id: 'EditListingPage.loadingListingData',
     };
     return <PageLayout title={intl.formatMessage(loadingPageMsg)} />;
   }

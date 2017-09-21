@@ -82,6 +82,7 @@
   "EditListingLocationForm.updated": "Updated!",
   "EditListingLocationPanel.createListingTitle": "Where's your sauna?",
   "EditListingLocationPanel.title": "Edit location of {listingTitle}",
+  "EditListingPage.loadingListingData": "Loading listing data…",
   "EditListingPage.titleCreateListing": "Create a listing",
   "EditListingPage.titleEditListing": "Edit listing",
   "EditListingPhotosForm.addImagesTip": "Tip: Choose 2-3 best photos of your sauna from different angles in a good light that really show the space.",
