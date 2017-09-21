@@ -104,7 +104,6 @@
   "EditListingPricingForm.pricePerNight": "Price per night in euros",
   "EditListingPricingForm.priceRequired": "You need to add a valid price.",
   "EditListingPricingForm.updateFailed": "Failed to update listing. Please try again.",
-  "EditListingPricingForm.updated": "Updated!",
   "EditListingPricingPanel.createListingTitle": "How much does it cost?",
   "EditListingPricingPanel.title": "Edit pricing of {listingTitle}",
   "EditListingWizard.saveEditDescription": "Save description",
