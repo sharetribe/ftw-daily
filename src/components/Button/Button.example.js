@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component } from 'react';
+import { IconSearch } from '../../components';
 import Button, { PrimaryButton, SecondaryButton, InlineTextButton } from './Button';
 
 import css from './Button.example.css';
@@ -21,6 +22,8 @@ class InteractiveButton extends Component {
   }
   render() {
     const handleClick = () => {
+      window.clearTimeout(this.inProgressTimeoutId);
+      window.clearTimeout(this.readyTimeoutId);
       this.setState({ inProgress: true, disabled: true });
       this.inProgressTimeoutId = window.setTimeout(
         () => {
@@ -45,6 +48,15 @@ const ButtonsComponent = () => {
     <div>
       <h3>Interactive button:</h3>
       <InteractiveButton />
+
+      <h3>Button with a translation:</h3>
+      <Button><span>Clique moi</span></Button>
+
+      <h3>Button with an icon and a text:</h3>
+      <Button>
+        <IconSearch rootClassName={css.searchIcon} />
+        <span>Search saunas</span>
+      </Button>
 
       <h3>Default button:</h3>
       <Button>Click me</Button>
@@ -79,7 +91,7 @@ const ButtonsComponent = () => {
       <h3>Primary button disabled and in progress:</h3>
       <PrimaryButton disabled inProgress>Click me</PrimaryButton>
 
-      <h3>Primary button disabled ready:</h3>
+      <h3>Primary button disabled and ready:</h3>
       <PrimaryButton disabled ready>Click me</PrimaryButton>
 
       <h3>Secondary button:</h3>
@@ -97,7 +109,7 @@ const ButtonsComponent = () => {
       <h3>Secondary button disabled and in progress:</h3>
       <SecondaryButton disabled inProgress>Click me</SecondaryButton>
 
-      <h3>Secondary button disabled ready:</h3>
+      <h3>Secondary button disabled and ready:</h3>
       <SecondaryButton disabled ready>Click me</SecondaryButton>
 
       <h3>Inline text button:</h3>
@@ -108,6 +120,11 @@ const ButtonsComponent = () => {
 
       <h3>Link that looks like a default button:</h3>
       <a className={css.buttonLink} href="#" onClick={preventDefault}>Click me</a>
+
+      <h3>Translated link that looks like a default button:</h3>
+      <a className={css.buttonLink} href="#" onClick={preventDefault}>
+        <span>Clique moi</span>
+      </a>
 
       <h3>Link that looks like a primary button:</h3>
       <a className={css.buttonLinkPrimary} href="#" onClick={preventDefault}>Click me</a>

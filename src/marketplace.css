@@ -152,18 +152,14 @@
     @apply --marketplaceButtonFontStyles;
 
     /* Dimensions */
-    display: flex;
+    display: block;
     width: 100%;
     min-height: 65px;
     margin: 0;
 
-    /* Center contents within flexbox */
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
-    /* Push the text up from center */
-    padding-bottom: 2px;
+    /* Padding is only for <a> elements where button styles are applied,
+   buttons elements should have zero padding */
+    padding: 20px 0 0 0;
 
     /* Borders */
     border: none;
@@ -178,11 +174,11 @@
     text-decoration: none;
 
     /* Effects */
-
     transition: all var(--transitionStyleButton);
+    cursor: pointer;
 
-    &:enabled:hover,
-    &:enabled:focus {
+    &:hover,
+    &:focus {
       outline: none;
       background-color: var(--marketplaceColorDark);
       text-decoration: none;
@@ -192,9 +188,7 @@
       background-color: var(--matterColorNegative);
       color: var(--matterColorLight);
       cursor: not-allowed;
-    }
-    &:enabled {
-      cursor: pointer;
+      box-shadow: none;
     }
   }
   --marketplaceButtonStylesPrimary {
@@ -203,9 +197,13 @@
     background-color: var(--successColor);
     color: var(--matterColorLight);
 
-    &:enabled:hover,
-    &:enabled:focus {
+    &:hover,
+    &:focus {
       background-color: var(--successColorDark);
+    }
+    &:disabled {
+      background-color: var(--matterColorNegative);
+      color: var(--matterColorLight);
     }
   }
   --marketplaceButtonStylesSecondary {
@@ -214,14 +212,23 @@
     background-color: var(--matterColorLight);
     color: var(--matterColor);
 
+    /* Padding is only for <a> elements where button styles are applied,
+   buttons elements should have zero padding */
+    padding: 18px 0 0 0;
+
     border-width: 1px;
     border-style: solid;
     border-color: var(--matterColorNegative);
 
-    &:enabled:hover,
-    &:enabled:focus {
+    &:hover,
+    &:focus {
       background-color: var(--matterColorLight);
       border-color: var(--matterColorAnti);
+    }
+    &:disabled {
+      background-color: var(--matterColorNegative);
+      color: var(--matterColorLight);
+      border-color: var(--matterColorNegative);
     }
   }
 
