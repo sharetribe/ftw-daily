@@ -23,6 +23,7 @@ import config from './config';
 import { authInfo } from './ducks/Auth.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
 import routeConfiguration from './routesConfiguration';
+import * as log from './util/log';
 
 import './marketplaceIndex.css';
 
@@ -73,6 +74,7 @@ if (typeof window !== 'undefined') {
 
   setupStripe();
   render(store);
+  log.setup(config.sentryDsn);
 
   if (config.dev) {
     // Expose stuff for the browser REPL

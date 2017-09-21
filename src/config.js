@@ -11,6 +11,8 @@ const sdkBaseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'http://loca
 
 const currency = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY || 'USD';
 
+const sentryDsn = process.env.REACT_APP_PUBLIC_SENTRY_DSN;
+
 // Currency formatting options.
 // See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
 //
@@ -209,6 +211,7 @@ const config = {
   siteTitle,
   siteTwitterHandle,
   facebookAppId,
+  sentryDsn,
 };
 
 export default config;
