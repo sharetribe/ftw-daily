@@ -57,7 +57,9 @@ const PasswordResetFormComponent = props => {
   );
 
   const classes = classNames(rootClassName || css.root, className);
-  const submitDisabled = invalid || submitting || inProgress;
+
+  const submitInProgress = submitting || inProgress;
+  const submitDisabled = invalid || submitInProgress;
 
   return (
     <form className={classes} onSubmit={handleSubmit}>
@@ -70,7 +72,7 @@ const PasswordResetFormComponent = props => {
         placeholder={passwordPlaceholder}
         validate={[passwordRequired, passwordMinLength, passwordMaxLength]}
       />
-      <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
+      <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
         <FormattedMessage id="PasswordResetForm.submitButtonText" />
       </PrimaryButton>
     </form>
