@@ -99,6 +99,7 @@ class ProfileSettingsFormComponent extends Component {
       rootClassName,
       submitting,
       updateInProgress,
+      updateProfileReady,
       updateProfileError,
       uploadImageError,
       uploadInProgress,
@@ -187,8 +188,9 @@ class ProfileSettingsFormComponent extends Component {
       : null;
 
     const classes = classNames(rootClassName || css.root, className);
-    const inProgress = uploadInProgress || updateInProgress;
-    const submitDisabled = invalid || submitting || inProgress || pristine;
+    const submitInProgress = submitting || updateInProgress;
+    const submitReady = updateProfileReady;
+    const submitDisabled = invalid || pristine || uploadInProgress || submitInProgress;
 
     return (
       <form className={classes} onSubmit={handleSubmit}>
@@ -236,7 +238,13 @@ class ProfileSettingsFormComponent extends Component {
           </div>
         </div>
         {submitError}
-        <Button className={css.submitButton} type="submit" disabled={submitDisabled}>
+        <Button
+          className={css.submitButton}
+          type="submit"
+          inProgress={submitInProgress}
+          disabled={submitDisabled}
+          ready={submitReady}
+        >
           <FormattedMessage id="ProfileSettingsForm.saveChanges" />
         </Button>
       </form>
@@ -249,16 +257,21 @@ ProfileSettingsFormComponent.defaultProps = {
   className: null,
   uploadImageError: null,
   updateProfileError: null,
+  updateProfileReady: false,
 };
 
 ProfileSettingsFormComponent.propTypes = {
   ...formPropTypes,
   rootClassName: string,
   className: string,
+
   uploadImageError: instanceOf(Error),
   uploadInProgress: bool.isRequired,
   updateInProgress: bool.isRequired,
   updateProfileError: instanceOf(Error),
+  updateProfileReady: bool,
+
+  // from injectIntl
   intl: intlShape.isRequired,
 };
 

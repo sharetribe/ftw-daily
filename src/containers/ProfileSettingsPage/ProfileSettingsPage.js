@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -21,101 +21,113 @@ const onImageUploadHandler = (values, fn) => {
   }
 };
 
-const onSubmit = (values, fn) => {
-  const { firstName, lastName, profileImage } = values;
-  const name = { firstName, lastName };
+export class ProfileSettingsPageComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { profileUpdated: false };
+  }
+  render() {
+    const {
+      authInfoError,
+      authInProgress,
+      currentUser,
+      currentUserHasListings,
+      currentUserHasOrders,
+      history,
+      image,
+      isAuthenticated,
+      location,
+      logoutError,
+      notificationCount,
+      onChange,
+      onImageUpload,
+      onLogout,
+      onManageDisableScrolling,
+      onUpdateProfile,
+      scrollingDisabled,
+      updateInProgress,
+      updateProfileError,
+      uploadImageError,
+      uploadInProgress,
+      sendVerificationEmailInProgress,
+      sendVerificationEmailError,
+      onResendVerificationEmail,
+    } = this.props;
 
-  // Update profileImage only if file system has been accessed
-  const updatedValues = profileImage.imageId && profileImage.file
-    ? { ...name, profileImageId: profileImage.imageId }
-    : name;
+    const handleSubmit = values => {
+      const { firstName, lastName, profileImage } = values;
+      const name = { firstName, lastName };
 
-  fn(updatedValues);
-};
+      // Update profileImage only if file system has been accessed
+      const updatedValues = profileImage.imageId && profileImage.file
+        ? { ...name, profileImageId: profileImage.imageId }
+        : name;
 
-export const ProfileSettingsPageComponent = props => {
-  const {
-    authInfoError,
-    authInProgress,
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    history,
-    image,
-    isAuthenticated,
-    location,
-    logoutError,
-    notificationCount,
-    onChange,
-    onImageUpload,
-    onLogout,
-    onManageDisableScrolling,
-    onUpdateProfile,
-    scrollingDisabled,
-    updateInProgress,
-    updateProfileError,
-    uploadImageError,
-    uploadInProgress,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-    onResendVerificationEmail,
-  } = props;
+      onUpdateProfile(updatedValues).then(() => {
+        this.setState({ profileUpdated: true });
+      });
+    };
 
-  const user = ensureCurrentUser(currentUser);
-  const { firstName, lastName } = user.attributes.profile;
-  const profileImage = image || { imageId: user.profileImage.id };
+    const handleChange = () => {
+      this.setState({ profileUpdated: false });
+      onChange();
+    };
 
-  const profileSettingsForm = user.id
-    ? <ProfileSettingsForm
-        className={css.form}
-        currentUser={currentUser}
-        initialValues={{ firstName, lastName, profileImage }}
-        profileImage={profileImage}
-        onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
-        uploadInProgress={uploadInProgress}
-        updateInProgress={updateInProgress}
-        uploadImageError={uploadImageError}
-        updateProfileError={updateProfileError}
-        onSubmit={values => {
-          onSubmit({ ...values, profileImage }, onUpdateProfile);
-        }}
-        onChange={onChange}
-      />
-    : null;
+    const user = ensureCurrentUser(currentUser);
+    const { firstName, lastName } = user.attributes.profile;
+    const profileImage = image || { imageId: user.profileImage.id };
 
-  return (
-    <PageLayout
-      className={css.root}
-      authInfoError={authInfoError}
-      logoutError={logoutError}
-      title="Profile settings"
-      scrollingDisabled={scrollingDisabled}
-    >
-      <Topbar
-        authInProgress={authInProgress}
-        currentPage="ProfileSettingsPage"
-        currentUser={currentUser}
-        currentUserHasListings={currentUserHasListings}
-        currentUserHasOrders={currentUserHasOrders}
-        history={history}
-        isAuthenticated={isAuthenticated}
-        location={location}
-        notificationCount={notificationCount}
-        onLogout={onLogout}
-        onManageDisableScrolling={onManageDisableScrolling}
-        onResendVerificationEmail={onResendVerificationEmail}
-        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-        sendVerificationEmailError={sendVerificationEmailError}
-      />
-      <UserNav selectedPageName="ProfileSettingsPage" />
+    const profileSettingsForm = user.id
+      ? <ProfileSettingsForm
+          className={css.form}
+          currentUser={currentUser}
+          initialValues={{ firstName, lastName, profileImage }}
+          profileImage={profileImage}
+          onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
+          uploadInProgress={uploadInProgress}
+          updateInProgress={updateInProgress}
+          updateProfileReady={this.state.profileUpdated}
+          uploadImageError={uploadImageError}
+          updateProfileError={updateProfileError}
+          onSubmit={handleSubmit}
+          onChange={handleChange}
+        />
+      : null;
 
-      <div className={css.content}>
-        <h1><FormattedMessage id="ProfileSettingsPage.title" /></h1>
-        {profileSettingsForm}
-      </div>
-    </PageLayout>
-  );
-};
+    return (
+      <PageLayout
+        className={css.root}
+        authInfoError={authInfoError}
+        logoutError={logoutError}
+        title="Profile settings"
+        scrollingDisabled={scrollingDisabled}
+      >
+        <Topbar
+          authInProgress={authInProgress}
+          currentPage="ProfileSettingsPage"
+          currentUser={currentUser}
+          currentUserHasListings={currentUserHasListings}
+          currentUserHasOrders={currentUserHasOrders}
+          history={history}
+          isAuthenticated={isAuthenticated}
+          location={location}
+          notificationCount={notificationCount}
+          onLogout={onLogout}
+          onManageDisableScrolling={onManageDisableScrolling}
+          onResendVerificationEmail={onResendVerificationEmail}
+          sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+          sendVerificationEmailError={sendVerificationEmailError}
+        />
+        <UserNav selectedPageName="ProfileSettingsPage" />
+
+        <div className={css.content}>
+          <h1><FormattedMessage id="ProfileSettingsPage.title" /></h1>
+          {profileSettingsForm}
+        </div>
+      </PageLayout>
+    );
+  }
+}
 
 ProfileSettingsPageComponent.defaultProps = {
   authInfoError: null,
