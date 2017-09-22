@@ -75,6 +75,7 @@ const EditListingWizard = props => {
     params,
     errors,
     fetchInProgress,
+    newListingCreated,
     flattenedRoutes,
     history,
     images,
@@ -213,6 +214,7 @@ const EditListingWizard = props => {
         selected={selectedTab === PHOTOS}
         disabled={!stepsStatus[PHOTOS]}
         panelUpdated={updatedTab === PHOTOS}
+        newListingCreated={newListingCreated}
         updateInProgress={updateInProgress}
         errors={errors}
         fetchInProgress={fetchInProgress}
@@ -268,6 +270,7 @@ EditListingWizard.propTypes = {
     uploadImageError: object,
   }).isRequired,
   fetchInProgress: bool.isRequired,
+  newListingCreated: bool.isRequired,
   flattenedRoutes: arrayOf(propTypes.route).isRequired,
   history: shape({
     push: func.isRequired,

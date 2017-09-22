@@ -52,6 +52,8 @@ import * as EditListingPhotosForm
   from './containers/EditListingPhotosForm/EditListingPhotosForm.example';
 import * as EditListingPricingForm
   from './containers/EditListingPricingForm/EditListingPricingForm.example';
+import * as EmailVerificationForm
+  from './containers/EmailVerificationForm/EmailVerificationForm.example';
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
 import * as PasswordRecoveryForm
   from './containers/PasswordRecoveryForm/PasswordRecoveryForm.example';
@@ -78,6 +80,7 @@ export {
   EditListingPhotosForm,
   EditListingPricingForm,
   EditListingWizard,
+  EmailVerificationForm,
   ExpandingTextarea,
   IconBannedUser,
   IconCheckmark,

@@ -66,7 +66,9 @@ export const currentUser = shape({
   id: uuid.isRequired,
   type: value('current-user').isRequired,
   attributes: shape({
+    banned: bool.isRequired,
     email: string.isRequired,
+    emailVerified: bool.isRequired,
     profile: shape({
       firstName: string.isRequired,
       lastName: string.isRequired,
@@ -82,6 +84,7 @@ export const user = shape({
   id: uuid.isRequired,
   type: value('user').isRequired,
   attributes: shape({
+    banned: bool.isRequired,
     profile: shape({
       displayName: string.isRequired,
       abbreviatedName: string.isRequired,

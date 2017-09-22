@@ -19,6 +19,7 @@ const PasswordRecoveryFormComponent = props => {
     form,
     initialValues,
     intl,
+    inProgress,
     recoveryError,
   } = props;
 
@@ -43,8 +44,10 @@ const PasswordRecoveryFormComponent = props => {
     ? emailNotFoundMessage
     : null;
   const initialEmail = initialValues ? initialValues.email : null;
-  const submitDisabled = (pristine && !initialEmail) || submitting;
+
   const classes = classNames(rootClassName || css.root, className);
+  const submitInProgress = submitting || inProgress;
+  const submitDisabled = (pristine && !initialEmail) || submitInProgress;
 
   const loginLink = (
     <NamedLink name="LoginPage" className={css.modalHelperLink}>
@@ -72,7 +75,7 @@ const PasswordRecoveryFormComponent = props => {
           </span>
         </p>
 
-        <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
+        <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
           <FormattedMessage id="PasswordRecoveryForm.sendInstructions" />
         </PrimaryButton>
       </div>
@@ -84,16 +87,21 @@ const PasswordRecoveryFormComponent = props => {
 PasswordRecoveryFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  inProgress: false,
   recoveryError: null,
 };
 
-const { instanceOf, string } = PropTypes;
+const { instanceOf, string, bool } = PropTypes;
 
 PasswordRecoveryFormComponent.propTypes = {
   ...formPropTypes,
   rootClassName: string,
   className: string,
+
+  inProgress: bool,
   recoveryError: instanceOf(Error),
+
+  // from injectIntl
   intl: intlShape.isRequired,
 };
 

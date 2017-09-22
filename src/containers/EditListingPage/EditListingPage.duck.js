@@ -45,6 +45,7 @@ const initialState = {
   updateListingError: null,
   showListingsError: null,
   uploadImageError: null,
+  createListingInProgress: false,
   submittedListingId: null,
   redirectToListing: false,
   images: {},
@@ -66,16 +67,27 @@ export default function reducer(state = initialState, action = {}) {
     case CREATE_LISTING_REQUEST:
       return {
         ...state,
+        createListingInProgress: true,
         createListingsError: null,
         submittedListingId: null,
         redirectToListing: false,
       };
     case CREATE_LISTING_SUCCESS:
-      return { ...state, submittedListingId: payload.data.id, redirectToListing: true };
+      return {
+        ...state,
+        createListingInProgress: false,
+        submittedListingId: payload.data.id,
+        redirectToListing: true,
+      };
     case CREATE_LISTING_ERROR:
       // eslint-disable-next-line no-console
       console.error(payload);
-      return { ...state, createListingsError: payload, redirectToListing: false };
+      return {
+        ...state,
+        createListingInProgress: false,
+        createListingsError: payload,
+        redirectToListing: false,
+      };
 
     case UPDATE_LISTING_REQUEST:
       return { ...state, updateInProgress: true, updateListingError: null };

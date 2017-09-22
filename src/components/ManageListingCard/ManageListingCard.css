@@ -259,9 +259,13 @@
 }
 
 .edit {
-  /* TODO: Odd font-size */
   @apply --marketplaceButtonStylesSecondary;
+
+  /* TODO: Odd font-size */
   font-size: 14px;
+
+  /* Reset min-height from button styles */
+  min-height: 0;
 
   /* Reserve space for button */
   flex-shrink: 0;
@@ -331,7 +335,12 @@
 }
 
 .openListingButton {
+  @apply --marketplaceButtonStylesPrimary;
   @apply --marketplaceH5FontStyles;
+
+  /* Reset min-height from button styles */
+  min-height: 0;
+
   width: 114px;
   height: 41px;
   padding: 6px 0 8px;

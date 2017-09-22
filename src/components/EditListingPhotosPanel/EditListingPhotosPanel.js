@@ -65,6 +65,7 @@ class EditListingPhotosPanel extends Component {
       address: omitBy(address, isUndefined),
     };
     this.props.onPayoutDetailsSubmit(params).then(() => {
+      this.setState({ showPayoutDetails: false });
       this.props.onManageDisableScrolling('EditListingPhotosPanel.payoutModal', false);
       this.props.onSubmit(this.state.submittedValues);
     });
@@ -76,6 +77,7 @@ class EditListingPhotosPanel extends Component {
       rootClassName,
       errors,
       fetchInProgress,
+      newListingCreated,
       images,
       listing,
       onImageUpload,
@@ -106,6 +108,7 @@ class EditListingPhotosPanel extends Component {
         <EditListingPhotosForm
           className={css.form}
           disabled={fetchInProgress}
+          ready={newListingCreated}
           errors={errors}
           initialValues={{ images }}
           images={images}
@@ -139,7 +142,7 @@ class EditListingPhotosPanel extends Component {
           </div>
           <PayoutDetailsForm
             className={css.payoutDetails}
-            disabled={fetchInProgress}
+            inProgress={fetchInProgress}
             createStripeAccountError={errors ? errors.createStripeAccountError : null}
             onChange={onPayoutDetailsFormChange}
             onSubmit={this.handlePayoutSubmit}
@@ -174,6 +177,7 @@ EditListingPhotosPanel.propTypes = {
     createStripeAccountError: object,
   }),
   fetchInProgress: bool.isRequired,
+  newListingCreated: bool.isRequired,
   images: array,
   listing: object, // TODO Should be propTypes.listing after API support is added.
   onImageUpload: func.isRequired,

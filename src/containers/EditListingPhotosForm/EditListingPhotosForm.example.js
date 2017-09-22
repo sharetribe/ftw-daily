@@ -14,6 +14,7 @@ export const Empty = {
     },
     saveActionMsg: 'Save photos',
     updated: false,
+    ready: false,
     updateInProgress: false,
     onUpdateImageOrder: imageOrder => {
       console.log('onUpdateImageOrder with new imageOrder:', imageOrder);

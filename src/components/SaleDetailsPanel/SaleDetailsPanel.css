@@ -80,6 +80,34 @@
   }
 }
 
+.error {
+  color: var(--failColor);
+  margin-left: 24px;
+  margin-right: 24px;
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}
+
+.errorMobile {
+  margin-top: 24px;
+
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.errorDesktop {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: block;
+    position: absolute;
+    bottom: 80px;
+  }
+}
+
 .avatarMobile {
   /* Position (over the listing image)*/
   margin-top: -31px;

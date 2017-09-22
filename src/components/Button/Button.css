@@ -73,6 +73,18 @@
 
 .ready {
   padding: 0;
+
+  &:disabled {
+    background-color: var(--marketplaceColor);
+  }
+}
+
+.primaryButton.ready:disabled {
+  background-color: var(--successColor);
+}
+
+.secondaryButton.ready:disabled {
+  background-color: var(--matterColorLight);
 }
 
 .spinner {

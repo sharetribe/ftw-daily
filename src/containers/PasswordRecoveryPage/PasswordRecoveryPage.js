@@ -76,6 +76,7 @@ export const PasswordRecoveryPageComponent = props => {
         <FormattedMessage id="PasswordRecoveryPage.forgotPasswordMessage" />
       </p>
       <PasswordRecoveryForm
+        inProgress={recoveryInProgress}
         onChange={onChange}
         onSubmit={values => onSubmitEmail(values.email)}
         initialValues={{ email: initialEmail }}

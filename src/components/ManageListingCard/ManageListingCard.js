@@ -16,8 +16,6 @@ import {
   MenuContent,
   MenuItem,
   NamedLink,
-  PrimaryButton,
-  SecondaryButton,
   IconSpinner,
   ResponsiveImage,
 } from '../../components';
@@ -103,7 +101,7 @@ export const ManageListingCardComponent = props => {
           <div className={css.closedMessage}>
             <FormattedMessage id="ManageListingCard.closedListing" />
           </div>
-          <PrimaryButton
+          <button
             className={css.openListingButton}
             disabled={!!actionsInProgressListingId}
             onClick={event => {
@@ -115,7 +113,7 @@ export const ManageListingCardComponent = props => {
             }}
           >
             <FormattedMessage id="ManageListingCard.openListing" />
-          </PrimaryButton>
+          </button>
         </div>
       </div>;
 
@@ -229,7 +227,7 @@ export const ManageListingCardComponent = props => {
             {title}
           </div>
         </div>
-        <SecondaryButton
+        <button
           className={css.edit}
           onClick={event => {
             event.preventDefault();
@@ -238,7 +236,7 @@ export const ManageListingCardComponent = props => {
           }}
         >
           <FormattedMessage id="ManageListingCard.edit" />
-        </SecondaryButton>
+        </button>
       </div>
     </NamedLink>
   );

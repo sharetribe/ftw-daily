@@ -150,8 +150,9 @@ class StripePaymentForm extends Component {
       });
   }
   render() {
-    const { className, rootClassName, disableSubmit, formId, paymentInfo } = this.props;
-    const submitDisabled = disableSubmit || this.state.submitting || !this.state.cardValueValid;
+    const { className, rootClassName, inProgress, formId, paymentInfo } = this.props;
+    const submitInProgress = this.state.submitting || inProgress;
+    const submitDisabled = !this.state.cardValueValid || submitInProgress;
     const classes = classNames(rootClassName || css.root, className);
     const cardClasses = classNames(css.card, {
       [css.cardSuccess]: this.state.cardValueValid,
@@ -173,7 +174,12 @@ class StripePaymentForm extends Component {
         {this.state.error ? <span style={{ color: 'red' }}>{this.state.error}</span> : null}
         <div className={css.submitContainer}>
           {paymentInfo ? <p className={css.paymentInfo}>{paymentInfo}</p> : null}
-          <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
+          <PrimaryButton
+            className={css.submitButton}
+            type="submit"
+            inProgress={submitInProgress}
+            disabled={submitDisabled}
+          >
             <FormattedMessage id="StripePaymentForm.submitPaymentInfo" />
           </PrimaryButton>
         </div>
@@ -185,7 +191,7 @@ class StripePaymentForm extends Component {
 StripePaymentForm.defaultProps = {
   className: null,
   rootClassName: null,
-  disableSubmit: false,
+  inProgress: false,
   paymentInfo: null,
 };
 
@@ -194,7 +200,7 @@ const { bool, func, string } = PropTypes;
 StripePaymentForm.propTypes = {
   className: string,
   rootClassName: string,
-  disableSubmit: bool,
+  inProgress: bool,
   formId: string.isRequired,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,

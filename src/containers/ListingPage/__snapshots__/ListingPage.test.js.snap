@@ -9,7 +9,9 @@ exports[`ListingPage matches snapshot 1`] = `
     currentUser={
       Object {
         "attributes": Object {
+          "banned": false,
           "email": "user-2@example.com",
+          "emailVerified": true,
           "profile": Object {
             "abbreviatedName": "user-2 abbreviated name",
             "displayName": "user-2 display name",
@@ -106,6 +108,7 @@ exports[`ListingPage matches snapshot 1`] = `
           user={
             Object {
               "attributes": Object {
+                "banned": false,
                 "profile": Object {
                   "abbreviatedName": "user-1 abbreviated name",
                   "displayName": "user-1 display name",
@@ -121,6 +124,7 @@ exports[`ListingPage matches snapshot 1`] = `
           user={
             Object {
               "attributes": Object {
+                "banned": false,
                 "profile": Object {
                   "abbreviatedName": "user-1 abbreviated name",
                   "displayName": "user-1 display name",

@@ -45,6 +45,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
       }
     }
     images={Array []}
+    newListingCreated={false}
     onChange={[Function]}
     onCreateListing={[Function]}
     onCreateListingDraft={[Function]}

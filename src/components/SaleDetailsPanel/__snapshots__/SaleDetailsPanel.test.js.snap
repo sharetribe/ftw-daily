@@ -28,6 +28,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
         user={
           Object {
             "attributes": Object {
+              "banned": false,
               "profile": Object {
                 "abbreviatedName": "customer1 abbreviated name",
                 "displayName": "customer1 display name",
@@ -46,6 +47,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
           user={
             Object {
               "attributes": Object {
+                "banned": false,
                 "profile": Object {
                   "abbreviatedName": "customer1 abbreviated name",
                   "displayName": "customer1 display name",
@@ -86,9 +88,12 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
             }
           } />
       </p>
+      <div />
       <div>
+        <div />
         <SecondaryButton
           disabled={false}
+          inProgress={false}
           onClick={[Function]}>
           <FormattedMessage
             id="SalePage.rejectButton"
@@ -96,6 +101,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
         </SecondaryButton>
         <PrimaryButton
           disabled={false}
+          inProgress={false}
           onClick={[Function]}>
           <FormattedMessage
             id="SalePage.acceptButton"
@@ -175,6 +181,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
             },
             "customer": Object {
               "attributes": Object {
+                "banned": false,
                 "profile": Object {
                   "abbreviatedName": "customer1 abbreviated name",
                   "displayName": "customer1 display name",
@@ -308,6 +315,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
               },
               "customer": Object {
                 "attributes": Object {
+                  "banned": false,
                   "profile": Object {
                     "abbreviatedName": "customer1 abbreviated name",
                     "displayName": "customer1 display name",

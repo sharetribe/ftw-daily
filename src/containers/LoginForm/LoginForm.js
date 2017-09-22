@@ -45,7 +45,8 @@ const LoginFormComponent = props => {
   const passwordRequired = validators.required(passwordRequiredMessage);
 
   const classes = classNames(rootClassName || css.root, className);
-  const submitDisabled = invalid || submitting || inProgress;
+  const submitInProgress = submitting || inProgress;
+  const submitDisabled = invalid || submitInProgress;
 
   const passwordRecoveryLink = (
     <NamedLink name="PasswordRecoveryPage" className={css.recoveryLink}>
@@ -81,7 +82,12 @@ const LoginFormComponent = props => {
             <FormattedMessage id="LoginForm.forgotPasswordInfo" values={{ passwordRecoveryLink }} />
           </span>
         </p>
-        <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
+        <PrimaryButton
+          className={css.submitButton}
+          type="submit"
+          inProgress={submitInProgress}
+          disabled={submitDisabled}
+        >
           <FormattedMessage id="LoginForm.logIn" />
         </PrimaryButton>
       </div>

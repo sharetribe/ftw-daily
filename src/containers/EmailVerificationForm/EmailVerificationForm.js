@@ -25,6 +25,9 @@ const EmailVerificationFormComponent = props => {
     </div>
   );
 
+  const submitInProgress = submitting || inProgress;
+  const submitDisabled = submitInProgress;
+
   const verifyEmail = (
     <div className={css.root}>
       <div>
@@ -45,7 +48,7 @@ const EmailVerificationFormComponent = props => {
         <Field component="input" type="hidden" name="verificationToken" />
 
         <div className={css.bottomWrapper}>
-          <PrimaryButton type="submit" disabled={submitting || inProgress}>
+          <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
 
             {submitting || inProgress
               ? <FormattedMessage id="EmailVerificationForm.verifying" />

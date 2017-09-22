@@ -29,6 +29,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
         user={
           Object {
             "attributes": Object {
+              "banned": false,
               "profile": Object {
                 "abbreviatedName": "provider abbreviated name",
                 "displayName": "provider display name",
@@ -154,6 +155,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
               },
               "customer": Object {
                 "attributes": Object {
+                  "banned": false,
                   "profile": Object {
                     "abbreviatedName": "customer abbreviated name",
                     "displayName": "customer display name",
@@ -189,6 +191,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
               },
               "provider": Object {
                 "attributes": Object {
+                  "banned": false,
                   "profile": Object {
                     "abbreviatedName": "provider abbreviated name",
                     "displayName": "provider display name",
@@ -231,6 +234,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
             user={
               Object {
                 "attributes": Object {
+                  "banned": false,
                   "profile": Object {
                     "abbreviatedName": "provider abbreviated name",
                     "displayName": "provider display name",
@@ -328,6 +332,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
               },
               "customer": Object {
                 "attributes": Object {
+                  "banned": false,
                   "profile": Object {
                     "abbreviatedName": "customer abbreviated name",
                     "displayName": "customer display name",
@@ -363,6 +368,7 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
               },
               "provider": Object {
                 "attributes": Object {
+                  "banned": false,
                   "profile": Object {
                     "abbreviatedName": "provider abbreviated name",
                     "displayName": "provider display name",
