@@ -29,7 +29,8 @@ describe('SaleDetailsPanel', () => {
       transaction,
       onAcceptSale: noop,
       onRejectSale: noop,
-      acceptOrRejectInProgress: false,
+      acceptInProgress: false,
+      rejectInProgress: false,
       intl: fakeIntl,
     };
     const tree = renderShallow(<SaleDetailsPanelComponent {...props} />);
@@ -54,7 +55,8 @@ describe('SaleDetailsPanel', () => {
       transaction,
       onAcceptSale: noop,
       onRejectSale: noop,
-      acceptOrRejectInProgress: false,
+      acceptInProgress: false,
+      rejectInProgress: false,
       intl: fakeIntl,
     };
     const panel = shallow(<SaleDetailsPanelComponent {...props} />);

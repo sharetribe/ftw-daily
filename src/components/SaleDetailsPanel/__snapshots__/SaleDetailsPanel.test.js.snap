@@ -88,9 +88,12 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
             }
           } />
       </p>
+      <div />
       <div>
+        <div />
         <SecondaryButton
           disabled={false}
+          inProgress={false}
           onClick={[Function]}>
           <FormattedMessage
             id="SalePage.rejectButton"
@@ -98,6 +101,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
         </SecondaryButton>
         <PrimaryButton
           disabled={false}
+          inProgress={false}
           onClick={[Function]}>
           <FormattedMessage
             id="SalePage.acceptButton"

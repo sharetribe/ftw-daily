@@ -26,7 +26,8 @@ const initialState = {
   fetchInProgress: false,
   fetchSaleError: null,
   transactionRef: null,
-  acceptOrRejectInProgress: false,
+  acceptInProgress: false,
+  rejectInProgress: false,
   acceptSaleError: null,
   rejectSaleError: null,
 };
@@ -45,25 +46,31 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
       return { ...state, fetchInProgress: false, fetchSaleError: payload };
 
     case ACCEPT_SALE_REQUEST:
-      return { ...state, acceptOrRejectInProgress: true, acceptSaleError: null };
+      return { ...state, acceptInProgress: true, acceptSaleError: null, rejectSaleError: null };
     case ACCEPT_SALE_SUCCESS:
-      return { ...state, acceptOrRejectInProgress: false };
+      return { ...state, acceptInProgress: false };
     case ACCEPT_SALE_ERROR:
       console.error(payload); // eslint-disable-line
-      return { ...state, acceptOrRejectInProgress: false, acceptSaleError: payload };
+      return { ...state, acceptInProgress: false, acceptSaleError: payload };
 
     case REJECT_SALE_REQUEST:
-      return { ...state, acceptOrRejectInProgress: true, rejectSaleError: null };
+      return { ...state, rejectInProgress: true, rejectSaleError: null, acceptSaleError: null };
     case REJECT_SALE_SUCCESS:
-      return { ...state, acceptOrRejectInProgress: false };
+      return { ...state, rejectInProgress: false };
     case REJECT_SALE_ERROR:
       console.error(payload); // eslint-disable-line
-      return { ...state, acceptOrRejectInProgress: false, rejectSaleError: payload };
+      return { ...state, rejectInProgress: false, rejectSaleError: payload };
 
     default:
       return state;
   }
 }
+
+// ================ Selectors ================ //
+
+export const acceptOrRejectInProgress = state => {
+  return state.SalePage.acceptInProgress || state.SalePage.rejectInProgress;
+};
 
 // ================ Action creators ================ //
 
@@ -127,6 +134,9 @@ export const fetchSale = id =>
 
 export const acceptSale = id =>
   (dispatch, getState, sdk) => {
+    if (acceptOrRejectInProgress(getState())) {
+      return Promise.reject(new Error('Accept or reject already in progress'));
+    }
     dispatch(acceptSaleRequest());
 
     return sdk.transactions
@@ -145,6 +155,9 @@ export const acceptSale = id =>
 
 export const rejectSale = id =>
   (dispatch, getState, sdk) => {
+    if (acceptOrRejectInProgress(getState())) {
+      return Promise.reject(new Error('Accept or reject already in progress'));
+    }
     dispatch(rejectSaleRequest());
 
     return sdk.transactions

@@ -106,7 +106,10 @@ export const SaleDetailsPanelComponent = props => {
     transaction,
     onAcceptSale,
     onRejectSale,
-    acceptOrRejectInProgress,
+    acceptInProgress,
+    rejectInProgress,
+    acceptSaleError,
+    rejectSaleError,
     intl,
   } = props;
   const currentTransaction = ensureTransaction(transaction);
@@ -153,18 +156,37 @@ export const SaleDetailsPanelComponent = props => {
   const isPreauthorizedState = currentTransaction.attributes.state ===
     propTypes.TX_STATE_PREAUTHORIZED;
   const canShowButtons = isPreauthorizedState && !isCustomerBanned;
+  const buttonsDisabled = acceptInProgress || rejectInProgress;
+
+  const acceptErrorMessage = acceptSaleError
+    ? <p className={css.error}>
+        <FormattedMessage id="SaleDetailsPanel.acceptSaleFailed" />
+      </p>
+    : null;
+  const rejectErrorMessage = rejectSaleError
+    ? <p className={css.error}>
+        <FormattedMessage id="SaleDetailsPanel.rejectSaleFailed" />
+      </p>
+    : null;
+
   const actionButtons = canShowButtons
     ? <div className={css.actionButtons}>
+        <div className={css.errorDesktop}>
+          {acceptErrorMessage}
+          {rejectErrorMessage}
+        </div>
         <SecondaryButton
           className={css.rejectButton}
-          disabled={acceptOrRejectInProgress}
+          inProgress={rejectInProgress}
+          disabled={buttonsDisabled}
           onClick={() => onRejectSale(currentTransaction.id)}
         >
           <FormattedMessage id="SalePage.rejectButton" />
         </SecondaryButton>
         <PrimaryButton
           className={css.acceptButton}
-          disabled={acceptOrRejectInProgress}
+          inProgress={acceptInProgress}
+          disabled={buttonsDisabled}
           onClick={() => onAcceptSale(currentTransaction.id)}
         >
           <FormattedMessage id="SalePage.acceptButton" />
@@ -198,6 +220,10 @@ export const SaleDetailsPanelComponent = props => {
           </div>
           <h1 className={css.title}>{title}</h1>
           <p className={css.message}>{message}</p>
+          <div className={css.errorMobile}>
+            {acceptErrorMessage}
+            {rejectErrorMessage}
+          </div>
           {actionButtons}
         </div>
         <div className={css.breakdownContainerMobile}>
@@ -235,9 +261,11 @@ SaleDetailsPanelComponent.defaultProps = {
   rootClassName: null,
   className: null,
   lastTransition: null,
+  acceptSaleError: null,
+  rejectSaleError: null,
 };
 
-const { string, func, bool } = PropTypes;
+const { string, func, bool, instanceOf } = PropTypes;
 
 SaleDetailsPanelComponent.propTypes = {
   rootClassName: string,
@@ -245,7 +273,10 @@ SaleDetailsPanelComponent.propTypes = {
   transaction: propTypes.transaction.isRequired,
   onAcceptSale: func.isRequired,
   onRejectSale: func.isRequired,
-  acceptOrRejectInProgress: bool.isRequired,
+  acceptInProgress: bool.isRequired,
+  rejectInProgress: bool.isRequired,
+  acceptSaleError: instanceOf(Error),
+  rejectSaleError: instanceOf(Error),
 
   // from injectIntl
   intl: intlShape.isRequired,

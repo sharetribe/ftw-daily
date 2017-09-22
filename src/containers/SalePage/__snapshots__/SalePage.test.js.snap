@@ -47,10 +47,13 @@ exports[`SalePage matches snapshot 1`] = `
     sendVerificationEmailInProgress={false} />
   <div>
     <InjectIntl(Component)
-      acceptOrRejectInProgress={false}
+      acceptInProgress={false}
+      acceptSaleError={null}
       className="undefined"
       onAcceptSale={[Function]}
       onRejectSale={[Function]}
+      rejectInProgress={false}
+      rejectSaleError={null}
       transaction={
         Object {
           "attributes": Object {

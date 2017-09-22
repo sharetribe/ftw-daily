@@ -27,7 +27,8 @@ export const SalePageComponent = props => {
     fetchSaleError,
     acceptSaleError,
     rejectSaleError,
-    acceptOrRejectInProgress,
+    acceptInProgress,
+    rejectInProgress,
     history,
     intl,
     isAuthenticated,
@@ -69,20 +70,16 @@ export const SalePageComponent = props => {
     ? <p className={css.error}><FormattedMessage id="SalePage.fetchSaleFailed" /></p>
     : <p className={css.loading}><FormattedMessage id="SalePage.loadingData" /></p>;
 
-  const acceptError = acceptSaleError
-    ? <p className={css.error}><FormattedMessage id="SalePage.acceptSaleFailed" /></p>
-    : null;
-  const rejectError = rejectSaleError
-    ? <p className={css.error}><FormattedMessage id="SalePage.rejectSaleFailed" /></p>
-    : null;
-
   const panel = isDataAvailable && currentTransaction.id
     ? <SaleDetailsPanel
         className={detailsClassName}
         transaction={currentTransaction}
         onAcceptSale={onAcceptSale}
         onRejectSale={onRejectSale}
-        acceptOrRejectInProgress={acceptOrRejectInProgress}
+        acceptInProgress={acceptInProgress}
+        rejectInProgress={rejectInProgress}
+        acceptSaleError={acceptSaleError}
+        rejectSaleError={rejectSaleError}
       />
     : loadingOrFailedFetching;
 
@@ -108,8 +105,6 @@ export const SalePageComponent = props => {
         sendVerificationEmailInProgress={sendVerificationEmailInProgress}
         sendVerificationEmailError={sendVerificationEmailError}
       />
-      {acceptError}
-      {rejectError}
       <div className={css.root}>
         {panel}
       </div>
@@ -141,7 +136,8 @@ SalePageComponent.propTypes = {
   fetchSaleError: instanceOf(Error),
   acceptSaleError: instanceOf(Error),
   rejectSaleError: instanceOf(Error),
-  acceptOrRejectInProgress: bool.isRequired,
+  acceptInProgress: bool.isRequired,
+  rejectInProgress: bool.isRequired,
   intl: intlShape.isRequired,
   isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
@@ -172,7 +168,8 @@ const mapStateToProps = state => {
     fetchSaleError,
     acceptSaleError,
     rejectSaleError,
-    acceptOrRejectInProgress,
+    acceptInProgress,
+    rejectInProgress,
     transactionRef,
   } = state.SalePage;
   const { authInfoError, isAuthenticated, logoutError } = state.Auth;
@@ -197,7 +194,8 @@ const mapStateToProps = state => {
     fetchSaleError,
     acceptSaleError,
     rejectSaleError,
-    acceptOrRejectInProgress,
+    acceptInProgress,
+    rejectInProgress,
     isAuthenticated,
     logoutError,
     notificationCount,
