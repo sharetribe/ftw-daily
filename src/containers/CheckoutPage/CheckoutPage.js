@@ -302,7 +302,7 @@ export class CheckoutPageComponent extends Component {
                 ? <StripePaymentForm
                     className={css.paymentForm}
                     onSubmit={this.handleSubmit}
-                    disableSubmit={this.state.submitting}
+                    inProgress={this.state.submitting}
                     formId="CheckoutPagePaymentForm"
                     paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo' })}
                   />

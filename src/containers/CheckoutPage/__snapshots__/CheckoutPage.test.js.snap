@@ -88,8 +88,8 @@ exports[`CheckoutPage matches snapshot 1`] = `
             values={Object {}} />
         </h3>
         <InjectIntl(StripePaymentForm)
-          disableSubmit={false}
           formId="CheckoutPagePaymentForm"
+          inProgress={false}
           onSubmit={[Function]}
           paymentInfo="CheckoutPage.paymentInfo" />
       </section>
