@@ -28,6 +28,7 @@ const auth = require('./auth');
 const renderer = require('./renderer');
 const dataLoader = require('./dataLoader');
 const fs = require('fs');
+const log = require('./log');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
 const dev = process.env.NODE_ENV !== 'production';
@@ -40,6 +41,10 @@ const TRUST_PROXY = process.env.SERVER_SHARETRIBE_TRUST_PROXY || null;
 const app = express();
 
 const errorPage = fs.readFileSync(path.join(buildPath, '500.html'), 'utf-8');
+
+// Error request handler
+log.setup();
+app.use(log.requestHandler());
 
 // The helmet middleware sets various HTTP headers to improve security.
 // See: https://www.npmjs.com/package/helmet
@@ -150,6 +155,9 @@ app.get('*', (req, res) => {
       res.status(500).send(errorPage);
     });
 });
+
+// Error handler that logs error responses
+app.use(log.errorHandler());
 
 app.listen(PORT, () => {
   const mode = dev ? 'development' : 'production';

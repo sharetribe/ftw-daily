@@ -37,7 +37,8 @@
     "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#e2fe4c3be061bfbefdb2db1fa5ed2a8a5d4d4ffe",
     "source-map-support": "^0.4.15",
     "url": "^0.11.0",
-    "raven-js": "^3.6.0"
+    "raven-js": "^3.6.0",
+    "raven": "^2.1.2"
   },
   "devDependencies": {
     "enzyme": "^2.8.0",
