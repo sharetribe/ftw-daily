@@ -50,9 +50,9 @@
   position: absolute;
   display: flex;
   justify-content: space-between;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 13px;
+  left: 13px;
+  width: calc(100% - 26px);
   color: var(--matterColorNegative);
   background-color: var(--matterColor);
   z-index: 1; /* bring on top of mobile image */
@@ -61,7 +61,7 @@
    should not show a pointer */
   cursor: initial;
 
-  border-radius: 2px 2px 0 0;
+  border-radius: 2px;
 }
 
 .ownListingText {
