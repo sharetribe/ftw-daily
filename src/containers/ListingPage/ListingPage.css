@@ -61,7 +61,7 @@
    should not show a pointer */
   cursor: initial;
 
-  border-radius: 2px;
+  border-radius: var(--borderRadius);
 }
 
 .ownListingText {
