@@ -104,12 +104,12 @@ exports[`ManageListingCard matches snapshot 1`] = `
         listing1 title
       </div>
     </div>
-    <SecondaryButton
+    <button
       onClick={[Function]}>
       <FormattedMessage
         id="ManageListingCard.edit"
         values={Object {}} />
-    </SecondaryButton>
+    </button>
   </div>
 </withFlattenedRoutes(withRouter(NamedLink))>
 `;
