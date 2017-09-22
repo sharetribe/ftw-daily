@@ -21,6 +21,7 @@ export const createUser = id => ({
   id: new UUID(id),
   type: 'user',
   attributes: {
+    banned: false,
     profile: {
       displayName: `${id} display name`,
       abbreviatedName: `${id} abbreviated name`,
@@ -33,7 +34,9 @@ export const createCurrentUser = id => ({
   id: new UUID(id),
   type: 'current-user',
   attributes: {
+    banned: false,
     email: `${id}@example.com`,
+    emailVerified: true,
     profile: {
       firstName: `${id} first name`,
       lastName: `${id} last name`,

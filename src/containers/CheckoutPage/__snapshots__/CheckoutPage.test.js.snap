@@ -45,6 +45,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
         user={
           Object {
             "attributes": Object {
+              "banned": false,
               "profile": Object {
                 "abbreviatedName": "author abbreviated name",
                 "displayName": "author display name",
@@ -121,6 +122,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
           user={
             Object {
               "attributes": Object {
+                "banned": false,
                 "profile": Object {
                   "abbreviatedName": "author abbreviated name",
                   "displayName": "author display name",

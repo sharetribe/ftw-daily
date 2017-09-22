@@ -28,6 +28,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
         user={
           Object {
             "attributes": Object {
+              "banned": false,
               "profile": Object {
                 "abbreviatedName": "customer1 abbreviated name",
                 "displayName": "customer1 display name",
@@ -46,6 +47,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
           user={
             Object {
               "attributes": Object {
+                "banned": false,
                 "profile": Object {
                   "abbreviatedName": "customer1 abbreviated name",
                   "displayName": "customer1 display name",
@@ -175,6 +177,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
             },
             "customer": Object {
               "attributes": Object {
+                "banned": false,
                 "profile": Object {
                   "abbreviatedName": "customer1 abbreviated name",
                   "displayName": "customer1 display name",
@@ -308,6 +311,7 @@ exports[`SaleDetailsPanel matches snapshot 1`] = `
               },
               "customer": Object {
                 "attributes": Object {
+                  "banned": false,
                   "profile": Object {
                     "abbreviatedName": "customer1 abbreviated name",
                     "displayName": "customer1 display name",

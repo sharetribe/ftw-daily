@@ -16,6 +16,7 @@ const userWithoutProfileImage = {
   id: new UUID('user-without-profile-image'),
   type: 'user',
   attributes: {
+    banned: false,
     profile: {
       displayName: 'No Profile',
       abbreviatedName: 'NP',
@@ -27,6 +28,7 @@ const userWithProfileImage = {
   id: new UUID('user-with-profile-image'),
   type: 'user',
   attributes: {
+    banned: false,
     profile: {
       displayName: 'Has Profile',
       abbreviatedName: 'HP',
