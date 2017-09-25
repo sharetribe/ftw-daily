@@ -156,7 +156,11 @@ const mapStateToProps = state => {
   // PageLayout needs authInfoError and logoutError, Topbar needs isAuthenticated
   const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   // Topbar needs user info.
-  const { changePasswordError, changePasswordInProgress, passwordChanged } = state.PasswordChangePage;
+  const {
+    changePasswordError,
+    changePasswordInProgress,
+    passwordChanged,
+  } = state.PasswordChangePage;
   const {
     currentUser,
     currentUserHasListings,

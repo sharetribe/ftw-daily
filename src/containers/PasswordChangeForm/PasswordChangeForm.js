@@ -100,11 +100,14 @@ class PasswordChangeFormComponent extends Component {
     const submitDisabled = invalid || submitting || inProgress;
 
     return (
-      <form className={classes} onSubmit={values => {
-        handleSubmit(values).then(() => {
-          this.resetTimeoutId = window.setTimeout(reset, RESET_TIMEOUT);
-        });
-      }}>
+      <form
+        className={classes}
+        onSubmit={values => {
+          handleSubmit(values).then(() => {
+            this.resetTimeoutId = window.setTimeout(reset, RESET_TIMEOUT);
+          });
+        }}
+      >
         <div className={css.newPasswordSection}>
           <TextInputField
             type="password"
@@ -149,7 +152,7 @@ class PasswordChangeFormComponent extends Component {
       </form>
     );
   }
-};
+}
 
 PasswordChangeFormComponent.defaultProps = {
   rootClassName: null,

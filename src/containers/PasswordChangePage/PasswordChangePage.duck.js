@@ -18,7 +18,12 @@ export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case CHANGE_PASSWORD_REQUEST:
-      return { ...state, changePasswordInProgress: true, changePasswordError: null, passwordChanged: false };
+      return {
+        ...state,
+        changePasswordInProgress: true,
+        changePasswordError: null,
+        passwordChanged: false,
+      };
     case CHANGE_PASSWORD_SUCCESS:
       return { ...state, changePasswordInProgress: false, passwordChanged: true };
     case CHANGE_PASSWORD_ERROR:
