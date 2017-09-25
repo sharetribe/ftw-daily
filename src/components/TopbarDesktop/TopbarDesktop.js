@@ -71,6 +71,15 @@ const TopbarDesktop = props => {
           <Avatar className={css.avatar} user={currentUser} />
         </MenuLabel>
         <MenuContent className={css.profileMenuContent}>
+          <MenuItem key="ManageListingsPage">
+            <NamedLink
+              className={classNames(css.yourListingsLink, currentPageClass('ManageListingsPage'))}
+              name="ManageListingsPage"
+            >
+              <span className={css.menuItemBorder} />
+              <FormattedMessage id="TopbarDesktop.yourListingsLink" />
+            </NamedLink>
+          </MenuItem>
           <MenuItem key="ProfileSettingsPage">
             <NamedLink
               className={classNames(
@@ -81,15 +90,6 @@ const TopbarDesktop = props => {
             >
               <span className={css.menuItemBorder} />
               <FormattedMessage id="TopbarDesktop.profileSettingsLink" />
-            </NamedLink>
-          </MenuItem>
-          <MenuItem key="ManageListingsPage">
-            <NamedLink
-              className={classNames(css.yourListingsLink, currentPageClass('ManageListingsPage'))}
-              name="ManageListingsPage"
-            >
-              <span className={css.menuItemBorder} />
-              <FormattedMessage id="TopbarDesktop.yourListingsLink" />
             </NamedLink>
           </MenuItem>
           <MenuItem key="AccountSettingsPage">
