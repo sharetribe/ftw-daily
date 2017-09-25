@@ -19,6 +19,7 @@ import LoginForm from './LoginForm/LoginForm';
 import ManageListingsPage from './ManageListingsPage/ManageListingsPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import OrderPage from './OrderPage/OrderPage';
+import PasswordChangeForm from './PasswordChangeForm/PasswordChangeForm';
 import PasswordChangePage from './PasswordChangePage/PasswordChangePage';
 import PasswordRecoveryForm from './PasswordRecoveryForm/PasswordRecoveryForm';
 import PasswordRecoveryPage from './PasswordRecoveryPage/PasswordRecoveryPage';
@@ -59,6 +60,7 @@ export {
   ManageListingsPage,
   NotFoundPage,
   OrderPage,
+  PasswordChangeForm,
   PasswordChangePage,
   PasswordRecoveryForm,
   PasswordRecoveryPage,
