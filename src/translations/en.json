@@ -254,6 +254,7 @@
   "PasswordChangeForm.saveChanges": "Save changes",
   "PasswordChangePage.emailTabTitle": "Email",
   "PasswordChangePage.passwordTabTitle": "Password",
+  "PasswordChangePage.title": "Password settings",
   "PasswordRecoveryForm.emailLabel": "Email",
   "PasswordRecoveryForm.emailNotFound": "Hmm. We didn't find an account with that email. Please double-check your email and try again.",
   "PasswordRecoveryForm.emailPlaceholder": "john.doe@example.com",

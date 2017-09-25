@@ -17,13 +17,17 @@ import {
   TopbarWrapper,
   UserNav,
 } from '../../components';
+import { PasswordChangeForm } from '../../containers';
 
+import { changePassword, changePasswordClear } from './PasswordChangePage.duck';
 import css from './PasswordChangePage.css';
 
 export const PasswordChangePageComponent = props => {
   const {
     authInfoError,
     authInProgress,
+    changePasswordError,
+    changePasswordInProgress,
     currentUser,
     currentUserHasListings,
     currentUserHasOrders,
@@ -32,8 +36,11 @@ export const PasswordChangePageComponent = props => {
     location,
     logoutError,
     notificationCount,
+    onChange,
     onLogout,
     onManageDisableScrolling,
+    onSubmitChangePassword,
+    passwordChanged,
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
     onResendVerificationEmail,
@@ -55,6 +62,18 @@ export const PasswordChangePageComponent = props => {
       },
     },
   ];
+
+  const changePasswordForm = currentUser && currentUser.id
+    ? <PasswordChangeForm
+        className={css.form}
+        changePasswordError={changePasswordError}
+        currentUser={currentUser}
+        onSubmit={onSubmitChangePassword}
+        onChange={onChange}
+        inProgress={changePasswordInProgress}
+        ready={passwordChanged}
+      />
+    : null;
 
   return (
     <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Contact details">
@@ -82,7 +101,12 @@ export const PasswordChangePageComponent = props => {
           <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />
         </SideNavWrapper>
         <ContentWrapper>
-          Main content
+          <div className={css.content}>
+            <h1 className={css.title}>
+              <FormattedMessage id="PasswordChangePage.title" />
+            </h1>
+            {changePasswordForm}
+          </div>
         </ContentWrapper>
       </LayoutSideNavigation>
     </PageLayout>
@@ -91,6 +115,7 @@ export const PasswordChangePageComponent = props => {
 
 PasswordChangePageComponent.defaultProps = {
   authInfoError: null,
+  changePasswordError: null,
   currentUser: null,
   currentUserHasOrders: null,
   logoutError: null,
@@ -103,14 +128,19 @@ const { bool, func, instanceOf, number, object, shape } = PropTypes;
 PasswordChangePageComponent.propTypes = {
   authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
+  changePasswordError: instanceOf(Error),
+  changePasswordInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   currentUserHasOrders: bool,
   isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
   notificationCount: number,
+  onChange: func.isRequired,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  onSubmitChangePassword: func.isRequired,
+  passwordChanged: bool.isRequired,
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: instanceOf(Error),
   onResendVerificationEmail: func.isRequired,
@@ -126,6 +156,7 @@ const mapStateToProps = state => {
   // PageLayout needs authInfoError and logoutError, Topbar needs isAuthenticated
   const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   // Topbar needs user info.
+  const { changePasswordError, changePasswordInProgress, passwordChanged } = state.PasswordChangePage;
   const {
     currentUser,
     currentUserHasListings,
@@ -137,12 +168,15 @@ const mapStateToProps = state => {
   return {
     authInfoError,
     authInProgress: authenticationInProgress(state),
+    changePasswordError,
+    changePasswordInProgress,
     currentUser,
     currentUserHasListings,
     currentUserHasOrders,
     notificationCount,
     isAuthenticated,
     logoutError,
+    passwordChanged,
     scrollingDisabled: isScrollingDisabled(state),
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
@@ -150,10 +184,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+  onChange: () => dispatch(changePasswordClear()),
   onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
+  onSubmitChangePassword: values => dispatch(changePassword(values)),
 });
 
 const PasswordChangePage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
