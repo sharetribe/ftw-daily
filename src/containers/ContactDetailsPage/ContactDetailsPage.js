@@ -20,21 +20,25 @@ import {
 } from '../../components';
 import { ContactDetailsForm } from '../../containers';
 
-import { changeEmail } from './ContactDetailsPage.duck';
+import { changeEmail, changeEmailClear } from './ContactDetailsPage.duck';
 import css from './ContactDetailsPage.css';
 
 export const ContactDetailsPageComponent = props => {
   const {
     authInfoError,
     authInProgress,
+    changeEmailError,
+    changeEmailInProgress,
     currentUser,
     currentUserHasListings,
     currentUserHasOrders,
+    emailChanged,
     history,
     isAuthenticated,
     location,
     logoutError,
     notificationCount,
+    onChange,
     onLogout,
     onManageDisableScrolling,
     sendVerificationEmailInProgress,
@@ -66,10 +70,15 @@ export const ContactDetailsPageComponent = props => {
     ? <ContactDetailsForm
         className={css.form}
         initialValues={{ email }}
+        changeEmailError={changeEmailError}
         currentUser={currentUser}
         onResendVerificationEmail={onResendVerificationEmail}
         onSubmit={onSubmitChangeEmail}
-        inProgress={authInProgress}
+        onChange={onChange}
+        inProgress={changeEmailInProgress}
+        ready={emailChanged}
+        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+        sendVerificationEmailError={sendVerificationEmailError}
       />
     : null;
 
@@ -113,6 +122,7 @@ export const ContactDetailsPageComponent = props => {
 
 ContactDetailsPageComponent.defaultProps = {
   authInfoError: null,
+  changeEmailError: null,
   currentUser: null,
   currentUserHasOrders: null,
   logoutError: null,
@@ -125,12 +135,16 @@ const { bool, func, instanceOf, number, object, shape } = PropTypes;
 ContactDetailsPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,
+  changeEmailError: instanceOf(Error),
+  changeEmailInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   currentUserHasOrders: bool,
+  emailChanged: bool.isRequired,
   isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
   notificationCount: number,
+  onChange: func.isRequired,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   onSubmitChangeEmail: func.isRequired,
@@ -157,12 +171,16 @@ const mapStateToProps = state => {
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
   } = state.user;
+  const { changeEmailError, changeEmailInProgress, emailChanged } = state.ContactDetailsPage;
   return {
     authInfoError,
     authInProgress: authenticationInProgress(state),
+    changeEmailError,
+    changeEmailInProgress,
     currentUser,
     currentUserHasListings,
     currentUserHasOrders,
+    emailChanged,
     notificationCount,
     isAuthenticated,
     logoutError,
@@ -173,6 +191,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+  onChange: () => dispatch(changeEmailClear()),
   onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
