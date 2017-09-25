@@ -15,10 +15,14 @@ describe('PasswordChangePage', () => {
         authInProgress={false}
         currentUserHasListings={false}
         isAuthenticated={false}
+        onChange={noop}
         onLogout={noop}
         onManageDisableScrolling={noop}
         sendVerificationEmailInProgress={false}
         onResendVerificationEmail={noop}
+        onSubmitChangePassword={noop}
+        changePasswordInProgress={false}
+        passwordChanged={false}
       />
     );
     expect(tree).toMatchSnapshot();
