@@ -16,8 +16,9 @@ const EmailVerificationFormComponent = props => {
     verificationError,
   } = props;
 
-  const email = <strong>{currentUser.attributes.email}</strong>;
-  const name = currentUser.attributes.profile.firstName;
+  const { email, emailVerified, pendingEmail, profile } = currentUser.attributes;
+  const emailToVerify = <strong>{pendingEmail || email}</strong>;
+  const name = profile.firstName;
 
   const errorMessage = (
     <div className={css.error}>
@@ -37,7 +38,10 @@ const EmailVerificationFormComponent = props => {
         </h1>
 
         <p className={css.modalMessage}>
-          <FormattedMessage id="EmailVerificationForm.finishAccountSetup" values={{ email }} />
+          <FormattedMessage
+            id="EmailVerificationForm.finishAccountSetup"
+            values={{ email: emailToVerify }}
+          />
         </p>
 
         {verificationError ? errorMessage : null}
@@ -82,7 +86,7 @@ const EmailVerificationFormComponent = props => {
     </div>
   );
 
-  return currentUser.attributes.emailVerified ? alreadyVerified : verifyEmail;
+  return emailVerified && !pendingEmail ? alreadyVerified : verifyEmail;
 };
 
 EmailVerificationFormComponent.defaultProps = {
