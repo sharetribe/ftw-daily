@@ -2,6 +2,7 @@ import AuthenticationPage from './AuthenticationPage/AuthenticationPage';
 import BookingDatesForm from './BookingDatesForm/BookingDatesForm';
 import ChangeAccountPasswordForm from './ChangeAccountPasswordForm/ChangeAccountPasswordForm';
 import CheckoutPage from './CheckoutPage/CheckoutPage';
+import ContactDetailsForm from './ContactDetailsForm/ContactDetailsForm';
 import ContactDetailsPage from './ContactDetailsPage/ContactDetailsPage';
 import EditListingDescriptionForm from './EditListingDescriptionForm/EditListingDescriptionForm';
 import EditListingLocationForm from './EditListingLocationForm/EditListingLocationForm';
@@ -41,6 +42,7 @@ export {
   BookingDatesForm,
   ChangeAccountPasswordForm,
   CheckoutPage,
+  ContactDetailsForm,
   ContactDetailsPage,
   EditListingDescriptionForm,
   EditListingLocationForm,
