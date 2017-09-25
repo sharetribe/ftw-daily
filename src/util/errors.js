@@ -94,3 +94,9 @@ export const isTransactionInitiateListingNotFoundError = apiError => {
  * is due to giving wrong password.
  */
 export const isForbiddenChangeEmailError = apiError => apiError && apiError.status === 403;
+
+/**
+ * Check if the given API error (from `sdk.currentUser.changePassword(params)`)
+ * is due to giving wrong password.
+ */
+export const isForbiddenChangePasswordError = apiError => apiError && apiError.status === 403;

@@ -10,11 +10,12 @@ import InboxPage from './InboxPage/InboxPage.duck';
 import ListingPage from './ListingPage/ListingPage.duck';
 import ManageListingsPage from './ManageListingsPage/ManageListingsPage.duck';
 import OrderPage from './OrderPage/OrderPage.duck';
+import PasswordChangePage from './PasswordChangePage/PasswordChangePage.duck';
+import PasswordRecoveryPage from './PasswordRecoveryPage/PasswordRecoveryPage.duck';
 import PasswordResetPage from './PasswordResetPage/PasswordResetPage.duck';
 import ProfileSettingsPage from './ProfileSettingsPage/ProfileSettingsPage.duck';
 import SalePage from './SalePage/SalePage.duck';
 import SearchPage from './SearchPage/SearchPage.duck';
-import PasswordRecoveryPage from './PasswordRecoveryPage/PasswordRecoveryPage.duck';
 
 export {
   CheckoutPage,
@@ -24,9 +25,10 @@ export {
   ListingPage,
   ManageListingsPage,
   OrderPage,
+  PasswordChangePage,
+  PasswordRecoveryPage,
   PasswordResetPage,
   ProfileSettingsPage,
   SalePage,
   SearchPage,
-  PasswordRecoveryPage,
 };
