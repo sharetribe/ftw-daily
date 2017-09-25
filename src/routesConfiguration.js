@@ -239,6 +239,7 @@ const routesConfiguration = [
         exact: true,
         name: 'ContactDetailsPage',
         component: props => <ContactDetailsPage {...props} />,
+        loadData: params => ContactDetailsPage.loadData(params),
       },
       {
         path: '/account/change-password',

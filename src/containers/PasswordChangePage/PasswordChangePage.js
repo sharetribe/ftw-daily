@@ -18,7 +18,6 @@ import {
   UserNav,
 } from '../../components';
 
-
 import css from './PasswordChangePage.css';
 
 export const PasswordChangePageComponent = props => {
