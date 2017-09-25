@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
@@ -13,188 +13,210 @@ import { PrimaryButton, TextInputField } from '../../components';
 
 import css from './ContactDetailsForm.css';
 
-const ContactDetailsFormComponent = props => {
-  const {
-    rootClassName,
-    className,
-    changeEmailError,
-    currentUser,
-    form,
-    handleSubmit,
-    submitting,
-    inProgress,
-    intl,
-    invalid,
-    onResendVerificationEmail,
-    pristine,
-    ready,
-    sendVerificationEmailError,
-    sendVerificationEmailInProgress,
-  } = props;
+const SHOW_EMAIL_SENT_TIMEOUT = 2000;
 
-  const user = ensureCurrentUser(currentUser);
-
-  if (!user.id) {
-    return null;
+class ContactDetailsFormComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { verificationEmailSent: false };
+    this.handleResendVerificationEmail = this.handleResendVerificationEmail.bind(this);
   }
 
-  // email
-  const emailLabel = intl.formatMessage({
-    id: 'ContactDetailsForm.emailLabel',
-  });
+  componentWillUnmount() {
+    window.clearTimeout(this.emailSentTimeoutId);
+  }
 
-  const { email, emailVerified, pendingEmail } = user.attributes;
-  const emailPlaceholder = email || '';
+  handleResendVerificationEmail() {
+    this.props.onResendVerificationEmail();
 
-  const emailRequiredMessage = intl.formatMessage({
-    id: 'ContactDetailsForm.emailRequired',
-  });
-  const emailRequired = validators.required(emailRequiredMessage);
-
-  // Email status info: unverified, verified and pending email (aka changed unverified email)
-  let emailVerifiedInfo = null;
-
-  if (emailVerified && !pendingEmail && pristine) {
-    // Current email is verified and there's no pending unverified email
-    emailVerifiedInfo = (
-      <span className={css.emailVerified}>
-        <FormattedMessage id="ContactDetailsForm.emailVerified" />
-      </span>
+    this.setState({ verificationEmailSent: true });
+    this.emailSentTimeoutId = window.setTimeout(
+      () => {
+        this.setState({ verificationEmailSent: false });
+      },
+      SHOW_EMAIL_SENT_TIMEOUT
     );
-  } else if (!emailVerified && !pendingEmail) {
-    // Current email is unverified. This is the email given in sign up form
+  }
+
+  render() {
+    const {
+      rootClassName,
+      className,
+      changeEmailError,
+      currentUser,
+      form,
+      handleSubmit,
+      submitting,
+      inProgress,
+      intl,
+      invalid,
+      pristine,
+      ready,
+      sendVerificationEmailError,
+      sendVerificationEmailInProgress,
+    } = this.props;
+
+    const user = ensureCurrentUser(currentUser);
+
+    if (!user.id) {
+      return null;
+    }
+
+    // email
+    const emailLabel = intl.formatMessage({
+      id: 'ContactDetailsForm.emailLabel',
+    });
+
+    const { email, emailVerified, pendingEmail } = user.attributes;
+    const emailPlaceholder = email || '';
+
+    const emailRequiredMessage = intl.formatMessage({
+      id: 'ContactDetailsForm.emailRequired',
+    });
+    const emailRequired = validators.required(emailRequiredMessage);
 
     const tooManyVerificationRequests = isTooManyEmailVerificationRequestsError(
       sendVerificationEmailError
     );
-    const resendClasses = classNames(css.helperLink, {
-      [css.resendClicked]: sendVerificationEmailInProgress,
-    });
 
-    /* eslint-disable jsx-a11y/no-static-element-interactions */
-    const resendEmailLink = tooManyVerificationRequests
-      ? <span className={css.tooMany}>
+    let resendEmailMessage = null;
+    if (tooManyVerificationRequests) {
+      resendEmailMessage = (
+        <span className={css.tooMany}>
           <FormattedMessage id="ContactDetailsForm.tooManyVerificationRequests" />
         </span>
-      : <span className={resendClasses} onClick={onResendVerificationEmail} role="button">
-          <FormattedMessage id="ContactDetailsForm.resendEmailVerificationText" />
-        </span>;
-    /* eslint-enable jsx-a11y/no-static-element-interactions */
-
-    emailVerifiedInfo = (
-      <span className={css.emailUnverified}>
-        <FormattedMessage id="ContactDetailsForm.emailUnverified" values={{ resendEmailLink }} />
-      </span>
-    );
-  } else if (pendingEmail) {
-    // Current email has been tried to change, but the new address is not yet verified
-
-    const pendingEmailStyled = <span className={css.emailStyle}>{pendingEmail}</span>;
-    const pendingEmailCheckInbox = (
-      <span className={css.checkInbox}>
-        <FormattedMessage
-          id="ContactDetailsForm.pendingEmailCheckInbox"
-          values={{ pendingEmail: pendingEmailStyled }}
-        />
-      </span>
-    );
-
-    const tooManyVerificationRequests = isTooManyEmailVerificationRequestsError(
-      sendVerificationEmailError
-    );
-    const resendClasses = classNames(css.helperLink, {
-      [css.resendClicked]: sendVerificationEmailInProgress,
-    });
-    /* eslint-disable jsx-a11y/no-static-element-interactions */
-    const resendPendingEmailLink = tooManyVerificationRequests
-      ? <span className={css.tooMany}>
-          <FormattedMessage id="ContactDetailsForm.tooManyVerificationRequests" />
+      );
+    } else if (sendVerificationEmailInProgress || this.state.verificationEmailSent) {
+      resendEmailMessage = (
+        <span className={css.emailSent}>
+          <FormattedMessage id="ContactDetailsForm.emailSent" />
         </span>
-      : <span className={resendClasses} onClick={onResendVerificationEmail} role="button">
+      );
+    } else {
+      /* eslint-disable jsx-a11y/no-static-element-interactions */
+      resendEmailMessage = (
+        <span className={css.helperLink} onClick={this.handleResendVerificationEmail} role="button">
           <FormattedMessage id="ContactDetailsForm.resendEmailVerificationText" />
-        </span>;
-    /* eslint-enable jsx-a11y/no-static-element-interactions */
+        </span>
+      );
+      /* eslint-enable jsx-a11y/no-static-element-interactions */
+    }
 
-    emailVerifiedInfo = (
-      <span className={css.pendingEmailUnverified}>
-        <FormattedMessage
-          id="ContactDetailsForm.pendingEmailUnverified"
-          values={{ pendingEmailCheckInbox, resendPendingEmailLink }}
-        />
-      </span>
+    // Email status info: unverified, verified and pending email (aka changed unverified email)
+    let emailVerifiedInfo = null;
+
+    if (emailVerified && !pendingEmail && pristine) {
+      // Current email is verified and there's no pending unverified email
+      emailVerifiedInfo = (
+        <span className={css.emailVerified}>
+          <FormattedMessage id="ContactDetailsForm.emailVerified" />
+        </span>
+      );
+    } else if (!emailVerified && !pendingEmail) {
+      // Current email is unverified. This is the email given in sign up form
+
+      emailVerifiedInfo = (
+        <span className={css.emailUnverified}>
+          <FormattedMessage
+            id="ContactDetailsForm.emailUnverified"
+            values={{ resendEmailMessage }}
+          />
+        </span>
+      );
+    } else if (pendingEmail) {
+      // Current email has been tried to change, but the new address is not yet verified
+
+      const pendingEmailStyled = <span className={css.emailStyle}>{pendingEmail}</span>;
+      const pendingEmailCheckInbox = (
+        <span className={css.checkInbox}>
+          <FormattedMessage
+            id="ContactDetailsForm.pendingEmailCheckInbox"
+            values={{ pendingEmail: pendingEmailStyled }}
+          />
+        </span>
+      );
+
+      emailVerifiedInfo = (
+        <span className={css.pendingEmailUnverified}>
+          <FormattedMessage
+            id="ContactDetailsForm.pendingEmailUnverified"
+            values={{ pendingEmailCheckInbox, resendEmailMessage }}
+          />
+        </span>
+      );
+    }
+
+    // password
+    const passwordLabel = intl.formatMessage({
+      id: 'ContactDetailsForm.passwordLabel',
+    });
+    const passwordPlaceholder = intl.formatMessage({
+      id: 'ContactDetailsForm.passwordPlaceholder',
+    });
+    const passwordRequiredMessage = intl.formatMessage({
+      id: 'ContactDetailsForm.passwordRequired',
+    });
+
+    const passwordRequired = validators.required(passwordRequiredMessage);
+
+    const passwordFailedMessage = intl.formatMessage({
+      id: 'ContactDetailsForm.passwordFailed',
+    });
+    const passwordErrorText = isForbiddenChangeEmailError(changeEmailError)
+      ? passwordFailedMessage
+      : null;
+
+    const classes = classNames(rootClassName || css.root, className);
+    const submitDisabled = invalid || submitting || inProgress;
+
+    return (
+      <form className={classes} onSubmit={handleSubmit}>
+        <div className={css.emailSection}>
+          <TextInputField
+            type="email"
+            name="email"
+            id={`${form}.email`}
+            label={emailLabel}
+            placeholder={emailPlaceholder}
+            validate={emailRequired}
+          />
+          {emailVerifiedInfo}
+        </div>
+
+        <div className={css.confirmChangesSection}>
+          <h3 className={css.confirmChangesTitle}>
+            <FormattedMessage id="ContactDetailsForm.confirmChangesTitle" />
+          </h3>
+          <p className={css.confirmChangesInfo}>
+            <FormattedMessage id="ContactDetailsForm.confirmChangesInfo" />
+          </p>
+
+          <TextInputField
+            className={css.password}
+            type="password"
+            name="currentPassword"
+            id={`${form}.currentPassword`}
+            label={passwordLabel}
+            placeholder={passwordPlaceholder}
+            validate={passwordRequired}
+            customErrorText={passwordErrorText}
+          />
+        </div>
+        <div className={css.bottomWrapper}>
+          <PrimaryButton
+            className={css.submitButton}
+            type="submit"
+            inProgress={inProgress}
+            ready={ready}
+            disabled={submitDisabled}
+          >
+            <FormattedMessage id="ContactDetailsForm.saveChanges" />
+          </PrimaryButton>
+        </div>
+      </form>
     );
   }
-
-  // password
-  const passwordLabel = intl.formatMessage({
-    id: 'ContactDetailsForm.passwordLabel',
-  });
-  const passwordPlaceholder = intl.formatMessage({
-    id: 'ContactDetailsForm.passwordPlaceholder',
-  });
-  const passwordRequiredMessage = intl.formatMessage({
-    id: 'ContactDetailsForm.passwordRequired',
-  });
-
-  const passwordRequired = validators.required(passwordRequiredMessage);
-
-  const passwordFailedMessage = intl.formatMessage({
-    id: 'ContactDetailsForm.passwordFailed',
-  });
-  const passwordErrorText = isForbiddenChangeEmailError(changeEmailError)
-    ? passwordFailedMessage
-    : null;
-
-  const classes = classNames(rootClassName || css.root, className);
-  const submitDisabled = invalid || submitting || inProgress;
-
-  return (
-    <form className={classes} onSubmit={handleSubmit}>
-      <div className={css.emailSection}>
-        <TextInputField
-          type="email"
-          name="email"
-          id={`${form}.email`}
-          label={emailLabel}
-          placeholder={emailPlaceholder}
-          validate={emailRequired}
-        />
-        {emailVerifiedInfo}
-      </div>
-
-      <div className={css.confirmChangesSection}>
-        <h3 className={css.confirmChangesTitle}>
-          <FormattedMessage id="ContactDetailsForm.confirmChangesTitle" />
-        </h3>
-        <p className={css.confirmChangesInfo}>
-          <FormattedMessage id="ContactDetailsForm.confirmChangesInfo" />
-        </p>
-
-        <TextInputField
-          className={css.password}
-          type="password"
-          name="currentPassword"
-          id={`${form}.currentPassword`}
-          label={passwordLabel}
-          placeholder={passwordPlaceholder}
-          validate={passwordRequired}
-          customErrorText={passwordErrorText}
-        />
-      </div>
-      <div className={css.bottomWrapper}>
-        <PrimaryButton
-          className={css.submitButton}
-          type="submit"
-          inProgress={inProgress}
-          ready={ready}
-          disabled={submitDisabled}
-        >
-          <FormattedMessage id="ContactDetailsForm.saveChanges" />
-        </PrimaryButton>
-      </div>
-    </form>
-  );
-};
+}
 
 ContactDetailsFormComponent.defaultProps = {
   rootClassName: null,
