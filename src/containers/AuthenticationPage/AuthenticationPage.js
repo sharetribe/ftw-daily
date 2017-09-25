@@ -146,7 +146,7 @@ export const AuthenticationPageComponent = props => {
     </InlineTextButton>
   );
   const fixEmailLink = (
-    <NamedLink className={css.modalHelperLink} name="ProfileSettingsPage">
+    <NamedLink className={css.modalHelperLink} name="ContactDetailsPage">
       <FormattedMessage id="AuthenticationPage.fixEmailLinkText" />
     </NamedLink>
   );
