@@ -78,10 +78,20 @@
   line-height: 20px;
   margin: 0;
   cursor: pointer;
+  opacity: 1;
+  transition: opacity var(--transitionStyleButton);
 
   @media (--viewportMedium) {
     margin: 0;
   }
+}
+
+.resendClicked {
+  opacity: 0;
+}
+
+.tooMany {
+  color: var(--matterColorAnti);
 }
 
 .confirmChangesTitle {

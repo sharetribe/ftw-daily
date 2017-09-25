@@ -32,8 +32,7 @@ const TopbarDesktop = props => {
     initialSearchFormValues,
   } = props;
 
-  const rootClass = rootClassName || css.root;
-  const classes = classNames(rootClass, className);
+  const classes = classNames(rootClassName || css.root, className);
 
   const search = (
     <TopbarSearchForm

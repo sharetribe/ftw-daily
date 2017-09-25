@@ -15,11 +15,14 @@ describe('ContactDetailsPage', () => {
         authInProgress={false}
         currentUserHasListings={false}
         isAuthenticated={false}
+        onChange={noop}
         onLogout={noop}
         onManageDisableScrolling={noop}
         sendVerificationEmailInProgress={false}
         onResendVerificationEmail={noop}
         onSubmitChangeEmail={noop}
+        changeEmailInProgress={false}
+        emailChanged={false}
       />
     );
     expect(tree).toMatchSnapshot();

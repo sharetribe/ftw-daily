@@ -5,6 +5,10 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
 import * as validators from '../../util/validators';
 import { ensureCurrentUser } from '../../util/data';
+import {
+  isForbiddenChangeEmailError,
+  isTooManyEmailVerificationRequestsError,
+} from '../../util/errors';
 import { PrimaryButton, TextInputField } from '../../components';
 
 import css from './ContactDetailsForm.css';
@@ -13,6 +17,7 @@ const ContactDetailsFormComponent = props => {
   const {
     rootClassName,
     className,
+    changeEmailError,
     currentUser,
     form,
     handleSubmit,
@@ -22,6 +27,9 @@ const ContactDetailsFormComponent = props => {
     invalid,
     onResendVerificationEmail,
     pristine,
+    ready,
+    sendVerificationEmailError,
+    sendVerificationEmailInProgress,
   } = props;
 
   const user = ensureCurrentUser(currentUser);
@@ -55,12 +63,22 @@ const ContactDetailsFormComponent = props => {
     );
   } else if (!emailVerified && !pendingEmail) {
     // Current email is unverified. This is the email given in sign up form
-    /* eslint-disable jsx-a11y/no-static-element-interactions */
-    const resendEmailLink = (
-      <span className={css.helperLink} onClick={onResendVerificationEmail} role="button">
-        <FormattedMessage id="ContactDetailsForm.resendEmailVerificationText" />
-      </span>
+
+    const tooManyVerificationRequests = isTooManyEmailVerificationRequestsError(
+      sendVerificationEmailError
     );
+    const resendClasses = classNames(css.helperLink, {
+      [css.resendClicked]: sendVerificationEmailInProgress,
+    });
+
+    /* eslint-disable jsx-a11y/no-static-element-interactions */
+    const resendEmailLink = tooManyVerificationRequests
+      ? <span className={css.tooMany}>
+          <FormattedMessage id="ContactDetailsForm.tooManyVerificationRequests" />
+        </span>
+      : <span className={resendClasses} onClick={onResendVerificationEmail} role="button">
+          <FormattedMessage id="ContactDetailsForm.resendEmailVerificationText" />
+        </span>;
     /* eslint-enable jsx-a11y/no-static-element-interactions */
 
     emailVerifiedInfo = (
@@ -74,16 +92,27 @@ const ContactDetailsFormComponent = props => {
     const pendingEmailStyled = <span className={css.emailStyle}>{pendingEmail}</span>;
     const pendingEmailCheckInbox = (
       <span className={css.checkInbox}>
-        <FormattedMessage id="ContactDetailsForm.pendingEmailCheckInbox" values={{ pendingEmail: pendingEmailStyled}} />
+        <FormattedMessage
+          id="ContactDetailsForm.pendingEmailCheckInbox"
+          values={{ pendingEmail: pendingEmailStyled }}
+        />
       </span>
     );
 
-    /* eslint-disable jsx-a11y/no-static-element-interactions */
-    const resendPendingEmailLink = (
-      <span className={css.helperLink} onClick={onResendVerificationEmail} role="button">
-        <FormattedMessage id="ContactDetailsForm.resendEmailVerificationText" />
-      </span>
+    const tooManyVerificationRequests = isTooManyEmailVerificationRequestsError(
+      sendVerificationEmailError
     );
+    const resendClasses = classNames(css.helperLink, {
+      [css.resendClicked]: sendVerificationEmailInProgress,
+    });
+    /* eslint-disable jsx-a11y/no-static-element-interactions */
+    const resendPendingEmailLink = tooManyVerificationRequests
+      ? <span className={css.tooMany}>
+          <FormattedMessage id="ContactDetailsForm.tooManyVerificationRequests" />
+        </span>
+      : <span className={resendClasses} onClick={onResendVerificationEmail} role="button">
+          <FormattedMessage id="ContactDetailsForm.resendEmailVerificationText" />
+        </span>;
     /* eslint-enable jsx-a11y/no-static-element-interactions */
 
     emailVerifiedInfo = (
@@ -106,7 +135,15 @@ const ContactDetailsFormComponent = props => {
   const passwordRequiredMessage = intl.formatMessage({
     id: 'ContactDetailsForm.passwordRequired',
   });
+
   const passwordRequired = validators.required(passwordRequiredMessage);
+
+  const passwordFailedMessage = intl.formatMessage({
+    id: 'ContactDetailsForm.passwordFailed',
+  });
+  const passwordErrorText = isForbiddenChangeEmailError(changeEmailError)
+    ? passwordFailedMessage
+    : null;
 
   const classes = classNames(rootClassName || css.root, className);
   const submitDisabled = invalid || submitting || inProgress;
@@ -141,10 +178,17 @@ const ContactDetailsFormComponent = props => {
           label={passwordLabel}
           placeholder={passwordPlaceholder}
           validate={passwordRequired}
+          customErrorText={passwordErrorText}
         />
       </div>
       <div className={css.bottomWrapper}>
-        <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
+        <PrimaryButton
+          className={css.submitButton}
+          type="submit"
+          inProgress={inProgress}
+          ready={ready}
+          disabled={submitDisabled}
+        >
           <FormattedMessage id="ContactDetailsForm.saveChanges" />
         </PrimaryButton>
       </div>
@@ -155,18 +199,25 @@ const ContactDetailsFormComponent = props => {
 ContactDetailsFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  changeEmailError: null,
   inProgress: false,
+  sendVerificationEmailError: null,
+  sendVerificationEmailInProgress: false,
 };
 
-const { bool, func, string } = PropTypes;
+const { bool, func, instanceOf, string } = PropTypes;
 
 ContactDetailsFormComponent.propTypes = {
   ...formPropTypes,
   rootClassName: string,
   className: string,
+  changeEmailError: instanceOf(Error),
   inProgress: bool,
   intl: intlShape.isRequired,
   onResendVerificationEmail: func.isRequired,
+  ready: bool.isRequired,
+  sendVerificationEmailError: instanceOf(Error),
+  sendVerificationEmailInProgress: bool,
 };
 
 const defaultFormName = 'ContactDetailsForm';

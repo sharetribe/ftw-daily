@@ -21,9 +21,6 @@
   flex-direction: column;
   width: 100%;
 
-  /* Hide Topbar's box-shadow when side nav is stacked below Topbar as a new bar */
-  z-index: calc(var(--zIndexTopbar));
-
   @media (--viewportLarge) {
     flex-direction: row;
     justify-content: center;

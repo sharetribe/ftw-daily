@@ -13,6 +13,11 @@
 
 }
 
+.desktopTopbar,
+.mobileTopbar {
+  box-shadow: none;
+}
+
 .tabs {
   display: flex;
   flex-direction: row;

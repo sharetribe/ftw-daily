@@ -154,7 +154,9 @@ class TopbarComponent extends Component {
     const {
       className,
       rootClassName,
+      desktopClassName,
       mobileRootClassName,
+      mobileClassName,
       isAuthenticated,
       authInProgress,
       currentUser,
@@ -233,7 +235,7 @@ class TopbarComponent extends Component {
 
     return (
       <div className={classes}>
-        <div className={classNames(mobileRootClassName || css.container)}>
+        <div className={classNames(mobileRootClassName || css.container, mobileClassName)}>
           <Button rootClassName={css.menu} onClick={this.handleMobileMenuOpen}>
             <MenuIcon
               className={css.menuIcon}
@@ -253,6 +255,7 @@ class TopbarComponent extends Component {
         </div>
         <div className={css.desktop}>
           <TopbarDesktop
+            className={desktopClassName}
             currentUserHasListings={currentUserHasListings}
             currentUser={currentUser}
             currentPage={currentPage}
@@ -336,7 +339,9 @@ class TopbarComponent extends Component {
 TopbarComponent.defaultProps = {
   className: null,
   rootClassName: null,
+  desktopClassName: null,
   mobileRootClassName: null,
+  mobileClassName: null,
   notificationCount: 0,
   currentUser: null,
   currentUserHasOrders: null,
@@ -349,7 +354,9 @@ const { arrayOf, bool, func, instanceOf, number, shape, string } = PropTypes;
 TopbarComponent.propTypes = {
   className: string,
   rootClassName: string,
+  desktopClassName: string,
   mobileRootClassName: string,
+  mobileClassName: string,
   isAuthenticated: bool.isRequired,
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,

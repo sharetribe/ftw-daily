@@ -88,3 +88,9 @@ export const isTransactionInitiateListingNotFoundError = apiError => {
     return error.code === ERROR_CODE_TRANSITION_PARAMETER_VALIDATION_FAILED && notfound;
   });
 };
+
+/**
+ * Check if the given API error (from `sdk.currentUser.changeEmail(params)`)
+ * is due to giving wrong password.
+ */
+export const isForbiddenChangeEmailError = apiError => apiError && apiError.status === 403;
