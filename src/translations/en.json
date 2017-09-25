@@ -63,6 +63,7 @@
   "ContactDetailsForm.saveChanges": "Save changes",
   "ContactDetailsPage.emailTabTitle": "Email",
   "ContactDetailsPage.passwordTabTitle": "Password",
+  "ContactDetailsPage.title": "Email settings",
   "DateInput.clearDate": "Clear Date",
   "DateInput.closeDatePicker": "Close",
   "DateInput.defaultPlaceholder": "Date input",

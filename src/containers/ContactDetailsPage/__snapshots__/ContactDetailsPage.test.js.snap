@@ -72,7 +72,13 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
     <ContentWrapper
       className={null}
       rootClassName={null}>
-      Main content
+      <div>
+        <h1>
+          <FormattedMessage
+            id="ContactDetailsPage.title"
+            values={Object {}} />
+        </h1>
+      </div>
     </ContentWrapper>
   </LayoutSideNavigation>
 </withRouter(PageLayout)>

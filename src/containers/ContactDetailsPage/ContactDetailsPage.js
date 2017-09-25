@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
-import { sendVerificationEmail } from '../../ducks/user.duck';
+import { ensureCurrentUser } from '../../util/data';
+import { fetchCurrentUser, sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import {
@@ -17,7 +18,9 @@ import {
   TopbarWrapper,
   UserNav,
 } from '../../components';
+import { ContactDetailsForm } from '../../containers';
 
+import { changeEmail } from './ContactDetailsPage.duck';
 import css from './ContactDetailsPage.css';
 
 export const ContactDetailsPageComponent = props => {
@@ -37,6 +40,7 @@ export const ContactDetailsPageComponent = props => {
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
     onResendVerificationEmail,
+    onSubmitChangeEmail,
   } = props;
 
   const tabs = [
@@ -55,6 +59,19 @@ export const ContactDetailsPageComponent = props => {
       },
     },
   ];
+
+  const user = ensureCurrentUser(currentUser);
+  const email = user.attributes.email || '';
+  const changeEmailForm = user.id
+    ? <ContactDetailsForm
+        className={css.form}
+        initialValues={{ email }}
+        currentUser={currentUser}
+        onResendVerificationEmail={onResendVerificationEmail}
+        onSubmit={onSubmitChangeEmail}
+        inProgress={authInProgress}
+      />
+    : null;
 
   return (
     <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Contact details">
@@ -82,7 +99,12 @@ export const ContactDetailsPageComponent = props => {
           <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />
         </SideNavWrapper>
         <ContentWrapper>
-          Main content
+          <div className={css.content}>
+            <h1 className={css.title}>
+              <FormattedMessage id="ContactDetailsPage.title" />
+            </h1>
+            {changeEmailForm}
+          </div>
         </ContentWrapper>
       </LayoutSideNavigation>
     </PageLayout>
@@ -111,6 +133,7 @@ ContactDetailsPageComponent.propTypes = {
   notificationCount: number,
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  onSubmitChangeEmail: func.isRequired,
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: instanceOf(Error),
   onResendVerificationEmail: func.isRequired,
@@ -154,10 +177,16 @@ const mapDispatchToProps = dispatch => ({
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
+  onSubmitChangeEmail: values => dispatch(changeEmail(values)),
 });
 
 const ContactDetailsPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
   ContactDetailsPageComponent
 );
+
+ContactDetailsPage.loadData = () => {
+  // Since verify email happens in separate tab, current user's data might be updated
+  return fetchCurrentUser();
+};
 
 export default ContactDetailsPage;
