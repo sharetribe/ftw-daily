@@ -60,7 +60,7 @@ export class ProfileSettingsPageComponent extends Component {
       const uploadedImage = this.props.image;
 
       // Update profileImage only if file system has been accessed
-      const updatedValues = uploadedImage.imageId && uploadedImage.file
+      const updatedValues = uploadedImage && uploadedImage.imageId && uploadedImage.file
         ? { ...name, profileImageId: uploadedImage.imageId }
         : name;
 
