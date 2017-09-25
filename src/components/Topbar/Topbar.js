@@ -212,7 +212,7 @@ class TopbarComponent extends Component {
       </InlineTextButton>
     );
     const fixEmailLink = (
-      <NamedLink className={css.helperLink} name="ProfileSettingsPage">
+      <NamedLink className={css.helperLink} name="ContactDetailsPage">
         <FormattedMessage id="Topbar.fixEmailLinkText" />
       </NamedLink>
     );
