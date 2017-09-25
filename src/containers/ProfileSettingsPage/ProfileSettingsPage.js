@@ -55,12 +55,13 @@ export class ProfileSettingsPageComponent extends Component {
     } = this.props;
 
     const handleSubmit = values => {
-      const { firstName, lastName, profileImage } = values;
+      const { firstName, lastName } = values;
       const name = { firstName, lastName };
+      const uploadedImage = this.props.image;
 
       // Update profileImage only if file system has been accessed
-      const updatedValues = profileImage.imageId && profileImage.file
-        ? { ...name, profileImageId: profileImage.imageId }
+      const updatedValues = uploadedImage.imageId && uploadedImage.file
+        ? { ...name, profileImageId: uploadedImage.imageId }
         : name;
 
       onUpdateProfile(updatedValues).then(() => {
