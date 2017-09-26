@@ -31,6 +31,10 @@
 
   color: var(--matterColor);
   padding-bottom: 10px;
+  padding-top: 10px;
+
+  /* push tabs against bottom of tab bar */
+  margin-top: auto;
 
   border-bottom-width: 2px;
   border-bottom-style: solid;
@@ -49,6 +53,10 @@
     border-bottom-width: 0px;
     margin-bottom: 14px;
     width: var(--linkWidth);
+
+    /* Remove mobile (horizontally aligned) nav styling */
+    padding-top: 0;
+    margin-top: 0;
 
     &:hover {
       background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='#C0392B' fill-rule='evenodd'/></svg>");
