@@ -41,7 +41,7 @@
   border-bottom-color: transparent;
 
   transition: var(--transitionStyleButton);
-  background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='#C0392B' fill-rule='evenodd'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='%23C0392B' fill-rule='evenodd'/></svg>");
   background-position: calc(var(--linkWidth) + var(--linkBorderWidth)) center; /* SelectedLink's width (200px) + border thickness (4px) = 204px */
 
   &:hover {
@@ -59,7 +59,7 @@
     margin-top: 0;
 
     &:hover {
-      background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='#C0392B' fill-rule='evenodd'/></svg>");
+      background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='%23C0392B' fill-rule='evenodd'/></svg>");
       background-position: right center;
     }
   }
@@ -71,11 +71,11 @@
 
   @media (--viewportLarge) {
     width: var(--linkWidth);
-    background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='#000' fill-rule='evenodd'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='%23000' fill-rule='evenodd'/></svg>");
     background-position: right center;
 
     &:hover {
-      background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='#000' fill-rule='evenodd'/></svg>");
+      background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='%23000' fill-rule='evenodd'/></svg>");
       background-position: right center;
     }
   }

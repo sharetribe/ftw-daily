@@ -95,7 +95,7 @@
 
   /* Add an underline for '.renderedDay' */
   & :global(.CalendarDay--today) {
-    background-image: url("data:image/svg+xml;utf8,<svg width='14' height='2' viewBox='0 0 14 2' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h14v2H0z' fill='#FFF' fill-rule='evenodd'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg width='14' height='2' viewBox='0 0 14 2' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h14v2H0z' fill='%23FFF' fill-rule='evenodd'/></svg>");
     background-position: center 30px;
   }
 
