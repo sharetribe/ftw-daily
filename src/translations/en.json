@@ -59,6 +59,7 @@
   "ContactDetailsForm.passwordLabel": "Current password",
   "ContactDetailsForm.passwordPlaceholder": "Enter your current password…",
   "ContactDetailsForm.passwordRequired": "Password is required",
+  "ContactDetailsForm.passwordTooShort": "Password should be at least {minLength} characters",
   "ContactDetailsForm.pendingEmailCheckInbox": "Check your inbox to verify {pendingEmail} now.",
   "ContactDetailsForm.pendingEmailUnverified": "You have changed your email address but haven’t verified the new address yet. {pendingEmailCheckInbox} {resendEmailMessage}",
   "ContactDetailsForm.resendEmailVerificationText": "Resend verification email.",

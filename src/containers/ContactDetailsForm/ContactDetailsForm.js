@@ -159,6 +159,20 @@ class ContactDetailsFormComponent extends Component {
 
     const passwordRequired = validators.required(passwordRequiredMessage);
 
+    const passwordMinLengthMessage = intl.formatMessage(
+      {
+        id: 'ContactDetailsForm.passwordTooShort',
+      },
+      {
+        minLength: validators.PASSWORD_MIN_LENGTH,
+      }
+    );
+
+    const passwordMinLength = validators.minLength(
+      passwordMinLengthMessage,
+      validators.PASSWORD_MIN_LENGTH
+    );
+
     const passwordFailedMessage = intl.formatMessage({
       id: 'ContactDetailsForm.passwordFailed',
     });
@@ -199,7 +213,7 @@ class ContactDetailsFormComponent extends Component {
             id={`${form}.currentPassword`}
             label={passwordLabel}
             placeholder={passwordPlaceholder}
-            validate={passwordRequired}
+            validate={[passwordRequired, passwordMinLength]}
             customErrorText={passwordErrorText}
           />
         </div>
