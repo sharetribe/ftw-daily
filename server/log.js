@@ -34,7 +34,9 @@ exports.requestHandler = () => {
   if (SENTRY_DSN) {
     return Raven.requestHandler();
   } else {
-    return null;
+    return (req, res, next) => {
+      next();
+    };
   }
 };
 
@@ -46,7 +48,9 @@ exports.errorHandler = () => {
   if (SENTRY_DSN) {
     return Raven.errorHandler();
   } else {
-    return null;
+    return (err, req, res, next) => {
+      next(err);
+    };
   }
 };
 
@@ -60,7 +64,6 @@ exports.errorHandler = () => {
  */
 exports.error = (e, data) => {
   if (SENTRY_DSN) {
-    console.log('logging an exception');
     Raven.captureException(e, { extra: data });
   } else {
     console.error(e);

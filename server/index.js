@@ -162,7 +162,7 @@ app.get('*', (req, res) => {
 });
 
 // Set error handler. If Sentry is set up, all error responses
-// (500 and up) will be logged there.
+// will be logged there.
 app.use(log.errorHandler());
 
 app.listen(PORT, () => {
