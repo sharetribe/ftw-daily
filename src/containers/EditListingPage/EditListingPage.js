@@ -150,6 +150,8 @@ export const EditListingPageComponent = props => {
           currentUser={currentUser}
           currentUserHasListings={currentUserHasListings}
           currentUserHasOrders={currentUserHasOrders}
+          desktopClassName={css.desktopTopbar}
+          mobileClassName={css.mobileTopbar}
           notificationCount={notificationCount}
           history={history}
           location={location}

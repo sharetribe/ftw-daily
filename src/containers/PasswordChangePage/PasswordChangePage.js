@@ -85,9 +85,11 @@ export const PasswordChangePageComponent = props => {
             currentUser={currentUser}
             currentUserHasListings={currentUserHasListings}
             currentUserHasOrders={currentUserHasOrders}
+            desktopClassName={css.desktopTopbar}
             history={history}
             isAuthenticated={isAuthenticated}
             location={location}
+            mobileClassName={css.mobileTopbar}
             notificationCount={notificationCount}
             onLogout={onLogout}
             onManageDisableScrolling={onManageDisableScrolling}
