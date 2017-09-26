@@ -23,15 +23,18 @@
   flex-direction: row;
   overflow-x: auto;
   min-height: 48px;
+  padding-top: 2px;
 
   @media (--viewportMedium) {
     min-height: 56px;
+    padding-top: 10px;
   }
 
   @media (--viewportLarge) {
     min-height: auto;
     flex-direction: column;
     margin-top: 28px;
+    padding-top: 0;
   }
 }
 

@@ -18,7 +18,7 @@
   /* Layout */
   display: flex;
   flex-direction: row;
-  padding: 10px 24px 0 24px;
+  padding: 0 24px 0 24px;
   flex-shrink: 0;
   background-color: var(--matterColorLight);
   box-shadow: var(--boxShadowLight);
