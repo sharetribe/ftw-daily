@@ -66,13 +66,17 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 28px 24px 0 24px;
+  padding: 29px 24px 0 24px;
 
   border-top-width: 1px;
   border-top-color: var(--matterColorNegative);
   border-top-style: solid;
   background-color: var(--matterColorLight);
   box-shadow: var(--boxShadow);
+
+  @media (--viewportMedium) {
+    padding: 24px 24px 0 24px;
+  }
 
   @media (--viewportLarge) {
     padding: 113px 0 82px 15vw;
@@ -100,20 +104,26 @@
 
 
   @media (--viewportMedium) {
+    padding-bottom: 10px;
     margin-top: 0;
     margin-bottom: 0;
+  }
+
+  @media (--viewportLarge) {
+    padding-bottom: 0;
   }
 }
 
 .tabs {
-  padding-top: 12px;
+  padding-top: 2px;
 
   display: flex;
   flex-direction: row;
   overflow-x: auto;
 
   @media (--viewportMedium) {
-    padding-top: 21px;
+    padding-top: 12px;
+    padding-top: 20px;
   }
 
   @media (--viewportLarge) {

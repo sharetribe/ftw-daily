@@ -26,6 +26,11 @@
   }
 }
 
+.desktopTopbar,
+.mobileTopbar {
+  box-shadow: none;
+}
+
 .wizard {
   flex-grow: 1;
 }
