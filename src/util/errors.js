@@ -32,6 +32,13 @@ export const isSignupEmailTakenError = apiError =>
   hasErrorWithCode(apiError, ERROR_CODE_EMAIL_TAKEN);
 
 /**
+ * Check if the given API error (from `sdk.currentuser.changeEmail()`) is
+ * due to the email address already being in use.
+ */
+export const isChangeEmailTakenError = apiError =>
+  hasErrorWithCode(apiError, ERROR_CODE_EMAIL_TAKEN);
+
+/**
  * Check if the given API error (from
  * `sdk.currentUser.sendVerificationEmail()`) is due to too many
  * active email verification requests.

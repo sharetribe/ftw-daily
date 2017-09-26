@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import * as validators from '../../util/validators';
 import { ensureCurrentUser } from '../../util/data';
 import {
+  isChangeEmailTakenError,
   isForbiddenChangeEmailError,
   isTooManyEmailVerificationRequestsError,
 } from '../../util/errors';
@@ -78,6 +79,10 @@ class ContactDetailsFormComponent extends Component {
     const tooManyVerificationRequests = isTooManyEmailVerificationRequestsError(
       sendVerificationEmailError
     );
+
+    const emailTakenErrorText = isChangeEmailTakenError(changeEmailError)
+      ? intl.formatMessage({ id: 'ContactDetailsForm.emailTakenError' })
+      : null;
 
     let resendEmailMessage = null;
     if (tooManyVerificationRequests) {
@@ -180,7 +185,16 @@ class ContactDetailsFormComponent extends Component {
       ? passwordFailedMessage
       : null;
 
-    const confirmClasses = classNames(css.confirmChangesSection, { [css.confirmChangesSectionVisible]: !pristine });
+    const confirmClasses = classNames(css.confirmChangesSection, {
+      [css.confirmChangesSectionVisible]: !pristine,
+    });
+
+    const genericFailure = changeEmailError && !(emailTakenErrorText || passwordErrorText)
+      ? <span className={css.error}>
+          <FormattedMessage id="ContactDetailsForm.genericFailure" />
+        </span>
+      : null;
+
     const classes = classNames(rootClassName || css.root, className);
     const submitDisabled = invalid || submitting || inProgress;
 
@@ -194,6 +208,7 @@ class ContactDetailsFormComponent extends Component {
             label={emailLabel}
             placeholder={emailPlaceholder}
             validate={emailRequired}
+            customErrorText={emailTakenErrorText}
           />
           {emailVerifiedInfo}
         </div>
@@ -218,6 +233,7 @@ class ContactDetailsFormComponent extends Component {
           />
         </div>
         <div className={css.bottomWrapper}>
+          {genericFailure}
           <PrimaryButton
             className={css.submitButton}
             type="submit"

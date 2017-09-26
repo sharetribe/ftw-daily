@@ -33,7 +33,10 @@ const EditListingLocationPanel = props => {
   );
 
   const panelTitle = currentListing.id
-    ? <FormattedMessage id="EditListingLocationPanel.title" values={{ listingTitle:listingLink }} />
+    ? <FormattedMessage
+        id="EditListingLocationPanel.title"
+        values={{ listingTitle: listingLink }}
+      />
     : <FormattedMessage id="EditListingLocationPanel.createListingTitle" />;
 
   // Only render current search if full place object is available in the URL params

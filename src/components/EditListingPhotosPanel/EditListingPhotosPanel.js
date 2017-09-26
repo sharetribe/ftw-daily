@@ -107,7 +107,10 @@ class EditListingPhotosPanel extends Component {
       </NamedLink>
     );
     const panelTitle = currentListing.id
-      ? <FormattedMessage id="EditListingPhotosPanel.title" values={{ listingTitle:listingLink }} />
+      ? <FormattedMessage
+          id="EditListingPhotosPanel.title"
+          values={{ listingTitle: listingLink }}
+        />
       : <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />;
 
     return (

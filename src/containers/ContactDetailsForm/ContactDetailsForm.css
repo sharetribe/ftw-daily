@@ -131,3 +131,17 @@
     margin-top: 96px;
   }
 }
+
+.error {
+  @apply --marketplaceH4FontStyles;
+  color: var(--failColor);
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  margin: 24px 0;
+
+  @media (--viewportMedium) {
+    margin: 24px 0;
+  }
+}
+
