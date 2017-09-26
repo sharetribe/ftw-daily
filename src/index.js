@@ -74,7 +74,8 @@ if (typeof window !== 'undefined') {
 
   setupStripe();
   render(store);
-  log.setup(config.sentryDsn);
+  // set up logger with Sentry DSN client key and environment
+  log.setup(config.sentryDsn, config.env);
 
   if (config.dev) {
     // Expose stuff for the browser REPL

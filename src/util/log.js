@@ -14,9 +14,9 @@ import Raven from 'raven-js';
  *
  * @param {String} sentryDsn A public Sentry DSN
  */
-export const setup = sentryDsn => {
+export const setup = (sentryDsn, env) => {
   if (sentryDsn !== undefined) {
-    Raven.config(sentryDsn).install();
+    Raven.config(sentryDsn, { environment: env }).install();
   }
 };
 

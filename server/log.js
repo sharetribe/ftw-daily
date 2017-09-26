@@ -5,21 +5,24 @@
  */
 
 const Raven = require('raven');
-const SENTRY_DSN = process.env.SERVER_SENTRY_DSN;
-const ENV = process.env.NODE_ENV;
+
+// Sentry client key
+let SENTRY_DSN;
 
 /**
  * Set up error loggin. If a Sentry DSN is defined
  * Sentry client is configured.
  */
-exports.setup = () => {
-  if (SENTRY_DSN) {
-    Raven.config(SENTRY_DSN, {
-      environment: ENV,
+exports.setup = (sentryDsn, env) => {
+  if (sentryDsn) {
+    Raven.config(sentryDsn, {
+      environment: env,
       autoBreadcrumbs: {
         http: true,
       },
     }).install();
+
+    SENTRY_DSN = sentryDsn;
   }
 };
 
