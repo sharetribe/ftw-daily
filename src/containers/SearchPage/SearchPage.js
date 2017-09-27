@@ -160,7 +160,6 @@ export class SearchPageComponent extends Component {
       sendVerificationEmailError,
       onResendVerificationEmail,
     } = this.props;
-
     // eslint-disable-next-line no-unused-vars
     const { boundsChanged, page, ...searchInURL } = parse(location.search, {
       latlng: ['origin'],

@@ -1,6 +1,7 @@
 import { authInfo } from './Auth.duck';
 import { updatedEntities, denormalisedEntities } from '../util/data';
 import { TX_TRANSITION_PREAUTHORIZE } from '../util/propTypes';
+import { setUserId } from '../util/log';
 
 // ================ Action types ================ //
 
@@ -337,6 +338,8 @@ export const fetchCurrentUser = () =>
         const entities = updatedEntities({}, response.data);
         const denormalised = denormalisedEntities(entities, 'current-user', [currentUserId]);
         const currentUser = denormalised[0];
+        // set current user id to the logger
+        setUserId(currentUser.id);
         dispatch(currentUserShowSuccess(currentUser));
         return currentUser;
       })
