@@ -1,4 +1,5 @@
 import { types } from '../../util/sdkLoader';
+import { error as logError } from '../../util/log';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
 
@@ -50,7 +51,6 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case ACCEPT_SALE_SUCCESS:
       return { ...state, acceptInProgress: false };
     case ACCEPT_SALE_ERROR:
-      console.error(payload); // eslint-disable-line
       return { ...state, acceptInProgress: false, acceptSaleError: payload };
 
     case REJECT_SALE_REQUEST:
@@ -58,7 +58,6 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case REJECT_SALE_SUCCESS:
       return { ...state, rejectInProgress: false };
     case REJECT_SALE_ERROR:
-      console.error(payload); // eslint-disable-line
       return { ...state, rejectInProgress: false, rejectSaleError: payload };
 
     default:
@@ -148,6 +147,7 @@ export const acceptSale = id =>
         return response;
       })
       .catch(e => {
+        logError(e, { txId: id, transition: 'TRANSITION_ACCEPT' });
         dispatch(acceptSaleError(e));
         throw e;
       });
@@ -169,6 +169,7 @@ export const rejectSale = id =>
         return response;
       })
       .catch(e => {
+        logError(e, { txId: id, transition: 'TRANSITION_REJECT' });
         dispatch(rejectSaleError(e));
         throw e;
       });

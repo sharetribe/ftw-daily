@@ -1,5 +1,6 @@
 import { omit, omitBy, isUndefined } from 'lodash';
 import { types } from '../../util/sdkLoader';
+import { error as logError } from '../../util/log';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserHasListingsSuccess } from '../../ducks/user.duck';
 
@@ -80,8 +81,6 @@ export default function reducer(state = initialState, action = {}) {
         redirectToListing: true,
       };
     case CREATE_LISTING_ERROR:
-      // eslint-disable-next-line no-console
-      console.error(payload);
       return {
         ...state,
         createListingInProgress: false,
@@ -94,8 +93,6 @@ export default function reducer(state = initialState, action = {}) {
     case UPDATE_LISTING_SUCCESS:
       return { ...state, updateInProgress: false };
     case UPDATE_LISTING_ERROR:
-      // eslint-disable-next-line no-console
-      console.error(payload);
       return { ...state, updateInProgress: false, updateListingError: payload };
 
     case SHOW_LISTINGS_REQUEST:
@@ -282,7 +279,10 @@ export function requestCreateListing(data) {
         dispatch(fetchCurrentUserHasListingsSuccess(true));
         return response;
       })
-      .catch(e => dispatch(createListingError(e)));
+      .catch(e => {
+        logError(e, { listingData: cleanedData });
+        return dispatch(createListingError(e));
+      });
   };
 }
 
@@ -318,7 +318,10 @@ export function requestUpdateListing(tab, data) {
         dispatch(markTabUpdated(tab));
         dispatch(updateListingSuccess(updateResponse));
       })
-      .catch(e => dispatch(updateListingError(e)));
+      .catch(e => {
+        logError(e, { listingData: cleanedData });
+        return dispatch(updateListingError(e));
+      });
   };
 }
 
