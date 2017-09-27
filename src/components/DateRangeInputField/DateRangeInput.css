@@ -38,6 +38,7 @@
     display: flex;
     justify-content: space-between;
     border: none;
+    background: none;
   }
   & :global(.DayPicker--horizontal) {
     margin: 0 auto;
@@ -221,6 +222,7 @@
   /* Create gutter between inputs */
   & :global(.DateInput) {
     width: calc(50% - 6px);
+    background: none;
 
     @media (--viewportMedium) {
       width: calc(50% - 12px);

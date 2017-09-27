@@ -127,7 +127,7 @@
 }
 
 .iconWrapper {
-  padding: 2px 10px 0 10px;
+  padding: 0px 10px 1px 10px;
   color: var(--matterColorLight);
   border-radius: 4px;
   transition: var(--transitionStyleButton);

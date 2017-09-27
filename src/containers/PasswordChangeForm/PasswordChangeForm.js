@@ -28,6 +28,7 @@ class PasswordChangeFormComponent extends Component {
       inProgress,
       intl,
       invalid,
+      pristine,
       ready,
       reset,
     } = this.props;
@@ -96,6 +97,7 @@ class PasswordChangeFormComponent extends Component {
       ? passwordFailedMessage
       : null;
 
+    const confirmClasses = classNames(css.confirmChangesSection, { [css.confirmChangesSectionVisible]: !pristine });
     const classes = classNames(rootClassName || css.root, className);
     const submitDisabled = invalid || submitting || inProgress;
 
@@ -119,7 +121,7 @@ class PasswordChangeFormComponent extends Component {
           />
         </div>
 
-        <div className={css.confirmChangesSection}>
+        <div className={confirmClasses}>
           <h3 className={css.confirmChangesTitle}>
             <FormattedMessage id="PasswordChangeForm.confirmChangesTitle" />
           </h3>

@@ -28,7 +28,9 @@
 
 .desktopTopbar,
 .mobileTopbar {
-  box-shadow: none;
+  @media screen and (max-width: 1024px) {
+    box-shadow: none;
+  }
 }
 
 .wizard {

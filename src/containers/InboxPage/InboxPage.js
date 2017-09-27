@@ -256,6 +256,7 @@ export const InboxPageComponent = props => {
       <Topbar
         className={css.topbar}
         mobileRootClassName={css.mobileTopbar}
+        desktopClassName={css.desktopTopbar}
         isAuthenticated={isAuthenticated}
         authInProgress={authInProgress}
         currentUser={currentUser}

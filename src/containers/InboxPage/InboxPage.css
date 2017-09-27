@@ -26,6 +26,13 @@
   }
 }
 
+.desktopTopbar,
+.mobileTopbar {
+  @media screen and (max-width: 1024px) {
+    box-shadow: none;
+  }
+}
+
 .container {
   width: 100%;
 

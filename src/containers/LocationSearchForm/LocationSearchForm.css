@@ -29,4 +29,8 @@
 .searchPredictions {
   margin-top: 16px;
   margin-bottom: 102px;
+
+  @media (--viewportXLarge) {
+    margin-bottom: 0;
+  }
 }

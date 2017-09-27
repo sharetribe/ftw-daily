@@ -18,4 +18,11 @@
 
 .hero {
   flex-grow: 1;
+  justify-content: flex-end;
+  padding-bottom: 98px;
+
+  @media (min-width: 768px) {
+    justify-content: center;
+    padding-top: 60px;
+  }
 }
