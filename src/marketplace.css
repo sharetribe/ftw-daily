@@ -345,6 +345,7 @@
 
     background-color: var(--matterColorLight);
     border-radius: var(--borderRadius);
+    border-bottom: none;
 
     @media (--viewportMedium) {
       flex-basis: 480px;
@@ -353,6 +354,7 @@
       padding: var(--modalPaddingMedium);
       margin-top: 12.5vh;
       margin-bottom: 12.5vh;
+      border-bottom: 8px solid var(--marketplaceColor);
     }
   }
 
