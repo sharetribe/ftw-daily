@@ -6,6 +6,7 @@ import { NotFoundPage } from './containers';
 import { NamedRedirect } from './components';
 import { withFlattenedRoutes } from './util/contextHelpers';
 import * as propTypes from './util/propTypes';
+import { error as logError } from './util/log';
 
 const { bool, arrayOf, object, func, shape, string, any } = PropTypes;
 
@@ -29,8 +30,7 @@ const callLoadData = props => {
         console.log(`loadData success for ${name} route`);
       })
       .catch(e => {
-        // eslint-disable-next-line no-console
-        console.error(`loadData error for ${name} route`, e);
+        logError(e, { route: route });
       });
   }
 };

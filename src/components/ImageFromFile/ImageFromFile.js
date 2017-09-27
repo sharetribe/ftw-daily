@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { Promised } from '../../components';
+import { error as logError } from '../../util/log';
 
 import css from './ImageFromFile.css';
 
@@ -12,9 +13,9 @@ const readImage = file =>
     const reader = new FileReader();
     reader.onload = e => resolve(e.target.result);
     reader.onerror = e => {
-      // eslint-disable-next-line
-      console.error('Error (', e, `) happened while reading ${file.name}: ${e.target.result}`);
-      reject(new Error(`Error reading ${file.name}: ${e.target.result}`));
+      const error = new Error(`Error reading ${file.name}: ${e.target.result}`);
+      logError(error, { file: file });
+      reject(error);
     };
     reader.readAsDataURL(file);
   });

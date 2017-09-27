@@ -41,7 +41,7 @@ const render = store => {
       ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
     })
     .catch(e => {
-      console.error(e); // eslint-disable-line
+      log.error(e);
     });
 };
 
@@ -55,6 +55,9 @@ const setupStripe = () => {
 
 // If we're in a browser already, render the client application.
 if (typeof window !== 'undefined') {
+  // set up logger with Sentry DSN client key and environment
+  log.setup(config.sentryDsn, config.env);
+
   // eslint-disable-next-line no-underscore-dangle
   const preloadedState = window.__PRELOADED_STATE__ || '{}';
   const initialState = JSON.parse(preloadedState, types.reviver);
@@ -74,8 +77,6 @@ if (typeof window !== 'undefined') {
 
   setupStripe();
   render(store);
-  // set up logger with Sentry DSN client key and environment
-  log.setup(config.sentryDsn, config.env);
 
   if (config.dev) {
     // Expose stuff for the browser REPL

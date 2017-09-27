@@ -156,7 +156,7 @@ app.get('*', (req, res) => {
       }
     })
     .catch(e => {
-      console.error(e);
+      log.error(e);
       res.status(500).send(errorPage);
     });
 });
