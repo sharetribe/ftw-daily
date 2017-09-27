@@ -97,6 +97,18 @@
   width: 24px;
   height: 24px;
   stroke: var(--matterColorLight);
+
+  /* Animation */
+  animation-name: checkmarkAnimation;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+}
+
+@keyframes checkmarkAnimation {
+  0%   { opacity: 0; transform: scale(0.75);}
+  50%   { transform: scale(1.15);}
+  100%   { opacity: 1; transform: scale(1);}
 }
 
 .secondaryButton .spinner {
