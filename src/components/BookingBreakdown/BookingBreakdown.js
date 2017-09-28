@@ -82,8 +82,7 @@ export const BookingBreakdownComponent = props => {
         'Commission should be present and the value should be zero or negative'
       );
       logError(error, {
-        providerCommissionLineItem: providerCommissionLineItem,
-        transaction: transaction,
+        transactionId: transaction.id,
       });
       throw error;
     }
