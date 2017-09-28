@@ -4,6 +4,22 @@
 
 }
 
+@keyframes animationBorders36px {
+  0%    { border: 0px solid #FFF; }
+  100%  { border: 36px solid #FFF;}
+}
+
+@keyframes animationBorders24px {
+  0%    { border: 0px solid #FFF; }
+  100%  { border: 24px solid #FFF;}
+}
+
+@keyframes animationBordersRadius {
+  0%    { border-radius: 0px; }
+  100%  { border-radius: 4px; }
+}
+
+
 /* heroContainer gives the height for HeroSection */
 /* Safari has a bug with vw padding inside flexbox. Therefore we need an extra div (container) */
 .heroContainer {
@@ -13,6 +29,16 @@
 
   @media (--viewportMedium) {
     min-height: calc(100vh - var(--topbarHeightDesktop));
+
+    animation-name: animationBorders24px;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    animation-delay: 1s;
+  }
+
+  @media (--viewportLarge) {
+    animation-name: animationBorders36px;
   }
 }
 
@@ -20,6 +46,13 @@
   flex-grow: 1;
   justify-content: flex-end;
   padding-bottom: 98px;
+
+  animation-name: animationBordersRadius;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-delay: 1s;
+  border-radius: 0px;
 
   @media (min-width: 768px) {
     justify-content: center;

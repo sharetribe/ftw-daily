@@ -2,6 +2,24 @@
 
 :root {
   --desktopTitleMaxWidth: 625px;
+
+  --animationProperties: {
+    animation-name: animationTitle;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    -webkit-animation-fill-mode: forwards;
+
+    visibility:hidden;
+    opacity: 1;
+    position: relative;
+  }
+}
+
+/* Animation for the hero elements */
+
+@keyframes animationTitle {
+  0%    { visibility: hidden; opacity: 0; top: -20px; }
+  100%  { visibility: visible; opacity: 1; top: 0;}
 }
 
 .root {
@@ -23,6 +41,9 @@
   @apply --marketplaceHeroTitleFontStyles;
   color: var(--matterColorLight);
 
+  @apply --animationProperties;
+  animation-delay: 0.5s;
+
   @media (--viewportMedium) {
     max-width: var(--desktopTitleMaxWidth);
   }
@@ -40,6 +61,9 @@
   margin-bottom: 63px;
   margin-top: 0;
 
+  @apply --animationProperties;
+  animation-delay: 0.65s;
+
   @media (--viewportMedium) {
     max-width: var(--desktopTitleMaxWidth);
   }
@@ -54,6 +78,9 @@
 .mobileSearchButton {
   border-radius: 4px;
   flex-shrink: 0;
+
+  @apply --animationProperties;
+  animation-delay: 0.8s;
 
   @media (--viewportMedium) {
     display: none;
@@ -75,6 +102,9 @@
   border-bottom: 4px solid var(--marketplaceColor);
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
+
+  @apply --animationProperties;
+  animation-delay: 0.8s;
 
   @media (--viewportMedium) {
     display: block;
