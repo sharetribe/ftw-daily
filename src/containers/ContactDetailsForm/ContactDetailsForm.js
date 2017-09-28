@@ -7,7 +7,7 @@ import * as validators from '../../util/validators';
 import { ensureCurrentUser } from '../../util/data';
 import {
   isChangeEmailTakenError,
-  isForbiddenChangeEmailError,
+  isChangeEmailWrongPassword,
   isTooManyEmailVerificationRequestsError,
 } from '../../util/errors';
 import { PrimaryButton, TextInputField } from '../../components';
@@ -19,7 +19,8 @@ const SHOW_EMAIL_SENT_TIMEOUT = 2000;
 class ContactDetailsFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { verificationEmailSent: false };
+    this.state = { showVerificationEmailSentMessage: false };
+    this.emailSentTimeoutId = null;
     this.handleResendVerificationEmail = this.handleResendVerificationEmail.bind(this);
   }
 
@@ -28,15 +29,17 @@ class ContactDetailsFormComponent extends Component {
   }
 
   handleResendVerificationEmail() {
-    this.props.onResendVerificationEmail();
+    this.setState({ showVerificationEmailSentMessage: true });
 
-    this.setState({ verificationEmailSent: true });
-    this.emailSentTimeoutId = window.setTimeout(
-      () => {
-        this.setState({ verificationEmailSent: false });
-      },
-      SHOW_EMAIL_SENT_TIMEOUT
-    );
+    this.props.onResendVerificationEmail().then(() => {
+      // show "verification email sent" text for a bit longer.
+      this.emailSentTimeoutId = window.setTimeout(
+        () => {
+          this.setState({ showVerificationEmailSentMessage: false });
+        },
+        SHOW_EMAIL_SENT_TIMEOUT
+      );
+    });
   }
 
   render() {
@@ -91,7 +94,7 @@ class ContactDetailsFormComponent extends Component {
           <FormattedMessage id="ContactDetailsForm.tooManyVerificationRequests" />
         </span>
       );
-    } else if (sendVerificationEmailInProgress || this.state.verificationEmailSent) {
+    } else if (sendVerificationEmailInProgress || this.state.showVerificationEmailSentMessage) {
       resendEmailMessage = (
         <span className={css.emailSent}>
           <FormattedMessage id="ContactDetailsForm.emailSent" />
@@ -181,7 +184,7 @@ class ContactDetailsFormComponent extends Component {
     const passwordFailedMessage = intl.formatMessage({
       id: 'ContactDetailsForm.passwordFailed',
     });
-    const passwordErrorText = isForbiddenChangeEmailError(changeEmailError)
+    const passwordErrorText = isChangeEmailWrongPassword(changeEmailError)
       ? passwordFailedMessage
       : null;
 

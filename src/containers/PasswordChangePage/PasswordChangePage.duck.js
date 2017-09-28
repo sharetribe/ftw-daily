@@ -61,6 +61,8 @@ export const changePassword = params =>
       .then(() => dispatch(changePasswordSuccess()))
       .catch(e => {
         dispatch(changePasswordError(e));
+        // This is thrown so that form can be cleared
+        // after a timeout on changePassword submit handler
         throw e;
       });
   };
