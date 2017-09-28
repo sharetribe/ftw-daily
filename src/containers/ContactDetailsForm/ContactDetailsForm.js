@@ -6,7 +6,8 @@ import classNames from 'classnames';
 import * as validators from '../../util/validators';
 import { ensureCurrentUser } from '../../util/data';
 import {
-  isForbiddenChangeEmailError,
+  isChangeEmailTakenError,
+  isChangeEmailWrongPassword,
   isTooManyEmailVerificationRequestsError,
 } from '../../util/errors';
 import { PrimaryButton, TextInputField } from '../../components';
@@ -18,7 +19,8 @@ const SHOW_EMAIL_SENT_TIMEOUT = 2000;
 class ContactDetailsFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { verificationEmailSent: false };
+    this.state = { showVerificationEmailSentMessage: false };
+    this.emailSentTimeoutId = null;
     this.handleResendVerificationEmail = this.handleResendVerificationEmail.bind(this);
   }
 
@@ -27,15 +29,17 @@ class ContactDetailsFormComponent extends Component {
   }
 
   handleResendVerificationEmail() {
-    this.props.onResendVerificationEmail();
+    this.setState({ showVerificationEmailSentMessage: true });
 
-    this.setState({ verificationEmailSent: true });
-    this.emailSentTimeoutId = window.setTimeout(
-      () => {
-        this.setState({ verificationEmailSent: false });
-      },
-      SHOW_EMAIL_SENT_TIMEOUT
-    );
+    this.props.onResendVerificationEmail().then(() => {
+      // show "verification email sent" text for a bit longer.
+      this.emailSentTimeoutId = window.setTimeout(
+        () => {
+          this.setState({ showVerificationEmailSentMessage: false });
+        },
+        SHOW_EMAIL_SENT_TIMEOUT
+      );
+    });
   }
 
   render() {
@@ -79,6 +83,10 @@ class ContactDetailsFormComponent extends Component {
       sendVerificationEmailError
     );
 
+    const emailTakenErrorText = isChangeEmailTakenError(changeEmailError)
+      ? intl.formatMessage({ id: 'ContactDetailsForm.emailTakenError' })
+      : null;
+
     let resendEmailMessage = null;
     if (tooManyVerificationRequests) {
       resendEmailMessage = (
@@ -86,7 +94,7 @@ class ContactDetailsFormComponent extends Component {
           <FormattedMessage id="ContactDetailsForm.tooManyVerificationRequests" />
         </span>
       );
-    } else if (sendVerificationEmailInProgress || this.state.verificationEmailSent) {
+    } else if (sendVerificationEmailInProgress || this.state.showVerificationEmailSentMessage) {
       resendEmailMessage = (
         <span className={css.emailSent}>
           <FormattedMessage id="ContactDetailsForm.emailSent" />
@@ -159,14 +167,37 @@ class ContactDetailsFormComponent extends Component {
 
     const passwordRequired = validators.required(passwordRequiredMessage);
 
+    const passwordMinLengthMessage = intl.formatMessage(
+      {
+        id: 'ContactDetailsForm.passwordTooShort',
+      },
+      {
+        minLength: validators.PASSWORD_MIN_LENGTH,
+      }
+    );
+
+    const passwordMinLength = validators.minLength(
+      passwordMinLengthMessage,
+      validators.PASSWORD_MIN_LENGTH
+    );
+
     const passwordFailedMessage = intl.formatMessage({
       id: 'ContactDetailsForm.passwordFailed',
     });
-    const passwordErrorText = isForbiddenChangeEmailError(changeEmailError)
+    const passwordErrorText = isChangeEmailWrongPassword(changeEmailError)
       ? passwordFailedMessage
       : null;
 
-    const confirmClasses = classNames(css.confirmChangesSection, { [css.confirmChangesSectionVisible]: !pristine });
+    const confirmClasses = classNames(css.confirmChangesSection, {
+      [css.confirmChangesSectionVisible]: !pristine,
+    });
+
+    const genericFailure = changeEmailError && !(emailTakenErrorText || passwordErrorText)
+      ? <span className={css.error}>
+          <FormattedMessage id="ContactDetailsForm.genericFailure" />
+        </span>
+      : null;
+
     const classes = classNames(rootClassName || css.root, className);
     const submitDisabled = invalid || submitting || inProgress;
 
@@ -180,6 +211,7 @@ class ContactDetailsFormComponent extends Component {
             label={emailLabel}
             placeholder={emailPlaceholder}
             validate={emailRequired}
+            customErrorText={emailTakenErrorText}
           />
           {emailVerifiedInfo}
         </div>
@@ -199,11 +231,12 @@ class ContactDetailsFormComponent extends Component {
             id={`${form}.currentPassword`}
             label={passwordLabel}
             placeholder={passwordPlaceholder}
-            validate={passwordRequired}
+            validate={[passwordRequired, passwordMinLength]}
             customErrorText={passwordErrorText}
           />
         </div>
         <div className={css.bottomWrapper}>
+          {genericFailure}
           <PrimaryButton
             className={css.submitButton}
             type="submit"

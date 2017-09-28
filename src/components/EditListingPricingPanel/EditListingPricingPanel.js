@@ -34,7 +34,7 @@ const EditListingPricingPanel = props => {
   );
 
   const panelTitle = currentListing.id
-    ? <FormattedMessage id="EditListingPricingPanel.title" values={{ listingTitle:listingLink }} />
+    ? <FormattedMessage id="EditListingPricingPanel.title" values={{ listingTitle: listingLink }} />
     : <FormattedMessage id="EditListingPricingPanel.createListingTitle" />;
 
   return (

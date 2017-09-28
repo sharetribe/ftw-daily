@@ -5,7 +5,7 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
 import * as validators from '../../util/validators';
 import { ensureCurrentUser } from '../../util/data';
-import { isForbiddenChangePasswordError } from '../../util/errors';
+import { isChangePasswordWrongPassword } from '../../util/errors';
 import { PrimaryButton, TextInputField } from '../../components';
 
 import css from './PasswordChangeForm.css';
@@ -13,6 +13,10 @@ import css from './PasswordChangeForm.css';
 const RESET_TIMEOUT = 800;
 
 class PasswordChangeFormComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.resetTimeoutId = null;
+  }
   componentWillUnmount() {
     window.clearTimeout(this.resetTimeoutId);
   }
@@ -93,11 +97,20 @@ class PasswordChangeFormComponent extends Component {
     const passwordFailedMessage = intl.formatMessage({
       id: 'PasswordChangeForm.passwordFailed',
     });
-    const passwordErrorText = isForbiddenChangePasswordError(changePasswordError)
+    const passwordErrorText = isChangePasswordWrongPassword(changePasswordError)
       ? passwordFailedMessage
       : null;
 
-    const confirmClasses = classNames(css.confirmChangesSection, { [css.confirmChangesSectionVisible]: !pristine });
+    const confirmClasses = classNames(css.confirmChangesSection, {
+      [css.confirmChangesSectionVisible]: !pristine,
+    });
+
+    const genericFailure = changePasswordError && !passwordErrorText
+      ? <span className={css.error}>
+          <FormattedMessage id="PasswordChangeForm.genericFailure" />
+        </span>
+      : null;
+
     const classes = classNames(rootClassName || css.root, className);
     const submitDisabled = invalid || submitting || inProgress;
 
@@ -107,6 +120,8 @@ class PasswordChangeFormComponent extends Component {
         onSubmit={values => {
           handleSubmit(values).then(() => {
             this.resetTimeoutId = window.setTimeout(reset, RESET_TIMEOUT);
+          }).catch(() => {
+            // Error is handled in duck file already.
           });
         }}
       >
@@ -141,6 +156,7 @@ class PasswordChangeFormComponent extends Component {
           />
         </div>
         <div className={css.bottomWrapper}>
+          {genericFailure}
           <PrimaryButton
             className={css.submitButton}
             type="submit"
