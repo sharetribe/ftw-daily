@@ -100,12 +100,15 @@ class EditListingPhotosPanel extends Component {
     const { title } = currentListing.attributes;
     const listingTitle = title || '';
 
-    const params = { id: currentListing.id.uuid, slug: createSlug(title) };
-    const listingLink = (
-      <NamedLink name="ListingPage" params={params}>
-        {listingTitle}
-      </NamedLink>
-    );
+    const listingLink = currentListing.id
+      ? <NamedLink
+          name="ListingPage"
+          params={{ id: currentListing.id.uuid, slug: createSlug(title) }}
+        >
+          {listingTitle}
+        </NamedLink>
+      : '';
+
     const panelTitle = currentListing.id
       ? <FormattedMessage
           id="EditListingPhotosPanel.title"
