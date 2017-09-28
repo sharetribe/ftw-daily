@@ -7,16 +7,15 @@
  */
 
 import Raven from 'raven-js';
+import config from '../config';
 
 /**
  * Set up error handling. If a Sentry DSN is
  * provided a Sentry client will be installed.
- *
- * @param {String} sentryDsn A public Sentry DSN
  */
-export const setup = (sentryDsn, env) => {
-  if (sentryDsn !== undefined) {
-    Raven.config(sentryDsn, { environment: env }).install();
+export const setup = () => {
+  if (config.sentryDsn !== undefined) {
+    Raven.config(config.sentryDsn, { environment: config.env }).install();
   }
 };
 

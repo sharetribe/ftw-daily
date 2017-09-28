@@ -31,21 +31,19 @@ const fs = require('fs');
 const log = require('./log');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
-const ENV = process.env.NODE_ENV;
+const dev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 4000;
 const CLIENT_ID = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID ||
   '08ec69f6-d37e-414d-83eb-324e94afddf0';
 const BASE_URL = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'http://localhost:8088';
 const ENFORCE_SSL = process.env.SERVER_SHARETRIBE_ENFORCE_SSL === 'true';
 const TRUST_PROXY = process.env.SERVER_SHARETRIBE_TRUST_PROXY || null;
-const SENTRY_DSN = process.env.SERVER_SENTRY_DSN;
-const dev = ENV !== 'production';
 const app = express();
 
 const errorPage = fs.readFileSync(path.join(buildPath, '500.html'), 'utf-8');
 
 // Setup error logger
-log.setup(SENTRY_DSN, ENV);
+log.setup();
 // Add logger request handler. In case Sentry is set up
 // request information is added to error context when sent
 // to Sentry.

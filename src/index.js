@@ -56,7 +56,7 @@ const setupStripe = () => {
 // If we're in a browser already, render the client application.
 if (typeof window !== 'undefined') {
   // set up logger with Sentry DSN client key and environment
-  log.setup(config.sentryDsn, config.env);
+  log.setup();
 
   // eslint-disable-next-line no-underscore-dangle
   const preloadedState = window.__PRELOADED_STATE__ || '{}';
