@@ -1,9 +1,22 @@
 exports[`ListingPage matches snapshot 1`] = `
 <PageLayout
   authInfoError={null}
+  contentType="website"
+  description="listing1 description"
+  facebookImages={Array []}
   logoutError={null}
+  schema="
+          {
+            \"@context\": \"http://schema.org\",
+            \"@type\": \"ItemPage\",
+            \"description\": \"listing1 description\",
+            \"name\": \"listing1 title\",
+            \"image\": []
+          }
+        "
   scrollingDisabled={false}
-  title="listing1 title 55">
+  title="listing1 title 55"
+  twitterImages={Array []}>
   <Topbar
     authInProgress={false}
     currentUser={

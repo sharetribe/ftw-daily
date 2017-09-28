@@ -2,13 +2,17 @@ import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { injectIntl, intlShape } from 'react-intl';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { PageLayout, HeroSection, Topbar } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
+import config from '../../config';
 
+import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
+import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
 
 export const LandingPageComponent = props => {
@@ -20,6 +24,7 @@ export const LandingPageComponent = props => {
     currentUserHasOrders,
     flattenedRoutes,
     history,
+    intl,
     isAuthenticated,
     location,
     logoutError,
@@ -31,14 +36,40 @@ export const LandingPageComponent = props => {
     sendVerificationEmailError,
     onResendVerificationEmail,
   } = props;
+
+  // Schema for search engines (helps them to understand what this page is about)
+  // http://schema.org
+  // We are using JSON-LD format
+  const schemaTitle = intl.formatMessage({ id: 'LandingPage.schemaTitle' });
+  const schemaDescription = intl.formatMessage({ id: 'LandingPage.schemaDescription' });
+  const schemaImage = `${config.canonicalRootURL}/${facebookImage}`;
+
   return (
     <PageLayout
       className={css.root}
       authInfoError={authInfoError}
       logoutError={logoutError}
       scrollingDisabled={scrollingDisabled}
-      title="Landing page"
+      contentType="website"
+      description={schemaDescription}
+      title={schemaTitle}
+      facebookImages={[{ url: facebookImage, width: 1200, height: 630 }]}
+      twitterImages={[{ url: twitterImage, width: 600, height: 314 }]}
+      schema={
+        `
+        {
+          "@context": "http://schema.org",
+          "@type": "WebPage",
+          "description": "${schemaDescription}",
+          "name": "${schemaTitle}",
+          "image": [
+            "${schemaImage}"
+          ]
+        }
+      `
+      }
     >
+
       <Topbar
         isAuthenticated={isAuthenticated}
         authInProgress={authInProgress}
@@ -99,6 +130,9 @@ LandingPageComponent.propTypes = {
   // from withRouter
   history: object.isRequired,
   location: object.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -135,6 +169,7 @@ const mapDispatchToProps = dispatch => ({
 
 const LandingPage = compose(
   connect(mapStateToProps, mapDispatchToProps),
+  injectIntl,
   withRouter,
   withFlattenedRoutes
 )(LandingPageComponent);

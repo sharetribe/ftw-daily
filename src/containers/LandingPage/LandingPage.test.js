@@ -1,4 +1,5 @@
 import React from 'react';
+import { fakeIntl } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
 import { LandingPageComponent } from './LandingPage';
 import { RoutesProvider } from '../../components';
@@ -16,6 +17,7 @@ describe('LandingPage', () => {
         scrollingDisabled={false}
         authInProgress={false}
         currentUserHasListings={false}
+        intl={fakeIntl}
         isAuthenticated={false}
         onLogout={noop}
         onManageDisableScrolling={noop}

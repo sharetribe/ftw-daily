@@ -34,6 +34,7 @@ describe('SearchPageComponent', () => {
       searchInProgress: false,
       authInProgress: false,
       currentUserHasListings: false,
+      intl: fakeIntl,
       isAuthenticated: false,
       onLogout: noop,
       onManageDisableScrolling: noop,

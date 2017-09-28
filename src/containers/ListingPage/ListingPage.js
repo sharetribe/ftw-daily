@@ -330,12 +330,39 @@ export class ListingPageComponent extends Component {
         </div>
       : null;
 
+    const facebookImages = hasImages
+      ? currentListing.images.map(image => {
+          return image.attributes.sizes.find(i => i.name === 'facebook');
+        })
+      : [];
+    const twitterImages = hasImages
+      ? currentListing.images.map(image => {
+          return image.attributes.sizes.find(i => i.name === 'twitter');
+        })
+      : [];
+    const schemaImages = JSON.stringify(facebookImages.map(img => img.url));
+
     return (
       <PageLayout
         authInfoError={authInfoError}
         logoutError={logoutError}
         title={`${title} ${formattedPrice}`}
         scrollingDisabled={scrollingDisabled}
+        contentType="website"
+        description={description}
+        facebookImages={facebookImages}
+        twitterImages={twitterImages}
+        schema={
+          `
+          {
+            "@context": "http://schema.org",
+            "@type": "ItemPage",
+            "description": "${description}",
+            "name": "${title}",
+            "image": ${schemaImages}
+          }
+        `
+        }
       >
         {topbar}
         <div className={listingClasses}>

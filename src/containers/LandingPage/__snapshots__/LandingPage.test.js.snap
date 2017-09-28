@@ -1,9 +1,40 @@
 exports[`LandingPage matches snapshot 1`] = `
 <PageLayout
   authInfoError={null}
+  contentType="website"
+  description="LandingPage.schemaDescription"
+  facebookImages={
+    Array [
+      Object {
+        "height": 630,
+        "url": "saunatimeFacebook-1200x630.jpg",
+        "width": 1200,
+      },
+    ]
+  }
   logoutError={null}
+  schema="
+        {
+          \"@context\": \"http://schema.org\",
+          \"@type\": \"WebPage\",
+          \"description\": \"LandingPage.schemaDescription\",
+          \"name\": \"LandingPage.schemaTitle\",
+          \"image\": [
+            \"https://localhost:3000/saunatimeFacebook-1200x630.jpg\"
+          ]
+        }
+      "
   scrollingDisabled={false}
-  title="Landing page">
+  title="LandingPage.schemaTitle"
+  twitterImages={
+    Array [
+      Object {
+        "height": 314,
+        "url": "saunatimeTwitter-600x314.jpg",
+        "width": 600,
+      },
+    ]
+  }>
   <Topbar
     authInProgress={false}
     currentUser={null}
