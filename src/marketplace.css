@@ -13,21 +13,20 @@
 
   /* Full screen Background image located in root-folder/src/assets */
   --backgroundImage: {
-      background-image: url("../../assets/background.jpg");
-      background-color: var(--matterColor);
-      background-size: cover;
-      background-position-y: center;
 
-      /*
-       This value is specific to the given image. The value is the
-       relative position of the interesting area in the x axis, counted
-       from the left side of the image.
+    /* Gradient direction and overlaying the black color on top of the image for better readability */
+    background:
+      linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
+      url("../../assets/background.jpg");
 
-       In the default image, this means the person sitting in the
-       sauna. This value ensures the person is approximately centered in
-       the viewport when the browser width changes.
-      */
-      background-position-x: 80%;
+    /* Add loading color for the div */
+    background-color: var(--matterColor);
+
+    /* Cover the whole screen with the background image */
+    background-size: cover;
+
+    /* Align the image within the container */
+    background-position: center center;
   }
 
 
