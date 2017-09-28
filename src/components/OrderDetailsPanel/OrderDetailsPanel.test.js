@@ -4,6 +4,7 @@ import { types } from '../../util/sdkLoader';
 import { createBooking, createListing, createUser, createTransaction } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl } from '../../util/test-data';
+import { TX_TRANSITION_PREAUTHORIZE } from '../../util/propTypes';
 import { BookingBreakdown } from '../../components';
 import { OrderDetailsPanelComponent } from './OrderDetailsPanel.js';
 
@@ -12,7 +13,7 @@ describe('OrderDetailsPanel', () => {
     const { Money } = types;
     const tx = createTransaction({
       id: 'order-tx',
-      state: 'state/preauthorized',
+      lastTransition: TX_TRANSITION_PREAUTHORIZE,
       total: new Money(16500, 'USD'),
       booking: createBooking('booking1', {
         start: new Date(Date.UTC(2017, 5, 10)),
@@ -29,7 +30,7 @@ describe('OrderDetailsPanel', () => {
     const { Money } = types;
     const tx = createTransaction({
       id: 'order-tx',
-      state: 'state/preauthorized',
+      lastTransition: TX_TRANSITION_PREAUTHORIZE,
       total: new Money(16500, 'USD'),
       booking: createBooking('booking1', {
         start: new Date(Date.UTC(2017, 5, 10)),

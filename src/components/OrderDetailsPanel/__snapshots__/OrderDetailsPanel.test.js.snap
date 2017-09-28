@@ -141,7 +141,6 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
                   "amount": 16400,
                   "currency": "USD",
                 },
-                "state": "state/preauthorized",
               },
               "booking": Object {
                 "attributes": Object {
@@ -319,7 +318,6 @@ exports[`OrderDetailsPanel matches snapshot 1`] = `
                   "amount": 16400,
                   "currency": "USD",
                 },
-                "state": "state/preauthorized",
               },
               "booking": Object {
                 "attributes": Object {

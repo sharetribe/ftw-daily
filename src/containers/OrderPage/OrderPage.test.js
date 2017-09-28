@@ -8,6 +8,7 @@ import {
   fakeIntl,
 } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
+import { TX_TRANSITION_PREAUTHORIZE } from '../../util/propTypes';
 import { OrderPageComponent } from './OrderPage';
 
 const noop = () => null;
@@ -17,7 +18,7 @@ describe('OrderPage', () => {
     const txId = 'tx-order-1';
     const transaction = createTransaction({
       id: txId,
-      state: 'state/preauthorized',
+      lastTransition: TX_TRANSITION_PREAUTHORIZE,
       booking: createBooking('booking1', {
         start: new Date(Date.UTC(2017, 5, 10)),
         end: new Date(Date.UTC(2017, 5, 13)),

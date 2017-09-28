@@ -39,8 +39,8 @@ const formatDate = (intl, date) => {
 
 // Translated name of the state of the given transaction
 const txState = (intl, tx, isOrder) => {
-  const { attributes: { state } } = tx;
-  if (state === propTypes.TX_STATE_ACCEPTED) {
+  const { attributes: { lastTransition } } = tx;
+  if (lastTransition === propTypes.TX_TRANSITION_ACCEPT) {
     return {
       nameClassName: css.nameAccepted,
       bookingClassName: css.bookingAccepted,
@@ -50,7 +50,7 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateAccepted',
       }),
     };
-  } else if (state === propTypes.TX_STATE_REJECTED) {
+  } else if (lastTransition === propTypes.TX_TRANSITION_REJECT) {
     return {
       nameClassName: css.nameDeclined,
       bookingClassName: css.bookingDeclined,
@@ -60,7 +60,7 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateDeclined',
       }),
     };
-  } else if (state === propTypes.TX_STATE_DELIVERED) {
+  } else if (lastTransition === propTypes.TX_TRANSITION_MARK_DELIVERED) {
     return {
       nameClassName: css.nameDelivered,
       bookingClassName: css.bookingDelivered,
@@ -101,7 +101,8 @@ export const InboxItem = props => {
   const otherUserDisplayName = userDisplayName(otherUser, bannedUserDisplayName);
 
   const stateData = txState(intl, tx, isOrder);
-  const isSaleNotification = !isOrder && tx.attributes.state === propTypes.TX_STATE_PREAUTHORIZED;
+  const isPreauthorized = tx.attributes.lastTransition === propTypes.TX_TRANSITION_PREAUTHORIZE;
+  const isSaleNotification = !isOrder && isPreauthorized;
   const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
   const lastTransitionedAt = formatDate(intl, tx.attributes.lastTransitionedAt);
   const bookingStart = formatDate(intl, booking.attributes.start);

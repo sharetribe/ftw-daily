@@ -86,7 +86,6 @@ exports[`OrderPage matches snapshot 1`] = `
             "amount": 900,
             "currency": "USD",
           },
-          "state": "state/preauthorized",
         },
         "booking": Object {
           "attributes": Object {

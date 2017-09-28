@@ -1,5 +1,4 @@
 import { updatedEntities, denormalisedEntities } from '../util/data';
-import { TX_STATE_PREAUTHORIZED } from '../util/propTypes';
 
 // ================ Action types ================ //
 
@@ -299,7 +298,8 @@ export const fetchCurrentUserNotifications = () =>
 
     const apiQueryParams = {
       only: 'sale',
-      states: [TX_STATE_PREAUTHORIZED],
+      // TODO: how to change this to use lastTransition?
+      // states: [TX_STATE_PREAUTHORIZED],
       page: 1,
       per_page: NOTIFICATION_PAGE_SIZE,
     };

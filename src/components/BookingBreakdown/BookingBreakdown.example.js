@@ -22,7 +22,6 @@ const exampleTransaction = params => {
       createdAt: created,
       lastTransitionedAt: created,
       lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
-      state: propTypes.TX_STATE_PREAUTHORIZED,
 
       // payinTotal, payoutTotal, and lineItems required in params
       ...params,
@@ -165,7 +164,6 @@ export const ProviderSaleRejected = {
   props: {
     userRole: 'provider',
     transaction: exampleTransaction({
-      state: propTypes.TX_STATE_REJECTED,
       lastTransition: propTypes.TX_TRANSITION_REJECT,
       payinTotal: new Money(4500, 'USD'),
       payoutTotal: new Money(2500, 'USD'),
@@ -195,7 +193,6 @@ export const ProviderSaleDelivered = {
   props: {
     userRole: 'provider',
     transaction: exampleTransaction({
-      state: propTypes.TX_STATE_DELIVERED,
       lastTransition: propTypes.TX_TRANSITION_MARK_DELIVERED,
       payinTotal: new Money(4500, 'USD'),
       payoutTotal: new Money(2500, 'USD'),

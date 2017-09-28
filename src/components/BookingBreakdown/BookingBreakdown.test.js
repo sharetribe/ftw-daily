@@ -25,7 +25,6 @@ const exampleTransaction = params => {
       createdAt: created,
       lastTransitionedAt: created,
       lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
-      state: propTypes.TX_STATE_PREAUTHORIZED,
 
       // payinTotal, payoutTotal, and lineItems required in params
       ...params,

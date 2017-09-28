@@ -28,30 +28,37 @@ const breakdown = transaction => {
     : null;
 };
 
-const saleTitle = (saleState, listingLink, customerName) => {
-  switch (saleState) {
-    case propTypes.TX_STATE_PREAUTHORIZED:
+const saleTitle = (lastTransition, listingLink, customerName) => {
+  switch (lastTransition) {
+    case propTypes.TX_TRANSITION_PREAUTHORIZE:
       return (
         <FormattedMessage
           id="SaleDetailsPanel.listingRequestedTitle"
           values={{ customerName, listingLink }}
         />
       );
-    case propTypes.TX_STATE_ACCEPTED:
+    case propTypes.TX_TRANSITION_ACCEPT:
       return (
         <FormattedMessage
           id="SaleDetailsPanel.listingAcceptedTitle"
           values={{ customerName, listingLink }}
         />
       );
-    case propTypes.TX_STATE_REJECTED:
+    case propTypes.TX_TRANSITION_REJECT:
       return (
         <FormattedMessage
           id="SaleDetailsPanel.listingRejectedTitle"
           values={{ customerName, listingLink }}
         />
       );
-    case propTypes.TX_STATE_DELIVERED:
+    case propTypes.TX_TRANSITION_AUTO_REJECT:
+      return (
+        <FormattedMessage
+          id="SaleDetailsPanel.listingRejectedTitle"
+          values={{ customerName, listingLink }}
+        />
+      );
+    case propTypes.TX_TRANSITION_MARK_DELIVERED:
       return (
         <FormattedMessage
           id="SaleDetailsPanel.listingDeliveredTitle"
@@ -63,7 +70,7 @@ const saleTitle = (saleState, listingLink, customerName) => {
   }
 };
 
-const saleMessage = (saleState, customerName, lastTransitionedAt, lastTransition) => {
+const saleMessage = (lastTransition, customerName, lastTransitionedAt) => {
   const formattedDate = (
     <span className={css.nowrap}>
       <FormattedDate
@@ -75,22 +82,25 @@ const saleMessage = (saleState, customerName, lastTransitionedAt, lastTransition
       />
     </span>
   );
-  const rejectedStatusTranslationId = lastTransition === propTypes.TX_TRANSITION_AUTO_REJECT
-    ? 'SaleDetailsPanel.saleAutoRejectedStatus'
-    : 'SaleDetailsPanel.saleRejectedStatus';
-  switch (saleState) {
-    case propTypes.TX_STATE_PREAUTHORIZED:
+  switch (lastTransition) {
+    case propTypes.TX_TRANSITION_PREAUTHORIZE:
       return (
         <FormattedMessage id="SaleDetailsPanel.saleRequestedStatus" values={{ customerName }} />
       );
-    case propTypes.TX_STATE_ACCEPTED: {
+    case propTypes.TX_TRANSITION_ACCEPT: {
       return (
         <FormattedMessage id="SaleDetailsPanel.saleAcceptedStatus" values={{ formattedDate }} />
       );
     }
-    case propTypes.TX_STATE_REJECTED:
-      return <FormattedMessage id={rejectedStatusTranslationId} values={{ formattedDate }} />;
-    case propTypes.TX_STATE_DELIVERED:
+    case propTypes.TX_TRANSITION_REJECT:
+      return (
+        <FormattedMessage id="SaleDetailsPanel.saleRejectedStatus" values={{ formattedDate }} />
+      );
+    case propTypes.TX_TRANSITION_AUTO_REJECT:
+      return (
+        <FormattedMessage id="SaleDetailsPanel.saleAutoRejectedStatus" values={{ formattedDate }} />
+      );
+    case propTypes.TX_TRANSITION_MARK_DELIVERED:
       return (
         <FormattedMessage id="SaleDetailsPanel.saleDeliveredStatus" values={{ formattedDate }} />
       );
@@ -123,7 +133,6 @@ export const SaleDetailsPanelComponent = props => {
   });
 
   const customerDisplayName = userDisplayName(currentCustomer, bannedUserDisplayName);
-  const transactionState = currentTransaction.attributes.state;
   const lastTransitionedAt = currentTransaction.attributes.lastTransitionedAt;
   const lastTransition = currentTransaction.attributes.lastTransition;
 
@@ -141,20 +150,20 @@ export const SaleDetailsPanelComponent = props => {
 
   const bookingInfo = breakdown(currentTransaction);
 
-  const title = saleTitle(transactionState, listingLink, customerDisplayName, lastTransition);
+  const title = saleTitle(lastTransition, listingLink, customerDisplayName);
   const message = isCustomerBanned
     ? intl.formatMessage({
         id: 'SaleDetailsPanel.customerBannedStatus',
       })
-    : saleMessage(transactionState, customerDisplayName, lastTransitionedAt, lastTransition);
+    : saleMessage(lastTransition, customerDisplayName, lastTransitionedAt);
 
   const listingTitle = currentListing.attributes.title;
   const firstImage = currentListing.images && currentListing.images.length > 0
     ? currentListing.images[0]
     : null;
 
-  const isPreauthorizedState = currentTransaction.attributes.state ===
-    propTypes.TX_STATE_PREAUTHORIZED;
+  const isPreauthorizedState = currentTransaction.attributes.lastTransition ===
+    propTypes.TX_TRANSITION_PREAUTHORIZE;
   const canShowButtons = isPreauthorizedState && !isCustomerBanned;
   const buttonsDisabled = acceptInProgress || rejectInProgress;
 
