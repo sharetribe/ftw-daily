@@ -28,7 +28,7 @@
 
 .desktopTopbar,
 .mobileTopbar {
-  @media screen and (max-width: 1024px) {
+  @media (--viewportLarge) {
     box-shadow: none;
   }
 }
