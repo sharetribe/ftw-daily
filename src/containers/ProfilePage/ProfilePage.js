@@ -6,7 +6,7 @@ import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { PageLayout, Topbar } from '../../components';
+import { Page, Topbar } from '../../components';
 
 export const ProfilePageComponent = props => {
   const {
@@ -29,7 +29,7 @@ export const ProfilePageComponent = props => {
   } = props;
 
   return (
-    <PageLayout
+    <Page
       authInfoError={authInfoError}
       logoutError={logoutError}
       title={`Profile page with display name: ${params.displayName}`}
@@ -49,7 +49,7 @@ export const ProfilePageComponent = props => {
         sendVerificationEmailInProgress={sendVerificationEmailInProgress}
         sendVerificationEmailError={sendVerificationEmailError}
       />
-    </PageLayout>
+    </Page>
   );
 };
 
@@ -88,7 +88,7 @@ ProfilePageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // PageLayout needs authInfoError and logoutError, Topbar needs isAuthenticated
+  // Page needs authInfoError and logoutError, Topbar needs isAuthenticated
   const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   // Topbar needs user info.
   const {

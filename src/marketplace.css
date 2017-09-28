@@ -310,7 +310,7 @@
 /* ================ Modals ================ */
 
   --marketplaceModalRootStyles {
-    /* PageLayout is using flex: AuthenticationPage's .root takes all available space */
+    /* Page is using flex: AuthenticationPage's .root takes all available space */
     flex-grow: 1;
 
     /* AuthenticationPage's root uses flexbox */

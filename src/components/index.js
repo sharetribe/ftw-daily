@@ -51,7 +51,7 @@ import NamedRedirect from './NamedRedirect/NamedRedirect';
 import NotificationBadge from './NotificationBadge/NotificationBadge';
 import OrderDetailsPanel from './OrderDetailsPanel/OrderDetailsPanel';
 import OrderDiscussionPanel from './OrderDiscussionPanel/OrderDiscussionPanel';
-import PageLayout from './PageLayout/PageLayout';
+import Page from './Page/Page';
 import PaginationLinks from './PaginationLinks/PaginationLinks';
 import Promised from './Promised/Promised';
 import ResponsiveImage from './ResponsiveImage/ResponsiveImage';
@@ -128,7 +128,7 @@ export {
   NotificationBadge,
   OrderDetailsPanel,
   OrderDiscussionPanel,
-  PageLayout,
+  Page,
   PaginationLinks,
   PrimaryButton,
   Promised,

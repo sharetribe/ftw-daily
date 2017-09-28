@@ -1,5 +1,5 @@
 exports[`ContactDetailsPage matches snapshot 1`] = `
-<PageLayout
+<Page
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
@@ -38,5 +38,5 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
         values={Object {}} />
     </h1>
   </div>
-</PageLayout>
+</Page>
 `;

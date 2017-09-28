@@ -1,5 +1,5 @@
 exports[`LandingPage matches snapshot 1`] = `
-<PageLayout
+<Page
   authInfoError={null}
   contentType="website"
   description="LandingPage.schemaDescription"
@@ -73,5 +73,5 @@ exports[`LandingPage matches snapshot 1`] = `
       }
       rootClassName={null} />
   </div>
-</PageLayout>
+</Page>
 `;

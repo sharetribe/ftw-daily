@@ -1,5 +1,5 @@
 exports[`NotFoundPageComponent matches snapshot 1`] = `
-<PageLayout
+<Page
   authInfoError={null}
   logoutError={null}
   title="NotFoundPage.title">
@@ -32,5 +32,5 @@ exports[`NotFoundPageComponent matches snapshot 1`] = `
         values={Object {}} />
     </h1>
   </div>
-</PageLayout>
+</Page>
 `;

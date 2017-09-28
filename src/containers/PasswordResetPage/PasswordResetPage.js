@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
-import { PageLayout, Topbar, NamedLink, IconKeys, IconKeysSuccess } from '../../components';
+import { Page, Topbar, NamedLink, IconKeys, IconKeysSuccess } from '../../components';
 import { PasswordResetForm } from '../../containers';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
@@ -127,7 +127,7 @@ export class PasswordResetPageComponent extends Component {
     }
 
     return (
-      <PageLayout
+      <Page
         title={title}
         authInfoError={authInfoError}
         logoutError={logoutError}
@@ -151,7 +151,7 @@ export class PasswordResetPageComponent extends Component {
         <div className={css.root}>
           {content}
         </div>
-      </PageLayout>
+      </Page>
     );
   }
 }

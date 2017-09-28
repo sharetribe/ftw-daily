@@ -1,5 +1,5 @@
 exports[`SearchPageComponent matches snapshot 1`] = `
-<PageLayout
+<Page
   authInfoError={null}
   description="SearchPage.schemaDescription"
   logoutError={null}
@@ -102,5 +102,5 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       </div>
     </withViewport(ModalInMobileComponent)>
   </div>
-</PageLayout>
+</Page>
 `;

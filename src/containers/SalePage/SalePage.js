@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
-import { NamedRedirect, SaleDetailsPanel, PageLayout, Topbar } from '../../components';
+import { NamedRedirect, SaleDetailsPanel, Page, Topbar } from '../../components';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
@@ -84,7 +84,7 @@ export const SalePageComponent = props => {
     : loadingOrFailedFetching;
 
   return (
-    <PageLayout
+    <Page
       authInfoError={authInfoError}
       logoutError={logoutError}
       title={intl.formatMessage({ id: 'SalePage.title' }, { title: listingTitle })}
@@ -108,7 +108,7 @@ export const SalePageComponent = props => {
       <div className={css.root}>
         {panel}
       </div>
-    </PageLayout>
+    </Page>
   );
 };
 

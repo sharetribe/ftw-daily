@@ -6,7 +6,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { PageLayout, HeroSection, Topbar } from '../../components';
+import { Page, HeroSection, Topbar } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import config from '../../config';
@@ -45,7 +45,7 @@ export const LandingPageComponent = props => {
   const schemaImage = `${config.canonicalRootURL}/${facebookImage}`;
 
   return (
-    <PageLayout
+    <Page
       className={css.root}
       authInfoError={authInfoError}
       logoutError={logoutError}
@@ -93,7 +93,7 @@ export const LandingPageComponent = props => {
           location={location}
         />
       </div>
-    </PageLayout>
+    </Page>
   );
 };
 

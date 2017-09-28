@@ -1,5 +1,5 @@
 exports[`EditListingPageComponent matches snapshot 1`] = `
-<PageLayout
+<Page
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
@@ -65,5 +65,5 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
         "type": "new",
       }
     } />
-</PageLayout>
+</Page>
 `;

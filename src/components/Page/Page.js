@@ -7,14 +7,14 @@ import { canonicalURL, metaTagProps } from '../../util/seo';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
-import css from './PageLayout.css';
+import css from './Page.css';
 
 const scrollToTop = () => {
   // Todo: this might need fine tuning later
   window.scrollTo(0, 0);
 };
 
-class PageLayoutComponent extends Component {
+class PageComponent extends Component {
   componentDidMount() {
     this.historyUnlisten = this.props.history.listen(() => scrollToTop());
   }
@@ -65,8 +65,8 @@ class PageLayoutComponent extends Component {
     const { pathname, search = '' } = history.location;
     const pathWithSearch = `${pathname}${search}`;
 
-    const schemaTitle = intl.formatMessage({ id: 'PageLayout.schemaTitle' });
-    const schemaDescription = intl.formatMessage({ id: 'PageLayout.schemaDescription' });
+    const schemaTitle = intl.formatMessage({ id: 'Page.schemaTitle' });
+    const schemaDescription = intl.formatMessage({ id: 'Page.schemaDescription' });
     const metaTitle = title || schemaTitle;
     const metaDescription = description || schemaDescription;
     const facebookImgs = facebookImages || [
@@ -120,12 +120,12 @@ class PageLayoutComponent extends Component {
         </Helmet>
         {authInfoError
           ? <div style={{ color: 'red' }}>
-              <FormattedMessage id="PageLayout.authInfoFailed" />
+              <FormattedMessage id="Page.authInfoFailed" />
             </div>
           : null}
         {logoutError
           ? <div style={{ color: 'red' }}>
-              <FormattedMessage id="PageLayout.logoutFailed" />
+              <FormattedMessage id="Page.logoutFailed" />
             </div>
           : null}
         <div className={css.content}>
@@ -138,7 +138,7 @@ class PageLayoutComponent extends Component {
 
 const { any, arrayOf, bool, func, instanceOf, number, shape, string } = PropTypes;
 
-PageLayoutComponent.defaultProps = {
+PageComponent.defaultProps = {
   className: null,
   rootClassName: null,
   children: null,
@@ -156,7 +156,7 @@ PageLayoutComponent.defaultProps = {
   updated: null,
 };
 
-PageLayoutComponent.propTypes = {
+PageComponent.propTypes = {
   className: string,
   rootClassName: string,
   children: any,
@@ -197,7 +197,7 @@ PageLayoutComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const PageLayout = injectIntl(withRouter(PageLayoutComponent));
-PageLayout.displayName = 'PageLayout';
+const Page = injectIntl(withRouter(PageComponent));
+Page.displayName = 'Page';
 
-export default PageLayout;
+export default Page;

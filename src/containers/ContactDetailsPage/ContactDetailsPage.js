@@ -11,7 +11,7 @@ import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck
 import {
   ContentWrapper,
   LayoutSideNavigation,
-  PageLayout,
+  Page,
   SideNavWrapper,
   TabNav,
   Topbar,
@@ -83,7 +83,7 @@ export const ContactDetailsPageComponent = props => {
     : null;
 
   return (
-    <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Contact details">
+    <Page authInfoError={authInfoError} logoutError={logoutError} title="Contact details">
       <LayoutSideNavigation>
         <TopbarWrapper>
           <Topbar
@@ -118,7 +118,7 @@ export const ContactDetailsPageComponent = props => {
           </div>
         </ContentWrapper>
       </LayoutSideNavigation>
-    </PageLayout>
+    </Page>
   );
 };
 
@@ -162,7 +162,7 @@ ContactDetailsPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // PageLayout needs authInfoError and logoutError, Topbar needs isAuthenticated
+  // Page needs authInfoError and logoutError, Topbar needs isAuthenticated
   const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   // Topbar needs user info.
   const {

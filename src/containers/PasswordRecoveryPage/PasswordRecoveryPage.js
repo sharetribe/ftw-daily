@@ -16,7 +16,7 @@ import {
   retypePasswordRecoveryEmail,
   clearPasswordRecoveryError,
 } from './PasswordRecoveryPage.duck';
-import { PageLayout, Topbar, InlineTextButton, IconKeys } from '../../components';
+import { Page, Topbar, InlineTextButton, IconKeys } from '../../components';
 import { PasswordRecoveryForm } from '../../containers';
 
 import DoorIcon from './DoorIcon';
@@ -162,7 +162,7 @@ export const PasswordRecoveryPageComponent = props => {
   }
 
   return (
-    <PageLayout authInfoError={authInfoError} logoutError={logoutError} title={title}>
+    <Page authInfoError={authInfoError} logoutError={logoutError} title={title}>
       <Topbar
         authInProgress={authInProgress}
         currentUser={currentUser}
@@ -182,7 +182,7 @@ export const PasswordRecoveryPageComponent = props => {
         {content}
       </div>
 
-    </PageLayout>
+    </Page>
   );
 };
 
@@ -234,7 +234,7 @@ PasswordRecoveryPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // PageLayout needs authInfoError and logoutError, Topbar needs isAuthenticated
+  // Page needs authInfoError and logoutError, Topbar needs isAuthenticated
   const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   // Topbar needs user info.
   const {

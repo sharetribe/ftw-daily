@@ -15,7 +15,7 @@ import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { SearchMap, ModalInMobile, PageLayout, SearchResultsPanel, Topbar } from '../../components';
+import { SearchMap, ModalInMobile, Page, SearchResultsPanel, Topbar } from '../../components';
 
 import { searchListings, searchMapListings } from './SearchPage.duck';
 import MapIcon from './MapIcon';
@@ -262,7 +262,7 @@ export class SearchPageComponent extends Component {
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <PageLayout
+      <Page
         authInfoError={authInfoError}
         logoutError={logoutError}
         scrollingDisabled={scrollingDisabled}
@@ -342,7 +342,7 @@ export class SearchPageComponent extends Component {
             </div>
           </ModalInMobile>
         </div>
-      </PageLayout>
+      </Page>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }

@@ -11,7 +11,7 @@ import {
   isTooManyEmailVerificationRequestsError,
 } from '../../util/errors';
 import {
-  PageLayout,
+  Page,
   NamedLink,
   NamedRedirect,
   TabNavHorizontal,
@@ -198,7 +198,7 @@ export const AuthenticationPageComponent = props => {
   });
 
   return (
-    <PageLayout
+    <Page
       authInfoError={authInfoError}
       logoutError={logoutError}
       title={title}
@@ -223,7 +223,7 @@ export const AuthenticationPageComponent = props => {
       <div className={css.root}>
         {showEmailVerification ? emailVerificationContent : formContent}
       </div>
-    </PageLayout>
+    </Page>
   );
 };
 

@@ -18,7 +18,7 @@ import {
   Button,
   Map,
   ModalInMobile,
-  PageLayout,
+  Page,
   ResponsiveImage,
   Topbar,
   NamedLink,
@@ -209,23 +209,23 @@ export class ListingPageComponent extends Component {
       // Other error in fetching listing
 
       return (
-        <PageLayout title={errorTitle}>
+        <Page title={errorTitle}>
           {topbar}
           <p className={css.errorText}>
             <FormattedMessage id="ListingPage.errorLoadingListingMessage" />
           </p>
-        </PageLayout>
+        </Page>
       );
     } else if (!currentListing.id) {
       // Still loading the listing
 
       return (
-        <PageLayout title={loadingTitle}>
+        <Page title={loadingTitle}>
           {topbar}
           <p className={css.loadingText}>
             <FormattedMessage id="ListingPage.loadingListingMessage" />
           </p>
-        </PageLayout>
+        </Page>
       );
     }
 
@@ -343,7 +343,7 @@ export class ListingPageComponent extends Component {
     const schemaImages = JSON.stringify(facebookImages.map(img => img.url));
 
     return (
-      <PageLayout
+      <Page
         authInfoError={authInfoError}
         logoutError={logoutError}
         title={`${title} ${formattedPrice}`}
@@ -486,7 +486,7 @@ export class ListingPageComponent extends Component {
             </div>
           </div>
         </div>
-      </PageLayout>
+      </Page>
     );
   }
 }

@@ -1,5 +1,5 @@
 exports[`ListingPage matches snapshot 1`] = `
-<PageLayout
+<Page
   authInfoError={null}
   contentType="website"
   description="listing1 description"
@@ -282,5 +282,5 @@ exports[`ListingPage matches snapshot 1`] = `
       </div>
     </div>
   </div>
-</PageLayout>
+</Page>
 `;

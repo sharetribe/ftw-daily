@@ -7,7 +7,7 @@ import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { PageLayout, Topbar } from '../../components';
+import { Page, Topbar } from '../../components';
 
 import css from './NotFoundPage.css';
 
@@ -45,7 +45,7 @@ export class NotFoundPageComponent extends Component {
     });
 
     return (
-      <PageLayout authInfoError={authInfoError} logoutError={logoutError} title={title}>
+      <Page authInfoError={authInfoError} logoutError={logoutError} title={title}>
         <Topbar
           authInProgress={authInProgress}
           currentUser={currentUser}
@@ -66,7 +66,7 @@ export class NotFoundPageComponent extends Component {
             <FormattedMessage id="NotFoundPage.heading" />
           </h1>
         </div>
-      </PageLayout>
+      </Page>
     );
   }
 }
@@ -112,7 +112,7 @@ NotFoundPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // PageLayout needs authInfoError and logoutError, Topbar needs isAuthenticated
+  // Page needs authInfoError and logoutError, Topbar needs isAuthenticated
   const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   // Topbar needs user info.
   const {

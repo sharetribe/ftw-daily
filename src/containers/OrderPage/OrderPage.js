@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
-import { NamedRedirect, OrderDetailsPanel, PageLayout, Topbar } from '../../components';
+import { NamedRedirect, OrderDetailsPanel, Page, Topbar } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
 import { sendVerificationEmail } from '../../ducks/user.duck';
@@ -70,7 +70,7 @@ export const OrderPageComponent = props => {
     : loadingOrFaildFetching;
 
   return (
-    <PageLayout
+    <Page
       authInfoError={authInfoError}
       logoutError={logoutError}
       title={intl.formatMessage({ id: 'OrderPage.title' }, { listingTitle })}
@@ -92,7 +92,7 @@ export const OrderPageComponent = props => {
         sendVerificationEmailError={sendVerificationEmailError}
       />
       {panel}
-    </PageLayout>
+    </Page>
   );
 };
 
