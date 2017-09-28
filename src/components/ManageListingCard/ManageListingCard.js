@@ -73,7 +73,7 @@ export const ManageListingCardComponent = props => {
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
-  const { title = '', price, open } = currentListing.attributes;
+  const { title = '', price, closed } = currentListing.attributes;
   const slug = createSlug(title);
   const firstImage = currentListing.images && currentListing.images.length > 0
     ? currentListing.images[0]
@@ -87,7 +87,7 @@ export const ManageListingCardComponent = props => {
   const { formattedPrice, priceTitle } = priceData(price, intl);
 
   /* eslint-disable jsx-a11y/no-static-element-interactions */
-  const closedOverlay = open
+  const closedOverlay = !closed
     ? null
     : <div
         className={css.closedOverlayWrapper}
@@ -175,7 +175,7 @@ export const ManageListingCardComponent = props => {
           <div className={css.menubarGradient} />
           <div className={css.menubar}>
             <Menu
-              className={classNames(css.menu, { [css.cardIsOpen]: open })}
+              className={classNames(css.menu, { [css.cardIsOpen]: !closed })}
               contentPlacementOffset={MENU_CONTENT_OFFSET}
               contentPosition="left"
               useArrow={false}
