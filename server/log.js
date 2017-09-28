@@ -15,6 +15,10 @@ const SENTRY_DSN = process.env.SERVER_SENTRY_DSN;
  */
 exports.setup = () => {
   if (SENTRY_DSN) {
+    // Configure the Sentry client. As is, this catches unhandled
+    // exceptions from starting the server etc. but does not catch the
+    // ones thrown from Express.js middleware functions. For those
+    // an error handler has to be added to the Express app.
     Raven.config(SENTRY_DSN, {
       environment: ENV,
       autoBreadcrumbs: {
