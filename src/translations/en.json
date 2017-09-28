@@ -378,6 +378,7 @@
   "SaleDetailsPanel.saleRejectedStatus": "You declined the request on {formattedDate}.",
   "SaleDetailsPanel.saleRequestedStatus": "{customerName} is waiting for your response.",
   "SalePage.acceptButton": "Accept",
+  "SalePage.fetchSaleFailed": "Fetching sale data failed.",
   "SalePage.loadingData": "Loading sale data.",
   "SalePage.rejectButton": "Decline",
   "SalePage.rejectSaleFailed": "Rejecting sale failed.",
