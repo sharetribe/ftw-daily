@@ -2,9 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { omitBy, isUndefined } from 'lodash';
+import { createSlug } from '../../util/urlHelpers';
 import { EditListingPhotosForm, PayoutDetailsForm } from '../../containers';
 import { ensureListing } from '../../util/data';
-import { Modal } from '../../components';
+import { Modal, NamedLink } from '../../components';
 import * as propTypes from '../../util/propTypes';
 
 import css from './EditListingPhotosPanel.css';
@@ -98,8 +99,15 @@ class EditListingPhotosPanel extends Component {
     const currentListing = ensureListing(listing);
     const { title } = currentListing.attributes;
     const listingTitle = title || '';
+
+    const params = { id: currentListing.id.uuid, slug: createSlug(title) };
+    const listingLink = (
+      <NamedLink name="ListingPage" params={params}>
+        {listingTitle}
+      </NamedLink>
+    );
     const panelTitle = currentListing.id
-      ? <FormattedMessage id="EditListingPhotosPanel.title" values={{ listingTitle }} />
+      ? <FormattedMessage id="EditListingPhotosPanel.title" values={{ listingTitle:listingLink }} />
       : <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />;
 
     return (

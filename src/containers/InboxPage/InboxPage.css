@@ -26,6 +26,15 @@
   }
 }
 
+.desktopTopbar,
+.mobileTopbar {
+  box-shadow: none;
+
+  @media (--viewportLarge) {
+    box-shadow: var(--boxShadowLight);
+  }
+}
+
 .container {
   width: 100%;
 

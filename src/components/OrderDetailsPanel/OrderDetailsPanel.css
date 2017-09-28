@@ -12,7 +12,7 @@
     flex-direction: row;
     justify-content: center;
     max-width: 1156px; /* 1060 + (paddingLeft + paddingRight) */
-    margin: 0 auto;
+    margin: 0 auto 60px;
     padding: 0 48px;
   }
 }
@@ -129,7 +129,7 @@
 }
 
 .bookingBreakdownContainer {
-  margin: 1px 0 40px 0;
+  margin: 1px 0 0 0;
 
   @media (--viewportLarge) {
 

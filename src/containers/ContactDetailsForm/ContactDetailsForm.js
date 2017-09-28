@@ -166,6 +166,7 @@ class ContactDetailsFormComponent extends Component {
       ? passwordFailedMessage
       : null;
 
+    const confirmClasses = classNames(css.confirmChangesSection, { [css.confirmChangesSectionVisible]: !pristine });
     const classes = classNames(rootClassName || css.root, className);
     const submitDisabled = invalid || submitting || inProgress;
 
@@ -183,7 +184,7 @@ class ContactDetailsFormComponent extends Component {
           {emailVerifiedInfo}
         </div>
 
-        <div className={css.confirmChangesSection}>
+        <div className={confirmClasses}>
           <h3 className={css.confirmChangesTitle}>
             <FormattedMessage id="ContactDetailsForm.confirmChangesTitle" />
           </h3>

@@ -29,6 +29,10 @@
 .desktopTopbar,
 .mobileTopbar {
   box-shadow: none;
+
+  @media (--viewportLarge) {
+    box-shadow: var(--boxShadowLight);
+  }
 }
 
 .wizard {

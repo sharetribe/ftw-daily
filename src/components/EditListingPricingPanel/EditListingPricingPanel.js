@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
+import { createSlug } from '../../util/urlHelpers';
+import { NamedLink } from '../../components';
 import { EditListingPricingForm } from '../../containers';
 import { ensureListing } from '../../util/data';
 
@@ -23,8 +25,16 @@ const EditListingPricingPanel = props => {
   const currentListing = ensureListing(listing);
   const { price, title } = currentListing.attributes;
   const listingTitle = title || '';
+
+  const params = { id: currentListing.id.uuid, slug: createSlug(title) };
+  const listingLink = (
+    <NamedLink name="ListingPage" params={params}>
+      {listingTitle}
+    </NamedLink>
+  );
+
   const panelTitle = currentListing.id
-    ? <FormattedMessage id="EditListingPricingPanel.title" values={{ listingTitle }} />
+    ? <FormattedMessage id="EditListingPricingPanel.title" values={{ listingTitle:listingLink }} />
     : <FormattedMessage id="EditListingPricingPanel.createListingTitle" />;
 
   return (

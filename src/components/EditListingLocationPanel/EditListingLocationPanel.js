@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
-import { EditListingLocationForm } from '../../containers';
 import { ensureListing } from '../../util/data';
+import { createSlug } from '../../util/urlHelpers';
+import { NamedLink } from '../../components';
+import { EditListingLocationForm } from '../../containers';
 
 import css from './EditListingLocationPanel.css';
 
@@ -23,8 +25,15 @@ const EditListingLocationPanel = props => {
   const currentListing = ensureListing(listing);
   const { address, geolocation, title } = currentListing.attributes;
   const listingTitle = title || '';
+  const params = { id: currentListing.id.uuid, slug: createSlug(title) };
+  const listingLink = (
+    <NamedLink name="ListingPage" params={params}>
+      {listingTitle}
+    </NamedLink>
+  );
+
   const panelTitle = currentListing.id
-    ? <FormattedMessage id="EditListingLocationPanel.title" values={{ listingTitle }} />
+    ? <FormattedMessage id="EditListingLocationPanel.title" values={{ listingTitle:listingLink }} />
     : <FormattedMessage id="EditListingLocationPanel.createListingTitle" />;
 
   // Only render current search if full place object is available in the URL params
