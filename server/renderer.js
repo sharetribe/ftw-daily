@@ -13,29 +13,59 @@ const buildPath = path.resolve(__dirname, '..', 'build');
 const indexHtml = fs.readFileSync(path.join(buildPath, 'index.html'), 'utf-8');
 
 const reNoMatch = /($^)/;
-const template = _.template(indexHtml, {
-  // Interpolate variables in the HTML template with the following
-  // syntax: <!--!variableName-->
+
+// Not all the Helmet provided data is tags to be added inside <head> or <body>
+// <html> tag's attributes need separate interpolation functionality
+const templateWithHtmlAttributes = _.template(indexHtml, {
+  // Interpolate htmlAttributes (Helmet data) in the HTML template with the following
+  // syntax: data-htmlattr="variableName"
   //
-  // This syntax is very intentional: it works as a HTML comment and
-  // doesn't render anything visual in the dev mode, and in the
-  // production mode, HtmlWebpackPlugin strips out comments using
-  // HTMLMinifier except those that aren't explicitly marked as custom
-  // comments. By default, custom comments are those that begin with a
-  // ! character.
+  // This syntax is very intentional: it works as a data attribute and
+  // doesn't render attributes that have special meaning in HTML renderig
+  // (except containing some data).
   //
-  // Note that the variables are _not_ escaped since we only inject
-  // HTML content.
-  //
-  // See:
-  // - https://github.com/ampedandwired/html-webpack-plugin
-  // - https://github.com/kangax/html-minifier
-  // - Plugin options in the production Webpack configuration file
-  interpolate: /<!--!([\s\S]+?)-->/g,
+  // This special attribute should be added to <html> tag
+  // It may contain attributes like lang, itemscope, and itemtype
+  interpolate: /data-htmlattr=\"([\s\S]+?)\"/g,
   // Disable evaluated and escaped variables in the template
   evaluate: reNoMatch,
   escape: reNoMatch,
 });
+
+// Template tags inside given template string (templatedWithHtmlAttributes),
+// which cantains <html> attributes already.
+const templateTags = templatedWithHtmlAttributes =>
+  _.template(templatedWithHtmlAttributes, {
+    // Interpolate variables in the HTML template with the following
+    // syntax: <!--!variableName-->
+    //
+    // This syntax is very intentional: it works as a HTML comment and
+    // doesn't render anything visual in the dev mode, and in the
+    // production mode, HtmlWebpackPlugin strips out comments using
+    // HTMLMinifier except those that aren't explicitly marked as custom
+    // comments. By default, custom comments are those that begin with a
+    // ! character.
+    //
+    // Note that the variables are _not_ escaped since we only inject
+    // HTML content.
+    //
+    // See:
+    // - https://github.com/ampedandwired/html-webpack-plugin
+    // - https://github.com/kangax/html-minifier
+    // - Plugin options in the production Webpack configuration file
+    interpolate: /<!--!([\s\S]+?)-->/g,
+    // Disable evaluated and escaped variables in the template
+    evaluate: reNoMatch,
+    escape: reNoMatch,
+  });
+
+// Interpolate htmlAttributes and other helmet data into the template
+const template = params => {
+  const htmlAttributes = params.htmlAttributes;
+  const tags = _.omit(params, ['htmlAttributes']);
+  const templatedWithHtmlAttributes = templateWithHtmlAttributes({ htmlAttributes });
+  return templateTags(templatedWithHtmlAttributes)(tags);
+};
 
 exports.render = function(requestUrl, context, preloadedState) {
   const { head, body } = renderApp(requestUrl, context, preloadedState);
@@ -54,5 +84,13 @@ exports.render = function(requestUrl, context, preloadedState) {
       <script>window.__PRELOADED_STATE__ = ${JSON.stringify(serializedState)};</script>
   `;
 
-  return template({ title: head.title.toString(), preloadedStateScript, body });
+  return template({
+    htmlAttributes: head.htmlAttributes.toString(),
+    title: head.title.toString(),
+    link: head.link.toString(),
+    meta: head.meta.toString(),
+    script: head.script.toString(),
+    preloadedStateScript,
+    body,
+  });
 };

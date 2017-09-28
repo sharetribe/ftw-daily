@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import { canonicalURL, metaTagProps } from '../../util/seo';
 
+import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
+import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './PageLayout.css';
 
 const scrollToTop = () => {
@@ -11,7 +14,7 @@ const scrollToTop = () => {
   window.scrollTo(0, 0);
 };
 
-class PageLayout extends Component {
+class PageLayoutComponent extends Component {
   componentDidMount() {
     this.historyUnlisten = this.props.history.listen(() => scrollToTop());
   }
@@ -26,11 +29,22 @@ class PageLayout extends Component {
     const {
       className,
       rootClassName,
-      title,
-      children,
       authInfoError,
+      children,
+      history,
+      intl,
       logoutError,
       scrollingDisabled,
+      contentType,
+      description,
+      facebookImages,
+      published,
+      schema,
+      tags,
+      title,
+      twitterHandle,
+      twitterImages,
+      updated,
     } = this.props;
 
     // TODO: use FlashMessages for auth errors
@@ -48,10 +62,61 @@ class PageLayout extends Component {
       [css.scrollingDisabled]: scrollingDisabled,
     });
 
+    const { pathname, search = '' } = history.location;
+    const pathWithSearch = `${pathname}${search}`;
+
+    const schemaTitle = intl.formatMessage({ id: 'PageLayout.schemaTitle' });
+    const schemaDescription = intl.formatMessage({ id: 'PageLayout.schemaDescription' });
+    const metaTitle = title || schemaTitle;
+    const metaDescription = description || schemaDescription;
+    const facebookImgs = facebookImages || [
+      { name: 'facebook', url: facebookImage, width: 1200, height: 630 },
+    ];
+    const twitterImgs = twitterImages || [
+      { name: 'twitter', url: twitterImage, width: 600, height: 314 },
+    ];
+
+    const metaToHead = metaTagProps({
+      contentType,
+      description: metaDescription,
+      facebookImages: facebookImgs,
+      twitterImages: twitterImgs,
+      published,
+      tags,
+      title: metaTitle,
+      twitterHandle,
+      updated,
+      url: canonicalURL(pathWithSearch),
+    });
+
+    // eslint-disable-next-line react/no-array-index-key
+    const metaTags = metaToHead.map((metaProps, i) => <meta key={i} {...metaProps} />);
+
+    // Schema for search engines (helps them to understand what this page is about)
+    // http://schema.org
+    // We are using JSON-LD format
+    const schemaJSONString = schema ||
+      JSON.stringify({
+        '@context': 'http://schema.org',
+        '@type': 'WebPage',
+        description: schemaDescription,
+        name: schemaTitle,
+      });
+
     return (
       <div className={classes}>
-        <Helmet>
+        <Helmet
+          htmlAttributes={{
+            lang: intl.locale,
+          }}
+        >
           <title>{title}</title>
+          <link rel="canonical" href={canonicalURL(pathWithSearch)} />
+          {metaTags}
+          <script type="application/ld+json">
+            {schemaJSONString}
+          </script>
+
         </Helmet>
         {authInfoError
           ? <div style={{ color: 'red' }}>
@@ -71,30 +136,68 @@ class PageLayout extends Component {
   }
 }
 
-const { any, bool, func, instanceOf, shape, string } = PropTypes;
+const { any, arrayOf, bool, func, instanceOf, number, shape, string } = PropTypes;
 
-PageLayout.defaultProps = {
+PageLayoutComponent.defaultProps = {
   className: null,
   rootClassName: null,
   children: null,
   authInfoError: null,
   logoutError: null,
   scrollingDisabled: false,
+  contentType: 'website',
+  description: null,
+  facebookImages: null,
+  twitterImages: null,
+  published: null,
+  schema: null,
+  tags: null,
+  twitterHandle: null,
+  updated: null,
 };
 
-PageLayout.propTypes = {
+PageLayoutComponent.propTypes = {
   className: string,
   rootClassName: string,
-  title: string.isRequired,
   children: any,
   authInfoError: instanceOf(Error),
   logoutError: instanceOf(Error),
   scrollingDisabled: bool,
 
+  // SEO related props
+  contentType: string, // og:type
+  description: string, // page description
+  facebookImages: arrayOf(
+    shape({
+      width: number.isRequired,
+      height: number.isRequired,
+      url: string.isRequired,
+    })
+  ),
+  twitterImages: arrayOf(
+    shape({
+      width: number.isRequired,
+      height: number.isRequired,
+      url: string.isRequired,
+    })
+  ),
+  published: string, // article:published_time
+  schema: string, // http://schema.org
+  tags: string, // article:tag
+  title: string.isRequired, // page title
+  twitterHandle: string, // twitter handle
+  updated: string, // article:modified_time
+
   // from withRouter
   history: shape({
     listen: func.isRequired,
   }).isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
-export default withRouter(PageLayout);
+const PageLayout = injectIntl(withRouter(PageLayoutComponent));
+PageLayout.displayName = 'PageLayout';
+
+export default PageLayout;

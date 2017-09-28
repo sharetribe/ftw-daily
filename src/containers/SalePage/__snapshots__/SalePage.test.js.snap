@@ -1,5 +1,5 @@
 exports[`SalePage matches snapshot 1`] = `
-<withRouter(PageLayout)
+<PageLayout
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
@@ -159,5 +159,5 @@ exports[`SalePage matches snapshot 1`] = `
         }
       } />
   </div>
-</withRouter(PageLayout)>
+</PageLayout>
 `;

@@ -1,5 +1,5 @@
 exports[`LandingPage matches snapshot 1`] = `
-<withRouter(PageLayout)
+<PageLayout
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
@@ -42,5 +42,5 @@ exports[`LandingPage matches snapshot 1`] = `
       }
       rootClassName={null} />
   </div>
-</withRouter(PageLayout)>
+</PageLayout>
 `;

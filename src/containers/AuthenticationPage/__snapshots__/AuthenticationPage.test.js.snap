@@ -1,5 +1,5 @@
 exports[`AuthenticationPageComponent matches snapshot 1`] = `
-<withRouter(PageLayout)
+<PageLayout
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
@@ -78,5 +78,5 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
         onSubmit={[Function]} />
     </div>
   </div>
-</withRouter(PageLayout)>
+</PageLayout>
 `;

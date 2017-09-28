@@ -1,5 +1,5 @@
 exports[`ContactDetailsPage matches snapshot 1`] = `
-<withRouter(PageLayout)
+<PageLayout
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
@@ -38,5 +38,5 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
         values={Object {}} />
     </h1>
   </div>
-</withRouter(PageLayout)>
+</PageLayout>
 `;

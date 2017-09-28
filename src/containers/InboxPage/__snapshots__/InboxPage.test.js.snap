@@ -1,5 +1,5 @@
 exports[`InboxPage matches snapshot 1`] = `
-<withRouter(PageLayout)
+<PageLayout
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
@@ -253,7 +253,7 @@ exports[`InboxPage matches snapshot 1`] = `
       </ul>
     </div>
   </div>
-</withRouter(PageLayout)>
+</PageLayout>
 `;
 
 exports[`InboxPage matches snapshot 2`] = `
@@ -309,7 +309,7 @@ exports[`InboxPage matches snapshot 2`] = `
 `;
 
 exports[`InboxPage matches snapshot 3`] = `
-<withRouter(PageLayout)
+<PageLayout
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
@@ -563,7 +563,7 @@ exports[`InboxPage matches snapshot 3`] = `
       </ul>
     </div>
   </div>
-</withRouter(PageLayout)>
+</PageLayout>
 `;
 
 exports[`InboxPage matches snapshot 4`] = `

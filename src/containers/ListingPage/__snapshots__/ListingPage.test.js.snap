@@ -1,5 +1,5 @@
 exports[`ListingPage matches snapshot 1`] = `
-<withRouter(PageLayout)
+<PageLayout
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
@@ -269,5 +269,5 @@ exports[`ListingPage matches snapshot 1`] = `
       </div>
     </div>
   </div>
-</withRouter(PageLayout)>
+</PageLayout>
 `;

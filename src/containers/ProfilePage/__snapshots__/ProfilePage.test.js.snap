@@ -1,5 +1,5 @@
 exports[`ProfilePage matches snapshot 1`] = `
-<withRouter(PageLayout)
+<PageLayout
   authInfoError={null}
   logoutError={null}
   title="Profile page with display name: most-awesome-shop">
@@ -25,5 +25,5 @@ exports[`ProfilePage matches snapshot 1`] = `
     onResendVerificationEmail={[Function]}
     sendVerificationEmailError={null}
     sendVerificationEmailInProgress={false} />
-</withRouter(PageLayout)>
+</PageLayout>
 `;

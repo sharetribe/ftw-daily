@@ -1,5 +1,5 @@
 exports[`SearchPageComponent matches snapshot 1`] = `
-<withRouter(PageLayout)
+<PageLayout
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
@@ -92,5 +92,5 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       </div>
     </withViewport(ModalInMobileComponent)>
   </div>
-</withRouter(PageLayout)>
+</PageLayout>
 `;

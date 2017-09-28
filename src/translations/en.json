@@ -241,6 +241,8 @@
   "OrderPage.title": "Order details: {listingTitle}",
   "PageLayout.authInfoFailed": "Could not get authentication information.",
   "PageLayout.logoutFailed": "Logout failed. Please try again.",
+  "PageLayout.schemaDescription": "You can book a sauna from Saunatime or get some income by sharing your own sauna",
+  "PageLayout.schemaTitle": "Book saunas everywhere",
   "PaginationLinks.next": "Next page",
   "PaginationLinks.previous": "Previous page",
   "PaginationLinks.toPage": "Go to page {page}",

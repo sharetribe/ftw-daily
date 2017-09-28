@@ -1,5 +1,5 @@
 exports[`OrderPage matches snapshot 1`] = `
-<withRouter(PageLayout)
+<PageLayout
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
@@ -151,5 +151,5 @@ exports[`OrderPage matches snapshot 1`] = `
         "type": "transaction",
       }
     } />
-</withRouter(PageLayout)>
+</PageLayout>
 `;
