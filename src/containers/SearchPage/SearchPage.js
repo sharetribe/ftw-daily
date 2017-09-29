@@ -129,7 +129,7 @@ export class SearchPageComponent extends Component {
         // eslint-disable-next-line no-console
         console.error(`An error (${error} occured while trying to retrieve map listings`);
 
-        logError(new Error(error));
+        logError(error);
       });
   }
 

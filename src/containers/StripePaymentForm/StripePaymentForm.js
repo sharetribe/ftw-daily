@@ -142,7 +142,7 @@ class StripePaymentForm extends Component {
         }
       })
       .catch(e => {
-        logError(e, { type: e.type, code: e.code, message: e.message });
+        logError(e, { stripeErrorType: e.type, stripeErrorCode: e.code });
 
         this.setState({
           submitting: false,

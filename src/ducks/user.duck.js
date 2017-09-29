@@ -339,7 +339,7 @@ export const fetchCurrentUser = () =>
         const denormalised = denormalisedEntities(entities, 'current-user', [currentUserId]);
         const currentUser = denormalised[0];
         // set current user id to the logger
-        setUserId(currentUser.id);
+        setUserId(currentUser.id.uuid);
         dispatch(currentUserShowSuccess(currentUser));
         return currentUser;
       })
