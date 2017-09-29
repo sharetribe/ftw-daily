@@ -1,3 +1,351 @@
+exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
+<div
+  className="">
+  <div>
+    <div>
+      <ResponsiveImage
+        alt="listing1 title"
+        className={null}
+        image={null}
+        nameSet={
+          Array [
+            Object {
+              "name": "landscape-crop",
+              "size": "400w",
+            },
+            Object {
+              "name": "landscape-crop2x",
+              "size": "800w",
+            },
+          ]
+        }
+        noImageMessage={null}
+        rootClassName={null}
+        sizes="100vw" />
+    </div>
+    <div>
+      <AvatarMedium
+        user={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "customer1 abbreviated name",
+                "displayName": "customer1 display name",
+              },
+            },
+            "id": UUID {
+              "uuid": "customer1",
+            },
+            "type": "user",
+          }
+        } />
+    </div>
+    <div>
+      <div>
+        <AvatarLarge
+          user={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "customer1 abbreviated name",
+                  "displayName": "customer1 display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "customer1",
+              },
+              "type": "user",
+            }
+          } />
+      </div>
+      <h1>
+        <FormattedMessage
+          id="SaleDetailsPanel.listingAcceptedTitle"
+          values={
+            Object {
+              "customerName": "customer1 display name",
+              "listingLink": <withFlattenedRoutes(withRouter(NamedLink))
+                name="ListingPage"
+                params={
+                    Object {
+                        "id": "listing1",
+                        "slug": "listing1-title",
+                      }
+                }>
+                listing1 title
+            </withFlattenedRoutes(withRouter(NamedLink))>,
+            }
+          } />
+      </h1>
+      <p>
+        <FormattedMessage
+          id="SaleDetailsPanel.saleAcceptedStatus"
+          values={
+            Object {
+              "formattedDate": <span>
+                <FormattedDate
+                    day="numeric"
+                    month="short"
+                    value={2017-06-10T00:00:00.000Z}
+                    weekday="long"
+                    year="numeric" />
+            </span>,
+            }
+          } />
+      </p>
+      <div />
+    </div>
+    <div>
+      <h3>
+        <FormattedMessage
+          id="SaleDetailsPanel.bookingBreakdownTitle"
+          values={Object {}} />
+      </h3>
+      <BookingBreakdown
+        booking={
+          Object {
+            "attributes": Object {
+              "end": 2017-06-13T00:00:00.000Z,
+              "start": 2017-06-10T00:00:00.000Z,
+            },
+            "id": UUID {
+              "uuid": "booking1",
+            },
+            "type": "booking",
+          }
+        }
+        transaction={
+          Object {
+            "attributes": Object {
+              "createdAt": 2017-05-01T00:00:00.000Z,
+              "lastTransition": "transition/accept",
+              "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
+              "lineItems": Array [
+                Object {
+                  "code": "line-item/night",
+                  "lineTotal": Money {
+                    "amount": 16500,
+                    "currency": "USD",
+                  },
+                  "quantity": "3",
+                  "unitPrice": Money {
+                    "amount": 5500,
+                    "currency": "USD",
+                  },
+                },
+                Object {
+                  "code": "line-item/provider-commission",
+                  "lineTotal": Money {
+                    "amount": -1000,
+                    "currency": "USD",
+                  },
+                  "unitPrice": Money {
+                    "amount": -1000,
+                    "currency": "USD",
+                  },
+                },
+              ],
+              "payinTotal": Money {
+                "amount": 16500,
+                "currency": "USD",
+              },
+              "payoutTotal": Money {
+                "amount": 15500,
+                "currency": "USD",
+              },
+            },
+            "booking": Object {
+              "attributes": Object {
+                "end": 2017-06-13T00:00:00.000Z,
+                "start": 2017-06-10T00:00:00.000Z,
+              },
+              "id": UUID {
+                "uuid": "booking1",
+              },
+              "type": "booking",
+            },
+            "customer": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "customer1 abbreviated name",
+                  "displayName": "customer1 display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "customer1",
+              },
+              "type": "user",
+            },
+            "id": UUID {
+              "uuid": "sale-accepted",
+            },
+            "listing": Object {
+              "attributes": Object {
+                "address": "listing1 address",
+                "description": "listing1 description",
+                "geolocation": LatLng {
+                  "lat": 40,
+                  "lng": 60,
+                },
+                "open": true,
+                "price": Money {
+                  "amount": 5500,
+                  "currency": "USD",
+                },
+                "title": "listing1 title",
+              },
+              "id": UUID {
+                "uuid": "listing1",
+              },
+              "type": "listing",
+            },
+            "provider": null,
+            "type": "transaction",
+          }
+        }
+        userRole="provider" />
+    </div>
+    <div>
+      <div>
+        <ResponsiveImage
+          alt="listing1 title"
+          className={null}
+          image={null}
+          nameSet={
+            Array [
+              Object {
+                "name": "landscape-crop",
+                "size": "400w",
+              },
+              Object {
+                "name": "landscape-crop2x",
+                "size": "800w",
+              },
+            ]
+          }
+          noImageMessage={null}
+          rootClassName={null}
+          sizes="100%" />
+      </div>
+      <h3>
+        <FormattedMessage
+          id="SaleDetailsPanel.bookingBreakdownTitle"
+          values={Object {}} />
+      </h3>
+      <div>
+        <BookingBreakdown
+          booking={
+            Object {
+              "attributes": Object {
+                "end": 2017-06-13T00:00:00.000Z,
+                "start": 2017-06-10T00:00:00.000Z,
+              },
+              "id": UUID {
+                "uuid": "booking1",
+              },
+              "type": "booking",
+            }
+          }
+          transaction={
+            Object {
+              "attributes": Object {
+                "createdAt": 2017-05-01T00:00:00.000Z,
+                "lastTransition": "transition/accept",
+                "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
+                "lineItems": Array [
+                  Object {
+                    "code": "line-item/night",
+                    "lineTotal": Money {
+                      "amount": 16500,
+                      "currency": "USD",
+                    },
+                    "quantity": "3",
+                    "unitPrice": Money {
+                      "amount": 5500,
+                      "currency": "USD",
+                    },
+                  },
+                  Object {
+                    "code": "line-item/provider-commission",
+                    "lineTotal": Money {
+                      "amount": -1000,
+                      "currency": "USD",
+                    },
+                    "unitPrice": Money {
+                      "amount": -1000,
+                      "currency": "USD",
+                    },
+                  },
+                ],
+                "payinTotal": Money {
+                  "amount": 16500,
+                  "currency": "USD",
+                },
+                "payoutTotal": Money {
+                  "amount": 15500,
+                  "currency": "USD",
+                },
+              },
+              "booking": Object {
+                "attributes": Object {
+                  "end": 2017-06-13T00:00:00.000Z,
+                  "start": 2017-06-10T00:00:00.000Z,
+                },
+                "id": UUID {
+                  "uuid": "booking1",
+                },
+                "type": "booking",
+              },
+              "customer": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "customer1 abbreviated name",
+                    "displayName": "customer1 display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "customer1",
+                },
+                "type": "user",
+              },
+              "id": UUID {
+                "uuid": "sale-accepted",
+              },
+              "listing": Object {
+                "attributes": Object {
+                  "address": "listing1 address",
+                  "description": "listing1 description",
+                  "geolocation": LatLng {
+                    "lat": 40,
+                    "lng": 60,
+                  },
+                  "open": true,
+                  "price": Money {
+                    "amount": 5500,
+                    "currency": "USD",
+                  },
+                  "title": "listing1 title",
+                },
+                "id": UUID {
+                  "uuid": "listing1",
+                },
+                "type": "listing",
+              },
+              "provider": null,
+              "type": "transaction",
+            }
+          }
+          userRole="provider" />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
 <div
   className="">
@@ -180,7 +528,7 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
               "type": "user",
             },
             "id": UUID {
-              "uuid": "sale-tx",
+              "uuid": "sale-autorejected",
             },
             "listing": Object {
               "attributes": Object {
@@ -313,7 +661,355 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
                 "type": "user",
               },
               "id": UUID {
-                "uuid": "sale-tx",
+                "uuid": "sale-autorejected",
+              },
+              "listing": Object {
+                "attributes": Object {
+                  "address": "listing1 address",
+                  "description": "listing1 description",
+                  "geolocation": LatLng {
+                    "lat": 40,
+                    "lng": 60,
+                  },
+                  "open": true,
+                  "price": Money {
+                    "amount": 5500,
+                    "currency": "USD",
+                  },
+                  "title": "listing1 title",
+                },
+                "id": UUID {
+                  "uuid": "listing1",
+                },
+                "type": "listing",
+              },
+              "provider": null,
+              "type": "transaction",
+            }
+          }
+          userRole="provider" />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
+<div
+  className="">
+  <div>
+    <div>
+      <ResponsiveImage
+        alt="listing1 title"
+        className={null}
+        image={null}
+        nameSet={
+          Array [
+            Object {
+              "name": "landscape-crop",
+              "size": "400w",
+            },
+            Object {
+              "name": "landscape-crop2x",
+              "size": "800w",
+            },
+          ]
+        }
+        noImageMessage={null}
+        rootClassName={null}
+        sizes="100vw" />
+    </div>
+    <div>
+      <AvatarMedium
+        user={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "customer1 abbreviated name",
+                "displayName": "customer1 display name",
+              },
+            },
+            "id": UUID {
+              "uuid": "customer1",
+            },
+            "type": "user",
+          }
+        } />
+    </div>
+    <div>
+      <div>
+        <AvatarLarge
+          user={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "customer1 abbreviated name",
+                  "displayName": "customer1 display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "customer1",
+              },
+              "type": "user",
+            }
+          } />
+      </div>
+      <h1>
+        <FormattedMessage
+          id="SaleDetailsPanel.listingDeliveredTitle"
+          values={
+            Object {
+              "customerName": "customer1 display name",
+              "listingLink": <withFlattenedRoutes(withRouter(NamedLink))
+                name="ListingPage"
+                params={
+                    Object {
+                        "id": "listing1",
+                        "slug": "listing1-title",
+                      }
+                }>
+                listing1 title
+            </withFlattenedRoutes(withRouter(NamedLink))>,
+            }
+          } />
+      </h1>
+      <p>
+        <FormattedMessage
+          id="SaleDetailsPanel.saleDeliveredStatus"
+          values={
+            Object {
+              "formattedDate": <span>
+                <FormattedDate
+                    day="numeric"
+                    month="short"
+                    value={2017-06-10T00:00:00.000Z}
+                    weekday="long"
+                    year="numeric" />
+            </span>,
+            }
+          } />
+      </p>
+      <div />
+    </div>
+    <div>
+      <h3>
+        <FormattedMessage
+          id="SaleDetailsPanel.bookingBreakdownTitle"
+          values={Object {}} />
+      </h3>
+      <BookingBreakdown
+        booking={
+          Object {
+            "attributes": Object {
+              "end": 2017-06-13T00:00:00.000Z,
+              "start": 2017-06-10T00:00:00.000Z,
+            },
+            "id": UUID {
+              "uuid": "booking1",
+            },
+            "type": "booking",
+          }
+        }
+        transaction={
+          Object {
+            "attributes": Object {
+              "createdAt": 2017-05-01T00:00:00.000Z,
+              "lastTransition": "transition/mark-delivered",
+              "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
+              "lineItems": Array [
+                Object {
+                  "code": "line-item/night",
+                  "lineTotal": Money {
+                    "amount": 16500,
+                    "currency": "USD",
+                  },
+                  "quantity": "3",
+                  "unitPrice": Money {
+                    "amount": 5500,
+                    "currency": "USD",
+                  },
+                },
+                Object {
+                  "code": "line-item/provider-commission",
+                  "lineTotal": Money {
+                    "amount": -1000,
+                    "currency": "USD",
+                  },
+                  "unitPrice": Money {
+                    "amount": -1000,
+                    "currency": "USD",
+                  },
+                },
+              ],
+              "payinTotal": Money {
+                "amount": 16500,
+                "currency": "USD",
+              },
+              "payoutTotal": Money {
+                "amount": 15500,
+                "currency": "USD",
+              },
+            },
+            "booking": Object {
+              "attributes": Object {
+                "end": 2017-06-13T00:00:00.000Z,
+                "start": 2017-06-10T00:00:00.000Z,
+              },
+              "id": UUID {
+                "uuid": "booking1",
+              },
+              "type": "booking",
+            },
+            "customer": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "customer1 abbreviated name",
+                  "displayName": "customer1 display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "customer1",
+              },
+              "type": "user",
+            },
+            "id": UUID {
+              "uuid": "sale-delivered",
+            },
+            "listing": Object {
+              "attributes": Object {
+                "address": "listing1 address",
+                "description": "listing1 description",
+                "geolocation": LatLng {
+                  "lat": 40,
+                  "lng": 60,
+                },
+                "open": true,
+                "price": Money {
+                  "amount": 5500,
+                  "currency": "USD",
+                },
+                "title": "listing1 title",
+              },
+              "id": UUID {
+                "uuid": "listing1",
+              },
+              "type": "listing",
+            },
+            "provider": null,
+            "type": "transaction",
+          }
+        }
+        userRole="provider" />
+    </div>
+    <div>
+      <div>
+        <ResponsiveImage
+          alt="listing1 title"
+          className={null}
+          image={null}
+          nameSet={
+            Array [
+              Object {
+                "name": "landscape-crop",
+                "size": "400w",
+              },
+              Object {
+                "name": "landscape-crop2x",
+                "size": "800w",
+              },
+            ]
+          }
+          noImageMessage={null}
+          rootClassName={null}
+          sizes="100%" />
+      </div>
+      <h3>
+        <FormattedMessage
+          id="SaleDetailsPanel.bookingBreakdownTitle"
+          values={Object {}} />
+      </h3>
+      <div>
+        <BookingBreakdown
+          booking={
+            Object {
+              "attributes": Object {
+                "end": 2017-06-13T00:00:00.000Z,
+                "start": 2017-06-10T00:00:00.000Z,
+              },
+              "id": UUID {
+                "uuid": "booking1",
+              },
+              "type": "booking",
+            }
+          }
+          transaction={
+            Object {
+              "attributes": Object {
+                "createdAt": 2017-05-01T00:00:00.000Z,
+                "lastTransition": "transition/mark-delivered",
+                "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
+                "lineItems": Array [
+                  Object {
+                    "code": "line-item/night",
+                    "lineTotal": Money {
+                      "amount": 16500,
+                      "currency": "USD",
+                    },
+                    "quantity": "3",
+                    "unitPrice": Money {
+                      "amount": 5500,
+                      "currency": "USD",
+                    },
+                  },
+                  Object {
+                    "code": "line-item/provider-commission",
+                    "lineTotal": Money {
+                      "amount": -1000,
+                      "currency": "USD",
+                    },
+                    "unitPrice": Money {
+                      "amount": -1000,
+                      "currency": "USD",
+                    },
+                  },
+                ],
+                "payinTotal": Money {
+                  "amount": 16500,
+                  "currency": "USD",
+                },
+                "payoutTotal": Money {
+                  "amount": 15500,
+                  "currency": "USD",
+                },
+              },
+              "booking": Object {
+                "attributes": Object {
+                  "end": 2017-06-13T00:00:00.000Z,
+                  "start": 2017-06-10T00:00:00.000Z,
+                },
+                "id": UUID {
+                  "uuid": "booking1",
+                },
+                "type": "booking",
+              },
+              "customer": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "customer1 abbreviated name",
+                    "displayName": "customer1 display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "customer1",
+                },
+                "type": "user",
+              },
+              "id": UUID {
+                "uuid": "sale-delivered",
               },
               "listing": Object {
                 "attributes": Object {
@@ -540,7 +1236,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
               "type": "user",
             },
             "id": UUID {
-              "uuid": "sale-tx",
+              "uuid": "sale-preauthorized",
             },
             "listing": Object {
               "attributes": Object {
@@ -673,7 +1369,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
                 "type": "user",
               },
               "id": UUID {
-                "uuid": "sale-tx",
+                "uuid": "sale-preauthorized",
               },
               "listing": Object {
                 "attributes": Object {
@@ -888,7 +1584,7 @@ exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
               "type": "user",
             },
             "id": UUID {
-              "uuid": "sale-tx",
+              "uuid": "sale-rejected",
             },
             "listing": Object {
               "attributes": Object {
@@ -1022,7 +1718,7 @@ exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
                 "type": "user",
               },
               "id": UUID {
-                "uuid": "sale-tx",
+                "uuid": "sale-rejected",
               },
               "listing": Object {
                 "attributes": Object {
