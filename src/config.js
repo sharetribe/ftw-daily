@@ -191,6 +191,9 @@ const siteTitle = 'Saunatime';
 const siteTwitterHandle = '@sharetribe';
 
 // Facebook counts shares with app or page associated by this id
+// Currently it is unset, but you can read more about fb:app_id from
+// https://developers.facebook.com/docs/sharing/webmasters#basic
+// You should create one to track social sharing in Facebook
 const facebookAppId = null;
 
 // NOTE: only expose configuration that should be visible in the

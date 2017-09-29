@@ -124,7 +124,8 @@ export const twitterMetaProps = data => {
   }
 
   if (twitterHandle) {
-    // TODO: this needs API support for listings
+    // TODO: If we want to connect providers twitter account on ListingPage
+    // we needs to get this info among listing data (API support needed)
     twitterMeta.push({ name: 'twitter:creator', content: twitterHandle });
   }
 
