@@ -10,9 +10,15 @@
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - var(--topbarHeight));
+  padding: 0;
 
   @media (--viewportMedium) {
     min-height: calc(100vh - var(--topbarHeightDesktop));
+    border: solid 24px #FFF;
+  }
+
+  @media (--viewportLarge) {
+    border: solid 36px #FFF;
   }
 }
 
@@ -21,8 +27,9 @@
   justify-content: flex-end;
   padding-bottom: 98px;
 
-  @media (min-width: 768px) {
+  @media (--viewportMedium) {
     justify-content: center;
     padding-top: 60px;
+    border-radius: 4px;
   }
 }
