@@ -1,7 +1,7 @@
 import { pick } from 'lodash';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
 import * as propTypes from '../../util/propTypes';
-import { error as logError } from '../../util/log';
+import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
@@ -120,7 +120,7 @@ export const initiateOrder = params =>
       })
       .catch(e => {
         dispatch(initiateOrderError(e));
-        logError(e);
+        log.error(e);
         throw e;
       });
   };
@@ -163,7 +163,7 @@ export const speculateTransaction = (listingId, bookingStart, bookingEnd) =>
         dispatch(speculateTransactionSuccess(tx));
       })
       .catch(e => {
-        logError(e);
+        log.error(e);
         return dispatch(speculateTransactionError(e));
       });
   };

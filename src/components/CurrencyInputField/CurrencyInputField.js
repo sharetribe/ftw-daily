@@ -20,7 +20,7 @@ import {
   truncateToSubUnitPrecision,
 } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
-import { error as logError } from '../../util/log';
+import * as log from '../../util/log';
 
 import css from './CurrencyInputField.css';
 
@@ -82,7 +82,7 @@ class CurrencyInputComponent extends Component {
         usesComma,
       };
     } catch (e) {
-      logError(e, { props: props });
+      log.error(e, { props: props });
       throw e;
     }
 

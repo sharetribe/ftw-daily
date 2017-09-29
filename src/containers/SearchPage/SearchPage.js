@@ -11,7 +11,7 @@ import { googleLatLngToSDKLatLng, googleBoundsToSDKBounds } from '../../util/goo
 import { createResourceLocatorString } from '../../util/routes';
 import { createSlug, parse, stringify } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
-import { error as logError } from '../../util/log';
+import * as log from '../../util/log';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
@@ -129,7 +129,7 @@ export class SearchPageComponent extends Component {
         // eslint-disable-next-line no-console
         console.error(`An error (${error} occured while trying to retrieve map listings`);
 
-        logError(error);
+        log.error(error);
       });
   }
 

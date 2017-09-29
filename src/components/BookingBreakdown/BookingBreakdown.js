@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import { types } from '../../util/sdkLoader';
 import { formatMoney } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
-import { error as logError } from '../../util/log';
+import * as log from '../../util/log';
 
 import css from './BookingBreakdown.css';
 
@@ -81,7 +81,7 @@ export const BookingBreakdownComponent = props => {
       const error = new Error(
         'Commission should be present and the value should be zero or negative'
       );
-      logError(error, {
+      log.error(error, {
         transactionId: transaction.id,
       });
       throw error;

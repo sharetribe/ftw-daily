@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { PrimaryButton } from '../../components';
-import { error as logError } from '../../util/log';
+import * as log from '../../util/log';
 import config from '../../config';
 
 import css from './StripePaymentForm.css';
@@ -142,7 +142,7 @@ class StripePaymentForm extends Component {
         }
       })
       .catch(e => {
-        logError(e, { stripeErrorType: e.type, stripeErrorCode: e.code });
+        log.error(e, { stripeErrorType: e.type, stripeErrorCode: e.code });
 
         this.setState({
           submitting: false,

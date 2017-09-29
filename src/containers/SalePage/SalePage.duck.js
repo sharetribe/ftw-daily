@@ -1,6 +1,6 @@
 import { types } from '../../util/sdkLoader';
 import * as propTypes from '../../util/propTypes';
-import { error as logError } from '../../util/log';
+import * as log from '../../util/log';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
 
@@ -144,7 +144,7 @@ export const acceptSale = id =>
         return response;
       })
       .catch(e => {
-        logError(e, { txId: id, transition: propTypes.TX_TRANSITION_ACCEPT });
+        log.error(e, { txId: id, transition: propTypes.TX_TRANSITION_ACCEPT });
         dispatch(acceptSaleError(e));
         throw e;
       });
@@ -166,7 +166,7 @@ export const rejectSale = id =>
         return response;
       })
       .catch(e => {
-        logError(e, { txId: id, transition: propTypes.TX_TRANSITION_REJECT });
+        log.error(e, { txId: id, transition: propTypes.TX_TRANSITION_REJECT });
         dispatch(rejectSaleError(e));
         throw e;
       });
