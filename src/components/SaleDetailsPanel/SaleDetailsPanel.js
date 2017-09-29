@@ -28,53 +28,52 @@ const breakdown = transaction => {
     : null;
 };
 
-const saleTitle = (lastTransition, listingLink, customerName) => {
-  switch (lastTransition) {
-    case propTypes.TX_TRANSITION_PREAUTHORIZE:
-      return (
-        <FormattedMessage
-          id="SaleDetailsPanel.listingRequestedTitle"
-          values={{ customerName, listingLink }}
-        />
-      );
-    case propTypes.TX_TRANSITION_ACCEPT:
-      return (
-        <FormattedMessage
-          id="SaleDetailsPanel.listingAcceptedTitle"
-          values={{ customerName, listingLink }}
-        />
-      );
-    case propTypes.TX_TRANSITION_REJECT:
-      return (
-        <FormattedMessage
-          id="SaleDetailsPanel.listingRejectedTitle"
-          values={{ customerName, listingLink }}
-        />
-      );
-    case propTypes.TX_TRANSITION_AUTO_REJECT:
-      return (
-        <FormattedMessage
-          id="SaleDetailsPanel.listingRejectedTitle"
-          values={{ customerName, listingLink }}
-        />
-      );
-    case propTypes.TX_TRANSITION_MARK_DELIVERED:
-      return (
-        <FormattedMessage
-          id="SaleDetailsPanel.listingDeliveredTitle"
-          values={{ customerName, listingLink }}
-        />
-      );
-    default:
-      return null;
+const saleTitle = (transaction, listingLink, customerName) => {
+  if (propTypes.txIsPreauthorized(transaction)) {
+    return (
+      <FormattedMessage
+        id="SaleDetailsPanel.listingRequestedTitle"
+        values={{ customerName, listingLink }}
+      />
+    );
+  } else if (propTypes.txIsAccepted(transaction)) {
+    return (
+      <FormattedMessage
+        id="SaleDetailsPanel.listingAcceptedTitle"
+        values={{ customerName, listingLink }}
+      />
+    );
+  } else if (propTypes.txIsRejected(transaction)) {
+    return (
+      <FormattedMessage
+        id="SaleDetailsPanel.listingRejectedTitle"
+        values={{ customerName, listingLink }}
+      />
+    );
+  } else if (propTypes.txIsAutorejected(transaction)) {
+    return (
+      <FormattedMessage
+        id="SaleDetailsPanel.listingRejectedTitle"
+        values={{ customerName, listingLink }}
+      />
+    );
+  } else if (propTypes.txIsDelivered(transaction)) {
+    return (
+      <FormattedMessage
+        id="SaleDetailsPanel.listingDeliveredTitle"
+        values={{ customerName, listingLink }}
+      />
+    );
+  } else {
+    return null;
   }
 };
 
-const saleMessage = (lastTransition, customerName, lastTransitionedAt) => {
+const saleMessage = (transaction, customerName) => {
   const formattedDate = (
     <span className={css.nowrap}>
       <FormattedDate
-        value={lastTransitionedAt}
+        value={transaction.attributes.lastTransitionedAt}
         year="numeric"
         month="short"
         day="numeric"
@@ -82,30 +81,22 @@ const saleMessage = (lastTransition, customerName, lastTransitionedAt) => {
       />
     </span>
   );
-  switch (lastTransition) {
-    case propTypes.TX_TRANSITION_PREAUTHORIZE:
-      return (
-        <FormattedMessage id="SaleDetailsPanel.saleRequestedStatus" values={{ customerName }} />
-      );
-    case propTypes.TX_TRANSITION_ACCEPT: {
-      return (
-        <FormattedMessage id="SaleDetailsPanel.saleAcceptedStatus" values={{ formattedDate }} />
-      );
-    }
-    case propTypes.TX_TRANSITION_REJECT:
-      return (
-        <FormattedMessage id="SaleDetailsPanel.saleRejectedStatus" values={{ formattedDate }} />
-      );
-    case propTypes.TX_TRANSITION_AUTO_REJECT:
-      return (
-        <FormattedMessage id="SaleDetailsPanel.saleAutoRejectedStatus" values={{ formattedDate }} />
-      );
-    case propTypes.TX_TRANSITION_MARK_DELIVERED:
-      return (
-        <FormattedMessage id="SaleDetailsPanel.saleDeliveredStatus" values={{ formattedDate }} />
-      );
-    default:
-      return null;
+  if (propTypes.txIsPreauthorized(transaction)) {
+    return <FormattedMessage id="SaleDetailsPanel.saleRequestedStatus" values={{ customerName }} />;
+  } else if (propTypes.txIsAccepted(transaction)) {
+    return <FormattedMessage id="SaleDetailsPanel.saleAcceptedStatus" values={{ formattedDate }} />;
+  } else if (propTypes.txIsRejected(transaction)) {
+    return <FormattedMessage id="SaleDetailsPanel.saleRejectedStatus" values={{ formattedDate }} />;
+  } else if (propTypes.txIsAutorejected(transaction)) {
+    return (
+      <FormattedMessage id="SaleDetailsPanel.saleAutoRejectedStatus" values={{ formattedDate }} />
+    );
+  } else if (propTypes.txIsDelivered(transaction)) {
+    return (
+      <FormattedMessage id="SaleDetailsPanel.saleDeliveredStatus" values={{ formattedDate }} />
+    );
+  } else {
+    return null;
   }
 };
 
@@ -133,8 +124,6 @@ export const SaleDetailsPanelComponent = props => {
   });
 
   const customerDisplayName = userDisplayName(currentCustomer, bannedUserDisplayName);
-  const lastTransitionedAt = currentTransaction.attributes.lastTransitionedAt;
-  const lastTransition = currentTransaction.attributes.lastTransition;
 
   let listingLink = null;
 
@@ -150,21 +139,19 @@ export const SaleDetailsPanelComponent = props => {
 
   const bookingInfo = breakdown(currentTransaction);
 
-  const title = saleTitle(lastTransition, listingLink, customerDisplayName);
+  const title = saleTitle(currentTransaction, listingLink, customerDisplayName);
   const message = isCustomerBanned
     ? intl.formatMessage({
         id: 'SaleDetailsPanel.customerBannedStatus',
       })
-    : saleMessage(lastTransition, customerDisplayName, lastTransitionedAt);
+    : saleMessage(currentTransaction, customerDisplayName);
 
   const listingTitle = currentListing.attributes.title;
   const firstImage = currentListing.images && currentListing.images.length > 0
     ? currentListing.images[0]
     : null;
 
-  const isPreauthorizedState = currentTransaction.attributes.lastTransition ===
-    propTypes.TX_TRANSITION_PREAUTHORIZE;
-  const canShowButtons = isPreauthorizedState && !isCustomerBanned;
+  const canShowButtons = propTypes.txIsPreauthorized(currentTransaction) && !isCustomerBanned;
   const buttonsDisabled = acceptInProgress || rejectInProgress;
 
   const acceptErrorMessage = acceptSaleError
@@ -269,7 +256,6 @@ export const SaleDetailsPanelComponent = props => {
 SaleDetailsPanelComponent.defaultProps = {
   rootClassName: null,
   className: null,
-  lastTransition: null,
   acceptSaleError: null,
   rejectSaleError: null,
 };
