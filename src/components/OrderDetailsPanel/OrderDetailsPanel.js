@@ -21,93 +21,89 @@ const breakdown = transaction => {
     : null;
 };
 
-const orderTitle = (lastTransition, listingLink, customerName) => {
-  switch (lastTransition) {
-    case propTypes.TX_TRANSITION_PREAUTHORIZE:
-      return (
-        <span>
-          <span className={css.mainTitle}>
-            <FormattedMessage
-              id="OrderDetailsPanel.orderPreauthorizedTitle"
-              values={{ customerName }}
-            />
-          </span>
+const orderTitle = (transaction, listingLink, customerName) => {
+  if (propTypes.txIsPreauthorized(transaction)) {
+    return (
+      <span>
+        <span className={css.mainTitle}>
           <FormattedMessage
-            id="OrderDetailsPanel.orderPreauthorizedSubtitle"
-            values={{ listingLink }}
+            id="OrderDetailsPanel.orderPreauthorizedTitle"
+            values={{ customerName }}
           />
         </span>
-      );
-    case propTypes.TX_TRANSITION_ACCEPT:
-      return (
-        <span>
-          <span className={css.mainTitle}>
-            <FormattedMessage id="OrderDetailsPanel.orderAcceptedTitle" values={{ customerName }} />
-          </span>
-          <FormattedMessage id="OrderDetailsPanel.orderAcceptedSubtitle" values={{ listingLink }} />
+        <FormattedMessage
+          id="OrderDetailsPanel.orderPreauthorizedSubtitle"
+          values={{ listingLink }}
+        />
+      </span>
+    );
+  } else if (propTypes.txIsAccepted(transaction)) {
+    return (
+      <span>
+        <span className={css.mainTitle}>
+          <FormattedMessage id="OrderDetailsPanel.orderAcceptedTitle" values={{ customerName }} />
         </span>
-      );
-    case propTypes.TX_TRANSITION_REJECT:
-      return (
-        <FormattedMessage id="OrderDetailsPanel.orderRejectedTitle" values={{ listingLink }} />
-      );
-    case propTypes.TX_TRANSITION_AUTO_REJECT:
-      return (
-        <FormattedMessage id="OrderDetailsPanel.orderAutoRejectedTitle" values={{ listingLink }} />
-      );
-    case propTypes.TX_TRANSITION_MARK_DELIVERED:
-      return (
-        <FormattedMessage id="OrderDetailsPanel.orderDeliveredTitle" values={{ listingLink }} />
-      );
-    default:
-      return null;
+        <FormattedMessage id="OrderDetailsPanel.orderAcceptedSubtitle" values={{ listingLink }} />
+      </span>
+    );
+  } else if (propTypes.txIsRejected(transaction)) {
+    return <FormattedMessage id="OrderDetailsPanel.orderRejectedTitle" values={{ listingLink }} />;
+  } else if (propTypes.txIsAutorejected(transaction)) {
+    return (
+      <FormattedMessage id="OrderDetailsPanel.orderAutoRejectedTitle" values={{ listingLink }} />
+    );
+  } else if (propTypes.txIsDelivered(transaction)) {
+    return <FormattedMessage id="OrderDetailsPanel.orderDeliveredTitle" values={{ listingLink }} />;
+  } else {
+    return null;
   }
 };
 
-const orderMessage = (lastTransition, listingTitle, providerName, lastTransitionedAt) => {
+const orderMessage = (transaction, listingTitle, providerName) => {
   const transitionDate = (
     <span className={css.transitionDate}>
-      <FormattedDate value={lastTransitionedAt} year="numeric" month="short" day="numeric" />
+      <FormattedDate
+        value={transaction.attributes.lastTransitionedAt}
+        year="numeric"
+        month="short"
+        day="numeric"
+      />
     </span>
   );
-  switch (lastTransition) {
-    case propTypes.TX_TRANSITION_PREAUTHORIZE:
-      return (
-        <FormattedMessage
-          id="OrderDetailsPanel.orderPreauthorizedStatus"
-          values={{ providerName }}
-        />
-      );
-    case propTypes.TX_TRANSITION_ACCEPT:
-      return (
-        <FormattedMessage
-          id="OrderDetailsPanel.orderAcceptedStatus"
-          values={{ providerName, transitionDate }}
-        />
-      );
-    case propTypes.TX_TRANSITION_REJECT:
-      return (
-        <FormattedMessage
-          id="OrderDetailsPanel.orderRejectedStatus"
-          values={{ providerName, transitionDate }}
-        />
-      );
-    case propTypes.TX_TRANSITION_AUTO_REJECT:
-      return (
-        <FormattedMessage
-          id="OrderDetailsPanel.orderAutoRejectedStatus"
-          values={{ providerName, transitionDate }}
-        />
-      );
-    case propTypes.TX_TRANSITION_MARK_DELIVERED:
-      return (
-        <FormattedMessage
-          id="OrderDetailsPanel.orderDeliveredStatus"
-          values={{ providerName, transitionDate }}
-        />
-      );
-    default:
-      return null;
+  if (propTypes.txIsPreauthorized(transaction)) {
+    return (
+      <FormattedMessage id="OrderDetailsPanel.orderPreauthorizedStatus" values={{ providerName }} />
+    );
+  } else if (propTypes.txIsAccepted(transaction)) {
+    return (
+      <FormattedMessage
+        id="OrderDetailsPanel.orderAcceptedStatus"
+        values={{ providerName, transitionDate }}
+      />
+    );
+  } else if (propTypes.txIsRejected(transaction)) {
+    return (
+      <FormattedMessage
+        id="OrderDetailsPanel.orderRejectedStatus"
+        values={{ providerName, transitionDate }}
+      />
+    );
+  } else if (propTypes.txIsAutorejected(transaction)) {
+    return (
+      <FormattedMessage
+        id="OrderDetailsPanel.orderAutoRejectedStatus"
+        values={{ providerName, transitionDate }}
+      />
+    );
+  } else if (propTypes.txIsDelivered(transaction)) {
+    return (
+      <FormattedMessage
+        id="OrderDetailsPanel.orderDeliveredStatus"
+        values={{ providerName, transitionDate }}
+      />
+    );
+  } else {
+    return null;
   }
 };
 
@@ -141,8 +137,6 @@ export const OrderDetailsPanelComponent = props => {
 
   const authorDisplayName = userDisplayName(currentProvider, bannedUserDisplayName);
   const customerDisplayName = userDisplayName(currentCustomer, bannedUserDisplayName);
-  const lastTransitionedAt = currentTransaction.attributes.lastTransitionedAt;
-  const lastTransition = currentTransaction.attributes.lastTransition;
 
   let listingLink = null;
 
@@ -163,10 +157,10 @@ export const OrderDetailsPanelComponent = props => {
     : currentListing.attributes.title;
 
   const bookingInfo = breakdown(currentTransaction);
-  const orderHeading = orderTitle(lastTransition, listingLink, customerDisplayName);
+  const orderHeading = orderTitle(currentTransaction, listingLink, customerDisplayName);
   const message = listingDeleted
     ? orderMessageDeletedListing
-    : orderMessage(lastTransition, listingLink, authorDisplayName, lastTransitionedAt);
+    : orderMessage(currentTransaction, listingLink, authorDisplayName);
 
   const firstImage = currentListing.images && currentListing.images.length > 0
     ? currentListing.images[0]
@@ -244,7 +238,6 @@ export const OrderDetailsPanelComponent = props => {
 OrderDetailsPanelComponent.defaultProps = {
   rootClassName: null,
   className: null,
-  lastTransition: null,
 };
 
 const { string } = PropTypes;
