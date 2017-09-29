@@ -178,12 +178,13 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
               "listing": Object {
                 "attributes": Object {
                   "address": "listing1 address",
+                  "closed": false,
+                  "deleted": false,
                   "description": "listing1 description",
                   "geolocation": LatLng {
                     "lat": 40,
                     "lng": 60,
                   },
-                  "open": true,
                   "price": Money {
                     "amount": 5500,
                     "currency": "USD",
@@ -354,12 +355,13 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
               "listing": Object {
                 "attributes": Object {
                   "address": "listing1 address",
+                  "closed": false,
+                  "deleted": false,
                   "description": "listing1 description",
                   "geolocation": LatLng {
                     "lat": 40,
                     "lng": 60,
                   },
-                  "open": true,
                   "price": Money {
                     "amount": 5500,
                     "currency": "USD",
@@ -563,12 +565,13 @@ exports[`OrderDetailsPanel autorejected matches snapshot 1`] = `
               "listing": Object {
                 "attributes": Object {
                   "address": "listing1 address",
+                  "closed": false,
+                  "deleted": false,
                   "description": "listing1 description",
                   "geolocation": LatLng {
                     "lat": 40,
                     "lng": 60,
                   },
-                  "open": true,
                   "price": Money {
                     "amount": 5500,
                     "currency": "USD",
@@ -739,12 +742,13 @@ exports[`OrderDetailsPanel autorejected matches snapshot 1`] = `
               "listing": Object {
                 "attributes": Object {
                   "address": "listing1 address",
+                  "closed": false,
+                  "deleted": false,
                   "description": "listing1 description",
                   "geolocation": LatLng {
                     "lat": 40,
                     "lng": 60,
                   },
-                  "open": true,
                   "price": Money {
                     "amount": 5500,
                     "currency": "USD",
@@ -948,12 +952,13 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
               "listing": Object {
                 "attributes": Object {
                   "address": "listing1 address",
+                  "closed": false,
+                  "deleted": false,
                   "description": "listing1 description",
                   "geolocation": LatLng {
                     "lat": 40,
                     "lng": 60,
                   },
-                  "open": true,
                   "price": Money {
                     "amount": 5500,
                     "currency": "USD",
@@ -1124,12 +1129,13 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
               "listing": Object {
                 "attributes": Object {
                   "address": "listing1 address",
+                  "closed": false,
+                  "deleted": false,
                   "description": "listing1 description",
                   "geolocation": LatLng {
                     "lat": 40,
                     "lng": 60,
                   },
-                  "open": true,
                   "price": Money {
                     "amount": 5500,
                     "currency": "USD",
@@ -1337,12 +1343,13 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
               "listing": Object {
                 "attributes": Object {
                   "address": "listing1 address",
+                  "closed": false,
+                  "deleted": false,
                   "description": "listing1 description",
                   "geolocation": LatLng {
                     "lat": 40,
                     "lng": 60,
                   },
-                  "open": true,
                   "price": Money {
                     "amount": 5500,
                     "currency": "USD",
@@ -1513,12 +1520,13 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
               "listing": Object {
                 "attributes": Object {
                   "address": "listing1 address",
+                  "closed": false,
+                  "deleted": false,
                   "description": "listing1 description",
                   "geolocation": LatLng {
                     "lat": 40,
                     "lng": 60,
                   },
-                  "open": true,
                   "price": Money {
                     "amount": 5500,
                     "currency": "USD",
