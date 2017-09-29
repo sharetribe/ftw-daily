@@ -159,12 +159,99 @@ export const ProviderSaleSingleNight = {
   },
 };
 
+export const ProviderSalePreauthorized = {
+  component: BookingBreakdown,
+  props: {
+    userRole: 'provider',
+    transaction: exampleTransaction({
+      lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+      payinTotal: new Money(4500, 'USD'),
+      payoutTotal: new Money(2500, 'USD'),
+      lineItems: [
+        {
+          code: 'line-item/night',
+          quantity: new Decimal(1),
+          unitPrice: new Money(4500, 'USD'),
+          lineTotal: new Money(4500, 'USD'),
+        },
+        {
+          code: 'line-item/provider-commission',
+          unitPrice: new Money(-2000, 'USD'),
+          lineTotal: new Money(-2000, 'USD'),
+        },
+      ],
+    }),
+    booking: exampleBooking({
+      start: new Date(Date.UTC(2017, 3, 14)),
+      end: new Date(Date.UTC(2017, 3, 15)),
+    }),
+  },
+};
+
+export const ProviderSaleAccepted = {
+  component: BookingBreakdown,
+  props: {
+    userRole: 'provider',
+    transaction: exampleTransaction({
+      lastTransition: propTypes.TX_TRANSITION_ACCEPT,
+      payinTotal: new Money(4500, 'USD'),
+      payoutTotal: new Money(2500, 'USD'),
+      lineItems: [
+        {
+          code: 'line-item/night',
+          quantity: new Decimal(1),
+          unitPrice: new Money(4500, 'USD'),
+          lineTotal: new Money(4500, 'USD'),
+        },
+        {
+          code: 'line-item/provider-commission',
+          unitPrice: new Money(-2000, 'USD'),
+          lineTotal: new Money(-2000, 'USD'),
+        },
+      ],
+    }),
+    booking: exampleBooking({
+      start: new Date(Date.UTC(2017, 3, 14)),
+      end: new Date(Date.UTC(2017, 3, 15)),
+    }),
+  },
+};
+
 export const ProviderSaleRejected = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_REJECT,
+      payinTotal: new Money(4500, 'USD'),
+      payoutTotal: new Money(2500, 'USD'),
+      lineItems: [
+        {
+          code: 'line-item/night',
+          quantity: new Decimal(1),
+          unitPrice: new Money(4500, 'USD'),
+          lineTotal: new Money(4500, 'USD'),
+        },
+        {
+          code: 'line-item/provider-commission',
+          unitPrice: new Money(-2000, 'USD'),
+          lineTotal: new Money(-2000, 'USD'),
+        },
+      ],
+    }),
+    booking: exampleBooking({
+      start: new Date(Date.UTC(2017, 3, 14)),
+      end: new Date(Date.UTC(2017, 3, 15)),
+    }),
+  },
+};
+
+export const ProviderSaleAutoRejected = {
+  component: BookingBreakdown,
+  props: {
+    userRole: 'provider',
+    transaction: exampleTransaction({
+      lastTransition: propTypes.TX_TRANSITION_AUTO_REJECT,
       payinTotal: new Money(4500, 'USD'),
       payoutTotal: new Money(2500, 'USD'),
       lineItems: [
