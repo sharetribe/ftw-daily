@@ -76,7 +76,8 @@ export class ProfileSettingsPageComponent extends Component {
 
     const user = ensureCurrentUser(currentUser);
     const { firstName, lastName } = user.attributes.profile;
-    const profileImage = image || { imageId: user.profileImage.id };
+    const profileImageId = user.profileImage ? user.profileImage.id : null;
+    const profileImage = image || { imageId: profileImageId };
 
     const profileSettingsForm = user.id
       ? <ProfileSettingsForm
