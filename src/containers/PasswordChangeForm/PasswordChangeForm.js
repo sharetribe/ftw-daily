@@ -118,11 +118,13 @@ class PasswordChangeFormComponent extends Component {
       <form
         className={classes}
         onSubmit={values => {
-          handleSubmit(values).then(() => {
-            this.resetTimeoutId = window.setTimeout(reset, RESET_TIMEOUT);
-          }).catch(() => {
-            // Error is handled in duck file already.
-          });
+          handleSubmit(values)
+            .then(() => {
+              this.resetTimeoutId = window.setTimeout(reset, RESET_TIMEOUT);
+            })
+            .catch(() => {
+              // Error is handled in duck file already.
+            });
         }}
       >
         <div className={css.newPasswordSection}>
