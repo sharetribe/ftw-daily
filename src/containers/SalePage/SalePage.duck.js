@@ -1,11 +1,8 @@
 import { types } from '../../util/sdkLoader';
+import * as propTypes from '../../util/propTypes';
 import { error as logError } from '../../util/log';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
-
-// Transition-to keys
-const TRANSITION_ACCEPT = 'transition/accept';
-const TRANSITION_REJECT = 'transition/reject';
 
 // ================ Action types ================ //
 
@@ -139,7 +136,7 @@ export const acceptSale = id =>
     dispatch(acceptSaleRequest());
 
     return sdk.transactions
-      .transition({ id, transition: TRANSITION_ACCEPT, params: {} }, { expand: true })
+      .transition({ id, transition: propTypes.TX_TRANSITION_ACCEPT, params: {} }, { expand: true })
       .then(response => {
         dispatch(addMarketplaceEntities(response));
         dispatch(acceptSaleSuccess());
@@ -147,7 +144,7 @@ export const acceptSale = id =>
         return response;
       })
       .catch(e => {
-        logError(e, { txId: id, transition: 'TRANSITION_ACCEPT' });
+        logError(e, { txId: id, transition: propTypes.TX_TRANSITION_ACCEPT });
         dispatch(acceptSaleError(e));
         throw e;
       });
@@ -161,7 +158,7 @@ export const rejectSale = id =>
     dispatch(rejectSaleRequest());
 
     return sdk.transactions
-      .transition({ id, transition: TRANSITION_REJECT, params: {} }, { expand: true })
+      .transition({ id, transition: propTypes.TX_TRANSITION_REJECT, params: {} }, { expand: true })
       .then(response => {
         dispatch(addMarketplaceEntities(response));
         dispatch(rejectSaleSuccess());
@@ -169,7 +166,7 @@ export const rejectSale = id =>
         return response;
       })
       .catch(e => {
-        logError(e, { txId: id, transition: 'TRANSITION_REJECT' });
+        logError(e, { txId: id, transition: propTypes.TX_TRANSITION_REJECT });
         dispatch(rejectSaleError(e));
         throw e;
       });
