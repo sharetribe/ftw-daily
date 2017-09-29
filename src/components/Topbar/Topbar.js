@@ -370,7 +370,7 @@ TopbarComponent.propTypes = {
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: instanceOf(Error),
 
-  // These are passed from PageLayout to keep Topbar rendering aware of location changes
+  // These are passed from Page to keep Topbar rendering aware of location changes
   history: shape({
     push: func.isRequired,
   }).isRequired,

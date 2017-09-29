@@ -6,7 +6,7 @@ import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { PageLayout, Topbar } from '../../components';
+import { Page, Topbar } from '../../components';
 
 export const PayoutPreferencesPageComponent = props => {
   const {
@@ -28,7 +28,7 @@ export const PayoutPreferencesPageComponent = props => {
   } = props;
 
   return (
-    <PageLayout authInfoError={authInfoError} logoutError={logoutError} title="Payout preferences">
+    <Page authInfoError={authInfoError} logoutError={logoutError} title="Payout preferences">
       <Topbar
         authInProgress={authInProgress}
         currentUser={currentUser}
@@ -44,7 +44,7 @@ export const PayoutPreferencesPageComponent = props => {
         sendVerificationEmailInProgress={sendVerificationEmailInProgress}
         sendVerificationEmailError={sendVerificationEmailError}
       />
-    </PageLayout>
+    </Page>
   );
 };
 
@@ -82,7 +82,7 @@ PayoutPreferencesPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // PageLayout needs authInfoError and logoutError, Topbar needs isAuthenticated
+  // Page needs authInfoError and logoutError, Topbar needs isAuthenticated
   const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   // Topbar needs user info.
   const {

@@ -1,20 +1,21 @@
 import React, { Component, PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { debounce, isEqual, unionWith } from 'lodash';
 import classNames from 'classnames';
+import config from '../../config';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { googleLatLngToSDKLatLng, googleBoundsToSDKBounds } from '../../util/googleMaps';
 import { createResourceLocatorString } from '../../util/routes';
-import { parse, stringify } from '../../util/urlHelpers';
+import { createSlug, parse, stringify } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { SearchMap, ModalInMobile, PageLayout, SearchResultsPanel, Topbar } from '../../components';
+import { SearchMap, ModalInMobile, Page, SearchResultsPanel, Topbar } from '../../components';
 
 import { searchListings, searchMapListings } from './SearchPage.duck';
 import MapIcon from './MapIcon';
@@ -39,7 +40,7 @@ export class SearchPageComponent extends Component {
     super(props);
 
     this.state = {
-      isSearchMapOpenOnMobile: false,
+      isSearchMapOpenOnMobile: props.tab === 'map',
     };
 
     // Initiating map creates 'bounds_changes' event
@@ -135,7 +136,9 @@ export class SearchPageComponent extends Component {
       currentUser,
       currentUserHasListings,
       currentUserHasOrders,
+      flattenedRoutes,
       history,
+      intl,
       isAuthenticated,
       listings,
       location,
@@ -149,7 +152,6 @@ export class SearchPageComponent extends Component {
       searchInProgress,
       searchListingsError,
       searchParams,
-      tab,
       sendVerificationEmailInProgress,
       sendVerificationEmailError,
       onResendVerificationEmail,
@@ -231,15 +233,52 @@ export class SearchPageComponent extends Component {
 
     const searchParamsForPagination = parse(location.search);
 
+    // Schema for search engines (helps them to understand what this page is about)
+    // http://schema.org
+    // We are using JSON-LD format
+    const schemaTitle = intl.formatMessage({ id: 'SearchPage.schemaTitle' });
+    const schemaDescription = intl.formatMessage({ id: 'SearchPage.schemaDescription' });
+    const schemaListings = listings.map((l, i) => {
+      const title = l.attributes.title;
+      const pathToItem = createResourceLocatorString('ListingPage', flattenedRoutes, {
+        id: l.id.uuid,
+        slug: createSlug(title),
+      });
+      return {
+        '@type': 'ListItem',
+        position: i,
+        url: `${config.canonicalRootURL}${pathToItem}`,
+        name: title,
+      };
+    });
+    const schemaMainEntity = JSON.stringify({
+      '@type': 'ItemList',
+      name: address,
+      itemListOrder: 'http://schema.org/ItemListOrderAscending',
+      itemListElement: schemaListings,
+    });
+
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <PageLayout
+      <Page
         authInfoError={authInfoError}
         logoutError={logoutError}
-        title={`Search page: ${tab}`}
         scrollingDisabled={scrollingDisabled}
+        description={schemaDescription}
+        title={schemaTitle}
+        schema={
+          `
+          {
+            "@context": "http://schema.org",
+            "@type": "SearchResultsPage",
+            "description": "${schemaDescription}",
+            "name": "${schemaTitle}",
+            "mainEntity": [${schemaMainEntity}]
+          }
+        `
+        }
       >
         <Topbar
           className={css.topbar}
@@ -303,7 +342,7 @@ export class SearchPageComponent extends Component {
             </div>
           </ModalInMobile>
         </div>
-      </PageLayout>
+      </Page>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
@@ -360,6 +399,9 @@ SearchPageComponent.propTypes = {
   location: shape({
     search: string.isRequired,
   }).isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -417,6 +459,7 @@ const mapDispatchToProps = dispatch => ({
 
 const SearchPage = compose(
   connect(mapStateToProps, mapDispatchToProps),
+  injectIntl,
   withFlattenedRoutes,
   withRouter
 )(SearchPageComponent);

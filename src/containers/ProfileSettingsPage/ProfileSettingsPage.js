@@ -9,7 +9,7 @@ import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { clearUpdatedForm, updateProfile, uploadImage } from './ProfileSettingsPage.duck';
-import { PageLayout, Topbar, UserNav } from '../../components';
+import { Page, Topbar, UserNav } from '../../components';
 import { ProfileSettingsForm } from '../../containers';
 
 import css from './ProfileSettingsPage.css';
@@ -97,7 +97,7 @@ export class ProfileSettingsPageComponent extends Component {
       : null;
 
     return (
-      <PageLayout
+      <Page
         className={css.root}
         authInfoError={authInfoError}
         logoutError={logoutError}
@@ -126,7 +126,7 @@ export class ProfileSettingsPageComponent extends Component {
           <h1><FormattedMessage id="ProfileSettingsPage.title" /></h1>
           {profileSettingsForm}
         </div>
-      </PageLayout>
+      </Page>
     );
   }
 }
@@ -182,7 +182,7 @@ ProfileSettingsPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // PageLayout needs authInfoError and logoutError, Topbar needs isAuthenticated
+  // Page needs authInfoError and logoutError, Topbar needs isAuthenticated
   const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   // Topbar needs user info.
   const {

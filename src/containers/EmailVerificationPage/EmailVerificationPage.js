@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
-import { PageLayout, Topbar } from '../../components';
+import { Page, Topbar } from '../../components';
 import { EmailVerificationForm } from '../../containers';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
@@ -65,7 +65,7 @@ export const EmailVerificationPageComponent = props => {
   const initialValues = { verificationToken: parseVerificationToken(location) };
 
   return (
-    <PageLayout
+    <Page
       title={title}
       authInfoError={authInfoError}
       logoutError={logoutError}
@@ -101,7 +101,7 @@ export const EmailVerificationPageComponent = props => {
         </div>
       </div>
 
-    </PageLayout>
+    </Page>
   );
 };
 

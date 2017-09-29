@@ -15,7 +15,7 @@ import {
   BookingBreakdown,
   NamedLink,
   NamedRedirect,
-  PageLayout,
+  Page,
   ResponsiveImage,
 } from '../../components';
 import { StripePaymentForm } from '../../containers';
@@ -239,21 +239,21 @@ export class CheckoutPageComponent extends Component {
       </div>
     );
 
-    const pageLayoutProps = { authInfoError, logoutError, title };
+    const pageProps = { authInfoError, logoutError, title };
 
     if (isLoading) {
       return (
-        <PageLayout {...pageLayoutProps}>
+        <Page {...pageProps}>
           {topbar}
           <div className={css.loading}>
             <FormattedMessage id="CheckoutPage.loadingData" />
           </div>
-        </PageLayout>
+        </Page>
       );
     }
 
     return (
-      <PageLayout {...pageLayoutProps}>
+      <Page {...pageProps}>
         {topbar}
         <div className={css.contentContainer}>
           <div className={css.aspectWrapper}>
@@ -343,7 +343,7 @@ export class CheckoutPageComponent extends Component {
           </div>
 
         </div>
-      </PageLayout>
+      </Page>
     );
   }
 }

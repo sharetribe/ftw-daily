@@ -1,9 +1,19 @@
 exports[`SearchPageComponent matches snapshot 1`] = `
-<withRouter(PageLayout)
+<Page
   authInfoError={null}
+  description="SearchPage.schemaDescription"
   logoutError={null}
+  schema="
+          {
+            \"@context\": \"http://schema.org\",
+            \"@type\": \"SearchResultsPage\",
+            \"description\": \"SearchPage.schemaDescription\",
+            \"name\": \"SearchPage.schemaTitle\",
+            \"mainEntity\": [{\"@type\":\"ItemList\",\"itemListOrder\":\"http://schema.org/ItemListOrderAscending\",\"itemListElement\":[]}]
+          }
+        "
   scrollingDisabled={false}
-  title="Search page: listings">
+  title="SearchPage.schemaTitle">
   <Topbar
     authInProgress={false}
     currentUser={null}
@@ -92,5 +102,5 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       </div>
     </withViewport(ModalInMobileComponent)>
   </div>
-</withRouter(PageLayout)>
+</Page>
 `;

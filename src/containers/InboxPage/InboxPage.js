@@ -9,7 +9,7 @@ import {
   NamedLink,
   NamedRedirect,
   NotificationBadge,
-  PageLayout,
+  Page,
   PaginationLinks,
   TabNav,
   Topbar,
@@ -247,7 +247,7 @@ export const InboxPageComponent = props => {
   const nav = <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />;
 
   return (
-    <PageLayout
+    <Page
       authInfoError={authInfoError}
       logoutError={logoutError}
       title={title}
@@ -288,7 +288,7 @@ export const InboxPageComponent = props => {
           {pagingLinks}
         </div>
       </div>
-    </PageLayout>
+    </Page>
   );
 };
 

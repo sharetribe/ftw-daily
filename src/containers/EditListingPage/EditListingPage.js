@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
-import { EditListingWizard, NamedRedirect, PageLayout, Topbar } from '../../components';
+import { EditListingWizard, NamedRedirect, Page, Topbar } from '../../components';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
@@ -136,7 +136,7 @@ export const EditListingPageComponent = props => {
       : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
 
     return (
-      <PageLayout
+      <Page
         authInfoError={authInfoError}
         logoutError={logoutError}
         title={title}
@@ -187,7 +187,7 @@ export const EditListingPageComponent = props => {
           updatedTab={page.updatedTab}
           updateInProgress={page.updateInProgress || page.createListingInProgress}
         />
-      </PageLayout>
+      </Page>
     );
   } else {
     // If user has come to this page through a direct linkto edit existing listing,
@@ -195,7 +195,7 @@ export const EditListingPageComponent = props => {
     const loadingPageMsg = {
       id: 'EditListingPage.loadingListingData',
     };
-    return <PageLayout title={intl.formatMessage(loadingPageMsg)} />;
+    return <Page title={intl.formatMessage(loadingPageMsg)} />;
   }
 };
 

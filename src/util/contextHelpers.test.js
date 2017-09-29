@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { PageLayout, RoutesProvider } from '../components';
+import { Page, RoutesProvider } from '../components';
 import routesConfiguration from '../routesConfiguration';
 import { flattenRoutes } from './routes';
 import { renderDeep, renderShallow } from './test-helpers';

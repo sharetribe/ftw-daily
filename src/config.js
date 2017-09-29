@@ -181,6 +181,21 @@ const stripeSupportedCountries = [
   },
 ];
 
+// Canonical root url is needed in social media sharing and SEO optimization purposes.
+const canonicalRootURL = process.env.REACT_APP_CANONICAL_ROOT_URL || 'https://localhost:3000';
+
+// Site title is needed in meta tags (bots and social media sharing reads those)
+const siteTitle = 'Saunatime';
+
+// Twitter handle is needed in meta tags (twitter:site)
+const siteTwitterHandle = '@sharetribe';
+
+// Facebook counts shares with app or page associated by this id
+// Currently it is unset, but you can read more about fb:app_id from
+// https://developers.facebook.com/docs/sharing/webmasters#basic
+// You should create one to track social sharing in Facebook
+const facebookAppId = null;
+
 // NOTE: only expose configuration that should be visible in the
 // client side, don't add any server secrets in this file.
 const config = {
@@ -190,6 +205,10 @@ const config = {
   currency,
   currencyConfig,
   stripe: { publishableKey: stripePublishableKey, supportedCountries: stripeSupportedCountries },
+  canonicalRootURL,
+  siteTitle,
+  siteTwitterHandle,
+  facebookAppId,
 };
 
 export default config;

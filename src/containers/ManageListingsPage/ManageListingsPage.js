@@ -8,7 +8,7 @@ import { parse } from '../../util/urlHelpers';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { ManageListingCard, PageLayout, PaginationLinks, Topbar, UserNav } from '../../components';
+import { ManageListingCard, Page, PaginationLinks, Topbar, UserNav } from '../../components';
 
 import {
   closeListing,
@@ -113,7 +113,7 @@ export class ManageListingsPageComponent extends Component {
     const openingErrorListingId = !!openingListingError && openingListingError.listingId;
 
     return (
-      <PageLayout
+      <Page
         authInfoError={authInfoError}
         logoutError={logoutError}
         scrollingDisabled={scrollingDisabled}
@@ -160,7 +160,7 @@ export class ManageListingsPageComponent extends Component {
           {paginationLinks}
         </div>
 
-      </PageLayout>
+      </Page>
     );
   }
 }
@@ -237,7 +237,7 @@ const mapStateToProps = state => {
     closingListingError,
   } = state.ManageListingsPage;
   const listings = getListingsById(state, currentPageResultIds);
-  // PageLayout needs authInfoError and logoutError, Topbar needs isAuthenticated
+  // Page needs authInfoError and logoutError, Topbar needs isAuthenticated
   const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   // Topbar needs user info.
   const {

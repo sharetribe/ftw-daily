@@ -1,5 +1,5 @@
 exports[`CheckoutPage matches snapshot 1`] = `
-<withRouter(PageLayout)
+<Page
   authInfoError={null}
   logoutError={null}
   title="CheckoutPage.title">
@@ -156,5 +156,5 @@ exports[`CheckoutPage matches snapshot 1`] = `
       </h3>
     </div>
   </div>
-</withRouter(PageLayout)>
+</Page>
 `;
