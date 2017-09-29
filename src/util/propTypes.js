@@ -163,6 +163,22 @@ export const TX_TRANSITIONS = [
   TX_TRANSITION_MARK_DELIVERED,
 ];
 
+const txLastTransition = tx => {
+  return tx && tx.attributes && tx.attributes.lastTransition ? tx.attributes.lastTransition : null;
+};
+
+export const txIsPreauthorized = tx => txLastTransition(tx) === TX_TRANSITION_PREAUTHORIZE;
+
+export const txIsAccepted = tx => txLastTransition(tx) === TX_TRANSITION_ACCEPT;
+
+export const txIsRejected = tx => txLastTransition(tx) === TX_TRANSITION_REJECT;
+
+export const txIsAutorejected = tx => txLastTransition(tx) === TX_TRANSITION_AUTO_REJECT;
+
+export const txIsRejectedOrAutorejected = tx => txIsRejected(tx) || txIsAutorejected(tx);
+
+export const txIsDelivered = tx => txLastTransition(tx) === TX_TRANSITION_MARK_DELIVERED;
+
 // Denormalised transaction object
 export const transaction = shape({
   id: uuid.isRequired,
