@@ -278,7 +278,7 @@ export class ListingPageComponent extends Component {
         </div>
       : null;
 
-    const showClosedListingHelpText = currentListing.id && !currentListing.attributes.open;
+    const showClosedListingHelpText = currentListing.id && currentListing.attributes.closed;
     const bookingHeading = (
       <div className={css.bookingHeading}>
         <h2 className={css.bookingTitle}>
@@ -297,7 +297,7 @@ export class ListingPageComponent extends Component {
     );
 
     const handleBookingSubmit = values => {
-      const isClosed = !currentListing.attributes.open;
+      const isClosed = currentListing.attributes.closed;
       if (isOwnListing || isClosed) {
         window.scrollTo(0, 0);
       } else {
@@ -310,7 +310,7 @@ export class ListingPageComponent extends Component {
     const listingClasses = classNames(css.pageRoot);
 
     const handleBookButtonClick = () => {
-      const isClosed = !currentListing.attributes.open;
+      const isClosed = currentListing.attributes.closed;
       if (isOwnListing || isClosed) {
         window.scrollTo(0, 0);
       } else {
@@ -324,7 +324,7 @@ export class ListingPageComponent extends Component {
       ? <div onClick={e => e.stopPropagation()}>
           <ActionBar
             isOwnListing={isOwnListing}
-            isClosed={!currentListing.attributes.open}
+            isClosed={currentListing.attributes.closed}
             editParams={editParams}
           />
         </div>
@@ -430,7 +430,7 @@ export class ListingPageComponent extends Component {
               </div>
 
               {bookingHeading}
-              {currentListing.attributes.open
+              {!currentListing.attributes.closed
                 ? <BookingDatesForm
                     className={css.bookingForm}
                     onSubmit={handleBookingSubmit}
@@ -449,7 +449,7 @@ export class ListingPageComponent extends Component {
                 </div>
               </div>
 
-              {currentListing.attributes.open
+              {!currentListing.attributes.closed
                 ? <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
                     {bookBtnMessage}
                   </Button>
