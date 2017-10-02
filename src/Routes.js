@@ -53,7 +53,7 @@ class RouteComponentRenderer extends Component {
     const { component: RouteComponent, authPage = 'SignupPage' } = route;
     const canShow = canShowComponent(this.props);
     if (!canShow) {
-      staticContext.forbidden = true;
+      staticContext.unauthorized = true;
     }
     return canShow
       ? <RouteComponent

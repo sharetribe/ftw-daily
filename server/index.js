@@ -80,14 +80,18 @@ app.use(cookieParser());
 app.get('*', (req, res) => {
   const context = {};
 
+  // Get handle to tokenStore
+  // We check in unauthorized cases if requests have set tokens to cookies
+  const tokenStore = sharetribeSdk.tokenStore.expressCookieStore({
+    clientId: CLIENT_ID,
+    req,
+    res,
+  });
+
   const sdk = sharetribeSdk.createInstance({
     clientId: CLIENT_ID,
     baseUrl: BASE_URL,
-    tokenStore: sharetribeSdk.tokenStore.expressCookieStore({
-      clientId: CLIENT_ID,
-      req,
-      res,
-    }),
+    tokenStore,
     typeHandlers: [
       {
         type: sharetribeSdk.types.BigDecimal,
@@ -110,13 +114,22 @@ app.get('*', (req, res) => {
 
       console.log(`\nRender info:\n${JSON.stringify(debugData, null, '  ')}`);
 
-      if (context.forbidden) {
-        // Routes component injects the context.forbidden when the
+      if (context.unauthorized) {
+        // Routes component injects the context.unauthorized when the
         // user isn't logged in to view the page that requires
         // authentication.
-        //
-        // TODO: separate 401 and 403 cases when authorization is done
-        // as well.
+
+        const token = tokenStore.getToken();
+        const refreshTokenExists = !!token && !!token.refresh_token;
+
+        if (refreshTokenExists) {
+          // If refresh token exists, we assume that client can handle the situation
+          // TODO: improve by checking if the token is valid (needs an API call)
+          res.status(200).send(html);
+        } else {
+          res.status(401).send(html);
+        }
+      } else if (context.forbidden) {
         res.status(403).send(html);
       } else if (context.url) {
         // React Router injects the context.url if a redirect was rendered
