@@ -20,6 +20,7 @@
 import { PropTypes } from 'react';
 import Decimal from 'decimal.js';
 import { types as sdkTypes } from './sdkLoader';
+import { ensureTransaction } from './data';
 
 const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
 const { arrayOf, bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
@@ -163,9 +164,7 @@ export const TX_TRANSITIONS = [
   TX_TRANSITION_MARK_DELIVERED,
 ];
 
-const txLastTransition = tx => {
-  return tx && tx.attributes && tx.attributes.lastTransition ? tx.attributes.lastTransition : null;
-};
+const txLastTransition = tx => ensureTransaction(tx).attributes.lastTransition;
 
 export const txIsPreauthorized = tx => txLastTransition(tx) === TX_TRANSITION_PREAUTHORIZE;
 
