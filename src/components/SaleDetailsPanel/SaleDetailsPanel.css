@@ -20,9 +20,18 @@
   white-space: nowrap;
 }
 
-.aspectWrapperMobile,
-.aspectWrapperDesktop {
+.imageWrapperMobile {
+  /* Layout */
+  display: block;
+  width: 100%;
   position: relative;
+
+  @media (--viewportLarge) {
+    display: none;
+  }
+}
+
+.aspectWrapper {
   padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
   background-color: var(--matterColorNegative); /* Loading BG color */
 }
@@ -152,6 +161,13 @@
 
     width: 409px;
   }
+}
+
+.breakdownImageWrapper {
+  /* Layout */
+  display: block;
+  width: 100%;
+  position: relative;
 }
 
 .breakdownTitleMobile {

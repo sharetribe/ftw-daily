@@ -195,17 +195,19 @@ export const SaleDetailsPanelComponent = props => {
   return (
     <div className={classes}>
       <div className={css.container}>
-        <div className={css.aspectWrapperMobile}>
-          <ResponsiveImage
-            rootClassName={css.rootForImage}
-            alt={listingTitle}
-            image={firstImage}
-            nameSet={[
-              { name: 'landscape-crop', size: '400w' },
-              { name: 'landscape-crop2x', size: '800w' },
-            ]}
-            sizes="100vw"
-          />
+        <div className={css.imageWrapperMobile}>
+          <div className={css.aspectWrapper}>
+            <ResponsiveImage
+              rootClassName={css.rootForImage}
+              alt={listingTitle}
+              image={firstImage}
+              nameSet={[
+                { name: 'landscape-crop', size: '400w' },
+                { name: 'landscape-crop2x', size: '800w' },
+              ]}
+              sizes="100vw"
+            />
+          </div>
         </div>
         <div className={css.avatarWrapper}>
           <AvatarMedium user={currentCustomer} className={css.avatarMobile} />
@@ -229,17 +231,19 @@ export const SaleDetailsPanelComponent = props => {
           {bookingInfo}
         </div>
         <div className={css.breakdownContainerDesktop}>
-          <div className={css.aspectWrapperDesktop}>
-            <ResponsiveImage
-              rootClassName={css.rootForImage}
-              alt={listingTitle}
-              image={firstImage}
-              nameSet={[
-                { name: 'landscape-crop', size: '400w' },
-                { name: 'landscape-crop2x', size: '800w' },
-              ]}
-              sizes="100%"
-            />
+          <div className={css.breakdownImageWrapper}>
+            <div className={css.aspectWrapper}>
+              <ResponsiveImage
+                rootClassName={css.rootForImage}
+                alt={listingTitle}
+                image={firstImage}
+                nameSet={[
+                  { name: 'landscape-crop', size: '400w' },
+                  { name: 'landscape-crop2x', size: '800w' },
+                ]}
+                sizes="100%"
+              />
+            </div>
           </div>
           <h3 className={css.breakdownTitleDesktop}>
             <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
