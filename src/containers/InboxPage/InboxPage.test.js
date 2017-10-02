@@ -5,6 +5,7 @@ import { fakeIntl, createUser, createTransaction, createBooking } from '../../ut
 import { InboxPageComponent, InboxItem } from './InboxPage';
 import routesConfiguration from '../../routesConfiguration';
 import { flattenRoutes } from '../../util/routes';
+import { TX_TRANSITION_PREAUTHORIZE } from '../../util/propTypes';
 
 const noop = () => null;
 
@@ -39,14 +40,14 @@ describe('InboxPage', () => {
       transactions: [
         createTransaction({
           id: 'order-1',
-          state: 'state/preauthorized',
+          lastTransition: TX_TRANSITION_PREAUTHORIZE,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2017, 0, 15)),
           booking: booking1,
         }),
         createTransaction({
           id: 'order-2',
-          state: 'state/preauthorized',
+          lastTransition: TX_TRANSITION_PREAUTHORIZE,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
           booking: booking2,
@@ -86,14 +87,14 @@ describe('InboxPage', () => {
       transactions: [
         createTransaction({
           id: 'sale-1',
-          state: 'state/preauthorized',
+          lastTransition: TX_TRANSITION_PREAUTHORIZE,
           customer,
           lastTransitionedAt: new Date(Date.UTC(2017, 0, 15)),
           booking: booking1,
         }),
         createTransaction({
           id: 'sale-2',
-          state: 'state/preauthorized',
+          lastTransition: TX_TRANSITION_PREAUTHORIZE,
           customer,
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
           booking: booking2,

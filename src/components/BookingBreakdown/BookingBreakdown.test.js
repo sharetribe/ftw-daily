@@ -1,20 +1,12 @@
 import React from 'react';
 import Decimal from 'decimal.js';
-import { fakeIntl } from '../../util/test-data';
+import { fakeIntl, createBooking } from '../../util/test-data';
 import { renderDeep } from '../../util/test-helpers';
 import { types } from '../../util/sdkLoader';
 import * as propTypes from '../../util/propTypes';
 import { BookingBreakdownComponent } from './BookingBreakdown';
 
 const { UUID, Money } = types;
-
-const exampleBooking = attributes => {
-  return {
-    id: new UUID('example-booking'),
-    type: 'booking',
-    attributes,
-  };
-};
 
 const exampleTransaction = params => {
   const created = new Date(Date.UTC(2017, 1, 1));
@@ -25,7 +17,6 @@ const exampleTransaction = params => {
       createdAt: created,
       lastTransitionedAt: created,
       lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
-      state: propTypes.TX_STATE_PREAUTHORIZED,
 
       // payinTotal, payoutTotal, and lineItems required in params
       ...params,
@@ -50,7 +41,7 @@ describe('BookingBreakdown', () => {
             },
           ],
         })}
-        booking={exampleBooking({
+        booking={createBooking('example-booking', {
           start: new Date(Date.UTC(2017, 3, 14)),
           end: new Date(Date.UTC(2017, 3, 16)),
         })}
@@ -76,7 +67,7 @@ describe('BookingBreakdown', () => {
             },
           ],
         })}
-        booking={exampleBooking({
+        booking={createBooking('example-booking', {
           start: new Date(Date.UTC(2017, 3, 14)),
           end: new Date(Date.UTC(2017, 3, 16)),
         })}
@@ -107,7 +98,7 @@ describe('BookingBreakdown', () => {
             },
           ],
         })}
-        booking={exampleBooking({
+        booking={createBooking('example-booking', {
           start: new Date(Date.UTC(2017, 3, 14)),
           end: new Date(Date.UTC(2017, 3, 16)),
         })}

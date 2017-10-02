@@ -127,7 +127,6 @@ exports[`InboxPage matches snapshot 1`] = `
                     "amount": 900,
                     "currency": "USD",
                   },
-                  "state": "state/preauthorized",
                 },
                 "booking": Object {
                   "attributes": Object {
@@ -215,7 +214,6 @@ exports[`InboxPage matches snapshot 1`] = `
                     "amount": 900,
                     "currency": "USD",
                   },
-                  "state": "state/preauthorized",
                 },
                 "booking": Object {
                   "attributes": Object {
@@ -437,7 +435,6 @@ exports[`InboxPage matches snapshot 3`] = `
                     "amount": 900,
                     "currency": "USD",
                   },
-                  "state": "state/preauthorized",
                 },
                 "booking": Object {
                   "attributes": Object {
@@ -525,7 +522,6 @@ exports[`InboxPage matches snapshot 3`] = `
                     "amount": 900,
                     "currency": "USD",
                   },
-                  "state": "state/preauthorized",
                 },
                 "booking": Object {
                   "attributes": Object {

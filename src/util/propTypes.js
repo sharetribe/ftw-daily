@@ -20,6 +20,7 @@
 import { PropTypes } from 'react';
 import Decimal from 'decimal.js';
 import { types as sdkTypes } from './sdkLoader';
+import { ensureTransaction } from './data';
 
 const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
 const { arrayOf, bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
@@ -135,18 +136,6 @@ export const booking = shape({
   }),
 });
 
-export const TX_STATE_ACCEPTED = 'state/accepted';
-export const TX_STATE_REJECTED = 'state/rejected';
-export const TX_STATE_PREAUTHORIZED = 'state/preauthorized';
-export const TX_STATE_DELIVERED = 'state/delivered';
-
-export const TX_STATES = [
-  TX_STATE_ACCEPTED,
-  TX_STATE_REJECTED,
-  TX_STATE_PREAUTHORIZED,
-  TX_STATE_DELIVERED,
-];
-
 // When the customer requests a booking, a transaction is created. The
 // initial state is preauthorized that is transitioned with the
 // initial preauthorize transition. The customer can see this
@@ -175,6 +164,20 @@ export const TX_TRANSITIONS = [
   TX_TRANSITION_MARK_DELIVERED,
 ];
 
+const txLastTransition = tx => ensureTransaction(tx).attributes.lastTransition;
+
+export const txIsPreauthorized = tx => txLastTransition(tx) === TX_TRANSITION_PREAUTHORIZE;
+
+export const txIsAccepted = tx => txLastTransition(tx) === TX_TRANSITION_ACCEPT;
+
+export const txIsRejected = tx => txLastTransition(tx) === TX_TRANSITION_REJECT;
+
+export const txIsAutorejected = tx => txLastTransition(tx) === TX_TRANSITION_AUTO_REJECT;
+
+export const txIsRejectedOrAutorejected = tx => txIsRejected(tx) || txIsAutorejected(tx);
+
+export const txIsDelivered = tx => txLastTransition(tx) === TX_TRANSITION_MARK_DELIVERED;
+
 // Denormalised transaction object
 export const transaction = shape({
   id: uuid.isRequired,
@@ -183,7 +186,6 @@ export const transaction = shape({
     createdAt: instanceOf(Date).isRequired,
     lastTransitionedAt: instanceOf(Date).isRequired,
     lastTransition: oneOf(TX_TRANSITIONS).isRequired,
-    state: oneOf(TX_STATES).isRequired,
     payinTotal: money.isRequired,
     payoutTotal: money.isRequired,
     lineItems: arrayOf(

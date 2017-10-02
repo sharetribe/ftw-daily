@@ -50,7 +50,6 @@ describe('BookingDatesForm', () => {
     expect(booking.attributes.start).toEqual(startDate);
     expect(booking.attributes.end).toEqual(endDate);
     expect(transaction.attributes.lastTransition).toEqual(propTypes.TX_TRANSITION_PREAUTHORIZE);
-    expect(transaction.attributes.state).toEqual(propTypes.TX_STATE_PREAUTHORIZED);
     expect(transaction.attributes.payinTotal).toEqual(new Money(2198, 'USD'));
     expect(transaction.attributes.payoutTotal).toEqual(new Money(2198, 'USD'));
     expect(transaction.attributes.lineItems).toEqual([

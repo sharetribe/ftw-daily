@@ -89,7 +89,6 @@ export const createListing = (id, attributes = {}, includes = {}) => ({
 export const createTransaction = options => {
   const {
     id,
-    state = propTypes.TX_STATE_PREAUTHORIZED,
     lastTransition = propTypes.TX_TRANSITION_PREAUTHORIZE,
     total = new Money(1000, 'USD'),
     commission = new Money(100, 'USD'),
@@ -106,7 +105,6 @@ export const createTransaction = options => {
     attributes: {
       createdAt: new Date(Date.UTC(2017, 4, 1)),
       lastTransitionedAt,
-      state,
       lastTransition,
       payinTotal: total,
       payoutTotal: new Money(total.amount - commission.amount, total.currency),

@@ -111,9 +111,9 @@ export const BookingBreakdownComponent = props => {
   }
 
   let providerTotalMessageId = 'BookingBreakdown.providerTotalDefault';
-  if (transaction.attributes.state === propTypes.TX_STATE_DELIVERED) {
+  if (propTypes.txIsDelivered(transaction)) {
     providerTotalMessageId = 'BookingBreakdown.providerTotalDelivered';
-  } else if (transaction.attributes.state === propTypes.TX_STATE_REJECTED) {
+  } else if (propTypes.txIsRejectedOrAutorejected(transaction)) {
     providerTotalMessageId = 'BookingBreakdown.providerTotalRejected';
   }
 

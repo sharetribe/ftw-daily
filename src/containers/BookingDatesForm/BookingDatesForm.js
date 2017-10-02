@@ -40,7 +40,6 @@ const estimatedNightlyTransaction = (bookingStart, bookingEnd, unitPrice) => {
       createdAt: now,
       lastTransitionedAt: now,
       lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
-      state: propTypes.TX_STATE_PREAUTHORIZED,
       payinTotal: totalPrice,
       payoutTotal: totalPrice,
       lineItems: [
