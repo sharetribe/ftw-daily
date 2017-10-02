@@ -12,6 +12,7 @@ import UI from './UI.duck';
 import marketplaceData from './marketplaceData.duck';
 import user from './user.duck';
 import EmailVerification from './EmailVerification.duck';
+import log from './log.duck';
 
 export {
   form,
@@ -22,4 +23,5 @@ export {
   marketplaceData,
   user,
   EmailVerification,
+  log,
 };
