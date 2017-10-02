@@ -1,4 +1,5 @@
 import { updatedEntities, denormalisedEntities } from '../util/data';
+import { TX_TRANSITION_PREAUTHORIZE } from '../util/propTypes';
 
 // ================ Action types ================ //
 
@@ -298,14 +299,7 @@ export const fetchCurrentUserNotifications = () =>
 
     const apiQueryParams = {
       only: 'sale',
-
-      // TODO: Currently the API supports only filtering by tx
-      // state. However, the state will be removed and support for
-      // filtering by last transitions is added. The code below should
-      // be changed at that point.
-      states: ['state/preauthorized'],
-      // last_transitions: [TX_TRANSITION_PREAUTHORIZE],
-
+      last_transitions: [TX_TRANSITION_PREAUTHORIZE],
       page: 1,
       per_page: NOTIFICATION_PAGE_SIZE,
     };
