@@ -18,7 +18,17 @@ exports.loadData = function(requestUrl, sdk) {
     []
   );
 
-  return Promise.all(dataLoadingCalls).then(() => {
-    return store.getState();
-  });
+  return Promise.all(dataLoadingCalls)
+    .then(() => {
+      return store.getState();
+    })
+    .catch(e => {
+      // TODO: log error to Sentry
+      console.error(e);
+
+      // Call to loadData failed, let client handle the data loading errors.
+      // (It might be recoverable error like lost connection.)
+      // Return "empty" store.
+      return store.getState();
+    });
 };
