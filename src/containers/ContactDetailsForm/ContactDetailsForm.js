@@ -78,6 +78,10 @@ class ContactDetailsFormComponent extends Component {
       id: 'ContactDetailsForm.emailRequired',
     });
     const emailRequired = validators.required(emailRequiredMessage);
+    const emailInvalidMessage = intl.formatMessage({
+      id: 'ContactDetailsForm.emailInvalid',
+    });
+    const emailValid = validators.emailFormatValid(emailInvalidMessage);
 
     const tooManyVerificationRequests = isTooManyEmailVerificationRequestsError(
       sendVerificationEmailError
@@ -210,7 +214,7 @@ class ContactDetailsFormComponent extends Component {
             id={`${form}.email`}
             label={emailLabel}
             placeholder={emailPlaceholder}
-            validate={emailRequired}
+            validate={[emailRequired, emailValid]}
             customErrorText={emailTakenErrorText}
           />
           {emailVerifiedInfo}
