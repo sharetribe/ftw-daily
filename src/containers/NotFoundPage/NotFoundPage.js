@@ -3,11 +3,14 @@ import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { withFlattenedRoutes } from '../../util/contextHelpers';
+import { createResourceLocatorString } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { Page, Topbar } from '../../components';
+import { LocationSearchForm } from '../../containers';
 
 import css from './NotFoundPage.css';
 
@@ -37,12 +40,20 @@ export class NotFoundPageComponent extends Component {
       sendVerificationEmailInProgress,
       sendVerificationEmailError,
       onResendVerificationEmail,
+      flattenedRoutes,
       intl,
     } = this.props;
 
     const title = intl.formatMessage({
       id: 'NotFoundPage.title',
     });
+
+    const handleSearchSubmit = values => {
+      const { search, selectedPlace } = values.location;
+      const { origin, bounds, country } = selectedPlace;
+      const searchParams = { address: search, origin, bounds, country };
+      history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
+    };
 
     return (
       <Page authInfoError={authInfoError} logoutError={logoutError} title={title}>
@@ -62,9 +73,16 @@ export class NotFoundPageComponent extends Component {
           sendVerificationEmailError={sendVerificationEmailError}
         />
         <div className={css.root}>
-          <h1>
-            <FormattedMessage id="NotFoundPage.heading" />
-          </h1>
+          <div className={css.content}>
+            <div className={css.number}>404</div>
+            <h1 className={css.heading}>
+              <FormattedMessage id="NotFoundPage.heading" />
+            </h1>
+            <p className={css.description}>
+              <FormattedMessage id="NotFoundPage.description" />
+            </p>
+            <LocationSearchForm className={css.searchForm} onSubmit={handleSearchSubmit} />
+          </div>
         </div>
       </Page>
     );
@@ -81,7 +99,7 @@ NotFoundPageComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf, number, object, shape } = PropTypes;
+const { bool, func, instanceOf, number, object, shape, array } = PropTypes;
 
 NotFoundPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
@@ -109,6 +127,9 @@ NotFoundPageComponent.propTypes = {
     push: func.isRequired,
   }).isRequired,
   location: shape({ state: object }).isRequired,
+
+  // from withFlattenedRoutes
+  flattenedRoutes: array.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -145,8 +166,11 @@ const mapDispatchToProps = dispatch => ({
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
-const NotFoundPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(
-  NotFoundPageComponent
-);
+const NotFoundPage = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter,
+  injectIntl,
+  withFlattenedRoutes
+)(NotFoundPageComponent);
 
 export default NotFoundPage;

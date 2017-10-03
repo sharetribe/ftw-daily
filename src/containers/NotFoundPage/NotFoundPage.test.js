@@ -21,6 +21,7 @@ describe('NotFoundPageComponent', () => {
         sendVerificationEmailInProgress={false}
         onResendVerificationEmail={noop}
         intl={fakeIntl}
+        flattenedRoutes={[]}
       />
     );
     expect(tree).toMatchSnapshot();

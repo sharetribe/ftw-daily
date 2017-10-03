@@ -26,11 +26,23 @@ exports[`NotFoundPageComponent matches snapshot 1`] = `
     sendVerificationEmailError={null}
     sendVerificationEmailInProgress={false} />
   <div>
-    <h1>
-      <FormattedMessage
-        id="NotFoundPage.heading"
-        values={Object {}} />
-    </h1>
+    <div>
+      <div>
+        404
+      </div>
+      <h1>
+        <FormattedMessage
+          id="NotFoundPage.heading"
+          values={Object {}} />
+      </h1>
+      <p>
+        <FormattedMessage
+          id="NotFoundPage.description"
+          values={Object {}} />
+      </p>
+      <ReduxForm
+        onSubmit={[Function]} />
+    </div>
   </div>
 </Page>
 `;
