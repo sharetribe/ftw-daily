@@ -1,5 +1,6 @@
 const url = require('url');
 const { matchPathname, configureStore, routeConfiguration } = require('./importer');
+const log = require('./log');
 
 exports.loadData = function(requestUrl, sdk) {
   const { pathname, query } = url.parse(requestUrl);
@@ -23,8 +24,7 @@ exports.loadData = function(requestUrl, sdk) {
       return store.getState();
     })
     .catch(e => {
-      // TODO: log error to Sentry
-      console.error(e);
+      log.error(e, 'server-side-data-load-failed');
 
       // Call to loadData failed, let client handle the data loading errors.
       // (It might be recoverable error like lost connection.)
