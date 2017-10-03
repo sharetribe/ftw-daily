@@ -63,3 +63,7 @@ to deploy a feature branch, setup the `sharetribe-starter-app` Heroku
 app and push the feature branch:
 
     git push heroku my-feature-branch:master
+
+## Logging
+
+Starter App has Sentry integration in place as an example of using as external error logging service. For more information see the [logging documentation](docs/sentry.md).
