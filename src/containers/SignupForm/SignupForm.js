@@ -31,6 +31,10 @@ const SignupFormComponent = props => {
     id: 'SignupForm.emailRequired',
   });
   const emailRequired = validators.required(emailRequiredMessage);
+  const emailInvalidMessage = intl.formatMessage({
+    id: 'SignupForm.emailInvalid',
+  });
+  const emailValid = validators.emailFormatValid(emailInvalidMessage);
 
   // password
   const passwordLabel = intl.formatMessage({
@@ -106,7 +110,7 @@ const SignupFormComponent = props => {
           id={`${form}.email`}
           label={emailLabel}
           placeholder={emailPlaceholder}
-          validate={emailRequired}
+          validate={[emailRequired, emailValid]}
         />
         <div className={css.name}>
           <TextInputField
