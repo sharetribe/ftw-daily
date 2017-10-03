@@ -27,6 +27,7 @@ const Decimal = require('decimal.js');
 const auth = require('./auth');
 const renderer = require('./renderer');
 const dataLoader = require('./dataLoader');
+const fs = require('fs');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
 const dev = process.env.NODE_ENV !== 'production';
@@ -144,7 +145,8 @@ app.get('*', (req, res) => {
     })
     .catch(e => {
       console.error(e);
-      res.status(500).send(e.message);
+      const errorPage = fs.readFileSync(path.join(buildPath, '500.html'), 'utf-8');
+      res.status(500).send(errorPage);
     });
 });
 
