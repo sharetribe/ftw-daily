@@ -21,7 +21,7 @@ const IconSpinner = props => {
           calcMode="linear"
           values="0 15 15;180 15 15;720 15 15"
           keyTimes="0;0.5;1"
-          dur=".9"
+          dur="0.9s"
           begin="0s"
           repeatCount="indefinite"
         />
@@ -30,7 +30,7 @@ const IconSpinner = props => {
           calcMode="linear"
           values="9 56;46 14;9 56"
           keyTimes="0;0.5;1"
-          dur=".9"
+          dur="0.9s"
           begin="0s"
           repeatCount="indefinite"
         />
