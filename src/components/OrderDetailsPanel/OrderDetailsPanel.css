@@ -17,18 +17,19 @@
   }
 }
 
-/* Firefox doesn't support image aspect ratio inside flexbox */
-.aspectWrapper {
-  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
-  background-color: var(--matterColorNegative); /* Loading BG color */
+.imageWrapperMobile {
+  /* Layout */
+  display: block;
+  width: 100%;
+  position: relative;
 
   @media (--viewportLarge) {
     display: none;
   }
 }
 
-.breakdownAspectWrapper {
-  position: relative;
+/* Firefox doesn't support image aspect ratio inside flexbox */
+.aspectWrapper {
   padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
   background-color: var(--matterColorNegative); /* Loading BG color */
 }
@@ -126,6 +127,13 @@
     display: block;
     padding-bottom: 55px;
   }
+}
+
+.breakdownImageWrapper {
+  /* Layout */
+  display: block;
+  width: 100%;
+  position: relative;
 }
 
 .bookingBreakdownContainer {

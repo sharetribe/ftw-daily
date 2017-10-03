@@ -3,25 +3,27 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
   className="">
   <div>
     <div>
-      <ResponsiveImage
-        alt="listing1 title"
-        className={null}
-        image={null}
-        nameSet={
-          Array [
-            Object {
-              "name": "landscape-crop",
-              "size": "400w",
-            },
-            Object {
-              "name": "landscape-crop2x",
-              "size": "800w",
-            },
-          ]
-        }
-        noImageMessage={null}
-        rootClassName={null}
-        sizes="100vw" />
+      <div>
+        <ResponsiveImage
+          alt="listing1 title"
+          className={null}
+          image={null}
+          nameSet={
+            Array [
+              Object {
+                "name": "landscape-crop",
+                "size": "400w",
+              },
+              Object {
+                "name": "landscape-crop2x",
+                "size": "800w",
+              },
+            ]
+          }
+          noImageMessage={null}
+          rootClassName={null}
+          sizes="100vw" />
+      </div>
     </div>
     <div>
       <AvatarMedium
@@ -211,25 +213,27 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
     </div>
     <div>
       <div>
-        <ResponsiveImage
-          alt="listing1 title"
-          className={null}
-          image={null}
-          nameSet={
-            Array [
-              Object {
-                "name": "landscape-crop",
-                "size": "400w",
-              },
-              Object {
-                "name": "landscape-crop2x",
-                "size": "800w",
-              },
-            ]
-          }
-          noImageMessage={null}
-          rootClassName={null}
-          sizes="100%" />
+        <div>
+          <ResponsiveImage
+            alt="listing1 title"
+            className={null}
+            image={null}
+            nameSet={
+              Array [
+                Object {
+                  "name": "landscape-crop",
+                  "size": "400w",
+                },
+                Object {
+                  "name": "landscape-crop2x",
+                  "size": "800w",
+                },
+              ]
+            }
+            noImageMessage={null}
+            rootClassName={null}
+            sizes="100%" />
+        </div>
       </div>
       <h3>
         <FormattedMessage
@@ -353,25 +357,27 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
   className="">
   <div>
     <div>
-      <ResponsiveImage
-        alt="listing1 title"
-        className={null}
-        image={null}
-        nameSet={
-          Array [
-            Object {
-              "name": "landscape-crop",
-              "size": "400w",
-            },
-            Object {
-              "name": "landscape-crop2x",
-              "size": "800w",
-            },
-          ]
-        }
-        noImageMessage={null}
-        rootClassName={null}
-        sizes="100vw" />
+      <div>
+        <ResponsiveImage
+          alt="listing1 title"
+          className={null}
+          image={null}
+          nameSet={
+            Array [
+              Object {
+                "name": "landscape-crop",
+                "size": "400w",
+              },
+              Object {
+                "name": "landscape-crop2x",
+                "size": "800w",
+              },
+            ]
+          }
+          noImageMessage={null}
+          rootClassName={null}
+          sizes="100vw" />
+      </div>
     </div>
     <div>
       <AvatarMedium
@@ -561,25 +567,27 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
     </div>
     <div>
       <div>
-        <ResponsiveImage
-          alt="listing1 title"
-          className={null}
-          image={null}
-          nameSet={
-            Array [
-              Object {
-                "name": "landscape-crop",
-                "size": "400w",
-              },
-              Object {
-                "name": "landscape-crop2x",
-                "size": "800w",
-              },
-            ]
-          }
-          noImageMessage={null}
-          rootClassName={null}
-          sizes="100%" />
+        <div>
+          <ResponsiveImage
+            alt="listing1 title"
+            className={null}
+            image={null}
+            nameSet={
+              Array [
+                Object {
+                  "name": "landscape-crop",
+                  "size": "400w",
+                },
+                Object {
+                  "name": "landscape-crop2x",
+                  "size": "800w",
+                },
+              ]
+            }
+            noImageMessage={null}
+            rootClassName={null}
+            sizes="100%" />
+        </div>
       </div>
       <h3>
         <FormattedMessage
@@ -703,25 +711,27 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
   className="">
   <div>
     <div>
-      <ResponsiveImage
-        alt="listing1 title"
-        className={null}
-        image={null}
-        nameSet={
-          Array [
-            Object {
-              "name": "landscape-crop",
-              "size": "400w",
-            },
-            Object {
-              "name": "landscape-crop2x",
-              "size": "800w",
-            },
-          ]
-        }
-        noImageMessage={null}
-        rootClassName={null}
-        sizes="100vw" />
+      <div>
+        <ResponsiveImage
+          alt="listing1 title"
+          className={null}
+          image={null}
+          nameSet={
+            Array [
+              Object {
+                "name": "landscape-crop",
+                "size": "400w",
+              },
+              Object {
+                "name": "landscape-crop2x",
+                "size": "800w",
+              },
+            ]
+          }
+          noImageMessage={null}
+          rootClassName={null}
+          sizes="100vw" />
+      </div>
     </div>
     <div>
       <AvatarMedium
@@ -911,25 +921,27 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
     </div>
     <div>
       <div>
-        <ResponsiveImage
-          alt="listing1 title"
-          className={null}
-          image={null}
-          nameSet={
-            Array [
-              Object {
-                "name": "landscape-crop",
-                "size": "400w",
-              },
-              Object {
-                "name": "landscape-crop2x",
-                "size": "800w",
-              },
-            ]
-          }
-          noImageMessage={null}
-          rootClassName={null}
-          sizes="100%" />
+        <div>
+          <ResponsiveImage
+            alt="listing1 title"
+            className={null}
+            image={null}
+            nameSet={
+              Array [
+                Object {
+                  "name": "landscape-crop",
+                  "size": "400w",
+                },
+                Object {
+                  "name": "landscape-crop2x",
+                  "size": "800w",
+                },
+              ]
+            }
+            noImageMessage={null}
+            rootClassName={null}
+            sizes="100%" />
+        </div>
       </div>
       <h3>
         <FormattedMessage
@@ -1053,25 +1065,27 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
   className="">
   <div>
     <div>
-      <ResponsiveImage
-        alt="listing1 title"
-        className={null}
-        image={null}
-        nameSet={
-          Array [
-            Object {
-              "name": "landscape-crop",
-              "size": "400w",
-            },
-            Object {
-              "name": "landscape-crop2x",
-              "size": "800w",
-            },
-          ]
-        }
-        noImageMessage={null}
-        rootClassName={null}
-        sizes="100vw" />
+      <div>
+        <ResponsiveImage
+          alt="listing1 title"
+          className={null}
+          image={null}
+          nameSet={
+            Array [
+              Object {
+                "name": "landscape-crop",
+                "size": "400w",
+              },
+              Object {
+                "name": "landscape-crop2x",
+                "size": "800w",
+              },
+            ]
+          }
+          noImageMessage={null}
+          rootClassName={null}
+          sizes="100vw" />
+      </div>
     </div>
     <div>
       <AvatarMedium
@@ -1273,25 +1287,27 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
     </div>
     <div>
       <div>
-        <ResponsiveImage
-          alt="listing1 title"
-          className={null}
-          image={null}
-          nameSet={
-            Array [
-              Object {
-                "name": "landscape-crop",
-                "size": "400w",
-              },
-              Object {
-                "name": "landscape-crop2x",
-                "size": "800w",
-              },
-            ]
-          }
-          noImageMessage={null}
-          rootClassName={null}
-          sizes="100%" />
+        <div>
+          <ResponsiveImage
+            alt="listing1 title"
+            className={null}
+            image={null}
+            nameSet={
+              Array [
+                Object {
+                  "name": "landscape-crop",
+                  "size": "400w",
+                },
+                Object {
+                  "name": "landscape-crop2x",
+                  "size": "800w",
+                },
+              ]
+            }
+            noImageMessage={null}
+            rootClassName={null}
+            sizes="100%" />
+        </div>
       </div>
       <h3>
         <FormattedMessage
@@ -1415,25 +1431,27 @@ exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
   className="">
   <div>
     <div>
-      <ResponsiveImage
-        alt="listing1 title"
-        className={null}
-        image={null}
-        nameSet={
-          Array [
-            Object {
-              "name": "landscape-crop",
-              "size": "400w",
-            },
-            Object {
-              "name": "landscape-crop2x",
-              "size": "800w",
-            },
-          ]
-        }
-        noImageMessage={null}
-        rootClassName={null}
-        sizes="100vw" />
+      <div>
+        <ResponsiveImage
+          alt="listing1 title"
+          className={null}
+          image={null}
+          nameSet={
+            Array [
+              Object {
+                "name": "landscape-crop",
+                "size": "400w",
+              },
+              Object {
+                "name": "landscape-crop2x",
+                "size": "800w",
+              },
+            ]
+          }
+          noImageMessage={null}
+          rootClassName={null}
+          sizes="100vw" />
+      </div>
     </div>
     <div>
       <AvatarMedium
@@ -1623,25 +1641,27 @@ exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
     </div>
     <div>
       <div>
-        <ResponsiveImage
-          alt="listing1 title"
-          className={null}
-          image={null}
-          nameSet={
-            Array [
-              Object {
-                "name": "landscape-crop",
-                "size": "400w",
-              },
-              Object {
-                "name": "landscape-crop2x",
-                "size": "800w",
-              },
-            ]
-          }
-          noImageMessage={null}
-          rootClassName={null}
-          sizes="100%" />
+        <div>
+          <ResponsiveImage
+            alt="listing1 title"
+            className={null}
+            image={null}
+            nameSet={
+              Array [
+                Object {
+                  "name": "landscape-crop",
+                  "size": "400w",
+                },
+                Object {
+                  "name": "landscape-crop2x",
+                  "size": "800w",
+                },
+              ]
+            }
+            noImageMessage={null}
+            rootClassName={null}
+            sizes="100%" />
+        </div>
       </div>
       <h3>
         <FormattedMessage

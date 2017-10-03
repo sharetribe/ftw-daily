@@ -171,17 +171,19 @@ export const OrderDetailsPanelComponent = props => {
   return (
     <div className={classes}>
       <div className={css.container}>
-        <div className={css.aspectWrapper}>
-          <ResponsiveImage
-            rootClassName={css.rootForImage}
-            alt={listingTitle}
-            image={firstImage}
-            nameSet={[
-              { name: 'landscape-crop', size: '400w' },
-              { name: 'landscape-crop2x', size: '800w' },
-            ]}
-            sizes="100vw"
-          />
+        <div className={css.imageWrapperMobile}>
+          <div className={css.aspectWrapper}>
+            <ResponsiveImage
+              rootClassName={css.rootForImage}
+              alt={listingTitle}
+              image={firstImage}
+              nameSet={[
+                { name: 'landscape-crop', size: '400w' },
+                { name: 'landscape-crop2x', size: '800w' },
+              ]}
+              sizes="100vw"
+            />
+          </div>
         </div>
         <div className={classNames(css.avatarWrapper, css.avatarMobile)}>
           <AvatarMedium user={currentProvider} />
@@ -200,17 +202,19 @@ export const OrderDetailsPanelComponent = props => {
             {bookingInfo}
           </div>
           <div className={css.breakdownDesktop}>
-            <div className={css.breakdownAspectWrapper}>
-              <ResponsiveImage
-                rootClassName={css.rootForImage}
-                alt={listingTitle}
-                image={firstImage}
-                nameSet={[
-                  { name: 'landscape-crop', size: '400w' },
-                  { name: 'landscape-crop2x', size: '800w' },
-                ]}
-                sizes="100%"
-              />
+            <div className={css.breakdownImageWrapper}>
+              <div className={css.aspectWrapper}>
+                <ResponsiveImage
+                  rootClassName={css.rootForImage}
+                  alt={listingTitle}
+                  image={firstImage}
+                  nameSet={[
+                    { name: 'landscape-crop', size: '400w' },
+                    { name: 'landscape-crop2x', size: '800w' },
+                  ]}
+                  sizes="100%"
+                />
+              </div>
             </div>
             <div className={css.avatarWrapper}>
               <AvatarMedium user={currentProvider} />
