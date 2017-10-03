@@ -191,6 +191,7 @@
   "ListingPage.ownListing": "This is your own listing.",
   "ListingPage.perNight": "per night",
   "ListingPage.viewImagesButton": "View photos ({count})",
+  "LocationSearchForm.placeholder": "Search saunas…",
   "LoginForm.emailInvalid": "A valid email address is required",
   "LoginForm.emailLabel": "Email",
   "LoginForm.emailPlaceholder": "john.doe@example.com",
