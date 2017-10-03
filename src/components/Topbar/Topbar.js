@@ -9,7 +9,6 @@ import { withFlattenedRoutes, withViewport } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
-import { clearUserId } from '../../util/log';
 import {
   Button,
   IconEmailAttention,
@@ -145,9 +144,6 @@ class TopbarComponent extends Component {
       } else if (typeof window !== 'undefined') {
         window.location = path;
       }
-
-      // clear user id from logger
-      clearUserId();
 
       // TODO: show flash message
       console.log('logged out'); // eslint-disable-line

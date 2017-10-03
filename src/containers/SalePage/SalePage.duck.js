@@ -144,13 +144,13 @@ export const acceptSale = id =>
         return response;
       })
       .catch(e => {
+        dispatch(acceptSaleError(e));
         dispatch(
           logError(e, 'accept-sale-failed', {
             txId: id,
             transition: propTypes.TX_TRANSITION_ACCEPT,
           })
         );
-        dispatch(acceptSaleError(e));
         throw e;
       });
   };
@@ -171,13 +171,13 @@ export const rejectSale = id =>
         return response;
       })
       .catch(e => {
+        dispatch(rejectSaleError(e));
         dispatch(
           logError(e, 'redect-sale-failed', {
             txId: id,
             transition: propTypes.TX_TRANSITION_REJECT,
           })
         );
-        dispatch(rejectSaleError(e));
         throw e;
       });
   };

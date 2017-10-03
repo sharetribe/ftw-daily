@@ -119,8 +119,8 @@ export const initiateOrder = params =>
         return orderId;
       })
       .catch(e => {
-        dispatch(logError(e, 'initiate-order-failed'));
         dispatch(initiateOrderError(e));
+        dispatch(logError(e, 'initiate-order-failed'));
         throw e;
       });
   };

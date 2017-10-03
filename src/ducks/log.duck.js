@@ -1,6 +1,6 @@
 /**
- * A utility duck file that can be used to pass
- * error data to a logger.
+ * A utility duck file that allows logger to be
+ * used with Redux's `dispatch` function.
  */
 
 import * as log from '../util/log';
