@@ -280,7 +280,7 @@ export function requestCreateListing(data) {
         return response;
       })
       .catch(e => {
-        dispatch(logError(e, { listingData: cleanedData }));
+        dispatch(logError(e, 'create-listing-failed', { listingData: cleanedData }));
         return dispatch(createListingError(e));
       });
   };
@@ -319,7 +319,7 @@ export function requestUpdateListing(tab, data) {
         dispatch(updateListingSuccess(updateResponse));
       })
       .catch(e => {
-        dispatch(logError(e, { listingData: cleanedData }));
+        dispatch(logError(e, 'update-listing-failed', { listingData: cleanedData }));
         return dispatch(updateListingError(e));
       });
   };

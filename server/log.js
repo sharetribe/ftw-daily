@@ -62,11 +62,12 @@ exports.errorHandler = () => {
  * the error to `console.error`.
  *
  * @param {Error} e Error that occurred
+ * @param {String} code Error code
  * @param {Object} data Additional data to be sent to Sentry
  */
-exports.error = (e, data) => {
+exports.error = (e, code, data) => {
   if (SENTRY_DSN) {
-    Raven.captureException(e, { extra: data });
+    Raven.captureException(e, { tags: { code }, extra: data });
   } else {
     console.error(e);
   }

@@ -7,4 +7,4 @@ import * as log from '../util/log';
 
 // ================ Thunks ================ //
 
-export const logError = (error, data) => () => log.error(error, data);
+export const logError = (error, code, data) => () => log.error(error, code, data);

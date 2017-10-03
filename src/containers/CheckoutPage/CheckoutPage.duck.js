@@ -119,8 +119,8 @@ export const initiateOrder = params =>
         return orderId;
       })
       .catch(e => {
+        dispatch(logError(e, 'initiate-order-failed'));
         dispatch(initiateOrderError(e));
-        dispatch(logError(e));
         throw e;
       });
   };
@@ -163,7 +163,7 @@ export const speculateTransaction = (listingId, bookingStart, bookingEnd) =>
         dispatch(speculateTransactionSuccess(tx));
       })
       .catch(e => {
-        dispatch(logError(e));
+        dispatch(logError(e, 'speculate-transaction-failed'));
         return dispatch(speculateTransactionError(e));
       });
   };

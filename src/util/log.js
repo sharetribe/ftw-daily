@@ -48,11 +48,12 @@ export const clearUserId = () => {
  * prints the error to the console.
  *
  * @param {Error} e Error that occurred
+ * @param {String} code Error code
  * @param {Object} data Additional data to be sent to Sentry
  */
-export const error = (e, data) => {
+export const error = (e, code, data) => {
   if (Raven.isSetup()) {
-    Raven.captureException(e, { extra: data });
+    Raven.captureException(e, { tags: { code }, extra: data });
   } else {
     console.error(e); // eslint-disable-line
   }

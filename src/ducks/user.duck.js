@@ -2,6 +2,7 @@ import { authInfo } from './Auth.duck';
 import { updatedEntities, denormalisedEntities } from '../util/data';
 import { TX_TRANSITION_PREAUTHORIZE } from '../util/propTypes';
 import { setUserId } from '../util/log';
+import { logError } from './log.duck';
 
 // ================ Action types ================ //
 
@@ -378,6 +379,7 @@ export const createStripeAccount = payoutDetails =>
         dispatch(stripeAccountCreateSuccess(accountResponse));
       })
       .catch(e => {
+        dispatch(logError(e, 'create-stripe-account-failed'));
         dispatch(stripeAccountCreateError(e));
         throw e;
       });

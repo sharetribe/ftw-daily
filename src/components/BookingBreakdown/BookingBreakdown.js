@@ -8,7 +8,6 @@ import classNames from 'classnames';
 import { types } from '../../util/sdkLoader';
 import { formatMoney } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
-import * as log from '../../util/log';
 
 import css from './BookingBreakdown.css';
 
@@ -78,13 +77,9 @@ export const BookingBreakdownComponent = props => {
 
   if (isProvider) {
     if (!isValidCommission(providerCommissionLineItem)) {
-      const error = new Error(
-        'Commission should be present and the value should be zero or negative'
-      );
-      log.error(error, {
-        transactionId: transaction.id ? transaction.id.uuid : null,
-      });
-      throw error;
+      // eslint-disable-next-line no-console
+      console.error('invalid commission line item:', providerCommissionLineItem);
+      throw new Error('Commission should be present and the value should be zero or negative');
     }
 
     // The total sum that the customer pays is the payinTotal. We use

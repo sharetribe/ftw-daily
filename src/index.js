@@ -41,7 +41,7 @@ const render = store => {
       ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
     })
     .catch(e => {
-      log.error(e);
+      log.error(e, 'browser-side-render-failed');
     });
 };
 

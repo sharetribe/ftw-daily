@@ -154,7 +154,7 @@ app.get('*', (req, res) => {
       }
     })
     .catch(e => {
-      log.error(e);
+      log.error(e, 'server-side-render-failed');
       res.status(500).send(errorPage);
     });
 });

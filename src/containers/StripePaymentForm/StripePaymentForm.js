@@ -142,7 +142,10 @@ class StripePaymentForm extends Component {
         }
       })
       .catch(e => {
-        log.error(e, { stripeErrorType: e.type, stripeErrorCode: e.code });
+        log.error(e, 'stripe-payment-form-submit-failed', {
+          stripeErrorType: e.type,
+          stripeErrorCode: e.code,
+        });
 
         this.setState({
           submitting: false,

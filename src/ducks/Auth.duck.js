@@ -1,4 +1,5 @@
 import { clearCurrentUser, fetchCurrentUser } from './user.duck';
+import { logError } from './log.duck';
 
 const authenticated = authInfo => authInfo.grantType === 'refresh_token';
 
@@ -174,5 +175,8 @@ export const signup = params =>
       .create(params)
       .then(() => dispatch(signupSuccess()))
       .then(() => dispatch(login(email, password)))
-      .catch(e => dispatch(signupError(e)));
+      .catch(e => {
+        dispatch(logError(e, 'signup-failed'));
+        dispatch(signupError(e));
+      });
   };
