@@ -14,7 +14,7 @@ import config from '../config';
  * provided a Sentry client will be installed.
  */
 export const setup = () => {
-  if (config.sentryDsn !== undefined) {
+  if (config.sentryDsn) {
     // Configures the Sentry client. Adds a handler for
     // any uncaught exception.
     Raven.config(config.sentryDsn, { environment: config.env }).install();

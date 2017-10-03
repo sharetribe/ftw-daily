@@ -82,7 +82,11 @@ class CurrencyInputComponent extends Component {
         usesComma,
       };
     } catch (e) {
-      log.error(e, { props: props });
+      log.error(e, {
+        currencyConfig: currencyConfig,
+        defaultValue: defaultValue,
+        initialValue: initialValue,
+      });
       throw e;
     }
 
