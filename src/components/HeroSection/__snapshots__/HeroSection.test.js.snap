@@ -15,6 +15,7 @@ exports[`HeroSection matches snapshot 1`] = `
   </p>
   <button
     className=""
+    disabled={false}
     onClick={[Function]}>
     <svg
       className=""

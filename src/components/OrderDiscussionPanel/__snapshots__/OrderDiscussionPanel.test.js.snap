@@ -28,6 +28,7 @@ exports[`OrderDiscussionPanel matches snapshot 1`] = `
       value="" />
     <button
       className=""
+      disabled={false}
       type="submit">
       Send
     </button>

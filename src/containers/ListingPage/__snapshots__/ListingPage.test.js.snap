@@ -273,6 +273,7 @@ exports[`ListingPage matches snapshot 1`] = `
         </div>
         <Button
           className={null}
+          disabled={false}
           inProgress={false}
           onClick={[Function]}
           ready={false}

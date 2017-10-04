@@ -155,6 +155,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
           role="menuitem">
           <button
             className=""
+            disabled={false}
             onClick={[Function]}>
             <span
               className={undefined} />
