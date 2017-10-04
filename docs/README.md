@@ -6,3 +6,4 @@ Documentation for specific topics can be found in the following files:
 
  - Original [create-react-app documentation](create-react-app.md)
  - [Testing](testing.md)
+ - [Error logging with Sentry](sentry.md)

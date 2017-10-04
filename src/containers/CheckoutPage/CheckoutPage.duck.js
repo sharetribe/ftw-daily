@@ -1,6 +1,7 @@
 import { pick } from 'lodash';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
 import * as propTypes from '../../util/propTypes';
+import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
@@ -119,6 +120,11 @@ export const initiateOrder = params =>
       })
       .catch(e => {
         dispatch(initiateOrderError(e));
+        log.error(e, 'initiate-order-failed', {
+          listingId: params.listingId.uuid,
+          bookingStart: params.bookingStart,
+          bookingEnd: params.bookingEnd,
+        });
         throw e;
       });
   };
@@ -160,5 +166,12 @@ export const speculateTransaction = (listingId, bookingStart, bookingEnd) =>
         const tx = denormalised[0];
         dispatch(speculateTransactionSuccess(tx));
       })
-      .catch(e => dispatch(speculateTransactionError(e)));
+      .catch(e => {
+        log.error(e, 'speculate-transaction-failed', {
+          listingId: listingId.uuid,
+          bookingStart: bookingStart,
+          bookingEnd: bookingEnd,
+        });
+        return dispatch(speculateTransactionError(e));
+      });
   };

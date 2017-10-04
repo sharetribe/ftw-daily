@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { PrimaryButton } from '../../components';
+import * as log from '../../util/log';
 import config from '../../config';
 
 import css from './StripePaymentForm.css';
@@ -141,8 +142,11 @@ class StripePaymentForm extends Component {
         }
       })
       .catch(e => {
-        // eslint-disable-next-line no-console
-        console.error(e);
+        log.error(e, 'stripe-payment-form-submit-failed', {
+          stripeErrorType: e.type,
+          stripeErrorCode: e.code,
+        });
+
         this.setState({
           submitting: false,
           error: stripeErrorTranslation(intl, e),

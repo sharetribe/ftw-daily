@@ -1,6 +1,7 @@
 import { authInfo } from './Auth.duck';
 import { updatedEntities, denormalisedEntities } from '../util/data';
 import { TX_TRANSITION_PREAUTHORIZE } from '../util/propTypes';
+import * as log from '../util/log';
 
 // ================ Action types ================ //
 
@@ -337,6 +338,8 @@ export const fetchCurrentUser = () =>
         const entities = updatedEntities({}, response.data);
         const denormalised = denormalisedEntities(entities, 'current-user', [currentUserId]);
         const currentUser = denormalised[0];
+        // set current user id to the logger
+        log.setUserId(currentUser.id.uuid);
         dispatch(currentUserShowSuccess(currentUser));
         return currentUser;
       })
@@ -376,6 +379,7 @@ export const createStripeAccount = payoutDetails =>
       })
       .catch(e => {
         dispatch(stripeAccountCreateError(e));
+        log.error(e, 'create-stripe-account-failed');
         throw e;
       });
   };

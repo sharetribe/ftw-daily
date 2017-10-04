@@ -20,6 +20,7 @@ import {
   truncateToSubUnitPrecision,
 } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
+import * as log from '../../util/log';
 
 import css from './CurrencyInputField.css';
 
@@ -81,9 +82,11 @@ class CurrencyInputComponent extends Component {
         usesComma,
       };
     } catch (e) {
-      // Print error, if default value isn't supported (see specs: truncateToSubUnitPrecision).
-      // eslint-disable-next-line no-console
-      console.error('CurrencyInput:', e);
+      log.error(e, 'currency-input-init-failed', {
+        currencyConfig: currencyConfig,
+        defaultValue: defaultValue,
+        initialValue: initialValue,
+      });
       throw e;
     }
 

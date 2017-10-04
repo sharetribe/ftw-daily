@@ -28,6 +28,7 @@ const auth = require('./auth');
 const renderer = require('./renderer');
 const dataLoader = require('./dataLoader');
 const fs = require('fs');
+const log = require('./log');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
 const dev = process.env.NODE_ENV !== 'production';
@@ -40,6 +41,13 @@ const TRUST_PROXY = process.env.SERVER_SHARETRIBE_TRUST_PROXY || null;
 const app = express();
 
 const errorPage = fs.readFileSync(path.join(buildPath, '500.html'), 'utf-8');
+
+// Setup error logger
+log.setup();
+// Add logger request handler. In case Sentry is set up
+// request information is added to error context when sent
+// to Sentry.
+app.use(log.requestHandler());
 
 // The helmet middleware sets various HTTP headers to improve security.
 // See: https://www.npmjs.com/package/helmet
@@ -146,10 +154,14 @@ app.get('*', (req, res) => {
       }
     })
     .catch(e => {
-      console.error(e);
+      log.error(e, 'server-side-render-failed');
       res.status(500).send(errorPage);
     });
 });
+
+// Set error handler. If Sentry is set up, all error responses
+// will be logged there.
+app.use(log.errorHandler());
 
 app.listen(PORT, () => {
   const mode = dev ? 'development' : 'production';

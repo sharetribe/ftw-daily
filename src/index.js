@@ -23,6 +23,7 @@ import config from './config';
 import { authInfo } from './ducks/Auth.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
 import routeConfiguration from './routesConfiguration';
+import * as log from './util/log';
 
 import './marketplaceIndex.css';
 
@@ -40,7 +41,7 @@ const render = store => {
       ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
     })
     .catch(e => {
-      console.error(e); // eslint-disable-line
+      log.error(e, 'browser-side-render-failed');
     });
 };
 
@@ -54,6 +55,9 @@ const setupStripe = () => {
 
 // If we're in a browser already, render the client application.
 if (typeof window !== 'undefined') {
+  // set up logger with Sentry DSN client key and environment
+  log.setup();
+
   // eslint-disable-next-line no-underscore-dangle
   const preloadedState = window.__PRELOADED_STATE__ || '{}';
   const initialState = JSON.parse(preloadedState, types.reviver);

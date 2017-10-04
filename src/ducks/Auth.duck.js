@@ -1,4 +1,5 @@
 import { clearCurrentUser, fetchCurrentUser } from './user.duck';
+import * as log from '../util/log';
 
 const authenticated = authInfo => authInfo.grantType === 'refresh_token';
 
@@ -156,7 +157,10 @@ export const logout = () =>
       .logout()
       .then(() => dispatch(clearCurrentUser()))
       .then(() => dispatch(logoutSuccess()))
-      .then(() => dispatch(userLogout()))
+      .then(() => {
+        dispatch(userLogout());
+        log.clearUserId();
+      })
       .catch(e => dispatch(logoutError(e)));
   };
 
@@ -174,5 +178,12 @@ export const signup = params =>
       .create(params)
       .then(() => dispatch(signupSuccess()))
       .then(() => dispatch(login(email, password)))
-      .catch(e => dispatch(signupError(e)));
+      .catch(e => {
+        dispatch(signupError(e));
+        log.error(e, 'signup-failed', {
+          email: params.email,
+          firstName: params.firstName,
+          lastName: params.lastName,
+        });
+      });
   };
