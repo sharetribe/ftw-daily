@@ -40,6 +40,7 @@
   "CheckoutPage.errorlistingLinkText": "the sauna page",
   "CheckoutPage.goToLandingPage": "Go to homepage",
   "CheckoutPage.hostedBy": "Hosted by {name}",
+  "CheckoutPage.initiateOrderAmountTooLow": "Unfortunately we're not able to process this payment, since the payment amount is too low. Please contact the administrators.",
   "CheckoutPage.initiateOrderError": "Payment request failed. Please go back to {listingLink} and try again. If the error persists, try refreshing the page or contacting the marketplace admin.",
   "CheckoutPage.listingNotFoundError": "Unfortunately the listing is not available anymore.",
   "CheckoutPage.loadingData": "Loading checkout data...",

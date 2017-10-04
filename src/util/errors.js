@@ -10,6 +10,7 @@
  */
 
 const ERROR_CODE_TRANSITION_PARAMETER_VALIDATION_FAILED = 'transition-parameter-validation-failed';
+const ERROR_CODE_PAYMENT_FAILED = 'payment-failed';
 const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
 const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'too-many-verification-requests';
 const ERROR_CODE_UPLOAD_OVER_LIMIT = 'upload-over-limit';
@@ -93,6 +94,28 @@ export const isTransactionInitiateListingNotFoundError = apiError => {
     }
 
     return error.code === ERROR_CODE_TRANSITION_PARAMETER_VALIDATION_FAILED && notfound;
+  });
+};
+
+/**
+ * Check if the given API error (from `sdk.transaction.initiate()`) is
+ * due to the transaction total amount being too low for Stripe.
+ */
+export const isTransactionInitiateAmountTooLowError = apiError => {
+  return responseErrors(apiError).some(error => {
+    const isPaymentFailedError = error.status === 402 && error.code === ERROR_CODE_PAYMENT_FAILED;
+    let isAmountTooLow = false;
+
+    try {
+      // TODO: This is a temporary solution until a proper error code
+      // for this specific error is received in the response.
+      const msg = error.details.msg;
+      isAmountTooLow = msg.startsWith('Amount must be at least');
+    } catch (e) {
+      // Ignore
+    }
+
+    return isPaymentFailedError && isAmountTooLow;
   });
 };
 

@@ -74,7 +74,7 @@ export const storedData = storageKey => {
     // Dates are expected to be in format: { date: new Date(), _serializedType: 'SerializableDate' }
     const reviver = (k, v) => {
       // eslint-disable-next-line no-underscore-dangle
-      if (typeof v === 'object' && v._serializedType === 'SerializableDate') {
+      if (v && typeof v === 'object' && v._serializedType === 'SerializableDate') {
         return new Date(v.date);
       }
       return types.reviver(k, v);
