@@ -30,7 +30,7 @@ const LocationSearchFormComponent = props => {
       <Field
         name="location"
         label="Location"
-        placeholder={intl.formatMessage({ id: 'TopbarSearchForm.placeholder' })}
+        placeholder={intl.formatMessage({ id: 'LocationSearchForm.placeholder' })}
         format={null}
         component={LocationAutocompleteInput}
         iconClassName={css.searchInputIcon}
