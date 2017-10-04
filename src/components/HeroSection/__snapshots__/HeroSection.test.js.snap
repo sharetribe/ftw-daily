@@ -43,7 +43,9 @@ exports[`HeroSection matches snapshot 1`] = `
     </span>
   </button>
   <form
+    action="/"
     className=""
+    method="post"
     onSubmit={[Function]}>
     <div
       className="">

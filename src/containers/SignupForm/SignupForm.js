@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
-import { PrimaryButton, TextInputField } from '../../components';
+import { Form, PrimaryButton, TextInputField } from '../../components';
 import * as validators from '../../util/validators';
 
 import css from './SignupForm.css';
@@ -102,7 +102,7 @@ const SignupFormComponent = props => {
   const submitDisabled = invalid || submitInProgress;
 
   return (
-    <form className={classes} onSubmit={handleSubmit}>
+    <Form className={classes} onSubmit={handleSubmit}>
       <div>
         <TextInputField
           type="email"
@@ -154,7 +154,7 @@ const SignupFormComponent = props => {
         </PrimaryButton>
       </div>
 
-    </form>
+    </Form>
   );
 };
 

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import * as validators from '../../util/validators';
 import { ensureCurrentUser } from '../../util/data';
 import { isChangePasswordWrongPassword } from '../../util/errors';
-import { PrimaryButton, TextInputField } from '../../components';
+import { Form, PrimaryButton, TextInputField } from '../../components';
 
 import css from './PasswordChangeForm.css';
 
@@ -115,7 +115,7 @@ class PasswordChangeFormComponent extends Component {
     const submitDisabled = invalid || submitting || inProgress;
 
     return (
-      <form
+      <Form
         className={classes}
         onSubmit={values => {
           handleSubmit(values)
@@ -169,7 +169,7 @@ class PasswordChangeFormComponent extends Component {
             <FormattedMessage id="PasswordChangeForm.saveChanges" />
           </PrimaryButton>
         </div>
-      </form>
+      </Form>
     );
   }
 }

@@ -1,6 +1,8 @@
 exports[`SignupForm matches snapshot 1`] = `
 <form
+  action="/"
   className=""
+  method="post"
   onSubmit={[Function]}>
   <div>
     <div

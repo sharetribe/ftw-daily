@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { PrimaryButton } from '../../components';
+import { Form, PrimaryButton } from '../../components';
 import * as log from '../../util/log';
 import config from '../../config';
 
@@ -164,7 +164,7 @@ class StripePaymentForm extends Component {
     });
 
     return (
-      <form className={classes} onSubmit={this.handleSubmit}>
+      <Form className={classes} onSubmit={this.handleSubmit}>
         <label className={css.label} htmlFor={`${formId}-card`}>
           <FormattedMessage id="StripePaymentForm.creditCardDetails" />
         </label>
@@ -187,7 +187,7 @@ class StripePaymentForm extends Component {
             <FormattedMessage id="StripePaymentForm.submitPaymentInfo" />
           </PrimaryButton>
         </div>
-      </form>
+      </Form>
     );
   }
 }

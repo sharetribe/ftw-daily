@@ -1,5 +1,5 @@
 exports[`EditListingLocationForm matches snapshot 1`] = `
-<form
+<Form
   className=""
   onSubmit={[Function]}>
   <Component
@@ -29,5 +29,5 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
     type="submit">
     Save location
   </Button>
-</form>
+</Form>
 `;

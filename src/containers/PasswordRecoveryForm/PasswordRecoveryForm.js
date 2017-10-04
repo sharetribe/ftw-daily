@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
-import { PrimaryButton, TextInputField, NamedLink } from '../../components';
+import { Form, PrimaryButton, TextInputField, NamedLink } from '../../components';
 import * as validators from '../../util/validators';
 import { isPasswordRecoveryEmailNotFoundError } from '../../util/errors';
 
@@ -61,7 +61,7 @@ const PasswordRecoveryFormComponent = props => {
   );
 
   return (
-    <form className={classes} onSubmit={handleSubmit}>
+    <Form className={classes} onSubmit={handleSubmit}>
       <TextInputField
         className={css.email}
         type="email"
@@ -85,7 +85,7 @@ const PasswordRecoveryFormComponent = props => {
         </PrimaryButton>
       </div>
 
-    </form>
+    </Form>
   );
 };
 

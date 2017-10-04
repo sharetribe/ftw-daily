@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
-import { LocationAutocompleteInput } from '../../components';
+import { Form, LocationAutocompleteInput } from '../../components';
 
 import css from './LocationSearchForm.css';
 
@@ -26,7 +26,7 @@ const LocationSearchFormComponent = props => {
   const preventFormSubmit = e => e.preventDefault();
 
   return (
-    <form className={classes} onSubmit={preventFormSubmit}>
+    <Form className={classes} onSubmit={preventFormSubmit}>
       <Field
         name="location"
         label="Location"
@@ -38,7 +38,7 @@ const LocationSearchFormComponent = props => {
         predictionsClassName={css.searchPredictions}
         onChange={onChange}
       />
-    </form>
+    </Form>
   );
 };
 

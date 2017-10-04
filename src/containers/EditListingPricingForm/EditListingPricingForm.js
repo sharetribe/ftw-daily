@@ -5,7 +5,7 @@ import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import config from '../../config';
 import { required } from '../../util/validators';
-import { Button, CurrencyInputField } from '../../components';
+import { Form, Button, CurrencyInputField } from '../../components';
 
 import css from './EditListingPricingForm.css';
 
@@ -41,7 +41,7 @@ export const EditListingPricingFormComponent = props => {
   const submitDisabled = invalid || disabled || submitInProgress;
 
   return (
-    <form className={classes} onSubmit={handleSubmit}>
+    <Form className={classes} onSubmit={handleSubmit}>
       {errorMessage}
       <CurrencyInputField
         id="EditListingPricingForm.CurrencyInputField"
@@ -63,7 +63,7 @@ export const EditListingPricingFormComponent = props => {
       >
         {saveActionMsg}
       </Button>
-    </form>
+    </Form>
   );
 };
 

@@ -13,7 +13,9 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
       src="saunatime-logo.png" />
   </a>
   <form
+    action="/"
     className=""
+    method="post"
     onSubmit={[Function]}>
     <div
       className="">
