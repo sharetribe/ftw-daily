@@ -9,7 +9,10 @@ import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureUser, ensureTransaction, ensureBooking } from '../../util/data';
 import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { createSlug } from '../../util/urlHelpers';
-import { isTransactionInitiateListingNotFoundError } from '../../util/errors';
+import {
+  isTransactionInitiateAmountTooLowError,
+  isTransactionInitiateListingNotFoundError,
+} from '../../util/errors';
 import {
   AvatarMedium,
   BookingBreakdown,
@@ -212,11 +215,24 @@ export class CheckoutPageComponent extends Component {
         <FormattedMessage id="CheckoutPage.errorlistingLinkText" />
       </NamedLink>
     );
-    const initiateOrderErrorMessage = !listingNotFound && initiateOrderError
-      ? <p className={css.orderError}>
+
+    const isAmountTooLowError = isTransactionInitiateAmountTooLowError(initiateOrderError);
+    let initiateOrderErrorMessage = null;
+
+    if (!listingNotFound && isAmountTooLowError) {
+      initiateOrderErrorMessage = (
+        <p className={css.orderError}>
+          <FormattedMessage id="CheckoutPage.initiateOrderAmountTooLow" values={{ listingLink }} />
+        </p>
+      );
+    } else if (!listingNotFound && initiateOrderError) {
+      initiateOrderErrorMessage = (
+        <p className={css.orderError}>
           <FormattedMessage id="CheckoutPage.initiateOrderError" values={{ listingLink }} />
         </p>
-      : null;
+      );
+    }
+
     const speculateTransactionErrorMessage = speculateTransactionError
       ? <p className={css.speculateError}>
           <FormattedMessage id="CheckoutPage.speculateTransactionError" />
