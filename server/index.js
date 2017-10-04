@@ -39,6 +39,8 @@ const ENFORCE_SSL = process.env.SERVER_SHARETRIBE_ENFORCE_SSL === 'true';
 const TRUST_PROXY = process.env.SERVER_SHARETRIBE_TRUST_PROXY || null;
 const app = express();
 
+const errorPage = fs.readFileSync(path.join(buildPath, '500.html'), 'utf-8');
+
 // The helmet middleware sets various HTTP headers to improve security.
 // See: https://www.npmjs.com/package/helmet
 app.use(helmet());
@@ -145,7 +147,6 @@ app.get('*', (req, res) => {
     })
     .catch(e => {
       console.error(e);
-      const errorPage = fs.readFileSync(path.join(buildPath, '500.html'), 'utf-8');
       res.status(500).send(errorPage);
     });
 });
