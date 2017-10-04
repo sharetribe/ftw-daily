@@ -1,8 +1,8 @@
 import { types } from '../../util/sdkLoader';
 import * as propTypes from '../../util/propTypes';
+import * as log from '../../util/log';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
-import { logError } from '../../ducks/log.duck';
 
 // ================ Action types ================ //
 
@@ -145,12 +145,10 @@ export const acceptSale = id =>
       })
       .catch(e => {
         dispatch(acceptSaleError(e));
-        dispatch(
-          logError(e, 'accept-sale-failed', {
-            txId: id,
-            transition: propTypes.TX_TRANSITION_ACCEPT,
-          })
-        );
+        log.error(e, 'accept-sale-failed', {
+          txId: id,
+          transition: propTypes.TX_TRANSITION_ACCEPT,
+        });
         throw e;
       });
   };
@@ -172,12 +170,10 @@ export const rejectSale = id =>
       })
       .catch(e => {
         dispatch(rejectSaleError(e));
-        dispatch(
-          logError(e, 'redect-sale-failed', {
-            txId: id,
-            transition: propTypes.TX_TRANSITION_REJECT,
-          })
-        );
+        log.error(e, 'redect-sale-failed', {
+          txId: id,
+          transition: propTypes.TX_TRANSITION_REJECT,
+        });
         throw e;
       });
   };

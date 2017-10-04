@@ -1,7 +1,7 @@
 import { omit, omitBy, isUndefined } from 'lodash';
 import { types } from '../../util/sdkLoader';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
-import { logError } from '../../ducks/log.duck';
+import * as log from '../../util/log';
 import { fetchCurrentUserHasListingsSuccess } from '../../ducks/user.duck';
 
 const requestAction = actionType => params => ({ type: actionType, payload: { params } });
@@ -280,7 +280,7 @@ export function requestCreateListing(data) {
         return response;
       })
       .catch(e => {
-        dispatch(logError(e, 'create-listing-failed', { listingData: cleanedData }));
+        log.error(e, 'create-listing-failed', { listingData: cleanedData });
         return dispatch(createListingError(e));
       });
   };
@@ -319,7 +319,7 @@ export function requestUpdateListing(tab, data) {
         dispatch(updateListingSuccess(updateResponse));
       })
       .catch(e => {
-        dispatch(logError(e, 'update-listing-failed', { listingData: cleanedData }));
+        log.error(e, 'update-listing-failed', { listingData: cleanedData });
         return dispatch(updateListingError(e));
       });
   };
