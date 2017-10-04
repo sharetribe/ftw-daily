@@ -1,3 +1,4 @@
+import { authInfo } from './Auth.duck';
 import { updatedEntities, denormalisedEntities } from '../util/data';
 import { TX_TRANSITION_PREAUTHORIZE } from '../util/propTypes';
 
@@ -323,7 +324,8 @@ export const fetchCurrentUser = () =>
     const { isAuthenticated } = getState().Auth;
 
     if (!isAuthenticated) {
-      // Ignore when not logged in, current user should be null
+      // Make sure current user is null
+      dispatch(currentUserShowSuccess(null));
       return Promise.resolve({});
     }
 
@@ -344,8 +346,14 @@ export const fetchCurrentUser = () =>
         if (!currentUser.attributes.emailVerified) {
           dispatch(fetchCurrentUserHasOrders());
         }
+
+        // Make sure auth info is up to date
+        dispatch(authInfo());
       })
       .catch(e => {
+        // Make sure auth info is up to date
+        dispatch(authInfo());
+
         // TODO: dispatch flash message: "Something went wrong while retrieving user info"
         dispatch(currentUserShowError(e));
       });

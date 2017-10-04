@@ -1,4 +1,4 @@
-import { clearCurrentUser, currentUserShowRequest } from './user.duck';
+import { clearCurrentUser, currentUserShowRequest, currentUserShowSuccess } from './user.duck';
 import reducer, {
   authenticationInProgress,
   authInfoSuccess,
@@ -192,10 +192,10 @@ describe('Auth duck', () => {
 
   describe('login thunk', () => {
     it('should dispatch success and fetch current user', () => {
+      const initialState = reducer();
       const getState = () => ({ Auth: initialState });
       const sdk = { login: jest.fn(() => Promise.resolve({})) };
       const dispatch = createFakeDispatch(getState, sdk);
-      const initialState = reducer();
       const username = 'x.x@example.com';
       const password = 'pass';
 
@@ -205,6 +205,11 @@ describe('Auth duck', () => {
           loginRequest(),
           loginSuccess(),
           currentUserShowRequest(),
+
+          // Test restriction: Since the getState mock always returns
+          // the initial state, user isn't marked as logged in and
+          // current user is still null.
+          currentUserShowSuccess(null),
         ]);
       });
     });
@@ -355,6 +360,11 @@ describe('Auth duck', () => {
           loginRequest(),
           loginSuccess(),
           currentUserShowRequest(),
+
+          // Test restriction: Since the getState mock always returns
+          // the initial state, user isn't marked as logged in and
+          // current user is still null.
+          currentUserShowSuccess(null),
         ]);
       });
     });
