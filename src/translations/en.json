@@ -236,6 +236,8 @@
   "OrderDetailsPanel.orderAcceptedTitle": "Woohoo {customerName}!",
   "OrderDetailsPanel.orderAutoRejectedStatus": "The request expired on {transitionDate}. {providerName} never replied to the request.",
   "OrderDetailsPanel.orderAutoRejectedTitle": "You requested to book {listingLink}",
+  "OrderDetailsPanel.orderCanceledStatus": "The request was cancelled on {transitionDate}",
+  "OrderDetailsPanel.orderCanceledTitle": "You booked {listingLink}",
   "OrderDetailsPanel.orderDeliveredStatus": " ",
   "OrderDetailsPanel.orderDeliveredTitle": "Booking period has ended",
   "OrderDetailsPanel.orderPreauthorizedStatus": "{providerName} has been notified about the booking request, so sit back and relax.",
