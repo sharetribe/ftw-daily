@@ -27,6 +27,7 @@ const Decimal = require('decimal.js');
 const auth = require('./auth');
 const renderer = require('./renderer');
 const dataLoader = require('./dataLoader');
+const fs = require('fs');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
 const dev = process.env.NODE_ENV !== 'production';
@@ -37,6 +38,8 @@ const BASE_URL = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'http://localh
 const ENFORCE_SSL = process.env.SERVER_SHARETRIBE_ENFORCE_SSL === 'true';
 const TRUST_PROXY = process.env.SERVER_SHARETRIBE_TRUST_PROXY || null;
 const app = express();
+
+const errorPage = fs.readFileSync(path.join(buildPath, '500.html'), 'utf-8');
 
 // The helmet middleware sets various HTTP headers to improve security.
 // See: https://www.npmjs.com/package/helmet
@@ -144,7 +147,7 @@ app.get('*', (req, res) => {
     })
     .catch(e => {
       console.error(e);
-      res.status(500).send(e.message);
+      res.status(500).send(errorPage);
     });
 });
 

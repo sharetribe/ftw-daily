@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>500 Server error</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/static/favicon.ico">
+
+    <style>
+
+     /**
+      * The fonts included are copyrighted by the vendor listed below.
+      *
+      * Vendor:      Mostardesign
+      * License URL: https://www.fontspring.com/licenses/mostardesign/webfont
+      *
+      */
+      @font-face {
+          font-family: 'sofiapro';
+          src: url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2') format('woff2'),
+               url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff') format('woff');
+          font-weight: 500; /* Medium */
+          font-style: normal;
+      }
+
+      @font-face {
+          font-family: 'sofiapro';
+          src: url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-semibold-webfont.woff2') format('woff2'),
+               url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-semibold-webfont.woff') format('woff');
+          font-weight: 600; /* SemiBold */
+          font-style: normal;
+      }
+
+      @font-face {
+          font-family: 'sofiapro';
+          src: url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-bold-webfont.woff2') format('woff2'),
+               url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-bold-webfont.woff') format('woff');
+          font-weight: 700; /* Bold */
+          font-style: normal;
+      }
+
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
+        -moz-osx-font-smoothing: grayscale; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
+        text-rendering: optimizeSpeed;
+
+        background-color: var(--matterColorBright);
+      }
+
+      h1 {
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 36px;
+        letter-spacing: -0.5px;
+        color: #4A4A4A;
+        margin-top: 24px;
+        margin-bottom: 24px;
+      }
+
+      p {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: -0.11px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+      }
+
+      .content {
+        max-width: 709px;
+        margin: 16vw 24px;
+        text-align: center;
+      }
+
+      .errorCode {
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 54px;
+        letter-spacing: -1px;
+        color: #C0392B;
+        margin-top: 24px;
+        margin-bottom: 24px;
+      }
+
+      .buttonLink {
+        /* Dimensions */
+        display: block;
+        max-width: 360px;
+        min-height: 47px;
+        margin: 46px auto 0 auto;
+        padding: 18px 0 0 0;
+
+
+        /* Font */
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: -0.3px;
+
+        /* Borders */
+        border-radius: 2px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #E7E7E7;
+
+        /* Colors */
+        background-color: #FFFFFF;
+        color: #4A4A4A;
+
+        /* Text */
+        text-align: center;
+        text-decoration: none;
+
+        /* Effects */
+        transition: all ease-in-out 0.1s;
+        cursor: pointer;
+      }
+      .buttonLink:hover,
+      .buttonLink:focus {
+        outline: none;
+        text-decoration: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
+        border-color: #B2B2B2;
+      }
+
+      .fontsLoaded {
+        font-family: sofiapro, Helvetica, Arial, sans-serif;
+        opacity: 1;
+      }
+
+      @media (min-width: 768px) {
+        h1 {
+          font-weight: 600;
+          line-height: 40px;
+          letter-spacing: -0.9px;
+        }
+
+        p {
+          font-size: 20px;
+          line-height: 32px;
+          margin-top: 16px;
+          margin-bottom: 16px;
+        }
+
+        .content {
+          margin: 232px auto;
+        }
+
+        .errorCode {
+          font-size: 90px;
+          line-height: 96px;
+          letter-spacing: -2px;
+          margin-top: 32px;
+          margin-bottom: 32px;
+        }
+        .buttonLink {
+          margin: 66px auto 0 auto;
+        }
+      }
+    </style>
+
+  </head>
+  <body id="body">
+    <div class="content">
+      <div class="errorCode">500</div>
+      <h1>Sorry, it seems we did something wrong.</h1>
+      <p>It might have been just a temporary issue, try refreshing the page or redo the action you were trying to do. If the issue occurs again, please contact us.</p>
+      <a class="buttonLink" href="/">Go to homepage</a>
+    </div>
+
+    <script>
+      (function(document){
+        // Simple font loading tracker (FOUT) for browsers that support FontFaceSet.
+        // Browsers that don't support FontFaceSet, will show only system fonts
+        if (document.fonts) {
+
+          // Optimization for Repeated views - i.e. page refresh hits the same error
+          if (sessionStorage.fontsLoaded) {
+            document.getElementById("body").classList.add("fontsLoaded");
+            return;
+          }
+
+          var sofiaproMedium = new FontFace('sofiapro', 'url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2") format("woff2"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff") format("woff")', { style: 'normal', weight: '500' });
+          var sofiaproSemibold = new FontFace('sofiapro', 'url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-semibold-webfont.woff2") format("woff2"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-semibold-webfont.woff") format("woff")', { style: 'normal', weight: '600' });
+          var sofiaproBold = new FontFace('sofiapro', 'url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-bold-webfont.woff2") format("woff2"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-bold-webfont.woff") format("woff")', { style: 'normal', weight: '700' });
+
+          Promise.all([sofiaproMedium.load(), sofiaproSemibold.load(), sofiaproBold.load()])
+            .then(function(values) {
+              values.forEach(function(f) {
+                document.fonts.add(f);
+              });
+              document.getElementById("body").classList.add("fontsLoaded");
+
+              // Optimization for Repeat Views
+              sessionStorage.fontsLoaded = true;
+            });
+        }
+      })(document);
+    </script>
+  </body>
+</html>
