@@ -30,7 +30,7 @@ const callLoadData = props => {
         console.log(`loadData success for ${name} route`);
       })
       .catch(e => {
-        log.error(e, 'load-data-failed', { route: route });
+        log.error(e, 'load-data-failed', { routeName: name });
       });
   }
 };

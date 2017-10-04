@@ -180,6 +180,10 @@ export const signup = params =>
       .then(() => dispatch(login(email, password)))
       .catch(e => {
         dispatch(signupError(e));
-        log.error(e, 'signup-failed');
+        log.error(e, 'signup-failed', {
+          email: params.email,
+          firstName: params.firstName,
+          lastName: params.lastName,
+        });
       });
   };

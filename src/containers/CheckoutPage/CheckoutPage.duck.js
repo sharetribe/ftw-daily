@@ -120,7 +120,11 @@ export const initiateOrder = params =>
       })
       .catch(e => {
         dispatch(initiateOrderError(e));
-        log.error(e, 'initiate-order-failed');
+        log.error(e, 'initiate-order-failed', {
+          listingId: params.listingId.uuid,
+          bookingStart: params.bookingStart,
+          bookingEnd: params.bookingEnd,
+        });
         throw e;
       });
   };
@@ -163,7 +167,11 @@ export const speculateTransaction = (listingId, bookingStart, bookingEnd) =>
         dispatch(speculateTransactionSuccess(tx));
       })
       .catch(e => {
-        log.error(e, 'speculate-transaction-failed');
+        log.error(e, 'speculate-transaction-failed', {
+          listingId: listingId.uuid,
+          bookingStart: bookingStart,
+          bookingEnd: bookingEnd,
+        });
         return dispatch(speculateTransactionError(e));
       });
   };
