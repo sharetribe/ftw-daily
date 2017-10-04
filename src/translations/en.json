@@ -216,7 +216,7 @@
   "ManageListingsPage.noResults": "You don't have any listings.",
   "ManageListingsPage.profileSettings": "Profile settings",
   "ManageListingsPage.queryError": "Query failed. Please try again.",
-  "ManageListingsPage.youHaveListings": "You have {count} listings",
+  "ManageListingsPage.youHaveListings": "You have {count} {count, plural, one {listing} other {listings}}",
   "ManageListingsPage.yourListings": "Your listings",
   "MapPriceMarker.unsupportedPrice": "({currency})",
   "Modal.close": "CLOSE",
