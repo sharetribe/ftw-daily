@@ -17,6 +17,7 @@ import reducer, {
   signupError,
   userLogout,
 } from './Auth.duck';
+import * as log from '../util/log';
 
 // Create a dispatch function that correctly calls the thunk functions
 // with itself
@@ -381,6 +382,8 @@ describe('Auth duck', () => {
       const email = 'pekka@example.com';
       const password = 'some pass';
       const params = { email, password, firstName: 'Pekka', lastName: 'Pohjola' };
+      // disable error logging
+      log.error = jest.fn();
 
       return signup(params)(dispatch, getState, sdk).then(() => {
         expect(sdk.currentUser.create.mock.calls).toEqual([[params]]);
