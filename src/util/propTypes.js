@@ -152,6 +152,9 @@ export const TX_TRANSITION_REJECT = 'transition/reject';
 // transitioned with the auto-reject transition.
 export const TX_TRANSITION_AUTO_REJECT = 'transition/auto-reject';
 
+// Admin can also cancel the transition.
+export const TX_TRANSITION_CANCEL = 'transition/cancel';
+
 // If the is marked as delivered in the backend, it is transitioned
 // with the mark-delivered transition.
 export const TX_TRANSITION_MARK_DELIVERED = 'transition/mark-delivered';
@@ -161,6 +164,7 @@ export const TX_TRANSITIONS = [
   TX_TRANSITION_ACCEPT,
   TX_TRANSITION_REJECT,
   TX_TRANSITION_AUTO_REJECT,
+  TX_TRANSITION_CANCEL,
   TX_TRANSITION_MARK_DELIVERED,
 ];
 
@@ -175,6 +179,8 @@ export const txIsRejected = tx => txLastTransition(tx) === TX_TRANSITION_REJECT;
 export const txIsAutorejected = tx => txLastTransition(tx) === TX_TRANSITION_AUTO_REJECT;
 
 export const txIsRejectedOrAutorejected = tx => txIsRejected(tx) || txIsAutorejected(tx);
+
+export const txIsCanceled = tx => txLastTransition(tx) === TX_TRANSITION_CANCEL;
 
 export const txIsDelivered = tx => txLastTransition(tx) === TX_TRANSITION_MARK_DELIVERED;
 
