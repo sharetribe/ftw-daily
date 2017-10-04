@@ -25,6 +25,7 @@
   "BookingBreakdown.providerTotalDefault": "You'll make",
   "BookingBreakdown.providerTotalDelivered": "You made",
   "BookingBreakdown.providerTotalRejected": "You would have made",
+  "BookingBreakdown.providerTotalCanceled": "Total price",
   "BookingBreakdown.subTotal": "Subtotal",
   "BookingBreakdown.total": "Total price",
   "BookingDatesForm.bookingEndTitle": "End date",

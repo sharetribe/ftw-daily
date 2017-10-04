@@ -115,6 +115,8 @@ export const BookingBreakdownComponent = props => {
     providerTotalMessageId = 'BookingBreakdown.providerTotalDelivered';
   } else if (propTypes.txIsRejectedOrAutorejected(transaction)) {
     providerTotalMessageId = 'BookingBreakdown.providerTotalRejected';
+  } else if (propTypes.txIsCanceled(transaction)) {
+    providerTotalMessageId = 'BookingBreakdown.providerTotalCanceled';
   }
 
   const totalLabel = isProvider
