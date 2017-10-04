@@ -222,7 +222,7 @@ export class CheckoutPageComponent extends Component {
     if (!listingNotFound && isAmountTooLowError) {
       initiateOrderErrorMessage = (
         <p className={css.orderError}>
-          <FormattedMessage id="CheckoutPage.initiateOrderAmountTooLow" values={{ listingLink }} />
+          <FormattedMessage id="CheckoutPage.initiateOrderAmountTooLow" />
         </p>
       );
     } else if (!listingNotFound && initiateOrderError) {
