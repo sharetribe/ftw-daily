@@ -361,6 +361,8 @@
   font-weight: var(--fontWeightSemiBold);
   color: var(--successColor);
 }
+
+.stateCanceled,
 .stateDeclined,
 .stateDelivered {
   color: var(--matterColorAnti);
@@ -368,6 +370,7 @@
 
 .nameRequested,
 .nameDeclined,
+.nameCanceled,
 .nameAccepted,
 .nameDelivered {
   font-weight: var(--fontWeightMedium);
@@ -383,6 +386,7 @@
 }
 
 .bookingRequested,
+.bookingCanceled,
 .bookingDeclined,
 .bookingAccepted,
 .bookingDelivered {
@@ -395,6 +399,7 @@
   font-weight: var(--fontWeightMedium);
 }
 
+.lastTransitionedAtCanceled,
 .lastTransitionedAtAccepted,
 .lastTransitionedAtRejected,
 .lastTransitionedAtDelivered {
