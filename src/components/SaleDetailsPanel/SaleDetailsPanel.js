@@ -57,6 +57,13 @@ const saleTitle = (transaction, listingLink, customerName) => {
         values={{ customerName, listingLink }}
       />
     );
+  } else if (propTypes.txIsCanceled(transaction)) {
+    return (
+      <FormattedMessage
+        id="SaleDetailsPanel.listingCanceledTitle"
+        values={{ customerName, listingLink }}
+      />
+    );
   } else if (propTypes.txIsDelivered(transaction)) {
     return (
       <FormattedMessage
@@ -91,6 +98,8 @@ const saleMessage = (transaction, customerName) => {
     return (
       <FormattedMessage id="SaleDetailsPanel.saleAutoRejectedStatus" values={{ formattedDate }} />
     );
+  } else if (propTypes.txIsCanceled(transaction)) {
+    return <FormattedMessage id="SaleDetailsPanel.saleCanceledStatus" values={{ formattedDate }} />;
   } else if (propTypes.txIsDelivered(transaction)) {
     return (
       <FormattedMessage id="SaleDetailsPanel.saleDeliveredStatus" values={{ formattedDate }} />

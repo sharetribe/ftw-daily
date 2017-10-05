@@ -1,7 +1,7 @@
 import React from 'react';
 import { RoutesProvider } from '../../components';
 import { renderShallow, renderDeep } from '../../util/test-helpers';
-import { fakeIntl, createUser, createTransaction, createBooking } from '../../util/test-data';
+import { fakeIntl, createCurrentUser, createUser, createTransaction, createBooking } from '../../util/test-data';
 import { InboxPageComponent, InboxItem } from './InboxPage';
 import routesConfiguration from '../../routesConfiguration';
 import { flattenRoutes } from '../../util/routes';
@@ -14,6 +14,9 @@ describe('InboxPage', () => {
     const flattenedRoutes = flattenRoutes(routesConfiguration);
     const provider = createUser('provider-user-id');
     const customer = createUser('customer-user-id');
+    const currentUserProvider = createCurrentUser('provider-user-id');
+    const currentUserCustomer = createCurrentUser('customer-user-id');
+
     const booking1 = createBooking('booking1', {
       start: new Date(Date.UTC(2017, 1, 15)),
       end: new Date(Date.UTC(2017, 1, 16)),
@@ -32,6 +35,7 @@ describe('InboxPage', () => {
         tab: 'orders',
       },
       authInProgress: false,
+      currentUser: currentUserProvider,
       currentUserHasListings: false,
       isAuthenticated: false,
       fetchInProgress: false,
@@ -41,6 +45,7 @@ describe('InboxPage', () => {
         createTransaction({
           id: 'order-1',
           lastTransition: TX_TRANSITION_PREAUTHORIZE,
+          customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2017, 0, 15)),
           booking: booking1,
@@ -48,6 +53,7 @@ describe('InboxPage', () => {
         createTransaction({
           id: 'order-2',
           lastTransition: TX_TRANSITION_PREAUTHORIZE,
+          customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
           booking: booking2,
@@ -79,6 +85,7 @@ describe('InboxPage', () => {
         tab: 'sales',
       },
       authInProgress: false,
+      currentUser: currentUserCustomer,
       currentUserHasListings: false,
       isAuthenticated: false,
       fetchInProgress: false,
@@ -89,6 +96,7 @@ describe('InboxPage', () => {
           id: 'sale-1',
           lastTransition: TX_TRANSITION_PREAUTHORIZE,
           customer,
+          provider,
           lastTransitionedAt: new Date(Date.UTC(2017, 0, 15)),
           booking: booking1,
         }),
@@ -96,6 +104,7 @@ describe('InboxPage', () => {
           id: 'sale-2',
           lastTransition: TX_TRANSITION_PREAUTHORIZE,
           customer,
+          provider,
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
           booking: booking2,
         }),

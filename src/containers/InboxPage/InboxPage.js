@@ -59,6 +59,16 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateDeclined',
       }),
     };
+  } else if (propTypes.txIsCanceled(tx)) {
+    return {
+      nameClassName: css.nameCanceled,
+      bookingClassName: css.bookingCanceled,
+      lastTransitionedAtClassName: css.lastTransitionedAtCanceled,
+      stateClassName: css.stateCanceled,
+      state: intl.formatMessage({
+        id: 'InboxPage.stateCanceled',
+      }),
+    };
   } else if (propTypes.txIsDelivered(tx)) {
     return {
       nameClassName: css.nameDelivered,
@@ -210,7 +220,12 @@ export const InboxPageComponent = props => {
       </li>
     : null;
 
-  const hasTransactions = !fetchInProgress && transactions && transactions.length > 0;
+  const hasOrderOrSaleTransactions = (tx, isOrdersTab, user) => {
+    return isOrdersTab
+      ? tx && tx.length > 0 && tx[0].customer.id.uuid === user.id.uuid
+      : tx && tx.length > 0 && tx[0].provider.id.uuid === user.id.uuid;
+  }
+  const hasTransactions = !fetchInProgress && hasOrderOrSaleTransactions(transactions, isOrders, currentUser);
   const pagingLinks = hasTransactions && pagination && pagination.totalPages > 1
     ? <PaginationLinks
         className={css.pagination}
