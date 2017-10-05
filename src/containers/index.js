@@ -1,6 +1,5 @@
 import AuthenticationPage from './AuthenticationPage/AuthenticationPage';
 import BookingDatesForm from './BookingDatesForm/BookingDatesForm';
-import ChangeAccountPasswordForm from './ChangeAccountPasswordForm/ChangeAccountPasswordForm';
 import CheckoutPage from './CheckoutPage/CheckoutPage';
 import ContactDetailsForm from './ContactDetailsForm/ContactDetailsForm';
 import ContactDetailsPage from './ContactDetailsPage/ContactDetailsPage';
@@ -41,7 +40,6 @@ import TopbarSearchForm from './TopbarSearchForm/TopbarSearchForm';
 export {
   AuthenticationPage,
   BookingDatesForm,
-  ChangeAccountPasswordForm,
   CheckoutPage,
   ContactDetailsForm,
   ContactDetailsPage,
