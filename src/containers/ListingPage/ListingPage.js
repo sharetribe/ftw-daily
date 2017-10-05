@@ -11,7 +11,7 @@ import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import { ensureListing, ensureUser } from '../../util/data';
+import { ensureListing, ensureUser, parseAddress } from '../../util/data';
 import {
   AvatarLarge,
   AvatarMedium,
@@ -259,13 +259,7 @@ export class ListingPageComponent extends Component {
 
     // TODO location address is currently serialized inside address field (API will change later)
     // Content is something like { locationAddress: 'Street, Province, Country', building: 'A 42' };
-    let locationAddress = '';
-    try {
-      const deserializedAddress = JSON.parse(address || '{}');
-      locationAddress = deserializedAddress.locationAddress;
-    } catch (e) {
-      locationAddress = address;
-    }
+    const { locationAddress } = parseAddress(address);
 
     const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' });
     const { formattedPrice, priceTitle } = priceData(price, intl);
