@@ -99,10 +99,7 @@ const orderMessage = (transaction, listingTitle, providerName) => {
     );
   } else if (propTypes.txIsCanceled(transaction)) {
     return (
-      <FormattedMessage
-        id="OrderDetailsPanel.orderCanceledStatus"
-        values={{ transitionDate }}
-      />
+      <FormattedMessage id="OrderDetailsPanel.orderCanceledStatus" values={{ transitionDate }} />
     );
   } else if (propTypes.txIsDelivered(transaction)) {
     return (

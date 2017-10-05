@@ -224,8 +224,9 @@ export const InboxPageComponent = props => {
     return isOrdersTab
       ? tx && tx.length > 0 && tx[0].customer.id.uuid === user.id.uuid
       : tx && tx.length > 0 && tx[0].provider.id.uuid === user.id.uuid;
-  }
-  const hasTransactions = !fetchInProgress && hasOrderOrSaleTransactions(transactions, isOrders, currentUser);
+  };
+  const hasTransactions = !fetchInProgress &&
+    hasOrderOrSaleTransactions(transactions, isOrders, currentUser);
   const pagingLinks = hasTransactions && pagination && pagination.totalPages > 1
     ? <PaginationLinks
         className={css.pagination}

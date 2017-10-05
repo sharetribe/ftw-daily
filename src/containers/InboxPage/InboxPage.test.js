@@ -1,7 +1,13 @@
 import React from 'react';
 import { RoutesProvider } from '../../components';
 import { renderShallow, renderDeep } from '../../util/test-helpers';
-import { fakeIntl, createCurrentUser, createUser, createTransaction, createBooking } from '../../util/test-data';
+import {
+  fakeIntl,
+  createCurrentUser,
+  createUser,
+  createTransaction,
+  createBooking,
+} from '../../util/test-data';
 import { InboxPageComponent, InboxItem } from './InboxPage';
 import routesConfiguration from '../../routesConfiguration';
 import { flattenRoutes } from '../../util/routes';
