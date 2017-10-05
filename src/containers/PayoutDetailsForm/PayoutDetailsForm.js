@@ -17,6 +17,8 @@ import * as validators from '../../util/validators';
 
 import css from './PayoutDetailsForm.css';
 
+const MIN_STRIPE_ACCOUNT_AGE = 18;
+
 const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
 
 export const stripeCountryConfigs = countryCode => {
@@ -77,6 +79,17 @@ const PayoutDetailsFormComponent = props => {
     intl.formatMessage({
       id: 'PayoutDetailsForm.birthdayRequired',
     })
+  );
+  const birthdayMinAge = validators.ageAtLeast(
+    intl.formatMessage(
+      {
+        id: 'PayoutDetailsForm.birthdayMinAge',
+      },
+      {
+        minAge: MIN_STRIPE_ACCOUNT_AGE,
+      }
+    ),
+    MIN_STRIPE_ACCOUNT_AGE
   );
 
   const countryLabel = intl.formatMessage({ id: 'PayoutDetailsForm.countryLabel' });
@@ -218,7 +231,7 @@ const PayoutDetailsFormComponent = props => {
           labelForMonth={birthdayLabelMonth}
           labelForYear={birthdayLabelYear}
           format={null}
-          validate={birthdayRequired}
+          validate={[birthdayRequired, birthdayMinAge]}
         />
       </div>
 
