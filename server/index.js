@@ -89,6 +89,14 @@ app.use('/static', express.static(path.join(buildPath, 'static')));
 app.use(cookieParser());
 
 app.get('*', (req, res) => {
+  if (req.url.startsWith('/static/')) {
+    // The express.static middleware only handles static resources
+    // that it finds, otherwise passes them through. However, we don't
+    // want to render the app for missing static resources and can
+    // just return 404 right away.
+    return res.status(404).send('Static asset not found.');
+  }
+
   const context = {};
 
   // Get handle to tokenStore
