@@ -188,7 +188,7 @@ const stripeSupportedCountries = [
 ];
 
 // Canonical root url is needed in social media sharing and SEO optimization purposes.
-const canonicalRootURL = process.env.REACT_APP_CANONICAL_ROOT_URL || 'https://localhost:3000';
+const canonicalRootURL = process.env.REACT_APP_CANONICAL_ROOT_URL || 'http://localhost:3000';
 
 // Site title is needed in meta tags (bots and social media sharing reads those)
 const siteTitle = 'Saunatime';

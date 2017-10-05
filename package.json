@@ -57,7 +57,7 @@
     "test-ci": "sharetribe-scripts test --env=jsdom --runInBand",
     "eject": "sharetribe-scripts eject",
     "start": "node server/index.js",
-    "dev-server": "yarn run build&&nodemon --watch server server/index.js",
+    "dev-server": "REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000 yarn run build&&nodemon --watch server server/index.js",
     "heroku-prebuild": "./heroku-copy-ssh-key-from-env.sh",
     "heroku-postbuild": "yarn run build"
   },
