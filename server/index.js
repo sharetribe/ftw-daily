@@ -88,6 +88,10 @@ app.use(compression());
 app.use('/static', express.static(path.join(buildPath, 'static')));
 app.use(cookieParser());
 
+const noCacheHeaders = {
+  'Cache-control': 'no-cache, no-store, must-revalidate',
+};
+
 app.get('*', (req, res) => {
   if (req.url.startsWith('/static/')) {
     // The express.static middleware only handles static resources
@@ -120,6 +124,11 @@ app.get('*', (req, res) => {
       },
     ],
   });
+
+  // Until we have a better plan for caching dynamic content and we
+  // make sure that no sensitive data can appear in the prefetched
+  // data, let's disable response caching altogether.
+  res.set(noCacheHeaders);
 
   dataLoader
     .loadData(req.url, sdk)
