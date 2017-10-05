@@ -1,21 +1,26 @@
 @import '../../marketplace.css';
 
+/* 404 page */
+
 .root {
   /* Expand to the available space */
   flex-grow: 1;
 
   display: flex;
   flex-direction: column;
-  padding: 24px;
-
-  @media (--viewportMedium) {
-    align-items: center;
-    justify-content: center;
-  }
+  align-items: center;
 }
 
 .content {
   max-width: 587px;
+  width: 80%;
+  margin-top: 60px;
+  margin-bottom: 60px;
+
+  @media (--viewportMedium) {
+    margin-top: 10vh;
+  }
+
 }
 
 .number {
