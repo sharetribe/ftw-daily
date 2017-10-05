@@ -64,6 +64,7 @@ if (typeof window !== 'undefined') {
   const sdk = createInstance({
     clientId: config.sdk.clientId,
     baseUrl: config.sdk.baseUrl,
+    secure: config.usingSSL,
     typeHandlers: [
       {
         type: BigDecimal,

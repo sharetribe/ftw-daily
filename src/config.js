@@ -14,6 +14,9 @@ const currency = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY || 'USD';
 // Sentry DSN (Data Source Name), a client key for authenticating calls to Sentry
 const sentryDsn = process.env.REACT_APP_PUBLIC_SENTRY_DSN;
 
+// If webapp is using SSL (i.e. it's behind 'https' protocol)
+const usingSSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
+
 // Currency formatting options.
 // See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
 //
@@ -213,6 +216,7 @@ const config = {
   siteTwitterHandle,
   facebookAppId,
   sentryDsn,
+  usingSSL,
 };
 
 export default config;
