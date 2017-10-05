@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { types } from 'sharetribe-sdk';
 
 const { LatLng } = types;
@@ -67,4 +68,11 @@ const EMAIL_RE = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 export const emailFormatValid = message =>
   value => {
     return value && EMAIL_RE.test(value) ? VALID : message;
+  };
+
+export const ageAtLeast = (message, minYears) =>
+  value => {
+    const now = moment();
+    const ageInYears = now.diff(moment(value), 'years', true);
+    return value && value instanceof Date && ageInYears >= minYears ? VALID : message;
   };
