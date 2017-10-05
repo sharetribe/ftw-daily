@@ -59,7 +59,13 @@ export const isTooManyEmailVerificationRequestsError = apiError =>
 export const isUploadListingImageOverLimitError = apiError =>
   hasErrorWithCode(apiError, ERROR_CODE_UPLOAD_OVER_LIMIT);
 
-// TODO: avatar upload over limit
+/**
+ * Check if the given API error (from
+ * `sdk.images.uploadProfileImage()`) is due to the image being over
+ * the size limit.
+ */
+export const isUploadProfileImageOverLimitError = apiError =>
+  hasErrorWithCode(apiError, ERROR_CODE_UPLOAD_OVER_LIMIT);
 
 /**
  * Check if the given API error (from `sdk.passwordReset.request()`)

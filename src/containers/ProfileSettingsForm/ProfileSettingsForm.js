@@ -5,6 +5,7 @@ import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
 import { ensureCurrentUser } from '../../util/data';
 import * as validators from '../../util/validators';
+import { isUploadProfileImageOverLimitError } from '../../util/errors';
 import { Form, Avatar, Button, ImageFromFile, IconSpinner, TextInputField } from '../../components';
 
 import css from './ProfileSettingsForm.css';
@@ -15,11 +16,22 @@ const UPLOAD_CHANGE_DELAY = 2000; // Show spinner so that browser has time to lo
 const RenderAvatar = props => {
   const { accept, id, input, label, type, disabled, uploadImageError } = props;
   const { name, onChange } = input;
-  const error = uploadImageError
-    ? <div className={css.error}>
+
+  let error = null;
+
+  if (isUploadProfileImageOverLimitError(uploadImageError)) {
+    error = (
+      <div className={css.error}>
+        <FormattedMessage id="ProfileSettingsForm.imageUploadFailedFileTooLarge" />
+      </div>
+    );
+  } else if (uploadImageError) {
+    error = (
+      <div className={css.error}>
         <FormattedMessage id="ProfileSettingsForm.imageUploadFailed" />
       </div>
-    : null;
+    );
+  }
 
   return (
     <div className={css.uploadAvatarWrapper}>
