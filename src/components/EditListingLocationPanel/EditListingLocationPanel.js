@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
-import { ensureListing } from '../../util/data';
+import { ensureListing, parseAddress } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
 import { NamedLink } from '../../components';
 import { EditListingLocationForm } from '../../containers';
@@ -47,15 +47,7 @@ const EditListingLocationPanel = props => {
 
   // TODO location address is currently serialized inside address field (API will change later)
   // Content is something like { locationAddress: 'Street, Province, Country', building: 'A 42' };
-  let locationAddress = '';
-  let building = '';
-  try {
-    const deserializedAddress = JSON.parse(address || '{}');
-    locationAddress = deserializedAddress.locationAddress;
-    building = deserializedAddress.building;
-  } catch (e) {
-    locationAddress = address;
-  }
+  const { locationAddress, building } = parseAddress(address);
 
   const initialSearchFormValues = {
     building,
