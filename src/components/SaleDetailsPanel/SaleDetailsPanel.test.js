@@ -47,6 +47,12 @@ const txAutoRejected = createTransaction({
   ...baseTxAttrs,
 });
 
+const txCanceled = createTransaction({
+  id: 'sale-canceled',
+  lastTransition: propTypes.TX_TRANSITION_CANCELED,
+  ...baseTxAttrs,
+});
+
 const txDelivered = createTransaction({
   id: 'sale-delivered',
   lastTransition: propTypes.TX_TRANSITION_MARK_DELIVERED,
@@ -93,6 +99,18 @@ describe('SaleDetailsPanel', () => {
   it('autorejected matches snapshot', () => {
     const props = {
       transaction: txAutoRejected,
+      onAcceptSale: noop,
+      onRejectSale: noop,
+      acceptInProgress: false,
+      rejectInProgress: false,
+      intl: fakeIntl,
+    };
+    const tree = renderShallow(<SaleDetailsPanelComponent {...props} />);
+    expect(tree).toMatchSnapshot();
+  });
+  it('canceled matches snapshot', () => {
+    const props = {
+      transaction: txCanceled,
       onAcceptSale: noop,
       onRejectSale: noop,
       acceptInProgress: false,
