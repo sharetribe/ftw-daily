@@ -10,7 +10,7 @@ import {
   isChangeEmailWrongPassword,
   isTooManyEmailVerificationRequestsError,
 } from '../../util/errors';
-import { PrimaryButton, TextInputField } from '../../components';
+import { Form, PrimaryButton, TextInputField } from '../../components';
 
 import css from './ContactDetailsForm.css';
 
@@ -206,7 +206,7 @@ class ContactDetailsFormComponent extends Component {
     const submitDisabled = invalid || submitting || inProgress;
 
     return (
-      <form className={classes} onSubmit={handleSubmit}>
+      <Form className={classes} onSubmit={handleSubmit}>
         <div className={css.emailSection}>
           <TextInputField
             type="email"
@@ -251,7 +251,7 @@ class ContactDetailsFormComponent extends Component {
             <FormattedMessage id="ContactDetailsForm.saveChanges" />
           </PrimaryButton>
         </div>
-      </form>
+      </Form>
     );
   }
 }

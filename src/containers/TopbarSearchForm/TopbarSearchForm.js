@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
-import { LocationAutocompleteInput } from '../../components';
+import { Form, LocationAutocompleteInput } from '../../components';
 
 import css from './TopbarSearchForm.css';
 
@@ -27,7 +27,7 @@ const TopbarSearchFormComponent = props => {
   const preventFormSubmit = e => e.preventDefault();
 
   return (
-    <form className={classes} onSubmit={preventFormSubmit}>
+    <Form className={classes} onSubmit={preventFormSubmit}>
       <Field
         name="location"
         label="Location"
@@ -41,7 +41,7 @@ const TopbarSearchFormComponent = props => {
         closeOnBlur={!isMobile}
         onChange={onChange}
       />
-    </form>
+    </Form>
   );
 };
 

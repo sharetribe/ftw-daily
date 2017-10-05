@@ -5,7 +5,7 @@ import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
 import { ensureCurrentUser } from '../../util/data';
 import * as validators from '../../util/validators';
-import { Avatar, Button, ImageFromFile, IconSpinner, TextInputField } from '../../components';
+import { Form, Avatar, Button, ImageFromFile, IconSpinner, TextInputField } from '../../components';
 
 import css from './ProfileSettingsForm.css';
 
@@ -193,7 +193,7 @@ class ProfileSettingsFormComponent extends Component {
     const submitDisabled = invalid || pristine || uploadInProgress || submitInProgress;
 
     return (
-      <form className={classes} onSubmit={handleSubmit}>
+      <Form className={classes} onSubmit={handleSubmit}>
         <div className={css.sectionContainer}>
           <h3 className={css.sectionTitle}>
             <FormattedMessage id="ProfileSettingsForm.yourProfilePicture" />
@@ -247,7 +247,7 @@ class ProfileSettingsFormComponent extends Component {
         >
           <FormattedMessage id="ProfileSettingsForm.saveChanges" />
         </Button>
-      </form>
+      </Form>
     );
   }
 }

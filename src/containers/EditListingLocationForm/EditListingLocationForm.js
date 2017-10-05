@@ -6,7 +6,7 @@ import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../util/validators';
-import { LocationAutocompleteInputField, Button, TextInputField } from '../../components';
+import { Form, LocationAutocompleteInputField, Button, TextInputField } from '../../components';
 
 import css from './EditListingLocationForm.css';
 
@@ -53,7 +53,7 @@ export const EditListingLocationFormComponent = props => {
   const submitDisabled = invalid || disabled || submitInProgress;
 
   return (
-    <form className={classes} onSubmit={handleSubmit}>
+    <Form className={classes} onSubmit={handleSubmit}>
       {errorMessage}
       <LocationAutocompleteInputField
         inputClassName={css.locationAutocompleteInput}
@@ -89,7 +89,7 @@ export const EditListingLocationFormComponent = props => {
       >
         {saveActionMsg}
       </Button>
-    </form>
+    </Form>
   );
 };
 

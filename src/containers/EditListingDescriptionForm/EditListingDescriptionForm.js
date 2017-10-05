@@ -4,7 +4,7 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { maxLength, required } from '../../util/validators';
-import { Button, TextInputField } from '../../components';
+import { Form, Button, TextInputField } from '../../components';
 
 import css from './EditListingDescriptionForm.css';
 
@@ -60,7 +60,7 @@ const EditListingDescriptionFormComponent = props => {
   const submitDisabled = invalid || disabled || submitInProgress;
 
   return (
-    <form className={classes} onSubmit={handleSubmit}>
+    <Form className={classes} onSubmit={handleSubmit}>
       {errorMessage}
       <TextInputField
         type="text"
@@ -92,7 +92,7 @@ const EditListingDescriptionFormComponent = props => {
       >
         {saveActionMsg}
       </Button>
-    </form>
+    </Form>
   );
 };
 

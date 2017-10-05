@@ -7,7 +7,7 @@ import { arrayMove } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { noEmptyArray } from '../../util/validators';
 import { isUploadListingImageOverLimitError } from '../../util/errors';
-import { AddImages, Button, ValidationError } from '../../components';
+import { Form, AddImages, Button, ValidationError } from '../../components';
 
 import css from './EditListingPhotosForm.css';
 
@@ -157,7 +157,7 @@ export class EditListingPhotosFormComponent extends Component {
       ready;
 
     return (
-      <form className={classes} onSubmit={handleSubmit}>
+      <Form className={classes} onSubmit={handleSubmit}>
         {errorMessage}
         <AddImages
           className={css.imagesField}
@@ -210,7 +210,7 @@ export class EditListingPhotosFormComponent extends Component {
         >
           {saveActionMsg}
         </Button>
-      </form>
+      </Form>
     );
   }
 }

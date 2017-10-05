@@ -12,7 +12,7 @@ import { nightsBetween } from '../../util/dates';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
 import config from '../../config';
-import { PrimaryButton, BookingBreakdown, DateRangeInputField } from '../../components';
+import { Form, PrimaryButton, BookingBreakdown, DateRangeInputField } from '../../components';
 
 import css from './BookingDatesForm.css';
 
@@ -150,7 +150,7 @@ export const BookingDatesFormComponent = props => {
   const endDatePlaceholderText = endDatePlaceholder || intl.formatDate(tomorrow, dateFormatOptions);
 
   return (
-    <form className={className} onSubmit={handleSubmit}>
+    <Form className={className} onSubmit={handleSubmit}>
       <DateRangeInputField
         className={css.bookingDates}
         name="bookingDates"
@@ -178,7 +178,7 @@ export const BookingDatesFormComponent = props => {
       <PrimaryButton className={css.submitButton} type="submit" disabled={submitDisabled}>
         <FormattedMessage id="BookingDatesForm.requestToBook" />
       </PrimaryButton>
-    </form>
+    </Form>
   );
 };
 

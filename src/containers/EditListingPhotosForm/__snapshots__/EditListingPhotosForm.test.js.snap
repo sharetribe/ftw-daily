@@ -1,5 +1,5 @@
 exports[`EditListingPhotosForm matches snapshot 1`] = `
-<form
+<Form
   className=""
   onSubmit={[Function]}>
   <AddImages
@@ -55,5 +55,5 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
     type="submit">
     Save photos
   </Button>
-</form>
+</Form>
 `;

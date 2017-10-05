@@ -1,5 +1,5 @@
 exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
-<form
+<Form
   className={null}
   onSubmit={[Function]}>
   <DateRangeInputField
@@ -30,5 +30,5 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
       id="BookingDatesForm.requestToBook"
       values={Object {}} />
   </PrimaryButton>
-</form>
+</Form>
 `;

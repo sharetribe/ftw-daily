@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
-import { PrimaryButton, TextInputField } from '../../components';
+import { Form, PrimaryButton, TextInputField } from '../../components';
 import * as validators from '../../util/validators';
 
 import css from './PasswordResetForm.css';
@@ -62,7 +62,7 @@ const PasswordResetFormComponent = props => {
   const submitDisabled = invalid || submitInProgress;
 
   return (
-    <form className={classes} onSubmit={handleSubmit}>
+    <Form className={classes} onSubmit={handleSubmit}>
       <TextInputField
         className={css.password}
         type="password"
@@ -75,7 +75,7 @@ const PasswordResetFormComponent = props => {
       <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
         <FormattedMessage id="PasswordResetForm.submitButtonText" />
       </PrimaryButton>
-    </form>
+    </Form>
   );
 };
 

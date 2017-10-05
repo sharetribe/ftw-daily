@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
-import { PrimaryButton, TextInputField, NamedLink } from '../../components';
+import { Form, PrimaryButton, TextInputField, NamedLink } from '../../components';
 import * as validators from '../../util/validators';
 
 import css from './LoginForm.css';
@@ -59,7 +59,7 @@ const LoginFormComponent = props => {
   );
 
   return (
-    <form className={classes} onSubmit={handleSubmit}>
+    <Form className={classes} onSubmit={handleSubmit}>
 
       <div>
         <TextInputField
@@ -95,7 +95,7 @@ const LoginFormComponent = props => {
           <FormattedMessage id="LoginForm.logIn" />
         </PrimaryButton>
       </div>
-    </form>
+    </Form>
   );
 };
 
