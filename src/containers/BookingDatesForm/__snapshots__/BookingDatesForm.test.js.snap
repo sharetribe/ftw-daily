@@ -6,8 +6,10 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
     endDateId="fakeTestForm.bookingEndDate"
     endDateLabel="BookingDatesForm.bookingEndTitle"
     endDatePlaceholderText="tomorrow"
+    focusedInput={null}
     format={null}
     name="bookingDates"
+    onFocusedInputChange={[Function]}
     startDateId="fakeTestForm.bookingStartDate"
     startDateLabel="BookingDatesForm.bookingStartTitle"
     startDatePlaceholderText="today"
@@ -24,7 +26,6 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
       values={Object {}} />
   </p>
   <PrimaryButton
-    disabled={true}
     type="submit">
     <FormattedMessage
       id="BookingDatesForm.requestToBook"
