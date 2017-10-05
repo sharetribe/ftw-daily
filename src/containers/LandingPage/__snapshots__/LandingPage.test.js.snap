@@ -20,7 +20,7 @@ exports[`LandingPage matches snapshot 1`] = `
           \"description\": \"LandingPage.schemaDescription\",
           \"name\": \"LandingPage.schemaTitle\",
           \"image\": [
-            \"https://localhost:3000/saunatimeFacebook-1200x630.jpg\"
+            \"http://localhost:3000/saunatimeFacebook-1200x630.jpg\"
           ]
         }
       "
