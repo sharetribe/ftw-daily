@@ -36,7 +36,7 @@ const PORT = process.env.PORT || 4000;
 const CLIENT_ID = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID ||
   '08ec69f6-d37e-414d-83eb-324e94afddf0';
 const BASE_URL = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'http://localhost:8088';
-const ENFORCE_SSL = process.env.SERVER_SHARETRIBE_ENFORCE_SSL === 'true';
+const USING_SSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 const TRUST_PROXY = process.env.SERVER_SHARETRIBE_TRUST_PROXY || null;
 const app = express();
 
@@ -53,13 +53,13 @@ app.use(log.requestHandler());
 // See: https://www.npmjs.com/package/helmet
 app.use(helmet());
 
-// Redirect HTTP to HTTPS if ENFORCE_SSL is `true`.
+// Redirect HTTP to HTTPS if USING_SSL is `true`.
 // This also works behind reverse proxies (load balancers) as they are for example used by Heroku.
 // In such cases, however, the TRUST_PROXY parameter has to be set (see below)
 //
 // Read more: https://github.com/aredo/express-enforces-ssl
 //
-if (ENFORCE_SSL) {
+if (USING_SSL) {
   app.use(enforceSsl());
 }
 
@@ -97,6 +97,7 @@ app.get('*', (req, res) => {
     clientId: CLIENT_ID,
     req,
     res,
+    secure: USING_SSL,
   });
 
   const sdk = sharetribeSdk.createInstance({
