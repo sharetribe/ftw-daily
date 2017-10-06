@@ -48,6 +48,7 @@ class PageComponent extends Component {
       intl,
       logoutError,
       scrollingDisabled,
+      author,
       contentType,
       description,
       facebookImages,
@@ -83,13 +84,14 @@ class PageComponent extends Component {
     const metaTitle = title || schemaTitle;
     const metaDescription = description || schemaDescription;
     const facebookImgs = facebookImages || [
-      { name: 'facebook', url: facebookImage, width: 1200, height: 630 },
+      { name: 'facebook', url: `${config.canonicalRootURL}${facebookImage}`, width: 1200, height: 630 },
     ];
     const twitterImgs = twitterImages || [
-      { name: 'twitter', url: twitterImage, width: 600, height: 314 },
+      { name: 'twitter', url: `${config.canonicalRootURL}${twitterImage}`, width: 600, height: 314 },
     ];
 
     const metaToHead = metaTagProps({
+      author,
       contentType,
       description: metaDescription,
       facebookImages: facebookImgs,
@@ -100,6 +102,7 @@ class PageComponent extends Component {
       twitterHandle,
       updated,
       url: canonicalURL(pathWithSearch),
+      locale: intl.locale,
     });
 
     // eslint-disable-next-line react/no-array-index-key
@@ -158,6 +161,7 @@ PageComponent.defaultProps = {
   authInfoError: null,
   logoutError: null,
   scrollingDisabled: false,
+  author: null,
   contentType: 'website',
   description: null,
   facebookImages: null,
@@ -178,6 +182,7 @@ PageComponent.propTypes = {
   scrollingDisabled: bool,
 
   // SEO related props
+  author: string,
   contentType: string, // og:type
   description: string, // page description
   facebookImages: arrayOf(
