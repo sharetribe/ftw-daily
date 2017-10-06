@@ -7,12 +7,12 @@ exports[`HeroSection matches snapshot 1`] = `
       Book saunas everywhere.
     </span>
   </h1>
-  <p
+  <h2
     className={undefined}>
     <span>
       The largest online community to rent saunas in Finland.
     </span>
-  </p>
+  </h2>
   <button
     className=""
     disabled={false}
