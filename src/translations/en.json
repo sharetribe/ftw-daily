@@ -171,7 +171,7 @@
   "InboxPage.stateRequested": "Requested",
   "InboxPage.title": "Inbox",
   "LandingPage.schemaDescription": "You can book a sauna from Saunatime or get some income by sharing your own sauna",
-  "LandingPage.schemaTitle": "Book saunas everywhere",
+  "LandingPage.schemaTitle": "Book saunas everywhere | {siteTitle}",
   "ListingCard.hostedBy": "Hosted by {authorName}.",
   "ListingCard.perNight": "per night",
   "ListingCard.unsupportedPrice": "({currency})",
