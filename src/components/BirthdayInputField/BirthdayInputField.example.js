@@ -8,6 +8,8 @@ const formName = 'Styleguide.BirthdayInput.Form';
 
 const FormComponent = () => {
   const required = validators.required('A valid date is required');
+  const minAge = 18;
+  const minAgeRequired = validators.ageAtLeast(`Age should be at least ${minAge}`, minAge);
   return (
     <form>
       <BirthdayInputField
@@ -15,7 +17,7 @@ const FormComponent = () => {
         name="birthday"
         label="Date of birth"
         format={null}
-        validate={required}
+        validate={[required, minAgeRequired]}
       />
     </form>
   );

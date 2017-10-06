@@ -317,6 +317,7 @@
   "PayoutDetailsForm.birthdayLabel": "Birth date",
   "PayoutDetailsForm.birthdayLabelMonth": "Month",
   "PayoutDetailsForm.birthdayLabelYear": "Year",
+  "PayoutDetailsForm.birthdayMinAge": "You should be at least {minAge} years old.",
   "PayoutDetailsForm.birthdayMonthPlaceholder": "mm",
   "PayoutDetailsForm.birthdayRequired": "Birthday is required and must be a valid date.",
   "PayoutDetailsForm.birthdayYearPlaceholder": "yyyy",
