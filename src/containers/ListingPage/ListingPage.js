@@ -115,7 +115,8 @@ export class ListingPageComponent extends Component {
 
   handleSubmit(values) {
     const { flattenedRoutes, history, getListing, params, useInitialValues } = this.props;
-    const listing = getListing(new UUID(params.id));
+    const listingId = new UUID(params.id);
+    const listing = getListing(listingId);
 
     this.setState({ isBookingModalOpenOnMobile: false });
 
@@ -166,8 +167,11 @@ export class ListingPageComponent extends Component {
       sendVerificationEmailInProgress,
       sendVerificationEmailError,
       onResendVerificationEmail,
+      flattenedRoutes,
     } = this.props;
-    const currentListing = ensureListing(getListing(new UUID(params.id)));
+    const listingId = new UUID(params.id);
+    const currentListing = ensureListing(getListing(listingId));
+    const listingSlug = params.slug || createSlug(currentListing.attributes.title || '');
     const {
       address = '',
       description = '',
@@ -299,7 +303,7 @@ export class ListingPageComponent extends Component {
       }
     };
 
-    const editParams = { ...params, type: 'edit', tab: 'description' };
+    const editParams = { id: listingId.uuid, slug: listingSlug, type: 'edit', tab: 'description' };
 
     const listingClasses = classNames(css.pageRoot);
 
@@ -341,6 +345,10 @@ export class ListingPageComponent extends Component {
       { title, price: formattedPrice, siteTitle }
     );
 
+    const canonicalPath = createResourceLocatorString('ListingPageCanonical', flattenedRoutes, {
+      id: listingId.uuid,
+    });
+
     return (
       <Page
         authInfoError={authInfoError}
@@ -352,6 +360,7 @@ export class ListingPageComponent extends Component {
         description={description}
         facebookImages={facebookImages}
         twitterImages={twitterImages}
+        canonicalPath={canonicalPath}
         schema={
           `
           {
@@ -513,7 +522,7 @@ ListingPageComponent.propTypes = {
   intl: intlShape.isRequired,
   params: shape({
     id: string.isRequired,
-    slug: string.isRequired,
+    slug: string,
   }).isRequired,
   authInfoError: instanceOf(Error),
   authInProgress: bool.isRequired,

@@ -17,7 +17,16 @@ describe('ListingPage', () => {
     const listing1 = createListing('listing1', {}, { author: createUser('user-1') });
     const getListing = () => listing1;
     const props = {
-      flattenedRoutes: [],
+      flattenedRoutes: [
+        // Fake route since a circular dependency prevents using the
+        // full routesConfiguration here
+        {
+          path: '/l/:id',
+          exact: true,
+          name: 'ListingPageCanonical',
+          component: noop,
+        },
+      ],
       location: { search: '' },
       history: {
         push: () => console.log('HistoryPush called'),

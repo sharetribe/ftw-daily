@@ -112,6 +112,16 @@ const routesConfiguration = [
         component: props => <EditListingPage {...props} />,
         loadData: (params, search) => EditListingPage.loadData(params, search),
       },
+
+      // Canonical path should be after the `/l/new` path since they
+      // conflict and `new` is not a valid listing UUID.
+      {
+        path: '/l/:id',
+        exact: true,
+        name: 'ListingPageCanonical',
+        loadData: (params, search) => ListingPage.loadData(params, search),
+        component: props => <ListingPage {...props} tab="listing" />,
+      },
     ],
   },
   {

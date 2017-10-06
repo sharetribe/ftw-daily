@@ -2,6 +2,7 @@ exports[`ListingPage matches snapshot 1`] = `
 <Page
   authInfoError={null}
   author="user-1 display name"
+  canonicalPath="/l/listing1"
   contentType="website"
   description="listing1 description"
   facebookImages={Array []}
