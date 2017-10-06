@@ -237,11 +237,11 @@
 
 .headingContainer {
   margin-top: 22px;
-  margin-bottom: 33px;
+  margin-bottom: 34px;
 
   @media (--viewportMedium) {
     display: flex;
-    margin-bottom: 55px;
+    margin-bottom: 53px;
   }
 }
 .desktopPriceContainer {
@@ -265,7 +265,7 @@
 
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 }
 
@@ -302,7 +302,7 @@
   margin-bottom: 0;
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
   }
 }
 
@@ -331,6 +331,7 @@
 
 .descriptionTitle {
   /* Font */
+  @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
 
   margin-top: 0;
@@ -366,6 +367,7 @@
 
 .locationTitle {
   /* Font */
+  @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
 
   margin-top: 0;
@@ -512,7 +514,7 @@
   @media (--viewportLarge) {
     display: block;
     margin-top: 6px;
-    margin-bottom: 42px;
+    margin-bottom: 47px;
   }
 }
 
@@ -522,7 +524,7 @@
     color: var(--matterColor);
 
     margin-top: 0;
-    margin-bottom: 7px;
+    margin-bottom: 9px;
   }
 }
 

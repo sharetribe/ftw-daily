@@ -269,9 +269,9 @@ export class ListingPageComponent extends Component {
     const { formattedPrice, priceTitle } = priceData(price, intl);
     const map = geolocation
       ? <div className={css.locationContainer}>
-          <h3 className={css.locationTitle}>
+          <h2 className={css.locationTitle}>
             <FormattedMessage id="ListingPage.locationTitle" />
-          </h3>
+          </h2>
           <div className={css.map}><Map center={geolocation} address={locationAddress} /></div>
         </div>
       : null;
@@ -435,9 +435,9 @@ export class ListingPageComponent extends Component {
               </div>
 
               <div className={css.descriptionContainer}>
-                <h3 className={css.descriptionTitle}>
+                <h2 className={css.descriptionTitle}>
                   <FormattedMessage id="ListingPage.descriptionTitle" />
-                </h3>
+                </h2>
                 <p className={css.description}>{description}</p>
               </div>
 
