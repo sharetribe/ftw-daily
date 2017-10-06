@@ -8,13 +8,12 @@ import moment from 'moment';
 import Decimal from 'decimal.js';
 import { types } from '../../util/sdkLoader';
 import { required, bookingDatesRequired } from '../../util/validators';
-import { nightsBetween } from '../../util/dates';
+import { nightsBetween, START_DATE, END_DATE } from '../../util/dates';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
 import config from '../../config';
 import { Form, PrimaryButton, BookingBreakdown, DateRangeInputField } from '../../components';
 
-import { START_DATE, END_DATE } from '../../components/DateRangeInputField/DateRangeInput';
 import css from './BookingDatesForm.css';
 
 const estimatedTotalPrice = (unitPrice, nightCount) => {

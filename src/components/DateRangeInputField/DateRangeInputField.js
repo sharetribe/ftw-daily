@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { Field } from 'redux-form';
 import classNames from 'classnames';
+import { START_DATE, END_DATE } from '../../util/dates';
 import { ValidationError } from '../../components';
 
-import DateRangeInput, { START_DATE, END_DATE } from './DateRangeInput';
+import DateRangeInput from './DateRangeInput';
 import css from './DateRangeInputField.css';
 
 class DateRangeInputFieldComponent extends Component {
