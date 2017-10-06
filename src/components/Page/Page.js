@@ -59,6 +59,7 @@ class PageComponent extends Component {
       title,
       twitterHandle,
       twitterImages,
+      canonicalPath,
       updated,
     } = this.props;
 
@@ -129,7 +130,7 @@ class PageComponent extends Component {
           }}
         >
           <title>{title}</title>
-          <link rel="canonical" href={canonicalURL(pathWithSearch)} />
+          <link rel="canonical" href={canonicalURL(canonicalPath || pathWithSearch)} />
           <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
           <meta httpEquiv="Content-Language" content={intl.locale} />
           {metaTags}
@@ -170,6 +171,7 @@ PageComponent.defaultProps = {
   description: null,
   facebookImages: null,
   twitterImages: null,
+  canonicalPath: null,
   published: null,
   schema: null,
   tags: null,
@@ -209,6 +211,7 @@ PageComponent.propTypes = {
   title: string.isRequired, // page title
   twitterHandle: string, // twitter handle
   updated: string, // article:modified_time
+  canonicalPath: string, // link rel=canonical
 
   // from withRouter
   history: shape({
