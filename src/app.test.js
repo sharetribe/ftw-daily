@@ -37,6 +37,7 @@ describe('Application', () => {
       '/': 'Book saunas everywhere | Saunatime',
       '/s': 'Search results for map search | Saunatime',
       '/l/listing-title-slug/1234': 'Loading listing…',
+      '/l/1234': 'Loading listing…',
       '/u/1234': 'Profile page with display name: 1234',
       '/login': 'Login',
       '/signup': 'Sign up',

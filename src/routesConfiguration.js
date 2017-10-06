@@ -112,6 +112,13 @@ const routesConfiguration = [
         component: props => <EditListingPage {...props} />,
         loadData: (params, search) => EditListingPage.loadData(params, search),
       },
+      {
+        path: '/l/:id',
+        exact: true,
+        name: 'ListingPageCanonical',
+        loadData: (params, search) => ListingPage.loadData(params, search),
+        component: props => <ListingPage {...props} tab="listing" />,
+      },
     ],
   },
   {
