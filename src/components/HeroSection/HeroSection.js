@@ -32,9 +32,9 @@ const HeroSection = props => {
       <h1 className={css.heroMainTitle}>
         <FormattedMessage id="HeroSection.title" />
       </h1>
-      <p className={css.heroSubTitle}>
+      <h2 className={css.heroSubTitle}>
         <FormattedMessage id="HeroSection.subTitle" />
-      </p>
+      </h2>
       <Button className={css.mobileSearchButton} onClick={handleMobileSearchClick}>
         <IconSearch rootClassName={css.searchIcon} />
         <FormattedMessage id="HeroSection.mobileSearchButtonText" />

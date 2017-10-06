@@ -307,9 +307,9 @@ class TopbarComponent extends Component {
         >
           <div className={css.verifyEmailContent}>
             <IconEmailAttention className={css.modalIcon} />
-            <h1 className={css.modalTitle}>
+            <p className={css.modalTitle}>
               <FormattedMessage id="Topbar.verifyEmailTitle" />
-            </h1>
+            </p>
             <p className={css.modalMessage}>
               <FormattedMessage id="Topbar.verifyEmailText" />
             </p>

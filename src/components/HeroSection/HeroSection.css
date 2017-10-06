@@ -57,15 +57,17 @@
 }
 
 .heroSubTitle {
+  @apply --marketplaceBodyFontStyles;
+
   color: var(--matterColorLight);
-  margin-bottom: 63px;
-  margin-top: 0;
+  margin: 0 0 63px 0;
 
   @apply --animationProperties;
   animation-delay: 0.65s;
 
   @media (--viewportMedium) {
     max-width: var(--desktopTitleMaxWidth);
+    margin: 0 0 63px 0;
   }
 
   @media (--viewportXLarge) {
