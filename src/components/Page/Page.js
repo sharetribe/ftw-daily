@@ -87,10 +87,20 @@ class PageComponent extends Component {
     const metaTitle = title || schemaTitle;
     const metaDescription = description || schemaDescription;
     const facebookImgs = facebookImages || [
-      { name: 'facebook', url: `${config.canonicalRootURL}${facebookImage}`, width: 1200, height: 630 },
+      {
+        name: 'facebook',
+        url: `${config.canonicalRootURL}${facebookImage}`,
+        width: 1200,
+        height: 630,
+      },
     ];
     const twitterImgs = twitterImages || [
-      { name: 'twitter', url: `${config.canonicalRootURL}${twitterImage}`, width: 600, height: 314 },
+      {
+        name: 'twitter',
+        url: `${config.canonicalRootURL}${twitterImage}`,
+        width: 600,
+        height: 314,
+      },
     ];
 
     const metaToHead = metaTagProps({
