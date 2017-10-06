@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import config from '../../config';
 import { canonicalURL, metaTagProps } from '../../util/seo';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
@@ -79,7 +80,8 @@ class PageComponent extends Component {
     const { pathname, search = '' } = history.location;
     const pathWithSearch = `${pathname}${search}`;
 
-    const schemaTitle = intl.formatMessage({ id: 'Page.schemaTitle' });
+    const siteTitle = config.siteTitle;
+    const schemaTitle = intl.formatMessage({ id: 'Page.schemaTitle' }, { siteTitle });
     const schemaDescription = intl.formatMessage({ id: 'Page.schemaDescription' });
     const metaTitle = title || schemaTitle;
     const metaDescription = description || schemaDescription;
@@ -128,6 +130,8 @@ class PageComponent extends Component {
         >
           <title>{title}</title>
           <link rel="canonical" href={canonicalURL(pathWithSearch)} />
+          <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
+          <meta httpEquiv="Content-Language" content={intl.locale} />
           {metaTags}
           <script type="application/ld+json">
             {schemaJSONString}
