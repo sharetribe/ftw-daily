@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import config from '../../config';
 import { canonicalURL, metaTagProps } from '../../util/seo';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
@@ -48,6 +49,7 @@ class PageComponent extends Component {
       intl,
       logoutError,
       scrollingDisabled,
+      author,
       contentType,
       description,
       facebookImages,
@@ -78,18 +80,20 @@ class PageComponent extends Component {
     const { pathname, search = '' } = history.location;
     const pathWithSearch = `${pathname}${search}`;
 
-    const schemaTitle = intl.formatMessage({ id: 'Page.schemaTitle' });
+    const siteTitle = config.siteTitle;
+    const schemaTitle = intl.formatMessage({ id: 'Page.schemaTitle' }, { siteTitle });
     const schemaDescription = intl.formatMessage({ id: 'Page.schemaDescription' });
     const metaTitle = title || schemaTitle;
     const metaDescription = description || schemaDescription;
     const facebookImgs = facebookImages || [
-      { name: 'facebook', url: facebookImage, width: 1200, height: 630 },
+      { name: 'facebook', url: `${config.canonicalRootURL}${facebookImage}`, width: 1200, height: 630 },
     ];
     const twitterImgs = twitterImages || [
-      { name: 'twitter', url: twitterImage, width: 600, height: 314 },
+      { name: 'twitter', url: `${config.canonicalRootURL}${twitterImage}`, width: 600, height: 314 },
     ];
 
     const metaToHead = metaTagProps({
+      author,
       contentType,
       description: metaDescription,
       facebookImages: facebookImgs,
@@ -100,6 +104,7 @@ class PageComponent extends Component {
       twitterHandle,
       updated,
       url: canonicalURL(pathWithSearch),
+      locale: intl.locale,
     });
 
     // eslint-disable-next-line react/no-array-index-key
@@ -125,6 +130,8 @@ class PageComponent extends Component {
         >
           <title>{title}</title>
           <link rel="canonical" href={canonicalURL(pathWithSearch)} />
+          <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
+          <meta httpEquiv="Content-Language" content={intl.locale} />
           {metaTags}
           <script type="application/ld+json">
             {schemaJSONString}
@@ -158,6 +165,7 @@ PageComponent.defaultProps = {
   authInfoError: null,
   logoutError: null,
   scrollingDisabled: false,
+  author: null,
   contentType: 'website',
   description: null,
   facebookImages: null,
@@ -178,6 +186,7 @@ PageComponent.propTypes = {
   scrollingDisabled: bool,
 
   // SEO related props
+  author: string,
   contentType: string, // og:type
   description: string, // page description
   facebookImages: arrayOf(

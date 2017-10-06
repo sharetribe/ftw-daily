@@ -34,8 +34,8 @@ describe('Application', () => {
 
   it('server renders pages that do not require authentication', () => {
     const urlTitles = {
-      '/': 'Book saunas everywhere',
-      '/s': 'Saunatime | search saunas everywhere',
+      '/': 'Book saunas everywhere | Saunatime',
+      '/s': 'Search results for map search | Saunatime',
       '/l/listing-title-slug/1234': 'Loading listing…',
       '/u/1234': 'Profile page with display name: 1234',
       '/login': 'Login',

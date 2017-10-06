@@ -9,7 +9,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             \"@type\": \"SearchResultsPage\",
             \"description\": \"SearchPage.schemaDescription\",
             \"name\": \"SearchPage.schemaTitle\",
-            \"mainEntity\": [{\"@type\":\"ItemList\",\"itemListOrder\":\"http://schema.org/ItemListOrderAscending\",\"itemListElement\":[]}]
+            \"mainEntity\": [{\"@type\":\"ItemList\",\"name\":\"SearchPage.schemaMapSearch\",\"itemListOrder\":\"http://schema.org/ItemListOrderAscending\",\"itemListElement\":[]}]
           }
         "
   scrollingDisabled={false}

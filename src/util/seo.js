@@ -2,6 +2,15 @@ import config from '../config';
 
 export const canonicalURL = path => `${config.canonicalRootURL}${path}`;
 
+const ensureOpenGraphLocale = locale => {
+  switch (locale) {
+    case 'en':
+      return 'en_US';
+    default:
+      return locale;
+  }
+};
+
 /**
  * These will be used with Helmet <meta {...openGraphMetaProps} />
  */
@@ -12,6 +21,7 @@ export const openGraphMetaProps = data => {
     description,
     facebookAppId,
     facebookImages,
+    locale,
     published,
     siteTitle,
     tags,
@@ -45,12 +55,13 @@ export const openGraphMetaProps = data => {
     { property: 'og:title', content: title },
     { property: 'og:type', content: contentType },
     { property: 'og:url', content: url },
+    { property: 'og:locale', content: ensureOpenGraphLocale(locale) },
   ];
 
   facebookImages.forEach(i => {
     openGraphMeta.push({
       property: 'og:image',
-      content: `${canonicalRootURL}${i.url}`,
+      content: i.url,
     });
 
     if (i.width && i.height) {
@@ -93,14 +104,15 @@ export const twitterMetaProps = data => {
     title,
     twitterHandle,
     twitterImages,
+    url,
   } = data;
 
-  if (!(title && description && siteTwitterHandle)) {
+  if (!(title && description && siteTwitterHandle && url)) {
     /* eslint-disable no-console */
     if (console && console.warning) {
       console.warning(
         `Can't create twitter card meta tags:
-        title, description, and siteTwitterHandle are needed.`
+        title, description, siteTwitterHandle, and url are needed.`
       );
     }
     /* eslint-enable no-console */
@@ -112,13 +124,14 @@ export const twitterMetaProps = data => {
     { name: 'twitter:title', content: title },
     { name: 'twitter:description', content: description },
     { name: 'twitter:site', content: siteTwitterHandle },
+    { name: 'twitter:url', content: url },
   ];
 
   if (canonicalRootURL && twitterImages && twitterImages.length > 0) {
     twitterImages.forEach(i => {
       twitterMeta.push({
         name: 'twitter:image:src',
-        content: `${canonicalRootURL}${i.url}`,
+        content: i.url,
       });
     });
   }
@@ -127,6 +140,10 @@ export const twitterMetaProps = data => {
     // TODO: If we want to connect providers twitter account on ListingPage
     // we needs to get this info among listing data (API support needed)
     twitterMeta.push({ name: 'twitter:creator', content: twitterHandle });
+  }
+
+  if (canonicalRootURL) {
+    twitterMeta.push({ name: 'twitter:domain', content: canonicalRootURL });
   }
 
   return twitterMeta;
@@ -144,6 +161,12 @@ export const metaTagProps = tagData => {
     siteTwitterHandle,
   } = config;
 
+  const author = tagData.author || siteTitle;
+  const defaultMeta = [
+    { name: 'description', content: tagData.description },
+    { name: 'author', content: author },
+  ];
+
   const openGraphMeta = openGraphMetaProps({
     ...tagData,
     canonicalRootURL,
@@ -157,5 +180,5 @@ export const metaTagProps = tagData => {
     siteTwitterHandle,
   });
 
-  return [...openGraphMeta, ...twitterMeta];
+  return [...defaultMeta, ...openGraphMeta, ...twitterMeta];
 };

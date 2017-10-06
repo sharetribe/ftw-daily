@@ -335,13 +335,19 @@ export class ListingPageComponent extends Component {
         })
       : [];
     const schemaImages = JSON.stringify(facebookImages.map(img => img.url));
+    const siteTitle = config.siteTitle;
+    const schemaTitle = intl.formatMessage(
+      { id: 'ListingPage.schemaTitle' },
+      { title, price: formattedPrice, siteTitle }
+    );
 
     return (
       <Page
         authInfoError={authInfoError}
         logoutError={logoutError}
-        title={`${title} ${formattedPrice}`}
+        title={schemaTitle}
         scrollingDisabled={scrollingDisabled}
+        author={currentAuthorDisplayName}
         contentType="website"
         description={description}
         facebookImages={facebookImages}
@@ -352,7 +358,7 @@ export class ListingPageComponent extends Component {
             "@context": "http://schema.org",
             "@type": "ItemPage",
             "description": "${description}",
-            "name": "${title}",
+            "name": "${schemaTitle}",
             "image": ${schemaImages}
           }
         `
