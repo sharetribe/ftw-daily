@@ -14,15 +14,28 @@ const scrollToTop = () => {
   window.scrollTo(0, 0);
 };
 
+const preventDefault = e => {
+  e.preventDefault();
+};
+
 class PageComponent extends Component {
   componentDidMount() {
     this.historyUnlisten = this.props.history.listen(() => scrollToTop());
+
+    // By default a dropped file is loaded in the browser window as a
+    // file URL. We want to prevent this since it might loose a lot of
+    // data the user has typed but not yet saved. Preventing requires
+    // handling both dragover and drop events.
+    document.addEventListener('dragover', preventDefault);
+    document.addEventListener('drop', preventDefault);
   }
 
   componentWillUnmount() {
     if (this.historyUnlisten) {
       this.historyUnlisten();
     }
+    document.removeEventListener('dragover', preventDefault);
+    document.removeEventListener('drop', preventDefault);
   }
 
   render() {
