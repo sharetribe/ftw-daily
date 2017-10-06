@@ -1,6 +1,7 @@
 exports[`ListingPage matches snapshot 1`] = `
 <Page
   authInfoError={null}
+  author="user-1 display name"
   contentType="website"
   description="listing1 description"
   facebookImages={Array []}
@@ -10,12 +11,12 @@ exports[`ListingPage matches snapshot 1`] = `
             \"@context\": \"http://schema.org\",
             \"@type\": \"ItemPage\",
             \"description\": \"listing1 description\",
-            \"name\": \"listing1 title\",
+            \"name\": \"ListingPage.schemaTitle\",
             \"image\": []
           }
         "
   scrollingDisabled={false}
-  title="listing1 title 55"
+  title="ListingPage.schemaTitle"
   twitterImages={Array []}>
   <Topbar
     authInProgress={false}
