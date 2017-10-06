@@ -183,21 +183,21 @@ exports[`ListingPage matches snapshot 1`] = `
           </div>
         </div>
         <div>
-          <h3>
+          <h2>
             <FormattedMessage
               id="ListingPage.descriptionTitle"
               values={Object {}} />
-          </h3>
+          </h2>
           <p>
             listing1 description
           </p>
         </div>
         <div>
-          <h3>
+          <h2>
             <FormattedMessage
               id="ListingPage.locationTitle"
               values={Object {}} />
-          </h3>
+          </h2>
           <div>
             <Map
               address="listing1 address"
