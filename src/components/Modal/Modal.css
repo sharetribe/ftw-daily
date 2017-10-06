@@ -17,6 +17,10 @@
   & .scrollLayer {
     @apply --marketplaceModalRootStyles;
 
+    /* Add default background color to avoid bouncing scroll showing the
+   page contents from behind the modal. */
+    background-color: var(--matterColorLight);
+
     /* Additional styles for the modal window, dimming the background and positioning the modal */
     min-height: 100vh;
     overflow: auto;
