@@ -167,6 +167,7 @@ export class ListingPageComponent extends Component {
       sendVerificationEmailInProgress,
       sendVerificationEmailError,
       onResendVerificationEmail,
+      flattenedRoutes,
     } = this.props;
     const listingId = new UUID(params.id);
     const currentListing = ensureListing(getListing(listingId));
@@ -344,6 +345,10 @@ export class ListingPageComponent extends Component {
       { title, price: formattedPrice, siteTitle }
     );
 
+    const canonicalPath = createResourceLocatorString('ListingPageCanonical', flattenedRoutes, {
+      id: listingId.uuid,
+    });
+
     return (
       <Page
         authInfoError={authInfoError}
@@ -355,6 +360,7 @@ export class ListingPageComponent extends Component {
         description={description}
         facebookImages={facebookImages}
         twitterImages={twitterImages}
+        canonicalPath={canonicalPath}
         schema={
           `
           {
