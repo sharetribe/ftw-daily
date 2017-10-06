@@ -77,18 +77,32 @@ if (TRUST_PROXY === 'true') {
   app.set('trust proxy', TRUST_PROXY);
 }
 
-// Use basic authentication when not in dev mode.
+app.use(compression());
+app.use('/static', express.static(path.join(buildPath, 'static')));
+app.use(cookieParser());
+
+// Use basic authentication when not in dev mode. This is
+// intentionally after the static middleware to skip basic auth for
+// static resources.
 if (!dev) {
   const USERNAME = process.env.BASIC_AUTH_USERNAME;
   const PASSWORD = process.env.BASIC_AUTH_PASSWORD;
   app.use(auth.basicAuth(USERNAME, PASSWORD));
 }
 
-app.use(compression());
-app.use('/static', express.static(path.join(buildPath, 'static')));
-app.use(cookieParser());
+const noCacheHeaders = {
+  'Cache-control': 'no-cache, no-store, must-revalidate',
+};
 
 app.get('*', (req, res) => {
+  if (req.url.startsWith('/static/')) {
+    // The express.static middleware only handles static resources
+    // that it finds, otherwise passes them through. However, we don't
+    // want to render the app for missing static resources and can
+    // just return 404 right away.
+    return res.status(404).send('Static asset not found.');
+  }
+
   const context = {};
 
   // Get handle to tokenStore
@@ -113,6 +127,11 @@ app.get('*', (req, res) => {
       },
     ],
   });
+
+  // Until we have a better plan for caching dynamic content and we
+  // make sure that no sensitive data can appear in the prefetched
+  // data, let's disable response caching altogether.
+  res.set(noCacheHeaders);
 
   dataLoader
     .loadData(req.url, sdk)
