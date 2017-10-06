@@ -236,7 +236,12 @@ export class SearchPageComponent extends Component {
     // Schema for search engines (helps them to understand what this page is about)
     // http://schema.org
     // We are using JSON-LD format
-    const schemaTitle = intl.formatMessage({ id: 'SearchPage.schemaTitle' });
+    const siteTitle = config.siteTitle;
+    const searchAddress = address || intl.formatMessage({ id: 'SearchPage.schemaMapSearch' });
+    const schemaTitle = intl.formatMessage(
+      { id: 'SearchPage.schemaTitle' },
+      { searchAddress, siteTitle }
+    );
     const schemaDescription = intl.formatMessage({ id: 'SearchPage.schemaDescription' });
     const schemaListings = listings.map((l, i) => {
       const title = l.attributes.title;
@@ -253,7 +258,7 @@ export class SearchPageComponent extends Component {
     });
     const schemaMainEntity = JSON.stringify({
       '@type': 'ItemList',
-      name: address,
+      name: searchAddress,
       itemListOrder: 'http://schema.org/ItemListOrderAscending',
       itemListElement: schemaListings,
     });
