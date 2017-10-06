@@ -222,7 +222,7 @@ export const userAbbreviatedName = (user, bannedUserAbbreviatedName) => {
  * TODO: address will be moved to custom field, when API supports custom fields.
  */
 export const parseAddress = address => {
-  if (typeof address !== 'string') {
+  if (!(typeof address === 'string' || address == null)) {
     throw new Error('Address must be a string.');
   }
 
