@@ -124,7 +124,7 @@
         border-color: #B2B2B2;
       }
 
-      .fontsLoaded {
+      .fontsLoaded body {
         font-family: sofiapro, Helvetica, Arial, sans-serif;
         opacity: 1;
       }
@@ -172,7 +172,7 @@
       })(document);
     </script>
   </head>
-  <body id="body">
+  <body>
     <div class="content">
       <div class="errorCode">500</div>
       <h1>Sorry, it seems we did something wrong.</h1>
@@ -194,7 +194,7 @@
           // Optimization for Repeated views - i.e. page refresh hits the same error
           // If there's no Promise available, we also revert to @font-face loading
           if (sessionStorage.fontsLoaded || !hasFeaturePromise) {
-            document.getElementById("body").classList.add("fontsLoaded");
+            document.documentElement.classList.add("fontsLoaded");
             return;
           }
 
@@ -207,7 +207,7 @@
               values.forEach(function(f) {
                 document.fonts.add(f);
               });
-              document.getElementById("body").classList.add("fontsLoaded");
+              document.documentElement.classList.add("fontsLoaded");
 
               // Optimization for Repeat Views
               sessionStorage.fontsLoaded = true;
