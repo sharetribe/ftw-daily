@@ -160,6 +160,17 @@
       }
     </style>
 
+    <script>
+      (function(document){
+        // Optimization for repeated views
+        // Small script to check if fonts are already loaded
+        // Adding as little footprint as possible to <head> since that will slow down rendering.
+        if (document.fonts && sessionStorage.fontsLoaded) {
+          // Optimization for Repeated views - i.e. page refresh hits the same error
+          document.documentElement.classList.add("fontsLoaded");
+        }
+      })(document);
+    </script>
   </head>
   <body id="body">
     <div class="content">
@@ -175,8 +186,14 @@
         // Browsers that don't support FontFaceSet, will show only system fonts
         if (document.fonts) {
 
+          // Check if Promise exists in window
+          var hasFeaturePromise = typeof window.Promise !== 'undefined' &&
+            typeof window.Promise.reject !== 'undefined' &&
+            Object.prototype.toString.call(Promise.resolve()) === '[object Promise]';
+
           // Optimization for Repeated views - i.e. page refresh hits the same error
-          if (sessionStorage.fontsLoaded) {
+          // If there's no Promise available, we also revert to @font-face loading
+          if (sessionStorage.fontsLoaded || !hasFeaturePromise) {
             document.getElementById("body").classList.add("fontsLoaded");
             return;
           }
