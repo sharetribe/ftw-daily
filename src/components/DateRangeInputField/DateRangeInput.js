@@ -9,13 +9,12 @@ import { intlShape, injectIntl } from 'react-intl';
 import { DateRangePicker, isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
 import classNames from 'classnames';
 import moment from 'moment';
+import { START_DATE, END_DATE } from '../../util/dates';
 
 import NextMonthIcon from './NextMonthIcon';
 import PreviousMonthIcon from './PreviousMonthIcon';
 import css from './DateRangeInput.css';
 
-export const START_DATE = 'startDate';
-export const END_DATE = 'endDate';
 export const HORIZONTAL_ORIENTATION = 'horizontal';
 export const ANCHOR_LEFT = 'left';
 
@@ -106,6 +105,15 @@ class DateRangeInputComponent extends Component {
     this.blurTimeoutId = null;
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // Update focusedInput in case a new value for it is
+    // passed in the props. This may occur if the focus
+    // is manually set to the date picker.
+    if (nextProps.focusedInput && nextProps.focusedInput !== this.props.focusedInput) {
+      this.setState({ focusedInput: nextProps.focusedInput });
+    }
   }
 
   componentWillUnmount() {

@@ -1,6 +1,12 @@
 import moment from 'moment';
 
 /**
+ * Input names for the DateRangePicker from react-dates.
+ */
+export const START_DATE = 'startDate';
+export const END_DATE = 'endDate';
+
+/**
  * Calculate the number of nights between the given dates
  *
  * @param {Date} startDate start of the time period

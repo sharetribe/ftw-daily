@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { Field } from 'redux-form';
 import classNames from 'classnames';
+import { START_DATE, END_DATE } from '../../util/dates';
 import { ValidationError } from '../../components';
 
-import DateRangeInput, { START_DATE, END_DATE } from './DateRangeInput';
+import DateRangeInput from './DateRangeInput';
 import css from './DateRangeInputField.css';
 
 class DateRangeInputFieldComponent extends Component {
@@ -14,9 +15,23 @@ class DateRangeInputFieldComponent extends Component {
     this.handleFocus = this.handleFocus.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    // Update focusedInput in case a new value for it is
+    // passed in the props. This may occur if the focus
+    // is manually set to the date picker.
+    if (nextProps.focusedInput && nextProps.focusedInput !== this.props.focusedInput) {
+      this.setState({ focusedInput: nextProps.focusedInput });
+    }
+  }
+
   handleBlur(focusedInput) {
     this.setState({ focusedInput: null });
     this.props.input.onBlur(focusedInput);
+    // Notify the containing component that the focused
+    // input has changed.
+    if (this.props.onFocusedInputChange) {
+      this.props.onFocusedInputChange(null);
+    }
   }
 
   handleFocus(focusedInput) {
@@ -25,6 +40,7 @@ class DateRangeInputFieldComponent extends Component {
   }
 
   render() {
+    /* eslint-disable no-unused-vars */
     const {
       className,
       rootClassName,
@@ -35,8 +51,13 @@ class DateRangeInputFieldComponent extends Component {
       input,
       meta,
       useMobileMargins,
+      // Extract focusedInput and onFocusedInputChange so that
+      // the same values will not be passed on to subcomponents.
+      focusedInput,
+      onFocusedInputChange,
       ...rest
     } = this.props;
+    /* eslint-disable no-unused-vars */
 
     if (startDateLabel && !startDateId) {
       throw new Error('startDateId required when a startDateLabel is given');
@@ -86,6 +107,7 @@ class DateRangeInputFieldComponent extends Component {
       useMobileMargins,
       ...restOfInput,
       ...rest,
+      focusedInput: this.state.focusedInput,
     };
     const classes = classNames(rootClassName || css.fieldRoot, className);
     const errorClasses = classNames({ [css.mobileMargins]: useMobileMargins });
@@ -118,9 +140,11 @@ DateRangeInputFieldComponent.defaultProps = {
   startDateId: null,
   startDateLabel: null,
   startDatePlaceholderText: null,
+  focusedInput: null,
+  onFocusedInputChange: null,
 };
 
-const { bool, object, string } = PropTypes;
+const { bool, func, object, oneOf, string } = PropTypes;
 
 DateRangeInputFieldComponent.propTypes = {
   className: string,
@@ -134,6 +158,8 @@ DateRangeInputFieldComponent.propTypes = {
   startDatePlaceholderText: string,
   input: object.isRequired,
   meta: object.isRequired,
+  focusedInput: oneOf([START_DATE, END_DATE]),
+  onFocusedInputChange: func,
 };
 
 const DateRangeInputField = props => {
