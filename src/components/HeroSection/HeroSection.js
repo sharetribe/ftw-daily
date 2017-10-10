@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { IconSearch, Button } from '../../components';
-import { LocationSearchForm } from '../../containers';
 import { stringify } from '../../util/urlHelpers';
 import { createResourceLocatorString } from '../../util/routes';
-import * as propTypes from '../../util/propTypes';
+import routeConfiguration from '../../routeConfiguration';
+import { IconSearch, Button } from '../../components';
+import { LocationSearchForm } from '../../containers';
 
 import css from './HeroSection.css';
 
 const HeroSection = props => {
-  const { rootClassName, className, flattenedRoutes, history, location } = props;
+  const { rootClassName, className, history, location } = props;
 
   const handleMobileSearchClick = () => {
     const params = { mobilesearch: 'open' };
@@ -22,7 +22,7 @@ const HeroSection = props => {
     const { search, selectedPlace } = values.location;
     const { origin, bounds, country } = selectedPlace;
     const searchParams = { address: search, origin, bounds, country };
-    history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams));
   };
 
   const classes = classNames(rootClassName || css.root, className);
@@ -46,13 +46,12 @@ const HeroSection = props => {
 
 HeroSection.defaultProps = { rootClassName: null, className: null };
 
-const { string, shape, func, arrayOf } = PropTypes;
+const { string, shape, func } = PropTypes;
 
 HeroSection.propTypes = {
   rootClassName: string,
   className: string,
 
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
   history: shape({
     push: func.isRequired,
   }).isRequired,
