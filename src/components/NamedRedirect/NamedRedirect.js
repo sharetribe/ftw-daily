@@ -4,17 +4,16 @@
  */
 import React, { PropTypes } from 'react';
 import { Redirect } from 'react-router-dom';
+import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName } from '../../util/routes';
-import { withFlattenedRoutes } from '../../util/contextHelpers';
-import * as propTypes from '../../util/propTypes';
 
 const NamedRedirect = props => {
-  const { name, search, state, params, flattenedRoutes, push } = props;
-  const pathname = pathByRouteName(name, flattenedRoutes, params);
+  const { name, search, state, params, push } = props;
+  const pathname = pathByRouteName(name, routeConfiguration(), params);
   return <Redirect to={{ pathname, search, state }} push={push} />;
 };
 
-const { arrayOf, object, string, bool } = PropTypes;
+const { bool, object, string } = PropTypes;
 
 NamedRedirect.defaultProps = { search: '', state: {}, push: false, params: {} };
 
@@ -24,7 +23,6 @@ NamedRedirect.propTypes = {
   state: object,
   push: bool,
   params: object,
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
 };
 
-export default withFlattenedRoutes(NamedRedirect);
+export default NamedRedirect;
