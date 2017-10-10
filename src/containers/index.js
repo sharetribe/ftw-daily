@@ -1,79 +1,42 @@
-import AuthenticationPage from './AuthenticationPage/AuthenticationPage';
-import BookingDatesForm from './BookingDatesForm/BookingDatesForm';
-import CheckoutPage from './CheckoutPage/CheckoutPage';
-import ContactDetailsForm from './ContactDetailsForm/ContactDetailsForm';
-import ContactDetailsPage from './ContactDetailsPage/ContactDetailsPage';
-import EditListingDescriptionForm from './EditListingDescriptionForm/EditListingDescriptionForm';
-import EditListingLocationForm from './EditListingLocationForm/EditListingLocationForm';
-import EditListingPage from './EditListingPage/EditListingPage';
-import EditListingPhotosForm from './EditListingPhotosForm/EditListingPhotosForm';
-import EditListingPricingForm from './EditListingPricingForm/EditListingPricingForm';
-import EmailVerificationForm from './EmailVerificationForm/EmailVerificationForm';
-import EmailVerificationPage from './EmailVerificationPage/EmailVerificationPage';
-import InboxPage from './InboxPage/InboxPage';
-import LandingPage from './LandingPage/LandingPage';
-import ListingPage from './ListingPage/ListingPage';
-import LocationSearchForm from './LocationSearchForm/LocationSearchForm';
-import LoginForm from './LoginForm/LoginForm';
-import ManageListingsPage from './ManageListingsPage/ManageListingsPage';
-import NotFoundPage from './NotFoundPage/NotFoundPage';
-import OrderPage from './OrderPage/OrderPage';
-import PasswordChangeForm from './PasswordChangeForm/PasswordChangeForm';
-import PasswordChangePage from './PasswordChangePage/PasswordChangePage';
-import PasswordRecoveryForm from './PasswordRecoveryForm/PasswordRecoveryForm';
-import PasswordRecoveryPage from './PasswordRecoveryPage/PasswordRecoveryPage';
-import PasswordResetForm from './PasswordResetForm/PasswordResetForm';
-import PasswordResetPage from './PasswordResetPage/PasswordResetPage';
-import PayoutDetailsForm from './PayoutDetailsForm/PayoutDetailsForm';
-import PayoutPreferencesPage from './PayoutPreferencesPage/PayoutPreferencesPage';
-import ProfilePage from './ProfilePage/ProfilePage';
-import ProfileSettingsForm from './ProfileSettingsForm/ProfileSettingsForm';
-import ProfileSettingsPage from './ProfileSettingsPage/ProfileSettingsPage';
-import SalePage from './SalePage/SalePage';
-import SearchPage from './SearchPage/SearchPage';
-import SecurityPage from './SecurityPage/SecurityPage';
-import SignupForm from './SignupForm/SignupForm';
-import StripePaymentForm from './StripePaymentForm/StripePaymentForm';
-import StyleguidePage from './StyleguidePage/StyleguidePage';
-import TopbarSearchForm from './TopbarSearchForm/TopbarSearchForm';
-
+export { default as AuthenticationPage } from './AuthenticationPage/AuthenticationPage';
+export { default as BookingDatesForm } from './BookingDatesForm/BookingDatesForm';
+export { default as CheckoutPage } from './CheckoutPage/CheckoutPage';
+export { default as ContactDetailsForm } from './ContactDetailsForm/ContactDetailsForm';
+export { default as ContactDetailsPage } from './ContactDetailsPage/ContactDetailsPage';
 export {
-  AuthenticationPage,
-  BookingDatesForm,
-  CheckoutPage,
-  ContactDetailsForm,
-  ContactDetailsPage,
-  EditListingDescriptionForm,
-  EditListingLocationForm,
-  EditListingPage,
-  EditListingPhotosForm,
-  EditListingPricingForm,
-  EmailVerificationForm,
-  EmailVerificationPage,
-  InboxPage,
-  LandingPage,
-  ListingPage,
-  LocationSearchForm,
-  LoginForm,
-  ManageListingsPage,
-  NotFoundPage,
-  OrderPage,
-  PasswordChangeForm,
-  PasswordChangePage,
-  PasswordRecoveryForm,
-  PasswordRecoveryPage,
-  PasswordResetForm,
-  PasswordResetPage,
-  PayoutDetailsForm,
-  PayoutPreferencesPage,
-  ProfilePage,
-  ProfileSettingsForm,
-  ProfileSettingsPage,
-  SalePage,
-  SearchPage,
-  SecurityPage,
-  SignupForm,
-  StripePaymentForm,
-  StyleguidePage,
-  TopbarSearchForm,
-};
+  default as EditListingDescriptionForm,
+} from './EditListingDescriptionForm/EditListingDescriptionForm';
+export {
+  default as EditListingLocationForm,
+} from './EditListingLocationForm/EditListingLocationForm';
+export { default as EditListingPage } from './EditListingPage/EditListingPage';
+export { default as EditListingPhotosForm } from './EditListingPhotosForm/EditListingPhotosForm';
+export { default as EditListingPricingForm } from './EditListingPricingForm/EditListingPricingForm';
+export { default as EmailVerificationForm } from './EmailVerificationForm/EmailVerificationForm';
+export { default as EmailVerificationPage } from './EmailVerificationPage/EmailVerificationPage';
+export { default as InboxPage } from './InboxPage/InboxPage';
+export { default as LandingPage } from './LandingPage/LandingPage';
+export { default as ListingPage } from './ListingPage/ListingPage';
+export { default as LocationSearchForm } from './LocationSearchForm/LocationSearchForm';
+export { default as LoginForm } from './LoginForm/LoginForm';
+export { default as ManageListingsPage } from './ManageListingsPage/ManageListingsPage';
+export { default as NotFoundPage } from './NotFoundPage/NotFoundPage';
+export { default as OrderPage } from './OrderPage/OrderPage';
+export { default as PasswordChangeForm } from './PasswordChangeForm/PasswordChangeForm';
+export { default as PasswordChangePage } from './PasswordChangePage/PasswordChangePage';
+export { default as PasswordRecoveryForm } from './PasswordRecoveryForm/PasswordRecoveryForm';
+export { default as PasswordRecoveryPage } from './PasswordRecoveryPage/PasswordRecoveryPage';
+export { default as PasswordResetForm } from './PasswordResetForm/PasswordResetForm';
+export { default as PasswordResetPage } from './PasswordResetPage/PasswordResetPage';
+export { default as PayoutDetailsForm } from './PayoutDetailsForm/PayoutDetailsForm';
+export { default as PayoutPreferencesPage } from './PayoutPreferencesPage/PayoutPreferencesPage';
+export { default as ProfilePage } from './ProfilePage/ProfilePage';
+export { default as ProfileSettingsForm } from './ProfileSettingsForm/ProfileSettingsForm';
+export { default as ProfileSettingsPage } from './ProfileSettingsPage/ProfileSettingsPage';
+export { default as SalePage } from './SalePage/SalePage';
+export { default as SearchPage } from './SearchPage/SearchPage';
+export { default as SecurityPage } from './SecurityPage/SecurityPage';
+export { default as SignupForm } from './SignupForm/SignupForm';
+export { default as StripePaymentForm } from './StripePaymentForm/StripePaymentForm';
+export { default as StyleguidePage } from './StyleguidePage/StyleguidePage';
+export { default as TopbarSearchForm } from './TopbarSearchForm/TopbarSearchForm';
