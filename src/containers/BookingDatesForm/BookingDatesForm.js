@@ -96,7 +96,7 @@ export class BookingDatesFormComponent extends Component {
   }
 
   // In case start or end date for the booking is missing
-  // focus on that input, otherwise continue witht the
+  // focus on that input, otherwise continue with the
   // default handleSubmit function.
   handleFormSubmit(e) {
     const { startDate, endDate } = this.props.bookingDates;

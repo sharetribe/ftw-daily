@@ -27,9 +27,11 @@ class DateRangeInputFieldComponent extends Component {
   handleBlur(focusedInput) {
     this.setState({ focusedInput: null });
     this.props.input.onBlur(focusedInput);
-    // notify the containing component that the focused
+    // Notify the containing component that the focused
     // input has changed.
-    this.props.onFocusedInputChange(null);
+    if (this.props.onFocusedInputChange) {
+      this.props.onFocusedInputChange(null);
+    }
   }
 
   handleFocus(focusedInput) {
@@ -49,8 +51,8 @@ class DateRangeInputFieldComponent extends Component {
       input,
       meta,
       useMobileMargins,
-      // extract focusedInput and onFocusedInputChange so that
-      // the same values will not be passed on to subcomponents
+      // Extract focusedInput and onFocusedInputChange so that
+      // the same values will not be passed on to subcomponents.
       focusedInput,
       onFocusedInputChange,
       ...rest
