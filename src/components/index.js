@@ -56,7 +56,6 @@ import Page from './Page/Page';
 import PaginationLinks from './PaginationLinks/PaginationLinks';
 import Promised from './Promised/Promised';
 import ResponsiveImage from './ResponsiveImage/ResponsiveImage';
-import RoutesProvider from './RoutesProvider/RoutesProvider';
 import SaleDetailsPanel from './SaleDetailsPanel/SaleDetailsPanel';
 import SearchMap from './SearchMap/SearchMap';
 import SearchMapGroupLabel from './SearchMapGroupLabel/SearchMapGroupLabel';
@@ -135,7 +134,6 @@ export {
   PrimaryButton,
   Promised,
   ResponsiveImage,
-  RoutesProvider,
   SaleDetailsPanel,
   SearchMap,
   SearchMapGroupLabel,
