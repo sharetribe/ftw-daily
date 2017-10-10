@@ -1,5 +1,4 @@
 import React from 'react';
-import { NamedRedirect } from './components';
 import {
   AuthenticationPage,
   CheckoutPage,
@@ -23,6 +22,11 @@ import {
   StyleguidePage,
   EmailVerificationPage,
 } from './containers';
+
+// routeConfiguration needs to initialize containers first
+// Otherwise, components will import form container eventually and
+// at that point css bundling / imports will happen in wrong order.
+import { NamedRedirect } from './components';
 
 export const ACCOUNT_SETTINGS_PAGES = ['ContactDetailsPage', 'PasswordChangePage'];
 
