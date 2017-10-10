@@ -15,7 +15,6 @@ describe('EditListingPageComponent', () => {
         isAuthenticated={false}
         authInProgress={false}
         fetchInProgress={false}
-        flattenedRoutes={[]}
         location={{ search: '' }}
         history={{ push: noop }}
         getListing={getListing}
