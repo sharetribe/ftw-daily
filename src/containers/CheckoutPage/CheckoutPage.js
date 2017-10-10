@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
+import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureUser, ensureTransaction, ensureBooking } from '../../util/data';
-import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { createSlug } from '../../util/urlHelpers';
 import {
   isTransactionInitiateAmountTooLowError,
@@ -99,7 +99,7 @@ export class CheckoutPageComponent extends Component {
     }
     this.setState({ submitting: true });
 
-    const { flattenedRoutes, history, sendOrderRequest, speculatedTransaction } = this.props;
+    const { history, sendOrderRequest, speculatedTransaction } = this.props;
     const requestParams = {
       listingId: this.state.pageData.listing.id,
       cardToken,
@@ -110,7 +110,7 @@ export class CheckoutPageComponent extends Component {
     sendOrderRequest(requestParams)
       .then(orderId => {
         this.setState({ submitting: false });
-        const orderDetailsPath = pathByRouteName('OrderDetailsPage', flattenedRoutes, {
+        const orderDetailsPath = pathByRouteName('OrderDetailsPage', routeConfiguration(), {
           id: orderId.uuid,
         });
         clearData(STORAGE_KEY);
@@ -375,7 +375,7 @@ CheckoutPageComponent.defaultProps = {
   currentUser: null,
 };
 
-const { arrayOf, func, instanceOf, shape, string, bool } = PropTypes;
+const { func, instanceOf, shape, string, bool } = PropTypes;
 
 CheckoutPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
@@ -404,9 +404,6 @@ CheckoutPageComponent.propTypes = {
   history: shape({
     push: func.isRequired,
   }).isRequired,
-
-  // from withFlattenedRoutes
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
 };
 
 const mapStateToProps = state => {
@@ -439,12 +436,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(speculateTransaction(listingId, bookingStart, bookingEnd)),
 });
 
-const CheckoutPage = compose(
-  withRouter,
-  connect(mapStateToProps, mapDispatchToProps),
-  withFlattenedRoutes,
-  injectIntl
-)(CheckoutPageComponent);
+const CheckoutPage = compose(withRouter, connect(mapStateToProps, mapDispatchToProps), injectIntl)(
+  CheckoutPageComponent
+);
 
 CheckoutPage.setInitialValues = initialValues => setInitialValues(initialValues);
 
