@@ -1,5 +1,5 @@
 exports[`ManageListingCard matches snapshot 1`] = `
-<withFlattenedRoutes(withRouter(NamedLink))
+<withRouter(NamedLink)
   className=""
   name="ListingPage"
   params={
@@ -111,5 +111,5 @@ exports[`ManageListingCard matches snapshot 1`] = `
         values={Object {}} />
     </button>
   </div>
-</withFlattenedRoutes(withRouter(NamedLink))>
+</withRouter(NamedLink)>
 `;

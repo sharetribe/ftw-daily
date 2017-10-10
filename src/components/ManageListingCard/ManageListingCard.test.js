@@ -9,7 +9,6 @@ describe('ManageListingCard', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
       <ManageListingCardComponent
-        flattenedRoutes={[]}
         history={{ push: noop }}
         listing={createListing('listing1')}
         intl={fakeIntl}
