@@ -2,13 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import routeConfiguration from './routeConfiguration';
 import { NotFoundPage } from './containers';
 import { NamedRedirect } from './components';
-import { withFlattenedRoutes } from './util/contextHelpers';
 import * as propTypes from './util/propTypes';
 import * as log from './util/log';
 
-const { bool, arrayOf, object, func, shape, string, any } = PropTypes;
+const { bool, object, func, shape, string } = PropTypes;
 
 const canShowComponent = props => {
   const { isAuthenticated, route } = props;
@@ -49,18 +49,14 @@ class RouteComponentRenderer extends Component {
   }
 
   render() {
-    const { route, match, location, staticContext, flattenedRoutes } = this.props;
+    const { route, match, location, staticContext } = this.props;
     const { component: RouteComponent, authPage = 'SignupPage' } = route;
     const canShow = canShowComponent(this.props);
     if (!canShow) {
       staticContext.unauthorized = true;
     }
     return canShow
-      ? <RouteComponent
-          params={match.params}
-          location={location}
-          flattenedRoutes={flattenedRoutes}
-        />
+      ? <RouteComponent params={match.params} location={location} />
       : <NamedRedirect
           name={authPage}
           state={{ from: `${location.pathname}${location.search}${location.hash}` }}
@@ -71,7 +67,6 @@ class RouteComponentRenderer extends Component {
 RouteComponentRenderer.propTypes = {
   isAuthenticated: bool.isRequired, // eslint-disable-line react/no-unused-prop-types
   logoutInProgress: bool.isRequired, // eslint-disable-line react/no-unused-prop-types
-  flattenedRoutes: any.isRequired,
   route: propTypes.route.isRequired,
   match: shape({
     params: object.isRequired,
@@ -86,7 +81,7 @@ RouteComponentRenderer.propTypes = {
 };
 
 const Routes = props => {
-  const { isAuthenticated, logoutInProgress, flattenedRoutes, staticContext, dispatch } = props;
+  const { isAuthenticated, logoutInProgress, staticContext, dispatch } = props;
 
   const toRouteComponent = route => {
     const renderProps = {
@@ -95,7 +90,6 @@ const Routes = props => {
       route,
       staticContext,
       dispatch,
-      flattenedRoutes,
     };
     return (
       <Route
@@ -115,7 +109,7 @@ const Routes = props => {
 
   return (
     <Switch>
-      {flattenedRoutes.map(toRouteComponent)}
+      {routeConfiguration().map(toRouteComponent)}
       <Route component={NotFoundPage} />
     </Switch>
   );
@@ -126,9 +120,6 @@ Routes.defaultProps = { staticContext: {} };
 Routes.propTypes = {
   isAuthenticated: bool.isRequired,
   logoutInProgress: bool.isRequired,
-
-  // from withFlattenedRoutes
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
 
   // from withRouter
   staticContext: object,
@@ -148,4 +139,4 @@ const mapStateToProps = state => {
 // lifecycle hook.
 //
 // See: https://github.com/ReactTraining/react-router/issues/4671
-export default compose(withRouter, connect(mapStateToProps), withFlattenedRoutes)(Routes);
+export default compose(withRouter, connect(mapStateToProps))(Routes);
