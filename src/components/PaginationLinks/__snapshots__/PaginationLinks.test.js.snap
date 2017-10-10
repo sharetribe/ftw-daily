@@ -8,7 +8,7 @@ exports[`PaginationLinks should match snapshot with both links disabled 1`] = `
   </div>
   <div
     className="">
-    <withFlattenedRoutes(withRouter(NamedLink))
+    <NamedLink
       className="undefined"
       name="SomePage"
       params={
@@ -23,7 +23,7 @@ exports[`PaginationLinks should match snapshot with both links disabled 1`] = `
         }
       }>
       1
-    </withFlattenedRoutes(withRouter(NamedLink))>
+    </NamedLink>
   </div>
   <div
     className="">
@@ -36,7 +36,7 @@ exports[`PaginationLinks should match snapshot with both links disabled 1`] = `
 exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
 <nav
   className="">
-  <withFlattenedRoutes(withRouter(NamedLink))
+  <NamedLink
     name="SomePage"
     params={
       Object {
@@ -51,10 +51,10 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
     }>
     <PrevPageIcon
       className={null} />
-  </withFlattenedRoutes(withRouter(NamedLink))>
+  </NamedLink>
   <div
     className="">
-    <withFlattenedRoutes(withRouter(NamedLink))
+    <NamedLink
       className=""
       name="SomePage"
       params={
@@ -69,8 +69,8 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
         }
       }>
       1
-    </withFlattenedRoutes(withRouter(NamedLink))>
-    <withFlattenedRoutes(withRouter(NamedLink))
+    </NamedLink>
+    <NamedLink
       className="undefined"
       name="SomePage"
       params={
@@ -85,8 +85,8 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
         }
       }>
       2
-    </withFlattenedRoutes(withRouter(NamedLink))>
-    <withFlattenedRoutes(withRouter(NamedLink))
+    </NamedLink>
+    <NamedLink
       className=""
       name="SomePage"
       params={
@@ -101,9 +101,9 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
         }
       }>
       3
-    </withFlattenedRoutes(withRouter(NamedLink))>
+    </NamedLink>
   </div>
-  <withFlattenedRoutes(withRouter(NamedLink))
+  <NamedLink
     name="SomePage"
     params={
       Object {
@@ -118,7 +118,7 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
     }>
     <NextPageIcon
       className={null} />
-  </withFlattenedRoutes(withRouter(NamedLink))>
+  </NamedLink>
 </nav>
 `;
 
@@ -132,7 +132,7 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
   </div>
   <div
     className="">
-    <withFlattenedRoutes(withRouter(NamedLink))
+    <NamedLink
       className="undefined"
       name="SomePage"
       params={
@@ -147,8 +147,8 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
         }
       }>
       1
-    </withFlattenedRoutes(withRouter(NamedLink))>
-    <withFlattenedRoutes(withRouter(NamedLink))
+    </NamedLink>
+    <NamedLink
       className=""
       name="SomePage"
       params={
@@ -163,8 +163,8 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
         }
       }>
       2
-    </withFlattenedRoutes(withRouter(NamedLink))>
-    <withFlattenedRoutes(withRouter(NamedLink))
+    </NamedLink>
+    <NamedLink
       className=""
       name="SomePage"
       params={
@@ -179,9 +179,9 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
         }
       }>
       3
-    </withFlattenedRoutes(withRouter(NamedLink))>
+    </NamedLink>
   </div>
-  <withFlattenedRoutes(withRouter(NamedLink))
+  <NamedLink
     name="SomePage"
     params={
       Object {
@@ -196,14 +196,14 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
     }>
     <NextPageIcon
       className={null} />
-  </withFlattenedRoutes(withRouter(NamedLink))>
+  </NamedLink>
 </nav>
 `;
 
 exports[`PaginationLinks should match snapshot with prev enabled and next disabled 1`] = `
 <nav
   className="">
-  <withFlattenedRoutes(withRouter(NamedLink))
+  <NamedLink
     name="SomePage"
     params={
       Object {
@@ -218,10 +218,10 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
     }>
     <PrevPageIcon
       className={null} />
-  </withFlattenedRoutes(withRouter(NamedLink))>
+  </NamedLink>
   <div
     className="">
-    <withFlattenedRoutes(withRouter(NamedLink))
+    <NamedLink
       className=""
       name="SomePage"
       params={
@@ -236,8 +236,8 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
         }
       }>
       1
-    </withFlattenedRoutes(withRouter(NamedLink))>
-    <withFlattenedRoutes(withRouter(NamedLink))
+    </NamedLink>
+    <NamedLink
       className=""
       name="SomePage"
       params={
@@ -252,8 +252,8 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
         }
       }>
       2
-    </withFlattenedRoutes(withRouter(NamedLink))>
-    <withFlattenedRoutes(withRouter(NamedLink))
+    </NamedLink>
+    <NamedLink
       className="undefined"
       name="SomePage"
       params={
@@ -268,7 +268,7 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
         }
       }>
       3
-    </withFlattenedRoutes(withRouter(NamedLink))>
+    </NamedLink>
   </div>
   <div
     className="">

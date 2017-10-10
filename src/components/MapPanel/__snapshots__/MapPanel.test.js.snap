@@ -4,13 +4,13 @@ exports[`MapPanel matches snapshot 1`] = `
     Map
   </div>
   <div />
-  <withFlattenedRoutes(withRouter(NamedLink))
+  <NamedLink
     name="SearchFiltersPage">
     Filters
-  </withFlattenedRoutes(withRouter(NamedLink))>
-  <withFlattenedRoutes(withRouter(NamedLink))
+  </NamedLink>
+  <NamedLink
     name="SearchListingsPage">
     X
-  </withFlattenedRoutes(withRouter(NamedLink))>
+  </NamedLink>
 </div>
 `;
