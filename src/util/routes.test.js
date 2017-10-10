@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { RoutesProvider } from '../components';
-import routesConfiguration from '../routesConfiguration';
+import routeConfiguration from '../routeConfiguration';
 import { renderDeep, renderShallow } from './test-helpers';
 import * as propTypes from './propTypes';
 import { createResourceLocatorString, flattenRoutes, findRouteByRouteName } from './routes';
@@ -9,7 +9,7 @@ const { arrayOf } = PropTypes;
 
 describe('util/routes.js', () => {
   describe('createResourceLocatorString', () => {
-    const flattenedRoutes = flattenRoutes(routesConfiguration);
+    const flattenedRoutes = flattenRoutes(routeConfiguration());
 
     it('should return meaningful strings if parameters are not needed', () => {
       // default links without params in path or search query
@@ -75,7 +75,7 @@ describe('util/routes.js', () => {
   });
 
   describe('findRouteByRouteName', () => {
-    const flattenedRoutes = flattenRoutes(routesConfiguration);
+    const flattenedRoutes = flattenRoutes(routeConfiguration());
     it('should return CheckoutPage route', () => {
       const foundRoute = findRouteByRouteName('CheckoutPage', flattenedRoutes);
       expect(foundRoute.name).toEqual('CheckoutPage');

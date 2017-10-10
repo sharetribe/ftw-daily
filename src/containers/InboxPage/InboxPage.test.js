@@ -9,7 +9,7 @@ import {
   createBooking,
 } from '../../util/test-data';
 import { InboxPageComponent, InboxItem } from './InboxPage';
-import routesConfiguration from '../../routesConfiguration';
+import routeConfiguration from '../../routeConfiguration';
 import { flattenRoutes } from '../../util/routes';
 import { TX_TRANSITION_PREAUTHORIZE } from '../../util/propTypes';
 
@@ -17,7 +17,7 @@ const noop = () => null;
 
 describe('InboxPage', () => {
   it('matches snapshot', () => {
-    const flattenedRoutes = flattenRoutes(routesConfiguration);
+    const flattenedRoutes = flattenRoutes(routeConfiguration());
     const provider = createUser('provider-user-id');
     const customer = createUser('customer-user-id');
     const currentUserProvider = createCurrentUser('provider-user-id');

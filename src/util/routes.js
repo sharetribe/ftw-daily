@@ -48,9 +48,9 @@ export const pathByRouteName = (nameToFind, flattenedRoutes, params = {}) =>
  *
  * @return {Array<{ route, params }>} - All matches as { route, params } objects
  */
-export const matchPathname = (pathname, routesConfiguration) => {
-  // TODO: remove flattening when routesConfiguration is flat
-  const flattenedRoutes = flattenRoutes(routesConfiguration);
+export const matchPathname = (pathname, routeConfiguration) => {
+  // TODO: remove flattening when routeConfiguration is flat
+  const flattenedRoutes = flattenRoutes(routeConfiguration);
 
   return flattenedRoutes.reduce(
     (matches, route) => {

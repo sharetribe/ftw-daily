@@ -19,7 +19,7 @@ describe('ListingPage', () => {
     const props = {
       flattenedRoutes: [
         // Fake route since a circular dependency prevents using the
-        // full routesConfiguration here
+        // full routeConfiguration here
         {
           path: '/l/:id',
           exact: true,

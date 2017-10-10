@@ -2,7 +2,7 @@
  * This component wraps React-Router's Link by providing name-based routing.
  *
  * The `name` prop should match a route in the flattened
- * routesConfiguration passed in context by the RoutesProvider
+ * routeConfiguration passed in context by the RoutesProvider
  * component. The `params` props is the route params for the route
  * path of the given route name.
  *
@@ -62,7 +62,7 @@ NamedLinkComponent.defaultProps = {
 NamedLinkComponent.displayName = 'NamedLink';
 
 NamedLinkComponent.propTypes = {
-  // name of the route in routesConfiguration
+  // name of the route in routeConfiguration
   name: string.isRequired,
   // params object for the named route
   params: object,

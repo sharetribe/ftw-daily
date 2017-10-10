@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { ACCOUNT_SETTINGS_PAGES } from '../../routesConfiguration';
+import { ACCOUNT_SETTINGS_PAGES } from '../../routeConfiguration';
 import { TabNavHorizontal } from '../../components';
 
 import css from './UserNav.css';

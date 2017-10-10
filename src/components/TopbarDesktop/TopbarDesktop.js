@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { ACCOUNT_SETTINGS_PAGES } from '../../routesConfiguration';
+import { ACCOUNT_SETTINGS_PAGES } from '../../routeConfiguration';
 import * as propTypes from '../../util/propTypes';
 import {
   Avatar,
