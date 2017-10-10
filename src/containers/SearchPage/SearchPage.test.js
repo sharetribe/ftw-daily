@@ -39,7 +39,6 @@ describe('SearchPageComponent', () => {
       onLogout: noop,
       onManageDisableScrolling: noop,
       onSearchMapListings: noop,
-      flattenedRoutes: [],
       sendVerificationEmailInProgress: false,
       onResendVerificationEmail: noop,
     };
