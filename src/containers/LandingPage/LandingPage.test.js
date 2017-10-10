@@ -11,7 +11,6 @@ describe('LandingPage', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
       <LandingPageComponent
-        flattenedRoutes={[]}
         history={{ push: noop }}
         location={{ search: '' }}
         scrollingDisabled={false}

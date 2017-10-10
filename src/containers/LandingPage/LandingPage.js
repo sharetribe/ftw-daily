@@ -6,10 +6,9 @@ import { injectIntl, intlShape } from 'react-intl';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { Page, HeroSection, Topbar } from '../../components';
 import * as propTypes from '../../util/propTypes';
-import { withFlattenedRoutes } from '../../util/contextHelpers';
 import config from '../../config';
+import { Page, HeroSection, Topbar } from '../../components';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
@@ -22,7 +21,6 @@ export const LandingPageComponent = props => {
     currentUser,
     currentUserHasListings,
     currentUserHasOrders,
-    flattenedRoutes,
     history,
     intl,
     isAuthenticated,
@@ -87,12 +85,7 @@ export const LandingPageComponent = props => {
         sendVerificationEmailError={sendVerificationEmailError}
       />
       <div className={css.heroContainer}>
-        <HeroSection
-          className={css.hero}
-          flattenedRoutes={flattenedRoutes}
-          history={history}
-          location={location}
-        />
+        <HeroSection className={css.hero} history={history} location={location} />
       </div>
     </Page>
   );
@@ -107,7 +100,7 @@ LandingPageComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { array, bool, func, instanceOf, number, object } = PropTypes;
+const { bool, func, instanceOf, number, object } = PropTypes;
 
 LandingPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
@@ -124,9 +117,6 @@ LandingPageComponent.propTypes = {
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: instanceOf(Error),
   onResendVerificationEmail: func.isRequired,
-
-  // from withFlattenedRoutes
-  flattenedRoutes: array.isRequired,
 
   // from withRouter
   history: object.isRequired,
@@ -168,11 +158,8 @@ const mapDispatchToProps = dispatch => ({
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
-const LandingPage = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  injectIntl,
-  withRouter,
-  withFlattenedRoutes
-)(LandingPageComponent);
+const LandingPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl, withRouter)(
+  LandingPageComponent
+);
 
 export default LandingPage;
