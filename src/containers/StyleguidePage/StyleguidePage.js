@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { isEmpty } from 'lodash';
 import classNames from 'classnames';
 import { NamedLink } from '../../components';
-import * as allExamples from '../../examples';
 
 import css from './StyleguidePage.css';
 
@@ -161,6 +160,17 @@ const examplesFor = (examples, group, componentName, exampleName) => {
 };
 
 const StyleguidePage = props => {
+  // TODO: importing all the examples will affect the module bundling
+  // since examples call routeConfiguration without function wrapping
+  // Wurthermore, it would be nice to exclude styleguide away from actual app
+  let allExamples = [];
+  try {
+    allExamples = require('../../examples'); // eslint-disable-line global-require
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('require(): The file "../../examples.js" could not be loaded.');
+  }
+
   const { params, raw } = props;
   const group = params.group ? decodeURIComponent(params.group) : ALL;
   const componentName = params.component || ALL;
