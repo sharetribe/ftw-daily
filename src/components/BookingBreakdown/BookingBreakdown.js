@@ -63,6 +63,20 @@ export const BookingBreakdownComponent = props => {
   const providerCommissionLineItem = transaction.attributes.lineItems.find(
     item => item.code === 'line-item/provider-commission'
   );
+  const refund = transaction.attributes.lineItems.find(
+    item =>
+      item.code === 'line-item/refund' &&
+      item.includeFor.includes(isProvider ? 'provider' : 'customer')
+  );
+
+  const refundInfo = !refund
+    ? null
+    : <div className={css.lineItem}>
+        <span className={css.itemLabel}>
+          <FormattedMessage id="BookingBreakdown.refund" />
+        </span>
+        <span className={css.itemValue}>{formatMoney(intl, refund.lineTotal)}</span>
+      </div>;
 
   const nightCount = nightPurchase.quantity.toFixed();
   const nightCountMessage = (
@@ -144,6 +158,7 @@ export const BookingBreakdownComponent = props => {
       </div>
       {subTotalInfo}
       {commissionInfo}
+      {refundInfo}
       <hr className={css.totalDivider} />
       <div className={css.lineItem}>
         <div className={css.totalLabel}>
