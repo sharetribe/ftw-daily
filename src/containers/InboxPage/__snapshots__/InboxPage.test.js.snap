@@ -4,48 +4,8 @@ exports[`InboxPage matches snapshot 1`] = `
   logoutError={null}
   scrollingDisabled={false}
   title="InboxPage.ordersTitle">
-  <Topbar
-    authInProgress={false}
-    currentPage="InboxPage"
-    currentUser={
-      Object {
-        "attributes": Object {
-          "banned": false,
-          "email": "provider-user-id@example.com",
-          "emailVerified": true,
-          "profile": Object {
-            "abbreviatedName": "provider-user-id abbreviated name",
-            "displayName": "provider-user-id display name",
-            "firstName": "provider-user-id first name",
-            "lastName": "provider-user-id last name",
-          },
-          "stripeConnected": true,
-        },
-        "id": UUID {
-          "uuid": "provider-user-id",
-        },
-        "type": "current-user",
-      }
-    }
-    currentUserHasListings={false}
-    currentUserHasOrders={null}
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
-    isAuthenticated={false}
-    location={
-      Object {
-        "search": "",
-      }
-    }
-    notificationCount={0}
-    onLogout={[Function]}
-    onManageDisableScrolling={[Function]}
-    onResendVerificationEmail={[Function]}
-    sendVerificationEmailError={null}
-    sendVerificationEmailInProgress={false} />
+  <Connect(withRouter(TopbarContainerComponent))
+    currentPage="InboxPage" />
   <div>
     <div>
       <h1>
@@ -355,48 +315,8 @@ exports[`InboxPage matches snapshot 3`] = `
   logoutError={null}
   scrollingDisabled={false}
   title="InboxPage.salesTitle">
-  <Topbar
-    authInProgress={false}
-    currentPage="InboxPage"
-    currentUser={
-      Object {
-        "attributes": Object {
-          "banned": false,
-          "email": "customer-user-id@example.com",
-          "emailVerified": true,
-          "profile": Object {
-            "abbreviatedName": "customer-user-id abbreviated name",
-            "displayName": "customer-user-id display name",
-            "firstName": "customer-user-id first name",
-            "lastName": "customer-user-id last name",
-          },
-          "stripeConnected": true,
-        },
-        "id": UUID {
-          "uuid": "customer-user-id",
-        },
-        "type": "current-user",
-      }
-    }
-    currentUserHasListings={false}
-    currentUserHasOrders={null}
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
-    isAuthenticated={false}
-    location={
-      Object {
-        "search": "",
-      }
-    }
-    notificationCount={0}
-    onLogout={[Function]}
-    onManageDisableScrolling={[Function]}
-    onResendVerificationEmail={[Function]}
-    sendVerificationEmailError={null}
-    sendVerificationEmailInProgress={false} />
+  <Connect(withRouter(TopbarContainerComponent))
+    currentPage="InboxPage" />
   <div>
     <div>
       <h1>
