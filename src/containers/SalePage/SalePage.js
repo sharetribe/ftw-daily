@@ -1,17 +1,15 @@
 import React, { PropTypes } from 'react';
-import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
-import { NamedRedirect, SaleDetailsPanel, Page, Topbar } from '../../components';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
-import { sendVerificationEmail } from '../../ducks/user.duck';
-import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
+import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { acceptSale, rejectSale, loadData } from './SalePage.duck';
+import { NamedRedirect, SaleDetailsPanel, Page } from '../../components';
+import { TopbarContainer } from '../../containers';
 
 import css from './SalePage.css';
 
@@ -20,31 +18,19 @@ import css from './SalePage.css';
 export const SalePageComponent = props => {
   const {
     authInfoError,
-    authInProgress,
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
     fetchSaleError,
     acceptSaleError,
     rejectSaleError,
     acceptInProgress,
     rejectInProgress,
-    history,
     intl,
-    isAuthenticated,
-    location,
     logoutError,
-    notificationCount,
     onAcceptSale,
-    onLogout,
-    onManageDisableScrolling,
     onRejectSale,
     params,
     scrollingDisabled,
     transaction,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-    onResendVerificationEmail,
   } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
@@ -90,21 +76,7 @@ export const SalePageComponent = props => {
       title={intl.formatMessage({ id: 'SalePage.title' }, { title: listingTitle })}
       scrollingDisabled={scrollingDisabled}
     >
-      <Topbar
-        isAuthenticated={isAuthenticated}
-        authInProgress={authInProgress}
-        currentUser={currentUser}
-        currentUserHasListings={currentUserHasListings}
-        currentUserHasOrders={currentUserHasOrders}
-        notificationCount={notificationCount}
-        history={history}
-        location={location}
-        onLogout={onLogout}
-        onManageDisableScrolling={onManageDisableScrolling}
-        onResendVerificationEmail={onResendVerificationEmail}
-        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-        sendVerificationEmailError={sendVerificationEmailError}
-      />
+      <TopbarContainer />
       <div className={css.root}>
         {panel}
       </div>
@@ -115,52 +87,31 @@ export const SalePageComponent = props => {
 SalePageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
-  currentUserHasOrders: null,
   fetchSaleError: null,
   acceptSaleError: null,
   rejectSaleError: null,
   logoutError: null,
-  notificationCount: 0,
   transaction: null,
-  sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
+const { bool, func, instanceOf, oneOf, shape, string } = PropTypes;
 
 SalePageComponent.propTypes = {
   authInfoError: instanceOf(Error),
-  authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
-  currentUserHasListings: bool.isRequired,
-  currentUserHasOrders: bool,
   fetchSaleError: instanceOf(Error),
   acceptSaleError: instanceOf(Error),
   rejectSaleError: instanceOf(Error),
   acceptInProgress: bool.isRequired,
   rejectInProgress: bool.isRequired,
   intl: intlShape.isRequired,
-  isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
-  notificationCount: number,
   onAcceptSale: func.isRequired,
-  onLogout: func.isRequired,
-  onManageDisableScrolling: func.isRequired,
   onRejectSale: func.isRequired,
   params: shape({ id: string }).isRequired,
   scrollingDisabled: bool.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
-  sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
-  onResendVerificationEmail: func.isRequired,
-
-  // from withRouter
-  history: shape({
-    push: func.isRequired,
-  }).isRequired,
-  location: shape({
-    search: string.isRequired,
-  }).isRequired,
 };
 
 const mapStateToProps = state => {
@@ -172,37 +123,23 @@ const mapStateToProps = state => {
     rejectInProgress,
     transactionRef,
   } = state.SalePage;
-  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
-  const {
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    currentUserNotificationCount: notificationCount,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-  } = state.user;
+  const { authInfoError, logoutError } = state.Auth;
+  const { currentUser } = state.user;
 
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
 
   return {
     authInfoError,
-    authInProgress: authenticationInProgress(state),
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
     fetchSaleError,
     acceptSaleError,
     rejectSaleError,
     acceptInProgress,
     rejectInProgress,
-    isAuthenticated,
     logoutError,
-    notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
     transaction,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
   };
 };
 
@@ -210,14 +147,10 @@ const mapDispatchToProps = dispatch => {
   return {
     onAcceptSale: transactionId => dispatch(acceptSale(transactionId)),
     onRejectSale: transactionId => dispatch(rejectSale(transactionId)),
-    onLogout: historyPush => dispatch(logout(historyPush)),
-    onManageDisableScrolling: (componentId, disableScrolling) =>
-      dispatch(manageDisableScrolling(componentId, disableScrolling)),
-    onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   };
 };
 
-const SalePage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(
+const SalePage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
   SalePageComponent
 );
 
