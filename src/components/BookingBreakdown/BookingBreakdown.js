@@ -69,14 +69,14 @@ export const BookingBreakdownComponent = props => {
       item.includeFor.includes(isProvider ? 'provider' : 'customer')
   );
 
-  const refundInfo = !refund
-    ? null
-    : <div className={css.lineItem}>
+  const refundInfo = refund
+    ? <div className={css.lineItem}>
         <span className={css.itemLabel}>
           <FormattedMessage id="BookingBreakdown.refund" />
         </span>
         <span className={css.itemValue}>{formatMoney(intl, refund.lineTotal)}</span>
-      </div>;
+      </div>
+    : null;
 
   const nightCount = nightPurchase.quantity.toFixed();
   const nightCountMessage = (
