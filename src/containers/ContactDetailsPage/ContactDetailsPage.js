@@ -1,46 +1,35 @@
 import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { ensureCurrentUser } from '../../util/data';
 import { fetchCurrentUser, sendVerificationEmail } from '../../ducks/user.duck';
-import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import {
   ContentWrapper,
   LayoutSideNavigation,
   Page,
   SideNavWrapper,
   TabNav,
-  Topbar,
   TopbarWrapper,
   UserNav,
 } from '../../components';
-import { ContactDetailsForm } from '../../containers';
+import { ContactDetailsForm, TopbarContainer } from '../../containers';
 
+import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { changeEmail, changeEmailClear } from './ContactDetailsPage.duck';
 import css from './ContactDetailsPage.css';
 
 export const ContactDetailsPageComponent = props => {
   const {
     authInfoError,
-    authInProgress,
     changeEmailError,
     changeEmailInProgress,
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
     emailChanged,
-    history,
-    isAuthenticated,
-    location,
     logoutError,
-    notificationCount,
     onChange,
-    onLogout,
-    onManageDisableScrolling,
+    scrollingDisabled,
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
     onResendVerificationEmail,
@@ -83,26 +72,18 @@ export const ContactDetailsPageComponent = props => {
     : null;
 
   return (
-    <Page authInfoError={authInfoError} logoutError={logoutError} title="Contact details">
+    <Page
+      authInfoError={authInfoError}
+      logoutError={logoutError}
+      title="Contact details"
+      scrollingDisabled={scrollingDisabled}
+    >
       <LayoutSideNavigation>
         <TopbarWrapper>
-          <Topbar
-            authInProgress={authInProgress}
+          <TopbarContainer
             currentPage="ContactDetailsPage"
-            currentUser={currentUser}
-            currentUserHasListings={currentUserHasListings}
-            currentUserHasOrders={currentUserHasOrders}
             desktopClassName={css.desktopTopbar}
-            history={history}
-            isAuthenticated={isAuthenticated}
-            location={location}
             mobileClassName={css.mobileTopbar}
-            notificationCount={notificationCount}
-            onLogout={onLogout}
-            onManageDisableScrolling={onManageDisableScrolling}
-            onResendVerificationEmail={onResendVerificationEmail}
-            sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-            sendVerificationEmailError={sendVerificationEmailError}
           />
           <UserNav selectedPageName="ContactDetailsPage" />
         </TopbarWrapper>
@@ -126,39 +107,25 @@ ContactDetailsPageComponent.defaultProps = {
   authInfoError: null,
   changeEmailError: null,
   currentUser: null,
-  currentUserHasOrders: null,
   logoutError: null,
-  notificationCount: 0,
   sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf, number, object, shape } = PropTypes;
+const { bool, func, instanceOf } = PropTypes;
 
 ContactDetailsPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
-  authInProgress: bool.isRequired,
   changeEmailError: instanceOf(Error),
   changeEmailInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
-  currentUserHasListings: bool.isRequired,
-  currentUserHasOrders: bool,
   emailChanged: bool.isRequired,
-  isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
-  notificationCount: number,
   onChange: func.isRequired,
-  onLogout: func.isRequired,
-  onManageDisableScrolling: func.isRequired,
   onSubmitChangeEmail: func.isRequired,
+  scrollingDisabled: bool.isRequired,
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: instanceOf(Error),
   onResendVerificationEmail: func.isRequired,
-
-  // from withRouter
-  history: shape({
-    push: func.isRequired,
-  }).isRequired,
-  location: shape({ state: object }).isRequired,
 };
 
 const mapStateToProps = state => {
@@ -167,23 +134,16 @@ const mapStateToProps = state => {
   // Topbar needs user info.
   const {
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    currentUserNotificationCount: notificationCount,
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
   } = state.user;
   const { changeEmailError, changeEmailInProgress, emailChanged } = state.ContactDetailsPage;
   return {
     authInfoError,
-    authInProgress: authenticationInProgress(state),
     changeEmailError,
     changeEmailInProgress,
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
     emailChanged,
-    notificationCount,
     isAuthenticated,
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
@@ -194,14 +154,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onChange: () => dispatch(changeEmailClear()),
-  onLogout: historyPush => dispatch(logout(historyPush)),
-  onManageDisableScrolling: (componentId, disableScrolling) =>
-    dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   onSubmitChangeEmail: values => dispatch(changeEmail(values)),
 });
 
-const ContactDetailsPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
+const ContactDetailsPage = compose(connect(mapStateToProps, mapDispatchToProps))(
   ContactDetailsPageComponent
 );
 
