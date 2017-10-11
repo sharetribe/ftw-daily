@@ -12,10 +12,9 @@ import { createResourceLocatorString } from '../../util/routes';
 import { createSlug, parse, stringify } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
-import { sendVerificationEmail } from '../../ducks/user.duck';
-import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { SearchMap, ModalInMobile, Page, SearchResultsPanel, Topbar } from '../../components';
+import { SearchMap, ModalInMobile, Page, SearchResultsPanel } from '../../components';
+import { TopbarContainer } from '../../containers';
 
 import { searchListings, searchMapListings } from './SearchPage.duck';
 import MapIcon from './MapIcon';
@@ -135,28 +134,17 @@ export class SearchPageComponent extends Component {
   render() {
     const {
       authInfoError,
-      authInProgress,
-      currentUser,
-      currentUserHasListings,
-      currentUserHasOrders,
-      history,
       intl,
-      isAuthenticated,
       listings,
       location,
       logoutError,
       mapListings,
-      notificationCount,
-      onLogout,
       onManageDisableScrolling,
       pagination,
       scrollingDisabled,
       searchInProgress,
       searchListingsError,
       searchParams,
-      sendVerificationEmailInProgress,
-      sendVerificationEmailError,
-      onResendVerificationEmail,
     } = this.props;
     // eslint-disable-next-line no-unused-vars
     const { boundsChanged, page, ...searchInURL } = parse(location.search, {
@@ -286,22 +274,7 @@ export class SearchPageComponent extends Component {
         `
         }
       >
-        <Topbar
-          className={css.topbar}
-          isAuthenticated={isAuthenticated}
-          authInProgress={authInProgress}
-          currentUser={currentUser}
-          currentUserHasListings={currentUserHasListings}
-          currentUserHasOrders={currentUserHasOrders}
-          notificationCount={notificationCount}
-          history={history}
-          location={location}
-          onLogout={onLogout}
-          onManageDisableScrolling={onManageDisableScrolling}
-          onResendVerificationEmail={onResendVerificationEmail}
-          sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-          sendVerificationEmailError={sendVerificationEmailError}
-        />
+        <TopbarContainer className={css.topbar} />
         <div className={css.container}>
           <div className={css.searchResultContainer}>
             <div className={css.searchResultSummary}>
@@ -356,33 +329,22 @@ export class SearchPageComponent extends Component {
 
 SearchPageComponent.defaultProps = {
   authInfoError: null,
-  currentUser: null,
-  currentUserHasOrders: null,
   listings: [],
   logoutError: null,
   mapListings: [],
-  notificationCount: 0,
   pagination: null,
   searchListingsError: null,
   searchParams: {},
   tab: 'listings',
-  sendVerificationEmailError: null,
 };
 
-const { array, bool, func, instanceOf, number, oneOf, object, shape, string } = PropTypes;
+const { array, bool, func, instanceOf, oneOf, object, shape, string } = PropTypes;
 
 SearchPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
-  authInProgress: bool.isRequired,
-  currentUser: propTypes.currentUser,
-  currentUserHasListings: bool.isRequired,
-  currentUserHasOrders: bool,
-  isAuthenticated: bool.isRequired,
   listings: array,
   mapListings: array,
   logoutError: instanceOf(Error),
-  notificationCount: number,
-  onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   onSearchMapListings: func.isRequired,
   pagination: propTypes.pagination,
@@ -391,9 +353,6 @@ SearchPageComponent.propTypes = {
   searchListingsError: instanceOf(Error),
   searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
-  sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
-  onResendVerificationEmail: func.isRequired,
 
   // from withRouter
   history: shape({
@@ -416,15 +375,7 @@ const mapStateToProps = state => {
     searchParams,
     searchMapListingIds,
   } = state.SearchPage;
-  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
-  const {
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    currentUserNotificationCount: notificationCount,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-  } = state.user;
+  const { authInfoError, logoutError } = state.Auth;
   const pageListings = getListingsById(state, currentPageResultIds);
   const mapListings = getListingsById(
     state,
@@ -433,30 +384,20 @@ const mapStateToProps = state => {
 
   return {
     authInfoError,
-    authInProgress: authenticationInProgress(state),
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    isAuthenticated,
     listings: pageListings,
     logoutError,
     mapListings,
-    notificationCount,
     pagination,
     scrollingDisabled: isScrollingDisabled(state),
     searchInProgress,
     searchListingsError,
     searchParams,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
-  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   onSearchMapListings: searchParams => dispatch(searchMapListings(searchParams)),
 });
 
