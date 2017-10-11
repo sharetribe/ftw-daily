@@ -4,7 +4,7 @@
 /* ================ Fonts ================ */
 
 body {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
   -moz-osx-font-smoothing: grayscale; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
   text-rendering: optimizeSpeed;
@@ -75,7 +75,7 @@ label {
 }
 
 button {
-  font-family: "sofiapro", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 select {
@@ -90,4 +90,13 @@ textarea {
   @apply --marketplaceInputStyles;
   min-height: 48px;
   padding: 0 0 5px 0;
+}
+
+:global(.fontsLoaded) {
+  & body {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+  }
+  & button {
+    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+  }
 }
