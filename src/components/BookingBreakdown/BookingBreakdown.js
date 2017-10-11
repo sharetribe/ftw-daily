@@ -64,9 +64,7 @@ export const BookingBreakdownComponent = props => {
     item => item.code === 'line-item/provider-commission'
   );
   const refund = transaction.attributes.lineItems.find(
-    item =>
-      item.code === 'line-item/refund' &&
-      item.includeFor.includes(isProvider ? 'provider' : 'customer')
+    item => item.code === (isProvider ? 'line-item/provider-refund' : 'line-item/customer-refund')
   );
 
   const refundInfo = refund
