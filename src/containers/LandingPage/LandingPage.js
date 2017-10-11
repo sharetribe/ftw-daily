@@ -3,12 +3,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { injectIntl, intlShape } from 'react-intl';
-import { sendVerificationEmail } from '../../ducks/user.duck';
-import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import * as propTypes from '../../util/propTypes';
+import { isScrollingDisabled } from '../../ducks/UI.duck';
 import config from '../../config';
-import { Page, HeroSection, Topbar } from '../../components';
+import { Page, HeroSection } from '../../components';
+import { TopbarContainer } from '../../containers';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
@@ -17,22 +15,11 @@ import css from './LandingPage.css';
 export const LandingPageComponent = props => {
   const {
     authInfoError,
-    authInProgress,
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
     history,
     intl,
-    isAuthenticated,
     location,
     logoutError,
-    notificationCount,
-    onLogout,
-    onManageDisableScrolling,
     scrollingDisabled,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-    onResendVerificationEmail,
   } = props;
 
   // Schema for search engines (helps them to understand what this page is about)
@@ -68,22 +55,7 @@ export const LandingPageComponent = props => {
       `
       }
     >
-
-      <Topbar
-        isAuthenticated={isAuthenticated}
-        authInProgress={authInProgress}
-        currentUser={currentUser}
-        currentUserHasListings={currentUserHasListings}
-        currentUserHasOrders={currentUserHasOrders}
-        notificationCount={notificationCount}
-        history={history}
-        location={location}
-        onLogout={onLogout}
-        onManageDisableScrolling={onManageDisableScrolling}
-        onResendVerificationEmail={onResendVerificationEmail}
-        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-        sendVerificationEmailError={sendVerificationEmailError}
-      />
+      <TopbarContainer />
       <div className={css.heroContainer}>
         <HeroSection className={css.hero} history={history} location={location} />
       </div>
@@ -93,30 +65,15 @@ export const LandingPageComponent = props => {
 
 LandingPageComponent.defaultProps = {
   authInfoError: null,
-  currentUser: null,
-  currentUserHasOrders: null,
   logoutError: null,
-  notificationCount: 0,
-  sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf, number, object } = PropTypes;
+const { bool, instanceOf, object } = PropTypes;
 
 LandingPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
-  authInProgress: bool.isRequired,
-  currentUser: propTypes.currentUser,
-  currentUserHasListings: bool.isRequired,
-  currentUserHasOrders: bool,
-  isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
-  notificationCount: number,
-  onLogout: func.isRequired,
-  onManageDisableScrolling: func.isRequired,
   scrollingDisabled: bool.isRequired,
-  sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
-  onResendVerificationEmail: func.isRequired,
 
   // from withRouter
   history: object.isRequired,
@@ -127,39 +84,14 @@ LandingPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
-  const {
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    currentUserNotificationCount: notificationCount,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-  } = state.user;
+  const { authInfoError, logoutError } = state.Auth;
   return {
     authInfoError,
-    authInProgress: authenticationInProgress(state),
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    isAuthenticated,
     logoutError,
-    notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  onLogout: historyPush => dispatch(logout(historyPush)),
-  onManageDisableScrolling: (componentId, disableScrolling) =>
-    dispatch(manageDisableScrolling(componentId, disableScrolling)),
-  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
-});
-
-const LandingPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl, withRouter)(
-  LandingPageComponent
-);
+const LandingPage = compose(connect(mapStateToProps), injectIntl, withRouter)(LandingPageComponent);
 
 export default LandingPage;
