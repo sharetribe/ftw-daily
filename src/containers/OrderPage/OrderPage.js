@@ -1,18 +1,16 @@
 import React, { PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
-import { NamedRedirect, OrderDetailsPanel, Page, Topbar } from '../../components';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
-import { sendVerificationEmail } from '../../ducks/user.duck';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
-import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { loadData } from './OrderPage.duck';
+import { isScrollingDisabled } from '../../ducks/UI.duck';
+import { NamedRedirect, OrderDetailsPanel, Page } from '../../components';
+import { TopbarContainer } from '../../containers';
 
+import { loadData } from './OrderPage.duck';
 import css from './OrderPage.css';
 
 // OrderPage handles data loading
@@ -20,25 +18,13 @@ import css from './OrderPage.css';
 export const OrderPageComponent = props => {
   const {
     authInfoError,
-    authInProgress,
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
     fetchOrderError,
-    history,
     intl,
-    isAuthenticated,
-    location,
     logoutError,
-    notificationCount,
-    onLogout,
-    onManageDisableScrolling,
     params,
     scrollingDisabled,
     transaction,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-    onResendVerificationEmail,
   } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
@@ -76,21 +62,7 @@ export const OrderPageComponent = props => {
       title={intl.formatMessage({ id: 'OrderPage.title' }, { listingTitle })}
       scrollingDisabled={scrollingDisabled}
     >
-      <Topbar
-        isAuthenticated={isAuthenticated}
-        authInProgress={authInProgress}
-        currentUser={currentUser}
-        currentUserHasListings={currentUserHasListings}
-        currentUserHasOrders={currentUserHasOrders}
-        notificationCount={notificationCount}
-        history={history}
-        location={location}
-        onLogout={onLogout}
-        onManageDisableScrolling={onManageDisableScrolling}
-        onResendVerificationEmail={onResendVerificationEmail}
-        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-        sendVerificationEmailError={sendVerificationEmailError}
-      />
+      <TopbarContainer />
       {panel}
     </Page>
   );
@@ -99,88 +71,43 @@ export const OrderPageComponent = props => {
 OrderPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
-  currentUserHasOrders: null,
   fetchOrderError: null,
   logoutError: null,
-  notificationCount: 0,
   transaction: null,
-  sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
+const { bool, instanceOf, oneOf, shape, string } = PropTypes;
 
 OrderPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
-  authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
-  currentUserHasListings: bool.isRequired,
-  currentUserHasOrders: bool,
   fetchOrderError: instanceOf(Error),
   intl: intlShape.isRequired,
-  isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
-  notificationCount: number,
-  onLogout: func.isRequired,
-  onManageDisableScrolling: func.isRequired,
   params: shape({ id: string }).isRequired,
   scrollingDisabled: bool.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
-  sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
-  onResendVerificationEmail: func.isRequired,
-
-  // from withRouter
-  history: shape({
-    push: func.isRequired,
-  }).isRequired,
-  location: shape({
-    search: string.isRequired,
-  }).isRequired,
 };
 
 const mapStateToProps = state => {
   const { fetchOrderError, transactionRef } = state.OrderPage;
-  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
-  const {
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    currentUserNotificationCount: notificationCount,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-  } = state.user;
-
+  const { authInfoError, logoutError } = state.Auth;
+  const { currentUser } = state.user;
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
 
   return {
     authInfoError,
-    authInProgress: authenticationInProgress(state),
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
     fetchOrderError,
-    isAuthenticated,
     logoutError,
-    notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
     transaction,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  onLogout: historyPush => dispatch(logout(historyPush)),
-  onManageDisableScrolling: (componentId, disableScrolling) =>
-    dispatch(manageDisableScrolling(componentId, disableScrolling)),
-  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
-});
-
-const OrderPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(
-  OrderPageComponent
-);
+const OrderPage = compose(connect(mapStateToProps), injectIntl)(OrderPageComponent);
 
 OrderPage.loadData = loadData;
 
