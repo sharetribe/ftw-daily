@@ -60,7 +60,6 @@ exports[`LandingPage matches snapshot 1`] = `
   <div>
     <HeroSection
       className={null}
-      flattenedRoutes={Array []}
       history={
         Object {
           "push": [Function],

@@ -4,7 +4,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
   logoutError={null}
   title="CheckoutPage.title">
   <div>
-    <withFlattenedRoutes(withRouter(NamedLink))
+    <NamedLink
       name="LandingPage">
       <LogoIcon
         alt="Logo"
@@ -15,7 +15,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
         alt="CheckoutPage.goToLandingPage"
         className={null}
         isMobile={false} />
-    </withFlattenedRoutes(withRouter(NamedLink))>
+    </NamedLink>
   </div>
   <div>
     <div>

@@ -5,10 +5,10 @@ import { withRouter } from 'react-router-dom';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import config from '../../config';
+import routeConfiguration from '../../routeConfiguration';
 import * as propTypes from '../../util/propTypes';
 import { formatMoney } from '../../util/currency';
 import { ensureListing } from '../../util/data';
-import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { createResourceLocatorString } from '../../util/routes';
 import { createSlug } from '../../util/urlHelpers';
 import { ResponsiveImage } from '../../components';
@@ -21,23 +21,23 @@ const getPixelPositionOffset = (width, height) => {
   return { x: -1 * (width / 2), y: -1 * (height + 3) };
 };
 
-const createURL = (flattenedRoutes, history, listing) => {
+const createURL = (routes, history, listing) => {
   const id = listing.id.uuid;
   const slug = createSlug(listing.attributes.title);
   const pathParams = { id, slug };
-  return createResourceLocatorString('ListingPage', flattenedRoutes, pathParams, {});
+  return createResourceLocatorString('ListingPage', routes, pathParams, {});
 };
 
 // ListingCard is the listing info without overlayview or carousel controls
 const ListingCard = props => {
-  const { className, clickHandler, flattenedRoutes, history, intl, isInCarousel, listing } = props;
+  const { className, clickHandler, history, intl, isInCarousel, listing } = props;
 
   const { title, price } = listing.attributes;
   const formattedPrice = price && price.currency === config.currency
     ? formatMoney(intl, price)
     : price.currency;
   const firstImage = listing.images && listing.images.length > 0 ? listing.images[0] : null;
-  const urlToListing = createURL(flattenedRoutes, history, listing);
+  const urlToListing = createURL(routeConfiguration(), history, listing);
 
   // listing card anchor needs sometimes inherited border radius.
   const classes = classNames(
@@ -100,7 +100,6 @@ ListingCard.propTypes = {
   className: string,
   listing: propTypes.listing.isRequired,
   clickHandler: func.isRequired,
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
   history: shape({
     push: func.isRequired,
   }).isRequired,
@@ -127,7 +126,7 @@ class SearchMapInfoCard extends Component {
   }
 
   render() {
-    const { className, rootClassName, intl, flattenedRoutes, history, listings } = this.props;
+    const { className, rootClassName, intl, history, listings } = this.props;
     const currentListing = ensureListing(listings[this.state.currentListingIndex]);
     const geolocation = currentListing.attributes.geolocation;
 
@@ -179,7 +178,6 @@ class SearchMapInfoCard extends Component {
           <ListingCard
             clickHandler={this.clickHandler}
             listing={currentListing}
-            flattenedRoutes={flattenedRoutes}
             history={history}
             intl={intl}
             isInCarousel={hasCarousel}
@@ -204,9 +202,6 @@ SearchMapInfoCard.propTypes = {
   listings: arrayOf(propTypes.listing).isRequired,
   onClickCallback: func,
 
-  // from withFlattenedRoutes
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
-
   // from withRouter
   history: shape({
     push: func.isRequired,
@@ -216,4 +211,4 @@ SearchMapInfoCard.propTypes = {
   intl: intlShape.isRequired,
 };
 
-export default compose(withRouter, withFlattenedRoutes, injectIntl)(SearchMapInfoCard);
+export default compose(withRouter, injectIntl)(SearchMapInfoCard);

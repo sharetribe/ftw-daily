@@ -59,7 +59,6 @@ export const EditListingPageComponent = props => {
     currentUserHasOrders,
     createStripeAccountError,
     fetchInProgress,
-    flattenedRoutes,
     getListing,
     history,
     intl,
@@ -168,7 +167,6 @@ export const EditListingPageComponent = props => {
           errors={errors}
           fetchInProgress={fetchInProgress}
           newListingCreated={newListingCreated}
-          flattenedRoutes={flattenedRoutes}
           history={history}
           images={images}
           listing={isNew ? page.listingDraft : currentListing}
@@ -211,7 +209,7 @@ EditListingPageComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { arrayOf, bool, func, instanceOf, number, object, shape, string, oneOf } = PropTypes;
+const { bool, func, instanceOf, number, object, shape, string, oneOf } = PropTypes;
 
 EditListingPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
@@ -221,7 +219,6 @@ EditListingPageComponent.propTypes = {
   currentUserHasListings: bool.isRequired,
   currentUserHasOrders: bool,
   fetchInProgress: bool.isRequired,
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
   getListing: func.isRequired,
   isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),

@@ -60,7 +60,7 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
             id="OrderDetailsPanel.orderAcceptedSubtitle"
             values={
               Object {
-                "listingLink": <withFlattenedRoutes(withRouter(NamedLink))
+                "listingLink": <NamedLink
                   name="ListingPage"
                   params={
                       Object {
@@ -69,7 +69,7 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
                         }
                   }>
                   listing1 title
-              </withFlattenedRoutes(withRouter(NamedLink))>,
+              </NamedLink>,
               }
             } />
         </span>
@@ -452,7 +452,7 @@ exports[`OrderDetailsPanel autorejected matches snapshot 1`] = `
           id="OrderDetailsPanel.orderAutoRejectedTitle"
           values={
             Object {
-              "listingLink": <withFlattenedRoutes(withRouter(NamedLink))
+              "listingLink": <NamedLink
                 name="ListingPage"
                 params={
                     Object {
@@ -461,7 +461,7 @@ exports[`OrderDetailsPanel autorejected matches snapshot 1`] = `
                       }
                 }>
                 listing1 title
-            </withFlattenedRoutes(withRouter(NamedLink))>,
+            </NamedLink>,
             }
           } />
       </h1>
@@ -853,7 +853,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
             id="OrderDetailsPanel.orderPreauthorizedSubtitle"
             values={
               Object {
-                "listingLink": <withFlattenedRoutes(withRouter(NamedLink))
+                "listingLink": <NamedLink
                   name="ListingPage"
                   params={
                       Object {
@@ -862,7 +862,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
                         }
                   }>
                   listing1 title
-              </withFlattenedRoutes(withRouter(NamedLink))>,
+              </NamedLink>,
               }
             } />
         </span>
@@ -1238,7 +1238,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
           id="OrderDetailsPanel.orderDeliveredTitle"
           values={
             Object {
-              "listingLink": <withFlattenedRoutes(withRouter(NamedLink))
+              "listingLink": <NamedLink
                 name="ListingPage"
                 params={
                     Object {
@@ -1247,7 +1247,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
                       }
                 }>
                 listing1 title
-            </withFlattenedRoutes(withRouter(NamedLink))>,
+            </NamedLink>,
             }
           } />
       </h1>
@@ -1639,7 +1639,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
             id="OrderDetailsPanel.orderPreauthorizedSubtitle"
             values={
               Object {
-                "listingLink": <withFlattenedRoutes(withRouter(NamedLink))
+                "listingLink": <NamedLink
                   name="ListingPage"
                   params={
                       Object {
@@ -1648,7 +1648,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
                         }
                   }>
                   listing1 title
-              </withFlattenedRoutes(withRouter(NamedLink))>,
+              </NamedLink>,
               }
             } />
         </span>
@@ -2024,7 +2024,7 @@ exports[`OrderDetailsPanel rejected matches snapshot 1`] = `
           id="OrderDetailsPanel.orderRejectedTitle"
           values={
             Object {
-              "listingLink": <withFlattenedRoutes(withRouter(NamedLink))
+              "listingLink": <NamedLink
                 name="ListingPage"
                 params={
                     Object {
@@ -2033,7 +2033,7 @@ exports[`OrderDetailsPanel rejected matches snapshot 1`] = `
                       }
                 }>
                 listing1 title
-            </withFlattenedRoutes(withRouter(NamedLink))>,
+            </NamedLink>,
             }
           } />
       </h1>

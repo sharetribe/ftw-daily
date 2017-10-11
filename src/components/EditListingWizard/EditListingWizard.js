@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import routeConfiguration from '../../routeConfiguration';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing } from '../../util/data';
 import { createResourceLocatorString } from '../../util/routes';
@@ -76,7 +77,6 @@ const EditListingWizard = props => {
     errors,
     fetchInProgress,
     newListingCreated,
-    flattenedRoutes,
     history,
     images,
     listing,
@@ -142,7 +142,7 @@ const EditListingWizard = props => {
             const pathParams = tabParams(LOCATION);
             // Redirect to location tab
             history.push(
-              createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
+              createResourceLocatorString('EditListingPage', routeConfiguration(), pathParams, {})
             );
           } else {
             update(DESCRIPTION, values);
@@ -175,7 +175,7 @@ const EditListingWizard = props => {
             const pathParams = tabParams(PRICING);
             // Redirect to pricing tab
             history.push(
-              createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
+              createResourceLocatorString('EditListingPage', routeConfiguration(), pathParams, {})
             );
           } else {
             update(LOCATION, updateValues);
@@ -200,7 +200,7 @@ const EditListingWizard = props => {
             const pathParams = tabParams(PHOTOS);
             // Redirect to photos tab
             history.push(
-              createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {})
+              createResourceLocatorString('EditListingPage', routeConfiguration(), pathParams, {})
             );
           } else {
             update(PRICING, values);
@@ -253,7 +253,7 @@ EditListingWizard.defaultProps = {
   updatedTab: null,
 };
 
-const { array, arrayOf, bool, func, object, oneOf, shape, string } = PropTypes;
+const { array, bool, func, object, oneOf, shape, string } = PropTypes;
 
 EditListingWizard.propTypes = {
   className: string,
@@ -271,7 +271,6 @@ EditListingWizard.propTypes = {
   }).isRequired,
   fetchInProgress: bool.isRequired,
   newListingCreated: bool.isRequired,
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
   history: shape({
     push: func.isRequired,
   }).isRequired,

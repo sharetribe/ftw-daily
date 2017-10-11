@@ -3,11 +3,11 @@ import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
+import routeConfiguration from '../../routeConfiguration';
 import * as propTypes from '../../util/propTypes';
 import { formatMoney } from '../../util/currency';
 import { ensureListing } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
-import { withFlattenedRoutes } from '../../util/contextHelpers';
 import { createResourceLocatorString } from '../../util/routes';
 import {
   InlineTextButton,
@@ -46,19 +46,18 @@ const priceData = (price, intl) => {
   return {};
 };
 
-const createURL = (flattenedRoutes, listing) => {
+const createURL = (routes, listing) => {
   const id = listing.id.uuid;
   const slug = createSlug(listing.attributes.title);
   const pathParams = { id, slug, type: 'edit', tab: 'description' };
 
-  return createResourceLocatorString('EditListingPage', flattenedRoutes, pathParams, {});
+  return createResourceLocatorString('EditListingPage', routes, pathParams, {});
 };
 
 export const ManageListingCardComponent = props => {
   const {
     className,
     rootClassName,
-    flattenedRoutes,
     hasClosingError,
     hasOpeningError,
     history,
@@ -232,7 +231,7 @@ export const ManageListingCardComponent = props => {
           onClick={event => {
             event.preventDefault();
             event.stopPropagation();
-            history.push(createURL(flattenedRoutes, listing));
+            history.push(createURL(routeConfiguration(), listing));
           }}
         >
           <FormattedMessage id="ManageListingCard.edit" />
@@ -248,7 +247,7 @@ ManageListingCardComponent.defaultProps = {
   actionsInProgressListingId: null,
 };
 
-const { arrayOf, bool, func, shape, string } = PropTypes;
+const { bool, func, shape, string } = PropTypes;
 
 ManageListingCardComponent.propTypes = {
   className: string,
@@ -263,13 +262,10 @@ ManageListingCardComponent.propTypes = {
   onOpenListing: func.isRequired,
   onToggleMenu: func.isRequired,
 
-  // from withFlattenedRoutes
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
-
   // from withRouter
   history: shape({
     push: func.isRequired,
   }).isRequired,
 };
 
-export default compose(withRouter, withFlattenedRoutes, injectIntl)(ManageListingCardComponent);
+export default compose(withRouter, injectIntl)(ManageListingCardComponent);

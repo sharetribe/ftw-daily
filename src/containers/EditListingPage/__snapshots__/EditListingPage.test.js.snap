@@ -38,7 +38,6 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
       }
     }
     fetchInProgress={false}
-    flattenedRoutes={Array []}
     history={
       Object {
         "push": [Function],

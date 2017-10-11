@@ -1,6 +1,4 @@
 import { createListing } from '../../util/test-data';
-import { flattenRoutes } from '../../util/routes';
-import routesConfiguration from '../../routesConfiguration';
 import EditListingWizard from './EditListingWizard';
 
 const noop = () => null;
@@ -16,7 +14,6 @@ export const NoPhotos = {
     },
     fetchInProgress: false,
     newListingCreated: false,
-    flattenedRoutes: flattenRoutes(routesConfiguration),
     history: { push: noop },
     images: [],
     listing: createListing('listing1'),

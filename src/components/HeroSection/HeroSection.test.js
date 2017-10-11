@@ -8,7 +8,6 @@ describe('HeroSection', () => {
   it('matches snapshot', () => {
     window.google = { maps: {} };
     const heroProps = {
-      flattenedRoutes: [],
       history: { push: noop },
       location: { search: '' },
     };

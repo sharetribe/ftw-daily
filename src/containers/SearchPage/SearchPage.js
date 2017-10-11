@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { debounce, isEqual, unionWith } from 'lodash';
 import classNames from 'classnames';
 import config from '../../config';
-import { withFlattenedRoutes } from '../../util/contextHelpers';
+import routeConfiguration from '../../routeConfiguration';
 import { googleLatLngToSDKLatLng, googleBoundsToSDKBounds } from '../../util/googleMaps';
 import { createResourceLocatorString } from '../../util/routes';
 import { createSlug, parse, stringify } from '../../util/urlHelpers';
@@ -77,7 +77,7 @@ export class SearchPageComponent extends Component {
   // We are using Google Maps idle event instead of bounds_changed, since it will not be fired
   // too often (in the middle of map's pan or zoom activity)
   onIdle(googleMap) {
-    const { flattenedRoutes, history, location } = this.props;
+    const { history, location } = this.props;
 
     const { address, country, boundsChanged } = parse(location.search, {
       latlng: ['origin'],
@@ -93,7 +93,9 @@ export class SearchPageComponent extends Component {
       const origin = googleLatLngToSDKLatLng(viewportBounds.getCenter());
 
       const searchParams = { address, origin, bounds, country, boundsChanged: true };
-      history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
+      history.push(
+        createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
+      );
     } else {
       this.useLocationSearchBounds = false;
       this.modalOpenedBoundsChange = false;
@@ -137,7 +139,6 @@ export class SearchPageComponent extends Component {
       currentUser,
       currentUserHasListings,
       currentUserHasOrders,
-      flattenedRoutes,
       history,
       intl,
       isAuthenticated,
@@ -245,7 +246,7 @@ export class SearchPageComponent extends Component {
     const schemaDescription = intl.formatMessage({ id: 'SearchPage.schemaDescription' });
     const schemaListings = listings.map((l, i) => {
       const title = l.attributes.title;
-      const pathToItem = createResourceLocatorString('ListingPage', flattenedRoutes, {
+      const pathToItem = createResourceLocatorString('ListingPage', routeConfiguration(), {
         id: l.id.uuid,
         slug: createSlug(title),
       });
@@ -368,7 +369,7 @@ SearchPageComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { array, arrayOf, bool, func, instanceOf, number, oneOf, object, shape, string } = PropTypes;
+const { array, bool, func, instanceOf, number, oneOf, object, shape, string } = PropTypes;
 
 SearchPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
@@ -393,9 +394,6 @@ SearchPageComponent.propTypes = {
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: instanceOf(Error),
   onResendVerificationEmail: func.isRequired,
-
-  // from withFlattenedRoutes
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
 
   // from withRouter
   history: shape({
@@ -462,12 +460,9 @@ const mapDispatchToProps = dispatch => ({
   onSearchMapListings: searchParams => dispatch(searchMapListings(searchParams)),
 });
 
-const SearchPage = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  injectIntl,
-  withFlattenedRoutes,
-  withRouter
-)(SearchPageComponent);
+const SearchPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl, withRouter)(
+  SearchPageComponent
+);
 
 SearchPage.loadData = (params, search) => {
   const queryParams = parse(search, {

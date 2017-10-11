@@ -3,7 +3,7 @@ import { fakeIntl } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
 import { LandingPageComponent } from './LandingPage';
 import { RoutesProvider } from '../../components';
-import routesConfiguration from '../../routesConfiguration';
+import routeConfiguration from '../../routeConfiguration';
 
 const noop = () => null;
 
@@ -11,7 +11,6 @@ describe('LandingPage', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
       <LandingPageComponent
-        flattenedRoutes={[]}
         history={{ push: noop }}
         location={{ search: '' }}
         scrollingDisabled={false}

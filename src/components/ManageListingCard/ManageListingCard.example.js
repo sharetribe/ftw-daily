@@ -22,7 +22,6 @@ export const ManageListingCardWrapped = {
     onCloseListing: noop,
     onOpenListing: noop,
     onToggleMenu: noop,
-    flattenedRoutes: [],
     history: { push: noop },
   },
 };

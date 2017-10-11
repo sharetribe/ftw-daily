@@ -4,8 +4,9 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { pickBy } from 'lodash';
 import classNames from 'classnames';
 import config from '../../config';
+import routeConfiguration from '../../routeConfiguration';
 import { ensureCurrentUser } from '../../util/data';
-import { withFlattenedRoutes, withViewport } from '../../util/contextHelpers';
+import { withViewport } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
@@ -98,8 +99,9 @@ class TopbarComponent extends Component {
     const hasOrders = currentUserHasOrders === true;
     const hasListingsOrOrders = currentUserHasListings || hasOrders;
 
+    const routes = routeConfiguration();
     const whitelistedPaths = VERIFY_EMAIL_MODAL_WHITELIST.map(page =>
-      pathByRouteName(page, this.props.flattenedRoutes));
+      pathByRouteName(page, routes));
     const isNotWhitelisted = !whitelistedPaths.includes(newLocation.pathname);
 
     // Show reminder
@@ -126,16 +128,16 @@ class TopbarComponent extends Component {
 
   handleSubmit(values) {
     const { search, selectedPlace } = values.location;
-    const { flattenedRoutes, history } = this.props;
+    const { history } = this.props;
     const { origin, bounds, country } = selectedPlace;
     const searchParams = { address: search, origin, bounds, country };
-    history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams));
   }
 
   handleLogout() {
-    const { onLogout, history, flattenedRoutes } = this.props;
+    const { onLogout, history } = this.props;
     onLogout().then(() => {
-      const path = pathByRouteName('LandingPage', flattenedRoutes);
+      const path = pathByRouteName('LandingPage', routeConfiguration());
 
       // In production we ensure that data is really lost,
       // but in development mode we use stored values for debugging
@@ -349,7 +351,7 @@ TopbarComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { arrayOf, bool, func, instanceOf, number, shape, string } = PropTypes;
+const { bool, func, instanceOf, number, shape, string } = PropTypes;
 
 TopbarComponent.propTypes = {
   className: string,
@@ -384,14 +386,11 @@ TopbarComponent.propTypes = {
     height: number.isRequired,
   }).isRequired,
 
-  // from withFlattenedRoutes
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
-
   // from injectIntl
   intl: intlShape.isRequired,
 };
 
-const Topbar = compose(withViewport, withFlattenedRoutes, injectIntl)(TopbarComponent);
+const Topbar = compose(withViewport, injectIntl)(TopbarComponent);
 
 Topbar.displayName = 'Topbar';
 

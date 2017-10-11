@@ -4,9 +4,14 @@ import { FormattedMessage } from 'react-intl';
 import { types } from '../../util/sdkLoader';
 import { createUser, createCurrentUser, createListing, fakeIntl } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
-import { ListingPageComponent, ActionBar } from './ListingPage';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { showListingRequest, showListingError, showListing } from './ListingPage.duck';
+
+// routeConfiguration needs to be imported before tests for ListingPageComponent can be made.
+// Otherwise, ListingPage itself is not initialized correctly when routeConfiguration is imported
+// (loadData call fails).
+import routeConfiguration from '../../routeConfiguration';
+import { ListingPageComponent, ActionBar } from './ListingPage';
 
 const { UUID } = types;
 const noop = () => null;
@@ -16,17 +21,8 @@ describe('ListingPage', () => {
     const currentUser = createCurrentUser('user-2');
     const listing1 = createListing('listing1', {}, { author: createUser('user-1') });
     const getListing = () => listing1;
+
     const props = {
-      flattenedRoutes: [
-        // Fake route since a circular dependency prevents using the
-        // full routesConfiguration here
-        {
-          path: '/l/:id',
-          exact: true,
-          name: 'ListingPageCanonical',
-          component: noop,
-        },
-      ],
       location: { search: '' },
       history: {
         push: () => console.log('HistoryPush called'),

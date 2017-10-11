@@ -3,31 +3,14 @@ import { matchPath } from 'react-router-dom';
 import pathToRegexp from 'path-to-regexp';
 import { stringify } from './urlHelpers';
 
-// Flatten the routes config.
-// TODO: flatten the original config and remove this function
-export const flattenRoutes = routes =>
-  routes.reduce(
-    (flatRoutes, route) => {
-      const r = { ...route };
-      delete r.routes;
-      flatRoutes.push(r);
-      if (route.routes) {
-        return flatRoutes.concat(flattenRoutes(route.routes));
-      }
-      return flatRoutes;
-    },
-    []
-  );
-
-const findRouteByName = (nameToFind, flattenedRoutes) =>
-  find(flattenedRoutes, route => route.name === nameToFind);
+const findRouteByName = (nameToFind, routes) => find(routes, route => route.name === nameToFind);
 
 /**
  * E.g. ```const toListingPath = toPathByRouteName('ListingPage', routes);```
  * Then we can generate listing paths with given params (```toListingPath({ id: uuidX })```)
  */
-const toPathByRouteName = (nameToFind, flattenedRoutes) => {
-  const route = findRouteByName(nameToFind, flattenedRoutes);
+const toPathByRouteName = (nameToFind, routes) => {
+  const route = findRouteByName(nameToFind, routes);
   if (!route) {
     throw new Error(`Path "${nameToFind}" was not found.`);
   }
@@ -37,8 +20,8 @@ const toPathByRouteName = (nameToFind, flattenedRoutes) => {
 /**
  * Shorthand for single path call. (```pathByRouteName('ListingPage', routes, { id: uuidX });```)
  */
-export const pathByRouteName = (nameToFind, flattenedRoutes, params = {}) =>
-  toPathByRouteName(nameToFind, flattenedRoutes)(params);
+export const pathByRouteName = (nameToFind, routes, params = {}) =>
+  toPathByRouteName(nameToFind, routes)(params);
 
 /**
  * Find the matching routes and their params for the given pathname
@@ -48,11 +31,8 @@ export const pathByRouteName = (nameToFind, flattenedRoutes, params = {}) =>
  *
  * @return {Array<{ route, params }>} - All matches as { route, params } objects
  */
-export const matchPathname = (pathname, routesConfiguration) => {
-  // TODO: remove flattening when routesConfiguration is flat
-  const flattenedRoutes = flattenRoutes(routesConfiguration);
-
-  return flattenedRoutes.reduce(
+export const matchPathname = (pathname, routeConfiguration) => {
+  return routeConfiguration.reduce(
     (matches, route) => {
       const { path, exact = false } = route;
       const match = matchPath(pathname, { path, exact });
@@ -74,13 +54,13 @@ export const matchPathname = (pathname, routesConfiguration) => {
  */
 export const createResourceLocatorString = (
   routeName,
-  flattenedRoutes,
+  routes,
   pathParams = {},
   searchParams = {}
 ) => {
   const searchQuery = stringify(searchParams);
   const includeSearchQuery = searchQuery.length > 0 ? `?${searchQuery}` : '';
-  const path = pathByRouteName(routeName, flattenedRoutes, pathParams);
+  const path = pathByRouteName(routeName, routes, pathParams);
   return `${path}${includeSearchQuery}`;
 };
 
@@ -91,12 +71,12 @@ export const createResourceLocatorString = (
  * `dispatch(PageComponent.setInitialValues({ listing, bookingDates }));`
  *
  * @param {String} nameToFind - Route name
- * @param {Array<{ route }>} flattenedRoutes - Route configuration as flattened array.
+ * @param {Array<{ route }>} routes - Route configuration as flat array.
  *
  * @return {Route} - Route that matches the given route name.
  */
-export const findRouteByRouteName = (nameToFind, flattenedRoutes) => {
-  const route = findRouteByName(nameToFind, flattenedRoutes);
+export const findRouteByRouteName = (nameToFind, routes) => {
+  const route = findRouteByName(nameToFind, routes);
   if (!route) {
     throw new Error(`Component "${nameToFind}" was not found.`);
   }

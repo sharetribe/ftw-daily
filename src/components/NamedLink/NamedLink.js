@@ -2,7 +2,7 @@
  * This component wraps React-Router's Link by providing name-based routing.
  *
  * The `name` prop should match a route in the flattened
- * routesConfiguration passed in context by the RoutesProvider
+ * routeConfiguration passed in context by the RoutesProvider
  * component. The `params` props is the route params for the route
  * path of the given route name.
  *
@@ -20,17 +20,15 @@
 import React, { PropTypes } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
+import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName } from '../../util/routes';
-import { withFlattenedRoutes } from '../../util/contextHelpers';
-import * as propTypes from '../../util/propTypes';
 
 export const NamedLinkComponent = props => {
-  const { name, params, flattenedRoutes, title } = props;
+  const { name, params, title } = props;
 
   // Link props
   const { to, children } = props;
-
-  const pathname = pathByRouteName(name, flattenedRoutes, params);
+  const pathname = pathByRouteName(name, routeConfiguration(), params);
   const { match } = props;
   const active = match.url && match.url === pathname;
 
@@ -45,7 +43,7 @@ export const NamedLinkComponent = props => {
   return <Link to={{ pathname, ...to }} {...aElemProps}>{children}</Link>;
 };
 
-const { arrayOf, object, string, shape, any } = PropTypes;
+const { object, string, shape, any } = PropTypes;
 
 NamedLinkComponent.defaultProps = {
   params: {},
@@ -62,7 +60,7 @@ NamedLinkComponent.defaultProps = {
 NamedLinkComponent.displayName = 'NamedLink';
 
 NamedLinkComponent.propTypes = {
-  // name of the route in routesConfiguration
+  // name of the route in routeConfiguration
   name: string.isRequired,
   // params object for the named route
   params: object,
@@ -76,11 +74,11 @@ NamedLinkComponent.propTypes = {
   activeClassName: string,
   title: string,
 
-  // from withFlattenedRoutes
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
-
   // from withRouter
   match: object,
 };
 
-export default withFlattenedRoutes(withRouter(NamedLinkComponent));
+const NamedLink = withRouter(NamedLinkComponent);
+NamedLink.displayName = 'NamedLink';
+
+export default NamedLink;

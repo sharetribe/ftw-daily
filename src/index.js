@@ -22,7 +22,7 @@ import * as sample from './util/sample';
 import config from './config';
 import { authInfo } from './ducks/Auth.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
-import routeConfiguration from './routesConfiguration';
+import routeConfiguration from './routeConfiguration';
 import * as log from './util/log';
 
 import './marketplaceIndex.css';
@@ -81,7 +81,14 @@ if (typeof window !== 'undefined') {
 
   if (config.dev) {
     // Expose stuff for the browser REPL
-    window.app = { config, sdk, sdkTypes: types, store, sample, routeConfiguration };
+    window.app = {
+      config,
+      sdk,
+      sdkTypes: types,
+      store,
+      sample,
+      routeConfiguration: routeConfiguration(),
+    };
   }
 }
 

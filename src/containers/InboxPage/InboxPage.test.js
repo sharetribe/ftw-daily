@@ -9,15 +9,13 @@ import {
   createBooking,
 } from '../../util/test-data';
 import { InboxPageComponent, InboxItem } from './InboxPage';
-import routesConfiguration from '../../routesConfiguration';
-import { flattenRoutes } from '../../util/routes';
+import routeConfiguration from '../../routeConfiguration';
 import { TX_TRANSITION_PREAUTHORIZE } from '../../util/propTypes';
 
 const noop = () => null;
 
 describe('InboxPage', () => {
   it('matches snapshot', () => {
-    const flattenedRoutes = flattenRoutes(routesConfiguration);
     const provider = createUser('provider-user-id');
     const customer = createUser('customer-user-id');
     const currentUserProvider = createCurrentUser('provider-user-id');
@@ -76,9 +74,7 @@ describe('InboxPage', () => {
 
     // Deeply render one InboxItem
     const orderItem = renderDeep(
-      <RoutesProvider flattenedRoutes={flattenedRoutes}>
-        <InboxItem type="order" tx={ordersProps.transactions[0]} intl={fakeIntl} />
-      </RoutesProvider>
+      <InboxItem type="order" tx={ordersProps.transactions[0]} intl={fakeIntl} />
     );
     expect(orderItem).toMatchSnapshot();
 
@@ -126,9 +122,7 @@ describe('InboxPage', () => {
 
     // Deeply render one InboxItem
     const saleItem = renderDeep(
-      <RoutesProvider flattenedRoutes={flattenedRoutes}>
-        <InboxItem type="sale" tx={salesProps.transactions[0]} intl={fakeIntl} />
-      </RoutesProvider>
+      <InboxItem type="sale" tx={salesProps.transactions[0]} intl={fakeIntl} />
     );
     expect(saleItem).toMatchSnapshot();
   });

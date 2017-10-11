@@ -3,7 +3,7 @@ import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { withFlattenedRoutes } from '../../util/contextHelpers';
+import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 import { sendVerificationEmail } from '../../ducks/user.duck';
@@ -40,7 +40,6 @@ export class NotFoundPageComponent extends Component {
       sendVerificationEmailInProgress,
       sendVerificationEmailError,
       onResendVerificationEmail,
-      flattenedRoutes,
       intl,
     } = this.props;
 
@@ -52,7 +51,9 @@ export class NotFoundPageComponent extends Component {
       const { search, selectedPlace } = values.location;
       const { origin, bounds, country } = selectedPlace;
       const searchParams = { address: search, origin, bounds, country };
-      history.push(createResourceLocatorString('SearchPage', flattenedRoutes, {}, searchParams));
+      history.push(
+        createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
+      );
     };
 
     return (
@@ -99,7 +100,7 @@ NotFoundPageComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf, number, object, shape, array } = PropTypes;
+const { bool, func, instanceOf, number, object, shape } = PropTypes;
 
 NotFoundPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
@@ -127,9 +128,6 @@ NotFoundPageComponent.propTypes = {
     push: func.isRequired,
   }).isRequired,
   location: shape({ state: object }).isRequired,
-
-  // from withFlattenedRoutes
-  flattenedRoutes: array.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -166,11 +164,8 @@ const mapDispatchToProps = dispatch => ({
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
-const NotFoundPage = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withRouter,
-  injectIntl,
-  withFlattenedRoutes
-)(NotFoundPageComponent);
+const NotFoundPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(
+  NotFoundPageComponent
+);
 
 export default NotFoundPage;

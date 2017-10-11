@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import config from '../../config';
+import routeConfiguration from '../../routeConfiguration';
 import * as propTypes from '../../util/propTypes';
 import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
@@ -88,7 +89,7 @@ export const ActionBar = props => {
   }
 };
 
-const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
+const { bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
 
 ActionBar.propTypes = {
   isOwnListing: bool.isRequired,
@@ -114,7 +115,7 @@ export class ListingPageComponent extends Component {
   }
 
   handleSubmit(values) {
-    const { flattenedRoutes, history, getListing, params, useInitialValues } = this.props;
+    const { history, getListing, params, useInitialValues } = this.props;
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
@@ -130,15 +131,16 @@ export class ListingPageComponent extends Component {
       },
     };
 
+    const routes = routeConfiguration();
     // Customize checkout page state with current listing and selected bookingDates
-    const { setInitialValues } = findRouteByRouteName('CheckoutPage', flattenedRoutes);
+    const { setInitialValues } = findRouteByRouteName('CheckoutPage', routes);
     useInitialValues(setInitialValues, initialValues);
 
     // Redirect to CheckoutPage
     history.push(
       createResourceLocatorString(
         'CheckoutPage',
-        flattenedRoutes,
+        routes,
         { id: listing.id.uuid, slug: createSlug(listing.attributes.title) },
         {}
       )
@@ -167,7 +169,6 @@ export class ListingPageComponent extends Component {
       sendVerificationEmailInProgress,
       sendVerificationEmailError,
       onResendVerificationEmail,
-      flattenedRoutes,
     } = this.props;
     const listingId = new UUID(params.id);
     const currentListing = ensureListing(getListing(listingId));
@@ -345,9 +346,13 @@ export class ListingPageComponent extends Component {
       { title, price: formattedPrice, siteTitle }
     );
 
-    const canonicalPath = createResourceLocatorString('ListingPageCanonical', flattenedRoutes, {
-      id: listingId.uuid,
-    });
+    const canonicalPath = createResourceLocatorString(
+      'ListingPageCanonical',
+      routeConfiguration(),
+      {
+        id: listingId.uuid,
+      }
+    );
 
     return (
       <Page
@@ -517,7 +522,6 @@ ListingPageComponent.propTypes = {
     push: func.isRequired,
   }).isRequired,
   location: object.isRequired,
-  flattenedRoutes: arrayOf(propTypes.route).isRequired,
   // from injectIntl
   intl: intlShape.isRequired,
   params: shape({
