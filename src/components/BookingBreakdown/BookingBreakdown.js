@@ -63,6 +63,18 @@ export const BookingBreakdownComponent = props => {
   const providerCommissionLineItem = transaction.attributes.lineItems.find(
     item => item.code === 'line-item/provider-commission'
   );
+  const refund = transaction.attributes.lineItems.find(
+    item => item.code === (isProvider ? 'line-item/provider-refund' : 'line-item/customer-refund')
+  );
+
+  const refundInfo = refund
+    ? <div className={css.lineItem}>
+        <span className={css.itemLabel}>
+          <FormattedMessage id="BookingBreakdown.refund" />
+        </span>
+        <span className={css.itemValue}>{formatMoney(intl, refund.lineTotal)}</span>
+      </div>
+    : null;
 
   const nightCount = nightPurchase.quantity.toFixed();
   const nightCountMessage = (
@@ -82,12 +94,10 @@ export const BookingBreakdownComponent = props => {
       throw new Error('Commission should be present and the value should be zero or negative');
     }
 
-    // The total sum that the customer pays is the payinTotal. We use
-    // this amount as the subtotal information for the provider
-    // breakdown.
-    //
-    // NOTE: this might break if the API hides the payinTotal from the provider
-    const formattedSubTotal = formatMoney(intl, transaction.attributes.payinTotal);
+    // Show night purchase line total (unit price * quantity) as a subtotal.
+    // PLEASE NOTE that this assumes that the transaction doesn't have other
+    // line item types than nights (e.g. week, month, year).
+    const formattedSubTotal = formatMoney(intl, nightPurchase.lineTotal);
     subTotalInfo = (
       <div className={css.lineItem}>
         <span className={css.itemLabel}>
@@ -144,6 +154,7 @@ export const BookingBreakdownComponent = props => {
       </div>
       {subTotalInfo}
       {commissionInfo}
+      {refundInfo}
       <hr className={css.totalDivider} />
       <div className={css.lineItem}>
         <div className={css.totalLabel}>
