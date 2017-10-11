@@ -6,15 +6,12 @@ import { connect } from 'react-redux';
 import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
-import { EditListingWizard, NamedRedirect, Page, Topbar } from '../../components';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
-import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import {
-  stripeAccountClearError,
-  createStripeAccount,
-  sendVerificationEmail,
-} from '../../ducks/user.duck';
+import { stripeAccountClearError, createStripeAccount } from '../../ducks/user.duck';
+import { EditListingWizard, NamedRedirect, Page } from '../../components';
+import { TopbarContainer } from '../../containers';
+
 import {
   createListingDraft,
   updateListingDraft,
@@ -53,25 +50,18 @@ const formatRequestData = values => {
 export const EditListingPageComponent = props => {
   const {
     authInfoError,
-    authInProgress,
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
     createStripeAccountError,
     fetchInProgress,
     getListing,
     history,
     intl,
-    isAuthenticated,
-    location,
     logoutError,
-    notificationCount,
     onCreateListing,
     onUpdateListing,
     onCreateListingDraft,
     onImageUpload,
     onRemoveListingImage,
-    onLogout,
     onManageDisableScrolling,
     onPayoutDetailsSubmit,
     onPayoutDetailsFormChange,
@@ -81,9 +71,6 @@ export const EditListingPageComponent = props => {
     page,
     params,
     scrollingDisabled,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-    onResendVerificationEmail,
   } = props;
 
   const { id, type } = params;
@@ -141,24 +128,11 @@ export const EditListingPageComponent = props => {
         title={title}
         scrollingDisabled={scrollingDisabled}
       >
-        <Topbar
+        <TopbarContainer
           className={css.topbar}
           mobileRootClassName={css.mobileTopbar}
-          isAuthenticated={isAuthenticated}
-          authInProgress={authInProgress}
-          currentUser={currentUser}
-          currentUserHasListings={currentUserHasListings}
-          currentUserHasOrders={currentUserHasOrders}
           desktopClassName={css.desktopTopbar}
           mobileClassName={css.mobileTopbar}
-          notificationCount={notificationCount}
-          history={history}
-          location={location}
-          onLogout={onLogout}
-          onManageDisableScrolling={onManageDisableScrolling}
-          onResendVerificationEmail={onResendVerificationEmail}
-          sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-          sendVerificationEmailError={sendVerificationEmailError}
         />
         <EditListingWizard
           className={css.wizard}
@@ -209,24 +183,18 @@ EditListingPageComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf, number, object, shape, string, oneOf } = PropTypes;
+const { bool, func, instanceOf, object, shape, string, oneOf } = PropTypes;
 
 EditListingPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
-  authInProgress: bool.isRequired,
   createStripeAccountError: PropTypes.instanceOf(Error),
   currentUser: propTypes.currentUser,
-  currentUserHasListings: bool.isRequired,
-  currentUserHasOrders: bool,
   fetchInProgress: bool.isRequired,
   getListing: func.isRequired,
-  isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
-  notificationCount: number,
   onCreateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
-  onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   onPayoutDetailsFormChange: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
@@ -243,31 +211,23 @@ EditListingPageComponent.propTypes = {
     tab: string.isRequired,
   }).isRequired,
   scrollingDisabled: bool.isRequired,
-  sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
-  onResendVerificationEmail: func.isRequired,
 
   /* from withRouter */
   history: shape({
     push: func.isRequired,
   }).isRequired,
-  location: object.isRequired,
+
   /* from injectIntl */
   intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
   const page = state.EditListingPage;
-  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
+  const { authInfoError, logoutError } = state.Auth;
   const {
     createStripeAccountInProgress,
     createStripeAccountError,
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    currentUserNotificationCount: notificationCount,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
   } = state.user;
 
   const fetchInProgress = createStripeAccountInProgress;
@@ -278,20 +238,13 @@ const mapStateToProps = state => {
   };
   return {
     authInfoError,
-    authInProgress: authenticationInProgress(state),
     createStripeAccountError,
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
     fetchInProgress,
     getListing,
-    isAuthenticated,
     logoutError,
-    notificationCount,
     page,
     scrollingDisabled: isScrollingDisabled(state),
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
   };
 };
 
@@ -300,7 +253,6 @@ const mapDispatchToProps = dispatch => ({
   onUpdateListing: (tab, values) => dispatch(requestUpdateListing(tab, values)),
   onCreateListingDraft: values => dispatch(createListingDraft(values)),
   onImageUpload: data => dispatch(requestImageUpload(data)),
-  onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onPayoutDetailsFormChange: () => dispatch(stripeAccountClearError()),
@@ -309,7 +261,6 @@ const mapDispatchToProps = dispatch => ({
   onRemoveListingImage: imageId => dispatch(removeListingImage(imageId)),
   onUpdateListingDraft: values => dispatch(updateListingDraft(values)),
   onChange: () => dispatch(clearUpdatedTab()),
-  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
 const EditListingPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
