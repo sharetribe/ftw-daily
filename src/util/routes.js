@@ -29,12 +29,13 @@ export const pathByRouteName = (nameToFind, routes, params = {}) =>
  * @param {String} pathname - Full URL path from root with possible
  * search params and hash included
  *
- * @return {Array<{ route, params }>} - All matches as { route, params } objects
+ * @return {Array<{ route, params }>} - All matches as { route, params } objects if matches has
+ * exact flag set to false. If not, an array containing just the first matched exact route is returned.
  */
 export const matchPathname = (pathname, routeConfiguration) => {
-  return routeConfiguration.reduce(
+  const matchedRoutes =  routeConfiguration.reduce(
     (matches, route) => {
-      const { path, exact = false } = route;
+      const { path, exact = true } = route;
       const match = matchPath(pathname, { path, exact });
       if (match) {
         matches.push({
@@ -46,6 +47,14 @@ export const matchPathname = (pathname, routeConfiguration) => {
     },
     []
   );
+
+  const matchedExactRoute = matchedRoutes.find(r => {
+    return r.exact === true || r.exact == null;
+  });
+
+  // We return matched 'exact' path route only if such exists
+  // and all matches if no exact flag exists.
+  return matchedExactRoute ? [matchedExactRoute] : matchedRoutes;
 };
 
 /**

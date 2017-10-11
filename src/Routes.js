@@ -91,11 +91,15 @@ const Routes = props => {
       staticContext,
       dispatch,
     };
+
+    // By default, our routes are exact.
+    // https://reacttraining.com/react-router/web/api/Route/exact-bool
+    const isExact = route.exact != null ? route.exact : true;
     return (
       <Route
         key={route.name}
         path={route.path}
-        exact={route.exact}
+        exact={isExact}
         render={matchProps => (
           <RouteComponentRenderer
             {...renderProps}
