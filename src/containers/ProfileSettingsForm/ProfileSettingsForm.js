@@ -44,8 +44,10 @@ const RenderAvatar = props => {
         name={name}
         onChange={event => {
           const file = event.target.files[0];
-          const tempId = `${file.name}_${Date.now()}`;
-          onChange({ id: tempId, file });
+          if (file != null) {
+            const tempId = `${file.name}_${Date.now()}`;
+            onChange({ id: tempId, file });
+          }
         }}
         type={type}
       />
@@ -152,9 +154,11 @@ class ProfileSettingsFormComponent extends Component {
     const transientUserProfileImage = profileImage.uploadedImage || user.profileImage;
     const transientUser = { ...user, profileImage: transientUserProfileImage };
 
-    const fileUploadInProgress = uploadInProgress && profileImage.file;
+    // Ensure that file exists if imageFromFile is used
+    const fileExists = !!profileImage.file;
+    const fileUploadInProgress = uploadInProgress && fileExists;
     const delayAfterUpload = profileImage.imageId && this.state.uploadDelay;
-    const imageFromFile = fileUploadInProgress || delayAfterUpload
+    const imageFromFile = fileExists && (fileUploadInProgress || delayAfterUpload)
       ? <ImageFromFile
           id={profileImage.id}
           className={errorClasses}
