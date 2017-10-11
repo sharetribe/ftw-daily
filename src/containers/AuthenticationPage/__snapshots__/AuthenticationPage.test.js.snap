@@ -4,31 +4,8 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
   logoutError={null}
   scrollingDisabled={false}
   title="AuthenticationPage.loginPageTitle">
-  <Topbar
-    authInProgress={false}
-    className=""
-    currentUser={null}
-    currentUserHasListings={false}
-    currentUserHasOrders={null}
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
-    isAuthenticated={false}
-    location={
-      Object {
-        "state": Object {
-          "from": "/protected",
-        },
-      }
-    }
-    notificationCount={0}
-    onLogout={[Function]}
-    onManageDisableScrolling={[Function]}
-    onResendVerificationEmail={[Function]}
-    sendVerificationEmailError={null}
-    sendVerificationEmailInProgress={false} />
+  <Connect(withRouter(TopbarContainerComponent))
+    className="" />
   <div>
     <div>
       <TabNavHorizontal
