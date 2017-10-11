@@ -5,12 +5,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
-import * as propTypes from '../../util/propTypes';
-import { sendVerificationEmail } from '../../ducks/user.duck';
-import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { Page, Topbar } from '../../components';
-import { LocationSearchForm } from '../../containers';
+import { isScrollingDisabled } from '../../ducks/UI.duck';
+import { Page } from '../../components';
+import { LocationSearchForm, TopbarContainer } from '../../containers';
 
 import css from './NotFoundPage.css';
 
@@ -26,21 +23,10 @@ export class NotFoundPageComponent extends Component {
   render() {
     const {
       authInfoError,
-      authInProgress,
-      currentUser,
-      currentUserHasListings,
-      currentUserHasOrders,
       history,
-      isAuthenticated,
-      location,
       logoutError,
-      notificationCount,
-      onLogout,
-      onManageDisableScrolling,
-      sendVerificationEmailInProgress,
-      sendVerificationEmailError,
-      onResendVerificationEmail,
       intl,
+      scrollingDisabled,
     } = this.props;
 
     const title = intl.formatMessage({
@@ -57,22 +43,13 @@ export class NotFoundPageComponent extends Component {
     };
 
     return (
-      <Page authInfoError={authInfoError} logoutError={logoutError} title={title}>
-        <Topbar
-          authInProgress={authInProgress}
-          currentUser={currentUser}
-          currentUserHasListings={currentUserHasListings}
-          currentUserHasOrders={currentUserHasOrders}
-          history={history}
-          isAuthenticated={isAuthenticated}
-          location={location}
-          notificationCount={notificationCount}
-          onLogout={onLogout}
-          onManageDisableScrolling={onManageDisableScrolling}
-          onResendVerificationEmail={onResendVerificationEmail}
-          sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-          sendVerificationEmailError={sendVerificationEmailError}
-        />
+      <Page
+        authInfoError={authInfoError}
+        logoutError={logoutError}
+        title={title}
+        scrollingDisabled={scrollingDisabled}
+      >
+        <TopbarContainer />
         <div className={css.root}>
           <div className={css.content}>
             <div className={css.number}>404</div>
@@ -92,30 +69,16 @@ export class NotFoundPageComponent extends Component {
 
 NotFoundPageComponent.defaultProps = {
   authInfoError: null,
-  currentUser: null,
-  currentUserHasOrders: null,
   logoutError: null,
-  notificationCount: 0,
   staticContext: {},
-  sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf, number, object, shape } = PropTypes;
+const { bool, func, instanceOf, object, shape } = PropTypes;
 
 NotFoundPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
-  authInProgress: bool.isRequired,
-  currentUser: propTypes.currentUser,
-  currentUserHasListings: bool.isRequired,
-  currentUserHasOrders: bool,
-  isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
-  notificationCount: number,
-  onLogout: func.isRequired,
-  onManageDisableScrolling: func.isRequired,
-  sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
-  onResendVerificationEmail: func.isRequired,
+  scrollingDisabled: bool.isRequired,
 
   // context object from StaticRouter, injected by the withRouter wrapper
   staticContext: object,
@@ -127,44 +90,19 @@ NotFoundPageComponent.propTypes = {
   history: shape({
     push: func.isRequired,
   }).isRequired,
-  location: shape({ state: object }).isRequired,
 };
 
 const mapStateToProps = state => {
-  // Page needs authInfoError and logoutError, Topbar needs isAuthenticated
-  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
-  // Topbar needs user info.
-  const {
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    currentUserNotificationCount: notificationCount,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-  } = state.user;
+  // Page needs authInfoError and logoutError
+  const { authInfoError, logoutError } = state.Auth;
   return {
     authInfoError,
-    authInProgress: authenticationInProgress(state),
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    notificationCount,
-    isAuthenticated,
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  onLogout: historyPush => dispatch(logout(historyPush)),
-  onManageDisableScrolling: (componentId, disableScrolling) =>
-    dispatch(manageDisableScrolling(componentId, disableScrolling)),
-  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
-});
-
-const NotFoundPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(
+const NotFoundPage = compose(connect(mapStateToProps), withRouter, injectIntl)(
   NotFoundPageComponent
 );
 
