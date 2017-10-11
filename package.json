@@ -34,7 +34,7 @@
     "redux-thunk": "^2.2.0",
     "sanitize.css": "^5.0.0",
     "sharetribe-scripts": "0.9.2",
-    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#c50f3798037ba5c310076f069bbafec41a170782",
+    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#acec122c4c1279bfecb411b027f7bb8928b6b44b",
     "source-map-support": "^0.4.15",
     "url": "^0.11.0",
     "raven-js": "^3.6.0",
