@@ -13,6 +13,8 @@ import { createSlug } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import { ensureListing, ensureUser, parseAddress } from '../../util/data';
+import { getListingsById } from '../../ducks/marketplaceData.duck';
+import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import {
   AvatarLarge,
   AvatarMedium,
@@ -21,20 +23,15 @@ import {
   ModalInMobile,
   Page,
   ResponsiveImage,
-  Topbar,
   NamedLink,
   NamedRedirect,
   Modal,
   ImageCarousel,
 } from '../../components';
-import EditIcon from './EditIcon';
-import { BookingDatesForm } from '../../containers';
-import { getListingsById } from '../../ducks/marketplaceData.duck';
-import { sendVerificationEmail } from '../../ducks/user.duck';
-import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { showListing } from './ListingPage.duck';
+import { BookingDatesForm, TopbarContainer } from '../../containers';
 
+import { showListing } from './ListingPage.duck';
+import EditIcon from './EditIcon';
 import css from './ListingPage.css';
 
 // This defines when ModalInMobile shows content as Modal
@@ -89,7 +86,7 @@ export const ActionBar = props => {
   }
 };
 
-const { bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
+const { bool, func, instanceOf, object, oneOf, shape, string } = PropTypes;
 
 ActionBar.propTypes = {
   isOwnListing: bool.isRequired,
@@ -150,25 +147,14 @@ export class ListingPageComponent extends Component {
   render() {
     const {
       authInfoError,
-      authInProgress,
       currentUser,
-      currentUserHasListings,
-      currentUserHasOrders,
       getListing,
-      history,
       intl,
-      isAuthenticated,
-      location,
       logoutError,
-      notificationCount,
-      onLogout,
       onManageDisableScrolling,
       params,
       scrollingDisabled,
       showListingError,
-      sendVerificationEmailInProgress,
-      sendVerificationEmailError,
-      onResendVerificationEmail,
     } = this.props;
     const listingId = new UUID(params.id);
     const currentListing = ensureListing(getListing(listingId));
@@ -181,23 +167,7 @@ export class ListingPageComponent extends Component {
       title = '',
     } = currentListing.attributes;
 
-    const topbar = (
-      <Topbar
-        isAuthenticated={isAuthenticated}
-        authInProgress={authInProgress}
-        currentUser={currentUser}
-        currentUserHasListings={currentUserHasListings}
-        currentUserHasOrders={currentUserHasOrders}
-        notificationCount={notificationCount}
-        history={history}
-        location={location}
-        onLogout={onLogout}
-        onManageDisableScrolling={onManageDisableScrolling}
-        onResendVerificationEmail={onResendVerificationEmail}
-        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-        sendVerificationEmailError={sendVerificationEmailError}
-      />
-    );
+    const topbar = <TopbarContainer />;
 
     const loadingTitle = intl.formatMessage({
       id: 'ListingPage.loadingListingTitle',
@@ -508,12 +478,9 @@ export class ListingPageComponent extends Component {
 ListingPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
-  currentUserHasOrders: null,
   logoutError: null,
-  notificationCount: 0,
   showListingError: null,
   tab: 'listing',
-  sendVerificationEmailError: null,
 };
 
 ListingPageComponent.propTypes = {
@@ -521,44 +488,29 @@ ListingPageComponent.propTypes = {
   history: shape({
     push: func.isRequired,
   }).isRequired,
-  location: object.isRequired,
+
   // from injectIntl
   intl: intlShape.isRequired,
+
   params: shape({
     id: string.isRequired,
     slug: string,
   }).isRequired,
   authInfoError: instanceOf(Error),
-  authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
-  currentUserHasListings: bool.isRequired,
-  currentUserHasOrders: bool,
   getListing: func.isRequired,
-  isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
-  notificationCount: number,
-  onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   scrollingDisabled: bool.isRequired,
   showListingError: instanceOf(Error),
   tab: oneOf(['book', 'listing']),
   useInitialValues: func.isRequired,
-  sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
-  onResendVerificationEmail: func.isRequired,
 };
 
 const mapStateToProps = state => {
   const { showListingError } = state.ListingPage;
-  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
-  const {
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    currentUserNotificationCount: notificationCount,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-  } = state.user;
+  const { authInfoError, logoutError } = state.Auth;
+  const { currentUser } = state.user;
 
   const getListing = id => {
     const listings = getListingsById(state, [id]);
@@ -567,26 +519,17 @@ const mapStateToProps = state => {
 
   return {
     authInfoError,
-    authInProgress: authenticationInProgress(state),
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
     getListing,
-    isAuthenticated,
     logoutError,
-    notificationCount,
     scrollingDisabled: isScrollingDisabled(state),
     showListingError,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  onLogout: historyPush => dispatch(logout(historyPush)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
-  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   useInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
 });
 

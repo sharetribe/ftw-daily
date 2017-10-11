@@ -19,47 +19,7 @@ exports[`ListingPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="ListingPage.schemaTitle"
   twitterImages={Array []}>
-  <Topbar
-    authInProgress={false}
-    currentUser={
-      Object {
-        "attributes": Object {
-          "banned": false,
-          "email": "user-2@example.com",
-          "emailVerified": true,
-          "profile": Object {
-            "abbreviatedName": "user-2 abbreviated name",
-            "displayName": "user-2 display name",
-            "firstName": "user-2 first name",
-            "lastName": "user-2 last name",
-          },
-          "stripeConnected": true,
-        },
-        "id": UUID {
-          "uuid": "user-2",
-        },
-        "type": "current-user",
-      }
-    }
-    currentUserHasListings={false}
-    currentUserHasOrders={null}
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
-    isAuthenticated={false}
-    location={
-      Object {
-        "search": "",
-      }
-    }
-    notificationCount={0}
-    onLogout={[Function]}
-    onManageDisableScrolling={[Function]}
-    onResendVerificationEmail={[Function]}
-    sendVerificationEmailError={null}
-    sendVerificationEmailInProgress={false} />
+  <Connect(withRouter(TopbarContainerComponent)) />
   <div
     className="">
     <div>
