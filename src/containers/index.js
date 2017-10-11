@@ -39,4 +39,5 @@ export { default as SecurityPage } from './SecurityPage/SecurityPage';
 export { default as SignupForm } from './SignupForm/SignupForm';
 export { default as StripePaymentForm } from './StripePaymentForm/StripePaymentForm';
 export { default as StyleguidePage } from './StyleguidePage/StyleguidePage';
+export { default as TopbarContainer } from './TopbarContainer/TopbarContainer';
 export { default as TopbarSearchForm } from './TopbarSearchForm/TopbarSearchForm';
