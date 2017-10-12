@@ -1,13 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`PaginationLinks should match snapshot with both links disabled 1`] = `
 <nav
-  className="">
+  className=""
+>
   <div
-    className="">
+    className=""
+  >
     <PrevPageIcon
-      className={null} />
+      className={null}
+    />
   </div>
   <div
-    className="">
+    className=""
+  >
     <NamedLink
       className="undefined"
       name="SomePage"
@@ -21,21 +27,25 @@ exports[`PaginationLinks should match snapshot with both links disabled 1`] = `
         Object {
           "search": "page=1&param=foobar",
         }
-      }>
+      }
+    >
       1
     </NamedLink>
   </div>
   <div
-    className="">
+    className=""
+  >
     <NextPageIcon
-      className={null} />
+      className={null}
+    />
   </div>
 </nav>
 `;
 
 exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
 <nav
-  className="">
+  className=""
+>
   <NamedLink
     name="SomePage"
     params={
@@ -48,12 +58,15 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
       Object {
         "search": "page=1&param=foobar",
       }
-    }>
+    }
+  >
     <PrevPageIcon
-      className={null} />
+      className={null}
+    />
   </NamedLink>
   <div
-    className="">
+    className=""
+  >
     <NamedLink
       className=""
       name="SomePage"
@@ -67,7 +80,8 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
         Object {
           "search": "page=1&param=foobar",
         }
-      }>
+      }
+    >
       1
     </NamedLink>
     <NamedLink
@@ -83,7 +97,8 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
         Object {
           "search": "page=2&param=foobar",
         }
-      }>
+      }
+    >
       2
     </NamedLink>
     <NamedLink
@@ -99,7 +114,8 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
         Object {
           "search": "page=3&param=foobar",
         }
-      }>
+      }
+    >
       3
     </NamedLink>
   </div>
@@ -115,23 +131,29 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
       Object {
         "search": "page=3&param=foobar",
       }
-    }>
+    }
+  >
     <NextPageIcon
-      className={null} />
+      className={null}
+    />
   </NamedLink>
 </nav>
 `;
 
 exports[`PaginationLinks should match snapshot with prev disabled and next enabled 1`] = `
 <nav
-  className="">
+  className=""
+>
   <div
-    className="">
+    className=""
+  >
     <PrevPageIcon
-      className={null} />
+      className={null}
+    />
   </div>
   <div
-    className="">
+    className=""
+  >
     <NamedLink
       className="undefined"
       name="SomePage"
@@ -145,7 +167,8 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
         Object {
           "search": "page=1&param=foobar",
         }
-      }>
+      }
+    >
       1
     </NamedLink>
     <NamedLink
@@ -161,7 +184,8 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
         Object {
           "search": "page=2&param=foobar",
         }
-      }>
+      }
+    >
       2
     </NamedLink>
     <NamedLink
@@ -177,7 +201,8 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
         Object {
           "search": "page=3&param=foobar",
         }
-      }>
+      }
+    >
       3
     </NamedLink>
   </div>
@@ -193,16 +218,19 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
       Object {
         "search": "page=2&param=foobar",
       }
-    }>
+    }
+  >
     <NextPageIcon
-      className={null} />
+      className={null}
+    />
   </NamedLink>
 </nav>
 `;
 
 exports[`PaginationLinks should match snapshot with prev enabled and next disabled 1`] = `
 <nav
-  className="">
+  className=""
+>
   <NamedLink
     name="SomePage"
     params={
@@ -215,12 +243,15 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
       Object {
         "search": "page=2&param=foobar",
       }
-    }>
+    }
+  >
     <PrevPageIcon
-      className={null} />
+      className={null}
+    />
   </NamedLink>
   <div
-    className="">
+    className=""
+  >
     <NamedLink
       className=""
       name="SomePage"
@@ -234,7 +265,8 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
         Object {
           "search": "page=1&param=foobar",
         }
-      }>
+      }
+    >
       1
     </NamedLink>
     <NamedLink
@@ -250,7 +282,8 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
         Object {
           "search": "page=2&param=foobar",
         }
-      }>
+      }
+    >
       2
     </NamedLink>
     <NamedLink
@@ -266,14 +299,17 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
         Object {
           "search": "page=3&param=foobar",
         }
-      }>
+      }
+    >
       3
     </NamedLink>
   </div>
   <div
-    className="">
+    className=""
+  >
     <NextPageIcon
-      className={null} />
+      className={null}
+    />
   </div>
 </nav>
 `;

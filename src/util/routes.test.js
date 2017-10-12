@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import { RoutesProvider } from '../components';
 import routeConfiguration from '../routeConfiguration';
 import { renderDeep, renderShallow } from './test-helpers';

@@ -1,9 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`EditListingPageComponent matches snapshot 1`] = `
 <Page
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
-  title="EditListingPage.titleCreateListing">
+  title="EditListingPage.titleCreateListing"
+>
   <Connect(withRouter(TopbarContainerComponent)) />
   <InjectIntl(EditListingWizard)
     currentUser={null}
@@ -42,6 +45,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
         "tab": "description",
         "type": "new",
       }
-    } />
+    }
+  />
 </Page>
 `;

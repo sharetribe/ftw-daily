@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -63,7 +63,7 @@ export class SearchPageComponent extends Component {
       this.fetchMoreListingsToMap(nextProps.location);
 
       // If no boundsChanged url parameter is given, this is original location search
-      const { boundsChanged } = parse(location.search, {
+      const { boundsChanged } = parse(window.location.search, {
         latlng: ['origin'],
         latlngBounds: ['bounds'],
       });

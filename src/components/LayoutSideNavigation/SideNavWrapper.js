@@ -3,7 +3,7 @@
  * and main content. Side navigation (first child) will be shown aside on Desktop and
  * as sub bar under Topbar on mobile screens.
  */
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import classNames from 'classnames';
 
 import css from './LayoutSideNavigation.css';

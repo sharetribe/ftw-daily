@@ -1,14 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`FilterPanel matches snapshot 1`] = `
 <div>
   <h1>
     Filters
   </h1>
   <NamedLink
-    name="SearchListingsPage">
+    name="SearchListingsPage"
+  >
     See studios
   </NamedLink>
   <NamedLink
-    name="SearchListingsPage">
+    name="SearchListingsPage"
+  >
     X
   </NamedLink>
 </div>

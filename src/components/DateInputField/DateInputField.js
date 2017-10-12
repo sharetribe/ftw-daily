@@ -3,7 +3,7 @@
  * Styles for SingleDatePicker can be found from 'public/reactDates.css'.
  * CSS modules can't handle global styles so they are currently added separately
  */
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import { Field } from 'redux-form';
 import { intlShape, injectIntl } from 'react-intl';
 import { SingleDatePicker, isInclusivelyAfterDay } from 'react-dates';

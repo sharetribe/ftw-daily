@@ -16,7 +16,7 @@
  *
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import classNames from 'classnames';
 
 import { MenuContent, MenuLabel } from '../../components';

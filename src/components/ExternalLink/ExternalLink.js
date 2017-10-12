@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 
 // External link that opens in a new tab/window, ensuring that the
 // opened page doesn't have access to the current page.

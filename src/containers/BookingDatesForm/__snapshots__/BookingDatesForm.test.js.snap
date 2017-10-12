@@ -1,7 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
 <Form
   className={null}
-  onSubmit={[Function]}>
+  onSubmit={[Function]}
+>
   <DateRangeInputField
     endDateId="fakeTestForm.bookingEndDate"
     endDateLabel="BookingDatesForm.bookingEndTitle"
@@ -19,17 +22,21 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
         [Function],
         [Function],
       ]
-    } />
+    }
+  />
   <p>
     <FormattedMessage
       id="BookingDatesForm.youWontBeChargedInfo"
-      values={Object {}} />
+      values={Object {}}
+    />
   </p>
   <PrimaryButton
-    type="submit">
+    type="submit"
+  >
     <FormattedMessage
       id="BookingDatesForm.requestToBook"
-      values={Object {}} />
+      values={Object {}}
+    />
   </PrimaryButton>
 </Form>
 `;

@@ -1,9 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`NotFoundPageComponent matches snapshot 1`] = `
 <Page
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
-  title="NotFoundPage.title">
+  title="NotFoundPage.title"
+>
   <Connect(withRouter(TopbarContainerComponent)) />
   <div>
     <div>
@@ -13,15 +16,18 @@ exports[`NotFoundPageComponent matches snapshot 1`] = `
       <h1>
         <FormattedMessage
           id="NotFoundPage.heading"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h1>
       <p>
         <FormattedMessage
           id="NotFoundPage.description"
-          values={Object {}} />
+          values={Object {}}
+        />
       </p>
       <ReduxForm
-        onSubmit={[Function]} />
+        onSubmit={[Function]}
+      />
     </div>
   </div>
 </Page>

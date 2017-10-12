@@ -1,9 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`ProfilePage matches snapshot 1`] = `
 <Page
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
-  title="Profile page with display name: most-awesome-shop">
+  title="Profile page with display name: most-awesome-shop"
+>
   <Connect(withRouter(TopbarContainerComponent)) />
 </Page>
 `;

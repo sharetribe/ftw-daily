@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { createSlug } from '../../util/urlHelpers';

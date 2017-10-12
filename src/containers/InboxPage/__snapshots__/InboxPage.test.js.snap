@@ -1,17 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`InboxPage matches snapshot 1`] = `
 <Page
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
-  title="InboxPage.ordersTitle">
+  title="InboxPage.ordersTitle"
+>
   <Connect(withRouter(TopbarContainerComponent))
-    currentPage="InboxPage" />
+    currentPage="InboxPage"
+  />
   <div>
     <div>
       <h1>
         <FormattedMessage
           id="InboxPage.title"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h1>
       <TabNav
         className={null}
@@ -31,7 +36,8 @@ exports[`InboxPage matches snapshot 1`] = `
               "text": <span>
                 <FormattedMessage
                       id="InboxPage.ordersTabTitle"
-                      values={Object {}} />
+                      values={Object {}}
+                />
           </span>,
             },
             Object {
@@ -45,11 +51,13 @@ exports[`InboxPage matches snapshot 1`] = `
               "text": <span>
                 <FormattedMessage
                       id="InboxPage.salesTabTitle"
-                      values={Object {}} />
+                      values={Object {}}
+                />
           </span>,
             },
           ]
-        } />
+        }
+      />
     </div>
     <div>
       <ul>
@@ -150,7 +158,8 @@ exports[`InboxPage matches snapshot 1`] = `
                 "type": "transaction",
               }
             }
-            type="order" />
+            type="order"
+          />
         </li>
         <li>
           <Component
@@ -249,7 +258,8 @@ exports[`InboxPage matches snapshot 1`] = `
                 "type": "transaction",
               }
             }
-            type="order" />
+            type="order"
+          />
         </li>
       </ul>
     </div>
@@ -263,46 +273,58 @@ exports[`InboxPage matches snapshot 2`] = `
   href="/order/order-1/details"
   onClick={[Function]}
   style={Object {}}
-  title={null}>
+  title={null}
+>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <div
       className=""
-      title="provider-user-id display name">
+      title="provider-user-id display name"
+    >
       <span
-        className={undefined}>
+        className={undefined}
+      >
         provider-user-id abbreviated name
       </span>
     </div>
   </div>
   <div
-    className={undefined} />
+    className={undefined}
+  />
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <div
-      className="">
+      className=""
+    >
       provider-user-id display name
     </div>
     <div
-      className="">
+      className=""
+    >
       2017-02-15
        - 
       2017-02-16
       <span
-        className={undefined}>
+        className={undefined}
+      >
         10
       </span>
     </div>
   </div>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <div
-      className="">
+      className=""
+    >
       InboxPage.stateRequested
     </div>
     <div
       className=""
-      title="2017-01-15 00:00">
+      title="2017-01-15 00:00"
+    >
       2017-01-15
     </div>
   </div>
@@ -314,15 +336,18 @@ exports[`InboxPage matches snapshot 3`] = `
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
-  title="InboxPage.salesTitle">
+  title="InboxPage.salesTitle"
+>
   <Connect(withRouter(TopbarContainerComponent))
-    currentPage="InboxPage" />
+    currentPage="InboxPage"
+  />
   <div>
     <div>
       <h1>
         <FormattedMessage
           id="InboxPage.title"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h1>
       <TabNav
         className={null}
@@ -342,7 +367,8 @@ exports[`InboxPage matches snapshot 3`] = `
               "text": <span>
                 <FormattedMessage
                       id="InboxPage.ordersTabTitle"
-                      values={Object {}} />
+                      values={Object {}}
+                />
           </span>,
             },
             Object {
@@ -356,11 +382,13 @@ exports[`InboxPage matches snapshot 3`] = `
               "text": <span>
                 <FormattedMessage
                       id="InboxPage.salesTabTitle"
-                      values={Object {}} />
+                      values={Object {}}
+                />
           </span>,
             },
           ]
-        } />
+        }
+      />
     </div>
     <div>
       <ul>
@@ -461,7 +489,8 @@ exports[`InboxPage matches snapshot 3`] = `
                 "type": "transaction",
               }
             }
-            type="sale" />
+            type="sale"
+          />
         </li>
         <li>
           <Component
@@ -560,7 +589,8 @@ exports[`InboxPage matches snapshot 3`] = `
                 "type": "transaction",
               }
             }
-            type="sale" />
+            type="sale"
+          />
         </li>
       </ul>
     </div>
@@ -574,49 +604,62 @@ exports[`InboxPage matches snapshot 4`] = `
   href="/sale/sale-1/details"
   onClick={[Function]}
   style={Object {}}
-  title={null}>
+  title={null}
+>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <div
       className=""
-      title="customer-user-id display name">
+      title="customer-user-id display name"
+    >
       <span
-        className={undefined}>
+        className={undefined}
+      >
         customer-user-id abbreviated name
       </span>
     </div>
   </div>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <div
-      className={undefined} />
+      className={undefined}
+    />
   </div>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <div
-      className="">
+      className=""
+    >
       customer-user-id display name
     </div>
     <div
-      className="">
+      className=""
+    >
       2017-02-15
        - 
       2017-02-16
       <span
-        className={undefined}>
+        className={undefined}
+      >
         9
       </span>
     </div>
   </div>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <div
-      className="">
+      className=""
+    >
       InboxPage.statePending
     </div>
     <div
       className=""
-      title="2017-01-15 00:00">
+      title="2017-01-15 00:00"
+    >
       2017-01-15
     </div>
   </div>

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import { withGoogleMap, GoogleMap } from 'react-google-maps';
 import classNames from 'classnames';
 import { groupBy, isEqual, reduce } from 'lodash';

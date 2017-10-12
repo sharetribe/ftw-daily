@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`ListingCard matches snapshot 1`] = `
 <NamedLink
   className=""
@@ -7,7 +9,8 @@ exports[`ListingCard matches snapshot 1`] = `
       "id": "listing1",
       "slug": "listing1-title",
     }
-  }>
+  }
+>
   <div>
     <div>
       <ResponsiveImage
@@ -28,19 +31,22 @@ exports[`ListingCard matches snapshot 1`] = `
         }
         noImageMessage={null}
         rootClassName={null}
-        sizes={null} />
+        sizes={null}
+      />
     </div>
   </div>
   <div>
     <div>
       <div
-        title={55}>
+        title={55}
+      >
         55
       </div>
       <div>
         <FormattedMessage
           id="ListingCard.perNight"
-          values={Object {}} />
+          values={Object {}}
+        />
       </div>
     </div>
     <div>
@@ -54,7 +60,8 @@ exports[`ListingCard matches snapshot 1`] = `
             Object {
               "authorName": "user1 display name",
             }
-          } />
+          }
+        />
       </div>
     </div>
   </div>

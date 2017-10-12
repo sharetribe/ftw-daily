@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import { Field } from 'redux-form';
 import classNames from 'classnames';
 import { START_DATE, END_DATE } from '../../util/dates';

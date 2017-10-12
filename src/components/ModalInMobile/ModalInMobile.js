@@ -11,7 +11,7 @@
  *   </ModalInMobile>
  * </Parent>
  */
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import classNames from 'classnames';
 import { Modal } from '../../components';
 import { withViewport } from '../../util/contextHelpers';

@@ -1,20 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`ContactDetailsPage matches snapshot 1`] = `
 <Page
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
-  title="Profile settings">
+  title="Profile settings"
+>
   <Connect(withRouter(TopbarContainerComponent))
-    currentPage="ProfileSettingsPage" />
+    currentPage="ProfileSettingsPage"
+  />
   <UserNav
     className={null}
     rootClassName={null}
-    selectedPageName="ProfileSettingsPage" />
+    selectedPageName="ProfileSettingsPage"
+  />
   <div>
     <h1>
       <FormattedMessage
         id="ProfileSettingsPage.title"
-        values={Object {}} />
+        values={Object {}}
+      />
     </h1>
   </div>
 </Page>

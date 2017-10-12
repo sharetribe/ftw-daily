@@ -1,13 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`EditListingDescriptionForm matches snapshot 1`] = `
 <form
   action="/"
   className=""
   method="post"
-  onSubmit={[Function]}>
+  onSubmit={[Function]}
+>
   <div
-    className="">
+    className=""
+  >
     <label
-      htmlFor="fakeTestForm.title">
+      htmlFor="fakeTestForm.title"
+    >
       Name of your sauna
     </label>
     <input
@@ -21,14 +26,17 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
       onDragStart={[Function]}
       onDrop={[Function]}
       onFocus={[Function]}
-      placeholder="What\'s the name of your sauna?"
+      placeholder="What's the name of your sauna?"
       type="text"
-      value="" />
+      value=""
+    />
   </div>
   <div
-    className="">
+    className=""
+  >
     <label
-      htmlFor="fakeTestForm.description">
+      htmlFor="fakeTestForm.description"
+    >
       Describe your sauna
     </label>
     <textarea
@@ -41,12 +49,14 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
       onDrop={[Function]}
       onFocus={[Function]}
       placeholder="How many people can fit in at once? Does the sauna come with towels?"
-      value="" />
+      value=""
+    />
   </div>
   <button
     className=""
     disabled={true}
-    type="submit">
+    type="submit"
+  >
     Save description
   </button>
 </form>

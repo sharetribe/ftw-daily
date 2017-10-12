@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import desktopLogo from './images/saunatime-logo.png';
 
 const LogoIcon = props => {

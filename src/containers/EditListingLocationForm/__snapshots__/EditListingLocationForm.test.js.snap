@@ -1,7 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`EditListingLocationForm matches snapshot 1`] = `
 <Form
   className=""
-  onSubmit={[Function]}>
+  onSubmit={[Function]}
+>
   <Component
     autoFocus={true}
     format={null}
@@ -13,20 +16,23 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
         [Function],
         [Function],
       ]
-    } />
+    }
+  />
   <TextInputField
     id="fakeTestForm.building"
     label="EditListingLocationForm.building"
     name="building"
     placeholder="EditListingLocationForm.buildingPlaceholder"
-    type="text" />
+    type="text"
+  />
   <Button
     className={null}
     disabled={false}
     inProgress={false}
     ready={false}
     rootClassName={null}
-    type="submit">
+    type="submit"
+  >
     Save location
   </Button>
 </Form>

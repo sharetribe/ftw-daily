@@ -3,7 +3,7 @@
  * onFocus: renders given value in unformatted manner: "9999,99"
  * onBlur: formats the given input: "9 999,99 €"
  */
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import { intlShape, injectIntl } from 'react-intl';
 import { Field } from 'redux-form';
 import classNames from 'classnames';

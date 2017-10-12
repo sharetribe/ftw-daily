@@ -1,14 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`SignupForm matches snapshot 1`] = `
 <form
   action="/"
   className=""
   method="post"
-  onSubmit={[Function]}>
+  onSubmit={[Function]}
+>
   <div>
     <div
-      className="">
+      className=""
+    >
       <label
-        htmlFor="SignupForm.email">
+        htmlFor="SignupForm.email"
+      >
         Email
       </label>
       <input
@@ -22,14 +27,18 @@ exports[`SignupForm matches snapshot 1`] = `
         onFocus={[Function]}
         placeholder="john.doe@example.com"
         type="email"
-        value="" />
+        value=""
+      />
     </div>
     <div
-      className={undefined}>
+      className={undefined}
+    >
       <div
-        className="">
+        className=""
+      >
         <label
-          htmlFor="SignupForm.firstName">
+          htmlFor="SignupForm.firstName"
+        >
           First name
         </label>
         <input
@@ -43,12 +52,15 @@ exports[`SignupForm matches snapshot 1`] = `
           onFocus={[Function]}
           placeholder="John"
           type="text"
-          value="" />
+          value=""
+        />
       </div>
       <div
-        className="">
+        className=""
+      >
         <label
-          htmlFor="SignupForm.lastName">
+          htmlFor="SignupForm.lastName"
+        >
           Last name
         </label>
         <input
@@ -62,13 +74,16 @@ exports[`SignupForm matches snapshot 1`] = `
           onFocus={[Function]}
           placeholder="Doe"
           type="text"
-          value="" />
+          value=""
+        />
       </div>
     </div>
     <div
-      className="">
+      className=""
+    >
       <label
-        htmlFor="SignupForm.password">
+        htmlFor="SignupForm.password"
+      >
         Password
       </label>
       <input
@@ -82,15 +97,18 @@ exports[`SignupForm matches snapshot 1`] = `
         onFocus={[Function]}
         placeholder="Enter your password…"
         type="password"
-        value="" />
+        value=""
+      />
     </div>
   </div>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <button
       className=""
       disabled={true}
-      type="submit">
+      type="submit"
+    >
       <span>
         Sign up
       </span>

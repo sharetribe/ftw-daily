@@ -1,32 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`TopbarDesktop data matches snapshot 1`] = `
 <nav
-  className="">
+  className=""
+>
   <a
     className="NamedLink_active"
     href="/"
     onClick={[Function]}
     style={Object {}}
-    title={null}>
+    title={null}
+  >
     <img
       alt="TopbarDesktop.logo"
       className={undefined}
-      src="saunatime-logo.png" />
+      src="saunatime-logo.png"
+    />
   </a>
   <form
     action="/"
     className=""
     method="post"
-    onSubmit={[Function]}>
+    onSubmit={[Function]}
+  >
     <div
-      className="">
+      className=""
+    >
       <div
-        className="">
+        className=""
+      >
         <svg
           className={undefined}
           height="22"
           viewBox="0 0 21 22"
           width="21"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g
             className={undefined}
             fill="none"
@@ -34,13 +43,16 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
-            transform="matrix(-1 0 0 1 20 1)">
+            transform="matrix(-1 0 0 1 20 1)"
+          >
             <path
-              d="M13 14l5.241 5.241" />
+              d="M13 14l5.241 5.241"
+            />
             <circle
               cx="7.5"
               cy="7.5"
-              r="7.5" />
+              r="7.5"
+            />
           </g>
         </svg>
       </div>
@@ -55,7 +67,8 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
         onKeyDown={[Function]}
         placeholder="Search saunas…"
         type="search"
-        value="" />
+        value=""
+      />
     </div>
   </form>
   <a
@@ -63,9 +76,11 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     href="/l/new"
     onClick={[Function]}
     style={Object {}}
-    title={null}>
+    title={null}
+  >
     <span
-      className={undefined}>
+      className={undefined}
+    >
       <span>
         + Add your sauna
       </span>
@@ -76,9 +91,11 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     href="/inbox/sales"
     onClick={[Function]}
     style={Object {}}
-    title={null}>
+    title={null}
+  >
     <span
-      className={undefined}>
+      className={undefined}
+    >
       <span>
         Inbox
       </span>
@@ -87,34 +104,43 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
   <div
     className=""
     onBlur={[Function]}
-    onKeyDown={[Function]}>
+    onKeyDown={[Function]}
+  >
     <button
       className=""
       onBlur={[Function]}
-      onClick={[Function]}>
+      onClick={[Function]}
+    >
       <div
         className=""
-        title={undefined}>
+        title={undefined}
+      >
         <span
-          className={undefined} />
+          className={undefined}
+        />
       </div>
     </button>
     <div
       className=""
-      style={Object {}}>
+      style={Object {}}
+    >
       <ul
-        className="">
+        className=""
+      >
         <li
           className=""
-          role="menuitem">
+          role="menuitem"
+        >
           <a
             className=""
             href="/listings"
             onClick={[Function]}
             style={Object {}}
-            title={null}>
+            title={null}
+          >
             <span
-              className={undefined} />
+              className={undefined}
+            />
             <span>
               Your listings
             </span>
@@ -122,15 +148,18 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
         </li>
         <li
           className=""
-          role="menuitem">
+          role="menuitem"
+        >
           <a
             className=""
             href="/profile-settings"
             onClick={[Function]}
             style={Object {}}
-            title={null}>
+            title={null}
+          >
             <span
-              className={undefined} />
+              className={undefined}
+            />
             <span>
               Profile settings
             </span>
@@ -138,15 +167,18 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
         </li>
         <li
           className=""
-          role="menuitem">
+          role="menuitem"
+        >
           <a
             className=""
             href="/account"
             onClick={[Function]}
             style={Object {}}
-            title={null}>
+            title={null}
+          >
             <span
-              className={undefined} />
+              className={undefined}
+            />
             <span>
               Account settings
             </span>
@@ -154,13 +186,16 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
         </li>
         <li
           className=""
-          role="menuitem">
+          role="menuitem"
+        >
           <button
             className=""
             disabled={false}
-            onClick={[Function]}>
+            onClick={[Function]}
+          >
             <span
-              className={undefined} />
+              className={undefined}
+            />
             <span>
               Log out
             </span>

@@ -17,7 +17,7 @@
  * defined. This way we get the validation errors only in the most
  * specific place and avoid duplicate errros.
  */
-import { PropTypes } from 'react';
+import { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import Decimal from 'decimal.js';
 import { types as sdkTypes } from './sdkLoader';
 import { ensureTransaction } from './data';
