@@ -44,7 +44,7 @@
     "enzyme": "^2.8.0",
     "enzyme-to-json": "^1.5.0",
     "nodemon": "^1.11.0",
-    "prettier": "^0.22.0",
+    "prettier": "1.7.4",
     "react-addons-test-utils": "^15.4.2",
     "react-test-renderer": "^15.4.2"
   },
@@ -52,7 +52,8 @@
     "clean": "rm -rf build/*",
     "dev": "sharetribe-scripts start",
     "build": "sharetribe-scripts build",
-    "format": "prettier --write --print-width 100 --single-quote --trailing-comma es5 'server/**/*.js' 'src/**/*.js'",
+    "format": "prettier --write '**/*.{js,json,css}'",
+    "format-ci": "prettier --list-different '**/*.{js,json,css}'",
     "test": "sharetribe-scripts test --env=jsdom",
     "test-ci": "sharetribe-scripts test --env=jsdom --runInBand",
     "eject": "sharetribe-scripts eject",
@@ -60,6 +61,11 @@
     "dev-server": "REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000 yarn run build&&nodemon --watch server server/index.js",
     "heroku-prebuild": "./heroku-copy-ssh-key-from-env.sh",
     "heroku-postbuild": "yarn run build"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "trailingComma": "es5"
   },
   "engines": {
     "node": "6.11.4",

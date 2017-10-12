@@ -14,6 +14,7 @@ dependencies:
 
 test:
   pre:
+    - yarn run format-ci
     - yarn run build
   override:
     - yarn run test-ci
