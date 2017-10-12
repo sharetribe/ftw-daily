@@ -63,7 +63,7 @@ export class SearchPageComponent extends Component {
       this.fetchMoreListingsToMap(nextProps.location);
 
       // If no boundsChanged url parameter is given, this is original location search
-      const { boundsChanged } = parse(location.search, {
+      const { boundsChanged } = parse(window.location.search, {
         latlng: ['origin'],
         latlngBounds: ['bounds'],
       });
