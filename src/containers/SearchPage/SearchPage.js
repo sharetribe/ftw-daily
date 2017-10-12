@@ -7,7 +7,12 @@ import { debounce, isEqual, unionWith } from 'lodash';
 import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
-import { googleLatLngToSDKLatLng, googleBoundsToSDKBounds } from '../../util/googleMaps';
+import {
+  googleLatLngToSDKLatLng,
+  googleBoundsToSDKBounds,
+  sdkBoundsToFixedCoordinates,
+  hasSameSDKBounds,
+} from '../../util/googleMaps';
 import { createResourceLocatorString } from '../../util/routes';
 import { createSlug, parse, stringify } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
@@ -28,6 +33,7 @@ const SHARETRIBE_API_MAX_PAGE_SIZE = 100;
 const MAX_SEARCH_RESULT_PAGES_ON_MAP = 5; // 100 * 5 = 500 listings are shown on a map.
 const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
+const BOUNDS_FIXED_PRECISION = 8;
 
 const pickSearchParamsOnly = params => {
   const { address, origin, bounds } = params || {};
@@ -78,20 +84,25 @@ export class SearchPageComponent extends Component {
   onIdle(googleMap) {
     const { history, location } = this.props;
 
-    const { address, country, mapSearch } = parse(location.search, {
+    const { address, country, bounds, mapSearch } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
 
+    const viewportGMapBounds = googleMap.getBounds();
+    const viewportBounds = sdkBoundsToFixedCoordinates(
+      googleBoundsToSDKBounds(viewportGMapBounds),
+      BOUNDS_FIXED_PRECISION
+    );
+    const boundsChanged = !hasSameSDKBounds(viewportBounds, bounds);
+    const isRealMapSearch = mapSearch && !this.modalOpenedBoundsChange;
+
     // If mapSearch url param is given (and we have not just opened mobile map modal)
     // or original location search is rendered once,
     // we start to react to 'bounds_changed' event by generating new searches
-    if ((mapSearch && !this.modalOpenedBoundsChange) || !this.locationInputSearch) {
-      const viewportBounds = googleMap.getBounds();
-      const bounds = googleBoundsToSDKBounds(viewportBounds);
-      const origin = googleLatLngToSDKLatLng(viewportBounds.getCenter());
-
-      const searchParams = { address, origin, bounds, country, mapSearch: true };
+    if (boundsChanged && (isRealMapSearch || !this.locationInputSearch)) {
+      const origin = googleLatLngToSDKLatLng(viewportGMapBounds.getCenter());
+      const searchParams = { address, origin, bounds: viewportBounds, country, mapSearch: true };
       history.push(
         createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
       );
@@ -185,9 +196,7 @@ export class SearchPageComponent extends Component {
         />
       </h2>
     );
-
-    const resultsFound =
-      address && !mapSearch ? resultsFoundWithAddress : resultsFoundNoAddress;
+    const resultsFound = address && !mapSearch ? resultsFoundWithAddress : resultsFoundNoAddress;
 
     const noResults = (
       <h2>
