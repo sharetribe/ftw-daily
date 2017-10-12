@@ -46,7 +46,7 @@ export class SearchPageComponent extends Component {
     // we listen to that event to make new searches
     // So, if the search comes from location search input,
     // we need to by pass 2nd search created by initial 'bounds_changes' event
-    this.useLocationSearchBounds = true;
+    this.locationInputSearch = true;
     this.modalOpenedBoundsChange = false;
     this.searchMapListingsInProgress = false;
 
@@ -62,13 +62,13 @@ export class SearchPageComponent extends Component {
     if (!isEqual(this.props.location, nextProps.location)) {
       this.fetchMoreListingsToMap(nextProps.location);
 
-      // If no boundsChanged url parameter is given, this is original location search
-      const { boundsChanged } = parse(window.location.search, {
+      // If no mapSearch url parameter is given, this is original location search
+      const { mapSearch } = parse(nextProps.location.search, {
         latlng: ['origin'],
         latlngBounds: ['bounds'],
       });
-      if (!boundsChanged) {
-        this.useLocationSearchBounds = true;
+      if (!mapSearch) {
+        this.locationInputSearch = true;
       }
     }
   }
@@ -78,25 +78,25 @@ export class SearchPageComponent extends Component {
   onIdle(googleMap) {
     const { history, location } = this.props;
 
-    const { address, country, boundsChanged } = parse(location.search, {
+    const { address, country, mapSearch } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
 
-    // If boundsChanged url param is given (and we have not just opened mobile map modal)
+    // If mapSearch url param is given (and we have not just opened mobile map modal)
     // or original location search is rendered once,
     // we start to react to 'bounds_changed' event by generating new searches
-    if ((boundsChanged && !this.modalOpenedBoundsChange) || !this.useLocationSearchBounds) {
+    if ((mapSearch && !this.modalOpenedBoundsChange) || !this.locationInputSearch) {
       const viewportBounds = googleMap.getBounds();
       const bounds = googleBoundsToSDKBounds(viewportBounds);
       const origin = googleLatLngToSDKLatLng(viewportBounds.getCenter());
 
-      const searchParams = { address, origin, bounds, country, boundsChanged: true };
+      const searchParams = { address, origin, bounds, country, mapSearch: true };
       history.push(
         createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
       );
     } else {
-      this.useLocationSearchBounds = false;
+      this.locationInputSearch = false;
       this.modalOpenedBoundsChange = false;
     }
   }
@@ -147,7 +147,7 @@ export class SearchPageComponent extends Component {
       searchParams,
     } = this.props;
     // eslint-disable-next-line no-unused-vars
-    const { boundsChanged, page, ...searchInURL } = parse(location.search, {
+    const { mapSearch, page, ...searchInURL } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
@@ -185,8 +185,9 @@ export class SearchPageComponent extends Component {
         />
       </h2>
     );
+
     const resultsFound =
-      address && !boundsChanged ? resultsFoundWithAddress : resultsFoundNoAddress;
+      address && !mapSearch ? resultsFoundWithAddress : resultsFoundNoAddress;
 
     const noResults = (
       <h2>
@@ -210,7 +211,7 @@ export class SearchPageComponent extends Component {
         onCloseAsModal={() => {
           onManageDisableScrolling('SearchPage.map', false);
         }}
-        useLocationSearchBounds={this.useLocationSearchBounds}
+        useLocationSearchBounds={this.locationInputSearch}
       />
     );
     const showSearchMapInMobile = this.state.isSearchMapOpenOnMobile ? searchMap : null;
@@ -293,7 +294,7 @@ export class SearchPageComponent extends Component {
                 <div
                   className={css.openMobileMap}
                   onClick={() => {
-                    this.useLocationSearchBounds = true;
+                    this.locationInputSearch = true;
                     this.modalOpenedBoundsChange = true;
                     this.setState({ isSearchMapOpenOnMobile: true });
                   }}
