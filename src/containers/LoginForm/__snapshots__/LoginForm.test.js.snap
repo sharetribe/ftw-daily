@@ -1,14 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`LoginForm matches snapshot 1`] = `
 <form
   action="/"
   className=""
   method="post"
-  onSubmit={[Function]}>
+  onSubmit={[Function]}
+>
   <div>
     <div
-      className="">
+      className=""
+    >
       <label
-        htmlFor="LoginForm.email">
+        htmlFor="LoginForm.email"
+      >
         Email
       </label>
       <input
@@ -22,12 +27,15 @@ exports[`LoginForm matches snapshot 1`] = `
         onFocus={[Function]}
         placeholder="john.doe@example.com"
         type="email"
-        value="" />
+        value=""
+      />
     </div>
     <div
-      className="">
+      className=""
+    >
       <label
-        htmlFor="LoginForm.password">
+        htmlFor="LoginForm.password"
+      >
         Password
       </label>
       <input
@@ -41,15 +49,19 @@ exports[`LoginForm matches snapshot 1`] = `
         onFocus={[Function]}
         placeholder="Enter your password…"
         type="password"
-        value="" />
+        value=""
+      />
     </div>
   </div>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <p
-      className={undefined}>
+      className={undefined}
+    >
       <span
-        className={undefined}>
+        className={undefined}
+      >
         <span>
           Forgot your password? 
           <a
@@ -57,7 +69,8 @@ exports[`LoginForm matches snapshot 1`] = `
             href="/recover-password"
             onClick={[Function]}
             style={Object {}}
-            title={null}>
+            title={null}
+          >
             <span>
               Reset password.
             </span>
@@ -68,7 +81,8 @@ exports[`LoginForm matches snapshot 1`] = `
     <button
       className=""
       disabled={true}
-      type="submit">
+      type="submit"
+    >
       <span>
         Log in
       </span>

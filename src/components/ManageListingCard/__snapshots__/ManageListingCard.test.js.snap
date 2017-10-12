@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`ManageListingCard matches snapshot 1`] = `
 <NamedLink
   className=""
@@ -7,7 +9,8 @@ exports[`ManageListingCard matches snapshot 1`] = `
       "id": "listing1",
       "slug": "listing1-title",
     }
-  }>
+  }
+>
   <div>
     <div>
       <ResponsiveImage
@@ -28,16 +31,20 @@ exports[`ManageListingCard matches snapshot 1`] = `
         }
         noImageMessage={null}
         rootClassName={null}
-        sizes={null} />
+        sizes={null}
+      />
     </div>
     <div
-      className="">
+      className=""
+    >
       <div
-        className="" />
+        className=""
+      />
       <div>
         <FormattedMessage
           id="ManageListingCard.viewListing"
-          values={Object {}} />
+          values={Object {}}
+        />
       </div>
     </div>
     <div>
@@ -50,17 +57,20 @@ exports[`ManageListingCard matches snapshot 1`] = `
           isOpen={false}
           onToggleActive={[Function]}
           rootClassName=""
-          useArrow={false}>
+          useArrow={false}
+        >
           <MenuLabel
             className={null}
             isOpen={false}
             isOpenClassName={null}
             onToggleActive={null}
-            rootClassName="">
+            rootClassName=""
+          >
             <div>
               <MenuIcon
                 className={null}
-                isActive={false} />
+                isActive={false}
+              />
             </div>
           </MenuLabel>
           <MenuContent
@@ -70,16 +80,20 @@ exports[`ManageListingCard matches snapshot 1`] = `
             contentRef={null}
             isOpen={false}
             rootClassName=""
-            style={null}>
+            style={null}
+          >
             <MenuItem
               className={null}
-              rootClassName="">
+              rootClassName=""
+            >
               <InlineTextButton
                 className=""
-                onClick={[Function]}>
+                onClick={[Function]}
+              >
                 <FormattedMessage
                   id="ManageListingCard.closeListing"
-                  values={Object {}} />
+                  values={Object {}}
+                />
               </InlineTextButton>
             </MenuItem>
           </MenuContent>
@@ -90,13 +104,15 @@ exports[`ManageListingCard matches snapshot 1`] = `
   <div>
     <div>
       <div
-        title={55}>
+        title={55}
+      >
         55
       </div>
       <div>
         <FormattedMessage
           id="ManageListingCard.perNight"
-          values={Object {}} />
+          values={Object {}}
+        />
       </div>
     </div>
     <div>
@@ -105,10 +121,12 @@ exports[`ManageListingCard matches snapshot 1`] = `
       </div>
     </div>
     <button
-      onClick={[Function]}>
+      onClick={[Function]}
+    >
       <FormattedMessage
         id="ManageListingCard.edit"
-        values={Object {}} />
+        values={Object {}}
+      />
     </button>
   </div>
 </NamedLink>

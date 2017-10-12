@@ -1,13 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`DateRangeInput matches snapshot 1`] = `
 <div
-  className="">
+  className=""
+>
   <div
-    className="DateRangePicker">
+    className="DateRangePicker"
+  >
     <div>
       <div
-        className="DateRangePickerInput">
+        className="DateRangePickerInput"
+      >
         <div
-          className="DateInput">
+          className="DateInput"
+        >
           <input
             aria-describedby="DateInput__screen-reader-message-bookingStartDate"
             aria-label="today"
@@ -23,23 +29,28 @@ exports[`DateRangeInput matches snapshot 1`] = `
             readOnly={false}
             required={false}
             type="text"
-            value="" />
+            value=""
+          />
           <p
             className="screen-reader-only"
-            id="DateInput__screen-reader-message-bookingStartDate">
+            id="DateInput__screen-reader-message-bookingStartDate"
+          >
             Date input
           </p>
           <div
-            className="DateInput__display-text">
+            className="DateInput__display-text"
+          >
             today
           </div>
         </div>
         <div
-          className="DateRangePickerInput__arrow">
+          className="DateRangePickerInput__arrow"
+        >
           <span />
         </div>
         <div
-          className="DateInput">
+          className="DateInput"
+        >
           <input
             aria-describedby="DateInput__screen-reader-message-bookingEndDate"
             aria-label="tomorrow"
@@ -55,14 +66,17 @@ exports[`DateRangeInput matches snapshot 1`] = `
             readOnly={false}
             required={false}
             type="text"
-            value="" />
+            value=""
+          />
           <p
             className="screen-reader-only"
-            id="DateInput__screen-reader-message-bookingEndDate">
+            id="DateInput__screen-reader-message-bookingEndDate"
+          >
             Date input
           </p>
           <div
-            className="DateInput__display-text">
+            className="DateInput__display-text"
+          >
             tomorrow
           </div>
         </div>

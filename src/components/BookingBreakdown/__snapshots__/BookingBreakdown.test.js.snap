@@ -1,57 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
 <div
-  className="">
+  className=""
+>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <span
-      className={undefined}>
+      className={undefined}
+    >
       <span>
         Price per night
       </span>
     </span>
     <span
-      className={undefined}>
+      className={undefined}
+    >
       10
     </span>
   </div>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <span
-      className={undefined}>
+      className={undefined}
+    >
       <span>
         <span
-          className={undefined}>
+          className={undefined}
+        >
           2017-04-14
         </span>
          – 
         <span
-          className={undefined}>
+          className={undefined}
+        >
           2017-04-16
         </span>
       </span>
     </span>
     <span
-      className={undefined}>
+      className={undefined}
+    >
       <span
         dangerouslySetInnerHTML={
           Object {
             "__html": "2 nights",
           }
-        } />
+        }
+      />
     </span>
   </div>
   <hr
-    className={undefined} />
+    className={undefined}
+  />
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <div
-      className={undefined}>
+      className={undefined}
+    >
       <span>
         Total price
       </span>
     </div>
     <div
-      className={undefined}>
+      className={undefined}
+    >
       20
     </div>
   </div>
@@ -60,58 +76,72 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
 
 exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
 <div
-  className="">
+  className=""
+>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <span
-      className={undefined}>
+      className={undefined}
+    >
       <span>
         Price per night
       </span>
     </span>
     <span
-      className={undefined}>
+      className={undefined}
+    >
       10
     </span>
   </div>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <span
-      className={undefined}>
+      className={undefined}
+    >
       <span>
         <span
-          className={undefined}>
+          className={undefined}
+        >
           2017-04-14
         </span>
          – 
         <span
-          className={undefined}>
+          className={undefined}
+        >
           2017-04-16
         </span>
       </span>
     </span>
     <span
-      className={undefined}>
+      className={undefined}
+    >
       <span
         dangerouslySetInnerHTML={
           Object {
             "__html": "2 nights",
           }
-        } />
+        }
+      />
     </span>
   </div>
   <hr
-    className={undefined} />
+    className={undefined}
+  />
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <div
-      className={undefined}>
+      className={undefined}
+    >
       <span>
         Total price
       </span>
     </div>
     <div
-      className={undefined}>
+      className={undefined}
+    >
       20
     </div>
   </div>
@@ -120,84 +150,104 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
 
 exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
 <div
-  className="">
+  className=""
+>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <span
-      className={undefined}>
+      className={undefined}
+    >
       <span>
         Price per night
       </span>
     </span>
     <span
-      className={undefined}>
+      className={undefined}
+    >
       10
     </span>
   </div>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <span
-      className={undefined}>
+      className={undefined}
+    >
       <span>
         <span
-          className={undefined}>
+          className={undefined}
+        >
           2017-04-14
         </span>
          – 
         <span
-          className={undefined}>
+          className={undefined}
+        >
           2017-04-16
         </span>
       </span>
     </span>
     <span
-      className={undefined}>
+      className={undefined}
+    >
       <span
         dangerouslySetInnerHTML={
           Object {
             "__html": "2 nights",
           }
-        } />
+        }
+      />
     </span>
   </div>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <span
-      className={undefined}>
+      className={undefined}
+    >
       <span>
         Subtotal
       </span>
     </span>
     <span
-      className={undefined}>
+      className={undefined}
+    >
       20
     </span>
   </div>
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <span
-      className={undefined}>
+      className={undefined}
+    >
       <span>
         Saunatime fee
       </span>
     </span>
     <span
-      className={undefined}>
+      className={undefined}
+    >
       -2
     </span>
   </div>
   <hr
-    className={undefined} />
+    className={undefined}
+  />
   <div
-    className={undefined}>
+    className={undefined}
+  >
     <div
-      className={undefined}>
+      className={undefined}
+    >
       <span>
-        You\'ll make
+        You'll make
       </span>
     </div>
     <div
-      className={undefined}>
+      className={undefined}
+    >
       18
     </div>
   </div>

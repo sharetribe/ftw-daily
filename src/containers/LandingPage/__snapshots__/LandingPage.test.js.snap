@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`LandingPage matches snapshot 1`] = `
 <Page
   authInfoError={null}
@@ -15,12 +17,12 @@ exports[`LandingPage matches snapshot 1`] = `
   logoutError={null}
   schema="
         {
-          \"@context\": \"http://schema.org\",
-          \"@type\": \"WebPage\",
-          \"description\": \"LandingPage.schemaDescription\",
-          \"name\": \"LandingPage.schemaTitle\",
-          \"image\": [
-            \"http://localhost:3000/saunatimeFacebook-1200x630.jpg\"
+          \\"@context\\": \\"http://schema.org\\",
+          \\"@type\\": \\"WebPage\\",
+          \\"description\\": \\"LandingPage.schemaDescription\\",
+          \\"name\\": \\"LandingPage.schemaTitle\\",
+          \\"image\\": [
+            \\"http://localhost:3000/saunatimeFacebook-1200x630.jpg\\"
           ]
         }
       "
@@ -34,7 +36,8 @@ exports[`LandingPage matches snapshot 1`] = `
         "width": 600,
       },
     ]
-  }>
+  }
+>
   <Connect(withRouter(TopbarContainerComponent)) />
   <div>
     <HeroSection
@@ -49,7 +52,8 @@ exports[`LandingPage matches snapshot 1`] = `
           "search": "",
         }
       }
-      rootClassName={null} />
+      rootClassName={null}
+    />
   </div>
 </Page>
 `;

@@ -1,13 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`EditListingPricingForm matches snapshot 1`] = `
 <form
   action="/"
   className=""
   method="post"
-  onSubmit={[Function]}>
+  onSubmit={[Function]}
+>
   <div
-    className="">
+    className=""
+  >
     <label
-      htmlFor="EditListingPricingForm.CurrencyInputField">
+      htmlFor="EditListingPricingForm.CurrencyInputField"
+    >
       Price per night in euros
     </label>
     <input
@@ -19,12 +24,14 @@ exports[`EditListingPricingForm matches snapshot 1`] = `
       onFocus={[Function]}
       placeholder="Choose your price…"
       type="text"
-      value="" />
+      value=""
+    />
   </div>
   <button
     className=""
     disabled={true}
-    type="submit">
+    type="submit"
+  >
     Save price
   </button>
 </form>

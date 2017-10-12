@@ -1,6 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
 <div
-  className="">
+  className=""
+>
   <div>
     <div>
       <div>
@@ -22,7 +25,8 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
           }
           noImageMessage={null}
           rootClassName={null}
-          sizes="100vw" />
+          sizes="100vw"
+        />
       </div>
     </div>
     <div>
@@ -41,7 +45,8 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
             },
             "type": "user",
           }
-        } />
+        }
+      />
     </div>
     <div>
       <div>
@@ -60,7 +65,8 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
               },
               "type": "user",
             }
-          } />
+          }
+        />
       </div>
       <h1>
         <FormattedMessage
@@ -75,11 +81,13 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
                         "id": "listing1",
                         "slug": "listing1-title",
                       }
-                }>
+                }
+            >
                 listing1 title
             </NamedLink>,
             }
-          } />
+          }
+        />
       </h1>
       <p>
         <FormattedMessage
@@ -92,10 +100,12 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
                     month="short"
                     value={2017-06-10T00:00:00.000Z}
                     weekday="long"
-                    year="numeric" />
+                    year="numeric"
+                />
             </span>,
             }
-          } />
+          }
+        />
       </p>
       <div />
     </div>
@@ -103,7 +113,8 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
       <h3>
         <FormattedMessage
           id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h3>
       <BookingBreakdown
         booking={
@@ -209,7 +220,8 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
             "type": "transaction",
           }
         }
-        userRole="provider" />
+        userRole="provider"
+      />
     </div>
     <div>
       <div>
@@ -232,13 +244,15 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
             }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100%" />
+            sizes="100%"
+          />
         </div>
       </div>
       <h3>
         <FormattedMessage
           id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h3>
       <div>
         <BookingBreakdown
@@ -345,7 +359,8 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
               "type": "transaction",
             }
           }
-          userRole="provider" />
+          userRole="provider"
+        />
       </div>
     </div>
   </div>
@@ -354,7 +369,8 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
 
 exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
 <div
-  className="">
+  className=""
+>
   <div>
     <div>
       <div>
@@ -376,7 +392,8 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
           }
           noImageMessage={null}
           rootClassName={null}
-          sizes="100vw" />
+          sizes="100vw"
+        />
       </div>
     </div>
     <div>
@@ -395,7 +412,8 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
             },
             "type": "user",
           }
-        } />
+        }
+      />
     </div>
     <div>
       <div>
@@ -414,7 +432,8 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
               },
               "type": "user",
             }
-          } />
+          }
+        />
       </div>
       <h1>
         <FormattedMessage
@@ -429,11 +448,13 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
                         "id": "listing1",
                         "slug": "listing1-title",
                       }
-                }>
+                }
+            >
                 listing1 title
             </NamedLink>,
             }
-          } />
+          }
+        />
       </h1>
       <p>
         <FormattedMessage
@@ -446,10 +467,12 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
                     month="short"
                     value={2017-06-10T00:00:00.000Z}
                     weekday="long"
-                    year="numeric" />
+                    year="numeric"
+                />
             </span>,
             }
-          } />
+          }
+        />
       </p>
       <div />
     </div>
@@ -457,7 +480,8 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
       <h3>
         <FormattedMessage
           id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h3>
       <BookingBreakdown
         booking={
@@ -563,7 +587,8 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
             "type": "transaction",
           }
         }
-        userRole="provider" />
+        userRole="provider"
+      />
     </div>
     <div>
       <div>
@@ -586,13 +611,15 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
             }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100%" />
+            sizes="100%"
+          />
         </div>
       </div>
       <h3>
         <FormattedMessage
           id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h3>
       <div>
         <BookingBreakdown
@@ -699,7 +726,8 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
               "type": "transaction",
             }
           }
-          userRole="provider" />
+          userRole="provider"
+        />
       </div>
     </div>
   </div>
@@ -708,7 +736,8 @@ exports[`SaleDetailsPanel autorejected matches snapshot 1`] = `
 
 exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
 <div
-  className="">
+  className=""
+>
   <div>
     <div>
       <div>
@@ -730,7 +759,8 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
           }
           noImageMessage={null}
           rootClassName={null}
-          sizes="100vw" />
+          sizes="100vw"
+        />
       </div>
     </div>
     <div>
@@ -749,7 +779,8 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
             },
             "type": "user",
           }
-        } />
+        }
+      />
     </div>
     <div>
       <div>
@@ -768,7 +799,8 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
               },
               "type": "user",
             }
-          } />
+          }
+        />
       </div>
       <h1>
         <FormattedMessage
@@ -783,11 +815,13 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
                         "id": "listing1",
                         "slug": "listing1-title",
                       }
-                }>
+                }
+            >
                 listing1 title
             </NamedLink>,
             }
-          } />
+          }
+        />
       </h1>
       <p>
         <FormattedMessage
@@ -796,7 +830,8 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
             Object {
               "customerName": "customer1 display name",
             }
-          } />
+          }
+        />
       </p>
       <div />
       <div>
@@ -804,18 +839,22 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
         <SecondaryButton
           disabled={false}
           inProgress={false}
-          onClick={[Function]}>
+          onClick={[Function]}
+        >
           <FormattedMessage
             id="SalePage.rejectButton"
-            values={Object {}} />
+            values={Object {}}
+          />
         </SecondaryButton>
         <PrimaryButton
           disabled={false}
           inProgress={false}
-          onClick={[Function]}>
+          onClick={[Function]}
+        >
           <FormattedMessage
             id="SalePage.acceptButton"
-            values={Object {}} />
+            values={Object {}}
+          />
         </PrimaryButton>
       </div>
     </div>
@@ -823,7 +862,8 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
       <h3>
         <FormattedMessage
           id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h3>
       <BookingBreakdown
         booking={
@@ -929,7 +969,8 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
             "type": "transaction",
           }
         }
-        userRole="provider" />
+        userRole="provider"
+      />
     </div>
     <div>
       <div>
@@ -952,13 +993,15 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
             }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100%" />
+            sizes="100%"
+          />
         </div>
       </div>
       <h3>
         <FormattedMessage
           id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h3>
       <div>
         <BookingBreakdown
@@ -1065,7 +1108,8 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
               "type": "transaction",
             }
           }
-          userRole="provider" />
+          userRole="provider"
+        />
       </div>
     </div>
   </div>
@@ -1074,7 +1118,8 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
 
 exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
 <div
-  className="">
+  className=""
+>
   <div>
     <div>
       <div>
@@ -1096,7 +1141,8 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
           }
           noImageMessage={null}
           rootClassName={null}
-          sizes="100vw" />
+          sizes="100vw"
+        />
       </div>
     </div>
     <div>
@@ -1115,7 +1161,8 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
             },
             "type": "user",
           }
-        } />
+        }
+      />
     </div>
     <div>
       <div>
@@ -1134,7 +1181,8 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
               },
               "type": "user",
             }
-          } />
+          }
+        />
       </div>
       <h1>
         <FormattedMessage
@@ -1149,11 +1197,13 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
                         "id": "listing1",
                         "slug": "listing1-title",
                       }
-                }>
+                }
+            >
                 listing1 title
             </NamedLink>,
             }
-          } />
+          }
+        />
       </h1>
       <p>
         <FormattedMessage
@@ -1166,10 +1216,12 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
                     month="short"
                     value={2017-06-10T00:00:00.000Z}
                     weekday="long"
-                    year="numeric" />
+                    year="numeric"
+                />
             </span>,
             }
-          } />
+          }
+        />
       </p>
       <div />
     </div>
@@ -1177,7 +1229,8 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
       <h3>
         <FormattedMessage
           id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h3>
       <BookingBreakdown
         booking={
@@ -1283,7 +1336,8 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
             "type": "transaction",
           }
         }
-        userRole="provider" />
+        userRole="provider"
+      />
     </div>
     <div>
       <div>
@@ -1306,13 +1360,15 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
             }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100%" />
+            sizes="100%"
+          />
         </div>
       </div>
       <h3>
         <FormattedMessage
           id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h3>
       <div>
         <BookingBreakdown
@@ -1419,7 +1475,8 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
               "type": "transaction",
             }
           }
-          userRole="provider" />
+          userRole="provider"
+        />
       </div>
     </div>
   </div>
@@ -1428,7 +1485,8 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
 
 exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
 <div
-  className="">
+  className=""
+>
   <div>
     <div>
       <div>
@@ -1450,7 +1508,8 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
           }
           noImageMessage={null}
           rootClassName={null}
-          sizes="100vw" />
+          sizes="100vw"
+        />
       </div>
     </div>
     <div>
@@ -1469,7 +1528,8 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
             },
             "type": "user",
           }
-        } />
+        }
+      />
     </div>
     <div>
       <div>
@@ -1488,7 +1548,8 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
               },
               "type": "user",
             }
-          } />
+          }
+        />
       </div>
       <h1>
         <FormattedMessage
@@ -1503,11 +1564,13 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
                         "id": "listing1",
                         "slug": "listing1-title",
                       }
-                }>
+                }
+            >
                 listing1 title
             </NamedLink>,
             }
-          } />
+          }
+        />
       </h1>
       <p>
         <FormattedMessage
@@ -1516,7 +1579,8 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
             Object {
               "customerName": "customer1 display name",
             }
-          } />
+          }
+        />
       </p>
       <div />
       <div>
@@ -1524,18 +1588,22 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
         <SecondaryButton
           disabled={false}
           inProgress={false}
-          onClick={[Function]}>
+          onClick={[Function]}
+        >
           <FormattedMessage
             id="SalePage.rejectButton"
-            values={Object {}} />
+            values={Object {}}
+          />
         </SecondaryButton>
         <PrimaryButton
           disabled={false}
           inProgress={false}
-          onClick={[Function]}>
+          onClick={[Function]}
+        >
           <FormattedMessage
             id="SalePage.acceptButton"
-            values={Object {}} />
+            values={Object {}}
+          />
         </PrimaryButton>
       </div>
     </div>
@@ -1543,7 +1611,8 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
       <h3>
         <FormattedMessage
           id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h3>
       <BookingBreakdown
         booking={
@@ -1649,7 +1718,8 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
             "type": "transaction",
           }
         }
-        userRole="provider" />
+        userRole="provider"
+      />
     </div>
     <div>
       <div>
@@ -1672,13 +1742,15 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
             }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100%" />
+            sizes="100%"
+          />
         </div>
       </div>
       <h3>
         <FormattedMessage
           id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h3>
       <div>
         <BookingBreakdown
@@ -1785,7 +1857,8 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
               "type": "transaction",
             }
           }
-          userRole="provider" />
+          userRole="provider"
+        />
       </div>
     </div>
   </div>
@@ -1794,7 +1867,8 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
 
 exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
 <div
-  className="">
+  className=""
+>
   <div>
     <div>
       <div>
@@ -1816,7 +1890,8 @@ exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
           }
           noImageMessage={null}
           rootClassName={null}
-          sizes="100vw" />
+          sizes="100vw"
+        />
       </div>
     </div>
     <div>
@@ -1835,7 +1910,8 @@ exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
             },
             "type": "user",
           }
-        } />
+        }
+      />
     </div>
     <div>
       <div>
@@ -1854,7 +1930,8 @@ exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
               },
               "type": "user",
             }
-          } />
+          }
+        />
       </div>
       <h1>
         <FormattedMessage
@@ -1869,11 +1946,13 @@ exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
                         "id": "listing1",
                         "slug": "listing1-title",
                       }
-                }>
+                }
+            >
                 listing1 title
             </NamedLink>,
             }
-          } />
+          }
+        />
       </h1>
       <p>
         <FormattedMessage
@@ -1886,10 +1965,12 @@ exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
                     month="short"
                     value={2017-06-10T00:00:00.000Z}
                     weekday="long"
-                    year="numeric" />
+                    year="numeric"
+                />
             </span>,
             }
-          } />
+          }
+        />
       </p>
       <div />
     </div>
@@ -1897,7 +1978,8 @@ exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
       <h3>
         <FormattedMessage
           id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h3>
       <BookingBreakdown
         booking={
@@ -2003,7 +2085,8 @@ exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
             "type": "transaction",
           }
         }
-        userRole="provider" />
+        userRole="provider"
+      />
     </div>
     <div>
       <div>
@@ -2026,13 +2109,15 @@ exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
             }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100%" />
+            sizes="100%"
+          />
         </div>
       </div>
       <h3>
         <FormattedMessage
           id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}} />
+          values={Object {}}
+        />
       </h3>
       <div>
         <BookingBreakdown
@@ -2139,7 +2224,8 @@ exports[`SaleDetailsPanel rejected matches snapshot 1`] = `
               "type": "transaction",
             }
           }
-          userRole="provider" />
+          userRole="provider"
+        />
       </div>
     </div>
   </div>

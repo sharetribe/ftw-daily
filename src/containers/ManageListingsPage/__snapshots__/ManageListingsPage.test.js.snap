@@ -1,15 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`ContactDetailsPage matches snapshot 1`] = `
 <Page
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
-  title="Manage listings">
+  title="Manage listings"
+>
   <Connect(withRouter(TopbarContainerComponent))
-    currentPage="ManageListingsPage" />
+    currentPage="ManageListingsPage"
+  />
   <UserNav
     className={null}
     rootClassName={null}
-    selectedPageName="ManageListingsPage" />
+    selectedPageName="ManageListingsPage"
+  />
   <div>
     <div />
   </div>

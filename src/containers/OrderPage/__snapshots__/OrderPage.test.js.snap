@@ -1,9 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`OrderPage matches snapshot 1`] = `
 <Page
   authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
-  title="OrderPage.title">
+  title="OrderPage.title"
+>
   <Connect(withRouter(TopbarContainerComponent)) />
   <InjectIntl(Component)
     className="undefined"
@@ -109,6 +112,7 @@ exports[`OrderPage matches snapshot 1`] = `
         },
         "type": "transaction",
       }
-    } />
+    }
+  />
 </Page>
 `;

@@ -1,14 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`EditListingPhotosForm matches snapshot 1`] = `
 <Form
   className=""
-  onSubmit={[Function]}>
+  onSubmit={[Function]}
+>
   <AddImages
     className={null}
     images={Array []}
     onRemoveImage={[Function]}
     onSortEnd={[Function]}
     savedImageAltText="EditListingPhotosForm.savedImageAltText"
-    thumbnailClassName={null}>
+    thumbnailClassName={null}
+  >
     <Field
       accept="image/*"
       component={[Function]}
@@ -19,18 +23,21 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
           <span>
             <FormattedMessage
               id="EditListingPhotosForm.chooseImage"
-              values={Object {}} />
+              values={Object {}}
+            />
           </span>
           <span>
             <FormattedMessage
               id="EditListingPhotosForm.imageTypes"
-              values={Object {}} />
+              values={Object {}}
+            />
           </span>
         </span>
       }
       name="addImage"
       onChange={[Function]}
-      type="file" />
+      type="file"
+    />
     <Field
       component={[Function]}
       name="images"
@@ -39,12 +46,14 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
         Array [
           [Function],
         ]
-      } />
+      }
+    />
   </AddImages>
   <p>
     <FormattedMessage
       id="EditListingPhotosForm.addImagesTip"
-      values={Object {}} />
+      values={Object {}}
+    />
   </p>
   <Button
     className={null}
@@ -52,7 +61,8 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
     inProgress={false}
     ready={false}
     rootClassName={null}
-    type="submit">
+    type="submit"
+  >
     Save photos
   </Button>
 </Form>

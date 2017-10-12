@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`ListingPage matches snapshot 1`] = `
 <Page
   authInfoError={null}
@@ -9,24 +11,28 @@ exports[`ListingPage matches snapshot 1`] = `
   logoutError={null}
   schema="
           {
-            \"@context\": \"http://schema.org\",
-            \"@type\": \"ItemPage\",
-            \"description\": \"listing1 description\",
-            \"name\": \"ListingPage.schemaTitle\",
-            \"image\": []
+            \\"@context\\": \\"http://schema.org\\",
+            \\"@type\\": \\"ItemPage\\",
+            \\"description\\": \\"listing1 description\\",
+            \\"name\\": \\"ListingPage.schemaTitle\\",
+            \\"image\\": []
           }
         "
   scrollingDisabled={false}
   title="ListingPage.schemaTitle"
-  twitterImages={Array []}>
+  twitterImages={Array []}
+>
   <Connect(withRouter(TopbarContainerComponent)) />
   <div
-    className="">
+    className=""
+  >
     <div>
       <div
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         <div
-          onClick={[Function]}>
+          onClick={[Function]}
+        >
           <ActionBar
             editParams={
               Object {
@@ -37,7 +43,8 @@ exports[`ListingPage matches snapshot 1`] = `
               }
             }
             isClosed={false}
-            isOwnListing={false} />
+            isOwnListing={false}
+          />
         </div>
         <ResponsiveImage
           alt="listing1 title"
@@ -65,7 +72,8 @@ exports[`ListingPage matches snapshot 1`] = `
           }
           noImageMessage={null}
           rootClassName={null}
-          sizes="100vw" />
+          sizes="100vw"
+        />
       </div>
     </div>
     <InjectIntl(ModalComponent)
@@ -73,9 +81,11 @@ exports[`ListingPage matches snapshot 1`] = `
       isOpen={false}
       lightCloseButton={true}
       onClose={[Function]}
-      onManageDisableScrolling={[Function]}>
+      onManageDisableScrolling={[Function]}
+    >
       <InjectIntl(ImageCarousel)
-        images={Array []} />
+        images={Array []}
+      />
     </InjectIntl(ModalComponent)>
     <div>
       <div>
@@ -94,7 +104,8 @@ exports[`ListingPage matches snapshot 1`] = `
               },
               "type": "user",
             }
-          } />
+          }
+        />
         <AvatarMedium
           user={
             Object {
@@ -110,19 +121,22 @@ exports[`ListingPage matches snapshot 1`] = `
               },
               "type": "user",
             }
-          } />
+          }
+        />
       </div>
       <div>
         <div>
           <div>
             <div
-              title={55}>
+              title={55}
+            >
               55
             </div>
             <div>
               <FormattedMessage
                 id="ListingPage.perNight"
-                values={Object {}} />
+                values={Object {}}
+              />
             </div>
           </div>
           <div>
@@ -137,7 +151,8 @@ exports[`ListingPage matches snapshot 1`] = `
                     Object {
                       "name": "user-1 display name",
                     }
-                  } />
+                  }
+                />
               </span>
             </div>
           </div>
@@ -146,7 +161,8 @@ exports[`ListingPage matches snapshot 1`] = `
           <h2>
             <FormattedMessage
               id="ListingPage.descriptionTitle"
-              values={Object {}} />
+              values={Object {}}
+            />
           </h2>
           <p>
             listing1 description
@@ -156,7 +172,8 @@ exports[`ListingPage matches snapshot 1`] = `
           <h2>
             <FormattedMessage
               id="ListingPage.locationTitle"
-              values={Object {}} />
+              values={Object {}}
+            />
           </h2>
           <div>
             <Map
@@ -169,7 +186,8 @@ exports[`ListingPage matches snapshot 1`] = `
               }
               className=""
               rootClassName={null}
-              zoom={11} />
+              zoom={11}
+            />
           </div>
         </div>
       </div>
@@ -178,7 +196,8 @@ exports[`ListingPage matches snapshot 1`] = `
         isModalOpenOnMobile={false}
         onClose={[Function]}
         onManageDisableScrolling={[Function]}
-        showAsModalMaxWidth={1023}>
+        showAsModalMaxWidth={1023}
+      >
         <div>
           <h1>
             listing1 title
@@ -191,7 +210,8 @@ exports[`ListingPage matches snapshot 1`] = `
                   Object {
                     "name": "user-1 display name",
                   }
-                } />
+                }
+              />
             </span>
           </div>
         </div>
@@ -203,12 +223,14 @@ exports[`ListingPage matches snapshot 1`] = `
                 Object {
                   "title": "listing1 title",
                 }
-              } />
+              }
+            />
           </h2>
           <div>
             <FormattedMessage
               id="ListingPage.bookingHelp"
-              values={Object {}} />
+              values={Object {}}
+            />
           </div>
         </div>
         <BookingDatesForm
@@ -219,18 +241,21 @@ exports[`ListingPage matches snapshot 1`] = `
               "amount": 5500,
               "currency": "USD",
             }
-          } />
+          }
+        />
       </withViewport(ModalInMobileComponent)>
       <div>
         <div>
           <div
-            title={55}>
+            title={55}
+          >
             55
           </div>
           <div>
             <FormattedMessage
               id="ListingPage.perNight"
-              values={Object {}} />
+              values={Object {}}
+            />
           </div>
         </div>
         <Button
@@ -239,7 +264,8 @@ exports[`ListingPage matches snapshot 1`] = `
           inProgress={false}
           onClick={[Function]}
           ready={false}
-          rootClassName={null}>
+          rootClassName={null}
+        >
           ListingPage.ctaButtonMessage
         </Button>
       </div>

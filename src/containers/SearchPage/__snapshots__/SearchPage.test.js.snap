@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`SearchPageComponent matches snapshot 1`] = `
 <Page
   authInfoError={null}
@@ -5,15 +7,16 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   logoutError={null}
   schema="
           {
-            \"@context\": \"http://schema.org\",
-            \"@type\": \"SearchResultsPage\",
-            \"description\": \"SearchPage.schemaDescription\",
-            \"name\": \"SearchPage.schemaTitle\",
-            \"mainEntity\": [{\"@type\":\"ItemList\",\"name\":\"SearchPage.schemaMapSearch\",\"itemListOrder\":\"http://schema.org/ItemListOrderAscending\",\"itemListElement\":[]}]
+            \\"@context\\": \\"http://schema.org\\",
+            \\"@type\\": \\"SearchResultsPage\\",
+            \\"description\\": \\"SearchPage.schemaDescription\\",
+            \\"name\\": \\"SearchPage.schemaTitle\\",
+            \\"mainEntity\\": [{\\"@type\\":\\"ItemList\\",\\"name\\":\\"SearchPage.schemaMapSearch\\",\\"itemListOrder\\":\\"http://schema.org/ItemListOrderAscending\\",\\"itemListElement\\":[]}]
           }
         "
   scrollingDisabled={false}
-  title="SearchPage.schemaTitle">
+  title="SearchPage.schemaTitle"
+>
   <Connect(withRouter(TopbarContainerComponent)) />
   <div>
     <div>
@@ -25,11 +28,13 @@ exports[`SearchPageComponent matches snapshot 1`] = `
               Object {
                 "count": 22,
               }
-            } />
+            }
+          />
         </h2>
       </div>
       <div
-        className="">
+        className=""
+      >
         <SearchResultsPanel
           className={null}
           listings={Array []}
@@ -42,14 +47,18 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             }
           }
           rootClassName={null}
-          search={Object {}}>
+          search={Object {}}
+        >
           <div
-            onClick={[Function]}>
+            onClick={[Function]}
+          >
             <MapIcon
-              className={null} />
+              className={null}
+            />
             <FormattedMessage
               id="SearchPage.openMapView"
-              values={Object {}} />
+              values={Object {}}
+            />
           </div>
         </SearchResultsPanel>
       </div>
@@ -59,7 +68,8 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       isModalOpenOnMobile={false}
       onClose={[Function]}
       onManageDisableScrolling={[Function]}
-      showAsModalMaxWidth={768}>
+      showAsModalMaxWidth={768}
+    >
       <div>
         <SearchMapComponent
           bounds={null}
@@ -77,7 +87,8 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           onIdle={[Function]}
           rootClassName={null}
           useLocationSearchBounds={true}
-          zoom={11} />
+          zoom={11}
+        />
       </div>
     </withViewport(ModalInMobileComponent)>
   </div>
