@@ -61,7 +61,15 @@
 .searchResultSummaryMobile {
   display: flex;
   justify-content: space-between;
-  margin: 8px 24px 14px 24px;
+
+  background-color: var(--matterColorBright);
+  width: 100vw;
+  padding: 8px 24px 14px 24px;
+
+  /* sticky result summary in mobile */
+  position: sticky;
+  top: 0;
+  z-index: 9;
 
   @media (--viewportMedium) {
     display: none;
