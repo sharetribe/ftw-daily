@@ -448,11 +448,12 @@
   "SalePage.title": "Sale details: {title}",
   "SearchMapInfoCard.noImage": "No image",
   "SearchPage.foundResults": "{count, number} {count, plural, one {sauna} other {saunas}} found",
+  "SearchPage.foundResultsMobile": "{count, number} {count, plural, one {result} other {results}}",
   "SearchPage.foundResultsWithAddress":
     "{count, number} {count, plural, one {sauna} other {saunas}} around {address}",
   "SearchPage.loadingResults": "Loading search results…",
   "SearchPage.noResults": "Could not find any listings.",
-  "SearchPage.openMapView": "Map view",
+  "SearchPage.openMapView": "Map",
   "SearchPage.schemaMapSearch": "map search",
   "SearchPage.schemaDescription": "Showing search results",
   "SearchPage.schemaTitle": "Search results for {searchAddress} | {siteTitle}",
