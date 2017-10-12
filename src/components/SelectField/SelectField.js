@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import { Field } from 'redux-form';
 import classNames from 'classnames';
 import { ValidationError } from '../../components';

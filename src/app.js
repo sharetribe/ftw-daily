@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';

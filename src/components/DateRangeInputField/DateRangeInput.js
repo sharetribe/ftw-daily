@@ -4,7 +4,7 @@
  *
  * N.B. *isOutsideRange* in defaultProps is defining what dates are available to booking.
  */
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import { intlShape, injectIntl } from 'react-intl';
 import { DateRangePicker, isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
 import classNames from 'classnames';

@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import Tabs from './Tabs';
 
 const TestPanel = props => {
   return <div>{props.children}</div>;
 };
 
+const { node } = PropTypes;
+
 TestPanel.propTypes = {
-  children: React.PropTypes.node.isRequired,
+  children: node.isRequired,
 };
 
 const selfLinkProps = {

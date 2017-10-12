@@ -17,7 +17,7 @@
  * will be added to the element className if the current URL matches
  * the one in the generated pathname of the link.
  */
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import { Link, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';

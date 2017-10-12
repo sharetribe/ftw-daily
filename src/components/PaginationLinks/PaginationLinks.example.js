@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
 import { withRouter } from 'react-router-dom';
 import { parse } from '../../util/urlHelpers';
 import PaginationLinks from './PaginationLinks';
