@@ -41,14 +41,17 @@ exports[`SearchPageComponent matches snapshot 1`] = `
                 Object {
                   "count": 22,
                 }
-              } />
+              }
+            />
           </h2>
         </div>
         <div
-          onClick={[Function]}>
+          onClick={[Function]}
+        >
           <FormattedMessage
             id="SearchPage.openMapView"
-            values={Object {}} />
+            values={Object {}}
+          />
         </div>
       </div>
       <div
@@ -66,7 +69,8 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             }
           }
           rootClassName={null}
-          search={Object {}} />
+          search={Object {}}
+        />
       </div>
     </div>
     <withViewport(ModalInMobileComponent)
