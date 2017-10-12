@@ -1,9 +1,13 @@
 import React, { PropTypes } from 'react';
-import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import * as propTypes from '../../util/propTypes';
+import { formatMoney } from '../../util/currency';
+import { userDisplayName } from '../../util/data';
+import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
   Avatar,
   NamedLink,
@@ -12,20 +16,13 @@ import {
   Page,
   PaginationLinks,
   TabNav,
-  Topbar,
 } from '../../components';
-import * as propTypes from '../../util/propTypes';
-import { formatMoney } from '../../util/currency';
-import { userDisplayName } from '../../util/data';
-import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
-import { sendVerificationEmail } from '../../ducks/user.duck';
-import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { loadData } from './InboxPage.duck';
+import { TopbarContainer } from '../../containers';
 
+import { loadData } from './InboxPage.duck';
 import css from './InboxPage.css';
 
-const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
+const { arrayOf, bool, instanceOf, number, oneOf, shape, string } = PropTypes;
 
 const formatDate = (intl, date) => {
   return {
@@ -165,27 +162,16 @@ InboxItem.propTypes = {
 export const InboxPageComponent = props => {
   const {
     authInfoError,
-    authInProgress,
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
     fetchInProgress,
     fetchOrdersOrSalesError,
-    history,
     intl,
-    isAuthenticated,
-    location,
     logoutError,
-    onLogout,
-    onManageDisableScrolling,
     pagination,
     params,
     providerNotificationCount,
     scrollingDisabled,
     transactions,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-    onResendVerificationEmail,
   } = props;
   const { tab } = params;
 
@@ -268,24 +254,11 @@ export const InboxPageComponent = props => {
       title={title}
       scrollingDisabled={scrollingDisabled}
     >
-      <Topbar
+      <TopbarContainer
         className={css.topbar}
         mobileRootClassName={css.mobileTopbar}
         desktopClassName={css.desktopTopbar}
-        isAuthenticated={isAuthenticated}
-        authInProgress={authInProgress}
-        currentUser={currentUser}
-        currentUserHasListings={currentUserHasListings}
-        currentUserHasOrders={currentUserHasOrders}
         currentPage="InboxPage"
-        notificationCount={providerNotificationCount}
-        history={history}
-        location={location}
-        onLogout={onLogout}
-        onManageDisableScrolling={onManageDisableScrolling}
-        onResendVerificationEmail={onResendVerificationEmail}
-        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-        sendVerificationEmailError={sendVerificationEmailError}
       />
       <div className={css.container}>
         <div className={css.navigation}>
@@ -324,29 +297,14 @@ InboxPageComponent.propTypes = {
   }).isRequired,
 
   authInfoError: instanceOf(Error),
-  authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
-  currentUserHasListings: bool.isRequired,
-  currentUserHasOrders: bool,
   fetchInProgress: bool.isRequired,
   fetchOrdersOrSalesError: instanceOf(Error),
-  isAuthenticated: bool.isRequired,
   logoutError: instanceOf(Error),
-  onLogout: func.isRequired,
-  onManageDisableScrolling: func.isRequired,
   pagination: propTypes.pagination,
   providerNotificationCount: number,
   scrollingDisabled: bool.isRequired,
   transactions: arrayOf(propTypes.transaction).isRequired,
-  sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
-  onResendVerificationEmail: func.isRequired,
-
-  // from withRouter
-  history: shape({
-    push: func.isRequired,
-  }).isRequired,
-  location: object.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
@@ -359,44 +317,25 @@ const mapStateToProps = state => {
     pagination,
     transactionRefs,
   } = state.InboxPage;
-  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
+  const { authInfoError, logoutError } = state.Auth;
   const {
     currentUser,
-    currentUserHasListings,
     currentUserNotificationCount: providerNotificationCount,
-    currentUserHasOrders,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
   } = state.user;
   return {
     authInfoError,
-    authInProgress: authenticationInProgress(state),
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
     fetchInProgress,
     fetchOrdersOrSalesError,
-    isAuthenticated,
     logoutError,
     pagination,
     providerNotificationCount,
     scrollingDisabled: isScrollingDisabled(state),
     transactions: getMarketplaceEntities(state, transactionRefs),
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  onLogout: historyPush => dispatch(logout(historyPush)),
-  onManageDisableScrolling: (componentId, disableScrolling) =>
-    dispatch(manageDisableScrolling(componentId, disableScrolling)),
-  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
-});
-
-const InboxPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(
-  InboxPageComponent
-);
+const InboxPage = compose(connect(mapStateToProps), injectIntl)(InboxPageComponent);
 
 InboxPage.loadData = loadData;
 

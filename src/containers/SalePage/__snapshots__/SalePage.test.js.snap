@@ -4,47 +4,7 @@ exports[`SalePage matches snapshot 1`] = `
   logoutError={null}
   scrollingDisabled={false}
   title="SalePage.title">
-  <Topbar
-    authInProgress={false}
-    currentUser={
-      Object {
-        "attributes": Object {
-          "banned": false,
-          "email": "provider1@example.com",
-          "emailVerified": true,
-          "profile": Object {
-            "abbreviatedName": "provider1 abbreviated name",
-            "displayName": "provider1 display name",
-            "firstName": "provider1 first name",
-            "lastName": "provider1 last name",
-          },
-          "stripeConnected": true,
-        },
-        "id": UUID {
-          "uuid": "provider1",
-        },
-        "type": "current-user",
-      }
-    }
-    currentUserHasListings={false}
-    currentUserHasOrders={null}
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
-    isAuthenticated={false}
-    location={
-      Object {
-        "search": "",
-      }
-    }
-    notificationCount={0}
-    onLogout={[Function]}
-    onManageDisableScrolling={[Function]}
-    onResendVerificationEmail={[Function]}
-    sendVerificationEmailError={null}
-    sendVerificationEmailInProgress={false} />
+  <Connect(withRouter(TopbarContainerComponent)) />
   <div>
     <InjectIntl(Component)
       acceptInProgress={false}

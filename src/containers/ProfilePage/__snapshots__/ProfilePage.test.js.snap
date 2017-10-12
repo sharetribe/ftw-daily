@@ -2,28 +2,8 @@ exports[`ProfilePage matches snapshot 1`] = `
 <Page
   authInfoError={null}
   logoutError={null}
+  scrollingDisabled={false}
   title="Profile page with display name: most-awesome-shop">
-  <Topbar
-    authInProgress={false}
-    currentUser={null}
-    currentUserHasListings={false}
-    currentUserHasOrders={null}
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
-    isAuthenticated={false}
-    location={
-      Object {
-        "search": "",
-      }
-    }
-    notificationCount={0}
-    onLogout={[Function]}
-    onManageDisableScrolling={[Function]}
-    onResendVerificationEmail={[Function]}
-    sendVerificationEmailError={null}
-    sendVerificationEmailInProgress={false} />
+  <Connect(withRouter(TopbarContainerComponent)) />
 </Page>
 `;

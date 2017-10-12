@@ -2,13 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { withRouter } from 'react-router-dom';
 import * as propTypes from '../../util/propTypes';
 import { parse } from '../../util/urlHelpers';
-import { sendVerificationEmail } from '../../ducks/user.duck';
-import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { ManageListingCard, Page, PaginationLinks, Topbar, UserNav } from '../../components';
+import { isScrollingDisabled } from '../../ducks/UI.duck';
+import { ManageListingCard, Page, PaginationLinks, UserNav } from '../../components';
+import { TopbarContainer } from '../../containers';
 
 import {
   closeListing,
@@ -38,21 +36,11 @@ export class ManageListingsPageComponent extends Component {
   render() {
     const {
       authInfoError,
-      authInProgress,
       closingListing,
       closingListingError,
-      currentUser,
-      currentUserHasListings,
-      currentUserHasOrders,
-      history,
-      isAuthenticated,
       listings,
-      location,
       logoutError,
-      notificationCount,
       onCloseListing,
-      onLogout,
-      onManageDisableScrolling,
       onOpenListing,
       openingListing,
       openingListingError,
@@ -61,9 +49,6 @@ export class ManageListingsPageComponent extends Component {
       queryListingsError,
       queryParams,
       scrollingDisabled,
-      sendVerificationEmailInProgress,
-      sendVerificationEmailError,
-      onResendVerificationEmail,
     } = this.props;
 
     // TODO Handle openingListingError, closingListingError,
@@ -119,23 +104,7 @@ export class ManageListingsPageComponent extends Component {
         scrollingDisabled={scrollingDisabled}
         title="Manage listings"
       >
-        <Topbar
-          authInProgress={authInProgress}
-          currentUser={currentUser}
-          currentUserHasListings={currentUserHasListings}
-          currentUserHasOrders={currentUserHasOrders}
-          currentPage="ManageListingsPage"
-          history={history}
-          isAuthenticated={isAuthenticated}
-          location={location}
-          notificationCount={notificationCount}
-          onLogout={onLogout}
-          onManageDisableScrolling={onManageDisableScrolling}
-          scrollingDisabled={scrollingDisabled}
-          onResendVerificationEmail={onResendVerificationEmail}
-          sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-          sendVerificationEmailError={sendVerificationEmailError}
-        />
+        <TopbarContainer currentPage="ManageListingsPage" />
         <UserNav selectedPageName="ManageListingsPage" />
         {queryInProgress ? loadingResults : null}
         {queryListingsError ? queryError : null}
@@ -167,11 +136,8 @@ export class ManageListingsPageComponent extends Component {
 
 ManageListingsPageComponent.defaultProps = {
   authInfoError: null,
-  currentUser: null,
-  currentUserHasOrders: null,
   listings: [],
   logoutError: null,
-  notificationCount: 0,
   pagination: null,
   queryListingsError: null,
   queryParams: null,
@@ -179,29 +145,20 @@ ManageListingsPageComponent.defaultProps = {
   closingListingError: null,
   openingListing: null,
   openingListingError: null,
-  sendVerificationEmailError: null,
 };
 
-const { arrayOf, bool, func, instanceOf, number, object, shape, string } = PropTypes;
+const { arrayOf, bool, func, instanceOf, object, shape, string } = PropTypes;
 
 ManageListingsPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
-  authInProgress: bool.isRequired,
   closingListing: shape({ uuid: string.isRequired }),
   closingListingError: shape({
     listingId: propTypes.uuid.isRequired,
     error: instanceOf(Error).isRequired,
   }),
-  currentUser: propTypes.currentUser,
-  currentUserHasListings: bool.isRequired,
-  currentUserHasOrders: bool,
-  isAuthenticated: bool.isRequired,
   listings: arrayOf(propTypes.listing),
   logoutError: instanceOf(Error),
-  notificationCount: number,
   onCloseListing: func.isRequired,
-  onLogout: func.isRequired,
-  onManageDisableScrolling: func.isRequired,
   onOpenListing: func.isRequired,
   openingListing: shape({ uuid: string.isRequired }),
   openingListingError: shape({
@@ -213,15 +170,6 @@ ManageListingsPageComponent.propTypes = {
   queryListingsError: instanceOf(Error),
   queryParams: object,
   scrollingDisabled: bool.isRequired,
-  sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
-  onResendVerificationEmail: func.isRequired,
-
-  // from withRouter
-  history: shape({
-    push: func.isRequired,
-  }).isRequired,
-  location: shape({ state: object }).isRequired,
 };
 
 const mapStateToProps = state => {
@@ -237,26 +185,11 @@ const mapStateToProps = state => {
     closingListingError,
   } = state.ManageListingsPage;
   const listings = getListingsById(state, currentPageResultIds);
-  // Page needs authInfoError and logoutError, Topbar needs isAuthenticated
-  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
-  // Topbar needs user info.
-  const {
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    currentUserNotificationCount: notificationCount,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-  } = state.user;
+  // Page needs authInfoError and logoutError
+  const { authInfoError, logoutError } = state.Auth;
   return {
     authInfoError,
-    authInProgress: authenticationInProgress(state),
     currentPageResultIds,
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    notificationCount,
-    isAuthenticated,
     listings,
     logoutError,
     pagination,
@@ -268,21 +201,15 @@ const mapStateToProps = state => {
     openingListingError,
     closingListing,
     closingListingError,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   onCloseListing: listingId => dispatch(closeListing(listingId)),
   onOpenListing: listingId => dispatch(openListing(listingId)),
-  onLogout: historyPush => dispatch(logout(historyPush)),
-  onManageDisableScrolling: (componentId, disableScrolling) =>
-    dispatch(manageDisableScrolling(componentId, disableScrolling)),
-  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
-const ManageListingsPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
+const ManageListingsPage = compose(connect(mapStateToProps, mapDispatchToProps))(
   ManageListingsPageComponent
 );
 

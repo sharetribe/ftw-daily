@@ -1,17 +1,14 @@
 import React, { PropTypes, Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { ensureCurrentUser } from '../../util/data';
-import { sendVerificationEmail } from '../../ducks/user.duck';
-import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
-import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { clearUpdatedForm, updateProfile, uploadImage } from './ProfileSettingsPage.duck';
-import { Page, Topbar, UserNav } from '../../components';
-import { ProfileSettingsForm } from '../../containers';
+import { isScrollingDisabled } from '../../ducks/UI.duck';
+import { Page, UserNav } from '../../components';
+import { ProfileSettingsForm, TopbarContainer } from '../../containers';
 
+import { clearUpdatedForm, updateProfile, uploadImage } from './ProfileSettingsPage.duck';
 import css from './ProfileSettingsPage.css';
 
 const onImageUploadHandler = (values, fn) => {
@@ -29,29 +26,17 @@ export class ProfileSettingsPageComponent extends Component {
   render() {
     const {
       authInfoError,
-      authInProgress,
       currentUser,
-      currentUserHasListings,
-      currentUserHasOrders,
-      history,
       image,
-      isAuthenticated,
-      location,
       logoutError,
-      notificationCount,
       onChange,
       onImageUpload,
-      onLogout,
-      onManageDisableScrolling,
       onUpdateProfile,
       scrollingDisabled,
       updateInProgress,
       updateProfileError,
       uploadImageError,
       uploadInProgress,
-      sendVerificationEmailInProgress,
-      sendVerificationEmailError,
-      onResendVerificationEmail,
     } = this.props;
 
     const handleSubmit = values => {
@@ -104,22 +89,7 @@ export class ProfileSettingsPageComponent extends Component {
         title="Profile settings"
         scrollingDisabled={scrollingDisabled}
       >
-        <Topbar
-          authInProgress={authInProgress}
-          currentPage="ProfileSettingsPage"
-          currentUser={currentUser}
-          currentUserHasListings={currentUserHasListings}
-          currentUserHasOrders={currentUserHasOrders}
-          history={history}
-          isAuthenticated={isAuthenticated}
-          location={location}
-          notificationCount={notificationCount}
-          onLogout={onLogout}
-          onManageDisableScrolling={onManageDisableScrolling}
-          onResendVerificationEmail={onResendVerificationEmail}
-          sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-          sendVerificationEmailError={sendVerificationEmailError}
-        />
+        <TopbarContainer currentPage="ProfileSettingsPage" />
         <UserNav selectedPageName="ProfileSettingsPage" />
 
         <div className={css.content}>
@@ -134,24 +104,17 @@ export class ProfileSettingsPageComponent extends Component {
 ProfileSettingsPageComponent.defaultProps = {
   authInfoError: null,
   currentUser: null,
-  currentUserHasOrders: null,
   logoutError: null,
-  notificationCount: 0,
   uploadImageError: null,
   updateProfileError: null,
   image: null,
-  sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf, number, object, shape, string } = PropTypes;
+const { bool, func, instanceOf, object, shape, string } = PropTypes;
 
 ProfileSettingsPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
-  authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
-  currentUserHasListings: bool.isRequired,
-  currentUserHasOrders: bool,
-  isAuthenticated: bool.isRequired,
   image: shape({
     id: string,
     imageId: propTypes.uuid,
@@ -159,40 +122,20 @@ ProfileSettingsPageComponent.propTypes = {
     uploadedImage: propTypes.image,
   }),
   logoutError: instanceOf(Error),
-  notificationCount: number,
   onChange: func.isRequired,
   onImageUpload: func.isRequired,
-  onLogout: func.isRequired,
-  onManageDisableScrolling: func.isRequired,
   onUpdateProfile: func.isRequired,
   scrollingDisabled: bool.isRequired,
   updateInProgress: bool.isRequired,
   updateProfileError: instanceOf(Error),
   uploadImageError: instanceOf(Error),
   uploadInProgress: bool.isRequired,
-  sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
-  onResendVerificationEmail: func.isRequired,
-
-  // from withRouter
-  history: shape({
-    push: func.isRequired,
-  }).isRequired,
-  location: shape({ state: object }).isRequired,
 };
 
 const mapStateToProps = state => {
-  // Page needs authInfoError and logoutError, Topbar needs isAuthenticated
-  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
-  // Topbar needs user info.
-  const {
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    currentUserNotificationCount: notificationCount,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-  } = state.user;
+  // Page needs authInfoError and logoutError
+  const { authInfoError, logoutError } = state.Auth;
+  const { currentUser } = state.user;
   const {
     image,
     uploadImageError,
@@ -202,35 +145,24 @@ const mapStateToProps = state => {
   } = state.ProfileSettingsPage;
   return {
     authInfoError,
-    authInProgress: authenticationInProgress(state),
     currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    notificationCount,
     image,
-    isAuthenticated,
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
     updateInProgress,
     updateProfileError,
     uploadImageError,
     uploadInProgress,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   onChange: () => dispatch(clearUpdatedForm()),
   onImageUpload: data => dispatch(uploadImage(data)),
-  onLogout: historyPush => dispatch(logout(historyPush)),
-  onManageDisableScrolling: (componentId, disableScrolling) =>
-    dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onUpdateProfile: data => dispatch(updateProfile(data)),
-  onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
 });
 
-const ProfileSettingsPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(
+const ProfileSettingsPage = compose(connect(mapStateToProps, mapDispatchToProps))(
   ProfileSettingsPageComponent
 );
 

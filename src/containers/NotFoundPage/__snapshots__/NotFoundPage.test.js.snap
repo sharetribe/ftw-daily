@@ -2,29 +2,9 @@ exports[`NotFoundPageComponent matches snapshot 1`] = `
 <Page
   authInfoError={null}
   logoutError={null}
+  scrollingDisabled={false}
   title="NotFoundPage.title">
-  <Topbar
-    authInProgress={false}
-    currentUser={null}
-    currentUserHasListings={false}
-    currentUserHasOrders={null}
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
-    isAuthenticated={false}
-    location={
-      Object {
-        "search": "",
-      }
-    }
-    notificationCount={0}
-    onLogout={[Function]}
-    onManageDisableScrolling={[Function]}
-    onResendVerificationEmail={[Function]}
-    sendVerificationEmailError={null}
-    sendVerificationEmailInProgress={false} />
+  <Connect(withRouter(TopbarContainerComponent)) />
   <div>
     <div>
       <div>

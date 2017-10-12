@@ -4,30 +4,8 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
   logoutError={null}
   scrollingDisabled={false}
   title="Manage listings">
-  <Topbar
-    authInProgress={false}
-    currentPage="ManageListingsPage"
-    currentUser={null}
-    currentUserHasListings={false}
-    currentUserHasOrders={null}
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
-    isAuthenticated={false}
-    location={
-      Object {
-        "search": "",
-      }
-    }
-    notificationCount={0}
-    onLogout={[Function]}
-    onManageDisableScrolling={[Function]}
-    onResendVerificationEmail={[Function]}
-    scrollingDisabled={false}
-    sendVerificationEmailError={null}
-    sendVerificationEmailInProgress={false} />
+  <Connect(withRouter(TopbarContainerComponent))
+    currentPage="ManageListingsPage" />
   <UserNav
     className={null}
     rootClassName={null}
