@@ -217,12 +217,12 @@ export const ProviderSaleAccepted = {
   },
 };
 
-export const ProviderSaleRejected = {
+export const ProviderSaleDeclined = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
     transaction: exampleTransaction({
-      lastTransition: propTypes.TX_TRANSITION_REJECT,
+      lastTransition: propTypes.TX_TRANSITION_DECLINE,
       payinTotal: new Money(4500, 'USD'),
       payoutTotal: new Money(2500, 'USD'),
       lineItems: [
@@ -246,12 +246,12 @@ export const ProviderSaleRejected = {
   },
 };
 
-export const ProviderSaleAutoRejected = {
+export const ProviderSaleAutoDeclined = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
     transaction: exampleTransaction({
-      lastTransition: propTypes.TX_TRANSITION_AUTO_REJECT,
+      lastTransition: propTypes.TX_TRANSITION_AUTO_DECLINE,
       payinTotal: new Money(4500, 'USD'),
       payoutTotal: new Money(2500, 'USD'),
       lineItems: [

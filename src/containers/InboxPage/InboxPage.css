@@ -401,7 +401,7 @@
 
 .lastTransitionedAtCanceled,
 .lastTransitionedAtAccepted,
-.lastTransitionedAtRejected,
+.lastTransitionedAtDeclined,
 .lastTransitionedAtDelivered {
   color: var(--matterColorAnti);
 }

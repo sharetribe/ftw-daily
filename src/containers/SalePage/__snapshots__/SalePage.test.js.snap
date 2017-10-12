@@ -13,10 +13,10 @@ exports[`SalePage matches snapshot 1`] = `
       acceptInProgress={false}
       acceptSaleError={null}
       className="undefined"
+      declineInProgress={false}
+      declineSaleError={null}
       onAcceptSale={[Function]}
-      onRejectSale={[Function]}
-      rejectInProgress={false}
-      rejectSaleError={null}
+      onDeclineSale={[Function]}
       transaction={
         Object {
           "attributes": Object {

@@ -7,7 +7,7 @@ import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { acceptSale, rejectSale, loadData } from './SalePage.duck';
+import { acceptSale, declineSale, loadData } from './SalePage.duck';
 import { NamedRedirect, SaleDetailsPanel, Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
@@ -21,13 +21,13 @@ export const SalePageComponent = props => {
     currentUser,
     fetchSaleError,
     acceptSaleError,
-    rejectSaleError,
+    declineSaleError,
     acceptInProgress,
-    rejectInProgress,
+    declineInProgress,
     intl,
     logoutError,
     onAcceptSale,
-    onRejectSale,
+    onDeclineSale,
     params,
     scrollingDisabled,
     transaction,
@@ -61,11 +61,11 @@ export const SalePageComponent = props => {
         className={detailsClassName}
         transaction={currentTransaction}
         onAcceptSale={onAcceptSale}
-        onRejectSale={onRejectSale}
+        onDeclineSale={onDeclineSale}
         acceptInProgress={acceptInProgress}
-        rejectInProgress={rejectInProgress}
+        declineInProgress={declineInProgress}
         acceptSaleError={acceptSaleError}
-        rejectSaleError={rejectSaleError}
+        declineSaleError={declineSaleError}
       />
     : loadingOrFailedFetching;
 
@@ -89,7 +89,7 @@ SalePageComponent.defaultProps = {
   currentUser: null,
   fetchSaleError: null,
   acceptSaleError: null,
-  rejectSaleError: null,
+  declineSaleError: null,
   logoutError: null,
   transaction: null,
 };
@@ -101,13 +101,13 @@ SalePageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   fetchSaleError: instanceOf(Error),
   acceptSaleError: instanceOf(Error),
-  rejectSaleError: instanceOf(Error),
+  declineSaleError: instanceOf(Error),
   acceptInProgress: bool.isRequired,
-  rejectInProgress: bool.isRequired,
+  declineInProgress: bool.isRequired,
   intl: intlShape.isRequired,
   logoutError: instanceOf(Error),
   onAcceptSale: func.isRequired,
-  onRejectSale: func.isRequired,
+  onDeclineSale: func.isRequired,
   params: shape({ id: string }).isRequired,
   scrollingDisabled: bool.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
@@ -118,9 +118,9 @@ const mapStateToProps = state => {
   const {
     fetchSaleError,
     acceptSaleError,
-    rejectSaleError,
+    declineSaleError,
     acceptInProgress,
-    rejectInProgress,
+    declineInProgress,
     transactionRef,
   } = state.SalePage;
   const { authInfoError, logoutError } = state.Auth;
@@ -134,9 +134,9 @@ const mapStateToProps = state => {
     currentUser,
     fetchSaleError,
     acceptSaleError,
-    rejectSaleError,
+    declineSaleError,
     acceptInProgress,
-    rejectInProgress,
+    declineInProgress,
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
     transaction,
@@ -146,7 +146,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onAcceptSale: transactionId => dispatch(acceptSale(transactionId)),
-    onRejectSale: transactionId => dispatch(rejectSale(transactionId)),
+    onDeclineSale: transactionId => dispatch(declineSale(transactionId)),
   };
 };
 

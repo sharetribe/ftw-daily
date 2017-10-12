@@ -46,11 +46,11 @@ const orderTitle = (transaction, listingLink, customerName) => {
         <FormattedMessage id="OrderDetailsPanel.orderAcceptedSubtitle" values={{ listingLink }} />
       </span>
     );
-  } else if (propTypes.txIsRejected(transaction)) {
-    return <FormattedMessage id="OrderDetailsPanel.orderRejectedTitle" values={{ listingLink }} />;
-  } else if (propTypes.txIsAutorejected(transaction)) {
+  } else if (propTypes.txIsDeclined(transaction)) {
+    return <FormattedMessage id="OrderDetailsPanel.orderDeclinedTitle" values={{ listingLink }} />;
+  } else if (propTypes.txIsAutodeclined(transaction)) {
     return (
-      <FormattedMessage id="OrderDetailsPanel.orderAutoRejectedTitle" values={{ listingLink }} />
+      <FormattedMessage id="OrderDetailsPanel.orderAutoDeclinedTitle" values={{ listingLink }} />
     );
   } else if (propTypes.txIsCanceled(transaction)) {
     return <FormattedMessage id="OrderDetailsPanel.orderCanceledTitle" values={{ listingLink }} />;
@@ -83,17 +83,17 @@ const orderMessage = (transaction, listingTitle, providerName) => {
         values={{ providerName, transitionDate }}
       />
     );
-  } else if (propTypes.txIsRejected(transaction)) {
+  } else if (propTypes.txIsDeclined(transaction)) {
     return (
       <FormattedMessage
-        id="OrderDetailsPanel.orderRejectedStatus"
+        id="OrderDetailsPanel.orderDeclinedStatus"
         values={{ providerName, transitionDate }}
       />
     );
-  } else if (propTypes.txIsAutorejected(transaction)) {
+  } else if (propTypes.txIsAutodeclined(transaction)) {
     return (
       <FormattedMessage
-        id="OrderDetailsPanel.orderAutoRejectedStatus"
+        id="OrderDetailsPanel.orderAutoDeclinedStatus"
         values={{ providerName, transitionDate }}
       />
     );

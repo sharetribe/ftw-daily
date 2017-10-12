@@ -14,9 +14,9 @@ export const ACCEPT_SALE_REQUEST = 'app/SalePage/ACCEPT_SALE_REQUEST';
 export const ACCEPT_SALE_SUCCESS = 'app/SalePage/ACCEPT_SALE_SUCCESS';
 export const ACCEPT_SALE_ERROR = 'app/SalePage/ACCEPT_SALE_ERROR';
 
-export const REJECT_SALE_REQUEST = 'app/SalePage/REJECT_SALE_REQUEST';
-export const REJECT_SALE_SUCCESS = 'app/SalePage/REJECT_SALE_SUCCESS';
-export const REJECT_SALE_ERROR = 'app/SalePage/REJECT_SALE_ERROR';
+export const DECLINE_SALE_REQUEST = 'app/SalePage/DECLINE_SALE_REQUEST';
+export const DECLINE_SALE_SUCCESS = 'app/SalePage/DECLINE_SALE_SUCCESS';
+export const DECLINE_SALE_ERROR = 'app/SalePage/DECLINE_SALE_ERROR';
 
 // ================ Reducer ================ //
 
@@ -25,9 +25,9 @@ const initialState = {
   fetchSaleError: null,
   transactionRef: null,
   acceptInProgress: false,
-  rejectInProgress: false,
+  declineInProgress: false,
   acceptSaleError: null,
-  rejectSaleError: null,
+  declineSaleError: null,
 };
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
@@ -44,18 +44,18 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
       return { ...state, fetchInProgress: false, fetchSaleError: payload };
 
     case ACCEPT_SALE_REQUEST:
-      return { ...state, acceptInProgress: true, acceptSaleError: null, rejectSaleError: null };
+      return { ...state, acceptInProgress: true, acceptSaleError: null, declineSaleError: null };
     case ACCEPT_SALE_SUCCESS:
       return { ...state, acceptInProgress: false };
     case ACCEPT_SALE_ERROR:
       return { ...state, acceptInProgress: false, acceptSaleError: payload };
 
-    case REJECT_SALE_REQUEST:
-      return { ...state, rejectInProgress: true, rejectSaleError: null, acceptSaleError: null };
-    case REJECT_SALE_SUCCESS:
-      return { ...state, rejectInProgress: false };
-    case REJECT_SALE_ERROR:
-      return { ...state, rejectInProgress: false, rejectSaleError: payload };
+    case DECLINE_SALE_REQUEST:
+      return { ...state, declineInProgress: true, declineSaleError: null, acceptSaleError: null };
+    case DECLINE_SALE_SUCCESS:
+      return { ...state, declineInProgress: false };
+    case DECLINE_SALE_ERROR:
+      return { ...state, declineInProgress: false, declineSaleError: payload };
 
     default:
       return state;
@@ -64,8 +64,8 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
 
 // ================ Selectors ================ //
 
-export const acceptOrRejectInProgress = state => {
-  return state.SalePage.acceptInProgress || state.SalePage.rejectInProgress;
+export const acceptOrDeclineInProgress = state => {
+  return state.SalePage.acceptInProgress || state.SalePage.declineInProgress;
 };
 
 // ================ Action creators ================ //
@@ -78,9 +78,9 @@ const acceptSaleRequest = () => ({ type: ACCEPT_SALE_REQUEST });
 const acceptSaleSuccess = () => ({ type: ACCEPT_SALE_SUCCESS });
 const acceptSaleError = e => ({ type: ACCEPT_SALE_ERROR, error: true, payload: e });
 
-const rejectSaleRequest = () => ({ type: REJECT_SALE_REQUEST });
-const rejectSaleSuccess = () => ({ type: REJECT_SALE_SUCCESS });
-const rejectSaleError = e => ({ type: REJECT_SALE_ERROR, error: true, payload: e });
+const declineSaleRequest = () => ({ type: DECLINE_SALE_REQUEST });
+const declineSaleSuccess = () => ({ type: DECLINE_SALE_SUCCESS });
+const declineSaleError = e => ({ type: DECLINE_SALE_ERROR, error: true, payload: e });
 
 // ================ Thunks ================ //
 
@@ -130,8 +130,8 @@ export const fetchSale = id =>
 
 export const acceptSale = id =>
   (dispatch, getState, sdk) => {
-    if (acceptOrRejectInProgress(getState())) {
-      return Promise.reject(new Error('Accept or reject already in progress'));
+    if (acceptOrDeclineInProgress(getState())) {
+      return Promise.reject(new Error('Accept or decline already in progress'));
     }
     dispatch(acceptSaleRequest());
 
@@ -153,26 +153,26 @@ export const acceptSale = id =>
       });
   };
 
-export const rejectSale = id =>
+export const declineSale = id =>
   (dispatch, getState, sdk) => {
-    if (acceptOrRejectInProgress(getState())) {
-      return Promise.reject(new Error('Accept or reject already in progress'));
+    if (acceptOrDeclineInProgress(getState())) {
+      return Promise.reject(new Error('Accept or decline already in progress'));
     }
-    dispatch(rejectSaleRequest());
+    dispatch(declineSaleRequest());
 
     return sdk.transactions
-      .transition({ id, transition: propTypes.TX_TRANSITION_REJECT, params: {} }, { expand: true })
+      .transition({ id, transition: propTypes.TX_TRANSITION_DECLINE, params: {} }, { expand: true })
       .then(response => {
         dispatch(addMarketplaceEntities(response));
-        dispatch(rejectSaleSuccess());
+        dispatch(declineSaleSuccess());
         dispatch(fetchCurrentUserNotifications());
         return response;
       })
       .catch(e => {
-        dispatch(rejectSaleError(e));
+        dispatch(declineSaleError(e));
         log.error(e, 'redect-sale-failed', {
           txId: id,
-          transition: propTypes.TX_TRANSITION_REJECT,
+          transition: propTypes.TX_TRANSITION_DECLINE,
         });
         throw e;
       });

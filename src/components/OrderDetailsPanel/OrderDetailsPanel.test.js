@@ -33,15 +33,15 @@ const txAccepted = createTransaction({
   ...baseTxAttrs,
 });
 
-const txRejected = createTransaction({
-  id: 'order-rejected',
-  lastTransition: propTypes.TX_TRANSITION_REJECT,
+const txDeclined = createTransaction({
+  id: 'order-declined',
+  lastTransition: propTypes.TX_TRANSITION_DECLINE,
   ...baseTxAttrs,
 });
 
-const txAutoRejected = createTransaction({
-  id: 'order-autorejected',
-  lastTransition: propTypes.TX_TRANSITION_AUTO_REJECT,
+const txAutoDeclined = createTransaction({
+  id: 'order-autodeclined',
+  lastTransition: propTypes.TX_TRANSITION_AUTO_DECLINE,
   ...baseTxAttrs,
 });
 
@@ -70,15 +70,15 @@ describe('OrderDetailsPanel', () => {
     );
     expect(tree).toMatchSnapshot();
   });
-  it('rejected matches snapshot', () => {
+  it('declined matches snapshot', () => {
     const tree = renderShallow(
-      <OrderDetailsPanelComponent transaction={txRejected} intl={fakeIntl} />
+      <OrderDetailsPanelComponent transaction={txDeclined} intl={fakeIntl} />
     );
     expect(tree).toMatchSnapshot();
   });
-  it('autorejected matches snapshot', () => {
+  it('autodeclined matches snapshot', () => {
     const tree = renderShallow(
-      <OrderDetailsPanelComponent transaction={txAutoRejected} intl={fakeIntl} />
+      <OrderDetailsPanelComponent transaction={txAutoDeclined} intl={fakeIntl} />
     );
     expect(tree).toMatchSnapshot();
   });
