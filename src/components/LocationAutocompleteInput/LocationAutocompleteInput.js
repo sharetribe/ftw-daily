@@ -382,6 +382,7 @@ class LocationAutocompleteInput extends Component {
       placeholder,
       input,
       meta,
+      inputRef,
     } = this.props;
     const { name, onFocus } = input;
     const { search, predictions } = currentValue(this.props);
@@ -421,6 +422,7 @@ class LocationAutocompleteInput extends Component {
           onBlur={this.handleOnBlur}
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
+          ref={inputRef}
         />
         {renderPredictions ? (
           <LocationPredictionsList
@@ -448,6 +450,7 @@ LocationAutocompleteInput.defaultProps = {
   validClassName: null,
   placeholder: '',
   meta: null,
+  inputRef: null,
 };
 
 LocationAutocompleteInput.propTypes = {
@@ -475,6 +478,7 @@ LocationAutocompleteInput.propTypes = {
     valid: bool.isRequired,
     touched: bool.isRequired,
   }),
+  inputRef: func,
 };
 
 export default LocationAutocompleteInput;

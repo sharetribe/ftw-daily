@@ -22,7 +22,6 @@ import { SearchMap, ModalInMobile, Page, SearchResultsPanel } from '../../compon
 import { TopbarContainer } from '../../containers';
 
 import { searchListings, searchMapListings } from './SearchPage.duck';
-import MapIcon from './MapIcon';
 import css from './SearchPage.css';
 
 // Pagination page size might need to be dynamic on responsive page layouts
@@ -198,6 +197,12 @@ export class SearchPageComponent extends Component {
     );
     const resultsFound = address && !mapSearch ? resultsFoundWithAddress : resultsFoundNoAddress;
 
+    const resultsFoundMobile = (
+      <h2>
+        <FormattedMessage id="SearchPage.foundResultsMobile" values={{ count: totalItems }} />
+      </h2>
+    );
+
     const noResults = (
       <h2>
         <FormattedMessage id="SearchPage.noResults" />
@@ -289,6 +294,24 @@ export class SearchPageComponent extends Component {
               {listingsAreLoaded && totalItems === 0 ? noResults : null}
               {searchInProgress ? loadingResults : null}
             </div>
+            <div className={css.searchResultSummaryMobile}>
+              <div>
+                {searchListingsError ? searchError : null}
+                {listingsAreLoaded && totalItems > 0 ? resultsFoundMobile : null}
+                {listingsAreLoaded && totalItems === 0 ? noResults : null}
+                {searchInProgress ? loadingResults : null}
+              </div>
+              <div
+                className={css.mapIcon}
+                onClick={() => {
+                  this.useLocationSearchBounds = true;
+                  this.modalOpenedBoundsChange = true;
+                  this.setState({ isSearchMapOpenOnMobile: true });
+                }}
+              >
+                <FormattedMessage id="SearchPage.openMapView" className={css.mapIconText} />
+              </div>
+            </div>
             <div
               className={classNames(css.listings, {
                 [css.newSearchInProgress]: !listingsAreLoaded,
@@ -299,19 +322,7 @@ export class SearchPageComponent extends Component {
                 listings={listings}
                 pagination={listingsAreLoaded ? pagination : null}
                 search={searchParamsForPagination}
-              >
-                <div
-                  className={css.openMobileMap}
-                  onClick={() => {
-                    this.locationInputSearch = true;
-                    this.modalOpenedBoundsChange = true;
-                    this.setState({ isSearchMapOpenOnMobile: true });
-                  }}
-                >
-                  <MapIcon className={css.openMobileMapIcon} />
-                  <FormattedMessage id="SearchPage.openMapView" />
-                </div>
-              </SearchResultsPanel>
+              />
             </div>
           </div>
           <ModalInMobile
