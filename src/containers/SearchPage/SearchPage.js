@@ -7,7 +7,12 @@ import { debounce, isEqual, unionWith } from 'lodash';
 import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
-import { googleLatLngToSDKLatLng, googleBoundsToSDKBounds } from '../../util/googleMaps';
+import {
+  googleLatLngToSDKLatLng,
+  googleBoundsToSDKBounds,
+  sdkBoundsToFixedCoordinates,
+  hasSameSDKBounds,
+} from '../../util/googleMaps';
 import { createResourceLocatorString } from '../../util/routes';
 import { createSlug, parse, stringify } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
@@ -28,6 +33,7 @@ const SHARETRIBE_API_MAX_PAGE_SIZE = 100;
 const MAX_SEARCH_RESULT_PAGES_ON_MAP = 5; // 100 * 5 = 500 listings are shown on a map.
 const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
+const BOUNDS_FIXED_PRECISION = 8;
 
 const pickSearchParamsOnly = params => {
   const { address, origin, bounds } = params || {};
@@ -46,7 +52,7 @@ export class SearchPageComponent extends Component {
     // we listen to that event to make new searches
     // So, if the search comes from location search input,
     // we need to by pass 2nd search created by initial 'bounds_changes' event
-    this.useLocationSearchBounds = true;
+    this.locationInputSearch = true;
     this.modalOpenedBoundsChange = false;
     this.searchMapListingsInProgress = false;
 
@@ -62,13 +68,13 @@ export class SearchPageComponent extends Component {
     if (!isEqual(this.props.location, nextProps.location)) {
       this.fetchMoreListingsToMap(nextProps.location);
 
-      // If no boundsChanged url parameter is given, this is original location search
-      const { boundsChanged } = parse(window.location.search, {
+      // If no mapSearch url parameter is given, this is original location search
+      const { mapSearch } = parse(nextProps.location.search, {
         latlng: ['origin'],
         latlngBounds: ['bounds'],
       });
-      if (!boundsChanged) {
-        this.useLocationSearchBounds = true;
+      if (!mapSearch) {
+        this.locationInputSearch = true;
       }
     }
   }
@@ -78,25 +84,30 @@ export class SearchPageComponent extends Component {
   onIdle(googleMap) {
     const { history, location } = this.props;
 
-    const { address, country, boundsChanged } = parse(location.search, {
+    const { address, country, bounds, mapSearch } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
 
-    // If boundsChanged url param is given (and we have not just opened mobile map modal)
+    const viewportGMapBounds = googleMap.getBounds();
+    const viewportBounds = sdkBoundsToFixedCoordinates(
+      googleBoundsToSDKBounds(viewportGMapBounds),
+      BOUNDS_FIXED_PRECISION
+    );
+    const boundsChanged = !hasSameSDKBounds(viewportBounds, bounds);
+    const isRealMapSearch = mapSearch && !this.modalOpenedBoundsChange;
+
+    // If mapSearch url param is given (and we have not just opened mobile map modal)
     // or original location search is rendered once,
     // we start to react to 'bounds_changed' event by generating new searches
-    if ((boundsChanged && !this.modalOpenedBoundsChange) || !this.useLocationSearchBounds) {
-      const viewportBounds = googleMap.getBounds();
-      const bounds = googleBoundsToSDKBounds(viewportBounds);
-      const origin = googleLatLngToSDKLatLng(viewportBounds.getCenter());
-
-      const searchParams = { address, origin, bounds, country, boundsChanged: true };
+    if (boundsChanged && (isRealMapSearch || !this.locationInputSearch)) {
+      const origin = googleLatLngToSDKLatLng(viewportGMapBounds.getCenter());
+      const searchParams = { address, origin, bounds: viewportBounds, country, mapSearch: true };
       history.push(
         createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
       );
     } else {
-      this.useLocationSearchBounds = false;
+      this.locationInputSearch = false;
       this.modalOpenedBoundsChange = false;
     }
   }
@@ -147,7 +158,7 @@ export class SearchPageComponent extends Component {
       searchParams,
     } = this.props;
     // eslint-disable-next-line no-unused-vars
-    const { boundsChanged, page, ...searchInURL } = parse(location.search, {
+    const { mapSearch, page, ...searchInURL } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
@@ -185,8 +196,7 @@ export class SearchPageComponent extends Component {
         />
       </h2>
     );
-    const resultsFound =
-      address && !boundsChanged ? resultsFoundWithAddress : resultsFoundNoAddress;
+    const resultsFound = address && !mapSearch ? resultsFoundWithAddress : resultsFoundNoAddress;
 
     const noResults = (
       <h2>
@@ -210,7 +220,7 @@ export class SearchPageComponent extends Component {
         onCloseAsModal={() => {
           onManageDisableScrolling('SearchPage.map', false);
         }}
-        useLocationSearchBounds={this.useLocationSearchBounds}
+        useLocationSearchBounds={this.locationInputSearch}
       />
     );
     const showSearchMapInMobile = this.state.isSearchMapOpenOnMobile ? searchMap : null;
@@ -293,7 +303,7 @@ export class SearchPageComponent extends Component {
                 <div
                   className={css.openMobileMap}
                   onClick={() => {
-                    this.useLocationSearchBounds = true;
+                    this.locationInputSearch = true;
                     this.modalOpenedBoundsChange = true;
                     this.setState({ isSearchMapOpenOnMobile: true });
                   }}

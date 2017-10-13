@@ -119,3 +119,40 @@ export const googleBoundsToSDKBounds = googleBounds => {
   const sw = googleBounds.getSouthWest();
   return new SDKLatLngBounds(new SDKLatLng(ne.lat(), ne.lng()), new SDKLatLng(sw.lat(), sw.lng()));
 };
+
+/**
+ * Cut some precision from bounds coordinates to tackle subtle map movements
+ * when map is moved manually
+ *
+ * @param {LatLngBounds} sdkBounds - bounds to be changed to fixed precision
+ * @param {Number} fixedPrecision - integer to be used on tofixed() change.
+ *
+ * @return {SDKLatLngBounds} - bounds cut to given fixed precision
+ */
+export const sdkBoundsToFixedCoordinates = (sdkBounds, fixedPrecision) => {
+  const fixed = n => Number.parseFloat(n.toFixed(fixedPrecision));
+  const ne = new SDKLatLng(fixed(sdkBounds.ne.lat), fixed(sdkBounds.ne.lng));
+  const sw = new SDKLatLng(fixed(sdkBounds.sw.lat), fixed(sdkBounds.sw.lng));
+
+  return new SDKLatLngBounds(ne, sw);
+};
+
+/**
+ * Check if given bounds object have the same coordinates
+ *
+ * @param {LatLngBounds} sdkBounds1 - bounds #1 to be compared
+ * @param {LatLngBounds} sdkBounds2 - bounds #2 to be compared
+ *
+ * @return {boolean} - true if bounds are the same
+ */
+export const hasSameSDKBounds = (sdkBounds1, sdkBounds2) => {
+  if (!(sdkBounds1 instanceof SDKLatLngBounds) && !(sdkBounds2 instanceof SDKLatLngBounds)) {
+    return false;
+  }
+  return (
+    sdkBounds1.ne.lat === sdkBounds2.ne.lat &&
+    sdkBounds1.ne.lng === sdkBounds2.ne.lng &&
+    sdkBounds1.sw.lat === sdkBounds2.sw.lat &&
+    sdkBounds1.sw.lng === sdkBounds2.sw.lng
+  );
+};
