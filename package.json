@@ -16,6 +16,7 @@
     "helmet": "^3.8.1",
     "lodash": "^4.17.4",
     "moment": "(2.10 - 2.14 || ^2.15.1) && < 2.18.0",
+    "nsp": "^2.8.1",
     "path-to-regexp": "^1.5.3",
     "query-string": "^5.0.0",
     "raven": "^2.1.2",
@@ -62,7 +63,8 @@
     "dev-server":
       "REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000 yarn run build&&nodemon --watch server server/index.js",
     "heroku-prebuild": "./heroku-copy-ssh-key-from-env.sh",
-    "heroku-postbuild": "yarn run build"
+    "heroku-postbuild": "yarn run build",
+    "audit": "nsp check"
   },
   "prettier": {
     "printWidth": 100,
