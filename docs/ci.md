@@ -20,6 +20,9 @@ the package. If that information is not enough, `yarn why
 package-name` can be used to get more detailed information about why
 the package is installed.
 
+If you are convinced that the vulnerability can be ignored, exceptions
+can be added to the [.nsprc](../.nsprc) file.
+
 ## Code formatting: `yarn run format-ci`
 
 This command fails if there are changes in the formatting that are not
