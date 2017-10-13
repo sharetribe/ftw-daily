@@ -17,4 +17,5 @@ module.exports = {
   matchPathname: mainJs.matchPathname,
   configureStore: mainJs.configureStore,
   routeConfiguration: mainJs.routeConfiguration,
+  config: mainJs.config,
 };
