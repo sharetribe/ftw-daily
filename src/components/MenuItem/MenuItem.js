@@ -16,7 +16,11 @@ const MenuItem = props => {
   const rootClass = rootClassName || css.root;
   const classes = classNames(rootClass, className);
 
-  return <li className={classes} role="menuitem">{children}</li>;
+  return (
+    <li className={classes} role="menuitem">
+      {children}
+    </li>
+  );
 };
 
 MenuItem.defaultProps = {

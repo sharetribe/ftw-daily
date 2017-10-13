@@ -55,21 +55,21 @@ export const ContactDetailsPageComponent = props => {
 
   const user = ensureCurrentUser(currentUser);
   const email = user.attributes.email || '';
-  const changeEmailForm = user.id
-    ? <ContactDetailsForm
-        className={css.form}
-        initialValues={{ email }}
-        changeEmailError={changeEmailError}
-        currentUser={currentUser}
-        onResendVerificationEmail={onResendVerificationEmail}
-        onSubmit={onSubmitChangeEmail}
-        onChange={onChange}
-        inProgress={changeEmailInProgress}
-        ready={emailChanged}
-        sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-        sendVerificationEmailError={sendVerificationEmailError}
-      />
-    : null;
+  const changeEmailForm = user.id ? (
+    <ContactDetailsForm
+      className={css.form}
+      initialValues={{ email }}
+      changeEmailError={changeEmailError}
+      currentUser={currentUser}
+      onResendVerificationEmail={onResendVerificationEmail}
+      onSubmit={onSubmitChangeEmail}
+      onChange={onChange}
+      inProgress={changeEmailInProgress}
+      ready={emailChanged}
+      sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+      sendVerificationEmailError={sendVerificationEmailError}
+    />
+  ) : null;
 
   return (
     <Page
@@ -132,11 +132,7 @@ const mapStateToProps = state => {
   // Page needs authInfoError and logoutError, Topbar needs isAuthenticated
   const { authInfoError, isAuthenticated, logoutError } = state.Auth;
   // Topbar needs user info.
-  const {
-    currentUser,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-  } = state.user;
+  const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
   const { changeEmailError, changeEmailInProgress, emailChanged } = state.ContactDetailsPage;
   return {
     authInfoError,

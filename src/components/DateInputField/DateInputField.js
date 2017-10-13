@@ -112,10 +112,10 @@ class DateInputComponent extends Component {
     const initialMoment = initialDate ? moment(initialDate) : null;
     const date = value instanceof Date ? moment(value) : initialMoment;
 
-    const placeholderText = placeholder ||
-      intl.formatMessage({ id: 'DateInput.defaultPlaceholder' });
-    const screenReaderInputText = screenReaderInputMessage ||
-      intl.formatMessage({ id: 'DateInput.screenReaderInputMessage' });
+    const placeholderText =
+      placeholder || intl.formatMessage({ id: 'DateInput.defaultPlaceholder' });
+    const screenReaderInputText =
+      screenReaderInputMessage || intl.formatMessage({ id: 'DateInput.screenReaderInputMessage' });
     const closeDatePickerText = phrases.closeDatePicker
       ? phrases.closeDatePicker
       : intl.formatMessage({ id: 'DateInput.closeDatePicker' });

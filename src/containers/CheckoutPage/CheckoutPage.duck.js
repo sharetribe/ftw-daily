@@ -103,31 +103,30 @@ export const speculateTransactionError = e => ({
 
 /* ================ Thunks ================ */
 
-export const initiateOrder = params =>
-  (dispatch, getState, sdk) => {
-    dispatch(initiateOrderRequest());
-    const bodyParams = {
-      transition: 'transition/preauthorize',
-      params,
-    };
-    return sdk.transactions
-      .initiate(bodyParams)
-      .then(response => {
-        const orderId = response.data.data.id;
-        dispatch(initiateOrderSuccess(orderId));
-        dispatch(fetchCurrentUserHasOrdersSuccess(true));
-        return orderId;
-      })
-      .catch(e => {
-        dispatch(initiateOrderError(e));
-        log.error(e, 'initiate-order-failed', {
-          listingId: params.listingId.uuid,
-          bookingStart: params.bookingStart,
-          bookingEnd: params.bookingEnd,
-        });
-        throw e;
-      });
+export const initiateOrder = params => (dispatch, getState, sdk) => {
+  dispatch(initiateOrderRequest());
+  const bodyParams = {
+    transition: 'transition/preauthorize',
+    params,
   };
+  return sdk.transactions
+    .initiate(bodyParams)
+    .then(response => {
+      const orderId = response.data.data.id;
+      dispatch(initiateOrderSuccess(orderId));
+      dispatch(fetchCurrentUserHasOrdersSuccess(true));
+      return orderId;
+    })
+    .catch(e => {
+      dispatch(initiateOrderError(e));
+      log.error(e, 'initiate-order-failed', {
+        listingId: params.listingId.uuid,
+        bookingStart: params.bookingStart,
+        bookingEnd: params.bookingEnd,
+      });
+      throw e;
+    });
+};
 
 /**
  * Initiate the speculative transaction with the given booking details
@@ -141,37 +140,40 @@ export const initiateOrder = params =>
  * pricing info for the booking breakdown to get a proper estimate for
  * the price with the chosen information.
  */
-export const speculateTransaction = (listingId, bookingStart, bookingEnd) =>
-  (dispatch, getState, sdk) => {
-    dispatch(speculateTransactionRequest());
-    const bodyParams = {
-      transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
-      params: {
-        listingId,
-        bookingStart,
-        bookingEnd,
-        cardToken: 'CheckoutPage_speculative_card_token',
-      },
-    };
-    const queryParams = {
-      include: ['booking', 'provider'],
-      expand: true,
-    };
-    return sdk.transactions
-      .initiateSpeculative(bodyParams, queryParams)
-      .then(response => {
-        const transactionId = response.data.data.id;
-        const entities = updatedEntities({}, response.data);
-        const denormalised = denormalisedEntities(entities, 'transaction', [transactionId]);
-        const tx = denormalised[0];
-        dispatch(speculateTransactionSuccess(tx));
-      })
-      .catch(e => {
-        log.error(e, 'speculate-transaction-failed', {
-          listingId: listingId.uuid,
-          bookingStart: bookingStart,
-          bookingEnd: bookingEnd,
-        });
-        return dispatch(speculateTransactionError(e));
-      });
+export const speculateTransaction = (listingId, bookingStart, bookingEnd) => (
+  dispatch,
+  getState,
+  sdk
+) => {
+  dispatch(speculateTransactionRequest());
+  const bodyParams = {
+    transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+    params: {
+      listingId,
+      bookingStart,
+      bookingEnd,
+      cardToken: 'CheckoutPage_speculative_card_token',
+    },
   };
+  const queryParams = {
+    include: ['booking', 'provider'],
+    expand: true,
+  };
+  return sdk.transactions
+    .initiateSpeculative(bodyParams, queryParams)
+    .then(response => {
+      const transactionId = response.data.data.id;
+      const entities = updatedEntities({}, response.data);
+      const denormalised = denormalisedEntities(entities, 'transaction', [transactionId]);
+      const tx = denormalised[0];
+      dispatch(speculateTransactionSuccess(tx));
+    })
+    .catch(e => {
+      log.error(e, 'speculate-transaction-failed', {
+        listingId: listingId.uuid,
+        bookingStart: bookingStart,
+        bookingEnd: bookingEnd,
+      });
+      return dispatch(speculateTransactionError(e));
+    });
+};

@@ -6,7 +6,7 @@
   padding-left: 0;
 
   &::after {
-    content: ".";
+    content: '.';
     visibility: hidden;
     display: block;
     height: 0;

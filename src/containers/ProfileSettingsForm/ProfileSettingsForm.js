@@ -35,7 +35,9 @@ const RenderAvatar = props => {
 
   return (
     <div className={css.uploadAvatarWrapper}>
-      <label className={css.label} htmlFor={id}>{label}</label>
+      <label className={css.label} htmlFor={id}>
+        {label}
+      </label>
       <input
         accept={accept}
         className={css.uploadAvatarInput}
@@ -86,12 +88,9 @@ class ProfileSettingsFormComponent extends Component {
     // but not yet visible (time to load image URL from srcset)
     if (this.props.uploadInProgress && !nextProps.uploadInProgress) {
       this.setState({ uploadDelay: true });
-      this.uploadDelayTimeoutId = window.setTimeout(
-        () => {
-          this.setState({ uploadDelay: false });
-        },
-        UPLOAD_CHANGE_DELAY
-      );
+      this.uploadDelayTimeoutId = window.setTimeout(() => {
+        this.setState({ uploadDelay: false });
+      }, UPLOAD_CHANGE_DELAY);
     }
   }
 
@@ -145,9 +144,12 @@ class ProfileSettingsFormComponent extends Component {
     });
     const lastNameRequired = validators.required(lastNameRequiredMessage);
 
-    const uploadingOverlay = uploadInProgress || this.state.uploadDelay
-      ? <div className={css.uploadingImageOverlay}><IconSpinner /></div>
-      : null;
+    const uploadingOverlay =
+      uploadInProgress || this.state.uploadDelay ? (
+        <div className={css.uploadingImageOverlay}>
+          <IconSpinner />
+        </div>
+      ) : null;
 
     const hasUploadError = !!uploadImageError && !uploadInProgress;
     const errorClasses = classNames({ [css.avatarUploadError]: hasUploadError });
@@ -158,8 +160,9 @@ class ProfileSettingsFormComponent extends Component {
     const fileExists = !!profileImage.file;
     const fileUploadInProgress = uploadInProgress && fileExists;
     const delayAfterUpload = profileImage.imageId && this.state.uploadDelay;
-    const imageFromFile = fileExists && (fileUploadInProgress || delayAfterUpload)
-      ? <ImageFromFile
+    const imageFromFile =
+      fileExists && (fileUploadInProgress || delayAfterUpload) ? (
+        <ImageFromFile
           id={profileImage.id}
           className={errorClasses}
           rootClassName={css.uploadingImage}
@@ -168,7 +171,7 @@ class ProfileSettingsFormComponent extends Component {
         >
           {uploadingOverlay}
         </ImageFromFile>
-      : null;
+      ) : null;
 
     // Avatar is rendered in hidden during the upload delay
     // Upload delay smoothes image change process:
@@ -176,32 +179,36 @@ class ProfileSettingsFormComponent extends Component {
     const avatarClasses = classNames(errorClasses, css.avatar, {
       [css.avatarInvisible]: this.state.uploadDelay,
     });
-    const avatarComponent = !fileUploadInProgress && profileImage.imageId
-      ? <Avatar className={avatarClasses} user={transientUser} />
-      : null;
+    const avatarComponent =
+      !fileUploadInProgress && profileImage.imageId ? (
+        <Avatar className={avatarClasses} user={transientUser} />
+      ) : null;
 
-    const chooseAvatarLabel = profileImage.imageId || fileUploadInProgress
-      ? <div className={css.avatarContainer}>
+    const chooseAvatarLabel =
+      profileImage.imageId || fileUploadInProgress ? (
+        <div className={css.avatarContainer}>
           {imageFromFile}
           {avatarComponent}
           <div className={css.changeAvatar}>
             <FormattedMessage id="ProfileSettingsForm.changeAvatar" />
           </div>
         </div>
-      : <div className={css.avatarPlaceholder}>
+      ) : (
+        <div className={css.avatarPlaceholder}>
           <div className={css.avatarPlaceholderText}>
             <FormattedMessage id="ProfileSettingsForm.addYourProfilePicture" />
           </div>
           <div className={css.avatarPlaceholderTextMobile}>
             <FormattedMessage id="ProfileSettingsForm.addYourProfilePictureMobile" />
           </div>
-        </div>;
-
-    const submitError = updateProfileError
-      ? <div className={css.error}>
-          <FormattedMessage id="ProfileSettingsForm.updateProfileFailed" />
         </div>
-      : null;
+      );
+
+    const submitError = updateProfileError ? (
+      <div className={css.error}>
+        <FormattedMessage id="ProfileSettingsForm.updateProfileFailed" />
+      </div>
+    ) : null;
 
     const classes = classNames(rootClassName || css.root, className);
     const submitInProgress = submitting || updateInProgress;
@@ -225,8 +232,12 @@ class ProfileSettingsFormComponent extends Component {
             type="file"
             uploadImageError={uploadImageError}
           />
-          <div className={css.tip}><FormattedMessage id="ProfileSettingsForm.tip" /></div>
-          <div className={css.fileInfo}><FormattedMessage id="ProfileSettingsForm.fileInfo" /></div>
+          <div className={css.tip}>
+            <FormattedMessage id="ProfileSettingsForm.tip" />
+          </div>
+          <div className={css.fileInfo}>
+            <FormattedMessage id="ProfileSettingsForm.fileInfo" />
+          </div>
         </div>
         <div className={classNames(css.sectionContainer, css.lastSection)}>
           <h3 className={css.sectionTitle}>

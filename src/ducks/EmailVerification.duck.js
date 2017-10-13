@@ -52,18 +52,17 @@ export const verificationError = error => ({
 
 // ================ Thunks ================ //
 
-export const verify = verificationToken =>
-  (dispatch, getState, sdk) => {
-    if (verificationInProgress(getState())) {
-      return Promise.reject(new Error('Email verification already in progress'));
-    }
-    dispatch(verificationRequest());
+export const verify = verificationToken => (dispatch, getState, sdk) => {
+  if (verificationInProgress(getState())) {
+    return Promise.reject(new Error('Email verification already in progress'));
+  }
+  dispatch(verificationRequest());
 
-    // Note that the thunk does not reject when the verification fails, it
-    // just dispatches the login error action.
-    return sdk.currentUser
-      .verifyEmail({ verificationToken })
-      .then(() => dispatch(verificationSuccess()))
-      .then(() => dispatch(fetchCurrentUser()))
-      .catch(e => dispatch(verificationError(e)));
-  };
+  // Note that the thunk does not reject when the verification fails, it
+  // just dispatches the login error action.
+  return sdk.currentUser
+    .verifyEmail({ verificationToken })
+    .then(() => dispatch(verificationSuccess()))
+    .then(() => dispatch(fetchCurrentUser()))
+    .catch(e => dispatch(verificationError(e)));
+};

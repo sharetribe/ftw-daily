@@ -12,7 +12,6 @@
 /* Dummy Topbar */
 
 .topbar {
-
   /* Size */
   width: 100%;
   height: var(--topbarHeight);
@@ -62,7 +61,6 @@
 }
 
 /* /Dummy Topbar */
-
 
 /**
  * Content: mobile flow vs desktop 2 columns

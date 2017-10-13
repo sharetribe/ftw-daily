@@ -88,102 +88,98 @@ const listingRelationship = txResponse => {
   return txResponse.data.data.relationships.listing.data;
 };
 
-export const fetchSale = id =>
-  (dispatch, getState, sdk) => {
-    dispatch(fetchSaleRequest());
-    let txResponse = null;
+export const fetchSale = id => (dispatch, getState, sdk) => {
+  dispatch(fetchSaleRequest());
+  let txResponse = null;
 
-    return sdk.transactions
-      .show(
-        {
-          id,
-          include: [
-            'customer',
-            'customer.profileImage',
-            'provider',
-            'provider.profileImage',
-            'listing',
-            'booking',
-          ],
-        },
-        { expand: true }
-      )
-      .then(response => {
-        txResponse = response;
-        const listingId = listingRelationship(response).id;
-        return sdk.listings.show({
-          id: listingId,
-          include: ['author', 'author.profileImage', 'images'],
-        });
-      })
-      .then(response => {
-        dispatch(addMarketplaceEntities(txResponse));
-        dispatch(addMarketplaceEntities(response));
-        dispatch(fetchSaleSuccess(txResponse));
-        return response;
-      })
-      .catch(e => {
-        dispatch(fetchSaleError(e));
-        throw e;
+  return sdk.transactions
+    .show(
+      {
+        id,
+        include: [
+          'customer',
+          'customer.profileImage',
+          'provider',
+          'provider.profileImage',
+          'listing',
+          'booking',
+        ],
+      },
+      { expand: true }
+    )
+    .then(response => {
+      txResponse = response;
+      const listingId = listingRelationship(response).id;
+      return sdk.listings.show({
+        id: listingId,
+        include: ['author', 'author.profileImage', 'images'],
       });
-  };
+    })
+    .then(response => {
+      dispatch(addMarketplaceEntities(txResponse));
+      dispatch(addMarketplaceEntities(response));
+      dispatch(fetchSaleSuccess(txResponse));
+      return response;
+    })
+    .catch(e => {
+      dispatch(fetchSaleError(e));
+      throw e;
+    });
+};
 
-export const acceptSale = id =>
-  (dispatch, getState, sdk) => {
-    if (acceptOrDeclineInProgress(getState())) {
-      return Promise.reject(new Error('Accept or decline already in progress'));
-    }
-    dispatch(acceptSaleRequest());
+export const acceptSale = id => (dispatch, getState, sdk) => {
+  if (acceptOrDeclineInProgress(getState())) {
+    return Promise.reject(new Error('Accept or decline already in progress'));
+  }
+  dispatch(acceptSaleRequest());
 
-    return sdk.transactions
-      .transition({ id, transition: propTypes.TX_TRANSITION_ACCEPT, params: {} }, { expand: true })
-      .then(response => {
-        dispatch(addMarketplaceEntities(response));
-        dispatch(acceptSaleSuccess());
-        dispatch(fetchCurrentUserNotifications());
-        return response;
-      })
-      .catch(e => {
-        dispatch(acceptSaleError(e));
-        log.error(e, 'accept-sale-failed', {
-          txId: id,
-          transition: propTypes.TX_TRANSITION_ACCEPT,
-        });
-        throw e;
+  return sdk.transactions
+    .transition({ id, transition: propTypes.TX_TRANSITION_ACCEPT, params: {} }, { expand: true })
+    .then(response => {
+      dispatch(addMarketplaceEntities(response));
+      dispatch(acceptSaleSuccess());
+      dispatch(fetchCurrentUserNotifications());
+      return response;
+    })
+    .catch(e => {
+      dispatch(acceptSaleError(e));
+      log.error(e, 'accept-sale-failed', {
+        txId: id,
+        transition: propTypes.TX_TRANSITION_ACCEPT,
       });
-  };
+      throw e;
+    });
+};
 
-export const declineSale = id =>
-  (dispatch, getState, sdk) => {
-    if (acceptOrDeclineInProgress(getState())) {
-      return Promise.reject(new Error('Accept or decline already in progress'));
-    }
-    dispatch(declineSaleRequest());
+export const declineSale = id => (dispatch, getState, sdk) => {
+  if (acceptOrDeclineInProgress(getState())) {
+    return Promise.reject(new Error('Accept or decline already in progress'));
+  }
+  dispatch(declineSaleRequest());
 
-    return sdk.transactions
-      .transition({ id, transition: propTypes.TX_TRANSITION_DECLINE, params: {} }, { expand: true })
-      .then(response => {
-        dispatch(addMarketplaceEntities(response));
-        dispatch(declineSaleSuccess());
-        dispatch(fetchCurrentUserNotifications());
-        return response;
-      })
-      .catch(e => {
-        dispatch(declineSaleError(e));
-        log.error(e, 'redect-sale-failed', {
-          txId: id,
-          transition: propTypes.TX_TRANSITION_DECLINE,
-        });
-        throw e;
+  return sdk.transactions
+    .transition({ id, transition: propTypes.TX_TRANSITION_DECLINE, params: {} }, { expand: true })
+    .then(response => {
+      dispatch(addMarketplaceEntities(response));
+      dispatch(declineSaleSuccess());
+      dispatch(fetchCurrentUserNotifications());
+      return response;
+    })
+    .catch(e => {
+      dispatch(declineSaleError(e));
+      log.error(e, 'redect-sale-failed', {
+        txId: id,
+        transition: propTypes.TX_TRANSITION_DECLINE,
       });
-  };
+      throw e;
+    });
+};
 
 // loadData is a collection of async calls that need to be made
 // before page has all the info it needs to render itself
-export const loadData = params =>
-  dispatch => {
-    const saleId = new types.UUID(params.id);
+export const loadData = params => dispatch => {
+  const saleId = new types.UUID(params.id);
 
-    // Sale (i.e. transaction entity in API, but from buyers perspective) contains sale details
-    return dispatch(fetchSale(saleId));
-  };
+  // Sale (i.e. transaction entity in API, but from buyers perspective) contains sale details
+  return dispatch(fetchSale(saleId));
+};

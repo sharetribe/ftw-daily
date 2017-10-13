@@ -84,7 +84,6 @@ const PasswordRecoveryFormComponent = props => {
           <FormattedMessage id="PasswordRecoveryForm.sendInstructions" />
         </PrimaryButton>
       </div>
-
     </Form>
   );
 };

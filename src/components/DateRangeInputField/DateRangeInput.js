@@ -78,8 +78,10 @@ const defaultProps = {
   isOutsideRange: day => {
     const daysCountAvailableToBook = 90;
     const endOfRange = daysCountAvailableToBook - 1;
-    return !isInclusivelyAfterDay(day, moment()) ||
-      !isInclusivelyBeforeDay(day, moment().add(endOfRange, 'days'));
+    return (
+      !isInclusivelyAfterDay(day, moment()) ||
+      !isInclusivelyBeforeDay(day, moment().add(endOfRange, 'days'))
+    );
   },
   isDayHighlighted: () => {},
 
@@ -137,12 +139,9 @@ class DateRangeInputComponent extends Component {
       this.props.onFocus(focusedInput);
     } else {
       window.clearTimeout(this.blurTimeoutId);
-      this.blurTimeoutId = window.setTimeout(
-        () => {
-          this.props.onBlur();
-        },
-        BLUR_TIMEOUT
-      );
+      this.blurTimeoutId = window.setTimeout(() => {
+        this.props.onBlur();
+      }, BLUR_TIMEOUT);
     }
   }
 
@@ -170,18 +169,19 @@ class DateRangeInputComponent extends Component {
 
     const initialStartMoment = initialDates ? moment(initialDates.startDate) : null;
     const initialEndMoment = initialDates ? moment(initialDates.endDate) : null;
-    const startDate = value && value.startDate instanceof Date
-      ? moment(value.startDate)
-      : initialStartMoment;
-    const endDate = value && value.endDate instanceof Date
-      ? moment(value.endDate)
-      : initialEndMoment;
+    const startDate =
+      value && value.startDate instanceof Date ? moment(value.startDate) : initialStartMoment;
+    const endDate =
+      value && value.endDate instanceof Date ? moment(value.endDate) : initialEndMoment;
 
-    const startDatePlaceholderTxt = startDatePlaceholderText ||
+    const startDatePlaceholderTxt =
+      startDatePlaceholderText ||
       intl.formatMessage({ id: 'DateRangeInputField.startDatePlaceholderText' });
-    const endDatePlaceholderTxt = endDatePlaceholderText ||
+    const endDatePlaceholderTxt =
+      endDatePlaceholderText ||
       intl.formatMessage({ id: 'DateRangeInputField.endDatePlaceholderText' });
-    const screenReaderInputText = screenReaderInputMessage ||
+    const screenReaderInputText =
+      screenReaderInputMessage ||
       intl.formatMessage({ id: 'DateRangeInputField.screenReaderInputMessage' });
     const closeDatePickerText = phrases.closeDatePicker
       ? phrases.closeDatePicker

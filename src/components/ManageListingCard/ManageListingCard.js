@@ -74,9 +74,8 @@ export const ManageListingCardComponent = props => {
   const id = currentListing.id.uuid;
   const { title = '', price, closed } = currentListing.attributes;
   const slug = createSlug(title);
-  const firstImage = currentListing.images && currentListing.images.length > 0
-    ? currentListing.images[0]
-    : null;
+  const firstImage =
+    currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
   const menuItemClasses = classNames(css.menuItem, {
     [css.menuItemDisabled]: !!actionsInProgressListingId,
@@ -86,38 +85,39 @@ export const ManageListingCardComponent = props => {
   const { formattedPrice, priceTitle } = priceData(price, intl);
 
   /* eslint-disable jsx-a11y/no-static-element-interactions */
-  const closedOverlay = !closed
-    ? null
-    : <div
-        className={css.closedOverlayWrapper}
-        onClick={event => {
-          event.preventDefault();
-          event.stopPropagation();
-        }}
-      >
-        <div className={css.closedOverlay} />
-        <div className={css.closedOverlayContent}>
-          <div className={css.closedMessage}>
-            <FormattedMessage id="ManageListingCard.closedListing" />
-          </div>
-          <button
-            className={css.openListingButton}
-            disabled={!!actionsInProgressListingId}
-            onClick={event => {
-              event.preventDefault();
-              event.stopPropagation();
-              if (!actionsInProgressListingId) {
-                onOpenListing(currentListing.id);
-              }
-            }}
-          >
-            <FormattedMessage id="ManageListingCard.openListing" />
-          </button>
+  const closedOverlay = !closed ? null : (
+    <div
+      className={css.closedOverlayWrapper}
+      onClick={event => {
+        event.preventDefault();
+        event.stopPropagation();
+      }}
+    >
+      <div className={css.closedOverlay} />
+      <div className={css.closedOverlayContent}>
+        <div className={css.closedMessage}>
+          <FormattedMessage id="ManageListingCard.closedListing" />
         </div>
-      </div>;
+        <button
+          className={css.openListingButton}
+          disabled={!!actionsInProgressListingId}
+          onClick={event => {
+            event.preventDefault();
+            event.stopPropagation();
+            if (!actionsInProgressListingId) {
+              onOpenListing(currentListing.id);
+            }
+          }}
+        >
+          <FormattedMessage id="ManageListingCard.openListing" />
+        </button>
+      </div>
+    </div>
+  );
 
-  const errorOverlay = hasOpeningError || hasClosingError
-    ? <div
+  const errorOverlay =
+    hasOpeningError || hasClosingError ? (
+      <div
         className={css.errorOverlayWrapper}
         onClick={event => {
           event.preventDefault();
@@ -131,23 +131,25 @@ export const ManageListingCardComponent = props => {
           </div>
         </div>
       </div>
-    : null;
+    ) : null;
 
   const thisInProgress = actionsInProgressListingId && actionsInProgressListingId.uuid === id;
-  const loadingOrErrorOverlay = thisInProgress
-    ? <div
-        className={css.loadingOverlayWrapper}
-        onClick={event => {
-          event.preventDefault();
-          event.stopPropagation();
-        }}
-      >
-        <div className={css.loadingOverlay} />
-        <div className={css.loadingOverlayContent}>
-          <IconSpinner />
-        </div>
+  const loadingOrErrorOverlay = thisInProgress ? (
+    <div
+      className={css.loadingOverlayWrapper}
+      onClick={event => {
+        event.preventDefault();
+        event.stopPropagation();
+      }}
+    >
+      <div className={css.loadingOverlay} />
+      <div className={css.loadingOverlayContent}>
+        <IconSpinner />
       </div>
-    : errorOverlay;
+    </div>
+  ) : (
+    errorOverlay
+  );
   /* eslint-enable jsx-a11y/no-static-element-interactions */
 
   return (
@@ -222,9 +224,7 @@ export const ManageListingCardComponent = props => {
           </div>
         </div>
         <div className={css.mainInfo}>
-          <div className={css.title}>
-            {title}
-          </div>
+          <div className={css.title}>{title}</div>
         </div>
         <button
           className={css.edit}

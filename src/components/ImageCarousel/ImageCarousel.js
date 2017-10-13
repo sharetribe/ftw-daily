@@ -54,17 +54,16 @@ class ImageCarousel extends Component {
     const classes = classNames(rootClassName || css.root, className);
 
     const naturalIndex = this.state.selectedImageIndex + 1;
-    const imageIndex = images.length > 0
-      ? <span className={css.imageIndex}>
+    const imageIndex =
+      images.length > 0 ? (
+        <span className={css.imageIndex}>
           {naturalIndex}/{images.length}
         </span>
-      : null;
-    const prevButton = images.length > 1
-      ? <button className={css.prev} onClick={this.prev} />
-      : null;
-    const nextButton = images.length > 1
-      ? <button className={css.next} onClick={this.next} />
-      : null;
+      ) : null;
+    const prevButton =
+      images.length > 1 ? <button className={css.prev} onClick={this.prev} /> : null;
+    const nextButton =
+      images.length > 1 ? <button className={css.next} onClick={this.next} /> : null;
 
     const imageAltText = intl.formatMessage(
       {

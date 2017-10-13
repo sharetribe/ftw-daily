@@ -27,14 +27,7 @@ import {
 import css from './EditListingPage.css';
 
 const formatRequestData = values => {
-  const {
-    address,
-    description,
-    images,
-    geolocation,
-    price,
-    title,
-  } = values;
+  const { address, description, images, geolocation, price, title } = values;
 
   return {
     address,
@@ -224,11 +217,7 @@ EditListingPageComponent.propTypes = {
 const mapStateToProps = state => {
   const page = state.EditListingPage;
   const { authInfoError, logoutError } = state.Auth;
-  const {
-    createStripeAccountInProgress,
-    createStripeAccountError,
-    currentUser,
-  } = state.user;
+  const { createStripeAccountInProgress, createStripeAccountError, currentUser } = state.user;
 
   const fetchInProgress = createStripeAccountInProgress;
 

@@ -28,7 +28,8 @@ const MapIcon = props => {
             result="shadowMatrixOuter1"
           />
           <feMerge>
-            <feMergeNode in="shadowMatrixOuter1" /><feMergeNode in="SourceGraphic" />
+            <feMergeNode in="shadowMatrixOuter1" />
+            <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
       </defs>
@@ -41,9 +42,7 @@ const MapIcon = props => {
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <path
-          d="M51.667 32L46 27.952V15l5.667 4.048L57.333 15 63 19.048V32l-5.667-4.048zM51.7 19v13M57.3 28V15"
-        />
+        <path d="M51.667 32L46 27.952V15l5.667 4.048L57.333 15 63 19.048V32l-5.667-4.048zM51.7 19v13M57.3 28V15" />
       </g>
     </svg>
   );

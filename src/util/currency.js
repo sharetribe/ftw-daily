@@ -136,9 +136,8 @@ export const truncateToSubUnitPrecision = (inputString, subUnitDivisor, useComma
   if (amount.isInteger()) {
     // accepted strings: '9', '9,' '9.' '9,99'
     const decimalCount2 = value.toFixed(2);
-    const decimalPrecisionMax2 = decimalCount2.length >= inputString.length
-      ? inputString
-      : value.toFixed(2);
+    const decimalPrecisionMax2 =
+      decimalCount2.length >= inputString.length ? inputString : value.toFixed(2);
     return ensureSeparator(decimalPrecisionMax2, useComma);
   } else {
     // truncate strings ('9.999' => '9.99')

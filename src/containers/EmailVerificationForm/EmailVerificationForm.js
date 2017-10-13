@@ -14,13 +14,7 @@ import * as propTypes from '../../util/propTypes';
 import css from './EmailVerificationForm.css';
 
 const EmailVerificationFormComponent = props => {
-  const {
-    currentUser,
-    submitting,
-    inProgress,
-    handleSubmit,
-    verificationError,
-  } = props;
+  const { currentUser, submitting, inProgress, handleSubmit, verificationError } = props;
 
   const { email, emailVerified, pendingEmail, profile } = currentUser.attributes;
   const emailToVerify = <strong>{pendingEmail || email}</strong>;
@@ -51,7 +45,6 @@ const EmailVerificationFormComponent = props => {
         </p>
 
         {verificationError ? errorMessage : null}
-
       </div>
 
       <Form onSubmit={handleSubmit}>
@@ -59,12 +52,12 @@ const EmailVerificationFormComponent = props => {
 
         <div className={css.bottomWrapper}>
           <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
-
-            {submitting || inProgress
-              ? <FormattedMessage id="EmailVerificationForm.verifying" />
-              : <FormattedMessage id="EmailVerificationForm.verify" />}
+            {submitting || inProgress ? (
+              <FormattedMessage id="EmailVerificationForm.verifying" />
+            ) : (
+              <FormattedMessage id="EmailVerificationForm.verify" />
+            )}
           </PrimaryButton>
-
         </div>
       </Form>
     </div>
@@ -81,7 +74,6 @@ const EmailVerificationFormComponent = props => {
         <p className={css.modalMessage}>
           <FormattedMessage id="EmailVerificationForm.successText" />
         </p>
-
       </div>
 
       <div className={css.bottomWrapper}>

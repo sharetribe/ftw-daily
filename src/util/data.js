@@ -40,16 +40,13 @@ export const updatedEntities = (oldEntities, apiResponse) => {
   const objects = (Array.isArray(data) ? data : [data]).concat(included);
 
   /* eslint-disable no-param-reassign */
-  const newEntities = objects.reduce(
-    (entities, curr) => {
-      const { id, type } = curr;
-      entities[type] = entities[type] || {};
-      const entity = entities[type][id.uuid];
-      entities[type][id.uuid] = entity ? combinedResourceObjects(entity, curr) : curr;
-      return entities;
-    },
-    oldEntities
-  );
+  const newEntities = objects.reduce((entities, curr) => {
+    const { id, type } = curr;
+    entities[type] = entities[type] || {};
+    const entity = entities[type][id.uuid];
+    entities[type][id.uuid] = entity ? combinedResourceObjects(entity, curr) : curr;
+    return entities;
+  }, oldEntities);
   /* eslint-enable no-param-reassign */
 
   return newEntities;

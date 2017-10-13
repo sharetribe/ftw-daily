@@ -1,7 +1,6 @@
 @import '../../marketplace.css';
 
 .root {
-
   /* Size from content */
   position: relative;
   width: auto;
@@ -26,7 +25,6 @@
 
   box-shadow: var(--boxShadowPopupLight);
   transition: var(--transitionStyleButton);
-
 
   &:hover {
     cursor: pointer;
@@ -55,7 +53,6 @@
 }
 
 .caret {
-
   /* Caret / arrow dimensions and position */
   width: 6px;
   height: 6px;

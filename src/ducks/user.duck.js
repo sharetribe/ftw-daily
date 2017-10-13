@@ -17,16 +17,24 @@ export const STRIPE_ACCOUNT_CREATE_ERROR = 'app/user/STRIPE_ACCOUNT_CREATE_ERROR
 
 export const STRIPE_ACCOUNT_CLEAR_ERROR = 'app/user/STRIPE_ACCOUNT_CLEAR_ERROR';
 
-export const FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST = 'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST';
-export const FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS = 'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS';
-export const FETCH_CURRENT_USER_HAS_LISTINGS_ERROR = 'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_ERROR';
+export const FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST =
+  'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST';
+export const FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS =
+  'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS';
+export const FETCH_CURRENT_USER_HAS_LISTINGS_ERROR =
+  'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_ERROR';
 
-export const FETCH_CURRENT_USER_NOTIFICATIONS_REQUEST = 'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_REQUEST';
-export const FETCH_CURRENT_USER_NOTIFICATIONS_SUCCESS = 'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_SUCCESS';
-export const FETCH_CURRENT_USER_NOTIFICATIONS_ERROR = 'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_ERROR';
+export const FETCH_CURRENT_USER_NOTIFICATIONS_REQUEST =
+  'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_REQUEST';
+export const FETCH_CURRENT_USER_NOTIFICATIONS_SUCCESS =
+  'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_SUCCESS';
+export const FETCH_CURRENT_USER_NOTIFICATIONS_ERROR =
+  'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_ERROR';
 
-export const FETCH_CURRENT_USER_HAS_ORDERS_REQUEST = 'app/user/FETCH_CURRENT_USER_HAS_ORDERS_REQUEST';
-export const FETCH_CURRENT_USER_HAS_ORDERS_SUCCESS = 'app/user/FETCH_CURRENT_USER_HAS_ORDERS_SUCCESS';
+export const FETCH_CURRENT_USER_HAS_ORDERS_REQUEST =
+  'app/user/FETCH_CURRENT_USER_HAS_ORDERS_REQUEST';
+export const FETCH_CURRENT_USER_HAS_ORDERS_SUCCESS =
+  'app/user/FETCH_CURRENT_USER_HAS_ORDERS_SUCCESS';
 export const FETCH_CURRENT_USER_HAS_ORDERS_ERROR = 'app/user/FETCH_CURRENT_USER_HAS_ORDERS_ERROR';
 
 export const SEND_VERIFICATION_EMAIL_REQUEST = 'app/user/SEND_VERIFICATION_EMAIL_REQUEST';
@@ -233,165 +241,159 @@ export const sendVerificationEmailError = e => ({
 
 // ================ Thunks ================ //
 
-export const fetchCurrentUserHasListings = () =>
-  (dispatch, getState, sdk) => {
-    dispatch(fetchCurrentUserHasListingsRequest());
-    const { currentUser } = getState().user;
+export const fetchCurrentUserHasListings = () => (dispatch, getState, sdk) => {
+  dispatch(fetchCurrentUserHasListingsRequest());
+  const { currentUser } = getState().user;
 
-    if (!currentUser) {
-      dispatch(fetchCurrentUserHasListingsSuccess(false));
-      return Promise.resolve(null);
-    }
+  if (!currentUser) {
+    dispatch(fetchCurrentUserHasListingsSuccess(false));
+    return Promise.resolve(null);
+  }
 
-    const currentUserId = currentUser.id;
-    const params = {
-      author_id: currentUserId,
+  const currentUserId = currentUser.id;
+  const params = {
+    author_id: currentUserId,
 
-      // Since we are only interested in if the user has
-      // listings, we only need at most one result.
-      page: 1,
-      per_page: 1,
-    };
-
-    return sdk.listings
-      .query(params)
-      .then(response => {
-        const hasListings = response.data.data && response.data.data.length > 0;
-        dispatch(fetchCurrentUserHasListingsSuccess(!!hasListings));
-      })
-      .catch(e => {
-        // TODO: dispatch flash message: "Something went wrong while retrieving user info"
-        dispatch(fetchCurrentUserHasListingsError(e));
-      });
+    // Since we are only interested in if the user has
+    // listings, we only need at most one result.
+    page: 1,
+    per_page: 1,
   };
 
-export const fetchCurrentUserHasOrders = () =>
-  (dispatch, getState, sdk) => {
-    dispatch(fetchCurrentUserHasOrdersRequest());
+  return sdk.listings
+    .query(params)
+    .then(response => {
+      const hasListings = response.data.data && response.data.data.length > 0;
+      dispatch(fetchCurrentUserHasListingsSuccess(!!hasListings));
+    })
+    .catch(e => {
+      // TODO: dispatch flash message: "Something went wrong while retrieving user info"
+      dispatch(fetchCurrentUserHasListingsError(e));
+    });
+};
 
-    if (!getState().user.currentUser) {
-      dispatch(fetchCurrentUserHasOrdersSuccess(false));
-      return Promise.resolve(null);
-    }
+export const fetchCurrentUserHasOrders = () => (dispatch, getState, sdk) => {
+  dispatch(fetchCurrentUserHasOrdersRequest());
 
-    const params = {
-      only: 'order',
-      page: 1,
-      per_page: 1,
-    };
+  if (!getState().user.currentUser) {
+    dispatch(fetchCurrentUserHasOrdersSuccess(false));
+    return Promise.resolve(null);
+  }
 
-    return sdk.transactions
-      .query(params)
-      .then(response => {
-        const hasOrders = response.data.data && response.data.data.length > 0;
-        dispatch(fetchCurrentUserHasOrdersSuccess(!!hasOrders));
-      })
-      .catch(e => {
-        // TODO: dispatch flash message: "Something went wrong while retrieving user info"
-        dispatch(fetchCurrentUserHasOrdersError(e));
-      });
+  const params = {
+    only: 'order',
+    page: 1,
+    per_page: 1,
   };
+
+  return sdk.transactions
+    .query(params)
+    .then(response => {
+      const hasOrders = response.data.data && response.data.data.length > 0;
+      dispatch(fetchCurrentUserHasOrdersSuccess(!!hasOrders));
+    })
+    .catch(e => {
+      // TODO: dispatch flash message: "Something went wrong while retrieving user info"
+      dispatch(fetchCurrentUserHasOrdersError(e));
+    });
+};
 
 // Notificaiton page size is max (100 items on page)
 const NOTIFICATION_PAGE_SIZE = 100;
 
-export const fetchCurrentUserNotifications = () =>
-  (dispatch, getState, sdk) => {
-    dispatch(fetchCurrentUserNotificationsRequest());
+export const fetchCurrentUserNotifications = () => (dispatch, getState, sdk) => {
+  dispatch(fetchCurrentUserNotificationsRequest());
 
-    const apiQueryParams = {
-      only: 'sale',
-      last_transitions: [TX_TRANSITION_PREAUTHORIZE],
-      page: 1,
-      per_page: NOTIFICATION_PAGE_SIZE,
-    };
-
-    sdk.transactions
-      .query(apiQueryParams)
-      .then(response => {
-        const transactions = response.data.data;
-        dispatch(fetchCurrentUserNotificationsSuccess(transactions));
-      })
-      .catch(e => {
-        // TODO: dispatch flash message: "Something went wrong while retrieving user info"
-        dispatch(fetchCurrentUserNotificationsError(e));
-        throw e;
-      });
+  const apiQueryParams = {
+    only: 'sale',
+    last_transitions: [TX_TRANSITION_PREAUTHORIZE],
+    page: 1,
+    per_page: NOTIFICATION_PAGE_SIZE,
   };
 
-export const fetchCurrentUser = () =>
-  (dispatch, getState, sdk) => {
-    dispatch(currentUserShowRequest());
-    const { isAuthenticated } = getState().Auth;
+  sdk.transactions
+    .query(apiQueryParams)
+    .then(response => {
+      const transactions = response.data.data;
+      dispatch(fetchCurrentUserNotificationsSuccess(transactions));
+    })
+    .catch(e => {
+      // TODO: dispatch flash message: "Something went wrong while retrieving user info"
+      dispatch(fetchCurrentUserNotificationsError(e));
+      throw e;
+    });
+};
 
-    if (!isAuthenticated) {
-      // Make sure current user is null
-      dispatch(currentUserShowSuccess(null));
-      return Promise.resolve({});
-    }
+export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
+  dispatch(currentUserShowRequest());
+  const { isAuthenticated } = getState().Auth;
 
-    return sdk.currentUser
-      .show({ include: ['profileImage'] })
-      .then(response => {
-        // Include profile image to denormalized user entity
-        const currentUserId = response.data.data.id;
-        const entities = updatedEntities({}, response.data);
-        const denormalised = denormalisedEntities(entities, 'current-user', [currentUserId]);
-        const currentUser = denormalised[0];
-        // set current user id to the logger
-        log.setUserId(currentUser.id.uuid);
-        dispatch(currentUserShowSuccess(currentUser));
-        return currentUser;
-      })
-      .then(currentUser => {
-        dispatch(fetchCurrentUserHasListings());
-        dispatch(fetchCurrentUserNotifications());
-        if (!currentUser.attributes.emailVerified) {
-          dispatch(fetchCurrentUserHasOrders());
-        }
+  if (!isAuthenticated) {
+    // Make sure current user is null
+    dispatch(currentUserShowSuccess(null));
+    return Promise.resolve({});
+  }
 
-        // Make sure auth info is up to date
-        dispatch(authInfo());
-      })
-      .catch(e => {
-        // Make sure auth info is up to date
-        dispatch(authInfo());
+  return sdk.currentUser
+    .show({ include: ['profileImage'] })
+    .then(response => {
+      // Include profile image to denormalized user entity
+      const currentUserId = response.data.data.id;
+      const entities = updatedEntities({}, response.data);
+      const denormalised = denormalisedEntities(entities, 'current-user', [currentUserId]);
+      const currentUser = denormalised[0];
+      // set current user id to the logger
+      log.setUserId(currentUser.id.uuid);
+      dispatch(currentUserShowSuccess(currentUser));
+      return currentUser;
+    })
+    .then(currentUser => {
+      dispatch(fetchCurrentUserHasListings());
+      dispatch(fetchCurrentUserNotifications());
+      if (!currentUser.attributes.emailVerified) {
+        dispatch(fetchCurrentUserHasOrders());
+      }
 
-        // TODO: dispatch flash message: "Something went wrong while retrieving user info"
-        dispatch(currentUserShowError(e));
-      });
-  };
+      // Make sure auth info is up to date
+      dispatch(authInfo());
+    })
+    .catch(e => {
+      // Make sure auth info is up to date
+      dispatch(authInfo());
 
-export const createStripeAccount = payoutDetails =>
-  (dispatch, getState, sdk) => {
-    dispatch(stripeAccountCreateRequest());
+      // TODO: dispatch flash message: "Something went wrong while retrieving user info"
+      dispatch(currentUserShowError(e));
+    });
+};
 
-    let accountResponse;
+export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) => {
+  dispatch(stripeAccountCreateRequest());
 
-    return sdk.currentUser
-      .createStripeAccount(payoutDetails)
-      .then(response => {
-        accountResponse = response;
-        return dispatch(fetchCurrentUser());
-      })
-      .then(() => {
-        dispatch(stripeAccountCreateSuccess(accountResponse));
-      })
-      .catch(e => {
-        dispatch(stripeAccountCreateError(e));
-        log.error(e, 'create-stripe-account-failed');
-        throw e;
-      });
-  };
+  let accountResponse;
 
-export const sendVerificationEmail = () =>
-  (dispatch, getState, sdk) => {
-    if (verificationSendingInProgress(getState())) {
-      return Promise.reject(new Error('Verification email sending already in progress'));
-    }
-    dispatch(sendVerificationEmailRequest());
-    return sdk.currentUser
-      .sendVerificationEmail()
-      .then(() => dispatch(sendVerificationEmailSuccess()))
-      .catch(e => dispatch(sendVerificationEmailError(e)));
-  };
+  return sdk.currentUser
+    .createStripeAccount(payoutDetails)
+    .then(response => {
+      accountResponse = response;
+      return dispatch(fetchCurrentUser());
+    })
+    .then(() => {
+      dispatch(stripeAccountCreateSuccess(accountResponse));
+    })
+    .catch(e => {
+      dispatch(stripeAccountCreateError(e));
+      log.error(e, 'create-stripe-account-failed');
+      throw e;
+    });
+};
+
+export const sendVerificationEmail = () => (dispatch, getState, sdk) => {
+  if (verificationSendingInProgress(getState())) {
+    return Promise.reject(new Error('Verification email sending already in progress'));
+  }
+  dispatch(sendVerificationEmailRequest());
+  return sdk.currentUser
+    .sendVerificationEmail()
+    .then(() => dispatch(sendVerificationEmailSuccess()))
+    .catch(e => dispatch(sendVerificationEmailError(e)));
+};

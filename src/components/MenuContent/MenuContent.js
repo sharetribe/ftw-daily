@@ -24,16 +24,17 @@ const MenuContent = props => {
   const classes = classNames(rootClass, className, { [css.isOpen]: isOpen });
   const contentClasses = classNames(contentClassName, css.content);
 
-  const arrowPositionStyle = arrowPosition && style.right != null
-    ? { position: 'absolute', right: arrowPosition, top: 0 }
-    : { position: 'absolute', left: arrowPosition, top: 0 };
+  const arrowPositionStyle =
+    arrowPosition && style.right != null
+      ? { position: 'absolute', right: arrowPosition, top: 0 }
+      : { position: 'absolute', left: arrowPosition, top: 0 };
 
-  const arrow = arrowPosition
-    ? <div style={arrowPositionStyle}>
-        <div className={css.arrowBelow} />
-        <div className={css.arrowTop} />
-      </div>
-    : null;
+  const arrow = arrowPosition ? (
+    <div style={arrowPositionStyle}>
+      <div className={css.arrowBelow} />
+      <div className={css.arrowTop} />
+    </div>
+  ) : null;
 
   React.Children.forEach(children, child => {
     if (child.type !== MenuItem) {
@@ -47,9 +48,7 @@ const MenuContent = props => {
   return (
     <div className={classes} ref={contentRef} style={style}>
       {arrow}
-      <ul className={contentClasses}>
-        {children}
-      </ul>
+      <ul className={contentClasses}>{children}</ul>
     </div>
   );
 };

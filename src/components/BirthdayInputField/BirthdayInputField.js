@@ -109,12 +109,9 @@ class BirthdayInputComponent extends Component {
   }
   handleSelectBlur() {
     window.clearTimeout(this.blurTimeoutId);
-    this.blurTimeoutId = window.setTimeout(
-      () => {
-        this.props.onBlur();
-      },
-      BLUR_TIMEOUT
-    );
+    this.blurTimeoutId = window.setTimeout(() => {
+      this.props.onBlur();
+    }, BLUR_TIMEOUT);
   }
   handleSelectChange(type, value) {
     this.setState(prevState => {
@@ -160,7 +157,11 @@ class BirthdayInputComponent extends Component {
             onChange={e => this.handleSelectChange('day', e.target.value)}
           >
             <option>{datePlaceholder}</option>
-            {days.map(d => <option key={d} value={d}>{pad(d)}</option>)}
+            {days.map(d => (
+              <option key={d} value={d}>
+                {pad(d)}
+              </option>
+            ))}
           </select>
         </div>
         <div className={css.selectWrapper}>
@@ -176,7 +177,11 @@ class BirthdayInputComponent extends Component {
             onChange={e => this.handleSelectChange('month', e.target.value)}
           >
             <option>{monthPlaceholder}</option>
-            {months.map(m => <option key={m} value={m}>{pad(m)}</option>)}
+            {months.map(m => (
+              <option key={m} value={m}>
+                {pad(m)}
+              </option>
+            ))}
           </select>
         </div>
         <div className={css.selectWrapper}>
@@ -192,7 +197,11 @@ class BirthdayInputComponent extends Component {
             onChange={e => this.handleSelectChange('year', e.target.value)}
           >
             <option>{yearPlaceholder}</option>
-            {years.map(y => <option key={y} value={y}>{y}</option>)}
+            {years.map(y => (
+              <option key={y} value={y}>
+                {y}
+              </option>
+            ))}
           </select>
         </div>
       </div>

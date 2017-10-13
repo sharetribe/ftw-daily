@@ -53,11 +53,7 @@ const priceData = (price, intl) => {
 };
 
 export const ActionBar = props => {
-  const {
-    isOwnListing,
-    isClosed,
-    editParams,
-  } = props;
+  const { isOwnListing, isClosed, editParams } = props;
 
   if (isOwnListing) {
     return (
@@ -215,19 +211,19 @@ export class ListingPageComponent extends Component {
         imageCarouselOpen: true,
       });
     };
-    const viewPhotosButton = hasImages
-      ? <button className={css.viewPhotos} onClick={handleViewPhotosClick}>
-          <FormattedMessage
-            id="ListingPage.viewImagesButton"
-            values={{ count: currentListing.images.length }}
-          />
-        </button>
-      : null;
+    const viewPhotosButton = hasImages ? (
+      <button className={css.viewPhotos} onClick={handleViewPhotosClick}>
+        <FormattedMessage
+          id="ListingPage.viewImagesButton"
+          values={{ count: currentListing.images.length }}
+        />
+      </button>
+    ) : null;
 
     const authorAvailable = currentListing && currentListing.author;
     const userAndListingAuthorAvailable = !!(currentUser && authorAvailable);
-    const isOwnListing = userAndListingAuthorAvailable &&
-      currentListing.author.id.uuid === currentUser.id.uuid;
+    const isOwnListing =
+      userAndListingAuthorAvailable && currentListing.author.id.uuid === currentUser.id.uuid;
 
     const currentAuthor = ensureUser(authorAvailable ? currentListing.author : {});
     const currentAuthorDisplayName = currentAuthor.attributes.profile.displayName;
@@ -238,14 +234,16 @@ export class ListingPageComponent extends Component {
 
     const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' });
     const { formattedPrice, priceTitle } = priceData(price, intl);
-    const map = geolocation
-      ? <div className={css.locationContainer}>
-          <h2 className={css.locationTitle}>
-            <FormattedMessage id="ListingPage.locationTitle" />
-          </h2>
-          <div className={css.map}><Map center={geolocation} address={locationAddress} /></div>
+    const map = geolocation ? (
+      <div className={css.locationContainer}>
+        <h2 className={css.locationTitle}>
+          <FormattedMessage id="ListingPage.locationTitle" />
+        </h2>
+        <div className={css.map}>
+          <Map center={geolocation} address={locationAddress} />
         </div>
-      : null;
+      </div>
+    ) : null;
 
     const showClosedListingHelpText = currentListing.id && currentListing.attributes.closed;
     const bookingHeading = (
@@ -289,15 +287,15 @@ export class ListingPageComponent extends Component {
 
     // Action bar is wrapped with a div that prevents the click events
     // to the parent that would otherwise open the image carousel
-    const actionBar = currentListing.id
-      ? <div onClick={e => e.stopPropagation()}>
-          <ActionBar
-            isOwnListing={isOwnListing}
-            isClosed={currentListing.attributes.closed}
-            editParams={editParams}
-          />
-        </div>
-      : null;
+    const actionBar = currentListing.id ? (
+      <div onClick={e => e.stopPropagation()}>
+        <ActionBar
+          isOwnListing={isOwnListing}
+          isClosed={currentListing.attributes.closed}
+          editParams={editParams}
+        />
+      </div>
+    ) : null;
 
     const facebookImages = hasImages
       ? currentListing.images.map(image => {
@@ -336,8 +334,7 @@ export class ListingPageComponent extends Component {
         facebookImages={facebookImages}
         twitterImages={twitterImages}
         canonicalPath={canonicalPath}
-        schema={
-          `
+        schema={`
           {
             "@context": "http://schema.org",
             "@type": "ItemPage",
@@ -345,8 +342,7 @@ export class ListingPageComponent extends Component {
             "name": "${schemaTitle}",
             "image": ${schemaImages}
           }
-        `
-        }
+        `}
       >
         {topbar}
         <div className={listingClasses}>
@@ -441,14 +437,14 @@ export class ListingPageComponent extends Component {
               </div>
 
               {bookingHeading}
-              {!currentListing.attributes.closed
-                ? <BookingDatesForm
-                    className={css.bookingForm}
-                    onSubmit={handleBookingSubmit}
-                    price={price}
-                    isOwnListing={isOwnListing}
-                  />
-                : null}
+              {!currentListing.attributes.closed ? (
+                <BookingDatesForm
+                  className={css.bookingForm}
+                  onSubmit={handleBookingSubmit}
+                  price={price}
+                  isOwnListing={isOwnListing}
+                />
+              ) : null}
             </ModalInMobile>
             <div className={css.openBookingForm}>
               <div className={css.priceContainer}>
@@ -460,13 +456,15 @@ export class ListingPageComponent extends Component {
                 </div>
               </div>
 
-              {!currentListing.attributes.closed
-                ? <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
-                    {bookBtnMessage}
-                  </Button>
-                : <div className={css.closedListingButton}>
-                    <FormattedMessage id="ListingPage.closedListingButtonText" />
-                  </div>}
+              {!currentListing.attributes.closed ? (
+                <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
+                  {bookBtnMessage}
+                </Button>
+              ) : (
+                <div className={css.closedListingButton}>
+                  <FormattedMessage id="ListingPage.closedListingButtonText" />
+                </div>
+              )}
             </div>
           </div>
         </div>

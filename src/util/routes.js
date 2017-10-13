@@ -33,20 +33,17 @@ export const pathByRouteName = (nameToFind, routes, params = {}) =>
  * exact flag set to false. If not, an array containing just the first matched exact route is returned.
  */
 export const matchPathname = (pathname, routeConfiguration) => {
-  const matchedRoutes = routeConfiguration.reduce(
-    (matches, route) => {
-      const { path, exact = true } = route;
-      const match = matchPath(pathname, { path, exact });
-      if (match) {
-        matches.push({
-          route,
-          params: match.params || {},
-        });
-      }
-      return matches;
-    },
-    []
-  );
+  const matchedRoutes = routeConfiguration.reduce((matches, route) => {
+    const { path, exact = true } = route;
+    const match = matchPath(pathname, { path, exact });
+    if (match) {
+      matches.push({
+        route,
+        params: match.params || {},
+      });
+    }
+    return matches;
+  }, []);
 
   const matchedExactRoute = matchedRoutes.find(r => {
     return r.exact === true || r.exact == null;

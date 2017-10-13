@@ -43,9 +43,7 @@ class Discussion extends Component {
   render() {
     return (
       <div className={this.props.className}>
-        <ul>
-          {this.props.messages.map(msg => <Message key={msg.id} {...msg} />)}
-        </ul>
+        <ul>{this.props.messages.map(msg => <Message key={msg.id} {...msg} />)}</ul>
         <form className={css.sendMessageForm} onSubmit={this.handleNewMessage}>
           <input
             className={css.sendMessageInput}
@@ -57,7 +55,9 @@ class Discussion extends Component {
             value={this.state.message}
             onChange={this.handleOnChange}
           />
-          <Button className={css.sendMessageButton} type="submit">Send</Button>
+          <Button className={css.sendMessageButton} type="submit">
+            Send
+          </Button>
         </form>
       </div>
     );

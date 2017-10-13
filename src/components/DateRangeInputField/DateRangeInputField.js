@@ -92,12 +92,17 @@ class DateRangeInputFieldComponent extends Component {
       [css.hover]: this.state.focusedInput === END_DATE,
     });
 
-    const label = startDateLabel && endDateLabel
-      ? <div className={classNames(css.labels, { [css.mobileMargins]: useMobileMargins })}>
-          <label className={startDateLabelClasses} htmlFor={startDateId}>{startDateLabel}</label>
-          <label className={endDateLabelClasses} htmlFor={endDateId}>{endDateLabel}</label>
+    const label =
+      startDateLabel && endDateLabel ? (
+        <div className={classNames(css.labels, { [css.mobileMargins]: useMobileMargins })}>
+          <label className={startDateLabelClasses} htmlFor={startDateId}>
+            {startDateLabel}
+          </label>
+          <label className={endDateLabelClasses} htmlFor={endDateId}>
+            {endDateLabel}
+          </label>
         </div>
-      : null;
+      ) : null;
 
     // eslint-disable-next-line no-unused-vars
     const { onBlur, onFocus, ...restOfInput } = input;

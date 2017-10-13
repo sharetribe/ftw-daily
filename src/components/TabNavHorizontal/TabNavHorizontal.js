@@ -27,7 +27,9 @@ const Tab = props => {
 
   return (
     <div className={className}>
-      <NamedLink className={linkClasses} {...linkProps}>{text}</NamedLink>
+      <NamedLink className={linkClasses} {...linkProps}>
+        {text}
+      </NamedLink>
     </div>
   );
 };

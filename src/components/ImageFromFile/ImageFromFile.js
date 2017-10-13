@@ -49,7 +49,9 @@ class ImageFromFile extends Component {
           );
         }}
         renderRejected={() => (
-          <div className={classes}><FormattedMessage id="ImageFromFile.couldNotReadFile" /></div>
+          <div className={classes}>
+            <FormattedMessage id="ImageFromFile.couldNotReadFile" />
+          </div>
         )}
       />
     );

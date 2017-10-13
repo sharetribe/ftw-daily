@@ -31,25 +31,22 @@ class AddImagesTest extends Component {
     });
 
     // Fake image uploaded state: show image thumbnail
-    setTimeout(
-      () => {
-        this.setState(prevState => {
-          const { UUID } = types;
-          const images = prevState.images;
-          const imageIndex = findIndex(images, i => i.id === fileId);
-          const updatedImage = { ...imageData, imageId: new UUID(fileId) };
-          const updatedImages = [
-            ...images.slice(0, imageIndex),
-            updatedImage,
-            ...images.slice(imageIndex + 1),
-          ];
-          return {
-            images: updatedImages,
-          };
-        });
-      },
-      1000
-    );
+    setTimeout(() => {
+      this.setState(prevState => {
+        const { UUID } = types;
+        const images = prevState.images;
+        const imageIndex = findIndex(images, i => i.id === fileId);
+        const updatedImage = { ...imageData, imageId: new UUID(fileId) };
+        const updatedImages = [
+          ...images.slice(0, imageIndex),
+          updatedImage,
+          ...images.slice(imageIndex + 1),
+        ];
+        return {
+          images: updatedImages,
+        };
+      });
+    }, 1000);
   }
 
   onSortEnd({ oldIndex, newIndex }) {
@@ -70,7 +67,9 @@ class AddImagesTest extends Component {
         >
           <div className={css.addImageWrapper}>
             <div className={css.aspectRatioWrapper}>
-              <label className={css.addImage} htmlFor="addImageExampleInput">+ Add image</label>
+              <label className={css.addImage} htmlFor="addImageExampleInput">
+                + Add image
+              </label>
               <input
                 id="addImageExampleInput"
                 type="file"

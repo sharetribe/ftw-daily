@@ -8,14 +8,15 @@ const SearchResultsPanel = props => {
   const { className, rootClassName, listings, pagination, search } = props;
   const classes = classNames(rootClassName || css.root, className);
 
-  const paginationLinks = pagination && pagination.totalPages > 1
-    ? <PaginationLinks
+  const paginationLinks =
+    pagination && pagination.totalPages > 1 ? (
+      <PaginationLinks
         className={css.pagination}
         pageName="SearchPage"
         pageSearchParams={search}
         pagination={pagination}
       />
-    : null;
+    ) : null;
 
   return (
     <div className={classes}>

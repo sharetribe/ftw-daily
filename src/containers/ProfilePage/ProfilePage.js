@@ -6,12 +6,7 @@ import { Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 export const ProfilePageComponent = props => {
-  const {
-    authInfoError,
-    logoutError,
-    params,
-    scrollingDisabled,
-  } = props;
+  const { authInfoError, logoutError, params, scrollingDisabled } = props;
 
   return (
     <Page

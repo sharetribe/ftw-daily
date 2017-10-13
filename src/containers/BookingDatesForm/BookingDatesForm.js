@@ -155,14 +155,14 @@ export class BookingDatesFormComponent extends Component {
     const endDateErrorMessage = intl.formatMessage({ id: 'DateRangeInputField.invalidEndDate' });
 
     const hasBookingInfo = startDate && endDate;
-    const bookingInfo = hasBookingInfo
-      ? <div className={css.priceBreakdownContainer}>
-          <h3 className={css.priceBreakdownTitle}>
-            <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
-          </h3>
-          {estimatedBreakdown(startDate, endDate, unitPrice)}
-        </div>
-      : null;
+    const bookingInfo = hasBookingInfo ? (
+      <div className={css.priceBreakdownContainer}>
+        <h3 className={css.priceBreakdownTitle}>
+          <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
+        </h3>
+        {estimatedBreakdown(startDate, endDate, unitPrice)}
+      </div>
+    ) : null;
 
     const dateFormatOptions = {
       weekday: 'short',
@@ -172,11 +172,14 @@ export class BookingDatesFormComponent extends Component {
 
     const now = moment();
     const today = now.startOf('day').toDate();
-    const tomorrow = now.startOf('day').add(1, 'days').toDate();
-    const startDatePlaceholderText = startDatePlaceholder ||
-      intl.formatDate(today, dateFormatOptions);
-    const endDatePlaceholderText = endDatePlaceholder ||
-      intl.formatDate(tomorrow, dateFormatOptions);
+    const tomorrow = now
+      .startOf('day')
+      .add(1, 'days')
+      .toDate();
+    const startDatePlaceholderText =
+      startDatePlaceholder || intl.formatDate(today, dateFormatOptions);
+    const endDatePlaceholderText =
+      endDatePlaceholder || intl.formatDate(tomorrow, dateFormatOptions);
 
     return (
       <Form className={className} onSubmit={this.handleFormSubmit}>

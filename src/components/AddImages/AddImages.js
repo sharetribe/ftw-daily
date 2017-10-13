@@ -27,9 +27,11 @@ const ThumbnailWrapper = props => {
     const removeButton = image.imageId ? <RemoveImageButton onClick={handleRemoveClick} /> : null;
 
     // While image is uploading we show overlay on top of thumbnail
-    const uploadingOverlay = !image.imageId
-      ? <div className={css.thumbnailLoading}><IconSpinner /></div>
-      : null;
+    const uploadingOverlay = !image.imageId ? (
+      <div className={css.thumbnailLoading}>
+        <IconSpinner />
+      </div>
+    ) : null;
 
     return (
       <ImageFromFile

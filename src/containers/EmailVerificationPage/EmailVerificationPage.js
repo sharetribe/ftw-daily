@@ -62,19 +62,19 @@ export const EmailVerificationPageComponent = props => {
       <TopbarContainer />
       <div className={css.root}>
         <div className={css.content}>
-
-          {currentUser
-            ? <EmailVerificationForm
-                initialValues={initialValues}
-                onSubmit={submitVerification}
-                currentUser={currentUser}
-                inProgress={emailVerificationInProgress}
-                verificationError={verificationError}
-              />
-            : <FormattedMessage id="EmailVerificationPage.loadingUserInformation" />}
+          {currentUser ? (
+            <EmailVerificationForm
+              initialValues={initialValues}
+              onSubmit={submitVerification}
+              currentUser={currentUser}
+              inProgress={emailVerificationInProgress}
+              verificationError={verificationError}
+            />
+          ) : (
+            <FormattedMessage id="EmailVerificationPage.loadingUserInformation" />
+          )}
         </div>
       </div>
-
     </Page>
   );
 };

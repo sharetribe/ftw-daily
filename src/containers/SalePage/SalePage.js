@@ -37,7 +37,8 @@ export const SalePageComponent = props => {
   const listingTitle = currentListing.attributes.title;
 
   // Redirect users with someone else's direct link to their own inbox/sales page.
-  const isDataAvailable = currentUser &&
+  const isDataAvailable =
+    currentUser &&
     currentTransaction.id &&
     currentTransaction.id.uuid === params.id &&
     currentTransaction.provider &&
@@ -52,12 +53,19 @@ export const SalePageComponent = props => {
     [css.tabContentVisible]: props.tab === 'details',
   });
 
-  const loadingOrFailedFetching = fetchSaleError
-    ? <p className={css.error}><FormattedMessage id="SalePage.fetchSaleFailed" /></p>
-    : <p className={css.loading}><FormattedMessage id="SalePage.loadingData" /></p>;
+  const loadingOrFailedFetching = fetchSaleError ? (
+    <p className={css.error}>
+      <FormattedMessage id="SalePage.fetchSaleFailed" />
+    </p>
+  ) : (
+    <p className={css.loading}>
+      <FormattedMessage id="SalePage.loadingData" />
+    </p>
+  );
 
-  const panel = isDataAvailable && currentTransaction.id
-    ? <SaleDetailsPanel
+  const panel =
+    isDataAvailable && currentTransaction.id ? (
+      <SaleDetailsPanel
         className={detailsClassName}
         transaction={currentTransaction}
         onAcceptSale={onAcceptSale}
@@ -67,7 +75,9 @@ export const SalePageComponent = props => {
         acceptSaleError={acceptSaleError}
         declineSaleError={declineSaleError}
       />
-    : loadingOrFailedFetching;
+    ) : (
+      loadingOrFailedFetching
+    );
 
   return (
     <Page
@@ -77,9 +87,7 @@ export const SalePageComponent = props => {
       scrollingDisabled={scrollingDisabled}
     >
       <TopbarContainer />
-      <div className={css.root}>
-        {panel}
-      </div>
+      <div className={css.root}>{panel}</div>
     </Page>
   );
 };

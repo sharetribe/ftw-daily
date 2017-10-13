@@ -64,7 +64,6 @@
 }
 
 .caret {
-
   /* Caret / arrow dimensions and position */
   width: 6px;
   height: 6px;
@@ -82,5 +81,4 @@
   border-bottom-style: solid;
   border-bottom-color: var(--matterColorNegative);
   border-bottom-width: 1px;
-
 }

@@ -40,17 +40,16 @@ export const showListingError = e => ({
   payload: e,
 });
 
-export const showListing = listingId =>
-  (dispatch, getState, sdk) => {
-    dispatch(showListingRequest(listingId));
-    dispatch(fetchCurrentUser());
-    return sdk.listings
-      .show({ id: listingId, include: ['author', 'author.profileImage', 'images'] })
-      .then(data => {
-        dispatch(addMarketplaceEntities(data));
-        return data;
-      })
-      .catch(e => {
-        dispatch(showListingError(e));
-      });
-  };
+export const showListing = listingId => (dispatch, getState, sdk) => {
+  dispatch(showListingRequest(listingId));
+  dispatch(fetchCurrentUser());
+  return sdk.listings
+    .show({ id: listingId, include: ['author', 'author.profileImage', 'images'] })
+    .then(data => {
+      dispatch(addMarketplaceEntities(data));
+      return data;
+    })
+    .catch(e => {
+      dispatch(showListingError(e));
+    });
+};

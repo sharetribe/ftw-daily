@@ -24,9 +24,8 @@ class EditListingPhotosPanel extends Component {
 
   handlePhotosSubmit(values) {
     const { onSubmit, currentUser } = this.props;
-    const stripeConnected = currentUser &&
-      currentUser.attributes &&
-      currentUser.attributes.stripeConnected;
+    const stripeConnected =
+      currentUser && currentUser.attributes && currentUser.attributes.stripeConnected;
     if (stripeConnected) {
       onSubmit(values);
     } else {
@@ -100,21 +99,22 @@ class EditListingPhotosPanel extends Component {
     const { title } = currentListing.attributes;
     const listingTitle = title || '';
 
-    const listingLink = currentListing.id
-      ? <NamedLink
-          name="ListingPage"
-          params={{ id: currentListing.id.uuid, slug: createSlug(title) }}
-        >
-          {listingTitle}
-        </NamedLink>
-      : '';
+    const listingLink = currentListing.id ? (
+      <NamedLink
+        name="ListingPage"
+        params={{ id: currentListing.id.uuid, slug: createSlug(title) }}
+      >
+        {listingTitle}
+      </NamedLink>
+    ) : (
+      ''
+    );
 
-    const panelTitle = currentListing.id
-      ? <FormattedMessage
-          id="EditListingPhotosPanel.title"
-          values={{ listingTitle: listingLink }}
-        />
-      : <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />;
+    const panelTitle = currentListing.id ? (
+      <FormattedMessage id="EditListingPhotosPanel.title" values={{ listingTitle: listingLink }} />
+    ) : (
+      <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />
+    );
 
     return (
       <div className={classes}>
@@ -162,7 +162,6 @@ class EditListingPhotosPanel extends Component {
             onSubmit={this.handlePayoutSubmit}
           />
         </Modal>
-
       </div>
     );
   }

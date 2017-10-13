@@ -34,17 +34,12 @@ const getPageNumbersArray = (page, totalPages) => {
       // E.g. [1, 4, 5, 6, 9], where current page = 5 and totalPages = 9.
       return v === 1 || Math.abs(v - page) <= 1 || v === totalPages;
     })
-    .reduce(
-      (newArray, p) => {
-        // Create a new array where gaps between consecutive numbers is filled with ellipsis character
-        // E.g. [1, '…', 4, 5, 6, '…', 9], where current page = 5 and totalPages = 9.
-        const isFirstPageOrNextToCurrentPage = p === 1 || newArray[newArray.length - 1] + 1 === p;
-        return isFirstPageOrNextToCurrentPage
-          ? newArray.concat([p])
-          : newArray.concat(['\u2026', p]);
-      },
-      []
-    );
+    .reduce((newArray, p) => {
+      // Create a new array where gaps between consecutive numbers is filled with ellipsis character
+      // E.g. [1, '…', 4, 5, 6, '…', 9], where current page = 5 and totalPages = 9.
+      const isFirstPageOrNextToCurrentPage = p === 1 || newArray[newArray.length - 1] + 1 === p;
+      return isFirstPageOrNextToCurrentPage ? newArray.concat([p]) : newArray.concat(['\u2026', p]);
+    }, []);
 };
 
 /**
@@ -115,18 +110,22 @@ export const PaginationLinksComponent = props => {
   const pageNumbersNavLinks = getPageNumbersArray(page, totalPages).map(v => {
     const isCurrentPage = v === page;
     const pageClassNames = classNames(css.toPageLink, { [css.currentPage]: isCurrentPage });
-    return typeof v === 'number'
-      ? <NamedLink
-          key={v}
-          className={pageClassNames}
-          name={pageName}
-          params={pagePathParams}
-          to={{ search: stringify({ ...pageSearchParams, page: v }) }}
-          title={intl.formatMessage({ id: 'PaginationLinks.toPage' }, { page: v })}
-        >
-          {v}
-        </NamedLink>
-      : <span key={`pagination_gap_${paginationGapKey()}`} className={css.paginationGap}>{v}</span>;
+    return typeof v === 'number' ? (
+      <NamedLink
+        key={v}
+        className={pageClassNames}
+        name={pageName}
+        params={pagePathParams}
+        to={{ search: stringify({ ...pageSearchParams, page: v }) }}
+        title={intl.formatMessage({ id: 'PaginationLinks.toPage' }, { page: v })}
+      >
+        {v}
+      </NamedLink>
+    ) : (
+      <span key={`pagination_gap_${paginationGapKey()}`} className={css.paginationGap}>
+        {v}
+      </span>
+    );
   });
 
   // Using 'justify-content: space-between' we can deal with very narrow mobile screens.

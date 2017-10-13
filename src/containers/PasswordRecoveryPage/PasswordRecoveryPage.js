@@ -68,9 +68,11 @@ export const PasswordRecoveryPageComponent = props => {
     </div>
   );
 
-  const submittedEmailText = passwordRequested
-    ? <span className={css.email}>{initialEmail}</span>
-    : <span className={css.email}>{submittedEmail}</span>;
+  const submittedEmailText = passwordRequested ? (
+    <span className={css.email}>{initialEmail}</span>
+  ) : (
+    <span className={css.email}>{submittedEmail}</span>
+  );
 
   const emailSubmittedContent = (
     <div className={css.emailSubmittedContent}>
@@ -86,12 +88,14 @@ export const PasswordRecoveryPageComponent = props => {
       </p>
       <div className={css.bottomWrapper}>
         <p className={css.helperText}>
-          {recoveryInProgress
-            ? <FormattedMessage id="PasswordRecoveryPage.resendingEmailInfo" />
-            : <FormattedMessage
-                id="PasswordRecoveryPage.resendEmailInfo"
-                values={{ resendEmailLink }}
-              />}
+          {recoveryInProgress ? (
+            <FormattedMessage id="PasswordRecoveryPage.resendingEmailInfo" />
+          ) : (
+            <FormattedMessage
+              id="PasswordRecoveryPage.resendEmailInfo"
+              values={{ resendEmailLink }}
+            />
+          )}
         </p>
         <p className={css.helperText}>
           <FormattedMessage id="PasswordRecoveryPage.fixEmailInfo" values={{ fixEmailLink }} />
@@ -147,9 +151,7 @@ export const PasswordRecoveryPageComponent = props => {
   return (
     <Page authInfoError={authInfoError} logoutError={logoutError} title={title}>
       <TopbarContainer />
-      <div className={css.root}>
-        {content}
-      </div>
+      <div className={css.root}>{content}</div>
     </Page>
   );
 };

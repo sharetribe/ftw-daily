@@ -13,11 +13,7 @@ const Form = props => {
 
     ...restProps,
   };
-  return (
-    <form {...formProps}>
-      {children}
-    </form>
-  );
+  return <form {...formProps}>{children}</form>;
 };
 
 Form.defaultProps = {

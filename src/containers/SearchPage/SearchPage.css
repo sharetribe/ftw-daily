@@ -123,7 +123,6 @@
 }
 
 .mapPanel {
-
   @media (--viewportMedium) {
     /**
      * .container is using flexbox,

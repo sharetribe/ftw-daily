@@ -48,8 +48,9 @@ export const PasswordChangePageComponent = props => {
     },
   ];
 
-  const changePasswordForm = currentUser && currentUser.id
-    ? <PasswordChangeForm
+  const changePasswordForm =
+    currentUser && currentUser.id ? (
+      <PasswordChangeForm
         className={css.form}
         changePasswordError={changePasswordError}
         currentUser={currentUser}
@@ -58,7 +59,7 @@ export const PasswordChangePageComponent = props => {
         inProgress={changePasswordInProgress}
         ready={passwordChanged}
       />
-    : null;
+    ) : null;
 
   return (
     <Page

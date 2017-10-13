@@ -24,7 +24,9 @@ const CurrencyInputWithIntl = ({ locale, ...rest }) => {
     addLocaleData([...fi]);
   }
   return (
-    <IntlProvider locale={locale}><CurrencyInput {...rest} input={{ onChange }} /></IntlProvider>
+    <IntlProvider locale={locale}>
+      <CurrencyInput {...rest} input={{ onChange }} />
+    </IntlProvider>
   );
 };
 

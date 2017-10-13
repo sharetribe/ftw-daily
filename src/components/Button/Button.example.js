@@ -25,21 +25,19 @@ class InteractiveButton extends Component {
       window.clearTimeout(this.inProgressTimeoutId);
       window.clearTimeout(this.readyTimeoutId);
       this.setState({ inProgress: true, disabled: true });
-      this.inProgressTimeoutId = window.setTimeout(
-        () => {
-          this.setState({ inProgress: false, disabled: false, ready: true });
-          this.readyTimeoutId = window.setTimeout(
-            () => {
-              this.setState({ inProgress: false, disabled: false, ready: false });
-            },
-            2000
-          );
-        },
-        2000
-      );
+      this.inProgressTimeoutId = window.setTimeout(() => {
+        this.setState({ inProgress: false, disabled: false, ready: true });
+        this.readyTimeoutId = window.setTimeout(() => {
+          this.setState({ inProgress: false, disabled: false, ready: false });
+        }, 2000);
+      }, 2000);
     };
 
-    return <Button {...this.state} onClick={handleClick}>Click me</Button>;
+    return (
+      <Button {...this.state} onClick={handleClick}>
+        Click me
+      </Button>
+    );
   }
 }
 
@@ -50,7 +48,9 @@ const ButtonsComponent = () => {
       <InteractiveButton />
 
       <h3>Button with a translation:</h3>
-      <Button><span>Clique moi</span></Button>
+      <Button>
+        <span>Clique moi</span>
+      </Button>
 
       <h3>Button with an icon and a text:</h3>
       <Button>
@@ -71,10 +71,14 @@ const ButtonsComponent = () => {
       <Button ready>Click me</Button>
 
       <h3>Default button disabled and in progress:</h3>
-      <Button disabled inProgress>Click me</Button>
+      <Button disabled inProgress>
+        Click me
+      </Button>
 
       <h3>Default button disabled and ready:</h3>
-      <Button disabled ready>Click me</Button>
+      <Button disabled ready>
+        Click me
+      </Button>
 
       <h3>Primary button:</h3>
       <PrimaryButton>Click me</PrimaryButton>
@@ -89,10 +93,14 @@ const ButtonsComponent = () => {
       <PrimaryButton ready>Click me</PrimaryButton>
 
       <h3>Primary button disabled and in progress:</h3>
-      <PrimaryButton disabled inProgress>Click me</PrimaryButton>
+      <PrimaryButton disabled inProgress>
+        Click me
+      </PrimaryButton>
 
       <h3>Primary button disabled and ready:</h3>
-      <PrimaryButton disabled ready>Click me</PrimaryButton>
+      <PrimaryButton disabled ready>
+        Click me
+      </PrimaryButton>
 
       <h3>Secondary button:</h3>
       <SecondaryButton>Click me</SecondaryButton>
@@ -107,19 +115,31 @@ const ButtonsComponent = () => {
       <SecondaryButton ready>Click me</SecondaryButton>
 
       <h3>Secondary button disabled and in progress:</h3>
-      <SecondaryButton disabled inProgress>Click me</SecondaryButton>
+      <SecondaryButton disabled inProgress>
+        Click me
+      </SecondaryButton>
 
       <h3>Secondary button disabled and ready:</h3>
-      <SecondaryButton disabled ready>Click me</SecondaryButton>
+      <SecondaryButton disabled ready>
+        Click me
+      </SecondaryButton>
 
       <h3>Inline text button:</h3>
       <p>
         Lorem ipsum <InlineTextButton>button that looks like link</InlineTextButton> dolor sit amet
       </p>
-      <p>Lorem ipsum <a href="#" onClick={preventDefault}>a normal link</a> dolor sit amet</p>
+      <p>
+        Lorem ipsum{' '}
+        <a href="#" onClick={preventDefault}>
+          a normal link
+        </a>{' '}
+        dolor sit amet
+      </p>
 
       <h3>Link that looks like a default button:</h3>
-      <a className={css.buttonLink} href="#" onClick={preventDefault}>Click me</a>
+      <a className={css.buttonLink} href="#" onClick={preventDefault}>
+        Click me
+      </a>
 
       <h3>Translated link that looks like a default button:</h3>
       <a className={css.buttonLink} href="#" onClick={preventDefault}>
@@ -127,14 +147,17 @@ const ButtonsComponent = () => {
       </a>
 
       <h3>Link that looks like a primary button:</h3>
-      <a className={css.buttonLinkPrimary} href="#" onClick={preventDefault}>Click me</a>
+      <a className={css.buttonLinkPrimary} href="#" onClick={preventDefault}>
+        Click me
+      </a>
 
       <h3>Link that looks like a secondary button:</h3>
-      <a className={css.buttonLinkSecondary} href="#" onClick={preventDefault}>Click me</a>
+      <a className={css.buttonLinkSecondary} href="#" onClick={preventDefault}>
+        Click me
+      </a>
 
       <h3>Button with custom styles:</h3>
       <Button className={css.customButton}>Click me</Button>
-
     </div>
   );
 };

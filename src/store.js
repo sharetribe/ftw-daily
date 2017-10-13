@@ -11,11 +11,12 @@ export default function configureStore(sdk, initialState = {}) {
   const middlewares = [thunk.withExtraArgument(sdk)];
 
   // Enable Redux Devtools in client side dev mode.
-  const composeEnhancers = process.env.NODE_ENV !== 'production' &&
+  const composeEnhancers =
+    process.env.NODE_ENV !== 'production' &&
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : compose;
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      : compose;
 
   const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 

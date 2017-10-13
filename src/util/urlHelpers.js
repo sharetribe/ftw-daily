@@ -3,7 +3,13 @@ import { types } from './sdkLoader';
 
 const { LatLng, LatLngBounds } = types;
 
-export const createSlug = str => encodeURIComponent(str.toLowerCase().split(' ').join('-'));
+export const createSlug = str =>
+  encodeURIComponent(
+    str
+      .toLowerCase()
+      .split(' ')
+      .join('-')
+  );
 
 /**
  * Parse float from a string
@@ -83,22 +89,19 @@ export const decodeLatLngBounds = str => {
 
 // Serialise SDK types in given object values into strings
 const serialiseSdkTypes = obj =>
-  Object.keys(obj).reduce(
-    (result, key) => {
-      const val = obj[key];
-      /* eslint-disable no-param-reassign */
-      if (val instanceof LatLngBounds) {
-        result[key] = encodeLatLngBounds(val);
-      } else if (val instanceof LatLng) {
-        result[key] = encodeLatLng(val);
-      } else {
-        result[key] = val;
-      }
-      /* eslint-enable no-param-reassign */
-      return result;
-    },
-    {}
-  );
+  Object.keys(obj).reduce((result, key) => {
+    const val = obj[key];
+    /* eslint-disable no-param-reassign */
+    if (val instanceof LatLngBounds) {
+      result[key] = encodeLatLngBounds(val);
+    } else if (val instanceof LatLng) {
+      result[key] = encodeLatLng(val);
+    } else {
+      result[key] = val;
+    }
+    /* eslint-enable no-param-reassign */
+    return result;
+  }, {});
 
 /**
  * Serialise given object into a string that can be used in a
@@ -113,18 +116,15 @@ const serialiseSdkTypes = obj =>
  */
 export const stringify = params => {
   const serialised = serialiseSdkTypes(params);
-  const cleaned = Object.keys(serialised).reduce(
-    (result, key) => {
-      const val = serialised[key];
-      /* eslint-disable no-param-reassign */
-      if (val !== null) {
-        result[key] = val;
-      }
-      /* eslint-enable no-param-reassign */
-      return result;
-    },
-    {}
-  );
+  const cleaned = Object.keys(serialised).reduce((result, key) => {
+    const val = serialised[key];
+    /* eslint-disable no-param-reassign */
+    if (val !== null) {
+      result[key] = val;
+    }
+    /* eslint-enable no-param-reassign */
+    return result;
+  }, {});
   return queryString.stringify(cleaned);
 };
 
@@ -148,25 +148,22 @@ export const stringify = params => {
 export const parse = (search, options = {}) => {
   const { latlng = [], latlngBounds = [] } = options;
   const params = queryString.parse(search);
-  return Object.keys(params).reduce(
-    (result, key) => {
-      const val = params[key];
-      /* eslint-disable no-param-reassign */
-      if (latlng.includes(key)) {
-        result[key] = decodeLatLng(val);
-      } else if (latlngBounds.includes(key)) {
-        result[key] = decodeLatLngBounds(val);
-      } else if (val === 'true') {
-        result[key] = true;
-      } else if (val === 'false') {
-        result[key] = false;
-      } else {
-        const num = parseFloatNum(val);
-        result[key] = num === null ? val : num;
-      }
-      /* eslint-enable no-param-reassign */
-      return result;
-    },
-    {}
-  );
+  return Object.keys(params).reduce((result, key) => {
+    const val = params[key];
+    /* eslint-disable no-param-reassign */
+    if (latlng.includes(key)) {
+      result[key] = decodeLatLng(val);
+    } else if (latlngBounds.includes(key)) {
+      result[key] = decodeLatLngBounds(val);
+    } else if (val === 'true') {
+      result[key] = true;
+    } else if (val === 'false') {
+      result[key] = false;
+    } else {
+      const num = parseFloatNum(val);
+      result[key] = num === null ? val : num;
+    }
+    /* eslint-enable no-param-reassign */
+    return result;
+  }, {});
 };

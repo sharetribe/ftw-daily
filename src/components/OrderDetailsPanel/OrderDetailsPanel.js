@@ -11,14 +11,14 @@ import css from './OrderDetailsPanel.css';
 const breakdown = transaction => {
   const loaded = transaction && transaction.id && transaction.booking && transaction.booking.id;
 
-  return loaded
-    ? <BookingBreakdown
-        className={css.receipt}
-        userRole="customer"
-        transaction={transaction}
-        booking={transaction.booking}
-      />
-    : null;
+  return loaded ? (
+    <BookingBreakdown
+      className={css.receipt}
+      userRole="customer"
+      transaction={transaction}
+      booking={transaction.booking}
+    />
+  ) : null;
 };
 
 const orderTitle = (transaction, listingLink, customerName) => {
@@ -114,12 +114,7 @@ const orderMessage = (transaction, listingTitle, providerName) => {
 };
 
 export const OrderDetailsPanelComponent = props => {
-  const {
-    rootClassName,
-    className,
-    transaction,
-    intl,
-  } = props;
+  const { rootClassName, className, transaction, intl } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const currentProvider = ensureUser(currentTransaction.provider);
@@ -168,9 +163,8 @@ export const OrderDetailsPanelComponent = props => {
     ? orderMessageDeletedListing
     : orderMessage(currentTransaction, listingLink, authorDisplayName);
 
-  const firstImage = currentListing.images && currentListing.images.length > 0
-    ? currentListing.images[0]
-    : null;
+  const firstImage =
+    currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
   const classes = classNames(rootClassName || css.root, className);
 
@@ -196,9 +190,7 @@ export const OrderDetailsPanelComponent = props => {
         </div>
         <div className={css.orderInfo}>
           <h1 className={css.heading}>{orderHeading}</h1>
-          <div className={css.message}>
-            {message}
-          </div>
+          <div className={css.message}>{message}</div>
         </div>
         <div className={css.bookingBreakdownContainer}>
           <div className={css.breakdownMobile}>

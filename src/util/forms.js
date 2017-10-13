@@ -38,9 +38,11 @@ export const enhancedField = (Comp, options = {}) => {
       } else {
         component = <input {...otherProps} {...input} type={type} placeholder={placeholder} />;
       }
-      const labelInfo = label
-        ? <label className={labelClassName} htmlFor={input.name}>{label}</label>
-        : null;
+      const labelInfo = label ? (
+        <label className={labelClassName} htmlFor={input.name}>
+          {label}
+        </label>
+      ) : null;
 
       return (
         <div className={rootClassName}>

@@ -68,15 +68,16 @@
 }
 
 /* Typography.example */
-.typographyContent {}
+.typographyContent {
+}
 
 .baselines {
   background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h10M0 06h10M0 12h10" stroke="%23ccc" shape-rendering="crispEdges" /><path d="M0 18h10" stroke="%23ddd" stroke-width="1" shape-rendering="crispEdges" /></svg>');
   background-repeat: repeat;
 
   @media (--viewportMedium) {
-      background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h10" stroke="%23ddd" stroke-width="1" shape-rendering="crispEdges" /><path d="M0 08h10M0 16h10M0" stroke="%23ccc" shape-rendering="crispEdges" /></svg>');
-      background-repeat: repeat;
+    background-image: url('data:image/svg+xml;utf8,<svg width="10" height="24" viewBox="0 0 10 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h10" stroke="%23ddd" stroke-width="1" shape-rendering="crispEdges" /><path d="M0 08h10M0 16h10M0" stroke="%23ccc" shape-rendering="crispEdges" /></svg>');
+    background-repeat: repeat;
   }
 }
 
@@ -110,7 +111,6 @@
     margin-right: calc(2 * var(--spacingUnitDesktop));
     margin-bottom: calc(2 * var(--spacingUnitDesktop) + 2px);
   }
-
 }
 
 .element {

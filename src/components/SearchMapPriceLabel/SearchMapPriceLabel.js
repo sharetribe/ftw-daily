@@ -30,9 +30,8 @@ class SearchMapPriceLabel extends Component {
     const { geolocation, price } = currentListing.attributes;
 
     // Create formatted price if currency is known or alternatively show just the unknown currency.
-    const formattedPrice = price && price.currency === config.currency
-      ? formatMoney(intl, price)
-      : price.currency;
+    const formattedPrice =
+      price && price.currency === config.currency ? formatMoney(intl, price) : price.currency;
 
     // Explicit type change to object literal for Google OverlayViews (geolocation is SDK type)
     const latLngLiteral = { lat: geolocation.lat, lng: geolocation.lng };
@@ -46,9 +45,7 @@ class SearchMapPriceLabel extends Component {
       >
         <button className={classes} onClick={() => onListingClicked(currentListing)}>
           <div className={css.caretShadow} />
-          <div className={css.priceLabel}>
-            {formattedPrice}
-          </div>
+          <div className={css.priceLabel}>{formattedPrice}</div>
           <div className={css.caret} />
         </button>
       </OverlayView>

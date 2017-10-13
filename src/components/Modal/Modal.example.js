@@ -22,9 +22,7 @@ class ModalWrapper extends Component {
   render() {
     return (
       <div>
-        <div style={{ margin: '1rem' }}>
-          Wrapper text before ModalInMobile
-        </div>
+        <div style={{ margin: '1rem' }}>Wrapper text before ModalInMobile</div>
         <Modal
           {...this.props}
           isOpen={this.state.isOpen}

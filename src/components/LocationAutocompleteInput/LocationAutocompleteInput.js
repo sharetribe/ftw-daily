@@ -34,7 +34,8 @@ const Icon = () => (
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M13 14l5.241 5.241" /><circle cx="7.5" cy="7.5" r="7.5" />
+      <path d="M13 14l5.241 5.241" />
+      <circle cx="7.5" cy="7.5" r="7.5" />
     </g>
   </svg>
 );
@@ -84,9 +85,7 @@ const LocationPredictionsList = props => {
 
   return (
     <div className={classes}>
-      <ul className={css.predictions}>
-        {predictions.map(item)}
-      </ul>
+      <ul className={css.predictions}>{predictions.map(item)}</ul>
       <div className={css.poweredByGoogle} />
     </div>
   );
@@ -423,16 +422,16 @@ class LocationAutocompleteInput extends Component {
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
         />
-        {renderPredictions
-          ? <LocationPredictionsList
-              className={predictionsClass}
-              predictions={predictions}
-              highlightedIndex={this.state.highlightedIndex}
-              onSelectStart={this.handlePredictionsSelectStart}
-              onSelectMove={this.handlePredictionsSelectMove}
-              onSelectEnd={this.handlePredictionsSelectEnd}
-            />
-          : null}
+        {renderPredictions ? (
+          <LocationPredictionsList
+            className={predictionsClass}
+            predictions={predictions}
+            highlightedIndex={this.state.highlightedIndex}
+            onSelectStart={this.handlePredictionsSelectStart}
+            onSelectMove={this.handlePredictionsSelectMove}
+            onSelectEnd={this.handlePredictionsSelectEnd}
+          />
+        ) : null}
       </div>
     );
   }
@@ -493,9 +492,11 @@ class LocationAutocompleteInputFieldComponent extends Component {
     const { input, label, meta, ...otherProps } = restProps;
     /* eslint-enable no-unused-vars */
 
-    const labelInfo = label
-      ? <label className={labelClassName} htmlFor={input.name}>{label}</label>
-      : null;
+    const labelInfo = label ? (
+      <label className={labelClassName} htmlFor={input.name}>
+        {label}
+      </label>
+    ) : null;
 
     return (
       <div className={rootClassName}>

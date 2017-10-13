@@ -101,7 +101,8 @@ class TopbarComponent extends Component {
 
     const routes = routeConfiguration();
     const whitelistedPaths = VERIFY_EMAIL_MODAL_WHITELIST.map(page =>
-      pathByRouteName(page, routes));
+      pathByRouteName(page, routes)
+    );
     const isNotWhitelisted = !whitelistedPaths.includes(newLocation.pathname);
 
     // Show reminder
@@ -226,11 +227,11 @@ class TopbarComponent extends Component {
     )
       ? 'Topbar.resendFailedTooManyRequests'
       : 'Topbar.resendFailed';
-    const resendErrorMessage = sendVerificationEmailError
-      ? <p className={css.error}>
-          <FormattedMessage id={resendErrorTranslationId} />
-        </p>
-      : null;
+    const resendErrorMessage = sendVerificationEmailError ? (
+      <p className={css.error}>
+        <FormattedMessage id={resendErrorTranslationId} />
+      </p>
+    ) : null;
     const closeButtonMessage = <FormattedMessage id="Topbar.closeVerifyEmailReminder" />;
 
     const classes = classNames(rootClassName || css.root, className);
@@ -322,15 +323,16 @@ class TopbarComponent extends Component {
 
             <div className={css.bottomWrapper}>
               <p className={css.helperText}>
-                {sendVerificationEmailInProgress
-                  ? <FormattedMessage id="Topbar.sendingEmail" />
-                  : <FormattedMessage id="Topbar.resendEmail" values={{ resendEmailLink }} />}
+                {sendVerificationEmailInProgress ? (
+                  <FormattedMessage id="Topbar.sendingEmail" />
+                ) : (
+                  <FormattedMessage id="Topbar.resendEmail" values={{ resendEmailLink }} />
+                )}
               </p>
               <p className={css.helperText}>
                 <FormattedMessage id="Topbar.fixEmail" values={{ fixEmailLink }} />
               </p>
             </div>
-
           </div>
         </Modal>
       </div>

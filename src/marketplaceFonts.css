@@ -7,11 +7,10 @@
   --fontWeightSemiBold: 600;
   --fontWeightBold: 700;
 
-
-/* ================ Default font ================ */
+  /* ================ Default font ================ */
 
   --marketplaceDefaultFontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 24px;
@@ -24,11 +23,10 @@
     }
   }
 
-
-/* ================ Body font ================ */
+  /* ================ Body font ================ */
 
   --marketplaceBodyFontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 24px;
@@ -46,8 +44,7 @@
     }
   }
 
-
-/* ================ Hero title ================ */
+  /* ================ Hero title ================ */
 
   --marketplaceHeroTitleFontStyles: {
     font-weight: var(--fontWeightBold);
@@ -68,27 +65,25 @@
     }
   }
 
+  /* ================ Modal title ================ */
 
-/* ================ Modal title ================ */
-
---marketplaceModalTitleStyles {
-  font-weight: var(--fontWeightSemiBold);
-  font-size: 30px;
-  line-height: 36px;
-  letter-spacing: -0.5px;
-  margin: 0;
-  font-weight: var(--fontWeightBold);
-
-  @media (--viewportMedium) {
+  --marketplaceModalTitleStyles {
     font-weight: var(--fontWeightSemiBold);
-    line-height: 40px;
-    letter-spacing: -0.9px;
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -0.5px;
     margin: 0;
+    font-weight: var(--fontWeightBold);
+
+    @media (--viewportMedium) {
+      font-weight: var(--fontWeightSemiBold);
+      line-height: 40px;
+      letter-spacing: -0.9px;
+      margin: 0;
+    }
   }
-}
 
-
-/* ================ H1, H2, H3, H4, H5 & H6 ================ */
+  /* ================ H1, H2, H3, H4, H5 & H6 ================ */
 
   --marketplaceH1FontStyles: {
     font-weight: var(--fontWeightBold);
@@ -195,11 +190,10 @@
     }
   }
 
-
-/* ================ Other fonts ================ */
+  /* ================ Other fonts ================ */
 
   --marketplaceTinyFontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
     font-size: 13px;
     line-height: 18px;
@@ -216,8 +210,7 @@
     }
   }
 
-
-/* ================ Tabbed navigation font styles ================ */
+  /* ================ Tabbed navigation font styles ================ */
 
   --marketplaceTabNavFontStyles {
     font-weight: var(--fontWeightMedium);

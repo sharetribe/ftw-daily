@@ -1,7 +1,6 @@
 @import '../../marketplace.css';
 
 :root {
-
   --infoTextStyles: {
     @apply --marketplaceH4FontStyles;
     color: var(--successColor);
@@ -21,7 +20,8 @@
   }
 }
 
-.root {}
+.root {
+}
 
 .emailSection {
   margin-top: 16px;
@@ -144,4 +144,3 @@
     margin: 24px 0;
   }
 }
-

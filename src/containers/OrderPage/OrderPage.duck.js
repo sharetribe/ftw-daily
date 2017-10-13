@@ -46,51 +46,49 @@ const listingRelationship = txResponse => {
   return txResponse.data.data.relationships.listing.data;
 };
 
-export const fetchOrder = id =>
-  (dispatch, getState, sdk) => {
-    dispatch(fetchOrderRequest());
+export const fetchOrder = id => (dispatch, getState, sdk) => {
+  dispatch(fetchOrderRequest());
 
-    let txResponse = null;
+  let txResponse = null;
 
-    return sdk.transactions
-      .show({ id, include: ['customer', 'provider', 'listing', 'booking'] }, { expand: true })
-      .then(response => {
-        txResponse = response;
-        const listingId = listingRelationship(response).id;
-        const entities = updatedEntities({}, response.data);
-        const denormalised = denormalisedEntities(entities, 'listing', [listingId]);
-        const listing = denormalised[0];
+  return sdk.transactions
+    .show({ id, include: ['customer', 'provider', 'listing', 'booking'] }, { expand: true })
+    .then(response => {
+      txResponse = response;
+      const listingId = listingRelationship(response).id;
+      const entities = updatedEntities({}, response.data);
+      const denormalised = denormalisedEntities(entities, 'listing', [listingId]);
+      const listing = denormalised[0];
 
-        const canFetchListing = listing && listing.attributes && !listing.attributes.deleted;
+      const canFetchListing = listing && listing.attributes && !listing.attributes.deleted;
 
-        if (canFetchListing) {
-          return sdk.listings.show({
-            id: listingId,
-            include: ['author', 'author.profileImage', 'images'],
-          });
-        } else {
-          return response;
-        }
-      })
-      .then(response => {
-        dispatch(addMarketplaceEntities(txResponse));
-        dispatch(addMarketplaceEntities(response));
-        dispatch(fetchOrderSuccess(txResponse));
-
+      if (canFetchListing) {
+        return sdk.listings.show({
+          id: listingId,
+          include: ['author', 'author.profileImage', 'images'],
+        });
+      } else {
         return response;
-      })
-      .catch(e => {
-        dispatch(fetchOrderError(e));
-        throw e;
-      });
-  };
+      }
+    })
+    .then(response => {
+      dispatch(addMarketplaceEntities(txResponse));
+      dispatch(addMarketplaceEntities(response));
+      dispatch(fetchOrderSuccess(txResponse));
+
+      return response;
+    })
+    .catch(e => {
+      dispatch(fetchOrderError(e));
+      throw e;
+    });
+};
 
 // loadData is a collection of async calls that need to be made
 // before page has all the info it needs to render itself
-export const loadData = params =>
-  dispatch => {
-    const orderId = new types.UUID(params.id);
+export const loadData = params => dispatch => {
+  const orderId = new types.UUID(params.id);
 
-    // Order (i.e. transaction entity in API, but from buyers perspective) contains order details
-    return dispatch(fetchOrder(orderId));
-  };
+  // Order (i.e. transaction entity in API, but from buyers perspective) contains order details
+  return dispatch(fetchOrder(orderId));
+};

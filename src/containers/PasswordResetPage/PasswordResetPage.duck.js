@@ -40,12 +40,15 @@ export const resetPasswordError = e => ({
 
 // ================ Thunks ================ //
 
-export const resetPassword = (email, passwordResetToken, newPassword) =>
-  (dispatch, getState, sdk) => {
-    dispatch(resetPasswordRequest());
-    const params = { email, passwordResetToken, newPassword };
-    return sdk.passwordReset
-      .reset(params)
-      .then(() => dispatch(resetPasswordSuccess()))
-      .catch(e => dispatch(resetPasswordError(e)));
-  };
+export const resetPassword = (email, passwordResetToken, newPassword) => (
+  dispatch,
+  getState,
+  sdk
+) => {
+  dispatch(resetPasswordRequest());
+  const params = { email, passwordResetToken, newPassword };
+  return sdk.passwordReset
+    .reset(params)
+    .then(() => dispatch(resetPasswordSuccess()))
+    .catch(e => dispatch(resetPasswordError(e)));
+};

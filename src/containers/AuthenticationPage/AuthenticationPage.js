@@ -85,14 +85,16 @@ export const AuthenticationPageComponent = props => {
 
   const signupErrorMessage = (
     <div className={css.error}>
-      {isSignupEmailTakenError(signupError)
-        ? <FormattedMessage id="AuthenticationPage.signupFailedEmailAlreadyTaken" />
-        : <FormattedMessage id="AuthenticationPage.signupFailed" />}
+      {isSignupEmailTakenError(signupError) ? (
+        <FormattedMessage id="AuthenticationPage.signupFailedEmailAlreadyTaken" />
+      ) : (
+        <FormattedMessage id="AuthenticationPage.signupFailed" />
+      )}
     </div>
   );
 
   // eslint-disable-next-line no-confusing-arrow
-  const errorMessage = (error, message) => error ? message : null;
+  const errorMessage = (error, message) => (error ? message : null);
   const loginOrSignupError = isLogin
     ? errorMessage(loginError, loginErrorMessage)
     : errorMessage(signupError, signupErrorMessage);
@@ -102,7 +104,9 @@ export const AuthenticationPageComponent = props => {
   const tabs = [
     {
       text: (
-        <h1 className={css.tab}><FormattedMessage id="AuthenticationPage.signupLinkText" /></h1>
+        <h1 className={css.tab}>
+          <FormattedMessage id="AuthenticationPage.signupLinkText" />
+        </h1>
       ),
       selected: !isLogin,
       linkProps: {
@@ -111,7 +115,11 @@ export const AuthenticationPageComponent = props => {
       },
     },
     {
-      text: <h1 className={css.tab}><FormattedMessage id="AuthenticationPage.loginLinkText" /></h1>,
+      text: (
+        <h1 className={css.tab}>
+          <FormattedMessage id="AuthenticationPage.loginLinkText" />
+        </h1>
+      ),
       selected: isLogin,
       linkProps: {
         name: 'LoginPage',
@@ -124,9 +132,11 @@ export const AuthenticationPageComponent = props => {
     <div className={css.content}>
       <TabNavHorizontal className={css.tabs} tabs={tabs} />
       {loginOrSignupError}
-      {isLogin
-        ? <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
-        : <SignupForm className={css.form} onSubmit={submitSignup} inProgress={authInProgress} />}
+      {isLogin ? (
+        <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
+      ) : (
+        <SignupForm className={css.form} onSubmit={submitSignup} inProgress={authInProgress} />
+      )}
     </div>
   );
 
@@ -149,11 +159,11 @@ export const AuthenticationPageComponent = props => {
   )
     ? 'AuthenticationPage.resendFailedTooManyRequests'
     : 'AuthenticationPage.resendFailed';
-  const resendErrorMessage = sendVerificationEmailError
-    ? <p className={css.error}>
-        <FormattedMessage id={resendErrorTranslationId} />
-      </p>
-    : null;
+  const resendErrorMessage = sendVerificationEmailError ? (
+    <p className={css.error}>
+      <FormattedMessage id={resendErrorTranslationId} />
+    </p>
+  ) : null;
 
   const emailVerificationContent = (
     <div className={css.content}>
@@ -174,15 +184,16 @@ export const AuthenticationPageComponent = props => {
 
       <div className={css.bottomWrapper}>
         <p className={css.modalHelperText}>
-          {sendVerificationEmailInProgress
-            ? <FormattedMessage id="AuthenticationPage.sendingEmail" />
-            : <FormattedMessage id="AuthenticationPage.resendEmail" values={{ resendEmailLink }} />}
+          {sendVerificationEmailInProgress ? (
+            <FormattedMessage id="AuthenticationPage.sendingEmail" />
+          ) : (
+            <FormattedMessage id="AuthenticationPage.resendEmail" values={{ resendEmailLink }} />
+          )}
         </p>
         <p className={css.modalHelperText}>
           <FormattedMessage id="AuthenticationPage.fixEmail" values={{ fixEmailLink }} />
         </p>
       </div>
-
     </div>
   );
 
@@ -243,11 +254,7 @@ AuthenticationPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { authInfoError, isAuthenticated, loginError, logoutError, signupError } = state.Auth;
-  const {
-    currentUser,
-    sendVerificationEmailInProgress,
-    sendVerificationEmailError,
-  } = state.user;
+  const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
   return {
     authInfoError,
     authInProgress: authenticationInProgress(state),

@@ -33,9 +33,10 @@ const stripeErrorTranslation = (intl, stripeError) => {
     return intl.formatMessage({ id: 'StripePaymentForm.genericError' });
   }
 
-  const translationId = type === 'validation_error'
-    ? `StripePaymentForm.stripe.validation_error.${code}`
-    : `StripePaymentForm.stripe.${type}`;
+  const translationId =
+    type === 'validation_error'
+      ? `StripePaymentForm.stripe.validation_error.${code}`
+      : `StripePaymentForm.stripe.${type}`;
 
   return intl.formatMessage({
     id: translationId,
@@ -48,7 +49,8 @@ const stripeElementsOptions = {
     {
       family: 'sofiapro',
       fontSmoothing: 'antialiased',
-      src: 'local("sofiapro"), local("SofiaPro"), local("Sofia Pro"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2") format("woff2")',
+      src:
+        'local("sofiapro"), local("SofiaPro"), local("Sofia Pro"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2") format("woff2")',
     },
   ],
 };

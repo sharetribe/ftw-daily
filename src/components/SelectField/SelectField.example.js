@@ -23,7 +23,9 @@ const FormComponent = props => {
         <option value="first">First option</option>
         <option value="second">Second option</option>
       </SelectField>
-      <Button style={{ marginTop: 24 }} type="submit" disabled={submitDisabled}>Submit</Button>
+      <Button style={{ marginTop: 24 }} type="submit" disabled={submitDisabled}>
+        Submit
+      </Button>
     </form>
   );
 };

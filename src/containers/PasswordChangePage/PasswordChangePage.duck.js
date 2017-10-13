@@ -51,18 +51,17 @@ export const changePasswordClear = () => ({ type: CHANGE_PASSWORD_CLEAR });
 
 // ================ Thunks ================ //
 
-export const changePassword = params =>
-  (dispatch, getState, sdk) => {
-    dispatch(changePasswordRequest());
-    const { newPassword, currentPassword } = params;
+export const changePassword = params => (dispatch, getState, sdk) => {
+  dispatch(changePasswordRequest());
+  const { newPassword, currentPassword } = params;
 
-    return sdk.currentUser
-      .changePassword({ newPassword, currentPassword })
-      .then(() => dispatch(changePasswordSuccess()))
-      .catch(e => {
-        dispatch(changePasswordError(e));
-        // This is thrown so that form can be cleared
-        // after a timeout on changePassword submit handler
-        throw e;
-      });
-  };
+  return sdk.currentUser
+    .changePassword({ newPassword, currentPassword })
+    .then(() => dispatch(changePasswordSuccess()))
+    .catch(e => {
+      dispatch(changePasswordError(e));
+      // This is thrown so that form can be cleared
+      // after a timeout on changePassword submit handler
+      throw e;
+    });
+};

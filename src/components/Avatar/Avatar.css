@@ -7,20 +7,19 @@
 
   /* Base for all avatars */
   --avatarBase: {
-      font-family: "sofiapro", Helvetica, Arial, sans-serif;
-      border-radius: 50%;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    border-radius: 50%;
 
-      /* Position possible initials to the center of the component */
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* Position possible initials to the center of the component */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-      /* Colors */
-      background-image: linear-gradient(-180deg, #E16B56 0%, #C0392B 100%);
-      color: var(--matterColorLight);
+    /* Colors */
+    background-image: linear-gradient(-180deg, #e16b56 0%, #c0392b 100%);
+    color: var(--matterColorLight);
   }
 }
-
 
 /* Small Avatar */
 
@@ -47,7 +46,6 @@
   border-radius: inherit;
 }
 
-
 /* Medium Avatar */
 
 .mediumAvatar {
@@ -63,7 +61,6 @@
   font-weight: var(--fontWeightSemiBold);
   padding-bottom: 5px;
 }
-
 
 /* Large Avatar */
 

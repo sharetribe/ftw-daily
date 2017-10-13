@@ -74,7 +74,6 @@
   }
 }
 
-
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
   padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
@@ -133,19 +132,19 @@
   transition: var(--transitionStyleButton);
 
   &:hover {
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
   }
 }
 
 .listingMenuIsOpen {
   & .iconWrapper {
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     color: var(--matterColorLight);
   }
 }
 
 .menuContent {
-  visibility:hidden;
+  visibility: hidden;
   opacity: 0;
   pointer-events: none;
 
@@ -235,7 +234,6 @@
     margin-bottom: 0;
   }
 }
-
 
 .mainInfo {
   display: flex;

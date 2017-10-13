@@ -33,12 +33,9 @@ class ContactDetailsFormComponent extends Component {
 
     this.props.onResendVerificationEmail().then(() => {
       // show "verification email sent" text for a bit longer.
-      this.emailSentTimeoutId = window.setTimeout(
-        () => {
-          this.setState({ showVerificationEmailSentMessage: false });
-        },
-        SHOW_EMAIL_SENT_TIMEOUT
-      );
+      this.emailSentTimeoutId = window.setTimeout(() => {
+        this.setState({ showVerificationEmailSentMessage: false });
+      }, SHOW_EMAIL_SENT_TIMEOUT);
     });
   }
 
@@ -196,11 +193,12 @@ class ContactDetailsFormComponent extends Component {
       [css.confirmChangesSectionVisible]: !pristine,
     });
 
-    const genericFailure = changeEmailError && !(emailTakenErrorText || passwordErrorText)
-      ? <span className={css.error}>
+    const genericFailure =
+      changeEmailError && !(emailTakenErrorText || passwordErrorText) ? (
+        <span className={css.error}>
           <FormattedMessage id="ContactDetailsForm.genericFailure" />
         </span>
-      : null;
+      ) : null;
 
     const classes = classNames(rootClassName || css.root, className);
     const submitDisabled = invalid || submitting || inProgress;

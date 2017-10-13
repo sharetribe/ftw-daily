@@ -19,9 +19,8 @@ const canShowComponent = props => {
 const callLoadData = props => {
   const { match, location, route, dispatch, logoutInProgress } = props;
   const { loadData, name } = route;
-  const shouldLoadData = typeof loadData === 'function' &&
-    canShowComponent(props) &&
-    !logoutInProgress;
+  const shouldLoadData =
+    typeof loadData === 'function' && canShowComponent(props) && !logoutInProgress;
 
   if (shouldLoadData) {
     dispatch(loadData(match.params, location.search))
@@ -55,12 +54,14 @@ class RouteComponentRenderer extends Component {
     if (!canShow) {
       staticContext.unauthorized = true;
     }
-    return canShow
-      ? <RouteComponent params={match.params} location={location} />
-      : <NamedRedirect
-          name={authPage}
-          state={{ from: `${location.pathname}${location.search}${location.hash}` }}
-        />;
+    return canShow ? (
+      <RouteComponent params={match.params} location={location} />
+    ) : (
+      <NamedRedirect
+        name={authPage}
+        state={{ from: `${location.pathname}${location.search}${location.hash}` }}
+      />
+    );
   }
 }
 

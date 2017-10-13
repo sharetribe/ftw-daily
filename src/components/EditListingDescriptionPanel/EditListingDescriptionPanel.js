@@ -25,21 +25,22 @@ const EditListingDescriptionPanel = props => {
   const currentListing = ensureListing(listing);
   const { description, title } = currentListing.attributes;
   const listingTitle = title || '';
-  const listingLink = currentListing.id
-    ? <NamedLink
-        name="ListingPage"
-        params={{ id: currentListing.id.uuid, slug: createSlug(title) }}
-      >
-        {listingTitle}
-      </NamedLink>
-    : '';
+  const listingLink = currentListing.id ? (
+    <NamedLink name="ListingPage" params={{ id: currentListing.id.uuid, slug: createSlug(title) }}>
+      {listingTitle}
+    </NamedLink>
+  ) : (
+    ''
+  );
 
-  const panelTitle = currentListing.id
-    ? <FormattedMessage
-        id="EditListingDescriptionPanel.title"
-        values={{ listingTitle: listingLink }}
-      />
-    : <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />;
+  const panelTitle = currentListing.id ? (
+    <FormattedMessage
+      id="EditListingDescriptionPanel.title"
+      values={{ listingTitle: listingLink }}
+    />
+  ) : (
+    <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
+  );
 
   return (
     <div className={classes}>

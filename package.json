@@ -36,7 +36,8 @@
     "redux-thunk": "^2.2.0",
     "sanitize.css": "^5.0.0",
     "sharetribe-scripts": "1.0.14",
-    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#acec122c4c1279bfecb411b027f7bb8928b6b44b",
+    "sharetribe-sdk":
+      "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#acec122c4c1279bfecb411b027f7bb8928b6b44b",
     "source-map-support": "^0.4.15",
     "url": "^0.11.0"
   },
@@ -58,7 +59,8 @@
     "test-ci": "sharetribe-scripts test --env=jsdom --runInBand",
     "eject": "sharetribe-scripts eject",
     "start": "node server/index.js",
-    "dev-server": "REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000 yarn run build&&nodemon --watch server server/index.js",
+    "dev-server":
+      "REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000 yarn run build&&nodemon --watch server server/index.js",
     "heroku-prebuild": "./heroku-copy-ssh-key-from-env.sh",
     "heroku-postbuild": "yarn run build"
   },

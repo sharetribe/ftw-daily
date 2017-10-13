@@ -1,7 +1,6 @@
 @import '../../marketplace.css';
 
 .fieldRoot {
-
 }
 
 .labels {
@@ -92,7 +91,6 @@
     width: 100%;
     margin: 0;
 
-
     /* Gutter between inputs (when calendar is not visible) */
     & .startDateLabel,
     & .endDateLabel {
@@ -103,7 +101,5 @@
       flex-basis: calc(50% - 12px);
       transition: all 0.15s ease-out;
     }
-
   }
-
 }

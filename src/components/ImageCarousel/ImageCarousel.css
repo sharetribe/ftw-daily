@@ -11,7 +11,7 @@
   padding: 0;
 
   @media (--viewportMedium) {
-    padding: var(--verticalPadding) 10vw;;
+    padding: var(--verticalPadding) 10vw;
   }
 }
 
@@ -24,7 +24,6 @@
 }
 
 .imageIndex {
-
   /* Fonts */
   @apply --marketplaceH4FontStyles;
   font-weight: var(--fontWeightSemiBold);
@@ -46,7 +45,6 @@
 
 .prev,
 .next {
-
   /* Position and dimensions */
   position: absolute;
   top: 0;
@@ -84,7 +82,6 @@
   @media (--viewportMedium) {
     background-position: center left 5vw;
     background-image: url('data:image/svg+xml;utf8,<svg width="20" height="31" viewBox="0 0 20 31" xmlns="http://www.w3.org/2000/svg"><path d="M18.6667957 0c.37866928 0 .75333854.1550012 1.0186737.4585452.47466996.5425042.4040028 1.3575521-.1573344 1.8199723L3.3986902 15.5001192 19.528135 28.72172085c.5613372.46242022.63200436 1.27746815.1573344 1.821264-.47733663.54508752-1.31734243.61096303-1.880013.15241784L.4720033 16.4869601C.1720012 16.2402499 0 15.8798721 0 15.5001192c0-.3797529.1720012-.7401307.4720033-.9868409L17.8054564.3048357C18.0561248.1007508 18.3627936 0 18.6667957 0" fill="%23FFF" fill-rule="evenodd"/></svg>');
-
   }
 }
 

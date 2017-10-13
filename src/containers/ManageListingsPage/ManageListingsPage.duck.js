@@ -232,52 +232,49 @@ export const queryListingsError = e => ({
 });
 
 // Throwing error for new (loadData may need that info)
-export const queryOwnListings = queryParams =>
-  (dispatch, getState, sdk) => {
-    dispatch(queryListingsRequest(queryParams));
+export const queryOwnListings = queryParams => (dispatch, getState, sdk) => {
+  dispatch(queryListingsRequest(queryParams));
 
-    const { include = [], page, perPage } = queryParams;
+  const { include = [], page, perPage } = queryParams;
 
-    // TODO: API can't handle camelCase request parameter yet.
-    return sdk.listings
-      .queryOwn({ include, page, per_page: perPage })
-      .then(response => {
-        dispatch(addOwnEntities(response));
-        dispatch(queryListingsSuccess(response));
-        return response;
-      })
-      .catch(e => {
-        dispatch(queryListingsError(e));
-        throw e;
-      });
-  };
+  // TODO: API can't handle camelCase request parameter yet.
+  return sdk.listings
+    .queryOwn({ include, page, per_page: perPage })
+    .then(response => {
+      dispatch(addOwnEntities(response));
+      dispatch(queryListingsSuccess(response));
+      return response;
+    })
+    .catch(e => {
+      dispatch(queryListingsError(e));
+      throw e;
+    });
+};
 
-export const closeListing = listingId =>
-  (dispatch, getState, sdk) => {
-    dispatch(closeListingRequest(listingId));
+export const closeListing = listingId => (dispatch, getState, sdk) => {
+  dispatch(closeListingRequest(listingId));
 
-    return sdk.listings
-      .close({ id: listingId }, { expand: true })
-      .then(response => {
-        dispatch(closeListingSuccess(response));
-        return response;
-      })
-      .catch(e => {
-        dispatch(closeListingError(e));
-      });
-  };
+  return sdk.listings
+    .close({ id: listingId }, { expand: true })
+    .then(response => {
+      dispatch(closeListingSuccess(response));
+      return response;
+    })
+    .catch(e => {
+      dispatch(closeListingError(e));
+    });
+};
 
-export const openListing = listingId =>
-  (dispatch, getState, sdk) => {
-    dispatch(openListingRequest(listingId));
+export const openListing = listingId => (dispatch, getState, sdk) => {
+  dispatch(openListingRequest(listingId));
 
-    return sdk.listings
-      .open({ id: listingId }, { expand: true })
-      .then(response => {
-        dispatch(openListingSuccess(response));
-        return response;
-      })
-      .catch(e => {
-        dispatch(openListingError(e));
-      });
-  };
+  return sdk.listings
+    .open({ id: listingId }, { expand: true })
+    .then(response => {
+      dispatch(openListingSuccess(response));
+      return response;
+    })
+    .catch(e => {
+      dispatch(openListingError(e));
+    });
+};

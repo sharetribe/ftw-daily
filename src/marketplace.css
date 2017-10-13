@@ -1,9 +1,8 @@
-@import "./marketplaceFonts.css";
+@import './marketplaceFonts.css';
 
 /* ================ Custom properties aka variables ================ */
 
 :root {
-
   /**
    * Font variables are separated to different file so that the amount of font styling rules
    * doesn't overflow this one.
@@ -13,11 +12,9 @@
 
   /* Full screen Background image located in root-folder/src/assets */
   --backgroundImage: {
-
     /* Gradient direction and overlaying the black color on top of the image for better readability */
-    background:
-      linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
-      url("../../assets/background.jpg");
+    background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
+      url('../../assets/background.jpg');
 
     /* Add loading color for the div */
     background-color: var(--matterColor);
@@ -29,31 +26,27 @@
     background-position: center center;
   }
 
+  /* ================ Colors ================ */
 
+  --marketplaceColor: #c0392b;
+  --marketplaceColorLight: #ff4c38;
+  --marketplaceColorDark: #8c291e;
 
-/* ================ Colors ================ */
-
-  --marketplaceColor: #C0392B;
-  --marketplaceColorLight: #FF4C38;
-  --marketplaceColorDark: #8C291E;
-
-  --successColor: #2ECC71;
+  --successColor: #2ecc71;
   --successColorDark: #239954;
-  --failColor: #FF0000;
-  --attentionColor: #FFAA00;
+  --failColor: #ff0000;
+  --attentionColor: #ffaa00;
 
   --matterColorDark: #000000;
-  --matterColor: #4A4A4A;
-  --matterColorAnti: #B2B2B2;
-  --matterColorNegative: #E7E7E7;
-  --matterColorBright: #FCFCFC;
-  --matterColorLight: #FFFFFF;
+  --matterColor: #4a4a4a;
+  --matterColorAnti: #b2b2b2;
+  --matterColorNegative: #e7e7e7;
+  --matterColorBright: #fcfcfc;
+  --matterColorLight: #ffffff;
 
-  --matterColorLightTransparent: rgba(255,255,255,0.65);
+  --matterColorLightTransparent: rgba(255, 255, 255, 0.65);
 
-
-
-/* ================ Spacing unites ================ */
+  /* ================ Spacing unites ================ */
 
   /* Multiples of mobile and desktop spacing units should be used with margins and paddings. */
   --spacingUnit: 6px;
@@ -66,13 +59,11 @@
   --boxShadowPopup: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
   --boxShadowPopupLight: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
   --boxShadowBreakdown: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
-  --boxShadowButton: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
-  --boxShadowListingCard: 0 0 50px 0 rgba(0,0,0,0.1);
+  --boxShadowButton: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  --boxShadowListingCard: 0 0 50px 0 rgba(0, 0, 0, 0.1);
   --boxShadowNotFoundPageSearch: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
 
-
-
-/* ================ Z-index base levels ================ */
+  /* ================ Z-index base levels ================ */
 
   /* topbar is positioned slightly above content */
   --zIndexTopbar: 10;
@@ -81,38 +72,29 @@
   /* modals and UI overlays should use z-indexes above 100 */
   --zIndexModal: 100;
 
-
-
-/* ================ Border radius ================ */
+  /* ================ Border radius ================ */
 
   --borderRadius: 2px;
   --borderRadiusMobileSearch: 3px;
 
-
-
-/* ================ Transition styles ================ */
+  /* ================ Transition styles ================ */
 
   --transitionStyle: ease-in 0.2s;
   --transitionStyleButton: ease-in-out 0.1s;
 
-
-
-/* ================ Topbar heights ================ */
+  /* ================ Topbar heights ================ */
 
   --topbarHeight: 60px;
   --topbarHeightDesktop: 72px;
 
-
-/* ================ Modal default padding ================ */
+  /* ================ Modal default padding ================ */
 
   --modalPadding: 24px 24px 48px 24px;
   --modalPaddingMedium: 55px 60px 55px 60px;
 
-
-/* ================ Links ================ */
+  /* ================ Links ================ */
 
   --marketplaceLinkStyles: {
-
     /* Position and dimensions */
     display: inline;
     margin: 0;
@@ -133,12 +115,10 @@
     }
   }
 
-
-
-/* ================ Buttons ================ */
+  /* ================ Buttons ================ */
 
   --marketplaceButtonFontStyles: {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 18px;
     line-height: 24px;
@@ -232,12 +212,9 @@
     }
   }
 
-
-
-/* ================ Inputs ================ */
+  /* ================ Inputs ================ */
 
   --marketplaceInputStyles: {
-
     /* Dimensions */
     display: block;
     width: 100%;
@@ -271,7 +248,6 @@
   }
 
   --marketplaceSelectStyles: {
-
     /* Dimensions */
     display: block;
     width: 100%;
@@ -305,10 +281,7 @@
     }
   }
 
-
-
-
-/* ================ Modals ================ */
+  /* ================ Modals ================ */
 
   --marketplaceModalRootStyles {
     /* Page is using flex: AuthenticationPage's .root takes all available space */
@@ -401,7 +374,6 @@
     }
   }
 
-
   /* Modal message */
 
   --marketplaceModalParagraphStyles {
@@ -411,7 +383,6 @@
       margin: 24px 0 0 0;
     }
   }
-
 
   /* Bottom wrapper for the modal */
 
@@ -458,7 +429,6 @@
   /* Modal Close icon */
 
   --marketplaceModalCloseStyles {
-
     /* Position inside modal */
     position: absolute;
     top: 0;
@@ -549,8 +519,6 @@
     }
   }
 }
-
-
 
 /* ================ Custom media queries ================ */
 

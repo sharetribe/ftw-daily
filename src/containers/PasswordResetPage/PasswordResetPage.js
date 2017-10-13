@@ -71,11 +71,11 @@ export class PasswordResetPageComponent extends Component {
         <p className={css.modalMessage}>
           <FormattedMessage id="PasswordResetPage.helpText" />
         </p>
-        {resetPasswordError
-          ? <p className={css.error}>
-              <FormattedMessage id="PasswordResetPage.resetFailed" />
-            </p>
-          : null}
+        {resetPasswordError ? (
+          <p className={css.error}>
+            <FormattedMessage id="PasswordResetPage.resetFailed" />
+          </p>
+        ) : null}
         <PasswordResetForm
           className={css.form}
           onSubmit={handleSubmit}
@@ -117,9 +117,7 @@ export class PasswordResetPageComponent extends Component {
         scrollingDisabled={scrollingDisabled}
       >
         <TopbarContainer />
-        <div className={css.root}>
-          {content}
-        </div>
+        <div className={css.root}>{content}</div>
       </Page>
     );
   }

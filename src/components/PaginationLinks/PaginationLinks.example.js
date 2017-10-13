@@ -27,9 +27,7 @@ const Pagination = props => {
   return (
     <div>
       <pre>
-        <code>
-          {JSON.stringify(pagination, null, '  ')}
-        </code>
+        <code>{JSON.stringify(pagination, null, '  ')}</code>
       </pre>
       <PaginationLinks {...linkProps} />
     </div>
