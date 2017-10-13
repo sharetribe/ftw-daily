@@ -143,14 +143,14 @@ export const booking = shape({
 // provider sees the transaction in the SalePage.
 export const TX_TRANSITION_PREAUTHORIZE = 'transition/preauthorize';
 
-// When the provider accepts or rejects a transaction from the
-// SalePage, it is transitioned with the accept or reject transition.
+// When the provider accepts or declines a transaction from the
+// SalePage, it is transitioned with the accept or decline transition.
 export const TX_TRANSITION_ACCEPT = 'transition/accept';
-export const TX_TRANSITION_REJECT = 'transition/reject';
+export const TX_TRANSITION_DECLINE = 'transition/decline';
 
-// If the backend automatically rejects the transaction, it is
-// transitioned with the auto-reject transition.
-export const TX_TRANSITION_AUTO_REJECT = 'transition/auto-reject';
+// If the backend automatically declines the transaction, it is
+// transitioned with the auto-decline transition.
+export const TX_TRANSITION_AUTO_DECLINE = 'transition/auto-decline';
 
 // Admin can also cancel the transition.
 export const TX_TRANSITION_CANCEL = 'transition/cancel';
@@ -162,8 +162,8 @@ export const TX_TRANSITION_MARK_DELIVERED = 'transition/mark-delivered';
 export const TX_TRANSITIONS = [
   TX_TRANSITION_PREAUTHORIZE,
   TX_TRANSITION_ACCEPT,
-  TX_TRANSITION_REJECT,
-  TX_TRANSITION_AUTO_REJECT,
+  TX_TRANSITION_DECLINE,
+  TX_TRANSITION_AUTO_DECLINE,
   TX_TRANSITION_CANCEL,
   TX_TRANSITION_MARK_DELIVERED,
 ];
@@ -174,11 +174,11 @@ export const txIsPreauthorized = tx => txLastTransition(tx) === TX_TRANSITION_PR
 
 export const txIsAccepted = tx => txLastTransition(tx) === TX_TRANSITION_ACCEPT;
 
-export const txIsRejected = tx => txLastTransition(tx) === TX_TRANSITION_REJECT;
+export const txIsDeclined = tx => txLastTransition(tx) === TX_TRANSITION_DECLINE;
 
-export const txIsAutorejected = tx => txLastTransition(tx) === TX_TRANSITION_AUTO_REJECT;
+export const txIsAutodeclined = tx => txLastTransition(tx) === TX_TRANSITION_AUTO_DECLINE;
 
-export const txIsRejectedOrAutorejected = tx => txIsRejected(tx) || txIsAutorejected(tx);
+export const txIsDeclinedOrAutodeclined = tx => txIsDeclined(tx) || txIsAutodeclined(tx);
 
 export const txIsCanceled = tx => txLastTransition(tx) === TX_TRANSITION_CANCEL;
 

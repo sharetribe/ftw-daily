@@ -43,17 +43,17 @@ const saleTitle = (transaction, listingLink, customerName) => {
         values={{ customerName, listingLink }}
       />
     );
-  } else if (propTypes.txIsRejected(transaction)) {
+  } else if (propTypes.txIsDeclined(transaction)) {
     return (
       <FormattedMessage
-        id="SaleDetailsPanel.listingRejectedTitle"
+        id="SaleDetailsPanel.listingDeclinedTitle"
         values={{ customerName, listingLink }}
       />
     );
-  } else if (propTypes.txIsAutorejected(transaction)) {
+  } else if (propTypes.txIsAutodeclined(transaction)) {
     return (
       <FormattedMessage
-        id="SaleDetailsPanel.listingRejectedTitle"
+        id="SaleDetailsPanel.listingDeclinedTitle"
         values={{ customerName, listingLink }}
       />
     );
@@ -92,11 +92,11 @@ const saleMessage = (transaction, customerName) => {
     return <FormattedMessage id="SaleDetailsPanel.saleRequestedStatus" values={{ customerName }} />;
   } else if (propTypes.txIsAccepted(transaction)) {
     return <FormattedMessage id="SaleDetailsPanel.saleAcceptedStatus" values={{ formattedDate }} />;
-  } else if (propTypes.txIsRejected(transaction)) {
-    return <FormattedMessage id="SaleDetailsPanel.saleRejectedStatus" values={{ formattedDate }} />;
-  } else if (propTypes.txIsAutorejected(transaction)) {
+  } else if (propTypes.txIsDeclined(transaction)) {
+    return <FormattedMessage id="SaleDetailsPanel.saleDeclinedStatus" values={{ formattedDate }} />;
+  } else if (propTypes.txIsAutodeclined(transaction)) {
     return (
-      <FormattedMessage id="SaleDetailsPanel.saleAutoRejectedStatus" values={{ formattedDate }} />
+      <FormattedMessage id="SaleDetailsPanel.saleAutoDeclinedStatus" values={{ formattedDate }} />
     );
   } else if (propTypes.txIsCanceled(transaction)) {
     return <FormattedMessage id="SaleDetailsPanel.saleCanceledStatus" values={{ formattedDate }} />;
@@ -115,11 +115,11 @@ export const SaleDetailsPanelComponent = props => {
     className,
     transaction,
     onAcceptSale,
-    onRejectSale,
+    onDeclineSale,
     acceptInProgress,
-    rejectInProgress,
+    declineInProgress,
     acceptSaleError,
-    rejectSaleError,
+    declineSaleError,
     intl,
   } = props;
   const currentTransaction = ensureTransaction(transaction);
@@ -161,16 +161,16 @@ export const SaleDetailsPanelComponent = props => {
     : null;
 
   const canShowButtons = propTypes.txIsPreauthorized(currentTransaction) && !isCustomerBanned;
-  const buttonsDisabled = acceptInProgress || rejectInProgress;
+  const buttonsDisabled = acceptInProgress || declineInProgress;
 
   const acceptErrorMessage = acceptSaleError
     ? <p className={css.error}>
         <FormattedMessage id="SaleDetailsPanel.acceptSaleFailed" />
       </p>
     : null;
-  const rejectErrorMessage = rejectSaleError
+  const declineErrorMessage = declineSaleError
     ? <p className={css.error}>
-        <FormattedMessage id="SaleDetailsPanel.rejectSaleFailed" />
+        <FormattedMessage id="SaleDetailsPanel.declineSaleFailed" />
       </p>
     : null;
 
@@ -178,15 +178,15 @@ export const SaleDetailsPanelComponent = props => {
     ? <div className={css.actionButtons}>
         <div className={css.errorDesktop}>
           {acceptErrorMessage}
-          {rejectErrorMessage}
+          {declineErrorMessage}
         </div>
         <SecondaryButton
-          className={css.rejectButton}
-          inProgress={rejectInProgress}
+          className={css.declineButton}
+          inProgress={declineInProgress}
           disabled={buttonsDisabled}
-          onClick={() => onRejectSale(currentTransaction.id)}
+          onClick={() => onDeclineSale(currentTransaction.id)}
         >
-          <FormattedMessage id="SalePage.rejectButton" />
+          <FormattedMessage id="SalePage.declineButton" />
         </SecondaryButton>
         <PrimaryButton
           className={css.acceptButton}
@@ -229,7 +229,7 @@ export const SaleDetailsPanelComponent = props => {
           <p className={css.message}>{message}</p>
           <div className={css.errorMobile}>
             {acceptErrorMessage}
-            {rejectErrorMessage}
+            {declineErrorMessage}
           </div>
           {actionButtons}
         </div>
@@ -270,7 +270,7 @@ SaleDetailsPanelComponent.defaultProps = {
   rootClassName: null,
   className: null,
   acceptSaleError: null,
-  rejectSaleError: null,
+  declineSaleError: null,
 };
 
 const { string, func, bool, instanceOf } = PropTypes;
@@ -280,11 +280,11 @@ SaleDetailsPanelComponent.propTypes = {
   className: string,
   transaction: propTypes.transaction.isRequired,
   onAcceptSale: func.isRequired,
-  onRejectSale: func.isRequired,
+  onDeclineSale: func.isRequired,
   acceptInProgress: bool.isRequired,
-  rejectInProgress: bool.isRequired,
+  declineInProgress: bool.isRequired,
   acceptSaleError: instanceOf(Error),
-  rejectSaleError: instanceOf(Error),
+  declineSaleError: instanceOf(Error),
 
   // from injectIntl
   intl: intlShape.isRequired,

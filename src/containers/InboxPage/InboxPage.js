@@ -46,11 +46,11 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateAccepted',
       }),
     };
-  } else if (propTypes.txIsRejectedOrAutorejected(tx)) {
+  } else if (propTypes.txIsDeclinedOrAutodeclined(tx)) {
     return {
       nameClassName: css.nameDeclined,
       bookingClassName: css.bookingDeclined,
-      lastTransitionedAtClassName: css.lastTransitionedAtRejected,
+      lastTransitionedAtClassName: css.lastTransitionedAtDeclined,
       stateClassName: css.stateDeclined,
       state: intl.formatMessage({
         id: 'InboxPage.stateDeclined',
