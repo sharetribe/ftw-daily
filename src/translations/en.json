@@ -174,7 +174,7 @@
   "HeroSection.mobileSearchButtonText": "Search saunas",
   "HeroSection.subTitle": "The largest online community to rent saunas in Finland.",
   "HeroSection.title": "Book saunas everywhere.",
-  "ImageCarousel.imageAltText": "Image {index}/{count}",
+  "ImageCarousel.imageAltText": "Listing image {index}/{count}",
   "ImageFromFile.couldNotReadFile": "Could not read file",
   "InboxPage.bannedUserDisplayName": "Banned user",
   "InboxPage.fetchFailed": "Could not load all messages. Please try again.",
