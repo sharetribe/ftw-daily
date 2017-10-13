@@ -4,8 +4,15 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
 <Page
   authInfoError={null}
   logoutError={null}
+  schema="
+        {
+          \\"@context\\": \\"http://schema.org\\",
+          \\"@type\\": \\"WebPage\\",
+          \\"name\\": \\"AuthenticationPage.schemaTitleLogin\\",
+        }
+      "
   scrollingDisabled={false}
-  title="AuthenticationPage.loginPageTitle"
+  title="AuthenticationPage.schemaTitleLogin"
 >
   <Connect(withRouter(TopbarContainerComponent))
     className=""

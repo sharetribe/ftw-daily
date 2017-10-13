@@ -1,27 +1,21 @@
 {
-  "AuthenticationPage.emailAlreadyInUse":
-    "An account already exists with this email address. Try logging in instead.",
+  "AuthenticationPage.emailAlreadyInUse": "An account already exists with this email address. Try logging in instead.",
   "AuthenticationPage.fixEmail": "Whoops, typo in your email? {fixEmailLink}.",
   "AuthenticationPage.fixEmailLinkText": "Fix it",
-  "AuthenticationPage.loginFailed":
-    "The email and password you entered did not match our records. Please double-check and try again.",
+  "AuthenticationPage.loginFailed": "The email and password you entered did not match our records. Please double-check and try again.",
   "AuthenticationPage.loginLinkText": "Login",
-  "AuthenticationPage.loginPageTitle": "Login",
   "AuthenticationPage.resendEmail": "Didn't get the email? {resendEmailLink}.",
   "AuthenticationPage.resendEmailLinkText": "Resend it",
   "AuthenticationPage.resendFailed": "Resending verification email failed. Please try again.",
-  "AuthenticationPage.resendFailedTooManyRequests":
-    "Resending verification email failed, since you’ve already been sent 5 verification emails. Please try again tomorrow.",
+  "AuthenticationPage.resendFailedTooManyRequests": "Resending verification email failed, since you’ve already been sent 5 verification emails. Please try again tomorrow.",
+  "AuthenticationPage.schemaTitleSignup": "Sing up | {siteTitle}",
+  "AuthenticationPage.schemaTitleLogin": "Log in | {siteTitle}",
   "AuthenticationPage.sendingEmail": "Sending verification email…",
-  "AuthenticationPage.signupFailed":
-    "Signup failed. Please make sure all the information you entered is correct and try again.",
-  "AuthenticationPage.signupFailedEmailAlreadyTaken":
-    "An account already exists with this email address. Try logging in instead.",
+  "AuthenticationPage.signupFailed": "Signup failed. Please make sure all the information you entered is correct and try again.",
+  "AuthenticationPage.signupFailedEmailAlreadyTaken": "An account already exists with this email address. Try logging in instead.",
   "AuthenticationPage.signupLinkText": "Sign up",
-  "AuthenticationPage.signupPageTitle": "Sign up",
   "AuthenticationPage.verifyEmailClose": "LATER",
-  "AuthenticationPage.verifyEmailText":
-    "Thanks for signing up! There's one quick step left. To be able to contact you, we need you to verify your email address. Please click the link we sent to {email}.",
+  "AuthenticationPage.verifyEmailText": "Thanks for signing up! There's one quick step left. To be able to contact you, we need you to verify your email address. Please click the link we sent to {email}.",
   "AuthenticationPage.verifyEmailTitle": "{name}, check your inbox to verify your email",
   "Avatar.bannedUserDisplayName": "Banned user",
   "BookingBreakdown.bookingPeriod": "{bookingStart} – {bookingEnd}",
@@ -37,8 +31,7 @@
   "BookingBreakdown.total": "Total price",
   "BookingDatesForm.bookingEndTitle": "End date",
   "BookingDatesForm.bookingStartTitle": "Start date",
-  "BookingDatesForm.listingCurrencyInvalid":
-    "Oops, the currency of the listing doesn't match the currency of the marketplace.",
+  "BookingDatesForm.listingCurrencyInvalid": "Oops, the currency of the listing doesn't match the currency of the marketplace.",
   "BookingDatesForm.listingPriceMissing": "Oops, this listing has no price!",
   "BookingDatesForm.ownListing": "You won't be able to book your own listing.",
   "BookingDatesForm.placeholder": "mm/dd/yyyy",
@@ -49,10 +42,8 @@
   "CheckoutPage.errorlistingLinkText": "the sauna page",
   "CheckoutPage.goToLandingPage": "Go to homepage",
   "CheckoutPage.hostedBy": "Hosted by {name}",
-  "CheckoutPage.initiateOrderAmountTooLow":
-    "Unfortunately we're not able to process this payment, since the payment amount is too low. Please contact the administrators.",
-  "CheckoutPage.initiateOrderError":
-    "Payment request failed. Please go back to {listingLink} and try again. If the error persists, try refreshing the page or contacting the marketplace admin.",
+  "CheckoutPage.initiateOrderAmountTooLow": "Unfortunately we're not able to process this payment, since the payment amount is too low. Please contact the administrators.",
+  "CheckoutPage.initiateOrderError": "Payment request failed. Please go back to {listingLink} and try again. If the error persists, try refreshing the page or contacting the marketplace admin.",
   "CheckoutPage.listingNotFoundError": "Unfortunately the listing is not available anymore.",
   "CheckoutPage.loadingData": "Loading checkout data...",
   "CheckoutPage.paymentInfo": "You'll only be charged if your request is accepted by the provider.",
@@ -60,8 +51,7 @@
   "CheckoutPage.priceBreakdownTitle": "Booking breakdown",
   "CheckoutPage.speculateTransactionError": "Failed to fetch breakdown information.",
   "CheckoutPage.title": "Book {listingTitle}",
-  "ContactDetailsForm.confirmChangesInfo":
-    "To change your email, you need to enter your current password.",
+  "ContactDetailsForm.confirmChangesInfo": "To change your email, you need to enter your current password.",
   "ContactDetailsForm.confirmChangesTitle": "Confirm your changes",
   "ContactDetailsForm.emailInvalid": "A valid email address is required",
   "ContactDetailsForm.emailLabel": "Your email",
@@ -70,16 +60,14 @@
   "ContactDetailsForm.emailTakenError": "This email address is already in use.",
   "ContactDetailsForm.emailUnverified": "You haven't verified your email yet. {resendEmailMessage}",
   "ContactDetailsForm.emailVerified": "Your email is verified.",
-  "ContactDetailsForm.genericFailure":
-    "Whoops, something went wrong. Please refresh the page and try again.",
+  "ContactDetailsForm.genericFailure": "Whoops, something went wrong. Please refresh the page and try again.",
   "ContactDetailsForm.passwordFailed": "Please double-check your password",
   "ContactDetailsForm.passwordLabel": "Current password",
   "ContactDetailsForm.passwordPlaceholder": "Enter your current password…",
   "ContactDetailsForm.passwordRequired": "Password is required",
   "ContactDetailsForm.passwordTooShort": "Password should be at least {minLength} characters",
   "ContactDetailsForm.pendingEmailCheckInbox": "Check your inbox to verify {pendingEmail} now.",
-  "ContactDetailsForm.pendingEmailUnverified":
-    "You have changed your email address but haven’t verified the new address yet. {pendingEmailCheckInbox} {resendEmailMessage}",
+  "ContactDetailsForm.pendingEmailUnverified": "You have changed your email address but haven’t verified the new address yet. {pendingEmailCheckInbox} {resendEmailMessage}",
   "ContactDetailsForm.resendEmailVerificationText": "Resend verification email.",
   "ContactDetailsForm.saveChanges": "Save changes",
   "ContactDetailsForm.tooManyVerificationRequests": "Too many email verification requests sent.",
@@ -98,8 +86,7 @@
   "DateRangeInputField.screenReaderInputMessage": "Date input",
   "DateRangeInputField.startDatePlaceholderText": "Add start date",
   "EditListingDescriptionForm.description": "Describe your sauna",
-  "EditListingDescriptionForm.descriptionPlaceholder":
-    "How many people can fit in at once? Does the sauna come with towels?",
+  "EditListingDescriptionForm.descriptionPlaceholder": "How many people can fit in at once? Does the sauna come with towels?",
   "EditListingDescriptionForm.descriptionRequired": "You need to add a description.",
   "EditListingDescriptionForm.maxLength": "Must be {maxLength} characters or less",
   "EditListingDescriptionForm.title": "Name of your sauna",
@@ -109,8 +96,7 @@
   "EditListingDescriptionPanel.createListingTitle": "Add your sauna",
   "EditListingDescriptionPanel.title": "Edit details of {listingTitle}",
   "EditListingLocationForm.address": "Address",
-  "EditListingLocationForm.addressNotRecognized":
-    "We didn't recognize this location. Please try another location.",
+  "EditListingLocationForm.addressNotRecognized": "We didn't recognize this location. Please try another location.",
   "EditListingLocationForm.addressPlaceholder": "Start typing…",
   "EditListingLocationForm.addressRequired": "You need to provide a location",
   "EditListingLocationForm.building": "Apt, suite, building # (optional)",
@@ -121,23 +107,19 @@
   "EditListingPage.loadingListingData": "Loading listing data…",
   "EditListingPage.titleCreateListing": "Create a listing",
   "EditListingPage.titleEditListing": "Edit listing",
-  "EditListingPhotosForm.addImagesTip":
-    "Tip: Choose 2-3 best photos of your sauna from different angles in a good light that really show the space.",
+  "EditListingPhotosForm.addImagesTip": "Tip: Choose 2-3 best photos of your sauna from different angles in a good light that really show the space.",
   "EditListingPhotosForm.bankAccountNumberRequired": "You need to add a bank account number.",
   "EditListingPhotosForm.chooseImage": "+ Choose an image…",
   "EditListingPhotosForm.createListingFailed": "Creating a new sauna failed",
   "EditListingPhotosForm.imageRequired": "You need to add at least one image.",
   "EditListingPhotosForm.imageTypes": ".JPG, .GIF or .PNG max. 10 MB",
-  "EditListingPhotosForm.imageUploadFailed.uploadFailed":
-    "Failed to upload image. Please try again.",
-  "EditListingPhotosForm.imageUploadFailed.uploadOverLimit":
-    "Image was too big. Maximum size is 10 MB.",
+  "EditListingPhotosForm.imageUploadFailed.uploadFailed": "Failed to upload image. Please try again.",
+  "EditListingPhotosForm.imageUploadFailed.uploadOverLimit": "Image was too big. Maximum size is 10 MB.",
   "EditListingPhotosForm.savedImageAltText": "Saved listing image",
   "EditListingPhotosForm.showListingFailed": "Fetching listing data failed",
   "EditListingPhotosForm.updateFailed": "Failed to update listing. Please try again.",
   "EditListingPhotosPanel.createListingTitle": "Add a few photos",
-  "EditListingPhotosPanel.payoutModalInfo":
-    "Since this was the first listing you created, we need to know bit more information about you in order to send you money. We only ask these once.",
+  "EditListingPhotosPanel.payoutModalInfo": "Since this was the first listing you created, we need to know bit more information about you in order to send you money. We only ask these once.",
   "EditListingPhotosPanel.payoutModalTitleOneMoreThing": "One more thing:",
   "EditListingPhotosPanel.payoutModalTitlePayoutPreferences": "Payout preferences",
   "EditListingPhotosPanel.title": "Edit photos of {listingTitle}",
@@ -159,11 +141,9 @@
   "EditListingWizard.tabLabelLocation": "Location",
   "EditListingWizard.tabLabelPhotos": "Photos",
   "EditListingWizard.tabLabelPricing": "Pricing",
-  "EmailVerificationForm.finishAccountSetup":
-    "We would like to send you email notifications. To allow that, please verify your email {email}.",
+  "EmailVerificationForm.finishAccountSetup": "We would like to send you email notifications. To allow that, please verify your email {email}.",
   "EmailVerificationForm.successButtonText": "Continue exploring",
-  "EmailVerificationForm.successText":
-    "Everything looks good, time to get out there – have a great day.",
+  "EmailVerificationForm.successText": "Everything looks good, time to get out there – have a great day.",
   "EmailVerificationForm.successTitle": "Thanks for verifying your email, {name}.",
   "EmailVerificationForm.verificationFailed": "Could not verify the email address.",
   "EmailVerificationForm.verify": "Verify my email",
@@ -191,8 +171,7 @@
   "InboxPage.statePending": "Pending",
   "InboxPage.stateRequested": "Requested",
   "InboxPage.title": "Inbox",
-  "LandingPage.schemaDescription":
-    "You can book a sauna from Saunatime or get some income by sharing your own sauna",
+  "LandingPage.schemaDescription": "You can book a sauna from Saunatime or get some income by sharing your own sauna",
   "LandingPage.schemaTitle": "Book saunas everywhere | {siteTitle}",
   "ListingCard.hostedBy": "Hosted by {authorName}.",
   "ListingCard.perNight": "per night",
@@ -228,8 +207,7 @@
   "LoginForm.passwordLabel": "Password",
   "LoginForm.passwordPlaceholder": "Enter your password…",
   "LoginForm.passwordRequired": "This field is required",
-  "ManageListingCard.actionFailed":
-    "Whoops, something went wrong. Please refresh the page and try again.",
+  "ManageListingCard.actionFailed": "Whoops, something went wrong. Please refresh the page and try again.",
   "ManageListingCard.closeListing": "Close listing",
   "ManageListingCard.closedListing": "This listing is closed and not visible on the marketplace.",
   "ManageListingCard.edit": "Edit",
@@ -243,14 +221,12 @@
   "ManageListingsPage.noResults": "You don't have any listings.",
   "ManageListingsPage.profileSettings": "Profile settings",
   "ManageListingsPage.queryError": "Query failed. Please try again.",
-  "ManageListingsPage.youHaveListings":
-    "You have {count} {count, plural, one {listing} other {listings}}",
+  "ManageListingsPage.youHaveListings": "You have {count} {count, plural, one {listing} other {listings}}",
   "ManageListingsPage.yourListings": "Your listings",
   "MapPriceMarker.unsupportedPrice": "({currency})",
   "Modal.close": "CLOSE",
   "Modal.closeModal": "Close modal",
-  "NotFoundPage.description":
-    "We can't find the page or the sauna you're looking for. Make sure you've typed the URL correctly, of try searching Saunatime.",
+  "NotFoundPage.description": "We can't find the page or the sauna you're looking for. Make sure you've typed the URL correctly, of try searching Saunatime.",
   "NotFoundPage.heading": "Sorry, we couldn't find that page.",
   "NotFoundPage.title": "Page not found",
   "OrderDetailsPanel.bannedUserDisplayName": "Banned user",
@@ -258,42 +234,34 @@
   "OrderDetailsPanel.deletedListingOrderTitle": "a listing",
   "OrderDetailsPanel.deletedListingTitle": "Deleted listing",
   "OrderDetailsPanel.hostedBy": "Hosted by {name}",
-  "OrderDetailsPanel.messageDeletedListing":
-    "However, the listing is deleted and cannot be viewed anymore.",
-  "OrderDetailsPanel.orderAcceptedStatus":
-    "{providerName} accepted the request on {transitionDate}.",
+  "OrderDetailsPanel.messageDeletedListing": "However, the listing is deleted and cannot be viewed anymore.",
+  "OrderDetailsPanel.orderAcceptedStatus": "{providerName} accepted the request on {transitionDate}.",
   "OrderDetailsPanel.orderAcceptedSubtitle": "You have booked {listingLink}",
   "OrderDetailsPanel.orderAcceptedTitle": "Woohoo {customerName}!",
-  "OrderDetailsPanel.orderAutoDeclinedStatus":
-    "The request expired on {transitionDate}. {providerName} never replied to the request.",
+  "OrderDetailsPanel.orderAutoDeclinedStatus": "The request expired on {transitionDate}. {providerName} never replied to the request.",
   "OrderDetailsPanel.orderAutoDeclinedTitle": "You requested to book {listingLink}",
   "OrderDetailsPanel.orderCanceledStatus": "The request was cancelled on {transitionDate}",
   "OrderDetailsPanel.orderCanceledTitle": "You booked {listingLink}",
   "OrderDetailsPanel.orderDeliveredStatus": " ",
   "OrderDetailsPanel.orderDeliveredTitle": "Booking period has ended",
-  "OrderDetailsPanel.orderPreauthorizedStatus":
-    "{providerName} has been notified about the booking request, so sit back and relax.",
+  "OrderDetailsPanel.orderPreauthorizedStatus": "{providerName} has been notified about the booking request, so sit back and relax.",
   "OrderDetailsPanel.orderPreauthorizedSubtitle": "You have requested to book {listingLink}",
   "OrderDetailsPanel.orderPreauthorizedTitle": "Great success, {customerName}!",
-  "OrderDetailsPanel.orderDeclinedStatus":
-    "Unfortunately {providerName} declined the request on {transitionDate}.",
+  "OrderDetailsPanel.orderDeclinedStatus": "Unfortunately {providerName} declined the request on {transitionDate}.",
   "OrderDetailsPanel.orderDeclinedTitle": "You requested to book {listingLink}",
   "OrderPage.fetchOrderFailed": "Fetching order data failed.",
   "OrderPage.loadingData": "Loading order data.",
   "OrderPage.title": "Order details: {listingTitle}",
   "Page.authInfoFailed": "Could not get authentication information.",
   "Page.logoutFailed": "Logout failed. Please try again.",
-  "Page.schemaDescription":
-    "You can book a sauna from Saunatime or get some income by sharing your own sauna",
+  "Page.schemaDescription": "You can book a sauna from Saunatime or get some income by sharing your own sauna",
   "Page.schemaTitle": "Book saunas everywhere | {siteTitle}",
   "PaginationLinks.next": "Next page",
   "PaginationLinks.previous": "Previous page",
   "PaginationLinks.toPage": "Go to page {page}",
-  "PasswordChangeForm.confirmChangesInfo":
-    "To change your password, you need to enter your current password.",
+  "PasswordChangeForm.confirmChangesInfo": "To change your password, you need to enter your current password.",
   "PasswordChangeForm.confirmChangesTitle": "Confirm your changes",
-  "PasswordChangeForm.genericFailure":
-    "Whoops, something went wrong. Please refresh the page and try again.",
+  "PasswordChangeForm.genericFailure": "Whoops, something went wrong. Please refresh the page and try again.",
   "PasswordChangeForm.newPasswordLabel": "New password",
   "PasswordChangeForm.newPasswordPlaceholder": "Enter your new password",
   "PasswordChangeForm.newPasswordRequired": "New password is required",
@@ -309,28 +277,22 @@
   "PasswordChangePage.title": "Password settings",
   "PasswordRecoveryForm.emailInvalid": "A valid email address is required",
   "PasswordRecoveryForm.emailLabel": "Email",
-  "PasswordRecoveryForm.emailNotFound":
-    "Hmm. We didn't find an account with that email. Please double-check your email and try again.",
+  "PasswordRecoveryForm.emailNotFound": "Hmm. We didn't find an account with that email. Please double-check your email and try again.",
   "PasswordRecoveryForm.emailPlaceholder": "john.doe@example.com",
   "PasswordRecoveryForm.emailRequired": "This field is required",
   "PasswordRecoveryForm.loginLinkInfo": "Suddenly remembered your password? {loginLink}",
   "PasswordRecoveryForm.loginLinkText": "Go log in.",
   "PasswordRecoveryForm.sendInstructions": "Send instructions",
-  "PasswordRecoveryPage.actionFailedMessage":
-    "Something went wrong. Please refresh the page and try again.",
+  "PasswordRecoveryPage.actionFailedMessage": "Something went wrong. Please refresh the page and try again.",
   "PasswordRecoveryPage.actionFailedTitle": "Whoops!",
-  "PasswordRecoveryPage.emailNotVerifiedContactAdmin":
-    "To resolve the issue, please contact Saunatime administrators.",
-  "PasswordRecoveryPage.emailNotVerifiedMessage":
-    "Unfortunately, we cannot recover your password, because your email {initialEmailText} hasn't been verified.",
+  "PasswordRecoveryPage.emailNotVerifiedContactAdmin": "To resolve the issue, please contact Saunatime administrators.",
+  "PasswordRecoveryPage.emailNotVerifiedMessage": "Unfortunately, we cannot recover your password, because your email {initialEmailText} hasn't been verified.",
   "PasswordRecoveryPage.emailNotVerifiedTitle": "We have bad news",
-  "PasswordRecoveryPage.emailSubmittedMessage":
-    "We have sent the instructions for resetting your password to {submittedEmailText}.",
+  "PasswordRecoveryPage.emailSubmittedMessage": "We have sent the instructions for resetting your password to {submittedEmailText}.",
   "PasswordRecoveryPage.emailSubmittedTitle": "Check your inbox",
   "PasswordRecoveryPage.fixEmailInfo": "Whoops, typo in your email? {fixEmailLink}",
   "PasswordRecoveryPage.fixEmailLinkText": "Fix it.",
-  "PasswordRecoveryPage.forgotPasswordMessage":
-    "No worries! Please enter the email address you used when signing up and we'll send you instructions on how to set a new password.",
+  "PasswordRecoveryPage.forgotPasswordMessage": "No worries! Please enter the email address you used when signing up and we'll send you instructions on how to set a new password.",
   "PasswordRecoveryPage.forgotPasswordTitle": "Forgot your password?",
   "PasswordRecoveryPage.resendEmailInfo": "Didn't get the email? {resendEmailLink}",
   "PasswordRecoveryPage.resendEmailLinkText": "Send another email.",
@@ -343,8 +305,7 @@
   "PasswordResetForm.passwordTooShort": "Password should be at least {minLength} characters",
   "PasswordResetForm.submitButtonText": "Reset password",
   "PasswordResetPage.helpText": "Please provide a new password.",
-  "PasswordResetPage.invalidUrlParams":
-    "Oops, it looks like the password reset link is broken. Try again by clicking on the link in the received email, or request a new link from the {recoveryLink}.",
+  "PasswordResetPage.invalidUrlParams": "Oops, it looks like the password reset link is broken. Try again by clicking on the link in the received email, or request a new link from the {recoveryLink}.",
   "PasswordResetPage.loginButtonText": "Log in",
   "PasswordResetPage.mainHeading": "Reset your password",
   "PasswordResetPage.passwordChangedHeading": "Password changed",
@@ -384,13 +345,11 @@
   "PayoutDetailsForm.countryNames.US": "United States",
   "PayoutDetailsForm.countryPlaceholder": "Select your country…",
   "PayoutDetailsForm.countryRequired": "This field is required",
-  "PayoutDetailsForm.createStripeAccountFailed":
-    "Whoopsie, something went wrong - please try again.",
+  "PayoutDetailsForm.createStripeAccountFailed": "Whoopsie, something went wrong - please try again.",
   "PayoutDetailsForm.firstNameLabel": "First name",
   "PayoutDetailsForm.firstNamePlaceholder": "John",
   "PayoutDetailsForm.firstNameRequired": "This field is required",
-  "PayoutDetailsForm.information":
-    "Since this was the first listing you created, we need to know bit more information about you in order to send you money. We only ask these once.",
+  "PayoutDetailsForm.information": "Since this was the first listing you created, we need to know bit more information about you in order to send you money. We only ask these once.",
   "PayoutDetailsForm.lastNameLabel": "Last name",
   "PayoutDetailsForm.lastNamePlaceholder": "Doe",
   "PayoutDetailsForm.lastNameRequired": "This field is required",
@@ -426,16 +385,14 @@
   "SaleDetailsPanel.bannedUserDisplayName": "Banned user",
   "SaleDetailsPanel.bookingBreakdownTitle": "Booking breakdown",
   "SaleDetailsPanel.customerBannedStatus": "The user made the request, but was later banned.",
-  "SaleDetailsPanel.listingAcceptedTitle":
-    "Woohoo! You accepted a request from {customerName} for {listingLink}",
+  "SaleDetailsPanel.listingAcceptedTitle": "Woohoo! You accepted a request from {customerName} for {listingLink}",
   "SaleDetailsPanel.listingCanceledTitle": "{customerName} booked {listingLink}",
   "SaleDetailsPanel.listingDeliveredTitle": "{customerName} booked {listingLink}",
   "SaleDetailsPanel.listingDeclinedTitle": "{customerName} requested to book {listingLink}",
   "SaleDetailsPanel.listingRequestedTitle": "{customerName} has requested to book {listingLink}",
   "SaleDetailsPanel.declineSaleFailed": "Oops, declining failed. Please try again.",
   "SaleDetailsPanel.saleAcceptedStatus": "You accepted the request on {formattedDate}.",
-  "SaleDetailsPanel.saleAutoDeclinedStatus":
-    "You did not react to the request on time. The request expired on {formattedDate}.",
+  "SaleDetailsPanel.saleAutoDeclinedStatus": "You did not react to the request on time. The request expired on {formattedDate}.",
   "SaleDetailsPanel.saleCanceledStatus": "The request was cancelled on {formattedDate}.",
   "SaleDetailsPanel.saleDeliveredStatus": "You delivered the order on {formattedDate}.",
   "SaleDetailsPanel.saleDeclinedStatus": "You declined the request on {formattedDate}.",
@@ -449,8 +406,7 @@
   "SearchMapInfoCard.noImage": "No image",
   "SearchPage.foundResults": "{count, number} {count, plural, one {sauna} other {saunas}} found",
   "SearchPage.foundResultsMobile": "{count, number} {count, plural, one {result} other {results}}",
-  "SearchPage.foundResultsWithAddress":
-    "{count, number} {count, plural, one {sauna} other {saunas}} around {address}",
+  "SearchPage.foundResultsWithAddress": "{count, number} {count, plural, one {sauna} other {saunas}} around {address}",
   "SearchPage.loadingResults": "Loading search results…",
   "SearchPage.noResults": "Could not find any listings.",
   "SearchPage.openMapView": "Map",
@@ -477,8 +433,7 @@
   "SignupForm.passwordTooShort": "Password should be at least {minLength} characters.",
   "SignupForm.signUp": "Sign up",
   "SignupForm.stripeConnectedAccountAgreementLinkText": "Stripe Connected Account Agreement",
-  "SignupForm.termsOfService":
-    "By confirming I accept the terms and conditions and the {stripeConnectedAccountAgreementLink}",
+  "SignupForm.termsOfService": "By confirming I accept the terms and conditions and the {stripeConnectedAccountAgreementLink}",
   "StripeBankAccountTokenInputField.accountNumber.inline": "account number",
   "StripeBankAccountTokenInputField.accountNumber.invalid": "Invalid {country} bank account number",
   "StripeBankAccountTokenInputField.accountNumber.label": "Bank account number",
@@ -490,10 +445,8 @@
   "StripeBankAccountTokenInputField.bsb.label": "BSB",
   "StripeBankAccountTokenInputField.bsb.placeholder": "Type in BSB…",
   "StripeBankAccountTokenInputField.bsb.required": "BSB is required",
-  "StripeBankAccountTokenInputField.genericStripeError":
-    "Could not connect account number. Please double-check that your {inputs} are valid in {country}",
-  "StripeBankAccountTokenInputField.genericStripeErrorIban":
-    "Could not connect account number. Please double-check that your account number is valid in {country}",
+  "StripeBankAccountTokenInputField.genericStripeError": "Could not connect account number. Please double-check that your {inputs} are valid in {country}",
+  "StripeBankAccountTokenInputField.genericStripeErrorIban": "Could not connect account number. Please double-check that your account number is valid in {country}",
   "StripeBankAccountTokenInputField.iban.inline": "IBAN",
   "StripeBankAccountTokenInputField.iban.invalid": "Invalid {country} bank account number",
   "StripeBankAccountTokenInputField.iban.label": "Bank account number (IBAN)",
@@ -521,26 +474,17 @@
   "StripePaymentForm.stripe.validation_error.card_declined": "The card was declined.",
   "StripePaymentForm.stripe.validation_error.expired_card": "The card has expired.",
   "StripePaymentForm.stripe.validation_error.incomplete_number": "Your card number is incomplete.",
-  "StripePaymentForm.stripe.validation_error.incorrect_cvc":
-    "The card's security code is incorrect.",
+  "StripePaymentForm.stripe.validation_error.incorrect_cvc": "The card's security code is incorrect.",
   "StripePaymentForm.stripe.validation_error.incorrect_number": "The card number is incorrect.",
-  "StripePaymentForm.stripe.validation_error.incorrect_zip":
-    "The card's zip code failed validation.",
+  "StripePaymentForm.stripe.validation_error.incorrect_zip": "The card's zip code failed validation.",
   "StripePaymentForm.stripe.validation_error.invalid_cvc": "The card's security code is invalid.",
-  "StripePaymentForm.stripe.validation_error.invalid_expiry_month":
-    "The card's expiration month is invalid.",
-  "StripePaymentForm.stripe.validation_error.invalid_expiry_month_past":
-    "Your card's expiration date is in the past.",
-  "StripePaymentForm.stripe.validation_error.invalid_expiry_year":
-    "The card's expiration year is invalid.",
-  "StripePaymentForm.stripe.validation_error.invalid_number":
-    "The card number is not a valid credit card number.",
-  "StripePaymentForm.stripe.validation_error.invalid_swipe_data":
-    "The card's swipe data is invalid.",
-  "StripePaymentForm.stripe.validation_error.missing":
-    "There is no card on a customer that is being charged.",
-  "StripePaymentForm.stripe.validation_error.processing_error":
-    "An error occurred while processing the card.",
+  "StripePaymentForm.stripe.validation_error.invalid_expiry_month": "The card's expiration month is invalid.",
+  "StripePaymentForm.stripe.validation_error.invalid_expiry_month_past": "Your card's expiration date is in the past.",
+  "StripePaymentForm.stripe.validation_error.invalid_expiry_year": "The card's expiration year is invalid.",
+  "StripePaymentForm.stripe.validation_error.invalid_number": "The card number is not a valid credit card number.",
+  "StripePaymentForm.stripe.validation_error.invalid_swipe_data": "The card's swipe data is invalid.",
+  "StripePaymentForm.stripe.validation_error.missing": "There is no card on a customer that is being charged.",
+  "StripePaymentForm.stripe.validation_error.processing_error": "An error occurred while processing the card.",
   "StripePaymentForm.submitPaymentInfo": "Send request",
   "Topbar.checkInbox": "Please check your inbox and verify your email {email}",
   "Topbar.closeVerifyEmailReminder": "Later",
@@ -548,17 +492,14 @@
   "Topbar.fixEmailLinkText": "Fix it.",
   "Topbar.logoIcon": "Go to homepage",
   "Topbar.menuIcon": "Open menu",
-  "Topbar.mobileSearchHelp":
-    "Tip: You can also search saunas by zip code, for example \"00500\" or city district – \"Sörnäinen\".",
+  "Topbar.mobileSearchHelp": "Tip: You can also search saunas by zip code, for example \"00500\" or city district – \"Sörnäinen\".",
   "Topbar.resendEmail": "Didn't get the email? {resendEmailLink}",
   "Topbar.resendEmailLinkText": "Resend it.",
   "Topbar.resendFailed": "Resending verification email failed. Please try again.",
-  "Topbar.resendFailedTooManyRequests":
-    "Resending verification email failed. You already have too many verification emails sent.",
+  "Topbar.resendFailedTooManyRequests": "Resending verification email failed. You already have too many verification emails sent.",
   "Topbar.searchIcon": "Open search",
   "Topbar.sendingEmail": "Sending verification email…",
-  "Topbar.verifyEmailText":
-    "We are currently not able to send you email notifications if other Saunatime users contact you, because you haven't verified your email.",
+  "Topbar.verifyEmailText": "We are currently not able to send you email notifications if other Saunatime users contact you, because you haven't verified your email.",
   "Topbar.verifyEmailTitle": "Please verify your email",
   "TopbarDesktop.accountSettingsLink": "Account settings",
   "TopbarDesktop.createListing": "+ Add your sauna",
@@ -578,10 +519,8 @@
   "TopbarMobileMenu.profileSettingsLink": "Profile settings",
   "TopbarMobileMenu.signupLink": "Sign up",
   "TopbarMobileMenu.signupOrLogin": "{signup} or {login}",
-  "TopbarMobileMenu.unauthorizedGreeting":
-    "Hello there,{lineBreak}would you like to {signupOrLogin}?",
+  "TopbarMobileMenu.unauthorizedGreeting": "Hello there,{lineBreak}would you like to {signupOrLogin}?",
   "TopbarMobileMenu.yourListingsLink": "Your listings",
   "TopbarSearchForm.placeholder": "Search saunas…",
-  "TopbarSearchForm.searchHelp":
-    "Tip: You can also search saunas by zip code, for example \"00500\" or city district \"Sörnäinen\"."
+  "TopbarSearchForm.searchHelp": "Tip: You can also search saunas by zip code, for example \"00500\" or city district \"Sörnäinen\"."
 }
