@@ -20,7 +20,9 @@ const formComponent = country => {
           formName={form}
           validate={validators.required(' ')}
         />
-        <Button style={{ marginTop: 24 }} type="submit">Submit</Button>
+        <Button style={{ marginTop: 24 }} type="submit">
+          Submit
+        </Button>
       </form>
     );
   };

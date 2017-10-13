@@ -53,17 +53,16 @@ export const changeEmailClear = () => ({ type: CHANGE_EMAIL_CLEAR });
 
 // ================ Thunks ================ //
 
-export const changeEmail = params =>
-  (dispatch, getState, sdk) => {
-    dispatch(changeEmailRequest());
-    const { email, currentPassword } = params;
+export const changeEmail = params => (dispatch, getState, sdk) => {
+  dispatch(changeEmailRequest());
+  const { email, currentPassword } = params;
 
-    return sdk.currentUser
-      .changeEmail({ email, currentPassword }, { expand: true })
-      .then(response => {
-        const currentUser = response.data.data;
-        dispatch(changeEmailSuccess());
-        dispatch(currentUserShowSuccess(currentUser));
-      })
-      .catch(e => dispatch(changeEmailError(e)));
-  };
+  return sdk.currentUser
+    .changeEmail({ email, currentPassword }, { expand: true })
+    .then(response => {
+      const currentUser = response.data.data;
+      dispatch(changeEmailSuccess());
+      dispatch(currentUserShowSuccess(currentUser));
+    })
+    .catch(e => dispatch(changeEmailError(e)));
+};

@@ -38,9 +38,8 @@ export const ListingCardComponent = props => {
   const slug = createSlug(title);
   const author = ensureUser(listing.author);
   const authorName = author.attributes.profile.displayName;
-  const firstImage = currentListing.images && currentListing.images.length > 0
-    ? currentListing.images[0]
-    : null;
+  const firstImage =
+    currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
   // TODO: Currently, API can return currencies that are not supported by starter app.
   const { formattedPrice, priceTitle } = priceData(price, intl);
@@ -70,9 +69,7 @@ export const ListingCardComponent = props => {
           </div>
         </div>
         <div className={css.mainInfo}>
-          <div className={css.title}>
-            {title}
-          </div>
+          <div className={css.title}>{title}</div>
           <div className={css.authorInfo}>
             <FormattedMessage
               className={css.authorName}

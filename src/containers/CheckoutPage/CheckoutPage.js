@@ -75,7 +75,8 @@ export class CheckoutPageComponent extends Component {
       storeData(bookingDates, listing, STORAGE_KEY);
     }
 
-    const hasData = pageData &&
+    const hasData =
+      pageData &&
       pageData.listing &&
       pageData.listing.id &&
       pageData.bookingDates &&
@@ -140,7 +141,8 @@ export class CheckoutPageComponent extends Component {
     // initiate or the speculative initiate fail due to the listing
     // being deleted or closec, we should dig the information from the
     // errors and not the listing data.
-    const listingNotFound = isTransactionInitiateListingNotFoundError(speculateTransactionError) ||
+    const listingNotFound =
+      isTransactionInitiateListingNotFoundError(speculateTransactionError) ||
       isTransactionInitiateListingNotFoundError(initiateOrderError);
 
     const isLoading = !this.state.dataLoaded || speculateTransactionInProgress;
@@ -151,16 +153,19 @@ export class CheckoutPageComponent extends Component {
     const currentListing = ensureListing(listing);
     const currentAuthor = ensureUser(currentListing.author);
 
-    const isOwnListing = currentUser &&
+    const isOwnListing =
+      currentUser &&
       currentUser.id &&
       currentAuthor &&
       currentAuthor.id &&
       currentAuthor.id.uuid === currentUser.id.uuid;
 
     const hasListingAndAuthor = !!(currentListing.id && currentAuthor.id);
-    const hasBookingDates = !!(bookingDates &&
+    const hasBookingDates = !!(
+      bookingDates &&
       bookingDates.bookingStart &&
-      bookingDates.bookingEnd);
+      bookingDates.bookingEnd
+    );
     const hasRequiredData = hasListingAndAuthor && hasBookingDates;
     const canShowPage = hasRequiredData && !isOwnListing;
     const shouldRedirect = !isLoading && !canShowPage;
@@ -179,34 +184,36 @@ export class CheckoutPageComponent extends Component {
 
     // Show breakdown only when transaction and booking are loaded
     // (i.e. have an id)
-    const breakdown = currentTransaction.id && currentBooking.id
-      ? <BookingBreakdown
+    const breakdown =
+      currentTransaction.id && currentBooking.id ? (
+        <BookingBreakdown
           className={css.bookingBreakdown}
           userRole="customer"
           transaction={currentTransaction}
           booking={currentBooking}
         />
-      : null;
+      ) : null;
 
     // Allow showing page when currentUser is still being downloaded,
     // but show payment form only when user info is loaded.
-    const showPaymentForm = !!(currentUser &&
+    const showPaymentForm = !!(
+      currentUser &&
       hasRequiredData &&
       !listingNotFound &&
-      !initiateOrderError);
+      !initiateOrderError
+    );
 
     const listingTitle = currentListing.attributes.title;
     const title = intl.formatMessage({ id: 'CheckoutPage.title' }, { listingTitle });
 
-    const firstImage = currentListing.images && currentListing.images.length > 0
-      ? currentListing.images[0]
-      : null;
+    const firstImage =
+      currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
-    const listingNotFoundErrorMessage = listingNotFound
-      ? <p className={css.notFoundError}>
-          <FormattedMessage id="CheckoutPage.listingNotFoundError" />
-        </p>
-      : null;
+    const listingNotFoundErrorMessage = listingNotFound ? (
+      <p className={css.notFoundError}>
+        <FormattedMessage id="CheckoutPage.listingNotFoundError" />
+      </p>
+    ) : null;
     const listingLink = (
       <NamedLink
         name="ListingPage"
@@ -233,11 +240,11 @@ export class CheckoutPageComponent extends Component {
       );
     }
 
-    const speculateTransactionErrorMessage = speculateTransactionError
-      ? <p className={css.speculateError}>
-          <FormattedMessage id="CheckoutPage.speculateTransactionError" />
-        </p>
-      : null;
+    const speculateTransactionErrorMessage = speculateTransactionError ? (
+      <p className={css.speculateError}>
+        <FormattedMessage id="CheckoutPage.speculateTransactionError" />
+      </p>
+    ) : null;
 
     const topbar = (
       <div className={css.topbar}>
@@ -314,15 +321,15 @@ export class CheckoutPageComponent extends Component {
               </h3>
               {initiateOrderErrorMessage}
               {listingNotFoundErrorMessage}
-              {showPaymentForm
-                ? <StripePaymentForm
-                    className={css.paymentForm}
-                    onSubmit={this.handleSubmit}
-                    inProgress={this.state.submitting}
-                    formId="CheckoutPagePaymentForm"
-                    paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo' })}
-                  />
-                : null}
+              {showPaymentForm ? (
+                <StripePaymentForm
+                  className={css.paymentForm}
+                  onSubmit={this.handleSubmit}
+                  inProgress={this.state.submitting}
+                  formId="CheckoutPagePaymentForm"
+                  paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo' })}
+                />
+              ) : null}
             </section>
           </div>
 
@@ -357,7 +364,6 @@ export class CheckoutPageComponent extends Component {
             {speculateTransactionErrorMessage}
             {breakdown}
           </div>
-
         </div>
       </Page>
     );

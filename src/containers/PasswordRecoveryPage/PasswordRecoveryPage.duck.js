@@ -69,12 +69,11 @@ export const clearPasswordRecoveryError = () => ({ type: CLEAR_RECOVERY_ERROR })
 
 // ================ Thunks ================ //
 
-export const recoverPassword = email =>
-  (dispatch, getState, sdk) => {
-    dispatch(passwordRecoveryRequest());
+export const recoverPassword = email => (dispatch, getState, sdk) => {
+  dispatch(passwordRecoveryRequest());
 
-    return sdk.passwordReset
-      .request({ email })
-      .then(() => dispatch(passwordRecoverySuccess(email)))
-      .catch(error => dispatch(passwordRecoveryError(error, email)));
-  };
+  return sdk.passwordReset
+    .request({ email })
+    .then(() => dispatch(passwordRecoverySuccess(email)))
+    .catch(error => dispatch(passwordRecoveryError(error, email)));
+};

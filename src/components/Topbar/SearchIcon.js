@@ -23,7 +23,8 @@ const SearchIcon = props => {
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <path d="M11.733 11.733l3.727 3.727" /><circle cx="6.4" cy="6.4" r="6.4" />
+        <path d="M11.733 11.733l3.727 3.727" />
+        <circle cx="6.4" cy="6.4" r="6.4" />
       </g>
     </svg>
   );

@@ -13,11 +13,7 @@ const TopbarWrapper = props => {
 
   const classes = classNames(rootClassName || css.topbarWrapper, className);
 
-  return (
-    <div className={classes}>
-      {children}
-    </div>
-  );
+  return <div className={classes}>{children}</div>;
 };
 
 TopbarWrapper.defaultProps = {

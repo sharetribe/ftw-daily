@@ -22,7 +22,9 @@ const RenderAddImage = props => {
     <div className={css.addImageWrapper}>
       <div className={css.aspectRatioWrapper}>
         {disabled ? null : <input {...inputProps} className={css.addImageInput} />}
-        <label htmlFor={name} className={css.addImage}>{label}</label>
+        <label htmlFor={name} className={css.addImage}>
+          {label}
+        </label>
       </div>
     </div>
   );
@@ -129,32 +131,29 @@ export class EditListingPhotosFormComponent extends Component {
     }
 
     // Create and show listing errors are shown above submit button
-    const createListingFailed = createListingsError
-      ? <p className={css.error}>
-          <FormattedMessage id="EditListingPhotosForm.createListingFailed" />
-        </p>
-      : null;
-    const showListingFailed = showListingsError
-      ? <p className={css.error}>
-          <FormattedMessage id="EditListingPhotosForm.showListingFailed" />
-        </p>
-      : null;
+    const createListingFailed = createListingsError ? (
+      <p className={css.error}>
+        <FormattedMessage id="EditListingPhotosForm.createListingFailed" />
+      </p>
+    ) : null;
+    const showListingFailed = showListingsError ? (
+      <p className={css.error}>
+        <FormattedMessage id="EditListingPhotosForm.showListingFailed" />
+      </p>
+    ) : null;
 
-    const errorMessage = updateError
-      ? <p className={css.error}>
-          <FormattedMessage id="EditListingPhotosForm.updateFailed" />
-        </p>
-      : null;
+    const errorMessage = updateError ? (
+      <p className={css.error}>
+        <FormattedMessage id="EditListingPhotosForm.updateFailed" />
+      </p>
+    ) : null;
 
     const classes = classNames(css.root, className);
 
     const submitReady = updated || ready;
     const submitInProgress = submitting || updateInProgress;
-    const submitDisabled = invalid ||
-      disabled ||
-      submitInProgress ||
-      this.state.imageUploadRequested ||
-      ready;
+    const submitDisabled =
+      invalid || disabled || submitInProgress || this.state.imageUploadRequested || ready;
 
     return (
       <Form className={classes} onSubmit={handleSubmit}>

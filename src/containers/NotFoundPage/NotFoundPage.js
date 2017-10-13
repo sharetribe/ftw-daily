@@ -21,13 +21,7 @@ export class NotFoundPageComponent extends Component {
   }
 
   render() {
-    const {
-      authInfoError,
-      history,
-      logoutError,
-      intl,
-      scrollingDisabled,
-    } = this.props;
+    const { authInfoError, history, logoutError, intl, scrollingDisabled } = this.props;
 
     const title = intl.formatMessage({
       id: 'NotFoundPage.title',

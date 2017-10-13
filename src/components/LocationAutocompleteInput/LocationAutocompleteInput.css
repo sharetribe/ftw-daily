@@ -31,7 +31,6 @@
   @media (--viewportMedium) {
     stroke-width: 2px;
   }
-
 }
 
 .input {
@@ -44,7 +43,7 @@
 
   /* Safari bugfix: without this Safari will print placeholder to a wrong place */
   &::-webkit-input-placeholder {
-    line-height:normal;
+    line-height: normal;
   }
 
   &:hover,

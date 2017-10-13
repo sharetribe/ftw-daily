@@ -33,18 +33,15 @@ const createFakeDispatch = (getState, sdk) => {
 
 // Get the dispatched actions from the fake dispatch function
 const dispatchedActions = fakeDispatch => {
-  return fakeDispatch.mock.calls.reduce(
-    (actions, args) => {
-      if (Array.isArray(args) && args.length === 1) {
-        const action = args[0];
-        return typeof action === 'object' ? actions.concat([action]) : actions;
-      } else {
-        console.error('fake dispatch invalid call args:', args);
-        throw new Error('Fake dispatch function should only be called with a single argument');
-      }
-    },
-    []
-  );
+  return fakeDispatch.mock.calls.reduce((actions, args) => {
+    if (Array.isArray(args) && args.length === 1) {
+      const action = args[0];
+      return typeof action === 'object' ? actions.concat([action]) : actions;
+    } else {
+      console.error('fake dispatch invalid call args:', args);
+      throw new Error('Fake dispatch function should only be called with a single argument');
+    }
+  }, []);
 };
 
 describe('Auth duck', () => {

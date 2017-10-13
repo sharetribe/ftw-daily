@@ -61,14 +61,15 @@ const TopbarMobileMenu = props => {
     );
   }
 
-  const notificationCountBadge = notificationCount > 0
-    ? <NotificationBadge className={css.notificationBadge} count={notificationCount} />
-    : null;
+  const notificationCountBadge =
+    notificationCount > 0 ? (
+      <NotificationBadge className={css.notificationBadge} count={notificationCount} />
+    ) : null;
 
   const displayName = user.attributes.profile.firstName;
   const currentPageClass = page => {
-    const isAccountSettingsPage = page === 'AccountSettingsPage' &&
-      ACCOUNT_SETTINGS_PAGES.includes(currentPage);
+    const isAccountSettingsPage =
+      page === 'AccountSettingsPage' && ACCOUNT_SETTINGS_PAGES.includes(currentPage);
     return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
   };
 
@@ -108,7 +109,6 @@ const TopbarMobileMenu = props => {
         >
           <FormattedMessage id="TopbarMobileMenu.accountSettingsLink" />
         </NamedLink>
-
       </div>
       <div className={css.footer}>
         <NamedLink className={css.createNewListingLink} name="NewListingPage">

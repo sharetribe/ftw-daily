@@ -1,7 +1,6 @@
 @import '../../marketplace.css';
 
 .inputRoot {
-
   /* Override react-dates default styles to match input styles */
 
   & :global(.SingleDatePicker) {
@@ -30,7 +29,6 @@
 }
 
 .fieldRoot {
-
 }
 
 .input {

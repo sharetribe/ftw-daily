@@ -34,7 +34,9 @@ const PlaceInfo = props => {
       <ul>
         <li>Address: {address}</li>
         <li>Country: {country || '[no country]'}</li>
-        <li>Coordinates: {origin.lat}, {origin.lng}</li>
+        <li>
+          Coordinates: {origin.lat}, {origin.lng}
+        </li>
         <li>Bounds: {bounds ? 'yes' : 'no'}</li>
       </ul>
     </div>

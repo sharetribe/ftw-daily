@@ -6,11 +6,7 @@ import { Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 export const SecurityPageComponent = props => {
-  const {
-    authInfoError,
-    logoutError,
-    scrollingDisabled,
-  } = props;
+  const { authInfoError, logoutError, scrollingDisabled } = props;
 
   return (
     <Page

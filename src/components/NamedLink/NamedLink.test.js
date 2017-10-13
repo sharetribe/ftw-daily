@@ -35,7 +35,9 @@ describe('NamedLink', () => {
   it('should contain correct link', () => {
     const id = 12;
     const tree = renderDeep(
-      <NamedLink name="ListingPageCanonical" params={{ id }}>to ListingPage</NamedLink>
+      <NamedLink name="ListingPageCanonical" params={{ id }}>
+        to ListingPage
+      </NamedLink>
     );
     expect(tree.type).toEqual('a');
     expect(tree.props.href).toEqual(`/l/${id}`);

@@ -21,8 +21,7 @@ import * as IconSearch from './components/IconSearch/IconSearch.example';
 import * as IconSpinner from './components/IconSpinner/IconSpinner.example';
 import * as ImageCarousel from './components/ImageCarousel/ImageCarousel.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
-import * as LocationAutocompleteInput
-  from './components/LocationAutocompleteInput/LocationAutocompleteInput.example';
+import * as LocationAutocompleteInput from './components/LocationAutocompleteInput/LocationAutocompleteInput.example';
 import * as ManageListingCard from './components/ManageListingCard/ManageListingCard.example';
 import * as Map from './components/Map/Map.example';
 import * as Menu from './components/Menu/Menu.example';
@@ -32,8 +31,7 @@ import * as NamedLink from './components/NamedLink/NamedLink.example';
 import * as PaginationLinks from './components/PaginationLinks/PaginationLinks.example';
 import * as ResponsiveImage from './components/ResponsiveImage/ResponsiveImage.example';
 import * as SelectField from './components/SelectField/SelectField.example';
-import * as StripeBankAccountTokenInputField
-  from './components/StripeBankAccountTokenInputField/StripeBankAccountTokenInputField.example';
+import * as StripeBankAccountTokenInputField from './components/StripeBankAccountTokenInputField/StripeBankAccountTokenInputField.example';
 import * as TabNav from './components/TabNav/TabNav.example';
 import * as Tabs from './components/Tabs/Tabs.example';
 import * as TextInputField from './components/TextInputField/TextInputField.example';
@@ -42,19 +40,13 @@ import * as TopbarDesktop from './components/TopbarDesktop/TopbarDesktop.example
 // containers
 import * as BookingDatesForm from './containers/BookingDatesForm/BookingDatesForm.example';
 import * as Colors from './containers/StyleguidePage/Colors.example';
-import * as EditListingDescriptionForm
-  from './containers/EditListingDescriptionForm/EditListingDescriptionForm.example';
-import * as EditListingLocationForm
-  from './containers/EditListingLocationForm/EditListingLocationForm.example';
-import * as EditListingPhotosForm
-  from './containers/EditListingPhotosForm/EditListingPhotosForm.example';
-import * as EditListingPricingForm
-  from './containers/EditListingPricingForm/EditListingPricingForm.example';
-import * as EmailVerificationForm
-  from './containers/EmailVerificationForm/EmailVerificationForm.example';
+import * as EditListingDescriptionForm from './containers/EditListingDescriptionForm/EditListingDescriptionForm.example';
+import * as EditListingLocationForm from './containers/EditListingLocationForm/EditListingLocationForm.example';
+import * as EditListingPhotosForm from './containers/EditListingPhotosForm/EditListingPhotosForm.example';
+import * as EditListingPricingForm from './containers/EditListingPricingForm/EditListingPricingForm.example';
+import * as EmailVerificationForm from './containers/EmailVerificationForm/EmailVerificationForm.example';
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
-import * as PasswordRecoveryForm
-  from './containers/PasswordRecoveryForm/PasswordRecoveryForm.example';
+import * as PasswordRecoveryForm from './containers/PasswordRecoveryForm/PasswordRecoveryForm.example';
 import * as PasswordResetForm from './containers/PasswordResetForm/PasswordResetForm.example';
 import * as PayoutDetailsForm from './containers/PayoutDetailsForm/PayoutDetailsForm.example';
 import * as SignupForm from './containers/SignupForm/SignupForm.example';

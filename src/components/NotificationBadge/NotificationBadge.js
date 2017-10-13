@@ -7,11 +7,7 @@ const NotificationBadge = props => {
   const { className, rootClassName, count } = props;
   const classes = classNames(rootClassName || css.root, className);
 
-  return (
-    <span className={classes}>
-      {count}
-    </span>
-  );
+  return <span className={classes}>{count}</span>;
 };
 
 const { number, string } = PropTypes;

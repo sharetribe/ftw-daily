@@ -22,7 +22,8 @@ const IconSearch = props => {
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <path d="M13 14l5.241 5.241" /><circle cx="7.5" cy="7.5" r="7.5" />
+        <path d="M13 14l5.241 5.241" />
+        <circle cx="7.5" cy="7.5" r="7.5" />
       </g>
     </svg>
   );

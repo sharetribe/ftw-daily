@@ -124,7 +124,8 @@ class PageComponent extends Component {
     // Schema for search engines (helps them to understand what this page is about)
     // http://schema.org
     // We are using JSON-LD format
-    const schemaJSONString = schema ||
+    const schemaJSONString =
+      schema ||
       JSON.stringify({
         '@context': 'http://schema.org',
         '@type': 'WebPage',
@@ -144,24 +145,19 @@ class PageComponent extends Component {
           <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
           <meta httpEquiv="Content-Language" content={intl.locale} />
           {metaTags}
-          <script type="application/ld+json">
-            {schemaJSONString}
-          </script>
-
+          <script type="application/ld+json">{schemaJSONString}</script>
         </Helmet>
-        {authInfoError
-          ? <div style={{ color: 'red' }}>
-              <FormattedMessage id="Page.authInfoFailed" />
-            </div>
-          : null}
-        {logoutError
-          ? <div style={{ color: 'red' }}>
-              <FormattedMessage id="Page.logoutFailed" />
-            </div>
-          : null}
-        <div className={css.content}>
-          {children}
-        </div>
+        {authInfoError ? (
+          <div style={{ color: 'red' }}>
+            <FormattedMessage id="Page.authInfoFailed" />
+          </div>
+        ) : null}
+        {logoutError ? (
+          <div style={{ color: 'red' }}>
+            <FormattedMessage id="Page.logoutFailed" />
+          </div>
+        ) : null}
+        <div className={css.content}>{children}</div>
       </div>
     );
   }

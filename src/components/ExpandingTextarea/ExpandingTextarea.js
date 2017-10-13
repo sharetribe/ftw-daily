@@ -10,12 +10,9 @@ class ExpandingTextarea extends Component {
   componentDidMount() {
     // Delay the autosize initialisation so that the autosize can
     // correctly calculate the height with the textarea value
-    this.timeoutId = window.setTimeout(
-      () => {
-        autosize(this.textarea);
-      },
-      100
-    );
+    this.timeoutId = window.setTimeout(() => {
+      autosize(this.textarea);
+    }, 100);
   }
   componentDidUpdate() {
     autosize.update(this.textarea);

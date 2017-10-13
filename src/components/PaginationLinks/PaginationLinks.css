@@ -1,6 +1,6 @@
 @import '../../marketplace.css';
 
-.root{
+.root {
   display: flex;
   justify-content: space-between;
   align-items: center;

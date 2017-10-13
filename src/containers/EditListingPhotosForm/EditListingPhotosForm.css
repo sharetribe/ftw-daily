@@ -39,7 +39,7 @@
   overflow: hidden;
 
   &::after {
-    content: ".";
+    content: '.';
     visibility: hidden;
     display: block;
     height: 0;
@@ -111,8 +111,8 @@
     font-weight: var(--fontWeightSemiBold);
     margin-top: 0;
     margin-bottom: 0;
-   }
- }
+  }
+}
 
 .imageTypes {
   @apply --marketplaceTinyFontStyles;
@@ -124,7 +124,7 @@
   @media (--viewportLarge) {
     margin-top: 0;
     margin-bottom: 0;
-   }
+  }
 }
 
 .addImageInput {

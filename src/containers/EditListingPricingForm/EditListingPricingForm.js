@@ -29,11 +29,11 @@ export const EditListingPricingFormComponent = props => {
     id: 'EditListingPricingForm.priceInputPlaceholder',
   });
 
-  const errorMessage = updateError
-    ? <p className={css.error}>
-        <FormattedMessage id="EditListingPricingForm.updateFailed" />
-      </p>
-    : null;
+  const errorMessage = updateError ? (
+    <p className={css.error}>
+      <FormattedMessage id="EditListingPricingForm.updateFailed" />
+    </p>
+  ) : null;
 
   const classes = classNames(css.root, className);
   const submitReady = updated;

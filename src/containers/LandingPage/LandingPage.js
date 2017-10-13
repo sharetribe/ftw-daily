@@ -13,14 +13,7 @@ import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
 
 export const LandingPageComponent = props => {
-  const {
-    authInfoError,
-    history,
-    intl,
-    location,
-    logoutError,
-    scrollingDisabled,
-  } = props;
+  const { authInfoError, history, intl, location, logoutError, scrollingDisabled } = props;
 
   // Schema for search engines (helps them to understand what this page is about)
   // http://schema.org
@@ -41,8 +34,7 @@ export const LandingPageComponent = props => {
       title={schemaTitle}
       facebookImages={[{ url: facebookImage, width: 1200, height: 630 }]}
       twitterImages={[{ url: twitterImage, width: 600, height: 314 }]}
-      schema={
-        `
+      schema={`
         {
           "@context": "http://schema.org",
           "@type": "WebPage",
@@ -52,8 +44,7 @@ export const LandingPageComponent = props => {
             "${schemaImage}"
           ]
         }
-      `
-      }
+      `}
     >
       <TopbarContainer />
       <div className={css.heroContainer}>

@@ -31,13 +31,15 @@ export const openGraphMetaProps = data => {
   } = data;
 
   if (
-    !(title &&
+    !(
+      title &&
       description &&
       contentType &&
       url &&
       facebookImages &&
       facebookImages.length > 0 &&
-      canonicalRootURL)
+      canonicalRootURL
+    )
   ) {
     /* eslint-disable no-console */
     if (console && console.warning) {
@@ -154,12 +156,7 @@ export const twitterMetaProps = data => {
  * Creates data for Open Graph and Twitter meta tags.
  */
 export const metaTagProps = tagData => {
-  const {
-    canonicalRootURL,
-    facebookAppId,
-    siteTitle,
-    siteTwitterHandle,
-  } = config;
+  const { canonicalRootURL, facebookAppId, siteTitle, siteTwitterHandle } = config;
 
   const author = tagData.author || siteTitle;
   const defaultMeta = [

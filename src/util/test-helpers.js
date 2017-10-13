@@ -17,9 +17,7 @@ export const TestProvider = props => {
   return (
     <IntlProvider locale="en" messages={localeData}>
       <BrowserRouter>
-        <Provider store={store}>
-          {props.children}
-        </Provider>
+        <Provider store={store}>{props.children}</Provider>
       </BrowserRouter>
     </IntlProvider>
   );
@@ -42,10 +40,6 @@ export const renderShallow = component => {
 // Fully render the given component to a JSON structure that can be
 // used in snapshot tests.
 export const renderDeep = component => {
-  const comp = renderer.create(
-    <TestProvider>
-      {component}
-    </TestProvider>
-  );
+  const comp = renderer.create(<TestProvider>{component}</TestProvider>);
   return comp.toJSON();
 };

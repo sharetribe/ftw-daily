@@ -33,9 +33,8 @@ const ListingCard = props => {
   const { className, clickHandler, history, intl, isInCarousel, listing } = props;
 
   const { title, price } = listing.attributes;
-  const formattedPrice = price && price.currency === config.currency
-    ? formatMoney(intl, price)
-    : price.currency;
+  const formattedPrice =
+    price && price.currency === config.currency ? formatMoney(intl, price) : price.currency;
   const firstImage = listing.images && listing.images.length > 0 ? listing.images[0] : null;
   const urlToListing = createURL(routeConfiguration(), history, listing);
 
@@ -78,12 +77,8 @@ const ListingCard = props => {
           </div>
         </div>
         <div className={classNames(css.info, { [css.borderRadiusInheritBottom]: !isInCarousel })}>
-          <div className={css.price}>
-            {formattedPrice}
-          </div>
-          <div className={css.name}>
-            {title}
-          </div>
+          <div className={css.price}>{formattedPrice}</div>
+          <div className={css.name}>{title}</div>
         </div>
       </div>
     </a>
@@ -133,35 +128,35 @@ class SearchMapInfoCard extends Component {
     // Explicit type change to object literal for Google OverlayViews (geolocation is SDK type)
     const latLngLiteral = { lat: geolocation.lat, lng: geolocation.lng };
     const hasCarousel = listings.length > 1;
-    const pagination = hasCarousel
-      ? <div className={classNames(css.paginationInfo, css.borderRadiusInheritBottom)}>
-          <button
-            className={css.paginationPrev}
-            onClick={e => {
-              e.preventDefault();
-              e.stopPropagation();
-              this.setState(prevState => ({
-                currentListingIndex: (prevState.currentListingIndex + listings.length - 1) %
-                  listings.length,
-              }));
-            }}
-          />
-          <div className={css.paginationPage}>
-            {`${this.state.currentListingIndex + 1}/${listings.length}`}
-          </div>
-          <button
-            className={css.paginationNext}
-            onClick={e => {
-              e.preventDefault();
-              e.stopPropagation();
-              this.setState(prevState => ({
-                currentListingIndex: (prevState.currentListingIndex + listings.length + 1) %
-                  listings.length,
-              }));
-            }}
-          />
+    const pagination = hasCarousel ? (
+      <div className={classNames(css.paginationInfo, css.borderRadiusInheritBottom)}>
+        <button
+          className={css.paginationPrev}
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.setState(prevState => ({
+              currentListingIndex:
+                (prevState.currentListingIndex + listings.length - 1) % listings.length,
+            }));
+          }}
+        />
+        <div className={css.paginationPage}>
+          {`${this.state.currentListingIndex + 1}/${listings.length}`}
         </div>
-      : null;
+        <button
+          className={css.paginationNext}
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.setState(prevState => ({
+              currentListingIndex:
+                (prevState.currentListingIndex + listings.length + 1) % listings.length,
+            }));
+          }}
+        />
+      </div>
+    ) : null;
 
     const classes = classNames(rootClassName || css.root, className);
     const caretClass = classNames(css.caret, { [css.caretWithCarousel]: hasCarousel });

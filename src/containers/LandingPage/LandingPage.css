@@ -1,7 +1,6 @@
 @import '../../marketplace.css';
 
 .root {
-
 }
 
 /* heroContainer gives the height for HeroSection */
@@ -14,11 +13,11 @@
 
   @media (--viewportMedium) {
     min-height: calc(100vh - var(--topbarHeightDesktop));
-    border: solid 24px #FFF;
+    border: solid 24px #fff;
   }
 
   @media (--viewportLarge) {
-    border: solid 36px #FFF;
+    border: solid 36px #fff;
   }
 }
 

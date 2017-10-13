@@ -14,10 +14,14 @@ const MenuWrapper = () => {
       </MenuLabel>
       <MenuContent style={style}>
         <MenuItem key="first item">
-          <InlineTextButton onClick={noop} style={btnStyle}>Click this</InlineTextButton>
+          <InlineTextButton onClick={noop} style={btnStyle}>
+            Click this
+          </InlineTextButton>
         </MenuItem>
         <MenuItem key="second item">
-          <InlineTextButton onClick={noop} style={btnStyle}>Click this</InlineTextButton>
+          <InlineTextButton onClick={noop} style={btnStyle}>
+            Click this
+          </InlineTextButton>
         </MenuItem>
       </MenuContent>
     </Menu>
@@ -25,7 +29,11 @@ const MenuWrapper = () => {
 };
 
 const MenuOnLeft = () => {
-  return <div style={{ width: '50px' }}><MenuWrapper /></div>;
+  return (
+    <div style={{ width: '50px' }}>
+      <MenuWrapper />
+    </div>
+  );
 };
 
 export const MenuBasic = {

@@ -10,7 +10,8 @@ export const withTogglePageClassNames = Component => {
     <Component togglePageClassNames={context.togglePageClassNames} {...props} />
   );
 
-  WithTogglePageClassNamesComponent.displayName = `withTogglePageClassNames(${Component.displayName || Component.name})`;
+  WithTogglePageClassNamesComponent.displayName = `withTogglePageClassNames(${Component.displayName ||
+    Component.name})`;
 
   const { func } = PropTypes;
 

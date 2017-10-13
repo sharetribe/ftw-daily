@@ -27,7 +27,8 @@ export default (state = initialState, action) => {
 
     case REMOVE_FLASH_NOTIFICATION:
       return state.map(findIndex(state, msg => msg.id === payload.id), msg =>
-        msg.set('isRead', true));
+        msg.set('isRead', true)
+      );
 
     default:
       return state;

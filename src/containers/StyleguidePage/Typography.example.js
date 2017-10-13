@@ -140,20 +140,16 @@ const Fonts = () => {
     <div className={css.typographyContent}>
       <p className={css.spacing2x}>
         The line-height of typographic elements is an multiple of 6px on mobile and multiple of 8px
-        on desktop. In addition to line-height, baselines are adjusted with vertical padding
-        (the sum of those paddings will be 6px on mobile or 8px on desktop). As a result one can
-        position following typographic elements with margins that are also multiples of 6px (or 8px).
+        on desktop. In addition to line-height, baselines are adjusted with vertical padding (the
+        sum of those paddings will be 6px on mobile or 8px on desktop). As a result one can position
+        following typographic elements with margins that are also multiples of 6px (or 8px).
       </p>
       <p className={css.spacing2x}>
         N.B. box-sizing is border-box, so borders affect to the total height of elements.
       </p>
       <div className={fontsContainerClasses}>
         <Font
-          component={() => (
-            <p className={css.heroTitle}>
-              Hello beautiful world.
-            </p>
-          )}
+          component={() => <p className={css.heroTitle}>Hello beautiful world.</p>}
           description="--marketplaceHeroTitleFontStyles: Biggest font style. Used in the hero in landingPage. Works as a site title."
           styling={heroTitleFontStyling}
         />
@@ -192,18 +188,17 @@ const Fonts = () => {
         <Font
           component={() => (
             <p>
-              Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+              Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod.
+              Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis
+              mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec
+              elit.
             </p>
           )}
           description="--marketplaceBodyFontStyles, p, button, etc: Paragraphs and other body texts."
           styling={bodyFontStyling}
         />
         <Font
-          component={() => (
-            <p className={css.tinyFont}>
-              Hosted by user
-            </p>
-          )}
+          component={() => <p className={css.tinyFont}>Hosted by user</p>}
           description="--marketplaceTinyFontStyles: Very small print."
           styling={tinyFontStyling}
         />

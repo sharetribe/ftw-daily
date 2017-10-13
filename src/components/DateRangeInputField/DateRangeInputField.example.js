@@ -37,7 +37,9 @@ export const Empty = {
       startDatePlaceholderText: moment().format('ddd, MMMM D'),
       endDateId: `${defaultFormName}.bookingEndDate`,
       endDateLabel: 'End date',
-      endDatePlaceholderText: moment().add(1, 'days').format('ddd, MMMM D'),
+      endDatePlaceholderText: moment()
+        .add(1, 'days')
+        .format('ddd, MMMM D'),
       format: null,
       validate: [
         required('Required'),

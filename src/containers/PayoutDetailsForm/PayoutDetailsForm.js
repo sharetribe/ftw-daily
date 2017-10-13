@@ -129,76 +129,75 @@ const PayoutDetailsFormComponent = props => {
   );
 
   const showAddressFields = country && requiresAddress(country);
-  const addressSection = showAddressFields
-    ? <div>
+  const addressSection = showAddressFields ? (
+    <div>
+      <TextInputField
+        className={css.field}
+        type="text"
+        name="streetAddress"
+        id={`${form}.streetAddress`}
+        label={streetAddressLabel}
+        placeholder={streetAddressPlaceholder}
+        validate={streetAddressRequired}
+        clearOnUnmount
+      />
+      <div className={css.formRow}>
         <TextInputField
-          className={css.field}
+          className={css.postalCode}
           type="text"
-          name="streetAddress"
-          id={`${form}.streetAddress`}
-          label={streetAddressLabel}
-          placeholder={streetAddressPlaceholder}
-          validate={streetAddressRequired}
+          name="postalCode"
+          id={`${form}.postalCode`}
+          label={postalCodeLabel}
+          placeholder={postalCodePlaceholder}
+          validate={postalCodeRequired}
           clearOnUnmount
         />
-        <div className={css.formRow}>
-          <TextInputField
-            className={css.postalCode}
-            type="text"
-            name="postalCode"
-            id={`${form}.postalCode`}
-            label={postalCodeLabel}
-            placeholder={postalCodePlaceholder}
-            validate={postalCodeRequired}
-            clearOnUnmount
-          />
-          <TextInputField
-            className={css.city}
-            type="text"
-            name="city"
-            id={`${form}.city`}
-            label={cityLabel}
-            placeholder={cityPlaceholder}
-            validate={cityRequired}
-            clearOnUnmount
-          />
-        </div>
+        <TextInputField
+          className={css.city}
+          type="text"
+          name="city"
+          id={`${form}.city`}
+          label={cityLabel}
+          placeholder={cityPlaceholder}
+          validate={cityRequired}
+          clearOnUnmount
+        />
       </div>
-    : null;
+    </div>
+  ) : null;
 
   // StripeBankAccountTokenInputField handles the error messages
   // internally, we just have to make sure we require a valid token
   // out of the field. Therefore the empty validation message.
   const bankAccountRequired = validators.required(' ');
 
-  const bankAccountSection = country
-    ? <div className={css.sectionContainer}>
-        <h3 className={css.subTitle}>
-          <FormattedMessage id="PayoutDetailsForm.bankDetails" />
-        </h3>
-        <StripeBankAccountTokenInputField
-          name="bankAccountToken"
-          formName={form}
-          country={country}
-          currency={countryCurrency(country)}
-          validate={bankAccountRequired}
-        />
-      </div>
-    : null;
+  const bankAccountSection = country ? (
+    <div className={css.sectionContainer}>
+      <h3 className={css.subTitle}>
+        <FormattedMessage id="PayoutDetailsForm.bankDetails" />
+      </h3>
+      <StripeBankAccountTokenInputField
+        name="bankAccountToken"
+        formName={form}
+        country={country}
+        currency={countryCurrency(country)}
+        validate={bankAccountRequired}
+      />
+    </div>
+  ) : null;
 
   const classes = classNames(css.root, className);
   const submitReady = false;
   const submitInProgress = submitting || inProgress;
   const submitDisabled = pristine || invalid || disabled || submitInProgress;
-  const error = createStripeAccountError
-    ? <div className={css.error}>
-        <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailed" />
-      </div>
-    : null;
+  const error = createStripeAccountError ? (
+    <div className={css.error}>
+      <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailed" />
+    </div>
+  ) : null;
 
   return (
     <Form className={classes} onSubmit={handleSubmit}>
-
       <div className={css.sectionContainer}>
         <h3 className={css.subTitle}>
           <FormattedMessage id="PayoutDetailsForm.personalDetailsTitle" />

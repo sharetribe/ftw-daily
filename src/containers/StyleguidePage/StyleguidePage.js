@@ -31,7 +31,6 @@ const Example = props => {
           {componentName}
         </NamedLink>
         /
-
         <NamedLink
           name="StyleguideComponentExample"
           params={{ component: componentName, example: exampleName }}
@@ -102,13 +101,9 @@ const Nav = props => {
 
   return (
     <nav className={css.withMargin}>
-      <ul>
-        {toGroupLink(ALL)}
-      </ul>
+      <ul>{toGroupLink(ALL)}</ul>
       <h5>Basic styling</h5>
-      <ul className={css.groups}>
-        {basicStylingGroups}
-      </ul>
+      <ul className={css.groups}>{basicStylingGroups}</ul>
       <h5>Component categories</h5>
       <ul className={css.groups}>
         {componentGroups}
@@ -128,34 +123,30 @@ Nav.propTypes = {
 // The imported examples are in a nested tree structure. Flatten the
 // structure into an array of example objects.
 const flatExamples = examples => {
-  return Object.keys(examples).reduce(
-    (flattened, componentName) => {
-      const exs = Object.keys(examples[componentName]).reduce(
-        (result, exampleName) => {
-          const ex = examples[componentName][exampleName];
-          return result.concat([
-            {
-              componentName,
-              exampleName,
-              group: DEFAULT_GROUP,
-              ...ex,
-            },
-          ]);
+  return Object.keys(examples).reduce((flattened, componentName) => {
+    const exs = Object.keys(examples[componentName]).reduce((result, exampleName) => {
+      const ex = examples[componentName][exampleName];
+      return result.concat([
+        {
+          componentName,
+          exampleName,
+          group: DEFAULT_GROUP,
+          ...ex,
         },
-        []
-      );
-      return flattened.concat(exs);
-    },
-    []
-  );
+      ]);
+    }, []);
+    return flattened.concat(exs);
+  }, []);
 };
 
 // Filter the examples based on the given criteria
 const examplesFor = (examples, group, componentName, exampleName) => {
   return examples.filter(ex => {
-    return (group === ALL || ex.group === group) &&
+    return (
+      (group === ALL || ex.group === group) &&
       (componentName === ALL || ex.componentName === componentName) &&
-      (exampleName === ALL || ex.exampleName === exampleName);
+      (exampleName === ALL || ex.exampleName === exampleName)
+    );
   });
 };
 
@@ -177,15 +168,12 @@ const StyleguidePage = props => {
   const exampleName = params.example || ALL;
 
   const flattened = flatExamples(allExamples);
-  const groups = flattened.reduce(
-    (result, ex) => {
-      if (ex.group && !result.includes(ex.group)) {
-        return result.concat(ex.group);
-      }
-      return result;
-    },
-    []
-  );
+  const groups = flattened.reduce((result, ex) => {
+    if (ex.group && !result.includes(ex.group)) {
+      return result.concat(ex.group);
+    }
+    return result;
+  }, []);
   groups.sort();
   const selectedGroup = isEmpty(params) ? ALL : params.group;
   const examples = examplesFor(flattened, group, componentName, exampleName);
@@ -197,20 +185,31 @@ const StyleguidePage = props => {
     const { component: ExampleComponent, props: exampleProps } = examples[0];
     return <ExampleComponent {...exampleProps} />;
   } else if (raw) {
-    return <p>No example with filter {componentName}/{exampleName}/raw</p>;
+    return (
+      <p>
+        No example with filter {componentName}/{exampleName}/raw
+      </p>
+    );
   }
 
-  const html = examples.length > 0
-    ? <ul className={css.examplesList}>
+  const html =
+    examples.length > 0 ? (
+      <ul className={css.examplesList}>
         {examples.map(ex => <Example key={`${ex.componentName}/${ex.exampleName}`} {...ex} />)}
       </ul>
-    : <p>No examples with filter: {componentName}/{exampleName}</p>;
+    ) : (
+      <p>
+        No examples with filter: {componentName}/{exampleName}
+      </p>
+    );
 
   return (
     <section className={css.root}>
       <div className={css.navBar}>
         <h1 className={css.withMargin}>
-          <NamedLink name="Styleguide" className={css.link}>Styleguide</NamedLink>
+          <NamedLink name="Styleguide" className={css.link}>
+            Styleguide
+          </NamedLink>
         </h1>
         <h2 className={css.withMargin}>Select category:</h2>
         <Nav groups={groups} selectedGroup={selectedGroup} />

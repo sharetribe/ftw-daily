@@ -13,11 +13,7 @@ const SideNavWrapper = props => {
 
   const classes = classNames(rootClassName || css.sideNavWrapper, className);
 
-  return (
-    <aside className={classes}>
-      {children}
-    </aside>
-  );
+  return <aside className={classes}>{children}</aside>;
 };
 
 SideNavWrapper.defaultProps = {

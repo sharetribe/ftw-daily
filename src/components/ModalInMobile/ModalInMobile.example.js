@@ -23,9 +23,7 @@ class ModalInMobileWrapper extends Component {
   render() {
     return (
       <div>
-        <div style={{ margin: '1rem' }}>
-          Wrapper text before ModalInMobile
-        </div>
+        <div style={{ margin: '1rem' }}>Wrapper text before ModalInMobile</div>
         <ModalInMobile
           {...this.props}
           onClose={() => {
@@ -35,12 +33,12 @@ class ModalInMobileWrapper extends Component {
           isModalOpenOnMobile={this.state.isOpen}
           onManageDisableScrolling={onManageDisableScrolling}
         >
-          <div style={{ margin: '1rem' }}>
-            Some content inside ModalInMobile component
-          </div>
+          <div style={{ margin: '1rem' }}>Some content inside ModalInMobile component</div>
         </ModalInMobile>
         <div style={{ margin: '1rem' }}>
-          <Button onClick={this.handleOpen} className={css.visibleOnMobileLayout}>Open</Button>
+          <Button onClick={this.handleOpen} className={css.visibleOnMobileLayout}>
+            Open
+          </Button>
         </div>
       </div>
     );

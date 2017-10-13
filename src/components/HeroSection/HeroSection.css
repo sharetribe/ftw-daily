@@ -9,7 +9,7 @@
     animation-timing-function: ease-out;
     -webkit-animation-fill-mode: forwards;
 
-    visibility:hidden;
+    visibility: hidden;
     opacity: 1;
     position: relative;
   }
@@ -18,8 +18,16 @@
 /* Animation for the hero elements */
 
 @keyframes animationTitle {
-  0%    { visibility: hidden; opacity: 0; top: -20px; }
-  100%  { visibility: visible; opacity: 1; top: 0;}
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    top: -20px;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    top: 0;
+  }
 }
 
 .root {

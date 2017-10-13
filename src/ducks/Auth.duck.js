@@ -119,71 +119,67 @@ export const userLogout = () => ({ type: USER_LOGOUT });
 
 // ================ Thunks ================ //
 
-export const authInfo = () =>
-  (dispatch, getState, sdk) => {
-    dispatch(authInfoRequest());
-    return sdk
-      .authInfo()
-      .then(info => dispatch(authInfoSuccess(info)))
-      .catch(e => dispatch(authInfoError(e)));
-  };
+export const authInfo = () => (dispatch, getState, sdk) => {
+  dispatch(authInfoRequest());
+  return sdk
+    .authInfo()
+    .then(info => dispatch(authInfoSuccess(info)))
+    .catch(e => dispatch(authInfoError(e)));
+};
 
-export const login = (username, password) =>
-  (dispatch, getState, sdk) => {
-    if (authenticationInProgress(getState())) {
-      return Promise.reject(new Error('Login or logout already in progress'));
-    }
-    dispatch(loginRequest());
+export const login = (username, password) => (dispatch, getState, sdk) => {
+  if (authenticationInProgress(getState())) {
+    return Promise.reject(new Error('Login or logout already in progress'));
+  }
+  dispatch(loginRequest());
 
-    // Note that the thunk does not reject when the login fails, it
-    // just dispatches the login error action.
-    return sdk
-      .login({ username, password })
-      .then(() => dispatch(loginSuccess()))
-      .then(() => dispatch(fetchCurrentUser()))
-      .catch(e => dispatch(loginError(e)));
-  };
+  // Note that the thunk does not reject when the login fails, it
+  // just dispatches the login error action.
+  return sdk
+    .login({ username, password })
+    .then(() => dispatch(loginSuccess()))
+    .then(() => dispatch(fetchCurrentUser()))
+    .catch(e => dispatch(loginError(e)));
+};
 
-export const logout = () =>
-  (dispatch, getState, sdk) => {
-    if (authenticationInProgress(getState())) {
-      return Promise.reject(new Error('Login or logout already in progress'));
-    }
-    dispatch(logoutRequest());
+export const logout = () => (dispatch, getState, sdk) => {
+  if (authenticationInProgress(getState())) {
+    return Promise.reject(new Error('Login or logout already in progress'));
+  }
+  dispatch(logoutRequest());
 
-    // Not that the thunk does not reject when the logout fails, it
-    // just dispatches the logout error action.
-    return sdk
-      .logout()
-      .then(() => dispatch(clearCurrentUser()))
-      .then(() => dispatch(logoutSuccess()))
-      .then(() => {
-        dispatch(userLogout());
-        log.clearUserId();
-      })
-      .catch(e => dispatch(logoutError(e)));
-  };
+  // Not that the thunk does not reject when the logout fails, it
+  // just dispatches the logout error action.
+  return sdk
+    .logout()
+    .then(() => dispatch(clearCurrentUser()))
+    .then(() => dispatch(logoutSuccess()))
+    .then(() => {
+      dispatch(userLogout());
+      log.clearUserId();
+    })
+    .catch(e => dispatch(logoutError(e)));
+};
 
-export const signup = params =>
-  (dispatch, getState, sdk) => {
-    if (authenticationInProgress(getState())) {
-      return Promise.reject(new Error('Login or logout already in progress'));
-    }
-    dispatch(signupRequest());
-    const { email, password } = params;
+export const signup = params => (dispatch, getState, sdk) => {
+  if (authenticationInProgress(getState())) {
+    return Promise.reject(new Error('Login or logout already in progress'));
+  }
+  dispatch(signupRequest());
+  const { email, password } = params;
 
-    // We must login the user if signup succeeds since the API doesn't
-    // do that automatically.
-    return sdk.currentUser
-      .create(params)
-      .then(() => dispatch(signupSuccess()))
-      .then(() => dispatch(login(email, password)))
-      .catch(e => {
-        dispatch(signupError(e));
-        log.error(e, 'signup-failed', {
-          email: params.email,
-          firstName: params.firstName,
-          lastName: params.lastName,
-        });
+  // We must login the user if signup succeeds since the API doesn't
+  // do that automatically.
+  return sdk.currentUser
+    .create(params)
+    .then(() => dispatch(signupSuccess()))
+    .then(() => dispatch(login(email, password)))
+    .catch(e => {
+      dispatch(signupError(e));
+      log.error(e, 'signup-failed', {
+        email: params.email,
+        firstName: params.firstName,
+        lastName: params.lastName,
       });
-  };
+    });
+};

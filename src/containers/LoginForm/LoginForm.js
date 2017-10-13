@@ -60,7 +60,6 @@ const LoginFormComponent = props => {
 
   return (
     <Form className={classes} onSubmit={handleSubmit}>
-
       <div>
         <TextInputField
           type="email"

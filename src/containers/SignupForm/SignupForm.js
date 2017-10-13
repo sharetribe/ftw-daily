@@ -153,7 +153,6 @@ const SignupFormComponent = props => {
           <FormattedMessage id="SignupForm.signUp" />
         </PrimaryButton>
       </div>
-
     </Form>
   );
 };

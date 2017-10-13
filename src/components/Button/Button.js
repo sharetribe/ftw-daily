@@ -36,7 +36,11 @@ class Button extends Component {
     // the client side is handling the submit.
     const buttonDisabled = this.state.mounted ? disabled : true;
 
-    return <button className={classes} {...rest} disabled={buttonDisabled}>{content}</button>;
+    return (
+      <button className={classes} {...rest} disabled={buttonDisabled}>
+        {content}
+      </button>
+    );
   }
 }
 

@@ -85,7 +85,6 @@
     height: var(--avatarSizeDesktop);
     border-radius: calc(var(--avatarSizeDesktop) / 2);
   }
-
 }
 
 .avatarPlaceholder {
@@ -245,7 +244,6 @@
     margin-top: 0;
     margin-bottom: 11px;
   }
-
 }
 
 .fileInfo {

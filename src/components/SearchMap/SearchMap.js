@@ -114,14 +114,14 @@ const MapWithGoogleMap = withGoogleMap(props => {
   });
 
   const listingsArray = Array.isArray(infoCardOpen) ? infoCardOpen : [infoCardOpen];
-  const openedCard = infoCardOpen
-    ? <SearchMapInfoCard
-        key={listingsArray[0].id.uuid}
-        className={INFO_CARD_HANDLE}
-        listings={listingsArray}
-        onClickCallback={onCloseAsModal}
-      />
-    : null;
+  const openedCard = infoCardOpen ? (
+    <SearchMapInfoCard
+      key={listingsArray[0].id.uuid}
+      className={INFO_CARD_HANDLE}
+      listings={listingsArray}
+      onClickCallback={onCloseAsModal}
+    />
+  ) : null;
 
   return (
     <GoogleMap

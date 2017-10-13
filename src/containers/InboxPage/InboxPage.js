@@ -128,9 +128,7 @@ export const InboxItem = props => {
       <div className={css.itemAvatar}>
         <Avatar user={otherUser} />
       </div>
-      <div className={css.rowNotificationDot}>
-        {rowNotificationDot}
-      </div>
+      <div className={css.rowNotificationDot}>{rowNotificationDot}</div>
       <div className={css.itemInfo}>
         <div className={classNames(css.itemUsername, stateData.nameClassName)}>
           {otherUserDisplayName}
@@ -194,40 +192,45 @@ export const InboxPageComponent = props => {
     );
   };
 
-  const error = fetchOrdersOrSalesError
-    ? <p className={css.error}>
-        <FormattedMessage id="InboxPage.fetchFailed" />
-      </p>
-    : null;
+  const error = fetchOrdersOrSalesError ? (
+    <p className={css.error}>
+      <FormattedMessage id="InboxPage.fetchFailed" />
+    </p>
+  ) : null;
 
-  const noResults = !fetchInProgress && transactions.length === 0 && !fetchOrdersOrSalesError
-    ? <li key="noResults" className={css.noResults}>
+  const noResults =
+    !fetchInProgress && transactions.length === 0 && !fetchOrdersOrSalesError ? (
+      <li key="noResults" className={css.noResults}>
         <FormattedMessage id={isOrders ? 'InboxPage.noOrdersFound' : 'InboxPage.noSalesFound'} />
       </li>
-    : null;
+    ) : null;
 
   const hasOrderOrSaleTransactions = (tx, isOrdersTab, user) => {
     return isOrdersTab
       ? tx && tx.length > 0 && tx[0].customer.id.uuid === user.id.uuid
       : tx && tx.length > 0 && tx[0].provider.id.uuid === user.id.uuid;
   };
-  const hasTransactions = !fetchInProgress &&
-    hasOrderOrSaleTransactions(transactions, isOrders, currentUser);
-  const pagingLinks = hasTransactions && pagination && pagination.totalPages > 1
-    ? <PaginationLinks
+  const hasTransactions =
+    !fetchInProgress && hasOrderOrSaleTransactions(transactions, isOrders, currentUser);
+  const pagingLinks =
+    hasTransactions && pagination && pagination.totalPages > 1 ? (
+      <PaginationLinks
         className={css.pagination}
         pageName="InboxPage"
         pagePathParams={params}
         pagination={pagination}
       />
-    : null;
+    ) : null;
 
-  const providerNotificationBadge = providerNotificationCount > 0
-    ? <NotificationBadge count={providerNotificationCount} />
-    : null;
+  const providerNotificationBadge =
+    providerNotificationCount > 0 ? <NotificationBadge count={providerNotificationCount} /> : null;
   const tabs = [
     {
-      text: <span><FormattedMessage id="InboxPage.ordersTabTitle" /></span>,
+      text: (
+        <span>
+          <FormattedMessage id="InboxPage.ordersTabTitle" />
+        </span>
+      ),
       selected: isOrders,
       linkProps: {
         name: 'InboxPage',
@@ -236,7 +239,10 @@ export const InboxPageComponent = props => {
     },
     {
       text: (
-        <span><FormattedMessage id="InboxPage.salesTabTitle" />{providerNotificationBadge}</span>
+        <span>
+          <FormattedMessage id="InboxPage.salesTabTitle" />
+          {providerNotificationBadge}
+        </span>
       ),
       selected: !isOrders,
       linkProps: {
@@ -311,17 +317,9 @@ InboxPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const {
-    fetchInProgress,
-    fetchOrdersOrSalesError,
-    pagination,
-    transactionRefs,
-  } = state.InboxPage;
+  const { fetchInProgress, fetchOrdersOrSalesError, pagination, transactionRefs } = state.InboxPage;
   const { authInfoError, logoutError } = state.Auth;
-  const {
-    currentUser,
-    currentUserNotificationCount: providerNotificationCount,
-  } = state.user;
+  const { currentUser, currentUserNotificationCount: providerNotificationCount } = state.user;
   return {
     authInfoError,
     currentUser,

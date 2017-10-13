@@ -16,20 +16,15 @@ const { Money } = types;
 // Validate the assumption that the commission exists and the amount
 // is zero or negative.
 const isValidCommission = commissionLineItem => {
-  return commissionLineItem &&
+  return (
+    commissionLineItem &&
     commissionLineItem.lineTotal instanceof Money &&
-    commissionLineItem.lineTotal.amount <= 0;
+    commissionLineItem.lineTotal.amount <= 0
+  );
 };
 
 export const BookingBreakdownComponent = props => {
-  const {
-    rootClassName,
-    className,
-    userRole,
-    transaction,
-    booking,
-    intl,
-  } = props;
+  const { rootClassName, className, userRole, transaction, booking, intl } = props;
 
   const isProvider = userRole === 'provider';
   const classes = classNames(rootClassName || css.root, className);
@@ -67,14 +62,14 @@ export const BookingBreakdownComponent = props => {
     item => item.code === (isProvider ? 'line-item/provider-refund' : 'line-item/customer-refund')
   );
 
-  const refundInfo = refund
-    ? <div className={css.lineItem}>
-        <span className={css.itemLabel}>
-          <FormattedMessage id="BookingBreakdown.refund" />
-        </span>
-        <span className={css.itemValue}>{formatMoney(intl, refund.lineTotal)}</span>
-      </div>
-    : null;
+  const refundInfo = refund ? (
+    <div className={css.lineItem}>
+      <span className={css.itemLabel}>
+        <FormattedMessage id="BookingBreakdown.refund" />
+      </span>
+      <span className={css.itemValue}>{formatMoney(intl, refund.lineTotal)}</span>
+    </div>
+  ) : null;
 
   const nightCount = nightPurchase.quantity.toFixed();
   const nightCountMessage = (
@@ -129,9 +124,11 @@ export const BookingBreakdownComponent = props => {
     providerTotalMessageId = 'BookingBreakdown.providerTotalCanceled';
   }
 
-  const totalLabel = isProvider
-    ? <FormattedMessage id={providerTotalMessageId} />
-    : <FormattedMessage id="BookingBreakdown.total" />;
+  const totalLabel = isProvider ? (
+    <FormattedMessage id={providerTotalMessageId} />
+  ) : (
+    <FormattedMessage id="BookingBreakdown.total" />
+  );
 
   const totalPrice = isProvider
     ? transaction.attributes.payoutTotal
@@ -147,9 +144,7 @@ export const BookingBreakdownComponent = props => {
         <span className={css.itemValue}>{formattedUnitPrice}</span>
       </div>
       <div className={css.lineItem}>
-        <span className={css.itemLabel}>
-          {bookingPeriod}
-        </span>
+        <span className={css.itemLabel}>{bookingPeriod}</span>
         <span className={css.itemValue}>{nightCountMessage}</span>
       </div>
       {subTotalInfo}
@@ -157,12 +152,8 @@ export const BookingBreakdownComponent = props => {
       {refundInfo}
       <hr className={css.totalDivider} />
       <div className={css.lineItem}>
-        <div className={css.totalLabel}>
-          {totalLabel}
-        </div>
-        <div className={css.totalPrice}>
-          {formattedTotalPrice}
-        </div>
+        <div className={css.totalLabel}>{totalLabel}</div>
+        <div className={css.totalPrice}>{formattedTotalPrice}</div>
       </div>
     </div>
   );

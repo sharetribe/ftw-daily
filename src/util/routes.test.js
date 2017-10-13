@@ -25,16 +25,11 @@ describe('util/routes.js', () => {
         TypeError('Expected "slug" to be defined')
       );
       expect(() =>
-        createResourceLocatorString('ListingPage', routes, { id: '1234' }, {})).toThrowError(
-        TypeError('Expected "slug" to be defined')
-      );
+        createResourceLocatorString('ListingPage', routes, { id: '1234' }, {})
+      ).toThrowError(TypeError('Expected "slug" to be defined'));
       expect(() =>
-        createResourceLocatorString(
-          'ListingPage',
-          routes,
-          { slug: 'nice-listing' },
-          {}
-        )).toThrowError(TypeError('Expected "id" to be defined'));
+        createResourceLocatorString('ListingPage', routes, { slug: 'nice-listing' }, {})
+      ).toThrowError(TypeError('Expected "id" to be defined'));
     });
 
     it('should return meaningful strings with search parameters', () => {

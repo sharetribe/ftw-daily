@@ -50,9 +50,8 @@ class CurrencyInputComponent extends Component {
   constructor(props) {
     super(props);
     const { currencyConfig, defaultValue, input, intl } = props;
-    const initialValue = input.value instanceof types.Money
-      ? convertMoneyToNumber(input.value)
-      : defaultValue;
+    const initialValue =
+      input.value instanceof types.Money ? convertMoneyToNumber(input.value) : defaultValue;
     const hasInitialValue = typeof initialValue === 'number' && !isNaN(initialValue);
 
     // We need to handle number format - some locales use dots and some commas as decimal separator
@@ -147,8 +146,8 @@ class CurrencyInputComponent extends Component {
 
       const targetDecimalValue = isEmptyString ? null : new Decimal(targetValue);
 
-      const isSafeValue = isEmptyString ||
-        (targetDecimalValue.isPositive() && isSafeNumber(targetDecimalValue));
+      const isSafeValue =
+        isEmptyString || (targetDecimalValue.isPositive() && isSafeNumber(targetDecimalValue));
       if (!isSafeValue) {
         throw new Error(`Unsafe money value: ${targetValue}`);
       }

@@ -12,8 +12,7 @@
   width: 100%;
   z-index: 100;
 
-
-/* scrollLayer is the .root for the Modal */
+  /* scrollLayer is the .root for the Modal */
   & .scrollLayer {
     @apply --marketplaceModalRootStyles;
 

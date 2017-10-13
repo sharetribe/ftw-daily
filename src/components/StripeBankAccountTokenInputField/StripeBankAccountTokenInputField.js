@@ -222,14 +222,7 @@ class TokenInputFieldComponent extends Component {
   }
 
   render() {
-    const {
-      rootClassName,
-      className,
-      country,
-      formName,
-      meta: formMeta,
-      intl,
-    } = this.props;
+    const { rootClassName, className, country, formName, meta: formMeta, intl } = this.props;
 
     if (!supportedCountries.includes(country)) {
       return (
@@ -250,16 +243,17 @@ class TokenInputFieldComponent extends Component {
     // more specific errors.
     const showingFieldErrors = hasInputErrors;
     const showStripeError = !!(this.state.stripeError && !showingFieldErrors && formMeta.touched);
-    const showFormError = !!(formMeta.touched &&
+    const showFormError = !!(
+      formMeta.touched &&
       formMeta.error &&
       !showingFieldErrors &&
-      !showStripeError);
+      !showStripeError
+    );
 
     const inputConfiguration = requiredInputs(country);
 
     return (
       <div className={classNames(rootClassName || css.root, className)}>
-
         {inputConfiguration.map(inputType => {
           return (
             <StripeBankAccountRequiredInput

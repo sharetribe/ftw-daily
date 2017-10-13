@@ -1,5 +1,5 @@
-@import "sanitize.css";
-@import "./marketplace.css";
+@import 'sanitize.css';
+@import './marketplace.css';
 
 /* ================ Fonts ================ */
 
@@ -26,12 +26,24 @@ a {
   @apply --marketplaceLinkStyles;
 }
 
-h1 { @apply --marketplaceH1FontStyles; }
-h2 { @apply --marketplaceH2FontStyles; }
-h3 { @apply --marketplaceH3FontStyles; }
-h4 { @apply --marketplaceH4FontStyles; }
-h5 { @apply --marketplaceH5FontStyles; }
-h6 { @apply --marketplaceH6FontStyles; }
+h1 {
+  @apply --marketplaceH1FontStyles;
+}
+h2 {
+  @apply --marketplaceH2FontStyles;
+}
+h3 {
+  @apply --marketplaceH3FontStyles;
+}
+h4 {
+  @apply --marketplaceH4FontStyles;
+}
+h5 {
+  @apply --marketplaceH5FontStyles;
+}
+h6 {
+  @apply --marketplaceH6FontStyles;
+}
 
 input,
 textarea,
@@ -94,9 +106,9 @@ textarea {
 
 :global(.fontsLoaded) {
   & body {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   }
   & button {
-    font-family: "sofiapro", Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   }
 }

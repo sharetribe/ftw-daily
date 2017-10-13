@@ -45,9 +45,10 @@ export class ProfileSettingsPageComponent extends Component {
       const uploadedImage = this.props.image;
 
       // Update profileImage only if file system has been accessed
-      const updatedValues = uploadedImage && uploadedImage.imageId && uploadedImage.file
-        ? { ...name, profileImageId: uploadedImage.imageId }
-        : name;
+      const updatedValues =
+        uploadedImage && uploadedImage.imageId && uploadedImage.file
+          ? { ...name, profileImageId: uploadedImage.imageId }
+          : name;
 
       onUpdateProfile(updatedValues).then(() => {
         this.setState({ profileUpdated: true });
@@ -64,22 +65,22 @@ export class ProfileSettingsPageComponent extends Component {
     const profileImageId = user.profileImage ? user.profileImage.id : null;
     const profileImage = image || { imageId: profileImageId };
 
-    const profileSettingsForm = user.id
-      ? <ProfileSettingsForm
-          className={css.form}
-          currentUser={currentUser}
-          initialValues={{ firstName, lastName, profileImage }}
-          profileImage={profileImage}
-          onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
-          uploadInProgress={uploadInProgress}
-          updateInProgress={updateInProgress}
-          updateProfileReady={this.state.profileUpdated}
-          uploadImageError={uploadImageError}
-          updateProfileError={updateProfileError}
-          onSubmit={handleSubmit}
-          onChange={handleChange}
-        />
-      : null;
+    const profileSettingsForm = user.id ? (
+      <ProfileSettingsForm
+        className={css.form}
+        currentUser={currentUser}
+        initialValues={{ firstName, lastName, profileImage }}
+        profileImage={profileImage}
+        onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
+        uploadInProgress={uploadInProgress}
+        updateInProgress={updateInProgress}
+        updateProfileReady={this.state.profileUpdated}
+        uploadImageError={uploadImageError}
+        updateProfileError={updateProfileError}
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+      />
+    ) : null;
 
     return (
       <Page
@@ -93,7 +94,9 @@ export class ProfileSettingsPageComponent extends Component {
         <UserNav selectedPageName="ProfileSettingsPage" />
 
         <div className={css.content}>
-          <h1><FormattedMessage id="ProfileSettingsPage.title" /></h1>
+          <h1>
+            <FormattedMessage id="ProfileSettingsPage.title" />
+          </h1>
           {profileSettingsForm}
         </div>
       </Page>

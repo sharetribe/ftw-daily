@@ -115,8 +115,8 @@ export class SearchPageComponent extends Component {
     // Search more listings for map
     onSearchMapListings(searchParamsForMapResults)
       .then(response => {
-        const hasNextPage = page < response.data.meta.totalPages &&
-          page < MAX_SEARCH_RESULT_PAGES_ON_MAP;
+        const hasNextPage =
+          page < response.data.meta.totalPages && page < MAX_SEARCH_RESULT_PAGES_ON_MAP;
         if (hasNextPage) {
           onSearchMapListings({ ...searchParamsForMapResults, page: page + 1 });
         } else {
@@ -174,9 +174,9 @@ export class SearchPageComponent extends Component {
         <FormattedMessage id="SearchPage.foundResults" values={{ count: totalItems }} />
       </h2>
     );
-    const addressNode = address
-      ? <span className={css.searchString}>{searchInURL.address.split(', ')[0]}</span>
-      : null;
+    const addressNode = address ? (
+      <span className={css.searchString}>{searchInURL.address.split(', ')[0]}</span>
+    ) : null;
     const resultsFoundWithAddress = (
       <h2>
         <FormattedMessage
@@ -185,9 +185,8 @@ export class SearchPageComponent extends Component {
         />
       </h2>
     );
-    const resultsFound = address && !boundsChanged
-      ? resultsFoundWithAddress
-      : resultsFoundNoAddress;
+    const resultsFound =
+      address && !boundsChanged ? resultsFoundWithAddress : resultsFoundNoAddress;
 
     const noResults = (
       <h2>
@@ -216,9 +215,8 @@ export class SearchPageComponent extends Component {
     );
     const showSearchMapInMobile = this.state.isSearchMapOpenOnMobile ? searchMap : null;
     const isWindowDefined = typeof window !== 'undefined';
-    const searchMapMaybe = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT
-      ? showSearchMapInMobile
-      : searchMap;
+    const searchMapMaybe =
+      isWindowDefined && window.innerWidth < MODAL_BREAKPOINT ? showSearchMapInMobile : searchMap;
 
     const searchParamsForPagination = parse(location.search);
 
@@ -262,8 +260,7 @@ export class SearchPageComponent extends Component {
         scrollingDisabled={scrollingDisabled}
         description={schemaDescription}
         title={schemaTitle}
-        schema={
-          `
+        schema={`
           {
             "@context": "http://schema.org",
             "@type": "SearchResultsPage",
@@ -271,8 +268,7 @@ export class SearchPageComponent extends Component {
             "name": "${schemaTitle}",
             "mainEntity": [${schemaMainEntity}]
           }
-        `
-        }
+        `}
       >
         <TopbarContainer className={css.topbar} />
         <div className={css.container}>
@@ -316,9 +312,7 @@ export class SearchPageComponent extends Component {
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             onManageDisableScrolling={onManageDisableScrolling}
           >
-            <div className={css.map}>
-              {searchMapMaybe}
-            </div>
+            <div className={css.map}>{searchMapMaybe}</div>
           </ModalInMobile>
         </div>
       </Page>

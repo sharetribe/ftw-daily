@@ -31,7 +31,8 @@ export const OrderPageComponent = props => {
   const listingTitle = currentListing.attributes.title;
 
   // Redirect users with someone else's direct link to their own inbox/orders page.
-  const isDataAvailable = currentUser &&
+  const isDataAvailable =
+    currentUser &&
     currentTransaction.id &&
     currentTransaction.id.uuid === params.id &&
     currentTransaction.customer &&
@@ -47,13 +48,22 @@ export const OrderPageComponent = props => {
     [css.tabContentVisible]: props.tab === 'details',
   });
 
-  const loadingOrFaildFetching = fetchOrderError
-    ? <p className={css.error}><FormattedMessage id="OrderPage.fetchOrderFailed" /></p>
-    : <p className={css.loading}><FormattedMessage id="OrderPage.loadingData" /></p>;
+  const loadingOrFaildFetching = fetchOrderError ? (
+    <p className={css.error}>
+      <FormattedMessage id="OrderPage.fetchOrderFailed" />
+    </p>
+  ) : (
+    <p className={css.loading}>
+      <FormattedMessage id="OrderPage.loadingData" />
+    </p>
+  );
 
-  const panel = isDataAvailable && currentTransaction.id
-    ? <OrderDetailsPanel className={detailsClassName} transaction={currentTransaction} />
-    : loadingOrFaildFetching;
+  const panel =
+    isDataAvailable && currentTransaction.id ? (
+      <OrderDetailsPanel className={detailsClassName} transaction={currentTransaction} />
+    ) : (
+      loadingOrFaildFetching
+    );
 
   return (
     <Page

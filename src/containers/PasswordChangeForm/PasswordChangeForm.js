@@ -105,11 +105,12 @@ class PasswordChangeFormComponent extends Component {
       [css.confirmChangesSectionVisible]: !pristine,
     });
 
-    const genericFailure = changePasswordError && !passwordErrorText
-      ? <span className={css.error}>
+    const genericFailure =
+      changePasswordError && !passwordErrorText ? (
+        <span className={css.error}>
           <FormattedMessage id="PasswordChangeForm.genericFailure" />
         </span>
-      : null;
+      ) : null;
 
     const classes = classNames(rootClassName || css.root, className);
     const submitDisabled = invalid || submitting || inProgress;

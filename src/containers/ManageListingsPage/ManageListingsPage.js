@@ -68,30 +68,35 @@ export class ManageListingsPageComponent extends Component {
       </h2>
     );
 
-    const noResults = listingsAreLoaded && pagination.totalItems === 0
-      ? <h1 className={css.title}>
+    const noResults =
+      listingsAreLoaded && pagination.totalItems === 0 ? (
+        <h1 className={css.title}>
           <FormattedMessage id="ManageListingsPage.noResults" />
         </h1>
-      : null;
+      ) : null;
 
-    const title = listingsAreLoaded && pagination.totalItems > 0
-      ? <h1 className={css.title}>
+    const title =
+      listingsAreLoaded && pagination.totalItems > 0 ? (
+        <h1 className={css.title}>
           <FormattedMessage
             id="ManageListingsPage.youHaveListings"
             values={{ count: pagination.totalItems }}
           />
         </h1>
-      : noResults;
+      ) : (
+        noResults
+      );
 
     const page = queryParams ? queryParams.page : 1;
-    const paginationLinks = listingsAreLoaded && pagination && pagination.totalPages > 1
-      ? <PaginationLinks
+    const paginationLinks =
+      listingsAreLoaded && pagination && pagination.totalPages > 1 ? (
+        <PaginationLinks
           className={css.pagination}
           pageName="ManageListingsPage"
           pageSearchParams={{ page }}
           pagination={pagination}
         />
-      : null;
+      ) : null;
 
     const listingMenuOpen = this.state.listingMenuOpen;
     const closingErrorListingId = !!closingListingError && closingListingError.listingId;
@@ -128,7 +133,6 @@ export class ManageListingsPageComponent extends Component {
           </div>
           {paginationLinks}
         </div>
-
       </Page>
     );
   }

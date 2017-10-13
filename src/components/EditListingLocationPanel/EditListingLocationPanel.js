@@ -25,21 +25,19 @@ const EditListingLocationPanel = props => {
   const currentListing = ensureListing(listing);
   const { address, geolocation, title } = currentListing.attributes;
   const listingTitle = title || '';
-  const listingLink = currentListing.id
-    ? <NamedLink
-        name="ListingPage"
-        params={{ id: currentListing.id.uuid, slug: createSlug(title) }}
-      >
-        {listingTitle}
-      </NamedLink>
-    : '';
+  const listingLink = currentListing.id ? (
+    <NamedLink name="ListingPage" params={{ id: currentListing.id.uuid, slug: createSlug(title) }}>
+      {listingTitle}
+    </NamedLink>
+  ) : (
+    ''
+  );
 
-  const panelTitle = currentListing.id
-    ? <FormattedMessage
-        id="EditListingLocationPanel.title"
-        values={{ listingTitle: listingLink }}
-      />
-    : <FormattedMessage id="EditListingLocationPanel.createListingTitle" />;
+  const panelTitle = currentListing.id ? (
+    <FormattedMessage id="EditListingLocationPanel.title" values={{ listingTitle: listingLink }} />
+  ) : (
+    <FormattedMessage id="EditListingLocationPanel.createListingTitle" />
+  );
 
   // Only render current search if full place object is available in the URL params
   // TODO bounds and country are missing - those need to be queried directly from Google Places

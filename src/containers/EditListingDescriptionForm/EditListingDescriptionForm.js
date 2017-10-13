@@ -48,11 +48,11 @@ const EditListingDescriptionFormComponent = props => {
     id: 'EditListingDescriptionForm.descriptionRequired',
   });
 
-  const errorMessage = updateError
-    ? <p className={css.error}>
-        <FormattedMessage id="EditListingDescriptionForm.updateFailed" />
-      </p>
-    : null;
+  const errorMessage = updateError ? (
+    <p className={css.error}>
+      <FormattedMessage id="EditListingDescriptionForm.updateFailed" />
+    </p>
+  ) : null;
 
   const classes = classNames(css.root, className);
   const submitReady = updated;

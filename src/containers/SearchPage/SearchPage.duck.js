@@ -107,48 +107,46 @@ export const searchMapListingsError = e => ({
   payload: e,
 });
 
-export const searchListings = searchParams =>
-  (dispatch, getState, sdk) => {
-    dispatch(searchListingsRequest(searchParams));
+export const searchListings = searchParams => (dispatch, getState, sdk) => {
+  dispatch(searchListingsRequest(searchParams));
 
-    const { origin, include = [], page, perPage } = searchParams;
+  const { origin, include = [], page, perPage } = searchParams;
 
-    // TODO: API can't handle camelCase request parameter yet.
-    const searchOrQuery = origin
-      ? sdk.listings.search({ ...searchParams, per_page: perPage })
-      : sdk.listings.query({ include, page, per_page: perPage });
+  // TODO: API can't handle camelCase request parameter yet.
+  const searchOrQuery = origin
+    ? sdk.listings.search({ ...searchParams, per_page: perPage })
+    : sdk.listings.query({ include, page, per_page: perPage });
 
-    return searchOrQuery
-      .then(response => {
-        dispatch(addMarketplaceEntities(response));
-        dispatch(searchListingsSuccess(response));
-        return response;
-      })
-      .catch(e => {
-        dispatch(searchListingsError(e));
-        throw e;
-      });
-  };
+  return searchOrQuery
+    .then(response => {
+      dispatch(addMarketplaceEntities(response));
+      dispatch(searchListingsSuccess(response));
+      return response;
+    })
+    .catch(e => {
+      dispatch(searchListingsError(e));
+      throw e;
+    });
+};
 
-export const searchMapListings = searchParams =>
-  (dispatch, getState, sdk) => {
-    dispatch(searchMapListingsRequest(searchParams));
+export const searchMapListings = searchParams => (dispatch, getState, sdk) => {
+  dispatch(searchMapListingsRequest(searchParams));
 
-    const { origin, include = [], page = 1, perPage } = searchParams;
+  const { origin, include = [], page = 1, perPage } = searchParams;
 
-    // TODO: API can't handle camelCase request parameter yet.
-    const searchOrQuery = origin
-      ? sdk.listings.search({ ...searchParams, page, per_page: perPage })
-      : sdk.listings.query({ include, page, per_page: perPage });
+  // TODO: API can't handle camelCase request parameter yet.
+  const searchOrQuery = origin
+    ? sdk.listings.search({ ...searchParams, page, per_page: perPage })
+    : sdk.listings.query({ include, page, per_page: perPage });
 
-    return searchOrQuery
-      .then(response => {
-        dispatch(addMarketplaceEntities(response));
-        dispatch(searchMapListingsSuccess(response));
-        return response;
-      })
-      .catch(e => {
-        dispatch(searchMapListingsError(e));
-        throw e;
-      });
-  };
+  return searchOrQuery
+    .then(response => {
+      dispatch(addMarketplaceEntities(response));
+      dispatch(searchMapListingsSuccess(response));
+      return response;
+    })
+    .catch(e => {
+      dispatch(searchMapListingsError(e));
+      throw e;
+    });
+};

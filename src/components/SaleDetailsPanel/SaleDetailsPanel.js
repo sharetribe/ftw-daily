@@ -19,13 +19,9 @@ import css from './SaleDetailsPanel.css';
 const breakdown = transaction => {
   const loaded = transaction && transaction.id && transaction.booking && transaction.booking.id;
 
-  return loaded
-    ? <BookingBreakdown
-        userRole="provider"
-        transaction={transaction}
-        booking={transaction.booking}
-      />
-    : null;
+  return loaded ? (
+    <BookingBreakdown userRole="provider" transaction={transaction} booking={transaction.booking} />
+  ) : null;
 };
 
 const saleTitle = (transaction, listingLink, customerName) => {
@@ -156,48 +152,47 @@ export const SaleDetailsPanelComponent = props => {
     : saleMessage(currentTransaction, customerDisplayName);
 
   const listingTitle = currentListing.attributes.title;
-  const firstImage = currentListing.images && currentListing.images.length > 0
-    ? currentListing.images[0]
-    : null;
+  const firstImage =
+    currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
   const canShowButtons = propTypes.txIsPreauthorized(currentTransaction) && !isCustomerBanned;
   const buttonsDisabled = acceptInProgress || declineInProgress;
 
-  const acceptErrorMessage = acceptSaleError
-    ? <p className={css.error}>
-        <FormattedMessage id="SaleDetailsPanel.acceptSaleFailed" />
-      </p>
-    : null;
-  const declineErrorMessage = declineSaleError
-    ? <p className={css.error}>
-        <FormattedMessage id="SaleDetailsPanel.declineSaleFailed" />
-      </p>
-    : null;
+  const acceptErrorMessage = acceptSaleError ? (
+    <p className={css.error}>
+      <FormattedMessage id="SaleDetailsPanel.acceptSaleFailed" />
+    </p>
+  ) : null;
+  const declineErrorMessage = declineSaleError ? (
+    <p className={css.error}>
+      <FormattedMessage id="SaleDetailsPanel.declineSaleFailed" />
+    </p>
+  ) : null;
 
-  const actionButtons = canShowButtons
-    ? <div className={css.actionButtons}>
-        <div className={css.errorDesktop}>
-          {acceptErrorMessage}
-          {declineErrorMessage}
-        </div>
-        <SecondaryButton
-          className={css.declineButton}
-          inProgress={declineInProgress}
-          disabled={buttonsDisabled}
-          onClick={() => onDeclineSale(currentTransaction.id)}
-        >
-          <FormattedMessage id="SalePage.declineButton" />
-        </SecondaryButton>
-        <PrimaryButton
-          className={css.acceptButton}
-          inProgress={acceptInProgress}
-          disabled={buttonsDisabled}
-          onClick={() => onAcceptSale(currentTransaction.id)}
-        >
-          <FormattedMessage id="SalePage.acceptButton" />
-        </PrimaryButton>
+  const actionButtons = canShowButtons ? (
+    <div className={css.actionButtons}>
+      <div className={css.errorDesktop}>
+        {acceptErrorMessage}
+        {declineErrorMessage}
       </div>
-    : null;
+      <SecondaryButton
+        className={css.declineButton}
+        inProgress={declineInProgress}
+        disabled={buttonsDisabled}
+        onClick={() => onDeclineSale(currentTransaction.id)}
+      >
+        <FormattedMessage id="SalePage.declineButton" />
+      </SecondaryButton>
+      <PrimaryButton
+        className={css.acceptButton}
+        inProgress={acceptInProgress}
+        disabled={buttonsDisabled}
+        onClick={() => onAcceptSale(currentTransaction.id)}
+      >
+        <FormattedMessage id="SalePage.acceptButton" />
+      </PrimaryButton>
+    </div>
+  ) : null;
 
   const classes = classNames(rootClassName || css.root, className);
 
@@ -257,9 +252,7 @@ export const SaleDetailsPanelComponent = props => {
           <h3 className={css.breakdownTitleDesktop}>
             <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
           </h3>
-          <div className={css.breakdownDesktop}>
-            {bookingInfo}
-          </div>
+          <div className={css.breakdownDesktop}>{bookingInfo}</div>
         </div>
       </div>
     </div>

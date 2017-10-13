@@ -87,7 +87,7 @@
   color: var(--marketplaceColor);
 
   margin-right: 10px;
-  }
+}
 
 .name {
   flex-grow: 1;
@@ -166,7 +166,6 @@
 }
 
 .caret {
-
   /* Caret / arrow dimensions and position */
   width: 6px;
   height: 6px;
@@ -201,4 +200,3 @@
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: inherit;
 }
-

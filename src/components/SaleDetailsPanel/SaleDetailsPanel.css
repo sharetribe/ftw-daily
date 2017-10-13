@@ -1,7 +1,6 @@
 @import '../../marketplace.css';
 
 .root {
-
 }
 
 .container {
@@ -196,7 +195,7 @@
 
   /* Contain repainting to this component only */
   /* 3D painting container helps scrolling */
-  transform: translate3d(0,0,0);
+  transform: translate3d(0, 0, 0);
 
   box-shadow: var(--boxShadowTop);
   background-color: white;

@@ -117,9 +117,10 @@ export const translateStripeError = (country, intl, stripeError) => {
     });
     // Print required inputs (to be included to error message)
     // e.g. "bank code, branch code and account number"
-    const inputsInString = inputsAsStrings.length > 1
-      ? inputsAsStrings.join(', ').replace(/,([^,]*)$/, `${andTranslated} $1`)
-      : inputsAsStrings[0];
+    const inputsInString =
+      inputsAsStrings.length > 1
+        ? inputsAsStrings.join(', ').replace(/,([^,]*)$/, `${andTranslated} $1`)
+        : inputsAsStrings[0];
 
     return intl.formatMessage(
       {

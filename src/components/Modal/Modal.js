@@ -72,18 +72,18 @@ export class ModalComponent extends Component {
     const closeButtonClasses = classNames(css.close, {
       [css.closeLight]: lightCloseButton,
     });
-    const closeBtn = isOpen
-      ? <Button
-          onClick={this.handleClose}
-          rootClassName={closeButtonClasses}
-          title={closeModalMessage}
-        >
-          <span className={css.closeText}>
-            {closeButtonMessage || <FormattedMessage id="Modal.close" />}
-          </span>
-          <IconClose rootClassName={css.closeIcon} />
-        </Button>
-      : null;
+    const closeBtn = isOpen ? (
+      <Button
+        onClick={this.handleClose}
+        rootClassName={closeButtonClasses}
+        title={closeModalMessage}
+      >
+        <span className={css.closeText}>
+          {closeButtonMessage || <FormattedMessage id="Modal.close" />}
+        </span>
+        <IconClose rootClassName={css.closeIcon} />
+      </Button>
+    ) : null;
 
     // Modal uses given styles to wrap child components.
     // If props doesn't contain isClosedClassName, styles default to css.isClosed
@@ -98,9 +98,7 @@ export class ModalComponent extends Component {
         <div className={scrollLayerClasses}>
           <div className={containerClasses}>
             {closeBtn}
-            <div className={classNames(css.content, contentClassName)}>
-              {children}
-            </div>
+            <div className={classNames(css.content, contentClassName)}>{children}</div>
           </div>
         </div>
       </div>

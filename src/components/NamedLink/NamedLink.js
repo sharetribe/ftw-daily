@@ -40,7 +40,11 @@ export const NamedLinkComponent = props => {
     title,
   };
 
-  return <Link to={{ pathname, ...to }} {...aElemProps}>{children}</Link>;
+  return (
+    <Link to={{ pathname, ...to }} {...aElemProps}>
+      {children}
+    </Link>
+  );
 };
 
 const { object, string, shape, any } = PropTypes;

@@ -96,7 +96,7 @@
 }
 
 .editIcon {
-  margin: -6px 7px 0 0 ;
+  margin: -6px 7px 0 0;
 }
 
 .rootForImage {
@@ -280,7 +280,6 @@
   }
 }
 
-
 .heading {
   margin-bottom: 33px;
   padding: 0 24px;
@@ -405,7 +404,7 @@
 
   /* Contain repainting to this component only */
   /* 3D painting container helps scrolling */
-  transform: translate3d(0,0,0);
+  transform: translate3d(0, 0, 0);
 
   @media (--viewportMedium) {
     padding: 18px 60px 18px 60px;
@@ -453,7 +452,6 @@
 }
 
 .modalInMobile {
-
   @media (--viewportLarge) {
     display: block;
     margin-top: 87px;

@@ -9,7 +9,6 @@
   padding-top: 29px;
 }
 
-
 /* ================ Tabs & Form ================ */
 
 .tabs {
@@ -43,7 +42,6 @@
   text-align: left;
 }
 
-
 /* ================ Hide Top bar in screens smaller than 768px  ================ */
 
 .hideOnMobile {
@@ -53,7 +51,6 @@
     display: block;
   }
 }
-
 
 /* ================ Close icon ================ */
 
@@ -72,9 +69,7 @@
   @apply --marketplaceModalCloseIcon;
 }
 
-
 /* ================ Typography ================ */
-
 
 /* Title of the modal */
 .modalTitle {
@@ -111,7 +106,6 @@
     margin-top: 0;
   }
 }
-
 
 /* ================ Errors ================ */
 
