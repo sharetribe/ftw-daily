@@ -6,16 +6,17 @@
     "array-includes": "^3.0.2",
     "array.prototype.find": "^2.0.4",
     "autosize": "^4.0.0",
-    "basic-auth": "^1.1.0",
+    "basic-auth": "^2.0.0",
     "classnames": "^2.2.5",
-    "compression": "^1.7.0",
+    "compression": "^1.7.1",
     "cookie-parser": "^1.4.3",
     "decimal.js": "^7.1.1",
-    "express": "^4.15.3",
+    "express": "^4.16.2",
     "express-enforces-ssl": "^1.1.0",
-    "helmet": "^3.8.1",
+    "helmet": "^3.8.2",
     "lodash": "^4.17.4",
     "moment": "(2.10 - 2.14 || ^2.15.1) && < 2.18.0",
+    "nsp": "^2.8.1",
     "path-to-regexp": "^1.5.3",
     "query-string": "^5.0.0",
     "raven": "^2.1.2",
@@ -38,13 +39,13 @@
     "sharetribe-scripts": "1.0.14",
     "sharetribe-sdk":
       "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#acec122c4c1279bfecb411b027f7bb8928b6b44b",
-    "source-map-support": "^0.4.15",
+    "source-map-support": "^0.5.0",
     "url": "^0.11.0"
   },
   "devDependencies": {
     "enzyme": "^2.8.0",
     "enzyme-to-json": "^1.5.0",
-    "nodemon": "^1.11.0",
+    "nodemon": "^1.12.1",
     "prettier": "1.7.4",
     "react-addons-test-utils": "^15.4.2",
     "react-test-renderer": "^15.4.2"
@@ -62,7 +63,8 @@
     "dev-server":
       "REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000 yarn run build&&nodemon --watch server server/index.js",
     "heroku-prebuild": "./heroku-copy-ssh-key-from-env.sh",
-    "heroku-postbuild": "yarn run build"
+    "heroku-postbuild": "yarn run build",
+    "audit": "nsp check"
   },
   "prettier": {
     "printWidth": 100,

@@ -1,0 +1,6 @@
+{
+  "exceptions": [
+    // mime is only used in webpack-dev-server
+    "https://nodesecurity.io/advisories/535"
+  ]
+}
