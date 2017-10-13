@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import config from '../../config';
 import * as propTypes from '../../util/propTypes';
 import { ensureCurrentUser } from '../../util/data';
 import {
@@ -63,10 +64,6 @@ export const AuthenticationPageComponent = props => {
   } else if (isAuthenticated && currentUserLoaded && !showEmailVerification) {
     return <NamedRedirect name="LandingPage" />;
   }
-
-  const title = intl.formatMessage({
-    id: isLogin ? 'AuthenticationPage.loginPageTitle' : 'AuthenticationPage.signupPageTitle',
-  });
 
   /* eslint-disable no-console */
   if (loginError && console && console.error) {
@@ -197,6 +194,11 @@ export const AuthenticationPageComponent = props => {
     </div>
   );
 
+  const siteTitle = config.siteTitle;
+  const schemaTitle = isLogin
+    ? intl.formatMessage({ id: 'AuthenticationPage.schemaTitleLogin' }, { siteTitle })
+    : intl.formatMessage({ id: 'AuthenticationPage.schemaTitleSignup' }, { siteTitle });
+
   const topbarClasses = classNames({
     [css.hideOnMobile]: showEmailVerification,
   });
@@ -205,8 +207,15 @@ export const AuthenticationPageComponent = props => {
     <Page
       authInfoError={authInfoError}
       logoutError={logoutError}
-      title={title}
+      title={schemaTitle}
       scrollingDisabled={scrollingDisabled}
+      schema={`
+        {
+          "@context": "http://schema.org",
+          "@type": "WebPage",
+          "name": "${schemaTitle}",
+        }
+      `}
     >
       <TopbarContainer className={topbarClasses} />
       <div className={css.root}>
