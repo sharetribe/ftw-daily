@@ -164,9 +164,15 @@ const mapDispatchToProps = dispatch => ({
   onSubmitPassword: (email, token, password) => dispatch(resetPassword(email, token, password)),
 });
 
+// Note: it is important that the withRouter HOC is **outside** the
+// connect HOC, otherwise React Router won't rerender any Route
+// components since connect implements a shouldComponentUpdate
+// lifecycle hook.
+//
+// See: https://github.com/ReactTraining/react-router/issues/4671
 const PasswordResetPage = compose(
-  connect(mapStateToProps, mapDispatchToProps),
   withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
   injectIntl
 )(PasswordResetPageComponent);
 

@@ -531,7 +531,13 @@ const mapDispatchToProps = dispatch => ({
   useInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
 });
 
-const ListingPage = compose(connect(mapStateToProps, mapDispatchToProps), withRouter, injectIntl)(
+// Note: it is important that the withRouter HOC is **outside** the
+// connect HOC, otherwise React Router won't rerender any Route
+// components since connect implements a shouldComponentUpdate
+// lifecycle hook.
+//
+// See: https://github.com/ReactTraining/react-router/issues/4671
+const ListingPage = compose(withRouter, connect(mapStateToProps, mapDispatchToProps), injectIntl)(
   ListingPageComponent
 );
 
