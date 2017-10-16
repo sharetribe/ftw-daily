@@ -7,7 +7,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="Manage listings"
 >
-  <Connect(withRouter(TopbarContainerComponent))
+  <withRouter(Connect(TopbarContainerComponent))
     currentPage="ManageListingsPage"
   />
   <UserNav

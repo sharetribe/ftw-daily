@@ -7,6 +7,6 @@ exports[`ProfilePage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="Profile page with display name: most-awesome-shop"
 >
-  <Connect(withRouter(TopbarContainerComponent)) />
+  <withRouter(Connect(TopbarContainerComponent)) />
 </Page>
 `;

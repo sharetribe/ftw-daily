@@ -416,7 +416,13 @@ const mapDispatchToProps = dispatch => ({
   onSearchMapListings: searchParams => dispatch(searchMapListings(searchParams)),
 });
 
-const SearchPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl, withRouter)(
+// Note: it is important that the withRouter HOC is **outside** the
+// connect HOC, otherwise React Router won't rerender any Route
+// components since connect implements a shouldComponentUpdate
+// lifecycle hook.
+//
+// See: https://github.com/ReactTraining/react-router/issues/4671
+const SearchPage = compose(withRouter, connect(mapStateToProps, mapDispatchToProps), injectIntl)(
   SearchPageComponent
 );
 

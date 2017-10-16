@@ -2,13 +2,12 @@ import React, { Component, PropTypes } from 'react'; // eslint-disable-line reac
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import routeConfiguration from './routeConfiguration';
 import { NotFoundPage } from './containers';
 import { NamedRedirect } from './components';
 import * as propTypes from './util/propTypes';
 import * as log from './util/log';
 
-const { bool, object, func, shape, string } = PropTypes;
+const { arrayOf, bool, object, func, shape, string } = PropTypes;
 
 const canShowComponent = props => {
   const { isAuthenticated, route } = props;
@@ -81,8 +80,8 @@ RouteComponentRenderer.propTypes = {
   dispatch: func.isRequired,
 };
 
-const Routes = props => {
-  const { isAuthenticated, logoutInProgress, staticContext, dispatch } = props;
+const Routes = (props, context) => {
+  const { isAuthenticated, logoutInProgress, staticContext, dispatch, routes } = props;
 
   const toRouteComponent = route => {
     const renderProps = {
@@ -112,9 +111,12 @@ const Routes = props => {
     );
   };
 
+  // N.B. routes prop within React Router needs to stay the same,
+  // so that React is is not rerendering page component.
+  // That's why we pass-in props.routes instead of calling routeConfiguration here.
   return (
     <Switch>
-      {routeConfiguration().map(toRouteComponent)}
+      {routes.map(toRouteComponent)}
       <Route component={NotFoundPage} />
     </Switch>
   );
@@ -125,6 +127,7 @@ Routes.defaultProps = { staticContext: {} };
 Routes.propTypes = {
   isAuthenticated: bool.isRequired,
   logoutInProgress: bool.isRequired,
+  routes: arrayOf(propTypes.route).isRequired,
 
   // from withRouter
   staticContext: object,

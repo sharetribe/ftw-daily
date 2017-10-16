@@ -7,6 +7,6 @@ exports[`PayoutPreferencesPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="Payout preferences"
 >
-  <Connect(withRouter(TopbarContainerComponent)) />
+  <withRouter(Connect(TopbarContainerComponent)) />
 </Page>
 `;

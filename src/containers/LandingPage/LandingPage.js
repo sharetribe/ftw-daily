@@ -83,6 +83,12 @@ const mapStateToProps = state => {
   };
 };
 
-const LandingPage = compose(connect(mapStateToProps), injectIntl, withRouter)(LandingPageComponent);
+// Note: it is important that the withRouter HOC is **outside** the
+// connect HOC, otherwise React Router won't rerender any Route
+// components since connect implements a shouldComponentUpdate
+// lifecycle hook.
+//
+// See: https://github.com/ReactTraining/react-router/issues/4671
+const LandingPage = compose(withRouter, connect(mapStateToProps), injectIntl)(LandingPageComponent);
 
 export default LandingPage;
