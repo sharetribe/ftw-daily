@@ -34,12 +34,12 @@ describe('Application', () => {
 
   it('server renders pages that do not require authentication', () => {
     const urlTitles = {
-      '/': 'Book saunas everywhere | Saunatime',
-      '/s': 'Search results for map search | Saunatime',
+      '/': 'Book saunas everywhere',
+      '/s': 'Search results for map search',
       '/l/listing-title-slug/1234': 'Loading listing…',
       '/l/1234': 'Loading listing…',
       '/u/1234': 'Profile page with display name: 1234',
-      '/login': 'Login',
+      '/login': 'Log in',
       '/signup': 'Sign up',
       '/recover-password': 'Request a new password',
       '/this-url-should-not-be-found': 'Page not found',
@@ -49,7 +49,7 @@ describe('Application', () => {
       const context = {};
       const { head, body } = render(url, context);
 
-      expect(head.title).toEqual(title);
+      expect(head.title).toContain(title);
 
       // context.url will contain the URL to redirect to if a <Redirect> was used
       expect(context.url).not.toBeDefined();
