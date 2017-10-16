@@ -38,7 +38,7 @@ exports[`LandingPage matches snapshot 1`] = `
     ]
   }
 >
-  <Connect(withRouter(TopbarContainerComponent)) />
+  <withRouter(Connect(TopbarContainerComponent)) />
   <div>
     <HeroSection
       className={null}

@@ -7,7 +7,7 @@ exports[`NotFoundPageComponent matches snapshot 1`] = `
   scrollingDisabled={false}
   title="NotFoundPage.title"
 >
-  <Connect(withRouter(TopbarContainerComponent)) />
+  <withRouter(Connect(TopbarContainerComponent)) />
   <div>
     <div>
       <div>

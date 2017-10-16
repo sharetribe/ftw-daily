@@ -22,7 +22,7 @@ exports[`ListingPage matches snapshot 1`] = `
   title="ListingPage.schemaTitle"
   twitterImages={Array []}
 >
-  <Connect(withRouter(TopbarContainerComponent)) />
+  <withRouter(Connect(TopbarContainerComponent)) />
   <div
     className=""
   >

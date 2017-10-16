@@ -7,7 +7,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
   scrollingDisabled={false}
   title="EditListingPage.titleCreateListing"
 >
-  <Connect(withRouter(TopbarContainerComponent)) />
+  <withRouter(Connect(TopbarContainerComponent)) />
   <InjectIntl(EditListingWizard)
     currentUser={null}
     errors={

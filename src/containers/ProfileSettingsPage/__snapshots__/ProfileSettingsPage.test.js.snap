@@ -7,7 +7,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="Profile settings"
 >
-  <Connect(withRouter(TopbarContainerComponent))
+  <withRouter(Connect(TopbarContainerComponent))
     currentPage="ProfileSettingsPage"
   />
   <UserNav

@@ -7,6 +7,6 @@ exports[`SecurityPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="Security"
 >
-  <Connect(withRouter(TopbarContainerComponent)) />
+  <withRouter(Connect(TopbarContainerComponent)) />
 </Page>
 `;

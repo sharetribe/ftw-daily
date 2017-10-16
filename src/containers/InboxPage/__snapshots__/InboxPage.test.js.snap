@@ -7,7 +7,7 @@ exports[`InboxPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="InboxPage.ordersTitle"
 >
-  <Connect(withRouter(TopbarContainerComponent))
+  <withRouter(Connect(TopbarContainerComponent))
     currentPage="InboxPage"
   />
   <div>
@@ -338,7 +338,7 @@ exports[`InboxPage matches snapshot 3`] = `
   scrollingDisabled={false}
   title="InboxPage.salesTitle"
 >
-  <Connect(withRouter(TopbarContainerComponent))
+  <withRouter(Connect(TopbarContainerComponent))
     currentPage="InboxPage"
   />
   <div>

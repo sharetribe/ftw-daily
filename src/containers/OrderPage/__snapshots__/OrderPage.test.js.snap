@@ -7,7 +7,7 @@ exports[`OrderPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="OrderPage.title"
 >
-  <Connect(withRouter(TopbarContainerComponent)) />
+  <withRouter(Connect(TopbarContainerComponent)) />
   <InjectIntl(Component)
     className="undefined"
     transaction={
