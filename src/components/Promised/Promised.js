@@ -7,7 +7,8 @@
  */
 
 /* eslint-disable no-underscore-dangle */
-import { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Promised extends Component {
   constructor(props) {

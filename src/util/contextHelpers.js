@@ -1,4 +1,5 @@
-import React, { PropTypes, Component as ReactComponent } from 'react'; // eslint-disable-line react/no-deprecated
+import React, { Component as ReactComponent } from 'react';
+import PropTypes from 'prop-types';
 import { throttle } from 'lodash';
 
 /**

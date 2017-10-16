@@ -30,7 +30,8 @@
  *   // Browser decides which image it will fetch based on current screen size.
  */
 
-import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';

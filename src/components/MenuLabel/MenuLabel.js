@@ -2,7 +2,8 @@
  * MenuLabel is the only always visible part of Menu.
  * Clicking it toggles visibility of MenuContent.
  */
-import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import css from './MenuLabel.css';
