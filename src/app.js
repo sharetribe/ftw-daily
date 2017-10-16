@@ -5,9 +5,10 @@ import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
-import configureStore from './store';
-import Routes from './Routes';
 import localeData from './translations/en.json';
+import configureStore from './store';
+import routeConfiguration from './routeConfiguration';
+import Routes from './Routes';
 
 export const ClientApp = props => {
   const { store } = props;
@@ -16,7 +17,7 @@ export const ClientApp = props => {
     <IntlProvider locale="en" messages={localeData}>
       <Provider store={store}>
         <BrowserRouter>
-          <Routes />
+          <Routes routes={routeConfiguration()} />
         </BrowserRouter>
       </Provider>
     </IntlProvider>
@@ -34,7 +35,7 @@ export const ServerApp = props => {
     <IntlProvider locale="en" messages={localeData}>
       <Provider store={store}>
         <StaticRouter location={url} context={context}>
-          <Routes />
+          <Routes routes={routeConfiguration()} />
         </StaticRouter>
       </Provider>
     </IntlProvider>
