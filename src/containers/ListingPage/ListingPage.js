@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';

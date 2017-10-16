@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { Form, PrimaryButton } from '../../components';

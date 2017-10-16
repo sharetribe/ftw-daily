@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
+import React from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';

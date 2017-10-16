@@ -2,7 +2,8 @@
  * MenuContent is a immediate child of Menu component sibling to MenuLabel.
  * Clicking MenuLabel toggles visibility of MenuContent.
  */
-import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { MenuItem } from '../../components';
 

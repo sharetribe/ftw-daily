@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react'; // eslint-disable-line react/no-deprecated
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
