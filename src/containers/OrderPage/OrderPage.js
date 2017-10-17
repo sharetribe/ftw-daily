@@ -87,14 +87,14 @@ OrderPageComponent.defaultProps = {
   transaction: null,
 };
 
-const { bool, instanceOf, oneOf, shape, string } = PropTypes;
+const { bool, oneOf, shape, string } = PropTypes;
 
 OrderPageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
+  authInfoError: propTypes.error,
   currentUser: propTypes.currentUser,
-  fetchOrderError: instanceOf(Error),
+  fetchOrderError: propTypes.error,
   intl: intlShape.isRequired,
-  logoutError: instanceOf(Error),
+  logoutError: propTypes.error,
   params: shape({ id: string }).isRequired,
   scrollingDisabled: bool.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
