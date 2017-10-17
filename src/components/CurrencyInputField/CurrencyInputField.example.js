@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
+import React from 'react';
+import PropTypes from 'prop-types';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import en from 'react-intl/locale-data/en';

@@ -79,6 +79,13 @@
   & :global(.DayPickerNavigation__prev),
   & :global(.DayPickerNavigation__next) {
     color: var(--matterColorLight);
+    border: 0;
+  }
+  & :global(.CalendarDay__button) {
+    border: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
   }
   & :global(.CalendarDay) {
     @apply --marketplaceH4FontStyles;

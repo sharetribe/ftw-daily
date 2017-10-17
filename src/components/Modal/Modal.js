@@ -8,7 +8,8 @@
  *   </Modal>
  * </Parent>
  */
-import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { Button, IconClose } from '../../components';

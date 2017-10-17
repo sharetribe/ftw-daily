@@ -12,7 +12,7 @@ exports[`DateRangeInput matches snapshot 1`] = `
         className="DateRangePickerInput"
       >
         <div
-          className="DateInput"
+          className="DateInput DateInput--open-down"
         >
           <input
             aria-describedby="DateInput__screen-reader-message-bookingStartDate"
@@ -44,12 +44,14 @@ exports[`DateRangeInput matches snapshot 1`] = `
           </div>
         </div>
         <div
+          aria-hidden="true"
           className="DateRangePickerInput__arrow"
+          role="presentation"
         >
           <span />
         </div>
         <div
-          className="DateInput"
+          className="DateInput DateInput--open-down"
         >
           <input
             aria-describedby="DateInput__screen-reader-message-bookingEndDate"

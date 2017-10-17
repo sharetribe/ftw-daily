@@ -7,7 +7,8 @@
  *   <input type="file" accept="images/*" onChange={handleChange} />
  * </AddImages>
  */
-import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
+import React from 'react';
+import PropTypes from 'prop-types';
 import { SortableContainer } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { ImageFromFile, ResponsiveImage, IconSpinner } from '../../components';

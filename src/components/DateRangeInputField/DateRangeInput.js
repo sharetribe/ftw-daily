@@ -4,7 +4,8 @@
  *
  * N.B. *isOutsideRange* in defaultProps is defining what dates are available to booking.
  */
-import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { intlShape, injectIntl } from 'react-intl';
 import { DateRangePicker, isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
 import classNames from 'classnames';
@@ -39,6 +40,7 @@ const defaultProps = {
   endDatePlaceholderText: null, // Handled inside component
   disabled: false,
   required: false,
+  readOnly: false,
   screenReaderInputMessage: null, // Handled inside component
   showClearDates: false,
   showDefaultInputIcon: false,
@@ -47,17 +49,21 @@ const defaultProps = {
   customCloseIcon: null,
 
   // calendar presentation and interaction related props
+  renderMonth: null,
   orientation: HORIZONTAL_ORIENTATION,
   anchorDirection: ANCHOR_LEFT,
   horizontalMargin: 0,
   withPortal: false,
   withFullScreenPortal: false,
+  daySize: 38,
+  isRTL: false,
   initialVisibleMonth: null,
+  firstDayOfWeek: 0, // 0 .. 6, 0 is Sunday. TODO: This should come from some localization config.
   numberOfMonths: 1,
   keepOpenOnDateSelect: false,
   reopenPickerOnClearDates: false,
   renderCalendarInfo: null,
-  daySize: 38,
+  hideKeyboardShortcutsPanel: true,
 
   // navigation related props
   navPrev: <PreviousMonthIcon />,
@@ -90,6 +96,7 @@ const defaultProps = {
   // https://momentjs.com/
   displayFormat: 'ddd, MMMM D',
   monthFormat: 'MMMM YYYY',
+  weekDayFormat: 'dd',
   phrases: {
     closeDatePicker: null, // Handled inside component
     clearDate: null, // Handled inside component

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
+import React from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { intlShape, injectIntl } from 'react-intl';
@@ -180,7 +181,7 @@ const { bool, func, instanceOf, object, shape, string, oneOf } = PropTypes;
 
 EditListingPageComponent.propTypes = {
   authInfoError: instanceOf(Error),
-  createStripeAccountError: PropTypes.instanceOf(Error),
+  createStripeAccountError: instanceOf(Error),
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
   getListing: func.isRequired,

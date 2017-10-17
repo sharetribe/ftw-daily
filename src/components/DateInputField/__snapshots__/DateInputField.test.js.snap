@@ -12,7 +12,7 @@ exports[`DateInput matches snapshot 1`] = `
         className="SingleDatePickerInput"
       >
         <div
-          className="DateInput"
+          className="DateInput DateInput--open-down"
         >
           <input
             aria-describedby="DateInput__screen-reader-message-date-input"

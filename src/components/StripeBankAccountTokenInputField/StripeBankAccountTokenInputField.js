@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component, PropTypes } from 'react'; // eslint-disable-line react/no-deprecated
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
 import classNames from 'classnames';
