@@ -23,7 +23,7 @@ import { types as sdkTypes } from './sdkLoader';
 import { ensureTransaction } from './data';
 
 const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
-const { arrayOf, bool, func, instanceOf, number, oneOf, shape, string } = PropTypes;
+const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
 
 // Fixed value
 export const value = val => oneOf([val]);
@@ -216,4 +216,41 @@ export const pagination = shape({
   perPage: number.isRequired,
   totalItems: number.isRequired,
   totalPages: number.isRequired,
+});
+
+export const ERROR_CODE_TRANSITION_PARAMETER_VALIDATION_FAILED =
+  'transition-parameter-validation-failed';
+export const ERROR_CODE_PAYMENT_FAILED = 'transaction-payment-failed';
+export const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
+export const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'email-too-many-verification-requests';
+export const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit';
+const ERROR_CODES = [
+  ERROR_CODE_TRANSITION_PARAMETER_VALIDATION_FAILED,
+  ERROR_CODE_PAYMENT_FAILED,
+  ERROR_CODE_EMAIL_TAKEN,
+  ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS,
+  ERROR_CODE_UPLOAD_OVER_LIMIT,
+];
+
+// API error
+// TODO this is likely to change soonish
+export const apiError = shape({
+  id: uuid.isRequired,
+  status: number.isRequired,
+  code: oneOf(ERROR_CODES).isRequired,
+  title: string.isRequired,
+  details: shape({
+    data: object,
+    msg: string,
+  }),
+});
+
+// Storable error prop type. (Error object should not be stored as it is.)
+export const error = shape({
+  type: value('error').isRequired,
+  name: string.isRequired,
+  message: string,
+  status: number,
+  statusText: string,
+  apiErrors: arrayOf(apiError),
 });

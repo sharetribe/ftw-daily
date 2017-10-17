@@ -9,11 +9,13 @@
  * name and the docstring of the function to ensure correct usage.
  */
 
-const ERROR_CODE_TRANSITION_PARAMETER_VALIDATION_FAILED = 'transition-parameter-validation-failed';
-const ERROR_CODE_PAYMENT_FAILED = 'transaction-payment-failed';
-const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
-const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'email-too-many-verification-requests';
-const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit';
+import {
+  ERROR_CODE_TRANSITION_PARAMETER_VALIDATION_FAILED,
+  ERROR_CODE_PAYMENT_FAILED,
+  ERROR_CODE_EMAIL_TAKEN,
+  ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS,
+  ERROR_CODE_UPLOAD_OVER_LIMIT,
+} from './propTypes';
 
 const errorAPIErrors = error => {
   return error && error.apiErrors ? error.apiErrors : [];
