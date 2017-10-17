@@ -87,16 +87,16 @@ EmailVerificationPageComponent.defaultProps = {
   verificationError: null,
 };
 
-const { bool, func, instanceOf, shape, string } = PropTypes;
+const { bool, func, shape, string } = PropTypes;
 
 EmailVerificationPageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
+  authInfoError: propTypes.error,
   currentUser: propTypes.currentUser,
-  logoutError: instanceOf(Error),
+  logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
   submitVerification: func.isRequired,
   emailVerificationInProgress: bool.isRequired,
-  verificationError: instanceOf(Error),
+  verificationError: propTypes.error,
 
   // from withRouter
   location: shape({

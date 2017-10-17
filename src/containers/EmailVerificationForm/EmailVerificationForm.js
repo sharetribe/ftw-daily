@@ -94,13 +94,13 @@ EmailVerificationFormComponent.defaultProps = {
   verificationError: null,
 };
 
-const { instanceOf, bool } = PropTypes;
+const { bool } = PropTypes;
 
 EmailVerificationFormComponent.propTypes = {
   ...formPropTypes,
   inProgress: bool,
   currentUser: propTypes.currentUser.isRequired,
-  verificationError: instanceOf(Error),
+  verificationError: propTypes.error,
 };
 
 const defaultFormName = 'EmailVerificationForm';
