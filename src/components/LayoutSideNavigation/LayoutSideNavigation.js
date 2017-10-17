@@ -23,10 +23,6 @@ const prepareChildren = children => {
 
   React.Children.forEach(children, child => {
     if (child.type === TopbarWrapper) {
-      // return React.cloneElement(child, {
-      //   isOpen,
-      //   onToggleActive: this.toggleOpen,
-      // });
       childrenMap.topbarWrapper = child;
     } else if (child.type === SideNavWrapper) {
       childrenMap.sideNavWrapper = child;
