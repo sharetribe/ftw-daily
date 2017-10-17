@@ -152,27 +152,27 @@ ManageListingsPageComponent.defaultProps = {
   openingListingError: null,
 };
 
-const { arrayOf, bool, func, instanceOf, object, shape, string } = PropTypes;
+const { arrayOf, bool, func, object, shape, string } = PropTypes;
 
 ManageListingsPageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
+  authInfoError: propTypes.error,
   closingListing: shape({ uuid: string.isRequired }),
   closingListingError: shape({
     listingId: propTypes.uuid.isRequired,
-    error: instanceOf(Error).isRequired,
+    error: propTypes.error.isRequired,
   }),
   listings: arrayOf(propTypes.listing),
-  logoutError: instanceOf(Error),
+  logoutError: propTypes.error,
   onCloseListing: func.isRequired,
   onOpenListing: func.isRequired,
   openingListing: shape({ uuid: string.isRequired }),
   openingListingError: shape({
     listingId: propTypes.uuid.isRequired,
-    error: instanceOf(Error).isRequired,
+    error: propTypes.error.isRequired,
   }),
   pagination: propTypes.pagination,
   queryInProgress: bool.isRequired,
-  queryListingsError: instanceOf(Error),
+  queryListingsError: propTypes.error,
   queryParams: object,
   scrollingDisabled: bool.isRequired,
 };

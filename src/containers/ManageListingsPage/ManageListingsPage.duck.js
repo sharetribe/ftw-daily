@@ -1,4 +1,5 @@
 import { updatedEntities, denormalisedEntities } from '../../util/data';
+import { storableError } from '../../util/errors';
 
 // ================ Action types ================ //
 
@@ -246,7 +247,7 @@ export const queryOwnListings = queryParams => (dispatch, getState, sdk) => {
       return response;
     })
     .catch(e => {
-      dispatch(queryListingsError(e));
+      dispatch(queryListingsError(storableError(e)));
       throw e;
     });
 };
@@ -261,7 +262,7 @@ export const closeListing = listingId => (dispatch, getState, sdk) => {
       return response;
     })
     .catch(e => {
-      dispatch(closeListingError(e));
+      dispatch(closeListingError(storableError(e)));
     });
 };
 
@@ -275,6 +276,6 @@ export const openListing = listingId => (dispatch, getState, sdk) => {
       return response;
     })
     .catch(e => {
-      dispatch(openListingError(e));
+      dispatch(openListingError(storableError(e)));
     });
 };
