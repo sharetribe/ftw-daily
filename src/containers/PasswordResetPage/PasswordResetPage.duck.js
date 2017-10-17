@@ -1,3 +1,5 @@
+import { storableError } from '../../util/errors';
+
 // ================ Action types ================ //
 
 export const RESET_PASSWORD_REQUEST = 'app/PasswordResetPage/RESET_PASSWORD_REQUEST';
@@ -50,5 +52,5 @@ export const resetPassword = (email, passwordResetToken, newPassword) => (
   return sdk.passwordReset
     .reset(params)
     .then(() => dispatch(resetPasswordSuccess()))
-    .catch(e => dispatch(resetPasswordError(e)));
+    .catch(e => dispatch(resetPasswordError(storableError(e))));
 };
