@@ -1,0 +1,9 @@
+@import '../../marketplace.css';
+
+.root {
+  height: 282px;
+  margin: 0 30px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: var(--matterColorNegative);
+}
