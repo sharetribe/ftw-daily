@@ -23,7 +23,7 @@ import { TopbarContainer } from '../../containers';
 import { loadData } from './InboxPage.duck';
 import css from './InboxPage.css';
 
-const { arrayOf, bool, instanceOf, number, oneOf, shape, string } = PropTypes;
+const { arrayOf, bool, number, oneOf, shape, string } = PropTypes;
 
 const formatDate = (intl, date) => {
   return {
@@ -303,11 +303,11 @@ InboxPageComponent.propTypes = {
     tab: string.isRequired,
   }).isRequired,
 
-  authInfoError: instanceOf(Error),
+  authInfoError: propTypes.error,
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
-  fetchOrdersOrSalesError: instanceOf(Error),
-  logoutError: instanceOf(Error),
+  fetchOrdersOrSalesError: propTypes.error,
+  logoutError: propTypes.error,
   pagination: propTypes.pagination,
   providerNotificationCount: number,
   scrollingDisabled: bool.isRequired,
