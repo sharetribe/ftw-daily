@@ -1,4 +1,5 @@
 import { unionWith } from 'lodash';
+import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 
 // ================ Action types ================ //
@@ -124,7 +125,7 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
       return response;
     })
     .catch(e => {
-      dispatch(searchListingsError(e));
+      dispatch(searchListingsError(storableError(e)));
       throw e;
     });
 };
@@ -146,7 +147,7 @@ export const searchMapListings = searchParams => (dispatch, getState, sdk) => {
       return response;
     })
     .catch(e => {
-      dispatch(searchMapListingsError(e));
+      dispatch(searchMapListingsError(storableError(e)));
       throw e;
     });
 };
