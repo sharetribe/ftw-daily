@@ -39,7 +39,9 @@ export class ModalComponent extends Component {
   }
 
   componentWillUnmount() {
+    const { id, onManageDisableScrolling } = this.props;
     document.body.removeEventListener('keyup', this.handleBodyKeyUp);
+    onManageDisableScrolling(id, false);
   }
 
   handleBodyKeyUp(event) {
