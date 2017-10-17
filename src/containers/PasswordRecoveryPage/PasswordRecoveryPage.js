@@ -3,19 +3,20 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import * as propTypes from '../../util/propTypes';
 import {
   isPasswordRecoveryEmailNotFoundError,
   isPasswordRecoveryEmailNotVerifiedError,
 } from '../../util/errors';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
+import { Page, InlineTextButton, IconKeys } from '../../components';
+import { PasswordRecoveryForm, TopbarContainer } from '../../containers';
+
 import {
   recoverPassword,
   retypePasswordRecoveryEmail,
   clearPasswordRecoveryError,
 } from './PasswordRecoveryPage.duck';
-import { Page, InlineTextButton, IconKeys } from '../../components';
-import { PasswordRecoveryForm, TopbarContainer } from '../../containers';
-
 import DoorIcon from './DoorIcon';
 import css from './PasswordRecoveryPage.css';
 
@@ -166,14 +167,14 @@ PasswordRecoveryPageComponent.defaultProps = {
   recoveryError: null,
 };
 
-const { bool, func, instanceOf, string } = PropTypes;
+const { bool, func, string } = PropTypes;
 
 PasswordRecoveryPageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
-  logoutError: instanceOf(Error),
+  authInfoError: propTypes.error,
+  logoutError: propTypes.error,
   initialEmail: string,
   submittedEmail: string,
-  recoveryError: instanceOf(Error),
+  recoveryError: propTypes.error,
   recoveryInProgress: bool.isRequired,
   passwordRequested: bool.isRequired,
   onChange: func.isRequired,
