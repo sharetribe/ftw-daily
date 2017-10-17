@@ -114,10 +114,10 @@ ProfileSettingsPageComponent.defaultProps = {
   image: null,
 };
 
-const { bool, func, instanceOf, object, shape, string } = PropTypes;
+const { bool, func, object, shape, string } = PropTypes;
 
 ProfileSettingsPageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
+  authInfoError: propTypes.error,
   currentUser: propTypes.currentUser,
   image: shape({
     id: string,
@@ -125,14 +125,14 @@ ProfileSettingsPageComponent.propTypes = {
     file: object,
     uploadedImage: propTypes.image,
   }),
-  logoutError: instanceOf(Error),
+  logoutError: propTypes.error,
   onChange: func.isRequired,
   onImageUpload: func.isRequired,
   onUpdateProfile: func.isRequired,
   scrollingDisabled: bool.isRequired,
   updateInProgress: bool.isRequired,
-  updateProfileError: instanceOf(Error),
-  uploadImageError: instanceOf(Error),
+  updateProfileError: propTypes.error,
+  uploadImageError: propTypes.error,
   uploadInProgress: bool.isRequired,
 };
 

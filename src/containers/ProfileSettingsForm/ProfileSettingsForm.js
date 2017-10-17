@@ -5,6 +5,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
 import { ensureCurrentUser } from '../../util/data';
+import * as propTypes from '../../util/propTypes';
 import * as validators from '../../util/validators';
 import { isUploadProfileImageOverLimitError } from '../../util/errors';
 import { Form, Avatar, Button, ImageFromFile, IconSpinner, TextInputField } from '../../components';
@@ -60,7 +61,7 @@ const RenderAvatar = props => {
 };
 
 RenderAvatar.defaultProps = { uploadImageError: null };
-const { bool, func, instanceOf, node, object, shape, string } = PropTypes;
+const { bool, func, node, object, shape, string } = PropTypes;
 
 RenderAvatar.propTypes = {
   accept: string.isRequired,
@@ -73,7 +74,7 @@ RenderAvatar.propTypes = {
   }).isRequired,
   label: node.isRequired,
   type: string.isRequired,
-  uploadImageError: instanceOf(Error),
+  uploadImageError: propTypes.error,
 };
 
 class ProfileSettingsFormComponent extends Component {
@@ -293,10 +294,10 @@ ProfileSettingsFormComponent.propTypes = {
   rootClassName: string,
   className: string,
 
-  uploadImageError: instanceOf(Error),
+  uploadImageError: propTypes.error,
   uploadInProgress: bool.isRequired,
   updateInProgress: bool.isRequired,
-  updateProfileError: instanceOf(Error),
+  updateProfileError: propTypes.error,
   updateProfileReady: bool,
 
   // from injectIntl

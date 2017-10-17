@@ -1,4 +1,5 @@
 import { updatedEntities, denormalisedEntities } from '../../util/data';
+import { storableError } from '../../util/errors';
 import { currentUserShowSuccess } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
@@ -120,7 +121,7 @@ export function uploadImage(actionPayload) {
         const uploadedImage = resp.data.data;
         dispatch(uploadImageSuccess({ data: { id, uploadedImage } }));
       })
-      .catch(e => dispatch(uploadImageError({ id, error: e })));
+      .catch(e => dispatch(uploadImageError({ id, error: storableError(e) })));
   };
 }
 
@@ -142,6 +143,6 @@ export const updateProfile = actionPayload => {
         // Update current user in state.user.currentUser through user.duck.js
         dispatch(currentUserShowSuccess(currentUser));
       })
-      .catch(e => dispatch(updateProfileError(e)));
+      .catch(e => dispatch(updateProfileError(storableError(e))));
   };
 };
