@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 import { types } from '../../util/sdkLoader';
 import { createUser, createCurrentUser, createListing, fakeIntl } from '../../util/test-data';
+import { storableError } from '../../util/errors';
 import { renderShallow } from '../../util/test-helpers';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { showListingRequest, showListingError, showListing } from './ListingPage.duck';
@@ -84,7 +85,7 @@ describe('ListingPage', () => {
         expect(dispatch.mock.calls).toEqual([
           [showListingRequest(id)],
           [expect.anything()], // fetchCurrentUser() call
-          [showListingError(error)],
+          [showListingError(storableError(error))],
         ]);
       });
     });
