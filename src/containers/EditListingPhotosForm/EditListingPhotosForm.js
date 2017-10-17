@@ -6,6 +6,7 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import classNames from 'classnames';
+import * as propTypes from '../../util/propTypes';
 import { noEmptyArray } from '../../util/validators';
 import { isUploadListingImageOverLimitError } from '../../util/errors';
 import { Form, AddImages, Button, ValidationError } from '../../components';
@@ -31,7 +32,7 @@ const RenderAddImage = props => {
   );
 };
 
-const { func, node, object, shape, string, bool, instanceOf } = PropTypes;
+const { bool, func, node, object, shape, string } = PropTypes;
 
 RenderAddImage.propTypes = {
   accept: string.isRequired,
@@ -231,7 +232,7 @@ EditListingPhotosFormComponent.propTypes = {
   saveActionMsg: string.isRequired,
   updated: bool.isRequired,
   ready: bool.isRequired,
-  updateError: instanceOf(Error),
+  updateError: propTypes.error,
   updateInProgress: bool.isRequired,
   onRemoveImage: func.isRequired,
 };

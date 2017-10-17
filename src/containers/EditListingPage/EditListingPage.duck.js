@@ -1,5 +1,6 @@
 import { omit, omitBy, isUndefined } from 'lodash';
 import { types } from '../../util/sdkLoader';
+import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasListingsSuccess } from '../../ducks/user.duck';
@@ -245,7 +246,7 @@ export function requestShowListing(actionPayload) {
         dispatch(showListingsSuccess(response));
         return response;
       })
-      .catch(e => dispatch(showListingsError(e)));
+      .catch(e => dispatch(showListingsError(storableError(e))));
   };
 }
 
@@ -281,7 +282,7 @@ export function requestCreateListing(data) {
       })
       .catch(e => {
         log.error(e, 'create-listing-failed', { listingData: cleanedData });
-        return dispatch(createListingError(e));
+        return dispatch(createListingError(storableError(e)));
       });
   };
 }
@@ -294,7 +295,7 @@ export function requestImageUpload(actionPayload) {
     return sdk.images
       .uploadListingImage({ image: actionPayload.file })
       .then(resp => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } })))
-      .catch(e => dispatch(uploadImageError({ id, error: e })));
+      .catch(e => dispatch(uploadImageError({ id, error: storableError(e) })));
   };
 }
 
@@ -320,7 +321,7 @@ export function requestUpdateListing(tab, data) {
       })
       .catch(e => {
         log.error(e, 'update-listing-failed', { listingData: cleanedData });
-        return dispatch(updateListingError(e));
+        return dispatch(updateListingError(storableError(e)));
       });
   };
 }
