@@ -10,10 +10,10 @@
  */
 
 const ERROR_CODE_TRANSITION_PARAMETER_VALIDATION_FAILED = 'transition-parameter-validation-failed';
-const ERROR_CODE_PAYMENT_FAILED = 'payment-failed';
+const ERROR_CODE_PAYMENT_FAILED = 'transaction-payment-failed';
 const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
-const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'too-many-verification-requests';
-const ERROR_CODE_UPLOAD_OVER_LIMIT = 'upload-over-limit';
+const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'email-too-many-verification-requests';
+const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit';
 
 const responseErrors = apiError => {
   return apiError && apiError.data && apiError.data.errors ? apiError.data.errors : [];
