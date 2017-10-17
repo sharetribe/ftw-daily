@@ -15,14 +15,21 @@ const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
 const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'email-too-many-verification-requests';
 const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit';
 
-const responseErrors = apiError => {
-  return apiError && apiError.data && apiError.data.errors ? apiError.data.errors : [];
+const errorAPIErrors = error => {
+  return error && error.apiErrors ? error.apiErrors : [];
 };
 
-const hasErrorWithCode = (apiError, code) => {
-  return responseErrors(apiError).some(error => {
-    return error.code === code;
+const hasErrorWithCode = (error, code) => {
+  return errorAPIErrors(error).some(apiError => {
+    return apiError.code === code;
   });
+};
+
+/**
+ * return apiErrors from error response
+ */
+const responseAPIErrors = error => {
+  return error && error.data && error.data.errors ? error.data.errors : [];
 };
 
 /**
@@ -83,7 +90,7 @@ export const isPasswordRecoveryEmailNotVerifiedError = error => error && error.s
  * being closed or deleted.
  */
 export const isTransactionInitiateListingNotFoundError = error => {
-  return responseErrors(error).some(apiError => {
+  return responseAPIErrors(error).some(apiError => {
     let notfound = false;
 
     try {
@@ -105,7 +112,7 @@ export const isTransactionInitiateListingNotFoundError = error => {
  * due to the transaction total amount being too low for Stripe.
  */
 export const isTransactionInitiateAmountTooLowError = error => {
-  return responseErrors(error).some(apiError => {
+  return responseAPIErrors(error).some(apiError => {
     const isPaymentFailedError =
       apiError.status === 402 && apiError.code === ERROR_CODE_PAYMENT_FAILED;
     let isAmountTooLow = false;
@@ -134,3 +141,19 @@ export const isChangeEmailWrongPassword = error => error && error.status === 403
  * is due to giving wrong password.
  */
 export const isChangePasswordWrongPassword = error => error && error.status === 403;
+
+export const storableError = error => {
+  const { name, message, status, statusText } = error;
+  // Status, statusText, and data.errors are (possibly) added to the error object by SDK
+  const apiErrors = responseAPIErrors(error);
+
+  // Returned object is the same as prop type check in util/proptypes -> error
+  return {
+    type: 'error',
+    name,
+    message,
+    status,
+    statusText,
+    apiErrors,
+  };
+};
