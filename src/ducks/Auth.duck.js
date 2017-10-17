@@ -1,4 +1,5 @@
 import { clearCurrentUser, fetchCurrentUser } from './user.duck';
+import { storableError } from '../util/errors';
 import * as log from '../util/log';
 
 const authenticated = authInfo => authInfo.grantType === 'refresh_token';
@@ -124,7 +125,7 @@ export const authInfo = () => (dispatch, getState, sdk) => {
   return sdk
     .authInfo()
     .then(info => dispatch(authInfoSuccess(info)))
-    .catch(e => dispatch(authInfoError(e)));
+    .catch(e => dispatch(authInfoError(storableError(e))));
 };
 
 export const login = (username, password) => (dispatch, getState, sdk) => {
@@ -139,7 +140,7 @@ export const login = (username, password) => (dispatch, getState, sdk) => {
     .login({ username, password })
     .then(() => dispatch(loginSuccess()))
     .then(() => dispatch(fetchCurrentUser()))
-    .catch(e => dispatch(loginError(e)));
+    .catch(e => dispatch(loginError(storableError(e))));
 };
 
 export const logout = () => (dispatch, getState, sdk) => {
@@ -158,7 +159,7 @@ export const logout = () => (dispatch, getState, sdk) => {
       dispatch(userLogout());
       log.clearUserId();
     })
-    .catch(e => dispatch(logoutError(e)));
+    .catch(e => dispatch(logoutError(storableError(e))));
 };
 
 export const signup = params => (dispatch, getState, sdk) => {
@@ -175,7 +176,7 @@ export const signup = params => (dispatch, getState, sdk) => {
     .then(() => dispatch(signupSuccess()))
     .then(() => dispatch(login(email, password)))
     .catch(e => {
-      dispatch(signupError(e));
+      dispatch(signupError(storableError(e)));
       log.error(e, 'signup-failed', {
         email: params.email,
         firstName: params.firstName,
