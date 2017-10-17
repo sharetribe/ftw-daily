@@ -6,6 +6,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import config from '../../config';
 import { canonicalURL, metaTagProps } from '../../util/seo';
+import * as propTypes from '../../util/propTypes';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
@@ -164,7 +165,7 @@ class PageComponent extends Component {
   }
 }
 
-const { any, arrayOf, bool, func, instanceOf, number, shape, string } = PropTypes;
+const { any, arrayOf, bool, func, number, shape, string } = PropTypes;
 
 PageComponent.defaultProps = {
   className: null,
@@ -190,8 +191,8 @@ PageComponent.propTypes = {
   className: string,
   rootClassName: string,
   children: any,
-  authInfoError: instanceOf(Error),
-  logoutError: instanceOf(Error),
+  authInfoError: propTypes.error,
+  logoutError: propTypes.error,
   scrollingDisabled: bool,
 
   // SEO related props
