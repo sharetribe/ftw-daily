@@ -143,7 +143,7 @@ class TokenInputFieldComponent extends Component {
     createToken(accountData)
       .then(token => {
         const changedValues = inputsNeeded.filter(
-          inputType => values[inputType] !== this.state[inputType].value
+          inputType => values[inputType] !== cleanedString(this.state[inputType].value)
         );
         const valuesAreUnchanged = changedValues.length === 0;
 
