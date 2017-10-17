@@ -64,7 +64,7 @@
 
   background-color: var(--matterColorBright);
   width: 100vw;
-  padding: 8px 24px 14px 24px;
+  padding: 1px 24px 14px 24px;
 
   /* sticky result summary in mobile */
   position: sticky;
@@ -77,6 +77,10 @@
 }
 
 .mapIcon {
+  /* Font */
+  @apply --marketplaceTinyFontStyles;
+  font-weight: var(--fontWeightBold);
+
   /* background map image */
   background-image: url(./images/map_icon@2x.png);
   background-size: cover;
@@ -86,9 +90,6 @@
   height: 35px;
   margin-top: 23px;
   padding: 9px 22px;
-
-  /* Font */
-  @apply --marketplaceTinyFontStyles;
 }
 
 .error {
