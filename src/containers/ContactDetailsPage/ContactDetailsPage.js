@@ -112,20 +112,20 @@ ContactDetailsPageComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf } = PropTypes;
+const { bool, func } = PropTypes;
 
 ContactDetailsPageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
-  changeEmailError: instanceOf(Error),
+  authInfoError: propTypes.error,
+  changeEmailError: propTypes.error,
   changeEmailInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   emailChanged: bool.isRequired,
-  logoutError: instanceOf(Error),
+  logoutError: propTypes.error,
   onChange: func.isRequired,
   onSubmitChangeEmail: func.isRequired,
   scrollingDisabled: bool.isRequired,
   sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
+  sendVerificationEmailError: propTypes.error,
   onResendVerificationEmail: func.isRequired,
 };
 
