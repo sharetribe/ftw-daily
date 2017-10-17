@@ -267,7 +267,7 @@ SaleDetailsPanelComponent.defaultProps = {
   declineSaleError: null,
 };
 
-const { string, func, bool, instanceOf } = PropTypes;
+const { bool, func, string } = PropTypes;
 
 SaleDetailsPanelComponent.propTypes = {
   rootClassName: string,
@@ -277,8 +277,8 @@ SaleDetailsPanelComponent.propTypes = {
   onDeclineSale: func.isRequired,
   acceptInProgress: bool.isRequired,
   declineInProgress: bool.isRequired,
-  acceptSaleError: instanceOf(Error),
-  declineSaleError: instanceOf(Error),
+  acceptSaleError: propTypes.error,
+  declineSaleError: propTypes.error,
 
   // from injectIntl
   intl: intlShape.isRequired,

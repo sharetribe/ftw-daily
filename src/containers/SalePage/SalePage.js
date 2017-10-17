@@ -103,18 +103,18 @@ SalePageComponent.defaultProps = {
   transaction: null,
 };
 
-const { bool, func, instanceOf, oneOf, shape, string } = PropTypes;
+const { bool, func, oneOf, shape, string } = PropTypes;
 
 SalePageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
+  authInfoError: propTypes.error,
   currentUser: propTypes.currentUser,
-  fetchSaleError: instanceOf(Error),
-  acceptSaleError: instanceOf(Error),
-  declineSaleError: instanceOf(Error),
+  fetchSaleError: propTypes.error,
+  acceptSaleError: propTypes.error,
+  declineSaleError: propTypes.error,
   acceptInProgress: bool.isRequired,
   declineInProgress: bool.isRequired,
   intl: intlShape.isRequired,
-  logoutError: instanceOf(Error),
+  logoutError: propTypes.error,
   onAcceptSale: func.isRequired,
   onDeclineSale: func.isRequired,
   params: shape({ id: string }).isRequired,

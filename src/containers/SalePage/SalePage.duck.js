@@ -1,4 +1,5 @@
 import { types } from '../../util/sdkLoader';
+import { storableError } from '../../util/errors';
 import * as propTypes from '../../util/propTypes';
 import * as log from '../../util/log';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
@@ -122,7 +123,7 @@ export const fetchSale = id => (dispatch, getState, sdk) => {
       return response;
     })
     .catch(e => {
-      dispatch(fetchSaleError(e));
+      dispatch(fetchSaleError(storableError(e)));
       throw e;
     });
 };
@@ -142,7 +143,7 @@ export const acceptSale = id => (dispatch, getState, sdk) => {
       return response;
     })
     .catch(e => {
-      dispatch(acceptSaleError(e));
+      dispatch(acceptSaleError(storableError(e)));
       log.error(e, 'accept-sale-failed', {
         txId: id,
         transition: propTypes.TX_TRANSITION_ACCEPT,
@@ -166,7 +167,7 @@ export const declineSale = id => (dispatch, getState, sdk) => {
       return response;
     })
     .catch(e => {
-      dispatch(declineSaleError(e));
+      dispatch(declineSaleError(storableError(e)));
       log.error(e, 'redect-sale-failed', {
         txId: id,
         transition: propTypes.TX_TRANSITION_DECLINE,
