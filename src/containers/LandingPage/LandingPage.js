@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { injectIntl, intlShape } from 'react-intl';
+import * as propTypes from '../../util/propTypes';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import config from '../../config';
 import { Page, HeroSection } from '../../components';
@@ -60,11 +61,11 @@ LandingPageComponent.defaultProps = {
   logoutError: null,
 };
 
-const { bool, instanceOf, object } = PropTypes;
+const { bool, object } = PropTypes;
 
 LandingPageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
-  logoutError: instanceOf(Error),
+  authInfoError: propTypes.error,
+  logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
 
   // from withRouter
