@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import routeConfiguration from '../../routeConfiguration';
+import * as propTypes from '../../util/propTypes';
 import { createResourceLocatorString } from '../../util/routes';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { Page } from '../../components';
@@ -68,11 +69,11 @@ NotFoundPageComponent.defaultProps = {
   staticContext: {},
 };
 
-const { bool, func, instanceOf, object, shape } = PropTypes;
+const { bool, func, object, shape } = PropTypes;
 
 NotFoundPageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
-  logoutError: instanceOf(Error),
+  authInfoError: propTypes.error,
+  logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
 
   // context object from StaticRouter, injected by the withRouter wrapper
