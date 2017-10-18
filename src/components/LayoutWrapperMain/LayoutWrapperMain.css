@@ -1,0 +1,6 @@
+.root {
+  /* Expand to the full remaining width of the viewport */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

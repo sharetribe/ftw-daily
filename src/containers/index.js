@@ -37,6 +37,7 @@ export { default as SalePage } from './SalePage/SalePage';
 export { default as SearchPage } from './SearchPage/SearchPage';
 export { default as SecurityPage } from './SecurityPage/SecurityPage';
 export { default as SignupForm } from './SignupForm/SignupForm';
+export { default as StaticPage } from './StaticPage/StaticPage';
 export { default as StripePaymentForm } from './StripePaymentForm/StripePaymentForm';
 export { default as StyleguidePage } from './StyleguidePage/StyleguidePage';
 export { default as TopbarContainer } from './TopbarContainer/TopbarContainer';

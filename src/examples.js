@@ -9,6 +9,7 @@ import * as DateInputField from './components/DateInputField/DateInputField.exam
 import * as DateRangeInputField from './components/DateRangeInputField/DateRangeInputField.example';
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
+import * as Footer from './components/Footer/Footer.example';
 import * as IconBannedUser from './components/IconBannedUser/IconBannedUser.example';
 import * as IconCheckmark from './components/IconCheckmark/IconCheckmark.example';
 import * as IconClose from './components/IconClose/IconClose.example';
@@ -71,6 +72,7 @@ export {
   EditListingWizard,
   EmailVerificationForm,
   ExpandingTextarea,
+  Footer,
   IconBannedUser,
   IconCheckmark,
   IconClose,

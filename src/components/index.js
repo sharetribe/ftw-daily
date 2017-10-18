@@ -26,6 +26,7 @@ export { default as EditListingWizard } from './EditListingWizard/EditListingWiz
 export { default as ExpandingTextarea } from './ExpandingTextarea/ExpandingTextarea';
 export { default as ExternalLink } from './ExternalLink/ExternalLink';
 export { default as FilterPanel } from './FilterPanel/FilterPanel';
+export { default as Footer } from './Footer/Footer';
 export { default as Form } from './Form/Form';
 export { default as HeroSection } from './HeroSection/HeroSection';
 export { default as IconBannedUser } from './IconBannedUser/IconBannedUser';
@@ -40,12 +41,12 @@ export { default as IconSearch } from './IconSearch/IconSearch';
 export { default as IconSpinner } from './IconSpinner/IconSpinner';
 export { default as ImageCarousel } from './ImageCarousel/ImageCarousel';
 export { default as ImageFromFile } from './ImageFromFile/ImageFromFile';
-export {
-  default as LayoutSideNavigation,
-  ContentWrapper,
-  SideNavWrapper,
-  TopbarWrapper,
-} from './LayoutSideNavigation/LayoutSideNavigation';
+export { default as LayoutSideNavigation } from './LayoutSideNavigation/LayoutSideNavigation';
+export { default as LayoutSingleColumn } from './LayoutSingleColumn/LayoutSingleColumn';
+export { default as LayoutWrapperTopbar } from './LayoutWrapperTopbar/LayoutWrapperTopbar';
+export { default as LayoutWrapperMain } from './LayoutWrapperMain/LayoutWrapperMain';
+export { default as LayoutWrapperSideNav } from './LayoutWrapperSideNav/LayoutWrapperSideNav';
+export { default as LayoutWrapperFooter } from './LayoutWrapperFooter/LayoutWrapperFooter';
 export { default as ListingCard } from './ListingCard/ListingCard';
 export {
   default as LocationAutocompleteInput,

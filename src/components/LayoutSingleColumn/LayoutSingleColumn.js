@@ -1,27 +1,20 @@
 /**
- * LayoutSideNavigation needs to have 3-4 children:
+ * LayoutSingleColumn needs to have 3-4 children:
  * LayoutWrapperTopbar, LayoutWrapperSideNav, LayoutWrapperMain, and possibly LayoutWrapperFooter.
- * SideNavWrapper will be shown aside on Desktop layout and
- * as a sub bar under Topbar on mobile screens.
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  LayoutWrapperTopbar,
-  LayoutWrapperSideNav,
-  LayoutWrapperMain,
-  LayoutWrapperFooter,
-} from '../../components';
+import { LayoutWrapperTopbar, LayoutWrapperMain, LayoutWrapperFooter } from '../../components';
 
-import css from './LayoutSideNavigation.css';
+import css from './LayoutSingleColumn.css';
 
 const prepareChildren = children => {
   const childrenCount = React.Children.count(children);
   if (!(childrenCount === 3 || childrenCount === 4)) {
     throw new Error(
-      `Menu needs to have 3 - 4 children:
-      LayoutWrapperTopbar, LayoutWrapperSideNav, and LayoutWrapperMain,
+      `Menu needs to have 2 - 3 children:
+      LayoutWrapperTopbar, and LayoutWrapperMain,
       and optionally LayoutWrapperFooter.`
     );
   }
@@ -31,8 +24,6 @@ const prepareChildren = children => {
   React.Children.forEach(children, child => {
     if (child.type === LayoutWrapperTopbar) {
       childrenMap.layoutWrapperTopbar = child;
-    } else if (child.type === LayoutWrapperSideNav) {
-      childrenMap.layoutWrapperSideNav = child;
     } else if (child.type === LayoutWrapperMain) {
       // LayoutWrapperMain needs different rootClassName
       const childWithAddedCSS = React.cloneElement(child, {
@@ -43,48 +34,40 @@ const prepareChildren = children => {
       childrenMap.layoutWrapperFooter = child;
     } else {
       throw new Error(
-        `LayoutSideNavigation has an unknown child.
-      Only LayoutWrapperTopbar, LayoutWrapperSideNav, LayoutWrapperMain, LayoutWrapperFooter are allowed.`
+        `LayoutSingleColumn has an unknown child.
+      Only LayoutWrapperTopbar, LayoutWrapperMain, LayoutWrapperFooter are allowed.`
       );
     }
   });
   return childrenMap;
 };
 
-const LayoutSideNavigation = props => {
-  const { className, rootClassName, containerClassName, children } = props;
-
+const LayoutSingleColumn = props => {
+  const { className, rootClassName, children } = props;
   const preparedChildren = prepareChildren(children);
   const classes = classNames(rootClassName || css.root, className);
-  const containerClasses = containerClassName || css.container;
-
   const maybeFooter = preparedChildren.layoutWrapperFooter || null;
 
   return (
     <div className={classes}>
       {preparedChildren.layoutWrapperTopbar}
-      <div className={containerClasses}>
-        {preparedChildren.layoutWrapperSideNav}
-        {preparedChildren.layoutWrapperMain}
-      </div>
+      {preparedChildren.layoutWrapperMain}
       {maybeFooter}
     </div>
   );
 };
 
-LayoutSideNavigation.defaultProps = {
+LayoutSingleColumn.defaultProps = {
   className: null,
   rootClassName: null,
-  containerClassName: null,
 };
 
 const { node, string } = PropTypes;
 
-LayoutSideNavigation.propTypes = {
+LayoutSingleColumn.propTypes = {
   children: node.isRequired,
   className: string,
   rootClassName: string,
-  containerClassName: string,
 };
 
-export default LayoutSideNavigation;
+export default LayoutSingleColumn;
