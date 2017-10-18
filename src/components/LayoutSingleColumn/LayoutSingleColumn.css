@@ -1,0 +1,18 @@
+@import '../../marketplace.css';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layoutWrapperMain {
+  /* Use all available space parent element (aka root) can give */
+  flex-grow: 1;
+
+  /* Expand to the full remaining width of the viewport */
+  display: flex;
+  flex-direction: column;
+  width: 100%
+
+}

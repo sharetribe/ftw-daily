@@ -42,6 +42,7 @@ export { default as IconSpinner } from './IconSpinner/IconSpinner';
 export { default as ImageCarousel } from './ImageCarousel/ImageCarousel';
 export { default as ImageFromFile } from './ImageFromFile/ImageFromFile';
 export { default as LayoutSideNavigation } from './LayoutSideNavigation/LayoutSideNavigation';
+export { default as LayoutSingleColumn } from './LayoutSingleColumn/LayoutSingleColumn';
 export { default as LayoutWrapperTopbar } from './LayoutWrapperTopbar/LayoutWrapperTopbar';
 export { default as LayoutWrapperMain } from './LayoutWrapperMain/LayoutWrapperMain';
 export { default as LayoutWrapperSideNav } from './LayoutWrapperSideNav/LayoutWrapperSideNav';
