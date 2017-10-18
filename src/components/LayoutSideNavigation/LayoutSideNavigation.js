@@ -7,7 +7,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { LayoutWrapperTopbar, LayoutWrapperSideNav, LayoutWrapperMain, LayoutWrapperFooter } from '../../components';
+import {
+  LayoutWrapperTopbar,
+  LayoutWrapperSideNav,
+  LayoutWrapperMain,
+  LayoutWrapperFooter,
+} from '../../components';
 
 import css from './LayoutSideNavigation.css';
 

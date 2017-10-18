@@ -6,11 +6,7 @@ import { Page } from '../../components';
 
 const StaticPageComponent = props => {
   const { children, ...pageProps } = props;
-  return (
-    <Page {...pageProps}>
-      {children}
-    </Page>
-  );
+  return <Page {...pageProps}>{children}</Page>;
 };
 
 StaticPageComponent.defaultProps = {
