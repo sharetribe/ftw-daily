@@ -203,7 +203,7 @@ As a last step you need to add the newly created static page to Starter apps rou
 Inside routeConfiguration function you should add URL path, page name (it should not conflicting with other pages), and component itself.
 
 Add it first to the imported pages in alphabetical order (2nd line):
-```
+```jsx
 import {
   AboutPage,
   AuthenticationPage,
@@ -212,7 +212,7 @@ import {
 
 and after that add the route configuration to your newly created page:
 (In this example we created about page. '/about' would work well as a path.)
-```
+```javascript
     {
       path: '/about',
       name: 'AboutPage',
