@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import * as propTypes from '../../util/propTypes';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { Page } from '../../components';
 import { TopbarContainer } from '../../containers';
@@ -26,11 +27,11 @@ ProfilePageComponent.defaultProps = {
   logoutError: null,
 };
 
-const { bool, instanceOf, shape, string } = PropTypes;
+const { bool, shape, string } = PropTypes;
 
 ProfilePageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
-  logoutError: instanceOf(Error),
+  authInfoError: propTypes.error,
+  logoutError: propTypes.error,
   params: shape({ displayName: string.isRequired }).isRequired,
   scrollingDisabled: bool.isRequired,
 };

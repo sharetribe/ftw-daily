@@ -67,6 +67,30 @@ const template = params => {
   return templateTags(templatedWithHtmlAttributes)(tags);
 };
 
+//
+// Clean Error details when stringifying Error.
+//
+const cleanErrorValue = value => {
+  // This should not happen
+  // Pick only selected few values to be stringified if Error object is encountered.
+  // Other values might contain circular structures
+  // (SDK's Axios library might add ctx and config which has such structures)
+  if (value instanceof Error) {
+    const { name, message, status, statusText, apiErrors } = value;
+    return { type: 'error', name, message, status, statusText, apiErrors };
+  }
+  return value;
+};
+
+//
+// JSON replacer
+// This stringifies SDK types and errors.
+//
+const replacer = (key = null, value) => {
+  const cleanedValue = cleanErrorValue(value);
+  return types.replacer(key, cleanedValue);
+};
+
 exports.render = function(requestUrl, context, preloadedState) {
   const { head, body } = renderApp(requestUrl, context, preloadedState);
 
@@ -74,7 +98,7 @@ exports.render = function(requestUrl, context, preloadedState) {
   // For security reasons we ensure that preloaded state is considered as a string
   // by replacing '<' character with its unicode equivalent.
   // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
-  const serializedState = JSON.stringify(preloadedState, types.replacer).replace(/</g, '\\u003c');
+  const serializedState = JSON.stringify(preloadedState, replacer).replace(/</g, '\\u003c');
 
   // At this point the serializedState is a string, the second
   // JSON.stringify wraps it within double quotes and escapes the

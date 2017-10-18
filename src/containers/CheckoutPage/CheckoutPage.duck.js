@@ -1,5 +1,6 @@
 import { pick } from 'lodash';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
+import { storableError } from '../../util/errors';
 import * as propTypes from '../../util/propTypes';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess } from '../../ducks/user.duck';
@@ -118,7 +119,7 @@ export const initiateOrder = params => (dispatch, getState, sdk) => {
       return orderId;
     })
     .catch(e => {
-      dispatch(initiateOrderError(e));
+      dispatch(initiateOrderError(storableError(e)));
       log.error(e, 'initiate-order-failed', {
         listingId: params.listingId.uuid,
         bookingStart: params.bookingStart,
@@ -174,6 +175,6 @@ export const speculateTransaction = (listingId, bookingStart, bookingEnd) => (
         bookingStart: bookingStart,
         bookingEnd: bookingEnd,
       });
-      return dispatch(speculateTransactionError(e));
+      return dispatch(speculateTransactionError(storableError(e)));
     });
 };

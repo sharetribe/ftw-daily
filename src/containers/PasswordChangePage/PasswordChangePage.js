@@ -101,14 +101,14 @@ PasswordChangePageComponent.defaultProps = {
   logoutError: null,
 };
 
-const { bool, func, instanceOf } = PropTypes;
+const { bool, func } = PropTypes;
 
 PasswordChangePageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
-  changePasswordError: instanceOf(Error),
+  authInfoError: propTypes.error,
+  changePasswordError: propTypes.error,
   changePasswordInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
-  logoutError: instanceOf(Error),
+  logoutError: propTypes.error,
   onChange: func.isRequired,
   onSubmitChangePassword: func.isRequired,
   passwordChanged: bool.isRequired,

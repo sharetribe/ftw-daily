@@ -1,3 +1,5 @@
+import { storableError } from '../../util/errors';
+
 // ================ Action types ================ //
 
 export const CHANGE_PASSWORD_REQUEST = 'app/PasswordChangePage/CHANGE_PASSWORD_REQUEST';
@@ -59,7 +61,7 @@ export const changePassword = params => (dispatch, getState, sdk) => {
     .changePassword({ newPassword, currentPassword })
     .then(() => dispatch(changePasswordSuccess()))
     .catch(e => {
-      dispatch(changePasswordError(e));
+      dispatch(changePasswordError(storableError(storableError(e))));
       // This is thrown so that form can be cleared
       // after a timeout on changePassword submit handler
       throw e;

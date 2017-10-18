@@ -83,7 +83,7 @@ export const ActionBar = props => {
   }
 };
 
-const { bool, func, instanceOf, object, oneOf, shape, string } = PropTypes;
+const { bool, func, object, oneOf, shape, string } = PropTypes;
 
 ActionBar.propTypes = {
   isOwnListing: bool.isRequired,
@@ -495,13 +495,13 @@ ListingPageComponent.propTypes = {
     id: string.isRequired,
     slug: string,
   }).isRequired,
-  authInfoError: instanceOf(Error),
+  authInfoError: propTypes.error,
   currentUser: propTypes.currentUser,
   getListing: func.isRequired,
-  logoutError: instanceOf(Error),
+  logoutError: propTypes.error,
   onManageDisableScrolling: func.isRequired,
   scrollingDisabled: bool.isRequired,
-  showListingError: instanceOf(Error),
+  showListingError: propTypes.error,
   tab: oneOf(['book', 'listing']),
   useInitialValues: func.isRequired,
 };

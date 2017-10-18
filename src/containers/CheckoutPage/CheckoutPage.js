@@ -385,7 +385,7 @@ CheckoutPageComponent.defaultProps = {
 const { func, instanceOf, shape, string, bool } = PropTypes;
 
 CheckoutPageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
+  authInfoError: propTypes.error,
   listing: propTypes.listing,
   bookingDates: shape({
     bookingStart: instanceOf(Date).isRequired,
@@ -393,10 +393,10 @@ CheckoutPageComponent.propTypes = {
   }),
   fetchSpeculatedTransaction: func.isRequired,
   speculateTransactionInProgress: bool.isRequired,
-  speculateTransactionError: instanceOf(Error),
+  speculateTransactionError: propTypes.error,
   speculatedTransaction: propTypes.transaction,
-  initiateOrderError: instanceOf(Error),
-  logoutError: instanceOf(Error),
+  initiateOrderError: propTypes.error,
+  logoutError: propTypes.error,
   currentUser: propTypes.currentUser,
   params: shape({
     id: string,

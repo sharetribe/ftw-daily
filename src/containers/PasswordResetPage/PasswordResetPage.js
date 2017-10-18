@@ -4,8 +4,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { isScrollingDisabled } from '../../ducks/UI.duck';
+import * as propTypes from '../../util/propTypes';
 import { parse } from '../../util/urlHelpers';
+import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { Page, NamedLink, IconKeys, IconKeysSuccess } from '../../components';
 import { PasswordResetForm, TopbarContainer } from '../../containers';
 
@@ -130,14 +131,14 @@ PasswordResetPageComponent.defaultProps = {
   resetPasswordError: null,
 };
 
-const { bool, func, instanceOf, shape, string } = PropTypes;
+const { bool, func, shape, string } = PropTypes;
 
 PasswordResetPageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
-  logoutError: instanceOf(Error),
+  authInfoError: propTypes.error,
+  logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
   resetPasswordInProgress: bool.isRequired,
-  resetPasswordError: instanceOf(Error),
+  resetPasswordError: propTypes.error,
   onSubmitPassword: func.isRequired,
 
   // from withRouter

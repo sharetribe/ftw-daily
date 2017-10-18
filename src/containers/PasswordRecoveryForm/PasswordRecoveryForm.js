@@ -4,9 +4,10 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
-import { Form, PrimaryButton, TextInputField, NamedLink } from '../../components';
+import * as propTypes from '../../util/propTypes';
 import * as validators from '../../util/validators';
 import { isPasswordRecoveryEmailNotFoundError } from '../../util/errors';
+import { Form, PrimaryButton, TextInputField, NamedLink } from '../../components';
 
 import css from './PasswordRecoveryForm.css';
 
@@ -96,7 +97,7 @@ PasswordRecoveryFormComponent.defaultProps = {
   recoveryError: null,
 };
 
-const { instanceOf, string, bool } = PropTypes;
+const { bool, string } = PropTypes;
 
 PasswordRecoveryFormComponent.propTypes = {
   ...formPropTypes,
@@ -104,7 +105,7 @@ PasswordRecoveryFormComponent.propTypes = {
   className: string,
 
   inProgress: bool,
-  recoveryError: instanceOf(Error),
+  recoveryError: propTypes.error,
 
   // from injectIntl
   intl: intlShape.isRequired,

@@ -54,7 +54,7 @@ TopbarContainerComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf, number, object, shape } = PropTypes;
+const { bool, func, number, object, shape } = PropTypes;
 
 TopbarContainerComponent.propTypes = {
   authInProgress: bool.isRequired,
@@ -66,7 +66,7 @@ TopbarContainerComponent.propTypes = {
   onLogout: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
+  sendVerificationEmailError: propTypes.error,
   onResendVerificationEmail: func.isRequired,
 
   // from withRouter

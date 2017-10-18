@@ -1,3 +1,4 @@
+import { storableError } from '../util/errors';
 import { fetchCurrentUser } from './user.duck';
 
 // ================ Action types ================ //
@@ -64,5 +65,5 @@ export const verify = verificationToken => (dispatch, getState, sdk) => {
     .verifyEmail({ verificationToken })
     .then(() => dispatch(verificationSuccess()))
     .then(() => dispatch(fetchCurrentUser()))
-    .catch(e => dispatch(verificationError(e)));
+    .catch(e => dispatch(verificationError(storableError(e))));
 };

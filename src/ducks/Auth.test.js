@@ -1,3 +1,4 @@
+import { storableError } from '../util/errors';
 import { clearCurrentUser, currentUserShowRequest, currentUserShowSuccess } from './user.duck';
 import reducer, {
   authenticationInProgress,
@@ -222,7 +223,7 @@ describe('Auth duck', () => {
 
       return login(username, password)(dispatch, getState, sdk).then(() => {
         expect(sdk.login.mock.calls).toEqual([[{ username, password }]]);
-        expect(dispatch.mock.calls).toEqual([[loginRequest()], [loginError(error)]]);
+        expect(dispatch.mock.calls).toEqual([[loginRequest()], [loginError(storableError(error))]]);
       });
     });
     it('should reject if another login is in progress', () => {
@@ -293,7 +294,10 @@ describe('Auth duck', () => {
 
       return logout()(dispatch, getState, sdk).then(() => {
         expect(sdk.logout.mock.calls.length).toEqual(1);
-        expect(dispatch.mock.calls).toEqual([[logoutRequest()], [logoutError(error)]]);
+        expect(dispatch.mock.calls).toEqual([
+          [logoutRequest()],
+          [logoutError(storableError(error))],
+        ]);
       });
     });
     it('should reject if another logout is in progress', () => {
@@ -384,7 +388,10 @@ describe('Auth duck', () => {
 
       return signup(params)(dispatch, getState, sdk).then(() => {
         expect(sdk.currentUser.create.mock.calls).toEqual([[params]]);
-        expect(dispatchedActions(dispatch)).toEqual([signupRequest(), signupError(error)]);
+        expect(dispatchedActions(dispatch)).toEqual([
+          signupRequest(),
+          signupError(storableError(error)),
+        ]);
       });
     });
   });

@@ -354,19 +354,19 @@ SearchPageComponent.defaultProps = {
   tab: 'listings',
 };
 
-const { array, bool, func, instanceOf, oneOf, object, shape, string } = PropTypes;
+const { array, bool, func, oneOf, object, shape, string } = PropTypes;
 
 SearchPageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
+  authInfoError: propTypes.error,
   listings: array,
   mapListings: array,
-  logoutError: instanceOf(Error),
+  logoutError: propTypes.error,
   onManageDisableScrolling: func.isRequired,
   onSearchMapListings: func.isRequired,
   pagination: propTypes.pagination,
   scrollingDisabled: bool.isRequired,
   searchInProgress: bool.isRequired,
-  searchListingsError: instanceOf(Error),
+  searchListingsError: propTypes.error,
   searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
 

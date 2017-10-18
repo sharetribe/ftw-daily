@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
+import * as propTypes from '../../util/propTypes';
 import * as validators from '../../util/validators';
 import { ensureCurrentUser } from '../../util/data';
 import { isChangePasswordWrongPassword } from '../../util/errors';
@@ -183,13 +184,13 @@ PasswordChangeFormComponent.defaultProps = {
   inProgress: false,
 };
 
-const { bool, instanceOf, string } = PropTypes;
+const { bool, string } = PropTypes;
 
 PasswordChangeFormComponent.propTypes = {
   ...formPropTypes,
   rootClassName: string,
   className: string,
-  changePasswordError: instanceOf(Error),
+  changePasswordError: propTypes.error,
   inProgress: bool,
   intl: intlShape.isRequired,
   ready: bool.isRequired,

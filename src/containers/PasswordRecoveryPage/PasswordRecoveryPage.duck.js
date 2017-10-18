@@ -1,3 +1,5 @@
+import { storableError } from '../../util/errors';
+
 // ================ Action types ================ //
 
 export const RECOVERY_REQUEST = 'app/PasswordRecoveryPage/RECOVERY_REQUEST';
@@ -75,5 +77,5 @@ export const recoverPassword = email => (dispatch, getState, sdk) => {
   return sdk.passwordReset
     .request({ email })
     .then(() => dispatch(passwordRecoverySuccess(email)))
-    .catch(error => dispatch(passwordRecoveryError(error, email)));
+    .catch(e => dispatch(passwordRecoveryError(storableError(e), email)));
 };

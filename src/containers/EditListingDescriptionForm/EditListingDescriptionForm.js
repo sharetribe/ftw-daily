@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
+import * as propTypes from '../../util/propTypes';
 import { maxLength, required } from '../../util/validators';
 import { Form, Button, TextInputField } from '../../components';
 
@@ -99,7 +100,7 @@ const EditListingDescriptionFormComponent = props => {
 
 EditListingDescriptionFormComponent.defaultProps = { className: null, updateError: null };
 
-const { func, string, bool, instanceOf } = PropTypes;
+const { bool, func, string } = PropTypes;
 
 EditListingDescriptionFormComponent.propTypes = {
   ...formPropTypes,
@@ -108,7 +109,7 @@ EditListingDescriptionFormComponent.propTypes = {
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   updated: bool.isRequired,
-  updateError: instanceOf(Error),
+  updateError: propTypes.error,
   updateInProgress: bool.isRequired,
 };
 

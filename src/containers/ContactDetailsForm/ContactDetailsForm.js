@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
+import * as propTypes from '../../util/propTypes';
 import * as validators from '../../util/validators';
 import { ensureCurrentUser } from '../../util/data';
 import {
@@ -264,18 +265,18 @@ ContactDetailsFormComponent.defaultProps = {
   sendVerificationEmailInProgress: false,
 };
 
-const { bool, func, instanceOf, string } = PropTypes;
+const { bool, func, string } = PropTypes;
 
 ContactDetailsFormComponent.propTypes = {
   ...formPropTypes,
   rootClassName: string,
   className: string,
-  changeEmailError: instanceOf(Error),
+  changeEmailError: propTypes.error,
   inProgress: bool,
   intl: intlShape.isRequired,
   onResendVerificationEmail: func.isRequired,
   ready: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
+  sendVerificationEmailError: propTypes.error,
   sendVerificationEmailInProgress: bool,
 };
 

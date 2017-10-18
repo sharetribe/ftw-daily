@@ -177,15 +177,15 @@ EditListingPageComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf, object, shape, string, oneOf } = PropTypes;
+const { bool, func, object, shape, string, oneOf } = PropTypes;
 
 EditListingPageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
-  createStripeAccountError: instanceOf(Error),
+  authInfoError: propTypes.error,
+  createStripeAccountError: propTypes.error,
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
   getListing: func.isRequired,
-  logoutError: instanceOf(Error),
+  logoutError: propTypes.error,
   onCreateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
   onImageUpload: func.isRequired,

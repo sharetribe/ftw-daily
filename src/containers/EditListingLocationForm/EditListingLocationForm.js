@@ -99,7 +99,7 @@ EditListingLocationFormComponent.defaultProps = {
   updateError: null,
 };
 
-const { func, string, bool, instanceOf } = PropTypes;
+const { func, string, bool } = PropTypes;
 
 EditListingLocationFormComponent.propTypes = {
   ...formPropTypes,
@@ -108,7 +108,7 @@ EditListingLocationFormComponent.propTypes = {
   saveActionMsg: string.isRequired,
   selectedPlace: propTypes.place,
   updated: bool.isRequired,
-  updateError: instanceOf(Error),
+  updateError: propTypes.error,
   updateInProgress: bool.isRequired,
 };
 

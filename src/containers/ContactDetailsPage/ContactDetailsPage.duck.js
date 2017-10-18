@@ -1,3 +1,4 @@
+import { storableError } from '../../util/errors';
 import { currentUserShowSuccess } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
@@ -64,5 +65,5 @@ export const changeEmail = params => (dispatch, getState, sdk) => {
       dispatch(changeEmailSuccess());
       dispatch(currentUserShowSuccess(currentUser));
     })
-    .catch(e => dispatch(changeEmailError(e)));
+    .catch(e => dispatch(changeEmailError(storableError(e))));
 };

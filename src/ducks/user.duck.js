@@ -1,7 +1,8 @@
-import { authInfo } from './Auth.duck';
 import { updatedEntities, denormalisedEntities } from '../util/data';
+import { storableError } from '../util/errors';
 import { TX_TRANSITION_PREAUTHORIZE } from '../util/propTypes';
 import * as log from '../util/log';
+import { authInfo } from './Auth.duck';
 
 // ================ Action types ================ //
 
@@ -268,7 +269,7 @@ export const fetchCurrentUserHasListings = () => (dispatch, getState, sdk) => {
     })
     .catch(e => {
       // TODO: dispatch flash message: "Something went wrong while retrieving user info"
-      dispatch(fetchCurrentUserHasListingsError(e));
+      dispatch(fetchCurrentUserHasListingsError(storableError(e)));
     });
 };
 
@@ -294,7 +295,7 @@ export const fetchCurrentUserHasOrders = () => (dispatch, getState, sdk) => {
     })
     .catch(e => {
       // TODO: dispatch flash message: "Something went wrong while retrieving user info"
-      dispatch(fetchCurrentUserHasOrdersError(e));
+      dispatch(fetchCurrentUserHasOrdersError(storableError(e)));
     });
 };
 
@@ -319,7 +320,7 @@ export const fetchCurrentUserNotifications = () => (dispatch, getState, sdk) => 
     })
     .catch(e => {
       // TODO: dispatch flash message: "Something went wrong while retrieving user info"
-      dispatch(fetchCurrentUserNotificationsError(e));
+      dispatch(fetchCurrentUserNotificationsError(storableError(e)));
       throw e;
     });
 };
@@ -362,7 +363,7 @@ export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
       dispatch(authInfo());
 
       // TODO: dispatch flash message: "Something went wrong while retrieving user info"
-      dispatch(currentUserShowError(e));
+      dispatch(currentUserShowError(storableError(e)));
     });
 };
 
@@ -381,7 +382,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
       dispatch(stripeAccountCreateSuccess(accountResponse));
     })
     .catch(e => {
-      dispatch(stripeAccountCreateError(e));
+      dispatch(stripeAccountCreateError(storableError(e)));
       log.error(e, 'create-stripe-account-failed');
       throw e;
     });
@@ -395,5 +396,5 @@ export const sendVerificationEmail = () => (dispatch, getState, sdk) => {
   return sdk.currentUser
     .sendVerificationEmail()
     .then(() => dispatch(sendVerificationEmailSuccess()))
-    .catch(e => dispatch(sendVerificationEmailError(e)));
+    .catch(e => dispatch(sendVerificationEmailError(storableError(e))));
 };

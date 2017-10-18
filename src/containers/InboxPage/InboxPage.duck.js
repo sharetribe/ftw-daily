@@ -1,4 +1,5 @@
 import { reverse, sortBy } from 'lodash';
+import { storableError } from '../../util/errors';
 import { parse } from '../../util/urlHelpers';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 
@@ -102,7 +103,7 @@ export const loadData = (params, search) => (dispatch, getState, sdk) => {
       return response;
     })
     .catch(e => {
-      dispatch(fetchOrdersOrSalesError(e));
+      dispatch(fetchOrdersOrSalesError(storableError(e)));
       throw e;
     });
 };

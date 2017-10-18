@@ -1,4 +1,5 @@
 import { types } from '../../util/sdkLoader';
+import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
 
@@ -79,7 +80,7 @@ export const fetchOrder = id => (dispatch, getState, sdk) => {
       return response;
     })
     .catch(e => {
-      dispatch(fetchOrderError(e));
+      dispatch(fetchOrderError(storableError(e)));
       throw e;
     });
 };

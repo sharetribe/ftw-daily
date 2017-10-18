@@ -236,23 +236,23 @@ AuthenticationPageComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf, object, oneOf, shape } = PropTypes;
+const { bool, func, object, oneOf, shape } = PropTypes;
 
 AuthenticationPageComponent.propTypes = {
-  authInfoError: instanceOf(Error),
+  authInfoError: propTypes.error,
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   isAuthenticated: bool.isRequired,
-  loginError: instanceOf(Error),
-  logoutError: instanceOf(Error),
+  loginError: propTypes.error,
+  logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
-  signupError: instanceOf(Error),
+  signupError: propTypes.error,
   submitLogin: func.isRequired,
   submitSignup: func.isRequired,
   tab: oneOf(['login', 'signup']),
 
   sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
+  sendVerificationEmailError: propTypes.error,
   onResendVerificationEmail: func.isRequired,
 
   // from withRouter

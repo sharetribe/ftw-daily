@@ -354,7 +354,7 @@ TopbarComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { bool, func, instanceOf, number, shape, string } = PropTypes;
+const { bool, func, number, shape, string } = PropTypes;
 
 TopbarComponent.propTypes = {
   className: string,
@@ -373,7 +373,7 @@ TopbarComponent.propTypes = {
   onManageDisableScrolling: func.isRequired,
   onResendVerificationEmail: func.isRequired,
   sendVerificationEmailInProgress: bool.isRequired,
-  sendVerificationEmailError: instanceOf(Error),
+  sendVerificationEmailError: propTypes.error,
 
   // These are passed from Page to keep Topbar rendering aware of location changes
   history: shape({

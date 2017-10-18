@@ -1,3 +1,4 @@
+import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
@@ -50,6 +51,6 @@ export const showListing = listingId => (dispatch, getState, sdk) => {
       return data;
     })
     .catch(e => {
-      dispatch(showListingError(e));
+      dispatch(showListingError(storableError(e)));
     });
 };
