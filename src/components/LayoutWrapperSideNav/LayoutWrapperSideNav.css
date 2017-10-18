@@ -1,0 +1,28 @@
+@import '../../marketplace.css';
+
+.root {
+  /* Layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 24px;
+
+  border-top-width: 1px;
+  border-top-color: var(--matterColorNegative);
+  border-top-style: solid;
+  background-color: var(--matterColorLight);
+  box-shadow: var(--boxShadow);
+
+  @media (--viewportLarge) {
+    padding: 113px 0 82px 15vw;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
+
+  @media (--viewportXLarge) {
+    padding-left: 25vw;
+  }
+}
