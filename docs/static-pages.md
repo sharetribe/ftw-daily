@@ -116,13 +116,13 @@ import {
 } from '../../components';
 ```
 
-Then we need to import styles and possible other files from current folder. With CSS we are using [CSS Modules](https://github.com/css-modules/css-modules) to tackle possible classhes of different class names.
+Then we need to import styles and possible other files from current folder. With CSS we are using [CSS Modules](https://github.com/css-modules/css-modules) to tackle possible classhes of different class names. [Read more.](#5-creating-the-css-file)
 
 ```jsx
 import css from './AboutPage.css';
 ```
 
-Then we also import an image which is used later (`<img src={image} alt="My first ice cream." />`). [Read more.](#5-creating-the-css-file)
+Then we also import an image which is used later (`<img src={image} alt="My first ice cream." />`). 
 
 ```jsx
 import image from './path/to/image.png';
