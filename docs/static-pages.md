@@ -5,8 +5,8 @@ you can create a static page.
 
 Steps to do a static page:
 1) [Create a new folder under `src/containers/`](#1-creating-a-new-folder)
-2) [Create a new JavaScript file with the same name.](#2-creating-javascript-file)
-3) [Create a new CSS file with the same name.](#3-creating-css-file)
+2) [Create a new JavaScript file using the same name.](#2-creating-javascript-file)
+3) [Create a new CSS file using the same name.](#3-creating-css-file)
 4) [Write the content to JavaScript file (i.e. AboutPage.js in our example).](#4-creating-the-component)
 5) [Write the style rules to CSS file (i.e. AboutPage.css in our example).](#5-creating-the-css-file)
 6) [Add the newly created page component to `src/containers/index.js`](#6-adding-the-component-to-the-component-directory)
@@ -14,15 +14,15 @@ Steps to do a static page:
 
 ## 1. Creating a new folder
 
-Create a new folder under `src/containers/` with the name of your static page. E.g. "about" page should be named as `AboutPage`
+Create a new folder under `src/containers/` with the name of your static page. E.g. "about" page should be named as `AboutPage`.
 
 ## 2. Creating JavaScript file
 
-Create a new JavaScript file with the same name. (Path should look like `src/containers/AboutPage/AboutPage.js`.)
+Create a new JavaScript file using the folder name. (Path should look like `src/containers/AboutPage/AboutPage.js`.)
 
 ## 3. Creating CSS file
 
-Create a new CSS file with the same name. (Path should look like `src/containers/AboutPage/AboutPage.css`.)
+Create a new CSS file using the folder name. (Path should look like `src/containers/AboutPage/AboutPage.css`.)
 
 ## 4. Creating the component
 
