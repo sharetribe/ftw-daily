@@ -200,6 +200,7 @@ export const transaction = shape({
         quantity: instanceOf(Decimal),
         unitPrice: money,
         lineTotal: money,
+        reversal: bool,
       })
     ).isRequired,
   }),
