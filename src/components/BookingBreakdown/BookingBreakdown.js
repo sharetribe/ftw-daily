@@ -54,13 +54,16 @@ export const BookingBreakdownComponent = props => {
   );
 
   const nightPurchase = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/night'
+    item => item.code === 'line-item/night' && !item.reversal
   );
   const providerCommissionLineItem = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/provider-commission'
+    item => item.code === 'line-item/provider-commission' && !item.reversal
   );
   const refund = transaction.attributes.lineItems.find(
-    item => item.code === (isProvider ? 'line-item/provider-refund' : 'line-item/customer-refund')
+    item => item.code === 'line-item/night' && item.reversal
+  );
+  const commissionRefund = transaction.attributes.lineItems.find(
+    item => item.code === 'line-item/provider-commission' && item.reversal
   );
 
   const refundInfo = refund ? (
@@ -80,8 +83,21 @@ export const BookingBreakdownComponent = props => {
   const formattedUnitPrice = formatMoney(intl, nightPurchase.unitPrice);
 
   // If commission is passed it will be shown as a fee already reduces from the total price
-  let subTotalInfo = null;
   let commissionInfo = null;
+
+  // Show night purchase line total (unit price * quantity) as a subtotal.
+  // PLEASE NOTE that this assumes that the transaction doesn't have other
+  // line item types than nights (e.g. week, month, year).
+  const showSubTotal = isProvider || refund;
+  const formattedSubTotal = formatMoney(intl, nightPurchase.lineTotal);
+  const subTotalInfo = showSubTotal ? (
+    <div className={css.lineItem}>
+      <span className={css.itemLabel}>
+        <FormattedMessage id="BookingBreakdown.subTotal" />
+      </span>
+      <span className={css.itemValue}>{formattedSubTotal}</span>
+    </div>
+  ) : null;
 
   if (isProvider) {
     if (!isValidCommission(providerCommissionLineItem)) {
@@ -90,23 +106,10 @@ export const BookingBreakdownComponent = props => {
       throw new Error('Commission should be present and the value should be zero or negative');
     }
 
-    // Show night purchase line total (unit price * quantity) as a subtotal.
-    // PLEASE NOTE that this assumes that the transaction doesn't have other
-    // line item types than nights (e.g. week, month, year).
-    const formattedSubTotal = formatMoney(intl, nightPurchase.lineTotal);
-    subTotalInfo = (
-      <div className={css.lineItem}>
-        <span className={css.itemLabel}>
-          <FormattedMessage id="BookingBreakdown.subTotal" />
-        </span>
-        <span className={css.itemValue}>{formattedSubTotal}</span>
-      </div>
-    );
-
     const commission = providerCommissionLineItem.lineTotal;
     const formattedCommission = commission ? formatMoney(intl, commission) : null;
 
-    commissionInfo = (
+    commissionInfo = commissionRefund ? null : (
       <div className={css.lineItem}>
         <span className={css.itemLabel}>
           <FormattedMessage id="BookingBreakdown.commission" />
