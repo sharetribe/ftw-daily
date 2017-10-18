@@ -184,7 +184,7 @@ Here's an example what your AboutPage.css file could look like:
   padding: 24px;
 
   /* Use CSS variable imported from marketplace.css */
-  background-color: var(--marketplaceColor)
+  background-color: var(--marketplaceColor);
 }
 ```
 
