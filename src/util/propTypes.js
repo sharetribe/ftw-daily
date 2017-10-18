@@ -198,9 +198,9 @@ export const transaction = shape({
       shape({
         code: string.isRequired,
         quantity: instanceOf(Decimal),
-        unitPrice: money,
-        lineTotal: money,
-        reversal: bool,
+        unitPrice: money.isRequired,
+        lineTotal: money.isRequired,
+        reversal: bool.isRequired,
       })
     ).isRequired,
   }),
