@@ -151,7 +151,7 @@ In the template above we are using StaticPage component with some attributes:
 - `title="About"` creates `<title>About</title>` element to `<head>` section of the page. (That title is also used in OpenGraph meta tags). You could also add `description="This is about page description"`
 - Then we have `schema` tag that defines some data for search engines in JSON-LD format. Check [schema.org](http://schema.org/docs/full.html) for more information.
 
-Inside StaticPage component we define layout (LayoutSingleColumn) and add other components inside specific content wrappers that the layout understands.
+Inside StaticPage component we define layout (LayoutSingleColumn) and add other components inside semantic content wrappers so that the layout is able to understand where to render those blocks.
 
 ```jsx
       <LayoutSingleColumn>
