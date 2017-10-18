@@ -1,37 +1,45 @@
 /**
- * LayoutSideNavigation needs to have 3 children: TopbarWrapper, SideNavWrapper and ContentWrapper.
+ * LayoutSideNavigation needs to have 3-4 children:
+ * LayoutWrapperTopbar, LayoutWrapperSideNav, LayoutWrapperMain, and possibly LayoutWrapperFooter.
  * SideNavWrapper will be shown aside on Desktop layout and
  * as a sub bar under Topbar on mobile screens.
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import TopbarWrapper from './TopbarWrapper';
-import SideNavWrapper from './SideNavWrapper';
-import ContentWrapper from './ContentWrapper';
+import { LayoutWrapperTopbar, LayoutWrapperSideNav, LayoutWrapperMain, LayoutWrapperFooter } from '../../components';
 
 import css from './LayoutSideNavigation.css';
 
 const prepareChildren = children => {
-  if (React.Children.count(children) !== 3) {
+  const childrenCount = React.Children.count(children);
+  if (!(childrenCount === 3 || childrenCount === 4)) {
     throw new Error(
-      'Menu needs to have 3 children: TopbarWrapper, SideNavWrapper and ContentWrapper.'
+      `Menu needs to have 3 - 4 children:
+      LayoutWrapperTopbar, LayoutWrapperSideNav, and LayoutWrapperMain,
+      and optionally LayoutWrapperFooter.`
     );
   }
 
   const childrenMap = {};
 
   React.Children.forEach(children, child => {
-    if (child.type === TopbarWrapper) {
-      childrenMap.topbarWrapper = child;
-    } else if (child.type === SideNavWrapper) {
-      childrenMap.sideNavWrapper = child;
-    } else if (child.type === ContentWrapper) {
-      childrenMap.contentWrapper = child;
+    if (child.type === LayoutWrapperTopbar) {
+      childrenMap.layoutWrapperTopbar = child;
+    } else if (child.type === LayoutWrapperSideNav) {
+      childrenMap.layoutWrapperSideNav = child;
+    } else if (child.type === LayoutWrapperMain) {
+      // LayoutWrapperMain needs different rootClassName
+      const childWithAddedCSS = React.cloneElement(child, {
+        rootClassName: css.layoutWrapperMain,
+      });
+      childrenMap.layoutWrapperMain = childWithAddedCSS;
+    } else if (child.type === LayoutWrapperFooter) {
+      childrenMap.layoutWrapperFooter = child;
     } else {
       throw new Error(
         `LayoutSideNavigation has an unknown child.
-      Only TopbarWrapper, SideNavWrapper, and ContentWrapper are allowed.`
+      Only LayoutWrapperTopbar, LayoutWrapperSideNav, LayoutWrapperMain, LayoutWrapperFooter are allowed.`
       );
     }
   });
@@ -45,13 +53,16 @@ const LayoutSideNavigation = props => {
   const classes = classNames(rootClassName || css.root, className);
   const containerClasses = containerClassName || css.container;
 
+  const maybeFooter = preparedChildren.layoutWrapperFooter || null;
+
   return (
     <div className={classes}>
-      {preparedChildren.topbarWrapper}
+      {preparedChildren.layoutWrapperTopbar}
       <div className={containerClasses}>
-        {preparedChildren.sideNavWrapper}
-        {preparedChildren.contentWrapper}
+        {preparedChildren.layoutWrapperSideNav}
+        {preparedChildren.layoutWrapperMain}
       </div>
+      {maybeFooter}
     </div>
   );
 };
@@ -70,7 +81,5 @@ LayoutSideNavigation.propTypes = {
   rootClassName: string,
   containerClassName: string,
 };
-
-export { ContentWrapper, SideNavWrapper, TopbarWrapper };
 
 export default LayoutSideNavigation;

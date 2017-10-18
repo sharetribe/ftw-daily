@@ -41,12 +41,7 @@ export { default as IconSearch } from './IconSearch/IconSearch';
 export { default as IconSpinner } from './IconSpinner/IconSpinner';
 export { default as ImageCarousel } from './ImageCarousel/ImageCarousel';
 export { default as ImageFromFile } from './ImageFromFile/ImageFromFile';
-export {
-  default as LayoutSideNavigation,
-  ContentWrapper,
-  SideNavWrapper,
-  TopbarWrapper,
-} from './LayoutSideNavigation/LayoutSideNavigation';
+export { default as LayoutSideNavigation } from './LayoutSideNavigation/LayoutSideNavigation';
 export { default as LayoutWrapperTopbar } from './LayoutWrapperTopbar/LayoutWrapperTopbar';
 export { default as LayoutWrapperMain } from './LayoutWrapperMain/LayoutWrapperMain';
 export { default as LayoutWrapperSideNav } from './LayoutWrapperSideNav/LayoutWrapperSideNav';
