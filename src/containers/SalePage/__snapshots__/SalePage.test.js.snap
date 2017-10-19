@@ -31,6 +31,7 @@ exports[`SalePage matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "quantity": "3",
+                "reversal": false,
                 "unitPrice": Money {
                   "amount": 333.3333333333333,
                   "currency": "USD",
@@ -42,6 +43,7 @@ exports[`SalePage matches snapshot 1`] = `
                   "amount": -100,
                   "currency": "USD",
                 },
+                "reversal": false,
                 "unitPrice": Money {
                   "amount": -100,
                   "currency": "USD",

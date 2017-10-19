@@ -89,6 +89,7 @@ exports[`InboxPage matches snapshot 1`] = `
                         "currency": "USD",
                       },
                       "quantity": "1",
+                      "reversal": false,
                       "unitPrice": Money {
                         "amount": 1000,
                         "currency": "USD",
@@ -100,6 +101,7 @@ exports[`InboxPage matches snapshot 1`] = `
                         "amount": -100,
                         "currency": "USD",
                       },
+                      "reversal": false,
                       "unitPrice": Money {
                         "amount": -100,
                         "currency": "USD",
@@ -189,6 +191,7 @@ exports[`InboxPage matches snapshot 1`] = `
                         "currency": "USD",
                       },
                       "quantity": "1",
+                      "reversal": false,
                       "unitPrice": Money {
                         "amount": 1000,
                         "currency": "USD",
@@ -200,6 +203,7 @@ exports[`InboxPage matches snapshot 1`] = `
                         "amount": -100,
                         "currency": "USD",
                       },
+                      "reversal": false,
                       "unitPrice": Money {
                         "amount": -100,
                         "currency": "USD",
@@ -420,6 +424,7 @@ exports[`InboxPage matches snapshot 3`] = `
                         "currency": "USD",
                       },
                       "quantity": "1",
+                      "reversal": false,
                       "unitPrice": Money {
                         "amount": 1000,
                         "currency": "USD",
@@ -431,6 +436,7 @@ exports[`InboxPage matches snapshot 3`] = `
                         "amount": -100,
                         "currency": "USD",
                       },
+                      "reversal": false,
                       "unitPrice": Money {
                         "amount": -100,
                         "currency": "USD",
@@ -520,6 +526,7 @@ exports[`InboxPage matches snapshot 3`] = `
                         "currency": "USD",
                       },
                       "quantity": "1",
+                      "reversal": false,
                       "unitPrice": Money {
                         "amount": 1000,
                         "currency": "USD",
@@ -531,6 +538,7 @@ exports[`InboxPage matches snapshot 3`] = `
                         "amount": -100,
                         "currency": "USD",
                       },
+                      "reversal": false,
                       "unitPrice": Money {
                         "amount": -100,
                         "currency": "USD",

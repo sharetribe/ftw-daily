@@ -114,11 +114,13 @@ export const createTransaction = options => {
           quantity: new Decimal(nightCount),
           unitPrice: new Money(total.amount / nightCount, total.currency),
           lineTotal: total,
+          reversal: false,
         },
         {
           code: 'line-item/provider-commission',
           unitPrice: new Money(commission.amount * -1, commission.currency),
           lineTotal: new Money(commission.amount * -1, commission.currency),
+          reversal: false,
         },
       ],
     },

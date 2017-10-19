@@ -137,6 +137,7 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
                       "currency": "USD",
                     },
                     "quantity": "3",
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": 5500,
                       "currency": "USD",
@@ -148,6 +149,7 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
                       "amount": -100,
                       "currency": "USD",
                     },
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -321,6 +323,7 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
                       "currency": "USD",
                     },
                     "quantity": "3",
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": 5500,
                       "currency": "USD",
@@ -332,6 +335,7 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
                       "amount": -100,
                       "currency": "USD",
                     },
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -543,6 +547,7 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
                       "currency": "USD",
                     },
                     "quantity": "3",
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": 5500,
                       "currency": "USD",
@@ -554,6 +559,7 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
                       "amount": -100,
                       "currency": "USD",
                     },
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -727,6 +733,7 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
                       "currency": "USD",
                     },
                     "quantity": "3",
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": 5500,
                       "currency": "USD",
@@ -738,6 +745,7 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
                       "amount": -100,
                       "currency": "USD",
                     },
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -953,6 +961,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
                       "currency": "USD",
                     },
                     "quantity": "3",
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": 5500,
                       "currency": "USD",
@@ -964,6 +973,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
                       "amount": -100,
                       "currency": "USD",
                     },
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -1137,6 +1147,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
                       "currency": "USD",
                     },
                     "quantity": "3",
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": 5500,
                       "currency": "USD",
@@ -1148,6 +1159,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
                       "amount": -100,
                       "currency": "USD",
                     },
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -1359,6 +1371,7 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
                       "currency": "USD",
                     },
                     "quantity": "3",
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": 5500,
                       "currency": "USD",
@@ -1370,6 +1383,7 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
                       "amount": -100,
                       "currency": "USD",
                     },
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -1543,6 +1557,7 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
                       "currency": "USD",
                     },
                     "quantity": "3",
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": 5500,
                       "currency": "USD",
@@ -1554,6 +1569,7 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
                       "amount": -100,
                       "currency": "USD",
                     },
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -1765,6 +1781,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
                       "currency": "USD",
                     },
                     "quantity": "3",
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": 5500,
                       "currency": "USD",
@@ -1776,6 +1793,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
                       "amount": -100,
                       "currency": "USD",
                     },
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -1949,6 +1967,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
                       "currency": "USD",
                     },
                     "quantity": "3",
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": 5500,
                       "currency": "USD",
@@ -1960,6 +1979,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
                       "amount": -100,
                       "currency": "USD",
                     },
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -2175,6 +2195,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
                       "currency": "USD",
                     },
                     "quantity": "3",
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": 5500,
                       "currency": "USD",
@@ -2186,6 +2207,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
                       "amount": -100,
                       "currency": "USD",
                     },
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -2359,6 +2381,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
                       "currency": "USD",
                     },
                     "quantity": "3",
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": 5500,
                       "currency": "USD",
@@ -2370,6 +2393,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
                       "amount": -100,
                       "currency": "USD",
                     },
+                    "reversal": false,
                     "unitPrice": Money {
                       "amount": -100,
                       "currency": "USD",
