@@ -335,15 +335,13 @@ export class ListingPageComponent extends Component {
         facebookImages={facebookImages}
         twitterImages={twitterImages}
         canonicalPath={canonicalPath}
-        schema={`
-          {
-            "@context": "http://schema.org",
-            "@type": "ItemPage",
-            "description": "${description}",
-            "name": "${schemaTitle}",
-            "image": ${schemaImages}
-          }
-        `}
+        schema={{
+          '@context': 'http://schema.org',
+          '@type': 'ItemPage',
+          description: description,
+          name: schemaTitle,
+          image: schemaImages,
+        }}
       >
         {topbar}
         <div className={listingClasses}>

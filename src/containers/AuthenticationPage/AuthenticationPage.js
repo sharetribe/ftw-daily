@@ -210,13 +210,11 @@ export const AuthenticationPageComponent = props => {
       logoutError={logoutError}
       title={schemaTitle}
       scrollingDisabled={scrollingDisabled}
-      schema={`
-        {
-          "@context": "http://schema.org",
-          "@type": "WebPage",
-          "name": "${schemaTitle}",
-        }
-      `}
+      schema={{
+        '@context': 'http://schema.org',
+        '@type': 'WebPage',
+        name: schemaTitle,
+      }}
     >
       <TopbarContainer className={topbarClasses} />
       <div className={css.root}>

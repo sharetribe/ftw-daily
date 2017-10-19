@@ -9,15 +9,15 @@ exports[`ListingPage matches snapshot 1`] = `
   description="listing1 description"
   facebookImages={Array []}
   logoutError={null}
-  schema="
-          {
-            \\"@context\\": \\"http://schema.org\\",
-            \\"@type\\": \\"ItemPage\\",
-            \\"description\\": \\"listing1 description\\",
-            \\"name\\": \\"ListingPage.schemaTitle\\",
-            \\"image\\": []
-          }
-        "
+  schema={
+    Object {
+      "@context": "http://schema.org",
+      "@type": "ItemPage",
+      "description": "listing1 description",
+      "image": "[]",
+      "name": "ListingPage.schemaTitle",
+    }
+  }
   scrollingDisabled={false}
   title="ListingPage.schemaTitle"
   twitterImages={Array []}

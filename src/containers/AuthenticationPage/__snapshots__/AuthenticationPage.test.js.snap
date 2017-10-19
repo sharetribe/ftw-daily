@@ -4,13 +4,13 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
 <Page
   authInfoError={null}
   logoutError={null}
-  schema="
-        {
-          \\"@context\\": \\"http://schema.org\\",
-          \\"@type\\": \\"WebPage\\",
-          \\"name\\": \\"AuthenticationPage.schemaTitleLogin\\",
-        }
-      "
+  schema={
+    Object {
+      "@context": "http://schema.org",
+      "@type": "WebPage",
+      "name": "AuthenticationPage.schemaTitleLogin",
+    }
+  }
   scrollingDisabled={false}
   title="AuthenticationPage.schemaTitleLogin"
 >

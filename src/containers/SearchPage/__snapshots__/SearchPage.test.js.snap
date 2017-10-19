@@ -5,15 +5,17 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   authInfoError={null}
   description="SearchPage.schemaDescription"
   logoutError={null}
-  schema="
-          {
-            \\"@context\\": \\"http://schema.org\\",
-            \\"@type\\": \\"SearchResultsPage\\",
-            \\"description\\": \\"SearchPage.schemaDescription\\",
-            \\"name\\": \\"SearchPage.schemaTitle\\",
-            \\"mainEntity\\": [{\\"@type\\":\\"ItemList\\",\\"name\\":\\"SearchPage.schemaMapSearch\\",\\"itemListOrder\\":\\"http://schema.org/ItemListOrderAscending\\",\\"itemListElement\\":[]}]
-          }
-        "
+  schema={
+    Object {
+      "@context": "http://schema.org",
+      "@type": "SearchResultsPage",
+      "description": "SearchPage.schemaDescription",
+      "mainEntity": Array [
+        "{\\"@type\\":\\"ItemList\\",\\"name\\":\\"SearchPage.schemaMapSearch\\",\\"itemListOrder\\":\\"http://schema.org/ItemListOrderAscending\\",\\"itemListElement\\":[]}",
+      ],
+      "name": "SearchPage.schemaTitle",
+    }
+  }
   scrollingDisabled={false}
   title="SearchPage.schemaTitle"
 >
