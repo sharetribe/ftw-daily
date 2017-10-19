@@ -83,6 +83,7 @@ class PageComponent extends Component {
     const { pathname, search = '' } = history.location;
     const pathWithSearch = `${pathname}${search}`;
 
+    const canonicalRootURL = config.canonicalRootURL;
     const siteTitle = config.siteTitle;
     const schemaTitle = intl.formatMessage({ id: 'Page.schemaTitle' }, { siteTitle });
     const schemaDescription = intl.formatMessage({ id: 'Page.schemaDescription' });
@@ -91,7 +92,7 @@ class PageComponent extends Component {
     const facebookImgs = facebookImages || [
       {
         name: 'facebook',
-        url: `${config.canonicalRootURL}${facebookImage}`,
+        url: `${canonicalRootURL}${facebookImage}`,
         width: 1200,
         height: 630,
       },
@@ -99,7 +100,7 @@ class PageComponent extends Component {
     const twitterImgs = twitterImages || [
       {
         name: 'twitter',
-        url: `${config.canonicalRootURL}${twitterImage}`,
+        url: `${canonicalRootURL}${twitterImage}`,
         width: 600,
         height: 314,
       },
@@ -123,17 +124,41 @@ class PageComponent extends Component {
     // eslint-disable-next-line react/no-array-index-key
     const metaTags = metaToHead.map((metaProps, i) => <meta key={i} {...metaProps} />);
 
+    const facebookPage = config.siteFacebookPage;
+    const twitterPage =
+      config.siteTwitterHandle && config.siteTwitterHandle.charAt(0) === '@'
+        ? `https://twitter.com/${config.siteTwitterHandle.substring(1)}`
+        : null;
+    const instagramPage = config.siteInstagramPage;
+    const sameOrganizationAs = [facebookPage, twitterPage, instagramPage].filter(v => v != null);
+
     // Schema for search engines (helps them to understand what this page is about)
     // http://schema.org
     // We are using JSON-LD format
-    const schemaJSONString =
-      schema ||
-      JSON.stringify({
+    const schemaFromProps = Array.isArray(schema) ? schema : [schema];
+    const schemaArrayJSONString = JSON.stringify([
+      ...schemaFromProps,
+      {
         '@context': 'http://schema.org',
-        '@type': 'WebPage',
+        '@type': 'Organization',
+        '@id': `${canonicalRootURL}#organization`,
+        url: canonicalRootURL,
+        name: siteTitle,
+        sameAs: sameOrganizationAs,
+        logo: `${canonicalRootURL}/static/webapp-icon-192x192.png`,
+        address: config.address,
+      },
+      {
+        '@context': 'http://schema.org',
+        '@type': 'WebSite',
+        url: canonicalRootURL,
         description: schemaDescription,
         name: schemaTitle,
-      });
+        publisher: {
+          '@id': `${canonicalRootURL}#organization`,
+        },
+      },
+    ]);
 
     return (
       <div className={classes}>
@@ -147,7 +172,7 @@ class PageComponent extends Component {
           <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
           <meta httpEquiv="Content-Language" content={intl.locale} />
           {metaTags}
-          <script type="application/ld+json">{schemaJSONString}</script>
+          <script type="application/ld+json">{schemaArrayJSONString}</script>
         </Helmet>
         {authInfoError ? (
           <div style={{ color: 'red' }}>
@@ -165,7 +190,7 @@ class PageComponent extends Component {
   }
 }
 
-const { any, arrayOf, bool, func, number, shape, string } = PropTypes;
+const { any, array, arrayOf, bool, func, number, object, oneOfType, shape, string } = PropTypes;
 
 PageComponent.defaultProps = {
   className: null,
@@ -214,7 +239,7 @@ PageComponent.propTypes = {
     })
   ),
   published: string, // article:published_time
-  schema: string, // http://schema.org
+  schema: oneOfType([object, array]), // http://schema.org
   tags: string, // article:tag
   title: string.isRequired, // page title
   twitterHandle: string, // twitter handle
