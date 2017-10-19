@@ -13,6 +13,7 @@
     "decimal.js": "7.2.4",
     "express": "^4.16.2",
     "express-enforces-ssl": "^1.1.0",
+    "express-sitemap": "^1.8.0",
     "helmet": "^3.9.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",

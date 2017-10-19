@@ -24,11 +24,13 @@ const enforceSsl = require('express-enforces-ssl');
 const path = require('path');
 const sharetribeSdk = require('sharetribe-sdk');
 const Decimal = require('decimal.js');
+const sitemap = require('express-sitemap');
 const auth = require('./auth');
 const renderer = require('./renderer');
 const dataLoader = require('./dataLoader');
 const fs = require('fs');
 const log = require('./log');
+const { sitemapStructure } = require('./sitemap');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
 const dev = process.env.NODE_ENV !== 'production';
@@ -41,6 +43,10 @@ const TRUST_PROXY = process.env.SERVER_SHARETRIBE_TRUST_PROXY || null;
 const app = express();
 
 const errorPage = fs.readFileSync(path.join(buildPath, '500.html'), 'utf-8');
+
+// load sitemap and robots file structure
+// and write those into files
+sitemap(sitemapStructure()).toFile();
 
 // Setup error logger
 log.setup();
@@ -79,6 +85,8 @@ if (TRUST_PROXY === 'true') {
 
 app.use(compression());
 app.use('/static', express.static(path.join(buildPath, 'static')));
+// server robots.txt from the root
+app.use('/robots.txt', express.static(path.join(buildPath, 'robots.txt')));
 app.use(cookieParser());
 
 // Use basic authentication when not in dev mode. This is
