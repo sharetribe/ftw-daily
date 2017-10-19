@@ -146,7 +146,7 @@ export const sdkBoundsToFixedCoordinates = (sdkBounds, fixedPrecision) => {
  * @return {boolean} - true if bounds are the same
  */
 export const hasSameSDKBounds = (sdkBounds1, sdkBounds2) => {
-  if (!(sdkBounds1 instanceof SDKLatLngBounds) && !(sdkBounds2 instanceof SDKLatLngBounds)) {
+  if (!(sdkBounds1 instanceof SDKLatLngBounds) || !(sdkBounds2 instanceof SDKLatLngBounds)) {
     return false;
   }
   return (
