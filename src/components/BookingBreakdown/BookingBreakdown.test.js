@@ -38,6 +38,7 @@ describe('BookingBreakdown', () => {
               quantity: new Decimal(2),
               lineTotal: new Money(2000, 'USD'),
               unitPrice: new Money(1000, 'USD'),
+              reversal: false,
             },
           ],
         })}
@@ -64,6 +65,7 @@ describe('BookingBreakdown', () => {
               quantity: new Decimal(2),
               lineTotal: new Money(2000, 'USD'),
               unitPrice: new Money(1000, 'USD'),
+              reversal: false,
             },
           ],
         })}
@@ -90,11 +92,13 @@ describe('BookingBreakdown', () => {
               quantity: new Decimal(2),
               lineTotal: new Money(2000, 'USD'),
               unitPrice: new Money(1000, 'USD'),
+              reversal: false,
             },
             {
               code: 'line-item/provider-commission',
               lineTotal: new Money(-200, 'USD'),
               unitPrice: new Money(-200, 'USD'),
+              reversal: false,
             },
           ],
         })}
