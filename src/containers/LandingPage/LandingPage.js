@@ -36,17 +36,13 @@ export const LandingPageComponent = props => {
       title={schemaTitle}
       facebookImages={[{ url: facebookImage, width: 1200, height: 630 }]}
       twitterImages={[{ url: twitterImage, width: 600, height: 314 }]}
-      schema={`
-        {
-          "@context": "http://schema.org",
-          "@type": "WebPage",
-          "description": "${schemaDescription}",
-          "name": "${schemaTitle}",
-          "image": [
-            "${schemaImage}"
-          ]
-        }
-      `}
+      schema={{
+        '@context': 'http://schema.org',
+        '@type': 'WebPage',
+        description: schemaDescription,
+        name: schemaTitle,
+        image: [schemaImage],
+      }}
     >
       <TopbarContainer />
       <div className={css.heroContainer}>

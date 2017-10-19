@@ -15,17 +15,17 @@ exports[`LandingPage matches snapshot 1`] = `
     ]
   }
   logoutError={null}
-  schema="
-        {
-          \\"@context\\": \\"http://schema.org\\",
-          \\"@type\\": \\"WebPage\\",
-          \\"description\\": \\"LandingPage.schemaDescription\\",
-          \\"name\\": \\"LandingPage.schemaTitle\\",
-          \\"image\\": [
-            \\"http://localhost:3000/saunatimeFacebook-1200x630.jpg\\"
-          ]
-        }
-      "
+  schema={
+    Object {
+      "@context": "http://schema.org",
+      "@type": "WebPage",
+      "description": "LandingPage.schemaDescription",
+      "image": Array [
+        "http://localhost:3000/saunatimeFacebook-1200x630.jpg",
+      ],
+      "name": "LandingPage.schemaTitle",
+    }
+  }
   scrollingDisabled={false}
   title="LandingPage.schemaTitle"
   twitterImages={

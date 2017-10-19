@@ -276,15 +276,13 @@ export class SearchPageComponent extends Component {
         scrollingDisabled={scrollingDisabled}
         description={schemaDescription}
         title={schemaTitle}
-        schema={`
-          {
-            "@context": "http://schema.org",
-            "@type": "SearchResultsPage",
-            "description": "${schemaDescription}",
-            "name": "${schemaTitle}",
-            "mainEntity": [${schemaMainEntity}]
-          }
-        `}
+        schema={{
+          '@context': 'http://schema.org',
+          '@type': 'SearchResultsPage',
+          description: schemaDescription,
+          name: schemaTitle,
+          mainEntity: [schemaMainEntity],
+        }}
       >
         <TopbarContainer className={css.topbar} />
         <div className={css.container}>
