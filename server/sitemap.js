@@ -7,16 +7,52 @@ const PORT = process.env.PORT || 4000;
 const USING_SSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 
 /**
+ * Resolves the domain from a URL, for example:
+ * https://example.com:8080 => example.com
+ */
+const resolveDomain = rootURL => {
+  if (!rootURL) {
+    return 'INVALID_URL';
+  }
+
+  if (rootURL.indexOf('//') === -1) {
+    return rootURL.split(':')[0];
+  } else {
+    const domainAndPort = rootURL.split('//')[1];
+    return domainAndPort.split(':')[0];
+  }
+};
+
+/**
+ * Resolves the port number from a URL. If the port
+ * can not be found `undefined` will be returned.
+ */
+const resolvePort = rootURL => {
+  if (!rootURL) {
+    return 'INVALID_URL';
+  }
+
+  let domainAndPort;
+  if (rootURL.indexOf('//') === -1) {
+    domainAndPort = rootURL;
+  } else {
+    domainAndPort = rootURL.split('//')[1];
+  }
+  return domainAndPort.split(':')[1];
+};
+
+/**
  * Return a structure for sitemap.xml and robots.txt to be
- * used by the express-sitemap library.
+ * used by the express-sitemap library. Uses the canonical
+ * URL value from config for domain and port information.
  */
 exports.sitemapStructure = () => {
   const now = moment().format('YYYY-MM-DD');
 
   return {
-    url: config.canonicalRootURL.split('//')[1].split(':')[0],
+    url: resolveDomain(config.canonicalRootURL),
     http: USING_SSL ? 'https' : 'http',
-    port: PORT,
+    port: resolvePort(config.canonicalRootURL),
     sitemap: path.join(buildPath, 'static', 'sitemap.xml'),
     robots: path.join(buildPath, 'robots.txt'),
     sitemapSubmission: '/static/sitemap.xml',
