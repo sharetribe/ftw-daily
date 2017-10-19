@@ -7,38 +7,40 @@ const PORT = process.env.PORT || 4000;
 const USING_SSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 
 /**
+ * Resolves domain and port information from
+ * a URL, for example:
+ * https://example.com:8080 => example.com:8080
+ */
+const domainAndPort = rootURL => {
+  if (rootURL.indexOf('//') === -1) {
+    return rootURL;
+  } else {
+    return rootURL.split('//')[1];
+  }
+};
+
+/**
  * Resolves the domain from a URL, for example:
  * https://example.com:8080 => example.com
  */
-const resolveDomain = rootURL => {
+const domain = rootURL => {
   if (!rootURL) {
     return 'INVALID_URL';
   }
 
-  if (rootURL.indexOf('//') === -1) {
-    return rootURL.split(':')[0];
-  } else {
-    const domainAndPort = rootURL.split('//')[1];
-    return domainAndPort.split(':')[0];
-  }
+  return domainAndPort(rootURL).split(':')[0];
 };
 
 /**
  * Resolves the port number from a URL. If the port
  * can not be found `undefined` will be returned.
  */
-const resolvePort = rootURL => {
+const port = rootURL => {
   if (!rootURL) {
     return 'INVALID_URL';
   }
 
-  let domainAndPort;
-  if (rootURL.indexOf('//') === -1) {
-    domainAndPort = rootURL;
-  } else {
-    domainAndPort = rootURL.split('//')[1];
-  }
-  return domainAndPort.split(':')[1];
+  return domainAndPort(rootURL).split(':')[1];
 };
 
 /**
@@ -50,9 +52,9 @@ exports.sitemapStructure = () => {
   const now = moment().format('YYYY-MM-DD');
 
   return {
-    url: resolveDomain(config.canonicalRootURL),
+    url: domain(config.canonicalRootURL),
     http: USING_SSL ? 'https' : 'http',
-    port: resolvePort(config.canonicalRootURL),
+    port: port(config.canonicalRootURL),
     sitemap: path.join(buildPath, 'static', 'sitemap.xml'),
     robots: path.join(buildPath, 'robots.txt'),
     sitemapSubmission: '/static/sitemap.xml',
