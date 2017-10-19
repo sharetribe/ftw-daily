@@ -21,6 +21,15 @@ const preventDefault = e => {
   e.preventDefault();
 };
 
+const twitterPageURL = siteTwitterHandle => {
+  if (siteTwitterHandle && siteTwitterHandle.charAt(0) === '@') {
+    return `https://twitter.com/${siteTwitterHandle.substring(1)}`;
+  } else if (siteTwitterHandle) {
+    return `https://twitter.com/${siteTwitterHandle}`;
+  }
+  return null;
+};
+
 class PageComponent extends Component {
   componentDidMount() {
     this.historyUnlisten = this.props.history.listen(() => scrollToTop());
@@ -125,16 +134,17 @@ class PageComponent extends Component {
     const metaTags = metaToHead.map((metaProps, i) => <meta key={i} {...metaProps} />);
 
     const facebookPage = config.siteFacebookPage;
-    const twitterPage =
-      config.siteTwitterHandle && config.siteTwitterHandle.charAt(0) === '@'
-        ? `https://twitter.com/${config.siteTwitterHandle.substring(1)}`
-        : null;
+    const twitterPage = twitterPageURL(config.siteTwitterHandle);
     const instagramPage = config.siteInstagramPage;
     const sameOrganizationAs = [facebookPage, twitterPage, instagramPage].filter(v => v != null);
 
     // Schema for search engines (helps them to understand what this page is about)
     // http://schema.org
     // We are using JSON-LD format
+
+    // Schema attribute can be either single schema object or an array of objects
+    // This makes it possible to include several different items from the same page.
+    // E.g. Product, Place, Video
     const schemaFromProps = Array.isArray(schema) ? schema : [schema];
     const schemaArrayJSONString = JSON.stringify([
       ...schemaFromProps,
