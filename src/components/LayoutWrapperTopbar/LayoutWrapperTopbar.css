@@ -1,4 +1,7 @@
+@import '../../marketplace.css';
+
 .root {
   width: 100%;
   position: relative;
+  z-index: var(--zIndexTopbar);
 }
