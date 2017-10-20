@@ -72,13 +72,17 @@ const Footer = props => {
         <div className={css.someLiksMobile}>{socialMediaLinks}</div>
         <div className={css.links}>
           <div className={css.organization} id="organization">
-            <Logo format="desktop" className={css.logo} />
+            <NamedLink name="LandingPage" className={css.logoLink}>
+              <Logo format="desktop" className={css.logo} />
+            </NamedLink>
             <div className={css.organizationInfo}>
               <p className={css.organizationDescription}>
                 <FormattedMessage id="Footer.organizationDescription" />
               </p>
               <p className={css.organizationCopyright}>
-                <FormattedMessage id="Footer.copyright" />
+                <ExternalLink href="https://www.sharetribe.com/" className={css.copyrightLink}>
+                  <FormattedMessage id="Footer.copyright" />
+                </ExternalLink>
               </p>
             </div>
           </div>
@@ -258,9 +262,12 @@ const Footer = props => {
           </div>
         </div>
         <div className={css.copyrightAndTermsMobile}>
-          <span className={css.organizationCopyrightMobile}>
+          <ExternalLink
+            href="https://www.sharetribe.com/"
+            className={css.organizationCopyrightMobile}
+          >
             <FormattedMessage id="Footer.copyright" />
-          </span>
+          </ExternalLink>
           <div className={css.tosAndPrivacyMobile}>
             <NamedLink name="LandingPage" className={css.privacy}>
               <FormattedMessage id="Footer.privacy" />

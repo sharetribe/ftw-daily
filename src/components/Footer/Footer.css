@@ -69,11 +69,16 @@
   }
 }
 
-.logo {
+.logoLink {
   display: block;
   width: 156px;
   height: 27px;
   margin-bottom: 14px;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
 }
 
 .organizationInfo {
@@ -88,6 +93,16 @@
 .organizationCopyright {
   @apply --marketplaceTinyFontStyles;
   margin-top: 32px;
+}
+
+.copyrightLink {
+  color: var(--matterColor);
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    color: var(--marketplaceColor);
+    text-decoration: none;
+  }
 }
 
 /* Desktop and Mobile: links to more information */
@@ -117,6 +132,7 @@
   /* Font */
   @apply --marketplaceH4FontStyles;
   color: var(--matterColor);
+  transition: var(--transitionStyleButton);
 
   margin-top: 0;
   margin-bottom: 12px;
@@ -196,6 +212,7 @@
   /* Font */
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColorAnti);
+  transition: var(--transitionStyleButton);
 
   margin-top: 0;
   margin-bottom: 0;
@@ -241,9 +258,15 @@
   /* Font */
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColorAnti);
+  transition: var(--transitionStyleButton);
 
   margin-top: 0;
   margin-bottom: 0;
+
+  &:hover {
+    color: var(--marketplaceColor);
+    text-decoration: none;
+  }
 }
 
 .tosAndPrivacyMobile {
