@@ -1,10 +1,10 @@
 @import '../../marketplace.css';
 
 .pageRoot {
-  display: block;
+  display: flex;
   padding-bottom: 90px;
   @media (--viewportLarge) {
-    padding-bottom: 24px;
+    padding-bottom: 0;
   }
 }
 
@@ -393,6 +393,8 @@
 }
 
 .openBookingForm {
+  /* Ensure that mobile button is over Footer too */
+  z-index: 9;
   position: fixed;
   bottom: 0;
   left: 0;
