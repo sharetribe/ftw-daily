@@ -18,7 +18,6 @@ import {
   ProfileSettingsPage,
   SalePage,
   SearchPage,
-  SecurityPage,
   StyleguidePage,
   EmailVerificationPage,
 } from './containers';
@@ -231,12 +230,6 @@ const routeConfiguration = () => {
       auth: true,
       name: 'PayoutPreferencesPage',
       component: props => <PayoutPreferencesPage {...props} />,
-    },
-    {
-      path: '/account/security',
-      auth: true,
-      name: 'SecurityPage',
-      component: props => <SecurityPage {...props} />,
     },
     {
       path: '/styleguide',
