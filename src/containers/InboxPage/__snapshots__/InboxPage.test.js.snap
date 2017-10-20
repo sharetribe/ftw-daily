@@ -7,11 +7,23 @@ exports[`InboxPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="InboxPage.ordersTitle"
 >
-  <withRouter(Connect(TopbarContainerComponent))
-    currentPage="InboxPage"
-  />
-  <div>
-    <div>
+  <LayoutSideNavigation
+    className={null}
+    containerClassName={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent))
+        currentPage="InboxPage"
+      />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperSideNav
+      className={null}
+      rootClassName={null}
+    >
       <h1>
         <FormattedMessage
           id="InboxPage.title"
@@ -58,8 +70,11 @@ exports[`InboxPage matches snapshot 1`] = `
           ]
         }
       />
-    </div>
-    <div>
+    </LayoutWrapperSideNav>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
       <ul>
         <li>
           <Component
@@ -266,8 +281,14 @@ exports[`InboxPage matches snapshot 1`] = `
           />
         </li>
       </ul>
-    </div>
-  </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <InjectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSideNavigation>
 </Page>
 `;
 
@@ -342,11 +363,23 @@ exports[`InboxPage matches snapshot 3`] = `
   scrollingDisabled={false}
   title="InboxPage.salesTitle"
 >
-  <withRouter(Connect(TopbarContainerComponent))
-    currentPage="InboxPage"
-  />
-  <div>
-    <div>
+  <LayoutSideNavigation
+    className={null}
+    containerClassName={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent))
+        currentPage="InboxPage"
+      />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperSideNav
+      className={null}
+      rootClassName={null}
+    >
       <h1>
         <FormattedMessage
           id="InboxPage.title"
@@ -393,8 +426,11 @@ exports[`InboxPage matches snapshot 3`] = `
           ]
         }
       />
-    </div>
-    <div>
+    </LayoutWrapperSideNav>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
       <ul>
         <li>
           <Component
@@ -601,8 +637,14 @@ exports[`InboxPage matches snapshot 3`] = `
           />
         </li>
       </ul>
-    </div>
-  </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <InjectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSideNavigation>
 </Page>
 `;
 
