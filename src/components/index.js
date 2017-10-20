@@ -38,6 +38,13 @@ export { default as IconEmailSuccess } from './IconEmailSuccess/IconEmailSuccess
 export { default as IconKeys } from './IconKeys/IconKeys';
 export { default as IconKeysSuccess } from './IconKeysSuccess/IconKeysSuccess';
 export { default as IconSearch } from './IconSearch/IconSearch';
+export {
+  default as IconSocialMediaFacebook,
+} from './IconSocialMediaFacebook/IconSocialMediaFacebook';
+export {
+  default as IconSocialMediaInstagram,
+} from './IconSocialMediaInstagram/IconSocialMediaInstagram';
+export { default as IconSocialMediaTwitter } from './IconSocialMediaTwitter/IconSocialMediaTwitter';
 export { default as IconSpinner } from './IconSpinner/IconSpinner';
 export { default as ImageCarousel } from './ImageCarousel/ImageCarousel';
 export { default as ImageFromFile } from './ImageFromFile/ImageFromFile';
