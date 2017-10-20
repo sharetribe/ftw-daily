@@ -8,7 +8,14 @@ import * as propTypes from '../../util/propTypes';
 import { verify } from '../../ducks/EmailVerification.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { parse } from '../../util/urlHelpers';
-import { Page } from '../../components';
+import {
+  Page,
+  LayoutSingleColumn,
+  LayoutWrapperTopbar,
+  LayoutWrapperMain,
+  LayoutWrapperFooter,
+  Footer,
+} from '../../components';
 import { EmailVerificationForm, TopbarContainer } from '../../containers';
 
 import css from './EmailVerificationPage.css';
@@ -60,22 +67,31 @@ export const EmailVerificationPageComponent = props => {
       logoutError={logoutError}
       scrollingDisabled={scrollingDisabled}
     >
-      <TopbarContainer />
-      <div className={css.root}>
-        <div className={css.content}>
-          {currentUser ? (
-            <EmailVerificationForm
-              initialValues={initialValues}
-              onSubmit={submitVerification}
-              currentUser={currentUser}
-              inProgress={emailVerificationInProgress}
-              verificationError={verificationError}
-            />
-          ) : (
-            <FormattedMessage id="EmailVerificationPage.loadingUserInformation" />
-          )}
-        </div>
-      </div>
+      <LayoutSingleColumn>
+        <LayoutWrapperTopbar>
+          <TopbarContainer />
+        </LayoutWrapperTopbar>
+        <LayoutWrapperMain className={css.layoutWrapperMain}>
+          <div className={css.root}>
+            <div className={css.content}>
+              {currentUser ? (
+                <EmailVerificationForm
+                  initialValues={initialValues}
+                  onSubmit={submitVerification}
+                  currentUser={currentUser}
+                  inProgress={emailVerificationInProgress}
+                  verificationError={verificationError}
+                />
+              ) : (
+                <FormattedMessage id="EmailVerificationPage.loadingUserInformation" />
+              )}
+            </div>
+          </div>
+        </LayoutWrapperMain>
+        <LayoutWrapperFooter>
+          <Footer />
+        </LayoutWrapperFooter>
+      </LayoutSingleColumn>
     </Page>
   );
 };
