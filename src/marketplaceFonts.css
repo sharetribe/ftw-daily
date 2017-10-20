@@ -203,7 +203,7 @@
     margin-bottom: 8.5px;
 
     @media (--viewportMedium) {
-      line-height: 18px;
+      line-height: 16px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 10.5px;
       margin-bottom: 13.5px;
