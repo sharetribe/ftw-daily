@@ -253,12 +253,13 @@
 }
 
 .organizationCopyrightMobile {
-  flex-basis: 172px;
-
   /* Font */
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColorAnti);
   transition: var(--transitionStyleButton);
+
+  /* Tell parent component how much space this one prefers */
+  flex-basis: 172px;
 
   margin-top: 0;
   margin-bottom: 0;
