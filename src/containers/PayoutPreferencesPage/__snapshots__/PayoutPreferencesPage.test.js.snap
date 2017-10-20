@@ -7,6 +7,28 @@ exports[`PayoutPreferencesPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="Payout preferences"
 >
-  <withRouter(Connect(TopbarContainerComponent)) />
+  <LayoutSingleColumn
+    className={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent)) />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      Content
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <InjectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSingleColumn>
 </Page>
 `;

@@ -4,7 +4,14 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as propTypes from '../../util/propTypes';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { Page } from '../../components';
+import {
+  Page,
+  LayoutSingleColumn,
+  LayoutWrapperTopbar,
+  LayoutWrapperMain,
+  LayoutWrapperFooter,
+  Footer,
+} from '../../components';
 import { TopbarContainer } from '../../containers';
 
 export const PayoutPreferencesPageComponent = props => {
@@ -17,7 +24,15 @@ export const PayoutPreferencesPageComponent = props => {
       title="Payout preferences"
       scrollingDisabled={scrollingDisabled}
     >
-      <TopbarContainer />
+      <LayoutSingleColumn>
+        <LayoutWrapperTopbar>
+          <TopbarContainer />
+        </LayoutWrapperTopbar>
+        <LayoutWrapperMain>Content</LayoutWrapperMain>
+        <LayoutWrapperFooter>
+          <Footer />
+        </LayoutWrapperFooter>
+      </LayoutSingleColumn>
     </Page>
   );
 };
