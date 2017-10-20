@@ -186,6 +186,8 @@
 }
 
 .actionButtons {
+  /* Position action button row above the footer */
+  z-index: 9;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -201,6 +203,7 @@
   background-color: white;
 
   @media (--viewportLarge) {
+    z-index: unset;
     position: static;
     box-shadow: none;
     width: auto;
