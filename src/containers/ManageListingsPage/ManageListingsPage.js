@@ -6,7 +6,17 @@ import { FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { parse } from '../../util/urlHelpers';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { ManageListingCard, Page, PaginationLinks, UserNav } from '../../components';
+import {
+  ManageListingCard,
+  Page,
+  PaginationLinks,
+  UserNav,
+  LayoutSingleColumn,
+  LayoutWrapperTopbar,
+  LayoutWrapperMain,
+  LayoutWrapperFooter,
+  Footer,
+} from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import {
@@ -110,30 +120,39 @@ export class ManageListingsPageComponent extends Component {
         scrollingDisabled={scrollingDisabled}
         title="Manage listings"
       >
-        <TopbarContainer currentPage="ManageListingsPage" />
-        <UserNav selectedPageName="ManageListingsPage" />
-        {queryInProgress ? loadingResults : null}
-        {queryListingsError ? queryError : null}
-        <div className={css.listingPanel}>
-          {title}
-          <div className={css.listingCards}>
-            {listings.map(l => (
-              <ManageListingCard
-                className={css.listingCard}
-                key={l.id.uuid}
-                listing={l}
-                isMenuOpen={!!listingMenuOpen && listingMenuOpen.id.uuid === l.id.uuid}
-                actionsInProgressListingId={openingListing || closingListing}
-                onToggleMenu={this.onToggleMenu}
-                onCloseListing={onCloseListing}
-                onOpenListing={onOpenListing}
-                hasOpeningError={openingErrorListingId.uuid === l.id.uuid}
-                hasClosingError={closingErrorListingId.uuid === l.id.uuid}
-              />
-            ))}
-          </div>
-          {paginationLinks}
-        </div>
+        <LayoutSingleColumn>
+          <LayoutWrapperTopbar>
+            <TopbarContainer currentPage="ManageListingsPage" />
+            <UserNav selectedPageName="ManageListingsPage" />
+          </LayoutWrapperTopbar>
+          <LayoutWrapperMain>
+            {queryInProgress ? loadingResults : null}
+            {queryListingsError ? queryError : null}
+            <div className={css.listingPanel}>
+              {title}
+              <div className={css.listingCards}>
+                {listings.map(l => (
+                  <ManageListingCard
+                    className={css.listingCard}
+                    key={l.id.uuid}
+                    listing={l}
+                    isMenuOpen={!!listingMenuOpen && listingMenuOpen.id.uuid === l.id.uuid}
+                    actionsInProgressListingId={openingListing || closingListing}
+                    onToggleMenu={this.onToggleMenu}
+                    onCloseListing={onCloseListing}
+                    onOpenListing={onOpenListing}
+                    hasOpeningError={openingErrorListingId.uuid === l.id.uuid}
+                    hasClosingError={closingErrorListingId.uuid === l.id.uuid}
+                  />
+                ))}
+              </div>
+              {paginationLinks}
+            </div>
+          </LayoutWrapperMain>
+          <LayoutWrapperFooter>
+            <Footer />
+          </LayoutWrapperFooter>
+        </LayoutSingleColumn>
       </Page>
     );
   }
