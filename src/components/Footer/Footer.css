@@ -1,9 +1,279 @@
 @import '../../marketplace.css';
 
 .root {
-  height: 282px;
-  margin: 0 30px;
   border-top-style: solid;
   border-top-width: 1px;
   border-top-color: var(--matterColorNegative);
+
+  width: 100%;
+  padding: 24px 24px 42px 24px;
+  background-color: var(--matterColorBright);
+
+  @media (--viewportMedium) {
+    padding: 73px 30px 81px 30px;
+    background-color: var(--matterColorLight);
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media (--viewportMedium) {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+}
+
+/* Mobile only social media links */
+.someLiksMobile {
+  margin-bottom: 24px;
+
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 24px;
+  margin-right: 12px;
+  text-align: center;
+}
+
+/* Footer links */
+.links {
+  /* Layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 60px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 0;
+  }
+}
+
+/* Desktop: logo and organization stuff */
+.organization {
+  flex-basis: 216px;
+  display: none;
+  margin-right: 24px;
+
+  @media (--viewportMedium) {
+    display: block;
+    order: 1;
+  }
+}
+
+.logoLink {
+  display: block;
+  width: 156px;
+  height: 27px;
+  margin-bottom: 14px;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+}
+
+.organizationInfo {
+  margin-left: 35px;
+  width: 179px;
+}
+
+.organizationDescription {
+  @apply --marketplaceTinyFontStyles;
+}
+
+.organizationCopyright {
+  @apply --marketplaceTinyFontStyles;
+  margin-top: 32px;
+}
+
+.copyrightLink {
+  color: var(--matterColor);
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    color: var(--marketplaceColor);
+    text-decoration: none;
+  }
+}
+
+/* Desktop and Mobile: links to more information */
+.infoLinks {
+  order: 2;
+  flex-basis: 172px;
+
+  @media (--viewportMedium) {
+    padding-top: 2px;
+  }
+}
+
+.list {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.listItem {
+  height: 24px;
+  margin-bottom: 6px;
+  @media (--viewportMedium) {
+    margin-bottom: 0;
+  }
+}
+
+.link {
+  /* Font */
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColor);
+  transition: var(--transitionStyleButton);
+
+  margin-top: 0;
+  margin-bottom: 12px;
+
+  &:hover {
+    color: var(--marketplaceColor);
+    text-decoration: none;
+  }
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+/* Desktop and Mobile: searches - first column */
+.searches {
+  order: 3;
+  flex-basis: 172px;
+  @media (--viewportMedium) {
+    padding-top: 2px;
+  }
+}
+
+/* Desktop and Mobile: searches - second column */
+/* This is not always visible */
+.searchesExtra {
+  order: 4;
+  display: none;
+  flex-basis: 172px;
+
+  @media (min-width: 550px) {
+    display: block;
+  }
+
+  @media (--viewportMedium) {
+    display: none;
+  }
+
+  @media (--viewportLarge) {
+    display: block;
+    padding-top: 2px;
+  }
+}
+
+/* Desktop: extra links (social media links and legal links) */
+.extraLinks {
+  order: 5;
+  display: none;
+  flex-basis: 172px;
+
+  @media (--viewportMedium) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.legalMatters {
+  /* Get extra space from parent element (which is using flexbox) */
+  flex-grow: 1;
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.tosAndPrivacy {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.legalLink,
+.privacy,
+.terms {
+  /* Font */
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColorAnti);
+  transition: var(--transitionStyleButton);
+
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:hover {
+    color: var(--marketplaceColor);
+    text-decoration: none;
+  }
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+/* Mobile: copyright mark and legal links for mobile */
+.copyrightAndTermsMobile {
+  /* Positioning */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  /* Dimensions */
+  height: 60px;
+  padding: 0 24px 18px 24px;
+
+  /* Layout */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  background-color: var(--matterColorLight);
+
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.organizationCopyrightMobile {
+  /* Font */
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColorAnti);
+  transition: var(--transitionStyleButton);
+
+  /* Tell parent component how much space this one prefers */
+  flex-basis: 172px;
+
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:hover {
+    color: var(--marketplaceColor);
+    text-decoration: none;
+  }
+}
+
+.tosAndPrivacyMobile {
+  flex-basis: 172px;
+}
+
+.privacy {
+  margin-right: 24px;
 }

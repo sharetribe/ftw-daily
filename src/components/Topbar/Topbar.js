@@ -15,6 +15,7 @@ import {
   Button,
   IconEmailAttention,
   InlineTextButton,
+  Logo,
   Modal,
   NamedLink,
   TopbarDesktop,
@@ -23,7 +24,6 @@ import {
 import { TopbarSearchForm } from '../../containers';
 
 import MenuIcon from './MenuIcon';
-import LogoIcon from './LogoIcon';
 import SearchIcon from './SearchIcon';
 import css from './Topbar.css';
 
@@ -240,21 +240,27 @@ class TopbarComponent extends Component {
     return (
       <div className={classes}>
         <div className={classNames(mobileRootClassName || css.container, mobileClassName)}>
-          <Button rootClassName={css.menu} onClick={this.handleMobileMenuOpen}>
-            <MenuIcon
-              className={css.menuIcon}
-              title={intl.formatMessage({ id: 'Topbar.menuIcon' })}
-            />
+          <Button
+            rootClassName={css.menu}
+            onClick={this.handleMobileMenuOpen}
+            title={intl.formatMessage({ id: 'Topbar.menuIcon' })}
+          >
+            <MenuIcon className={css.menuIcon} />
             {notificationDot}
           </Button>
-          <NamedLink className={css.home} name="LandingPage">
-            <LogoIcon title={intl.formatMessage({ id: 'Topbar.logoIcon' })} />
+          <NamedLink
+            className={css.home}
+            name="LandingPage"
+            title={intl.formatMessage({ id: 'Topbar.logoIcon' })}
+          >
+            <Logo format="mobile" />
           </NamedLink>
-          <Button rootClassName={css.searchMenu} onClick={this.handleMobileSearchOpen}>
-            <SearchIcon
-              className={css.searchMenuIcon}
-              title={intl.formatMessage({ id: 'Topbar.searchIcon' })}
-            />
+          <Button
+            rootClassName={css.searchMenu}
+            onClick={this.handleMobileSearchOpen}
+            title={intl.formatMessage({ id: 'Topbar.searchIcon' })}
+          >
+            <SearchIcon className={css.searchMenuIcon} />
           </Button>
         </div>
         <div className={css.desktop}>

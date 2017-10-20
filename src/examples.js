@@ -19,6 +19,9 @@ import * as IconEmailSuccess from './components/IconEmailSuccess/IconEmailSucces
 import * as IconKeys from './components/IconKeys/IconKeys.example';
 import * as IconKeysSuccess from './components/IconKeysSuccess/IconKeysSuccess.example';
 import * as IconSearch from './components/IconSearch/IconSearch.example';
+import * as IconSocialMediaFacebook from './components/IconSocialMediaFacebook/IconSocialMediaFacebook.example';
+import * as IconSocialMediaInstagram from './components/IconSocialMediaInstagram/IconSocialMediaInstagram.example';
+import * as IconSocialMediaTwitter from './components/IconSocialMediaTwitter/IconSocialMediaTwitter.example';
 import * as IconSpinner from './components/IconSpinner/IconSpinner.example';
 import * as ImageCarousel from './components/ImageCarousel/ImageCarousel.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
@@ -82,6 +85,9 @@ export {
   IconKeys,
   IconKeysSuccess,
   IconSearch,
+  IconSocialMediaFacebook,
+  IconSocialMediaInstagram,
+  IconSocialMediaTwitter,
   IconSpinner,
   ImageCarousel,
   ListingCard,

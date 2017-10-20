@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LogoIcon = props => {
-  const { className } = props;
+const IconLogo = props => {
+  const { className, ...rest } = props;
 
   return (
     <svg
       className={className}
+      {...rest}
       width="21"
       height="25"
       viewBox="0 0 21 25"
@@ -23,12 +24,12 @@ const LogoIcon = props => {
 
 const { string } = PropTypes;
 
-LogoIcon.defaultProps = {
+IconLogo.defaultProps = {
   className: null,
 };
 
-LogoIcon.propTypes = {
+IconLogo.propTypes = {
   className: string,
 };
 
-export default LogoIcon;
+export default IconLogo;
