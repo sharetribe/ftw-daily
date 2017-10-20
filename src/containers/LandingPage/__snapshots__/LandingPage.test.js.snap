@@ -38,22 +38,43 @@ exports[`LandingPage matches snapshot 1`] = `
     ]
   }
 >
-  <withRouter(Connect(TopbarContainerComponent)) />
-  <div>
-    <HeroSection
+  <LayoutSingleColumn
+    className={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
       className={null}
-      history={
-        Object {
-          "push": [Function],
-        }
-      }
-      location={
-        Object {
-          "search": "",
-        }
-      }
       rootClassName={null}
-    />
-  </div>
+    >
+      <withRouter(Connect(TopbarContainerComponent)) />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <div>
+        <HeroSection
+          className={null}
+          history={
+            Object {
+              "push": [Function],
+            }
+          }
+          location={
+            Object {
+              "search": "",
+            }
+          }
+          rootClassName={null}
+        />
+      </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <InjectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSingleColumn>
 </Page>
 `;
