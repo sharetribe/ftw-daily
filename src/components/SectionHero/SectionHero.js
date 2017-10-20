@@ -8,9 +8,9 @@ import routeConfiguration from '../../routeConfiguration';
 import { IconSearch, Button } from '../../components';
 import { LocationSearchForm } from '../../containers';
 
-import css from './HeroSection.css';
+import css from './SectionHero.css';
 
-const HeroSection = props => {
+const SectionHero = props => {
   const { rootClassName, className, history, location } = props;
 
   const handleMobileSearchClick = () => {
@@ -31,25 +31,25 @@ const HeroSection = props => {
   return (
     <div className={classes}>
       <h1 className={css.heroMainTitle}>
-        <FormattedMessage id="HeroSection.title" />
+        <FormattedMessage id="SectionHero.title" />
       </h1>
       <h2 className={css.heroSubTitle}>
-        <FormattedMessage id="HeroSection.subTitle" />
+        <FormattedMessage id="SectionHero.subTitle" />
       </h2>
       <Button className={css.mobileSearchButton} onClick={handleMobileSearchClick}>
         <IconSearch rootClassName={css.searchIcon} />
-        <FormattedMessage id="HeroSection.mobileSearchButtonText" />
+        <FormattedMessage id="SectionHero.mobileSearchButtonText" />
       </Button>
       <LocationSearchForm className={css.desktopSearchForm} onSubmit={handleSearchSubmit} />
     </div>
   );
 };
 
-HeroSection.defaultProps = { rootClassName: null, className: null };
+SectionHero.defaultProps = { rootClassName: null, className: null };
 
 const { string, shape, func } = PropTypes;
 
-HeroSection.propTypes = {
+SectionHero.propTypes = {
   rootClassName: string,
   className: string,
 
@@ -61,4 +61,4 @@ HeroSection.propTypes = {
   }).isRequired,
 };
 
-export default HeroSection;
+export default SectionHero;

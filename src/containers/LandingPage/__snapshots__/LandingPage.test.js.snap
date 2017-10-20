@@ -52,7 +52,7 @@ exports[`LandingPage matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <HeroSection
+        <SectionHero
           className={null}
           history={
             Object {

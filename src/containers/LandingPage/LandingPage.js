@@ -9,7 +9,7 @@ import { isScrollingDisabled } from '../../ducks/UI.duck';
 import config from '../../config';
 import {
   Page,
-  HeroSection,
+  SectionHero,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
@@ -57,7 +57,7 @@ export const LandingPageComponent = props => {
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
           <div className={css.heroContainer}>
-            <HeroSection className={css.hero} history={history} location={location} />
+            <SectionHero className={css.hero} history={history} location={location} />
           </div>
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
