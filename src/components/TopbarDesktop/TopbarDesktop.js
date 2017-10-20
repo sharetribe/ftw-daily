@@ -7,6 +7,7 @@ import * as propTypes from '../../util/propTypes';
 import {
   Avatar,
   InlineTextButton,
+  Logo,
   Menu,
   MenuLabel,
   MenuContent,
@@ -15,7 +16,6 @@ import {
 } from '../../components';
 import { TopbarSearchForm } from '../../containers';
 
-import logo from './images/saunatime-logo.png';
 import css from './TopbarDesktop.css';
 
 const TopbarDesktop = props => {
@@ -128,9 +128,9 @@ const TopbarDesktop = props => {
   return (
     <nav className={classes}>
       <NamedLink className={css.logoLink} name="LandingPage">
-        <img
+        <Logo
+          format="desktop"
           className={css.logo}
-          src={logo}
           alt={intl.formatMessage({ id: 'TopbarDesktop.logo' })}
         />
       </NamedLink>

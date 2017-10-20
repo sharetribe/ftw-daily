@@ -13,7 +13,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
   >
     <img
       alt="TopbarDesktop.logo"
-      className={undefined}
+      className={null}
       src="saunatime-logo.png"
     />
   </a>
