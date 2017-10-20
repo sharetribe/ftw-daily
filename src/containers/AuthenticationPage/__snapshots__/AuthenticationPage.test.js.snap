@@ -14,61 +14,82 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
   scrollingDisabled={false}
   title="AuthenticationPage.schemaTitleLogin"
 >
-  <withRouter(Connect(TopbarContainerComponent))
-    className=""
-  />
-  <div>
-    <div>
-      <TabNavHorizontal
-        className={null}
-        rootClassName={null}
-        skin="light"
-        tabClassName={null}
-        tabRootClassName={null}
-        tabs={
-          Array [
-            Object {
-              "linkProps": Object {
-                "name": "SignupPage",
-                "to": Object {
-                  "state": Object {
-                    "from": "/protected",
-                  },
-                },
-              },
-              "selected": false,
-              "text": <h1>
-                <FormattedMessage
-                      id="AuthenticationPage.signupLinkText"
-                      values={Object {}}
-                />
-          </h1>,
-            },
-            Object {
-              "linkProps": Object {
-                "name": "LoginPage",
-                "to": Object {
-                  "state": Object {
-                    "from": "/protected",
-                  },
-                },
-              },
-              "selected": true,
-              "text": <h1>
-                <FormattedMessage
-                      id="AuthenticationPage.loginLinkText"
-                      values={Object {}}
-                />
-          </h1>,
-            },
-          ]
-        }
+  <LayoutSingleColumn
+    className={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent))
+        className=""
       />
-      <ReduxForm
-        inProgress={false}
-        onSubmit={[Function]}
-      />
-    </div>
-  </div>
+    </LayoutWrapperTopbar>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <div>
+        <div>
+          <TabNavHorizontal
+            className={null}
+            rootClassName={null}
+            skin="light"
+            tabClassName={null}
+            tabRootClassName={null}
+            tabs={
+              Array [
+                Object {
+                  "linkProps": Object {
+                    "name": "SignupPage",
+                    "to": Object {
+                      "state": Object {
+                        "from": "/protected",
+                      },
+                    },
+                  },
+                  "selected": false,
+                  "text": <h1>
+                    <FormattedMessage
+                          id="AuthenticationPage.signupLinkText"
+                          values={Object {}}
+                    />
+              </h1>,
+                },
+                Object {
+                  "linkProps": Object {
+                    "name": "LoginPage",
+                    "to": Object {
+                      "state": Object {
+                        "from": "/protected",
+                      },
+                    },
+                  },
+                  "selected": true,
+                  "text": <h1>
+                    <FormattedMessage
+                          id="AuthenticationPage.loginLinkText"
+                          values={Object {}}
+                    />
+              </h1>,
+                },
+              ]
+            }
+          />
+          <ReduxForm
+            inProgress={false}
+            onSubmit={[Function]}
+          />
+        </div>
+      </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <InjectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSingleColumn>
 </Page>
 `;
