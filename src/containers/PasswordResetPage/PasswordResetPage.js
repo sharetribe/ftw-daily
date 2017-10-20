@@ -7,7 +7,17 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { parse } from '../../util/urlHelpers';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { Page, NamedLink, IconKeys, IconKeysSuccess } from '../../components';
+import {
+  Page,
+  NamedLink,
+  IconKeys,
+  IconKeysSuccess,
+  LayoutSingleColumn,
+  LayoutWrapperTopbar,
+  LayoutWrapperMain,
+  LayoutWrapperFooter,
+  Footer,
+} from '../../components';
 import { PasswordResetForm, TopbarContainer } from '../../containers';
 
 import { resetPassword } from './PasswordResetPage.duck';
@@ -118,8 +128,17 @@ export class PasswordResetPageComponent extends Component {
         logoutError={logoutError}
         scrollingDisabled={scrollingDisabled}
       >
-        <TopbarContainer />
-        <div className={css.root}>{content}</div>
+        <LayoutSingleColumn>
+          <LayoutWrapperTopbar>
+            <TopbarContainer />
+          </LayoutWrapperTopbar>
+          <LayoutWrapperMain className={css.layoutWrapperMain}>
+            <div className={css.root}>{content}</div>
+          </LayoutWrapperMain>
+          <LayoutWrapperFooter>
+            <Footer />
+          </LayoutWrapperFooter>
+        </LayoutSingleColumn>
       </Page>
     );
   }
