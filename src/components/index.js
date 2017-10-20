@@ -59,6 +59,7 @@ export {
   default as LocationAutocompleteInput,
   LocationAutocompleteInputField,
 } from './LocationAutocompleteInput/LocationAutocompleteInput';
+export { default as Logo } from './Logo/Logo';
 export { default as ManageListingCard } from './ManageListingCard/ManageListingCard';
 export { default as Map } from './Map/Map';
 export { default as MapPanel } from './MapPanel/MapPanel';
