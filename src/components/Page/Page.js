@@ -54,7 +54,6 @@ class PageComponent extends Component {
     const {
       className,
       rootClassName,
-      authInfoError,
       children,
       history,
       intl,
@@ -77,9 +76,6 @@ class PageComponent extends Component {
     // TODO: use FlashMessages for auth errors
 
     /* eslint-disable no-console */
-    if (authInfoError && console && console.error) {
-      console.error(authInfoError);
-    }
     if (logoutError && console && console.error) {
       console.error(logoutError);
     }
@@ -184,11 +180,6 @@ class PageComponent extends Component {
           {metaTags}
           <script type="application/ld+json">{schemaArrayJSONString}</script>
         </Helmet>
-        {authInfoError ? (
-          <div style={{ color: 'red' }}>
-            <FormattedMessage id="Page.authInfoFailed" />
-          </div>
-        ) : null}
         {logoutError ? (
           <div style={{ color: 'red' }}>
             <FormattedMessage id="Page.logoutFailed" />
@@ -206,7 +197,6 @@ PageComponent.defaultProps = {
   className: null,
   rootClassName: null,
   children: null,
-  authInfoError: null,
   logoutError: null,
   scrollingDisabled: false,
   author: null,
@@ -226,7 +216,6 @@ PageComponent.propTypes = {
   className: string,
   rootClassName: string,
   children: any,
-  authInfoError: propTypes.error,
   logoutError: propTypes.error,
   scrollingDisabled: bool,
 

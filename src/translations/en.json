@@ -276,7 +276,6 @@
   "OrderPage.fetchOrderFailed": "Fetching order data failed.",
   "OrderPage.loadingData": "Loading order data.",
   "OrderPage.title": "Order details: {listingTitle}",
-  "Page.authInfoFailed": "Could not get authentication information.",
   "Page.logoutFailed": "Logout failed. Please try again.",
   "Page.schemaDescription": "You can book a sauna from Saunatime or get some income by sharing your own sauna",
   "Page.schemaTitle": "Book saunas everywhere | {siteTitle}",
