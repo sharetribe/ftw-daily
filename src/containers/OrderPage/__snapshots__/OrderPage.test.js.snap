@@ -7,114 +7,135 @@ exports[`OrderPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="OrderPage.title"
 >
-  <withRouter(Connect(TopbarContainerComponent)) />
-  <InjectIntl(Component)
-    className="undefined"
-    transaction={
-      Object {
-        "attributes": Object {
-          "createdAt": 2017-05-01T00:00:00.000Z,
-          "lastTransition": "transition/preauthorize",
-          "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
-          "lineItems": Array [
-            Object {
-              "code": "line-item/night",
-              "lineTotal": Money {
+  <LayoutSingleColumn
+    className={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent)) />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <InjectIntl(Component)
+        className="undefined"
+        transaction={
+          Object {
+            "attributes": Object {
+              "createdAt": 2017-05-01T00:00:00.000Z,
+              "lastTransition": "transition/preauthorize",
+              "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
+              "lineItems": Array [
+                Object {
+                  "code": "line-item/night",
+                  "lineTotal": Money {
+                    "amount": 1000,
+                    "currency": "USD",
+                  },
+                  "quantity": "3",
+                  "reversal": false,
+                  "unitPrice": Money {
+                    "amount": 333.3333333333333,
+                    "currency": "USD",
+                  },
+                },
+                Object {
+                  "code": "line-item/provider-commission",
+                  "lineTotal": Money {
+                    "amount": -100,
+                    "currency": "USD",
+                  },
+                  "reversal": false,
+                  "unitPrice": Money {
+                    "amount": -100,
+                    "currency": "USD",
+                  },
+                },
+              ],
+              "payinTotal": Money {
                 "amount": 1000,
                 "currency": "USD",
               },
-              "quantity": "3",
-              "reversal": false,
-              "unitPrice": Money {
-                "amount": 333.3333333333333,
+              "payoutTotal": Money {
+                "amount": 900,
                 "currency": "USD",
               },
             },
-            Object {
-              "code": "line-item/provider-commission",
-              "lineTotal": Money {
-                "amount": -100,
-                "currency": "USD",
+            "booking": Object {
+              "attributes": Object {
+                "end": 2017-06-13T00:00:00.000Z,
+                "start": 2017-06-10T00:00:00.000Z,
               },
-              "reversal": false,
-              "unitPrice": Money {
-                "amount": -100,
-                "currency": "USD",
+              "id": UUID {
+                "uuid": "booking1",
               },
+              "type": "booking",
             },
-          ],
-          "payinTotal": Money {
-            "amount": 1000,
-            "currency": "USD",
-          },
-          "payoutTotal": Money {
-            "amount": 900,
-            "currency": "USD",
-          },
-        },
-        "booking": Object {
-          "attributes": Object {
-            "end": 2017-06-13T00:00:00.000Z,
-            "start": 2017-06-10T00:00:00.000Z,
-          },
-          "id": UUID {
-            "uuid": "booking1",
-          },
-          "type": "booking",
-        },
-        "customer": Object {
-          "attributes": Object {
-            "banned": false,
-            "profile": Object {
-              "abbreviatedName": "customer1 abbreviated name",
-              "displayName": "customer1 display name",
+            "customer": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "customer1 abbreviated name",
+                  "displayName": "customer1 display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "customer1",
+              },
+              "type": "user",
             },
-          },
-          "id": UUID {
-            "uuid": "customer1",
-          },
-          "type": "user",
-        },
-        "id": UUID {
-          "uuid": "tx-order-1",
-        },
-        "listing": Object {
-          "attributes": Object {
-            "address": "listing1 address",
-            "closed": false,
-            "deleted": false,
-            "description": "listing1 description",
-            "geolocation": LatLng {
-              "lat": 40,
-              "lng": 60,
+            "id": UUID {
+              "uuid": "tx-order-1",
             },
-            "price": Money {
-              "amount": 5500,
-              "currency": "USD",
+            "listing": Object {
+              "attributes": Object {
+                "address": "listing1 address",
+                "closed": false,
+                "deleted": false,
+                "description": "listing1 description",
+                "geolocation": LatLng {
+                  "lat": 40,
+                  "lng": 60,
+                },
+                "price": Money {
+                  "amount": 5500,
+                  "currency": "USD",
+                },
+                "title": "listing1 title",
+              },
+              "id": UUID {
+                "uuid": "listing1",
+              },
+              "type": "listing",
             },
-            "title": "listing1 title",
-          },
-          "id": UUID {
-            "uuid": "listing1",
-          },
-          "type": "listing",
-        },
-        "provider": Object {
-          "attributes": Object {
-            "banned": false,
-            "profile": Object {
-              "abbreviatedName": "provider1 abbreviated name",
-              "displayName": "provider1 display name",
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "provider1 abbreviated name",
+                  "displayName": "provider1 display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider1",
+              },
+              "type": "user",
             },
-          },
-          "id": UUID {
-            "uuid": "provider1",
-          },
-          "type": "user",
-        },
-        "type": "transaction",
-      }
-    }
-  />
+            "type": "transaction",
+          }
+        }
+      />
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <InjectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSingleColumn>
 </Page>
 `;

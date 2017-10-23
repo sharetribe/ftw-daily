@@ -5,7 +5,6 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import * as propTypes from '../../util/propTypes';
@@ -28,6 +27,11 @@ import {
   NamedRedirect,
   Modal,
   ImageCarousel,
+  LayoutSingleColumn,
+  LayoutWrapperTopbar,
+  LayoutWrapperMain,
+  LayoutWrapperFooter,
+  Footer,
 } from '../../components';
 import { BookingDatesForm, TopbarContainer } from '../../containers';
 
@@ -182,10 +186,17 @@ export class ListingPageComponent extends Component {
 
       return (
         <Page title={errorTitle}>
-          {topbar}
-          <p className={css.errorText}>
-            <FormattedMessage id="ListingPage.errorLoadingListingMessage" />
-          </p>
+          <LayoutSingleColumn className={css.pageRoot}>
+            <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
+            <LayoutWrapperMain>
+              <p className={css.errorText}>
+                <FormattedMessage id="ListingPage.errorLoadingListingMessage" />
+              </p>
+            </LayoutWrapperMain>
+            <LayoutWrapperFooter>
+              <Footer />
+            </LayoutWrapperFooter>
+          </LayoutSingleColumn>
         </Page>
       );
     } else if (!currentListing.id) {
@@ -193,10 +204,17 @@ export class ListingPageComponent extends Component {
 
       return (
         <Page title={loadingTitle}>
-          {topbar}
-          <p className={css.loadingText}>
-            <FormattedMessage id="ListingPage.loadingListingMessage" />
-          </p>
+          <LayoutSingleColumn className={css.pageRoot}>
+            <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
+            <LayoutWrapperMain>
+              <p className={css.loadingText}>
+                <FormattedMessage id="ListingPage.loadingListingMessage" />
+              </p>
+            </LayoutWrapperMain>
+            <LayoutWrapperFooter>
+              <Footer />
+            </LayoutWrapperFooter>
+          </LayoutSingleColumn>
         </Page>
       );
     }
@@ -275,8 +293,6 @@ export class ListingPageComponent extends Component {
 
     const editParams = { id: listingId.uuid, slug: listingSlug, type: 'edit', tab: 'description' };
 
-    const listingClasses = classNames(css.pageRoot);
-
     const handleBookButtonClick = () => {
       const isClosed = currentListing.attributes.closed;
       if (isOwnListing || isClosed) {
@@ -343,130 +359,137 @@ export class ListingPageComponent extends Component {
           image: schemaImages,
         }}
       >
-        {topbar}
-        <div className={listingClasses}>
-          <div className={css.threeToTwoWrapper}>
-            <div className={css.aspectWrapper} onClick={handleViewPhotosClick}>
-              {actionBar}
-              <ResponsiveImage
-                rootClassName={css.rootForImage}
-                alt={title}
-                image={firstImage}
-                nameSet={[
-                  { name: 'landscape-crop', size: '400w' },
-                  { name: 'landscape-crop2x', size: '800w' },
-                  { name: 'landscape-crop4x', size: '1600w' },
-                  { name: 'landscape-crop6x', size: '2400w' },
-                ]}
-                sizes="100vw"
-              />
-              {viewPhotosButton}
-            </div>
-          </div>
-          <Modal
-            id="ListingPage.imageCarousel"
-            scrollLayerClassName={css.carouselModalScrollLayer}
-            containerClassName={css.carouselModalContainer}
-            lightCloseButton
-            isOpen={this.state.imageCarouselOpen}
-            onClose={() => this.setState({ imageCarouselOpen: false })}
-            onManageDisableScrolling={onManageDisableScrolling}
-          >
-            <ImageCarousel images={currentListing.images} />
-          </Modal>
-
-          <div className={css.contentContainer}>
-            <div className={css.avatarWrapper}>
-              <AvatarLarge user={currentAuthor} className={css.avatarDesktop} />
-              <AvatarMedium user={currentAuthor} className={css.avatarMobile} />
-            </div>
-
-            <div className={css.mainContent}>
-              <div className={css.headingContainer}>
-                <div className={css.desktopPriceContainer}>
-                  <div className={css.desktopPriceValue} title={priceTitle}>
-                    {formattedPrice}
-                  </div>
-                  <div className={css.desktopPerNight}>
-                    <FormattedMessage id="ListingPage.perNight" />
-                  </div>
-                </div>
-                <div className={css.heading}>
-                  <h1 className={css.title}>{title}</h1>
-                  <div className={css.author}>
-                    <span className={css.authorName}>
-                      <FormattedMessage
-                        id="ListingPage.hostedBy"
-                        values={{ name: currentAuthorDisplayName }}
-                      />
-                    </span>
-                  </div>
+        <LayoutSingleColumn className={css.pageRoot}>
+          <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
+          <LayoutWrapperMain>
+            <div>
+              <div className={css.threeToTwoWrapper}>
+                <div className={css.aspectWrapper} onClick={handleViewPhotosClick}>
+                  {actionBar}
+                  <ResponsiveImage
+                    rootClassName={css.rootForImage}
+                    alt={title}
+                    image={firstImage}
+                    nameSet={[
+                      { name: 'landscape-crop', size: '400w' },
+                      { name: 'landscape-crop2x', size: '800w' },
+                      { name: 'landscape-crop4x', size: '1600w' },
+                      { name: 'landscape-crop6x', size: '2400w' },
+                    ]}
+                    sizes="100vw"
+                  />
+                  {viewPhotosButton}
                 </div>
               </div>
+              <Modal
+                id="ListingPage.imageCarousel"
+                scrollLayerClassName={css.carouselModalScrollLayer}
+                containerClassName={css.carouselModalContainer}
+                lightCloseButton
+                isOpen={this.state.imageCarouselOpen}
+                onClose={() => this.setState({ imageCarouselOpen: false })}
+                onManageDisableScrolling={onManageDisableScrolling}
+              >
+                <ImageCarousel images={currentListing.images} />
+              </Modal>
 
-              <div className={css.descriptionContainer}>
-                <h2 className={css.descriptionTitle}>
-                  <FormattedMessage id="ListingPage.descriptionTitle" />
-                </h2>
-                <p className={css.description}>{description}</p>
-              </div>
+              <div className={css.contentContainer}>
+                <div className={css.avatarWrapper}>
+                  <AvatarLarge user={currentAuthor} className={css.avatarDesktop} />
+                  <AvatarMedium user={currentAuthor} className={css.avatarMobile} />
+                </div>
 
-              {map}
-            </div>
+                <div className={css.mainContent}>
+                  <div className={css.headingContainer}>
+                    <div className={css.desktopPriceContainer}>
+                      <div className={css.desktopPriceValue} title={priceTitle}>
+                        {formattedPrice}
+                      </div>
+                      <div className={css.desktopPerNight}>
+                        <FormattedMessage id="ListingPage.perNight" />
+                      </div>
+                    </div>
+                    <div className={css.heading}>
+                      <h1 className={css.title}>{title}</h1>
+                      <div className={css.author}>
+                        <span className={css.authorName}>
+                          <FormattedMessage
+                            id="ListingPage.hostedBy"
+                            values={{ name: currentAuthorDisplayName }}
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
-            <ModalInMobile
-              className={css.modalInMobile}
-              containerClassName={css.modalContainer}
-              id="BookingDatesFormInModal"
-              isModalOpenOnMobile={this.state.isBookingModalOpenOnMobile}
-              onClose={() => this.setState({ isBookingModalOpenOnMobile: false })}
-              showAsModalMaxWidth={MODAL_BREAKPOINT}
-              onManageDisableScrolling={onManageDisableScrolling}
-            >
-              <div className={css.modalHeading}>
-                <h1 className={css.title}>{title}</h1>
-                <div className={css.author}>
-                  <span className={css.authorName}>
-                    <FormattedMessage
-                      id="ListingPage.hostedBy"
-                      values={{ name: currentAuthorDisplayName }}
+                  <div className={css.descriptionContainer}>
+                    <h2 className={css.descriptionTitle}>
+                      <FormattedMessage id="ListingPage.descriptionTitle" />
+                    </h2>
+                    <p className={css.description}>{description}</p>
+                  </div>
+
+                  {map}
+                </div>
+
+                <ModalInMobile
+                  className={css.modalInMobile}
+                  containerClassName={css.modalContainer}
+                  id="BookingDatesFormInModal"
+                  isModalOpenOnMobile={this.state.isBookingModalOpenOnMobile}
+                  onClose={() => this.setState({ isBookingModalOpenOnMobile: false })}
+                  showAsModalMaxWidth={MODAL_BREAKPOINT}
+                  onManageDisableScrolling={onManageDisableScrolling}
+                >
+                  <div className={css.modalHeading}>
+                    <h1 className={css.title}>{title}</h1>
+                    <div className={css.author}>
+                      <span className={css.authorName}>
+                        <FormattedMessage
+                          id="ListingPage.hostedBy"
+                          values={{ name: currentAuthorDisplayName }}
+                        />
+                      </span>
+                    </div>
+                  </div>
+
+                  {bookingHeading}
+                  {!currentListing.attributes.closed ? (
+                    <BookingDatesForm
+                      className={css.bookingForm}
+                      onSubmit={handleBookingSubmit}
+                      price={price}
+                      isOwnListing={isOwnListing}
                     />
-                  </span>
+                  ) : null}
+                </ModalInMobile>
+                <div className={css.openBookingForm}>
+                  <div className={css.priceContainer}>
+                    <div className={css.priceValue} title={priceTitle}>
+                      {formattedPrice}
+                    </div>
+                    <div className={css.perNight}>
+                      <FormattedMessage id="ListingPage.perNight" />
+                    </div>
+                  </div>
+
+                  {!currentListing.attributes.closed ? (
+                    <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
+                      {bookBtnMessage}
+                    </Button>
+                  ) : (
+                    <div className={css.closedListingButton}>
+                      <FormattedMessage id="ListingPage.closedListingButtonText" />
+                    </div>
+                  )}
                 </div>
               </div>
-
-              {bookingHeading}
-              {!currentListing.attributes.closed ? (
-                <BookingDatesForm
-                  className={css.bookingForm}
-                  onSubmit={handleBookingSubmit}
-                  price={price}
-                  isOwnListing={isOwnListing}
-                />
-              ) : null}
-            </ModalInMobile>
-            <div className={css.openBookingForm}>
-              <div className={css.priceContainer}>
-                <div className={css.priceValue} title={priceTitle}>
-                  {formattedPrice}
-                </div>
-                <div className={css.perNight}>
-                  <FormattedMessage id="ListingPage.perNight" />
-                </div>
-              </div>
-
-              {!currentListing.attributes.closed ? (
-                <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
-                  {bookBtnMessage}
-                </Button>
-              ) : (
-                <div className={css.closedListingButton}>
-                  <FormattedMessage id="ListingPage.closedListingButtonText" />
-                </div>
-              )}
             </div>
-          </div>
-        </div>
+          </LayoutWrapperMain>
+          <LayoutWrapperFooter>
+            <Footer />
+          </LayoutWrapperFooter>
+        </LayoutSingleColumn>
       </Page>
     );
   }

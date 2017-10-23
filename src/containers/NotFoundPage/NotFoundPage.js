@@ -8,7 +8,14 @@ import routeConfiguration from '../../routeConfiguration';
 import * as propTypes from '../../util/propTypes';
 import { createResourceLocatorString } from '../../util/routes';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { Page } from '../../components';
+import {
+  Page,
+  LayoutSingleColumn,
+  LayoutWrapperTopbar,
+  LayoutWrapperMain,
+  LayoutWrapperFooter,
+  Footer,
+} from '../../components';
 import { LocationSearchForm, TopbarContainer } from '../../containers';
 
 import css from './NotFoundPage.css';
@@ -45,19 +52,28 @@ export class NotFoundPageComponent extends Component {
         title={title}
         scrollingDisabled={scrollingDisabled}
       >
-        <TopbarContainer />
-        <div className={css.root}>
-          <div className={css.content}>
-            <div className={css.number}>404</div>
-            <h1 className={css.heading}>
-              <FormattedMessage id="NotFoundPage.heading" />
-            </h1>
-            <p className={css.description}>
-              <FormattedMessage id="NotFoundPage.description" />
-            </p>
-            <LocationSearchForm className={css.searchForm} onSubmit={handleSearchSubmit} />
-          </div>
-        </div>
+        <LayoutSingleColumn>
+          <LayoutWrapperTopbar>
+            <TopbarContainer />
+          </LayoutWrapperTopbar>
+          <LayoutWrapperMain>
+            <div className={css.root}>
+              <div className={css.content}>
+                <div className={css.number}>404</div>
+                <h1 className={css.heading}>
+                  <FormattedMessage id="NotFoundPage.heading" />
+                </h1>
+                <p className={css.description}>
+                  <FormattedMessage id="NotFoundPage.description" />
+                </p>
+                <LocationSearchForm className={css.searchForm} onSubmit={handleSearchSubmit} />
+              </div>
+            </div>
+          </LayoutWrapperMain>
+          <LayoutWrapperFooter>
+            <Footer />
+          </LayoutWrapperFooter>
+        </LayoutSingleColumn>
       </Page>
     );
   }

@@ -79,7 +79,6 @@ describe('Application', () => {
       '/account/contact-details': defaultAuthPath,
       '/account/change-password': defaultAuthPath,
       '/account/payout-preferences': defaultAuthPath,
-      '/account/security': defaultAuthPath,
       '/verify-email': loginPath,
     };
     forEach(urlRedirects, (redirectPath, url) => {

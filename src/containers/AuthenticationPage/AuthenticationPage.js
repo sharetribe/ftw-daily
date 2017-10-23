@@ -20,6 +20,11 @@ import {
   IconEmailSent,
   InlineTextButton,
   IconClose,
+  LayoutSingleColumn,
+  LayoutWrapperTopbar,
+  LayoutWrapperMain,
+  LayoutWrapperFooter,
+  Footer,
 } from '../../components';
 import { LoginForm, SignupForm, TopbarContainer } from '../../containers';
 import { login, authenticationInProgress, signup } from '../../ducks/Auth.duck';
@@ -216,10 +221,19 @@ export const AuthenticationPageComponent = props => {
         name: schemaTitle,
       }}
     >
-      <TopbarContainer className={topbarClasses} />
-      <div className={css.root}>
-        {showEmailVerification ? emailVerificationContent : formContent}
-      </div>
+      <LayoutSingleColumn>
+        <LayoutWrapperTopbar>
+          <TopbarContainer className={topbarClasses} />
+        </LayoutWrapperTopbar>
+        <LayoutWrapperMain className={css.layoutWrapperMain}>
+          <div className={css.root}>
+            {showEmailVerification ? emailVerificationContent : formContent}
+          </div>
+        </LayoutWrapperMain>
+        <LayoutWrapperFooter>
+          <Footer />
+        </LayoutWrapperFooter>
+      </LayoutSingleColumn>
     </Page>
   );
 };

@@ -11,6 +11,8 @@ import {
   LayoutWrapperMain,
   LayoutWrapperSideNav,
   LayoutWrapperTopbar,
+  LayoutWrapperFooter,
+  Footer,
   Page,
   TabNav,
   UserNav,
@@ -99,6 +101,9 @@ export const ContactDetailsPageComponent = props => {
             {changeEmailForm}
           </div>
         </LayoutWrapperMain>
+        <LayoutWrapperFooter>
+          <Footer />
+        </LayoutWrapperFooter>
       </LayoutSideNavigation>
     </Page>
   );

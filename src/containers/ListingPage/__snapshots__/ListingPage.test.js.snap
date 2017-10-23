@@ -22,254 +22,273 @@ exports[`ListingPage matches snapshot 1`] = `
   title="ListingPage.schemaTitle"
   twitterImages={Array []}
 >
-  <withRouter(Connect(TopbarContainerComponent)) />
-  <div
-    className=""
+  <LayoutSingleColumn
+    className={null}
+    rootClassName={null}
   >
-    <div>
-      <div
-        onClick={[Function]}
-      >
-        <div
-          onClick={[Function]}
-        >
-          <ActionBar
-            editParams={
-              Object {
-                "id": "listing1",
-                "slug": "listing1-title",
-                "tab": "description",
-                "type": "edit",
-              }
-            }
-            isClosed={false}
-            isOwnListing={false}
-          />
-        </div>
-        <ResponsiveImage
-          alt="listing1 title"
-          className={null}
-          image={null}
-          nameSet={
-            Array [
-              Object {
-                "name": "landscape-crop",
-                "size": "400w",
-              },
-              Object {
-                "name": "landscape-crop2x",
-                "size": "800w",
-              },
-              Object {
-                "name": "landscape-crop4x",
-                "size": "1600w",
-              },
-              Object {
-                "name": "landscape-crop6x",
-                "size": "2400w",
-              },
-            ]
-          }
-          noImageMessage={null}
-          rootClassName={null}
-          sizes="100vw"
-        />
-      </div>
-    </div>
-    <InjectIntl(ModalComponent)
-      id="ListingPage.imageCarousel"
-      isOpen={false}
-      lightCloseButton={true}
-      onClose={[Function]}
-      onManageDisableScrolling={[Function]}
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
     >
-      <InjectIntl(ImageCarousel)
-        images={Array []}
-      />
-    </InjectIntl(ModalComponent)>
-    <div>
-      <div>
-        <AvatarLarge
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "user-1 abbreviated name",
-                  "displayName": "user-1 display name",
-                },
-              },
-              "id": UUID {
-                "uuid": "user-1",
-              },
-              "type": "user",
-            }
-          }
-        />
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "user-1 abbreviated name",
-                  "displayName": "user-1 display name",
-                },
-              },
-              "id": UUID {
-                "uuid": "user-1",
-              },
-              "type": "user",
-            }
-          }
-        />
-      </div>
-      <div>
-        <div>
-          <div>
-            <div
-              title={55}
-            >
-              55
-            </div>
-            <div>
-              <FormattedMessage
-                id="ListingPage.perNight"
-                values={Object {}}
-              />
-            </div>
-          </div>
-          <div>
-            <h1>
-              listing1 title
-            </h1>
-            <div>
-              <span>
-                <FormattedMessage
-                  id="ListingPage.hostedBy"
-                  values={
-                    Object {
-                      "name": "user-1 display name",
-                    }
-                  }
-                />
-              </span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h2>
-            <FormattedMessage
-              id="ListingPage.descriptionTitle"
-              values={Object {}}
-            />
-          </h2>
-          <p>
-            listing1 description
-          </p>
-        </div>
-        <div>
-          <h2>
-            <FormattedMessage
-              id="ListingPage.locationTitle"
-              values={Object {}}
-            />
-          </h2>
-          <div>
-            <Map
-              address="listing1 address"
-              center={
-                LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                }
-              }
-              className=""
-              rootClassName={null}
-              zoom={11}
-            />
-          </div>
-        </div>
-      </div>
-      <withViewport(ModalInMobileComponent)
-        id="BookingDatesFormInModal"
-        isModalOpenOnMobile={false}
-        onClose={[Function]}
-        onManageDisableScrolling={[Function]}
-        showAsModalMaxWidth={1023}
-      >
-        <div>
-          <h1>
-            listing1 title
-          </h1>
-          <div>
-            <span>
-              <FormattedMessage
-                id="ListingPage.hostedBy"
-                values={
-                  Object {
-                    "name": "user-1 display name",
-                  }
-                }
-              />
-            </span>
-          </div>
-        </div>
-        <div>
-          <h2>
-            <FormattedMessage
-              id="ListingPage.bookingTitle"
-              values={
-                Object {
-                  "title": "listing1 title",
-                }
-              }
-            />
-          </h2>
-          <div>
-            <FormattedMessage
-              id="ListingPage.bookingHelp"
-              values={Object {}}
-            />
-          </div>
-        </div>
-        <BookingDatesForm
-          isOwnListing={false}
-          onSubmit={[Function]}
-          price={
-            Money {
-              "amount": 5500,
-              "currency": "USD",
-            }
-          }
-        />
-      </withViewport(ModalInMobileComponent)>
+      <withRouter(Connect(TopbarContainerComponent)) />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
       <div>
         <div>
           <div
-            title={55}
+            onClick={[Function]}
           >
-            55
-          </div>
-          <div>
-            <FormattedMessage
-              id="ListingPage.perNight"
-              values={Object {}}
+            <div
+              onClick={[Function]}
+            >
+              <ActionBar
+                editParams={
+                  Object {
+                    "id": "listing1",
+                    "slug": "listing1-title",
+                    "tab": "description",
+                    "type": "edit",
+                  }
+                }
+                isClosed={false}
+                isOwnListing={false}
+              />
+            </div>
+            <ResponsiveImage
+              alt="listing1 title"
+              className={null}
+              image={null}
+              nameSet={
+                Array [
+                  Object {
+                    "name": "landscape-crop",
+                    "size": "400w",
+                  },
+                  Object {
+                    "name": "landscape-crop2x",
+                    "size": "800w",
+                  },
+                  Object {
+                    "name": "landscape-crop4x",
+                    "size": "1600w",
+                  },
+                  Object {
+                    "name": "landscape-crop6x",
+                    "size": "2400w",
+                  },
+                ]
+              }
+              noImageMessage={null}
+              rootClassName={null}
+              sizes="100vw"
             />
           </div>
         </div>
-        <Button
-          className={null}
-          disabled={false}
-          inProgress={false}
-          onClick={[Function]}
-          ready={false}
-          rootClassName={null}
+        <InjectIntl(ModalComponent)
+          id="ListingPage.imageCarousel"
+          isOpen={false}
+          lightCloseButton={true}
+          onClose={[Function]}
+          onManageDisableScrolling={[Function]}
         >
-          ListingPage.ctaButtonMessage
-        </Button>
+          <InjectIntl(ImageCarousel)
+            images={Array []}
+          />
+        </InjectIntl(ModalComponent)>
+        <div>
+          <div>
+            <AvatarLarge
+              user={
+                Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "user-1 abbreviated name",
+                      "displayName": "user-1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user-1",
+                  },
+                  "type": "user",
+                }
+              }
+            />
+            <AvatarMedium
+              user={
+                Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "user-1 abbreviated name",
+                      "displayName": "user-1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user-1",
+                  },
+                  "type": "user",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div>
+              <div>
+                <div
+                  title={55}
+                >
+                  55
+                </div>
+                <div>
+                  <FormattedMessage
+                    id="ListingPage.perNight"
+                    values={Object {}}
+                  />
+                </div>
+              </div>
+              <div>
+                <h1>
+                  listing1 title
+                </h1>
+                <div>
+                  <span>
+                    <FormattedMessage
+                      id="ListingPage.hostedBy"
+                      values={
+                        Object {
+                          "name": "user-1 display name",
+                        }
+                      }
+                    />
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h2>
+                <FormattedMessage
+                  id="ListingPage.descriptionTitle"
+                  values={Object {}}
+                />
+              </h2>
+              <p>
+                listing1 description
+              </p>
+            </div>
+            <div>
+              <h2>
+                <FormattedMessage
+                  id="ListingPage.locationTitle"
+                  values={Object {}}
+                />
+              </h2>
+              <div>
+                <Map
+                  address="listing1 address"
+                  center={
+                    LatLng {
+                      "lat": 40,
+                      "lng": 60,
+                    }
+                  }
+                  className=""
+                  rootClassName={null}
+                  zoom={11}
+                />
+              </div>
+            </div>
+          </div>
+          <withViewport(ModalInMobileComponent)
+            id="BookingDatesFormInModal"
+            isModalOpenOnMobile={false}
+            onClose={[Function]}
+            onManageDisableScrolling={[Function]}
+            showAsModalMaxWidth={1023}
+          >
+            <div>
+              <h1>
+                listing1 title
+              </h1>
+              <div>
+                <span>
+                  <FormattedMessage
+                    id="ListingPage.hostedBy"
+                    values={
+                      Object {
+                        "name": "user-1 display name",
+                      }
+                    }
+                  />
+                </span>
+              </div>
+            </div>
+            <div>
+              <h2>
+                <FormattedMessage
+                  id="ListingPage.bookingTitle"
+                  values={
+                    Object {
+                      "title": "listing1 title",
+                    }
+                  }
+                />
+              </h2>
+              <div>
+                <FormattedMessage
+                  id="ListingPage.bookingHelp"
+                  values={Object {}}
+                />
+              </div>
+            </div>
+            <BookingDatesForm
+              isOwnListing={false}
+              onSubmit={[Function]}
+              price={
+                Money {
+                  "amount": 5500,
+                  "currency": "USD",
+                }
+              }
+            />
+          </withViewport(ModalInMobileComponent)>
+          <div>
+            <div>
+              <div
+                title={55}
+              >
+                55
+              </div>
+              <div>
+                <FormattedMessage
+                  id="ListingPage.perNight"
+                  values={Object {}}
+                />
+              </div>
+            </div>
+            <Button
+              className={null}
+              disabled={false}
+              inProgress={false}
+              onClick={[Function]}
+              ready={false}
+              rootClassName={null}
+            >
+              ListingPage.ctaButtonMessage
+            </Button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <InjectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSingleColumn>
 </Page>
 `;

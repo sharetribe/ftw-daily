@@ -7,28 +7,49 @@ exports[`NotFoundPageComponent matches snapshot 1`] = `
   scrollingDisabled={false}
   title="NotFoundPage.title"
 >
-  <withRouter(Connect(TopbarContainerComponent)) />
-  <div>
-    <div>
+  <LayoutSingleColumn
+    className={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent)) />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
       <div>
-        404
+        <div>
+          <div>
+            404
+          </div>
+          <h1>
+            <FormattedMessage
+              id="NotFoundPage.heading"
+              values={Object {}}
+            />
+          </h1>
+          <p>
+            <FormattedMessage
+              id="NotFoundPage.description"
+              values={Object {}}
+            />
+          </p>
+          <ReduxForm
+            onSubmit={[Function]}
+          />
+        </div>
       </div>
-      <h1>
-        <FormattedMessage
-          id="NotFoundPage.heading"
-          values={Object {}}
-        />
-      </h1>
-      <p>
-        <FormattedMessage
-          id="NotFoundPage.description"
-          values={Object {}}
-        />
-      </p>
-      <ReduxForm
-        onSubmit={[Function]}
-      />
-    </div>
-  </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <InjectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSingleColumn>
 </Page>
 `;

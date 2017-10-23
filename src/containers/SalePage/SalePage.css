@@ -6,6 +6,15 @@
   flex: 1;
 }
 
+/* actionButtons are fixed positioned until viewportLarge is reached */
+/* margin-bottom gives space for those buttons when scrolling to bottom */
+.footerWrapper {
+  margin-bottom: 101px;
+
+  @media (--viewportLarge) {
+    margin-bottom: 0;
+  }
+}
 .loading {
   margin-left: 24px;
   margin-right: 24px;

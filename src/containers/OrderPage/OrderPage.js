@@ -8,7 +8,16 @@ import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { NamedRedirect, OrderDetailsPanel, Page } from '../../components';
+import {
+  NamedRedirect,
+  OrderDetailsPanel,
+  Page,
+  LayoutSingleColumn,
+  LayoutWrapperTopbar,
+  LayoutWrapperMain,
+  LayoutWrapperFooter,
+  Footer,
+} from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import { loadData } from './OrderPage.duck';
@@ -73,8 +82,15 @@ export const OrderPageComponent = props => {
       title={intl.formatMessage({ id: 'OrderPage.title' }, { listingTitle })}
       scrollingDisabled={scrollingDisabled}
     >
-      <TopbarContainer />
-      {panel}
+      <LayoutSingleColumn>
+        <LayoutWrapperTopbar>
+          <TopbarContainer />
+        </LayoutWrapperTopbar>
+        <LayoutWrapperMain className={css.mainContent}>{panel}</LayoutWrapperMain>
+        <LayoutWrapperFooter>
+          <Footer />
+        </LayoutWrapperFooter>
+      </LayoutSingleColumn>
     </Page>
   );
 };

@@ -7,16 +7,37 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="Manage listings"
 >
-  <withRouter(Connect(TopbarContainerComponent))
-    currentPage="ManageListingsPage"
-  />
-  <UserNav
+  <LayoutSingleColumn
     className={null}
     rootClassName={null}
-    selectedPageName="ManageListingsPage"
-  />
-  <div>
-    <div />
-  </div>
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent))
+        currentPage="ManageListingsPage"
+      />
+      <UserNav
+        className={null}
+        rootClassName={null}
+        selectedPageName="ManageListingsPage"
+      />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <div>
+        <div />
+      </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <InjectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSingleColumn>
 </Page>
 `;

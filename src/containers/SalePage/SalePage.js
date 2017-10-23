@@ -5,11 +5,20 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
-import { ensureListing, ensureTransaction } from '../../util/data';
+import { ensureListing, ensureUser, ensureTransaction } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { acceptSale, declineSale, loadData } from './SalePage.duck';
-import { NamedRedirect, SaleDetailsPanel, Page } from '../../components';
+import {
+  NamedRedirect,
+  SaleDetailsPanel,
+  Page,
+  LayoutSingleColumn,
+  LayoutWrapperTopbar,
+  LayoutWrapperMain,
+  LayoutWrapperFooter,
+  Footer,
+} from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import css from './SalePage.css';
@@ -64,6 +73,14 @@ export const SalePageComponent = props => {
     </p>
   );
 
+  // We need to know if the customer is in pending state -
+  // to show action buttons bar and reserve space below footer.
+  // (accept reject buttons are position: fixed on mobile layout)
+  const currentCustomer = ensureUser(currentTransaction.customer);
+  const customerLoaded = !!currentCustomer.id;
+  const isCustomerBanned = customerLoaded || currentCustomer.attributes.banned;
+  const isPending = propTypes.txIsPreauthorized(currentTransaction) && !isCustomerBanned;
+
   const panel =
     isDataAvailable && currentTransaction.id ? (
       <SaleDetailsPanel
@@ -87,8 +104,17 @@ export const SalePageComponent = props => {
       title={intl.formatMessage({ id: 'SalePage.title' }, { title: listingTitle })}
       scrollingDisabled={scrollingDisabled}
     >
-      <TopbarContainer />
-      <div className={css.root}>{panel}</div>
+      <LayoutSingleColumn>
+        <LayoutWrapperTopbar>
+          <TopbarContainer />
+        </LayoutWrapperTopbar>
+        <LayoutWrapperMain>
+          <div className={css.root}>{panel}</div>
+        </LayoutWrapperMain>
+        <LayoutWrapperFooter className={classNames({ [css.footerWrapper]: isPending })}>
+          <Footer />
+        </LayoutWrapperFooter>
+      </LayoutSingleColumn>
     </Page>
   );
 };

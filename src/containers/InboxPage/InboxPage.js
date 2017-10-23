@@ -17,6 +17,12 @@ import {
   Page,
   PaginationLinks,
   TabNav,
+  LayoutSideNavigation,
+  LayoutWrapperMain,
+  LayoutWrapperSideNav,
+  LayoutWrapperTopbar,
+  LayoutWrapperFooter,
+  Footer,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
@@ -261,28 +267,33 @@ export const InboxPageComponent = props => {
       title={title}
       scrollingDisabled={scrollingDisabled}
     >
-      <TopbarContainer
-        className={css.topbar}
-        mobileRootClassName={css.mobileTopbar}
-        desktopClassName={css.desktopTopbar}
-        currentPage="InboxPage"
-      />
-      <div className={css.container}>
-        <div className={css.navigation}>
+      <LayoutSideNavigation>
+        <LayoutWrapperTopbar>
+          <TopbarContainer
+            className={css.topbar}
+            mobileRootClassName={css.mobileTopbar}
+            desktopClassName={css.desktopTopbar}
+            currentPage="InboxPage"
+          />
+        </LayoutWrapperTopbar>
+        <LayoutWrapperSideNav className={css.navigation}>
           <h1 className={css.title}>
             <FormattedMessage id="InboxPage.title" />
           </h1>
           {nav}
-        </div>
-        <div className={css.content}>
+        </LayoutWrapperSideNav>
+        <LayoutWrapperMain>
           {error}
           <ul className={css.itemList}>
             {!fetchInProgress ? transactions.map(toTxItem) : null}
             {noResults}
           </ul>
           {pagingLinks}
-        </div>
-      </div>
+        </LayoutWrapperMain>
+        <LayoutWrapperFooter>
+          <Footer />
+        </LayoutWrapperFooter>
+      </LayoutSideNavigation>
     </Page>
   );
 };

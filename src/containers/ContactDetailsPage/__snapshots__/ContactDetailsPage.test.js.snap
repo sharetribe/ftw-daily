@@ -73,6 +73,12 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
         </h1>
       </div>
     </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <InjectIntl(Footer) />
+    </LayoutWrapperFooter>
   </LayoutSideNavigation>
 </Page>
 `;

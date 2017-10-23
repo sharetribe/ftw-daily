@@ -9,7 +9,16 @@ import {
   isPasswordRecoveryEmailNotVerifiedError,
 } from '../../util/errors';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { Page, InlineTextButton, IconKeys } from '../../components';
+import {
+  Page,
+  InlineTextButton,
+  IconKeys,
+  LayoutSingleColumn,
+  LayoutWrapperMain,
+  LayoutWrapperTopbar,
+  LayoutWrapperFooter,
+  Footer,
+} from '../../components';
 import { PasswordRecoveryForm, TopbarContainer } from '../../containers';
 
 import {
@@ -152,8 +161,17 @@ export const PasswordRecoveryPageComponent = props => {
 
   return (
     <Page authInfoError={authInfoError} logoutError={logoutError} title={title}>
-      <TopbarContainer />
-      <div className={css.root}>{content}</div>
+      <LayoutSingleColumn>
+        <LayoutWrapperTopbar>
+          <TopbarContainer />
+        </LayoutWrapperTopbar>
+        <LayoutWrapperMain className={css.layoutWrapperMain}>
+          <div className={css.root}>{content}</div>
+        </LayoutWrapperMain>
+        <LayoutWrapperFooter>
+          <Footer />
+        </LayoutWrapperFooter>
+      </LayoutSingleColumn>
     </Page>
   );
 };

@@ -6,7 +6,15 @@ import { FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { ensureCurrentUser } from '../../util/data';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { Page, UserNav } from '../../components';
+import {
+  Page,
+  UserNav,
+  LayoutSingleColumn,
+  LayoutWrapperTopbar,
+  LayoutWrapperMain,
+  LayoutWrapperFooter,
+  Footer,
+} from '../../components';
 import { ProfileSettingsForm, TopbarContainer } from '../../containers';
 
 import { clearUpdatedForm, updateProfile, uploadImage } from './ProfileSettingsPage.duck';
@@ -91,15 +99,23 @@ export class ProfileSettingsPageComponent extends Component {
         title="Profile settings"
         scrollingDisabled={scrollingDisabled}
       >
-        <TopbarContainer currentPage="ProfileSettingsPage" />
-        <UserNav selectedPageName="ProfileSettingsPage" />
-
-        <div className={css.content}>
-          <h1>
-            <FormattedMessage id="ProfileSettingsPage.title" />
-          </h1>
-          {profileSettingsForm}
-        </div>
+        <LayoutSingleColumn>
+          <LayoutWrapperTopbar>
+            <TopbarContainer currentPage="ProfileSettingsPage" />
+            <UserNav selectedPageName="ProfileSettingsPage" />
+          </LayoutWrapperTopbar>
+          <LayoutWrapperMain>
+            <div className={css.content}>
+              <h1>
+                <FormattedMessage id="ProfileSettingsPage.title" />
+              </h1>
+              {profileSettingsForm}
+            </div>
+          </LayoutWrapperMain>
+          <LayoutWrapperFooter>
+            <Footer />
+          </LayoutWrapperFooter>
+        </LayoutSingleColumn>
       </Page>
     );
   }

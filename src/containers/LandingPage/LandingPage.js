@@ -7,7 +7,15 @@ import { injectIntl, intlShape } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import config from '../../config';
-import { Page, HeroSection } from '../../components';
+import {
+  Page,
+  HeroSection,
+  LayoutSingleColumn,
+  LayoutWrapperTopbar,
+  LayoutWrapperMain,
+  LayoutWrapperFooter,
+  Footer,
+} from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
@@ -44,10 +52,19 @@ export const LandingPageComponent = props => {
         image: [schemaImage],
       }}
     >
-      <TopbarContainer />
-      <div className={css.heroContainer}>
-        <HeroSection className={css.hero} history={history} location={location} />
-      </div>
+      <LayoutSingleColumn>
+        <LayoutWrapperTopbar>
+          <TopbarContainer />
+        </LayoutWrapperTopbar>
+        <LayoutWrapperMain>
+          <div className={css.heroContainer}>
+            <HeroSection className={css.hero} history={history} location={location} />
+          </div>
+        </LayoutWrapperMain>
+        <LayoutWrapperFooter>
+          <Footer />
+        </LayoutWrapperFooter>
+      </LayoutSingleColumn>
     </Page>
   );
 };
