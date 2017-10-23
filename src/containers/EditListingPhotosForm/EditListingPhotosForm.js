@@ -109,8 +109,6 @@ export class EditListingPhotosFormComponent extends Component {
       </span>
     );
 
-    // TODO Add tip #2: re-order text
-
     const imageRequiredMessage = intl.formatMessage({ id: 'EditListingPhotosForm.imageRequired' });
 
     const { createListingsError, showListingsError, uploadImageError } = errors;
