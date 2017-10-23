@@ -148,6 +148,112 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
 </div>
 `;
 
+exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`] = `
+<div
+  className=""
+>
+  <div
+    className={undefined}
+  >
+    <span
+      className={undefined}
+    >
+      <span>
+        Price per night
+      </span>
+    </span>
+    <span
+      className={undefined}
+    >
+      10
+    </span>
+  </div>
+  <div
+    className={undefined}
+  >
+    <span
+      className={undefined}
+    >
+      <span>
+        <span
+          className={undefined}
+        >
+          2017-04-14
+        </span>
+         – 
+        <span
+          className={undefined}
+        >
+          2017-04-16
+        </span>
+      </span>
+    </span>
+    <span
+      className={undefined}
+    >
+      <span
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "2 nights",
+          }
+        }
+      />
+    </span>
+  </div>
+  <div
+    className={undefined}
+  >
+    <span
+      className={undefined}
+    >
+      <span>
+        Subtotal
+      </span>
+    </span>
+    <span
+      className={undefined}
+    >
+      20
+    </span>
+  </div>
+  <div
+    className={undefined}
+  >
+    <span
+      className={undefined}
+    >
+      <span>
+        Refund
+      </span>
+    </span>
+    <span
+      className={undefined}
+    >
+      -20
+    </span>
+  </div>
+  <hr
+    className={undefined}
+  />
+  <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      <span>
+        Total price
+      </span>
+    </div>
+    <div
+      className={undefined}
+    >
+      0
+    </div>
+  </div>
+</div>
+`;
+
 exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
 <div
   className=""

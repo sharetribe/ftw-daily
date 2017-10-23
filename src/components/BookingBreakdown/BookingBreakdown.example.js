@@ -321,3 +321,49 @@ export const ProviderSaleDelivered = {
     }),
   },
 };
+
+export const ProviderSaleCanceled = {
+  component: BookingBreakdown,
+  props: {
+    userRole: 'provider',
+    transaction: exampleTransaction({
+      lastTransition: propTypes.TX_TRANSITION_CANCEL,
+      payinTotal: new Money(0, 'USD'),
+      payoutTotal: new Money(0, 'USD'),
+      lineItems: [
+        {
+          code: 'line-item/night',
+          quantity: new Decimal(1),
+          unitPrice: new Money(4500, 'USD'),
+          lineTotal: new Money(4500, 'USD'),
+          reversal: false,
+        },
+        {
+          code: 'line-item/night',
+          quantity: new Decimal(-1),
+          unitPrice: new Money(4500, 'USD'),
+          lineTotal: new Money(-4500, 'USD'),
+          reversal: true,
+        },
+        {
+          code: 'line-item/provider-commission',
+          quantity: new Decimal(1),
+          unitPrice: new Money(-2000, 'USD'),
+          lineTotal: new Money(-2000, 'USD'),
+          reversal: false,
+        },
+        {
+          code: 'line-item/provider-commission',
+          quantity: new Decimal(-1),
+          unitPrice: new Money(2000, 'USD'),
+          lineTotal: new Money(-2000, 'USD'),
+          reversal: true,
+        },
+      ],
+    }),
+    booking: exampleBooking({
+      start: new Date(Date.UTC(2017, 3, 14)),
+      end: new Date(Date.UTC(2017, 3, 15)),
+    }),
+  },
+};
