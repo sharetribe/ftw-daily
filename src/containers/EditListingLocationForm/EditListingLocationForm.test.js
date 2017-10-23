@@ -1,4 +1,4 @@
-// TODO: renderdeep doesn't work due to Google Maps API integration
+// NOTE: renderdeep doesn't work due to Google Maps API integration
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl, fakeFormProps } from '../../util/test-data';
