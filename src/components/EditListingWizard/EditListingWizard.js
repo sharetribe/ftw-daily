@@ -61,15 +61,6 @@ const stepsActive = listing => {
   };
 };
 
-// TODO remove TestPanel when different wizard forms are available
-const TestPanel = props => {
-  return <div>{props.children}</div>;
-};
-
-TestPanel.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
 // Create a new or edit listing through EditListingWizard
 const EditListingWizard = props => {
   const {
