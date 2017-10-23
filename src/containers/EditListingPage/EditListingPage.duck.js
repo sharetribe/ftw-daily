@@ -186,7 +186,6 @@ export const updateImageOrder = imageOrder => ({
   payload: { imageOrder },
 });
 
-// TODO These temporary listing actions will be changed when API supports unpublished listings
 export const createListingDraft = listingData => {
   const { description, title } = listingData;
   return {

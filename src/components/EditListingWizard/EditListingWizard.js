@@ -61,15 +61,6 @@ const stepsActive = listing => {
   };
 };
 
-// TODO remove TestPanel when different wizard forms are available
-const TestPanel = props => {
-  return <div>{props.children}</div>;
-};
-
-TestPanel.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
 // Create a new or edit listing through EditListingWizard
 const EditListingWizard = props => {
   const {
@@ -276,8 +267,9 @@ EditListingWizard.propTypes = {
     push: func.isRequired,
   }).isRequired,
   images: array.isRequired,
+
+  // We cannot use propTypes.listing since the listing might be a draft.
   listing: shape({
-    // TODO Should be propTypes.listing after API support is added.
     attributes: shape({
       address: string,
       description: string,
@@ -287,6 +279,7 @@ EditListingWizard.propTypes = {
     }),
     images: array,
   }),
+
   onCreateListing: func.isRequired,
   onUpdateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,

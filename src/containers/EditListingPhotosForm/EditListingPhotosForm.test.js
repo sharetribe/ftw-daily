@@ -1,4 +1,4 @@
-// TODO: renderdeep doesn't work due to
+// NOTE: renderdeep doesn't work due to
 // "Invariant Violation: getNodeFromInstance: Invalid argument."
 // refs and findDOMNode are not supported by react-test-renderer
 // (react-sortable-hoc uses them)

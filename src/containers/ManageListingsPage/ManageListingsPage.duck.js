@@ -238,7 +238,6 @@ export const queryOwnListings = queryParams => (dispatch, getState, sdk) => {
 
   const { include = [], page, perPage } = queryParams;
 
-  // TODO: API can't handle camelCase request parameter yet.
   return sdk.listings
     .queryOwn({ include, page, per_page: perPage })
     .then(response => {

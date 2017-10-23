@@ -82,7 +82,6 @@ export const ManageListingCardComponent = props => {
     [css.menuItemDisabled]: !!actionsInProgressListingId,
   });
 
-  // TODO: Currently, API can return currencies that are not supported by starter app.
   const { formattedPrice, priceTitle } = priceData(price, intl);
 
   /* eslint-disable jsx-a11y/no-static-element-interactions */

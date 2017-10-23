@@ -113,7 +113,6 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
 
   const { origin, include = [], page, perPage } = searchParams;
 
-  // TODO: API can't handle camelCase request parameter yet.
   const searchOrQuery = origin
     ? sdk.listings.search({ ...searchParams, per_page: perPage })
     : sdk.listings.query({ include, page, per_page: perPage });
@@ -135,7 +134,6 @@ export const searchMapListings = searchParams => (dispatch, getState, sdk) => {
 
   const { origin, include = [], page = 1, perPage } = searchParams;
 
-  // TODO: API can't handle camelCase request parameter yet.
   const searchOrQuery = origin
     ? sdk.listings.search({ ...searchParams, page, per_page: perPage })
     : sdk.listings.query({ include, page, per_page: perPage });

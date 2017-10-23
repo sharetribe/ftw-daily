@@ -58,7 +58,6 @@ pre {
 }
 
 /* ================ Normalisations ================ */
-/* TODO */
 
 html {
   @apply --marketplaceDefaultFontStyles;
