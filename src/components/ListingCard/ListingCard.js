@@ -42,7 +42,6 @@ export const ListingCardComponent = props => {
   const firstImage =
     currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
-  // TODO: Currently, API can return currencies that are not supported by starter app.
   const { formattedPrice, priceTitle } = priceData(price, intl);
 
   return (
