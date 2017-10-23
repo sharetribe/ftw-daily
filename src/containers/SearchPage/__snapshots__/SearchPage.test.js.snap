@@ -2,7 +2,6 @@
 
 exports[`SearchPageComponent matches snapshot 1`] = `
 <Page
-  authInfoError={null}
   description="SearchPage.schemaDescription"
   logoutError={null}
   schema={

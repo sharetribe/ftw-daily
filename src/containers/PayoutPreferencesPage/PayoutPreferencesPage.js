@@ -15,11 +15,10 @@ import {
 import { TopbarContainer } from '../../containers';
 
 export const PayoutPreferencesPageComponent = props => {
-  const { authInfoError, logoutError, scrollingDisabled } = props;
+  const { logoutError, scrollingDisabled } = props;
 
   return (
     <Page
-      authInfoError={authInfoError}
       logoutError={logoutError}
       title="Payout preferences"
       scrollingDisabled={scrollingDisabled}
@@ -38,23 +37,20 @@ export const PayoutPreferencesPageComponent = props => {
 };
 
 PayoutPreferencesPageComponent.defaultProps = {
-  authInfoError: null,
   logoutError: null,
 };
 
 const { bool } = PropTypes;
 
 PayoutPreferencesPageComponent.propTypes = {
-  authInfoError: propTypes.error,
   logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
 };
 
 const mapStateToProps = state => {
-  // Page needs authInfoError and logoutError
-  const { authInfoError, logoutError } = state.Auth;
+  // Page needs logoutError
+  const { logoutError } = state.Auth;
   return {
-    authInfoError,
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
   };

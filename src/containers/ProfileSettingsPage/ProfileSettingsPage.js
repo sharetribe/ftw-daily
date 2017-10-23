@@ -34,7 +34,6 @@ export class ProfileSettingsPageComponent extends Component {
   }
   render() {
     const {
-      authInfoError,
       currentUser,
       image,
       logoutError,
@@ -94,7 +93,6 @@ export class ProfileSettingsPageComponent extends Component {
     return (
       <Page
         className={css.root}
-        authInfoError={authInfoError}
         logoutError={logoutError}
         title="Profile settings"
         scrollingDisabled={scrollingDisabled}
@@ -122,7 +120,6 @@ export class ProfileSettingsPageComponent extends Component {
 }
 
 ProfileSettingsPageComponent.defaultProps = {
-  authInfoError: null,
   currentUser: null,
   logoutError: null,
   uploadImageError: null,
@@ -133,7 +130,6 @@ ProfileSettingsPageComponent.defaultProps = {
 const { bool, func, object, shape, string } = PropTypes;
 
 ProfileSettingsPageComponent.propTypes = {
-  authInfoError: propTypes.error,
   currentUser: propTypes.currentUser,
   image: shape({
     id: string,
@@ -153,8 +149,8 @@ ProfileSettingsPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // Page needs authInfoError and logoutError
-  const { authInfoError, logoutError } = state.Auth;
+  // Page needs logoutError
+  const { logoutError } = state.Auth;
   const { currentUser } = state.user;
   const {
     image,
@@ -164,7 +160,6 @@ const mapStateToProps = state => {
     updateProfileError,
   } = state.ProfileSettingsPage;
   return {
-    authInfoError,
     currentUser,
     image,
     logoutError,

@@ -166,7 +166,6 @@ InboxItem.propTypes = {
 
 export const InboxPageComponent = props => {
   const {
-    authInfoError,
     currentUser,
     fetchInProgress,
     fetchOrdersOrSalesError,
@@ -261,12 +260,7 @@ export const InboxPageComponent = props => {
   const nav = <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />;
 
   return (
-    <Page
-      authInfoError={authInfoError}
-      logoutError={logoutError}
-      title={title}
-      scrollingDisabled={scrollingDisabled}
-    >
+    <Page logoutError={logoutError} title={title} scrollingDisabled={scrollingDisabled}>
       <LayoutSideNavigation>
         <LayoutWrapperTopbar>
           <TopbarContainer
@@ -299,7 +293,6 @@ export const InboxPageComponent = props => {
 };
 
 InboxPageComponent.defaultProps = {
-  authInfoError: null,
   currentUser: null,
   currentUserHasOrders: null,
   fetchOrdersOrSalesError: null,
@@ -314,7 +307,6 @@ InboxPageComponent.propTypes = {
     tab: string.isRequired,
   }).isRequired,
 
-  authInfoError: propTypes.error,
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
   fetchOrdersOrSalesError: propTypes.error,
@@ -330,10 +322,9 @@ InboxPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { fetchInProgress, fetchOrdersOrSalesError, pagination, transactionRefs } = state.InboxPage;
-  const { authInfoError, logoutError } = state.Auth;
+  const { logoutError } = state.Auth;
   const { currentUser, currentUserNotificationCount: providerNotificationCount } = state.user;
   return {
-    authInfoError,
     currentUser,
     fetchInProgress,
     fetchOrdersOrSalesError,

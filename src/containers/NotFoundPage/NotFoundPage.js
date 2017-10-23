@@ -30,7 +30,7 @@ export class NotFoundPageComponent extends Component {
   }
 
   render() {
-    const { authInfoError, history, logoutError, intl, scrollingDisabled } = this.props;
+    const { history, logoutError, intl, scrollingDisabled } = this.props;
 
     const title = intl.formatMessage({
       id: 'NotFoundPage.title',
@@ -46,12 +46,7 @@ export class NotFoundPageComponent extends Component {
     };
 
     return (
-      <Page
-        authInfoError={authInfoError}
-        logoutError={logoutError}
-        title={title}
-        scrollingDisabled={scrollingDisabled}
-      >
+      <Page logoutError={logoutError} title={title} scrollingDisabled={scrollingDisabled}>
         <LayoutSingleColumn>
           <LayoutWrapperTopbar>
             <TopbarContainer />
@@ -80,7 +75,6 @@ export class NotFoundPageComponent extends Component {
 }
 
 NotFoundPageComponent.defaultProps = {
-  authInfoError: null,
   logoutError: null,
   staticContext: {},
 };
@@ -88,7 +82,6 @@ NotFoundPageComponent.defaultProps = {
 const { bool, func, object, shape } = PropTypes;
 
 NotFoundPageComponent.propTypes = {
-  authInfoError: propTypes.error,
   logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
 
@@ -105,10 +98,9 @@ NotFoundPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // Page needs authInfoError and logoutError
-  const { authInfoError, logoutError } = state.Auth;
+  // Page needs logoutError
+  const { logoutError } = state.Auth;
   return {
-    authInfoError,
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
   };

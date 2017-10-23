@@ -27,7 +27,6 @@ import css from './OrderPage.css';
 // It show loading data text or OrderDetailsPanel (and later also another panel for messages).
 export const OrderPageComponent = props => {
   const {
-    authInfoError,
     currentUser,
     fetchOrderError,
     intl,
@@ -77,7 +76,6 @@ export const OrderPageComponent = props => {
 
   return (
     <Page
-      authInfoError={authInfoError}
       logoutError={logoutError}
       title={intl.formatMessage({ id: 'OrderPage.title' }, { listingTitle })}
       scrollingDisabled={scrollingDisabled}
@@ -96,7 +94,6 @@ export const OrderPageComponent = props => {
 };
 
 OrderPageComponent.defaultProps = {
-  authInfoError: null,
   currentUser: null,
   fetchOrderError: null,
   logoutError: null,
@@ -106,7 +103,6 @@ OrderPageComponent.defaultProps = {
 const { bool, oneOf, shape, string } = PropTypes;
 
 OrderPageComponent.propTypes = {
-  authInfoError: propTypes.error,
   currentUser: propTypes.currentUser,
   fetchOrderError: propTypes.error,
   intl: intlShape.isRequired,
@@ -119,13 +115,12 @@ OrderPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { fetchOrderError, transactionRef } = state.OrderPage;
-  const { authInfoError, logoutError } = state.Auth;
+  const { logoutError } = state.Auth;
   const { currentUser } = state.user;
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
 
   return {
-    authInfoError,
     currentUser,
     fetchOrderError,
     logoutError,

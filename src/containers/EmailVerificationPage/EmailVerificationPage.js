@@ -44,7 +44,6 @@ const parseVerificationToken = location => {
 
 export const EmailVerificationPageComponent = props => {
   const {
-    authInfoError,
     currentUser,
     intl,
     logoutError,
@@ -61,12 +60,7 @@ export const EmailVerificationPageComponent = props => {
   const initialValues = { verificationToken: parseVerificationToken(location) };
 
   return (
-    <Page
-      title={title}
-      authInfoError={authInfoError}
-      logoutError={logoutError}
-      scrollingDisabled={scrollingDisabled}
-    >
+    <Page title={title} logoutError={logoutError} scrollingDisabled={scrollingDisabled}>
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
           <TopbarContainer />
@@ -97,7 +91,6 @@ export const EmailVerificationPageComponent = props => {
 };
 
 EmailVerificationPageComponent.defaultProps = {
-  authInfoError: null,
   currentUser: null,
   logoutError: null,
   verificationError: null,
@@ -106,7 +99,6 @@ EmailVerificationPageComponent.defaultProps = {
 const { bool, func, shape, string } = PropTypes;
 
 EmailVerificationPageComponent.propTypes = {
-  authInfoError: propTypes.error,
   currentUser: propTypes.currentUser,
   logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
@@ -124,11 +116,10 @@ EmailVerificationPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { authInfoError, logoutError } = state.Auth;
+  const { logoutError } = state.Auth;
   const { currentUser } = state.user;
   const { verificationError } = state.EmailVerification;
   return {
-    authInfoError,
     verificationError,
     currentUser,
     logoutError,

@@ -2,7 +2,6 @@
 
 exports[`AuthenticationPageComponent matches snapshot 1`] = `
 <Page
-  authInfoError={null}
   logoutError={null}
   schema={
     Object {

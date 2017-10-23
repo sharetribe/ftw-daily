@@ -147,7 +147,6 @@ export class ListingPageComponent extends Component {
 
   render() {
     const {
-      authInfoError,
       currentUser,
       getListing,
       intl,
@@ -341,7 +340,6 @@ export class ListingPageComponent extends Component {
 
     return (
       <Page
-        authInfoError={authInfoError}
         logoutError={logoutError}
         title={schemaTitle}
         scrollingDisabled={scrollingDisabled}
@@ -496,7 +494,6 @@ export class ListingPageComponent extends Component {
 }
 
 ListingPageComponent.defaultProps = {
-  authInfoError: null,
   currentUser: null,
   logoutError: null,
   showListingError: null,
@@ -516,7 +513,6 @@ ListingPageComponent.propTypes = {
     id: string.isRequired,
     slug: string,
   }).isRequired,
-  authInfoError: propTypes.error,
   currentUser: propTypes.currentUser,
   getListing: func.isRequired,
   logoutError: propTypes.error,
@@ -529,7 +525,7 @@ ListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { showListingError } = state.ListingPage;
-  const { authInfoError, logoutError } = state.Auth;
+  const { logoutError } = state.Auth;
   const { currentUser } = state.user;
 
   const getListing = id => {
@@ -538,7 +534,6 @@ const mapStateToProps = state => {
   };
 
   return {
-    authInfoError,
     currentUser,
     getListing,
     logoutError,

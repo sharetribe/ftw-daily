@@ -8,11 +8,10 @@ import { Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 export const ProfilePageComponent = props => {
-  const { authInfoError, logoutError, params, scrollingDisabled } = props;
+  const { logoutError, params, scrollingDisabled } = props;
 
   return (
     <Page
-      authInfoError={authInfoError}
       logoutError={logoutError}
       title={`Profile page with display name: ${params.displayName}`}
       scrollingDisabled={scrollingDisabled}
@@ -23,24 +22,21 @@ export const ProfilePageComponent = props => {
 };
 
 ProfilePageComponent.defaultProps = {
-  authInfoError: null,
   logoutError: null,
 };
 
 const { bool, shape, string } = PropTypes;
 
 ProfilePageComponent.propTypes = {
-  authInfoError: propTypes.error,
   logoutError: propTypes.error,
   params: shape({ displayName: string.isRequired }).isRequired,
   scrollingDisabled: bool.isRequired,
 };
 
 const mapStateToProps = state => {
-  // Page needs authInfoError and logoutError
-  const { authInfoError, logoutError } = state.Auth;
+  // Page needs logoutError
+  const { logoutError } = state.Auth;
   return {
-    authInfoError,
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
   };

@@ -23,7 +23,7 @@ import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
 
 export const LandingPageComponent = props => {
-  const { authInfoError, history, intl, location, logoutError, scrollingDisabled } = props;
+  const { history, intl, location, logoutError, scrollingDisabled } = props;
 
   // Schema for search engines (helps them to understand what this page is about)
   // http://schema.org
@@ -36,7 +36,6 @@ export const LandingPageComponent = props => {
   return (
     <Page
       className={css.root}
-      authInfoError={authInfoError}
       logoutError={logoutError}
       scrollingDisabled={scrollingDisabled}
       contentType="website"
@@ -70,14 +69,12 @@ export const LandingPageComponent = props => {
 };
 
 LandingPageComponent.defaultProps = {
-  authInfoError: null,
   logoutError: null,
 };
 
 const { bool, object } = PropTypes;
 
 LandingPageComponent.propTypes = {
-  authInfoError: propTypes.error,
   logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
 
@@ -90,9 +87,8 @@ LandingPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { authInfoError, logoutError } = state.Auth;
+  const { logoutError } = state.Auth;
   return {
-    authInfoError,
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
   };

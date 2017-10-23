@@ -2,7 +2,6 @@
 
 exports[`CheckoutPage matches snapshot 1`] = `
 <Page
-  authInfoError={null}
   logoutError={null}
   title="CheckoutPage.title"
 >
