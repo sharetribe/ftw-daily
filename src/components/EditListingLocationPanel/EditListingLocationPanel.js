@@ -86,7 +86,10 @@ EditListingLocationPanel.defaultProps = {
 EditListingLocationPanel.propTypes = {
   className: string,
   rootClassName: string,
-  listing: object, // TODO Should be propTypes.listing after API support is added.
+
+  // We cannot use propTypes.listing since the listing might be a draft.
+  listing: object,
+
   onSubmit: func.isRequired,
   onChange: func.isRequired,
   submitButtonText: string.isRequired,

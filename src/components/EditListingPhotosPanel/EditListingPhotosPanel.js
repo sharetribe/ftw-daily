@@ -193,7 +193,10 @@ EditListingPhotosPanel.propTypes = {
   fetchInProgress: bool.isRequired,
   newListingCreated: bool.isRequired,
   images: array,
-  listing: object, // TODO Should be propTypes.listing after API support is added.
+
+  // We cannot use propTypes.listing since the listing might be a draft.
+  listing: object,
+
   onImageUpload: func.isRequired,
   onPayoutDetailsFormChange: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
