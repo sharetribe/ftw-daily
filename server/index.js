@@ -146,12 +146,13 @@ app.get('*', (req, res) => {
     .then(preloadedState => {
       const html = renderer.render(req.url, context, preloadedState);
 
-      const debugData = {
-        url: req.url,
-        context,
-      };
-
-      console.log(`\nRender info:\n${JSON.stringify(debugData, null, '  ')}`);
+      if (dev) {
+        const debugData = {
+          url: req.url,
+          context,
+        };
+        console.log(`\nRender info:\n${JSON.stringify(debugData, null, '  ')}`);
+      }
 
       if (context.unauthorized) {
         // Routes component injects the context.unauthorized when the
