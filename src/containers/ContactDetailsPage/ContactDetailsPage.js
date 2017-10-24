@@ -25,7 +25,6 @@ import css from './ContactDetailsPage.css';
 
 export const ContactDetailsPageComponent = props => {
   const {
-    authInfoError,
     changeEmailError,
     changeEmailInProgress,
     currentUser,
@@ -75,12 +74,7 @@ export const ContactDetailsPageComponent = props => {
   ) : null;
 
   return (
-    <Page
-      authInfoError={authInfoError}
-      logoutError={logoutError}
-      title="Contact details"
-      scrollingDisabled={scrollingDisabled}
-    >
+    <Page logoutError={logoutError} title="Contact details" scrollingDisabled={scrollingDisabled}>
       <LayoutSideNavigation>
         <LayoutWrapperTopbar>
           <TopbarContainer
@@ -110,7 +104,6 @@ export const ContactDetailsPageComponent = props => {
 };
 
 ContactDetailsPageComponent.defaultProps = {
-  authInfoError: null,
   changeEmailError: null,
   currentUser: null,
   logoutError: null,
@@ -120,7 +113,6 @@ ContactDetailsPageComponent.defaultProps = {
 const { bool, func } = PropTypes;
 
 ContactDetailsPageComponent.propTypes = {
-  authInfoError: propTypes.error,
   changeEmailError: propTypes.error,
   changeEmailInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
@@ -135,13 +127,12 @@ ContactDetailsPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // Page needs authInfoError and logoutError, Topbar needs isAuthenticated
-  const { authInfoError, isAuthenticated, logoutError } = state.Auth;
+  // Page needs logoutError, Topbar needs isAuthenticated
+  const { isAuthenticated, logoutError } = state.Auth;
   // Topbar needs user info.
   const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
   const { changeEmailError, changeEmailInProgress, emailChanged } = state.ContactDetailsPage;
   return {
-    authInfoError,
     changeEmailError,
     changeEmailInProgress,
     currentUser,

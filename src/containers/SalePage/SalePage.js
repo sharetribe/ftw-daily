@@ -27,7 +27,6 @@ import css from './SalePage.css';
 // It show loading data text or SaleDetailsPanel (and later also another panel for messages).
 export const SalePageComponent = props => {
   const {
-    authInfoError,
     currentUser,
     fetchSaleError,
     acceptSaleError,
@@ -99,7 +98,6 @@ export const SalePageComponent = props => {
 
   return (
     <Page
-      authInfoError={authInfoError}
       logoutError={logoutError}
       title={intl.formatMessage({ id: 'SalePage.title' }, { title: listingTitle })}
       scrollingDisabled={scrollingDisabled}
@@ -120,7 +118,6 @@ export const SalePageComponent = props => {
 };
 
 SalePageComponent.defaultProps = {
-  authInfoError: null,
   currentUser: null,
   fetchSaleError: null,
   acceptSaleError: null,
@@ -132,7 +129,6 @@ SalePageComponent.defaultProps = {
 const { bool, func, oneOf, shape, string } = PropTypes;
 
 SalePageComponent.propTypes = {
-  authInfoError: propTypes.error,
   currentUser: propTypes.currentUser,
   fetchSaleError: propTypes.error,
   acceptSaleError: propTypes.error,
@@ -158,14 +154,13 @@ const mapStateToProps = state => {
     declineInProgress,
     transactionRef,
   } = state.SalePage;
-  const { authInfoError, logoutError } = state.Auth;
+  const { logoutError } = state.Auth;
   const { currentUser } = state.user;
 
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
 
   return {
-    authInfoError,
     currentUser,
     fetchSaleError,
     acceptSaleError,

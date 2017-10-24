@@ -35,7 +35,6 @@ import css from './AuthenticationPage.css';
 
 export const AuthenticationPageComponent = props => {
   const {
-    authInfoError,
     authInProgress,
     currentUser,
     intl,
@@ -211,7 +210,6 @@ export const AuthenticationPageComponent = props => {
 
   return (
     <Page
-      authInfoError={authInfoError}
       logoutError={logoutError}
       title={schemaTitle}
       scrollingDisabled={scrollingDisabled}
@@ -239,7 +237,6 @@ export const AuthenticationPageComponent = props => {
 };
 
 AuthenticationPageComponent.defaultProps = {
-  authInfoError: null,
   currentUser: null,
   loginError: null,
   logoutError: null,
@@ -251,7 +248,6 @@ AuthenticationPageComponent.defaultProps = {
 const { bool, func, object, oneOf, shape } = PropTypes;
 
 AuthenticationPageComponent.propTypes = {
-  authInfoError: propTypes.error,
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   isAuthenticated: bool.isRequired,
@@ -275,10 +271,9 @@ AuthenticationPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { authInfoError, isAuthenticated, loginError, logoutError, signupError } = state.Auth;
+  const { isAuthenticated, loginError, logoutError, signupError } = state.Auth;
   const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
   return {
-    authInfoError,
     authInProgress: authenticationInProgress(state),
     currentUser,
     isAuthenticated,

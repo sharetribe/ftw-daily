@@ -144,7 +144,6 @@ export class SearchPageComponent extends Component {
 
   render() {
     const {
-      authInfoError,
       intl,
       listings,
       location,
@@ -271,7 +270,6 @@ export class SearchPageComponent extends Component {
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <Page
-        authInfoError={authInfoError}
         logoutError={logoutError}
         scrollingDisabled={scrollingDisabled}
         description={schemaDescription}
@@ -342,7 +340,6 @@ export class SearchPageComponent extends Component {
 }
 
 SearchPageComponent.defaultProps = {
-  authInfoError: null,
   listings: [],
   logoutError: null,
   mapListings: [],
@@ -355,7 +352,6 @@ SearchPageComponent.defaultProps = {
 const { array, bool, func, oneOf, object, shape, string } = PropTypes;
 
 SearchPageComponent.propTypes = {
-  authInfoError: propTypes.error,
   listings: array,
   mapListings: array,
   logoutError: propTypes.error,
@@ -389,7 +385,7 @@ const mapStateToProps = state => {
     searchParams,
     searchMapListingIds,
   } = state.SearchPage;
-  const { authInfoError, logoutError } = state.Auth;
+  const { logoutError } = state.Auth;
   const pageListings = getListingsById(state, currentPageResultIds);
   const mapListings = getListingsById(
     state,
@@ -397,7 +393,6 @@ const mapStateToProps = state => {
   );
 
   return {
-    authInfoError,
     listings: pageListings,
     logoutError,
     mapListings,

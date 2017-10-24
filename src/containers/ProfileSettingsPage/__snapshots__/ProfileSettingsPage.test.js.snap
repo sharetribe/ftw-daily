@@ -2,7 +2,6 @@
 
 exports[`ContactDetailsPage matches snapshot 1`] = `
 <Page
-  authInfoError={null}
   logoutError={null}
   scrollingDisabled={false}
   title="Profile settings"

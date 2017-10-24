@@ -46,7 +46,6 @@ export class ManageListingsPageComponent extends Component {
 
   render() {
     const {
-      authInfoError,
       closingListing,
       closingListingError,
       listings,
@@ -114,12 +113,7 @@ export class ManageListingsPageComponent extends Component {
     const openingErrorListingId = !!openingListingError && openingListingError.listingId;
 
     return (
-      <Page
-        authInfoError={authInfoError}
-        logoutError={logoutError}
-        scrollingDisabled={scrollingDisabled}
-        title="Manage listings"
-      >
+      <Page logoutError={logoutError} scrollingDisabled={scrollingDisabled} title="Manage listings">
         <LayoutSingleColumn>
           <LayoutWrapperTopbar>
             <TopbarContainer currentPage="ManageListingsPage" />
@@ -159,7 +153,6 @@ export class ManageListingsPageComponent extends Component {
 }
 
 ManageListingsPageComponent.defaultProps = {
-  authInfoError: null,
   listings: [],
   logoutError: null,
   pagination: null,
@@ -174,7 +167,6 @@ ManageListingsPageComponent.defaultProps = {
 const { arrayOf, bool, func, object, shape, string } = PropTypes;
 
 ManageListingsPageComponent.propTypes = {
-  authInfoError: propTypes.error,
   closingListing: shape({ uuid: string.isRequired }),
   closingListingError: shape({
     listingId: propTypes.uuid.isRequired,
@@ -209,10 +201,9 @@ const mapStateToProps = state => {
     closingListingError,
   } = state.ManageListingsPage;
   const listings = getListingsById(state, currentPageResultIds);
-  // Page needs authInfoError and logoutError
-  const { authInfoError, logoutError } = state.Auth;
+  // Page needs logoutError
+  const { logoutError } = state.Auth;
   return {
-    authInfoError,
     currentPageResultIds,
     listings,
     logoutError,

@@ -2,13 +2,12 @@ import { clearCurrentUser, fetchCurrentUser } from './user.duck';
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
 
-const authenticated = authInfo => authInfo.grantType === 'refresh_token';
+const authenticated = authInfo => authInfo && authInfo.grantType === 'refresh_token';
 
 // ================ Action types ================ //
 
 export const AUTH_INFO_REQUEST = 'app/Auth/AUTH_INFO_REQUEST';
 export const AUTH_INFO_SUCCESS = 'app/Auth/AUTH_INFO_SUCCESS';
-export const AUTH_INFO_ERROR = 'app/Auth/AUTH_INFO_ERROR';
 
 export const LOGIN_REQUEST = 'app/Auth/LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'app/Auth/LOGIN_SUCCESS';
@@ -33,7 +32,6 @@ const initialState = {
 
   // auth info
   authInfoLoaded: false,
-  authInfoError: null,
 
   // login
   loginError: null,
@@ -52,12 +50,9 @@ export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case AUTH_INFO_REQUEST:
-      return { ...state, authInfoError: null };
+      return state;
     case AUTH_INFO_SUCCESS:
       return { ...state, authInfoLoaded: true, isAuthenticated: authenticated(payload) };
-    case AUTH_INFO_ERROR:
-      console.error(payload); // eslint-disable-line
-      return { ...state, authInfoLoaded: true, authInfoError: payload };
 
     case LOGIN_REQUEST:
       return {
@@ -102,7 +97,6 @@ export const authenticationInProgress = state => {
 
 export const authInfoRequest = () => ({ type: AUTH_INFO_REQUEST });
 export const authInfoSuccess = info => ({ type: AUTH_INFO_SUCCESS, payload: info });
-export const authInfoError = error => ({ type: AUTH_INFO_ERROR, payload: error, error: true });
 
 export const loginRequest = () => ({ type: LOGIN_REQUEST });
 export const loginSuccess = () => ({ type: LOGIN_SUCCESS });
@@ -125,7 +119,15 @@ export const authInfo = () => (dispatch, getState, sdk) => {
   return sdk
     .authInfo()
     .then(info => dispatch(authInfoSuccess(info)))
-    .catch(e => dispatch(authInfoError(storableError(e))));
+    .catch(e => {
+      // Requesting auth info just reads the token from the token
+      // store (i.e. cookies), and should not fail in normal
+      // circumstances. If it fails, it's due to a programming
+      // error. In that case we mark the operation done and dispatch
+      // `null` success action that marks the user as unauthenticated.
+      log.error(e, 'auth-info-failed');
+      dispatch(authInfoSuccess(null));
+    });
 };
 
 export const login = (username, password) => (dispatch, getState, sdk) => {

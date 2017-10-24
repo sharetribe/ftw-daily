@@ -23,7 +23,6 @@ import css from './PasswordChangePage.css';
 
 export const PasswordChangePageComponent = props => {
   const {
-    authInfoError,
     changePasswordError,
     changePasswordInProgress,
     currentUser,
@@ -65,12 +64,7 @@ export const PasswordChangePageComponent = props => {
     ) : null;
 
   return (
-    <Page
-      authInfoError={authInfoError}
-      logoutError={logoutError}
-      title="Contact details"
-      scrollingDisabled={scrollingDisabled}
-    >
+    <Page logoutError={logoutError} title="Contact details" scrollingDisabled={scrollingDisabled}>
       <LayoutSideNavigation>
         <LayoutWrapperTopbar>
           <TopbarContainer
@@ -100,7 +94,6 @@ export const PasswordChangePageComponent = props => {
 };
 
 PasswordChangePageComponent.defaultProps = {
-  authInfoError: null,
   changePasswordError: null,
   currentUser: null,
   logoutError: null,
@@ -109,7 +102,6 @@ PasswordChangePageComponent.defaultProps = {
 const { bool, func } = PropTypes;
 
 PasswordChangePageComponent.propTypes = {
-  authInfoError: propTypes.error,
   changePasswordError: propTypes.error,
   changePasswordInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
@@ -121,8 +113,8 @@ PasswordChangePageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // Page needs authInfoError and logoutError
-  const { authInfoError, logoutError } = state.Auth;
+  // Page needs logoutError
+  const { logoutError } = state.Auth;
   // Topbar needs user info.
   const {
     changePasswordError,
@@ -131,7 +123,6 @@ const mapStateToProps = state => {
   } = state.PasswordChangePage;
   const { currentUser } = state.user;
   return {
-    authInfoError,
     changePasswordError,
     changePasswordInProgress,
     currentUser,

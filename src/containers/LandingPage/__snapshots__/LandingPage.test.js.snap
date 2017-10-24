@@ -2,7 +2,6 @@
 
 exports[`LandingPage matches snapshot 1`] = `
 <Page
-  authInfoError={null}
   contentType="website"
   description="LandingPage.schemaDescription"
   facebookImages={

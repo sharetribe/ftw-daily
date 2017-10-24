@@ -3,7 +3,6 @@ import { clearCurrentUser, currentUserShowRequest, currentUserShowSuccess } from
 import reducer, {
   authenticationInProgress,
   authInfoSuccess,
-  authInfoError,
   login,
   loginRequest,
   loginSuccess,
@@ -51,7 +50,6 @@ describe('Auth duck', () => {
       const state = reducer();
       expect(state.isAuthenticated).toEqual(false);
       expect(state.authInfoLoaded).toEqual(false);
-      expect(state.authInfoError).toBeNull();
       expect(state.loginError).toBeNull();
       expect(state.logoutError).toBeNull();
       expect(state.signupError).toBeNull();
@@ -165,7 +163,6 @@ describe('Auth duck', () => {
       const state = reducer(initialState, authInfoSuccess(authInfoLoggedOut));
       expect(state.authInfoLoaded).toEqual(true);
       expect(state.isAuthenticated).toEqual(false);
-      expect(state.authInfoError).toBeNull();
     });
 
     it('should set initial state for anonymous users', () => {
@@ -175,7 +172,6 @@ describe('Auth duck', () => {
       const state = reducer(initialState, authInfoSuccess(authInfoAnonymous));
       expect(state.authInfoLoaded).toEqual(true);
       expect(state.isAuthenticated).toEqual(false);
-      expect(state.authInfoError).toBeNull();
     });
 
     it('should set initial state for unauthenticated users', () => {
@@ -185,7 +181,6 @@ describe('Auth duck', () => {
       const state = reducer(initialState, authInfoSuccess(authInfoLoggedIn));
       expect(state.authInfoLoaded).toEqual(true);
       expect(state.isAuthenticated).toEqual(true);
-      expect(state.authInfoError).toBeNull();
     });
   });
 

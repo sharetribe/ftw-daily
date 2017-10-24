@@ -43,7 +43,6 @@ const formatRequestData = values => {
 // N.B. All the presentational content needs to be extracted to their own components
 export const EditListingPageComponent = props => {
   const {
-    authInfoError,
     currentUser,
     createStripeAccountError,
     fetchInProgress,
@@ -116,12 +115,7 @@ export const EditListingPageComponent = props => {
       : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
 
     return (
-      <Page
-        authInfoError={authInfoError}
-        logoutError={logoutError}
-        title={title}
-        scrollingDisabled={scrollingDisabled}
-      >
+      <Page logoutError={logoutError} title={title} scrollingDisabled={scrollingDisabled}>
         <TopbarContainer
           className={css.topbar}
           mobileRootClassName={css.mobileTopbar}
@@ -166,7 +160,6 @@ export const EditListingPageComponent = props => {
 };
 
 EditListingPageComponent.defaultProps = {
-  authInfoError: null,
   createStripeAccountError: null,
   currentUser: null,
   currentUserHasOrders: null,
@@ -180,7 +173,6 @@ EditListingPageComponent.defaultProps = {
 const { bool, func, object, shape, string, oneOf } = PropTypes;
 
 EditListingPageComponent.propTypes = {
-  authInfoError: propTypes.error,
   createStripeAccountError: propTypes.error,
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
@@ -217,7 +209,7 @@ EditListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const page = state.EditListingPage;
-  const { authInfoError, logoutError } = state.Auth;
+  const { logoutError } = state.Auth;
   const { createStripeAccountInProgress, createStripeAccountError, currentUser } = state.user;
 
   const fetchInProgress = createStripeAccountInProgress;
@@ -227,7 +219,6 @@ const mapStateToProps = state => {
     return listings.length === 1 ? listings[0] : null;
   };
   return {
-    authInfoError,
     createStripeAccountError,
     currentUser,
     fetchInProgress,
