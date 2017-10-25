@@ -24,6 +24,7 @@ import { authInfo } from './ducks/Auth.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
 import routeConfiguration from './routeConfiguration';
 import * as log from './util/log';
+import { LoggingAnalyticsHandler, GoogleAnalyticsHandler } from './analytics/handlers';
 
 import './marketplaceIndex.css';
 
@@ -53,6 +54,22 @@ const setupStripe = () => {
   window.Stripe.setPublishableKey(config.stripe.publishableKey);
 };
 
+const setupAnalyticsHandlers = () => {
+  let handlers = [];
+
+  // Log analytics page views and events in dev mode
+  if (config.dev) {
+    handlers.push(new LoggingAnalyticsHandler());
+  }
+
+  // Add Google Analytics handler if tracker ID is found
+  if (process.env.REACT_APP_GOOGLE_ANALYTICS_ID) {
+    handlers.push(new GoogleAnalyticsHandler(window.ga));
+  }
+
+  return handlers;
+};
+
 // If we're in a browser already, render the client application.
 if (typeof window !== 'undefined') {
   // set up logger with Sentry DSN client key and environment
@@ -74,7 +91,8 @@ if (typeof window !== 'undefined') {
       },
     ],
   });
-  const store = configureStore(sdk, initialState);
+  const analyticsHandlers = setupAnalyticsHandlers();
+  const store = configureStore(initialState, sdk, analyticsHandlers);
 
   setupStripe();
   render(store);
