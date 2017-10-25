@@ -108,6 +108,23 @@ exports.render = function(requestUrl, context, preloadedState) {
       <script>window.__PRELOADED_STATE__ = ${JSON.stringify(serializedState)};</script>
   `;
 
+  // We want to precicely control where the analytics script is
+  // injected in the HTML file so we can catch all events as early as
+  // possible. This is why we inject the GA script separately from
+  // react-helmet. This script also ensures that all the GA scripts
+  // are added only when the proper env var is present.
+  //
+  // See: https://developers.google.com/analytics/devguides/collection/analyticsjs/#alternative_async_tracking_snippet
+  const googleAnalyticsScript = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
+    ? `
+        <script>
+          window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+          ga('create', '${process.env.REACT_APP_GOOGLE_ANALYTICS_ID}', 'auto');
+        </script>
+        <script async src="https://www.google-analytics.com/analytics.js"></script>
+        `
+    : '';
+
   return template({
     htmlAttributes: head.htmlAttributes.toString(),
     title: head.title.toString(),
@@ -115,6 +132,7 @@ exports.render = function(requestUrl, context, preloadedState) {
     meta: head.meta.toString(),
     script: head.script.toString(),
     preloadedStateScript,
+    googleAnalyticsScript,
     body,
   });
 };
