@@ -274,8 +274,8 @@ describe('Auth duck', () => {
         expect(sdk.logout.mock.calls.length).toEqual(1);
         expect(dispatch.mock.calls).toEqual([
           [logoutRequest()],
-          [clearCurrentUser()],
           [logoutSuccess()],
+          [clearCurrentUser()],
           [userLogout()],
         ]);
       });
