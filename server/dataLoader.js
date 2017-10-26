@@ -6,7 +6,7 @@ exports.loadData = function(requestUrl, sdk) {
   const { pathname, query } = url.parse(requestUrl);
   const matchedRoutes = matchPathname(pathname, routeConfiguration());
 
-  const store = configureStore(sdk);
+  const store = configureStore({}, sdk);
 
   const dataLoadingCalls = matchedRoutes.reduce((calls, match) => {
     const { route, params } = match;

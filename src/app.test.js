@@ -7,7 +7,7 @@ import { ClientApp, ServerApp } from './app';
 import configureStore from './store';
 
 const render = (url, context) => {
-  const store = configureStore({});
+  const store = configureStore();
   const body = ReactDOMServer.renderToString(
     <ServerApp url={url} context={context} store={store} />
   );
@@ -18,7 +18,7 @@ const render = (url, context) => {
 describe('Application', () => {
   it('renders in the client without crashing', () => {
     window.google = { maps: {} };
-    const store = configureStore({});
+    const store = configureStore();
     const div = document.createElement('div');
     ReactDOM.render(<ClientApp store={store} />, div);
     delete window.google;
