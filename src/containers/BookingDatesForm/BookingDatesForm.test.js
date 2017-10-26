@@ -28,7 +28,7 @@ describe('BookingDatesForm', () => {
     );
     expect(tree).toMatchSnapshot();
   });
-  it('matches snapshot with selected dates', () => {
+  it('matches selected dates', () => {
     const price = new Money(1099, 'USD');
     const startDate = new Date(Date.UTC(2017, 3, 14));
     const endDate = new Date(Date.UTC(2017, 3, 16));
@@ -58,6 +58,7 @@ describe('BookingDatesForm', () => {
         unitPrice: price,
         quantity: new Decimal(2),
         lineTotal: new Money(2198, 'USD'),
+        reversal: false,
       },
     ]);
   });
