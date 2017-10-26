@@ -10,6 +10,7 @@ import config from '../../config';
 import {
   Page,
   SectionHero,
+  SectionLocations,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
@@ -59,6 +60,7 @@ export const LandingPageComponent = props => {
           <div className={css.heroContainer}>
             <SectionHero className={css.hero} history={history} location={location} />
           </div>
+          <SectionLocations />
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
           <Footer />
