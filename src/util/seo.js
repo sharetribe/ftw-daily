@@ -1,7 +1,5 @@
 import config from '../config';
 
-export const canonicalURL = path => `${config.canonicalRootURL}${path}`;
-
 const ensureOpenGraphLocale = locale => {
   switch (locale) {
     case 'en':

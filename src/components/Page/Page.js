@@ -4,8 +4,10 @@ import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import routeConfiguration from '../../routeConfiguration';
 import config from '../../config';
-import { canonicalURL, metaTagProps } from '../../util/seo';
+import { metaTagProps } from '../../util/seo';
+import { canonicalRoutePath } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
@@ -55,7 +57,7 @@ class PageComponent extends Component {
       className,
       rootClassName,
       children,
-      history,
+      location,
       intl,
       logoutError,
       scrollingDisabled,
@@ -69,7 +71,6 @@ class PageComponent extends Component {
       title,
       twitterHandle,
       twitterImages,
-      canonicalPath,
       updated,
     } = this.props;
 
@@ -85,10 +86,10 @@ class PageComponent extends Component {
       [css.scrollingDisabled]: scrollingDisabled,
     });
 
-    const { pathname, search = '' } = history.location;
-    const pathWithSearch = `${pathname}${search}`;
-
     const canonicalRootURL = config.canonicalRootURL;
+    const canonicalPath = canonicalRoutePath(routeConfiguration(), location);
+    const canonicalUrl = `${canonicalRootURL}${canonicalPath}`;
+
     const siteTitle = config.siteTitle;
     const schemaTitle = intl.formatMessage({ id: 'Page.schemaTitle' }, { siteTitle });
     const schemaDescription = intl.formatMessage({ id: 'Page.schemaDescription' });
@@ -122,7 +123,7 @@ class PageComponent extends Component {
       title: metaTitle,
       twitterHandle,
       updated,
-      url: canonicalURL(pathWithSearch),
+      url: canonicalUrl,
       locale: intl.locale,
     });
 
@@ -174,7 +175,7 @@ class PageComponent extends Component {
           }}
         >
           <title>{title}</title>
-          <link rel="canonical" href={canonicalURL(canonicalPath || pathWithSearch)} />
+          <link rel="canonical" href={canonicalUrl} />
           <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
           <meta httpEquiv="Content-Language" content={intl.locale} />
           {metaTags}
@@ -204,7 +205,6 @@ PageComponent.defaultProps = {
   description: null,
   facebookImages: null,
   twitterImages: null,
-  canonicalPath: null,
   published: null,
   schema: null,
   tags: null,
@@ -243,12 +243,12 @@ PageComponent.propTypes = {
   title: string.isRequired, // page title
   twitterHandle: string, // twitter handle
   updated: string, // article:modified_time
-  canonicalPath: string, // link rel=canonical
 
   // from withRouter
   history: shape({
     listen: func.isRequired,
   }).isRequired,
+  location: object.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,

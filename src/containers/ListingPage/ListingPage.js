@@ -330,14 +330,6 @@ export class ListingPageComponent extends Component {
       { title, price: formattedPrice, siteTitle }
     );
 
-    const canonicalPath = createResourceLocatorString(
-      'ListingPageCanonical',
-      routeConfiguration(),
-      {
-        id: listingId.uuid,
-      }
-    );
-
     return (
       <Page
         logoutError={logoutError}
@@ -348,7 +340,6 @@ export class ListingPageComponent extends Component {
         description={description}
         facebookImages={facebookImages}
         twitterImages={twitterImages}
-        canonicalPath={canonicalPath}
         schema={{
           '@context': 'http://schema.org',
           '@type': 'ItemPage',
