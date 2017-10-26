@@ -111,4 +111,52 @@ describe('BookingBreakdown', () => {
     );
     expect(tree).toMatchSnapshot();
   });
+  it('provider canceled transaction data matches snapshot', () => {
+    const tree = renderDeep(
+      <BookingBreakdownComponent
+        userRole="provider"
+        transaction={exampleTransaction({
+          lastTransition: propTypes.TX_TRANSITION_CANCEL,
+          payinTotal: new Money(0, 'USD'),
+          payoutTotal: new Money(0, 'USD'),
+          lineItems: [
+            {
+              code: 'line-item/night',
+              quantity: new Decimal(2),
+              lineTotal: new Money(2000, 'USD'),
+              unitPrice: new Money(1000, 'USD'),
+              reversal: false,
+            },
+            {
+              code: 'line-item/night',
+              quantity: new Decimal(-2),
+              lineTotal: new Money(-2000, 'USD'),
+              unitPrice: new Money(1000, 'USD'),
+              reversal: true,
+            },
+            {
+              code: 'line-item/provider-commission',
+              quantity: new Decimal(1),
+              lineTotal: new Money(-200, 'USD'),
+              unitPrice: new Money(-200, 'USD'),
+              reversal: false,
+            },
+            {
+              code: 'line-item/provider-commission',
+              quantity: new Decimal(-1),
+              lineTotal: new Money(200, 'USD'),
+              unitPrice: new Money(-200, 'USD'),
+              reversal: true,
+            },
+          ],
+        })}
+        booking={createBooking('example-booking', {
+          start: new Date(Date.UTC(2017, 3, 14)),
+          end: new Date(Date.UTC(2017, 3, 16)),
+        })}
+        intl={fakeIntl}
+      />
+    );
+    expect(tree).toMatchSnapshot();
+  });
 });
