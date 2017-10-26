@@ -8,6 +8,8 @@ import { NamedRedirect } from './components';
 import { locationChanged } from './ducks/Routing.duck';
 import * as propTypes from './util/propTypes';
 import * as log from './util/log';
+import { canonicalRouteUrl } from './util/routes';
+import routeConfiguration from './routeConfiguration';
 
 const { arrayOf, bool, object, func, shape, string } = PropTypes;
 
@@ -36,9 +38,8 @@ const callLoadData = props => {
 };
 
 const handleLocationChanged = (dispatch, location) => {
-  const { pathname, search, hash } = location;
-  const canonicalUrl = `${pathname}${search}${hash}`;
-  dispatch(locationChanged(location, canonicalUrl));
+  const url = canonicalRouteUrl(routeConfiguration(), location);
+  dispatch(locationChanged(location, url));
 };
 
 class RouteComponentRenderer extends Component {

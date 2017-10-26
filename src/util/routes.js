@@ -88,3 +88,32 @@ export const findRouteByRouteName = (nameToFind, routes) => {
   }
   return route;
 };
+
+/**
+ * Get the canonical URL from the given location
+ *
+ * @param {Array<{ route }>} routes - Route configuration as flat array
+ * @param {Object} location - location object from React Router
+ *
+ * @return {String} Canonical URL of the given location
+ *
+ */
+export const canonicalRouteUrl = (routes, location) => {
+  const { pathname, search, hash } = location;
+
+  const matches = matchPathname(pathname, routes);
+  const isListingRoute = matches.length === 1 && matches[0].route.name === 'ListingPage';
+
+  if (isListingRoute) {
+    // Remove the dynamic slug from the listing page canonical URL
+
+    const parts = pathname.split('/');
+    if (parts.length !== 4) {
+      throw new Error('Expecting ListingPage pathname to have 4 parts');
+    }
+    const canonicalListingPathname = `/${parts[1]}/${parts[3]}`;
+    return `${canonicalListingPathname}${search}${hash}`;
+  }
+
+  return `${pathname}${search}${hash}`;
+};

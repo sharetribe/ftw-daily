@@ -4,7 +4,7 @@ import { RoutesProvider } from '../components';
 import routeConfiguration from '../routeConfiguration';
 import { renderDeep, renderShallow } from './test-helpers';
 import * as propTypes from './propTypes';
-import { createResourceLocatorString, findRouteByRouteName } from './routes';
+import { createResourceLocatorString, findRouteByRouteName, canonicalRouteUrl } from './routes';
 
 const { arrayOf } = PropTypes;
 
@@ -65,6 +65,69 @@ describe('util/routes.js', () => {
     it('should throw exception for non-existing route (BlaaBlaaPage)', () => {
       expect(() => findRouteByRouteName('BlaaBlaaPage', routes)).toThrowError(
         'Component "BlaaBlaaPage" was not found.'
+      );
+    });
+  });
+
+  describe('canonicalRouteUrl', () => {
+    it('handles non-listing route', () => {
+      const routes = routeConfiguration();
+      const location = {
+        pathname: '/',
+        search: '?some=value',
+        hash: '#and-some-hash',
+      };
+      expect(canonicalRouteUrl(routes, location)).toEqual('/?some=value#and-some-hash');
+    });
+    it('handles ListingPage', () => {
+      const routes = routeConfiguration();
+      const location = {
+        pathname: '/l/some-slug-here/00000000-0000-0000-0000-000000000000',
+        search: '',
+        hash: '',
+      };
+      expect(canonicalRouteUrl(routes, location)).toEqual(
+        '/l/00000000-0000-0000-0000-000000000000'
+      );
+    });
+    it('handles ListingBasePage', () => {
+      const routes = routeConfiguration();
+      const location = {
+        pathname: '/l',
+        search: '',
+        hash: '',
+      };
+      expect(canonicalRouteUrl(routes, location)).toEqual('/l');
+    });
+    it('handles CheckoutPage', () => {
+      const routes = routeConfiguration();
+      const location = {
+        pathname: '/l/some-slug-here/00000000-0000-0000-0000-000000000000/checkout',
+        search: '',
+        hash: '',
+      };
+      expect(canonicalRouteUrl(routes, location)).toEqual(
+        '/l/some-slug-here/00000000-0000-0000-0000-000000000000/checkout'
+      );
+    });
+    it('handles NewListingPage', () => {
+      const routes = routeConfiguration();
+      const location = {
+        pathname: '/l/new',
+        search: '',
+        hash: '',
+      };
+      expect(canonicalRouteUrl(routes, location)).toEqual('/l/new');
+    });
+    it('handles ListingPageCanonical', () => {
+      const routes = routeConfiguration();
+      const location = {
+        pathname: '/l/00000000-0000-0000-0000-000000000000',
+        search: '',
+        hash: '',
+      };
+      expect(canonicalRouteUrl(routes, location)).toEqual(
+        '/l/00000000-0000-0000-0000-000000000000'
       );
     });
   });
