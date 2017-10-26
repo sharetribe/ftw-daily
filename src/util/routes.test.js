@@ -4,7 +4,7 @@ import { RoutesProvider } from '../components';
 import routeConfiguration from '../routeConfiguration';
 import { renderDeep, renderShallow } from './test-helpers';
 import * as propTypes from './propTypes';
-import { createResourceLocatorString, findRouteByRouteName, canonicalRouteUrl } from './routes';
+import { createResourceLocatorString, findRouteByRouteName, canonicalRoutePath } from './routes';
 
 const { arrayOf } = PropTypes;
 
@@ -69,7 +69,7 @@ describe('util/routes.js', () => {
     });
   });
 
-  describe('canonicalRouteUrl', () => {
+  describe('canonicalRoutePath', () => {
     it('handles non-listing route', () => {
       const routes = routeConfiguration();
       const location = {
@@ -77,7 +77,7 @@ describe('util/routes.js', () => {
         search: '?some=value',
         hash: '#and-some-hash',
       };
-      expect(canonicalRouteUrl(routes, location)).toEqual('/?some=value#and-some-hash');
+      expect(canonicalRoutePath(routes, location)).toEqual('/?some=value#and-some-hash');
     });
     it('handles ListingPage', () => {
       const routes = routeConfiguration();
@@ -86,7 +86,7 @@ describe('util/routes.js', () => {
         search: '',
         hash: '',
       };
-      expect(canonicalRouteUrl(routes, location)).toEqual(
+      expect(canonicalRoutePath(routes, location)).toEqual(
         '/l/00000000-0000-0000-0000-000000000000'
       );
     });
@@ -97,7 +97,7 @@ describe('util/routes.js', () => {
         search: '',
         hash: '',
       };
-      expect(canonicalRouteUrl(routes, location)).toEqual('/l');
+      expect(canonicalRoutePath(routes, location)).toEqual('/l');
     });
     it('handles CheckoutPage', () => {
       const routes = routeConfiguration();
@@ -106,7 +106,7 @@ describe('util/routes.js', () => {
         search: '',
         hash: '',
       };
-      expect(canonicalRouteUrl(routes, location)).toEqual(
+      expect(canonicalRoutePath(routes, location)).toEqual(
         '/l/some-slug-here/00000000-0000-0000-0000-000000000000/checkout'
       );
     });
@@ -117,7 +117,7 @@ describe('util/routes.js', () => {
         search: '',
         hash: '',
       };
-      expect(canonicalRouteUrl(routes, location)).toEqual('/l/new');
+      expect(canonicalRoutePath(routes, location)).toEqual('/l/new');
     });
     it('handles ListingPageCanonical', () => {
       const routes = routeConfiguration();
@@ -126,7 +126,7 @@ describe('util/routes.js', () => {
         search: '',
         hash: '',
       };
-      expect(canonicalRouteUrl(routes, location)).toEqual(
+      expect(canonicalRoutePath(routes, location)).toEqual(
         '/l/00000000-0000-0000-0000-000000000000'
       );
     });

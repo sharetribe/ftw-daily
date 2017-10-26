@@ -98,7 +98,7 @@ export const findRouteByRouteName = (nameToFind, routes) => {
  * @return {String} Canonical URL of the given location
  *
  */
-export const canonicalRouteUrl = (routes, location) => {
+export const canonicalRoutePath = (routes, location) => {
   const { pathname, search, hash } = location;
 
   const matches = matchPathname(pathname, routes);
