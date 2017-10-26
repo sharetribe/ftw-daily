@@ -14,3 +14,4 @@ Documentation for specific topics can be found in the following files:
  - [Error logging with Sentry](sentry.md)
  - [CI](ci.md)
  - [Static pages](static-pages.md)
+ - [Analytics](analytics.md)

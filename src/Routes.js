@@ -5,8 +5,11 @@ import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { NotFoundPage } from './containers';
 import { NamedRedirect } from './components';
+import { locationChanged } from './ducks/Routing.duck';
 import * as propTypes from './util/propTypes';
 import * as log from './util/log';
+import { canonicalRoutePath } from './util/routes';
+import routeConfiguration from './routeConfiguration';
 
 const { arrayOf, bool, object, func, shape, string } = PropTypes;
 
@@ -34,10 +37,16 @@ const callLoadData = props => {
   }
 };
 
+const handleLocationChanged = (dispatch, location) => {
+  const url = canonicalRoutePath(routeConfiguration(), location);
+  dispatch(locationChanged(location, url));
+};
+
 class RouteComponentRenderer extends Component {
   componentDidMount() {
     // Calling loadData on initial rendering (on client side).
     callLoadData(this.props);
+    handleLocationChanged(this.props.dispatch, this.props.location);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,6 +54,7 @@ class RouteComponentRenderer extends Component {
     // This makes it possible to use loadData as default client side data loading technique.
     // However it is better to fetch data before location change to avoid "Loading data" state.
     callLoadData(nextProps);
+    handleLocationChanged(nextProps.dispatch, nextProps.location);
   }
 
   render() {

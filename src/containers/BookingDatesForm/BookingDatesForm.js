@@ -49,6 +49,7 @@ const estimatedNightlyTransaction = (bookingStart, bookingEnd, unitPrice) => {
           unitPrice: unitPrice,
           quantity: new Decimal(nightCount),
           lineTotal: totalPrice,
+          reversal: false,
         },
       ],
     },

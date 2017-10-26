@@ -20,15 +20,21 @@ const noop = () => null;
 describe('ListingPage', () => {
   it('matches snapshot', () => {
     const currentUser = createCurrentUser('user-2');
-    const listing1 = createListing('listing1', {}, { author: createUser('user-1') });
+    const id = 'listing1';
+    const slug = 'listing1-title';
+    const listing1 = createListing(id, {}, { author: createUser('user-1') });
     const getListing = () => listing1;
 
     const props = {
-      location: { search: '' },
+      location: {
+        pathname: `/l/${slug}/${id}`,
+        search: '',
+        hash: '',
+      },
       history: {
         push: () => console.log('HistoryPush called'),
       },
-      params: { slug: 'listing1-title', id: 'listing1' },
+      params: { id, slug },
       currentUser,
       getListing: getListing,
       intl: fakeIntl,
