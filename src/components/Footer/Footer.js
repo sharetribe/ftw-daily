@@ -2,6 +2,7 @@ import React from 'react';
 import { string } from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import { twitterPageURL } from '../../util/urlHelpers';
 import config from '../../config';
 import {
   IconSocialMediaFacebook,
@@ -13,15 +14,6 @@ import {
 } from '../../components';
 
 import css from './Footer.css';
-
-const twitterPageURL = siteTwitterHandle => {
-  if (siteTwitterHandle && siteTwitterHandle.charAt(0) === '@') {
-    return `https://twitter.com/${siteTwitterHandle.substring(1)}`;
-  } else if (siteTwitterHandle) {
-    return `https://twitter.com/${siteTwitterHandle}`;
-  }
-  return null;
-};
 
 const renderSocialMediaLinks = intl => {
   const { siteFacebookPage, siteInstagramPage, siteTwitterHandle } = config;

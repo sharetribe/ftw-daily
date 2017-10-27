@@ -1,4 +1,6 @@
 import React from 'react';
+import config from '../../config';
+import { twitterPageURL } from '../../util/urlHelpers';
 import { StaticPage, TopbarContainer } from '../../containers';
 import {
   LayoutSingleColumn,
@@ -13,6 +15,8 @@ import css from './AboutPage.css';
 import image from './about-us.jpg';
 
 const AboutPage = () => {
+  const { siteTwitterHandle, siteFacebookPage } = config;
+  const siteTwitterPage = twitterPageURL(siteTwitterHandle);
   return (
     <StaticPage
       title="About Us"
@@ -60,7 +64,7 @@ const AboutPage = () => {
 
               <h3 id="contact">Get in touch</h3>
               <p>
-                We are happy to help you in anything you have in your mind.?Best way to reach us is
+                We are happy to help you in anything you have in your mind? Best way to reach us is
                 by emailing us at{' '}
                 <ExternalLink href="mailto:hello@saunatime.io?Subject=Hello%20friends">
                   hello@saunatime.io
@@ -68,10 +72,8 @@ const AboutPage = () => {
               </p>
               <p>
                 You can also checkout our{' '}
-                <ExternalLink href="https://www.facebook.com/Sharetribe/">
-                  Facebook
-                </ExternalLink>{' '}
-                and <ExternalLink href="https://twitter.com/sharetribe">Twitter</ExternalLink>.
+                <ExternalLink href={siteFacebookPage}>Facebook</ExternalLink> and{' '}
+                <ExternalLink href={siteTwitterPage}>Twitter</ExternalLink>.
               </p>
             </div>
           </div>
