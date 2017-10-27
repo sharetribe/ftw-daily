@@ -32,7 +32,7 @@ const AboutPage = () => {
           <TopbarContainer />
         </LayoutWrapperTopbar>
 
-        <LayoutWrapperMain>
+        <LayoutWrapperMain className={css.staticPageWrapper}>
           <h1 className={css.pageTitle}>It&#8217;s about Saunatime.</h1>
           <img className={css.coverImage} src={image} alt="My first ice cream." />
 

@@ -5,7 +5,16 @@
 
 .pageTitle {
   text-align: center;
+}
 
+.staticPageWrapper {
+  width: calc(100% - 48px);
+  max-width: 1056px;
+  margin: 72px auto;
+
+  @media (--viewportMedium) {
+    width: calc(100% - 72px);
+  }
 }
 
 .coverImage {
@@ -18,15 +27,28 @@
 
 .contentWrapper {
   display: flex;
+  flex-wrap: wrap;
+
+  @media (--viewportMedium) {
+    flex-wrap: nowrap;
+  }
+
 }
 
 .contentSide {
-  width: 193px;
-  margin-right: 103px;
-  margin-top: 8px;
+  font-style: italic;
+
+  @media (--viewportMedium) {
+    width: 193px;
+    margin-right: 103px;
+    margin-top: 8px;
+  }
 }
 
 .contentMain {
-  max-width: 650px;
   width: 90%;
+
+  @media (--viewportMedium) {
+    max-width: 650px;
+  }
 }

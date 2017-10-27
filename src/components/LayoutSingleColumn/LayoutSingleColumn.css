@@ -13,7 +13,4 @@
   /* Expand to the full remaining width of the viewport */
   display: flex;
   flex-direction: column;
-  width: calc(100% - 72px);
-  max-width: 1056px;
-  margin: 88px auto;
 }
