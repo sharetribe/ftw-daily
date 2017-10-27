@@ -61,8 +61,6 @@ export class ManageListingsPageComponent extends Component {
       scrollingDisabled,
     } = this.props;
 
-    // TODO Handle openingListingError, closingListingError,
-
     const hasPaginationInfo = !!pagination && pagination.totalItems != null;
     const listingsAreLoaded = !queryInProgress && hasPaginationInfo;
 
