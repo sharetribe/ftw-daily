@@ -151,15 +151,16 @@ export const logout = () => (dispatch, getState, sdk) => {
   }
   dispatch(logoutRequest());
 
-  // Not that the thunk does not reject when the logout fails, it
+  // Note that the thunk does not reject when the logout fails, it
   // just dispatches the logout error action.
   return sdk
     .logout()
-    .then(() => dispatch(clearCurrentUser()))
-    .then(() => dispatch(logoutSuccess()))
     .then(() => {
-      dispatch(userLogout());
+      // The order of the dispatched actions
+      dispatch(logoutSuccess());
+      dispatch(clearCurrentUser());
       log.clearUserId();
+      dispatch(userLogout());
     })
     .catch(e => dispatch(logoutError(storableError(e))));
 };
