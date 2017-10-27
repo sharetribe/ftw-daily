@@ -21,7 +21,7 @@
   width: 100%;
 
   @media (--viewportMedium) {
-    max-width: 1120px;
+    max-width: 1056px;
     margin: 0 auto;
   }
 }
@@ -59,7 +59,7 @@
 
 /* Desktop: logo and organization stuff */
 .organization {
-  flex-basis: 216px;
+  flex-basis: 220px;
   display: none;
   margin-right: 24px;
 
@@ -108,7 +108,7 @@
 /* Desktop and Mobile: links to more information */
 .infoLinks {
   order: 2;
-  flex-basis: 172px;
+  flex-basis: 165px;
 
   @media (--viewportMedium) {
     padding-top: 2px;
@@ -151,7 +151,7 @@
 /* Desktop and Mobile: searches - first column */
 .searches {
   order: 3;
-  flex-basis: 172px;
+  flex-basis: 165px;
   @media (--viewportMedium) {
     padding-top: 2px;
   }
@@ -162,7 +162,7 @@
 .searchesExtra {
   order: 4;
   display: none;
-  flex-basis: 172px;
+  flex-basis: 165px;
 
   @media (min-width: 550px) {
     display: block;
@@ -182,7 +182,7 @@
 .extraLinks {
   order: 5;
   display: none;
-  flex-basis: 172px;
+  flex-basis: 109px;
 
   @media (--viewportMedium) {
     display: flex;

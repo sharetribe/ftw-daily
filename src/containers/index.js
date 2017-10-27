@@ -1,3 +1,4 @@
+export { default as AboutPage } from './AboutPage/AboutPage';
 export { default as AuthenticationPage } from './AuthenticationPage/AuthenticationPage';
 export { default as BookingDatesForm } from './BookingDatesForm/BookingDatesForm';
 export { default as CheckoutPage } from './CheckoutPage/CheckoutPage';

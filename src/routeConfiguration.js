@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  AboutPage,
   AuthenticationPage,
   CheckoutPage,
   ContactDetailsPage,
@@ -39,7 +40,16 @@ const RedirectToLandingPage = () => <NamedRedirect name="LandingPage" />;
 // See behaviour from Routes.js where Route is created.
 const routeConfiguration = () => {
   return [
-    { path: '/', name: 'LandingPage', component: props => <LandingPage {...props} /> },
+    {
+      path: '/',
+      name: 'LandingPage',
+      component: props => <LandingPage {...props} />
+    },
+    {
+      path: '/about',
+      name: 'AboutPage',
+      component: AboutPage,
+    },
     {
       path: '/s',
       name: 'SearchPage',
