@@ -103,16 +103,28 @@ export const canonicalRoutePath = (routes, location) => {
 
   const matches = matchPathname(pathname, routes);
   const isListingRoute = matches.length === 1 && matches[0].route.name === 'ListingPage';
+  const isListingBookRoute = matches.length === 1 && matches[0].route.name === 'ListingPageBook';
 
   if (isListingRoute) {
     // Remove the dynamic slug from the listing page canonical URL
 
     const parts = pathname.split('/');
+
     if (parts.length !== 4) {
-      throw new Error('Expecting ListingPage pathname to have 4 parts');
+      throw new Error('Expected ListingPage route to have 4 parts');
     }
     const canonicalListingPathname = `/${parts[1]}/${parts[3]}`;
     return `${canonicalListingPathname}${search}${hash}`;
+  } else if (isListingBookRoute) {
+    // Remove the dynamic slug from the listing book page canonical URL
+
+    const parts = pathname.split('/');
+
+    if (parts.length !== 5) {
+      throw new Error('Expected ListingPageBook route to have 5 parts');
+    }
+    const canonicalListingBookPathname = `/${parts[1]}/${parts[3]}/${parts[4]}`;
+    return `${canonicalListingBookPathname}${search}${hash}`;
   }
 
   return `${pathname}${search}${hash}`;
