@@ -167,3 +167,19 @@ export const parse = (search, options = {}) => {
     return result;
   }, {});
 };
+
+/**
+ * Create Twitter page url from twitterHandle
+ *
+ * @param {String} twitterHandle - handle is used for generating Twitter page URL
+ *
+ * @return {String} twitterPageURL
+ */
+export const twitterPageURL = twitterHandle => {
+  if (twitterHandle && twitterHandle.charAt(0) === '@') {
+    return `https://twitter.com/${twitterHandle.substring(1)}`;
+  } else if (twitterHandle) {
+    return `https://twitter.com/${twitterHandle}`;
+  }
+  return null;
+};

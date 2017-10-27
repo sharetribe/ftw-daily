@@ -50,14 +50,12 @@ const AboutPage = () => {
     <StaticPage
       className={css.root}
       title="About"
-      schema={`
-        {
-          "@context": "http://schema.org",
-          "@type": "AboutPage",
-          "description": "Description of this page",
-          "name": "About page",
-        }
-      `}
+      schema={{
+        "@context": "http://schema.org",
+        "@type": "AboutPage",
+        "description": "Description of this page",
+        "name": "About page",
+      }}
     >
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
@@ -136,14 +134,12 @@ In the template above we are using StaticPage component with some attributes:
     <StaticPage
       className={css.root}
       title="About"
-      schema={`
-        {
-          "@context": "http://schema.org",
-          "@type": "AboutPage",
-          "description": "Description of this page",
-          "name": "About page",
-        }
-      `}
+      schema={{
+        "@context": "http://schema.org",
+        "@type": "AboutPage",
+        "description": "Description of this page",
+        "name": "About page",
+      }}
     >
 ```
 
