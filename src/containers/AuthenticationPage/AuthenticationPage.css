@@ -50,6 +50,18 @@
   text-align: left;
 }
 
+/* Terms of Service modal*/
+
+.termsWrapper {
+  width: 100%;
+  padding-top: 40px;
+
+  @media (--viewportMedium) {
+    width: 571px;
+    padding-top: 11px;
+  }
+}
+
 /* ================ Hide Top bar in screens smaller than 768px  ================ */
 
 .hideOnMobile {

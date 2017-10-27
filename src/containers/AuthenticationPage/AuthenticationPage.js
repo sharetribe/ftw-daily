@@ -247,7 +247,9 @@ export class AuthenticationPageComponent extends Component {
               onClose={() => this.setState({ tosModalOpen: false })}
               onManageDisableScrolling={onManageDisableScrolling}
             >
-              <TermsOfService />
+              <div className={css.termsWrapper}>
+                <TermsOfService />
+              </div>
             </Modal>
           </LayoutWrapperMain>
           <LayoutWrapperFooter>

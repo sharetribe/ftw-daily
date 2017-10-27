@@ -88,10 +88,12 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
         onClose={[Function]}
         onManageDisableScrolling={[Function]}
       >
-        <TermsOfService
-          className={null}
-          rootClassName={null}
-        />
+        <div>
+          <TermsOfService
+            className={null}
+            rootClassName={null}
+          />
+        </div>
       </InjectIntl(ModalComponent)>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
