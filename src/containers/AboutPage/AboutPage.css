@@ -1,8 +1,5 @@
 @import '../../marketplace.css';
 
-.root {
-}
-
 .pageTitle {
   text-align: center;
 }
@@ -32,7 +29,6 @@
   @media (--viewportMedium) {
     flex-wrap: nowrap;
   }
-
 }
 
 .contentSide {
