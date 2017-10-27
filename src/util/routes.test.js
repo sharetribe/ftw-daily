@@ -90,6 +90,17 @@ describe('util/routes.js', () => {
         '/l/00000000-0000-0000-0000-000000000000'
       );
     });
+    it('handles ListingPageBook', () => {
+      const routes = routeConfiguration();
+      const location = {
+        pathname: '/l/some-slug-here/00000000-0000-0000-0000-000000000000/book',
+        search: '',
+        hash: '',
+      };
+      expect(canonicalRoutePath(routes, location)).toEqual(
+        '/l/00000000-0000-0000-0000-000000000000/book'
+      );
+    });
     it('handles ListingBasePage', () => {
       const routes = routeConfiguration();
       const location = {

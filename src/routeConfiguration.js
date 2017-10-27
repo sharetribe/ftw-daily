@@ -39,7 +39,11 @@ const RedirectToLandingPage = () => <NamedRedirect name="LandingPage" />;
 // See behaviour from Routes.js where Route is created.
 const routeConfiguration = () => {
   return [
-    { path: '/', name: 'LandingPage', component: props => <LandingPage {...props} /> },
+    {
+      path: '/',
+      name: 'LandingPage',
+      component: props => <LandingPage {...props} />,
+    },
     {
       path: '/s',
       name: 'SearchPage',
@@ -77,7 +81,7 @@ const routeConfiguration = () => {
     },
     {
       path: '/l/:slug/:id/book',
-      name: 'ListingPage',
+      name: 'ListingPageBook',
       component: props => <ListingPage {...props} tab="book" />,
       loadData: ListingPage.loadData,
     },
