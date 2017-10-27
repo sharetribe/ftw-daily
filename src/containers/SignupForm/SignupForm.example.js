@@ -7,6 +7,9 @@ export const Empty = {
     onSubmit(values) {
       console.log('sign up with form values:', values);
     },
+    onOpenTermsOfService() {
+      console.log('open terms of service');
+    },
   },
   group: 'forms',
 };

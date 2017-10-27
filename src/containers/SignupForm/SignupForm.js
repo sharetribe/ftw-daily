@@ -9,6 +9,8 @@ import * as validators from '../../util/validators';
 
 import css from './SignupForm.css';
 
+const KEY_CODE_ENTER = 13;
+
 const SignupFormComponent = props => {
   const {
     rootClassName,
@@ -19,6 +21,7 @@ const SignupFormComponent = props => {
     inProgress,
     invalid,
     intl,
+    onOpenTermsOfService,
   } = props;
 
   // email
@@ -102,6 +105,24 @@ const SignupFormComponent = props => {
   const submitInProgress = submitting || inProgress;
   const submitDisabled = invalid || submitInProgress;
 
+  const handleTermsKeyUp = e => {
+    // Allow click action with keyboard like with normal links
+    if (e.keyCode === KEY_CODE_ENTER) {
+      onOpenTermsOfService();
+    }
+  };
+  const termsLink = (
+    <span
+      className={css.termsLink}
+      onClick={onOpenTermsOfService}
+      role="button"
+      tabIndex="0"
+      onKeyUp={handleTermsKeyUp}
+    >
+      <FormattedMessage id="SignupForm.termsAndConditionsLinkText" />
+    </span>
+  );
+
   return (
     <Form className={classes} onSubmit={handleSubmit}>
       <div>
@@ -145,6 +166,11 @@ const SignupFormComponent = props => {
       </div>
 
       <div className={css.bottomWrapper}>
+        <p className={css.bottomWrapperText}>
+          <span className={css.termsText}>
+            <FormattedMessage id="SignupForm.termsAndConditionsAcceptText" values={{ termsLink }} />
+          </span>
+        </p>
         <PrimaryButton
           className={css.submitButton}
           type="submit"
@@ -160,11 +186,15 @@ const SignupFormComponent = props => {
 
 SignupFormComponent.defaultProps = { inProgress: false };
 
-const { bool } = PropTypes;
+const { bool, func } = PropTypes;
 
 SignupFormComponent.propTypes = {
   ...formPropTypes,
   inProgress: bool,
+
+  onOpenTermsOfService: func.isRequired,
+
+  // from injectIntl
   intl: intlShape.isRequired,
 };
 
