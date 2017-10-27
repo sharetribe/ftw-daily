@@ -25,15 +25,22 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
+  Modal,
+  TermsOfService,
 } from '../../components';
 import { LoginForm, SignupForm, TopbarContainer } from '../../containers';
 import { login, authenticationInProgress, signup } from '../../ducks/Auth.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { sendVerificationEmail } from '../../ducks/user.duck';
+import { manageDisableScrolling } from '../../ducks/UI.duck';
 
 import css from './AuthenticationPage.css';
 
 export class AuthenticationPageComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { tosModalOpen: false };
+  }
   render() {
     const {
       authInProgress,
@@ -51,6 +58,7 @@ export class AuthenticationPageComponent extends Component {
       sendVerificationEmailInProgress,
       sendVerificationEmailError,
       onResendVerificationEmail,
+      onManageDisableScrolling,
     } = this.props;
     const isLogin = tab === 'login';
     const from = location.state && location.state.from ? location.state.from : null;
@@ -138,7 +146,12 @@ export class AuthenticationPageComponent extends Component {
         {isLogin ? (
           <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
         ) : (
-          <SignupForm className={css.form} onSubmit={submitSignup} inProgress={authInProgress} />
+          <SignupForm
+            className={css.form}
+            onSubmit={submitSignup}
+            inProgress={authInProgress}
+            onOpenTermsOfService={() => this.setState({ tosModalOpen: true })}
+          />
         )}
       </div>
     );
@@ -228,6 +241,14 @@ export class AuthenticationPageComponent extends Component {
             <div className={css.root}>
               {showEmailVerification ? emailVerificationContent : formContent}
             </div>
+            <Modal
+              id="AuthenticationPage.tos"
+              isOpen={this.state.tosModalOpen}
+              onClose={() => this.setState({ tosModalOpen: false })}
+              onManageDisableScrolling={onManageDisableScrolling}
+            >
+              <TermsOfService />
+            </Modal>
           </LayoutWrapperMain>
           <LayoutWrapperFooter>
             <Footer />
@@ -264,6 +285,7 @@ AuthenticationPageComponent.propTypes = {
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: propTypes.error,
   onResendVerificationEmail: func.isRequired,
+  onManageDisableScrolling: func.isRequired,
 
   // from withRouter
   location: shape({ state: object }).isRequired,
@@ -292,6 +314,8 @@ const mapDispatchToProps = dispatch => ({
   submitLogin: ({ email, password }) => dispatch(login(email, password)),
   submitSignup: params => dispatch(signup(params)),
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
+  onManageDisableScrolling: (componentId, disableScrolling) =>
+    dispatch(manageDisableScrolling(componentId, disableScrolling)),
 });
 
 // Note: it is important that the withRouter HOC is **outside** the

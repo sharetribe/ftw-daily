@@ -82,6 +82,17 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
           />
         </div>
       </div>
+      <InjectIntl(ModalComponent)
+        id="AuthenticationPage.tos"
+        isOpen={false}
+        onClose={[Function]}
+        onManageDisableScrolling={[Function]}
+      >
+        <TermsOfService
+          className={null}
+          rootClassName={null}
+        />
+      </InjectIntl(ModalComponent)>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
       className={null}
