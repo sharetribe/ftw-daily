@@ -91,6 +91,7 @@ export {
 export { default as TabNav } from './TabNav/TabNav';
 export { default as TabNavHorizontal } from './TabNavHorizontal/TabNavHorizontal';
 export { default as Tabs } from './Tabs/Tabs';
+export { default as TermsOfService } from './TermsOfService/TermsOfService';
 export { default as TextInputField } from './TextInputField/TextInputField';
 export { default as Topbar } from './Topbar/Topbar';
 export { default as TopbarDesktop } from './TopbarDesktop/TopbarDesktop';
