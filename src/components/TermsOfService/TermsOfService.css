@@ -1,2 +1,31 @@
+@import '../../marketplace.css';
+
 .root {
+  & p {
+    @apply --marketplaceH4FontStyles;
+  }
+
+  & .lastUpdated {
+    @apply --marketplaceBodyFontStyles;
+    margin-top: 0;
+    margin-bottom: 53px;
+
+    @media (--viewportMedium) {
+      margin-top: 0;
+      margin-bottom: 53px;
+    }
+  }
+}
+
+.mainHeading {
+  margin-top: 0;
+  margin-bottom: 19px;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 19px;
+  }
+}
+
+.sectionHeading {
 }
