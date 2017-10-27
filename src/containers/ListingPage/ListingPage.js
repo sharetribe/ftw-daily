@@ -97,14 +97,44 @@ ActionBar.propTypes = {
 
 ActionBar.displayName = 'ActionBar';
 
+const gotoBookTab = (history, listing) => {
+  if (!listing.id) {
+    // Listing not fully loaded yet
+    return;
+  }
+  const routes = routeConfiguration();
+  history.push(
+    createResourceLocatorString(
+      'ListingPageBook',
+      routes,
+      { id: listing.id.uuid, slug: createSlug(listing.attributes.title) },
+      {}
+    )
+  );
+};
+
+const gotoListingTab = (history, listing) => {
+  if (!listing.id) {
+    // Listing not fully loaded yet
+    return;
+  }
+  const routes = routeConfiguration();
+  history.push(
+    createResourceLocatorString(
+      'ListingPage',
+      routes,
+      { id: listing.id.uuid, slug: createSlug(listing.attributes.title) },
+      {}
+    )
+  );
+};
+
 // TODO: price unit (per x), custom fields, contact, reviews
 // N.B. All the presentational content needs to be extracted to their own components
 export class ListingPageComponent extends Component {
   constructor(props) {
     super(props);
-    const tab = props.tab;
     this.state = {
-      isBookingModalOpenOnMobile: tab && tab === 'book',
       pageClassNames: [],
       imageCarouselOpen: false,
     };
@@ -116,8 +146,6 @@ export class ListingPageComponent extends Component {
     const { history, getListing, params, useInitialValues } = this.props;
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
-
-    this.setState({ isBookingModalOpenOnMobile: false });
 
     const { bookingDates } = values;
 
@@ -147,6 +175,7 @@ export class ListingPageComponent extends Component {
 
   render() {
     const {
+      tab,
       currentUser,
       getListing,
       intl,
@@ -155,6 +184,7 @@ export class ListingPageComponent extends Component {
       params,
       scrollingDisabled,
       showListingError,
+      history,
     } = this.props;
     const listingId = new UUID(params.id);
     const currentListing = ensureListing(getListing(listingId));
@@ -281,6 +311,10 @@ export class ListingPageComponent extends Component {
       </div>
     );
 
+    const handleMobileBookModalClose = () => {
+      gotoListingTab(history, currentListing);
+    };
+
     const handleBookingSubmit = values => {
       const isClosed = currentListing.attributes.closed;
       if (isOwnListing || isClosed) {
@@ -297,7 +331,7 @@ export class ListingPageComponent extends Component {
       if (isOwnListing || isClosed) {
         window.scrollTo(0, 0);
       } else {
-        this.setState({ isBookingModalOpenOnMobile: true });
+        gotoBookTab(history, currentListing);
       }
     };
 
@@ -425,8 +459,8 @@ export class ListingPageComponent extends Component {
                   className={css.modalInMobile}
                   containerClassName={css.modalContainer}
                   id="BookingDatesFormInModal"
-                  isModalOpenOnMobile={this.state.isBookingModalOpenOnMobile}
-                  onClose={() => this.setState({ isBookingModalOpenOnMobile: false })}
+                  isModalOpenOnMobile={tab === 'book'}
+                  onClose={handleMobileBookModalClose}
                   showAsModalMaxWidth={MODAL_BREAKPOINT}
                   onManageDisableScrolling={onManageDisableScrolling}
                 >
