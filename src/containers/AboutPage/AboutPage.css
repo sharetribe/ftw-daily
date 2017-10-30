@@ -7,10 +7,11 @@
 .staticPageWrapper {
   width: calc(100% - 48px);
   max-width: 1056px;
-  margin: 72px auto;
+  margin: 24px auto;
 
   @media (--viewportMedium) {
     width: calc(100% - 72px);
+    margin: 72px auto;
   }
 }
 
@@ -47,4 +48,10 @@
   @media (--viewportMedium) {
     max-width: 650px;
   }
+}
+
+.subtitle {
+  @apply --marketplaceH3FontStyles;
+  margin-top: 48px;
+  margin-bottom: 24px;
 }
