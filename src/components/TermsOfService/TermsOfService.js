@@ -9,7 +9,6 @@ const TermsOfService = props => {
   const classes = classNames(rootClassName || css.root, className);
   return (
     <div className={classes}>
-      <h1 className={css.mainHeading}>Terms of Service</h1>
       <p className={css.lastUpdated}>Last updated: October 30, 2017</p>
 
       <p>
@@ -19,7 +18,7 @@ const TermsOfService = props => {
         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </p>
 
-      <h2 className={css.sectionHeading}>1 Lorem ipsum dolor sit amet</h2>
+      <h2>1 Lorem ipsum dolor sit amet</h2>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -28,7 +27,7 @@ const TermsOfService = props => {
         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </p>
 
-      <h2 className={css.sectionHeading}>2 Sed ut perspiciatis unde</h2>
+      <h2>2 Sed ut perspiciatis unde</h2>
       <p>
         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
         laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
@@ -42,7 +41,7 @@ const TermsOfService = props => {
         molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
       </p>
 
-      <h2 className={css.sectionHeading}>3 At vero eos et accusamus</h2>
+      <h2>3 At vero eos et accusamus</h2>
       <p>
         At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
         voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati

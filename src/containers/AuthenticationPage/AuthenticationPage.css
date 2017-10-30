@@ -62,6 +62,15 @@
   }
 }
 
+.termsHeading {
+  @apply --marketplaceH1FontStyles;
+  margin: 0 0 19px 0;
+
+  @media (--viewportMedium) {
+    margin: 0 0 19px 0;
+  }
+}
+
 /* ================ Hide Top bar in screens smaller than 768px  ================ */
 
 .hideOnMobile {

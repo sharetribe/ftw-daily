@@ -31,6 +31,7 @@ export { default as PasswordResetForm } from './PasswordResetForm/PasswordResetF
 export { default as PasswordResetPage } from './PasswordResetPage/PasswordResetPage';
 export { default as PayoutDetailsForm } from './PayoutDetailsForm/PayoutDetailsForm';
 export { default as PayoutPreferencesPage } from './PayoutPreferencesPage/PayoutPreferencesPage';
+export { default as PrivacyPolicyPage } from './PrivacyPolicyPage/PrivacyPolicyPage';
 export { default as ProfilePage } from './ProfilePage/ProfilePage';
 export { default as ProfileSettingsForm } from './ProfileSettingsForm/ProfileSettingsForm';
 export { default as ProfileSettingsPage } from './ProfileSettingsPage/ProfileSettingsPage';
@@ -40,5 +41,6 @@ export { default as SignupForm } from './SignupForm/SignupForm';
 export { default as StaticPage } from './StaticPage/StaticPage';
 export { default as StripePaymentForm } from './StripePaymentForm/StripePaymentForm';
 export { default as StyleguidePage } from './StyleguidePage/StyleguidePage';
+export { default as TermsOfServicePage } from './TermsOfServicePage/TermsOfServicePage';
 export { default as TopbarContainer } from './TopbarContainer/TopbarContainer';
 export { default as TopbarSearchForm } from './TopbarSearchForm/TopbarSearchForm';

@@ -248,6 +248,9 @@ export class AuthenticationPageComponent extends Component {
               onManageDisableScrolling={onManageDisableScrolling}
             >
               <div className={css.termsWrapper}>
+                <h2 className={css.termsHeading}>
+                  <FormattedMessage id="AuthenticationPage.termsHeading" />
+                </h2>
                 <TermsOfService />
               </div>
             </Modal>

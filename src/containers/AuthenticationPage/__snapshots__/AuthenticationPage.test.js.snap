@@ -89,6 +89,12 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
         onManageDisableScrolling={[Function]}
       >
         <div>
+          <h2>
+            <FormattedMessage
+              id="AuthenticationPage.termsHeading"
+              values={Object {}}
+            />
+          </h2>
           <TermsOfService
             className={null}
             rootClassName={null}
