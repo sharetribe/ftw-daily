@@ -14,7 +14,6 @@ import {
   LayoutWrapperFooter,
   Footer,
   Page,
-  TabNav,
   UserNav,
 } from '../../components';
 import { ContactDetailsForm, TopbarContainer } from '../../containers';
@@ -84,9 +83,7 @@ export const ContactDetailsPageComponent = props => {
           />
           <UserNav selectedPageName="ContactDetailsPage" />
         </LayoutWrapperTopbar>
-        <LayoutWrapperSideNav>
-          <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />
-        </LayoutWrapperSideNav>
+        <LayoutWrapperSideNav tabs={tabs} />
         <LayoutWrapperMain>
           <div className={css.content}>
             <h1 className={css.title}>
