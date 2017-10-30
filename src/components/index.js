@@ -76,6 +76,7 @@ export { default as OrderDetailsPanel } from './OrderDetailsPanel/OrderDetailsPa
 export { default as OrderDiscussionPanel } from './OrderDiscussionPanel/OrderDiscussionPanel';
 export { default as Page } from './Page/Page';
 export { default as PaginationLinks } from './PaginationLinks/PaginationLinks';
+export { default as PrivacyPolicy } from './PrivacyPolicy/PrivacyPolicy';
 export { default as Promised } from './Promised/Promised';
 export { default as ResponsiveImage } from './ResponsiveImage/ResponsiveImage';
 export { default as SaleDetailsPanel } from './SaleDetailsPanel/SaleDetailsPanel';

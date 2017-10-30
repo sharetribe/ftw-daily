@@ -7,8 +7,11 @@ import {
   LayoutWrapperSideNav,
   LayoutWrapperTopbar,
   LayoutWrapperFooter,
+  PrivacyPolicy,
   Footer,
 } from '../../components';
+
+import css from './PrivacyPolicyPage.css';
 
 const PrivacyPolicyPage = () => {
   const tabs = [
@@ -35,7 +38,12 @@ const PrivacyPolicyPage = () => {
         </LayoutWrapperTopbar>
         <LayoutWrapperSideNav tabs={tabs} />
         <LayoutWrapperMain>
-          <p>TODO: Privacy policy</p>
+          <div className={css.content}>
+            <h1 className={css.heading}>
+              <FormattedMessage id="PrivacyPolicyPage.heading" />
+            </h1>
+            <PrivacyPolicy />
+          </div>
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
           <Footer />
