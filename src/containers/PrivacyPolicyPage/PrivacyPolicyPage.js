@@ -1,7 +1,13 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { StaticPage, TopbarContainer } from '../../containers';
+import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import * as propTypes from '../../util/propTypes';
+import { isScrollingDisabled } from '../../ducks/UI.duck';
+import { TopbarContainer } from '../../containers';
 import {
+  Page,
   LayoutSideNavigation,
   LayoutWrapperMain,
   LayoutWrapperSideNav,
@@ -10,31 +16,46 @@ import {
   PrivacyPolicy,
   Footer,
 } from '../../components';
+import config from '../../config';
 
 import css from './PrivacyPolicyPage.css';
 
-const PrivacyPolicyPage = () => {
+const PrivacyPolicyPageComponent = props => {
+  const { logoutError, scrollingDisabled, intl } = props;
+
   const tabs = [
     {
-      text: <FormattedMessage id="TermsOfServicePage.privacyTabTitle" />,
+      text: intl.formatMessage({ id: 'PrivacyPolicyPage.privacyTabTitle' }),
       selected: true,
       linkProps: {
         name: 'PrivacyPolicyPage',
       },
     },
     {
-      text: <FormattedMessage id="TermsOfServicePage.tosTabTitle" />,
+      text: intl.formatMessage({ id: 'PrivacyPolicyPage.tosTabTitle' }),
       selected: false,
       linkProps: {
         name: 'TermsOfServicePage',
       },
     },
   ];
+  const siteTitle = config.siteTitle;
+  const schemaTitle = intl.formatMessage({ id: 'PrivacyPolicyPage.schemaTitle' }, { siteTitle });
+  const schema = {
+    '@context': 'http://schema.org',
+    '@type': 'WebPage',
+    name: schemaTitle,
+  };
   return (
-    <StaticPage title="Privacy policy">
+    <Page
+      title={schemaTitle}
+      logoutError={logoutError}
+      scrollingDisabled={scrollingDisabled}
+      schema={schema}
+    >
       <LayoutSideNavigation>
         <LayoutWrapperTopbar>
-          <TopbarContainer currentPage="TermsOfServicePage" />
+          <TopbarContainer currentPage="PrivacyPolicyPage" />
         </LayoutWrapperTopbar>
         <LayoutWrapperSideNav tabs={tabs} />
         <LayoutWrapperMain>
@@ -49,8 +70,32 @@ const PrivacyPolicyPage = () => {
           <Footer />
         </LayoutWrapperFooter>
       </LayoutSideNavigation>
-    </StaticPage>
+    </Page>
   );
 };
+
+PrivacyPolicyPageComponent.defaultProps = {
+  logoutError: null,
+};
+
+const { bool } = PropTypes;
+
+PrivacyPolicyPageComponent.propTypes = {
+  logoutError: propTypes.error,
+  scrollingDisabled: bool.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
+};
+
+const mapStateToProps = state => {
+  const { logoutError } = state.Auth;
+  return {
+    logoutError,
+    scrollingDisabled: isScrollingDisabled(state),
+  };
+};
+
+const PrivacyPolicyPage = compose(connect(mapStateToProps), injectIntl)(PrivacyPolicyPageComponent);
 
 export default PrivacyPolicyPage;

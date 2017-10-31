@@ -16,6 +16,7 @@ import {
   Footer,
   TermsOfService,
 } from '../../components';
+import config from '../../config';
 
 import css from './TermsOfServicePage.css';
 
@@ -38,9 +39,20 @@ const TermsOfServicePageComponent = props => {
       },
     },
   ];
-  const title = intl.formatMessage({ id: 'TermsOfServicePage.title' });
+  const siteTitle = config.siteTitle;
+  const schemaTitle = intl.formatMessage({ id: 'TermsOfServicePage.schemaTitle' }, { siteTitle });
+  const schema = {
+    '@context': 'http://schema.org',
+    '@type': 'WebPage',
+    name: schemaTitle,
+  };
   return (
-    <Page title={title} logoutError={logoutError} scrollingDisabled={scrollingDisabled}>
+    <Page
+      title={schemaTitle}
+      logoutError={logoutError}
+      scrollingDisabled={scrollingDisabled}
+      schema={schema}
+    >
       <LayoutSideNavigation>
         <LayoutWrapperTopbar>
           <TopbarContainer currentPage="TermsOfServicePage" />
