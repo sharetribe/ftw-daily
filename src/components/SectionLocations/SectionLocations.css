@@ -15,18 +15,26 @@
   }
 }
 
-.titleWrapper {
-  max-width: 735px;
-}
-
-.title {
+.title_h1 {
   margin-top: 0;
   @media (--viewportMedium) {
     margin-bottom: 23px;
   }
 }
 
-.subtitleWrapper {
+.title {
+  /* Font style */
+  @apply --marketplaceH1FontStyles;
+
+  margin-top: 0;
+  max-width: 735px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 23px;
+  }
+}
+
+.subtitle {
   max-width: 672px;
 }
 
@@ -37,7 +45,7 @@
 
   @media (--viewportMedium) {
     flex-direction: row;
-    margin-top: 54px;
+    margin-top: 57px;
   }
 }
 

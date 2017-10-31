@@ -11,7 +11,7 @@ import helsinkiImage from './images/location_helsinki.jpg';
 import rovaniemiImage from './images/location_rovaniemi.jpg';
 import rukaImage from './images/location_ruka.jpg';
 
-const location = (name, image, searchQuery) => {
+const locationLink = (name, image, searchQuery) => {
   const nameText = <span className={css.locationName}>{name}</span>;
   return (
     <NamedLink name="SearchPage" to={{ search: searchQuery }} className={css.location}>
@@ -38,28 +38,26 @@ const SectionLocations = props => {
   return (
     <div className={classes}>
       <div className={css.content}>
-        <div className={css.titleWrapper}>
-          <h1 className={css.title}>
-            <FormattedMessage id="SectionLocations.title" />
-          </h1>
+        <div className={css.title}>
+          <FormattedMessage id="SectionLocations.title" />
         </div>
-        <div className={css.subtitleWrapper}>
+        <div className={css.subtitle}>
           <p>
             <FormattedMessage id="SectionLocations.subtitle" />
           </p>
         </div>
         <div className={css.locations}>
-          {location(
+          {locationLink(
             'Helsinki',
             helsinkiImage,
             '?address=Helsinki%2C%20Finland&bounds=60.2978389%2C25.254484899999966%2C59.9224887%2C24.782875800000056&country=FI&origin=60.16985569999999%2C24.93837910000002'
           )}
-          {location(
+          {locationLink(
             'Rovaniemi',
             rovaniemiImage,
             '?address=Rovaniemi%2C%20Finland&bounds=67.18452510000002%2C27.32667850000007%2C66.1553745%2C24.736871199999996&country=FI&origin=66.50394779999999%2C25.729390599999988'
           )}
-          {location(
+          {locationLink(
             'Ruka',
             rukaImage,
             '?address=Ruka%2C%20Finland&bounds=66.1704578%2C29.14246849999995%2C66.1614402%2C29.110453699999994&country=FI&origin=66.16594940000002%2C29.12646110000003'
