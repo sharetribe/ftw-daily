@@ -37,7 +37,36 @@ const callLoadData = props => {
   }
 };
 
+const setPageScrollPosition = location => {
+  if (!location.hash) {
+    // No hash, scroll to top
+    window.scroll({
+      top: 0,
+      left: 0,
+    });
+  } else {
+    const el = document.querySelector(location.hash);
+    if (el) {
+      // Found element with the given fragment identifier, scrolling
+      // to that element.
+      //
+      // NOTE: This isn't foolproof. It works when navigating within
+      // the application between pages and within a single page. It
+      // also works with the initial page load. However, it doesn't
+      // seem work work properly when refreshing the page, at least
+      // not in Chrome.
+      //
+      // TODO: investigate why the scrolling fails on refresh
+      el.scrollIntoView({
+        block: 'start',
+        behavior: 'smooth',
+      });
+    }
+  }
+};
+
 const handleLocationChanged = (dispatch, location) => {
+  setPageScrollPosition(location);
   const url = canonicalRoutePath(routeConfiguration(), location);
   dispatch(locationChanged(location, url));
 };

@@ -40,6 +40,7 @@
     "sanitize.css": "^5.0.0",
     "sharetribe-scripts": "1.0.14",
     "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#acec122c4c1279bfecb411b027f7bb8928b6b44b",
+    "smoothscroll-polyfill": "^0.4.0",
     "source-map-support": "^0.5.0",
     "url": "^0.11.0"
   },

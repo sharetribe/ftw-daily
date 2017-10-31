@@ -14,11 +14,6 @@ import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './Page.css';
 
-const scrollToTop = () => {
-  // Todo: this might need fine tuning later
-  window.scrollTo(0, 0);
-};
-
 const preventDefault = e => {
   e.preventDefault();
 };
@@ -34,8 +29,6 @@ const twitterPageURL = siteTwitterHandle => {
 
 class PageComponent extends Component {
   componentDidMount() {
-    this.historyUnlisten = this.props.history.listen(() => scrollToTop());
-
     // By default a dropped file is loaded in the browser window as a
     // file URL. We want to prevent this since it might loose a lot of
     // data the user has typed but not yet saved. Preventing requires
@@ -45,9 +38,6 @@ class PageComponent extends Component {
   }
 
   componentWillUnmount() {
-    if (this.historyUnlisten) {
-      this.historyUnlisten();
-    }
     document.removeEventListener('dragover', preventDefault);
     document.removeEventListener('drop', preventDefault);
   }

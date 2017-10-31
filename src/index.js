@@ -95,6 +95,7 @@ if (typeof window !== 'undefined') {
   const store = configureStore(initialState, sdk, analyticsHandlers);
 
   setupStripe();
+  require('smoothscroll-polyfill').polyfill();
   render(store);
 
   if (config.dev) {
