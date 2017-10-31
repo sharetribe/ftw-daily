@@ -3,7 +3,7 @@
 .root {
 }
 
-/* heroContainer gives the height for HeroSection */
+/* heroContainer gives the height for SectionHero */
 /* Safari has a bug with vw padding inside flexbox. Therefore we need an extra div (container) */
 .heroContainer {
   display: flex;

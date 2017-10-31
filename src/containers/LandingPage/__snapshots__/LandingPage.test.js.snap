@@ -52,7 +52,7 @@ exports[`LandingPage matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <HeroSection
+        <SectionHero
           className={null}
           history={
             Object {
@@ -67,6 +67,10 @@ exports[`LandingPage matches snapshot 1`] = `
           rootClassName={null}
         />
       </div>
+      <SectionLocations
+        className={null}
+        rootClassName={null}
+      />
     </LayoutWrapperMain>
     <LayoutWrapperFooter
       className={null}

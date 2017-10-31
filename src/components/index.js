@@ -28,7 +28,6 @@ export { default as ExternalLink } from './ExternalLink/ExternalLink';
 export { default as FilterPanel } from './FilterPanel/FilterPanel';
 export { default as Footer } from './Footer/Footer';
 export { default as Form } from './Form/Form';
-export { default as HeroSection } from './HeroSection/HeroSection';
 export { default as IconBannedUser } from './IconBannedUser/IconBannedUser';
 export { default as IconCheckmark } from './IconCheckmark/IconCheckmark';
 export { default as IconClose } from './IconClose/IconClose';
@@ -85,6 +84,8 @@ export { default as SearchMapGroupLabel } from './SearchMapGroupLabel/SearchMapG
 export { default as SearchMapInfoCard } from './SearchMapInfoCard/SearchMapInfoCard';
 export { default as SearchMapPriceLabel } from './SearchMapPriceLabel/SearchMapPriceLabel';
 export { default as SearchResultsPanel } from './SearchResultsPanel/SearchResultsPanel';
+export { default as SectionHero } from './SectionHero/SectionHero';
+export { default as SectionLocations } from './SectionLocations/SectionLocations';
 export { default as SelectField } from './SelectField/SelectField';
 export {
   default as StripeBankAccountTokenInputField,

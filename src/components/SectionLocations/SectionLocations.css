@@ -1,0 +1,124 @@
+@import '../../marketplace.css';
+
+.root {
+  padding: 40px 24px;
+
+  @media (--viewportMedium) {
+    padding: 86px 36px;
+  }
+}
+
+.content {
+  @media (--viewportMedium) {
+    max-width: 1052px;
+    margin: 0 auto;
+  }
+}
+
+.title_h1 {
+  margin-top: 0;
+  @media (--viewportMedium) {
+    margin-bottom: 23px;
+  }
+}
+
+.title {
+  /* Font style */
+  @apply --marketplaceH1FontStyles;
+
+  margin-top: 0;
+  max-width: 735px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 23px;
+  }
+}
+
+.paragraph {
+  max-width: 672px;
+}
+
+.locations {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+
+  @media (--viewportMedium) {
+    flex-direction: row;
+    margin-top: 57px;
+  }
+}
+
+.location {
+  width: 100%;
+  margin-bottom: 27px;
+
+  /* Remove link's hover effect */
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.location:nth-of-type(1) {
+  @media (--viewportMedium) {
+    margin-right: 20px;
+  }
+}
+
+.location:nth-of-type(2) {
+  @media (--viewportMedium) {
+    margin: 0 20px;
+  }
+}
+
+.location:nth-of-type(3) {
+  @media (--viewportMedium) {
+    margin-left: 20px;
+  }
+}
+
+/* A wrapper for a responsive image that holds it's aspect ratio */
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 4px;
+  transition: var(--transitionStyleButton);
+  box-shadow: var(--boxShadowSectionLocation);
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: var(--boxShadowSectionLocationHover);
+  }
+}
+
+/* An image wrapper that defines the images aspect ratio */
+.aspectWrapper {
+  padding-bottom: calc(6 / 13 * 100%); /* 13:6 Aspect Ratio */
+
+  @media (--viewportMedium) {
+    padding-bottom: calc(2 / 3 * 100%); /* 3:2 Aspect Ratio */
+  }
+}
+
+.locationImage {
+  /* Layout - image will take space defined by aspect ratio wrapper */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.linkText {
+  @apply --marketplaceH2FontStyles;
+  color: var(--matterColor);
+  margin-bottom: 0;
+}
+
+.locationName {
+  color: var(--marketplaceColor);
+}
