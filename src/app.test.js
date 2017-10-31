@@ -38,7 +38,7 @@ describe('Application', () => {
       '/s': 'Search results for map search',
       '/l/listing-title-slug/1234': 'Loading listing…',
       '/l/1234': 'Loading listing…',
-      '/u/1234': 'Profile page with display name: 1234',
+      '/u/1234': 'Profile page',
       '/login': 'Log in',
       '/signup': 'Sign up',
       '/recover-password': 'Request a new password',
