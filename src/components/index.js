@@ -85,6 +85,7 @@ export { default as SearchMapInfoCard } from './SearchMapInfoCard/SearchMapInfoC
 export { default as SearchMapPriceLabel } from './SearchMapPriceLabel/SearchMapPriceLabel';
 export { default as SearchResultsPanel } from './SearchResultsPanel/SearchResultsPanel';
 export { default as SectionHero } from './SectionHero/SectionHero';
+export { default as SectionHowItWorks } from './SectionHowItWorks/SectionHowItWorks';
 export { default as SectionLocations } from './SectionLocations/SectionLocations';
 export { default as SelectField } from './SelectField/SelectField';
 export {

@@ -71,6 +71,10 @@ exports[`LandingPage matches snapshot 1`] = `
         className={null}
         rootClassName={null}
       />
+      <SectionHowItWorks
+        className={null}
+        rootClassName={null}
+      />
     </LayoutWrapperMain>
     <LayoutWrapperFooter
       className={null}
