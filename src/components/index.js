@@ -76,6 +76,7 @@ export { default as OrderDetailsPanel } from './OrderDetailsPanel/OrderDetailsPa
 export { default as OrderDiscussionPanel } from './OrderDiscussionPanel/OrderDiscussionPanel';
 export { default as Page } from './Page/Page';
 export { default as PaginationLinks } from './PaginationLinks/PaginationLinks';
+export { default as PrivacyPolicy } from './PrivacyPolicy/PrivacyPolicy';
 export { default as Promised } from './Promised/Promised';
 export { default as ResponsiveImage } from './ResponsiveImage/ResponsiveImage';
 export { default as SaleDetailsPanel } from './SaleDetailsPanel/SaleDetailsPanel';
@@ -91,6 +92,7 @@ export {
 export { default as TabNav } from './TabNav/TabNav';
 export { default as TabNavHorizontal } from './TabNavHorizontal/TabNavHorizontal';
 export { default as Tabs } from './Tabs/Tabs';
+export { default as TermsOfService } from './TermsOfService/TermsOfService';
 export { default as TextInputField } from './TextInputField/TextInputField';
 export { default as Topbar } from './Topbar/Topbar';
 export { default as TopbarDesktop } from './TopbarDesktop/TopbarDesktop';

@@ -5,6 +5,7 @@ import {
   CheckoutPage,
   ContactDetailsPage,
   EditListingPage,
+  EmailVerificationPage,
   InboxPage,
   LandingPage,
   ListingPage,
@@ -12,15 +13,16 @@ import {
   NotFoundPage,
   OrderPage,
   PasswordChangePage,
-  PasswordResetPage,
   PasswordRecoveryPage,
+  PasswordResetPage,
   PayoutPreferencesPage,
+  PrivacyPolicyPage,
   ProfilePage,
   ProfileSettingsPage,
   SalePage,
   SearchPage,
   StyleguidePage,
-  EmailVerificationPage,
+  TermsOfServicePage,
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -240,6 +242,16 @@ const routeConfiguration = () => {
       auth: true,
       name: 'PayoutPreferencesPage',
       component: props => <PayoutPreferencesPage {...props} />,
+    },
+    {
+      path: '/terms-of-service',
+      name: 'TermsOfServicePage',
+      component: props => <TermsOfServicePage {...props} />,
+    },
+    {
+      path: '/privacy-policy',
+      name: 'PrivacyPolicyPage',
+      component: props => <PrivacyPolicyPage {...props} />,
     },
     {
       path: '/styleguide',

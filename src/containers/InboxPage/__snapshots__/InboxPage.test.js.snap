@@ -22,6 +22,7 @@ exports[`InboxPage matches snapshot 1`] = `
     <LayoutWrapperSideNav
       className={null}
       rootClassName={null}
+      tabs={null}
     >
       <h1>
         <FormattedMessage
@@ -377,6 +378,7 @@ exports[`InboxPage matches snapshot 3`] = `
     <LayoutWrapperSideNav
       className={null}
       rootClassName={null}
+      tabs={null}
     >
       <h1>
         <FormattedMessage

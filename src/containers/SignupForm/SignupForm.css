@@ -29,3 +29,20 @@
 .bottomWrapper {
   @apply --marketplaceModalBottomWrapper;
 }
+
+.bottomWrapperText {
+  @apply --marketplaceModalBottomWrapperText;
+}
+
+.termsText {
+  @apply --marketplaceModalHelperText;
+}
+
+.termsLink {
+  @apply --marketplaceModalHelperLink;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

@@ -104,6 +104,28 @@ exports[`SignupForm matches snapshot 1`] = `
   <div
     className={undefined}
   >
+    <p
+      className={undefined}
+    >
+      <span
+        className={undefined}
+      >
+        <span>
+          By signing up you accept the 
+          <span
+            className={undefined}
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            <span>
+              terms and conditions
+            </span>
+          </span>
+        </span>
+      </span>
+    </p>
     <button
       className=""
       disabled={true}

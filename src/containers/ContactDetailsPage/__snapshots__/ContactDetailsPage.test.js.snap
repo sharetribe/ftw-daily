@@ -27,38 +27,31 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
     <LayoutWrapperSideNav
       className={null}
       rootClassName={null}
-    >
-      <TabNav
-        className={null}
-        rootClassName={null}
-        tabClassName={null}
-        tabRootClassName={null}
-        tabs={
-          Array [
-            Object {
-              "linkProps": Object {
-                "name": "ContactDetailsPage",
-              },
-              "selected": true,
-              "text": <FormattedMessage
-                id="ContactDetailsPage.emailTabTitle"
-                values={Object {}}
-          />,
+      tabs={
+        Array [
+          Object {
+            "linkProps": Object {
+              "name": "ContactDetailsPage",
             },
-            Object {
-              "linkProps": Object {
-                "name": "PasswordChangePage",
-              },
-              "selected": false,
-              "text": <FormattedMessage
-                id="ContactDetailsPage.passwordTabTitle"
-                values={Object {}}
-          />,
+            "selected": true,
+            "text": <FormattedMessage
+              id="ContactDetailsPage.emailTabTitle"
+              values={Object {}}
+        />,
+          },
+          Object {
+            "linkProps": Object {
+              "name": "PasswordChangePage",
             },
-          ]
-        }
-      />
-    </LayoutWrapperSideNav>
+            "selected": false,
+            "text": <FormattedMessage
+              id="ContactDetailsPage.passwordTabTitle"
+              values={Object {}}
+        />,
+          },
+        ]
+      }
+    />
     <LayoutWrapperMain
       className={null}
       rootClassName={null}
