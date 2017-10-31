@@ -85,10 +85,10 @@
 
 /* An image wrapper that defines the images aspect ratio */
 .aspectWrapper {
-  padding-bottom: 46.1538%; /* 13:6 Aspect Ratio */
+  padding-bottom: calc(6 / 13 * 100%); /* 13:6 Aspect Ratio */
 
   @media (--viewportMedium) {
-    padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
+    padding-bottom: calc(2 / 3 * 100%); /* 3:2 Aspect Ratio */
   }
 }
 
