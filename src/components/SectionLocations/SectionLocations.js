@@ -7,9 +7,9 @@ import { NamedLink } from '../../components';
 
 import css from './SectionLocations.css';
 
-import helsinkiImage from '../../assets/location_helsinki.jpg';
-import rovaniemiImage from '../../assets/location_rovaniemi.jpg';
-import rukaImage from '../../assets/location_ruka.jpg';
+import helsinkiImage from './images/location_helsinki.jpg';
+import rovaniemiImage from './images/location_rovaniemi.jpg';
+import rukaImage from './images/location_ruka.jpg';
 
 const location = (name, image, searchQuery) => {
   const nameText = <span className={css.locationName}>{name}</span>;
