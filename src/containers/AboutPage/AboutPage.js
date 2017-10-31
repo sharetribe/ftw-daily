@@ -33,42 +33,48 @@ const AboutPage = () => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
-          <h1 className={css.pageTitle}>It&#8217;s about Saunatime.</h1>
+          <h1 className={css.pageTitle}>Experience the unique Finnish home sauna.</h1>
           <img className={css.coverImage} src={image} alt="My first ice cream." />
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
-              <p>"We built Saunatime because we didn't have a sauna in our apartment building."</p>
+              <p>Did you know that Finland has 3.2 million saunas - almost one sauna per person!</p>
             </div>
 
             <div className={css.contentMain}>
               <h2>
-                Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque
-                nisl consectetur et. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+                Most of the Finnish saunas are located at the homes of individuals - indeed, most
+                people in Finland live in an apartment with sauna in it. In addition, lots of people
+                have lakeside summer cottages, which also typically come with a separate sauna
+                building near the waterfront.
               </h2>
 
-              <h3>Tortor mauris condimentum</h3>
-
               <p>
-                Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque
-                nisl consectetur et. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+                To truly experience a Finnish sauna, you need to look beyond the public saunas, and
+                instead visit a real home or cottage sauna. Saunatime makes this possible for
+                everyone. All our saunas are owned by individuals willing to let tourists and other
+                curious visitors to enter their sacred spaces.
               </p>
 
+              <h3 className={css.subtitle}>Are you a sauna owner?</h3>
+
               <p>
-                Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis
-                consectetur purus sit amet fermentum. Cum sociis natoque penatibus et magnis dis
-                parturient montes, nascetur ridiculus mus.
+                Saunatime offers you a good way to earn some extra cash! If you're not using your
+                sauna every evening, why not rent it to other people while it's free. And even if
+                you are using your sauna every evening (we understand, it's so good), why not invite
+                other people to join you when the sauna is already warm! A shared sauna experience
+                is often a more fulfilling one.
               </p>
 
-              <h3 id="contact">Get in touch</h3>
+              <h3 id="contact" className={css.subtitle}>
+                Create your own marketplace like Saunatime
+              </h3>
               <p>
-                We are happy to help you in anything you have in your mind? Best way to reach us is
-                by emailing us at{' '}
-                <ExternalLink href="mailto:hello@saunatime.io?Subject=Hello%20friends">
-                  hello@saunatime.io
-                </ExternalLink>.
+                Saunatime is brought to you by the good folks at {' '}
+                <ExternalLink href="http://sharetribe.com">Sharetribe</ExternalLink>. Would you like
+                to create your own marketplace platform a bit like Saunatime? Or perhaps a mobile
+                app? With Sharetribe it's really easy. If you have a marketplace idea in mind, do
+                get in touch!
               </p>
               <p>
                 You can also checkout our{' '}
