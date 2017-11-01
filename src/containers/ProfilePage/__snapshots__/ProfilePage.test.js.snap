@@ -3,8 +3,15 @@
 exports[`ProfilePage matches snapshot 1`] = `
 <Page
   logoutError={null}
+  schema={
+    Object {
+      "@context": "http://schema.org",
+      "@type": "ProfilePage",
+      "name": "ProfilePage.schemaTitle",
+    }
+  }
   scrollingDisabled={false}
-  title="Profile page"
+  title="ProfilePage.schemaTitle"
 >
   <LayoutSideNavigation
     className={null}

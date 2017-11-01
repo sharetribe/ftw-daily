@@ -394,6 +394,7 @@
   "ProfilePage.loadingData": "Loading user data…",
   "ProfilePage.loadingDataFailed": "Whoopsie, something went wrong - please try again.",
   "ProfilePage.mobileHeading": "{name}",
+  "ProfilePage.schemaTitle": "{name} | {siteTitle}",
   "ProfileSettingsForm.addYourProfilePicture": "+ Add your profile picture…",
   "ProfileSettingsForm.addYourProfilePictureMobile": "+ Add",
   "ProfileSettingsForm.changeAvatar": "Change",

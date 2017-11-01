@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
@@ -22,6 +22,7 @@ import {
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 import { showUser } from './ProfilePage.duck';
+import config from '../../config';
 
 import css from './ProfilePage.css';
 
@@ -35,6 +36,7 @@ export const ProfilePageComponent = props => {
     user,
     userShowInProgress,
     userShowError,
+    intl,
   } = props;
   const ensuredCurrentUser = ensureCurrentUser(currentUser);
   const profileUser = ensureUser(user);
@@ -108,9 +110,27 @@ export const ProfilePageComponent = props => {
     content = mainContent;
   }
 
-  const schemaTitle = 'Profile page';
+  const schemaTitle = intl.formatMessage(
+    {
+      id: 'ProfilePage.schemaTitle',
+    },
+    {
+      name: displayName,
+      siteTitle: config.siteTitle,
+    }
+  );
+
   return (
-    <Page logoutError={logoutError} scrollingDisabled={scrollingDisabled} title={schemaTitle}>
+    <Page
+      logoutError={logoutError}
+      scrollingDisabled={scrollingDisabled}
+      title={schemaTitle}
+      schema={{
+        '@context': 'http://schema.org',
+        '@type': 'ProfilePage',
+        name: schemaTitle,
+      }}
+    >
       <LayoutSideNavigation>
         <LayoutWrapperTopbar>
           <TopbarContainer currentPage="ProfilePage" />
@@ -141,6 +161,9 @@ ProfilePageComponent.propTypes = {
   user: propTypes.user,
   userShowInProgress: bool.isRequired,
   userShowError: propTypes.error,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -160,7 +183,7 @@ const mapStateToProps = state => {
   };
 };
 
-const ProfilePage = compose(connect(mapStateToProps))(ProfilePageComponent);
+const ProfilePage = compose(connect(mapStateToProps), injectIntl)(ProfilePageComponent);
 
 ProfilePage.loadData = params => {
   const id = new UUID(params.id);
