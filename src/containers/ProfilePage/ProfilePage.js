@@ -19,9 +19,10 @@ import {
   Footer,
   AvatarLarge,
   NamedLink,
+  ListingCard,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
-import { showUser } from './ProfilePage.duck';
+import { loadData } from './ProfilePage.duck';
 import config from '../../config';
 
 import css from './ProfilePage.css';
@@ -36,6 +37,8 @@ export const ProfilePageComponent = props => {
     user,
     userShowInProgress,
     userShowError,
+    queryListingsError,
+    listings,
     intl,
   } = props;
   const ensuredCurrentUser = ensureCurrentUser(currentUser);
@@ -44,7 +47,6 @@ export const ProfilePageComponent = props => {
     ensuredCurrentUser.id && profileUser.id && ensuredCurrentUser.id.uuid === profileUser.id.uuid;
   const displayName = profileUser.attributes.profile.displayName;
   const bio = profileUser.attributes.profile.bio;
-  const listings = [];
   const hasBio = !!bio;
   const hasListings = listings.length > 0;
 
@@ -87,6 +89,13 @@ export const ProfilePageComponent = props => {
           <h2 className={css.listingsTitle}>
             <FormattedMessage id="ProfilePage.listingsTitle" values={{ count: listings.length }} />
           </h2>
+          <ul className={css.listings}>
+            {listings.map(l => (
+              <li className={css.listing} key={l.id.uuid}>
+                <ListingCard listing={l} />
+              </li>
+            ))}
+          </ul>
         </div>
       ) : null}
     </div>
@@ -94,7 +103,7 @@ export const ProfilePageComponent = props => {
 
   let content;
 
-  if (userShowError) {
+  if (userShowError || queryListingsError) {
     content = (
       <p className={css.error}>
         <FormattedMessage id="ProfilePage.loadingDataFailed" />
@@ -150,9 +159,10 @@ ProfilePageComponent.defaultProps = {
   currentUser: null,
   user: null,
   userShowError: null,
+  queryListingsError: null,
 };
 
-const { bool } = PropTypes;
+const { bool, arrayOf } = PropTypes;
 
 ProfilePageComponent.propTypes = {
   logoutError: propTypes.error,
@@ -161,6 +171,8 @@ ProfilePageComponent.propTypes = {
   user: propTypes.user,
   userShowInProgress: bool.isRequired,
   userShowError: propTypes.error,
+  queryListingsError: propTypes.error,
+  listings: arrayOf(propTypes.listing).isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
@@ -170,9 +182,16 @@ const mapStateToProps = state => {
   // Page needs logoutError
   const { logoutError } = state.Auth;
   const { currentUser } = state.user;
-  const { userId, userShowInProgress, userShowError } = state.ProfilePage;
-  const matches = getMarketplaceEntities(state, [{ type: 'user', id: userId }]);
-  const user = matches.length === 1 ? matches[0] : null;
+  const {
+    userId,
+    userShowInProgress,
+    userShowError,
+    queryListingsError,
+    userListingRefs,
+  } = state.ProfilePage;
+  const userMatches = getMarketplaceEntities(state, [{ type: 'user', id: userId }]);
+  const user = userMatches.length === 1 ? userMatches[0] : null;
+  const listings = getMarketplaceEntities(state, userListingRefs);
   return {
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
@@ -180,6 +199,8 @@ const mapStateToProps = state => {
     user,
     userShowInProgress,
     userShowError,
+    queryListingsError,
+    listings,
   };
 };
 
@@ -187,7 +208,7 @@ const ProfilePage = compose(connect(mapStateToProps), injectIntl)(ProfilePageCom
 
 ProfilePage.loadData = params => {
   const id = new UUID(params.id);
-  return showUser(id);
+  return loadData(id);
 };
 
 export default ProfilePage;

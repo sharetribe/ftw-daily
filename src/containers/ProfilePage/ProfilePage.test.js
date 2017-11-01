@@ -12,6 +12,7 @@ describe('ProfilePage', () => {
         scrollingDisabled={false}
         user={createUser('test-user')}
         userShowInProgress={false}
+        listings={[]}
         intl={fakeIntl}
       />
     );
