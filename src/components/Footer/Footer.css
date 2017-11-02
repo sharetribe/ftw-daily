@@ -10,8 +10,20 @@
   background-color: var(--matterColorBright);
 
   @media (--viewportMedium) {
-    padding: 73px 30px 81px 30px;
-    background-color: var(--matterColorLight);
+    padding: 0 30px 81px 30px;
+    border-top: none;
+  }
+}
+
+/* Wrapper to limit the top border in desktop
+ * view from the outermost paddings*/
+.topBorderWrapper {
+  @media (--viewportMedium) {
+    padding-top: 73px;
+
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: var(--matterColorNegative);
   }
 }
 
