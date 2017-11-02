@@ -15,7 +15,7 @@
 
 .sectionContainer {
   padding: 0;
-  margin-bottom: 36px;
+  margin-bottom: 37px;
 
   @media (--viewportMedium) {
     padding: 0;
@@ -29,6 +29,7 @@
 
   margin-top: 0;
   margin-bottom: 13px;
+
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 20px;
@@ -36,9 +37,18 @@
 }
 
 .lastSection {
-  margin-bottom: 66px;
+  /* Fix baseline alignment */
+  padding-top: 3px;
+
+  margin-bottom: 69px;
+
   @media (--viewportMedium) {
+    padding-top: 6px;
     margin-bottom: 111px;
+
+    & .sectionTitle {
+      margin-bottom: 18px;
+    }
   }
 }
 
@@ -278,6 +288,11 @@
 
 .bioInfo {
   color: var(--matterColorAnti);
+  margin-top: 11px;
+
+  @media (--viewportMedium) {
+    margin-top: 13px;
+  }
 }
 
 .submitButton {

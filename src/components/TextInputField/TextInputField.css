@@ -14,3 +14,10 @@
 .inputError {
   border-bottom-color: var(--failColor);
 }
+
+.textarea {
+  @media (--viewportMedium) {
+    /* Fix baseline alignment */
+    padding-top: 6px;
+  }
+}

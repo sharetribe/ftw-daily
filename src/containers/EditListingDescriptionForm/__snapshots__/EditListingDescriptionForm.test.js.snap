@@ -40,7 +40,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
       Describe your sauna
     </label>
     <textarea
-      className=""
+      className="undefined"
       id="fakeTestForm.description"
       name="description"
       onBlur={[Function]}
