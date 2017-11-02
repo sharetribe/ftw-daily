@@ -67,21 +67,15 @@
   }
 }
 
-.step:nth-of-type(1) {
+.step {
   @media (--viewportMedium) {
-    margin-right: 38px;
+    margin-right: 76px;
   }
 }
 
-.step:nth-of-type(2) {
+.step:last-of-type {
   @media (--viewportMedium) {
-    margin: 0 38px;
-  }
-}
-
-.step:nth-of-type(3) {
-  @media (--viewportMedium) {
-    margin-left: 38px;
+    margin-right: 0;
   }
 }
 
