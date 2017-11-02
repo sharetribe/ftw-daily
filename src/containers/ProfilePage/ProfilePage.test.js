@@ -1,5 +1,6 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
+import { createUser, fakeIntl } from '../../util/test-data';
 import { ProfilePageComponent } from './ProfilePage';
 
 const noop = () => null;
@@ -8,17 +9,11 @@ describe('ProfilePage', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
       <ProfilePageComponent
-        params={{ displayName: 'most-awesome-shop' }}
-        history={{ push: noop }}
-        location={{ search: '' }}
         scrollingDisabled={false}
-        authInProgress={false}
-        currentUserHasListings={false}
-        isAuthenticated={false}
-        onLogout={noop}
-        onManageDisableScrolling={noop}
-        sendVerificationEmailInProgress={false}
-        onResendVerificationEmail={noop}
+        user={createUser('test-user')}
+        userShowInProgress={false}
+        listings={[]}
+        intl={fakeIntl}
       />
     );
     expect(tree).toMatchSnapshot();

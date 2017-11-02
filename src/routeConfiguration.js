@@ -133,9 +133,10 @@ const routeConfiguration = () => {
       component: RedirectToLandingPage,
     },
     {
-      path: '/u/:displayName',
+      path: '/u/:id',
       name: 'ProfilePage',
       component: props => <ProfilePage {...props} />,
+      loadData: ProfilePage.loadData,
     },
     {
       path: '/profile-settings',
