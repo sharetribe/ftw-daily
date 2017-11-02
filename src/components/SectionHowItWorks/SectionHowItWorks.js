@@ -25,28 +25,28 @@ const SectionHowItWorks = props => {
             <div className={css.steps}>
               <div className={css.step}>
                 <h2 className={css.stepTitle}>
-                  <FormattedMessage id="SectionHowItWorks.partOneTitle" />
+                  <FormattedMessage id="SectionHowItWorks.part1Title" />
                 </h2>
                 <p>
-                  <FormattedMessage id="SectionHowItWorks.partOneText" />
+                  <FormattedMessage id="SectionHowItWorks.part1Text" />
                 </p>
               </div>
 
               <div className={css.step}>
                 <h2 className={css.stepTitle}>
-                  <FormattedMessage id="SectionHowItWorks.partTwoTitle" />
+                  <FormattedMessage id="SectionHowItWorks.part2Title" />
                 </h2>
                 <p>
-                  <FormattedMessage id="SectionHowItWorks.partTwoText" />
+                  <FormattedMessage id="SectionHowItWorks.part2Text" />
                 </p>
               </div>
 
               <div className={css.step}>
                 <h2 className={css.stepTitle}>
-                  <FormattedMessage id="SectionHowItWorks.partThreeTitle" />
+                  <FormattedMessage id="SectionHowItWorks.part3Title" />
                 </h2>
                 <p>
-                  <FormattedMessage id="SectionHowItWorks.partThreeText" />
+                  <FormattedMessage id="SectionHowItWorks.part3Text" />
                 </p>
               </div>
             </div>
