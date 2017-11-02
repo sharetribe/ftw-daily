@@ -218,16 +218,19 @@ export const pagination = shape({
   totalPages: number.isRequired,
 });
 
-export const ERROR_CODE_TRANSITION_PARAMETER_VALIDATION_FAILED =
-  'transition-parameter-validation-failed';
+export const ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND = 'transaction-listing-not-found';
 export const ERROR_CODE_PAYMENT_FAILED = 'transaction-payment-failed';
 export const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
+export const ERROR_CODE_EMAIL_NOT_FOUND = 'email-not-found';
+export const ERROR_CODE_EMAIL_NOT_VERIFIED = 'email-unverified';
 export const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'email-too-many-verification-requests';
 export const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit';
 const ERROR_CODES = [
-  ERROR_CODE_TRANSITION_PARAMETER_VALIDATION_FAILED,
+  ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND,
   ERROR_CODE_PAYMENT_FAILED,
   ERROR_CODE_EMAIL_TAKEN,
+  ERROR_CODE_EMAIL_NOT_FOUND,
+  ERROR_CODE_EMAIL_NOT_VERIFIED,
   ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS,
   ERROR_CODE_UPLOAD_OVER_LIMIT,
 ];

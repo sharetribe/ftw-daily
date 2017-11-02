@@ -10,9 +10,11 @@
  */
 
 import {
-  ERROR_CODE_TRANSITION_PARAMETER_VALIDATION_FAILED,
+  ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND,
   ERROR_CODE_PAYMENT_FAILED,
   ERROR_CODE_EMAIL_TAKEN,
+  ERROR_CODE_EMAIL_NOT_FOUND,
+  ERROR_CODE_EMAIL_NOT_VERIFIED,
   ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS,
   ERROR_CODE_UPLOAD_OVER_LIMIT,
 } from './propTypes';
@@ -78,36 +80,23 @@ export const isUploadProfileImageOverLimitError = error =>
  * Check if the given API error (from `sdk.passwordReset.request()`)
  * is due to no user having the given email address.
  */
-export const isPasswordRecoveryEmailNotFoundError = error => error && error.status === 404;
+export const isPasswordRecoveryEmailNotFoundError = error =>
+  hasErrorWithCode(error, ERROR_CODE_EMAIL_NOT_FOUND);
 
 /**
  * Check if the given API error (from `sdk.passwordReset.request()`)
  * is due to the email not being verified, preventing the reset.
  */
-export const isPasswordRecoveryEmailNotVerifiedError = error => error && error.status === 409;
+export const isPasswordRecoveryEmailNotVerifiedError = error =>
+  hasErrorWithCode(error, ERROR_CODE_EMAIL_NOT_VERIFIED);
 
 /**
  * Check if the given API error (from `sdk.transaction.initiate()` or
  * `sdk.transaction.initiateSpeculative()`) is due to the listing
  * being closed or deleted.
  */
-export const isTransactionInitiateListingNotFoundError = error => {
-  return responseAPIErrors(error).some(apiError => {
-    let notfound = false;
-
-    try {
-      // TODO: This is clearly a temporary solution for digging out
-      // the deleted information from the error and should be changed
-      // to a proper error code when the API supports a specific code
-      // for this.
-      notfound = apiError.details.data.rep[0][1].reason === 'listing-not-found';
-    } catch (e) {
-      // Ignore
-    }
-
-    return apiError.code === ERROR_CODE_TRANSITION_PARAMETER_VALIDATION_FAILED && notfound;
-  });
-};
+export const isTransactionInitiateListingNotFoundError = error =>
+  hasErrorWithCode(error, ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND);
 
 /**
  * Check if the given API error (from `sdk.transaction.initiate()`) is
@@ -122,8 +111,10 @@ export const isTransactionInitiateAmountTooLowError = error => {
     try {
       // TODO: This is a temporary solution until a proper error code
       // for this specific error is received in the response.
-      const msg = apiError.details.msg;
-      isAmountTooLow = msg.startsWith('Amount must be at least');
+      const msg = apiError.meta.stripe_message;
+      isAmountTooLow =
+        msg.startsWith('Amount must be at least') ||
+        msg.startsWith('Amount must convert to at least');
     } catch (e) {
       // Ignore
     }
