@@ -146,6 +146,14 @@ class ProfileSettingsFormComponent extends Component {
     });
     const lastNameRequired = validators.required(lastNameRequiredMessage);
 
+    // Bio
+    const bioLabel = intl.formatMessage({
+      id: 'ProfileSettingsForm.bioLabel',
+    });
+    const bioPlaceholder = intl.formatMessage({
+      id: 'ProfileSettingsForm.bioPlaceholder',
+    });
+
     const uploadingOverlay =
       uploadInProgress || this.state.uploadDelay ? (
         <div className={css.uploadingImageOverlay}>
@@ -241,7 +249,7 @@ class ProfileSettingsFormComponent extends Component {
             <FormattedMessage id="ProfileSettingsForm.fileInfo" />
           </div>
         </div>
-        <div className={classNames(css.sectionContainer, css.lastSection)}>
+        <div className={css.sectionContainer}>
           <h3 className={css.sectionTitle}>
             <FormattedMessage id="ProfileSettingsForm.yourName" />
           </h3>
@@ -265,6 +273,21 @@ class ProfileSettingsFormComponent extends Component {
               validate={lastNameRequired}
             />
           </div>
+        </div>
+        <div className={classNames(css.sectionContainer, css.lastSection)}>
+          <h3 className={css.sectionTitle}>
+            <FormattedMessage id="ProfileSettingsForm.bioHeading" />
+          </h3>
+          <TextInputField
+            type="textarea"
+            name="bio"
+            id={`${form}.bio`}
+            label={bioLabel}
+            placeholder={bioPlaceholder}
+          />
+          <p className={css.bioInfo}>
+            <FormattedMessage id="ProfileSettingsForm.bioInfo" />
+          </p>
         </div>
         {submitError}
         <Button

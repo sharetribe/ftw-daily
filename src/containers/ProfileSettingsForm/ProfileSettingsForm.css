@@ -276,6 +276,10 @@
   width: calc(66% - 9px);
 }
 
+.bioInfo {
+  color: var(--matterColorAnti);
+}
+
 .submitButton {
   margin-top: 24px;
 }
