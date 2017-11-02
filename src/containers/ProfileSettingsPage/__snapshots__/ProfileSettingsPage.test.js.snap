@@ -28,12 +28,14 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <h1>
-          <FormattedMessage
-            id="ProfileSettingsPage.title"
-            values={Object {}}
-          />
-        </h1>
+        <div>
+          <h1>
+            <FormattedMessage
+              id="ProfileSettingsPage.title"
+              values={Object {}}
+            />
+          </h1>
+        </div>
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
