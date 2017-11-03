@@ -143,6 +143,16 @@ export default function reducer(state = initialState, action = {}) {
 
 // ================ Selectors ================ //
 
+export const hasCurrentUserErrors = state => {
+  const { user } = state;
+  return (
+    user.currentUserShowError ||
+    user.currentUserHasListingsError ||
+    user.currentUserNotificationCountError ||
+    user.currentUserHasOrdersError
+  );
+};
+
 export const verificationSendingInProgress = state => {
   return state.user.sendVerificationEmailInProgress;
 };
@@ -267,10 +277,7 @@ export const fetchCurrentUserHasListings = () => (dispatch, getState, sdk) => {
       const hasListings = response.data.data && response.data.data.length > 0;
       dispatch(fetchCurrentUserHasListingsSuccess(!!hasListings));
     })
-    .catch(e => {
-      // TODO: dispatch flash message: "Something went wrong while retrieving user info"
-      dispatch(fetchCurrentUserHasListingsError(storableError(e)));
-    });
+    .catch(e => dispatch(fetchCurrentUserHasListingsError(storableError(e))));
 };
 
 export const fetchCurrentUserHasOrders = () => (dispatch, getState, sdk) => {
@@ -293,10 +300,7 @@ export const fetchCurrentUserHasOrders = () => (dispatch, getState, sdk) => {
       const hasOrders = response.data.data && response.data.data.length > 0;
       dispatch(fetchCurrentUserHasOrdersSuccess(!!hasOrders));
     })
-    .catch(e => {
-      // TODO: dispatch flash message: "Something went wrong while retrieving user info"
-      dispatch(fetchCurrentUserHasOrdersError(storableError(e)));
-    });
+    .catch(e => dispatch(fetchCurrentUserHasOrdersError(storableError(e))));
 };
 
 // Notificaiton page size is max (100 items on page)
@@ -318,11 +322,7 @@ export const fetchCurrentUserNotifications = () => (dispatch, getState, sdk) => 
       const transactions = response.data.data;
       dispatch(fetchCurrentUserNotificationsSuccess(transactions));
     })
-    .catch(e => {
-      // TODO: dispatch flash message: "Something went wrong while retrieving user info"
-      dispatch(fetchCurrentUserNotificationsError(storableError(e)));
-      throw e;
-    });
+    .catch(e => dispatch(fetchCurrentUserNotificationsError(storableError(e))));
 };
 
 export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
@@ -362,7 +362,6 @@ export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
       // Make sure auth info is up to date
       dispatch(authInfo());
 
-      // TODO: dispatch flash message: "Something went wrong while retrieving user info"
       dispatch(currentUserShowError(storableError(e)));
     });
 };
