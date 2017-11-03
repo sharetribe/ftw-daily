@@ -69,7 +69,8 @@
 
 .step {
   @media (--viewportMedium) {
-    margin-right: 76px;
+    width: 324px;
+    margin-right: 40px;
   }
 }
 
