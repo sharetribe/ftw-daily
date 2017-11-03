@@ -1,5 +1,10 @@
 @import '../../marketplace.css';
 
+:root {
+  --sectionMarginTop: 94px;
+  --sectionMarginTopMobile: 40px;
+}
+
 .root {
 }
 
@@ -30,5 +35,62 @@
     justify-content: center;
     padding-top: 60px;
     border-radius: 4px;
+  }
+}
+
+.sections {
+  margin: 0;
+
+  @media (--viewportMedium) {
+    padding: 0 30px;
+  }
+}
+
+.section {
+  overflow: auto;
+}
+
+/* Square corners for the last section if it's even */
+.section:nth-of-type(2n):last-of-type {
+  @media (--viewportMedium) {
+    border-radius: 4px 4px 0 0;
+  }
+}
+
+/* Every other section has a light background */
+.section:nth-of-type(2n) {
+  background-color: var(--matterColorLight);
+  @media (--viewportMedium) {
+    border-radius: 4px;
+  }
+}
+
+.sectionContent {
+  margin: var(--sectionMarginTopMobile) 24px 50px 24px;
+
+  @media (--viewportMedium) {
+    max-width: 1052px;
+    margin: var(--sectionMarginTop) auto;
+  }
+}
+
+/* A red top bar on top of light sections */
+.section:nth-of-type(2n) .sectionContent:before {
+  background: var(--marketplaceColor);
+  content: '';
+  display: block;
+  width: 109px;
+  height: 6px;
+
+  /* Place the bar on top of .sectionContent top margin */
+  position: relative;
+  top: -var(--sectionMarginTopMobile);
+
+  @media (--viewportMedium) {
+    width: 192px;
+    height: 8px;
+
+    /* Place the bar on top of .sectionContent top margin */
+    top: -var(--sectionMarginTop);
   }
 }

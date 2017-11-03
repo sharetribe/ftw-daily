@@ -1,22 +1,6 @@
 @import '../../marketplace.css';
 
-.root {
-  padding: 40px 24px;
-
-  @media (--viewportMedium) {
-    padding: 87px 36px;
-  }
-}
-
-.content {
-  @media (--viewportMedium) {
-    max-width: 1052px;
-    margin: 0 auto;
-  }
-}
-
 .title {
-  /* Font style */
   @apply --marketplaceH1FontStyles;
 
   margin-top: 0;
