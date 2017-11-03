@@ -73,6 +73,8 @@
   --zIndexPopup: 50;
   /* modals and UI overlays should use z-indexes above 100 */
   --zIndexModal: 100;
+  /* generic error message should overlay even modals */
+  --zIndexGenericError: 200;
 
   /* ================ Border radius ================ */
 

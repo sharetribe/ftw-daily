@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as propTypes from '../../util/propTypes';
-import { sendVerificationEmail } from '../../ducks/user.duck';
+import { sendVerificationEmail, hasCurrentUserErrors } from '../../ducks/user.duck';
 import { logout, authenticationInProgress } from '../../ducks/Auth.duck';
 import { manageDisableScrolling } from '../../ducks/UI.duck';
 import { Topbar } from '../../components';
@@ -17,6 +17,7 @@ export const TopbarContainerComponent = props => {
     currentUserHasOrders,
     history,
     isAuthenticated,
+    hasGenericError,
     location,
     notificationCount,
     onLogout,
@@ -42,6 +43,7 @@ export const TopbarContainerComponent = props => {
       onResendVerificationEmail={onResendVerificationEmail}
       sendVerificationEmailInProgress={sendVerificationEmailInProgress}
       sendVerificationEmailError={sendVerificationEmailError}
+      showGenericError={hasGenericError}
       {...rest}
     />
   );
@@ -68,6 +70,7 @@ TopbarContainerComponent.propTypes = {
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: propTypes.error,
   onResendVerificationEmail: func.isRequired,
+  hasGenericError: bool.isRequired,
 
   // from withRouter
   history: shape({
@@ -78,7 +81,7 @@ TopbarContainerComponent.propTypes = {
 
 const mapStateToProps = state => {
   // Topbar needs isAuthenticated
-  const { isAuthenticated } = state.Auth;
+  const { isAuthenticated, logoutError } = state.Auth;
   // Topbar needs user info.
   const {
     currentUser,
@@ -88,6 +91,7 @@ const mapStateToProps = state => {
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
   } = state.user;
+  const hasGenericError = !!(logoutError || hasCurrentUserErrors(state));
   return {
     authInProgress: authenticationInProgress(state),
     currentUser,
@@ -97,6 +101,7 @@ const mapStateToProps = state => {
     isAuthenticated,
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
+    hasGenericError,
   };
 };
 

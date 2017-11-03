@@ -545,6 +545,7 @@
   "Topbar.closeVerifyEmailReminder": "Later",
   "Topbar.fixEmail": "Whoops, typo in your email? {fixEmailLink}",
   "Topbar.fixEmailLinkText": "Fix it.",
+  "Topbar.genericError": "Oh no, something went wrong. Please check your network connection and try again.",
   "Topbar.logoIcon": "Go to homepage",
   "Topbar.menuIcon": "Open menu",
   "Topbar.mobileSearchHelp": "Tip: You can also search saunas by zip code, for example \"00500\" or city district – \"Sörnäinen\".",
