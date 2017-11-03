@@ -18,9 +18,7 @@ StaticPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { logoutError } = state.Auth;
   return {
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
   };
 };

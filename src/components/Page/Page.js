@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
 import config from '../../config';
 import { metaTagProps } from '../../util/seo';
 import { canonicalRoutePath } from '../../util/routes';
-import * as propTypes from '../../util/propTypes';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
@@ -49,7 +48,6 @@ class PageComponent extends Component {
       children,
       location,
       intl,
-      logoutError,
       scrollingDisabled,
       author,
       contentType,
@@ -63,14 +61,6 @@ class PageComponent extends Component {
       twitterImages,
       updated,
     } = this.props;
-
-    // TODO: use FlashMessages for auth errors
-
-    /* eslint-disable no-console */
-    if (logoutError && console && console.error) {
-      console.error(logoutError);
-    }
-    /* eslint-enable no-console */
 
     const classes = classNames(rootClassName || css.root, className, {
       [css.scrollingDisabled]: scrollingDisabled,
@@ -171,11 +161,6 @@ class PageComponent extends Component {
           {metaTags}
           <script type="application/ld+json">{schemaArrayJSONString}</script>
         </Helmet>
-        {logoutError ? (
-          <div style={{ color: 'red' }}>
-            <FormattedMessage id="Page.logoutFailed" />
-          </div>
-        ) : null}
         <div className={css.content}>{children}</div>
       </div>
     );
@@ -188,7 +173,6 @@ PageComponent.defaultProps = {
   className: null,
   rootClassName: null,
   children: null,
-  logoutError: null,
   scrollingDisabled: false,
   author: null,
   contentType: 'website',
@@ -206,7 +190,6 @@ PageComponent.propTypes = {
   className: string,
   rootClassName: string,
   children: any,
-  logoutError: propTypes.error,
   scrollingDisabled: bool,
 
   // SEO related props

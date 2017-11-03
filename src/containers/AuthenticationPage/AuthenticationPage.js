@@ -49,7 +49,6 @@ export class AuthenticationPageComponent extends Component {
       isAuthenticated,
       location,
       loginError,
-      logoutError,
       scrollingDisabled,
       signupError,
       submitLogin,
@@ -78,15 +77,6 @@ export class AuthenticationPageComponent extends Component {
     } else if (isAuthenticated && currentUserLoaded && !showEmailVerification) {
       return <NamedRedirect name="LandingPage" />;
     }
-
-    /* eslint-disable no-console */
-    if (loginError && console && console.error) {
-      console.error(loginError);
-    }
-    if (signupError && console && console.error) {
-      console.error(signupError);
-    }
-    /* eslint-enable no-console */
 
     const loginErrorMessage = (
       <div className={css.error}>
@@ -224,7 +214,6 @@ export class AuthenticationPageComponent extends Component {
 
     return (
       <Page
-        logoutError={logoutError}
         title={schemaTitle}
         scrollingDisabled={scrollingDisabled}
         schema={{
@@ -267,7 +256,6 @@ export class AuthenticationPageComponent extends Component {
 AuthenticationPageComponent.defaultProps = {
   currentUser: null,
   loginError: null,
-  logoutError: null,
   signupError: null,
   tab: 'signup',
   sendVerificationEmailError: null,
@@ -280,7 +268,6 @@ AuthenticationPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   isAuthenticated: bool.isRequired,
   loginError: propTypes.error,
-  logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
   signupError: propTypes.error,
   submitLogin: func.isRequired,
@@ -300,14 +287,13 @@ AuthenticationPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { isAuthenticated, loginError, logoutError, signupError } = state.Auth;
+  const { isAuthenticated, loginError, signupError } = state.Auth;
   const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
   return {
     authInProgress: authenticationInProgress(state),
     currentUser,
     isAuthenticated,
     loginError,
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
     signupError,
     sendVerificationEmailInProgress,

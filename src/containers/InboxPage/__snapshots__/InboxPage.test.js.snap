@@ -2,7 +2,6 @@
 
 exports[`InboxPage matches snapshot 1`] = `
 <Page
-  logoutError={null}
   scrollingDisabled={false}
   title="InboxPage.ordersTitle"
 >
@@ -358,7 +357,6 @@ exports[`InboxPage matches snapshot 2`] = `
 
 exports[`InboxPage matches snapshot 3`] = `
 <Page
-  logoutError={null}
   scrollingDisabled={false}
   title="InboxPage.salesTitle"
 >

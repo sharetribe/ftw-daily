@@ -31,7 +31,6 @@ const { UUID } = types;
 
 export const ProfilePageComponent = props => {
   const {
-    logoutError,
     scrollingDisabled,
     currentUser,
     user,
@@ -124,7 +123,6 @@ export const ProfilePageComponent = props => {
 
   return (
     <Page
-      logoutError={logoutError}
       scrollingDisabled={scrollingDisabled}
       title={schemaTitle}
       schema={{
@@ -148,7 +146,6 @@ export const ProfilePageComponent = props => {
 };
 
 ProfilePageComponent.defaultProps = {
-  logoutError: null,
   currentUser: null,
   user: null,
   userShowError: null,
@@ -158,7 +155,6 @@ ProfilePageComponent.defaultProps = {
 const { bool, arrayOf } = PropTypes;
 
 ProfilePageComponent.propTypes = {
-  logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
   currentUser: propTypes.currentUser,
   user: propTypes.user,
@@ -171,15 +167,12 @@ ProfilePageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // Page needs logoutError
-  const { logoutError } = state.Auth;
   const { currentUser } = state.user;
   const { userId, userShowError, queryListingsError, userListingRefs } = state.ProfilePage;
   const userMatches = getMarketplaceEntities(state, [{ type: 'user', id: userId }]);
   const user = userMatches.length === 1 ? userMatches[0] : null;
   const listings = getMarketplaceEntities(state, userListingRefs);
   return {
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
     currentUser,
     user,

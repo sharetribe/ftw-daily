@@ -37,7 +37,6 @@ export class PasswordResetPageComponent extends Component {
   render() {
     const {
       intl,
-      logoutError,
       scrollingDisabled,
       location,
       resetPasswordInProgress,
@@ -121,7 +120,7 @@ export class PasswordResetPageComponent extends Component {
     }
 
     return (
-      <Page title={title} logoutError={logoutError} scrollingDisabled={scrollingDisabled}>
+      <Page title={title} scrollingDisabled={scrollingDisabled}>
         <LayoutSingleColumn>
           <LayoutWrapperTopbar>
             <TopbarContainer />
@@ -139,14 +138,12 @@ export class PasswordResetPageComponent extends Component {
 }
 
 PasswordResetPageComponent.defaultProps = {
-  logoutError: null,
   resetPasswordError: null,
 };
 
 const { bool, func, shape, string } = PropTypes;
 
 PasswordResetPageComponent.propTypes = {
-  logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
   resetPasswordInProgress: bool.isRequired,
   resetPasswordError: propTypes.error,
@@ -162,10 +159,8 @@ PasswordResetPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { logoutError } = state.Auth;
   const { resetPasswordInProgress, resetPasswordError } = state.PasswordResetPage;
   return {
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
     resetPasswordInProgress,
     resetPasswordError,

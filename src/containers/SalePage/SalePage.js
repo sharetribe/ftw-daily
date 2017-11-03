@@ -34,7 +34,6 @@ export const SalePageComponent = props => {
     acceptInProgress,
     declineInProgress,
     intl,
-    logoutError,
     onAcceptSale,
     onDeclineSale,
     params,
@@ -98,7 +97,6 @@ export const SalePageComponent = props => {
 
   return (
     <Page
-      logoutError={logoutError}
       title={intl.formatMessage({ id: 'SalePage.title' }, { title: listingTitle })}
       scrollingDisabled={scrollingDisabled}
     >
@@ -122,7 +120,6 @@ SalePageComponent.defaultProps = {
   fetchSaleError: null,
   acceptSaleError: null,
   declineSaleError: null,
-  logoutError: null,
   transaction: null,
 };
 
@@ -136,7 +133,6 @@ SalePageComponent.propTypes = {
   acceptInProgress: bool.isRequired,
   declineInProgress: bool.isRequired,
   intl: intlShape.isRequired,
-  logoutError: propTypes.error,
   onAcceptSale: func.isRequired,
   onDeclineSale: func.isRequired,
   params: shape({ id: string }).isRequired,
@@ -154,7 +150,6 @@ const mapStateToProps = state => {
     declineInProgress,
     transactionRef,
   } = state.SalePage;
-  const { logoutError } = state.Auth;
   const { currentUser } = state.user;
 
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
@@ -167,7 +162,6 @@ const mapStateToProps = state => {
     declineSaleError,
     acceptInProgress,
     declineInProgress,
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
     transaction,
   };

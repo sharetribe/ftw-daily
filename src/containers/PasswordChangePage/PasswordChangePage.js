@@ -25,7 +25,6 @@ export const PasswordChangePageComponent = props => {
     changePasswordError,
     changePasswordInProgress,
     currentUser,
-    logoutError,
     onChange,
     onSubmitChangePassword,
     passwordChanged,
@@ -63,7 +62,7 @@ export const PasswordChangePageComponent = props => {
     ) : null;
 
   return (
-    <Page logoutError={logoutError} title="Contact details" scrollingDisabled={scrollingDisabled}>
+    <Page title="Contact details" scrollingDisabled={scrollingDisabled}>
       <LayoutSideNavigation>
         <LayoutWrapperTopbar>
           <TopbarContainer
@@ -93,7 +92,6 @@ export const PasswordChangePageComponent = props => {
 PasswordChangePageComponent.defaultProps = {
   changePasswordError: null,
   currentUser: null,
-  logoutError: null,
 };
 
 const { bool, func } = PropTypes;
@@ -102,7 +100,6 @@ PasswordChangePageComponent.propTypes = {
   changePasswordError: propTypes.error,
   changePasswordInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
-  logoutError: propTypes.error,
   onChange: func.isRequired,
   onSubmitChangePassword: func.isRequired,
   passwordChanged: bool.isRequired,
@@ -110,8 +107,6 @@ PasswordChangePageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // Page needs logoutError
-  const { logoutError } = state.Auth;
   // Topbar needs user info.
   const {
     changePasswordError,
@@ -123,7 +118,6 @@ const mapStateToProps = state => {
     changePasswordError,
     changePasswordInProgress,
     currentUser,
-    logoutError,
     passwordChanged,
     scrollingDisabled: isScrollingDisabled(state),
   };

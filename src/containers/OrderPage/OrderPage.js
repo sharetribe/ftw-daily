@@ -26,15 +26,7 @@ import css from './OrderPage.css';
 // OrderPage handles data loading
 // It show loading data text or OrderDetailsPanel (and later also another panel for messages).
 export const OrderPageComponent = props => {
-  const {
-    currentUser,
-    fetchOrderError,
-    intl,
-    logoutError,
-    params,
-    scrollingDisabled,
-    transaction,
-  } = props;
+  const { currentUser, fetchOrderError, intl, params, scrollingDisabled, transaction } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const listingTitle = currentListing.attributes.title;
@@ -76,7 +68,6 @@ export const OrderPageComponent = props => {
 
   return (
     <Page
-      logoutError={logoutError}
       title={intl.formatMessage({ id: 'OrderPage.title' }, { listingTitle })}
       scrollingDisabled={scrollingDisabled}
     >
@@ -96,7 +87,6 @@ export const OrderPageComponent = props => {
 OrderPageComponent.defaultProps = {
   currentUser: null,
   fetchOrderError: null,
-  logoutError: null,
   transaction: null,
 };
 
@@ -106,7 +96,6 @@ OrderPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   fetchOrderError: propTypes.error,
   intl: intlShape.isRequired,
-  logoutError: propTypes.error,
   params: shape({ id: string }).isRequired,
   scrollingDisabled: bool.isRequired,
   tab: oneOf(['details', 'discussion']).isRequired,
@@ -115,7 +104,6 @@ OrderPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { fetchOrderError, transactionRef } = state.OrderPage;
-  const { logoutError } = state.Auth;
   const { currentUser } = state.user;
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
@@ -123,7 +111,6 @@ const mapStateToProps = state => {
   return {
     currentUser,
     fetchOrderError,
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
     transaction,
   };

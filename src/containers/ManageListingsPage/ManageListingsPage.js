@@ -49,7 +49,6 @@ export class ManageListingsPageComponent extends Component {
       closingListing,
       closingListingError,
       listings,
-      logoutError,
       onCloseListing,
       onOpenListing,
       openingListing,
@@ -111,7 +110,7 @@ export class ManageListingsPageComponent extends Component {
     const openingErrorListingId = !!openingListingError && openingListingError.listingId;
 
     return (
-      <Page logoutError={logoutError} scrollingDisabled={scrollingDisabled} title="Manage listings">
+      <Page scrollingDisabled={scrollingDisabled} title="Manage listings">
         <LayoutSingleColumn>
           <LayoutWrapperTopbar>
             <TopbarContainer currentPage="ManageListingsPage" />
@@ -152,7 +151,6 @@ export class ManageListingsPageComponent extends Component {
 
 ManageListingsPageComponent.defaultProps = {
   listings: [],
-  logoutError: null,
   pagination: null,
   queryListingsError: null,
   queryParams: null,
@@ -171,7 +169,6 @@ ManageListingsPageComponent.propTypes = {
     error: propTypes.error.isRequired,
   }),
   listings: arrayOf(propTypes.listing),
-  logoutError: propTypes.error,
   onCloseListing: func.isRequired,
   onOpenListing: func.isRequired,
   openingListing: shape({ uuid: string.isRequired }),
@@ -199,12 +196,9 @@ const mapStateToProps = state => {
     closingListingError,
   } = state.ManageListingsPage;
   const listings = getListingsById(state, currentPageResultIds);
-  // Page needs logoutError
-  const { logoutError } = state.Auth;
   return {
     currentPageResultIds,
     listings,
-    logoutError,
     pagination,
     queryInProgress,
     queryListingsError,

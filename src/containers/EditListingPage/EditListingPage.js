@@ -49,7 +49,6 @@ export const EditListingPageComponent = props => {
     getListing,
     history,
     intl,
-    logoutError,
     onCreateListing,
     onUpdateListing,
     onCreateListingDraft,
@@ -115,7 +114,7 @@ export const EditListingPageComponent = props => {
       : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
 
     return (
-      <Page logoutError={logoutError} title={title} scrollingDisabled={scrollingDisabled}>
+      <Page title={title} scrollingDisabled={scrollingDisabled}>
         <TopbarContainer
           className={css.topbar}
           mobileRootClassName={css.mobileTopbar}
@@ -165,7 +164,6 @@ EditListingPageComponent.defaultProps = {
   currentUserHasOrders: null,
   listing: null,
   listingDraft: null,
-  logoutError: null,
   notificationCount: 0,
   sendVerificationEmailError: null,
 };
@@ -177,7 +175,6 @@ EditListingPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
   getListing: func.isRequired,
-  logoutError: propTypes.error,
   onCreateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
@@ -209,7 +206,6 @@ EditListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const page = state.EditListingPage;
-  const { logoutError } = state.Auth;
   const { createStripeAccountInProgress, createStripeAccountError, currentUser } = state.user;
 
   const fetchInProgress = createStripeAccountInProgress;
@@ -223,7 +219,6 @@ const mapStateToProps = state => {
     currentUser,
     fetchInProgress,
     getListing,
-    logoutError,
     page,
     scrollingDisabled: isScrollingDisabled(state),
   };

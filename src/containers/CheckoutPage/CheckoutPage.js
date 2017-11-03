@@ -125,7 +125,6 @@ export class CheckoutPageComponent extends Component {
 
   render() {
     const {
-      logoutError,
       speculateTransactionInProgress,
       speculateTransactionError,
       speculatedTransaction,
@@ -262,7 +261,7 @@ export class CheckoutPageComponent extends Component {
       </div>
     );
 
-    const pageProps = { logoutError, title };
+    const pageProps = { title };
 
     if (isLoading) {
       return (
@@ -376,7 +375,6 @@ CheckoutPageComponent.defaultProps = {
   bookingDates: null,
   speculateTransactionError: null,
   speculatedTransaction: null,
-  logoutError: null,
   currentUser: null,
 };
 
@@ -393,7 +391,6 @@ CheckoutPageComponent.propTypes = {
   speculateTransactionError: propTypes.error,
   speculatedTransaction: propTypes.transaction,
   initiateOrderError: propTypes.error,
-  logoutError: propTypes.error,
   currentUser: propTypes.currentUser,
   params: shape({
     id: string,
@@ -420,10 +417,8 @@ const mapStateToProps = state => {
     initiateOrderError,
   } = state.CheckoutPage;
   const { currentUser } = state.user;
-  const { logoutError } = state.Auth;
   return {
     currentUser,
-    logoutError,
     bookingDates,
     speculateTransactionInProgress,
     speculateTransactionError,

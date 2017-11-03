@@ -2,7 +2,6 @@
 
 exports[`ContactDetailsPage matches snapshot 1`] = `
 <Page
-  logoutError={null}
   scrollingDisabled={false}
   title="Manage listings"
 >

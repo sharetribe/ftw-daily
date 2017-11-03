@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { injectIntl, intlShape } from 'react-intl';
-import * as propTypes from '../../util/propTypes';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import config from '../../config';
 import {
@@ -25,7 +24,7 @@ import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
 
 export const LandingPageComponent = props => {
-  const { history, intl, location, logoutError, scrollingDisabled } = props;
+  const { history, intl, location, scrollingDisabled } = props;
 
   // Schema for search engines (helps them to understand what this page is about)
   // http://schema.org
@@ -38,7 +37,6 @@ export const LandingPageComponent = props => {
   return (
     <Page
       className={css.root}
-      logoutError={logoutError}
       scrollingDisabled={scrollingDisabled}
       contentType="website"
       description={schemaDescription}
@@ -72,14 +70,9 @@ export const LandingPageComponent = props => {
   );
 };
 
-LandingPageComponent.defaultProps = {
-  logoutError: null,
-};
-
 const { bool, object } = PropTypes;
 
 LandingPageComponent.propTypes = {
-  logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
 
   // from withRouter
@@ -91,9 +84,7 @@ LandingPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { logoutError } = state.Auth;
   return {
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
   };
 };

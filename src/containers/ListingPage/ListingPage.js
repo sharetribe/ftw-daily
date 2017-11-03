@@ -179,7 +179,6 @@ export class ListingPageComponent extends Component {
       currentUser,
       getListing,
       intl,
-      logoutError,
       onManageDisableScrolling,
       params,
       scrollingDisabled,
@@ -366,7 +365,6 @@ export class ListingPageComponent extends Component {
 
     return (
       <Page
-        logoutError={logoutError}
         title={schemaTitle}
         scrollingDisabled={scrollingDisabled}
         author={currentAuthorDisplayName}
@@ -520,7 +518,6 @@ export class ListingPageComponent extends Component {
 
 ListingPageComponent.defaultProps = {
   currentUser: null,
-  logoutError: null,
   showListingError: null,
   tab: 'listing',
 };
@@ -540,7 +537,6 @@ ListingPageComponent.propTypes = {
   }).isRequired,
   currentUser: propTypes.currentUser,
   getListing: func.isRequired,
-  logoutError: propTypes.error,
   onManageDisableScrolling: func.isRequired,
   scrollingDisabled: bool.isRequired,
   showListingError: propTypes.error,
@@ -550,7 +546,6 @@ ListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { showListingError } = state.ListingPage;
-  const { logoutError } = state.Auth;
   const { currentUser } = state.user;
 
   const getListing = id => {
@@ -561,7 +556,6 @@ const mapStateToProps = state => {
   return {
     currentUser,
     getListing,
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
     showListingError,
   };

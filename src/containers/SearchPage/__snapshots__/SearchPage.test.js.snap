@@ -3,7 +3,6 @@
 exports[`SearchPageComponent matches snapshot 1`] = `
 <Page
   description="SearchPage.schemaDescription"
-  logoutError={null}
   schema={
     Object {
       "@context": "http://schema.org",

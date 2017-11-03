@@ -28,7 +28,6 @@ export const ContactDetailsPageComponent = props => {
     changeEmailInProgress,
     currentUser,
     emailChanged,
-    logoutError,
     onChange,
     scrollingDisabled,
     sendVerificationEmailInProgress,
@@ -73,7 +72,7 @@ export const ContactDetailsPageComponent = props => {
   ) : null;
 
   return (
-    <Page logoutError={logoutError} title="Contact details" scrollingDisabled={scrollingDisabled}>
+    <Page title="Contact details" scrollingDisabled={scrollingDisabled}>
       <LayoutSideNavigation>
         <LayoutWrapperTopbar>
           <TopbarContainer
@@ -103,7 +102,6 @@ export const ContactDetailsPageComponent = props => {
 ContactDetailsPageComponent.defaultProps = {
   changeEmailError: null,
   currentUser: null,
-  logoutError: null,
   sendVerificationEmailError: null,
 };
 
@@ -114,7 +112,6 @@ ContactDetailsPageComponent.propTypes = {
   changeEmailInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   emailChanged: bool.isRequired,
-  logoutError: propTypes.error,
   onChange: func.isRequired,
   onSubmitChangeEmail: func.isRequired,
   scrollingDisabled: bool.isRequired,
@@ -124,8 +121,6 @@ ContactDetailsPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // Page needs logoutError, Topbar needs isAuthenticated
-  const { isAuthenticated, logoutError } = state.Auth;
   // Topbar needs user info.
   const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
   const { changeEmailError, changeEmailInProgress, emailChanged } = state.ContactDetailsPage;
@@ -134,8 +129,6 @@ const mapStateToProps = state => {
     changeEmailInProgress,
     currentUser,
     emailChanged,
-    isAuthenticated,
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
     sendVerificationEmailInProgress,
     sendVerificationEmailError,

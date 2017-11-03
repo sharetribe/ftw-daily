@@ -170,7 +170,6 @@ export const InboxPageComponent = props => {
     fetchInProgress,
     fetchOrdersOrSalesError,
     intl,
-    logoutError,
     pagination,
     params,
     providerNotificationCount,
@@ -260,7 +259,7 @@ export const InboxPageComponent = props => {
   const nav = <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />;
 
   return (
-    <Page logoutError={logoutError} title={title} scrollingDisabled={scrollingDisabled}>
+    <Page title={title} scrollingDisabled={scrollingDisabled}>
       <LayoutSideNavigation>
         <LayoutWrapperTopbar>
           <TopbarContainer
@@ -296,7 +295,6 @@ InboxPageComponent.defaultProps = {
   currentUser: null,
   currentUserHasOrders: null,
   fetchOrdersOrSalesError: null,
-  logoutError: null,
   pagination: null,
   providerNotificationCount: 0,
   sendVerificationEmailError: null,
@@ -310,7 +308,6 @@ InboxPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
   fetchOrdersOrSalesError: propTypes.error,
-  logoutError: propTypes.error,
   pagination: propTypes.pagination,
   providerNotificationCount: number,
   scrollingDisabled: bool.isRequired,
@@ -322,13 +319,11 @@ InboxPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { fetchInProgress, fetchOrdersOrSalesError, pagination, transactionRefs } = state.InboxPage;
-  const { logoutError } = state.Auth;
   const { currentUser, currentUserNotificationCount: providerNotificationCount } = state.user;
   return {
     currentUser,
     fetchInProgress,
     fetchOrdersOrSalesError,
-    logoutError,
     pagination,
     providerNotificationCount,
     scrollingDisabled: isScrollingDisabled(state),

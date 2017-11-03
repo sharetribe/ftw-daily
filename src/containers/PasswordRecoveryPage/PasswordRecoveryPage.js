@@ -31,7 +31,6 @@ import css from './PasswordRecoveryPage.css';
 
 export const PasswordRecoveryPageComponent = props => {
   const {
-    logoutError,
     initialEmail,
     submittedEmail,
     recoveryError,
@@ -159,7 +158,7 @@ export const PasswordRecoveryPageComponent = props => {
   }
 
   return (
-    <Page logoutError={logoutError} title={title}>
+    <Page title={title}>
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
           <TopbarContainer />
@@ -176,7 +175,6 @@ export const PasswordRecoveryPageComponent = props => {
 };
 
 PasswordRecoveryPageComponent.defaultProps = {
-  logoutError: null,
   sendVerificationEmailError: null,
   initialEmail: null,
   submittedEmail: null,
@@ -186,7 +184,6 @@ PasswordRecoveryPageComponent.defaultProps = {
 const { bool, func, string } = PropTypes;
 
 PasswordRecoveryPageComponent.propTypes = {
-  logoutError: propTypes.error,
   initialEmail: string,
   submittedEmail: string,
   recoveryError: propTypes.error,
@@ -201,9 +198,6 @@ PasswordRecoveryPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // Page needs logoutError
-  const { logoutError } = state.Auth;
-
   const {
     initialEmail,
     submittedEmail,
@@ -212,7 +206,6 @@ const mapStateToProps = state => {
     passwordRequested,
   } = state.PasswordRecoveryPage;
   return {
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
     initialEmail,
     submittedEmail,

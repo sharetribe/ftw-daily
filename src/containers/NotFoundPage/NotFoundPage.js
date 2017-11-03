@@ -5,7 +5,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import routeConfiguration from '../../routeConfiguration';
-import * as propTypes from '../../util/propTypes';
 import { createResourceLocatorString } from '../../util/routes';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
@@ -30,7 +29,7 @@ export class NotFoundPageComponent extends Component {
   }
 
   render() {
-    const { history, logoutError, intl, scrollingDisabled } = this.props;
+    const { history, intl, scrollingDisabled } = this.props;
 
     const title = intl.formatMessage({
       id: 'NotFoundPage.title',
@@ -46,7 +45,7 @@ export class NotFoundPageComponent extends Component {
     };
 
     return (
-      <Page logoutError={logoutError} title={title} scrollingDisabled={scrollingDisabled}>
+      <Page title={title} scrollingDisabled={scrollingDisabled}>
         <LayoutSingleColumn>
           <LayoutWrapperTopbar>
             <TopbarContainer />
@@ -75,14 +74,12 @@ export class NotFoundPageComponent extends Component {
 }
 
 NotFoundPageComponent.defaultProps = {
-  logoutError: null,
   staticContext: {},
 };
 
 const { bool, func, object, shape } = PropTypes;
 
 NotFoundPageComponent.propTypes = {
-  logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
 
   // context object from StaticRouter, injected by the withRouter wrapper
@@ -98,10 +95,7 @@ NotFoundPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // Page needs logoutError
-  const { logoutError } = state.Auth;
   return {
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
   };
 };

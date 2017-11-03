@@ -13,7 +13,6 @@ exports[`LandingPage matches snapshot 1`] = `
       },
     ]
   }
-  logoutError={null}
   schema={
     Object {
       "@context": "http://schema.org",
