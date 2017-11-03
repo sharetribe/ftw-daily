@@ -16,26 +16,30 @@ export const QUERY_LISTINGS_ERROR = 'app/ProfilePage/QUERY_LISTINGS_ERROR';
 
 const initialState = {
   userId: null,
-
-  userShowInProgress: false,
-  userShowError: null,
-
-  queryListingsError: null,
   userListingRefs: [],
+  userShowError: null,
+  queryListingsError: null,
 };
 
 export default function profilePageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case SHOW_USER_REQUEST:
-      return { ...state, userShowInProgress: true, userShowError: null, userId: payload.userId };
+      return { ...state, userShowError: null, userId: payload.userId };
     case SHOW_USER_SUCCESS:
-      return { ...state, userShowInProgress: false };
+      return state;
     case SHOW_USER_ERROR:
-      return { ...state, userShowInProgress: false, userShowError: payload };
+      return { ...state, userShowError: payload };
 
     case QUERY_LISTINGS_REQUEST:
-      return { ...state, userListingRefs: [], queryListingsError: null };
+      return {
+        ...state,
+
+        // Empty listings only when user id changes
+        userListingRefs: payload.userId === state.userId ? state.userListingRefs : [],
+
+        queryListingsError: null,
+      };
     case QUERY_LISTINGS_SUCCESS:
       return { ...state, userListingRefs: payload.listingRefs };
     case QUERY_LISTINGS_ERROR:
@@ -63,8 +67,9 @@ export const showUserError = e => ({
   payload: e,
 });
 
-export const queryListingsRequest = () => ({
+export const queryListingsRequest = userId => ({
   type: QUERY_LISTINGS_REQUEST,
+  payload: { userId },
 });
 
 export const queryListingsSuccess = listingRefs => ({
@@ -81,7 +86,7 @@ export const queryListingsError = e => ({
 // ================ Thunks ================ //
 
 export const queryUserListings = userId => (dispatch, getState, sdk) => {
-  dispatch(queryListingsRequest());
+  dispatch(queryListingsRequest(userId));
   return sdk.listings
     .query({ author_id: userId, include: ['images'] })
     .then(response => {

@@ -391,7 +391,6 @@
   "ProfilePage.editProfileLinkDesktop": "Edit profile",
   "ProfilePage.editProfileLinkMobile": "Edit",
   "ProfilePage.listingsTitle": "My saunas ({count})",
-  "ProfilePage.loadingData": "Loading user data…",
   "ProfilePage.loadingDataFailed": "Whoopsie, something went wrong - please try again.",
   "ProfilePage.mobileHeading": "{name}",
   "ProfilePage.schemaTitle": "{name} | {siteTitle}",
