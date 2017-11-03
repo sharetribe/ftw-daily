@@ -23,6 +23,7 @@ import {
   ResponsiveImage,
 } from '../../components';
 import { StripePaymentForm } from '../../containers';
+import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { initiateOrder, setInitialValues, speculateTransaction } from './CheckoutPage.duck';
 
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
@@ -125,6 +126,7 @@ export class CheckoutPageComponent extends Component {
 
   render() {
     const {
+      scrollingDisabled,
       speculateTransactionInProgress,
       speculateTransactionError,
       speculatedTransaction,
@@ -261,7 +263,7 @@ export class CheckoutPageComponent extends Component {
       </div>
     );
 
-    const pageProps = { title };
+    const pageProps = { title, scrollingDisabled };
 
     if (isLoading) {
       return (
@@ -381,6 +383,7 @@ CheckoutPageComponent.defaultProps = {
 const { func, instanceOf, shape, string, bool } = PropTypes;
 
 CheckoutPageComponent.propTypes = {
+  scrollingDisabled: bool.isRequired,
   listing: propTypes.listing,
   bookingDates: shape({
     bookingStart: instanceOf(Date).isRequired,
@@ -418,6 +421,7 @@ const mapStateToProps = state => {
   } = state.CheckoutPage;
   const { currentUser } = state.user;
   return {
+    scrollingDisabled: isScrollingDisabled(state),
     currentUser,
     bookingDates,
     speculateTransactionInProgress,

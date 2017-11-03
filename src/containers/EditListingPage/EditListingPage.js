@@ -154,7 +154,9 @@ export const EditListingPageComponent = props => {
     const loadingPageMsg = {
       id: 'EditListingPage.loadingListingData',
     };
-    return <Page title={intl.formatMessage(loadingPageMsg)} />;
+    return (
+      <Page title={intl.formatMessage(loadingPageMsg)} scrollingDisabled={scrollingDisabled} />
+    );
   }
 };
 

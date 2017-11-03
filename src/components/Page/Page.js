@@ -173,7 +173,6 @@ PageComponent.defaultProps = {
   className: null,
   rootClassName: null,
   children: null,
-  scrollingDisabled: false,
   author: null,
   contentType: 'website',
   description: null,
@@ -190,7 +189,7 @@ PageComponent.propTypes = {
   className: string,
   rootClassName: string,
   children: any,
-  scrollingDisabled: bool,
+  scrollingDisabled: bool.isRequired,
 
   // SEO related props
   author: string,

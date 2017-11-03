@@ -213,7 +213,7 @@ export class ListingPageComponent extends Component {
       // Other error in fetching listing
 
       return (
-        <Page title={errorTitle}>
+        <Page title={errorTitle} scrollingDisabled={scrollingDisabled}>
           <LayoutSingleColumn className={css.pageRoot}>
             <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
             <LayoutWrapperMain>
@@ -231,7 +231,7 @@ export class ListingPageComponent extends Component {
       // Still loading the listing
 
       return (
-        <Page title={loadingTitle}>
+        <Page title={loadingTitle} scrollingDisabled={scrollingDisabled}>
           <LayoutSingleColumn className={css.pageRoot}>
             <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
             <LayoutWrapperMain>

@@ -31,6 +31,7 @@ import css from './PasswordRecoveryPage.css';
 
 export const PasswordRecoveryPageComponent = props => {
   const {
+    scrollingDisabled,
     initialEmail,
     submittedEmail,
     recoveryError,
@@ -158,7 +159,7 @@ export const PasswordRecoveryPageComponent = props => {
   }
 
   return (
-    <Page title={title}>
+    <Page title={title} scrollingDisabled={scrollingDisabled}>
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
           <TopbarContainer />
@@ -184,6 +185,7 @@ PasswordRecoveryPageComponent.defaultProps = {
 const { bool, func, string } = PropTypes;
 
 PasswordRecoveryPageComponent.propTypes = {
+  scrollingDisabled: bool.isRequired,
   initialEmail: string,
   submittedEmail: string,
   recoveryError: propTypes.error,

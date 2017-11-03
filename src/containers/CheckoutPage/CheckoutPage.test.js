@@ -22,6 +22,7 @@ describe('CheckoutPage', () => {
       sendOrderRequest: noop,
       fetchSpeculatedTransaction: noop,
       speculateTransactionInProgress: false,
+      scrollingDisabled: false,
     };
     const tree = renderShallow(<CheckoutPageComponent {...props} />);
     expect(tree).toMatchSnapshot();
