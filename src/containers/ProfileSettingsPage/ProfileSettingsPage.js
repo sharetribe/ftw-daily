@@ -14,6 +14,7 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
+  NamedLink,
 } from '../../components';
 import { ProfileSettingsForm, TopbarContainer } from '../../containers';
 
@@ -48,15 +49,19 @@ export class ProfileSettingsPageComponent extends Component {
     } = this.props;
 
     const handleSubmit = values => {
-      const { firstName, lastName } = values;
-      const name = { firstName, lastName };
+      const { firstName, lastName, bio: rawBio } = values;
+
+      // Ensure that the optional bio is a string
+      const bio = rawBio || '';
+
+      const profile = { firstName, lastName, bio };
       const uploadedImage = this.props.image;
 
       // Update profileImage only if file system has been accessed
       const updatedValues =
         uploadedImage && uploadedImage.imageId && uploadedImage.file
-          ? { ...name, profileImageId: uploadedImage.imageId }
-          : name;
+          ? { ...profile, profileImageId: uploadedImage.imageId }
+          : profile;
 
       onUpdateProfile(updatedValues).then(() => {
         this.setState({ profileUpdated: true });
@@ -69,7 +74,7 @@ export class ProfileSettingsPageComponent extends Component {
     };
 
     const user = ensureCurrentUser(currentUser);
-    const { firstName, lastName } = user.attributes.profile;
+    const { firstName, lastName, bio } = user.attributes.profile;
     const profileImageId = user.profileImage ? user.profileImage.id : null;
     const profileImage = image || { imageId: profileImageId };
 
@@ -77,7 +82,7 @@ export class ProfileSettingsPageComponent extends Component {
       <ProfileSettingsForm
         className={css.form}
         currentUser={currentUser}
-        initialValues={{ firstName, lastName, profileImage }}
+        initialValues={{ firstName, lastName, bio, profileImage }}
         profileImage={profileImage}
         onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
         uploadInProgress={uploadInProgress}
@@ -104,9 +109,20 @@ export class ProfileSettingsPageComponent extends Component {
           </LayoutWrapperTopbar>
           <LayoutWrapperMain>
             <div className={css.content}>
-              <h1>
-                <FormattedMessage id="ProfileSettingsPage.title" />
-              </h1>
+              <div className={css.headingContainer}>
+                <h1 className={css.heading}>
+                  <FormattedMessage id="ProfileSettingsPage.title" />
+                </h1>
+                {user.id ? (
+                  <NamedLink
+                    className={css.profileLink}
+                    name="ProfilePage"
+                    params={{ id: user.id.uuid }}
+                  >
+                    <FormattedMessage id="ProfileSettingsPage.viewProfileLink" />
+                  </NamedLink>
+                ) : null}
+              </div>
               {profileSettingsForm}
             </div>
           </LayoutWrapperMain>

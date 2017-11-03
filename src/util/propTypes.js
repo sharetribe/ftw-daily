@@ -75,6 +75,7 @@ export const currentUser = shape({
       lastName: string.isRequired,
       displayName: string.isRequired,
       abbreviatedName: string.isRequired,
+      bio: string,
     }).isRequired,
     stripeConnected: bool.isRequired,
   }),
@@ -89,6 +90,7 @@ export const user = shape({
     profile: shape({
       displayName: string.isRequired,
       abbreviatedName: string.isRequired,
+      bio: string,
     }),
   }),
 });

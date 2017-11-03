@@ -46,6 +46,7 @@ class TextInputFieldComponent extends Component {
     const inputClasses = classNames(css.input, {
       [css.inputSuccess]: valid,
       [css.inputError]: hasError,
+      [css.textarea]: isTextarea,
     });
     const inputProps = isTextarea
       ? { className: inputClasses, id, ...input, ...rest }

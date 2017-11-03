@@ -12,3 +12,32 @@
     margin: 56px auto;
   }
 }
+
+.headingContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.heading {
+  margin-right: 24px;
+}
+
+.profileLink {
+  @apply --marketplaceButtonStylesSecondary;
+  @apply --marketplaceH5FontStyles;
+
+  display: inline-block;
+  width: auto;
+  min-height: auto;
+  height: 41px;
+
+  float: right;
+  flex-shrink: 0;
+
+  margin: 19px 0 0 auto;
+  padding: 9px 16px 8px 16px;
+
+  @media (--viewportMedium) {
+    margin: 37px 0 0 auto;
+  }
+}
