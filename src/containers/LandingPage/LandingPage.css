@@ -13,11 +13,11 @@
 
   @media (--viewportMedium) {
     min-height: calc(100vh - var(--topbarHeightDesktop));
-    border: solid 24px #fff;
+    border: solid 24px #fcfcfc;
   }
 
   @media (--viewportLarge) {
-    border: solid 36px #fff;
+    border: solid 36px #fcfcfc;
   }
 }
 
