@@ -66,11 +66,11 @@
 }
 
 .sectionContent {
-  margin: var(--sectionMarginTopMobile) 24px 50px 24px;
+  margin: var(--sectionMarginTopMobile) 24px 51px 24px;
 
   @media (--viewportMedium) {
     max-width: 1052px;
-    margin: var(--sectionMarginTop) auto;
+    margin: var(--sectionMarginTop) auto 93px auto;
   }
 }
 
