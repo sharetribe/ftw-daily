@@ -149,7 +149,6 @@ class TopbarComponent extends Component {
         window.location = path;
       }
 
-      // TODO: show flash message
       console.log('logged out'); // eslint-disable-line
     });
   }
