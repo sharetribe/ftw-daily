@@ -35,7 +35,6 @@ export const ProfilePageComponent = props => {
     scrollingDisabled,
     currentUser,
     user,
-    userShowInProgress,
     userShowError,
     queryListingsError,
     listings,
@@ -109,12 +108,6 @@ export const ProfilePageComponent = props => {
         <FormattedMessage id="ProfilePage.loadingDataFailed" />
       </p>
     );
-  } else if (userShowInProgress) {
-    content = (
-      <p className={css.loading}>
-        <FormattedMessage id="ProfilePage.loadingData" />
-      </p>
-    );
   } else {
     content = mainContent;
   }
@@ -169,7 +162,6 @@ ProfilePageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
   currentUser: propTypes.currentUser,
   user: propTypes.user,
-  userShowInProgress: bool.isRequired,
   userShowError: propTypes.error,
   queryListingsError: propTypes.error,
   listings: arrayOf(propTypes.listing).isRequired,
@@ -182,13 +174,7 @@ const mapStateToProps = state => {
   // Page needs logoutError
   const { logoutError } = state.Auth;
   const { currentUser } = state.user;
-  const {
-    userId,
-    userShowInProgress,
-    userShowError,
-    queryListingsError,
-    userListingRefs,
-  } = state.ProfilePage;
+  const { userId, userShowError, queryListingsError, userListingRefs } = state.ProfilePage;
   const userMatches = getMarketplaceEntities(state, [{ type: 'user', id: userId }]);
   const user = userMatches.length === 1 ? userMatches[0] : null;
   const listings = getMarketplaceEntities(state, userListingRefs);
@@ -197,7 +183,6 @@ const mapStateToProps = state => {
     scrollingDisabled: isScrollingDisabled(state),
     currentUser,
     user,
-    userShowInProgress,
     userShowError,
     queryListingsError,
     listings,
