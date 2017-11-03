@@ -118,9 +118,10 @@ EmailVerificationPageComponent.propTypes = {
 const mapStateToProps = state => {
   const { logoutError } = state.Auth;
   const { currentUser } = state.user;
-  const { verificationError } = state.EmailVerification;
+  const { verificationError, verificationInProgress } = state.EmailVerification;
   return {
     verificationError,
+    emailVerificationInProgress: verificationInProgress,
     currentUser,
     logoutError,
     scrollingDisabled: isScrollingDisabled(state),
