@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
@@ -29,6 +29,7 @@ export const PasswordChangePageComponent = props => {
     onSubmitChangePassword,
     passwordChanged,
     scrollingDisabled,
+    intl,
   } = props;
 
   const tabs = [
@@ -61,8 +62,10 @@ export const PasswordChangePageComponent = props => {
       />
     ) : null;
 
+  const title = intl.formatMessage({ id: 'PasswordChangePage.title' });
+
   return (
-    <Page title="Contact details" scrollingDisabled={scrollingDisabled}>
+    <Page title={title} scrollingDisabled={scrollingDisabled}>
       <LayoutSideNavigation>
         <LayoutWrapperTopbar>
           <TopbarContainer
@@ -76,7 +79,7 @@ export const PasswordChangePageComponent = props => {
         <LayoutWrapperMain>
           <div className={css.content}>
             <h1 className={css.title}>
-              <FormattedMessage id="PasswordChangePage.title" />
+              <FormattedMessage id="PasswordChangePage.heading" />
             </h1>
             {changePasswordForm}
           </div>
@@ -104,6 +107,9 @@ PasswordChangePageComponent.propTypes = {
   onSubmitChangePassword: func.isRequired,
   passwordChanged: bool.isRequired,
   scrollingDisabled: bool.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -128,7 +134,7 @@ const mapDispatchToProps = dispatch => ({
   onSubmitChangePassword: values => dispatch(changePassword(values)),
 });
 
-const PasswordChangePage = compose(connect(mapStateToProps, mapDispatchToProps))(
+const PasswordChangePage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
   PasswordChangePageComponent
 );
 

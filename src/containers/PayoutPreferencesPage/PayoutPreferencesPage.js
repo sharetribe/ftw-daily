@@ -16,8 +16,10 @@ import { TopbarContainer } from '../../containers';
 export const PayoutPreferencesPageComponent = props => {
   const { scrollingDisabled } = props;
 
+  const title = 'Payout preferences';
+
   return (
-    <Page title="Payout preferences" scrollingDisabled={scrollingDisabled}>
+    <Page title={title} scrollingDisabled={scrollingDisabled}>
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
           <TopbarContainer />

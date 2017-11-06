@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { ensureCurrentUser } from '../../util/data';
 import { fetchCurrentUser, sendVerificationEmail } from '../../ducks/user.duck';
@@ -34,6 +34,7 @@ export const ContactDetailsPageComponent = props => {
     sendVerificationEmailError,
     onResendVerificationEmail,
     onSubmitChangeEmail,
+    intl,
   } = props;
 
   const tabs = [
@@ -71,8 +72,10 @@ export const ContactDetailsPageComponent = props => {
     />
   ) : null;
 
+  const title = intl.formatMessage({ id: 'ContactDetailsPage.title' });
+
   return (
-    <Page title="Contact details" scrollingDisabled={scrollingDisabled}>
+    <Page title={title} scrollingDisabled={scrollingDisabled}>
       <LayoutSideNavigation>
         <LayoutWrapperTopbar>
           <TopbarContainer
@@ -86,7 +89,7 @@ export const ContactDetailsPageComponent = props => {
         <LayoutWrapperMain>
           <div className={css.content}>
             <h1 className={css.title}>
-              <FormattedMessage id="ContactDetailsPage.title" />
+              <FormattedMessage id="ContactDetailsPage.heading" />
             </h1>
             {changeEmailForm}
           </div>
@@ -118,6 +121,9 @@ ContactDetailsPageComponent.propTypes = {
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: propTypes.error,
   onResendVerificationEmail: func.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -141,7 +147,7 @@ const mapDispatchToProps = dispatch => ({
   onSubmitChangeEmail: values => dispatch(changeEmail(values)),
 });
 
-const ContactDetailsPage = compose(connect(mapStateToProps, mapDispatchToProps))(
+const ContactDetailsPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
   ContactDetailsPageComponent
 );
 

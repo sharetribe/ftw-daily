@@ -3,7 +3,7 @@
 exports[`ContactDetailsPage matches snapshot 1`] = `
 <Page
   scrollingDisabled={false}
-  title="Manage listings"
+  title="ManageListingsPage.title"
 >
   <LayoutSingleColumn
     className={null}

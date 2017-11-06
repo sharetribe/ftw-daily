@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { ensureCurrentUser } from '../../util/data';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
@@ -45,6 +45,7 @@ export class ProfileSettingsPageComponent extends Component {
       updateProfileError,
       uploadImageError,
       uploadInProgress,
+      intl,
     } = this.props;
 
     const handleSubmit = values => {
@@ -94,8 +95,10 @@ export class ProfileSettingsPageComponent extends Component {
       />
     ) : null;
 
+    const title = intl.formatMessage({ id: 'ProfileSettingsPage.title' });
+
     return (
-      <Page className={css.root} title="Profile settings" scrollingDisabled={scrollingDisabled}>
+      <Page className={css.root} title={title} scrollingDisabled={scrollingDisabled}>
         <LayoutSingleColumn>
           <LayoutWrapperTopbar>
             <TopbarContainer currentPage="ProfileSettingsPage" />
@@ -105,7 +108,7 @@ export class ProfileSettingsPageComponent extends Component {
             <div className={css.content}>
               <div className={css.headingContainer}>
                 <h1 className={css.heading}>
-                  <FormattedMessage id="ProfileSettingsPage.title" />
+                  <FormattedMessage id="ProfileSettingsPage.heading" />
                 </h1>
                 {user.id ? (
                   <NamedLink
@@ -154,6 +157,9 @@ ProfileSettingsPageComponent.propTypes = {
   updateProfileError: propTypes.error,
   uploadImageError: propTypes.error,
   uploadInProgress: bool.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -182,7 +188,7 @@ const mapDispatchToProps = dispatch => ({
   onUpdateProfile: data => dispatch(updateProfile(data)),
 });
 
-const ProfileSettingsPage = compose(connect(mapStateToProps, mapDispatchToProps))(
+const ProfileSettingsPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
   ProfileSettingsPageComponent
 );
 

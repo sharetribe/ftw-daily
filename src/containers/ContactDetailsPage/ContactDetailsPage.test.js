@@ -1,5 +1,6 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
+import { fakeIntl } from '../../util/test-data';
 import { ContactDetailsPageComponent } from './ContactDetailsPage';
 
 const noop = () => null;
@@ -23,6 +24,7 @@ describe('ContactDetailsPage', () => {
         onSubmitChangeEmail={noop}
         changeEmailInProgress={false}
         emailChanged={false}
+        intl={fakeIntl}
       />
     );
     expect(tree).toMatchSnapshot();

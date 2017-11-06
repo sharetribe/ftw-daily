@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { parse } from '../../util/urlHelpers';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
@@ -58,6 +58,7 @@ export class ManageListingsPageComponent extends Component {
       queryListingsError,
       queryParams,
       scrollingDisabled,
+      intl,
     } = this.props;
 
     const hasPaginationInfo = !!pagination && pagination.totalItems != null;
@@ -82,7 +83,7 @@ export class ManageListingsPageComponent extends Component {
         </h1>
       ) : null;
 
-    const title =
+    const heading =
       listingsAreLoaded && pagination.totalItems > 0 ? (
         <h1 className={css.title}>
           <FormattedMessage
@@ -109,8 +110,10 @@ export class ManageListingsPageComponent extends Component {
     const closingErrorListingId = !!closingListingError && closingListingError.listingId;
     const openingErrorListingId = !!openingListingError && openingListingError.listingId;
 
+    const title = intl.formatMessage({ id: 'ManageListingsPage.title' });
+
     return (
-      <Page scrollingDisabled={scrollingDisabled} title="Manage listings">
+      <Page title={title} scrollingDisabled={scrollingDisabled}>
         <LayoutSingleColumn>
           <LayoutWrapperTopbar>
             <TopbarContainer currentPage="ManageListingsPage" />
@@ -120,7 +123,7 @@ export class ManageListingsPageComponent extends Component {
             {queryInProgress ? loadingResults : null}
             {queryListingsError ? queryError : null}
             <div className={css.listingPanel}>
-              {title}
+              {heading}
               <div className={css.listingCards}>
                 {listings.map(l => (
                   <ManageListingCard
@@ -181,6 +184,9 @@ ManageListingsPageComponent.propTypes = {
   queryListingsError: propTypes.error,
   queryParams: object,
   scrollingDisabled: bool.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -216,7 +222,7 @@ const mapDispatchToProps = dispatch => ({
   onOpenListing: listingId => dispatch(openListing(listingId)),
 });
 
-const ManageListingsPage = compose(connect(mapStateToProps, mapDispatchToProps))(
+const ManageListingsPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
   ManageListingsPageComponent
 );
 
