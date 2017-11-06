@@ -3,7 +3,7 @@
 exports[`ContactDetailsPage matches snapshot 1`] = `
 <Page
   scrollingDisabled={false}
-  title="Profile settings"
+  title="ProfileSettingsPage.title"
 >
   <LayoutSingleColumn
     className={null}
@@ -30,7 +30,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
         <div>
           <h1>
             <FormattedMessage
-              id="ProfileSettingsPage.title"
+              id="ProfileSettingsPage.heading"
               values={Object {}}
             />
           </h1>
