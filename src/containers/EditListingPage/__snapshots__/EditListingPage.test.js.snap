@@ -2,7 +2,6 @@
 
 exports[`EditListingPageComponent matches snapshot 1`] = `
 <Page
-  logoutError={null}
   scrollingDisabled={false}
   title="EditListingPage.titleCreateListing"
 >

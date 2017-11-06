@@ -37,7 +37,6 @@ export class ProfileSettingsPageComponent extends Component {
     const {
       currentUser,
       image,
-      logoutError,
       onChange,
       onImageUpload,
       onUpdateProfile,
@@ -96,12 +95,7 @@ export class ProfileSettingsPageComponent extends Component {
     ) : null;
 
     return (
-      <Page
-        className={css.root}
-        logoutError={logoutError}
-        title="Profile settings"
-        scrollingDisabled={scrollingDisabled}
-      >
+      <Page className={css.root} title="Profile settings" scrollingDisabled={scrollingDisabled}>
         <LayoutSingleColumn>
           <LayoutWrapperTopbar>
             <TopbarContainer currentPage="ProfileSettingsPage" />
@@ -137,7 +131,6 @@ export class ProfileSettingsPageComponent extends Component {
 
 ProfileSettingsPageComponent.defaultProps = {
   currentUser: null,
-  logoutError: null,
   uploadImageError: null,
   updateProfileError: null,
   image: null,
@@ -153,7 +146,6 @@ ProfileSettingsPageComponent.propTypes = {
     file: object,
     uploadedImage: propTypes.image,
   }),
-  logoutError: propTypes.error,
   onChange: func.isRequired,
   onImageUpload: func.isRequired,
   onUpdateProfile: func.isRequired,
@@ -165,8 +157,6 @@ ProfileSettingsPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // Page needs logoutError
-  const { logoutError } = state.Auth;
   const { currentUser } = state.user;
   const {
     image,
@@ -178,7 +168,6 @@ const mapStateToProps = state => {
   return {
     currentUser,
     image,
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
     updateInProgress,
     updateProfileError,

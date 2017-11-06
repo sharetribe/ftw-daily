@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
-import * as propTypes from '../../util/propTypes';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { TopbarContainer } from '../../containers';
 import {
@@ -21,7 +20,7 @@ import config from '../../config';
 import css from './TermsOfServicePage.css';
 
 const TermsOfServicePageComponent = props => {
-  const { logoutError, scrollingDisabled, intl } = props;
+  const { scrollingDisabled, intl } = props;
 
   const tabs = [
     {
@@ -47,12 +46,7 @@ const TermsOfServicePageComponent = props => {
     name: schemaTitle,
   };
   return (
-    <Page
-      title={schemaTitle}
-      logoutError={logoutError}
-      scrollingDisabled={scrollingDisabled}
-      schema={schema}
-    >
+    <Page title={schemaTitle} scrollingDisabled={scrollingDisabled} schema={schema}>
       <LayoutSideNavigation>
         <LayoutWrapperTopbar>
           <TopbarContainer currentPage="TermsOfServicePage" />
@@ -74,14 +68,9 @@ const TermsOfServicePageComponent = props => {
   );
 };
 
-TermsOfServicePageComponent.defaultProps = {
-  logoutError: null,
-};
-
 const { bool } = PropTypes;
 
 TermsOfServicePageComponent.propTypes = {
-  logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
 
   // from injectIntl
@@ -89,9 +78,7 @@ TermsOfServicePageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { logoutError } = state.Auth;
   return {
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
   };
 };

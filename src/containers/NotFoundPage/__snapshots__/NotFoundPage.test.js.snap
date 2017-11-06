@@ -2,7 +2,6 @@
 
 exports[`NotFoundPageComponent matches snapshot 1`] = `
 <Page
-  logoutError={null}
   scrollingDisabled={false}
   title="NotFoundPage.title"
 >

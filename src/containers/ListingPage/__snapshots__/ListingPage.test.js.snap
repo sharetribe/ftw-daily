@@ -6,7 +6,6 @@ exports[`ListingPage matches snapshot 1`] = `
   contentType="website"
   description="listing1 description"
   facebookImages={Array []}
-  logoutError={null}
   schema={
     Object {
       "@context": "http://schema.org",

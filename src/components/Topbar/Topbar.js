@@ -67,6 +67,28 @@ const isTooManyVerificationRequestsApiError = error => {
   return apiError && apiError.code === ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS;
 };
 
+const GenericError = props => {
+  const { show } = props;
+  const classes = classNames(css.genericError, {
+    [css.genericErrorVisible]: show,
+  });
+  return (
+    <div className={classes}>
+      <div className={css.genericErrorContent}>
+        <p className={css.genericErrorText}>
+          <FormattedMessage id="Topbar.genericError" />
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const { bool } = PropTypes;
+
+GenericError.propTypes = {
+  show: bool.isRequired,
+};
+
 class TopbarComponent extends Component {
   constructor(props) {
     super(props);
@@ -149,7 +171,6 @@ class TopbarComponent extends Component {
         window.location = path;
       }
 
-      // TODO: show flash message
       console.log('logged out'); // eslint-disable-line
     });
   }
@@ -174,6 +195,7 @@ class TopbarComponent extends Component {
       onResendVerificationEmail,
       sendVerificationEmailInProgress,
       sendVerificationEmailError,
+      showGenericError,
     } = this.props;
 
     const { mobilemenu, mobilesearch, address, origin, bounds, country } = parse(location.search, {
@@ -342,6 +364,7 @@ class TopbarComponent extends Component {
             </div>
           </div>
         </Modal>
+        <GenericError show={showGenericError} />
       </div>
     );
   }
@@ -360,7 +383,7 @@ TopbarComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { bool, func, number, shape, string } = PropTypes;
+const { func, number, shape, string } = PropTypes;
 
 TopbarComponent.propTypes = {
   className: string,
@@ -380,6 +403,7 @@ TopbarComponent.propTypes = {
   onResendVerificationEmail: func.isRequired,
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: propTypes.error,
+  showGenericError: bool.isRequired,
 
   // These are passed from Page to keep Topbar rendering aware of location changes
   history: shape({

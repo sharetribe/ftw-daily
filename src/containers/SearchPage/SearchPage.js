@@ -136,7 +136,7 @@ export class SearchPageComponent extends Component {
       })
       .catch(error => {
         // In case of error, stop recursive loop and report error.
-        // TODO: Show a flash message
+        // TODO: Show and error in the listings column
         // eslint-disable-next-line no-console
         console.error(`An error (${error} occured while trying to retrieve map listings`);
       });
@@ -147,7 +147,6 @@ export class SearchPageComponent extends Component {
       intl,
       listings,
       location,
-      logoutError,
       mapListings,
       onManageDisableScrolling,
       pagination,
@@ -270,7 +269,6 @@ export class SearchPageComponent extends Component {
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <Page
-        logoutError={logoutError}
         scrollingDisabled={scrollingDisabled}
         description={schemaDescription}
         title={schemaTitle}
@@ -341,7 +339,6 @@ export class SearchPageComponent extends Component {
 
 SearchPageComponent.defaultProps = {
   listings: [],
-  logoutError: null,
   mapListings: [],
   pagination: null,
   searchListingsError: null,
@@ -354,7 +351,6 @@ const { array, bool, func, oneOf, object, shape, string } = PropTypes;
 SearchPageComponent.propTypes = {
   listings: array,
   mapListings: array,
-  logoutError: propTypes.error,
   onManageDisableScrolling: func.isRequired,
   onSearchMapListings: func.isRequired,
   pagination: propTypes.pagination,
@@ -385,7 +381,6 @@ const mapStateToProps = state => {
     searchParams,
     searchMapListingIds,
   } = state.SearchPage;
-  const { logoutError } = state.Auth;
   const pageListings = getListingsById(state, currentPageResultIds);
   const mapListings = getListingsById(
     state,
@@ -394,7 +389,6 @@ const mapStateToProps = state => {
 
   return {
     listings: pageListings,
-    logoutError,
     mapListings,
     pagination,
     scrollingDisabled: isScrollingDisabled(state),

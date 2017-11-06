@@ -2,7 +2,6 @@
 
 exports[`AuthenticationPageComponent matches snapshot 1`] = `
 <Page
-  logoutError={null}
   schema={
     Object {
       "@context": "http://schema.org",

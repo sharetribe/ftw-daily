@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import * as propTypes from '../../util/propTypes';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
   Page,
@@ -15,14 +14,10 @@ import {
 import { TopbarContainer } from '../../containers';
 
 export const PayoutPreferencesPageComponent = props => {
-  const { logoutError, scrollingDisabled } = props;
+  const { scrollingDisabled } = props;
 
   return (
-    <Page
-      logoutError={logoutError}
-      title="Payout preferences"
-      scrollingDisabled={scrollingDisabled}
-    >
+    <Page title="Payout preferences" scrollingDisabled={scrollingDisabled}>
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
           <TopbarContainer />
@@ -36,22 +31,14 @@ export const PayoutPreferencesPageComponent = props => {
   );
 };
 
-PayoutPreferencesPageComponent.defaultProps = {
-  logoutError: null,
-};
-
 const { bool } = PropTypes;
 
 PayoutPreferencesPageComponent.propTypes = {
-  logoutError: propTypes.error,
   scrollingDisabled: bool.isRequired,
 };
 
 const mapStateToProps = state => {
-  // Page needs logoutError
-  const { logoutError } = state.Auth;
   return {
-    logoutError,
     scrollingDisabled: isScrollingDisabled(state),
   };
 };

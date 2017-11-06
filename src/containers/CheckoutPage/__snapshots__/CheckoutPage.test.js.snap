@@ -2,7 +2,7 @@
 
 exports[`CheckoutPage matches snapshot 1`] = `
 <Page
-  logoutError={null}
+  scrollingDisabled={false}
   title="CheckoutPage.title"
 >
   <div>
