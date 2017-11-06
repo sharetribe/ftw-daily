@@ -1,4 +1,5 @@
-import { nightsBetween } from './dates';
+import { fakeIntl } from './test-data';
+import { nightsBetween, formatDate } from './dates';
 
 describe('date utils', () => {
   describe('nightsBetween()', () => {
@@ -20,6 +21,22 @@ describe('date utils', () => {
       const start = new Date(2017, 0, 1);
       const end = new Date(2017, 0, 3);
       expect(nightsBetween(start, end)).toEqual(2);
+    });
+  });
+
+  describe('formatDate()', () => {
+    /*
+      NOTE: These are not really testing the formatting properly since
+      the fakeIntl object has to be used in the tests.
+     */
+
+    it('formats a date today', () => {
+      const d = new Date(Date.UTC(2017, 10, 23, 13, 51));
+      expect(formatDate(fakeIntl, 'Today', d)).toEqual('Today, 13:51');
+    });
+    it('formats a date', () => {
+      const d = new Date(Date.UTC(2017, 10, 22, 13, 51));
+      expect(formatDate(fakeIntl, 'Today', d)).toEqual('2017-11-22, 13:51');
     });
   });
 });

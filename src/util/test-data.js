@@ -154,7 +154,7 @@ export const fakeIntl = {
   formatPlural: d => d,
   formatRelative: d => d,
   formatTime: d => `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`,
-  now: d => d,
+  now: () => Date.UTC(2017, 10, 23, 12, 59),
 };
 
 const noop = () => null;
