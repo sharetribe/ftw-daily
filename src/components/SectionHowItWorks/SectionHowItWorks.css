@@ -1,60 +1,8 @@
 @import '../../marketplace.css';
 
-.root {
-  padding: 0 40px;
-  background-color: var(--matterColorLight);
-
-  @media (--viewportMedium) {
-    padding: 0 30px;
-    background-color: var(--matterColorBright);
-  }
-}
-
-/* A div for specifying the area for a section specific background color */
-.section {
-  /* prevent inner div margin from collapsing and ending up outside this div */
-  overflow: auto;
-
-  background-color: var(--matterColorLight);
-
-  @media (--viewportMedium) {
-    border-radius: 4px 4px 0 0;
-  }
-}
-
-.contentWrapper {
-  @media (--viewportMedium) {
-    max-width: 1052px;
-    margin: 0 auto;
-  }
-}
-
-/* Draw the red bar on top of the section */
-.contentWrapper:before {
-  content: '';
-  display: block;
-  width: 109px;
-  height: 6px;
-  background: var(--marketplaceColor);
-
-  @media (--viewportMedium) {
-    width: 192px;
-    height: 8px;
-  }
-}
-
-.content {
-  margin-top: 37px;
-  margin-bottom: 53px;
-
-  @media (--viewportMedium) {
-    margin-top: 81px;
-    margin-bottom: 86px;
-  }
-}
-
 .title {
   @apply --marketplaceH1FontStyles;
+  margin-top: 0;
 }
 
 .steps {
@@ -63,13 +11,13 @@
 
   @media (--viewportMedium) {
     flex-direction: row;
-    margin-top: 0;
   }
 }
 
 .step {
   @media (--viewportMedium) {
-    margin-right: 76px;
+    width: 324px;
+    margin-right: 40px;
   }
 }
 
@@ -80,12 +28,18 @@
 }
 
 .stepTitle {
+  margin-top: 18px;
+  margin-bottom: 18px;
+
   @media (--viewportMedium) {
+    margin-top: 21px;
     margin-bottom: 18px;
   }
 }
 
 .createListingLink {
+  margin-top: 36px;
+
   @media (--viewportMedium) {
     margin-top: 52px;
   }
