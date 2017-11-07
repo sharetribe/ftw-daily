@@ -11,6 +11,7 @@ import { withViewport } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
+import { isTooManyEmailVerificationRequestsError } from '../../util/errors';
 import {
   Button,
   IconEmailAttention,
@@ -27,7 +28,6 @@ import MenuIcon from './MenuIcon';
 import SearchIcon from './SearchIcon';
 import css from './Topbar.css';
 
-const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'too-many-verification-requests';
 const MAX_MOBILE_SCREEN_WIDTH = 768;
 const VERIFY_EMAIL_MODAL_WHITELIST = [
   'LoginPage',
@@ -53,18 +53,6 @@ const redirectToURLWithoutModalState = (props, modalStateParam) => {
   const stringified = stringify(queryParams);
   const searchString = stringified ? `?${stringified}` : '';
   history.push(`${pathname}${searchString}`, state);
-};
-
-const firstApiError = error => {
-  if (error && error.data && error.data.errors && error.data.errors.length > 0) {
-    return error.data.errors[0];
-  }
-  return null;
-};
-
-const isTooManyVerificationRequestsApiError = error => {
-  const apiError = firstApiError(error);
-  return apiError && apiError.code === ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS;
 };
 
 const GenericError = props => {
@@ -245,7 +233,7 @@ class TopbarComponent extends Component {
       </NamedLink>
     );
 
-    const resendErrorTranslationId = isTooManyVerificationRequestsApiError(
+    const resendErrorTranslationId = isTooManyEmailVerificationRequestsError(
       sendVerificationEmailError
     )
       ? 'Topbar.resendFailedTooManyRequests'
