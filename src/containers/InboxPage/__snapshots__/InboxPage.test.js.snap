@@ -292,18 +292,17 @@ exports[`InboxPage matches snapshot 1`] = `
 `;
 
 exports[`InboxPage matches snapshot 2`] = `
-<a
-  className=""
-  href="/order/order-1/details"
-  onClick={[Function]}
-  style={Object {}}
-  title={null}
+<div
+  className={undefined}
 >
   <div
     className={undefined}
   >
-    <div
+    <a
       className=""
+      href="/u/provider-user-id"
+      onClick={[Function]}
+      style={Object {}}
       title="provider-user-id display name"
     >
       <span
@@ -311,48 +310,56 @@ exports[`InboxPage matches snapshot 2`] = `
       >
         provider-user-id abbreviated name
       </span>
-    </div>
+    </a>
   </div>
-  <div
-    className={undefined}
-  />
-  <div
-    className={undefined}
+  <a
+    className=""
+    href="/order/order-1/details"
+    onClick={[Function]}
+    style={Object {}}
+    title={null}
   >
     <div
-      className=""
-    >
-      provider-user-id display name
-    </div>
+      className={undefined}
+    />
     <div
-      className=""
+      className={undefined}
     >
-      2017-02-15
-       - 
-      2017-02-16
-      <span
-        className={undefined}
+      <div
+        className=""
       >
-        10
-      </span>
+        provider-user-id display name
+      </div>
+      <div
+        className=""
+      >
+        2017-02-15
+         - 
+        2017-02-16
+        <span
+          className={undefined}
+        >
+          10
+        </span>
+      </div>
     </div>
-  </div>
-  <div
-    className={undefined}
-  >
     <div
-      className=""
+      className={undefined}
     >
-      InboxPage.stateRequested
+      <div
+        className=""
+      >
+        InboxPage.stateRequested
+      </div>
+      <div
+        className=""
+        title="2017-01-15 00:00"
+      >
+        2017-01-15
+      </div>
     </div>
-    <div
-      className=""
-      title="2017-01-15 00:00"
-    >
-      2017-01-15
-    </div>
-  </div>
-</a>
+  </a>
+</div>
 `;
 
 exports[`InboxPage matches snapshot 3`] = `
@@ -647,18 +654,17 @@ exports[`InboxPage matches snapshot 3`] = `
 `;
 
 exports[`InboxPage matches snapshot 4`] = `
-<a
-  className=""
-  href="/sale/sale-1/details"
-  onClick={[Function]}
-  style={Object {}}
-  title={null}
+<div
+  className={undefined}
 >
   <div
     className={undefined}
   >
-    <div
+    <a
       className=""
+      href="/u/customer-user-id"
+      onClick={[Function]}
+      style={Object {}}
       title="customer-user-id display name"
     >
       <span
@@ -666,50 +672,58 @@ exports[`InboxPage matches snapshot 4`] = `
       >
         customer-user-id abbreviated name
       </span>
-    </div>
+    </a>
   </div>
-  <div
-    className={undefined}
+  <a
+    className=""
+    href="/sale/sale-1/details"
+    onClick={[Function]}
+    style={Object {}}
+    title={null}
   >
     <div
       className={undefined}
-    />
-  </div>
-  <div
-    className={undefined}
-  >
-    <div
-      className=""
     >
-      customer-user-id display name
-    </div>
-    <div
-      className=""
-    >
-      2017-02-15
-       - 
-      2017-02-16
-      <span
+      <div
         className={undefined}
+      />
+    </div>
+    <div
+      className={undefined}
+    >
+      <div
+        className=""
       >
-        9
-      </span>
+        customer-user-id display name
+      </div>
+      <div
+        className=""
+      >
+        2017-02-15
+         - 
+        2017-02-16
+        <span
+          className={undefined}
+        >
+          9
+        </span>
+      </div>
     </div>
-  </div>
-  <div
-    className={undefined}
-  >
     <div
-      className=""
+      className={undefined}
     >
-      InboxPage.statePending
+      <div
+        className=""
+      >
+        InboxPage.statePending
+      </div>
+      <div
+        className=""
+        title="2017-01-15 00:00"
+      >
+        2017-01-15
+      </div>
     </div>
-    <div
-      className=""
-      title="2017-01-15 00:00"
-    >
-      2017-01-15
-    </div>
-  </div>
-</a>
+  </a>
+</div>
 `;
