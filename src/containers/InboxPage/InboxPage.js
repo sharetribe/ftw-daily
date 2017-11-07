@@ -133,7 +133,7 @@ export const InboxItem = props => {
       params={{ id: tx.id.uuid }}
     >
       <div className={css.itemAvatar}>
-        <Avatar user={otherUser} />
+        <Avatar user={otherUser} disableProfileLink />
       </div>
       <div className={css.rowNotificationDot}>{rowNotificationDot}</div>
       <div className={css.itemInfo}>

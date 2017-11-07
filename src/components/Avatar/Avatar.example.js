@@ -171,3 +171,13 @@ export const WithProfileImageUserLarge = {
   },
   group: 'avatar',
 };
+
+export const WithoutProfileLink = {
+  component: AvatarLarge,
+  props: {
+    user: userWithProfileImage,
+    disableProfileLink: true,
+    intl: fakeIntl,
+  },
+  group: 'avatar',
+};

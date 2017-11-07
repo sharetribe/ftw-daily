@@ -32,6 +32,7 @@ exports[`ProfilePage matches snapshot 1`] = `
     >
       <div>
         <AvatarLarge
+          disableProfileLink={true}
           user={
             Object {
               "attributes": Object {
