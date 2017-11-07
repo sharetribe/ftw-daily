@@ -49,6 +49,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
       className=""
     >
       <AvatarMedium
+        disableProfileLink={true}
         user={
           Object {
             "attributes": Object {
@@ -132,6 +133,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
       </div>
       <div>
         <AvatarMedium
+          disableProfileLink={true}
           user={
             Object {
               "attributes": Object {

@@ -61,7 +61,7 @@ export const ProfilePageComponent = props => {
 
   const asideContent = (
     <div className={css.asideContent}>
-      <AvatarLarge className={css.avatar} user={user} />
+      <AvatarLarge className={css.avatar} user={user} disableProfileLink />
       <h1 className={css.mobileHeading}>
         {displayName ? (
           <FormattedMessage id="ProfilePage.mobileHeading" values={{ name: displayName }} />

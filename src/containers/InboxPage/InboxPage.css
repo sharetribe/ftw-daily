@@ -163,7 +163,14 @@
   }
 }
 
+.item {
+  display: flex;
+  flex-direction: row;
+}
+
 .itemLink {
+  flex: 1;
+
   /* Layout */
   display: flex;
 

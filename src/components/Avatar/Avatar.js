@@ -4,12 +4,12 @@ import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { ensureUser, userDisplayName, userAbbreviatedName } from '../../util/data';
-import { ResponsiveImage, IconBannedUser } from '../../components/';
+import { ResponsiveImage, IconBannedUser, NamedLink } from '../../components/';
 
 import css from './Avatar.css';
 
 export const AvatarComponent = props => {
-  const { rootClassName, className, user, intl } = props;
+  const { rootClassName, className, user, disableProfileLink, intl } = props;
   const classes = classNames(rootClassName || css.root, className);
   const avatarUser = ensureUser(user);
   const isBannedUser = avatarUser.attributes.banned;
@@ -21,10 +21,36 @@ export const AvatarComponent = props => {
 
   const displayName = userDisplayName(avatarUser, bannedUserDisplayName);
   const abbreviatedName = userAbbreviatedName(avatarUser, bannedUserAbbreviatedName);
+  const rootProps = { className: classes, title: displayName };
+  const linkProps = avatarUser.id
+    ? { name: 'ProfilePage', params: { id: avatarUser.id.uuid } }
+    : { name: 'ProfileBasePage' };
+  const hasProfileImage = avatarUser.profileImage && avatarUser.profileImage.id;
+  const profileLinkEnabled = !disableProfileLink;
 
-  if (avatarUser.profileImage && avatarUser.profileImage.id) {
+  if (isBannedUser) {
     return (
-      <div className={classes} title={displayName}>
+      <div {...rootProps}>
+        <IconBannedUser className={css.bannedUserIcon} />
+      </div>
+    );
+  } else if (hasProfileImage && profileLinkEnabled) {
+    return (
+      <NamedLink {...rootProps} {...linkProps}>
+        <ResponsiveImage
+          rootClassName={css.avatarImage}
+          alt={displayName}
+          image={avatarUser.profileImage}
+          nameSet={[
+            { name: 'square-xlarge2x', size: '1x' },
+            { name: 'square-xlarge4x', size: '2x' },
+          ]}
+        />
+      </NamedLink>
+    );
+  } else if (hasProfileImage) {
+    return (
+      <div {...rootProps}>
         <ResponsiveImage
           rootClassName={css.avatarImage}
           alt={displayName}
@@ -36,34 +62,38 @@ export const AvatarComponent = props => {
         />
       </div>
     );
-  } else if (isBannedUser) {
+  } else if (profileLinkEnabled) {
+    // Placeholder avatar (initials)
     return (
-      <div className={classes} title={displayName}>
-        <IconBannedUser className={css.bannedUserIcon} />
-      </div>
+      <NamedLink {...rootProps} {...linkProps}>
+        <span className={css.initials}>{abbreviatedName}</span>
+      </NamedLink>
     );
   } else {
     // Placeholder avatar (initials)
     return (
-      <div className={classes} title={displayName}>
+      <div {...rootProps}>
         <span className={css.initials}>{abbreviatedName}</span>
       </div>
     );
   }
 };
 
-const { string, oneOfType } = PropTypes;
-
 AvatarComponent.defaultProps = {
   className: null,
   rootClassName: null,
   user: null,
+  disableProfileLink: false,
 };
+
+const { string, oneOfType, bool } = PropTypes;
 
 AvatarComponent.propTypes = {
   rootClassName: string,
   className: string,
   user: oneOfType([propTypes.user, propTypes.currentUser]),
+
+  disableProfileLink: bool,
 
   // from injectIntl
   intl: intlShape.isRequired,

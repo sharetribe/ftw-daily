@@ -127,34 +127,38 @@ export const InboxItem = props => {
   });
 
   return (
-    <NamedLink
-      className={linkClasses}
-      name={isOrder ? 'OrderDetailsPage' : 'SaleDetailsPage'}
-      params={{ id: tx.id.uuid }}
-    >
+    <div className={css.item}>
       <div className={css.itemAvatar}>
         <Avatar user={otherUser} />
       </div>
-      <div className={css.rowNotificationDot}>{rowNotificationDot}</div>
-      <div className={css.itemInfo}>
-        <div className={classNames(css.itemUsername, stateData.nameClassName)}>
-          {otherUserDisplayName}
+      <NamedLink
+        className={linkClasses}
+        name={isOrder ? 'OrderDetailsPage' : 'SaleDetailsPage'}
+        params={{ id: tx.id.uuid }}
+      >
+        <div className={css.rowNotificationDot}>{rowNotificationDot}</div>
+        <div className={css.itemInfo}>
+          <div className={classNames(css.itemUsername, stateData.nameClassName)}>
+            {otherUserDisplayName}
+          </div>
+          <div className={classNames(css.bookingInfo, stateData.bookingClassName)}>
+            {bookingStart.short} - {bookingEnd.short}
+            <span className={css.itemPrice}>{price}</span>
+          </div>
         </div>
-        <div className={classNames(css.bookingInfo, stateData.bookingClassName)}>
-          {bookingStart.short} - {bookingEnd.short}
-          <span className={css.itemPrice}>{price}</span>
+        <div className={css.itemState}>
+          <div className={classNames(css.stateName, stateData.stateClassName)}>
+            {stateData.state}
+          </div>
+          <div
+            className={classNames(css.lastTransitionedAt, stateData.lastTransitionedAtClassName)}
+            title={lastTransitionedAt.long}
+          >
+            {lastTransitionedAt.short}
+          </div>
         </div>
-      </div>
-      <div className={css.itemState}>
-        <div className={classNames(css.stateName, stateData.stateClassName)}>{stateData.state}</div>
-        <div
-          className={classNames(css.lastTransitionedAt, stateData.lastTransitionedAtClassName)}
-          title={lastTransitionedAt.long}
-        >
-          {lastTransitionedAt.short}
-        </div>
-      </div>
-    </NamedLink>
+      </NamedLink>
+    </div>
   );
 };
 
