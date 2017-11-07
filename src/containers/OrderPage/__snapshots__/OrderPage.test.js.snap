@@ -77,7 +77,7 @@ exports[`OrderPage matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "customer1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "customer1 display name",
                 },
               },
@@ -114,7 +114,7 @@ exports[`OrderPage matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "provider1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "provider1 display name",
                 },
               },

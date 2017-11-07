@@ -64,7 +64,7 @@ export const EmptyUser = {
     user: null,
     intl: fakeIntl,
   },
-  group: 'avatar',
+  group: 'users',
 };
 
 export const EmptyUserMedium = {
@@ -73,7 +73,7 @@ export const EmptyUserMedium = {
     user: null,
     intl: fakeIntl,
   },
-  group: 'avatar',
+  group: 'users',
 };
 
 export const EmptyUserLarge = {
@@ -82,7 +82,7 @@ export const EmptyUserLarge = {
     user: null,
     intl: fakeIntl,
   },
-  group: 'avatar',
+  group: 'users',
 };
 
 // ================ Banned user ================ //
@@ -93,7 +93,7 @@ export const BannedUser = {
     user: bannedUser,
     intl: fakeIntl,
   },
-  group: 'avatar',
+  group: 'users',
 };
 
 export const BannedUserMedium = {
@@ -102,7 +102,7 @@ export const BannedUserMedium = {
     user: bannedUser,
     intl: fakeIntl,
   },
-  group: 'avatar',
+  group: 'users',
 };
 
 export const BannedUserLarge = {
@@ -111,7 +111,7 @@ export const BannedUserLarge = {
     user: bannedUser,
     intl: fakeIntl,
   },
-  group: 'avatar',
+  group: 'users',
 };
 
 // ================ No profile image ================ //
@@ -122,7 +122,7 @@ export const WithoutProfileImageUser = {
     user: userWithoutProfileImage,
     intl: fakeIntl,
   },
-  group: 'avatar',
+  group: 'users',
 };
 
 export const WithoutProfileImageUserMedium = {
@@ -131,7 +131,7 @@ export const WithoutProfileImageUserMedium = {
     user: userWithoutProfileImage,
     intl: fakeIntl,
   },
-  group: 'avatar',
+  group: 'users',
 };
 
 export const WithoutProfileImageUserLarge = {
@@ -140,7 +140,7 @@ export const WithoutProfileImageUserLarge = {
     user: userWithoutProfileImage,
     intl: fakeIntl,
   },
-  group: 'avatar',
+  group: 'users',
 };
 
 // ================ Full user with profile image ================ //
@@ -151,7 +151,7 @@ export const WithProfileImageUser = {
     user: userWithProfileImage,
     intl: fakeIntl,
   },
-  group: 'avatar',
+  group: 'users',
 };
 
 export const WithProfileImageUserMedium = {
@@ -160,7 +160,7 @@ export const WithProfileImageUserMedium = {
     user: userWithProfileImage,
     intl: fakeIntl,
   },
-  group: 'avatar',
+  group: 'users',
 };
 
 export const WithProfileImageUserLarge = {
@@ -169,7 +169,7 @@ export const WithProfileImageUserLarge = {
     user: userWithProfileImage,
     intl: fakeIntl,
   },
-  group: 'avatar',
+  group: 'users',
 };
 
 export const WithoutProfileLink = {
@@ -179,5 +179,5 @@ export const WithoutProfileLink = {
     disableProfileLink: true,
     intl: fakeIntl,
   },
-  group: 'avatar',
+  group: 'users',
 };

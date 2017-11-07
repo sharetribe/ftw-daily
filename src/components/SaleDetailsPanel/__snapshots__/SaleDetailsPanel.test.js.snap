@@ -36,7 +36,7 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
             "attributes": Object {
               "banned": false,
               "profile": Object {
-                "abbreviatedName": "customer1 abbreviated name",
+                "abbreviatedName": "TT",
                 "displayName": "customer1 display name",
               },
             },
@@ -56,7 +56,7 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "customer1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "customer1 display name",
                 },
               },
@@ -185,7 +185,7 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "customer1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "customer1 display name",
                 },
               },
@@ -326,7 +326,7 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
                 "attributes": Object {
                   "banned": false,
                   "profile": Object {
-                    "abbreviatedName": "customer1 abbreviated name",
+                    "abbreviatedName": "TT",
                     "displayName": "customer1 display name",
                   },
                 },
@@ -407,7 +407,7 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
             "attributes": Object {
               "banned": false,
               "profile": Object {
-                "abbreviatedName": "customer1 abbreviated name",
+                "abbreviatedName": "TT",
                 "displayName": "customer1 display name",
               },
             },
@@ -427,7 +427,7 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "customer1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "customer1 display name",
                 },
               },
@@ -556,7 +556,7 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "customer1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "customer1 display name",
                 },
               },
@@ -697,7 +697,7 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
                 "attributes": Object {
                   "banned": false,
                   "profile": Object {
-                    "abbreviatedName": "customer1 abbreviated name",
+                    "abbreviatedName": "TT",
                     "displayName": "customer1 display name",
                   },
                 },
@@ -778,7 +778,7 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
             "attributes": Object {
               "banned": false,
               "profile": Object {
-                "abbreviatedName": "customer1 abbreviated name",
+                "abbreviatedName": "TT",
                 "displayName": "customer1 display name",
               },
             },
@@ -798,7 +798,7 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "customer1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "customer1 display name",
                 },
               },
@@ -942,7 +942,7 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "customer1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "customer1 display name",
                 },
               },
@@ -1083,7 +1083,7 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
                 "attributes": Object {
                   "banned": false,
                   "profile": Object {
-                    "abbreviatedName": "customer1 abbreviated name",
+                    "abbreviatedName": "TT",
                     "displayName": "customer1 display name",
                   },
                 },
@@ -1164,7 +1164,7 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
             "attributes": Object {
               "banned": false,
               "profile": Object {
-                "abbreviatedName": "customer1 abbreviated name",
+                "abbreviatedName": "TT",
                 "displayName": "customer1 display name",
               },
             },
@@ -1184,7 +1184,7 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "customer1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "customer1 display name",
                 },
               },
@@ -1313,7 +1313,7 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "customer1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "customer1 display name",
                 },
               },
@@ -1454,7 +1454,7 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
                 "attributes": Object {
                   "banned": false,
                   "profile": Object {
-                    "abbreviatedName": "customer1 abbreviated name",
+                    "abbreviatedName": "TT",
                     "displayName": "customer1 display name",
                   },
                 },
@@ -1535,7 +1535,7 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
             "attributes": Object {
               "banned": false,
               "profile": Object {
-                "abbreviatedName": "customer1 abbreviated name",
+                "abbreviatedName": "TT",
                 "displayName": "customer1 display name",
               },
             },
@@ -1555,7 +1555,7 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "customer1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "customer1 display name",
                 },
               },
@@ -1684,7 +1684,7 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "customer1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "customer1 display name",
                 },
               },
@@ -1825,7 +1825,7 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
                 "attributes": Object {
                   "banned": false,
                   "profile": Object {
-                    "abbreviatedName": "customer1 abbreviated name",
+                    "abbreviatedName": "TT",
                     "displayName": "customer1 display name",
                   },
                 },
@@ -1906,7 +1906,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
             "attributes": Object {
               "banned": false,
               "profile": Object {
-                "abbreviatedName": "customer1 abbreviated name",
+                "abbreviatedName": "TT",
                 "displayName": "customer1 display name",
               },
             },
@@ -1926,7 +1926,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "customer1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "customer1 display name",
                 },
               },
@@ -2070,7 +2070,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "customer1 abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "customer1 display name",
                 },
               },
@@ -2211,7 +2211,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
                 "attributes": Object {
                   "banned": false,
                   "profile": Object {
-                    "abbreviatedName": "customer1 abbreviated name",
+                    "abbreviatedName": "TT",
                     "displayName": "customer1 display name",
                   },
                 },

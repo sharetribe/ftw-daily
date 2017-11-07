@@ -145,7 +145,7 @@ exports[`InboxPage matches snapshot 1`] = `
                   "attributes": Object {
                     "banned": false,
                     "profile": Object {
-                      "abbreviatedName": "customer-user-id abbreviated name",
+                      "abbreviatedName": "TT",
                       "displayName": "customer-user-id display name",
                     },
                   },
@@ -162,7 +162,7 @@ exports[`InboxPage matches snapshot 1`] = `
                   "attributes": Object {
                     "banned": false,
                     "profile": Object {
-                      "abbreviatedName": "provider-user-id abbreviated name",
+                      "abbreviatedName": "TT",
                       "displayName": "provider-user-id display name",
                     },
                   },
@@ -247,7 +247,7 @@ exports[`InboxPage matches snapshot 1`] = `
                   "attributes": Object {
                     "banned": false,
                     "profile": Object {
-                      "abbreviatedName": "customer-user-id abbreviated name",
+                      "abbreviatedName": "TT",
                       "displayName": "customer-user-id display name",
                     },
                   },
@@ -264,7 +264,7 @@ exports[`InboxPage matches snapshot 1`] = `
                   "attributes": Object {
                     "banned": false,
                     "profile": Object {
-                      "abbreviatedName": "provider-user-id abbreviated name",
+                      "abbreviatedName": "TT",
                       "displayName": "provider-user-id display name",
                     },
                   },
@@ -308,7 +308,7 @@ exports[`InboxPage matches snapshot 2`] = `
       <span
         className={undefined}
       >
-        provider-user-id abbreviated name
+        TT
       </span>
     </a>
   </div>
@@ -507,7 +507,7 @@ exports[`InboxPage matches snapshot 3`] = `
                   "attributes": Object {
                     "banned": false,
                     "profile": Object {
-                      "abbreviatedName": "customer-user-id abbreviated name",
+                      "abbreviatedName": "TT",
                       "displayName": "customer-user-id display name",
                     },
                   },
@@ -524,7 +524,7 @@ exports[`InboxPage matches snapshot 3`] = `
                   "attributes": Object {
                     "banned": false,
                     "profile": Object {
-                      "abbreviatedName": "provider-user-id abbreviated name",
+                      "abbreviatedName": "TT",
                       "displayName": "provider-user-id display name",
                     },
                   },
@@ -609,7 +609,7 @@ exports[`InboxPage matches snapshot 3`] = `
                   "attributes": Object {
                     "banned": false,
                     "profile": Object {
-                      "abbreviatedName": "customer-user-id abbreviated name",
+                      "abbreviatedName": "TT",
                       "displayName": "customer-user-id display name",
                     },
                   },
@@ -626,7 +626,7 @@ exports[`InboxPage matches snapshot 3`] = `
                   "attributes": Object {
                     "banned": false,
                     "profile": Object {
-                      "abbreviatedName": "provider-user-id abbreviated name",
+                      "abbreviatedName": "TT",
                       "displayName": "provider-user-id display name",
                     },
                   },
@@ -670,7 +670,7 @@ exports[`InboxPage matches snapshot 4`] = `
       <span
         className={undefined}
       >
-        customer-user-id abbreviated name
+        TT
       </span>
     </a>
   </div>

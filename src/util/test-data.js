@@ -24,7 +24,7 @@ export const createUser = id => ({
     banned: false,
     profile: {
       displayName: `${id} display name`,
-      abbreviatedName: `${id} abbreviated name`,
+      abbreviatedName: 'TT',
     },
   },
 });

@@ -103,7 +103,7 @@ exports[`ListingPage matches snapshot 1`] = `
                   "attributes": Object {
                     "banned": false,
                     "profile": Object {
-                      "abbreviatedName": "user-1 abbreviated name",
+                      "abbreviatedName": "TT",
                       "displayName": "user-1 display name",
                     },
                   },
@@ -120,7 +120,7 @@ exports[`ListingPage matches snapshot 1`] = `
                   "attributes": Object {
                     "banned": false,
                     "profile": Object {
-                      "abbreviatedName": "user-1 abbreviated name",
+                      "abbreviatedName": "TT",
                       "displayName": "user-1 display name",
                     },
                   },

@@ -1,0 +1,54 @@
+@import '../../marketplace.css';
+
+.root {
+  display: flex;
+  flex-direction: row;
+}
+
+.avatar {
+  margin-right: 36px;
+}
+
+.info {
+  flex: 1;
+}
+
+.heading {
+  @apply --marketplaceH2FontStyles;
+  margin: 20px 0 0 0;
+
+  @media (--viewportMedium) {
+    margin: 15px 0 0 0;
+  }
+}
+
+.bio {
+  /* Preserve newlines, but collapse other whitespace */
+  white-space: pre-line;
+
+  margin: 18px 0 0 0;
+
+  transition: all 1s ease-in;
+
+  @media (--viewportMedium) {
+    margin: 18px 0 0 0;
+  }
+}
+
+.showMore {
+  margin-left: 5px;
+}
+
+.links {
+}
+
+.withBioMissingAbove {
+  @media (--viewportMedium) {
+    /* Fix baseline alignment if bio is missing from above */
+    margin-top: 18px;
+  }
+}
+
+.linkSeparator {
+  margin: 0 10px;
+}

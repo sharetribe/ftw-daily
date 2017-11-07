@@ -99,5 +99,6 @@ export { default as TextInputField } from './TextInputField/TextInputField';
 export { default as Topbar } from './Topbar/Topbar';
 export { default as TopbarDesktop } from './TopbarDesktop/TopbarDesktop';
 export { default as TopbarMobileMenu } from './TopbarMobileMenu/TopbarMobileMenu';
+export { default as UserCard } from './UserCard/UserCard';
 export { default as UserNav } from './UserNav/UserNav';
 export { default as ValidationError } from './ValidationError/ValidationError';

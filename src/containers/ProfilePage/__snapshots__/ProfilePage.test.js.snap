@@ -38,7 +38,7 @@ exports[`ProfilePage matches snapshot 1`] = `
               "attributes": Object {
                 "banned": false,
                 "profile": Object {
-                  "abbreviatedName": "test-user abbreviated name",
+                  "abbreviatedName": "TT",
                   "displayName": "test-user display name",
                 },
               },
