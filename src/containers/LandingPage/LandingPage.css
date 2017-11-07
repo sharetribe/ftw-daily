@@ -84,13 +84,13 @@
 
   /* Place the bar on top of .sectionContent top margin */
   position: relative;
-  top: -var(--sectionMarginTopMobile);
+  top: calc(-1 * var(--sectionMarginTopMobile));
 
   @media (--viewportMedium) {
     width: 192px;
     height: 8px;
 
     /* Place the bar on top of .sectionContent top margin */
-    top: -var(--sectionMarginTop);
+    top: calc(-1 * var(--sectionMarginTop));
   }
 }
