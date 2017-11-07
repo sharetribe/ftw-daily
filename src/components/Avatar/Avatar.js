@@ -26,6 +26,7 @@ export const AvatarComponent = props => {
     ? { name: 'ProfilePage', params: { id: avatarUser.id.uuid } }
     : { name: 'ProfileBasePage' };
   const hasProfileImage = avatarUser.profileImage && avatarUser.profileImage.id;
+  const profileLinkEnabled = !disableProfileLink;
 
   if (isBannedUser) {
     return (
@@ -33,7 +34,7 @@ export const AvatarComponent = props => {
         <IconBannedUser className={css.bannedUserIcon} />
       </div>
     );
-  } else if (hasProfileImage && !disableProfileLink) {
+  } else if (hasProfileImage && profileLinkEnabled) {
     return (
       <NamedLink {...rootProps} {...linkProps}>
         <ResponsiveImage
@@ -61,7 +62,7 @@ export const AvatarComponent = props => {
         />
       </div>
     );
-  } else if (!disableProfileLink) {
+  } else if (profileLinkEnabled) {
     // Placeholder avatar (initials)
     return (
       <NamedLink {...rootProps} {...linkProps}>
