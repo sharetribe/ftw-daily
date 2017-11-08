@@ -1,28 +1,17 @@
-import React, { Component } from 'react';
 import { fakeIntl } from '../../util/test-data';
 import StripePaymentForm from './StripePaymentForm';
 
-class StripePaymentFormExample extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { token: null };
-  }
-  render() {
-    const handleSubmit = values => {
-      const { token } = values;
-      this.setState({ token });
-    };
-    return (
-      <div>
-        <StripePaymentForm {...this.props} onSubmit={handleSubmit} />
-        {this.state.token ? <p>Token: {this.state.token}</p> : null}
-      </div>
-    );
-  }
-}
-
 export const Empty = {
-  component: StripePaymentFormExample,
-  props: { intl: fakeIntl, formId: 'StripePaymentFormExample' },
+  component: StripePaymentForm,
+  props: {
+    formId: 'StripePaymentFormExample',
+    onChange: values => {
+      console.log('form onChange:', values);
+    },
+    onSubmit: values => {
+      console.log('form onSubmit:', values);
+    },
+    intl: fakeIntl,
+  },
   group: 'forms',
 };

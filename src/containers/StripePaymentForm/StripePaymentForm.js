@@ -112,12 +112,13 @@ class StripePaymentForm extends Component {
     }
   }
   handleCardValueChange(event) {
-    const { intl } = this.props;
+    const { intl, onChange } = this.props;
     const { error, complete } = event;
     this.setState({
       error: error ? stripeErrorTranslation(intl, error) : null,
       cardValueValid: complete,
     });
+    onChange({ token: null });
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -206,6 +207,7 @@ StripePaymentForm.defaultProps = {
   rootClassName: null,
   inProgress: false,
   paymentInfo: null,
+  onChange: () => null,
 };
 
 const { bool, func, string } = PropTypes;
@@ -217,6 +219,7 @@ StripePaymentForm.propTypes = {
   formId: string.isRequired,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
+  onChange: func,
   paymentInfo: string,
 };
 
