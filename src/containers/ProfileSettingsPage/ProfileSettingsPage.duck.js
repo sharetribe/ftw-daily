@@ -137,7 +137,7 @@ export const updateProfile = actionPayload => {
         // Include profile image to denormalized user entity
         const currentUserId = response.data.data.id;
         const entities = updatedEntities({}, response.data);
-        const denormalised = denormalisedEntities(entities, 'current-user', [currentUserId]);
+        const denormalised = denormalisedEntities(entities, 'currentUser', [currentUserId]);
         const currentUser = denormalised[0];
 
         // Update current user in state.user.currentUser through user.duck.js

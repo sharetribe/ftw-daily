@@ -341,7 +341,7 @@ export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
       // Include profile image to denormalized user entity
       const currentUserId = response.data.data.id;
       const entities = updatedEntities({}, response.data);
-      const denormalised = denormalisedEntities(entities, 'current-user', [currentUserId]);
+      const denormalised = denormalisedEntities(entities, 'currentUser', [currentUserId]);
       const currentUser = denormalised[0];
       // set current user id to the logger
       log.setUserId(currentUser.id.uuid);

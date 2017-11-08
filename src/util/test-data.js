@@ -32,7 +32,7 @@ export const createUser = id => ({
 // Create a user that conforms to the util/propTypes currentUser schema
 export const createCurrentUser = id => ({
   id: new UUID(id),
-  type: 'current-user',
+  type: 'currentUser',
   attributes: {
     banned: false,
     email: `${id}@example.com`,
