@@ -8,7 +8,8 @@ class StripePaymentFormExample extends Component {
     this.state = { token: null };
   }
   render() {
-    const handleSubmit = token => {
+    const handleSubmit = values => {
+      const { token } = values;
       this.setState({ token });
     };
     return (

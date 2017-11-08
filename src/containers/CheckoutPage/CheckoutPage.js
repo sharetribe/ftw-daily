@@ -96,12 +96,13 @@ export class CheckoutPageComponent extends Component {
     this.setState({ pageData: pageData || {}, dataLoaded: true });
   }
 
-  handleSubmit(cardToken) {
+  handleSubmit(values) {
     if (this.state.submitting) {
       return;
     }
     this.setState({ submitting: true });
 
+    const cardToken = values.token;
     const { history, sendOrderRequest, speculatedTransaction } = this.props;
     const requestParams = {
       listingId: this.state.pageData.listing.id,

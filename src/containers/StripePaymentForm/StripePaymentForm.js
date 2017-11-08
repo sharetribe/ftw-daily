@@ -141,7 +141,7 @@ class StripePaymentForm extends Component {
           });
         } else {
           this.setState({ submitting: false });
-          onSubmit(token.id);
+          onSubmit({ token: token.id });
         }
       })
       .catch(e => {
