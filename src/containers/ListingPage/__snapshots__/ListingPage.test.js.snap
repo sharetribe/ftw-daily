@@ -97,40 +97,72 @@ exports[`ListingPage matches snapshot 1`] = `
         </InjectIntl(ModalComponent)>
         <div>
           <div>
-            <AvatarLarge
-              user={
+            <NamedLink
+              name="ListingPage"
+              params={
                 Object {
-                  "attributes": Object {
-                    "banned": false,
-                    "profile": Object {
-                      "abbreviatedName": "TT",
-                      "displayName": "user-1 display name",
-                    },
-                  },
-                  "id": UUID {
-                    "uuid": "user-1",
-                  },
-                  "type": "user",
+                  "id": "listing1",
+                  "slug": "listing1-title",
                 }
               }
-            />
-            <AvatarMedium
-              user={
+              to={
                 Object {
-                  "attributes": Object {
-                    "banned": false,
-                    "profile": Object {
-                      "abbreviatedName": "TT",
-                      "displayName": "user-1 display name",
-                    },
-                  },
-                  "id": UUID {
-                    "uuid": "user-1",
-                  },
-                  "type": "user",
+                  "hash": "#host",
                 }
               }
-            />
+            >
+              <AvatarLarge
+                disableProfileLink={true}
+                user={
+                  Object {
+                    "attributes": Object {
+                      "banned": false,
+                      "profile": Object {
+                        "abbreviatedName": "TT",
+                        "displayName": "user-1 display name",
+                      },
+                    },
+                    "id": UUID {
+                      "uuid": "user-1",
+                    },
+                    "type": "user",
+                  }
+                }
+              />
+            </NamedLink>
+            <NamedLink
+              name="ListingPage"
+              params={
+                Object {
+                  "id": "listing1",
+                  "slug": "listing1-title",
+                }
+              }
+              to={
+                Object {
+                  "hash": "#host",
+                }
+              }
+            >
+              <AvatarMedium
+                disableProfileLink={true}
+                user={
+                  Object {
+                    "attributes": Object {
+                      "banned": false,
+                      "profile": Object {
+                        "abbreviatedName": "TT",
+                        "displayName": "user-1 display name",
+                      },
+                    },
+                    "id": UUID {
+                      "uuid": "user-1",
+                    },
+                    "type": "user",
+                  }
+                }
+              />
+            </NamedLink>
           </div>
           <div>
             <div>
@@ -152,16 +184,29 @@ exports[`ListingPage matches snapshot 1`] = `
                   listing1 title
                 </h1>
                 <div>
-                  <span>
-                    <FormattedMessage
-                      id="ListingPage.hostedBy"
-                      values={
-                        Object {
-                          "name": "user-1 display name",
-                        }
+                  <FormattedMessage
+                    id="ListingPage.hostedBy"
+                    values={
+                      Object {
+                        "name": <NamedLink
+                          name="ListingPage"
+                          params={
+                              Object {
+                                  "id": "listing1",
+                                  "slug": "listing1-title",
+                                }
+                          }
+                          to={
+                              Object {
+                                  "hash": "#host",
+                                }
+                          }
+                      >
+                          user-1 display name
+                      </NamedLink>,
                       }
-                    />
-                  </span>
+                    }
+                  />
                 </div>
               </div>
             </div>
@@ -197,6 +242,55 @@ exports[`ListingPage matches snapshot 1`] = `
                   zoom={11}
                 />
               </div>
+            </div>
+            <div
+              id="host"
+            >
+              <h2>
+                <FormattedMessage
+                  id="ListingPage.yourHostHeading"
+                  values={Object {}}
+                />
+              </h2>
+              <UserCard
+                className={null}
+                currentUser={
+                  Object {
+                    "attributes": Object {
+                      "banned": false,
+                      "email": "user-2@example.com",
+                      "emailVerified": true,
+                      "profile": Object {
+                        "abbreviatedName": "user-2 abbreviated name",
+                        "displayName": "user-2 display name",
+                        "firstName": "user-2 first name",
+                        "lastName": "user-2 last name",
+                      },
+                      "stripeConnected": true,
+                    },
+                    "id": UUID {
+                      "uuid": "user-2",
+                    },
+                    "type": "current-user",
+                  }
+                }
+                rootClassName={null}
+                user={
+                  Object {
+                    "attributes": Object {
+                      "banned": false,
+                      "profile": Object {
+                        "abbreviatedName": "TT",
+                        "displayName": "user-1 display name",
+                      },
+                    },
+                    "id": UUID {
+                      "uuid": "user-1",
+                    },
+                    "type": "user",
+                  }
+                }
+              />
             </div>
           </div>
           <withViewport(ModalInMobileComponent)
