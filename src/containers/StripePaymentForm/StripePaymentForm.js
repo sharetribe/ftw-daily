@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { Form, PrimaryButton } from '../../components';
+import { Form, PrimaryButton, ExpandingTextarea } from '../../components';
 import * as log from '../../util/log';
 import config from '../../config';
 
@@ -70,6 +70,14 @@ const cardStyles = {
   },
 };
 
+const initialState = {
+  error: null,
+  submitting: false,
+  cardValueValid: false,
+  token: null,
+  message: '',
+};
+
 /**
  * Payment form that asks for credit card info using Stripe Elements.
  *
@@ -82,7 +90,7 @@ const cardStyles = {
 class StripePaymentForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { error: null, submitting: false, cardValueValid: false };
+    this.state = initialState;
     this.handleCardValueChange = this.handleCardValueChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -105,6 +113,9 @@ class StripePaymentForm extends Component {
       }
     });
   }
+  componentWillReceiveProps() {
+    this.setState(initialState);
+  }
   componentWillUnmount() {
     if (this.card) {
       this.card.removeEventListener('change', this.handleCardValueChange);
@@ -114,11 +125,21 @@ class StripePaymentForm extends Component {
   handleCardValueChange(event) {
     const { intl, onChange } = this.props;
     const { error, complete } = event;
-    this.setState({
-      error: error ? stripeErrorTranslation(intl, error) : null,
-      cardValueValid: complete,
+
+    // A change in the card should clear the token and trigger a call
+    // to the onChange prop with the cleared token and the current
+    // message.
+
+    this.setState(prevState => {
+      const { message } = prevState;
+      const token = null;
+      onChange({ token, message });
+      return {
+        error: error ? stripeErrorTranslation(intl, error) : null,
+        cardValueValid: complete,
+        token,
+      };
     });
-    onChange({ token: null });
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -129,6 +150,13 @@ class StripePaymentForm extends Component {
     }
 
     const { intl, onSubmit } = this.props;
+
+    if (this.state.token) {
+      // Token already fetched for the current card value
+      onSubmit({ token: this.state.token, message: this.state.message.trim() });
+      return;
+    }
+
     this.setState({ submitting: true });
 
     this.stripe
@@ -139,10 +167,11 @@ class StripePaymentForm extends Component {
           this.setState({
             submitting: false,
             error: stripeErrorTranslation(intl, error),
+            token: null,
           });
         } else {
-          this.setState({ submitting: false });
-          onSubmit({ token: token.id });
+          this.setState({ submitting: false, token: token.id });
+          onSubmit({ token: token.id, message: this.state.message.trim() });
         }
       })
       .catch(e => {
@@ -158,7 +187,16 @@ class StripePaymentForm extends Component {
       });
   }
   render() {
-    const { className, rootClassName, inProgress, formId, paymentInfo } = this.props;
+    const {
+      className,
+      rootClassName,
+      inProgress,
+      formId,
+      paymentInfo,
+      onChange,
+      authorDisplayName,
+      intl,
+    } = this.props;
     const submitInProgress = this.state.submitting || inProgress;
     const submitDisabled = !this.state.cardValueValid || submitInProgress;
     const classes = classNames(rootClassName || css.root, className);
@@ -166,6 +204,23 @@ class StripePaymentForm extends Component {
       [css.cardSuccess]: this.state.cardValueValid,
       [css.cardError]: this.state.error,
     });
+
+    const messagePlaceholder = intl.formatMessage(
+      { id: 'StripePaymentForm.messagePlaceholder' },
+      { name: authorDisplayName }
+    );
+
+    const handleMessageChange = e => {
+      // A change in the message should call the onChange prop with
+      // the current token and the new message.
+      const message = e.target.value;
+      this.setState(prevState => {
+        const { token } = prevState;
+        const newState = { token, message };
+        onChange(newState);
+        return newState;
+      });
+    };
 
     return (
       <Form className={classes} onSubmit={this.handleSubmit}>
@@ -186,6 +241,12 @@ class StripePaymentForm extends Component {
         <h3 className={css.messageHeading}>
           <FormattedMessage id="StripePaymentForm.messageHeading" />
         </h3>
+        <ExpandingTextarea
+          className={css.message}
+          placeholder={messagePlaceholder}
+          value={this.state.message}
+          onChange={handleMessageChange}
+        />
         <div className={css.submitContainer}>
           {paymentInfo ? <p className={css.paymentInfo}>{paymentInfo}</p> : null}
           <PrimaryButton
@@ -221,6 +282,7 @@ StripePaymentForm.propTypes = {
   onSubmit: func.isRequired,
   onChange: func,
   paymentInfo: string,
+  authorDisplayName: string.isRequired,
 };
 
 export default injectIntl(StripePaymentForm);

@@ -5,6 +5,7 @@ export const Empty = {
   component: StripePaymentForm,
   props: {
     formId: 'StripePaymentFormExample',
+    authorDisplayName: 'Janne K',
     onChange: values => {
       console.log('form onChange:', values);
     },

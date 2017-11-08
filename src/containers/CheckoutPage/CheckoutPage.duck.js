@@ -104,16 +104,21 @@ export const speculateTransactionError = e => ({
 
 /* ================ Thunks ================ */
 
-export const initiateOrder = params => (dispatch, getState, sdk) => {
+export const initiateOrder = (orderParams, initialMessage) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
   const bodyParams = {
     transition: 'transition/preauthorize',
-    params,
+    params: orderParams,
   };
+  let orderResponse;
   return sdk.transactions
     .initiate(bodyParams)
     .then(response => {
-      const orderId = response.data.data.id;
+      orderResponse = response;
+      console.log(`TODO: save initial message: "${initialMessage}"`);
+    })
+    .then(() => {
+      const orderId = orderResponse.data.data.id;
       dispatch(initiateOrderSuccess(orderId));
       dispatch(fetchCurrentUserHasOrdersSuccess(true));
       return orderId;
@@ -121,9 +126,9 @@ export const initiateOrder = params => (dispatch, getState, sdk) => {
     .catch(e => {
       dispatch(initiateOrderError(storableError(e)));
       log.error(e, 'initiate-order-failed', {
-        listingId: params.listingId.uuid,
-        bookingStart: params.bookingStart,
-        bookingEnd: params.bookingEnd,
+        listingId: orderParams.listingId.uuid,
+        bookingStart: orderParams.bookingStart,
+        bookingEnd: orderParams.bookingEnd,
       });
       throw e;
     });

@@ -64,6 +64,10 @@
   }
 }
 
+.message {
+  border-bottom-color: var(--matterColorAnti);
+}
+
 .submitContainer {
   margin-top: auto;
 

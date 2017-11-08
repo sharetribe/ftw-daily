@@ -103,6 +103,7 @@ export class CheckoutPageComponent extends Component {
     this.setState({ submitting: true });
 
     const cardToken = values.token;
+    const initialMessage = values.message;
     const { history, sendOrderRequest, speculatedTransaction } = this.props;
     const requestParams = {
       listingId: this.state.pageData.listing.id,
@@ -111,7 +112,7 @@ export class CheckoutPageComponent extends Component {
       bookingEnd: speculatedTransaction.booking.attributes.end,
     };
 
-    sendOrderRequest(requestParams)
+    sendOrderRequest(requestParams, initialMessage)
       .then(orderId => {
         this.setState({ submitting: false });
         const orderDetailsPath = pathByRouteName('OrderDetailsPage', routeConfiguration(), {
@@ -327,6 +328,7 @@ export class CheckoutPageComponent extends Component {
                   inProgress={this.state.submitting}
                   formId="CheckoutPagePaymentForm"
                   paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo' })}
+                  authorDisplayName={currentAuthor.attributes.profile.displayName}
                 />
               ) : null}
             </section>
@@ -431,7 +433,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  sendOrderRequest: params => dispatch(initiateOrder(params)),
+  sendOrderRequest: (params, initialMessage) => dispatch(initiateOrder(params, initialMessage)),
   fetchSpeculatedTransaction: (listingId, bookingStart, bookingEnd) =>
     dispatch(speculateTransaction(listingId, bookingStart, bookingEnd)),
 });

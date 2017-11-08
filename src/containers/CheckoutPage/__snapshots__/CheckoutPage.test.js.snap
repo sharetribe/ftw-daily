@@ -95,6 +95,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
       </div>
       <section>
         <InjectIntl(StripePaymentForm)
+          authorDisplayName="author display name"
           formId="CheckoutPagePaymentForm"
           inProgress={false}
           onSubmit={[Function]}
