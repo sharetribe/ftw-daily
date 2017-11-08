@@ -5,17 +5,6 @@
   flex-direction: column;
 }
 
-.label {
-  margin: 0;
-
-  @media (--viewportMedium) {
-    margin-bottom: 2px;
-  }
-  @media (--viewportLarge) {
-    margin-bottom: 4px;
-  }
-}
-
 .card {
   @apply --marketplaceInputStyles;
 
@@ -52,9 +41,20 @@
   }
 }
 
+.paymentLabel {
+  margin: 0;
+
+  @media (--viewportMedium) {
+    margin-bottom: 2px;
+  }
+  @media (--viewportLarge) {
+    margin-bottom: 4px;
+  }
+}
+
 .messageHeading {
   color: var(--matterColorAnti);
-  margin: 40px 0 44px 0;
+  margin: 40px 0 14px 0;
 
   @media (--viewportMedium) {
     margin: 41px 0 26px 0;
@@ -62,6 +62,18 @@
   @media (--viewportLarge) {
     margin: 40px 0 26px 0;
   }
+}
+
+.messageLabel {
+  margin: 0 0 5px 0;
+
+  @media (--viewportMedium) {
+    margin: 0 0 6px 0;
+  }
+}
+
+.messageOptional {
+  color: var(--matterColorAnti);
 }
 
 .message {
@@ -72,7 +84,7 @@
   margin-top: auto;
 
   @media (--viewportLarge) {
-    margin-top: 133px;
+    margin-top: 72px;
   }
 }
 
@@ -81,6 +93,7 @@
   color: var(--matterColorAnti);
   text-align: center;
   padding: 0 42px;
+  margin: 28px 0 0 0;
 
   @media (--viewportLarge) {
     /* TODO this is ugly overwrite to fix unconsistent font styles */
@@ -90,9 +103,12 @@
 }
 
 .submitButton {
-  margin-top: 21px;
+  margin-top: 22px;
 
+  @media (--viewportMedium) {
+    margin-top: 26px;
+  }
   @media (--viewportLarge) {
-    margin-top: 18px;
+    margin-top: 17px;
   }
 }

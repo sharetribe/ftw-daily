@@ -222,12 +222,18 @@ class StripePaymentForm extends Component {
       });
     };
 
+    const messageOptionalText = (
+      <span className={css.messageOptional}>
+        <FormattedMessage id="StripePaymentForm.messageOptionalText" />
+      </span>
+    );
+
     return (
       <Form className={classes} onSubmit={this.handleSubmit}>
         <h3 className={css.paymentHeading}>
           <FormattedMessage id="StripePaymentForm.paymentHeading" />
         </h3>
-        <label className={css.label} htmlFor={`${formId}-card`}>
+        <label className={css.paymentLabel} htmlFor={`${formId}-card`}>
           <FormattedMessage id="StripePaymentForm.creditCardDetails" />
         </label>
         <div
@@ -241,14 +247,18 @@ class StripePaymentForm extends Component {
         <h3 className={css.messageHeading}>
           <FormattedMessage id="StripePaymentForm.messageHeading" />
         </h3>
+        <label className={css.messageLabel} htmlFor={`${formId}-message`}>
+          <FormattedMessage id="StripePaymentForm.messageLabel" values={{ messageOptionalText }} />
+        </label>
         <ExpandingTextarea
+          id={`${formId}-message`}
           className={css.message}
           placeholder={messagePlaceholder}
           value={this.state.message}
           onChange={handleMessageChange}
         />
         <div className={css.submitContainer}>
-          {paymentInfo ? <p className={css.paymentInfo}>{paymentInfo}</p> : null}
+          <p className={css.paymentInfo}>{paymentInfo}</p>
           <PrimaryButton
             className={css.submitButton}
             type="submit"
@@ -267,7 +277,6 @@ StripePaymentForm.defaultProps = {
   className: null,
   rootClassName: null,
   inProgress: false,
-  paymentInfo: null,
   onChange: () => null,
 };
 
@@ -281,7 +290,7 @@ StripePaymentForm.propTypes = {
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   onChange: func,
-  paymentInfo: string,
+  paymentInfo: string.isRequired,
   authorDisplayName: string.isRequired,
 };
 

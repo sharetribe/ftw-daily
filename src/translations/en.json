@@ -521,6 +521,8 @@
   "StripePaymentForm.creditCardDetails": "Credit card details",
   "StripePaymentForm.genericError": "Could not handle payment data. Please try again.",
   "StripePaymentForm.messageHeading": "Message",
+  "StripePaymentForm.messageLabel": "Say hello to your host {messageOptionalText}",
+  "StripePaymentForm.messageOptionalText": "• optional",
   "StripePaymentForm.messagePlaceholder": "Hello {name}! I'm looking forward to…",
   "StripePaymentForm.paymentHeading": "Payment",
   "StripePaymentForm.stripe.api_connection_error": "Could not connect to Stripe API.",

@@ -6,6 +6,7 @@ export const Empty = {
   props: {
     formId: 'StripePaymentFormExample',
     authorDisplayName: 'Janne K',
+    paymentInfo: 'You might or might not be charged yet',
     onChange: values => {
       console.log('form onChange:', values);
     },
