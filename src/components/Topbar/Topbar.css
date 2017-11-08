@@ -196,12 +196,14 @@
 
   /* Place enough to the right to hide the error */
   right: -355px;
+  opacity: 0;
 
   max-width: 340px;
   margin: 0 15px;
 
   /* Animate error from the right */
-  transition: right var(--transitionStyle);
+  transition: all ease-out 0.2s;
+  transition-delay: 1s;
 
   /* Bleed the bg color from the bottom */
   padding-bottom: 4px;
@@ -218,6 +220,7 @@
 
 .genericErrorVisible {
   right: 0;
+  opacity: 1;
 }
 
 .genericErrorContent {
