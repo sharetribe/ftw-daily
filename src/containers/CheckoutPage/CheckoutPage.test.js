@@ -17,7 +17,7 @@ describe('CheckoutPage', () => {
       history: { push: noop },
       intl: fakeIntl,
       listing,
-      currentUser: createCurrentUser('current-user'),
+      currentUser: createCurrentUser('currentUser'),
       params: { id: 'listing1', slug: 'listing1' },
       sendOrderRequest: noop,
       fetchSpeculatedTransaction: noop,
