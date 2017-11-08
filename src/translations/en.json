@@ -520,6 +520,8 @@
   "StripeBankAccountTokenInputField.unsupportedCountry": "Country not supported: {country}",
   "StripePaymentForm.creditCardDetails": "Credit card details",
   "StripePaymentForm.genericError": "Could not handle payment data. Please try again.",
+  "StripePaymentForm.messageHeading": "Message",
+  "StripePaymentForm.paymentHeading": "Payment",
   "StripePaymentForm.stripe.api_connection_error": "Could not connect to Stripe API.",
   "StripePaymentForm.stripe.api_error": "Error in Stripe API.",
   "StripePaymentForm.stripe.authentication_error": "Could not authenticate with Stripe.",

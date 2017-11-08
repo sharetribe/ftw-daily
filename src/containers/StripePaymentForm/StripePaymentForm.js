@@ -168,6 +168,9 @@ class StripePaymentForm extends Component {
 
     return (
       <Form className={classes} onSubmit={this.handleSubmit}>
+        <h3 className={css.paymentHeading}>
+          <FormattedMessage id="StripePaymentForm.paymentHeading" />
+        </h3>
         <label className={css.label} htmlFor={`${formId}-card`}>
           <FormattedMessage id="StripePaymentForm.creditCardDetails" />
         </label>
@@ -179,6 +182,9 @@ class StripePaymentForm extends Component {
           }}
         />
         {this.state.error ? <span style={{ color: 'red' }}>{this.state.error}</span> : null}
+        <h3 className={css.messageHeading}>
+          <FormattedMessage id="StripePaymentForm.messageHeading" />
+        </h3>
         <div className={css.submitContainer}>
           {paymentInfo ? <p className={css.paymentInfo}>{paymentInfo}</p> : null}
           <PrimaryButton
