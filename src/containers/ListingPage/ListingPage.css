@@ -318,6 +318,10 @@
   }
 }
 
+.authorNameLink {
+  color: var(--matterColor);
+}
+
 .descriptionContainer {
   padding: 0 24px;
   margin-bottom: 35px;

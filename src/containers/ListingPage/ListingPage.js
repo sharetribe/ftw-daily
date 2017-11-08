@@ -364,6 +364,17 @@ export class ListingPageComponent extends Component {
       { title, price: formattedPrice, siteTitle }
     );
 
+    const hostLink = (
+      <NamedLink
+        className={css.authorNameLink}
+        name="ListingPage"
+        params={params}
+        to={{ hash: '#host' }}
+      >
+        {currentAuthorDisplayName}
+      </NamedLink>
+    );
+
     return (
       <Page
         title={schemaTitle}
@@ -417,8 +428,20 @@ export class ListingPageComponent extends Component {
 
               <div className={css.contentContainer}>
                 <div className={css.avatarWrapper}>
-                  <AvatarLarge user={currentAuthor} className={css.avatarDesktop} />
-                  <AvatarMedium user={currentAuthor} className={css.avatarMobile} />
+                  <NamedLink name="ListingPage" params={params} to={{ hash: '#host' }}>
+                    <AvatarLarge
+                      user={currentAuthor}
+                      className={css.avatarDesktop}
+                      disableProfileLink
+                    />
+                  </NamedLink>
+                  <NamedLink name="ListingPage" params={params} to={{ hash: '#host' }}>
+                    <AvatarMedium
+                      user={currentAuthor}
+                      className={css.avatarMobile}
+                      disableProfileLink
+                    />
+                  </NamedLink>
                 </div>
 
                 <div className={css.mainContent}>
@@ -434,12 +457,7 @@ export class ListingPageComponent extends Component {
                     <div className={css.heading}>
                       <h1 className={css.title}>{title}</h1>
                       <div className={css.author}>
-                        <span className={css.authorName}>
-                          <FormattedMessage
-                            id="ListingPage.hostedBy"
-                            values={{ name: currentAuthorDisplayName }}
-                          />
-                        </span>
+                        <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />
                       </div>
                     </div>
                   </div>
