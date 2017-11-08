@@ -40,6 +40,7 @@ import * as TabNav from './components/TabNav/TabNav.example';
 import * as Tabs from './components/Tabs/Tabs.example';
 import * as TextInputField from './components/TextInputField/TextInputField.example';
 import * as TopbarDesktop from './components/TopbarDesktop/TopbarDesktop.example';
+import * as UserCard from './components/UserCard/UserCard.example';
 
 // containers
 import * as BookingDatesForm from './containers/BookingDatesForm/BookingDatesForm.example';
@@ -113,4 +114,5 @@ export {
   TextInputField,
   TopbarDesktop,
   Typography,
+  UserCard,
 };
