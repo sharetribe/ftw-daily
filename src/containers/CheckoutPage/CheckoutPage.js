@@ -318,9 +318,6 @@ export class CheckoutPageComponent extends Component {
             </div>
 
             <section className={css.paymentContainer}>
-              <h3 className={css.paymentTitle}>
-                <FormattedMessage id="CheckoutPage.paymentTitle" />
-              </h3>
               {initiateOrderErrorMessage}
               {listingNotFoundErrorMessage}
               {showPaymentForm ? (

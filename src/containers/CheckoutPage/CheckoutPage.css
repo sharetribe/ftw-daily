@@ -228,23 +228,6 @@
   }
 }
 
-.paymentTitle {
-  /* Font */
-  color: var(--matterColorAnti);
-
-  margin-top: 0;
-  margin-bottom: 14px;
-  @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 14px;
-  }
-
-  @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 26px;
-  }
-}
-
 .orderError,
 .notFoundError {
   margin: 11px 0 12px 0;

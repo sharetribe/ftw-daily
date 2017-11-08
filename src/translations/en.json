@@ -48,7 +48,6 @@
   "CheckoutPage.listingNotFoundError": "Unfortunately the listing is not available anymore.",
   "CheckoutPage.loadingData": "Loading checkout data…",
   "CheckoutPage.paymentInfo": "You'll only be charged if your request is accepted by the provider.",
-  "CheckoutPage.paymentTitle": "Payment",
   "CheckoutPage.priceBreakdownTitle": "Booking breakdown",
   "CheckoutPage.speculateTransactionError": "Failed to fetch breakdown information.",
   "CheckoutPage.title": "Book {listingTitle}",
