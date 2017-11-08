@@ -110,18 +110,26 @@ export const initiateOrder = (orderParams, initialMessage) => (dispatch, getStat
     transition: 'transition/preauthorize',
     params: orderParams,
   };
-  let orderResponse;
   return sdk.transactions
     .initiate(bodyParams)
     .then(response => {
-      orderResponse = response;
-      console.log(`TODO: save initial message: "${initialMessage}"`);
-    })
-    .then(() => {
-      const orderId = orderResponse.data.data.id;
+      const orderId = response.data.data.id;
       dispatch(initiateOrderSuccess(orderId));
       dispatch(fetchCurrentUserHasOrdersSuccess(true));
-      return orderId;
+
+      if (initialMessage) {
+        return sdk.messages
+          .send({ transactionId: orderId, content: initialMessage })
+          .then(() => {
+            return { orderId, initialMessageSuccess: true };
+          })
+          .catch(e => {
+            log.error(e, 'initial-message-send-failed', { txId: orderId });
+            return { orderId, initialMessageSuccess: false };
+          });
+      } else {
+        return Promise.resolve({ orderId, initialMessageSuccess: true });
+      }
     })
     .catch(e => {
       dispatch(initiateOrderError(storableError(e)));

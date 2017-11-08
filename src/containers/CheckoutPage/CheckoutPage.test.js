@@ -14,6 +14,7 @@ describe('CheckoutPage', () => {
         bookingStart: new Date(Date.UTC(2017, 3, 14)),
         bookingEnd: new Date(Date.UTC(2017, 3, 16)),
       },
+      dispatch: noop,
       history: { push: noop },
       intl: fakeIntl,
       listing,

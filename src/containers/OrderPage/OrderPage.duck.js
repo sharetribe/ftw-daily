@@ -1,9 +1,12 @@
+import { pick } from 'lodash';
 import { types } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
 
 // ================ Action types ================ //
+
+export const SET_INITAL_VALUES = 'app/OrderPage/SET_INITIAL_VALUES';
 
 export const FETCH_ORDER_REQUEST = 'app/OrderPage/FETCH_ORDER_REQUEST';
 export const FETCH_ORDER_SUCCESS = 'app/OrderPage/FETCH_ORDER_SUCCESS';
@@ -22,11 +25,15 @@ const initialState = {
   fetchMessagesInProgress: false,
   fetchMessagesError: null,
   messages: [],
+  messageSendingFailedToTransaction: null,
 };
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
+    case SET_INITAL_VALUES:
+      return { ...initialState, ...payload };
+
     case FETCH_ORDER_REQUEST:
       return { ...state, fetchOrderInProgress: true, fetchOrderError: null };
     case FETCH_ORDER_SUCCESS: {
@@ -49,6 +56,11 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
 }
 
 // ================ Action creators ================ //
+
+export const setInitialValues = initialValues => ({
+  type: SET_INITAL_VALUES,
+  payload: pick(initialValues, Object.keys(initialState)),
+});
 
 const fetchOrderRequest = () => ({ type: FETCH_ORDER_REQUEST });
 const fetchOrderSuccess = response => ({ type: FETCH_ORDER_SUCCESS, payload: response });

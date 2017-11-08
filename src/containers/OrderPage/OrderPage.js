@@ -20,16 +20,32 @@ import {
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
-import { loadData } from './OrderPage.duck';
+import { loadData, setInitialValues } from './OrderPage.duck';
 import css from './OrderPage.css';
 
 // OrderPage handles data loading
 // It show loading data text or OrderDetailsPanel (and later also another panel for messages).
 export const OrderPageComponent = props => {
-  const { currentUser, fetchOrderError, intl, params, scrollingDisabled, transaction } = props;
+  const {
+    currentUser,
+    fetchOrderError,
+    messageSendingFailedToTransaction,
+    intl,
+    params,
+    scrollingDisabled,
+    transaction,
+  } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const listingTitle = currentListing.attributes.title;
+
+  if (messageSendingFailedToTransaction) {
+    // TODO: render error message with other messages
+    console.error(
+      'failed to send initial message to transaction:',
+      messageSendingFailedToTransaction
+    );
+  }
 
   // Redirect users with someone else's direct link to their own inbox/orders page.
   const isDataAvailable =
@@ -95,6 +111,7 @@ const { bool, oneOf, shape, string } = PropTypes;
 OrderPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   fetchOrderError: propTypes.error,
+  messageSendingFailedToTransaction: propTypes.uuid,
   intl: intlShape.isRequired,
   params: shape({ id: string }).isRequired,
   scrollingDisabled: bool.isRequired,
@@ -103,7 +120,7 @@ OrderPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { fetchOrderError, transactionRef } = state.OrderPage;
+  const { fetchOrderError, transactionRef, messageSendingFailedToTransaction } = state.OrderPage;
   const { currentUser } = state.user;
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
@@ -111,6 +128,7 @@ const mapStateToProps = state => {
   return {
     currentUser,
     fetchOrderError,
+    messageSendingFailedToTransaction,
     scrollingDisabled: isScrollingDisabled(state),
     transaction,
   };
@@ -118,6 +136,7 @@ const mapStateToProps = state => {
 
 const OrderPage = compose(connect(mapStateToProps), injectIntl)(OrderPageComponent);
 
+OrderPage.setInitialValues = setInitialValues;
 OrderPage.loadData = loadData;
 
 export default OrderPage;
