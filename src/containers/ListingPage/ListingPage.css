@@ -377,6 +377,32 @@
   }
 }
 
+.yourHostContainer {
+  padding: 0 24px;
+  margin-bottom: 5px;
+
+  @media (--viewportMedium) {
+    padding: 0;
+  }
+  @media (--viewportLarge) {
+    margin-bottom: 3px;
+  }
+}
+
+.yourHostHeading {
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColorAnti);
+
+  margin: 54px 0 23px 0;
+
+  @media (--viewportMedium) {
+    margin: 53px 0 27px 0;
+  }
+  @media (--viewportLarge) {
+    margin: 51px 0 27px 0;
+  }
+}
+
 .map {
   /* Dimensions: Map takes all available space from viewport (excludes action button and section title) */
   height: calc(100vh - 193px);

@@ -219,6 +219,7 @@
   "ListingPage.perNight": "per night",
   "ListingPage.schemaTitle": "{title} - {price} | {siteTitle}",
   "ListingPage.viewImagesButton": "View photos ({count})",
+  "ListingPage.yourHostHeading": "Your host",
   "LocationSearchForm.placeholder": "Search saunas…",
   "LoginForm.emailInvalid": "A valid email address is required",
   "LoginForm.emailLabel": "Email",

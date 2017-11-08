@@ -32,6 +32,7 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
+  UserCard,
 } from '../../components';
 import { BookingDatesForm, TopbarContainer } from '../../containers';
 
@@ -451,6 +452,12 @@ export class ListingPageComponent extends Component {
                   </div>
 
                   {map}
+                  <div id="host" className={css.yourHostContainer}>
+                    <h2 className={css.yourHostHeading}>
+                      <FormattedMessage id="ListingPage.yourHostHeading" />
+                    </h2>
+                    <UserCard user={currentListing.author} currentUser={currentUser} />
+                  </div>
                 </div>
 
                 <ModalInMobile
