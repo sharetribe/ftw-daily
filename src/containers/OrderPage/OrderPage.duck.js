@@ -9,26 +9,39 @@ export const FETCH_ORDER_REQUEST = 'app/OrderPage/FETCH_ORDER_REQUEST';
 export const FETCH_ORDER_SUCCESS = 'app/OrderPage/FETCH_ORDER_SUCCESS';
 export const FETCH_ORDER_ERROR = 'app/OrderPage/FETCH_ORDER_ERROR';
 
+export const FETCH_MESSAGES_REQUEST = 'app/OrderPage/FETCH_MESSAGES_REQUEST';
+export const FETCH_MESSAGES_SUCCESS = 'app/OrderPage/FETCH_MESSAGES_SUCCESS';
+export const FETCH_MESSAGES_ERROR = 'app/OrderPage/FETCH_MESSAGES_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
-  fetchInProgress: false,
+  fetchOrderInProgress: false,
   fetchOrderError: null,
   transactionRef: null,
+  fetchMessagesInProgress: false,
+  fetchMessagesError: null,
+  messages: [],
 };
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case FETCH_ORDER_REQUEST:
-      return { ...state, fetchInProgress: true, fetchOrderError: null };
+      return { ...state, fetchOrderInProgress: true, fetchOrderError: null };
     case FETCH_ORDER_SUCCESS: {
       const transactionRef = { id: payload.data.data.id, type: 'transaction' };
-      return { ...state, fetchInProgress: false, transactionRef };
+      return { ...state, fetchOrderInProgress: false, transactionRef };
     }
     case FETCH_ORDER_ERROR:
       console.error(payload); // eslint-disable-line
-      return { ...state, fetchInProgress: false, fetchOrderError: payload };
+      return { ...state, fetchOrderInProgress: false, fetchOrderError: payload };
+    case FETCH_MESSAGES_REQUEST:
+      return { ...state, fetchMessagesInProgress: true, fetchMessagesError: null };
+    case FETCH_MESSAGES_SUCCESS:
+      return { ...state, fetchMessagesInProgress: false, messages: payload };
+    case FETCH_MESSAGES_ERROR:
+      return { ...state, fetchMessagesInProgress: false, fetchMessagesError: payload };
 
     default:
       return state;
@@ -40,6 +53,10 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
 const fetchOrderRequest = () => ({ type: FETCH_ORDER_REQUEST });
 const fetchOrderSuccess = response => ({ type: FETCH_ORDER_SUCCESS, payload: response });
 const fetchOrderError = e => ({ type: FETCH_ORDER_ERROR, error: true, payload: e });
+
+const fetchMessagesRequest = () => ({ type: FETCH_MESSAGES_REQUEST });
+const fetchMessagesSuccess = messages => ({ type: FETCH_MESSAGES_SUCCESS, payload: messages });
+const fetchMessagesError = e => ({ type: FETCH_MESSAGES_ERROR, error: true, payload: e });
 
 // ================ Thunks ================ //
 
@@ -85,11 +102,29 @@ export const fetchOrder = id => (dispatch, getState, sdk) => {
     });
 };
 
+export const fetchMessages = txId => (dispatch, getState, sdk) => {
+  dispatch(fetchMessagesRequest());
+
+  return sdk.messages
+    .query({ transaction_id: txId })
+    .then(response => {
+      const entities = updatedEntities({}, response.data);
+      const messageIds = response.data.data.map(d => d.id);
+      const denormalized = denormalisedEntities(entities, 'message', messageIds);
+
+      dispatch(fetchMessagesSuccess(denormalized));
+    })
+    .catch(e => {
+      dispatch(fetchMessagesError(e));
+      throw e;
+    });
+};
+
 // loadData is a collection of async calls that need to be made
 // before page has all the info it needs to render itself
 export const loadData = params => dispatch => {
   const orderId = new types.UUID(params.id);
 
   // Order (i.e. transaction entity in API, but from buyers perspective) contains order details
-  return dispatch(fetchOrder(orderId));
+  return Promise.all([dispatch(fetchOrder(orderId)), dispatch(fetchMessages(orderId))]);
 };
