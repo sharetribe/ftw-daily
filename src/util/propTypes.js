@@ -201,6 +201,12 @@ export const txIsCanceled = tx => txLastTransition(tx) === TX_TRANSITION_CANCEL;
 
 export const txIsDelivered = tx => txLastTransition(tx) === TX_TRANSITION_MARK_DELIVERED;
 
+export const txTransition = shape({
+  at: instanceOf(Date).isRequired,
+  by: oneOf(TX_TRANSITION_ACTORS).isRequired,
+  transition: oneOf(TX_TRANSITIONS).isRequired,
+});
+
 // Denormalised transaction object
 export const transaction = shape({
   id: uuid.isRequired,
@@ -220,13 +226,7 @@ export const transaction = shape({
         reversal: bool.isRequired,
       })
     ).isRequired,
-    transitions: arrayOf(
-      shape({
-        at: instanceOf(Date).isRequired,
-        by: oneOf(TX_TRANSITION_ACTORS).isRequired,
-        transition: oneOf(TX_TRANSITIONS).isRequired,
-      })
-    ).isRequired,
+    transitions: arrayOf(txTransition).isRequired,
   }),
   booking,
   listing,

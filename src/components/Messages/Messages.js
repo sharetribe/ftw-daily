@@ -4,6 +4,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { Avatar } from '../../components';
 import { formatDate } from '../../util/dates';
+import { ensureTransaction, ensureUser } from '../../util/data';
 import * as propTypes from '../../util/propTypes';
 
 import css from './Messages.css';
@@ -43,11 +44,133 @@ OwnMessage.propTypes = {
   intl: intlShape.isRequired,
 };
 
+const Transition = props => {
+  const { transition, currentUser, customer, provider, listingTitle, intl } = props;
+
+  const resolveTransitionMessage = (transition, ownRole, otherUsersName, intl) => {
+    const isOwnTransition = transition.by === ownRole;
+    const transitionType = transition.transition;
+    const displayName = otherUsersName;
+
+    switch (transitionType) {
+      case propTypes.TX_TRANSITION_PREAUTHORIZE:
+        return isOwnTransition
+          ? intl.formatMessage({ id: 'Messages.ownTransitionRequest' }, { listingTitle })
+          : intl.formatMessage({ id: 'Messages.transitionRequest' }, { displayName, listingTitle });
+      case propTypes.TX_TRANSITION_ACCEPT:
+        return isOwnTransition
+          ? intl.formatMessage({ id: 'Messages.ownTransitionAccept' })
+          : intl.formatMessage({ id: 'Messages.transitionAccept' }, { displayName });
+      case propTypes.TX_TRANSITION_DECLINE:
+        return isOwnTransition
+          ? intl.formatMessage({ id: 'Messages.ownTransitionDecline' })
+          : intl.formatMessage({ id: 'Messages.transitionDecline' }, { displayName });
+      case propTypes.TX_TRANSITION_AUTO_DECLINE:
+        return ownRole === propTypes.TX_TRANSITION_ACTOR_PROVIDER
+          ? intl.formatMessage({ id: 'Messages.ownTransitionAutoDecline' })
+          : intl.formatMessage({ id: 'Messages.transitionAutoDecline' }, { displayName });
+      case propTypes.TX_TRANSITION_MARK_DELIVERED:
+        return intl.formatMessage({ id: 'Messages.transitionComplete' });
+      case propTypes.TX_TRANSITION_CANCEL:
+        return intl.formatMessage({ id: 'Messages.transitionCancel' });
+
+      default:
+        return '';
+    }
+  };
+
+  const ownRole =
+    currentUser.id.uuid === customer.id.uuid
+      ? propTypes.TX_TRANSITION_ACTOR_CUSTOMER
+      : propTypes.TX_TRANSITION_ACTOR_PROVIDER;
+
+  const otherUsersName =
+    ownRole === propTypes.TX_TRANSITION_ACTOR_CUSTOMER
+      ? provider.attributes.profile.displayName
+      : customer.attributes.profile.displayName;
+
+  const transitionMessage = resolveTransitionMessage(transition, ownRole, otherUsersName, intl);
+  const todayString = intl.formatMessage({ id: 'Messages.today' });
+
+  return (
+    <div className={css.transition}>
+      <div className={css.bullet}>
+        <p className={css.transitionContent}>•</p>
+      </div>
+      <div>
+        <p className={css.transitionContent}>{transitionMessage}</p>
+        <p className={css.transitionDate}>{formatDate(intl, todayString, transition.at)}</p>
+      </div>
+    </div>
+  );
+};
+
+Transition.propTypes = {
+  transition: propTypes.txTransition.isRequired,
+  currentUser: propTypes.currentUser.isRequired,
+  customer: propTypes.user.isRequired,
+  provider: propTypes.user.isRequired,
+  listingTitle: string.isRequired,
+  intl: intlShape.isRequired,
+};
+
+const EmptyTransition = () => {
+  return (
+    <div className={css.transition}>
+      <div className={css.bullet}>
+        <p className={css.transitionContent}>•</p>
+      </div>
+      <div>
+        <p className={css.transitionContent} />
+        <p className={css.transitionDate} />
+      </div>
+    </div>
+  );
+};
+
 export const MessagesComponent = props => {
-  const { rootClassName, className, messages, currentUser, intl } = props;
+  const { rootClassName, className, messages, transaction, currentUser, intl } = props;
   const classes = classNames(rootClassName || css.root, className);
 
-  const msg = message => {
+  const currentTransaction = ensureTransaction(transaction);
+  const transitions = currentTransaction.attributes.transitions
+    ? currentTransaction.attributes.transitions
+    : [];
+  const currentCustomer = ensureUser(currentTransaction.customer);
+  const currentProvider = ensureUser(currentTransaction.provider);
+
+  const transitionsAvailable =
+    currentUser && currentUser.id && currentCustomer.id && currentProvider.id;
+
+  const isMessage = item => item && item.type === 'message';
+
+  // Compare function for sorting an array containint messages and transitions
+  const compareItems = (a, b) => {
+    const itemDate = item => (isMessage(item) ? item.attributes.at : item.at);
+    return itemDate(a) - itemDate(b);
+  };
+
+  // combine messages and transaction transitions
+  const items = messages.concat(transitions).sort(compareItems);
+
+  const transitionComponent = transition => {
+    if (transitionsAvailable) {
+      return (
+        <Transition
+          transition={transition}
+          currentUser={currentUser}
+          customer={currentCustomer}
+          provider={currentProvider}
+          listingTitle={currentTransaction.listing.attributes.title}
+          intl={intl}
+        />
+      );
+    } else {
+      return <EmptyTransition />;
+    }
+  };
+
+  const messageComponent = message => {
     const isOwnMessage =
       message.sender &&
       message.sender.id &&
@@ -60,13 +183,32 @@ export const MessagesComponent = props => {
     return <Message message={message} intl={intl} />;
   };
 
+  const messageListItem = message => {
+    return (
+      <li id={`msg-${message.id.uuid}`} key={message.id.uuid} className={css.messageItem}>
+        {messageComponent(message)}
+      </li>
+    );
+  };
+
+  const transitionListItem = transition => {
+    const classes = classNames(css.messageItem, css.transition);
+    return (
+      <li key={transition.transition} className={classes}>
+        {transitionComponent(transition)}
+      </li>
+    );
+  };
+
   return (
     <ul className={classes}>
-      {messages.map(m => (
-        <li id={`msg-${m.id.uuid}`} key={m.id.uuid} className={css.messageItem}>
-          {msg(m)}
-        </li>
-      ))}
+      {items.map(item => {
+        if (isMessage(item)) {
+          return messageListItem(item);
+        } else {
+          return transitionListItem(item);
+        }
+      })}
     </ul>
   );
 };
@@ -81,6 +223,7 @@ MessagesComponent.propTypes = {
   className: string,
 
   messages: arrayOf(propTypes.message),
+  transaction: propTypes.transaction,
   currentUser: propTypes.currentUser,
 
   // from injectIntl

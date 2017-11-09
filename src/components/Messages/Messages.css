@@ -81,3 +81,21 @@
 .ownMessageDate {
   text-align: right;
 }
+
+.transition {
+  display: flex;
+  flex-direction: row;
+}
+
+.transitionContent {
+  margin: 0;
+}
+.transitionDate {
+  @apply --marketplaceMessageDateFontStyles;
+  margin: 0;
+  color: var(--matterColorAnti);
+}
+
+.bullet {
+  margin-right: 6px;
+}

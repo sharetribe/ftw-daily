@@ -86,6 +86,15 @@ export const createListing = (id, attributes = {}, includes = {}) => ({
   ...includes,
 });
 
+export const createTxTransition = options => {
+  return {
+    at: new Date(Date.UTC(2017, 4, 1)),
+    by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
+    transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+    ...options,
+  };
+};
+
 export const createTransaction = options => {
   const {
     id,
@@ -98,17 +107,17 @@ export const createTransaction = options => {
     provider = null,
     lastTransitionedAt = new Date(Date.UTC(2017, 5, 1)),
     transitions = [
-        {
-          at: new Date(Date.UTC(2017, 4, 1)),
-          by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
-        },
-        {
-          at: new Date(Date.UTC(2017, 5, 1)),
-          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
-          transition: propTypes.TX_TRANSITION_ACCEPT,
-        },
-        ],
+      createTxTransition({
+        at: new Date(Date.UTC(2017, 4, 1)),
+        by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
+        transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+      }),
+      createTxTransition({
+        at: new Date(Date.UTC(2017, 5, 1)),
+        by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
+        transition: propTypes.TX_TRANSITION_ACCEPT,
+      }),
+    ],
   } = options;
   const nightCount = booking ? nightsBetween(booking.attributes.start, booking.attributes.end) : 1;
   return {
