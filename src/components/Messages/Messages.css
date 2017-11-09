@@ -1,0 +1,80 @@
+@import '../../marketplace.css';
+
+.root {
+  margin: 0;
+
+  /* Clearfix */
+  width: 100%;
+  overflow: auto;
+}
+
+.messageItem {
+  margin-bottom: 35px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 40px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.message,
+.ownMessage {
+  /* Preserve newlines, but collapse other whitespace */
+  white-space: pre-line;
+  max-width: 433px;
+}
+
+.message {
+  display: flex;
+  flex-direction: row;
+}
+
+.ownMessage {
+  float: right;
+}
+
+.avatar {
+  flex-shrink: 0;
+  margin: 9px 12px 0 0;
+}
+
+.messageContent,
+.ownMessageContent {
+  @apply --marketplaceMessageFontStyles;
+
+  margin: 0;
+  padding: 15px 14px 11px 14px;
+  border-radius: 8px;
+  box-shadow: var(--boxShadow);
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}
+
+.messageContent {
+  flex: 1;
+}
+
+.ownMessageContent {
+  background-color: var(--marketplaceColor);
+  color: var(--matterColorLight);
+}
+
+.messageDate,
+.ownMessageDate {
+  @apply --marketplaceMessageDateFontStyles;
+  margin: 11px 0 0 0;
+  color: var(--matterColorAnti);
+
+  @media (--viewportMedium) {
+    margin: 14px 0 0 0;
+  }
+}
+
+.ownMessageDate {
+  text-align: right;
+}

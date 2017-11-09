@@ -131,6 +131,19 @@ export const createTransaction = options => {
   };
 };
 
+export const createMessage = (id, attributes = {}, includes = {}) => {
+  return {
+    id: new UUID(id),
+    type: 'message',
+    attributes: {
+      at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
+      content: `Message ${id}\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+      ...attributes,
+    },
+    ...includes,
+  };
+};
+
 // Default config for currency formatting in tests and examples.
 export const currencyConfig = {
   style: 'currency',
