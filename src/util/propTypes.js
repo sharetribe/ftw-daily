@@ -172,6 +172,19 @@ export const TX_TRANSITIONS = [
   TX_TRANSITION_MARK_DELIVERED,
 ];
 
+// Roles of actors that perform transaction transitions
+export const TX_TRANSITION_ACTOR_CUSTOMER = 'customer';
+export const TX_TRANSITION_ACTOR_PROVIDER = 'provider';
+export const TX_TRANSITION_ACTOR_SYSTEM = 'system';
+export const TX_TRANSITION_ACTOR_OPERATOR = 'operator';
+
+export const TX_TRANSITION_ACTORS = [
+  TX_TRANSITION_ACTOR_CUSTOMER,
+  TX_TRANSITION_ACTOR_PROVIDER,
+  TX_TRANSITION_ACTOR_SYSTEM,
+  TX_TRANSITION_ACTOR_OPERATOR,
+];
+
 const txLastTransition = tx => ensureTransaction(tx).attributes.lastTransition;
 
 export const txIsPreauthorized = tx => txLastTransition(tx) === TX_TRANSITION_PREAUTHORIZE;
@@ -205,6 +218,13 @@ export const transaction = shape({
         unitPrice: money.isRequired,
         lineTotal: money.isRequired,
         reversal: bool.isRequired,
+      })
+    ).isRequired,
+    transitions: arrayOf(
+      shape({
+        at: instanceOf(Date).isRequired,
+        by: oneOf(TX_TRANSITION_ACTORS).isRequired,
+        transition: oneOf(TX_TRANSITIONS).isRequired,
       })
     ).isRequired,
   }),
