@@ -95,6 +95,18 @@ exports[`SalePage matches snapshot 1`] = `
                   "amount": 900,
                   "currency": "USD",
                 },
+                "transitions": Array [
+                  Object {
+                    "at": 2017-05-01T00:00:00.000Z,
+                    "by": "customer",
+                    "transition": "transition/preauthorize",
+                  },
+                  Object {
+                    "at": 2017-06-01T00:00:00.000Z,
+                    "by": "provider",
+                    "transition": "transition/accept",
+                  },
+                ],
               },
               "booking": Object {
                 "attributes": Object {

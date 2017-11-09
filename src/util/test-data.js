@@ -89,7 +89,7 @@ export const createListing = (id, attributes = {}, includes = {}) => ({
 export const createTransaction = options => {
   const {
     id,
-    lastTransition = propTypes.TX_TRANSITION_PREAUTHORIZE,
+    lastTransition = propTypes.TX_TRANSITION_ACCEPT,
     total = new Money(1000, 'USD'),
     commission = new Money(100, 'USD'),
     booking = null,
@@ -97,6 +97,18 @@ export const createTransaction = options => {
     customer = null,
     provider = null,
     lastTransitionedAt = new Date(Date.UTC(2017, 5, 1)),
+    transitions = [
+        {
+          at: new Date(Date.UTC(2017, 4, 1)),
+          by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
+          transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+        },
+        {
+          at: new Date(Date.UTC(2017, 5, 1)),
+          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
+          transition: propTypes.TX_TRANSITION_ACCEPT,
+        },
+        ],
   } = options;
   const nightCount = booking ? nightsBetween(booking.attributes.start, booking.attributes.end) : 1;
   return {
@@ -123,6 +135,7 @@ export const createTransaction = options => {
           reversal: false,
         },
       ],
+      transitions,
     },
     booking,
     listing,
