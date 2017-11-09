@@ -5,9 +5,9 @@ import { updatedEntities, denormalisedEntities } from '../../util/data';
 
 // ================ Action types ================ //
 
-export const FETCH_ORDER_REQUEST = 'app/InboxPage/FETCH_ORDER_REQUEST';
-export const FETCH_ORDER_SUCCESS = 'app/InboxPage/FETCH_ORDER_SUCCESS';
-export const FETCH_ORDER_ERROR = 'app/InboxPage/FETCH_ORDER_ERROR';
+export const FETCH_ORDER_REQUEST = 'app/OrderPage/FETCH_ORDER_REQUEST';
+export const FETCH_ORDER_SUCCESS = 'app/OrderPage/FETCH_ORDER_SUCCESS';
+export const FETCH_ORDER_ERROR = 'app/OrderPage/FETCH_ORDER_ERROR';
 
 // ================ Reducer ================ //
 
