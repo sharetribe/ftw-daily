@@ -248,6 +248,7 @@
   "ManageListingsPage.youHaveListings": "You have {count} {count, plural, one {listing} other {listings}}",
   "ManageListingsPage.yourListings": "Your listings",
   "MapPriceMarker.unsupportedPrice": "({currency})",
+  "Messages.today": "Today",
   "Modal.close": "CLOSE",
   "Modal.closeModal": "Close modal",
   "NotFoundPage.description": "We can't find the page or the sauna you're looking for. Make sure you've typed the URL correctly, of try searching Saunatime.",

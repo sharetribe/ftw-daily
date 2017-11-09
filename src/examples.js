@@ -29,6 +29,7 @@ import * as LocationAutocompleteInput from './components/LocationAutocompleteInp
 import * as ManageListingCard from './components/ManageListingCard/ManageListingCard.example';
 import * as Map from './components/Map/Map.example';
 import * as Menu from './components/Menu/Menu.example';
+import * as Messages from './components/Messages/Messages.example';
 import * as Modal from './components/Modal/Modal.example';
 import * as ModalInMobile from './components/ModalInMobile/ModalInMobile.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
@@ -97,6 +98,7 @@ export {
   ManageListingCard,
   Map,
   Menu,
+  Messages,
   Modal,
   ModalInMobile,
   NamedLink,

@@ -49,10 +49,10 @@ export { default as ImageCarousel } from './ImageCarousel/ImageCarousel';
 export { default as ImageFromFile } from './ImageFromFile/ImageFromFile';
 export { default as LayoutSideNavigation } from './LayoutSideNavigation/LayoutSideNavigation';
 export { default as LayoutSingleColumn } from './LayoutSingleColumn/LayoutSingleColumn';
-export { default as LayoutWrapperTopbar } from './LayoutWrapperTopbar/LayoutWrapperTopbar';
+export { default as LayoutWrapperFooter } from './LayoutWrapperFooter/LayoutWrapperFooter';
 export { default as LayoutWrapperMain } from './LayoutWrapperMain/LayoutWrapperMain';
 export { default as LayoutWrapperSideNav } from './LayoutWrapperSideNav/LayoutWrapperSideNav';
-export { default as LayoutWrapperFooter } from './LayoutWrapperFooter/LayoutWrapperFooter';
+export { default as LayoutWrapperTopbar } from './LayoutWrapperTopbar/LayoutWrapperTopbar';
 export { default as ListingCard } from './ListingCard/ListingCard';
 export {
   default as LocationAutocompleteInput,
@@ -66,6 +66,7 @@ export { default as Menu } from './Menu/Menu';
 export { default as MenuContent } from './MenuContent/MenuContent';
 export { default as MenuItem } from './MenuItem/MenuItem';
 export { default as MenuLabel } from './MenuLabel/MenuLabel';
+export { default as Messages } from './Messages/Messages';
 export { default as Modal } from './Modal/Modal';
 export { default as ModalInMobile } from './ModalInMobile/ModalInMobile';
 export { default as NamedLink } from './NamedLink/NamedLink';

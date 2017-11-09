@@ -210,6 +210,27 @@
     }
   }
 
+  --marketplaceMessageFontStyles {
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-weight: var(--fontWeightRegular);
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  --marketplaceMessageDateFontStyles {
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-weight: var(--fontWeightRegular);
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: -0.1px;
+
+    @media (--viewportMedium) {
+      font-weight: var(--fontWeightMedium);
+      font-size: 14px;
+      line-height: 24px;
+    }
+  }
+
   /* ================ Tabbed navigation font styles ================ */
 
   --marketplaceTabNavFontStyles {
