@@ -62,6 +62,22 @@ export const place = shape({
   country: string, // country code, e.g. FI, US
 });
 
+// Denormalised image object
+export const image = shape({
+  id: uuid.isRequired,
+  type: value('image').isRequired,
+  attributes: shape({
+    sizes: arrayOf(
+      shape({
+        width: number.isRequired,
+        height: number.isRequired,
+        name: string.isRequired,
+        url: string.isRequired,
+      })
+    ).isRequired,
+  }),
+});
+
 // Denormalised user object
 export const currentUser = shape({
   id: uuid.isRequired,
@@ -79,6 +95,7 @@ export const currentUser = shape({
     }).isRequired,
     stripeConnected: bool.isRequired,
   }),
+  profileImage: image,
 });
 
 // Denormalised user object
@@ -93,22 +110,7 @@ export const user = shape({
       bio: string,
     }),
   }),
-});
-
-// Denormalised image object
-export const image = shape({
-  id: uuid.isRequired,
-  type: value('image').isRequired,
-  attributes: shape({
-    sizes: arrayOf(
-      shape({
-        width: number.isRequired,
-        height: number.isRequired,
-        name: string.isRequired,
-        url: string.isRequired,
-      })
-    ).isRequired,
-  }),
+  profileImage: image,
 });
 
 // Denormalised listing object
@@ -210,6 +212,17 @@ export const transaction = shape({
   listing,
   customer: user,
   provider: user,
+});
+
+// Denormalised transaction message
+export const message = shape({
+  id: uuid.isRequired,
+  type: value('message').isRequired,
+  attributes: shape({
+    at: instanceOf(Date).isRequired,
+    content: string.isRequired,
+  }).isRequired,
+  sender: user,
 });
 
 // Pagination information in the response meta
