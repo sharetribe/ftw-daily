@@ -2,6 +2,7 @@ import { types } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import * as propTypes from '../../util/propTypes';
 import * as log from '../../util/log';
+import { updatedEntities, denormalisedEntities } from '../../util/data';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
 
@@ -19,30 +20,37 @@ export const DECLINE_SALE_REQUEST = 'app/SalePage/DECLINE_SALE_REQUEST';
 export const DECLINE_SALE_SUCCESS = 'app/SalePage/DECLINE_SALE_SUCCESS';
 export const DECLINE_SALE_ERROR = 'app/SalePage/DECLINE_SALE_ERROR';
 
+export const FETCH_MESSAGES_REQUEST = 'app/SalePage/FETCH_MESSAGES_REQUEST';
+export const FETCH_MESSAGES_SUCCESS = 'app/SalePage/FETCH_MESSAGES_SUCCESS';
+export const FETCH_MESSAGES_ERROR = 'app/SalePage/FETCH_MESSAGES_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
-  fetchInProgress: false,
+  fetchSaleInProgress: false,
   fetchSaleError: null,
   transactionRef: null,
   acceptInProgress: false,
   declineInProgress: false,
   acceptSaleError: null,
   declineSaleError: null,
+  fetchMessagesInProgress: false,
+  fetchMessagesError: null,
+  messages: [],
 };
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case FETCH_SALE_REQUEST:
-      return { ...state, fetchInProgress: true, fetchSaleError: null };
+      return { ...state, fetchSaleInProgress: true, fetchSaleError: null };
     case FETCH_SALE_SUCCESS: {
       const transactionRef = { id: payload.data.data.id, type: 'transaction' };
-      return { ...state, fetchInProgress: false, transactionRef };
+      return { ...state, fetchSaleInProgress: false, transactionRef };
     }
     case FETCH_SALE_ERROR:
       console.error(payload); // eslint-disable-line
-      return { ...state, fetchInProgress: false, fetchSaleError: payload };
+      return { ...state, fetchSaleInProgress: false, fetchSaleError: payload };
 
     case ACCEPT_SALE_REQUEST:
       return { ...state, acceptInProgress: true, acceptSaleError: null, declineSaleError: null };
@@ -57,6 +65,13 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
       return { ...state, declineInProgress: false };
     case DECLINE_SALE_ERROR:
       return { ...state, declineInProgress: false, declineSaleError: payload };
+
+    case FETCH_MESSAGES_REQUEST:
+      return { ...state, fetchMessagesInProgress: true, fetchMessagesError: null };
+    case FETCH_MESSAGES_SUCCESS:
+      return { ...state, fetchMessagesInProgress: false, messages: payload };
+    case FETCH_MESSAGES_ERROR:
+      return { ...state, fetchMessagesInProgress: false, fetchMessagesError: payload };
 
     default:
       return state;
@@ -82,6 +97,10 @@ const acceptSaleError = e => ({ type: ACCEPT_SALE_ERROR, error: true, payload: e
 const declineSaleRequest = () => ({ type: DECLINE_SALE_REQUEST });
 const declineSaleSuccess = () => ({ type: DECLINE_SALE_SUCCESS });
 const declineSaleError = e => ({ type: DECLINE_SALE_ERROR, error: true, payload: e });
+
+const fetchMessagesRequest = () => ({ type: FETCH_MESSAGES_REQUEST });
+const fetchMessagesSuccess = messages => ({ type: FETCH_MESSAGES_SUCCESS, payload: messages });
+const fetchMessagesError = e => ({ type: FETCH_MESSAGES_ERROR, error: true, payload: e });
 
 // ================ Thunks ================ //
 
@@ -176,11 +195,29 @@ export const declineSale = id => (dispatch, getState, sdk) => {
     });
 };
 
+export const fetchMessages = txId => (dispatch, getState, sdk) => {
+  dispatch(fetchMessagesRequest());
+
+  return sdk.messages
+    .query({ transaction_id: txId })
+    .then(response => {
+      const entities = updatedEntities({}, response.data);
+      const messageIds = response.data.data.map(d => d.id);
+      const denormalized = denormalisedEntities(entities, 'message', messageIds);
+
+      dispatch(fetchMessagesSuccess(denormalized));
+    })
+    .catch(e => {
+      dispatch(fetchMessagesError(e));
+      throw e;
+    });
+};
+
 // loadData is a collection of async calls that need to be made
 // before page has all the info it needs to render itself
 export const loadData = params => dispatch => {
   const saleId = new types.UUID(params.id);
 
   // Sale (i.e. transaction entity in API, but from buyers perspective) contains sale details
-  return dispatch(fetchSale(saleId));
+  return Promise.all([dispatch(fetchSale(saleId)), dispatch(fetchMessages(saleId))]);
 };
