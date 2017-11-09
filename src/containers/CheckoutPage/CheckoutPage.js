@@ -6,7 +6,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
-import { pathByRouteName } from '../../util/routes';
+import { pathByRouteName, findRouteByRouteName } from '../../util/routes';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureUser, ensureTransaction, ensureBooking } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
@@ -96,13 +96,15 @@ export class CheckoutPageComponent extends Component {
     this.setState({ pageData: pageData || {}, dataLoaded: true });
   }
 
-  handleSubmit(cardToken) {
+  handleSubmit(values) {
     if (this.state.submitting) {
       return;
     }
     this.setState({ submitting: true });
 
-    const { history, sendOrderRequest, speculatedTransaction } = this.props;
+    const cardToken = values.token;
+    const initialMessage = values.message;
+    const { history, sendOrderRequest, speculatedTransaction, dispatch } = this.props;
     const requestParams = {
       listingId: this.state.pageData.listing.id,
       cardToken,
@@ -110,10 +112,21 @@ export class CheckoutPageComponent extends Component {
       bookingEnd: speculatedTransaction.booking.attributes.end,
     };
 
-    sendOrderRequest(requestParams)
-      .then(orderId => {
+    sendOrderRequest(requestParams, initialMessage)
+      .then(values => {
+        const { orderId, initialMessageSuccess } = values;
         this.setState({ submitting: false });
-        const orderDetailsPath = pathByRouteName('OrderDetailsPage', routeConfiguration(), {
+        const routes = routeConfiguration();
+        const OrderPage = findRouteByRouteName('OrderDetailsPage', routes);
+
+        // Transaction is already created, but if the initial message
+        // sending failed, we tell it to the OrderDetailsPage.
+        dispatch(
+          OrderPage.setInitialValues({
+            messageSendingFailedToTransaction: initialMessageSuccess ? null : orderId,
+          })
+        );
+        const orderDetailsPath = pathByRouteName('OrderDetailsPage', routes, {
           id: orderId.uuid,
         });
         clearData(STORAGE_KEY);
@@ -317,9 +330,6 @@ export class CheckoutPageComponent extends Component {
             </div>
 
             <section className={css.paymentContainer}>
-              <h3 className={css.paymentTitle}>
-                <FormattedMessage id="CheckoutPage.paymentTitle" />
-              </h3>
               {initiateOrderErrorMessage}
               {listingNotFoundErrorMessage}
               {showPaymentForm ? (
@@ -329,6 +339,7 @@ export class CheckoutPageComponent extends Component {
                   inProgress={this.state.submitting}
                   formId="CheckoutPagePaymentForm"
                   paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo' })}
+                  authorDisplayName={currentAuthor.attributes.profile.displayName}
                 />
               ) : null}
             </section>
@@ -401,6 +412,9 @@ CheckoutPageComponent.propTypes = {
   }).isRequired,
   sendOrderRequest: func.isRequired,
 
+  // from connect
+  dispatch: func.isRequired,
+
   // from injectIntl
   intl: intlShape.isRequired,
 
@@ -433,7 +447,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  sendOrderRequest: params => dispatch(initiateOrder(params)),
+  dispatch,
+  sendOrderRequest: (params, initialMessage) => dispatch(initiateOrder(params, initialMessage)),
   fetchSpeculatedTransaction: (listingId, bookingStart, bookingEnd) =>
     dispatch(speculateTransaction(listingId, bookingStart, bookingEnd)),
 });

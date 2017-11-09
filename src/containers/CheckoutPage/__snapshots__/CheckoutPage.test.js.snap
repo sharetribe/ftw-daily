@@ -94,13 +94,8 @@ exports[`CheckoutPage matches snapshot 1`] = `
         </h3>
       </div>
       <section>
-        <h3>
-          <FormattedMessage
-            id="CheckoutPage.paymentTitle"
-            values={Object {}}
-          />
-        </h3>
         <InjectIntl(StripePaymentForm)
+          authorDisplayName="author display name"
           formId="CheckoutPagePaymentForm"
           inProgress={false}
           onSubmit={[Function]}

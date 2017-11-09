@@ -104,11 +104,11 @@ export const speculateTransactionError = e => ({
 
 /* ================ Thunks ================ */
 
-export const initiateOrder = params => (dispatch, getState, sdk) => {
+export const initiateOrder = (orderParams, initialMessage) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
   const bodyParams = {
     transition: 'transition/preauthorize',
-    params,
+    params: orderParams,
   };
   return sdk.transactions
     .initiate(bodyParams)
@@ -116,14 +116,27 @@ export const initiateOrder = params => (dispatch, getState, sdk) => {
       const orderId = response.data.data.id;
       dispatch(initiateOrderSuccess(orderId));
       dispatch(fetchCurrentUserHasOrdersSuccess(true));
-      return orderId;
+
+      if (initialMessage) {
+        return sdk.messages
+          .send({ transactionId: orderId, content: initialMessage })
+          .then(() => {
+            return { orderId, initialMessageSuccess: true };
+          })
+          .catch(e => {
+            log.error(e, 'initial-message-send-failed', { txId: orderId });
+            return { orderId, initialMessageSuccess: false };
+          });
+      } else {
+        return Promise.resolve({ orderId, initialMessageSuccess: true });
+      }
     })
     .catch(e => {
       dispatch(initiateOrderError(storableError(e)));
       log.error(e, 'initiate-order-failed', {
-        listingId: params.listingId.uuid,
-        bookingStart: params.bookingStart,
-        bookingEnd: params.bookingEnd,
+        listingId: orderParams.listingId.uuid,
+        bookingStart: orderParams.bookingStart,
+        bookingEnd: orderParams.bookingEnd,
       });
       throw e;
     });

@@ -184,6 +184,7 @@ const routeConfiguration = () => {
       name: 'OrderDetailsPage',
       component: props => <OrderPage {...props} tab="details" />,
       loadData: OrderPage.loadData,
+      setInitialValues: OrderPage.setInitialValues,
     },
     {
       path: '/order/:id/discussion',
@@ -191,6 +192,7 @@ const routeConfiguration = () => {
       name: 'OrderDiscussionPage',
       component: props => <OrderPage {...props} tab="discussion" />,
       loadData: OrderPage.loadData,
+      setInitialValues: OrderPage.setInitialValues,
     },
     {
       path: '/sale/:id',

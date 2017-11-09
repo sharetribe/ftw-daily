@@ -88,7 +88,7 @@
   @media (--viewportLarge) {
     flex-grow: 0;
     flex-basis: 519px;
-    margin-top: 177px;
+    margin-top: 121px;
     margin-right: 132px;
   }
 }
@@ -228,23 +228,6 @@
   }
 }
 
-.paymentTitle {
-  /* Font */
-  color: var(--matterColorAnti);
-
-  margin-top: 0;
-  margin-bottom: 14px;
-  @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 14px;
-  }
-
-  @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 26px;
-  }
-}
-
 .orderError,
 .notFoundError {
   margin: 11px 0 12px 0;
@@ -340,7 +323,7 @@
   margin: 5px 24px 25px 24px;
 
   @media (--viewportLarge) {
-    margin: 38px 48px 25px 48px;
+    margin: 38px 48px 26px 48px;
   }
 }
 

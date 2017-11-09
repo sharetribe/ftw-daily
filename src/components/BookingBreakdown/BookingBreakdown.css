@@ -19,6 +19,12 @@
 
   @media (--viewportMedium) {
     margin: -1px 0 8px 0;
+
+    &:last-of-type {
+      /* Last item should not have bottom margin that goes to the bottom of
+         the component */
+      margin-bottom: 0;
+    }
   }
 
   display: flex;
