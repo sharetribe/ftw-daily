@@ -29,23 +29,15 @@ describe('OrderPage', () => {
     });
 
     const props = {
-      authInProgress: false,
-      currentUserHasListings: false,
-      isAuthenticated: false,
-      onLogout: noop,
-      onManageDisableScrolling: noop,
-      currentUser: createCurrentUser('customer1'),
       params: { id: txId },
-      transaction,
       tab: 'details',
-      intl: fakeIntl,
+
+      currentUser: createCurrentUser('customer1'),
+      messages: [],
       scrollingDisabled: false,
-      location: { search: '' },
-      history: {
-        push: () => console.log('HistoryPush called'),
-      },
-      sendVerificationEmailInProgress: false,
-      onResendVerificationEmail: noop,
+      transaction,
+
+      intl: fakeIntl,
     };
 
     const tree = renderShallow(<OrderPageComponent {...props} />);

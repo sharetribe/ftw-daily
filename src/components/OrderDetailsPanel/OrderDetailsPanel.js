@@ -1,11 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape, FormattedDate, FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
 import { ensureListing, ensureTransaction, ensureUser, userDisplayName } from '../../util/data';
-import { BookingBreakdown, NamedLink, ResponsiveImage, AvatarMedium } from '../../components';
+import {
+  BookingBreakdown,
+  NamedLink,
+  ResponsiveImage,
+  AvatarMedium,
+  Messages,
+} from '../../components';
 
 import css from './OrderDetailsPanel.css';
 
@@ -14,7 +20,7 @@ const breakdown = transaction => {
 
   return loaded ? (
     <BookingBreakdown
-      className={css.receipt}
+      className={css.breakdown}
       userRole="customer"
       transaction={transaction}
       booking={transaction.booking}
@@ -62,60 +68,26 @@ const orderTitle = (transaction, listingLink, customerName) => {
   }
 };
 
-const orderMessage = (transaction, listingTitle, providerName) => {
-  const transitionDate = (
-    <span className={css.transitionDate}>
-      <FormattedDate
-        value={transaction.attributes.lastTransitionedAt}
-        year="numeric"
-        month="short"
-        day="numeric"
-      />
-    </span>
-  );
+const orderMessage = (transaction, providerName) => {
   if (propTypes.txIsPreauthorized(transaction)) {
     return (
       <FormattedMessage id="OrderDetailsPanel.orderPreauthorizedStatus" values={{ providerName }} />
     );
-  } else if (propTypes.txIsAccepted(transaction)) {
-    return (
-      <FormattedMessage
-        id="OrderDetailsPanel.orderAcceptedStatus"
-        values={{ providerName, transitionDate }}
-      />
-    );
-  } else if (propTypes.txIsDeclined(transaction)) {
-    return (
-      <FormattedMessage
-        id="OrderDetailsPanel.orderDeclinedStatus"
-        values={{ providerName, transitionDate }}
-      />
-    );
-  } else if (propTypes.txIsAutodeclined(transaction)) {
-    return (
-      <FormattedMessage
-        id="OrderDetailsPanel.orderAutoDeclinedStatus"
-        values={{ providerName, transitionDate }}
-      />
-    );
-  } else if (propTypes.txIsCanceled(transaction)) {
-    return (
-      <FormattedMessage id="OrderDetailsPanel.orderCanceledStatus" values={{ transitionDate }} />
-    );
-  } else if (propTypes.txIsDelivered(transaction)) {
-    return (
-      <FormattedMessage
-        id="OrderDetailsPanel.orderDeliveredStatus"
-        values={{ providerName, transitionDate }}
-      />
-    );
-  } else {
-    return null;
   }
+  return null;
 };
 
 export const OrderDetailsPanelComponent = props => {
-  const { rootClassName, className, transaction, intl } = props;
+  const {
+    rootClassName,
+    className,
+    currentUser,
+    transaction,
+    messages,
+    initialMessageFailed,
+    fetchMessagesError,
+    intl,
+  } = props;
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const currentProvider = ensureUser(currentTransaction.provider);
@@ -160,46 +132,76 @@ export const OrderDetailsPanelComponent = props => {
 
   const bookingInfo = breakdown(currentTransaction);
   const orderHeading = orderTitle(currentTransaction, listingLink, customerDisplayName);
-  const message = listingDeleted
+  const orderInfoText = listingDeleted
     ? orderMessageDeletedListing
-    : orderMessage(currentTransaction, listingLink, authorDisplayName);
+    : orderMessage(currentTransaction, authorDisplayName);
+  const showInfoMessage = !!orderInfoText;
 
   const firstImage =
     currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
+
+  const messagesContainerClasses = classNames(css.messagesContainer, {
+    [css.messagesContainerWithInfoAbove]: showInfoMessage,
+  });
+  const messagesContainer =
+    messages.length > 0 ? (
+      <div className={messagesContainerClasses}>
+        <h3 className={css.messagesHeading}>
+          <FormattedMessage id="OrderDetailsPanel.messagesHeading" />
+        </h3>
+        {initialMessageFailed
+          ? (
+            <p className={css.error}>
+              <FormattedMessage id="OrderDetailsPanel.initialMessageFailed" />
+            </p>
+          )
+          : null}
+        {fetchMessagesError
+          ? (
+            <p className={css.error}>
+              <FormattedMessage id="OrderDetailsPanel.messageLoadingFailed" />
+            </p>
+          )
+          : null}
+        <Messages className={css.messages} messages={messages} currentUser={currentUser} />
+      </div>
+    ) : null;
 
   const classes = classNames(rootClassName || css.root, className);
 
   return (
     <div className={classes}>
       <div className={css.container}>
-        <div className={css.imageWrapperMobile}>
-          <div className={css.aspectWrapper}>
-            <ResponsiveImage
-              rootClassName={css.rootForImage}
-              alt={listingTitle}
-              image={firstImage}
-              nameSet={[
-                { name: 'landscape-crop', size: '400w' },
-                { name: 'landscape-crop2x', size: '800w' },
-              ]}
-              sizes="100vw"
-            />
-          </div>
-        </div>
-        <div className={classNames(css.avatarWrapper, css.avatarMobile)}>
-          <AvatarMedium user={currentProvider} />
-        </div>
         <div className={css.orderInfo}>
+          <div className={css.imageWrapperMobile}>
+            <div className={css.aspectWrapper}>
+              <ResponsiveImage
+                rootClassName={css.rootForImage}
+                alt={listingTitle}
+                image={firstImage}
+                nameSet={[
+                  { name: 'landscape-crop', size: '400w' },
+                  { name: 'landscape-crop2x', size: '800w' },
+                ]}
+                sizes="100vw"
+              />
+            </div>
+          </div>
+          <div className={classNames(css.avatarWrapper, css.avatarMobile)}>
+            <AvatarMedium user={currentProvider} />
+          </div>
           <h1 className={css.heading}>{orderHeading}</h1>
-          <div className={css.message}>{message}</div>
-        </div>
-        <div className={css.bookingBreakdownContainer}>
+          {showInfoMessage ? <p className={css.orderInfoText}>{orderInfoText}</p> : null}
+          {showInfoMessage ? <hr className={css.infoTextDivider} /> : null}
           <div className={css.breakdownMobile}>
             <h3 className={css.bookingBreakdownTitle}>
               <FormattedMessage id="OrderDetailsPanel.bookingBreakdownTitle" />
             </h3>
             {bookingInfo}
           </div>
+          {messagesContainer}
+        </div>
+        <div className={css.bookingBreakdownContainer}>
           <div className={css.breakdownDesktop}>
             <div className={css.breakdownImageWrapper}>
               <div className={css.aspectWrapper}>
@@ -241,14 +243,20 @@ export const OrderDetailsPanelComponent = props => {
 OrderDetailsPanelComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  fetchMessagesError: null,
 };
 
-const { string } = PropTypes;
+const { string, arrayOf, bool } = PropTypes;
 
 OrderDetailsPanelComponent.propTypes = {
   rootClassName: string,
   className: string,
+
+  currentUser: propTypes.currentUser,
   transaction: propTypes.transaction.isRequired,
+  messages: arrayOf(propTypes.message).isRequired,
+  initialMessageFailed: bool.isRequired,
+  fetchMessagesError: propTypes.error,
 
   // from injectIntl
   intl: intlShape,

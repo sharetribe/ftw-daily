@@ -29,6 +29,8 @@ export const OrderPageComponent = props => {
   const {
     currentUser,
     fetchOrderError,
+    fetchMessagesError,
+    messages,
     messageSendingFailedToTransaction,
     intl,
     params,
@@ -39,13 +41,11 @@ export const OrderPageComponent = props => {
   const currentListing = ensureListing(currentTransaction.listing);
   const listingTitle = currentListing.attributes.title;
 
-  if (messageSendingFailedToTransaction) {
-    // TODO: render error message with other messages
-    console.error(
-      'failed to send initial message to transaction:',
-      messageSendingFailedToTransaction
-    );
-  }
+  const initialMessageFailed = !!(
+    messageSendingFailedToTransaction &&
+    currentTransaction.id &&
+    messageSendingFailedToTransaction.uuid === currentTransaction.id.uuid
+  );
 
   // Redirect users with someone else's direct link to their own inbox/orders page.
   const isDataAvailable =
@@ -77,7 +77,14 @@ export const OrderPageComponent = props => {
 
   const panel =
     isDataAvailable && currentTransaction.id ? (
-      <OrderDetailsPanel className={detailsClassName} transaction={currentTransaction} />
+      <OrderDetailsPanel
+        className={detailsClassName}
+        currentUser={currentUser}
+        transaction={currentTransaction}
+        messages={messages}
+        initialMessageFailed={initialMessageFailed}
+        fetchMessagesError={fetchMessagesError}
+      />
     ) : (
       loadingOrFaildFetching
     );
@@ -103,31 +110,46 @@ export const OrderPageComponent = props => {
 OrderPageComponent.defaultProps = {
   currentUser: null,
   fetchOrderError: null,
+  fetchMessagesError: null,
+  messageSendingFailedToTransaction: null,
   transaction: null,
 };
 
-const { bool, oneOf, shape, string } = PropTypes;
+const { bool, oneOf, shape, string, array } = PropTypes;
 
 OrderPageComponent.propTypes = {
+  params: shape({ id: string }).isRequired,
+  tab: oneOf(['details', 'discussion']).isRequired,
+
   currentUser: propTypes.currentUser,
   fetchOrderError: propTypes.error,
+  fetchMessagesError: propTypes.error,
+  messages: array.isRequired,
   messageSendingFailedToTransaction: propTypes.uuid,
-  intl: intlShape.isRequired,
-  params: shape({ id: string }).isRequired,
   scrollingDisabled: bool.isRequired,
-  tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
-  const { fetchOrderError, transactionRef, messageSendingFailedToTransaction } = state.OrderPage;
   const { currentUser } = state.user;
+  const {
+    fetchOrderError,
+    transactionRef,
+    fetchMessagesError,
+    messages,
+    messageSendingFailedToTransaction,
+  } = state.OrderPage;
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
 
   return {
     currentUser,
     fetchOrderError,
+    fetchMessagesError,
+    messages,
     messageSendingFailedToTransaction,
     scrollingDisabled: isScrollingDisabled(state),
     transaction,
