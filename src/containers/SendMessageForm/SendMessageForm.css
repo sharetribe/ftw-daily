@@ -1,0 +1,11 @@
+@import '../../marketplace.css';
+
+.root {
+}
+
+.textarea {
+  border-bottom-color: var(--attentionColor);
+}
+
+.submitButton {
+}

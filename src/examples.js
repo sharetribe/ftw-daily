@@ -55,6 +55,7 @@ import * as LoginForm from './containers/LoginForm/LoginForm.example';
 import * as PasswordRecoveryForm from './containers/PasswordRecoveryForm/PasswordRecoveryForm.example';
 import * as PasswordResetForm from './containers/PasswordResetForm/PasswordResetForm.example';
 import * as PayoutDetailsForm from './containers/PayoutDetailsForm/PayoutDetailsForm.example';
+import * as SendMessageForm from './containers/SendMessageForm/SendMessageForm.example';
 import * as SignupForm from './containers/SignupForm/SignupForm.example';
 import * as StripePaymentForm from './containers/StripePaymentForm/StripePaymentForm.example';
 import * as Typography from './containers/StyleguidePage/Typography.example';
@@ -108,6 +109,7 @@ export {
   PayoutDetailsForm,
   ResponsiveImage,
   SelectField,
+  SendMessageForm,
   SignupForm,
   StripeBankAccountTokenInputField,
   StripePaymentForm,
