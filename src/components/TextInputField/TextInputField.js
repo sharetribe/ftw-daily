@@ -17,6 +17,7 @@ class TextInputFieldComponent extends Component {
     const {
       rootClassName,
       className,
+      inputRootClass,
       clearOnUnmount,
       customErrorText,
       id,
@@ -43,11 +44,13 @@ class TextInputFieldComponent extends Component {
 
     const fieldMeta = { touched, error: errorText };
 
-    const inputClasses = classNames(css.input, {
-      [css.inputSuccess]: valid,
-      [css.inputError]: hasError,
-      [css.textarea]: isTextarea,
-    });
+    const inputClasses =
+      inputRootClass ||
+      classNames(css.input, {
+        [css.inputSuccess]: valid,
+        [css.inputError]: hasError,
+        [css.textarea]: isTextarea,
+      });
     const inputProps = isTextarea
       ? { className: inputClasses, id, ...input, ...rest }
       : { className: inputClasses, id, type, ...input, ...rest };
@@ -66,6 +69,7 @@ class TextInputFieldComponent extends Component {
 TextInputFieldComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  inputRootClass: null,
   clearOnUnmount: false,
   customErrorText: null,
   id: null,
@@ -77,6 +81,7 @@ const { string, bool, shape, func, object } = PropTypes;
 TextInputFieldComponent.propTypes = {
   rootClassName: string,
   className: string,
+  inputRootClass: string,
 
   clearOnUnmount: bool,
 
