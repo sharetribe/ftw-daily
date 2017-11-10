@@ -58,7 +58,6 @@ const txDelivered = createTransaction({
 });
 
 describe('OrderDetailsPanel', () => {
-
   const panelBaseProps = {
     intl: fakeIntl,
     messages: [],

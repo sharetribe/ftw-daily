@@ -143,29 +143,25 @@ export const OrderDetailsPanelComponent = props => {
   const messagesContainerClasses = classNames(css.messagesContainer, {
     [css.messagesContainerWithInfoAbove]: showInfoMessage,
   });
-  const messagesContainer =
-    messages.length > 0 ? (
-      <div className={messagesContainerClasses}>
-        <h3 className={css.messagesHeading}>
-          <FormattedMessage id="OrderDetailsPanel.messagesHeading" />
-        </h3>
-        {initialMessageFailed
-          ? (
-            <p className={css.error}>
-              <FormattedMessage id="OrderDetailsPanel.initialMessageFailed" />
-            </p>
-          )
-          : null}
-        {fetchMessagesError
-          ? (
-            <p className={css.error}>
-              <FormattedMessage id="OrderDetailsPanel.messageLoadingFailed" />
-            </p>
-          )
-          : null}
-        <Messages className={css.messages} messages={messages} currentUser={currentUser} />
-      </div>
-    ) : null;
+  const showMessages = messages.length > 0 || initialMessageFailed || fetchMessagesError;
+  const messagesContainer = showMessages ? (
+    <div className={messagesContainerClasses}>
+      <h3 className={css.messagesHeading}>
+        <FormattedMessage id="OrderDetailsPanel.messagesHeading" />
+      </h3>
+      {initialMessageFailed ? (
+        <p className={css.error}>
+          <FormattedMessage id="OrderDetailsPanel.initialMessageFailed" />
+        </p>
+      ) : null}
+      {fetchMessagesError ? (
+        <p className={css.error}>
+          <FormattedMessage id="OrderDetailsPanel.messageLoadingFailed" />
+        </p>
+      ) : null}
+      <Messages className={css.messages} messages={messages} currentUser={currentUser} />
+    </div>
+  ) : null;
 
   const classes = classNames(rootClassName || css.root, className);
 
