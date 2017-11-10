@@ -118,11 +118,14 @@ export const fetchMessages = txId => (dispatch, getState, sdk) => {
   dispatch(fetchMessagesRequest());
 
   return sdk.messages
-    .query({ transaction_id: txId })
+    .query({ transaction_id: txId, include: ['sender', 'sender.profileImage'] })
     .then(response => {
       const entities = updatedEntities({}, response.data);
       const messageIds = response.data.data.map(d => d.id);
       const denormalized = denormalisedEntities(entities, 'message', messageIds);
+
+      // Messages come latest first, so we need to reverse the order
+      denormalized.reverse();
 
       dispatch(fetchMessagesSuccess(denormalized));
     })

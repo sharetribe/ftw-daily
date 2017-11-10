@@ -58,39 +58,45 @@ const txDelivered = createTransaction({
 });
 
 describe('OrderDetailsPanel', () => {
+  const panelBaseProps = {
+    intl: fakeIntl,
+    messages: [],
+    initialMessageFailed: false,
+  };
+
   it('preauthorized matches snapshot', () => {
     const tree = renderShallow(
-      <OrderDetailsPanelComponent transaction={txPreauthorized} intl={fakeIntl} />
+      <OrderDetailsPanelComponent transaction={txPreauthorized} {...panelBaseProps} />
     );
     expect(tree).toMatchSnapshot();
   });
   it('accepted matches snapshot', () => {
     const tree = renderShallow(
-      <OrderDetailsPanelComponent transaction={txAccepted} intl={fakeIntl} />
+      <OrderDetailsPanelComponent transaction={txAccepted} {...panelBaseProps} />
     );
     expect(tree).toMatchSnapshot();
   });
   it('declined matches snapshot', () => {
     const tree = renderShallow(
-      <OrderDetailsPanelComponent transaction={txDeclined} intl={fakeIntl} />
+      <OrderDetailsPanelComponent transaction={txDeclined} {...panelBaseProps} />
     );
     expect(tree).toMatchSnapshot();
   });
   it('autodeclined matches snapshot', () => {
     const tree = renderShallow(
-      <OrderDetailsPanelComponent transaction={txAutoDeclined} intl={fakeIntl} />
+      <OrderDetailsPanelComponent transaction={txAutoDeclined} {...panelBaseProps} />
     );
     expect(tree).toMatchSnapshot();
   });
   it('canceled matches snapshot', () => {
     const tree = renderShallow(
-      <OrderDetailsPanelComponent transaction={txCanceled} intl={fakeIntl} />
+      <OrderDetailsPanelComponent transaction={txCanceled} {...panelBaseProps} />
     );
     expect(tree).toMatchSnapshot();
   });
   it('delivered matches snapshot', () => {
     const tree = renderShallow(
-      <OrderDetailsPanelComponent transaction={txDelivered} intl={fakeIntl} />
+      <OrderDetailsPanelComponent transaction={txDelivered} {...panelBaseProps} />
     );
     expect(tree).toMatchSnapshot();
   });
@@ -108,7 +114,7 @@ describe('OrderDetailsPanel', () => {
       provider: createUser('provider'),
       customer: createUser('customer'),
     });
-    const panel = shallow(<OrderDetailsPanelComponent transaction={tx} intl={fakeIntl} />);
+    const panel = shallow(<OrderDetailsPanelComponent transaction={tx} {...panelBaseProps} />);
     const breakdownProps = panel.find(BookingBreakdown).props();
     expect(breakdownProps.transaction.attributes.payinTotal).toEqual(new Money(16500, 'USD'));
   });

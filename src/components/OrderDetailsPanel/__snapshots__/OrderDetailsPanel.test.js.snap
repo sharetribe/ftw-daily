@@ -7,50 +7,50 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
   <div>
     <div>
       <div>
-        <ResponsiveImage
-          alt="listing1 title"
-          className={null}
-          image={null}
-          nameSet={
-            Array [
-              Object {
-                "name": "landscape-crop",
-                "size": "400w",
+        <div>
+          <ResponsiveImage
+            alt="listing1 title"
+            className={null}
+            image={null}
+            nameSet={
+              Array [
+                Object {
+                  "name": "landscape-crop",
+                  "size": "400w",
+                },
+                Object {
+                  "name": "landscape-crop2x",
+                  "size": "800w",
+                },
+              ]
+            }
+            noImageMessage={null}
+            rootClassName={null}
+            sizes="100vw"
+          />
+        </div>
+      </div>
+      <div
+        className=""
+      >
+        <AvatarMedium
+          user={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
               },
-              Object {
-                "name": "landscape-crop2x",
-                "size": "800w",
+              "id": UUID {
+                "uuid": "provider",
               },
-            ]
+              "type": "user",
+            }
           }
-          noImageMessage={null}
-          rootClassName={null}
-          sizes="100vw"
         />
       </div>
-    </div>
-    <div
-      className=""
-    >
-      <AvatarMedium
-        user={
-          Object {
-            "attributes": Object {
-              "banned": false,
-              "profile": Object {
-                "abbreviatedName": "TT",
-                "displayName": "provider display name",
-              },
-            },
-            "id": UUID {
-              "uuid": "provider",
-            },
-            "type": "user",
-          }
-        }
-      />
-    </div>
-    <div>
       <h1>
         <span>
           <span>
@@ -83,26 +83,6 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
           />
         </span>
       </h1>
-      <div>
-        <FormattedMessage
-          id="OrderDetailsPanel.orderAcceptedStatus"
-          values={
-            Object {
-              "providerName": "provider display name",
-              "transitionDate": <span>
-                <FormattedDate
-                    day="numeric"
-                    month="short"
-                    value={2017-06-01T00:00:00.000Z}
-                    year="numeric"
-                />
-            </span>,
-            }
-          }
-        />
-      </div>
-    </div>
-    <div>
       <div>
         <h3>
           <FormattedMessage
@@ -231,6 +211,8 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+    </div>
+    <div>
       <div>
         <div>
           <div>
@@ -429,50 +411,50 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
   <div>
     <div>
       <div>
-        <ResponsiveImage
-          alt="listing1 title"
-          className={null}
-          image={null}
-          nameSet={
-            Array [
-              Object {
-                "name": "landscape-crop",
-                "size": "400w",
+        <div>
+          <ResponsiveImage
+            alt="listing1 title"
+            className={null}
+            image={null}
+            nameSet={
+              Array [
+                Object {
+                  "name": "landscape-crop",
+                  "size": "400w",
+                },
+                Object {
+                  "name": "landscape-crop2x",
+                  "size": "800w",
+                },
+              ]
+            }
+            noImageMessage={null}
+            rootClassName={null}
+            sizes="100vw"
+          />
+        </div>
+      </div>
+      <div
+        className=""
+      >
+        <AvatarMedium
+          user={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
               },
-              Object {
-                "name": "landscape-crop2x",
-                "size": "800w",
+              "id": UUID {
+                "uuid": "provider",
               },
-            ]
+              "type": "user",
+            }
           }
-          noImageMessage={null}
-          rootClassName={null}
-          sizes="100vw"
         />
       </div>
-    </div>
-    <div
-      className=""
-    >
-      <AvatarMedium
-        user={
-          Object {
-            "attributes": Object {
-              "banned": false,
-              "profile": Object {
-                "abbreviatedName": "TT",
-                "displayName": "provider display name",
-              },
-            },
-            "id": UUID {
-              "uuid": "provider",
-            },
-            "type": "user",
-          }
-        }
-      />
-    </div>
-    <div>
       <h1>
         <FormattedMessage
           id="OrderDetailsPanel.orderAutoDeclinedTitle"
@@ -493,26 +475,6 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
           }
         />
       </h1>
-      <div>
-        <FormattedMessage
-          id="OrderDetailsPanel.orderAutoDeclinedStatus"
-          values={
-            Object {
-              "providerName": "provider display name",
-              "transitionDate": <span>
-                <FormattedDate
-                    day="numeric"
-                    month="short"
-                    value={2017-06-01T00:00:00.000Z}
-                    year="numeric"
-                />
-            </span>,
-            }
-          }
-        />
-      </div>
-    </div>
-    <div>
       <div>
         <h3>
           <FormattedMessage
@@ -641,6 +603,8 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+    </div>
+    <div>
       <div>
         <div>
           <div>
@@ -839,50 +803,50 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
   <div>
     <div>
       <div>
-        <ResponsiveImage
-          alt="listing1 title"
-          className={null}
-          image={null}
-          nameSet={
-            Array [
-              Object {
-                "name": "landscape-crop",
-                "size": "400w",
+        <div>
+          <ResponsiveImage
+            alt="listing1 title"
+            className={null}
+            image={null}
+            nameSet={
+              Array [
+                Object {
+                  "name": "landscape-crop",
+                  "size": "400w",
+                },
+                Object {
+                  "name": "landscape-crop2x",
+                  "size": "800w",
+                },
+              ]
+            }
+            noImageMessage={null}
+            rootClassName={null}
+            sizes="100vw"
+          />
+        </div>
+      </div>
+      <div
+        className=""
+      >
+        <AvatarMedium
+          user={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
               },
-              Object {
-                "name": "landscape-crop2x",
-                "size": "800w",
+              "id": UUID {
+                "uuid": "provider",
               },
-            ]
+              "type": "user",
+            }
           }
-          noImageMessage={null}
-          rootClassName={null}
-          sizes="100vw"
         />
       </div>
-    </div>
-    <div
-      className=""
-    >
-      <AvatarMedium
-        user={
-          Object {
-            "attributes": Object {
-              "banned": false,
-              "profile": Object {
-                "abbreviatedName": "TT",
-                "displayName": "provider display name",
-              },
-            },
-            "id": UUID {
-              "uuid": "provider",
-            },
-            "type": "user",
-          }
-        }
-      />
-    </div>
-    <div>
       <h1>
         <span>
           <span>
@@ -915,7 +879,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
           />
         </span>
       </h1>
-      <div>
+      <p>
         <FormattedMessage
           id="OrderDetailsPanel.orderPreauthorizedStatus"
           values={
@@ -924,9 +888,8 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
             }
           }
         />
-      </div>
-    </div>
-    <div>
+      </p>
+      <hr />
       <div>
         <h3>
           <FormattedMessage
@@ -1055,6 +1018,8 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+    </div>
+    <div>
       <div>
         <div>
           <div>
@@ -1253,50 +1218,50 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
   <div>
     <div>
       <div>
-        <ResponsiveImage
-          alt="listing1 title"
-          className={null}
-          image={null}
-          nameSet={
-            Array [
-              Object {
-                "name": "landscape-crop",
-                "size": "400w",
+        <div>
+          <ResponsiveImage
+            alt="listing1 title"
+            className={null}
+            image={null}
+            nameSet={
+              Array [
+                Object {
+                  "name": "landscape-crop",
+                  "size": "400w",
+                },
+                Object {
+                  "name": "landscape-crop2x",
+                  "size": "800w",
+                },
+              ]
+            }
+            noImageMessage={null}
+            rootClassName={null}
+            sizes="100vw"
+          />
+        </div>
+      </div>
+      <div
+        className=""
+      >
+        <AvatarMedium
+          user={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
               },
-              Object {
-                "name": "landscape-crop2x",
-                "size": "800w",
+              "id": UUID {
+                "uuid": "provider",
               },
-            ]
+              "type": "user",
+            }
           }
-          noImageMessage={null}
-          rootClassName={null}
-          sizes="100vw"
         />
       </div>
-    </div>
-    <div
-      className=""
-    >
-      <AvatarMedium
-        user={
-          Object {
-            "attributes": Object {
-              "banned": false,
-              "profile": Object {
-                "abbreviatedName": "TT",
-                "displayName": "provider display name",
-              },
-            },
-            "id": UUID {
-              "uuid": "provider",
-            },
-            "type": "user",
-          }
-        }
-      />
-    </div>
-    <div>
       <h1>
         <FormattedMessage
           id="OrderDetailsPanel.orderDeclinedTitle"
@@ -1317,26 +1282,6 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
           }
         />
       </h1>
-      <div>
-        <FormattedMessage
-          id="OrderDetailsPanel.orderDeclinedStatus"
-          values={
-            Object {
-              "providerName": "provider display name",
-              "transitionDate": <span>
-                <FormattedDate
-                    day="numeric"
-                    month="short"
-                    value={2017-06-01T00:00:00.000Z}
-                    year="numeric"
-                />
-            </span>,
-            }
-          }
-        />
-      </div>
-    </div>
-    <div>
       <div>
         <h3>
           <FormattedMessage
@@ -1465,6 +1410,8 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+    </div>
+    <div>
       <div>
         <div>
           <div>
@@ -1663,50 +1610,50 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
   <div>
     <div>
       <div>
-        <ResponsiveImage
-          alt="listing1 title"
-          className={null}
-          image={null}
-          nameSet={
-            Array [
-              Object {
-                "name": "landscape-crop",
-                "size": "400w",
+        <div>
+          <ResponsiveImage
+            alt="listing1 title"
+            className={null}
+            image={null}
+            nameSet={
+              Array [
+                Object {
+                  "name": "landscape-crop",
+                  "size": "400w",
+                },
+                Object {
+                  "name": "landscape-crop2x",
+                  "size": "800w",
+                },
+              ]
+            }
+            noImageMessage={null}
+            rootClassName={null}
+            sizes="100vw"
+          />
+        </div>
+      </div>
+      <div
+        className=""
+      >
+        <AvatarMedium
+          user={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
               },
-              Object {
-                "name": "landscape-crop2x",
-                "size": "800w",
+              "id": UUID {
+                "uuid": "provider",
               },
-            ]
+              "type": "user",
+            }
           }
-          noImageMessage={null}
-          rootClassName={null}
-          sizes="100vw"
         />
       </div>
-    </div>
-    <div
-      className=""
-    >
-      <AvatarMedium
-        user={
-          Object {
-            "attributes": Object {
-              "banned": false,
-              "profile": Object {
-                "abbreviatedName": "TT",
-                "displayName": "provider display name",
-              },
-            },
-            "id": UUID {
-              "uuid": "provider",
-            },
-            "type": "user",
-          }
-        }
-      />
-    </div>
-    <div>
       <h1>
         <FormattedMessage
           id="OrderDetailsPanel.orderDeliveredTitle"
@@ -1727,26 +1674,6 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
           }
         />
       </h1>
-      <div>
-        <FormattedMessage
-          id="OrderDetailsPanel.orderDeliveredStatus"
-          values={
-            Object {
-              "providerName": "provider display name",
-              "transitionDate": <span>
-                <FormattedDate
-                    day="numeric"
-                    month="short"
-                    value={2017-06-01T00:00:00.000Z}
-                    year="numeric"
-                />
-            </span>,
-            }
-          }
-        />
-      </div>
-    </div>
-    <div>
       <div>
         <h3>
           <FormattedMessage
@@ -1875,6 +1802,8 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+    </div>
+    <div>
       <div>
         <div>
           <div>
@@ -2073,50 +2002,50 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
   <div>
     <div>
       <div>
-        <ResponsiveImage
-          alt="listing1 title"
-          className={null}
-          image={null}
-          nameSet={
-            Array [
-              Object {
-                "name": "landscape-crop",
-                "size": "400w",
+        <div>
+          <ResponsiveImage
+            alt="listing1 title"
+            className={null}
+            image={null}
+            nameSet={
+              Array [
+                Object {
+                  "name": "landscape-crop",
+                  "size": "400w",
+                },
+                Object {
+                  "name": "landscape-crop2x",
+                  "size": "800w",
+                },
+              ]
+            }
+            noImageMessage={null}
+            rootClassName={null}
+            sizes="100vw"
+          />
+        </div>
+      </div>
+      <div
+        className=""
+      >
+        <AvatarMedium
+          user={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
               },
-              Object {
-                "name": "landscape-crop2x",
-                "size": "800w",
+              "id": UUID {
+                "uuid": "provider",
               },
-            ]
+              "type": "user",
+            }
           }
-          noImageMessage={null}
-          rootClassName={null}
-          sizes="100vw"
         />
       </div>
-    </div>
-    <div
-      className=""
-    >
-      <AvatarMedium
-        user={
-          Object {
-            "attributes": Object {
-              "banned": false,
-              "profile": Object {
-                "abbreviatedName": "TT",
-                "displayName": "provider display name",
-              },
-            },
-            "id": UUID {
-              "uuid": "provider",
-            },
-            "type": "user",
-          }
-        }
-      />
-    </div>
-    <div>
       <h1>
         <span>
           <span>
@@ -2149,7 +2078,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
           />
         </span>
       </h1>
-      <div>
+      <p>
         <FormattedMessage
           id="OrderDetailsPanel.orderPreauthorizedStatus"
           values={
@@ -2158,9 +2087,8 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
             }
           }
         />
-      </div>
-    </div>
-    <div>
+      </p>
+      <hr />
       <div>
         <h3>
           <FormattedMessage
@@ -2289,6 +2217,8 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+    </div>
+    <div>
       <div>
         <div>
           <div>

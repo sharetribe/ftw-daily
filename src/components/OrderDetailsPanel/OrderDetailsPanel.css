@@ -4,6 +4,18 @@
   position: relative;
 }
 
+.error {
+  color: var(--failColor);
+  margin: 13px 0 22px 0;
+
+  @media (--viewportMedium) {
+    margin: 13px 0 23px 0;
+  }
+  @media (--viewportLarge) {
+    margin: 12px 0 23px 0;
+  }
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -72,13 +84,13 @@
 
 .orderInfo {
   @media (--viewportLarge) {
-    max-width: 519px;
-    margin-right: 132px;
+    max-width: 538px;
+    margin-right: 108px;
   }
 }
 
 .heading {
-  margin: 28px 24px 0 24px;
+  margin: 27px 24px 0 24px;
 
   @media (--viewportMedium) {
     max-width: 80%;
@@ -94,18 +106,27 @@
   display: block;
 }
 
-.messagesContainer {
-  display: flex;
-  flex-direction: column;
+.orderInfoText {
+  margin: 18px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 23px 24px 0 24px;
+  }
+  @media (--viewportLarge) {
+    margin: 23px 0 0 0;
+  }
 }
 
-.message {
-  display: flex;
-  margin: 24px 24px 47px 24px;
+.infoTextDivider {
+  display: none;
+
+  height: 1px;
+  background-color: var(--matterColorNegative);
+  border: none;
+  margin: 37px 0 0 0;
 
   @media (--viewportLarge) {
-    margin: 31px 0 0 0;
-    line-height: 32px;
+    display: block;
   }
 }
 
@@ -114,6 +135,11 @@
 }
 
 .breakdownMobile {
+  margin-top: 47px;
+
+  @media (--viewportMedium) {
+    margin-top: 43px;
+  }
   @media (--viewportLarge) {
     display: none;
   }
@@ -176,7 +202,7 @@
   margin-bottom: 0;
 
   @media (--viewportLarge) {
-    margin-top: 0;
+    margin-top: 1px;
     margin-bottom: 0;
   }
 }
@@ -185,25 +211,54 @@
   /* Font */
   color: var(--matterColorAnti);
 
-  margin-top: 5px;
-  margin-bottom: 14px;
-  margin-left: 24px;
-  margin-right: 24px;
+  margin: 0 24px 0 24px;
 
   @media (--viewportLarge) {
-    margin-top: 38px;
-    margin-bottom: 25px;
-    margin-left: 48px;
-    margin-right: 48px;
+    margin: 37px 48px 26px 48px;
   }
 }
 
-.receipt {
-  margin-left: 24px;
-  margin-right: 24px;
+.breakdown {
+  margin: 14px 24px 0 24px;
 
+  @media (--viewportMedium) {
+    margin: 18px 24px 0 24px;
+  }
   @media (--viewportLarge) {
-    margin-left: 48px;
-    margin-right: 48px;
+    margin: 14px 48px 0 48px;
+  }
+}
+
+.messagesContainer {
+  margin: 46px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 46px 24px 0 24px;
+  }
+  @media (--viewportLarge) {
+    margin: 43px 0 0 0;
+  }
+}
+
+.messagesContainerWithInfoAbove {
+  @media (--viewportLarge) {
+    margin: 38px 0 0 0;
+  }
+}
+
+.messagesHeading {
+  color: var(--matterColorAnti);
+  margin: 0;
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}
+
+.messages {
+  margin-top: 17px;
+
+  @media (--viewportMedium) {
+    margin-top: 19px;
   }
 }

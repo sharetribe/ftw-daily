@@ -24,6 +24,7 @@
 .ownMessage {
   /* Preserve newlines, but collapse other whitespace */
   white-space: pre-line;
+  width: 100%;
   max-width: 433px;
 }
 
