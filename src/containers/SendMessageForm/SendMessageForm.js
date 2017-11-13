@@ -10,6 +10,59 @@ import css from './SendMessageForm.css';
 
 const BLUR_TIMEOUT_MS = 100;
 
+const IconSendMessageMobile = () => {
+  return (
+    <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter
+          x="-1.9%"
+          y="-8.5%"
+          width="103.7%"
+          height="113.2%"
+          filterUnits="objectBoundingBox"
+          id="a"
+        >
+          <feOffset dy="-2" in="SourceAlpha" result="shadowOffsetOuter1" />
+          <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+          <feColorMatrix
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"
+            in="shadowBlurOuter1"
+            result="shadowMatrixOuter1"
+          />
+          <feMerge>
+            <feMergeNode in="shadowMatrixOuter1" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <g transform="translate(4 6)" filter="url(#a)" fill="none" fillRule="evenodd">
+        <rect className={css.fillSuccess} width="48" height="48" rx="24" />
+        <g fill="#FFF">
+          <path d="M14.47 23.048c-.14.05-.237.193-.25.36-.013.163.062.317.19.39l4.623 2.688 12.162-10.593-16.726 7.155zM20.47 27.327l-.97 6.59c0 .228.184.416.417.416.145 0 .284-.076.36-.206l2.94-4.823 4.833 2.894c.118.066.26.067.373.015.12-.055.207-.162.234-.292l3.315-15.328-11.5 10.735z" />
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const IconSendMessageDesktop = () => {
+  return (
+    <svg
+      className={css.sendIconDesktop}
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g className={css.strokeMatter} fill="none" fillRule="evenodd" strokeLinejoin="round">
+        <path d="M12.91 1L0 7.003l5.052 2.212z" />
+        <path d="M10.75 11.686L5.042 9.222l7.928-8.198z" />
+        <path d="M5.417 8.583v4.695l2.273-2.852" />
+      </g>
+    </svg>
+  );
+};
+
 class SendMessageFormComponent extends Component {
   constructor(props) {
     super(props);
@@ -57,13 +110,17 @@ class SendMessageFormComponent extends Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
+        <button className={css.submitButtonMobile}>
+          <IconSendMessageMobile />
+        </button>
         <SecondaryButton
-          className={css.submitButton}
+          className={css.submitButtonDesktop}
           inProgress={submitInProgress}
           disabled={submitDisabled}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         >
+          <IconSendMessageDesktop />
           <FormattedMessage id="SendMessageForm.sendMessage" />
         </SecondaryButton>
       </Form>

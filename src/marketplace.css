@@ -63,6 +63,7 @@
   --boxShadowListingCard: 0 0 50px 0 rgba(0, 0, 0, 0.1);
   --boxShadowNotFoundPageSearch: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   --boxShadowSectionLocationHover: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+  --boxShadowBottomForm: 0 -2px 4px 0 rgba(0, 0, 0, 0.05);
 
   /* ================ Z-index base levels ================ */
 
