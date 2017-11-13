@@ -37,6 +37,7 @@ export { default as ProfileSettingsForm } from './ProfileSettingsForm/ProfileSet
 export { default as ProfileSettingsPage } from './ProfileSettingsPage/ProfileSettingsPage';
 export { default as SalePage } from './SalePage/SalePage';
 export { default as SearchPage } from './SearchPage/SearchPage';
+export { default as SendMessageForm } from './SendMessageForm/SendMessageForm';
 export { default as SignupForm } from './SignupForm/SignupForm';
 export { default as StaticPage } from './StaticPage/StaticPage';
 export { default as StripePaymentForm } from './StripePaymentForm/StripePaymentForm';

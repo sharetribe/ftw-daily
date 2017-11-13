@@ -1,0 +1,82 @@
+@import '../../marketplace.css';
+
+.root {
+  position: relative;
+  box-shadow: var(--boxShadowBottomForm);
+
+  @media (--viewportLarge) {
+    box-shadow: none;
+
+    /* Clearfix */
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+.textarea {
+  @apply --marketplaceH4FontStyles;
+  border-bottom-width: 0;
+
+  /* Avoid text going behind the submit button */
+  padding: 22px 76px 25px 24px;
+
+  margin: 0;
+  max-height: 183px;
+
+  background-color: var(--matterColorLight);
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+  @media (--viewportLarge) {
+    padding: 0 0 5px 0;
+    margin: 0;
+    max-height: initial;
+    border-bottom-width: 2px;
+    border-bottom-color: var(--attentionColor);
+    background-color: transparent;
+  }
+}
+
+.submitButtonMobile {
+  position: absolute;
+  top: -28px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border: none;
+  padding: 0;
+
+  @media (--viewportLarge) {
+    display: none;
+  }
+}
+
+.fillSuccess {
+  fill: var(--successColor);
+}
+
+.strokeMatter {
+  stroke: var(--matterColor);
+}
+
+.submitButtonDesktop {
+  @apply --marketplaceH5FontStyles;
+  font-weight: var(--fontWeightMedium);
+  display: none;
+
+  float: right;
+  padding: 0 16px;
+  min-height: auto;
+  height: 41px;
+
+  @media (--viewportLarge) {
+    display: inline-block;
+    margin: 17px 0 0 0;
+    width: auto;
+  }
+}
+
+.sendIconDesktop {
+  margin: -3px 5px 0 0;
+}
