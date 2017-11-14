@@ -16,6 +16,10 @@ export const FETCH_MESSAGES_REQUEST = 'app/OrderPage/FETCH_MESSAGES_REQUEST';
 export const FETCH_MESSAGES_SUCCESS = 'app/OrderPage/FETCH_MESSAGES_SUCCESS';
 export const FETCH_MESSAGES_ERROR = 'app/OrderPage/FETCH_MESSAGES_ERROR';
 
+export const SEND_MESSAGE_REQUEST = 'app/OrderPage/SEND_MESSAGE_REQUEST';
+export const SEND_MESSAGE_SUCCESS = 'app/OrderPage/SEND_MESSAGE_SUCCESS';
+export const SEND_MESSAGE_ERROR = 'app/OrderPage/SEND_MESSAGE_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -26,6 +30,8 @@ const initialState = {
   fetchMessagesError: null,
   messages: [],
   messageSendingFailedToTransaction: null,
+  sendMessageInProgress: false,
+  sendMessageError: null,
 };
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
@@ -43,12 +49,20 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case FETCH_ORDER_ERROR:
       console.error(payload); // eslint-disable-line
       return { ...state, fetchOrderInProgress: false, fetchOrderError: payload };
+
     case FETCH_MESSAGES_REQUEST:
       return { ...state, fetchMessagesInProgress: true, fetchMessagesError: null };
     case FETCH_MESSAGES_SUCCESS:
       return { ...state, fetchMessagesInProgress: false, messages: payload };
     case FETCH_MESSAGES_ERROR:
       return { ...state, fetchMessagesInProgress: false, fetchMessagesError: payload };
+
+    case SEND_MESSAGE_REQUEST:
+      return { ...state, sendMessageInProgress: true, sendMessageError: null };
+    case SEND_MESSAGE_SUCCESS:
+      return { ...state, sendMessageInProgress: false };
+    case SEND_MESSAGE_ERROR:
+      return { ...state, sendMessageInProgress: false, sendMessageError: payload };
 
     default:
       return state;
@@ -69,6 +83,10 @@ const fetchOrderError = e => ({ type: FETCH_ORDER_ERROR, error: true, payload: e
 const fetchMessagesRequest = () => ({ type: FETCH_MESSAGES_REQUEST });
 const fetchMessagesSuccess = messages => ({ type: FETCH_MESSAGES_SUCCESS, payload: messages });
 const fetchMessagesError = e => ({ type: FETCH_MESSAGES_ERROR, error: true, payload: e });
+
+const sendMessageRequest = () => ({ type: SEND_MESSAGE_REQUEST });
+const sendMessageSuccess = () => ({ type: SEND_MESSAGE_SUCCESS });
+const sendMessageError = e => ({ type: SEND_MESSAGE_ERROR, error: true, payload: e });
 
 // ================ Thunks ================ //
 
@@ -130,7 +148,7 @@ export const fetchMessages = txId => (dispatch, getState, sdk) => {
       dispatch(fetchMessagesSuccess(denormalized));
     })
     .catch(e => {
-      dispatch(fetchMessagesError(e));
+      dispatch(fetchMessagesError(storableError(e)));
       throw e;
     });
 };
@@ -140,6 +158,32 @@ export const fetchMessages = txId => (dispatch, getState, sdk) => {
 export const loadData = params => dispatch => {
   const orderId = new types.UUID(params.id);
 
+  // Clear the send error since the message form is emptied as well.
+  dispatch(setInitialValues({ sendMessageError: null }));
+
   // Order (i.e. transaction entity in API, but from buyers perspective) contains order details
   return Promise.all([dispatch(fetchOrder(orderId)), dispatch(fetchMessages(orderId))]);
+};
+
+export const sendMessage = (orderId, message) => (dispatch, getState, sdk) => {
+  console.log('sendMessage:', orderId, message);
+  dispatch(sendMessageRequest());
+
+  return sdk.messages
+    .send({ transactionId: orderId, content: message })
+    .then(response => {
+      const messageId = response.data.data.id;
+      return dispatch(fetchMessages(orderId))
+        .then(() => {
+          dispatch(sendMessageSuccess());
+          return messageId;
+        })
+        .catch(() => dispatch(sendMessageSuccess()));
+    })
+    .catch(e => {
+      dispatch(sendMessageError(storableError(e)));
+      // Rethrow so the page can track whether the sending failed, and
+      // keep the message in the form for a retry.
+      throw e;
+    });
 };

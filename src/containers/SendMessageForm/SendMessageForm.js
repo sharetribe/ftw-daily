@@ -100,8 +100,6 @@ class SendMessageFormComponent extends Component {
       invalid,
     } = this.props;
 
-    console.log({ sendMessageError });
-
     const classes = classNames(rootClassName || css.root, className);
     const submitInProgress = submitting || inProgress;
     const submitDisabled = invalid || submitInProgress;

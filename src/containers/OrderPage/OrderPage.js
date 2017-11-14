@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { reset as resetForm } from 'redux-form';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
@@ -20,7 +21,7 @@ import {
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
-import { loadData, setInitialValues } from './OrderPage.duck';
+import { loadData, setInitialValues, sendMessage } from './OrderPage.duck';
 import css from './OrderPage.css';
 
 // OrderPage handles data loading
@@ -32,6 +33,10 @@ export const OrderPageComponent = props => {
     fetchMessagesError,
     messages,
     messageSendingFailedToTransaction,
+    sendMessageInProgress,
+    sendMessageError,
+    onSendMessage,
+    onResetForm,
     intl,
     params,
     scrollingDisabled,
@@ -84,6 +89,10 @@ export const OrderPageComponent = props => {
         messages={messages}
         initialMessageFailed={initialMessageFailed}
         fetchMessagesError={fetchMessagesError}
+        sendMessageInProgress={sendMessageInProgress}
+        sendMessageError={sendMessageError}
+        onSendMessage={onSendMessage}
+        onResetForm={onResetForm}
       />
     ) : (
       loadingOrFaildFetching
@@ -112,10 +121,11 @@ OrderPageComponent.defaultProps = {
   fetchOrderError: null,
   fetchMessagesError: null,
   messageSendingFailedToTransaction: null,
+  sendMessageError: null,
   transaction: null,
 };
 
-const { bool, oneOf, shape, string, array } = PropTypes;
+const { bool, oneOf, shape, string, array, func } = PropTypes;
 
 OrderPageComponent.propTypes = {
   params: shape({ id: string }).isRequired,
@@ -126,8 +136,12 @@ OrderPageComponent.propTypes = {
   fetchMessagesError: propTypes.error,
   messages: array.isRequired,
   messageSendingFailedToTransaction: propTypes.uuid,
+  sendMessageInProgress: bool.isRequired,
+  sendMessageError: propTypes.error,
   scrollingDisabled: bool.isRequired,
   transaction: propTypes.transaction,
+  onSendMessage: func.isRequired,
+  onResetForm: func.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
@@ -141,6 +155,8 @@ const mapStateToProps = state => {
     fetchMessagesError,
     messages,
     messageSendingFailedToTransaction,
+    sendMessageInProgress,
+    sendMessageError,
   } = state.OrderPage;
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
@@ -151,12 +167,21 @@ const mapStateToProps = state => {
     fetchMessagesError,
     messages,
     messageSendingFailedToTransaction,
+    sendMessageInProgress,
+    sendMessageError,
     scrollingDisabled: isScrollingDisabled(state),
     transaction,
   };
 };
 
-const OrderPage = compose(connect(mapStateToProps), injectIntl)(OrderPageComponent);
+const mapDispatchToProps = dispatch => ({
+  onSendMessage: (orderId, message) => dispatch(sendMessage(orderId, message)),
+  onResetForm: formName => dispatch(resetForm(formName)),
+});
+
+const OrderPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
+  OrderPageComponent
+);
 
 OrderPage.setInitialValues = setInitialValues;
 OrderPage.loadData = loadData;

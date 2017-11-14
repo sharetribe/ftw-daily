@@ -63,7 +63,7 @@ export const MessagesComponent = props => {
   return (
     <ul className={classes}>
       {messages.map(m => (
-        <li key={m.id.uuid} className={css.messageItem}>
+        <li id={`msg-${m.id.uuid}`} key={m.id.uuid} className={css.messageItem}>
           {msg(m)}
         </li>
       ))}
