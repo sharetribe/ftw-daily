@@ -5,11 +5,14 @@
 
   /* Clearfix */
   width: 100%;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .messageItem {
   margin-bottom: 35px;
+
+  /* Clearfix */
+  overflow: auto;
 
   @media (--viewportMedium) {
     margin-bottom: 40px;
