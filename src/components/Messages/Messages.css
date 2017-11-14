@@ -2,14 +2,16 @@
 
 .root {
   margin: 0;
-}
 
-.root:after {
+  /* Clearfix */
   @apply --clearfix;
 }
 
 .messageItem {
   margin-bottom: 35px;
+
+  /* Clearfix */
+  @apply --clearfix;
 
   @media (--viewportMedium) {
     margin-bottom: 40px;
@@ -18,10 +20,6 @@
   &:last-of-type {
     margin-bottom: 0;
   }
-}
-
-.messageItem:after {
-  @apply --clearfix;
 }
 
 .message,
