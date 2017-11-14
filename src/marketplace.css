@@ -96,6 +96,16 @@
   --modalPadding: 24px 24px 48px 24px;
   --modalPaddingMedium: 55px 60px 55px 60px;
 
+  /* ================ Clearfix solution ================ */
+
+  /* Apply to an :after pseudo element of the container where
+   * the clearfix effect is desired */
+  --clearfix {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
   /* ================ Links ================ */
 
   --marketplaceLinkStyles: {
