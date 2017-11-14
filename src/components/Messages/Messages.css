@@ -4,12 +4,14 @@
   margin: 0;
 
   /* Clearfix */
-  width: 100%;
-  overflow: auto;
+  @apply --clearfix;
 }
 
 .messageItem {
   margin-bottom: 35px;
+
+  /* Clearfix */
+  @apply --clearfix;
 
   @media (--viewportMedium) {
     margin-bottom: 40px;

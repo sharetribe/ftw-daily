@@ -96,6 +96,16 @@
   --modalPadding: 24px 24px 48px 24px;
   --modalPaddingMedium: 55px 60px 55px 60px;
 
+  /* ================ Clearfix solution ================ */
+
+  --clearfix {
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  }
+
   /* ================ Links ================ */
 
   --marketplaceLinkStyles: {
