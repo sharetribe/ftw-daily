@@ -40,16 +40,30 @@
 
 .submitButtonMobile {
   position: absolute;
-  top: -28px;
-  right: 20px;
-  width: 56px;
-  height: 56px;
+  top: -21px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
   border: none;
   padding: 0;
+  background-color: var(--successColor);
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 
   @media (--viewportLarge) {
     display: none;
   }
+}
+
+.spinner {
+  stroke: var(--matterColorLight);
+  width: 18px;
+  height: 18px;
+  stroke-width: 4px;
 }
 
 .fillSuccess {
@@ -60,14 +74,61 @@
   stroke: var(--matterColor);
 }
 
+.errorMobile {
+  @apply --marketplaceH5FontStyles;
+  font-weight: var(--fontWeightMedium);
+  color: var(--failColor);
+  margin: 0;
+  position: absolute;
+  top: -15px;
+  right: 80px;
+  padding: 5px 16px;
+  background-color: var(--matterColorLight);
+
+  @media (--viewportMedium) {
+    margin: 0;
+    top: -14px;
+  }
+  @media (--viewportLarge) {
+    display: none;
+  }
+}
+
+.submitContainerDesktop {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.errorContainerDesktop {
+  display: none;
+  flex: 1;
+  text-align: right;
+  padding: 26px 24px 0 0;
+
+  @media (--viewportLarge) {
+    display: block;
+  }
+}
+
+.errorDesktop {
+  @apply --marketplaceH5FontStyles;
+  font-weight: var(--fontWeightMedium);
+  color: var(--failColor);
+  margin: 0;
+}
+
 .submitButtonDesktop {
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightMedium);
-  display: none;
 
   float: right;
   padding: 0 16px;
   min-height: auto;
+  min-width: 150px;
   height: 41px;
 
   @media (--viewportLarge) {
@@ -75,6 +136,18 @@
     margin: 17px 0 0 0;
     width: auto;
   }
+}
+
+.sendIconMobile {
+  margin: 0 3px 3px 0;
+}
+
+.sendIconMobileInProgress {
+  width: 20px;
+  height: 20px;
+  stroke: var(--matterColorLight);
+  stroke-width: 4px;
+  margin-bottom: 4px;
 }
 
 .sendIconDesktop {

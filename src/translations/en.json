@@ -471,6 +471,7 @@
   "SectionLocations.listingsInLocation": "Saunas in {location}",
   "SectionLocations.subtitle": "We have more than 1000 saunas around Finland. Here are some of our most popular locations.",
   "SectionLocations.title": "We have wooden saunas, electric saunas and even tent saunas.",
+  "SendMessageForm.sendFailed": "Failed to send. Please try again.",
   "SendMessageForm.sendMessage": "Send message",
   "SignupForm.emailInvalid": "A valid email address is required",
   "SignupForm.emailLabel": "Email",
