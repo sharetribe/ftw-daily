@@ -157,4 +157,6 @@ const SendMessageForm = compose(reduxForm({ form: defaultFormName }), injectIntl
   SendMessageFormComponent
 );
 
+SendMessageForm.displayName = 'SendMessageForm';
+
 export default SendMessageForm;

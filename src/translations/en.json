@@ -272,6 +272,7 @@
   "OrderDetailsPanel.orderPreauthorizedStatus": "{providerName} has been notified about the booking request, so sit back and relax.",
   "OrderDetailsPanel.orderPreauthorizedSubtitle": "You have requested to book {listingLink}",
   "OrderDetailsPanel.orderPreauthorizedTitle": "Great success, {customerName}!",
+  "OrderDetailsPanel.sendMessagePlaceholder": "Send a message to {name}…",
   "OrderPage.fetchOrderFailed": "Fetching order data failed.",
   "OrderPage.loadingData": "Loading order data.",
   "OrderPage.title": "Order details: {listingTitle}",

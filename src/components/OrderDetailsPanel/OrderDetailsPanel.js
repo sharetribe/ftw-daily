@@ -12,6 +12,7 @@ import {
   AvatarMedium,
   Messages,
 } from '../../components';
+import { SendMessageForm } from '../../containers';
 
 import css from './OrderDetailsPanel.css';
 
@@ -163,6 +164,17 @@ export const OrderDetailsPanelComponent = props => {
     </div>
   ) : null;
 
+  const sendMessagePlaceholder = intl.formatMessage(
+    { id: 'OrderDetailsPanel.sendMessagePlaceholder' },
+    { name: 'Juho' }
+  );
+  const sendMessageForm = (
+    <SendMessageForm
+      rootClassName={css.sendMessageForm}
+      messagePlaceholder={sendMessagePlaceholder}
+    />
+  );
+
   const classes = classNames(rootClassName || css.root, className);
 
   return (
@@ -196,6 +208,7 @@ export const OrderDetailsPanelComponent = props => {
             {bookingInfo}
           </div>
           {messagesContainer}
+          {sendMessageForm}
         </div>
         <div className={css.bookingBreakdownContainer}>
           <div className={css.breakdownDesktop}>

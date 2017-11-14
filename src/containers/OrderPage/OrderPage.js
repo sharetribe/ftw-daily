@@ -100,7 +100,7 @@ export const OrderPageComponent = props => {
         </LayoutWrapperTopbar>
         <LayoutWrapperMain className={css.mainContent}>{panel}</LayoutWrapperMain>
         <LayoutWrapperFooter>
-          <Footer />
+          <Footer className={css.footer} />
         </LayoutWrapperFooter>
       </LayoutSingleColumn>
     </Page>

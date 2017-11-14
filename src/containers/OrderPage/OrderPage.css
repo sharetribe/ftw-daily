@@ -1,7 +1,9 @@
 @import '../../marketplace.css';
 
 .mainContent {
-  margin-bottom: 122px;
+  @media (--viewportLarge) {
+    margin-bottom: 122px;
+  }
 }
 
 .loading {
@@ -25,4 +27,12 @@
 
 .activeTab {
   font-weight: bold;
+}
+
+.footer {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+  }
 }

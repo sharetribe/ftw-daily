@@ -83,22 +83,26 @@
 }
 
 .orderInfo {
+  margin-bottom: 210px;
+
   @media (--viewportLarge) {
     max-width: 538px;
     margin-right: 108px;
+    margin-bottom: 0;
   }
 }
 
 .heading {
-  margin: 27px 24px 0 24px;
+  margin: 29px 24px 0 24px;
 
   @media (--viewportMedium) {
+    margin: 25px 24px 0 24px;
     max-width: 80%;
   }
 
   @media (--viewportLarge) {
     max-width: 100%;
-    margin: 177px 0 0 0;
+    margin: 175px 0 0 0;
   }
 }
 
@@ -152,6 +156,9 @@
     width: 409px;
     display: block;
     padding-bottom: 55px;
+    background-color: var(--matterColorLight);
+    border: 1px solid var(--matterColorNegative);
+    border-radius: 2px;
   }
 }
 
@@ -166,12 +173,9 @@
   margin: 1px 0 0 0;
 
   @media (--viewportLarge) {
-    margin-top: 122px;
+    margin-top: 121px;
     margin-left: 0;
     margin-right: 0;
-    background-color: var(--matterColorLight);
-    border: 1px solid var(--matterColorNegative);
-    border-radius: 2px;
   }
 }
 
@@ -189,7 +193,7 @@
   margin-bottom: 10px;
 
   @media (--viewportLarge) {
-    margin-top: 13px;
+    margin-top: 14px;
     margin-bottom: 0;
   }
 }
@@ -260,5 +264,18 @@
 
   @media (--viewportMedium) {
     margin-top: 19px;
+  }
+}
+
+.sendMessageForm {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: var(--boxShadowBottomForm);
+
+  @media (--viewportLarge) {
+    margin-top: 47px;
+    position: relative;
+    box-shadow: none;
   }
 }

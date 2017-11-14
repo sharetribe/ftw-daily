@@ -211,6 +211,9 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+      <SendMessageForm
+        messagePlaceholder="OrderDetailsPanel.sendMessagePlaceholder"
+      />
     </div>
     <div>
       <div>
@@ -603,6 +606,9 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+      <SendMessageForm
+        messagePlaceholder="OrderDetailsPanel.sendMessagePlaceholder"
+      />
     </div>
     <div>
       <div>
@@ -1018,6 +1024,9 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+      <SendMessageForm
+        messagePlaceholder="OrderDetailsPanel.sendMessagePlaceholder"
+      />
     </div>
     <div>
       <div>
@@ -1410,6 +1419,9 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+      <SendMessageForm
+        messagePlaceholder="OrderDetailsPanel.sendMessagePlaceholder"
+      />
     </div>
     <div>
       <div>
@@ -1802,6 +1814,9 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+      <SendMessageForm
+        messagePlaceholder="OrderDetailsPanel.sendMessagePlaceholder"
+      />
     </div>
     <div>
       <div>
@@ -2217,6 +2232,9 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+      <SendMessageForm
+        messagePlaceholder="OrderDetailsPanel.sendMessagePlaceholder"
+      />
     </div>
     <div>
       <div>
