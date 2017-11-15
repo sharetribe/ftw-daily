@@ -89,24 +89,7 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
           }
         />
       </h1>
-      <p>
-        <FormattedMessage
-          id="SaleDetailsPanel.saleAcceptedStatus"
-          values={
-            Object {
-              "formattedDate": <span>
-                <FormattedDate
-                    day="numeric"
-                    month="short"
-                    value={2017-06-10T00:00:00.000Z}
-                    weekday="long"
-                    year="numeric"
-                />
-            </span>,
-            }
-          }
-        />
-      </p>
+      <p />
       <div />
     </div>
     <div>
@@ -460,24 +443,7 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
           }
         />
       </h1>
-      <p>
-        <FormattedMessage
-          id="SaleDetailsPanel.saleAutoDeclinedStatus"
-          values={
-            Object {
-              "formattedDate": <span>
-                <FormattedDate
-                    day="numeric"
-                    month="short"
-                    value={2017-06-10T00:00:00.000Z}
-                    weekday="long"
-                    year="numeric"
-                />
-            </span>,
-            }
-          }
-        />
-      </p>
+      <p />
       <div />
     </div>
     <div>
@@ -1217,24 +1183,7 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
           }
         />
       </h1>
-      <p>
-        <FormattedMessage
-          id="SaleDetailsPanel.saleDeclinedStatus"
-          values={
-            Object {
-              "formattedDate": <span>
-                <FormattedDate
-                    day="numeric"
-                    month="short"
-                    value={2017-06-10T00:00:00.000Z}
-                    weekday="long"
-                    year="numeric"
-                />
-            </span>,
-            }
-          }
-        />
-      </p>
+      <p />
       <div />
     </div>
     <div>
@@ -1588,24 +1537,7 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
           }
         />
       </h1>
-      <p>
-        <FormattedMessage
-          id="SaleDetailsPanel.saleDeliveredStatus"
-          values={
-            Object {
-              "formattedDate": <span>
-                <FormattedDate
-                    day="numeric"
-                    month="short"
-                    value={2017-06-10T00:00:00.000Z}
-                    weekday="long"
-                    year="numeric"
-                />
-            </span>,
-            }
-          }
-        />
-      </p>
+      <p />
       <div />
     </div>
     <div>

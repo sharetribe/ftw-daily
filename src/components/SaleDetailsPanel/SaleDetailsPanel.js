@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape, FormattedDate, FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
@@ -73,37 +73,11 @@ const saleTitle = (transaction, listingLink, customerName) => {
   }
 };
 
-const saleMessage = (transaction, customerName) => {
-  const formattedDate = (
-    <span className={css.nowrap}>
-      <FormattedDate
-        value={transaction.attributes.lastTransitionedAt}
-        year="numeric"
-        month="short"
-        day="numeric"
-        weekday="long"
-      />
-    </span>
-  );
+const saleInfoText = (transaction, customerName) => {
   if (propTypes.txIsPreauthorized(transaction)) {
     return <FormattedMessage id="SaleDetailsPanel.saleRequestedStatus" values={{ customerName }} />;
-  } else if (propTypes.txIsAccepted(transaction)) {
-    return <FormattedMessage id="SaleDetailsPanel.saleAcceptedStatus" values={{ formattedDate }} />;
-  } else if (propTypes.txIsDeclined(transaction)) {
-    return <FormattedMessage id="SaleDetailsPanel.saleDeclinedStatus" values={{ formattedDate }} />;
-  } else if (propTypes.txIsAutodeclined(transaction)) {
-    return (
-      <FormattedMessage id="SaleDetailsPanel.saleAutoDeclinedStatus" values={{ formattedDate }} />
-    );
-  } else if (propTypes.txIsCanceled(transaction)) {
-    return <FormattedMessage id="SaleDetailsPanel.saleCanceledStatus" values={{ formattedDate }} />;
-  } else if (propTypes.txIsDelivered(transaction)) {
-    return (
-      <FormattedMessage id="SaleDetailsPanel.saleDeliveredStatus" values={{ formattedDate }} />
-    );
-  } else {
-    return null;
   }
+  return null;
 };
 
 export const SaleDetailsPanelComponent = props => {
@@ -162,11 +136,11 @@ export const SaleDetailsPanelComponent = props => {
   const bookingInfo = breakdown(currentTransaction);
 
   const title = saleTitle(currentTransaction, listingLink, customerDisplayName);
-  const message = isCustomerBanned
+  const infoText = isCustomerBanned
     ? intl.formatMessage({
         id: 'SaleDetailsPanel.customerBannedStatus',
       })
-    : saleMessage(currentTransaction, customerDisplayName);
+    : saleInfoText(currentTransaction, customerDisplayName);
 
   const listingTitle = currentListing.attributes.title;
   const firstImage =
@@ -238,7 +212,7 @@ export const SaleDetailsPanelComponent = props => {
             <AvatarLarge user={currentCustomer} className={css.avatarDesktop} />
           </div>
           <h1 className={css.title}>{title}</h1>
-          <p className={css.message}>{message}</p>
+          <p className={css.infoText}>{infoText}</p>
           <div className={css.errorMobile}>
             {acceptErrorMessage}
             {declineErrorMessage}
