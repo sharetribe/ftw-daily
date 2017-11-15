@@ -166,7 +166,6 @@ export const loadData = params => dispatch => {
 };
 
 export const sendMessage = (orderId, message) => (dispatch, getState, sdk) => {
-  console.log('sendMessage:', orderId, message);
   dispatch(sendMessageRequest());
 
   return sdk.messages
