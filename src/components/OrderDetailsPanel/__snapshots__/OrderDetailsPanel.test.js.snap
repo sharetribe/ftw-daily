@@ -211,8 +211,98 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+      <div
+        className=""
+      >
+        <h3>
+          <FormattedMessage
+            id="OrderDetailsPanel.messagesHeading"
+            values={Object {}}
+          />
+        </h3>
+        <InjectIntl(Component)
+          currentUser={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "email": "user2@example.com",
+                "emailVerified": true,
+                "profile": Object {
+                  "abbreviatedName": "user2 abbreviated name",
+                  "displayName": "user2 display name",
+                  "firstName": "user2 first name",
+                  "lastName": "user2 last name",
+                },
+                "stripeConnected": true,
+              },
+              "id": UUID {
+                "uuid": "user2",
+              },
+              "type": "currentUser",
+            }
+          }
+          messages={
+            Array [
+              Object {
+                "attributes": Object {
+                  "at": 2017-11-09T08:12:00.000Z,
+                  "content": "Message msg1
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                },
+                "id": UUID {
+                  "uuid": "msg1",
+                },
+                "sender": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user1",
+                  },
+                  "type": "user",
+                },
+                "type": "message",
+              },
+              Object {
+                "attributes": Object {
+                  "at": 2017-11-09T08:12:00.000Z,
+                  "content": "Message msg2
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                },
+                "id": UUID {
+                  "uuid": "msg2",
+                },
+                "sender": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user2 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user2",
+                  },
+                  "type": "user",
+                },
+                "type": "message",
+              },
+            ]
+          }
+        />
+      </div>
       <SendMessageForm
+        form="OrderDetailsPanel.SendMessageForm"
+        inProgress={false}
         messagePlaceholder="OrderDetailsPanel.sendMessagePlaceholder"
+        onSubmit={[Function]}
+        sendMessageError={null}
       />
     </div>
     <div>
@@ -606,8 +696,98 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+      <div
+        className=""
+      >
+        <h3>
+          <FormattedMessage
+            id="OrderDetailsPanel.messagesHeading"
+            values={Object {}}
+          />
+        </h3>
+        <InjectIntl(Component)
+          currentUser={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "email": "user2@example.com",
+                "emailVerified": true,
+                "profile": Object {
+                  "abbreviatedName": "user2 abbreviated name",
+                  "displayName": "user2 display name",
+                  "firstName": "user2 first name",
+                  "lastName": "user2 last name",
+                },
+                "stripeConnected": true,
+              },
+              "id": UUID {
+                "uuid": "user2",
+              },
+              "type": "currentUser",
+            }
+          }
+          messages={
+            Array [
+              Object {
+                "attributes": Object {
+                  "at": 2017-11-09T08:12:00.000Z,
+                  "content": "Message msg1
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                },
+                "id": UUID {
+                  "uuid": "msg1",
+                },
+                "sender": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user1",
+                  },
+                  "type": "user",
+                },
+                "type": "message",
+              },
+              Object {
+                "attributes": Object {
+                  "at": 2017-11-09T08:12:00.000Z,
+                  "content": "Message msg2
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                },
+                "id": UUID {
+                  "uuid": "msg2",
+                },
+                "sender": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user2 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user2",
+                  },
+                  "type": "user",
+                },
+                "type": "message",
+              },
+            ]
+          }
+        />
+      </div>
       <SendMessageForm
+        form="OrderDetailsPanel.SendMessageForm"
+        inProgress={false}
         messagePlaceholder="OrderDetailsPanel.sendMessagePlaceholder"
+        onSubmit={[Function]}
+        sendMessageError={null}
       />
     </div>
     <div>
@@ -1024,8 +1204,98 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+      <div
+        className="undefined"
+      >
+        <h3>
+          <FormattedMessage
+            id="OrderDetailsPanel.messagesHeading"
+            values={Object {}}
+          />
+        </h3>
+        <InjectIntl(Component)
+          currentUser={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "email": "user2@example.com",
+                "emailVerified": true,
+                "profile": Object {
+                  "abbreviatedName": "user2 abbreviated name",
+                  "displayName": "user2 display name",
+                  "firstName": "user2 first name",
+                  "lastName": "user2 last name",
+                },
+                "stripeConnected": true,
+              },
+              "id": UUID {
+                "uuid": "user2",
+              },
+              "type": "currentUser",
+            }
+          }
+          messages={
+            Array [
+              Object {
+                "attributes": Object {
+                  "at": 2017-11-09T08:12:00.000Z,
+                  "content": "Message msg1
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                },
+                "id": UUID {
+                  "uuid": "msg1",
+                },
+                "sender": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user1",
+                  },
+                  "type": "user",
+                },
+                "type": "message",
+              },
+              Object {
+                "attributes": Object {
+                  "at": 2017-11-09T08:12:00.000Z,
+                  "content": "Message msg2
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                },
+                "id": UUID {
+                  "uuid": "msg2",
+                },
+                "sender": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user2 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user2",
+                  },
+                  "type": "user",
+                },
+                "type": "message",
+              },
+            ]
+          }
+        />
+      </div>
       <SendMessageForm
+        form="OrderDetailsPanel.SendMessageForm"
+        inProgress={false}
         messagePlaceholder="OrderDetailsPanel.sendMessagePlaceholder"
+        onSubmit={[Function]}
+        sendMessageError={null}
       />
     </div>
     <div>
@@ -1419,8 +1689,98 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+      <div
+        className=""
+      >
+        <h3>
+          <FormattedMessage
+            id="OrderDetailsPanel.messagesHeading"
+            values={Object {}}
+          />
+        </h3>
+        <InjectIntl(Component)
+          currentUser={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "email": "user2@example.com",
+                "emailVerified": true,
+                "profile": Object {
+                  "abbreviatedName": "user2 abbreviated name",
+                  "displayName": "user2 display name",
+                  "firstName": "user2 first name",
+                  "lastName": "user2 last name",
+                },
+                "stripeConnected": true,
+              },
+              "id": UUID {
+                "uuid": "user2",
+              },
+              "type": "currentUser",
+            }
+          }
+          messages={
+            Array [
+              Object {
+                "attributes": Object {
+                  "at": 2017-11-09T08:12:00.000Z,
+                  "content": "Message msg1
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                },
+                "id": UUID {
+                  "uuid": "msg1",
+                },
+                "sender": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user1",
+                  },
+                  "type": "user",
+                },
+                "type": "message",
+              },
+              Object {
+                "attributes": Object {
+                  "at": 2017-11-09T08:12:00.000Z,
+                  "content": "Message msg2
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                },
+                "id": UUID {
+                  "uuid": "msg2",
+                },
+                "sender": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user2 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user2",
+                  },
+                  "type": "user",
+                },
+                "type": "message",
+              },
+            ]
+          }
+        />
+      </div>
       <SendMessageForm
+        form="OrderDetailsPanel.SendMessageForm"
+        inProgress={false}
         messagePlaceholder="OrderDetailsPanel.sendMessagePlaceholder"
+        onSubmit={[Function]}
+        sendMessageError={null}
       />
     </div>
     <div>
@@ -1814,8 +2174,98 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+      <div
+        className=""
+      >
+        <h3>
+          <FormattedMessage
+            id="OrderDetailsPanel.messagesHeading"
+            values={Object {}}
+          />
+        </h3>
+        <InjectIntl(Component)
+          currentUser={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "email": "user2@example.com",
+                "emailVerified": true,
+                "profile": Object {
+                  "abbreviatedName": "user2 abbreviated name",
+                  "displayName": "user2 display name",
+                  "firstName": "user2 first name",
+                  "lastName": "user2 last name",
+                },
+                "stripeConnected": true,
+              },
+              "id": UUID {
+                "uuid": "user2",
+              },
+              "type": "currentUser",
+            }
+          }
+          messages={
+            Array [
+              Object {
+                "attributes": Object {
+                  "at": 2017-11-09T08:12:00.000Z,
+                  "content": "Message msg1
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                },
+                "id": UUID {
+                  "uuid": "msg1",
+                },
+                "sender": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user1",
+                  },
+                  "type": "user",
+                },
+                "type": "message",
+              },
+              Object {
+                "attributes": Object {
+                  "at": 2017-11-09T08:12:00.000Z,
+                  "content": "Message msg2
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                },
+                "id": UUID {
+                  "uuid": "msg2",
+                },
+                "sender": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user2 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user2",
+                  },
+                  "type": "user",
+                },
+                "type": "message",
+              },
+            ]
+          }
+        />
+      </div>
       <SendMessageForm
+        form="OrderDetailsPanel.SendMessageForm"
+        inProgress={false}
         messagePlaceholder="OrderDetailsPanel.sendMessagePlaceholder"
+        onSubmit={[Function]}
+        sendMessageError={null}
       />
     </div>
     <div>
@@ -2232,8 +2682,98 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
           userRole="customer"
         />
       </div>
+      <div
+        className="undefined"
+      >
+        <h3>
+          <FormattedMessage
+            id="OrderDetailsPanel.messagesHeading"
+            values={Object {}}
+          />
+        </h3>
+        <InjectIntl(Component)
+          currentUser={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "email": "user2@example.com",
+                "emailVerified": true,
+                "profile": Object {
+                  "abbreviatedName": "user2 abbreviated name",
+                  "displayName": "user2 display name",
+                  "firstName": "user2 first name",
+                  "lastName": "user2 last name",
+                },
+                "stripeConnected": true,
+              },
+              "id": UUID {
+                "uuid": "user2",
+              },
+              "type": "currentUser",
+            }
+          }
+          messages={
+            Array [
+              Object {
+                "attributes": Object {
+                  "at": 2017-11-09T08:12:00.000Z,
+                  "content": "Message msg1
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                },
+                "id": UUID {
+                  "uuid": "msg1",
+                },
+                "sender": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user1",
+                  },
+                  "type": "user",
+                },
+                "type": "message",
+              },
+              Object {
+                "attributes": Object {
+                  "at": 2017-11-09T08:12:00.000Z,
+                  "content": "Message msg2
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                },
+                "id": UUID {
+                  "uuid": "msg2",
+                },
+                "sender": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user2 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user2",
+                  },
+                  "type": "user",
+                },
+                "type": "message",
+              },
+            ]
+          }
+        />
+      </div>
       <SendMessageForm
+        form="OrderDetailsPanel.SendMessageForm"
+        inProgress={false}
         messagePlaceholder="OrderDetailsPanel.sendMessagePlaceholder"
+        onSubmit={[Function]}
+        sendMessageError={null}
       />
     </div>
     <div>

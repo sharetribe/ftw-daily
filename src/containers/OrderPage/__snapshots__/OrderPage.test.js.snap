@@ -19,7 +19,7 @@ exports[`OrderPage matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <InjectIntl(Component)
+      <InjectIntl(OrderDetailsPanelComponent)
         className="undefined"
         currentUser={
           Object {
@@ -44,6 +44,10 @@ exports[`OrderPage matches snapshot 1`] = `
         fetchMessagesError={null}
         initialMessageFailed={false}
         messages={Array []}
+        onResetForm={[Function]}
+        onSendMessage={[Function]}
+        sendMessageError={null}
+        sendMessageInProgress={false}
         transaction={
           Object {
             "attributes": Object {

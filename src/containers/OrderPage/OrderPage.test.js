@@ -34,8 +34,11 @@ describe('OrderPage', () => {
 
       currentUser: createCurrentUser('customer1'),
       messages: [],
+      sendMessageInProgress: false,
       scrollingDisabled: false,
       transaction,
+      onSendMessage: noop,
+      onResetForm: noop,
 
       intl: fakeIntl,
     };
