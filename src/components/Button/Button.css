@@ -91,6 +91,7 @@
   width: 28px;
   height: 28px;
   stroke: var(--matterColorLight);
+  stroke-width: 3px;
 }
 
 .checkmark {

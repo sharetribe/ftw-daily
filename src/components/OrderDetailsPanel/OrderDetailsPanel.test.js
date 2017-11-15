@@ -1,7 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { types } from '../../util/sdkLoader';
-import { createBooking, createListing, createUser, createTransaction } from '../../util/test-data';
+import {
+  createBooking,
+  createListing,
+  createUser,
+  createTransaction,
+  createCurrentUser,
+  createMessage,
+} from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl } from '../../util/test-data';
 import * as propTypes from '../../util/propTypes';
@@ -57,11 +64,20 @@ const txDelivered = createTransaction({
   ...baseTxAttrs,
 });
 
+const noop = () => null;
+
 describe('OrderDetailsPanel', () => {
   const panelBaseProps = {
     intl: fakeIntl,
-    messages: [],
+    currentUser: createCurrentUser('user2'),
+    messages: [
+      createMessage('msg1', {}, { sender: createUser('user1') }),
+      createMessage('msg2', {}, { sender: createUser('user2') }),
+    ],
     initialMessageFailed: false,
+    sendMessageInProgress: false,
+    onSendMessage: noop,
+    onResetForm: noop,
   };
 
   it('preauthorized matches snapshot', () => {

@@ -6,6 +6,7 @@ exports[`Messages matches snapshot 1`] = `
 >
   <li
     className={undefined}
+    id="msg-msg1"
   >
     <div
       className={undefined}
@@ -41,6 +42,7 @@ exports[`Messages matches snapshot 1`] = `
   </li>
   <li
     className={undefined}
+    id="msg-msg2"
   >
     <div
       className={undefined}

@@ -4,7 +4,8 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
-import { Form, TextInputField, SecondaryButton } from '../../components';
+import { Form, TextInputField, SecondaryButton, IconSpinner } from '../../components';
+import * as propTypes from '../../util/propTypes';
 
 import css from './SendMessageForm.css';
 
@@ -12,7 +13,13 @@ const BLUR_TIMEOUT_MS = 100;
 
 const IconSendMessageMobile = () => {
   return (
-    <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className={css.sendIconMobile}
+      width="26"
+      height="26"
+      viewBox="0 0 26 26"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <defs>
         <filter
           x="-1.9%"
@@ -35,11 +42,8 @@ const IconSendMessageMobile = () => {
           </feMerge>
         </filter>
       </defs>
-      <g transform="translate(4 6)" filter="url(#a)" fill="none" fillRule="evenodd">
-        <rect className={css.fillSuccess} width="48" height="48" rx="24" />
-        <g fill="#FFF">
-          <path d="M14.47 23.048c-.14.05-.237.193-.25.36-.013.163.062.317.19.39l4.623 2.688 12.162-10.593-16.726 7.155zM20.47 27.327l-.97 6.59c0 .228.184.416.417.416.145 0 .284-.076.36-.206l2.94-4.823 4.833 2.894c.118.066.26.067.373.015.12-.055.207-.162.234-.292l3.315-15.328-11.5 10.735z" />
-        </g>
+      <g filter="url(#a)" transform="translate(-313 -10)" fill="#FFF" fillRule="evenodd">
+        <path d="M317.47 23.048c-.14.05-.237.193-.25.36-.013.163.062.317.19.39l4.623 2.688 12.162-10.593-16.726 7.155zM323.47 27.327l-.97 6.59c0 .228.184.416.417.416.145 0 .284-.076.36-.206l2.94-4.823 4.833 2.894c.118.066.26.067.373.015.12-.055.207-.162.234-.292l3.315-15.328-11.5 10.735z" />
       </g>
     </svg>
   );
@@ -92,6 +96,7 @@ class SendMessageFormComponent extends Component {
       handleSubmit,
       submitting,
       inProgress,
+      sendMessageError,
       invalid,
     } = this.props;
 
@@ -110,19 +115,37 @@ class SendMessageFormComponent extends Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
-        <button className={css.submitButtonMobile}>
-          <IconSendMessageMobile />
+        {sendMessageError ? (
+          <p className={css.errorMobile}>
+            <FormattedMessage id="SendMessageForm.sendFailed" />
+          </p>
+        ) : null}
+        <button className={css.submitButtonMobile} disabled={submitDisabled}>
+          {submitInProgress ? (
+            <IconSpinner className={css.sendIconMobileInProgress} />
+          ) : (
+            <IconSendMessageMobile />
+          )}
         </button>
-        <SecondaryButton
-          className={css.submitButtonDesktop}
-          inProgress={submitInProgress}
-          disabled={submitDisabled}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-        >
-          <IconSendMessageDesktop />
-          <FormattedMessage id="SendMessageForm.sendMessage" />
-        </SecondaryButton>
+        <div className={css.submitContainerDesktop}>
+          <div className={css.errorContainerDesktop}>
+            {sendMessageError ? (
+              <p className={css.errorDesktop}>
+                <FormattedMessage id="SendMessageForm.sendFailed" />
+              </p>
+            ) : null}
+          </div>
+          <SecondaryButton
+            className={css.submitButtonDesktop}
+            inProgress={submitInProgress}
+            disabled={submitDisabled}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+          >
+            <IconSendMessageDesktop />
+            <FormattedMessage id="SendMessageForm.sendMessage" />
+          </SecondaryButton>
+        </div>
       </Form>
     );
   }
@@ -135,6 +158,7 @@ SendMessageFormComponent.defaultProps = {
   messagePlaceholder: null,
   onFocus: () => null,
   onBlur: () => null,
+  sendMessageError: null,
 };
 
 SendMessageFormComponent.propTypes = {
@@ -146,6 +170,7 @@ SendMessageFormComponent.propTypes = {
   messagePlaceholder: string,
   onFocus: func,
   onBlur: func,
+  sendMessageError: propTypes.error,
 
   // from injectIntl
   intl: intlShape.isRequired,
@@ -156,5 +181,7 @@ const defaultFormName = 'SendMessageForm';
 const SendMessageForm = compose(reduxForm({ form: defaultFormName }), injectIntl)(
   SendMessageFormComponent
 );
+
+SendMessageForm.displayName = 'SendMessageForm';
 
 export default SendMessageForm;
