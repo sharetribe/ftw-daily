@@ -26,8 +26,14 @@ exports[`SalePage matches snapshot 1`] = `
           className="undefined"
           declineInProgress={false}
           declineSaleError={null}
+          fetchMessagesError={null}
+          messages={Array []}
           onAcceptSale={[Function]}
           onDeclineSale={[Function]}
+          onResetForm={[Function]}
+          onSendMessage={[Function]}
+          sendMessageError={null}
+          sendMessageInProgress={false}
           transaction={
             Object {
               "attributes": Object {

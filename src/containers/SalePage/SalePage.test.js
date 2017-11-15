@@ -29,27 +29,20 @@ describe('SalePage', () => {
     });
 
     const props = {
+      params: { id: txId },
+      tab: 'details',
       currentUser: createCurrentUser('provider1'),
-      location: { search: '' },
-      history: {
-        push: () => console.log('HistoryPush called'),
-      },
-      authInProgress: false,
       acceptInProgress: false,
       declineInProgress: false,
-      currentUserHasListings: false,
-      isAuthenticated: false,
-      onLogout: noop,
-      onManageDisableScrolling: noop,
       onAcceptSale: noop,
       onDeclineSale: noop,
-      params: { id: txId },
       scrollingDisabled: false,
       transaction,
-      tab: 'details',
+      messages: [],
+      sendMessageInProgress: false,
+      onSendMessage: noop,
+      onResetForm: noop,
       intl: fakeIntl,
-      sendVerificationEmailInProgress: false,
-      onResendVerificationEmail: noop,
     };
 
     const tree = renderShallow(<SalePageComponent {...props} />);

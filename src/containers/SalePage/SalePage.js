@@ -4,11 +4,12 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { reset as resetForm } from 'redux-form';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureUser, ensureTransaction } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { acceptSale, declineSale, loadData } from './SalePage.duck';
+import { acceptSale, declineSale, loadData, sendMessage } from './SalePage.duck';
 import {
   NamedRedirect,
   SaleDetailsPanel,
@@ -39,7 +40,23 @@ export const SalePageComponent = props => {
     params,
     scrollingDisabled,
     transaction,
+    fetchMessagesError,
+    messages,
+    sendMessageInProgress,
+    sendMessageError,
+    onSendMessage,
+    onResetForm,
   } = props;
+
+  console.log({
+    fetchMessagesError,
+    messages,
+    sendMessageInProgress,
+    sendMessageError,
+    onSendMessage,
+    onResetForm,
+  });
+
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const listingTitle = currentListing.attributes.title;
@@ -121,24 +138,35 @@ SalePageComponent.defaultProps = {
   acceptSaleError: null,
   declineSaleError: null,
   transaction: null,
+  fetchMessagesError: null,
+  sendMessageError: null,
 };
 
-const { bool, func, oneOf, shape, string } = PropTypes;
+const { bool, func, oneOf, shape, string, arrayOf } = PropTypes;
 
 SalePageComponent.propTypes = {
+  params: shape({ id: string }).isRequired,
+  tab: oneOf(['details', 'discussion']).isRequired,
+
   currentUser: propTypes.currentUser,
   fetchSaleError: propTypes.error,
   acceptSaleError: propTypes.error,
   declineSaleError: propTypes.error,
   acceptInProgress: bool.isRequired,
   declineInProgress: bool.isRequired,
-  intl: intlShape.isRequired,
   onAcceptSale: func.isRequired,
   onDeclineSale: func.isRequired,
-  params: shape({ id: string }).isRequired,
   scrollingDisabled: bool.isRequired,
-  tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
+  fetchMessagesError: propTypes.error,
+  messages: arrayOf(propTypes.message).isRequired,
+  sendMessageInProgress: bool.isRequired,
+  sendMessageError: propTypes.error,
+  onSendMessage: func.isRequired,
+  onResetForm: func.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -149,6 +177,10 @@ const mapStateToProps = state => {
     acceptInProgress,
     declineInProgress,
     transactionRef,
+    fetchMessagesError,
+    messages,
+    sendMessageInProgress,
+    sendMessageError,
   } = state.SalePage;
   const { currentUser } = state.user;
 
@@ -164,6 +196,10 @@ const mapStateToProps = state => {
     declineInProgress,
     scrollingDisabled: isScrollingDisabled(state),
     transaction,
+    fetchMessagesError,
+    messages,
+    sendMessageInProgress,
+    sendMessageError,
   };
 };
 
@@ -171,6 +207,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onAcceptSale: transactionId => dispatch(acceptSale(transactionId)),
     onDeclineSale: transactionId => dispatch(declineSale(transactionId)),
+    onSendMessage: (saleId, message) => dispatch(sendMessage(saleId, message)),
+    onResetForm: formName => dispatch(resetForm(formName)),
   };
 };
 
