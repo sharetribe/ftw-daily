@@ -279,3 +279,11 @@
     box-shadow: none;
   }
 }
+
+.sendMessageFormFocusedInMobileSafari {
+  position: absolute;
+
+  @media (--viewportLarge) {
+    position: relative;
+  }
+}

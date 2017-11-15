@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
 import { ensureListing, ensureTransaction, ensureUser, userDisplayName } from '../../util/data';
+import { isMobileSafari } from '../../util/userAgent';
 import {
   BookingBreakdown,
   NamedLink,
@@ -81,7 +82,7 @@ const orderMessage = (transaction, providerName) => {
 export class OrderDetailsPanelComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { setInitialEmptyMessage: false };
+    this.state = { sendMessageFormFocused: false };
   }
   render() {
     const {
@@ -190,6 +191,17 @@ export class OrderDetailsPanelComponent extends Component {
         });
       }
     };
+    const isMobSaf = isMobileSafari();
+    const handleSendMessageFormFocus = () => {
+      this.setState({ sendMessageFormFocused: true });
+      if (isMobSaf) {
+        // Scroll to bottom
+        window.scroll({ top: document.body.scrollHeight, left: 0, behavior: 'smooth' });
+      }
+    };
+    const handleSendMessageFormBlur = () => {
+      this.setState({ sendMessageFormFocused: false });
+    };
     const handleMessageSubmit = values => {
       return onSendMessage(currentTransaction.id, values.message)
         .then(messageId => {
@@ -200,6 +212,9 @@ export class OrderDetailsPanelComponent extends Component {
           console.error(e);
         });
     };
+    const sendMessageFormClasses = classNames(css.sendMessageForm, {
+      [css.sendMessageFormFocusedInMobileSafari]: isMobSaf && this.state.sendMessageFormFocused,
+    });
 
     const classes = classNames(rootClassName || css.root, className);
 
@@ -236,10 +251,12 @@ export class OrderDetailsPanelComponent extends Component {
             {messagesContainer}
             <SendMessageForm
               form={sendMessageFormName}
-              rootClassName={css.sendMessageForm}
+              rootClassName={sendMessageFormClasses}
               messagePlaceholder={sendMessagePlaceholder}
               inProgress={sendMessageInProgress}
               sendMessageError={sendMessageError}
+              onFocus={handleSendMessageFormFocus}
+              onBlur={handleSendMessageFormBlur}
               onSubmit={handleMessageSubmit}
             />
           </div>
