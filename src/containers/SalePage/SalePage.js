@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { reset as resetForm } from 'redux-form';
 import * as propTypes from '../../util/propTypes';
-import { ensureListing, ensureUser, ensureTransaction } from '../../util/data';
+import { ensureListing, ensureTransaction } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { acceptSale, declineSale, loadData, sendMessage } from './SalePage.duck';
@@ -79,18 +79,11 @@ export const SalePageComponent = props => {
     </p>
   );
 
-  // We need to know if the customer is in pending state -
-  // to show action buttons bar and reserve space below footer.
-  // (accept reject buttons are position: fixed on mobile layout)
-  const currentCustomer = ensureUser(currentTransaction.customer);
-  const customerLoaded = !!currentCustomer.id;
-  const isCustomerBanned = customerLoaded || currentCustomer.attributes.banned;
-  const isPending = propTypes.txIsPreauthorized(currentTransaction) && !isCustomerBanned;
-
   const panel =
     isDataAvailable && currentTransaction.id ? (
       <SaleDetailsPanel
         className={detailsClassName}
+        currentUser={currentUser}
         transaction={currentTransaction}
         onAcceptSale={onAcceptSale}
         onDeclineSale={onDeclineSale}
@@ -121,7 +114,7 @@ export const SalePageComponent = props => {
         <LayoutWrapperMain>
           <div className={css.root}>{panel}</div>
         </LayoutWrapperMain>
-        <LayoutWrapperFooter className={classNames({ [css.footerWrapper]: isPending })}>
+        <LayoutWrapperFooter className={css.footer}>
           <Footer />
         </LayoutWrapperFooter>
       </LayoutSingleColumn>

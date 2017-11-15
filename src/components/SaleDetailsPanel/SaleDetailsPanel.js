@@ -13,6 +13,7 @@ import {
   ResponsiveImage,
   PrimaryButton,
   SecondaryButton,
+  Messages,
 } from '../../components';
 
 import css from './SaleDetailsPanel.css';
@@ -84,6 +85,7 @@ export const SaleDetailsPanelComponent = props => {
   const {
     rootClassName,
     className,
+    currentUser,
     transaction,
     onAcceptSale,
     onDeclineSale,
@@ -141,10 +143,25 @@ export const SaleDetailsPanelComponent = props => {
         id: 'SaleDetailsPanel.customerBannedStatus',
       })
     : saleInfoText(currentTransaction, customerDisplayName);
+  const showInfoMessage = !!infoText;
 
   const listingTitle = currentListing.attributes.title;
   const firstImage =
     currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
+
+  const messagesContainerClasses = classNames(css.messagesContainer, {
+    [css.messagesContainerWithInfoAbove]: showInfoMessage,
+  });
+  const showMessages = messages.length > 0 || fetchMessagesError;
+  // TODO: handle fetchMessagesError
+  const messagesContainer = showMessages ? (
+    <div className={messagesContainerClasses}>
+      <h3 className={css.messagesHeading}>
+        <FormattedMessage id="SaleDetailsPanel.messagesHeading" />
+      </h3>
+      <Messages className={css.messages} messages={messages} currentUser={currentUser} />
+    </div>
+  ) : null;
 
   const canShowButtons = propTypes.txIsPreauthorized(currentTransaction) && !isCustomerBanned;
   const buttonsDisabled = acceptInProgress || declineInProgress;
@@ -190,24 +207,24 @@ export const SaleDetailsPanelComponent = props => {
   return (
     <div className={classes}>
       <div className={css.container}>
-        <div className={css.imageWrapperMobile}>
-          <div className={css.aspectWrapper}>
-            <ResponsiveImage
-              rootClassName={css.rootForImage}
-              alt={listingTitle}
-              image={firstImage}
-              nameSet={[
-                { name: 'landscape-crop', size: '400w' },
-                { name: 'landscape-crop2x', size: '800w' },
-              ]}
-              sizes="100vw"
-            />
+        <div className={css.saleInfo}>
+          <div className={css.imageWrapperMobile}>
+            <div className={css.aspectWrapper}>
+              <ResponsiveImage
+                rootClassName={css.rootForImage}
+                alt={listingTitle}
+                image={firstImage}
+                nameSet={[
+                  { name: 'landscape-crop', size: '400w' },
+                  { name: 'landscape-crop2x', size: '800w' },
+                ]}
+                sizes="100vw"
+              />
+            </div>
           </div>
-        </div>
-        <div className={css.avatarWrapper}>
-          <AvatarMedium user={currentCustomer} className={css.avatarMobile} />
-        </div>
-        <div className={css.info}>
+          <div className={css.avatarWrapper}>
+            <AvatarMedium user={currentCustomer} className={css.avatarMobile} />
+          </div>
           <div className={css.avatarWrapper}>
             <AvatarLarge user={currentCustomer} className={css.avatarDesktop} />
           </div>
@@ -217,13 +234,14 @@ export const SaleDetailsPanelComponent = props => {
             {acceptErrorMessage}
             {declineErrorMessage}
           </div>
+          <div className={css.breakdownContainerMobile}>
+            <h3 className={css.breakdownTitleMobile}>
+              <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
+            </h3>
+            {bookingInfo}
+          </div>
+          {messagesContainer}
           {actionButtons}
-        </div>
-        <div className={css.breakdownContainerMobile}>
-          <h3 className={css.breakdownTitleMobile}>
-            <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
-          </h3>
-          {bookingInfo}
         </div>
         <div className={css.breakdownContainerDesktop}>
           <div className={css.breakdownImageWrapper}>
@@ -253,6 +271,7 @@ export const SaleDetailsPanelComponent = props => {
 SaleDetailsPanelComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  currentUser: null,
   acceptSaleError: null,
   declineSaleError: null,
   fetchMessagesError: null,
@@ -265,6 +284,7 @@ SaleDetailsPanelComponent.propTypes = {
   rootClassName: string,
   className: string,
 
+  currentUser: propTypes.currentUser,
   transaction: propTypes.transaction.isRequired,
   onAcceptSale: func.isRequired,
   onDeclineSale: func.isRequired,

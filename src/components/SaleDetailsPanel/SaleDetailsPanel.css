@@ -1,6 +1,7 @@
 @import '../../marketplace.css';
 
 .root {
+  position: relative;
 }
 
 .container {
@@ -12,6 +13,16 @@
     max-width: 1156px; /* 1060 + (paddingLeft + paddingRight) */
     margin: 0 auto 60px;
     padding: 0 48px;
+  }
+}
+
+.saleInfo {
+  margin-bottom: 210px;
+
+  @media (--viewportLarge) {
+    max-width: 538px;
+    margin-right: 108px;
+    margin-bottom: 0;
   }
 }
 
@@ -57,13 +68,6 @@
   left: 0;
   right: 0;
   width: 100%;
-}
-
-.info {
-  @media (--viewportLarge) {
-    margin-right: 132px;
-    max-width: 519px;
-  }
 }
 
 .title {
@@ -139,7 +143,7 @@
 }
 
 .breakdownContainerMobile {
-  margin: 0 24px 122px 24px;
+  margin: 0 24px 0 24px;
 
   @media (--viewportLarge) {
     display: none;
@@ -183,6 +187,30 @@
 
 .breakdownDesktop {
   margin: 48px;
+}
+
+.messagesContainer {
+  margin: 0 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}
+
+.messagesContainerWithInfoAbove {
+}
+
+.messagesHeading {
+  color: var(--matterColorAnti);
+  margin: 48px 0 0 0;
+
+  @media (--viewportMedium) {
+    margin: 48px 0 0 0;
+  }
+}
+
+.messages {
+  margin-top: 24px;
 }
 
 .actionButtons {

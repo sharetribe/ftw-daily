@@ -431,6 +431,7 @@
   "SaleDetailsPanel.listingDeclinedTitle": "{customerName} requested to book {listingLink}",
   "SaleDetailsPanel.listingDeliveredTitle": "{customerName} booked {listingLink}",
   "SaleDetailsPanel.listingRequestedTitle": "{customerName} has requested to book {listingLink}",
+  "SaleDetailsPanel.messagesHeading": "Activity",
   "SaleDetailsPanel.saleAcceptedStatus": "You accepted the request on {formattedDate}.",
   "SaleDetailsPanel.saleAutoDeclinedStatus": "You did not react to the request on time. The request expired on {formattedDate}.",
   "SaleDetailsPanel.saleCanceledStatus": "The request was cancelled on {formattedDate}.",
