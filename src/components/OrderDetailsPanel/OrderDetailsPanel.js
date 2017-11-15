@@ -155,7 +155,11 @@ export class OrderDetailsPanelComponent extends Component {
     const messagesContainerClasses = classNames(css.messagesContainer, {
       [css.messagesContainerWithInfoAbove]: showInfoMessage,
     });
-    const showMessages = messages.length > 0 || initialMessageFailed || fetchMessagesError;
+    const txTransitions = currentTransaction.attributes.transitions
+      ? currentTransaction.attributes.transitions
+      : [];
+    const showMessages =
+      messages.length > 0 || txTransitions.length > 0 || initialMessageFailed || fetchMessagesError;
     const messagesContainer = showMessages ? (
       <div className={messagesContainerClasses}>
         <h3 className={css.messagesHeading}>
@@ -171,7 +175,12 @@ export class OrderDetailsPanelComponent extends Component {
             <FormattedMessage id="OrderDetailsPanel.messageLoadingFailed" />
           </p>
         ) : null}
-        <Messages className={css.messages} messages={messages} currentUser={currentUser} />
+        <Messages
+          className={css.messages}
+          messages={messages}
+          transaction={currentTransaction}
+          currentUser={currentUser}
+        />
       </div>
     ) : null;
 
