@@ -48,15 +48,6 @@ export const SalePageComponent = props => {
     onResetForm,
   } = props;
 
-  console.log({
-    fetchMessagesError,
-    messages,
-    sendMessageInProgress,
-    sendMessageError,
-    onSendMessage,
-    onResetForm,
-  });
-
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const listingTitle = currentListing.attributes.title;
@@ -107,6 +98,12 @@ export const SalePageComponent = props => {
         declineInProgress={declineInProgress}
         acceptSaleError={acceptSaleError}
         declineSaleError={declineSaleError}
+        messages={messages}
+        fetchMessagesError={fetchMessagesError}
+        sendMessageInProgress={sendMessageInProgress}
+        sendMessageError={sendMessageError}
+        onSendMessage={onSendMessage}
+        onResetForm={onResetForm}
       />
     ) : (
       loadingOrFailedFetching

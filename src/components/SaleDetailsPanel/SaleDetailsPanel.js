@@ -117,8 +117,24 @@ export const SaleDetailsPanelComponent = props => {
     declineInProgress,
     acceptSaleError,
     declineSaleError,
+    fetchMessagesError,
+    messages,
+    sendMessageInProgress,
+    sendMessageError,
+    onSendMessage,
+    onResetForm,
     intl,
   } = props;
+
+  console.log({
+    fetchMessagesError,
+    messages,
+    sendMessageInProgress,
+    sendMessageError,
+    onSendMessage,
+    onResetForm,
+  });
+
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const currentCustomer = ensureUser(currentTransaction.customer);
@@ -265,13 +281,16 @@ SaleDetailsPanelComponent.defaultProps = {
   className: null,
   acceptSaleError: null,
   declineSaleError: null,
+  fetchMessagesError: null,
+  sendMessageError: null,
 };
 
-const { bool, func, string } = PropTypes;
+const { bool, func, string, arrayOf } = PropTypes;
 
 SaleDetailsPanelComponent.propTypes = {
   rootClassName: string,
   className: string,
+
   transaction: propTypes.transaction.isRequired,
   onAcceptSale: func.isRequired,
   onDeclineSale: func.isRequired,
@@ -279,6 +298,13 @@ SaleDetailsPanelComponent.propTypes = {
   declineInProgress: bool.isRequired,
   acceptSaleError: propTypes.error,
   declineSaleError: propTypes.error,
+
+  fetchMessagesError: propTypes.error,
+  messages: arrayOf(propTypes.message).isRequired,
+  sendMessageInProgress: bool.isRequired,
+  sendMessageError: propTypes.error,
+  onSendMessage: func.isRequired,
+  onResetForm: func.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
