@@ -52,11 +52,21 @@ export const WithTransitions = {
     messages: [
       createMessage(
         'msg1',
-        { at: new Date(Date.UTC(2017, 10, 9, 8, 12)) },
+        { at: new Date(Date.UTC(2017, 10, 9, 8, 11)) },
         { sender: createUser('user1') }
       ),
       createMessage(
         'msg2',
+        { at: new Date(Date.UTC(2017, 10, 9, 8, 14)) },
+        { sender: createUser('user1') }
+      ),
+      createMessage(
+        'msg3',
+        { at: new Date(Date.UTC(2017, 10, 9, 8, 17)) },
+        { sender: createUser('user2') }
+      ),
+      createMessage(
+        'msg4',
         { at: new Date(Date.UTC(2017, 10, 12, 13, 20)) },
         { sender: createUser('user2') }
       ),
@@ -72,9 +82,19 @@ export const WithTransitions = {
           transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
         }),
         createTxTransition({
-          at: new Date(Date.UTC(2017, 10, 9, 10, 33)),
+          at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
           by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
           transition: propTypes.TX_TRANSITION_ACCEPT,
+        }),
+        createTxTransition({
+          at: new Date(Date.UTC(2017, 10, 9, 10, 33)),
+          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
+          transition: propTypes.TX_TRANSITION_DECLINE,
+        }),
+        createTxTransition({
+          at: new Date(Date.UTC(2017, 10, 9, 10, 34)),
+          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
+          transition: propTypes.TX_TRANSITION_MARK_DELIVERED,
         }),
       ],
     }),

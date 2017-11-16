@@ -192,9 +192,8 @@ export const MessagesComponent = props => {
   };
 
   const transitionListItem = transition => {
-    const classes = classNames(css.messageItem, css.transition);
     return (
-      <li key={transition.transition} className={classes}>
+      <li key={transition.transition} className={css.transitionItem}>
         {transitionComponent(transition)}
       </li>
     );

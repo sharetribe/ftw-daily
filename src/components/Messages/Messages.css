@@ -82,13 +82,45 @@
   text-align: right;
 }
 
+.transitionItem {
+  margin-bottom: 34px;
+
+  /* Clearfix */
+  @apply --clearfix;
+
+  @media (--viewportMedium) {
+    margin-bottom: 40px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
 .transition {
   display: flex;
   flex-direction: row;
+  margin: -1px 0 1px 0;
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
 }
 
 .transitionContent {
   margin: 0;
+
+  /* Font */
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  font-weight: var(--fontWeightRegular);
+  font-size: 16px;
+  line-height: 20px;
+
+  @media (--viewportMedium) {
+    font-size: 20px;
+    line-height: 32px;
+    margin: 1px 0 -1px 0;
+  }
 }
 .transitionDate {
   @apply --marketplaceMessageDateFontStyles;
