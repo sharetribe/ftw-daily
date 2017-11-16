@@ -220,7 +220,7 @@ export const fetchMessages = txId => (dispatch, getState, sdk) => {
   dispatch(fetchMessagesRequest());
 
   return sdk.messages
-    .query({ transaction_id: txId })
+    .query({ transaction_id: txId, include: ['sender', 'sender.profileImage'] })
     .then(response => {
       const entities = updatedEntities({}, response.data);
       const messageIds = response.data.data.map(d => d.id);
