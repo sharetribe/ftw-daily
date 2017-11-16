@@ -33,7 +33,8 @@ const log = require('./log');
 const { sitemapStructure } = require('./sitemap');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
-const dev = process.env.NODE_ENV !== 'production';
+const env = process.env.REACT_APP_ENV;
+const dev = env !== 'staging' && env !== 'production';
 const PORT = process.env.PORT || 4000;
 const CLIENT_ID =
   process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID || '08ec69f6-d37e-414d-83eb-324e94afddf0';
