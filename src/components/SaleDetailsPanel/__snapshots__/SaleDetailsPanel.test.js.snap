@@ -89,7 +89,6 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
           }
         />
       </h1>
-      <p />
       <div />
       <div>
         <h3>
@@ -529,7 +528,6 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
           }
         />
       </h1>
-      <p />
       <div />
       <div>
         <h3>
@@ -1441,7 +1439,6 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
           }
         />
       </h1>
-      <p />
       <div />
       <div>
         <h3>
@@ -1881,7 +1878,6 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
           }
         />
       </h1>
-      <p />
       <div />
       <div>
         <h3>

@@ -22,7 +22,12 @@ const breakdown = transaction => {
   const loaded = transaction && transaction.id && transaction.booking && transaction.booking.id;
 
   return loaded ? (
-    <BookingBreakdown userRole="provider" transaction={transaction} booking={transaction.booking} />
+    <BookingBreakdown
+      className={css.breakdown}
+      userRole="provider"
+      transaction={transaction}
+      booking={transaction.booking}
+    />
   ) : null;
 };
 
@@ -143,14 +148,14 @@ export const SaleDetailsPanelComponent = props => {
         id: 'SaleDetailsPanel.customerBannedStatus',
       })
     : saleInfoText(currentTransaction, customerDisplayName);
-  const showInfoMessage = !!infoText;
+  const showInfoText = !!infoText;
 
   const listingTitle = currentListing.attributes.title;
   const firstImage =
     currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
   const messagesContainerClasses = classNames(css.messagesContainer, {
-    [css.messagesContainerWithInfoAbove]: showInfoMessage,
+    [css.messagesContainerWithInfoAbove]: showInfoText,
   });
   const showMessages = messages.length > 0 || fetchMessagesError;
   // TODO: handle fetchMessagesError
@@ -229,7 +234,7 @@ export const SaleDetailsPanelComponent = props => {
             <AvatarLarge user={currentCustomer} className={css.avatarDesktop} />
           </div>
           <h1 className={css.title}>{title}</h1>
-          <p className={css.infoText}>{infoText}</p>
+          {showInfoText ? <p className={css.infoText}>{infoText}</p> : null}
           <div className={css.errorMobile}>
             {acceptErrorMessage}
             {declineErrorMessage}
