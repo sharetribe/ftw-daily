@@ -3,6 +3,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import createReducer from './reducers';
 import * as analytics from './analytics/analytics';
+import config from './config';
 
 /**
  * Create a new store with the given initial state. Adds Redux
@@ -13,9 +14,7 @@ export default function configureStore(initialState = {}, sdk = null, analyticsH
 
   // Enable Redux Devtools in client side dev mode.
   const composeEnhancers =
-    process.env.NODE_ENV !== 'production' &&
-    typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    config.dev && typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       : compose;
 

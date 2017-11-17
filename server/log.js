@@ -6,7 +6,7 @@
 
 const Raven = require('raven');
 
-const ENV = process.env.NODE_ENV;
+const ENV = process.env.REACT_APP_ENV;
 const SENTRY_DSN = process.env.SERVER_SENTRY_DSN;
 
 /**

@@ -1,5 +1,5 @@
-const env = process.env.NODE_ENV;
-const dev = env !== 'production';
+const env = process.env.REACT_APP_ENV === undefined ? 'production' : process.env.REACT_APP_ENV;
+const dev = process.env.REACT_APP_ENV === 'development';
 
 // To pass environment variables to the client app in the build
 // script, react-scripts (and the sharetribe-scripts fork of
