@@ -8,13 +8,13 @@
 }
 
 .messageItem {
-  margin-bottom: 35px;
+  margin-bottom: 38px;
 
   /* Clearfix */
   @apply --clearfix;
 
   @media (--viewportMedium) {
-    margin-bottom: 40px;
+    margin-bottom: 41px;
   }
 
   &:last-of-type {
@@ -41,7 +41,11 @@
 
 .avatar {
   flex-shrink: 0;
-  margin: 9px 12px 0 0;
+  margin: 6px 12px 0 0;
+
+  @media (--viewportMedium) {
+    margin: 9px 12px 0 0;
+  }
 }
 
 .messageContent,
@@ -49,11 +53,12 @@
   @apply --marketplaceMessageFontStyles;
 
   margin: 0;
-  padding: 15px 14px 11px 14px;
+  padding: 12px 14px 11px 14px;
   border-radius: 8px;
   box-shadow: var(--boxShadow);
 
   @media (--viewportMedium) {
+    padding: 14px 14px 11px 14px;
     margin: 0;
   }
 }
@@ -80,4 +85,48 @@
 
 .ownMessageDate {
   text-align: right;
+}
+
+.transitionItem {
+  margin-bottom: 36px;
+
+  /* Clearfix */
+  @apply --clearfix;
+
+  @media (--viewportMedium) {
+    margin-bottom: 40px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.transition {
+  display: flex;
+  flex-direction: row;
+  padding: 3px 0 2px 0;
+
+  @media (--viewportMedium) {
+    padding: 0;
+  }
+}
+
+.transitionContent {
+  @apply --marketplaceTxTransitionFontStyles;
+  margin: 0;
+}
+
+.transitionDate {
+  @apply --marketplaceMessageDateFontStyles;
+  color: var(--matterColorAnti);
+  margin: 7px 0 0 0;
+
+  @media (--viewportMedium) {
+    margin: -1px 0 1px 0;
+  }
+}
+
+.bullet {
+  margin-right: 6px;
 }

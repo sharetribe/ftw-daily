@@ -172,6 +172,19 @@ export const TX_TRANSITIONS = [
   TX_TRANSITION_MARK_DELIVERED,
 ];
 
+// Roles of actors that perform transaction transitions
+export const TX_TRANSITION_ACTOR_CUSTOMER = 'customer';
+export const TX_TRANSITION_ACTOR_PROVIDER = 'provider';
+export const TX_TRANSITION_ACTOR_SYSTEM = 'system';
+export const TX_TRANSITION_ACTOR_OPERATOR = 'operator';
+
+export const TX_TRANSITION_ACTORS = [
+  TX_TRANSITION_ACTOR_CUSTOMER,
+  TX_TRANSITION_ACTOR_PROVIDER,
+  TX_TRANSITION_ACTOR_SYSTEM,
+  TX_TRANSITION_ACTOR_OPERATOR,
+];
+
 const txLastTransition = tx => ensureTransaction(tx).attributes.lastTransition;
 
 export const txIsPreauthorized = tx => txLastTransition(tx) === TX_TRANSITION_PREAUTHORIZE;
@@ -187,6 +200,12 @@ export const txIsDeclinedOrAutodeclined = tx => txIsDeclined(tx) || txIsAutodecl
 export const txIsCanceled = tx => txLastTransition(tx) === TX_TRANSITION_CANCEL;
 
 export const txIsDelivered = tx => txLastTransition(tx) === TX_TRANSITION_MARK_DELIVERED;
+
+export const txTransition = shape({
+  at: instanceOf(Date).isRequired,
+  by: oneOf(TX_TRANSITION_ACTORS).isRequired,
+  transition: oneOf(TX_TRANSITIONS).isRequired,
+});
 
 // Denormalised transaction object
 export const transaction = shape({
@@ -207,6 +226,7 @@ export const transaction = shape({
         reversal: bool.isRequired,
       })
     ).isRequired,
+    transitions: arrayOf(txTransition).isRequired,
   }),
   booking,
   listing,

@@ -231,6 +231,18 @@
     }
   }
 
+  --marketplaceTxTransitionFontStyles {
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-weight: var(--fontWeightMedium);
+    font-size: 16px;
+    line-height: 18px;
+
+    @media (--viewportMedium) {
+      font-size: 20px;
+      line-height: 32px;
+    }
+  }
+
   /* ================ Tabbed navigation font styles ================ */
 
   --marketplaceTabNavFontStyles {

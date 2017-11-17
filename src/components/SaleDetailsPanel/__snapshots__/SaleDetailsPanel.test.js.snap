@@ -151,6 +151,18 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
                   "amount": 15500,
                   "currency": "USD",
                 },
+                "transitions": Array [
+                  Object {
+                    "at": 2017-05-01T00:00:00.000Z,
+                    "by": "customer",
+                    "transition": "transition/preauthorize",
+                  },
+                  Object {
+                    "at": 2017-06-01T00:00:00.000Z,
+                    "by": "provider",
+                    "transition": "transition/accept",
+                  },
+                ],
               },
               "booking": Object {
                 "attributes": Object {
@@ -379,6 +391,18 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
                   "amount": 15500,
                   "currency": "USD",
                 },
+                "transitions": Array [
+                  Object {
+                    "at": 2017-05-01T00:00:00.000Z,
+                    "by": "customer",
+                    "transition": "transition/preauthorize",
+                  },
+                  Object {
+                    "at": 2017-06-01T00:00:00.000Z,
+                    "by": "provider",
+                    "transition": "transition/accept",
+                  },
+                ],
               },
               "booking": Object {
                 "attributes": Object {
@@ -590,6 +614,18 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
                   "amount": 15500,
                   "currency": "USD",
                 },
+                "transitions": Array [
+                  Object {
+                    "at": 2017-05-01T00:00:00.000Z,
+                    "by": "customer",
+                    "transition": "transition/preauthorize",
+                  },
+                  Object {
+                    "at": 2017-06-01T00:00:00.000Z,
+                    "by": "provider",
+                    "transition": "transition/accept",
+                  },
+                ],
               },
               "booking": Object {
                 "attributes": Object {
@@ -818,6 +854,18 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
                   "amount": 15500,
                   "currency": "USD",
                 },
+                "transitions": Array [
+                  Object {
+                    "at": 2017-05-01T00:00:00.000Z,
+                    "by": "customer",
+                    "transition": "transition/preauthorize",
+                  },
+                  Object {
+                    "at": 2017-06-01T00:00:00.000Z,
+                    "by": "provider",
+                    "transition": "transition/accept",
+                  },
+                ],
               },
               "booking": Object {
                 "attributes": Object {
@@ -948,7 +996,7 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
       </div>
       <h1>
         <FormattedMessage
-          id="SaleDetailsPanel.listingRequestedTitle"
+          id="SaleDetailsPanel.listingAcceptedTitle"
           values={
             Object {
               "customerName": "customer1 display name",
@@ -967,16 +1015,6 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
           }
         />
       </h1>
-      <p>
-        <FormattedMessage
-          id="SaleDetailsPanel.saleRequestedStatus"
-          values={
-            Object {
-              "customerName": "customer1 display name",
-            }
-          }
-        />
-      </p>
       <div />
       <div>
         <h3>
@@ -1002,7 +1040,7 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/preauthorize",
+                "lastTransition": "transition/accept",
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -1039,6 +1077,18 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
                   "amount": 15500,
                   "currency": "USD",
                 },
+                "transitions": Array [
+                  Object {
+                    "at": 2017-05-01T00:00:00.000Z,
+                    "by": "customer",
+                    "transition": "transition/preauthorize",
+                  },
+                  Object {
+                    "at": 2017-06-01T00:00:00.000Z,
+                    "by": "provider",
+                    "transition": "transition/accept",
+                  },
+                ],
               },
               "booking": Object {
                 "attributes": Object {
@@ -1095,7 +1145,7 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
         />
       </div>
       <div
-        className="undefined"
+        className=""
       >
         <h3>
           <FormattedMessage
@@ -1180,29 +1230,6 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
           }
         />
       </div>
-      <div>
-        <div />
-        <SecondaryButton
-          disabled={false}
-          inProgress={false}
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            id="SalePage.declineButton"
-            values={Object {}}
-          />
-        </SecondaryButton>
-        <PrimaryButton
-          disabled={false}
-          inProgress={false}
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            id="SalePage.acceptButton"
-            values={Object {}}
-          />
-        </PrimaryButton>
-      </div>
     </div>
     <div>
       <div>
@@ -1253,7 +1280,7 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/preauthorize",
+                "lastTransition": "transition/accept",
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -1290,6 +1317,18 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
                   "amount": 15500,
                   "currency": "USD",
                 },
+                "transitions": Array [
+                  Object {
+                    "at": 2017-05-01T00:00:00.000Z,
+                    "by": "customer",
+                    "transition": "transition/preauthorize",
+                  },
+                  Object {
+                    "at": 2017-06-01T00:00:00.000Z,
+                    "by": "provider",
+                    "transition": "transition/accept",
+                  },
+                ],
               },
               "booking": Object {
                 "attributes": Object {
@@ -1501,6 +1540,18 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
                   "amount": 15500,
                   "currency": "USD",
                 },
+                "transitions": Array [
+                  Object {
+                    "at": 2017-05-01T00:00:00.000Z,
+                    "by": "customer",
+                    "transition": "transition/preauthorize",
+                  },
+                  Object {
+                    "at": 2017-06-01T00:00:00.000Z,
+                    "by": "provider",
+                    "transition": "transition/accept",
+                  },
+                ],
               },
               "booking": Object {
                 "attributes": Object {
@@ -1729,6 +1780,18 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
                   "amount": 15500,
                   "currency": "USD",
                 },
+                "transitions": Array [
+                  Object {
+                    "at": 2017-05-01T00:00:00.000Z,
+                    "by": "customer",
+                    "transition": "transition/preauthorize",
+                  },
+                  Object {
+                    "at": 2017-06-01T00:00:00.000Z,
+                    "by": "provider",
+                    "transition": "transition/accept",
+                  },
+                ],
               },
               "booking": Object {
                 "attributes": Object {
@@ -1940,6 +2003,18 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
                   "amount": 15500,
                   "currency": "USD",
                 },
+                "transitions": Array [
+                  Object {
+                    "at": 2017-05-01T00:00:00.000Z,
+                    "by": "customer",
+                    "transition": "transition/preauthorize",
+                  },
+                  Object {
+                    "at": 2017-06-01T00:00:00.000Z,
+                    "by": "provider",
+                    "transition": "transition/accept",
+                  },
+                ],
               },
               "booking": Object {
                 "attributes": Object {
@@ -2168,6 +2243,18 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
                   "amount": 15500,
                   "currency": "USD",
                 },
+                "transitions": Array [
+                  Object {
+                    "at": 2017-05-01T00:00:00.000Z,
+                    "by": "customer",
+                    "transition": "transition/preauthorize",
+                  },
+                  Object {
+                    "at": 2017-06-01T00:00:00.000Z,
+                    "by": "provider",
+                    "transition": "transition/accept",
+                  },
+                ],
               },
               "booking": Object {
                 "attributes": Object {
@@ -2389,6 +2476,18 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
                   "amount": 15500,
                   "currency": "USD",
                 },
+                "transitions": Array [
+                  Object {
+                    "at": 2017-05-01T00:00:00.000Z,
+                    "by": "customer",
+                    "transition": "transition/preauthorize",
+                  },
+                  Object {
+                    "at": 2017-06-01T00:00:00.000Z,
+                    "by": "provider",
+                    "transition": "transition/accept",
+                  },
+                ],
               },
               "booking": Object {
                 "attributes": Object {
@@ -2640,6 +2739,18 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
                   "amount": 15500,
                   "currency": "USD",
                 },
+                "transitions": Array [
+                  Object {
+                    "at": 2017-05-01T00:00:00.000Z,
+                    "by": "customer",
+                    "transition": "transition/preauthorize",
+                  },
+                  Object {
+                    "at": 2017-06-01T00:00:00.000Z,
+                    "by": "provider",
+                    "transition": "transition/accept",
+                  },
+                ],
               },
               "booking": Object {
                 "attributes": Object {
