@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
@@ -86,192 +86,194 @@ const saleInfoText = (transaction, customerName) => {
   return null;
 };
 
-export const SaleDetailsPanelComponent = props => {
-  const {
-    rootClassName,
-    className,
-    currentUser,
-    transaction,
-    onAcceptSale,
-    onDeclineSale,
-    acceptInProgress,
-    declineInProgress,
-    acceptSaleError,
-    declineSaleError,
-    fetchMessagesError,
-    messages,
-    sendMessageInProgress,
-    sendMessageError,
-    onSendMessage,
-    onResetForm,
-    intl,
-  } = props;
+export class SaleDetailsPanelComponent extends Component {
+  render() {
+    const {
+      rootClassName,
+      className,
+      currentUser,
+      transaction,
+      onAcceptSale,
+      onDeclineSale,
+      acceptInProgress,
+      declineInProgress,
+      acceptSaleError,
+      declineSaleError,
+      fetchMessagesError,
+      messages,
+      sendMessageInProgress,
+      sendMessageError,
+      onSendMessage,
+      onResetForm,
+      intl,
+    } = this.props;
 
-  console.log({
-    fetchMessagesError,
-    messages,
-    sendMessageInProgress,
-    sendMessageError,
-    onSendMessage,
-    onResetForm,
-  });
+    console.log({
+      fetchMessagesError,
+      messages,
+      sendMessageInProgress,
+      sendMessageError,
+      onSendMessage,
+      onResetForm,
+    });
 
-  const currentTransaction = ensureTransaction(transaction);
-  const currentListing = ensureListing(currentTransaction.listing);
-  const currentCustomer = ensureUser(currentTransaction.customer);
-  const customerLoaded = !!currentCustomer.id;
-  const isCustomerBanned = customerLoaded && currentCustomer.attributes.banned;
+    const currentTransaction = ensureTransaction(transaction);
+    const currentListing = ensureListing(currentTransaction.listing);
+    const currentCustomer = ensureUser(currentTransaction.customer);
+    const customerLoaded = !!currentCustomer.id;
+    const isCustomerBanned = customerLoaded && currentCustomer.attributes.banned;
 
-  const bannedUserDisplayName = intl.formatMessage({
-    id: 'SaleDetailsPanel.bannedUserDisplayName',
-  });
+    const bannedUserDisplayName = intl.formatMessage({
+      id: 'SaleDetailsPanel.bannedUserDisplayName',
+    });
 
-  const customerDisplayName = userDisplayName(currentCustomer, bannedUserDisplayName);
+    const customerDisplayName = userDisplayName(currentCustomer, bannedUserDisplayName);
 
-  let listingLink = null;
+    let listingLink = null;
 
-  if (currentListing.id && currentListing.attributes.title) {
-    const title = currentListing.attributes.title;
-    const params = { id: currentListing.id.uuid, slug: createSlug(title) };
-    listingLink = (
-      <NamedLink name="ListingPage" params={params}>
-        {title}
-      </NamedLink>
-    );
-  }
+    if (currentListing.id && currentListing.attributes.title) {
+      const title = currentListing.attributes.title;
+      const params = { id: currentListing.id.uuid, slug: createSlug(title) };
+      listingLink = (
+        <NamedLink name="ListingPage" params={params}>
+          {title}
+        </NamedLink>
+      );
+    }
 
-  const bookingInfo = breakdown(currentTransaction);
+    const bookingInfo = breakdown(currentTransaction);
 
-  const title = saleTitle(currentTransaction, listingLink, customerDisplayName);
-  const infoText = isCustomerBanned
-    ? intl.formatMessage({
-        id: 'SaleDetailsPanel.customerBannedStatus',
-      })
-    : saleInfoText(currentTransaction, customerDisplayName);
-  const showInfoText = !!infoText;
+    const title = saleTitle(currentTransaction, listingLink, customerDisplayName);
+    const infoText = isCustomerBanned
+      ? intl.formatMessage({
+          id: 'SaleDetailsPanel.customerBannedStatus',
+        })
+      : saleInfoText(currentTransaction, customerDisplayName);
+    const showInfoText = !!infoText;
 
-  const listingTitle = currentListing.attributes.title;
-  const firstImage =
-    currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
+    const listingTitle = currentListing.attributes.title;
+    const firstImage =
+      currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
-  const messagesContainerClasses = classNames(css.messagesContainer, {
-    [css.messagesContainerWithInfoAbove]: showInfoText,
-  });
-  const showMessages = messages.length > 0 || fetchMessagesError;
-  // TODO: handle fetchMessagesError
-  const messagesContainer = showMessages ? (
-    <div className={messagesContainerClasses}>
-      <h3 className={css.messagesHeading}>
-        <FormattedMessage id="SaleDetailsPanel.messagesHeading" />
-      </h3>
-      <Messages className={css.messages} messages={messages} currentUser={currentUser} />
-    </div>
-  ) : null;
-
-  const canShowButtons = propTypes.txIsPreauthorized(currentTransaction) && !isCustomerBanned;
-  const buttonsDisabled = acceptInProgress || declineInProgress;
-
-  const acceptErrorMessage = acceptSaleError ? (
-    <p className={css.error}>
-      <FormattedMessage id="SaleDetailsPanel.acceptSaleFailed" />
-    </p>
-  ) : null;
-  const declineErrorMessage = declineSaleError ? (
-    <p className={css.error}>
-      <FormattedMessage id="SaleDetailsPanel.declineSaleFailed" />
-    </p>
-  ) : null;
-
-  const actionButtons = canShowButtons ? (
-    <div className={css.actionButtons}>
-      <div className={css.errorDesktop}>
-        {acceptErrorMessage}
-        {declineErrorMessage}
+    const messagesContainerClasses = classNames(css.messagesContainer, {
+      [css.messagesContainerWithInfoAbove]: showInfoText,
+    });
+    const showMessages = messages.length > 0 || fetchMessagesError;
+    // TODO: handle fetchMessagesError
+    const messagesContainer = showMessages ? (
+      <div className={messagesContainerClasses}>
+        <h3 className={css.messagesHeading}>
+          <FormattedMessage id="SaleDetailsPanel.messagesHeading" />
+        </h3>
+        <Messages className={css.messages} messages={messages} currentUser={currentUser} />
       </div>
-      <SecondaryButton
-        className={css.declineButton}
-        inProgress={declineInProgress}
-        disabled={buttonsDisabled}
-        onClick={() => onDeclineSale(currentTransaction.id)}
-      >
-        <FormattedMessage id="SalePage.declineButton" />
-      </SecondaryButton>
-      <PrimaryButton
-        className={css.acceptButton}
-        inProgress={acceptInProgress}
-        disabled={buttonsDisabled}
-        onClick={() => onAcceptSale(currentTransaction.id)}
-      >
-        <FormattedMessage id="SalePage.acceptButton" />
-      </PrimaryButton>
-    </div>
-  ) : null;
+    ) : null;
 
-  const classes = classNames(rootClassName || css.root, className);
+    const canShowButtons = propTypes.txIsPreauthorized(currentTransaction) && !isCustomerBanned;
+    const buttonsDisabled = acceptInProgress || declineInProgress;
 
-  return (
-    <div className={classes}>
-      <div className={css.container}>
-        <div className={css.saleInfo}>
-          <div className={css.imageWrapperMobile}>
-            <div className={css.aspectWrapper}>
-              <ResponsiveImage
-                rootClassName={css.rootForImage}
-                alt={listingTitle}
-                image={firstImage}
-                nameSet={[
-                  { name: 'landscape-crop', size: '400w' },
-                  { name: 'landscape-crop2x', size: '800w' },
-                ]}
-                sizes="100vw"
-              />
+    const acceptErrorMessage = acceptSaleError ? (
+      <p className={css.error}>
+        <FormattedMessage id="SaleDetailsPanel.acceptSaleFailed" />
+      </p>
+    ) : null;
+    const declineErrorMessage = declineSaleError ? (
+      <p className={css.error}>
+        <FormattedMessage id="SaleDetailsPanel.declineSaleFailed" />
+      </p>
+    ) : null;
+
+    const actionButtons = canShowButtons ? (
+      <div className={css.actionButtons}>
+        <div className={css.errorDesktop}>
+          {acceptErrorMessage}
+          {declineErrorMessage}
+        </div>
+        <SecondaryButton
+          className={css.declineButton}
+          inProgress={declineInProgress}
+          disabled={buttonsDisabled}
+          onClick={() => onDeclineSale(currentTransaction.id)}
+        >
+          <FormattedMessage id="SalePage.declineButton" />
+        </SecondaryButton>
+        <PrimaryButton
+          className={css.acceptButton}
+          inProgress={acceptInProgress}
+          disabled={buttonsDisabled}
+          onClick={() => onAcceptSale(currentTransaction.id)}
+        >
+          <FormattedMessage id="SalePage.acceptButton" />
+        </PrimaryButton>
+      </div>
+    ) : null;
+
+    const classes = classNames(rootClassName || css.root, className);
+
+    return (
+      <div className={classes}>
+        <div className={css.container}>
+          <div className={css.saleInfo}>
+            <div className={css.imageWrapperMobile}>
+              <div className={css.aspectWrapper}>
+                <ResponsiveImage
+                  rootClassName={css.rootForImage}
+                  alt={listingTitle}
+                  image={firstImage}
+                  nameSet={[
+                    { name: 'landscape-crop', size: '400w' },
+                    { name: 'landscape-crop2x', size: '800w' },
+                  ]}
+                  sizes="100vw"
+                />
+              </div>
             </div>
+            <div className={css.avatarWrapper}>
+              <AvatarMedium user={currentCustomer} className={css.avatarMobile} />
+            </div>
+            <div className={css.avatarWrapper}>
+              <AvatarLarge user={currentCustomer} className={css.avatarDesktop} />
+            </div>
+            <h1 className={css.title}>{title}</h1>
+            {showInfoText ? <p className={css.infoText}>{infoText}</p> : null}
+            <div className={css.errorMobile}>
+              {acceptErrorMessage}
+              {declineErrorMessage}
+            </div>
+            <div className={css.breakdownContainerMobile}>
+              <h3 className={css.breakdownTitleMobile}>
+                <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
+              </h3>
+              {bookingInfo}
+            </div>
+            {messagesContainer}
+            {actionButtons}
           </div>
-          <div className={css.avatarWrapper}>
-            <AvatarMedium user={currentCustomer} className={css.avatarMobile} />
-          </div>
-          <div className={css.avatarWrapper}>
-            <AvatarLarge user={currentCustomer} className={css.avatarDesktop} />
-          </div>
-          <h1 className={css.title}>{title}</h1>
-          {showInfoText ? <p className={css.infoText}>{infoText}</p> : null}
-          <div className={css.errorMobile}>
-            {acceptErrorMessage}
-            {declineErrorMessage}
-          </div>
-          <div className={css.breakdownContainerMobile}>
-            <h3 className={css.breakdownTitleMobile}>
+          <div className={css.breakdownContainerDesktop}>
+            <div className={css.breakdownImageWrapper}>
+              <div className={css.aspectWrapper}>
+                <ResponsiveImage
+                  rootClassName={css.rootForImage}
+                  alt={listingTitle}
+                  image={firstImage}
+                  nameSet={[
+                    { name: 'landscape-crop', size: '400w' },
+                    { name: 'landscape-crop2x', size: '800w' },
+                  ]}
+                  sizes="100%"
+                />
+              </div>
+            </div>
+            <h3 className={css.breakdownTitleDesktop}>
               <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
             </h3>
-            {bookingInfo}
+            <div className={css.breakdownDesktop}>{bookingInfo}</div>
           </div>
-          {messagesContainer}
-          {actionButtons}
-        </div>
-        <div className={css.breakdownContainerDesktop}>
-          <div className={css.breakdownImageWrapper}>
-            <div className={css.aspectWrapper}>
-              <ResponsiveImage
-                rootClassName={css.rootForImage}
-                alt={listingTitle}
-                image={firstImage}
-                nameSet={[
-                  { name: 'landscape-crop', size: '400w' },
-                  { name: 'landscape-crop2x', size: '800w' },
-                ]}
-                sizes="100%"
-              />
-            </div>
-          </div>
-          <h3 className={css.breakdownTitleDesktop}>
-            <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
-          </h3>
-          <div className={css.breakdownDesktop}>{bookingInfo}</div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 SaleDetailsPanelComponent.defaultProps = {
   rootClassName: null,

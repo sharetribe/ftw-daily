@@ -20,7 +20,7 @@ exports[`SalePage matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <InjectIntl(Component)
+        <InjectIntl(SaleDetailsPanelComponent)
           acceptInProgress={false}
           acceptSaleError={null}
           className="undefined"
