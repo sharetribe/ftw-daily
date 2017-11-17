@@ -1,0 +1,43 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:6.11.5
+        environment:
+          YARN_VERSION: 1.2.1
+    steps:
+      - checkout
+      - restore_cache:
+          key: yarn-cache
+      - run:
+          name: set PATH
+          command: echo 'export PATH="${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"' >> $BASH_ENV
+      - run:
+          name: install yarn
+          command: |
+            if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
+              echo "Downloading and installing Yarn"
+              curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
+            else
+              echo "The correct version of Yarn is already installed"
+            fi
+      - run:
+          name: yarn
+          command: yarn
+      - save_cache:
+          key: yarn-cache
+          paths:
+            - ~/.cache/yarn
+            - ~/.yarn
+      - run:
+          name: audit
+          command: yarn run audit
+      - run:
+          name: format-ci
+          command: yarn run format-ci
+      - run:
+          name: build
+          command: yarn run build
+      - run:
+          name: test
+          command: yarn run test-ci
