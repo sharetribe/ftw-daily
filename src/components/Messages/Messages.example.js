@@ -49,6 +49,32 @@ export const WithCurrentUser = {
 export const WithTransitions = {
   component: Messages,
   props: {
+    messages: [],
+    transaction: createTransaction({
+      customer: createUser('user1'),
+      provider: createUser('user2'),
+      listing: createListing('Listing'),
+      transitions: [
+        createTxTransition({
+          at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
+          by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
+          transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+        }),
+        createTxTransition({
+          at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
+          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
+          transition: propTypes.TX_TRANSITION_ACCEPT,
+        }),
+      ],
+    }),
+    currentUser: createCurrentUser('user2'),
+  },
+  group: 'messages',
+};
+
+export const WithMessagesAndTransitions = {
+  component: Messages,
+  props: {
     messages: [
       createMessage(
         'msg1',
