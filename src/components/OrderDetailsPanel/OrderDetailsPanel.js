@@ -303,6 +303,7 @@ export class OrderDetailsPanelComponent extends Component {
 OrderDetailsPanelComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  currentUser: null,
   fetchMessagesError: null,
   sendMessageError: null,
 };

@@ -24,10 +24,36 @@ exports[`SalePage matches snapshot 1`] = `
           acceptInProgress={false}
           acceptSaleError={null}
           className="undefined"
+          currentUser={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "email": "provider1@example.com",
+                "emailVerified": true,
+                "profile": Object {
+                  "abbreviatedName": "provider1 abbreviated name",
+                  "displayName": "provider1 display name",
+                  "firstName": "provider1 first name",
+                  "lastName": "provider1 last name",
+                },
+                "stripeConnected": true,
+              },
+              "id": UUID {
+                "uuid": "provider1",
+              },
+              "type": "currentUser",
+            }
+          }
           declineInProgress={false}
           declineSaleError={null}
+          fetchMessagesError={null}
+          messages={Array []}
           onAcceptSale={[Function]}
           onDeclineSale={[Function]}
+          onResetForm={[Function]}
+          onSendMessage={[Function]}
+          sendMessageError={null}
+          sendMessageInProgress={false}
           transaction={
             Object {
               "attributes": Object {
@@ -137,7 +163,7 @@ exports[`SalePage matches snapshot 1`] = `
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
-      className=""
+      className={null}
       rootClassName={null}
     >
       <InjectIntl(Footer) />

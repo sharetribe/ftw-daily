@@ -24,6 +24,11 @@ export const FETCH_MESSAGES_REQUEST = 'app/SalePage/FETCH_MESSAGES_REQUEST';
 export const FETCH_MESSAGES_SUCCESS = 'app/SalePage/FETCH_MESSAGES_SUCCESS';
 export const FETCH_MESSAGES_ERROR = 'app/SalePage/FETCH_MESSAGES_ERROR';
 
+export const SEND_MESSAGE_REQUEST = 'app/SalePage/SEND_MESSAGE_REQUEST';
+export const SEND_MESSAGE_SUCCESS = 'app/SalePage/SEND_MESSAGE_SUCCESS';
+export const SEND_MESSAGE_ERROR = 'app/SalePage/SEND_MESSAGE_ERROR';
+export const CLEAR_SEND_MESSAGE_ERROR = 'app/SalePage/CLEAR_SEND_MESSAGE_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -37,6 +42,8 @@ const initialState = {
   fetchMessagesInProgress: false,
   fetchMessagesError: null,
   messages: [],
+  sendMessageInProgress: false,
+  sendMessageError: null,
 };
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
@@ -73,6 +80,15 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case FETCH_MESSAGES_ERROR:
       return { ...state, fetchMessagesInProgress: false, fetchMessagesError: payload };
 
+    case SEND_MESSAGE_REQUEST:
+      return { ...state, sendMessageInProgress: true, sendMessageError: null };
+    case SEND_MESSAGE_SUCCESS:
+      return { ...state, sendMessageInProgress: false };
+    case SEND_MESSAGE_ERROR:
+      return { ...state, sendMessageInProgress: false, sendMessageError: payload };
+    case CLEAR_SEND_MESSAGE_ERROR:
+      return { ...state, sendMessageError: null };
+
     default:
       return state;
   }
@@ -101,6 +117,11 @@ const declineSaleError = e => ({ type: DECLINE_SALE_ERROR, error: true, payload:
 const fetchMessagesRequest = () => ({ type: FETCH_MESSAGES_REQUEST });
 const fetchMessagesSuccess = messages => ({ type: FETCH_MESSAGES_SUCCESS, payload: messages });
 const fetchMessagesError = e => ({ type: FETCH_MESSAGES_ERROR, error: true, payload: e });
+
+const sendMessageRequest = () => ({ type: SEND_MESSAGE_REQUEST });
+const sendMessageSuccess = () => ({ type: SEND_MESSAGE_SUCCESS });
+const sendMessageError = e => ({ type: SEND_MESSAGE_ERROR, error: true, payload: e });
+const clearSendMessageError = () => ({ type: CLEAR_SEND_MESSAGE_ERROR });
 
 // ================ Thunks ================ //
 
@@ -199,7 +220,7 @@ export const fetchMessages = txId => (dispatch, getState, sdk) => {
   dispatch(fetchMessagesRequest());
 
   return sdk.messages
-    .query({ transaction_id: txId })
+    .query({ transaction_id: txId, include: ['sender', 'sender.profileImage'] })
     .then(response => {
       const entities = updatedEntities({}, response.data);
       const messageIds = response.data.data.map(d => d.id);
@@ -208,7 +229,7 @@ export const fetchMessages = txId => (dispatch, getState, sdk) => {
       dispatch(fetchMessagesSuccess(denormalized));
     })
     .catch(e => {
-      dispatch(fetchMessagesError(e));
+      dispatch(fetchMessagesError(storableError(e)));
       throw e;
     });
 };
@@ -218,6 +239,31 @@ export const fetchMessages = txId => (dispatch, getState, sdk) => {
 export const loadData = params => dispatch => {
   const saleId = new types.UUID(params.id);
 
+  // Clear the send error since the message form is emptied as well.
+  dispatch(clearSendMessageError());
+
   // Sale (i.e. transaction entity in API, but from buyers perspective) contains sale details
   return Promise.all([dispatch(fetchSale(saleId)), dispatch(fetchMessages(saleId))]);
+};
+
+export const sendMessage = (saleId, message) => (dispatch, getState, sdk) => {
+  dispatch(sendMessageRequest());
+
+  return sdk.messages
+    .send({ transactionId: saleId, content: message })
+    .then(response => {
+      const messageId = response.data.data.id;
+      return dispatch(fetchMessages(saleId))
+        .then(() => {
+          dispatch(sendMessageSuccess());
+          return messageId;
+        })
+        .catch(() => dispatch(sendMessageSuccess()));
+    })
+    .catch(e => {
+      dispatch(sendMessageError(storableError(e)));
+      // Rethrow so the page can track whether the sending failed, and
+      // keep the message in the form for a retry.
+      throw e;
+    });
 };

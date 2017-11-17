@@ -1,6 +1,7 @@
 @import '../../marketplace.css';
 
 .root {
+  position: relative;
 }
 
 .container {
@@ -10,8 +11,18 @@
   @media (--viewportLarge) {
     flex-direction: row;
     max-width: 1156px; /* 1060 + (paddingLeft + paddingRight) */
-    margin: 0 auto 60px;
+    margin: 0 auto 57px auto;
     padding: 0 48px;
+  }
+}
+
+.saleInfo {
+  margin-bottom: 210px;
+
+  @media (--viewportLarge) {
+    max-width: 538px;
+    margin-right: 108px;
+    margin-bottom: 0;
   }
 }
 
@@ -59,13 +70,6 @@
   width: 100%;
 }
 
-.info {
-  @media (--viewportLarge) {
-    margin-right: 132px;
-    max-width: 519px;
-  }
-}
-
 .title {
   margin: 22px 24px 0 24px;
 
@@ -75,16 +79,18 @@
 
   @media (--viewportLarge) {
     max-width: 100%;
-    margin: 40px 0 0 0;
+    margin: 42px 0 0 0;
   }
 }
 
-.message {
-  margin: 24px 24px 0 24px;
+.infoText {
+  margin: 18px 24px 0 24px;
 
+  @media (--viewportMedium) {
+    margin: 23px 24px 0 24px;
+  }
   @media (--viewportLarge) {
-    margin: 31px 0 0 0;
-    line-height: 32px;
+    margin: 23px 0 0 0;
   }
 }
 
@@ -134,13 +140,27 @@
 
   @media (--viewportLarge) {
     display: flex;
-    margin-top: 121px;
+    margin-top: 119px;
+  }
+}
+
+.breakdown {
+  margin: 14px 0 0 0;
+
+  @media (--viewportMedium) {
+    margin: 18px 0 0 0;
+  }
+  @media (--viewportLarge) {
+    margin: 14px 0 0 0;
   }
 }
 
 .breakdownContainerMobile {
-  margin: 0 24px 122px 24px;
+  margin: 47px 24px 0 24px;
 
+  @media (--viewportMedium) {
+    margin-top: 43px;
+  }
   @media (--viewportLarge) {
     display: none;
   }
@@ -172,8 +192,11 @@
 .breakdownTitleMobile {
   /* Font */
   color: var(--matterColorAnti);
+  margin: 0;
 
-  margin: 47px 0 14px 0;
+  @media (--viewportMedium) {
+    margin: 0;
+  }
 }
 
 .breakdownTitleDesktop {
@@ -183,6 +206,40 @@
 
 .breakdownDesktop {
   margin: 48px;
+}
+
+.messagesContainer {
+  margin: 46px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 46px 24px 0 24px;
+  }
+  @media (--viewportLarge) {
+    margin: 43px 0 0 0;
+  }
+}
+
+.messagesContainerWithInfoAbove {
+  @media (--viewportLarge) {
+    margin: 36px 0 0 0;
+  }
+}
+
+.messagesHeading {
+  color: var(--matterColorAnti);
+  margin: 0;
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}
+
+.messages {
+  margin-top: 17px;
+
+  @media (--viewportMedium) {
+    margin-top: 19px;
+  }
 }
 
 .actionButtons {
@@ -207,7 +264,7 @@
     position: static;
     box-shadow: none;
     width: auto;
-    margin: 104px 0 0 0;
+    margin: 82px 0 0 0;
     padding: 0;
   }
 }

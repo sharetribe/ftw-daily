@@ -1,7 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { types } from '../../util/sdkLoader';
-import { createTransaction, createBooking, createListing, createUser } from '../../util/test-data';
+import {
+  createTransaction,
+  createBooking,
+  createListing,
+  createUser,
+  createCurrentUser,
+  createMessage,
+} from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl } from '../../util/test-data';
 import * as propTypes from '../../util/propTypes';
@@ -60,74 +67,66 @@ const txDelivered = createTransaction({
 });
 
 describe('SaleDetailsPanel', () => {
+  const panelBaseProps = {
+    onAcceptSale: noop,
+    onDeclineSale: noop,
+    acceptInProgress: false,
+    declineInProgress: false,
+    currentUser: createCurrentUser('user1'),
+    messages: [
+      createMessage('msg1', {}, { sender: createUser('user1') }),
+      createMessage('msg2', {}, { sender: createUser('user2') }),
+    ],
+    sendMessageInProgress: false,
+    onSendMessage: noop,
+    onResetForm: noop,
+    intl: fakeIntl,
+  };
+
   it('preauthorized matches snapshot', () => {
     const props = {
+      ...panelBaseProps,
       transaction: txPreauthorized,
-      onAcceptSale: noop,
-      onDeclineSale: noop,
-      acceptInProgress: false,
-      declineInProgress: false,
-      intl: fakeIntl,
     };
     const tree = renderShallow(<SaleDetailsPanelComponent {...props} />);
     expect(tree).toMatchSnapshot();
   });
   it('accepted matches snapshot', () => {
     const props = {
+      ...panelBaseProps,
       transaction: txAccepted,
-      onAcceptSale: noop,
-      onDeclineSale: noop,
-      acceptInProgress: false,
-      declineInProgress: false,
-      intl: fakeIntl,
     };
     const tree = renderShallow(<SaleDetailsPanelComponent {...props} />);
     expect(tree).toMatchSnapshot();
   });
   it('declined matches snapshot', () => {
     const props = {
+      ...panelBaseProps,
       transaction: txDeclined,
-      onAcceptSale: noop,
-      onDeclineSale: noop,
-      acceptInProgress: false,
-      declineInProgress: false,
-      intl: fakeIntl,
     };
     const tree = renderShallow(<SaleDetailsPanelComponent {...props} />);
     expect(tree).toMatchSnapshot();
   });
   it('autodeclined matches snapshot', () => {
     const props = {
+      ...panelBaseProps,
       transaction: txAutoDeclined,
-      onAcceptSale: noop,
-      onDeclineSale: noop,
-      acceptInProgress: false,
-      declineInProgress: false,
-      intl: fakeIntl,
     };
     const tree = renderShallow(<SaleDetailsPanelComponent {...props} />);
     expect(tree).toMatchSnapshot();
   });
   it('canceled matches snapshot', () => {
     const props = {
+      ...panelBaseProps,
       transaction: txCanceled,
-      onAcceptSale: noop,
-      onDeclineSale: noop,
-      acceptInProgress: false,
-      declineInProgress: false,
-      intl: fakeIntl,
     };
     const tree = renderShallow(<SaleDetailsPanelComponent {...props} />);
     expect(tree).toMatchSnapshot();
   });
   it('delivered matches snapshot', () => {
     const props = {
+      ...panelBaseProps,
       transaction: txDelivered,
-      onAcceptSale: noop,
-      onDeclineSale: noop,
-      acceptInProgress: false,
-      declineInProgress: false,
-      intl: fakeIntl,
     };
     const tree = renderShallow(<SaleDetailsPanelComponent {...props} />);
     expect(tree).toMatchSnapshot();
@@ -147,12 +146,8 @@ describe('SaleDetailsPanel', () => {
       lastTransitionedAt: new Date(Date.UTC(2017, 5, 10)),
     });
     const props = {
+      ...panelBaseProps,
       transaction,
-      onAcceptSale: noop,
-      onDeclineSale: noop,
-      acceptInProgress: false,
-      declineInProgress: false,
-      intl: fakeIntl,
     };
     const panel = shallow(<SaleDetailsPanelComponent {...props} />);
     const breakdownProps = panel.find(BookingBreakdown).props();

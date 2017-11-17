@@ -4,11 +4,12 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { reset as resetForm } from 'redux-form';
 import * as propTypes from '../../util/propTypes';
-import { ensureListing, ensureUser, ensureTransaction } from '../../util/data';
+import { ensureListing, ensureTransaction } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { acceptSale, declineSale, loadData } from './SalePage.duck';
+import { acceptSale, declineSale, loadData, sendMessage } from './SalePage.duck';
 import {
   NamedRedirect,
   SaleDetailsPanel,
@@ -39,7 +40,14 @@ export const SalePageComponent = props => {
     params,
     scrollingDisabled,
     transaction,
+    fetchMessagesError,
+    messages,
+    sendMessageInProgress,
+    sendMessageError,
+    onSendMessage,
+    onResetForm,
   } = props;
+
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const listingTitle = currentListing.attributes.title;
@@ -71,18 +79,11 @@ export const SalePageComponent = props => {
     </p>
   );
 
-  // We need to know if the customer is in pending state -
-  // to show action buttons bar and reserve space below footer.
-  // (accept reject buttons are position: fixed on mobile layout)
-  const currentCustomer = ensureUser(currentTransaction.customer);
-  const customerLoaded = !!currentCustomer.id;
-  const isCustomerBanned = customerLoaded || currentCustomer.attributes.banned;
-  const isPending = propTypes.txIsPreauthorized(currentTransaction) && !isCustomerBanned;
-
   const panel =
     isDataAvailable && currentTransaction.id ? (
       <SaleDetailsPanel
         className={detailsClassName}
+        currentUser={currentUser}
         transaction={currentTransaction}
         onAcceptSale={onAcceptSale}
         onDeclineSale={onDeclineSale}
@@ -90,6 +91,12 @@ export const SalePageComponent = props => {
         declineInProgress={declineInProgress}
         acceptSaleError={acceptSaleError}
         declineSaleError={declineSaleError}
+        messages={messages}
+        fetchMessagesError={fetchMessagesError}
+        sendMessageInProgress={sendMessageInProgress}
+        sendMessageError={sendMessageError}
+        onSendMessage={onSendMessage}
+        onResetForm={onResetForm}
       />
     ) : (
       loadingOrFailedFetching
@@ -107,7 +114,7 @@ export const SalePageComponent = props => {
         <LayoutWrapperMain>
           <div className={css.root}>{panel}</div>
         </LayoutWrapperMain>
-        <LayoutWrapperFooter className={classNames({ [css.footerWrapper]: isPending })}>
+        <LayoutWrapperFooter className={css.footer}>
           <Footer />
         </LayoutWrapperFooter>
       </LayoutSingleColumn>
@@ -121,24 +128,35 @@ SalePageComponent.defaultProps = {
   acceptSaleError: null,
   declineSaleError: null,
   transaction: null,
+  fetchMessagesError: null,
+  sendMessageError: null,
 };
 
-const { bool, func, oneOf, shape, string } = PropTypes;
+const { bool, func, oneOf, shape, string, arrayOf } = PropTypes;
 
 SalePageComponent.propTypes = {
+  params: shape({ id: string }).isRequired,
+  tab: oneOf(['details', 'discussion']).isRequired,
+
   currentUser: propTypes.currentUser,
   fetchSaleError: propTypes.error,
   acceptSaleError: propTypes.error,
   declineSaleError: propTypes.error,
   acceptInProgress: bool.isRequired,
   declineInProgress: bool.isRequired,
-  intl: intlShape.isRequired,
   onAcceptSale: func.isRequired,
   onDeclineSale: func.isRequired,
-  params: shape({ id: string }).isRequired,
   scrollingDisabled: bool.isRequired,
-  tab: oneOf(['details', 'discussion']).isRequired,
   transaction: propTypes.transaction,
+  fetchMessagesError: propTypes.error,
+  messages: arrayOf(propTypes.message).isRequired,
+  sendMessageInProgress: bool.isRequired,
+  sendMessageError: propTypes.error,
+  onSendMessage: func.isRequired,
+  onResetForm: func.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -149,6 +167,10 @@ const mapStateToProps = state => {
     acceptInProgress,
     declineInProgress,
     transactionRef,
+    fetchMessagesError,
+    messages,
+    sendMessageInProgress,
+    sendMessageError,
   } = state.SalePage;
   const { currentUser } = state.user;
 
@@ -164,6 +186,10 @@ const mapStateToProps = state => {
     declineInProgress,
     scrollingDisabled: isScrollingDisabled(state),
     transaction,
+    fetchMessagesError,
+    messages,
+    sendMessageInProgress,
+    sendMessageError,
   };
 };
 
@@ -171,6 +197,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onAcceptSale: transactionId => dispatch(acceptSale(transactionId)),
     onDeclineSale: transactionId => dispatch(declineSale(transactionId)),
+    onSendMessage: (saleId, message) => dispatch(sendMessage(saleId, message)),
+    onResetForm: formName => dispatch(resetForm(formName)),
   };
 };
 

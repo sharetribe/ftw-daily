@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape, FormattedDate, FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
@@ -13,6 +13,7 @@ import {
   ResponsiveImage,
   PrimaryButton,
   SecondaryButton,
+  Messages,
 } from '../../components';
 
 import css from './SaleDetailsPanel.css';
@@ -21,7 +22,12 @@ const breakdown = transaction => {
   const loaded = transaction && transaction.id && transaction.booking && transaction.booking.id;
 
   return loaded ? (
-    <BookingBreakdown userRole="provider" transaction={transaction} booking={transaction.booking} />
+    <BookingBreakdown
+      className={css.breakdown}
+      userRole="provider"
+      transaction={transaction}
+      booking={transaction.booking}
+    />
   ) : null;
 };
 
@@ -73,43 +79,18 @@ const saleTitle = (transaction, listingLink, customerName) => {
   }
 };
 
-const saleMessage = (transaction, customerName) => {
-  const formattedDate = (
-    <span className={css.nowrap}>
-      <FormattedDate
-        value={transaction.attributes.lastTransitionedAt}
-        year="numeric"
-        month="short"
-        day="numeric"
-        weekday="long"
-      />
-    </span>
-  );
+const saleInfoText = (transaction, customerName) => {
   if (propTypes.txIsPreauthorized(transaction)) {
     return <FormattedMessage id="SaleDetailsPanel.saleRequestedStatus" values={{ customerName }} />;
-  } else if (propTypes.txIsAccepted(transaction)) {
-    return <FormattedMessage id="SaleDetailsPanel.saleAcceptedStatus" values={{ formattedDate }} />;
-  } else if (propTypes.txIsDeclined(transaction)) {
-    return <FormattedMessage id="SaleDetailsPanel.saleDeclinedStatus" values={{ formattedDate }} />;
-  } else if (propTypes.txIsAutodeclined(transaction)) {
-    return (
-      <FormattedMessage id="SaleDetailsPanel.saleAutoDeclinedStatus" values={{ formattedDate }} />
-    );
-  } else if (propTypes.txIsCanceled(transaction)) {
-    return <FormattedMessage id="SaleDetailsPanel.saleCanceledStatus" values={{ formattedDate }} />;
-  } else if (propTypes.txIsDelivered(transaction)) {
-    return (
-      <FormattedMessage id="SaleDetailsPanel.saleDeliveredStatus" values={{ formattedDate }} />
-    );
-  } else {
-    return null;
   }
+  return null;
 };
 
 export const SaleDetailsPanelComponent = props => {
   const {
     rootClassName,
     className,
+    currentUser,
     transaction,
     onAcceptSale,
     onDeclineSale,
@@ -117,8 +98,24 @@ export const SaleDetailsPanelComponent = props => {
     declineInProgress,
     acceptSaleError,
     declineSaleError,
+    fetchMessagesError,
+    messages,
+    sendMessageInProgress,
+    sendMessageError,
+    onSendMessage,
+    onResetForm,
     intl,
   } = props;
+
+  console.log({
+    fetchMessagesError,
+    messages,
+    sendMessageInProgress,
+    sendMessageError,
+    onSendMessage,
+    onResetForm,
+  });
+
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const currentCustomer = ensureUser(currentTransaction.customer);
@@ -146,15 +143,30 @@ export const SaleDetailsPanelComponent = props => {
   const bookingInfo = breakdown(currentTransaction);
 
   const title = saleTitle(currentTransaction, listingLink, customerDisplayName);
-  const message = isCustomerBanned
+  const infoText = isCustomerBanned
     ? intl.formatMessage({
         id: 'SaleDetailsPanel.customerBannedStatus',
       })
-    : saleMessage(currentTransaction, customerDisplayName);
+    : saleInfoText(currentTransaction, customerDisplayName);
+  const showInfoText = !!infoText;
 
   const listingTitle = currentListing.attributes.title;
   const firstImage =
     currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
+
+  const messagesContainerClasses = classNames(css.messagesContainer, {
+    [css.messagesContainerWithInfoAbove]: showInfoText,
+  });
+  const showMessages = messages.length > 0 || fetchMessagesError;
+  // TODO: handle fetchMessagesError
+  const messagesContainer = showMessages ? (
+    <div className={messagesContainerClasses}>
+      <h3 className={css.messagesHeading}>
+        <FormattedMessage id="SaleDetailsPanel.messagesHeading" />
+      </h3>
+      <Messages className={css.messages} messages={messages} currentUser={currentUser} />
+    </div>
+  ) : null;
 
   const canShowButtons = propTypes.txIsPreauthorized(currentTransaction) && !isCustomerBanned;
   const buttonsDisabled = acceptInProgress || declineInProgress;
@@ -200,40 +212,41 @@ export const SaleDetailsPanelComponent = props => {
   return (
     <div className={classes}>
       <div className={css.container}>
-        <div className={css.imageWrapperMobile}>
-          <div className={css.aspectWrapper}>
-            <ResponsiveImage
-              rootClassName={css.rootForImage}
-              alt={listingTitle}
-              image={firstImage}
-              nameSet={[
-                { name: 'landscape-crop', size: '400w' },
-                { name: 'landscape-crop2x', size: '800w' },
-              ]}
-              sizes="100vw"
-            />
+        <div className={css.saleInfo}>
+          <div className={css.imageWrapperMobile}>
+            <div className={css.aspectWrapper}>
+              <ResponsiveImage
+                rootClassName={css.rootForImage}
+                alt={listingTitle}
+                image={firstImage}
+                nameSet={[
+                  { name: 'landscape-crop', size: '400w' },
+                  { name: 'landscape-crop2x', size: '800w' },
+                ]}
+                sizes="100vw"
+              />
+            </div>
           </div>
-        </div>
-        <div className={css.avatarWrapper}>
-          <AvatarMedium user={currentCustomer} className={css.avatarMobile} />
-        </div>
-        <div className={css.info}>
+          <div className={css.avatarWrapper}>
+            <AvatarMedium user={currentCustomer} className={css.avatarMobile} />
+          </div>
           <div className={css.avatarWrapper}>
             <AvatarLarge user={currentCustomer} className={css.avatarDesktop} />
           </div>
           <h1 className={css.title}>{title}</h1>
-          <p className={css.message}>{message}</p>
+          {showInfoText ? <p className={css.infoText}>{infoText}</p> : null}
           <div className={css.errorMobile}>
             {acceptErrorMessage}
             {declineErrorMessage}
           </div>
+          <div className={css.breakdownContainerMobile}>
+            <h3 className={css.breakdownTitleMobile}>
+              <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
+            </h3>
+            {bookingInfo}
+          </div>
+          {messagesContainer}
           {actionButtons}
-        </div>
-        <div className={css.breakdownContainerMobile}>
-          <h3 className={css.breakdownTitleMobile}>
-            <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
-          </h3>
-          {bookingInfo}
         </div>
         <div className={css.breakdownContainerDesktop}>
           <div className={css.breakdownImageWrapper}>
@@ -263,15 +276,20 @@ export const SaleDetailsPanelComponent = props => {
 SaleDetailsPanelComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  currentUser: null,
   acceptSaleError: null,
   declineSaleError: null,
+  fetchMessagesError: null,
+  sendMessageError: null,
 };
 
-const { bool, func, string } = PropTypes;
+const { bool, func, string, arrayOf } = PropTypes;
 
 SaleDetailsPanelComponent.propTypes = {
   rootClassName: string,
   className: string,
+
+  currentUser: propTypes.currentUser,
   transaction: propTypes.transaction.isRequired,
   onAcceptSale: func.isRequired,
   onDeclineSale: func.isRequired,
@@ -279,6 +297,13 @@ SaleDetailsPanelComponent.propTypes = {
   declineInProgress: bool.isRequired,
   acceptSaleError: propTypes.error,
   declineSaleError: propTypes.error,
+
+  fetchMessagesError: propTypes.error,
+  messages: arrayOf(propTypes.message).isRequired,
+  sendMessageInProgress: bool.isRequired,
+  sendMessageError: propTypes.error,
+  onSendMessage: func.isRequired,
+  onResetForm: func.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,

@@ -1,9 +1,6 @@
 @import '../../marketplace.css';
 
 .mainContent {
-  @media (--viewportLarge) {
-    margin-bottom: 122px;
-  }
 }
 
 .loading {
