@@ -1,4 +1,4 @@
-const env = process.env.REACT_APP_ENV === undefined ? 'production' : process.env.REACT_APP_ENV;
+const env = process.env.REACT_APP_ENV || 'production';
 const dev = process.env.REACT_APP_ENV === 'development';
 
 // To pass environment variables to the client app in the build
