@@ -94,31 +94,31 @@
   }
 }
 
-.error {
+.messagesError {
   color: var(--failColor);
-  margin-left: 24px;
-  margin-right: 24px;
+  margin: 13px 0 0 0;
+}
+
+.actionError {
+  @apply --marketplaceH5FontStyles;
+  color: var(--failColor);
+  margin: 0 0 11px 0;
 
   @media (--viewportMedium) {
+    margin: 0 0 10px 0;
+  }
+  @media (--viewportLarge) {
     margin: 0;
   }
 }
 
-.errorMobile {
-  margin-top: 24px;
+.actionErrors {
+  width: 100%;
+  text-align: center;
 
-  @media (--viewportMedium) {
-    display: none;
-  }
-}
-
-.errorDesktop {
-  display: none;
-
-  @media (--viewportMedium) {
-    display: block;
+  @media (--viewportLarge) {
     position: absolute;
-    bottom: 80px;
+    top: 25px;
   }
 }
 
@@ -159,27 +159,29 @@
   margin: 47px 24px 0 24px;
 
   @media (--viewportMedium) {
-    margin-top: 43px;
+    margin-top: 44px;
   }
   @media (--viewportLarge) {
     display: none;
   }
 }
 
-.breakdownContainerDesktop {
+.desktopAside {
   display: none;
-
-  margin: 119px 24px 24px 24px;
 
   @media (--viewportLarge) {
     display: block;
     margin: 116px 0 0 0;
-    background-color: var(--matterColorLight);
-    border: 1px solid var(--matterColorNegative);
-    border-radius: 2px;
-
-    width: 409px;
   }
+}
+
+.breakdownContainerDesktop {
+  position: sticky;
+  top: 24px;
+  background-color: var(--matterColorLight);
+  border: 1px solid var(--matterColorNegative);
+  border-radius: 2px;
+  width: 409px;
 }
 
 .breakdownImageWrapper {
@@ -205,7 +207,7 @@
 }
 
 .breakdownDesktop {
-  margin: 48px;
+  margin: 48px 48px 0 48px;
 }
 
 .messagesContainer {
@@ -238,7 +240,39 @@
   margin-top: 17px;
 
   @media (--viewportMedium) {
-    margin-top: 19px;
+    margin-top: 20px;
+  }
+}
+
+.sendMessageForm {
+  position: relative;
+  margin-top: 46px;
+  width: 100%;
+
+  @media (--viewportMedium) {
+    margin-top: 49px;
+  }
+  @media (--viewportLarge) {
+    margin-top: 47px;
+  }
+}
+
+.sendMessageFormFixed {
+  position: fixed;
+  bottom: 0;
+  box-shadow: var(--boxShadowBottomForm);
+
+  @media (--viewportLarge) {
+    position: relative;
+    box-shadow: none;
+  }
+}
+
+.sendMessageFormFocusedInMobileSafari {
+  position: absolute;
+
+  @media (--viewportLarge) {
+    position: relative;
   }
 }
 
@@ -249,8 +283,6 @@
   bottom: 0;
   width: 100%;
   padding: 18px 24px 18px 24px;
-
-  display: flex;
 
   /* Contain repainting to this component only */
   /* 3D painting container helps scrolling */
@@ -264,15 +296,52 @@
     position: static;
     box-shadow: none;
     width: auto;
-    margin: 82px 0 0 0;
-    padding: 0;
+    margin: 0 48px 48px 48px;
+    padding: 50px 0 0 0;
   }
 }
 
-.declineButton {
-  margin-right: 6.5px;
+.mobileActionButtons {
+  display: block;
+
+  @media (--viewportLarge) {
+    display: none;
+  }
 }
 
-.acceptButton {
-  margin-left: 6.5px;
+.desktopActionButtons {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+  }
+}
+
+.actionButtonsWithFormFocused {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+  }
+}
+
+.actionButtonWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  @media (--viewportLarge) {
+    flex-direction: column;
+  }
+
+  & button:first-child {
+    margin: 0 12px 0 0;
+
+    @media (--viewportLarge) {
+      margin: 8px 0 0 0;
+
+      /* Switch order in desktop layout with accept button being on the top */
+      order: 1;
+    }
+  }
 }

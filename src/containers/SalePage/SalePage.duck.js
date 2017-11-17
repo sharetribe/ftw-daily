@@ -226,6 +226,9 @@ export const fetchMessages = txId => (dispatch, getState, sdk) => {
       const messageIds = response.data.data.map(d => d.id);
       const denormalized = denormalisedEntities(entities, 'message', messageIds);
 
+      // Messages come latest first, so we need to reverse the order
+      denormalized.reverse();
+
       dispatch(fetchMessagesSuccess(denormalized));
     })
     .catch(e => {

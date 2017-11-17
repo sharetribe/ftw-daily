@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { createSlug } from '../../util/urlHelpers';
 import { ensureListing, ensureTransaction, ensureUser, userDisplayName } from '../../util/data';
+import { isMobileSafari } from '../../util/userAgent';
 import {
   AvatarLarge,
   AvatarMedium,
@@ -15,6 +16,7 @@ import {
   SecondaryButton,
   Messages,
 } from '../../components';
+import { SendMessageForm } from '../../containers';
 
 import css from './SaleDetailsPanel.css';
 
@@ -87,6 +89,10 @@ const saleInfoText = (transaction, customerName) => {
 };
 
 export class SaleDetailsPanelComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { sendMessageFormFocused: false };
+  }
   render() {
     const {
       rootClassName,
@@ -108,18 +114,10 @@ export class SaleDetailsPanelComponent extends Component {
       intl,
     } = this.props;
 
-    console.log({
-      fetchMessagesError,
-      messages,
-      sendMessageInProgress,
-      sendMessageError,
-      onSendMessage,
-      onResetForm,
-    });
-
     const currentTransaction = ensureTransaction(transaction);
     const currentListing = ensureListing(currentTransaction.listing);
     const currentCustomer = ensureUser(currentTransaction.customer);
+    const currentProvider = ensureUser(currentTransaction.provider);
     const customerLoaded = !!currentCustomer.id;
     const isCustomerBanned = customerLoaded && currentCustomer.attributes.banned;
 
@@ -127,7 +125,20 @@ export class SaleDetailsPanelComponent extends Component {
       id: 'SaleDetailsPanel.bannedUserDisplayName',
     });
 
+    const authorDisplayName = userDisplayName(currentProvider, bannedUserDisplayName);
     const customerDisplayName = userDisplayName(currentCustomer, bannedUserDisplayName);
+
+    let otherUserDisplayName = '';
+    const currentUserIsCustomer =
+      currentUser.id && currentCustomer.id && currentUser.id.uuid === currentCustomer.id.uuid;
+    const currentUserIsProvider =
+      currentUser.id && currentProvider.id && currentUser.id.uuid === currentProvider.id.uuid;
+
+    if (currentUserIsCustomer) {
+      otherUserDisplayName = authorDisplayName;
+    } else if (currentUserIsProvider) {
+      otherUserDisplayName = customerDisplayName;
+    }
 
     let listingLink = null;
 
@@ -159,12 +170,16 @@ export class SaleDetailsPanelComponent extends Component {
       [css.messagesContainerWithInfoAbove]: showInfoText,
     });
     const showMessages = messages.length > 0 || fetchMessagesError;
-    // TODO: handle fetchMessagesError
     const messagesContainer = showMessages ? (
       <div className={messagesContainerClasses}>
         <h3 className={css.messagesHeading}>
           <FormattedMessage id="SaleDetailsPanel.messagesHeading" />
         </h3>
+        {fetchMessagesError ? (
+          <p className={css.messagesError}>
+            <FormattedMessage id="SaleDetailsPanel.messageLoadingFailed" />
+          </p>
+        ) : null}
         <Messages className={css.messages} messages={messages} currentUser={currentUser} />
       </div>
     ) : null;
@@ -173,40 +188,89 @@ export class SaleDetailsPanelComponent extends Component {
     const buttonsDisabled = acceptInProgress || declineInProgress;
 
     const acceptErrorMessage = acceptSaleError ? (
-      <p className={css.error}>
+      <p className={css.actionError}>
         <FormattedMessage id="SaleDetailsPanel.acceptSaleFailed" />
       </p>
     ) : null;
     const declineErrorMessage = declineSaleError ? (
-      <p className={css.error}>
+      <p className={css.actionError}>
         <FormattedMessage id="SaleDetailsPanel.declineSaleFailed" />
       </p>
     ) : null;
 
+    const actionButtonClasses = classNames(css.actionButtons, {
+      [css.actionButtonsWithFormFocused]: this.state.sendMessageFormFocused,
+    });
     const actionButtons = canShowButtons ? (
-      <div className={css.actionButtons}>
-        <div className={css.errorDesktop}>
+      <div className={actionButtonClasses}>
+        <div className={css.actionErrors}>
           {acceptErrorMessage}
           {declineErrorMessage}
         </div>
-        <SecondaryButton
-          className={css.declineButton}
-          inProgress={declineInProgress}
-          disabled={buttonsDisabled}
-          onClick={() => onDeclineSale(currentTransaction.id)}
-        >
-          <FormattedMessage id="SalePage.declineButton" />
-        </SecondaryButton>
-        <PrimaryButton
-          className={css.acceptButton}
-          inProgress={acceptInProgress}
-          disabled={buttonsDisabled}
-          onClick={() => onAcceptSale(currentTransaction.id)}
-        >
-          <FormattedMessage id="SalePage.acceptButton" />
-        </PrimaryButton>
+        <div className={css.actionButtonWrapper}>
+          <SecondaryButton
+            inProgress={declineInProgress}
+            disabled={buttonsDisabled}
+            onClick={() => onDeclineSale(currentTransaction.id)}
+          >
+            <FormattedMessage id="SalePage.declineButton" />
+          </SecondaryButton>
+          <PrimaryButton
+            inProgress={acceptInProgress}
+            disabled={buttonsDisabled}
+            onClick={() => onAcceptSale(currentTransaction.id)}
+          >
+            <FormattedMessage id="SalePage.acceptButton" />
+          </PrimaryButton>
+        </div>
       </div>
     ) : null;
+
+    const sendMessagePlaceholder = intl.formatMessage(
+      { id: 'SaleDetailsPanel.sendMessagePlaceholder' },
+      { name: otherUserDisplayName }
+    );
+
+    const sendMessageFormName = 'SaleDetailsPanel.SendMessageForm';
+    const scrollToMessage = messageId => {
+      const selector = `#msg-${messageId.uuid}`;
+      const el = document.querySelector(selector);
+      if (el) {
+        el.scrollIntoView({
+          block: 'start',
+          behavior: 'smooth',
+        });
+      }
+    };
+    const isMobSaf = isMobileSafari();
+    const handleSendMessageFormFocus = () => {
+      this.setState({ sendMessageFormFocused: true });
+      if (isMobSaf) {
+        // Scroll to bottom
+        window.scroll({ top: document.body.scrollHeight, left: 0, behavior: 'smooth' });
+      }
+    };
+    const handleSendMessageFormBlur = () => {
+      this.setState({ sendMessageFormFocused: false });
+    };
+    const handleMessageSubmit = values => {
+      const message = values.message ? values.message.trim() : null;
+      if (!message) {
+        return;
+      }
+      onSendMessage(currentTransaction.id, message)
+        .then(messageId => {
+          onResetForm(sendMessageFormName);
+          scrollToMessage(messageId);
+        })
+        .catch(e => {
+          // Ignore, Redux handles the error
+        });
+    };
+    const sendMessageFormClasses = classNames(css.sendMessageForm, {
+      [css.sendMessageFormFixed]: this.state.sendMessageFormFocused || !canShowButtons,
+      [css.sendMessageFormFocusedInMobileSafari]: isMobSaf && this.state.sendMessageFormFocused,
+    });
 
     const classes = classNames(rootClassName || css.root, className);
 
@@ -236,10 +300,6 @@ export class SaleDetailsPanelComponent extends Component {
             </div>
             <h1 className={css.title}>{title}</h1>
             {showInfoText ? <p className={css.infoText}>{infoText}</p> : null}
-            <div className={css.errorMobile}>
-              {acceptErrorMessage}
-              {declineErrorMessage}
-            </div>
             <div className={css.breakdownContainerMobile}>
               <h3 className={css.breakdownTitleMobile}>
                 <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
@@ -247,27 +307,40 @@ export class SaleDetailsPanelComponent extends Component {
               {bookingInfo}
             </div>
             {messagesContainer}
-            {actionButtons}
+            <SendMessageForm
+              form={sendMessageFormName}
+              rootClassName={sendMessageFormClasses}
+              messagePlaceholder={sendMessagePlaceholder}
+              inProgress={sendMessageInProgress}
+              sendMessageError={sendMessageError}
+              onFocus={handleSendMessageFormFocus}
+              onBlur={handleSendMessageFormBlur}
+              onSubmit={handleMessageSubmit}
+            />
+            <div className={css.mobileActionButtons}>{actionButtons}</div>
           </div>
-          <div className={css.breakdownContainerDesktop}>
-            <div className={css.breakdownImageWrapper}>
-              <div className={css.aspectWrapper}>
-                <ResponsiveImage
-                  rootClassName={css.rootForImage}
-                  alt={listingTitle}
-                  image={firstImage}
-                  nameSet={[
-                    { name: 'landscape-crop', size: '400w' },
-                    { name: 'landscape-crop2x', size: '800w' },
-                  ]}
-                  sizes="100%"
-                />
+          <div className={css.desktopAside}>
+            <div className={css.breakdownContainerDesktop}>
+              <div className={css.breakdownImageWrapper}>
+                <div className={css.aspectWrapper}>
+                  <ResponsiveImage
+                    rootClassName={css.rootForImage}
+                    alt={listingTitle}
+                    image={firstImage}
+                    nameSet={[
+                      { name: 'landscape-crop', size: '400w' },
+                      { name: 'landscape-crop2x', size: '800w' },
+                    ]}
+                    sizes="100%"
+                  />
+                </div>
               </div>
+              <h3 className={css.breakdownTitleDesktop}>
+                <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
+              </h3>
+              <div className={css.breakdownDesktop}>{bookingInfo}</div>
+              <div className={css.desktopActionButtons}>{actionButtons}</div>
             </div>
-            <h3 className={css.breakdownTitleDesktop}>
-              <FormattedMessage id="SaleDetailsPanel.bookingBreakdownTitle" />
-            </h3>
-            <div className={css.breakdownDesktop}>{bookingInfo}</div>
           </div>
         </div>
       </div>
