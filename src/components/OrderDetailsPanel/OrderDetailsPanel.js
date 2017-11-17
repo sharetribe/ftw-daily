@@ -124,6 +124,18 @@ export class OrderDetailsPanelComponent extends Component {
     const authorDisplayName = userDisplayName(currentProvider, bannedUserDisplayName);
     const customerDisplayName = userDisplayName(currentCustomer, bannedUserDisplayName);
 
+    let otherUserDisplayName = '';
+    const currentUserIsCustomer =
+      currentUser.id && currentCustomer.id && currentUser.id.uuid === currentCustomer.id.uuid;
+    const currentUserIsProvider =
+      currentUser.id && currentProvider.id && currentUser.id.uuid === currentProvider.id.uuid;
+
+    if (currentUserIsCustomer) {
+      otherUserDisplayName = authorDisplayName;
+    } else if (currentUserIsProvider) {
+      otherUserDisplayName = customerDisplayName;
+    }
+
     let listingLink = null;
 
     if (listingLoaded && currentListing.attributes.title) {
@@ -186,7 +198,7 @@ export class OrderDetailsPanelComponent extends Component {
 
     const sendMessagePlaceholder = intl.formatMessage(
       { id: 'OrderDetailsPanel.sendMessagePlaceholder' },
-      { name: 'Juho' }
+      { name: otherUserDisplayName }
     );
 
     const sendMessageFormName = 'OrderDetailsPanel.SendMessageForm';
