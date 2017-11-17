@@ -224,13 +224,17 @@ export class OrderDetailsPanelComponent extends Component {
       this.setState({ sendMessageFormFocused: false });
     };
     const handleMessageSubmit = values => {
-      return onSendMessage(currentTransaction.id, values.message)
+      const message = values.message ? values.message.trim() : null;
+      if (!message) {
+        return;
+      }
+      onSendMessage(currentTransaction.id, message)
         .then(messageId => {
           onResetForm(sendMessageFormName);
           scrollToMessage(messageId);
         })
         .catch(e => {
-          console.error(e);
+          // Ignore, Redux handles the error
         });
     };
     const sendMessageFormClasses = classNames(css.sendMessageForm, {
