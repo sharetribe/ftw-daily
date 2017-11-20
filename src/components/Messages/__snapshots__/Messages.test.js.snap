@@ -47,13 +47,17 @@ exports[`Messages matches snapshot 1`] = `
     <div
       className={undefined}
     >
-      <p
+      <div
         className={undefined}
       >
-        Message msg2
-        
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
+        <p
+          className={undefined}
+        >
+          Message msg2
+          
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
       <p
         className={undefined}
       >

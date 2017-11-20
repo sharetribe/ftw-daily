@@ -33,7 +33,9 @@ const OwnMessage = props => {
   const todayString = intl.formatMessage({ id: 'Messages.today' });
   return (
     <div className={css.ownMessage}>
-      <p className={css.ownMessageContent}>{message.attributes.content}</p>
+      <div className={css.ownMessageContentWrapper}>
+        <p className={css.ownMessageContent}>{message.attributes.content}</p>
+      </div>
       <p className={css.ownMessageDate}>{formatDate(intl, todayString, message.attributes.at)}</p>
     </div>
   );
