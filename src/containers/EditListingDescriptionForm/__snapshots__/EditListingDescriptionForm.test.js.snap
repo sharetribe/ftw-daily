@@ -13,7 +13,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
     <label
       htmlFor="fakeTestForm.title"
     >
-      Name of your sauna
+      The name of your sauna
     </label>
     <input
       autoFocus={true}
@@ -48,7 +48,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
       onDragStart={[Function]}
       onDrop={[Function]}
       onFocus={[Function]}
-      placeholder="How many people can fit in at once? Does the sauna come with towels?"
+      placeholder="How many people can fit at once? Does the sauna come with towels?"
       value=""
     />
   </div>
