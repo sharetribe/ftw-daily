@@ -11,7 +11,7 @@ import {
   NamedLink,
   ResponsiveImage,
   AvatarMedium,
-  Messages,
+  ActivityFeed,
 } from '../../components';
 import { SendMessageForm } from '../../containers';
 
@@ -187,7 +187,7 @@ export class OrderDetailsPanelComponent extends Component {
             <FormattedMessage id="OrderDetailsPanel.messageLoadingFailed" />
           </p>
         ) : null}
-        <Messages
+        <ActivityFeed
           className={css.messages}
           messages={messages}
           transaction={currentTransaction}

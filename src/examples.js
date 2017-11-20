@@ -1,4 +1,5 @@
 // components
+import * as ActivityFeed from './components/ActivityFeed/ActivityFeed.example';
 import * as AddImages from './components/AddImages/AddImages.example';
 import * as Avatar from './components/Avatar/Avatar.example';
 import * as BirthdayInputField from './components/BirthdayInputField/BirthdayInputField.example';
@@ -29,7 +30,6 @@ import * as LocationAutocompleteInput from './components/LocationAutocompleteInp
 import * as ManageListingCard from './components/ManageListingCard/ManageListingCard.example';
 import * as Map from './components/Map/Map.example';
 import * as Menu from './components/Menu/Menu.example';
-import * as Messages from './components/Messages/Messages.example';
 import * as Modal from './components/Modal/Modal.example';
 import * as ModalInMobile from './components/ModalInMobile/ModalInMobile.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
@@ -61,6 +61,7 @@ import * as StripePaymentForm from './containers/StripePaymentForm/StripePayment
 import * as Typography from './containers/StyleguidePage/Typography.example';
 
 export {
+  ActivityFeed,
   AddImages,
   Avatar,
   BirthdayInputField,
@@ -99,7 +100,6 @@ export {
   ManageListingCard,
   Map,
   Menu,
-  Messages,
   Modal,
   ModalInMobile,
   NamedLink,

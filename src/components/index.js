@@ -1,3 +1,4 @@
+export { default as ActivityFeed } from './ActivityFeed/ActivityFeed';
 export { default as AddImages } from './AddImages/AddImages';
 export { default as Avatar, AvatarMedium, AvatarLarge } from './Avatar/Avatar';
 export { default as BirthdayInputField } from './BirthdayInputField/BirthdayInputField';
@@ -66,7 +67,6 @@ export { default as Menu } from './Menu/Menu';
 export { default as MenuContent } from './MenuContent/MenuContent';
 export { default as MenuItem } from './MenuItem/MenuItem';
 export { default as MenuLabel } from './MenuLabel/MenuLabel';
-export { default as Messages } from './Messages/Messages';
 export { default as Modal } from './Modal/Modal';
 export { default as ModalInMobile } from './ModalInMobile/ModalInMobile';
 export { default as NamedLink } from './NamedLink/NamedLink';

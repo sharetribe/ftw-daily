@@ -7,11 +7,11 @@ import { formatDate } from '../../util/dates';
 import { ensureTransaction, ensureUser } from '../../util/data';
 import * as propTypes from '../../util/propTypes';
 
-import css from './Messages.css';
+import css from './ActivityFeed.css';
 
 const Message = props => {
   const { message, intl } = props;
-  const todayString = intl.formatMessage({ id: 'Messages.today' });
+  const todayString = intl.formatMessage({ id: 'ActivityFeed.today' });
   return (
     <div className={css.message}>
       <Avatar className={css.avatar} user={message.sender} />
@@ -30,7 +30,7 @@ Message.propTypes = {
 
 const OwnMessage = props => {
   const { message, intl } = props;
-  const todayString = intl.formatMessage({ id: 'Messages.today' });
+  const todayString = intl.formatMessage({ id: 'ActivityFeed.today' });
   return (
     <div className={css.ownMessage}>
       <div className={css.ownMessageContentWrapper}>
@@ -57,24 +57,27 @@ const Transition = props => {
     switch (transitionType) {
       case propTypes.TX_TRANSITION_PREAUTHORIZE:
         return isOwnTransition
-          ? intl.formatMessage({ id: 'Messages.ownTransitionRequest' }, { listingTitle })
-          : intl.formatMessage({ id: 'Messages.transitionRequest' }, { displayName, listingTitle });
+          ? intl.formatMessage({ id: 'ActivityFeed.ownTransitionRequest' }, { listingTitle })
+          : intl.formatMessage(
+              { id: 'ActivityFeed.transitionRequest' },
+              { displayName, listingTitle }
+            );
       case propTypes.TX_TRANSITION_ACCEPT:
         return isOwnTransition
-          ? intl.formatMessage({ id: 'Messages.ownTransitionAccept' })
-          : intl.formatMessage({ id: 'Messages.transitionAccept' }, { displayName });
+          ? intl.formatMessage({ id: 'ActivityFeed.ownTransitionAccept' })
+          : intl.formatMessage({ id: 'ActivityFeed.transitionAccept' }, { displayName });
       case propTypes.TX_TRANSITION_DECLINE:
         return isOwnTransition
-          ? intl.formatMessage({ id: 'Messages.ownTransitionDecline' })
-          : intl.formatMessage({ id: 'Messages.transitionDecline' }, { displayName });
+          ? intl.formatMessage({ id: 'ActivityFeed.ownTransitionDecline' })
+          : intl.formatMessage({ id: 'ActivityFeed.transitionDecline' }, { displayName });
       case propTypes.TX_TRANSITION_AUTO_DECLINE:
         return ownRole === propTypes.TX_TRANSITION_ACTOR_PROVIDER
-          ? intl.formatMessage({ id: 'Messages.ownTransitionAutoDecline' })
-          : intl.formatMessage({ id: 'Messages.transitionAutoDecline' }, { displayName });
+          ? intl.formatMessage({ id: 'ActivityFeed.ownTransitionAutoDecline' })
+          : intl.formatMessage({ id: 'ActivityFeed.transitionAutoDecline' }, { displayName });
       case propTypes.TX_TRANSITION_MARK_DELIVERED:
-        return intl.formatMessage({ id: 'Messages.transitionComplete' });
+        return intl.formatMessage({ id: 'ActivityFeed.transitionComplete' });
       case propTypes.TX_TRANSITION_CANCEL:
-        return intl.formatMessage({ id: 'Messages.transitionCancel' });
+        return intl.formatMessage({ id: 'ActivityFeed.transitionCancel' });
 
       default:
         return '';
@@ -92,7 +95,7 @@ const Transition = props => {
       : customer.attributes.profile.displayName;
 
   const transitionMessage = resolveTransitionMessage(transition, ownRole, otherUsersName, intl);
-  const todayString = intl.formatMessage({ id: 'Messages.today' });
+  const todayString = intl.formatMessage({ id: 'ActivityFeed.today' });
 
   return (
     <div className={css.transition}>
@@ -130,7 +133,7 @@ const EmptyTransition = () => {
   );
 };
 
-export const MessagesComponent = props => {
+export const ActivityFeedComponent = props => {
   const { rootClassName, className, messages, transaction, currentUser, intl } = props;
   const classes = classNames(rootClassName || css.root, className);
 
@@ -214,12 +217,12 @@ export const MessagesComponent = props => {
   );
 };
 
-MessagesComponent.defaultProps = {
+ActivityFeedComponent.defaultProps = {
   rootClassName: null,
   className: null,
 };
 
-MessagesComponent.propTypes = {
+ActivityFeedComponent.propTypes = {
   rootClassName: string,
   className: string,
 
@@ -231,6 +234,6 @@ MessagesComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const Messages = injectIntl(MessagesComponent);
+const ActivityFeed = injectIntl(ActivityFeedComponent);
 
-export default Messages;
+export default ActivityFeed;
