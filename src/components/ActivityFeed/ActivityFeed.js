@@ -4,7 +4,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { Avatar } from '../../components';
 import { formatDate } from '../../util/dates';
-import { ensureTransaction, ensureUser } from '../../util/data';
+import { ensureTransaction, ensureUser, ensureListing } from '../../util/data';
 import * as propTypes from '../../util/propTypes';
 
 import css from './ActivityFeed.css';
@@ -143,9 +143,14 @@ export const ActivityFeedComponent = props => {
     : [];
   const currentCustomer = ensureUser(currentTransaction.customer);
   const currentProvider = ensureUser(currentTransaction.provider);
+  const currentListing = ensureListing(currentTransaction.listing);
 
-  const transitionsAvailable =
-    currentUser && currentUser.id && currentCustomer.id && currentProvider.id;
+  const transitionsAvailable = !!(
+    currentUser &&
+    currentUser.id &&
+    currentCustomer.id &&
+    currentProvider.id
+  );
 
   const isMessage = item => item && item.type === 'message';
 
@@ -166,7 +171,7 @@ export const ActivityFeedComponent = props => {
           currentUser={currentUser}
           customer={currentCustomer}
           provider={currentProvider}
-          listingTitle={currentTransaction.listing.attributes.title}
+          listingTitle={currentListing.attributes.title}
           intl={intl}
         />
       );
