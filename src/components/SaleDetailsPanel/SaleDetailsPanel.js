@@ -169,6 +169,8 @@ export class SaleDetailsPanelComponent extends Component {
     const messagesContainerClasses = classNames(css.messagesContainer, {
       [css.messagesContainerWithInfoAbove]: showInfoText,
     });
+    const hasOlderMessages = false; // TODO
+    const showOlderMessages = () => null; // TODO
     const showMessages = messages.length > 0 || fetchMessagesError;
     const messagesContainer = showMessages ? (
       <div className={messagesContainerClasses}>
@@ -180,7 +182,14 @@ export class SaleDetailsPanelComponent extends Component {
             <FormattedMessage id="SaleDetailsPanel.messageLoadingFailed" />
           </p>
         ) : null}
-        <ActivityFeed className={css.messages} messages={messages} currentUser={currentUser} />
+        <ActivityFeed
+          className={css.messages}
+          messages={messages}
+          transaction={currentTransaction}
+          currentUser={currentUser}
+          hasOlderMessages={hasOlderMessages}
+          onShowOlderMessages={showOlderMessages}
+        />
       </div>
     ) : null;
 

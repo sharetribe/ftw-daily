@@ -9,14 +9,14 @@ import {
 import * as propTypes from '../../util/propTypes';
 import ActivityFeed from './ActivityFeed';
 
+const noop = () => null;
+
 export const Empty = {
   component: ActivityFeed,
   props: {
     messages: [],
-    currentUser: null,
-    transaction: null,
-    customer: null,
-    provider: null,
+    hasOlderMessages: false,
+    onShowOlderMessages: noop,
   },
   group: 'messages',
 };
@@ -28,7 +28,8 @@ export const WithoutCurrentUser = {
       createMessage('msg1', {}, { sender: createUser('user1') }),
       createMessage('msg2', {}, { sender: createUser('user2') }),
     ],
-    currentUser: null,
+    hasOlderMessages: false,
+    onShowOlderMessages: noop,
   },
   group: 'messages',
 };
@@ -36,6 +37,7 @@ export const WithoutCurrentUser = {
 export const WithCurrentUser = {
   component: ActivityFeed,
   props: {
+    currentUser: createCurrentUser('user2'),
     messages: [
       createMessage('msg1', {}, { sender: createUser('user1') }),
       createMessage('msg2', {}, { sender: createUser('user2') }),
@@ -43,7 +45,8 @@ export const WithCurrentUser = {
       createMessage('msg4', { content: 'ok' }, { sender: createUser('user1') }),
       createMessage('msg5', {}, { sender: createUser('user1') }),
     ],
-    currentUser: createCurrentUser('user2'),
+    hasOlderMessages: false,
+    onShowOlderMessages: noop,
   },
   group: 'messages',
 };
@@ -51,7 +54,7 @@ export const WithCurrentUser = {
 export const WithTransitions = {
   component: ActivityFeed,
   props: {
-    messages: [],
+    currentUser: createCurrentUser('user2'),
     transaction: createTransaction({
       customer: createUser('user1'),
       provider: createUser('user2'),
@@ -69,7 +72,9 @@ export const WithTransitions = {
         }),
       ],
     }),
-    currentUser: createCurrentUser('user2'),
+    messages: [],
+    hasOlderMessages: false,
+    onShowOlderMessages: noop,
   },
   group: 'messages',
 };
@@ -77,28 +82,7 @@ export const WithTransitions = {
 export const WithMessagesAndTransitions = {
   component: ActivityFeed,
   props: {
-    messages: [
-      createMessage(
-        'msg1',
-        { at: new Date(Date.UTC(2017, 10, 9, 8, 11)) },
-        { sender: createUser('user1') }
-      ),
-      createMessage(
-        'msg2',
-        { at: new Date(Date.UTC(2017, 10, 9, 8, 14)) },
-        { sender: createUser('user1') }
-      ),
-      createMessage(
-        'msg3',
-        { at: new Date(Date.UTC(2017, 10, 9, 8, 17)) },
-        { sender: createUser('user2') }
-      ),
-      createMessage(
-        'msg4',
-        { at: new Date(Date.UTC(2017, 10, 12, 13, 20)) },
-        { sender: createUser('user2') }
-      ),
-    ],
+    currentUser: createCurrentUser('user2'),
     transaction: createTransaction({
       customer: createUser('user1'),
       provider: createUser('user2'),
@@ -126,7 +110,30 @@ export const WithMessagesAndTransitions = {
         }),
       ],
     }),
-    currentUser: createCurrentUser('user2'),
+    messages: [
+      createMessage(
+        'msg1',
+        { at: new Date(Date.UTC(2017, 10, 9, 8, 11)) },
+        { sender: createUser('user1') }
+      ),
+      createMessage(
+        'msg2',
+        { at: new Date(Date.UTC(2017, 10, 9, 8, 14)) },
+        { sender: createUser('user1') }
+      ),
+      createMessage(
+        'msg3',
+        { at: new Date(Date.UTC(2017, 10, 9, 8, 17)) },
+        { sender: createUser('user2') }
+      ),
+      createMessage(
+        'msg4',
+        { at: new Date(Date.UTC(2017, 10, 12, 13, 20)) },
+        { sender: createUser('user2') }
+      ),
+    ],
+    hasOlderMessages: false,
+    onShowOlderMessages: noop,
   },
   group: 'messages',
 };

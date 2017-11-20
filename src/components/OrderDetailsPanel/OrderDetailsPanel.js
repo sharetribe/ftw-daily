@@ -170,6 +170,8 @@ export class OrderDetailsPanelComponent extends Component {
     const txTransitions = currentTransaction.attributes.transitions
       ? currentTransaction.attributes.transitions
       : [];
+    const hasOlderMessages = false; // TODO
+    const showOlderMessages = () => null; // TODO
     const showMessages =
       messages.length > 0 || txTransitions.length > 0 || initialMessageFailed || fetchMessagesError;
     const messagesContainer = showMessages ? (
@@ -192,6 +194,8 @@ export class OrderDetailsPanelComponent extends Component {
           messages={messages}
           transaction={currentTransaction}
           currentUser={currentUser}
+          hasOlderMessages={hasOlderMessages}
+          onShowOlderMessages={showOlderMessages}
         />
       </div>
     ) : null;

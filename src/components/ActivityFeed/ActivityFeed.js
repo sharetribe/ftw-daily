@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, arrayOf } from 'prop-types';
+import { string, arrayOf, bool, func } from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { Avatar } from '../../components';
@@ -226,9 +226,11 @@ ActivityFeedComponent.propTypes = {
   rootClassName: string,
   className: string,
 
-  messages: arrayOf(propTypes.message),
-  transaction: propTypes.transaction,
   currentUser: propTypes.currentUser,
+  transaction: propTypes.transaction,
+  messages: arrayOf(propTypes.message),
+  hasOlderMessages: bool.isRequired,
+  onShowOlderMessages: func.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
