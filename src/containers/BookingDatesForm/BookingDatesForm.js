@@ -52,6 +52,13 @@ const estimatedNightlyTransaction = (bookingStart, bookingEnd, unitPrice) => {
           reversal: false,
         },
       ],
+      transitions: [
+        {
+          at: now,
+          by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
+          transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+        },
+      ],
     },
     booking: {
       id: new types.UUID('estimated-booking'),
