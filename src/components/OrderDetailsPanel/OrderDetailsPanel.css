@@ -233,7 +233,7 @@
   }
 }
 
-.messagesContainer {
+.feedContainer {
   margin: 46px 24px 0 24px;
 
   @media (--viewportMedium) {
@@ -244,13 +244,13 @@
   }
 }
 
-.messagesContainerWithInfoAbove {
+.feedContainerWithInfoAbove {
   @media (--viewportLarge) {
     margin: 38px 0 0 0;
   }
 }
 
-.messagesHeading {
+.feedHeading {
   color: var(--matterColorAnti);
   margin: 0;
 
@@ -259,7 +259,7 @@
   }
 }
 
-.messages {
+.feed {
   margin-top: 17px;
 
   @media (--viewportMedium) {

@@ -222,7 +222,7 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
       >
         <h3>
           <FormattedMessage
-            id="SaleDetailsPanel.messagesHeading"
+            id="SaleDetailsPanel.activityHeading"
             values={Object {}}
           />
         </h3>
@@ -805,7 +805,7 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
       >
         <h3>
           <FormattedMessage
-            id="SaleDetailsPanel.messagesHeading"
+            id="SaleDetailsPanel.activityHeading"
             values={Object {}}
           />
         </h3>
@@ -1388,7 +1388,7 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
       >
         <h3>
           <FormattedMessage
-            id="SaleDetailsPanel.messagesHeading"
+            id="SaleDetailsPanel.activityHeading"
             values={Object {}}
           />
         </h3>
@@ -1971,7 +1971,7 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
       >
         <h3>
           <FormattedMessage
-            id="SaleDetailsPanel.messagesHeading"
+            id="SaleDetailsPanel.activityHeading"
             values={Object {}}
           />
         </h3>
@@ -2554,7 +2554,7 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
       >
         <h3>
           <FormattedMessage
-            id="SaleDetailsPanel.messagesHeading"
+            id="SaleDetailsPanel.activityHeading"
             values={Object {}}
           />
         </h3>
@@ -3147,7 +3147,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
       >
         <h3>
           <FormattedMessage
-            id="SaleDetailsPanel.messagesHeading"
+            id="SaleDetailsPanel.activityHeading"
             values={Object {}}
           />
         </h3>
