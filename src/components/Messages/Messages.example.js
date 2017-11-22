@@ -39,7 +39,9 @@ export const WithCurrentUser = {
     messages: [
       createMessage('msg1', {}, { sender: createUser('user1') }),
       createMessage('msg2', {}, { sender: createUser('user2') }),
-      createMessage('msg3', {}, { sender: createUser('user1') }),
+      createMessage('msg3', { content: 'ok' }, { sender: createUser('user2') }),
+      createMessage('msg4', { content: 'ok' }, { sender: createUser('user1') }),
+      createMessage('msg5', {}, { sender: createUser('user1') }),
     ],
     currentUser: createCurrentUser('user2'),
   },
