@@ -54,7 +54,7 @@
   },
   "scripts": {
     "clean": "rm -rf build/*",
-    "dev": "sharetribe-scripts start",
+    "dev": "REACT_APP_ENV=development sharetribe-scripts start",
     "build": "sharetribe-scripts build",
     "format": "prettier --write '**/*.{js,css}'",
     "format-ci": "prettier --list-different '**/*.{js,css}'",
@@ -62,7 +62,7 @@
     "test-ci": "sharetribe-scripts test --env=jsdom --runInBand",
     "eject": "sharetribe-scripts eject",
     "start": "node server/index.js",
-    "dev-server": "REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000 yarn run build&&nodemon --watch server server/index.js",
+    "dev-server": "export REACT_APP_ENV=development REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000&&yarn run build&&nodemon --watch server server/index.js",
     "heroku-prebuild": "./heroku-copy-ssh-key-from-env.sh",
     "heroku-postbuild": "yarn run build",
     "audit": "nsp check"

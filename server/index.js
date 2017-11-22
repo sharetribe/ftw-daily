@@ -33,7 +33,7 @@ const log = require('./log');
 const { sitemapStructure } = require('./sitemap');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
-const env = process.env.REACT_APP_ENV === undefined ? 'production' : process.env.REACT_APP_ENV;
+const env = process.env.REACT_APP_ENV || 'production';
 const dev = process.env.REACT_APP_ENV === 'development';
 const PORT = process.env.PORT || 4000;
 const CLIENT_ID =
