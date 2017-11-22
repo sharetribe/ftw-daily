@@ -166,21 +166,33 @@ export class SaleDetailsPanelComponent extends Component {
     const firstImage =
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
-    const messagesContainerClasses = classNames(css.messagesContainer, {
-      [css.messagesContainerWithInfoAbove]: showInfoText,
+    const feedContainerClasses = classNames(css.feedContainer, {
+      [css.feedContainerWithInfoAbove]: showInfoText,
     });
-    const showMessages = messages.length > 0 || fetchMessagesError;
-    const messagesContainer = showMessages ? (
-      <div className={messagesContainerClasses}>
-        <h3 className={css.messagesHeading}>
-          <FormattedMessage id="SaleDetailsPanel.messagesHeading" />
+    const txTransitions = currentTransaction.attributes.transitions
+      ? currentTransaction.attributes.transitions
+      : [];
+    const hasOlderMessages = false; // TODO
+    const showOlderMessages = () => null; // TODO
+    const showFeed = messages.length > 0 || txTransitions.length > 0 || fetchMessagesError;
+    const feedContainer = showFeed ? (
+      <div className={feedContainerClasses}>
+        <h3 className={css.feedHeading}>
+          <FormattedMessage id="SaleDetailsPanel.activityHeading" />
         </h3>
         {fetchMessagesError ? (
           <p className={css.messagesError}>
             <FormattedMessage id="SaleDetailsPanel.messageLoadingFailed" />
           </p>
         ) : null}
-        <ActivityFeed className={css.messages} messages={messages} currentUser={currentUser} />
+        <ActivityFeed
+          className={css.feed}
+          messages={messages}
+          transaction={currentTransaction}
+          currentUser={currentUser}
+          hasOlderMessages={hasOlderMessages}
+          onShowOlderMessages={showOlderMessages}
+        />
       </div>
     ) : null;
 
@@ -306,7 +318,7 @@ export class SaleDetailsPanelComponent extends Component {
               </h3>
               {bookingInfo}
             </div>
-            {messagesContainer}
+            {feedContainer}
             <SendMessageForm
               form={sendMessageFormName}
               rootClassName={sendMessageFormClasses}

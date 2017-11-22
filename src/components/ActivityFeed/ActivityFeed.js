@@ -1,10 +1,11 @@
 import React from 'react';
-import { string, arrayOf } from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { string, arrayOf, bool, func } from 'prop-types';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { dropWhile } from 'lodash';
 import classNames from 'classnames';
-import { Avatar } from '../../components';
+import { Avatar, InlineTextButton } from '../../components';
 import { formatDate } from '../../util/dates';
-import { ensureTransaction, ensureUser } from '../../util/data';
+import { ensureTransaction, ensureUser, ensureListing } from '../../util/data';
 import * as propTypes from '../../util/propTypes';
 
 import css from './ActivityFeed.css';
@@ -133,8 +134,37 @@ const EmptyTransition = () => {
   );
 };
 
+const isMessage = item => item && item.type === 'message';
+
+// Compare function for sorting an array containint messages and transitions
+const compareItems = (a, b) => {
+  const itemDate = item => (isMessage(item) ? item.attributes.at : item.at);
+  return itemDate(a) - itemDate(b);
+};
+
+const organizedItems = (messages, transitions, hasOlderMessages) => {
+  const items = messages.concat(transitions).sort(compareItems);
+  if (hasOlderMessages) {
+    // Hide transitions that happened before the oldest message. Since
+    // we have older items (messages) that we are not showing, seeing
+    // old transitions would be confusing.
+    return dropWhile(items, i => !isMessage(i));
+  } else {
+    return items;
+  }
+};
+
 export const ActivityFeedComponent = props => {
-  const { rootClassName, className, messages, transaction, currentUser, intl } = props;
+  const {
+    rootClassName,
+    className,
+    messages,
+    transaction,
+    currentUser,
+    hasOlderMessages,
+    onShowOlderMessages,
+    intl,
+  } = props;
   const classes = classNames(rootClassName || css.root, className);
 
   const currentTransaction = ensureTransaction(transaction);
@@ -143,20 +173,17 @@ export const ActivityFeedComponent = props => {
     : [];
   const currentCustomer = ensureUser(currentTransaction.customer);
   const currentProvider = ensureUser(currentTransaction.provider);
+  const currentListing = ensureListing(currentTransaction.listing);
 
-  const transitionsAvailable =
-    currentUser && currentUser.id && currentCustomer.id && currentProvider.id;
-
-  const isMessage = item => item && item.type === 'message';
-
-  // Compare function for sorting an array containint messages and transitions
-  const compareItems = (a, b) => {
-    const itemDate = item => (isMessage(item) ? item.attributes.at : item.at);
-    return itemDate(a) - itemDate(b);
-  };
+  const transitionsAvailable = !!(
+    currentUser &&
+    currentUser.id &&
+    currentCustomer.id &&
+    currentProvider.id
+  );
 
   // combine messages and transaction transitions
-  const items = messages.concat(transitions).sort(compareItems);
+  const items = organizedItems(messages, transitions, hasOlderMessages);
 
   const transitionComponent = transition => {
     if (transitionsAvailable) {
@@ -166,7 +193,7 @@ export const ActivityFeedComponent = props => {
           currentUser={currentUser}
           customer={currentCustomer}
           provider={currentProvider}
-          listingTitle={currentTransaction.listing.attributes.title}
+          listingTitle={currentListing.attributes.title}
           intl={intl}
         />
       );
@@ -206,6 +233,13 @@ export const ActivityFeedComponent = props => {
 
   return (
     <ul className={classes}>
+      {hasOlderMessages ? (
+        <li className={css.showOlderWrapper} key="show-older-messages">
+          <InlineTextButton className={css.showOlderButton} onClick={onShowOlderMessages}>
+            <FormattedMessage id="ActivityFeed.showOlderMessages" />
+          </InlineTextButton>
+        </li>
+      ) : null}
       {items.map(item => {
         if (isMessage(item)) {
           return messageListItem(item);
@@ -226,9 +260,11 @@ ActivityFeedComponent.propTypes = {
   rootClassName: string,
   className: string,
 
-  messages: arrayOf(propTypes.message),
-  transaction: propTypes.transaction,
   currentUser: propTypes.currentUser,
+  transaction: propTypes.transaction,
+  messages: arrayOf(propTypes.message),
+  hasOlderMessages: bool.isRequired,
+  onShowOlderMessages: func.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,

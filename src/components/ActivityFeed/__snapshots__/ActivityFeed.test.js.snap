@@ -6,6 +6,56 @@ exports[`ActivityFeed matches snapshot 1`] = `
 >
   <li
     className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      <div
+        className={undefined}
+      >
+        <p
+          className={undefined}
+        >
+          •
+        </p>
+      </div>
+      <div>
+        <p
+          className={undefined}
+        />
+        <p
+          className={undefined}
+        />
+      </div>
+    </div>
+  </li>
+  <li
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      <div
+        className={undefined}
+      >
+        <p
+          className={undefined}
+        >
+          •
+        </p>
+      </div>
+      <div>
+        <p
+          className={undefined}
+        />
+        <p
+          className={undefined}
+        />
+      </div>
+    </div>
+  </li>
+  <li
+    className={undefined}
     id="msg-msg1"
   >
     <div

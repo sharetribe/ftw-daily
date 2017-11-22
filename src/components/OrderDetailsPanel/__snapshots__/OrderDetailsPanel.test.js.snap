@@ -228,7 +228,7 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
       >
         <h3>
           <FormattedMessage
-            id="OrderDetailsPanel.messagesHeading"
+            id="OrderDetailsPanel.activityHeading"
             values={Object {}}
           />
         </h3>
@@ -253,6 +253,7 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
               "type": "currentUser",
             }
           }
+          hasOlderMessages={false}
           messages={
             Array [
               Object {
@@ -307,6 +308,7 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
               },
             ]
           }
+          onShowOlderMessages={[Function]}
           transaction={
             Object {
               "attributes": Object {
@@ -857,7 +859,7 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
       >
         <h3>
           <FormattedMessage
-            id="OrderDetailsPanel.messagesHeading"
+            id="OrderDetailsPanel.activityHeading"
             values={Object {}}
           />
         </h3>
@@ -882,6 +884,7 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
               "type": "currentUser",
             }
           }
+          hasOlderMessages={false}
           messages={
             Array [
               Object {
@@ -936,6 +939,7 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
               },
             ]
           }
+          onShowOlderMessages={[Function]}
           transaction={
             Object {
               "attributes": Object {
@@ -1498,7 +1502,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
       >
         <h3>
           <FormattedMessage
-            id="OrderDetailsPanel.messagesHeading"
+            id="OrderDetailsPanel.activityHeading"
             values={Object {}}
           />
         </h3>
@@ -1523,6 +1527,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
               "type": "currentUser",
             }
           }
+          hasOlderMessages={false}
           messages={
             Array [
               Object {
@@ -1577,6 +1582,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
               },
             ]
           }
+          onShowOlderMessages={[Function]}
           transaction={
             Object {
               "attributes": Object {
@@ -2127,7 +2133,7 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
       >
         <h3>
           <FormattedMessage
-            id="OrderDetailsPanel.messagesHeading"
+            id="OrderDetailsPanel.activityHeading"
             values={Object {}}
           />
         </h3>
@@ -2152,6 +2158,7 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
               "type": "currentUser",
             }
           }
+          hasOlderMessages={false}
           messages={
             Array [
               Object {
@@ -2206,6 +2213,7 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
               },
             ]
           }
+          onShowOlderMessages={[Function]}
           transaction={
             Object {
               "attributes": Object {
@@ -2756,7 +2764,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
       >
         <h3>
           <FormattedMessage
-            id="OrderDetailsPanel.messagesHeading"
+            id="OrderDetailsPanel.activityHeading"
             values={Object {}}
           />
         </h3>
@@ -2781,6 +2789,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
               "type": "currentUser",
             }
           }
+          hasOlderMessages={false}
           messages={
             Array [
               Object {
@@ -2835,6 +2844,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
               },
             ]
           }
+          onShowOlderMessages={[Function]}
           transaction={
             Object {
               "attributes": Object {
@@ -3408,7 +3418,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
       >
         <h3>
           <FormattedMessage
-            id="OrderDetailsPanel.messagesHeading"
+            id="OrderDetailsPanel.activityHeading"
             values={Object {}}
           />
         </h3>
@@ -3433,6 +3443,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
               "type": "currentUser",
             }
           }
+          hasOlderMessages={false}
           messages={
             Array [
               Object {
@@ -3487,6 +3498,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
               },
             ]
           }
+          onShowOlderMessages={[Function]}
           transaction={
             Object {
               "attributes": Object {

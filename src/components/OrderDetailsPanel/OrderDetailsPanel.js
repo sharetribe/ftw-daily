@@ -164,18 +164,20 @@ export class OrderDetailsPanelComponent extends Component {
     const firstImage =
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
-    const messagesContainerClasses = classNames(css.messagesContainer, {
-      [css.messagesContainerWithInfoAbove]: showInfoMessage,
+    const feedContainerClasses = classNames(css.feedContainer, {
+      [css.feedContainerWithInfoAbove]: showInfoMessage,
     });
     const txTransitions = currentTransaction.attributes.transitions
       ? currentTransaction.attributes.transitions
       : [];
-    const showMessages =
+    const hasOlderMessages = false; // TODO
+    const showOlderMessages = () => null; // TODO
+    const showFeed =
       messages.length > 0 || txTransitions.length > 0 || initialMessageFailed || fetchMessagesError;
-    const messagesContainer = showMessages ? (
-      <div className={messagesContainerClasses}>
-        <h3 className={css.messagesHeading}>
-          <FormattedMessage id="OrderDetailsPanel.messagesHeading" />
+    const feedContainer = showFeed ? (
+      <div className={feedContainerClasses}>
+        <h3 className={css.feedHeading}>
+          <FormattedMessage id="OrderDetailsPanel.activityHeading" />
         </h3>
         {initialMessageFailed ? (
           <p className={css.error}>
@@ -188,10 +190,12 @@ export class OrderDetailsPanelComponent extends Component {
           </p>
         ) : null}
         <ActivityFeed
-          className={css.messages}
+          className={css.feed}
           messages={messages}
           transaction={currentTransaction}
           currentUser={currentUser}
+          hasOlderMessages={hasOlderMessages}
+          onShowOlderMessages={showOlderMessages}
         />
       </div>
     ) : null;
@@ -273,7 +277,7 @@ export class OrderDetailsPanelComponent extends Component {
               </h3>
               {bookingInfo}
             </div>
-            {messagesContainer}
+            {feedContainer}
             <SendMessageForm
               form={sendMessageFormName}
               rootClassName={sendMessageFormClasses}
