@@ -163,6 +163,16 @@ export const TX_TRANSITION_CANCEL = 'transition/cancel';
 // with the mark-delivered transition.
 export const TX_TRANSITION_MARK_DELIVERED = 'transition/mark-delivered';
 
+// Review transitions
+export const TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST = 'transition/review-by-provider-first';
+export const TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND = 'transition/review-by-provider-second';
+export const TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST = 'transition/review-by-customer-first';
+export const TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND = 'transition/review-by-customer-second';
+export const TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER = 'transition/mark-reviewed-by-customer';
+export const TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER = 'transition/mark-reviewed-by-provider';
+export const TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS =
+  'transition/auto-complete-without-reviews';
+
 export const TX_TRANSITIONS = [
   TX_TRANSITION_PREAUTHORIZE,
   TX_TRANSITION_ACCEPT,
@@ -170,6 +180,13 @@ export const TX_TRANSITIONS = [
   TX_TRANSITION_AUTO_DECLINE,
   TX_TRANSITION_CANCEL,
   TX_TRANSITION_MARK_DELIVERED,
+  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+  TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+  TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+  TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
+  TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
+  TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
 ];
 
 // Roles of actors that perform transaction transitions
@@ -205,6 +222,20 @@ export const txTransition = shape({
   at: instanceOf(Date).isRequired,
   by: oneOf(TX_TRANSITION_ACTORS).isRequired,
   transition: oneOf(TX_TRANSITIONS).isRequired,
+});
+
+// A review on a user
+export const review = shape({
+  id: uuid.isRequired,
+  attributes: shape({
+    at: instanceOf(Date).isRequired,
+    content: string,
+    rating: number,
+    state: string.isRequired,
+    type: string.isRequired,
+  }),
+  author: user,
+  subject: user,
 });
 
 // Denormalised transaction object
