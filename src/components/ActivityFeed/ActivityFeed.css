@@ -136,3 +136,15 @@
 .bullet {
   margin-right: 6px;
 }
+
+.showOlderWrapper {
+  text-align: center;
+  margin-bottom: 1px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 0;
+  }
+}
+
+.showOlderButton {
+}

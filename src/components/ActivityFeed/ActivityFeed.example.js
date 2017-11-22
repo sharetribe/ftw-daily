@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import {
   createUser,
   createCurrentUser,
@@ -135,5 +136,85 @@ export const WithMessagesAndTransitions = {
     hasOlderMessages: false,
     onShowOlderMessages: noop,
   },
+  group: 'messages',
+};
+
+class PagedFeed extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { showAllMessages: false };
+  }
+  render() {
+    const dates = [
+      new Date(Date.UTC(2017, 10, 20, 12)),
+      new Date(Date.UTC(2017, 10, 21, 12)),
+      new Date(Date.UTC(2017, 10, 22, 12)),
+      new Date(Date.UTC(2017, 10, 23, 12)),
+      new Date(Date.UTC(2017, 10, 24, 12)),
+      new Date(Date.UTC(2017, 10, 25, 12)),
+      new Date(Date.UTC(2017, 10, 26, 12)),
+    ];
+
+    const currentUser = createCurrentUser('customer');
+    const customer = createUser('customer');
+    const provider = createUser('provider');
+
+    const trans1 = createTxTransition({
+      at: dates[0],
+      by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
+      transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+    });
+    const trans2 = createTxTransition({
+      at: dates[2],
+      by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
+      transition: propTypes.TX_TRANSITION_ACCEPT,
+    });
+
+    // Last transition timestamp is interleaved between the last two
+    // messages.
+    const trans3 = createTxTransition({
+      at: dates[5],
+      by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
+      transition: propTypes.TX_TRANSITION_MARK_DELIVERED,
+    });
+
+    // First message timestamp is interleaved between the first two
+    // transitions.
+    const msg1 = createMessage('msg1', { at: dates[1] }, { sender: customer });
+
+    const msg2 = createMessage('msg2', { at: dates[3] }, { sender: provider });
+    const msg3 = createMessage('msg3', { at: dates[4] }, { sender: customer });
+    const msg4 = createMessage('msg4', { at: dates[6] }, { sender: customer });
+
+    const transaction = createTransaction({
+      id: 'tx1',
+      lastTransition: propTypes.TX_TRANSITION_MARK_DELIVERED,
+      lastTransitionedAt: dates[5],
+      transitions: [trans1, trans2, trans3],
+      listing: createListing('listing'),
+      customer,
+      provider,
+    });
+    const messages = this.state.showAllMessages ? [msg1, msg2, msg3, msg4] : [msg2, msg3, msg4];
+
+    const handleShowOlder = () => {
+      console.log('show older messages');
+      this.setState({ showAllMessages: true });
+    };
+
+    const feedProps = {
+      currentUser,
+      transaction,
+      messages,
+      hasOlderMessages: !this.state.showAllMessages,
+      onShowOlderMessages: handleShowOlder,
+    };
+    return <ActivityFeed {...feedProps} />;
+  }
+}
+
+export const WithMessagePaging = {
+  component: PagedFeed,
+  props: {},
   group: 'messages',
 };

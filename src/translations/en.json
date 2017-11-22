@@ -3,6 +3,7 @@
   "ActivityFeed.ownTransitionAutoDecline": "Booking request expired. You did not reply on time.",
   "ActivityFeed.ownTransitionDecline": "You declined the booking request.",
   "ActivityFeed.ownTransitionRequest": "You requested to book { listingTitle }.",
+  "ActivityFeed.showOlderMessages": "Show older",
   "ActivityFeed.today": "Today",
   "ActivityFeed.transitionAccept": "{ displayName } accepted the booking request.",
   "ActivityFeed.transitionAutoDecline": "Booking request expired. { displayName } did not reply on time.",
