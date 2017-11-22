@@ -90,11 +90,14 @@ export class OrderDetailsPanelComponent extends Component {
       className,
       currentUser,
       transaction,
+      totalMessages,
       messages,
       initialMessageFailed,
+      fetchMessagesInProgress,
       fetchMessagesError,
       sendMessageInProgress,
       sendMessageError,
+      onShowMoreMessages,
       onSendMessage,
       onResetForm,
       intl,
@@ -170,8 +173,10 @@ export class OrderDetailsPanelComponent extends Component {
     const txTransitions = currentTransaction.attributes.transitions
       ? currentTransaction.attributes.transitions
       : [];
-    const hasOlderMessages = false; // TODO
-    const showOlderMessages = () => null; // TODO
+    const hasOlderMessages = totalMessages > messages.length;
+    const handleShowOlderMessages = () => {
+      onShowMoreMessages(currentTransaction.id);
+    };
     const showFeed =
       messages.length > 0 || txTransitions.length > 0 || initialMessageFailed || fetchMessagesError;
     const feedContainer = showFeed ? (
@@ -194,8 +199,9 @@ export class OrderDetailsPanelComponent extends Component {
           messages={messages}
           transaction={currentTransaction}
           currentUser={currentUser}
-          hasOlderMessages={hasOlderMessages}
-          onShowOlderMessages={showOlderMessages}
+          hasOlderMessages={hasOlderMessages && !fetchMessagesInProgress}
+          onShowOlderMessages={handleShowOlderMessages}
+          fetchMessagesInProgress={fetchMessagesInProgress}
         />
       </div>
     ) : null;
@@ -337,7 +343,7 @@ OrderDetailsPanelComponent.defaultProps = {
   sendMessageError: null,
 };
 
-const { string, arrayOf, bool, func } = PropTypes;
+const { string, arrayOf, bool, func, number } = PropTypes;
 
 OrderDetailsPanelComponent.propTypes = {
   rootClassName: string,
@@ -345,11 +351,14 @@ OrderDetailsPanelComponent.propTypes = {
 
   currentUser: propTypes.currentUser,
   transaction: propTypes.transaction.isRequired,
+  totalMessages: number.isRequired,
   messages: arrayOf(propTypes.message).isRequired,
   initialMessageFailed: bool.isRequired,
+  fetchMessagesInProgress: bool.isRequired,
   fetchMessagesError: propTypes.error,
   sendMessageInProgress: bool.isRequired,
   sendMessageError: propTypes.error,
+  onShowMoreMessages: func.isRequired,
   onSendMessage: func.isRequired,
   onResetForm: func.isRequired,
 

@@ -70,12 +70,15 @@ describe('OrderDetailsPanel', () => {
   const panelBaseProps = {
     intl: fakeIntl,
     currentUser: createCurrentUser('user2'),
+    totalMessages: 2,
     messages: [
       createMessage('msg1', {}, { sender: createUser('user1') }),
       createMessage('msg2', {}, { sender: createUser('user2') }),
     ],
     initialMessageFailed: false,
+    fetchMessagesInProgress: false,
     sendMessageInProgress: false,
+    onShowMoreMessages: noop,
     onSendMessage: noop,
     onResetForm: noop,
   };

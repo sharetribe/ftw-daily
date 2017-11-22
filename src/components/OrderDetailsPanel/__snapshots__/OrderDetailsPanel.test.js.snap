@@ -253,6 +253,7 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
               "type": "currentUser",
             }
           }
+          fetchMessagesInProgress={false}
           hasOlderMessages={false}
           messages={
             Array [
@@ -884,6 +885,7 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
               "type": "currentUser",
             }
           }
+          fetchMessagesInProgress={false}
           hasOlderMessages={false}
           messages={
             Array [
@@ -1527,6 +1529,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
               "type": "currentUser",
             }
           }
+          fetchMessagesInProgress={false}
           hasOlderMessages={false}
           messages={
             Array [
@@ -2158,6 +2161,7 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
               "type": "currentUser",
             }
           }
+          fetchMessagesInProgress={false}
           hasOlderMessages={false}
           messages={
             Array [
@@ -2789,6 +2793,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
               "type": "currentUser",
             }
           }
+          fetchMessagesInProgress={false}
           hasOlderMessages={false}
           messages={
             Array [
@@ -3443,6 +3448,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
               "type": "currentUser",
             }
           }
+          fetchMessagesInProgress={false}
           hasOlderMessages={false}
           messages={
             Array [
