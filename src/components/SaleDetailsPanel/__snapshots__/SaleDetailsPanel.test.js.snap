@@ -89,7 +89,6 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
           }
         />
       </h1>
-      <div />
       <div>
         <h3>
           <FormattedMessage
@@ -304,107 +303,54 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
           }
         />
       </div>
+      <SendMessageForm
+        form="SaleDetailsPanel.SendMessageForm"
+        inProgress={false}
+        messagePlaceholder="SaleDetailsPanel.sendMessagePlaceholder"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onSubmit={[Function]}
+        rootClassName=""
+        sendMessageError={null}
+      />
+      <div />
     </div>
     <div>
       <div>
         <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
-            noImageMessage={null}
-            rootClassName={null}
-            sizes="100%"
-          />
+          <div>
+            <ResponsiveImage
+              alt="listing1 title"
+              className={null}
+              image={null}
+              nameSet={
+                Array [
+                  Object {
+                    "name": "landscape-crop",
+                    "size": "400w",
+                  },
+                  Object {
+                    "name": "landscape-crop2x",
+                    "size": "800w",
+                  },
+                ]
+              }
+              noImageMessage={null}
+              rootClassName={null}
+              sizes="100%"
+            />
+          </div>
         </div>
-      </div>
-      <h3>
-        <FormattedMessage
-          id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}}
-        />
-      </h3>
-      <div>
-        <BookingBreakdown
-          booking={
-            Object {
-              "attributes": Object {
-                "end": 2017-06-13T00:00:00.000Z,
-                "start": 2017-06-10T00:00:00.000Z,
-              },
-              "id": UUID {
-                "uuid": "booking1",
-              },
-              "type": "booking",
-            }
-          }
-          transaction={
-            Object {
-              "attributes": Object {
-                "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/accept",
-                "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
-                "lineItems": Array [
-                  Object {
-                    "code": "line-item/night",
-                    "lineTotal": Money {
-                      "amount": 16500,
-                      "currency": "USD",
-                    },
-                    "quantity": "3",
-                    "reversal": false,
-                    "unitPrice": Money {
-                      "amount": 5500,
-                      "currency": "USD",
-                    },
-                  },
-                  Object {
-                    "code": "line-item/provider-commission",
-                    "lineTotal": Money {
-                      "amount": -1000,
-                      "currency": "USD",
-                    },
-                    "reversal": false,
-                    "unitPrice": Money {
-                      "amount": -1000,
-                      "currency": "USD",
-                    },
-                  },
-                ],
-                "payinTotal": Money {
-                  "amount": 16500,
-                  "currency": "USD",
-                },
-                "payoutTotal": Money {
-                  "amount": 15500,
-                  "currency": "USD",
-                },
-                "transitions": Array [
-                  Object {
-                    "at": 2017-05-01T00:00:00.000Z,
-                    "by": "customer",
-                    "transition": "transition/preauthorize",
-                  },
-                  Object {
-                    "at": 2017-06-01T00:00:00.000Z,
-                    "by": "provider",
-                    "transition": "transition/accept",
-                  },
-                ],
-              },
-              "booking": Object {
+        <h3>
+          <FormattedMessage
+            id="SaleDetailsPanel.bookingBreakdownTitle"
+            values={Object {}}
+          />
+        </h3>
+        <div>
+          <BookingBreakdown
+            booking={
+              Object {
                 "attributes": Object {
                   "end": 2017-06-13T00:00:00.000Z,
                   "start": 2017-06-10T00:00:00.000Z,
@@ -413,50 +359,117 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
                   "uuid": "booking1",
                 },
                 "type": "booking",
-              },
-              "customer": Object {
+              }
+            }
+            transaction={
+              Object {
                 "attributes": Object {
-                  "banned": false,
-                  "profile": Object {
-                    "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
-                  },
-                },
-                "id": UUID {
-                  "uuid": "customer1",
-                },
-                "type": "user",
-              },
-              "id": UUID {
-                "uuid": "sale-accepted",
-              },
-              "listing": Object {
-                "attributes": Object {
-                  "address": "listing1 address",
-                  "closed": false,
-                  "deleted": false,
-                  "description": "listing1 description",
-                  "geolocation": LatLng {
-                    "lat": 40,
-                    "lng": 60,
-                  },
-                  "price": Money {
-                    "amount": 5500,
+                  "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransition": "transition/accept",
+                  "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
+                  "lineItems": Array [
+                    Object {
+                      "code": "line-item/night",
+                      "lineTotal": Money {
+                        "amount": 16500,
+                        "currency": "USD",
+                      },
+                      "quantity": "3",
+                      "reversal": false,
+                      "unitPrice": Money {
+                        "amount": 5500,
+                        "currency": "USD",
+                      },
+                    },
+                    Object {
+                      "code": "line-item/provider-commission",
+                      "lineTotal": Money {
+                        "amount": -1000,
+                        "currency": "USD",
+                      },
+                      "reversal": false,
+                      "unitPrice": Money {
+                        "amount": -1000,
+                        "currency": "USD",
+                      },
+                    },
+                  ],
+                  "payinTotal": Money {
+                    "amount": 16500,
                     "currency": "USD",
                   },
-                  "title": "listing1 title",
+                  "payoutTotal": Money {
+                    "amount": 15500,
+                    "currency": "USD",
+                  },
+                  "transitions": Array [
+                    Object {
+                      "at": 2017-05-01T00:00:00.000Z,
+                      "by": "customer",
+                      "transition": "transition/preauthorize",
+                    },
+                    Object {
+                      "at": 2017-06-01T00:00:00.000Z,
+                      "by": "provider",
+                      "transition": "transition/accept",
+                    },
+                  ],
+                },
+                "booking": Object {
+                  "attributes": Object {
+                    "end": 2017-06-13T00:00:00.000Z,
+                    "start": 2017-06-10T00:00:00.000Z,
+                  },
+                  "id": UUID {
+                    "uuid": "booking1",
+                  },
+                  "type": "booking",
+                },
+                "customer": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "customer1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "customer1",
+                  },
+                  "type": "user",
                 },
                 "id": UUID {
-                  "uuid": "listing1",
+                  "uuid": "sale-accepted",
                 },
-                "type": "listing",
-              },
-              "provider": null,
-              "type": "transaction",
+                "listing": Object {
+                  "attributes": Object {
+                    "address": "listing1 address",
+                    "closed": false,
+                    "deleted": false,
+                    "description": "listing1 description",
+                    "geolocation": LatLng {
+                      "lat": 40,
+                      "lng": 60,
+                    },
+                    "price": Money {
+                      "amount": 5500,
+                      "currency": "USD",
+                    },
+                    "title": "listing1 title",
+                  },
+                  "id": UUID {
+                    "uuid": "listing1",
+                  },
+                  "type": "listing",
+                },
+                "provider": null,
+                "type": "transaction",
+              }
             }
-          }
-          userRole="provider"
-        />
+            userRole="provider"
+          />
+        </div>
+        <div />
       </div>
     </div>
   </div>
@@ -552,7 +565,6 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
           }
         />
       </h1>
-      <div />
       <div>
         <h3>
           <FormattedMessage
@@ -767,107 +779,54 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
           }
         />
       </div>
+      <SendMessageForm
+        form="SaleDetailsPanel.SendMessageForm"
+        inProgress={false}
+        messagePlaceholder="SaleDetailsPanel.sendMessagePlaceholder"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onSubmit={[Function]}
+        rootClassName=""
+        sendMessageError={null}
+      />
+      <div />
     </div>
     <div>
       <div>
         <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
-            noImageMessage={null}
-            rootClassName={null}
-            sizes="100%"
-          />
+          <div>
+            <ResponsiveImage
+              alt="listing1 title"
+              className={null}
+              image={null}
+              nameSet={
+                Array [
+                  Object {
+                    "name": "landscape-crop",
+                    "size": "400w",
+                  },
+                  Object {
+                    "name": "landscape-crop2x",
+                    "size": "800w",
+                  },
+                ]
+              }
+              noImageMessage={null}
+              rootClassName={null}
+              sizes="100%"
+            />
+          </div>
         </div>
-      </div>
-      <h3>
-        <FormattedMessage
-          id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}}
-        />
-      </h3>
-      <div>
-        <BookingBreakdown
-          booking={
-            Object {
-              "attributes": Object {
-                "end": 2017-06-13T00:00:00.000Z,
-                "start": 2017-06-10T00:00:00.000Z,
-              },
-              "id": UUID {
-                "uuid": "booking1",
-              },
-              "type": "booking",
-            }
-          }
-          transaction={
-            Object {
-              "attributes": Object {
-                "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/auto-decline",
-                "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
-                "lineItems": Array [
-                  Object {
-                    "code": "line-item/night",
-                    "lineTotal": Money {
-                      "amount": 16500,
-                      "currency": "USD",
-                    },
-                    "quantity": "3",
-                    "reversal": false,
-                    "unitPrice": Money {
-                      "amount": 5500,
-                      "currency": "USD",
-                    },
-                  },
-                  Object {
-                    "code": "line-item/provider-commission",
-                    "lineTotal": Money {
-                      "amount": -1000,
-                      "currency": "USD",
-                    },
-                    "reversal": false,
-                    "unitPrice": Money {
-                      "amount": -1000,
-                      "currency": "USD",
-                    },
-                  },
-                ],
-                "payinTotal": Money {
-                  "amount": 16500,
-                  "currency": "USD",
-                },
-                "payoutTotal": Money {
-                  "amount": 15500,
-                  "currency": "USD",
-                },
-                "transitions": Array [
-                  Object {
-                    "at": 2017-05-01T00:00:00.000Z,
-                    "by": "customer",
-                    "transition": "transition/preauthorize",
-                  },
-                  Object {
-                    "at": 2017-06-01T00:00:00.000Z,
-                    "by": "provider",
-                    "transition": "transition/accept",
-                  },
-                ],
-              },
-              "booking": Object {
+        <h3>
+          <FormattedMessage
+            id="SaleDetailsPanel.bookingBreakdownTitle"
+            values={Object {}}
+          />
+        </h3>
+        <div>
+          <BookingBreakdown
+            booking={
+              Object {
                 "attributes": Object {
                   "end": 2017-06-13T00:00:00.000Z,
                   "start": 2017-06-10T00:00:00.000Z,
@@ -876,50 +835,117 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
                   "uuid": "booking1",
                 },
                 "type": "booking",
-              },
-              "customer": Object {
+              }
+            }
+            transaction={
+              Object {
                 "attributes": Object {
-                  "banned": false,
-                  "profile": Object {
-                    "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
-                  },
-                },
-                "id": UUID {
-                  "uuid": "customer1",
-                },
-                "type": "user",
-              },
-              "id": UUID {
-                "uuid": "sale-autodeclined",
-              },
-              "listing": Object {
-                "attributes": Object {
-                  "address": "listing1 address",
-                  "closed": false,
-                  "deleted": false,
-                  "description": "listing1 description",
-                  "geolocation": LatLng {
-                    "lat": 40,
-                    "lng": 60,
-                  },
-                  "price": Money {
-                    "amount": 5500,
+                  "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransition": "transition/auto-decline",
+                  "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
+                  "lineItems": Array [
+                    Object {
+                      "code": "line-item/night",
+                      "lineTotal": Money {
+                        "amount": 16500,
+                        "currency": "USD",
+                      },
+                      "quantity": "3",
+                      "reversal": false,
+                      "unitPrice": Money {
+                        "amount": 5500,
+                        "currency": "USD",
+                      },
+                    },
+                    Object {
+                      "code": "line-item/provider-commission",
+                      "lineTotal": Money {
+                        "amount": -1000,
+                        "currency": "USD",
+                      },
+                      "reversal": false,
+                      "unitPrice": Money {
+                        "amount": -1000,
+                        "currency": "USD",
+                      },
+                    },
+                  ],
+                  "payinTotal": Money {
+                    "amount": 16500,
                     "currency": "USD",
                   },
-                  "title": "listing1 title",
+                  "payoutTotal": Money {
+                    "amount": 15500,
+                    "currency": "USD",
+                  },
+                  "transitions": Array [
+                    Object {
+                      "at": 2017-05-01T00:00:00.000Z,
+                      "by": "customer",
+                      "transition": "transition/preauthorize",
+                    },
+                    Object {
+                      "at": 2017-06-01T00:00:00.000Z,
+                      "by": "provider",
+                      "transition": "transition/accept",
+                    },
+                  ],
+                },
+                "booking": Object {
+                  "attributes": Object {
+                    "end": 2017-06-13T00:00:00.000Z,
+                    "start": 2017-06-10T00:00:00.000Z,
+                  },
+                  "id": UUID {
+                    "uuid": "booking1",
+                  },
+                  "type": "booking",
+                },
+                "customer": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "customer1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "customer1",
+                  },
+                  "type": "user",
                 },
                 "id": UUID {
-                  "uuid": "listing1",
+                  "uuid": "sale-autodeclined",
                 },
-                "type": "listing",
-              },
-              "provider": null,
-              "type": "transaction",
+                "listing": Object {
+                  "attributes": Object {
+                    "address": "listing1 address",
+                    "closed": false,
+                    "deleted": false,
+                    "description": "listing1 description",
+                    "geolocation": LatLng {
+                      "lat": 40,
+                      "lng": 60,
+                    },
+                    "price": Money {
+                      "amount": 5500,
+                      "currency": "USD",
+                    },
+                    "title": "listing1 title",
+                  },
+                  "id": UUID {
+                    "uuid": "listing1",
+                  },
+                  "type": "listing",
+                },
+                "provider": null,
+                "type": "transaction",
+              }
             }
-          }
-          userRole="provider"
-        />
+            userRole="provider"
+          />
+        </div>
+        <div />
       </div>
     </div>
   </div>
@@ -1015,7 +1041,6 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
           }
         />
       </h1>
-      <div />
       <div>
         <h3>
           <FormattedMessage
@@ -1230,107 +1255,54 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
           }
         />
       </div>
+      <SendMessageForm
+        form="SaleDetailsPanel.SendMessageForm"
+        inProgress={false}
+        messagePlaceholder="SaleDetailsPanel.sendMessagePlaceholder"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onSubmit={[Function]}
+        rootClassName=""
+        sendMessageError={null}
+      />
+      <div />
     </div>
     <div>
       <div>
         <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
-            noImageMessage={null}
-            rootClassName={null}
-            sizes="100%"
-          />
+          <div>
+            <ResponsiveImage
+              alt="listing1 title"
+              className={null}
+              image={null}
+              nameSet={
+                Array [
+                  Object {
+                    "name": "landscape-crop",
+                    "size": "400w",
+                  },
+                  Object {
+                    "name": "landscape-crop2x",
+                    "size": "800w",
+                  },
+                ]
+              }
+              noImageMessage={null}
+              rootClassName={null}
+              sizes="100%"
+            />
+          </div>
         </div>
-      </div>
-      <h3>
-        <FormattedMessage
-          id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}}
-        />
-      </h3>
-      <div>
-        <BookingBreakdown
-          booking={
-            Object {
-              "attributes": Object {
-                "end": 2017-06-13T00:00:00.000Z,
-                "start": 2017-06-10T00:00:00.000Z,
-              },
-              "id": UUID {
-                "uuid": "booking1",
-              },
-              "type": "booking",
-            }
-          }
-          transaction={
-            Object {
-              "attributes": Object {
-                "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/accept",
-                "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
-                "lineItems": Array [
-                  Object {
-                    "code": "line-item/night",
-                    "lineTotal": Money {
-                      "amount": 16500,
-                      "currency": "USD",
-                    },
-                    "quantity": "3",
-                    "reversal": false,
-                    "unitPrice": Money {
-                      "amount": 5500,
-                      "currency": "USD",
-                    },
-                  },
-                  Object {
-                    "code": "line-item/provider-commission",
-                    "lineTotal": Money {
-                      "amount": -1000,
-                      "currency": "USD",
-                    },
-                    "reversal": false,
-                    "unitPrice": Money {
-                      "amount": -1000,
-                      "currency": "USD",
-                    },
-                  },
-                ],
-                "payinTotal": Money {
-                  "amount": 16500,
-                  "currency": "USD",
-                },
-                "payoutTotal": Money {
-                  "amount": 15500,
-                  "currency": "USD",
-                },
-                "transitions": Array [
-                  Object {
-                    "at": 2017-05-01T00:00:00.000Z,
-                    "by": "customer",
-                    "transition": "transition/preauthorize",
-                  },
-                  Object {
-                    "at": 2017-06-01T00:00:00.000Z,
-                    "by": "provider",
-                    "transition": "transition/accept",
-                  },
-                ],
-              },
-              "booking": Object {
+        <h3>
+          <FormattedMessage
+            id="SaleDetailsPanel.bookingBreakdownTitle"
+            values={Object {}}
+          />
+        </h3>
+        <div>
+          <BookingBreakdown
+            booking={
+              Object {
                 "attributes": Object {
                   "end": 2017-06-13T00:00:00.000Z,
                   "start": 2017-06-10T00:00:00.000Z,
@@ -1339,50 +1311,117 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
                   "uuid": "booking1",
                 },
                 "type": "booking",
-              },
-              "customer": Object {
+              }
+            }
+            transaction={
+              Object {
                 "attributes": Object {
-                  "banned": false,
-                  "profile": Object {
-                    "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
-                  },
-                },
-                "id": UUID {
-                  "uuid": "customer1",
-                },
-                "type": "user",
-              },
-              "id": UUID {
-                "uuid": "sale-canceled",
-              },
-              "listing": Object {
-                "attributes": Object {
-                  "address": "listing1 address",
-                  "closed": false,
-                  "deleted": false,
-                  "description": "listing1 description",
-                  "geolocation": LatLng {
-                    "lat": 40,
-                    "lng": 60,
-                  },
-                  "price": Money {
-                    "amount": 5500,
+                  "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransition": "transition/accept",
+                  "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
+                  "lineItems": Array [
+                    Object {
+                      "code": "line-item/night",
+                      "lineTotal": Money {
+                        "amount": 16500,
+                        "currency": "USD",
+                      },
+                      "quantity": "3",
+                      "reversal": false,
+                      "unitPrice": Money {
+                        "amount": 5500,
+                        "currency": "USD",
+                      },
+                    },
+                    Object {
+                      "code": "line-item/provider-commission",
+                      "lineTotal": Money {
+                        "amount": -1000,
+                        "currency": "USD",
+                      },
+                      "reversal": false,
+                      "unitPrice": Money {
+                        "amount": -1000,
+                        "currency": "USD",
+                      },
+                    },
+                  ],
+                  "payinTotal": Money {
+                    "amount": 16500,
                     "currency": "USD",
                   },
-                  "title": "listing1 title",
+                  "payoutTotal": Money {
+                    "amount": 15500,
+                    "currency": "USD",
+                  },
+                  "transitions": Array [
+                    Object {
+                      "at": 2017-05-01T00:00:00.000Z,
+                      "by": "customer",
+                      "transition": "transition/preauthorize",
+                    },
+                    Object {
+                      "at": 2017-06-01T00:00:00.000Z,
+                      "by": "provider",
+                      "transition": "transition/accept",
+                    },
+                  ],
+                },
+                "booking": Object {
+                  "attributes": Object {
+                    "end": 2017-06-13T00:00:00.000Z,
+                    "start": 2017-06-10T00:00:00.000Z,
+                  },
+                  "id": UUID {
+                    "uuid": "booking1",
+                  },
+                  "type": "booking",
+                },
+                "customer": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "customer1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "customer1",
+                  },
+                  "type": "user",
                 },
                 "id": UUID {
-                  "uuid": "listing1",
+                  "uuid": "sale-canceled",
                 },
-                "type": "listing",
-              },
-              "provider": null,
-              "type": "transaction",
+                "listing": Object {
+                  "attributes": Object {
+                    "address": "listing1 address",
+                    "closed": false,
+                    "deleted": false,
+                    "description": "listing1 description",
+                    "geolocation": LatLng {
+                      "lat": 40,
+                      "lng": 60,
+                    },
+                    "price": Money {
+                      "amount": 5500,
+                      "currency": "USD",
+                    },
+                    "title": "listing1 title",
+                  },
+                  "id": UUID {
+                    "uuid": "listing1",
+                  },
+                  "type": "listing",
+                },
+                "provider": null,
+                "type": "transaction",
+              }
             }
-          }
-          userRole="provider"
-        />
+            userRole="provider"
+          />
+        </div>
+        <div />
       </div>
     </div>
   </div>
@@ -1478,7 +1517,6 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
           }
         />
       </h1>
-      <div />
       <div>
         <h3>
           <FormattedMessage
@@ -1693,107 +1731,54 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
           }
         />
       </div>
+      <SendMessageForm
+        form="SaleDetailsPanel.SendMessageForm"
+        inProgress={false}
+        messagePlaceholder="SaleDetailsPanel.sendMessagePlaceholder"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onSubmit={[Function]}
+        rootClassName=""
+        sendMessageError={null}
+      />
+      <div />
     </div>
     <div>
       <div>
         <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
-            noImageMessage={null}
-            rootClassName={null}
-            sizes="100%"
-          />
+          <div>
+            <ResponsiveImage
+              alt="listing1 title"
+              className={null}
+              image={null}
+              nameSet={
+                Array [
+                  Object {
+                    "name": "landscape-crop",
+                    "size": "400w",
+                  },
+                  Object {
+                    "name": "landscape-crop2x",
+                    "size": "800w",
+                  },
+                ]
+              }
+              noImageMessage={null}
+              rootClassName={null}
+              sizes="100%"
+            />
+          </div>
         </div>
-      </div>
-      <h3>
-        <FormattedMessage
-          id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}}
-        />
-      </h3>
-      <div>
-        <BookingBreakdown
-          booking={
-            Object {
-              "attributes": Object {
-                "end": 2017-06-13T00:00:00.000Z,
-                "start": 2017-06-10T00:00:00.000Z,
-              },
-              "id": UUID {
-                "uuid": "booking1",
-              },
-              "type": "booking",
-            }
-          }
-          transaction={
-            Object {
-              "attributes": Object {
-                "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/decline",
-                "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
-                "lineItems": Array [
-                  Object {
-                    "code": "line-item/night",
-                    "lineTotal": Money {
-                      "amount": 16500,
-                      "currency": "USD",
-                    },
-                    "quantity": "3",
-                    "reversal": false,
-                    "unitPrice": Money {
-                      "amount": 5500,
-                      "currency": "USD",
-                    },
-                  },
-                  Object {
-                    "code": "line-item/provider-commission",
-                    "lineTotal": Money {
-                      "amount": -1000,
-                      "currency": "USD",
-                    },
-                    "reversal": false,
-                    "unitPrice": Money {
-                      "amount": -1000,
-                      "currency": "USD",
-                    },
-                  },
-                ],
-                "payinTotal": Money {
-                  "amount": 16500,
-                  "currency": "USD",
-                },
-                "payoutTotal": Money {
-                  "amount": 15500,
-                  "currency": "USD",
-                },
-                "transitions": Array [
-                  Object {
-                    "at": 2017-05-01T00:00:00.000Z,
-                    "by": "customer",
-                    "transition": "transition/preauthorize",
-                  },
-                  Object {
-                    "at": 2017-06-01T00:00:00.000Z,
-                    "by": "provider",
-                    "transition": "transition/accept",
-                  },
-                ],
-              },
-              "booking": Object {
+        <h3>
+          <FormattedMessage
+            id="SaleDetailsPanel.bookingBreakdownTitle"
+            values={Object {}}
+          />
+        </h3>
+        <div>
+          <BookingBreakdown
+            booking={
+              Object {
                 "attributes": Object {
                   "end": 2017-06-13T00:00:00.000Z,
                   "start": 2017-06-10T00:00:00.000Z,
@@ -1802,50 +1787,117 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
                   "uuid": "booking1",
                 },
                 "type": "booking",
-              },
-              "customer": Object {
+              }
+            }
+            transaction={
+              Object {
                 "attributes": Object {
-                  "banned": false,
-                  "profile": Object {
-                    "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
-                  },
-                },
-                "id": UUID {
-                  "uuid": "customer1",
-                },
-                "type": "user",
-              },
-              "id": UUID {
-                "uuid": "sale-declined",
-              },
-              "listing": Object {
-                "attributes": Object {
-                  "address": "listing1 address",
-                  "closed": false,
-                  "deleted": false,
-                  "description": "listing1 description",
-                  "geolocation": LatLng {
-                    "lat": 40,
-                    "lng": 60,
-                  },
-                  "price": Money {
-                    "amount": 5500,
+                  "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransition": "transition/decline",
+                  "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
+                  "lineItems": Array [
+                    Object {
+                      "code": "line-item/night",
+                      "lineTotal": Money {
+                        "amount": 16500,
+                        "currency": "USD",
+                      },
+                      "quantity": "3",
+                      "reversal": false,
+                      "unitPrice": Money {
+                        "amount": 5500,
+                        "currency": "USD",
+                      },
+                    },
+                    Object {
+                      "code": "line-item/provider-commission",
+                      "lineTotal": Money {
+                        "amount": -1000,
+                        "currency": "USD",
+                      },
+                      "reversal": false,
+                      "unitPrice": Money {
+                        "amount": -1000,
+                        "currency": "USD",
+                      },
+                    },
+                  ],
+                  "payinTotal": Money {
+                    "amount": 16500,
                     "currency": "USD",
                   },
-                  "title": "listing1 title",
+                  "payoutTotal": Money {
+                    "amount": 15500,
+                    "currency": "USD",
+                  },
+                  "transitions": Array [
+                    Object {
+                      "at": 2017-05-01T00:00:00.000Z,
+                      "by": "customer",
+                      "transition": "transition/preauthorize",
+                    },
+                    Object {
+                      "at": 2017-06-01T00:00:00.000Z,
+                      "by": "provider",
+                      "transition": "transition/accept",
+                    },
+                  ],
+                },
+                "booking": Object {
+                  "attributes": Object {
+                    "end": 2017-06-13T00:00:00.000Z,
+                    "start": 2017-06-10T00:00:00.000Z,
+                  },
+                  "id": UUID {
+                    "uuid": "booking1",
+                  },
+                  "type": "booking",
+                },
+                "customer": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "customer1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "customer1",
+                  },
+                  "type": "user",
                 },
                 "id": UUID {
-                  "uuid": "listing1",
+                  "uuid": "sale-declined",
                 },
-                "type": "listing",
-              },
-              "provider": null,
-              "type": "transaction",
+                "listing": Object {
+                  "attributes": Object {
+                    "address": "listing1 address",
+                    "closed": false,
+                    "deleted": false,
+                    "description": "listing1 description",
+                    "geolocation": LatLng {
+                      "lat": 40,
+                      "lng": 60,
+                    },
+                    "price": Money {
+                      "amount": 5500,
+                      "currency": "USD",
+                    },
+                    "title": "listing1 title",
+                  },
+                  "id": UUID {
+                    "uuid": "listing1",
+                  },
+                  "type": "listing",
+                },
+                "provider": null,
+                "type": "transaction",
+              }
             }
-          }
-          userRole="provider"
-        />
+            userRole="provider"
+          />
+        </div>
+        <div />
       </div>
     </div>
   </div>
@@ -1941,7 +1993,6 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
           }
         />
       </h1>
-      <div />
       <div>
         <h3>
           <FormattedMessage
@@ -2156,107 +2207,54 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
           }
         />
       </div>
+      <SendMessageForm
+        form="SaleDetailsPanel.SendMessageForm"
+        inProgress={false}
+        messagePlaceholder="SaleDetailsPanel.sendMessagePlaceholder"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onSubmit={[Function]}
+        rootClassName=""
+        sendMessageError={null}
+      />
+      <div />
     </div>
     <div>
       <div>
         <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
-            noImageMessage={null}
-            rootClassName={null}
-            sizes="100%"
-          />
+          <div>
+            <ResponsiveImage
+              alt="listing1 title"
+              className={null}
+              image={null}
+              nameSet={
+                Array [
+                  Object {
+                    "name": "landscape-crop",
+                    "size": "400w",
+                  },
+                  Object {
+                    "name": "landscape-crop2x",
+                    "size": "800w",
+                  },
+                ]
+              }
+              noImageMessage={null}
+              rootClassName={null}
+              sizes="100%"
+            />
+          </div>
         </div>
-      </div>
-      <h3>
-        <FormattedMessage
-          id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}}
-        />
-      </h3>
-      <div>
-        <BookingBreakdown
-          booking={
-            Object {
-              "attributes": Object {
-                "end": 2017-06-13T00:00:00.000Z,
-                "start": 2017-06-10T00:00:00.000Z,
-              },
-              "id": UUID {
-                "uuid": "booking1",
-              },
-              "type": "booking",
-            }
-          }
-          transaction={
-            Object {
-              "attributes": Object {
-                "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/mark-delivered",
-                "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
-                "lineItems": Array [
-                  Object {
-                    "code": "line-item/night",
-                    "lineTotal": Money {
-                      "amount": 16500,
-                      "currency": "USD",
-                    },
-                    "quantity": "3",
-                    "reversal": false,
-                    "unitPrice": Money {
-                      "amount": 5500,
-                      "currency": "USD",
-                    },
-                  },
-                  Object {
-                    "code": "line-item/provider-commission",
-                    "lineTotal": Money {
-                      "amount": -1000,
-                      "currency": "USD",
-                    },
-                    "reversal": false,
-                    "unitPrice": Money {
-                      "amount": -1000,
-                      "currency": "USD",
-                    },
-                  },
-                ],
-                "payinTotal": Money {
-                  "amount": 16500,
-                  "currency": "USD",
-                },
-                "payoutTotal": Money {
-                  "amount": 15500,
-                  "currency": "USD",
-                },
-                "transitions": Array [
-                  Object {
-                    "at": 2017-05-01T00:00:00.000Z,
-                    "by": "customer",
-                    "transition": "transition/preauthorize",
-                  },
-                  Object {
-                    "at": 2017-06-01T00:00:00.000Z,
-                    "by": "provider",
-                    "transition": "transition/accept",
-                  },
-                ],
-              },
-              "booking": Object {
+        <h3>
+          <FormattedMessage
+            id="SaleDetailsPanel.bookingBreakdownTitle"
+            values={Object {}}
+          />
+        </h3>
+        <div>
+          <BookingBreakdown
+            booking={
+              Object {
                 "attributes": Object {
                   "end": 2017-06-13T00:00:00.000Z,
                   "start": 2017-06-10T00:00:00.000Z,
@@ -2265,50 +2263,117 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
                   "uuid": "booking1",
                 },
                 "type": "booking",
-              },
-              "customer": Object {
+              }
+            }
+            transaction={
+              Object {
                 "attributes": Object {
-                  "banned": false,
-                  "profile": Object {
-                    "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
-                  },
-                },
-                "id": UUID {
-                  "uuid": "customer1",
-                },
-                "type": "user",
-              },
-              "id": UUID {
-                "uuid": "sale-delivered",
-              },
-              "listing": Object {
-                "attributes": Object {
-                  "address": "listing1 address",
-                  "closed": false,
-                  "deleted": false,
-                  "description": "listing1 description",
-                  "geolocation": LatLng {
-                    "lat": 40,
-                    "lng": 60,
-                  },
-                  "price": Money {
-                    "amount": 5500,
+                  "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransition": "transition/mark-delivered",
+                  "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
+                  "lineItems": Array [
+                    Object {
+                      "code": "line-item/night",
+                      "lineTotal": Money {
+                        "amount": 16500,
+                        "currency": "USD",
+                      },
+                      "quantity": "3",
+                      "reversal": false,
+                      "unitPrice": Money {
+                        "amount": 5500,
+                        "currency": "USD",
+                      },
+                    },
+                    Object {
+                      "code": "line-item/provider-commission",
+                      "lineTotal": Money {
+                        "amount": -1000,
+                        "currency": "USD",
+                      },
+                      "reversal": false,
+                      "unitPrice": Money {
+                        "amount": -1000,
+                        "currency": "USD",
+                      },
+                    },
+                  ],
+                  "payinTotal": Money {
+                    "amount": 16500,
                     "currency": "USD",
                   },
-                  "title": "listing1 title",
+                  "payoutTotal": Money {
+                    "amount": 15500,
+                    "currency": "USD",
+                  },
+                  "transitions": Array [
+                    Object {
+                      "at": 2017-05-01T00:00:00.000Z,
+                      "by": "customer",
+                      "transition": "transition/preauthorize",
+                    },
+                    Object {
+                      "at": 2017-06-01T00:00:00.000Z,
+                      "by": "provider",
+                      "transition": "transition/accept",
+                    },
+                  ],
+                },
+                "booking": Object {
+                  "attributes": Object {
+                    "end": 2017-06-13T00:00:00.000Z,
+                    "start": 2017-06-10T00:00:00.000Z,
+                  },
+                  "id": UUID {
+                    "uuid": "booking1",
+                  },
+                  "type": "booking",
+                },
+                "customer": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "customer1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "customer1",
+                  },
+                  "type": "user",
                 },
                 "id": UUID {
-                  "uuid": "listing1",
+                  "uuid": "sale-delivered",
                 },
-                "type": "listing",
-              },
-              "provider": null,
-              "type": "transaction",
+                "listing": Object {
+                  "attributes": Object {
+                    "address": "listing1 address",
+                    "closed": false,
+                    "deleted": false,
+                    "description": "listing1 description",
+                    "geolocation": LatLng {
+                      "lat": 40,
+                      "lng": 60,
+                    },
+                    "price": Money {
+                      "amount": 5500,
+                      "currency": "USD",
+                    },
+                    "title": "listing1 title",
+                  },
+                  "id": UUID {
+                    "uuid": "listing1",
+                  },
+                  "type": "listing",
+                },
+                "provider": null,
+                "type": "transaction",
+              }
             }
-          }
-          userRole="provider"
-        />
+            userRole="provider"
+          />
+        </div>
+        <div />
       </div>
     </div>
   </div>
@@ -2414,7 +2479,6 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
           }
         />
       </p>
-      <div />
       <div>
         <h3>
           <FormattedMessage
@@ -2629,130 +2693,82 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
           }
         />
       </div>
+      <SendMessageForm
+        form="SaleDetailsPanel.SendMessageForm"
+        inProgress={false}
+        messagePlaceholder="SaleDetailsPanel.sendMessagePlaceholder"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onSubmit={[Function]}
+        rootClassName=""
+        sendMessageError={null}
+      />
       <div>
-        <div />
-        <SecondaryButton
-          disabled={false}
-          inProgress={false}
-          onClick={[Function]}
+        <div
+          className=""
         >
-          <FormattedMessage
-            id="SalePage.declineButton"
-            values={Object {}}
-          />
-        </SecondaryButton>
-        <PrimaryButton
-          disabled={false}
-          inProgress={false}
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            id="SalePage.acceptButton"
-            values={Object {}}
-          />
-        </PrimaryButton>
+          <div />
+          <div>
+            <SecondaryButton
+              disabled={false}
+              inProgress={false}
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="SalePage.declineButton"
+                values={Object {}}
+              />
+            </SecondaryButton>
+            <PrimaryButton
+              disabled={false}
+              inProgress={false}
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="SalePage.acceptButton"
+                values={Object {}}
+              />
+            </PrimaryButton>
+          </div>
+        </div>
       </div>
     </div>
     <div>
       <div>
         <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
-            noImageMessage={null}
-            rootClassName={null}
-            sizes="100%"
-          />
+          <div>
+            <ResponsiveImage
+              alt="listing1 title"
+              className={null}
+              image={null}
+              nameSet={
+                Array [
+                  Object {
+                    "name": "landscape-crop",
+                    "size": "400w",
+                  },
+                  Object {
+                    "name": "landscape-crop2x",
+                    "size": "800w",
+                  },
+                ]
+              }
+              noImageMessage={null}
+              rootClassName={null}
+              sizes="100%"
+            />
+          </div>
         </div>
-      </div>
-      <h3>
-        <FormattedMessage
-          id="SaleDetailsPanel.bookingBreakdownTitle"
-          values={Object {}}
-        />
-      </h3>
-      <div>
-        <BookingBreakdown
-          booking={
-            Object {
-              "attributes": Object {
-                "end": 2017-06-13T00:00:00.000Z,
-                "start": 2017-06-10T00:00:00.000Z,
-              },
-              "id": UUID {
-                "uuid": "booking1",
-              },
-              "type": "booking",
-            }
-          }
-          transaction={
-            Object {
-              "attributes": Object {
-                "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/preauthorize",
-                "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
-                "lineItems": Array [
-                  Object {
-                    "code": "line-item/night",
-                    "lineTotal": Money {
-                      "amount": 16500,
-                      "currency": "USD",
-                    },
-                    "quantity": "3",
-                    "reversal": false,
-                    "unitPrice": Money {
-                      "amount": 5500,
-                      "currency": "USD",
-                    },
-                  },
-                  Object {
-                    "code": "line-item/provider-commission",
-                    "lineTotal": Money {
-                      "amount": -1000,
-                      "currency": "USD",
-                    },
-                    "reversal": false,
-                    "unitPrice": Money {
-                      "amount": -1000,
-                      "currency": "USD",
-                    },
-                  },
-                ],
-                "payinTotal": Money {
-                  "amount": 16500,
-                  "currency": "USD",
-                },
-                "payoutTotal": Money {
-                  "amount": 15500,
-                  "currency": "USD",
-                },
-                "transitions": Array [
-                  Object {
-                    "at": 2017-05-01T00:00:00.000Z,
-                    "by": "customer",
-                    "transition": "transition/preauthorize",
-                  },
-                  Object {
-                    "at": 2017-06-01T00:00:00.000Z,
-                    "by": "provider",
-                    "transition": "transition/accept",
-                  },
-                ],
-              },
-              "booking": Object {
+        <h3>
+          <FormattedMessage
+            id="SaleDetailsPanel.bookingBreakdownTitle"
+            values={Object {}}
+          />
+        </h3>
+        <div>
+          <BookingBreakdown
+            booking={
+              Object {
                 "attributes": Object {
                   "end": 2017-06-13T00:00:00.000Z,
                   "start": 2017-06-10T00:00:00.000Z,
@@ -2761,50 +2777,145 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
                   "uuid": "booking1",
                 },
                 "type": "booking",
-              },
-              "customer": Object {
+              }
+            }
+            transaction={
+              Object {
                 "attributes": Object {
-                  "banned": false,
-                  "profile": Object {
-                    "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
-                  },
-                },
-                "id": UUID {
-                  "uuid": "customer1",
-                },
-                "type": "user",
-              },
-              "id": UUID {
-                "uuid": "sale-preauthorized",
-              },
-              "listing": Object {
-                "attributes": Object {
-                  "address": "listing1 address",
-                  "closed": false,
-                  "deleted": false,
-                  "description": "listing1 description",
-                  "geolocation": LatLng {
-                    "lat": 40,
-                    "lng": 60,
-                  },
-                  "price": Money {
-                    "amount": 5500,
+                  "createdAt": 2017-05-01T00:00:00.000Z,
+                  "lastTransition": "transition/preauthorize",
+                  "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
+                  "lineItems": Array [
+                    Object {
+                      "code": "line-item/night",
+                      "lineTotal": Money {
+                        "amount": 16500,
+                        "currency": "USD",
+                      },
+                      "quantity": "3",
+                      "reversal": false,
+                      "unitPrice": Money {
+                        "amount": 5500,
+                        "currency": "USD",
+                      },
+                    },
+                    Object {
+                      "code": "line-item/provider-commission",
+                      "lineTotal": Money {
+                        "amount": -1000,
+                        "currency": "USD",
+                      },
+                      "reversal": false,
+                      "unitPrice": Money {
+                        "amount": -1000,
+                        "currency": "USD",
+                      },
+                    },
+                  ],
+                  "payinTotal": Money {
+                    "amount": 16500,
                     "currency": "USD",
                   },
-                  "title": "listing1 title",
+                  "payoutTotal": Money {
+                    "amount": 15500,
+                    "currency": "USD",
+                  },
+                  "transitions": Array [
+                    Object {
+                      "at": 2017-05-01T00:00:00.000Z,
+                      "by": "customer",
+                      "transition": "transition/preauthorize",
+                    },
+                    Object {
+                      "at": 2017-06-01T00:00:00.000Z,
+                      "by": "provider",
+                      "transition": "transition/accept",
+                    },
+                  ],
+                },
+                "booking": Object {
+                  "attributes": Object {
+                    "end": 2017-06-13T00:00:00.000Z,
+                    "start": 2017-06-10T00:00:00.000Z,
+                  },
+                  "id": UUID {
+                    "uuid": "booking1",
+                  },
+                  "type": "booking",
+                },
+                "customer": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "customer1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "customer1",
+                  },
+                  "type": "user",
                 },
                 "id": UUID {
-                  "uuid": "listing1",
+                  "uuid": "sale-preauthorized",
                 },
-                "type": "listing",
-              },
-              "provider": null,
-              "type": "transaction",
+                "listing": Object {
+                  "attributes": Object {
+                    "address": "listing1 address",
+                    "closed": false,
+                    "deleted": false,
+                    "description": "listing1 description",
+                    "geolocation": LatLng {
+                      "lat": 40,
+                      "lng": 60,
+                    },
+                    "price": Money {
+                      "amount": 5500,
+                      "currency": "USD",
+                    },
+                    "title": "listing1 title",
+                  },
+                  "id": UUID {
+                    "uuid": "listing1",
+                  },
+                  "type": "listing",
+                },
+                "provider": null,
+                "type": "transaction",
+              }
             }
-          }
-          userRole="provider"
-        />
+            userRole="provider"
+          />
+        </div>
+        <div>
+          <div
+            className=""
+          >
+            <div />
+            <div>
+              <SecondaryButton
+                disabled={false}
+                inProgress={false}
+                onClick={[Function]}
+              >
+                <FormattedMessage
+                  id="SalePage.declineButton"
+                  values={Object {}}
+                />
+              </SecondaryButton>
+              <PrimaryButton
+                disabled={false}
+                inProgress={false}
+                onClick={[Function]}
+              >
+                <FormattedMessage
+                  id="SalePage.acceptButton"
+                  values={Object {}}
+                />
+              </PrimaryButton>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

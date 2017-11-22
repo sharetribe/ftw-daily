@@ -120,7 +120,12 @@ class SendMessageFormComponent extends Component {
             <FormattedMessage id="SendMessageForm.sendFailed" />
           </p>
         ) : null}
-        <button className={css.submitButtonMobile} disabled={submitDisabled}>
+        <button
+          className={css.submitButtonMobile}
+          disabled={submitDisabled}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+        >
           {submitInProgress ? (
             <IconSpinner className={css.sendIconMobileInProgress} />
           ) : (
