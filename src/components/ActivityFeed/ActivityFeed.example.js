@@ -7,10 +7,10 @@ import {
   createTxTransition,
 } from '../../util/test-data';
 import * as propTypes from '../../util/propTypes';
-import Messages from './Messages';
+import ActivityFeed from './ActivityFeed';
 
 export const Empty = {
-  component: Messages,
+  component: ActivityFeed,
   props: {
     messages: [],
     currentUser: null,
@@ -22,7 +22,7 @@ export const Empty = {
 };
 
 export const WithoutCurrentUser = {
-  component: Messages,
+  component: ActivityFeed,
   props: {
     messages: [
       createMessage('msg1', {}, { sender: createUser('user1') }),
@@ -34,7 +34,7 @@ export const WithoutCurrentUser = {
 };
 
 export const WithCurrentUser = {
-  component: Messages,
+  component: ActivityFeed,
   props: {
     messages: [
       createMessage('msg1', {}, { sender: createUser('user1') }),
@@ -49,7 +49,7 @@ export const WithCurrentUser = {
 };
 
 export const WithTransitions = {
-  component: Messages,
+  component: ActivityFeed,
   props: {
     messages: [],
     transaction: createTransaction({
@@ -75,7 +75,7 @@ export const WithTransitions = {
 };
 
 export const WithMessagesAndTransitions = {
-  component: Messages,
+  component: ActivityFeed,
   props: {
     messages: [
       createMessage(

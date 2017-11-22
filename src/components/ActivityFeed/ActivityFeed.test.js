@@ -1,9 +1,9 @@
 import React from 'react';
 import { renderDeep } from '../../util/test-helpers';
 import { fakeIntl, createUser, createCurrentUser, createMessage } from '../../util/test-data';
-import { MessagesComponent } from './Messages';
+import { ActivityFeedComponent } from './ActivityFeed';
 
-describe('Messages', () => {
+describe('ActivityFeed', () => {
   it('matches snapshot', () => {
     const props = {
       messages: [
@@ -13,7 +13,7 @@ describe('Messages', () => {
       currentUser: createCurrentUser('user2'),
       intl: fakeIntl,
     };
-    const tree = renderDeep(<MessagesComponent {...props} />);
+    const tree = renderDeep(<ActivityFeedComponent {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });

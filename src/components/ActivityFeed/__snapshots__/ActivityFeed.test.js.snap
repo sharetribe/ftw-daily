@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Messages matches snapshot 1`] = `
+exports[`ActivityFeed matches snapshot 1`] = `
 <ul
   className=""
 >

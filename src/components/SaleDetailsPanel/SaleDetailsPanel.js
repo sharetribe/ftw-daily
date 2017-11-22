@@ -14,7 +14,7 @@ import {
   ResponsiveImage,
   PrimaryButton,
   SecondaryButton,
-  Messages,
+  ActivityFeed,
 } from '../../components';
 import { SendMessageForm } from '../../containers';
 
@@ -180,7 +180,7 @@ export class SaleDetailsPanelComponent extends Component {
             <FormattedMessage id="SaleDetailsPanel.messageLoadingFailed" />
           </p>
         ) : null}
-        <Messages className={css.messages} messages={messages} currentUser={currentUser} />
+        <ActivityFeed className={css.messages} messages={messages} currentUser={currentUser} />
       </div>
     ) : null;
 
