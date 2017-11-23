@@ -137,6 +137,32 @@
   margin-right: 6px;
 }
 
+.reviewContent {
+  @apply --marketplaceH4FontStyles;
+  font-style: italic;
+  white-space: pre-line;
+  margin: 8px 0 0 0;
+
+  @media (--viewportMedium) {
+    max-width: 500px;
+    margin: 7px 0 0 0;
+  }
+}
+
+.reviewStars {
+  margin-top: 4px;
+
+  @media (--viewportMedium) {
+    margin-top: 2px;
+  }
+}
+
+.reviewStar {
+  width: 12px;
+  height: 12px;
+  font-styles: initial;
+}
+
 .showOlderWrapper {
   text-align: center;
   margin-bottom: 1px;

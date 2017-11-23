@@ -6,6 +6,7 @@ import {
   createTransaction,
   createListing,
   createTxTransition,
+  createReview,
 } from '../../util/test-data';
 import * as propTypes from '../../util/propTypes';
 import ActivityFeed from './ActivityFeed';
@@ -84,7 +85,7 @@ export const WithTransitions = {
   group: 'messages',
 };
 
-export const WithMessagesAndTransitions = {
+export const WithMessagesTransitionsAndReviews = {
   component: ActivityFeed,
   props: {
     currentUser: createCurrentUser('user2'),
@@ -92,6 +93,7 @@ export const WithMessagesAndTransitions = {
       customer: createUser('user1'),
       provider: createUser('user2'),
       listing: createListing('Listing'),
+      lastTransition: propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
       transitions: [
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
@@ -113,6 +115,28 @@ export const WithMessagesAndTransitions = {
           by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
           transition: propTypes.TX_TRANSITION_MARK_DELIVERED,
         }),
+        createTxTransition({
+          at: new Date(Date.UTC(2017, 10, 9, 11, 34)),
+          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
+          transition: propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+        }),
+        createTxTransition({
+          at: new Date(Date.UTC(2017, 10, 9, 12, 34)),
+          by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
+          transition: propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+        }),
+      ],
+      reviews: [
+        createReview(
+          'review1',
+          { at: new Date(Date.UTC(2017, 10, 9, 11, 34)), rating: 3, type: 'ofCustomer' },
+          { author: createUser('user2'), subject: createUser('user1') }
+        ),
+        createReview(
+          'review2',
+          { at: new Date(Date.UTC(2017, 10, 9, 12, 34)), rating: 5, type: 'ofProvider' },
+          { author: createUser('user1'), subject: createUser('user2') }
+        ),
       ],
     }),
     messages: [
@@ -137,6 +161,48 @@ export const WithMessagesAndTransitions = {
         { sender: createUser('user2') }
       ),
     ],
+    hasOlderMessages: false,
+    onShowOlderMessages: noop,
+    fetchMessagesInProgress: false,
+  },
+  group: 'messages',
+};
+
+export const WithAReviewFromBothUsers = {
+  component: ActivityFeed,
+  props: {
+    currentUser: createCurrentUser('user1'),
+    transaction: createTransaction({
+      customer: createUser('user1'),
+      provider: createUser('user2'),
+      listing: createListing('Listing'),
+      reviews: [
+        createReview(
+          'review1',
+          { at: new Date(Date.UTC(2017, 10, 9, 8, 10)), rating: 3, type: 'ofProvider' },
+          { author: createUser('user1'), subject: createUser('user2') }
+        ),
+        createReview(
+          'review2',
+          { at: new Date(Date.UTC(2017, 10, 10, 8, 10)), rating: 5, type: 'ofCustomer' },
+          { author: createUser('user2'), subject: createUser('user1') }
+        ),
+      ],
+      lastTransition: propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+      transitions: [
+        createTxTransition({
+          at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
+          by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
+          transition: propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+        }),
+        createTxTransition({
+          at: new Date(Date.UTC(2017, 10, 10, 8, 10)),
+          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
+          transition: propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+        }),
+      ],
+    }),
+    messages: [],
     hasOlderMessages: false,
     onShowOlderMessages: noop,
     fetchMessagesInProgress: false,

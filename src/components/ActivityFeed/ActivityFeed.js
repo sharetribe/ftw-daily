@@ -1,9 +1,9 @@
 import React from 'react';
-import { string, arrayOf, bool, func } from 'prop-types';
+import { string, arrayOf, bool, func, number } from 'prop-types';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { dropWhile } from 'lodash';
 import classNames from 'classnames';
-import { Avatar, InlineTextButton } from '../../components';
+import { Avatar, InlineTextButton, NamedLink, ReviewRating } from '../../components';
 import { formatDate } from '../../util/dates';
 import { ensureTransaction, ensureUser, ensureListing } from '../../util/data';
 import * as propTypes from '../../util/propTypes';
@@ -47,43 +47,156 @@ OwnMessage.propTypes = {
   intl: intlShape.isRequired,
 };
 
+const Review = props => {
+  const { content, rating } = props;
+  return (
+    <div>
+      <p className={css.reviewContent}>{content}</p>
+      <ReviewRating
+        reviewStarClassName={css.reviewStar}
+        className={css.reviewStars}
+        rating={rating}
+      />
+    </div>
+  );
+};
+
+Review.propTypes = {
+  content: string.isRequired,
+  rating: number.isRequired,
+};
+
+const areReviewsCompleted = transition => {
+  return [
+    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+    propTypes.TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
+    propTypes.TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
+    propTypes.TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
+  ].includes(transition);
+};
+
+const isReviewTransition = transition => {
+  return [
+    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+  ].includes(transition);
+};
+
+const hasUserLeftAReviewFirst = (userRole, lastTransition) => {
+  return (
+    (lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST &&
+      userRole === propTypes.TX_TRANSITION_ACTOR_CUSTOMER) ||
+    (lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST &&
+      userRole === propTypes.TX_TRANSITION_ACTOR_PROVIDER) ||
+    areReviewsCompleted(lastTransition)
+  );
+};
+
+const resolveTransitionMessage = (
+  transition,
+  lastTransition,
+  listingTitle,
+  ownRole,
+  otherUsersName,
+  intl
+) => {
+  const isOwnTransition = transition.by === ownRole;
+  const currentTransition = transition.transition;
+  const displayName = otherUsersName;
+  const deliveredState = lastTransition === propTypes.TX_TRANSITION_MARK_DELIVERED;
+
+  switch (currentTransition) {
+    case propTypes.TX_TRANSITION_PREAUTHORIZE:
+      return isOwnTransition ? (
+        <FormattedMessage id="ActivityFeed.ownTransitionRequest" values={{ listingTitle }} />
+      ) : (
+        <FormattedMessage
+          id="ActivityFeed.transitionRequest"
+          values={{ displayName, listingTitle }}
+        />
+      );
+    case propTypes.TX_TRANSITION_ACCEPT:
+      return isOwnTransition ? (
+        <FormattedMessage id="ActivityFeed.ownTransitionAccept" />
+      ) : (
+        <FormattedMessage id="ActivityFeed.transitionAccept" values={{ displayName }} />
+      );
+    case propTypes.TX_TRANSITION_DECLINE:
+      return isOwnTransition ? (
+        <FormattedMessage id="ActivityFeed.ownTransitionDecline" />
+      ) : (
+        <FormattedMessage id="ActivityFeed.transitionDecline" />
+      );
+    case propTypes.TX_TRANSITION_AUTO_DECLINE:
+      return ownRole === propTypes.TX_TRANSITION_ACTOR_PROVIDER ? (
+        <FormattedMessage id="ActivityFeed.ownTransitionAutoDecline" />
+      ) : (
+        <FormattedMessage id="ActivityFeed.transitionAutoDecline" values={{ displayName }} />
+      );
+    case propTypes.TX_TRANSITION_CANCEL:
+      return <FormattedMessage id="ActivityFeed.transitionCancel" />;
+    case propTypes.TX_TRANSITION_MARK_DELIVERED:
+      // Show the leave a review link if the state is delivered or
+      // if current user is not the first to leave a review
+      const reviewLink =
+        deliveredState || !hasUserLeftAReviewFirst(ownRole, lastTransition) ? (
+          <NamedLink name="LandingPage">
+            <FormattedMessage id="ActivityFeed.leaveAReview" values={{ displayName }} />
+          </NamedLink>
+        ) : null;
+
+      return <FormattedMessage id="ActivityFeed.transitionComplete" values={{ reviewLink }} />;
+    case propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST:
+    case propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST:
+      if (isOwnTransition) {
+        return <FormattedMessage id="ActivityFeed.ownTransitionReview" values={{ displayName }} />;
+      } else {
+        // show the leave a review link if current user is not the first
+        // one to leave a review
+        const reviewLink = !hasUserLeftAReviewFirst(ownRole, lastTransition) ? (
+          <NamedLink name="LandingPage">
+            <FormattedMessage id="ActivityFeed.leaveAReviewSecond" values={{ displayName }} />
+          </NamedLink>
+        ) : null;
+        return (
+          <FormattedMessage
+            id="ActivityFeed.transitionReview"
+            values={{ displayName, reviewLink }}
+          />
+        );
+      }
+    case propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND:
+    case propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND:
+      if (isOwnTransition) {
+        return <FormattedMessage id="ActivityFeed.ownTransitionReview" values={{ displayName }} />;
+      } else {
+        return (
+          <FormattedMessage
+            id="ActivityFeed.transitionReview"
+            values={{ displayName, reviewLink: null }}
+          />
+        );
+      }
+
+    default:
+      return '';
+  }
+};
+
+const reviewByAuthorId = (transaction, userId) => {
+  return transaction.reviews.filter(r => r.author.id.uuid === userId.uuid)[0];
+};
+
 const Transition = props => {
-  const { transition, currentUser, customer, provider, listingTitle, intl } = props;
+  const { transition, transaction, currentUser, intl } = props;
 
-  const resolveTransitionMessage = (transition, ownRole, otherUsersName, intl) => {
-    const isOwnTransition = transition.by === ownRole;
-    const transitionType = transition.transition;
-    const displayName = otherUsersName;
-
-    switch (transitionType) {
-      case propTypes.TX_TRANSITION_PREAUTHORIZE:
-        return isOwnTransition
-          ? intl.formatMessage({ id: 'ActivityFeed.ownTransitionRequest' }, { listingTitle })
-          : intl.formatMessage(
-              { id: 'ActivityFeed.transitionRequest' },
-              { displayName, listingTitle }
-            );
-      case propTypes.TX_TRANSITION_ACCEPT:
-        return isOwnTransition
-          ? intl.formatMessage({ id: 'ActivityFeed.ownTransitionAccept' })
-          : intl.formatMessage({ id: 'ActivityFeed.transitionAccept' }, { displayName });
-      case propTypes.TX_TRANSITION_DECLINE:
-        return isOwnTransition
-          ? intl.formatMessage({ id: 'ActivityFeed.ownTransitionDecline' })
-          : intl.formatMessage({ id: 'ActivityFeed.transitionDecline' }, { displayName });
-      case propTypes.TX_TRANSITION_AUTO_DECLINE:
-        return ownRole === propTypes.TX_TRANSITION_ACTOR_PROVIDER
-          ? intl.formatMessage({ id: 'ActivityFeed.ownTransitionAutoDecline' })
-          : intl.formatMessage({ id: 'ActivityFeed.transitionAutoDecline' }, { displayName });
-      case propTypes.TX_TRANSITION_MARK_DELIVERED:
-        return intl.formatMessage({ id: 'ActivityFeed.transitionComplete' });
-      case propTypes.TX_TRANSITION_CANCEL:
-        return intl.formatMessage({ id: 'ActivityFeed.transitionCancel' });
-
-      default:
-        return '';
-    }
-  };
+  const customer = transaction.customer;
+  const provider = transaction.provider;
+  const listingTitle = transaction.listing.attributes.title;
+  const lastTransition = transaction.attributes.lastTransition;
 
   const ownRole =
     currentUser.id.uuid === customer.id.uuid
@@ -95,7 +208,38 @@ const Transition = props => {
       ? provider.attributes.profile.displayName
       : customer.attributes.profile.displayName;
 
-  const transitionMessage = resolveTransitionMessage(transition, ownRole, otherUsersName, intl);
+  const transitionMessage = resolveTransitionMessage(
+    transition,
+    lastTransition,
+    listingTitle,
+    ownRole,
+    otherUsersName,
+    intl
+  );
+  const currentTransition = transition.transition;
+
+  let reviewComponent = null;
+
+  if (isReviewTransition(currentTransition) && areReviewsCompleted(lastTransition)) {
+    const customerReview =
+      currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST ||
+      currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND;
+    const providerReview =
+      currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST ||
+      currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND;
+    if (customerReview) {
+      const review = reviewByAuthorId(transaction, customer.id);
+      reviewComponent = (
+        <Review content={review.attributes.content} rating={review.attributes.rating} />
+      );
+    } else if (providerReview) {
+      const review = reviewByAuthorId(transaction, provider.id);
+      reviewComponent = (
+        <Review content={review.attributes.content} rating={review.attributes.rating} />
+      );
+    }
+  }
+
   const todayString = intl.formatMessage({ id: 'ActivityFeed.today' });
 
   return (
@@ -106,6 +250,7 @@ const Transition = props => {
       <div>
         <p className={css.transitionContent}>{transitionMessage}</p>
         <p className={css.transitionDate}>{formatDate(intl, todayString, transition.at)}</p>
+        {reviewComponent}
       </div>
     </div>
   );
@@ -113,10 +258,8 @@ const Transition = props => {
 
 Transition.propTypes = {
   transition: propTypes.txTransition.isRequired,
+  transaction: propTypes.transaction.isRequired,
   currentUser: propTypes.currentUser.isRequired,
-  customer: propTypes.user.isRequired,
-  provider: propTypes.user.isRequired,
-  listingTitle: string.isRequired,
   intl: intlShape.isRequired,
 };
 
@@ -180,7 +323,8 @@ export const ActivityFeedComponent = props => {
     currentUser &&
     currentUser.id &&
     currentCustomer.id &&
-    currentProvider.id
+    currentProvider.id &&
+    currentListing.id
   );
 
   // combine messages and transaction transitions
@@ -191,10 +335,8 @@ export const ActivityFeedComponent = props => {
       return (
         <Transition
           transition={transition}
+          transaction={currentTransaction}
           currentUser={currentUser}
-          customer={currentCustomer}
-          provider={currentProvider}
-          listingTitle={currentListing.attributes.title}
           intl={intl}
         />
       );

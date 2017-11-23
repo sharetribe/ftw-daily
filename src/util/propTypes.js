@@ -263,6 +263,7 @@ export const transaction = shape({
   listing,
   customer: user,
   provider: user,
+  reviews: arrayOf(review),
 });
 
 // Denormalised transaction message

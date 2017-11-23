@@ -183,6 +183,7 @@ exports[`InboxPage matches snapshot 1`] = `
                   },
                   "type": "user",
                 },
+                "reviews": Array [],
                 "type": "transaction",
               }
             }
@@ -297,6 +298,7 @@ exports[`InboxPage matches snapshot 1`] = `
                   },
                   "type": "user",
                 },
+                "reviews": Array [],
                 "type": "transaction",
               }
             }
@@ -569,6 +571,7 @@ exports[`InboxPage matches snapshot 3`] = `
                   },
                   "type": "user",
                 },
+                "reviews": Array [],
                 "type": "transaction",
               }
             }
@@ -683,6 +686,7 @@ exports[`InboxPage matches snapshot 3`] = `
                   },
                   "type": "user",
                 },
+                "reviews": Array [],
                 "type": "transaction",
               }
             }

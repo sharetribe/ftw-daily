@@ -217,6 +217,7 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -424,6 +425,7 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -633,6 +635,7 @@ exports[`OrderDetailsPanel accepted matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -849,6 +852,7 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -1056,6 +1060,7 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -1265,6 +1270,7 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -1493,6 +1499,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -1700,6 +1707,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -1909,6 +1917,7 @@ exports[`OrderDetailsPanel canceled matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -2125,6 +2134,7 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -2332,6 +2342,7 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -2541,6 +2552,7 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -2757,6 +2769,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -2964,6 +2977,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -3173,6 +3187,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -3412,6 +3427,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -3619,6 +3635,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
@@ -3828,6 +3845,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
                 },
                 "type": "user",
               },
+              "reviews": Array [],
               "type": "transaction",
             }
           }
