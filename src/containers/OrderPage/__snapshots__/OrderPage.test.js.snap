@@ -42,12 +42,15 @@ exports[`OrderPage matches snapshot 1`] = `
           }
         }
         fetchMessagesError={null}
+        fetchMessagesInProgress={false}
         initialMessageFailed={false}
         messages={Array []}
         onResetForm={[Function]}
         onSendMessage={[Function]}
+        onShowMoreMessages={[Function]}
         sendMessageError={null}
         sendMessageInProgress={false}
+        totalMessages={0}
         transaction={
           Object {
             "attributes": Object {

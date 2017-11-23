@@ -4,6 +4,8 @@ import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
 
+const MESSAGES_PAGE_SIZE = 100;
+
 // ================ Action types ================ //
 
 export const SET_INITAL_VALUES = 'app/OrderPage/SET_INITIAL_VALUES';
@@ -28,6 +30,7 @@ const initialState = {
   transactionRef: null,
   fetchMessagesInProgress: false,
   fetchMessagesError: null,
+  totalMessages: 0,
   messages: [],
   messageSendingFailedToTransaction: null,
   sendMessageInProgress: false,
@@ -53,7 +56,12 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case FETCH_MESSAGES_REQUEST:
       return { ...state, fetchMessagesInProgress: true, fetchMessagesError: null };
     case FETCH_MESSAGES_SUCCESS:
-      return { ...state, fetchMessagesInProgress: false, messages: payload };
+      return {
+        ...state,
+        fetchMessagesInProgress: false,
+        messages: payload.messages,
+        totalMessages: payload.totalItems,
+      };
     case FETCH_MESSAGES_ERROR:
       return { ...state, fetchMessagesInProgress: false, fetchMessagesError: payload };
 
@@ -69,6 +77,12 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
   }
 }
 
+// ================ Selectors ================ //
+
+export const fetchedMessagesCount = state => {
+  return state.OrderPage.messages.length;
+};
+
 // ================ Action creators ================ //
 
 export const setInitialValues = initialValues => ({
@@ -81,7 +95,10 @@ const fetchOrderSuccess = response => ({ type: FETCH_ORDER_SUCCESS, payload: res
 const fetchOrderError = e => ({ type: FETCH_ORDER_ERROR, error: true, payload: e });
 
 const fetchMessagesRequest = () => ({ type: FETCH_MESSAGES_REQUEST });
-const fetchMessagesSuccess = messages => ({ type: FETCH_MESSAGES_SUCCESS, payload: messages });
+const fetchMessagesSuccess = (messages, totalItems) => ({
+  type: FETCH_MESSAGES_SUCCESS,
+  payload: { messages, totalItems },
+});
 const fetchMessagesError = e => ({ type: FETCH_MESSAGES_ERROR, error: true, payload: e });
 
 const sendMessageRequest = () => ({ type: SEND_MESSAGE_REQUEST });
@@ -132,22 +149,41 @@ export const fetchOrder = id => (dispatch, getState, sdk) => {
     });
 };
 
-export const fetchMessages = txId => (dispatch, getState, sdk) => {
+const fetchMessages = (txId, paging) => (dispatch, getState, sdk) => {
   dispatch(fetchMessagesRequest());
 
   return sdk.messages
-    .query({ transaction_id: txId, include: ['sender', 'sender.profileImage'] })
+    .query({ transaction_id: txId, include: ['sender', 'sender.profileImage'], ...paging })
     .then(response => {
       const entities = updatedEntities({}, response.data);
       const messageIds = response.data.data.map(d => d.id);
       const denormalized = denormalisedEntities(entities, 'message', messageIds);
 
-      dispatch(fetchMessagesSuccess(denormalized));
+      dispatch(fetchMessagesSuccess(denormalized, response.data.meta.totalItems));
     })
     .catch(e => {
       dispatch(fetchMessagesError(storableError(e)));
       throw e;
     });
+};
+
+const fetchNLatestMessages = (txId, n) => (dispatch, getState, sdk) => {
+  const paging = {
+    page: 1,
+    per_page: n,
+  };
+  return dispatch(fetchMessages(txId, paging));
+};
+
+export const fetchMoreMessages = txId => (dispatch, getState, sdk) => {
+  // This is clearly not the most sophisticated solution, but the
+  // default page size should be large enough that seeing the "Show
+  // older" button is very rare.
+  //
+  // This compromises on the network request size in favor of correct
+  // page offset handling that is quite tricky.
+  const messagesToFetch = fetchedMessagesCount(getState()) + MESSAGES_PAGE_SIZE;
+  return dispatch(fetchNLatestMessages(txId, messagesToFetch));
 };
 
 // loadData is a collection of async calls that need to be made
@@ -159,7 +195,10 @@ export const loadData = params => dispatch => {
   dispatch(setInitialValues({ sendMessageError: null }));
 
   // Order (i.e. transaction entity in API, but from buyers perspective) contains order details
-  return Promise.all([dispatch(fetchOrder(orderId)), dispatch(fetchMessages(orderId))]);
+  return Promise.all([
+    dispatch(fetchOrder(orderId)),
+    dispatch(fetchNLatestMessages(orderId, MESSAGES_PAGE_SIZE)),
+  ]);
 };
 
 export const sendMessage = (orderId, message) => (dispatch, getState, sdk) => {
@@ -169,7 +208,14 @@ export const sendMessage = (orderId, message) => (dispatch, getState, sdk) => {
     .send({ transactionId: orderId, content: message })
     .then(response => {
       const messageId = response.data.data.id;
-      return dispatch(fetchMessages(orderId))
+
+      // Try to keep the fetched messages in the store by fetching the
+      // sent message and as much messages as there were before. Some
+      // of the older ones might be lost if there are also other new
+      // messages received in addition to this message.
+      const messagesToFetch = fetchedMessagesCount(getState()) + 1;
+
+      return dispatch(fetchNLatestMessages(orderId, messagesToFetch))
         .then(() => {
           dispatch(sendMessageSuccess());
           return messageId;

@@ -33,10 +33,13 @@ describe('OrderPage', () => {
       tab: 'details',
 
       currentUser: createCurrentUser('customer1'),
+      totalMessages: 0,
       messages: [],
+      fetchMessagesInProgress: false,
       sendMessageInProgress: false,
       scrollingDisabled: false,
       transaction,
+      onShowMoreMessages: noop,
       onSendMessage: noop,
       onResetForm: noop,
 

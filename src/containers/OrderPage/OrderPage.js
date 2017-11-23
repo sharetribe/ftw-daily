@@ -21,7 +21,7 @@ import {
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
-import { loadData, setInitialValues, sendMessage } from './OrderPage.duck';
+import { loadData, setInitialValues, sendMessage, fetchMoreMessages } from './OrderPage.duck';
 import css from './OrderPage.css';
 
 // OrderPage handles data loading
@@ -30,11 +30,14 @@ export const OrderPageComponent = props => {
   const {
     currentUser,
     fetchOrderError,
+    fetchMessagesInProgress,
     fetchMessagesError,
+    totalMessages,
     messages,
     messageSendingFailedToTransaction,
     sendMessageInProgress,
     sendMessageError,
+    onShowMoreMessages,
     onSendMessage,
     onResetForm,
     intl,
@@ -86,11 +89,14 @@ export const OrderPageComponent = props => {
         className={detailsClassName}
         currentUser={currentUser}
         transaction={currentTransaction}
+        fetchMessagesInProgress={fetchMessagesInProgress}
+        totalMessages={totalMessages}
         messages={messages}
         initialMessageFailed={initialMessageFailed}
         fetchMessagesError={fetchMessagesError}
         sendMessageInProgress={sendMessageInProgress}
         sendMessageError={sendMessageError}
+        onShowMoreMessages={onShowMoreMessages}
         onSendMessage={onSendMessage}
         onResetForm={onResetForm}
       />
@@ -125,7 +131,7 @@ OrderPageComponent.defaultProps = {
   transaction: null,
 };
 
-const { bool, oneOf, shape, string, array, func } = PropTypes;
+const { bool, oneOf, shape, string, array, func, number } = PropTypes;
 
 OrderPageComponent.propTypes = {
   params: shape({ id: string }).isRequired,
@@ -133,13 +139,16 @@ OrderPageComponent.propTypes = {
 
   currentUser: propTypes.currentUser,
   fetchOrderError: propTypes.error,
+  fetchMessagesInProgress: bool.isRequired,
   fetchMessagesError: propTypes.error,
+  totalMessages: number.isRequired,
   messages: array.isRequired,
   messageSendingFailedToTransaction: propTypes.uuid,
   sendMessageInProgress: bool.isRequired,
   sendMessageError: propTypes.error,
   scrollingDisabled: bool.isRequired,
   transaction: propTypes.transaction,
+  onShowMoreMessages: func.isRequired,
   onSendMessage: func.isRequired,
   onResetForm: func.isRequired,
 
@@ -152,7 +161,9 @@ const mapStateToProps = state => {
   const {
     fetchOrderError,
     transactionRef,
+    fetchMessagesInProgress,
     fetchMessagesError,
+    totalMessages,
     messages,
     messageSendingFailedToTransaction,
     sendMessageInProgress,
@@ -164,7 +175,9 @@ const mapStateToProps = state => {
   return {
     currentUser,
     fetchOrderError,
+    fetchMessagesInProgress,
     fetchMessagesError,
+    totalMessages,
     messages,
     messageSendingFailedToTransaction,
     sendMessageInProgress,
@@ -175,6 +188,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+  onShowMoreMessages: orderId => dispatch(fetchMoreMessages(orderId)),
   onSendMessage: (orderId, message) => dispatch(sendMessage(orderId, message)),
   onResetForm: formName => dispatch(resetForm(formName)),
 });
