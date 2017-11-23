@@ -18,6 +18,7 @@ export const Empty = {
     messages: [],
     hasOlderMessages: false,
     onShowOlderMessages: noop,
+    fetchMessagesInProgress: false,
   },
   group: 'messages',
 };
@@ -31,6 +32,7 @@ export const WithoutCurrentUser = {
     ],
     hasOlderMessages: false,
     onShowOlderMessages: noop,
+    fetchMessagesInProgress: false,
   },
   group: 'messages',
 };
@@ -48,6 +50,7 @@ export const WithCurrentUser = {
     ],
     hasOlderMessages: false,
     onShowOlderMessages: noop,
+    fetchMessagesInProgress: false,
   },
   group: 'messages',
 };
@@ -76,6 +79,7 @@ export const WithTransitions = {
     messages: [],
     hasOlderMessages: false,
     onShowOlderMessages: noop,
+    fetchMessagesInProgress: false,
   },
   group: 'messages',
 };
@@ -135,6 +139,7 @@ export const WithMessagesAndTransitions = {
     ],
     hasOlderMessages: false,
     onShowOlderMessages: noop,
+    fetchMessagesInProgress: false,
   },
   group: 'messages',
 };
@@ -208,6 +213,7 @@ class PagedFeed extends Component {
       messages,
       hasOlderMessages: !this.state.showAllMessages,
       onShowOlderMessages: handleShowOlder,
+      fetchMessagesInProgress: false,
     };
     return <ActivityFeed {...feedProps} />;
   }

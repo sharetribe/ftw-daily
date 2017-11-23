@@ -22,6 +22,7 @@ describe('ActivityFeed', () => {
       ],
       hasOlderMessages: false,
       onShowOlderMessages: noop,
+      fetchMessagesInProgress: false,
       intl: fakeIntl,
     };
     const tree = renderDeep(<ActivityFeedComponent {...props} />);
