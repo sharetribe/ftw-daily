@@ -142,9 +142,9 @@ const compareItems = (a, b) => {
   return itemDate(a) - itemDate(b);
 };
 
-const organizedItems = (messages, transitions, hasOlderMessages) => {
+const organizedItems = (messages, transitions, hideOldTransitions) => {
   const items = messages.concat(transitions).sort(compareItems);
-  if (hasOlderMessages) {
+  if (hideOldTransitions) {
     // Hide transitions that happened before the oldest message. Since
     // we have older items (messages) that we are not showing, seeing
     // old transitions would be confusing.
@@ -163,6 +163,7 @@ export const ActivityFeedComponent = props => {
     currentUser,
     hasOlderMessages,
     onShowOlderMessages,
+    fetchMessagesInProgress,
     intl,
   } = props;
   const classes = classNames(rootClassName || css.root, className);
@@ -183,7 +184,7 @@ export const ActivityFeedComponent = props => {
   );
 
   // combine messages and transaction transitions
-  const items = organizedItems(messages, transitions, hasOlderMessages);
+  const items = organizedItems(messages, transitions, hasOlderMessages || fetchMessagesInProgress);
 
   const transitionComponent = transition => {
     if (transitionsAvailable) {
@@ -265,6 +266,7 @@ ActivityFeedComponent.propTypes = {
   messages: arrayOf(propTypes.message),
   hasOlderMessages: bool.isRequired,
   onShowOlderMessages: func.isRequired,
+  fetchMessagesInProgress: bool.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
