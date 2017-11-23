@@ -6,6 +6,8 @@ import { updatedEntities, denormalisedEntities } from '../../util/data';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
 
+const MESSAGES_PAGE_SIZE = 100;
+
 // ================ Action types ================ //
 
 export const FETCH_SALE_REQUEST = 'app/SalePagePage/FETCH_SALE_REQUEST';
@@ -41,6 +43,7 @@ const initialState = {
   declineSaleError: null,
   fetchMessagesInProgress: false,
   fetchMessagesError: null,
+  totalMessages: 0,
   messages: [],
   sendMessageInProgress: false,
   sendMessageError: null,
@@ -76,7 +79,12 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case FETCH_MESSAGES_REQUEST:
       return { ...state, fetchMessagesInProgress: true, fetchMessagesError: null };
     case FETCH_MESSAGES_SUCCESS:
-      return { ...state, fetchMessagesInProgress: false, messages: payload };
+      return {
+        ...state,
+        fetchMessagesInProgress: false,
+        messages: payload.messages,
+        totalMessages: payload.totalItems,
+      };
     case FETCH_MESSAGES_ERROR:
       return { ...state, fetchMessagesInProgress: false, fetchMessagesError: payload };
 
@@ -100,6 +108,10 @@ export const acceptOrDeclineInProgress = state => {
   return state.SalePage.acceptInProgress || state.SalePage.declineInProgress;
 };
 
+export const fetchedMessagesCount = state => {
+  return state.SalePage.messages.length;
+};
+
 // ================ Action creators ================ //
 
 const fetchSaleRequest = () => ({ type: FETCH_SALE_REQUEST });
@@ -115,7 +127,10 @@ const declineSaleSuccess = () => ({ type: DECLINE_SALE_SUCCESS });
 const declineSaleError = e => ({ type: DECLINE_SALE_ERROR, error: true, payload: e });
 
 const fetchMessagesRequest = () => ({ type: FETCH_MESSAGES_REQUEST });
-const fetchMessagesSuccess = messages => ({ type: FETCH_MESSAGES_SUCCESS, payload: messages });
+const fetchMessagesSuccess = (messages, totalItems) => ({
+  type: FETCH_MESSAGES_SUCCESS,
+  payload: { messages, totalItems },
+});
 const fetchMessagesError = e => ({ type: FETCH_MESSAGES_ERROR, error: true, payload: e });
 
 const sendMessageRequest = () => ({ type: SEND_MESSAGE_REQUEST });
@@ -208,7 +223,7 @@ export const declineSale = id => (dispatch, getState, sdk) => {
     })
     .catch(e => {
       dispatch(declineSaleError(storableError(e)));
-      log.error(e, 'redect-sale-failed', {
+      log.error(e, 'reject-sale-failed', {
         txId: id,
         transition: propTypes.TX_TRANSITION_DECLINE,
       });
@@ -216,25 +231,41 @@ export const declineSale = id => (dispatch, getState, sdk) => {
     });
 };
 
-export const fetchMessages = txId => (dispatch, getState, sdk) => {
+const fetchMessages = (txId, paging) => (dispatch, getState, sdk) => {
   dispatch(fetchMessagesRequest());
 
   return sdk.messages
-    .query({ transaction_id: txId, include: ['sender', 'sender.profileImage'] })
+    .query({ transaction_id: txId, include: ['sender', 'sender.profileImage'], ...paging })
     .then(response => {
       const entities = updatedEntities({}, response.data);
       const messageIds = response.data.data.map(d => d.id);
       const denormalized = denormalisedEntities(entities, 'message', messageIds);
 
-      // Messages come latest first, so we need to reverse the order
-      denormalized.reverse();
-
-      dispatch(fetchMessagesSuccess(denormalized));
+      dispatch(fetchMessagesSuccess(denormalized, response.data.meta.totalItems));
     })
     .catch(e => {
       dispatch(fetchMessagesError(storableError(e)));
       throw e;
     });
+};
+
+const fetchNLatestMessages = (txId, n) => (dispatch, getState, sdk) => {
+  const paging = {
+    page: 1,
+    per_page: n,
+  };
+  return dispatch(fetchMessages(txId, paging));
+};
+
+export const fetchMoreMessages = txId => (dispatch, getState, sdk) => {
+  // This is clearly not the most sophisticated solution, but the
+  // default page size should be large enough that seeing the "Show
+  // older" button is very rare.
+  //
+  // This compromises on the network request size in favor of correct
+  // page offset handling that is quite tricky.
+  const messagesToFetch = fetchedMessagesCount(getState()) + MESSAGES_PAGE_SIZE;
+  return dispatch(fetchNLatestMessages(txId, messagesToFetch));
 };
 
 // loadData is a collection of async calls that need to be made
@@ -246,7 +277,10 @@ export const loadData = params => dispatch => {
   dispatch(clearSendMessageError());
 
   // Sale (i.e. transaction entity in API, but from buyers perspective) contains sale details
-  return Promise.all([dispatch(fetchSale(saleId)), dispatch(fetchMessages(saleId))]);
+  return Promise.all([
+    dispatch(fetchSale(saleId)),
+    dispatch(fetchNLatestMessages(saleId, MESSAGES_PAGE_SIZE)),
+  ]);
 };
 
 export const sendMessage = (saleId, message) => (dispatch, getState, sdk) => {

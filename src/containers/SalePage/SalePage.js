@@ -9,7 +9,7 @@ import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { acceptSale, declineSale, loadData, sendMessage } from './SalePage.duck';
+import { acceptSale, declineSale, loadData, sendMessage, fetchMoreMessages } from './SalePage.duck';
 import {
   NamedRedirect,
   SaleDetailsPanel,
@@ -40,10 +40,13 @@ export const SalePageComponent = props => {
     params,
     scrollingDisabled,
     transaction,
+    fetchMessagesInProgress,
     fetchMessagesError,
+    totalMessages,
     messages,
     sendMessageInProgress,
     sendMessageError,
+    onShowMoreMessages,
     onSendMessage,
     onResetForm,
   } = props;
@@ -91,10 +94,13 @@ export const SalePageComponent = props => {
         declineInProgress={declineInProgress}
         acceptSaleError={acceptSaleError}
         declineSaleError={declineSaleError}
+        totalMessages={totalMessages}
         messages={messages}
+        fetchMessagesInProgress={fetchMessagesInProgress}
         fetchMessagesError={fetchMessagesError}
         sendMessageInProgress={sendMessageInProgress}
         sendMessageError={sendMessageError}
+        onShowMoreMessages={onShowMoreMessages}
         onSendMessage={onSendMessage}
         onResetForm={onResetForm}
       />
@@ -132,7 +138,7 @@ SalePageComponent.defaultProps = {
   sendMessageError: null,
 };
 
-const { bool, func, oneOf, shape, string, arrayOf } = PropTypes;
+const { bool, func, oneOf, shape, string, arrayOf, number } = PropTypes;
 
 SalePageComponent.propTypes = {
   params: shape({ id: string }).isRequired,
@@ -149,9 +155,11 @@ SalePageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
   transaction: propTypes.transaction,
   fetchMessagesError: propTypes.error,
+  totalMessages: number.isRequired,
   messages: arrayOf(propTypes.message).isRequired,
   sendMessageInProgress: bool.isRequired,
   sendMessageError: propTypes.error,
+  onShowMoreMessages: func.isRequired,
   onSendMessage: func.isRequired,
   onResetForm: func.isRequired,
 
@@ -167,7 +175,9 @@ const mapStateToProps = state => {
     acceptInProgress,
     declineInProgress,
     transactionRef,
+    fetchMessagesInProgress,
     fetchMessagesError,
+    totalMessages,
     messages,
     sendMessageInProgress,
     sendMessageError,
@@ -186,7 +196,9 @@ const mapStateToProps = state => {
     declineInProgress,
     scrollingDisabled: isScrollingDisabled(state),
     transaction,
+    fetchMessagesInProgress,
     fetchMessagesError,
+    totalMessages,
     messages,
     sendMessageInProgress,
     sendMessageError,
@@ -197,6 +209,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onAcceptSale: transactionId => dispatch(acceptSale(transactionId)),
     onDeclineSale: transactionId => dispatch(declineSale(transactionId)),
+    onShowMoreMessages: saleId => dispatch(fetchMoreMessages(saleId)),
     onSendMessage: (saleId, message) => dispatch(sendMessage(saleId, message)),
     onResetForm: formName => dispatch(resetForm(formName)),
   };
