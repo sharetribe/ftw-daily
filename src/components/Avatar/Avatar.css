@@ -5,6 +5,9 @@
   --avatarSizeMedium: 60px;
   --avatarSizeLarge: 96px;
 
+  --bgColorTop: var(--marketplaceColorLight);
+  --bgColorBottom: var(--marketplaceColor);
+
   /* Base for all avatars */
   --avatarBase: {
     font-family: 'sofiapro', Helvetica, Arial, sans-serif;
@@ -16,7 +19,7 @@
     justify-content: center;
 
     /* Colors */
-    background-image: linear-gradient(-180deg, #e16b56 0%, #c0392b 100%);
+    background-image: linear-gradient(-180deg, var(--bgColorTop) 0%, var(--bgColorBottom) 100%);
     color: var(--matterColorLight);
 
     &:hover {
