@@ -1,6 +1,19 @@
 const env = process.env.REACT_APP_ENV || 'production';
 const dev = process.env.REACT_APP_ENV === 'development';
 
+// If you want to change the language, remember to also change the
+// locale data and the messages in the app.js file.
+const locale = 'en';
+const i18n = {
+  /*
+    0: Sunday
+    1: Monday
+    ...
+    6: Saturday
+  */
+  firstDayOfTheWeek: 0,
+};
+
 // To pass environment variables to the client app in the build
 // script, react-scripts (and the sharetribe-scripts fork of
 // react-scripts) require using the REACT_APP_ prefix to avoid
@@ -219,6 +232,8 @@ const facebookAppId = null;
 const config = {
   env,
   dev,
+  locale,
+  i18n,
   sdk: { clientId: sdkClientId, baseUrl: sdkBaseUrl },
   currency,
   currencyConfig,
