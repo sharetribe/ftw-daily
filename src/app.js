@@ -4,18 +4,34 @@ import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import moment from 'moment';
 import { IntlProvider, addLocaleData } from 'react-intl';
-import en from 'react-intl/locale-data/en';
-import localeData from './translations/en.json';
 import configureStore from './store';
 import routeConfiguration from './routeConfiguration';
 import Routes from './Routes';
+import config from './config';
+
+// If you want to change the language, Change the imports to the match
+// the wanted locale.
+//
+// Remember to also change the language in the config.js file.
+import localeData from 'react-intl/locale-data/en';
+import messages from './translations/en.json';
+
+const setupLocale = () => {
+  // Add the translation messages
+  addLocaleData([...localeData]);
+
+  // Set the Moment locale globally
+  // See: http://momentjs.com/docs/#/i18n/changing-locale/
+  moment.locale(config.locale);
+};
 
 export const ClientApp = props => {
   const { store } = props;
-  addLocaleData([...en]);
+  setupLocale();
   return (
-    <IntlProvider locale="en" messages={localeData}>
+    <IntlProvider locale={config.locale} messages={messages}>
       <Provider store={store}>
         <BrowserRouter>
           <Routes routes={routeConfiguration()} />
@@ -31,9 +47,9 @@ ClientApp.propTypes = { store: any.isRequired };
 
 export const ServerApp = props => {
   const { url, context, store } = props;
-  addLocaleData([...en]);
+  setupLocale();
   return (
-    <IntlProvider locale="en" messages={localeData}>
+    <IntlProvider locale={config.locale} messages={messages}>
       <Provider store={store}>
         <StaticRouter location={url} context={context}>
           <Routes routes={routeConfiguration()} />

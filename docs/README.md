@@ -16,3 +16,4 @@ Documentation for specific topics can be found in the following files:
  - [Static pages](static-pages.md)
  - [Analytics](analytics.md)
  - [Terms of Service and Privacy Policy](terms-of-service-and-privacy-policy.md)
+ - [i18n](i18n.md)

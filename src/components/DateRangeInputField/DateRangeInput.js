@@ -11,6 +11,7 @@ import { DateRangePicker, isInclusivelyAfterDay, isInclusivelyBeforeDay } from '
 import classNames from 'classnames';
 import moment from 'moment';
 import { START_DATE, END_DATE } from '../../util/dates';
+import config from '../../config';
 
 import NextMonthIcon from './NextMonthIcon';
 import PreviousMonthIcon from './PreviousMonthIcon';
@@ -58,7 +59,7 @@ const defaultProps = {
   daySize: 38,
   isRTL: false,
   initialVisibleMonth: null,
-  firstDayOfWeek: 0, // 0 .. 6, 0 is Sunday. TODO: This should come from some localization config.
+  firstDayOfWeek: config.i18n.firstDayOfWeek,
   numberOfMonths: 1,
   keepOpenOnDateSelect: false,
   reopenPickerOnClearDates: false,
