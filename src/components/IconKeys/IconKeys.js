@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import css from './IconKeys.css';
+
 const IconKeys = props => {
   const { className } = props;
   return (
@@ -20,7 +22,7 @@ const IconKeys = props => {
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <g transform="translate(-538.000000, -240.000000)" stroke="#C0392B">
+        <g className={css.strokeMarketplaceColor} transform="translate(-538.000000, -240.000000)">
           <g transform="translate(540.000000, 242.000000)">
             <g>
               <path
