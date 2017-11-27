@@ -7,6 +7,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   @media (--viewportLarge) {
     flex-direction: row;
@@ -17,12 +18,11 @@
 }
 
 .saleInfo {
-  margin-bottom: 210px;
+  margin-bottom: 104px;
 
   @media (--viewportLarge) {
-    max-width: 538px;
-    margin-right: 108px;
-    margin-bottom: 0;
+    max-width: 542px;
+    margin-right: 56px;
   }
 }
 
@@ -171,13 +171,13 @@
 
   @media (--viewportLarge) {
     display: block;
-    margin: 116px 0 0 0;
+    margin: 119px 0 0 0;
   }
 }
 
 .breakdownContainerDesktop {
   position: sticky;
-  top: 24px;
+  top: -272px; /* This is a hack to showcase how the component would look when the image isn't sticky */
   background-color: var(--matterColorLight);
   border: 1px solid var(--matterColorNegative);
   border-radius: 2px;
@@ -202,16 +202,16 @@
 }
 
 .breakdownTitleDesktop {
-  margin: 48px 48px 50px 48px;
+  margin: 44px 48px 18px 48px;
   color: var(--matterColorAnti);
 }
 
 .breakdownDesktop {
-  margin: 48px 48px 0 48px;
+  margin: 0 48px 0 48px;
 }
 
 .feedContainer {
-  margin: 46px 24px 0 24px;
+  margin: 46px 24px 36px 24px;
 
   @media (--viewportMedium) {
     margin: 46px 24px 0 24px;
@@ -223,7 +223,7 @@
 
 .feedContainerWithInfoAbove {
   @media (--viewportLarge) {
-    margin: 36px 0 0 0;
+    margin: 38px 0 0 0;
   }
 }
 

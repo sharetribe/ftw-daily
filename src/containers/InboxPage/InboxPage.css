@@ -137,11 +137,7 @@
 
 .itemList {
   margin: 0;
-  padding: 16px 24px;
-
-  @media (--viewportLarge) {
-    padding: 0;
-  }
+  padding: 0;
 }
 
 .listItem {
@@ -350,7 +346,7 @@
   color: var(--matterColor);
   margin-top: 4px;
 
-  @media (var--viewportmedium) {
+  @media (--viewportMedium) {
     margin-top: 9px;
   }
 }

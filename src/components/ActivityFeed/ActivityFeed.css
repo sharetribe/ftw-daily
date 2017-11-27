@@ -8,13 +8,13 @@
 }
 
 .messageItem {
-  margin-bottom: 38px;
+  margin-bottom: 20px;
 
   /* Clearfix */
   @apply --clearfix;
 
   @media (--viewportMedium) {
-    margin-bottom: 41px;
+    margin-bottom: 17px;
   }
 
   &:last-of-type {
@@ -57,12 +57,12 @@
 
   display: inline-block;
   margin: 0;
-  padding: 12px 14px 11px 14px;
+  padding: 6px 14px 11px 14px;
   border-radius: 8px;
   box-shadow: var(--boxShadow);
 
   @media (--viewportMedium) {
-    padding: 14px 14px 11px 14px;
+    padding: 8px 14px 9px 14px;
     margin: 0;
   }
 }
@@ -85,7 +85,7 @@
   color: var(--matterColorAnti);
 
   @media (--viewportMedium) {
-    margin: 14px 0 0 0;
+    margin: 6px 0 0 0;
   }
 }
 
@@ -100,7 +100,7 @@
   @apply --clearfix;
 
   @media (--viewportMedium) {
-    margin-bottom: 40px;
+    margin-bottom: 24px;
   }
 
   &:last-of-type {

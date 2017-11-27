@@ -38,7 +38,7 @@
 }
 
 .itemValue {
-  @apply --marketplaceDefaultFontStyles;
+  @apply --marketplaceH4FontStyles;
   font-weight: 600;
   margin: 0 0 0 10px;
 
@@ -74,7 +74,8 @@
 }
 
 .totalPrice {
-  @apply --marketplaceH2FontStyles;
+  @apply --marketplaceBodyFontStyles;
+  font-weight: var(--fontWeightSemiBold);
   margin: 0 0 0 10px;
 
   @media (--viewportMedium) {
