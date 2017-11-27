@@ -1,14 +1,20 @@
 {
   "name": "Saunatime",
-  "icons": [
-    {
-      "src": "/static/webapp-icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    }
-  ],
+  "short_name": "Saunatime",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#C0392B",
-  "background_color": "#FFFFFF"
+  "background_color": "#FFFFFF",
+  "icons": [
+    {
+      "src": "/static/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
