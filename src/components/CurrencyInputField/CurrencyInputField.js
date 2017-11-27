@@ -145,7 +145,9 @@ class CurrencyInputComponent extends Component {
       const isEmptyString = targetValue === '';
       const valueOrZero = isEmptyString ? '0' : targetValue;
 
-      const targetDecimalValue = isEmptyString ? null : new Decimal(targetValue);
+      const targetDecimalValue = isEmptyString
+        ? null
+        : new Decimal(ensureDotSeparator(targetValue));
 
       const isSafeValue =
         isEmptyString || (targetDecimalValue.isPositive() && isSafeNumber(targetDecimalValue));
