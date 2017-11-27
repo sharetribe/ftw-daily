@@ -226,7 +226,7 @@
 
     @media (--viewportMedium) {
       font-weight: var(--fontWeightMedium);
-      font-size: 14px;
+      font-size: 13px;
       line-height: 24px;
     }
   }
