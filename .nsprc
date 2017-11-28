@@ -1,6 +1,9 @@
 {
   "exceptions": [
-    // mime is only used in webpack-dev-server
+    "https://nodesecurity.io/advisories/338",
+    "https://nodesecurity.io/advisories/525",
+    "https://nodesecurity.io/advisories/532",
+    "https://nodesecurity.io/advisories/534",
     "https://nodesecurity.io/advisories/535"
   ]
 }
