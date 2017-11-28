@@ -21,6 +21,7 @@ import * as IconKeys from './components/IconKeys/IconKeys.example';
 import * as IconKeysSuccess from './components/IconKeysSuccess/IconKeysSuccess.example';
 import * as IconSearch from './components/IconSearch/IconSearch.example';
 import * as IconReviewStar from './components/IconReviewStar/IconReviewStar.example';
+import * as IconReviewUser from './components/IconReviewUser/IconReviewUser.example';
 import * as IconSocialMediaFacebook from './components/IconSocialMediaFacebook/IconSocialMediaFacebook.example';
 import * as IconSocialMediaInstagram from './components/IconSocialMediaInstagram/IconSocialMediaInstagram.example';
 import * as IconSocialMediaTwitter from './components/IconSocialMediaTwitter/IconSocialMediaTwitter.example';
@@ -91,6 +92,7 @@ export {
   IconKeys,
   IconKeysSuccess,
   IconReviewStar,
+  IconReviewUser,
   IconSearch,
   IconSocialMediaFacebook,
   IconSocialMediaInstagram,
