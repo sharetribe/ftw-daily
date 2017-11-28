@@ -164,6 +164,8 @@ export const TX_TRANSITION_CANCEL = 'transition/cancel';
 export const TX_TRANSITION_MARK_DELIVERED = 'transition/mark-delivered';
 
 // Review transitions
+// Reviews are given through transaction transitions.
+// Either party (provider or customer) can be the first to give a review.
 export const TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST = 'transition/review-by-provider-first';
 export const TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND = 'transition/review-by-provider-second';
 export const TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST = 'transition/review-by-customer-first';
