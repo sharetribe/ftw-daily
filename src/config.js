@@ -11,7 +11,7 @@ const i18n = {
     ...
     6: Saturday
   */
-  firstDayOfTheWeek: 0,
+  firstDayOfWeek: 0,
 };
 
 // To pass environment variables to the client app in the build
