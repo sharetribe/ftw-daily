@@ -157,9 +157,9 @@ const StyleguidePage = props => {
   // Furthermore, it would be nice to exclude styleguide away from actual app
   let allExamples = [];
   try {
-    allExamples = require('../../examples'); // eslint-disable-line global-require
+    allExamples = require('../../examples');
   } catch (e) {
-    // eslint-disable-next-line no-console
+    console.error(e);
     console.warn('require(): The file "../../examples.js" could not be loaded.');
   }
 
