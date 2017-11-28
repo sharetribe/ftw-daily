@@ -11,6 +11,9 @@
 
 import {
   ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND,
+  ERROR_CODE_TRANSACTION_INVALID_TRANSITION,
+  ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_CUSTOMER,
+  ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_PROVIDER,
   ERROR_CODE_PAYMENT_FAILED,
   ERROR_CODE_EMAIL_TAKEN,
   ERROR_CODE_EMAIL_NOT_FOUND,
@@ -122,6 +125,25 @@ export const isTransactionInitiateAmountTooLowError = error => {
     return isPaymentFailedError && isAmountTooLow;
   });
 };
+
+/**
+ * Check if the given API error (from `sdk.transactions.transition(id, transition, params)`)
+ * is due to invalid transition attempt.
+ */
+export const isTransactionsTransitionInvalidTransition = error =>
+  error &&
+  error.status === 409 &&
+  hasErrorWithCode(error, ERROR_CODE_TRANSACTION_INVALID_TRANSITION);
+
+/**
+ * Check if the given API error (from `sdk.transactions.transition(id, transition, params)`)
+ * is due to already sent review.
+ */
+export const isTransactionsTransitionAlreadyReviewed = error =>
+  error &&
+  error.status === 409 &&
+  (hasErrorWithCode(error, ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_CUSTOMER) ||
+    hasErrorWithCode(error, ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_PROVIDER));
 
 /**
  * Check if the given API error (from `sdk.currentUser.changeEmail(params)`)

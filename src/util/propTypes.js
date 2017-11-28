@@ -312,6 +312,11 @@ export const pagination = shape({
 });
 
 export const ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND = 'transaction-listing-not-found';
+export const ERROR_CODE_TRANSACTION_INVALID_TRANSITION = 'transaction-invalid-transition';
+export const ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_CUSTOMER =
+  'transaction-already-reviewed-by-customer';
+export const ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_PROVIDER =
+  'transaction-already-reviewed-by-provider';
 export const ERROR_CODE_PAYMENT_FAILED = 'transaction-payment-failed';
 export const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
 export const ERROR_CODE_EMAIL_NOT_FOUND = 'email-not-found';
@@ -320,6 +325,9 @@ export const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'email-too-many-verific
 export const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit';
 const ERROR_CODES = [
   ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND,
+  ERROR_CODE_TRANSACTION_INVALID_TRANSITION,
+  ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_CUSTOMER,
+  ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_PROVIDER,
   ERROR_CODE_PAYMENT_FAILED,
   ERROR_CODE_EMAIL_TAKEN,
   ERROR_CODE_EMAIL_NOT_FOUND,
