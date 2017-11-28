@@ -1,7 +1,6 @@
 import { has, trimEnd } from 'lodash';
 import Decimal from 'decimal.js';
 import { types } from './sdkLoader';
-import config from '../config';
 import { subUnitDivisors } from './currencyConfig';
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
@@ -205,9 +204,6 @@ export const convertMoneyToNumber = value => {
   if (!(value instanceof types.Money)) {
     throw new Error('Value must be a Money type');
   }
-  if (value.currency !== config.currency) {
-    throw new Error('Given currency different from marketplace currency');
-  }
   const subUnitDivisorAsDecimal = convertDivisorToDecimal(unitDivisor(value.currency));
   let amount;
 
@@ -244,9 +240,6 @@ export const convertMoneyToNumber = value => {
 export const formatMoney = (intl, value) => {
   if (!(value instanceof types.Money)) {
     throw new Error('Value must be a Money type');
-  }
-  if (value.currency !== config.currency) {
-    throw new Error('Given currency different from marketplace currency');
   }
   const valueAsNumber = convertMoneyToNumber(value);
 
