@@ -35,6 +35,7 @@ export { default as PrivacyPolicyPage } from './PrivacyPolicyPage/PrivacyPolicyP
 export { default as ProfilePage } from './ProfilePage/ProfilePage';
 export { default as ProfileSettingsForm } from './ProfileSettingsForm/ProfileSettingsForm';
 export { default as ProfileSettingsPage } from './ProfileSettingsPage/ProfileSettingsPage';
+export { default as ReviewForm } from './ReviewForm/ReviewForm';
 export { default as SalePage } from './SalePage/SalePage';
 export { default as SearchPage } from './SearchPage/SearchPage';
 export { default as SendMessageForm } from './SendMessageForm/SendMessageForm';
