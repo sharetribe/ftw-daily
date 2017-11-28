@@ -80,6 +80,7 @@ export { default as PaginationLinks } from './PaginationLinks/PaginationLinks';
 export { default as PrivacyPolicy } from './PrivacyPolicy/PrivacyPolicy';
 export { default as Promised } from './Promised/Promised';
 export { default as ResponsiveImage } from './ResponsiveImage/ResponsiveImage';
+export { default as ReviewRating } from './ReviewRating/ReviewRating';
 export { default as SaleDetailsPanel } from './SaleDetailsPanel/SaleDetailsPanel';
 export { default as SearchMap } from './SearchMap/SearchMap';
 export { default as SearchMapGroupLabel } from './SearchMapGroupLabel/SearchMapGroupLabel';
