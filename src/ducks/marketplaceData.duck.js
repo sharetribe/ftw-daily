@@ -68,6 +68,17 @@ export const getMarketplaceEntities = (state, entityRefs) => {
   }
 };
 
+/**
+ * Get the denormalised transaction entities with the given IDs
+ *
+ * @param {Object} state the full Redux store
+ * @param {Array<UUID>} transactionIds transaction IDs to select from the store
+ */
+export const getTransactionsById = (state, transactionIds) => {
+  const entityRefs = transactionIds.map(id => ({ id, type: 'transaction' }));
+  return getMarketplaceEntities(state, entityRefs);
+};
+
 // ================ Action creators ================ //
 
 export const addMarketplaceEntities = apiResponse => ({
