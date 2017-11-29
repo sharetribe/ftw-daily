@@ -8,7 +8,7 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
-import { isScrollingDisabled } from '../../ducks/UI.duck';
+import { isScrollingDisabled, manageDisableScrolling } from '../../ducks/UI.duck';
 import {
   NamedRedirect,
   OrderDetailsPanel,
@@ -21,7 +21,13 @@ import {
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
-import { loadData, setInitialValues, sendMessage, fetchMoreMessages } from './OrderPage.duck';
+import {
+  loadData,
+  setInitialValues,
+  sendMessage,
+  sendReview,
+  fetchMoreMessages,
+} from './OrderPage.duck';
 import css from './OrderPage.css';
 
 // OrderPage handles data loading
@@ -37,8 +43,12 @@ export const OrderPageComponent = props => {
     messageSendingFailedToTransaction,
     sendMessageInProgress,
     sendMessageError,
+    sendReviewInProgress,
+    sendReviewError,
+    onManageDisableScrolling,
     onShowMoreMessages,
     onSendMessage,
+    onSendReview,
     onResetForm,
     intl,
     params,
@@ -96,8 +106,12 @@ export const OrderPageComponent = props => {
         fetchMessagesError={fetchMessagesError}
         sendMessageInProgress={sendMessageInProgress}
         sendMessageError={sendMessageError}
+        sendReviewInProgress={sendReviewInProgress}
+        sendReviewError={sendReviewError}
+        onManageDisableScrolling={onManageDisableScrolling}
         onShowMoreMessages={onShowMoreMessages}
         onSendMessage={onSendMessage}
+        onSendReview={onSendReview}
         onResetForm={onResetForm}
       />
     ) : (
@@ -168,6 +182,8 @@ const mapStateToProps = state => {
     messageSendingFailedToTransaction,
     sendMessageInProgress,
     sendMessageError,
+    sendReviewInProgress,
+    sendReviewError,
   } = state.OrderPage;
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
   const transaction = transactions.length > 0 ? transactions[0] : null;
@@ -182,14 +198,20 @@ const mapStateToProps = state => {
     messageSendingFailedToTransaction,
     sendMessageInProgress,
     sendMessageError,
+    sendReviewInProgress,
+    sendReviewError,
     scrollingDisabled: isScrollingDisabled(state),
     transaction,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
+  onManageDisableScrolling: (componentId, disableScrolling) =>
+    dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onShowMoreMessages: orderId => dispatch(fetchMoreMessages(orderId)),
   onSendMessage: (orderId, message) => dispatch(sendMessage(orderId, message)),
+  onSendReview: (orderId, reviewRating, reviewContent) =>
+    dispatch(sendReview(orderId, reviewRating, reviewContent)),
   onResetForm: formName => dispatch(resetForm(formName)),
 });
 
