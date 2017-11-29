@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 
-import CustomMarker from './images/customMarker.png';
+import CustomMarker from './images/marker.png';
 import css from './Map.css';
 
 class Map extends Component {
@@ -29,28 +29,18 @@ class Map extends Component {
 
     const customMarker = {
       url: CustomMarker,
-      // This marker is 21 pixels wide by 25 pixels high.
-      size: new window.google.maps.Size(21, 25),
+      // This marker is 32 pixels wide by 32 pixels high.
+      size: new window.google.maps.Size(32, 32),
       // The origin for this image is (0, 0).
       origin: new window.google.maps.Point(0, 0),
-      // The anchor for this image is the base of the flagpole at (10, 25).
-      anchor: new window.google.maps.Point(10, 25),
+      // The anchor for the marker is in the bottom center.
+      anchor: new window.google.maps.Point(16, 32),
     };
 
-    // Shapes define the clickable region of the icon. The type defines an HTML
-    // <area> element 'poly' which traces out a polygon as a series of X,Y points.
-    // The final coordinate closes the poly by connecting to the first coordinate.
-    const shape = {
-      coords: [1, 1, 1, 21, 25, 21, 25, 1],
-      type: 'poly',
-    };
-
-    // eslint-disable-next-line no-new
     new window.google.maps.Marker({
       position: centerLocation,
       map,
       icon: customMarker,
-      shape,
       title: address,
     });
   }
