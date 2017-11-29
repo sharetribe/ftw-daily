@@ -6,6 +6,8 @@ import { ValidationError, ExpandingTextarea } from '../../components';
 
 import css from './TextInputField.css';
 
+const CONTENT_MAX_LENGTH = 5000;
+
 class TextInputFieldComponent extends Component {
   componentWillUnmount() {
     if (this.props.clearOnUnmount) {
@@ -52,7 +54,7 @@ class TextInputFieldComponent extends Component {
         [css.textarea]: isTextarea,
       });
     const inputProps = isTextarea
-      ? { className: inputClasses, id, ...input, ...rest }
+      ? { className: inputClasses, id, rows: 1, maxLength: CONTENT_MAX_LENGTH, ...input, ...rest }
       : { className: inputClasses, id, type, ...input, ...rest };
 
     const classes = classNames(rootClassName || css.root, className);
