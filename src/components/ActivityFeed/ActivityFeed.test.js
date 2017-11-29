@@ -21,6 +21,7 @@ describe('ActivityFeed', () => {
         createMessage('msg2', {}, { sender: createUser('user2') }),
       ],
       hasOlderMessages: false,
+      onOpenReviewModal: noop,
       onShowOlderMessages: noop,
       fetchMessagesInProgress: false,
       intl: fakeIntl,
