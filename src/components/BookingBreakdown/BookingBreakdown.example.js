@@ -1,9 +1,12 @@
 import Decimal from 'decimal.js';
 import { types } from '../../util/sdkLoader';
 import * as propTypes from '../../util/propTypes';
+import config from '../../config';
 import BookingBreakdown from './BookingBreakdown';
 
 const { UUID, Money } = types;
+
+const CURRENCY = config.currency;
 
 const exampleBooking = attributes => {
   return {
@@ -41,14 +44,14 @@ export const Checkout = {
   props: {
     userRole: 'customer',
     transaction: exampleTransaction({
-      payinTotal: new Money(9000, 'USD'),
-      payoutTotal: new Money(9000, 'USD'),
+      payinTotal: new Money(9000, CURRENCY),
+      payoutTotal: new Money(9000, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
           quantity: new Decimal(2),
-          unitPrice: new Money(4500, 'USD'),
-          lineTotal: new Money(9000, 'USD'),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(9000, CURRENCY),
           reversal: false,
         },
       ],
@@ -65,14 +68,14 @@ export const CustomerOrder = {
   props: {
     userRole: 'customer',
     transaction: exampleTransaction({
-      payinTotal: new Money(9000, 'USD'),
-      payoutTotal: new Money(9000, 'USD'),
+      payinTotal: new Money(9000, CURRENCY),
+      payoutTotal: new Money(9000, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
           quantity: new Decimal(2),
-          unitPrice: new Money(4500, 'USD'),
-          lineTotal: new Money(9000, 'USD'),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(9000, CURRENCY),
           reversal: false,
         },
       ],
@@ -89,20 +92,20 @@ export const ProviderSale = {
   props: {
     userRole: 'provider',
     transaction: exampleTransaction({
-      payinTotal: new Money(9000, 'USD'),
-      payoutTotal: new Money(7000, 'USD'),
+      payinTotal: new Money(9000, CURRENCY),
+      payoutTotal: new Money(7000, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
           quantity: new Decimal(2),
-          unitPrice: new Money(4500, 'USD'),
-          lineTotal: new Money(9000, 'USD'),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(9000, CURRENCY),
           reversal: false,
         },
         {
           code: 'line-item/provider-commission',
-          unitPrice: new Money(-2000, 'USD'),
-          lineTotal: new Money(-2000, 'USD'),
+          unitPrice: new Money(-2000, CURRENCY),
+          lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
         },
       ],
@@ -119,20 +122,20 @@ export const ProviderSaleZeroCommission = {
   props: {
     userRole: 'provider',
     transaction: exampleTransaction({
-      payinTotal: new Money(9000, 'USD'),
-      payoutTotal: new Money(9000, 'USD'),
+      payinTotal: new Money(9000, CURRENCY),
+      payoutTotal: new Money(9000, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
           quantity: new Decimal(2),
-          unitPrice: new Money(4500, 'USD'),
-          lineTotal: new Money(9000, 'USD'),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(9000, CURRENCY),
           reversal: false,
         },
         {
           code: 'line-item/provider-commission',
-          unitPrice: new Money(0, 'USD'),
-          lineTotal: new Money(0, 'USD'),
+          unitPrice: new Money(0, CURRENCY),
+          lineTotal: new Money(0, CURRENCY),
           reversal: false,
         },
       ],
@@ -149,20 +152,20 @@ export const ProviderSaleSingleNight = {
   props: {
     userRole: 'provider',
     transaction: exampleTransaction({
-      payinTotal: new Money(4500, 'USD'),
-      payoutTotal: new Money(2500, 'USD'),
+      payinTotal: new Money(4500, CURRENCY),
+      payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
           quantity: new Decimal(1),
-          unitPrice: new Money(4500, 'USD'),
-          lineTotal: new Money(4500, 'USD'),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(4500, CURRENCY),
           reversal: false,
         },
         {
           code: 'line-item/provider-commission',
-          unitPrice: new Money(-2000, 'USD'),
-          lineTotal: new Money(-2000, 'USD'),
+          unitPrice: new Money(-2000, CURRENCY),
+          lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
         },
       ],
@@ -180,20 +183,20 @@ export const ProviderSalePreauthorized = {
     userRole: 'provider',
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
-      payinTotal: new Money(4500, 'USD'),
-      payoutTotal: new Money(2500, 'USD'),
+      payinTotal: new Money(4500, CURRENCY),
+      payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
           quantity: new Decimal(1),
-          unitPrice: new Money(4500, 'USD'),
-          lineTotal: new Money(4500, 'USD'),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(4500, CURRENCY),
           reversal: false,
         },
         {
           code: 'line-item/provider-commission',
-          unitPrice: new Money(-2000, 'USD'),
-          lineTotal: new Money(-2000, 'USD'),
+          unitPrice: new Money(-2000, CURRENCY),
+          lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
         },
       ],
@@ -211,20 +214,20 @@ export const ProviderSaleAccepted = {
     userRole: 'provider',
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_ACCEPT,
-      payinTotal: new Money(4500, 'USD'),
-      payoutTotal: new Money(2500, 'USD'),
+      payinTotal: new Money(4500, CURRENCY),
+      payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
           quantity: new Decimal(1),
-          unitPrice: new Money(4500, 'USD'),
-          lineTotal: new Money(4500, 'USD'),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(4500, CURRENCY),
           reversal: false,
         },
         {
           code: 'line-item/provider-commission',
-          unitPrice: new Money(-2000, 'USD'),
-          lineTotal: new Money(-2000, 'USD'),
+          unitPrice: new Money(-2000, CURRENCY),
+          lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
         },
       ],
@@ -242,20 +245,20 @@ export const ProviderSaleDeclined = {
     userRole: 'provider',
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_DECLINE,
-      payinTotal: new Money(4500, 'USD'),
-      payoutTotal: new Money(2500, 'USD'),
+      payinTotal: new Money(4500, CURRENCY),
+      payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
           quantity: new Decimal(1),
-          unitPrice: new Money(4500, 'USD'),
-          lineTotal: new Money(4500, 'USD'),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(4500, CURRENCY),
           reversal: false,
         },
         {
           code: 'line-item/provider-commission',
-          unitPrice: new Money(-2000, 'USD'),
-          lineTotal: new Money(-2000, 'USD'),
+          unitPrice: new Money(-2000, CURRENCY),
+          lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
         },
       ],
@@ -273,20 +276,20 @@ export const ProviderSaleAutoDeclined = {
     userRole: 'provider',
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_AUTO_DECLINE,
-      payinTotal: new Money(4500, 'USD'),
-      payoutTotal: new Money(2500, 'USD'),
+      payinTotal: new Money(4500, CURRENCY),
+      payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
           quantity: new Decimal(1),
-          unitPrice: new Money(4500, 'USD'),
-          lineTotal: new Money(4500, 'USD'),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(4500, CURRENCY),
           reversal: false,
         },
         {
           code: 'line-item/provider-commission',
-          unitPrice: new Money(-2000, 'USD'),
-          lineTotal: new Money(-2000, 'USD'),
+          unitPrice: new Money(-2000, CURRENCY),
+          lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
         },
       ],
@@ -304,20 +307,20 @@ export const ProviderSaleDelivered = {
     userRole: 'provider',
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_MARK_DELIVERED,
-      payinTotal: new Money(4500, 'USD'),
-      payoutTotal: new Money(2500, 'USD'),
+      payinTotal: new Money(4500, CURRENCY),
+      payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
           quantity: new Decimal(1),
-          unitPrice: new Money(4500, 'USD'),
-          lineTotal: new Money(4500, 'USD'),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(4500, CURRENCY),
           reversal: false,
         },
         {
           code: 'line-item/provider-commission',
-          unitPrice: new Money(-2000, 'USD'),
-          lineTotal: new Money(-2000, 'USD'),
+          unitPrice: new Money(-2000, CURRENCY),
+          lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
         },
       ],
@@ -335,35 +338,35 @@ export const ProviderSaleCanceled = {
     userRole: 'provider',
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_CANCEL,
-      payinTotal: new Money(0, 'USD'),
-      payoutTotal: new Money(0, 'USD'),
+      payinTotal: new Money(0, CURRENCY),
+      payoutTotal: new Money(0, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
           quantity: new Decimal(1),
-          unitPrice: new Money(4500, 'USD'),
-          lineTotal: new Money(4500, 'USD'),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(4500, CURRENCY),
           reversal: false,
         },
         {
           code: 'line-item/night',
           quantity: new Decimal(-1),
-          unitPrice: new Money(4500, 'USD'),
-          lineTotal: new Money(-4500, 'USD'),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(-4500, CURRENCY),
           reversal: true,
         },
         {
           code: 'line-item/provider-commission',
           quantity: new Decimal(1),
-          unitPrice: new Money(-2000, 'USD'),
-          lineTotal: new Money(-2000, 'USD'),
+          unitPrice: new Money(-2000, CURRENCY),
+          lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
         },
         {
           code: 'line-item/provider-commission',
           quantity: new Decimal(-1),
-          unitPrice: new Money(2000, 'USD'),
-          lineTotal: new Money(-2000, 'USD'),
+          unitPrice: new Money(2000, CURRENCY),
+          lineTotal: new Money(-2000, CURRENCY),
           reversal: true,
         },
       ],

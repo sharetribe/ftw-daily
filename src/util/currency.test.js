@@ -238,13 +238,6 @@ describe('currency utils', () => {
       const value = null;
       expect(() => formatMoney(intl, value)).toThrowError('Value must be a Money type');
     });
-    it('complains about mismatching currencies', () => {
-      const intl = null;
-      const value = new types.Money(100, 'EUR');
-      expect(() => formatMoney(intl, value)).toThrowError(
-        'Given currency different from marketplace currency'
-      );
-    });
 
     // No test for that actual formatting for now. It depends on the
     // locale, and it doesn't really make sense to test the fake intl

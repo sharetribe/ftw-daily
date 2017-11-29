@@ -51,8 +51,15 @@ class CurrencyInputComponent extends Component {
   constructor(props) {
     super(props);
     const { currencyConfig, defaultValue, input, intl } = props;
-    const initialValue =
-      input.value instanceof types.Money ? convertMoneyToNumber(input.value) : defaultValue;
+    const initialValueIsMoney = input.value instanceof types.Money;
+
+    if (initialValueIsMoney && input.value.currency !== currencyConfig.currency) {
+      const e = new Error('Value currency different from marketplace currency');
+      log.error(e, 'currency-input-invalid-currency', { currencyConfig, inputValue: input.value });
+      throw e;
+    }
+
+    const initialValue = initialValueIsMoney ? convertMoneyToNumber(input.value) : defaultValue;
     const hasInitialValue = typeof initialValue === 'number' && !isNaN(initialValue);
 
     // We need to handle number format - some locales use dots and some commas as decimal separator
@@ -82,11 +89,7 @@ class CurrencyInputComponent extends Component {
         usesComma,
       };
     } catch (e) {
-      log.error(e, 'currency-input-init-failed', {
-        currencyConfig: currencyConfig,
-        defaultValue: defaultValue,
-        initialValue: initialValue,
-      });
+      log.error(e, 'currency-input-init-failed', { currencyConfig, defaultValue, initialValue });
       throw e;
     }
 
