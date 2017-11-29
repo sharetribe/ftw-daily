@@ -3,7 +3,7 @@ import { string, arrayOf, bool, func, number } from 'prop-types';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { dropWhile } from 'lodash';
 import classNames from 'classnames';
-import { Avatar, InlineTextButton, NamedLink, ReviewRating } from '../../components';
+import { Avatar, InlineTextButton, ReviewRating } from '../../components';
 import { formatDate } from '../../util/dates';
 import { ensureTransaction, ensureUser, ensureListing } from '../../util/data';
 import * as propTypes from '../../util/propTypes';
@@ -95,6 +95,12 @@ const hasUserLeftAReviewFirst = (userRole, lastTransition) => {
   );
 };
 
+const onLeaveAReview = () => {
+  // TODO: Open up a review modal
+
+  console.log('Leave a review button clicked');
+};
+
 const resolveTransitionMessage = (
   transition,
   lastTransition,
@@ -143,9 +149,9 @@ const resolveTransitionMessage = (
       // if current user is not the first to leave a review
       const reviewLink =
         deliveredState || !hasUserLeftAReviewFirst(ownRole, lastTransition) ? (
-          <NamedLink name="LandingPage">
+          <InlineTextButton onClick={onLeaveAReview}>
             <FormattedMessage id="ActivityFeed.leaveAReview" values={{ displayName }} />
-          </NamedLink>
+          </InlineTextButton>
         ) : null;
 
       return <FormattedMessage id="ActivityFeed.transitionComplete" values={{ reviewLink }} />;
@@ -157,9 +163,9 @@ const resolveTransitionMessage = (
         // show the leave a review link if current user is not the first
         // one to leave a review
         const reviewLink = !hasUserLeftAReviewFirst(ownRole, lastTransition) ? (
-          <NamedLink name="LandingPage">
+          <InlineTextButton onClick={onLeaveAReview}>
             <FormattedMessage id="ActivityFeed.leaveAReviewSecond" values={{ displayName }} />
-          </NamedLink>
+          </InlineTextButton>
         ) : null;
         return (
           <FormattedMessage
