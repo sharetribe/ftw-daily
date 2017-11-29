@@ -3,7 +3,7 @@
 One of the first customisations is to change the marketplace colors
 and icons.
 
-# Colors
+## Colors
 
 To change the marketplace colors, open the
 [src/marketplace.css](../src/marketplace.css) file and change the
@@ -15,7 +15,7 @@ color variables:
 --marketplaceColorDark: #8c291e;
 ```
 
-# Icons
+## Icons
 
 The default icons are generated with
 [RealFaviconGenerator](https://realfavicongenerator.net/). You can
@@ -60,3 +60,10 @@ point to those images.
     <meta name="theme-color" content="#c0392b">
     <!-- End Favicons -->
    ```
+
+## Map marker icon
+
+The map marker icon in the listing can be found in
+[src/components/Map/images/marker.png](../src/components/Map/images/marker.png). The
+dimensions should be 32x32 pixels, so the `favicon-32x32.png` file can
+be used to replace the map icon.
