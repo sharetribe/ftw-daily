@@ -101,9 +101,11 @@ export class OrderDetailsPanelComponent extends Component {
     const currentTransaction = ensureTransaction(transaction);
     const { reviewRating, reviewContent } = values;
     const rating = Number.parseInt(reviewRating, 10);
-    onSendReview(currentTransaction.id, rating, reviewContent).then(r =>
-      this.setState({ isReviewModalOpen: false, reviewSubmitted: true })
-    );
+    onSendReview(currentTransaction, rating, reviewContent)
+      .then(r => this.setState({ isReviewModalOpen: false, reviewSubmitted: true }))
+      .catch(e => {
+        // Do nothing.
+      });
   }
 
   render() {

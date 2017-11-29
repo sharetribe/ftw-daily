@@ -2,7 +2,7 @@ import { pick } from 'lodash';
 import { types } from '../../util/sdkLoader';
 import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
 import * as propTypes from '../../util/propTypes';
-import { addMarketplaceEntities, getTransactionsById } from '../../ducks/marketplaceData.duck';
+import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
 
 const MESSAGES_PAGE_SIZE = 100;
@@ -284,7 +284,7 @@ const sendReviewAsFirst = (id, params, dispatch, sdk) => {
     .catch(e => {
       // If transaction transition is invalid, lets try another endpoint.
       if (isTransactionsTransitionInvalidTransition(e)) {
-        sendReviewAsSecond(id, params, dispatch, sdk);
+        return sendReviewAsSecond(id, params, dispatch, sdk);
       } else {
         dispatch(sendReviewError(storableError(e)));
 
@@ -295,18 +295,16 @@ const sendReviewAsFirst = (id, params, dispatch, sdk) => {
     });
 };
 
-export const sendReview = (orderId, reviewRating, reviewContent) => (dispatch, getState, sdk) => {
+export const sendReview = (tx, reviewRating, reviewContent) => (dispatch, getState, sdk) => {
   const params = { reviewRating, reviewContent };
-  const txs = getTransactionsById(getState(), [orderId]);
   const txStateProviderFirst =
-    txs.length === 1 &&
-    txs[0].attributes.lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST;
+    tx.attributes.lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST;
 
   dispatch(sendReviewRequest());
 
   return txStateProviderFirst
-    ? sendReviewAsSecond(orderId, params, dispatch, sdk)
-    : sendReviewAsFirst(orderId, params, dispatch, sdk);
+    ? sendReviewAsSecond(tx.id, params, dispatch, sdk)
+    : sendReviewAsFirst(tx.id, params, dispatch, sdk);
 };
 
 // loadData is a collection of async calls that need to be made

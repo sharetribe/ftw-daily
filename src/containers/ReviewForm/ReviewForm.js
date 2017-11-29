@@ -14,6 +14,7 @@ import css from './ReviewForm.css';
 const ReviewFormComponent = props => {
   const {
     className,
+    rootClassName,
     disabled,
     handleSubmit,
     intl,
@@ -38,23 +39,22 @@ const ReviewFormComponent = props => {
     id: 'ReviewForm.reviewContentRequired',
   });
 
-  const errorMessage =
-    sendReviewError && isTransactionsTransitionAlreadyReviewed(sendReviewError) ? (
-      <p className={css.error}>
-        <FormattedMessage id="ReviewForm.reviewSubmitAlreadySent" />
-      </p>
-    ) : (
-      <p className={css.error}>
-        <FormattedMessage id="ReviewForm.reviewSubmitFailed" />
-      </p>
-    );
+  const errorMessage = isTransactionsTransitionAlreadyReviewed(sendReviewError) ? (
+    <p className={css.error}>
+      <FormattedMessage id="ReviewForm.reviewSubmitAlreadySent" />
+    </p>
+  ) : (
+    <p className={css.error}>
+      <FormattedMessage id="ReviewForm.reviewSubmitFailed" />
+    </p>
+  );
   const errorArea = sendReviewError ? errorMessage : <p className={css.errorPlaceholder} />;
 
   const reviewSubmitMessage = intl.formatMessage({
     id: 'ReviewForm.reviewSubmit',
   });
 
-  const classes = classNames(css.root, className);
+  const classes = classNames(rootClassName || css.root, className);
   const submitInProgress = submitting || sendReviewInProgress;
   const submitDisabled = invalid || disabled || submitInProgress;
 
@@ -92,13 +92,14 @@ const ReviewFormComponent = props => {
   );
 };
 
-ReviewFormComponent.defaultProps = { className: null, sendReviewError: null };
+ReviewFormComponent.defaultProps = { className: null, rootClassName: null, sendReviewError: null };
 
 const { bool, func, string } = PropTypes;
 
 ReviewFormComponent.propTypes = {
   ...formPropTypes,
   className: string,
+  rootClassName: string,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   reviewSent: bool.isRequired,

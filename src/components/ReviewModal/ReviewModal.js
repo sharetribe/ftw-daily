@@ -26,6 +26,7 @@ const ReviewModal = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const closeButtonMessage = intl.formatMessage({ id: 'ReviewModal.later' });
+  const reviewee = <span className={css.reviewee}>{revieweeName}</span>;
 
   return (
     <Modal
@@ -39,7 +40,7 @@ const ReviewModal = props => {
     >
       <IconReviewUser className={css.modalIcon} />
       <p className={css.modalTitle}>
-        <FormattedMessage id="ReviewModal.title" values={{ revieweeName }} />
+        <FormattedMessage id="ReviewModal.title" values={{ revieweeName: reviewee }} />
       </p>
       <p className={css.modalMessage}>
         <FormattedMessage id="ReviewModal.description" />

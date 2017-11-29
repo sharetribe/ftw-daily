@@ -210,8 +210,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onShowMoreMessages: orderId => dispatch(fetchMoreMessages(orderId)),
   onSendMessage: (orderId, message) => dispatch(sendMessage(orderId, message)),
-  onSendReview: (orderId, reviewRating, reviewContent) =>
-    dispatch(sendReview(orderId, reviewRating, reviewContent)),
+  onSendReview: (tx, reviewRating, reviewContent) =>
+    dispatch(sendReview(tx, reviewRating, reviewContent)),
   onResetForm: formName => dispatch(resetForm(formName)),
 });
 

@@ -23,6 +23,10 @@
   @apply --marketplaceModalTitleStyles;
 }
 
+.reviewee {
+  white-space: nowrap;
+}
+
 /* Paragraph for the Modal */
 .modalMessage {
   @apply --marketplaceModalParagraphStyles;

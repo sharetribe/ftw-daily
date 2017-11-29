@@ -20,6 +20,7 @@
 
 .label {
   width: 30px;
+  cursor: pointer;
 }
 
 .star {
