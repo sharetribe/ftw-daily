@@ -27,7 +27,7 @@ const IconSendMessageMobile = () => {
           width="103.7%"
           height="113.2%"
           filterUnits="objectBoundingBox"
-          id="a"
+          id="SendMessageForm_IconSendMessageMobile"
         >
           <feOffset dy="-2" in="SourceAlpha" result="shadowOffsetOuter1" />
           <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
@@ -42,7 +42,12 @@ const IconSendMessageMobile = () => {
           </feMerge>
         </filter>
       </defs>
-      <g filter="url(#a)" transform="translate(-313 -10)" fill="#FFF" fillRule="evenodd">
+      <g
+        filter="url(#SendMessageForm_IconSendMessageMobile)"
+        transform="translate(-313 -10)"
+        fill="#FFF"
+        fillRule="evenodd"
+      >
         <path d="M317.47 23.048c-.14.05-.237.193-.25.36-.013.163.062.317.19.39l4.623 2.688 12.162-10.593-16.726 7.155zM323.47 27.327l-.97 6.59c0 .228.184.416.417.416.145 0 .284-.076.36-.206l2.94-4.823 4.833 2.894c.118.066.26.067.373.015.12-.055.207-.162.234-.292l3.315-15.328-11.5 10.735z" />
       </g>
     </svg>

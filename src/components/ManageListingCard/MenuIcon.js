@@ -17,14 +17,7 @@ const MenuIcon = props => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        <filter
-          x="-38.9%"
-          y="-125%"
-          width="177.8%"
-          height="450%"
-          filterUnits="objectBoundingBox"
-          id="a"
-        >
+        <filter x="-38.9%" y="-125%" width="177.8%" height="450%" filterUnits="objectBoundingBox">
           <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1" />
           <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
           <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1" />

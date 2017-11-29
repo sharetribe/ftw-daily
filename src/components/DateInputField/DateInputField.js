@@ -130,7 +130,7 @@ class DateInputComponent extends Component {
       <div className={classes}>
         <SingleDatePicker
           {...datePickerProps}
-          id="date-input"
+          id={`DateInputField_DateInputComponent_${name}`}
           date={date}
           focused={focused}
           onDateChange={this.onDateChange}
