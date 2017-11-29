@@ -224,16 +224,42 @@ export const txTransition = shape({
   transition: oneOf(TX_TRANSITIONS).isRequired,
 });
 
+// Check if tx transition is followed by a state where
+// reviews are completed
+export const areReviewsCompleted = transition => {
+  return [
+    TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+    TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+    TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
+    TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
+    TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
+  ].includes(transition);
+};
+
+// Check if a user giving a review is related to
+// given tx transition.
+export const isReviewTransition = transition => {
+  return [
+    TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+    TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+    TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+    TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+  ].includes(transition);
+};
+
+// Possible amount of stars in a review
+export const REVIEW_RATINGS = [1, 2, 3, 4, 5];
+
 // A review on a user
 export const review = shape({
   id: uuid.isRequired,
   attributes: shape({
     at: instanceOf(Date).isRequired,
     content: string,
-    rating: number,
+    rating: oneOf(REVIEW_RATINGS),
     state: string.isRequired,
     type: string.isRequired,
-  }),
+  }).isRequired,
   author: user,
   subject: user,
 });

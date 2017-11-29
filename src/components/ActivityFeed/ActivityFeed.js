@@ -66,32 +66,13 @@ Review.propTypes = {
   rating: number.isRequired,
 };
 
-const areReviewsCompleted = transition => {
-  return [
-    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
-    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-    propTypes.TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
-    propTypes.TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
-    propTypes.TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
-  ].includes(transition);
-};
-
-const isReviewTransition = transition => {
-  return [
-    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
-    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
-    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
-    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-  ].includes(transition);
-};
-
 const hasUserLeftAReviewFirst = (userRole, lastTransition) => {
   return (
     (lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST &&
       userRole === propTypes.TX_TRANSITION_ACTOR_CUSTOMER) ||
     (lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST &&
       userRole === propTypes.TX_TRANSITION_ACTOR_PROVIDER) ||
-    areReviewsCompleted(lastTransition)
+    propTypes.areReviewsCompleted(lastTransition)
   );
 };
 
@@ -199,10 +180,11 @@ const reviewByAuthorId = (transaction, userId) => {
 const Transition = props => {
   const { transition, transaction, currentUser, intl } = props;
 
-  const customer = transaction.customer;
-  const provider = transaction.provider;
-  const listingTitle = transaction.listing.attributes.title;
-  const lastTransition = transaction.attributes.lastTransition;
+  const currentTransaction = ensureTransaction(transaction);
+  const customer = currentTransaction.customer;
+  const provider = currentTransaction.provider;
+  const listingTitle = currentTransaction.listing.attributes.title;
+  const lastTransition = currentTransaction.attributes.lastTransition;
 
   const ownRole =
     currentUser.id.uuid === customer.id.uuid
@@ -226,7 +208,10 @@ const Transition = props => {
 
   let reviewComponent = null;
 
-  if (isReviewTransition(currentTransition) && areReviewsCompleted(lastTransition)) {
+  if (
+    propTypes.isReviewTransition(currentTransition) &&
+    propTypes.areReviewsCompleted(lastTransition)
+  ) {
     const customerReview =
       currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST ||
       currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND;
@@ -234,12 +219,12 @@ const Transition = props => {
       currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST ||
       currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND;
     if (customerReview) {
-      const review = reviewByAuthorId(transaction, customer.id);
+      const review = reviewByAuthorId(currentTransaction, customer.id);
       reviewComponent = (
         <Review content={review.attributes.content} rating={review.attributes.rating} />
       );
     } else if (providerReview) {
-      const review = reviewByAuthorId(transaction, provider.id);
+      const review = reviewByAuthorId(currentTransaction, provider.id);
       reviewComponent = (
         <Review content={review.attributes.content} rating={review.attributes.rating} />
       );
@@ -341,7 +326,7 @@ export const ActivityFeedComponent = props => {
       return (
         <Transition
           transition={transition}
-          transaction={currentTransaction}
+          transaction={transaction}
           currentUser={currentUser}
           intl={intl}
         />

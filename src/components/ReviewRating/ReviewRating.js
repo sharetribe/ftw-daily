@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { range } from 'lodash';
+import classNames from 'classnames';
 import { IconReviewStar } from '../../components';
-
-const MAX_RATING = 5;
+import * as propTypes from '../../util/propTypes';
 
 const ReviewRating = props => {
   const { className, rootClassName, reviewStarClassName, rating } = props;
-  const classes = rootClassName || className;
+  const classes = classNames(rootClassName, className);
 
-  const stars = range(MAX_RATING);
+  const stars = propTypes.REVIEW_RATINGS;
   return (
     <div className={classes}>
       {stars.map(star => (
         <IconReviewStar
           key={`star-${star}`}
           className={reviewStarClassName}
-          isFilled={star < rating}
+          isFilled={star <= rating}
         />
       ))}
     </div>
@@ -24,14 +23,15 @@ const ReviewRating = props => {
 };
 
 ReviewRating.defaultProps = {
+  rootClassName: null,
   className: null,
   reviewStarClassName: null,
 };
 
-const { number, string } = PropTypes;
+const { string, oneOf } = PropTypes;
 
 ReviewRating.propTypes = {
-  rating: number.isRequired,
+  rating: oneOf(propTypes.REVIEW_RATINGS).isRequired,
   reviewStartClassName: string,
   rootClassName: string,
   className: string,
