@@ -6,6 +6,8 @@ import { createSlug } from '../../util/urlHelpers';
 import { NamedLink } from '../../components';
 import { EditListingPricingForm } from '../../containers';
 import { ensureListing } from '../../util/data';
+import { types } from '../../util/sdkLoader';
+import config from '../../config';
 
 import css from './EditListingPricingPanel.css';
 
@@ -40,19 +42,29 @@ const EditListingPricingPanel = props => {
     <FormattedMessage id="EditListingPricingPanel.createListingTitle" />
   );
 
+  const priceCurrencyValid =
+    price instanceof types.Money ? price.currency === config.currency : true;
+  const form = priceCurrencyValid ? (
+    <EditListingPricingForm
+      className={css.form}
+      initialValues={{ price }}
+      onSubmit={onSubmit}
+      onChange={onChange}
+      saveActionMsg={submitButtonText}
+      updated={panelUpdated}
+      updateError={errors.updateListingError}
+      updateInProgress={updateInProgress}
+    />
+  ) : (
+    <div className={css.priceCurrencyInvalid}>
+      <FormattedMessage id="EditListingPricingPanel.listingPriceCurrencyInvalid" />
+    </div>
+  );
+
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingPricingForm
-        className={css.form}
-        initialValues={{ price }}
-        onSubmit={onSubmit}
-        onChange={onChange}
-        saveActionMsg={submitButtonText}
-        updated={panelUpdated}
-        updateError={errors.updateListingError}
-        updateInProgress={updateInProgress}
-      />
+      {form}
     </div>
   );
 };

@@ -141,6 +141,7 @@
   "EditListingPricingForm.priceRequired": "You need to add a valid price.",
   "EditListingPricingForm.updateFailed": "Failed to update listing. Please try again.",
   "EditListingPricingPanel.createListingTitle": "How much does it cost?",
+  "EditListingPricingPanel.listingPriceCurrencyInvalid": "Listing currency is different from the marketplace currency. You cannot edit the price.",
   "EditListingPricingPanel.title": "Edit the pricing of {listingTitle}",
   "EditListingWizard.saveEditDescription": "Save description",
   "EditListingWizard.saveEditLocation": "Save location",

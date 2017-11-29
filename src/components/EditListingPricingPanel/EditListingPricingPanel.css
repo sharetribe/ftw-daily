@@ -20,3 +20,7 @@
     margin-bottom: 44px;
   }
 }
+
+.priceCurrencyInvalid {
+  color: var(--failColor);
+}

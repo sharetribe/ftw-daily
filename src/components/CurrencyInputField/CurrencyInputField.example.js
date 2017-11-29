@@ -9,9 +9,14 @@ import { currencyConfig } from '../../util/test-data';
 import * as validators from '../../util/validators';
 import CurrencyInputField, { CurrencyInput } from './CurrencyInputField';
 
-const defaultConfig = {
+const currencyConfigUSD = {
   ...currencyConfig,
   currency: 'USD',
+};
+
+const currencyConfigEUR = {
+  ...currencyConfig,
+  currency: 'EUR',
 };
 
 // eslint-disable-next-line no-console
@@ -19,7 +24,7 @@ const onChange = price => console.log('CurrencyInput - value:', price);
 
 // Different locales need to be initialized before their currency formatting is in use
 const CurrencyInputWithIntl = ({ locale, ...rest }) => {
-  if (locale === 'en-US') {
+  if (locale === 'en') {
     addLocaleData([...en]);
   } else {
     addLocaleData([...fi]);
@@ -38,22 +43,39 @@ CurrencyInputWithIntl.propTypes = {
   locale: string.isRequired,
 };
 
-// Empty field with en-US locale
-export const EmptyWithEnUS = {
+export const EmptyWithEnUSD = {
   component: CurrencyInputWithIntl,
   props: {
-    currencyConfig: defaultConfig,
-    locale: 'en-US',
+    currencyConfig: currencyConfigUSD,
+    locale: 'en',
   },
   group: 'custom inputs',
 };
 
-// Default value with fi-FI locale
-export const defaultValueWithFiFI = {
+export const defaultValueWithEnUSD = {
   component: CurrencyInputWithIntl,
   props: {
-    currencyConfig: { ...defaultConfig, currency: 'EUR' },
-    locale: 'fi-FI',
+    currencyConfig: currencyConfigUSD,
+    locale: 'en',
+    defaultValue: 9999.99,
+  },
+  group: 'custom inputs',
+};
+
+export const EmptyWithFiEUR = {
+  component: CurrencyInputWithIntl,
+  props: {
+    currencyConfig: currencyConfigEUR,
+    locale: 'fi',
+  },
+  group: 'custom inputs',
+};
+
+export const defaultValueWithFiEUR = {
+  component: CurrencyInputWithIntl,
+  props: {
+    currencyConfig: currencyConfigEUR,
+    locale: 'fi',
     defaultValue: 9999.99,
   },
   group: 'custom inputs',
@@ -71,7 +93,7 @@ const FormComponent = props => {
         id={`${form}.price`}
         label="Set price:"
         placeholder="Type in amount in EUR..."
-        currencyConfig={{ ...defaultConfig, currency: 'EUR' }}
+        currencyConfig={currencyConfigEUR}
         validate={required}
       />
     </form>
