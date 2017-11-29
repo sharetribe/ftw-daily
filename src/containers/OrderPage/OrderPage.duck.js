@@ -117,7 +117,21 @@ export const fetchOrder = id => (dispatch, getState, sdk) => {
   let txResponse = null;
 
   return sdk.transactions
-    .show({ id, include: ['customer', 'provider', 'listing', 'booking'] }, { expand: true })
+    .show(
+      {
+        id,
+        include: [
+          'customer',
+          'provider',
+          'listing',
+          'booking',
+          'reviews',
+          'reviews.author',
+          'reviews.subject',
+        ],
+      },
+      { expand: true }
+    )
     .then(response => {
       txResponse = response;
       const listingId = listingRelationship(response).id;

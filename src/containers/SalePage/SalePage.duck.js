@@ -159,6 +159,9 @@ export const fetchSale = id => (dispatch, getState, sdk) => {
           'provider.profileImage',
           'listing',
           'booking',
+          'reviews',
+          'reviews.author',
+          'reviews.subject',
         ],
       },
       { expand: true }

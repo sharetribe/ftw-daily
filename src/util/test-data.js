@@ -105,6 +105,7 @@ export const createTransaction = options => {
     listing = null,
     customer = null,
     provider = null,
+    reviews = [],
     lastTransitionedAt = new Date(Date.UTC(2017, 5, 1)),
     transitions = [
       createTxTransition({
@@ -150,6 +151,7 @@ export const createTransaction = options => {
     listing,
     customer,
     provider,
+    reviews,
   };
 };
 
@@ -160,6 +162,22 @@ export const createMessage = (id, attributes = {}, includes = {}) => {
     attributes: {
       at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
       content: `Message ${id}\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+      ...attributes,
+    },
+    ...includes,
+  };
+};
+
+export const createReview = (id, attributes = {}, includes = {}) => {
+  return {
+    id: new UUID(id),
+    attributes: {
+      at: new Date(),
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      rating: 3,
+      state: 'public',
+      type: 'ofProvider',
       ...attributes,
     },
     ...includes,
