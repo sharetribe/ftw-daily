@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { isTransactionsTransitionAlreadyReviewed } from '../../util/errors';
 import * as propTypes from '../../util/propTypes';
 import { required } from '../../util/validators';
-import { FieldStarRating, Form, PrimaryButton, TextInputField } from '../../components';
+import { FieldReviewRating, Form, PrimaryButton, TextInputField } from '../../components';
 
 import css from './ReviewForm.css';
 
@@ -60,7 +60,7 @@ const ReviewFormComponent = props => {
 
   return (
     <Form className={classes} onSubmit={handleSubmit}>
-      <FieldStarRating
+      <FieldReviewRating
         className={css.reviewRating}
         id={`${form}.starRating`}
         name="reviewRating"

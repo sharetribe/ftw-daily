@@ -5,9 +5,9 @@ import { Field } from 'redux-form';
 import classNames from 'classnames';
 import { IconReviewStar, ValidationError } from '../../components';
 
-import css from './FieldStarRating.css';
+import css from './FieldReviewRating.css';
 
-class FieldStarRatingComponent extends Component {
+class FieldReviewRatingComponent extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -76,7 +76,7 @@ class FieldStarRatingComponent extends Component {
             key={`label.${inputId}`}
             className={css.label}
             htmlFor={inputId}
-            title={intl.formatMessage({ id: `FieldStarRating.${starId}` })}
+            title={intl.formatMessage({ id: `FieldReviewRating.${starId}` })}
           >
             <IconReviewStar rootClassName={css.star} />
           </label>
@@ -102,7 +102,7 @@ class FieldStarRatingComponent extends Component {
   }
 }
 
-FieldStarRatingComponent.defaultProps = {
+FieldReviewRatingComponent.defaultProps = {
   rootClassName: null,
   className: null,
   clearOnUnmount: false,
@@ -112,7 +112,7 @@ FieldStarRatingComponent.defaultProps = {
 
 const { string, bool, shape, func, object } = PropTypes;
 
-FieldStarRatingComponent.propTypes = {
+FieldReviewRatingComponent.propTypes = {
   rootClassName: string,
   className: string,
   clearOnUnmount: bool,
@@ -133,8 +133,8 @@ FieldStarRatingComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const FieldStarRating = props => {
-  return <Field component={FieldStarRatingComponent} {...props} />;
+const FieldReviewRating = props => {
+  return <Field component={FieldReviewRatingComponent} {...props} />;
 };
 
-export default injectIntl(FieldStarRating);
+export default injectIntl(FieldReviewRating);

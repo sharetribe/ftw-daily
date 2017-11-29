@@ -3,9 +3,9 @@ import React from 'react';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import * as validators from '../../util/validators';
 import { Button } from '../../components';
-import FieldStarRating from './FieldStarRating';
+import FieldReviewRating from './FieldReviewRating';
 
-const formName = 'Styleguide.FieldStarRating.Form';
+const formName = 'Styleguide.FieldReviewRating.Form';
 
 const FormComponent = props => {
   const { form, handleSubmit, invalid, pristine, submitting } = props;
@@ -14,7 +14,7 @@ const FormComponent = props => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <FieldStarRating
+      <FieldReviewRating
         id={`${form}.rate1`}
         name="rating"
         label="Rate your experience"
