@@ -304,6 +304,7 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
               },
             ]
           }
+          onOpenReviewModal={[Function]}
           onShowOlderMessages={[Function]}
           transaction={
             Object {
@@ -584,6 +585,17 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
       </div>
     </div>
   </div>
+  <InjectIntl(ReviewModal)
+    id="ReviewSaleModal"
+    isOpen={false}
+    onCloseModal={[Function]}
+    onManageDisableScrolling={[Function]}
+    onSubmitReview={[Function]}
+    reviewSent={false}
+    revieweeName="customer1 display name"
+    sendReviewError={null}
+    sendReviewInProgress={false}
+  />
 </div>
 `;
 
@@ -891,6 +903,7 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
               },
             ]
           }
+          onOpenReviewModal={[Function]}
           onShowOlderMessages={[Function]}
           transaction={
             Object {
@@ -1171,6 +1184,17 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
       </div>
     </div>
   </div>
+  <InjectIntl(ReviewModal)
+    id="ReviewSaleModal"
+    isOpen={false}
+    onCloseModal={[Function]}
+    onManageDisableScrolling={[Function]}
+    onSubmitReview={[Function]}
+    reviewSent={false}
+    revieweeName="customer1 display name"
+    sendReviewError={null}
+    sendReviewInProgress={false}
+  />
 </div>
 `;
 
@@ -1478,6 +1502,7 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
               },
             ]
           }
+          onOpenReviewModal={[Function]}
           onShowOlderMessages={[Function]}
           transaction={
             Object {
@@ -1758,6 +1783,17 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
       </div>
     </div>
   </div>
+  <InjectIntl(ReviewModal)
+    id="ReviewSaleModal"
+    isOpen={false}
+    onCloseModal={[Function]}
+    onManageDisableScrolling={[Function]}
+    onSubmitReview={[Function]}
+    reviewSent={false}
+    revieweeName="customer1 display name"
+    sendReviewError={null}
+    sendReviewInProgress={false}
+  />
 </div>
 `;
 
@@ -2065,6 +2101,7 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
               },
             ]
           }
+          onOpenReviewModal={[Function]}
           onShowOlderMessages={[Function]}
           transaction={
             Object {
@@ -2345,6 +2382,17 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
       </div>
     </div>
   </div>
+  <InjectIntl(ReviewModal)
+    id="ReviewSaleModal"
+    isOpen={false}
+    onCloseModal={[Function]}
+    onManageDisableScrolling={[Function]}
+    onSubmitReview={[Function]}
+    reviewSent={false}
+    revieweeName="customer1 display name"
+    sendReviewError={null}
+    sendReviewInProgress={false}
+  />
 </div>
 `;
 
@@ -2652,6 +2700,7 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
               },
             ]
           }
+          onOpenReviewModal={[Function]}
           onShowOlderMessages={[Function]}
           transaction={
             Object {
@@ -2932,6 +2981,17 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
       </div>
     </div>
   </div>
+  <InjectIntl(ReviewModal)
+    id="ReviewSaleModal"
+    isOpen={false}
+    onCloseModal={[Function]}
+    onManageDisableScrolling={[Function]}
+    onSubmitReview={[Function]}
+    reviewSent={false}
+    revieweeName="customer1 display name"
+    sendReviewError={null}
+    sendReviewInProgress={false}
+  />
 </div>
 `;
 
@@ -3249,6 +3309,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
               },
             ]
           }
+          onOpenReviewModal={[Function]}
           onShowOlderMessages={[Function]}
           transaction={
             Object {
@@ -3585,5 +3646,16 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
       </div>
     </div>
   </div>
+  <InjectIntl(ReviewModal)
+    id="ReviewSaleModal"
+    isOpen={false}
+    onCloseModal={[Function]}
+    onManageDisableScrolling={[Function]}
+    onSubmitReview={[Function]}
+    reviewSent={false}
+    revieweeName="customer1 display name"
+    sendReviewError={null}
+    sendReviewInProgress={false}
+  />
 </div>
 `;
