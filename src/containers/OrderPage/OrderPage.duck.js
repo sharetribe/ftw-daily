@@ -247,12 +247,16 @@ export const sendMessage = (orderId, message) => (dispatch, getState, sdk) => {
     });
 };
 
+const REVIEW_TX_INCLUDES = ['reviews', 'reviews.author', 'reviews.subject'];
+
 // If other party (provider) has already sent a review, we need to make transition to
 // TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND
 const sendReviewAsSecond = (id, params, dispatch, sdk) => {
   const transition = propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND;
+  const include = REVIEW_TX_INCLUDES;
+
   return sdk.transactions
-    .transition({ id, transition, params }, { expand: true })
+    .transition({ id, transition, params }, { expand: true, include })
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(sendReviewSuccess());
@@ -274,8 +278,10 @@ const sendReviewAsSecond = (id, params, dispatch, sdk) => {
 // by calling sendReviewAsSecond().
 const sendReviewAsFirst = (id, params, dispatch, sdk) => {
   const transition = propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST;
+  const include = REVIEW_TX_INCLUDES;
+
   return sdk.transactions
-    .transition({ id, transition, params }, { expand: true })
+    .transition({ id, transition, params }, { expand: true, include })
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(sendReviewSuccess());
