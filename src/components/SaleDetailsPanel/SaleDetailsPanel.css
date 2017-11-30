@@ -207,7 +207,7 @@
 }
 
 .breakdownDesktop {
-  margin: 0 48px 0 48px;
+  margin: 0 48px 50px 48px;
 }
 
 .feedContainer {
@@ -293,7 +293,7 @@
     box-shadow: none;
     width: auto;
     margin: 0 48px 48px 48px;
-    padding: 50px 0 0 0;
+    padding: 0;
   }
 }
 
