@@ -80,8 +80,12 @@ describe('SaleDetailsPanel', () => {
     ],
     fetchMessagesInProgress: false,
     sendMessageInProgress: false,
+    sendReviewInProgress: false,
+    onManageDisableScrolling: noop,
+    onOpenReviewModal: noop,
     onShowMoreMessages: noop,
     onSendMessage: noop,
+    onSendReview: noop,
     onResetForm: noop,
     intl: fakeIntl,
   };

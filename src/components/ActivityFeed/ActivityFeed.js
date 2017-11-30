@@ -76,19 +76,14 @@ const hasUserLeftAReviewFirst = (userRole, lastTransition) => {
   );
 };
 
-const onLeaveAReview = () => {
-  // TODO: Open up a review modal
-
-  console.log('Leave a review button clicked');
-};
-
 const resolveTransitionMessage = (
   transition,
   lastTransition,
   listingTitle,
   ownRole,
   otherUsersName,
-  intl
+  intl,
+  onOpenReviewModal
 ) => {
   const isOwnTransition = transition.by === ownRole;
   const currentTransition = transition.transition;
@@ -130,7 +125,7 @@ const resolveTransitionMessage = (
       // if current user is not the first to leave a review
       const reviewLink =
         deliveredState || !hasUserLeftAReviewFirst(ownRole, lastTransition) ? (
-          <InlineTextButton onClick={onLeaveAReview}>
+          <InlineTextButton onClick={onOpenReviewModal}>
             <FormattedMessage id="ActivityFeed.leaveAReview" values={{ displayName }} />
           </InlineTextButton>
         ) : null;
@@ -144,7 +139,7 @@ const resolveTransitionMessage = (
         // show the leave a review link if current user is not the first
         // one to leave a review
         const reviewLink = !hasUserLeftAReviewFirst(ownRole, lastTransition) ? (
-          <InlineTextButton onClick={onLeaveAReview}>
+          <InlineTextButton onClick={onOpenReviewModal}>
             <FormattedMessage id="ActivityFeed.leaveAReviewSecond" values={{ displayName }} />
           </InlineTextButton>
         ) : null;
@@ -178,7 +173,7 @@ const reviewByAuthorId = (transaction, userId) => {
 };
 
 const Transition = props => {
-  const { transition, transaction, currentUser, intl } = props;
+  const { transition, transaction, currentUser, intl, onOpenReviewModal } = props;
 
   const currentTransaction = ensureTransaction(transaction);
   const customer = currentTransaction.customer;
@@ -202,7 +197,8 @@ const Transition = props => {
     listingTitle,
     ownRole,
     otherUsersName,
-    intl
+    intl,
+    onOpenReviewModal
   );
   const currentTransition = transition.transition;
 
@@ -252,6 +248,7 @@ Transition.propTypes = {
   transaction: propTypes.transaction.isRequired,
   currentUser: propTypes.currentUser.isRequired,
   intl: intlShape.isRequired,
+  onOpenReviewModal: func.isRequired,
 };
 
 const EmptyTransition = () => {
@@ -296,6 +293,7 @@ export const ActivityFeedComponent = props => {
     transaction,
     currentUser,
     hasOlderMessages,
+    onOpenReviewModal,
     onShowOlderMessages,
     fetchMessagesInProgress,
     intl,
@@ -329,6 +327,7 @@ export const ActivityFeedComponent = props => {
           transaction={transaction}
           currentUser={currentUser}
           intl={intl}
+          onOpenReviewModal={onOpenReviewModal}
         />
       );
     } else {
@@ -398,6 +397,7 @@ ActivityFeedComponent.propTypes = {
   transaction: propTypes.transaction,
   messages: arrayOf(propTypes.message),
   hasOlderMessages: bool.isRequired,
+  onOpenReviewModal: func.isRequired,
   onShowOlderMessages: func.isRequired,
   fetchMessagesInProgress: bool.isRequired,
 

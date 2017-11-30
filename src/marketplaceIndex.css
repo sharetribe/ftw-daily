@@ -71,6 +71,7 @@ ul {
   padding: 0;
 }
 
+legend,
 label {
   @apply --marketplaceH4FontStyles;
   font-weight: var(--fontWeightSemiBold);

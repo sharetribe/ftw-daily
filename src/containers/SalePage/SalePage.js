@@ -8,8 +8,7 @@ import { reset as resetForm } from 'redux-form';
 import * as propTypes from '../../util/propTypes';
 import { ensureListing, ensureTransaction } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
-import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { acceptSale, declineSale, loadData, sendMessage, fetchMoreMessages } from './SalePage.duck';
+import { isScrollingDisabled, manageDisableScrolling } from '../../ducks/UI.duck';
 import {
   NamedRedirect,
   SaleDetailsPanel,
@@ -22,6 +21,14 @@ import {
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
+import {
+  acceptSale,
+  declineSale,
+  loadData,
+  sendMessage,
+  sendReview,
+  fetchMoreMessages,
+} from './SalePage.duck';
 import css from './SalePage.css';
 
 // SalePage handles data loading
@@ -46,8 +53,12 @@ export const SalePageComponent = props => {
     messages,
     sendMessageInProgress,
     sendMessageError,
+    sendReviewInProgress,
+    sendReviewError,
+    onManageDisableScrolling,
     onShowMoreMessages,
     onSendMessage,
+    onSendReview,
     onResetForm,
   } = props;
 
@@ -100,8 +111,12 @@ export const SalePageComponent = props => {
         fetchMessagesError={fetchMessagesError}
         sendMessageInProgress={sendMessageInProgress}
         sendMessageError={sendMessageError}
+        sendReviewInProgress={sendReviewInProgress}
+        sendReviewError={sendReviewError}
+        onManageDisableScrolling={onManageDisableScrolling}
         onShowMoreMessages={onShowMoreMessages}
         onSendMessage={onSendMessage}
+        onSendReview={onSendReview}
         onResetForm={onResetForm}
       />
     ) : (
@@ -181,6 +196,8 @@ const mapStateToProps = state => {
     messages,
     sendMessageInProgress,
     sendMessageError,
+    sendReviewInProgress,
+    sendReviewError,
   } = state.SalePage;
   const { currentUser } = state.user;
 
@@ -202,6 +219,8 @@ const mapStateToProps = state => {
     messages,
     sendMessageInProgress,
     sendMessageError,
+    sendReviewInProgress,
+    sendReviewError,
   };
 };
 
@@ -212,6 +231,10 @@ const mapDispatchToProps = dispatch => {
     onShowMoreMessages: saleId => dispatch(fetchMoreMessages(saleId)),
     onSendMessage: (saleId, message) => dispatch(sendMessage(saleId, message)),
     onResetForm: formName => dispatch(resetForm(formName)),
+    onManageDisableScrolling: (componentId, disableScrolling) =>
+      dispatch(manageDisableScrolling(componentId, disableScrolling)),
+    onSendReview: (tx, reviewRating, reviewContent) =>
+      dispatch(sendReview(tx, reviewRating, reviewContent)),
   };
 };
 

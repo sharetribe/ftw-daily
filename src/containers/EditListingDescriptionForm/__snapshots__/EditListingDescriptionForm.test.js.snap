@@ -42,6 +42,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
     <textarea
       className="undefined"
       id="fakeTestForm.description"
+      maxLength={5000}
       name="description"
       onBlur={[Function]}
       onChange={[Function]}
@@ -49,6 +50,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
       onDrop={[Function]}
       onFocus={[Function]}
       placeholder="How many people can fit at once? Does the sauna come with towels?"
+      rows={1}
       value=""
     />
   </div>

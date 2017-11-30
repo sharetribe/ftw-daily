@@ -7,11 +7,12 @@ import { createSlug } from '../../util/urlHelpers';
 import { ensureListing, ensureTransaction, ensureUser, userDisplayName } from '../../util/data';
 import { isMobileSafari } from '../../util/userAgent';
 import {
+  ActivityFeed,
+  AvatarMedium,
   BookingBreakdown,
   NamedLink,
   ResponsiveImage,
-  AvatarMedium,
-  ActivityFeed,
+  ReviewModal,
 } from '../../components';
 import { SendMessageForm } from '../../containers';
 
@@ -82,8 +83,31 @@ const orderMessage = (transaction, providerName) => {
 export class OrderDetailsPanelComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { sendMessageFormFocused: false };
+    this.state = {
+      sendMessageFormFocused: false,
+      isReviewModalOpen: false,
+      reviewSubmitted: false,
+    };
+    this.onOpenReviewModal = this.onOpenReviewModal.bind(this);
+    this.onSubmitReview = this.onSubmitReview.bind(this);
   }
+
+  onOpenReviewModal() {
+    this.setState({ isReviewModalOpen: true });
+  }
+
+  onSubmitReview(values) {
+    const { onSendReview, transaction } = this.props;
+    const currentTransaction = ensureTransaction(transaction);
+    const { reviewRating, reviewContent } = values;
+    const rating = Number.parseInt(reviewRating, 10);
+    onSendReview(currentTransaction, rating, reviewContent)
+      .then(r => this.setState({ isReviewModalOpen: false, reviewSubmitted: true }))
+      .catch(e => {
+        // Do nothing.
+      });
+  }
+
   render() {
     const {
       rootClassName,
@@ -97,6 +121,9 @@ export class OrderDetailsPanelComponent extends Component {
       fetchMessagesError,
       sendMessageInProgress,
       sendMessageError,
+      sendReviewInProgress,
+      sendReviewError,
+      onManageDisableScrolling,
       onShowMoreMessages,
       onSendMessage,
       onResetForm,
@@ -200,6 +227,7 @@ export class OrderDetailsPanelComponent extends Component {
           transaction={currentTransaction}
           currentUser={currentUser}
           hasOlderMessages={hasOlderMessages && !fetchMessagesInProgress}
+          onOpenReviewModal={this.onOpenReviewModal}
           onShowOlderMessages={handleShowOlderMessages}
           fetchMessagesInProgress={fetchMessagesInProgress}
         />
@@ -330,6 +358,17 @@ export class OrderDetailsPanelComponent extends Component {
             </div>
           </div>
         </div>
+        <ReviewModal
+          id="ReviewOrderModal"
+          isOpen={this.state.isReviewModalOpen}
+          onCloseModal={() => this.setState({ isReviewModalOpen: false })}
+          onManageDisableScrolling={onManageDisableScrolling}
+          onSubmitReview={this.onSubmitReview}
+          revieweeName={authorDisplayName}
+          reviewSent={this.state.reviewSubmitted}
+          sendReviewInProgress={sendReviewInProgress}
+          sendReviewError={sendReviewError}
+        />
       </div>
     );
   }
@@ -341,6 +380,7 @@ OrderDetailsPanelComponent.defaultProps = {
   currentUser: null,
   fetchMessagesError: null,
   sendMessageError: null,
+  sendReviewError: null,
 };
 
 const { string, arrayOf, bool, func, number } = PropTypes;
@@ -358,8 +398,12 @@ OrderDetailsPanelComponent.propTypes = {
   fetchMessagesError: propTypes.error,
   sendMessageInProgress: bool.isRequired,
   sendMessageError: propTypes.error,
+  sendReviewInProgress: bool.isRequired,
+  sendReviewError: propTypes.error,
+  onManageDisableScrolling: func.isRequired,
   onShowMoreMessages: func.isRequired,
   onSendMessage: func.isRequired,
+  onSendReview: func.isRequired,
   onResetForm: func.isRequired,
 
   // from injectIntl

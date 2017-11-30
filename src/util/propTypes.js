@@ -164,6 +164,8 @@ export const TX_TRANSITION_CANCEL = 'transition/cancel';
 export const TX_TRANSITION_MARK_DELIVERED = 'transition/mark-delivered';
 
 // Review transitions
+// Reviews are given through transaction transitions.
+// Either party (provider or customer) can be the first to give a review.
 export const TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST = 'transition/review-by-provider-first';
 export const TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND = 'transition/review-by-provider-second';
 export const TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST = 'transition/review-by-customer-first';
@@ -312,6 +314,11 @@ export const pagination = shape({
 });
 
 export const ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND = 'transaction-listing-not-found';
+export const ERROR_CODE_TRANSACTION_INVALID_TRANSITION = 'transaction-invalid-transition';
+export const ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_CUSTOMER =
+  'transaction-already-reviewed-by-customer';
+export const ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_PROVIDER =
+  'transaction-already-reviewed-by-provider';
 export const ERROR_CODE_PAYMENT_FAILED = 'transaction-payment-failed';
 export const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
 export const ERROR_CODE_EMAIL_NOT_FOUND = 'email-not-found';
@@ -320,6 +327,9 @@ export const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'email-too-many-verific
 export const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit';
 const ERROR_CODES = [
   ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND,
+  ERROR_CODE_TRANSACTION_INVALID_TRANSITION,
+  ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_CUSTOMER,
+  ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_PROVIDER,
   ERROR_CODE_PAYMENT_FAILED,
   ERROR_CODE_EMAIL_TAKEN,
   ERROR_CODE_EMAIL_NOT_FOUND,

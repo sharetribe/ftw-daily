@@ -1,5 +1,6 @@
+import { pick } from 'lodash';
 import { types } from '../../util/sdkLoader';
-import { storableError } from '../../util/errors';
+import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
 import * as propTypes from '../../util/propTypes';
 import * as log from '../../util/log';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
@@ -9,6 +10,8 @@ import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
 const MESSAGES_PAGE_SIZE = 100;
 
 // ================ Action types ================ //
+
+export const SET_INITAL_VALUES = 'app/OrderPage/SET_INITIAL_VALUES';
 
 export const FETCH_SALE_REQUEST = 'app/SalePagePage/FETCH_SALE_REQUEST';
 export const FETCH_SALE_SUCCESS = 'app/SalePage/FETCH_SALE_SUCCESS';
@@ -29,7 +32,10 @@ export const FETCH_MESSAGES_ERROR = 'app/SalePage/FETCH_MESSAGES_ERROR';
 export const SEND_MESSAGE_REQUEST = 'app/SalePage/SEND_MESSAGE_REQUEST';
 export const SEND_MESSAGE_SUCCESS = 'app/SalePage/SEND_MESSAGE_SUCCESS';
 export const SEND_MESSAGE_ERROR = 'app/SalePage/SEND_MESSAGE_ERROR';
-export const CLEAR_SEND_MESSAGE_ERROR = 'app/SalePage/CLEAR_SEND_MESSAGE_ERROR';
+
+export const SEND_REVIEW_REQUEST = 'app/SalePage/SEND_REVIEW_REQUEST';
+export const SEND_REVIEW_SUCCESS = 'app/SalePage/SEND_REVIEW_SUCCESS';
+export const SEND_REVIEW_ERROR = 'app/SalePage/SEND_REVIEW_ERROR';
 
 // ================ Reducer ================ //
 
@@ -47,11 +53,16 @@ const initialState = {
   messages: [],
   sendMessageInProgress: false,
   sendMessageError: null,
+  sendReviewInProgress: false,
+  sendReviewError: null,
 };
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
+    case SET_INITAL_VALUES:
+      return { ...initialState, ...payload };
+
     case FETCH_SALE_REQUEST:
       return { ...state, fetchSaleInProgress: true, fetchSaleError: null };
     case FETCH_SALE_SUCCESS: {
@@ -94,8 +105,13 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
       return { ...state, sendMessageInProgress: false };
     case SEND_MESSAGE_ERROR:
       return { ...state, sendMessageInProgress: false, sendMessageError: payload };
-    case CLEAR_SEND_MESSAGE_ERROR:
-      return { ...state, sendMessageError: null };
+
+    case SEND_REVIEW_REQUEST:
+      return { ...state, sendReviewInProgress: true, sendReviewError: null };
+    case SEND_REVIEW_SUCCESS:
+      return { ...state, sendReviewInProgress: false };
+    case SEND_REVIEW_ERROR:
+      return { ...state, sendReviewInProgress: false, sendReviewError: payload };
 
     default:
       return state;
@@ -113,6 +129,10 @@ export const fetchedMessagesCount = state => {
 };
 
 // ================ Action creators ================ //
+export const setInitialValues = initialValues => ({
+  type: SET_INITAL_VALUES,
+  payload: pick(initialValues, Object.keys(initialState)),
+});
 
 const fetchSaleRequest = () => ({ type: FETCH_SALE_REQUEST });
 const fetchSaleSuccess = response => ({ type: FETCH_SALE_SUCCESS, payload: response });
@@ -136,7 +156,10 @@ const fetchMessagesError = e => ({ type: FETCH_MESSAGES_ERROR, error: true, payl
 const sendMessageRequest = () => ({ type: SEND_MESSAGE_REQUEST });
 const sendMessageSuccess = () => ({ type: SEND_MESSAGE_SUCCESS });
 const sendMessageError = e => ({ type: SEND_MESSAGE_ERROR, error: true, payload: e });
-const clearSendMessageError = () => ({ type: CLEAR_SEND_MESSAGE_ERROR });
+
+const sendReviewRequest = () => ({ type: SEND_REVIEW_REQUEST });
+const sendReviewSuccess = () => ({ type: SEND_REVIEW_SUCCESS });
+const sendReviewError = e => ({ type: SEND_REVIEW_ERROR, error: true, payload: e });
 
 // ================ Thunks ================ //
 
@@ -271,21 +294,6 @@ export const fetchMoreMessages = txId => (dispatch, getState, sdk) => {
   return dispatch(fetchNLatestMessages(txId, messagesToFetch));
 };
 
-// loadData is a collection of async calls that need to be made
-// before page has all the info it needs to render itself
-export const loadData = params => dispatch => {
-  const saleId = new types.UUID(params.id);
-
-  // Clear the send error since the message form is emptied as well.
-  dispatch(clearSendMessageError());
-
-  // Sale (i.e. transaction entity in API, but from buyers perspective) contains sale details
-  return Promise.all([
-    dispatch(fetchSale(saleId)),
-    dispatch(fetchNLatestMessages(saleId, MESSAGES_PAGE_SIZE)),
-  ]);
-};
-
 export const sendMessage = (saleId, message) => (dispatch, getState, sdk) => {
   dispatch(sendMessageRequest());
 
@@ -306,4 +314,85 @@ export const sendMessage = (saleId, message) => (dispatch, getState, sdk) => {
       // keep the message in the form for a retry.
       throw e;
     });
+};
+
+const REVIEW_TX_INCLUDES = ['reviews', 'reviews.author', 'reviews.subject'];
+
+// If other party (customer) has already sent a review, we need to make transition to
+// TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND
+const sendReviewAsSecond = (id, params, dispatch, sdk) => {
+  const transition = propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND;
+  const include = REVIEW_TX_INCLUDES;
+
+  return sdk.transactions
+    .transition({ id, transition, params }, { expand: true, include })
+    .then(response => {
+      dispatch(addMarketplaceEntities(response));
+      dispatch(sendReviewSuccess());
+      return response;
+    })
+    .catch(e => {
+      dispatch(sendReviewError(storableError(e)));
+
+      // Rethrow so the page can track whether the sending failed, and
+      // keep the message in the form for a retry.
+      throw e;
+    });
+};
+
+// If other party (customer) has not yet sent a review, we need to make transition to
+// TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST
+// However, the other party might have made the review after previous data synch point.
+// So, error is likely to happen and then we must try another state transition
+// by calling sendReviewAsSecond().
+const sendReviewAsFirst = (id, params, dispatch, sdk) => {
+  const transition = propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST;
+  const include = REVIEW_TX_INCLUDES;
+
+  return sdk.transactions
+    .transition({ id, transition, params }, { expand: true, include })
+    .then(response => {
+      dispatch(addMarketplaceEntities(response));
+      dispatch(sendReviewSuccess());
+      return response;
+    })
+    .catch(e => {
+      // If transaction transition is invalid, lets try another endpoint.
+      if (isTransactionsTransitionInvalidTransition(e)) {
+        return sendReviewAsSecond(id, params, dispatch, sdk);
+      } else {
+        dispatch(sendReviewError(storableError(e)));
+
+        // Rethrow so the page can track whether the sending failed, and
+        // keep the message in the form for a retry.
+        throw e;
+      }
+    });
+};
+
+export const sendReview = (tx, reviewRating, reviewContent) => (dispatch, getState, sdk) => {
+  const params = { reviewRating, reviewContent };
+  const txStateProviderFirst =
+    tx.attributes.lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST;
+
+  dispatch(sendReviewRequest());
+
+  return txStateProviderFirst
+    ? sendReviewAsSecond(tx.id, params, dispatch, sdk)
+    : sendReviewAsFirst(tx.id, params, dispatch, sdk);
+};
+
+// loadData is a collection of async calls that need to be made
+// before page has all the info it needs to render itself
+export const loadData = params => dispatch => {
+  const saleId = new types.UUID(params.id);
+
+  // Clear the send error since the message form is emptied as well.
+  dispatch(setInitialValues({ sendMessageError: null, sendReviewError: null }));
+
+  // Sale (i.e. transaction entity in API, but from buyers perspective) contains sale details
+  return Promise.all([
+    dispatch(fetchSale(saleId)),
+    dispatch(fetchNLatestMessages(saleId, MESSAGES_PAGE_SIZE)),
+  ]);
 };
