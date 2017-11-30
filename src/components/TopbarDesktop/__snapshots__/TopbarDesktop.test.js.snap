@@ -65,7 +65,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
         onChange={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
-        placeholder="Search saunas…"
+        placeholder="TopbarSearchForm.placeholder"
         type="search"
         value=""
       />
@@ -82,7 +82,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        + Add your sauna
+        TopbarDesktop.createListing
       </span>
     </span>
   </a>
@@ -97,7 +97,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        Inbox
+        TopbarDesktop.inbox
       </span>
     </span>
   </a>
@@ -142,7 +142,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
               className={undefined}
             />
             <span>
-              Your listings
+              TopbarDesktop.yourListingsLink
             </span>
           </a>
         </li>
@@ -161,7 +161,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
               className={undefined}
             />
             <span>
-              Profile settings
+              TopbarDesktop.profileSettingsLink
             </span>
           </a>
         </li>
@@ -180,7 +180,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
               className={undefined}
             />
             <span>
-              Account settings
+              TopbarDesktop.accountSettingsLink
             </span>
           </a>
         </li>
@@ -197,7 +197,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
               className={undefined}
             />
             <span>
-              Log out
+              TopbarDesktop.logout
             </span>
           </button>
         </li>

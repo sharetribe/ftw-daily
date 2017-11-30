@@ -16,7 +16,7 @@ exports[`DateInput matches snapshot 1`] = `
         >
           <input
             aria-describedby="DateInput__screen-reader-message-DateInputField_DateInputComponent_someDate"
-            aria-label="Date input"
+            aria-label="DateInput.defaultPlaceholder"
             autoComplete="off"
             className="DateInput__input needsclick"
             disabled={false}
@@ -25,7 +25,7 @@ exports[`DateInput matches snapshot 1`] = `
             onChange={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
-            placeholder="Date input"
+            placeholder="DateInput.defaultPlaceholder"
             readOnly={false}
             required={false}
             type="text"
@@ -35,12 +35,12 @@ exports[`DateInput matches snapshot 1`] = `
             className="screen-reader-only"
             id="DateInput__screen-reader-message-DateInputField_DateInputComponent_someDate"
           >
-            Date input
+            DateInput.screenReaderInputMessage
           </p>
           <div
             className="DateInput__display-text"
           >
-            Date input
+            DateInput.defaultPlaceholder
           </div>
         </div>
       </div>

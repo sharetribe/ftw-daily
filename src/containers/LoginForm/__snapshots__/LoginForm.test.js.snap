@@ -14,7 +14,7 @@ exports[`LoginForm matches snapshot 1`] = `
       <label
         htmlFor="LoginForm.email"
       >
-        Email
+        LoginForm.emailLabel
       </label>
       <input
         className=""
@@ -25,7 +25,7 @@ exports[`LoginForm matches snapshot 1`] = `
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder="john.doe@example.com"
+        placeholder="LoginForm.emailPlaceholder"
         type="email"
         value=""
       />
@@ -36,7 +36,7 @@ exports[`LoginForm matches snapshot 1`] = `
       <label
         htmlFor="LoginForm.password"
       >
-        Password
+        LoginForm.passwordLabel
       </label>
       <input
         className=""
@@ -47,7 +47,7 @@ exports[`LoginForm matches snapshot 1`] = `
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder="Enter your password…"
+        placeholder="LoginForm.passwordPlaceholder"
         type="password"
         value=""
       />
@@ -63,18 +63,7 @@ exports[`LoginForm matches snapshot 1`] = `
         className={undefined}
       >
         <span>
-          Forgot your password? 
-          <a
-            className=""
-            href="/recover-password"
-            onClick={[Function]}
-            style={Object {}}
-            title={null}
-          >
-            <span>
-              Reset password.
-            </span>
-          </a>
+          LoginForm.forgotPasswordInfo
         </span>
       </span>
     </p>
@@ -84,7 +73,7 @@ exports[`LoginForm matches snapshot 1`] = `
       type="submit"
     >
       <span>
-        Log in
+        LoginForm.logIn
       </span>
     </button>
   </div>

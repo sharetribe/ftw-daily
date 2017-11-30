@@ -11,7 +11,7 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        Price per night
+        BookingBreakdown.pricePerNight
       </span>
     </span>
     <span
@@ -27,17 +27,7 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        <span
-          className={undefined}
-        >
-          2017-04-14
-        </span>
-         – 
-        <span
-          className={undefined}
-        >
-          2017-04-16
-        </span>
+        BookingBreakdown.bookingPeriod
       </span>
     </span>
     <span
@@ -46,7 +36,7 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
       <span
         dangerouslySetInnerHTML={
           Object {
-            "__html": "2 nights",
+            "__html": "BookingBreakdown.nightCount",
           }
         }
       />
@@ -62,7 +52,7 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        Total price
+        BookingBreakdown.total
       </span>
     </div>
     <div
@@ -85,7 +75,7 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        Price per night
+        BookingBreakdown.pricePerNight
       </span>
     </span>
     <span
@@ -101,17 +91,7 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        <span
-          className={undefined}
-        >
-          2017-04-14
-        </span>
-         – 
-        <span
-          className={undefined}
-        >
-          2017-04-16
-        </span>
+        BookingBreakdown.bookingPeriod
       </span>
     </span>
     <span
@@ -120,7 +100,7 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
       <span
         dangerouslySetInnerHTML={
           Object {
-            "__html": "2 nights",
+            "__html": "BookingBreakdown.nightCount",
           }
         }
       />
@@ -136,7 +116,7 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        Total price
+        BookingBreakdown.total
       </span>
     </div>
     <div
@@ -159,7 +139,7 @@ exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`
       className={undefined}
     >
       <span>
-        Price per night
+        BookingBreakdown.pricePerNight
       </span>
     </span>
     <span
@@ -175,17 +155,7 @@ exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`
       className={undefined}
     >
       <span>
-        <span
-          className={undefined}
-        >
-          2017-04-14
-        </span>
-         – 
-        <span
-          className={undefined}
-        >
-          2017-04-16
-        </span>
+        BookingBreakdown.bookingPeriod
       </span>
     </span>
     <span
@@ -194,7 +164,7 @@ exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`
       <span
         dangerouslySetInnerHTML={
           Object {
-            "__html": "2 nights",
+            "__html": "BookingBreakdown.nightCount",
           }
         }
       />
@@ -207,7 +177,7 @@ exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`
       className={undefined}
     >
       <span>
-        Subtotal
+        BookingBreakdown.subTotal
       </span>
     </span>
     <span
@@ -223,7 +193,7 @@ exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`
       className={undefined}
     >
       <span>
-        Refund
+        BookingBreakdown.refund
       </span>
     </span>
     <span
@@ -242,7 +212,7 @@ exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`
       className={undefined}
     >
       <span>
-        Total price
+        BookingBreakdown.providerTotalCanceled
       </span>
     </div>
     <div
@@ -265,7 +235,7 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        Price per night
+        BookingBreakdown.pricePerNight
       </span>
     </span>
     <span
@@ -281,17 +251,7 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        <span
-          className={undefined}
-        >
-          2017-04-14
-        </span>
-         – 
-        <span
-          className={undefined}
-        >
-          2017-04-16
-        </span>
+        BookingBreakdown.bookingPeriod
       </span>
     </span>
     <span
@@ -300,7 +260,7 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
       <span
         dangerouslySetInnerHTML={
           Object {
-            "__html": "2 nights",
+            "__html": "BookingBreakdown.nightCount",
           }
         }
       />
@@ -313,7 +273,7 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        Subtotal
+        BookingBreakdown.subTotal
       </span>
     </span>
     <span
@@ -329,7 +289,7 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        Saunatime fee
+        BookingBreakdown.commission
       </span>
     </span>
     <span
@@ -348,7 +308,7 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        You'll make
+        BookingBreakdown.providerTotalDefault
       </span>
     </div>
     <div

@@ -34,16 +34,16 @@ describe('Application', () => {
 
   it('server renders pages that do not require authentication', () => {
     const urlTitles = {
-      '/': 'Book saunas everywhere',
-      '/s': 'Search results for map search',
-      '/l/listing-title-slug/1234': 'Loading listing…',
-      '/l/1234': 'Loading listing…',
-      '/u/1234': ' | Saunatime',
-      '/login': 'Log in',
-      '/signup': 'Sign up',
-      '/recover-password': 'Request a new password',
-      '/this-url-should-not-be-found': 'Page not found',
-      '/reset-password?t=token&e=email': 'Reset password',
+      '/': 'LandingPage.schemaTitle',
+      '/s': 'SearchPage.schemaTitle',
+      '/l/listing-title-slug/1234': 'ListingPage.loadingListingTitle',
+      '/l/1234': 'ListingPage.loadingListingTitle',
+      '/u/1234': 'ProfilePage.schemaTitle',
+      '/login': 'AuthenticationPage.schemaTitleLogin',
+      '/signup': 'AuthenticationPage.schemaTitleSignup',
+      '/recover-password': 'PasswordRecoveryPage.title',
+      '/this-url-should-not-be-found': 'NotFoundPage.title',
+      '/reset-password?t=token&e=email': 'PasswordResetPage.title',
     };
     forEach(urlTitles, (title, url) => {
       const context = {};
