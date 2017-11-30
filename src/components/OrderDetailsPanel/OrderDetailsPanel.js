@@ -57,15 +57,37 @@ const orderTitle = (transaction, listingLink, customerName) => {
       </span>
     );
   } else if (propTypes.txIsDeclined(transaction)) {
-    return <FormattedMessage id="OrderDetailsPanel.orderDeclinedTitle" values={{ listingLink }} />;
+    return (
+      <FormattedMessage
+        id="OrderDetailsPanel.orderDeclinedTitle"
+        values={{ customerName, listingLink }}
+      />
+    );
   } else if (propTypes.txIsAutodeclined(transaction)) {
     return (
-      <FormattedMessage id="OrderDetailsPanel.orderAutoDeclinedTitle" values={{ listingLink }} />
+      <FormattedMessage
+        id="OrderDetailsPanel.orderDeclinedTitle"
+        values={{ customerName, listingLink }}
+      />
     );
   } else if (propTypes.txIsCanceled(transaction)) {
-    return <FormattedMessage id="OrderDetailsPanel.orderCanceledTitle" values={{ listingLink }} />;
-  } else if (propTypes.txIsDelivered(transaction)) {
-    return <FormattedMessage id="OrderDetailsPanel.orderDeliveredTitle" values={{ listingLink }} />;
+    return (
+      <FormattedMessage
+        id="OrderDetailsPanel.orderCancelledTitle"
+        values={{ customerName, listingLink }}
+      />
+    );
+  } else if (
+    propTypes.txIsDelivered(transaction) ||
+    propTypes.txHasFirstReview(transaction) ||
+    propTypes.txIsReviewed(transaction)
+  ) {
+    return (
+      <FormattedMessage
+        id="OrderDetailsPanel.orderDeliveredTitle"
+        values={{ customerName, listingLink }}
+      />
+    );
   } else {
     return null;
   }
@@ -74,7 +96,7 @@ const orderTitle = (transaction, listingLink, customerName) => {
 const orderMessage = (transaction, providerName) => {
   if (propTypes.txIsPreauthorized(transaction)) {
     return (
-      <FormattedMessage id="OrderDetailsPanel.orderPreauthorizedStatus" values={{ providerName }} />
+      <FormattedMessage id="OrderDetailsPanel.orderPreauthorizedInfo" values={{ providerName }} />
     );
   }
   return null;

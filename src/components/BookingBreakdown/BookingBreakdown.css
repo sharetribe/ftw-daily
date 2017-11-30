@@ -44,7 +44,7 @@
 
   @media (--viewportMedium) {
     font-weight: 700;
-    margin: -1px 0 0 10px;
+    margin: 0 0 0 10px;
   }
 }
 
@@ -79,6 +79,6 @@
   margin: 0 0 0 10px;
 
   @media (--viewportMedium) {
-    margin: 0 0 0 10px;
+    margin: 2px 0 0 10px;
   }
 }

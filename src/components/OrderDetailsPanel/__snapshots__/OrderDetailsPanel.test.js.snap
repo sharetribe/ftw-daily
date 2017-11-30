@@ -712,9 +712,10 @@ exports[`OrderDetailsPanel autodeclined matches snapshot 1`] = `
       </div>
       <h1>
         <FormattedMessage
-          id="OrderDetailsPanel.orderAutoDeclinedTitle"
+          id="OrderDetailsPanel.orderDeclinedTitle"
           values={
             Object {
+              "customerName": "customer display name",
               "listingLink": <NamedLink
                 name="ListingPage"
                 params={
@@ -2021,6 +2022,7 @@ exports[`OrderDetailsPanel declined matches snapshot 1`] = `
           id="OrderDetailsPanel.orderDeclinedTitle"
           values={
             Object {
+              "customerName": "customer display name",
               "listingLink": <NamedLink
                 name="ListingPage"
                 params={
@@ -2668,6 +2670,7 @@ exports[`OrderDetailsPanel delivered matches snapshot 1`] = `
           id="OrderDetailsPanel.orderDeliveredTitle"
           values={
             Object {
+              "customerName": "customer display name",
               "listingLink": <NamedLink
                 name="ListingPage"
                 params={
@@ -3344,7 +3347,7 @@ exports[`OrderDetailsPanel preauthorized matches snapshot 1`] = `
       </h1>
       <p>
         <FormattedMessage
-          id="OrderDetailsPanel.orderPreauthorizedStatus"
+          id="OrderDetailsPanel.orderPreauthorizedInfo"
           values={
             Object {
               "providerName": "provider display name",

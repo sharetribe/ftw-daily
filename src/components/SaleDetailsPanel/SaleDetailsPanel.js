@@ -38,42 +38,46 @@ const saleTitle = (transaction, listingLink, customerName) => {
   if (propTypes.txIsPreauthorized(transaction)) {
     return (
       <FormattedMessage
-        id="SaleDetailsPanel.listingRequestedTitle"
+        id="SaleDetailsPanel.saleRequestedTitle"
         values={{ customerName, listingLink }}
       />
     );
   } else if (propTypes.txIsAccepted(transaction)) {
     return (
       <FormattedMessage
-        id="SaleDetailsPanel.listingAcceptedTitle"
+        id="SaleDetailsPanel.saleAcceptedTitle"
         values={{ customerName, listingLink }}
       />
     );
   } else if (propTypes.txIsDeclined(transaction)) {
     return (
       <FormattedMessage
-        id="SaleDetailsPanel.listingDeclinedTitle"
+        id="SaleDetailsPanel.saleDeclinedTitle"
         values={{ customerName, listingLink }}
       />
     );
   } else if (propTypes.txIsAutodeclined(transaction)) {
     return (
       <FormattedMessage
-        id="SaleDetailsPanel.listingDeclinedTitle"
+        id="SaleDetailsPanel.saleDeclinedTitle"
         values={{ customerName, listingLink }}
       />
     );
   } else if (propTypes.txIsCanceled(transaction)) {
     return (
       <FormattedMessage
-        id="SaleDetailsPanel.listingCanceledTitle"
+        id="SaleDetailsPanel.saleCancelledTitle"
         values={{ customerName, listingLink }}
       />
     );
-  } else if (propTypes.txIsDelivered(transaction)) {
+  } else if (
+    propTypes.txIsDelivered(transaction) ||
+    propTypes.txHasFirstReview(transaction) ||
+    propTypes.txIsReviewed(transaction)
+  ) {
     return (
       <FormattedMessage
-        id="SaleDetailsPanel.listingDeliveredTitle"
+        id="SaleDetailsPanel.saleDeliveredTitle"
         values={{ customerName, listingLink }}
       />
     );
@@ -84,7 +88,7 @@ const saleTitle = (transaction, listingLink, customerName) => {
 
 const saleInfoText = (transaction, customerName) => {
   if (propTypes.txIsPreauthorized(transaction)) {
-    return <FormattedMessage id="SaleDetailsPanel.saleRequestedStatus" values={{ customerName }} />;
+    return <FormattedMessage id="SaleDetailsPanel.saleRequestedInfo" values={{ customerName }} />;
   }
   return null;
 };

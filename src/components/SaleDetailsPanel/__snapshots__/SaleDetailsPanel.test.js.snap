@@ -70,7 +70,7 @@ exports[`SaleDetailsPanel accepted matches snapshot 1`] = `
       </div>
       <h1>
         <FormattedMessage
-          id="SaleDetailsPanel.listingAcceptedTitle"
+          id="SaleDetailsPanel.saleAcceptedTitle"
           values={
             Object {
               "customerName": "customer1 display name",
@@ -669,7 +669,7 @@ exports[`SaleDetailsPanel autodeclined matches snapshot 1`] = `
       </div>
       <h1>
         <FormattedMessage
-          id="SaleDetailsPanel.listingDeclinedTitle"
+          id="SaleDetailsPanel.saleDeclinedTitle"
           values={
             Object {
               "customerName": "customer1 display name",
@@ -1268,7 +1268,7 @@ exports[`SaleDetailsPanel canceled matches snapshot 1`] = `
       </div>
       <h1>
         <FormattedMessage
-          id="SaleDetailsPanel.listingAcceptedTitle"
+          id="SaleDetailsPanel.saleAcceptedTitle"
           values={
             Object {
               "customerName": "customer1 display name",
@@ -1867,7 +1867,7 @@ exports[`SaleDetailsPanel declined matches snapshot 1`] = `
       </div>
       <h1>
         <FormattedMessage
-          id="SaleDetailsPanel.listingDeclinedTitle"
+          id="SaleDetailsPanel.saleDeclinedTitle"
           values={
             Object {
               "customerName": "customer1 display name",
@@ -2466,7 +2466,7 @@ exports[`SaleDetailsPanel delivered matches snapshot 1`] = `
       </div>
       <h1>
         <FormattedMessage
-          id="SaleDetailsPanel.listingDeliveredTitle"
+          id="SaleDetailsPanel.saleDeliveredTitle"
           values={
             Object {
               "customerName": "customer1 display name",
@@ -3065,7 +3065,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
       </div>
       <h1>
         <FormattedMessage
-          id="SaleDetailsPanel.listingRequestedTitle"
+          id="SaleDetailsPanel.saleRequestedTitle"
           values={
             Object {
               "customerName": "customer1 display name",
@@ -3086,7 +3086,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
       </h1>
       <p>
         <FormattedMessage
-          id="SaleDetailsPanel.saleRequestedStatus"
+          id="SaleDetailsPanel.saleRequestedInfo"
           values={
             Object {
               "customerName": "customer1 display name",

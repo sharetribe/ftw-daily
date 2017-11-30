@@ -220,11 +220,20 @@ export const txIsCanceled = tx => txLastTransition(tx) === TX_TRANSITION_CANCEL;
 
 export const txIsDelivered = tx => txLastTransition(tx) === TX_TRANSITION_MARK_DELIVERED;
 
+export const txHasFirstReview = tx => firstReviewTransitions.includes(txLastTransition(tx));
+
+export const txIsReviewed = tx => areReviewsCompleted(txLastTransition(tx));
+
 export const txTransition = shape({
   at: instanceOf(Date).isRequired,
   by: oneOf(TX_TRANSITION_ACTORS).isRequired,
   transition: oneOf(TX_TRANSITIONS).isRequired,
 });
+
+const firstReviewTransitions = [
+  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+];
 
 // Check if tx transition is followed by a state where
 // reviews are completed
