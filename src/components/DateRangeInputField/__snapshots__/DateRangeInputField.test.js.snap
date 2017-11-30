@@ -35,7 +35,7 @@ exports[`DateRangeInput matches snapshot 1`] = `
             className="screen-reader-only"
             id="DateInput__screen-reader-message-bookingStartDate"
           >
-            Date input
+            DateRangeInputField.screenReaderInputMessage
           </p>
           <div
             className="DateInput__display-text"
@@ -74,7 +74,7 @@ exports[`DateRangeInput matches snapshot 1`] = `
             className="screen-reader-only"
             id="DateInput__screen-reader-message-bookingEndDate"
           >
-            Date input
+            DateRangeInputField.screenReaderInputMessage
           </p>
           <div
             className="DateInput__display-text"

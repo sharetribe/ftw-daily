@@ -8,14 +8,14 @@ exports[`SectionHero matches snapshot 1`] = `
     className={undefined}
   >
     <span>
-      Book saunas everywhere.
+      SectionHero.title
     </span>
   </h1>
   <h2
     className={undefined}
   >
     <span>
-      The largest online community to rent saunas in Finland.
+      SectionHero.subTitle
     </span>
   </h2>
   <button
@@ -49,7 +49,7 @@ exports[`SectionHero matches snapshot 1`] = `
       </g>
     </svg>
     <span>
-      Search saunas
+      SectionHero.mobileSearchButtonText
     </span>
   </button>
   <form
@@ -100,7 +100,7 @@ exports[`SectionHero matches snapshot 1`] = `
         onChange={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
-        placeholder="Search saunas…"
+        placeholder="LocationSearchForm.placeholder"
         type="search"
         value=""
       />
