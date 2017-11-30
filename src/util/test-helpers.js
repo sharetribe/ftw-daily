@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { mapValues } from 'lodash';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { IntlProvider, addLocaleData } from 'react-intl';
@@ -7,7 +8,11 @@ import en from 'react-intl/locale-data/en';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from '../store';
-import localeData from '../translations/en.json';
+import messages from '../translations/en.json';
+
+// Locale should not affect the tests. We ensure this by providing
+// messages with the key as the value of each message.
+const testMessages = mapValues(messages, (val, key) => key);
 
 // Provide all the context for components that connect to the Redux
 // store, i18n, router, etc.
@@ -15,7 +20,7 @@ export const TestProvider = props => {
   const store = configureStore();
   addLocaleData([...en]);
   return (
-    <IntlProvider locale="en" messages={localeData}>
+    <IntlProvider locale="en" messages={testMessages}>
       <BrowserRouter>
         <Provider store={store}>{props.children}</Provider>
       </BrowserRouter>

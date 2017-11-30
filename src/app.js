@@ -4,6 +4,7 @@ import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { mapValues } from 'lodash';
 import moment from 'moment';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import configureStore from './store';
@@ -18,7 +19,19 @@ import config from './config';
 import localeData from 'react-intl/locale-data/en';
 import messages from './translations/en.json';
 
+const isTestEnv = process.env.NODE_ENV === 'test';
+
+// Locale should not affect the tests. We ensure this by providing
+// messages with the key as the value of each message.
+const testMessages = mapValues(messages, (val, key) => key);
+const localeMessages = isTestEnv ? testMessages : messages;
+
 const setupLocale = () => {
+  if (isTestEnv) {
+    // Don't change the locale in tests
+    return;
+  }
+
   // Add the translation messages
   addLocaleData([...localeData]);
 
@@ -31,7 +44,7 @@ export const ClientApp = props => {
   const { store } = props;
   setupLocale();
   return (
-    <IntlProvider locale={config.locale} messages={messages}>
+    <IntlProvider locale={config.locale} messages={localeMessages}>
       <Provider store={store}>
         <BrowserRouter>
           <Routes routes={routeConfiguration()} />
@@ -49,7 +62,7 @@ export const ServerApp = props => {
   const { url, context, store } = props;
   setupLocale();
   return (
-    <IntlProvider locale={config.locale} messages={messages}>
+    <IntlProvider locale={config.locale} messages={localeMessages}>
       <Provider store={store}>
         <StaticRouter location={url} context={context}>
           <Routes routes={routeConfiguration()} />
