@@ -59,26 +59,23 @@ describe('Application', () => {
   it('server renders redirects for pages that require authentication', () => {
     const loginPath = '/login';
     const signupPath = '/signup';
-    const defaultAuthPath = signupPath;
     const urlRedirects = {
-      '/l/new': defaultAuthPath,
-      '/l/listing-title-slug/1234/new/description': defaultAuthPath,
-      '/l/listing-title-slug/1234/checkout': defaultAuthPath,
-      '/profile-settings': defaultAuthPath,
-      '/inbox': defaultAuthPath,
-      '/inbox/orders': defaultAuthPath,
-      '/inbox/sales': defaultAuthPath,
-      '/order/1234': defaultAuthPath,
-      '/order/1234/discussion': defaultAuthPath,
-      '/order/1234/details': defaultAuthPath,
-      '/sale/1234': defaultAuthPath,
-      '/sale/1234/discussion': defaultAuthPath,
-      '/sale/1234/details': defaultAuthPath,
-      '/listings': defaultAuthPath,
-      '/account': defaultAuthPath,
-      '/account/contact-details': defaultAuthPath,
-      '/account/change-password': defaultAuthPath,
-      '/account/payout-preferences': defaultAuthPath,
+      '/l/new': signupPath,
+      '/l/listing-title-slug/1234/new/description': signupPath,
+      '/l/listing-title-slug/1234/checkout': signupPath,
+      '/profile-settings': loginPath,
+      '/inbox': loginPath,
+      '/inbox/orders': loginPath,
+      '/inbox/sales': loginPath,
+      '/order/1234': loginPath,
+      '/order/1234/details': loginPath,
+      '/sale/1234': loginPath,
+      '/sale/1234/details': loginPath,
+      '/listings': loginPath,
+      '/account': loginPath,
+      '/account/contact-details': loginPath,
+      '/account/change-password': loginPath,
+      '/account/payout-preferences': loginPath,
       '/verify-email': loginPath,
     };
     forEach(urlRedirects, (redirectPath, url) => {
