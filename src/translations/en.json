@@ -229,6 +229,7 @@
   "ListingPage.ctaButtonMessage": "Request to book",
   "ListingPage.descriptionTitle": "About this sauna",
   "ListingPage.editListing": "Edit listing",
+  "ListingPage.editProfileLink": "Edit profile",
   "ListingPage.errorLoadingListingMessage": "Could not load listing. Please try again.",
   "ListingPage.errorLoadingListingTitle": "Error in loading listing",
   "ListingPage.hostedBy": "Hosted by {name}",

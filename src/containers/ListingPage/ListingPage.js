@@ -479,6 +479,11 @@ export class ListingPageComponent extends Component {
                     <h2 className={css.yourHostHeading}>
                       <FormattedMessage id="ListingPage.yourHostHeading" />
                     </h2>
+                    {isOwnListing ? (
+                      <NamedLink className={css.editProfileLink} name="ProfileSettingsPage">
+                        <FormattedMessage id="ListingPage.editProfileLink" />
+                      </NamedLink>
+                    ) : null}
                     <UserCard
                       user={currentListing.author}
                       currentUser={currentUser}

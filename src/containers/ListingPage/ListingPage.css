@@ -382,6 +382,7 @@
 }
 
 .yourHostContainer {
+  position: relative;
   padding: 0 24px;
   margin-bottom: 5px;
 
@@ -404,6 +405,24 @@
   }
   @media (--viewportLarge) {
     margin: 51px 0 27px 0;
+  }
+}
+
+.editProfileLink {
+  @apply --marketplaceH4FontStyles;
+  position: absolute;
+  margin: 0;
+
+  /* Align to same baseline as the "Your host" heading */
+  top: 2px;
+  right: 24px;
+
+  @media (--viewportMedium) {
+    margin: 0;
+
+    /* Align to same baseline as the "Hello, ..." heading */
+    top: 74px;
+    right: 0;
   }
 }
 
