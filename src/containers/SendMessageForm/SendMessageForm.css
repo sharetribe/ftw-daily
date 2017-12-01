@@ -49,6 +49,7 @@
   background-color: var(--successColor);
   border-radius: 50%;
   cursor: pointer;
+  outline: none;
 
   &:disabled {
     cursor: not-allowed;

@@ -40,10 +40,10 @@
 
 .avatar {
   flex-shrink: 0;
-  margin: 6px 12px 0 0;
+  margin: 0px 12px 0 0;
 
   @media (--viewportMedium) {
-    margin: 9px 12px 0 0;
+    margin: 0px 12px 0 0;
   }
 }
 
@@ -85,7 +85,7 @@
   color: var(--matterColorAnti);
 
   @media (--viewportMedium) {
-    margin: 6px 0 0 0;
+    margin: 7px 0 0 0;
   }
 }
 
@@ -94,13 +94,13 @@
 }
 
 .transitionItem {
-  margin-bottom: 36px;
+  margin-bottom: 18px;
 
   /* Clearfix */
   @apply --clearfix;
 
   @media (--viewportMedium) {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
 
   &:last-of-type {
@@ -153,13 +153,15 @@
   margin-top: 4px;
 
   @media (--viewportMedium) {
-    margin-top: 2px;
+    margin-top: 5px;
+    margin-bottom: 4px;
   }
 }
 
 .reviewStar {
   width: 12px;
   height: 12px;
+  margin-right: 2px;
   font-styles: initial;
 }
 
