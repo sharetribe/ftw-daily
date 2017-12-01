@@ -444,7 +444,7 @@
   "ResponsiveImage.noImage": "No image",
   "ReviewForm.reviewContentLabel": "Leave a review",
   "ReviewForm.reviewContentPlaceholder": "Descripe your experience...",
-  "ReviewForm.reviewContentRequired": "Review message is required",
+  "ReviewForm.reviewContentRequired": "You need to add a message to leave a review.",
   "ReviewForm.reviewRatingLabel": "Rate your experience",
   "ReviewForm.reviewRatingRequired": "Review message is required",
   "ReviewForm.reviewSubmit": "Publish review",
