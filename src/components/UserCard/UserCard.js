@@ -35,7 +35,7 @@ class ExpandableBio extends Component {
   }
   render() {
     const { expand } = this.state;
-    const { bio } = this.props;
+    const { className, bio } = this.props;
     const truncatedBio = truncated(bio);
 
     const handleShowMoreClick = () => {
@@ -47,7 +47,7 @@ class ExpandableBio extends Component {
       </InlineTextButton>
     );
     return (
-      <p className={css.bio}>
+      <p className={className}>
         {expand ? bio : truncatedBio}
         {bio !== truncatedBio && !expand ? showMore : null}
       </p>
@@ -55,7 +55,10 @@ class ExpandableBio extends Component {
   }
 }
 
+ExpandableBio.defaultProps = { className: null };
+
 ExpandableBio.propTypes = {
+  className: string,
   bio: string.isRequired,
 };
 
@@ -74,26 +77,33 @@ const UserCard = props => {
   });
   return (
     <div className={classes}>
-      <AvatarLarge className={css.avatar} user={user} />
-      <div className={css.info}>
-        <h3 className={css.heading}>
-          <FormattedMessage id="UserCard.heading" values={{ name: displayName }} />
-        </h3>
-        {hasBio ? <ExpandableBio bio={bio} /> : null}
-        <p className={linkClasses}>
-          {ensuredUser.id ? (
-            <NamedLink name="ProfilePage" params={{ id: ensuredUser.id.uuid }}>
-              <FormattedMessage id="UserCard.viewProfileLink" />
-            </NamedLink>
-          ) : null}
-          {isCurrentUser ? <span className={css.linkSeparator}>•</span> : null}
-          {isCurrentUser ? (
-            <NamedLink name="ProfileSettingsPage">
-              <FormattedMessage id="UserCard.editProfileLink" />
-            </NamedLink>
-          ) : null}
-        </p>
+      <div className={css.content}>
+        <AvatarLarge className={css.avatar} user={user} />
+        <div className={css.info}>
+          <h3 className={css.heading}>
+            <FormattedMessage id="UserCard.heading" values={{ name: displayName }} />
+          </h3>
+          {hasBio ? <ExpandableBio className={css.desktopBio} bio={bio} /> : null}
+          <p className={linkClasses}>
+            {ensuredUser.id ? (
+              <NamedLink
+                className={css.link}
+                name="ProfilePage"
+                params={{ id: ensuredUser.id.uuid }}
+              >
+                <FormattedMessage id="UserCard.viewProfileLink" />
+              </NamedLink>
+            ) : null}
+            {isCurrentUser ? <span className={css.linkSeparator}>•</span> : null}
+            {isCurrentUser ? (
+              <NamedLink className={css.link} name="ProfileSettingsPage">
+                <FormattedMessage id="UserCard.editProfileLink" />
+              </NamedLink>
+            ) : null}
+          </p>
+        </div>
       </div>
+      {hasBio ? <ExpandableBio className={css.mobileBio} bio={bio} /> : null}
     </div>
   );
 };

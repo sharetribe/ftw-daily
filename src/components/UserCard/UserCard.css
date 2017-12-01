@@ -1,11 +1,15 @@
 @import '../../marketplace.css';
 
 .root {
+}
+
+.content {
   display: flex;
   flex-direction: row;
 }
 
 .avatar {
+  flex-shrink: 0;
   margin-right: 36px;
 }
 
@@ -22,7 +26,12 @@
   }
 }
 
-.bio {
+.link {
+  white-space: nowrap;
+}
+
+.mobileBio,
+.desktopBio {
   /* Preserve newlines, but collapse other whitespace */
   white-space: pre-line;
 
@@ -32,6 +41,20 @@
 
   @media (--viewportMedium) {
     margin: 18px 0 0 0;
+  }
+}
+
+.mobileBio {
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.desktopBio {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: block;
   }
 }
 
