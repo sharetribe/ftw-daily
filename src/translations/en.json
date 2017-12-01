@@ -619,7 +619,7 @@
   "TopbarMobileMenu.yourListingsLink": "Your listings",
   "TopbarSearchForm.placeholder": "Search saunas…",
   "TopbarSearchForm.searchHelp": "Tip: You can also search saunas by zip code, for example \"00500\" or city district \"Sörnäinen\".",
-  "UserCard.editProfileLink": "Edit profile",
+  "UserCard.contactUser": "Contact",
   "UserCard.heading": "Hello, I'm {name}.",
   "UserCard.showFullBioLink": "more",
   "UserCard.viewProfileLink": "View profile"

@@ -6,23 +6,27 @@ const { UUID } = types;
 
 export const EmptyUser = {
   component: UserCard,
-  props: {},
-  group: 'users',
-};
-
-export const WithUser = {
-  component: UserCard,
   props: {
-    user: createUser('test-card-user'),
+    onContactUser: user => console.log('concact user:', user),
   },
   group: 'users',
 };
 
-export const WithCurrentUser = {
+export const WithoutBio = {
+  component: UserCard,
+  props: {
+    user: createUser('test-card-user'),
+    onContactUser: user => console.log('concact user:', user),
+  },
+  group: 'users',
+};
+
+export const WithoutBioCurrentUser = {
   component: UserCard,
   props: {
     user: createUser('test-card-user'),
     currentUser: createCurrentUser('test-card-user'),
+    onContactUser: user => console.log('concact user:', user),
   },
   group: 'users',
 };
@@ -63,7 +67,7 @@ export const WithProfileImageAndBio = {
         },
       },
     },
-    currentUser: createCurrentUser('full-user'),
+    onContactUser: user => console.log('concact user:', user),
   },
   group: 'users',
 };

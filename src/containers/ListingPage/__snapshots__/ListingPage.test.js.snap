@@ -274,6 +274,7 @@ exports[`ListingPage matches snapshot 1`] = `
                     "type": "currentUser",
                   }
                 }
+                onContactUser={[Function]}
                 rootClassName={null}
                 user={
                   Object {

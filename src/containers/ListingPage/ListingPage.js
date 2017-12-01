@@ -375,6 +375,11 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
+    const handleContactUser = user => {
+      // TODO: this
+      console.log('contact user:', user);
+    };
+
     return (
       <Page
         title={schemaTitle}
@@ -474,7 +479,11 @@ export class ListingPageComponent extends Component {
                     <h2 className={css.yourHostHeading}>
                       <FormattedMessage id="ListingPage.yourHostHeading" />
                     </h2>
-                    <UserCard user={currentListing.author} currentUser={currentUser} />
+                    <UserCard
+                      user={currentListing.author}
+                      currentUser={currentUser}
+                      onContactUser={handleContactUser}
+                    />
                   </div>
                 </div>
 
