@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string } from 'prop-types';
+import { string, func } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { truncate } from 'lodash';
 import classNames from 'classnames';
@@ -35,7 +35,7 @@ class ExpandableBio extends Component {
   }
   render() {
     const { expand } = this.state;
-    const { bio } = this.props;
+    const { className, bio } = this.props;
     const truncatedBio = truncated(bio);
 
     const handleShowMoreClick = () => {
@@ -47,7 +47,7 @@ class ExpandableBio extends Component {
       </InlineTextButton>
     );
     return (
-      <p className={css.bio}>
+      <p className={className}>
         {expand ? bio : truncatedBio}
         {bio !== truncatedBio && !expand ? showMore : null}
       </p>
@@ -55,45 +55,60 @@ class ExpandableBio extends Component {
   }
 }
 
+ExpandableBio.defaultProps = { className: null };
+
 ExpandableBio.propTypes = {
+  className: string,
   bio: string.isRequired,
 };
 
 const UserCard = props => {
-  const { rootClassName, className, user, currentUser } = props;
+  const { rootClassName, className, user, currentUser, onContactUser } = props;
   const ensuredUser = ensureUser(user);
   const ensuredCurrentUser = ensureCurrentUser(currentUser);
   const isCurrentUser =
     ensuredUser.id && ensuredCurrentUser.id && ensuredUser.id.uuid === ensuredCurrentUser.id.uuid;
   const { displayName, bio } = ensuredUser.attributes.profile;
 
+  const handleContactUserClick = () => {
+    onContactUser(user);
+  };
+
   const hasBio = !!bio;
   const classes = classNames(rootClassName || css.root, className);
   const linkClasses = classNames(css.links, {
     [css.withBioMissingAbove]: !hasBio,
   });
+
+  const separator = isCurrentUser ? null : <span className={css.linkSeparator}>•</span>;
+  const contact = isCurrentUser ? null : (
+    <InlineTextButton onClick={handleContactUserClick}>
+      <FormattedMessage id="UserCard.contactUser" />
+    </InlineTextButton>
+  );
+  const links = ensuredUser.id ? (
+    <p className={linkClasses}>
+      <NamedLink className={css.link} name="ProfilePage" params={{ id: ensuredUser.id.uuid }}>
+        <FormattedMessage id="UserCard.viewProfileLink" />
+      </NamedLink>
+      {separator}
+      {contact}
+    </p>
+  ) : null;
+
   return (
     <div className={classes}>
-      <AvatarLarge className={css.avatar} user={user} />
-      <div className={css.info}>
-        <h3 className={css.heading}>
-          <FormattedMessage id="UserCard.heading" values={{ name: displayName }} />
-        </h3>
-        {hasBio ? <ExpandableBio bio={bio} /> : null}
-        <p className={linkClasses}>
-          {ensuredUser.id ? (
-            <NamedLink name="ProfilePage" params={{ id: ensuredUser.id.uuid }}>
-              <FormattedMessage id="UserCard.viewProfileLink" />
-            </NamedLink>
-          ) : null}
-          {isCurrentUser ? <span className={css.linkSeparator}>•</span> : null}
-          {isCurrentUser ? (
-            <NamedLink name="ProfileSettingsPage">
-              <FormattedMessage id="UserCard.editProfileLink" />
-            </NamedLink>
-          ) : null}
-        </p>
+      <div className={css.content}>
+        <AvatarLarge className={css.avatar} user={user} />
+        <div className={css.info}>
+          <h3 className={css.heading}>
+            <FormattedMessage id="UserCard.heading" values={{ name: displayName }} />
+          </h3>
+          {hasBio ? <ExpandableBio className={css.desktopBio} bio={bio} /> : null}
+          {links}
+        </div>
       </div>
+      {hasBio ? <ExpandableBio className={css.mobileBio} bio={bio} /> : null}
     </div>
   );
 };
@@ -108,6 +123,7 @@ UserCard.propTypes = {
   className: string,
   user: propTypes.user,
   currentUser: propTypes.currentUser,
+  onContactUser: func.isRequired,
 };
 
 export default UserCard;
