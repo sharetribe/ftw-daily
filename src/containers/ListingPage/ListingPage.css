@@ -186,6 +186,7 @@
 
 .mainContent {
   flex-basis: 100%;
+  margin-bottom: 23px;
 
   @media (--viewportMedium) {
     margin-top: 50px;
