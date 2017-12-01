@@ -36,7 +36,7 @@ import {
 } from '../../components';
 import { BookingDatesForm, TopbarContainer } from '../../containers';
 
-import { showListing } from './ListingPage.duck';
+import { loadData } from './ListingPage.duck';
 import EditIcon from './EditIcon';
 import css from './ListingPage.css';
 
@@ -616,9 +616,6 @@ const ListingPage = compose(withRouter, connect(mapStateToProps, mapDispatchToPr
   ListingPageComponent
 );
 
-ListingPage.loadData = params => {
-  const id = new UUID(params.id);
-  return showListing(id);
-};
+ListingPage.loadData = loadData;
 
 export default ListingPage;
