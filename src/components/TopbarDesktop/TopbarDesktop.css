@@ -160,6 +160,21 @@
 
   /* Style: red dot */
   background-color: var(--failColor);
+
+  animation-name: notificationPop;
+  animation-duration: 0.1s;
+  animation-delay: 0.1s;
+  animation-fill-mode: forwards;
+
+  animation-timing-function: ease-in;
+  opacity: 0;
+  transform: scale(0);
+}
+
+
+@keyframes notificationPop {
+    0%   {transform: scale(0); opacity: 0;}
+    100% {transform: scale(1); opacity: 1;}
 }
 
 /* Profile menu */
