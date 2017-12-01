@@ -90,7 +90,7 @@
     margin: 23px 24px 0 24px;
   }
   @media (--viewportLarge) {
-    margin: 23px 0 0 0;
+    margin: 22px 0 -2px 0;
   }
 }
 
@@ -118,7 +118,7 @@
 
   @media (--viewportLarge) {
     position: absolute;
-    top: 25px;
+    top: 151px;
   }
 }
 
@@ -207,7 +207,7 @@
 }
 
 .breakdownDesktop {
-  margin: 0 48px 50px 48px;
+  margin: 0 48px 47px 48px;
 }
 
 .feedContainer {

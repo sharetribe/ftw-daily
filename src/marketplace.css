@@ -24,6 +24,16 @@
 
     /* Align the image within the container */
     background-position: center center;
+
+    @media (--viewportMedium) {
+      border-radius: 28px;
+      border: solid 24px var(--matterColorBright);
+    }
+
+    @media (--viewportLarge) {
+      border-radius: 40px;
+      border: solid 36px var(--matterColorBright);
+    }
   }
 
   /* ================ Colors ================ */
@@ -444,7 +454,7 @@
 
   --marketplaceModalCloseStyles {
     /* Position inside modal */
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
 
@@ -457,12 +467,13 @@
     width: auto;
 
     /* Sizing (touch area) */
-    padding: 24px 30px;
+    padding: 24px 40px;
     margin: 0;
     border: 0;
 
     @media (--viewportMedium) {
       padding: 27px 30px;
+      position: absolute;
     }
 
     /* Colors */

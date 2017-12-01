@@ -131,9 +131,6 @@
    predictions list */
   position: absolute;
   top: 73px;
-
-  /* Pull text behind search suggestions */
-  z-index: -1;
 }
 
 /* ================ Modal ================ */
