@@ -48,6 +48,7 @@ exports[`SalePage matches snapshot 1`] = `
           declineSaleError={null}
           fetchMessagesError={null}
           messages={Array []}
+          oldestMessagePageFetched={0}
           onAcceptSale={[Function]}
           onDeclineSale={[Function]}
           onResetForm={[Function]}
@@ -55,7 +56,7 @@ exports[`SalePage matches snapshot 1`] = `
           onShowMoreMessages={[Function]}
           sendMessageError={null}
           sendMessageInProgress={false}
-          totalMessages={0}
+          totalMessagePages={0}
           transaction={
             Object {
               "attributes": Object {

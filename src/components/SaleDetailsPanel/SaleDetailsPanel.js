@@ -135,7 +135,8 @@ export class SaleDetailsPanelComponent extends Component {
       declineSaleError,
       fetchMessagesInProgress,
       fetchMessagesError,
-      totalMessages,
+      totalMessagePages,
+      oldestMessagePageFetched,
       messages,
       sendMessageInProgress,
       sendMessageError,
@@ -206,7 +207,7 @@ export class SaleDetailsPanelComponent extends Component {
     const txTransitions = currentTransaction.attributes.transitions
       ? currentTransaction.attributes.transitions
       : [];
-    const hasOlderMessages = totalMessages > messages.length;
+    const hasOlderMessages = totalMessagePages > oldestMessagePageFetched;
     const handleShowOlderMessages = () => {
       onShowMoreMessages(currentTransaction.id);
     };
@@ -436,7 +437,8 @@ SaleDetailsPanelComponent.propTypes = {
   declineSaleError: propTypes.error,
   fetchMessagesInProgress: bool.isRequired,
   fetchMessagesError: propTypes.error,
-  totalMessages: number.isRequired,
+  totalMessagePages: number.isRequired,
+  oldestMessagePageFetched: number.isRequired,
   messages: arrayOf(propTypes.message).isRequired,
   sendMessageInProgress: bool.isRequired,
   sendMessageError: propTypes.error,

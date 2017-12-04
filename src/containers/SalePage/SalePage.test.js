@@ -39,6 +39,8 @@ describe('SalePage', () => {
       scrollingDisabled: false,
       transaction,
       totalMessages: 0,
+      totalMessagePages: 0,
+      oldestMessagePageFetched: 0,
       messages: [],
       sendMessageInProgress: false,
       onShowMoreMessages: noop,

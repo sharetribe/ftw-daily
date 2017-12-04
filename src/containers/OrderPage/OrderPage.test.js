@@ -34,6 +34,8 @@ describe('OrderPage', () => {
 
       currentUser: createCurrentUser('customer1'),
       totalMessages: 0,
+      totalMessagePages: 0,
+      oldestMessagePageFetched: 0,
       messages: [],
       fetchMessagesInProgress: false,
       sendMessageInProgress: false,

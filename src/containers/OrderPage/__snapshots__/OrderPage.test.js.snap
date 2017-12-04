@@ -45,12 +45,13 @@ exports[`OrderPage matches snapshot 1`] = `
         fetchMessagesInProgress={false}
         initialMessageFailed={false}
         messages={Array []}
+        oldestMessagePageFetched={0}
         onResetForm={[Function]}
         onSendMessage={[Function]}
         onShowMoreMessages={[Function]}
         sendMessageError={null}
         sendMessageInProgress={false}
-        totalMessages={0}
+        totalMessagePages={0}
         transaction={
           Object {
             "attributes": Object {

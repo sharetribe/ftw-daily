@@ -71,6 +71,8 @@ describe('OrderDetailsPanel', () => {
     intl: fakeIntl,
     currentUser: createCurrentUser('user2'),
     totalMessages: 2,
+    totalMessagePages: 1,
+    oldestMessagePageFetched: 1,
     messages: [
       createMessage('msg1', {}, { sender: createUser('user1') }),
       createMessage('msg2', {}, { sender: createUser('user2') }),

@@ -38,7 +38,8 @@ export const OrderPageComponent = props => {
     fetchOrderError,
     fetchMessagesInProgress,
     fetchMessagesError,
-    totalMessages,
+    totalMessagePages,
+    oldestMessagePageFetched,
     messages,
     messageSendingFailedToTransaction,
     sendMessageInProgress,
@@ -100,7 +101,8 @@ export const OrderPageComponent = props => {
         currentUser={currentUser}
         transaction={currentTransaction}
         fetchMessagesInProgress={fetchMessagesInProgress}
-        totalMessages={totalMessages}
+        totalMessagePages={totalMessagePages}
+        oldestMessagePageFetched={oldestMessagePageFetched}
         messages={messages}
         initialMessageFailed={initialMessageFailed}
         fetchMessagesError={fetchMessagesError}
@@ -155,7 +157,8 @@ OrderPageComponent.propTypes = {
   fetchOrderError: propTypes.error,
   fetchMessagesInProgress: bool.isRequired,
   fetchMessagesError: propTypes.error,
-  totalMessages: number.isRequired,
+  totalMessagePages: number.isRequired,
+  oldestMessagePageFetched: number.isRequired,
   messages: array.isRequired,
   messageSendingFailedToTransaction: propTypes.uuid,
   sendMessageInProgress: bool.isRequired,
@@ -177,7 +180,8 @@ const mapStateToProps = state => {
     transactionRef,
     fetchMessagesInProgress,
     fetchMessagesError,
-    totalMessages,
+    totalMessagePages,
+    oldestMessagePageFetched,
     messages,
     messageSendingFailedToTransaction,
     sendMessageInProgress,
@@ -193,7 +197,8 @@ const mapStateToProps = state => {
     fetchOrderError,
     fetchMessagesInProgress,
     fetchMessagesError,
-    totalMessages,
+    totalMessagePages,
+    oldestMessagePageFetched,
     messages,
     messageSendingFailedToTransaction,
     sendMessageInProgress,

@@ -136,7 +136,8 @@ export class OrderDetailsPanelComponent extends Component {
       className,
       currentUser,
       transaction,
-      totalMessages,
+      totalMessagePages,
+      oldestMessagePageFetched,
       messages,
       initialMessageFailed,
       fetchMessagesInProgress,
@@ -222,7 +223,7 @@ export class OrderDetailsPanelComponent extends Component {
     const txTransitions = currentTransaction.attributes.transitions
       ? currentTransaction.attributes.transitions
       : [];
-    const hasOlderMessages = totalMessages > messages.length;
+    const hasOlderMessages = totalMessagePages > oldestMessagePageFetched;
     const handleShowOlderMessages = () => {
       onShowMoreMessages(currentTransaction.id);
     };
@@ -413,7 +414,8 @@ OrderDetailsPanelComponent.propTypes = {
 
   currentUser: propTypes.currentUser,
   transaction: propTypes.transaction.isRequired,
-  totalMessages: number.isRequired,
+  totalMessagePages: number.isRequired,
+  oldestMessagePageFetched: number.isRequired,
   messages: arrayOf(propTypes.message).isRequired,
   initialMessageFailed: bool.isRequired,
   fetchMessagesInProgress: bool.isRequired,
