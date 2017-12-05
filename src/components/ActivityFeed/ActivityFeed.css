@@ -150,6 +150,7 @@
 }
 
 .reviewStars {
+  display: block;
   margin-top: 4px;
 
   @media (--viewportMedium) {
