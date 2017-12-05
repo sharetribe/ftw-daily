@@ -205,8 +205,25 @@ const fetchMessages = (txId, page) => (dispatch, getState, sdk) => {
       const denormalizedMessages = denormalisedEntities(entities, 'message', messageIds);
       const { totalItems, totalPages, page: fetchedPage } = response.data.meta;
       const pagination = { totalItems, totalPages, page: fetchedPage };
+      const totalMessages = getState().OrderPage.totalMessages;
 
+      // Original fetchMessages call succeeded
       dispatch(fetchMessagesSuccess(denormalizedMessages, pagination));
+
+      // Check if totalItems has changed between fetched pagination pages
+      // if totalItems has changed, fetch first page again to include new incoming messages.
+      // TODO if there're more than 100 incoming messages,
+      // this should loop through most recent pages instead of fetching just the first one.
+      if (totalItems > totalMessages && page > 1) {
+        dispatch(fetchMessages(txId, 1))
+          .then(() => {
+            // Original fetch was enough as a response for user action,
+            // this just includes new incoming messages
+          })
+          .catch(() => {
+            // Background update, no need to to do anything atm.
+          });
+      }
     })
     .catch(e => {
       dispatch(fetchMessagesError(storableError(e)));
