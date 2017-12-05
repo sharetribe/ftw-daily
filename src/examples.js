@@ -39,6 +39,7 @@ import * as NamedLink from './components/NamedLink/NamedLink.example';
 import * as PaginationLinks from './components/PaginationLinks/PaginationLinks.example';
 import * as ResponsiveImage from './components/ResponsiveImage/ResponsiveImage.example';
 import * as ReviewRating from './components/ReviewRating/ReviewRating.example';
+import * as Reviews from './components/Reviews/Reviews.example';
 import * as SelectField from './components/SelectField/SelectField.example';
 import * as StripeBankAccountTokenInputField from './components/StripeBankAccountTokenInputField/StripeBankAccountTokenInputField.example';
 import * as TabNav from './components/TabNav/TabNav.example';
@@ -116,8 +117,9 @@ export {
   PasswordResetForm,
   PayoutDetailsForm,
   ResponsiveImage,
-  ReviewRating,
   ReviewForm,
+  ReviewRating,
+  Reviews,
   SelectField,
   SendMessageForm,
   SignupForm,
