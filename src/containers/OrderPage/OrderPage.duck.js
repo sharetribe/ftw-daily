@@ -36,12 +36,23 @@ const initialState = {
   fetchMessagesInProgress: false,
   fetchMessagesError: null,
   totalMessages: 0,
+  totalMessagePages: 0,
+  oldestMessagePageFetched: 0,
   messages: [],
   messageSendingFailedToTransaction: null,
   sendMessageInProgress: false,
   sendMessageError: null,
   sendReviewInProgress: false,
   sendReviewError: null,
+};
+
+// Merge entity arrays using ids, so that conflicting items in newer array (b) overwrite old values (a).
+// const a = [{ id: { uuid: 1 } }, { id: { uuid: 3 } }];
+// const b = [{ id: : { uuid: 2 } }, { id: : { uuid: 1 } }];
+// mergeEntityArrays(a, b)
+// => [{ id: { uuid: 3 } }, { id: : { uuid: 2 } }, { id: : { uuid: 1 } }]
+const mergeEntityArrays = (a, b) => {
+  return a.filter(aEntity => !b.find(bEntity => aEntity.id.uuid === bEntity.id.uuid)).concat(b);
 };
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
@@ -62,13 +73,20 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
 
     case FETCH_MESSAGES_REQUEST:
       return { ...state, fetchMessagesInProgress: true, fetchMessagesError: null };
-    case FETCH_MESSAGES_SUCCESS:
+    case FETCH_MESSAGES_SUCCESS: {
+      const oldestMessagePageFetched =
+        state.oldestMessagePageFetched > payload.page
+          ? state.oldestMessagePageFetched
+          : payload.page;
       return {
         ...state,
         fetchMessagesInProgress: false,
-        messages: payload.messages,
+        messages: mergeEntityArrays(state.messages, payload.messages),
         totalMessages: payload.totalItems,
+        totalMessagePages: payload.totalPages,
+        oldestMessagePageFetched,
       };
+    }
     case FETCH_MESSAGES_ERROR:
       return { ...state, fetchMessagesInProgress: false, fetchMessagesError: payload };
 
@@ -91,12 +109,6 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
   }
 }
 
-// ================ Selectors ================ //
-
-export const fetchedMessagesCount = state => {
-  return state.OrderPage.messages.length;
-};
-
 // ================ Action creators ================ //
 
 export const setInitialValues = initialValues => ({
@@ -109,9 +121,9 @@ const fetchOrderSuccess = response => ({ type: FETCH_ORDER_SUCCESS, payload: res
 const fetchOrderError = e => ({ type: FETCH_ORDER_ERROR, error: true, payload: e });
 
 const fetchMessagesRequest = () => ({ type: FETCH_MESSAGES_REQUEST });
-const fetchMessagesSuccess = (messages, totalItems) => ({
+const fetchMessagesSuccess = (messages, pagination) => ({
   type: FETCH_MESSAGES_SUCCESS,
-  payload: { messages, totalItems },
+  payload: { messages, ...pagination },
 });
 const fetchMessagesError = e => ({ type: FETCH_MESSAGES_ERROR, error: true, payload: e });
 
@@ -181,7 +193,8 @@ export const fetchOrder = id => (dispatch, getState, sdk) => {
     });
 };
 
-const fetchMessages = (txId, paging) => (dispatch, getState, sdk) => {
+const fetchMessages = (txId, page) => (dispatch, getState, sdk) => {
+  const paging = { page, per_page: MESSAGES_PAGE_SIZE };
   dispatch(fetchMessagesRequest());
 
   return sdk.messages
@@ -189,9 +202,28 @@ const fetchMessages = (txId, paging) => (dispatch, getState, sdk) => {
     .then(response => {
       const entities = updatedEntities({}, response.data);
       const messageIds = response.data.data.map(d => d.id);
-      const denormalized = denormalisedEntities(entities, 'message', messageIds);
+      const denormalizedMessages = denormalisedEntities(entities, 'message', messageIds);
+      const { totalItems, totalPages, page: fetchedPage } = response.data.meta;
+      const pagination = { totalItems, totalPages, page: fetchedPage };
+      const totalMessages = getState().OrderPage.totalMessages;
 
-      dispatch(fetchMessagesSuccess(denormalized, response.data.meta.totalItems));
+      // Original fetchMessages call succeeded
+      dispatch(fetchMessagesSuccess(denormalizedMessages, pagination));
+
+      // Check if totalItems has changed between fetched pagination pages
+      // if totalItems has changed, fetch first page again to include new incoming messages.
+      // TODO if there're more than 100 incoming messages,
+      // this should loop through most recent pages instead of fetching just the first one.
+      if (totalItems > totalMessages && page > 1) {
+        dispatch(fetchMessages(txId, 1))
+          .then(() => {
+            // Original fetch was enough as a response for user action,
+            // this just includes new incoming messages
+          })
+          .catch(() => {
+            // Background update, no need to to do anything atm.
+          });
+      }
     })
     .catch(e => {
       dispatch(fetchMessagesError(storableError(e)));
@@ -199,23 +231,15 @@ const fetchMessages = (txId, paging) => (dispatch, getState, sdk) => {
     });
 };
 
-const fetchNLatestMessages = (txId, n) => (dispatch, getState, sdk) => {
-  const paging = {
-    page: 1,
-    per_page: n,
-  };
-  return dispatch(fetchMessages(txId, paging));
-};
-
 export const fetchMoreMessages = txId => (dispatch, getState, sdk) => {
-  // This is clearly not the most sophisticated solution, but the
-  // default page size should be large enough that seeing the "Show
-  // older" button is very rare.
-  //
-  // This compromises on the network request size in favor of correct
-  // page offset handling that is quite tricky.
-  const messagesToFetch = fetchedMessagesCount(getState()) + MESSAGES_PAGE_SIZE;
-  return dispatch(fetchNLatestMessages(txId, messagesToFetch));
+  const state = getState();
+  const { oldestMessagePageFetched, totalMessagePages } = state.OrderPage;
+  const hasMoreOldMessages = totalMessagePages > oldestMessagePageFetched;
+
+  // In case there're no more old pages left we default to fetching the current cursor position
+  const nextPage = hasMoreOldMessages ? oldestMessagePageFetched + 1 : oldestMessagePageFetched;
+
+  return dispatch(fetchMessages(txId, nextPage));
 };
 
 export const sendMessage = (orderId, message) => (dispatch, getState, sdk) => {
@@ -226,13 +250,11 @@ export const sendMessage = (orderId, message) => (dispatch, getState, sdk) => {
     .then(response => {
       const messageId = response.data.data.id;
 
-      // Try to keep the fetched messages in the store by fetching the
-      // sent message and as much messages as there were before. Some
-      // of the older ones might be lost if there are also other new
-      // messages received in addition to this message.
-      const messagesToFetch = fetchedMessagesCount(getState()) + 1;
-
-      return dispatch(fetchNLatestMessages(orderId, messagesToFetch))
+      // We fetch the first page again to add sent message to the page data
+      // and update possible incoming messages too.
+      // TODO if there're more than 100 incoming messages,
+      // this should loop through most recent pages instead of fetching just the first one.
+      return dispatch(fetchMessages(orderId, 1))
         .then(() => {
           dispatch(sendMessageSuccess());
           return messageId;
@@ -322,8 +344,5 @@ export const loadData = params => dispatch => {
   dispatch(setInitialValues({ sendMessageError: null, sendReviewError: null }));
 
   // Order (i.e. transaction entity in API, but from buyers perspective) contains order details
-  return Promise.all([
-    dispatch(fetchOrder(orderId)),
-    dispatch(fetchNLatestMessages(orderId, MESSAGES_PAGE_SIZE)),
-  ]);
+  return Promise.all([dispatch(fetchOrder(orderId)), dispatch(fetchMessages(orderId, 1))]);
 };

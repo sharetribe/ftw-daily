@@ -49,7 +49,8 @@ export const SalePageComponent = props => {
     transaction,
     fetchMessagesInProgress,
     fetchMessagesError,
-    totalMessages,
+    totalMessagePages,
+    oldestMessagePageFetched,
     messages,
     sendMessageInProgress,
     sendMessageError,
@@ -105,7 +106,8 @@ export const SalePageComponent = props => {
         declineInProgress={declineInProgress}
         acceptSaleError={acceptSaleError}
         declineSaleError={declineSaleError}
-        totalMessages={totalMessages}
+        totalMessagePages={totalMessagePages}
+        oldestMessagePageFetched={oldestMessagePageFetched}
         messages={messages}
         fetchMessagesInProgress={fetchMessagesInProgress}
         fetchMessagesError={fetchMessagesError}
@@ -170,7 +172,8 @@ SalePageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
   transaction: propTypes.transaction,
   fetchMessagesError: propTypes.error,
-  totalMessages: number.isRequired,
+  totalMessagePages: number.isRequired,
+  oldestMessagePageFetched: number.isRequired,
   messages: arrayOf(propTypes.message).isRequired,
   sendMessageInProgress: bool.isRequired,
   sendMessageError: propTypes.error,
@@ -192,7 +195,8 @@ const mapStateToProps = state => {
     transactionRef,
     fetchMessagesInProgress,
     fetchMessagesError,
-    totalMessages,
+    totalMessagePages,
+    oldestMessagePageFetched,
     messages,
     sendMessageInProgress,
     sendMessageError,
@@ -215,7 +219,8 @@ const mapStateToProps = state => {
     transaction,
     fetchMessagesInProgress,
     fetchMessagesError,
-    totalMessages,
+    totalMessagePages,
+    oldestMessagePageFetched,
     messages,
     sendMessageInProgress,
     sendMessageError,
