@@ -382,6 +382,32 @@
   }
 }
 
+.reviewsContainer {
+  padding: 0 24px;
+  margin-bottom: 5px;
+
+  @media (--viewportMedium) {
+    padding: 0;
+  }
+  @media (--viewportLarge) {
+    margin-bottom: 3px;
+  }
+}
+
+.reviewsHeading {
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColorAnti);
+
+  margin: 52px 0 20px 0;
+
+  @media (--viewportMedium) {
+    margin: 53px 0 27px 0;
+  }
+  @media (--viewportLarge) {
+    margin: 50px 0 26px 0;
+  }
+}
+
 .yourHostContainer {
   position: relative;
   padding: 0 24px;
@@ -405,7 +431,7 @@
     margin: 53px 0 27px 0;
   }
   @media (--viewportLarge) {
-    margin: 51px 0 27px 0;
+    margin: 53px 0 27px 0;
   }
 }
 

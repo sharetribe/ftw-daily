@@ -33,6 +33,7 @@ import {
   LayoutWrapperFooter,
   Footer,
   UserCard,
+  Reviews,
 } from '../../components';
 import { BookingDatesForm, TopbarContainer } from '../../containers';
 
@@ -88,7 +89,7 @@ export const ActionBar = props => {
   }
 };
 
-const { bool, func, object, oneOf, shape, string } = PropTypes;
+const { arrayOf, bool, func, object, oneOf, shape, string } = PropTypes;
 
 ActionBar.propTypes = {
   isOwnListing: bool.isRequired,
@@ -185,6 +186,7 @@ export class ListingPageComponent extends Component {
       scrollingDisabled,
       showListingError,
       history,
+      reviews,
     } = this.props;
     const listingId = new UUID(params.id);
     const currentListing = ensureListing(getListing(listingId));
@@ -475,6 +477,15 @@ export class ListingPageComponent extends Component {
                   </div>
 
                   {map}
+                  <div className={css.reviewsContainer}>
+                    <h2 className={css.reviewsHeading}>
+                      <FormattedMessage
+                        id="ListingPage.reviewsHeading"
+                        values={{ count: reviews.length }}
+                      />
+                    </h2>
+                    <Reviews reviews={reviews} />
+                  </div>
                   <div id="host" className={css.yourHostContainer}>
                     <h2 className={css.yourHostHeading}>
                       <FormattedMessage id="ListingPage.yourHostHeading" />
@@ -559,6 +570,7 @@ ListingPageComponent.defaultProps = {
   currentUser: null,
   showListingError: null,
   tab: 'listing',
+  reviews: [],
 };
 
 ListingPageComponent.propTypes = {
@@ -581,10 +593,11 @@ ListingPageComponent.propTypes = {
   showListingError: propTypes.error,
   tab: oneOf(['book', 'listing']),
   useInitialValues: func.isRequired,
+  reviews: arrayOf(propTypes.review),
 };
 
 const mapStateToProps = state => {
-  const { showListingError } = state.ListingPage;
+  const { showListingError, reviews } = state.ListingPage;
   const { currentUser } = state.user;
 
   const getListing = id => {
@@ -597,6 +610,7 @@ const mapStateToProps = state => {
     getListing,
     scrollingDisabled: isScrollingDisabled(state),
     showListingError,
+    reviews,
   };
 };
 

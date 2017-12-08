@@ -243,6 +243,21 @@ exports[`ListingPage matches snapshot 1`] = `
                 />
               </div>
             </div>
+            <div>
+              <h2>
+                <FormattedMessage
+                  id="ListingPage.reviewsHeading"
+                  values={
+                    Object {
+                      "count": 0,
+                    }
+                  }
+                />
+              </h2>
+              <InjectIntl(ReviewsComponent)
+                reviews={Array []}
+              />
+            </div>
             <div
               id="host"
             >
