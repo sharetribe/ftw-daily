@@ -19,7 +19,9 @@ li {
 .review {
   display: flex;
   flex-direction: row;
-  max-width: 564px;
+  flex-basis: 564px;
+  flex-shrink: 1;
+  flex-grow: 0;
 }
 
 .avatar {
