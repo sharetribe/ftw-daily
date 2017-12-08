@@ -100,8 +100,14 @@ input {
 
 textarea {
   @apply --marketplaceInputStyles;
-  min-height: 48px;
-  padding: 0 0 5px 0;
+
+  /* Todo: All textareas are using auto-sizing extension which currently calculates required space incorrectly when box-sixing is "border-box" */
+  box-sizing: content-box;
+  padding: 0 0 10px 0;
+
+  &::placeholder {
+    padding: 0 0 10px 0;
+  }
 }
 
 :global(.fontsLoaded) {
