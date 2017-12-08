@@ -18,11 +18,6 @@
 
   @media (--viewportMedium) {
     min-height: calc(100vh - var(--topbarHeightDesktop));
-    border: solid 24px #fcfcfc;
-  }
-
-  @media (--viewportLarge) {
-    border: solid 36px #fcfcfc;
   }
 }
 
@@ -34,7 +29,6 @@
   @media (--viewportMedium) {
     justify-content: center;
     padding-top: 60px;
-    border-radius: 4px;
   }
 }
 

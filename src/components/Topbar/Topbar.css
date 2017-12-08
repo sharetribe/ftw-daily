@@ -99,6 +99,26 @@
   /* Style: red dot with white border */
   background-color: var(--failColor);
   border: 2px solid var(--matterColorLight);
+
+  animation-name: notificationPop;
+  animation-duration: 0.1s;
+  animation-delay: 0.1s;
+  animation-fill-mode: forwards;
+
+  animation-timing-function: ease-in;
+  opacity: 0;
+  transform: scale(0);
+}
+
+@keyframes notificationPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .desktop {
@@ -131,9 +151,6 @@
    predictions list */
   position: absolute;
   top: 73px;
-
-  /* Pull text behind search suggestions */
-  z-index: -1;
 }
 
 /* ================ Modal ================ */

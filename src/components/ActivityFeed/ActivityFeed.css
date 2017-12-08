@@ -57,12 +57,12 @@
 
   display: inline-block;
   margin: 0;
-  padding: 6px 14px 11px 14px;
+  padding: 8.5px 14px 8.5px 14px;
   border-radius: 8px;
   box-shadow: var(--boxShadow);
 
   @media (--viewportMedium) {
-    padding: 6px 14px 11px 14px;
+    padding: 8.5px 14px 8.5px 14px;
     margin: 0;
   }
 }
@@ -85,7 +85,7 @@
   color: var(--matterColorAnti);
 
   @media (--viewportMedium) {
-    margin: 7px 0 0 0;
+    margin: 6px 0 0 0;
   }
 }
 
