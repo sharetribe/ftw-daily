@@ -17,6 +17,8 @@ import image from './about-us.jpg';
 const AboutPage = () => {
   const { siteTwitterHandle, siteFacebookPage } = config;
   const siteTwitterPage = twitterPageURL(siteTwitterHandle);
+
+  // prettier-ignore
   return (
     <StaticPage
       title="About Us"
