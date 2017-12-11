@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 
-import CustomMarker from './images/marker.png';
+import CustomMarker from './images/marker-32x32.png';
 import css from './Map.css';
 
 class Map extends Component {
