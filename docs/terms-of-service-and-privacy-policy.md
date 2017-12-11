@@ -1,7 +1,7 @@
 # Terms of Service and Privacy Policy
 
-The Terms of Service and Privacy Policy of a marketplace are static
-components that can be edited to suit the marketplace.
+The Terms of Service and Privacy Policy of a marketplace are static components that can be edited to
+suit the marketplace.
 
 ## Terms of Service
 
