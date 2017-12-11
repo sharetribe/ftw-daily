@@ -27,6 +27,13 @@ const twitterPageURL = siteTwitterHandle => {
 };
 
 class PageComponent extends Component {
+  constructor(props) {
+    super(props);
+    // Keeping scrollPosition out of state reduces rendering cycles (and no bad states rendered)
+    this.scrollPosition = 0;
+    this.contentDiv = null;
+  }
+
   componentDidMount() {
     // By default a dropped file is loaded in the browser window as a
     // file URL. We want to prevent this since it might loose a lot of
@@ -39,6 +46,16 @@ class PageComponent extends Component {
   componentWillUnmount() {
     document.removeEventListener('dragover', preventDefault);
     document.removeEventListener('drop', preventDefault);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const scrollingDisabled = nextProps.scrollingDisabled;
+    const scrollingDisabledHasChanged = scrollingDisabled !== this.props.scrollingDisabled;
+
+    if (scrollingDisabled && scrollingDisabledHasChanged) {
+      // Update current scroll position, if scrolling is disabled (e.g. modal is open)
+      this.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    }
   }
 
   render() {
@@ -147,6 +164,19 @@ class PageComponent extends Component {
       },
     ]);
 
+    const scrollPositionStyles = scrollingDisabled
+      ? { marginTop: `${-1 * this.scrollPosition}px` }
+      : {};
+
+    // If scrolling is not disabled, but content element has still scrollPosition set
+    // in style attribute, we scrollTo scrollPosition.
+    const hasMarginTopStyle = this.contentDiv && this.contentDiv.style.marginTop;
+    if (!scrollingDisabled && hasMarginTopStyle) {
+      window.requestAnimationFrame(() => {
+        window.scrollTo(0, this.scrollPosition);
+      });
+    }
+
     return (
       <div className={classes}>
         <Helmet
@@ -161,7 +191,15 @@ class PageComponent extends Component {
           {metaTags}
           <script type="application/ld+json">{schemaArrayJSONString}</script>
         </Helmet>
-        <div className={css.content}>{children}</div>
+        <div
+          className={css.content}
+          style={scrollPositionStyles}
+          ref={c => {
+            this.contentDiv = c;
+          }}
+        >
+          {children}
+        </div>
       </div>
     );
   }

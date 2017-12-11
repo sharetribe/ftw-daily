@@ -317,7 +317,6 @@
     @media (--viewportMedium) {
       justify-content: center;
       align-items: flex-start;
-      @apply --backgroundImage;
     }
   }
 
