@@ -57,5 +57,5 @@ set if icons and an HTML snippet to point to those images.
 ## Map marker icon
 
 The map marker icon in the listing can be found in
-[src/components/Map/images/marker.png](../src/components/Map/images/marker.png). The dimensions
+[src/components/Map/images/marker-32x32.png](../src/components/Map/images/marker-32x32.png). The dimensions
 should be 32x32 pixels, so the `favicon-32x32.png` file can be used to replace the map icon.
