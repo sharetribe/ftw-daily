@@ -9,7 +9,7 @@ NPM package.
 
 Documentation for specific topics can be found in the following files:
 
- - Original [create-react-app documentation](create-react-app.md)
+ - Original [create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md)
  - [Testing](testing.md)
  - [Error logging with Sentry](sentry.md)
  - [CI](ci.md)
