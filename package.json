@@ -57,8 +57,8 @@
     "clean": "rm -rf build/*",
     "dev": "sharetribe-scripts start",
     "build": "sharetribe-scripts build",
-    "format": "prettier --write '**/*.{js,css}'",
-    "format-ci": "prettier --list-different '**/*.{js,css}'",
+    "format": "prettier --write '**/*.{js,css,md}'",
+    "format-ci": "prettier --list-different '**/*.{js,css,md}'",
     "test": "sharetribe-scripts test --env=jsdom",
     "test-ci": "sharetribe-scripts test --env=jsdom --runInBand",
     "eject": "sharetribe-scripts eject",
@@ -71,7 +71,8 @@
   "prettier": {
     "printWidth": 100,
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "proseWrap": "always"
   },
   "engines": {
     "node": "6.11.5",
