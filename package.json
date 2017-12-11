@@ -69,7 +69,6 @@
     "audit": "nsp check --preprocessor yarn"
   },
   "prettier": {
-    "printWidth": 100,
     "singleQuote": true,
     "trailingComma": "es5",
     "proseWrap": "always"
