@@ -1,13 +1,11 @@
 # Colors and icons
 
-One of the first customisations is to change the marketplace colors
-and icons.
+One of the first customisations is to change the marketplace colors and icons.
 
 ## Colors
 
-To change the marketplace colors, open the
-[src/marketplace.css](../src/marketplace.css) file and change the
-color variables:
+To change the marketplace colors, open the [src/marketplace.css](../src/marketplace.css) file and
+change the color variables:
 
 ```css
 --marketplaceColor: #c0392b;
@@ -17,11 +15,9 @@ color variables:
 
 ## Icons
 
-The default icons are generated with
-[RealFaviconGenerator](https://realfavicongenerator.net/). You can
-upload your original icon to the tool, customise the colors and
-themes, and download a generated set if icons and an HTML snippet to
-point to those images.
+The default icons are generated with [RealFaviconGenerator](https://realfavicongenerator.net/). You
+can upload your original icon to the tool, customise the colors and themes, and download a generated
+set if icons and an HTML snippet to point to those images.
 
 1. Open https://realfavicongenerator.net/
 
@@ -35,17 +31,14 @@ point to those images.
 
 1. Generate the icons
 
-1. Unzip the favicons.zip archive and replace the default icons and
-   files in [public/static/icons/](../public/static/icons/) with the
-   new icons
+1. Unzip the favicons.zip archive and replace the default icons and files in
+   [public/static/icons/](../public/static/icons/) with the new icons
 
-1. Replace the default HTML snippet in
-   [public/index.html](../public/index.html) with the snippet from the
-   generator.
+1. Replace the default HTML snippet in [public/index.html](../public/index.html) with the snippet
+   from the generator.
 
-   **Note:** Remove the manifest link from the snippet as we have a
-   default manifest with extra data compared to the generated one. You
-   can edit the default file as you wish.
+   **Note:** Remove the manifest link from the snippet as we have a default manifest with extra data
+   compared to the generated one. You can edit the default file as you wish.
 
    **Example HTML snippet:**
 
@@ -64,6 +57,5 @@ point to those images.
 ## Map marker icon
 
 The map marker icon in the listing can be found in
-[src/components/Map/images/marker.png](../src/components/Map/images/marker.png). The
-dimensions should be 32x32 pixels, so the `favicon-32x32.png` file can
-be used to replace the map icon.
+[src/components/Map/images/marker.png](../src/components/Map/images/marker.png). The dimensions
+should be 32x32 pixels, so the `favicon-32x32.png` file can be used to replace the map icon.

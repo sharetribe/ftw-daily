@@ -2,11 +2,10 @@
 
 [![CircleCI](https://circleci.com/gh/sharetribe/sharetribe-starter-app.svg?style=shield&circle-token=198451e83e5cecb0d662949260dbc3273ac44a67)](https://circleci.com/gh/sharetribe/sharetribe-starter-app)
 
-This is a template application for a Sharetribe marketplace that can
-be extended and customised. It is based on an application bootstrapped
-with
-[create-react-app](https://github.com/facebookincubator/create-react-app) with
-some additions, namely server side rendering and a custom CSS setup.
+This is a template application for a Sharetribe marketplace that can be extended and customised. It
+is based on an application bootstrapped with
+[create-react-app](https://github.com/facebookincubator/create-react-app) with some additions,
+namely server side rendering and a custom CSS setup.
 
 ## Documentation
 
@@ -16,8 +15,8 @@ Documentation can be found in the [docs directory](docs/).
 
 Install required tools:
 
- - [Node.js](https://nodejs.org/)
- - [Yarn](https://yarnpkg.com/)
+* [Node.js](https://nodejs.org/)
+* [Yarn](https://yarnpkg.com/)
 
 Clone this repository and install dependencies:
 
@@ -25,18 +24,16 @@ Clone this repository and install dependencies:
 
 ## Development
 
-To develop the application and to see changes live, start the frontend
-development server:
+To develop the application and to see changes live, start the frontend development server:
 
     yarn run dev
 
 **Known issues:**
 
-* Adding/changing `import`s may not be synced properly with
-  ESLint. You may see an error `Unable to resolve path to module` even
-  though the module existing in right path. Restarting the server
-  doesn't help. To solve the issue, you need to make a change to the
-  file where the error occurs.
+* Adding/changing `import`s may not be synced properly with ESLint. You may see an error
+  `Unable to resolve path to module` even though the module existing in right path. Restarting the
+  server doesn't help. To solve the issue, you need to make a change to the file where the error
+  occurs.
 
 ## Development Server
 
@@ -44,13 +41,11 @@ To develop the server setup, run:
 
     yarn run dev-server
 
-This runs the frontend production build and starts the Express.js
-server in `server/index.js` that renders the application routes in the
-server. The server is automatically restarted when there are changes
-in the `server/` directory.
+This runs the frontend production build and starts the Express.js server in `server/index.js` that
+renders the application routes in the server. The server is automatically restarted when there are
+changes in the `server/` directory.
 
-Not that this server does **not** pick up changes in the frontend
-application code.
+Not that this server does **not** pick up changes in the frontend application code.
 
 ## Tests
 
@@ -62,8 +57,7 @@ See more in the [testing documentation](docs/testing.md).
 
 ## Deployment
 
-The `master` branch is automatically deployed to Heroku. If you want
-to deploy a feature branch, setup the `sharetribe-starter-app` Heroku
-app and push the feature branch:
+The `master` branch is automatically deployed to Heroku. If you want to deploy a feature branch,
+setup the `sharetribe-starter-app` Heroku app and push the feature branch:
 
     git push heroku my-feature-branch:master

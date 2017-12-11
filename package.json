@@ -16,7 +16,7 @@
     "express-sitemap": "^1.8.0",
     "helmet": "^3.9.0",
     "lodash": "^4.17.4",
-    "moment": "2.19.2",
+    "moment": "^2.19.4",
     "nsp": "^3.1.0",
     "nsp-preprocessor-yarn": "^1.0.0",
     "path-to-regexp": "^2.1.0",
@@ -48,8 +48,8 @@
   "devDependencies": {
     "enzyme": "^2.9.1",
     "enzyme-to-json": "^1.6.0",
-    "nodemon": "^1.12.1",
-    "prettier": "1.7.4",
+    "nodemon": "^1.12.5",
+    "prettier": "^1.9.1",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^15.6.2"
   },
@@ -59,6 +59,7 @@
     "build": "sharetribe-scripts build",
     "format": "prettier --write '**/*.{js,css}'",
     "format-ci": "prettier --list-different '**/*.{js,css}'",
+    "format-docs": "prettier --write 'docs/**/*.md'",
     "test": "sharetribe-scripts test --env=jsdom",
     "test-ci": "sharetribe-scripts test --env=jsdom --runInBand",
     "eject": "sharetribe-scripts eject",
@@ -69,9 +70,9 @@
     "audit": "nsp check --preprocessor yarn"
   },
   "prettier": {
-    "printWidth": 100,
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "proseWrap": "always"
   },
   "engines": {
     "node": "6.11.5",

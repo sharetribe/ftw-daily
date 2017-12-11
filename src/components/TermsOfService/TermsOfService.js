@@ -7,6 +7,8 @@ import css from './TermsOfService.css';
 const TermsOfService = props => {
   const { rootClassName, className } = props;
   const classes = classNames(rootClassName || css.root, className);
+
+  // prettier-ignore
   return (
     <div className={classes}>
       <p className={css.lastUpdated}>Last updated: October 30, 2017</p>
