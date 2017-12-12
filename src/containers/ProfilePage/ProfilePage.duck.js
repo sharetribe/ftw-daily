@@ -1,5 +1,6 @@
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
+import { updatedEntities, denormalisedEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
 
 // ================ Action types ================ //
@@ -12,6 +13,10 @@ export const QUERY_LISTINGS_REQUEST = 'app/ProfilePage/QUERY_LISTINGS_REQUEST';
 export const QUERY_LISTINGS_SUCCESS = 'app/ProfilePage/QUERY_LISTINGS_SUCCESS';
 export const QUERY_LISTINGS_ERROR = 'app/ProfilePage/QUERY_LISTINGS_ERROR';
 
+export const QUERY_REVIEWS_REQUEST = 'app/ProfilePage/QUERY_REVIEWS_REQUEST';
+export const QUERY_REVIEWS_SUCCESS = 'app/ProfilePage/QUERY_REVIEWS_SUCCESS';
+export const QUERY_REVIEWS_ERROR = 'app/ProfilePage/QUERY_REVIEWS_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -19,6 +24,8 @@ const initialState = {
   userListingRefs: [],
   userShowError: null,
   queryListingsError: null,
+  reviews: [],
+  queryReviewsError: null,
 };
 
 export default function profilePageReducer(state = initialState, action = {}) {
@@ -44,6 +51,12 @@ export default function profilePageReducer(state = initialState, action = {}) {
       return { ...state, userListingRefs: payload.listingRefs };
     case QUERY_LISTINGS_ERROR:
       return { ...state, queryListingsError: payload };
+    case QUERY_REVIEWS_REQUEST:
+      return { ...state, queryReviewsError: null };
+    case QUERY_REVIEWS_SUCCESS:
+      return { ...state, reviews: payload };
+    case QUERY_REVIEWS_ERROR:
+      return { ...state, queryReviewsError: payload };
 
     default:
       return state;
@@ -83,6 +96,21 @@ export const queryListingsError = e => ({
   payload: e,
 });
 
+export const queryReviewsRequest = () => ({
+  type: QUERY_REVIEWS_REQUEST,
+});
+
+export const queryReviewsSuccess = reviews => ({
+  type: QUERY_REVIEWS_SUCCESS,
+  payload: reviews,
+});
+
+export const queryReviewsError = e => ({
+  type: QUERY_REVIEWS_ERROR,
+  error: true,
+  payload: e,
+});
+
 // ================ Thunks ================ //
 
 export const queryUserListings = userId => (dispatch, getState, sdk) => {
@@ -97,6 +125,18 @@ export const queryUserListings = userId => (dispatch, getState, sdk) => {
       return response;
     })
     .catch(e => dispatch(queryListingsError(storableError(e))));
+};
+
+export const queryUserReviews = userId => (dispatch, getState, sdk) => {
+  sdk.reviews
+    .query({ subject_id: userId, state: 'public', include: ['author', 'author_profile_image'] })
+    .then(response => {
+      const entities = updatedEntities({}, response.data);
+      const reviewIds = response.data.data.map(d => d.id);
+      const denormalized = denormalisedEntities(entities, 'review', reviewIds);
+      dispatch(queryReviewsSuccess(denormalized));
+    })
+    .catch(e => dispatch(queryReviewsError(e)));
 };
 
 export const showUser = userId => (dispatch, getState, sdk) => {
@@ -116,5 +156,6 @@ export const loadData = userId => (dispatch, getState, sdk) => {
     dispatch(fetchCurrentUser()),
     dispatch(showUser(userId)),
     dispatch(queryUserListings(userId)),
+    dispatch(queryUserReviews(userId)),
   ]);
 };
