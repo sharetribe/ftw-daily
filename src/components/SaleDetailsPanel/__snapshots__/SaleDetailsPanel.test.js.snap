@@ -3441,7 +3441,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
               onClick={[Function]}
             >
               <FormattedMessage
-                id="SalePage.declineButton"
+                id="SaleDetailsPanel.declineButton"
                 values={Object {}}
               />
             </SecondaryButton>
@@ -3451,7 +3451,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
               onClick={[Function]}
             >
               <FormattedMessage
-                id="SalePage.acceptButton"
+                id="SaleDetailsPanel.acceptButton"
                 values={Object {}}
               />
             </PrimaryButton>
@@ -3626,7 +3626,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
                 onClick={[Function]}
               >
                 <FormattedMessage
-                  id="SalePage.declineButton"
+                  id="SaleDetailsPanel.declineButton"
                   values={Object {}}
                 />
               </SecondaryButton>
@@ -3636,7 +3636,7 @@ exports[`SaleDetailsPanel preauthorized matches snapshot 1`] = `
                 onClick={[Function]}
               >
                 <FormattedMessage
-                  id="SalePage.acceptButton"
+                  id="SaleDetailsPanel.acceptButton"
                   values={Object {}}
                 />
               </PrimaryButton>

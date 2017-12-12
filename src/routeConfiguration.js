@@ -11,7 +11,6 @@ import {
   ListingPage,
   ManageListingsPage,
   NotFoundPage,
-  OrderPage,
   PasswordChangePage,
   PasswordRecoveryPage,
   PasswordResetPage,
@@ -19,10 +18,10 @@ import {
   PrivacyPolicyPage,
   ProfilePage,
   ProfileSettingsPage,
-  SalePage,
   SearchPage,
   StyleguidePage,
   TermsOfServicePage,
+  TransactionPage,
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -187,9 +186,9 @@ const routeConfiguration = () => {
       name: 'OrderDetailsPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <OrderPage {...props} tab="details" />,
-      loadData: OrderPage.loadData,
-      setInitialValues: OrderPage.setInitialValues,
+      component: props => <TransactionPage {...props} transactionRole="customer" />,
+      loadData: TransactionPage.loadData,
+      setInitialValues: TransactionPage.setInitialValues,
     },
     {
       path: '/sale/:id',
@@ -203,8 +202,8 @@ const routeConfiguration = () => {
       name: 'SaleDetailsPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <SalePage {...props} tab="details" />,
-      loadData: SalePage.loadData,
+      component: props => <TransactionPage {...props} transactionRole="provider" />,
+      loadData: TransactionPage.loadData,
     },
     {
       path: '/listings',

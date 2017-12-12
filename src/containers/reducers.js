@@ -17,6 +17,7 @@ import ProfilePage from './ProfilePage/ProfilePage.duck';
 import ProfileSettingsPage from './ProfileSettingsPage/ProfileSettingsPage.duck';
 import SalePage from './SalePage/SalePage.duck';
 import SearchPage from './SearchPage/SearchPage.duck';
+import TransactionPage from './TransactionPage/TransactionPage.duck';
 
 export {
   CheckoutPage,
@@ -33,4 +34,5 @@ export {
   ProfileSettingsPage,
   SalePage,
   SearchPage,
+  TransactionPage,
 };

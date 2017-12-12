@@ -123,7 +123,7 @@ export class CheckoutPageComponent extends Component {
         // sending failed, we tell it to the OrderDetailsPage.
         dispatch(
           OrderPage.setInitialValues({
-            messageSendingFailedToTransaction: initialMessageSuccess ? null : orderId,
+            initialMessageFailedToTransaction: initialMessageSuccess ? null : orderId,
           })
         );
         const orderDetailsPath = pathByRouteName('OrderDetailsPage', routes, {
