@@ -187,6 +187,7 @@ export class ListingPageComponent extends Component {
       showListingError,
       history,
       reviews,
+      fetchReviewsError,
     } = this.props;
     const listingId = new UUID(params.id);
     const currentListing = ensureListing(getListing(listingId));
@@ -382,6 +383,12 @@ export class ListingPageComponent extends Component {
       console.log('contact user:', user);
     };
 
+    const reviewsError = (
+      <h2 className={css.errorText}>
+        <FormattedMessage id="ListingPage.reviewsError" />
+      </h2>
+    );
+
     return (
       <Page
         title={schemaTitle}
@@ -477,6 +484,7 @@ export class ListingPageComponent extends Component {
                   </div>
 
                   {map}
+
                   <div className={css.reviewsContainer}>
                     <h2 className={css.reviewsHeading}>
                       <FormattedMessage
@@ -484,6 +492,7 @@ export class ListingPageComponent extends Component {
                         values={{ count: reviews.length }}
                       />
                     </h2>
+                    {fetchReviewsError ? reviewsError : null}
                     <Reviews reviews={reviews} />
                   </div>
                   <div id="host" className={css.yourHostContainer}>
@@ -571,6 +580,7 @@ ListingPageComponent.defaultProps = {
   showListingError: null,
   tab: 'listing',
   reviews: [],
+  fetchReviewsError: null,
 };
 
 ListingPageComponent.propTypes = {
@@ -594,10 +604,11 @@ ListingPageComponent.propTypes = {
   tab: oneOf(['book', 'listing']),
   useInitialValues: func.isRequired,
   reviews: arrayOf(propTypes.review),
+  fetchReviewsError: propTypes.error,
 };
 
 const mapStateToProps = state => {
-  const { showListingError, reviews } = state.ListingPage;
+  const { showListingError, reviews, fetchReviewsError } = state.ListingPage;
   const { currentUser } = state.user;
 
   const getListing = id => {
@@ -611,6 +622,7 @@ const mapStateToProps = state => {
     scrollingDisabled: isScrollingDisabled(state),
     showListingError,
     reviews,
+    fetchReviewsError,
   };
 };
 
