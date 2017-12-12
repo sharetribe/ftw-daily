@@ -10,7 +10,7 @@ const ReviewRating = props => {
 
   const stars = propTypes.REVIEW_RATINGS;
   return (
-    <div className={classes}>
+    <span className={classes}>
       {stars.map(star => (
         <IconReviewStar
           key={`star-${star}`}
@@ -18,7 +18,7 @@ const ReviewRating = props => {
           isFilled={star <= rating}
         />
       ))}
-    </div>
+    </span>
   );
 };
 
