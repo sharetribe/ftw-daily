@@ -43,6 +43,7 @@ import * as Reviews from './components/Reviews/Reviews.example';
 import * as SelectField from './components/SelectField/SelectField.example';
 import * as StripeBankAccountTokenInputField from './components/StripeBankAccountTokenInputField/StripeBankAccountTokenInputField.example';
 import * as TabNav from './components/TabNav/TabNav.example';
+import * as TabNavHorizontal from './components/TabNavHorizontal/TabNavHorizontal.example';
 import * as Tabs from './components/Tabs/Tabs.example';
 import * as TextInputField from './components/TextInputField/TextInputField.example';
 import * as TopbarDesktop from './components/TopbarDesktop/TopbarDesktop.example';
@@ -126,6 +127,7 @@ export {
   StripeBankAccountTokenInputField,
   StripePaymentForm,
   TabNav,
+  TabNavHorizontal,
   Tabs,
   TextInputField,
   TopbarDesktop,
