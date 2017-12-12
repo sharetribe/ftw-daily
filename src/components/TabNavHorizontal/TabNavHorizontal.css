@@ -22,7 +22,7 @@
   }
 }
 
-.link {
+.tabContent {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -51,7 +51,7 @@
   }
 }
 
-.selectedLink {
+.selectedTabContent {
   border-bottom-color: var(--matterColorDark);
   color: var(--matterColorDark);
 }
@@ -63,7 +63,7 @@
 }
 
 /* Dark skin */
-.linkDarkSkin {
+.tabContentDarkSkin {
   color: var(--matterColorAnti);
 
   &:hover {
@@ -71,7 +71,7 @@
   }
 }
 
-.selectedLinkDarkSkin {
+.selectedTabContentDarkSkin {
   border-bottom-color: var(--matterColorLight);
   color: var(--matterColorLight);
 }
