@@ -55,7 +55,6 @@ describe('TransactionPage - Sale', () => {
   });
 });
 
-
 describe('TransactionPage - Order', () => {
   it('matches snapshot', () => {
     const txId = 'tx-order-1';
