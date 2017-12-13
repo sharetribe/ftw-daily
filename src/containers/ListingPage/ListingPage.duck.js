@@ -77,7 +77,7 @@ export const showListing = listingId => (dispatch, getState, sdk) => {
 
 export const fetchReviews = listingId => (dispatch, getState, sdk) => {
   return sdk.reviews
-    .query({ listing_id: listingId, include: ['author', 'author.profileImage'] })
+    .query({ listing_id: listingId, state: 'public', include: ['author', 'author.profileImage'] })
     .then(response => {
       const entities = updatedEntities({}, response.data);
       const reviewIds = response.data.data.map(d => d.id);
