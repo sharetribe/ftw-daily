@@ -99,7 +99,14 @@
 }
 
 .listingsContainer {
+  @apply --clearfix;
   border-top: 1px solid var(--matterColorNegative);
+  border-bottom: 1px solid var(--matterColorNegative);
+  padding-bottom: 23px;
+
+  @media (--viewportMedium) {
+    padding-bottom: 58px;
+  }
 }
 
 .listingsTitle {
@@ -157,4 +164,34 @@
       margin-top: 20px;
     }
   }
+}
+
+.mobileReviews {
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.mobileReviewsTitle {
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColorAnti);
+  margin: 24px 0;
+}
+
+.desktopReviews {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: block;
+    margin-top: 28px;
+  }
+}
+
+.desktopReviewsTitle {
+  @apply --marketplaceH3FontStyles;
+  margin-bottom: 0;
+}
+
+.desktopReviewsTabNav {
+  margin-bottom: 32px;
 }

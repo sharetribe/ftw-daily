@@ -21,8 +21,8 @@ import css from './TabNavHorizontal.css';
 export const LIGHT_SKIN = 'light';
 export const DARK_SKIN = 'dark';
 
-export const TYPE_LINK = 'link';
-export const TYPE_BUTTON = 'button';
+export const TAB_TYPE_LINK = 'link';
+export const TAB_TYPE_BUTTON = 'button';
 
 const { arrayOf, bool, func, node, object, oneOf, string } = PropTypes;
 
@@ -105,7 +105,7 @@ LinkTab.propTypes = {
 const TabNavHorizontal = props => {
   const { className, rootClassName, tabRootClassName, tabs, skin, type } = props;
   const isDark = skin === DARK_SKIN;
-  const isButton = type === TYPE_BUTTON;
+  const isButton = type === TAB_TYPE_BUTTON;
   const classes = classNames(rootClassName || css.root, { [css.darkSkin]: isDark }, className);
   const tabClasses = tabRootClassName || css.tab;
   return (
@@ -128,7 +128,7 @@ TabNavHorizontal.defaultProps = {
   tabRootClassName: null,
   tabClassName: null,
   skin: LIGHT_SKIN,
-  type: TYPE_LINK,
+  type: TAB_TYPE_LINK,
 };
 
 TabNavHorizontal.propTypes = {
@@ -137,7 +137,7 @@ TabNavHorizontal.propTypes = {
   tabRootClassName: string,
   tabs: arrayOf(object).isRequired,
   skin: oneOf([LIGHT_SKIN, DARK_SKIN]),
-  type: oneOf([TYPE_LINK, TYPE_BUTTON]),
+  type: oneOf([TAB_TYPE_LINK, TAB_TYPE_BUTTON]),
 };
 
 export default TabNavHorizontal;

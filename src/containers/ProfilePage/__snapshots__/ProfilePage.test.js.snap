@@ -76,6 +76,79 @@ exports[`ProfilePage matches snapshot 1`] = `
             }
           />
         </h1>
+        <div>
+          <h2>
+            <FormattedMessage
+              id="ProfilePage.reviewsOfProviderTitle"
+              values={
+                Object {
+                  "count": 0,
+                }
+              }
+            />
+          </h2>
+          <InjectIntl(ReviewsComponent)
+            reviews={Array []}
+          />
+          <h2>
+            <FormattedMessage
+              id="ProfilePage.reviewsOfCustomerTitle"
+              values={
+                Object {
+                  "count": 0,
+                }
+              }
+            />
+          </h2>
+          <InjectIntl(ReviewsComponent)
+            reviews={Array []}
+          />
+        </div>
+        <div>
+          <TabNavHorizontal
+            className={null}
+            rootClassName={null}
+            skin="light"
+            tabClassName={null}
+            tabRootClassName={null}
+            tabs={
+              Array [
+                Object {
+                  "onClick": [Function],
+                  "selected": true,
+                  "text": <h3>
+                    <FormattedMessage
+                          id="ProfilePage.reviewsOfProviderTitle"
+                          values={
+                                Object {
+                                      "count": 0,
+                                    }
+                          }
+                    />
+              </h3>,
+                },
+                Object {
+                  "onClick": [Function],
+                  "selected": false,
+                  "text": <h3>
+                    <FormattedMessage
+                          id="ProfilePage.reviewsOfCustomerTitle"
+                          values={
+                                Object {
+                                      "count": 0,
+                                    }
+                          }
+                    />
+              </h3>,
+                },
+              ]
+            }
+            type="button"
+          />
+          <InjectIntl(ReviewsComponent)
+            reviews={Array []}
+          />
+        </div>
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter

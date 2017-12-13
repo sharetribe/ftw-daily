@@ -1,5 +1,5 @@
 import TabNavHorizontal from './TabNavHorizontal';
-import { TYPE_BUTTON, TYPE_LINK } from './TabNavHorizontal';
+import { TAB_TYPE_BUTTON, TAB_TYPE_LINK } from './TabNavHorizontal';
 
 const selfLinkProps = {
   name: 'StyleguideComponent',
@@ -13,7 +13,7 @@ export const LinkTabs = {
       { text: 'Normal', linkProps: selfLinkProps },
       { text: 'Selected', linkProps: selfLinkProps, selected: true },
     ],
-    type: TYPE_LINK,
+    type: TAB_TYPE_LINK,
   },
   group: 'navigation',
 };
@@ -24,7 +24,7 @@ export const ButtonTabs = {
   component: TabNavHorizontal,
   props: {
     tabs: [{ text: 'Normal', onClick: noop }, { text: 'Selected', onClick: noop, selected: true }],
-    type: TYPE_BUTTON,
+    type: TAB_TYPE_BUTTON,
   },
   group: 'navigation',
 };
