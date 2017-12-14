@@ -18,7 +18,7 @@ export const LinkTabs = {
   group: 'navigation',
 };
 
-const noop = () => {};
+const noop = () => null;
 
 export const ButtonTabs = {
   component: TabNavHorizontal,
