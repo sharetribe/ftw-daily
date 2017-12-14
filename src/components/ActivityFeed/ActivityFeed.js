@@ -69,7 +69,7 @@ Review.propTypes = {
 
 // Check if a transition is the kind that
 // should be rendered in he ActivityFeed
-const isTransitionRendered = transition => {
+const shouldRenderTransition = transition => {
   return [
     propTypes.TX_TRANSITION_PREAUTHORIZE,
     propTypes.TX_TRANSITION_ACCEPT,
@@ -386,7 +386,7 @@ export const ActivityFeedComponent = props => {
   };
 
   const transitionListItem = transition => {
-    if (isTransitionRendered(transition.transition)) {
+    if (shouldRenderTransition(transition.transition)) {
       return (
         <li key={transition.transition} className={css.transitionItem}>
           {transitionComponent(transition)}
