@@ -276,8 +276,9 @@ export class ListingPageComponent extends Component {
     const isOwnListing =
       userAndListingAuthorAvailable && currentListing.author.id.uuid === currentUser.id.uuid;
 
-    const currentAuthor = ensureUser(authorAvailable ? currentListing.author : {});
-    const currentAuthorDisplayName = currentAuthor.attributes.profile.displayName;
+    const currentAuthor = authorAvailable ? currentListing.author : null;
+    const ensuredAuthor = ensureUser(currentAuthor);
+    const authorDisplayName = ensuredAuthor.attributes.profile.displayName;
 
     // TODO location address is currently serialized inside address field (API will change later)
     // Content is something like { locationAddress: 'Street, Province, Country', building: 'A 42' };
@@ -374,7 +375,7 @@ export class ListingPageComponent extends Component {
         params={params}
         to={{ hash: '#host' }}
       >
-        {currentAuthorDisplayName}
+        {authorDisplayName}
       </NamedLink>
     );
 
@@ -393,7 +394,7 @@ export class ListingPageComponent extends Component {
       <Page
         title={schemaTitle}
         scrollingDisabled={scrollingDisabled}
-        author={currentAuthorDisplayName}
+        author={authorDisplayName}
         contentType="website"
         description={description}
         facebookImages={facebookImages}
@@ -527,7 +528,7 @@ export class ListingPageComponent extends Component {
                       <span className={css.authorName}>
                         <FormattedMessage
                           id="ListingPage.hostedBy"
-                          values={{ name: currentAuthorDisplayName }}
+                          values={{ name: authorDisplayName }}
                         />
                       </span>
                     </div>
