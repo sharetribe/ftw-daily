@@ -109,7 +109,7 @@ export const denormalisedEntities = (entities, type, ids) => {
  *
  * @param {Object} transaction entity object, which is to be ensured agains null values
  */
-export const ensureTransaction = (transaction, booking = {}, listing = {}, provider = {}) => {
+export const ensureTransaction = (transaction, booking = null, listing = null, provider = null) => {
   const empty = {
     id: null,
     type: 'transaction',

@@ -284,8 +284,12 @@ export const transaction = shape({
     createdAt: instanceOf(Date).isRequired,
     lastTransitionedAt: instanceOf(Date).isRequired,
     lastTransition: oneOf(TX_TRANSITIONS).isRequired,
-    payinTotal: money.isRequired,
-    payoutTotal: money.isRequired,
+
+    // An enquiry won't need a total sum nor a booking so these are
+    // optional.
+    payinTotal: money,
+    payoutTotal: money,
+
     lineItems: arrayOf(
       shape({
         code: string.isRequired,
