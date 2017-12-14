@@ -78,6 +78,12 @@ export const WithTransitions = {
           by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
           transition: propTypes.TX_TRANSITION_ACCEPT,
         }),
+        // this should not be visible in the feed
+        createTxTransition({
+          at: new Date(Date.UTC(2017, 10, 16, 8, 12)),
+          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
+          transition: propTypes.TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
+        }),
       ],
     }),
     messages: [],
