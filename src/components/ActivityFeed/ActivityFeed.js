@@ -7,6 +7,7 @@ import { Avatar, InlineTextButton, ReviewRating } from '../../components';
 import { formatDate } from '../../util/dates';
 import { ensureTransaction, ensureUser, ensureListing } from '../../util/data';
 import * as propTypes from '../../util/propTypes';
+import * as log from '../../util/log';
 
 import css from './ActivityFeed.css';
 
@@ -192,6 +193,9 @@ const resolveTransitionMessage = (
       }
 
     default:
+      log.error(new Error('Unknown transaction transition type'), 'unknown-transition-type', {
+        transitionType: currentTransition,
+      });
       return '';
   }
 };
