@@ -247,17 +247,6 @@ export const areReviewsCompleted = transition => {
   ].includes(transition);
 };
 
-// Check if a user giving a review is related to
-// given tx transition.
-export const isReviewTransition = transition => {
-  return [
-    TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
-    TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
-    TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
-    TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-  ].includes(transition);
-};
-
 // Possible amount of stars in a review
 export const REVIEW_RATINGS = [1, 2, 3, 4, 5];
 

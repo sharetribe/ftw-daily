@@ -7,6 +7,7 @@ import { Avatar, InlineTextButton, ReviewRating } from '../../components';
 import { formatDate } from '../../util/dates';
 import { ensureTransaction, ensureUser, ensureListing } from '../../util/data';
 import * as propTypes from '../../util/propTypes';
+import * as log from '../../util/log';
 
 import css from './ActivityFeed.css';
 
@@ -64,6 +65,34 @@ const Review = props => {
 Review.propTypes = {
   content: string.isRequired,
   rating: number.isRequired,
+};
+
+// Check if a transition is the kind that
+// should be rendered in he ActivityFeed
+const shouldRenderTransition = transition => {
+  return [
+    propTypes.TX_TRANSITION_PREAUTHORIZE,
+    propTypes.TX_TRANSITION_ACCEPT,
+    propTypes.TX_TRANSITION_DECLINE,
+    propTypes.TX_TRANSITION_AUTO_DECLINE,
+    propTypes.TX_TRANSITION_CANCEL,
+    propTypes.TX_TRANSITION_MARK_DELIVERED,
+    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+  ].includes(transition);
+};
+
+// Check if a user giving a review is related to
+// given tx transition.
+const isReviewTransition = transition => {
+  return [
+    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+  ].includes(transition);
 };
 
 const hasUserLeftAReviewFirst = (userRole, lastTransition) => {
@@ -164,6 +193,9 @@ const resolveTransitionMessage = (
       }
 
     default:
+      log.error(new Error('Unknown transaction transition type'), 'unknown-transition-type', {
+        transitionType: currentTransition,
+      });
       return '';
   }
 };
@@ -204,10 +236,7 @@ const Transition = props => {
 
   let reviewComponent = null;
 
-  if (
-    propTypes.isReviewTransition(currentTransition) &&
-    propTypes.areReviewsCompleted(lastTransition)
-  ) {
+  if (isReviewTransition(currentTransition) && propTypes.areReviewsCompleted(lastTransition)) {
     const customerReview =
       currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST ||
       currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND;
@@ -357,11 +386,15 @@ export const ActivityFeedComponent = props => {
   };
 
   const transitionListItem = transition => {
-    return (
-      <li key={transition.transition} className={css.transitionItem}>
-        {transitionComponent(transition)}
-      </li>
-    );
+    if (shouldRenderTransition(transition.transition)) {
+      return (
+        <li key={transition.transition} className={css.transitionItem}>
+          {transitionComponent(transition)}
+        </li>
+      );
+    } else {
+      return null;
+    }
   };
 
   return (
