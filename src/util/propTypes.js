@@ -147,6 +147,11 @@ export const booking = shape({
 // provider sees the transaction in the SalePage.
 export const TX_TRANSITION_PREAUTHORIZE = 'transition/preauthorize';
 
+// A customer can also initiate a transaction with an enquiry, and
+// then transition that by preauthorization.
+export const TX_TRANSITION_ENQUIRE = 'transition/enquire';
+export const TX_TRANSITION_PREAUTHORIZE_ENQUIRY = 'transition/preauthorize-enquiry';
+
 // When the provider accepts or declines a transaction from the
 // SalePage, it is transitioned with the accept or decline transition.
 export const TX_TRANSITION_ACCEPT = 'transition/accept';
@@ -176,6 +181,8 @@ export const TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS =
   'transition/auto-complete-without-reviews';
 
 export const TX_TRANSITIONS = [
+  TX_TRANSITION_ENQUIRE,
+  TX_TRANSITION_PREAUTHORIZE_ENQUIRY,
   TX_TRANSITION_PREAUTHORIZE,
   TX_TRANSITION_ACCEPT,
   TX_TRANSITION_DECLINE,
@@ -206,7 +213,12 @@ export const TX_TRANSITION_ACTORS = [
 
 const txLastTransition = tx => ensureTransaction(tx).attributes.lastTransition;
 
-export const txIsPreauthorized = tx => txLastTransition(tx) === TX_TRANSITION_PREAUTHORIZE;
+export const txIsPreauthorized = tx => {
+  const transition = txLastTransition(tx);
+  return (
+    transition === TX_TRANSITION_PREAUTHORIZE || transition === TX_TRANSITION_PREAUTHORIZE_ENQUIRY
+  );
+};
 
 export const txIsAccepted = tx => txLastTransition(tx) === TX_TRANSITION_ACCEPT;
 

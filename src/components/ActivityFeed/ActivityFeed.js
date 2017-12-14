@@ -72,6 +72,7 @@ Review.propTypes = {
 const shouldRenderTransition = transition => {
   return [
     propTypes.TX_TRANSITION_PREAUTHORIZE,
+    propTypes.TX_TRANSITION_PREAUTHORIZE_ENQUIRY,
     propTypes.TX_TRANSITION_ACCEPT,
     propTypes.TX_TRANSITION_DECLINE,
     propTypes.TX_TRANSITION_AUTO_DECLINE,
@@ -121,6 +122,7 @@ const resolveTransitionMessage = (
 
   switch (currentTransition) {
     case propTypes.TX_TRANSITION_PREAUTHORIZE:
+    case propTypes.TX_TRANSITION_PREAUTHORIZE_ENQUIRY:
       return isOwnTransition ? (
         <FormattedMessage id="ActivityFeed.ownTransitionRequest" values={{ listingTitle }} />
       ) : (
