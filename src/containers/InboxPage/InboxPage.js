@@ -105,9 +105,18 @@ const txState = (intl, tx, isOrder) => {
   };
 };
 
+const bookingData = (tx, isOrder, intl) => {
+  const booking = tx.booking;
+  const bookingStart = formatDate(intl, booking.attributes.start);
+  const bookingEnd = formatDate(intl, booking.attributes.end);
+  const bookingPrice = isOrder ? tx.attributes.payinTotal : tx.attributes.payoutTotal;
+  const price = formatMoney(intl, bookingPrice);
+  return { bookingStart, bookingEnd, price };
+};
+
 export const InboxItem = props => {
   const { type, tx, intl } = props;
-  const { customer, provider, booking } = tx;
+  const { customer, provider } = tx;
   const isOrder = type === 'order';
 
   const otherUser = isOrder ? provider : customer;
@@ -122,11 +131,8 @@ export const InboxItem = props => {
   const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
   const lastTransitionedAt = formatDate(intl, tx.attributes.lastTransitionedAt);
 
-  const bookingPrice = isOrder ? tx.attributes.payinTotal : tx.attributes.payoutTotal;
-  const hasBookingInfo = !!(booking && bookingPrice);
-  const bookingStart = hasBookingInfo ? formatDate(intl, booking.attributes.start) : null;
-  const bookingEnd = hasBookingInfo ? formatDate(intl, booking.attributes.end) : null;
-  const price = hasBookingInfo ? formatMoney(intl, bookingPrice) : null;
+  const isEnquiry = propTypes.txIsEnquired(tx);
+  const { bookingStart, bookingEnd, price } = isEnquiry ? {} : bookingData(tx, isOrder, intl);
 
   const linkClasses = classNames(css.itemLink, {
     [css.bannedUserLink]: isOtherUserBanned,
@@ -147,10 +153,12 @@ export const InboxItem = props => {
           <div className={classNames(css.itemUsername, stateData.nameClassName)}>
             {otherUserDisplayName}
           </div>
-          <div className={classNames(css.bookingInfo, stateData.bookingClassName)}>
-            {hasBookingInfo ? `${bookingStart.short} - ${bookingEnd.short}` : null}
-            {hasBookingInfo ? <span className={css.itemPrice}>{price}</span> : null}
-          </div>
+          {!isEnquiry ? (
+            <div className={classNames(css.bookingInfo, stateData.bookingClassName)}>
+              {bookingStart.short} - {bookingEnd.short}
+              <span className={css.itemPrice}>{price}</span>
+            </div>
+          ) : null}
         </div>
         <div className={css.itemState}>
           <div className={classNames(css.stateName, stateData.stateClassName)}>
