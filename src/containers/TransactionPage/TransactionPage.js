@@ -71,7 +71,10 @@ export const TransactionPageComponent = props => {
 
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
-  const listingTitle = currentListing.attributes.title;
+  const deletedListingTitle = intl.formatMessage({
+    id: 'TransactionPage.deletedListing',
+  });
+  const listingTitle = currentListing.attributes.title || deletedListingTitle;
 
   // Redirect users with someone else's direct link to their own inbox/sales or inbox/orders page.
   const isDataAvailable =
