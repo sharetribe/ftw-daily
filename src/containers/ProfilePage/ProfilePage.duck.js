@@ -5,6 +5,8 @@ import { storableError } from '../../util/errors';
 
 // ================ Action types ================ //
 
+export const CLEAR_STATE = 'app/ProfilePage/CLEAR_STATE';
+
 export const SHOW_USER_REQUEST = 'app/ProfilePage/SHOW_USER_REQUEST';
 export const SHOW_USER_SUCCESS = 'app/ProfilePage/SHOW_USER_SUCCESS';
 export const SHOW_USER_ERROR = 'app/ProfilePage/SHOW_USER_ERROR';
@@ -31,6 +33,8 @@ const initialState = {
 export default function profilePageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
+    case CLEAR_STATE:
+      return { ...state, userListingRefs: [], reviews: [] };
     case SHOW_USER_REQUEST:
       return { ...state, userShowError: null, userId: payload.userId };
     case SHOW_USER_SUCCESS:
@@ -50,13 +54,13 @@ export default function profilePageReducer(state = initialState, action = {}) {
     case QUERY_LISTINGS_SUCCESS:
       return { ...state, userListingRefs: payload.listingRefs };
     case QUERY_LISTINGS_ERROR:
-      return { ...state, queryListingsError: payload };
+      return { ...state, userListingRefs: [], queryListingsError: payload };
     case QUERY_REVIEWS_REQUEST:
       return { ...state, queryReviewsError: null };
     case QUERY_REVIEWS_SUCCESS:
       return { ...state, reviews: payload };
     case QUERY_REVIEWS_ERROR:
-      return { ...state, queryReviewsError: payload };
+      return { ...state, reviews: [], queryReviewsError: payload };
 
     default:
       return state;
@@ -64,6 +68,10 @@ export default function profilePageReducer(state = initialState, action = {}) {
 }
 
 // ================ Action creators ================ //
+
+export const clearState = () => ({
+  type: CLEAR_STATE,
+});
 
 export const showUserRequest = userId => ({
   type: SHOW_USER_REQUEST,
@@ -152,6 +160,10 @@ export const showUser = userId => (dispatch, getState, sdk) => {
 };
 
 export const loadData = userId => (dispatch, getState, sdk) => {
+  // Clear state so that previously loaded data is not visible
+  // in case this page load fails.
+  dispatch(clearState());
+
   return Promise.all([
     dispatch(fetchCurrentUser()),
     dispatch(showUser(userId)),
