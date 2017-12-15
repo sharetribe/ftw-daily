@@ -51,6 +51,14 @@
   }
 }
 
+.button {
+  /* Override Chrome's border-radius which is visible when
+   border is used as underline */
+  border-radius: 0;
+  /* Override Chrome's button outline */
+  outline: 0;
+}
+
 .selectedTabContent {
   border-bottom-color: var(--matterColorDark);
   color: var(--matterColorDark);
