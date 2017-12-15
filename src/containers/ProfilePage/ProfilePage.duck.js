@@ -124,7 +124,7 @@ export const queryReviewsError = e => ({
 export const queryUserListings = userId => (dispatch, getState, sdk) => {
   dispatch(queryListingsRequest(userId));
   return sdk.listings
-    .query({ author_id: userId, include: ['images'] })
+    .query({ author_id: userId, include: ['author', 'images'] })
     .then(response => {
       // Pick only the id and type properties from the response listings
       const listingRefs = response.data.data.map(({ id, type }) => ({ id, type }));
