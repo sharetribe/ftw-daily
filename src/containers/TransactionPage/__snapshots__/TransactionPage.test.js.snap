@@ -20,7 +20,9 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <InjectIntl(OrderDetailsPanelComponent)
+        <InjectIntl(TransactionPanelComponent)
+          acceptInProgress={false}
+          acceptSaleError={null}
           className=""
           currentUser={
             Object {
@@ -42,11 +44,15 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
               "type": "currentUser",
             }
           }
+          declineInProgress={false}
+          declineSaleError={null}
           fetchMessagesError={null}
           fetchMessagesInProgress={false}
           initialMessageFailed={false}
           messages={Array []}
           oldestMessagePageFetched={0}
+          onAcceptSale={[Function]}
+          onDeclineSale={[Function]}
           onResetForm={[Function]}
           onSendMessage={[Function]}
           onShowMoreMessages={[Function]}
@@ -171,6 +177,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
               "type": "transaction",
             }
           }
+          transactionRole="customer"
         />
       </div>
     </LayoutWrapperMain>
@@ -204,7 +211,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <InjectIntl(SaleDetailsPanelComponent)
+        <InjectIntl(TransactionPanelComponent)
           acceptInProgress={false}
           acceptSaleError={null}
           className=""
@@ -231,6 +238,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
           declineInProgress={false}
           declineSaleError={null}
           fetchMessagesError={null}
+          initialMessageFailed={false}
           messages={Array []}
           oldestMessagePageFetched={0}
           onAcceptSale={[Function]}
@@ -359,6 +367,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
               "type": "transaction",
             }
           }
+          transactionRole="provider"
         />
       </div>
     </LayoutWrapperMain>

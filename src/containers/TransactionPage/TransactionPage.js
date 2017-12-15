@@ -11,8 +11,7 @@ import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled, manageDisableScrolling } from '../../ducks/UI.duck';
 import {
   NamedRedirect,
-  OrderDetailsPanel,
-  SaleDetailsPanel,
+  TransactionPanel,
   Page,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
@@ -125,42 +124,16 @@ export const TransactionPageComponent = props => {
     </p>
   );
 
-  const salePanel = isDataAvailable ? (
-    <SaleDetailsPanel
-      className={detailsClassName}
-      currentUser={currentUser}
-      transaction={currentTransaction}
-      onAcceptSale={onAcceptSale}
-      onDeclineSale={onDeclineSale}
-      acceptInProgress={acceptInProgress}
-      declineInProgress={declineInProgress}
-      acceptSaleError={acceptSaleError}
-      declineSaleError={declineSaleError}
-      totalMessagePages={totalMessagePages}
-      oldestMessagePageFetched={oldestMessagePageFetched}
-      messages={messages}
-      fetchMessagesInProgress={fetchMessagesInProgress}
-      fetchMessagesError={fetchMessagesError}
-      sendMessageInProgress={sendMessageInProgress}
-      sendMessageError={sendMessageError}
-      sendReviewInProgress={sendReviewInProgress}
-      sendReviewError={sendReviewError}
-      onManageDisableScrolling={onManageDisableScrolling}
-      onShowMoreMessages={onShowMoreMessages}
-      onSendMessage={onSendMessage}
-      onSendReview={onSendReview}
-      onResetForm={onResetForm}
-    />
-  ) : null;
-
   const initialMessageFailed = !!(
     initialMessageFailedToTransaction &&
     currentTransaction.id &&
     initialMessageFailedToTransaction.uuid === currentTransaction.id.uuid
   );
 
-  const orderPanel = isDataAvailable ? (
-    <OrderDetailsPanel
+  // TransactionPanel is presentational component
+  // that currently handles showing everything inside layout's main view area.
+  const panel = isDataAvailable ? (
+    <TransactionPanel
       className={detailsClassName}
       currentUser={currentUser}
       transaction={currentTransaction}
@@ -179,11 +152,17 @@ export const TransactionPageComponent = props => {
       onSendMessage={onSendMessage}
       onSendReview={onSendReview}
       onResetForm={onResetForm}
+      transactionRole={transactionRole}
+      onAcceptSale={onAcceptSale}
+      onDeclineSale={onDeclineSale}
+      acceptInProgress={acceptInProgress}
+      declineInProgress={declineInProgress}
+      acceptSaleError={acceptSaleError}
+      declineSaleError={declineSaleError}
     />
-  ) : null;
-
-  const saleOrOrderPanel = isDataAvailable && isOwnSale ? salePanel : orderPanel;
-  const panel = isDataAvailable ? saleOrOrderPanel : loadingOrFailedFetching;
+  ) : (
+    loadingOrFailedFetching
+  );
 
   return (
     <Page
