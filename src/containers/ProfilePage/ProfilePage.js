@@ -36,7 +36,8 @@ export class ProfilePageComponent extends Component {
     super(props);
 
     this.state = {
-      reviews: propTypes.REVIEW_TYPE_OF_PROVIDER,
+      // keep track of which reviews tab to show in desktop viewport
+      showReviewsType: propTypes.REVIEW_TYPE_OF_PROVIDER,
     };
 
     this.showOfProviderReviews = this.showOfProviderReviews.bind(this);
@@ -45,13 +46,13 @@ export class ProfilePageComponent extends Component {
 
   showOfProviderReviews() {
     this.setState({
-      reviews: propTypes.REVIEW_TYPE_OF_PROVIDER,
+      showReviewsType: propTypes.REVIEW_TYPE_OF_PROVIDER,
     });
   }
 
   showOfCustomerReviews() {
     this.setState({
-      reviews: propTypes.REVIEW_TYPE_OF_CUSTOMER,
+      showReviewsType: propTypes.REVIEW_TYPE_OF_CUSTOMER,
     });
   }
 
@@ -149,7 +150,7 @@ export class ProfilePageComponent extends Component {
             />
           </h3>
         ),
-        selected: this.state.reviews === propTypes.REVIEW_TYPE_OF_PROVIDER,
+        selected: this.state.showReviewsType === propTypes.REVIEW_TYPE_OF_PROVIDER,
         onClick: this.showOfProviderReviews,
       },
       {
@@ -161,7 +162,7 @@ export class ProfilePageComponent extends Component {
             />
           </h3>
         ),
-        selected: this.state.reviews === propTypes.REVIEW_TYPE_OF_CUSTOMER,
+        selected: this.state.showReviewsType === propTypes.REVIEW_TYPE_OF_CUSTOMER,
         onClick: this.showOfCustomerReviews,
       },
     ];
@@ -172,7 +173,7 @@ export class ProfilePageComponent extends Component {
 
         {queryReviewsError ? reviewsError : null}
 
-        {this.state.reviews === propTypes.REVIEW_TYPE_OF_PROVIDER ? (
+        {this.state.showReviewsType === propTypes.REVIEW_TYPE_OF_PROVIDER ? (
           <Reviews reviews={reviewsOfProvider} />
         ) : (
           <Reviews reviews={reviewsOfCustomer} />
