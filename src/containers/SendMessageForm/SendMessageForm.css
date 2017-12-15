@@ -23,6 +23,10 @@
   margin: 0;
   max-height: 183px;
 
+  /* We need to remove horizontal paddings,
+   since textarea uses content-box (autosize library fix). */
+  width: calc(100vw - 100px);
+
   background-color: var(--matterColorLight);
 
   @media (--viewportMedium) {
@@ -32,6 +36,7 @@
     padding: 0 0 5px 0;
     margin: 0;
     max-height: initial;
+    width: 100%;
     border-bottom-width: 2px;
     border-bottom-color: var(--attentionColor);
     background-color: transparent;
