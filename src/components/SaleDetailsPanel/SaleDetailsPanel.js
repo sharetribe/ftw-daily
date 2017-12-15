@@ -264,14 +264,14 @@ export class SaleDetailsPanelComponent extends Component {
             disabled={buttonsDisabled}
             onClick={() => onDeclineSale(currentTransaction.id)}
           >
-            <FormattedMessage id="SalePage.declineButton" />
+            <FormattedMessage id="SaleDetailsPanel.declineButton" />
           </SecondaryButton>
           <PrimaryButton
             inProgress={acceptInProgress}
             disabled={buttonsDisabled}
             onClick={() => onAcceptSale(currentTransaction.id)}
           >
-            <FormattedMessage id="SalePage.acceptButton" />
+            <FormattedMessage id="SaleDetailsPanel.acceptButton" />
           </PrimaryButton>
         </div>
       </div>

@@ -6,14 +6,6 @@
   flex: 1;
 }
 
-.footer {
-  display: none;
-
-  @media (--viewportLarge) {
-    display: block;
-  }
-}
-
 .loading {
   margin-left: 24px;
   margin-right: 24px;
@@ -31,4 +23,12 @@
 
 .tabContentVisible {
   display: block;
+}
+
+.footer {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+  }
 }

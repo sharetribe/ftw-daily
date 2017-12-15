@@ -11,41 +11,41 @@ const MESSAGES_PAGE_SIZE = 100;
 
 // ================ Action types ================ //
 
-export const SET_INITAL_VALUES = 'app/OrderPage/SET_INITIAL_VALUES';
+export const SET_INITAL_VALUES = 'app/TransactionPage/SET_INITIAL_VALUES';
 
-export const FETCH_SALE_REQUEST = 'app/SalePagePage/FETCH_SALE_REQUEST';
-export const FETCH_SALE_SUCCESS = 'app/SalePage/FETCH_SALE_SUCCESS';
-export const FETCH_SALE_ERROR = 'app/SalePage/FETCH_SALE_ERROR';
+export const FETCH_TRANSACTION_REQUEST = 'app/TransactionPage/FETCH_TRANSACTION_REQUEST';
+export const FETCH_TRANSACTION_SUCCESS = 'app/TransactionPage/FETCH_TRANSACTION_SUCCESS';
+export const FETCH_TRANSACTION_ERROR = 'app/TransactionPage/FETCH_TRANSACTION_ERROR';
 
-export const ACCEPT_SALE_REQUEST = 'app/SalePage/ACCEPT_SALE_REQUEST';
-export const ACCEPT_SALE_SUCCESS = 'app/SalePage/ACCEPT_SALE_SUCCESS';
-export const ACCEPT_SALE_ERROR = 'app/SalePage/ACCEPT_SALE_ERROR';
+export const ACCEPT_SALE_REQUEST = 'app/TransactionPage/ACCEPT_SALE_REQUEST';
+export const ACCEPT_SALE_SUCCESS = 'app/TransactionPage/ACCEPT_SALE_SUCCESS';
+export const ACCEPT_SALE_ERROR = 'app/TransactionPage/ACCEPT_SALE_ERROR';
 
-export const DECLINE_SALE_REQUEST = 'app/SalePage/DECLINE_SALE_REQUEST';
-export const DECLINE_SALE_SUCCESS = 'app/SalePage/DECLINE_SALE_SUCCESS';
-export const DECLINE_SALE_ERROR = 'app/SalePage/DECLINE_SALE_ERROR';
+export const DECLINE_SALE_REQUEST = 'app/TransactionPage/DECLINE_SALE_REQUEST';
+export const DECLINE_SALE_SUCCESS = 'app/TransactionPage/DECLINE_SALE_SUCCESS';
+export const DECLINE_SALE_ERROR = 'app/TransactionPage/DECLINE_SALE_ERROR';
 
-export const FETCH_MESSAGES_REQUEST = 'app/SalePage/FETCH_MESSAGES_REQUEST';
-export const FETCH_MESSAGES_SUCCESS = 'app/SalePage/FETCH_MESSAGES_SUCCESS';
-export const FETCH_MESSAGES_ERROR = 'app/SalePage/FETCH_MESSAGES_ERROR';
+export const FETCH_MESSAGES_REQUEST = 'app/TransactionPage/FETCH_MESSAGES_REQUEST';
+export const FETCH_MESSAGES_SUCCESS = 'app/TransactionPage/FETCH_MESSAGES_SUCCESS';
+export const FETCH_MESSAGES_ERROR = 'app/TransactionPage/FETCH_MESSAGES_ERROR';
 
-export const SEND_MESSAGE_REQUEST = 'app/SalePage/SEND_MESSAGE_REQUEST';
-export const SEND_MESSAGE_SUCCESS = 'app/SalePage/SEND_MESSAGE_SUCCESS';
-export const SEND_MESSAGE_ERROR = 'app/SalePage/SEND_MESSAGE_ERROR';
+export const SEND_MESSAGE_REQUEST = 'app/TransactionPage/SEND_MESSAGE_REQUEST';
+export const SEND_MESSAGE_SUCCESS = 'app/TransactionPage/SEND_MESSAGE_SUCCESS';
+export const SEND_MESSAGE_ERROR = 'app/TransactionPage/SEND_MESSAGE_ERROR';
 
-export const SEND_REVIEW_REQUEST = 'app/SalePage/SEND_REVIEW_REQUEST';
-export const SEND_REVIEW_SUCCESS = 'app/SalePage/SEND_REVIEW_SUCCESS';
-export const SEND_REVIEW_ERROR = 'app/SalePage/SEND_REVIEW_ERROR';
+export const SEND_REVIEW_REQUEST = 'app/TransactionPage/SEND_REVIEW_REQUEST';
+export const SEND_REVIEW_SUCCESS = 'app/TransactionPage/SEND_REVIEW_SUCCESS';
+export const SEND_REVIEW_ERROR = 'app/TransactionPage/SEND_REVIEW_ERROR';
 
 // ================ Reducer ================ //
 
 const initialState = {
-  fetchSaleInProgress: false,
-  fetchSaleError: null,
+  fetchTransactionInProgress: false,
+  fetchTransactionError: null,
   transactionRef: null,
   acceptInProgress: false,
-  declineInProgress: false,
   acceptSaleError: null,
+  declineInProgress: false,
   declineSaleError: null,
   fetchMessagesInProgress: false,
   fetchMessagesError: null,
@@ -53,6 +53,7 @@ const initialState = {
   totalMessagePages: 0,
   oldestMessagePageFetched: 0,
   messages: [],
+  initialMessageFailedToTransaction: null,
   sendMessageInProgress: false,
   sendMessageError: null,
   sendReviewInProgress: false,
@@ -74,15 +75,15 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case SET_INITAL_VALUES:
       return { ...initialState, ...payload };
 
-    case FETCH_SALE_REQUEST:
-      return { ...state, fetchSaleInProgress: true, fetchSaleError: null };
-    case FETCH_SALE_SUCCESS: {
+    case FETCH_TRANSACTION_REQUEST:
+      return { ...state, fetchTransactionInProgress: true, fetchTransactionError: null };
+    case FETCH_TRANSACTION_SUCCESS: {
       const transactionRef = { id: payload.data.data.id, type: 'transaction' };
-      return { ...state, fetchSaleInProgress: false, transactionRef };
+      return { ...state, fetchTransactionInProgress: false, transactionRef };
     }
-    case FETCH_SALE_ERROR:
+    case FETCH_TRANSACTION_ERROR:
       console.error(payload); // eslint-disable-line
-      return { ...state, fetchSaleInProgress: false, fetchSaleError: payload };
+      return { ...state, fetchTransactionInProgress: false, fetchTransactionError: payload };
 
     case ACCEPT_SALE_REQUEST:
       return { ...state, acceptInProgress: true, acceptSaleError: null, declineSaleError: null };
@@ -139,7 +140,7 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
 // ================ Selectors ================ //
 
 export const acceptOrDeclineInProgress = state => {
-  return state.SalePage.acceptInProgress || state.SalePage.declineInProgress;
+  return state.TransactionPage.acceptInProgress || state.TransactionPage.declineInProgress;
 };
 
 // ================ Action creators ================ //
@@ -148,9 +149,12 @@ export const setInitialValues = initialValues => ({
   payload: pick(initialValues, Object.keys(initialState)),
 });
 
-const fetchSaleRequest = () => ({ type: FETCH_SALE_REQUEST });
-const fetchSaleSuccess = response => ({ type: FETCH_SALE_SUCCESS, payload: response });
-const fetchSaleError = e => ({ type: FETCH_SALE_ERROR, error: true, payload: e });
+const fetchTransactionRequest = () => ({ type: FETCH_TRANSACTION_REQUEST });
+const fetchTransactionSuccess = response => ({
+  type: FETCH_TRANSACTION_SUCCESS,
+  payload: response,
+});
+const fetchTransactionError = e => ({ type: FETCH_TRANSACTION_ERROR, error: true, payload: e });
 
 const acceptSaleRequest = () => ({ type: ACCEPT_SALE_REQUEST });
 const acceptSaleSuccess = () => ({ type: ACCEPT_SALE_SUCCESS });
@@ -181,8 +185,8 @@ const listingRelationship = txResponse => {
   return txResponse.data.data.relationships.listing.data;
 };
 
-export const fetchSale = id => (dispatch, getState, sdk) => {
-  dispatch(fetchSaleRequest());
+export const fetchTransaction = id => (dispatch, getState, sdk) => {
+  dispatch(fetchTransactionRequest());
   let txResponse = null;
 
   return sdk.transactions
@@ -206,19 +210,29 @@ export const fetchSale = id => (dispatch, getState, sdk) => {
     .then(response => {
       txResponse = response;
       const listingId = listingRelationship(response).id;
-      return sdk.listings.show({
-        id: listingId,
-        include: ['author', 'author.profileImage', 'images'],
-      });
+      const entities = updatedEntities({}, response.data);
+      const denormalised = denormalisedEntities(entities, 'listing', [listingId]);
+      const listing = denormalised[0];
+
+      const canFetchListing = listing && listing.attributes && !listing.attributes.deleted;
+
+      if (canFetchListing) {
+        return sdk.listings.show({
+          id: listingId,
+          include: ['author', 'author.profileImage', 'images'],
+        });
+      } else {
+        return response;
+      }
     })
     .then(response => {
       dispatch(addMarketplaceEntities(txResponse));
       dispatch(addMarketplaceEntities(response));
-      dispatch(fetchSaleSuccess(txResponse));
+      dispatch(fetchTransactionSuccess(txResponse));
       return response;
     })
     .catch(e => {
-      dispatch(fetchSaleError(storableError(e)));
+      dispatch(fetchTransactionError(storableError(e)));
       throw e;
     });
 };
@@ -283,7 +297,7 @@ const fetchMessages = (txId, page) => (dispatch, getState, sdk) => {
       const denormalizedMessages = denormalisedEntities(entities, 'message', messageIds);
       const { totalItems, totalPages, page: fetchedPage } = response.data.meta;
       const pagination = { totalItems, totalPages, page: fetchedPage };
-      const totalMessages = getState().OrderPage.totalMessages;
+      const totalMessages = getState().TransactionPage.totalMessages;
 
       // Original fetchMessages call succeeded
       dispatch(fetchMessagesSuccess(denormalizedMessages, pagination));
@@ -311,7 +325,7 @@ const fetchMessages = (txId, page) => (dispatch, getState, sdk) => {
 
 export const fetchMoreMessages = txId => (dispatch, getState, sdk) => {
   const state = getState();
-  const { oldestMessagePageFetched, totalMessagePages } = state.SalePage;
+  const { oldestMessagePageFetched, totalMessagePages } = state.TransactionPage;
   const hasMoreOldMessages = totalMessagePages > oldestMessagePageFetched;
 
   // In case there're no more old pages left we default to fetching the current cursor position
@@ -320,11 +334,11 @@ export const fetchMoreMessages = txId => (dispatch, getState, sdk) => {
   return dispatch(fetchMessages(txId, nextPage));
 };
 
-export const sendMessage = (saleId, message) => (dispatch, getState, sdk) => {
+export const sendMessage = (txId, message) => (dispatch, getState, sdk) => {
   dispatch(sendMessageRequest());
 
   return sdk.messages
-    .send({ transactionId: saleId, content: message })
+    .send({ transactionId: txId, content: message })
     .then(response => {
       const messageId = response.data.data.id;
 
@@ -332,7 +346,7 @@ export const sendMessage = (saleId, message) => (dispatch, getState, sdk) => {
       // and update possible incoming messages too.
       // TODO if there're more than 100 incoming messages,
       // this should loop through most recent pages instead of fetching just the first one.
-      return dispatch(fetchMessages(saleId, 1))
+      return dispatch(fetchMessages(txId, 1))
         .then(() => {
           dispatch(sendMessageSuccess());
           return messageId;
@@ -416,11 +430,11 @@ export const sendReview = (tx, reviewRating, reviewContent) => (dispatch, getSta
 // loadData is a collection of async calls that need to be made
 // before page has all the info it needs to render itself
 export const loadData = params => dispatch => {
-  const saleId = new types.UUID(params.id);
+  const txId = new types.UUID(params.id);
 
   // Clear the send error since the message form is emptied as well.
   dispatch(setInitialValues({ sendMessageError: null, sendReviewError: null }));
 
-  // Sale (i.e. transaction entity in API, but from buyers perspective) contains sale details
-  return Promise.all([dispatch(fetchSale(saleId)), dispatch(fetchMessages(saleId, 1))]);
+  // Sale / order (i.e. transaction entity in API)
+  return Promise.all([dispatch(fetchTransaction(txId)), dispatch(fetchMessages(txId, 1))]);
 };
