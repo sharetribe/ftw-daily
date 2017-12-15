@@ -239,3 +239,9 @@ export const fakeFormProps = {
   pure: true,
   initialized: true,
 };
+
+// Create fake viewport to help with shallow rendering
+export const fakeViewport = {
+  width: 2100,
+  height: 1339,
+};

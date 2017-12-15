@@ -77,34 +77,6 @@ exports[`ProfilePage matches snapshot 1`] = `
           />
         </h1>
         <div>
-          <h2>
-            <FormattedMessage
-              id="ProfilePage.reviewsOfProviderTitle"
-              values={
-                Object {
-                  "count": 0,
-                }
-              }
-            />
-          </h2>
-          <InjectIntl(ReviewsComponent)
-            reviews={Array []}
-          />
-          <h2>
-            <FormattedMessage
-              id="ProfilePage.reviewsOfCustomerTitle"
-              values={
-                Object {
-                  "count": 0,
-                }
-              }
-            />
-          </h2>
-          <InjectIntl(ReviewsComponent)
-            reviews={Array []}
-          />
-        </div>
-        <div>
           <Component
             className={null}
             rootClassName={null}

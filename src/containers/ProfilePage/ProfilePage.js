@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import { types } from '../../util/sdkLoader';
 import * as propTypes from '../../util/propTypes';
 import { ensureCurrentUser, ensureUser } from '../../util/data';
+import { withViewport } from '../../util/contextHelpers';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import {
@@ -30,6 +31,7 @@ import config from '../../config';
 import css from './ProfilePage.css';
 
 const { UUID } = types;
+const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 export class ProfilePageComponent extends Component {
   constructor(props) {
@@ -66,6 +68,7 @@ export class ProfilePageComponent extends Component {
       listings,
       reviews,
       queryReviewsError,
+      viewport,
       intl,
     } = this.props;
     const ensuredCurrentUser = ensureCurrentUser(currentUser);
@@ -76,6 +79,7 @@ export class ProfilePageComponent extends Component {
     const bio = profileUser.attributes.profile.bio;
     const hasBio = !!bio;
     const hasListings = listings.length > 0;
+    const isMobileLayout = viewport.width < MAX_MOBILE_SCREEN_WIDTH;
 
     const editLinkMobile = isCurrentUser ? (
       <NamedLink className={css.editLinkMobile} name="ProfileSettingsPage">
@@ -204,8 +208,7 @@ export class ProfilePageComponent extends Component {
             </ul>
           </div>
         ) : null}
-        {mobileReviews}
-        {desktopReviews}
+        {isMobileLayout ? mobileReviews : desktopReviews}
       </div>
     );
 
@@ -265,7 +268,7 @@ ProfilePageComponent.defaultProps = {
   queryReviewsError: null,
 };
 
-const { bool, arrayOf } = PropTypes;
+const { bool, arrayOf, number, shape } = PropTypes;
 
 ProfilePageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
@@ -276,6 +279,12 @@ ProfilePageComponent.propTypes = {
   listings: arrayOf(propTypes.listing).isRequired,
   reviews: arrayOf(propTypes.review),
   queryReviewsError: propTypes.error,
+
+  // form withViewport
+  viewport: shape({
+    width: number.isRequired,
+    height: number.isRequired,
+  }).isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
@@ -306,7 +315,9 @@ const mapStateToProps = state => {
   };
 };
 
-const ProfilePage = compose(connect(mapStateToProps), injectIntl)(ProfilePageComponent);
+const ProfilePage = compose(connect(mapStateToProps), withViewport, injectIntl)(
+  ProfilePageComponent
+);
 
 ProfilePage.loadData = params => {
   const id = new UUID(params.id);

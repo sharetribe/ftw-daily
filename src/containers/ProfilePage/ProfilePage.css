@@ -166,12 +166,6 @@
   }
 }
 
-.mobileReviews {
-  @media (--viewportMedium) {
-    display: none;
-  }
-}
-
 .mobileReviewsTitle {
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
@@ -179,12 +173,7 @@
 }
 
 .desktopReviews {
-  display: none;
-
-  @media (--viewportMedium) {
-    display: block;
-    margin-top: 28px;
-  }
+  margin-top: 28px;
 }
 
 .desktopReviewsTitle {
