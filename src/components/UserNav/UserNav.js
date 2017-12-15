@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { ACCOUNT_SETTINGS_PAGES } from '../../routeConfiguration';
-import { TabNavHorizontal } from '../../components';
+import { LinkTabNavHorizontal } from '../../components';
 
 import css from './UserNav.css';
 
@@ -38,7 +38,7 @@ const UserNav = props => {
   ];
 
   return (
-    <TabNavHorizontal className={classes} tabRootClassName={css.tab} tabs={tabs} skin="dark" />
+    <LinkTabNavHorizontal className={classes} tabRootClassName={css.tab} tabs={tabs} skin="dark" />
   );
 };
 

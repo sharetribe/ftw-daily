@@ -1,30 +1,42 @@
-import TabNavHorizontal from './TabNavHorizontal';
-import { TAB_TYPE_BUTTON, TAB_TYPE_LINK } from './TabNavHorizontal';
+import React from 'react';
+import { LinkTabNavHorizontal, ButtonTabNavHorizontal } from './TabNavHorizontal';
 
 const selfLinkProps = {
   name: 'StyleguideComponent',
   params: { component: 'TabNavHorizontal' },
 };
 
-export const LinkTabs = {
-  component: TabNavHorizontal,
-  props: {
-    tabs: [
-      { text: 'Normal', linkProps: selfLinkProps },
-      { text: 'Selected', linkProps: selfLinkProps, selected: true },
-    ],
-    type: TAB_TYPE_LINK,
-  },
-  group: 'navigation',
-};
+const linkTabs = [
+  { text: 'Normal', linkProps: selfLinkProps },
+  { text: 'Selected', linkProps: selfLinkProps, selected: true },
+];
 
 const noop = () => null;
 
-export const ButtonTabs = {
-  component: TabNavHorizontal,
-  props: {
-    tabs: [{ text: 'Normal', onClick: noop }, { text: 'Selected', onClick: noop, selected: true }],
-    type: TAB_TYPE_BUTTON,
-  },
+const buttonTabs = [
+  { text: 'Normal', onClick: noop },
+  { text: 'Selected', onClick: noop, selected: true },
+];
+
+const TabNavHorizontalComponent = () => {
+  return (
+    <div>
+      <h3>Horizontal link tab navigation with light skin</h3>
+      <LinkTabNavHorizontal tabs={linkTabs} />
+
+      <h3>Horizontal link tab navigation with dark skin</h3>
+      <LinkTabNavHorizontal tabs={linkTabs} skin="dark" />
+
+      <h3>Horizontal button tab navigation with light skin</h3>
+      <ButtonTabNavHorizontal tabs={buttonTabs} />
+
+      <h3>Horizontal button tab navigation with dark skin</h3>
+      <ButtonTabNavHorizontal tabs={buttonTabs} skin="dark" />
+    </div>
+  );
+};
+
+export const TabNavHorizontal = {
+  component: TabNavHorizontalComponent,
   group: 'navigation',
 };

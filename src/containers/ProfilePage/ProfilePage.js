@@ -21,9 +21,8 @@ import {
   NamedLink,
   ListingCard,
   Reviews,
-  TabNavHorizontal,
+  ButtonTabNavHorizontal,
 } from '../../components';
-import { TAB_TYPE_BUTTON } from '../../components/TabNavHorizontal/TabNavHorizontal';
 import { TopbarContainer } from '../../containers';
 import { loadData } from './ProfilePage.duck';
 import config from '../../config';
@@ -169,11 +168,7 @@ export class ProfilePageComponent extends Component {
 
     const desktopReviews = (
       <div className={css.desktopReviews}>
-        <TabNavHorizontal
-          className={css.desktopReviewsTabNav}
-          tabs={desktopReviewTabs}
-          type={TAB_TYPE_BUTTON}
-        />
+        <ButtonTabNavHorizontal className={css.desktopReviewsTabNav} tabs={desktopReviewTabs} />
 
         {queryReviewsError ? reviewsError : null}
 

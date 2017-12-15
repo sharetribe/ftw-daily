@@ -30,7 +30,7 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
     >
       <div>
         <div>
-          <TabNavHorizontal
+          <Component
             className={null}
             rootClassName={null}
             skin="light"
@@ -74,7 +74,6 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
                 },
               ]
             }
-            type="link"
           />
           <ReduxForm
             inProgress={false}
