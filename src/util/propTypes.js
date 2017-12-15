@@ -23,7 +23,18 @@ import { types as sdkTypes } from './sdkLoader';
 import { ensureTransaction } from './data';
 
 const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
-const { arrayOf, bool, func, instanceOf, number, object, oneOf, shape, string } = PropTypes;
+const {
+  arrayOf,
+  bool,
+  func,
+  instanceOf,
+  number,
+  object,
+  oneOf,
+  oneOfType,
+  shape,
+  string,
+} = PropTypes;
 
 // Fixed value
 export const value = val => oneOf([val]);
@@ -113,19 +124,25 @@ export const user = shape({
   profileImage: image,
 });
 
+const listingAttributes = shape({
+  title: string.isRequired,
+  description: string.isRequired,
+  address: string.isRequired,
+  geolocation: latlng.isRequired,
+  closed: bool.isRequired,
+  deleted: value(false).isRequired,
+  price: money,
+});
+
+const deletedListingAttributes = shape({
+  deleted: value(true).isRequired,
+});
+
 // Denormalised listing object
 export const listing = shape({
   id: uuid.isRequired,
   type: value('listing').isRequired,
-  attributes: shape({
-    title: string.isRequired,
-    description: string.isRequired,
-    address: string.isRequired,
-    geolocation: latlng.isRequired,
-    closed: bool.isRequired,
-    deleted: bool.isRequired,
-    price: money,
-  }).isRequired,
+  attributes: oneOfType([listingAttributes, deletedListingAttributes]).isRequired,
   author: user,
   images: arrayOf(image),
 });
