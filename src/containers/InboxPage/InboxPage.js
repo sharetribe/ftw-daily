@@ -121,10 +121,12 @@ export const InboxItem = props => {
   const isSaleNotification = !isOrder && propTypes.txIsPreauthorized(tx);
   const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
   const lastTransitionedAt = formatDate(intl, tx.attributes.lastTransitionedAt);
-  const bookingStart = formatDate(intl, booking.attributes.start);
-  const bookingEnd = formatDate(intl, booking.attributes.end);
+
   const bookingPrice = isOrder ? tx.attributes.payinTotal : tx.attributes.payoutTotal;
-  const price = formatMoney(intl, bookingPrice);
+  const hasBookingInfo = !!(booking && bookingPrice);
+  const bookingStart = hasBookingInfo ? formatDate(intl, booking.attributes.start) : null;
+  const bookingEnd = hasBookingInfo ? formatDate(intl, booking.attributes.end) : null;
+  const price = hasBookingInfo ? formatMoney(intl, bookingPrice) : null;
 
   const linkClasses = classNames(css.itemLink, {
     [css.bannedUserLink]: isOtherUserBanned,
@@ -146,8 +148,8 @@ export const InboxItem = props => {
             {otherUserDisplayName}
           </div>
           <div className={classNames(css.bookingInfo, stateData.bookingClassName)}>
-            {bookingStart.short} - {bookingEnd.short}
-            <span className={css.itemPrice}>{price}</span>
+            {hasBookingInfo ? `${bookingStart.short} - ${bookingEnd.short}` : null}
+            {hasBookingInfo ? <span className={css.itemPrice}>{price}</span> : null}
           </div>
         </div>
         <div className={css.itemState}>
