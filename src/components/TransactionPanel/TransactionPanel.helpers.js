@@ -78,12 +78,17 @@ export const BreakdownMaybe = props => {
 
   const classes = classNames(rootClassName || css.breakdown, className);
   return loaded ? (
-    <BookingBreakdown
-      className={classes}
-      userRole={transactionRole}
-      transaction={transaction}
-      booking={transaction.booking}
-    />
+    <div>
+      <h3 className={css.bookingBreakdownTitle}>
+        <FormattedMessage id="TransactionPanel.bookingBreakdownTitle" />
+      </h3>
+      <BookingBreakdown
+        className={classes}
+        userRole={transactionRole}
+        transaction={transaction}
+        booking={transaction.booking}
+      />
+    </div>
   ) : null;
 };
 

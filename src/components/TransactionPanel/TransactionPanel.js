@@ -274,7 +274,9 @@ export class TransactionPanelComponent extends Component {
               onBlur={this.onSendMessageFormBlur}
               onSubmit={this.onMessageSubmit}
             />
-            {isProvider ? <div className={css.mobileActionButtons}>{actionButtons}</div> : null}
+            {isProvider && canShowButtons ? (
+              <div className={css.mobileActionButtons}>{actionButtons}</div>
+            ) : null}
           </div>
 
           <div className={css.desktopAside}>
@@ -309,11 +311,10 @@ export class TransactionPanelComponent extends Component {
                   </p>
                 </div>
               ) : null}
-              <h3 className={css.bookingBreakdownTitle}>
-                <FormattedMessage id="TransactionPanel.bookingBreakdownTitle" />
-              </h3>
               <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
-              {isProvider ? <div className={css.desktopActionButtons}>{actionButtons}</div> : null}
+              {isProvider && canShowButtons ? (
+                <div className={css.desktopActionButtons}>{actionButtons}</div>
+              ) : null}
             </div>
           </div>
         </div>
