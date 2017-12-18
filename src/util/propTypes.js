@@ -213,6 +213,8 @@ export const TX_TRANSITION_ACTORS = [
 
 const txLastTransition = tx => ensureTransaction(tx).attributes.lastTransition;
 
+export const txIsEnquired = tx => txLastTransition(tx) === TX_TRANSITION_ENQUIRE;
+
 export const txIsPreauthorized = tx => {
   const transition = txLastTransition(tx);
   return (

@@ -305,6 +305,7 @@
 
 /* Transaction status affects to certain font colors and weights */
 
+.nameEnquired,
 .namePending {
   font-weight: var(--fontWeightBold);
 
@@ -317,6 +318,7 @@
   /* This class is empty on purpose, it is used below for banned users */
 }
 
+.stateEnquired,
 .stateRequested,
 .statePending {
   font-weight: var(--fontWeightSemiBold);
@@ -334,6 +336,7 @@
   color: var(--matterColorAnti);
 }
 
+.nameEnquiredOrder,
 .nameRequested,
 .nameDeclined,
 .nameCanceled,
@@ -342,6 +345,7 @@
   font-weight: var(--fontWeightMedium);
 }
 
+.bookingEnquired,
 .bookingPending {
   color: var(--matterColor);
   margin-top: 4px;
@@ -359,6 +363,7 @@
   color: var(--matterColorAnti);
 }
 
+.lastTransitionedAtEnquired,
 .lastTransitionedAtPending,
 .lastTransitionedAtRequested {
   color: var(--matterColor);

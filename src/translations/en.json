@@ -217,6 +217,7 @@
   "InboxPage.stateCanceled": "Canceled",
   "InboxPage.stateDeclined": "Declined",
   "InboxPage.stateDelivered": "Delivered",
+  "InboxPage.stateEnquiry": "Enquiry",
   "InboxPage.statePending": "Pending",
   "InboxPage.stateRequested": "Requested",
   "InboxPage.title": "Inbox",
