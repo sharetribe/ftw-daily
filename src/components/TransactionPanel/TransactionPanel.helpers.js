@@ -92,9 +92,6 @@ export const BreakdownMaybe = props => {
   ) : null;
 };
 
-// Functional component as a helper to build ActionButtons
-// Provider only when state is preauthorized
-export const ActionButtonsMaybe = props => {
 const createListingLink = (listing, label, listingPageName = 'ListingPage', className = '') => {
   const listingLoaded = !!listing.id;
 
@@ -111,6 +108,21 @@ const createListingLink = (listing, label, listingPageName = 'ListingPage', clas
   }
 };
 
+// Functional component as a helper to build ActionButtons for
+// provider when state is preauthorized
+export const OrderActionButtonMaybe = props => {
+  const { className, rootClassName, canShowButtons, listing } = props;
+
+  const title = <FormattedMessage id="TransactionPanel.requestToBook" />;
+  const listingLink = createListingLink(listing, title, 'ListingPageBook', css.requestToBookButton);
+  const classes = classNames(rootClassName || css.actionButtons, className);
+
+  return canShowButtons ? <div className={classes}>{listingLink}</div> : null;
+};
+
+// Functional component as a helper to build ActionButtons for
+// provider when state is preauthorized
+export const SaleActionButtonsMaybe = props => {
   const {
     className,
     rootClassName,

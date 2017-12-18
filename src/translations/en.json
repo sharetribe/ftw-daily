@@ -620,6 +620,7 @@
   "TransactionPanel.orderPreauthorizedInfo": "{providerName} has been notified about the booking request. Sit back and relax.",
   "TransactionPanel.orderPreauthorizedSubtitle": "You have requested to book {listingLink}.",
   "TransactionPanel.orderPreauthorizedTitle": "Great success, {customerName}!",
+  "TransactionPanel.requestToBook": "Request to book",
   "TransactionPanel.saleAcceptedTitle": "You accepted a request from {customerName} to book {listingLink}.",
   "TransactionPanel.saleCancelledTitle": "The booking from {customerName} for {listingLink} has been cancelled.",
   "TransactionPanel.saleDeclinedTitle": "The request from {customerName} to book {listingLink} has been declined.",
