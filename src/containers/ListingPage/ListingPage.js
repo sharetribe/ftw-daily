@@ -27,6 +27,7 @@ import {
   NamedRedirect,
   Modal,
   ImageCarousel,
+  InlineTextButton,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
@@ -35,7 +36,7 @@ import {
   UserCard,
   Reviews,
 } from '../../components';
-import { BookingDatesForm, TopbarContainer } from '../../containers';
+import { BookingDatesForm, TopbarContainer, EnquiryForm } from '../../containers';
 
 import { loadData } from './ListingPage.duck';
 import EditIcon from './EditIcon';
@@ -139,6 +140,7 @@ export class ListingPageComponent extends Component {
     this.state = {
       pageClassNames: [],
       imageCarouselOpen: false,
+      enquiryModalOpen: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -278,6 +280,8 @@ export class ListingPageComponent extends Component {
 
     const currentAuthor = authorAvailable ? currentListing.author : null;
     const ensuredAuthor = ensureUser(currentAuthor);
+
+    // TODO: use helper to handle banned
     const authorDisplayName = ensuredAuthor.attributes.profile.displayName;
 
     // TODO location address is currently serialized inside address field (API will change later)
@@ -380,8 +384,11 @@ export class ListingPageComponent extends Component {
     );
 
     const handleContactUser = user => {
-      // TODO: this
-      console.log('contact user:', user);
+      this.setState({ enquiryModalOpen: true });
+    };
+    const handleSubmitEnquiryMessage = values => {
+      const { message } = values;
+      console.log('TODO: send enquiry message:', message);
     };
 
     const reviewsError = (
@@ -473,6 +480,12 @@ export class ListingPageComponent extends Component {
                       <h1 className={css.title}>{title}</h1>
                       <div className={css.author}>
                         <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />
+                        <span className={css.contactWrapper}>
+                          <span className={css.separator}>•</span>
+                          <InlineTextButton className={css.contactLink} onClick={handleContactUser}>
+                            <FormattedMessage id="ListingPage.contactUser" />
+                          </InlineTextButton>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -510,6 +523,21 @@ export class ListingPageComponent extends Component {
                       currentUser={currentUser}
                       onContactUser={handleContactUser}
                     />
+                    <Modal
+                      id="ListingPage.enquiry"
+                      contentClassName={css.enquiryModalContent}
+                      isOpen={this.state.enquiryModalOpen}
+                      onClose={() => this.setState({ enquiryModalOpen: false })}
+                      onManageDisableScrolling={onManageDisableScrolling}
+                    >
+                      <EnquiryForm
+                        className={css.enquiryForm}
+                        submitButtonWrapperClassName={css.enquirySubmitButtonWrapper}
+                        listingTitle={title}
+                        authorDisplayName={authorDisplayName}
+                        onSubmit={handleSubmitEnquiryMessage}
+                      />
+                    </Modal>
                   </div>
                 </div>
 

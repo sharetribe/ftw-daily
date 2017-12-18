@@ -207,6 +207,19 @@ exports[`ListingPage matches snapshot 1`] = `
                       }
                     }
                   />
+                  <span>
+                    <span>
+                      •
+                    </span>
+                    <InlineTextButton
+                      onClick={[Function]}
+                    >
+                      <FormattedMessage
+                        id="ListingPage.contactUser"
+                        values={Object {}}
+                      />
+                    </InlineTextButton>
+                  </span>
                 </div>
               </div>
             </div>
@@ -307,6 +320,18 @@ exports[`ListingPage matches snapshot 1`] = `
                   }
                 }
               />
+              <InjectIntl(ModalComponent)
+                id="ListingPage.enquiry"
+                isOpen={false}
+                onClose={[Function]}
+                onManageDisableScrolling={[Function]}
+              >
+                <ReduxForm
+                  authorDisplayName="user-1 display name"
+                  listingTitle="listing1 title"
+                  onSubmit={[Function]}
+                />
+              </InjectIntl(ModalComponent)>
             </div>
           </div>
           <withViewport(ModalInMobileComponent)

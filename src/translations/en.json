@@ -231,6 +231,7 @@
   "ListingPage.bookingTitle": "Book {title}",
   "ListingPage.closedListing": "This listing has been closed and can't be booked.",
   "ListingPage.closedListingButtonText": "Sorry, this listing has been closed.",
+  "ListingPage.contactUser": "Contact",
   "ListingPage.ctaButtonMessage": "Request to book",
   "ListingPage.descriptionTitle": "About this sauna",
   "ListingPage.editListing": "Edit listing",

@@ -1,8 +1,6 @@
 @import '../../marketplace.css';
 
 .root {
-  display: flex;
-  flex-direction: column;
 }
 
 .icon {
@@ -24,9 +22,4 @@
   @media (--viewportMedium) {
     margin: 22px 0 24px 0;
   }
-}
-
-.submitButton {
-  /* Push to bottom of the flex container */
-  margin-top: auto;
 }
