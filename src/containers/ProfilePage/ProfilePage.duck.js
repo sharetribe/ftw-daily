@@ -5,7 +5,7 @@ import { storableError } from '../../util/errors';
 
 // ================ Action types ================ //
 
-export const CLEAR_STATE = 'app/ProfilePage/CLEAR_STATE';
+export const SET_INITIAL_STATE = 'app/ProfilePage/SET_INITIAL_STATE';
 
 export const SHOW_USER_REQUEST = 'app/ProfilePage/SHOW_USER_REQUEST';
 export const SHOW_USER_SUCCESS = 'app/ProfilePage/SHOW_USER_SUCCESS';
@@ -33,8 +33,8 @@ const initialState = {
 export default function profilePageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
-    case CLEAR_STATE:
-      return { ...state, userListingRefs: [], reviews: [] };
+    case SET_INITIAL_STATE:
+      return { ...initialState };
     case SHOW_USER_REQUEST:
       return { ...state, userShowError: null, userId: payload.userId };
     case SHOW_USER_SUCCESS:
@@ -69,8 +69,8 @@ export default function profilePageReducer(state = initialState, action = {}) {
 
 // ================ Action creators ================ //
 
-export const clearState = () => ({
-  type: CLEAR_STATE,
+export const setInitialState = () => ({
+  type: SET_INITIAL_STATE,
 });
 
 export const showUserRequest = userId => ({
@@ -162,7 +162,7 @@ export const showUser = userId => (dispatch, getState, sdk) => {
 export const loadData = userId => (dispatch, getState, sdk) => {
   // Clear state so that previously loaded data is not visible
   // in case this page load fails.
-  dispatch(clearState());
+  dispatch(setInitialState());
 
   return Promise.all([
     dispatch(fetchCurrentUser()),
