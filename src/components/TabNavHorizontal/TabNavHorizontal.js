@@ -103,7 +103,7 @@ ButtonTabNavHorizontal.propTypes = {
   tabs: arrayOf(
     shape({
       text: node.isRequired,
-      disbaled: bool,
+      disabled: bool,
       selected: bool,
       onClick: func.isRequired,
     })
@@ -132,7 +132,7 @@ LinkTabNavHorizontal.propTypes = {
   tabs: arrayOf(
     shape({
       text: node.isRequired,
-      disbaled: bool,
+      disabled: bool,
       selected: bool,
       linkProps: object.isRequired,
     })
