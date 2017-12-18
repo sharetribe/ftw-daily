@@ -1,0 +1,32 @@
+@import '../../marketplace.css';
+
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.icon {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: block;
+    margin-bottom: 36px;
+  }
+}
+
+.heading {
+  @apply --marketplaceModalTitleStyles;
+}
+
+.field {
+  margin: 25px 0 24px 0;
+
+  @media (--viewportMedium) {
+    margin: 22px 0 24px 0;
+  }
+}
+
+.submitButton {
+  /* Push to bottom of the flex container */
+  margin-top: auto;
+}

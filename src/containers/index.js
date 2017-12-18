@@ -15,6 +15,7 @@ export { default as EditListingPhotosForm } from './EditListingPhotosForm/EditLi
 export { default as EditListingPricingForm } from './EditListingPricingForm/EditListingPricingForm';
 export { default as EmailVerificationForm } from './EmailVerificationForm/EmailVerificationForm';
 export { default as EmailVerificationPage } from './EmailVerificationPage/EmailVerificationPage';
+export { default as EnquiryForm } from './EnquiryForm/EnquiryForm';
 export { default as InboxPage } from './InboxPage/InboxPage';
 export { default as LandingPage } from './LandingPage/LandingPage';
 export { default as ListingPage } from './ListingPage/ListingPage';
