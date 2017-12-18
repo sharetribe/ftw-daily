@@ -169,7 +169,7 @@
 .mobileReviewsTitle {
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
-  margin: 24px 0;
+  margin: 24px 0 26px 0;
 }
 
 .desktopReviews {
