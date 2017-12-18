@@ -87,6 +87,16 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateDelivered',
       }),
     };
+  } else if (propTypes.txIsEnquired(tx)) {
+    return {
+      nameClassName: isOrder ? css.nameEnquiredOrder : css.nameEnquired,
+      bookingClassName: css.bookingEnquired,
+      lastTransitionedAtClassName: css.lastTransitionedAtEnquired,
+      stateClassName: css.stateEnquired,
+      state: intl.formatMessage({
+        id: 'InboxPage.stateEnquiry',
+      }),
+    };
   }
   return {
     nameClassName: isOrder ? css.nameRequested : css.namePending,
