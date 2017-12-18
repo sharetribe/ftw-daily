@@ -279,9 +279,9 @@ export class TransactionPanelComponent extends Component {
             ) : null}
           </div>
 
-          <div className={css.desktopAside}>
-            <div className={css.breakdownDesktop}>
-              <div className={css.breakdownImageWrapper}>
+          <div className={css.asideDesktop}>
+            <div className={css.detailCard}>
+              <div className={css.detailCardImageWrapper}>
                 <div className={css.aspectWrapper}>
                   <ResponsiveImage
                     rootClassName={css.rootForImage}
@@ -301,9 +301,9 @@ export class TransactionPanelComponent extends Component {
                 </div>
               ) : null}
               {isCustomer ? (
-                <div className={css.breakdownHeadings}>
-                  <h2 className={css.breakdownTitle}>{listingTitle}</h2>
-                  <p className={css.breakdownSubtitle}>
+                <div className={css.detailCardHeadings}>
+                  <h2 className={css.detailCardTitle}>{listingTitle}</h2>
+                  <p className={css.detailCardSubtitle}>
                     <FormattedMessage
                       id="TransactionPanel.hostedBy"
                       values={{ name: authorDisplayName }}

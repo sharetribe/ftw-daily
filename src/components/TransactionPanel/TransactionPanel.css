@@ -152,7 +152,7 @@
   }
 }
 
-.desktopAside {
+.asideDesktop {
   margin: 1px 0 0 0;
 
   @media (--viewportLarge) {
@@ -162,7 +162,7 @@
   }
 }
 
-.breakdownDesktop {
+.detailCard {
   display: none;
 
   position: sticky;
@@ -177,14 +177,14 @@
   }
 }
 
-.breakdownImageWrapper {
+.detailCardImageWrapper {
   /* Layout */
   display: block;
   width: 100%;
   position: relative;
 }
 
-.breakdownHeadings {
+.detailCardHeadings {
   display: none;
 
   @media (--viewportLarge) {
@@ -194,7 +194,7 @@
   }
 }
 
-.breakdownTitle {
+.detailCardTitle {
   margin-bottom: 10px;
 
   @media (--viewportLarge) {
@@ -203,7 +203,7 @@
   }
 }
 
-.breakdownSubtitle {
+.detailCardSubtitle {
   @apply --marketplaceH5FontStyles;
   color: var(--matterColorAnti);
 
