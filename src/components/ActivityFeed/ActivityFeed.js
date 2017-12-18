@@ -5,7 +5,7 @@ import { dropWhile } from 'lodash';
 import classNames from 'classnames';
 import { Avatar, InlineTextButton, ReviewRating } from '../../components';
 import { formatDate } from '../../util/dates';
-import { ensureTransaction, ensureUser, ensureListing } from '../../util/data';
+import { ensureTransaction, ensureUser, ensureListing, userDisplayName } from '../../util/data';
 import * as propTypes from '../../util/propTypes';
 import * as log from '../../util/log';
 
@@ -212,7 +212,13 @@ const Transition = props => {
   const currentTransaction = ensureTransaction(transaction);
   const customer = currentTransaction.customer;
   const provider = currentTransaction.provider;
-  const listingTitle = currentTransaction.listing.attributes.title;
+
+  const deletedListing = intl.formatMessage({
+    id: 'ActivityFeed.deletedListing',
+  });
+  const listingTitle = currentTransaction.listing.attributes.deleted
+    ? deletedListing
+    : currentTransaction.listing.attributes.title;
   const lastTransition = currentTransaction.attributes.lastTransition;
 
   const ownRole =
@@ -220,10 +226,13 @@ const Transition = props => {
       ? propTypes.TX_TRANSITION_ACTOR_CUSTOMER
       : propTypes.TX_TRANSITION_ACTOR_PROVIDER;
 
+  const bannedUserDisplayName = intl.formatMessage({
+    id: 'ActivityFeed.bannedUserDisplayName',
+  });
   const otherUsersName =
     ownRole === propTypes.TX_TRANSITION_ACTOR_CUSTOMER
-      ? provider.attributes.profile.displayName
-      : customer.attributes.profile.displayName;
+      ? userDisplayName(provider, bannedUserDisplayName)
+      : userDisplayName(customer, bannedUserDisplayName);
 
   const transitionMessage = resolveTransitionMessage(
     transition,
