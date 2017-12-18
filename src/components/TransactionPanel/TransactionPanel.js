@@ -257,9 +257,6 @@ export class TransactionPanelComponent extends Component {
             />
 
             <div className={css.breakdownMobile}>
-              <h3 className={css.bookingBreakdownTitle}>
-                <FormattedMessage id="TransactionPanel.bookingBreakdownTitle" />
-              </h3>
               <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
             </div>
 
