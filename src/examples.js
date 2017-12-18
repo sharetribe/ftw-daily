@@ -18,11 +18,12 @@ import * as IconClose from './components/IconClose/IconClose.example';
 import * as IconEmailAttention from './components/IconEmailAttention/IconEmailAttention.example';
 import * as IconEmailSent from './components/IconEmailSent/IconEmailSent.example';
 import * as IconEmailSuccess from './components/IconEmailSuccess/IconEmailSuccess.example';
+import * as IconEnquiry from './components/IconEnquiry/IconEnquiry.example';
 import * as IconKeys from './components/IconKeys/IconKeys.example';
 import * as IconKeysSuccess from './components/IconKeysSuccess/IconKeysSuccess.example';
-import * as IconSearch from './components/IconSearch/IconSearch.example';
 import * as IconReviewStar from './components/IconReviewStar/IconReviewStar.example';
 import * as IconReviewUser from './components/IconReviewUser/IconReviewUser.example';
+import * as IconSearch from './components/IconSearch/IconSearch.example';
 import * as IconSocialMediaFacebook from './components/IconSocialMediaFacebook/IconSocialMediaFacebook.example';
 import * as IconSocialMediaInstagram from './components/IconSocialMediaInstagram/IconSocialMediaInstagram.example';
 import * as IconSocialMediaTwitter from './components/IconSocialMediaTwitter/IconSocialMediaTwitter.example';
@@ -93,6 +94,7 @@ export {
   IconEmailAttention,
   IconEmailSent,
   IconEmailSuccess,
+  IconEnquiry,
   IconKeys,
   IconKeysSuccess,
   IconReviewStar,
