@@ -57,6 +57,7 @@ import * as EditListingLocationForm from './containers/EditListingLocationForm/E
 import * as EditListingPhotosForm from './containers/EditListingPhotosForm/EditListingPhotosForm.example';
 import * as EditListingPricingForm from './containers/EditListingPricingForm/EditListingPricingForm.example';
 import * as EmailVerificationForm from './containers/EmailVerificationForm/EmailVerificationForm.example';
+import * as EnquiryForm from './containers/EnquiryForm/EnquiryForm.example';
 import * as LoginForm from './containers/LoginForm/LoginForm.example';
 import * as PasswordRecoveryForm from './containers/PasswordRecoveryForm/PasswordRecoveryForm.example';
 import * as PasswordResetForm from './containers/PasswordResetForm/PasswordResetForm.example';
@@ -85,6 +86,7 @@ export {
   EditListingPricingForm,
   EditListingWizard,
   EmailVerificationForm,
+  EnquiryForm,
   ExpandingTextarea,
   FieldReviewRating,
   Footer,
