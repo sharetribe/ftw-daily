@@ -231,6 +231,8 @@ export class TransactionPanelComponent extends Component {
               transaction={currentTransaction}
               customerDisplayName={customerDisplayName}
               currentListing={currentListing}
+              listingTitle={listingTitle}
+              transactionRole={transactionRole}
             />
             <TransactionPageMessage
               transaction={currentTransaction}
@@ -238,6 +240,7 @@ export class TransactionPanelComponent extends Component {
               customerDisplayName={customerDisplayName}
               listingDeleted={listingDeleted}
               isCustomerBanned={isCustomerBanned}
+              transactionRole={transactionRole}
             />
 
             <div className={css.breakdownMobile}>

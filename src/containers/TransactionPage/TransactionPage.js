@@ -73,7 +73,9 @@ export const TransactionPageComponent = props => {
   const deletedListingTitle = intl.formatMessage({
     id: 'TransactionPage.deletedListing',
   });
-  const listingTitle = currentListing.attributes.title || deletedListingTitle;
+  const listingTitle = currentListing.attributes.deleted
+    ? deletedListingTitle
+    : currentListing.attributes.title;
 
   // Redirect users with someone else's direct link to their own inbox/sales or inbox/orders page.
   const isDataAvailable =

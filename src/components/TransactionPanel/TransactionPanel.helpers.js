@@ -165,9 +165,9 @@ export const OrderTitle = props => {
     transaction,
     customerDisplayName: customerName,
     currentListing,
+    listingTitle,
   } = props;
   const listingLoaded = !!currentListing.id;
-  const listingTitle = currentListing.attributes.title; // TODO deleted listing
   const listingLink = createListingLink(listingLoaded, listingTitle, currentListing.id);
 
   const classes = classNames(rootClassName || css.headingOrder, className);
@@ -276,9 +276,9 @@ export const SaleTitle = props => {
     transaction,
     customerDisplayName: customerName,
     currentListing,
+    listingTitle,
   } = props;
   const listingLoaded = !!currentListing.id;
-  const listingTitle = currentListing.attributes.title;
   const listingLink = createListingLink(listingLoaded, listingTitle, currentListing.id);
 
   const classes = classNames(rootClassName || css.headingSale, className);

@@ -17,13 +17,7 @@
  * defined. This way we get the validation errors only in the most
  * specific place and avoid duplicate errros.
  */
-import PropTypes from 'prop-types';
-import Decimal from 'decimal.js';
-import { types as sdkTypes } from './sdkLoader';
-import { ensureTransaction } from './data';
-
-const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
-const {
+import {
   arrayOf,
   bool,
   func,
@@ -34,7 +28,12 @@ const {
   oneOfType,
   shape,
   string,
-} = PropTypes;
+} from 'prop-types';
+import Decimal from 'decimal.js';
+import { types as sdkTypes } from './sdkLoader';
+import { ensureTransaction } from './data';
+
+const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
 
 // Fixed value
 export const value = val => oneOf([val]);
@@ -135,6 +134,7 @@ const listingAttributes = shape({
 });
 
 const deletedListingAttributes = shape({
+  closed: bool.isRequired,
   deleted: value(true).isRequired,
 });
 
