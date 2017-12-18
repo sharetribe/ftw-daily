@@ -191,7 +191,15 @@ export const OrderTitle = props => {
 
   const classes = classNames(rootClassName || css.headingOrder, className);
 
-  if (propTypes.txIsPreauthorized(transaction)) {
+  if (propTypes.txIsEnquired(transaction)) {
+    return (
+      <h1 className={classes}>
+        <span className={css.mainTitle}>
+          <FormattedMessage id="TransactionPanel.orderEnquiredTitle" values={{ listingLink }} />
+        </span>
+      </h1>
+    );
+  } else if (propTypes.txIsPreauthorized(transaction)) {
     return (
       <h1 className={classes}>
         <span className={css.mainTitle}>
@@ -301,7 +309,16 @@ export const SaleTitle = props => {
 
   const classes = classNames(rootClassName || css.headingSale, className);
 
-  if (propTypes.txIsPreauthorized(transaction)) {
+  if (propTypes.txIsEnquired(transaction)) {
+    return (
+      <h1 className={classes}>
+        <FormattedMessage
+          id="TransactionPanel.saleEnquiredTitle"
+          values={{ customerName, listingLink }}
+        />
+      </h1>
+    );
+  } else if (propTypes.txIsPreauthorized(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
