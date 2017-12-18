@@ -95,6 +95,22 @@ export const BreakdownMaybe = props => {
 // Functional component as a helper to build ActionButtons
 // Provider only when state is preauthorized
 export const ActionButtonsMaybe = props => {
+const createListingLink = (listing, label, listingPageName = 'ListingPage', className = '') => {
+  const listingLoaded = !!listing.id;
+
+  if (listingLoaded && !listing.attributes.deleted) {
+    const title = listing.attributes.title;
+    const params = { id: listing.id.uuid, slug: createSlug(title) };
+    return (
+      <NamedLink className={className} name={listingPageName} params={params}>
+        {label}
+      </NamedLink>
+    );
+  } else {
+    return <FormattedMessage id="TransactionPanel.deletedListingOrderTitle" />;
+  }
+};
+
   const {
     className,
     rootClassName,
@@ -149,19 +165,6 @@ export const ActionButtonsMaybe = props => {
   ) : null;
 };
 
-const createListingLink = (listingLoaded, title, id) => {
-  if (listingLoaded && title) {
-    const params = { id: id.uuid, slug: createSlug(title) };
-    return (
-      <NamedLink name="ListingPage" params={params}>
-        {title}
-      </NamedLink>
-    );
-  } else {
-    return <FormattedMessage id="TransactionPanel.deletedListingOrderTitle" />;
-  }
-};
-
 // Functional component as a helper to build order title
 export const OrderTitle = props => {
   const {
@@ -172,8 +175,7 @@ export const OrderTitle = props => {
     currentListing,
     listingTitle,
   } = props;
-  const listingLoaded = !!currentListing.id;
-  const listingLink = createListingLink(listingLoaded, listingTitle, currentListing.id);
+  const listingLink = createListingLink(currentListing, listingTitle);
 
   const classes = classNames(rootClassName || css.headingOrder, className);
 
@@ -283,8 +285,7 @@ export const SaleTitle = props => {
     currentListing,
     listingTitle,
   } = props;
-  const listingLoaded = !!currentListing.id;
-  const listingLink = createListingLink(listingLoaded, listingTitle, currentListing.id);
+  const listingLink = createListingLink(currentListing, listingTitle);
 
   const classes = classNames(rootClassName || css.headingSale, className);
 
