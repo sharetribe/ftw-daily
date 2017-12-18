@@ -226,6 +226,7 @@
   "ListingCard.perNight": "per night",
   "ListingCard.unsupportedPrice": "({currency})",
   "ListingCard.unsupportedPriceTitle": "Unsupported currency ({currency})",
+  "ListingPage.bannedUserDisplayName": "Banned user",
   "ListingPage.bookingHelp": "Start by choosing your dates.",
   "ListingPage.bookingHelpClosedListing": "Sorry, this listing has been closed.",
   "ListingPage.bookingTitle": "Book {title}",

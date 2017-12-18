@@ -12,7 +12,7 @@ import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import { ensureListing, ensureUser, parseAddress } from '../../util/data';
+import { ensureListing, ensureUser, parseAddress, userDisplayName } from '../../util/data';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import {
@@ -281,8 +281,10 @@ export class ListingPageComponent extends Component {
     const currentAuthor = authorAvailable ? currentListing.author : null;
     const ensuredAuthor = ensureUser(currentAuthor);
 
-    // TODO: use helper to handle banned
-    const authorDisplayName = ensuredAuthor.attributes.profile.displayName;
+    const bannedUserDisplayName = intl.formatMessage({
+      id: 'ListingPage.bannedUserDisplayName',
+    });
+    const authorDisplayName = userDisplayName(ensuredAuthor, bannedUserDisplayName);
 
     // TODO location address is currently serialized inside address field (API will change later)
     // Content is something like { locationAddress: 'Street, Province, Country', building: 'A 42' };
