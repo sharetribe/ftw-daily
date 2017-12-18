@@ -98,7 +98,7 @@ export {
   default as StripeBankAccountTokenInputField,
 } from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';
 export { default as TabNav } from './TabNav/TabNav';
-export { default as TabNavHorizontal } from './TabNavHorizontal/TabNavHorizontal';
+export { LinkTabNavHorizontal, ButtonTabNavHorizontal } from './TabNavHorizontal/TabNavHorizontal';
 export { default as Tabs } from './Tabs/Tabs';
 export { default as TermsOfService } from './TermsOfService/TermsOfService';
 export { default as TextInputField } from './TextInputField/TextInputField';

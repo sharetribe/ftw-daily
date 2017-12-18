@@ -16,7 +16,7 @@ import {
   Page,
   NamedLink,
   NamedRedirect,
-  TabNavHorizontal,
+  LinkTabNavHorizontal,
   IconEmailSent,
   InlineTextButton,
   IconClose,
@@ -131,7 +131,7 @@ export class AuthenticationPageComponent extends Component {
 
     const formContent = (
       <div className={css.content}>
-        <TabNavHorizontal className={css.tabs} tabs={tabs} />
+        <LinkTabNavHorizontal className={css.tabs} tabs={tabs} />
         {loginOrSignupError}
         {isLogin ? (
           <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />

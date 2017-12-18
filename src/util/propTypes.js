@@ -281,6 +281,10 @@ export const areReviewsCompleted = transition => {
 // Possible amount of stars in a review
 export const REVIEW_RATINGS = [1, 2, 3, 4, 5];
 
+// Review types: review of a provider and of a customer
+export const REVIEW_TYPE_OF_PROVIDER = 'ofProvider';
+export const REVIEW_TYPE_OF_CUSTOMER = 'ofCustomer';
+
 // A review on a user
 export const review = shape({
   id: uuid.isRequired,
@@ -289,7 +293,7 @@ export const review = shape({
     content: string,
     rating: oneOf(REVIEW_RATINGS),
     state: string.isRequired,
-    type: string.isRequired,
+    type: oneOf([REVIEW_TYPE_OF_PROVIDER, REVIEW_TYPE_OF_CUSTOMER]).isRequired,
   }).isRequired,
   author: user,
   subject: user,

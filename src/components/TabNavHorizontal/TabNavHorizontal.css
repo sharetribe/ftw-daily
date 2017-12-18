@@ -22,7 +22,7 @@
   }
 }
 
-.link {
+.tabContent {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -40,7 +40,8 @@
 
   transition: var(--transitionStyleButton);
 
-  &:hover {
+  &:hover,
+  &:focus {
     text-decoration: none;
     color: var(--matterColorDark);
   }
@@ -51,7 +52,15 @@
   }
 }
 
-.selectedLink {
+.button {
+  /* Override Chrome's border-radius which is visible when
+   border is used as underline */
+  border-radius: 0;
+  /* Override Chrome's button outline */
+  outline: 0;
+}
+
+.selectedTabContent {
   border-bottom-color: var(--matterColorDark);
   color: var(--matterColorDark);
 }
@@ -63,7 +72,7 @@
 }
 
 /* Dark skin */
-.linkDarkSkin {
+.tabContentDarkSkin {
   color: var(--matterColorAnti);
 
   &:hover {
@@ -71,7 +80,7 @@
   }
 }
 
-.selectedLinkDarkSkin {
+.selectedTabContentDarkSkin {
   border-bottom-color: var(--matterColorLight);
   color: var(--matterColorLight);
 }
