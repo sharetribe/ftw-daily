@@ -40,7 +40,8 @@
 
   transition: var(--transitionStyleButton);
 
-  &:hover {
+  &:hover,
+  &:focus {
     text-decoration: none;
     color: var(--matterColorDark);
   }
