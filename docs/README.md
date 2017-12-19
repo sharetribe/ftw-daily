@@ -17,3 +17,4 @@ Documentation for specific topics can be found in the following files:
 * [Terms of Service and Privacy Policy](terms-of-service-and-privacy-policy.md)
 * [i18n](i18n.md)
 * [Colors and icons](colors-and-icons.md)
+* [Starting a new customisation project](starting-a-new-customisation-project.md)
