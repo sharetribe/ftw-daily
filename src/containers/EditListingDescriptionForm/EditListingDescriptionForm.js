@@ -8,6 +8,7 @@ import * as propTypes from '../../util/propTypes';
 import { maxLength, required } from '../../util/validators';
 import { Form, Button, TextInputField } from '../../components';
 
+import { CategorySelectFieldMaybe } from './EditListingDescriptionForm.helpers';
 import css from './EditListingDescriptionForm.css';
 
 const TITLE_MAX_LENGTH = 60;
@@ -84,6 +85,8 @@ const EditListingDescriptionFormComponent = props => {
         placeholder={descriptionPlaceholderMessage}
         validate={[required(descriptionRequiredMessage)]}
       />
+
+      <CategorySelectFieldMaybe form={form} intl={intl} />
 
       <Button
         className={css.submitButton}
