@@ -48,6 +48,8 @@ describe('ListingPage', () => {
       useInitialValues: noop,
       sendVerificationEmailInProgress: false,
       onResendVerificationEmail: noop,
+      sendEnquiryInProgress: false,
+      onSendEnquiry: noop,
     };
 
     const tree = renderShallow(<ListingPageComponent {...props} />);

@@ -220,11 +220,6 @@ export class ListingPageComponent extends Component {
       sendEnquiryError,
     } = this.props;
 
-    if (sendEnquiryError) {
-      // TODO: add to UI
-      console.error(sendEnquiryError);
-    }
-
     const listingId = new UUID(params.id);
     const currentListing = ensureListing(getListing(listingId));
     const listingSlug = params.slug || createSlug(currentListing.attributes.title || '');
@@ -566,6 +561,7 @@ export class ListingPageComponent extends Component {
                         submitButtonWrapperClassName={css.enquirySubmitButtonWrapper}
                         listingTitle={title}
                         authorDisplayName={authorDisplayName}
+                        sendEnquiryError={sendEnquiryError}
                         onSubmit={this.onSubmitEnquiry}
                         inProgress={sendEnquiryInProgress}
                       />

@@ -23,3 +23,12 @@
     margin: 22px 0 24px 0;
   }
 }
+
+.error {
+  color: var(--failColor);
+  margin-top: 0;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+  }
+}
