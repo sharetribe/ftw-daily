@@ -152,7 +152,7 @@
   }
 }
 
-.desktopAside {
+.asideDesktop {
   margin: 1px 0 0 0;
 
   @media (--viewportLarge) {
@@ -162,7 +162,7 @@
   }
 }
 
-.breakdownDesktop {
+.detailCard {
   display: none;
 
   position: sticky;
@@ -177,24 +177,25 @@
   }
 }
 
-.breakdownImageWrapper {
+.detailCardImageWrapper {
   /* Layout */
   display: block;
   width: 100%;
   position: relative;
 }
 
-.breakdownHeadings {
+.detailCardHeadings {
   display: none;
 
   @media (--viewportLarge) {
     display: block;
     margin-left: 48px;
     margin-right: 48px;
+    margin-bottom: 37px;
   }
 }
 
-.breakdownTitle {
+.detailCardTitle {
   margin-bottom: 10px;
 
   @media (--viewportLarge) {
@@ -203,7 +204,7 @@
   }
 }
 
-.breakdownSubtitle {
+.detailCardSubtitle {
   @apply --marketplaceH5FontStyles;
   color: var(--matterColorAnti);
 
@@ -298,6 +299,12 @@
   @media (--viewportLarge) {
     position: relative;
   }
+}
+
+.requestToBookButton {
+  @apply --marketplaceButtonStylesPrimary;
+
+  text-decoration: none;
 }
 
 .actionButtons {

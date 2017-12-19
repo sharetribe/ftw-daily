@@ -10,9 +10,10 @@ import { SendMessageForm } from '../../containers';
 
 // These are internal components that make this file more readable.
 import {
-  ActionButtonsMaybe,
   BreakdownMaybe,
   FeedSection,
+  OrderActionButtonMaybe,
+  SaleActionButtonsMaybe,
   TransactionPageTitle,
   TransactionPageMessage,
   displayNames,
@@ -138,8 +139,12 @@ export class TransactionPanelComponent extends Component {
     const listingDeleted = listingLoaded && currentListing.attributes.deleted;
     const customerLoaded = !!currentCustomer.id;
     const isCustomerBanned = customerLoaded && currentCustomer.attributes.banned;
-    const canShowButtons =
+    const canShowSaleButtons =
       isProvider && propTypes.txIsPreauthorized(currentTransaction) && !isCustomerBanned;
+    const isProviderLoaded = !!currentProvider.id;
+    const isProviderBanned = isProviderLoaded && currentProvider.attributes.banned;
+    const canShowBookButton =
+      isCustomer && propTypes.txIsEnquired(currentTransaction) && !isProviderBanned;
 
     const bannedUserDisplayName = intl.formatMessage({
       id: 'TransactionPanel.bannedUserDisplayName',
@@ -166,19 +171,32 @@ export class TransactionPanelComponent extends Component {
       [css.actionButtonsWithFormFocused]: this.state.sendMessageFormFocused,
     });
 
-    const actionButtons = (
-      <ActionButtonsMaybe
-        rootClassName={actionButtonClasses}
-        canShowButtons={canShowButtons}
-        transaction={currentTransaction}
-        acceptInProgress={acceptInProgress}
-        declineInProgress={declineInProgress}
-        acceptSaleError={acceptSaleError}
-        declineSaleError={declineSaleError}
-        onAcceptSale={onAcceptSale}
-        onDeclineSale={onDeclineSale}
-      />
-    );
+    const canShowActionButtons = canShowBookButton || canShowSaleButtons;
+
+    let actionButtons = null;
+    if (canShowSaleButtons) {
+      actionButtons = (
+        <SaleActionButtonsMaybe
+          rootClassName={actionButtonClasses}
+          canShowButtons={canShowSaleButtons}
+          transaction={currentTransaction}
+          acceptInProgress={acceptInProgress}
+          declineInProgress={declineInProgress}
+          acceptSaleError={acceptSaleError}
+          declineSaleError={declineSaleError}
+          onAcceptSale={onAcceptSale}
+          onDeclineSale={onDeclineSale}
+        />
+      );
+    } else if (canShowBookButton) {
+      actionButtons = (
+        <OrderActionButtonMaybe
+          rootClassName={actionButtonClasses}
+          canShowButtons={canShowBookButton}
+          listing={currentListing}
+        />
+      );
+    }
 
     const sendMessagePlaceholder = intl.formatMessage(
       { id: 'TransactionPanel.sendMessagePlaceholder' },
@@ -186,7 +204,7 @@ export class TransactionPanelComponent extends Component {
     );
 
     const sendMessageFormClasses = classNames(css.sendMessageForm, {
-      [css.sendMessageFormFixed]: !canShowButtons || this.state.sendMessageFormFocused,
+      [css.sendMessageFormFixed]: !canShowActionButtons || this.state.sendMessageFormFocused,
       [css.sendMessageFormFocusedInMobileSafari]:
         this.isMobSaf && this.state.sendMessageFormFocused,
     });
@@ -244,9 +262,6 @@ export class TransactionPanelComponent extends Component {
             />
 
             <div className={css.breakdownMobile}>
-              <h3 className={css.bookingBreakdownTitle}>
-                <FormattedMessage id="TransactionPanel.bookingBreakdownTitle" />
-              </h3>
               <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
             </div>
 
@@ -274,14 +289,14 @@ export class TransactionPanelComponent extends Component {
               onBlur={this.onSendMessageFormBlur}
               onSubmit={this.onMessageSubmit}
             />
-            {isProvider && canShowButtons ? (
+            {canShowActionButtons ? (
               <div className={css.mobileActionButtons}>{actionButtons}</div>
             ) : null}
           </div>
 
-          <div className={css.desktopAside}>
-            <div className={css.breakdownDesktop}>
-              <div className={css.breakdownImageWrapper}>
+          <div className={css.asideDesktop}>
+            <div className={css.detailCard}>
+              <div className={css.detailCardImageWrapper}>
                 <div className={css.aspectWrapper}>
                   <ResponsiveImage
                     rootClassName={css.rootForImage}
@@ -301,9 +316,9 @@ export class TransactionPanelComponent extends Component {
                 </div>
               ) : null}
               {isCustomer ? (
-                <div className={css.breakdownHeadings}>
-                  <h2 className={css.breakdownTitle}>{listingTitle}</h2>
-                  <p className={css.breakdownSubtitle}>
+                <div className={css.detailCardHeadings}>
+                  <h2 className={css.detailCardTitle}>{listingTitle}</h2>
+                  <p className={css.detailCardSubtitle}>
                     <FormattedMessage
                       id="TransactionPanel.hostedBy"
                       values={{ name: authorDisplayName }}
@@ -312,7 +327,7 @@ export class TransactionPanelComponent extends Component {
                 </div>
               ) : null}
               <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
-              {isProvider && canShowButtons ? (
+              {canShowActionButtons ? (
                 <div className={css.desktopActionButtons}>{actionButtons}</div>
               ) : null}
             </div>

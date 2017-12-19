@@ -21,6 +21,7 @@
 
     &:hover {
       border-bottom: 4px solid var(--marketplaceColor);
+      border-radius: 0;
       text-decoration: none;
     }
   }
