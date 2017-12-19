@@ -6,6 +6,7 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
 import { Form, PrimaryButton, TextInputField, IconEnquiry } from '../../components';
 import * as validators from '../../util/validators';
+import * as propTypes from '../../util/propTypes';
 
 import css from './EnquiryForm.css';
 
@@ -21,6 +22,7 @@ const EnquiryFormComponent = props => {
     intl,
     listingTitle,
     authorDisplayName,
+    sendEnquiryError,
   } = props;
 
   const messageLabel = intl.formatMessage(
@@ -38,7 +40,7 @@ const EnquiryFormComponent = props => {
   const messageRequiredMessage = intl.formatMessage({
     id: 'EnquiryForm.messageRequired',
   });
-  const messageRequired = validators.required(messageRequiredMessage);
+  const messageRequired = validators.requiredAndNonEmptyString(messageRequiredMessage);
 
   const classes = classNames(rootClassName || css.root, className);
   const submitInProgress = submitting || inProgress;
@@ -60,6 +62,11 @@ const EnquiryFormComponent = props => {
         validate={[messageRequired]}
       />
       <div className={submitButtonWrapperClassName}>
+        {sendEnquiryError ? (
+          <p className={css.error}>
+            <FormattedMessage id="EnquiryForm.sendEnquiryError" />
+          </p>
+        ) : null}
         <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
           <FormattedMessage id="EnquiryForm.submitButtonText" />
         </PrimaryButton>
@@ -73,6 +80,7 @@ EnquiryFormComponent.defaultProps = {
   className: null,
   submitButtonWrapperClassName: null,
   inProgress: false,
+  sendEnquiryError: null,
 };
 
 EnquiryFormComponent.propTypes = {
@@ -85,6 +93,7 @@ EnquiryFormComponent.propTypes = {
 
   listingTitle: string.isRequired,
   authorDisplayName: string.isRequired,
+  sendEnquiryError: propTypes.error,
 
   // from injectIntl
   intl: intlShape.isRequired,

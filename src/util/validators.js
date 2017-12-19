@@ -17,6 +17,10 @@ export const required = message => value => {
   return value ? VALID : message;
 };
 
+export const requiredAndNonEmptyString = message => value => {
+  return value && typeof value === 'string' && value.trim() ? VALID : message;
+};
+
 export const minLength = (message, minimumLength) => value => {
   return value && value.length >= minimumLength ? VALID : message;
 };

@@ -328,8 +328,10 @@ exports[`ListingPage matches snapshot 1`] = `
               >
                 <ReduxForm
                   authorDisplayName="user-1 display name"
+                  inProgress={false}
                   listingTitle="listing1 title"
                   onSubmit={[Function]}
+                  sendEnquiryError={null}
                 />
               </InjectIntl(ModalComponent)>
             </div>
