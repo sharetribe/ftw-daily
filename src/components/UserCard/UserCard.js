@@ -80,8 +80,9 @@ const UserCard = props => {
     [css.withBioMissingAbove]: !hasBio,
   });
 
-  const separator = isCurrentUser ? null : <span className={css.linkSeparator}>•</span>;
-  const contact = isCurrentUser ? null : (
+  const hideContact = !currentUser || isCurrentUser;
+  const separator = hideContact ? null : <span className={css.linkSeparator}>•</span>;
+  const contact = hideContact ? null : (
     <InlineTextButton onClick={handleContactUserClick}>
       <FormattedMessage id="UserCard.contactUser" />
     </InlineTextButton>

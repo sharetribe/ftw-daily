@@ -306,6 +306,7 @@ export class ListingPageComponent extends Component {
     const userAndListingAuthorAvailable = !!(currentUser && authorAvailable);
     const isOwnListing =
       userAndListingAuthorAvailable && currentListing.author.id.uuid === currentUser.id.uuid;
+    const showContactUser = currentUser && !isOwnListing;
 
     const currentAuthor = authorAvailable ? currentListing.author : null;
     const ensuredAuthor = ensureUser(currentAuthor);
@@ -503,15 +504,17 @@ export class ListingPageComponent extends Component {
                       <h1 className={css.title}>{title}</h1>
                       <div className={css.author}>
                         <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />
-                        <span className={css.contactWrapper}>
-                          <span className={css.separator}>•</span>
-                          <InlineTextButton
-                            className={css.contactLink}
-                            onClick={this.onContactUser}
-                          >
-                            <FormattedMessage id="ListingPage.contactUser" />
-                          </InlineTextButton>
-                        </span>
+                        {showContactUser ? (
+                          <span className={css.contactWrapper}>
+                            <span className={css.separator}>•</span>
+                            <InlineTextButton
+                              className={css.contactLink}
+                              onClick={this.onContactUser}
+                            >
+                              <FormattedMessage id="ListingPage.contactUser" />
+                            </InlineTextButton>
+                          </span>
+                        ) : null}
                       </div>
                     </div>
                   </div>

@@ -67,6 +67,7 @@ export const WithProfileImageAndBio = {
         },
       },
     },
+    currentUser: createCurrentUser('test-card-current-user'),
     onContactUser: user => console.log('concact user:', user),
   },
   group: 'users',
