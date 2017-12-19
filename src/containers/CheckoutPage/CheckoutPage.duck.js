@@ -107,7 +107,7 @@ export const speculateTransactionError = e => ({
 export const initiateOrder = (orderParams, initialMessage) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
   const bodyParams = {
-    transition: 'transition/preauthorize',
+    transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
     params: orderParams,
   };
   return sdk.transactions
