@@ -13,6 +13,7 @@ const EnquiryFormComponent = props => {
   const {
     rootClassName,
     className,
+    submitButtonWrapperClassName,
     form,
     handleSubmit,
     submitting,
@@ -40,7 +41,6 @@ const EnquiryFormComponent = props => {
   const messageRequired = validators.required(messageRequiredMessage);
 
   const classes = classNames(rootClassName || css.root, className);
-
   const submitInProgress = submitting || inProgress;
   const submitDisabled = submitInProgress;
 
@@ -59,14 +59,11 @@ const EnquiryFormComponent = props => {
         placeholder={messagePlaceholder}
         validate={[messageRequired]}
       />
-      <PrimaryButton
-        className={css.submitButton}
-        type="submit"
-        inProgress={submitInProgress}
-        disabled={submitDisabled}
-      >
-        <FormattedMessage id="EnquiryForm.submitButtonText" />
-      </PrimaryButton>
+      <div className={submitButtonWrapperClassName}>
+        <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
+          <FormattedMessage id="EnquiryForm.submitButtonText" />
+        </PrimaryButton>
+      </div>
     </Form>
   );
 };
@@ -74,6 +71,7 @@ const EnquiryFormComponent = props => {
 EnquiryFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  submitButtonWrapperClassName: null,
   inProgress: false,
 };
 
@@ -81,6 +79,7 @@ EnquiryFormComponent.propTypes = {
   ...formPropTypes,
   rootClassName: string,
   className: string,
+  submitButtonWrapperClassName: string,
 
   inProgress: bool,
 

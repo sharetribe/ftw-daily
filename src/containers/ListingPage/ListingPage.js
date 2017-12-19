@@ -12,7 +12,7 @@ import { types } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import { ensureListing, ensureUser, parseAddress } from '../../util/data';
+import { ensureListing, ensureUser, parseAddress, userDisplayName } from '../../util/data';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import {
@@ -27,6 +27,7 @@ import {
   NamedRedirect,
   Modal,
   ImageCarousel,
+  InlineTextButton,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
@@ -35,7 +36,7 @@ import {
   UserCard,
   Reviews,
 } from '../../components';
-import { BookingDatesForm, TopbarContainer } from '../../containers';
+import { BookingDatesForm, TopbarContainer, EnquiryForm } from '../../containers';
 
 import { loadData } from './ListingPage.duck';
 import EditIcon from './EditIcon';
@@ -139,9 +140,11 @@ export class ListingPageComponent extends Component {
     this.state = {
       pageClassNames: [],
       imageCarouselOpen: false,
+      enquiryModalOpen: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onContactUser = this.onContactUser.bind(this);
   }
 
   handleSubmit(values) {
@@ -173,6 +176,10 @@ export class ListingPageComponent extends Component {
         {}
       )
     );
+  }
+
+  onContactUser() {
+    this.setState({ enquiryModalOpen: true });
   }
 
   render() {
@@ -278,7 +285,11 @@ export class ListingPageComponent extends Component {
 
     const currentAuthor = authorAvailable ? currentListing.author : null;
     const ensuredAuthor = ensureUser(currentAuthor);
-    const authorDisplayName = ensuredAuthor.attributes.profile.displayName;
+
+    const bannedUserDisplayName = intl.formatMessage({
+      id: 'ListingPage.bannedUserDisplayName',
+    });
+    const authorDisplayName = userDisplayName(ensuredAuthor, bannedUserDisplayName);
 
     // TODO location address is currently serialized inside address field (API will change later)
     // Content is something like { locationAddress: 'Street, Province, Country', building: 'A 42' };
@@ -379,9 +390,9 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-    const handleContactUser = user => {
-      // TODO: this
-      console.log('contact user:', user);
+    const handleSubmitEnquiryMessage = values => {
+      const { message } = values;
+      console.log('TODO: send enquiry message:', message);
     };
 
     const reviewsError = (
@@ -473,6 +484,15 @@ export class ListingPageComponent extends Component {
                       <h1 className={css.title}>{title}</h1>
                       <div className={css.author}>
                         <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />
+                        <span className={css.contactWrapper}>
+                          <span className={css.separator}>•</span>
+                          <InlineTextButton
+                            className={css.contactLink}
+                            onClick={this.onContactUser}
+                          >
+                            <FormattedMessage id="ListingPage.contactUser" />
+                          </InlineTextButton>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -508,8 +528,23 @@ export class ListingPageComponent extends Component {
                     <UserCard
                       user={currentListing.author}
                       currentUser={currentUser}
-                      onContactUser={handleContactUser}
+                      onContactUser={this.onContactUser}
                     />
+                    <Modal
+                      id="ListingPage.enquiry"
+                      contentClassName={css.enquiryModalContent}
+                      isOpen={this.state.enquiryModalOpen}
+                      onClose={() => this.setState({ enquiryModalOpen: false })}
+                      onManageDisableScrolling={onManageDisableScrolling}
+                    >
+                      <EnquiryForm
+                        className={css.enquiryForm}
+                        submitButtonWrapperClassName={css.enquirySubmitButtonWrapper}
+                        listingTitle={title}
+                        authorDisplayName={authorDisplayName}
+                        onSubmit={handleSubmitEnquiryMessage}
+                      />
+                    </Modal>
                   </div>
                 </div>
 

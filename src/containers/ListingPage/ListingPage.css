@@ -323,6 +323,22 @@
   color: var(--matterColor);
 }
 
+.contactWrapper {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: inline;
+  }
+}
+
+.separator {
+  margin: 0 10px;
+}
+
+.contactLink {
+  @apply --marketplaceH4FontStyles;
+}
+
 .descriptionContainer {
   padding: 0 24px;
   margin-bottom: 35px;
@@ -432,6 +448,38 @@
   }
   @media (--viewportLarge) {
     margin: 53px 0 27px 0;
+  }
+}
+
+.enquiryModalContent {
+  flex-grow: 1;
+  display: flex;
+}
+
+.enquiryForm {
+  flex-grow: 1;
+  margin: 70px 0 100px 0;
+
+  @media (--viewportMedium) {
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+    margin: 0;
+  }
+}
+
+.enquirySubmitButtonWrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  background-color: var(--matterColorLight);
+
+  @media (--viewportMedium) {
+    position: static;
+    padding: 0;
+    margin-top: auto;
   }
 }
 
