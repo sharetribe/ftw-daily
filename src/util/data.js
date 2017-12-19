@@ -137,7 +137,7 @@ export const ensureBooking = booking => {
  * @param {Object} listing entity object, which is to be ensured agains null values
  */
 export const ensureListing = listing => {
-  const empty = { id: null, type: 'listing', attributes: {}, images: [] };
+  const empty = { id: null, type: 'listing', attributes: { customAttributes: {} }, images: [] };
   return { ...empty, ...listing };
 };
 

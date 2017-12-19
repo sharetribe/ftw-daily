@@ -143,6 +143,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                 "attributes": Object {
                   "address": "listing1 address",
                   "closed": false,
+                  "customAttributes": Object {},
                   "deleted": false,
                   "description": "listing1 description",
                   "geolocation": LatLng {
@@ -333,6 +334,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                 "attributes": Object {
                   "address": "listing1 address",
                   "closed": false,
+                  "customAttributes": Object {},
                   "deleted": false,
                   "description": "listing1 description",
                   "geolocation": LatLng {

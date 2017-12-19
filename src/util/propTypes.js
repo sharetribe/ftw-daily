@@ -131,6 +131,7 @@ const listingAttributes = shape({
   closed: bool.isRequired,
   deleted: value(false).isRequired,
   price: money,
+  customAttributes: object,
 });
 
 const deletedListingAttributes = shape({
