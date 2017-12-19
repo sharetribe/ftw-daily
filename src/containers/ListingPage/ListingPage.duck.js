@@ -2,6 +2,7 @@ import { types } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
+import * as propTypes from '../../util/propTypes';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
@@ -13,6 +14,10 @@ export const FETCH_REVIEWS_REQUEST = 'app/ListingPage/FETCH_REVIEWS_REQUEST';
 export const FETCH_REVIEWS_SUCCESS = 'app/ListingPage/FETCH_REVIEWS_SUCCESS';
 export const FETCH_REVIEWS_ERROR = 'app/ListingPage/FETCH_REVIEWS_ERROR';
 
+export const SEND_ENQUIRY_REQUEST = 'app/ListingPage/SEND_ENQUIRY_REQUEST';
+export const SEND_ENQUIRY_SUCCESS = 'app/ListingPage/SEND_ENQUIRY_SUCCESS';
+export const SEND_ENQUIRY_ERROR = 'app/ListingPage/SEND_ENQUIRY_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -20,6 +25,8 @@ const initialState = {
   showListingError: null,
   reviews: [],
   fetchReviewsError: null,
+  sendEnquiryInProgress: false,
+  sendEnquiryError: null,
 };
 
 const listingPageReducer = (state = initialState, action = {}) => {
@@ -29,12 +36,21 @@ const listingPageReducer = (state = initialState, action = {}) => {
       return { ...state, id: payload.id, showListingError: null };
     case SHOW_LISTING_ERROR:
       return { ...state, showListingError: payload };
+
     case FETCH_REVIEWS_REQUEST:
       return { ...state, fetchReviewsError: null };
     case FETCH_REVIEWS_SUCCESS:
       return { ...state, reviews: payload };
     case FETCH_REVIEWS_ERROR:
       return { ...state, fetchReviewsError: payload };
+
+    case SEND_ENQUIRY_REQUEST:
+      return { ...state, sendEnquiryInProgress: true, sendEnquiryError: null };
+    case SEND_ENQUIRY_SUCCESS:
+      return { ...state, sendEnquiryInProgress: false };
+    case SEND_ENQUIRY_ERROR:
+      return { ...state, sendEnquiryInProgress: false, sendEnquiryError: payload };
+
     default:
       return state;
   }
@@ -57,7 +73,15 @@ export const showListingError = e => ({
 
 export const fetchReviewsRequest = () => ({ type: FETCH_REVIEWS_REQUEST });
 export const fetchReviewsSuccess = reviews => ({ type: FETCH_REVIEWS_SUCCESS, payload: reviews });
-export const fetchReviewsError = error => ({ type: FETCH_REVIEWS_ERROR, payload: error });
+export const fetchReviewsError = error => ({
+  type: FETCH_REVIEWS_ERROR,
+  error: true,
+  payload: error,
+});
+
+export const sendEnquiryRequest = () => ({ type: SEND_ENQUIRY_REQUEST });
+export const sendEnquirySuccess = () => ({ type: SEND_ENQUIRY_SUCCESS });
+export const sendEnquiryError = e => ({ type: SEND_ENQUIRY_ERROR, error: true, payload: e });
 
 // ================ Thunks ================ //
 
@@ -85,7 +109,28 @@ export const fetchReviews = listingId => (dispatch, getState, sdk) => {
       dispatch(fetchReviewsSuccess(denormalized));
     })
     .catch(e => {
-      dispatch(fetchReviewsError(e));
+      dispatch(fetchReviewsError(storableError(e)));
+    });
+};
+
+export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => {
+  console.log('sendEnquiry:', listingId.uuid, message);
+  dispatch(sendEnquiryRequest());
+  const bodyParams = {
+    transition: propTypes.TX_TRANSITION_ENQUIRE,
+    params: { listingId },
+  };
+  return sdk.transactions
+    .initiate(bodyParams)
+    .then(response => {
+      const txId = response.data.data.id;
+      // TODO: send message to the transaction
+      dispatch(sendEnquirySuccess());
+      return txId;
+    })
+    .catch(e => {
+      dispatch(sendEnquiryError(storableError(e)));
+      throw e;
     });
 };
 

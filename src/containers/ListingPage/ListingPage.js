@@ -38,7 +38,7 @@ import {
 } from '../../components';
 import { BookingDatesForm, TopbarContainer, EnquiryForm } from '../../containers';
 
-import { loadData } from './ListingPage.duck';
+import { sendEnquiry, loadData } from './ListingPage.duck';
 import EditIcon from './EditIcon';
 import css from './ListingPage.css';
 
@@ -145,6 +145,7 @@ export class ListingPageComponent extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onContactUser = this.onContactUser.bind(this);
+    this.onSubmitEnquiry = this.onSubmitEnquiry.bind(this);
   }
 
   handleSubmit(values) {
@@ -182,6 +183,28 @@ export class ListingPageComponent extends Component {
     this.setState({ enquiryModalOpen: true });
   }
 
+  onSubmitEnquiry(values) {
+    const { history, params, onSendEnquiry } = this.props;
+    const routes = routeConfiguration();
+    const listingId = new UUID(params.id);
+    const { message = '' } = values;
+    const msg = message.trim();
+
+    onSendEnquiry(listingId, msg)
+      .then(txId => {
+        console.log('enquiry success, redirect to tx page:', txId.uuid);
+        this.setState({ enquiryModalOpen: false });
+
+        // Redirect to OrderDetailsPage
+        history.push(
+          createResourceLocatorString('OrderDetailsPage', routes, { id: txId.uuid }, {})
+        );
+      })
+      .catch(() => {
+        // Ignore, error handling in duck file
+      });
+  }
+
   render() {
     const {
       tab,
@@ -195,7 +218,15 @@ export class ListingPageComponent extends Component {
       history,
       reviews,
       fetchReviewsError,
+      sendEnquiryInProgress,
+      sendEnquiryError,
     } = this.props;
+
+    if (sendEnquiryError) {
+      // TODO: add to UI
+      console.error(sendEnquiryError);
+    }
+
     const listingId = new UUID(params.id);
     const currentListing = ensureListing(getListing(listingId));
     const listingSlug = params.slug || createSlug(currentListing.attributes.title || '');
@@ -390,11 +421,6 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-    const handleSubmitEnquiryMessage = values => {
-      const { message } = values;
-      console.log('TODO: send enquiry message:', message);
-    };
-
     const reviewsError = (
       <h2 className={css.errorText}>
         <FormattedMessage id="ListingPage.reviewsError" />
@@ -542,7 +568,8 @@ export class ListingPageComponent extends Component {
                         submitButtonWrapperClassName={css.enquirySubmitButtonWrapper}
                         listingTitle={title}
                         authorDisplayName={authorDisplayName}
-                        onSubmit={handleSubmitEnquiryMessage}
+                        onSubmit={this.onSubmitEnquiry}
+                        inProgress={sendEnquiryInProgress}
                       />
                     </Modal>
                   </div>
@@ -617,6 +644,7 @@ ListingPageComponent.defaultProps = {
   tab: 'listing',
   reviews: [],
   fetchReviewsError: null,
+  sendEnquiryError: null,
 };
 
 ListingPageComponent.propTypes = {
@@ -641,10 +669,19 @@ ListingPageComponent.propTypes = {
   useInitialValues: func.isRequired,
   reviews: arrayOf(propTypes.review),
   fetchReviewsError: propTypes.error,
+  sendEnquiryInProgress: bool.isRequired,
+  sendEnquiryError: propTypes.error,
+  onSendEnquiry: func.isRequired,
 };
 
 const mapStateToProps = state => {
-  const { showListingError, reviews, fetchReviewsError } = state.ListingPage;
+  const {
+    showListingError,
+    reviews,
+    fetchReviewsError,
+    sendEnquiryInProgress,
+    sendEnquiryError,
+  } = state.ListingPage;
   const { currentUser } = state.user;
 
   const getListing = id => {
@@ -659,6 +696,8 @@ const mapStateToProps = state => {
     showListingError,
     reviews,
     fetchReviewsError,
+    sendEnquiryInProgress,
+    sendEnquiryError,
   };
 };
 
@@ -666,6 +705,7 @@ const mapDispatchToProps = dispatch => ({
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   useInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
+  onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
 });
 
 // Note: it is important that the withRouter HOC is **outside** the
