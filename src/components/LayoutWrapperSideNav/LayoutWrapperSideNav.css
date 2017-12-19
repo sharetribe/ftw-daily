@@ -14,7 +14,7 @@
   box-shadow: var(--boxShadow);
 
   @media (--viewportLarge) {
-    padding: 113px 0 82px 15vw;
+    padding: 112px 0 82px 15vw;
     flex-direction: column;
     justify-content: flex-start;
     border: none;
