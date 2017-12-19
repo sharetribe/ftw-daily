@@ -144,6 +144,7 @@ export class ListingPageComponent extends Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onContactUser = this.onContactUser.bind(this);
   }
 
   handleSubmit(values) {
@@ -175,6 +176,10 @@ export class ListingPageComponent extends Component {
         {}
       )
     );
+  }
+
+  onContactUser() {
+    this.setState({ enquiryModalOpen: true });
   }
 
   render() {
@@ -385,9 +390,6 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-    const handleContactUser = user => {
-      this.setState({ enquiryModalOpen: true });
-    };
     const handleSubmitEnquiryMessage = values => {
       const { message } = values;
       console.log('TODO: send enquiry message:', message);
@@ -484,7 +486,10 @@ export class ListingPageComponent extends Component {
                         <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />
                         <span className={css.contactWrapper}>
                           <span className={css.separator}>•</span>
-                          <InlineTextButton className={css.contactLink} onClick={handleContactUser}>
+                          <InlineTextButton
+                            className={css.contactLink}
+                            onClick={this.onContactUser}
+                          >
                             <FormattedMessage id="ListingPage.contactUser" />
                           </InlineTextButton>
                         </span>
@@ -523,7 +528,7 @@ export class ListingPageComponent extends Component {
                     <UserCard
                       user={currentListing.author}
                       currentUser={currentUser}
-                      onContactUser={handleContactUser}
+                      onContactUser={this.onContactUser}
                     />
                     <Modal
                       id="ListingPage.enquiry"

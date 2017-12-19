@@ -458,7 +458,7 @@
 
 .enquiryForm {
   flex-grow: 1;
-  margin-top: 70px;
+  margin: 70px 0 100px 0;
 
   @media (--viewportMedium) {
     display: flex;
