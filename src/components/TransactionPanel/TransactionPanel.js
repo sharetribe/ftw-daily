@@ -172,8 +172,10 @@ export class TransactionPanelComponent extends Component {
     });
 
     const canShowActionButtons = canShowBookButton || canShowSaleButtons;
-    const actionButtons =
-      canShowActionButtons && canShowSaleButtons ? (
+
+    let actionButtons = null;
+    if (canShowSaleButtons) {
+      actionButtons = (
         <SaleActionButtonsMaybe
           rootClassName={actionButtonClasses}
           canShowButtons={canShowSaleButtons}
@@ -185,13 +187,16 @@ export class TransactionPanelComponent extends Component {
           onAcceptSale={onAcceptSale}
           onDeclineSale={onDeclineSale}
         />
-      ) : (
+      );
+    } else if (canShowBookButton) {
+      actionButtons = (
         <OrderActionButtonMaybe
           rootClassName={actionButtonClasses}
           canShowButtons={canShowBookButton}
           listing={currentListing}
         />
       );
+    }
 
     const sendMessagePlaceholder = intl.formatMessage(
       { id: 'TransactionPanel.sendMessagePlaceholder' },
