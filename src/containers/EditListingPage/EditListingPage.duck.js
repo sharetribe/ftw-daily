@@ -187,18 +187,21 @@ export const updateImageOrder = imageOrder => ({
 });
 
 export const createListingDraft = listingData => {
-  const { description, title } = listingData;
+  const { title, description, customAttributes } = listingData;
   return {
     type: CREATE_LISTING_DRAFT,
-    payload: { attributes: { title, description } },
+    payload: { attributes: { title, description, customAttributes } },
   };
 };
 
 export const updateListingDraft = listingData => {
-  const { address, description, title, geolocation, images, price } = listingData;
+  const { address, description, title, geolocation, images, price, customAttributes } = listingData;
   return {
     type: UPDATE_LISTING_DRAFT,
-    payload: { attributes: { address, description, geolocation, price, title }, images },
+    payload: {
+      attributes: { address, description, geolocation, price, title, customAttributes },
+      images,
+    },
   };
 };
 
