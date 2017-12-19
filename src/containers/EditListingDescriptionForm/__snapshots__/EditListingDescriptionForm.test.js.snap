@@ -54,6 +54,52 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
       value=""
     />
   </div>
+  <div
+    className=""
+  >
+    <label
+      htmlFor="fakeTestForm.category"
+    >
+      EditListingDescriptionForm.categoryLabel
+    </label>
+    <select
+      className=""
+      id="fakeTestForm.category"
+      name="category"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onDragStart={[Function]}
+      onDrop={[Function]}
+      onFocus={[Function]}
+      value=""
+    >
+      <option
+        value=""
+      >
+        EditListingDescriptionForm.categoryPlaceholder
+      </option>
+      <option
+        value="road"
+      >
+        EditListingDescriptionForm.categoryOption.road
+      </option>
+      <option
+        value="mountain"
+      >
+        EditListingDescriptionForm.categoryOption.mountain
+      </option>
+      <option
+        value="track"
+      >
+        EditListingDescriptionForm.categoryOption.track
+      </option>
+      <option
+        value="other"
+      >
+        EditListingDescriptionForm.categoryOption.other
+      </option>
+    </select>
+  </div>
   <button
     className=""
     disabled={true}
