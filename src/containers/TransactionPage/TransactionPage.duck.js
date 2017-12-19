@@ -8,6 +8,7 @@ import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
 
 const MESSAGES_PAGE_SIZE = 100;
+const CUSTOMER = 'customer';
 
 // ================ Action types ================ //
 
@@ -363,10 +364,14 @@ export const sendMessage = (txId, message) => (dispatch, getState, sdk) => {
 
 const REVIEW_TX_INCLUDES = ['reviews', 'reviews.author', 'reviews.subject'];
 
-// If other party (customer) has already sent a review, we need to make transition to
-// TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND
-const sendReviewAsSecond = (id, params, dispatch, sdk) => {
-  const transition = propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND;
+// If other party has already sent a review, we need to make transition to
+// TX_TRANSITION_REVIEW_BY_<CUSTOMER/PROVIDER>_SECOND
+const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
+  const transition =
+    role === CUSTOMER
+      ? propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND
+      : propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND;
+
   const include = REVIEW_TX_INCLUDES;
 
   return sdk.transactions
@@ -385,13 +390,16 @@ const sendReviewAsSecond = (id, params, dispatch, sdk) => {
     });
 };
 
-// If other party (customer) has not yet sent a review, we need to make transition to
-// TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST
+// If other party has not yet sent a review, we need to make transition to
+// TX_TRANSITION_REVIEW_BY_<CUSTOMER/PROVIDER>_FIRST
 // However, the other party might have made the review after previous data synch point.
 // So, error is likely to happen and then we must try another state transition
 // by calling sendReviewAsSecond().
-const sendReviewAsFirst = (id, params, dispatch, sdk) => {
-  const transition = propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST;
+const sendReviewAsFirst = (id, params, role, dispatch, sdk) => {
+  const transition =
+    role === CUSTOMER
+      ? propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST
+      : propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST;
   const include = REVIEW_TX_INCLUDES;
 
   return sdk.transactions
@@ -404,7 +412,7 @@ const sendReviewAsFirst = (id, params, dispatch, sdk) => {
     .catch(e => {
       // If transaction transition is invalid, lets try another endpoint.
       if (isTransactionsTransitionInvalidTransition(e)) {
-        return sendReviewAsSecond(id, params, dispatch, sdk);
+        return sendReviewAsSecond(id, params, role, dispatch, sdk);
       } else {
         dispatch(sendReviewError(storableError(e)));
 
@@ -415,16 +423,19 @@ const sendReviewAsFirst = (id, params, dispatch, sdk) => {
     });
 };
 
-export const sendReview = (tx, reviewRating, reviewContent) => (dispatch, getState, sdk) => {
+export const sendReview = (role, tx, reviewRating, reviewContent) => (dispatch, getState, sdk) => {
   const params = { reviewRating, reviewContent };
-  const txStateProviderFirst =
-    tx.attributes.lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST;
+
+  const txStateOtherPartyFirst =
+    role === CUSTOMER
+      ? tx.attributes.lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST
+      : tx.attributes.lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST;
 
   dispatch(sendReviewRequest());
 
-  return txStateProviderFirst
-    ? sendReviewAsSecond(tx.id, params, dispatch, sdk)
-    : sendReviewAsFirst(tx.id, params, dispatch, sdk);
+  return txStateOtherPartyFirst
+    ? sendReviewAsSecond(tx.id, params, role, dispatch, sdk)
+    : sendReviewAsFirst(tx.id, params, role, dispatch, sdk);
 };
 
 // loadData is a collection of async calls that need to be made
