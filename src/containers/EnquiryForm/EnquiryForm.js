@@ -38,7 +38,7 @@ const EnquiryFormComponent = props => {
   const messageRequiredMessage = intl.formatMessage({
     id: 'EnquiryForm.messageRequired',
   });
-  const messageRequired = validators.required(messageRequiredMessage);
+  const messageRequired = validators.requiredAndNonEmptyString(messageRequiredMessage);
 
   const classes = classNames(rootClassName || css.root, className);
   const submitInProgress = submitting || inProgress;

@@ -187,10 +187,9 @@ export class ListingPageComponent extends Component {
     const { history, params, onSendEnquiry } = this.props;
     const routes = routeConfiguration();
     const listingId = new UUID(params.id);
-    const { message = '' } = values;
-    const msg = message.trim();
+    const { message } = values;
 
-    onSendEnquiry(listingId, msg)
+    onSendEnquiry(listingId, message.trim())
       .then(txId => {
         this.setState({ enquiryModalOpen: false });
 
