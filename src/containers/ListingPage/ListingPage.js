@@ -192,7 +192,6 @@ export class ListingPageComponent extends Component {
 
     onSendEnquiry(listingId, msg)
       .then(txId => {
-        console.log('enquiry success, redirect to tx page:', txId.uuid);
         this.setState({ enquiryModalOpen: false });
 
         // Redirect to OrderDetailsPage

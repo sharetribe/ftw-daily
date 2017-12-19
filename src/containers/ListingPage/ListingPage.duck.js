@@ -114,7 +114,6 @@ export const fetchReviews = listingId => (dispatch, getState, sdk) => {
 };
 
 export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => {
-  console.log('sendEnquiry:', listingId.uuid, message);
   dispatch(sendEnquiryRequest());
   const bodyParams = {
     transition: propTypes.TX_TRANSITION_ENQUIRE,
@@ -123,10 +122,13 @@ export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => 
   return sdk.transactions
     .initiate(bodyParams)
     .then(response => {
-      const txId = response.data.data.id;
-      // TODO: send message to the transaction
-      dispatch(sendEnquirySuccess());
-      return txId;
+      const transactionId = response.data.data.id;
+
+      // Send the message to the created transaction
+      return sdk.messages.send({ transactionId, content: message }).then(() => {
+        dispatch(sendEnquirySuccess());
+        return transactionId;
+      });
     })
     .catch(e => {
       dispatch(sendEnquiryError(storableError(e)));
