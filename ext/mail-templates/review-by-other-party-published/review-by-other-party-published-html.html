@@ -1,0 +1,19 @@
+<html>
+  <body>
+    {{#with transaction}}
+    <h1>{{other-party.display-name}} wrote you a review. Here's what they wrote.</h1>
+
+    {{#each reviews}}
+      {{#eq recipient.id subject.id}}
+        <blockquote><i>"{{content}}"</i></blockquote>
+      {{/eq}}
+    {{/each}}
+
+    <p>The review has been published on your {{marketplace.name}} profile.</p>
+
+    <p>
+      <a href="{{marketplace.url}}/u/{{url-encode recipient.id}}">View your profile.</a>
+    </p>
+    {{/with}}
+  </body>
+</html>
