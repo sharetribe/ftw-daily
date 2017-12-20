@@ -200,6 +200,35 @@ const stripeSupportedCountries = [
   },
 ];
 
+// Custom attributes are marketplace specific listing data (e.g. listing could have a category).
+// Custom attributes can be defined through management console and code related to custom
+// attributes should be changed accordingly.
+//
+// Here's an example what custom attributes might look like for bicycle listings. This code
+// assumes that a custom attribute, called 'category', is created through management console
+// with 4 possible values: 'road', 'mountain', 'track', and 'other'.
+//
+// When listing information is queried customAttributes is returned among other attributes:
+//  {
+//    id: 1,
+//    type: 'listing',
+//    attributes: {
+//      title: 'sauna',
+//      // and description, closed, deleted, price, etc.
+//      customAttributes: {
+//        category: "mountain",
+//        // and other added custom attributes as "key: value" pairs
+//      },
+//    },
+//  }
+const customAttributes = {
+  category: {
+    select: 'single', // possible values: 'single' (only type supported atm.)
+    type: 'string',
+    values: ['road', 'mountain', 'track', 'other'],
+  },
+};
+
 // Address information is used in SEO schema for Organization (http://schema.org/PostalAddress)
 const addressCountry = 'FI';
 const addressRegion = 'Helsinki';
@@ -237,6 +266,7 @@ const config = {
   sdk: { clientId: sdkClientId, baseUrl: sdkBaseUrl },
   currency,
   currencyConfig,
+  customAttributes,
   stripe: { publishableKey: stripePublishableKey, supportedCountries: stripeSupportedCountries },
   canonicalRootURL,
   address: {

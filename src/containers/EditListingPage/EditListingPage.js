@@ -28,7 +28,7 @@ import {
 import css from './EditListingPage.css';
 
 const formatRequestData = values => {
-  const { address, description, images, geolocation, price, title } = values;
+  const { address, description, images, geolocation, price, title, customAttributes } = values;
 
   return {
     address,
@@ -37,6 +37,7 @@ const formatRequestData = values => {
     images: images.map(i => i.imageId),
     price,
     title,
+    customAttributes,
   };
 };
 

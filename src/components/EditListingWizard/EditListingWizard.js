@@ -129,15 +129,18 @@ const EditListingWizard = props => {
         submitButtonText={submitText(intl, isNew, DESCRIPTION)}
         onChange={onChange}
         onSubmit={values => {
+          const { title, description, ...rest } = values;
+          const updateValues = { title, description, customAttributes: { ...rest } };
+
           if (isNew) {
-            onUpsertListingDraft(values);
+            onUpsertListingDraft(updateValues);
             const pathParams = tabParams(LOCATION);
             // Redirect to location tab
             history.push(
               createResourceLocatorString('EditListingPage', routeConfiguration(), pathParams, {})
             );
           } else {
-            update(DESCRIPTION, values);
+            update(DESCRIPTION, updateValues);
           }
         }}
       />
@@ -272,6 +275,7 @@ EditListingWizard.propTypes = {
   listing: shape({
     attributes: shape({
       address: string,
+      customAttributes: object, // structure (key: value) can be defined in management console
       description: string,
       geolocation: object,
       pricing: object,
