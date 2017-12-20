@@ -233,7 +233,7 @@ export class ListingPageComponent extends Component {
 
     const { customAttributes } = currentListing.attributes;
     const category =
-      customAttributes && customAttributes.category ? (
+      config.customAttributes.category && customAttributes && customAttributes.category ? (
         <span>
           {customAttributes.category}
           <span className={css.separator}>•</span>
