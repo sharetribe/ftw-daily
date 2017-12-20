@@ -35,7 +35,7 @@
   padding: 24px;
 
   @media (--viewportLarge) {
-    padding: 118px 15vw 82px 82px;
+    padding: 116px 15vw 82px 82px;
     background-color: var(--matterColorLight);
     border-left-width: 1px;
     border-left-style: solid;

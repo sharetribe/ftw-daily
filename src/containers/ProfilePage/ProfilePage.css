@@ -86,8 +86,6 @@
 .bio {
   /* Preserve newlines, but collapse other whitespace */
   white-space: pre-line;
-
-  max-width: 563px;
   margin: 5px 0 24px 0;
 
   @media (--viewportMedium) {
@@ -95,6 +93,7 @@
   }
   @media (--viewportLarge) {
     margin: 0 0 56px 0;
+    max-width: 600px;
   }
 }
 
@@ -118,7 +117,8 @@
     margin-bottom: 0;
   }
   @media (--viewportLarge) {
-    margin-top: 19px;
+    margin-top: 58px;
+    margin-bottom: 8px;
   }
 }
 
@@ -158,10 +158,11 @@
     }
 
     /* Vertical space */
-    margin-top: 41px;
+    margin-top: 0;
     &:nth-of-type(1),
     &:nth-of-type(2) {
       margin-top: 20px;
+      margin-bottom: 36px;
     }
   }
 }
@@ -174,6 +175,10 @@
 
 .desktopReviews {
   margin-top: 28px;
+
+  @media (--viewportLarge) {
+    max-width: 600px;
+  }
 }
 
 .desktopReviewsTitle {

@@ -4,7 +4,7 @@
   margin: 0;
 }
 
-li {
+.reviewItem {
   margin-bottom: 32px;
 
   &:last-of-type {
