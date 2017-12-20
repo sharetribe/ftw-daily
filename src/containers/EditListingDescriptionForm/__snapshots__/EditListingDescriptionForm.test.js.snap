@@ -60,7 +60,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
     <label
       htmlFor="fakeTestForm.category"
     >
-      EditListingDescriptionForm.categoryLabel
+      FieldCustomAttributeSelect.category.label
     </label>
     <select
       className=""
@@ -76,27 +76,27 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
       <option
         value=""
       >
-        EditListingDescriptionForm.categoryPlaceholder
+        FieldCustomAttributeSelect.category.placeholder
       </option>
       <option
         value="road"
       >
-        EditListingDescriptionForm.categoryOption.road
+        FieldCustomAttributeSelect.category.option.road
       </option>
       <option
         value="mountain"
       >
-        EditListingDescriptionForm.categoryOption.mountain
+        FieldCustomAttributeSelect.category.option.mountain
       </option>
       <option
         value="track"
       >
-        EditListingDescriptionForm.categoryOption.track
+        FieldCustomAttributeSelect.category.option.track
       </option>
       <option
         value="other"
       >
-        EditListingDescriptionForm.categoryOption.other
+        FieldCustomAttributeSelect.category.option.other
       </option>
     </select>
   </div>
