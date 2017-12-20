@@ -85,6 +85,7 @@ export { default as ResponsiveImage } from './ResponsiveImage/ResponsiveImage';
 export { default as ReviewModal } from './ReviewModal/ReviewModal';
 export { default as ReviewRating } from './ReviewRating/ReviewRating';
 export { default as Reviews } from './Reviews/Reviews';
+export { default as SearchAttributes } from './SearchAttributes/SearchAttributes';
 export { default as SearchMap } from './SearchMap/SearchMap';
 export { default as SearchMapGroupLabel } from './SearchMapGroupLabel/SearchMapGroupLabel';
 export { default as SearchMapInfoCard } from './SearchMapInfoCard/SearchMapInfoCard';

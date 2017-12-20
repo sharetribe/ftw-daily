@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
@@ -19,7 +19,13 @@ import { createSlug, parse, stringify } from '../../util/urlHelpers';
 import * as propTypes from '../../util/propTypes';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { SearchMap, ModalInMobile, Page, SearchResultsPanel } from '../../components';
+import {
+  SearchMap,
+  ModalInMobile,
+  Page,
+  SearchResultsPanel,
+  SearchAttributes,
+} from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import { searchListings, searchMapListings } from './SearchPage.duck';
@@ -172,48 +178,6 @@ export class SearchPageComponent extends Component {
     const totalItems = searchParamsMatch && hasPaginationInfo ? pagination.totalItems : 0;
     const listingsAreLoaded = !searchInProgress && searchParamsMatch && hasPaginationInfo;
 
-    const searchError = (
-      <h2 className={css.error}>
-        <FormattedMessage id="SearchPage.searchError" />
-      </h2>
-    );
-
-    const resultsFoundNoAddress = (
-      <h2>
-        <FormattedMessage id="SearchPage.foundResults" values={{ count: totalItems }} />
-      </h2>
-    );
-    const addressNode = address ? (
-      <span className={css.searchString}>{searchInURL.address.split(', ')[0]}</span>
-    ) : null;
-    const resultsFoundWithAddress = (
-      <h2>
-        <FormattedMessage
-          id="SearchPage.foundResultsWithAddress"
-          values={{ count: totalItems, address: addressNode }}
-        />
-      </h2>
-    );
-    const resultsFound = address && !mapSearch ? resultsFoundWithAddress : resultsFoundNoAddress;
-
-    const resultsFoundMobile = (
-      <h2>
-        <FormattedMessage id="SearchPage.foundResultsMobile" values={{ count: totalItems }} />
-      </h2>
-    );
-
-    const noResults = (
-      <h2>
-        <FormattedMessage id="SearchPage.noResults" />
-      </h2>
-    );
-
-    const loadingResults = (
-      <h2>
-        <FormattedMessage id="SearchPage.loadingResults" />
-      </h2>
-    );
-
     const searchMap = (
       <SearchMap
         bounds={bounds}
@@ -264,6 +228,14 @@ export class SearchPageComponent extends Component {
       itemListElement: schemaListings,
     });
 
+
+    const onMapIconClick = () => {
+      this.useLocationSearchBounds = true;
+      this.modalOpenedBoundsChange = true;
+      this.setState({ isSearchMapOpenOnMobile: true });
+    };
+
+
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
     /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -283,30 +255,14 @@ export class SearchPageComponent extends Component {
         <TopbarContainer className={css.topbar} />
         <div className={css.container}>
           <div className={css.searchResultContainer}>
-            <div className={css.searchResultSummary}>
-              {searchListingsError ? searchError : null}
-              {listingsAreLoaded && totalItems > 0 ? resultsFound : null}
-              {listingsAreLoaded && totalItems === 0 ? noResults : null}
-              {searchInProgress ? loadingResults : null}
-            </div>
-            <div className={css.searchResultSummaryMobile}>
-              <div>
-                {searchListingsError ? searchError : null}
-                {listingsAreLoaded && totalItems > 0 ? resultsFoundMobile : null}
-                {listingsAreLoaded && totalItems === 0 ? noResults : null}
-                {searchInProgress ? loadingResults : null}
-              </div>
-              <div
-                className={css.mapIcon}
-                onClick={() => {
-                  this.useLocationSearchBounds = true;
-                  this.modalOpenedBoundsChange = true;
-                  this.setState({ isSearchMapOpenOnMobile: true });
-                }}
-              >
-                <FormattedMessage id="SearchPage.openMapView" className={css.mapIconText} />
-              </div>
-            </div>
+            <SearchAttributes
+              listingsAreLoaded={listingsAreLoaded}
+              resultsCount={totalItems}
+              searchInProgress={searchInProgress}
+              searchListingsError={searchListingsError}
+              onMapIconClick={onMapIconClick}
+            />
+
             <div
               className={classNames(css.listings, {
                 [css.newSearchInProgress]: !listingsAreLoaded,

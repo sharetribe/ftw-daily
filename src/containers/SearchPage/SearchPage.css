@@ -45,57 +45,6 @@
   }
 }
 
-.searchResultSummary {
-  display: none;
-
-  @media (--viewportMedium) {
-    display: block;
-    margin: 8px 24px 14px 24px;
-  }
-
-  @media (--viewportLarge) {
-    margin: 8px 36px 14px 36px;
-  }
-}
-
-.searchResultSummaryMobile {
-  display: flex;
-  justify-content: space-between;
-
-  background-color: var(--matterColorBright);
-  width: 100vw;
-  padding: 1px 24px 14px 24px;
-
-  /* sticky result summary in mobile */
-  position: sticky;
-  top: 0;
-  z-index: 9;
-
-  @media (--viewportMedium) {
-    display: none;
-  }
-}
-
-.mapIcon {
-  /* Font */
-  @apply --marketplaceTinyFontStyles;
-  font-weight: var(--fontWeightBold);
-
-  /* background map image */
-  background-image: url(./images/map_icon@2x.png);
-  background-size: cover;
-
-  border-radius: 3px;
-  width: 72px;
-  height: 35px;
-  margin-top: 23px;
-  padding: 9px 22px;
-}
-
-.error {
-  color: var(--failColor);
-}
-
 .searchString {
   /* Search string should not break on white spaces - i.e. line-break should happen before. */
   white-space: nowrap;
