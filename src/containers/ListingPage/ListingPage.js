@@ -231,6 +231,15 @@ export class ListingPageComponent extends Component {
       title = '',
     } = currentListing.attributes;
 
+    const { customAttributes } = currentListing.attributes;
+    const category =
+      config.customAttributes.category && customAttributes && customAttributes.category ? (
+        <span>
+          <FormattedMessage id={`ListingPage.category.${customAttributes.category}`} />
+          <span className={css.separator}>•</span>
+        </span>
+      ) : null;
+
     const topbar = <TopbarContainer />;
 
     const loadingTitle = intl.formatMessage({
@@ -503,6 +512,7 @@ export class ListingPageComponent extends Component {
                     <div className={css.heading}>
                       <h1 className={css.title}>{title}</h1>
                       <div className={css.author}>
+                        {category}
                         <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />
                         {showContactUser ? (
                           <span className={css.contactWrapper}>

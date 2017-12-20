@@ -81,6 +81,7 @@ export const createListing = (id, attributes = {}, includes = {}) => ({
     closed: false,
     deleted: false,
     price: new Money(5500, 'USD'),
+    customAttributes: {},
     ...attributes,
   },
   ...includes,
