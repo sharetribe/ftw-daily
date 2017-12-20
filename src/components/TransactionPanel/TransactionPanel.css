@@ -86,12 +86,17 @@
   }
 }
 
-.avatarDesktop {
+.avatarWrapperProviderDesktop {
   display: none;
 
   @media (--viewportLarge) {
-    display: flex;
+    display: block;
     margin-top: 119px;
+  }
+}
+.avatarDesktop {
+  @media (--viewportLarge) {
+    display: flex;
   }
 }
 
