@@ -13,10 +13,16 @@
 .heroContainer {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - var(--topbarHeight));
+  min-height: 300px;
+  height: 67.5vh;
+  max-height: 600px;
   padding: 0;
 
   @media (--viewportMedium) {
+    min-height: 80vh;
+  }
+
+  @media (--viewportLarge) {
     min-height: calc(100vh - var(--topbarHeightDesktop));
   }
 }
@@ -24,9 +30,13 @@
 .hero {
   flex-grow: 1;
   justify-content: flex-end;
-  padding-bottom: 98px;
+  padding-bottom: 32px;
 
   @media (--viewportMedium) {
+    padding-bottom: 83px;
+  }
+
+  @media (--viewportLarge) {
     justify-content: center;
     padding-top: 60px;
   }
@@ -36,7 +46,11 @@
   margin: 0;
 
   @media (--viewportMedium) {
-    padding: 1px 30px 0 30px;
+    padding: 1px 7.5vw 0 7.5vw;
+  }
+
+  @media (--viewportLarge) {
+    padding: 1px 0px;
   }
 }
 
@@ -63,6 +77,11 @@
   margin: var(--sectionMarginTopMobile) 24px 51px 24px;
 
   @media (--viewportMedium) {
+    max-width: 1052px;
+    margin: 60px auto 60px auto;
+  }
+
+  @media (--viewportLarge) {
     max-width: 1052px;
     margin: var(--sectionMarginTop) auto 93px auto;
   }

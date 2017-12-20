@@ -40,7 +40,11 @@
   /* Text positioning is done with paddings */
   padding: 0 24px 0 24px;
 
-  @media (min-width: 768px) {
+  @media (--viewportMedium) {
+    padding: 0 0 0 7.5vw;
+  }
+
+  @media (--viewportLarge) {
     padding: 0 0 0 15vw;
   }
 }
@@ -55,20 +59,13 @@
   @media (--viewportMedium) {
     max-width: var(--desktopTitleMaxWidth);
   }
-
-  @media (--viewportXLarge) {
-    font-size: 144px;
-    line-height: 144px;
-    max-width: 1000px;
-    margin-bottom: 60px;
-  }
 }
 
 .heroSubTitle {
   @apply --marketplaceBodyFontStyles;
 
   color: var(--matterColorLight);
-  margin: 0 0 63px 0;
+  margin: 0 0 32px 0;
 
   @apply --animationProperties;
   animation-delay: 0.65s;
@@ -76,12 +73,6 @@
   @media (--viewportMedium) {
     max-width: var(--desktopTitleMaxWidth);
     margin: 0 0 63px 0;
-  }
-
-  @media (--viewportXLarge) {
-    font-size: 24px;
-    line-height: 36px;
-    max-width: 1000px;
   }
 }
 
