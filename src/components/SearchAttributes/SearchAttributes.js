@@ -4,13 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import css from './SearchAttributes.css';
 
 const SearchAttributes = props => {
-  const { listingsAreLoaded, resultsCount, searchInProgress, searchListingsError, onMapIconClick} = props;
-
-  const searchError = (
-    <h2 className={css.error}>
-      <FormattedMessage id="SearchAttributes.searchError" />
-    </h2>
-  );
+  const { listingsAreLoaded, resultsCount, searchInProgress, onMapIconClick} = props;
 
   const loadingResults = (
     <h2>
@@ -39,7 +33,6 @@ const SearchAttributes = props => {
   return (
     <div>
       <div className={css.searchResultSummary}>
-        {searchListingsError ? searchError : null}
         {listingsAreLoaded && resultsCount > 0 ? resultsFound : null}
         {listingsAreLoaded && resultsCount === 0 ? noResults : null}
         {searchInProgress ? loadingResults : null}
@@ -47,7 +40,6 @@ const SearchAttributes = props => {
 
       <div className={css.searchResultSummaryMobile}>
         <div>
-          {searchListingsError ? searchError : null}
           {listingsAreLoaded && resultsCount > 0 ? resultsFoundMobile : null}
           {listingsAreLoaded && resultsCount === 0 ? noResults : null}
           {searchInProgress ? loadingResults : null}

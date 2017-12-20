@@ -46,7 +46,3 @@
   margin-top: 23px;
   padding: 9px 22px;
 }
-
-.error {
-  color: var(--failColor);
-}

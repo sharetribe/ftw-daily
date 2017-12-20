@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
@@ -178,6 +178,12 @@ export class SearchPageComponent extends Component {
     const totalItems = searchParamsMatch && hasPaginationInfo ? pagination.totalItems : 0;
     const listingsAreLoaded = !searchInProgress && searchParamsMatch && hasPaginationInfo;
 
+    const searchError = (
+      <h2 className={css.error}>
+        <FormattedMessage id="SearchAttributes.searchError" />
+      </h2>
+    );
+
     const searchMap = (
       <SearchMap
         bounds={bounds}
@@ -268,6 +274,8 @@ export class SearchPageComponent extends Component {
                 [css.newSearchInProgress]: !listingsAreLoaded,
               })}
             >
+              {searchListingsError ? searchError : null}
+
               <SearchResultsPanel
                 className={css.searchListingsPanel}
                 listings={listings}
