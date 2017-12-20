@@ -54,7 +54,7 @@ const ReviewsComponent = props => {
     <ul className={classes}>
       {reviews.map(r => {
         return (
-          <li key={`Review_${r.id.uuid}`}>
+          <li key={`Review_${r.id.uuid}`} className={css.reviewItem}>
             <Review review={r} intl={intl} />
           </li>
         );

@@ -2,17 +2,17 @@
 
 .root {
   margin: 0;
+}
 
-  & li {
-    margin-bottom: 32px;
+.reviewItem {
+  margin-bottom: 32px;
 
-    &:last-of-type {
-      margin-bottom: 0;
-    }
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 
-    @media (--viewportMedium) {
-      margin-bottom: 39px;
-    }
+  @media (--viewportMedium) {
+    margin-bottom: 39px;
   }
 }
 
