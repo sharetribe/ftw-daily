@@ -223,7 +223,8 @@ const stripeSupportedCountries = [
 //  }
 const customAttributes = {
   category: {
-    type: 'singleChoice', // possible values: 'singleChoice' (only type supported atm.)
+    select: 'single', // possible values: 'single' (only type supported atm.)
+    type: 'string',
     values: ['road', 'mountain', 'track', 'other'],
   },
 };

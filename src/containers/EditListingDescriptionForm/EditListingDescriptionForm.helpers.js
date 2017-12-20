@@ -10,7 +10,8 @@ export const CategorySelectFieldMaybe = props => {
 
   // Does custom attribute 'category' exists in current marketplace configuration
   const caCategory = config.customAttributes && config.customAttributes.category;
-  const isSingleChoiceCategory = caCategory && caCategory.type === 'singleChoice';
+  const isSingleChoiceCategory =
+    caCategory && caCategory.select === 'single' && caCategory.type === 'string';
 
   // If custom attribute for category doesn't exist, don't print SelectField
   if (!isSingleChoiceCategory) {
