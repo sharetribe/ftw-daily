@@ -337,6 +337,7 @@
 
 .contactLink {
   @apply --marketplaceH4FontStyles;
+  margin: 0;
 }
 
 .descriptionContainer {
