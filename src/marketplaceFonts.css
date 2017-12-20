@@ -48,20 +48,26 @@
 
   --marketplaceHeroTitleFontStyles: {
     font-weight: var(--fontWeightBold);
-    font-size: 48px;
-    line-height: 54px;
+    font-size: 42px;
+    line-height: 42px;
     letter-spacing: -1px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 25px;
-    margin-bottom: 29px;
+    margin-bottom: 20px;
 
     @media (--viewportMedium) {
-      font-size: 90px;
-      line-height: 96px;
-      letter-spacing: -2px;
+      font-size: 72px;
+      line-height: 72px;
+      letter-spacing: -1.5px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 25px;
       margin-bottom: 31px;
+    }
+
+    @media (min-width: 1441px) {
+      font-size: 90px;
+      line-height: 96px;
+      letter-spacing: -2px;
     }
   }
 
