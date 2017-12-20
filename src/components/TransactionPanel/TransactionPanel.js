@@ -240,7 +240,7 @@ export class TransactionPanelComponent extends Component {
               <AvatarMedium user={currentProvider} />
             </div>
             {isProvider ? (
-              <div className={css.avatarWrapper}>
+              <div className={css.avatarWrapperProviderDesktop}>
                 <AvatarLarge user={currentCustomer} className={css.avatarDesktop} />
               </div>
             ) : null}
