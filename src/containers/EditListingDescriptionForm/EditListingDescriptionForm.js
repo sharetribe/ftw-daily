@@ -6,9 +6,8 @@ import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { maxLength, required } from '../../util/validators';
-import { Form, Button, TextInputField } from '../../components';
+import { FieldCustomAttributeSelect, Form, Button, TextInputField } from '../../components';
 
-import { CategorySelectFieldMaybe } from './EditListingDescriptionForm.helpers';
 import css from './EditListingDescriptionForm.css';
 
 const TITLE_MAX_LENGTH = 60;
@@ -86,7 +85,7 @@ const EditListingDescriptionFormComponent = props => {
         validate={[required(descriptionRequiredMessage)]}
       />
 
-      <CategorySelectFieldMaybe form={form} intl={intl} />
+      <FieldCustomAttributeSelect id={`${form}.category`} customAttribute="category" />
 
       <Button
         className={css.submitButton}
