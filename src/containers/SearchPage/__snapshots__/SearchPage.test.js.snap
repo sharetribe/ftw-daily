@@ -20,11 +20,20 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   <withRouter(Connect(TopbarContainerComponent)) />
   <div>
     <div>
-      <SearchAttributes
+      <InjectIntl(SearchAttributesComponent)
         listingsAreLoaded={true}
+        onMapIconClick={[Function]}
         resultsCount={22}
         searchInProgress={false}
         searchListingsError={null}
+        urlQueryParams={
+          Object {
+            "address": undefined,
+            "bounds": undefined,
+            "ca_category": undefined,
+            "origin": undefined,
+          }
+        }
       />
       <div
         className=""

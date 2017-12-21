@@ -1,15 +1,130 @@
 @import '../../marketplace.css';
 
+.root {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+}
+
+.menu {
+  display: inline-block;
+  padding-right: 8px;
+
+  &:last-of-type {
+    padding-right: 0;
+  }
+}
+
+.menuLabel {
+  @apply --marketplaceButtonStylesSecondary;
+  @apply --marketplaceSearchFilterLabelFontStyles;
+
+  padding: 0 16px 2px 16px;
+  width: auto;
+  min-height: 0;
+  border-radius: 4px;
+
+  &:focus {
+    outline: none;
+    background-color: var(--matterColorLight);
+    border-color: transparent;
+    text-decoration: none;
+    box-shadow: var(--boxShadowFilterButton);
+  }
+}
+
+.menuLabelSelected {
+  @apply --marketplaceButtonStyles;
+  @apply --marketplaceSearchFilterLabelFontStyles;
+  font-weight: var(--fontWeightSemiBold);
+
+  padding: 0 16px 2px 16px;
+  width: auto;
+  min-height: 0;
+  border-radius: 4px;
+}
+
+.menuContent {
+  margin-top: 8px;
+  padding-top: 15px;
+  min-width: 300px;
+  border-radius: 4px;
+}
+
+/* left animated "border" like hover element */
+.menuItemBorder {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  height: calc(100% - 4px);
+  width: 0;
+  background-color: var(--marketplaceColor);
+  transition: width var(--transitionStyleButton);
+}
+
+/* left static border for selected element */
+.menuItemBorderSelected {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  height: calc(100% - 4px);
+  width: 6px;
+  background-color: var(--matterColorDark);
+}
+
+.menuItem {
+  @apply --marketplaceSearchFilterOptionFontStyles;
+
+  /* Layout */
+  position: relative;
+  display: block;
+
+  /* Dimensions */
+  min-width: 300px;
+  margin: 0;
+  padding: 4px 30px;
+
+  color: var(--matterColor);
+
+  &:hover {
+    color: var(--matterColorDark);
+    text-decoration: none;
+  }
+
+  &:hover .menuItemBorder {
+    width: 6px;
+  }
+}
+
+.clearMenuItem {
+  @apply --marketplaceH5FontStyles;
+  font-weight: var(--fontWeightMedium);
+  color: var(--matterColorAnti);
+
+  /* Layout */
+  position: relative;
+  display: block;
+
+  /* Dimensions */
+  min-width: 300px;
+  margin: 0;
+  padding: 35px 30px 19px 30px;
+
+  &:hover {
+    color: var(--matterColor);
+    text-decoration: none;
+  }
+}
+
 .searchResultSummary {
+  @apply --marketplaceH4FontStyles;
+  line-height: 20px;
+  margin-top: 10px;
+
   display: none;
 
   @media (--viewportMedium) {
     display: block;
-    margin: 8px 24px 14px 24px;
-  }
-
-  @media (--viewportLarge) {
-    margin: 8px 36px 14px 36px;
   }
 }
 

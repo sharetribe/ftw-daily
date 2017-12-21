@@ -42,8 +42,8 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
 const BOUNDS_FIXED_PRECISION = 8;
 
 const pickSearchParamsOnly = params => {
-  const { address, origin, bounds } = params || {};
-  return { address, origin, bounds };
+  const { address, origin, bounds, ca_category } = params || {};
+  return { address, origin, bounds, ca_category };
 };
 
 export class SearchPageComponent extends Component {
@@ -167,10 +167,12 @@ export class SearchPageComponent extends Component {
       latlngBounds: ['bounds'],
     });
 
+    const urlQueryParams = pickSearchParamsOnly(searchInURL);
+
     // Page transition might initially use values from previous search
-    const searchParamsInURL = stringify(pickSearchParamsOnly(searchInURL));
-    const searchParamsInProps = stringify(pickSearchParamsOnly(searchParams));
-    const searchParamsMatch = searchParamsInURL === searchParamsInProps;
+    const urlQueryString = stringify(urlQueryParams);
+    const paramsQueryString = stringify(pickSearchParamsOnly(searchParams));
+    const searchParamsMatch = urlQueryString === paramsQueryString;
 
     const { address, bounds, origin } = searchInURL || {};
 
@@ -234,13 +236,11 @@ export class SearchPageComponent extends Component {
       itemListElement: schemaListings,
     });
 
-
     const onMapIconClick = () => {
       this.useLocationSearchBounds = true;
       this.modalOpenedBoundsChange = true;
       this.setState({ isSearchMapOpenOnMobile: true });
     };
-
 
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
@@ -262,6 +262,8 @@ export class SearchPageComponent extends Component {
         <div className={css.container}>
           <div className={css.searchResultContainer}>
             <SearchAttributes
+              className={css.searchAttributes}
+              urlQueryParams={urlQueryParams}
               listingsAreLoaded={listingsAreLoaded}
               resultsCount={totalItems}
               searchInProgress={searchInProgress}
