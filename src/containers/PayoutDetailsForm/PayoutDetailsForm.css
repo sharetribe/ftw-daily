@@ -20,7 +20,9 @@
 
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 17px;
+    margin-bottom: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 }
 

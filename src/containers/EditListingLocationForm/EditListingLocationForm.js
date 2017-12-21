@@ -57,6 +57,7 @@ export const EditListingLocationFormComponent = props => {
     <Form className={classes} onSubmit={handleSubmit}>
       {errorMessage}
       <LocationAutocompleteInputField
+        className={css.locationAddress}
         inputClassName={css.locationAutocompleteInput}
         iconClassName={css.locationAutocompleteInputIcon}
         predictionsClassName={css.predictionsRoot}

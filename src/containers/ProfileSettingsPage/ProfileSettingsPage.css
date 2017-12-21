@@ -9,7 +9,7 @@
 
   @media (--viewportMedium) {
     max-width: 565px;
-    margin: 56px auto;
+    margin: 55px auto 56px auto;
   }
 }
 

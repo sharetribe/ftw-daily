@@ -65,6 +65,7 @@ const EditListingDescriptionFormComponent = props => {
     <Form className={classes} onSubmit={handleSubmit}>
       {errorMessage}
       <TextInputField
+        className={css.title}
         type="text"
         name="title"
         id={`${form}.title`}
@@ -85,7 +86,11 @@ const EditListingDescriptionFormComponent = props => {
         validate={[required(descriptionRequiredMessage)]}
       />
 
-      <FieldCustomAttributeSelect id={`${form}.category`} customAttribute="category" />
+      <FieldCustomAttributeSelect
+        className={css.category}
+        id={`${form}.category`}
+        customAttribute="category"
+      />
 
       <Button
         className={css.submitButton}

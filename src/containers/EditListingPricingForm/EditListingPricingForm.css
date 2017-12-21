@@ -1,12 +1,17 @@
 @import '../../marketplace.css';
 
 .root {
+  /* Dimensions */
   width: 100%;
   height: auto;
   display: flex;
   flex: 1;
   flex-direction: column;
   flex-grow: 1;
+
+  @media (--viewportMedium) {
+    padding-top: 2px;
+  }
 }
 
 .error {

@@ -30,6 +30,7 @@
 
   @media (--viewportMedium) {
     margin-bottom: 56px;
+    padding-top: 0;
   }
 }
 
@@ -40,10 +41,6 @@
   margin-bottom: 60px;
   padding: 0;
   opacity: 0;
-
-  @media (--viewportLarge) {
-    padding: 4px 0 0 0;
-  }
 }
 
 .confirmChangesSectionVisible {
@@ -106,12 +103,9 @@
 
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 14px;
-  }
-
-  @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 }
 
@@ -120,7 +114,7 @@
   margin-bottom: 37px;
 
   @media (--viewportMedium) {
-    margin-bottom: 46px;
+    margin-bottom: 48px;
   }
 }
 
