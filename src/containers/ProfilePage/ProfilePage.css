@@ -104,7 +104,7 @@
   padding-bottom: 23px;
 
   @media (--viewportMedium) {
-    padding-bottom: 58px;
+    padding-bottom: 22px;
   }
 }
 
@@ -148,6 +148,7 @@
   @media (--viewportMedium) {
     /* Two columns in desktop */
     width: calc(50% - 12px);
+    margin-bottom: 36px;
 
     /* Horizontal space */
     &:nth-of-type(odd) {
@@ -162,7 +163,6 @@
     &:nth-of-type(1),
     &:nth-of-type(2) {
       margin-top: 20px;
-      margin-bottom: 36px;
     }
   }
 }
