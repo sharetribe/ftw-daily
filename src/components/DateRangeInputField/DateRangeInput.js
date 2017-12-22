@@ -95,7 +95,7 @@ const defaultProps = {
   // Internationalization props
   // Multilocale support can be achieved with displayFormat like moment.localeData.longDateFormat('L')
   // https://momentjs.com/
-  displayFormat: 'ddd, MMMM D',
+  displayFormat: 'ddd, MMM D',
   monthFormat: 'MMMM YYYY',
   weekDayFormat: 'dd',
   phrases: {

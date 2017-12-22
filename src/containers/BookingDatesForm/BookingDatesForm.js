@@ -175,7 +175,7 @@ export class BookingDatesFormComponent extends Component {
 
     const dateFormatOptions = {
       weekday: 'short',
-      month: 'long',
+      month: 'short',
       day: 'numeric',
     };
 
