@@ -83,6 +83,8 @@ label {
     font-weight: var(--fontWeightSemiBold);
     margin-top: 0;
     margin-bottom: 0;
+    padding-top: 6px;
+    padding-bottom: 2px;
   }
 }
 
@@ -107,6 +109,10 @@ textarea {
 
   &::placeholder {
     padding: 0 0 10px 0;
+  }
+
+  @media (--viewportMedium) {
+    padding: 4px 0 10px 0;
   }
 }
 

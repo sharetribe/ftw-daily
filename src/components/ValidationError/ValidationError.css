@@ -3,6 +3,12 @@
 .root {
   @apply --marketplaceH4FontStyles;
   margin-top: 6px;
+  margin-bottom: 12px;
   color: var(--failColor);
   overflow: hidden;
+
+  @media (--viewportMedium) {
+    margin-top: 6px;
+    margin-bottom: 10px;
+  }
 }

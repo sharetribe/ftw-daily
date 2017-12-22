@@ -1,11 +1,27 @@
 @import '../../marketplace.css';
 
+:root {
+  --formMargins: {
+    margin-bottom: 24px;
+
+    @media (--viewportMedium) {
+      margin-bottom: 32px;
+    }
+  }
+}
 .root {
+  /* Dimensions */
   width: 100%;
   height: auto;
+
+  /* Display format */
   display: flex;
   flex: 1;
   flex-direction: column;
+
+  @media (--viewportMedium) {
+    padding-top: 2px;
+  }
 }
 
 .error {
@@ -21,6 +37,10 @@
   &:focus {
     border-bottom-color: var(--matterColorDark);
     outline: none;
+  }
+
+  @media (--viewportMedium) {
+    height: 40px;
   }
 }
 
@@ -39,18 +59,23 @@
   border-bottom-right-radius: var(--borderRadius);
   box-shadow: var(--boxShadowPopup);
   z-index: var(--zIndexPopup + 1);
+
+  @media (--viewportMedium) {
+    top: 40px;
+  }
 }
 
 .validLocation {
   border-bottom-color: var(--successColor);
 }
 
+.locationAddress,
 .building {
   flex-shrink: 0;
-  margin-top: 24px;
+  margin-bottom: 24px;
 
   @media (--viewportMedium) {
-    margin-top: 28px;
+    margin-bottom: 32px;
   }
 }
 

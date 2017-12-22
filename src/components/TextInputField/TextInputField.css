@@ -16,8 +16,4 @@
 }
 
 .textarea {
-  @media (--viewportMedium) {
-    /* Fix baseline alignment */
-    padding-top: 6px;
-  }
 }

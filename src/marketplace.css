@@ -266,7 +266,7 @@
     }
 
     @media (--viewportMedium) {
-      padding: 6px 0 10px 0;
+      padding: 4px 0 10px 0;
     }
   }
 
@@ -301,6 +301,10 @@
     &:focus {
       border-bottom-color: var(--matterColor);
       outline: none;
+    }
+
+    @media (--viewportMedium) {
+      padding: 4px 0 10px 0;
     }
   }
 
@@ -538,7 +542,7 @@
     margin-top: 24px;
 
     @media (--viewportMedium) {
-      margin-top: 30px;
+      margin-top: 32px;
     }
   }
 }
