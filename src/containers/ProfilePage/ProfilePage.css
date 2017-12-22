@@ -114,7 +114,8 @@
   margin-bottom: 0;
 
   @media (--viewportMedium) {
-    margin-bottom: 0;
+	  margin-top: 48px;
+    margin-bottom: 8px;
   }
   @media (--viewportLarge) {
     margin-top: 58px;
@@ -173,11 +174,20 @@
   margin: 24px 0 26px 0;
 }
 
+.mobileReviews {
+	margin-bottom: 36px;
+}
+
 .desktopReviews {
   margin-top: 28px;
 
+  @media (--viewportMedium) {
+		margin-bottom: 48px;
+  }
+
   @media (--viewportLarge) {
     max-width: 600px;
+    margin-bottom: 0;
   }
 }
 

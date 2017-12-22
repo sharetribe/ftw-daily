@@ -34,10 +34,9 @@
 .desktopBio {
   /* Preserve newlines, but collapse other whitespace */
   white-space: pre-line;
-
   margin: 18px 0 0 0;
-
   transition: all 1s ease-in;
+  @apply --marketplaceH4FontStyles;
 
   @media (--viewportMedium) {
     margin: 18px 0 0 0;
@@ -60,9 +59,11 @@
 
 .showMore {
   margin-left: 5px;
+   @apply --marketplaceH4FontStyles;
 }
 
 .links {
+	 @apply --marketplaceH4FontStyles;
 }
 
 .withBioMissingAbove {

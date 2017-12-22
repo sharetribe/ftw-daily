@@ -10,6 +10,10 @@
   background-color: var(--matterColorBright);
 
   @media (--viewportMedium) {
+    padding: 0 30px 33px 30px;
+  }
+
+	@media (--viewportLarge) {
     padding: 0 30px 81px 30px;
     border-top: none;
   }
@@ -19,6 +23,10 @@
  * view from the outermost paddings*/
 .topBorderWrapper {
   @media (--viewportMedium) {
+    padding-top: 41px;
+  }
+
+  @media (--viewportLarge) {
     padding-top: 73px;
 
     border-top-style: solid;
@@ -62,7 +70,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 60px;
+  margin-bottom: 42px;
 
   @media (--viewportMedium) {
     margin-bottom: 0;
