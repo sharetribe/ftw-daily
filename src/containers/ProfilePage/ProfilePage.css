@@ -114,7 +114,7 @@
   margin-bottom: 0;
 
   @media (--viewportMedium) {
-	  margin-top: 48px;
+    margin-top: 48px;
     margin-bottom: 8px;
   }
   @media (--viewportLarge) {
@@ -175,14 +175,14 @@
 }
 
 .mobileReviews {
-	margin-bottom: 36px;
+  margin-bottom: 36px;
 }
 
 .desktopReviews {
   margin-top: 28px;
 
   @media (--viewportMedium) {
-		margin-bottom: 48px;
+    margin-bottom: 48px;
   }
 
   @media (--viewportLarge) {

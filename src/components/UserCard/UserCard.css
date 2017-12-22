@@ -59,11 +59,11 @@
 
 .showMore {
   margin-left: 5px;
-   @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH4FontStyles;
 }
 
 .links {
-	 @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH4FontStyles;
 }
 
 .withBioMissingAbove {

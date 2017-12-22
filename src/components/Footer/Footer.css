@@ -13,7 +13,7 @@
     padding: 0 30px 33px 30px;
   }
 
-	@media (--viewportLarge) {
+  @media (--viewportLarge) {
     padding: 0 30px 81px 30px;
     border-top: none;
   }

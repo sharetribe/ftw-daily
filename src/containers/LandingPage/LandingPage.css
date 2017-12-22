@@ -20,14 +20,14 @@
   padding: 0;
 
   @media (--viewportMedium) {
-	  min-height: 500px;
-	  height: 80vh;
-	  max-height: none;
+    min-height: 500px;
+    height: 80vh;
+    max-height: none;
   }
 
   @media (--viewportLarge) {
-	  min-height: 600px;
-	  height: calc(100vh - var(--topbarHeightDesktop));
+    min-height: 600px;
+    height: calc(100vh - var(--topbarHeightDesktop));
   }
 }
 
