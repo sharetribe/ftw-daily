@@ -383,10 +383,6 @@ export const apiError = shape({
   status: number.isRequired,
   code: oneOf(ERROR_CODES).isRequired,
   title: string.isRequired,
-  details: shape({
-    data: object,
-    msg: string,
-  }),
 });
 
 // Storable error prop type. (Error object should not be stored as it is.)
