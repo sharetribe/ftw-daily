@@ -44,7 +44,7 @@ exports[`ListingCard matches snapshot 1`] = `
       </div>
       <div>
         <FormattedMessage
-          id="ListingCard.perNight"
+          id="ListingCard.perUnit"
           values={Object {}}
         />
       </div>

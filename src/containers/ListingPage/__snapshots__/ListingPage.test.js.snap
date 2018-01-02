@@ -174,7 +174,7 @@ exports[`ListingPage matches snapshot 1`] = `
                 </div>
                 <div>
                   <FormattedMessage
-                    id="ListingPage.perNight"
+                    id="ListingPage.perUnit"
                     values={Object {}}
                   />
                 </div>
@@ -398,7 +398,7 @@ exports[`ListingPage matches snapshot 1`] = `
               </div>
               <div>
                 <FormattedMessage
-                  id="ListingPage.perNight"
+                  id="ListingPage.perUnit"
                   values={Object {}}
                 />
               </div>

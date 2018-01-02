@@ -270,7 +270,7 @@
   }
 }
 
-.desktopPerNight {
+.desktopPerUnit {
   /* Font */
   @apply --marketplaceH5FontStyles;
   color: var(--matterColor);
@@ -565,7 +565,7 @@
   }
 }
 
-.perNight {
+.perUnit {
   /* Font */
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColor);

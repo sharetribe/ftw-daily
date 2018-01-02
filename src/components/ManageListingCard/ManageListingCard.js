@@ -219,8 +219,8 @@ export const ManageListingCardComponent = props => {
           <div className={css.priceValue} title={priceTitle}>
             {formattedPrice}
           </div>
-          <div className={css.perNight}>
-            <FormattedMessage id="ManageListingCard.perNight" />
+          <div className={css.perUnit}>
+            <FormattedMessage id="ManageListingCard.perUnit" />
           </div>
         </div>
         <div className={css.mainInfo}>

@@ -25,7 +25,7 @@ export const EditListingPricingFormComponent = props => {
     updateInProgress,
   } = props;
 
-  const pricePerNightMessage = intl.formatMessage({ id: 'EditListingPricingForm.pricePerNight' });
+  const pricePerUnitMessage = intl.formatMessage({ id: 'EditListingPricingForm.pricePerUnit' });
   const priceRequiredMessage = intl.formatMessage({ id: 'EditListingPricingForm.priceRequired' });
   const pricePlaceholderMessage = intl.formatMessage({
     id: 'EditListingPricingForm.priceInputPlaceholder',
@@ -50,7 +50,7 @@ export const EditListingPricingFormComponent = props => {
         className={css.priceInput}
         autoFocus
         name="price"
-        label={pricePerNightMessage}
+        label={pricePerUnitMessage}
         placeholder={pricePlaceholderMessage}
         currencyConfig={config.currencyConfig}
         validate={[required(priceRequiredMessage)]}
