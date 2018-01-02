@@ -24,24 +24,14 @@ const isValidCommission = commissionLineItem => {
   );
 };
 
-const BreakdownItems = props => {
-  const { transaction, booking, isProvider, intl } = props;
-
+const UnitPriceItem = props => {
+  const { transaction, intl } = props;
   const nightPurchase = transaction.attributes.lineItems.find(
     item => item.code === 'line-item/night' && !item.reversal
   );
-  const providerCommissionLineItem = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/provider-commission' && !item.reversal
-  );
-  const refund = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/night' && item.reversal
-  );
-  const commissionRefund = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/provider-commission' && item.reversal
-  );
-
   const formattedUnitPrice = formatMoney(intl, nightPurchase.unitPrice);
-  const unitPriceItem = (
+
+  return (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
         <FormattedMessage id="BookingBreakdown.pricePerNight" />
@@ -49,6 +39,15 @@ const BreakdownItems = props => {
       <span className={css.itemValue}>{formattedUnitPrice}</span>
     </div>
   );
+};
+
+UnitPriceItem.propTypes = {
+  transaction: propTypes.transaction.isRequired,
+  intl: intlShape.isRequired,
+};
+
+const UnitsItem = props => {
+  const { transaction, booking, intl } = props;
 
   const dateFormatOptions = {
     weekday: 'short',
@@ -72,36 +71,45 @@ const BreakdownItems = props => {
       }}
     />
   );
-
+  const nightPurchase = transaction.attributes.lineItems.find(
+    item => item.code === 'line-item/night' && !item.reversal
+  );
   const nightCount = nightPurchase.quantity.toFixed();
   const nightCountMessage = (
     <FormattedHTMLMessage id="BookingBreakdown.nightCount" values={{ count: nightCount }} />
   );
-  const unitsItem = (
+
+  return (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>{bookingPeriod}</span>
       <span className={css.itemValue}>{nightCountMessage}</span>
     </div>
   );
+};
 
-  const refundItem = refund ? (
-    <div className={css.lineItem}>
-      <span className={css.itemLabel}>
-        <FormattedMessage id="BookingBreakdown.refund" />
-      </span>
-      <span className={css.itemValue}>{formatMoney(intl, refund.lineTotal)}</span>
-    </div>
-  ) : null;
+UnitsItem.propTypes = {
+  transaction: propTypes.transaction.isRequired,
+  booking: propTypes.booking.isRequired,
+  intl: intlShape.isRequired,
+};
 
-  // If commission is passed it will be shown as a fee already reduces from the total price
-  let commissionItem = null;
+const SubTotalItemMaybe = props => {
+  const { transaction, isProvider, intl } = props;
+
+  const refund = transaction.attributes.lineItems.find(
+    item => item.code === 'line-item/night' && item.reversal
+  );
 
   // Show night purchase line total (unit price * quantity) as a subtotal.
   // PLEASE NOTE that this assumes that the transaction doesn't have other
   // line item types than nights (e.g. week, month, year).
   const showSubTotal = isProvider || refund;
+  const nightPurchase = transaction.attributes.lineItems.find(
+    item => item.code === 'line-item/night' && !item.reversal
+  );
   const formattedSubTotal = formatMoney(intl, nightPurchase.lineTotal);
-  const subTotalItem = showSubTotal ? (
+
+  return showSubTotal ? (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
         <FormattedMessage id="BookingBreakdown.subTotal" />
@@ -109,6 +117,26 @@ const BreakdownItems = props => {
       <span className={css.itemValue}>{formattedSubTotal}</span>
     </div>
   ) : null;
+};
+
+SubTotalItemMaybe.propTypes = {
+  transaction: propTypes.transaction.isRequired,
+  isProvider: bool.isRequired,
+  intl: intlShape.isRequired,
+};
+
+const CommissionItemMaybe = props => {
+  const { transaction, isProvider, intl } = props;
+
+  const providerCommissionLineItem = transaction.attributes.lineItems.find(
+    item => item.code === 'line-item/provider-commission' && !item.reversal
+  );
+  const commissionRefund = transaction.attributes.lineItems.find(
+    item => item.code === 'line-item/provider-commission' && item.reversal
+  );
+
+  // If commission is passed it will be shown as a fee already reduces from the total price
+  let commissionItem = null;
 
   if (isProvider) {
     if (!isValidCommission(providerCommissionLineItem)) {
@@ -129,21 +157,35 @@ const BreakdownItems = props => {
       </div>
     );
   }
-  return (
-    <div>
-      {unitPriceItem}
-      {unitsItem}
-      {subTotalItem}
-      {commissionItem}
-      {refundItem}
-    </div>
-  );
+
+  return commissionItem;
 };
 
-BreakdownItems.propTypes = {
+CommissionItemMaybe.propTypes = {
   transaction: propTypes.transaction.isRequired,
-  booking: propTypes.booking.isRequired,
   isProvider: bool.isRequired,
+  intl: intlShape.isRequired,
+};
+
+const RefundItemMaybe = props => {
+  const { transaction, intl } = props;
+
+  const refund = transaction.attributes.lineItems.find(
+    item => item.code === 'line-item/night' && item.reversal
+  );
+
+  return refund ? (
+    <div className={css.lineItem}>
+      <span className={css.itemLabel}>
+        <FormattedMessage id="BookingBreakdown.refund" />
+      </span>
+      <span className={css.itemValue}>{formatMoney(intl, refund.lineTotal)}</span>
+    </div>
+  ) : null;
+};
+
+RefundItemMaybe.propTypes = {
+  transaction: propTypes.transaction.isRequired,
   intl: intlShape.isRequired,
 };
 
@@ -175,12 +217,11 @@ export const BookingBreakdownComponent = props => {
 
   return (
     <div className={classes}>
-      <BreakdownItems
-        transaction={transaction}
-        booking={booking}
-        isProvider={isProvider}
-        intl={intl}
-      />
+      <UnitPriceItem transaction={transaction} intl={intl} />
+      <UnitsItem transaction={transaction} booking={booking} intl={intl} />
+      <SubTotalItemMaybe transaction={transaction} isProvider={isProvider} intl={intl} />
+      <CommissionItemMaybe transaction={transaction} isProvider={isProvider} intl={intl} />
+      <RefundItemMaybe transaction={transaction} intl={intl} />
       <hr className={css.totalDivider} />
       <div className={css.lineItem}>
         <div className={css.totalLabel}>{totalLabel}</div>
