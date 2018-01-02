@@ -98,6 +98,10 @@ exports[`InboxPage matches snapshot 1`] = `
                   "lineItems": Array [
                     Object {
                       "code": "line-item/night",
+                      "includeFor": Array [
+                        "customer",
+                        "provider",
+                      ],
                       "lineTotal": Money {
                         "amount": 1000,
                         "currency": "USD",
@@ -111,6 +115,9 @@ exports[`InboxPage matches snapshot 1`] = `
                     },
                     Object {
                       "code": "line-item/provider-commission",
+                      "includeFor": Array [
+                        "provider",
+                      ],
                       "lineTotal": Money {
                         "amount": -100,
                         "currency": "USD",
@@ -213,6 +220,10 @@ exports[`InboxPage matches snapshot 1`] = `
                   "lineItems": Array [
                     Object {
                       "code": "line-item/night",
+                      "includeFor": Array [
+                        "customer",
+                        "provider",
+                      ],
                       "lineTotal": Money {
                         "amount": 1000,
                         "currency": "USD",
@@ -226,6 +237,9 @@ exports[`InboxPage matches snapshot 1`] = `
                     },
                     Object {
                       "code": "line-item/provider-commission",
+                      "includeFor": Array [
+                        "provider",
+                      ],
                       "lineTotal": Money {
                         "amount": -100,
                         "currency": "USD",
@@ -486,6 +500,10 @@ exports[`InboxPage matches snapshot 3`] = `
                   "lineItems": Array [
                     Object {
                       "code": "line-item/night",
+                      "includeFor": Array [
+                        "customer",
+                        "provider",
+                      ],
                       "lineTotal": Money {
                         "amount": 1000,
                         "currency": "USD",
@@ -499,6 +517,9 @@ exports[`InboxPage matches snapshot 3`] = `
                     },
                     Object {
                       "code": "line-item/provider-commission",
+                      "includeFor": Array [
+                        "provider",
+                      ],
                       "lineTotal": Money {
                         "amount": -100,
                         "currency": "USD",
@@ -601,6 +622,10 @@ exports[`InboxPage matches snapshot 3`] = `
                   "lineItems": Array [
                     Object {
                       "code": "line-item/night",
+                      "includeFor": Array [
+                        "customer",
+                        "provider",
+                      ],
                       "lineTotal": Money {
                         "amount": 1000,
                         "currency": "USD",
@@ -614,6 +639,9 @@ exports[`InboxPage matches snapshot 3`] = `
                     },
                     Object {
                       "code": "line-item/provider-commission",
+                      "includeFor": Array [
+                        "provider",
+                      ],
                       "lineTotal": Money {
                         "amount": -100,
                         "currency": "USD",

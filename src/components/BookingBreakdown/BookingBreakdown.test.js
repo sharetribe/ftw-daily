@@ -42,6 +42,7 @@ describe('BookingBreakdown', () => {
           lineItems: [
             {
               code: 'line-item/night',
+              includeFor: ['customer', 'provider'],
               quantity: new Decimal(2),
               lineTotal: new Money(2000, 'USD'),
               unitPrice: new Money(1000, 'USD'),
@@ -69,6 +70,7 @@ describe('BookingBreakdown', () => {
           lineItems: [
             {
               code: 'line-item/night',
+              includeFor: ['customer', 'provider'],
               quantity: new Decimal(2),
               lineTotal: new Money(2000, 'USD'),
               unitPrice: new Money(1000, 'USD'),
@@ -96,6 +98,7 @@ describe('BookingBreakdown', () => {
           lineItems: [
             {
               code: 'line-item/night',
+              includeFor: ['customer', 'provider'],
               quantity: new Decimal(2),
               lineTotal: new Money(2000, 'USD'),
               unitPrice: new Money(1000, 'USD'),
@@ -103,6 +106,7 @@ describe('BookingBreakdown', () => {
             },
             {
               code: 'line-item/provider-commission',
+              includeFor: ['provider'],
               lineTotal: new Money(-200, 'USD'),
               unitPrice: new Money(-200, 'USD'),
               reversal: false,
@@ -129,6 +133,7 @@ describe('BookingBreakdown', () => {
           lineItems: [
             {
               code: 'line-item/night',
+              includeFor: ['customer', 'provider'],
               quantity: new Decimal(2),
               lineTotal: new Money(2000, 'USD'),
               unitPrice: new Money(1000, 'USD'),
@@ -136,6 +141,7 @@ describe('BookingBreakdown', () => {
             },
             {
               code: 'line-item/night',
+              includeFor: ['customer', 'provider'],
               quantity: new Decimal(-2),
               lineTotal: new Money(-2000, 'USD'),
               unitPrice: new Money(1000, 'USD'),
@@ -143,6 +149,7 @@ describe('BookingBreakdown', () => {
             },
             {
               code: 'line-item/provider-commission',
+              includeFor: ['provider'],
               quantity: new Decimal(1),
               lineTotal: new Money(-200, 'USD'),
               unitPrice: new Money(-200, 'USD'),
@@ -150,6 +157,7 @@ describe('BookingBreakdown', () => {
             },
             {
               code: 'line-item/provider-commission',
+              includeFor: ['provider'],
               quantity: new Decimal(-1),
               lineTotal: new Money(200, 'USD'),
               unitPrice: new Money(-200, 'USD'),

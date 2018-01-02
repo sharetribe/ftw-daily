@@ -49,6 +49,7 @@ export const Checkout = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(2),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(9000, CURRENCY),
@@ -73,6 +74,7 @@ export const CustomerOrder = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(2),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(9000, CURRENCY),
@@ -97,6 +99,7 @@ export const ProviderSale = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(2),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(9000, CURRENCY),
@@ -104,6 +107,7 @@ export const ProviderSale = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -127,6 +131,7 @@ export const ProviderSaleZeroCommission = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(2),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(9000, CURRENCY),
@@ -134,6 +139,7 @@ export const ProviderSaleZeroCommission = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(0, CURRENCY),
           lineTotal: new Money(0, CURRENCY),
           reversal: false,
@@ -157,6 +163,7 @@ export const ProviderSaleSingleNight = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -164,6 +171,7 @@ export const ProviderSaleSingleNight = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -188,6 +196,7 @@ export const ProviderSalePreauthorized = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -195,6 +204,7 @@ export const ProviderSalePreauthorized = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -219,6 +229,7 @@ export const ProviderSaleAccepted = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -226,6 +237,7 @@ export const ProviderSaleAccepted = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -250,6 +262,7 @@ export const ProviderSaleDeclined = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -257,6 +270,7 @@ export const ProviderSaleDeclined = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -281,6 +295,7 @@ export const ProviderSaleAutoDeclined = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -288,6 +303,7 @@ export const ProviderSaleAutoDeclined = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -312,6 +328,7 @@ export const ProviderSaleDelivered = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -319,6 +336,7 @@ export const ProviderSaleDelivered = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -343,6 +361,7 @@ export const ProviderSaleCanceled = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -350,6 +369,7 @@ export const ProviderSaleCanceled = {
         },
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(-1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(-4500, CURRENCY),
@@ -357,6 +377,7 @@ export const ProviderSaleCanceled = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
@@ -364,6 +385,7 @@ export const ProviderSaleCanceled = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           quantity: new Decimal(-1),
           unitPrice: new Money(2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),

@@ -46,6 +46,7 @@ const estimatedNightlyTransaction = (bookingStart, bookingEnd, unitPrice) => {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           unitPrice: unitPrice,
           quantity: new Decimal(nightCount),
           lineTotal: totalPrice,

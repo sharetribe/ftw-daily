@@ -134,6 +134,7 @@ export const createTransaction = options => {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(nightCount),
           unitPrice: new Money(total.amount / nightCount, total.currency),
           lineTotal: total,
@@ -141,6 +142,7 @@ export const createTransaction = options => {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(commission.amount * -1, commission.currency),
           lineTotal: new Money(commission.amount * -1, commission.currency),
           reversal: false,

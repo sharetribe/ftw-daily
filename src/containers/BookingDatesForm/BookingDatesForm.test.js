@@ -55,6 +55,7 @@ describe('BookingDatesForm', () => {
     expect(transaction.attributes.lineItems).toEqual([
       {
         code: 'line-item/night',
+        includeFor: ['customer', 'provider'],
         unitPrice: price,
         quantity: new Decimal(2),
         lineTotal: new Money(2198, 'USD'),
