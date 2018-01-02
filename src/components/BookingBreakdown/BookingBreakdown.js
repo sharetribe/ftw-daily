@@ -25,16 +25,16 @@ const isValidCommission = commissionLineItem => {
 };
 
 const UnitPriceItem = props => {
-  const { transaction, intl } = props;
-  const nightPurchase = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/night' && !item.reversal
+  const { transaction, unitType, intl } = props;
+  const unitPurchase = transaction.attributes.lineItems.find(
+    item => item.code === unitType && !item.reversal
   );
-  const formattedUnitPrice = formatMoney(intl, nightPurchase.unitPrice);
+  const formattedUnitPrice = formatMoney(intl, unitPurchase.unitPrice);
 
   return (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
-        <FormattedMessage id="BookingBreakdown.pricePerNight" />
+        <FormattedMessage id="BookingBreakdown.pricePerUnit" />
       </span>
       <span className={css.itemValue}>{formattedUnitPrice}</span>
     </div>
@@ -43,11 +43,12 @@ const UnitPriceItem = props => {
 
 UnitPriceItem.propTypes = {
   transaction: propTypes.transaction.isRequired,
+  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]).isRequired,
   intl: intlShape.isRequired,
 };
 
 const UnitsItem = props => {
-  const { transaction, booking, intl } = props;
+  const { transaction, booking, unitType, intl } = props;
 
   const dateFormatOptions = {
     weekday: 'short',
@@ -71,18 +72,18 @@ const UnitsItem = props => {
       }}
     />
   );
-  const nightPurchase = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/night' && !item.reversal
+  const unitPurchase = transaction.attributes.lineItems.find(
+    item => item.code === unitType && !item.reversal
   );
-  const nightCount = nightPurchase.quantity.toFixed();
-  const nightCountMessage = (
-    <FormattedHTMLMessage id="BookingBreakdown.nightCount" values={{ count: nightCount }} />
+  const unitCount = unitPurchase.quantity.toFixed();
+  const unitCountMessage = (
+    <FormattedHTMLMessage id="BookingBreakdown.unitCount" values={{ count: unitCount }} />
   );
 
   return (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>{bookingPeriod}</span>
-      <span className={css.itemValue}>{nightCountMessage}</span>
+      <span className={css.itemValue}>{unitCountMessage}</span>
     </div>
   );
 };
@@ -94,20 +95,20 @@ UnitsItem.propTypes = {
 };
 
 const SubTotalItemMaybe = props => {
-  const { transaction, isProvider, intl } = props;
+  const { transaction, unitType, isProvider, intl } = props;
 
   const refund = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/night' && item.reversal
+    item => item.code === unitType && item.reversal
   );
 
-  // Show night purchase line total (unit price * quantity) as a subtotal.
+  // Show unit purchase line total (unit price * quantity) as a subtotal.
   // PLEASE NOTE that this assumes that the transaction doesn't have other
-  // line item types than nights (e.g. week, month, year).
+  // line item types than the defined unit type (e.g. week, month, year).
   const showSubTotal = isProvider || refund;
-  const nightPurchase = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/night' && !item.reversal
+  const unitPurchase = transaction.attributes.lineItems.find(
+    item => item.code === unitType && !item.reversal
   );
-  const formattedSubTotal = formatMoney(intl, nightPurchase.lineTotal);
+  const formattedSubTotal = formatMoney(intl, unitPurchase.lineTotal);
 
   return showSubTotal ? (
     <div className={css.lineItem}>
@@ -129,10 +130,10 @@ const CommissionItemMaybe = props => {
   const { transaction, isProvider, intl } = props;
 
   const providerCommissionLineItem = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/provider-commission' && !item.reversal
+    item => item.code === propTypes.LINE_ITEM_PROVIDER_COMMISSION && !item.reversal
   );
   const commissionRefund = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/provider-commission' && item.reversal
+    item => item.code === propTypes.LINE_ITEM_PROVIDER_COMMISSION && item.reversal
   );
 
   // If commission is passed it will be shown as a fee already reduces from the total price
@@ -168,10 +169,10 @@ CommissionItemMaybe.propTypes = {
 };
 
 const RefundItemMaybe = props => {
-  const { transaction, intl } = props;
+  const { transaction, unitType, intl } = props;
 
   const refund = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/night' && item.reversal
+    item => item.code === unitType && item.reversal
   );
 
   return refund ? (
@@ -191,6 +192,8 @@ RefundItemMaybe.propTypes = {
 
 export const BookingBreakdownComponent = props => {
   const { rootClassName, className, userRole, transaction, booking, intl } = props;
+
+  const unitType = propTypes.LINE_ITEM_NIGHT;
 
   const isProvider = userRole === 'provider';
   const classes = classNames(rootClassName || css.root, className);
@@ -217,11 +220,16 @@ export const BookingBreakdownComponent = props => {
 
   return (
     <div className={classes}>
-      <UnitPriceItem transaction={transaction} intl={intl} />
-      <UnitsItem transaction={transaction} booking={booking} intl={intl} />
-      <SubTotalItemMaybe transaction={transaction} isProvider={isProvider} intl={intl} />
+      <UnitPriceItem transaction={transaction} unitType={unitType} intl={intl} />
+      <UnitsItem transaction={transaction} booking={booking} unitType={unitType} intl={intl} />
+      <SubTotalItemMaybe
+        transaction={transaction}
+        unitType={unitType}
+        isProvider={isProvider}
+        intl={intl}
+      />
       <CommissionItemMaybe transaction={transaction} isProvider={isProvider} intl={intl} />
-      <RefundItemMaybe transaction={transaction} intl={intl} />
+      <RefundItemMaybe transaction={transaction} unitType={unitType} intl={intl} />
       <hr className={css.totalDivider} />
       <div className={css.lineItem}>
         <div className={css.totalLabel}>{totalLabel}</div>

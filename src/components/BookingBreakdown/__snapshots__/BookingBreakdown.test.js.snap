@@ -11,7 +11,7 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        BookingBreakdown.pricePerNight
+        BookingBreakdown.pricePerUnit
       </span>
     </span>
     <span
@@ -36,7 +36,7 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
       <span
         dangerouslySetInnerHTML={
           Object {
-            "__html": "BookingBreakdown.nightCount",
+            "__html": "BookingBreakdown.unitCount",
           }
         }
       />
@@ -75,7 +75,7 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        BookingBreakdown.pricePerNight
+        BookingBreakdown.pricePerUnit
       </span>
     </span>
     <span
@@ -100,7 +100,7 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
       <span
         dangerouslySetInnerHTML={
           Object {
-            "__html": "BookingBreakdown.nightCount",
+            "__html": "BookingBreakdown.unitCount",
           }
         }
       />
@@ -139,7 +139,7 @@ exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`
       className={undefined}
     >
       <span>
-        BookingBreakdown.pricePerNight
+        BookingBreakdown.pricePerUnit
       </span>
     </span>
     <span
@@ -164,7 +164,7 @@ exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`
       <span
         dangerouslySetInnerHTML={
           Object {
-            "__html": "BookingBreakdown.nightCount",
+            "__html": "BookingBreakdown.unitCount",
           }
         }
       />
@@ -235,7 +235,7 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
       className={undefined}
     >
       <span>
-        BookingBreakdown.pricePerNight
+        BookingBreakdown.pricePerUnit
       </span>
     </span>
     <span
@@ -260,7 +260,7 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
       <span
         dangerouslySetInnerHTML={
           Object {
-            "__html": "BookingBreakdown.nightCount",
+            "__html": "BookingBreakdown.unitCount",
           }
         }
       />
