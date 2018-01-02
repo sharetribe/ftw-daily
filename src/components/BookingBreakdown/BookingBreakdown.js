@@ -3,7 +3,7 @@
  * I.e. dates and other details related to payment decision in receipt format.
  */
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, oneOf, string } from 'prop-types';
 import { FormattedMessage, FormattedHTMLMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import { types } from '../../util/sdkLoader';
@@ -24,11 +24,8 @@ const isValidCommission = commissionLineItem => {
   );
 };
 
-export const BookingBreakdownComponent = props => {
-  const { rootClassName, className, userRole, transaction, booking, intl } = props;
-
-  const isProvider = userRole === 'provider';
-  const classes = classNames(rootClassName || css.root, className);
+const BreakdownItems = props => {
+  const { transaction, booking, isProvider, intl } = props;
 
   const nightPurchase = transaction.attributes.lineItems.find(
     item => item.code === 'line-item/night' && !item.reversal
@@ -132,6 +129,29 @@ export const BookingBreakdownComponent = props => {
       </div>
     );
   }
+  return (
+    <div>
+      {unitPriceItem}
+      {unitsItem}
+      {subTotalItem}
+      {commissionItem}
+      {refundItem}
+    </div>
+  );
+};
+
+BreakdownItems.propTypes = {
+  transaction: propTypes.transaction.isRequired,
+  booking: propTypes.booking.isRequired,
+  isProvider: bool.isRequired,
+  intl: intlShape.isRequired,
+};
+
+export const BookingBreakdownComponent = props => {
+  const { rootClassName, className, userRole, transaction, booking, intl } = props;
+
+  const isProvider = userRole === 'provider';
+  const classes = classNames(rootClassName || css.root, className);
 
   let providerTotalMessageId = 'BookingBreakdown.providerTotalDefault';
   if (propTypes.txIsDelivered(transaction)) {
@@ -155,11 +175,12 @@ export const BookingBreakdownComponent = props => {
 
   return (
     <div className={classes}>
-      {unitPriceItem}
-      {unitsItem}
-      {subTotalItem}
-      {commissionItem}
-      {refundItem}
+      <BreakdownItems
+        transaction={transaction}
+        booking={booking}
+        isProvider={isProvider}
+        intl={intl}
+      />
       <hr className={css.totalDivider} />
       <div className={css.lineItem}>
         <div className={css.totalLabel}>{totalLabel}</div>
@@ -170,8 +191,6 @@ export const BookingBreakdownComponent = props => {
 };
 
 BookingBreakdownComponent.defaultProps = { rootClassName: null, className: null };
-
-const { oneOf, string } = PropTypes;
 
 BookingBreakdownComponent.propTypes = {
   rootClassName: string,

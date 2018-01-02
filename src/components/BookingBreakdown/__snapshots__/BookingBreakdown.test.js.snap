@@ -4,43 +4,45 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
 <div
   className=""
 >
-  <div
-    className={undefined}
-  >
-    <span
-      className={undefined}
-    >
-      <span>
-        BookingBreakdown.pricePerNight
-      </span>
-    </span>
-    <span
-      className={undefined}
-    >
-      10
-    </span>
-  </div>
-  <div
-    className={undefined}
-  >
-    <span
-      className={undefined}
-    >
-      <span>
-        BookingBreakdown.bookingPeriod
-      </span>
-    </span>
-    <span
+  <div>
+    <div
       className={undefined}
     >
       <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "BookingBreakdown.nightCount",
+        className={undefined}
+      >
+        <span>
+          BookingBreakdown.pricePerNight
+        </span>
+      </span>
+      <span
+        className={undefined}
+      >
+        10
+      </span>
+    </div>
+    <div
+      className={undefined}
+    >
+      <span
+        className={undefined}
+      >
+        <span>
+          BookingBreakdown.bookingPeriod
+        </span>
+      </span>
+      <span
+        className={undefined}
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "BookingBreakdown.nightCount",
+            }
           }
-        }
-      />
-    </span>
+        />
+      </span>
+    </div>
   </div>
   <hr
     className={undefined}
@@ -68,43 +70,45 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
 <div
   className=""
 >
-  <div
-    className={undefined}
-  >
-    <span
-      className={undefined}
-    >
-      <span>
-        BookingBreakdown.pricePerNight
-      </span>
-    </span>
-    <span
-      className={undefined}
-    >
-      10
-    </span>
-  </div>
-  <div
-    className={undefined}
-  >
-    <span
-      className={undefined}
-    >
-      <span>
-        BookingBreakdown.bookingPeriod
-      </span>
-    </span>
-    <span
+  <div>
+    <div
       className={undefined}
     >
       <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "BookingBreakdown.nightCount",
+        className={undefined}
+      >
+        <span>
+          BookingBreakdown.pricePerNight
+        </span>
+      </span>
+      <span
+        className={undefined}
+      >
+        10
+      </span>
+    </div>
+    <div
+      className={undefined}
+    >
+      <span
+        className={undefined}
+      >
+        <span>
+          BookingBreakdown.bookingPeriod
+        </span>
+      </span>
+      <span
+        className={undefined}
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "BookingBreakdown.nightCount",
+            }
           }
-        }
-      />
-    </span>
+        />
+      </span>
+    </div>
   </div>
   <hr
     className={undefined}
@@ -132,75 +136,77 @@ exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`
 <div
   className=""
 >
-  <div
-    className={undefined}
-  >
-    <span
-      className={undefined}
-    >
-      <span>
-        BookingBreakdown.pricePerNight
-      </span>
-    </span>
-    <span
-      className={undefined}
-    >
-      10
-    </span>
-  </div>
-  <div
-    className={undefined}
-  >
-    <span
-      className={undefined}
-    >
-      <span>
-        BookingBreakdown.bookingPeriod
-      </span>
-    </span>
-    <span
+  <div>
+    <div
       className={undefined}
     >
       <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "BookingBreakdown.nightCount",
+        className={undefined}
+      >
+        <span>
+          BookingBreakdown.pricePerNight
+        </span>
+      </span>
+      <span
+        className={undefined}
+      >
+        10
+      </span>
+    </div>
+    <div
+      className={undefined}
+    >
+      <span
+        className={undefined}
+      >
+        <span>
+          BookingBreakdown.bookingPeriod
+        </span>
+      </span>
+      <span
+        className={undefined}
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "BookingBreakdown.nightCount",
+            }
           }
-        }
-      />
-    </span>
-  </div>
-  <div
-    className={undefined}
-  >
-    <span
-      className={undefined}
-    >
-      <span>
-        BookingBreakdown.subTotal
+        />
       </span>
-    </span>
-    <span
+    </div>
+    <div
       className={undefined}
     >
-      20
-    </span>
-  </div>
-  <div
-    className={undefined}
-  >
-    <span
-      className={undefined}
-    >
-      <span>
-        BookingBreakdown.refund
+      <span
+        className={undefined}
+      >
+        <span>
+          BookingBreakdown.subTotal
+        </span>
       </span>
-    </span>
-    <span
+      <span
+        className={undefined}
+      >
+        20
+      </span>
+    </div>
+    <div
       className={undefined}
     >
-      -20
-    </span>
+      <span
+        className={undefined}
+      >
+        <span>
+          BookingBreakdown.refund
+        </span>
+      </span>
+      <span
+        className={undefined}
+      >
+        -20
+      </span>
+    </div>
   </div>
   <hr
     className={undefined}
@@ -228,75 +234,77 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
 <div
   className=""
 >
-  <div
-    className={undefined}
-  >
-    <span
-      className={undefined}
-    >
-      <span>
-        BookingBreakdown.pricePerNight
-      </span>
-    </span>
-    <span
-      className={undefined}
-    >
-      10
-    </span>
-  </div>
-  <div
-    className={undefined}
-  >
-    <span
-      className={undefined}
-    >
-      <span>
-        BookingBreakdown.bookingPeriod
-      </span>
-    </span>
-    <span
+  <div>
+    <div
       className={undefined}
     >
       <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "BookingBreakdown.nightCount",
+        className={undefined}
+      >
+        <span>
+          BookingBreakdown.pricePerNight
+        </span>
+      </span>
+      <span
+        className={undefined}
+      >
+        10
+      </span>
+    </div>
+    <div
+      className={undefined}
+    >
+      <span
+        className={undefined}
+      >
+        <span>
+          BookingBreakdown.bookingPeriod
+        </span>
+      </span>
+      <span
+        className={undefined}
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "BookingBreakdown.nightCount",
+            }
           }
-        }
-      />
-    </span>
-  </div>
-  <div
-    className={undefined}
-  >
-    <span
-      className={undefined}
-    >
-      <span>
-        BookingBreakdown.subTotal
+        />
       </span>
-    </span>
-    <span
+    </div>
+    <div
       className={undefined}
     >
-      20
-    </span>
-  </div>
-  <div
-    className={undefined}
-  >
-    <span
-      className={undefined}
-    >
-      <span>
-        BookingBreakdown.commission
+      <span
+        className={undefined}
+      >
+        <span>
+          BookingBreakdown.subTotal
+        </span>
       </span>
-    </span>
-    <span
+      <span
+        className={undefined}
+      >
+        20
+      </span>
+    </div>
+    <div
       className={undefined}
     >
-      -2
-    </span>
+      <span
+        className={undefined}
+      >
+        <span>
+          BookingBreakdown.commission
+        </span>
+      </span>
+      <span
+        className={undefined}
+      >
+        -2
+      </span>
+    </div>
   </div>
   <hr
     className={undefined}
