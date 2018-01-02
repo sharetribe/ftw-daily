@@ -30,6 +30,29 @@ export const BookingBreakdownComponent = props => {
   const isProvider = userRole === 'provider';
   const classes = classNames(rootClassName || css.root, className);
 
+  const nightPurchase = transaction.attributes.lineItems.find(
+    item => item.code === 'line-item/night' && !item.reversal
+  );
+  const providerCommissionLineItem = transaction.attributes.lineItems.find(
+    item => item.code === 'line-item/provider-commission' && !item.reversal
+  );
+  const refund = transaction.attributes.lineItems.find(
+    item => item.code === 'line-item/night' && item.reversal
+  );
+  const commissionRefund = transaction.attributes.lineItems.find(
+    item => item.code === 'line-item/provider-commission' && item.reversal
+  );
+
+  const formattedUnitPrice = formatMoney(intl, nightPurchase.unitPrice);
+  const unitPriceItem = (
+    <div className={css.lineItem}>
+      <span className={css.itemLabel}>
+        <FormattedMessage id="BookingBreakdown.pricePerNight" />
+      </span>
+      <span className={css.itemValue}>{formattedUnitPrice}</span>
+    </div>
+  );
+
   const dateFormatOptions = {
     weekday: 'short',
     month: 'short',
@@ -53,20 +76,18 @@ export const BookingBreakdownComponent = props => {
     />
   );
 
-  const nightPurchase = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/night' && !item.reversal
+  const nightCount = nightPurchase.quantity.toFixed();
+  const nightCountMessage = (
+    <FormattedHTMLMessage id="BookingBreakdown.nightCount" values={{ count: nightCount }} />
   );
-  const providerCommissionLineItem = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/provider-commission' && !item.reversal
-  );
-  const refund = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/night' && item.reversal
-  );
-  const commissionRefund = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/provider-commission' && item.reversal
+  const unitsItem = (
+    <div className={css.lineItem}>
+      <span className={css.itemLabel}>{bookingPeriod}</span>
+      <span className={css.itemValue}>{nightCountMessage}</span>
+    </div>
   );
 
-  const refundInfo = refund ? (
+  const refundItem = refund ? (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
         <FormattedMessage id="BookingBreakdown.refund" />
@@ -75,22 +96,15 @@ export const BookingBreakdownComponent = props => {
     </div>
   ) : null;
 
-  const nightCount = nightPurchase.quantity.toFixed();
-  const nightCountMessage = (
-    <FormattedHTMLMessage id="BookingBreakdown.nightCount" values={{ count: nightCount }} />
-  );
-
-  const formattedUnitPrice = formatMoney(intl, nightPurchase.unitPrice);
-
   // If commission is passed it will be shown as a fee already reduces from the total price
-  let commissionInfo = null;
+  let commissionItem = null;
 
   // Show night purchase line total (unit price * quantity) as a subtotal.
   // PLEASE NOTE that this assumes that the transaction doesn't have other
   // line item types than nights (e.g. week, month, year).
   const showSubTotal = isProvider || refund;
   const formattedSubTotal = formatMoney(intl, nightPurchase.lineTotal);
-  const subTotalInfo = showSubTotal ? (
+  const subTotalItem = showSubTotal ? (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
         <FormattedMessage id="BookingBreakdown.subTotal" />
@@ -109,7 +123,7 @@ export const BookingBreakdownComponent = props => {
     const commission = providerCommissionLineItem.lineTotal;
     const formattedCommission = commission ? formatMoney(intl, commission) : null;
 
-    commissionInfo = commissionRefund ? null : (
+    commissionItem = commissionRefund ? null : (
       <div className={css.lineItem}>
         <span className={css.itemLabel}>
           <FormattedMessage id="BookingBreakdown.commission" />
@@ -141,19 +155,11 @@ export const BookingBreakdownComponent = props => {
 
   return (
     <div className={classes}>
-      <div className={css.lineItem}>
-        <span className={css.itemLabel}>
-          <FormattedMessage id="BookingBreakdown.pricePerNight" />
-        </span>
-        <span className={css.itemValue}>{formattedUnitPrice}</span>
-      </div>
-      <div className={css.lineItem}>
-        <span className={css.itemLabel}>{bookingPeriod}</span>
-        <span className={css.itemValue}>{nightCountMessage}</span>
-      </div>
-      {subTotalInfo}
-      {commissionInfo}
-      {refundInfo}
+      {unitPriceItem}
+      {unitsItem}
+      {subTotalItem}
+      {commissionItem}
+      {refundItem}
       <hr className={css.totalDivider} />
       <div className={css.lineItem}>
         <div className={css.totalLabel}>{totalLabel}</div>
