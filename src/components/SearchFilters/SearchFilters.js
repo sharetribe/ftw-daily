@@ -6,7 +6,7 @@ import { omit } from 'lodash';
 import config from '../../config';
 import { stringify } from '../../util/urlHelpers';
 import { Menu, MenuContent, MenuItem, MenuLabel, NamedLink } from '../../components';
-import css from './SearchAttributes.css';
+import css from './SearchFilters.css';
 
 const SelectSingleCustomAttribute = props => {
   const { customAttribute, urlQueryParams, intl } = props;
@@ -24,7 +24,7 @@ const SelectSingleCustomAttribute = props => {
 
   // resolve menu label text and class
   const menuLabel =
-    currentValue || intl.formatMessage({ id: `SearchAttributes.${customAttribute}.label` });
+    currentValue || intl.formatMessage({ id: `SearchFilters.${customAttribute}.label` });
   const menuLabelClass = currentValue ? css.menuLabelSelected : css.menuLabel;
 
   return (
@@ -54,7 +54,7 @@ const SelectSingleCustomAttribute = props => {
             name="SearchPage"
             to={{ search: clearQueryString }}
           >
-            <FormattedMessage id={'SearchAttributes.clear'} />
+            <FormattedMessage id={'SearchFilters.clear'} />
           </NamedLink>
         </MenuItem>
       </MenuContent>
@@ -62,7 +62,7 @@ const SelectSingleCustomAttribute = props => {
   );
 };
 
-const SearchAttributesComponent = props => {
+const SearchFiltersComponent = props => {
   const {
     rootClassName,
     className,
@@ -74,17 +74,17 @@ const SearchAttributesComponent = props => {
     intl,
   } = props;
 
-  const loadingResults = <FormattedMessage id="SearchAttributes.loadingResults" />;
+  const loadingResults = <FormattedMessage id="SearchFilters.loadingResults" />;
 
   const resultsFound = (
-    <FormattedMessage id="SearchAttributes.foundResults" values={{ count: resultsCount }} />
+    <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
   );
 
-  const noResults = <FormattedMessage id="SearchAttributes.noResults" />;
+  const noResults = <FormattedMessage id="SearchFilters.noResults" />;
 
   const resultsFoundMobile = (
     <h2>
-      <FormattedMessage id="SearchAttributes.foundResults" values={{ count: resultsCount }} />
+      <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
     </h2>
   );
 
@@ -113,13 +113,13 @@ const SearchAttributesComponent = props => {
           {searchInProgress ? loadingResults : null}
         </div>
         <div className={css.mapIcon} onClick={onMapIconClick}>
-          <FormattedMessage id="SearchAttributes.openMapView" className={css.mapIconText} />
+          <FormattedMessage id="SearchFilters.openMapView" className={css.mapIconText} />
         </div>
       </div>
     </div>
   );
 };
 
-const SearchAttributes = injectIntl(SearchAttributesComponent);
+const SearchFilters = injectIntl(SearchFiltersComponent);
 
-export default SearchAttributes;
+export default SearchFilters;

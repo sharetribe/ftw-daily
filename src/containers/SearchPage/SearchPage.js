@@ -24,7 +24,7 @@ import {
   ModalInMobile,
   Page,
   SearchResultsPanel,
-  SearchAttributes,
+  SearchFilters,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
@@ -261,7 +261,7 @@ export class SearchPageComponent extends Component {
         <TopbarContainer className={css.topbar} />
         <div className={css.container}>
           <div className={css.searchResultContainer}>
-            <SearchAttributes
+            <SearchFilters
               className={css.searchAttributes}
               urlQueryParams={urlQueryParams}
               listingsAreLoaded={listingsAreLoaded}
