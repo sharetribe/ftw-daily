@@ -410,3 +410,55 @@ export const ProviderSaleCanceled = {
     }),
   },
 };
+
+export const SingleDay = {
+  component: BookingBreakdown,
+  props: {
+    userRole: 'customer',
+    unitType: propTypes.LINE_ITEM_DAY,
+    transaction: exampleTransaction({
+      payinTotal: new Money(4500, CURRENCY),
+      payoutTotal: new Money(4500, CURRENCY),
+      lineItems: [
+        {
+          code: 'line-item/day',
+          includeFor: ['customer', 'provider'],
+          quantity: new Decimal(1),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(4500, CURRENCY),
+          reversal: false,
+        },
+      ],
+    }),
+    booking: exampleBooking({
+      start: new Date(Date.UTC(2017, 3, 14)),
+      end: new Date(Date.UTC(2017, 3, 15)),
+    }),
+  },
+};
+
+export const MultipleDays = {
+  component: BookingBreakdown,
+  props: {
+    userRole: 'customer',
+    unitType: propTypes.LINE_ITEM_DAY,
+    transaction: exampleTransaction({
+      payinTotal: new Money(9000, CURRENCY),
+      payoutTotal: new Money(9000, CURRENCY),
+      lineItems: [
+        {
+          code: 'line-item/day',
+          includeFor: ['customer', 'provider'],
+          quantity: new Decimal(2),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(9000, CURRENCY),
+          reversal: false,
+        },
+      ],
+    }),
+    booking: exampleBooking({
+      start: new Date(Date.UTC(2017, 3, 14)),
+      end: new Date(Date.UTC(2017, 3, 16)),
+    }),
+  },
+};

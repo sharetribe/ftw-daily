@@ -5,10 +5,12 @@
 import React from 'react';
 import { bool, oneOf, string } from 'prop-types';
 import { FormattedMessage, FormattedHTMLMessage, intlShape, injectIntl } from 'react-intl';
+import moment from 'moment';
 import classNames from 'classnames';
 import { types } from '../../util/sdkLoader';
 import { formatMoney } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
+import { daysBetween } from '../../util/dates';
 
 import css from './BookingBreakdown.css';
 
@@ -26,6 +28,7 @@ const isValidCommission = commissionLineItem => {
 
 const UnitPriceItem = props => {
   const { transaction, unitType, intl } = props;
+  const isNightly = unitType === propTypes.LINE_ITEM_NIGHT;
   const unitPurchase = transaction.attributes.lineItems.find(
     item => item.code === unitType && !item.reversal
   );
@@ -34,7 +37,9 @@ const UnitPriceItem = props => {
   return (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
-        <FormattedMessage id="BookingBreakdown.pricePerUnit" />
+        <FormattedMessage
+          id={isNightly ? 'BookingBreakdown.pricePerNight' : 'BookingBreakdown.pricePerDay'}
+        />
       </span>
       <span className={css.itemValue}>{formattedUnitPrice}</span>
     </div>
@@ -50,24 +55,28 @@ UnitPriceItem.propTypes = {
 const UnitsItem = props => {
   const { transaction, booking, unitType, intl } = props;
 
+  const { start: startDate, end: endDateRaw } = booking.attributes;
+  const isNightly = unitType === propTypes.LINE_ITEM_NIGHT;
+  const isSingleDay = !isNightly && daysBetween(startDate, endDateRaw) === 1;
+
+  const endDay = isNightly ? endDateRaw : moment(endDateRaw).subtract(1, 'days');
+
   const dateFormatOptions = {
     weekday: 'short',
     month: 'short',
     day: 'numeric',
   };
-  const bookingPeriod = (
+  const bookingPeriod = isSingleDay ? (
+    intl.formatDate(startDate, dateFormatOptions)
+  ) : (
     <FormattedMessage
       id="BookingBreakdown.bookingPeriod"
       values={{
         bookingStart: (
-          <span className={css.nowrap}>
-            {intl.formatDate(booking.attributes.start, dateFormatOptions)}
-          </span>
+          <span className={css.nowrap}>{intl.formatDate(startDate, dateFormatOptions)}</span>
         ),
         bookingEnd: (
-          <span className={css.nowrap}>
-            {intl.formatDate(booking.attributes.end, dateFormatOptions)}
-          </span>
+          <span className={css.nowrap}>{intl.formatDate(endDay, dateFormatOptions)}</span>
         ),
       }}
     />
@@ -77,7 +86,10 @@ const UnitsItem = props => {
   );
   const unitCount = unitPurchase.quantity.toFixed();
   const unitCountMessage = (
-    <FormattedHTMLMessage id="BookingBreakdown.unitCount" values={{ count: unitCount }} />
+    <FormattedHTMLMessage
+      id={isNightly ? 'BookingBreakdown.nightCount' : 'BookingBreakdown.dayCount'}
+      values={{ count: unitCount }}
+    />
   );
 
   return (
