@@ -31,6 +31,13 @@ describe('TransactionPanel - Sale', () => {
     customer: createUser('customer1'),
     lastTransitionedAt: new Date(Date.UTC(2017, 5, 10)),
   };
+
+  const txEnquired = createTransaction({
+    id: 'sale-enquired',
+    lastTransition: propTypes.TX_TRANSITION_ENQUIRE,
+    ...baseTxAttrs,
+  });
+
   const txPreauthorized = createTransaction({
     id: 'sale-preauthorized',
     lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
@@ -93,6 +100,14 @@ describe('TransactionPanel - Sale', () => {
     intl: fakeIntl,
   };
 
+  it('enquired matches snapshot', () => {
+    const props = {
+      ...panelBaseProps,
+      transaction: txEnquired,
+    };
+    const tree = renderShallow(<TransactionPanelComponent {...props} />);
+    expect(tree).toMatchSnapshot();
+  });
   it('preauthorized matches snapshot', () => {
     const props = {
       ...panelBaseProps,
@@ -182,6 +197,12 @@ describe('TransactionPanel - Order', () => {
     customer: createUser('customer'),
   };
 
+  const txEnquired = createTransaction({
+    id: 'order-enquired',
+    lastTransition: propTypes.TX_TRANSITION_ENQUIRE,
+    ...baseTxAttrs,
+  });
+
   const txPreauthorized = createTransaction({
     id: 'order-preauthorized',
     lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
@@ -244,6 +265,15 @@ describe('TransactionPanel - Order', () => {
     declineInProgress: false,
   };
 
+  it('enquired matches snapshot', () => {
+    const props = {
+      ...panelBaseProps,
+      transaction: txEnquired,
+    };
+
+    const tree = renderShallow(<TransactionPanelComponent {...props} />);
+    expect(tree).toMatchSnapshot();
+  });
   it('preauthorized matches snapshot', () => {
     const props = {
       ...panelBaseProps,
