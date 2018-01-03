@@ -43,6 +43,7 @@ export const Checkout = {
   component: BookingBreakdown,
   props: {
     userRole: 'customer',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(9000, CURRENCY),
       payoutTotal: new Money(9000, CURRENCY),
@@ -68,6 +69,7 @@ export const CustomerOrder = {
   component: BookingBreakdown,
   props: {
     userRole: 'customer',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(9000, CURRENCY),
       payoutTotal: new Money(9000, CURRENCY),
@@ -93,6 +95,7 @@ export const ProviderSale = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(9000, CURRENCY),
       payoutTotal: new Money(7000, CURRENCY),
@@ -125,6 +128,7 @@ export const ProviderSaleZeroCommission = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(9000, CURRENCY),
       payoutTotal: new Money(9000, CURRENCY),
@@ -157,6 +161,7 @@ export const ProviderSaleSingleNight = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
@@ -189,6 +194,7 @@ export const ProviderSalePreauthorized = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
       payinTotal: new Money(4500, CURRENCY),
@@ -222,6 +228,7 @@ export const ProviderSaleAccepted = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_ACCEPT,
       payinTotal: new Money(4500, CURRENCY),
@@ -255,6 +262,7 @@ export const ProviderSaleDeclined = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_DECLINE,
       payinTotal: new Money(4500, CURRENCY),
@@ -288,6 +296,7 @@ export const ProviderSaleAutoDeclined = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_AUTO_DECLINE,
       payinTotal: new Money(4500, CURRENCY),
@@ -321,6 +330,7 @@ export const ProviderSaleDelivered = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_MARK_DELIVERED,
       payinTotal: new Money(4500, CURRENCY),
@@ -354,6 +364,7 @@ export const ProviderSaleCanceled = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_CANCEL,
       payinTotal: new Money(0, CURRENCY),

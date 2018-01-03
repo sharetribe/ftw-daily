@@ -11,6 +11,8 @@ import {
   PrimaryButton,
   SecondaryButton,
 } from '../../components';
+import config from '../../config';
+
 import css from './TransactionPanel.css';
 
 // Functional component as a helper to build ActivityFeed section
@@ -85,6 +87,7 @@ export const BreakdownMaybe = props => {
       <BookingBreakdown
         className={classes}
         userRole={transactionRole}
+        unitType={config.bookingUnitType}
         transaction={transaction}
         booking={transaction.booking}
       />

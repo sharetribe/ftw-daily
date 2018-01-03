@@ -25,6 +25,7 @@ import {
 import { StripePaymentForm } from '../../containers';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { initiateOrder, setInitialValues, speculateTransaction } from './CheckoutPage.duck';
+import config from '../../config';
 
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import LogoIcon from './LogoIcon';
@@ -203,6 +204,7 @@ export class CheckoutPageComponent extends Component {
         <BookingBreakdown
           className={css.bookingBreakdown}
           userRole="customer"
+          unitType={config.bookingUnitType}
           transaction={currentTransaction}
           booking={currentBooking}
         />

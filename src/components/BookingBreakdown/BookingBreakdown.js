@@ -191,9 +191,7 @@ RefundItemMaybe.propTypes = {
 };
 
 export const BookingBreakdownComponent = props => {
-  const { rootClassName, className, userRole, transaction, booking, intl } = props;
-
-  const unitType = propTypes.LINE_ITEM_NIGHT;
+  const { rootClassName, className, userRole, unitType, transaction, booking, intl } = props;
 
   const isProvider = userRole === 'provider';
   const classes = classNames(rootClassName || css.root, className);
@@ -246,6 +244,7 @@ BookingBreakdownComponent.propTypes = {
   className: string,
 
   userRole: oneOf(['customer', 'provider']).isRequired,
+  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]).isRequired,
   transaction: propTypes.transaction.isRequired,
   booking: propTypes.booking.isRequired,
 

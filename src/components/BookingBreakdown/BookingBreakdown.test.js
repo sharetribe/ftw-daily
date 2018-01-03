@@ -36,6 +36,7 @@ describe('BookingBreakdown', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
         userRole="customer"
+        unitType={propTypes.LINE_ITEM_NIGHT}
         transaction={exampleTransaction({
           payinTotal: new Money(2000, 'USD'),
           payoutTotal: new Money(2000, 'USD'),
@@ -64,6 +65,7 @@ describe('BookingBreakdown', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
         userRole="customer"
+        unitType={propTypes.LINE_ITEM_NIGHT}
         transaction={exampleTransaction({
           payinTotal: new Money(2000, 'USD'),
           payoutTotal: new Money(2000, 'USD'),
@@ -92,6 +94,7 @@ describe('BookingBreakdown', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
         userRole="provider"
+        unitType={propTypes.LINE_ITEM_NIGHT}
         transaction={exampleTransaction({
           payinTotal: new Money(2000, 'USD'),
           payoutTotal: new Money(1800, 'USD'),
@@ -126,6 +129,7 @@ describe('BookingBreakdown', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
         userRole="provider"
+        unitType={propTypes.LINE_ITEM_NIGHT}
         transaction={exampleTransaction({
           lastTransition: propTypes.TX_TRANSITION_CANCEL,
           payinTotal: new Money(0, 'USD'),
