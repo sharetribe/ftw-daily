@@ -157,6 +157,22 @@ export const isChangeEmailWrongPassword = error => error && error.status === 403
  */
 export const isChangePasswordWrongPassword = error => error && error.status === 403;
 
+
+/**
+ * Check if the given API error (from
+ * 'sdk.currentUser.createStripeAccount(payoutDetails)') is due to
+ * invalid postal code in the given country.
+*/
+export const isStripeInvalidPostalCode = error => {
+  const msgRe = /^Invalid [A-Z]{2} postal code$/;
+  return errorAPIErrors(error).some(apiError => {
+    // Stripe doesn't seem to give an error code for this specific
+    // case, so we have to recognize it from the message.
+    const msg = apiError.meta && apiError.meta.stripe_message ? apiError.meta.stripe_message : '';
+    return msgRe.test(msg);
+  });
+};
+
 export const storableError = error => {
   const { name, message, status, statusText } = error;
   // Status, statusText, and data.errors are (possibly) added to the error object by SDK

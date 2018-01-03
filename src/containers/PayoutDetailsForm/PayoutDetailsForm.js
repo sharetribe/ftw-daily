@@ -15,6 +15,7 @@ import {
   TextInputField,
 } from '../../components';
 import * as validators from '../../util/validators';
+import { isStripeInvalidPostalCode } from '../../util/errors';
 
 import css from './PayoutDetailsForm.css';
 
@@ -191,11 +192,22 @@ const PayoutDetailsFormComponent = props => {
   const submitReady = false;
   const submitInProgress = submitting || inProgress;
   const submitDisabled = pristine || invalid || disabled || submitInProgress;
-  const error = createStripeAccountError ? (
-    <div className={css.error}>
-      <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailed" />
-    </div>
-  ) : null;
+
+  let error = null;
+
+  if (isStripeInvalidPostalCode(createStripeAccountError)) {
+    error = (
+      <div className={css.error}>
+        <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailedInvalidPostalCode" />
+      </div>
+    );
+  } else if (createStripeAccountError) {
+    error = (
+      <div className={css.error}>
+        <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailed" />
+      </div>
+    );
+  }
 
   return (
     <Form className={classes} onSubmit={handleSubmit}>
