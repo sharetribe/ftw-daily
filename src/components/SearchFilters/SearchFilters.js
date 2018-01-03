@@ -1,5 +1,6 @@
 import React from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import PropTypes from 'prop-types';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { omit } from 'lodash';
 
@@ -7,6 +8,8 @@ import config from '../../config';
 import { stringify } from '../../util/urlHelpers';
 import { Menu, MenuContent, MenuItem, MenuLabel, NamedLink } from '../../components';
 import css from './SearchFilters.css';
+
+const { object, string, bool, number, func } = PropTypes;
 
 const SelectSingleCustomAttribute = props => {
   const { customAttribute, urlQueryParams, intl } = props;
@@ -60,6 +63,21 @@ const SelectSingleCustomAttribute = props => {
       </MenuContent>
     </Menu>
   );
+};
+
+SelectSingleCustomAttribute.defaultProps = {
+  rootClassName: null,
+  className: null,
+};
+
+SelectSingleCustomAttribute.propTypes = {
+  rootClassName: string,
+  className: string,
+  customAttribute: string.isRequired,
+  urlQueryParams: object.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 const SearchFiltersComponent = props => {
@@ -118,6 +136,26 @@ const SearchFiltersComponent = props => {
       </div>
     </div>
   );
+};
+
+SearchFiltersComponent.defaultProps = {
+  rootClassName: null,
+  className: null,
+  resultsCount: null,
+  searchingInProgress: false,
+};
+
+SearchFiltersComponent.propTypes = {
+  rootClassName: string,
+  className: string,
+  urlQueryParams: object.isRequired,
+  listingsAreLoaded: bool.isRequired,
+  resultsCount: number,
+  searchingInProgress: bool,
+  onMapIconClick: func.isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 const SearchFilters = injectIntl(SearchFiltersComponent);
