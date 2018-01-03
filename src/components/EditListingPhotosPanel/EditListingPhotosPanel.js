@@ -69,6 +69,8 @@ class EditListingPhotosPanel extends Component {
       this.setState({ showPayoutDetails: false });
       this.props.onManageDisableScrolling('EditListingPhotosPanel.payoutModal', false);
       this.props.onSubmit(this.state.submittedValues);
+    }).catch(() => {
+      // do nothing
     });
   }
 
