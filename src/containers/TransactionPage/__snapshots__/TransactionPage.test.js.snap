@@ -68,6 +68,10 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                 "lineItems": Array [
                   Object {
                     "code": "line-item/night",
+                    "includeFor": Array [
+                      "customer",
+                      "provider",
+                    ],
                     "lineTotal": Money {
                       "amount": 1000,
                       "currency": "USD",
@@ -81,6 +85,9 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                   },
                   Object {
                     "code": "line-item/provider-commission",
+                    "includeFor": Array [
+                      "provider",
+                    ],
                     "lineTotal": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -259,6 +266,10 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                 "lineItems": Array [
                   Object {
                     "code": "line-item/night",
+                    "includeFor": Array [
+                      "customer",
+                      "provider",
+                    ],
                     "lineTotal": Money {
                       "amount": 1000,
                       "currency": "USD",
@@ -272,6 +283,9 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                   },
                   Object {
                     "code": "line-item/provider-commission",
+                    "includeFor": Array [
+                      "provider",
+                    ],
                     "lineTotal": Money {
                       "amount": -100,
                       "currency": "USD",

@@ -220,7 +220,7 @@
   }
 }
 
-.perNight {
+.perUnit {
   /* Font */
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColor);

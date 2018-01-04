@@ -45,7 +45,8 @@ const estimatedNightlyTransaction = (bookingStart, bookingEnd, unitPrice) => {
       payoutTotal: totalPrice,
       lineItems: [
         {
-          code: 'line-item/night',
+          code: propTypes.LINE_ITEM_NIGHT,
+          includeFor: ['customer', 'provider'],
           unitPrice: unitPrice,
           quantity: new Decimal(nightCount),
           lineTotal: totalPrice,
@@ -77,12 +78,14 @@ const estimatedBreakdown = (bookingStart, bookingEnd, unitPrice) => {
     return null;
   }
 
+  // TODO: estimate daily tx if config is set
   const tx = estimatedNightlyTransaction(bookingStart, bookingEnd, unitPrice);
 
   return (
     <BookingBreakdown
       className={css.receipt}
       userRole="customer"
+      unitType={config.bookingUnitType}
       transaction={tx}
       booking={tx.booking}
     />

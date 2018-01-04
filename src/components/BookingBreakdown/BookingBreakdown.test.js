@@ -36,12 +36,14 @@ describe('BookingBreakdown', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
         userRole="customer"
+        unitType={propTypes.LINE_ITEM_NIGHT}
         transaction={exampleTransaction({
           payinTotal: new Money(2000, 'USD'),
           payoutTotal: new Money(2000, 'USD'),
           lineItems: [
             {
               code: 'line-item/night',
+              includeFor: ['customer', 'provider'],
               quantity: new Decimal(2),
               lineTotal: new Money(2000, 'USD'),
               unitPrice: new Money(1000, 'USD'),
@@ -63,12 +65,14 @@ describe('BookingBreakdown', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
         userRole="customer"
+        unitType={propTypes.LINE_ITEM_NIGHT}
         transaction={exampleTransaction({
           payinTotal: new Money(2000, 'USD'),
           payoutTotal: new Money(2000, 'USD'),
           lineItems: [
             {
               code: 'line-item/night',
+              includeFor: ['customer', 'provider'],
               quantity: new Decimal(2),
               lineTotal: new Money(2000, 'USD'),
               unitPrice: new Money(1000, 'USD'),
@@ -90,12 +94,14 @@ describe('BookingBreakdown', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
         userRole="provider"
+        unitType={propTypes.LINE_ITEM_NIGHT}
         transaction={exampleTransaction({
           payinTotal: new Money(2000, 'USD'),
           payoutTotal: new Money(1800, 'USD'),
           lineItems: [
             {
               code: 'line-item/night',
+              includeFor: ['customer', 'provider'],
               quantity: new Decimal(2),
               lineTotal: new Money(2000, 'USD'),
               unitPrice: new Money(1000, 'USD'),
@@ -103,6 +109,7 @@ describe('BookingBreakdown', () => {
             },
             {
               code: 'line-item/provider-commission',
+              includeFor: ['provider'],
               lineTotal: new Money(-200, 'USD'),
               unitPrice: new Money(-200, 'USD'),
               reversal: false,
@@ -122,6 +129,7 @@ describe('BookingBreakdown', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
         userRole="provider"
+        unitType={propTypes.LINE_ITEM_NIGHT}
         transaction={exampleTransaction({
           lastTransition: propTypes.TX_TRANSITION_CANCEL,
           payinTotal: new Money(0, 'USD'),
@@ -129,6 +137,7 @@ describe('BookingBreakdown', () => {
           lineItems: [
             {
               code: 'line-item/night',
+              includeFor: ['customer', 'provider'],
               quantity: new Decimal(2),
               lineTotal: new Money(2000, 'USD'),
               unitPrice: new Money(1000, 'USD'),
@@ -136,6 +145,7 @@ describe('BookingBreakdown', () => {
             },
             {
               code: 'line-item/night',
+              includeFor: ['customer', 'provider'],
               quantity: new Decimal(-2),
               lineTotal: new Money(-2000, 'USD'),
               unitPrice: new Money(1000, 'USD'),
@@ -143,6 +153,7 @@ describe('BookingBreakdown', () => {
             },
             {
               code: 'line-item/provider-commission',
+              includeFor: ['provider'],
               quantity: new Decimal(1),
               lineTotal: new Money(-200, 'USD'),
               unitPrice: new Money(-200, 'USD'),
@@ -150,6 +161,7 @@ describe('BookingBreakdown', () => {
             },
             {
               code: 'line-item/provider-commission',
+              includeFor: ['provider'],
               quantity: new Decimal(-1),
               lineTotal: new Money(200, 'USD'),
               unitPrice: new Money(-200, 'USD'),

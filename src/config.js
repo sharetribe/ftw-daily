@@ -14,6 +14,13 @@ const i18n = {
   firstDayOfWeek: 0,
 };
 
+// The transaction line item code for the main unit type in bookings.
+//
+// Possible values: ['line-item/night', 'line-item/day']
+//
+// TODO: Check that this applies when API adds support for daily bookings
+const bookingUnitType = 'line-item/night';
+
 // To pass environment variables to the client app in the build
 // script, react-scripts (and the sharetribe-scripts fork of
 // react-scripts) require using the REACT_APP_ prefix to avoid
@@ -262,6 +269,7 @@ const config = {
   env,
   dev,
   locale,
+  bookingUnitType,
   i18n,
   sdk: { clientId: sdkClientId, baseUrl: sdkBaseUrl },
   currency,

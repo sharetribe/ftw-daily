@@ -505,8 +505,8 @@ export class ListingPageComponent extends Component {
                       <div className={css.desktopPriceValue} title={priceTitle}>
                         {formattedPrice}
                       </div>
-                      <div className={css.desktopPerNight}>
-                        <FormattedMessage id="ListingPage.perNight" />
+                      <div className={css.desktopPerUnit}>
+                        <FormattedMessage id="ListingPage.perUnit" />
                       </div>
                     </div>
                     <div className={css.heading}>
@@ -618,8 +618,8 @@ export class ListingPageComponent extends Component {
                     <div className={css.priceValue} title={priceTitle}>
                       {formattedPrice}
                     </div>
-                    <div className={css.perNight}>
-                      <FormattedMessage id="ListingPage.perNight" />
+                    <div className={css.perUnit}>
+                      <FormattedMessage id="ListingPage.perUnit" />
                     </div>
                   </div>
 

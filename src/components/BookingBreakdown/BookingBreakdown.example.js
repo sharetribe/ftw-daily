@@ -43,12 +43,14 @@ export const Checkout = {
   component: BookingBreakdown,
   props: {
     userRole: 'customer',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(9000, CURRENCY),
       payoutTotal: new Money(9000, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(2),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(9000, CURRENCY),
@@ -67,12 +69,14 @@ export const CustomerOrder = {
   component: BookingBreakdown,
   props: {
     userRole: 'customer',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(9000, CURRENCY),
       payoutTotal: new Money(9000, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(2),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(9000, CURRENCY),
@@ -91,12 +95,14 @@ export const ProviderSale = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(9000, CURRENCY),
       payoutTotal: new Money(7000, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(2),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(9000, CURRENCY),
@@ -104,6 +110,7 @@ export const ProviderSale = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -121,12 +128,14 @@ export const ProviderSaleZeroCommission = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(9000, CURRENCY),
       payoutTotal: new Money(9000, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(2),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(9000, CURRENCY),
@@ -134,6 +143,7 @@ export const ProviderSaleZeroCommission = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(0, CURRENCY),
           lineTotal: new Money(0, CURRENCY),
           reversal: false,
@@ -151,12 +161,14 @@ export const ProviderSaleSingleNight = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -164,6 +176,7 @@ export const ProviderSaleSingleNight = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -181,6 +194,7 @@ export const ProviderSalePreauthorized = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
       payinTotal: new Money(4500, CURRENCY),
@@ -188,6 +202,7 @@ export const ProviderSalePreauthorized = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -195,6 +210,7 @@ export const ProviderSalePreauthorized = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -212,6 +228,7 @@ export const ProviderSaleAccepted = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_ACCEPT,
       payinTotal: new Money(4500, CURRENCY),
@@ -219,6 +236,7 @@ export const ProviderSaleAccepted = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -226,6 +244,7 @@ export const ProviderSaleAccepted = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -243,6 +262,7 @@ export const ProviderSaleDeclined = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_DECLINE,
       payinTotal: new Money(4500, CURRENCY),
@@ -250,6 +270,7 @@ export const ProviderSaleDeclined = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -257,6 +278,7 @@ export const ProviderSaleDeclined = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -274,6 +296,7 @@ export const ProviderSaleAutoDeclined = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_AUTO_DECLINE,
       payinTotal: new Money(4500, CURRENCY),
@@ -281,6 +304,7 @@ export const ProviderSaleAutoDeclined = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -288,6 +312,7 @@ export const ProviderSaleAutoDeclined = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -305,6 +330,7 @@ export const ProviderSaleDelivered = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_MARK_DELIVERED,
       payinTotal: new Money(4500, CURRENCY),
@@ -312,6 +338,7 @@ export const ProviderSaleDelivered = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -319,6 +346,7 @@ export const ProviderSaleDelivered = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
           reversal: false,
@@ -336,6 +364,7 @@ export const ProviderSaleCanceled = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
+    unitType: propTypes.LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       lastTransition: propTypes.TX_TRANSITION_CANCEL,
       payinTotal: new Money(0, CURRENCY),
@@ -343,6 +372,7 @@ export const ProviderSaleCanceled = {
       lineItems: [
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(4500, CURRENCY),
@@ -350,6 +380,7 @@ export const ProviderSaleCanceled = {
         },
         {
           code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
           quantity: new Decimal(-1),
           unitPrice: new Money(4500, CURRENCY),
           lineTotal: new Money(-4500, CURRENCY),
@@ -357,6 +388,7 @@ export const ProviderSaleCanceled = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           quantity: new Decimal(1),
           unitPrice: new Money(-2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
@@ -364,6 +396,7 @@ export const ProviderSaleCanceled = {
         },
         {
           code: 'line-item/provider-commission',
+          includeFor: ['provider'],
           quantity: new Decimal(-1),
           unitPrice: new Money(2000, CURRENCY),
           lineTotal: new Money(-2000, CURRENCY),
@@ -374,6 +407,58 @@ export const ProviderSaleCanceled = {
     booking: exampleBooking({
       start: new Date(Date.UTC(2017, 3, 14)),
       end: new Date(Date.UTC(2017, 3, 15)),
+    }),
+  },
+};
+
+export const SingleDay = {
+  component: BookingBreakdown,
+  props: {
+    userRole: 'customer',
+    unitType: propTypes.LINE_ITEM_DAY,
+    transaction: exampleTransaction({
+      payinTotal: new Money(4500, CURRENCY),
+      payoutTotal: new Money(4500, CURRENCY),
+      lineItems: [
+        {
+          code: 'line-item/day',
+          includeFor: ['customer', 'provider'],
+          quantity: new Decimal(1),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(4500, CURRENCY),
+          reversal: false,
+        },
+      ],
+    }),
+    booking: exampleBooking({
+      start: new Date(Date.UTC(2017, 3, 14)),
+      end: new Date(Date.UTC(2017, 3, 15)),
+    }),
+  },
+};
+
+export const MultipleDays = {
+  component: BookingBreakdown,
+  props: {
+    userRole: 'customer',
+    unitType: propTypes.LINE_ITEM_DAY,
+    transaction: exampleTransaction({
+      payinTotal: new Money(9000, CURRENCY),
+      payoutTotal: new Money(9000, CURRENCY),
+      lineItems: [
+        {
+          code: 'line-item/day',
+          includeFor: ['customer', 'provider'],
+          quantity: new Decimal(2),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(9000, CURRENCY),
+          reversal: false,
+        },
+      ],
+    }),
+    booking: exampleBooking({
+      start: new Date(Date.UTC(2017, 3, 14)),
+      end: new Date(Date.UTC(2017, 3, 16)),
     }),
   },
 };

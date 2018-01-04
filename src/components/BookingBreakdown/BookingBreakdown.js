@@ -3,12 +3,14 @@
  * I.e. dates and other details related to payment decision in receipt format.
  */
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, oneOf, string } from 'prop-types';
 import { FormattedMessage, FormattedHTMLMessage, intlShape, injectIntl } from 'react-intl';
+import moment from 'moment';
 import classNames from 'classnames';
 import { types } from '../../util/sdkLoader';
 import { formatMoney } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
+import { daysBetween } from '../../util/dates';
 
 import css from './BookingBreakdown.css';
 
@@ -24,73 +26,103 @@ const isValidCommission = commissionLineItem => {
   );
 };
 
-export const BookingBreakdownComponent = props => {
-  const { rootClassName, className, userRole, transaction, booking, intl } = props;
+const UnitPriceItem = props => {
+  const { transaction, unitType, intl } = props;
+  const isNightly = unitType === propTypes.LINE_ITEM_NIGHT;
+  const unitPurchase = transaction.attributes.lineItems.find(
+    item => item.code === unitType && !item.reversal
+  );
+  const formattedUnitPrice = formatMoney(intl, unitPurchase.unitPrice);
 
-  const isProvider = userRole === 'provider';
-  const classes = classNames(rootClassName || css.root, className);
+  return (
+    <div className={css.lineItem}>
+      <span className={css.itemLabel}>
+        <FormattedMessage
+          id={isNightly ? 'BookingBreakdown.pricePerNight' : 'BookingBreakdown.pricePerDay'}
+        />
+      </span>
+      <span className={css.itemValue}>{formattedUnitPrice}</span>
+    </div>
+  );
+};
+
+UnitPriceItem.propTypes = {
+  transaction: propTypes.transaction.isRequired,
+  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]).isRequired,
+  intl: intlShape.isRequired,
+};
+
+const UnitsItem = props => {
+  const { transaction, booking, unitType, intl } = props;
+
+  const { start: startDate, end: endDateRaw } = booking.attributes;
+  const isNightly = unitType === propTypes.LINE_ITEM_NIGHT;
+  const isSingleDay = !isNightly && daysBetween(startDate, endDateRaw) === 1;
+
+  const endDay = isNightly ? endDateRaw : moment(endDateRaw).subtract(1, 'days');
 
   const dateFormatOptions = {
     weekday: 'short',
     month: 'short',
     day: 'numeric',
   };
-  const bookingPeriod = (
+  const bookingPeriod = isSingleDay ? (
+    intl.formatDate(startDate, dateFormatOptions)
+  ) : (
     <FormattedMessage
       id="BookingBreakdown.bookingPeriod"
       values={{
         bookingStart: (
-          <span className={css.nowrap}>
-            {intl.formatDate(booking.attributes.start, dateFormatOptions)}
-          </span>
+          <span className={css.nowrap}>{intl.formatDate(startDate, dateFormatOptions)}</span>
         ),
         bookingEnd: (
-          <span className={css.nowrap}>
-            {intl.formatDate(booking.attributes.end, dateFormatOptions)}
-          </span>
+          <span className={css.nowrap}>{intl.formatDate(endDay, dateFormatOptions)}</span>
         ),
       }}
     />
   );
-
-  const nightPurchase = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/night' && !item.reversal
+  const unitPurchase = transaction.attributes.lineItems.find(
+    item => item.code === unitType && !item.reversal
   );
-  const providerCommissionLineItem = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/provider-commission' && !item.reversal
-  );
-  const refund = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/night' && item.reversal
-  );
-  const commissionRefund = transaction.attributes.lineItems.find(
-    item => item.code === 'line-item/provider-commission' && item.reversal
+  const unitCount = unitPurchase.quantity.toFixed();
+  const unitCountMessage = (
+    <FormattedHTMLMessage
+      id={isNightly ? 'BookingBreakdown.nightCount' : 'BookingBreakdown.dayCount'}
+      values={{ count: unitCount }}
+    />
   );
 
-  const refundInfo = refund ? (
+  return (
     <div className={css.lineItem}>
-      <span className={css.itemLabel}>
-        <FormattedMessage id="BookingBreakdown.refund" />
-      </span>
-      <span className={css.itemValue}>{formatMoney(intl, refund.lineTotal)}</span>
+      <span className={css.itemLabel}>{bookingPeriod}</span>
+      <span className={css.itemValue}>{unitCountMessage}</span>
     </div>
-  ) : null;
+  );
+};
 
-  const nightCount = nightPurchase.quantity.toFixed();
-  const nightCountMessage = (
-    <FormattedHTMLMessage id="BookingBreakdown.nightCount" values={{ count: nightCount }} />
+UnitsItem.propTypes = {
+  transaction: propTypes.transaction.isRequired,
+  booking: propTypes.booking.isRequired,
+  intl: intlShape.isRequired,
+};
+
+const SubTotalItemMaybe = props => {
+  const { transaction, unitType, isProvider, intl } = props;
+
+  const refund = transaction.attributes.lineItems.find(
+    item => item.code === unitType && item.reversal
   );
 
-  const formattedUnitPrice = formatMoney(intl, nightPurchase.unitPrice);
-
-  // If commission is passed it will be shown as a fee already reduces from the total price
-  let commissionInfo = null;
-
-  // Show night purchase line total (unit price * quantity) as a subtotal.
+  // Show unit purchase line total (unit price * quantity) as a subtotal.
   // PLEASE NOTE that this assumes that the transaction doesn't have other
-  // line item types than nights (e.g. week, month, year).
+  // line item types than the defined unit type (e.g. week, month, year).
   const showSubTotal = isProvider || refund;
-  const formattedSubTotal = formatMoney(intl, nightPurchase.lineTotal);
-  const subTotalInfo = showSubTotal ? (
+  const unitPurchase = transaction.attributes.lineItems.find(
+    item => item.code === unitType && !item.reversal
+  );
+  const formattedSubTotal = formatMoney(intl, unitPurchase.lineTotal);
+
+  return showSubTotal ? (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
         <FormattedMessage id="BookingBreakdown.subTotal" />
@@ -98,6 +130,26 @@ export const BookingBreakdownComponent = props => {
       <span className={css.itemValue}>{formattedSubTotal}</span>
     </div>
   ) : null;
+};
+
+SubTotalItemMaybe.propTypes = {
+  transaction: propTypes.transaction.isRequired,
+  isProvider: bool.isRequired,
+  intl: intlShape.isRequired,
+};
+
+const CommissionItemMaybe = props => {
+  const { transaction, isProvider, intl } = props;
+
+  const providerCommissionLineItem = transaction.attributes.lineItems.find(
+    item => item.code === propTypes.LINE_ITEM_PROVIDER_COMMISSION && !item.reversal
+  );
+  const commissionRefund = transaction.attributes.lineItems.find(
+    item => item.code === propTypes.LINE_ITEM_PROVIDER_COMMISSION && item.reversal
+  );
+
+  // If commission is passed it will be shown as a fee already reduces from the total price
+  let commissionItem = null;
 
   if (isProvider) {
     if (!isValidCommission(providerCommissionLineItem)) {
@@ -109,7 +161,7 @@ export const BookingBreakdownComponent = props => {
     const commission = providerCommissionLineItem.lineTotal;
     const formattedCommission = commission ? formatMoney(intl, commission) : null;
 
-    commissionInfo = commissionRefund ? null : (
+    commissionItem = commissionRefund ? null : (
       <div className={css.lineItem}>
         <span className={css.itemLabel}>
           <FormattedMessage id="BookingBreakdown.commission" />
@@ -118,6 +170,43 @@ export const BookingBreakdownComponent = props => {
       </div>
     );
   }
+
+  return commissionItem;
+};
+
+CommissionItemMaybe.propTypes = {
+  transaction: propTypes.transaction.isRequired,
+  isProvider: bool.isRequired,
+  intl: intlShape.isRequired,
+};
+
+const RefundItemMaybe = props => {
+  const { transaction, unitType, intl } = props;
+
+  const refund = transaction.attributes.lineItems.find(
+    item => item.code === unitType && item.reversal
+  );
+
+  return refund ? (
+    <div className={css.lineItem}>
+      <span className={css.itemLabel}>
+        <FormattedMessage id="BookingBreakdown.refund" />
+      </span>
+      <span className={css.itemValue}>{formatMoney(intl, refund.lineTotal)}</span>
+    </div>
+  ) : null;
+};
+
+RefundItemMaybe.propTypes = {
+  transaction: propTypes.transaction.isRequired,
+  intl: intlShape.isRequired,
+};
+
+export const BookingBreakdownComponent = props => {
+  const { rootClassName, className, userRole, unitType, transaction, booking, intl } = props;
+
+  const isProvider = userRole === 'provider';
+  const classes = classNames(rootClassName || css.root, className);
 
   let providerTotalMessageId = 'BookingBreakdown.providerTotalDefault';
   if (propTypes.txIsDelivered(transaction)) {
@@ -141,19 +230,16 @@ export const BookingBreakdownComponent = props => {
 
   return (
     <div className={classes}>
-      <div className={css.lineItem}>
-        <span className={css.itemLabel}>
-          <FormattedMessage id="BookingBreakdown.pricePerNight" />
-        </span>
-        <span className={css.itemValue}>{formattedUnitPrice}</span>
-      </div>
-      <div className={css.lineItem}>
-        <span className={css.itemLabel}>{bookingPeriod}</span>
-        <span className={css.itemValue}>{nightCountMessage}</span>
-      </div>
-      {subTotalInfo}
-      {commissionInfo}
-      {refundInfo}
+      <UnitPriceItem transaction={transaction} unitType={unitType} intl={intl} />
+      <UnitsItem transaction={transaction} booking={booking} unitType={unitType} intl={intl} />
+      <SubTotalItemMaybe
+        transaction={transaction}
+        unitType={unitType}
+        isProvider={isProvider}
+        intl={intl}
+      />
+      <CommissionItemMaybe transaction={transaction} isProvider={isProvider} intl={intl} />
+      <RefundItemMaybe transaction={transaction} unitType={unitType} intl={intl} />
       <hr className={css.totalDivider} />
       <div className={css.lineItem}>
         <div className={css.totalLabel}>{totalLabel}</div>
@@ -165,13 +251,12 @@ export const BookingBreakdownComponent = props => {
 
 BookingBreakdownComponent.defaultProps = { rootClassName: null, className: null };
 
-const { oneOf, string } = PropTypes;
-
 BookingBreakdownComponent.propTypes = {
   rootClassName: string,
   className: string,
 
   userRole: oneOf(['customer', 'provider']).isRequired,
+  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]).isRequired,
   transaction: propTypes.transaction.isRequired,
   booking: propTypes.booking.isRequired,
 

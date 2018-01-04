@@ -300,6 +300,15 @@ export const review = shape({
   subject: user,
 });
 
+export const LINE_ITEM_NIGHT = 'line-item/night';
+
+// TODO: This is speculative, check again when the API adds the day support
+export const LINE_ITEM_DAY = 'line-item/day';
+
+export const LINE_ITEM_PROVIDER_COMMISSION = 'line-item/provider-commission';
+
+const LINE_ITEMS = [LINE_ITEM_NIGHT, LINE_ITEM_DAY, LINE_ITEM_PROVIDER_COMMISSION];
+
 // Denormalised transaction object
 export const transaction = shape({
   id: uuid.isRequired,
@@ -316,7 +325,8 @@ export const transaction = shape({
 
     lineItems: arrayOf(
       shape({
-        code: string.isRequired,
+        code: oneOf(LINE_ITEMS).isRequired,
+        includeFor: arrayOf(oneOf(['customer', 'provider'])).isRequired,
         quantity: instanceOf(Decimal),
         unitPrice: money.isRequired,
         lineTotal: money.isRequired,

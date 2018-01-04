@@ -24,6 +24,26 @@ export const nightsBetween = (startDate, endDate) => {
 };
 
 /**
+ * Calculate the number of days between the given dates
+ *
+ * @param {Date} startDate start of the time period
+ * @param {Date} endDate end of the time period. NOTE: with daily
+ * bookings, it is expected that this date is the exclusive end date,
+ * i.e. the last day of the booking is the previous date of this end
+ * date.
+ *
+ * @throws Will throw if the end date is before the start date
+ * @returns {Number} number of days between the given dates
+ */
+export const daysBetween = (startDate, endDate) => {
+  const days = moment(endDate).diff(startDate, 'days');
+  if (days < 0) {
+    throw new Error('End date cannot be before start date');
+  }
+  return days;
+};
+
+/**
  * Format the given date
  *
  * @param {Object} intl Intl object from react-intl
