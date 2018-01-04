@@ -232,8 +232,10 @@ export class ListingPageComponent extends Component {
     } = currentListing.attributes;
 
     const { customAttributes } = currentListing.attributes;
+    const hasCategoryConfig = config.customAttributes && config.customAttributes.category;
+    const hasCategoryAttribute = customAttributes && customAttributes.category;
     const category =
-      config.customAttributes.category && customAttributes && customAttributes.category ? (
+      hasCategoryConfig && hasCategoryAttribute ? (
         <span>
           <FormattedMessage id={`ListingPage.category.${customAttributes.category}`} />
           <span className={css.separator}>•</span>
