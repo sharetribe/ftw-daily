@@ -4388,6 +4388,10 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
               "lineItems": Array [
                 Object {
                   "code": "line-item/night",
+                  "includeFor": Array [
+                    "customer",
+                    "provider",
+                  ],
                   "lineTotal": Money {
                     "amount": 16500,
                     "currency": "USD",
@@ -4401,6 +4405,9 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                 },
                 Object {
                   "code": "line-item/provider-commission",
+                  "includeFor": Array [
+                    "provider",
+                  ],
                   "lineTotal": Money {
                     "amount": -100,
                     "currency": "USD",
@@ -4642,6 +4649,10 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                 "lineItems": Array [
                   Object {
                     "code": "line-item/night",
+                    "includeFor": Array [
+                      "customer",
+                      "provider",
+                    ],
                     "lineTotal": Money {
                       "amount": 16500,
                       "currency": "USD",
@@ -4655,6 +4666,9 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                   },
                   Object {
                     "code": "line-item/provider-commission",
+                    "includeFor": Array [
+                      "provider",
+                    ],
                     "lineTotal": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -4764,6 +4778,10 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
               "lineItems": Array [
                 Object {
                   "code": "line-item/night",
+                  "includeFor": Array [
+                    "customer",
+                    "provider",
+                  ],
                   "lineTotal": Money {
                     "amount": 16500,
                     "currency": "USD",
@@ -4777,6 +4795,9 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                 },
                 Object {
                   "code": "line-item/provider-commission",
+                  "includeFor": Array [
+                    "provider",
+                  ],
                   "lineTotal": Money {
                     "amount": -100,
                     "currency": "USD",
@@ -5004,6 +5025,10 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                 "lineItems": Array [
                   Object {
                     "code": "line-item/night",
+                    "includeFor": Array [
+                      "customer",
+                      "provider",
+                    ],
                     "lineTotal": Money {
                       "amount": 16500,
                       "currency": "USD",
@@ -5017,6 +5042,9 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                   },
                   Object {
                     "code": "line-item/provider-commission",
+                    "includeFor": Array [
+                      "provider",
+                    ],
                     "lineTotal": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -5220,6 +5248,10 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
               "lineItems": Array [
                 Object {
                   "code": "line-item/night",
+                  "includeFor": Array [
+                    "customer",
+                    "provider",
+                  ],
                   "lineTotal": Money {
                     "amount": 16500,
                     "currency": "USD",
@@ -5233,6 +5265,9 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                 },
                 Object {
                   "code": "line-item/provider-commission",
+                  "includeFor": Array [
+                    "provider",
+                  ],
                   "lineTotal": Money {
                     "amount": -100,
                     "currency": "USD",
@@ -5345,6 +5380,10 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
               "lineItems": Array [
                 Object {
                   "code": "line-item/night",
+                  "includeFor": Array [
+                    "customer",
+                    "provider",
+                  ],
                   "lineTotal": Money {
                     "amount": 16500,
                     "currency": "USD",
@@ -5358,6 +5397,9 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                 },
                 Object {
                   "code": "line-item/provider-commission",
+                  "includeFor": Array [
+                    "provider",
+                  ],
                   "lineTotal": Money {
                     "amount": -100,
                     "currency": "USD",
@@ -5467,6 +5509,10 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                 "lineItems": Array [
                   Object {
                     "code": "line-item/night",
+                    "includeFor": Array [
+                      "customer",
+                      "provider",
+                    ],
                     "lineTotal": Money {
                       "amount": 16500,
                       "currency": "USD",
@@ -5480,6 +5526,9 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                   },
                   Object {
                     "code": "line-item/provider-commission",
+                    "includeFor": Array [
+                      "provider",
+                    ],
                     "lineTotal": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -5589,6 +5638,10 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
               "lineItems": Array [
                 Object {
                   "code": "line-item/night",
+                  "includeFor": Array [
+                    "customer",
+                    "provider",
+                  ],
                   "lineTotal": Money {
                     "amount": 16500,
                     "currency": "USD",
@@ -5602,6 +5655,9 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                 },
                 Object {
                   "code": "line-item/provider-commission",
+                  "includeFor": Array [
+                    "provider",
+                  ],
                   "lineTotal": Money {
                     "amount": -100,
                     "currency": "USD",
@@ -5829,6 +5885,10 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                 "lineItems": Array [
                   Object {
                     "code": "line-item/night",
+                    "includeFor": Array [
+                      "customer",
+                      "provider",
+                    ],
                     "lineTotal": Money {
                       "amount": 16500,
                       "currency": "USD",
@@ -5842,6 +5902,9 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                   },
                   Object {
                     "code": "line-item/provider-commission",
+                    "includeFor": Array [
+                      "provider",
+                    ],
                     "lineTotal": Money {
                       "amount": -100,
                       "currency": "USD",
@@ -6039,6 +6102,10 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
               "lineItems": Array [
                 Object {
                   "code": "line-item/night",
+                  "includeFor": Array [
+                    "customer",
+                    "provider",
+                  ],
                   "lineTotal": Money {
                     "amount": 16500,
                     "currency": "USD",
@@ -6052,6 +6119,9 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 },
                 Object {
                   "code": "line-item/provider-commission",
+                  "includeFor": Array [
+                    "provider",
+                  ],
                   "lineTotal": Money {
                     "amount": -1000,
                     "currency": "USD",

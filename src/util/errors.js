@@ -157,12 +157,11 @@ export const isChangeEmailWrongPassword = error => error && error.status === 403
  */
 export const isChangePasswordWrongPassword = error => error && error.status === 403;
 
-
 /**
  * Check if the given API error (from
  * 'sdk.currentUser.createStripeAccount(payoutDetails)') is due to
  * invalid postal code in the given country.
-*/
+ */
 export const isStripeInvalidPostalCode = error => {
   const msgRe = /^Invalid [A-Z]{2} postal code$/;
   return errorAPIErrors(error).some(apiError => {

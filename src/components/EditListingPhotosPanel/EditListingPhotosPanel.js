@@ -65,13 +65,16 @@ class EditListingPhotosPanel extends Component {
       bankAccountToken,
       address: omitBy(address, isUndefined),
     };
-    this.props.onPayoutDetailsSubmit(params).then(() => {
-      this.setState({ showPayoutDetails: false });
-      this.props.onManageDisableScrolling('EditListingPhotosPanel.payoutModal', false);
-      this.props.onSubmit(this.state.submittedValues);
-    }).catch(() => {
-      // do nothing
-    });
+    this.props
+      .onPayoutDetailsSubmit(params)
+      .then(() => {
+        this.setState({ showPayoutDetails: false });
+        this.props.onManageDisableScrolling('EditListingPhotosPanel.payoutModal', false);
+        this.props.onSubmit(this.state.submittedValues);
+      })
+      .catch(() => {
+        // do nothing
+      });
   }
 
   render() {
