@@ -65,7 +65,13 @@ class Menu extends Component {
     // FocusEvent is fired faster than the link elements native click handler
     // gets its own event. Therefore, we need to check the origin of this FocusEvent.
     if (!this.menu.contains(event.relatedTarget)) {
-      this.setState({ isOpen: false });
+      const { isOpen, onToggleActive } = this.props;
+
+      if (isControlledMenu(isOpen, onToggleActive)) {
+        onToggleActive(false);
+      } else {
+        this.setState({ isOpen: false });
+      }
     }
   }
 
