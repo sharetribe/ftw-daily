@@ -1,3 +1,4 @@
+import { pick } from 'lodash';
 import { types } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
@@ -6,6 +7,8 @@ import * as propTypes from '../../util/propTypes';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
+
+export const SET_INITAL_VALUES = 'app/ListingPage/SET_INITIAL_VALUES';
 
 export const SHOW_LISTING_REQUEST = 'app/ListingPage/SHOW_LISTING_REQUEST';
 export const SHOW_LISTING_ERROR = 'app/ListingPage/SHOW_LISTING_ERROR';
@@ -27,11 +30,15 @@ const initialState = {
   fetchReviewsError: null,
   sendEnquiryInProgress: false,
   sendEnquiryError: null,
+  enquiryModalOpenForListingId: null,
 };
 
 const listingPageReducer = (state = initialState, action = {}) => {
   const { type, payload } = action;
   switch (type) {
+    case SET_INITAL_VALUES:
+      return { ...initialState, ...payload };
+
     case SHOW_LISTING_REQUEST:
       return { ...state, id: payload.id, showListingError: null };
     case SHOW_LISTING_ERROR:
@@ -59,6 +66,11 @@ const listingPageReducer = (state = initialState, action = {}) => {
 export default listingPageReducer;
 
 // ================ Action creators ================ //
+
+export const setInitialValues = initialValues => ({
+  type: SET_INITAL_VALUES,
+  payload: pick(initialValues, Object.keys(initialState)),
+});
 
 export const showListingRequest = id => ({
   type: SHOW_LISTING_REQUEST,
