@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { omit } from 'lodash';
 
 import config from '../../config';
-import { stringify } from '../../util/urlHelpers';
-import { Menu, MenuContent, MenuItem, MenuLabel, NamedLink } from '../../components';
+import { Menu, MenuContent, MenuItem, MenuLabel } from '../../components';
 import css from './SelectSingleCustomAttribute.css';
 
 class SelectSingleCustomAttributeComponent extends Component {
@@ -15,25 +13,27 @@ class SelectSingleCustomAttributeComponent extends Component {
 
     this.state = { isOpen: false };
     this.onToggleActive = this.onToggleActive.bind(this);
+    this.selectOption = this.selectOption.bind(this);
   }
 
   onToggleActive(isOpen) {
     this.setState({ isOpen: isOpen });
   }
 
+  selectOption(customAttribute, option) {
+    this.setState({ isOpen: false });
+    this.props.onSelect(customAttribute, option);
+  }
+
   render() {
     const { rootClassName, className, customAttribute, urlQueryParams, intl } = this.props;
 
+    // custom attribute content
     const ca = customAttribute && config.customAttributes[customAttribute];
-
     // name of the corresponding query parameter
     const caParam = `ca_${customAttribute}`;
     // current value of this custom attribute filter
     const currentValue = urlQueryParams[caParam];
-    // query params where this custom attribute is cleared
-    const clearUrlQueryParams = omit(urlQueryParams, caParam);
-    // query string for clearing this custom attribute
-    const clearQueryString = stringify(clearUrlQueryParams);
 
     // resolve menu label text and class
     const menuLabel = currentValue
@@ -56,28 +56,28 @@ class SelectSingleCustomAttributeComponent extends Component {
           {ca.values.map(v => {
             // check if this option is selected
             const selected = currentValue === v;
-            // search query string with this option added
-            const queryString = stringify({ ...urlQueryParams, [caParam]: v });
             // menu item border class
             const menuItemBorderClass = selected ? css.menuItemBorderSelected : css.menuItemBorder;
 
             return (
               <MenuItem key={v}>
-                <NamedLink className={css.menuItem} name="SearchPage" to={{ search: queryString }}>
+                <button
+                  className={css.menuItem}
+                  onClick={() => this.selectOption(customAttribute, v)}
+                >
                   <span className={menuItemBorderClass} />
                   <FormattedMessage id={`SelectSingleCustomAttribute.category.option.${v}`} />
-                </NamedLink>
+                </button>
               </MenuItem>
             );
           })}
           <MenuItem key={'clearLink'}>
-            <NamedLink
+            <button
               className={css.clearMenuItem}
-              name="SearchPage"
-              to={{ search: clearQueryString }}
+              onClick={() => this.selectOption(customAttribute, null)}
             >
               <FormattedMessage id={'SelectSingleCustomAttribute.clear'} />
-            </NamedLink>
+            </button>
           </MenuItem>
         </MenuContent>
       </Menu>
@@ -85,7 +85,7 @@ class SelectSingleCustomAttributeComponent extends Component {
   }
 }
 
-const { object, string } = PropTypes;
+const { object, string, func } = PropTypes;
 
 SelectSingleCustomAttributeComponent.defaultProps = {
   rootClassName: null,
@@ -97,6 +97,7 @@ SelectSingleCustomAttributeComponent.propTypes = {
   className: string,
   customAttribute: string.isRequired,
   urlQueryParams: object.isRequired,
+  onSelect: func.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,

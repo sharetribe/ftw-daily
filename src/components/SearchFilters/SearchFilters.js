@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
+import { withRouter } from 'react-router-dom';
+import { omit } from 'lodash';
 
 import { SelectSingleCustomAttribute } from '../../components';
+import routeConfiguration from '../../routeConfiguration';
+import { createResourceLocatorString } from '../../util/routes';
 import css from './SearchFilters.css';
 
 const SearchFiltersComponent = props => {
@@ -15,7 +19,7 @@ const SearchFiltersComponent = props => {
     resultsCount,
     searchInProgress,
     onMapIconClick,
-    intl,
+    history,
   } = props;
 
   const loadingResults = <FormattedMessage id="SearchFilters.loadingResults" />;
@@ -34,13 +38,26 @@ const SearchFiltersComponent = props => {
 
   const classes = classNames(rootClassName || css.root, className);
 
+  const onSelectSingle = (customAttribute, option) => {
+    // name of the corresponding query parameter
+    const caParam = `ca_${customAttribute}`;
+
+    // query parameters after selecting the option
+    // if no option is passed, clear the selection for the filter
+    const queryParams = option
+      ? { ...urlQueryParams, [caParam]: option }
+      : omit(urlQueryParams, caParam);
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  };
+
   return (
     <div className={classes}>
       <div className={css.filters}>
         <SelectSingleCustomAttribute
           customAttribute="category"
           urlQueryParams={urlQueryParams}
-          intl={intl}
+          onSelect={onSelectSingle}
         />
       </div>
 
@@ -64,7 +81,7 @@ const SearchFiltersComponent = props => {
   );
 };
 
-const { object, string, bool, number, func } = PropTypes;
+const { object, string, bool, number, func, shape } = PropTypes;
 
 SearchFiltersComponent.defaultProps = {
   rootClassName: null,
@@ -82,10 +99,12 @@ SearchFiltersComponent.propTypes = {
   searchingInProgress: bool,
   onMapIconClick: func.isRequired,
 
-  // from injectIntl
-  intl: intlShape.isRequired,
+  // from withRouter
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
 };
 
-const SearchFilters = injectIntl(SearchFiltersComponent);
+const SearchFilters = withRouter(SearchFiltersComponent);
 
 export default SearchFilters;
