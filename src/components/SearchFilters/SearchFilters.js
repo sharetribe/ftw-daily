@@ -9,7 +9,10 @@ import { SelectSingleCustomAttribute } from '../../components';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import config from '../../config';
+import { withViewport } from '../../util/contextHelpers';
 import css from './SearchFilters.css';
+
+const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 const SearchFiltersComponent = props => {
   const {
@@ -20,8 +23,11 @@ const SearchFiltersComponent = props => {
     resultsCount,
     searchInProgress,
     onMapIconClick,
+    viewport,
     history,
   } = props;
+
+  const isMobileLayout = viewport.width < MAX_MOBILE_SCREEN_WIDTH;
 
   const loadingResults = <FormattedMessage id="SearchFilters.loadingResults" />;
 
@@ -32,9 +38,7 @@ const SearchFiltersComponent = props => {
   const noResults = <FormattedMessage id="SearchFilters.noResults" />;
 
   const resultsFoundMobile = (
-    <h2>
-      <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
-    </h2>
+    <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
   );
 
   const classes = classNames(rootClassName || css.root, className);
@@ -63,7 +67,7 @@ const SearchFiltersComponent = props => {
     />
   ) : null;
 
-  return (
+  const desktopFilters = (
     <div className={classes}>
       <div className={css.filters}>{categoryFilter}</div>
 
@@ -72,19 +76,25 @@ const SearchFiltersComponent = props => {
         {listingsAreLoaded && resultsCount === 0 ? noResults : null}
         {searchInProgress ? loadingResults : null}
       </div>
+    </div>
+  );
 
+  const mobileFilters = (
+    <div className={classes}>
       <div className={css.searchResultSummaryMobile}>
-        <div>
-          {listingsAreLoaded && resultsCount > 0 ? resultsFoundMobile : null}
-          {listingsAreLoaded && resultsCount === 0 ? noResults : null}
-          {searchInProgress ? loadingResults : null}
-        </div>
-        <div className={css.mapIcon} onClick={onMapIconClick}>
-          <FormattedMessage id="SearchFilters.openMapView" className={css.mapIconText} />
-        </div>
+        {listingsAreLoaded && resultsCount > 0 ? resultsFoundMobile : null}
+        {listingsAreLoaded && resultsCount === 0 ? noResults : null}
+        {searchInProgress ? loadingResults : null}
+      </div>
+      <div className={css.mapIcon} onClick={onMapIconClick}>
+        <FormattedMessage id="SearchFilters.openMapView" className={css.mapIconText} />
       </div>
     </div>
   );
+
+  const filters = isMobileLayout ? mobileFilters : desktopFilters;
+
+  return filters;
 };
 
 const { object, string, bool, number, func, shape } = PropTypes;
@@ -105,12 +115,18 @@ SearchFiltersComponent.propTypes = {
   searchingInProgress: bool,
   onMapIconClick: func.isRequired,
 
+  // form withViewport
+  viewport: shape({
+    width: number.isRequired,
+    height: number.isRequired,
+  }).isRequired,
+
   // from withRouter
   history: shape({
     push: func.isRequired,
   }).isRequired,
 };
 
-const SearchFilters = withRouter(SearchFiltersComponent);
+const SearchFilters = withViewport(withRouter(SearchFiltersComponent));
 
 export default SearchFilters;
