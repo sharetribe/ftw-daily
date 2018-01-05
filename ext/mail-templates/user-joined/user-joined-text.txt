@@ -1,0 +1,6 @@
+Hello {{recipient.first-name}},
+
+Welcome to {{marketplace.name}}!
+
+Best regards,
+The {{marketplace.name}} team
