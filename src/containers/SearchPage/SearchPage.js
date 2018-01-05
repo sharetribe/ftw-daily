@@ -90,7 +90,7 @@ export class SearchPageComponent extends Component {
   onIdle(googleMap) {
     const { history, location } = this.props;
 
-    const { address, country, bounds, mapSearch } = parse(location.search, {
+    const { address, country, bounds, mapSearch, ca_category } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
@@ -108,7 +108,14 @@ export class SearchPageComponent extends Component {
     // we start to react to 'bounds_changed' event by generating new searches
     if (boundsChanged && (isRealMapSearch || !this.locationInputSearch)) {
       const origin = googleLatLngToSDKLatLng(viewportGMapBounds.getCenter());
-      const searchParams = { address, origin, bounds: viewportBounds, country, mapSearch: true };
+      const searchParams = {
+        address,
+        origin,
+        bounds: viewportBounds,
+        country,
+        mapSearch: true,
+        ca_category,
+      };
       history.push(
         createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
       );
