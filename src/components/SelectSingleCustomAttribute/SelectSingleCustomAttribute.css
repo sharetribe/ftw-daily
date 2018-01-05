@@ -68,21 +68,22 @@
 
 .menuItem {
   @apply --marketplaceSearchFilterOptionFontStyles;
+  color: var(--matterColor);
 
   /* Layout */
   position: relative;
-  display: block;
-
-  /* Dimensions */
   min-width: 300px;
   margin: 0;
   padding: 4px 30px;
 
-  color: var(--matterColor);
+  /* Override button styles */
+  outline: none;
+  text-align: left;
+  border: none;
 
+  &:focus,
   &:hover {
     color: var(--matterColorDark);
-    text-decoration: none;
   }
 
   &:hover .menuItemBorder {
@@ -97,15 +98,17 @@
 
   /* Layout */
   position: relative;
-  display: block;
-
-  /* Dimensions */
   min-width: 300px;
   margin: 0;
   padding: 35px 30px 19px 30px;
 
+  /* Override button styles */
+  outline: none;
+  text-align: left;
+  border: none;
+
+  &:focus,
   &:hover {
     color: var(--matterColor);
-    text-decoration: none;
   }
 }
