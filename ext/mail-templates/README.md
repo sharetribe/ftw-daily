@@ -93,6 +93,10 @@ to verify their email address.
 Sent to a user after they sign up for an account in the marketplace and
 instructs them to verify their email address.
 
+#### user-joined
+
+Sent to a new marketplace user after they verify their email address.
+
 ### Transaction engine mails
 
 The templates in the list below correspond to mails defined in the default
