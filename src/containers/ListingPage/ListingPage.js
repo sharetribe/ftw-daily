@@ -38,7 +38,7 @@ import {
 } from '../../components';
 import { BookingDatesForm, TopbarContainer, EnquiryForm } from '../../containers';
 
-import { sendEnquiry, loadData } from './ListingPage.duck';
+import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import EditIcon from './EditIcon';
 import css from './ListingPage.css';
 
@@ -137,10 +137,11 @@ const gotoListingTab = (history, listing) => {
 export class ListingPageComponent extends Component {
   constructor(props) {
     super(props);
+    const { enquiryModalOpenForListingId, params } = props;
     this.state = {
       pageClassNames: [],
       imageCarouselOpen: false,
-      enquiryModalOpen: false,
+      enquiryModalOpen: enquiryModalOpenForListingId === params.id,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -180,7 +181,21 @@ export class ListingPageComponent extends Component {
   }
 
   onContactUser() {
-    this.setState({ enquiryModalOpen: true });
+    const { currentUser, history, useInitialValues, params } = this.props;
+
+    if (!currentUser) {
+      const location = window.location;
+      const state = { from: `${location.pathname}${location.search}${location.hash}` };
+
+      // We need to log in before showing the modal, but first we need to ensure
+      // that modal does open when user is redirected back to this listingpage
+      useInitialValues(setInitialValues, { enquiryModalOpenForListingId: params.id });
+
+      // signup and return back to listingPage.
+      history.push(createResourceLocatorString('SignupPage', routeConfiguration(), {}, {}), state);
+    } else {
+      this.setState({ enquiryModalOpen: true });
+    }
   }
 
   onSubmitEnquiry(values) {
@@ -317,7 +332,7 @@ export class ListingPageComponent extends Component {
     const userAndListingAuthorAvailable = !!(currentUser && authorAvailable);
     const isOwnListing =
       userAndListingAuthorAvailable && currentListing.author.id.uuid === currentUser.id.uuid;
-    const showContactUser = currentUser && !isOwnListing;
+    const showContactUser = !currentUser || (currentUser && !isOwnListing);
 
     const currentAuthor = authorAvailable ? currentListing.author : null;
     const ensuredAuthor = ensureUser(currentAuthor);
@@ -649,6 +664,7 @@ export class ListingPageComponent extends Component {
 
 ListingPageComponent.defaultProps = {
   currentUser: null,
+  enquiryModalOpenForListingId: null,
   showListingError: null,
   tab: 'listing',
   reviews: [],
@@ -673,6 +689,7 @@ ListingPageComponent.propTypes = {
   getListing: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   scrollingDisabled: bool.isRequired,
+  enquiryModalOpenForListingId: string,
   showListingError: propTypes.error,
   tab: oneOf(['book', 'listing']),
   useInitialValues: func.isRequired,
@@ -690,6 +707,7 @@ const mapStateToProps = state => {
     fetchReviewsError,
     sendEnquiryInProgress,
     sendEnquiryError,
+    enquiryModalOpenForListingId,
   } = state.ListingPage;
   const { currentUser } = state.user;
 
@@ -702,6 +720,7 @@ const mapStateToProps = state => {
     currentUser,
     getListing,
     scrollingDisabled: isScrollingDisabled(state),
+    enquiryModalOpenForListingId,
     showListingError,
     reviews,
     fetchReviewsError,
@@ -727,6 +746,7 @@ const ListingPage = compose(withRouter, connect(mapStateToProps, mapDispatchToPr
   ListingPageComponent
 );
 
+ListingPage.setInitialValues = initialValues => setInitialValues(initialValues);
 ListingPage.loadData = loadData;
 
 export default ListingPage;
