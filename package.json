@@ -2,6 +2,7 @@
   "name": "app",
   "version": "0.2.0",
   "private": true,
+  "license": "Apache-2.0",
   "dependencies": {
     "array-includes": "^3.0.3",
     "array.prototype.find": "^2.0.4",

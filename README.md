@@ -61,3 +61,9 @@ The `master` branch is automatically deployed to Heroku. If you want to deploy a
 setup the `sharetribe-starter-app` Heroku app and push the feature branch:
 
     git push heroku my-feature-branch:master
+
+## License
+
+This project is licensed under the terms of the Apache-2.0 license.
+
+See [LICENSE](LICENSE)
