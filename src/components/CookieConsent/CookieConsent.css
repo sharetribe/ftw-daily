@@ -3,12 +3,12 @@
 .root {
   /* Fixed on top of everything */
   position: fixed;
-  top: 0;
+  bottom: 0;
   z-index: 1000;
 
   /* Dimensions */
   width: 100vw;
-  padding: 17px 0;
+  padding: 5px 0;
 
   /* Layout */
   display: flex;
@@ -21,22 +21,21 @@
 
   /* Cover Topbar on desktop */
   @media (--viewportMedium) {
-    padding: 20px 0;
+    padding: 8px 0;
   }
 }
 
 .message {
   @apply --marketplaceH5FontStyles;
-  margin: 0 24px;
+  margin-left: 24px;
 }
 
 .cookieLink {
-  color: var(--matterColorNegative);
+  color: var(--matterColorLight);
   border-bottom: 1px solid var(--matterColorNegative);
 
   &:hover {
     text-decoration: none;
-    border-bottom: 1px solid transparent;
   }
 }
 
@@ -47,10 +46,22 @@
 
   /* Dimensions */
   padding: 3px 12px 3px 12px;
-  margin: 0 24px;
+  margin: 0 24px 0 6px;
 
   background-color: transparent;
   border: solid 1px var(--matterColorNegative);
   border-radius: 4px;
   cursor: pointer;
+
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    background-color: var(--matterColorNegative);
+    color: var(--matterColor);
+    transition: var(--transitionStyleButton);
+  }
+
+  @media (--viewportMedium) {
+    margin: 0 24px;
+  }
 }
