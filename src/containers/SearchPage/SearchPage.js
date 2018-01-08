@@ -25,10 +25,11 @@ import {
   Page,
   SearchResultsPanel,
   SearchFilters,
+  SearchFiltersMobile,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
-
 import { searchListings, searchMapListings } from './SearchPage.duck';
+
 import css from './SearchPage.css';
 
 // Pagination page size might need to be dynamic on responsive page layouts
@@ -191,7 +192,7 @@ export class SearchPageComponent extends Component {
 
     const searchError = (
       <h2 className={css.error}>
-        <FormattedMessage id="SearchAttributes.searchError" />
+        <FormattedMessage id="SearchPage.searchError" />
       </h2>
     );
 
@@ -278,8 +279,19 @@ export class SearchPageComponent extends Component {
               searchInProgress={searchInProgress}
               searchListingsError={searchListingsError}
               onMapIconClick={onMapIconClick}
+              onManageDisableScrolling={onManageDisableScrolling}
             />
-
+            <SearchFiltersMobile
+              className={css.searchFiltersMobile}
+              urlQueryParams={urlQueryParams}
+              listingsAreLoaded={listingsAreLoaded}
+              resultsCount={totalItems}
+              searchInProgress={searchInProgress}
+              searchListingsError={searchListingsError}
+              showAsModalMaxWidth={MODAL_BREAKPOINT}
+              onMapIconClick={onMapIconClick}
+              onManageDisableScrolling={onManageDisableScrolling}
+            />
             <div
               className={classNames(css.listings, {
                 [css.newSearchInProgress]: !listingsAreLoaded,
