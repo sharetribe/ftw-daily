@@ -11,6 +11,7 @@ import { DateRangePicker, isInclusivelyAfterDay, isInclusivelyBeforeDay } from '
 import classNames from 'classnames';
 import moment from 'moment';
 import { START_DATE, END_DATE } from '../../util/dates';
+import * as propTypes from '../../util/propTypes';
 import config from '../../config';
 
 import NextMonthIcon from './NextMonthIcon';
@@ -28,6 +29,9 @@ export const ANCHOR_LEFT = 'left';
 // This prevents showing the validation error when the user selects a
 // value and moves on to another input within this component.
 const BLUR_TIMEOUT = 100;
+
+// Minumum nights count depends on bookingUnitType (day vs night)
+const IS_DAY_PICKER = config.bookingUnitType === propTypes.LINE_ITEM_DAY;
 
 // Possible configuration options of React-dates
 const defaultProps = {
@@ -76,7 +80,7 @@ const defaultProps = {
   renderDay: day => {
     return <span className="renderedDay">{day.format('D')}</span>;
   },
-  minimumNights: 1,
+  minimumNights: IS_DAY_PICKER ? 0 : 1,
   enableOutsideDays: false,
   isDayBlocked: () => false,
 
