@@ -398,6 +398,7 @@
   "PayoutDetailsForm.countryPlaceholder": "Select your country…",
   "PayoutDetailsForm.countryRequired": "This field is required",
   "PayoutDetailsForm.createStripeAccountFailed": "Whoops, something went wrong. Please try again.",
+  "PayoutDetailsForm.createStripeAccountFailedInvalidPostalCode": "Whoops, check that the selected country and postal code are correct and try again.",
   "PayoutDetailsForm.firstNameLabel": "First name",
   "PayoutDetailsForm.firstNamePlaceholder": "John",
   "PayoutDetailsForm.firstNameRequired": "This field is required",

@@ -56,5 +56,6 @@ export const error = (e, code, data) => {
     Raven.captureException(e, { tags: { code }, extra: data });
   } else {
     console.error(e); // eslint-disable-line
+    console.error('Error code:', code, 'data:', data);
   }
 };
