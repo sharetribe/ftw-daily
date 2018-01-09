@@ -228,13 +228,19 @@ const stripeSupportedCountries = [
 //      },
 //    },
 //  }
-const customAttributes = {
+const exampleCustomAttributes = {
   category: {
     select: 'single', // possible values: 'single' (only type supported atm.)
     type: 'string',
     values: ['road', 'mountain', 'track', 'other'],
   },
 };
+
+// To use the example custom attributes, set the
+// REACT_APP_USE_EXAMPLE_CUSTOM_ATTRIBUTES variable to `true` in the
+// gitignored `.env.development.local` file
+const useExampleCustomAttributes = process.env.REACT_APP_USE_EXAMPLE_CUSTOM_ATTRIBUTES === 'true';
+const customAttributes = useExampleCustomAttributes ? exampleCustomAttributes : {};
 
 // Address information is used in SEO schema for Organization (http://schema.org/PostalAddress)
 const addressCountry = 'FI';
