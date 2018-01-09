@@ -9,7 +9,7 @@
 .searchResultSummary {
   @apply --marketplaceH4FontStyles;
   line-height: 20px;
-  margin-top: 10px;
+  margin-top: 9px;
 
   display: none;
 

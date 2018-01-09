@@ -40,7 +40,7 @@
 
 .menuContent {
   margin-top: 8px;
-  padding-top: 15px;
+  padding-top: 13px;
   min-width: 300px;
   border-radius: 4px;
 }
@@ -100,7 +100,7 @@
   position: relative;
   min-width: 300px;
   margin: 0;
-  padding: 35px 30px 19px 30px;
+  padding: 34px 30px 19px 30px;
 
   /* Override button styles */
   outline: none;

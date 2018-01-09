@@ -269,7 +269,7 @@ export class SearchPageComponent extends Component {
         <div className={css.container}>
           <div className={css.searchResultContainer}>
             <SearchFilters
-              className={css.searchAttributes}
+              className={css.searchFilters}
               urlQueryParams={urlQueryParams}
               listingsAreLoaded={listingsAreLoaded}
               resultsCount={totalItems}
