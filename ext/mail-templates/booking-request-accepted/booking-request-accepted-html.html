@@ -26,6 +26,10 @@
       {{#each line-items}}
         {{#contains include-for "customer"}}
           <tr>
+            {{#eq "day" code}}
+            <td>{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "day" "days"}}</td>
+            <td style="padding-left: 20px;">{{> format-money money=line-total}}</td>
+            {{/eq}}
             {{#eq "night" code}}
             <td>{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "night" "nights"}}</td>
             <td style="padding-left: 20px;">{{> format-money money=line-total}}</td>

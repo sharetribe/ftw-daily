@@ -17,6 +17,9 @@ We have charged {{> format-money money=payin-total}} from your credit card. Here
 Payment
 {{#each line-items~}}
 {{~#contains include-for "customer"~}}
+{{~#eq "day" code~}}
+{{> format-money money=unit-price}} x {{number quantity}} {{inflect quantity "day" "days"}}: {{> format-money money=line-total}}
+{{/eq~}}
 {{~#eq "night" code~}}
 {{> format-money money=unit-price}} x {{number quantity}} {{inflect quantity "night" "nights"}}: {{> format-money money=line-total}}
 {{/eq~}}

@@ -15,6 +15,9 @@ Good news! {{customer.display-name}} just requested to book {{listing.title}} fr
 Payment
 {{#each line-items~}}
 {{~#contains include-for "provider"~}}
+{{~#eq "day" code~}}
+{{> format-money money=unit-price}} x {{number quantity}} {{inflect quantity "day" "days"}}: {{> format-money money=line-total}}
+{{/eq~}}
 {{~#eq "night" code~}}
 {{> format-money money=unit-price}} x {{number quantity}} {{inflect quantity "night" "nights"}}: {{> format-money money=line-total}}
 {{/eq~}}
@@ -25,7 +28,7 @@ Payment
 {{/each~}}
 You earn: {{> format-money money=payout-total}}
 
-You need to accept the request by {{> format-date date=booking-expires-on}}. Otherwise the request will be expired and you won't get paid. If the booked dates won't work for you, you can also choose to decline the request.
+You need to accept the request by {{> format-date date=delayed-transition.run-at}}. Otherwise the request will be expired and you won't get paid. If the booked dates won't work for you, you can also choose to decline the request.
 
 Accept or decline the booking: {{marketplace.url}}/sale/{{url-encode id}}/details
 
