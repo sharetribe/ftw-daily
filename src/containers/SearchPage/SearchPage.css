@@ -65,7 +65,8 @@
 .searchFilters {
   padding: 16px 0;
 
-  @media (--viewportLarge) {
+  @media (--viewportMedium) {
+    padding: 0;
     margin-top: 3px;
     margin-bottom: 21px;
   }
