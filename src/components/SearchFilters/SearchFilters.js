@@ -8,6 +8,7 @@ import { omit } from 'lodash';
 import { SelectSingleCustomAttribute } from '../../components';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
+import config from '../../config';
 import css from './SearchFilters.css';
 
 const SearchFiltersComponent = props => {
@@ -51,15 +52,18 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
+  const hasCategoryConfig = config.customAttributes && config.customAttributes.category;
+  const categoryFilter = hasCategoryConfig ? (
+    <SelectSingleCustomAttribute
+      customAttribute="category"
+      urlQueryParams={urlQueryParams}
+      onSelect={onSelectSingle}
+    />
+  ) : null;
+
   return (
     <div className={classes}>
-      <div className={css.filters}>
-        <SelectSingleCustomAttribute
-          customAttribute="category"
-          urlQueryParams={urlQueryParams}
-          onSelect={onSelectSingle}
-        />
-      </div>
+      <div className={css.filters}>{categoryFilter}</div>
 
       <div className={css.searchResultSummary}>
         {listingsAreLoaded && resultsCount > 0 ? resultsFound : null}
