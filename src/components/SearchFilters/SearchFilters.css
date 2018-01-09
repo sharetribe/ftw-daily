@@ -3,28 +3,7 @@
 .root {
   display: flex;
   justify-content: space-between;
-  height: 40px;
-}
-
-.searchResultSummary {
-  @apply --marketplaceH4FontStyles;
-  line-height: 20px;
-  margin-top: 9px;
-
-  display: none;
-
-  @media (--viewportMedium) {
-    display: block;
-  }
-}
-
-.searchResultSummaryMobile {
-  display: flex;
-  justify-content: space-between;
-
   background-color: var(--matterColorBright);
-  width: 100vw;
-  padding: 1px 24px 14px 24px;
 
   /* sticky result summary in mobile */
   position: sticky;
@@ -32,8 +11,26 @@
   z-index: 9;
 
   @media (--viewportMedium) {
-    display: none;
+    position: static;
+    top: unset;
+    z-index: unset;
   }
+}
+
+.searchResultSummary {
+  @apply --marketplaceH4FontStyles;
+  line-height: 20px;
+  margin-top: 9px;
+}
+
+.searchResultSummaryMobile {
+  @apply --marketplaceH3FontStyles;
+  margin-top: 8px;
+
+  display: flex;
+  justify-content: space-between;
+
+  background-color: var(--matterColorBright);
 }
 
 .mapIcon {
@@ -48,6 +45,6 @@
   border-radius: 3px;
   width: 72px;
   height: 35px;
-  margin-top: 23px;
   padding: 9px 22px;
+  margin: 0;
 }

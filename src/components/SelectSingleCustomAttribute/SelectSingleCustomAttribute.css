@@ -13,8 +13,9 @@
   @apply --marketplaceButtonStylesSecondary;
   @apply --marketplaceSearchFilterLabelFontStyles;
 
-  padding: 0 16px 2px 16px;
+  padding: 9px 16px 9px 16px;
   width: auto;
+  height: auto;
   min-height: 0;
   border-radius: 4px;
 
@@ -32,8 +33,9 @@
   @apply --marketplaceSearchFilterLabelFontStyles;
   font-weight: var(--fontWeightSemiBold);
 
-  padding: 0 16px 2px 16px;
+  padding: 9px 16px 9px 16px;
   width: auto;
+  height: auto;
   min-height: 0;
   border-radius: 4px;
 }

@@ -31,9 +31,10 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  padding: 18px 24px 96px 24px;
+  padding: 2px 24px 96px 24px;
 
   @media (--viewportMedium) {
+    padding: 18px 24px 96px 24px;
     /**
      * .container is using flexbox,
      * This specifies that searchResultContainer is taking 60% from the viewport width
@@ -62,11 +63,11 @@
 }
 
 .searchFilters {
-  margin-bottom: 16px;
+  padding: 16px 0;
 
   @media (--viewportLarge) {
-    margin-top: 2px;
-    margin-bottom: 22px;
+    margin-top: 3px;
+    margin-bottom: 21px;
   }
 }
 
