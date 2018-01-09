@@ -11,7 +11,7 @@
   z-index: 9;
 
   @media (--viewportMedium) {
-    position: unset;
+    position: static;
     top: unset;
     z-index: unset;
   }
