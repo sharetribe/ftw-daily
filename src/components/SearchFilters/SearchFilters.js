@@ -40,7 +40,9 @@ const SearchFiltersComponent = props => {
   const classes = classNames(rootClassName || css.root, className);
 
   const onSelectSingle = (customAttribute, option) => {
-    // name of the corresponding query parameter
+    // Name of the corresponding query parameter.
+    // The custom attribute query parameters are named
+    // ca_<custom_attribute_name> in the API.
     const caParam = `ca_${customAttribute}`;
 
     // query parameters after selecting the option

@@ -41,6 +41,7 @@ const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
 const BOUNDS_FIXED_PRECISION = 8;
 
+// extract search parameters, including a custom attribute named category
 const pickSearchParamsOnly = params => {
   const { address, origin, bounds, ca_category } = params || {};
   return { address, origin, bounds, ca_category };
@@ -90,6 +91,7 @@ export class SearchPageComponent extends Component {
   onIdle(googleMap) {
     const { history, location } = this.props;
 
+    // parse query parameters, including a custom attribute named category
     const { address, country, bounds, mapSearch, ca_category } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
