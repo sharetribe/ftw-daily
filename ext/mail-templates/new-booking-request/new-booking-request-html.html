@@ -24,6 +24,11 @@
       {{#each line-items}}
         {{#contains include-for "provider"}}
           <tr>
+            {{#eq "day" code}}
+            <td>{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "day" "days"}}</td>
+            <td style="text-align: right; padding-left: 20px">{{> format-money money=line-total}}</td>
+            {{/eq}}
+
             {{#eq "night" code}}
             <td>{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "night" "nights"}}</td>
             <td style="text-align: right; padding-left: 20px">{{> format-money money=line-total}}</td>
@@ -45,7 +50,7 @@
       </tfoot>
     </table>
 
-    <p>You need to accept the request by {{> format-date date=booking-expires-on}}. Otherwise the request will be expired and you won't get paid. If the booked dates won't work for you, you can also choose to decline the request.</p>
+    <p>You need to accept the request by {{> format-date date=delayed-transition.run-at}}. Otherwise the request will be expired and you won't get paid. If the booked dates won't work for you, you can also choose to decline the request.</p>
 
     <p><a href="{{marketplace.url}}/sale/{{url-encode id}}/details">Accept or decline the booking</a></p>
 
