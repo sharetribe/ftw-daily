@@ -17,8 +17,6 @@ const i18n = {
 // The transaction line item code for the main unit type in bookings.
 //
 // Possible values: ['line-item/night', 'line-item/day']
-//
-// TODO: Check that this applies when API adds support for daily bookings
 const bookingUnitType = 'line-item/night';
 
 // To pass environment variables to the client app in the build

@@ -301,10 +301,7 @@ export const review = shape({
 });
 
 export const LINE_ITEM_NIGHT = 'line-item/night';
-
-// TODO: This is speculative, check again when the API adds the day support
 export const LINE_ITEM_DAY = 'line-item/day';
-
 export const LINE_ITEM_PROVIDER_COMMISSION = 'line-item/provider-commission';
 
 const LINE_ITEMS = [LINE_ITEM_NIGHT, LINE_ITEM_DAY, LINE_ITEM_PROVIDER_COMMISSION];
