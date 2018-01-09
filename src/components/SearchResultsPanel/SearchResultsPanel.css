@@ -6,16 +6,10 @@
 }
 
 .listingCards {
-  padding: 0 24px 96px 24px;
-
   @media (--viewportMedium) {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-  }
-
-  @media (--viewportLarge) {
-    padding: 0 36px 36px 36px;
   }
 }
 

@@ -20,40 +20,21 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   <withRouter(Connect(TopbarContainerComponent)) />
   <div>
     <div>
-      <div>
-        <h2>
-          <FormattedMessage
-            id="SearchPage.foundResults"
-            values={
-              Object {
-                "count": 22,
-              }
-            }
-          />
-        </h2>
-      </div>
-      <div>
-        <div>
-          <h2>
-            <FormattedMessage
-              id="SearchPage.foundResultsMobile"
-              values={
-                Object {
-                  "count": 22,
-                }
-              }
-            />
-          </h2>
-        </div>
-        <div
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            id="SearchPage.openMapView"
-            values={Object {}}
-          />
-        </div>
-      </div>
+      <withRouter(SearchFiltersComponent)
+        listingsAreLoaded={true}
+        onMapIconClick={[Function]}
+        resultsCount={22}
+        searchInProgress={false}
+        searchListingsError={null}
+        urlQueryParams={
+          Object {
+            "address": undefined,
+            "bounds": undefined,
+            "ca_category": undefined,
+            "origin": undefined,
+          }
+        }
+      />
       <div
         className=""
       >

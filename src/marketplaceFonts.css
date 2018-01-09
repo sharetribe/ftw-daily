@@ -249,6 +249,32 @@
     }
   }
 
+  --marketplaceSearchFilterLabelFontStyles {
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 13px;
+    line-height: 18px;
+
+    @media (--viewportMedium) {
+      font-weight: var(--fontWeightMedium);
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+
+  --marketplaceSearchFilterOptionFontStyles {
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 13px;
+    line-height: 18px;
+
+    @media (--viewportMedium) {
+      font-weight: var(--fontWeightMedium);
+      font-size: 18px;
+      line-height: 32px;
+    }
+  }
+
   /* ================ Tabbed navigation font styles ================ */
 
   --marketplaceTabNavFontStyles {
