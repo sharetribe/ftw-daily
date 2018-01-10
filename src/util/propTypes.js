@@ -306,6 +306,8 @@ export const LINE_ITEM_PROVIDER_COMMISSION = 'line-item/provider-commission';
 
 const LINE_ITEMS = [LINE_ITEM_NIGHT, LINE_ITEM_DAY, LINE_ITEM_PROVIDER_COMMISSION];
 
+export const bookingUnitType = oneOf([LINE_ITEM_NIGHT, LINE_ITEM_DAY]);
+
 // Denormalised transaction object
 export const transaction = shape({
   id: uuid.isRequired,

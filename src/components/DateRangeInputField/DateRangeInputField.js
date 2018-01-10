@@ -158,7 +158,7 @@ const { bool, func, object, oneOf, string } = PropTypes;
 DateRangeInputFieldComponent.propTypes = {
   className: string,
   rootClassName: string,
-  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]).isRequired,
+  unitType: propTypes.bookingUnitType.isRequired,
   useMobileMargins: bool,
   endDateId: string,
   endDateLabel: string,

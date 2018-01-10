@@ -275,7 +275,7 @@ const { bool, func, instanceOf, oneOf, shape, string } = PropTypes;
 
 DateRangeInputComponent.propTypes = {
   className: string,
-  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]).isRequired,
+  unitType: propTypes.bookingUnitType.isRequired,
   focusedInput: oneOf([START_DATE, END_DATE]),
   initialDates: instanceOf(Date),
   intl: intlShape.isRequired,

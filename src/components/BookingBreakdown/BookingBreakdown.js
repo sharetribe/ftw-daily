@@ -48,7 +48,7 @@ const UnitPriceItem = props => {
 
 UnitPriceItem.propTypes = {
   transaction: propTypes.transaction.isRequired,
-  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]).isRequired,
+  unitType: propTypes.bookingUnitType.isRequired,
   intl: intlShape.isRequired,
 };
 
@@ -256,7 +256,7 @@ BookingBreakdownComponent.propTypes = {
   className: string,
 
   userRole: oneOf(['customer', 'provider']).isRequired,
-  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]).isRequired,
+  unitType: propTypes.bookingUnitType.isRequired,
   transaction: propTypes.transaction.isRequired,
   booking: propTypes.booking.isRequired,
 

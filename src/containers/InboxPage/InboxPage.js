@@ -202,7 +202,7 @@ export const InboxItem = props => {
 };
 
 InboxItem.propTypes = {
-  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]),
+  unitType: propTypes.bookingUnitType.isRequired,
   type: oneOf(['order', 'sale']).isRequired,
   tx: propTypes.transaction.isRequired,
   intl: intlShape.isRequired,
@@ -351,7 +351,7 @@ InboxPageComponent.propTypes = {
     tab: string.isRequired,
   }).isRequired,
 
-  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]),
+  unitType: propTypes.bookingUnitType,
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
   fetchOrdersOrSalesError: propTypes.error,

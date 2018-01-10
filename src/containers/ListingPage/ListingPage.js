@@ -681,7 +681,7 @@ ListingPageComponent.propTypes = {
     push: func.isRequired,
   }).isRequired,
 
-  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]).isRequired,
+  unitType: propTypes.bookingUnitType,
   // from injectIntl
   intl: intlShape.isRequired,
 

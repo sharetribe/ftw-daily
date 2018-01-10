@@ -242,7 +242,7 @@ BookingDatesFormComponent.defaultProps = {
   endDatePlaceholder: null,
 };
 
-const { instanceOf, shape, string, bool, oneOf } = PropTypes;
+const { instanceOf, shape, string, bool } = PropTypes;
 
 BookingDatesFormComponent.propTypes = {
   ...formPropTypes,
@@ -250,7 +250,7 @@ BookingDatesFormComponent.propTypes = {
   rootClassName: string,
   className: string,
 
-  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]).isRequired,
+  unitType: propTypes.bookingUnitType.isRequired,
   price: instanceOf(types.Money),
   isOwnListing: bool,
 
