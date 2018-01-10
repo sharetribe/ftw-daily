@@ -129,6 +129,7 @@ export class BookingDatesFormComponent extends Component {
     const {
       rootClassName,
       className,
+      submitButtonWrapperClassName,
       unitType,
       bookingDates,
       form,
@@ -141,6 +142,7 @@ export class BookingDatesFormComponent extends Component {
 
     const { startDate, endDate } = bookingDates;
     const classes = classNames(rootClassName || css.root, className);
+    const submitButtonClasses = classNames(css.submitButtonWrapper, submitButtonWrapperClassName);
 
     if (!unitPrice) {
       return (
@@ -225,9 +227,11 @@ export class BookingDatesFormComponent extends Component {
             }
           />
         </p>
-        <PrimaryButton className={css.submitButton} type="submit">
-          <FormattedMessage id="BookingDatesForm.requestToBook" />
-        </PrimaryButton>
+        <div className={submitButtonClasses}>
+          <PrimaryButton type="submit">
+            <FormattedMessage id="BookingDatesForm.requestToBook" />
+          </PrimaryButton>
+        </div>
       </Form>
     );
   }
@@ -236,6 +240,7 @@ export class BookingDatesFormComponent extends Component {
 BookingDatesFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  submitButtonWrapperClassName: null,
   price: null,
   isOwnListing: false,
   startDatePlaceholder: null,
@@ -249,6 +254,7 @@ BookingDatesFormComponent.propTypes = {
 
   rootClassName: string,
   className: string,
+  submitButtonWrapperClassName: string,
 
   unitType: propTypes.bookingUnitType.isRequired,
   price: instanceOf(types.Money),

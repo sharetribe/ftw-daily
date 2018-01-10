@@ -8,6 +8,9 @@
 .bookingDates {
   flex-shrink: 0;
   margin-bottom: 46px;
+
+  /* Ensure that calendar dropdown gets some stacking context relative to other form items below */
+  z-index: 1;
 }
 
 .priceBreakdownContainer {
@@ -62,13 +65,13 @@
   }
 }
 
-.submitButton {
+.submitButtonWrapper {
   flex-shrink: 0;
-  margin: 0 24px 24px 24px;
-  width: calc(100% - 48px);
+  padding: 0 24px 24px 24px;
+  width: 100%;
 
   @media (--viewportMedium) {
-    margin: 0;
+    padding: 0;
     width: 100%;
   }
 }
