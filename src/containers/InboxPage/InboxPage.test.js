@@ -10,7 +10,7 @@ import {
 } from '../../util/test-data';
 import { InboxPageComponent, InboxItem } from './InboxPage';
 import routeConfiguration from '../../routeConfiguration';
-import { TX_TRANSITION_PREAUTHORIZE } from '../../util/propTypes';
+import { TX_TRANSITION_PREAUTHORIZE, LINE_ITEM_NIGHT } from '../../util/propTypes';
 
 const noop = () => null;
 
@@ -31,6 +31,7 @@ describe('InboxPage', () => {
     });
 
     const ordersProps = {
+      unitType: LINE_ITEM_NIGHT,
       location: { search: '' },
       history: {
         push: () => console.log('HistoryPush called'),
@@ -74,11 +75,17 @@ describe('InboxPage', () => {
 
     // Deeply render one InboxItem
     const orderItem = renderDeep(
-      <InboxItem type="order" tx={ordersProps.transactions[0]} intl={fakeIntl} />
+      <InboxItem
+        unitType={LINE_ITEM_NIGHT}
+        type="order"
+        tx={ordersProps.transactions[0]}
+        intl={fakeIntl}
+      />
     );
     expect(orderItem).toMatchSnapshot();
 
     const salesProps = {
+      unitType: LINE_ITEM_NIGHT,
       location: { search: '' },
       history: {
         push: () => console.log('HistoryPush called'),
@@ -122,7 +129,12 @@ describe('InboxPage', () => {
 
     // Deeply render one InboxItem
     const saleItem = renderDeep(
-      <InboxItem type="sale" tx={salesProps.transactions[0]} intl={fakeIntl} />
+      <InboxItem
+        unitType={LINE_ITEM_NIGHT}
+        type="sale"
+        tx={salesProps.transactions[0]}
+        intl={fakeIntl}
+      />
     );
     expect(saleItem).toMatchSnapshot();
   });

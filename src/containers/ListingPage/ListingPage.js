@@ -220,6 +220,7 @@ export class ListingPageComponent extends Component {
 
   render() {
     const {
+      unitType,
       tab,
       currentUser,
       getListing,
@@ -624,6 +625,7 @@ export class ListingPageComponent extends Component {
                   {!currentListing.attributes.closed ? (
                     <BookingDatesForm
                       className={css.bookingForm}
+                      unitType={unitType}
                       onSubmit={handleBookingSubmit}
                       price={price}
                       isOwnListing={isOwnListing}
@@ -663,6 +665,7 @@ export class ListingPageComponent extends Component {
 }
 
 ListingPageComponent.defaultProps = {
+  unitType: config.bookingUnitType,
   currentUser: null,
   enquiryModalOpenForListingId: null,
   showListingError: null,
@@ -678,6 +681,7 @@ ListingPageComponent.propTypes = {
     push: func.isRequired,
   }).isRequired,
 
+  unitType: propTypes.bookingUnitType,
   // from injectIntl
   intl: intlShape.isRequired,
 

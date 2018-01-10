@@ -35,8 +35,35 @@ export const ANCHOR_LEFT = 'left';
 // value and moves on to another input within this component.
 const BLUR_TIMEOUT = 100;
 
-// Minumum nights count depends on bookingUnitType (day vs night)
-const IS_DAY_PICKER = config.bookingUnitType === propTypes.LINE_ITEM_DAY;
+const apiEndDateToPickerDate = (unitType, endDate) => {
+  const isValid = endDate instanceof Date;
+  const isDaily = unitType === propTypes.LINE_ITEM_DAY;
+
+  if (!isValid) {
+    return null;
+  } else if (isDaily) {
+    // API end dates are exlusive, so we need to shift them with daily
+    // booking.
+    return moment(endDate).subtract(1, 'days');
+  } else {
+    return moment(endDate);
+  }
+};
+
+const pickerEndDateToApiDate = (unitType, endDate) => {
+  const isValid = endDate instanceof moment;
+  const isDaily = unitType === propTypes.LINE_ITEM_DAY;
+
+  if (!isValid) {
+    return null;
+  } else if (isDaily) {
+    // API end dates are exlusive, so we need to shift them with daily
+    // booking.
+    return endDate.add(1, 'days').toDate();
+  } else {
+    return endDate.toDate();
+  }
+};
 
 // Possible configuration options of React-dates
 const defaultProps = {
@@ -89,7 +116,7 @@ const defaultProps = {
   renderDayContents: day => {
     return <span className="renderedDay">{day.format('D')}</span>;
   },
-  minimumNights: IS_DAY_PICKER ? 0 : 1,
+  minimumNights: 1,
   enableOutsideDays: false,
   isDayBlocked: () => false,
 
@@ -144,9 +171,10 @@ class DateRangeInputComponent extends Component {
   }
 
   onDatesChange(dates) {
+    const { unitType } = this.props;
     const { startDate, endDate } = dates;
     const startDateAsDate = startDate instanceof moment ? startDate.toDate() : null;
-    const endDateAsDate = endDate instanceof moment ? endDate.toDate() : null;
+    const endDateAsDate = pickerEndDateToApiDate(unitType, endDate);
     this.props.onChange({ startDate: startDateAsDate, endDate: endDateAsDate });
   }
 
@@ -170,6 +198,7 @@ class DateRangeInputComponent extends Component {
     /* eslint-disable no-unused-vars */
     const {
       className,
+      unitType,
       initialDates,
       intl,
       name,
@@ -188,12 +217,13 @@ class DateRangeInputComponent extends Component {
     } = this.props;
     /* eslint-enable no-unused-vars */
 
+    const isDaily = unitType === propTypes.LINE_ITEM_DAY;
     const initialStartMoment = initialDates ? moment(initialDates.startDate) : null;
     const initialEndMoment = initialDates ? moment(initialDates.endDate) : null;
     const startDate =
       value && value.startDate instanceof Date ? moment(value.startDate) : initialStartMoment;
     const endDate =
-      value && value.endDate instanceof Date ? moment(value.endDate) : initialEndMoment;
+      apiEndDateToPickerDate(unitType, value ? value.endDate : null) || initialEndMoment;
 
     const startDatePlaceholderTxt =
       startDatePlaceholderText ||
@@ -223,6 +253,7 @@ class DateRangeInputComponent extends Component {
           onFocusChange={this.onFocusChange}
           startDate={startDate}
           endDate={endDate}
+          minimumNights={isDaily ? 0 : 1}
           onDatesChange={this.onDatesChange}
           startDatePlaceholderText={startDatePlaceholderTxt}
           endDatePlaceholderText={endDatePlaceholderTxt}
@@ -244,6 +275,7 @@ const { bool, func, instanceOf, oneOf, shape, string } = PropTypes;
 
 DateRangeInputComponent.propTypes = {
   className: string,
+  unitType: propTypes.bookingUnitType.isRequired,
   focusedInput: oneOf([START_DATE, END_DATE]),
   initialDates: instanceOf(Date),
   intl: intlShape.isRequired,

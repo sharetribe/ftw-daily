@@ -9,7 +9,7 @@ import moment from 'moment';
 import Decimal from 'decimal.js';
 import { types } from '../../util/sdkLoader';
 import { required, bookingDatesRequired } from '../../util/validators';
-import { nightsBetween, START_DATE, END_DATE } from '../../util/dates';
+import { nightsBetween, daysBetween, START_DATE, END_DATE } from '../../util/dates';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import * as propTypes from '../../util/propTypes';
 import config from '../../config';
@@ -17,9 +17,9 @@ import { Form, PrimaryButton, BookingBreakdown, DateRangeInputField } from '../.
 
 import css from './BookingDatesForm.css';
 
-const estimatedTotalPrice = (unitPrice, nightCount) => {
+const estimatedTotalPrice = (unitPrice, unitCount) => {
   const numericPrice = convertMoneyToNumber(unitPrice);
-  const numericTotalPrice = new Decimal(numericPrice).times(nightCount).toNumber();
+  const numericTotalPrice = new Decimal(numericPrice).times(unitCount).toNumber();
   return new types.Money(
     convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
     unitPrice.currency
@@ -29,10 +29,13 @@ const estimatedTotalPrice = (unitPrice, nightCount) => {
 // When we cannot speculatively initiate a transaction (i.e. logged
 // out), we must estimate the booking breakdown. This function creates
 // an estimated transaction object for that use case.
-const estimatedNightlyTransaction = (bookingStart, bookingEnd, unitPrice) => {
+const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice) => {
   const now = new Date();
-  const nightCount = nightsBetween(bookingStart, bookingEnd);
-  const totalPrice = estimatedTotalPrice(unitPrice, nightCount);
+  const isNightly = unitType === propTypes.LINE_ITEM_NIGHT;
+  const unitCount = isNightly
+    ? nightsBetween(bookingStart, bookingEnd)
+    : daysBetween(bookingStart, bookingEnd);
+  const totalPrice = estimatedTotalPrice(unitPrice, unitCount);
 
   return {
     id: new types.UUID('estimated-transaction'),
@@ -45,10 +48,10 @@ const estimatedNightlyTransaction = (bookingStart, bookingEnd, unitPrice) => {
       payoutTotal: totalPrice,
       lineItems: [
         {
-          code: propTypes.LINE_ITEM_NIGHT,
+          code: isNightly ? propTypes.LINE_ITEM_NIGHT : propTypes.LINE_ITEM_DAY,
           includeFor: ['customer', 'provider'],
           unitPrice: unitPrice,
-          quantity: new Decimal(nightCount),
+          quantity: new Decimal(unitCount),
           lineTotal: totalPrice,
           reversal: false,
         },
@@ -72,20 +75,19 @@ const estimatedNightlyTransaction = (bookingStart, bookingEnd, unitPrice) => {
   };
 };
 
-const estimatedBreakdown = (bookingStart, bookingEnd, unitPrice) => {
+const estimatedBreakdown = (unitType, bookingStart, bookingEnd, unitPrice) => {
   const canEstimatePrice = bookingStart && bookingEnd && unitPrice;
   if (!canEstimatePrice) {
     return null;
   }
 
-  // TODO: estimate daily tx if config is set
-  const tx = estimatedNightlyTransaction(bookingStart, bookingEnd, unitPrice);
+  const tx = estimatedTransaction(unitType, bookingStart, bookingEnd, unitPrice);
 
   return (
     <BookingBreakdown
       className={css.receipt}
       userRole="customer"
-      unitType={config.bookingUnitType}
+      unitType={unitType}
       transaction={tx}
       booking={tx.booking}
     />
@@ -127,6 +129,7 @@ export class BookingDatesFormComponent extends Component {
     const {
       rootClassName,
       className,
+      unitType,
       bookingDates,
       form,
       price: unitPrice,
@@ -172,7 +175,7 @@ export class BookingDatesFormComponent extends Component {
         <h3 className={css.priceBreakdownTitle}>
           <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
         </h3>
-        {estimatedBreakdown(startDate, endDate, unitPrice)}
+        {estimatedBreakdown(unitType, startDate, endDate, unitPrice)}
       </div>
     ) : null;
 
@@ -198,6 +201,7 @@ export class BookingDatesFormComponent extends Component {
         <DateRangeInputField
           className={css.bookingDates}
           name="bookingDates"
+          unitType={unitType}
           startDateId={`${form}.bookingStartDate`}
           startDateLabel={bookingStartLabel}
           startDatePlaceholderText={startDatePlaceholderText}
@@ -245,6 +249,8 @@ BookingDatesFormComponent.propTypes = {
 
   rootClassName: string,
   className: string,
+
+  unitType: propTypes.bookingUnitType.isRequired,
   price: instanceOf(types.Money),
   isOwnListing: bool,
 

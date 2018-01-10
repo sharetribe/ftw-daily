@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import moment from 'moment';
 import classNames from 'classnames';
 import * as propTypes from '../../util/propTypes';
 import { formatMoney } from '../../util/currency';
 import { userDisplayName } from '../../util/data';
+import { daysBetween } from '../../util/dates';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
@@ -25,6 +27,7 @@ import {
   Footer,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
+import config from '../../config';
 
 import { loadData } from './InboxPage.duck';
 import css from './InboxPage.css';
@@ -115,17 +118,26 @@ const txState = (intl, tx, isOrder) => {
   };
 };
 
-const bookingData = (tx, isOrder, intl) => {
-  const booking = tx.booking;
-  const bookingStart = formatDate(intl, booking.attributes.start);
-  const bookingEnd = formatDate(intl, booking.attributes.end);
+const bookingData = (unitType, tx, isOrder, intl) => {
+  const { start, end } = tx.booking.attributes;
+  const isDaily = unitType === propTypes.LINE_ITEM_DAY;
+  const isSingleDay = isDaily && daysBetween(start, end) === 1;
+  const bookingStart = formatDate(intl, start);
+
+  // Shift the exclusive API end date with daily bookings
+  const endDate = isDaily
+    ? moment(end)
+        .subtract(1, 'days')
+        .toDate()
+    : end;
+  const bookingEnd = formatDate(intl, endDate);
   const bookingPrice = isOrder ? tx.attributes.payinTotal : tx.attributes.payoutTotal;
   const price = formatMoney(intl, bookingPrice);
-  return { bookingStart, bookingEnd, price };
+  return { bookingStart, bookingEnd, price, isSingleDay };
 };
 
 export const InboxItem = props => {
-  const { type, tx, intl } = props;
+  const { unitType, type, tx, intl } = props;
   const { customer, provider } = tx;
   const isOrder = type === 'order';
 
@@ -142,7 +154,10 @@ export const InboxItem = props => {
   const lastTransitionedAt = formatDate(intl, tx.attributes.lastTransitionedAt);
 
   const isEnquiry = propTypes.txIsEnquired(tx);
-  const { bookingStart, bookingEnd, price } = isEnquiry ? {} : bookingData(tx, isOrder, intl);
+  const { bookingStart, bookingEnd, price, isSingleDay } = isEnquiry
+    ? {}
+    : bookingData(unitType, tx, isOrder, intl);
+  const dateInfo = isSingleDay ? bookingStart.short : `${bookingStart.short} - ${bookingEnd.short}`;
 
   const linkClasses = classNames(css.itemLink, {
     [css.bannedUserLink]: isOtherUserBanned,
@@ -165,7 +180,7 @@ export const InboxItem = props => {
           </div>
           {!isEnquiry ? (
             <div className={classNames(css.bookingInfo, stateData.bookingClassName)}>
-              {bookingStart.short} - {bookingEnd.short}
+              {dateInfo}
               <span className={css.itemPrice}>{price}</span>
             </div>
           ) : null}
@@ -187,6 +202,7 @@ export const InboxItem = props => {
 };
 
 InboxItem.propTypes = {
+  unitType: propTypes.bookingUnitType.isRequired,
   type: oneOf(['order', 'sale']).isRequired,
   tx: propTypes.transaction.isRequired,
   intl: intlShape.isRequired,
@@ -194,6 +210,7 @@ InboxItem.propTypes = {
 
 export const InboxPageComponent = props => {
   const {
+    unitType,
     currentUser,
     fetchInProgress,
     fetchOrdersOrSalesError,
@@ -220,7 +237,7 @@ export const InboxPageComponent = props => {
   const toTxItem = tx => {
     return (
       <li key={tx.id.uuid} className={css.listItem}>
-        <InboxItem type={isOrders ? 'order' : 'sale'} tx={tx} intl={intl} />
+        <InboxItem unitType={unitType} type={isOrders ? 'order' : 'sale'} tx={tx} intl={intl} />
       </li>
     );
   };
@@ -320,6 +337,7 @@ export const InboxPageComponent = props => {
 };
 
 InboxPageComponent.defaultProps = {
+  unitType: config.bookingUnitType,
   currentUser: null,
   currentUserHasOrders: null,
   fetchOrdersOrSalesError: null,
@@ -333,6 +351,7 @@ InboxPageComponent.propTypes = {
     tab: string.isRequired,
   }).isRequired,
 
+  unitType: propTypes.bookingUnitType,
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
   fetchOrdersOrSalesError: propTypes.error,

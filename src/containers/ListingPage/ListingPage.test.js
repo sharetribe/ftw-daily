@@ -5,6 +5,7 @@ import { types } from '../../util/sdkLoader';
 import { createUser, createCurrentUser, createListing, fakeIntl } from '../../util/test-data';
 import { storableError } from '../../util/errors';
 import { renderShallow } from '../../util/test-helpers';
+import * as propTypes from '../../util/propTypes';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { showListingRequest, showListingError, showListing } from './ListingPage.duck';
 
@@ -26,6 +27,7 @@ describe('ListingPage', () => {
     const getListing = () => listing1;
 
     const props = {
+      unitType: propTypes.LINE_ITEM_NIGHT,
       location: {
         pathname: `/l/${slug}/${id}`,
         search: '',

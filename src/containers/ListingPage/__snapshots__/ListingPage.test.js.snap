@@ -387,6 +387,7 @@ exports[`ListingPage matches snapshot 1`] = `
                   "currency": "USD",
                 }
               }
+              unitType="line-item/night"
             />
           </withViewport(ModalInMobileComponent)>
           <div>

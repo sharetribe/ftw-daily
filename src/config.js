@@ -18,7 +18,9 @@ const i18n = {
 //
 // Possible values: ['line-item/night', 'line-item/day']
 //
-// TODO: Check that this applies when API adds support for daily bookings
+// Note: if you change this, many of the generic translations will
+// still show information about nights. Make sure to go through the
+// translations when the unit is changed.
 const bookingUnitType = 'line-item/night';
 
 // To pass environment variables to the client app in the build
