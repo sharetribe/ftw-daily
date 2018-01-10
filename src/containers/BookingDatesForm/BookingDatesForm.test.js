@@ -17,6 +17,7 @@ describe('BookingDatesForm', () => {
     const tree = renderShallow(
       <BookingDatesFormComponent
         {...fakeFormProps}
+        unitType={propTypes.LINE_ITEM_NIGHT}
         intl={fakeIntl}
         dispatch={noop}
         onSubmit={v => v}
@@ -35,6 +36,7 @@ describe('BookingDatesForm', () => {
     const tree = shallow(
       <BookingDatesFormComponent
         {...fakeFormProps}
+        unitType={propTypes.LINE_ITEM_NIGHT}
         intl={fakeIntl}
         dispatch={noop}
         onSubmit={v => v}

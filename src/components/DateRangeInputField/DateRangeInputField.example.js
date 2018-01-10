@@ -4,6 +4,7 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import moment from 'moment';
 import { Button } from '../../components';
 import { required, bookingDatesRequired } from '../../util/validators';
+import * as propTypes from '../../util/propTypes';
 import DateRangeInputField from './DateRangeInputField';
 
 const FormComponent = props => {
@@ -32,6 +33,7 @@ export const Empty = {
   props: {
     dateInputProps: {
       name: 'bookingDates',
+      unitType: propTypes.LINE_ITEM_NIGHT,
       startDateId: `${defaultFormName}.bookingStartDate`,
       startDateLabel: 'Start date',
       startDatePlaceholderText: moment().format('ddd, MMMM D'),

@@ -75,19 +75,19 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice) => 
   };
 };
 
-const estimatedBreakdown = (bookingStart, bookingEnd, unitPrice) => {
+const estimatedBreakdown = (unitType, bookingStart, bookingEnd, unitPrice) => {
   const canEstimatePrice = bookingStart && bookingEnd && unitPrice;
   if (!canEstimatePrice) {
     return null;
   }
 
-  const tx = estimatedTransaction(config.bookingUnitType, bookingStart, bookingEnd, unitPrice);
+  const tx = estimatedTransaction(unitType, bookingStart, bookingEnd, unitPrice);
 
   return (
     <BookingBreakdown
       className={css.receipt}
       userRole="customer"
-      unitType={config.bookingUnitType}
+      unitType={unitType}
       transaction={tx}
       booking={tx.booking}
     />
@@ -129,6 +129,7 @@ export class BookingDatesFormComponent extends Component {
     const {
       rootClassName,
       className,
+      unitType,
       bookingDates,
       form,
       price: unitPrice,
@@ -174,7 +175,7 @@ export class BookingDatesFormComponent extends Component {
         <h3 className={css.priceBreakdownTitle}>
           <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
         </h3>
-        {estimatedBreakdown(startDate, endDate, unitPrice)}
+        {estimatedBreakdown(unitType, startDate, endDate, unitPrice)}
       </div>
     ) : null;
 
@@ -200,6 +201,7 @@ export class BookingDatesFormComponent extends Component {
         <DateRangeInputField
           className={css.bookingDates}
           name="bookingDates"
+          unitType={unitType}
           startDateId={`${form}.bookingStartDate`}
           startDateLabel={bookingStartLabel}
           startDatePlaceholderText={startDatePlaceholderText}
@@ -240,13 +242,15 @@ BookingDatesFormComponent.defaultProps = {
   endDatePlaceholder: null,
 };
 
-const { instanceOf, shape, string, bool } = PropTypes;
+const { instanceOf, shape, string, bool, oneOf } = PropTypes;
 
 BookingDatesFormComponent.propTypes = {
   ...formPropTypes,
 
   rootClassName: string,
   className: string,
+
+  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]).isRequired,
   price: instanceOf(types.Money),
   isOwnListing: bool,
 

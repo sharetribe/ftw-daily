@@ -16,6 +16,7 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
     startDateId="fakeTestForm.bookingStartDate"
     startDateLabel="BookingDatesForm.bookingStartTitle"
     startDatePlaceholderText="today"
+    unitType="line-item/night"
     useMobileMargins={true}
     validate={
       Array [

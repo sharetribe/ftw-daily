@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import classNames from 'classnames';
 import { START_DATE, END_DATE } from '../../util/dates';
+import * as propTypes from '../../util/propTypes';
 import { ValidationError } from '../../components';
 
 import DateRangeInput from './DateRangeInput';
@@ -45,6 +46,7 @@ class DateRangeInputFieldComponent extends Component {
     const {
       className,
       rootClassName,
+      unitType,
       startDateId,
       startDateLabel,
       endDateId,
@@ -108,6 +110,7 @@ class DateRangeInputFieldComponent extends Component {
     // eslint-disable-next-line no-unused-vars
     const { onBlur, onFocus, ...restOfInput } = input;
     const inputProps = {
+      unitType,
       onBlur: this.handleBlur,
       onFocus: this.handleFocus,
       useMobileMargins,
@@ -155,6 +158,7 @@ const { bool, func, object, oneOf, string } = PropTypes;
 DateRangeInputFieldComponent.propTypes = {
   className: string,
   rootClassName: string,
+  unitType: oneOf([propTypes.LINE_ITEM_NIGHT, propTypes.LINE_ITEM_DAY]).isRequired,
   useMobileMargins: bool,
   endDateId: string,
   endDateLabel: string,
