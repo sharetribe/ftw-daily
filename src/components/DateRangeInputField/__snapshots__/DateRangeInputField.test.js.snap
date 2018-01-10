@@ -5,20 +5,20 @@ exports[`DateRangeInput matches snapshot 1`] = `
   className=""
 >
   <div
-    className="DateRangePicker"
+    className="DateRangePicker DateRangePicker_1"
   >
     <div>
       <div
-        className="DateRangePickerInput"
+        className="DateRangePickerInput DateRangePickerInput_1"
       >
         <div
-          className="DateInput DateInput--open-down"
+          className="DateInput DateInput_1"
         >
           <input
             aria-describedby="DateInput__screen-reader-message-bookingStartDate"
             aria-label="today"
             autoComplete="off"
-            className="DateInput__input needsclick"
+            className="DateInput_input DateInput_input_1"
             disabled={false}
             id="bookingStartDate"
             name="bookingStartDate"
@@ -32,32 +32,27 @@ exports[`DateRangeInput matches snapshot 1`] = `
             value=""
           />
           <p
-            className="screen-reader-only"
+            className="DateInput_screenReaderMessage DateInput_screenReaderMessage_1"
             id="DateInput__screen-reader-message-bookingStartDate"
           >
             DateRangeInputField.screenReaderInputMessage
           </p>
-          <div
-            className="DateInput__display-text"
-          >
-            today
-          </div>
         </div>
         <div
           aria-hidden="true"
-          className="DateRangePickerInput__arrow"
+          className="DateRangePickerInput_arrow DateRangePickerInput_arrow_1"
           role="presentation"
         >
           <span />
         </div>
         <div
-          className="DateInput DateInput--open-down"
+          className="DateInput DateInput_1"
         >
           <input
             aria-describedby="DateInput__screen-reader-message-bookingEndDate"
             aria-label="tomorrow"
             autoComplete="off"
-            className="DateInput__input needsclick"
+            className="DateInput_input DateInput_input_1"
             disabled={false}
             id="bookingEndDate"
             name="bookingEndDate"
@@ -71,16 +66,11 @@ exports[`DateRangeInput matches snapshot 1`] = `
             value=""
           />
           <p
-            className="screen-reader-only"
+            className="DateInput_screenReaderMessage DateInput_screenReaderMessage_1"
             id="DateInput__screen-reader-message-bookingEndDate"
           >
             DateRangeInputField.screenReaderInputMessage
           </p>
-          <div
-            className="DateInput__display-text"
-          >
-            tomorrow
-          </div>
         </div>
       </div>
     </div>

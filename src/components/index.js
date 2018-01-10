@@ -11,7 +11,6 @@ export {
 } from './Button/Button';
 export { default as CookieConsent } from './CookieConsent/CookieConsent';
 export { default as CurrencyInputField } from './CurrencyInputField/CurrencyInputField';
-export { default as DateInputField } from './DateInputField/DateInputField';
 export { default as DateRangeInputField } from './DateRangeInputField/DateRangeInputField';
 export { default as Discussion } from './Discussion/Discussion';
 export {

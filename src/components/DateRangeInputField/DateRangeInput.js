@@ -6,8 +6,13 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { intlShape, injectIntl } from 'react-intl';
+
+// react-dates needs to be initialized before using any react-dates component
+// Since this is currently only component using react-dates we can do it here
+// https://github.com/airbnb/react-dates#initialize
+import 'react-dates/initialize';
 import { DateRangePicker, isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
+import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import moment from 'moment';
 import { START_DATE, END_DATE } from '../../util/dates';
@@ -52,6 +57,8 @@ const defaultProps = {
   customArrowIcon: <span />,
   customInputIcon: null,
   customCloseIcon: null,
+  noBorder: true,
+  block: false,
 
   // calendar presentation and interaction related props
   renderMonth: null,
@@ -75,9 +82,11 @@ const defaultProps = {
   navNext: <NextMonthIcon />,
   onPrevMonthClick() {},
   onNextMonthClick() {},
+  transitionDuration: 200, // milliseconds between next month changes etc.
 
+  renderCalendarDay: undefined, // If undefined, renders react-dates/lib/components/CalendarDay
   // day presentation and interaction related props
-  renderDay: day => {
+  renderDayContents: day => {
     return <span className="renderedDay">{day.format('D')}</span>;
   },
   minimumNights: IS_DAY_PICKER ? 0 : 1,

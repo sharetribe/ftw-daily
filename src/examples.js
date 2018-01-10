@@ -6,7 +6,6 @@ import * as BirthdayInputField from './components/BirthdayInputField/BirthdayInp
 import * as BookingBreakdown from './components/BookingBreakdown/BookingBreakdown.example';
 import * as Button from './components/Button/Button.example';
 import * as CurrencyInputField from './components/CurrencyInputField/CurrencyInputField.example';
-import * as DateInputField from './components/DateInputField/DateInputField.example';
 import * as DateRangeInputField from './components/DateRangeInputField/DateRangeInputField.example';
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
@@ -79,7 +78,6 @@ export {
   Button,
   Colors,
   CurrencyInputField,
-  DateInputField,
   DateRangeInputField,
   EditListingDescriptionForm,
   EditListingLocationForm,

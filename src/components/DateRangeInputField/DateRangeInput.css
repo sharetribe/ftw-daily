@@ -15,22 +15,34 @@
   & :global(.DateRangePicker) {
     display: block;
   }
-  & :global(.DateRangePicker__picker--horizontal) {
-    top: 36px;
+  & :global(.DateRangePicker_picker__directionLeft) {
+    /* !important is added to top because react-dates uses inline style for height */
+    /* Similar problem as in issue: https://github.com/airbnb/react-dates/issues/947 */
+    top: 36px !important;
     width: 100%;
     min-height: calc(100vh - var(--datepickerDistanceToTop));
     background-color: var(--marketplaceColor);
 
     @media (--viewportMedium) {
-      top: 45px;
+      /* !important is added to top because react-dates uses inline style for height */
+      /* Similar problem as in issue: https://github.com/airbnb/react-dates/issues/947 */
+      top: 45px !important;
     }
 
     @media (--viewportMedium) {
-      top: 42px;
+      /* !important is added to top because react-dates uses inline style for height */
+      /* Similar problem as in issue: https://github.com/airbnb/react-dates/issues/947 */
+      top: 42px !important;
       min-height: auto;
       box-shadow: var(--boxShadowPopup);
       border-radius: 0 0 2px 2px;
     }
+  }
+
+  & :global(.DateInput_input) {
+    padding: 0;
+    border: 0;
+    background: none;
   }
   & :global(.DateRangePickerInput) {
     width: 100%;
@@ -39,11 +51,12 @@
     border: none;
     background: none;
   }
-  & :global(.DayPicker--horizontal) {
+  & :global(.DayPicker__horizontal) {
     margin: 0 auto;
     background-color: var(--marketplaceColor);
     box-shadow: none;
   }
+  & :global(.CalendarMonth),
   & :global(.CalendarMonthGrid) {
     background-color: transparent;
   }
@@ -56,16 +69,16 @@
       padding: 6px 0 9px 0;
     }
   }
-  & :global(.DayPicker__week-header) {
+  & :global(.DayPicker_weekHeader) {
     color: var(--matterColorLight);
     top: 57px;
   }
 
-  & :global(.DayPicker__week-header li) {
+  & :global(.DayPicker_weekHeader_li) {
     font-weight: 400;
   }
 
-  & :global(.CalendarMonth__caption) {
+  & :global(.CalendarMonth_caption) {
     color: var(--matterColorLight);
     @apply --marketplaceH2FontStyles;
     margin: 1px 0 14px;
@@ -76,12 +89,12 @@
       margin-bottom: 0;
     }
   }
-  & :global(.DayPickerNavigation__prev),
-  & :global(.DayPickerNavigation__next) {
+  & :global(.DayPickerNavigation_button) {
     color: var(--matterColorLight);
     border: 0;
   }
-  & :global(.CalendarDay__button) {
+  & :global(.CalendarDay__default) {
+    background-color: var(--marketplaceColor);
     border: 0;
     padding: 0;
     width: 100%;
@@ -101,18 +114,23 @@
   }
 
   /* Add an underline for '.renderedDay' */
-  & :global(.CalendarDay--today) {
+  & :global(.CalendarDay__today .renderedDay) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: var(--selectionHeight);
     background-image: url("data:image/svg+xml;utf8,<svg width='14' height='2' viewBox='0 0 14 2' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h14v2H0z' fill='%23FFF' fill-rule='evenodd'/></svg>");
-    background-position: center 30px;
+    background-position: center 28px;
   }
 
   /* Remove default bg-color and use our extra span instead '.renderedDay' */
-  & :global(.CalendarDay--hovered-span),
-  & :global(.CalendarDay--selected-span) {
+  & :global(.CalendarDay__hovered_span),
+  & :global(.CalendarDay__selected_span) {
     background-image: transparent;
     background-color: transparent;
   }
-  & :global(.CalendarDay--hovered-span .renderedDay) {
+  & :global(.CalendarDay__hovered_span .renderedDay) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,7 +138,7 @@
     height: var(--selectionHeight);
     background-color: var(--hoveredOverlayColor);
   }
-  & :global(.CalendarDay--selected-span .renderedDay) {
+  & :global(.CalendarDay__selected_span .renderedDay) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,11 +148,11 @@
     transition: all 0.2s ease-out;
   }
   /* Remove default bg-color and use our extra span instead '.renderedDay' */
-  & :global(.CalendarDay--selected-start) {
+  & :global(.CalendarDay__selected_start) {
     background-color: transparent;
     background-image: none;
   }
-  & :global(.CalendarDay--selected-start .renderedDay) {
+  & :global(.CalendarDay__selected_start .renderedDay) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -145,10 +163,10 @@
     border-bottom-left-radius: calc(var(--selectionHeight) / 2);
   }
   /* Remove default bg-color and use our extra span instead '.renderedDay' */
-  & :global(.CalendarDay--after-hovered-start) {
+  & :global(.CalendarDay__after-hovered_start) {
     background-color: transparent;
   }
-  & :global(.CalendarDay--after-hovered-start .renderedDay) {
+  & :global(.CalendarDay__after-hovered_start .renderedDay) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -157,10 +175,10 @@
     background-color: var(--hoveredOverlayColor);
   }
   /* Remove default bg-color and use our extra span instead '.renderedDay' */
-  & :global(.CalendarDay--selected-end) {
+  & :global(.CalendarDay__selected_end) {
     background-color: transparent;
   }
-  & :global(.CalendarDay--selected-end .renderedDay) {
+  & :global(.CalendarDay__selected_end .renderedDay) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -170,11 +188,7 @@
     border-top-right-radius: calc(var(--selectionHeight) / 2);
     border-bottom-right-radius: calc(var(--selectionHeight) / 2);
   }
-  /* Remove default bg-color and use our extra span instead '.renderedDay' */
-  & :global(.CalendarDay--hovered) {
-    background-color: transparent;
-  }
-  & :global(.CalendarDay--hovered .renderedDay) {
+  & :global(.CalendarDay:hover .renderedDay) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -183,30 +197,18 @@
     background-color: var(--hoveredOverlayColor);
   }
   /* Remove default bg-color and use our extra span instead '.renderedDay' */
-  & :global(.CalendarDay--blocked-out-of-range) {
+  & :global(.CalendarDay__blocked_out_of_range),
+  & :global(.CalendarDay__blocked_out_of_range:active),
+  & :global(.CalendarDay__blocked_out_of_range:hover) {
     background-color: transparent;
     color: var(--marketplaceColorDark);
     border: 0;
   }
-  & :global(.CalendarDay--blocked-out-of-range .renderedDay) {
+  & :global(.CalendarDay__blocked_out_of_range .renderedDay) {
     background-color: transparent;
   }
-  & :global(.DateInput--with-caret::before) {
+  & :global(.DateInput_fang) {
     display: none;
-  }
-  & :global(.DateInput--with-caret::after) {
-    display: none;
-  }
-  & :global(.DateInput__display-text) {
-    @apply --marketplaceDefaultFontStyles;
-    padding: 0;
-    color: var(--matterColorAnti);
-  }
-  & :global(.DateInput__display-text--focused) {
-    background-color: transparent;
-  }
-  & :global(.DateInput__display-text--has-input) {
-    color: var(--matterColor);
   }
 }
 

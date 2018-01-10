@@ -177,6 +177,14 @@ anymatch@^1.3.0:
     arrify "^1.0.0"
     micromatch "^2.1.5"
 
+aphrodite@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/aphrodite/-/aphrodite-1.2.5.tgz#8358c36c80bb03aee9b97165aaa70186225b4983"
+  dependencies:
+    asap "^2.0.3"
+    inline-style-prefixer "^3.0.1"
+    string-hash "^1.1.3"
+
 append-transform@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/append-transform/-/append-transform-0.4.0.tgz#d76ebf8ca94d276e247a36bad44a4b74ab611991"
@@ -232,7 +240,7 @@ array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
 
-array-flatten@^2.1.0:
+array-flatten@^2.1.0, array-flatten@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-2.1.1.tgz#426bb9da84090c1838d812c8150af20a8331e296"
 
@@ -275,6 +283,10 @@ array.prototype.find@^2.0.4:
 arrify@^1.0.0, arrify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
+
+asap@^2.0.3:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
 
 asap@~2.0.3:
   version "2.0.5"
@@ -1167,6 +1179,10 @@ boom@5.x.x:
   dependencies:
     hoek "4.x.x"
 
+bowser@^1.7.3:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/bowser/-/bowser-1.9.1.tgz#f86ef2132e8cb10b3eb6ea5af018758c587020db"
+
 boxen@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/boxen/-/boxen-0.6.0.tgz#8364d4248ac34ff0ef1b2f2bf49a6c60ce0d81b6"
@@ -1214,6 +1230,10 @@ braces@^1.8.2:
     expand-range "^1.8.1"
     preserve "^0.2.0"
     repeat-element "^1.1.2"
+
+brcast@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/brcast/-/brcast-2.0.2.tgz#2db16de44140e418dc37fab10beec0369e78dcef"
 
 brorand@^1.0.1:
   version "1.1.0"
@@ -1893,6 +1913,12 @@ css-color-names@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/css-color-names/-/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0"
 
+css-in-js-utils@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/css-in-js-utils/-/css-in-js-utils-2.0.0.tgz#5af1dd70f4b06b331f48d22a3d86e0786c0b9435"
+  dependencies:
+    hyphenate-style-name "^1.0.2"
+
 css-loader@0.28.4:
   version "0.28.4"
   resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-0.28.4.tgz#6cf3579192ce355e8b38d5f42dd7a1f2ec898d0f"
@@ -2080,6 +2106,10 @@ deep-extend@~0.4.0:
 deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
+
+deepmerge@^1.5.1, deepmerge@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-1.5.2.tgz#10499d868844cdad4fee0842df8c7f6f0c95a753"
 
 default-gateway@^2.2.2:
   version "2.6.1"
@@ -3248,6 +3278,13 @@ glob@^7.0.5:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
+global-cache@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/global-cache/-/global-cache-1.2.1.tgz#39ca020d3dd7b3f0934c52b75363f8d53312c16d"
+  dependencies:
+    define-properties "^1.1.2"
+    is-symbol "^1.0.1"
+
 global-dirs@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/global-dirs/-/global-dirs-0.1.0.tgz#10d34039e0df04272e262cf24224f7209434df4f"
@@ -3507,7 +3544,7 @@ hoist-non-react-statics@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
 
-hoist-non-react-statics@^2.2.1, hoist-non-react-statics@^2.3.0:
+hoist-non-react-statics@^2.2.1, hoist-non-react-statics@^2.3.0, hoist-non-react-statics@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.3.1.tgz#343db84c6018c650778898240135a1420ee22ce0"
 
@@ -3655,6 +3692,10 @@ https-proxy-agent@^2.1.0:
     agent-base "^4.1.0"
     debug "^2.4.1"
 
+hyphenate-style-name@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.2.tgz#31160a36930adaf1fc04c6074f7eb41465d4ec4b"
+
 iconv-lite@0.4.13:
   version "0.4.13"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
@@ -3733,6 +3774,13 @@ inherits@2.0.1:
 ini@^1.3.4, ini@~1.3.0:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.4.tgz#0537cb79daf59b59a1a517dff706c86ec039162e"
+
+inline-style-prefixer@^3.0.1:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/inline-style-prefixer/-/inline-style-prefixer-3.0.8.tgz#8551b8e5b4d573244e66a34b04f7d32076a2b534"
+  dependencies:
+    bowser "^1.7.3"
+    css-in-js-utils "^2.0.0"
 
 inquirer@3.2.1:
   version "3.2.1"
@@ -6394,7 +6442,7 @@ rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-addons-shallow-compare@^15.6.2:
+react-addons-shallow-compare@^15.5.2, react-addons-shallow-compare@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react-addons-shallow-compare/-/react-addons-shallow-compare-15.6.2.tgz#198a00b91fc37623db64a28fd17b596ba362702f"
   dependencies:
@@ -6405,20 +6453,22 @@ react-addons-test-utils@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.6.2.tgz#c12b6efdc2247c10da7b8770d185080a7b047156"
 
-react-dates@12.7.1:
-  version "12.7.1"
-  resolved "https://registry.yarnpkg.com/react-dates/-/react-dates-12.7.1.tgz#e25dbe57368483020faa1b99af4f0c6633022fba"
+react-dates@^16.0.0:
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/react-dates/-/react-dates-16.0.1.tgz#0522e65c57b1a5dd685160127e29dff8bb41e573"
   dependencies:
     airbnb-prop-types "^2.8.1"
-    classnames "^2.2.5"
     consolidated-events "^1.1.0"
     is-touch-device "^1.0.1"
     lodash "^4.1.1"
     object.assign "^4.0.4"
     object.values "^1.0.4"
     prop-types "^15.5.10"
+    react-addons-shallow-compare "^15.5.2"
     react-moment-proptypes "^1.5.0"
-    react-portal "^3.1.0"
+    react-portal "^4.1.0"
+    react-with-styles "^2.2.0"
+    react-with-styles-interface-css "^3.0.0"
 
 react-dev-utils@^4.1.0:
   version "4.1.0"
@@ -6519,9 +6569,9 @@ react-moment-proptypes@^1.5.0:
   dependencies:
     moment ">=1.6.0"
 
-react-portal@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/react-portal/-/react-portal-3.1.0.tgz#865c44fb72a1da106c649206936559ce891ee899"
+react-portal@^4.1.0:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/react-portal/-/react-portal-4.1.2.tgz#7f28f3c8c2ed5c541907c0ed0f24e8996acf627f"
   dependencies:
     prop-types "^15.5.8"
 
@@ -6585,6 +6635,36 @@ react-test-renderer@^15.6.2:
   dependencies:
     fbjs "^0.8.9"
     object-assign "^4.1.0"
+
+react-with-direction@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-with-direction/-/react-with-direction-1.1.0.tgz#1043d850db3d5c9970bca9e8d05dbea8c7e958c4"
+  dependencies:
+    airbnb-prop-types "^2.8.1"
+    brcast "^2.0.2"
+    deepmerge "^1.5.1"
+    hoist-non-react-statics "^2.3.1"
+    object.assign "^4.0.4"
+    object.values "^1.0.4"
+    prop-types "^15.6.0"
+
+react-with-styles-interface-css@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-with-styles-interface-css/-/react-with-styles-interface-css-3.0.0.tgz#ebb000c23f75567f25af6792ab7a29089d798fda"
+  dependencies:
+    aphrodite "^1.2.5"
+    array-flatten "^2.1.1"
+    global-cache "^1.2.1"
+
+react-with-styles@^2.2.0:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/react-with-styles/-/react-with-styles-2.3.1.tgz#5cd54718cd21b188c6b5c1334e2d445251164e67"
+  dependencies:
+    deepmerge "^1.5.2"
+    global-cache "^1.2.1"
+    hoist-non-react-statics "^2.3.1"
+    prop-types "^15.6.0"
+    react-with-direction "^1.1.0"
 
 "react@^15 || ^16":
   version "16.0.0"
@@ -7438,6 +7518,10 @@ stream-http@^2.3.1:
 strict-uri-encode@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
+
+string-hash@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/string-hash/-/string-hash-1.1.3.tgz#e8aafc0ac1855b4666929ed7dd1275df5d6c811b"
 
 string-length@^1.0.1:
   version "1.0.1"
