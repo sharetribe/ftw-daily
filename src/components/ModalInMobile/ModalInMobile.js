@@ -72,6 +72,7 @@ class ModalInMobileComponent extends Component {
       containerClassName,
       id,
       showAsModalMaxWidth,
+      closeButtonMessage,
       onManageDisableScrolling,
       viewport,
     } = this.props;
@@ -97,6 +98,7 @@ class ModalInMobileComponent extends Component {
         isOpen={isOpen}
         isClosedClassName={closedClassName}
         onClose={this.handleClose}
+        closeButtonMessage={closeButtonMessage}
         onManageDisableScrolling={onManageDisableScrolling}
       >
         {children}
@@ -111,6 +113,7 @@ ModalInMobileComponent.defaultProps = {
   containerClassName: null,
   onClose: null,
   showAsModalMaxWidth: 0,
+  closeButtonMessage: null,
 };
 
 const { bool, func, node, number, string, shape } = PropTypes;
@@ -123,6 +126,7 @@ ModalInMobileComponent.propTypes = {
   isModalOpenOnMobile: bool.isRequired,
   onClose: func,
   showAsModalMaxWidth: number,
+  closeButtonMessage: node,
   // eslint-disable-next-line react/no-unused-prop-types
   onManageDisableScrolling: func.isRequired,
 

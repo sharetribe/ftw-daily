@@ -38,6 +38,7 @@ class SearchFiltersMobileComponent extends Component {
     const noResults = <FormattedMessage id="SearchFilters.noResultsMobile" />;
     const loadingResults = <FormattedMessage id="SearchFilters.loadingResultsMobile" />;
     const filtersHeading = intl.formatMessage({ id: 'SearchFiltersMobile.heading' });
+    const modalCloseButtonMessage = intl.formatMessage({ id: 'SearchFiltersMobile.cancel'});
 
     const showListingsLabel = intl.formatMessage(
       { id: 'SearchFiltersMobile.showListings' },
@@ -114,6 +115,7 @@ class SearchFiltersMobileComponent extends Component {
           showAsModalMaxWidth={showAsModalMaxWidth}
           onManageDisableScrolling={onManageDisableScrolling}
           containerClassName={css.modalContainer}
+          closeButtonMessage={modalCloseButtonMessage}
         >
           <div className={css.modalHeadingWrapper}>
             <span className={css.modalHeading}>{filtersHeading}</span>

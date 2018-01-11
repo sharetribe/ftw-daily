@@ -472,6 +472,7 @@
   "SearchFilters.noResults": "Could not find any listings.",
   "SearchFilters.noResultsMobile": "No results.",
   "SearchFilters.openMapView": "Map",
+  "SearchFiltersMobile.cancel": "CANCEL",
   "SearchFiltersMobile.heading": "Filter saunas",
   "SearchFiltersMobile.resetAll": "Reset all",
   "SearchFiltersMobile.showListings": "Show {count, number} {count, plural, one {sauna} other {saunas}}",
