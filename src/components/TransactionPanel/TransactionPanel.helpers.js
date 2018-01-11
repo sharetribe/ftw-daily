@@ -5,8 +5,8 @@ import {
   txHasFirstReview,
   txIsAccepted,
   txIsCanceled,
+  txIsCompleted,
   txIsDeclined,
-  txIsDelivered,
   txIsEnquired,
   txIsExpired,
   txIsRequested,
@@ -264,7 +264,7 @@ export const OrderTitle = props => {
       </h1>
     );
   } else if (
-    txIsDelivered(transaction) ||
+    txIsCompleted(transaction) ||
     txHasFirstReview(transaction) ||
     txIsReviewed(transaction)
   ) {
@@ -377,7 +377,7 @@ export const SaleTitle = props => {
       </h1>
     );
   } else if (
-    txIsDelivered(transaction) ||
+    txIsCompleted(transaction) ||
     txHasFirstReview(transaction) ||
     txIsReviewed(transaction)
   ) {

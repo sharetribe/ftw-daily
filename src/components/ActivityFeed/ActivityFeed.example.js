@@ -10,12 +10,12 @@ import {
 } from '../../util/test-data';
 import {
   TRANSITION_ACCEPT,
+  TRANSITION_COMPLETE,
   TRANSITION_DECLINE,
   TRANSITION_REQUEST,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
   TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
-  TX_TRANSITION_MARK_DELIVERED,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
   TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
@@ -135,7 +135,7 @@ export const WithMessagesTransitionsAndReviews = {
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 10, 34)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
-          transition: TX_TRANSITION_MARK_DELIVERED,
+          transition: TRANSITION_COMPLETE,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 11, 34)),
@@ -270,7 +270,7 @@ class PagedFeed extends Component {
     const trans3 = createTxTransition({
       at: dates[5],
       by: TX_TRANSITION_ACTOR_CUSTOMER,
-      transition: TX_TRANSITION_MARK_DELIVERED,
+      transition: TRANSITION_COMPLETE,
     });
 
     // First message timestamp is interleaved between the first two
@@ -283,7 +283,7 @@ class PagedFeed extends Component {
 
     const transaction = createTransaction({
       id: 'tx1',
-      lastTransition: TX_TRANSITION_MARK_DELIVERED,
+      lastTransition: TRANSITION_COMPLETE,
       lastTransitionedAt: dates[5],
       transitions: [trans1, trans2, trans3],
       listing: createListing('listing'),

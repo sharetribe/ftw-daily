@@ -14,11 +14,11 @@ import { fakeIntl } from '../../util/test-data';
 import {
   TRANSITION_ACCEPT,
   TRANSITION_CANCELED,
+  TRANSITION_COMPLETE,
   TRANSITION_DECLINE,
   TRANSITION_ENQUIRE,
   TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
-  TX_TRANSITION_MARK_DELIVERED,
 } from '../../util/types';
 import { BreakdownMaybe } from './TransactionPanel.helpers';
 import { TransactionPanelComponent } from './TransactionPanel';
@@ -78,7 +78,7 @@ describe('TransactionPanel - Sale', () => {
 
   const txDelivered = createTransaction({
     id: 'sale-delivered',
-    lastTransition: TX_TRANSITION_MARK_DELIVERED,
+    lastTransition: TRANSITION_COMPLETE,
     ...baseTxAttrs,
   });
 
@@ -243,7 +243,7 @@ describe('TransactionPanel - Order', () => {
 
   const txDelivered = createTransaction({
     id: 'order-delivered',
-    lastTransition: TX_TRANSITION_MARK_DELIVERED,
+    lastTransition: TRANSITION_COMPLETE,
     ...baseTxAttrs,
   });
 

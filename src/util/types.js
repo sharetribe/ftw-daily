@@ -180,9 +180,8 @@ export const TRANSITION_EXPIRE = 'transition/auto-decline';
 // Admin can also cancel the transition.
 export const TRANSITION_CANCEL = 'transition/cancel';
 
-// If the is marked as delivered in the backend, it is transitioned
-// with the mark-delivered transition.
-export const TX_TRANSITION_MARK_DELIVERED = 'transition/mark-delivered';
+// The backend will mark the transaction completed.
+export const TRANSITION_COMPLETE = 'transition/mark-delivered';
 
 // Review transitions
 // Reviews are given through transaction transitions.
@@ -199,13 +198,13 @@ export const TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS =
 export const TX_TRANSITIONS = [
   TRANSITION_ACCEPT,
   TRANSITION_CANCEL,
+  TRANSITION_COMPLETE,
   TRANSITION_DECLINE,
   TRANSITION_ENQUIRE,
   TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
   TRANSITION_REQUEST_AFTER_ENQUIRY,
   TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
-  TX_TRANSITION_MARK_DELIVERED,
   TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
   TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
@@ -246,7 +245,7 @@ export const txIsDeclinedOrAutodeclined = tx => txIsDeclined(tx) || txIsExpired(
 
 export const txIsCanceled = tx => txLastTransition(tx) === TRANSITION_CANCEL;
 
-export const txIsDelivered = tx => txLastTransition(tx) === TX_TRANSITION_MARK_DELIVERED;
+export const txIsCompleted = tx => txLastTransition(tx) === TRANSITION_COMPLETE;
 
 export const txHasFirstReview = tx => firstReviewTransitions.includes(txLastTransition(tx));
 

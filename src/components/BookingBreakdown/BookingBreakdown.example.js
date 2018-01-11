@@ -5,11 +5,11 @@ import {
   LINE_ITEM_NIGHT,
   TRANSITION_ACCEPT,
   TRANSITION_CANCEL,
+  TRANSITION_COMPLETE,
   TRANSITION_DECLINE,
   TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
   TX_TRANSITION_ACTOR_CUSTOMER,
-  TX_TRANSITION_MARK_DELIVERED,
 } from '../../util/types';
 import config from '../../config';
 import BookingBreakdown from './BookingBreakdown';
@@ -342,7 +342,7 @@ export const ProviderSaleDelivered = {
     userRole: 'provider',
     unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
-      lastTransition: TX_TRANSITION_MARK_DELIVERED,
+      lastTransition: TRANSITION_COMPLETE,
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
       lineItems: [

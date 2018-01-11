@@ -10,8 +10,8 @@ import {
   txHasFirstReview,
   txIsAccepted,
   txIsCanceled,
+  txIsCompleted,
   txIsDeclinedOrAutodeclined,
-  txIsDelivered,
   txIsEnquired,
   txIsRequested,
   txIsReviewed,
@@ -87,7 +87,7 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateCanceled',
       }),
     };
-  } else if (txIsDelivered(tx) || txHasFirstReview(tx) || txIsReviewed(tx)) {
+  } else if (txIsCompleted(tx) || txHasFirstReview(tx) || txIsReviewed(tx)) {
     return {
       nameClassName: css.nameDelivered,
       bookingClassName: css.bookingDelivered,

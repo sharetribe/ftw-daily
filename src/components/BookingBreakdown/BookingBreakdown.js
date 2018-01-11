@@ -13,8 +13,8 @@ import {
   LINE_ITEM_NIGHT,
   LINE_ITEM_PROVIDER_COMMISSION,
   txIsCanceled,
+  txIsCompleted,
   txIsDeclinedOrAutodeclined,
-  txIsDelivered,
   propTypes,
 } from '../../util/types';
 import { daysBetween } from '../../util/dates';
@@ -216,7 +216,7 @@ export const BookingBreakdownComponent = props => {
   const classes = classNames(rootClassName || css.root, className);
 
   let providerTotalMessageId = 'BookingBreakdown.providerTotalDefault';
-  if (txIsDelivered(transaction)) {
+  if (txIsCompleted(transaction)) {
     providerTotalMessageId = 'BookingBreakdown.providerTotalDelivered';
   } else if (txIsDeclinedOrAutodeclined(transaction)) {
     providerTotalMessageId = 'BookingBreakdown.providerTotalDeclined';

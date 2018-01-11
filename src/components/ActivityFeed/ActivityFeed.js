@@ -9,13 +9,13 @@ import { ensureTransaction, ensureUser, ensureListing, userDisplayName } from '.
 import {
   TRANSITION_ACCEPT,
   TRANSITION_CANCEL,
+  TRANSITION_COMPLETE,
   TRANSITION_DECLINE,
   TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
   TRANSITION_REQUEST_AFTER_ENQUIRY,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
-  TX_TRANSITION_MARK_DELIVERED,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
   TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
@@ -89,11 +89,11 @@ const shouldRenderTransition = transition => {
   return [
     TRANSITION_ACCEPT,
     TRANSITION_CANCEL,
+    TRANSITION_COMPLETE,
     TRANSITION_DECLINE,
     TRANSITION_EXPIRE,
     TRANSITION_REQUEST,
     TRANSITION_REQUEST_AFTER_ENQUIRY,
-    TX_TRANSITION_MARK_DELIVERED,
     TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
     TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
     TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
@@ -134,7 +134,7 @@ const resolveTransitionMessage = (
   const isOwnTransition = transition.by === ownRole;
   const currentTransition = transition.transition;
   const displayName = otherUsersName;
-  const deliveredState = lastTransition === TX_TRANSITION_MARK_DELIVERED;
+  const deliveredState = lastTransition === TRANSITION_COMPLETE;
 
   switch (currentTransition) {
     case TRANSITION_REQUEST:
@@ -167,7 +167,7 @@ const resolveTransitionMessage = (
       );
     case TRANSITION_CANCEL:
       return <FormattedMessage id="ActivityFeed.transitionCancel" />;
-    case TX_TRANSITION_MARK_DELIVERED:
+    case TRANSITION_COMPLETE:
       // Show the leave a review link if the state is delivered or
       // if current user is not the first to leave a review
       const reviewLink =
