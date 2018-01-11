@@ -165,9 +165,9 @@ propTypes.booking = shape({
 export const TRANSITION_REQUEST = 'transition/preauthorize';
 
 // A customer can also initiate a transaction with an enquiry, and
-// then transition that by preauthorization.
+// then transition that with a request.
 export const TX_TRANSITION_ENQUIRE = 'transition/enquire';
-export const TX_TRANSITION_PREAUTHORIZE_ENQUIRY = 'transition/preauthorize-enquiry';
+export const TRANSITION_REQUEST_AFTER_ENQUIRY = 'transition/preauthorize-enquiry';
 
 // When the provider accepts or declines a transaction from the
 // SalePage, it is transitioned with the accept or decline transition.
@@ -199,6 +199,7 @@ export const TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS =
 
 export const TX_TRANSITIONS = [
   TRANSITION_REQUEST,
+  TRANSITION_REQUEST_AFTER_ENQUIRY,
   TX_TRANSITION_ACCEPT,
   TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
   TX_TRANSITION_AUTO_DECLINE,
@@ -208,7 +209,6 @@ export const TX_TRANSITIONS = [
   TX_TRANSITION_MARK_DELIVERED,
   TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
   TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
-  TX_TRANSITION_PREAUTHORIZE_ENQUIRY,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
   TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
@@ -234,7 +234,7 @@ export const txIsEnquired = tx => txLastTransition(tx) === TX_TRANSITION_ENQUIRE
 
 export const txIsRequested = tx => {
   const transition = txLastTransition(tx);
-  return transition === TRANSITION_REQUEST || transition === TX_TRANSITION_PREAUTHORIZE_ENQUIRY;
+  return transition === TRANSITION_REQUEST || transition === TRANSITION_REQUEST_AFTER_ENQUIRY;
 };
 
 export const txIsAccepted = tx => txLastTransition(tx) === TX_TRANSITION_ACCEPT;
