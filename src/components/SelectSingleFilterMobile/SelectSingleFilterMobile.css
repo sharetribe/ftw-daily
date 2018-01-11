@@ -15,6 +15,23 @@
   color: var(--marketplaceColor);
 }
 
+.labelButton {
+  /* Override button styles */
+  outline: none;
+  text-align: left;
+  border: none;
+  padding: 0;
+}
+
+.optionsContainerOpen {
+  height: auto;
+}
+
+.optionsContainerClosed {
+  height: 0;
+  overflow: hidden;
+}
+
 /* left animated "border" like hover element */
 .optionBorder {
   position: absolute;
