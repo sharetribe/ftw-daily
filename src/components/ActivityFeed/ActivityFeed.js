@@ -7,12 +7,12 @@ import { Avatar, InlineTextButton, ReviewRating } from '../../components';
 import { formatDate } from '../../util/dates';
 import { ensureTransaction, ensureUser, ensureListing, userDisplayName } from '../../util/data';
 import {
+  TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
   TRANSITION_REQUEST_AFTER_ENQUIRY,
   TX_TRANSITION_ACCEPT,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
-  TX_TRANSITION_AUTO_DECLINE,
   TX_TRANSITION_CANCEL,
   TX_TRANSITION_DECLINE,
   TX_TRANSITION_MARK_DELIVERED,
@@ -87,10 +87,10 @@ Review.propTypes = {
 // should be rendered in he ActivityFeed
 const shouldRenderTransition = transition => {
   return [
+    TRANSITION_EXPIRE,
     TRANSITION_REQUEST,
     TRANSITION_REQUEST_AFTER_ENQUIRY,
     TX_TRANSITION_ACCEPT,
-    TX_TRANSITION_AUTO_DECLINE,
     TX_TRANSITION_CANCEL,
     TX_TRANSITION_DECLINE,
     TX_TRANSITION_MARK_DELIVERED,
@@ -159,7 +159,7 @@ const resolveTransitionMessage = (
       ) : (
         <FormattedMessage id="ActivityFeed.transitionDecline" />
       );
-    case TX_TRANSITION_AUTO_DECLINE:
+    case TRANSITION_EXPIRE:
       return ownRole === TX_TRANSITION_ACTOR_PROVIDER ? (
         <FormattedMessage id="ActivityFeed.ownTransitionAutoDecline" />
       ) : (

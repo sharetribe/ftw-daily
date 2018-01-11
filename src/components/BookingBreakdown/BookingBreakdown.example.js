@@ -3,10 +3,10 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   LINE_ITEM_DAY,
   LINE_ITEM_NIGHT,
+  TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
   TX_TRANSITION_ACCEPT,
   TX_TRANSITION_ACTOR_CUSTOMER,
-  TX_TRANSITION_AUTO_DECLINE,
   TX_TRANSITION_CANCEL,
   TX_TRANSITION_DECLINE,
   TX_TRANSITION_MARK_DELIVERED,
@@ -308,7 +308,7 @@ export const ProviderSaleAutoDeclined = {
     userRole: 'provider',
     unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
-      lastTransition: TX_TRANSITION_AUTO_DECLINE,
+      lastTransition: TRANSITION_EXPIRE,
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
       lineItems: [

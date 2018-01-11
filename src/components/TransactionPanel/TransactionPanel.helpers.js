@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import {
   txHasFirstReview,
   txIsAccepted,
-  txIsAutodeclined,
   txIsCanceled,
   txIsDeclined,
   txIsDelivered,
   txIsEnquired,
+  txIsExpired,
   txIsRequested,
   txIsReviewed,
 } from '../../util/types';
@@ -245,7 +245,7 @@ export const OrderTitle = props => {
         />
       </h1>
     );
-  } else if (txIsAutodeclined(transaction)) {
+  } else if (txIsExpired(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -358,7 +358,7 @@ export const SaleTitle = props => {
         />
       </h1>
     );
-  } else if (txIsAutodeclined(transaction)) {
+  } else if (txIsExpired(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage

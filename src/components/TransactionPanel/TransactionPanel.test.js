@@ -13,9 +13,9 @@ import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl } from '../../util/test-data';
 import {
   TRANSITION_ENQUIRE,
+  TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
   TX_TRANSITION_ACCEPT,
-  TX_TRANSITION_AUTO_DECLINE,
   TX_TRANSITION_CANCELED,
   TX_TRANSITION_DECLINE,
   TX_TRANSITION_MARK_DELIVERED,
@@ -66,7 +66,7 @@ describe('TransactionPanel - Sale', () => {
 
   const txAutoDeclined = createTransaction({
     id: 'sale-autodeclined',
-    lastTransition: TX_TRANSITION_AUTO_DECLINE,
+    lastTransition: TRANSITION_EXPIRE,
     ...baseTxAttrs,
   });
 
@@ -231,7 +231,7 @@ describe('TransactionPanel - Order', () => {
 
   const txAutoDeclined = createTransaction({
     id: 'order-autodeclined',
-    lastTransition: TX_TRANSITION_AUTO_DECLINE,
+    lastTransition: TRANSITION_EXPIRE,
     ...baseTxAttrs,
   });
 

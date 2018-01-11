@@ -174,9 +174,8 @@ export const TRANSITION_REQUEST_AFTER_ENQUIRY = 'transition/preauthorize-enquiry
 export const TX_TRANSITION_ACCEPT = 'transition/accept';
 export const TX_TRANSITION_DECLINE = 'transition/decline';
 
-// If the backend automatically declines the transaction, it is
-// transitioned with the auto-decline transition.
-export const TX_TRANSITION_AUTO_DECLINE = 'transition/auto-decline';
+// The backend automatically expire the transaction.
+export const TRANSITION_EXPIRE = 'transition/auto-decline';
 
 // Admin can also cancel the transition.
 export const TX_TRANSITION_CANCEL = 'transition/cancel';
@@ -199,11 +198,11 @@ export const TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS =
 
 export const TX_TRANSITIONS = [
   TRANSITION_ENQUIRE,
+  TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
   TRANSITION_REQUEST_AFTER_ENQUIRY,
   TX_TRANSITION_ACCEPT,
   TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
-  TX_TRANSITION_AUTO_DECLINE,
   TX_TRANSITION_CANCEL,
   TX_TRANSITION_DECLINE,
   TX_TRANSITION_MARK_DELIVERED,
@@ -241,9 +240,9 @@ export const txIsAccepted = tx => txLastTransition(tx) === TX_TRANSITION_ACCEPT;
 
 export const txIsDeclined = tx => txLastTransition(tx) === TX_TRANSITION_DECLINE;
 
-export const txIsAutodeclined = tx => txLastTransition(tx) === TX_TRANSITION_AUTO_DECLINE;
+export const txIsExpired = tx => txLastTransition(tx) === TRANSITION_EXPIRE;
 
-export const txIsDeclinedOrAutodeclined = tx => txIsDeclined(tx) || txIsAutodeclined(tx);
+export const txIsDeclinedOrAutodeclined = tx => txIsDeclined(tx) || txIsExpired(tx);
 
 export const txIsCanceled = tx => txLastTransition(tx) === TX_TRANSITION_CANCEL;
 
