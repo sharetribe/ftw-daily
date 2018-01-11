@@ -250,8 +250,7 @@ export const txHasFirstReview = tx => firstReviewTransitions.includes(txLastTran
 
 export const txIsReviewed = tx => areReviewsCompleted(txLastTransition(tx));
 
-// TODO: rename to `transition`
-propTypes.txTransition = shape({
+propTypes.transition = shape({
   at: instanceOf(Date).isRequired,
   by: oneOf(TX_TRANSITION_ACTORS).isRequired,
   transition: oneOf(TX_TRANSITIONS).isRequired,
@@ -324,7 +323,7 @@ propTypes.transaction = shape({
         reversal: bool.isRequired,
       })
     ).isRequired,
-    transitions: arrayOf(propTypes.txTransition).isRequired,
+    transitions: arrayOf(propTypes.transition).isRequired,
   }),
   booking: propTypes.booking,
   listing: propTypes.listing,

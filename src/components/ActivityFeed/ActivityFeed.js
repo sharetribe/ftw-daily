@@ -300,7 +300,7 @@ const Transition = props => {
 };
 
 Transition.propTypes = {
-  transition: propTypes.txTransition.isRequired,
+  transition: propTypes.transition.isRequired,
   transaction: propTypes.transaction.isRequired,
   currentUser: propTypes.currentUser.isRequired,
   intl: intlShape.isRequired,
