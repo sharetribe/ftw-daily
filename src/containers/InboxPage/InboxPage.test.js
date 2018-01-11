@@ -10,7 +10,7 @@ import {
 } from '../../util/test-data';
 import { InboxPageComponent, InboxItem } from './InboxPage';
 import routeConfiguration from '../../routeConfiguration';
-import { TX_TRANSITION_PREAUTHORIZE, LINE_ITEM_NIGHT } from '../../util/propTypes';
+import { LINE_ITEM_NIGHT, TX_TRANSITION_PREAUTHORIZE } from '../../util/types';
 
 const noop = () => null;
 

@@ -6,7 +6,23 @@ import classNames from 'classnames';
 import { Avatar, InlineTextButton, ReviewRating } from '../../components';
 import { formatDate } from '../../util/dates';
 import { ensureTransaction, ensureUser, ensureListing, userDisplayName } from '../../util/data';
-import * as propTypes from '../../util/propTypes';
+import {
+  TX_TRANSITION_ACCEPT,
+  TX_TRANSITION_ACTOR_CUSTOMER,
+  TX_TRANSITION_ACTOR_PROVIDER,
+  TX_TRANSITION_AUTO_DECLINE,
+  TX_TRANSITION_CANCEL,
+  TX_TRANSITION_DECLINE,
+  TX_TRANSITION_MARK_DELIVERED,
+  TX_TRANSITION_PREAUTHORIZE,
+  TX_TRANSITION_PREAUTHORIZE_ENQUIRY,
+  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+  TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+  TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+  areReviewsCompleted,
+  propTypes,
+} from '../../util/types';
 import * as log from '../../util/log';
 
 import css from './ActivityFeed.css';
@@ -71,17 +87,17 @@ Review.propTypes = {
 // should be rendered in he ActivityFeed
 const shouldRenderTransition = transition => {
   return [
-    propTypes.TX_TRANSITION_PREAUTHORIZE,
-    propTypes.TX_TRANSITION_PREAUTHORIZE_ENQUIRY,
-    propTypes.TX_TRANSITION_ACCEPT,
-    propTypes.TX_TRANSITION_DECLINE,
-    propTypes.TX_TRANSITION_AUTO_DECLINE,
-    propTypes.TX_TRANSITION_CANCEL,
-    propTypes.TX_TRANSITION_MARK_DELIVERED,
-    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
-    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
-    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
-    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+    TX_TRANSITION_PREAUTHORIZE,
+    TX_TRANSITION_PREAUTHORIZE_ENQUIRY,
+    TX_TRANSITION_ACCEPT,
+    TX_TRANSITION_DECLINE,
+    TX_TRANSITION_AUTO_DECLINE,
+    TX_TRANSITION_CANCEL,
+    TX_TRANSITION_MARK_DELIVERED,
+    TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+    TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+    TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+    TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
   ].includes(transition);
 };
 
@@ -89,20 +105,20 @@ const shouldRenderTransition = transition => {
 // given tx transition.
 const isReviewTransition = transition => {
   return [
-    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
-    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
-    propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
-    propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+    TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+    TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+    TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+    TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
   ].includes(transition);
 };
 
 const hasUserLeftAReviewFirst = (userRole, lastTransition) => {
   return (
-    (lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST &&
-      userRole === propTypes.TX_TRANSITION_ACTOR_CUSTOMER) ||
-    (lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST &&
-      userRole === propTypes.TX_TRANSITION_ACTOR_PROVIDER) ||
-    propTypes.areReviewsCompleted(lastTransition)
+    (lastTransition === TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST &&
+      userRole === TX_TRANSITION_ACTOR_CUSTOMER) ||
+    (lastTransition === TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST &&
+      userRole === TX_TRANSITION_ACTOR_PROVIDER) ||
+    areReviewsCompleted(lastTransition)
   );
 };
 
@@ -118,11 +134,11 @@ const resolveTransitionMessage = (
   const isOwnTransition = transition.by === ownRole;
   const currentTransition = transition.transition;
   const displayName = otherUsersName;
-  const deliveredState = lastTransition === propTypes.TX_TRANSITION_MARK_DELIVERED;
+  const deliveredState = lastTransition === TX_TRANSITION_MARK_DELIVERED;
 
   switch (currentTransition) {
-    case propTypes.TX_TRANSITION_PREAUTHORIZE:
-    case propTypes.TX_TRANSITION_PREAUTHORIZE_ENQUIRY:
+    case TX_TRANSITION_PREAUTHORIZE:
+    case TX_TRANSITION_PREAUTHORIZE_ENQUIRY:
       return isOwnTransition ? (
         <FormattedMessage id="ActivityFeed.ownTransitionRequest" values={{ listingTitle }} />
       ) : (
@@ -131,27 +147,27 @@ const resolveTransitionMessage = (
           values={{ displayName, listingTitle }}
         />
       );
-    case propTypes.TX_TRANSITION_ACCEPT:
+    case TX_TRANSITION_ACCEPT:
       return isOwnTransition ? (
         <FormattedMessage id="ActivityFeed.ownTransitionAccept" />
       ) : (
         <FormattedMessage id="ActivityFeed.transitionAccept" values={{ displayName }} />
       );
-    case propTypes.TX_TRANSITION_DECLINE:
+    case TX_TRANSITION_DECLINE:
       return isOwnTransition ? (
         <FormattedMessage id="ActivityFeed.ownTransitionDecline" />
       ) : (
         <FormattedMessage id="ActivityFeed.transitionDecline" />
       );
-    case propTypes.TX_TRANSITION_AUTO_DECLINE:
-      return ownRole === propTypes.TX_TRANSITION_ACTOR_PROVIDER ? (
+    case TX_TRANSITION_AUTO_DECLINE:
+      return ownRole === TX_TRANSITION_ACTOR_PROVIDER ? (
         <FormattedMessage id="ActivityFeed.ownTransitionAutoDecline" />
       ) : (
         <FormattedMessage id="ActivityFeed.transitionAutoDecline" values={{ displayName }} />
       );
-    case propTypes.TX_TRANSITION_CANCEL:
+    case TX_TRANSITION_CANCEL:
       return <FormattedMessage id="ActivityFeed.transitionCancel" />;
-    case propTypes.TX_TRANSITION_MARK_DELIVERED:
+    case TX_TRANSITION_MARK_DELIVERED:
       // Show the leave a review link if the state is delivered or
       // if current user is not the first to leave a review
       const reviewLink =
@@ -162,8 +178,8 @@ const resolveTransitionMessage = (
         ) : null;
 
       return <FormattedMessage id="ActivityFeed.transitionComplete" values={{ reviewLink }} />;
-    case propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST:
-    case propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST:
+    case TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST:
+    case TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST:
       if (isOwnTransition) {
         return <FormattedMessage id="ActivityFeed.ownTransitionReview" values={{ displayName }} />;
       } else {
@@ -181,8 +197,8 @@ const resolveTransitionMessage = (
           />
         );
       }
-    case propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND:
-    case propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND:
+    case TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND:
+    case TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND:
       if (isOwnTransition) {
         return <FormattedMessage id="ActivityFeed.ownTransitionReview" values={{ displayName }} />;
       } else {
@@ -223,14 +239,14 @@ const Transition = props => {
 
   const ownRole =
     currentUser.id.uuid === customer.id.uuid
-      ? propTypes.TX_TRANSITION_ACTOR_CUSTOMER
-      : propTypes.TX_TRANSITION_ACTOR_PROVIDER;
+      ? TX_TRANSITION_ACTOR_CUSTOMER
+      : TX_TRANSITION_ACTOR_PROVIDER;
 
   const bannedUserDisplayName = intl.formatMessage({
     id: 'ActivityFeed.bannedUserDisplayName',
   });
   const otherUsersName =
-    ownRole === propTypes.TX_TRANSITION_ACTOR_CUSTOMER
+    ownRole === TX_TRANSITION_ACTOR_CUSTOMER
       ? userDisplayName(provider, bannedUserDisplayName)
       : userDisplayName(customer, bannedUserDisplayName);
 
@@ -247,13 +263,13 @@ const Transition = props => {
 
   let reviewComponent = null;
 
-  if (isReviewTransition(currentTransition) && propTypes.areReviewsCompleted(lastTransition)) {
+  if (isReviewTransition(currentTransition) && areReviewsCompleted(lastTransition)) {
     const customerReview =
-      currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST ||
-      currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND;
+      currentTransition === TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST ||
+      currentTransition === TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND;
     const providerReview =
-      currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST ||
-      currentTransition === propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND;
+      currentTransition === TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST ||
+      currentTransition === TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND;
     if (customerReview) {
       const review = reviewByAuthorId(currentTransaction, customer.id);
       reviewComponent = (

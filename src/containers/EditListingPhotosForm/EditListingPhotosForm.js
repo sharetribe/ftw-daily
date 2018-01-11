@@ -6,7 +6,7 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import classNames from 'classnames';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { noEmptyArray } from '../../util/validators';
 import { isUploadListingImageOverLimitError } from '../../util/errors';
 import { Form, AddImages, Button, ValidationError } from '../../components';

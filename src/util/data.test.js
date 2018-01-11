@@ -1,4 +1,4 @@
-import { types } from './sdkLoader';
+import { types as sdkTypes } from './sdkLoader';
 import {
   combinedRelationships,
   combinedResourceObjects,
@@ -6,7 +6,7 @@ import {
   denormalisedEntities,
 } from './data';
 
-const { UUID } = types;
+const { UUID } = sdkTypes;
 
 describe('data utils', () => {
   describe('combinedRelationships()', () => {

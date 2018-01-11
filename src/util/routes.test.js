@@ -1,12 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { arrayOf } from 'prop-types';
 import { RoutesProvider } from '../components';
 import routeConfiguration from '../routeConfiguration';
 import { renderDeep, renderShallow } from './test-helpers';
-import * as propTypes from './propTypes';
 import { createResourceLocatorString, findRouteByRouteName, canonicalRoutePath } from './routes';
-
-const { arrayOf } = PropTypes;
 
 describe('util/routes.js', () => {
   describe('createResourceLocatorString', () => {

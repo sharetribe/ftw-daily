@@ -5,7 +5,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
 import { ensureCurrentUser } from '../../util/data';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import * as validators from '../../util/validators';
 import { isUploadProfileImageOverLimitError } from '../../util/errors';
 import { Form, Avatar, Button, ImageFromFile, IconSpinner, TextInputField } from '../../components';

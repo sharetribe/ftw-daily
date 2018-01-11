@@ -1,10 +1,20 @@
 import Decimal from 'decimal.js';
-import { types } from '../../util/sdkLoader';
-import * as propTypes from '../../util/propTypes';
+import { types as sdkTypes } from '../../util/sdkLoader';
+import {
+  LINE_ITEM_DAY,
+  LINE_ITEM_NIGHT,
+  TX_TRANSITION_ACCEPT,
+  TX_TRANSITION_ACTOR_CUSTOMER,
+  TX_TRANSITION_AUTO_DECLINE,
+  TX_TRANSITION_CANCEL,
+  TX_TRANSITION_DECLINE,
+  TX_TRANSITION_MARK_DELIVERED,
+  TX_TRANSITION_PREAUTHORIZE,
+} from '../../util/types';
 import config from '../../config';
 import BookingBreakdown from './BookingBreakdown';
 
-const { UUID, Money } = types;
+const { UUID, Money } = sdkTypes;
 
 const CURRENCY = config.currency;
 
@@ -24,12 +34,12 @@ const exampleTransaction = params => {
     attributes: {
       createdAt: created,
       lastTransitionedAt: created,
-      lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TX_TRANSITION_PREAUTHORIZE,
       transitions: [
         {
           at: created,
-          by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+          by: TX_TRANSITION_ACTOR_CUSTOMER,
+          transition: TX_TRANSITION_PREAUTHORIZE,
         },
       ],
 
@@ -43,7 +53,7 @@ export const Checkout = {
   component: BookingBreakdown,
   props: {
     userRole: 'customer',
-    unitType: propTypes.LINE_ITEM_NIGHT,
+    unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(9000, CURRENCY),
       payoutTotal: new Money(9000, CURRENCY),
@@ -69,7 +79,7 @@ export const CustomerOrder = {
   component: BookingBreakdown,
   props: {
     userRole: 'customer',
-    unitType: propTypes.LINE_ITEM_NIGHT,
+    unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(9000, CURRENCY),
       payoutTotal: new Money(9000, CURRENCY),
@@ -95,7 +105,7 @@ export const ProviderSale = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
-    unitType: propTypes.LINE_ITEM_NIGHT,
+    unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(9000, CURRENCY),
       payoutTotal: new Money(7000, CURRENCY),
@@ -128,7 +138,7 @@ export const ProviderSaleZeroCommission = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
-    unitType: propTypes.LINE_ITEM_NIGHT,
+    unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(9000, CURRENCY),
       payoutTotal: new Money(9000, CURRENCY),
@@ -161,7 +171,7 @@ export const ProviderSaleSingleNight = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
-    unitType: propTypes.LINE_ITEM_NIGHT,
+    unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
@@ -194,9 +204,9 @@ export const ProviderSalePreauthorized = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
-    unitType: propTypes.LINE_ITEM_NIGHT,
+    unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
-      lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TX_TRANSITION_PREAUTHORIZE,
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
@@ -228,9 +238,9 @@ export const ProviderSaleAccepted = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
-    unitType: propTypes.LINE_ITEM_NIGHT,
+    unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
-      lastTransition: propTypes.TX_TRANSITION_ACCEPT,
+      lastTransition: TX_TRANSITION_ACCEPT,
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
@@ -262,9 +272,9 @@ export const ProviderSaleDeclined = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
-    unitType: propTypes.LINE_ITEM_NIGHT,
+    unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
-      lastTransition: propTypes.TX_TRANSITION_DECLINE,
+      lastTransition: TX_TRANSITION_DECLINE,
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
@@ -296,9 +306,9 @@ export const ProviderSaleAutoDeclined = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
-    unitType: propTypes.LINE_ITEM_NIGHT,
+    unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
-      lastTransition: propTypes.TX_TRANSITION_AUTO_DECLINE,
+      lastTransition: TX_TRANSITION_AUTO_DECLINE,
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
@@ -330,9 +340,9 @@ export const ProviderSaleDelivered = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
-    unitType: propTypes.LINE_ITEM_NIGHT,
+    unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
-      lastTransition: propTypes.TX_TRANSITION_MARK_DELIVERED,
+      lastTransition: TX_TRANSITION_MARK_DELIVERED,
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
@@ -364,9 +374,9 @@ export const ProviderSaleCanceled = {
   component: BookingBreakdown,
   props: {
     userRole: 'provider',
-    unitType: propTypes.LINE_ITEM_NIGHT,
+    unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
-      lastTransition: propTypes.TX_TRANSITION_CANCEL,
+      lastTransition: TX_TRANSITION_CANCEL,
       payinTotal: new Money(0, CURRENCY),
       payoutTotal: new Money(0, CURRENCY),
       lineItems: [
@@ -415,7 +425,7 @@ export const SingleDay = {
   component: BookingBreakdown,
   props: {
     userRole: 'customer',
-    unitType: propTypes.LINE_ITEM_DAY,
+    unitType: LINE_ITEM_DAY,
     transaction: exampleTransaction({
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(4500, CURRENCY),
@@ -441,7 +451,7 @@ export const MultipleDays = {
   component: BookingBreakdown,
   props: {
     userRole: 'customer',
-    unitType: propTypes.LINE_ITEM_DAY,
+    unitType: LINE_ITEM_DAY,
     transaction: exampleTransaction({
       payinTotal: new Money(9000, CURRENCY),
       payoutTotal: new Money(9000, CURRENCY),

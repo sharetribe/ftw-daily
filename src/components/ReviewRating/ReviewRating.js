@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { IconReviewStar } from '../../components';
-import * as propTypes from '../../util/propTypes';
+import { REVIEW_RATINGS } from '../../util/types';
 
 const ReviewRating = props => {
   const { className, rootClassName, reviewStarClassName, rating } = props;
   const classes = classNames(rootClassName, className);
 
-  const stars = propTypes.REVIEW_RATINGS;
+  const stars = REVIEW_RATINGS;
   return (
     <span className={classes}>
       {stars.map(star => (
@@ -31,7 +31,7 @@ ReviewRating.defaultProps = {
 const { string, oneOf } = PropTypes;
 
 ReviewRating.propTypes = {
-  rating: oneOf(propTypes.REVIEW_RATINGS).isRequired,
+  rating: oneOf(REVIEW_RATINGS).isRequired,
   reviewStartClassName: string,
   rootClassName: string,
   className: string,

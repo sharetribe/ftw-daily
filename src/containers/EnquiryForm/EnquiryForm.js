@@ -6,7 +6,7 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
 import { Form, PrimaryButton, TextInputField, IconEnquiry } from '../../components';
 import * as validators from '../../util/validators';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 
 import css from './EnquiryForm.css';
 

@@ -6,7 +6,9 @@
  */
 import moment from 'moment';
 import { reduce } from 'lodash';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
+
+const { UUID, Money } = sdkTypes;
 
 // Validate that given 'obj' has all the keys of defined by validPropTypes parameter
 // and values must pass related test-value-format function.
@@ -36,9 +38,9 @@ export const isValidBookingDates = bookingDates => {
 // Currently only id & attributes.price are needed.
 export const isValidListing = listing => {
   const props = {
-    id: id => id instanceof types.UUID,
+    id: id => id instanceof UUID,
     attributes: v => {
-      return typeof v === 'object' && v.price instanceof types.Money;
+      return typeof v === 'object' && v.price instanceof Money;
     },
   };
   return validateProperties(listing, props);
@@ -60,7 +62,7 @@ export const storeData = (bookingDates, listing, storageKey) => {
     };
     /* eslint-enable no-underscore-dangle */
 
-    const storableData = JSON.stringify(data, types.replacer);
+    const storableData = JSON.stringify(data, sdkTypes.replacer);
     window.sessionStorage.setItem(storageKey, storableData);
   }
 };
@@ -77,7 +79,7 @@ export const storedData = storageKey => {
       if (v && typeof v === 'object' && v._serializedType === 'SerializableDate') {
         return new Date(v.date);
       }
-      return types.reviver(k, v);
+      return sdkTypes.reviver(k, v);
     };
 
     const { bookingDates, listing, storedAt } = checkoutPageData

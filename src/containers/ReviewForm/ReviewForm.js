@@ -5,7 +5,7 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { isTransactionsTransitionAlreadyReviewed } from '../../util/errors';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { required } from '../../util/validators';
 import { FieldReviewRating, Form, PrimaryButton, TextInputField } from '../../components';
 

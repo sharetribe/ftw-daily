@@ -5,7 +5,7 @@ import { truncate } from 'lodash';
 import classNames from 'classnames';
 import { AvatarLarge, NamedLink, InlineTextButton } from '../../components';
 import { ensureUser, ensureCurrentUser } from '../../util/data';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 
 import css from './UserCard.css';
 

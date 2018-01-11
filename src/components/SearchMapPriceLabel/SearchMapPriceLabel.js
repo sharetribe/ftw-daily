@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { OverlayView } from 'react-google-maps';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { ensureListing } from '../../util/data';
 import config from '../../config';

@@ -7,14 +7,21 @@ import { bool, oneOf, string } from 'prop-types';
 import { FormattedMessage, FormattedHTMLMessage, intlShape, injectIntl } from 'react-intl';
 import moment from 'moment';
 import classNames from 'classnames';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import { formatMoney } from '../../util/currency';
-import * as propTypes from '../../util/propTypes';
+import {
+  LINE_ITEM_NIGHT,
+  LINE_ITEM_PROVIDER_COMMISSION,
+  txIsCanceled,
+  txIsDeclinedOrAutodeclined,
+  txIsDelivered,
+  propTypes,
+} from '../../util/types';
 import { daysBetween } from '../../util/dates';
 
 import css from './BookingBreakdown.css';
 
-const { Money } = types;
+const { Money } = sdkTypes;
 
 // Validate the assumption that the commission exists and the amount
 // is zero or negative.
@@ -28,7 +35,7 @@ const isValidCommission = commissionLineItem => {
 
 const UnitPriceItem = props => {
   const { transaction, unitType, intl } = props;
-  const isNightly = unitType === propTypes.LINE_ITEM_NIGHT;
+  const isNightly = unitType === LINE_ITEM_NIGHT;
   const unitPurchase = transaction.attributes.lineItems.find(
     item => item.code === unitType && !item.reversal
   );
@@ -56,7 +63,7 @@ const UnitsItem = props => {
   const { transaction, booking, unitType, intl } = props;
 
   const { start: startDate, end: endDateRaw } = booking.attributes;
-  const isNightly = unitType === propTypes.LINE_ITEM_NIGHT;
+  const isNightly = unitType === LINE_ITEM_NIGHT;
   const isSingleDay = !isNightly && daysBetween(startDate, endDateRaw) === 1;
 
   const endDay = isNightly ? endDateRaw : moment(endDateRaw).subtract(1, 'days');
@@ -142,10 +149,10 @@ const CommissionItemMaybe = props => {
   const { transaction, isProvider, intl } = props;
 
   const providerCommissionLineItem = transaction.attributes.lineItems.find(
-    item => item.code === propTypes.LINE_ITEM_PROVIDER_COMMISSION && !item.reversal
+    item => item.code === LINE_ITEM_PROVIDER_COMMISSION && !item.reversal
   );
   const commissionRefund = transaction.attributes.lineItems.find(
-    item => item.code === propTypes.LINE_ITEM_PROVIDER_COMMISSION && item.reversal
+    item => item.code === LINE_ITEM_PROVIDER_COMMISSION && item.reversal
   );
 
   // If commission is passed it will be shown as a fee already reduces from the total price
@@ -209,11 +216,11 @@ export const BookingBreakdownComponent = props => {
   const classes = classNames(rootClassName || css.root, className);
 
   let providerTotalMessageId = 'BookingBreakdown.providerTotalDefault';
-  if (propTypes.txIsDelivered(transaction)) {
+  if (txIsDelivered(transaction)) {
     providerTotalMessageId = 'BookingBreakdown.providerTotalDelivered';
-  } else if (propTypes.txIsDeclinedOrAutodeclined(transaction)) {
+  } else if (txIsDeclinedOrAutodeclined(transaction)) {
     providerTotalMessageId = 'BookingBreakdown.providerTotalDeclined';
-  } else if (propTypes.txIsCanceled(transaction)) {
+  } else if (txIsCanceled(transaction)) {
     providerTotalMessageId = 'BookingBreakdown.providerTotalCanceled';
   }
 

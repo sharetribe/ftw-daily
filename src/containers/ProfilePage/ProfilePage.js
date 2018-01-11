@@ -4,8 +4,8 @@ import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { types } from '../../util/sdkLoader';
-import * as propTypes from '../../util/propTypes';
+import { types as sdkTypes } from '../../util/sdkLoader';
+import { REVIEW_TYPE_OF_PROVIDER, REVIEW_TYPE_OF_CUSTOMER, propTypes } from '../../util/types';
 import { ensureCurrentUser, ensureUser } from '../../util/data';
 import { withViewport } from '../../util/contextHelpers';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
@@ -30,7 +30,7 @@ import config from '../../config';
 
 import css from './ProfilePage.css';
 
-const { UUID } = types;
+const { UUID } = sdkTypes;
 const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 export class ProfilePageComponent extends Component {
@@ -39,7 +39,7 @@ export class ProfilePageComponent extends Component {
 
     this.state = {
       // keep track of which reviews tab to show in desktop viewport
-      showReviewsType: propTypes.REVIEW_TYPE_OF_PROVIDER,
+      showReviewsType: REVIEW_TYPE_OF_PROVIDER,
     };
 
     this.showOfProviderReviews = this.showOfProviderReviews.bind(this);
@@ -48,13 +48,13 @@ export class ProfilePageComponent extends Component {
 
   showOfProviderReviews() {
     this.setState({
-      showReviewsType: propTypes.REVIEW_TYPE_OF_PROVIDER,
+      showReviewsType: REVIEW_TYPE_OF_PROVIDER,
     });
   }
 
   showOfCustomerReviews() {
     this.setState({
-      showReviewsType: propTypes.REVIEW_TYPE_OF_CUSTOMER,
+      showReviewsType: REVIEW_TYPE_OF_CUSTOMER,
     });
   }
 
@@ -115,13 +115,9 @@ export class ProfilePageComponent extends Component {
       </p>
     );
 
-    const reviewsOfProvider = reviews.filter(
-      r => r.attributes.type === propTypes.REVIEW_TYPE_OF_PROVIDER
-    );
+    const reviewsOfProvider = reviews.filter(r => r.attributes.type === REVIEW_TYPE_OF_PROVIDER);
 
-    const reviewsOfCustomer = reviews.filter(
-      r => r.attributes.type === propTypes.REVIEW_TYPE_OF_CUSTOMER
-    );
+    const reviewsOfCustomer = reviews.filter(r => r.attributes.type === REVIEW_TYPE_OF_CUSTOMER);
 
     const mobileReviews = (
       <div className={css.mobileReviews}>
@@ -154,7 +150,7 @@ export class ProfilePageComponent extends Component {
             />
           </h3>
         ),
-        selected: this.state.showReviewsType === propTypes.REVIEW_TYPE_OF_PROVIDER,
+        selected: this.state.showReviewsType === REVIEW_TYPE_OF_PROVIDER,
         onClick: this.showOfProviderReviews,
       },
       {
@@ -166,7 +162,7 @@ export class ProfilePageComponent extends Component {
             />
           </h3>
         ),
-        selected: this.state.showReviewsType === propTypes.REVIEW_TYPE_OF_CUSTOMER,
+        selected: this.state.showReviewsType === REVIEW_TYPE_OF_CUSTOMER,
         onClick: this.showOfCustomerReviews,
       },
     ];
@@ -177,7 +173,7 @@ export class ProfilePageComponent extends Component {
 
         {queryReviewsError ? reviewsError : null}
 
-        {this.state.showReviewsType === propTypes.REVIEW_TYPE_OF_PROVIDER ? (
+        {this.state.showReviewsType === REVIEW_TYPE_OF_PROVIDER ? (
           <Reviews reviews={reviewsOfProvider} />
         ) : (
           <Reviews reviews={reviewsOfCustomer} />

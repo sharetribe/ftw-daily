@@ -6,7 +6,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { NotFoundPage } from './containers';
 import { NamedRedirect } from './components';
 import { locationChanged } from './ducks/Routing.duck';
-import * as propTypes from './util/propTypes';
+import { propTypes } from './util/types';
 import * as log from './util/log';
 import { canonicalRoutePath } from './util/routes';
 import routeConfiguration from './routeConfiguration';

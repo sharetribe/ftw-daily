@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { debounce } from 'lodash';
 import classNames from 'classnames';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
 import { ValidationError } from '../../components';
 

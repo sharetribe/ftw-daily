@@ -3,7 +3,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import { arrayOf, string } from 'prop-types';
 import classNames from 'classnames';
 import { Avatar, ReviewRating } from '../../components';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 
 import css from './Reviews.css';
 

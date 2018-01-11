@@ -2,11 +2,16 @@ import React from 'react';
 import Decimal from 'decimal.js';
 import { fakeIntl, createBooking } from '../../util/test-data';
 import { renderDeep } from '../../util/test-helpers';
-import { types } from '../../util/sdkLoader';
-import * as propTypes from '../../util/propTypes';
+import { types as sdkTypes } from '../../util/sdkLoader';
+import {
+  LINE_ITEM_NIGHT,
+  TX_TRANSITION_ACTOR_CUSTOMER,
+  TX_TRANSITION_CANCEL,
+  TX_TRANSITION_PREAUTHORIZE,
+} from '../../util/types';
 import { BookingBreakdownComponent } from './BookingBreakdown';
 
-const { UUID, Money } = types;
+const { UUID, Money } = sdkTypes;
 
 const exampleTransaction = params => {
   const created = new Date(Date.UTC(2017, 1, 1));
@@ -16,12 +21,12 @@ const exampleTransaction = params => {
     attributes: {
       createdAt: created,
       lastTransitionedAt: created,
-      lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TX_TRANSITION_PREAUTHORIZE,
       transitions: [
         {
           at: created,
-          by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+          by: TX_TRANSITION_ACTOR_CUSTOMER,
+          transition: TX_TRANSITION_PREAUTHORIZE,
         },
       ],
 
@@ -36,7 +41,7 @@ describe('BookingBreakdown', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
         userRole="customer"
-        unitType={propTypes.LINE_ITEM_NIGHT}
+        unitType={LINE_ITEM_NIGHT}
         transaction={exampleTransaction({
           payinTotal: new Money(2000, 'USD'),
           payoutTotal: new Money(2000, 'USD'),
@@ -65,7 +70,7 @@ describe('BookingBreakdown', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
         userRole="customer"
-        unitType={propTypes.LINE_ITEM_NIGHT}
+        unitType={LINE_ITEM_NIGHT}
         transaction={exampleTransaction({
           payinTotal: new Money(2000, 'USD'),
           payoutTotal: new Money(2000, 'USD'),
@@ -94,7 +99,7 @@ describe('BookingBreakdown', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
         userRole="provider"
-        unitType={propTypes.LINE_ITEM_NIGHT}
+        unitType={LINE_ITEM_NIGHT}
         transaction={exampleTransaction({
           payinTotal: new Money(2000, 'USD'),
           payoutTotal: new Money(1800, 'USD'),
@@ -129,9 +134,9 @@ describe('BookingBreakdown', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
         userRole="provider"
-        unitType={propTypes.LINE_ITEM_NIGHT}
+        unitType={LINE_ITEM_NIGHT}
         transaction={exampleTransaction({
-          lastTransition: propTypes.TX_TRANSITION_CANCEL,
+          lastTransition: TX_TRANSITION_CANCEL,
           payinTotal: new Money(0, 'USD'),
           payoutTotal: new Money(0, 'USD'),
           lineItems: [

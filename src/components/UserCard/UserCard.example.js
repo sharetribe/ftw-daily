@@ -1,8 +1,8 @@
 import { createUser, createCurrentUser } from '../../util/test-data';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import UserCard from './UserCard';
 
-const { UUID } = types;
+const { UUID } = sdkTypes;
 
 export const EmptyUser = {
   component: UserCard,

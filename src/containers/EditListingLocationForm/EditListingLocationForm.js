@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { autocompleteSearchRequired, autocompletePlaceSelected } from '../../util/validators';
 import { Form, LocationAutocompleteInputField, Button, TextInputField } from '../../components';
 

@@ -5,7 +5,18 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import moment from 'moment';
 import classNames from 'classnames';
-import * as propTypes from '../../util/propTypes';
+import {
+  LINE_ITEM_DAY,
+  txHasFirstReview,
+  txIsAccepted,
+  txIsCanceled,
+  txIsDeclinedOrAutodeclined,
+  txIsDelivered,
+  txIsEnquired,
+  txIsPreauthorized,
+  txIsReviewed,
+  propTypes,
+} from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { userDisplayName } from '../../util/data';
 import { daysBetween } from '../../util/dates';
@@ -46,7 +57,7 @@ const formatDate = (intl, date) => {
 
 // Translated name of the state of the given transaction
 const txState = (intl, tx, isOrder) => {
-  if (propTypes.txIsAccepted(tx)) {
+  if (txIsAccepted(tx)) {
     return {
       nameClassName: css.nameAccepted,
       bookingClassName: css.bookingAccepted,
@@ -56,7 +67,7 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateAccepted',
       }),
     };
-  } else if (propTypes.txIsDeclinedOrAutodeclined(tx)) {
+  } else if (txIsDeclinedOrAutodeclined(tx)) {
     return {
       nameClassName: css.nameDeclined,
       bookingClassName: css.bookingDeclined,
@@ -66,7 +77,7 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateDeclined',
       }),
     };
-  } else if (propTypes.txIsCanceled(tx)) {
+  } else if (txIsCanceled(tx)) {
     return {
       nameClassName: css.nameCanceled,
       bookingClassName: css.bookingCanceled,
@@ -76,11 +87,7 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateCanceled',
       }),
     };
-  } else if (
-    propTypes.txIsDelivered(tx) ||
-    propTypes.txHasFirstReview(tx) ||
-    propTypes.txIsReviewed(tx)
-  ) {
+  } else if (txIsDelivered(tx) || txHasFirstReview(tx) || txIsReviewed(tx)) {
     return {
       nameClassName: css.nameDelivered,
       bookingClassName: css.bookingDelivered,
@@ -90,7 +97,7 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateDelivered',
       }),
     };
-  } else if (propTypes.txIsEnquired(tx)) {
+  } else if (txIsEnquired(tx)) {
     return {
       nameClassName: isOrder ? css.nameEnquiredOrder : css.nameEnquired,
       bookingClassName: css.bookingEnquired,
@@ -120,7 +127,7 @@ const txState = (intl, tx, isOrder) => {
 
 const bookingData = (unitType, tx, isOrder, intl) => {
   const { start, end } = tx.booking.attributes;
-  const isDaily = unitType === propTypes.LINE_ITEM_DAY;
+  const isDaily = unitType === LINE_ITEM_DAY;
   const isSingleDay = isDaily && daysBetween(start, end) === 1;
   const bookingStart = formatDate(intl, start);
 
@@ -149,11 +156,11 @@ export const InboxItem = props => {
   const otherUserDisplayName = userDisplayName(otherUser, bannedUserDisplayName);
 
   const stateData = txState(intl, tx, isOrder);
-  const isSaleNotification = !isOrder && propTypes.txIsPreauthorized(tx);
+  const isSaleNotification = !isOrder && txIsPreauthorized(tx);
   const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
   const lastTransitionedAt = formatDate(intl, tx.attributes.lastTransitionedAt);
 
-  const isEnquiry = propTypes.txIsEnquired(tx);
+  const isEnquiry = txIsEnquired(tx);
   const { bookingStart, bookingEnd, price, isSingleDay } = isEnquiry
     ? {}
     : bookingData(unitType, tx, isOrder, intl);

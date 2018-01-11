@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import * as propTypes from '../../util/propTypes';
+import { txIsEnquired, txIsPreauthorized, propTypes } from '../../util/types';
 import { ensureListing, ensureTransaction, ensureUser } from '../../util/data';
 import { isMobileSafari } from '../../util/userAgent';
 import { AvatarMedium, AvatarLarge, ResponsiveImage, ReviewModal } from '../../components';
@@ -140,11 +140,10 @@ export class TransactionPanelComponent extends Component {
     const customerLoaded = !!currentCustomer.id;
     const isCustomerBanned = customerLoaded && currentCustomer.attributes.banned;
     const canShowSaleButtons =
-      isProvider && propTypes.txIsPreauthorized(currentTransaction) && !isCustomerBanned;
+      isProvider && txIsPreauthorized(currentTransaction) && !isCustomerBanned;
     const isProviderLoaded = !!currentProvider.id;
     const isProviderBanned = isProviderLoaded && currentProvider.attributes.banned;
-    const canShowBookButton =
-      isCustomer && propTypes.txIsEnquired(currentTransaction) && !isProviderBanned;
+    const canShowBookButton = isCustomer && txIsEnquired(currentTransaction) && !isProviderBanned;
 
     const bannedUserDisplayName = intl.formatMessage({
       id: 'TransactionPanel.bannedUserDisplayName',
@@ -209,8 +208,7 @@ export class TransactionPanelComponent extends Component {
         this.isMobSaf && this.state.sendMessageFormFocused,
     });
 
-    const showInfoMessage =
-      listingDeleted || (!listingDeleted && propTypes.txIsPreauthorized(transaction)); // !!orderInfoMessage;
+    const showInfoMessage = listingDeleted || (!listingDeleted && txIsPreauthorized(transaction)); // !!orderInfoMessage;
 
     const feedContainerClasses = classNames(css.feedContainer, {
       [css.feedContainerWithInfoAbove]: showInfoMessage,

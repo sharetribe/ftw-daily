@@ -1,8 +1,8 @@
 import React from 'react';
 import Map from './Map';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 
-const { LatLng } = types;
+const { LatLng } = sdkTypes;
 
 export const Empty = {
   component: props => (

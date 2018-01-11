@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { range } from 'lodash';
 import { NamedLink } from '../../components';
 import { stringify } from '../../util/urlHelpers';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 
 import NextPageIcon from './NextPageIcon';
 import PrevPageIcon from './PrevPageIcon';

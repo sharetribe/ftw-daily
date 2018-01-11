@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Decimal from 'decimal.js';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl, fakeFormProps } from '../../util/test-data';
-import * as propTypes from '../../util/propTypes';
+import { LINE_ITEM_NIGHT, TX_TRANSITION_PREAUTHORIZE } from '../../util/types';
 import { BookingBreakdown } from '../../components';
 import { BookingDatesFormComponent } from './BookingDatesForm';
 
-const { Money } = types;
+const { Money } = sdkTypes;
 
 const noop = () => null;
 
@@ -17,7 +17,7 @@ describe('BookingDatesForm', () => {
     const tree = renderShallow(
       <BookingDatesFormComponent
         {...fakeFormProps}
-        unitType={propTypes.LINE_ITEM_NIGHT}
+        unitType={LINE_ITEM_NIGHT}
         intl={fakeIntl}
         dispatch={noop}
         onSubmit={v => v}
@@ -36,7 +36,7 @@ describe('BookingDatesForm', () => {
     const tree = shallow(
       <BookingDatesFormComponent
         {...fakeFormProps}
-        unitType={propTypes.LINE_ITEM_NIGHT}
+        unitType={LINE_ITEM_NIGHT}
         intl={fakeIntl}
         dispatch={noop}
         onSubmit={v => v}
@@ -51,7 +51,7 @@ describe('BookingDatesForm', () => {
     expect(userRole).toEqual('customer');
     expect(booking.attributes.start).toEqual(startDate);
     expect(booking.attributes.end).toEqual(endDate);
-    expect(transaction.attributes.lastTransition).toEqual(propTypes.TX_TRANSITION_PREAUTHORIZE);
+    expect(transaction.attributes.lastTransition).toEqual(TX_TRANSITION_PREAUTHORIZE);
     expect(transaction.attributes.payinTotal).toEqual(new Money(2198, 'USD'));
     expect(transaction.attributes.payoutTotal).toEqual(new Money(2198, 'USD'));
     expect(transaction.attributes.lineItems).toEqual([

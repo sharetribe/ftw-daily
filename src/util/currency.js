@@ -1,7 +1,9 @@
 import { has, trimEnd } from 'lodash';
 import Decimal from 'decimal.js';
-import { types } from './sdkLoader';
+import { types as sdkTypes } from './sdkLoader';
 import { subUnitDivisors } from './currencyConfig';
+
+const { Money } = sdkTypes;
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER
@@ -201,7 +203,7 @@ const isGoogleMathLong = value => {
  * @return {Number} converted value
  */
 export const convertMoneyToNumber = value => {
-  if (!(value instanceof types.Money)) {
+  if (!(value instanceof Money)) {
     throw new Error('Value must be a Money type');
   }
   const subUnitDivisorAsDecimal = convertDivisorToDecimal(unitDivisor(value.currency));
@@ -238,7 +240,7 @@ export const convertMoneyToNumber = value => {
  * @return {String} formatted money value
  */
 export const formatMoney = (intl, value) => {
-  if (!(value instanceof types.Money)) {
+  if (!(value instanceof Money)) {
     throw new Error('Value must be a Money type');
   }
   const valueAsNumber = convertMoneyToNumber(value);

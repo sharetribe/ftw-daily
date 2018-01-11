@@ -1,8 +1,8 @@
 import Avatar, { AvatarMedium, AvatarLarge } from './Avatar';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import { fakeIntl } from '../../util/test-data';
 
-const { UUID } = types;
+const { UUID } = sdkTypes;
 
 const bannedUser = {
   id: new UUID('banned-user'),

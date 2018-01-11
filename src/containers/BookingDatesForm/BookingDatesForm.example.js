@@ -1,16 +1,18 @@
 /* eslint-disable no-console */
-import { types } from '../../util/sdkLoader';
-import * as propTypes from '../../util/propTypes';
+import { types as sdkTypes } from '../../util/sdkLoader';
+import { LINE_ITEM_NIGHT } from '../../util/types';
 import BookingDatesForm from './BookingDatesForm';
+
+const { Money } = sdkTypes;
 
 export const Form = {
   component: BookingDatesForm,
   props: {
-    unitType: propTypes.LINE_ITEM_NIGHT,
+    unitType: LINE_ITEM_NIGHT,
     onSubmit: values => {
       console.log('Submit BookingDatesForm with values:', values);
     },
-    price: new types.Money(1099, 'USD'),
+    price: new Money(1099, 'USD'),
   },
   group: 'forms',
 };

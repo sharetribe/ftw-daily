@@ -4,7 +4,7 @@ import { withGoogleMap, GoogleMap } from 'react-google-maps';
 import classNames from 'classnames';
 import { groupBy, isEqual, reduce } from 'lodash';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { googleBoundsToSDKBounds } from '../../util/googleMaps';
 import { SearchMapInfoCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
 

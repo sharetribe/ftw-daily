@@ -16,7 +16,7 @@ import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import moment from 'moment';
 import { START_DATE, END_DATE } from '../../util/dates';
-import * as propTypes from '../../util/propTypes';
+import { LINE_ITEM_DAY, propTypes } from '../../util/types';
 import config from '../../config';
 
 import NextMonthIcon from './NextMonthIcon';
@@ -37,7 +37,7 @@ const BLUR_TIMEOUT = 100;
 
 const apiEndDateToPickerDate = (unitType, endDate) => {
   const isValid = endDate instanceof Date;
-  const isDaily = unitType === propTypes.LINE_ITEM_DAY;
+  const isDaily = unitType === LINE_ITEM_DAY;
 
   if (!isValid) {
     return null;
@@ -52,7 +52,7 @@ const apiEndDateToPickerDate = (unitType, endDate) => {
 
 const pickerEndDateToApiDate = (unitType, endDate) => {
   const isValid = endDate instanceof moment;
-  const isDaily = unitType === propTypes.LINE_ITEM_DAY;
+  const isDaily = unitType === LINE_ITEM_DAY;
 
   if (!isValid) {
     return null;
@@ -217,7 +217,7 @@ class DateRangeInputComponent extends Component {
     } = this.props;
     /* eslint-enable no-unused-vars */
 
-    const isDaily = unitType === propTypes.LINE_ITEM_DAY;
+    const isDaily = unitType === LINE_ITEM_DAY;
     const initialStartMoment = initialDates ? moment(initialDates.startDate) : null;
     const initialEndMoment = initialDates ? moment(initialDates.endDate) : null;
     const startDate =

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import {
   isPasswordRecoveryEmailNotFoundError,
   isPasswordRecoveryEmailNotVerifiedError,

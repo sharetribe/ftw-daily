@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   createTransaction,
   createBooking,
@@ -11,13 +11,21 @@ import {
 } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl } from '../../util/test-data';
-import * as propTypes from '../../util/propTypes';
+import {
+  TX_TRANSITION_ACCEPT,
+  TX_TRANSITION_AUTO_DECLINE,
+  TX_TRANSITION_CANCELED,
+  TX_TRANSITION_DECLINE,
+  TX_TRANSITION_ENQUIRE,
+  TX_TRANSITION_MARK_DELIVERED,
+  TX_TRANSITION_PREAUTHORIZE,
+} from '../../util/types';
 import { BreakdownMaybe } from './TransactionPanel.helpers';
 import { TransactionPanelComponent } from './TransactionPanel';
 
 const noop = () => null;
 
-const { Money } = types;
+const { Money } = sdkTypes;
 
 describe('TransactionPanel - Sale', () => {
   const baseTxAttrs = {
@@ -34,43 +42,43 @@ describe('TransactionPanel - Sale', () => {
 
   const txEnquired = createTransaction({
     id: 'sale-enquired',
-    lastTransition: propTypes.TX_TRANSITION_ENQUIRE,
+    lastTransition: TX_TRANSITION_ENQUIRE,
     ...baseTxAttrs,
   });
 
   const txPreauthorized = createTransaction({
     id: 'sale-preauthorized',
-    lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+    lastTransition: TX_TRANSITION_PREAUTHORIZE,
     ...baseTxAttrs,
   });
 
   const txAccepted = createTransaction({
     id: 'sale-accepted',
-    lastTransition: propTypes.TX_TRANSITION_ACCEPT,
+    lastTransition: TX_TRANSITION_ACCEPT,
     ...baseTxAttrs,
   });
 
   const txDeclined = createTransaction({
     id: 'sale-declined',
-    lastTransition: propTypes.TX_TRANSITION_DECLINE,
+    lastTransition: TX_TRANSITION_DECLINE,
     ...baseTxAttrs,
   });
 
   const txAutoDeclined = createTransaction({
     id: 'sale-autodeclined',
-    lastTransition: propTypes.TX_TRANSITION_AUTO_DECLINE,
+    lastTransition: TX_TRANSITION_AUTO_DECLINE,
     ...baseTxAttrs,
   });
 
   const txCanceled = createTransaction({
     id: 'sale-canceled',
-    lastTransition: propTypes.TX_TRANSITION_CANCELED,
+    lastTransition: TX_TRANSITION_CANCELED,
     ...baseTxAttrs,
   });
 
   const txDelivered = createTransaction({
     id: 'sale-delivered',
-    lastTransition: propTypes.TX_TRANSITION_MARK_DELIVERED,
+    lastTransition: TX_TRANSITION_MARK_DELIVERED,
     ...baseTxAttrs,
   });
 
@@ -159,7 +167,7 @@ describe('TransactionPanel - Sale', () => {
   it('renders correct total price', () => {
     const transaction = createTransaction({
       id: 'sale-tx',
-      lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TX_TRANSITION_PREAUTHORIZE,
       total: new Money(16500, 'USD'),
       commission: new Money(1000, 'USD'),
       booking: createBooking('booking1', {
@@ -199,43 +207,43 @@ describe('TransactionPanel - Order', () => {
 
   const txEnquired = createTransaction({
     id: 'order-enquired',
-    lastTransition: propTypes.TX_TRANSITION_ENQUIRE,
+    lastTransition: TX_TRANSITION_ENQUIRE,
     ...baseTxAttrs,
   });
 
   const txPreauthorized = createTransaction({
     id: 'order-preauthorized',
-    lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+    lastTransition: TX_TRANSITION_PREAUTHORIZE,
     ...baseTxAttrs,
   });
 
   const txAccepted = createTransaction({
     id: 'order-accepted',
-    lastTransition: propTypes.TX_TRANSITION_ACCEPT,
+    lastTransition: TX_TRANSITION_ACCEPT,
     ...baseTxAttrs,
   });
 
   const txDeclined = createTransaction({
     id: 'order-declined',
-    lastTransition: propTypes.TX_TRANSITION_DECLINE,
+    lastTransition: TX_TRANSITION_DECLINE,
     ...baseTxAttrs,
   });
 
   const txAutoDeclined = createTransaction({
     id: 'order-autodeclined',
-    lastTransition: propTypes.TX_TRANSITION_AUTO_DECLINE,
+    lastTransition: TX_TRANSITION_AUTO_DECLINE,
     ...baseTxAttrs,
   });
 
   const txCanceled = createTransaction({
     id: 'order-canceled',
-    lastTransition: propTypes.TX_TRANSITION_CANCELED,
+    lastTransition: TX_TRANSITION_CANCELED,
     ...baseTxAttrs,
   });
 
   const txDelivered = createTransaction({
     id: 'order-delivered',
-    lastTransition: propTypes.TX_TRANSITION_MARK_DELIVERED,
+    lastTransition: TX_TRANSITION_MARK_DELIVERED,
     ...baseTxAttrs,
   });
 
@@ -324,10 +332,9 @@ describe('TransactionPanel - Order', () => {
     expect(tree).toMatchSnapshot();
   });
   it('renders correct total price', () => {
-    const { Money } = types;
     const tx = createTransaction({
       id: 'order-tx',
-      lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TX_TRANSITION_PREAUTHORIZE,
       total: new Money(16500, 'USD'),
       booking: createBooking('booking1', {
         start: new Date(Date.UTC(2017, 5, 10)),

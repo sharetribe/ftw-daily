@@ -1,4 +1,4 @@
-import { types } from './sdkLoader';
+import { types as sdkTypes } from './sdkLoader';
 import {
   parseFloatNum,
   encodeLatLng,
@@ -9,7 +9,7 @@ import {
   parse,
 } from './urlHelpers';
 
-const { LatLng, LatLngBounds } = types;
+const { LatLng, LatLngBounds } = sdkTypes;
 
 const SPACE = encodeURIComponent(' ');
 const COMMA = encodeURIComponent(',');

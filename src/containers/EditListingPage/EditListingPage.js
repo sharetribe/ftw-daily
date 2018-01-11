@@ -4,9 +4,9 @@ import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { stripeAccountClearError, createStripeAccount } from '../../ducks/user.duck';
@@ -26,6 +26,8 @@ import {
 } from './EditListingPage.duck';
 
 import css from './EditListingPage.css';
+
+const { UUID } = sdkTypes;
 
 const formatRequestData = values => {
   const { address, description, images, geolocation, price, title, customAttributes } = values;
@@ -70,7 +72,7 @@ export const EditListingPageComponent = props => {
 
   const isNew = type === 'new';
   const newListingCreated = isNew && !!page.submittedListingId;
-  const listingId = page.submittedListingId || (id ? new types.UUID(id) : null);
+  const listingId = page.submittedListingId || (id ? new UUID(id) : null);
   const currentListing = getListing(listingId);
 
   const shouldRedirect = page.submittedListingId && currentListing;

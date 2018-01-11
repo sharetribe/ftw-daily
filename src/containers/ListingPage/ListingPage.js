@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
-import * as propTypes from '../../util/propTypes';
-import { types } from '../../util/sdkLoader';
+import { propTypes } from '../../util/types';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
@@ -45,7 +45,7 @@ import css from './ListingPage.css';
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;
 
-const { UUID } = types;
+const { UUID } = sdkTypes;
 
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {

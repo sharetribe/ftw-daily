@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import classNames from 'classnames';
 import { START_DATE, END_DATE } from '../../util/dates';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { ValidationError } from '../../components';
 
 import DateRangeInput from './DateRangeInput';
