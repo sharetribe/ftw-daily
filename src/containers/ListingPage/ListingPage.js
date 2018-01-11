@@ -625,6 +625,7 @@ export class ListingPageComponent extends Component {
                   {!currentListing.attributes.closed ? (
                     <BookingDatesForm
                       className={css.bookingForm}
+                      submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
                       unitType={unitType}
                       onSubmit={handleBookingSubmit}
                       price={price}

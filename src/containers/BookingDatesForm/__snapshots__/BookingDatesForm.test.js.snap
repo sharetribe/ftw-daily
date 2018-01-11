@@ -31,13 +31,17 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
       values={Object {}}
     />
   </p>
-  <PrimaryButton
-    type="submit"
+  <div
+    className=""
   >
-    <FormattedMessage
-      id="BookingDatesForm.requestToBook"
-      values={Object {}}
-    />
-  </PrimaryButton>
+    <PrimaryButton
+      type="submit"
+    >
+      <FormattedMessage
+        id="BookingDatesForm.requestToBook"
+        values={Object {}}
+      />
+    </PrimaryButton>
+  </div>
 </Form>
 `;
