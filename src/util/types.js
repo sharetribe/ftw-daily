@@ -190,7 +190,7 @@ export const TRANSITION_REVIEW_1_BY_PROVIDER = 'transition/review-by-provider-fi
 export const TRANSITION_REVIEW_2_BY_PROVIDER = 'transition/review-by-provider-second';
 export const TRANSITION_REVIEW_1_BY_CUSTOMER = 'transition/review-by-customer-first';
 export const TRANSITION_REVIEW_2_BY_CUSTOMER = 'transition/review-by-customer-second';
-export const TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER = 'transition/mark-reviewed-by-customer';
+export const TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD = 'transition/mark-reviewed-by-customer';
 export const TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER = 'transition/mark-reviewed-by-provider';
 export const TRANSITION_EXPIRE_REVIEW_PERIOD = 'transition/auto-complete-without-reviews';
 
@@ -201,6 +201,7 @@ export const TX_TRANSITIONS = [
   TRANSITION_DECLINE,
   TRANSITION_ENQUIRE,
   TRANSITION_EXPIRE,
+  TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD,
   TRANSITION_EXPIRE_REVIEW_PERIOD,
   TRANSITION_REQUEST,
   TRANSITION_REQUEST_AFTER_ENQUIRY,
@@ -208,7 +209,6 @@ export const TX_TRANSITIONS = [
   TRANSITION_REVIEW_1_BY_PROVIDER,
   TRANSITION_REVIEW_2_BY_CUSTOMER,
   TRANSITION_REVIEW_2_BY_PROVIDER,
-  TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
   TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
 ];
 
@@ -263,10 +263,10 @@ const firstReviewTransitions = [TRANSITION_REVIEW_1_BY_CUSTOMER, TRANSITION_REVI
 // reviews are completed
 export const areReviewsCompleted = transition => {
   return [
+    TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD,
     TRANSITION_EXPIRE_REVIEW_PERIOD,
     TRANSITION_REVIEW_2_BY_CUSTOMER,
     TRANSITION_REVIEW_2_BY_PROVIDER,
-    TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
     TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
   ].includes(transition);
 };
