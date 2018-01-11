@@ -103,6 +103,9 @@ export {
   default as SelectSingleCustomAttribute,
 } from './SelectSingleCustomAttribute/SelectSingleCustomAttribute';
 export {
+  default as SelectSingleFilterMobile,
+} from './SelectSingleFilterMobile/SelectSingleFilterMobile';
+export {
   default as StripeBankAccountTokenInputField,
 } from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';
 export { default as TabNav } from './TabNav/TabNav';

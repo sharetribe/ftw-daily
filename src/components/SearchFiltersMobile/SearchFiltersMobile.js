@@ -7,54 +7,9 @@ import { omit } from 'lodash';
 
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
-import { SecondaryButton, ModalInMobile, Button } from '../../components';
+import { SecondaryButton, ModalInMobile, Button, SelectSingleFilterMobile } from '../../components';
 import config from '../../config';
 import css from './SearchFiltersMobile.css';
-
-class SelectSingleCustomAttributeMobile extends Component {
-  constructor(props) {
-    super(props);
-    this.selectOption = this.selectOption.bind(this);
-  }
-
-  selectOption(option) {
-    const customAttribute = this.props.customAttribute;
-    this.props.onSelect(customAttribute, option);
-  }
-
-  render() {
-    const { customAttribute, urlQueryParams, intl } = this.props;
-    const filterLabel = intl.formatMessage({
-      id: `SelectSingleCustomAttribute.${customAttribute}.label`,
-    });
-    // custom attribute content
-    const ca = customAttribute && config.customAttributes[customAttribute];
-    // name of the corresponding query parameter
-    const caParam = `ca_${customAttribute}`;
-    // current value of this custom attribute filter
-    const currentValue = urlQueryParams[caParam];
-
-    const labelClass = currentValue ? css.filterLabelSelected : css.filterLabel;
-
-    return (
-      <div>
-        <div className={labelClass}>{filterLabel}</div>
-        {ca.values.map(v => {
-          // check if this option is selected
-          const selected = currentValue === v;
-          // menu item border class
-          const optionBorderClass = selected ? css.optionBorderSelected : css.optionBorder;
-          return (
-            <button key={v} className={css.option} onClick={() => this.selectOption(v)}>
-              <span className={optionBorderClass} />
-              <FormattedMessage id={`SelectSingleCustomAttributeMobile.category.option.${v}`} />
-            </button>
-          );
-        })}
-      </div>
-    );
-  }
-}
 
 class SearchFiltersMobileComponent extends Component {
   constructor(props) {
@@ -89,11 +44,11 @@ class SearchFiltersMobileComponent extends Component {
       { count: resultsCount }
     );
 
-    const openMobileFilters = () => {
+    const openFilters = () => {
       this.setState({ isFiltersOpenOnMobile: true });
     };
 
-    const closeMobileFilters = () => {
+    const closeFilters = () => {
       this.setState({ isFiltersOpenOnMobile: false });
     };
 
@@ -129,7 +84,7 @@ class SearchFiltersMobileComponent extends Component {
 
     const hasCategoryConfig = config.customAttributes && config.customAttributes.category;
     const categoryFilter = hasCategoryConfig ? (
-      <SelectSingleCustomAttributeMobile
+      <SelectSingleFilterMobile
         customAttribute={customAttribute}
         urlQueryParams={urlQueryParams}
         onSelect={onSelectSingle}
@@ -145,7 +100,7 @@ class SearchFiltersMobileComponent extends Component {
           {searchInProgress ? loadingResults : null}
         </div>
         <div className={css.buttons}>
-          <SecondaryButton className={css.filterButton} onClick={openMobileFilters}>
+          <SecondaryButton className={css.filterButton} onClick={openFilters}>
             <FormattedMessage id="SearchFilters.filtersButtonLabel" className={css.mapIconText} />
           </SecondaryButton>
           <div className={css.mapIcon} onClick={onMapIconClick}>
@@ -155,20 +110,20 @@ class SearchFiltersMobileComponent extends Component {
         <ModalInMobile
           id="SearchFiltersMobile.filters"
           isModalOpenOnMobile={this.state.isFiltersOpenOnMobile}
-          onClose={closeMobileFilters}
+          onClose={closeFilters}
           showAsModalMaxWidth={showAsModalMaxWidth}
           onManageDisableScrolling={onManageDisableScrolling}
           containerClassName={css.modalContainer}
         >
           <div className={css.modalHeadingWrapper}>
             <span className={css.modalHeading}>{filtersHeading}</span>
-            <button className={css.clearButton} onClick={resetAll}>
+            <button className={css.resetAllButton} onClick={resetAll}>
               <FormattedMessage id={'SearchFiltersMobile.resetAll'} />
             </button>
           </div>
-          <div className={css.filtersContainer}>{categoryFilter}</div>
+          {categoryFilter}
           <div className={css.showListingsContainer}>
-            <Button className={css.showListingsButton} onClick={closeMobileFilters}>
+            <Button className={css.showListingsButton} onClick={closeFilters}>
               {showListingsLabel}
             </Button>
           </div>
