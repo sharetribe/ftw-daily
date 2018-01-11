@@ -38,17 +38,32 @@ class SearchFiltersMobileComponent extends Component {
     const noResults = <FormattedMessage id="SearchFilters.noResultsMobile" />;
     const loadingResults = <FormattedMessage id="SearchFilters.loadingResultsMobile" />;
     const filtersHeading = intl.formatMessage({ id: 'SearchFiltersMobile.heading' });
-    const modalCloseButtonMessage = intl.formatMessage({ id: 'SearchFiltersMobile.cancel'});
+    const modalCloseButtonMessage = intl.formatMessage({ id: 'SearchFiltersMobile.cancel' });
 
     const showListingsLabel = intl.formatMessage(
       { id: 'SearchFiltersMobile.showListings' },
       { count: resultsCount }
     );
 
+    // Open filters modal, set the initial parameters to current ones
     const openFilters = () => {
-      this.setState({ isFiltersOpenOnMobile: true });
+      this.setState({ isFiltersOpenOnMobile: true, initialQueryParams: urlQueryParams });
     };
 
+    // Close the filters by clicking cancel, revert to the initial params
+    const cancelFilters = () => {
+      history.push(
+        createResourceLocatorString(
+          'SearchPage',
+          routeConfiguration(),
+          {},
+          this.state.initialQueryParams
+        )
+      );
+      this.setState({ isFiltersOpenOnMobile: false, initialQueryParams: null });
+    };
+
+    // Close the filter modal
     const closeFilters = () => {
       this.setState({ isFiltersOpenOnMobile: false });
     };
@@ -111,7 +126,7 @@ class SearchFiltersMobileComponent extends Component {
         <ModalInMobile
           id="SearchFiltersMobile.filters"
           isModalOpenOnMobile={this.state.isFiltersOpenOnMobile}
-          onClose={closeFilters}
+          onClose={cancelFilters}
           showAsModalMaxWidth={showAsModalMaxWidth}
           onManageDisableScrolling={onManageDisableScrolling}
           containerClassName={css.modalContainer}
