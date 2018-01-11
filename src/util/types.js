@@ -188,7 +188,7 @@ export const TRANSITION_COMPLETE = 'transition/mark-delivered';
 // Either party (provider or customer) can be the first to give a review.
 export const TRANSITION_REVIEW_1_BY_PROVIDER = 'transition/review-by-provider-first';
 export const TRANSITION_REVIEW_2_BY_PROVIDER = 'transition/review-by-provider-second';
-export const TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST = 'transition/review-by-customer-first';
+export const TRANSITION_REVIEW_1_BY_CUSTOMER = 'transition/review-by-customer-first';
 export const TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND = 'transition/review-by-customer-second';
 export const TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER = 'transition/mark-reviewed-by-customer';
 export const TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER = 'transition/mark-reviewed-by-provider';
@@ -204,11 +204,11 @@ export const TX_TRANSITIONS = [
   TRANSITION_EXPIRE_REVIEW_PERIOD,
   TRANSITION_REQUEST,
   TRANSITION_REQUEST_AFTER_ENQUIRY,
+  TRANSITION_REVIEW_1_BY_CUSTOMER,
   TRANSITION_REVIEW_1_BY_PROVIDER,
   TRANSITION_REVIEW_2_BY_PROVIDER,
   TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
   TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
 ];
 
@@ -257,10 +257,7 @@ propTypes.txTransition = shape({
   transition: oneOf(TX_TRANSITIONS).isRequired,
 });
 
-const firstReviewTransitions = [
-  TRANSITION_REVIEW_1_BY_PROVIDER,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
-];
+const firstReviewTransitions = [TRANSITION_REVIEW_1_BY_CUSTOMER, TRANSITION_REVIEW_1_BY_PROVIDER];
 
 // Check if tx transition is followed by a state where
 // reviews are completed

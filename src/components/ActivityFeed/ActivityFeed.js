@@ -14,11 +14,11 @@ import {
   TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
   TRANSITION_REQUEST_AFTER_ENQUIRY,
+  TRANSITION_REVIEW_1_BY_CUSTOMER,
   TRANSITION_REVIEW_1_BY_PROVIDER,
   TRANSITION_REVIEW_2_BY_PROVIDER,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
   areReviewsCompleted,
   propTypes,
@@ -94,9 +94,9 @@ const shouldRenderTransition = transition => {
     TRANSITION_EXPIRE,
     TRANSITION_REQUEST,
     TRANSITION_REQUEST_AFTER_ENQUIRY,
+    TRANSITION_REVIEW_1_BY_CUSTOMER,
     TRANSITION_REVIEW_1_BY_PROVIDER,
     TRANSITION_REVIEW_2_BY_PROVIDER,
-    TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
     TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
   ].includes(transition);
 };
@@ -105,16 +105,16 @@ const shouldRenderTransition = transition => {
 // given tx transition.
 const isReviewTransition = transition => {
   return [
+    TRANSITION_REVIEW_1_BY_CUSTOMER,
     TRANSITION_REVIEW_1_BY_PROVIDER,
     TRANSITION_REVIEW_2_BY_PROVIDER,
-    TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
     TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
   ].includes(transition);
 };
 
 const hasUserLeftAReviewFirst = (userRole, lastTransition) => {
   return (
-    (lastTransition === TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST &&
+    (lastTransition === TRANSITION_REVIEW_1_BY_CUSTOMER &&
       userRole === TX_TRANSITION_ACTOR_CUSTOMER) ||
     (lastTransition === TRANSITION_REVIEW_1_BY_PROVIDER &&
       userRole === TX_TRANSITION_ACTOR_PROVIDER) ||
@@ -179,7 +179,7 @@ const resolveTransitionMessage = (
 
       return <FormattedMessage id="ActivityFeed.transitionComplete" values={{ reviewLink }} />;
     case TRANSITION_REVIEW_1_BY_PROVIDER:
-    case TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST:
+    case TRANSITION_REVIEW_1_BY_CUSTOMER:
       if (isOwnTransition) {
         return <FormattedMessage id="ActivityFeed.ownTransitionReview" values={{ displayName }} />;
       } else {
@@ -265,7 +265,7 @@ const Transition = props => {
 
   if (isReviewTransition(currentTransition) && areReviewsCompleted(lastTransition)) {
     const customerReview =
-      currentTransition === TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST ||
+      currentTransition === TRANSITION_REVIEW_1_BY_CUSTOMER ||
       currentTransition === TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND;
     const providerReview =
       currentTransition === TRANSITION_REVIEW_1_BY_PROVIDER ||

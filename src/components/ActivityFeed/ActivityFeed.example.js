@@ -14,11 +14,11 @@ import {
   TRANSITION_DECLINE,
   TRANSITION_EXPIRE_REVIEW_PERIOD,
   TRANSITION_REQUEST,
+  TRANSITION_REVIEW_1_BY_CUSTOMER,
   TRANSITION_REVIEW_1_BY_PROVIDER,
   TRANSITION_REVIEW_2_BY_PROVIDER,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
 } from '../../util/types';
 import ActivityFeed from './ActivityFeed';
@@ -216,7 +216,7 @@ export const WithAReviewFromBothUsers = {
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+          transition: TRANSITION_REVIEW_1_BY_CUSTOMER,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 10, 8, 10)),
