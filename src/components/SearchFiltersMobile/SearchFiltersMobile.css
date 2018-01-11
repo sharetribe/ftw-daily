@@ -66,12 +66,13 @@
 
 .modalContainer {
   width: 100%;
-  padding: 94px 24px;
+  padding: 94px 0;
 }
 
 .modalHeadingWrapper {
   padding-bottom: 26px;
   border-bottom: 1px solid var(--matterColorNegative);
+  margin: 0 24px 30px 24px;
 }
 
 .modalHeading {
@@ -99,3 +100,64 @@
     color: var(--matterColor);
   }
 }
+
+.filterLabel {
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColorDark);
+  padding-left: 24px;
+}
+
+.filterLabelSelected {
+  @apply --marketplaceH3FontStyles;
+  color: var(--marketplaceColor);
+  padding-left: 24px;
+}
+
+/* left animated "border" like hover element */
+.optionBorder {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  height: calc(100% - 7px);
+  width: 0;
+  background-color: var(--matterColorDark);
+  transition: width var(--transitionStyleButton);
+}
+
+/* left static border for selected element */
+.optionBorderSelected {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  height: calc(100% - 7px);
+  width: 12px;
+  background-color: var(--matterColorDark);
+  transition: width var(--transitionStyleButton);
+}
+
+.option {
+  @apply --marketplaceH3FontStyles;
+  font-weight: var(--fontWeightMedium);
+  color: var(--matterColor);
+
+  /* Layout */
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 4px 24px 4px 44px;
+
+  /* Override button styles */
+  outline: none;
+  border: none;
+
+  &:focus,
+  &:hover {
+    color: var(--matterColorDark);
+  }
+
+  &:hover .menuItemBorder {
+    width: 6px;
+  }
+}
+
+

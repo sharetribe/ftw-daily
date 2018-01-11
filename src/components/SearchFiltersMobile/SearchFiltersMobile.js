@@ -3,9 +3,62 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
+import { omit } from 'lodash';
 
+import routeConfiguration from '../../routeConfiguration';
+import { createResourceLocatorString } from '../../util/routes';
 import { SecondaryButton, ModalInMobile } from '../../components';
+import config from '../../config';
 import css from './SearchFiltersMobile.css';
+
+class SelectSingleCustomAttributeMobile extends Component {
+  constructor(props) {
+    super(props);
+    this.selectOption = this.selectOption.bind(this);
+  }
+
+  selectOption(option) {
+    const customAttribute = this.props.customAttribute;
+    console.log(`select option and ca: ${option} - ${customAttribute}`);
+    //this.setState({ isOpen: false });
+    this.props.onSelect(customAttribute, option);
+  }
+
+  render() {
+    const { customAttribute, urlQueryParams, intl } = this.props;
+    const filterLabel = intl.formatMessage({
+      id: `SelectSingleCustomAttribute.${customAttribute}.label`,
+    });
+    // custom attribute content
+    const ca = customAttribute && config.customAttributes[customAttribute];
+    // name of the corresponding query parameter
+    const caParam = `ca_${customAttribute}`;
+    // current value of this custom attribute filter
+    const currentValue = urlQueryParams[caParam];
+
+    const labelClass = currentValue ? css.filterLabelSelected : css.filterLabel;
+
+    return (
+      <div>
+        <div className={labelClass}>
+          {filterLabel}
+        </div>
+        {ca.values.map(v => {
+          // check if this option is selected
+          const selected = currentValue === v;
+          // menu item border class
+          const optionBorderClass = selected ? css.optionBorderSelected : css.optionBorder;
+          return (
+            <button key={v} className={css.option} onClick={() => this.selectOption(v)}>
+              <span className={optionBorderClass} />
+              <FormattedMessage id={`SelectSingleCustomAttributeMobile.category.option.${v}`} />
+            </button>
+          );
+        })}
+      </div>
+    );
+  }
+}
 
 class SearchFiltersMobileComponent extends Component {
   constructor(props) {
@@ -24,6 +77,7 @@ class SearchFiltersMobileComponent extends Component {
       showAsModalMaxWidth,
       onMapIconClick,
       onManageDisableScrolling,
+      history,
       intl,
     } = this.props;
 
@@ -43,6 +97,33 @@ class SearchFiltersMobileComponent extends Component {
     };
 
     const classes = classNames(rootClassName || css.root, className);
+
+    const onSelectSingle = (customAttribute, option) => {
+      // Name of the corresponding query parameter.
+      // The custom attribute query parameters are named
+      // ca_<custom_attribute_name> in the API.
+      const caParam = `ca_${customAttribute}`;
+
+      // query parameters after selecting the option
+      // if no option is passed, clear the selection for the filter
+      const queryParams = option
+        ? { ...urlQueryParams, [caParam]: option }
+        : omit(urlQueryParams, caParam);
+
+      history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+    };
+
+    const customAttribute = 'category';
+
+    const hasCategoryConfig = config.customAttributes && config.customAttributes.category;
+    const categoryFilter = hasCategoryConfig ? (
+      <SelectSingleCustomAttributeMobile
+        customAttribute={customAttribute}
+        urlQueryParams={urlQueryParams}
+        onSelect={onSelectSingle}
+        intl={intl}
+      />
+    ) : null;
 
     return (
       <div className={classes}>
@@ -73,7 +154,10 @@ class SearchFiltersMobileComponent extends Component {
               <FormattedMessage id={'SearchFiltersMobile.resetAll'} />
             </button>
           </div>
-          <div className={css.mobileFilterWrapper} />
+          <div className={css.filtersContainer}>{categoryFilter}</div>
+          <button onClick={closeMobileFilters}>
+            "Show saunas"
+          </button>
         </ModalInMobile>
       </div>
     );
