@@ -14,11 +14,11 @@ import {
   TRANSITION_DECLINE,
   TRANSITION_EXPIRE_REVIEW_PERIOD,
   TRANSITION_REQUEST,
+  TRANSITION_REVIEW_1_BY_PROVIDER,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
   TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
 } from '../../util/types';
 import ActivityFeed from './ActivityFeed';
@@ -140,7 +140,7 @@ export const WithMessagesTransitionsAndReviews = {
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 11, 34)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
-          transition: TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+          transition: TRANSITION_REVIEW_1_BY_PROVIDER,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 12, 34)),

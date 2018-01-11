@@ -4,9 +4,9 @@ import { isTransactionsTransitionInvalidTransition, storableError } from '../../
 import {
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
+  TRANSITION_REVIEW_1_BY_PROVIDER,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
   TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
 } from '../../util/types';
 import * as log from '../../util/log';
@@ -406,9 +406,7 @@ const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
 // by calling sendReviewAsSecond().
 const sendReviewAsFirst = (id, params, role, dispatch, sdk) => {
   const transition =
-    role === CUSTOMER
-      ? TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST
-      : TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST;
+    role === CUSTOMER ? TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST : TRANSITION_REVIEW_1_BY_PROVIDER;
   const include = REVIEW_TX_INCLUDES;
 
   return sdk.transactions
@@ -437,7 +435,7 @@ export const sendReview = (role, tx, reviewRating, reviewContent) => (dispatch, 
 
   const txStateOtherPartyFirst =
     role === CUSTOMER
-      ? tx.attributes.lastTransition === TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST
+      ? tx.attributes.lastTransition === TRANSITION_REVIEW_1_BY_PROVIDER
       : tx.attributes.lastTransition === TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST;
 
   dispatch(sendReviewRequest());
