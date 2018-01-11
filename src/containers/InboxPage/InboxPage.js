@@ -11,7 +11,7 @@ import {
   txIsAccepted,
   txIsCanceled,
   txIsCompleted,
-  txIsDeclinedOrAutodeclined,
+  txIsDeclinedOrExpired,
   txIsEnquired,
   txIsRequested,
   txIsReviewed,
@@ -67,7 +67,7 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateAccepted',
       }),
     };
-  } else if (txIsDeclinedOrAutodeclined(tx)) {
+  } else if (txIsDeclinedOrExpired(tx)) {
     return {
       nameClassName: css.nameDeclined,
       bookingClassName: css.bookingDeclined,

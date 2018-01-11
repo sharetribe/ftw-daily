@@ -240,7 +240,7 @@ export const txIsDeclined = tx => txLastTransition(tx) === TRANSITION_DECLINE;
 
 export const txIsExpired = tx => txLastTransition(tx) === TRANSITION_EXPIRE;
 
-export const txIsDeclinedOrAutodeclined = tx => txIsDeclined(tx) || txIsExpired(tx);
+export const txIsDeclinedOrExpired = tx => txIsDeclined(tx) || txIsExpired(tx);
 
 export const txIsCanceled = tx => txLastTransition(tx) === TRANSITION_CANCEL;
 

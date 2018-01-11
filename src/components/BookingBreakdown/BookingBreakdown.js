@@ -14,7 +14,7 @@ import {
   LINE_ITEM_PROVIDER_COMMISSION,
   txIsCanceled,
   txIsCompleted,
-  txIsDeclinedOrAutodeclined,
+  txIsDeclinedOrExpired,
   propTypes,
 } from '../../util/types';
 import { daysBetween } from '../../util/dates';
@@ -218,7 +218,7 @@ export const BookingBreakdownComponent = props => {
   let providerTotalMessageId = 'BookingBreakdown.providerTotalDefault';
   if (txIsCompleted(transaction)) {
     providerTotalMessageId = 'BookingBreakdown.providerTotalDelivered';
-  } else if (txIsDeclinedOrAutodeclined(transaction)) {
+  } else if (txIsDeclinedOrExpired(transaction)) {
     providerTotalMessageId = 'BookingBreakdown.providerTotalDeclined';
   } else if (txIsCanceled(transaction)) {
     providerTotalMessageId = 'BookingBreakdown.providerTotalCanceled';
