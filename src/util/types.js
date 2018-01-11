@@ -187,7 +187,7 @@ export const TRANSITION_COMPLETE = 'transition/mark-delivered';
 // Reviews are given through transaction transitions.
 // Either party (provider or customer) can be the first to give a review.
 export const TRANSITION_REVIEW_1_BY_PROVIDER = 'transition/review-by-provider-first';
-export const TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND = 'transition/review-by-provider-second';
+export const TRANSITION_REVIEW_2_BY_PROVIDER = 'transition/review-by-provider-second';
 export const TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST = 'transition/review-by-customer-first';
 export const TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND = 'transition/review-by-customer-second';
 export const TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER = 'transition/mark-reviewed-by-customer';
@@ -205,11 +205,11 @@ export const TX_TRANSITIONS = [
   TRANSITION_REQUEST,
   TRANSITION_REQUEST_AFTER_ENQUIRY,
   TRANSITION_REVIEW_1_BY_PROVIDER,
+  TRANSITION_REVIEW_2_BY_PROVIDER,
   TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
   TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
 ];
 
 // Roles of actors that perform transaction transitions
@@ -267,10 +267,10 @@ const firstReviewTransitions = [
 export const areReviewsCompleted = transition => {
   return [
     TRANSITION_EXPIRE_REVIEW_PERIOD,
+    TRANSITION_REVIEW_2_BY_PROVIDER,
     TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
     TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
     TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-    TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
   ].includes(transition);
 };
 

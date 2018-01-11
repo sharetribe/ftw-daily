@@ -15,11 +15,11 @@ import {
   TRANSITION_EXPIRE_REVIEW_PERIOD,
   TRANSITION_REQUEST,
   TRANSITION_REVIEW_1_BY_PROVIDER,
+  TRANSITION_REVIEW_2_BY_PROVIDER,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
 } from '../../util/types';
 import ActivityFeed from './ActivityFeed';
 
@@ -211,7 +211,7 @@ export const WithAReviewFromBothUsers = {
           { author: createUser('user2'), subject: createUser('user1') }
         ),
       ],
-      lastTransition: TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+      lastTransition: TRANSITION_REVIEW_2_BY_PROVIDER,
       transitions: [
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
@@ -221,7 +221,7 @@ export const WithAReviewFromBothUsers = {
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 10, 8, 10)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
-          transition: TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+          transition: TRANSITION_REVIEW_2_BY_PROVIDER,
         }),
       ],
     }),

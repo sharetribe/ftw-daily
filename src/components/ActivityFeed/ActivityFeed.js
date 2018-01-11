@@ -15,11 +15,11 @@ import {
   TRANSITION_REQUEST,
   TRANSITION_REQUEST_AFTER_ENQUIRY,
   TRANSITION_REVIEW_1_BY_PROVIDER,
+  TRANSITION_REVIEW_2_BY_PROVIDER,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
   areReviewsCompleted,
   propTypes,
 } from '../../util/types';
@@ -95,9 +95,9 @@ const shouldRenderTransition = transition => {
     TRANSITION_REQUEST,
     TRANSITION_REQUEST_AFTER_ENQUIRY,
     TRANSITION_REVIEW_1_BY_PROVIDER,
+    TRANSITION_REVIEW_2_BY_PROVIDER,
     TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
     TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-    TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
   ].includes(transition);
 };
 
@@ -106,9 +106,9 @@ const shouldRenderTransition = transition => {
 const isReviewTransition = transition => {
   return [
     TRANSITION_REVIEW_1_BY_PROVIDER,
+    TRANSITION_REVIEW_2_BY_PROVIDER,
     TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
     TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-    TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
   ].includes(transition);
 };
 
@@ -197,7 +197,7 @@ const resolveTransitionMessage = (
           />
         );
       }
-    case TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND:
+    case TRANSITION_REVIEW_2_BY_PROVIDER:
     case TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND:
       if (isOwnTransition) {
         return <FormattedMessage id="ActivityFeed.ownTransitionReview" values={{ displayName }} />;
@@ -269,7 +269,7 @@ const Transition = props => {
       currentTransition === TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND;
     const providerReview =
       currentTransition === TRANSITION_REVIEW_1_BY_PROVIDER ||
-      currentTransition === TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND;
+      currentTransition === TRANSITION_REVIEW_2_BY_PROVIDER;
     if (customerReview) {
       const review = reviewByAuthorId(currentTransaction, customer.id);
       reviewComponent = (
