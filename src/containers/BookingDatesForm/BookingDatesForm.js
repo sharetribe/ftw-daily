@@ -14,8 +14,8 @@ import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../u
 import {
   LINE_ITEM_DAY,
   LINE_ITEM_NIGHT,
+  TRANSITION_REQUEST,
   TX_TRANSITION_ACTOR_CUSTOMER,
-  TX_TRANSITION_PREAUTHORIZE,
   propTypes,
 } from '../../util/types';
 import config from '../../config';
@@ -51,7 +51,7 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice) => 
     attributes: {
       createdAt: now,
       lastTransitionedAt: now,
-      lastTransition: TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TRANSITION_REQUEST,
       payinTotal: totalPrice,
       payoutTotal: totalPrice,
       lineItems: [
@@ -68,7 +68,7 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice) => 
         {
           at: now,
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TX_TRANSITION_PREAUTHORIZE,
+          transition: TRANSITION_REQUEST,
         },
       ],
     },

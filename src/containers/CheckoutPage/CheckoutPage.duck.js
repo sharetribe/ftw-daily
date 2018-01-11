@@ -1,7 +1,7 @@
 import { pick } from 'lodash';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
-import { TX_TRANSITION_PREAUTHORIZE } from '../../util/types';
+import { TRANSITION_REQUEST } from '../../util/types';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess } from '../../ducks/user.duck';
 
@@ -107,7 +107,7 @@ export const speculateTransactionError = e => ({
 export const initiateOrder = (orderParams, initialMessage) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
   const bodyParams = {
-    transition: TX_TRANSITION_PREAUTHORIZE,
+    transition: TRANSITION_REQUEST,
     params: orderParams,
   };
   return sdk.transactions
@@ -161,7 +161,7 @@ export const speculateTransaction = (listingId, bookingStart, bookingEnd) => (
 ) => {
   dispatch(speculateTransactionRequest());
   const bodyParams = {
-    transition: TX_TRANSITION_PREAUTHORIZE,
+    transition: TRANSITION_REQUEST,
     params: {
       listingId,
       bookingStart,

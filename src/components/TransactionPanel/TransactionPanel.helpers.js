@@ -9,7 +9,7 @@ import {
   txIsDeclined,
   txIsDelivered,
   txIsEnquired,
-  txIsPreauthorized,
+  txIsRequested,
   txIsReviewed,
 } from '../../util/types';
 import { userDisplayName } from '../../util/data';
@@ -212,7 +212,7 @@ export const OrderTitle = props => {
         </span>
       </h1>
     );
-  } else if (txIsPreauthorized(transaction)) {
+  } else if (txIsRequested(transaction)) {
     return (
       <h1 className={classes}>
         <span className={css.mainTitle}>
@@ -292,7 +292,7 @@ export const OrderMessage = props => {
   } = props;
   const classes = classNames(rootClassName || css.transactionInfoMessage, className);
 
-  if (!listingDeleted && txIsPreauthorized(transaction)) {
+  if (!listingDeleted && txIsRequested(transaction)) {
     return (
       <p className={classes}>
         <FormattedMessage id="TransactionPanel.orderPreauthorizedInfo" values={{ providerName }} />
@@ -331,7 +331,7 @@ export const SaleTitle = props => {
         />
       </h1>
     );
-  } else if (txIsPreauthorized(transaction)) {
+  } else if (txIsRequested(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -405,7 +405,7 @@ export const SaleMessage = props => {
   } = props;
   const classes = classNames(rootClassName || css.transactionInfoMessage, className);
 
-  if (!isCustomerBanned && txIsPreauthorized(transaction)) {
+  if (!isCustomerBanned && txIsRequested(transaction)) {
     return (
       <p className={classes}>
         <FormattedMessage id="TransactionPanel.saleRequestedInfo" values={{ customerName }} />

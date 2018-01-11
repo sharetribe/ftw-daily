@@ -9,13 +9,13 @@ import {
   createReview,
 } from '../../util/test-data';
 import {
+  TRANSITION_REQUEST,
   TX_TRANSITION_ACCEPT,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
   TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
   TX_TRANSITION_DECLINE,
   TX_TRANSITION_MARK_DELIVERED,
-  TX_TRANSITION_PREAUTHORIZE,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
   TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
@@ -83,7 +83,7 @@ export const WithTransitions = {
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TX_TRANSITION_PREAUTHORIZE,
+          transition: TRANSITION_REQUEST,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
@@ -120,7 +120,7 @@ export const WithMessagesTransitionsAndReviews = {
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TX_TRANSITION_PREAUTHORIZE,
+          transition: TRANSITION_REQUEST,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
@@ -257,7 +257,7 @@ class PagedFeed extends Component {
     const trans1 = createTxTransition({
       at: dates[0],
       by: TX_TRANSITION_ACTOR_CUSTOMER,
-      transition: TX_TRANSITION_PREAUTHORIZE,
+      transition: TRANSITION_REQUEST,
     });
     const trans2 = createTxTransition({
       at: dates[2],

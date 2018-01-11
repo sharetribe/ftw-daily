@@ -8,7 +8,7 @@ import {
   fakeIntl,
 } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
-import { TX_TRANSITION_PREAUTHORIZE } from '../../util/types';
+import { TRANSITION_REQUEST } from '../../util/types';
 import { TransactionPageComponent } from './TransactionPage';
 
 const noop = () => null;
@@ -18,7 +18,7 @@ describe('TransactionPage - Sale', () => {
     const txId = 'tx-sale-1';
     const transaction = createTransaction({
       id: txId,
-      lastTransition: TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TRANSITION_REQUEST,
       booking: createBooking('booking1', {
         start: new Date(Date.UTC(2017, 5, 10)),
         end: new Date(Date.UTC(2017, 5, 13)),
@@ -60,7 +60,7 @@ describe('TransactionPage - Order', () => {
     const txId = 'tx-order-1';
     const transaction = createTransaction({
       id: txId,
-      lastTransition: TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TRANSITION_REQUEST,
       booking: createBooking('booking1', {
         start: new Date(Date.UTC(2017, 5, 10)),
         end: new Date(Date.UTC(2017, 5, 13)),

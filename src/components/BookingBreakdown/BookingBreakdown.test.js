@@ -5,9 +5,9 @@ import { renderDeep } from '../../util/test-helpers';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   LINE_ITEM_NIGHT,
+  TRANSITION_REQUEST,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_CANCEL,
-  TX_TRANSITION_PREAUTHORIZE,
 } from '../../util/types';
 import { BookingBreakdownComponent } from './BookingBreakdown';
 
@@ -21,12 +21,12 @@ const exampleTransaction = params => {
     attributes: {
       createdAt: created,
       lastTransitionedAt: created,
-      lastTransition: TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TRANSITION_REQUEST,
       transitions: [
         {
           at: created,
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TX_TRANSITION_PREAUTHORIZE,
+          transition: TRANSITION_REQUEST,
         },
       ],
 

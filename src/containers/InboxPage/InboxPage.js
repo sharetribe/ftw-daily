@@ -13,7 +13,7 @@ import {
   txIsDeclinedOrAutodeclined,
   txIsDelivered,
   txIsEnquired,
-  txIsPreauthorized,
+  txIsRequested,
   txIsReviewed,
   propTypes,
 } from '../../util/types';
@@ -156,7 +156,7 @@ export const InboxItem = props => {
   const otherUserDisplayName = userDisplayName(otherUser, bannedUserDisplayName);
 
   const stateData = txState(intl, tx, isOrder);
-  const isSaleNotification = !isOrder && txIsPreauthorized(tx);
+  const isSaleNotification = !isOrder && txIsRequested(tx);
   const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
   const lastTransitionedAt = formatDate(intl, tx.attributes.lastTransitionedAt);
 

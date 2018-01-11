@@ -7,6 +7,7 @@ import { Avatar, InlineTextButton, ReviewRating } from '../../components';
 import { formatDate } from '../../util/dates';
 import { ensureTransaction, ensureUser, ensureListing, userDisplayName } from '../../util/data';
 import {
+  TRANSITION_REQUEST,
   TX_TRANSITION_ACCEPT,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
@@ -14,7 +15,6 @@ import {
   TX_TRANSITION_CANCEL,
   TX_TRANSITION_DECLINE,
   TX_TRANSITION_MARK_DELIVERED,
-  TX_TRANSITION_PREAUTHORIZE,
   TX_TRANSITION_PREAUTHORIZE_ENQUIRY,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
@@ -87,7 +87,7 @@ Review.propTypes = {
 // should be rendered in he ActivityFeed
 const shouldRenderTransition = transition => {
   return [
-    TX_TRANSITION_PREAUTHORIZE,
+    TRANSITION_REQUEST,
     TX_TRANSITION_PREAUTHORIZE_ENQUIRY,
     TX_TRANSITION_ACCEPT,
     TX_TRANSITION_DECLINE,
@@ -137,7 +137,7 @@ const resolveTransitionMessage = (
   const deliveredState = lastTransition === TX_TRANSITION_MARK_DELIVERED;
 
   switch (currentTransition) {
-    case TX_TRANSITION_PREAUTHORIZE:
+    case TRANSITION_REQUEST:
     case TX_TRANSITION_PREAUTHORIZE_ENQUIRY:
       return isOwnTransition ? (
         <FormattedMessage id="ActivityFeed.ownTransitionRequest" values={{ listingTitle }} />

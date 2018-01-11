@@ -12,13 +12,13 @@ import {
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl } from '../../util/test-data';
 import {
+  TRANSITION_REQUEST,
   TX_TRANSITION_ACCEPT,
   TX_TRANSITION_AUTO_DECLINE,
   TX_TRANSITION_CANCELED,
   TX_TRANSITION_DECLINE,
   TX_TRANSITION_ENQUIRE,
   TX_TRANSITION_MARK_DELIVERED,
-  TX_TRANSITION_PREAUTHORIZE,
 } from '../../util/types';
 import { BreakdownMaybe } from './TransactionPanel.helpers';
 import { TransactionPanelComponent } from './TransactionPanel';
@@ -48,7 +48,7 @@ describe('TransactionPanel - Sale', () => {
 
   const txPreauthorized = createTransaction({
     id: 'sale-preauthorized',
-    lastTransition: TX_TRANSITION_PREAUTHORIZE,
+    lastTransition: TRANSITION_REQUEST,
     ...baseTxAttrs,
   });
 
@@ -167,7 +167,7 @@ describe('TransactionPanel - Sale', () => {
   it('renders correct total price', () => {
     const transaction = createTransaction({
       id: 'sale-tx',
-      lastTransition: TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TRANSITION_REQUEST,
       total: new Money(16500, 'USD'),
       commission: new Money(1000, 'USD'),
       booking: createBooking('booking1', {
@@ -213,7 +213,7 @@ describe('TransactionPanel - Order', () => {
 
   const txPreauthorized = createTransaction({
     id: 'order-preauthorized',
-    lastTransition: TX_TRANSITION_PREAUTHORIZE,
+    lastTransition: TRANSITION_REQUEST,
     ...baseTxAttrs,
   });
 
@@ -334,7 +334,7 @@ describe('TransactionPanel - Order', () => {
   it('renders correct total price', () => {
     const tx = createTransaction({
       id: 'order-tx',
-      lastTransition: TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TRANSITION_REQUEST,
       total: new Money(16500, 'USD'),
       booking: createBooking('booking1', {
         start: new Date(Date.UTC(2017, 5, 10)),

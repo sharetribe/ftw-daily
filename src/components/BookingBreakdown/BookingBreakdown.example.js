@@ -3,13 +3,13 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   LINE_ITEM_DAY,
   LINE_ITEM_NIGHT,
+  TRANSITION_REQUEST,
   TX_TRANSITION_ACCEPT,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_AUTO_DECLINE,
   TX_TRANSITION_CANCEL,
   TX_TRANSITION_DECLINE,
   TX_TRANSITION_MARK_DELIVERED,
-  TX_TRANSITION_PREAUTHORIZE,
 } from '../../util/types';
 import config from '../../config';
 import BookingBreakdown from './BookingBreakdown';
@@ -34,12 +34,12 @@ const exampleTransaction = params => {
     attributes: {
       createdAt: created,
       lastTransitionedAt: created,
-      lastTransition: TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TRANSITION_REQUEST,
       transitions: [
         {
           at: created,
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TX_TRANSITION_PREAUTHORIZE,
+          transition: TRANSITION_REQUEST,
         },
       ],
 
@@ -206,7 +206,7 @@ export const ProviderSalePreauthorized = {
     userRole: 'provider',
     unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
-      lastTransition: TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TRANSITION_REQUEST,
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
       lineItems: [

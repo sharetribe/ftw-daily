@@ -160,12 +160,9 @@ propTypes.booking = shape({
   }),
 });
 
-// When the customer requests a booking, a transaction is created. The
-// initial state is preauthorized that is transitioned with the
-// initial preauthorize transition. The customer can see this
-// transaction in the OrderPage that is linked from the InboxPage. The
-// provider sees the transaction in the SalePage.
-export const TX_TRANSITION_PREAUTHORIZE = 'transition/preauthorize';
+// When a customer makes a booking to a listing, a transaction is
+// created with the initial request transition.
+export const TRANSITION_REQUEST = 'transition/preauthorize';
 
 // A customer can also initiate a transaction with an enquiry, and
 // then transition that by preauthorization.
@@ -201,21 +198,21 @@ export const TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS =
   'transition/auto-complete-without-reviews';
 
 export const TX_TRANSITIONS = [
-  TX_TRANSITION_ENQUIRE,
-  TX_TRANSITION_PREAUTHORIZE_ENQUIRY,
-  TX_TRANSITION_PREAUTHORIZE,
+  TRANSITION_REQUEST,
   TX_TRANSITION_ACCEPT,
-  TX_TRANSITION_DECLINE,
+  TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
   TX_TRANSITION_AUTO_DECLINE,
   TX_TRANSITION_CANCEL,
+  TX_TRANSITION_DECLINE,
+  TX_TRANSITION_ENQUIRE,
   TX_TRANSITION_MARK_DELIVERED,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
   TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
   TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
-  TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
+  TX_TRANSITION_PREAUTHORIZE_ENQUIRY,
+  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+  TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+  TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
 ];
 
 // Roles of actors that perform transaction transitions
@@ -235,11 +232,9 @@ const txLastTransition = tx => ensureTransaction(tx).attributes.lastTransition;
 
 export const txIsEnquired = tx => txLastTransition(tx) === TX_TRANSITION_ENQUIRE;
 
-export const txIsPreauthorized = tx => {
+export const txIsRequested = tx => {
   const transition = txLastTransition(tx);
-  return (
-    transition === TX_TRANSITION_PREAUTHORIZE || transition === TX_TRANSITION_PREAUTHORIZE_ENQUIRY
-  );
+  return transition === TRANSITION_REQUEST || transition === TX_TRANSITION_PREAUTHORIZE_ENQUIRY;
 };
 
 export const txIsAccepted = tx => txLastTransition(tx) === TX_TRANSITION_ACCEPT;
