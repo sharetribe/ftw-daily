@@ -12,12 +12,12 @@ import {
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl } from '../../util/test-data';
 import {
+  TRANSITION_ENQUIRE,
   TRANSITION_REQUEST,
   TX_TRANSITION_ACCEPT,
   TX_TRANSITION_AUTO_DECLINE,
   TX_TRANSITION_CANCELED,
   TX_TRANSITION_DECLINE,
-  TX_TRANSITION_ENQUIRE,
   TX_TRANSITION_MARK_DELIVERED,
 } from '../../util/types';
 import { BreakdownMaybe } from './TransactionPanel.helpers';
@@ -42,7 +42,7 @@ describe('TransactionPanel - Sale', () => {
 
   const txEnquired = createTransaction({
     id: 'sale-enquired',
-    lastTransition: TX_TRANSITION_ENQUIRE,
+    lastTransition: TRANSITION_ENQUIRE,
     ...baseTxAttrs,
   });
 
@@ -207,7 +207,7 @@ describe('TransactionPanel - Order', () => {
 
   const txEnquired = createTransaction({
     id: 'order-enquired',
-    lastTransition: TX_TRANSITION_ENQUIRE,
+    lastTransition: TRANSITION_ENQUIRE,
     ...baseTxAttrs,
   });
 

@@ -166,7 +166,7 @@ export const TRANSITION_REQUEST = 'transition/preauthorize';
 
 // A customer can also initiate a transaction with an enquiry, and
 // then transition that with a request.
-export const TX_TRANSITION_ENQUIRE = 'transition/enquire';
+export const TRANSITION_ENQUIRE = 'transition/enquire';
 export const TRANSITION_REQUEST_AFTER_ENQUIRY = 'transition/preauthorize-enquiry';
 
 // When the provider accepts or declines a transaction from the
@@ -198,6 +198,7 @@ export const TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS =
   'transition/auto-complete-without-reviews';
 
 export const TX_TRANSITIONS = [
+  TRANSITION_ENQUIRE,
   TRANSITION_REQUEST,
   TRANSITION_REQUEST_AFTER_ENQUIRY,
   TX_TRANSITION_ACCEPT,
@@ -205,7 +206,6 @@ export const TX_TRANSITIONS = [
   TX_TRANSITION_AUTO_DECLINE,
   TX_TRANSITION_CANCEL,
   TX_TRANSITION_DECLINE,
-  TX_TRANSITION_ENQUIRE,
   TX_TRANSITION_MARK_DELIVERED,
   TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
   TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
@@ -230,7 +230,7 @@ export const TX_TRANSITION_ACTORS = [
 
 const txLastTransition = tx => ensureTransaction(tx).attributes.lastTransition;
 
-export const txIsEnquired = tx => txLastTransition(tx) === TX_TRANSITION_ENQUIRE;
+export const txIsEnquired = tx => txLastTransition(tx) === TRANSITION_ENQUIRE;
 
 export const txIsRequested = tx => {
   const transition = txLastTransition(tx);
