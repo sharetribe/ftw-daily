@@ -2,8 +2,8 @@ import { pick } from 'lodash';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
 import {
-  TX_TRANSITION_ACCEPT,
-  TX_TRANSITION_DECLINE,
+  TRANSITION_ACCEPT,
+  TRANSITION_DECLINE,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
   TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
@@ -254,7 +254,7 @@ export const acceptSale = id => (dispatch, getState, sdk) => {
   dispatch(acceptSaleRequest());
 
   return sdk.transactions
-    .transition({ id, transition: TX_TRANSITION_ACCEPT, params: {} }, { expand: true })
+    .transition({ id, transition: TRANSITION_ACCEPT, params: {} }, { expand: true })
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(acceptSaleSuccess());
@@ -265,7 +265,7 @@ export const acceptSale = id => (dispatch, getState, sdk) => {
       dispatch(acceptSaleError(storableError(e)));
       log.error(e, 'accept-sale-failed', {
         txId: id,
-        transition: TX_TRANSITION_ACCEPT,
+        transition: TRANSITION_ACCEPT,
       });
       throw e;
     });
@@ -278,7 +278,7 @@ export const declineSale = id => (dispatch, getState, sdk) => {
   dispatch(declineSaleRequest());
 
   return sdk.transactions
-    .transition({ id, transition: TX_TRANSITION_DECLINE, params: {} }, { expand: true })
+    .transition({ id, transition: TRANSITION_DECLINE, params: {} }, { expand: true })
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(declineSaleSuccess());
@@ -289,7 +289,7 @@ export const declineSale = id => (dispatch, getState, sdk) => {
       dispatch(declineSaleError(storableError(e)));
       log.error(e, 'reject-sale-failed', {
         txId: id,
-        transition: TX_TRANSITION_DECLINE,
+        transition: TRANSITION_DECLINE,
       });
       throw e;
     });

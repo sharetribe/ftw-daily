@@ -12,12 +12,12 @@ import {
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl } from '../../util/test-data';
 import {
+  TRANSITION_ACCEPT,
+  TRANSITION_CANCELED,
+  TRANSITION_DECLINE,
   TRANSITION_ENQUIRE,
   TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
-  TX_TRANSITION_ACCEPT,
-  TX_TRANSITION_CANCELED,
-  TX_TRANSITION_DECLINE,
   TX_TRANSITION_MARK_DELIVERED,
 } from '../../util/types';
 import { BreakdownMaybe } from './TransactionPanel.helpers';
@@ -54,13 +54,13 @@ describe('TransactionPanel - Sale', () => {
 
   const txAccepted = createTransaction({
     id: 'sale-accepted',
-    lastTransition: TX_TRANSITION_ACCEPT,
+    lastTransition: TRANSITION_ACCEPT,
     ...baseTxAttrs,
   });
 
   const txDeclined = createTransaction({
     id: 'sale-declined',
-    lastTransition: TX_TRANSITION_DECLINE,
+    lastTransition: TRANSITION_DECLINE,
     ...baseTxAttrs,
   });
 
@@ -72,7 +72,7 @@ describe('TransactionPanel - Sale', () => {
 
   const txCanceled = createTransaction({
     id: 'sale-canceled',
-    lastTransition: TX_TRANSITION_CANCELED,
+    lastTransition: TRANSITION_CANCELED,
     ...baseTxAttrs,
   });
 
@@ -219,13 +219,13 @@ describe('TransactionPanel - Order', () => {
 
   const txAccepted = createTransaction({
     id: 'order-accepted',
-    lastTransition: TX_TRANSITION_ACCEPT,
+    lastTransition: TRANSITION_ACCEPT,
     ...baseTxAttrs,
   });
 
   const txDeclined = createTransaction({
     id: 'order-declined',
-    lastTransition: TX_TRANSITION_DECLINE,
+    lastTransition: TRANSITION_DECLINE,
     ...baseTxAttrs,
   });
 
@@ -237,7 +237,7 @@ describe('TransactionPanel - Order', () => {
 
   const txCanceled = createTransaction({
     id: 'order-canceled',
-    lastTransition: TX_TRANSITION_CANCELED,
+    lastTransition: TRANSITION_CANCELED,
     ...baseTxAttrs,
   });
 

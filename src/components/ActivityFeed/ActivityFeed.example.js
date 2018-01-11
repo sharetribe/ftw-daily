@@ -9,12 +9,12 @@ import {
   createReview,
 } from '../../util/test-data';
 import {
+  TRANSITION_ACCEPT,
+  TRANSITION_DECLINE,
   TRANSITION_REQUEST,
-  TX_TRANSITION_ACCEPT,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
   TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
-  TX_TRANSITION_DECLINE,
   TX_TRANSITION_MARK_DELIVERED,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
@@ -88,7 +88,7 @@ export const WithTransitions = {
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
-          transition: TX_TRANSITION_ACCEPT,
+          transition: TRANSITION_ACCEPT,
         }),
         // this should not be visible in the feed
         createTxTransition({
@@ -125,12 +125,12 @@ export const WithMessagesTransitionsAndReviews = {
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
-          transition: TX_TRANSITION_ACCEPT,
+          transition: TRANSITION_ACCEPT,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 10, 33)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
-          transition: TX_TRANSITION_DECLINE,
+          transition: TRANSITION_DECLINE,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 10, 34)),
@@ -262,7 +262,7 @@ class PagedFeed extends Component {
     const trans2 = createTxTransition({
       at: dates[2],
       by: TX_TRANSITION_ACTOR_PROVIDER,
-      transition: TX_TRANSITION_ACCEPT,
+      transition: TRANSITION_ACCEPT,
     });
 
     // Last transition timestamp is interleaved between the last two

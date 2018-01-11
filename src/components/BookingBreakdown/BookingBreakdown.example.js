@@ -3,12 +3,12 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   LINE_ITEM_DAY,
   LINE_ITEM_NIGHT,
+  TRANSITION_ACCEPT,
+  TRANSITION_CANCEL,
+  TRANSITION_DECLINE,
   TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
-  TX_TRANSITION_ACCEPT,
   TX_TRANSITION_ACTOR_CUSTOMER,
-  TX_TRANSITION_CANCEL,
-  TX_TRANSITION_DECLINE,
   TX_TRANSITION_MARK_DELIVERED,
 } from '../../util/types';
 import config from '../../config';
@@ -240,7 +240,7 @@ export const ProviderSaleAccepted = {
     userRole: 'provider',
     unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
-      lastTransition: TX_TRANSITION_ACCEPT,
+      lastTransition: TRANSITION_ACCEPT,
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
@@ -274,7 +274,7 @@ export const ProviderSaleDeclined = {
     userRole: 'provider',
     unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
-      lastTransition: TX_TRANSITION_DECLINE,
+      lastTransition: TRANSITION_DECLINE,
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
       lineItems: [
@@ -376,7 +376,7 @@ export const ProviderSaleCanceled = {
     userRole: 'provider',
     unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
-      lastTransition: TX_TRANSITION_CANCEL,
+      lastTransition: TRANSITION_CANCEL,
       payinTotal: new Money(0, CURRENCY),
       payoutTotal: new Money(0, CURRENCY),
       lineItems: [

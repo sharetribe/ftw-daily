@@ -7,14 +7,14 @@ import { Avatar, InlineTextButton, ReviewRating } from '../../components';
 import { formatDate } from '../../util/dates';
 import { ensureTransaction, ensureUser, ensureListing, userDisplayName } from '../../util/data';
 import {
+  TRANSITION_ACCEPT,
+  TRANSITION_CANCEL,
+  TRANSITION_DECLINE,
   TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
   TRANSITION_REQUEST_AFTER_ENQUIRY,
-  TX_TRANSITION_ACCEPT,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
-  TX_TRANSITION_CANCEL,
-  TX_TRANSITION_DECLINE,
   TX_TRANSITION_MARK_DELIVERED,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
   TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
@@ -87,12 +87,12 @@ Review.propTypes = {
 // should be rendered in he ActivityFeed
 const shouldRenderTransition = transition => {
   return [
+    TRANSITION_ACCEPT,
+    TRANSITION_CANCEL,
+    TRANSITION_DECLINE,
     TRANSITION_EXPIRE,
     TRANSITION_REQUEST,
     TRANSITION_REQUEST_AFTER_ENQUIRY,
-    TX_TRANSITION_ACCEPT,
-    TX_TRANSITION_CANCEL,
-    TX_TRANSITION_DECLINE,
     TX_TRANSITION_MARK_DELIVERED,
     TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
     TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
@@ -147,13 +147,13 @@ const resolveTransitionMessage = (
           values={{ displayName, listingTitle }}
         />
       );
-    case TX_TRANSITION_ACCEPT:
+    case TRANSITION_ACCEPT:
       return isOwnTransition ? (
         <FormattedMessage id="ActivityFeed.ownTransitionAccept" />
       ) : (
         <FormattedMessage id="ActivityFeed.transitionAccept" values={{ displayName }} />
       );
-    case TX_TRANSITION_DECLINE:
+    case TRANSITION_DECLINE:
       return isOwnTransition ? (
         <FormattedMessage id="ActivityFeed.ownTransitionDecline" />
       ) : (
@@ -165,7 +165,7 @@ const resolveTransitionMessage = (
       ) : (
         <FormattedMessage id="ActivityFeed.transitionAutoDecline" values={{ displayName }} />
       );
-    case TX_TRANSITION_CANCEL:
+    case TRANSITION_CANCEL:
       return <FormattedMessage id="ActivityFeed.transitionCancel" />;
     case TX_TRANSITION_MARK_DELIVERED:
       // Show the leave a review link if the state is delivered or

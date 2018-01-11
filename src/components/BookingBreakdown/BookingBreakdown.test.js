@@ -5,9 +5,9 @@ import { renderDeep } from '../../util/test-helpers';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   LINE_ITEM_NIGHT,
+  TRANSITION_CANCEL,
   TRANSITION_REQUEST,
   TX_TRANSITION_ACTOR_CUSTOMER,
-  TX_TRANSITION_CANCEL,
 } from '../../util/types';
 import { BookingBreakdownComponent } from './BookingBreakdown';
 
@@ -136,7 +136,7 @@ describe('BookingBreakdown', () => {
         userRole="provider"
         unitType={LINE_ITEM_NIGHT}
         transaction={exampleTransaction({
-          lastTransition: TX_TRANSITION_CANCEL,
+          lastTransition: TRANSITION_CANCEL,
           payinTotal: new Money(0, 'USD'),
           payoutTotal: new Money(0, 'USD'),
           lineItems: [

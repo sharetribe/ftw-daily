@@ -171,14 +171,14 @@ export const TRANSITION_REQUEST_AFTER_ENQUIRY = 'transition/preauthorize-enquiry
 
 // When the provider accepts or declines a transaction from the
 // SalePage, it is transitioned with the accept or decline transition.
-export const TX_TRANSITION_ACCEPT = 'transition/accept';
-export const TX_TRANSITION_DECLINE = 'transition/decline';
+export const TRANSITION_ACCEPT = 'transition/accept';
+export const TRANSITION_DECLINE = 'transition/decline';
 
 // The backend automatically expire the transaction.
 export const TRANSITION_EXPIRE = 'transition/auto-decline';
 
 // Admin can also cancel the transition.
-export const TX_TRANSITION_CANCEL = 'transition/cancel';
+export const TRANSITION_CANCEL = 'transition/cancel';
 
 // If the is marked as delivered in the backend, it is transitioned
 // with the mark-delivered transition.
@@ -197,14 +197,14 @@ export const TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS =
   'transition/auto-complete-without-reviews';
 
 export const TX_TRANSITIONS = [
+  TRANSITION_ACCEPT,
+  TRANSITION_CANCEL,
+  TRANSITION_DECLINE,
   TRANSITION_ENQUIRE,
   TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
   TRANSITION_REQUEST_AFTER_ENQUIRY,
-  TX_TRANSITION_ACCEPT,
   TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
-  TX_TRANSITION_CANCEL,
-  TX_TRANSITION_DECLINE,
   TX_TRANSITION_MARK_DELIVERED,
   TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
   TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
@@ -236,15 +236,15 @@ export const txIsRequested = tx => {
   return transition === TRANSITION_REQUEST || transition === TRANSITION_REQUEST_AFTER_ENQUIRY;
 };
 
-export const txIsAccepted = tx => txLastTransition(tx) === TX_TRANSITION_ACCEPT;
+export const txIsAccepted = tx => txLastTransition(tx) === TRANSITION_ACCEPT;
 
-export const txIsDeclined = tx => txLastTransition(tx) === TX_TRANSITION_DECLINE;
+export const txIsDeclined = tx => txLastTransition(tx) === TRANSITION_DECLINE;
 
 export const txIsExpired = tx => txLastTransition(tx) === TRANSITION_EXPIRE;
 
 export const txIsDeclinedOrAutodeclined = tx => txIsDeclined(tx) || txIsExpired(tx);
 
-export const txIsCanceled = tx => txLastTransition(tx) === TX_TRANSITION_CANCEL;
+export const txIsCanceled = tx => txLastTransition(tx) === TRANSITION_CANCEL;
 
 export const txIsDelivered = tx => txLastTransition(tx) === TX_TRANSITION_MARK_DELIVERED;
 
