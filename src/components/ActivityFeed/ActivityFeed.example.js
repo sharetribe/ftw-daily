@@ -16,10 +16,10 @@ import {
   TRANSITION_REQUEST,
   TRANSITION_REVIEW_1_BY_CUSTOMER,
   TRANSITION_REVIEW_1_BY_PROVIDER,
+  TRANSITION_REVIEW_2_BY_CUSTOMER,
   TRANSITION_REVIEW_2_BY_PROVIDER,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
 } from '../../util/types';
 import ActivityFeed from './ActivityFeed';
 
@@ -115,7 +115,7 @@ export const WithMessagesTransitionsAndReviews = {
       customer: createUser('user1'),
       provider: createUser('user2'),
       listing: createListing('Listing'),
-      lastTransition: TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+      lastTransition: TRANSITION_REVIEW_2_BY_CUSTOMER,
       transitions: [
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
@@ -145,7 +145,7 @@ export const WithMessagesTransitionsAndReviews = {
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 12, 34)),
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+          transition: TRANSITION_REVIEW_2_BY_CUSTOMER,
         }),
       ],
       reviews: [

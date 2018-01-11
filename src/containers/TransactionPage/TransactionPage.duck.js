@@ -6,8 +6,8 @@ import {
   TRANSITION_DECLINE,
   TRANSITION_REVIEW_1_BY_CUSTOMER,
   TRANSITION_REVIEW_1_BY_PROVIDER,
+  TRANSITION_REVIEW_2_BY_CUSTOMER,
   TRANSITION_REVIEW_2_BY_PROVIDER,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
 } from '../../util/types';
 import * as log from '../../util/log';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
@@ -377,7 +377,7 @@ const REVIEW_TX_INCLUDES = ['reviews', 'reviews.author', 'reviews.subject'];
 // TX_TRANSITION_REVIEW_BY_<CUSTOMER/PROVIDER>_SECOND
 const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
   const transition =
-    role === CUSTOMER ? TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND : TRANSITION_REVIEW_2_BY_PROVIDER;
+    role === CUSTOMER ? TRANSITION_REVIEW_2_BY_CUSTOMER : TRANSITION_REVIEW_2_BY_PROVIDER;
 
   const include = REVIEW_TX_INCLUDES;
 
