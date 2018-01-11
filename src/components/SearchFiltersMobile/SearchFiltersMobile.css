@@ -160,4 +160,18 @@
   }
 }
 
+.showListingsContainer {
+  z-index: 11;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
+  padding: 18px 24px;
+}
 
+.showListingsButton {
+  background-color: var(--marketplaceColor);
+  display: inline-block;
+  border-radius: 3px;
+}

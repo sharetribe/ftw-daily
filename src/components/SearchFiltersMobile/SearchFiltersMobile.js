@@ -7,7 +7,7 @@ import { omit } from 'lodash';
 
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
-import { SecondaryButton, ModalInMobile } from '../../components';
+import { SecondaryButton, ModalInMobile, Button } from '../../components';
 import config from '../../config';
 import css from './SearchFiltersMobile.css';
 
@@ -19,8 +19,6 @@ class SelectSingleCustomAttributeMobile extends Component {
 
   selectOption(option) {
     const customAttribute = this.props.customAttribute;
-    console.log(`select option and ca: ${option} - ${customAttribute}`);
-    //this.setState({ isOpen: false });
     this.props.onSelect(customAttribute, option);
   }
 
@@ -40,9 +38,7 @@ class SelectSingleCustomAttributeMobile extends Component {
 
     return (
       <div>
-        <div className={labelClass}>
-          {filterLabel}
-        </div>
+        <div className={labelClass}>{filterLabel}</div>
         {ca.values.map(v => {
           // check if this option is selected
           const selected = currentValue === v;
@@ -88,6 +84,11 @@ class SearchFiltersMobileComponent extends Component {
     const loadingResults = <FormattedMessage id="SearchFilters.loadingResultsMobile" />;
     const filtersHeading = intl.formatMessage({ id: 'SearchFiltersMobile.heading' });
 
+    const showListingsLabel = intl.formatMessage(
+      { id: 'SearchFiltersMobile.showListings' },
+      { count: resultsCount }
+    );
+
     const openMobileFilters = () => {
       this.setState({ isFiltersOpenOnMobile: true });
     };
@@ -95,8 +96,6 @@ class SearchFiltersMobileComponent extends Component {
     const closeMobileFilters = () => {
       this.setState({ isFiltersOpenOnMobile: false });
     };
-
-    const classes = classNames(rootClassName || css.root, className);
 
     const onSelectSingle = (customAttribute, option) => {
       // Name of the corresponding query parameter.
@@ -110,10 +109,23 @@ class SearchFiltersMobileComponent extends Component {
         ? { ...urlQueryParams, [caParam]: option }
         : omit(urlQueryParams, caParam);
 
-      history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+      history.push(
+        createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams)
+      );
     };
 
     const customAttribute = 'category';
+
+    // Reset all filter query parameters
+    const resetAll = () => {
+      const caParam = `ca_${customAttribute}`;
+      const queryParams = omit(urlQueryParams, caParam);
+      history.push(
+        createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams)
+      );
+    };
+
+    const classes = classNames(rootClassName || css.root, className);
 
     const hasCategoryConfig = config.customAttributes && config.customAttributes.category;
     const categoryFilter = hasCategoryConfig ? (
@@ -150,14 +162,16 @@ class SearchFiltersMobileComponent extends Component {
         >
           <div className={css.modalHeadingWrapper}>
             <span className={css.modalHeading}>{filtersHeading}</span>
-            <button className={css.clearButton}>
+            <button className={css.clearButton} onClick={resetAll}>
               <FormattedMessage id={'SearchFiltersMobile.resetAll'} />
             </button>
           </div>
           <div className={css.filtersContainer}>{categoryFilter}</div>
-          <button onClick={closeMobileFilters}>
-            "Show saunas"
-          </button>
+          <div className={css.showListingsContainer}>
+            <Button className={css.showListingsButton} onClick={closeMobileFilters}>
+              {showListingsLabel}
+            </Button>
+          </div>
         </ModalInMobile>
       </div>
     );

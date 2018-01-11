@@ -474,6 +474,7 @@
   "SearchFilters.openMapView": "Map",
   "SearchFiltersMobile.heading": "Filter saunas",
   "SearchFiltersMobile.resetAll": "Reset all",
+  "SearchFiltersMobile.showListings": "Show {count, number} {count, plural, one {sauna} other {saunas}}",
   "SearchMapInfoCard.noImage": "No image",
   "SearchPage.schemaDescription": "Showing search results",
   "SearchPage.schemaMapSearch": "map search",
