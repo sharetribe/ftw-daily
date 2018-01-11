@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderDeep } from '../../util/test-helpers';
-import * as propTypes from '../../util/propTypes';
+import { LINE_ITEM_NIGHT } from '../../util/types';
 import { DateRangeInput } from './DateRangeInputField';
 
 const noop = () => null;
@@ -8,7 +8,7 @@ const noop = () => null;
 describe('DateRangeInput', () => {
   it('matches snapshot', () => {
     const props = {
-      unitType: propTypes.LINE_ITEM_NIGHT,
+      unitType: LINE_ITEM_NIGHT,
       name: 'bookingDates',
       onBlur: noop,
       onChange: noop,

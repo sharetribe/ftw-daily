@@ -6,10 +6,12 @@ import { createSlug } from '../../util/urlHelpers';
 import { NamedLink } from '../../components';
 import { EditListingPricingForm } from '../../containers';
 import { ensureListing } from '../../util/data';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import config from '../../config';
 
 import css from './EditListingPricingPanel.css';
+
+const { Money } = sdkTypes;
 
 const EditListingPricingPanel = props => {
   const {
@@ -42,8 +44,7 @@ const EditListingPricingPanel = props => {
     <FormattedMessage id="EditListingPricingPanel.createListingTitle" />
   );
 
-  const priceCurrencyValid =
-    price instanceof types.Money ? price.currency === config.currency : true;
+  const priceCurrencyValid = price instanceof Money ? price.currency === config.currency : true;
   const form = priceCurrencyValid ? (
     <EditListingPricingForm
       className={css.form}

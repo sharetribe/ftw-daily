@@ -1,9 +1,11 @@
 import { omit, omitBy, isUndefined } from 'lodash';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasListingsSuccess } from '../../ducks/user.duck';
+
+const { UUID } = sdkTypes;
 
 const requestAction = actionType => params => ({ type: actionType, payload: { params } });
 
@@ -339,7 +341,7 @@ export function loadData(params) {
       return Promise.resolve(null);
     }
     const payload = {
-      id: new types.UUID(id),
+      id: new UUID(id),
       include: ['author', 'images'],
     };
     return dispatch(requestShowListing(payload));

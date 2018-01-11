@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 
 import CustomMarker from './images/marker-32x32.png';
 import css from './Map.css';

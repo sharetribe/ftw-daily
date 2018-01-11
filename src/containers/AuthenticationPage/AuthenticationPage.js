@@ -6,7 +6,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import config from '../../config';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
 import {
   isSignupEmailTakenError,

@@ -14,7 +14,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Decimal from 'decimal.js';
-import { createInstance, types } from './util/sdkLoader';
+import { createInstance, types as sdkTypes } from './util/sdkLoader';
 import { ClientApp, renderApp } from './app';
 import configureStore from './store';
 import { matchPathname } from './util/routes';
@@ -28,7 +28,7 @@ import { LoggingAnalyticsHandler, GoogleAnalyticsHandler } from './analytics/han
 
 import './marketplaceIndex.css';
 
-const { BigDecimal } = types;
+const { BigDecimal } = sdkTypes;
 
 const render = store => {
   // If the server already loaded the auth information, render the app
@@ -77,7 +77,7 @@ if (typeof window !== 'undefined') {
 
   // eslint-disable-next-line no-underscore-dangle
   const preloadedState = window.__PRELOADED_STATE__ || '{}';
-  const initialState = JSON.parse(preloadedState, types.reviver);
+  const initialState = JSON.parse(preloadedState, sdkTypes.reviver);
   const sdk = createInstance({
     clientId: config.sdk.clientId,
     baseUrl: config.sdk.baseUrl,
@@ -103,7 +103,7 @@ if (typeof window !== 'undefined') {
     window.app = {
       config,
       sdk,
-      sdkTypes: types,
+      sdkTypes,
       store,
       sample,
       routeConfiguration: routeConfiguration(),

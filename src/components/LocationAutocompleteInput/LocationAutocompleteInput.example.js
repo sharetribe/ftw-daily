@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { Button } from '../../components';
 import LocationAutocompleteInput from './LocationAutocompleteInput';
 

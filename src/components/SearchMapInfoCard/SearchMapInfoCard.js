@@ -7,7 +7,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { ensureListing } from '../../util/data';
 import { createResourceLocatorString } from '../../util/routes';

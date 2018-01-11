@@ -7,20 +7,28 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import moment from 'moment';
 import Decimal from 'decimal.js';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import { required, bookingDatesRequired } from '../../util/validators';
 import { nightsBetween, daysBetween, START_DATE, END_DATE } from '../../util/dates';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
-import * as propTypes from '../../util/propTypes';
+import {
+  LINE_ITEM_DAY,
+  LINE_ITEM_NIGHT,
+  TX_TRANSITION_ACTOR_CUSTOMER,
+  TX_TRANSITION_PREAUTHORIZE,
+  propTypes,
+} from '../../util/types';
 import config from '../../config';
 import { Form, PrimaryButton, BookingBreakdown, DateRangeInputField } from '../../components';
 
 import css from './BookingDatesForm.css';
 
+const { Money, UUID } = sdkTypes;
+
 const estimatedTotalPrice = (unitPrice, unitCount) => {
   const numericPrice = convertMoneyToNumber(unitPrice);
   const numericTotalPrice = new Decimal(numericPrice).times(unitCount).toNumber();
-  return new types.Money(
+  return new Money(
     convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
     unitPrice.currency
   );
@@ -31,24 +39,24 @@ const estimatedTotalPrice = (unitPrice, unitCount) => {
 // an estimated transaction object for that use case.
 const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice) => {
   const now = new Date();
-  const isNightly = unitType === propTypes.LINE_ITEM_NIGHT;
+  const isNightly = unitType === LINE_ITEM_NIGHT;
   const unitCount = isNightly
     ? nightsBetween(bookingStart, bookingEnd)
     : daysBetween(bookingStart, bookingEnd);
   const totalPrice = estimatedTotalPrice(unitPrice, unitCount);
 
   return {
-    id: new types.UUID('estimated-transaction'),
+    id: new UUID('estimated-transaction'),
     type: 'transaction',
     attributes: {
       createdAt: now,
       lastTransitionedAt: now,
-      lastTransition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TX_TRANSITION_PREAUTHORIZE,
       payinTotal: totalPrice,
       payoutTotal: totalPrice,
       lineItems: [
         {
-          code: isNightly ? propTypes.LINE_ITEM_NIGHT : propTypes.LINE_ITEM_DAY,
+          code: isNightly ? LINE_ITEM_NIGHT : LINE_ITEM_DAY,
           includeFor: ['customer', 'provider'],
           unitPrice: unitPrice,
           quantity: new Decimal(unitCount),
@@ -59,13 +67,13 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice) => 
       transitions: [
         {
           at: now,
-          by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+          by: TX_TRANSITION_ACTOR_CUSTOMER,
+          transition: TX_TRANSITION_PREAUTHORIZE,
         },
       ],
     },
     booking: {
-      id: new types.UUID('estimated-booking'),
+      id: new UUID('estimated-booking'),
       type: 'booking',
       attributes: {
         start: bookingStart,
@@ -257,7 +265,7 @@ BookingDatesFormComponent.propTypes = {
   submitButtonWrapperClassName: string,
 
   unitType: propTypes.bookingUnitType.isRequired,
-  price: instanceOf(types.Money),
+  price: propTypes.money,
   isOwnListing: bool,
 
   // from formValueSelector

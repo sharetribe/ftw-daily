@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { ensureUser, userDisplayName, userAbbreviatedName } from '../../util/data';
 import { ResponsiveImage, IconBannedUser, NamedLink } from '../../components/';
 

@@ -1,11 +1,20 @@
 import { pick } from 'lodash';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
-import * as propTypes from '../../util/propTypes';
+import {
+  TX_TRANSITION_ACCEPT,
+  TX_TRANSITION_DECLINE,
+  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+  TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+  TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+} from '../../util/types';
 import * as log from '../../util/log';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
+
+const { UUID } = sdkTypes;
 
 const MESSAGES_PAGE_SIZE = 100;
 const CUSTOMER = 'customer';
@@ -245,7 +254,7 @@ export const acceptSale = id => (dispatch, getState, sdk) => {
   dispatch(acceptSaleRequest());
 
   return sdk.transactions
-    .transition({ id, transition: propTypes.TX_TRANSITION_ACCEPT, params: {} }, { expand: true })
+    .transition({ id, transition: TX_TRANSITION_ACCEPT, params: {} }, { expand: true })
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(acceptSaleSuccess());
@@ -256,7 +265,7 @@ export const acceptSale = id => (dispatch, getState, sdk) => {
       dispatch(acceptSaleError(storableError(e)));
       log.error(e, 'accept-sale-failed', {
         txId: id,
-        transition: propTypes.TX_TRANSITION_ACCEPT,
+        transition: TX_TRANSITION_ACCEPT,
       });
       throw e;
     });
@@ -269,7 +278,7 @@ export const declineSale = id => (dispatch, getState, sdk) => {
   dispatch(declineSaleRequest());
 
   return sdk.transactions
-    .transition({ id, transition: propTypes.TX_TRANSITION_DECLINE, params: {} }, { expand: true })
+    .transition({ id, transition: TX_TRANSITION_DECLINE, params: {} }, { expand: true })
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(declineSaleSuccess());
@@ -280,7 +289,7 @@ export const declineSale = id => (dispatch, getState, sdk) => {
       dispatch(declineSaleError(storableError(e)));
       log.error(e, 'reject-sale-failed', {
         txId: id,
-        transition: propTypes.TX_TRANSITION_DECLINE,
+        transition: TX_TRANSITION_DECLINE,
       });
       throw e;
     });
@@ -369,8 +378,8 @@ const REVIEW_TX_INCLUDES = ['reviews', 'reviews.author', 'reviews.subject'];
 const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
   const transition =
     role === CUSTOMER
-      ? propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND
-      : propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND;
+      ? TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND
+      : TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND;
 
   const include = REVIEW_TX_INCLUDES;
 
@@ -398,8 +407,8 @@ const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
 const sendReviewAsFirst = (id, params, role, dispatch, sdk) => {
   const transition =
     role === CUSTOMER
-      ? propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST
-      : propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST;
+      ? TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST
+      : TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST;
   const include = REVIEW_TX_INCLUDES;
 
   return sdk.transactions
@@ -428,8 +437,8 @@ export const sendReview = (role, tx, reviewRating, reviewContent) => (dispatch, 
 
   const txStateOtherPartyFirst =
     role === CUSTOMER
-      ? tx.attributes.lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST
-      : tx.attributes.lastTransition === propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST;
+      ? tx.attributes.lastTransition === TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST
+      : tx.attributes.lastTransition === TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST;
 
   dispatch(sendReviewRequest());
 
@@ -441,7 +450,7 @@ export const sendReview = (role, tx, reviewRating, reviewContent) => (dispatch, 
 // loadData is a collection of async calls that need to be made
 // before page has all the info it needs to render itself
 export const loadData = params => dispatch => {
-  const txId = new types.UUID(params.id);
+  const txId = new UUID(params.id);
 
   // Clear the send error since the message form is emptied as well.
   dispatch(setInitialValues({ sendMessageError: null, sendReviewError: null }));

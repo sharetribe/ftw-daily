@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import { findIndex, uniqueId } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import AddImages from './AddImages';
 import css from './AddImages.example.css';
+
+const { UUID } = sdkTypes;
 
 const getId = () => {
   return uniqueId();
@@ -33,7 +35,6 @@ class AddImagesTest extends Component {
     // Fake image uploaded state: show image thumbnail
     setTimeout(() => {
       this.setState(prevState => {
-        const { UUID } = types;
         const images = prevState.images;
         const imageIndex = findIndex(images, i => i.id === fileId);
         const updatedImage = { ...imageData, imageId: new UUID(fileId) };

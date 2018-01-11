@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { OverlayView } from 'react-google-maps';
 import classNames from 'classnames';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { ensureListing } from '../../util/data';
 
 import css from './SearchMapGroupLabel.css';

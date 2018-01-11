@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName, findRouteByRouteName } from '../../util/routes';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { ensureListing, ensureUser, ensureTransaction, ensureBooking } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
 import {

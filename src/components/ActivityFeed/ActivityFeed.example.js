@@ -8,7 +8,19 @@ import {
   createTxTransition,
   createReview,
 } from '../../util/test-data';
-import * as propTypes from '../../util/propTypes';
+import {
+  TX_TRANSITION_ACCEPT,
+  TX_TRANSITION_ACTOR_CUSTOMER,
+  TX_TRANSITION_ACTOR_PROVIDER,
+  TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
+  TX_TRANSITION_DECLINE,
+  TX_TRANSITION_MARK_DELIVERED,
+  TX_TRANSITION_PREAUTHORIZE,
+  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+  TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+  TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+} from '../../util/types';
 import ActivityFeed from './ActivityFeed';
 
 const noop = () => null;
@@ -70,19 +82,19 @@ export const WithTransitions = {
       transitions: [
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
-          by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+          by: TX_TRANSITION_ACTOR_CUSTOMER,
+          transition: TX_TRANSITION_PREAUTHORIZE,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
-          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
-          transition: propTypes.TX_TRANSITION_ACCEPT,
+          by: TX_TRANSITION_ACTOR_PROVIDER,
+          transition: TX_TRANSITION_ACCEPT,
         }),
         // this should not be visible in the feed
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 16, 8, 12)),
-          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
-          transition: propTypes.TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
+          by: TX_TRANSITION_ACTOR_PROVIDER,
+          transition: TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
         }),
       ],
     }),
@@ -103,37 +115,37 @@ export const WithMessagesTransitionsAndReviews = {
       customer: createUser('user1'),
       provider: createUser('user2'),
       listing: createListing('Listing'),
-      lastTransition: propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+      lastTransition: TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
       transitions: [
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
-          by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+          by: TX_TRANSITION_ACTOR_CUSTOMER,
+          transition: TX_TRANSITION_PREAUTHORIZE,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
-          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
-          transition: propTypes.TX_TRANSITION_ACCEPT,
+          by: TX_TRANSITION_ACTOR_PROVIDER,
+          transition: TX_TRANSITION_ACCEPT,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 10, 33)),
-          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
-          transition: propTypes.TX_TRANSITION_DECLINE,
+          by: TX_TRANSITION_ACTOR_PROVIDER,
+          transition: TX_TRANSITION_DECLINE,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 10, 34)),
-          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
-          transition: propTypes.TX_TRANSITION_MARK_DELIVERED,
+          by: TX_TRANSITION_ACTOR_PROVIDER,
+          transition: TX_TRANSITION_MARK_DELIVERED,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 11, 34)),
-          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
-          transition: propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+          by: TX_TRANSITION_ACTOR_PROVIDER,
+          transition: TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 12, 34)),
-          by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+          by: TX_TRANSITION_ACTOR_CUSTOMER,
+          transition: TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
         }),
       ],
       reviews: [
@@ -199,17 +211,17 @@ export const WithAReviewFromBothUsers = {
           { author: createUser('user2'), subject: createUser('user1') }
         ),
       ],
-      lastTransition: propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+      lastTransition: TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
       transitions: [
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
-          by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: propTypes.TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+          by: TX_TRANSITION_ACTOR_CUSTOMER,
+          transition: TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 10, 8, 10)),
-          by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
-          transition: propTypes.TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+          by: TX_TRANSITION_ACTOR_PROVIDER,
+          transition: TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
         }),
       ],
     }),
@@ -244,21 +256,21 @@ class PagedFeed extends Component {
 
     const trans1 = createTxTransition({
       at: dates[0],
-      by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
-      transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+      by: TX_TRANSITION_ACTOR_CUSTOMER,
+      transition: TX_TRANSITION_PREAUTHORIZE,
     });
     const trans2 = createTxTransition({
       at: dates[2],
-      by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
-      transition: propTypes.TX_TRANSITION_ACCEPT,
+      by: TX_TRANSITION_ACTOR_PROVIDER,
+      transition: TX_TRANSITION_ACCEPT,
     });
 
     // Last transition timestamp is interleaved between the last two
     // messages.
     const trans3 = createTxTransition({
       at: dates[5],
-      by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
-      transition: propTypes.TX_TRANSITION_MARK_DELIVERED,
+      by: TX_TRANSITION_ACTOR_CUSTOMER,
+      transition: TX_TRANSITION_MARK_DELIVERED,
     });
 
     // First message timestamp is interleaved between the first two
@@ -271,7 +283,7 @@ class PagedFeed extends Component {
 
     const transaction = createTransaction({
       id: 'tx1',
-      lastTransition: propTypes.TX_TRANSITION_MARK_DELIVERED,
+      lastTransition: TX_TRANSITION_MARK_DELIVERED,
       lastTransitionedAt: dates[5],
       transitions: [trans1, trans2, trans3],
       listing: createListing('listing'),

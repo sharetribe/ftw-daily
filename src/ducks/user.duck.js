@@ -1,6 +1,6 @@
 import { updatedEntities, denormalisedEntities } from '../util/data';
 import { storableError } from '../util/errors';
-import { TX_TRANSITION_PREAUTHORIZE, TX_TRANSITION_PREAUTHORIZE_ENQUIRY } from '../util/propTypes';
+import { TX_TRANSITION_PREAUTHORIZE, TX_TRANSITION_PREAUTHORIZE_ENQUIRY } from '../util/types';
 import * as log from '../util/log';
 import { authInfo } from './Auth.duck';
 

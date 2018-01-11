@@ -1,11 +1,16 @@
 import Decimal from 'decimal.js';
-import { types } from './sdkLoader';
+import { types as sdkTypes } from './sdkLoader';
 import { nightsBetween } from '../util/dates';
-import * as propTypes from '../util/propTypes';
+import {
+  TX_TRANSITION_ACCEPT,
+  TX_TRANSITION_ACTOR_CUSTOMER,
+  TX_TRANSITION_ACTOR_PROVIDER,
+  TX_TRANSITION_PREAUTHORIZE,
+} from '../util/types';
 
-const { UUID, LatLng, Money } = types;
+const { UUID, LatLng, Money } = sdkTypes;
 
-// Create a booking that conforms to the util/propTypes booking schema
+// Create a booking that conforms to the util/types booking schema
 export const createBooking = (id, attributes = {}) => ({
   id: new UUID(id),
   type: 'booking',
@@ -16,7 +21,7 @@ export const createBooking = (id, attributes = {}) => ({
   },
 });
 
-// Create a user that conforms to the util/propTypes user schema
+// Create a user that conforms to the util/types user schema
 export const createUser = id => ({
   id: new UUID(id),
   type: 'user',
@@ -29,7 +34,7 @@ export const createUser = id => ({
   },
 });
 
-// Create a user that conforms to the util/propTypes currentUser schema
+// Create a user that conforms to the util/types currentUser schema
 export const createCurrentUser = id => ({
   id: new UUID(id),
   type: 'currentUser',
@@ -47,7 +52,7 @@ export const createCurrentUser = id => ({
   },
 });
 
-// Create a user that conforms to the util/propTypes user schema
+// Create a user that conforms to the util/types user schema
 export const createImage = id => ({
   id: new UUID(id),
   type: 'image',
@@ -69,7 +74,7 @@ export const createImage = id => ({
   },
 });
 
-// Create a user that conforms to the util/propTypes listing schema
+// Create a user that conforms to the util/types listing schema
 export const createListing = (id, attributes = {}, includes = {}) => ({
   id: new UUID(id),
   type: 'listing',
@@ -90,8 +95,8 @@ export const createListing = (id, attributes = {}, includes = {}) => ({
 export const createTxTransition = options => {
   return {
     at: new Date(Date.UTC(2017, 4, 1)),
-    by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
-    transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+    by: TX_TRANSITION_ACTOR_CUSTOMER,
+    transition: TX_TRANSITION_PREAUTHORIZE,
     ...options,
   };
 };
@@ -99,7 +104,7 @@ export const createTxTransition = options => {
 export const createTransaction = options => {
   const {
     id,
-    lastTransition = propTypes.TX_TRANSITION_ACCEPT,
+    lastTransition = TX_TRANSITION_ACCEPT,
     total = new Money(1000, 'USD'),
     commission = new Money(100, 'USD'),
     booking = null,
@@ -111,13 +116,13 @@ export const createTransaction = options => {
     transitions = [
       createTxTransition({
         at: new Date(Date.UTC(2017, 4, 1)),
-        by: propTypes.TX_TRANSITION_ACTOR_CUSTOMER,
-        transition: propTypes.TX_TRANSITION_PREAUTHORIZE,
+        by: TX_TRANSITION_ACTOR_CUSTOMER,
+        transition: TX_TRANSITION_PREAUTHORIZE,
       }),
       createTxTransition({
         at: new Date(Date.UTC(2017, 5, 1)),
-        by: propTypes.TX_TRANSITION_ACTOR_PROVIDER,
-        transition: propTypes.TX_TRANSITION_ACCEPT,
+        by: TX_TRANSITION_ACTOR_PROVIDER,
+        transition: TX_TRANSITION_ACCEPT,
       }),
     ],
   } = options;

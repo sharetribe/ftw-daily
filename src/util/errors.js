@@ -20,7 +20,7 @@ import {
   ERROR_CODE_EMAIL_NOT_VERIFIED,
   ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS,
   ERROR_CODE_UPLOAD_OVER_LIMIT,
-} from './propTypes';
+} from './types';
 
 const errorAPIErrors = error => {
   return error && error.apiErrors ? error.apiErrors : [];
@@ -177,7 +177,7 @@ export const storableError = error => {
   // Status, statusText, and data.errors are (possibly) added to the error object by SDK
   const apiErrors = responseAPIErrors(error);
 
-  // Returned object is the same as prop type check in util/proptypes -> error
+  // Returned object is the same as prop type check in util/types -> error
   return {
     type: 'error',
     name,

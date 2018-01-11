@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { ResponsiveImage } from '../../components';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 
 import css from './ImageCarousel.css';
 

@@ -5,7 +5,7 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import config from '../../config';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { required } from '../../util/validators';
 import { Form, Button, CurrencyInputField } from '../../components';
 

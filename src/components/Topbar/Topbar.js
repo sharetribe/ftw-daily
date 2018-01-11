@@ -10,7 +10,7 @@ import { ensureCurrentUser } from '../../util/data';
 import { withViewport } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { isTooManyEmailVerificationRequestsError } from '../../util/errors';
 import {
   Button,

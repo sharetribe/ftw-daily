@@ -1,7 +1,7 @@
 import queryString from 'query-string';
-import { types } from './sdkLoader';
+import { types as sdkTypes } from './sdkLoader';
 
-const { LatLng, LatLngBounds } = types;
+const { LatLng, LatLngBounds } = sdkTypes;
 
 export const createSlug = str =>
   encodeURIComponent(

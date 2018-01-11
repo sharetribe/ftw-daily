@@ -10,7 +10,7 @@ import { Field } from 'redux-form';
 import classNames from 'classnames';
 import Decimal from 'decimal.js';
 import { ValidationError } from '../../components';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   isSafeNumber,
   unitDivisor,
@@ -20,10 +20,12 @@ import {
   ensureSeparator,
   truncateToSubUnitPrecision,
 } from '../../util/currency';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import * as log from '../../util/log';
 
 import css from './CurrencyInputField.css';
+
+const { Money } = sdkTypes;
 
 const allowedInputProps = allProps => {
   // Strip away props that are not passed to input element (or are overwritten)
@@ -38,7 +40,7 @@ const getPrice = (unformattedValue, currencyConfig) => {
   try {
     return isEmptyString
       ? null
-      : new types.Money(
+      : new Money(
           convertUnitToSubUnit(unformattedValue, unitDivisor(currencyConfig.currency)),
           currencyConfig.currency
         );
@@ -51,7 +53,7 @@ class CurrencyInputComponent extends Component {
   constructor(props) {
     super(props);
     const { currencyConfig, defaultValue, input, intl } = props;
-    const initialValueIsMoney = input.value instanceof types.Money;
+    const initialValueIsMoney = input.value instanceof Money;
 
     if (initialValueIsMoney && input.value.currency !== currencyConfig.currency) {
       const e = new Error('Value currency different from marketplace currency');

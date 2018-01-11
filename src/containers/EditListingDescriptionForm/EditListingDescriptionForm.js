@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 import { maxLength, required } from '../../util/validators';
 import { FieldCustomAttributeSelect, Form, Button, TextInputField } from '../../components';
 

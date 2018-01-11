@@ -7,7 +7,7 @@ import { createSlug } from '../../util/urlHelpers';
 import { EditListingPhotosForm, PayoutDetailsForm } from '../../containers';
 import { ensureListing } from '../../util/data';
 import { Modal, NamedLink } from '../../components';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 
 import css from './EditListingPhotosPanel.css';
 

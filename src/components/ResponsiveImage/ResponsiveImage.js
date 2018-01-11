@@ -34,7 +34,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 
 import NoImageIcon from './NoImageIcon';
 import css from './ResponsiveImage.css';

@@ -10,7 +10,7 @@ import {
   IconEmailSuccess,
   PrimaryButton,
 } from '../../components';
-import * as propTypes from '../../util/propTypes';
+import { propTypes } from '../../util/types';
 
 import css from './EmailVerificationForm.css';
 

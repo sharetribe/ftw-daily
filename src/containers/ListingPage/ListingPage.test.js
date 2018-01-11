@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import { createUser, createCurrentUser, createListing, fakeIntl } from '../../util/test-data';
 import { storableError } from '../../util/errors';
 import { renderShallow } from '../../util/test-helpers';
-import * as propTypes from '../../util/propTypes';
+import { LINE_ITEM_NIGHT } from '../../util/types';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { showListingRequest, showListingError, showListing } from './ListingPage.duck';
 
@@ -15,7 +15,7 @@ import { showListingRequest, showListingError, showListing } from './ListingPage
 import routeConfiguration from '../../routeConfiguration';
 import { ListingPageComponent, ActionBar } from './ListingPage';
 
-const { UUID } = types;
+const { UUID } = sdkTypes;
 const noop = () => null;
 
 describe('ListingPage', () => {
@@ -27,7 +27,7 @@ describe('ListingPage', () => {
     const getListing = () => listing1;
 
     const props = {
-      unitType: propTypes.LINE_ITEM_NIGHT,
+      unitType: LINE_ITEM_NIGHT,
       location: {
         pathname: `/l/${slug}/${id}`,
         search: '',

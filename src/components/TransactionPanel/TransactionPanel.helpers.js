@@ -1,7 +1,17 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import * as propTypes from '../../util/propTypes';
+import {
+  txHasFirstReview,
+  txIsAccepted,
+  txIsAutodeclined,
+  txIsCanceled,
+  txIsDeclined,
+  txIsDelivered,
+  txIsEnquired,
+  txIsPreauthorized,
+  txIsReviewed,
+} from '../../util/types';
 import { userDisplayName } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
 import {
@@ -194,7 +204,7 @@ export const OrderTitle = props => {
 
   const classes = classNames(rootClassName || css.headingOrder, className);
 
-  if (propTypes.txIsEnquired(transaction)) {
+  if (txIsEnquired(transaction)) {
     return (
       <h1 className={classes}>
         <span className={css.mainTitle}>
@@ -202,7 +212,7 @@ export const OrderTitle = props => {
         </span>
       </h1>
     );
-  } else if (propTypes.txIsPreauthorized(transaction)) {
+  } else if (txIsPreauthorized(transaction)) {
     return (
       <h1 className={classes}>
         <span className={css.mainTitle}>
@@ -217,7 +227,7 @@ export const OrderTitle = props => {
         />
       </h1>
     );
-  } else if (propTypes.txIsAccepted(transaction)) {
+  } else if (txIsAccepted(transaction)) {
     return (
       <h1 className={classes}>
         <span className={css.mainTitle}>
@@ -226,7 +236,7 @@ export const OrderTitle = props => {
         <FormattedMessage id="TransactionPanel.orderAcceptedSubtitle" values={{ listingLink }} />
       </h1>
     );
-  } else if (propTypes.txIsDeclined(transaction)) {
+  } else if (txIsDeclined(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -235,7 +245,7 @@ export const OrderTitle = props => {
         />
       </h1>
     );
-  } else if (propTypes.txIsAutodeclined(transaction)) {
+  } else if (txIsAutodeclined(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -244,7 +254,7 @@ export const OrderTitle = props => {
         />
       </h1>
     );
-  } else if (propTypes.txIsCanceled(transaction)) {
+  } else if (txIsCanceled(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -254,9 +264,9 @@ export const OrderTitle = props => {
       </h1>
     );
   } else if (
-    propTypes.txIsDelivered(transaction) ||
-    propTypes.txHasFirstReview(transaction) ||
-    propTypes.txIsReviewed(transaction)
+    txIsDelivered(transaction) ||
+    txHasFirstReview(transaction) ||
+    txIsReviewed(transaction)
   ) {
     return (
       <h1 className={classes}>
@@ -282,7 +292,7 @@ export const OrderMessage = props => {
   } = props;
   const classes = classNames(rootClassName || css.transactionInfoMessage, className);
 
-  if (!listingDeleted && propTypes.txIsPreauthorized(transaction)) {
+  if (!listingDeleted && txIsPreauthorized(transaction)) {
     return (
       <p className={classes}>
         <FormattedMessage id="TransactionPanel.orderPreauthorizedInfo" values={{ providerName }} />
@@ -312,7 +322,7 @@ export const SaleTitle = props => {
 
   const classes = classNames(rootClassName || css.headingSale, className);
 
-  if (propTypes.txIsEnquired(transaction)) {
+  if (txIsEnquired(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -321,7 +331,7 @@ export const SaleTitle = props => {
         />
       </h1>
     );
-  } else if (propTypes.txIsPreauthorized(transaction)) {
+  } else if (txIsPreauthorized(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -330,7 +340,7 @@ export const SaleTitle = props => {
         />
       </h1>
     );
-  } else if (propTypes.txIsAccepted(transaction)) {
+  } else if (txIsAccepted(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -339,7 +349,7 @@ export const SaleTitle = props => {
         />
       </h1>
     );
-  } else if (propTypes.txIsDeclined(transaction)) {
+  } else if (txIsDeclined(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -348,7 +358,7 @@ export const SaleTitle = props => {
         />
       </h1>
     );
-  } else if (propTypes.txIsAutodeclined(transaction)) {
+  } else if (txIsAutodeclined(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -357,7 +367,7 @@ export const SaleTitle = props => {
         />
       </h1>
     );
-  } else if (propTypes.txIsCanceled(transaction)) {
+  } else if (txIsCanceled(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -367,9 +377,9 @@ export const SaleTitle = props => {
       </h1>
     );
   } else if (
-    propTypes.txIsDelivered(transaction) ||
-    propTypes.txHasFirstReview(transaction) ||
-    propTypes.txIsReviewed(transaction)
+    txIsDelivered(transaction) ||
+    txHasFirstReview(transaction) ||
+    txIsReviewed(transaction)
   ) {
     return (
       <h1 className={classes}>
@@ -395,7 +405,7 @@ export const SaleMessage = props => {
   } = props;
   const classes = classNames(rootClassName || css.transactionInfoMessage, className);
 
-  if (!isCustomerBanned && propTypes.txIsPreauthorized(transaction)) {
+  if (!isCustomerBanned && txIsPreauthorized(transaction)) {
     return (
       <p className={classes}>
         <FormattedMessage id="TransactionPanel.saleRequestedInfo" values={{ customerName }} />

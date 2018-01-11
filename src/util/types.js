@@ -35,17 +35,19 @@ import { ensureTransaction } from './data';
 
 const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
 
+const propTypes = {};
+
 // Fixed value
-export const value = val => oneOf([val]);
+propTypes.value = val => oneOf([val]);
 
 // SDK type instances
-export const uuid = instanceOf(UUID);
-export const latlng = instanceOf(LatLng);
-export const latlngBounds = instanceOf(LatLngBounds);
-export const money = instanceOf(Money);
+propTypes.uuid = instanceOf(UUID);
+propTypes.latlng = instanceOf(LatLng);
+propTypes.latlngBounds = instanceOf(LatLngBounds);
+propTypes.money = instanceOf(Money);
 
 // Configuration for currency formatting
-export const currencyConfig = shape({
+propTypes.currencyConfig = shape({
   style: string.isRequired,
   currency: string.isRequired,
   currencyDisplay: string,
@@ -55,7 +57,7 @@ export const currencyConfig = shape({
 });
 
 // Configuration for a single route
-export const route = shape({
+propTypes.route = shape({
   name: string.isRequired,
   path: string.isRequired,
   exact: bool,
@@ -65,17 +67,17 @@ export const route = shape({
 });
 
 // Place object from LocationAutocompleteInput
-export const place = shape({
+propTypes.place = shape({
   address: string.isRequired,
-  origin: latlng.isRequired,
-  bounds: latlngBounds, // optional viewport bounds
+  origin: propTypes.latlng.isRequired,
+  bounds: propTypes.latlngBounds, // optional viewport bounds
   country: string, // country code, e.g. FI, US
 });
 
 // Denormalised image object
-export const image = shape({
-  id: uuid.isRequired,
-  type: value('image').isRequired,
+propTypes.image = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('image').isRequired,
   attributes: shape({
     sizes: arrayOf(
       shape({
@@ -89,9 +91,9 @@ export const image = shape({
 });
 
 // Denormalised user object
-export const currentUser = shape({
-  id: uuid.isRequired,
-  type: value('currentUser').isRequired,
+propTypes.currentUser = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('currentUser').isRequired,
   attributes: shape({
     banned: bool.isRequired,
     email: string.isRequired,
@@ -105,13 +107,13 @@ export const currentUser = shape({
     }).isRequired,
     stripeConnected: bool.isRequired,
   }),
-  profileImage: image,
+  profileImage: propTypes.image,
 });
 
 // Denormalised user object
-export const user = shape({
-  id: uuid.isRequired,
-  type: value('user').isRequired,
+propTypes.user = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('user').isRequired,
   attributes: shape({
     banned: bool.isRequired,
     profile: shape({
@@ -120,38 +122,38 @@ export const user = shape({
       bio: string,
     }),
   }),
-  profileImage: image,
+  profileImage: propTypes.image,
 });
 
 const listingAttributes = shape({
   title: string.isRequired,
   description: string.isRequired,
   address: string.isRequired,
-  geolocation: latlng.isRequired,
+  geolocation: propTypes.latlng.isRequired,
   closed: bool.isRequired,
-  deleted: value(false).isRequired,
-  price: money,
+  deleted: propTypes.value(false).isRequired,
+  price: propTypes.money,
   customAttributes: object,
 });
 
 const deletedListingAttributes = shape({
   closed: bool.isRequired,
-  deleted: value(true).isRequired,
+  deleted: propTypes.value(true).isRequired,
 });
 
 // Denormalised listing object
-export const listing = shape({
-  id: uuid.isRequired,
-  type: value('listing').isRequired,
+propTypes.listing = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('listing').isRequired,
   attributes: oneOfType([listingAttributes, deletedListingAttributes]).isRequired,
-  author: user,
-  images: arrayOf(image),
+  author: propTypes.user,
+  images: arrayOf(propTypes.image),
 });
 
 // Denormalised booking object
-export const booking = shape({
-  id: uuid.isRequired,
-  type: value('booking').isRequired,
+propTypes.booking = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('booking').isRequired,
   attributes: shape({
     end: instanceOf(Date).isRequired,
     start: instanceOf(Date).isRequired,
@@ -256,7 +258,8 @@ export const txHasFirstReview = tx => firstReviewTransitions.includes(txLastTran
 
 export const txIsReviewed = tx => areReviewsCompleted(txLastTransition(tx));
 
-export const txTransition = shape({
+// TODO: rename to `transition`
+propTypes.txTransition = shape({
   at: instanceOf(Date).isRequired,
   by: oneOf(TX_TRANSITION_ACTORS).isRequired,
   transition: oneOf(TX_TRANSITIONS).isRequired,
@@ -287,8 +290,8 @@ export const REVIEW_TYPE_OF_PROVIDER = 'ofProvider';
 export const REVIEW_TYPE_OF_CUSTOMER = 'ofCustomer';
 
 // A review on a user
-export const review = shape({
-  id: uuid.isRequired,
+propTypes.review = shape({
+  id: propTypes.uuid.isRequired,
   attributes: shape({
     at: instanceOf(Date).isRequired,
     content: string,
@@ -296,8 +299,8 @@ export const review = shape({
     state: string.isRequired,
     type: oneOf([REVIEW_TYPE_OF_PROVIDER, REVIEW_TYPE_OF_CUSTOMER]).isRequired,
   }).isRequired,
-  author: user,
-  subject: user,
+  author: propTypes.user,
+  subject: propTypes.user,
 });
 
 export const LINE_ITEM_NIGHT = 'line-item/night';
@@ -306,12 +309,12 @@ export const LINE_ITEM_PROVIDER_COMMISSION = 'line-item/provider-commission';
 
 const LINE_ITEMS = [LINE_ITEM_NIGHT, LINE_ITEM_DAY, LINE_ITEM_PROVIDER_COMMISSION];
 
-export const bookingUnitType = oneOf([LINE_ITEM_NIGHT, LINE_ITEM_DAY]);
+propTypes.bookingUnitType = oneOf([LINE_ITEM_NIGHT, LINE_ITEM_DAY]);
 
 // Denormalised transaction object
-export const transaction = shape({
-  id: uuid.isRequired,
-  type: value('transaction').isRequired,
+propTypes.transaction = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('transaction').isRequired,
   attributes: shape({
     createdAt: instanceOf(Date).isRequired,
     lastTransitionedAt: instanceOf(Date).isRequired,
@@ -319,41 +322,41 @@ export const transaction = shape({
 
     // An enquiry won't need a total sum nor a booking so these are
     // optional.
-    payinTotal: money,
-    payoutTotal: money,
+    payinTotal: propTypes.money,
+    payoutTotal: propTypes.money,
 
     lineItems: arrayOf(
       shape({
         code: oneOf(LINE_ITEMS).isRequired,
         includeFor: arrayOf(oneOf(['customer', 'provider'])).isRequired,
         quantity: instanceOf(Decimal),
-        unitPrice: money.isRequired,
-        lineTotal: money.isRequired,
+        unitPrice: propTypes.money.isRequired,
+        lineTotal: propTypes.money.isRequired,
         reversal: bool.isRequired,
       })
     ).isRequired,
-    transitions: arrayOf(txTransition).isRequired,
+    transitions: arrayOf(propTypes.txTransition).isRequired,
   }),
-  booking,
-  listing,
-  customer: user,
-  provider: user,
-  reviews: arrayOf(review),
+  booking: propTypes.booking,
+  listing: propTypes.listing,
+  customer: propTypes.user,
+  provider: propTypes.user,
+  reviews: arrayOf(propTypes.review),
 });
 
 // Denormalised transaction message
-export const message = shape({
-  id: uuid.isRequired,
-  type: value('message').isRequired,
+propTypes.message = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('message').isRequired,
   attributes: shape({
     at: instanceOf(Date).isRequired,
     content: string.isRequired,
   }).isRequired,
-  sender: user,
+  sender: propTypes.user,
 });
 
 // Pagination information in the response meta
-export const pagination = shape({
+propTypes.pagination = shape({
   page: number.isRequired,
   perPage: number.isRequired,
   totalItems: number.isRequired,
@@ -389,8 +392,8 @@ const ERROR_CODES = [
 
 // API error
 // TODO this is likely to change soonish
-export const apiError = shape({
-  id: uuid.isRequired,
+propTypes.apiError = shape({
+  id: propTypes.uuid.isRequired,
   status: number.isRequired,
   code: oneOf(ERROR_CODES).isRequired,
   title: string.isRequired,
@@ -398,11 +401,13 @@ export const apiError = shape({
 });
 
 // Storable error prop type. (Error object should not be stored as it is.)
-export const error = shape({
-  type: value('error').isRequired,
+propTypes.error = shape({
+  type: propTypes.value('error').isRequired,
   name: string.isRequired,
   message: string,
   status: number,
   statusText: string,
-  apiErrors: arrayOf(apiError),
+  apiErrors: arrayOf(propTypes.apiError),
 });
+
+export { propTypes };

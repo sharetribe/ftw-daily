@@ -1,10 +1,12 @@
 import { pick } from 'lodash';
-import { types } from '../../util/sdkLoader';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
-import * as propTypes from '../../util/propTypes';
+import { TX_TRANSITION_ENQUIRE } from '../../util/types';
 import { fetchCurrentUser } from '../../ducks/user.duck';
+
+const { UUID } = sdkTypes;
 
 // ================ Action types ================ //
 
@@ -128,7 +130,7 @@ export const fetchReviews = listingId => (dispatch, getState, sdk) => {
 export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => {
   dispatch(sendEnquiryRequest());
   const bodyParams = {
-    transition: propTypes.TX_TRANSITION_ENQUIRE,
+    transition: TX_TRANSITION_ENQUIRE,
     params: { listingId },
   };
   return sdk.transactions
@@ -149,7 +151,7 @@ export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => 
 };
 
 export const loadData = params => dispatch => {
-  const listingId = new types.UUID(params.id);
+  const listingId = new UUID(params.id);
 
   return Promise.all([dispatch(showListing(listingId)), dispatch(fetchReviews(listingId))]);
 };

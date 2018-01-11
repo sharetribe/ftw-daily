@@ -1,6 +1,6 @@
-import { types } from '../util/sdkLoader';
+import { types as sdkTypes } from '../util/sdkLoader';
 
-const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = types;
+const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
 
 const placeOrigin = place => {
   if (place && place.geometry && place.geometry.location) {

@@ -8,7 +8,7 @@ import {
   fakeIntl,
 } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
-import { TX_TRANSITION_PREAUTHORIZE } from '../../util/propTypes';
+import { TX_TRANSITION_PREAUTHORIZE } from '../../util/types';
 import { TransactionPageComponent } from './TransactionPage';
 
 const noop = () => null;

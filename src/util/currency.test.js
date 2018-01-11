@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js';
-import { types } from './sdkLoader';
+import { types as sdkTypes } from './sdkLoader';
 import {
   MIN_SAFE_INTEGER,
   MAX_SAFE_INTEGER,
@@ -12,6 +12,8 @@ import {
   truncateToSubUnitPrecision,
   formatMoney,
 } from './currency';
+
+const { Money } = sdkTypes;
 
 describe('currency utils', () => {
   describe('isSafeNumber()', () => {
@@ -212,8 +214,6 @@ describe('currency utils', () => {
   });
 
   describe('convertMoneyToNumber(value)', () => {
-    const Money = types.Money;
-
     it('Money as value', () => {
       expect(convertMoneyToNumber(new Money(10, 'USD'))).toBeCloseTo(0.1);
       expect(convertMoneyToNumber(new Money(1000, 'USD'))).toBeCloseTo(10);
