@@ -22,20 +22,14 @@ class SelectSingleFilterMobileComponent extends Component {
     if (e && e.currentTarget) {
       e.currentTarget.blur();
     }
-  };
+  }
 
   toggleIsOpen() {
     this.setState({ isOpen: !this.state.isOpen });
-  };
+  }
 
   render() {
-    const {
-      rootClassName,
-      className,
-      customAttribute,
-      urlQueryParams,
-      intl,
-    } = this.props;
+    const { rootClassName, className, customAttribute, urlQueryParams, intl } = this.props;
 
     const filterLabel = intl.formatMessage({
       id: `SelectSingleFilterMobile.${customAttribute}.label`,
@@ -61,7 +55,7 @@ class SelectSingleFilterMobileComponent extends Component {
           <button className={css.labelButton} onClick={this.toggleIsOpen}>
             <span className={labelClass}>{filterLabel}</span>
           </button>
-          <button className={css.clearButton} onClick={(e) => this.selectOption(null, e)} onBlur={() => console.log('button onBlur')}>
+          <button className={css.clearButton} onClick={e => this.selectOption(null, e)}>
             <FormattedMessage id={'SelectSingleFilterMobile.clear'} />
           </button>
         </div>

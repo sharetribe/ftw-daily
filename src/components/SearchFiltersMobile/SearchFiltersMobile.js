@@ -15,6 +15,75 @@ class SearchFiltersMobileComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { isFiltersOpenOnMobile: false };
+
+    //TODO: take as props
+    this.customAttribute = 'category';
+
+    this.openFilters = this.openFilters.bind(this);
+    this.cancelFilters = this.cancelFilters.bind(this);
+    this.closeFilters = this.closeFilters.bind(this);
+    this.resetAll = this.resetAll.bind(this);
+    this.onSelectSingle = this.onSelectSingle.bind(this);
+  }
+
+  // Open filters modal, set the initial parameters to current ones
+  openFilters() {
+    const { onOpenModal, urlQueryParams } = this.props;
+    onOpenModal();
+    this.setState({ isFiltersOpenOnMobile: true, initialQueryParams: urlQueryParams });
+  }
+
+  // Close the filters by clicking cancel, revert to the initial params
+  cancelFilters() {
+    const { history, onCloseModal } = this.props;
+
+    history.push(
+      createResourceLocatorString(
+        'SearchPage',
+        routeConfiguration(),
+        {},
+        this.state.initialQueryParams
+      )
+    );
+    onCloseModal();
+    this.setState({ isFiltersOpenOnMobile: false, initialQueryParams: null });
+  }
+
+  // Close the filter modal
+  closeFilters() {
+    this.props.onCloseModal();
+    this.setState({ isFiltersOpenOnMobile: false });
+  }
+
+  onSelectSingle(customAttribute, option) {
+    const { urlQueryParams, history } = this.props;
+
+    // Name of the corresponding query parameter.
+    // The custom attribute query parameters are named
+    // ca_<custom_attribute_name> in the API.
+    const caParam = `ca_${customAttribute}`;
+
+    // query parameters after selecting the option
+    // if no option is passed, clear the selection for the filter
+    const queryParams = option
+      ? { ...urlQueryParams, [caParam]: option }
+      : omit(urlQueryParams, caParam);
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  }
+
+  // Reset all filter query parameters
+  resetAll(e) {
+    const { urlQueryParams, history } = this.props;
+
+    const caParam = `ca_${this.customAttribute}`;
+    const queryParams = omit(urlQueryParams, caParam);
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+
+    // blur event target if event is passed
+    if (e && e.currentTarget) {
+      e.currentTarget.blur();
+    }
   }
 
   render() {
@@ -28,9 +97,6 @@ class SearchFiltersMobileComponent extends Component {
       showAsModalMaxWidth,
       onMapIconClick,
       onManageDisableScrolling,
-      onOpenModal,
-      onCloseModal,
-      history,
       intl,
     } = this.props;
 
@@ -47,73 +113,14 @@ class SearchFiltersMobileComponent extends Component {
       { count: resultsCount }
     );
 
-    // Open filters modal, set the initial parameters to current ones
-    const openFilters = () => {
-      onOpenModal();
-      this.setState({ isFiltersOpenOnMobile: true, initialQueryParams: urlQueryParams });
-    };
-
-    // Close the filters by clicking cancel, revert to the initial params
-    const cancelFilters = () => {
-      history.push(
-        createResourceLocatorString(
-          'SearchPage',
-          routeConfiguration(),
-          {},
-          this.state.initialQueryParams
-        )
-      );
-      onCloseModal();
-      this.setState({ isFiltersOpenOnMobile: false, initialQueryParams: null });
-    };
-
-    // Close the filter modal
-    const closeFilters = () => {
-      onCloseModal();
-      this.setState({ isFiltersOpenOnMobile: false });
-    };
-
-    const onSelectSingle = (customAttribute, option) => {
-      // Name of the corresponding query parameter.
-      // The custom attribute query parameters are named
-      // ca_<custom_attribute_name> in the API.
-      const caParam = `ca_${customAttribute}`;
-
-      // query parameters after selecting the option
-      // if no option is passed, clear the selection for the filter
-      const queryParams = option
-        ? { ...urlQueryParams, [caParam]: option }
-        : omit(urlQueryParams, caParam);
-
-      history.push(
-        createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams)
-      );
-    };
-
-    const customAttribute = 'category';
-
-    // Reset all filter query parameters
-    const resetAll = (e) => {
-      const caParam = `ca_${customAttribute}`;
-      const queryParams = omit(urlQueryParams, caParam);
-      history.push(
-        createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams)
-      );
-
-      // blur event target if event is passed
-      if (e && e.currentTarget) {
-        e.currentTarget.blur();
-      }
-    };
-
     const classes = classNames(rootClassName || css.root, className);
 
     const hasCategoryConfig = config.customAttributes && config.customAttributes.category;
     const categoryFilter = hasCategoryConfig ? (
       <SelectSingleFilterMobile
-        customAttribute={customAttribute}
+        customAttribute={this.customAttribute}
         urlQueryParams={urlQueryParams}
-        onSelect={onSelectSingle}
+        onSelect={this.onSelectSingle}
         intl={intl}
       />
     ) : null;
@@ -126,7 +133,7 @@ class SearchFiltersMobileComponent extends Component {
           {searchInProgress ? loadingResults : null}
         </div>
         <div className={css.buttons}>
-          <SecondaryButton className={css.filterButton} onClick={openFilters}>
+          <SecondaryButton className={css.filterButton} onClick={this.openFilters}>
             <FormattedMessage id="SearchFilters.filtersButtonLabel" className={css.mapIconText} />
           </SecondaryButton>
           <div className={css.mapIcon} onClick={onMapIconClick}>
@@ -136,7 +143,7 @@ class SearchFiltersMobileComponent extends Component {
         <ModalInMobile
           id="SearchFiltersMobile.filters"
           isModalOpenOnMobile={this.state.isFiltersOpenOnMobile}
-          onClose={cancelFilters}
+          onClose={this.cancelFilters}
           showAsModalMaxWidth={showAsModalMaxWidth}
           onManageDisableScrolling={onManageDisableScrolling}
           containerClassName={css.modalContainer}
@@ -144,13 +151,13 @@ class SearchFiltersMobileComponent extends Component {
         >
           <div className={css.modalHeadingWrapper}>
             <span className={css.modalHeading}>{filtersHeading}</span>
-            <button className={css.resetAllButton} onClick={(e) => resetAll(e)}>
+            <button className={css.resetAllButton} onClick={e => this.resetAll(e)}>
               <FormattedMessage id={'SearchFiltersMobile.resetAll'} />
             </button>
           </div>
           {categoryFilter}
           <div className={css.showListingsContainer}>
-            <Button className={css.showListingsButton} onClick={closeFilters}>
+            <Button className={css.showListingsButton} onClick={this.closeFilters}>
               {showListingsLabel}
             </Button>
           </div>
