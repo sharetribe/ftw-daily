@@ -7,19 +7,19 @@ import { Avatar, InlineTextButton, ReviewRating } from '../../components';
 import { formatDate } from '../../util/dates';
 import { ensureTransaction, ensureUser, ensureListing, userDisplayName } from '../../util/data';
 import {
-  TX_TRANSITION_ACCEPT,
+  TRANSITION_ACCEPT,
+  TRANSITION_CANCEL,
+  TRANSITION_COMPLETE,
+  TRANSITION_DECLINE,
+  TRANSITION_EXPIRE,
+  TRANSITION_REQUEST,
+  TRANSITION_REQUEST_AFTER_ENQUIRY,
+  TRANSITION_REVIEW_1_BY_CUSTOMER,
+  TRANSITION_REVIEW_1_BY_PROVIDER,
+  TRANSITION_REVIEW_2_BY_CUSTOMER,
+  TRANSITION_REVIEW_2_BY_PROVIDER,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
-  TX_TRANSITION_AUTO_DECLINE,
-  TX_TRANSITION_CANCEL,
-  TX_TRANSITION_DECLINE,
-  TX_TRANSITION_MARK_DELIVERED,
-  TX_TRANSITION_PREAUTHORIZE,
-  TX_TRANSITION_PREAUTHORIZE_ENQUIRY,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
   areReviewsCompleted,
   propTypes,
 } from '../../util/types';
@@ -87,17 +87,17 @@ Review.propTypes = {
 // should be rendered in he ActivityFeed
 const shouldRenderTransition = transition => {
   return [
-    TX_TRANSITION_PREAUTHORIZE,
-    TX_TRANSITION_PREAUTHORIZE_ENQUIRY,
-    TX_TRANSITION_ACCEPT,
-    TX_TRANSITION_DECLINE,
-    TX_TRANSITION_AUTO_DECLINE,
-    TX_TRANSITION_CANCEL,
-    TX_TRANSITION_MARK_DELIVERED,
-    TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
-    TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
-    TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
-    TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+    TRANSITION_ACCEPT,
+    TRANSITION_CANCEL,
+    TRANSITION_COMPLETE,
+    TRANSITION_DECLINE,
+    TRANSITION_EXPIRE,
+    TRANSITION_REQUEST,
+    TRANSITION_REQUEST_AFTER_ENQUIRY,
+    TRANSITION_REVIEW_1_BY_CUSTOMER,
+    TRANSITION_REVIEW_1_BY_PROVIDER,
+    TRANSITION_REVIEW_2_BY_CUSTOMER,
+    TRANSITION_REVIEW_2_BY_PROVIDER,
   ].includes(transition);
 };
 
@@ -105,18 +105,18 @@ const shouldRenderTransition = transition => {
 // given tx transition.
 const isReviewTransition = transition => {
   return [
-    TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
-    TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
-    TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
-    TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+    TRANSITION_REVIEW_1_BY_CUSTOMER,
+    TRANSITION_REVIEW_1_BY_PROVIDER,
+    TRANSITION_REVIEW_2_BY_CUSTOMER,
+    TRANSITION_REVIEW_2_BY_PROVIDER,
   ].includes(transition);
 };
 
 const hasUserLeftAReviewFirst = (userRole, lastTransition) => {
   return (
-    (lastTransition === TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST &&
+    (lastTransition === TRANSITION_REVIEW_1_BY_CUSTOMER &&
       userRole === TX_TRANSITION_ACTOR_CUSTOMER) ||
-    (lastTransition === TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST &&
+    (lastTransition === TRANSITION_REVIEW_1_BY_PROVIDER &&
       userRole === TX_TRANSITION_ACTOR_PROVIDER) ||
     areReviewsCompleted(lastTransition)
   );
@@ -134,11 +134,11 @@ const resolveTransitionMessage = (
   const isOwnTransition = transition.by === ownRole;
   const currentTransition = transition.transition;
   const displayName = otherUsersName;
-  const deliveredState = lastTransition === TX_TRANSITION_MARK_DELIVERED;
+  const deliveredState = lastTransition === TRANSITION_COMPLETE;
 
   switch (currentTransition) {
-    case TX_TRANSITION_PREAUTHORIZE:
-    case TX_TRANSITION_PREAUTHORIZE_ENQUIRY:
+    case TRANSITION_REQUEST:
+    case TRANSITION_REQUEST_AFTER_ENQUIRY:
       return isOwnTransition ? (
         <FormattedMessage id="ActivityFeed.ownTransitionRequest" values={{ listingTitle }} />
       ) : (
@@ -147,27 +147,27 @@ const resolveTransitionMessage = (
           values={{ displayName, listingTitle }}
         />
       );
-    case TX_TRANSITION_ACCEPT:
+    case TRANSITION_ACCEPT:
       return isOwnTransition ? (
         <FormattedMessage id="ActivityFeed.ownTransitionAccept" />
       ) : (
         <FormattedMessage id="ActivityFeed.transitionAccept" values={{ displayName }} />
       );
-    case TX_TRANSITION_DECLINE:
+    case TRANSITION_DECLINE:
       return isOwnTransition ? (
         <FormattedMessage id="ActivityFeed.ownTransitionDecline" />
       ) : (
         <FormattedMessage id="ActivityFeed.transitionDecline" />
       );
-    case TX_TRANSITION_AUTO_DECLINE:
+    case TRANSITION_EXPIRE:
       return ownRole === TX_TRANSITION_ACTOR_PROVIDER ? (
         <FormattedMessage id="ActivityFeed.ownTransitionAutoDecline" />
       ) : (
         <FormattedMessage id="ActivityFeed.transitionAutoDecline" values={{ displayName }} />
       );
-    case TX_TRANSITION_CANCEL:
+    case TRANSITION_CANCEL:
       return <FormattedMessage id="ActivityFeed.transitionCancel" />;
-    case TX_TRANSITION_MARK_DELIVERED:
+    case TRANSITION_COMPLETE:
       // Show the leave a review link if the state is delivered or
       // if current user is not the first to leave a review
       const reviewLink =
@@ -178,8 +178,8 @@ const resolveTransitionMessage = (
         ) : null;
 
       return <FormattedMessage id="ActivityFeed.transitionComplete" values={{ reviewLink }} />;
-    case TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST:
-    case TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST:
+    case TRANSITION_REVIEW_1_BY_PROVIDER:
+    case TRANSITION_REVIEW_1_BY_CUSTOMER:
       if (isOwnTransition) {
         return <FormattedMessage id="ActivityFeed.ownTransitionReview" values={{ displayName }} />;
       } else {
@@ -197,8 +197,8 @@ const resolveTransitionMessage = (
           />
         );
       }
-    case TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND:
-    case TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND:
+    case TRANSITION_REVIEW_2_BY_PROVIDER:
+    case TRANSITION_REVIEW_2_BY_CUSTOMER:
       if (isOwnTransition) {
         return <FormattedMessage id="ActivityFeed.ownTransitionReview" values={{ displayName }} />;
       } else {
@@ -265,11 +265,11 @@ const Transition = props => {
 
   if (isReviewTransition(currentTransition) && areReviewsCompleted(lastTransition)) {
     const customerReview =
-      currentTransition === TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST ||
-      currentTransition === TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND;
+      currentTransition === TRANSITION_REVIEW_1_BY_CUSTOMER ||
+      currentTransition === TRANSITION_REVIEW_2_BY_CUSTOMER;
     const providerReview =
-      currentTransition === TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST ||
-      currentTransition === TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND;
+      currentTransition === TRANSITION_REVIEW_1_BY_PROVIDER ||
+      currentTransition === TRANSITION_REVIEW_2_BY_PROVIDER;
     if (customerReview) {
       const review = reviewByAuthorId(currentTransaction, customer.id);
       reviewComponent = (
@@ -300,7 +300,7 @@ const Transition = props => {
 };
 
 Transition.propTypes = {
-  transition: propTypes.txTransition.isRequired,
+  transition: propTypes.transition.isRequired,
   transaction: propTypes.transaction.isRequired,
   currentUser: propTypes.currentUser.isRequired,
   intl: intlShape.isRequired,

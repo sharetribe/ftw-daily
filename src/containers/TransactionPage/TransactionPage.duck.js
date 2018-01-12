@@ -2,12 +2,12 @@ import { pick } from 'lodash';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
 import {
-  TX_TRANSITION_ACCEPT,
-  TX_TRANSITION_DECLINE,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+  TRANSITION_ACCEPT,
+  TRANSITION_DECLINE,
+  TRANSITION_REVIEW_1_BY_CUSTOMER,
+  TRANSITION_REVIEW_1_BY_PROVIDER,
+  TRANSITION_REVIEW_2_BY_CUSTOMER,
+  TRANSITION_REVIEW_2_BY_PROVIDER,
 } from '../../util/types';
 import * as log from '../../util/log';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
@@ -254,7 +254,7 @@ export const acceptSale = id => (dispatch, getState, sdk) => {
   dispatch(acceptSaleRequest());
 
   return sdk.transactions
-    .transition({ id, transition: TX_TRANSITION_ACCEPT, params: {} }, { expand: true })
+    .transition({ id, transition: TRANSITION_ACCEPT, params: {} }, { expand: true })
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(acceptSaleSuccess());
@@ -265,7 +265,7 @@ export const acceptSale = id => (dispatch, getState, sdk) => {
       dispatch(acceptSaleError(storableError(e)));
       log.error(e, 'accept-sale-failed', {
         txId: id,
-        transition: TX_TRANSITION_ACCEPT,
+        transition: TRANSITION_ACCEPT,
       });
       throw e;
     });
@@ -278,7 +278,7 @@ export const declineSale = id => (dispatch, getState, sdk) => {
   dispatch(declineSaleRequest());
 
   return sdk.transactions
-    .transition({ id, transition: TX_TRANSITION_DECLINE, params: {} }, { expand: true })
+    .transition({ id, transition: TRANSITION_DECLINE, params: {} }, { expand: true })
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(declineSaleSuccess());
@@ -289,7 +289,7 @@ export const declineSale = id => (dispatch, getState, sdk) => {
       dispatch(declineSaleError(storableError(e)));
       log.error(e, 'reject-sale-failed', {
         txId: id,
-        transition: TX_TRANSITION_DECLINE,
+        transition: TRANSITION_DECLINE,
       });
       throw e;
     });
@@ -374,12 +374,10 @@ export const sendMessage = (txId, message) => (dispatch, getState, sdk) => {
 const REVIEW_TX_INCLUDES = ['reviews', 'reviews.author', 'reviews.subject'];
 
 // If other party has already sent a review, we need to make transition to
-// TX_TRANSITION_REVIEW_BY_<CUSTOMER/PROVIDER>_SECOND
+// TRANSITION_REVIEW_2_BY_<CUSTOMER/PROVIDER>
 const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
   const transition =
-    role === CUSTOMER
-      ? TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND
-      : TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND;
+    role === CUSTOMER ? TRANSITION_REVIEW_2_BY_CUSTOMER : TRANSITION_REVIEW_2_BY_PROVIDER;
 
   const include = REVIEW_TX_INCLUDES;
 
@@ -400,15 +398,13 @@ const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
 };
 
 // If other party has not yet sent a review, we need to make transition to
-// TX_TRANSITION_REVIEW_BY_<CUSTOMER/PROVIDER>_FIRST
+// TRANSITION_REVIEW_1_BY_<CUSTOMER/PROVIDER>
 // However, the other party might have made the review after previous data synch point.
 // So, error is likely to happen and then we must try another state transition
 // by calling sendReviewAsSecond().
 const sendReviewAsFirst = (id, params, role, dispatch, sdk) => {
   const transition =
-    role === CUSTOMER
-      ? TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST
-      : TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST;
+    role === CUSTOMER ? TRANSITION_REVIEW_1_BY_CUSTOMER : TRANSITION_REVIEW_1_BY_PROVIDER;
   const include = REVIEW_TX_INCLUDES;
 
   return sdk.transactions
@@ -437,8 +433,8 @@ export const sendReview = (role, tx, reviewRating, reviewContent) => (dispatch, 
 
   const txStateOtherPartyFirst =
     role === CUSTOMER
-      ? tx.attributes.lastTransition === TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST
-      : tx.attributes.lastTransition === TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST;
+      ? tx.attributes.lastTransition === TRANSITION_REVIEW_1_BY_PROVIDER
+      : tx.attributes.lastTransition === TRANSITION_REVIEW_1_BY_CUSTOMER;
 
   dispatch(sendReviewRequest());
 

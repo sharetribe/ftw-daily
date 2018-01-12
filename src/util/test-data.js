@@ -2,10 +2,10 @@ import Decimal from 'decimal.js';
 import { types as sdkTypes } from './sdkLoader';
 import { nightsBetween } from '../util/dates';
 import {
-  TX_TRANSITION_ACCEPT,
+  TRANSITION_ACCEPT,
+  TRANSITION_REQUEST,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
-  TX_TRANSITION_PREAUTHORIZE,
 } from '../util/types';
 
 const { UUID, LatLng, Money } = sdkTypes;
@@ -96,7 +96,7 @@ export const createTxTransition = options => {
   return {
     at: new Date(Date.UTC(2017, 4, 1)),
     by: TX_TRANSITION_ACTOR_CUSTOMER,
-    transition: TX_TRANSITION_PREAUTHORIZE,
+    transition: TRANSITION_REQUEST,
     ...options,
   };
 };
@@ -104,7 +104,7 @@ export const createTxTransition = options => {
 export const createTransaction = options => {
   const {
     id,
-    lastTransition = TX_TRANSITION_ACCEPT,
+    lastTransition = TRANSITION_ACCEPT,
     total = new Money(1000, 'USD'),
     commission = new Money(100, 'USD'),
     booking = null,
@@ -117,12 +117,12 @@ export const createTransaction = options => {
       createTxTransition({
         at: new Date(Date.UTC(2017, 4, 1)),
         by: TX_TRANSITION_ACTOR_CUSTOMER,
-        transition: TX_TRANSITION_PREAUTHORIZE,
+        transition: TRANSITION_REQUEST,
       }),
       createTxTransition({
         at: new Date(Date.UTC(2017, 5, 1)),
         by: TX_TRANSITION_ACTOR_PROVIDER,
-        transition: TX_TRANSITION_ACCEPT,
+        transition: TRANSITION_ACCEPT,
       }),
     ],
   } = options;

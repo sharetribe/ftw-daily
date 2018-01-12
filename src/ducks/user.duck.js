@@ -1,6 +1,6 @@
 import { updatedEntities, denormalisedEntities } from '../util/data';
 import { storableError } from '../util/errors';
-import { TX_TRANSITION_PREAUTHORIZE, TX_TRANSITION_PREAUTHORIZE_ENQUIRY } from '../util/types';
+import { TRANSITION_REQUEST, TRANSITION_REQUEST_AFTER_ENQUIRY } from '../util/types';
 import * as log from '../util/log';
 import { authInfo } from './Auth.duck';
 
@@ -311,7 +311,7 @@ export const fetchCurrentUserNotifications = () => (dispatch, getState, sdk) => 
 
   const apiQueryParams = {
     only: 'sale',
-    last_transitions: [TX_TRANSITION_PREAUTHORIZE, TX_TRANSITION_PREAUTHORIZE_ENQUIRY],
+    last_transitions: [TRANSITION_REQUEST, TRANSITION_REQUEST_AFTER_ENQUIRY],
     page: 1,
     per_page: NOTIFICATION_PAGE_SIZE,
   };

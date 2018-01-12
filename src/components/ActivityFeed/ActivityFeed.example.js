@@ -9,17 +9,17 @@ import {
   createReview,
 } from '../../util/test-data';
 import {
-  TX_TRANSITION_ACCEPT,
+  TRANSITION_ACCEPT,
+  TRANSITION_COMPLETE,
+  TRANSITION_DECLINE,
+  TRANSITION_EXPIRE_REVIEW_PERIOD,
+  TRANSITION_REQUEST,
+  TRANSITION_REVIEW_1_BY_CUSTOMER,
+  TRANSITION_REVIEW_1_BY_PROVIDER,
+  TRANSITION_REVIEW_2_BY_CUSTOMER,
+  TRANSITION_REVIEW_2_BY_PROVIDER,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
-  TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
-  TX_TRANSITION_DECLINE,
-  TX_TRANSITION_MARK_DELIVERED,
-  TX_TRANSITION_PREAUTHORIZE,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
 } from '../../util/types';
 import ActivityFeed from './ActivityFeed';
 
@@ -83,18 +83,18 @@ export const WithTransitions = {
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TX_TRANSITION_PREAUTHORIZE,
+          transition: TRANSITION_REQUEST,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
-          transition: TX_TRANSITION_ACCEPT,
+          transition: TRANSITION_ACCEPT,
         }),
         // this should not be visible in the feed
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 16, 8, 12)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
-          transition: TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
+          transition: TRANSITION_EXPIRE_REVIEW_PERIOD,
         }),
       ],
     }),
@@ -115,37 +115,37 @@ export const WithMessagesTransitionsAndReviews = {
       customer: createUser('user1'),
       provider: createUser('user2'),
       listing: createListing('Listing'),
-      lastTransition: TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+      lastTransition: TRANSITION_REVIEW_2_BY_CUSTOMER,
       transitions: [
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TX_TRANSITION_PREAUTHORIZE,
+          transition: TRANSITION_REQUEST,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
-          transition: TX_TRANSITION_ACCEPT,
+          transition: TRANSITION_ACCEPT,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 10, 33)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
-          transition: TX_TRANSITION_DECLINE,
+          transition: TRANSITION_DECLINE,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 10, 34)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
-          transition: TX_TRANSITION_MARK_DELIVERED,
+          transition: TRANSITION_COMPLETE,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 11, 34)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
-          transition: TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
+          transition: TRANSITION_REVIEW_1_BY_PROVIDER,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 12, 34)),
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
+          transition: TRANSITION_REVIEW_2_BY_CUSTOMER,
         }),
       ],
       reviews: [
@@ -211,17 +211,17 @@ export const WithAReviewFromBothUsers = {
           { author: createUser('user2'), subject: createUser('user1') }
         ),
       ],
-      lastTransition: TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+      lastTransition: TRANSITION_REVIEW_2_BY_PROVIDER,
       transitions: [
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
+          transition: TRANSITION_REVIEW_1_BY_CUSTOMER,
         }),
         createTxTransition({
           at: new Date(Date.UTC(2017, 10, 10, 8, 10)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
-          transition: TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
+          transition: TRANSITION_REVIEW_2_BY_PROVIDER,
         }),
       ],
     }),
@@ -257,12 +257,12 @@ class PagedFeed extends Component {
     const trans1 = createTxTransition({
       at: dates[0],
       by: TX_TRANSITION_ACTOR_CUSTOMER,
-      transition: TX_TRANSITION_PREAUTHORIZE,
+      transition: TRANSITION_REQUEST,
     });
     const trans2 = createTxTransition({
       at: dates[2],
       by: TX_TRANSITION_ACTOR_PROVIDER,
-      transition: TX_TRANSITION_ACCEPT,
+      transition: TRANSITION_ACCEPT,
     });
 
     // Last transition timestamp is interleaved between the last two
@@ -270,7 +270,7 @@ class PagedFeed extends Component {
     const trans3 = createTxTransition({
       at: dates[5],
       by: TX_TRANSITION_ACTOR_CUSTOMER,
-      transition: TX_TRANSITION_MARK_DELIVERED,
+      transition: TRANSITION_COMPLETE,
     });
 
     // First message timestamp is interleaved between the first two
@@ -283,7 +283,7 @@ class PagedFeed extends Component {
 
     const transaction = createTransaction({
       id: 'tx1',
-      lastTransition: TX_TRANSITION_MARK_DELIVERED,
+      lastTransition: TRANSITION_COMPLETE,
       lastTransitionedAt: dates[5],
       transitions: [trans1, trans2, trans3],
       listing: createListing('listing'),

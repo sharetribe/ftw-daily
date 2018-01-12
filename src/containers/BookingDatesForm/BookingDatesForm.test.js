@@ -4,7 +4,7 @@ import Decimal from 'decimal.js';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl, fakeFormProps } from '../../util/test-data';
-import { LINE_ITEM_NIGHT, TX_TRANSITION_PREAUTHORIZE } from '../../util/types';
+import { LINE_ITEM_NIGHT, TRANSITION_REQUEST } from '../../util/types';
 import { BookingBreakdown } from '../../components';
 import { BookingDatesFormComponent } from './BookingDatesForm';
 
@@ -51,7 +51,7 @@ describe('BookingDatesForm', () => {
     expect(userRole).toEqual('customer');
     expect(booking.attributes.start).toEqual(startDate);
     expect(booking.attributes.end).toEqual(endDate);
-    expect(transaction.attributes.lastTransition).toEqual(TX_TRANSITION_PREAUTHORIZE);
+    expect(transaction.attributes.lastTransition).toEqual(TRANSITION_REQUEST);
     expect(transaction.attributes.payinTotal).toEqual(new Money(2198, 'USD'));
     expect(transaction.attributes.payoutTotal).toEqual(new Money(2198, 'USD'));
     expect(transaction.attributes.lineItems).toEqual([

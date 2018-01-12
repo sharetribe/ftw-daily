@@ -160,62 +160,56 @@ propTypes.booking = shape({
   }),
 });
 
-// When the customer requests a booking, a transaction is created. The
-// initial state is preauthorized that is transitioned with the
-// initial preauthorize transition. The customer can see this
-// transaction in the OrderPage that is linked from the InboxPage. The
-// provider sees the transaction in the SalePage.
-export const TX_TRANSITION_PREAUTHORIZE = 'transition/preauthorize';
+// When a customer makes a booking to a listing, a transaction is
+// created with the initial request transition.
+export const TRANSITION_REQUEST = 'transition/preauthorize';
 
 // A customer can also initiate a transaction with an enquiry, and
-// then transition that by preauthorization.
-export const TX_TRANSITION_ENQUIRE = 'transition/enquire';
-export const TX_TRANSITION_PREAUTHORIZE_ENQUIRY = 'transition/preauthorize-enquiry';
+// then transition that with a request.
+export const TRANSITION_ENQUIRE = 'transition/enquire';
+export const TRANSITION_REQUEST_AFTER_ENQUIRY = 'transition/preauthorize-enquiry';
 
 // When the provider accepts or declines a transaction from the
 // SalePage, it is transitioned with the accept or decline transition.
-export const TX_TRANSITION_ACCEPT = 'transition/accept';
-export const TX_TRANSITION_DECLINE = 'transition/decline';
+export const TRANSITION_ACCEPT = 'transition/accept';
+export const TRANSITION_DECLINE = 'transition/decline';
 
-// If the backend automatically declines the transaction, it is
-// transitioned with the auto-decline transition.
-export const TX_TRANSITION_AUTO_DECLINE = 'transition/auto-decline';
+// The backend automatically expire the transaction.
+export const TRANSITION_EXPIRE = 'transition/auto-decline';
 
 // Admin can also cancel the transition.
-export const TX_TRANSITION_CANCEL = 'transition/cancel';
+export const TRANSITION_CANCEL = 'transition/cancel';
 
-// If the is marked as delivered in the backend, it is transitioned
-// with the mark-delivered transition.
-export const TX_TRANSITION_MARK_DELIVERED = 'transition/mark-delivered';
+// The backend will mark the transaction completed.
+export const TRANSITION_COMPLETE = 'transition/mark-delivered';
 
-// Review transitions
-// Reviews are given through transaction transitions.
-// Either party (provider or customer) can be the first to give a review.
-export const TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST = 'transition/review-by-provider-first';
-export const TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND = 'transition/review-by-provider-second';
-export const TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST = 'transition/review-by-customer-first';
-export const TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND = 'transition/review-by-customer-second';
-export const TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER = 'transition/mark-reviewed-by-customer';
-export const TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER = 'transition/mark-reviewed-by-provider';
-export const TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS =
-  'transition/auto-complete-without-reviews';
+// Reviews are given through transaction transitions. Review 1 can be
+// by provider or customer, and review 2 will be the other party of
+// the transaction.
+export const TRANSITION_REVIEW_1_BY_PROVIDER = 'transition/review-by-provider-first';
+export const TRANSITION_REVIEW_2_BY_PROVIDER = 'transition/review-by-provider-second';
+export const TRANSITION_REVIEW_1_BY_CUSTOMER = 'transition/review-by-customer-first';
+export const TRANSITION_REVIEW_2_BY_CUSTOMER = 'transition/review-by-customer-second';
+export const TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD = 'transition/mark-reviewed-by-customer';
+export const TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD = 'transition/mark-reviewed-by-provider';
+export const TRANSITION_EXPIRE_REVIEW_PERIOD = 'transition/auto-complete-without-reviews';
 
-export const TX_TRANSITIONS = [
-  TX_TRANSITION_ENQUIRE,
-  TX_TRANSITION_PREAUTHORIZE_ENQUIRY,
-  TX_TRANSITION_PREAUTHORIZE,
-  TX_TRANSITION_ACCEPT,
-  TX_TRANSITION_DECLINE,
-  TX_TRANSITION_AUTO_DECLINE,
-  TX_TRANSITION_CANCEL,
-  TX_TRANSITION_MARK_DELIVERED,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
-  TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-  TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
-  TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
-  TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
+export const TRANSITIONS = [
+  TRANSITION_ACCEPT,
+  TRANSITION_CANCEL,
+  TRANSITION_COMPLETE,
+  TRANSITION_DECLINE,
+  TRANSITION_ENQUIRE,
+  TRANSITION_EXPIRE,
+  TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD,
+  TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD,
+  TRANSITION_EXPIRE_REVIEW_PERIOD,
+  TRANSITION_REQUEST,
+  TRANSITION_REQUEST_AFTER_ENQUIRY,
+  TRANSITION_REVIEW_1_BY_CUSTOMER,
+  TRANSITION_REVIEW_1_BY_PROVIDER,
+  TRANSITION_REVIEW_2_BY_CUSTOMER,
+  TRANSITION_REVIEW_2_BY_PROVIDER,
 ];
 
 // Roles of actors that perform transaction transitions
@@ -233,52 +227,46 @@ export const TX_TRANSITION_ACTORS = [
 
 const txLastTransition = tx => ensureTransaction(tx).attributes.lastTransition;
 
-export const txIsEnquired = tx => txLastTransition(tx) === TX_TRANSITION_ENQUIRE;
+export const txIsEnquired = tx => txLastTransition(tx) === TRANSITION_ENQUIRE;
 
-export const txIsPreauthorized = tx => {
+export const txIsRequested = tx => {
   const transition = txLastTransition(tx);
-  return (
-    transition === TX_TRANSITION_PREAUTHORIZE || transition === TX_TRANSITION_PREAUTHORIZE_ENQUIRY
-  );
+  return transition === TRANSITION_REQUEST || transition === TRANSITION_REQUEST_AFTER_ENQUIRY;
 };
 
-export const txIsAccepted = tx => txLastTransition(tx) === TX_TRANSITION_ACCEPT;
+export const txIsAccepted = tx => txLastTransition(tx) === TRANSITION_ACCEPT;
 
-export const txIsDeclined = tx => txLastTransition(tx) === TX_TRANSITION_DECLINE;
+export const txIsDeclined = tx => txLastTransition(tx) === TRANSITION_DECLINE;
 
-export const txIsAutodeclined = tx => txLastTransition(tx) === TX_TRANSITION_AUTO_DECLINE;
+export const txIsExpired = tx => txLastTransition(tx) === TRANSITION_EXPIRE;
 
-export const txIsDeclinedOrAutodeclined = tx => txIsDeclined(tx) || txIsAutodeclined(tx);
+export const txIsDeclinedOrExpired = tx => txIsDeclined(tx) || txIsExpired(tx);
 
-export const txIsCanceled = tx => txLastTransition(tx) === TX_TRANSITION_CANCEL;
+export const txIsCanceled = tx => txLastTransition(tx) === TRANSITION_CANCEL;
 
-export const txIsDelivered = tx => txLastTransition(tx) === TX_TRANSITION_MARK_DELIVERED;
+export const txIsCompleted = tx => txLastTransition(tx) === TRANSITION_COMPLETE;
 
 export const txHasFirstReview = tx => firstReviewTransitions.includes(txLastTransition(tx));
 
 export const txIsReviewed = tx => areReviewsCompleted(txLastTransition(tx));
 
-// TODO: rename to `transition`
-propTypes.txTransition = shape({
+propTypes.transition = shape({
   at: instanceOf(Date).isRequired,
   by: oneOf(TX_TRANSITION_ACTORS).isRequired,
-  transition: oneOf(TX_TRANSITIONS).isRequired,
+  transition: oneOf(TRANSITIONS).isRequired,
 });
 
-const firstReviewTransitions = [
-  TX_TRANSITION_REVIEW_BY_PROVIDER_FIRST,
-  TX_TRANSITION_REVIEW_BY_CUSTOMER_FIRST,
-];
+const firstReviewTransitions = [TRANSITION_REVIEW_1_BY_CUSTOMER, TRANSITION_REVIEW_1_BY_PROVIDER];
 
 // Check if tx transition is followed by a state where
 // reviews are completed
 export const areReviewsCompleted = transition => {
   return [
-    TX_TRANSITION_REVIEW_BY_PROVIDER_SECOND,
-    TX_TRANSITION_REVIEW_BY_CUSTOMER_SECOND,
-    TX_TRANSITION_MARK_REVIEWED_BY_CUSTOMER,
-    TX_TRANSITION_MARK_REVIEWED_BY_PROVIDER,
-    TX_TRANSITION_AUTO_COMPLETE_WITHOUT_REVIEWS,
+    TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD,
+    TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD,
+    TRANSITION_EXPIRE_REVIEW_PERIOD,
+    TRANSITION_REVIEW_2_BY_CUSTOMER,
+    TRANSITION_REVIEW_2_BY_PROVIDER,
   ].includes(transition);
 };
 
@@ -318,7 +306,7 @@ propTypes.transaction = shape({
   attributes: shape({
     createdAt: instanceOf(Date).isRequired,
     lastTransitionedAt: instanceOf(Date).isRequired,
-    lastTransition: oneOf(TX_TRANSITIONS).isRequired,
+    lastTransition: oneOf(TRANSITIONS).isRequired,
 
     // An enquiry won't need a total sum nor a booking so these are
     // optional.
@@ -335,7 +323,7 @@ propTypes.transaction = shape({
         reversal: bool.isRequired,
       })
     ).isRequired,
-    transitions: arrayOf(propTypes.txTransition).isRequired,
+    transitions: arrayOf(propTypes.transition).isRequired,
   }),
   booking: propTypes.booking,
   listing: propTypes.listing,

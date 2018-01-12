@@ -3,7 +3,7 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { updatedEntities, denormalisedEntities } from '../../util/data';
-import { TX_TRANSITION_ENQUIRE } from '../../util/types';
+import { TRANSITION_ENQUIRE } from '../../util/types';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
 const { UUID } = sdkTypes;
@@ -130,7 +130,7 @@ export const fetchReviews = listingId => (dispatch, getState, sdk) => {
 export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => {
   dispatch(sendEnquiryRequest());
   const bodyParams = {
-    transition: TX_TRANSITION_ENQUIRE,
+    transition: TRANSITION_ENQUIRE,
     params: { listingId },
   };
   return sdk.transactions

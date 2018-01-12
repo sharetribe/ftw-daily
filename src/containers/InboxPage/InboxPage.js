@@ -10,10 +10,10 @@ import {
   txHasFirstReview,
   txIsAccepted,
   txIsCanceled,
-  txIsDeclinedOrAutodeclined,
-  txIsDelivered,
+  txIsCompleted,
+  txIsDeclinedOrExpired,
   txIsEnquired,
-  txIsPreauthorized,
+  txIsRequested,
   txIsReviewed,
   propTypes,
 } from '../../util/types';
@@ -67,7 +67,7 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateAccepted',
       }),
     };
-  } else if (txIsDeclinedOrAutodeclined(tx)) {
+  } else if (txIsDeclinedOrExpired(tx)) {
     return {
       nameClassName: css.nameDeclined,
       bookingClassName: css.bookingDeclined,
@@ -87,7 +87,7 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateCanceled',
       }),
     };
-  } else if (txIsDelivered(tx) || txHasFirstReview(tx) || txIsReviewed(tx)) {
+  } else if (txIsCompleted(tx) || txHasFirstReview(tx) || txIsReviewed(tx)) {
     return {
       nameClassName: css.nameDelivered,
       bookingClassName: css.bookingDelivered,
@@ -156,7 +156,7 @@ export const InboxItem = props => {
   const otherUserDisplayName = userDisplayName(otherUser, bannedUserDisplayName);
 
   const stateData = txState(intl, tx, isOrder);
-  const isSaleNotification = !isOrder && txIsPreauthorized(tx);
+  const isSaleNotification = !isOrder && txIsRequested(tx);
   const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
   const lastTransitionedAt = formatDate(intl, tx.attributes.lastTransitionedAt);
 

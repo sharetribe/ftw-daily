@@ -4,12 +4,12 @@ import classNames from 'classnames';
 import {
   txHasFirstReview,
   txIsAccepted,
-  txIsAutodeclined,
   txIsCanceled,
+  txIsCompleted,
   txIsDeclined,
-  txIsDelivered,
   txIsEnquired,
-  txIsPreauthorized,
+  txIsExpired,
+  txIsRequested,
   txIsReviewed,
 } from '../../util/types';
 import { userDisplayName } from '../../util/data';
@@ -212,7 +212,7 @@ export const OrderTitle = props => {
         </span>
       </h1>
     );
-  } else if (txIsPreauthorized(transaction)) {
+  } else if (txIsRequested(transaction)) {
     return (
       <h1 className={classes}>
         <span className={css.mainTitle}>
@@ -245,7 +245,7 @@ export const OrderTitle = props => {
         />
       </h1>
     );
-  } else if (txIsAutodeclined(transaction)) {
+  } else if (txIsExpired(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -264,7 +264,7 @@ export const OrderTitle = props => {
       </h1>
     );
   } else if (
-    txIsDelivered(transaction) ||
+    txIsCompleted(transaction) ||
     txHasFirstReview(transaction) ||
     txIsReviewed(transaction)
   ) {
@@ -292,7 +292,7 @@ export const OrderMessage = props => {
   } = props;
   const classes = classNames(rootClassName || css.transactionInfoMessage, className);
 
-  if (!listingDeleted && txIsPreauthorized(transaction)) {
+  if (!listingDeleted && txIsRequested(transaction)) {
     return (
       <p className={classes}>
         <FormattedMessage id="TransactionPanel.orderPreauthorizedInfo" values={{ providerName }} />
@@ -331,7 +331,7 @@ export const SaleTitle = props => {
         />
       </h1>
     );
-  } else if (txIsPreauthorized(transaction)) {
+  } else if (txIsRequested(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -358,7 +358,7 @@ export const SaleTitle = props => {
         />
       </h1>
     );
-  } else if (txIsAutodeclined(transaction)) {
+  } else if (txIsExpired(transaction)) {
     return (
       <h1 className={classes}>
         <FormattedMessage
@@ -377,7 +377,7 @@ export const SaleTitle = props => {
       </h1>
     );
   } else if (
-    txIsDelivered(transaction) ||
+    txIsCompleted(transaction) ||
     txHasFirstReview(transaction) ||
     txIsReviewed(transaction)
   ) {
@@ -405,7 +405,7 @@ export const SaleMessage = props => {
   } = props;
   const classes = classNames(rootClassName || css.transactionInfoMessage, className);
 
-  if (!isCustomerBanned && txIsPreauthorized(transaction)) {
+  if (!isCustomerBanned && txIsRequested(transaction)) {
     return (
       <p className={classes}>
         <FormattedMessage id="TransactionPanel.saleRequestedInfo" values={{ customerName }} />

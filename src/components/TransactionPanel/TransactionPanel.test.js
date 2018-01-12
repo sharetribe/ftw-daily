@@ -12,13 +12,13 @@ import {
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl } from '../../util/test-data';
 import {
-  TX_TRANSITION_ACCEPT,
-  TX_TRANSITION_AUTO_DECLINE,
-  TX_TRANSITION_CANCELED,
-  TX_TRANSITION_DECLINE,
-  TX_TRANSITION_ENQUIRE,
-  TX_TRANSITION_MARK_DELIVERED,
-  TX_TRANSITION_PREAUTHORIZE,
+  TRANSITION_ACCEPT,
+  TRANSITION_CANCELED,
+  TRANSITION_COMPLETE,
+  TRANSITION_DECLINE,
+  TRANSITION_ENQUIRE,
+  TRANSITION_EXPIRE,
+  TRANSITION_REQUEST,
 } from '../../util/types';
 import { BreakdownMaybe } from './TransactionPanel.helpers';
 import { TransactionPanelComponent } from './TransactionPanel';
@@ -42,43 +42,43 @@ describe('TransactionPanel - Sale', () => {
 
   const txEnquired = createTransaction({
     id: 'sale-enquired',
-    lastTransition: TX_TRANSITION_ENQUIRE,
+    lastTransition: TRANSITION_ENQUIRE,
     ...baseTxAttrs,
   });
 
   const txPreauthorized = createTransaction({
     id: 'sale-preauthorized',
-    lastTransition: TX_TRANSITION_PREAUTHORIZE,
+    lastTransition: TRANSITION_REQUEST,
     ...baseTxAttrs,
   });
 
   const txAccepted = createTransaction({
     id: 'sale-accepted',
-    lastTransition: TX_TRANSITION_ACCEPT,
+    lastTransition: TRANSITION_ACCEPT,
     ...baseTxAttrs,
   });
 
   const txDeclined = createTransaction({
     id: 'sale-declined',
-    lastTransition: TX_TRANSITION_DECLINE,
+    lastTransition: TRANSITION_DECLINE,
     ...baseTxAttrs,
   });
 
   const txAutoDeclined = createTransaction({
     id: 'sale-autodeclined',
-    lastTransition: TX_TRANSITION_AUTO_DECLINE,
+    lastTransition: TRANSITION_EXPIRE,
     ...baseTxAttrs,
   });
 
   const txCanceled = createTransaction({
     id: 'sale-canceled',
-    lastTransition: TX_TRANSITION_CANCELED,
+    lastTransition: TRANSITION_CANCELED,
     ...baseTxAttrs,
   });
 
   const txDelivered = createTransaction({
     id: 'sale-delivered',
-    lastTransition: TX_TRANSITION_MARK_DELIVERED,
+    lastTransition: TRANSITION_COMPLETE,
     ...baseTxAttrs,
   });
 
@@ -167,7 +167,7 @@ describe('TransactionPanel - Sale', () => {
   it('renders correct total price', () => {
     const transaction = createTransaction({
       id: 'sale-tx',
-      lastTransition: TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TRANSITION_REQUEST,
       total: new Money(16500, 'USD'),
       commission: new Money(1000, 'USD'),
       booking: createBooking('booking1', {
@@ -207,43 +207,43 @@ describe('TransactionPanel - Order', () => {
 
   const txEnquired = createTransaction({
     id: 'order-enquired',
-    lastTransition: TX_TRANSITION_ENQUIRE,
+    lastTransition: TRANSITION_ENQUIRE,
     ...baseTxAttrs,
   });
 
   const txPreauthorized = createTransaction({
     id: 'order-preauthorized',
-    lastTransition: TX_TRANSITION_PREAUTHORIZE,
+    lastTransition: TRANSITION_REQUEST,
     ...baseTxAttrs,
   });
 
   const txAccepted = createTransaction({
     id: 'order-accepted',
-    lastTransition: TX_TRANSITION_ACCEPT,
+    lastTransition: TRANSITION_ACCEPT,
     ...baseTxAttrs,
   });
 
   const txDeclined = createTransaction({
     id: 'order-declined',
-    lastTransition: TX_TRANSITION_DECLINE,
+    lastTransition: TRANSITION_DECLINE,
     ...baseTxAttrs,
   });
 
   const txAutoDeclined = createTransaction({
     id: 'order-autodeclined',
-    lastTransition: TX_TRANSITION_AUTO_DECLINE,
+    lastTransition: TRANSITION_EXPIRE,
     ...baseTxAttrs,
   });
 
   const txCanceled = createTransaction({
     id: 'order-canceled',
-    lastTransition: TX_TRANSITION_CANCELED,
+    lastTransition: TRANSITION_CANCELED,
     ...baseTxAttrs,
   });
 
   const txDelivered = createTransaction({
     id: 'order-delivered',
-    lastTransition: TX_TRANSITION_MARK_DELIVERED,
+    lastTransition: TRANSITION_COMPLETE,
     ...baseTxAttrs,
   });
 
@@ -334,7 +334,7 @@ describe('TransactionPanel - Order', () => {
   it('renders correct total price', () => {
     const tx = createTransaction({
       id: 'order-tx',
-      lastTransition: TX_TRANSITION_PREAUTHORIZE,
+      lastTransition: TRANSITION_REQUEST,
       total: new Money(16500, 'USD'),
       booking: createBooking('booking1', {
         start: new Date(Date.UTC(2017, 5, 10)),

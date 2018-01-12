@@ -10,7 +10,7 @@ import {
 } from '../../util/test-data';
 import { InboxPageComponent, InboxItem } from './InboxPage';
 import routeConfiguration from '../../routeConfiguration';
-import { LINE_ITEM_NIGHT, TX_TRANSITION_PREAUTHORIZE } from '../../util/types';
+import { LINE_ITEM_NIGHT, TRANSITION_REQUEST } from '../../util/types';
 
 const noop = () => null;
 
@@ -49,7 +49,7 @@ describe('InboxPage', () => {
       transactions: [
         createTransaction({
           id: 'order-1',
-          lastTransition: TX_TRANSITION_PREAUTHORIZE,
+          lastTransition: TRANSITION_REQUEST,
           customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2017, 0, 15)),
@@ -57,7 +57,7 @@ describe('InboxPage', () => {
         }),
         createTransaction({
           id: 'order-2',
-          lastTransition: TX_TRANSITION_PREAUTHORIZE,
+          lastTransition: TRANSITION_REQUEST,
           customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
@@ -103,7 +103,7 @@ describe('InboxPage', () => {
       transactions: [
         createTransaction({
           id: 'sale-1',
-          lastTransition: TX_TRANSITION_PREAUTHORIZE,
+          lastTransition: TRANSITION_REQUEST,
           customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2017, 0, 15)),
@@ -111,7 +111,7 @@ describe('InboxPage', () => {
         }),
         createTransaction({
           id: 'sale-2',
-          lastTransition: TX_TRANSITION_PREAUTHORIZE,
+          lastTransition: TRANSITION_REQUEST,
           customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
