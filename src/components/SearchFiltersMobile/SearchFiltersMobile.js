@@ -93,12 +93,17 @@ class SearchFiltersMobileComponent extends Component {
     const customAttribute = 'category';
 
     // Reset all filter query parameters
-    const resetAll = () => {
+    const resetAll = (e) => {
       const caParam = `ca_${customAttribute}`;
       const queryParams = omit(urlQueryParams, caParam);
       history.push(
         createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams)
       );
+
+      // blur event target if event is passed
+      if (e && e.currentTarget) {
+        e.currentTarget.blur();
+      }
     };
 
     const classes = classNames(rootClassName || css.root, className);
@@ -139,7 +144,7 @@ class SearchFiltersMobileComponent extends Component {
         >
           <div className={css.modalHeadingWrapper}>
             <span className={css.modalHeading}>{filtersHeading}</span>
-            <button className={css.resetAllButton} onClick={resetAll}>
+            <button className={css.resetAllButton} onClick={(e) => resetAll(e)}>
               <FormattedMessage id={'SearchFiltersMobile.resetAll'} />
             </button>
           </div>

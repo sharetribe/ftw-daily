@@ -10,7 +10,23 @@ class SelectSingleFilterMobileComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { isOpen: true };
+    this.selectOption = this.selectOption.bind(this);
+    this.toggleIsOpen = this.toggleIsOpen.bind(this);
   }
+
+  selectOption(option, e) {
+    const { customAttribute, onSelect } = this.props;
+    onSelect(customAttribute, option);
+
+    // blur event target if event is passed
+    if (e && e.currentTarget) {
+      e.currentTarget.blur();
+    }
+  };
+
+  toggleIsOpen() {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
 
   render() {
     const {
@@ -18,17 +34,8 @@ class SelectSingleFilterMobileComponent extends Component {
       className,
       customAttribute,
       urlQueryParams,
-      onSelect,
       intl,
     } = this.props;
-
-    const selectOption = option => {
-      onSelect(customAttribute, option);
-    };
-
-    const toggleIsOpen = () => {
-      this.setState({ isOpen: !this.state.isOpen });
-    };
 
     const filterLabel = intl.formatMessage({
       id: `SelectSingleFilterMobile.${customAttribute}.label`,
@@ -51,10 +58,10 @@ class SelectSingleFilterMobileComponent extends Component {
     return (
       <div className={classes}>
         <div className={labelClass}>
-          <button className={css.labelButton} onClick={toggleIsOpen}>
+          <button className={css.labelButton} onClick={this.toggleIsOpen}>
             <span className={labelClass}>{filterLabel}</span>
           </button>
-          <button className={css.clearButton} onClick={() => selectOption(null)}>
+          <button className={css.clearButton} onClick={(e) => this.selectOption(null, e)} onBlur={() => console.log('button onBlur')}>
             <FormattedMessage id={'SelectSingleFilterMobile.clear'} />
           </button>
         </div>
@@ -65,7 +72,7 @@ class SelectSingleFilterMobileComponent extends Component {
             // menu item border class
             const optionBorderClass = selected ? css.optionBorderSelected : css.optionBorder;
             return (
-              <button key={v} className={css.option} onClick={() => selectOption(v)}>
+              <button key={v} className={css.option} onClick={() => this.selectOption(v)}>
                 <span className={optionBorderClass} />
                 <FormattedMessage id={`SelectSingleFilterMobile.category.option.${v}`} />
               </button>
