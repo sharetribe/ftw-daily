@@ -4,6 +4,12 @@
   --containerHeight: calc(100vh - var(--topbarHeightDesktop));
 }
 
+/* Can be given to Topbar when a modal is opened
+ * so that the Topbar is not rendered on top of it.*/
+.topbarBehindModal {
+  z-index: initial;
+}
+
 .topbar {
   @media (--viewportMedium) {
     position: fixed;

@@ -38,8 +38,10 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       />
       <InjectIntl(withRouter(SearchFiltersMobileComponent))
         listingsAreLoaded={true}
+        onCloseModal={[Function]}
         onManageDisableScrolling={[Function]}
         onMapIconClick={[Function]}
+        onOpenModal={[Function]}
         resultsCount={22}
         searchInProgress={false}
         searchListingsError={null}

@@ -22,7 +22,7 @@ class SelectSingleFilterMobileComponent extends Component {
       intl,
     } = this.props;
 
-    const selectOption = (option) => {
+    const selectOption = option => {
       onSelect(customAttribute, option);
     };
 

@@ -54,6 +54,7 @@ export class SearchPageComponent extends Component {
 
     this.state = {
       isSearchMapOpenOnMobile: props.tab === 'map',
+      isMobileModalOpen: false,
     };
 
     // Initiating map creates 'bounds_changes' event
@@ -66,6 +67,8 @@ export class SearchPageComponent extends Component {
 
     this.onIdle = debounce(this.onIdle.bind(this), SEARCH_WITH_MAP_DEBOUNCE);
     this.fetchMoreListingsToMap = this.fetchMoreListingsToMap.bind(this);
+    this.onOpenMobileModal = this.onOpenMobileModal.bind(this);
+    this.onCloseMobileModal = this.onCloseMobileModal.bind(this);
   }
 
   componentDidMount() {
@@ -156,6 +159,18 @@ export class SearchPageComponent extends Component {
         // eslint-disable-next-line no-console
         console.error(`An error (${error} occured while trying to retrieve map listings`);
       });
+  }
+
+  // Invoked when a modal is opened from a child component,
+  // for example when a filter modal is opened in mobile view
+  onOpenMobileModal() {
+    this.setState({ isMobileModalOpen: true });
+  }
+
+  // Invoked when a modal is closed from a child component,
+  // for example when a filter modal is opened in mobile view
+  onCloseMobileModal() {
+    this.setState({ isMobileModalOpen: false });
   }
 
   render() {
@@ -252,6 +267,12 @@ export class SearchPageComponent extends Component {
       this.setState({ isSearchMapOpenOnMobile: true });
     };
 
+    // Set topbar class based on if a modal is open in
+    // a child component
+    const topbarClasses = this.state.isMobileModalOpen
+      ? classNames(css.topbarBehindModal, css.topbar)
+      : css.topbar;
+
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
     /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -268,7 +289,7 @@ export class SearchPageComponent extends Component {
           mainEntity: [schemaMainEntity],
         }}
       >
-        <TopbarContainer className={css.topbar} />
+        <TopbarContainer className={topbarClasses} />
         <div className={css.container}>
           <div className={css.searchResultContainer}>
             <SearchFilters
@@ -291,6 +312,8 @@ export class SearchPageComponent extends Component {
               showAsModalMaxWidth={MODAL_BREAKPOINT}
               onMapIconClick={onMapIconClick}
               onManageDisableScrolling={onManageDisableScrolling}
+              onOpenModal={this.onOpenMobileModal}
+              onCloseModal={this.onCloseMobileModal}
             />
             <div
               className={classNames(css.listings, {

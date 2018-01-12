@@ -8,10 +8,10 @@
   /* sticky result summary in mobile */
   position: sticky;
   top: 0;
-  z-index: 11;
+  z-index: 1;
 }
 
-.searchResultSummaryMobile {
+.searchResultSummary {
   @apply --marketplaceH3FontStyles;
   margin-top: 6px;
 

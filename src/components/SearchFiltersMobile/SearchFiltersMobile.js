@@ -28,6 +28,8 @@ class SearchFiltersMobileComponent extends Component {
       showAsModalMaxWidth,
       onMapIconClick,
       onManageDisableScrolling,
+      onOpenModal,
+      onCloseModal,
       history,
       intl,
     } = this.props;
@@ -47,6 +49,7 @@ class SearchFiltersMobileComponent extends Component {
 
     // Open filters modal, set the initial parameters to current ones
     const openFilters = () => {
+      onOpenModal();
       this.setState({ isFiltersOpenOnMobile: true, initialQueryParams: urlQueryParams });
     };
 
@@ -60,11 +63,13 @@ class SearchFiltersMobileComponent extends Component {
           this.state.initialQueryParams
         )
       );
+      onCloseModal();
       this.setState({ isFiltersOpenOnMobile: false, initialQueryParams: null });
     };
 
     // Close the filter modal
     const closeFilters = () => {
+      onCloseModal();
       this.setState({ isFiltersOpenOnMobile: false });
     };
 
@@ -157,6 +162,8 @@ SearchFiltersMobileComponent.defaultProps = {
   className: null,
   resultsCount: null,
   searchingInProgress: false,
+  onOpenModal: null,
+  onCloseModal: null,
 };
 
 SearchFiltersMobileComponent.propTypes = {
@@ -169,6 +176,8 @@ SearchFiltersMobileComponent.propTypes = {
   showAsModalMaxWidth: number.isRequired,
   onMapIconClick: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  onOpenModal: func,
+  onCloseModal: func,
 
   // from injectIntl
   intl: intlShape.isRequired,
