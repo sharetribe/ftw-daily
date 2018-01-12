@@ -374,7 +374,7 @@ export const sendMessage = (txId, message) => (dispatch, getState, sdk) => {
 const REVIEW_TX_INCLUDES = ['reviews', 'reviews.author', 'reviews.subject'];
 
 // If other party has already sent a review, we need to make transition to
-// TX_TRANSITION_REVIEW_BY_<CUSTOMER/PROVIDER>_SECOND
+// TRANSITION_REVIEW_2_BY_<CUSTOMER/PROVIDER>
 const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
   const transition =
     role === CUSTOMER ? TRANSITION_REVIEW_2_BY_CUSTOMER : TRANSITION_REVIEW_2_BY_PROVIDER;
@@ -398,7 +398,7 @@ const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
 };
 
 // If other party has not yet sent a review, we need to make transition to
-// TX_TRANSITION_REVIEW_BY_<CUSTOMER/PROVIDER>_FIRST
+// TRANSITION_REVIEW_1_BY_<CUSTOMER/PROVIDER>
 // However, the other party might have made the review after previous data synch point.
 // So, error is likely to happen and then we must try another state transition
 // by calling sendReviewAsSecond().

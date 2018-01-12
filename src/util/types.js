@@ -183,9 +183,9 @@ export const TRANSITION_CANCEL = 'transition/cancel';
 // The backend will mark the transaction completed.
 export const TRANSITION_COMPLETE = 'transition/mark-delivered';
 
-// Review transitions
-// Reviews are given through transaction transitions.
-// Either party (provider or customer) can be the first to give a review.
+// Reviews are given through transaction transitions. Review 1 can be
+// by provider or customer, and review 2 will be the other party of
+// the transaction.
 export const TRANSITION_REVIEW_1_BY_PROVIDER = 'transition/review-by-provider-first';
 export const TRANSITION_REVIEW_2_BY_PROVIDER = 'transition/review-by-provider-second';
 export const TRANSITION_REVIEW_1_BY_CUSTOMER = 'transition/review-by-customer-first';
@@ -194,7 +194,7 @@ export const TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD = 'transition/mark-reviewe
 export const TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD = 'transition/mark-reviewed-by-provider';
 export const TRANSITION_EXPIRE_REVIEW_PERIOD = 'transition/auto-complete-without-reviews';
 
-export const TX_TRANSITIONS = [
+export const TRANSITIONS = [
   TRANSITION_ACCEPT,
   TRANSITION_CANCEL,
   TRANSITION_COMPLETE,
@@ -253,7 +253,7 @@ export const txIsReviewed = tx => areReviewsCompleted(txLastTransition(tx));
 propTypes.transition = shape({
   at: instanceOf(Date).isRequired,
   by: oneOf(TX_TRANSITION_ACTORS).isRequired,
-  transition: oneOf(TX_TRANSITIONS).isRequired,
+  transition: oneOf(TRANSITIONS).isRequired,
 });
 
 const firstReviewTransitions = [TRANSITION_REVIEW_1_BY_CUSTOMER, TRANSITION_REVIEW_1_BY_PROVIDER];
@@ -306,7 +306,7 @@ propTypes.transaction = shape({
   attributes: shape({
     createdAt: instanceOf(Date).isRequired,
     lastTransitionedAt: instanceOf(Date).isRequired,
-    lastTransition: oneOf(TX_TRANSITIONS).isRequired,
+    lastTransition: oneOf(TRANSITIONS).isRequired,
 
     // An enquiry won't need a total sum nor a booking so these are
     // optional.
