@@ -14,7 +14,7 @@
   }
 
   @media (--viewportLarge) {
-    padding: 0 30px 81px 30px;
+    padding: 0 0 81px 0;
     border-top: none;
   }
 }
