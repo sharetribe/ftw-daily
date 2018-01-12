@@ -4,17 +4,6 @@
   display: flex;
   justify-content: space-between;
   background-color: var(--matterColorBright);
-
-  /* sticky result summary in mobile */
-  position: sticky;
-  top: 0;
-  z-index: 11;
-
-  @media (--viewportMedium) {
-    position: static;
-    top: unset;
-    z-index: unset;
-  }
 }
 
 .searchResultSummary {
