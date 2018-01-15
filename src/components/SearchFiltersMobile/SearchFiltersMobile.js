@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
-import { omit } from 'lodash';
+import { omit, toPairs } from 'lodash';
 
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
@@ -18,7 +18,7 @@ const validateParamValue = value => value !== null && value !== undefined && val
 
 // Check if a filter parameter is included query parameters
 const hasFilterQueryParams = queryParams => {
-  const firstFilterParam = Object.entries(queryParams).find(entry => {
+  const firstFilterParam = toPairs(queryParams).find(entry => {
     return !!(entry[0].startsWith(CA_PREFIX) && validateParamValue(entry[1]));
   });
   return !!firstFilterParam;
