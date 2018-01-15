@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { omit } from 'lodash';
 
-import { SelectSingleCustomAttribute } from '../../components';
+import { SelectSingleFilter } from '../../components';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import config from '../../config';
@@ -49,7 +49,7 @@ const SearchFiltersComponent = props => {
 
   const hasCategoryConfig = config.customAttributes && config.customAttributes.category;
   const categoryFilter = hasCategoryConfig ? (
-    <SelectSingleCustomAttribute
+    <SelectSingleFilter
       customAttribute="category"
       urlQueryParams={urlQueryParams}
       onSelect={onSelectSingle}

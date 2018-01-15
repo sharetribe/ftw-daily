@@ -99,9 +99,7 @@ export { default as SectionHero } from './SectionHero/SectionHero';
 export { default as SectionHowItWorks } from './SectionHowItWorks/SectionHowItWorks';
 export { default as SectionLocations } from './SectionLocations/SectionLocations';
 export { default as SelectField } from './SelectField/SelectField';
-export {
-  default as SelectSingleCustomAttribute,
-} from './SelectSingleCustomAttribute/SelectSingleCustomAttribute';
+export { default as SelectSingleFilter } from './SelectSingleFilter/SelectSingleFilter';
 export {
   default as SelectSingleFilterMobile,
 } from './SelectSingleFilterMobile/SelectSingleFilterMobile';
