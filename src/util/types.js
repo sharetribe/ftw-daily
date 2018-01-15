@@ -162,12 +162,12 @@ propTypes.booking = shape({
 
 // When a customer makes a booking to a listing, a transaction is
 // created with the initial request transition.
-export const TRANSITION_REQUEST = 'transition/preauthorize';
+export const TRANSITION_REQUEST = 'transition/request';
 
 // A customer can also initiate a transaction with an enquiry, and
 // then transition that with a request.
 export const TRANSITION_ENQUIRE = 'transition/enquire';
-export const TRANSITION_REQUEST_AFTER_ENQUIRY = 'transition/preauthorize-enquiry';
+export const TRANSITION_REQUEST_AFTER_ENQUIRY = 'transition/request-after-enquiry';
 
 // When the provider accepts or declines a transaction from the
 // SalePage, it is transitioned with the accept or decline transition.
@@ -175,24 +175,24 @@ export const TRANSITION_ACCEPT = 'transition/accept';
 export const TRANSITION_DECLINE = 'transition/decline';
 
 // The backend automatically expire the transaction.
-export const TRANSITION_EXPIRE = 'transition/auto-decline';
+export const TRANSITION_EXPIRE = 'transition/expire';
 
 // Admin can also cancel the transition.
 export const TRANSITION_CANCEL = 'transition/cancel';
 
 // The backend will mark the transaction completed.
-export const TRANSITION_COMPLETE = 'transition/mark-delivered';
+export const TRANSITION_COMPLETE = 'transition/complete';
 
 // Reviews are given through transaction transitions. Review 1 can be
 // by provider or customer, and review 2 will be the other party of
 // the transaction.
-export const TRANSITION_REVIEW_1_BY_PROVIDER = 'transition/review-by-provider-first';
-export const TRANSITION_REVIEW_2_BY_PROVIDER = 'transition/review-by-provider-second';
-export const TRANSITION_REVIEW_1_BY_CUSTOMER = 'transition/review-by-customer-first';
-export const TRANSITION_REVIEW_2_BY_CUSTOMER = 'transition/review-by-customer-second';
-export const TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD = 'transition/mark-reviewed-by-customer';
-export const TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD = 'transition/mark-reviewed-by-provider';
-export const TRANSITION_EXPIRE_REVIEW_PERIOD = 'transition/auto-complete-without-reviews';
+export const TRANSITION_REVIEW_1_BY_PROVIDER = 'transition/review-1_by-provider';
+export const TRANSITION_REVIEW_2_BY_PROVIDER = 'transition/review-2-by-provider';
+export const TRANSITION_REVIEW_1_BY_CUSTOMER = 'transition/review-1-by-customer';
+export const TRANSITION_REVIEW_2_BY_CUSTOMER = 'transition/review-2-by-customer';
+export const TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD = 'transition/expire-customer-review-period';
+export const TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD = 'transition/expire-provider-review-period';
+export const TRANSITION_EXPIRE_REVIEW_PERIOD = 'transition/expire-review-period';
 
 export const TRANSITIONS = [
   TRANSITION_ACCEPT,
