@@ -361,7 +361,7 @@ export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
     .catch(e => {
       // Make sure auth info is up to date
       dispatch(authInfo());
-
+      log.error(e, 'fetch-current-user-failed');
       dispatch(currentUserShowError(storableError(e)));
     });
 };
