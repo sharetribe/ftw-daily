@@ -93,7 +93,7 @@ exports[`InboxPage matches snapshot 1`] = `
               Object {
                 "attributes": Object {
                   "createdAt": 2017-05-01T00:00:00.000Z,
-                  "lastTransition": "transition/preauthorize",
+                  "lastTransition": "transition/request",
                   "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
@@ -141,7 +141,7 @@ exports[`InboxPage matches snapshot 1`] = `
                     Object {
                       "at": 2017-05-01T00:00:00.000Z,
                       "by": "customer",
-                      "transition": "transition/preauthorize",
+                      "transition": "transition/request",
                     },
                     Object {
                       "at": 2017-06-01T00:00:00.000Z,
@@ -216,7 +216,7 @@ exports[`InboxPage matches snapshot 1`] = `
               Object {
                 "attributes": Object {
                   "createdAt": 2017-05-01T00:00:00.000Z,
-                  "lastTransition": "transition/preauthorize",
+                  "lastTransition": "transition/request",
                   "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
@@ -264,7 +264,7 @@ exports[`InboxPage matches snapshot 1`] = `
                     Object {
                       "at": 2017-05-01T00:00:00.000Z,
                       "by": "customer",
-                      "transition": "transition/preauthorize",
+                      "transition": "transition/request",
                     },
                     Object {
                       "at": 2017-06-01T00:00:00.000Z,
@@ -495,7 +495,7 @@ exports[`InboxPage matches snapshot 3`] = `
               Object {
                 "attributes": Object {
                   "createdAt": 2017-05-01T00:00:00.000Z,
-                  "lastTransition": "transition/preauthorize",
+                  "lastTransition": "transition/request",
                   "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
@@ -543,7 +543,7 @@ exports[`InboxPage matches snapshot 3`] = `
                     Object {
                       "at": 2017-05-01T00:00:00.000Z,
                       "by": "customer",
-                      "transition": "transition/preauthorize",
+                      "transition": "transition/request",
                     },
                     Object {
                       "at": 2017-06-01T00:00:00.000Z,
@@ -618,7 +618,7 @@ exports[`InboxPage matches snapshot 3`] = `
               Object {
                 "attributes": Object {
                   "createdAt": 2017-05-01T00:00:00.000Z,
-                  "lastTransition": "transition/preauthorize",
+                  "lastTransition": "transition/request",
                   "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
@@ -666,7 +666,7 @@ exports[`InboxPage matches snapshot 3`] = `
                     Object {
                       "at": 2017-05-01T00:00:00.000Z,
                       "by": "customer",
-                      "transition": "transition/preauthorize",
+                      "transition": "transition/request",
                     },
                     Object {
                       "at": 2017-06-01T00:00:00.000Z,

@@ -131,7 +131,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -263,7 +263,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -392,7 +392,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -521,7 +521,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -768,7 +768,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -943,7 +943,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/auto-decline",
+              "lastTransition": "transition/expire",
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -991,7 +991,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -1075,7 +1075,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/auto-decline",
+              "lastTransition": "transition/expire",
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -1123,7 +1123,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -1204,7 +1204,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/auto-decline",
+                "lastTransition": "transition/expire",
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -1252,7 +1252,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -1333,7 +1333,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/auto-decline",
+              "lastTransition": "transition/expire",
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -1381,7 +1381,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -1580,7 +1580,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/auto-decline",
+                "lastTransition": "transition/expire",
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -1628,7 +1628,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -1851,7 +1851,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -1983,7 +1983,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -2112,7 +2112,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -2241,7 +2241,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -2488,7 +2488,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -2711,7 +2711,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -2843,7 +2843,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -2972,7 +2972,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -3101,7 +3101,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -3348,7 +3348,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -3523,7 +3523,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/mark-delivered",
+              "lastTransition": "transition/complete",
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -3571,7 +3571,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -3655,7 +3655,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/mark-delivered",
+              "lastTransition": "transition/complete",
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -3703,7 +3703,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -3784,7 +3784,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/mark-delivered",
+                "lastTransition": "transition/complete",
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -3832,7 +3832,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -3913,7 +3913,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/mark-delivered",
+              "lastTransition": "transition/complete",
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -3961,7 +3961,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -4160,7 +4160,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/mark-delivered",
+                "lastTransition": "transition/complete",
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -4208,7 +4208,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -4431,7 +4431,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -4563,7 +4563,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -4692,7 +4692,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -4821,7 +4821,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -5068,7 +5068,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -5243,7 +5243,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/preauthorize",
+              "lastTransition": "transition/request",
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -5291,7 +5291,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -5375,7 +5375,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/preauthorize",
+              "lastTransition": "transition/request",
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -5423,7 +5423,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -5504,7 +5504,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/preauthorize",
+                "lastTransition": "transition/request",
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -5552,7 +5552,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -5633,7 +5633,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/preauthorize",
+              "lastTransition": "transition/request",
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -5681,7 +5681,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -5880,7 +5880,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/preauthorize",
+                "lastTransition": "transition/request",
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -5928,7 +5928,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -6145,7 +6145,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -6264,7 +6264,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -6381,7 +6381,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -6498,7 +6498,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -6733,7 +6733,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -6889,7 +6889,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/auto-decline",
+              "lastTransition": "transition/expire",
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -6937,7 +6937,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -7008,7 +7008,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/auto-decline",
+              "lastTransition": "transition/expire",
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -7056,7 +7056,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -7125,7 +7125,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/auto-decline",
+                "lastTransition": "transition/expire",
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -7173,7 +7173,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -7242,7 +7242,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/auto-decline",
+              "lastTransition": "transition/expire",
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -7290,7 +7290,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -7477,7 +7477,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/auto-decline",
+                "lastTransition": "transition/expire",
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -7525,7 +7525,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -7729,7 +7729,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -7848,7 +7848,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -7965,7 +7965,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -8082,7 +8082,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -8317,7 +8317,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -8521,7 +8521,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -8640,7 +8640,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -8757,7 +8757,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -8874,7 +8874,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -9109,7 +9109,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -9265,7 +9265,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/mark-delivered",
+              "lastTransition": "transition/complete",
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -9313,7 +9313,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -9384,7 +9384,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/mark-delivered",
+              "lastTransition": "transition/complete",
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -9432,7 +9432,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -9501,7 +9501,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/mark-delivered",
+                "lastTransition": "transition/complete",
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -9549,7 +9549,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -9618,7 +9618,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/mark-delivered",
+              "lastTransition": "transition/complete",
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -9666,7 +9666,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -9853,7 +9853,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/mark-delivered",
+                "lastTransition": "transition/complete",
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -9901,7 +9901,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -10105,7 +10105,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -10224,7 +10224,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -10341,7 +10341,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -10458,7 +10458,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -10693,7 +10693,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -10849,7 +10849,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/preauthorize",
+              "lastTransition": "transition/request",
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -10897,7 +10897,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -10968,7 +10968,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/preauthorize",
+              "lastTransition": "transition/request",
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -11016,7 +11016,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -11085,7 +11085,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/preauthorize",
+                "lastTransition": "transition/request",
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -11133,7 +11133,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
@@ -11202,7 +11202,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "createdAt": 2017-05-01T00:00:00.000Z,
-              "lastTransition": "transition/preauthorize",
+              "lastTransition": "transition/request",
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
@@ -11250,7 +11250,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                 Object {
                   "at": 2017-05-01T00:00:00.000Z,
                   "by": "customer",
-                  "transition": "transition/preauthorize",
+                  "transition": "transition/request",
                 },
                 Object {
                   "at": 2017-06-01T00:00:00.000Z,
@@ -11437,7 +11437,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/preauthorize",
+                "lastTransition": "transition/request",
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -11485,7 +11485,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                   Object {
                     "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
-                    "transition": "transition/preauthorize",
+                    "transition": "transition/request",
                   },
                   Object {
                     "at": 2017-06-01T00:00:00.000Z,
