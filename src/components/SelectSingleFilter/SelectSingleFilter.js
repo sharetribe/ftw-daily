@@ -5,9 +5,9 @@ import classNames from 'classnames';
 
 import config from '../../config';
 import { Menu, MenuContent, MenuItem, MenuLabel } from '../../components';
-import css from './SelectSingleCustomAttribute.css';
+import css from './SelectSingleFilter.css';
 
-class SelectSingleCustomAttributeComponent extends Component {
+class SelectSingleFilterComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -37,8 +37,8 @@ class SelectSingleCustomAttributeComponent extends Component {
 
     // resolve menu label text and class
     const menuLabel = currentValue
-      ? intl.formatMessage({ id: `SelectSingleCustomAttribute.category.option.${currentValue}` })
-      : intl.formatMessage({ id: `SelectSingleCustomAttribute.${customAttribute}.label` });
+      ? intl.formatMessage({ id: `SelectSingleFilter.category.option.${currentValue}` })
+      : intl.formatMessage({ id: `SelectSingleFilter.${customAttribute}.label` });
     const menuLabelClass = currentValue ? css.menuLabelSelected : css.menuLabel;
 
     const classes = classNames(rootClassName || css.root, className);
@@ -66,7 +66,7 @@ class SelectSingleCustomAttributeComponent extends Component {
                   onClick={() => this.selectOption(customAttribute, v)}
                 >
                   <span className={menuItemBorderClass} />
-                  <FormattedMessage id={`SelectSingleCustomAttribute.category.option.${v}`} />
+                  <FormattedMessage id={`SelectSingleFilter.category.option.${v}`} />
                 </button>
               </MenuItem>
             );
@@ -76,7 +76,7 @@ class SelectSingleCustomAttributeComponent extends Component {
               className={css.clearMenuItem}
               onClick={() => this.selectOption(customAttribute, null)}
             >
-              <FormattedMessage id={'SelectSingleCustomAttribute.clear'} />
+              <FormattedMessage id={'SelectSingleFilter.clear'} />
             </button>
           </MenuItem>
         </MenuContent>
@@ -87,12 +87,12 @@ class SelectSingleCustomAttributeComponent extends Component {
 
 const { object, string, func } = PropTypes;
 
-SelectSingleCustomAttributeComponent.defaultProps = {
+SelectSingleFilterComponent.defaultProps = {
   rootClassName: null,
   className: null,
 };
 
-SelectSingleCustomAttributeComponent.propTypes = {
+SelectSingleFilterComponent.propTypes = {
   rootClassName: string,
   className: string,
   customAttribute: string.isRequired,
@@ -103,6 +103,6 @@ SelectSingleCustomAttributeComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const SelectSingleCustomAttribute = injectIntl(SelectSingleCustomAttributeComponent);
+const SelectSingleFilter = injectIntl(SelectSingleFilterComponent);
 
-export default SelectSingleCustomAttribute;
+export default SelectSingleFilter;
