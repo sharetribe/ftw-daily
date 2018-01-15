@@ -20,12 +20,32 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   <withRouter(Connect(TopbarContainerComponent)) />
   <div>
     <div>
-      <withViewport(withRouter(SearchFiltersComponent))
+      <withRouter(SearchFiltersComponent)
         listingsAreLoaded={true}
+        onManageDisableScrolling={[Function]}
         onMapIconClick={[Function]}
         resultsCount={22}
         searchInProgress={false}
         searchListingsError={null}
+        urlQueryParams={
+          Object {
+            "address": undefined,
+            "bounds": undefined,
+            "ca_category": undefined,
+            "origin": undefined,
+          }
+        }
+      />
+      <InjectIntl(withRouter(SearchFiltersMobileComponent))
+        listingsAreLoaded={true}
+        onCloseModal={[Function]}
+        onManageDisableScrolling={[Function]}
+        onMapIconClick={[Function]}
+        onOpenModal={[Function]}
+        resultsCount={22}
+        searchInProgress={false}
+        searchListingsError={null}
+        showAsModalMaxWidth={768}
         urlQueryParams={
           Object {
             "address": undefined,

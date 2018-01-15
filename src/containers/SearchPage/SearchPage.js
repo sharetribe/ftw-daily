@@ -25,10 +25,11 @@ import {
   Page,
   SearchResultsPanel,
   SearchFilters,
+  SearchFiltersMobile,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
-
 import { searchListings, searchMapListings } from './SearchPage.duck';
+
 import css from './SearchPage.css';
 
 // Pagination page size might need to be dynamic on responsive page layouts
@@ -53,6 +54,7 @@ export class SearchPageComponent extends Component {
 
     this.state = {
       isSearchMapOpenOnMobile: props.tab === 'map',
+      isMobileModalOpen: false,
     };
 
     // Initiating map creates 'bounds_changes' event
@@ -65,6 +67,8 @@ export class SearchPageComponent extends Component {
 
     this.onIdle = debounce(this.onIdle.bind(this), SEARCH_WITH_MAP_DEBOUNCE);
     this.fetchMoreListingsToMap = this.fetchMoreListingsToMap.bind(this);
+    this.onOpenMobileModal = this.onOpenMobileModal.bind(this);
+    this.onCloseMobileModal = this.onCloseMobileModal.bind(this);
   }
 
   componentDidMount() {
@@ -157,6 +161,18 @@ export class SearchPageComponent extends Component {
       });
   }
 
+  // Invoked when a modal is opened from a child component,
+  // for example when a filter modal is opened in mobile view
+  onOpenMobileModal() {
+    this.setState({ isMobileModalOpen: true });
+  }
+
+  // Invoked when a modal is closed from a child component,
+  // for example when a filter modal is opened in mobile view
+  onCloseMobileModal() {
+    this.setState({ isMobileModalOpen: false });
+  }
+
   render() {
     const {
       intl,
@@ -191,7 +207,7 @@ export class SearchPageComponent extends Component {
 
     const searchError = (
       <h2 className={css.error}>
-        <FormattedMessage id="SearchAttributes.searchError" />
+        <FormattedMessage id="SearchPage.searchError" />
       </h2>
     );
 
@@ -251,6 +267,12 @@ export class SearchPageComponent extends Component {
       this.setState({ isSearchMapOpenOnMobile: true });
     };
 
+    // Set topbar class based on if a modal is open in
+    // a child component
+    const topbarClasses = this.state.isMobileModalOpen
+      ? classNames(css.topbarBehindModal, css.topbar)
+      : css.topbar;
+
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
     /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -267,7 +289,7 @@ export class SearchPageComponent extends Component {
           mainEntity: [schemaMainEntity],
         }}
       >
-        <TopbarContainer className={css.topbar} />
+        <TopbarContainer className={topbarClasses} />
         <div className={css.container}>
           <div className={css.searchResultContainer}>
             <SearchFilters
@@ -278,8 +300,21 @@ export class SearchPageComponent extends Component {
               searchInProgress={searchInProgress}
               searchListingsError={searchListingsError}
               onMapIconClick={onMapIconClick}
+              onManageDisableScrolling={onManageDisableScrolling}
             />
-
+            <SearchFiltersMobile
+              className={css.searchFiltersMobile}
+              urlQueryParams={urlQueryParams}
+              listingsAreLoaded={listingsAreLoaded}
+              resultsCount={totalItems}
+              searchInProgress={searchInProgress}
+              searchListingsError={searchListingsError}
+              showAsModalMaxWidth={MODAL_BREAKPOINT}
+              onMapIconClick={onMapIconClick}
+              onManageDisableScrolling={onManageDisableScrolling}
+              onOpenModal={this.onOpenMobileModal}
+              onCloseModal={this.onCloseMobileModal}
+            />
             <div
               className={classNames(css.listings, {
                 [css.newSearchInProgress]: !listingsAreLoaded,
