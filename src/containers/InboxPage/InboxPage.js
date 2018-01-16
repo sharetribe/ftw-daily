@@ -143,6 +143,33 @@ const bookingData = (unitType, tx, isOrder, intl) => {
   return { bookingStart, bookingEnd, price, isSingleDay };
 };
 
+// Functional component as internal helper to print BookingInfo if that is needed
+const BookingInfoMaybe = props => {
+  const { bookingClassName, isOrder, intl, tx, unitType } = props;
+  const isEnquiry = txIsEnquired(tx);
+
+  if (isEnquiry) {
+    return null;
+  }
+
+  const { bookingStart, bookingEnd, price, isSingleDay } = bookingData(unitType, tx, isOrder, intl);
+  const dateInfo = isSingleDay ? bookingStart.short : `${bookingStart.short} - ${bookingEnd.short}`;
+
+  return (
+    <div className={classNames(css.bookingInfo, bookingClassName)}>
+      {dateInfo}
+      <span className={css.itemPrice}>{price}</span>
+    </div>
+  );
+};
+
+BookingInfoMaybe.propTypes = {
+  intl: intlShape.isRequired,
+  isOrder: bool.isRequired,
+  tx: propTypes.transaction.isRequired,
+  unitType: propTypes.bookingUnitType.isRequired,
+};
+
 export const InboxItem = props => {
   const { unitType, type, tx, intl } = props;
   const { customer, provider } = tx;
@@ -159,12 +186,6 @@ export const InboxItem = props => {
   const isSaleNotification = !isOrder && txIsRequested(tx);
   const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
   const lastTransitionedAt = formatDate(intl, tx.attributes.lastTransitionedAt);
-
-  const isEnquiry = txIsEnquired(tx);
-  const { bookingStart, bookingEnd, price, isSingleDay } = isEnquiry
-    ? {}
-    : bookingData(unitType, tx, isOrder, intl);
-  const dateInfo = isSingleDay ? bookingStart.short : `${bookingStart.short} - ${bookingEnd.short}`;
 
   const linkClasses = classNames(css.itemLink, {
     [css.bannedUserLink]: isOtherUserBanned,
@@ -185,12 +206,13 @@ export const InboxItem = props => {
           <div className={classNames(css.itemUsername, stateData.nameClassName)}>
             {otherUserDisplayName}
           </div>
-          {!isEnquiry ? (
-            <div className={classNames(css.bookingInfo, stateData.bookingClassName)}>
-              {dateInfo}
-              <span className={css.itemPrice}>{price}</span>
-            </div>
-          ) : null}
+          <BookingInfoMaybe
+            bookingClassName={stateData.bookingClassName}
+            intl={intl}
+            isOrder={isOrder}
+            tx={tx}
+            unitType={unitType}
+          />
         </div>
         <div className={css.itemState}>
           <div className={classNames(css.stateName, stateData.stateClassName)}>
