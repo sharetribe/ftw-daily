@@ -3,13 +3,26 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
-import { omit } from 'lodash';
+import { omit, toPairs } from 'lodash';
 
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import { SecondaryButton, ModalInMobile, Button, SelectSingleFilterMobile } from '../../components';
 import config from '../../config';
 import css from './SearchFiltersMobile.css';
+
+// prefix for all custom attribute query params
+const CA_PREFIX = 'ca_';
+
+const validateParamValue = value => value !== null && value !== undefined && value.length > 0;
+
+// Check if a filter parameter is included query parameters
+const hasFilterQueryParams = queryParams => {
+  const firstFilterParam = toPairs(queryParams).find(entry => {
+    return !!(entry[0].startsWith(CA_PREFIX) && validateParamValue(entry[1]));
+  });
+  return !!firstFilterParam;
+};
 
 class SearchFiltersMobileComponent extends Component {
   constructor(props) {
@@ -61,7 +74,7 @@ class SearchFiltersMobileComponent extends Component {
     // Name of the corresponding query parameter.
     // The custom attribute query parameters are named
     // ca_<custom_attribute_name> in the API.
-    const caParam = `ca_${customAttribute}`;
+    const caParam = `${CA_PREFIX}${customAttribute}`;
 
     // query parameters after selecting the option
     // if no option is passed, clear the selection for the filter
@@ -76,7 +89,7 @@ class SearchFiltersMobileComponent extends Component {
   resetAll(e) {
     const { urlQueryParams, history } = this.props;
 
-    const caParam = `ca_${this.customAttribute}`;
+    const caParam = `${CA_PREFIX}${this.customAttribute}`;
     const queryParams = omit(urlQueryParams, caParam);
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
 
@@ -100,6 +113,8 @@ class SearchFiltersMobileComponent extends Component {
       intl,
     } = this.props;
 
+    const classes = classNames(rootClassName || css.root, className);
+
     const resultsFound = (
       <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
     );
@@ -113,7 +128,15 @@ class SearchFiltersMobileComponent extends Component {
       { count: resultsCount }
     );
 
-    const classes = classNames(rootClassName || css.root, className);
+    const filtersButton = hasFilterQueryParams(urlQueryParams) ? (
+      <Button className={css.filtersButton} onClick={this.openFilters}>
+        <FormattedMessage id="SearchFilters.filtersButtonLabel" className={css.mapIconText} />
+      </Button>
+    ) : (
+      <SecondaryButton className={css.filtersButton} onClick={this.openFilters}>
+        <FormattedMessage id="SearchFilters.filtersButtonLabel" className={css.mapIconText} />
+      </SecondaryButton>
+    );
 
     const hasCategoryConfig = config.customAttributes && config.customAttributes.category;
     const categoryFilter = hasCategoryConfig ? (
@@ -133,9 +156,7 @@ class SearchFiltersMobileComponent extends Component {
           {searchInProgress ? loadingResults : null}
         </div>
         <div className={css.buttons}>
-          <SecondaryButton className={css.filterButton} onClick={this.openFilters}>
-            <FormattedMessage id="SearchFilters.filtersButtonLabel" className={css.mapIconText} />
-          </SecondaryButton>
+          {filtersButton}
           <div className={css.mapIcon} onClick={onMapIconClick}>
             <FormattedMessage id="SearchFilters.openMapView" className={css.mapIconText} />
           </div>

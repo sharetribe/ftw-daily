@@ -29,7 +29,7 @@
   display: flex;
 }
 
-.filterButton {
+.filtersButton {
   @apply --marketplaceTinyFontStyles;
   font-weight: var(--fontWeightBold);
 
@@ -38,14 +38,6 @@
   padding: 0 18px;
   margin: 0 9px 0 0;
   border-radius: 4px;
-
-  &:focus {
-    outline: none;
-    background-color: var(--matterColorLight);
-    border-color: transparent;
-    text-decoration: none;
-    box-shadow: var(--boxShadowFilterButton);
-  }
 }
 
 .mapIcon {
