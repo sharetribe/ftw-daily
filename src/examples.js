@@ -40,6 +40,7 @@ import * as PaginationLinks from './components/PaginationLinks/PaginationLinks.e
 import * as ResponsiveImage from './components/ResponsiveImage/ResponsiveImage.example';
 import * as ReviewRating from './components/ReviewRating/ReviewRating.example';
 import * as Reviews from './components/Reviews/Reviews.example';
+import * as SectionSearchLinks from './components/SectionSearchLinks/SectionSearchLinks.example';
 import * as SelectField from './components/SelectField/SelectField.example';
 import * as StripeBankAccountTokenInputField from './components/StripeBankAccountTokenInputField/StripeBankAccountTokenInputField.example';
 import * as TabNav from './components/TabNav/TabNav.example';
@@ -123,6 +124,7 @@ export {
   ReviewForm,
   ReviewRating,
   Reviews,
+  SectionSearchLinks,
   SelectField,
   SendMessageForm,
   SignupForm,
