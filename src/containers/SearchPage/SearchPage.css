@@ -50,7 +50,7 @@
 
   @media (--viewportLarge) {
     flex-basis: 62.5%;
-    padding: 24px 36px 36px 36px;
+    padding: 23px 36px 36px 36px;
   }
 }
 
@@ -74,7 +74,6 @@
   @media (--viewportMedium) {
     display: flex;
     padding: 0 24px;
-    margin-top: 3px;
     margin-bottom: 21px;
   }
 }

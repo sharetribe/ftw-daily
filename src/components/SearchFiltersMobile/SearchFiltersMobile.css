@@ -63,9 +63,9 @@
 }
 
 .modalHeadingWrapper {
-  padding-bottom: 26px;
+  padding-bottom: 31px;
   border-bottom: 1px solid var(--matterColorNegative);
-  margin-bottom: 30px;
+  margin-bottom: 27px;
 }
 
 .modalHeading {
@@ -82,6 +82,7 @@
   display: inline;
   float: right;
   margin: 17px 0 0 0;
+  padding: 0;
 
   /* Override button styles */
   outline: none;
