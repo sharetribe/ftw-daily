@@ -1,22 +1,22 @@
-import SectionSearchLinks from './SectionSearchLinks';
+import SectionThumbnailLinks from './SectionThumbnailLinks';
 
 const imageAltText = 'styleguide alt text';
 
-export const TwoLinksWithHeadings = {
-  component: SectionSearchLinks,
+export const TwoNamedLinksWithHeadings = {
+  component: SectionThumbnailLinks,
   props: {
     linksPerRow: 2,
     links: [
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?1',
+        linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?1' } },
         text: 'Link 1',
       },
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?2',
+        linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?2' } },
         text: 'Link 2',
       },
     ],
@@ -26,27 +26,27 @@ export const TwoLinksWithHeadings = {
   group: 'sections',
 };
 
-export const ThreeLinksWithHeadings = {
-  component: SectionSearchLinks,
+export const ThreeExternalLinksWithHeadings = {
+  component: SectionThumbnailLinks,
   props: {
     linksPerRow: 3,
     links: [
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?1',
+        linkProps: { type: 'ExternalLink', href: 'http://example.com/1' },
         text: 'Link 1',
       },
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?2',
+        linkProps: { type: 'ExternalLink', href: 'http://example.com/2' },
         text: 'Link 2',
       },
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?3',
+        linkProps: { type: 'ExternalLink', href: 'http://example.com/3' },
         text: 'Link 3',
       },
     ],
@@ -57,32 +57,32 @@ export const ThreeLinksWithHeadings = {
 };
 
 export const FourLinks = {
-  component: SectionSearchLinks,
+  component: SectionThumbnailLinks,
   props: {
     linksPerRow: 2,
     links: [
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?1',
+        linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?1' } },
         text: 'Link 1 with quite a long text that tests how the items below align',
       },
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?2',
+        linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?2' } },
         text: 'Link 2',
       },
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?3',
+        linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?3' } },
         text: 'Link 3',
       },
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?4',
+        linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?4' } },
         text: 'Link 4',
       },
     ],
@@ -91,44 +91,45 @@ export const FourLinks = {
 };
 
 export const SixLinks = {
-  component: SectionSearchLinks,
+  component: SectionThumbnailLinks,
   props: {
     linksPerRow: 3,
     links: [
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?1',
+        linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?1' } },
         text: 'Link 1',
       },
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
+        linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?2' } },
         searchQuery: '?2',
         text: 'Link 2',
       },
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?3',
+        linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?3' } },
         text: 'Link 3',
       },
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?4',
+        linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?4' } },
         text: 'Link 4',
       },
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?5',
+        linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?5' } },
         text: 'Link 5',
       },
       {
         imageUrl: 'http://lorempixel.com/648/448/',
         imageAltText,
-        searchQuery: '?6',
+        linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?6' } },
         text: 'Link 6',
       },
     ],

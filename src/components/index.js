@@ -98,7 +98,7 @@ export { default as SearchResultsPanel } from './SearchResultsPanel/SearchResult
 export { default as SectionHero } from './SectionHero/SectionHero';
 export { default as SectionHowItWorks } from './SectionHowItWorks/SectionHowItWorks';
 export { default as SectionLocations } from './SectionLocations/SectionLocations';
-export { default as SectionSearchLinks } from './SectionSearchLinks/SectionSearchLinks';
+export { default as SectionThumbnailLinks } from './SectionThumbnailLinks/SectionThumbnailLinks';
 export { default as SelectField } from './SelectField/SelectField';
 export { default as SelectSingleFilter } from './SelectSingleFilter/SelectSingleFilter';
 export {
