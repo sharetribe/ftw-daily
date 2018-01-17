@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
 import { propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
-import { ensureListing } from '../../util/data';
+import { ensureOwnListing } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
 import { createResourceLocatorString } from '../../util/routes';
 import {
@@ -71,7 +71,7 @@ export const ManageListingCardComponent = props => {
     onToggleMenu,
   } = props;
   const classes = classNames(rootClassName || css.root, className);
-  const currentListing = ensureListing(listing);
+  const currentListing = ensureOwnListing(listing);
   const id = currentListing.id.uuid;
   const { title = '', price, closed } = currentListing.attributes;
   const slug = createSlug(title);
@@ -255,7 +255,7 @@ ManageListingCardComponent.propTypes = {
   hasClosingError: bool.isRequired,
   hasOpeningError: bool.isRequired,
   intl: intlShape.isRequired,
-  listing: propTypes.listing.isRequired,
+  listing: propTypes.ownListing.isRequired,
   isMenuOpen: bool.isRequired,
   actionsInProgressListingId: shape({ uuid: string.isRequired }),
   onCloseListing: func.isRequired,

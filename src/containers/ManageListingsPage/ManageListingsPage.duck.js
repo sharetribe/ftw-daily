@@ -42,15 +42,15 @@ const merge = (state, apiResponse) => {
 };
 
 const updateListingAttributes = (state, listingEntity) => {
-  const oldListing = state.ownEntities.listing[listingEntity.id.uuid];
+  const oldListing = state.ownEntities.ownListing[listingEntity.id.uuid];
   const updatedListing = { ...oldListing, attributes: listingEntity.attributes };
   const ownListingEntities = {
-    ...state.ownEntities.listing,
+    ...state.ownEntities.ownListing,
     [listingEntity.id.uuid]: updatedListing,
   };
   return {
     ...state,
-    ownEntities: { ...state.ownEntities, listing: ownListingEntities },
+    ownEntities: { ...state.ownEntities, ownListing: ownListingEntities },
   };
 };
 
@@ -146,7 +146,7 @@ export default manageListingsPageReducer;
 export const getListingsById = (state, listingIds) => {
   const { ownEntities } = state.ManageListingsPage;
   try {
-    return denormalisedEntities(ownEntities, 'listing', listingIds);
+    return denormalisedEntities(ownEntities, 'ownListing', listingIds);
   } catch (e) {
     return [];
   }
@@ -238,8 +238,8 @@ export const queryOwnListings = queryParams => (dispatch, getState, sdk) => {
 
   const { include = [], page, perPage } = queryParams;
 
-  return sdk.listings
-    .queryOwn({ include, page, per_page: perPage })
+  return sdk.ownListings
+    .query({ include, page, per_page: perPage })
     .then(response => {
       dispatch(addOwnEntities(response));
       dispatch(queryListingsSuccess(response));
@@ -254,7 +254,7 @@ export const queryOwnListings = queryParams => (dispatch, getState, sdk) => {
 export const closeListing = listingId => (dispatch, getState, sdk) => {
   dispatch(closeListingRequest(listingId));
 
-  return sdk.listings
+  return sdk.ownListings
     .close({ id: listingId }, { expand: true })
     .then(response => {
       dispatch(closeListingSuccess(response));
@@ -268,7 +268,7 @@ export const closeListing = listingId => (dispatch, getState, sdk) => {
 export const openListing = listingId => (dispatch, getState, sdk) => {
   dispatch(openListingRequest(listingId));
 
-  return sdk.listings
+  return sdk.ownListings
     .open({ id: listingId }, { expand: true })
     .then(response => {
       dispatch(openListingSuccess(response));

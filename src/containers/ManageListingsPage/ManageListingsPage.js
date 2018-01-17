@@ -171,7 +171,7 @@ ManageListingsPageComponent.propTypes = {
     listingId: propTypes.uuid.isRequired,
     error: propTypes.error.isRequired,
   }),
-  listings: arrayOf(propTypes.listing),
+  listings: arrayOf(propTypes.ownListing),
   onCloseListing: func.isRequired,
   onOpenListing: func.isRequired,
   openingListing: shape({ uuid: string.isRequired }),

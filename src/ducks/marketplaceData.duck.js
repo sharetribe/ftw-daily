@@ -47,6 +47,21 @@ export const getListingsById = (state, listingIds) => {
 };
 
 /**
+ * Get the denormalised ownListing entities with the given IDs
+ *
+ * @param {Object} state the full Redux store
+ * @param {Array<UUID>} listingIds listing IDs to select from the store
+ */
+export const getOwnListingsById = (state, listingIds) => {
+  const { entities } = state.marketplaceData;
+  try {
+    return denormalisedEntities(entities, 'ownListing', listingIds);
+  } catch (e) {
+    return [];
+  }
+};
+
+/**
  * Get the denormalised entities from the given entity references.
  *
  * @param {Object} state the full Redux store
