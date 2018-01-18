@@ -20,6 +20,7 @@ const express = require('express');
 const helmet = require('helmet');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const enforceSsl = require('express-enforces-ssl');
 const path = require('path');
 const sharetribeSdk = require('sharetribe-sdk');
@@ -31,6 +32,7 @@ const dataLoader = require('./dataLoader');
 const fs = require('fs');
 const log = require('./log');
 const { sitemapStructure } = require('./sitemap');
+const csp = require('./csp');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
 const env = process.env.REACT_APP_ENV || 'production';
@@ -41,6 +43,9 @@ const CLIENT_ID =
 const BASE_URL = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'http://localhost:8088';
 const USING_SSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 const TRUST_PROXY = process.env.SERVER_SHARETRIBE_TRUST_PROXY || null;
+const CSP = process.env.REACT_APP_CSP;
+const cspReportUrl = '/csp-report';
+const cspEnabled = CSP === 'block' || CSP === 'report';
 const app = express();
 
 const errorPage = fs.readFileSync(path.join(buildPath, '500.html'), 'utf-8');
@@ -59,6 +64,23 @@ app.use(log.requestHandler());
 // The helmet middleware sets various HTTP headers to improve security.
 // See: https://www.npmjs.com/package/helmet
 app.use(helmet());
+
+if (cspEnabled) {
+  // When a CSP directive is violated, the browser posts a JSON body
+  // to the defined report URL and we need to parse this body.
+  app.use(
+    bodyParser.json({
+      type: ['json', 'application/csp-report'],
+    })
+  );
+
+  // CSP can be turned on in report or block mode. In report mode, the
+  // browser checks the policy and calls the report URL when the
+  // policy is violated, but doesn't block any requests. In block
+  // mode, the browser also blocks the requests.
+  const reportOnly = CSP === 'report';
+  app.use(csp(cspReportUrl, USING_SSL, reportOnly));
+}
 
 // Redirect HTTP to HTTPS if USING_SSL is `true`.
 // This also works behind reverse proxies (load balancers) as they are for example used by Heroku.
@@ -192,6 +214,15 @@ app.get('*', (req, res) => {
 // Set error handler. If Sentry is set up, all error responses
 // will be logged there.
 app.use(log.errorHandler());
+
+if (cspEnabled) {
+  // Handler for CSP violation reports.
+  app.post(cspReportUrl, (req, res) => {
+    const report = req.body ? req.body['csp-report'] : null;
+    log.error(new Error('CSP violation'), 'csp-violation', report);
+    res.status(204).end();
+  });
+}
 
 app.listen(PORT, () => {
   const mode = dev ? 'development' : 'production';

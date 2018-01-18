@@ -70,5 +70,7 @@ exports.error = (e, code, data) => {
     Raven.captureException(e, { tags: { code }, extra: data });
   } else {
     console.error(e);
+    console.error(code);
+    console.error(data);
   }
 };
