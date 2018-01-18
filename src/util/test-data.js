@@ -92,6 +92,24 @@ export const createListing = (id, attributes = {}, includes = {}) => ({
   ...includes,
 });
 
+// Create a user that conforms to the util/types ownListing schema
+export const createOwnListing = (id, attributes = {}, includes = {}) => ({
+  id: new UUID(id),
+  type: 'ownListing',
+  attributes: {
+    title: `${id} title`,
+    description: `${id} description`,
+    address: `${id} address`,
+    geolocation: new LatLng(40, 60),
+    closed: false,
+    deleted: false,
+    price: new Money(5500, 'USD'),
+    customAttributes: {},
+    ...attributes,
+  },
+  ...includes,
+});
+
 export const createTxTransition = options => {
   return {
     at: new Date(Date.UTC(2017, 4, 1)),

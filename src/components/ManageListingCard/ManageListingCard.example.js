@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react';
 import ManageListingCard from './ManageListingCard';
-import { createListing, fakeIntl } from '../../util/test-data';
+import { createOwnListing, fakeIntl } from '../../util/test-data';
 
 const noop = () => null;
 
@@ -17,7 +17,7 @@ export const ManageListingCardWrapped = {
     hasClosingError: false,
     hasOpeningError: false,
     intl: fakeIntl,
-    listing: createListing('listing1'),
+    listing: createOwnListing('listing1'),
     isMenuOpen: false,
     onCloseListing: noop,
     onOpenListing: noop,
