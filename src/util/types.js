@@ -134,6 +134,19 @@ const listingAttributes = shape({
   deleted: propTypes.value(false).isRequired,
   price: propTypes.money,
   customAttributes: object,
+  publicData: object,
+});
+
+const ownListingAttributes = shape({
+  title: string.isRequired,
+  description: string.isRequired,
+  address: string.isRequired,
+  geolocation: propTypes.latlng.isRequired,
+  closed: bool.isRequired,
+  deleted: propTypes.value(false).isRequired,
+  price: propTypes.money,
+  customAttributes: object,
+  publicData: object,
 });
 
 const deletedListingAttributes = shape({
@@ -146,6 +159,15 @@ propTypes.listing = shape({
   id: propTypes.uuid.isRequired,
   type: propTypes.value('listing').isRequired,
   attributes: oneOfType([listingAttributes, deletedListingAttributes]).isRequired,
+  author: propTypes.user,
+  images: arrayOf(propTypes.image),
+});
+
+// Denormalised ownListing object
+propTypes.ownListing = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('ownListing').isRequired,
+  attributes: oneOfType([ownListingAttributes, deletedListingAttributes]).isRequired,
   author: propTypes.user,
   images: arrayOf(propTypes.image),
 });

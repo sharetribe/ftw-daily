@@ -144,6 +144,16 @@ export const ensureListing = listing => {
 /**
  * Create shell objects to ensure that attributes etc. exists.
  *
+ * @param {Object} listing entity object, which is to be ensured agains null values
+ */
+export const ensureOwnListing = listing => {
+  const empty = { id: null, type: 'ownListing', attributes: { customAttributes: {} }, images: [] };
+  return { ...empty, ...listing };
+};
+
+/**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
  * @param {Object} user entity object, which is to be ensured agains null values
  */
 export const ensureUser = user => {

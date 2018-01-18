@@ -216,22 +216,22 @@ export const removeListingImage = imageId => ({
 // take the params object that the corresponding SDK endpoint method
 // expects.
 
-// SDK method: listings.create
+// SDK method: ownListings.create
 export const createListing = requestAction(CREATE_LISTING_REQUEST);
 export const createListingSuccess = successAction(CREATE_LISTING_SUCCESS);
 export const createListingError = errorAction(CREATE_LISTING_ERROR);
 
-// SDK method: listings.update
+// SDK method: ownListings.update
 export const updateListing = requestAction(UPDATE_LISTING_REQUEST);
 export const updateListingSuccess = successAction(UPDATE_LISTING_SUCCESS);
 export const updateListingError = errorAction(UPDATE_LISTING_ERROR);
 
-// SDK method: listings.show
+// SDK method: ownListings.show
 export const showListings = requestAction(SHOW_LISTINGS_REQUEST);
 export const showListingsSuccess = successAction(SHOW_LISTINGS_SUCCESS);
 export const showListingsError = errorAction(SHOW_LISTINGS_ERROR);
 
-// SDK method: listings.uploadImage
+// SDK method: images.uploadListingImage
 export const uploadImage = requestAction(UPLOAD_IMAGE_REQUEST);
 export const uploadImageSuccess = successAction(UPLOAD_IMAGE_SUCCESS);
 export const uploadImageError = errorAction(UPLOAD_IMAGE_ERROR);
@@ -241,7 +241,7 @@ export const uploadImageError = errorAction(UPLOAD_IMAGE_ERROR);
 export function requestShowListing(actionPayload) {
   return (dispatch, getState, sdk) => {
     dispatch(showListings(actionPayload));
-    return sdk.listings
+    return sdk.ownListings
       .show(actionPayload)
       .then(response => {
         // EditListingPage fetches new listing data, which also needs to be added to global data
@@ -267,7 +267,7 @@ export function requestCreateListing(data) {
 
     dispatch(createListing(cleanedData));
 
-    return sdk.listings
+    return sdk.ownListings
       .create(cleanedData)
       .then(response => {
         const id = response.data.data.id.uuid;
@@ -312,7 +312,7 @@ export function requestUpdateListing(tab, data) {
     dispatch(updateListing(cleanedData));
     const { id } = cleanedData;
     let updateResponse;
-    return sdk.listings
+    return sdk.ownListings
       .update(cleanedData)
       .then(response => {
         updateResponse = response;

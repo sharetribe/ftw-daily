@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
-import { getListingsById } from '../../ducks/marketplaceData.duck';
+import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { stripeAccountClearError, createStripeAccount } from '../../ducks/user.duck';
 import { EditListingWizard, NamedRedirect, Page } from '../../components';
@@ -216,7 +216,8 @@ const mapStateToProps = state => {
   const fetchInProgress = createStripeAccountInProgress;
 
   const getListing = id => {
-    const listings = getListingsById(state, [id]);
+    const listings = getMarketplaceEntities(state, [{ id, type: 'ownListing' }]);
+
     return listings.length === 1 ? listings[0] : null;
   };
   return {
