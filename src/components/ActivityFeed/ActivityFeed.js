@@ -157,13 +157,13 @@ const resolveTransitionMessage = (
       return isOwnTransition ? (
         <FormattedMessage id="ActivityFeed.ownTransitionDecline" />
       ) : (
-        <FormattedMessage id="ActivityFeed.transitionDecline" />
+        <FormattedMessage id="ActivityFeed.transitionDecline" values={{ displayName }} />
       );
     case TRANSITION_EXPIRE:
       return ownRole === TX_TRANSITION_ACTOR_PROVIDER ? (
-        <FormattedMessage id="ActivityFeed.ownTransitionAutoDecline" />
+        <FormattedMessage id="ActivityFeed.ownTransitionExpire" />
       ) : (
-        <FormattedMessage id="ActivityFeed.transitionAutoDecline" values={{ displayName }} />
+        <FormattedMessage id="ActivityFeed.transitionExpire" values={{ displayName }} />
       );
     case TRANSITION_CANCEL:
       return <FormattedMessage id="ActivityFeed.transitionCancel" />;
