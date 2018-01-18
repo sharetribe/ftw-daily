@@ -3,6 +3,7 @@ const { config } = require('./importer');
 
 const dev = process.env.REACT_APP_ENV === 'development';
 const googleAnalyticsEnabled = !!process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
+const sentryClientEnabled = !!process.env.REACT_APP_PUBLIC_SENTRY_DSN;
 
 /**
  * Middleware for creating a Content Security Policy
@@ -32,6 +33,7 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
   const googleFonts = 'https://fonts.googleapis.com/';
   const stripeJs = 'https://js.stripe.com/';
   const stripeQ = 'https://q.stripe.com/';
+  const sentryApi = 'https://sentry.io/api/';
 
   const scriptSrc = [self, inline, googleMaps, stripeJs];
 
@@ -60,6 +62,9 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
     // enabled.
     scriptSrc.push(googleAnalytics);
     imgSrc.push(googleAnalytics);
+  }
+  if (sentryClientEnabled) {
+    connectSrc.push(sentryApi);
   }
   if (dev) {
     // The default Core docker-compose setup server images from this
