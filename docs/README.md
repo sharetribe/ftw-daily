@@ -18,3 +18,4 @@ Documentation for specific topics can be found in the following files:
 * [i18n](i18n.md)
 * [Colors and icons](colors-and-icons.md)
 * [Starting a new customisation project](starting-a-new-customisation-project.md)
+* [Google Maps](google-maps.md)
