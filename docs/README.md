@@ -19,3 +19,4 @@ Documentation for specific topics can be found in the following files:
 * [Colors and icons](colors-and-icons.md)
 * [Starting a new customisation project](starting-a-new-customisation-project.md)
 * [Google Maps](google-maps.md)
+* [Content Security Policy (CSP)](content-security-policy.md)
