@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, arrayOf, shape, node, oneOf, oneOfType } from 'prop-types';
+import { string, arrayOf, shape, node, object, oneOf, oneOfType } from 'prop-types';
 import classNames from 'classnames';
 import { ExternalLink, NamedLink } from '../../components';
 
@@ -16,14 +16,14 @@ const ThumbnailLink = props => {
     linkProps,
     text,
   } = props;
-  const { type, name, to, href } = linkProps;
+  const { type, name, params, to, href } = linkProps;
   const classes = classNames(rootClassName || css.link, className, {
     [css.link2Columns]: linksPerRow === 2,
     [css.link3Columns]: linksPerRow === 3,
   });
   const imageWrapperClasses = classNames(css.imageWrapper, imageWrapperClassName);
 
-  const LinkComponentProps = type === 'NamedLink' ? { name, to } : { href };
+  const LinkComponentProps = type === 'NamedLink' ? { name, params, to } : { href };
   const LinkComponent = type === 'NamedLink' ? NamedLink : ExternalLink;
 
   return (
@@ -88,6 +88,7 @@ SectionThumbnailLinks.defaultProps = {
 const namedLinkShape = shape({
   type: oneOf(['NamedLink']).isRequired,
   name: string.isRequired,
+  params: object,
   to: shape({
     search: string,
     hash: string,
