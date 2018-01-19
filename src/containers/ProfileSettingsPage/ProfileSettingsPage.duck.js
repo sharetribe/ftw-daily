@@ -1,4 +1,4 @@
-import { updatedEntities, denormalisedEntities } from '../../util/data';
+import { denormalisedResponseEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
 import { currentUserShowSuccess } from '../../ducks/user.duck';
 
@@ -134,11 +134,11 @@ export const updateProfile = actionPayload => {
       .then(response => {
         dispatch(updateProfileSuccess(response));
 
-        // Include profile image to denormalized user entity
-        const currentUserId = response.data.data.id;
-        const entities = updatedEntities({}, response.data);
-        const denormalised = denormalisedEntities(entities, 'currentUser', [currentUserId]);
-        const currentUser = denormalised[0];
+        const entities = denormalisedResponseEntities(response);
+        if (entities.length !== 1) {
+          throw new Error('Expected a resource in the sdk.currentUser.updateProfile response');
+        }
+        const currentUser = entities[0];
 
         // Update current user in state.user.currentUser through user.duck.js
         dispatch(currentUserShowSuccess(currentUser));

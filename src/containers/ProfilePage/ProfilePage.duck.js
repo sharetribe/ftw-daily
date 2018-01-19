@@ -1,6 +1,6 @@
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
-import { updatedEntities, denormalisedEntities } from '../../util/data';
+import { denormalisedResponseEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
 
 // ================ Action types ================ //
@@ -139,10 +139,8 @@ export const queryUserReviews = userId => (dispatch, getState, sdk) => {
   sdk.reviews
     .query({ subject_id: userId, state: 'public', include: ['author', 'author_profile_image'] })
     .then(response => {
-      const entities = updatedEntities({}, response.data);
-      const reviewIds = response.data.data.map(d => d.id);
-      const denormalized = denormalisedEntities(entities, 'review', reviewIds);
-      dispatch(queryReviewsSuccess(denormalized));
+      const reviews = denormalisedResponseEntities(response);
+      dispatch(queryReviewsSuccess(reviews));
     })
     .catch(e => dispatch(queryReviewsError(e)));
 };

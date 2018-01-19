@@ -1,4 +1,4 @@
-import { updatedEntities, denormalisedEntities } from '../util/data';
+import { denormalisedResponseEntities } from '../util/data';
 import { storableError } from '../util/errors';
 import { TRANSITION_REQUEST, TRANSITION_REQUEST_AFTER_ENQUIRY } from '../util/types';
 import * as log from '../util/log';
@@ -335,11 +335,12 @@ export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
   return sdk.currentUser
     .show({ include: ['profileImage'] })
     .then(response => {
-      // Include profile image to denormalized user entity
-      const currentUserId = response.data.data.id;
-      const entities = updatedEntities({}, response.data);
-      const denormalised = denormalisedEntities(entities, 'currentUser', [currentUserId]);
-      const currentUser = denormalised[0];
+      const entities = denormalisedResponseEntities(response);
+      if (entities.length !== 1) {
+        throw new Error('Expected a resource in the sdk.currentUser.show response');
+      }
+      const currentUser = entities[0];
+
       // set current user id to the logger
       log.setUserId(currentUser.id.uuid);
       dispatch(currentUserShowSuccess(currentUser));

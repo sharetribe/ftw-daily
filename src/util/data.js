@@ -105,6 +105,29 @@ export const denormalisedEntities = (entities, type, ids) => {
 };
 
 /**
+ * Denormalise the data from the given SDK response
+ *
+ * @param {Object} sdkResponse response object from an SDK call
+ *
+ * @return {Array} entities in the response with relationships
+ * denormalised from the included data
+ */
+export const denormalisedResponseEntities = sdkResponse => {
+  const apiResponse = sdkResponse.data;
+  const data = apiResponse.data;
+  const resources = Array.isArray(data) ? data : [data];
+
+  if (!data || resources.length === 0) {
+    return [];
+  }
+
+  const entities = updatedEntities({}, apiResponse);
+  const type = resources[0].type;
+  const resourceIds = resources.map(r => r.id);
+  return denormalisedEntities(entities, type, resourceIds);
+};
+
+/**
  * Create shell objects to ensure that attributes etc. exists.
  *
  * @param {Object} transaction entity object, which is to be ensured agains null values

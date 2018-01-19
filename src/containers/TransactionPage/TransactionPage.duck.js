@@ -10,7 +10,11 @@ import {
   TRANSITION_REVIEW_2_BY_PROVIDER,
 } from '../../util/types';
 import * as log from '../../util/log';
-import { updatedEntities, denormalisedEntities } from '../../util/data';
+import {
+  updatedEntities,
+  denormalisedEntities,
+  denormalisedResponseEntities,
+} from '../../util/data';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
 
@@ -302,15 +306,13 @@ const fetchMessages = (txId, page) => (dispatch, getState, sdk) => {
   return sdk.messages
     .query({ transaction_id: txId, include: ['sender', 'sender.profileImage'], ...paging })
     .then(response => {
-      const entities = updatedEntities({}, response.data);
-      const messageIds = response.data.data.map(d => d.id);
-      const denormalizedMessages = denormalisedEntities(entities, 'message', messageIds);
+      const messages = denormalisedResponseEntities(response);
       const { totalItems, totalPages, page: fetchedPage } = response.data.meta;
       const pagination = { totalItems, totalPages, page: fetchedPage };
       const totalMessages = getState().TransactionPage.totalMessages;
 
       // Original fetchMessages call succeeded
-      dispatch(fetchMessagesSuccess(denormalizedMessages, pagination));
+      dispatch(fetchMessagesSuccess(messages, pagination));
 
       // Check if totalItems has changed between fetched pagination pages
       // if totalItems has changed, fetch first page again to include new incoming messages.

@@ -1,5 +1,5 @@
 import { pick } from 'lodash';
-import { updatedEntities, denormalisedEntities } from '../../util/data';
+import { denormalisedResponseEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
 import { TRANSITION_REQUEST } from '../../util/types';
 import * as log from '../../util/log';
@@ -176,10 +176,11 @@ export const speculateTransaction = (listingId, bookingStart, bookingEnd) => (
   return sdk.transactions
     .initiateSpeculative(bodyParams, queryParams)
     .then(response => {
-      const transactionId = response.data.data.id;
-      const entities = updatedEntities({}, response.data);
-      const denormalised = denormalisedEntities(entities, 'transaction', [transactionId]);
-      const tx = denormalised[0];
+      const entities = denormalisedResponseEntities(response);
+      if (entities.length !== 1) {
+        throw new Error('Expected a resource in the sdk.transactions.initiateSpeculative response');
+      }
+      const tx = entities[0];
       dispatch(speculateTransactionSuccess(tx));
     })
     .catch(e => {
