@@ -222,6 +222,7 @@ export class ListingPageComponent extends Component {
     const {
       unitType,
       tab,
+      isAuthenticated,
       currentUser,
       getListing,
       intl,
@@ -583,7 +584,7 @@ export class ListingPageComponent extends Component {
                     <Modal
                       id="ListingPage.enquiry"
                       contentClassName={css.enquiryModalContent}
-                      isOpen={this.state.enquiryModalOpen}
+                      isOpen={isAuthenticated && this.state.enquiryModalOpen}
                       onClose={() => this.setState({ enquiryModalOpen: false })}
                       onManageDisableScrolling={onManageDisableScrolling}
                     >
@@ -690,6 +691,7 @@ ListingPageComponent.propTypes = {
     id: string.isRequired,
     slug: string,
   }).isRequired,
+  isAuthenticated: bool.isRequired,
   currentUser: propTypes.currentUser,
   getListing: func.isRequired,
   onManageDisableScrolling: func.isRequired,
@@ -706,6 +708,7 @@ ListingPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
+  const { isAuthenticated } = state.Auth;
   const {
     showListingError,
     reviews,
@@ -722,6 +725,7 @@ const mapStateToProps = state => {
   };
 
   return {
+    isAuthenticated,
     currentUser,
     getListing,
     scrollingDisabled: isScrollingDisabled(state),
