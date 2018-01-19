@@ -34,10 +34,11 @@ const initialState = {
 
 const resultIds = data => data.data.map(l => l.id);
 
-const merge = (state, apiResponse) => {
+const merge = (state, sdkResponse) => {
+  const apiResponse = sdkResponse.data;
   return {
     ...state,
-    ownEntities: updatedEntities({ ...state.ownEntities }, apiResponse.data),
+    ownEntities: updatedEntities({ ...state.ownEntities }, apiResponse),
   };
 };
 
@@ -179,9 +180,9 @@ export const getOwnEntities = (state, entityRefs) => {
 // This works the same way as addMarketplaceEntities,
 // but we don't want to mix own listings with searched listings
 // (own listings data contains different info - e.g. exact location etc.)
-export const addOwnEntities = apiResponse => ({
+export const addOwnEntities = sdkResponse => ({
   type: ADD_OWN_ENTITIES,
-  payload: apiResponse,
+  payload: sdkResponse,
 });
 
 export const openListingRequest = listingId => ({
