@@ -11,6 +11,7 @@ import * as EditListingWizard from './components/EditListingWizard/EditListingWi
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
 import * as FieldCheckbox from './components/FieldCheckbox/FieldCheckbox.example';
 import * as FieldReviewRating from './components/FieldReviewRating/FieldReviewRating.example';
+import * as FieldSetCheckbox from './components/FieldSetCheckbox/FieldSetCheckbox.example';
 import * as Footer from './components/Footer/Footer.example';
 import * as IconBannedUser from './components/IconBannedUser/IconBannedUser.example';
 import * as IconCheckmark from './components/IconCheckmark/IconCheckmark.example';
@@ -91,6 +92,7 @@ export {
   ExpandingTextarea,
   FieldCheckbox,
   FieldReviewRating,
+  FieldSetCheckbox,
   Footer,
   IconBannedUser,
   IconCheckmark,
