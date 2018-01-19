@@ -40,11 +40,12 @@ export default function marketplaceDataReducer(state = initialState, action = {}
  */
 export const getListingsById = (state, listingIds) => {
   const { entities } = state.marketplaceData;
-  try {
-    return denormalisedEntities(entities, 'listing', listingIds);
-  } catch (e) {
-    return [];
-  }
+  const resources = listingIds.map(id => ({
+    id,
+    type: 'listing',
+  }));
+  const throwIfNotFound = false;
+  return denormalisedEntities(entities, resources, throwIfNotFound);
 };
 
 /**
@@ -60,13 +61,8 @@ export const getListingsById = (state, listingIds) => {
  */
 export const getMarketplaceEntities = (state, entityRefs) => {
   const { entities } = state.marketplaceData;
-  const type = entityRefs.length > 0 ? entityRefs[0].type : null;
-  const ids = entityRefs.map(ref => ref.id);
-  try {
-    return denormalisedEntities(entities, type, ids);
-  } catch (e) {
-    return [];
-  }
+  const throwIfNotFound = false;
+  return denormalisedEntities(entities, entityRefs, throwIfNotFound);
 };
 
 // ================ Action creators ================ //

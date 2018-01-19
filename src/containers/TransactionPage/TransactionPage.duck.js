@@ -225,7 +225,8 @@ export const fetchTransaction = id => (dispatch, getState, sdk) => {
       txResponse = response;
       const listingId = listingRelationship(response).id;
       const entities = updatedEntities({}, response.data);
-      const denormalised = denormalisedEntities(entities, 'listing', [listingId]);
+      const listingRef = { id: listingId, type: 'listing' };
+      const denormalised = denormalisedEntities(entities, [listingRef]);
       const listing = denormalised[0];
 
       const canFetchListing = listing && listing.attributes && !listing.attributes.deleted;

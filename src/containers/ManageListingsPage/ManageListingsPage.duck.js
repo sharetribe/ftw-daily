@@ -144,35 +144,14 @@ export default manageListingsPageReducer;
  * @param {Object} state the full Redux store
  * @param {Array<UUID>} listingIds listing IDs to select from the store
  */
-export const getListingsById = (state, listingIds) => {
+export const getOwnListingsById = (state, listingIds) => {
   const { ownEntities } = state.ManageListingsPage;
-  try {
-    return denormalisedEntities(ownEntities, 'ownListing', listingIds);
-  } catch (e) {
-    return [];
-  }
-};
-
-/**
- * Get the denormalised own entities from the given entity references.
- *
- * @param {Object} state the full Redux store
- *
- * @param {Array<{ id, type }} entityRefs References to entities that
- * we want to query from the data. Currently we expect that all the
- * entities have the same type.
- *
- * @return {Array<Object>} denormalised entities
- */
-export const getOwnEntities = (state, entityRefs) => {
-  const { ownEntities } = state.ManageListingsPage;
-  const type = entityRefs.length > 0 ? entityRefs[0].type : null;
-  const ids = entityRefs.map(ref => ref.id);
-  try {
-    return denormalisedEntities(ownEntities, type, ids);
-  } catch (e) {
-    return [];
-  }
+  const resources = listingIds.map(id => ({
+    id,
+    type: 'ownListing',
+  }));
+  const throwIfNotFound = false;
+  return denormalisedEntities(ownEntities, resources, throwIfNotFound);
 };
 
 // ================ Action creators ================ //
