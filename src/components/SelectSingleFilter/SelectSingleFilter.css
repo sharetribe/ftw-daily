@@ -69,7 +69,7 @@
 }
 
 .menuItem {
-  @apply --marketplaceSearchFilterOptionFontStyles;
+  @apply --marketplaceListingAttributeFontStyles;
   color: var(--matterColor);
 
   /* Layout */

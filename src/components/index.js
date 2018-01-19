@@ -27,6 +27,7 @@ export { default as EditListingWizard } from './EditListingWizard/EditListingWiz
 export { default as ExpandingTextarea } from './ExpandingTextarea/ExpandingTextarea';
 export { default as ExternalLink } from './ExternalLink/ExternalLink';
 export { default as FilterPanel } from './FilterPanel/FilterPanel';
+export { default as FieldCheckbox } from './FieldCheckbox/FieldCheckbox';
 export {
   default as FieldCustomAttributeSelect,
 } from './FieldCustomAttributeSelect/FieldCustomAttributeSelect';
