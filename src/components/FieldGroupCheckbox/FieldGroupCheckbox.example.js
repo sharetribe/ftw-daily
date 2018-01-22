@@ -3,12 +3,12 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { Button } from '../../components';
 import FieldGroupCheckbox from './FieldGroupCheckbox';
 
-const formName = 'Styleguide.FieldGroupCheckbox';
+const formName = 'Styleguide.FieldGroupCheckboxForm';
 
 const legend = <h3>Amenities</h3>;
 
 const componentProps = {
-  name: 'amenities',
+  id: `${formName}.amenities`,
   legend: legend,
   options: [
     {

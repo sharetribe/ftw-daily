@@ -12,7 +12,7 @@ class FieldGroupCheckbox extends Component {
   }
 
   render() {
-    const { rootClassName, className, name, legend, options, twoColumns } = this.props;
+    const { rootClassName, className, id, legend, options, twoColumns } = this.props;
     const classes = classNames(rootClassName || css.root, className);
     const listClasses = twoColumns ? classNames(css.list, css.twoColumns) : css.list;
 
@@ -21,10 +21,10 @@ class FieldGroupCheckbox extends Component {
         {legend ? <legend>{legend}</legend> : null}
         <ul className={listClasses}>
           {options.map(option => {
-            const id = `${name}-${option.name}`;
+            const fieldId = `${id}.${option.name}`;
             return (
-              <li key={id} className={css.item}>
-                <FieldCheckbox id={id} name={option.name} text={option.text} />
+              <li key={fieldId} className={css.item}>
+                <FieldCheckbox id={fieldId} name={option.name} text={option.text} />
               </li>
             );
           })}
@@ -46,7 +46,7 @@ const { arrayOf, bool, node, shape, string } = PropTypes;
 FieldGroupCheckbox.propTypes = {
   rootClassName: string,
   className: string,
-  name: string.isRequired,
+  id: string.isRequired,
   legend: node,
   options: arrayOf(
     shape({
