@@ -187,38 +187,43 @@ describe('data utils', () => {
       attributes: { url: `https://example.com/${id}.jpg`, width: 300, height: 200 },
     });
 
-    it('return no results with empty ids', () => {
+    it('returns no results with empty resources', () => {
       const entities = { listing: { listing1: createListing('listing1') } };
-      expect(denormalisedEntities(entities, 'listing', [])).toEqual([]);
+      expect(denormalisedEntities(entities, [])).toEqual([]);
     });
 
-    it('return no results with empty entities and empty ids', () => {
+    it('returns no results with empty entities and empty ids', () => {
       const entities = {};
-      expect(denormalisedEntities(entities, 'listing', [])).toEqual([]);
+      expect(denormalisedEntities(entities, [])).toEqual([]);
     });
 
-    it('throws when selecting a nonexistent type', () => {
+    it('handles selecting a nonexistent resource of different type', () => {
       const entities = { listing: { listing1: createListing('listing1') } };
-      expect(() => denormalisedEntities(entities, 'user', [new UUID('user1')])).toThrow(
-        'No entities of type user'
+      const user = createUser('user1');
+      expect(() => denormalisedEntities(entities, [user])).toThrow(
+        'Entity with type "user" and id "user1" not found'
       );
+      // Empty results when error throwIfNotFound=false
+      expect(denormalisedEntities(entities, [user], false)).toEqual([]);
     });
 
-    it('throws when selecting a nonexistent id', () => {
+    it('handles selecting a nonexistent resource of same type', () => {
       const entities = { listing: { listing1: createListing('listing1') } };
-      const ids = [new UUID('listing2')];
-      expect(() => denormalisedEntities(entities, 'listing', ids)).toThrow(
-        'Entity listing with id listing2 not found'
+      const listing2 = createListing('listing2');
+      expect(() => denormalisedEntities(entities, [listing2])).toThrow(
+        'Entity with type "listing" and id "listing2" not found'
       );
+      // Empty results when error throwIfNotFound=false
+      expect(denormalisedEntities(entities, [listing2], false)).toEqual([]);
     });
 
     it('throws if a related entity is not found', () => {
       const listing1 = createListing('listing1');
       listing1.relationships = { author: { data: createUser('user1') } };
       const entities = { listing: { listing1 } };
-      const ids = [listing1.id];
-      expect(() => denormalisedEntities(entities, 'listing', ids)).toThrow(
-        'No entities of type user'
+      const resources = [listing1];
+      expect(() => denormalisedEntities(entities, resources)).toThrow(
+        'Entity with type "user" and id "user1" not found'
       );
     });
 
@@ -228,8 +233,39 @@ describe('data utils', () => {
       const listing3 = createListing('listing3');
 
       const entities = { listing: { listing1, listing2, listing3 } };
-      const ids = [listing1.id, listing3.id];
-      expect(denormalisedEntities(entities, 'listing', ids)).toEqual([listing1, listing3]);
+      const resources = [listing1, listing3];
+      expect(denormalisedEntities(entities, resources)).toEqual([listing1, listing3]);
+    });
+
+    it('returns entities of different types', () => {
+      const user1 = createUser('user1');
+      const listing1 = createListing('listing1');
+      const entities = {
+        listing: { listing1 },
+        user: { user1 },
+      };
+      expect(denormalisedEntities(entities, [listing1, user1])).toEqual([listing1, user1]);
+    });
+
+    it('throws with circular relationships', () => {
+      // Currently the data handling code cannot handle circular
+      // relationships. These are possible in practice with certain
+      // include params in different API queries, but fixing this is
+      // not trivial. The denormalisation cannot skip entities that
+      // are already added since that would remove the fundamental
+      // feature of updating entities with new data.
+
+      const user1 = createUser('user1');
+      const listing1 = createListing('listing1');
+      const listing1Relationships = { author: { data: user1 } };
+      const listing1WithRelationships = { ...listing1, relationships: listing1Relationships };
+      const user1Relationships = { topListing: { data: listing1 } };
+      const user1WithRelationships = { ...user1, relationships: user1Relationships };
+      const entities = {
+        listing: { listing1: listing1WithRelationships },
+        user: { user1: user1WithRelationships },
+      };
+      expect(() => denormalisedEntities(entities, [listing1])).toThrow();
     });
 
     it('denormalises simple relationships', () => {
@@ -242,10 +278,7 @@ describe('data utils', () => {
         listing: { listing1: listing1WithRelationships, listing2 },
         user: { user1 },
       };
-      const ids = [listing1.id];
-      expect(denormalisedEntities(entities, 'listing', ids)).toEqual([
-        { ...listing1, author: user1 },
-      ]);
+      expect(denormalisedEntities(entities, [listing1])).toEqual([{ ...listing1, author: user1 }]);
     });
 
     it('denormalises multiple relationships', () => {
@@ -265,9 +298,8 @@ describe('data utils', () => {
         user: { user1 },
         image: { image1, image2 },
       };
-      const ids = [listing1.id, listing2.id];
 
-      expect(denormalisedEntities(entities, 'listing', ids)).toEqual([
+      expect(denormalisedEntities(entities, [listing1, listing2])).toEqual([
         { ...listing1, author: user1, images: [image1, image2] },
         listing2,
       ]);
@@ -287,9 +319,8 @@ describe('data utils', () => {
         listing: { listing1: listing1WithRelationships, listing2, listing3 },
         user: { user1 },
       };
-      const ids = [listing1.id, listing2.id];
 
-      expect(denormalisedEntities(entities, 'listing', ids)).toEqual([
+      expect(denormalisedEntities(entities, [listing1, listing2])).toEqual([
         { ...listing1, author: null, images: [] },
         listing2,
       ]);

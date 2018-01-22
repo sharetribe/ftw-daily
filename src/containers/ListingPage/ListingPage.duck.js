@@ -2,7 +2,7 @@ import { pick } from 'lodash';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
-import { updatedEntities, denormalisedEntities } from '../../util/data';
+import { denormalisedResponseEntities } from '../../util/data';
 import { TRANSITION_ENQUIRE } from '../../util/types';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
@@ -117,10 +117,8 @@ export const fetchReviews = listingId => (dispatch, getState, sdk) => {
   return sdk.reviews
     .query({ listing_id: listingId, state: 'public', include: ['author', 'author.profileImage'] })
     .then(response => {
-      const entities = updatedEntities({}, response.data);
-      const reviewIds = response.data.data.map(d => d.id);
-      const denormalized = denormalisedEntities(entities, 'review', reviewIds);
-      dispatch(fetchReviewsSuccess(denormalized));
+      const reviews = denormalisedResponseEntities(response);
+      dispatch(fetchReviewsSuccess(reviews));
     })
     .catch(e => {
       dispatch(fetchReviewsError(storableError(e)));

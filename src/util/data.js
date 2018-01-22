@@ -39,7 +39,6 @@ export const updatedEntities = (oldEntities, apiResponse) => {
   const { data, included = [] } = apiResponse;
   const objects = (Array.isArray(data) ? data : [data]).concat(included);
 
-  /* eslint-disable no-param-reassign */
   const newEntities = objects.reduce((entities, curr) => {
     const { id, type } = curr;
     entities[type] = entities[type] || {};
@@ -47,30 +46,36 @@ export const updatedEntities = (oldEntities, apiResponse) => {
     entities[type][id.uuid] = entity ? combinedResourceObjects(entity, curr) : curr;
     return entities;
   }, oldEntities);
-  /* eslint-enable no-param-reassign */
 
   return newEntities;
 };
 
 /**
- * Denormalise the entities with the given IDs from the entities object
+ * Denormalise the entities with the resources from the entities object
  *
  * This function calculates the dernormalised tree structure from the
  * normalised entities object with all the relationships joined in.
  *
  * @param {Object} entities entities object in the SDK Redux store
- * @param {String} type entity type of the given IDs
- * @param {Array<UUID>} ids IDs to pick from the entities
+ * @param {Array<{ id, type }} resources array of objects
+ * with id and type
+ * @param {Boolean} throwIfNotFound wheather to skip a resource that
+ * is not found (false), or to throw an Error (true)
+ *
+ * @return {Array} the given resource objects denormalised that were
+ * found in the entities
  */
-export const denormalisedEntities = (entities, type, ids) => {
-  if (!entities[type] && ids.length > 0) {
-    throw new Error(`No entities of type ${type}`);
-  }
-  return ids.map(id => {
-    const entity = entities[type][id.uuid];
-    if (!entity) {
-      throw new Error(`Entity ${type} with id ${id.uuid} not found`);
+export const denormalisedEntities = (entities, resources, throwIfNotFound = true) => {
+  const denormalised = resources.map(res => {
+    const { id, type } = res;
+    const entityFound = entities[type] && id && entities[type][id.uuid];
+    if (!entityFound) {
+      if (throwIfNotFound) {
+        throw new Error(`Entity with type "${type}" and id "${id ? id.uuid : id}" not found`);
+      }
+      return null;
     }
+    const entity = entities[type][id.uuid];
     const { relationships, ...entityData } = entity;
 
     if (relationships) {
@@ -84,15 +89,13 @@ export const denormalisedEntities = (entities, type, ids) => {
           const hasMultipleRefs = Array.isArray(relRef.data);
           const multipleRefsEmpty = hasMultipleRefs && relRef.data.length === 0;
           if (!relRef.data || multipleRefsEmpty) {
-            // eslint-disable-next-line no-param-reassign
             ent[relName] = hasMultipleRefs ? [] : null;
           } else {
             const refs = hasMultipleRefs ? relRef.data : [relRef.data];
-            const relIds = refs.map(ref => ref.id);
-            const relType = refs[0].type;
-            const rels = denormalisedEntities(entities, relType, relIds);
 
-            // eslint-disable-next-line no-param-reassign
+            // If a relationship is not found, an Error should be thrown
+            const rels = denormalisedEntities(entities, refs, true);
+
             ent[relName] = hasMultipleRefs ? rels : rels[0];
           }
           return ent;
@@ -102,6 +105,28 @@ export const denormalisedEntities = (entities, type, ids) => {
     }
     return entityData;
   });
+  return denormalised.filter(e => !!e);
+};
+
+/**
+ * Denormalise the data from the given SDK response
+ *
+ * @param {Object} sdkResponse response object from an SDK call
+ *
+ * @return {Array} entities in the response with relationships
+ * denormalised from the included data
+ */
+export const denormalisedResponseEntities = sdkResponse => {
+  const apiResponse = sdkResponse.data;
+  const data = apiResponse.data;
+  const resources = Array.isArray(data) ? data : [data];
+
+  if (!data || resources.length === 0) {
+    return [];
+  }
+
+  const entities = updatedEntities({}, apiResponse);
+  return denormalisedEntities(entities, resources);
 };
 
 /**

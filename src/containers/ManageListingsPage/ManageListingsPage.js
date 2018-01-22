@@ -22,7 +22,7 @@ import { TopbarContainer } from '../../containers';
 import {
   closeListing,
   openListing,
-  getListingsById,
+  getOwnListingsById,
   queryOwnListings,
 } from './ManageListingsPage.duck';
 import css from './ManageListingsPage.css';
@@ -201,7 +201,7 @@ const mapStateToProps = state => {
     closingListing,
     closingListingError,
   } = state.ManageListingsPage;
-  const listings = getListingsById(state, currentPageResultIds);
+  const listings = getOwnListingsById(state, currentPageResultIds);
   return {
     currentPageResultIds,
     listings,
