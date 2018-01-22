@@ -1,0 +1,49 @@
+@import '../../marketplace.css';
+
+.root {
+  margin: 0;
+}
+
+.twoColumns {
+  @media (--viewportMedium) {
+    columns: 2;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+
+  /* Fix broken multi-column layout in Chrome */
+  page-break-inside: avoid;
+}
+
+.check {
+  margin: 1px 8px -1px 0;
+}
+
+.selectedText,
+.notSelectedText {
+  @apply --marketplaceBodyFontStyles;
+  margin: 0;
+}
+
+.selectedText {
+  font-weight: var(--fontWeightSemiBold);
+}
+
+.notSelectedText {
+  color: var(--matterColorNegative);
+  position: relative;
+  margin-left: 17px;
+}
+
+/* line-through */
+.notSelectedText::after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 58%;
+  content: '';
+  border-bottom: solid 1px var(--matterColorNegative);
+}

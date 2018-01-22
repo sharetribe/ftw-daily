@@ -38,6 +38,7 @@ import * as Modal from './components/Modal/Modal.example';
 import * as ModalInMobile from './components/ModalInMobile/ModalInMobile.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
 import * as PaginationLinks from './components/PaginationLinks/PaginationLinks.example';
+import * as PropertyGroup from './components/PropertyGroup/PropertyGroup.example';
 import * as ResponsiveImage from './components/ResponsiveImage/ResponsiveImage.example';
 import * as ReviewRating from './components/ReviewRating/ReviewRating.example';
 import * as Reviews from './components/Reviews/Reviews.example';
@@ -122,6 +123,7 @@ export {
   PasswordRecoveryForm,
   PasswordResetForm,
   PayoutDetailsForm,
+  PropertyGroup,
   ResponsiveImage,
   ReviewForm,
   ReviewRating,
