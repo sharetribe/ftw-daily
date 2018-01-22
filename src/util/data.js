@@ -231,27 +231,3 @@ export const userAbbreviatedName = (user, bannedUserAbbreviatedName) => {
     return '';
   }
 };
-
-/**
- * Temporary utility function to parse address field.
- * Location address is currently serialized inside address field.
- *
- * TODO: address will be moved to custom field, when API supports custom fields.
- */
-export const parseAddress = address => {
-  if (!(typeof address === 'string' || address == null)) {
-    throw new Error('Address must be a string.');
-  }
-
-  // Content is serialized as { locationAddress: 'Street, Province, Country', building: 'A 42' };
-  let locationAddress = '';
-  let building = '';
-  try {
-    const deserializedAddress = JSON.parse(address || '{}');
-    locationAddress = deserializedAddress.locationAddress || '';
-    building = deserializedAddress.building || '';
-  } catch (e) {
-    locationAddress = address;
-  }
-  return { locationAddress, building };
-};

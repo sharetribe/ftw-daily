@@ -46,9 +46,14 @@ const submitText = (intl, isNew, step) => {
  * @return object containing activity / editability of different steps of this wizard
  */
 const stepsActive = listing => {
-  const { address, description, geolocation, price, title } = listing.attributes;
-  const descriptionStep = !!title && !!description;
-  const locationStep = !!address && !!geolocation;
+  const { description, geolocation, price, title, publicData } = listing.attributes;
+  const descriptionStep = !!(title && description);
+  const locationStep = !!(
+    geolocation &&
+    publicData &&
+    publicData.location &&
+    publicData.location.address
+  );
   const pricingStep = !!price;
 
   // photosStep is about adding listing.images
@@ -129,8 +134,13 @@ const EditListingWizard = props => {
         submitButtonText={submitText(intl, isNew, DESCRIPTION)}
         onChange={onChange}
         onSubmit={values => {
-          const { title, description, ...rest } = values;
-          const updateValues = { title, description, customAttributes: { ...rest } };
+          const { title, description, category } = values;
+          const updateValues = {
+            title,
+            description,
+            customAttributes: { category },
+            publicData: { category },
+          };
 
           if (isNew) {
             onUpsertListingDraft(updateValues);
@@ -160,12 +170,14 @@ const EditListingWizard = props => {
           const { building, location } = values;
           const { selectedPlace: { address, origin } } = location;
           const updateValues = {
-            address: JSON.stringify({ locationAddress: address, building }),
             geolocation: origin,
+            address,
+            publicData: {
+              location: { address, building },
+            },
           };
 
           if (isNew) {
-            // TODO When API supports building number, etc. change this to use those fields instead.
             onUpdateListingDraft(updateValues);
             const pathParams = tabParams(PRICING);
             // Redirect to pricing tab
@@ -222,8 +234,8 @@ const EditListingWizard = props => {
         submitButtonText={submitText(intl, isNew, PHOTOS)}
         onChange={onChange}
         onSubmit={values => {
-          const { country, images: updatedImages } = values;
-          const updateValues = { ...listing.attributes, country, images: updatedImages };
+          const { images: updatedImages } = values;
+          const updateValues = { ...listing.attributes, images: updatedImages };
           if (isNew) {
             onCreateListing(updateValues);
           } else {
