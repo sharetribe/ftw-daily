@@ -27,9 +27,11 @@ export { default as EditListingWizard } from './EditListingWizard/EditListingWiz
 export { default as ExpandingTextarea } from './ExpandingTextarea/ExpandingTextarea';
 export { default as ExternalLink } from './ExternalLink/ExternalLink';
 export { default as FilterPanel } from './FilterPanel/FilterPanel';
+export { default as FieldCheckbox } from './FieldCheckbox/FieldCheckbox';
 export {
   default as FieldCustomAttributeSelect,
 } from './FieldCustomAttributeSelect/FieldCustomAttributeSelect';
+export { default as FieldGroupCheckbox } from './FieldGroupCheckbox/FieldGroupCheckbox';
 export { default as FieldReviewRating } from './FieldReviewRating/FieldReviewRating';
 export { default as Footer } from './Footer/Footer';
 export { default as Form } from './Form/Form';

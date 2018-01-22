@@ -9,6 +9,8 @@ import * as CurrencyInputField from './components/CurrencyInputField/CurrencyInp
 import * as DateRangeInputField from './components/DateRangeInputField/DateRangeInputField.example';
 import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
+import * as FieldCheckbox from './components/FieldCheckbox/FieldCheckbox.example';
+import * as FieldGroupCheckbox from './components/FieldGroupCheckbox/FieldGroupCheckbox.example';
 import * as FieldReviewRating from './components/FieldReviewRating/FieldReviewRating.example';
 import * as Footer from './components/Footer/Footer.example';
 import * as IconBannedUser from './components/IconBannedUser/IconBannedUser.example';
@@ -88,6 +90,8 @@ export {
   EmailVerificationForm,
   EnquiryForm,
   ExpandingTextarea,
+  FieldCheckbox,
+  FieldGroupCheckbox,
   FieldReviewRating,
   Footer,
   IconBannedUser,
