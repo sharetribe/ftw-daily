@@ -22,7 +22,8 @@
     display: inline;
   }
 
-  /* Hightlight the text on hover */
+  /* Hightlight the text on hover and focus */
+  &:focus + label .text,
   &:hover + label .text {
     color: var(--matterColorDark);
   }
