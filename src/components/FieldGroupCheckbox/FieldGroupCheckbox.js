@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { FieldCheckbox } from '../../components';
-import css from './FieldSetCheckbox.css';
+import css from './FieldGroupCheckbox.css';
 
-class FieldSetCheckbox extends Component {
+class FieldGroupCheckbox extends Component {
   constructor(props) {
     super(props);
     this.state = { selected: [] };
@@ -34,7 +34,7 @@ class FieldSetCheckbox extends Component {
   }
 }
 
-FieldSetCheckbox.defaultProps = {
+FieldGroupCheckbox.defaultProps = {
   rootClassName: null,
   className: null,
   legend: null,
@@ -43,7 +43,7 @@ FieldSetCheckbox.defaultProps = {
 
 const { arrayOf, bool, node, shape, string } = PropTypes;
 
-FieldSetCheckbox.propTypes = {
+FieldGroupCheckbox.propTypes = {
   rootClassName: string,
   className: string,
   name: string.isRequired,
@@ -57,4 +57,4 @@ FieldSetCheckbox.propTypes = {
   twoColumns: bool,
 };
 
-export default FieldSetCheckbox;
+export default FieldGroupCheckbox;

@@ -31,8 +31,8 @@ export { default as FieldCheckbox } from './FieldCheckbox/FieldCheckbox';
 export {
   default as FieldCustomAttributeSelect,
 } from './FieldCustomAttributeSelect/FieldCustomAttributeSelect';
+export { default as FieldGroupCheckbox } from './FieldGroupCheckbox/FieldGroupCheckbox';
 export { default as FieldReviewRating } from './FieldReviewRating/FieldReviewRating';
-export { default as FieldSetCheckbox } from './FieldSetCheckbox/FieldSetCheckbox';
 export { default as Footer } from './Footer/Footer';
 export { default as Form } from './Form/Form';
 export { default as IconBannedUser } from './IconBannedUser/IconBannedUser';

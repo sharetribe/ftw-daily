@@ -1,9 +1,9 @@
 import React from 'react';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { Button } from '../../components';
-import FieldSetCheckbox from './FieldSetCheckbox';
+import FieldGroupCheckbox from './FieldGroupCheckbox';
 
-const formName = 'Styleguide.FieldSetCheckbox';
+const formName = 'Styleguide.FieldGroupCheckbox';
 
 const legend = <h3>Amenities</h3>;
 
@@ -54,7 +54,7 @@ const FormComponent = props => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <FieldSetCheckbox {...componentProps} />
+      <FieldGroupCheckbox {...componentProps} />
 
       <Button style={{ marginTop: 24 }} type="submit" disabled={submitDisabled}>
         Submit
