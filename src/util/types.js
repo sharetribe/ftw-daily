@@ -128,7 +128,6 @@ propTypes.user = shape({
 const listingAttributes = shape({
   title: string.isRequired,
   description: string.isRequired,
-  address: string.isRequired,
   geolocation: propTypes.latlng.isRequired,
   closed: bool.isRequired,
   deleted: propTypes.value(false).isRequired,
@@ -140,7 +139,6 @@ const listingAttributes = shape({
 const ownListingAttributes = shape({
   title: string.isRequired,
   description: string.isRequired,
-  address: string.isRequired,
   geolocation: propTypes.latlng.isRequired,
   closed: bool.isRequired,
   deleted: propTypes.value(false).isRequired,

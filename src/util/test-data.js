@@ -81,7 +81,6 @@ export const createListing = (id, attributes = {}, includes = {}) => ({
   attributes: {
     title: `${id} title`,
     description: `${id} description`,
-    address: `${id} address`,
     geolocation: new LatLng(40, 60),
     closed: false,
     deleted: false,
@@ -100,7 +99,6 @@ export const createOwnListing = (id, attributes = {}, includes = {}) => ({
   attributes: {
     title: `${id} title`,
     description: `${id} description`,
-    address: `${id} address`,
     geolocation: new LatLng(40, 60),
     closed: false,
     deleted: false,

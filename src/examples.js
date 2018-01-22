@@ -7,7 +7,6 @@ import * as BookingBreakdown from './components/BookingBreakdown/BookingBreakdow
 import * as Button from './components/Button/Button.example';
 import * as CurrencyInputField from './components/CurrencyInputField/CurrencyInputField.example';
 import * as DateRangeInputField from './components/DateRangeInputField/DateRangeInputField.example';
-import * as EditListingWizard from './components/EditListingWizard/EditListingWizard.example';
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
 import * as FieldCheckbox from './components/FieldCheckbox/FieldCheckbox.example';
 import * as FieldGroupCheckbox from './components/FieldGroupCheckbox/FieldGroupCheckbox.example';
@@ -86,7 +85,6 @@ export {
   EditListingLocationForm,
   EditListingPhotosForm,
   EditListingPricingForm,
-  EditListingWizard,
   EmailVerificationForm,
   EnquiryForm,
   ExpandingTextarea,
