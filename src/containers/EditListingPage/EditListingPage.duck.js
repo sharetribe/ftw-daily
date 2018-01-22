@@ -1,4 +1,4 @@
-import { omit, omitBy, isUndefined } from 'lodash';
+import { omit, omitBy, isUndefined, merge } from 'lodash';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
@@ -141,11 +141,13 @@ export default function reducer(state = initialState, action = {}) {
     case UPDATE_LISTING_DRAFT: {
       const { attributes, images } = state.listingDraft || {};
       const updatedImages = payload.images || images;
-      const listingDraft = {
-        attributes: { ...attributes, ...omitBy(payload.attributes, isUndefined) },
-        images: updatedImages,
+      return {
+        ...state,
+        listingDraft: {
+          attributes: merge(attributes, omitBy(payload.attributes, isUndefined)),
+          images: updatedImages,
+        },
       };
-      return { ...state, listingDraft };
     }
 
     case REMOVE_LISTING_IMAGE: {
@@ -189,19 +191,18 @@ export const updateImageOrder = imageOrder => ({
 });
 
 export const createListingDraft = listingData => {
-  const { title, description, customAttributes } = listingData;
   return {
     type: CREATE_LISTING_DRAFT,
-    payload: { attributes: { title, description, customAttributes } },
+    payload: { attributes: listingData },
   };
 };
 
 export const updateListingDraft = listingData => {
-  const { address, description, title, geolocation, images, price, customAttributes } = listingData;
+  const { images, ...attributes } = listingData;
   return {
     type: UPDATE_LISTING_DRAFT,
     payload: {
-      attributes: { address, description, geolocation, price, title, customAttributes },
+      attributes,
       images,
     },
   };

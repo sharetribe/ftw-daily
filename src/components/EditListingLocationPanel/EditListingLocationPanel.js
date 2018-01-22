@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
-import { ensureListing, parseAddress } from '../../util/data';
+import { ensureListing } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
 import { NamedLink } from '../../components';
 import { EditListingLocationForm } from '../../containers';
@@ -24,7 +24,7 @@ const EditListingLocationPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
-  const { address, geolocation, title } = currentListing.attributes;
+  const { geolocation, title, publicData } = currentListing.attributes;
   const listingTitle = title || '';
   const listingLink = currentListing.id ? (
     <NamedLink name="ListingPage" params={{ id: currentListing.id.uuid, slug: createSlug(title) }}>
@@ -42,18 +42,17 @@ const EditListingLocationPanel = props => {
 
   // Only render current search if full place object is available in the URL params
   // TODO bounds and country are missing - those need to be queried directly from Google Places
-  const locationFieldsPresent = address && geolocation;
-
-  // TODO location address is currently serialized inside address field (API will change later)
-  // Content is something like { locationAddress: 'Street, Province, Country', building: 'A 42' };
-  const { locationAddress, building } = parseAddress(address);
+  const locationFieldsPresent =
+    publicData && publicData.location && publicData.location.address && geolocation;
+  const location = publicData && publicData.location ? publicData.location : {};
+  const { address, building } = location;
 
   const initialSearchFormValues = {
     building,
     location: locationFieldsPresent
       ? {
-          search: locationAddress,
-          selectedPlace: { address: locationAddress, origin: geolocation },
+          search: address,
+          selectedPlace: { address, origin: geolocation },
         }
       : null,
   };

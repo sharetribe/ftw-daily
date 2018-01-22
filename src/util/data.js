@@ -162,7 +162,12 @@ export const ensureBooking = booking => {
  * @param {Object} listing entity object, which is to be ensured agains null values
  */
 export const ensureListing = listing => {
-  const empty = { id: null, type: 'listing', attributes: { customAttributes: {} }, images: [] };
+  const empty = {
+    id: null,
+    type: 'listing',
+    attributes: { customAttributes: {}, publicData: {} },
+    images: [],
+  };
   return { ...empty, ...listing };
 };
 
@@ -172,7 +177,12 @@ export const ensureListing = listing => {
  * @param {Object} listing entity object, which is to be ensured agains null values
  */
 export const ensureOwnListing = listing => {
-  const empty = { id: null, type: 'ownListing', attributes: { customAttributes: {} }, images: [] };
+  const empty = {
+    id: null,
+    type: 'ownListing',
+    attributes: { customAttributes: {}, publicData: {} },
+    images: [],
+  };
   return { ...empty, ...listing };
 };
 
@@ -245,28 +255,4 @@ export const userAbbreviatedName = (user, bannedUserAbbreviatedName) => {
   } else {
     return '';
   }
-};
-
-/**
- * Temporary utility function to parse address field.
- * Location address is currently serialized inside address field.
- *
- * TODO: address will be moved to custom field, when API supports custom fields.
- */
-export const parseAddress = address => {
-  if (!(typeof address === 'string' || address == null)) {
-    throw new Error('Address must be a string.');
-  }
-
-  // Content is serialized as { locationAddress: 'Street, Province, Country', building: 'A 42' };
-  let locationAddress = '';
-  let building = '';
-  try {
-    const deserializedAddress = JSON.parse(address || '{}');
-    locationAddress = deserializedAddress.locationAddress || '';
-    building = deserializedAddress.building || '';
-  } catch (e) {
-    locationAddress = address;
-  }
-  return { locationAddress, building };
 };

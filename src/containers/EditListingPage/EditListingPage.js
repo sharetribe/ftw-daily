@@ -30,16 +30,11 @@ import css from './EditListingPage.css';
 const { UUID } = sdkTypes;
 
 const formatRequestData = values => {
-  const { address, description, images, geolocation, price, title, customAttributes } = values;
+  const { images, ...rest } = values;
 
   return {
-    address,
-    description,
-    geolocation,
     images: images.map(i => i.imageId),
-    price,
-    title,
-    customAttributes,
+    ...rest,
   };
 };
 

@@ -134,7 +134,7 @@ const listingAttributes = shape({
   deleted: propTypes.value(false).isRequired,
   price: propTypes.money,
   customAttributes: object,
-  publicData: object,
+  publicData: object.isRequired,
 });
 
 const ownListingAttributes = shape({
@@ -146,7 +146,7 @@ const ownListingAttributes = shape({
   deleted: propTypes.value(false).isRequired,
   price: propTypes.money,
   customAttributes: object,
-  publicData: object,
+  publicData: object.isRequired,
 });
 
 const deletedListingAttributes = shape({

@@ -12,7 +12,7 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import { ensureListing, ensureUser, parseAddress, userDisplayName } from '../../util/data';
+import { ensureListing, ensureUser, userDisplayName } from '../../util/data';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import {
@@ -241,11 +241,11 @@ export class ListingPageComponent extends Component {
     const currentListing = ensureListing(getListing(listingId));
     const listingSlug = params.slug || createSlug(currentListing.attributes.title || '');
     const {
-      address = '',
       description = '',
       geolocation = null,
       price = null,
       title = '',
+      publicData,
     } = currentListing.attributes;
 
     const { customAttributes } = currentListing.attributes;
@@ -344,9 +344,7 @@ export class ListingPageComponent extends Component {
     });
     const authorDisplayName = userDisplayName(ensuredAuthor, bannedUserDisplayName);
 
-    // TODO location address is currently serialized inside address field (API will change later)
-    // Content is something like { locationAddress: 'Street, Province, Country', building: 'A 42' };
-    const { locationAddress } = parseAddress(address);
+    const address = publicData.location ? publicData.location.address : '';
 
     const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' });
     const { formattedPrice, priceTitle } = priceData(price, intl);
@@ -356,7 +354,7 @@ export class ListingPageComponent extends Component {
           <FormattedMessage id="ListingPage.locationTitle" />
         </h2>
         <div className={css.map}>
-          <Map center={geolocation} address={locationAddress} />
+          <Map center={geolocation} address={address} />
         </div>
       </div>
     ) : null;
