@@ -3,7 +3,7 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { Button } from '../../components';
 import FieldSetCheckbox from './FieldSetCheckbox';
 
-const formName = 'Styleguide.FieldSetCheckbox.Form';
+const formName = 'Styleguide.FieldSetCheckbox';
 
 const legend = <h3>Amenities</h3>;
 
@@ -48,7 +48,7 @@ const componentProps = {
 };
 
 const FormComponent = props => {
-  const { form, handleSubmit, invalid, pristine, submitting } = props;
+  const { handleSubmit, invalid, pristine, submitting } = props;
 
   const submitDisabled = invalid || pristine || submitting;
 
