@@ -167,7 +167,7 @@ const EditListingWizard = props => {
         submitButtonText={submitText(intl, isNew, LOCATION)}
         onChange={onChange}
         onSubmit={values => {
-          const { building = "", location } = values;
+          const { building = '', location } = values;
           const { selectedPlace: { address, origin } } = location;
           const updateValues = {
             geolocation: origin,
