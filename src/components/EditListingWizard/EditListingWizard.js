@@ -167,11 +167,10 @@ const EditListingWizard = props => {
         submitButtonText={submitText(intl, isNew, LOCATION)}
         onChange={onChange}
         onSubmit={values => {
-          const { building, location } = values;
+          const { building = "", location } = values;
           const { selectedPlace: { address, origin } } = location;
           const updateValues = {
             geolocation: origin,
-            address,
             publicData: {
               location: { address, building },
             },
@@ -286,8 +285,8 @@ EditListingWizard.propTypes = {
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: shape({
     attributes: shape({
-      address: string,
       customAttributes: object, // structure (key: value) can be defined in management console
+      publicData: object,
       description: string,
       geolocation: object,
       pricing: object,
