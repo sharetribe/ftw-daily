@@ -14,6 +14,7 @@ const exampleOptions = [
 export const WithSomeSelected = {
   component: PropertyGroup,
   props: {
+    id: 'amenities',
     options: exampleOptions,
     selectedOptions: ['towels', 'bathroom', 'barbeque'],
     twoColumns: true,

@@ -1,30 +1,71 @@
 @import '../../marketplace.css';
 
+:root {
+  --lineHeight: 24px;
+  --lineThroughTop: calc(var(--lineHeight) - 7px);
+  --lineThroughBottom: calc(var(--lineHeight) - 6px);
+  --lineHeightMobile: 20px;
+  --lineThroughTopMobile: calc(var(--lineHeightMobile) - 5px);
+  --lineThroughBottomMobile: calc(var(--lineHeightMobile) - 4px);
+}
+
 .root {
   margin: 0;
 }
 
 .twoColumns {
   @media (--viewportMedium) {
-    columns: 2;
+    column-count: 2;
   }
 }
 
 .item {
   display: flex;
+  padding: 2px 0;
+
+  @media (--viewportMedium) {
+    padding: 4px 0;
+  }
+}
+
+.itemSelected {
+  padding: 2px 0;
+  display: flex;
   align-items: center;
 
   /* Fix broken multi-column layout in Chrome */
   page-break-inside: avoid;
+
+  @media (--viewportMedium) {
+    padding: 4px 0;
+  }
 }
 
-.check {
+.checkIcon {
   margin: 1px 8px -1px 0;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.marketplaceFill {
+  fill: var(--marketplaceColor);
+}
+
+.iconWrapper {
+  display: inline-flex;
+  align-content: center;
+}
+
+.textWrapper {
+  display: inline-block;
 }
 
 .selectedText,
 .notSelectedText {
   @apply --marketplaceBodyFontStyles;
+  line-height: var(--lineHeight);
   margin: 0;
 }
 
@@ -35,15 +76,21 @@
 .notSelectedText {
   color: var(--matterColorNegative);
   position: relative;
-  margin-left: 17px;
-}
 
-/* line-through */
-.notSelectedText::after {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 58%;
-  content: '';
-  border-bottom: solid 1px var(--matterColorNegative);
+  /* line-through */
+  background-image: linear-gradient(
+    transparent var(--lineThroughTopMobile),
+    var(--matterColorNegative) var(--lineThroughTopMobile),
+    var(--matterColorNegative) var(--lineThroughBottomMobile),
+    transparent var(--lineThroughBottomMobile)
+  );
+
+  @media (--viewportMedium) {
+    background-image: linear-gradient(
+      transparent var(--lineThroughTop),
+      var(--matterColorNegative) var(--lineThroughTop),
+      var(--matterColorNegative) var(--lineThroughBottom),
+      transparent var(--lineThroughBottom)
+    );
+  }
 }
