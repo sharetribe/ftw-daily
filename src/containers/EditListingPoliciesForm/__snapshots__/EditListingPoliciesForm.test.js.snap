@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditListingPoliciesForm matches snapshot 1`] = `
+<Form
+  className=""
+  onSubmit={[Function]}
+>
+  <TextInputField
+    id="fakeTestForm.saunaRules"
+    label="EditListingPoliciesForm.rulesLabel"
+    name="saunaRules"
+    placeholder="EditListingPoliciesForm.rulesPlaceholder"
+    type="textarea"
+  />
+  <Button
+    className={null}
+    disabled={false}
+    inProgress={false}
+    ready={false}
+    rootClassName={null}
+    type="submit"
+  >
+    Save rules
+  </Button>
+</Form>
+`;

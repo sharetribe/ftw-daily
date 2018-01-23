@@ -57,6 +57,7 @@ import * as Colors from './containers/StyleguidePage/Colors.example';
 import * as EditListingDescriptionForm from './containers/EditListingDescriptionForm/EditListingDescriptionForm.example';
 import * as EditListingLocationForm from './containers/EditListingLocationForm/EditListingLocationForm.example';
 import * as EditListingPhotosForm from './containers/EditListingPhotosForm/EditListingPhotosForm.example';
+import * as EditListingPoliciesForm from './containers/EditListingPoliciesForm/EditListingPoliciesForm.example';
 import * as EditListingPricingForm from './containers/EditListingPricingForm/EditListingPricingForm.example';
 import * as EmailVerificationForm from './containers/EmailVerificationForm/EmailVerificationForm.example';
 import * as EnquiryForm from './containers/EnquiryForm/EnquiryForm.example';
@@ -84,6 +85,7 @@ export {
   EditListingDescriptionForm,
   EditListingLocationForm,
   EditListingPhotosForm,
+  EditListingPoliciesForm,
   EditListingPricingForm,
   EmailVerificationForm,
   EnquiryForm,
