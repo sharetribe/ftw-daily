@@ -20,13 +20,13 @@ const selfLinkProps = {
 const TabsWrapper = () => {
   return (
     <Tabs>
-      <TestPanel tabLabel="Description" tabLinkProps={selfLinkProps}>
+      <TestPanel tabId="Description" tabLabel="Description" tabLinkProps={selfLinkProps}>
         Description form stuff
       </TestPanel>
-      <TestPanel selected tabLabel="Location" tabLinkProps={selfLinkProps}>
+      <TestPanel selected tabId="Location" tabLabel="Location" tabLinkProps={selfLinkProps}>
         Location form stuff
       </TestPanel>
-      <TestPanel tabLabel="Price" tabLinkProps={selfLinkProps} disabled>
+      <TestPanel tabId="Price" tabLabel="Price" tabLinkProps={selfLinkProps} disabled>
         Price form stuff
       </TestPanel>
     </Tabs>

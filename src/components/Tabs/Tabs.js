@@ -28,18 +28,20 @@ const Tabs = props => {
   const classes = classNames(rootClasses, className);
 
   const tabNavTabs = React.Children.map(children, child => {
-    const { tabLabel, tabLinkProps } = child.props;
+    const { tabId, tabLabel, tabLinkProps } = child.props;
 
     // Child components need to have TabNav props included
-    if (!tabLabel || !tabLinkProps) {
+    if (!tabId || !tabLabel || !tabLinkProps) {
       throw new Error(
         `Tabs component: a child component is missing required props.
+        tabId: (${tabId})
         tabLabel: (${tabLabel})
         tabLinkProps: (${tabLinkProps})`
       );
     }
 
     return {
+      id: tabId,
       text: child.props.tabLabel,
       linkProps: child.props.tabLinkProps,
       disabled: child.props.disabled,

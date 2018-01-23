@@ -6,14 +6,14 @@ import { NamedLink } from '../../components';
 import css from './TabNav.css';
 
 const Tab = props => {
-  const { className, disabled, text, selected, linkProps } = props;
+  const { className, id, disabled, text, selected, linkProps } = props;
   const linkClasses = classNames(css.link, {
     [css.selectedLink]: selected,
     [css.disabled]: disabled,
   });
 
   return (
-    <div className={className}>
+    <div id={id} className={className}>
       <NamedLink className={linkClasses} {...linkProps}>
         {text}
       </NamedLink>
@@ -26,6 +26,7 @@ Tab.defaultProps = { className: null, disabled: false, selected: false };
 const { arrayOf, bool, node, object, string } = PropTypes;
 
 Tab.propTypes = {
+  id: string.isRequired,
   className: string,
   text: node.isRequired,
   disabled: bool,
@@ -40,8 +41,8 @@ const TabNav = props => {
   return (
     <nav className={classes}>
       {tabs.map((tab, index) => {
-        const key = typeof tab.text === 'string' ? tab.text : index;
-        return <Tab key={key} className={tabClasses} {...tab} />;
+        const id = typeof tab.id === 'string' ? tab.id : `${index}`;
+        return <Tab key={id} id={id} className={tabClasses} {...tab} />;
       })}
     </nav>
   );
