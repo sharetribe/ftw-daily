@@ -1,0 +1,84 @@
+@import '../../marketplace.css';
+
+:root {
+  --lineHeight: 24px;
+  --lineThroughTop: calc(var(--lineHeight) - 7px);
+  --lineThroughBottom: calc(var(--lineHeight) - 6px);
+  --lineHeightMobile: 20px;
+  --lineThroughTopMobile: calc(var(--lineHeightMobile) - 5px);
+  --lineThroughBottomMobile: calc(var(--lineHeightMobile) - 4px);
+}
+
+.root {
+  margin: 0;
+}
+
+.twoColumns {
+  @media (--viewportMedium) {
+    column-count: 2;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 2px 0;
+
+  @media (--viewportMedium) {
+    padding: 4px 0;
+  }
+}
+
+.checkIcon {
+  margin: 1px 8px -1px 0;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.marketplaceFill {
+  fill: var(--marketplaceColor);
+}
+
+.iconWrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.textWrapper {
+  display: inline-block;
+}
+
+.selectedText,
+.notSelectedText {
+  @apply --marketplaceBodyFontStyles;
+  line-height: var(--lineHeight);
+  margin: 0;
+}
+
+.selectedText {
+  font-weight: var(--fontWeightSemiBold);
+}
+
+.notSelectedText {
+  color: var(--matterColorNegative);
+  position: relative;
+
+  /* line-through */
+  background-image: linear-gradient(
+    transparent var(--lineThroughTopMobile),
+    var(--matterColorNegative) var(--lineThroughTopMobile),
+    var(--matterColorNegative) var(--lineThroughBottomMobile),
+    transparent var(--lineThroughBottomMobile)
+  );
+
+  @media (--viewportMedium) {
+    background-image: linear-gradient(
+      transparent var(--lineThroughTop),
+      var(--matterColorNegative) var(--lineThroughTop),
+      var(--matterColorNegative) var(--lineThroughBottom),
+      transparent var(--lineThroughBottom)
+    );
+  }
+}
