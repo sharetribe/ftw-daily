@@ -1,3 +1,12 @@
+/*
+ * Renders a group of checkboxes that can be used to select
+ * multiple values from a set of options.
+ *
+ * The corresponding component when rendering the selected
+ * values is PropertyGroup.
+ *
+ */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';

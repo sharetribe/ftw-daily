@@ -1,3 +1,11 @@
+/*
+ * Renders a set of options with selected and non-selected values.
+ *
+ * The corresponding component when selecting the values is
+ * FieldGroupCheckbox.
+ *
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
