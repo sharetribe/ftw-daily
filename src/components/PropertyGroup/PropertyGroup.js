@@ -36,29 +36,16 @@ const IconCheck = props => {
   );
 };
 
-const SelectedItem = props => {
-  const { text } = props;
-  return (
-    <li className={css.itemSelected}>
-      <div className={css.iconWrapper}>
-        <IconCheck isVisible={true} />
-      </div>
-      <div className={css.textWrapper}>
-        <span className={css.selectedText}>{text}</span>
-      </div>
-    </li>
-  );
-};
-
-const NotSelectedItem = props => {
-  const { text } = props;
+const Item = props => {
+  const { text, isSelected } = props;
+  const textClass = isSelected ? css.selectedText : css.notSelectedText;
   return (
     <li className={css.item}>
       <div className={css.iconWrapper}>
-        <IconCheck isVisible={false} />
+        <IconCheck isVisible={isSelected} />
       </div>
       <div className={css.textWrapper}>
-        <span className={css.notSelectedText}>{text}</span>
+        <span className={textClass}>{text}</span>
       </div>
     </li>
   );
@@ -73,14 +60,9 @@ const PropertyGroup = props => {
 
   return (
     <ul className={listClasses}>
-      {checked.map(
-        option =>
-          option.isSelected ? (
-            <SelectedItem key={`${id}.${option.value}`} text={option.text} />
-          ) : (
-            <NotSelectedItem key={`${id}.${option.value}`} text={option.text} />
-          )
-      )}
+      {checked.map(option => (
+        <Item key={`${id}.${option.value}`} text={option.text} isSelected={option.isSelected} />
+      ))}
     </ul>
   );
 };
