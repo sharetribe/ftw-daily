@@ -46,6 +46,22 @@ const submitText = (intl, isNew, step) => {
   return intl.formatMessage({ id: key });
 };
 
+const tabLabel = (intl, step) => {
+  let key = null;
+  if (step === DESCRIPTION) {
+    key = 'EditListingWizard.tabLabelDescription';
+  } else if (step === POLICY) {
+    key = 'EditListingWizard.tabLabelPolicy';
+  } else if (step === LOCATION) {
+    key = 'EditListingWizard.tabLabelLocation';
+  } else if (step === PRICING) {
+    key = 'EditListingWizard.tabLabelPricing';
+  } else if (step === PHOTOS) {
+    key = 'EditListingWizard.tabLabelPhotos';
+  }
+  return intl.formatMessage({ id: key });
+};
+
 /**
  * Check which wizard steps are active and which are not yet available. Step is active is previous
  * step is completed.
@@ -166,21 +182,27 @@ class EditListingWizard extends Component {
       this.hasScrolledToTab = true;
     }
 
+    const panelProps = tab => {
+      return {
+        className: css.panel,
+        disabled: !stepsStatus[tab],
+        errors,
+        listing,
+        onChange,
+        panelUpdated: updatedTab === tab,
+        selected: selectedTab === tab,
+        submitButtonText: submitText(intl, isNew, tab),
+        tabId: `${id}_${tab}`,
+        tabLabel: tabLabel(intl, tab),
+        tabLinkProps: tabLink(tab),
+        updateInProgress,
+      };
+    };
+
     return (
       <Tabs rootClassName={classes} navRootClassName={css.nav} tabRootClassName={css.tab}>
         <EditListingDescriptionPanel
-          className={css.panel}
-          tabId={`${id}_a${DESCRIPTION}`}
-          tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelDescription' })}
-          tabLinkProps={tabLink(DESCRIPTION)}
-          selected={selectedTab === DESCRIPTION}
-          panelUpdated={updatedTab === DESCRIPTION}
-          updateInProgress={updateInProgress}
-          disabled={!stepsStatus[DESCRIPTION]}
-          errors={errors}
-          listing={listing}
-          submitButtonText={submitText(intl, isNew, DESCRIPTION)}
-          onChange={onChange}
+          {...panelProps(DESCRIPTION)}
           onSubmit={values => {
             const { title, description, category } = values;
             const updateValues = {
@@ -203,18 +225,7 @@ class EditListingWizard extends Component {
           }}
         />
         <EditListingPoliciesPanel
-          className={css.panel}
-          tabId={`${id}_${POLICY}`}
-          tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelPolicy' })}
-          tabLinkProps={tabLink(POLICY)}
-          selected={selectedTab === POLICY}
-          panelUpdated={updatedTab === POLICY}
-          updateInProgress={updateInProgress}
-          disabled={!stepsStatus[POLICY]}
-          errors={errors}
-          listing={listing}
-          submitButtonText={submitText(intl, isNew, POLICY)}
-          onChange={onChange}
+          {...panelProps(POLICY)}
           onSubmit={values => {
             const { saunaRules = '' } = values;
             const updateValues = {
@@ -236,18 +247,7 @@ class EditListingWizard extends Component {
           }}
         />
         <EditListingLocationPanel
-          className={css.panel}
-          tabId={`${id}_${LOCATION}`}
-          tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelLocation' })}
-          tabLinkProps={tabLink(LOCATION)}
-          selected={selectedTab === LOCATION}
-          panelUpdated={updatedTab === LOCATION}
-          updateInProgress={updateInProgress}
-          disabled={!stepsStatus[LOCATION]}
-          errors={errors}
-          listing={listing}
-          submitButtonText={submitText(intl, isNew, LOCATION)}
-          onChange={onChange}
+          {...panelProps(LOCATION)}
           onSubmit={values => {
             const { building = '', location } = values;
             const { selectedPlace: { address, origin } } = location;
@@ -271,18 +271,7 @@ class EditListingWizard extends Component {
           }}
         />
         <EditListingPricingPanel
-          className={css.panel}
-          tabId={`${id}_${PRICING}`}
-          tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelPricing' })}
-          tabLinkProps={tabLink(PRICING)}
-          selected={selectedTab === PRICING}
-          panelUpdated={updatedTab === PRICING}
-          updateInProgress={updateInProgress}
-          disabled={!stepsStatus[PRICING]}
-          errors={errors}
-          listing={listing}
-          submitButtonText={submitText(intl, isNew, PRICING)}
-          onChange={onChange}
+          {...panelProps(PRICING)}
           onSubmit={values => {
             if (isNew) {
               onUpdateListingDraft(values);
@@ -297,25 +286,14 @@ class EditListingWizard extends Component {
           }}
         />
         <EditListingPhotosPanel
-          className={css.panel}
-          tabId={`${id}_${PHOTOS}`}
-          tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelPhotos' })}
-          tabLinkProps={tabLink(PHOTOS)}
-          selected={selectedTab === PHOTOS}
-          disabled={!stepsStatus[PHOTOS]}
-          panelUpdated={updatedTab === PHOTOS}
+          {...panelProps(PHOTOS)}
           newListingCreated={newListingCreated}
-          updateInProgress={updateInProgress}
-          errors={errors}
           fetchInProgress={fetchInProgress}
-          listing={listing}
           images={images}
           onImageUpload={onImageUpload}
           onRemoveImage={onRemoveImage}
           onPayoutDetailsFormChange={onPayoutDetailsFormChange}
           onPayoutDetailsSubmit={onPayoutDetailsSubmit}
-          submitButtonText={submitText(intl, isNew, PHOTOS)}
-          onChange={onChange}
           onSubmit={values => {
             const { country, images: updatedImages } = values;
             const updateValues = { ...listing.attributes, country, images: updatedImages };

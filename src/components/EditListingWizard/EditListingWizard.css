@@ -42,6 +42,7 @@
 
 .tab {
   margin-left: 16px;
+  white-space: nowrap;
 
   &:first-child {
     margin-left: 0;
