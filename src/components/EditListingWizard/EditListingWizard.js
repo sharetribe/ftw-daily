@@ -12,6 +12,7 @@ import {
   EditListingDescriptionPanel,
   EditListingLocationPanel,
   EditListingPhotosPanel,
+  EditListingPoliciesPanel,
   EditListingPricingPanel,
   NamedRedirect,
   Tabs,
@@ -20,10 +21,11 @@ import {
 import css from './EditListingWizard.css';
 
 const DESCRIPTION = 'description';
+const POLICY = 'policy';
 const LOCATION = 'location';
 const PRICING = 'pricing';
 const PHOTOS = 'photos';
-const STEPS = [DESCRIPTION, LOCATION, PRICING, PHOTOS];
+const STEPS = [DESCRIPTION, POLICY, LOCATION, PRICING, PHOTOS];
 
 // Tabs are horizontal in small screens
 const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
@@ -32,6 +34,8 @@ const submitText = (intl, isNew, step) => {
   let key = null;
   if (step === DESCRIPTION) {
     key = isNew ? 'EditListingWizard.saveNewDescription' : 'EditListingWizard.saveEditDescription';
+  } else if (step === POLICY) {
+    key = isNew ? 'EditListingWizard.saveNewPolicies' : 'EditListingWizard.saveEditPolicies';
   } else if (step === LOCATION) {
     key = isNew ? 'EditListingWizard.saveNewLocation' : 'EditListingWizard.saveEditLocation';
   } else if (step === PRICING) {
@@ -53,6 +57,7 @@ const submitText = (intl, isNew, step) => {
 const stepsActive = listing => {
   const { description, geolocation, price, title, publicData } = listing.attributes;
   const descriptionStep = !!(title && description);
+  const policyStep = !!(publicData && typeof publicData.saunaRules !== 'undefined');
   const locationStep = !!(
     geolocation &&
     publicData &&
@@ -65,7 +70,8 @@ const stepsActive = listing => {
 
   return {
     [DESCRIPTION]: true,
-    [LOCATION]: descriptionStep,
+    [POLICY]: descriptionStep,
+    [LOCATION]: policyStep,
     [PRICING]: locationStep,
     [PHOTOS]: pricingStep,
   };
@@ -186,13 +192,46 @@ class EditListingWizard extends Component {
 
             if (isNew) {
               onUpsertListingDraft(updateValues);
-              const pathParams = tabParams(LOCATION);
+              const pathParams = tabParams(POLICY);
               // Redirect to location tab
               history.push(
                 createResourceLocatorString('EditListingPage', routeConfiguration(), pathParams, {})
               );
             } else {
               update(DESCRIPTION, updateValues);
+            }
+          }}
+        />
+        <EditListingPoliciesPanel
+          className={css.panel}
+          tabId={`${id}_${POLICY}`}
+          tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelPolicy' })}
+          tabLinkProps={tabLink(POLICY)}
+          selected={selectedTab === POLICY}
+          panelUpdated={updatedTab === POLICY}
+          updateInProgress={updateInProgress}
+          disabled={!stepsStatus[POLICY]}
+          errors={errors}
+          listing={listing}
+          submitButtonText={submitText(intl, isNew, POLICY)}
+          onChange={onChange}
+          onSubmit={values => {
+            const { saunaRules = '' } = values;
+            const updateValues = {
+              publicData: {
+                saunaRules,
+              },
+            };
+
+            if (isNew) {
+              onUpdateListingDraft(updateValues);
+              const pathParams = tabParams(LOCATION);
+              // Redirect to pricing tab
+              history.push(
+                createResourceLocatorString('EditListingPage', routeConfiguration(), pathParams, {})
+              );
+            } else {
+              update(POLICY, updateValues);
             }
           }}
         />
@@ -220,7 +259,6 @@ class EditListingWizard extends Component {
             };
 
             if (isNew) {
-              // TODO When API supports building number, etc. change this to use those fields instead.
               onUpdateListingDraft(updateValues);
               const pathParams = tabParams(PRICING);
               // Redirect to pricing tab
