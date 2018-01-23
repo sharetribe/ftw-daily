@@ -6,7 +6,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
   title="EditListingPage.titleCreateListing"
 >
   <withRouter(Connect(TopbarContainerComponent)) />
-  <InjectIntl(EditListingWizard)
+  <withViewport(InjectIntl(EditListingWizard))
     currentUser={null}
     errors={
       Object {
@@ -23,6 +23,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
         "push": [Function],
       }
     }
+    id="EditListingWizard"
     images={Array []}
     newListingCreated={false}
     onChange={[Function]}

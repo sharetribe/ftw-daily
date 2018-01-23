@@ -31,7 +31,7 @@ const Tabs = props => {
     const { tabId, tabLabel, tabLinkProps } = child.props;
 
     // Child components need to have TabNav props included
-    if (!tabId || !tabLabel || !tabLinkProps) {
+    if (!tabId || !tabLabel || !tabLinkProps) {
       throw new Error(
         `Tabs component: a child component is missing required props.
         tabId: (${tabId})

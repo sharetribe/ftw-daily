@@ -18,15 +18,17 @@
   /* Layout */
   display: flex;
   flex-direction: row;
-  padding: 0 24px 0 24px;
+  padding: 0;
   flex-shrink: 0;
   background-color: var(--matterColorLight);
   box-shadow: var(--boxShadowLight);
   border-top: 1px solid var(--matterColorNegative);
+  overflow-x: scroll;
 
   @media (--viewportLarge) {
     padding: 126px 0 82px 15vw;
     flex-direction: column;
+    overflow-x: auto;
 
     background-color: var(--matterColorBright);
     box-shadow: none;
@@ -43,10 +45,26 @@
 
   &:first-child {
     margin-left: 0;
+
+    /* Padding added to tab so that it will be visible after call to scrollToTab */
+    padding-left: 24px;
+  }
+
+  &:last-child {
+    /* Padding added to tab so that it will be visible after call to scrollToTab */
+    padding-right: 24px;
   }
 
   @media (--viewportLarge) {
     margin-left: 0;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
   }
 }
 

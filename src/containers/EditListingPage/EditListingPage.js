@@ -120,6 +120,7 @@ export const EditListingPageComponent = props => {
           mobileClassName={css.mobileTopbar}
         />
         <EditListingWizard
+          id="EditListingWizard"
           className={css.wizard}
           params={params}
           disabled={disableForm}
