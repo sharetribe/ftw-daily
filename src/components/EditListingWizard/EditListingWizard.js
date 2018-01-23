@@ -12,6 +12,7 @@ import {
   EditListingDescriptionPanel,
   EditListingLocationPanel,
   EditListingPhotosPanel,
+  EditListingPoliciesPanel,
   EditListingPricingPanel,
   NamedRedirect,
   Tabs,
@@ -20,10 +21,11 @@ import {
 import css from './EditListingWizard.css';
 
 const DESCRIPTION = 'description';
+const POLICY = 'policy';
 const LOCATION = 'location';
 const PRICING = 'pricing';
 const PHOTOS = 'photos';
-const STEPS = [DESCRIPTION, LOCATION, PRICING, PHOTOS];
+const STEPS = [DESCRIPTION, POLICY, LOCATION, PRICING, PHOTOS];
 
 // Tabs are horizontal in small screens
 const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
@@ -32,12 +34,30 @@ const submitText = (intl, isNew, step) => {
   let key = null;
   if (step === DESCRIPTION) {
     key = isNew ? 'EditListingWizard.saveNewDescription' : 'EditListingWizard.saveEditDescription';
+  } else if (step === POLICY) {
+    key = isNew ? 'EditListingWizard.saveNewPolicies' : 'EditListingWizard.saveEditPolicies';
   } else if (step === LOCATION) {
     key = isNew ? 'EditListingWizard.saveNewLocation' : 'EditListingWizard.saveEditLocation';
   } else if (step === PRICING) {
     key = isNew ? 'EditListingWizard.saveNewPricing' : 'EditListingWizard.saveEditPricing';
   } else if (step === PHOTOS) {
     key = isNew ? 'EditListingWizard.saveNewPhotos' : 'EditListingWizard.saveEditPhotos';
+  }
+  return intl.formatMessage({ id: key });
+};
+
+const tabLabel = (intl, step) => {
+  let key = null;
+  if (step === DESCRIPTION) {
+    key = 'EditListingWizard.tabLabelDescription';
+  } else if (step === POLICY) {
+    key = 'EditListingWizard.tabLabelPolicy';
+  } else if (step === LOCATION) {
+    key = 'EditListingWizard.tabLabelLocation';
+  } else if (step === PRICING) {
+    key = 'EditListingWizard.tabLabelPricing';
+  } else if (step === PHOTOS) {
+    key = 'EditListingWizard.tabLabelPhotos';
   }
   return intl.formatMessage({ id: key });
 };
@@ -53,6 +73,7 @@ const submitText = (intl, isNew, step) => {
 const stepsActive = listing => {
   const { description, geolocation, price, title, publicData } = listing.attributes;
   const descriptionStep = !!(title && description);
+  const policyStep = !!(publicData && typeof publicData.saunaRules !== 'undefined');
   const locationStep = !!(
     geolocation &&
     publicData &&
@@ -65,7 +86,8 @@ const stepsActive = listing => {
 
   return {
     [DESCRIPTION]: true,
-    [LOCATION]: descriptionStep,
+    [POLICY]: descriptionStep,
+    [LOCATION]: policyStep,
     [PRICING]: locationStep,
     [PHOTOS]: pricingStep,
   };
@@ -160,21 +182,27 @@ class EditListingWizard extends Component {
       this.hasScrolledToTab = true;
     }
 
+    const panelProps = tab => {
+      return {
+        className: css.panel,
+        disabled: !stepsStatus[tab],
+        errors,
+        listing,
+        onChange,
+        panelUpdated: updatedTab === tab,
+        selected: selectedTab === tab,
+        submitButtonText: submitText(intl, isNew, tab),
+        tabId: `${id}_${tab}`,
+        tabLabel: tabLabel(intl, tab),
+        tabLinkProps: tabLink(tab),
+        updateInProgress,
+      };
+    };
+
     return (
       <Tabs rootClassName={classes} navRootClassName={css.nav} tabRootClassName={css.tab}>
         <EditListingDescriptionPanel
-          className={css.panel}
-          tabId={`${id}_a${DESCRIPTION}`}
-          tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelDescription' })}
-          tabLinkProps={tabLink(DESCRIPTION)}
-          selected={selectedTab === DESCRIPTION}
-          panelUpdated={updatedTab === DESCRIPTION}
-          updateInProgress={updateInProgress}
-          disabled={!stepsStatus[DESCRIPTION]}
-          errors={errors}
-          listing={listing}
-          submitButtonText={submitText(intl, isNew, DESCRIPTION)}
-          onChange={onChange}
+          {...panelProps(DESCRIPTION)}
           onSubmit={values => {
             const { title, description, category } = values;
             const updateValues = {
@@ -186,7 +214,7 @@ class EditListingWizard extends Component {
 
             if (isNew) {
               onUpsertListingDraft(updateValues);
-              const pathParams = tabParams(LOCATION);
+              const pathParams = tabParams(POLICY);
               // Redirect to location tab
               history.push(
                 createResourceLocatorString('EditListingPage', routeConfiguration(), pathParams, {})
@@ -196,19 +224,30 @@ class EditListingWizard extends Component {
             }
           }}
         />
+        <EditListingPoliciesPanel
+          {...panelProps(POLICY)}
+          onSubmit={values => {
+            const { saunaRules = '' } = values;
+            const updateValues = {
+              publicData: {
+                saunaRules,
+              },
+            };
+
+            if (isNew) {
+              onUpdateListingDraft(updateValues);
+              const pathParams = tabParams(LOCATION);
+              // Redirect to pricing tab
+              history.push(
+                createResourceLocatorString('EditListingPage', routeConfiguration(), pathParams, {})
+              );
+            } else {
+              update(POLICY, updateValues);
+            }
+          }}
+        />
         <EditListingLocationPanel
-          className={css.panel}
-          tabId={`${id}_${LOCATION}`}
-          tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelLocation' })}
-          tabLinkProps={tabLink(LOCATION)}
-          selected={selectedTab === LOCATION}
-          panelUpdated={updatedTab === LOCATION}
-          updateInProgress={updateInProgress}
-          disabled={!stepsStatus[LOCATION]}
-          errors={errors}
-          listing={listing}
-          submitButtonText={submitText(intl, isNew, LOCATION)}
-          onChange={onChange}
+          {...panelProps(LOCATION)}
           onSubmit={values => {
             const { building = '', location } = values;
             const { selectedPlace: { address, origin } } = location;
@@ -220,7 +259,6 @@ class EditListingWizard extends Component {
             };
 
             if (isNew) {
-              // TODO When API supports building number, etc. change this to use those fields instead.
               onUpdateListingDraft(updateValues);
               const pathParams = tabParams(PRICING);
               // Redirect to pricing tab
@@ -233,18 +271,7 @@ class EditListingWizard extends Component {
           }}
         />
         <EditListingPricingPanel
-          className={css.panel}
-          tabId={`${id}_${PRICING}`}
-          tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelPricing' })}
-          tabLinkProps={tabLink(PRICING)}
-          selected={selectedTab === PRICING}
-          panelUpdated={updatedTab === PRICING}
-          updateInProgress={updateInProgress}
-          disabled={!stepsStatus[PRICING]}
-          errors={errors}
-          listing={listing}
-          submitButtonText={submitText(intl, isNew, PRICING)}
-          onChange={onChange}
+          {...panelProps(PRICING)}
           onSubmit={values => {
             if (isNew) {
               onUpdateListingDraft(values);
@@ -259,25 +286,14 @@ class EditListingWizard extends Component {
           }}
         />
         <EditListingPhotosPanel
-          className={css.panel}
-          tabId={`${id}_${PHOTOS}`}
-          tabLabel={intl.formatMessage({ id: 'EditListingWizard.tabLabelPhotos' })}
-          tabLinkProps={tabLink(PHOTOS)}
-          selected={selectedTab === PHOTOS}
-          disabled={!stepsStatus[PHOTOS]}
-          panelUpdated={updatedTab === PHOTOS}
+          {...panelProps(PHOTOS)}
           newListingCreated={newListingCreated}
-          updateInProgress={updateInProgress}
-          errors={errors}
           fetchInProgress={fetchInProgress}
-          listing={listing}
           images={images}
           onImageUpload={onImageUpload}
           onRemoveImage={onRemoveImage}
           onPayoutDetailsFormChange={onPayoutDetailsFormChange}
           onPayoutDetailsSubmit={onPayoutDetailsSubmit}
-          submitButtonText={submitText(intl, isNew, PHOTOS)}
-          onChange={onChange}
           onSubmit={values => {
             const { country, images: updatedImages } = values;
             const updateValues = { ...listing.attributes, country, images: updatedImages };

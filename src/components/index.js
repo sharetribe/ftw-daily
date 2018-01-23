@@ -21,6 +21,9 @@ export {
 } from './EditListingLocationPanel/EditListingLocationPanel';
 export { default as EditListingPhotosPanel } from './EditListingPhotosPanel/EditListingPhotosPanel';
 export {
+  default as EditListingPoliciesPanel,
+} from './EditListingPoliciesPanel/EditListingPoliciesPanel';
+export {
   default as EditListingPricingPanel,
 } from './EditListingPricingPanel/EditListingPricingPanel';
 export { default as EditListingWizard } from './EditListingWizard/EditListingWizard';

@@ -12,6 +12,9 @@ export {
 } from './EditListingLocationForm/EditListingLocationForm';
 export { default as EditListingPage } from './EditListingPage/EditListingPage';
 export { default as EditListingPhotosForm } from './EditListingPhotosForm/EditListingPhotosForm';
+export {
+  default as EditListingPoliciesForm,
+} from './EditListingPoliciesForm/EditListingPoliciesForm';
 export { default as EditListingPricingForm } from './EditListingPricingForm/EditListingPricingForm';
 export { default as EmailVerificationForm } from './EmailVerificationForm/EmailVerificationForm';
 export { default as EmailVerificationPage } from './EmailVerificationPage/EmailVerificationPage';
