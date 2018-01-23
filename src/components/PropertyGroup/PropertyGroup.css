@@ -24,9 +24,6 @@
   align-items: center;
   padding: 2px 0;
 
-  /* Fix broken multi-column layout in Chrome */
-  page-break-inside: avoid;
-
   @media (--viewportMedium) {
     padding: 4px 0;
   }
