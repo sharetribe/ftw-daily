@@ -60,8 +60,9 @@ const priceData = (price, intl) => {
   return {};
 };
 
-export const ActionBar = props => {
-  const { isOwnListing, isClosed, editParams } = props;
+export const ActionBarMaybe = props => {
+  const { isOwnListing, listing, editParams } = props;
+  const isClosed = listing.attributes.closed;
 
   if (isOwnListing) {
     return (
@@ -92,13 +93,13 @@ export const ActionBar = props => {
 
 const { arrayOf, bool, func, object, oneOf, shape, string } = PropTypes;
 
-ActionBar.propTypes = {
+ActionBarMaybe.propTypes = {
   isOwnListing: bool.isRequired,
-  isClosed: bool.isRequired,
+  listing: propTypes.listing.isRequired,
   editParams: object.isRequired,
 };
 
-ActionBar.displayName = 'ActionBar';
+ActionBarMaybe.displayName = 'ActionBarMaybe';
 
 const gotoBookTab = (history, listing) => {
   if (!listing.id) {
@@ -405,9 +406,9 @@ export class ListingPageComponent extends Component {
     // to the parent that would otherwise open the image carousel
     const actionBar = currentListing.id ? (
       <div onClick={e => e.stopPropagation()}>
-        <ActionBar
+        <ActionBarMaybe
           isOwnListing={isOwnListing}
-          isClosed={currentListing.attributes.closed}
+          listing={currentListing}
           editParams={editParams}
         />
       </div>

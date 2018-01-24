@@ -13,7 +13,7 @@ import { showListingRequest, showListingError, showListing } from './ListingPage
 // Otherwise, ListingPage itself is not initialized correctly when routeConfiguration is imported
 // (loadData call fails).
 import routeConfiguration from '../../routeConfiguration';
-import { ListingPageComponent, ActionBar } from './ListingPage';
+import { ListingPageComponent, ActionBarMaybe } from './ListingPage';
 
 const { UUID } = sdkTypes;
 const noop = () => null;
@@ -101,30 +101,48 @@ describe('ListingPage', () => {
     });
   });
 
-  describe('ActionBar', () => {
+  describe('ActionBarMaybe', () => {
     it('shows users own listing status', () => {
-      const actionBar = shallow(<ActionBar isOwnListing isClosed={false} editParams={{}} />);
+      const listing = createListing('listing-published', {
+        closed: false,
+        state: 'published',
+      });
+      const actionBar = shallow(<ActionBarMaybe isOwnListing listing={listing} editParams={{}} />);
       const formattedMessages = actionBar.find(FormattedMessage);
       expect(formattedMessages.length).toEqual(2);
       expect(formattedMessages.at(0).props().id).toEqual('ListingPage.ownListing');
       expect(formattedMessages.at(1).props().id).toEqual('ListingPage.editListing');
     });
     it('shows users own closed listing status', () => {
-      const actionBar = shallow(<ActionBar isOwnListing isClosed editParams={{}} />);
+      const listing = createListing('listing-closed', {
+        closed: true,
+        state: 'published',
+      });
+      const actionBar = shallow(<ActionBarMaybe isOwnListing listing={listing} editParams={{}} />);
       const formattedMessages = actionBar.find(FormattedMessage);
       expect(formattedMessages.length).toEqual(2);
       expect(formattedMessages.at(0).props().id).toEqual('ListingPage.ownClosedListing');
       expect(formattedMessages.at(1).props().id).toEqual('ListingPage.editListing');
     });
     it('shows closed listing status', () => {
-      const actionBar = shallow(<ActionBar isOwnListing={false} isClosed editParams={{}} />);
+      const listing = createListing('listing-closed', {
+        closed: true,
+        state: 'published',
+      });
+      const actionBar = shallow(
+        <ActionBarMaybe isOwnListing={false} listing={listing} editParams={{}} />
+      );
       const formattedMessages = actionBar.find(FormattedMessage);
       expect(formattedMessages.length).toEqual(1);
       expect(formattedMessages.at(0).props().id).toEqual('ListingPage.closedListing');
     });
     it("is missing if listing is not closed or user's own", () => {
+      const listing = createListing('listing-published', {
+        closed: false,
+        state: 'published',
+      });
       const actionBar = shallow(
-        <ActionBar isOwnListing={false} isClosed={false} editParams={{}} />
+        <ActionBarMaybe isOwnListing={false} listing={listing} editParams={{}} />
       );
       expect(actionBar.equals(null)).toEqual(true);
     });
