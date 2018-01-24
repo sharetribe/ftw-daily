@@ -68,6 +68,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -181,6 +182,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -313,6 +315,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -442,6 +445,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -571,6 +575,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -818,6 +823,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -928,6 +934,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -1041,6 +1048,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -1173,6 +1181,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -1302,6 +1311,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -1431,6 +1441,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -1678,6 +1689,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -1788,6 +1800,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -1901,6 +1914,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -2033,6 +2047,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -2162,6 +2177,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -2291,6 +2307,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -2538,6 +2555,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -2648,6 +2666,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -2761,6 +2780,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -2893,6 +2913,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -3022,6 +3043,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -3151,6 +3173,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -3398,6 +3421,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -3508,6 +3532,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -3621,6 +3646,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -3753,6 +3779,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -3882,6 +3909,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -4011,6 +4039,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -4258,6 +4287,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -4368,6 +4398,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -4481,6 +4512,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -4613,6 +4645,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -4742,6 +4775,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -4871,6 +4905,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -5118,6 +5153,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -5228,6 +5264,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -5341,6 +5378,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -5473,6 +5511,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -5602,6 +5641,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -5731,6 +5771,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -5978,6 +6019,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -6082,6 +6124,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -6195,6 +6238,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -6314,6 +6358,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -6431,6 +6476,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -6548,6 +6594,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -6783,6 +6830,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -6874,6 +6922,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -6987,6 +7036,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -7106,6 +7156,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -7223,6 +7274,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -7340,6 +7392,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -7575,6 +7628,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -7666,6 +7720,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -7779,6 +7834,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -7898,6 +7954,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -8015,6 +8072,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -8132,6 +8190,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -8367,6 +8426,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -8458,6 +8518,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -8571,6 +8632,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -8690,6 +8752,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -8807,6 +8870,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -8924,6 +8988,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -9159,6 +9224,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -9250,6 +9316,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -9363,6 +9430,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -9482,6 +9550,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -9599,6 +9668,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -9716,6 +9786,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -9951,6 +10022,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -10042,6 +10114,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -10155,6 +10228,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -10274,6 +10348,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -10391,6 +10466,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -10508,6 +10584,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -10743,6 +10820,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -10834,6 +10912,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                 "currency": "USD",
               },
               "publicData": Object {},
+              "state": "published",
               "title": "listing1 title",
             },
             "id": UUID {
@@ -10947,6 +11026,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -11066,6 +11146,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -11183,6 +11264,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -11300,6 +11382,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                   "currency": "USD",
                 },
                 "publicData": Object {},
+                "state": "published",
                 "title": "listing1 title",
               },
               "id": UUID {
@@ -11535,6 +11618,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {

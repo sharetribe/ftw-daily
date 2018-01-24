@@ -125,12 +125,16 @@ propTypes.user = shape({
   profileImage: propTypes.image,
 });
 
+export const LISTING_STATE_PUBLISHED = 'published';
+export const LISTING_STATES = [LISTING_STATE_PUBLISHED];
+
 const listingAttributes = shape({
   title: string.isRequired,
   description: string.isRequired,
   geolocation: propTypes.latlng.isRequired,
   closed: bool.isRequired,
   deleted: propTypes.value(false).isRequired,
+  state: oneOf(LISTING_STATES).isRequired,
   price: propTypes.money,
   customAttributes: object,
   publicData: object.isRequired,
@@ -142,6 +146,7 @@ const ownListingAttributes = shape({
   geolocation: propTypes.latlng.isRequired,
   closed: bool.isRequired,
   deleted: propTypes.value(false).isRequired,
+  state: oneOf(LISTING_STATES).isRequired,
   price: propTypes.money,
   customAttributes: object,
   publicData: object.isRequired,

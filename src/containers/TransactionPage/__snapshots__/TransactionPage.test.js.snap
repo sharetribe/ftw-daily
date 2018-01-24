@@ -161,6 +161,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
@@ -359,6 +360,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                     "currency": "USD",
                   },
                   "publicData": Object {},
+                  "state": "published",
                   "title": "listing1 title",
                 },
                 "id": UUID {
