@@ -3,94 +3,85 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import routeConfiguration from '../../routeConfiguration';
-import { propTypes } from '../../util/types';
 import { withViewport } from '../../util/contextHelpers';
 import { ensureListing } from '../../util/data';
-import { createResourceLocatorString } from '../../util/routes';
-import {
-  EditListingDescriptionPanel,
-  EditListingLocationPanel,
-  EditListingPhotosPanel,
-  EditListingPoliciesPanel,
-  EditListingPricingPanel,
-  NamedRedirect,
-  Tabs,
-} from '../../components';
+import { NamedRedirect, Tabs } from '../../components';
 
+import EditListingWizardTab, {
+  DESCRIPTION,
+  POLICY,
+  LOCATION,
+  PRICING,
+  PHOTOS,
+} from './EditListingWizardTab';
 import css from './EditListingWizard.css';
 
-const DESCRIPTION = 'description';
-const POLICY = 'policy';
-const LOCATION = 'location';
-const PRICING = 'pricing';
-const PHOTOS = 'photos';
-const STEPS = [DESCRIPTION, POLICY, LOCATION, PRICING, PHOTOS];
+// TODO: PHOTOS panel needs to be the last one since it currently contains PayoutDetailsForm modal
+// All the other panels can be reordered.
+export const TABS = [DESCRIPTION, POLICY, LOCATION, PRICING, PHOTOS];
 
 // Tabs are horizontal in small screens
 const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
 
-const submitText = (intl, isNew, step) => {
+const tabLabel = (intl, tab) => {
   let key = null;
-  if (step === DESCRIPTION) {
-    key = isNew ? 'EditListingWizard.saveNewDescription' : 'EditListingWizard.saveEditDescription';
-  } else if (step === POLICY) {
-    key = isNew ? 'EditListingWizard.saveNewPolicies' : 'EditListingWizard.saveEditPolicies';
-  } else if (step === LOCATION) {
-    key = isNew ? 'EditListingWizard.saveNewLocation' : 'EditListingWizard.saveEditLocation';
-  } else if (step === PRICING) {
-    key = isNew ? 'EditListingWizard.saveNewPricing' : 'EditListingWizard.saveEditPricing';
-  } else if (step === PHOTOS) {
-    key = isNew ? 'EditListingWizard.saveNewPhotos' : 'EditListingWizard.saveEditPhotos';
-  }
-  return intl.formatMessage({ id: key });
-};
-
-const tabLabel = (intl, step) => {
-  let key = null;
-  if (step === DESCRIPTION) {
+  if (tab === DESCRIPTION) {
     key = 'EditListingWizard.tabLabelDescription';
-  } else if (step === POLICY) {
+  } else if (tab === POLICY) {
     key = 'EditListingWizard.tabLabelPolicy';
-  } else if (step === LOCATION) {
+  } else if (tab === LOCATION) {
     key = 'EditListingWizard.tabLabelLocation';
-  } else if (step === PRICING) {
+  } else if (tab === PRICING) {
     key = 'EditListingWizard.tabLabelPricing';
-  } else if (step === PHOTOS) {
+  } else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos';
   }
+
   return intl.formatMessage({ id: key });
 };
 
 /**
- * Check which wizard steps are active and which are not yet available. Step is active is previous
- * step is completed.
+ * Check if a wizard tab is completed.
+ *
+ * @param tab wizard's tab
+ * @param listing is contains some specific data if tab is completed
+ *
+ * @return true if tab / step is completed.
+ */
+const tabCompleted = (tab, listing) => {
+  const { description, geolocation, price, title, publicData } = listing.attributes;
+  const images = listing.images;
+
+  switch (tab) {
+    case DESCRIPTION:
+      return !!(description && title);
+    case POLICY:
+      return !!(publicData && typeof publicData.saunaRules !== 'undefined');
+    case LOCATION:
+      return !!(geolocation && publicData && publicData.location && publicData.location.address);
+    case PRICING:
+      return !!price;
+    case PHOTOS:
+      return images && images.length > 0;
+    default:
+      return false;
+  }
+};
+
+/**
+ * Check which wizard tabs are active and which are not yet available. Tab is active if previous
+ * tab is completed.
  *
  * @param listing data to be checked
  *
- * @return object containing activity / editability of different steps of this wizard
+ * @return object containing activity / editability of different tabs of this wizard
  */
-const stepsActive = listing => {
-  const { description, geolocation, price, title, publicData } = listing.attributes;
-  const descriptionStep = !!(title && description);
-  const policyStep = !!(publicData && typeof publicData.saunaRules !== 'undefined');
-  const locationStep = !!(
-    geolocation &&
-    publicData &&
-    publicData.location &&
-    publicData.location.address
-  );
-  const pricingStep = !!price;
-
-  // photosStep is about adding listing.images
-
-  return {
-    [DESCRIPTION]: true,
-    [POLICY]: descriptionStep,
-    [LOCATION]: policyStep,
-    [PRICING]: locationStep,
-    [PHOTOS]: pricingStep,
-  };
+const tabsActive = listing => {
+  return TABS.reduce((acc, tab) => {
+    const previousTabIndex = TABS.findIndex(t => t === tab) - 1;
+    const isActive = previousTabIndex >= 0 ? tabCompleted(TABS[previousTabIndex], listing) : true;
+    return { ...acc, [tab]: isActive };
+  }, {});
 };
 
 const scrollToTab = (tabPrefix, tabId) => {
@@ -113,58 +104,18 @@ class EditListingWizard extends Component {
   }
 
   render() {
-    const {
-      id,
-      className,
-      params,
-      errors,
-      fetchInProgress,
-      newListingCreated,
-      history,
-      images,
-      listing,
-      onCreateListing,
-      onUpdateListing,
-      onCreateListingDraft,
-      onImageUpload,
-      onPayoutDetailsFormChange,
-      onPayoutDetailsSubmit,
-      onUpdateImageOrder,
-      onRemoveImage,
-      onUpdateListingDraft,
-      onChange,
-      rootClassName,
-      currentUser,
-      onManageDisableScrolling,
-      updatedTab,
-      updateInProgress,
-      intl,
-      viewport,
-    } = this.props;
+    const { id, className, rootClassName, params, listing, viewport, intl, ...rest } = this.props;
 
-    const isNew = params.type === 'new';
     const selectedTab = params.tab;
     const rootClasses = rootClassName || css.root;
     const classes = classNames(rootClasses, className);
     const currentListing = ensureListing(listing);
-    const stepsStatus = stepsActive(currentListing);
+    const tabsStatus = tabsActive(currentListing);
 
-    const tabParams = tab => {
-      return { ...params, tab };
-    };
-    const tabLink = tab => {
-      return { name: 'EditListingPage', params: tabParams(tab) };
-    };
-
-    // If selectedStep is not active, redirect to the beginning of wizard
-    if (!stepsStatus[selectedTab]) {
-      return <NamedRedirect name="EditListingPage" params={tabParams(DESCRIPTION)} />;
+    // If selectedTab is not active, redirect to the beginning of wizard
+    if (!tabsStatus[selectedTab]) {
+      return <NamedRedirect name="EditListingPage" params={{ ...params, tab: TABS[0] }} />;
     }
-
-    const onUpsertListingDraft = currentListing.id ? onUpdateListingDraft : onCreateListingDraft;
-    const update = (tab, values) => {
-      onUpdateListing(tab, { ...values, id: currentListing.id });
-    };
 
     const { width } = viewport;
     const hasViewport = width > 0;
@@ -182,132 +133,30 @@ class EditListingWizard extends Component {
       this.hasScrolledToTab = true;
     }
 
-    const panelProps = tab => {
-      return {
-        className: css.panel,
-        disabled: !stepsStatus[tab],
-        errors,
-        listing,
-        onChange,
-        panelUpdated: updatedTab === tab,
-        selected: selectedTab === tab,
-        submitButtonText: submitText(intl, isNew, tab),
-        tabId: `${id}_${tab}`,
-        tabLabel: tabLabel(intl, tab),
-        tabLinkProps: tabLink(tab),
-        updateInProgress,
-      };
+    const tabLink = tab => {
+      return { name: 'EditListingPage', params: { ...params, tab } };
     };
 
     return (
       <Tabs rootClassName={classes} navRootClassName={css.nav} tabRootClassName={css.tab}>
-        <EditListingDescriptionPanel
-          {...panelProps(DESCRIPTION)}
-          onSubmit={values => {
-            const { title, description, category } = values;
-            const updateValues = {
-              title,
-              description,
-              customAttributes: { category },
-              publicData: { category },
-            };
-
-            if (isNew) {
-              onUpsertListingDraft(updateValues);
-              const pathParams = tabParams(POLICY);
-              // Redirect to location tab
-              history.push(
-                createResourceLocatorString('EditListingPage', routeConfiguration(), pathParams, {})
-              );
-            } else {
-              update(DESCRIPTION, updateValues);
-            }
-          }}
-        />
-        <EditListingPoliciesPanel
-          {...panelProps(POLICY)}
-          onSubmit={values => {
-            const { saunaRules = '' } = values;
-            const updateValues = {
-              publicData: {
-                saunaRules,
-              },
-            };
-
-            if (isNew) {
-              onUpdateListingDraft(updateValues);
-              const pathParams = tabParams(LOCATION);
-              // Redirect to pricing tab
-              history.push(
-                createResourceLocatorString('EditListingPage', routeConfiguration(), pathParams, {})
-              );
-            } else {
-              update(POLICY, updateValues);
-            }
-          }}
-        />
-        <EditListingLocationPanel
-          {...panelProps(LOCATION)}
-          onSubmit={values => {
-            const { building = '', location } = values;
-            const { selectedPlace: { address, origin } } = location;
-            const updateValues = {
-              geolocation: origin,
-              publicData: {
-                location: { address, building },
-              },
-            };
-
-            if (isNew) {
-              onUpdateListingDraft(updateValues);
-              const pathParams = tabParams(PRICING);
-              // Redirect to pricing tab
-              history.push(
-                createResourceLocatorString('EditListingPage', routeConfiguration(), pathParams, {})
-              );
-            } else {
-              update(LOCATION, updateValues);
-            }
-          }}
-        />
-        <EditListingPricingPanel
-          {...panelProps(PRICING)}
-          onSubmit={values => {
-            if (isNew) {
-              onUpdateListingDraft(values);
-              const pathParams = tabParams(PHOTOS);
-              // Redirect to photos tab
-              history.push(
-                createResourceLocatorString('EditListingPage', routeConfiguration(), pathParams, {})
-              );
-            } else {
-              update(PRICING, values);
-            }
-          }}
-        />
-        <EditListingPhotosPanel
-          {...panelProps(PHOTOS)}
-          newListingCreated={newListingCreated}
-          fetchInProgress={fetchInProgress}
-          images={images}
-          onImageUpload={onImageUpload}
-          onRemoveImage={onRemoveImage}
-          onPayoutDetailsFormChange={onPayoutDetailsFormChange}
-          onPayoutDetailsSubmit={onPayoutDetailsSubmit}
-          onSubmit={values => {
-            const { country, images: updatedImages } = values;
-            const updateValues = { ...listing.attributes, country, images: updatedImages };
-            if (isNew) {
-              onCreateListing(updateValues);
-            } else {
-              const imageIds = updatedImages.map(img => img.imageId || img.id);
-              update(PHOTOS, { images: imageIds });
-            }
-          }}
-          onUpdateImageOrder={onUpdateImageOrder}
-          currentUser={currentUser}
-          onManageDisableScrolling={onManageDisableScrolling}
-        />
+        {TABS.map(tab => {
+          return (
+            <EditListingWizardTab
+              {...rest}
+              key={tab}
+              tabId={`${id}_${tab}`}
+              tabLabel={tabLabel(intl, tab)}
+              tabLinkProps={tabLink(tab)}
+              selected={selectedTab === tab}
+              disabled={!tabsStatus[tab]}
+              tab={tab}
+              intl={intl}
+              params={params}
+              listing={listing}
+              marketplaceTabs={TABS}
+            />
+          );
+        })}
       </Tabs>
     );
   }
@@ -315,36 +164,22 @@ class EditListingWizard extends Component {
 
 EditListingWizard.defaultProps = {
   className: null,
-  errors: null,
-  listing: null,
   rootClassName: null,
-  currentUser: null,
-  updatedTab: null,
+  listing: null,
 };
 
-const { array, bool, func, number, object, oneOf, shape, string } = PropTypes;
+const { array, number, object, oneOf, shape, string } = PropTypes;
 
 EditListingWizard.propTypes = {
   id: string.isRequired,
   className: string,
+  rootClassName: string,
   params: shape({
     id: string.isRequired,
     slug: string.isRequired,
     type: oneOf(['new', 'edit']).isRequired,
-    tab: oneOf(STEPS).isRequired,
+    tab: oneOf(TABS).isRequired,
   }).isRequired,
-  errors: shape({
-    createListingsError: object,
-    updateListingError: object,
-    showListingsError: object,
-    uploadImageError: object,
-  }).isRequired,
-  fetchInProgress: bool.isRequired,
-  newListingCreated: bool.isRequired,
-  history: shape({
-    push: func.isRequired,
-  }).isRequired,
-  images: array.isRequired,
 
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: shape({
@@ -358,22 +193,6 @@ EditListingWizard.propTypes = {
     }),
     images: array,
   }),
-
-  onCreateListing: func.isRequired,
-  onUpdateListing: func.isRequired,
-  onCreateListingDraft: func.isRequired,
-  onImageUpload: func.isRequired,
-  onPayoutDetailsFormChange: func.isRequired,
-  onPayoutDetailsSubmit: func.isRequired,
-  onUpdateImageOrder: func.isRequired,
-  onRemoveImage: func.isRequired,
-  onUpdateListingDraft: func.isRequired,
-  onChange: func.isRequired,
-  rootClassName: string,
-  currentUser: propTypes.currentUser,
-  onManageDisableScrolling: func.isRequired,
-  updatedTab: string,
-  updateInProgress: bool.isRequired,
 
   // from withViewport
   viewport: shape({
