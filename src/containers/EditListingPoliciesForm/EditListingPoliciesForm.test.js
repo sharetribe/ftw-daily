@@ -11,6 +11,7 @@ describe('EditListingPoliciesForm', () => {
     const tree = renderShallow(
       <EditListingPoliciesFormComponent
         {...fakeFormProps}
+        publicData={{}}
         intl={fakeIntl}
         dispatch={noop}
         onSubmit={v => v}

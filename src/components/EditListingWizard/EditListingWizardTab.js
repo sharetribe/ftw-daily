@@ -124,10 +124,9 @@ const EditListingWizardTab = props => {
           {...panelProps(POLICY)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
-            const { saunaRules = '' } = values;
             const updateValues = {
               publicData: {
-                saunaRules,
+                ...values,
               },
             };
 
