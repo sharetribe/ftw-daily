@@ -20,7 +20,6 @@ import {
   AvatarLarge,
   AvatarMedium,
   Button,
-  Map,
   ModalInMobile,
   Page,
   ResponsiveImage,
@@ -41,6 +40,8 @@ import { BookingDatesForm, TopbarContainer, EnquiryForm } from '../../containers
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import EditIcon from './EditIcon';
+import SectionRulesMaybe from './SectionRulesMaybe';
+import SectionMapMaybe from './SectionMapMaybe';
 import css from './ListingPage.css';
 
 // This defines when ModalInMobile shows content as Modal
@@ -358,20 +359,8 @@ export class ListingPageComponent extends Component {
     });
     const authorDisplayName = userDisplayName(ensuredAuthor, bannedUserDisplayName);
 
-    const address = publicData.location ? publicData.location.address : '';
-
     const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' });
     const { formattedPrice, priceTitle } = priceData(price, intl);
-    const map = geolocation ? (
-      <div className={css.locationContainer}>
-        <h2 className={css.locationTitle}>
-          <FormattedMessage id="ListingPage.locationTitle" />
-        </h2>
-        <div className={css.map}>
-          <Map center={geolocation} address={address} />
-        </div>
-      </div>
-    ) : null;
 
     const showClosedListingHelpText = currentListing.id && isClosed;
     const bookingHeading = (
@@ -567,7 +556,8 @@ export class ListingPageComponent extends Component {
                     <p className={css.description}>{description}</p>
                   </div>
 
-                  {map}
+                  <SectionRulesMaybe publicData={publicData} />
+                  <SectionMapMaybe geolocation={geolocation} publicData={publicData} />
 
                   <div className={css.reviewsContainer}>
                     <h2 className={css.reviewsHeading}>
