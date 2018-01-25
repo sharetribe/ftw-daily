@@ -66,21 +66,33 @@
 
 .ownListingText {
   @apply --marketplaceH4FontStyles;
-  margin: 16px 12px 13px 24px;
+  margin: 14px 12px 11px 24px;
+
+  @media (--viewportMedium) {
+    margin: 25px 12px 22px 24px;
+  }
+}
+
+.ownListingTextPendingApproval {
+  color: var(--attentionColor);
 }
 
 .closedListingText {
   @apply --marketplaceH4FontStyles;
-  margin: 16px 12px 13px 24px;
+  margin: 14px 12px 11px 24px;
   text-align: center;
   width: 100%;
+
+  @media (--viewportMedium) {
+    margin: 25px 12px 22px 24px;
+  }
 }
 
 .editListingLink {
   @apply --marketplaceH4FontStyles;
   flex-shrink: 0;
   margin: 0;
-  padding: 16px 24px 13px 12px;
+  padding: 14px 24px 11px 12px;
   color: var(--matterColorNegative);
 
   transition: var(--transitionStyleButton);
@@ -92,6 +104,7 @@
 
   @media (--viewportMedium) {
     margin: 0;
+    padding: 25px 24px 22px 12px;
   }
 }
 

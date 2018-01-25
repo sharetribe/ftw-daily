@@ -5,9 +5,10 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
-import { propTypes } from '../../util/types';
+import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
@@ -62,15 +63,27 @@ const priceData = (price, intl) => {
 
 export const ActionBarMaybe = props => {
   const { isOwnListing, listing, editParams } = props;
-  const isClosed = listing.attributes.closed;
+  const state = listing.attributes.state;
+  const isPendingApproval = state === LISTING_STATE_PENDING_APPROVAL;
+  const isClosed = state === LISTING_STATE_CLOSED;
 
   if (isOwnListing) {
+    let ownListingTextTranslationId = 'ListingPage.ownListing';
+
+    if (isPendingApproval) {
+      ownListingTextTranslationId = 'ListingPage.ownListingPendingApproval';
+    } else if (isClosed) {
+      ownListingTextTranslationId = 'ListingPage.ownClosedListing';
+    }
+
+    const ownListingTextClasses = classNames(css.ownListingText, {
+      [css.ownListingTextPendingApproval]: isPendingApproval,
+    });
+
     return (
       <div className={css.actionBar}>
-        <p className={css.ownListingText}>
-          <FormattedMessage
-            id={isClosed ? 'ListingPage.ownClosedListing' : 'ListingPage.ownListing'}
-          />
+        <p className={ownListingTextClasses}>
+          <FormattedMessage id={ownListingTextTranslationId} />
         </p>
         <NamedLink className={css.editListingLink} name="EditListingPage" params={editParams}>
           <EditIcon className={css.editIcon} />
@@ -86,9 +99,8 @@ export const ActionBarMaybe = props => {
         </p>
       </div>
     );
-  } else {
-    return null;
   }
+  return null;
 };
 
 const { arrayOf, bool, func, object, oneOf, shape, string } = PropTypes;

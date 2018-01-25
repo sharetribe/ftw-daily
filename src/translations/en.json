@@ -265,6 +265,7 @@
   "ListingPage.locationTitle": "Location",
   "ListingPage.ownClosedListing": "Your listing has been closed and can't be booked.",
   "ListingPage.ownListing": "This is your own listing.",
+  "ListingPage.ownListingPendingApproval": "This listing is pending approval.",
   "ListingPage.perUnit": "per night",
   "ListingPage.reviewsError": "Loading reviews failed.",
   "ListingPage.reviewsHeading": "Reviews ({count})",
