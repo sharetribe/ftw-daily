@@ -41,7 +41,7 @@ exports[`ListingPage matches snapshot 1`] = `
             <div
               onClick={[Function]}
             >
-              <ActionBar
+              <ActionBarMaybe
                 editParams={
                   Object {
                     "id": "listing1",
@@ -50,8 +50,46 @@ exports[`ListingPage matches snapshot 1`] = `
                     "type": "edit",
                   }
                 }
-                isClosed={false}
                 isOwnListing={false}
+                listing={
+                  Object {
+                    "attributes": Object {
+                      "closed": false,
+                      "customAttributes": Object {},
+                      "deleted": false,
+                      "description": "listing1 description",
+                      "geolocation": LatLng {
+                        "lat": 40,
+                        "lng": 60,
+                      },
+                      "price": Money {
+                        "amount": 5500,
+                        "currency": "USD",
+                      },
+                      "publicData": Object {},
+                      "state": "published",
+                      "title": "listing1 title",
+                    },
+                    "author": Object {
+                      "attributes": Object {
+                        "banned": false,
+                        "profile": Object {
+                          "abbreviatedName": "TT",
+                          "displayName": "user-1 display name",
+                        },
+                      },
+                      "id": UUID {
+                        "uuid": "user-1",
+                      },
+                      "type": "user",
+                    },
+                    "id": UUID {
+                      "uuid": "listing1",
+                    },
+                    "images": Array [],
+                    "type": "listing",
+                  }
+                }
               />
             </div>
             <ResponsiveImage
