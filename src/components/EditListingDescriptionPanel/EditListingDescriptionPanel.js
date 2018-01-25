@@ -50,7 +50,17 @@ const EditListingDescriptionPanel = props => {
         className={css.form}
         initialValues={{ title, description, ...customAttributes }}
         saveActionMsg={submitButtonText}
-        onSubmit={onSubmit}
+        onSubmit={values => {
+          const { title, description, category } = values;
+          const updateValues = {
+            title,
+            description,
+            customAttributes: { category },
+            publicData: { category },
+          };
+
+          onSubmit(updateValues);
+        }}
         onChange={onChange}
         updated={panelUpdated}
         updateError={errors.updateListingError}

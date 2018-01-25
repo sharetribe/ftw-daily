@@ -29,15 +29,6 @@ import css from './EditListingPage.css';
 
 const { UUID } = sdkTypes;
 
-const formatRequestData = values => {
-  const { images, ...rest } = values;
-
-  return {
-    images: images.map(i => i.imageId),
-    ...rest,
-  };
-};
-
 // N.B. All the presentational content needs to be extracted to their own components
 export const EditListingPageComponent = props => {
   const {
@@ -227,7 +218,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onCreateListing: values => dispatch(requestCreateListing(formatRequestData(values))),
+  onCreateListing: values => dispatch(requestCreateListing(values)),
   onUpdateListing: (tab, values) => dispatch(requestUpdateListing(tab, values)),
   onCreateListingDraft: values => dispatch(createListingDraft(values)),
   onImageUpload: data => dispatch(requestImageUpload(data)),

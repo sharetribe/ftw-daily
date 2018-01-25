@@ -4,6 +4,7 @@ import EditListingPoliciesForm from './EditListingPoliciesForm';
 export const Empty = {
   component: EditListingPoliciesForm,
   props: {
+    publicData: {},
     onSubmit: values => {
       console.log('Submit EditListingPoliciesForm with (unformatted) values:', values);
     },

@@ -40,16 +40,20 @@ const EditListingPoliciesPanel = props => {
     <FormattedMessage id="EditListingPoliciesPanel.createListingTitle" />
   );
 
-  const saunaRules = publicData && publicData.saunaRules ? publicData.saunaRules : '';
-  const initialSearchFormValues = { saunaRules };
-
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingPoliciesForm
         className={css.form}
-        initialValues={initialSearchFormValues}
-        onSubmit={onSubmit}
+        publicData={publicData}
+        onSubmit={values => {
+          const updateValues = {
+            publicData: {
+              ...values,
+            },
+          };
+          onSubmit(updateValues);
+        }}
         onChange={onChange}
         saveActionMsg={submitButtonText}
         updated={panelUpdated}

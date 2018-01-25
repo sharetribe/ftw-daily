@@ -6,9 +6,9 @@ exports[`EditListingPoliciesForm matches snapshot 1`] = `
   onSubmit={[Function]}
 >
   <TextInputField
-    id="fakeTestForm.saunaRules"
+    id="fakeTestForm.rules"
     label="EditListingPoliciesForm.rulesLabel"
-    name="saunaRules"
+    name="rules"
     placeholder="EditListingPoliciesForm.rulesPlaceholder"
     type="textarea"
   />
