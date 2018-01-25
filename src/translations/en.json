@@ -297,6 +297,7 @@
   "ManageListingCard.closedListing": "This listing is closed and not visible on the marketplace.",
   "ManageListingCard.edit": "Edit",
   "ManageListingCard.openListing": "Open listing",
+  "ManageListingCard.pendingApproval": "{listingTitle} is pending admin approval and can't be booked.",
   "ManageListingCard.perUnit": "per night",
   "ManageListingCard.unsupportedPrice": "({currency})",
   "ManageListingCard.unsupportedPriceTitle": "Unsupported currency ({currency})",
