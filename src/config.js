@@ -1,5 +1,9 @@
+import amenities from './saunatime-amenities.json';
+
 const env = process.env.REACT_APP_ENV || 'production';
 const dev = process.env.REACT_APP_ENV === 'development';
+
+const saunatime = { amenities };
 
 // If you want to change the language, remember to also change the
 // locale data and the messages in the app.js file.
@@ -237,43 +241,6 @@ const exampleCustomAttributes = {
     values: ['road', 'mountain', 'track', 'other'],
   },
 };
-
-const amenities = [
-  {
-    name: 'towels',
-    text: 'Towels',
-  },
-  {
-    name: 'bathroom',
-    text: 'Bathroom',
-  },
-  {
-    name: 'swimming_pool',
-    text: 'Swimming pool',
-  },
-  {
-    name: 'own_drinks',
-    text: 'Own drinks allowed',
-  },
-  {
-    name: 'jacuzzi',
-    text: 'Jacuzzi',
-  },
-  {
-    name: 'audiovisual_entertainment',
-    text: 'Audiovisual entertainment',
-  },
-  {
-    name: 'barbeque',
-    text: 'Barbeque',
-  },
-  {
-    name: 'own_food_allowed',
-    text: 'Own food allowed',
-  },
-];
-
-const saunatime = { amenities };
 
 // To use the example custom attributes, set the
 // REACT_APP_USE_EXAMPLE_CUSTOM_ATTRIBUTES variable to `true` in the

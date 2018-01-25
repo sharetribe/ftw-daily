@@ -1,0 +1,34 @@
+[
+  {
+    "name": "towels",
+    "text": "Towels"
+  },
+  {
+    "name": "bathroom",
+    "text": "Bathroom"
+  },
+  {
+    "name": "swimming_pool",
+    "text": "Swimming pool"
+  },
+  {
+    "name": "own_drinks",
+    "text": "Own drinks allowed"
+  },
+  {
+    "name": "jacuzzi",
+    "text": "Jacuzzi"
+  },
+  {
+    "name": "audiovisual_entertainment",
+    "text": "Audiovisual entertainment"
+  },
+  {
+    "name": "barbeque",
+    "text": "Barbeque"
+  },
+  {
+    "name": "own_food_allowed",
+    "text": "Own food allowed"
+  }
+]
