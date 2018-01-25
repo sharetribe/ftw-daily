@@ -16,8 +16,8 @@ export class EditListingPoliciesFormComponent extends Component {
     // Initialize form inside this component reduces the amount of files that are tied to
     // marketplace specific content in publicData.
     const { initialize, publicData } = props;
-    const { saunaRules = '' } = publicData;
-    initialize({ saunaRules });
+    const { rules = '' } = publicData;
+    initialize({ rules });
   }
 
   render() {
@@ -36,7 +36,7 @@ export class EditListingPoliciesFormComponent extends Component {
     } = this.props;
 
     const rulesLabelMessage = intl.formatMessage({ id: 'EditListingPoliciesForm.rulesLabel' });
-    const saunaRulesPlaceholderMessage = intl.formatMessage({
+    const rulesPlaceholderMessage = intl.formatMessage({
       id: 'EditListingPoliciesForm.rulesPlaceholder',
     });
 
@@ -58,10 +58,10 @@ export class EditListingPoliciesFormComponent extends Component {
         <TextInputField
           className={css.policy}
           type="textarea"
-          name="saunaRules"
-          id={`${form}.saunaRules`}
+          name="rules"
+          id={`${form}.rules`}
           label={rulesLabelMessage}
-          placeholder={saunaRulesPlaceholderMessage}
+          placeholder={rulesPlaceholderMessage}
         />
 
         <Button

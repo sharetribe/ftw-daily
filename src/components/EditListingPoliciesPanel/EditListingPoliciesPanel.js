@@ -46,7 +46,14 @@ const EditListingPoliciesPanel = props => {
       <EditListingPoliciesForm
         className={css.form}
         publicData={publicData}
-        onSubmit={onSubmit}
+        onSubmit={values => {
+          const updateValues = {
+            publicData: {
+              ...values,
+            },
+          };
+          onSubmit(updateValues);
+        }}
         onChange={onChange}
         saveActionMsg={submitButtonText}
         updated={panelUpdated}

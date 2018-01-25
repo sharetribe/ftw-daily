@@ -64,12 +64,9 @@ const EditListingWizardTab = props => {
   const isNew = params.type === 'new';
   const currentListing = ensureListing(listing);
 
-  const onUpsertListingDraft = currentListing.id ? onUpdateListingDraft : onCreateListingDraft;
-  const update = (tab, values) => {
-    onUpdateListing(tab, { ...values, id: currentListing.id });
-  };
   const onCompleteEditListingWizardTab = (tab, updateValues) => {
     if (isNew) {
+      const onUpsertListingDraft = currentListing.id ? onUpdateListingDraft : onCreateListingDraft;
       onUpsertListingDraft(updateValues);
       // Redirect to next tab
       const pathParams = pathParamsToNextTab(params, tab, marketplaceTabs);
@@ -77,7 +74,7 @@ const EditListingWizardTab = props => {
         createResourceLocatorString('EditListingPage', routeConfiguration(), pathParams, {})
       );
     } else {
-      update(tab, updateValues);
+      onUpdateListing(tab, { ...updateValues, id: currentListing.id });
     }
   };
 
@@ -102,15 +99,7 @@ const EditListingWizardTab = props => {
           {...panelProps(DESCRIPTION)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
-            const { title, description, category } = values;
-            const updateValues = {
-              title,
-              description,
-              customAttributes: { category },
-              publicData: { category },
-            };
-
-            onCompleteEditListingWizardTab(tab, updateValues);
+            onCompleteEditListingWizardTab(tab, values);
           }}
         />
       );
@@ -124,13 +113,7 @@ const EditListingWizardTab = props => {
           {...panelProps(POLICY)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
-            const updateValues = {
-              publicData: {
-                ...values,
-              },
-            };
-
-            onCompleteEditListingWizardTab(tab, updateValues);
+            onCompleteEditListingWizardTab(tab, values);
           }}
         />
       );
@@ -144,16 +127,7 @@ const EditListingWizardTab = props => {
           {...panelProps(LOCATION)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
-            const { building = '', location } = values;
-            const { selectedPlace: { address, origin } } = location;
-            const updateValues = {
-              geolocation: origin,
-              publicData: {
-                location: { address, building },
-              },
-            };
-
-            onCompleteEditListingWizardTab(tab, updateValues);
+            onCompleteEditListingWizardTab(tab, values);
           }}
         />
       );
@@ -189,13 +163,13 @@ const EditListingWizardTab = props => {
           onPayoutDetailsSubmit={onPayoutDetailsSubmit}
           onSubmit={values => {
             const { images: updatedImages } = values;
-            const updateValues = { ...listing.attributes, images: updatedImages };
+            const imageIds = updatedImages.map(img => img.imageId || img.id);
+            const updateValues = { ...listing.attributes, images: imageIds };
 
             if (isNew) {
               onCreateListing(updateValues);
             } else {
-              const imageIds = updatedImages.map(img => img.imageId || img.id);
-              update(PHOTOS, { images: imageIds });
+              onUpdateListing(PHOTOS, { images: imageIds, id: currentListing.id });
             }
           }}
           onUpdateImageOrder={onUpdateImageOrder}

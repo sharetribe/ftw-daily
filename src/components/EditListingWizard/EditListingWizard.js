@@ -56,7 +56,7 @@ const tabCompleted = (tab, listing) => {
     case DESCRIPTION:
       return !!(description && title);
     case POLICY:
-      return !!(publicData && typeof publicData.saunaRules !== 'undefined');
+      return !!(publicData && typeof publicData.rules !== 'undefined');
     case LOCATION:
       return !!(geolocation && publicData && publicData.location && publicData.location.address);
     case PRICING:
@@ -107,6 +107,7 @@ class EditListingWizard extends Component {
     const { id, className, rootClassName, params, listing, viewport, intl, ...rest } = this.props;
 
     const selectedTab = params.tab;
+    const isNew = params.type === 'new';
     const rootClasses = rootClassName || css.root;
     const classes = classNames(rootClasses, className);
     const currentListing = ensureListing(listing);
@@ -148,7 +149,7 @@ class EditListingWizard extends Component {
               tabLabel={tabLabel(intl, tab)}
               tabLinkProps={tabLink(tab)}
               selected={selectedTab === tab}
-              disabled={!tabsStatus[tab]}
+              disabled={isNew && !tabsStatus[tab]}
               tab={tab}
               intl={intl}
               params={params}
