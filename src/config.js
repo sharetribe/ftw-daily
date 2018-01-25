@@ -1,9 +1,7 @@
-import amenities from './saunatime-amenities.json';
+import * as custom from './marketplace-custom-config.js';
 
 const env = process.env.REACT_APP_ENV || 'production';
 const dev = process.env.REACT_APP_ENV === 'development';
-
-const saunatime = { amenities };
 
 // If you want to change the language, remember to also change the
 // locale data and the messages in the app.js file.
@@ -302,7 +300,7 @@ const config = {
   facebookAppId,
   sentryDsn,
   usingSSL,
-  saunatime,
+  custom,
 };
 
 export default config;

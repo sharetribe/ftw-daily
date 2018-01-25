@@ -12,36 +12,36 @@ const componentProps = {
   legend: legend,
   options: [
     {
-      name: 'towels',
-      text: 'Towels',
+      key: 'towels',
+      label: 'Towels',
     },
     {
-      name: 'bathroom',
-      text: 'Bathfoom',
+      key: 'bathroom',
+      label: 'Bathroom',
     },
     {
-      name: 'swimming_pool',
-      text: 'Swimming pool',
+      key: 'swimming_pool',
+      label: 'Swimming pool',
     },
     {
-      name: 'own_drinks',
-      text: 'Own drinks allowed',
+      key: 'own_drinks',
+      label: 'Own drinks allowed',
     },
     {
-      name: 'jacuzzi',
-      text: 'Jacuzzi',
+      key: 'jacuzzi',
+      label: 'Jacuzzi',
     },
     {
-      name: 'audiovisual_entertainment',
-      text: 'Audiovisual entertainment',
+      key: 'audiovisual_entertainment',
+      label: 'Audiovisual entertainment',
     },
     {
-      name: 'barbeque',
-      text: 'Barbeque',
+      key: 'barbeque',
+      label: 'Barbeque',
     },
     {
-      name: 'own_food_allowed',
-      text: 'Own food allowed',
+      key: 'own_food_allowed',
+      label: 'Own food allowed',
     },
   ],
   twoColumns: true,

@@ -39,7 +39,7 @@ const { node, string } = PropTypes;
 IconCheckbox.propTypes = { className: string };
 
 const FieldCheckbox = props => {
-  const { rootClassName, className, svgClassName, id, name, text } = props;
+  const { rootClassName, className, svgClassName, id, name, label } = props;
 
   const classes = classNames(rootClassName || css.root, className);
 
@@ -48,7 +48,7 @@ const FieldCheckbox = props => {
       <Field id={id} name={name} className={css.input} type="checkbox" component="input" />
       <label htmlFor={id} className={css.label}>
         <IconCheckbox className={svgClassName} />
-        <span className={css.text}>{text}</span>
+        <span className={css.text}>{label}</span>
       </label>
     </span>
   );
@@ -58,7 +58,7 @@ FieldCheckbox.defaultProps = {
   className: null,
   rootClassName: null,
   svgClassName: null,
-  text: null,
+  label: null,
 };
 
 FieldCheckbox.propTypes = {
@@ -67,7 +67,7 @@ FieldCheckbox.propTypes = {
   svgClassName: string,
   id: string.isRequired,
   name: string.isRequired,
-  text: node,
+  label: node,
 };
 
 export default FieldCheckbox;

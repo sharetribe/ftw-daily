@@ -42,7 +42,7 @@ const EditListingFeaturesFormComponent = props => {
       <FieldGroupCheckbox
         className={css.features}
         id={`${form}.amenities`}
-        options={config.saunatime.amenities}
+        options={config.custom.amenities}
       />
 
       <Button
@@ -77,6 +77,6 @@ EditListingFeaturesFormComponent.propTypes = {
   updateInProgress: bool.isRequired,
 };
 
-const formName = 'EditListingFeaturesForm';
+const defaultFormName = 'EditListingFeaturesForm';
 
-export default reduxForm({ form: formName })(EditListingFeaturesFormComponent);
+export default reduxForm({ form: defaultFormName })(EditListingFeaturesFormComponent);
