@@ -1,3 +1,5 @@
+import * as custom from './marketplace-custom-config.js';
+
 const env = process.env.REACT_APP_ENV || 'production';
 const dev = process.env.REACT_APP_ENV === 'development';
 
@@ -298,6 +300,7 @@ const config = {
   facebookAppId,
   sentryDsn,
   usingSSL,
+  custom,
 };
 
 export default config;

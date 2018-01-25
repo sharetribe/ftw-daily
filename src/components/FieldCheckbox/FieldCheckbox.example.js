@@ -15,7 +15,7 @@ const FormComponent = props => {
       <FieldCheckbox
         id="field-checkbox-example-id"
         name="field-checkbox-example-name"
-        text="Check here"
+        label="Check here"
       />
 
       <Button style={{ marginTop: 24 }} type="submit" disabled={submitDisabled}>

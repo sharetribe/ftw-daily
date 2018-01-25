@@ -7,41 +7,35 @@
  *
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { FieldCheckbox } from '../../components';
 import css from './FieldGroupCheckbox.css';
 
-class FieldGroupCheckbox extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { selected: [] };
-  }
+const FieldGroupCheckbox = props => {
+  const { rootClassName, className, id, legend, options, twoColumns } = props;
 
-  render() {
-    const { rootClassName, className, id, legend, options, twoColumns } = this.props;
-    const classes = classNames(rootClassName || css.root, className);
-    const listClasses = twoColumns ? classNames(css.list, css.twoColumns) : css.list;
+  const classes = classNames(rootClassName || css.root, className);
+  const listClasses = twoColumns ? classNames(css.list, css.twoColumns) : css.list;
 
-    return (
-      <fieldset className={classes}>
-        {legend ? <legend>{legend}</legend> : null}
-        <ul className={listClasses}>
-          {options.map(option => {
-            const fieldId = `${id}.${option.name}`;
-            return (
-              <li key={fieldId} className={css.item}>
-                <FieldCheckbox id={fieldId} name={option.name} text={option.text} />
-              </li>
-            );
-          })}
-        </ul>
-      </fieldset>
-    );
-  }
-}
+  return (
+    <fieldset className={classes}>
+      {legend ? <legend>{legend}</legend> : null}
+      <ul className={listClasses}>
+        {options.map(option => {
+          const fieldId = `${id}.${option.key}`;
+          return (
+            <li key={fieldId} className={css.item}>
+              <FieldCheckbox id={fieldId} name={option.key} label={option.label} />
+            </li>
+          );
+        })}
+      </ul>
+    </fieldset>
+  );
+};
 
 FieldGroupCheckbox.defaultProps = {
   rootClassName: null,
@@ -59,8 +53,8 @@ FieldGroupCheckbox.propTypes = {
   legend: node,
   options: arrayOf(
     shape({
-      name: string.isRequired,
-      text: node.isRequired,
+      key: string.isRequired,
+      label: node.isRequired,
     })
   ).isRequired,
   twoColumns: bool,

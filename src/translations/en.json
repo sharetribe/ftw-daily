@@ -119,6 +119,7 @@
   "EditListingDescriptionForm.updateFailed": "Failed to update listing. Please try again.",
   "EditListingDescriptionPanel.createListingTitle": "Add your sauna",
   "EditListingDescriptionPanel.title": "Edit details of {listingTitle}",
+  "EditListingFeaturesForm.updateFailed": "Failed to update listing. Please try again.",
   "EditListingLocationForm.address": "Address",
   "EditListingLocationForm.addressNotRecognized": "We didn't recognize this location. Please try another location.",
   "EditListingLocationForm.addressPlaceholder": "123 Example Street",
