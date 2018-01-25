@@ -1,0 +1,34 @@
+@import '../../marketplace.css';
+
+:root {
+  --formMargins: {
+    margin-bottom: 24px;
+
+    @media (--viewportMedium) {
+      margin-bottom: 32px;
+    }
+  }
+}
+
+.root {
+}
+
+.features {
+  @apply --formMargins;
+}
+
+.error {
+  color: var(--failColor);
+}
+
+.submitButton {
+  margin-top: auto;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+
+  @media (--viewportLarge) {
+    display: inline-block;
+    width: 241px;
+    margin-top: 100px;
+  }
+}

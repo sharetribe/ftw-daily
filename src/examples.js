@@ -56,6 +56,7 @@ import * as UserCard from './components/UserCard/UserCard.example';
 import * as BookingDatesForm from './containers/BookingDatesForm/BookingDatesForm.example';
 import * as Colors from './containers/StyleguidePage/Colors.example';
 import * as EditListingDescriptionForm from './containers/EditListingDescriptionForm/EditListingDescriptionForm.example';
+import * as EditListingFeaturesForm from './containers/EditListingFeaturesForm/EditListingFeaturesForm.example';
 import * as EditListingLocationForm from './containers/EditListingLocationForm/EditListingLocationForm.example';
 import * as EditListingPhotosForm from './containers/EditListingPhotosForm/EditListingPhotosForm.example';
 import * as EditListingPoliciesForm from './containers/EditListingPoliciesForm/EditListingPoliciesForm.example';
@@ -84,6 +85,7 @@ export {
   CurrencyInputField,
   DateRangeInputField,
   EditListingDescriptionForm,
+  EditListingFeaturesForm,
   EditListingLocationForm,
   EditListingPhotosForm,
   EditListingPoliciesForm,

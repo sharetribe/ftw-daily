@@ -8,6 +8,9 @@ export {
   default as EditListingDescriptionForm,
 } from './EditListingDescriptionForm/EditListingDescriptionForm';
 export {
+  default as EditListingFeaturesForm,
+} from './EditListingFeaturesForm/EditListingFeaturesForm';
+export {
   default as EditListingLocationForm,
 } from './EditListingLocationForm/EditListingLocationForm';
 export { default as EditListingPage } from './EditListingPage/EditListingPage';

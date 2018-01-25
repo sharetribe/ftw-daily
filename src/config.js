@@ -238,6 +238,43 @@ const exampleCustomAttributes = {
   },
 };
 
+const amenities = [
+  {
+    name: 'towels',
+    text: 'Towels',
+  },
+  {
+    name: 'bathroom',
+    text: 'Bathroom',
+  },
+  {
+    name: 'swimming_pool',
+    text: 'Swimming pool',
+  },
+  {
+    name: 'own_drinks',
+    text: 'Own drinks allowed',
+  },
+  {
+    name: 'jacuzzi',
+    text: 'Jacuzzi',
+  },
+  {
+    name: 'audiovisual_entertainment',
+    text: 'Audiovisual entertainment',
+  },
+  {
+    name: 'barbeque',
+    text: 'Barbeque',
+  },
+  {
+    name: 'own_food_allowed',
+    text: 'Own food allowed',
+  },
+];
+
+const saunatime = { amenities };
+
 // To use the example custom attributes, set the
 // REACT_APP_USE_EXAMPLE_CUSTOM_ATTRIBUTES variable to `true` in the
 // gitignored `.env.development.local` file
@@ -298,6 +335,7 @@ const config = {
   facebookAppId,
   sentryDsn,
   usingSSL,
+  saunatime,
 };
 
 export default config;
