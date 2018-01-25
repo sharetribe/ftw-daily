@@ -225,7 +225,7 @@ const stripeSupportedCountries = [
 //    type: 'listing',
 //    attributes: {
 //      title: 'sauna',
-//      // and description, closed, deleted, price, etc.
+//      // and description, price, etc.
 //      customAttributes: {
 //        category: "mountain",
 //        // and other added custom attributes as "key: value" pairs
