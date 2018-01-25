@@ -36,3 +36,10 @@ export const amenities = [
     label: 'Own food allowed',
   },
 ];
+
+export const categories = [
+  { key: 'road', label: 'Road' },
+  { key: 'mountain', label: 'Mountain' },
+  { key: 'track', label: 'Track' },
+  { key: 'other', label: 'Other' },
+];
