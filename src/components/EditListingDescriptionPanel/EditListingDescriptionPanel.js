@@ -6,6 +6,7 @@ import { ensureListing } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
 import { NamedLink } from '../../components';
 import { EditListingDescriptionForm } from '../../containers';
+import config from '../../config';
 
 import css from './EditListingDescriptionPanel.css';
 
@@ -65,6 +66,7 @@ const EditListingDescriptionPanel = props => {
         updated={panelUpdated}
         updateError={errors.updateListingError}
         updateInProgress={updateInProgress}
+        categories={config.custom.categories}
       />
     </div>
   );

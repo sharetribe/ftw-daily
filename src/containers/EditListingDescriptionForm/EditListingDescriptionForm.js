@@ -1,16 +1,47 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, string, arrayOf, shape } from 'prop-types';
 import { compose } from 'redux';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { maxLength, required } from '../../util/validators';
-import { FieldCustomAttributeSelect, Form, Button, TextInputField } from '../../components';
+import { Form, Button, TextInputField, SelectField } from '../../components';
 
 import css from './EditListingDescriptionForm.css';
 
 const TITLE_MAX_LENGTH = 60;
+
+const CustomCategorySelectFieldMaybe = props => {
+  const { name, id, categories, intl } = props;
+  const categoryLabel = intl.formatMessage({
+    id: 'EditListingDescriptionForm.categoryLabel',
+  });
+  const categoryPlaceholder = intl.formatMessage({
+    id: 'EditListingDescriptionForm.categoryPlaceholder',
+  });
+  const categoryRequired = required(
+    intl.formatMessage({
+      id: 'EditListingDescriptionForm.categoryRequired',
+    })
+  );
+  return categories ? (
+    <SelectField
+      className={css.category}
+      name={name}
+      id={id}
+      label={categoryLabel}
+      validate={categoryRequired}
+    >
+      <option value="">{categoryPlaceholder}</option>
+      {categories.map(c => (
+        <option key={c.key} value={c.key}>
+          {c.label}
+        </option>
+      ))}
+    </SelectField>
+  ) : null;
+};
 
 const EditListingDescriptionFormComponent = props => {
   const {
@@ -25,6 +56,7 @@ const EditListingDescriptionFormComponent = props => {
     updated,
     updateError,
     updateInProgress,
+    categories,
   } = props;
 
   const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
@@ -86,10 +118,11 @@ const EditListingDescriptionFormComponent = props => {
         validate={[required(descriptionRequiredMessage)]}
       />
 
-      <FieldCustomAttributeSelect
-        className={css.category}
+      <CustomCategorySelectFieldMaybe
+        name="category"
         id={`${form}.category`}
-        customAttribute="category"
+        categories={categories}
+        intl={intl}
       />
 
       <Button
@@ -107,8 +140,6 @@ const EditListingDescriptionFormComponent = props => {
 
 EditListingDescriptionFormComponent.defaultProps = { className: null, updateError: null };
 
-const { bool, func, string } = PropTypes;
-
 EditListingDescriptionFormComponent.propTypes = {
   ...formPropTypes,
   className: string,
@@ -118,6 +149,12 @@ EditListingDescriptionFormComponent.propTypes = {
   updated: bool.isRequired,
   updateError: propTypes.error,
   updateInProgress: bool.isRequired,
+  categories: arrayOf(
+    shape({
+      key: string.isRequired,
+      label: string.isRequired,
+    })
+  ),
 };
 
 const formName = 'EditListingDescriptionForm';
