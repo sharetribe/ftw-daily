@@ -347,6 +347,7 @@ export class ListingPageComponent extends Component {
     const userAndListingAuthorAvailable = !!(currentUser && authorAvailable);
     const isOwnListing =
       userAndListingAuthorAvailable && currentListing.author.id.uuid === currentUser.id.uuid;
+    const isClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
     const showContactUser = !currentUser || (currentUser && !isOwnListing);
 
     const currentAuthor = authorAvailable ? currentListing.author : null;
@@ -372,7 +373,7 @@ export class ListingPageComponent extends Component {
       </div>
     ) : null;
 
-    const showClosedListingHelpText = currentListing.id && currentListing.attributes.closed;
+    const showClosedListingHelpText = currentListing.id && isClosed;
     const bookingHeading = (
       <div className={css.bookingHeading}>
         <h2 className={css.bookingTitle}>
@@ -395,8 +396,8 @@ export class ListingPageComponent extends Component {
     };
 
     const handleBookingSubmit = values => {
-      const isClosed = currentListing.attributes.closed;
-      if (isOwnListing || isClosed) {
+      const isCurrentlyClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
+      if (isOwnListing || isCurrentlyClosed) {
         window.scrollTo(0, 0);
       } else {
         this.handleSubmit(values);
@@ -406,8 +407,8 @@ export class ListingPageComponent extends Component {
     const editParams = { id: listingId.uuid, slug: listingSlug, type: 'edit', tab: 'description' };
 
     const handleBookButtonClick = () => {
-      const isClosed = currentListing.attributes.closed;
-      if (isOwnListing || isClosed) {
+      const isCurrentlyClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
+      if (isOwnListing || isCurrentlyClosed) {
         window.scrollTo(0, 0);
       } else {
         gotoBookTab(history, currentListing);
@@ -634,7 +635,7 @@ export class ListingPageComponent extends Component {
                   </div>
 
                   {bookingHeading}
-                  {!currentListing.attributes.closed ? (
+                  {!isClosed ? (
                     <BookingDatesForm
                       className={css.bookingForm}
                       submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
@@ -655,7 +656,7 @@ export class ListingPageComponent extends Component {
                     </div>
                   </div>
 
-                  {!currentListing.attributes.closed ? (
+                  {!isClosed ? (
                     <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
                       {bookBtnMessage}
                     </Button>

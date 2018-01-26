@@ -148,7 +148,6 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
               },
               "listing": Object {
                 "attributes": Object {
-                  "closed": false,
                   "customAttributes": Object {},
                   "deleted": false,
                   "description": "listing1 description",
@@ -347,7 +346,6 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
               },
               "listing": Object {
                 "attributes": Object {
-                  "closed": false,
                   "customAttributes": Object {},
                   "deleted": false,
                   "description": "listing1 description",

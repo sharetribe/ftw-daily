@@ -139,7 +139,6 @@ const listingAttributes = shape({
   title: string.isRequired,
   description: string.isRequired,
   geolocation: propTypes.latlng.isRequired,
-  closed: bool.isRequired,
   deleted: propTypes.value(false).isRequired,
   state: oneOf(LISTING_STATES).isRequired,
   price: propTypes.money,
@@ -151,7 +150,6 @@ const ownListingAttributes = shape({
   title: string.isRequired,
   description: string.isRequired,
   geolocation: propTypes.latlng.isRequired,
-  closed: bool.isRequired,
   deleted: propTypes.value(false).isRequired,
   state: oneOf(LISTING_STATES).isRequired,
   price: propTypes.money,
@@ -160,7 +158,6 @@ const ownListingAttributes = shape({
 });
 
 const deletedListingAttributes = shape({
-  closed: bool.isRequired,
   deleted: propTypes.value(true).isRequired,
 });
 

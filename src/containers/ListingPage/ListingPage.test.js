@@ -109,8 +109,6 @@ describe('ListingPage', () => {
   describe('ActionBarMaybe', () => {
     it('shows users own listing status', () => {
       const listing = createListing('listing-published', {
-        closed: false,
-        deleted: false,
         state: LISTING_STATE_PUBLISHED,
       });
       const actionBar = shallow(<ActionBarMaybe isOwnListing listing={listing} editParams={{}} />);
@@ -121,8 +119,6 @@ describe('ListingPage', () => {
     });
     it('shows users own pending listing status', () => {
       const listing = createListing('listing-published', {
-        closed: false,
-        deleted: false,
         state: LISTING_STATE_PENDING_APPROVAL,
       });
       const actionBar = shallow(<ActionBarMaybe isOwnListing listing={listing} editParams={{}} />);
@@ -133,8 +129,6 @@ describe('ListingPage', () => {
     });
     it('shows users own closed listing status', () => {
       const listing = createListing('listing-closed', {
-        closed: true,
-        deleted: false,
         state: LISTING_STATE_CLOSED,
       });
       const actionBar = shallow(<ActionBarMaybe isOwnListing listing={listing} editParams={{}} />);
@@ -145,8 +139,6 @@ describe('ListingPage', () => {
     });
     it('shows closed listing status', () => {
       const listing = createListing('listing-closed', {
-        closed: true,
-        deleted: false,
         state: LISTING_STATE_CLOSED,
       });
       const actionBar = shallow(
@@ -158,8 +150,6 @@ describe('ListingPage', () => {
     });
     it("is missing if listing is not closed or user's own", () => {
       const listing = createListing('listing-published', {
-        closed: false,
-        deleted: false,
         state: LISTING_STATE_PUBLISHED,
       });
       const actionBar = shallow(

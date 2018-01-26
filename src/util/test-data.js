@@ -6,6 +6,7 @@ import {
   TRANSITION_REQUEST,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
+  LISTING_STATE_PUBLISHED,
 } from '../util/types';
 
 const { UUID, LatLng, Money } = sdkTypes;
@@ -82,9 +83,8 @@ export const createListing = (id, attributes = {}, includes = {}) => ({
     title: `${id} title`,
     description: `${id} description`,
     geolocation: new LatLng(40, 60),
-    closed: false,
     deleted: false,
-    state: 'published',
+    state: LISTING_STATE_PUBLISHED,
     price: new Money(5500, 'USD'),
     customAttributes: {},
     publicData: {},
@@ -101,9 +101,8 @@ export const createOwnListing = (id, attributes = {}, includes = {}) => ({
     title: `${id} title`,
     description: `${id} description`,
     geolocation: new LatLng(40, 60),
-    closed: false,
     deleted: false,
-    state: 'published',
+    state: LISTING_STATE_PUBLISHED,
     price: new Money(5500, 'USD'),
     customAttributes: {},
     publicData: {},
