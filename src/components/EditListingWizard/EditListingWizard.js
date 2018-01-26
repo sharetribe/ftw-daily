@@ -101,6 +101,11 @@ class EditListingWizard extends Component {
 
     // Having this info in state would trigger unnecessary rerendering
     this.hasScrolledToTab = false;
+    this.handleCreateFlowTabScrolling = this.handleCreateFlowTabScrolling.bind(this);
+  }
+
+  handleCreateFlowTabScrolling(shouldScroll) {
+    this.hasScrolledToTab = shouldScroll;
   }
 
   render() {
@@ -155,6 +160,7 @@ class EditListingWizard extends Component {
               params={params}
               listing={listing}
               marketplaceTabs={TABS}
+              handleCreateFlowTabScrolling={this.handleCreateFlowTabScrolling}
             />
           );
         })}
