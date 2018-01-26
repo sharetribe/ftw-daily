@@ -271,28 +271,22 @@ exports[`ListingPage matches snapshot 1`] = `
                 listing1 description
               </p>
             </div>
-            <div>
-              <h2>
-                <FormattedMessage
-                  id="ListingPage.locationTitle"
-                  values={Object {}}
-                />
-              </h2>
-              <div>
-                <Map
-                  address=""
-                  center={
-                    LatLng {
-                      "lat": 40,
-                      "lng": 60,
-                    }
-                  }
-                  className=""
-                  rootClassName={null}
-                  zoom={11}
-                />
-              </div>
-            </div>
+            <SectionRulesMaybe
+              className={null}
+              publicData={Object {}}
+              rootClassName={null}
+            />
+            <SectionMapMaybe
+              className={null}
+              geolocation={
+                LatLng {
+                  "lat": 40,
+                  "lng": 60,
+                }
+              }
+              publicData={Object {}}
+              rootClassName={null}
+            />
             <div>
               <h2>
                 <FormattedMessage

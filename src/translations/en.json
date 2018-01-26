@@ -278,6 +278,7 @@
   "ListingPage.perUnit": "per night",
   "ListingPage.reviewsError": "Loading reviews failed.",
   "ListingPage.reviewsHeading": "Reviews ({count})",
+  "ListingPage.rulesTitle": "Sauna rules",
   "ListingPage.schemaTitle": "{title} - {price} | {siteTitle}",
   "ListingPage.viewImagesButton": "View photos ({count})",
   "ListingPage.yourHostHeading": "Your host",
