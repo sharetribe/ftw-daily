@@ -67,7 +67,8 @@ const EditListingWizardTab = props => {
 
   const onCompleteEditListingWizardTab = (tab, updateValues) => {
     if (isNew) {
-      const onUpsertListingDraft = currentListing.id ? onUpdateListingDraft : onCreateListingDraft;
+      const onUpsertListingDraft =
+        tab !== marketplaceTabs[0] ? onUpdateListingDraft : onCreateListingDraft;
       onUpsertListingDraft(updateValues);
 
       // Create listing flow: smooth scrolling polyfill to scroll to correct tab
