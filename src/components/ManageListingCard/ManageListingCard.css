@@ -256,6 +256,10 @@
   }
 }
 
+.titlePending {
+  color: var(--attentionColor);
+}
+
 .edit {
   @apply --marketplaceButtonStylesSecondary;
 
@@ -279,14 +283,16 @@
 
 .loadingOverlayWrapper,
 .errorOverlayWrapper,
-.closedOverlayWrapper {
+.closedOverlayWrapper,
+.pendingApprovalOverlayWrapper {
   /* Positioning */
   @apply --coverEverything;
 }
 
 .loadingOverlay,
 .errorOverlay,
-.closedOverlay {
+.closedOverlay,
+.pendingApprovalOverlay {
   /* Positioning */
   @apply --coverEverything;
 
@@ -297,7 +303,8 @@
 
 .loadingOverlayContent,
 .errorOverlayContent,
-.closedOverlayContent {
+.closedOverlayContent,
+.pendingApprovalOverlayContent {
   @apply --marketplaceH4FontStyles;
   color: var(--matterColor);
 
@@ -327,8 +334,18 @@
   margin-top: 90px;
 }
 
+.pendingApprovalOverlayContent {
+  justify-content: flex-start;
+  margin-top: 90px;
+}
+
 .closedMessage {
   max-width: 220px;
+  text-align: center;
+}
+
+.pendingMessage {
+  max-width: 300px;
   text-align: center;
 }
 

@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
-import { propTypes } from '../../util/types';
+import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { ensureOwnListing } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
@@ -73,7 +73,9 @@ export const ManageListingCardComponent = props => {
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
   const id = currentListing.id.uuid;
-  const { title = '', price, closed } = currentListing.attributes;
+  const { title = '', price, state } = currentListing.attributes;
+  const isPendingApproval = state === LISTING_STATE_PENDING_APPROVAL;
+  const isClosed = state === LISTING_STATE_CLOSED;
   const slug = createSlug(title);
   const firstImage =
     currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
@@ -85,7 +87,7 @@ export const ManageListingCardComponent = props => {
   const { formattedPrice, priceTitle } = priceData(price, intl);
 
   /* eslint-disable jsx-a11y/no-static-element-interactions */
-  const closedOverlay = !closed ? null : (
+  const closedOverlay = !isClosed ? null : (
     <div
       className={css.closedOverlayWrapper}
       onClick={event => {
@@ -133,6 +135,26 @@ export const ManageListingCardComponent = props => {
       </div>
     ) : null;
 
+  const pendingApprovalOverlay = isPendingApproval ? (
+    <div
+      className={css.pendingApprovalOverlayWrapper}
+      onClick={event => {
+        event.preventDefault();
+        event.stopPropagation();
+      }}
+    >
+      <div className={css.pendingApprovalOverlay} />
+      <div className={css.pendingApprovalOverlayContent}>
+        <div className={css.pendingMessage}>
+          <FormattedMessage
+            id="ManageListingCard.pendingApproval"
+            values={{ listingTitle: title }}
+          />
+        </div>
+      </div>
+    </div>
+  ) : null;
+
   const thisInProgress = actionsInProgressListingId && actionsInProgressListingId.uuid === id;
   const loadingOrErrorOverlay = thisInProgress ? (
     <div
@@ -151,6 +173,10 @@ export const ManageListingCardComponent = props => {
     errorOverlay
   );
   /* eslint-enable jsx-a11y/no-static-element-interactions */
+
+  const titleClasses = classNames(css.title, {
+    [css.titlePending]: isPendingApproval,
+  });
 
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
@@ -176,7 +202,7 @@ export const ManageListingCardComponent = props => {
           <div className={css.menubarGradient} />
           <div className={css.menubar}>
             <Menu
-              className={classNames(css.menu, { [css.cardIsOpen]: !closed })}
+              className={classNames(css.menu, { [css.cardIsOpen]: !isClosed })}
               contentPlacementOffset={MENU_CONTENT_OFFSET}
               contentPosition="left"
               useArrow={false}
@@ -212,6 +238,7 @@ export const ManageListingCardComponent = props => {
           </div>
         </div>
         {closedOverlay}
+        {pendingApprovalOverlay}
         {loadingOrErrorOverlay}
       </div>
       <div className={css.info}>
@@ -224,7 +251,7 @@ export const ManageListingCardComponent = props => {
           </div>
         </div>
         <div className={css.mainInfo}>
-          <div className={css.title}>{title}</div>
+          <div className={titleClasses}>{title}</div>
         </div>
         <button
           className={css.edit}

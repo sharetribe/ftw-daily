@@ -116,7 +116,9 @@ exports[`ManageListingCard matches snapshot 1`] = `
       </div>
     </div>
     <div>
-      <div>
+      <div
+        className=""
+      >
         listing1 title
       </div>
     </div>
