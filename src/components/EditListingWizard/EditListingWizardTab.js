@@ -44,6 +44,7 @@ const EditListingWizardTab = props => {
     history,
     images,
     listing,
+    handleCreateFlowTabScrolling,
     onCreateListing,
     onUpdateListing,
     onCreateListingDraft,
@@ -68,6 +69,9 @@ const EditListingWizardTab = props => {
     if (isNew) {
       const onUpsertListingDraft = currentListing.id ? onUpdateListingDraft : onCreateListingDraft;
       onUpsertListingDraft(updateValues);
+
+      // Create listing flow: smooth scrolling polyfill to scroll to correct tab
+      handleCreateFlowTabScrolling(false);
       // Redirect to next tab
       const pathParams = pathParamsToNextTab(params, tab, marketplaceTabs);
       history.push(
@@ -225,6 +229,7 @@ EditListingWizardTab.propTypes = {
     images: array,
   }),
 
+  handleCreateFlowTabScrolling: func.isRequired,
   onCreateListing: func.isRequired,
   onUpdateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
