@@ -130,6 +130,8 @@ export class EditListingPhotosFormComponent extends Component {
       );
     }
 
+    // NOTE: These error messages are here since Photos panel is the last visible panel
+    // before creating a new listing. If that order is changed, these should be changed too.
     // Create and show listing errors are shown above submit button
     const createListingFailed = createListingsError ? (
       <p className={css.error}>
@@ -142,6 +144,7 @@ export class EditListingPhotosFormComponent extends Component {
       </p>
     ) : null;
 
+    // Updating listing (edit mode) failed
     const errorMessage = updateError ? (
       <p className={css.error}>
         <FormattedMessage id="EditListingPhotosForm.updateFailed" />
