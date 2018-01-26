@@ -24,7 +24,7 @@ const EditListingDescriptionPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
-  const { description, title, customAttributes } = currentListing.attributes;
+  const { description, title, publicData } = currentListing.attributes;
   const listingTitle = title || '';
   const listingLink = currentListing.id ? (
     <NamedLink name="ListingPage" params={{ id: currentListing.id.uuid, slug: createSlug(title) }}>
@@ -48,7 +48,7 @@ const EditListingDescriptionPanel = props => {
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingDescriptionForm
         className={css.form}
-        initialValues={{ title, description, ...customAttributes }}
+        initialValues={{ title, description, category: publicData.category }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
           const { title, description, category } = values;
