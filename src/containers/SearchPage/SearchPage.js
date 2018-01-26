@@ -42,10 +42,12 @@ const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
 const BOUNDS_FIXED_PRECISION = 8;
 
+const CATEGORY_URL_PARAM = 'ca_category';
+
 // extract search parameters, including a custom attribute named category
 const pickSearchParamsOnly = params => {
-  const { address, origin, bounds, ca_category } = params || {};
-  return { address, origin, bounds, ca_category };
+  const { address, origin, bounds, ...rest } = params || {};
+  return { address, origin, bounds, [CATEGORY_URL_PARAM]: rest[CATEGORY_URL_PARAM] };
 };
 
 export class SearchPageComponent extends Component {
@@ -185,6 +187,7 @@ export class SearchPageComponent extends Component {
       searchInProgress,
       searchListingsError,
       searchParams,
+      categories,
     } = this.props;
     // eslint-disable-next-line no-unused-vars
     const { mapSearch, page, ...searchInURL } = parse(location.search, {
@@ -301,6 +304,7 @@ export class SearchPageComponent extends Component {
               searchListingsError={searchListingsError}
               onMapIconClick={onMapIconClick}
               onManageDisableScrolling={onManageDisableScrolling}
+              categories={categories}
             />
             <SearchFiltersMobile
               className={css.searchFiltersMobile}
@@ -314,6 +318,7 @@ export class SearchPageComponent extends Component {
               onManageDisableScrolling={onManageDisableScrolling}
               onOpenModal={this.onOpenMobileModal}
               onCloseModal={this.onCloseMobileModal}
+              categories={categories}
             />
             <div
               className={classNames(css.listings, {
@@ -354,6 +359,7 @@ SearchPageComponent.defaultProps = {
   searchListingsError: null,
   searchParams: {},
   tab: 'listings',
+  categories: config.custom.categories,
 };
 
 const { array, bool, func, oneOf, object, shape, string } = PropTypes;
@@ -369,6 +375,7 @@ SearchPageComponent.propTypes = {
   searchListingsError: propTypes.error,
   searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
+  categories: array,
 
   // from withRouter
   history: shape({
@@ -429,9 +436,9 @@ SearchPage.loadData = (params, search) => {
     latlng: ['origin'],
     latlngBounds: ['bounds'],
   });
-  const page = queryParams.page || 1;
+  const { page = 1, ...rest } = queryParams;
   return searchListings({
-    ...queryParams,
+    ...rest,
     page,
     perPage: RESULT_PAGE_SIZE,
     include: ['author', 'images'],

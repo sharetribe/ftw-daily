@@ -20,7 +20,19 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   <withRouter(Connect(TopbarContainerComponent)) />
   <div>
     <div>
-      <withRouter(SearchFiltersComponent)
+      <withRouter(InjectIntl(SearchFiltersComponent))
+        categories={
+          Array [
+            Object {
+              "key": "cat1",
+              "label": "Cat 1",
+            },
+            Object {
+              "key": "cat2",
+              "label": "Cat 2",
+            },
+          ]
+        }
         listingsAreLoaded={true}
         onManageDisableScrolling={[Function]}
         onMapIconClick={[Function]}
@@ -37,6 +49,18 @@ exports[`SearchPageComponent matches snapshot 1`] = `
         }
       />
       <InjectIntl(withRouter(SearchFiltersMobileComponent))
+        categories={
+          Array [
+            Object {
+              "key": "cat1",
+              "label": "Cat 1",
+            },
+            Object {
+              "key": "cat2",
+              "label": "Cat 2",
+            },
+          ]
+        }
         listingsAreLoaded={true}
         onCloseModal={[Function]}
         onManageDisableScrolling={[Function]}
