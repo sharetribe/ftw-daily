@@ -83,13 +83,7 @@ const routeConfiguration = () => {
     {
       path: '/l/:slug/:id',
       name: 'ListingPage',
-      component: props => <ListingPage {...props} tab="listing" />,
-      loadData: ListingPage.loadData,
-    },
-    {
-      path: '/l/:slug/:id/book',
-      name: 'ListingPageBook',
-      component: props => <ListingPage {...props} tab="book" />,
+      component: props => <ListingPage {...props} />,
       loadData: ListingPage.loadData,
     },
     {
