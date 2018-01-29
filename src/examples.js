@@ -4,10 +4,10 @@ import * as AddImages from './components/AddImages/AddImages.example';
 import * as Avatar from './components/Avatar/Avatar.example';
 import * as BookingBreakdown from './components/BookingBreakdown/BookingBreakdown.example';
 import * as Button from './components/Button/Button.example';
-import * as CurrencyInputField from './components/CurrencyInputField/CurrencyInputField.example';
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
 import * as FieldBirthdayInput from './components/FieldBirthdayInput/FieldBirthdayInput.example';
 import * as FieldCheckbox from './components/FieldCheckbox/FieldCheckbox.example';
+import * as FieldCurrencyInput from './components/FieldCurrencyInput/FieldCurrencyInput.example';
 import * as FieldDateRangeInput from './components/FieldDateRangeInput/FieldDateRangeInput.example';
 import * as FieldGroupCheckbox from './components/FieldGroupCheckbox/FieldGroupCheckbox.example';
 import * as FieldReviewRating from './components/FieldReviewRating/FieldReviewRating.example';
@@ -81,7 +81,6 @@ export {
   BookingDatesForm,
   Button,
   Colors,
-  CurrencyInputField,
   EditListingDescriptionForm,
   EditListingFeaturesForm,
   EditListingLocationForm,
@@ -93,6 +92,7 @@ export {
   ExpandingTextarea,
   FieldBirthdayInput,
   FieldCheckbox,
+  FieldCurrencyInput,
   FieldDateRangeInput,
   FieldGroupCheckbox,
   FieldReviewRating,

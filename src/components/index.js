@@ -9,7 +9,6 @@ export {
   InlineTextButton,
 } from './Button/Button';
 export { default as CookieConsent } from './CookieConsent/CookieConsent';
-export { default as CurrencyInputField } from './CurrencyInputField/CurrencyInputField';
 export { default as Discussion } from './Discussion/Discussion';
 export {
   default as EditListingDescriptionPanel,
@@ -30,6 +29,7 @@ export { default as ExternalLink } from './ExternalLink/ExternalLink';
 export { default as FilterPanel } from './FilterPanel/FilterPanel';
 export { default as FieldBirthdayInput } from './FieldBirthdayInput/FieldBirthdayInput';
 export { default as FieldCheckbox } from './FieldCheckbox/FieldCheckbox';
+export { default as FieldCurrencyInput } from './FieldCurrencyInput/FieldCurrencyInput';
 export { default as FieldDateRangeInput } from './FieldDateRangeInput/FieldDateRangeInput';
 export { default as FieldGroupCheckbox } from './FieldGroupCheckbox/FieldGroupCheckbox';
 export { default as FieldReviewRating } from './FieldReviewRating/FieldReviewRating';
