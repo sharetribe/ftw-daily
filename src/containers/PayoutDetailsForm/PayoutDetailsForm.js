@@ -11,7 +11,7 @@ import {
   Button,
   StripeBankAccountTokenInputField,
   SelectField,
-  BirthdayInputField,
+  FieldBirthdayInput,
   TextInputField,
 } from '../../components';
 import * as validators from '../../util/validators';
@@ -235,7 +235,7 @@ const PayoutDetailsFormComponent = props => {
             validate={lastNameRequired}
           />
         </div>
-        <BirthdayInputField
+        <FieldBirthdayInput
           className={css.field}
           id={birthdayId}
           name="birthDate"

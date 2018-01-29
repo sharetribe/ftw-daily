@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { range } from 'lodash';
 import { ValidationError } from '../../components';
 
-import css from './BirthdayInputField.css';
+import css from './FieldBirthdayInput.css';
 
 // Since redux-form tracks the onBlur event for marking the field as
 // touched (which triggers possible error validation rendering), only
@@ -239,7 +239,7 @@ BirthdayInputComponent.propTypes = {
 
 const BirthdayInput = injectIntl(BirthdayInputComponent);
 
-const BirthdayInputFieldComponent = props => {
+const FieldBirthdayInputComponent = props => {
   const { rootClassName, className, id, label, labelForMonth, labelForYear, input, meta } = props;
   const { valid, invalid, touched, error } = meta;
 
@@ -278,7 +278,7 @@ const BirthdayInputFieldComponent = props => {
   );
 };
 
-BirthdayInputFieldComponent.defaultProps = {
+FieldBirthdayInputComponent.defaultProps = {
   rootClassName: null,
   className: null,
   label: null,
@@ -286,7 +286,7 @@ BirthdayInputFieldComponent.defaultProps = {
   labelForYear: null,
 };
 
-BirthdayInputFieldComponent.propTypes = {
+FieldBirthdayInputComponent.propTypes = {
   rootClassName: string,
   className: string,
   id: string.isRequired,
@@ -297,8 +297,8 @@ BirthdayInputFieldComponent.propTypes = {
   meta: object.isRequired,
 };
 
-const BirthdayInputField = props => {
-  return <Field component={BirthdayInputFieldComponent} {...props} />;
+const FieldBirthdayInput = props => {
+  return <Field component={FieldBirthdayInputComponent} {...props} />;
 };
 
-export default BirthdayInputField;
+export default FieldBirthdayInput;

@@ -1,7 +1,6 @@
 export { default as ActivityFeed } from './ActivityFeed/ActivityFeed';
 export { default as AddImages } from './AddImages/AddImages';
 export { default as Avatar, AvatarMedium, AvatarLarge } from './Avatar/Avatar';
-export { default as BirthdayInputField } from './BirthdayInputField/BirthdayInputField';
 export { default as BookingBreakdown } from './BookingBreakdown/BookingBreakdown';
 export {
   default as Button,
@@ -29,6 +28,7 @@ export { default as EditListingWizard } from './EditListingWizard/EditListingWiz
 export { default as ExpandingTextarea } from './ExpandingTextarea/ExpandingTextarea';
 export { default as ExternalLink } from './ExternalLink/ExternalLink';
 export { default as FilterPanel } from './FilterPanel/FilterPanel';
+export { default as FieldBirthdayInput } from './FieldBirthdayInput/FieldBirthdayInput';
 export { default as FieldCheckbox } from './FieldCheckbox/FieldCheckbox';
 export { default as FieldDateRangeInput } from './FieldDateRangeInput/FieldDateRangeInput';
 export { default as FieldGroupCheckbox } from './FieldGroupCheckbox/FieldGroupCheckbox';
