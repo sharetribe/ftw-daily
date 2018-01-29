@@ -1,0 +1,98 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { FormattedMessage } from 'react-intl';
+import { toPairs } from 'lodash';
+
+import { ensureListing } from '../../util/data';
+import { createSlug } from '../../util/urlHelpers';
+import { EditListingFeaturesForm } from '../../containers';
+import { NamedLink } from '../../components';
+
+const EditListingFeaturesPanel = props => {
+  const {
+    rootClassName,
+    className,
+    listing,
+    onSubmit,
+    onChange,
+    submitButtonText,
+    panelUpdated,
+    updateInProgress,
+    errors,
+  } = props;
+
+  const classes = classNames(rootClassName || className);
+  const currentListing = ensureListing(listing);
+  const { title, publicData } = currentListing.attributes;
+  const listingTitle = title || '';
+  const listingLink = currentListing.id ? (
+    <NamedLink name="ListingPage" params={{ id: currentListing.id.uuid, slug: createSlug(title) }}>
+      {listingTitle}
+    </NamedLink>
+  ) : (
+    ''
+  );
+
+  const panelTitle = currentListing.id ? (
+    <FormattedMessage id="EditListingLocationPanel.title" values={{ listingTitle: listingLink }} />
+  ) : (
+    <FormattedMessage id="EditListingLocationPanel.createListingTitle" />
+  );
+
+  const currentFeaturesArray = publicData && publicData.amenities;
+  const currentFeatures =
+    currentFeaturesArray &&
+    currentFeaturesArray.reduce((map, key) => {
+      map[key] = true;
+      return map;
+    }, {});
+
+  return (
+    <div className={classes}>
+      <h1>{panelTitle}</h1>
+      <EditListingFeaturesForm
+        initialValues={currentFeatures}
+        onSubmit={values => {
+          const entries = toPairs(values);
+          const amenities = entries.filter(entry => entry[1] === true).map(entry => entry[0]);
+
+          const updatedValues = {
+            publicData: { amenities },
+          };
+          onSubmit(updatedValues);
+        }}
+        onChange={onChange}
+        saveActionMsg={submitButtonText}
+        updated={panelUpdated}
+        updateError={errors.updateListingError}
+        updateInProgress={updateInProgress}
+      />
+    </div>
+  );
+};
+
+EditListingFeaturesPanel.defaultProps = {
+  rootClassName: null,
+  className: null,
+  listing: null,
+};
+
+const { bool, func, object, string } = PropTypes;
+
+EditListingFeaturesPanel.propTypes = {
+  rootClassName: string,
+  className: string,
+
+  // We cannot use propTypes.listing since the listing might be a draft.
+  listing: object,
+
+  onSubmit: func.isRequired,
+  onChange: func.isRequired,
+  submitButtonText: string.isRequired,
+  panelUpdated: bool.isRequired,
+  updateInProgress: bool.isRequired,
+  errors: object.isRequired,
+};
+
+export default EditListingFeaturesPanel;
