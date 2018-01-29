@@ -11,6 +11,18 @@
 }
 
 .root {
+  /* Dimensions */
+  width: 100%;
+  height: auto;
+
+  /* Layout */
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  @media (--viewportMedium) {
+    padding-top: 1px;
+  }
 }
 
 .features {

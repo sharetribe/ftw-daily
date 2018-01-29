@@ -9,6 +9,8 @@ import { createSlug } from '../../util/urlHelpers';
 import { EditListingFeaturesForm } from '../../containers';
 import { NamedLink } from '../../components';
 
+import css from './EditListingFeaturesPanel.css';
+
 const EditListingFeaturesPanel = props => {
   const {
     rootClassName,
@@ -22,7 +24,7 @@ const EditListingFeaturesPanel = props => {
     errors,
   } = props;
 
-  const classes = classNames(rootClassName || className);
+  const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const { title, publicData } = currentListing.attributes;
   const listingTitle = title || '';
@@ -35,9 +37,9 @@ const EditListingFeaturesPanel = props => {
   );
 
   const panelTitle = currentListing.id ? (
-    <FormattedMessage id="EditListingLocationPanel.title" values={{ listingTitle: listingLink }} />
+    <FormattedMessage id="EditListingFeaturesPanel.title" values={{ listingTitle: listingLink }} />
   ) : (
-    <FormattedMessage id="EditListingLocationPanel.createListingTitle" />
+    <FormattedMessage id="EditListingFeaturesPanel.createListingTitle" />
   );
 
   const currentFeaturesArray = publicData && publicData.amenities;
@@ -50,8 +52,9 @@ const EditListingFeaturesPanel = props => {
 
   return (
     <div className={classes}>
-      <h1>{panelTitle}</h1>
+      <h1 className={css.title}>{panelTitle}</h1>
       <EditListingFeaturesForm
+        className={css.form}
         initialValues={currentFeatures}
         onSubmit={values => {
           const entries = toPairs(values);
