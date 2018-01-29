@@ -7,9 +7,9 @@ import { propTypes } from '../../util/types';
 import { ValidationError } from '../../components';
 
 import DateRangeInput from './DateRangeInput';
-import css from './DateRangeInputField.css';
+import css from './FieldDateRangeInput.css';
 
-class DateRangeInputFieldComponent extends Component {
+class FieldDateRangeInputComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { focusedInput: null };
@@ -139,7 +139,7 @@ class DateRangeInputFieldComponent extends Component {
   }
 }
 
-DateRangeInputFieldComponent.defaultProps = {
+FieldDateRangeInputComponent.defaultProps = {
   className: null,
   rootClassName: null,
   useMobileMargins: false,
@@ -155,7 +155,7 @@ DateRangeInputFieldComponent.defaultProps = {
 
 const { bool, func, object, oneOf, string } = PropTypes;
 
-DateRangeInputFieldComponent.propTypes = {
+FieldDateRangeInputComponent.propTypes = {
   className: string,
   rootClassName: string,
   unitType: propTypes.bookingUnitType.isRequired,
@@ -172,9 +172,9 @@ DateRangeInputFieldComponent.propTypes = {
   onFocusedInputChange: func,
 };
 
-const DateRangeInputField = props => {
-  return <Field component={DateRangeInputFieldComponent} {...props} />;
+const FieldDateRangeInput = props => {
+  return <Field component={FieldDateRangeInputComponent} {...props} />;
 };
 
 export { DateRangeInput };
-export default DateRangeInputField;
+export default FieldDateRangeInput;

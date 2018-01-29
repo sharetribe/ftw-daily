@@ -6,9 +6,9 @@ import * as BirthdayInputField from './components/BirthdayInputField/BirthdayInp
 import * as BookingBreakdown from './components/BookingBreakdown/BookingBreakdown.example';
 import * as Button from './components/Button/Button.example';
 import * as CurrencyInputField from './components/CurrencyInputField/CurrencyInputField.example';
-import * as DateRangeInputField from './components/DateRangeInputField/DateRangeInputField.example';
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
 import * as FieldCheckbox from './components/FieldCheckbox/FieldCheckbox.example';
+import * as FieldDateRangeInput from './components/FieldDateRangeInput/FieldDateRangeInput.example';
 import * as FieldGroupCheckbox from './components/FieldGroupCheckbox/FieldGroupCheckbox.example';
 import * as FieldReviewRating from './components/FieldReviewRating/FieldReviewRating.example';
 import * as Footer from './components/Footer/Footer.example';
@@ -83,7 +83,6 @@ export {
   Button,
   Colors,
   CurrencyInputField,
-  DateRangeInputField,
   EditListingDescriptionForm,
   EditListingFeaturesForm,
   EditListingLocationForm,
@@ -94,6 +93,7 @@ export {
   EnquiryForm,
   ExpandingTextarea,
   FieldCheckbox,
+  FieldDateRangeInput,
   FieldGroupCheckbox,
   FieldReviewRating,
   Footer,

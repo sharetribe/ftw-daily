@@ -19,7 +19,7 @@ import {
   propTypes,
 } from '../../util/types';
 import config from '../../config';
-import { Form, PrimaryButton, BookingBreakdown, DateRangeInputField } from '../../components';
+import { Form, PrimaryButton, BookingBreakdown, FieldDateRangeInput } from '../../components';
 
 import css from './BookingDatesForm.css';
 
@@ -175,9 +175,9 @@ export class BookingDatesFormComponent extends Component {
     const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle' });
     const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' });
     const startDateErrorMessage = intl.formatMessage({
-      id: 'DateRangeInputField.invalidStartDate',
+      id: 'FieldDateRangeInput.invalidStartDate',
     });
-    const endDateErrorMessage = intl.formatMessage({ id: 'DateRangeInputField.invalidEndDate' });
+    const endDateErrorMessage = intl.formatMessage({ id: 'FieldDateRangeInput.invalidEndDate' });
 
     const hasBookingInfo = startDate && endDate;
     const bookingInfo = hasBookingInfo ? (
@@ -208,7 +208,7 @@ export class BookingDatesFormComponent extends Component {
 
     return (
       <Form className={className} onSubmit={this.handleFormSubmit}>
-        <DateRangeInputField
+        <FieldDateRangeInput
           className={css.bookingDates}
           name="bookingDates"
           unitType={unitType}

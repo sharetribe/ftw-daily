@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderDeep } from '../../util/test-helpers';
 import { LINE_ITEM_NIGHT } from '../../util/types';
-import { DateRangeInput } from './DateRangeInputField';
+import { DateRangeInput } from './FieldDateRangeInput';
 
 const noop = () => null;
 

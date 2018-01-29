@@ -5,7 +5,7 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
   className={null}
   onSubmit={[Function]}
 >
-  <DateRangeInputField
+  <FieldDateRangeInput
     endDateId="fakeTestForm.bookingEndDate"
     endDateLabel="BookingDatesForm.bookingEndTitle"
     endDatePlaceholderText="tomorrow"
