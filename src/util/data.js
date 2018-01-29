@@ -165,7 +165,7 @@ export const ensureListing = listing => {
   const empty = {
     id: null,
     type: 'listing',
-    attributes: { customAttributes: {}, publicData: {} },
+    attributes: { publicData: {} },
     images: [],
   };
   return { ...empty, ...listing };
@@ -180,7 +180,7 @@ export const ensureOwnListing = listing => {
   const empty = {
     id: null,
     type: 'ownListing',
-    attributes: { customAttributes: {}, publicData: {} },
+    attributes: { publicData: {} },
     images: [],
   };
   return { ...empty, ...listing };

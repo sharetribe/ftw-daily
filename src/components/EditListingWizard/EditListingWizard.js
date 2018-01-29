@@ -185,7 +185,6 @@ EditListingWizard.propTypes = {
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: shape({
     attributes: shape({
-      customAttributes: object, // structure (key: value) can be defined in management console
       publicData: object,
       description: string,
       geolocation: object,
