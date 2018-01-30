@@ -94,6 +94,13 @@ const routeConfiguration = () => {
       setInitialValues: CheckoutPage.setInitialValues,
     },
     {
+      path: '/l/:slug/:id/:variant',
+      name: 'ListingPageVariant',
+      auth: true,
+      component: props => <ListingPage {...props} />,
+      loadData: ListingPage.loadData,
+    },
+    {
       path: '/l/new',
       name: 'NewListingPage',
       auth: true,
