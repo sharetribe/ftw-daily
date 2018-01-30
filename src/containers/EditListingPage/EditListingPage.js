@@ -6,7 +6,7 @@ import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { createSlug } from '../../util/urlHelpers';
-import { propTypes } from '../../util/types';
+import { LISTING_STATE_PENDING_APPROVAL, propTypes } from '../../util/types';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { stripeAccountClearError, createStripeAccount } from '../../ducks/user.duck';
@@ -29,13 +29,15 @@ import css from './EditListingPage.css';
 
 const { UUID } = sdkTypes;
 
+const PENDING_APPROVAL_VARIANT = 'pending-approval';
+
 // N.B. All the presentational content needs to be extracted to their own components
 export const EditListingPageComponent = props => {
   const {
     currentUser,
     createStripeAccountError,
     fetchInProgress,
-    getListing,
+    getOwnListing,
     history,
     intl,
     onCreateListing,
@@ -59,7 +61,9 @@ export const EditListingPageComponent = props => {
   const isNew = type === 'new';
   const newListingCreated = isNew && !!page.submittedListingId;
   const listingId = page.submittedListingId || (id ? new UUID(id) : null);
-  const currentListing = getListing(listingId);
+  const currentListing = getOwnListing(listingId);
+  const isPendingApproval =
+    currentListing && currentListing.attributes.state === LISTING_STATE_PENDING_APPROVAL;
 
   const shouldRedirect = page.submittedListingId && currentListing;
   const showForm = isNew || currentListing;
@@ -68,7 +72,25 @@ export const EditListingPageComponent = props => {
     // If page has already listingId (after submit) and current listings exist
     // redirect to listing page
     const listingSlug = currentListing ? createSlug(currentListing.attributes.title) : null;
-    return <NamedRedirect name="ListingPage" params={{ id: listingId.uuid, slug: listingSlug }} />;
+
+    const redirectProps = isPendingApproval
+      ? {
+          name: 'ListingPageVariant',
+          params: {
+            id: listingId.uuid,
+            slug: listingSlug,
+            variant: PENDING_APPROVAL_VARIANT,
+          },
+        }
+      : {
+          name: 'ListingPage',
+          params: {
+            id: listingId.uuid,
+            slug: listingSlug,
+          },
+        };
+
+    return <NamedRedirect {...redirectProps} />;
   } else if (showForm) {
     const {
       createListingsError = null,
@@ -166,7 +188,7 @@ EditListingPageComponent.propTypes = {
   createStripeAccountError: propTypes.error,
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
-  getListing: func.isRequired,
+  getOwnListing: func.isRequired,
   onCreateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
@@ -202,7 +224,7 @@ const mapStateToProps = state => {
 
   const fetchInProgress = createStripeAccountInProgress;
 
-  const getListing = id => {
+  const getOwnListing = id => {
     const listings = getMarketplaceEntities(state, [{ id, type: 'ownListing' }]);
 
     return listings.length === 1 ? listings[0] : null;
@@ -211,7 +233,7 @@ const mapStateToProps = state => {
     createStripeAccountError,
     currentUser,
     fetchInProgress,
-    getListing,
+    getOwnListing,
     page,
     scrollingDisabled: isScrollingDisabled(state),
   };
