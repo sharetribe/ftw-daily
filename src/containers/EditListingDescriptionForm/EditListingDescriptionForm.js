@@ -6,42 +6,12 @@ import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { maxLength, required } from '../../util/validators';
-import { Form, Button, TextInputField, SelectField } from '../../components';
+import { Form, Button, TextInputField } from '../../components';
+import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
 
 import css from './EditListingDescriptionForm.css';
 
 const TITLE_MAX_LENGTH = 60;
-
-const CustomCategorySelectFieldMaybe = props => {
-  const { name, id, categories, intl } = props;
-  const categoryLabel = intl.formatMessage({
-    id: 'EditListingDescriptionForm.categoryLabel',
-  });
-  const categoryPlaceholder = intl.formatMessage({
-    id: 'EditListingDescriptionForm.categoryPlaceholder',
-  });
-  const categoryRequired = required(
-    intl.formatMessage({
-      id: 'EditListingDescriptionForm.categoryRequired',
-    })
-  );
-  return categories ? (
-    <SelectField
-      className={css.category}
-      name={name}
-      id={id}
-      label={categoryLabel}
-      validate={categoryRequired}
-    >
-      <option value="">{categoryPlaceholder}</option>
-      {categories.map(c => (
-        <option key={c.key} value={c.key}>
-          {c.label}
-        </option>
-      ))}
-    </SelectField>
-  ) : null;
-};
 
 const EditListingDescriptionFormComponent = props => {
   const {
