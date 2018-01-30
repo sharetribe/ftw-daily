@@ -6,6 +6,7 @@ import { ensureListing } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
 import { NamedLink } from '../../components';
 import { EditListingDescriptionForm } from '../../containers';
+import config from '../../config';
 
 import css from './EditListingDescriptionPanel.css';
 
@@ -24,7 +25,7 @@ const EditListingDescriptionPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
-  const { description, title, customAttributes } = currentListing.attributes;
+  const { description, title, publicData } = currentListing.attributes;
   const listingTitle = title || '';
   const listingLink = currentListing.id ? (
     <NamedLink name="ListingPage" params={{ id: currentListing.id.uuid, slug: createSlug(title) }}>
@@ -48,14 +49,19 @@ const EditListingDescriptionPanel = props => {
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingDescriptionForm
         className={css.form}
-        initialValues={{ title, description, ...customAttributes }}
+        initialValues={{ title, description, category: publicData.category }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
           const { title, description, category } = values;
           const updateValues = {
             title,
             description,
+
+            // Save category also to the deprecated customAttributes
+            // so it can be used in search.
+            // TODO: remove when publicData is used in search
             customAttributes: { category },
+
             publicData: { category },
           };
 
@@ -65,6 +71,7 @@ const EditListingDescriptionPanel = props => {
         updated={panelUpdated}
         updateError={errors.updateListingError}
         updateInProgress={updateInProgress}
+        categories={config.custom.categories}
       />
     </div>
   );

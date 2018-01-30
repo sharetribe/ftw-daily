@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { object, string, func, arrayOf, shape } from 'prop-types';
 import classNames from 'classnames';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import config from '../../config';
 import css from './SelectSingleFilterMobile.css';
 
-class SelectSingleFilterMobileComponent extends Component {
+class SelectSingleFilterMobile extends Component {
   constructor(props) {
     super(props);
     this.state = { isOpen: true };
@@ -15,8 +14,8 @@ class SelectSingleFilterMobileComponent extends Component {
   }
 
   selectOption(option, e) {
-    const { customAttribute, onSelect } = this.props;
-    onSelect(customAttribute, option);
+    const { urlParam, onSelect } = this.props;
+    onSelect(urlParam, option);
 
     // blur event target if event is passed
     if (e && e.currentTarget) {
@@ -29,17 +28,10 @@ class SelectSingleFilterMobileComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className, customAttribute, urlQueryParams, intl } = this.props;
+    const { rootClassName, className, urlQueryParams, urlParam, paramLabel, options } = this.props;
 
-    const filterLabel = intl.formatMessage({
-      id: `SelectSingleFilterMobile.${customAttribute}.label`,
-    });
-    // custom attribute content
-    const ca = customAttribute && config.customAttributes[customAttribute];
-    // name of the corresponding query parameter
-    const caParam = `ca_${customAttribute}`;
     // current value of this custom attribute filter
-    const currentValue = urlQueryParams[caParam];
+    const currentValue = urlQueryParams[urlParam];
 
     const labelClass = currentValue ? css.filterLabelSelected : css.filterLabel;
 
@@ -53,22 +45,26 @@ class SelectSingleFilterMobileComponent extends Component {
       <div className={classes}>
         <div className={labelClass}>
           <button className={css.labelButton} onClick={this.toggleIsOpen}>
-            <span className={labelClass}>{filterLabel}</span>
+            <span className={labelClass}>{paramLabel}</span>
           </button>
           <button className={css.clearButton} onClick={e => this.selectOption(null, e)}>
             <FormattedMessage id={'SelectSingleFilterMobile.clear'} />
           </button>
         </div>
         <div className={optionsContainerClass}>
-          {ca.values.map(v => {
+          {options.map(option => {
             // check if this option is selected
-            const selected = currentValue === v;
+            const selected = currentValue === option.key;
             // menu item border class
             const optionBorderClass = selected ? css.optionBorderSelected : css.optionBorder;
             return (
-              <button key={v} className={css.option} onClick={() => this.selectOption(v)}>
+              <button
+                key={option.key}
+                className={css.option}
+                onClick={() => this.selectOption(option.key)}
+              >
                 <span className={optionBorderClass} />
-                <FormattedMessage id={`SelectSingleFilterMobile.category.option.${v}`} />
+                {option.label}
               </button>
             );
           })}
@@ -78,24 +74,25 @@ class SelectSingleFilterMobileComponent extends Component {
   }
 }
 
-const { object, string, func } = PropTypes;
-
-SelectSingleFilterMobileComponent.defaultProps = {
+SelectSingleFilterMobile.defaultProps = {
   rootClassName: null,
   className: null,
 };
 
-SelectSingleFilterMobileComponent.propTypes = {
+SelectSingleFilterMobile.propTypes = {
   rootClassName: string,
   className: string,
-  customAttribute: string.isRequired,
   urlQueryParams: object.isRequired,
+  urlParam: string.isRequired,
+  paramLabel: string.isRequired,
   onSelect: func.isRequired,
 
-  // from injectIntl
-  intl: intlShape.isRequired,
+  options: arrayOf(
+    shape({
+      key: string.isRequired,
+      label: string.isRequired,
+    })
+  ).isRequired,
 };
-
-const SelectSingleFilterMobile = injectIntl(SelectSingleFilterMobileComponent);
 
 export default SelectSingleFilterMobile;

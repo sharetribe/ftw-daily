@@ -146,6 +146,11 @@ const gotoListingTab = (history, listing) => {
   );
 };
 
+const categoryLabel = (categories, key) => {
+  const cat = categories.find(c => c.key === key);
+  return cat ? cat.label : key;
+};
+
 // TODO: price unit (per x), custom fields, contact, reviews
 // N.B. All the presentational content needs to be extracted to their own components
 export class ListingPageComponent extends Component {
@@ -262,13 +267,10 @@ export class ListingPageComponent extends Component {
       publicData,
     } = currentListing.attributes;
 
-    const { customAttributes } = currentListing.attributes;
-    const hasCategoryConfig = config.customAttributes && config.customAttributes.category;
-    const hasCategoryAttribute = customAttributes && customAttributes.category;
     const category =
-      hasCategoryConfig && hasCategoryAttribute ? (
+      publicData && publicData.category ? (
         <span>
-          <FormattedMessage id={`ListingPage.category.${customAttributes.category}`} />
+          {categoryLabel(config.custom.categories, publicData.category)}
           <span className={css.separator}>•</span>
         </span>
       ) : null;

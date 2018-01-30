@@ -142,7 +142,6 @@ const listingAttributes = shape({
   deleted: propTypes.value(false).isRequired,
   state: oneOf(LISTING_STATES).isRequired,
   price: propTypes.money,
-  customAttributes: object,
   publicData: object.isRequired,
 });
 
@@ -153,7 +152,6 @@ const ownListingAttributes = shape({
   deleted: propTypes.value(false).isRequired,
   state: oneOf(LISTING_STATES).isRequired,
   price: propTypes.money,
-  customAttributes: object,
   publicData: object.isRequired,
 });
 

@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { compose } from 'redux';
+import { object, string, bool, number, func, shape, array } from 'prop-types';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { omit } from 'lodash';
@@ -8,8 +9,9 @@ import { omit } from 'lodash';
 import { SelectSingleFilter } from '../../components';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
-import config from '../../config';
 import css from './SearchFilters.css';
+
+const CATEGORY_URL_PARAM = 'ca_category';
 
 const SearchFiltersComponent = props => {
   const {
@@ -19,7 +21,9 @@ const SearchFiltersComponent = props => {
     listingsAreLoaded,
     resultsCount,
     searchInProgress,
+    categories,
     history,
+    intl,
   } = props;
 
   const loadingResults = <FormattedMessage id="SearchFilters.loadingResults" />;
@@ -32,27 +36,27 @@ const SearchFiltersComponent = props => {
 
   const classes = classNames(rootClassName || css.root, className);
 
-  const onSelectSingle = (customAttribute, option) => {
-    // Name of the corresponding query parameter.
-    // The custom attribute query parameters are named
-    // ca_<custom_attribute_name> in the API.
-    const caParam = `ca_${customAttribute}`;
+  const categoryLabel = intl.formatMessage({
+    id: 'SearchFilters.categoryLabel',
+  });
 
+  const onSelectOption = (urlParam, option) => {
     // query parameters after selecting the option
     // if no option is passed, clear the selection for the filter
     const queryParams = option
-      ? { ...urlQueryParams, [caParam]: option }
-      : omit(urlQueryParams, caParam);
+      ? { ...urlQueryParams, [urlParam]: option }
+      : omit(urlQueryParams, urlParam);
 
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
-  const hasCategoryConfig = config.customAttributes && config.customAttributes.category;
-  const categoryFilter = hasCategoryConfig ? (
+  const categoryFilter = categories ? (
     <SelectSingleFilter
-      customAttribute="category"
       urlQueryParams={urlQueryParams}
-      onSelect={onSelectSingle}
+      urlParam={CATEGORY_URL_PARAM}
+      paramLabel={categoryLabel}
+      onSelect={onSelectOption}
+      options={categories}
     />
   ) : null;
   return (
@@ -68,13 +72,12 @@ const SearchFiltersComponent = props => {
   );
 };
 
-const { object, string, bool, number, func, shape } = PropTypes;
-
 SearchFiltersComponent.defaultProps = {
   rootClassName: null,
   className: null,
   resultsCount: null,
   searchingInProgress: false,
+  categories: null,
 };
 
 SearchFiltersComponent.propTypes = {
@@ -86,13 +89,17 @@ SearchFiltersComponent.propTypes = {
   searchingInProgress: bool,
   onMapIconClick: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  categories: array,
 
   // from withRouter
   history: shape({
     push: func.isRequired,
   }).isRequired,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
-const SearchFilters = withRouter(SearchFiltersComponent);
+const SearchFilters = compose(withRouter, injectIntl)(SearchFiltersComponent);
 
 export default SearchFilters;

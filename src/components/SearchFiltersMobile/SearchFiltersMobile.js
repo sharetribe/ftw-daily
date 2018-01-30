@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { object, string, bool, number, func, shape, array } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
@@ -8,18 +8,16 @@ import { omit, toPairs } from 'lodash';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import { SecondaryButton, ModalInMobile, Button, SelectSingleFilterMobile } from '../../components';
-import config from '../../config';
 import css from './SearchFiltersMobile.css';
 
-// prefix for all custom attribute query params
-const CA_PREFIX = 'ca_';
+const CATEGORY_URL_PARAM = 'ca_category';
 
 const validateParamValue = value => value !== null && value !== undefined && value.length > 0;
 
 // Check if a filter parameter is included query parameters
 const hasFilterQueryParams = queryParams => {
   const firstFilterParam = toPairs(queryParams).find(entry => {
-    return !!(entry[0].startsWith(CA_PREFIX) && validateParamValue(entry[1]));
+    return validateParamValue(entry[1]);
   });
   return !!firstFilterParam;
 };
@@ -28,9 +26,6 @@ class SearchFiltersMobileComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { isFiltersOpenOnMobile: false };
-
-    //TODO: take as props
-    this.customAttribute = 'category';
 
     this.openFilters = this.openFilters.bind(this);
     this.cancelFilters = this.cancelFilters.bind(this);
@@ -68,19 +63,14 @@ class SearchFiltersMobileComponent extends Component {
     this.setState({ isFiltersOpenOnMobile: false });
   }
 
-  onSelectSingle(customAttribute, option) {
+  onSelectSingle(urlParam, option) {
     const { urlQueryParams, history } = this.props;
-
-    // Name of the corresponding query parameter.
-    // The custom attribute query parameters are named
-    // ca_<custom_attribute_name> in the API.
-    const caParam = `${CA_PREFIX}${customAttribute}`;
 
     // query parameters after selecting the option
     // if no option is passed, clear the selection for the filter
     const queryParams = option
-      ? { ...urlQueryParams, [caParam]: option }
-      : omit(urlQueryParams, caParam);
+      ? { ...urlQueryParams, [urlParam]: option }
+      : omit(urlQueryParams, urlParam);
 
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   }
@@ -89,8 +79,7 @@ class SearchFiltersMobileComponent extends Component {
   resetAll(e) {
     const { urlQueryParams, history } = this.props;
 
-    const caParam = `${CA_PREFIX}${this.customAttribute}`;
-    const queryParams = omit(urlQueryParams, caParam);
+    const queryParams = omit(urlQueryParams, CATEGORY_URL_PARAM);
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
 
     // blur event target if event is passed
@@ -110,6 +99,7 @@ class SearchFiltersMobileComponent extends Component {
       showAsModalMaxWidth,
       onMapIconClick,
       onManageDisableScrolling,
+      categories,
       intl,
     } = this.props;
 
@@ -138,12 +128,16 @@ class SearchFiltersMobileComponent extends Component {
       </SecondaryButton>
     );
 
-    const hasCategoryConfig = config.customAttributes && config.customAttributes.category;
-    const categoryFilter = hasCategoryConfig ? (
+    const categoryLabel = intl.formatMessage({
+      id: 'SearchFiltersMobile.categoryLabel',
+    });
+    const categoryFilter = categories ? (
       <SelectSingleFilterMobile
-        customAttribute={this.customAttribute}
         urlQueryParams={urlQueryParams}
+        urlParam={CATEGORY_URL_PARAM}
+        paramLabel={categoryLabel}
         onSelect={this.onSelectSingle}
+        options={categories}
         intl={intl}
       />
     ) : null;
@@ -188,8 +182,6 @@ class SearchFiltersMobileComponent extends Component {
   }
 }
 
-const { object, string, bool, number, func, shape } = PropTypes;
-
 SearchFiltersMobileComponent.defaultProps = {
   rootClassName: null,
   className: null,
@@ -211,6 +203,7 @@ SearchFiltersMobileComponent.propTypes = {
   onManageDisableScrolling: func.isRequired,
   onOpenModal: func,
   onCloseModal: func,
+  categories: array,
 
   // from injectIntl
   intl: intlShape.isRequired,
