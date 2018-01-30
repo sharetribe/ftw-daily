@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { ensureListing } from '../../util/data';
-import { createSlug } from '../../util/urlHelpers';
-import { NamedLink } from '../../components';
+import { ListingLink } from '../../components';
 import { EditListingPoliciesForm } from '../../containers';
 
 import css from './EditListingPoliciesPanel.css';
@@ -24,18 +23,13 @@ const EditListingPoliciesPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
-  const { title, publicData } = currentListing.attributes;
-  const listingTitle = title || '';
-  const listingLink = currentListing.id ? (
-    <NamedLink name="ListingPage" params={{ id: currentListing.id.uuid, slug: createSlug(title) }}>
-      {listingTitle}
-    </NamedLink>
-  ) : (
-    ''
-  );
+  const { publicData } = currentListing.attributes;
 
   const panelTitle = currentListing.id ? (
-    <FormattedMessage id="EditListingPoliciesPanel.title" values={{ listingTitle: listingLink }} />
+    <FormattedMessage
+      id="EditListingPoliciesPanel.title"
+      values={{ listingTitle: <ListingLink listing={listing} /> }}
+    />
   ) : (
     <FormattedMessage id="EditListingPoliciesPanel.createListingTitle" />
   );

@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { createSlug } from '../../util/urlHelpers';
 import { EditListingPhotosForm } from '../../containers';
-import { ensureListing } from '../../util/data';
-import { NamedLink } from '../../components';
+import { ensureOwnListing } from '../../util/data';
+import { ListingLink } from '../../components';
 
 import css from './EditListingPhotosPanel.css';
 
@@ -31,23 +30,13 @@ class EditListingPhotosPanel extends Component {
 
     const rootClass = rootClassName || css.root;
     const classes = classNames(rootClass, className);
-    const currentListing = ensureListing(listing);
-    const { title } = currentListing.attributes;
-    const listingTitle = title || '';
-
-    const listingLink = currentListing.id ? (
-      <NamedLink
-        name="ListingPage"
-        params={{ id: currentListing.id.uuid, slug: createSlug(title) }}
-      >
-        {listingTitle}
-      </NamedLink>
-    ) : (
-      ''
-    );
+    const currentListing = ensureOwnListing(listing);
 
     const panelTitle = currentListing.id ? (
-      <FormattedMessage id="EditListingPhotosPanel.title" values={{ listingTitle: listingLink }} />
+      <FormattedMessage
+        id="EditListingPhotosPanel.title"
+        values={{ listingTitle: <ListingLink listing={listing} /> }}
+      />
     ) : (
       <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />
     );

@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { ensureListing } from '../../util/data';
-import { createSlug } from '../../util/urlHelpers';
-import { NamedLink } from '../../components';
+import { ListingLink } from '../../components';
 import { EditListingDescriptionForm } from '../../containers';
 import config from '../../config';
 
@@ -26,19 +25,11 @@ const EditListingDescriptionPanel = props => {
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const { description, title, publicData } = currentListing.attributes;
-  const listingTitle = title || '';
-  const listingLink = currentListing.id ? (
-    <NamedLink name="ListingPage" params={{ id: currentListing.id.uuid, slug: createSlug(title) }}>
-      {listingTitle}
-    </NamedLink>
-  ) : (
-    ''
-  );
 
   const panelTitle = currentListing.id ? (
     <FormattedMessage
       id="EditListingDescriptionPanel.title"
-      values={{ listingTitle: listingLink }}
+      values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
     <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
