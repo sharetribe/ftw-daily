@@ -46,22 +46,22 @@
   align-items: center;
 }
 
-.textWrapper {
+.labelWrapper {
   display: inline-block;
 }
 
-.selectedText,
-.notSelectedText {
+.selectedLabel,
+.notSelectedLabel {
   @apply --marketplaceBodyFontStyles;
   line-height: var(--lineHeight);
   margin: 0;
 }
 
-.selectedText {
+.selectedLabel {
   font-weight: var(--fontWeightSemiBold);
 }
 
-.notSelectedText {
+.notSelectedLabel {
   color: var(--matterColorNegative);
   position: relative;
 

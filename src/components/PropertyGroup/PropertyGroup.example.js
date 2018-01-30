@@ -1,14 +1,38 @@
 import PropertyGroup from './PropertyGroup';
 
 const exampleOptions = [
-  { value: 'towels', text: 'Towels' },
-  { value: 'bathroom', text: 'Bathroom' },
-  { value: 'swimming', text: 'Swimming' },
-  { value: 'own_drinks_allowed', text: 'Own drinks allowed' },
-  { value: 'jacuzzi', text: 'Jacuzzi' },
-  { value: 'audiovisual_entertainment', text: 'Audiovisual entertainment' },
-  { value: 'barbeque', text: 'Barbeque' },
-  { value: 'own_food_allowed', text: 'Own food allowed' },
+  {
+    key: 'towels',
+    label: 'Towels',
+  },
+  {
+    key: 'bathroom',
+    label: 'Bathroom',
+  },
+  {
+    key: 'swimming_pool',
+    label: 'Swimming pool',
+  },
+  {
+    key: 'own_drinks',
+    label: 'Own drinks allowed',
+  },
+  {
+    key: 'jacuzzi',
+    label: 'Jacuzzi',
+  },
+  {
+    key: 'audiovisual_entertainment',
+    label: 'Audiovisual entertainment',
+  },
+  {
+    key: 'barbeque',
+    label: 'Barbeque',
+  },
+  {
+    key: 'own_food_allowed',
+    label: 'Own food allowed',
+  },
 ];
 
 export const WithSomeSelected = {
