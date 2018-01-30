@@ -67,6 +67,7 @@ export { default as LayoutWrapperMain } from './LayoutWrapperMain/LayoutWrapperM
 export { default as LayoutWrapperSideNav } from './LayoutWrapperSideNav/LayoutWrapperSideNav';
 export { default as LayoutWrapperTopbar } from './LayoutWrapperTopbar/LayoutWrapperTopbar';
 export { default as ListingCard } from './ListingCard/ListingCard';
+export { default as ListingLink } from './ListingLink/ListingLink';
 export {
   default as LocationAutocompleteInput,
   LocationAutocompleteInputField,
