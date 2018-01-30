@@ -15,14 +15,14 @@ import { FieldCheckbox } from '../../components';
 import css from './FieldGroupCheckbox.css';
 
 const FieldGroupCheckbox = props => {
-  const { rootClassName, className, id, legend, options, twoColumns } = props;
+  const { rootClassName, className, id, label, options, twoColumns } = props;
 
   const classes = classNames(rootClassName || css.root, className);
   const listClasses = twoColumns ? classNames(css.list, css.twoColumns) : css.list;
 
   return (
     <fieldset className={classes}>
-      {legend ? <legend>{legend}</legend> : null}
+      {label ? <legend>{label}</legend> : null}
       <ul className={listClasses}>
         {options.map(option => {
           const fieldId = `${id}.${option.key}`;
@@ -40,7 +40,7 @@ const FieldGroupCheckbox = props => {
 FieldGroupCheckbox.defaultProps = {
   rootClassName: null,
   className: null,
-  legend: null,
+  label: null,
   twoColumns: false,
 };
 
@@ -50,7 +50,7 @@ FieldGroupCheckbox.propTypes = {
   rootClassName: string,
   className: string,
   id: string.isRequired,
-  legend: node,
+  label: node,
   options: arrayOf(
     shape({
       key: string.isRequired,
