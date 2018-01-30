@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import { arrayOf, bool, func, object, shape, string } from 'prop-types';
+import { arrayOf, bool, func, object, shape, string, oneOf, oneOfType } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -13,8 +13,8 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { createSlug, parse } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import { ensureListing, ensureUser, userDisplayName } from '../../util/data';
-import { getListingsById } from '../../ducks/marketplaceData.duck';
+import { ensureListing, ensureOwnListing, ensureUser, userDisplayName } from '../../util/data';
+import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import {
   AvatarLarge,
@@ -47,6 +47,8 @@ import css from './ListingPage.css';
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;
+
+const PENDING_APPROVAL_VARIANT = 'pending-approval';
 
 const { UUID } = sdkTypes;
 
@@ -107,7 +109,7 @@ export const ActionBarMaybe = props => {
 
 ActionBarMaybe.propTypes = {
   isOwnListing: bool.isRequired,
-  listing: propTypes.listing.isRequired,
+  listing: oneOfType([propTypes.listing, propTypes.ownListing]).isRequired,
   editParams: object.isRequired,
 };
 
@@ -241,6 +243,7 @@ export class ListingPageComponent extends Component {
       isAuthenticated,
       currentUser,
       getListing,
+      getOwnListing,
       intl,
       onManageDisableScrolling,
       params,
@@ -256,7 +259,10 @@ export class ListingPageComponent extends Component {
 
     const isBook = !!parse(location.search).book;
     const listingId = new UUID(params.id);
-    const currentListing = ensureListing(getListing(listingId));
+    const currentListing =
+      params.variant === PENDING_APPROVAL_VARIANT
+        ? ensureOwnListing(getOwnListing(listingId))
+        : ensureListing(getListing(listingId));
     const listingSlug = params.slug || createSlug(currentListing.attributes.title || '');
     const {
       description = '',
@@ -705,10 +711,13 @@ ListingPageComponent.propTypes = {
   params: shape({
     id: string.isRequired,
     slug: string,
+    variant: oneOf([PENDING_APPROVAL_VARIANT]),
   }).isRequired,
+
   isAuthenticated: bool.isRequired,
   currentUser: propTypes.currentUser,
   getListing: func.isRequired,
+  getOwnListing: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   scrollingDisabled: bool.isRequired,
   enquiryModalOpenForListingId: string,
@@ -734,7 +743,14 @@ const mapStateToProps = state => {
   const { currentUser } = state.user;
 
   const getListing = id => {
-    const listings = getListingsById(state, [id]);
+    const ref = { id, type: 'listing' };
+    const listings = getMarketplaceEntities(state, [ref]);
+    return listings.length === 1 ? listings[0] : null;
+  };
+
+  const getOwnListing = id => {
+    const ref = { id, type: 'ownListing' };
+    const listings = getMarketplaceEntities(state, [ref]);
     return listings.length === 1 ? listings[0] : null;
   };
 
@@ -742,6 +758,7 @@ const mapStateToProps = state => {
     isAuthenticated,
     currentUser,
     getListing,
+    getOwnListing,
     scrollingDisabled: isScrollingDisabled(state),
     enquiryModalOpenForListingId,
     showListingError,
