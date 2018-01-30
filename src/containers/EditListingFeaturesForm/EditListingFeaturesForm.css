@@ -11,13 +11,15 @@
 }
 
 .root {
+  /* Expand to available space */
+  flex-grow: 1;
+
   /* Dimensions */
   width: 100%;
   height: auto;
 
   /* Layout */
   display: flex;
-  flex: 1;
   flex-direction: column;
 
   @media (--viewportMedium) {
