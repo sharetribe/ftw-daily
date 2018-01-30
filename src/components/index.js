@@ -29,7 +29,6 @@ export {
 export { default as EditListingWizard } from './EditListingWizard/EditListingWizard';
 export { default as ExpandingTextarea } from './ExpandingTextarea/ExpandingTextarea';
 export { default as ExternalLink } from './ExternalLink/ExternalLink';
-export { default as FilterPanel } from './FilterPanel/FilterPanel';
 export { default as FieldBirthdayInput } from './FieldBirthdayInput/FieldBirthdayInput';
 export { default as FieldCheckbox } from './FieldCheckbox/FieldCheckbox';
 export { default as FieldCurrencyInput } from './FieldCurrencyInput/FieldCurrencyInput';
