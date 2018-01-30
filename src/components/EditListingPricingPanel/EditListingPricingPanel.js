@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { ListingLink } from '../../components';
 import { EditListingPricingForm } from '../../containers';
-import { ensureListing } from '../../util/data';
+import { ensureOwnListing } from '../../util/data';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import config from '../../config';
 
@@ -26,7 +26,7 @@ const EditListingPricingPanel = props => {
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
-  const currentListing = ensureListing(listing);
+  const currentListing = ensureOwnListing(listing);
   const { price } = currentListing.attributes;
 
   const panelTitle = currentListing.id ? (

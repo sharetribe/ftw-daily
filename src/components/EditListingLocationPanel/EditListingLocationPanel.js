@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
-import { ensureListing } from '../../util/data';
+import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
 import { EditListingLocationForm } from '../../containers';
 
@@ -22,7 +22,7 @@ const EditListingLocationPanel = props => {
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
-  const currentListing = ensureListing(listing);
+  const currentListing = ensureOwnListing(listing);
   const { geolocation, publicData } = currentListing.attributes;
 
   const panelTitle = currentListing.id ? (
