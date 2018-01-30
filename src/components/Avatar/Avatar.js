@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
-import { ensureUser, userDisplayName, userAbbreviatedName } from '../../util/data';
+import {
+  ensureUser,
+  ensureCurrentUser,
+  userDisplayName,
+  userAbbreviatedName,
+} from '../../util/data';
 import { ResponsiveImage, IconBannedUser, NamedLink } from '../../components/';
 
 import css from './Avatar.css';
@@ -11,7 +16,10 @@ import css from './Avatar.css';
 export const AvatarComponent = props => {
   const { rootClassName, className, user, disableProfileLink, intl } = props;
   const classes = classNames(rootClassName || css.root, className);
-  const avatarUser = ensureUser(user);
+
+  const userIsCurrentUser = user && user.type === 'currentUser';
+  const avatarUser = userIsCurrentUser ? ensureCurrentUser(user) : ensureUser(user);
+
   const isBannedUser = avatarUser.attributes.banned;
 
   const bannedUserDisplayName = intl.formatMessage({

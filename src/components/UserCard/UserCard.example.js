@@ -72,3 +72,13 @@ export const WithProfileImageAndBio = {
   },
   group: 'users',
 };
+
+export const WithCurrentUserAsUser = {
+  component: UserCard,
+  props: {
+    user: createCurrentUser('test-card-user'),
+    currentUser: createCurrentUser('test-card-user'),
+    onContactUser: user => console.log('concact user:', user),
+  },
+  group: 'users',
+};
