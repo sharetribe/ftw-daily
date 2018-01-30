@@ -2,7 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { createUser, createCurrentUser, createListing, fakeIntl } from '../../util/test-data';
+import {
+  createUser,
+  createCurrentUser,
+  createListing,
+  createOwnListing,
+  fakeIntl,
+} from '../../util/test-data';
 import { storableError } from '../../util/errors';
 import { renderShallow } from '../../util/test-helpers';
 import {
@@ -29,7 +35,9 @@ describe('ListingPage', () => {
     const id = 'listing1';
     const slug = 'listing1-title';
     const listing1 = createListing(id, {}, { author: createUser('user-1') });
+    const listing1Own = createOwnListing(id, {}, { author: createCurrentUser('user-1') });
     const getListing = () => listing1;
+    const getOwnListing = () => listing1Own;
 
     const props = {
       unitType: LINE_ITEM_NIGHT,
@@ -43,7 +51,8 @@ describe('ListingPage', () => {
       },
       params: { id, slug },
       currentUser,
-      getListing: getListing,
+      getListing,
+      getOwnListing,
       intl: fakeIntl,
       authInProgress: false,
       currentUserHasListings: false,
