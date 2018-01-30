@@ -15,9 +15,9 @@ import css from './PropertyGroup.css';
 
 const checkSelected = (options, selectedOptions) => {
   return options.map(option => ({
-    text: option.text,
-    value: option.value,
-    isSelected: includes(selectedOptions, option.value),
+    key: option.key,
+    label: option.label,
+    isSelected: includes(selectedOptions, option.key),
   }));
 };
 
@@ -37,15 +37,15 @@ const IconCheck = props => {
 };
 
 const Item = props => {
-  const { text, isSelected } = props;
-  const textClass = isSelected ? css.selectedText : css.notSelectedText;
+  const { label, isSelected } = props;
+  const labelClass = isSelected ? css.selectedLabel : css.notSelectedLabel;
   return (
     <li className={css.item}>
       <div className={css.iconWrapper}>
         <IconCheck isVisible={isSelected} />
       </div>
-      <div className={css.textWrapper}>
-        <span className={textClass}>{text}</span>
+      <div className={css.labelWrapper}>
+        <span className={labelClass}>{label}</span>
       </div>
     </li>
   );
@@ -61,7 +61,7 @@ const PropertyGroup = props => {
   return (
     <ul className={listClasses}>
       {checked.map(option => (
-        <Item key={`${id}.${option.value}`} text={option.text} isSelected={option.isSelected} />
+        <Item key={`${id}.${option.key}`} label={option.label} isSelected={option.isSelected} />
       ))}
     </ul>
   );
@@ -70,6 +70,7 @@ const PropertyGroup = props => {
 PropertyGroup.defaultProps = {
   rootClassName: null,
   className: null,
+  selectedOptions: [],
   twoColumns: false,
 };
 
@@ -81,11 +82,11 @@ PropertyGroup.propTypes = {
   id: string.isRequired,
   options: arrayOf(
     shape({
-      value: string.isRequired,
-      text: node.isRequired,
+      key: string.isRequired,
+      label: node.isRequired,
     })
   ),
-  selectedOptions: arrayOf(string).isRequired,
+  selectedOptions: arrayOf(string),
   twoColumns: bool,
 };
 

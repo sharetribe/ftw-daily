@@ -4,9 +4,8 @@
   --lineHeight: 24px;
   --lineThroughTop: calc(var(--lineHeight) - 7px);
   --lineThroughBottom: calc(var(--lineHeight) - 6px);
-  --lineHeightMobile: 20px;
-  --lineThroughTopMobile: calc(var(--lineHeightMobile) - 5px);
-  --lineThroughBottomMobile: calc(var(--lineHeightMobile) - 4px);
+  --lineThroughTopMobile: calc(var(--lineHeight) - 9px);
+  --lineThroughBottomMobile: calc(var(--lineHeight) - 8px);
 }
 
 .root {
@@ -22,7 +21,7 @@
 .item {
   display: flex;
   align-items: center;
-  padding: 2px 0;
+  padding: 3px 0;
 
   @media (--viewportMedium) {
     padding: 4px 0;
@@ -46,22 +45,22 @@
   align-items: center;
 }
 
-.textWrapper {
+.labelWrapper {
   display: inline-block;
 }
 
-.selectedText,
-.notSelectedText {
+.selectedLabel,
+.notSelectedLabel {
   @apply --marketplaceBodyFontStyles;
   line-height: var(--lineHeight);
   margin: 0;
 }
 
-.selectedText {
+.selectedLabel {
   font-weight: var(--fontWeightSemiBold);
 }
 
-.notSelectedText {
+.notSelectedLabel {
   color: var(--matterColorNegative);
   position: relative;
 
