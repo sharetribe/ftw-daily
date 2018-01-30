@@ -178,8 +178,11 @@ export const ManageListingCardComponent = props => {
     [css.titlePending]: isPendingApproval,
   });
 
+  const linkName = isPendingApproval ? 'ListingPageVariant' : 'ListingPage';
+  const linkParams = isPendingApproval ? { id, slug, variant: 'pending-approval' } : { id, slug };
+
   return (
-    <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
+    <NamedLink className={classes} name={linkName} params={linkParams}>
       <div className={css.threeToTwoWrapper}>
         <div className={css.aspectWrapper}>
           <ResponsiveImage
