@@ -16,7 +16,7 @@ import {
   MenuLabel,
   MenuContent,
   MenuItem,
-  NamedLink,
+  ListingLink,
   IconSpinner,
   ResponsiveImage,
 } from '../../components';
@@ -76,7 +76,6 @@ export const ManageListingCardComponent = props => {
   const { title = '', price, state } = currentListing.attributes;
   const isPendingApproval = state === LISTING_STATE_PENDING_APPROVAL;
   const isClosed = state === LISTING_STATE_CLOSED;
-  const slug = createSlug(title);
   const firstImage =
     currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
@@ -178,11 +177,8 @@ export const ManageListingCardComponent = props => {
     [css.titlePending]: isPendingApproval,
   });
 
-  const linkName = isPendingApproval ? 'ListingPageVariant' : 'ListingPage';
-  const linkParams = isPendingApproval ? { id, slug, variant: 'pending-approval' } : { id, slug };
-
   return (
-    <NamedLink className={classes} name={linkName} params={linkParams}>
+    <ListingLink className={classes} listing={listing}>
       <div className={css.threeToTwoWrapper}>
         <div className={css.aspectWrapper}>
           <ResponsiveImage
@@ -267,7 +263,7 @@ export const ManageListingCardComponent = props => {
           <FormattedMessage id="ManageListingCard.edit" />
         </button>
       </div>
-    </NamedLink>
+    </ListingLink>
   );
 };
 

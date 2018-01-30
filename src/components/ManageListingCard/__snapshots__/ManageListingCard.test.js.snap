@@ -1,13 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ManageListingCard matches snapshot 1`] = `
-<NamedLink
+<ListingLink
   className=""
-  name="ListingPage"
-  params={
+  listing={
     Object {
-      "id": "listing1",
-      "slug": "listing1-title",
+      "attributes": Object {
+        "deleted": false,
+        "description": "listing1 description",
+        "geolocation": LatLng {
+          "lat": 40,
+          "lng": 60,
+        },
+        "price": Money {
+          "amount": 5500,
+          "currency": "USD",
+        },
+        "publicData": Object {},
+        "state": "published",
+        "title": "listing1 title",
+      },
+      "id": UUID {
+        "uuid": "listing1",
+      },
+      "type": "ownListing",
     }
   }
 >
@@ -131,5 +147,5 @@ exports[`ManageListingCard matches snapshot 1`] = `
       />
     </button>
   </div>
-</NamedLink>
+</ListingLink>
 `;
