@@ -1,4 +1,4 @@
-import { reduce } from 'lodash';
+import { isArray, reduce } from 'lodash';
 
 /**
  * Combine the given relationships objects
@@ -254,5 +254,30 @@ export const userAbbreviatedName = (user, bannedUserAbbreviatedName) => {
     return user.attributes.profile.abbreviatedName;
   } else {
     return '';
+  }
+};
+
+/**
+ * A customizer function to be used with the
+ * mergeWith function from lodash.
+ *
+ * Works like merge in every way exept that on case of
+ * an array the old value is completely overridden with
+ * the new value.
+ *
+ * @param {Object} objValue Value of current field, denoted by key
+ * @param {Object} srcValue New value
+ * @param {String} key Key of the field currently being merged
+ * @param {Object} object Target object that is receiving values from source
+ * @param {Object} source Source object that is merged into object param
+ * @param {Object} stack Tracks merged values
+ *
+ * @return {Object} New value for objValue if the original is an array,
+ * otherwise undefined is returned, which results in mergeWith using the
+ * standard merging function
+ */
+export const overrideArrays = (objValue, srcValue, key, object, source, stack) => {
+  if (isArray(objValue)) {
+    return srcValue;
   }
 };

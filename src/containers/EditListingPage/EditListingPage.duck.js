@@ -1,9 +1,10 @@
-import { omit, omitBy, isUndefined, merge } from 'lodash';
+import { omit, omitBy, isUndefined, mergeWith } from 'lodash';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasListingsSuccess } from '../../ducks/user.duck';
+import { overrideArrays } from '../../util/data';
 
 const { UUID } = sdkTypes;
 
@@ -144,7 +145,11 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         listingDraft: {
-          attributes: merge(attributes, omitBy(payload.attributes, isUndefined)),
+          attributes: mergeWith(
+            attributes,
+            omitBy(payload.attributes, isUndefined),
+            overrideArrays
+          ),
           images: updatedImages,
         },
       };
