@@ -8,7 +8,7 @@ import css from './SelectSingleFilter.css';
 
 const optionLabel = (options, key) => {
   const option = options.find(o => o.key === key);
-  return option ? option.label : '';
+  return option ? option.label : key;
 };
 
 class SelectSingleFilter extends Component {
