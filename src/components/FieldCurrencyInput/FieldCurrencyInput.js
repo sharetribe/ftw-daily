@@ -23,7 +23,7 @@ import {
 import { propTypes } from '../../util/types';
 import * as log from '../../util/log';
 
-import css from './CurrencyInputField.css';
+import css from './FieldCurrencyInput.css';
 
 const { Money } = sdkTypes;
 
@@ -234,7 +234,7 @@ CurrencyInputComponent.propTypes = {
 
 export const CurrencyInput = injectIntl(CurrencyInputComponent);
 
-const CurrencyInputFieldComponent = props => {
+const FieldCurrencyInputComponent = props => {
   const { rootClassName, className, id, label, input, meta, ...rest } = props;
 
   if (label && !id) {
@@ -263,14 +263,14 @@ const CurrencyInputFieldComponent = props => {
   );
 };
 
-CurrencyInputFieldComponent.defaultProps = {
+FieldCurrencyInputComponent.defaultProps = {
   rootClassName: null,
   className: null,
   id: null,
   label: null,
 };
 
-CurrencyInputFieldComponent.propTypes = {
+FieldCurrencyInputComponent.propTypes = {
   rootClassName: string,
   className: string,
 
@@ -284,8 +284,8 @@ CurrencyInputFieldComponent.propTypes = {
   meta: object.isRequired,
 };
 
-const CurrencyInputField = props => {
-  return <Field component={CurrencyInputFieldComponent} {...props} />;
+const FieldCurrencyInput = props => {
+  return <Field component={FieldCurrencyInputComponent} {...props} />;
 };
 
-export default CurrencyInputField;
+export default FieldCurrencyInput;

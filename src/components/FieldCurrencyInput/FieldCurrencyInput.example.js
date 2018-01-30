@@ -7,7 +7,7 @@ import en from 'react-intl/locale-data/en';
 import fi from 'react-intl/locale-data/fi';
 import { currencyConfig } from '../../util/test-data';
 import * as validators from '../../util/validators';
-import CurrencyInputField, { CurrencyInput } from './CurrencyInputField';
+import FieldCurrencyInput, { CurrencyInput } from './FieldCurrencyInput';
 
 const currencyConfigUSD = {
   ...currencyConfig,
@@ -81,14 +81,14 @@ export const defaultValueWithFiEUR = {
   group: 'custom inputs',
 };
 
-const formName = 'Styleguide.CurrencyInputField.Form';
+const formName = 'Styleguide.FieldCurrencyInput.Form';
 
 const FormComponent = props => {
   const { form } = props;
   const required = validators.required('This field is required');
   return (
     <form>
-      <CurrencyInputField
+      <FieldCurrencyInput
         name="price"
         id={`${form}.price`}
         label="Set price:"

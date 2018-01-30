@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import config from '../../config';
 import { propTypes } from '../../util/types';
 import { required } from '../../util/validators';
-import { Form, Button, CurrencyInputField } from '../../components';
+import { Form, Button, FieldCurrencyInput } from '../../components';
 
 import css from './EditListingPricingForm.css';
 
@@ -45,8 +45,8 @@ export const EditListingPricingFormComponent = props => {
   return (
     <Form className={classes} onSubmit={handleSubmit}>
       {errorMessage}
-      <CurrencyInputField
-        id="EditListingPricingForm.CurrencyInputField"
+      <FieldCurrencyInput
+        id="EditListingPricingForm.FieldCurrencyInput"
         className={css.priceInput}
         autoFocus
         name="price"

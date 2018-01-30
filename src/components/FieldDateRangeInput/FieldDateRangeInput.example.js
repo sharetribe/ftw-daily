@@ -5,14 +5,14 @@ import moment from 'moment';
 import { Button } from '../../components';
 import { required, bookingDatesRequired } from '../../util/validators';
 import { LINE_ITEM_NIGHT } from '../../util/types';
-import DateRangeInputField from './DateRangeInputField';
+import FieldDateRangeInput from './FieldDateRangeInput';
 
 const FormComponent = props => {
   const { form, handleSubmit, pristine, submitting, dateInputProps } = props;
   const submitDisabled = pristine || submitting;
   return (
     <form onSubmit={handleSubmit}>
-      <DateRangeInputField {...dateInputProps} />
+      <FieldDateRangeInput {...dateInputProps} />
       <Button type="submit" disabled={submitDisabled} style={{ marginTop: '24px' }}>
         Select
       </Button>

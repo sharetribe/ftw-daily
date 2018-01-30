@@ -227,19 +227,19 @@ class DateRangeInputComponent extends Component {
 
     const startDatePlaceholderTxt =
       startDatePlaceholderText ||
-      intl.formatMessage({ id: 'DateRangeInputField.startDatePlaceholderText' });
+      intl.formatMessage({ id: 'FieldDateRangeInput.startDatePlaceholderText' });
     const endDatePlaceholderTxt =
       endDatePlaceholderText ||
-      intl.formatMessage({ id: 'DateRangeInputField.endDatePlaceholderText' });
+      intl.formatMessage({ id: 'FieldDateRangeInput.endDatePlaceholderText' });
     const screenReaderInputText =
       screenReaderInputMessage ||
-      intl.formatMessage({ id: 'DateRangeInputField.screenReaderInputMessage' });
+      intl.formatMessage({ id: 'FieldDateRangeInput.screenReaderInputMessage' });
     const closeDatePickerText = phrases.closeDatePicker
       ? phrases.closeDatePicker
-      : intl.formatMessage({ id: 'DateRangeInputField.closeDatePicker' });
+      : intl.formatMessage({ id: 'FieldDateRangeInput.closeDatePicker' });
     const clearDateText = phrases.clearDate
       ? phrases.clearDate
-      : intl.formatMessage({ id: 'DateRangeInputField.clearDate' });
+      : intl.formatMessage({ id: 'FieldDateRangeInput.clearDate' });
 
     const classes = classNames(css.inputRoot, className, {
       [css.withMobileMargins]: useMobileMargins,

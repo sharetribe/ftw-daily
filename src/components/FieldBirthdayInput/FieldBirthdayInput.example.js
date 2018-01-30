@@ -2,7 +2,7 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 import * as validators from '../../util/validators';
-import BirthdayInputField from './BirthdayInputField';
+import FieldBirthdayInput from './FieldBirthdayInput';
 
 const formName = 'Styleguide.BirthdayInput.Form';
 
@@ -12,7 +12,7 @@ const FormComponent = () => {
   const minAgeRequired = validators.ageAtLeast(`Age should be at least ${minAge}`, minAge);
   return (
     <form>
-      <BirthdayInputField
+      <FieldBirthdayInput
         id={`${formName}.birthday`}
         name="birthday"
         label="Date of birth"
