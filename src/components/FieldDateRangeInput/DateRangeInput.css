@@ -26,12 +26,6 @@
     @media (--viewportMedium) {
       /* !important is added to top because react-dates uses inline style for height */
       /* Similar problem as in issue: https://github.com/airbnb/react-dates/issues/947 */
-      top: 45px !important;
-    }
-
-    @media (--viewportMedium) {
-      /* !important is added to top because react-dates uses inline style for height */
-      /* Similar problem as in issue: https://github.com/airbnb/react-dates/issues/947 */
       top: 42px !important;
       min-height: auto;
       box-shadow: var(--boxShadowPopup);

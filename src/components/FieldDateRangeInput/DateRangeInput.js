@@ -5,7 +5,7 @@
  * N.B. *isOutsideRange* in defaultProps is defining what dates are available to booking.
  */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, instanceOf, oneOf, shape, string } from 'prop-types';
 
 // react-dates needs to be initialized before using any react-dates component
 // Since this is currently only component using react-dates we can do it here
@@ -270,8 +270,6 @@ DateRangeInputComponent.defaultProps = {
   useMobileMargins: false,
   ...defaultProps,
 };
-
-const { bool, func, instanceOf, oneOf, shape, string } = PropTypes;
 
 DateRangeInputComponent.propTypes = {
   className: string,
