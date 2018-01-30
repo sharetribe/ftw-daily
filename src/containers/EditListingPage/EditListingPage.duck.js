@@ -191,9 +191,13 @@ export const updateImageOrder = imageOrder => ({
 });
 
 export const createListingDraft = listingData => {
+  const { images, ...attributes } = listingData;
   return {
     type: CREATE_LISTING_DRAFT,
-    payload: { attributes: listingData },
+    payload: {
+      attributes,
+      images,
+    },
   };
 };
 

@@ -2,81 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { omitBy, isUndefined } from 'lodash';
 import { createSlug } from '../../util/urlHelpers';
-import { EditListingPhotosForm, PayoutDetailsForm } from '../../containers';
+import { EditListingPhotosForm } from '../../containers';
 import { ensureListing } from '../../util/data';
-import { Modal, NamedLink } from '../../components';
-import { propTypes } from '../../util/types';
+import { NamedLink } from '../../components';
 
 import css from './EditListingPhotosPanel.css';
 
 class EditListingPhotosPanel extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      submittedValues: null,
-      showPayoutDetails: false,
-    };
-    this.handlePhotosSubmit = this.handlePhotosSubmit.bind(this);
-    this.handlePayoutModalClose = this.handlePayoutModalClose.bind(this);
-    this.handlePayoutSubmit = this.handlePayoutSubmit.bind(this);
-  }
-
-  handlePhotosSubmit(values) {
-    const { onSubmit, currentUser } = this.props;
-    const stripeConnected =
-      currentUser && currentUser.attributes && currentUser.attributes.stripeConnected;
-    if (stripeConnected) {
-      onSubmit(values);
-    } else {
-      this.setState({
-        submittedValues: values,
-        showPayoutDetails: true,
-      });
-    }
-  }
-
-  handlePayoutModalClose() {
-    this.setState({ showPayoutDetails: false });
-  }
-
-  handlePayoutSubmit(values) {
-    const {
-      firstName,
-      lastName,
-      birthDate,
-      country,
-      streetAddress,
-      postalCode,
-      city,
-      bankAccountToken,
-    } = values;
-    const address = {
-      country,
-      city,
-      addressLine: streetAddress,
-      postalCode,
-    };
-    const params = {
-      firstName,
-      lastName,
-      birthDate,
-      bankAccountToken,
-      address: omitBy(address, isUndefined),
-    };
-    this.props
-      .onPayoutDetailsSubmit(params)
-      .then(() => {
-        this.setState({ showPayoutDetails: false });
-        this.props.onManageDisableScrolling('EditListingPhotosPanel.payoutModal', false);
-        this.props.onSubmit(this.state.submittedValues);
-      })
-      .catch(() => {
-        // do nothing
-      });
-  }
-
   render() {
     const {
       className,
@@ -88,19 +21,16 @@ class EditListingPhotosPanel extends Component {
       listing,
       onImageUpload,
       onUpdateImageOrder,
-      onManageDisableScrolling,
-      onPayoutDetailsFormChange,
       submitButtonText,
       panelUpdated,
       updateInProgress,
       onChange,
+      onSubmit,
       onRemoveImage,
     } = this.props;
 
     const rootClass = rootClassName || css.root;
-    const classes = classNames(rootClass, className, {
-      [css.payoutModalOpen]: this.state.showPayoutDetails,
-    });
+    const classes = classNames(rootClass, className);
     const currentListing = ensureListing(listing);
     const { title } = currentListing.attributes;
     const listingTitle = title || '';
@@ -133,7 +63,10 @@ class EditListingPhotosPanel extends Component {
           initialValues={{ images }}
           images={images}
           onImageUpload={onImageUpload}
-          onSubmit={this.handlePhotosSubmit}
+          onSubmit={values => {
+            const { addImage, ...updateValues } = values;
+            onSubmit(updateValues);
+          }}
           onChange={onChange}
           onUpdateImageOrder={onUpdateImageOrder}
           onRemoveImage={onRemoveImage}
@@ -142,32 +75,6 @@ class EditListingPhotosPanel extends Component {
           updateError={errors.updateListingError}
           updateInProgress={updateInProgress}
         />
-
-        <Modal
-          id="EditListingPhotosPanel.payoutModal"
-          className={css.payoutModal}
-          isOpen={this.state.showPayoutDetails}
-          onClose={this.handlePayoutModalClose}
-          onManageDisableScrolling={onManageDisableScrolling}
-        >
-          <div className={css.modalHeaderWrapper}>
-            <h1 className={css.modalTitle}>
-              <FormattedMessage id="EditListingPhotosPanel.payoutModalTitleOneMoreThing" />
-              <br />
-              <FormattedMessage id="EditListingPhotosPanel.payoutModalTitlePayoutPreferences" />
-            </h1>
-            <p className={css.modalMessage}>
-              <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
-            </p>
-          </div>
-          <PayoutDetailsForm
-            className={css.payoutDetails}
-            inProgress={fetchInProgress}
-            createStripeAccountError={errors ? errors.createStripeAccountError : null}
-            onChange={onPayoutDetailsFormChange}
-            onSubmit={this.handlePayoutSubmit}
-          />
-        </Modal>
       </div>
     );
   }
@@ -181,13 +88,11 @@ EditListingPhotosPanel.defaultProps = {
   errors: null,
   images: [],
   listing: null,
-  currentUser: null,
 };
 
 EditListingPhotosPanel.propTypes = {
   className: string,
   rootClassName: string,
-  currentUser: propTypes.currentUser,
   errors: shape({
     createListingsError: object,
     updateListingError: object,
@@ -203,13 +108,10 @@ EditListingPhotosPanel.propTypes = {
   listing: object,
 
   onImageUpload: func.isRequired,
-  onPayoutDetailsFormChange: func.isRequired,
-  onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,
   onChange: func.isRequired,
   submitButtonText: string.isRequired,
-  onManageDisableScrolling: func.isRequired,
   panelUpdated: bool.isRequired,
   updateInProgress: bool.isRequired,
   onRemoveImage: func.isRequired,

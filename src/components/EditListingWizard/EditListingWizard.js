@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { array, bool, func, number, object, oneOf, shape, string } from 'prop-types';
 import { compose } from 'redux';
-import { injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import { omitBy, isUndefined } from 'lodash';
 import { withViewport } from '../../util/contextHelpers';
 import { ensureListing } from '../../util/data';
-import { NamedRedirect, Tabs } from '../../components';
+import { PayoutDetailsForm } from '../../containers';
+import { Modal, NamedRedirect, Tabs } from '../../components';
 
 import EditListingWizardTab, {
   DESCRIPTION,
@@ -101,15 +103,90 @@ class EditListingWizard extends Component {
 
     // Having this info in state would trigger unnecessary rerendering
     this.hasScrolledToTab = false;
+
+    this.state = {
+      submittedValues: null,
+      showPayoutDetails: false,
+    };
     this.handleCreateFlowTabScrolling = this.handleCreateFlowTabScrolling.bind(this);
+    this.handleCreateListing = this.handleCreateListing.bind(this);
+    this.handlePayoutModalClose = this.handlePayoutModalClose.bind(this);
+    this.handlePayoutSubmit = this.handlePayoutSubmit.bind(this);
   }
 
   handleCreateFlowTabScrolling(shouldScroll) {
     this.hasScrolledToTab = shouldScroll;
   }
 
+  handleCreateListing(values) {
+    const { onCreateListing, currentUser } = this.props;
+    const stripeConnected =
+      currentUser && currentUser.attributes && currentUser.attributes.stripeConnected;
+    if (stripeConnected) {
+      onCreateListing(values);
+    } else {
+      this.setState({
+        submittedValues: values,
+        showPayoutDetails: true,
+      });
+    }
+  }
+
+  handlePayoutModalClose() {
+    this.setState({ showPayoutDetails: false });
+  }
+
+  handlePayoutSubmit(values) {
+    const {
+      firstName,
+      lastName,
+      birthDate,
+      country,
+      streetAddress,
+      postalCode,
+      city,
+      bankAccountToken,
+    } = values;
+    const address = {
+      country,
+      city,
+      addressLine: streetAddress,
+      postalCode,
+    };
+    const params = {
+      firstName,
+      lastName,
+      birthDate,
+      bankAccountToken,
+      address: omitBy(address, isUndefined),
+    };
+    this.props
+      .onPayoutDetailsSubmit(params)
+      .then(() => {
+        this.setState({ showPayoutDetails: false });
+        this.props.onManageDisableScrolling('EditListingWizard.payoutModal', false);
+        this.props.onCreateListing(this.state.submittedValues);
+      })
+      .catch(() => {
+        // do nothing
+      });
+  }
+
   render() {
-    const { id, className, rootClassName, params, listing, viewport, intl, ...rest } = this.props;
+    const {
+      id,
+      className,
+      rootClassName,
+      params,
+      listing,
+      viewport,
+      intl,
+      errors,
+      fetchInProgress,
+      onManageDisableScrolling,
+      onPayoutDetailsFormChange,
+      ...rest
+    } = this.props;
 
     const selectedTab = params.tab;
     const isNew = params.type === 'new';
@@ -144,27 +221,61 @@ class EditListingWizard extends Component {
     };
 
     return (
-      <Tabs rootClassName={classes} navRootClassName={css.nav} tabRootClassName={css.tab}>
-        {TABS.map(tab => {
-          return (
-            <EditListingWizardTab
-              {...rest}
-              key={tab}
-              tabId={`${id}_${tab}`}
-              tabLabel={tabLabel(intl, tab)}
-              tabLinkProps={tabLink(tab)}
-              selected={selectedTab === tab}
-              disabled={isNew && !tabsStatus[tab]}
-              tab={tab}
-              intl={intl}
-              params={params}
-              listing={listing}
-              marketplaceTabs={TABS}
-              handleCreateFlowTabScrolling={this.handleCreateFlowTabScrolling}
-            />
-          );
-        })}
-      </Tabs>
+      <div className={classes}>
+        <Tabs
+          rootClassName={css.tabsContainer}
+          navRootClassName={css.nav}
+          tabRootClassName={css.tab}
+        >
+          {TABS.map(tab => {
+            return (
+              <EditListingWizardTab
+                {...rest}
+                key={tab}
+                tabId={`${id}_${tab}`}
+                tabLabel={tabLabel(intl, tab)}
+                tabLinkProps={tabLink(tab)}
+                selected={selectedTab === tab}
+                disabled={isNew && !tabsStatus[tab]}
+                tab={tab}
+                intl={intl}
+                params={params}
+                listing={listing}
+                marketplaceTabs={TABS}
+                errors={errors}
+                handleCreateFlowTabScrolling={this.handleCreateFlowTabScrolling}
+                handleCreateListing={this.handleCreateListing}
+                fetchInProgress={fetchInProgress}
+              />
+            );
+          })}
+        </Tabs>
+        <Modal
+          id="EditListingWizard.payoutModal"
+          className={css.payoutModal}
+          isOpen={this.state.showPayoutDetails}
+          onClose={this.handlePayoutModalClose}
+          onManageDisableScrolling={onManageDisableScrolling}
+        >
+          <div className={css.modalHeaderWrapper}>
+            <h1 className={css.modalTitle}>
+              <FormattedMessage id="EditListingPhotosPanel.payoutModalTitleOneMoreThing" />
+              <br />
+              <FormattedMessage id="EditListingPhotosPanel.payoutModalTitlePayoutPreferences" />
+            </h1>
+            <p className={css.modalMessage}>
+              <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
+            </p>
+          </div>
+          <PayoutDetailsForm
+            className={css.payoutDetails}
+            inProgress={fetchInProgress}
+            createStripeAccountError={errors ? errors.createStripeAccountError : null}
+            onChange={onPayoutDetailsFormChange}
+            onSubmit={this.handlePayoutSubmit}
+          />
+        </Modal>
+      </div>
     );
   }
 }
@@ -174,8 +285,6 @@ EditListingWizard.defaultProps = {
   rootClassName: null,
   listing: null,
 };
-
-const { array, number, object, oneOf, shape, string } = PropTypes;
 
 EditListingWizard.propTypes = {
   id: string.isRequired,
@@ -199,6 +308,19 @@ EditListingWizard.propTypes = {
     }),
     images: array,
   }),
+
+  errors: shape({
+    createListingsError: object,
+    updateListingError: object,
+    showListingsError: object,
+    uploadImageError: object,
+    createStripeAccountError: object,
+  }),
+  fetchInProgress: bool.isRequired,
+  onCreateListing: func.isRequired,
+  onPayoutDetailsFormChange: func.isRequired,
+  onPayoutDetailsSubmit: func.isRequired,
+  onManageDisableScrolling: func.isRequired,
 
   // from withViewport
   viewport: shape({
