@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOMServer from 'react-dom/server';
+
+// react-dates needs to be initialized before using any react-dates component
+// https://github.com/airbnb/react-dates#initialize
+// NOTE: Initializing it here will initialize it also for app.test.js
+import 'react-dates/initialize';
 import Helmet from 'react-helmet';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
