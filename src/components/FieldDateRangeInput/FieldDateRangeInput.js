@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object, oneOf, string } from 'prop-types';
 import { Field } from 'redux-form';
 import classNames from 'classnames';
 import { START_DATE, END_DATE } from '../../util/dates';
@@ -152,8 +152,6 @@ FieldDateRangeInputComponent.defaultProps = {
   focusedInput: null,
   onFocusedInputChange: null,
 };
-
-const { bool, func, object, oneOf, string } = PropTypes;
 
 FieldDateRangeInputComponent.propTypes = {
   className: string,

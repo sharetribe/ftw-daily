@@ -5,27 +5,23 @@ import React from 'react';
 // https://github.com/airbnb/react-dates#initialize
 import 'react-dates/initialize';
 import { renderDeep } from '../../util/test-helpers';
-import { LINE_ITEM_NIGHT } from '../../util/types';
-import { DateRangeInput } from './FieldDateRangeInput';
+import { DateInput } from './FieldDateInput';
 
 const noop = () => null;
 
-describe('DateRangeInput', () => {
+describe('DateInput', () => {
   it('matches snapshot', () => {
     const props = {
-      unitType: LINE_ITEM_NIGHT,
-      name: 'bookingDates',
+      name: 'bookingDate',
       onBlur: noop,
       onChange: noop,
       onFocus: noop,
       onDragStart: noop,
       onDrop: noop,
-      startDateId: 'bookingStartDate',
-      startDatePlaceholderText: 'today',
-      endDateId: 'bookingEndDate',
-      endDatePlaceholderText: 'tomorrow',
+      id: 'bookingDate',
+      placeholderText: 'today',
     };
-    const tree = renderDeep(<DateRangeInput {...props} />);
+    const tree = renderDeep(<DateInput {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });

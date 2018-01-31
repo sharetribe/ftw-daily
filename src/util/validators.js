@@ -46,6 +46,11 @@ export const autocompletePlaceSelected = message => value => {
   return selectedPlaceIsValid ? VALID : message;
 };
 
+export const bookingDateRequired = inValidDateMessage => value => {
+  const dateIsValid = value && value.date instanceof Date;
+  return !dateIsValid ? inValidDateMessage : VALID;
+};
+
 export const bookingDatesRequired = (inValidStartDateMessage, inValidEndDateMessage) => value => {
   const startDateIsValid = value && value.startDate instanceof Date;
   const endDateIsValid = value && value.endDate instanceof Date;
