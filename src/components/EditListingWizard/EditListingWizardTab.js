@@ -85,9 +85,11 @@ const EditListingWizardTab = props => {
         handleCreateListing({ ...listing.attributes, images: imageIdArray });
       }
     } else {
+      const { images: updatedImages, ...rest } = updateValues;
       // Normalize images for API call
-      const imageIdArray = imageIds(updateValues.images);
-      onUpdateListing(tab, { ...updateValues, id: currentListing.id, images: imageIdArray });
+      const imageProperty =
+        typeof updatedImages !== 'undefined' ? { images: imageIds(updatedImages) } : {};
+      onUpdateListing(tab, { ...rest, id: currentListing.id, ...imageProperty });
     }
   };
 
