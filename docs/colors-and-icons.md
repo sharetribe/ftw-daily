@@ -21,7 +21,7 @@ set if icons and an HTML snippet to point to those images.
 
 1. Open https://realfavicongenerator.net/
 
-1. Upload your original icon image
+1. Upload your original icon image (should be 260px X 260px)
 
 1. Configure platform specific icons
 
