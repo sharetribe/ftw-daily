@@ -105,7 +105,7 @@ export const BreakdownMaybe = props => {
   ) : null;
 };
 
-const createListingLink = (listing, label, searchParams, className = '') => {
+const createListingLink = (listing, label, searchParams = {}, className = '') => {
   const listingLoaded = !!listing.id;
 
   if (listingLoaded && !listing.attributes.deleted) {
