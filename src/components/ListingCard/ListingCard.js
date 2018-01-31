@@ -11,6 +11,8 @@ import config from '../../config';
 
 import css from './ListingCard.css';
 
+const MAX_LENGTH_FOR_WORDS_IN_TITLE = 10;
+
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {
     const formattedPrice = formatMoney(intl, price);
@@ -28,6 +30,23 @@ const priceData = (price, intl) => {
     };
   }
   return {};
+};
+
+// Cards are not fixed sizes - So, long words in title make flexboxed items to grow too big.
+// 1. We split title to an array of words and spaces.
+//    "foo bar".split(/([^\s]+)/gi) => ["", "foo", " ", "bar", ""]
+// 2. Then we break long words by adding a '<span>' with word-break: 'break-all';
+const formatTitle = (title, maxLength) => {
+  const nonWhiteSpaceSequence = /([^\s]+)/gi;
+  return title.split(nonWhiteSpaceSequence).map((word, index) => {
+    return word.length > maxLength ? (
+      <span key={index} style={{ wordBreak: 'break-all' }}>
+        {word}
+      </span>
+    ) : (
+      word
+    );
+  });
 };
 
 export const ListingCardComponent = props => {
@@ -69,7 +88,7 @@ export const ListingCardComponent = props => {
           </div>
         </div>
         <div className={css.mainInfo}>
-          <div className={css.title}>{title}</div>
+          <div className={css.title}>{formatTitle(title, MAX_LENGTH_FOR_WORDS_IN_TITLE)}</div>
           <div className={css.authorInfo}>
             <FormattedMessage
               className={css.authorName}

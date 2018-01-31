@@ -51,7 +51,9 @@ exports[`ListingCard matches snapshot 1`] = `
     </div>
     <div>
       <div>
-        listing1 title
+        listing1
+         
+        title
       </div>
       <div>
         <FormattedMessage
