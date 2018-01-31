@@ -10,7 +10,7 @@ import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { createSlug, parse } from '../../util/urlHelpers';
+import { LISTING_PAGE_PENDING_APPROVAL_VARIANT, createSlug, parse } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import { ensureListing, ensureOwnListing, ensureUser, userDisplayName } from '../../util/data';
@@ -47,8 +47,6 @@ import css from './ListingPage.css';
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;
-
-const PENDING_APPROVAL_VARIANT = 'pending-approval';
 
 const { UUID } = sdkTypes;
 
@@ -259,10 +257,11 @@ export class ListingPageComponent extends Component {
 
     const isBook = !!parse(location.search).book;
     const listingId = new UUID(params.id);
-    const currentListing =
-      params.variant === PENDING_APPROVAL_VARIANT
-        ? ensureOwnListing(getOwnListing(listingId))
-        : ensureListing(getListing(listingId));
+    const isPendingApprovalVariant = params.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
+    const currentListing = isPendingApprovalVariant
+      ? ensureOwnListing(getOwnListing(listingId))
+      : ensureListing(getListing(listingId));
+
     const listingSlug = params.slug || createSlug(currentListing.attributes.title || '');
     const {
       description = '',
@@ -711,7 +710,7 @@ ListingPageComponent.propTypes = {
   params: shape({
     id: string.isRequired,
     slug: string,
-    variant: oneOf([PENDING_APPROVAL_VARIANT]),
+    variant: oneOf([LISTING_PAGE_PENDING_APPROVAL_VARIANT]),
   }).isRequired,
 
   isAuthenticated: bool.isRequired,

@@ -10,9 +10,7 @@ import React from 'react';
 import { string, oneOfType, node } from 'prop-types';
 import { NamedLink } from '../../components';
 import { LISTING_STATE_PENDING_APPROVAL, propTypes } from '../../util/types';
-import { createSlug } from '../../util/urlHelpers';
-
-const PENDING_APPROVAL_VARIANT = 'pending-approval';
+import { LISTING_PAGE_PENDING_APPROVAL_VARIANT, createSlug } from '../../util/urlHelpers';
 
 const ListingLink = props => {
   const { className, listing, children } = props;
@@ -30,7 +28,7 @@ const ListingLink = props => {
         params: {
           id,
           slug,
-          variant: PENDING_APPROVAL_VARIANT,
+          variant: LISTING_PAGE_PENDING_APPROVAL_VARIANT,
         },
       }
     : {

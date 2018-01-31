@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { createSlug } from '../../util/urlHelpers';
+import { LISTING_PAGE_PENDING_APPROVAL_VARIANT, createSlug } from '../../util/urlHelpers';
 import { LISTING_STATE_PENDING_APPROVAL, propTypes } from '../../util/types';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
@@ -28,8 +28,6 @@ import {
 import css from './EditListingPage.css';
 
 const { UUID } = sdkTypes;
-
-const PENDING_APPROVAL_VARIANT = 'pending-approval';
 
 // N.B. All the presentational content needs to be extracted to their own components
 export const EditListingPageComponent = props => {
@@ -79,7 +77,7 @@ export const EditListingPageComponent = props => {
           params: {
             id: listingId.uuid,
             slug: listingSlug,
-            variant: PENDING_APPROVAL_VARIANT,
+            variant: LISTING_PAGE_PENDING_APPROVAL_VARIANT,
           },
         }
       : {

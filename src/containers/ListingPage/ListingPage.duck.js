@@ -4,6 +4,7 @@ import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { denormalisedResponseEntities } from '../../util/data';
 import { TRANSITION_ENQUIRE } from '../../util/types';
+import { LISTING_PAGE_PENDING_APPROVAL_VARIANT } from '../../util/urlHelpers';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
 const { UUID } = sdkTypes;
@@ -154,7 +155,7 @@ export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => 
 export const loadData = (params, search) => dispatch => {
   const listingId = new UUID(params.id);
 
-  if (params.variant === 'pending-approval') {
+  if (params.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT) {
     return dispatch(showListing(listingId, true));
   }
   return Promise.all([dispatch(showListing(listingId)), dispatch(fetchReviews(listingId))]);
