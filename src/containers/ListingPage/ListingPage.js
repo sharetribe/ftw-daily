@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { arrayOf, bool, func, object, shape, string, oneOf, oneOfType } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -10,11 +10,11 @@ import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { createSlug } from '../../util/urlHelpers';
+import { LISTING_PAGE_PENDING_APPROVAL_VARIANT, createSlug, parse } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import { ensureListing, ensureUser, userDisplayName } from '../../util/data';
-import { getListingsById } from '../../ducks/marketplaceData.duck';
+import { ensureListing, ensureOwnListing, ensureUser, userDisplayName } from '../../util/data';
+import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import {
   AvatarLarge,
@@ -105,17 +105,15 @@ export const ActionBarMaybe = props => {
   return null;
 };
 
-const { arrayOf, bool, func, object, oneOf, shape, string } = PropTypes;
-
 ActionBarMaybe.propTypes = {
   isOwnListing: bool.isRequired,
-  listing: propTypes.listing.isRequired,
+  listing: oneOfType([propTypes.listing, propTypes.ownListing]).isRequired,
   editParams: object.isRequired,
 };
 
 ActionBarMaybe.displayName = 'ActionBarMaybe';
 
-const gotoBookTab = (history, listing) => {
+const openBookModal = (history, listing) => {
   if (!listing.id) {
     // Listing not fully loaded yet
     return;
@@ -123,15 +121,15 @@ const gotoBookTab = (history, listing) => {
   const routes = routeConfiguration();
   history.push(
     createResourceLocatorString(
-      'ListingPageBook',
+      'ListingPage',
       routes,
       { id: listing.id.uuid, slug: createSlug(listing.attributes.title) },
-      {}
+      { book: true }
     )
   );
 };
 
-const gotoListingTab = (history, listing) => {
+const closeBookModal = (history, listing) => {
   if (!listing.id) {
     // Listing not fully loaded yet
     return;
@@ -201,10 +199,9 @@ export class ListingPageComponent extends Component {
   }
 
   onContactUser() {
-    const { currentUser, history, useInitialValues, params } = this.props;
+    const { currentUser, history, useInitialValues, params, location } = this.props;
 
     if (!currentUser) {
-      const location = window.location;
       const state = { from: `${location.pathname}${location.search}${location.hash}` };
 
       // We need to log in before showing the modal, but first we need to ensure
@@ -241,13 +238,14 @@ export class ListingPageComponent extends Component {
   render() {
     const {
       unitType,
-      tab,
       isAuthenticated,
       currentUser,
       getListing,
+      getOwnListing,
       intl,
       onManageDisableScrolling,
       params,
+      location,
       scrollingDisabled,
       showListingError,
       history,
@@ -257,8 +255,13 @@ export class ListingPageComponent extends Component {
       sendEnquiryError,
     } = this.props;
 
+    const isBook = !!parse(location.search).book;
     const listingId = new UUID(params.id);
-    const currentListing = ensureListing(getListing(listingId));
+    const isPendingApprovalVariant = params.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
+    const currentListing = isPendingApprovalVariant
+      ? ensureOwnListing(getOwnListing(listingId))
+      : ensureListing(getListing(listingId));
+
     const listingSlug = params.slug || createSlug(currentListing.attributes.title || '');
     const {
       description = '',
@@ -384,7 +387,7 @@ export class ListingPageComponent extends Component {
     );
 
     const handleMobileBookModalClose = () => {
-      gotoListingTab(history, currentListing);
+      closeBookModal(history, currentListing);
     };
 
     const handleBookingSubmit = values => {
@@ -403,7 +406,7 @@ export class ListingPageComponent extends Component {
       if (isOwnListing || isCurrentlyClosed) {
         window.scrollTo(0, 0);
       } else {
-        gotoBookTab(history, currentListing);
+        openBookModal(history, currentListing);
       }
     };
 
@@ -622,7 +625,7 @@ export class ListingPageComponent extends Component {
                   className={css.modalInMobile}
                   containerClassName={css.modalContainer}
                   id="BookingDatesFormInModal"
-                  isModalOpenOnMobile={tab === 'book'}
+                  isModalOpenOnMobile={isBook}
                   onClose={handleMobileBookModalClose}
                   showAsModalMaxWidth={MODAL_BREAKPOINT}
                   onManageDisableScrolling={onManageDisableScrolling}
@@ -688,7 +691,6 @@ ListingPageComponent.defaultProps = {
   currentUser: null,
   enquiryModalOpenForListingId: null,
   showListingError: null,
-  tab: 'listing',
   reviews: [],
   fetchReviewsError: null,
   sendEnquiryError: null,
@@ -699,6 +701,7 @@ ListingPageComponent.propTypes = {
   history: shape({
     push: func.isRequired,
   }).isRequired,
+  location: object.isRequired,
 
   unitType: propTypes.bookingUnitType,
   // from injectIntl
@@ -707,15 +710,17 @@ ListingPageComponent.propTypes = {
   params: shape({
     id: string.isRequired,
     slug: string,
+    variant: oneOf([LISTING_PAGE_PENDING_APPROVAL_VARIANT]),
   }).isRequired,
+
   isAuthenticated: bool.isRequired,
   currentUser: propTypes.currentUser,
   getListing: func.isRequired,
+  getOwnListing: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   scrollingDisabled: bool.isRequired,
   enquiryModalOpenForListingId: string,
   showListingError: propTypes.error,
-  tab: oneOf(['book', 'listing']),
   useInitialValues: func.isRequired,
   reviews: arrayOf(propTypes.review),
   fetchReviewsError: propTypes.error,
@@ -737,7 +742,14 @@ const mapStateToProps = state => {
   const { currentUser } = state.user;
 
   const getListing = id => {
-    const listings = getListingsById(state, [id]);
+    const ref = { id, type: 'listing' };
+    const listings = getMarketplaceEntities(state, [ref]);
+    return listings.length === 1 ? listings[0] : null;
+  };
+
+  const getOwnListing = id => {
+    const ref = { id, type: 'ownListing' };
+    const listings = getMarketplaceEntities(state, [ref]);
     return listings.length === 1 ? listings[0] : null;
   };
 
@@ -745,6 +757,7 @@ const mapStateToProps = state => {
     isAuthenticated,
     currentUser,
     getListing,
+    getOwnListing,
     scrollingDisabled: isScrollingDisabled(state),
     enquiryModalOpenForListingId,
     showListingError,

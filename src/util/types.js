@@ -173,7 +173,7 @@ propTypes.ownListing = shape({
   id: propTypes.uuid.isRequired,
   type: propTypes.value('ownListing').isRequired,
   attributes: oneOfType([ownListingAttributes, deletedListingAttributes]).isRequired,
-  author: propTypes.user,
+  author: propTypes.currentUser,
   images: arrayOf(propTypes.image),
 });
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string, func } from 'prop-types';
+import { string, func, oneOfType } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { truncate } from 'lodash';
 import classNames from 'classnames';
@@ -64,7 +64,10 @@ ExpandableBio.propTypes = {
 
 const UserCard = props => {
   const { rootClassName, className, user, currentUser, onContactUser } = props;
-  const ensuredUser = ensureUser(user);
+
+  const userIsCurrentUser = user && user.type === 'currentUser';
+  const ensuredUser = userIsCurrentUser ? ensureCurrentUser(user) : ensureUser(user);
+
   const ensuredCurrentUser = ensureCurrentUser(currentUser);
   const isCurrentUser =
     ensuredUser.id && ensuredCurrentUser.id && ensuredUser.id.uuid === ensuredCurrentUser.id.uuid;
@@ -117,12 +120,14 @@ const UserCard = props => {
 UserCard.defaultProps = {
   rootClassName: null,
   className: null,
+  user: null,
+  currentUser: null,
 };
 
 UserCard.propTypes = {
   rootClassName: string,
   className: string,
-  user: propTypes.user,
+  user: oneOfType([propTypes.user, propTypes.currentUser]),
   currentUser: propTypes.currentUser,
   onContactUser: func.isRequired,
 };

@@ -5,9 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import { toPairs } from 'lodash';
 
 import { ensureListing } from '../../util/data';
-import { createSlug } from '../../util/urlHelpers';
 import { EditListingFeaturesForm } from '../../containers';
-import { NamedLink } from '../../components';
+import { ListingLink } from '../../components';
 
 import css from './EditListingFeaturesPanel.css';
 
@@ -26,18 +25,13 @@ const EditListingFeaturesPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
-  const { title, publicData } = currentListing.attributes;
-  const listingTitle = title || '';
-  const listingLink = currentListing.id ? (
-    <NamedLink name="ListingPage" params={{ id: currentListing.id.uuid, slug: createSlug(title) }}>
-      {listingTitle}
-    </NamedLink>
-  ) : (
-    ''
-  );
+  const { publicData } = currentListing.attributes;
 
   const panelTitle = currentListing.id ? (
-    <FormattedMessage id="EditListingFeaturesPanel.title" values={{ listingTitle: listingLink }} />
+    <FormattedMessage
+      id="EditListingFeaturesPanel.title"
+      values={{ listingTitle: <ListingLink listing={listing} /> }}
+    />
   ) : (
     <FormattedMessage id="EditListingFeaturesPanel.createListingTitle" />
   );

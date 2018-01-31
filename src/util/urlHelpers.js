@@ -3,6 +3,8 @@ import { types as sdkTypes } from './sdkLoader';
 
 const { LatLng, LatLngBounds } = sdkTypes;
 
+export const LISTING_PAGE_PENDING_APPROVAL_VARIANT = 'pending-approval';
+
 export const createSlug = str =>
   encodeURIComponent(
     str

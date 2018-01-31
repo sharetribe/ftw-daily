@@ -301,6 +301,10 @@
   opacity: 0.9;
 }
 
+.pendingApprovalOverlay {
+  cursor: default;
+}
+
 .loadingOverlayContent,
 .errorOverlayContent,
 .closedOverlayContent,

@@ -87,15 +87,15 @@ describe('util/routes.js', () => {
         '/l/00000000-0000-0000-0000-000000000000'
       );
     });
-    it('handles ListingPageBook', () => {
+    it('handles ListingPage book', () => {
       const routes = routeConfiguration();
       const location = {
-        pathname: '/l/some-slug-here/00000000-0000-0000-0000-000000000000/book',
+        pathname: '/l/some-slug-here/00000000-0000-0000-0000-000000000000?book=true',
         search: '',
         hash: '',
       };
       expect(canonicalRoutePath(routes, location)).toEqual(
-        '/l/00000000-0000-0000-0000-000000000000/book'
+        '/l/00000000-0000-0000-0000-000000000000?book=true'
       );
     });
     it('handles ListingBasePage', () => {

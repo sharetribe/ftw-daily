@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
-import { createSlug } from '../../util/urlHelpers';
-import { NamedLink } from '../../components';
+import { ListingLink } from '../../components';
 import { EditListingPricingForm } from '../../containers';
-import { ensureListing } from '../../util/data';
+import { ensureOwnListing } from '../../util/data';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import config from '../../config';
 
@@ -27,19 +26,14 @@ const EditListingPricingPanel = props => {
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
-  const currentListing = ensureListing(listing);
-  const { price, title } = currentListing.attributes;
-  const listingTitle = title || '';
-  const listingLink = currentListing.id ? (
-    <NamedLink name="ListingPage" params={{ id: currentListing.id.uuid, slug: createSlug(title) }}>
-      {listingTitle}
-    </NamedLink>
-  ) : (
-    ''
-  );
+  const currentListing = ensureOwnListing(listing);
+  const { price } = currentListing.attributes;
 
   const panelTitle = currentListing.id ? (
-    <FormattedMessage id="EditListingPricingPanel.title" values={{ listingTitle: listingLink }} />
+    <FormattedMessage
+      id="EditListingPricingPanel.title"
+      values={{ listingTitle: <ListingLink listing={listing} /> }}
+    />
   ) : (
     <FormattedMessage id="EditListingPricingPanel.createListingTitle" />
   );

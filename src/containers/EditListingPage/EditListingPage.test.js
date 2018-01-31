@@ -7,7 +7,7 @@ const noop = () => null;
 
 describe('EditListingPageComponent', () => {
   it('matches snapshot', () => {
-    const getListing = () => null;
+    const getOwnListing = () => null;
     const tree = renderShallow(
       <EditListingPageComponent
         params={{ id: 'id', slug: 'slug', type: 'new', tab: 'description' }}
@@ -17,7 +17,7 @@ describe('EditListingPageComponent', () => {
         fetchInProgress={false}
         location={{ search: '' }}
         history={{ push: noop }}
-        getListing={getListing}
+        getOwnListing={getOwnListing}
         images={[]}
         intl={fakeIntl}
         onLogout={noop}

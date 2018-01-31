@@ -13,7 +13,7 @@ import {
   txIsReviewed,
 } from '../../util/types';
 import { userDisplayName } from '../../util/data';
-import { createSlug } from '../../util/urlHelpers';
+import { createSlug, stringify } from '../../util/urlHelpers';
 import {
   ActivityFeed,
   BookingBreakdown,
@@ -105,14 +105,15 @@ export const BreakdownMaybe = props => {
   ) : null;
 };
 
-const createListingLink = (listing, label, listingPageName = 'ListingPage', className = '') => {
+const createListingLink = (listing, label, searchParams, className = '') => {
   const listingLoaded = !!listing.id;
 
   if (listingLoaded && !listing.attributes.deleted) {
     const title = listing.attributes.title;
     const params = { id: listing.id.uuid, slug: createSlug(title) };
+    const to = { search: stringify(searchParams) };
     return (
-      <NamedLink className={className} name={listingPageName} params={params}>
+      <NamedLink className={className} name="ListingPage" params={params} to={to}>
         {label}
       </NamedLink>
     );
@@ -127,7 +128,7 @@ export const OrderActionButtonMaybe = props => {
   const { className, rootClassName, canShowButtons, listing } = props;
 
   const title = <FormattedMessage id="TransactionPanel.requestToBook" />;
-  const listingLink = createListingLink(listing, title, 'ListingPageBook', css.requestToBookButton);
+  const listingLink = createListingLink(listing, title, { book: true }, css.requestToBookButton);
   const classes = classNames(rootClassName || css.actionButtons, className);
 
   return canShowButtons ? <div className={classes}>{listingLink}</div> : null;

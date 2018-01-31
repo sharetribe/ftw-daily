@@ -4,6 +4,7 @@ import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { denormalisedResponseEntities } from '../../util/data';
 import { TRANSITION_ENQUIRE } from '../../util/types';
+import { LISTING_PAGE_PENDING_APPROVAL_VARIANT } from '../../util/urlHelpers';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
 const { UUID } = sdkTypes;
@@ -99,11 +100,14 @@ export const sendEnquiryError = e => ({ type: SEND_ENQUIRY_ERROR, error: true, p
 
 // ================ Thunks ================ //
 
-export const showListing = listingId => (dispatch, getState, sdk) => {
+export const showListing = (listingId, isOwn = false) => (dispatch, getState, sdk) => {
   dispatch(showListingRequest(listingId));
   dispatch(fetchCurrentUser());
-  return sdk.listings
-    .show({ id: listingId, include: ['author', 'author.profileImage', 'images'] })
+  const params = { id: listingId, include: ['author', 'author.profileImage', 'images'] };
+
+  const show = isOwn ? sdk.ownListings.show(params) : sdk.listings.show(params);
+
+  return show
     .then(data => {
       dispatch(addMarketplaceEntities(data));
       return data;
@@ -148,8 +152,11 @@ export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => 
     });
 };
 
-export const loadData = params => dispatch => {
+export const loadData = (params, search) => dispatch => {
   const listingId = new UUID(params.id);
 
+  if (params.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT) {
+    return dispatch(showListing(listingId, true));
+  }
   return Promise.all([dispatch(showListing(listingId)), dispatch(fetchReviews(listingId))]);
 };

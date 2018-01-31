@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
-import { ensureListing } from '../../util/data';
-import { createSlug } from '../../util/urlHelpers';
-import { NamedLink } from '../../components';
+import { ensureOwnListing } from '../../util/data';
+import { ListingLink } from '../../components';
 import { EditListingLocationForm } from '../../containers';
 
 import css from './EditListingLocationPanel.css';
@@ -23,19 +22,14 @@ const EditListingLocationPanel = props => {
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
-  const currentListing = ensureListing(listing);
-  const { geolocation, title, publicData } = currentListing.attributes;
-  const listingTitle = title || '';
-  const listingLink = currentListing.id ? (
-    <NamedLink name="ListingPage" params={{ id: currentListing.id.uuid, slug: createSlug(title) }}>
-      {listingTitle}
-    </NamedLink>
-  ) : (
-    ''
-  );
+  const currentListing = ensureOwnListing(listing);
+  const { geolocation, publicData } = currentListing.attributes;
 
   const panelTitle = currentListing.id ? (
-    <FormattedMessage id="EditListingLocationPanel.title" values={{ listingTitle: listingLink }} />
+    <FormattedMessage
+      id="EditListingLocationPanel.title"
+      values={{ listingTitle: <ListingLink listing={listing} /> }}
+    />
   ) : (
     <FormattedMessage id="EditListingLocationPanel.createListingTitle" />
   );
