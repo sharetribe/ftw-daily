@@ -12,10 +12,8 @@ const { LatLng } = sdkTypes;
  */
 export const obfuscatedCoordinates = latlng => {
   const { lat, lng } = latlng;
-
-  // TODO: improve this
-  const newLat = lat + random(-0.001, 0.001);
-  const newLng = lng + random(-0.001, 0.001);
-
+  const threshold = 0.01;
+  const newLat = lat + random(-1 * threshold, threshold);
+  const newLng = lng + random(-1 * threshold, threshold);
   return new LatLng(newLat, newLng);
 };

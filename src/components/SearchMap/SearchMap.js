@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { arrayOf, bool, func, number, string, object } from 'prop-types';
 import { withGoogleMap, GoogleMap } from 'react-google-maps';
 import classNames from 'classnames';
 import { groupBy, isEqual, reduce } from 'lodash';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { propTypes } from '../../util/types';
+import { obfuscatedCoordinates } from '../../util/maps';
 import { googleBoundsToSDKBounds } from '../../util/googleMaps';
 import { SearchMapInfoCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
+import config from '../../config';
 
 import css from './SearchMap.css';
 
@@ -65,6 +67,20 @@ const groupedByCoordinates = mapListings => {
  */
 const reducedToArray = mapListings => {
   return reduce(mapListings, (acc, listing) => acc.concat([listing]), []);
+};
+
+const withCoordinatesObfuscated = listings => {
+  return listings.map(listing => {
+    const { attributes, ...rest } = listing;
+    const attrs = {
+      ...attributes,
+      geolocation: obfuscatedCoordinates(attributes.geolocation),
+    };
+    return {
+      ...rest,
+      attributes: attrs,
+    };
+  });
 };
 
 /**
@@ -214,14 +230,19 @@ export class SearchMapComponent extends Component {
       rootClassName,
       center,
       isOpenOnModal,
-      listings,
+      listings: originalListings,
       mapRootClassName,
       onCloseAsModal,
       onIdle,
       zoom,
+      coordinatesConfig,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
     const mapClasses = mapRootClassName || css.mapRoot;
+
+    const listings = coordinatesConfig.fuzzy
+      ? withCoordinatesObfuscated(originalListings)
+      : originalListings;
 
     // container element listens clicks so that opened SearchMapInfoCard can be closed
     /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -261,9 +282,8 @@ SearchMapComponent.defaultProps = {
   rootClassName: null,
   useLocationSearchBounds: true,
   zoom: 11,
+  coordinatesConfig: config.coordinates,
 };
-
-const { arrayOf, bool, func, number, string } = PropTypes;
 
 SearchMapComponent.propTypes = {
   bounds: propTypes.latlngBounds,
@@ -277,6 +297,7 @@ SearchMapComponent.propTypes = {
   rootClassName: string,
   useLocationSearchBounds: bool, // eslint-disable-line react/no-unused-prop-types
   zoom: number,
+  coordinatesConfig: object,
 };
 
 const SearchMap = SearchMapComponent;
