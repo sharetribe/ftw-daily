@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { string, number } from 'prop-types';
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import { string, number, object } from 'prop-types';
+import { withGoogleMap, GoogleMap, Marker, Circle } from 'react-google-maps';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
+import { obfuscatedCoordinates } from '../../util/maps';
+import config from '../../config';
+
 import CustomMarker from './images/marker-32x32.png';
 import css from './Map.css';
 
@@ -11,9 +14,9 @@ import css from './Map.css';
  * It handles some of the google map initialization states.
  */
 const MapWithGoogleMap = withGoogleMap(props => {
-  const { center, zoom, address } = props;
+  const { center, zoom, address, coordinatesConfig } = props;
 
-  const customMarker = {
+  const markerIcon = {
     url: CustomMarker,
     // This marker is 32 pixels wide by 32 pixels high.
     size: new window.google.maps.Size(32, 32),
@@ -22,6 +25,16 @@ const MapWithGoogleMap = withGoogleMap(props => {
     // The anchor for the marker is in the bottom center.
     anchor: new window.google.maps.Point(16, 32),
   };
+
+  const marker = <Marker position={center} icon={markerIcon} title={address} />;
+
+  const circleProps = {
+    options: coordinatesConfig.circleOptions,
+    radius: coordinatesConfig.circleRadius,
+    center,
+  };
+
+  const circle = <Circle {...circleProps} />;
 
   return (
     <GoogleMap
@@ -37,7 +50,7 @@ const MapWithGoogleMap = withGoogleMap(props => {
         fullscreenControl: true,
       }}
     >
-      <Marker position={center} icon={customMarker} title={address} />
+      {coordinatesConfig.fuzzy ? circle : marker}
     </GoogleMap>
   );
 });
@@ -51,10 +64,19 @@ export class Map extends Component {
   }
 
   render() {
-    const { className, rootClassName, mapRootClassName, address, center, zoom } = this.props;
+    const {
+      className,
+      rootClassName,
+      mapRootClassName,
+      address,
+      center,
+      zoom,
+      coordinatesConfig,
+    } = this.props;
     const classes = classNames(rootClassName || css.root, className);
     const mapClasses = mapRootClassName || css.mapRoot;
-    const centerLocationForGoogleMap = { lat: center.lat, lng: center.lng };
+    const location = coordinatesConfig.fuzzy ? obfuscatedCoordinates(center) : center;
+    const centerLocationForGoogleMap = { lat: location.lat, lng: location.lng };
 
     return (
       <MapWithGoogleMap
@@ -63,16 +85,18 @@ export class Map extends Component {
         center={centerLocationForGoogleMap}
         zoom={zoom}
         address={address}
+        coordinatesConfig={coordinatesConfig}
       />
     );
   }
 }
 
 Map.defaultProps = {
-  className: '',
+  className: null,
   rootClassName: null,
   mapRootClassName: null,
-  zoom: 11,
+  zoom: config.coordinates.fuzzy ? config.coordinates.fuzzyDefaultZoomLevel : 11,
+  coordinatesConfig: config.coordinates,
 };
 
 Map.propTypes = {
@@ -82,6 +106,7 @@ Map.propTypes = {
   address: string.isRequired,
   center: propTypes.latlng.isRequired,
   zoom: number,
+  coordinatesConfig: object,
 };
 
 export default Map;
