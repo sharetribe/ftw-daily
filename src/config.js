@@ -241,7 +241,7 @@ const facebookAppId = null;
 const coordinates = {
   // If true, obfuscate the coordinates of the listings that are shown
   // on a map.
-  fuzzy: process.env.REACT_APP_FUZZY_COORDINATES || true,
+  fuzzy: process.env.REACT_APP_FUZZY_COORDINATES || false,
 
   fuzzyDefaultZoomLevel: 14,
 

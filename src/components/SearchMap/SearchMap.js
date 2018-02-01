@@ -71,14 +71,15 @@ const reducedToArray = mapListings => {
 
 const withCoordinatesObfuscated = listings => {
   return listings.map(listing => {
-    const { attributes, ...rest } = listing;
-    const attrs = {
-      ...attributes,
-      geolocation: obfuscatedCoordinates(attributes.geolocation),
-    };
+    const { id, attributes, ...rest } = listing;
+    const geolocation = obfuscatedCoordinates(attributes.geolocation, id ? id.uuid : null);
     return {
+      id,
       ...rest,
-      attributes: attrs,
+      attributes: {
+        ...attributes,
+        geolocation,
+      },
     };
   });
 };

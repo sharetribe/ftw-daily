@@ -334,6 +334,11 @@ exports[`ListingPage matches snapshot 1`] = `
                   "lng": 60,
                 }
               }
+              listingId={
+                UUID {
+                  "uuid": "listing1",
+                }
+              }
               publicData={Object {}}
               rootClassName={null}
             />

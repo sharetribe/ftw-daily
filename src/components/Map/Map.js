@@ -3,7 +3,6 @@ import { string, number, object } from 'prop-types';
 import { withGoogleMap, GoogleMap, Marker, Circle } from 'react-google-maps';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
-import { obfuscatedCoordinates } from '../../util/maps';
 import config from '../../config';
 
 import CustomMarker from './images/marker-32x32.png';
@@ -70,12 +69,23 @@ export class Map extends Component {
       mapRootClassName,
       address,
       center,
+      obfuscatedCenter,
       zoom,
       coordinatesConfig,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
     const mapClasses = mapRootClassName || css.mapRoot;
-    const location = coordinatesConfig.fuzzy ? obfuscatedCoordinates(center) : center;
+
+    if (coordinatesConfig.fuzzy && !obfuscatedCenter) {
+      throw new Error(
+        'Map: obfuscatedCenter prop is required when config.coordinates.fuzzy === true'
+      );
+    }
+    if (!coordinatesConfig.fuzzy && !center) {
+      throw new Error('Map: center prop is required when config.coordinates.fuzzy === false');
+    }
+
+    const location = coordinatesConfig.fuzzy ? obfuscatedCenter : center;
     const centerLocationForGoogleMap = { lat: location.lat, lng: location.lng };
 
     return (
@@ -95,6 +105,7 @@ Map.defaultProps = {
   className: null,
   rootClassName: null,
   mapRootClassName: null,
+  address: '',
   zoom: config.coordinates.fuzzy ? config.coordinates.fuzzyDefaultZoomLevel : 11,
   coordinatesConfig: config.coordinates,
 };
@@ -103,8 +114,9 @@ Map.propTypes = {
   className: string,
   rootClassName: string,
   mapRootClassName: string,
-  address: string.isRequired,
-  center: propTypes.latlng.isRequired,
+  address: string,
+  center: propTypes.latlng,
+  obfuscatedCenter: propTypes.latlng,
   zoom: number,
   coordinatesConfig: object,
 };

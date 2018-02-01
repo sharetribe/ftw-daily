@@ -124,7 +124,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
                 "strokeWeight": 0.5,
               },
               "circleRadius": 500,
-              "fuzzy": true,
+              "fuzzy": false,
               "fuzzyDefaultZoomLevel": 14,
             }
           }

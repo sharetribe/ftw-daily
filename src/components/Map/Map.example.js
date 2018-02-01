@@ -13,6 +13,7 @@ export const WithMarker = {
   ),
   props: {
     center: new LatLng(60.16502999999999, 24.940064399999983),
+    obfuscatedCenter: new LatLng(60.16502999999999, 24.940064399999983),
     address: 'Sharetribe',
     zoom: 22,
   },
@@ -26,6 +27,7 @@ export const WithObfuscatedLocation = {
   ),
   props: {
     center: new LatLng(60.16502999999999, 24.940064399999983),
+    obfuscatedCenter: new LatLng(60.16502999999999, 24.940064399999983),
     address: 'Sharetribe',
     zoom: 14,
     coordinatesConfig: {
