@@ -135,7 +135,17 @@ exports[`ManageListingCard matches snapshot 1`] = `
       <div
         className=""
       >
-        listing1 title
+        <span
+          style={
+            Object {
+              "wordBreak": "break-all",
+            }
+          }
+        >
+          listing1
+        </span>
+         
+        title
       </div>
     </div>
     <button
