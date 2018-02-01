@@ -107,6 +107,7 @@ export { default as SectionHowItWorks } from './SectionHowItWorks/SectionHowItWo
 export { default as SectionLocations } from './SectionLocations/SectionLocations';
 export { default as SectionThumbnailLinks } from './SectionThumbnailLinks/SectionThumbnailLinks';
 export { default as SelectField } from './SelectField/SelectField';
+export { default as SelectMultipleFilter } from './SelectMultipleFilter/SelectMultipleFilter';
 export { default as SelectSingleFilter } from './SelectSingleFilter/SelectSingleFilter';
 export {
   default as SelectSingleFilterMobile,
