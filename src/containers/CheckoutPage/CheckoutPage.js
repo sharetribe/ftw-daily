@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, instanceOf, object, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
@@ -70,18 +70,21 @@ export class CheckoutPageComponent extends Component {
    * based on this initial data.
    */
   loadInitialData() {
-    const { bookingDates, listing } = this.props;
-    const hasDataInProps = !!(bookingDates && listing);
-    const pageData = hasDataInProps ? { bookingDates, listing } : storedData(STORAGE_KEY);
+    const { bookingData, bookingDates, listing, fetchSpeculatedTransaction } = this.props;
+    const hasDataInProps = !!(bookingData && bookingDates && listing);
+    const pageData = hasDataInProps
+      ? { bookingData, bookingDates, listing }
+      : storedData(STORAGE_KEY);
 
     if (hasDataInProps) {
-      storeData(bookingDates, listing, STORAGE_KEY);
+      storeData(bookingData, bookingDates, listing, STORAGE_KEY);
     }
 
     const hasData =
       pageData &&
       pageData.listing &&
       pageData.listing.id &&
+      pageData.bookingData &&
       pageData.bookingDates &&
       pageData.bookingDates.bookingStart &&
       pageData.bookingDates.bookingEnd;
@@ -387,17 +390,17 @@ export class CheckoutPageComponent extends Component {
 CheckoutPageComponent.defaultProps = {
   initiateOrderError: null,
   listing: null,
+  bookingData: {},
   bookingDates: null,
   speculateTransactionError: null,
   speculatedTransaction: null,
   currentUser: null,
 };
 
-const { func, instanceOf, shape, string, bool } = PropTypes;
-
 CheckoutPageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
   listing: propTypes.listing,
+  bookingData: object,
   bookingDates: shape({
     bookingStart: instanceOf(Date).isRequired,
     bookingEnd: instanceOf(Date).isRequired,
@@ -429,6 +432,7 @@ CheckoutPageComponent.propTypes = {
 const mapStateToProps = state => {
   const {
     listing,
+    bookingData,
     bookingDates,
     speculateTransactionInProgress,
     speculateTransactionError,
@@ -439,6 +443,7 @@ const mapStateToProps = state => {
   return {
     scrollingDisabled: isScrollingDisabled(state),
     currentUser,
+    bookingData,
     bookingDates,
     speculateTransactionInProgress,
     speculateTransactionError,

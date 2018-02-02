@@ -54,6 +54,7 @@ describe('CheckoutPage', () => {
       const initialValues = {
         initiateOrderError: null,
         listing: null,
+        bookingData: null,
         bookingDates: null,
         speculateTransactionError: null,
         speculateTransactionInProgress: false,

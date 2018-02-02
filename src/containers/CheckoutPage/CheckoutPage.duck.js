@@ -21,6 +21,7 @@ export const SPECULATE_TRANSACTION_ERROR = 'app/ListingPage/SPECULATE_TRANSACTIO
 
 const initialState = {
   listing: null,
+  bookingData: null,
   bookingDates: null,
   speculateTransactionInProgress: false,
   speculateTransactionError: null,
