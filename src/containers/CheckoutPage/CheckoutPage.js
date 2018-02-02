@@ -90,11 +90,9 @@ export class CheckoutPageComponent extends Component {
       pageData.bookingDates.bookingEnd;
 
     if (hasData) {
-      this.props.fetchSpeculatedTransaction(
-        pageData.listing.id,
-        pageData.bookingDates.bookingStart,
-        pageData.bookingDates.bookingEnd
-      );
+      const listingId = pageData.listing.id;
+      const { bookingStart, bookingEnd } = pageData.bookingDates;
+      fetchSpeculatedTransaction({ listingId, bookingStart, bookingEnd });
     }
 
     this.setState({ pageData: pageData || {}, dataLoaded: true });
