@@ -21,9 +21,9 @@ Some generic things to update and check when starting to customize Starter app.
 - [Config: marketplace address](../src/config.js): contact details also improve SEO
 - [Config: social media pages](../src/config.js)
 - [Marketplace custom config](../src/marketplace-custom-config.js)
-- Update [ListingPage](../src/containers/ListingPage/ListingPage.js) to show public data
-- Update [EditListingWizard](../src/components/EditListingWizard/EditListingWizard.js) and panels to add public data
-- Update [SearchPage](../src/containers/SearchPage/SearchPage.js) to filter with public data
+- Update [ListingPage](../src/containers/ListingPage/ListingPage.js) to show extended data (aka publicData attribute)
+- Update [EditListingWizard](../src/components/EditListingWizard/EditListingWizard.js) and panels to add extended data
+- Update [SearchPage](../src/containers/SearchPage/SearchPage.js) to filter with extended data
 - Update [routeConfiguration](../src/routeConfiguration) if needed
 - Update [config: bookingUnitType](../src/config.js) if needed
 - If `line-item/units` is used, add quantity handling
