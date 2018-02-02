@@ -238,6 +238,24 @@ const siteFacebookPage = 'https://www.facebook.com/Sharetribe/';
 // You should create one to track social sharing in Facebook
 const facebookAppId = null;
 
+const coordinates = {
+  // If true, obfuscate the coordinates of the listings that are shown
+  // on a map.
+  fuzzy: process.env.REACT_APP_FUZZY_COORDINATES || false,
+
+  fuzzyDefaultZoomLevel: 14,
+
+  // When fuzzy === true, a circle is shown on the map, the radius and
+  // the style can be configured here.
+  circleRadius: 500,
+  circleOptions: {
+    fillColor: '#c0392b',
+    fillOpacity: 0.2,
+    strokeColor: '#c0392b',
+    strokeWeight: 0.5,
+  },
+};
+
 // NOTE: only expose configuration that should be visible in the
 // client side, don't add any server secrets in this file.
 const config = {
@@ -264,6 +282,7 @@ const config = {
   facebookAppId,
   sentryDsn,
   usingSSL,
+  coordinates,
   custom,
 };
 

@@ -575,7 +575,11 @@ export class ListingPageComponent extends Component {
                   </div>
 
                   <SectionRulesMaybe publicData={publicData} />
-                  <SectionMapMaybe geolocation={geolocation} publicData={publicData} />
+                  <SectionMapMaybe
+                    geolocation={geolocation}
+                    publicData={publicData}
+                    listingId={currentListing.id}
+                  />
 
                   <div className={css.reviewsContainer}>
                     <h2 className={css.reviewsHeading}>
