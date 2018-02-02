@@ -3,6 +3,7 @@
 exports[`EditListingLocationForm matches snapshot 1`] = `
 <Form
   className=""
+  contentRef={null}
   onSubmit={[Function]}
 >
   <Component

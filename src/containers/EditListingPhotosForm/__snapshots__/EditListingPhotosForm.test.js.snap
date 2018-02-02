@@ -3,6 +3,7 @@
 exports[`EditListingPhotosForm matches snapshot 1`] = `
 <Form
   className=""
+  contentRef={null}
   onSubmit={[Function]}
 >
   <AddImages

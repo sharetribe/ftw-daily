@@ -57,6 +57,7 @@ const SearchFiltersComponent = props => {
       paramLabel={categoryLabel}
       onSelect={onSelectOption}
       options={categories}
+      contentPlacementOffset={-14}
     />
   ) : null;
   return (

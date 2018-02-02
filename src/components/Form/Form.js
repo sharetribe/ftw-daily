@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Form = props => {
-  const { children, ...restProps } = props;
+  const { children, contentRef, ...restProps } = props;
 
   const formProps = {
     // These are mainly default values for the server
@@ -12,6 +12,9 @@ const Form = props => {
     method: 'post',
     action: '/',
 
+    // allow content ref function to be passed to the form
+    ref: contentRef,
+
     ...restProps,
   };
   return <form {...formProps}>{children}</form>;
@@ -19,12 +22,14 @@ const Form = props => {
 
 Form.defaultProps = {
   children: null,
+  contentRef: null,
 };
 
-const { node } = PropTypes;
+const { func, node } = PropTypes;
 
 Form.propTypes = {
   children: node,
+  contentRef: func,
 };
 
 export default Form;
