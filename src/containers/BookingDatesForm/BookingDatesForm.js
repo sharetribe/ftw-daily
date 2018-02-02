@@ -89,7 +89,7 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
 
 const estimatedBreakdown = (unitType, bookingStart, bookingEnd, unitPrice, quantity) => {
   const isUnits = unitType === LINE_ITEM_UNITS;
-  const quantityIfUsingUnits = !isUnits || !Number.isInteger(quantity);
+  const quantityIfUsingUnits = !isUnits || Number.isInteger(quantity);
   const canEstimatePrice = bookingStart && bookingEnd && unitPrice && quantityIfUsingUnits;
   if (!canEstimatePrice) {
     return null;
