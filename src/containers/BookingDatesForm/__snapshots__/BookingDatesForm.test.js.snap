@@ -3,6 +3,7 @@
 exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
 <Form
   className={null}
+  contentRef={null}
   onSubmit={[Function]}
 >
   <FieldDateRangeInput
