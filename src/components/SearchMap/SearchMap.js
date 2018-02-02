@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { arrayOf, bool, func, number, string, object } from 'prop-types';
+import { arrayOf, bool, func, number, string, object, shape } from 'prop-types';
 import { withGoogleMap, GoogleMap } from 'react-google-maps';
 import classNames from 'classnames';
 import { groupBy, isEqual, reduce } from 'lodash';
@@ -298,7 +298,12 @@ SearchMapComponent.propTypes = {
   rootClassName: string,
   useLocationSearchBounds: bool, // eslint-disable-line react/no-unused-prop-types
   zoom: number,
-  coordinatesConfig: object,
+  coordinatesConfig: shape({
+    fuzzy: bool.isRequired,
+    fuzzyDefaultZoomLevel: number.isRequired,
+    circleRadius: number.isRequired,
+    circleOptions: object.isRequired,
+  }),
 };
 
 const SearchMap = SearchMapComponent;
