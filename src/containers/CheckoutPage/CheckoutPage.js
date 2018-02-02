@@ -92,6 +92,10 @@ export class CheckoutPageComponent extends Component {
     if (hasData) {
       const listingId = pageData.listing.id;
       const { bookingStart, bookingEnd } = pageData.bookingDates;
+
+      // Fetch speculated transaction for showing price in booking breakdown
+      // NOTE: if unit type is line-item/units, quantity needs to be added.
+      // The way to pass it to checkout page is through pageData.bookingData
       fetchSpeculatedTransaction({ listingId, bookingStart, bookingEnd });
     }
 
@@ -107,6 +111,10 @@ export class CheckoutPageComponent extends Component {
     const cardToken = values.token;
     const initialMessage = values.message;
     const { history, sendOrderRequest, speculatedTransaction, dispatch } = this.props;
+
+    // Create order aka transaction
+    // NOTE: if unit type is line-item/units, quantity needs to be added.
+    // The way to pass it to checkout page is through pageData.bookingData
     const requestParams = {
       listingId: this.state.pageData.listing.id,
       cardToken,
