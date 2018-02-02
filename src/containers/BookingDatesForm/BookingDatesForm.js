@@ -14,6 +14,7 @@ import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../u
 import {
   LINE_ITEM_DAY,
   LINE_ITEM_NIGHT,
+  LINE_ITEM_UNITS,
   TRANSITION_REQUEST,
   TX_TRANSITION_ACTOR_CUSTOMER,
   propTypes,
@@ -37,12 +38,15 @@ const estimatedTotalPrice = (unitPrice, unitCount) => {
 // When we cannot speculatively initiate a transaction (i.e. logged
 // out), we must estimate the booking breakdown. This function creates
 // an estimated transaction object for that use case.
-const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice) => {
+const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, quantity) => {
   const now = new Date();
   const isNightly = unitType === LINE_ITEM_NIGHT;
+  const isDaily = unitType === LINE_ITEM_DAY;
+
   const unitCount = isNightly
     ? nightsBetween(bookingStart, bookingEnd)
-    : daysBetween(bookingStart, bookingEnd);
+    : isDaily ? daysBetween(bookingStart, bookingEnd) : quantity;
+
   const totalPrice = estimatedTotalPrice(unitPrice, unitCount);
 
   return {
@@ -56,7 +60,7 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice) => 
       payoutTotal: totalPrice,
       lineItems: [
         {
-          code: isNightly ? LINE_ITEM_NIGHT : LINE_ITEM_DAY,
+          code: unitType,
           includeFor: ['customer', 'provider'],
           unitPrice: unitPrice,
           quantity: new Decimal(unitCount),
@@ -83,13 +87,15 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice) => 
   };
 };
 
-const estimatedBreakdown = (unitType, bookingStart, bookingEnd, unitPrice) => {
-  const canEstimatePrice = bookingStart && bookingEnd && unitPrice;
+const estimatedBreakdown = (unitType, bookingStart, bookingEnd, unitPrice, quantity) => {
+  const isUnits = unitType === LINE_ITEM_UNITS;
+  const quantityIfUsingUnits = !isUnits || !Number.isInteger(quantity);
+  const canEstimatePrice = bookingStart && bookingEnd && unitPrice && quantityIfUsingUnits;
   if (!canEstimatePrice) {
     return null;
   }
 
-  const tx = estimatedTransaction(unitType, bookingStart, bookingEnd, unitPrice);
+  const tx = estimatedTransaction(unitType, bookingStart, bookingEnd, unitPrice, quantity);
 
   return (
     <BookingBreakdown
