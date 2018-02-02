@@ -6,12 +6,15 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { omit } from 'lodash';
 
-import { SelectSingleFilter } from '../../components';
+import { SelectSingleFilter, SelectMultipleFilter } from '../../components';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import css from './SearchFilters.css';
 
 const CATEGORY_URL_PARAM = 'pub_category';
+const FEATURES_URL_PARAM = 'pub_features';
+
+const FILTER_OFFSET = -14;
 
 const SearchFiltersComponent = props => {
   const {
@@ -22,6 +25,7 @@ const SearchFiltersComponent = props => {
     resultsCount,
     searchInProgress,
     categories,
+    features,
     history,
     intl,
   } = props;
@@ -40,6 +44,19 @@ const SearchFiltersComponent = props => {
     id: 'SearchFilters.categoryLabel',
   });
 
+  const initialFeatures =
+    urlQueryParams[FEATURES_URL_PARAM] && urlQueryParams[FEATURES_URL_PARAM].split(',');
+
+  const handleSelectOptions = options => {
+    console.log('Select features', options);
+
+    const queryParams = options
+      ? { ...urlQueryParams, [FEATURES_URL_PARAM]: options.join(',') }
+      : omit(urlQueryParams, FEATURES_URL_PARAM);
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  };
+
   const onSelectOption = (urlParam, option) => {
     // query parameters after selecting the option
     // if no option is passed, clear the selection for the filter
@@ -57,12 +74,25 @@ const SearchFiltersComponent = props => {
       paramLabel={categoryLabel}
       onSelect={onSelectOption}
       options={categories}
-      contentPlacementOffset={-14}
+      contentPlacementOffset={FILTER_OFFSET}
     />
   ) : null;
+
+  const featuresFilter = features ? (
+    <SelectMultipleFilter
+      onSubmit={handleSelectOptions}
+      options={features}
+      initialValues={initialFeatures}
+      contentPlacementOffset={FILTER_OFFSET}
+    />
+  ) : null;
+
   return (
     <div className={classes}>
-      <div className={css.filters}>{categoryFilter}</div>
+      <div className={css.filters}>
+        {categoryFilter}
+        {featuresFilter}
+      </div>
 
       <div className={css.searchResultSummary}>
         {listingsAreLoaded && resultsCount > 0 ? resultsFound : null}
@@ -79,6 +109,7 @@ SearchFiltersComponent.defaultProps = {
   resultsCount: null,
   searchingInProgress: false,
   categories: null,
+  features: null,
 };
 
 SearchFiltersComponent.propTypes = {
@@ -91,6 +122,7 @@ SearchFiltersComponent.propTypes = {
   onMapIconClick: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   categories: array,
+  features: array,
 
   // from withRouter
   history: shape({

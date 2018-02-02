@@ -43,11 +43,18 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
 const BOUNDS_FIXED_PRECISION = 8;
 
 const CATEGORY_URL_PARAM = 'pub_category';
+const FEATURES_URL_PARAM = 'pub_features';
 
 // extract search parameters, including a custom attribute named category
 const pickSearchParamsOnly = params => {
   const { address, origin, bounds, ...rest } = params || {};
-  return { address, origin, bounds, [CATEGORY_URL_PARAM]: rest[CATEGORY_URL_PARAM] };
+  return {
+    address,
+    origin,
+    bounds,
+    [CATEGORY_URL_PARAM]: rest[CATEGORY_URL_PARAM],
+    [FEATURES_URL_PARAM]: rest[FEATURES_URL_PARAM],
+  };
 };
 
 export class SearchPageComponent extends Component {
@@ -103,6 +110,7 @@ export class SearchPageComponent extends Component {
       latlngBounds: ['bounds'],
     });
     const category = rest[CATEGORY_URL_PARAM];
+    const features = rest[FEATURES_URL_PARAM];
 
     const viewportGMapBounds = googleMap.getBounds();
     const viewportBounds = sdkBoundsToFixedCoordinates(
@@ -124,6 +132,7 @@ export class SearchPageComponent extends Component {
         country,
         mapSearch: true,
         [CATEGORY_URL_PARAM]: category,
+        [FEATURES_URL_PARAM]: features,
       };
       history.push(
         createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
@@ -189,6 +198,7 @@ export class SearchPageComponent extends Component {
       searchListingsError,
       searchParams,
       categories,
+      features,
     } = this.props;
     // eslint-disable-next-line no-unused-vars
     const { mapSearch, page, ...searchInURL } = parse(location.search, {
@@ -306,6 +316,7 @@ export class SearchPageComponent extends Component {
               onMapIconClick={onMapIconClick}
               onManageDisableScrolling={onManageDisableScrolling}
               categories={categories}
+              features={features}
             />
             <SearchFiltersMobile
               className={css.searchFiltersMobile}
@@ -361,6 +372,7 @@ SearchPageComponent.defaultProps = {
   searchParams: {},
   tab: 'listings',
   categories: config.custom.categories,
+  features: config.custom.amenities,
 };
 
 const { array, bool, func, oneOf, object, shape, string } = PropTypes;
@@ -377,6 +389,7 @@ SearchPageComponent.propTypes = {
   searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
   categories: array,
+  features: array,
 
   // from withRouter
   history: shape({
