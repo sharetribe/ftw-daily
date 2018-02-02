@@ -18,7 +18,7 @@ const i18n = {
 
 // The transaction line item code for the main unit type in bookings.
 //
-// Possible values: ['line-item/night', 'line-item/day']
+// Possible values: ['line-item/night', 'line-item/day', 'line-item/units';]
 //
 // Note: if you change this, many of the generic translations will
 // still show information about nights. Make sure to go through the
