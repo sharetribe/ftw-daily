@@ -19,7 +19,7 @@ Some generic things to update and check when starting to customize Starter app.
 - [Config: update environment variables](../src/config.js)
 - [Config: siteTitle](../src/config.js) for page schema (SEO)
 - [Config: marketplace address](../src/config.js): contact details also improve SEO
-- [Config: social media integration](../src/config.js)
+- [Config: social media pages](../src/config.js)
 - [Marketplace custom config](../src/marketplace-custom-config.js)
 - Update [ListingPage](../src/containers/ListingPage/ListingPage.js) to show public data
 - Update [EditListingWizard](../src/components/EditListingWizard/EditListingWizard.js) and panels to add public data
