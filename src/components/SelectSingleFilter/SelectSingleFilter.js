@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { object, string, func, arrayOf, shape } from 'prop-types';
+import { object, string, func, arrayOf, shape, number } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 
@@ -30,7 +30,15 @@ class SelectSingleFilter extends Component {
   }
 
   render() {
-    const { rootClassName, className, urlQueryParams, urlParam, paramLabel, options } = this.props;
+    const {
+      rootClassName,
+      className,
+      urlQueryParams,
+      urlParam,
+      paramLabel,
+      options,
+      contentPlacementOffset,
+    } = this.props;
 
     // current value of this custom attribute filter
     const currentValue = urlQueryParams[urlParam];
@@ -45,7 +53,7 @@ class SelectSingleFilter extends Component {
       <Menu
         className={classes}
         useArrow={false}
-        contentPlacementOffset={-14}
+        contentPlacementOffset={contentPlacementOffset}
         onToggleActive={this.onToggleActive}
         isOpen={this.state.isOpen}
       >
@@ -83,6 +91,7 @@ class SelectSingleFilter extends Component {
 SelectSingleFilter.defaultProps = {
   rootClassName: null,
   className: null,
+  contentPlacementOffset: 0,
 };
 
 SelectSingleFilter.propTypes = {
@@ -92,13 +101,13 @@ SelectSingleFilter.propTypes = {
   urlParam: string.isRequired,
   paramLabel: string.isRequired,
   onSelect: func.isRequired,
-
   options: arrayOf(
     shape({
       key: string.isRequired,
       label: string.isRequired,
     })
   ).isRequired,
+  contentPlacementOffset: number,
 };
 
 export default SelectSingleFilter;
