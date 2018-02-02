@@ -9,8 +9,8 @@ Some generic things to update and check when starting to customize Starter app.
 - [LandingPage](../src/containers/LandingPage/LandingPage.js): update and create branded sections
 - [Footer](../src/components/Footer/Footer.js)
 - [AboutPage](../src/containers/AboutPage/AboutPage.js)
-- [TermsOfServicePage](terms-of-service-and-privacy-policy.md#terms-of-service)
-- [PrivacyPolicy](terms-of-service-and-privacy-policy.md#privacy-policy)
+- [Terms of Service](terms-of-service-and-privacy-policy.md#terms-of-service)
+- [Privacy Policy](terms-of-service-and-privacy-policy.md#privacy-policy)
 - [Social media sharing graphics](../src/components/Page/Page.js);
 - [Logo](../src/components/Logo/Logo.js) Change and check that it works on Topbar and Footer
 - [Logo in CheckoutPage](../src/containers/CheckoutPage/LogoIcon.js)
