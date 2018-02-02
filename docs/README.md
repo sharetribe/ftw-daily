@@ -12,6 +12,7 @@ Documentation for specific topics can be found in the following files:
 * [Testing](testing.md)
 * [Error logging with Sentry](sentry.md)
 * [CI](ci.md)
+* [Customization checklist](customization-checklist.md)
 * [Static pages](static-pages.md)
 * [Analytics](analytics.md)
 * [Terms of Service and Privacy Policy](terms-of-service-and-privacy-policy.md)
