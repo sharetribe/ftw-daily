@@ -21,6 +21,7 @@ export const SPECULATE_TRANSACTION_ERROR = 'app/ListingPage/SPECULATE_TRANSACTIO
 
 const initialState = {
   listing: null,
+  bookingData: null,
   bookingDates: null,
   speculateTransactionInProgress: false,
   speculateTransactionError: null,
@@ -154,18 +155,12 @@ export const initiateOrder = (orderParams, initialMessage) => (dispatch, getStat
  * pricing info for the booking breakdown to get a proper estimate for
  * the price with the chosen information.
  */
-export const speculateTransaction = (listingId, bookingStart, bookingEnd) => (
-  dispatch,
-  getState,
-  sdk
-) => {
+export const speculateTransaction = params => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
   const bodyParams = {
     transition: TRANSITION_REQUEST,
     params: {
-      listingId,
-      bookingStart,
-      bookingEnd,
+      ...params,
       cardToken: 'CheckoutPage_speculative_card_token',
     },
   };
@@ -184,10 +179,11 @@ export const speculateTransaction = (listingId, bookingStart, bookingEnd) => (
       dispatch(speculateTransactionSuccess(tx));
     })
     .catch(e => {
+      const { listingId, bookingStart, bookingEnd } = params;
       log.error(e, 'speculate-transaction-failed', {
         listingId: listingId.uuid,
-        bookingStart: bookingStart,
-        bookingEnd: bookingEnd,
+        bookingStart,
+        bookingEnd,
       });
       return dispatch(speculateTransactionError(storableError(e)));
     });

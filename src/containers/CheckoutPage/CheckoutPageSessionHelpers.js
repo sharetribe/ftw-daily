@@ -47,12 +47,13 @@ export const isValidListing = listing => {
 };
 
 // Stores given bookingDates and listing to sessionStorage
-export const storeData = (bookingDates, listing, storageKey) => {
-  if (window && window.sessionStorage && listing && bookingDates) {
+export const storeData = (bookingData, bookingDates, listing, storageKey) => {
+  if (window && window.sessionStorage && listing && bookingDates && bookingData) {
     // TODO: How should we deal with Dates when data is serialized?
     // Hard coded serializable date objects atm.
     /* eslint-disable no-underscore-dangle */
     const data = {
+      bookingData,
       bookingDates: {
         bookingStart: { date: bookingDates.bookingStart, _serializedType: 'SerializableDate' },
         bookingEnd: { date: bookingDates.bookingEnd, _serializedType: 'SerializableDate' },
@@ -82,7 +83,7 @@ export const storedData = storageKey => {
       return sdkTypes.reviver(k, v);
     };
 
-    const { bookingDates, listing, storedAt } = checkoutPageData
+    const { bookingData, bookingDates, listing, storedAt } = checkoutPageData
       ? JSON.parse(checkoutPageData, reviver)
       : {};
 
@@ -92,7 +93,7 @@ export const storedData = storageKey => {
       : false;
 
     if (isFreshlySaved && isValidBookingDates(bookingDates) && isValidListing(listing)) {
-      return { bookingDates, listing };
+      return { bookingData, bookingDates, listing };
     }
   }
   return {};

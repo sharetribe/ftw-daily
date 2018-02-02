@@ -172,10 +172,11 @@ export class ListingPageComponent extends Component {
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
-    const { bookingDates } = values;
+    const { bookingDates, ...bookingData } = values;
 
     const initialValues = {
       listing,
+      bookingData,
       bookingDates: {
         bookingStart: bookingDates.startDate,
         bookingEnd: bookingDates.endDate,
