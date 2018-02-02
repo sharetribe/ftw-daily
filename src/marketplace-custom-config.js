@@ -38,8 +38,8 @@ export const amenities = [
 ];
 
 export const categories = [
-  { key: 'road', label: 'Road' },
-  { key: 'mountain', label: 'Mountain' },
-  { key: 'track', label: 'Track' },
+  { key: 'smoke', label: 'Smoke' },
+  { key: 'electric', label: 'Electric' },
+  { key: 'wood', label: 'Wood' },
   { key: 'other', label: 'Other' },
 ];
