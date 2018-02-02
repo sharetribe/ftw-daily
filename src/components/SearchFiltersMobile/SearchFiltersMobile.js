@@ -10,7 +10,7 @@ import { createResourceLocatorString } from '../../util/routes';
 import { SecondaryButton, ModalInMobile, Button, SelectSingleFilterMobile } from '../../components';
 import css from './SearchFiltersMobile.css';
 
-const CATEGORY_URL_PARAM = 'ca_category';
+const CATEGORY_URL_PARAM = 'pub_category';
 
 const validateParamValue = value => value !== null && value !== undefined && value.length > 0;
 

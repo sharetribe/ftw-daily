@@ -47,12 +47,6 @@ const EditListingDescriptionPanel = props => {
           const updateValues = {
             title,
             description,
-
-            // Save category also to the deprecated customAttributes
-            // so it can be used in search.
-            // TODO: remove when publicData is used in search
-            customAttributes: { category },
-
             publicData: { category },
           };
 

@@ -111,13 +111,14 @@ export const searchMapListingsError = e => ({
 export const searchListings = searchParams => (dispatch, getState, sdk) => {
   dispatch(searchListingsRequest(searchParams));
 
-  const { origin, include = [], page, perPage } = searchParams;
+  const { perPage, ...rest } = searchParams;
+  const params = {
+    ...rest,
+    per_page: perPage,
+  };
 
-  const searchOrQuery = origin
-    ? sdk.listings.search({ ...searchParams, per_page: perPage })
-    : sdk.listings.query({ include, page, per_page: perPage });
-
-  return searchOrQuery
+  return sdk.listings
+    .query(params)
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(searchListingsSuccess(response));
@@ -132,13 +133,14 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
 export const searchMapListings = searchParams => (dispatch, getState, sdk) => {
   dispatch(searchMapListingsRequest(searchParams));
 
-  const { origin, include = [], page = 1, perPage } = searchParams;
+  const { perPage, ...rest } = searchParams;
+  const params = {
+    ...rest,
+    per_page: perPage,
+  };
 
-  const searchOrQuery = origin
-    ? sdk.listings.search({ ...searchParams, page, per_page: perPage })
-    : sdk.listings.query({ include, page, per_page: perPage });
-
-  return searchOrQuery
+  return sdk.listings
+    .query(params)
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(searchMapListingsSuccess(response));

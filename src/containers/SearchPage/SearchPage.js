@@ -42,7 +42,7 @@ const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
 const BOUNDS_FIXED_PRECISION = 8;
 
-const CATEGORY_URL_PARAM = 'ca_category';
+const CATEGORY_URL_PARAM = 'pub_category';
 
 // extract search parameters, including a custom attribute named category
 const pickSearchParamsOnly = params => {
@@ -98,10 +98,11 @@ export class SearchPageComponent extends Component {
     const { history, location } = this.props;
 
     // parse query parameters, including a custom attribute named category
-    const { address, country, bounds, mapSearch, ca_category } = parse(location.search, {
+    const { address, country, bounds, mapSearch, ...rest } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
+    const category = rest[CATEGORY_URL_PARAM];
 
     const viewportGMapBounds = googleMap.getBounds();
     const viewportBounds = sdkBoundsToFixedCoordinates(
@@ -122,7 +123,7 @@ export class SearchPageComponent extends Component {
         bounds: viewportBounds,
         country,
         mapSearch: true,
-        ca_category,
+        [CATEGORY_URL_PARAM]: category,
       };
       history.push(
         createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
