@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { arrayOf, func, node, shape, string } from 'prop-types';
+import { arrayOf, func, node, number, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
 import { toPairs } from 'lodash';
@@ -160,6 +160,7 @@ SelectMultipleFilter.defaultProps = {
   rootClassName: null,
   className: null,
   initialValues: [],
+  contentPlacementOffset: 0,
 };
 
 SelectMultipleFilter.propTypes = {
@@ -173,6 +174,7 @@ SelectMultipleFilter.propTypes = {
     })
   ).isRequired,
   initialValues: arrayOf(string),
+  contentPlacementOffset: number,
 
   // form injectIntl
   intl: intlShape.isRequired,
