@@ -11,7 +11,7 @@ import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import css from './SearchFilters.css';
 
-const CATEGORY_URL_PARAM = 'ca_category';
+const CATEGORY_URL_PARAM = 'pub_category';
 
 const SearchFiltersComponent = props => {
   const {

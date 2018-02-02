@@ -43,8 +43,8 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           Object {
             "address": undefined,
             "bounds": undefined,
-            "ca_category": undefined,
             "origin": undefined,
+            "pub_category": undefined,
           }
         }
       />
@@ -74,8 +74,8 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           Object {
             "address": undefined,
             "bounds": undefined,
-            "ca_category": undefined,
             "origin": undefined,
+            "pub_category": undefined,
           }
         }
       />
