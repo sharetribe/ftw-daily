@@ -30,7 +30,6 @@ const valuesToKeys = values => {
   return entries.filter(entry => entry[1] === true).map(entry => entry[0]);
 };
 
-
 class SelectMultipleFilter extends Component {
   constructor(props) {
     super(props);
@@ -115,7 +114,15 @@ class SelectMultipleFilter extends Component {
     const { rootClassName, className, options, initialValues, intl } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
-    const label = intl.formatMessage({ id: 'SelectMultipleFilterMobile.label' });
+    const hasInitialValues = initialValues.length > 0;
+    const labelStyles = hasInitialValues ? css.labelSelected : css.label;
+    const label = hasInitialValues
+      ? intl.formatMessage(
+          { id: 'SelectMultipleFilterMobile.labelSelected' },
+          { count: initialValues.length }
+        )
+      : intl.formatMessage({ id: 'SelectMultipleFilterMobile.label' });
+
     const contentStyle = this.positionStyleForContent();
 
     return (
@@ -127,7 +134,7 @@ class SelectMultipleFilter extends Component {
           this.filter = node;
         }}
       >
-        <button className={css.label} onClick={() => this.toggleOpen()}>
+        <button className={labelStyles} onClick={() => this.toggleOpen()}>
           {label}
         </button>
         <SelectMultipleFilterForm

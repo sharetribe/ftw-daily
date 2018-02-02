@@ -519,6 +519,7 @@
   "SectionLocations.subtitle": "We have more than 1000 saunas around Finland. Here are some of our most popular locations.",
   "SectionLocations.title": "We have wooden saunas, electric saunas, and even tent saunas.",
   "SelectMultipleFilterMobile.label": "Amenities",
+  "SelectMultipleFilterMobile.labelSelected": "Amenities • {count}",
   "SelectMultipleFilterMobile.clear": "Clear",
   "SelectMultipleFilterMobile.cancel": "Cancel",
   "SelectMultipleFilterMobile.submit": "Apply",
