@@ -51,6 +51,8 @@ const SearchFiltersComponent = props => {
   const initialFeatures =
     urlQueryParams[FEATURES_URL_PARAM] && urlQueryParams[FEATURES_URL_PARAM].split(',');
 
+  const initialCategory = urlQueryParams[CATEGORY_URL_PARAM];
+
   const handleSelectOptions = (urlParam, options) => {
     const queryParams = options
       ? { ...urlQueryParams, [FEATURES_URL_PARAM]: options.join(',') }
@@ -71,11 +73,11 @@ const SearchFiltersComponent = props => {
 
   const categoryFilter = categories ? (
     <SelectSingleFilter
-      urlQueryParams={urlQueryParams}
       urlParam={CATEGORY_URL_PARAM}
       label={categoryLabel}
       onSelect={onSelectOption}
       options={categories}
+      initialValue={initialCategory}
       contentPlacementOffset={FILTER_OFFSET}
     />
   ) : null;

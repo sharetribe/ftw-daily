@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { object, string, func, arrayOf, shape, number } from 'prop-types';
+import { string, func, arrayOf, shape, number } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 
@@ -33,19 +33,16 @@ class SelectSingleFilter extends Component {
     const {
       rootClassName,
       className,
-      urlQueryParams,
       urlParam,
       label,
       options,
+      initialValue,
       contentPlacementOffset,
     } = this.props;
 
-    // current value of this custom attribute filter
-    const currentValue = urlQueryParams[urlParam];
-
     // resolve menu label text and class
-    const menuLabel = currentValue ? optionLabel(options, currentValue) : label;
-    const menuLabelClass = currentValue ? css.menuLabelSelected : css.menuLabel;
+    const menuLabel = initialValue ? optionLabel(options, initialValue) : label;
+    const menuLabelClass = initialValue ? css.menuLabelSelected : css.menuLabel;
 
     const classes = classNames(rootClassName || css.root, className);
 
@@ -61,7 +58,7 @@ class SelectSingleFilter extends Component {
         <MenuContent className={css.menuContent}>
           {options.map(option => {
             // check if this option is selected
-            const selected = currentValue === option.key;
+            const selected = initialValue === option.key;
             // menu item border class
             const menuItemBorderClass = selected ? css.menuItemBorderSelected : css.menuItemBorder;
 
@@ -91,13 +88,13 @@ class SelectSingleFilter extends Component {
 SelectSingleFilter.defaultProps = {
   rootClassName: null,
   className: null,
+  initialValue: null,
   contentPlacementOffset: 0,
 };
 
 SelectSingleFilter.propTypes = {
   rootClassName: string,
   className: string,
-  urlQueryParams: object.isRequired,
   urlParam: string.isRequired,
   label: string.isRequired,
   onSelect: func.isRequired,
@@ -107,6 +104,7 @@ SelectSingleFilter.propTypes = {
       label: string.isRequired,
     })
   ).isRequired,
+  initialValue: string,
   contentPlacementOffset: number,
 };
 
