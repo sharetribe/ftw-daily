@@ -48,9 +48,10 @@ class SelectMultipleFilter extends Component {
   }
 
   handleSubmit(values) {
+    const { onSubmit, urlParam } = this.props;
     const selectedKeys = valuesToKeys(values);
     this.setState({ isOpen: false });
-    this.props.onSubmit(selectedKeys);
+    onSubmit(urlParam, selectedKeys);
   }
 
   handleClear() {
@@ -59,9 +60,9 @@ class SelectMultipleFilter extends Component {
   }
 
   handleCancel() {
-    const { onSubmit, initialValues } = this.props;
+    const { onSubmit, initialValues, urlParam } = this.props;
     this.setState({ isOpen: false });
-    onSubmit(initialValues);
+    onSubmit(urlParam, initialValues);
   }
 
   handleBlur(event) {
@@ -166,6 +167,7 @@ SelectMultipleFilter.defaultProps = {
 SelectMultipleFilter.propTypes = {
   rootClassName: string,
   className: string,
+  urlParam: string.isRequired,
   onSubmit: func.isRequired,
   options: array.isRequired,
   initialValues: arrayOf(string),

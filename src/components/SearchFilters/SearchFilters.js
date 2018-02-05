@@ -12,7 +12,7 @@ import { createResourceLocatorString } from '../../util/routes';
 import css from './SearchFilters.css';
 
 const CATEGORY_URL_PARAM = 'pub_category';
-const FEATURES_URL_PARAM = 'pub_features';
+const FEATURES_URL_PARAM = 'pub_amenities';
 
 const FILTER_OFFSET = -14;
 
@@ -47,9 +47,7 @@ const SearchFiltersComponent = props => {
   const initialFeatures =
     urlQueryParams[FEATURES_URL_PARAM] && urlQueryParams[FEATURES_URL_PARAM].split(',');
 
-  const handleSelectOptions = options => {
-    console.log('Select features', options);
-
+  const handleSelectOptions = (urlParam, options) => {
     const queryParams = options
       ? { ...urlQueryParams, [FEATURES_URL_PARAM]: options.join(',') }
       : omit(urlQueryParams, FEATURES_URL_PARAM);
@@ -80,6 +78,7 @@ const SearchFiltersComponent = props => {
 
   const featuresFilter = features ? (
     <SelectMultipleFilter
+      urlParam={FEATURES_URL_PARAM}
       onSubmit={handleSelectOptions}
       options={features}
       initialValues={initialFeatures}

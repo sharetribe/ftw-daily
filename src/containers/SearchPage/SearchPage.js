@@ -43,7 +43,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
 const BOUNDS_FIXED_PRECISION = 8;
 
 const CATEGORY_URL_PARAM = 'pub_category';
-const FEATURES_URL_PARAM = 'pub_features';
+const FEATURES_URL_PARAM = 'pub_amenities';
 
 // extract search parameters, including a custom attribute named category
 const pickSearchParamsOnly = params => {

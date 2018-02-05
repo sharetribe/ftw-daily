@@ -80,8 +80,8 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             "address": undefined,
             "bounds": undefined,
             "origin": undefined,
+            "pub_amenities": undefined,
             "pub_category": undefined,
-            "pub_features": undefined,
           }
         }
       />
@@ -112,8 +112,8 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             "address": undefined,
             "bounds": undefined,
             "origin": undefined,
+            "pub_amenities": undefined,
             "pub_category": undefined,
-            "pub_features": undefined,
           }
         }
       />
