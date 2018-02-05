@@ -35,7 +35,7 @@ class SelectSingleFilter extends Component {
       className,
       urlQueryParams,
       urlParam,
-      paramLabel,
+      label,
       options,
       contentPlacementOffset,
     } = this.props;
@@ -44,7 +44,7 @@ class SelectSingleFilter extends Component {
     const currentValue = urlQueryParams[urlParam];
 
     // resolve menu label text and class
-    const menuLabel = currentValue ? optionLabel(options, currentValue) : paramLabel;
+    const menuLabel = currentValue ? optionLabel(options, currentValue) : label;
     const menuLabelClass = currentValue ? css.menuLabelSelected : css.menuLabel;
 
     const classes = classNames(rootClassName || css.root, className);
@@ -99,7 +99,7 @@ SelectSingleFilter.propTypes = {
   className: string,
   urlQueryParams: object.isRequired,
   urlParam: string.isRequired,
-  paramLabel: string.isRequired,
+  label: string.isRequired,
   onSelect: func.isRequired,
   options: arrayOf(
     shape({

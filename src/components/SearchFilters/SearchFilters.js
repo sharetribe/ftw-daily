@@ -44,6 +44,10 @@ const SearchFiltersComponent = props => {
     id: 'SearchFilters.categoryLabel',
   });
 
+  const featuresLabel = intl.formatMessage({
+    id: 'SearchFilters.featuresLabel',
+  });
+
   const initialFeatures =
     urlQueryParams[FEATURES_URL_PARAM] && urlQueryParams[FEATURES_URL_PARAM].split(',');
 
@@ -69,7 +73,7 @@ const SearchFiltersComponent = props => {
     <SelectSingleFilter
       urlQueryParams={urlQueryParams}
       urlParam={CATEGORY_URL_PARAM}
-      paramLabel={categoryLabel}
+      label={categoryLabel}
       onSelect={onSelectOption}
       options={categories}
       contentPlacementOffset={FILTER_OFFSET}
@@ -79,6 +83,7 @@ const SearchFiltersComponent = props => {
   const featuresFilter = features ? (
     <SelectMultipleFilter
       urlParam={FEATURES_URL_PARAM}
+      label={featuresLabel}
       onSubmit={handleSelectOptions}
       options={features}
       initialValues={initialFeatures}

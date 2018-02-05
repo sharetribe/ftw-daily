@@ -112,17 +112,18 @@ class SelectMultipleFilter extends Component {
   }
 
   render() {
-    const { rootClassName, className, options, initialValues, intl } = this.props;
+    const { rootClassName, className, label, options, initialValues, intl } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
     const hasInitialValues = initialValues.length > 0;
     const labelStyles = hasInitialValues ? css.labelSelected : css.label;
-    const label = hasInitialValues
+
+    const buttonLabel = hasInitialValues
       ? intl.formatMessage(
-          { id: 'SelectMultipleFilterMobile.labelSelected' },
-          { count: initialValues.length }
+          { id: 'SelectMultipleFilter.labelSelected' },
+          { labelText: label, count: initialValues.length }
         )
-      : intl.formatMessage({ id: 'SelectMultipleFilterMobile.label' });
+      : label;
 
     const contentStyle = this.positionStyleForContent();
 
@@ -136,7 +137,7 @@ class SelectMultipleFilter extends Component {
         }}
       >
         <button className={labelStyles} onClick={() => this.toggleOpen()}>
-          {label}
+          {buttonLabel}
         </button>
         <SelectMultipleFilterForm
           onSubmit={this.handleSubmit}
@@ -168,6 +169,7 @@ SelectMultipleFilter.propTypes = {
   rootClassName: string,
   className: string,
   urlParam: string.isRequired,
+  label: string.isRequired,
   onSubmit: func.isRequired,
   options: array.isRequired,
   initialValues: arrayOf(string),
