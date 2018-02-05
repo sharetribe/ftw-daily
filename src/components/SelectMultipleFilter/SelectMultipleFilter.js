@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { arrayOf, func, node, number, shape, string } from 'prop-types';
+import { array, arrayOf, func, number, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
 import { toPairs } from 'lodash';
@@ -167,12 +167,7 @@ SelectMultipleFilter.propTypes = {
   rootClassName: string,
   className: string,
   onSubmit: func.isRequired,
-  options: arrayOf(
-    shape({
-      key: string.isRequired,
-      label: node.isRequired,
-    })
-  ).isRequired,
+  options: array.isRequired,
   initialValues: arrayOf(string),
   contentPlacementOffset: number,
 
