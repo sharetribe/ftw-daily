@@ -48,21 +48,21 @@ class SelectMultipleFilter extends Component {
   }
 
   handleSubmit(values) {
-    const { onSubmit, urlParam } = this.props;
+    const { onSelect, urlParam } = this.props;
     const selectedKeys = valuesToKeys(values);
     this.setState({ isOpen: false });
-    onSubmit(urlParam, selectedKeys);
+    onSelect(urlParam, selectedKeys);
   }
 
   handleClear() {
     this.setState({ isOpen: false });
-    this.props.onSubmit(null);
+    this.props.onSelect(null);
   }
 
   handleCancel() {
-    const { onSubmit, initialValues, urlParam } = this.props;
+    const { onSelect, initialValues, urlParam } = this.props;
     this.setState({ isOpen: false });
-    onSubmit(urlParam, initialValues);
+    onSelect(urlParam, initialValues);
   }
 
   handleBlur(event) {
@@ -170,7 +170,7 @@ SelectMultipleFilter.propTypes = {
   className: string,
   urlParam: string.isRequired,
   label: string.isRequired,
-  onSubmit: func.isRequired,
+  onSelect: func.isRequired,
   options: array.isRequired,
   initialValues: arrayOf(string),
   contentPlacementOffset: number,

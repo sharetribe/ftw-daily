@@ -48,20 +48,22 @@ const SearchFiltersComponent = props => {
     id: 'SearchFilters.featuresLabel',
   });
 
-  const initialFeatures =
-    urlQueryParams[FEATURES_URL_PARAM] && urlQueryParams[FEATURES_URL_PARAM].split(',');
+  const initialFeatures = !!urlQueryParams[FEATURES_URL_PARAM]
+    ? urlQueryParams[FEATURES_URL_PARAM].split(',')
+    : [];
 
   const initialCategory = urlQueryParams[CATEGORY_URL_PARAM];
 
   const handleSelectOptions = (urlParam, options) => {
-    const queryParams = options
-      ? { ...urlQueryParams, [FEATURES_URL_PARAM]: options.join(',') }
-      : omit(urlQueryParams, FEATURES_URL_PARAM);
+    const queryParams =
+      options && options.length > 0
+        ? { ...urlQueryParams, [FEATURES_URL_PARAM]: options.join(',') }
+        : omit(urlQueryParams, FEATURES_URL_PARAM);
 
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
-  const onSelectOption = (urlParam, option) => {
+  const handleSelectOption = (urlParam, option) => {
     // query parameters after selecting the option
     // if no option is passed, clear the selection for the filter
     const queryParams = option
@@ -75,7 +77,7 @@ const SearchFiltersComponent = props => {
     <SelectSingleFilter
       urlParam={CATEGORY_URL_PARAM}
       label={categoryLabel}
-      onSelect={onSelectOption}
+      onSelect={handleSelectOption}
       options={categories}
       initialValue={initialCategory}
       contentPlacementOffset={FILTER_OFFSET}
@@ -86,7 +88,7 @@ const SearchFiltersComponent = props => {
     <SelectMultipleFilter
       urlParam={FEATURES_URL_PARAM}
       label={featuresLabel}
-      onSubmit={handleSelectOptions}
+      onSelect={handleSelectOptions}
       options={features}
       initialValues={initialFeatures}
       contentPlacementOffset={FILTER_OFFSET}
