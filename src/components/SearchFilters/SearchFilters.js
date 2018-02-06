@@ -87,6 +87,7 @@ const SearchFiltersComponent = props => {
 
   const featuresFilter = features ? (
     <SelectMultipleFilter
+      name="amenities"
       urlParam={AMENITIES_URL_PARAM}
       label={featuresLabel}
       onSelect={handleSelectOptions}

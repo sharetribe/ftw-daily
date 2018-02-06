@@ -6,9 +6,11 @@ import FieldGroupCheckbox from './FieldGroupCheckbox';
 const formName = 'Styleguide.FieldGroupCheckboxForm';
 
 const label = <h3>Amenities</h3>;
+const name = 'amenities';
 
 const componentProps = {
-  id: `${formName}.amenities`,
+  id: `${formName}.${name}`,
+  name: name,
   label: label,
   options: [
     {

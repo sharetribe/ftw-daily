@@ -54,6 +54,7 @@ const AmenitiesFilterComponent = withRouter(props => {
 
   return (
     <SelectMultipleFilter
+      name="amenities"
       urlParam={URL_PARAM}
       label="Amenities"
       onSelect={(urlParam, values) => handleSubmit(urlParam, values, history)}

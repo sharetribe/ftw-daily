@@ -10,6 +10,8 @@ import { ListingLink } from '../../components';
 
 import css from './EditListingFeaturesPanel.css';
 
+const FEATURES_NAME = 'amenities';
+
 const EditListingFeaturesPanel = props => {
   const {
     rootClassName,
@@ -44,14 +46,18 @@ const EditListingFeaturesPanel = props => {
       return map;
     }, {});
 
+  const initialValues = { [FEATURES_NAME]: currentFeatures };
+
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingFeaturesForm
         className={css.form}
-        initialValues={currentFeatures}
+        name={FEATURES_NAME}
+        initialValues={initialValues}
         onSubmit={values => {
-          const entries = toPairs(values);
+          const entries = values[FEATURES_NAME] ? toPairs(values[FEATURES_NAME]) : [];
+
           const amenities = entries.filter(entry => entry[1] === true).map(entry => entry[0]);
 
           const updatedValues = {

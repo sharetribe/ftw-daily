@@ -15,7 +15,7 @@ import { FieldCheckbox } from '../../components';
 import css from './FieldGroupCheckbox.css';
 
 const FieldGroupCheckbox = props => {
-  const { rootClassName, className, id, label, options, twoColumns } = props;
+  const { rootClassName, className, id, name, label, options, twoColumns } = props;
 
   const classes = classNames(rootClassName || css.root, className);
   const listClasses = twoColumns ? classNames(css.list, css.twoColumns) : css.list;
@@ -28,7 +28,7 @@ const FieldGroupCheckbox = props => {
           const fieldId = `${id}.${option.key}`;
           return (
             <li key={fieldId} className={css.item}>
-              <FieldCheckbox id={fieldId} name={option.key} label={option.label} />
+              <FieldCheckbox id={fieldId} name={`${name}.${option.key}`} label={option.label} />
             </li>
           );
         })}
@@ -50,6 +50,7 @@ FieldGroupCheckbox.propTypes = {
   rootClassName: string,
   className: string,
   id: string.isRequired,
+  name: string.isRequired,
   label: node,
   options: arrayOf(
     shape({
