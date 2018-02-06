@@ -43,7 +43,7 @@ const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is
 const BOUNDS_FIXED_PRECISION = 8;
 
 const CATEGORY_URL_PARAM = 'pub_category';
-const FEATURES_URL_PARAM = 'pub_amenities';
+const AMENITIES_URL_PARAM = 'pub_amenities';
 
 // extract search parameters, including a custom attribute named category
 const pickSearchParamsOnly = params => {
@@ -53,7 +53,7 @@ const pickSearchParamsOnly = params => {
     origin,
     bounds,
     [CATEGORY_URL_PARAM]: rest[CATEGORY_URL_PARAM],
-    [FEATURES_URL_PARAM]: rest[FEATURES_URL_PARAM],
+    [AMENITIES_URL_PARAM]: rest[AMENITIES_URL_PARAM],
   };
 };
 
@@ -110,7 +110,7 @@ export class SearchPageComponent extends Component {
       latlngBounds: ['bounds'],
     });
     const category = rest[CATEGORY_URL_PARAM];
-    const features = rest[FEATURES_URL_PARAM];
+    const features = rest[AMENITIES_URL_PARAM];
 
     const viewportGMapBounds = googleMap.getBounds();
     const viewportBounds = sdkBoundsToFixedCoordinates(
@@ -132,7 +132,7 @@ export class SearchPageComponent extends Component {
         country,
         mapSearch: true,
         [CATEGORY_URL_PARAM]: category,
-        [FEATURES_URL_PARAM]: features,
+        [AMENITIES_URL_PARAM]: features,
       };
       history.push(
         createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)

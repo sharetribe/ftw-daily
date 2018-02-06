@@ -12,7 +12,7 @@ import { createResourceLocatorString } from '../../util/routes';
 import css from './SearchFilters.css';
 
 const CATEGORY_URL_PARAM = 'pub_category';
-const FEATURES_URL_PARAM = 'pub_amenities';
+const AMENITIES_URL_PARAM = 'pub_amenities';
 
 const FILTER_OFFSET = -14;
 
@@ -48,8 +48,8 @@ const SearchFiltersComponent = props => {
     id: 'SearchFilters.featuresLabel',
   });
 
-  const initialFeatures = !!urlQueryParams[FEATURES_URL_PARAM]
-    ? urlQueryParams[FEATURES_URL_PARAM].split(',')
+  const initialFeatures = !!urlQueryParams[AMENITIES_URL_PARAM]
+    ? urlQueryParams[AMENITIES_URL_PARAM].split(',')
     : [];
 
   const initialCategory = urlQueryParams[CATEGORY_URL_PARAM];
@@ -57,8 +57,8 @@ const SearchFiltersComponent = props => {
   const handleSelectOptions = (urlParam, options) => {
     const queryParams =
       options && options.length > 0
-        ? { ...urlQueryParams, [FEATURES_URL_PARAM]: options.join(',') }
-        : omit(urlQueryParams, FEATURES_URL_PARAM);
+        ? { ...urlQueryParams, [AMENITIES_URL_PARAM]: options.join(',') }
+        : omit(urlQueryParams, AMENITIES_URL_PARAM);
 
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
@@ -86,7 +86,7 @@ const SearchFiltersComponent = props => {
 
   const featuresFilter = features ? (
     <SelectMultipleFilter
-      urlParam={FEATURES_URL_PARAM}
+      urlParam={AMENITIES_URL_PARAM}
       label={featuresLabel}
       onSelect={handleSelectOptions}
       options={features}
