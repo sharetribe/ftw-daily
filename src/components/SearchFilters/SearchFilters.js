@@ -14,7 +14,8 @@ import css from './SearchFilters.css';
 const CATEGORY_URL_PARAM = 'pub_category';
 const AMENITIES_URL_PARAM = 'pub_amenities';
 
-const FILTER_OFFSET = -14;
+// Dropdown container can have a positional offset (in pixels)
+const FILTER_DROPDOWN_OFFSET = -14;
 
 const SearchFiltersComponent = props => {
   const {
@@ -80,7 +81,7 @@ const SearchFiltersComponent = props => {
       onSelect={handleSelectOption}
       options={categories}
       initialValue={initialCategory}
-      contentPlacementOffset={FILTER_OFFSET}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
 
@@ -91,7 +92,7 @@ const SearchFiltersComponent = props => {
       onSelect={handleSelectOptions}
       options={features}
       initialValues={initialFeatures}
-      contentPlacementOffset={FILTER_OFFSET}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
 
