@@ -36,9 +36,9 @@ const SelectMultipleFilterFormComponent = props => {
     onCancel();
   };
 
-  const clear = intl.formatMessage({ id: 'SelectMultipleFilterMobile.clear' });
-  const cancel = intl.formatMessage({ id: 'SelectMultipleFilterMobile.cancel' });
-  const submit = intl.formatMessage({ id: 'SelectMultipleFilterMobile.submit' });
+  const clear = intl.formatMessage({ id: 'SelectMultipleFilterForm.clear' });
+  const cancel = intl.formatMessage({ id: 'SelectMultipleFilterForm.cancel' });
+  const submit = intl.formatMessage({ id: 'SelectMultipleFilterForm.submit' });
 
   return (
     <Form

@@ -6,12 +6,16 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { omit } from 'lodash';
 
-import { SelectSingleFilter } from '../../components';
+import { SelectSingleFilter, SelectMultipleFilter } from '../../components';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import css from './SearchFilters.css';
 
 const CATEGORY_URL_PARAM = 'pub_category';
+const AMENITIES_URL_PARAM = 'pub_amenities';
+
+// Dropdown container can have a positional offset (in pixels)
+const FILTER_DROPDOWN_OFFSET = -14;
 
 const SearchFiltersComponent = props => {
   const {
@@ -22,6 +26,7 @@ const SearchFiltersComponent = props => {
     resultsCount,
     searchInProgress,
     categories,
+    features,
     history,
     intl,
   } = props;
@@ -40,7 +45,26 @@ const SearchFiltersComponent = props => {
     id: 'SearchFilters.categoryLabel',
   });
 
-  const onSelectOption = (urlParam, option) => {
+  const featuresLabel = intl.formatMessage({
+    id: 'SearchFilters.featuresLabel',
+  });
+
+  const initialFeatures = !!urlQueryParams[AMENITIES_URL_PARAM]
+    ? urlQueryParams[AMENITIES_URL_PARAM].split(',')
+    : [];
+
+  const initialCategory = urlQueryParams[CATEGORY_URL_PARAM];
+
+  const handleSelectOptions = (urlParam, options) => {
+    const queryParams =
+      options && options.length > 0
+        ? { ...urlQueryParams, [AMENITIES_URL_PARAM]: options.join(',') }
+        : omit(urlQueryParams, AMENITIES_URL_PARAM);
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  };
+
+  const handleSelectOption = (urlParam, option) => {
     // query parameters after selecting the option
     // if no option is passed, clear the selection for the filter
     const queryParams = option
@@ -52,16 +76,32 @@ const SearchFiltersComponent = props => {
 
   const categoryFilter = categories ? (
     <SelectSingleFilter
-      urlQueryParams={urlQueryParams}
       urlParam={CATEGORY_URL_PARAM}
-      paramLabel={categoryLabel}
-      onSelect={onSelectOption}
+      label={categoryLabel}
+      onSelect={handleSelectOption}
       options={categories}
+      initialValue={initialCategory}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
+
+  const featuresFilter = features ? (
+    <SelectMultipleFilter
+      urlParam={AMENITIES_URL_PARAM}
+      label={featuresLabel}
+      onSelect={handleSelectOptions}
+      options={features}
+      initialValues={initialFeatures}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) : null;
+
   return (
     <div className={classes}>
-      <div className={css.filters}>{categoryFilter}</div>
+      <div className={css.filters}>
+        {categoryFilter}
+        {featuresFilter}
+      </div>
 
       <div className={css.searchResultSummary}>
         {listingsAreLoaded && resultsCount > 0 ? resultsFound : null}
@@ -78,6 +118,7 @@ SearchFiltersComponent.defaultProps = {
   resultsCount: null,
   searchingInProgress: false,
   categories: null,
+  features: null,
 };
 
 SearchFiltersComponent.propTypes = {
@@ -90,6 +131,7 @@ SearchFiltersComponent.propTypes = {
   onMapIconClick: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   categories: array,
+  features: array,
 
   // from withRouter
   history: shape({

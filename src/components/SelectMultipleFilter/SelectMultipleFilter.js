@@ -48,20 +48,21 @@ class SelectMultipleFilter extends Component {
   }
 
   handleSubmit(values) {
+    const { onSelect, urlParam } = this.props;
     const selectedKeys = valuesToKeys(values);
     this.setState({ isOpen: false });
-    this.props.onSubmit(selectedKeys);
+    onSelect(urlParam, selectedKeys);
   }
 
   handleClear() {
     this.setState({ isOpen: false });
-    this.props.onSubmit(null);
+    this.props.onSelect(null);
   }
 
   handleCancel() {
-    const { onSubmit, initialValues } = this.props;
+    const { onSelect, initialValues, urlParam } = this.props;
     this.setState({ isOpen: false });
-    onSubmit(initialValues);
+    onSelect(urlParam, initialValues);
   }
 
   handleBlur(event) {
@@ -111,17 +112,18 @@ class SelectMultipleFilter extends Component {
   }
 
   render() {
-    const { rootClassName, className, options, initialValues, intl } = this.props;
+    const { rootClassName, className, label, options, initialValues, intl } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
     const hasInitialValues = initialValues.length > 0;
     const labelStyles = hasInitialValues ? css.labelSelected : css.label;
-    const label = hasInitialValues
+
+    const buttonLabel = hasInitialValues
       ? intl.formatMessage(
-          { id: 'SelectMultipleFilterMobile.labelSelected' },
-          { count: initialValues.length }
+          { id: 'SelectMultipleFilter.labelSelected' },
+          { labelText: label, count: initialValues.length }
         )
-      : intl.formatMessage({ id: 'SelectMultipleFilterMobile.label' });
+      : label;
 
     const contentStyle = this.positionStyleForContent();
 
@@ -135,7 +137,7 @@ class SelectMultipleFilter extends Component {
         }}
       >
         <button className={labelStyles} onClick={() => this.toggleOpen()}>
-          {label}
+          {buttonLabel}
         </button>
         <SelectMultipleFilterForm
           onSubmit={this.handleSubmit}
@@ -166,7 +168,9 @@ SelectMultipleFilter.defaultProps = {
 SelectMultipleFilter.propTypes = {
   rootClassName: string,
   className: string,
-  onSubmit: func.isRequired,
+  urlParam: string.isRequired,
+  label: string.isRequired,
+  onSelect: func.isRequired,
   options: array.isRequired,
   initialValues: arrayOf(string),
   contentPlacementOffset: number,

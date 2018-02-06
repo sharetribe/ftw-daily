@@ -33,6 +33,42 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             },
           ]
         }
+        features={
+          Array [
+            Object {
+              "key": "towels",
+              "label": "Towels",
+            },
+            Object {
+              "key": "bathroom",
+              "label": "Bathroom",
+            },
+            Object {
+              "key": "swimming_pool",
+              "label": "Swimming pool",
+            },
+            Object {
+              "key": "own_drinks",
+              "label": "Own drinks allowed",
+            },
+            Object {
+              "key": "jacuzzi",
+              "label": "Jacuzzi",
+            },
+            Object {
+              "key": "audiovisual_entertainment",
+              "label": "Audiovisual entertainment",
+            },
+            Object {
+              "key": "barbeque",
+              "label": "Barbeque",
+            },
+            Object {
+              "key": "own_food_allowed",
+              "label": "Own food allowed",
+            },
+          ]
+        }
         listingsAreLoaded={true}
         onManageDisableScrolling={[Function]}
         onMapIconClick={[Function]}
@@ -44,6 +80,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             "address": undefined,
             "bounds": undefined,
             "origin": undefined,
+            "pub_amenities": undefined,
             "pub_category": undefined,
           }
         }
@@ -75,6 +112,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             "address": undefined,
             "bounds": undefined,
             "origin": undefined,
+            "pub_amenities": undefined,
             "pub_category": undefined,
           }
         }
