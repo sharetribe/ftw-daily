@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { types } from 'sharetribe-sdk';
+import { toPairs } from 'lodash';
 
 const { LatLng } = types;
 
@@ -19,6 +20,16 @@ export const required = message => value => {
 
 export const requiredAndNonEmptyString = message => value => {
   return value && typeof value === 'string' && value.trim() ? VALID : message;
+};
+
+export const requiredFieldArrayCheckbox = message => value => {
+  if (!value) {
+    return message;
+  }
+
+  const entries = toPairs(value);
+  const hasSelectedValues = entries.filter(e => !!e[1]).length > 0;
+  return hasSelectedValues ? VALID : message;
 };
 
 export const minLength = (message, minimumLength) => value => {
