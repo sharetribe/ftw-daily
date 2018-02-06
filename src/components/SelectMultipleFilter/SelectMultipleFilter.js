@@ -48,8 +48,8 @@ class SelectMultipleFilter extends Component {
   }
 
   handleSubmit(values) {
-    const { onSelect, urlParam } = this.props;
-    const selectedKeys = valuesToKeys(values);
+    const { name, onSelect, urlParam } = this.props;
+    const selectedKeys = valuesToKeys(values[name]);
     this.setState({ isOpen: false });
     onSelect(urlParam, selectedKeys);
   }
@@ -112,7 +112,7 @@ class SelectMultipleFilter extends Component {
   }
 
   render() {
-    const { rootClassName, className, label, options, initialValues, intl } = this.props;
+    const { rootClassName, className, name, label, options, initialValues, intl } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
     const hasInitialValues = initialValues.length > 0;
@@ -126,6 +126,14 @@ class SelectMultipleFilter extends Component {
       : label;
 
     const contentStyle = this.positionStyleForContent();
+
+    // turn a list of values into a map that can be passed to
+    // a redux form
+    const initialValuesObj = keysToValues(initialValues);
+
+    // pass the initial values with the name key so that
+    // they can be passed to the correct field
+    const namedInitialValues = { [name]: initialValuesObj };
 
     return (
       <div
@@ -141,8 +149,9 @@ class SelectMultipleFilter extends Component {
         </button>
         <SelectMultipleFilterForm
           onSubmit={this.handleSubmit}
-          initialValues={keysToValues(initialValues)}
+          initialValues={namedInitialValues}
           enableReinitialize={true}
+          name={name}
           onClear={this.handleClear}
           onCancel={this.handleCancel}
           options={options}
@@ -168,6 +177,7 @@ SelectMultipleFilter.defaultProps = {
 SelectMultipleFilter.propTypes = {
   rootClassName: string,
   className: string,
+  name: string.isRequired,
   urlParam: string.isRequired,
   label: string.isRequired,
   onSelect: func.isRequired,

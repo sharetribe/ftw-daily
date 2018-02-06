@@ -17,6 +17,7 @@ const EditListingFeaturesFormComponent = props => {
     disabled,
     rootClassName,
     className,
+    name,
     handleSubmit,
     saveActionMsg,
     updated,
@@ -41,7 +42,8 @@ const EditListingFeaturesFormComponent = props => {
 
       <FieldGroupCheckbox
         className={css.features}
-        id={`${form}.amenities`}
+        id={`${form}.${name}`}
+        name={name}
         options={config.custom.amenities}
       />
 
@@ -70,6 +72,7 @@ EditListingFeaturesFormComponent.propTypes = {
   ...formPropTypes,
   rootClassName: string,
   className: string,
+  name: string.isRequired,
   handleSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   updated: bool.isRequired,
