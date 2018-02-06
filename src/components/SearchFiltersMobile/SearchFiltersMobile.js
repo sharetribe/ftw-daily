@@ -131,13 +131,15 @@ class SearchFiltersMobileComponent extends Component {
     const categoryLabel = intl.formatMessage({
       id: 'SearchFiltersMobile.categoryLabel',
     });
+    const initialCategory = urlQueryParams[CATEGORY_URL_PARAM];
+
     const categoryFilter = categories ? (
       <SelectSingleFilterMobile
-        urlQueryParams={urlQueryParams}
         urlParam={CATEGORY_URL_PARAM}
         paramLabel={categoryLabel}
         onSelect={this.onSelectSingle}
         options={categories}
+        initialValue={initialCategory}
         intl={intl}
       />
     ) : null;
