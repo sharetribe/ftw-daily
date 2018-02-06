@@ -523,6 +523,8 @@
   "SelectMultipleFilterForm.clear": "Clear",
   "SelectMultipleFilterForm.cancel": "Cancel",
   "SelectMultipleFilterForm.submit": "Apply",
+  "SelectMultipleFilterMobileForm.clear": "Clear",
+  "SelectMultipleFilterMobileForm.labelSelected": "{labelText} • {count}",
   "SelectSingleFilter.clear": "Clear",
   "SelectSingleFilterMobile.clear": "Clear",
   "SendMessageForm.sendFailed": "Failed to send. Please try again.",
