@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage, FormattedHTMLMessage, FormattedDate } from 'react-intl';
 import moment from 'moment';
-import { LINE_ITEM_NIGHT, propTypes } from '../../util/types';
+import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import { daysBetween } from '../../util/dates';
 
 import css from './BookingBreakdown.css';
@@ -42,7 +42,7 @@ const LineItemBookingPeriod = props => {
 
   const { start: startDate, end: endDateRaw } = booking.attributes;
   const isNightly = unitType === LINE_ITEM_NIGHT;
-  const isDaily = unitType === LINE_ITEM_NIGHT;
+  const isDaily = unitType === LINE_ITEM_DAY;
 
   const dayCount = daysBetween(startDate, endDateRaw);
   const isSingleDay = !isNightly && dayCount === 1;
