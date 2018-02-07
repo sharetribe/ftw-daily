@@ -28,7 +28,7 @@ class SelectSingleFilterMobile extends Component {
   }
 
   render() {
-    const { rootClassName, className, paramLabel, options, initialValue } = this.props;
+    const { rootClassName, className, label, options, initialValue } = this.props;
 
     const labelClass = initialValue ? css.filterLabelSelected : css.filterLabel;
 
@@ -42,7 +42,7 @@ class SelectSingleFilterMobile extends Component {
       <div className={classes}>
         <div className={labelClass}>
           <button className={css.labelButton} onClick={this.toggleIsOpen}>
-            <span className={labelClass}>{paramLabel}</span>
+            <span className={labelClass}>{label}</span>
           </button>
           <button className={css.clearButton} onClick={e => this.selectOption(null, e)}>
             <FormattedMessage id={'SelectSingleFilterMobile.clear'} />
@@ -81,7 +81,7 @@ SelectSingleFilterMobile.propTypes = {
   rootClassName: string,
   className: string,
   urlParam: string.isRequired,
-  paramLabel: string.isRequired,
+  label: string.isRequired,
   onSelect: func.isRequired,
 
   options: arrayOf(

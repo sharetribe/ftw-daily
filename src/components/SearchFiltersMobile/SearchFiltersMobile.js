@@ -137,7 +137,7 @@ class SearchFiltersMobileComponent extends Component {
     const categoryFilter = categories ? (
       <SelectSingleFilterMobile
         urlParam={CATEGORY_URL_PARAM}
-        paramLabel={categoryLabel}
+        label={categoryLabel}
         onSelect={this.onSelectSingle}
         options={categories}
         initialValue={initialCategory}
