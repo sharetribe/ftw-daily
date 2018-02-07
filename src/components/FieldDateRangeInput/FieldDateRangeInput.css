@@ -73,17 +73,20 @@
  * but calendar popup doesn't.
  */
 .mobileMargins {
-  width: calc(100% - 48px);
+  /* Mobile Safari couldn't handle width: calc(100vw - 48px); */
+  width: calc(100vw - 48px);
   margin: 0 24px;
 
   /* Gutter between inputs (when calendar is not visible) */
   & .startDateLabel,
   & .endDateLabel {
-    flex-basis: calc(50% - 6px);
+    /* Mobile Safari couldn't handle width: calc(50% - 6px); */
+    flex-basis: calc(50vw - 30px);
   }
 
   & .input {
-    flex-basis: calc(50% - 6px);
+    /* Mobile Safari couldn't handle width: calc(50% - 6px); */
+    flex-basis: calc(50vw - 30px);
     transition: all 0.15s ease-out;
   }
 
