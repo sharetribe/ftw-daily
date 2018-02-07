@@ -1,13 +1,14 @@
 import { random, memoize, round } from 'lodash';
 import { types as sdkTypes } from './sdkLoader';
+import config from '../config';
 
 const { LatLng } = sdkTypes;
 
 const obfuscatedCoordinatesImpl = latlng => {
   const { lat, lng } = latlng;
-  const threshold = 0.01;
-  const newLat = round(lat + random(-1 * threshold, threshold), 5);
-  const newLng = round(lng + random(-1 * threshold, threshold), 5);
+  const offset = config.coordinates.coordinateOffset;
+  const newLat = round(lat + random(-1 * offset, offset), 5);
+  const newLng = round(lng + random(-1 * offset, offset), 5);
   return new LatLng(newLat, newLng);
 };
 
