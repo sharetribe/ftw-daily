@@ -2,33 +2,12 @@ import React, { Component } from 'react';
 import { array, arrayOf, func, number, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
-import { toPairs } from 'lodash';
 
+import { arrayToFormValues, formValuesToArray } from '../../util/data';
 import SelectMultipleFilterForm from './SelectMultipleFilterForm';
 import css from './SelectMultipleFilter.css';
 
 const KEY_CODE_ESCAPE = 27;
-
-/**
- * Convert an array of option keys into
- * an object that can be passed to a redux
- * form as initial values.
- */
-const keysToValues = keys => {
-  return keys.reduce((map, key) => {
-    map[key] = true;
-    return map;
-  }, {});
-};
-
-/**
- * Convert an object containing values received
- * from a redux form into an array of values.
- */
-const valuesToKeys = values => {
-  const entries = toPairs(values);
-  return entries.filter(entry => entry[1] === true).map(entry => entry[0]);
-};
 
 class SelectMultipleFilter extends Component {
   constructor(props) {
@@ -49,7 +28,7 @@ class SelectMultipleFilter extends Component {
 
   handleSubmit(values) {
     const { name, onSelect, urlParam } = this.props;
-    const selectedKeys = valuesToKeys(values[name]);
+    const selectedKeys = formValuesToArray(values[name]);
     this.setState({ isOpen: false });
     onSelect(urlParam, selectedKeys);
   }
@@ -129,7 +108,7 @@ class SelectMultipleFilter extends Component {
 
     // turn a list of values into a map that can be passed to
     // a redux form
-    const initialValuesObj = keysToValues(initialValues);
+    const initialValuesObj = arrayToFormValues(initialValues);
 
     // pass the initial values with the name key so that
     // they can be passed to the correct field
