@@ -40,6 +40,7 @@
     @media (--viewportMedium) {
       flex-basis: 576px;
       min-height: auto;
+      height: auto;
     }
   }
 }
