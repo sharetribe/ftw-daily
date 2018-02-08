@@ -1,5 +1,5 @@
 import React from 'react';
-import { array, string, arrayOf, func, shape } from 'prop-types';
+import { array, string, func } from 'prop-types';
 import classNames from 'classnames';
 
 import SelectMultipleFilterMobileForm from './SelectMultipleFilterMobileForm';
@@ -61,12 +61,7 @@ SelectMultipleFilterMobile.propTypes = {
   urlParam: string.isRequired,
   label: string.isRequired,
   onSelect: func.isRequired,
-  options: arrayOf(
-    shape({
-      key: string.isRequired,
-      label: string.isRequired,
-    })
-  ).isRequired,
+  options: array.isRequired,
   initialValues: array,
 };
 
