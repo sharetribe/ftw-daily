@@ -257,7 +257,6 @@ class EditListingWizard extends Component {
         </Tabs>
         <Modal
           id="EditListingWizard.payoutModal"
-          className={css.payoutModal}
           isOpen={this.state.showPayoutDetails}
           onClose={this.handlePayoutModalClose}
           onManageDisableScrolling={onManageDisableScrolling}

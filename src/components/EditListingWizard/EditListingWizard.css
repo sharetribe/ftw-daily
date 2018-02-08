@@ -91,3 +91,11 @@
     padding-right: 25vw;
   }
 }
+
+.payoutDetails {
+  margin-bottom: 100px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 0;
+  }
+}
