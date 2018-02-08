@@ -1,4 +1,4 @@
-import { random, memoize, round } from 'lodash';
+import { memoize } from 'lodash';
 import { types as sdkTypes } from './sdkLoader';
 import config from '../config';
 
@@ -7,8 +7,22 @@ const { LatLng } = sdkTypes;
 const obfuscatedCoordinatesImpl = latlng => {
   const { lat, lng } = latlng;
   const offset = config.coordinates.coordinateOffset;
-  const newLat = round(lat + random(-1 * offset, offset), 5);
-  const newLng = round(lng + random(-1 * offset, offset), 5);
+
+  // https://gis.stackexchange.com/questions/25877/generating-random-locations-nearby
+  const r = offset / 111300;
+  const y0 = lat;
+  const x0 = lng;
+  const u = Math.random();
+  const v = Math.random();
+  const w = r * Math.sqrt(u);
+  const t = 2 * Math.PI * v;
+  const x = w * Math.cos(t);
+  const y1 = w * Math.sin(t);
+  const x1 = x / Math.cos(y0);
+
+  const newLat = y0 + y1;
+  const newLng = x0 + x1;
+
   return new LatLng(newLat, newLng);
 };
 

@@ -253,12 +253,11 @@ const coordinates = {
   //
   // https://gis.stackexchange.com/a/8674
 
-  // Amount of maximum offset that is applied to obfuscate the
-  // original coordinates.
-  coordinateOffset: 0.004, // 0.001 is roughly 111m
-
-  // The circle radius in meters.
-  circleRadius: 500,
+  // Amount of maximum offset in meters that is applied to obfuscate
+  // the original coordinates. The actual value is random, but the
+  // obfuscated coordinates are withing a circle that has the same
+  // radius as the offset.
+  coordinateOffset: 500,
 
   // Options to style the circle appearance.
   //

@@ -29,7 +29,7 @@ const MapWithGoogleMap = withGoogleMap(props => {
 
   const circleProps = {
     options: coordinatesConfig.circleOptions,
-    radius: coordinatesConfig.circleRadius,
+    radius: coordinatesConfig.coordinateOffset,
     center,
   };
 
