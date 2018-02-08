@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { arrayOf, bool, func, number, string, object, shape } from 'prop-types';
+import { arrayOf, bool, func, number, string, shape } from 'prop-types';
 import { withGoogleMap, GoogleMap } from 'react-google-maps';
 import classNames from 'classnames';
 import { groupBy, isEqual, reduce } from 'lodash';
@@ -300,9 +300,6 @@ SearchMapComponent.propTypes = {
   zoom: number,
   coordinatesConfig: shape({
     fuzzy: bool.isRequired,
-    fuzzyDefaultZoomLevel: number.isRequired,
-    circleRadius: number.isRequired,
-    circleOptions: object.isRequired,
   }),
 };
 

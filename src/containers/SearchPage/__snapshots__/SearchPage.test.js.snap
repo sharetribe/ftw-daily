@@ -162,8 +162,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
                 "strokeColor": "#c0392b",
                 "strokeWeight": 0.5,
               },
-              "circleRadius": 500,
-              "coordinateOffset": 0.004,
+              "coordinateOffset": 500,
               "fuzzy": false,
               "fuzzyDefaultZoomLevel": 14,
             }
