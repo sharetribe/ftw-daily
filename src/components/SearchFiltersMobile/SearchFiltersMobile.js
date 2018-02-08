@@ -11,13 +11,15 @@ import { SecondaryButton, ModalInMobile, Button, SelectSingleFilterMobile } from
 import css from './SearchFiltersMobile.css';
 
 const CATEGORY_URL_PARAM = 'pub_category';
+const allowedCategories = [CATEGORY_URL_PARAM];
 
 const validateParamValue = value => value !== null && value !== undefined && value.length > 0;
+const validateParamKey = key => allowedCategories.includes(key);
 
 // Check if a filter parameter is included query parameters
 const hasFilterQueryParams = queryParams => {
   const firstFilterParam = toPairs(queryParams).find(entry => {
-    return validateParamValue(entry[1]);
+    return validateParamKey(entry[0]) && validateParamValue(entry[1]);
   });
   return !!firstFilterParam;
 };
@@ -131,13 +133,15 @@ class SearchFiltersMobileComponent extends Component {
     const categoryLabel = intl.formatMessage({
       id: 'SearchFiltersMobile.categoryLabel',
     });
+    const initialCategory = urlQueryParams[CATEGORY_URL_PARAM];
+
     const categoryFilter = categories ? (
       <SelectSingleFilterMobile
-        urlQueryParams={urlQueryParams}
         urlParam={CATEGORY_URL_PARAM}
-        paramLabel={categoryLabel}
+        label={categoryLabel}
         onSelect={this.onSelectSingle}
         options={categories}
+        initialValue={initialCategory}
         intl={intl}
       />
     ) : null;
