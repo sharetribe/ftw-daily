@@ -43,6 +43,8 @@ const SelectMultipleFilterMobile = props => {
         initialValuesCount={initialValues.length}
         onChange={handleSelect}
         onClear={handleClear}
+        enableReinitialize={true}
+        keepDirtyOnReinitialize={true}
       />
     </div>
   );

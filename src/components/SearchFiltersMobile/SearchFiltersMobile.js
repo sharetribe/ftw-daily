@@ -100,7 +100,7 @@ class SearchFiltersMobileComponent extends Component {
   resetAll(e) {
     const { urlQueryParams, history } = this.props;
 
-    const queryParams = omit(urlQueryParams, CATEGORY_URL_PARAM);
+    const queryParams = omit(urlQueryParams, [CATEGORY_URL_PARAM, FEATURES_URL_PARAM]);
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
 
     // blur event target if event is passed

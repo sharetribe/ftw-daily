@@ -17,11 +17,7 @@ class SelectMultipleFilterMobileFormComponent extends Component {
   }
 
   handleClear() {
-    const { destroy, onClear } = this.props;
-    // destroy redux form state so that initial values passed
-    // to the form are also cleared
-    destroy();
-    onClear();
+    this.props.onClear();
   }
 
   toggleIsOpen() {
