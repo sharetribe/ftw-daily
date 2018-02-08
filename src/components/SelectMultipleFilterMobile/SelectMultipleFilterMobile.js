@@ -66,6 +66,7 @@ class SelectMultipleFilterMobileComponent extends Component {
           </button>
         </div>
         <SelectMultipleFilterMobileForm
+          form={`SelectMultipleFilterMobileForm.${name}`}
           className={optionsContainerClass}
           name={name}
           options={options}

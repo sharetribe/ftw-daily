@@ -30,6 +30,6 @@ SelectMultipleFilterMobileFormComponent.propTypes = {
   ).isRequired,
 };
 
-const defaultFormName = 'SelectMultipleFilterMobileForm';
+const SelectMultipleFilterMobileForm = reduxForm({})(SelectMultipleFilterMobileFormComponent);
 
-export default reduxForm({ form: defaultFormName })(SelectMultipleFilterMobileFormComponent);
+export default SelectMultipleFilterMobileForm;
