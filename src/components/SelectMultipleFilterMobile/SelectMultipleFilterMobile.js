@@ -65,16 +65,15 @@ class SelectMultipleFilterMobileComponent extends Component {
             <FormattedMessage id={'SelectMultipleFilterMobileForm.clear'} />
           </button>
         </div>
-        <div className={optionsContainerClass}>
-          <SelectMultipleFilterMobileForm
-            name={name}
-            options={options}
-            initialValues={namedInitialValues}
-            onChange={this.handleSelect}
-            enableReinitialize={true}
-            keepDirtyOnReinitialize={true}
-          />
-        </div>
+        <SelectMultipleFilterMobileForm
+          className={optionsContainerClass}
+          name={name}
+          options={options}
+          initialValues={namedInitialValues}
+          onChange={this.handleSelect}
+          enableReinitialize={true}
+          keepDirtyOnReinitialize={true}
+        />
       </div>
     );
   }

@@ -2,6 +2,7 @@
 
 .root {
   padding-bottom: 16px;
+  margin-top: 30px;
   border-bottom: 1px solid var(--matterColorNegative);
 }
 

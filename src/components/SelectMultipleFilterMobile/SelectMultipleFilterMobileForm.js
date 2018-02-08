@@ -5,19 +5,22 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { FieldGroupCheckbox, Form } from '../../components';
 
 const SelectMultipleFilterMobileFormComponent = props => {
-  const { form, name, options } = props;
+  const { form, className, name, options } = props;
 
   return (
-    <Form>
+    <Form className={className}>
       <FieldGroupCheckbox name={name} id={`${form}.${name}`} options={options} />
     </Form>
   );
 };
 
-SelectMultipleFilterMobileFormComponent.defaultProps = {};
+SelectMultipleFilterMobileFormComponent.defaultProps = {
+  className: null,
+};
 
 SelectMultipleFilterMobileFormComponent.propTypes = {
   ...formPropTypes,
+  className: string,
   name: string.isRequired,
   options: arrayOf(
     shape({

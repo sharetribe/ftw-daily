@@ -211,8 +211,10 @@ class SearchFiltersMobileComponent extends Component {
               <FormattedMessage id={'SearchFiltersMobile.resetAll'} />
             </button>
           </div>
-          {categoryFilter}
-          {featuresFilter}
+          <div className={css.filtersWrapper}>
+            {categoryFilter}
+            {featuresFilter}
+          </div>
           <div className={css.showListingsContainer}>
             <Button className={css.showListingsButton} onClick={this.closeFilters}>
               {showListingsLabel}
