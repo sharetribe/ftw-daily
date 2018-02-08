@@ -3,7 +3,7 @@ import { object, string, bool, number, func, shape, array } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
-import { includes, omit, toPairs } from 'lodash';
+import { omit, toPairs } from 'lodash';
 
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
@@ -11,9 +11,10 @@ import { SecondaryButton, ModalInMobile, Button, SelectSingleFilterMobile } from
 import css from './SearchFiltersMobile.css';
 
 const CATEGORY_URL_PARAM = 'pub_category';
+const allowedCategories = [CATEGORY_URL_PARAM];
 
 const validateParamValue = value => value !== null && value !== undefined && value.length > 0;
-const validateParamKey = key => includes([CATEGORY_URL_PARAM], key);
+const validateParamKey = key => allowedCategories.includes(key);
 
 // Check if a filter parameter is included query parameters
 const hasFilterQueryParams = queryParams => {
