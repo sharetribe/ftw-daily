@@ -494,6 +494,7 @@
   "SearchFilters.openMapView": "Map",
   "SearchFiltersMobile.cancel": "CANCEL",
   "SearchFiltersMobile.categoryLabel": "Category",
+  "SearchFiltersMobile.featuresLabel": "Amenities",
   "SearchFiltersMobile.heading": "Filter saunas",
   "SearchFiltersMobile.resetAll": "Reset all",
   "SearchFiltersMobile.showListings": "Show {count, number} {count, plural, one {sauna} other {saunas}}",

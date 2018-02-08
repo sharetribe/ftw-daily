@@ -7,11 +7,18 @@ import { omit, toPairs } from 'lodash';
 
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
-import { SecondaryButton, ModalInMobile, Button, SelectSingleFilterMobile } from '../../components';
+import {
+  SecondaryButton,
+  ModalInMobile,
+  Button,
+  SelectSingleFilterMobile,
+  SelectMultipleFilterMobile,
+} from '../../components';
 import css from './SearchFiltersMobile.css';
 
 const CATEGORY_URL_PARAM = 'pub_category';
-const allowedCategories = [CATEGORY_URL_PARAM];
+const FEATURES_URL_PARAM = 'pub_amenities';
+const allowedCategories = [CATEGORY_URL_PARAM, FEATURES_URL_PARAM];
 
 const validateParamValue = value => value !== null && value !== undefined && value.length > 0;
 const validateParamKey = key => allowedCategories.includes(key);
@@ -33,7 +40,8 @@ class SearchFiltersMobileComponent extends Component {
     this.cancelFilters = this.cancelFilters.bind(this);
     this.closeFilters = this.closeFilters.bind(this);
     this.resetAll = this.resetAll.bind(this);
-    this.onSelectSingle = this.onSelectSingle.bind(this);
+    this.handleSelectSingle = this.handleSelectSingle.bind(this);
+    this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
   }
 
   // Open filters modal, set the initial parameters to current ones
@@ -65,7 +73,7 @@ class SearchFiltersMobileComponent extends Component {
     this.setState({ isFiltersOpenOnMobile: false });
   }
 
-  onSelectSingle(urlParam, option) {
+  handleSelectSingle(urlParam, option) {
     const { urlQueryParams, history } = this.props;
 
     // query parameters after selecting the option
@@ -73,6 +81,17 @@ class SearchFiltersMobileComponent extends Component {
     const queryParams = option
       ? { ...urlQueryParams, [urlParam]: option }
       : omit(urlQueryParams, urlParam);
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  }
+
+  handleSelectMultiple(urlParam, options) {
+    const { urlQueryParams, history } = this.props;
+
+    const queryParams =
+      options && options.length > 0
+        ? { ...urlQueryParams, [FEATURES_URL_PARAM]: options.join(',') }
+        : omit(urlQueryParams, FEATURES_URL_PARAM);
 
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   }
@@ -102,6 +121,7 @@ class SearchFiltersMobileComponent extends Component {
       onMapIconClick,
       onManageDisableScrolling,
       categories,
+      features,
       intl,
     } = this.props;
 
@@ -139,10 +159,27 @@ class SearchFiltersMobileComponent extends Component {
       <SelectSingleFilterMobile
         urlParam={CATEGORY_URL_PARAM}
         label={categoryLabel}
-        onSelect={this.onSelectSingle}
+        onSelect={this.handleSelectSingle}
         options={categories}
         initialValue={initialCategory}
         intl={intl}
+      />
+    ) : null;
+
+    const featuresLabel = intl.formatMessage({ id: 'SearchFiltersMobile.featuresLabel' });
+
+    const initialFeatures = !!urlQueryParams[FEATURES_URL_PARAM]
+      ? urlQueryParams[FEATURES_URL_PARAM].split(',')
+      : [];
+
+    const featuresFilter = features ? (
+      <SelectMultipleFilterMobile
+        name="amenities"
+        urlParam={FEATURES_URL_PARAM}
+        label={featuresLabel}
+        onSelect={this.handleSelectMultiple}
+        options={features}
+        initialValues={initialFeatures}
       />
     ) : null;
 
@@ -175,6 +212,7 @@ class SearchFiltersMobileComponent extends Component {
             </button>
           </div>
           {categoryFilter}
+          {featuresFilter}
           <div className={css.showListingsContainer}>
             <Button className={css.showListingsButton} onClick={this.closeFilters}>
               {showListingsLabel}
@@ -193,6 +231,8 @@ SearchFiltersMobileComponent.defaultProps = {
   searchingInProgress: false,
   onOpenModal: null,
   onCloseModal: null,
+  categories: null,
+  features: null,
 };
 
 SearchFiltersMobileComponent.propTypes = {
@@ -208,6 +248,7 @@ SearchFiltersMobileComponent.propTypes = {
   onOpenModal: func,
   onCloseModal: func,
   categories: array,
+  features: array,
 
   // from injectIntl
   intl: intlShape.isRequired,

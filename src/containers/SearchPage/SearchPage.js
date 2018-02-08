@@ -331,6 +331,7 @@ export class SearchPageComponent extends Component {
               onOpenModal={this.onOpenMobileModal}
               onCloseModal={this.onCloseMobileModal}
               categories={categories}
+              features={features}
             />
             <div
               className={classNames(css.listings, {
