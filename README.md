@@ -28,6 +28,8 @@ To develop the application and to see changes live, start the frontend developme
 
     yarn run dev
 
+**You also need to [configure Google Maps api key](./docs/google-maps.md)**
+
 **Known issues:**
 
 * Adding/changing `import`s may not be synced properly with ESLint. You may see an error
