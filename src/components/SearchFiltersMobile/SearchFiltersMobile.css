@@ -96,8 +96,9 @@
 
 .filtersWrapper {
   /* add bottom margin so that the last filter won't be hidden
-   * under the bottom bar */
-  margin-bottom: 160px;
+   * under the mobile safari bottom bar or the "Show results"
+   * button bar */
+  padding-bottom: 180px;
 }
 
 .showListingsContainer {
