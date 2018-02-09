@@ -127,6 +127,7 @@ class SelectMultipleFilter extends Component {
           {buttonLabel}
         </button>
         <SelectMultipleFilterForm
+          form={`SelectMultipleFilterForm.${name}`}
           onSubmit={this.handleSubmit}
           initialValues={namedInitialValues}
           enableReinitialize={true}

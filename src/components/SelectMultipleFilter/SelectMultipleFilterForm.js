@@ -94,8 +94,8 @@ SelectMultipleFilterFormComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const defaultFormName = 'SelectMultipleFilterForm';
-
-export default compose(reduxForm({ form: defaultFormName }), injectIntl)(
+const SelectMultipleFilterForm = compose(reduxForm({}), injectIntl)(
   SelectMultipleFilterFormComponent
 );
+
+export default SelectMultipleFilterForm;

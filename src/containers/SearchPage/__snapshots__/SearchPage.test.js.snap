@@ -36,36 +36,12 @@ exports[`SearchPageComponent matches snapshot 1`] = `
         features={
           Array [
             Object {
-              "key": "towels",
-              "label": "Towels",
+              "key": "dog1",
+              "label": "Dog 1",
             },
             Object {
-              "key": "bathroom",
-              "label": "Bathroom",
-            },
-            Object {
-              "key": "swimming_pool",
-              "label": "Swimming pool",
-            },
-            Object {
-              "key": "own_drinks",
-              "label": "Own drinks allowed",
-            },
-            Object {
-              "key": "jacuzzi",
-              "label": "Jacuzzi",
-            },
-            Object {
-              "key": "audiovisual_entertainment",
-              "label": "Audiovisual entertainment",
-            },
-            Object {
-              "key": "barbeque",
-              "label": "Barbeque",
-            },
-            Object {
-              "key": "own_food_allowed",
-              "label": "Own food allowed",
+              "key": "dog2",
+              "label": "Dog 2",
             },
           ]
         }
@@ -95,6 +71,18 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             Object {
               "key": "cat2",
               "label": "Cat 2",
+            },
+          ]
+        }
+        features={
+          Array [
+            Object {
+              "key": "dog1",
+              "label": "Dog 1",
+            },
+            Object {
+              "key": "dog2",
+              "label": "Dog 2",
             },
           ]
         }
