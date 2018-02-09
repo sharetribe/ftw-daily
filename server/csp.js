@@ -34,6 +34,7 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
   const googleFonts = 'https://fonts.googleapis.com/';
   const stripeJs = 'https://js.stripe.com/';
   const stripeQ = 'https://q.stripe.com/';
+  const stripeApi = 'https://api.stripe.com/';
   const sentryApi = 'https://sentry.io/api/';
 
   const scriptSrc = [self, inline, googleMaps, stripeJs];
@@ -52,7 +53,7 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
     googleStaticMaps,
   ];
 
-  const connectSrc = [self, sharetribeApi, googleMaps];
+  const connectSrc = [self, sharetribeApi, googleMaps, stripeApi];
 
   const fontSrc = [self, data, sharetribeAssets, googleStaticFonts];
 
