@@ -25,7 +25,6 @@ import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
   Avatar,
   NamedLink,
-  NamedRedirect,
   NotificationBadge,
   Page,
   PaginationLinks,
@@ -37,7 +36,7 @@ import {
   LayoutWrapperFooter,
   Footer,
 } from '../../components';
-import { TopbarContainer } from '../../containers';
+import { TopbarContainer, NotFoundPage } from '../../containers';
 import config from '../../config';
 
 import { loadData } from './InboxPage.duck';
@@ -254,7 +253,7 @@ export const InboxPageComponent = props => {
 
   const validTab = tab === 'orders' || tab === 'sales';
   if (!validTab) {
-    return <NamedRedirect name="NotFoundPage" />;
+    return <NotFoundPage />;
   }
 
   const isOrders = tab === 'orders';

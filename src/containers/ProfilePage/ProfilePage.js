@@ -24,7 +24,7 @@ import {
   Reviews,
   ButtonTabNavHorizontal,
 } from '../../components';
-import { TopbarContainer } from '../../containers';
+import { TopbarContainer, NotFoundPage } from '../../containers';
 import { loadData } from './ProfilePage.duck';
 import config from '../../config';
 
@@ -210,7 +210,9 @@ export class ProfilePageComponent extends Component {
 
     let content;
 
-    if (userShowError || queryListingsError) {
+    if (userShowError && userShowError.status === 404) {
+      return <NotFoundPage />;
+    } else if (userShowError || queryListingsError) {
       content = (
         <p className={css.error}>
           <FormattedMessage id="ProfilePage.loadingDataFailed" />

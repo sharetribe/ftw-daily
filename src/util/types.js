@@ -392,6 +392,8 @@ export const ERROR_CODE_EMAIL_NOT_VERIFIED = 'email-unverified';
 export const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'email-too-many-verification-requests';
 export const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit';
 export const ERROR_CODE_VALIDATION_INVALID_PARAMS = 'validation-invalid-params';
+export const ERROR_CODE_NOT_FOUND = 'not-found';
+
 const ERROR_CODES = [
   ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND,
   ERROR_CODE_TRANSACTION_INVALID_TRANSITION,
@@ -404,6 +406,7 @@ const ERROR_CODES = [
   ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS,
   ERROR_CODE_UPLOAD_OVER_LIMIT,
   ERROR_CODE_VALIDATION_INVALID_PARAMS,
+  ERROR_CODE_NOT_FOUND,
 ];
 
 // API error
