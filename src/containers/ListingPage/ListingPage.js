@@ -24,7 +24,6 @@ import {
   Page,
   ResponsiveImage,
   NamedLink,
-  NamedRedirect,
   Modal,
   ImageCarousel,
   InlineTextButton,
@@ -37,7 +36,7 @@ import {
   Reviews,
   PropertyGroup,
 } from '../../components';
-import { BookingDatesForm, TopbarContainer, EnquiryForm } from '../../containers';
+import { BookingDatesForm, TopbarContainer, EnquiryForm, NotFoundPage } from '../../containers';
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import EditIcon from './EditIcon';
@@ -292,7 +291,7 @@ export class ListingPageComponent extends Component {
     if (showListingError && showListingError.status === 404) {
       // 404 listing not found
 
-      return <NamedRedirect name="NotFoundPage" />;
+      return <NotFoundPage />;
     } else if (showListingError) {
       // Other error in fetching listing
 
