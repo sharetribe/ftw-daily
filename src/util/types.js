@@ -393,6 +393,7 @@ export const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'email-too-many-verific
 export const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit';
 export const ERROR_CODE_VALIDATION_INVALID_PARAMS = 'validation-invalid-params';
 export const ERROR_CODE_NOT_FOUND = 'not-found';
+export const ERROR_CODE_FORBIDDEN = 'forbidden';
 
 const ERROR_CODES = [
   ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND,
@@ -407,6 +408,7 @@ const ERROR_CODES = [
   ERROR_CODE_UPLOAD_OVER_LIMIT,
   ERROR_CODE_VALIDATION_INVALID_PARAMS,
   ERROR_CODE_NOT_FOUND,
+  ERROR_CODE_FORBIDDEN,
 ];
 
 // API error

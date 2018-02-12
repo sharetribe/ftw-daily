@@ -97,6 +97,7 @@ const routeConfiguration = () => {
       path: '/l/:slug/:id/:variant',
       name: 'ListingPageVariant',
       auth: true,
+      authPage: 'LoginPage',
       component: props => <ListingPage {...props} />,
       loadData: ListingPage.loadData,
     },

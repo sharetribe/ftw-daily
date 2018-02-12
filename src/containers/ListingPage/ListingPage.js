@@ -24,6 +24,7 @@ import {
   Page,
   ResponsiveImage,
   NamedLink,
+  NamedRedirect,
   Modal,
   ImageCarousel,
   InlineTextButton,
@@ -261,6 +262,24 @@ export class ListingPageComponent extends Component {
     const currentListing = isPendingApprovalVariant
       ? ensureOwnListing(getOwnListing(listingId))
       : ensureListing(getListing(listingId));
+
+    const isApproved =
+      currentListing.id && currentListing.attributes.state !== LISTING_STATE_PENDING_APPROVAL;
+
+    const pendingIsApproved = isPendingApprovalVariant && isApproved;
+
+    // If a /pending-approval URL is shared, the UI requires
+    // authentication and attempts to fetch the listing from own
+    // listings. This will fail with 403 Forbidden if the author is
+    // another user. We use this information to try to fetch the
+    // public listing.
+    const pendingOtherUsersListing =
+      isPendingApprovalVariant && showListingError && showListingError.status === 403;
+    const shouldShowPublicListingPage = pendingIsApproved || pendingOtherUsersListing;
+
+    if (shouldShowPublicListingPage) {
+      return <NamedRedirect name="ListingPage" params={params} search={location.search} />;
+    }
 
     const listingSlug = params.slug || createSlug(currentListing.attributes.title || '');
     const {
@@ -705,7 +724,9 @@ ListingPageComponent.propTypes = {
   history: shape({
     push: func.isRequired,
   }).isRequired,
-  location: object.isRequired,
+  location: shape({
+    search: string,
+  }).isRequired,
 
   unitType: propTypes.bookingUnitType,
   // from injectIntl
