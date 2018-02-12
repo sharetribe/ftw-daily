@@ -22,9 +22,10 @@
     display: inline;
   }
 
-  /* Hightlight the text on hover and focus */
+  /* Hightlight the text on checked, hover and focus */
   &:focus + label .text,
-  &:hover + label .text {
+  &:hover + label .text,
+  &:checked + label .text {
     color: var(--matterColorDark);
   }
 }
