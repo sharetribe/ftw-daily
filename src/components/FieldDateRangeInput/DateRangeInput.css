@@ -204,6 +204,9 @@
   & :global(.DateInput_fang) {
     display: none;
   }
+  & :global(.CalendarMonth_caption) {
+    text-transform: capitalize;
+  }
 }
 
 /**
