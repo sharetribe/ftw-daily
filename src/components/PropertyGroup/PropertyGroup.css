@@ -29,7 +29,6 @@
 }
 
 .checkIcon {
-  margin: 1px 8px -1px 0;
 }
 
 .hidden {
@@ -41,8 +40,11 @@
 }
 
 .iconWrapper {
-  display: inline-flex;
-  align-items: center;
+  align-self: baseline;
+  margin-right: 8px;
+
+  /* This follows line-height */
+  height: var(--lineHeight);
 }
 
 .labelWrapper {

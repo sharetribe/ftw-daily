@@ -6,10 +6,8 @@ import { Field } from 'redux-form';
 import css from './FieldCheckbox.css';
 
 const IconCheckbox = props => {
-  const svgClasses = classNames(props.className, css.checkbox);
-
   return (
-    <svg className={svgClasses} width="14" height="14" xmlns="http://www.w3.org/2000/svg">
+    <svg className={props.className} width="14" height="14" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" fillRule="evenodd">
         <g transform="translate(2 2)">
           <path
@@ -47,7 +45,9 @@ const FieldCheckbox = props => {
     <span className={classes}>
       <Field id={id} name={name} className={css.input} type="checkbox" component="input" />
       <label htmlFor={id} className={css.label}>
-        <IconCheckbox className={svgClassName} />
+        <span className={css.checkboxWrapper}>
+          <IconCheckbox className={svgClassName} />
+        </span>
         <span className={css.text}>{label}</span>
       </label>
     </span>
