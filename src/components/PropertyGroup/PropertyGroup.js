@@ -41,9 +41,9 @@ const Item = props => {
   const labelClass = isSelected ? css.selectedLabel : css.notSelectedLabel;
   return (
     <li className={css.item}>
-      <div className={css.iconWrapper}>
+      <span className={css.iconWrapper}>
         <IconCheck isVisible={isSelected} />
-      </div>
+      </span>
       <div className={css.labelWrapper}>
         <span className={labelClass}>{label}</span>
       </div>

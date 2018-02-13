@@ -20,6 +20,8 @@
   /* Display the "check" when checked */
   &:checked + label .checked {
     display: inline;
+    stroke: var(--marketplaceColor);
+    stroke-width: 1px;
   }
 
   /* Hightlight the text on checked, hover and focus */
@@ -36,8 +38,15 @@
   padding: 0;
 }
 
-.checkbox {
+.checkboxWrapper {
+  /* This should follow line-height */
+  height: 32px;
+  margin-top: -1px;
   margin-right: 12px;
+  align-self: baseline;
+
+  display: inline-flex;
+  align-items: center;
 }
 
 .checked {
