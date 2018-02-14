@@ -14,6 +14,7 @@ const KEY_CODE_ARROW_UP = 38;
 const KEY_CODE_ARROW_DOWN = 40;
 const KEY_CODE_ENTER = 13;
 const KEY_CODE_TAB = 9;
+const KEY_CODE_ESC = 27;
 const DIRECTION_UP = 'up';
 const DIRECTION_DOWN = 'down';
 const TOUCH_TAP_RADIUS = 5; // Movement within 5px from touch start is considered a tap
@@ -151,6 +152,9 @@ class LocationAutocompleteInput extends Component {
       highlightedIndex: -1, // -1 means no highlight
     };
 
+    // Ref to the input element.
+    this.input = null;
+
     this.changeHighlight = this.changeHighlight.bind(this);
     this.selectItem = this.selectItem.bind(this);
     this.selectItemIfNoneSelected = this.selectItemIfNoneSelected.bind(this);
@@ -194,6 +198,8 @@ class LocationAutocompleteInput extends Component {
       }
     } else if (e.keyCode === KEY_CODE_TAB) {
       this.selectItemIfNoneSelected();
+    } else if (e.keyCode === KEY_CODE_ESC && this.input) {
+      this.input.blur();
     }
   }
 
@@ -423,7 +429,12 @@ class LocationAutocompleteInput extends Component {
           onBlur={this.handleOnBlur}
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
-          ref={inputRef}
+          ref={node => {
+            this.input = node;
+            if (inputRef) {
+              inputRef(node);
+            }
+          }}
         />
         {renderPredictions ? (
           <LocationPredictionsList

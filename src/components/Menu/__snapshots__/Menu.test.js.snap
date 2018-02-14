@@ -5,6 +5,7 @@ exports[`Menu matches snapshot 1`] = `
   className=""
   onBlur={[Function]}
   onKeyDown={[Function]}
+  tabIndex={0}
 >
   <button
     className=""
