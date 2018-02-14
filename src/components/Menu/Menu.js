@@ -174,6 +174,7 @@ class Menu extends Component {
       <div
         className={classes}
         onBlur={this.onBlur}
+        tabIndex={0}
         onKeyDown={this.onKeyDown}
         ref={c => {
           this.menu = c;
