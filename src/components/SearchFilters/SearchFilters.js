@@ -26,7 +26,7 @@ const SearchFiltersComponent = props => {
     resultsCount,
     searchInProgress,
     categories,
-    features,
+    amenities,
     history,
     intl,
   } = props;
@@ -45,11 +45,11 @@ const SearchFiltersComponent = props => {
     id: 'SearchFilters.categoryLabel',
   });
 
-  const featuresLabel = intl.formatMessage({
-    id: 'SearchFilters.featuresLabel',
+  const amenitiesLabel = intl.formatMessage({
+    id: 'SearchFilters.amenitiesLabel',
   });
 
-  const initialFeatures = !!urlQueryParams[AMENITIES_URL_PARAM]
+  const initialAmenities = !!urlQueryParams[AMENITIES_URL_PARAM]
     ? urlQueryParams[AMENITIES_URL_PARAM].split(',')
     : [];
 
@@ -85,14 +85,14 @@ const SearchFiltersComponent = props => {
     />
   ) : null;
 
-  const featuresFilter = features ? (
+  const amenitiesFilter = amenities ? (
     <SelectMultipleFilter
       name="amenities"
       urlParam={AMENITIES_URL_PARAM}
-      label={featuresLabel}
+      label={amenitiesLabel}
       onSelect={handleSelectOptions}
-      options={features}
-      initialValues={initialFeatures}
+      options={amenities}
+      initialValues={initialAmenities}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
@@ -101,7 +101,7 @@ const SearchFiltersComponent = props => {
     <div className={classes}>
       <div className={css.filters}>
         {categoryFilter}
-        {featuresFilter}
+        {amenitiesFilter}
       </div>
 
       <div className={css.searchResultSummary}>
@@ -119,7 +119,7 @@ SearchFiltersComponent.defaultProps = {
   resultsCount: null,
   searchingInProgress: false,
   categories: null,
-  features: null,
+  amenities: null,
 };
 
 SearchFiltersComponent.propTypes = {
@@ -132,7 +132,7 @@ SearchFiltersComponent.propTypes = {
   onMapIconClick: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   categories: array,
-  features: array,
+  amenities: array,
 
   // from withRouter
   history: shape({
