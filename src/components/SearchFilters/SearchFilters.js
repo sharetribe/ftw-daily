@@ -58,8 +58,8 @@ const SearchFiltersComponent = props => {
   const handleSelectOptions = (urlParam, options) => {
     const queryParams =
       options && options.length > 0
-        ? { ...urlQueryParams, [FEATURES_URL_PARAM]: options.join(',') }
-        : omit(urlQueryParams, FEATURES_URL_PARAM);
+        ? { ...urlQueryParams, [urlParam]: options.join(',') }
+        : omit(urlQueryParams, urlParam);
 
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
