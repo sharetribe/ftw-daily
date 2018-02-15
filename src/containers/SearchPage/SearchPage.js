@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { debounce, isEqual, unionWith } from 'lodash';
+import { debounce, intersection, isEqual, unionWith } from 'lodash';
 import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
@@ -45,6 +45,32 @@ const BOUNDS_FIXED_PRECISION = 8;
 const CATEGORY_URL_PARAM = 'pub_category';
 const AMENITIES_URL_PARAM = 'pub_amenities';
 
+// Find correct extended data key from config.custom
+// e.g. 'pub_category' -> 'categories'.
+const customConfigKey = paramKey => {
+  switch (paramKey) {
+    case CATEGORY_URL_PARAM:
+      return 'categories';
+    case AMENITIES_URL_PARAM:
+      return 'amenities';
+    default:
+      return null;
+  }
+};
+
+const validURLParamForExtendedData = (paramKey, urlParams) => {
+  const configKey = customConfigKey(paramKey);
+  const value = urlParams[paramKey];
+  const valueArray = value ? value.split(',') : [];
+
+  if (configKey && valueArray.length > 0) {
+    const allowedValues = config.custom[configKey].map(a => a.key);
+    const validValues = intersection(valueArray, allowedValues).join(',');
+    return validValues.length > 0 ? { [paramKey]: validValues } : {};
+  }
+  return {};
+};
+
 // extract search parameters, including a custom attribute named category
 const pickSearchParamsOnly = params => {
   const { address, origin, bounds, ...rest } = params || {};
@@ -52,8 +78,8 @@ const pickSearchParamsOnly = params => {
     address,
     origin,
     bounds,
-    [CATEGORY_URL_PARAM]: rest[CATEGORY_URL_PARAM],
-    [AMENITIES_URL_PARAM]: rest[AMENITIES_URL_PARAM],
+    ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest),
+    ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest),
   };
 };
 
@@ -109,8 +135,6 @@ export class SearchPageComponent extends Component {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
-    const category = rest[CATEGORY_URL_PARAM];
-    const features = rest[AMENITIES_URL_PARAM];
 
     const viewportGMapBounds = googleMap.getBounds();
     const viewportBounds = sdkBoundsToFixedCoordinates(
@@ -131,8 +155,8 @@ export class SearchPageComponent extends Component {
         bounds: viewportBounds,
         country,
         mapSearch: true,
-        [CATEGORY_URL_PARAM]: category,
-        [AMENITIES_URL_PARAM]: features,
+        ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest),
+        ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest),
       };
       history.push(
         createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
