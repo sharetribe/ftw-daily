@@ -55,6 +55,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           Object {
             "address": undefined,
             "bounds": undefined,
+            "country": undefined,
             "origin": undefined,
           }
         }
@@ -97,6 +98,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           Object {
             "address": undefined,
             "bounds": undefined,
+            "country": undefined,
             "origin": undefined,
           }
         }

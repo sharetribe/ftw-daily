@@ -73,11 +73,12 @@ const validURLParamForExtendedData = (paramKey, urlParams) => {
 
 // extract search parameters, including a custom attribute named category
 const pickSearchParamsOnly = params => {
-  const { address, origin, bounds, ...rest } = params || {};
+  const { address, origin, bounds, country, ...rest } = params || {};
   return {
     address,
     origin,
     bounds,
+    country,
     ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest),
     ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest),
   };
