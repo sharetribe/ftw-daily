@@ -17,11 +17,11 @@ import {
 import css from './SearchFiltersMobile.css';
 
 const CATEGORY_URL_PARAM = 'pub_category';
-const FEATURES_URL_PARAM = 'pub_amenities';
-const allowedCategories = [CATEGORY_URL_PARAM, FEATURES_URL_PARAM];
+const AMENITIES_URL_PARAM = 'pub_amenities';
+const allowedParams = [CATEGORY_URL_PARAM, AMENITIES_URL_PARAM];
 
 const validateParamValue = value => value !== null && value !== undefined && value.length > 0;
-const validateParamKey = key => allowedCategories.includes(key);
+const validateParamKey = key => allowedParams.includes(key);
 
 // Check if a filter parameter is included query parameters
 const hasFilterQueryParams = queryParams => {
@@ -90,8 +90,8 @@ class SearchFiltersMobileComponent extends Component {
 
     const queryParams =
       options && options.length > 0
-        ? { ...urlQueryParams, [FEATURES_URL_PARAM]: options.join(',') }
-        : omit(urlQueryParams, FEATURES_URL_PARAM);
+        ? { ...urlQueryParams, [urlParam]: options.join(',') }
+        : omit(urlQueryParams, urlParam);
 
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   }
@@ -100,7 +100,7 @@ class SearchFiltersMobileComponent extends Component {
   resetAll(e) {
     const { urlQueryParams, history } = this.props;
 
-    const queryParams = omit(urlQueryParams, [CATEGORY_URL_PARAM, FEATURES_URL_PARAM]);
+    const queryParams = omit(urlQueryParams, [CATEGORY_URL_PARAM, AMENITIES_URL_PARAM]);
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
 
     // blur event target if event is passed
@@ -168,14 +168,14 @@ class SearchFiltersMobileComponent extends Component {
 
     const featuresLabel = intl.formatMessage({ id: 'SearchFiltersMobile.featuresLabel' });
 
-    const initialFeatures = !!urlQueryParams[FEATURES_URL_PARAM]
-      ? urlQueryParams[FEATURES_URL_PARAM].split(',')
+    const initialFeatures = !!urlQueryParams[AMENITIES_URL_PARAM]
+      ? urlQueryParams[AMENITIES_URL_PARAM].split(',')
       : [];
 
     const featuresFilter = features ? (
       <SelectMultipleFilterMobile
         name="amenities"
-        urlParam={FEATURES_URL_PARAM}
+        urlParam={AMENITIES_URL_PARAM}
         label={featuresLabel}
         onSelect={this.handleSelectMultiple}
         options={features}

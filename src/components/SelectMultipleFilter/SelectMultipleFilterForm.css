@@ -73,6 +73,11 @@
   border: none;
   cursor: pointer;
 
+  /* clearButton will add all available space between cancelButton,
+   * but some hard coded margin is still needed
+   */
+  margin-left: 48px;
+
   &:focus,
   &:hover {
     color: var(--matterColor);

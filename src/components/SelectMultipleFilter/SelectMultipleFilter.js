@@ -34,8 +34,9 @@ class SelectMultipleFilter extends Component {
   }
 
   handleClear() {
+    const { onSelect, urlParam } = this.props;
     this.setState({ isOpen: false });
-    this.props.onSelect(null);
+    onSelect(urlParam, null);
   }
 
   handleCancel() {
