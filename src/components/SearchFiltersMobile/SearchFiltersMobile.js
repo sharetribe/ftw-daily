@@ -18,10 +18,10 @@ import css from './SearchFiltersMobile.css';
 
 const CATEGORY_URL_PARAM = 'pub_category';
 const AMENITIES_URL_PARAM = 'pub_amenities';
-const allowedCategories = [CATEGORY_URL_PARAM, AMENITIES_URL_PARAM];
+const allowedParams = [CATEGORY_URL_PARAM, AMENITIES_URL_PARAM];
 
 const validateParamValue = value => value !== null && value !== undefined && value.length > 0;
-const validateParamKey = key => allowedCategories.includes(key);
+const validateParamKey = key => allowedParams.includes(key);
 
 // Check if a filter parameter is included query parameters
 const hasFilterQueryParams = queryParams => {
