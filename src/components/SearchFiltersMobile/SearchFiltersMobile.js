@@ -121,7 +121,7 @@ class SearchFiltersMobileComponent extends Component {
       onMapIconClick,
       onManageDisableScrolling,
       categories,
-      features,
+      amenities,
       intl,
     } = this.props;
 
@@ -166,20 +166,20 @@ class SearchFiltersMobileComponent extends Component {
       />
     ) : null;
 
-    const featuresLabel = intl.formatMessage({ id: 'SearchFiltersMobile.featuresLabel' });
+    const amenitiesLabel = intl.formatMessage({ id: 'SearchFiltersMobile.amenitiesLabel' });
 
-    const initialFeatures = !!urlQueryParams[AMENITIES_URL_PARAM]
+    const initialAmenities = !!urlQueryParams[AMENITIES_URL_PARAM]
       ? urlQueryParams[AMENITIES_URL_PARAM].split(',')
       : [];
 
-    const featuresFilter = features ? (
+    const amenitiesFilter = amenities ? (
       <SelectMultipleFilterMobile
         name="amenities"
         urlParam={AMENITIES_URL_PARAM}
-        label={featuresLabel}
+        label={amenitiesLabel}
         onSelect={this.handleSelectMultiple}
-        options={features}
-        initialValues={initialFeatures}
+        options={amenities}
+        initialValues={initialAmenities}
       />
     ) : null;
 
@@ -213,7 +213,7 @@ class SearchFiltersMobileComponent extends Component {
           </div>
           <div className={css.filtersWrapper}>
             {categoryFilter}
-            {featuresFilter}
+            {amenitiesFilter}
           </div>
           <div className={css.showListingsContainer}>
             <Button className={css.showListingsButton} onClick={this.closeFilters}>
@@ -234,7 +234,7 @@ SearchFiltersMobileComponent.defaultProps = {
   onOpenModal: null,
   onCloseModal: null,
   categories: null,
-  features: null,
+  amenities: null,
 };
 
 SearchFiltersMobileComponent.propTypes = {
@@ -250,7 +250,7 @@ SearchFiltersMobileComponent.propTypes = {
   onOpenModal: func,
   onCloseModal: func,
   categories: array,
-  features: array,
+  amenities: array,
 
   // from injectIntl
   intl: intlShape.isRequired,
