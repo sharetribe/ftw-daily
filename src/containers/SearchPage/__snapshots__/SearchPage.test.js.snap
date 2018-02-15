@@ -51,14 +51,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
         resultsCount={22}
         searchInProgress={false}
         searchListingsError={null}
-        urlQueryParams={
-          Object {
-            "address": undefined,
-            "bounds": undefined,
-            "country": undefined,
-            "origin": undefined,
-          }
-        }
+        urlQueryParams={Object {}}
       />
       <InjectIntl(withRouter(SearchFiltersMobileComponent))
         amenities={
@@ -94,14 +87,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
         searchInProgress={false}
         searchListingsError={null}
         showAsModalMaxWidth={768}
-        urlQueryParams={
-          Object {
-            "address": undefined,
-            "bounds": undefined,
-            "country": undefined,
-            "origin": undefined,
-          }
-        }
+        urlQueryParams={Object {}}
       />
       <div
         className=""
