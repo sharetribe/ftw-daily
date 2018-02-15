@@ -222,7 +222,7 @@ export class SearchPageComponent extends Component {
       searchListingsError,
       searchParams,
       categories,
-      features,
+      amenities,
     } = this.props;
     // eslint-disable-next-line no-unused-vars
     const { mapSearch, page, ...searchInURL } = parse(location.search, {
@@ -340,7 +340,7 @@ export class SearchPageComponent extends Component {
               onMapIconClick={onMapIconClick}
               onManageDisableScrolling={onManageDisableScrolling}
               categories={categories}
-              features={features}
+              amenities={amenities}
             />
             <SearchFiltersMobile
               className={css.searchFiltersMobile}
@@ -355,7 +355,7 @@ export class SearchPageComponent extends Component {
               onOpenModal={this.onOpenMobileModal}
               onCloseModal={this.onCloseMobileModal}
               categories={categories}
-              features={features}
+              amenities={amenities}
             />
             <div
               className={classNames(css.listings, {
@@ -397,7 +397,7 @@ SearchPageComponent.defaultProps = {
   searchParams: {},
   tab: 'listings',
   categories: config.custom.categories,
-  features: config.custom.amenities,
+  amenities: config.custom.amenities,
 };
 
 const { array, bool, func, oneOf, object, shape, string } = PropTypes;
@@ -414,7 +414,7 @@ SearchPageComponent.propTypes = {
   searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
   categories: array,
-  features: array,
+  amenities: array,
 
   // from withRouter
   history: shape({
