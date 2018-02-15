@@ -21,6 +21,18 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   <div>
     <div>
       <withRouter(InjectIntl(SearchFiltersComponent))
+        amenities={
+          Array [
+            Object {
+              "key": "dog1",
+              "label": "Dog 1",
+            },
+            Object {
+              "key": "dog2",
+              "label": "Dog 2",
+            },
+          ]
+        }
         categories={
           Array [
             Object {
@@ -30,18 +42,6 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             Object {
               "key": "cat2",
               "label": "Cat 2",
-            },
-          ]
-        }
-        features={
-          Array [
-            Object {
-              "key": "dog1",
-              "label": "Dog 1",
-            },
-            Object {
-              "key": "dog2",
-              "label": "Dog 2",
             },
           ]
         }
@@ -56,12 +56,22 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             "address": undefined,
             "bounds": undefined,
             "origin": undefined,
-            "pub_amenities": undefined,
-            "pub_category": undefined,
           }
         }
       />
       <InjectIntl(withRouter(SearchFiltersMobileComponent))
+        amenities={
+          Array [
+            Object {
+              "key": "dog1",
+              "label": "Dog 1",
+            },
+            Object {
+              "key": "dog2",
+              "label": "Dog 2",
+            },
+          ]
+        }
         categories={
           Array [
             Object {
@@ -71,18 +81,6 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             Object {
               "key": "cat2",
               "label": "Cat 2",
-            },
-          ]
-        }
-        features={
-          Array [
-            Object {
-              "key": "dog1",
-              "label": "Dog 1",
-            },
-            Object {
-              "key": "dog2",
-              "label": "Dog 2",
             },
           ]
         }
@@ -100,8 +98,6 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             "address": undefined,
             "bounds": undefined,
             "origin": undefined,
-            "pub_amenities": undefined,
-            "pub_category": undefined,
           }
         }
       />

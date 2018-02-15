@@ -42,7 +42,7 @@ describe('SearchPageComponent', () => {
       sendVerificationEmailInProgress: false,
       onResendVerificationEmail: noop,
       categories: [{ key: 'cat1', label: 'Cat 1' }, { key: 'cat2', label: 'Cat 2' }],
-      features: [{ key: 'dog1', label: 'Dog 1' }, { key: 'dog2', label: 'Dog 2' }],
+      amenities: [{ key: 'dog1', label: 'Dog 1' }, { key: 'dog2', label: 'Dog 2' }],
     };
     const tree = renderShallow(<SearchPageComponent {...props} />);
     expect(tree).toMatchSnapshot();
