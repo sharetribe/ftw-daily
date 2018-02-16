@@ -75,10 +75,8 @@ const validURLParamForExtendedData = (paramKey, urlParams) => {
 const pickSearchParamsOnly = params => {
   const { address, origin, bounds, country, ...rest } = params || {};
   return {
-    address,
     origin,
     bounds,
-    country,
     ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest),
     ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest),
   };
@@ -174,9 +172,11 @@ export class SearchPageComponent extends Component {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
+
     const perPage = SHARETRIBE_API_MAX_PAGE_SIZE;
     const page = 1;
-    const searchParamsForMapResults = { ...searchInURL, include: ['images'], page, perPage };
+    const { address, country, ...rest } = searchInURL;
+    const searchParamsForMapResults = { ...rest, include: ['images'], page, perPage };
     this.searchMapListingsInProgress = true;
 
     // Search more listings for map
@@ -333,7 +333,7 @@ export class SearchPageComponent extends Component {
           <div className={css.searchResultContainer}>
             <SearchFilters
               className={css.searchFilters}
-              urlQueryParams={urlQueryParams}
+              urlQueryParams={searchInURL}
               listingsAreLoaded={listingsAreLoaded}
               resultsCount={totalItems}
               searchInProgress={searchInProgress}
@@ -345,7 +345,7 @@ export class SearchPageComponent extends Component {
             />
             <SearchFiltersMobile
               className={css.searchFiltersMobile}
-              urlQueryParams={urlQueryParams}
+              urlQueryParams={searchInURL}
               listingsAreLoaded={listingsAreLoaded}
               resultsCount={totalItems}
               searchInProgress={searchInProgress}
@@ -476,7 +476,7 @@ SearchPage.loadData = (params, search) => {
     latlng: ['origin'],
     latlngBounds: ['bounds'],
   });
-  const { page = 1, ...rest } = queryParams;
+  const { page = 1, address, country, ...rest } = queryParams;
   return searchListings({
     ...rest,
     page,
