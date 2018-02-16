@@ -71,6 +71,16 @@ const validURLParamForExtendedData = (paramKey, urlParams) => {
   return {};
 };
 
+// validate filter params
+const validURLParamsForExtendedData = params => {
+  const { [CATEGORY_URL_PARAM]: category, [AMENITIES_URL_PARAM]: amenities, ...rest } = params;
+  return {
+    ...rest,
+    ...validURLParamForExtendedData(CATEGORY_URL_PARAM, params),
+    ...validURLParamForExtendedData(AMENITIES_URL_PARAM, params),
+  };
+};
+
 // extract search parameters, including a custom attribute named category
 const pickSearchParamsOnly = params => {
   const { address, origin, bounds, country, ...rest } = params || {};
@@ -244,6 +254,8 @@ export class SearchPageComponent extends Component {
     const totalItems = searchParamsMatch && hasPaginationInfo ? pagination.totalItems : 0;
     const listingsAreLoaded = !searchInProgress && searchParamsMatch && hasPaginationInfo;
 
+    const validQueryParams = validURLParamsForExtendedData(searchInURL);
+
     const searchError = (
       <h2 className={css.error}>
         <FormattedMessage id="SearchPage.searchError" />
@@ -333,7 +345,7 @@ export class SearchPageComponent extends Component {
           <div className={css.searchResultContainer}>
             <SearchFilters
               className={css.searchFilters}
-              urlQueryParams={searchInURL}
+              urlQueryParams={validQueryParams}
               listingsAreLoaded={listingsAreLoaded}
               resultsCount={totalItems}
               searchInProgress={searchInProgress}
@@ -345,7 +357,7 @@ export class SearchPageComponent extends Component {
             />
             <SearchFiltersMobile
               className={css.searchFiltersMobile}
-              urlQueryParams={searchInURL}
+              urlQueryParams={validQueryParams}
               listingsAreLoaded={listingsAreLoaded}
               resultsCount={totalItems}
               searchInProgress={searchInProgress}
