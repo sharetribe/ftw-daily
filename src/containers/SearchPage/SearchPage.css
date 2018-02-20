@@ -56,11 +56,6 @@
 
 .error {
   color: var(--failColor);
-  padding-left: 24px;
-
-  @media (--viewportMedium) {
-    padding-left: 36px;
-  }
 }
 
 .searchString {

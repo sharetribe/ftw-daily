@@ -47,7 +47,6 @@ exports[`SearchPageComponent matches snapshot 1`] = `
         }
         listingsAreLoaded={true}
         onManageDisableScrolling={[Function]}
-        onMapIconClick={[Function]}
         resultsCount={22}
         searchInProgress={false}
         searchListingsError={null}

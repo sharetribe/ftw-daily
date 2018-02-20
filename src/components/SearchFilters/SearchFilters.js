@@ -31,15 +31,8 @@ const SearchFiltersComponent = props => {
     intl,
   } = props;
 
-  const loadingResults = <FormattedMessage id="SearchFilters.loadingResults" />;
-
-  const resultsFound = (
-    <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
-  );
-
-  const noResults = <FormattedMessage id="SearchFilters.noResults" />;
-
-  const classes = classNames(rootClassName || css.root, className);
+  const hasNoResult = listingsAreLoaded && resultsCount === 0;
+  const classes = classNames(rootClassName || css.root, { [css.longInfo]: hasNoResult }, className);
 
   const categoryLabel = intl.formatMessage({
     id: 'SearchFilters.categoryLabel',
@@ -104,11 +97,25 @@ const SearchFiltersComponent = props => {
         {amenitiesFilter}
       </div>
 
-      <div className={css.searchResultSummary}>
-        {listingsAreLoaded && resultsCount > 0 ? resultsFound : null}
-        {listingsAreLoaded && resultsCount === 0 ? noResults : null}
-        {searchInProgress ? loadingResults : null}
-      </div>
+      {listingsAreLoaded && resultsCount > 0 ? (
+        <div className={css.searchResultSummary}>
+          <span className={css.resultsFound}>
+            <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
+          </span>
+        </div>
+      ) : null}
+
+      {hasNoResult ? (
+        <div className={css.noSearchResults}>
+          <FormattedMessage id="SearchFilters.noResults" />
+        </div>
+      ) : null}
+
+      {searchInProgress ? (
+        <div className={css.loadingResults}>
+          <FormattedMessage id="SearchFilters.loadingResults" />
+        </div>
+      ) : null}
     </div>
   );
 };
@@ -129,7 +136,6 @@ SearchFiltersComponent.propTypes = {
   listingsAreLoaded: bool.isRequired,
   resultsCount: number,
   searchingInProgress: bool,
-  onMapIconClick: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   categories: array,
   amenities: array,
