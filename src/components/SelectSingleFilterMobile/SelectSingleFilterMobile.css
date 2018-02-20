@@ -1,15 +1,19 @@
 @import '../../marketplace.css';
 
 .root {
-  padding-bottom: 16px;
-  margin-top: 30px;
+  padding-top: 24px;
+  padding-bottom: 47px;
   border-bottom: 1px solid var(--matterColorNegative);
 }
 
 .filterLabel,
 .filterLabelSelected {
   @apply --marketplaceH3FontStyles;
-  margin-bottom: 16px;
+
+  /* Baseline adjustment for label text */
+  margin-top: 0;
+  margin-bottom: 12px;
+  padding: 4px 0 2px 0;
 }
 
 .filterLabel {
@@ -81,10 +85,6 @@
 
   &:hover .menuItemBorder {
     width: 6px;
-  }
-
-  &:last-child {
-    margin-bottom: 18px;
   }
 }
 
