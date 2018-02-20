@@ -30,6 +30,7 @@
   text-align: left;
   border: none;
   padding: 0;
+  cursor: pointer;
 }
 
 .optionsContainerOpen {
