@@ -110,6 +110,12 @@ const SearchFiltersComponent = props => {
           <FormattedMessage id="SearchFilters.noResults" />
         </div>
       ) : null}
+
+      {searchInProgress ? (
+        <div className={css.loadingResults}>
+          <FormattedMessage id="SearchFilters.loadingResults" />
+        </div>
+      ) : null}
     </div>
   );
 };
