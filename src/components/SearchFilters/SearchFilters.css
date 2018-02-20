@@ -6,6 +6,10 @@
   background-color: var(--matterColorBright);
 }
 
+.longInfo {
+  flex-wrap: wrap;
+}
+
 .filters {
   & > *:not(:last-child) {
     margin-right: 8px;
@@ -22,6 +26,17 @@
 
   /* parent uses flexbox: this defines minimum width for text "6 results" */
   flex-basis: 55px;
+  flex-shrink: 0;
+}
+
+.noSearchResults {
+  @apply --marketplaceH4FontStyles;
+  line-height: 20px;
+  margin-top: 13px;
+  margin-bottom: 12px;
+
+  /* parent uses flexbox: this defines minimum width for text "6 results" */
+  flex-basis: 100%;
   flex-shrink: 0;
 }
 
