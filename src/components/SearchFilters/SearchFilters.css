@@ -6,6 +6,14 @@
   background-color: var(--matterColorBright);
 }
 
+.filters {
+  & > *:not(:last-child) {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    height: auto;
+  }
+}
+
 .searchResultSummary {
   @apply --marketplaceH4FontStyles;
   line-height: 20px;

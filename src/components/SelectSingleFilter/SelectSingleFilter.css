@@ -2,7 +2,6 @@
 
 .root {
   display: inline-block;
-  padding-right: 8px;
 
   &:last-of-type {
     padding-right: 0;
