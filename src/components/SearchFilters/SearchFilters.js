@@ -129,7 +129,6 @@ SearchFiltersComponent.propTypes = {
   listingsAreLoaded: bool.isRequired,
   resultsCount: number,
   searchingInProgress: bool,
-  onMapIconClick: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   categories: array,
   amenities: array,

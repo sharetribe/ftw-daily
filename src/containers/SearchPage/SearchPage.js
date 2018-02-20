@@ -350,7 +350,6 @@ export class SearchPageComponent extends Component {
               resultsCount={totalItems}
               searchInProgress={searchInProgress}
               searchListingsError={searchListingsError}
-              onMapIconClick={onMapIconClick}
               onManageDisableScrolling={onManageDisableScrolling}
               categories={categories}
               amenities={amenities}
