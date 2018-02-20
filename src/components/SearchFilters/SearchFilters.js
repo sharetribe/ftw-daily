@@ -105,7 +105,7 @@ const SearchFiltersComponent = props => {
         </div>
       ) : null}
 
-      {listingsAreLoaded && resultsCount === 0 ? (
+      {hasNoResult ? (
         <div className={css.noSearchResults}>
           <FormattedMessage id="SearchFilters.noResults" />
         </div>
