@@ -2,7 +2,7 @@
 
 .root {
   padding-top: 24px;
-  padding-bottom: 47px;
+  padding-bottom: 17px;
   border-bottom: 1px solid var(--matterColorNegative);
 }
 
@@ -34,6 +34,7 @@
 
 .optionsContainerOpen {
   height: auto;
+  padding-bottom: 30px;
 }
 
 .optionsContainerClosed {
