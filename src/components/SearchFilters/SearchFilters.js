@@ -34,7 +34,9 @@ const SearchFiltersComponent = props => {
   const loadingResults = <FormattedMessage id="SearchFilters.loadingResults" />;
 
   const resultsFound = (
-    <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
+    <span className={css.resultsFound}>
+      <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
+    </span>
   );
 
   const noResults = <FormattedMessage id="SearchFilters.noResults" />;

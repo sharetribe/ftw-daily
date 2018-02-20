@@ -18,5 +18,13 @@
   @apply --marketplaceH4FontStyles;
   line-height: 20px;
   margin-top: 11px;
-  margin-bottom: 13px;
+  margin-bottom: 10px;
+
+  /* parent uses flexbox: this defines minimum width for text "6 results" */
+  flex-basis: 55px;
+  flex-shrink: 0;
+}
+
+.resultsFound {
+  white-space: nowrap;
 }
