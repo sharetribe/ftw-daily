@@ -85,6 +85,16 @@
   }
 }
 
+.searchFiltersPanel {
+  flex-grow: 1;
+  display: flex;
+  padding: 0 24px 24px 24px;
+
+  @media (--viewportLarge) {
+    padding: 0;
+  }
+}
+
 .listings {
   flex-grow: 1;
   display: flex;
@@ -98,7 +108,6 @@
 
 .newSearchInProgress {
   opacity: 0.1;
-  transition: opacity var(--transitionStyleButton);
 }
 
 .searchListingsPanel {
