@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { array, string, func } from 'prop-types';
+import { array, bool, func, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
@@ -34,7 +34,17 @@ class SelectMultipleFilterMobileComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className, name, label, options, initialValues, intl } = this.props;
+    const {
+      rootClassName,
+      className,
+      id,
+      name,
+      label,
+      options,
+      initialValues,
+      intl,
+      twoColumns,
+    } = this.props;
 
     const classes = classNames(rootClassName || css.root, className);
 
@@ -48,9 +58,11 @@ class SelectMultipleFilterMobileComponent extends Component {
         )
       : label;
 
-    const optionsContainerClass = this.state.isOpen
-      ? css.optionsContainerOpen
-      : css.optionsContainerClosed;
+    const optionsContainerClass = classNames({
+      [css.optionsContainerOpen]: this.state.isOpen,
+      [css.optionsContainerClosed]: !this.state.isOpen,
+      [css.columnLayout]: twoColumns,
+    });
 
     const initialValuesObj = arrayToFormValues(initialValues);
     const namedInitialValues = { [name]: initialValuesObj };
@@ -66,14 +78,15 @@ class SelectMultipleFilterMobileComponent extends Component {
           </button>
         </div>
         <SelectMultipleFilterMobileForm
-          form={`SelectMultipleFilterMobileForm.${name}`}
+          form={`SelectMultipleFilterMobileForm.${id ? id : name}`}
           className={optionsContainerClass}
           name={name}
           options={options}
           initialValues={namedInitialValues}
           onChange={this.handleSelect}
-          enableReinitialize={true}
-          keepDirtyOnReinitialize={true}
+          twoColumns={twoColumns}
+          enableReinitialize
+          keepDirtyOnReinitialize
         />
       </div>
     );
@@ -83,18 +96,22 @@ class SelectMultipleFilterMobileComponent extends Component {
 SelectMultipleFilterMobileComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  id: undefined,
   initialValues: [],
+  twoColumns: false,
 };
 
 SelectMultipleFilterMobileComponent.propTypes = {
   rootClassName: string,
   className: string,
+  id: string,
   name: string.isRequired,
   urlParam: string.isRequired,
   label: string.isRequired,
   onSelect: func.isRequired,
   options: array.isRequired,
   initialValues: array,
+  twoColumns: bool,
 
   // from injectIntl
   intl: intlShape.isRequired,
