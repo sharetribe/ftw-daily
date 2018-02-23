@@ -38,7 +38,7 @@
   margin-top: 16px;
   margin-bottom: 12px;
 
-  /* parent uses flexbox: this defines minimum width for text "6 results" */
+  /* parent uses flexbox: this defines minimum width for translated text "noResults" */
   flex-basis: 100%;
   flex-shrink: 0;
 }
@@ -64,4 +64,43 @@
 
 .resultsFound {
   white-space: nowrap;
+}
+
+.searchFiltersPanelClosed {
+  @apply --marketplaceButtonStylesSecondary;
+  @apply --marketplaceSearchFilterLabelFontStyles;
+
+  display: inline-block;
+  padding: 9px 16px 10px 16px;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  border-radius: 4px;
+
+  &:focus {
+    outline: none;
+    background-color: var(--matterColorLight);
+    border-color: transparent;
+    text-decoration: none;
+    box-shadow: var(--boxShadowFilterButton);
+  }
+}
+
+.searchFiltersPanelOpen {
+  @apply --marketplaceButtonStyles;
+  @apply --marketplaceSearchFilterLabelFontStyles;
+  font-weight: var(--fontWeightSemiBold);
+
+  display: inline-block;
+  padding: 9px 16px 10px 16px;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  border-radius: 4px;
+  border: 1px solid var(--marketplaceColor);
+
+  &:hover,
+  &:focus {
+    border: 1px solid var(--marketplaceColorDark);
+  }
 }

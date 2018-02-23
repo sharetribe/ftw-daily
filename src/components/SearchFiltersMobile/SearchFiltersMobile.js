@@ -34,7 +34,7 @@ const hasFilterQueryParams = queryParams => {
 class SearchFiltersMobileComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { isFiltersOpenOnMobile: false };
+    this.state = { isFiltersOpenOnMobile: false, initialQueryParams: null };
 
     this.openFilters = this.openFilters.bind(this);
     this.cancelFilters = this.cancelFilters.bind(this);

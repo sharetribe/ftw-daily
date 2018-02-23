@@ -47,6 +47,7 @@
 
   display: inline-flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .checked {
@@ -63,4 +64,5 @@
   color: var(--matterColor);
   margin-top: -1px;
   margin-bottom: 1px;
+  cursor: pointer;
 }

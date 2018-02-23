@@ -43,6 +43,16 @@
   overflow: hidden;
 }
 
+.hasBullets {
+  padding-left: 26px;
+}
+
+.twoColumns {
+  @media (--viewportMedium) {
+    column-count: 2;
+  }
+}
+
 .optionBorder,
 .optionBorderSelected {
   position: absolute;
@@ -64,6 +74,28 @@
   background-color: var(--matterColorDark);
 }
 
+.optionBullet,
+.optionBulletSelected {
+  position: absolute;
+  left: -5px;
+  top: 13px;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: var(--marketplaceColor);
+  transition: opacity var(--transitionStyleButton);
+}
+
+/* left animated "border" like hover element */
+.optionBullet {
+  opacity: 0;
+}
+
+/* left static border for selected element */
+.optionBulletSelected {
+  opacity: 1;
+}
+
 .option {
   @apply --marketplaceH4FontStyles;
   font-weight: var(--fontWeightMedium);
@@ -79,6 +111,7 @@
   /* Override button styles */
   outline: none;
   border: none;
+  cursor: pointer;
 
   &:focus,
   &:hover {
@@ -88,6 +121,11 @@
   &:hover .menuItemBorder {
     width: 6px;
   }
+}
+
+.optionSelected {
+  composes: option;
+  color: var(--matterColorDark);
 }
 
 .clearButton {

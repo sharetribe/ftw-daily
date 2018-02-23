@@ -37,10 +37,10 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  padding: 2px 0 96px 0;
+  padding: 2px 0 0 0;
 
   @media (--viewportMedium) {
-    padding: 18px 0 96px 0;
+    padding: 18px 0 0 0;
     /**
      * .container is using flexbox,
      * This specifies that searchResultContainer is taking 60% from the viewport width
@@ -71,6 +71,10 @@
     padding: 0 24px;
     margin-bottom: 21px;
   }
+
+  @media (--viewportLarge) {
+    padding: 0;
+  }
 }
 
 .searchFiltersMobile {
@@ -81,16 +85,29 @@
   }
 }
 
+.searchFiltersPanel {
+  flex-grow: 1;
+  display: flex;
+  padding: 0 24px 24px 24px;
+
+  @media (--viewportLarge) {
+    padding: 0;
+  }
+}
+
 .listings {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  padding: 0 24px;
+  padding: 0 24px 96px 24px;
+
+  @media (--viewportLarge) {
+    padding: 0 0 96px 0;
+  }
 }
 
 .newSearchInProgress {
   opacity: 0.1;
-  transition: opacity var(--transitionStyleButton);
 }
 
 .searchListingsPanel {

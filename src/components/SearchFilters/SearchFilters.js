@@ -27,6 +27,9 @@ const SearchFiltersComponent = props => {
     searchInProgress,
     categories,
     amenities,
+    isSearchFiltersPanelOpen,
+    toggleSearchFiltersPanel,
+    searchFiltersPanelSelectedCount,
     history,
     intl,
   } = props;
@@ -90,11 +93,29 @@ const SearchFiltersComponent = props => {
     />
   ) : null;
 
+  const toggleSearchFiltersPanelButtonClasses =
+    isSearchFiltersPanelOpen || searchFiltersPanelSelectedCount > 0
+      ? css.searchFiltersPanelOpen
+      : css.searchFiltersPanelClosed;
+  const toggleSearchFiltersPanelButton = toggleSearchFiltersPanel ? (
+    <button
+      className={toggleSearchFiltersPanelButtonClasses}
+      onClick={() => {
+        toggleSearchFiltersPanel(!isSearchFiltersPanelOpen);
+      }}
+    >
+      <FormattedMessage
+        id="SearchFilters.moreFiltersButton"
+        values={{ count: searchFiltersPanelSelectedCount }}
+      />
+    </button>
+  ) : null;
   return (
     <div className={classes}>
       <div className={css.filters}>
         {categoryFilter}
         {amenitiesFilter}
+        {toggleSearchFiltersPanelButton}
       </div>
 
       {listingsAreLoaded && resultsCount > 0 ? (
@@ -127,6 +148,9 @@ SearchFiltersComponent.defaultProps = {
   searchingInProgress: false,
   categories: null,
   amenities: null,
+  isSearchFiltersPanelOpen: false,
+  toggleSearchFiltersPanel: null,
+  searchFiltersPanelSelectedCount: 0,
 };
 
 SearchFiltersComponent.propTypes = {
@@ -139,6 +163,9 @@ SearchFiltersComponent.propTypes = {
   onManageDisableScrolling: func.isRequired,
   categories: array,
   amenities: array,
+  isSearchFiltersPanelOpen: bool,
+  toggleSearchFiltersPanel: func,
+  searchFiltersPanelSelectedCount: number,
 
   // from withRouter
   history: shape({
