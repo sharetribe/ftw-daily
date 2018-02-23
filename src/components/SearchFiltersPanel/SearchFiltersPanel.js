@@ -1,3 +1,34 @@
+/**
+ * SearchFiltersPanel can be used to add extra filters to togglable panel in SearchPage.
+ * Using this component will need you to enable it in SearchPage and passing needed props to
+ * SearchFilters component (which is the default place for SearchFilters).
+ *
+ *
+ * An example how to render MultiSelectFilter inside render function:
+ *
+ * const currentQueryParams = this.state.currentQueryParams;
+ * const splitQueryParam = queryParam => queryParam ? queryParam.split(',') : [];
+ *
+ * // initialValue for a select should come either from state.currentQueryParam or urlQueryParam
+ * const hascurrentQueryParam = typeof currentQueryParams[MULTI_SELECT_URL_PARAM] !== 'undefined'
+ * const initialMultiSelectValue = hascurrentQueryParam
+ *   ? splitQueryParam(currentQueryParams[MULTI_SELECT_URL_PARAM])
+ *   : splitQueryParam(this.props.urlQueryParams[MULTI_SELECT_URL_PARAM]);
+ *
+ * const multiSelectFilterX = multiSelectFilterXFromProps ? (
+ *   <SelectMultipleFilterMobile
+ *     id="SearchFiltersPanel.multiSelectFilterX"
+ *     name="multiSelectFilterX"
+ *     urlParam={MULTI_SELECT_URL_PARAM}
+ *     label={this.props.intl.formatMessage({ id: 'SearchFiltersPanel.multiSelectFilterXLabel' })}
+ *     onSelect={this.handleSelectMultiple}
+ *     options={multiSelectFilterXFromProps}
+ *     initialValues={initialMultiSelectValue}
+ *     twoColumns
+ *   />
+ * ) : null;
+ */
+
 import React, { Component } from 'react';
 import { func, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
@@ -13,30 +44,6 @@ import css from './SearchFiltersPanel.css';
 // Create constants from url params and uset them in FILTERS array and while adding actual filters
 // e.g. const MULTI_SELECT_URL_PARAM = 'pub_filterX';
 const FILTERS = [];
-
-// An example how to render MultiSelectFilter inside render function:
-//
-// const currentQueryParams = this.state.currentQueryParams;
-// const splitQueryParam = queryParam => queryParam ? queryParam.split(',') : [];
-//
-// // initialValue for a select should come either from state.currentQueryParam or urlQueryParam
-// const hascurrentQueryParam = typeof currentQueryParams[MULTI_SELECT_URL_PARAM] !== 'undefined'
-// const initialMultiSelectValue = hascurrentQueryParam
-//   ? splitQueryParam(currentQueryParams[MULTI_SELECT_URL_PARAM])
-//   : splitQueryParam(this.props.urlQueryParams[MULTI_SELECT_URL_PARAM]);
-
-// const multiSelectFilterX = multiSelectFilterXFromProps ? (
-//   <SelectMultipleFilterMobile
-//     id="SearchFiltersPanel.multiSelectFilterX"
-//     name="multiSelectFilterX"
-//     urlParam={MULTI_SELECT_URL_PARAM}
-//     label={this.props.intl.formatMessage({ id: 'SearchFiltersPanel.multiSelectFilterXLabel' })}
-//     onSelect={this.handleSelectMultiple}
-//     options={multiSelectFilterXFromProps}
-//     initialValues={initialMultiSelectValue}
-//     twoColumns
-//   />
-// ) : null;
 
 class SearchFiltersPanelComponent extends Component {
   constructor(props) {
