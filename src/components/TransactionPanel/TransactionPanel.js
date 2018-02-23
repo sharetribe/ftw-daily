@@ -165,10 +165,7 @@ export class TransactionPanelComponent extends Component {
     const firstImage =
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
-    const actionButtonClasses = classNames(css.actionButtons, {
-      [css.actionButtonsWithFormFocused]: this.state.sendMessageFormFocused,
-    });
-
+    const actionButtonClasses = classNames(css.actionButtons);
     const canShowActionButtons = canShowBookButton || canShowSaleButtons;
 
     let actionButtons = null;
@@ -201,11 +198,7 @@ export class TransactionPanelComponent extends Component {
       { name: otherUserDisplayName }
     );
 
-    const sendMessageFormClasses = classNames(css.sendMessageForm, {
-      [css.sendMessageFormFixed]: !canShowActionButtons || this.state.sendMessageFormFocused,
-      [css.sendMessageFormFocusedInMobileSafari]:
-        this.isMobSaf && this.state.sendMessageFormFocused,
-    });
+    const sendMessageFormClasses = classNames(css.sendMessageForm);
 
     const showInfoMessage = listingDeleted || (!listingDeleted && txIsRequested(transaction)); // !!orderInfoMessage;
 

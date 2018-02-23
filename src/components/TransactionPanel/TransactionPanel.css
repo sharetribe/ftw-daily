@@ -276,33 +276,14 @@
 
 .sendMessageForm {
   position: relative;
-  margin-top: 46px;
-  width: 100%;
+  margin: 46px 24px 0 24px;
 
   @media (--viewportMedium) {
-    margin-top: 49px;
+    margin: 49px 24px 0 24px;
+    border-top: 0;
   }
   @media (--viewportLarge) {
-    margin-top: 47px;
-  }
-}
-
-.sendMessageFormFixed {
-  position: fixed;
-  bottom: 0;
-  box-shadow: var(--boxShadowBottomForm);
-
-  @media (--viewportLarge) {
-    position: relative;
-    box-shadow: none;
-  }
-}
-
-.sendMessageFormFocusedInMobileSafari {
-  position: absolute;
-
-  @media (--viewportLarge) {
-    position: relative;
+    margin: 47px 0 0 0;
   }
 }
 
@@ -351,14 +332,6 @@
   @media (--viewportLarge) {
     display: block;
     margin-bottom: 48px;
-  }
-}
-
-.actionButtonsWithFormFocused {
-  display: none;
-
-  @media (--viewportLarge) {
-    display: block;
   }
 }
 
