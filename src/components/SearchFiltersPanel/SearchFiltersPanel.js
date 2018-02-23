@@ -16,7 +16,7 @@
  *   : splitQueryParam(this.props.urlQueryParams[MULTI_SELECT_URL_PARAM]);
  *
  * const multiSelectFilterX = multiSelectFilterXFromProps ? (
- *   <SelectMultipleFilterMobile
+ *   <SelectMultipleFilterPlain
  *     id="SearchFiltersPanel.multiSelectFilterX"
  *     name="multiSelectFilterX"
  *     urlParam={MULTI_SELECT_URL_PARAM}

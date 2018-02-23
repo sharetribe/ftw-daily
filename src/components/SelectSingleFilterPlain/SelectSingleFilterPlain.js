@@ -3,9 +3,9 @@ import { arrayOf, bool, func, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 
-import css from './SelectSingleFilterMobile.css';
+import css from './SelectSingleFilterPlain.css';
 
-class SelectSingleFilterMobile extends Component {
+class SelectSingleFilterPlain extends Component {
   constructor(props) {
     super(props);
     this.state = { isOpen: true };
@@ -57,7 +57,7 @@ class SelectSingleFilterMobile extends Component {
             <span className={labelClass}>{label}</span>
           </button>
           <button className={css.clearButton} onClick={e => this.selectOption(null, e)}>
-            <FormattedMessage id={'SelectSingleFilterMobile.clear'} />
+            <FormattedMessage id={'SelectSingleFilterPlain.clear'} />
           </button>
         </div>
         <div className={optionsContainerClass}>
@@ -92,7 +92,7 @@ class SelectSingleFilterMobile extends Component {
   }
 }
 
-SelectSingleFilterMobile.defaultProps = {
+SelectSingleFilterPlain.defaultProps = {
   rootClassName: null,
   className: null,
   initialValue: null,
@@ -100,7 +100,7 @@ SelectSingleFilterMobile.defaultProps = {
   useBullets: false,
 };
 
-SelectSingleFilterMobile.propTypes = {
+SelectSingleFilterPlain.propTypes = {
   rootClassName: string,
   className: string,
   urlParam: string.isRequired,
@@ -118,4 +118,4 @@ SelectSingleFilterMobile.propTypes = {
   useBullets: bool,
 };
 
-export default SelectSingleFilterMobile;
+export default SelectSingleFilterPlain;

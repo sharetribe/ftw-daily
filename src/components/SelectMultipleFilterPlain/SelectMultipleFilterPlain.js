@@ -3,12 +3,12 @@ import { array, bool, func, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
-import SelectMultipleFilterMobileForm from './SelectMultipleFilterMobileForm';
+import SelectMultipleFilterPlainForm from './SelectMultipleFilterPlainForm';
 import { arrayToFormValues, formValuesToArray } from '../../util/data';
 
-import css from './SelectMultipleFilterMobile.css';
+import css from './SelectMultipleFilterPlain.css';
 
-class SelectMultipleFilterMobileComponent extends Component {
+class SelectMultipleFilterPlainComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { isOpen: true };
@@ -53,7 +53,7 @@ class SelectMultipleFilterMobileComponent extends Component {
 
     const labelText = hasInitialValues
       ? intl.formatMessage(
-          { id: 'SelectMultipleFilterMobileForm.labelSelected' },
+          { id: 'SelectMultipleFilterPlainForm.labelSelected' },
           { labelText: label, count: initialValues.length }
         )
       : label;
@@ -74,11 +74,11 @@ class SelectMultipleFilterMobileComponent extends Component {
             <span className={labelClass}>{labelText}</span>
           </button>
           <button type="button" className={css.clearButton} onClick={this.handleClear}>
-            <FormattedMessage id={'SelectMultipleFilterMobileForm.clear'} />
+            <FormattedMessage id={'SelectMultipleFilterPlainForm.clear'} />
           </button>
         </div>
-        <SelectMultipleFilterMobileForm
-          form={`SelectMultipleFilterMobileForm.${id ? id : name}`}
+        <SelectMultipleFilterPlainForm
+          form={`SelectMultipleFilterPlainForm.${id ? id : name}`}
           className={optionsContainerClass}
           name={name}
           options={options}
@@ -93,7 +93,7 @@ class SelectMultipleFilterMobileComponent extends Component {
   }
 }
 
-SelectMultipleFilterMobileComponent.defaultProps = {
+SelectMultipleFilterPlainComponent.defaultProps = {
   rootClassName: null,
   className: null,
   id: undefined,
@@ -101,7 +101,7 @@ SelectMultipleFilterMobileComponent.defaultProps = {
   twoColumns: false,
 };
 
-SelectMultipleFilterMobileComponent.propTypes = {
+SelectMultipleFilterPlainComponent.propTypes = {
   rootClassName: string,
   className: string,
   id: string,
@@ -117,6 +117,6 @@ SelectMultipleFilterMobileComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const SelectMultipleFilterMobile = injectIntl(SelectMultipleFilterMobileComponent);
+const SelectMultipleFilterPlain = injectIntl(SelectMultipleFilterPlainComponent);
 
-export default SelectMultipleFilterMobile;
+export default SelectMultipleFilterPlain;

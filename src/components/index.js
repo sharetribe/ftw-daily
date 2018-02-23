@@ -111,12 +111,12 @@ export { default as SectionThumbnailLinks } from './SectionThumbnailLinks/Sectio
 export { default as SelectField } from './SelectField/SelectField';
 export { default as SelectMultipleFilter } from './SelectMultipleFilter/SelectMultipleFilter';
 export {
-  default as SelectMultipleFilterMobile,
-} from './SelectMultipleFilterMobile/SelectMultipleFilterMobile';
+  default as SelectMultipleFilterPlain,
+} from './SelectMultipleFilterPlain/SelectMultipleFilterPlain';
 export { default as SelectSingleFilter } from './SelectSingleFilter/SelectSingleFilter';
 export {
-  default as SelectSingleFilterMobile,
-} from './SelectSingleFilterMobile/SelectSingleFilterMobile';
+  default as SelectSingleFilterPlain,
+} from './SelectSingleFilterPlain/SelectSingleFilterPlain';
 export {
   default as StripeBankAccountTokenInputField,
 } from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';

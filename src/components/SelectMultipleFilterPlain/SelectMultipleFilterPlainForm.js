@@ -4,7 +4,7 @@ import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 
 import { FieldGroupCheckbox, Form } from '../../components';
 
-const SelectMultipleFilterMobileFormComponent = props => {
+const SelectMultipleFilterPlainFormComponent = props => {
   const { form, className, name, options, twoColumns } = props;
 
   return (
@@ -19,12 +19,12 @@ const SelectMultipleFilterMobileFormComponent = props => {
   );
 };
 
-SelectMultipleFilterMobileFormComponent.defaultProps = {
+SelectMultipleFilterPlainFormComponent.defaultProps = {
   className: null,
   twoColumns: false,
 };
 
-SelectMultipleFilterMobileFormComponent.propTypes = {
+SelectMultipleFilterPlainFormComponent.propTypes = {
   ...formPropTypes,
   className: string,
   name: string.isRequired,
@@ -37,6 +37,6 @@ SelectMultipleFilterMobileFormComponent.propTypes = {
   twoColumns: bool,
 };
 
-const SelectMultipleFilterMobileForm = reduxForm({})(SelectMultipleFilterMobileFormComponent);
+const SelectMultipleFilterPlainForm = reduxForm({})(SelectMultipleFilterPlainFormComponent);
 
-export default SelectMultipleFilterMobileForm;
+export default SelectMultipleFilterPlainForm;
