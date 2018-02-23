@@ -18,16 +18,17 @@
   border-bottom-width: 0;
 
   /* Avoid text going behind the submit button */
-  padding: 22px 76px 25px 24px;
+  padding: 22px 52px 25px 0;
 
   margin: 0;
-  max-height: 183px;
 
   /* We need to remove horizontal paddings,
    since textarea uses content-box (autosize library fix). */
-  width: calc(100vw - 100px);
+  width: calc(100% - 52px);
 
-  background-color: var(--matterColorLight);
+  border-bottom-width: 2px;
+  border-bottom-color: var(--attentionColor);
+  background-color: transparent;
 
   @media (--viewportMedium) {
     margin: 0;
@@ -35,33 +36,7 @@
   @media (--viewportLarge) {
     padding: 0 0 5px 0;
     margin: 0;
-    max-height: initial;
     width: 100%;
-    border-bottom-width: 2px;
-    border-bottom-color: var(--attentionColor);
-    background-color: transparent;
-  }
-}
-
-.submitButtonMobile {
-  position: absolute;
-  top: -21px;
-  right: 24px;
-  width: 48px;
-  height: 48px;
-  border: none;
-  padding: 0;
-  background-color: var(--successColor);
-  border-radius: 50%;
-  cursor: pointer;
-  outline: none;
-
-  &:disabled {
-    cursor: not-allowed;
-  }
-
-  @media (--viewportLarge) {
-    display: none;
   }
 }
 
@@ -80,54 +55,26 @@
   stroke: var(--matterColor);
 }
 
-.errorMobile {
-  @apply --marketplaceH5FontStyles;
-  font-weight: var(--fontWeightMedium);
-  color: var(--failColor);
-  margin: 0;
-  position: absolute;
-  top: -15px;
-  right: 80px;
-  padding: 5px 16px;
-  background-color: var(--matterColorLight);
-
-  @media (--viewportMedium) {
-    margin: 0;
-    top: -14px;
-  }
-  @media (--viewportLarge) {
-    display: none;
-  }
+.submitContainer {
+  display: flex;
+  flex-direction: row;
 }
 
-.submitContainerDesktop {
-  display: none;
-
-  @media (--viewportLarge) {
-    display: flex;
-    flex-direction: row;
-  }
-}
-
-.errorContainerDesktop {
-  display: none;
+.errorContainer {
+  display: block;
   flex: 1;
   text-align: right;
   padding: 26px 24px 0 0;
-
-  @media (--viewportLarge) {
-    display: block;
-  }
 }
 
-.errorDesktop {
+.error {
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightMedium);
   color: var(--failColor);
   margin: 0;
 }
 
-.submitButtonDesktop {
+.submitButton {
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightMedium);
 
@@ -137,25 +84,11 @@
   min-width: 150px;
   height: 41px;
 
-  @media (--viewportLarge) {
-    display: inline-block;
-    margin: 17px 0 0 0;
-    width: auto;
-  }
+  display: inline-block;
+  margin: 17px 0 0 0;
+  width: auto;
 }
 
-.sendIconMobile {
-  margin: 0 3px 3px 0;
-}
-
-.sendIconMobileInProgress {
-  width: 20px;
-  height: 20px;
-  stroke: var(--matterColorLight);
-  stroke-width: 4px;
-  margin-bottom: 4px;
-}
-
-.sendIconDesktop {
+.sendIcon {
   margin: -3px 5px 0 0;
 }
