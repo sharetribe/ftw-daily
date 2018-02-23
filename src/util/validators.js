@@ -18,6 +18,10 @@ export const required = message => value => {
   return value ? VALID : message;
 };
 
+export const requiredBoolean = message => value => {
+  return typeof value === 'boolean' ? VALID : message;
+};
+
 export const requiredAndNonEmptyString = message => value => {
   return value && typeof value === 'string' && value.trim() ? VALID : message;
 };

@@ -6,6 +6,7 @@ import * as BookingBreakdown from './components/BookingBreakdown/BookingBreakdow
 import * as Button from './components/Button/Button.example';
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
 import * as FieldBirthdayInput from './components/FieldBirthdayInput/FieldBirthdayInput.example';
+import * as FieldBoolean from './components/FieldBoolean/FieldBoolean.example';
 import * as FieldCheckbox from './components/FieldCheckbox/FieldCheckbox.example';
 import * as FieldCurrencyInput from './components/FieldCurrencyInput/FieldCurrencyInput.example';
 import * as FieldDateInput from './components/FieldDateInput/FieldDateInput.example';
@@ -94,6 +95,7 @@ export {
   EnquiryForm,
   ExpandingTextarea,
   FieldBirthdayInput,
+  FieldBoolean,
   FieldCheckbox,
   FieldCurrencyInput,
   FieldDateInput,
