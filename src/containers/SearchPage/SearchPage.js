@@ -37,8 +37,8 @@ import css from './SearchPage.css';
 // Current design has max 3 columns 12 is divisible by 2 and 3
 // So, there's enough cards to fill all columns on full pagination pages
 const RESULT_PAGE_SIZE = 12;
-const SHARETRIBE_API_MAX_PAGE_SIZE = 100;
-const MAX_SEARCH_RESULT_PAGES_ON_MAP = 5; // 100 * 5 = 500 listings are shown on a map.
+const MAX_SEARCH_RESULT_PAGE_SIZE_ON_MAP = 80; // max page size is 100 in API
+const MAX_SEARCH_RESULT_PAGES_ON_MAP = 1; // page size * n pages = number of listings shown on a map.
 const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
 const BOUNDS_FIXED_PRECISION = 8;
@@ -186,7 +186,7 @@ export class SearchPageComponent extends Component {
       latlngBounds: ['bounds'],
     });
 
-    const perPage = SHARETRIBE_API_MAX_PAGE_SIZE;
+    const perPage = MAX_SEARCH_RESULT_PAGE_SIZE_ON_MAP;
     const page = 1;
     const { address, country, ...rest } = searchInURL;
     const searchParamsForMapResults = { ...rest, include: ['images'], page, perPage };
