@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import SelectMultipleFilterMobile from './SelectMultipleFilterMobile';
+import SelectMultipleFilterPlain from './SelectMultipleFilterPlain';
 import { stringify, parse } from '../../util/urlHelpers';
 
 const URL_PARAM = 'pub_amenities';
@@ -53,7 +53,7 @@ const AmenitiesFilterComponent = props => {
   const initialValues = !!amenities ? amenities.split(',') : [];
 
   return (
-    <SelectMultipleFilterMobile
+    <SelectMultipleFilterPlain
       name="amenities"
       urlParam={URL_PARAM}
       label="Amenities"
