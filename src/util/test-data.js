@@ -23,7 +23,7 @@ export const createBooking = (id, attributes = {}) => ({
 });
 
 // Create a user that conforms to the util/types user schema
-export const createUser = id => ({
+export const createUser = (id, attributes = {}) => ({
   id: new UUID(id),
   type: 'user',
   attributes: {
@@ -32,11 +32,12 @@ export const createUser = id => ({
       displayName: `${id} display name`,
       abbreviatedName: 'TT',
     },
+    ...attributes,
   },
 });
 
 // Create a user that conforms to the util/types currentUser schema
-export const createCurrentUser = id => ({
+export const createCurrentUser = (id, attributes = {}) => ({
   id: new UUID(id),
   type: 'currentUser',
   attributes: {
@@ -50,6 +51,7 @@ export const createCurrentUser = id => ({
       abbreviatedName: `${id} abbreviated name`,
     },
     stripeConnected: true,
+    ...attributes,
   },
 });
 

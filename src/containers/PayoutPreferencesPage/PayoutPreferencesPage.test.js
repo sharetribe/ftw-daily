@@ -1,24 +1,31 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
+import { fakeIntl, createCurrentUser } from '../../util/test-data';
 import { PayoutPreferencesPageComponent } from './PayoutPreferencesPage';
 
-const noop = () => null;
-
 describe('PayoutPreferencesPage', () => {
-  it('matches snapshot', () => {
+  it('matches snapshot with Stripe not connected', () => {
+    const currentUser = createCurrentUser('stripe-not-connected', {
+      stripeConnected: false,
+    });
+    expect(currentUser.attributes.stripeConnected).toEqual(false);
     const tree = renderShallow(
       <PayoutPreferencesPageComponent
-        params={{ displayName: 'my-shop' }}
-        history={{ push: noop }}
-        location={{ search: '' }}
+        currentUser={currentUser}
         scrollingDisabled={false}
-        authInProgress={false}
-        currentUserHasListings={false}
-        isAuthenticated={false}
-        onLogout={noop}
-        onManageDisableScrolling={noop}
-        sendVerificationEmailInProgress={false}
-        onResendVerificationEmail={noop}
+        intl={fakeIntl}
+      />
+    );
+    expect(tree).toMatchSnapshot();
+  });
+  it('matches snapshot with Stripe connected', () => {
+    const currentUser = createCurrentUser('stripe-connected');
+    expect(currentUser.attributes.stripeConnected).toEqual(true);
+    const tree = renderShallow(
+      <PayoutPreferencesPageComponent
+        currentUser={currentUser}
+        scrollingDisabled={false}
+        intl={fakeIntl}
       />
     );
     expect(tree).toMatchSnapshot();
