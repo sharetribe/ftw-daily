@@ -20,6 +20,9 @@
 }
 
 .anchor {
+  display: block;
+  overflow: hidden;
+
   &:hover {
     text-decoration: none;
   }
