@@ -75,7 +75,7 @@ describe('Application', () => {
       '/account': loginPath,
       '/account/contact-details': loginPath,
       '/account/change-password': loginPath,
-      '/account/payout-preferences': loginPath,
+      '/account/payments': loginPath,
       '/verify-email': loginPath,
     };
     forEach(urlRedirects, (redirectPath, url) => {

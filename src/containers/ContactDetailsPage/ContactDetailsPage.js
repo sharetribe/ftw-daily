@@ -52,6 +52,13 @@ export const ContactDetailsPageComponent = props => {
         name: 'PasswordChangePage',
       },
     },
+    {
+      text: <FormattedMessage id="ContactDetailsPage.paymentsTabTitle" />,
+      selected: false,
+      linkProps: {
+        name: 'PayoutPreferencesPage',
+      },
+    },
   ];
 
   const user = ensureCurrentUser(currentUser);

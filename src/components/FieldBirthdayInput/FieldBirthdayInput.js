@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { func, instanceOf, object, node, string, bool } from 'prop-types';
 import { Field } from 'redux-form';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
@@ -130,6 +130,7 @@ class BirthdayInputComponent extends Component {
       dateLabel,
       monthLabel,
       yearLabel,
+      disabled,
       intl,
     } = this.props;
 
@@ -148,6 +149,7 @@ class BirthdayInputComponent extends Component {
         <div className={css.selectWrapper}>
           {dateLabel}
           <select
+            disabled={disabled}
             id={dateId}
             value={selectedValue(this.state.selected.day)}
             className={classNames(css.select, selectClassName, {
@@ -168,6 +170,7 @@ class BirthdayInputComponent extends Component {
         <div className={css.selectWrapper}>
           {monthLabel}
           <select
+            disabled={disabled}
             id={monthId}
             value={selectedValue(this.state.selected.month)}
             className={classNames(css.select, selectClassName, {
@@ -188,6 +191,7 @@ class BirthdayInputComponent extends Component {
         <div className={css.selectWrapper}>
           {yearLabel}
           <select
+            disabled={disabled}
             id={yearId}
             value={selectedValue(this.state.selected.year)}
             className={classNames(css.select, selectClassName, {
@@ -216,9 +220,8 @@ BirthdayInputComponent.defaultProps = {
   monthLabel: null,
   yearLabel: null,
   value: null,
+  disabled: false,
 };
-
-const { func, instanceOf, object, node, string } = PropTypes;
 
 BirthdayInputComponent.propTypes = {
   selectClassName: string,
@@ -232,6 +235,7 @@ BirthdayInputComponent.propTypes = {
   onChange: func.isRequired,
   onFocus: func.isRequired,
   onBlur: func.isRequired,
+  disabled: bool,
 
   // from injectIntl
   intl: intlShape.isRequired,
@@ -240,7 +244,17 @@ BirthdayInputComponent.propTypes = {
 const BirthdayInput = injectIntl(BirthdayInputComponent);
 
 const FieldBirthdayInputComponent = props => {
-  const { rootClassName, className, id, label, labelForMonth, labelForYear, input, meta } = props;
+  const {
+    rootClassName,
+    className,
+    id,
+    label,
+    labelForMonth,
+    labelForYear,
+    disabled,
+    input,
+    meta,
+  } = props;
   const { valid, invalid, touched, error } = meta;
 
   // Error message and input error styles are only shown if the
@@ -267,6 +281,7 @@ const FieldBirthdayInputComponent = props => {
     dateLabel,
     monthLabel,
     yearLabel,
+    disabled,
     ...input,
   };
   const classes = classNames(rootClassName || css.fieldRoot, className);
@@ -284,6 +299,7 @@ FieldBirthdayInputComponent.defaultProps = {
   label: null,
   labelForMonth: null,
   labelForYear: null,
+  disabled: false,
 };
 
 FieldBirthdayInputComponent.propTypes = {
@@ -293,6 +309,7 @@ FieldBirthdayInputComponent.propTypes = {
   label: string,
   labelForMonth: string,
   labelForYear: string,
+  disabled: bool,
   input: object.isRequired,
   meta: object.isRequired,
 };

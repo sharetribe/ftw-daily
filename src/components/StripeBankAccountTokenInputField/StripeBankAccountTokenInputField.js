@@ -223,7 +223,15 @@ class TokenInputFieldComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className, country, formName, meta: formMeta, intl } = this.props;
+    const {
+      rootClassName,
+      className,
+      country,
+      formName,
+      meta: formMeta,
+      intl,
+      disabled,
+    } = this.props;
 
     if (!supportedCountries.includes(country)) {
       return (
@@ -258,6 +266,7 @@ class TokenInputFieldComponent extends Component {
         {inputConfiguration.map(inputType => {
           return (
             <StripeBankAccountRequiredInput
+              disabled={disabled}
               key={inputType}
               inputType={inputType}
               formName={formName}
@@ -280,7 +289,11 @@ class TokenInputFieldComponent extends Component {
   }
 }
 
-TokenInputFieldComponent.defaultProps = { rootClassName: null, className: null };
+TokenInputFieldComponent.defaultProps = {
+  rootClassName: null,
+  className: null,
+  disabled: false,
+};
 
 const { string, shape, func, bool } = PropTypes;
 
@@ -290,6 +303,7 @@ TokenInputFieldComponent.propTypes = {
   country: string.isRequired,
   currency: string.isRequired,
   formName: string.isRequired,
+  disabled: bool,
 
   input: shape({
     onChange: func.isRequired,
