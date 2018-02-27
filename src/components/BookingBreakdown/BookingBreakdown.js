@@ -13,6 +13,7 @@ import LineItemBookingPeriod from './LineItemBookingPeriod';
 import LineItemUnitsMaybe from './LineItemUnitsMaybe';
 import LineItemSubTotalMaybe from './LineItemSubTotalMaybe';
 import LineItemProviderCommissionMaybe from './LineItemProviderCommissionMaybe';
+import LineItemCustomerCommissionMaybe from './LineItemCustomerCommissionMaybe';
 import LineItemRefundMaybe from './LineItemRefundMaybe';
 import LineItemTotalPrice from './LineItemTotalPrice';
 import css from './BookingBreakdown.css';
@@ -21,6 +22,7 @@ export const BookingBreakdownComponent = props => {
   const { rootClassName, className, userRole, unitType, transaction, booking, intl } = props;
 
   const isProvider = userRole === 'provider';
+  const isCustomer = userRole === 'customer';
   const classes = classNames(rootClassName || css.root, className);
 
   return (
@@ -38,6 +40,11 @@ export const BookingBreakdownComponent = props => {
       <LineItemProviderCommissionMaybe
         transaction={transaction}
         isProvider={isProvider}
+        intl={intl}
+      />
+      <LineItemCustomerCommissionMaybe
+        transaction={transaction}
+        isCustomer={isCustomer}
         intl={intl}
       />
       <LineItemRefundMaybe transaction={transaction} unitType={unitType} intl={intl} />
