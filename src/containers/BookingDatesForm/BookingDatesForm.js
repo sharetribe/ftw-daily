@@ -7,6 +7,7 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import moment from 'moment';
 import Decimal from 'decimal.js';
+import { isNumber } from 'lodash';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { required, bookingDatesRequired } from '../../util/validators';
 import { nightsBetween, daysBetween, START_DATE, END_DATE } from '../../util/dates';
@@ -36,6 +37,9 @@ const estimatedUnitsTotal = (unitPrice, unitCount) => {
 };
 
 const estimatedCustomerCommission = (unitsTotal, percentage) => {
+  if (!isNumber(percentage)) {
+    return null;
+  }
   const numericTotal = convertMoneyToNumber(unitsTotal);
   // Divide the commission percentage with 100 to get the
   // commission multiplier and use precision of 2 when
@@ -94,10 +98,7 @@ const estimatedTransaction = (
     reversal: false,
   };
 
-  const commission = isCommission
-    ? estimatedCustomerCommission(unitsTotal, customerCommissionPercentage)
-    : null;
-
+  const commission = estimatedCustomerCommission(unitsTotal, customerCommissionPercentage);
   const totalPrice = isCommission ? estimatedPayInTotal(unitsTotal, commission) : unitsTotal;
 
   const lineItems = isCommission
