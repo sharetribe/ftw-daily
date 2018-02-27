@@ -63,8 +63,17 @@ export const PayoutPreferencesPageComponent = props => {
   ];
 
   const title = intl.formatMessage({ id: 'PayoutPreferencesPage.title' });
-
   const formDisabled = !currentUserLoaded || stripeConnected || payoutDetailsSaved;
+
+  let message = <FormattedMessage id="PayoutPreferencesPage.loadingData" />;
+
+  if (currentUserLoaded && payoutDetailsSaved) {
+    message = <FormattedMessage id="PayoutPreferencesPage.payoutDetailsSaved" />;
+  } else if (currentUserLoaded && stripeConnected) {
+    message = <FormattedMessage id="PayoutPreferencesPage.stripeAlreadyConnected" />;
+  } else if (currentUserLoaded && !stripeConnected) {
+    message = <FormattedMessage id="PayoutPreferencesPage.stripeNotConnected" />;
+  }
 
   return (
     <Page title={title} scrollingDisabled={scrollingDisabled}>
@@ -83,6 +92,7 @@ export const PayoutPreferencesPageComponent = props => {
             <h1 className={css.title}>
               <FormattedMessage id="PayoutPreferencesPage.heading" />
             </h1>
+            <p>{message}</p>
             <PayoutDetailsForm
               disabled={formDisabled}
               inProgress={fetchInProgress}
