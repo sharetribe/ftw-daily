@@ -3,6 +3,10 @@
 .root {
 }
 
+.disabled {
+  opacity: 0.5;
+}
+
 .sectionContainer {
   margin-bottom: 35px;
 

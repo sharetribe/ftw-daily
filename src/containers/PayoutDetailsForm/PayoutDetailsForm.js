@@ -50,6 +50,7 @@ const PayoutDetailsFormComponent = props => {
     form,
     disabled,
     inProgress,
+    ready,
     handleSubmit,
     pristine,
     submitting,
@@ -134,6 +135,7 @@ const PayoutDetailsFormComponent = props => {
   const addressSection = showAddressFields ? (
     <div>
       <TextInputField
+        disabled={disabled}
         className={css.field}
         type="text"
         name="streetAddress"
@@ -145,6 +147,7 @@ const PayoutDetailsFormComponent = props => {
       />
       <div className={css.formRow}>
         <TextInputField
+          disabled={disabled}
           className={css.postalCode}
           type="text"
           name="postalCode"
@@ -155,6 +158,7 @@ const PayoutDetailsFormComponent = props => {
           clearOnUnmount
         />
         <TextInputField
+          disabled={disabled}
           className={css.city}
           type="text"
           name="city"
@@ -179,6 +183,7 @@ const PayoutDetailsFormComponent = props => {
         <FormattedMessage id="PayoutDetailsForm.bankDetails" />
       </h3>
       <StripeBankAccountTokenInputField
+        disabled={disabled}
         name="bankAccountToken"
         formName={form}
         country={country}
@@ -188,8 +193,9 @@ const PayoutDetailsFormComponent = props => {
     </div>
   ) : null;
 
-  const classes = classNames(css.root, className);
-  const submitReady = false;
+  const classes = classNames(css.root, className, {
+    [css.disabled]: disabled,
+  });
   const submitInProgress = submitting || inProgress;
   const submitDisabled = pristine || invalid || disabled || submitInProgress;
 
@@ -217,6 +223,7 @@ const PayoutDetailsFormComponent = props => {
         </h3>
         <div className={css.formRow}>
           <TextInputField
+            disabled={disabled}
             className={css.firstName}
             type="text"
             name="firstName"
@@ -226,6 +233,7 @@ const PayoutDetailsFormComponent = props => {
             validate={firstNameRequired}
           />
           <TextInputField
+            disabled={disabled}
             className={css.lastName}
             type="text"
             name="lastName"
@@ -236,6 +244,7 @@ const PayoutDetailsFormComponent = props => {
           />
         </div>
         <FieldBirthdayInput
+          disabled={disabled}
           className={css.field}
           id={birthdayId}
           name="birthDate"
@@ -252,6 +261,7 @@ const PayoutDetailsFormComponent = props => {
           <FormattedMessage id="PayoutDetailsForm.addressTitle" />
         </h3>
         <SelectField
+          disabled={disabled}
           className={css.selectCountry}
           name="country"
           id={`${form}.country`}
@@ -274,7 +284,7 @@ const PayoutDetailsFormComponent = props => {
         type="submit"
         inProgress={submitInProgress}
         disabled={submitDisabled}
-        ready={submitReady}
+        ready={ready}
       >
         <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
       </Button>
@@ -288,6 +298,7 @@ PayoutDetailsFormComponent.defaultProps = {
   createStripeAccountError: null,
   disabled: false,
   inProgress: false,
+  ready: false,
 };
 
 const { bool, object, string } = PropTypes;
@@ -298,6 +309,7 @@ PayoutDetailsFormComponent.propTypes = {
   createStripeAccountError: object,
   disabled: bool,
   inProgress: bool,
+  ready: bool,
 
   // from mapStateToProps
   country: string,
