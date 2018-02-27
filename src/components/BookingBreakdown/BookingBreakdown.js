@@ -12,7 +12,7 @@ import LineItemUnitPrice from './LineItemUnitPrice';
 import LineItemBookingPeriod from './LineItemBookingPeriod';
 import LineItemUnitsMaybe from './LineItemUnitsMaybe';
 import LineItemSubTotalMaybe from './LineItemSubTotalMaybe';
-import LineItemCommissionMaybe from './LineItemCommissionMaybe';
+import LineItemProviderCommissionMaybe from './LineItemProviderCommissionMaybe';
 import LineItemRefundMaybe from './LineItemRefundMaybe';
 import LineItemTotalPrice from './LineItemTotalPrice';
 import css from './BookingBreakdown.css';
@@ -35,7 +35,11 @@ export const BookingBreakdownComponent = props => {
         isProvider={isProvider}
         intl={intl}
       />
-      <LineItemCommissionMaybe transaction={transaction} isProvider={isProvider} intl={intl} />
+      <LineItemProviderCommissionMaybe
+        transaction={transaction}
+        isProvider={isProvider}
+        intl={intl}
+      />
       <LineItemRefundMaybe transaction={transaction} unitType={unitType} intl={intl} />
 
       <hr className={css.totalDivider} />

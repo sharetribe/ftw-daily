@@ -19,7 +19,7 @@ const isValidCommission = commissionLineItem => {
   );
 };
 
-const LineItemCommissionMaybe = props => {
+const LineItemProviderCommissionMaybe = props => {
   const { transaction, isProvider, intl } = props;
 
   const providerCommissionLineItem = transaction.attributes.lineItems.find(
@@ -55,10 +55,10 @@ const LineItemCommissionMaybe = props => {
   return commissionItem;
 };
 
-LineItemCommissionMaybe.propTypes = {
+LineItemProviderCommissionMaybe.propTypes = {
   transaction: propTypes.transaction.isRequired,
   isProvider: bool.isRequired,
   intl: intlShape.isRequired,
 };
 
-export default LineItemCommissionMaybe;
+export default LineItemProviderCommissionMaybe;
