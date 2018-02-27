@@ -719,7 +719,7 @@ ListingPageComponent.defaultProps = {
   reviews: [],
   fetchReviewsError: null,
   sendEnquiryError: null,
-  customerCommissionPercentage: config.customerCommissionPercentage,
+  customerCommissionPercentage: config.custom.customerCommissionPercentage,
 };
 
 ListingPageComponent.propTypes = {

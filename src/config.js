@@ -271,14 +271,6 @@ const coordinates = {
   },
 };
 
-// Marketplace fee that a customer pays on top of the listing price.
-// Used for estimated booking breakdown price calculations.
-//
-// For example, a customer commission of 10%:
-//
-// const customerCommissionPercentage = 10;
-const customerCommissionPercentage = null;
-
 // NOTE: only expose configuration that should be visible in the
 // client side, don't add any server secrets in this file.
 const config = {
@@ -307,7 +299,6 @@ const config = {
   usingSSL,
   coordinates,
   custom,
-  customerCommissionPercentage,
 };
 
 export default config;
