@@ -4,11 +4,14 @@ import { fetchCurrentUser, createStripeAccount } from '../../ducks/user.duck';
 // ================ Action types ================ //
 
 export const SET_INITIAL_STATE = 'app/PayoutPreferencesPage/SET_INITIAL_STATE';
+export const SAVE_PAYOUT_DETAILS_REQUEST = 'app/PayoutPreferencesPage/SAVE_PAYOUT_DETAILS_REQUEST';
 export const SAVE_PAYOUT_DETAILS_SUCCESS = 'app/PayoutPreferencesPage/SAVE_PAYOUT_DETAILS_SUCCESS';
+export const SAVE_PAYOUT_DETAILS_ERROR = 'app/PayoutPreferencesPage/SAVE_PAYOUT_DETAILS_ERROR';
 
 // ================ Reducer ================ //
 
 const initialState = {
+  payoutDetailsSaveInProgress: false,
   payoutDetailsSaved: false,
 };
 
@@ -17,8 +20,14 @@ export default function payoutPreferencesPageReducer(state = initialState, actio
   switch (type) {
     case SET_INITIAL_STATE:
       return initialState;
+
+    case SAVE_PAYOUT_DETAILS_REQUEST:
+      return { ...state, payoutDetailsSaveInProgress: true };
+    case SAVE_PAYOUT_DETAILS_ERROR:
+      return { ...state, payoutDetailsSaveInProgress: false };
     case SAVE_PAYOUT_DETAILS_SUCCESS:
-      return { ...state, payoutDetailsSaved: true };
+      return { ...state, payoutDetailsSaveInProgress: false, payoutDetailsSaved: true };
+
     default:
       return state;
   }
@@ -30,6 +39,12 @@ export const setInitialState = () => ({
   type: SET_INITIAL_STATE,
 });
 
+export const savePayoutDetailsRequest = () => ({
+  type: SAVE_PAYOUT_DETAILS_REQUEST,
+});
+export const savePayoutDetailsError = () => ({
+  type: SAVE_PAYOUT_DETAILS_ERROR,
+});
 export const savePayoutDetailsSuccess = () => ({
   type: SAVE_PAYOUT_DETAILS_SUCCESS,
 });
@@ -37,6 +52,7 @@ export const savePayoutDetailsSuccess = () => ({
 // ================ Thunks ================ //
 
 export const savePayoutDetails = values => (dispatch, getState, sdk) => {
+  dispatch(savePayoutDetailsRequest());
   const {
     firstName,
     lastName,
@@ -60,7 +76,9 @@ export const savePayoutDetails = values => (dispatch, getState, sdk) => {
     bankAccountToken,
     address: omitBy(address, isUndefined),
   };
-  return dispatch(createStripeAccount(params)).then(() => dispatch(savePayoutDetailsSuccess()));
+  return dispatch(createStripeAccount(params))
+    .then(() => dispatch(savePayoutDetailsSuccess()))
+    .catch(() => dispatch(savePayoutDetailsError()));
 };
 
 export const loadData = () => (dispatch, getState, sdk) => {
