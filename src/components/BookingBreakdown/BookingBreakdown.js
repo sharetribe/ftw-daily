@@ -34,7 +34,7 @@ export const BookingBreakdownComponent = props => {
       <LineItemSubTotalMaybe
         transaction={transaction}
         unitType={unitType}
-        isProvider={isProvider}
+        userRole={userRole}
         intl={intl}
       />
       <LineItemProviderCommissionMaybe
