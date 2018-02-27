@@ -78,14 +78,6 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe connected 1`] = `
             values={Object {}}
           />
         </p>
-        <Connect(ReduxForm)
-          createStripeAccountError={null}
-          disabled={true}
-          inProgress={false}
-          onChange={[Function]}
-          onSubmit={[Function]}
-          ready={false}
-        />
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
@@ -183,6 +175,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
           onChange={[Function]}
           onSubmit={[Function]}
           ready={false}
+          submitButtonText="PayoutPreferencesPage.submitButtonText"
         />
       </div>
     </LayoutWrapperMain>
@@ -281,6 +274,7 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
           onChange={[Function]}
           onSubmit={[Function]}
           ready={true}
+          submitButtonText="PayoutPreferencesPage.submitButtonText"
         />
       </div>
     </LayoutWrapperMain>

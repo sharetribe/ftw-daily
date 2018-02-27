@@ -51,6 +51,7 @@ const PayoutDetailsFormComponent = props => {
     disabled,
     inProgress,
     ready,
+    submitButtonText,
     handleSubmit,
     pristine,
     submitting,
@@ -286,7 +287,11 @@ const PayoutDetailsFormComponent = props => {
         disabled={submitDisabled}
         ready={ready}
       >
-        <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
+        {submitButtonText ? (
+          submitButtonText
+        ) : (
+          <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
+        )}
       </Button>
     </Form>
   );
@@ -299,6 +304,7 @@ PayoutDetailsFormComponent.defaultProps = {
   disabled: false,
   inProgress: false,
   ready: false,
+  submitButtonText: null,
 };
 
 const { bool, object, string } = PropTypes;
@@ -310,6 +316,7 @@ PayoutDetailsFormComponent.propTypes = {
   disabled: bool,
   inProgress: bool,
   ready: bool,
+  submitButtonText: string,
 
   // from mapStateToProps
   country: string,

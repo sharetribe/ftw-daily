@@ -26,10 +26,10 @@ export const PayoutPreferencesPageComponent = props => {
   const {
     currentUser,
     scrollingDisabled,
-    fetchInProgress,
     createStripeAccountError,
     onPayoutDetailsFormChange,
     onPayoutDetailsFormSubmit,
+    payoutDetailsSaveInProgress,
     payoutDetailsSaved,
     intl,
   } = props;
@@ -75,6 +75,20 @@ export const PayoutPreferencesPageComponent = props => {
     message = <FormattedMessage id="PayoutPreferencesPage.stripeNotConnected" />;
   }
 
+  const showForm =
+    currentUserLoaded && (payoutDetailsSaveInProgress || payoutDetailsSaved || !stripeConnected);
+  const form = showForm ? (
+    <PayoutDetailsForm
+      disabled={formDisabled}
+      inProgress={payoutDetailsSaveInProgress}
+      ready={payoutDetailsSaved}
+      submitButtonText={intl.formatMessage({ id: 'PayoutPreferencesPage.submitButtonText' })}
+      createStripeAccountError={createStripeAccountError}
+      onChange={onPayoutDetailsFormChange}
+      onSubmit={onPayoutDetailsFormSubmit}
+    />
+  ) : null;
+
   return (
     <Page title={title} scrollingDisabled={scrollingDisabled}>
       <LayoutSideNavigation>
@@ -93,14 +107,7 @@ export const PayoutPreferencesPageComponent = props => {
               <FormattedMessage id="PayoutPreferencesPage.heading" />
             </h1>
             <p>{message}</p>
-            <PayoutDetailsForm
-              disabled={formDisabled}
-              inProgress={fetchInProgress}
-              ready={payoutDetailsSaved}
-              createStripeAccountError={createStripeAccountError}
-              onChange={onPayoutDetailsFormChange}
-              onSubmit={onPayoutDetailsFormSubmit}
-            />
+            {form}
           </div>
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
@@ -119,7 +126,7 @@ PayoutPreferencesPageComponent.defaultProps = {
 PayoutPreferencesPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   scrollingDisabled: bool.isRequired,
-  fetchInProgress: bool.isRequired,
+  payoutDetailsSaveInProgress: bool.isRequired,
   createStripeAccountError: propTypes.error,
   payoutDetailsSaved: bool.isRequired,
 
@@ -131,13 +138,12 @@ PayoutPreferencesPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { createStripeAccountInProgress, createStripeAccountError, currentUser } = state.user;
-  const fetchInProgress = createStripeAccountInProgress;
-  const { payoutDetailsSaved } = state.PayoutPreferencesPage;
+  const { createStripeAccountError, currentUser } = state.user;
+  const { payoutDetailsSaveInProgress, payoutDetailsSaved } = state.PayoutPreferencesPage;
   return {
     currentUser,
-    fetchInProgress,
     createStripeAccountError,
+    payoutDetailsSaveInProgress,
     payoutDetailsSaved,
     scrollingDisabled: isScrollingDisabled(state),
   };

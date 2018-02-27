@@ -15,7 +15,7 @@ describe('PayoutPreferencesPage', () => {
       <PayoutPreferencesPageComponent
         currentUser={currentUser}
         scrollingDisabled={false}
-        fetchInProgress={false}
+        payoutDetailsSaveInProgress={false}
         payoutDetailsSaved={false}
         onPayoutDetailsFormChange={noop}
         onPayoutDetailsFormSubmit={noop}
@@ -31,7 +31,7 @@ describe('PayoutPreferencesPage', () => {
       <PayoutPreferencesPageComponent
         currentUser={currentUser}
         scrollingDisabled={false}
-        fetchInProgress={false}
+        payoutDetailsSaveInProgress={false}
         payoutDetailsSaved={false}
         onPayoutDetailsFormChange={noop}
         onPayoutDetailsFormSubmit={noop}
@@ -47,7 +47,7 @@ describe('PayoutPreferencesPage', () => {
       <PayoutPreferencesPageComponent
         currentUser={currentUser}
         scrollingDisabled={false}
-        fetchInProgress={false}
+        payoutDetailsSaveInProgress={false}
         payoutDetailsSaved={true}
         onPayoutDetailsFormChange={noop}
         onPayoutDetailsFormSubmit={noop}
