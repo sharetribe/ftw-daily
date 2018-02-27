@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { instanceOf, shape, string, bool, number } from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
@@ -26,7 +26,7 @@ import css from './BookingDatesForm.css';
 
 const { Money, UUID } = sdkTypes;
 
-const estimatedTotalPrice = (unitPrice, unitCount) => {
+const estimatedUnitsTotal = (unitPrice, unitCount) => {
   const numericPrice = convertMoneyToNumber(unitPrice);
   const numericTotalPrice = new Decimal(numericPrice).times(unitCount).toNumber();
   return new Money(
@@ -35,10 +35,44 @@ const estimatedTotalPrice = (unitPrice, unitCount) => {
   );
 };
 
+const estimatedCustomerCommission = (unitsTotal, percentage) => {
+  const numericTotal = convertMoneyToNumber(unitsTotal);
+  // Divide the commission percentage with 100 to get the
+  // commission multiplier and use precision of 2 when
+  // rounding the sub units.
+  const numericCommission = new Decimal(percentage)
+    .div(100)
+    .times(numericTotal)
+    .toDP(2)
+    .toNumber();
+
+  return new Money(
+    convertUnitToSubUnit(numericCommission, unitDivisor(unitsTotal.currency)),
+    unitsTotal.currency
+  );
+};
+
+const estimatedPayInTotal = (unitsTotal, customerCommission) => {
+  const numericTotal = convertMoneyToNumber(unitsTotal);
+  const numericCommission = convertMoneyToNumber(customerCommission);
+  const numericPayIn = new Decimal(numericTotal).plus(numericCommission).toNumber();
+  return new Money(
+    convertUnitToSubUnit(numericPayIn, unitDivisor(unitsTotal.currency)),
+    unitsTotal.currency
+  );
+};
+
 // When we cannot speculatively initiate a transaction (i.e. logged
 // out), we must estimate the booking breakdown. This function creates
 // an estimated transaction object for that use case.
-const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, quantity) => {
+const estimatedTransaction = (
+  unitType,
+  bookingStart,
+  bookingEnd,
+  unitPrice,
+  quantity,
+  customerCommissionPercentage
+) => {
   const now = new Date();
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
@@ -47,7 +81,37 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
     ? nightsBetween(bookingStart, bookingEnd)
     : isDaily ? daysBetween(bookingStart, bookingEnd) : quantity;
 
-  const totalPrice = estimatedTotalPrice(unitPrice, unitCount);
+  const isCommission = !!customerCommissionPercentage;
+
+  const unitsTotal = estimatedUnitsTotal(unitPrice, unitCount);
+
+  const unitLineItem = {
+    code: unitType,
+    includeFor: ['customer', 'provider'],
+    unitPrice: unitPrice,
+    quantity: new Decimal(unitCount),
+    lineTotal: unitsTotal,
+    reversal: false,
+  };
+
+  const commission = isCommission
+    ? estimatedCustomerCommission(unitsTotal, customerCommissionPercentage)
+    : null;
+
+  const totalPrice = isCommission ? estimatedPayInTotal(unitsTotal, commission) : unitsTotal;
+
+  const lineItems = isCommission
+    ? [
+        unitLineItem,
+        {
+          code: 'line-item/customer-commission',
+          includeFor: ['customer'],
+          unitPrice: unitsTotal,
+          lineTotal: commission,
+          reversal: false,
+        },
+      ]
+    : [unitLineItem];
 
   return {
     id: new UUID('estimated-transaction'),
@@ -58,16 +122,7 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
       lastTransition: TRANSITION_REQUEST,
       payinTotal: totalPrice,
       payoutTotal: totalPrice,
-      lineItems: [
-        {
-          code: unitType,
-          includeFor: ['customer', 'provider'],
-          unitPrice: unitPrice,
-          quantity: new Decimal(unitCount),
-          lineTotal: totalPrice,
-          reversal: false,
-        },
-      ],
+      lineItems,
       transitions: [
         {
           at: now,
@@ -87,7 +142,14 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
   };
 };
 
-const estimatedBreakdown = (unitType, bookingStart, bookingEnd, unitPrice, quantity) => {
+const estimatedBreakdown = (
+  unitType,
+  bookingStart,
+  bookingEnd,
+  unitPrice,
+  quantity,
+  customerCommissionPercentage
+) => {
   const isUnits = unitType === LINE_ITEM_UNITS;
   const quantityIfUsingUnits = !isUnits || Number.isInteger(quantity);
   const canEstimatePrice = bookingStart && bookingEnd && unitPrice && quantityIfUsingUnits;
@@ -95,7 +157,14 @@ const estimatedBreakdown = (unitType, bookingStart, bookingEnd, unitPrice, quant
     return null;
   }
 
-  const tx = estimatedTransaction(unitType, bookingStart, bookingEnd, unitPrice, quantity);
+  const tx = estimatedTransaction(
+    unitType,
+    bookingStart,
+    bookingEnd,
+    unitPrice,
+    quantity,
+    customerCommissionPercentage
+  );
 
   return (
     <BookingBreakdown
@@ -152,6 +221,7 @@ export class BookingDatesFormComponent extends Component {
       startDatePlaceholder,
       endDatePlaceholder,
       isOwnListing,
+      customerCommissionPercentage,
     } = this.props;
 
     const { startDate, endDate } = bookingDates;
@@ -191,7 +261,14 @@ export class BookingDatesFormComponent extends Component {
         <h3 className={css.priceBreakdownTitle}>
           <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
         </h3>
-        {estimatedBreakdown(unitType, startDate, endDate, unitPrice)}
+        {estimatedBreakdown(
+          unitType,
+          startDate,
+          endDate,
+          unitPrice,
+          null,
+          customerCommissionPercentage
+        )}
       </div>
     ) : null;
 
@@ -259,9 +336,8 @@ BookingDatesFormComponent.defaultProps = {
   isOwnListing: false,
   startDatePlaceholder: null,
   endDatePlaceholder: null,
+  customerCommissionPercentage: null,
 };
-
-const { instanceOf, shape, string, bool } = PropTypes;
 
 BookingDatesFormComponent.propTypes = {
   ...formPropTypes,
@@ -273,6 +349,7 @@ BookingDatesFormComponent.propTypes = {
   unitType: propTypes.bookingUnitType.isRequired,
   price: propTypes.money,
   isOwnListing: bool,
+  customerCommissionPercentage: number,
 
   // from formValueSelector
   bookingDates: shape({

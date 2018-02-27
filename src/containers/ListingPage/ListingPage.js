@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import { arrayOf, bool, func, object, shape, string, oneOf, oneOfType } from 'prop-types';
+import { arrayOf, bool, func, object, shape, string, oneOf, oneOfType, number } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -254,6 +254,7 @@ export class ListingPageComponent extends Component {
       fetchReviewsError,
       sendEnquiryInProgress,
       sendEnquiryError,
+      customerCommissionPercentage,
     } = this.props;
 
     const isBook = !!parse(location.search).book;
@@ -674,6 +675,7 @@ export class ListingPageComponent extends Component {
                       onSubmit={handleBookingSubmit}
                       price={price}
                       isOwnListing={isOwnListing}
+                      customerCommissionPercentage={customerCommissionPercentage}
                     />
                   ) : null}
                 </ModalInMobile>
@@ -717,6 +719,7 @@ ListingPageComponent.defaultProps = {
   reviews: [],
   fetchReviewsError: null,
   sendEnquiryError: null,
+  customerCommissionPercentage: config.customerCommissionPercentage,
 };
 
 ListingPageComponent.propTypes = {
@@ -752,6 +755,7 @@ ListingPageComponent.propTypes = {
   sendEnquiryInProgress: bool.isRequired,
   sendEnquiryError: propTypes.error,
   onSendEnquiry: func.isRequired,
+  customerCommissionPercentage: number,
 };
 
 const mapStateToProps = state => {

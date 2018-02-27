@@ -465,6 +465,7 @@ exports[`ListingPage matches snapshot 1`] = `
               </div>
             </div>
             <BookingDatesForm
+              customerCommissionPercentage={null}
               isOwnListing={false}
               onSubmit={[Function]}
               price={
