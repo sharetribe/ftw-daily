@@ -247,6 +247,7 @@ const routeConfiguration = () => {
       auth: true,
       authPage: 'LoginPage',
       component: props => <PayoutPreferencesPage {...props} />,
+      loadData: PayoutPreferencesPage.loadData,
     },
     {
       path: '/terms-of-service',
