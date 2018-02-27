@@ -82,6 +82,7 @@ export const PayoutPreferencesPageComponent = props => {
       disabled={formDisabled}
       inProgress={payoutDetailsSaveInProgress}
       ready={payoutDetailsSaved}
+      submitButtonText={intl.formatMessage({ id: 'PayoutPreferencesPage.submitButtonText' })}
       createStripeAccountError={createStripeAccountError}
       onChange={onPayoutDetailsFormChange}
       onSubmit={onPayoutDetailsFormSubmit}

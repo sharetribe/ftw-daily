@@ -175,6 +175,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
           onChange={[Function]}
           onSubmit={[Function]}
           ready={false}
+          submitButtonText="PayoutPreferencesPage.submitButtonText"
         />
       </div>
     </LayoutWrapperMain>
@@ -273,6 +274,7 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
           onChange={[Function]}
           onSubmit={[Function]}
           ready={true}
+          submitButtonText="PayoutPreferencesPage.submitButtonText"
         />
       </div>
     </LayoutWrapperMain>
