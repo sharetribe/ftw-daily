@@ -134,6 +134,10 @@ app.get('*', (req, res) => {
     return res.status(404).send('Static asset not found.');
   }
 
+  if (req.url === '/_status.json') {
+    return res.status(200).send({ status: 'ok' });
+  }
+
   const context = {};
 
   // Get handle to tokenStore
