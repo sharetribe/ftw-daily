@@ -20,6 +20,7 @@ import {
   ERROR_CODE_EMAIL_NOT_VERIFIED,
   ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS,
   ERROR_CODE_UPLOAD_OVER_LIMIT,
+  ERROR_CODE_MISSING_STRIPE_ACCOUNT,
 } from './types';
 
 const errorAPIErrors = error => {
@@ -100,6 +101,14 @@ export const isPasswordRecoveryEmailNotVerifiedError = error =>
  */
 export const isTransactionInitiateListingNotFoundError = error =>
   hasErrorWithCode(error, ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND);
+
+/**
+ * Check if the given API error (from `sdk.transaction.initiate()` or
+ * `sdk.transaction.initiateSpeculative()`) is due to missign Stripe
+ * connection from the listing author.
+ */
+export const isTransactionInitiateMissingStripeAccountError = error =>
+  hasErrorWithCode(error, ERROR_CODE_MISSING_STRIPE_ACCOUNT);
 
 /**
  * Check if the given API error (from `sdk.transaction.initiate()`) is
