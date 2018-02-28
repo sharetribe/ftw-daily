@@ -394,6 +394,7 @@ export const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit';
 export const ERROR_CODE_VALIDATION_INVALID_PARAMS = 'validation-invalid-params';
 export const ERROR_CODE_NOT_FOUND = 'not-found';
 export const ERROR_CODE_FORBIDDEN = 'forbidden';
+export const ERROR_CODE_MISSING_STRIPE_ACCOUNT = 'transaction-missing-stripe-account';
 
 const ERROR_CODES = [
   ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND,
@@ -409,6 +410,7 @@ const ERROR_CODES = [
   ERROR_CODE_VALIDATION_INVALID_PARAMS,
   ERROR_CODE_NOT_FOUND,
   ERROR_CODE_FORBIDDEN,
+  ERROR_CODE_MISSING_STRIPE_ACCOUNT,
 ];
 
 // API error

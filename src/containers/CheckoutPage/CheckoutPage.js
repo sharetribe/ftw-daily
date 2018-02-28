@@ -13,6 +13,7 @@ import { createSlug } from '../../util/urlHelpers';
 import {
   isTransactionInitiateAmountTooLowError,
   isTransactionInitiateListingNotFoundError,
+  isTransactionInitiateMissingStripeAccountError,
 } from '../../util/errors';
 import {
   AvatarMedium,
@@ -225,7 +226,8 @@ export class CheckoutPageComponent extends Component {
       currentUser &&
       hasRequiredData &&
       !listingNotFound &&
-      !initiateOrderError
+      !initiateOrderError &&
+      !speculateTransactionError
     );
 
     const listingTitle = currentListing.attributes.title;
@@ -270,6 +272,21 @@ export class CheckoutPageComponent extends Component {
         <FormattedMessage id="CheckoutPage.speculateTransactionError" />
       </p>
     ) : null;
+    let speculateErrorMessage = null;
+
+    if (isTransactionInitiateMissingStripeAccountError(speculateTransactionError)) {
+      speculateErrorMessage = (
+        <p className={css.orderError}>
+          <FormattedMessage id="CheckoutPage.providerStripeAccountMissingError" />
+        </p>
+      );
+    } else if (speculateTransactionError) {
+      speculateErrorMessage = (
+        <p className={css.orderError}>
+          <FormattedMessage id="CheckoutPage.speculateFailedMessage" />
+        </p>
+      );
+    }
 
     const topbar = (
       <div className={css.topbar}>
@@ -343,6 +360,7 @@ export class CheckoutPageComponent extends Component {
             <section className={css.paymentContainer}>
               {initiateOrderErrorMessage}
               {listingNotFoundErrorMessage}
+              {speculateErrorMessage}
               {showPaymentForm ? (
                 <StripePaymentForm
                   className={css.paymentForm}
