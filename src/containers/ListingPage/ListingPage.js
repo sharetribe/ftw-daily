@@ -443,16 +443,23 @@ export class ListingPageComponent extends Component {
       </div>
     ) : null;
 
-    const facebookImages = hasImages
-      ? currentListing.images.map(image => {
-          return image.attributes.sizes.find(i => i.name === 'facebook');
+    const listingImages = (listing, variantName) =>
+      (listing.images || [])
+        .map(image => {
+          const variants = image.attributes.variants;
+          const variant = variants && variants[variantName];
+
+          // deprecated
+          // for backwards combatility only
+          const sizes = image.attributes.sizes;
+          const size = sizes && sizes.find(i => i.name === variantName);
+
+          return variant || size;
         })
-      : [];
-    const twitterImages = hasImages
-      ? currentListing.images.map(image => {
-          return image.attributes.sizes.find(i => i.name === 'twitter');
-        })
-      : [];
+        .filter(variant => variant != null);
+
+    const facebookImages = listingImages(currentListing, 'facebook');
+    const twitterImages = listingImages(currentListing, 'twitter');
     const schemaImages = JSON.stringify(facebookImages.map(img => img.url));
     const siteTitle = config.siteTitle;
     const schemaTitle = intl.formatMessage(

@@ -62,10 +62,17 @@ const ResponsiveImage = props => {
   }
 
   const imageSizes = image.attributes.sizes;
+  const imageVariants = image.attributes.variants;
 
   const srcSet = nameSet
     .map(v => {
-      const url = imageSizes.find(i => i.name === v.name).url;
+      const variant = imageVariants && imageVariants[v.name];
+
+      // deprecated
+      // for backwards compatibility only
+      const size = imageSizes && imageSizes.find(i => i.name === v.name);
+
+      const url = (variant || size).url;
       return `${url} ${v.size}`;
     })
     .join(', ');
