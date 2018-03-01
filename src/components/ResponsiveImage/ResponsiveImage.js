@@ -61,7 +61,6 @@ const ResponsiveImage = props => {
     /* eslint-enable jsx-a11y/img-redundant-alt */
   }
 
-  const defaultURL = nameSet[0].url;
   const imageSizes = image.attributes.sizes;
 
   const srcSet = nameSet
@@ -73,7 +72,7 @@ const ResponsiveImage = props => {
 
   const sizesProp = sizes ? { sizes } : {};
 
-  return <img alt={alt} className={classes} src={defaultURL} srcSet={srcSet} {...sizesProp} />;
+  return <img alt={alt} className={classes} srcSet={srcSet} {...sizesProp} />;
 };
 
 const { arrayOf, shape, string } = PropTypes;
