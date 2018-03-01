@@ -189,7 +189,13 @@ export class SearchPageComponent extends Component {
     const perPage = MAX_SEARCH_RESULT_PAGE_SIZE_ON_MAP;
     const page = 1;
     const { address, country, ...rest } = searchInURL;
-    const searchParamsForMapResults = { ...rest, include: ['images'], page, perPage };
+    const searchParamsForMapResults = {
+      ...rest,
+      include: ['images'],
+      page,
+      perPage,
+      'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+    };
     this.searchMapListingsInProgress = true;
 
     // Search more listings for map
@@ -529,6 +535,7 @@ SearchPage.loadData = (params, search) => {
     page,
     perPage: RESULT_PAGE_SIZE,
     include: ['author', 'images'],
+    'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
   });
 };
 

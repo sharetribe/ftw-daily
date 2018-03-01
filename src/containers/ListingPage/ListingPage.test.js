@@ -83,7 +83,33 @@ describe('ListingPage', () => {
       return showListing(id)(dispatch, null, sdk).then(data => {
         expect(data).toEqual(response);
         expect(show.mock.calls).toEqual([
-          [{ id, include: ['author', 'author.profileImage', 'images'] }],
+          [
+            {
+              id,
+              include: ['author', 'author.profileImage', 'images'],
+              'fields.image': [
+                // Listing page
+                'variants.landscape-crop',
+                'variants.landscape-crop2x',
+                'variants.landscape-crop4x',
+                'variants.landscape-crop6x',
+
+                // Social media
+                'variants.facebook',
+                'variants.twitter',
+
+                // Image carousel
+                'variants.scaled-small',
+                'variants.scaled-medium',
+                'variants.scaled-large',
+                'variants.scaled-xlarge',
+
+                // Avatars
+                'variants.square-xlarge2x',
+                'variants.square-xlarge4x',
+              ],
+            },
+          ],
         ]);
         expect(dispatch.mock.calls).toEqual([
           [showListingRequest(id)],
@@ -104,7 +130,33 @@ describe('ListingPage', () => {
 
       return showListing(id)(dispatch, null, sdk).then(data => {
         expect(show.mock.calls).toEqual([
-          [{ id, include: ['author', 'author.profileImage', 'images'] }],
+          [
+            {
+              id,
+              include: ['author', 'author.profileImage', 'images'],
+              'fields.image': [
+                // Listing page
+                'variants.landscape-crop',
+                'variants.landscape-crop2x',
+                'variants.landscape-crop4x',
+                'variants.landscape-crop6x',
+
+                // Social media
+                'variants.facebook',
+                'variants.twitter',
+
+                // Image carousel
+                'variants.scaled-small',
+                'variants.scaled-medium',
+                'variants.scaled-large',
+                'variants.scaled-xlarge',
+
+                // Avatars
+                'variants.square-xlarge2x',
+                'variants.square-xlarge4x',
+              ],
+            },
+          ],
         ]);
         expect(dispatch.mock.calls).toEqual([
           [showListingRequest(id)],
