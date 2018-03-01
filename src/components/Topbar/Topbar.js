@@ -29,12 +29,13 @@ import SearchIcon from './SearchIcon';
 import css from './Topbar.css';
 
 const MAX_MOBILE_SCREEN_WIDTH = 768;
-const VERIFY_EMAIL_MODAL_WHITELIST = [
+const MISSING_INFORMATION_MODAL_WHITELIST = [
   'LoginPage',
   'SignupPage',
   'ContactDetailsPage',
   'EmailVerificationPage',
   'PasswordResetPage',
+  'PayoutPreferencesPage',
 ];
 
 const redirectToURLWithModalState = (props, modalStateParam) => {
@@ -80,9 +81,12 @@ GenericError.propTypes = {
 class TopbarComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { showVerifyEmailReminder: false, hasSeenEmailReminder: false };
+    this.state = {
+      showMissingInformationReminder: false,
+      hasSeenMissingInformationReminder: false,
+    };
 
-    this.onHistoryChanged = this.handleEmailReminder.bind(this);
+    this.onHistoryChanged = this.handleMissingInformationReminder.bind(this);
     this.handleMobileMenuOpen = this.handleMobileMenuOpen.bind(this);
     this.handleMobileMenuClose = this.handleMobileMenuClose.bind(this);
     this.handleMobileSearchOpen = this.handleMobileSearchOpen.bind(this);
@@ -94,14 +98,25 @@ class TopbarComponent extends Component {
   componentWillReceiveProps(nextProps) {
     const { currentUser, currentUserHasListings, currentUserHasOrders, location } = nextProps;
     const user = ensureCurrentUser(currentUser);
-    this.handleEmailReminder(user, currentUserHasListings, currentUserHasOrders, location);
+    this.handleMissingInformationReminder(
+      user,
+      currentUserHasListings,
+      currentUserHasOrders,
+      location
+    );
   }
 
-  handleEmailReminder(currentUser, currentUserHasListings, currentUserHasOrders, newLocation) {
+  handleMissingInformationReminder(
+    currentUser,
+    currentUserHasListings,
+    currentUserHasOrders,
+    newLocation
+  ) {
     // Track if path changes inside Page level component
     const pathChanged = newLocation.pathname !== this.props.location.pathname;
     const emailUnverified = !!currentUser.id && !currentUser.attributes.emailVerified;
-    const notRemindedYet = !this.state.showVerifyEmailReminder && !this.state.hasSeenEmailReminder;
+    const notRemindedYet =
+      !this.state.showMissingInformationReminder && !this.state.hasSeenMissingInformationReminder;
     const showOnPathChange = notRemindedYet || pathChanged;
 
     // Emails are sent when order is initiated
@@ -111,14 +126,14 @@ class TopbarComponent extends Component {
     const hasListingsOrOrders = currentUserHasListings || hasOrders;
 
     const routes = routeConfiguration();
-    const whitelistedPaths = VERIFY_EMAIL_MODAL_WHITELIST.map(page =>
+    const whitelistedPaths = MISSING_INFORMATION_MODAL_WHITELIST.map(page =>
       pathByRouteName(page, routes)
     );
     const isNotWhitelisted = !whitelistedPaths.includes(newLocation.pathname);
 
     // Show reminder
     if (emailUnverified && isNotWhitelisted && hasListingsOrOrders && showOnPathChange) {
-      this.setState({ showVerifyEmailReminder: true });
+      this.setState({ showMissingInformationReminder: true });
     }
   }
 
@@ -316,11 +331,14 @@ class TopbarComponent extends Component {
         </Modal>
 
         <Modal
-          id="EmailVerificationReminder"
-          containerClassName={css.verifyEmailModal}
-          isOpen={this.state.showVerifyEmailReminder}
+          id="MissingInformationReminder"
+          containerClassName={css.missingInformationModal}
+          isOpen={this.state.showMissingInformationReminder}
           onClose={() => {
-            this.setState({ showVerifyEmailReminder: false, hasSeenEmailReminder: true });
+            this.setState({
+              showMissingInformationReminder: false,
+              hasSeenMissingInformationReminder: true,
+            });
           }}
           onManageDisableScrolling={onManageDisableScrolling}
           closeButtonMessage={closeButtonMessage}

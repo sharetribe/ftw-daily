@@ -164,7 +164,7 @@
   }
 }
 
-.verifyEmailModal {
+.missingInformationModal {
   @apply --marketplaceModalBaseStyles;
   padding-top: 70px;
 }
