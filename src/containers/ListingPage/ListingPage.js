@@ -245,7 +245,7 @@ export class ListingPageComponent extends Component {
       getOwnListing,
       intl,
       onManageDisableScrolling,
-      params,
+      params: rawParams,
       location,
       scrollingDisabled,
       showListingError,
@@ -257,11 +257,14 @@ export class ListingPageComponent extends Component {
     } = this.props;
 
     const isBook = !!parse(location.search).book;
-    const listingId = new UUID(params.id);
-    const isPendingApprovalVariant = params.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
+    const listingId = new UUID(rawParams.id);
+    const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
     const currentListing = isPendingApprovalVariant
       ? ensureOwnListing(getOwnListing(listingId))
       : ensureListing(getListing(listingId));
+
+    const listingSlug = rawParams.slug || createSlug(currentListing.attributes.title || '');
+    const params = { slug: listingSlug, ...rawParams };
 
     const isApproved =
       currentListing.id && currentListing.attributes.state !== LISTING_STATE_PENDING_APPROVAL;
@@ -281,7 +284,6 @@ export class ListingPageComponent extends Component {
       return <NamedRedirect name="ListingPage" params={params} search={location.search} />;
     }
 
-    const listingSlug = params.slug || createSlug(currentListing.attributes.title || '');
     const {
       description = '',
       geolocation = null,
