@@ -65,4 +65,48 @@ describe('BookingDatesForm', () => {
       },
     ]);
   });
+  it('matches customer commission', () => {
+    const price = new Money(1099, 'USD');
+    const startDate = new Date(Date.UTC(2017, 3, 14));
+    const endDate = new Date(Date.UTC(2017, 3, 16));
+    const tree = shallow(
+      <BookingDatesFormComponent
+        {...fakeFormProps}
+        unitType={LINE_ITEM_NIGHT}
+        intl={fakeIntl}
+        dispatch={noop}
+        onSubmit={v => v}
+        price={price}
+        bookingDates={{ startDate, endDate }}
+        startDatePlaceholder="today"
+        endDatePlaceholder="tomorrow"
+        customerCommissionPercentage={10}
+      />
+    );
+    const breakdown = tree.find(BookingBreakdown);
+    const { userRole, transaction, booking } = breakdown.props();
+    expect(userRole).toEqual('customer');
+    expect(booking.attributes.start).toEqual(startDate);
+    expect(booking.attributes.end).toEqual(endDate);
+    expect(transaction.attributes.lastTransition).toEqual(TRANSITION_REQUEST);
+    expect(transaction.attributes.payinTotal).toEqual(new Money(2418, 'USD'));
+    expect(transaction.attributes.payoutTotal).toEqual(new Money(2418, 'USD'));
+    expect(transaction.attributes.lineItems).toEqual([
+      {
+        code: 'line-item/night',
+        includeFor: ['customer', 'provider'],
+        unitPrice: price,
+        quantity: new Decimal(2),
+        lineTotal: new Money(2198, 'USD'),
+        reversal: false,
+      },
+      {
+        code: 'line-item/customer-commission',
+        includeFor: ['customer'],
+        unitPrice: new Money(2198, 'USD'),
+        lineTotal: new Money(220, 'USD'),
+        reversal: false,
+      },
+    ]);
+  });
 });

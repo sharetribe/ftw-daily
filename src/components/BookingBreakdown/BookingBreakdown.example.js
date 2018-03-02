@@ -101,6 +101,39 @@ export const CustomerOrder = {
   },
 };
 
+export const CustomerOrderWithCommission = {
+  component: BookingBreakdown,
+  props: {
+    userRole: 'customer',
+    unitType: LINE_ITEM_NIGHT,
+    transaction: exampleTransaction({
+      payinTotal: new Money(9900, CURRENCY),
+      payoutTotal: new Money(9900, CURRENCY),
+      lineItems: [
+        {
+          code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
+          quantity: new Decimal(2),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(9000, CURRENCY),
+          reversal: false,
+        },
+        {
+          code: 'line-item/customer-commission',
+          includeFor: ['customer'],
+          unitPrice: new Money(9000, CURRENCY),
+          lineTotal: new Money(900, CURRENCY),
+          reversal: false,
+        },
+      ],
+    }),
+    booking: exampleBooking({
+      start: new Date(Date.UTC(2017, 3, 14)),
+      end: new Date(Date.UTC(2017, 3, 16)),
+    }),
+  },
+};
+
 export const ProviderSale = {
   component: BookingBreakdown,
   props: {

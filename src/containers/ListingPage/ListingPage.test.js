@@ -66,6 +66,7 @@ describe('ListingPage', () => {
       onResendVerificationEmail: noop,
       sendEnquiryInProgress: false,
       onSendEnquiry: noop,
+      customerCommissionPercentage: null,
     };
 
     const tree = renderShallow(<ListingPageComponent {...props} />);
