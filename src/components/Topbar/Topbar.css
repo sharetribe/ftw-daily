@@ -207,6 +207,10 @@
   @apply --marketplaceModalIconStyles;
 }
 
+.reminderModalLinkButton {
+  @apply --marketplaceButtonStylesPrimary;
+}
+
 .genericError {
   position: fixed;
   top: calc(var(--topbarHeight) + 15px);

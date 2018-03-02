@@ -78,6 +78,72 @@ GenericError.propTypes = {
   show: bool.isRequired,
 };
 
+const ReminderModalContent = props => {
+  const {
+    currentUser,
+    email,
+    resendErrorMessage,
+    sendVerificationEmailInProgress,
+    resendEmailLink,
+    fixEmailLink,
+  } = props;
+  const emailVerificationMissingContent = (
+    <div>
+      <IconEmailAttention className={css.modalIcon} />
+      <p className={css.modalTitle}>
+        <FormattedMessage id="Topbar.verifyEmailTitle" />
+      </p>
+      <p className={css.modalMessage}>
+        <FormattedMessage id="Topbar.verifyEmailText" />
+      </p>
+      <p className={css.modalMessage}>
+        <FormattedMessage id="Topbar.checkInbox" values={{ email }} />
+      </p>
+      {resendErrorMessage}
+
+      <div className={css.bottomWrapper}>
+        <p className={css.helperText}>
+          {sendVerificationEmailInProgress ? (
+            <FormattedMessage id="Topbar.sendingEmail" />
+          ) : (
+            <FormattedMessage id="Topbar.resendEmail" values={{ resendEmailLink }} />
+          )}
+        </p>
+        <p className={css.helperText}>
+          <FormattedMessage id="Topbar.fixEmail" values={{ fixEmailLink }} />
+        </p>
+      </div>
+    </div>
+  );
+
+  const stripeAccountMissingContent = (
+    <div>
+      <p className={css.modalTitle}>
+        <FormattedMessage id="Topbar.missingStripeAccountTitle" />
+      </p>
+      <p className={css.modalMessage}>
+        <FormattedMessage id="Topbar.missingStripeAccountText" />
+      </p>
+      <div className={css.bottomWrapper}>
+        <NamedLink className={css.reminderModalLinkButton} name="PayoutPreferencesPage">
+          <FormattedMessage id="Topbar.gotoPaymentSettings" />
+        </NamedLink>
+      </div>
+    </div>
+  );
+
+  const currentUserLoaded = currentUser && currentUser.id;
+  let content = null;
+
+  if (currentUserLoaded && !currentUser.attributes.emailVerified) {
+    content = emailVerificationMissingContent;
+  } else if (currentUserLoaded && !currentUser.attributes.stripeConnected) {
+    content = stripeAccountMissingContent;
+  }
+
+  return content;
+};
+
 class TopbarComponent extends Component {
   constructor(props) {
     super(props);
@@ -115,6 +181,8 @@ class TopbarComponent extends Component {
     // Track if path changes inside Page level component
     const pathChanged = newLocation.pathname !== this.props.location.pathname;
     const emailUnverified = !!currentUser.id && !currentUser.attributes.emailVerified;
+    const stripeAccountMissing = !!currentUser.id && !currentUser.attributes.stripeConnected;
+    const infoMissing = emailUnverified || stripeAccountMissing;
     const notRemindedYet =
       !this.state.showMissingInformationReminder && !this.state.hasSeenMissingInformationReminder;
     const showOnPathChange = notRemindedYet || pathChanged;
@@ -132,7 +200,7 @@ class TopbarComponent extends Component {
     const isNotWhitelisted = !whitelistedPaths.includes(newLocation.pathname);
 
     // Show reminder
-    if (emailUnverified && isNotWhitelisted && hasListingsOrOrders && showOnPathChange) {
+    if (infoMissing && isNotWhitelisted && hasListingsOrOrders && showOnPathChange) {
       this.setState({ showMissingInformationReminder: true });
     }
   }
@@ -343,32 +411,14 @@ class TopbarComponent extends Component {
           onManageDisableScrolling={onManageDisableScrolling}
           closeButtonMessage={closeButtonMessage}
         >
-          <div className={css.verifyEmailContent}>
-            <IconEmailAttention className={css.modalIcon} />
-            <p className={css.modalTitle}>
-              <FormattedMessage id="Topbar.verifyEmailTitle" />
-            </p>
-            <p className={css.modalMessage}>
-              <FormattedMessage id="Topbar.verifyEmailText" />
-            </p>
-            <p className={css.modalMessage}>
-              <FormattedMessage id="Topbar.checkInbox" values={{ email }} />
-            </p>
-            {resendErrorMessage}
-
-            <div className={css.bottomWrapper}>
-              <p className={css.helperText}>
-                {sendVerificationEmailInProgress ? (
-                  <FormattedMessage id="Topbar.sendingEmail" />
-                ) : (
-                  <FormattedMessage id="Topbar.resendEmail" values={{ resendEmailLink }} />
-                )}
-              </p>
-              <p className={css.helperText}>
-                <FormattedMessage id="Topbar.fixEmail" values={{ fixEmailLink }} />
-              </p>
-            </div>
-          </div>
+          <ReminderModalContent
+            currentUser={currentUser}
+            email={email}
+            resendErrorMessage={resendErrorMessage}
+            sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+            resendEmailLink={resendEmailLink}
+            fixEmailLink={fixEmailLink}
+          />
         </Modal>
         <GenericError show={showGenericError} />
       </div>
