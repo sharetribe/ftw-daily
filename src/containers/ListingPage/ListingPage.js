@@ -447,12 +447,12 @@ export class ListingPageComponent extends Component {
       (listing.images || [])
         .map(image => {
           const variants = image.attributes.variants;
-          const variant = variants && variants[variantName];
+          const variant = variants ? variants[variantName] : null;
 
           // deprecated
           // for backwards combatility only
           const sizes = image.attributes.sizes;
-          const size = sizes && sizes.find(i => i.name === variantName);
+          const size = sizes ? sizes.find(i => i.name === variantName) : null;
 
           return variant || size;
         })
