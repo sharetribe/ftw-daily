@@ -103,7 +103,31 @@ export const sendEnquiryError = e => ({ type: SEND_ENQUIRY_ERROR, error: true, p
 export const showListing = (listingId, isOwn = false) => (dispatch, getState, sdk) => {
   dispatch(showListingRequest(listingId));
   dispatch(fetchCurrentUser());
-  const params = { id: listingId, include: ['author', 'author.profileImage', 'images'] };
+  const params = {
+    id: listingId,
+    include: ['author', 'author.profileImage', 'images'],
+    'fields.image': [
+      // Listing page
+      'variants.landscape-crop',
+      'variants.landscape-crop2x',
+      'variants.landscape-crop4x',
+      'variants.landscape-crop6x',
+
+      // Social media
+      'variants.facebook',
+      'variants.twitter',
+
+      // Image carousel
+      'variants.scaled-small',
+      'variants.scaled-medium',
+      'variants.scaled-large',
+      'variants.scaled-xlarge',
+
+      // Avatars
+      'variants.square-xlarge2x',
+      'variants.square-xlarge4x',
+    ],
+  };
 
   const show = isOwn ? sdk.ownListings.show(params) : sdk.listings.show(params);
 

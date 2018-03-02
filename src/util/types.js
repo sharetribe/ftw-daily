@@ -24,6 +24,7 @@ import {
   instanceOf,
   number,
   object,
+  objectOf,
   oneOf,
   oneOfType,
   shape,
@@ -86,7 +87,14 @@ propTypes.image = shape({
         name: string.isRequired,
         url: string.isRequired,
       })
-    ).isRequired,
+    ),
+    variants: objectOf(
+      shape({
+        width: number.isRequired,
+        height: number.isRequired,
+        url: string.isRequired,
+      })
+    ),
   }),
 });
 

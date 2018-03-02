@@ -61,19 +61,33 @@ const ResponsiveImage = props => {
     /* eslint-enable jsx-a11y/img-redundant-alt */
   }
 
-  const defaultURL = nameSet[0].url;
   const imageSizes = image.attributes.sizes;
+  const imageVariants = image.attributes.variants;
 
   const srcSet = nameSet
     .map(v => {
-      const url = imageSizes.find(i => i.name === v.name).url;
-      return `${url} ${v.size}`;
+      const variant = imageVariants ? imageVariants[v.name] : null;
+
+      // deprecated
+      // for backwards compatibility only
+      const size = imageSizes ? imageSizes.find(i => i.name === v.name) : null;
+
+      if (variant || size) {
+        const url = (variant || size).url;
+        return `${url} ${v.size}`;
+      } else {
+        // Handle case where the requested variant doesn't exist, for
+        // example because it hasn't been loaded yet.
+        // Return null, which will be filtered out.
+        return null;
+      }
     })
+    .filter(v => v != null)
     .join(', ');
 
   const sizesProp = sizes ? { sizes } : {};
 
-  return <img alt={alt} className={classes} src={defaultURL} srcSet={srcSet} {...sizesProp} />;
+  return <img alt={alt} className={classes} srcSet={srcSet} {...sizesProp} />;
 };
 
 const { arrayOf, shape, string } = PropTypes;
