@@ -77,16 +77,18 @@ const tabCompleted = (tab, listing) => {
 
 /**
  * Check which wizard tabs are active and which are not yet available. Tab is active if previous
- * tab is completed.
+ * tab is completed. In edit mode all tabs are active.
  *
+ * @param isNew flag if a new listing is being created or an old one being edited
  * @param listing data to be checked
  *
  * @return object containing activity / editability of different tabs of this wizard
  */
-const tabsActive = listing => {
+const tabsActive = (isNew, listing) => {
   return TABS.reduce((acc, tab) => {
     const previousTabIndex = TABS.findIndex(t => t === tab) - 1;
-    const isActive = previousTabIndex >= 0 ? tabCompleted(TABS[previousTabIndex], listing) : true;
+    const isActive =
+      previousTabIndex >= 0 ? !isNew || tabCompleted(TABS[previousTabIndex], listing) : true;
     return { ...acc, [tab]: isActive };
   }, {});
 };
@@ -198,7 +200,7 @@ class EditListingWizard extends Component {
     const rootClasses = rootClassName || css.root;
     const classes = classNames(rootClasses, className);
     const currentListing = ensureListing(listing);
-    const tabsStatus = tabsActive(currentListing);
+    const tabsStatus = tabsActive(isNew, currentListing);
 
     // If selectedTab is not active, redirect to the beginning of wizard
     if (!tabsStatus[selectedTab]) {

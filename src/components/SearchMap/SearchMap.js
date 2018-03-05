@@ -241,9 +241,10 @@ export class SearchMapComponent extends Component {
     const classes = classNames(rootClassName || css.root, className);
     const mapClasses = mapRootClassName || css.mapRoot;
 
+    const listingsWithLocation = originalListings.filter(l => !!l.attributes.geolocation);
     const listings = coordinatesConfig.fuzzy
-      ? withCoordinatesObfuscated(originalListings)
-      : originalListings;
+      ? withCoordinatesObfuscated(listingsWithLocation)
+      : listingsWithLocation;
 
     // container element listens clicks so that opened SearchMapInfoCard can be closed
     /* eslint-disable jsx-a11y/no-static-element-interactions */
