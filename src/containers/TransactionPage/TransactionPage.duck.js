@@ -1,6 +1,10 @@
 import { pick } from 'lodash';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
+import {
+  isTransactionsTransitionInvalidTransition,
+  storableError,
+  responseApiErrorInfo,
+} from '../../util/errors';
 import {
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
@@ -271,6 +275,7 @@ export const acceptSale = id => (dispatch, getState, sdk) => {
       log.error(e, 'accept-sale-failed', {
         txId: id,
         transition: TRANSITION_ACCEPT,
+        apiErrorInfo: responseApiErrorInfo(e),
       });
       throw e;
     });
@@ -295,6 +300,7 @@ export const declineSale = id => (dispatch, getState, sdk) => {
       log.error(e, 'reject-sale-failed', {
         txId: id,
         transition: TRANSITION_DECLINE,
+        apiErrorInfo: responseApiErrorInfo(e),
       });
       throw e;
     });
