@@ -164,7 +164,7 @@
   }
 }
 
-.verifyEmailModal {
+.missingInformationModal {
   @apply --marketplaceModalBaseStyles;
   padding-top: 70px;
 }
@@ -205,6 +205,10 @@
 
 .modalIcon {
   @apply --marketplaceModalIconStyles;
+}
+
+.reminderModalLinkButton {
+  @apply --marketplaceButtonStylesPrimary;
 }
 
 .genericError {
