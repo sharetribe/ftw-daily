@@ -48,6 +48,8 @@ const cspReportUrl = '/csp-report';
 const cspEnabled = CSP === 'block' || CSP === 'report';
 const app = express();
 
+const listingRedirects = require('./listing-redirects.json');
+
 const errorPage = fs.readFileSync(path.join(buildPath, '500.html'), 'utf-8');
 
 // load sitemap and robots file structure
@@ -124,6 +126,15 @@ if (!dev) {
 const noCacheHeaders = {
   'Cache-control': 'no-cache, no-store, must-revalidate',
 };
+
+// Old-style listing URL redirects
+app.get('/listings/:listing_id(\\d+)-?:title?', (req, res) => {
+  if (listingRedirects[req.params.listing_id]) {
+    return res.redirect(302, listingRedirects[req.params.listing_id]);
+  } else {
+    return res.redirect(302, '/');
+  }
+});
 
 app.get('*', (req, res) => {
   if (req.url.startsWith('/static/')) {
