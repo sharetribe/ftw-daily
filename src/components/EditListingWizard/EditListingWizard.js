@@ -143,8 +143,8 @@ class EditListingWizard extends Component {
 
   handlePayoutSubmit(values) {
     const {
-      firstName,
-      lastName,
+      fname: firstName,
+      lname: lastName,
       birthDate,
       country,
       streetAddress,

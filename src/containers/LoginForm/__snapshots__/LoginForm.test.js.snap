@@ -17,6 +17,7 @@ exports[`LoginForm matches snapshot 1`] = `
         LoginForm.emailLabel
       </label>
       <input
+        autoComplete="email"
         className=""
         id="LoginForm.email"
         name="email"
@@ -39,6 +40,7 @@ exports[`LoginForm matches snapshot 1`] = `
         LoginForm.passwordLabel
       </label>
       <input
+        autoComplete="current-password"
         className=""
         id="LoginForm.password"
         name="password"

@@ -129,6 +129,7 @@ const SignupFormComponent = props => {
         <TextInputField
           type="email"
           name="email"
+          autoComplete="email"
           id={`${form}.email`}
           label={emailLabel}
           placeholder={emailPlaceholder}
@@ -138,8 +139,9 @@ const SignupFormComponent = props => {
           <TextInputField
             className={css.firstNameRoot}
             type="text"
-            name="firstName"
-            id={`${form}.firstName`}
+            name="fname"
+            autoComplete="given-name"
+            id={`${form}.fname`}
             label={firstNameLabel}
             placeholder={firstNamePlaceholder}
             validate={firstNameRequired}
@@ -147,8 +149,9 @@ const SignupFormComponent = props => {
           <TextInputField
             className={css.lastNameRoot}
             type="text"
-            name="lastName"
-            id={`${form}.lastName`}
+            name="lname"
+            autoComplete="family-name"
+            id={`${form}.lname`}
             label={lastNameLabel}
             placeholder={lastNamePlaceholder}
             validate={lastNameRequired}
@@ -158,6 +161,7 @@ const SignupFormComponent = props => {
           className={css.password}
           type="password"
           name="password"
+          autoComplete="new-password"
           id={`${form}.password`}
           label={passwordLabel}
           placeholder={passwordPlaceholder}

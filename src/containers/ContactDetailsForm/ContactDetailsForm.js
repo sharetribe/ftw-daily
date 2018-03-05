@@ -233,6 +233,7 @@ class ContactDetailsFormComponent extends Component {
             type="password"
             name="currentPassword"
             id={`${form}.currentPassword`}
+            autoComplete="current-password"
             label={passwordLabel}
             placeholder={passwordPlaceholder}
             validate={[passwordRequired, passwordMinLength]}

@@ -75,6 +75,12 @@ export const PayoutPreferencesPageComponent = props => {
     message = <FormattedMessage id="PayoutPreferencesPage.stripeNotConnected" />;
   }
 
+  const handlePayoutDetailsSubmit = values => {
+    const { fname, lname, ...rest } = values;
+    const params = { firstName: fname, lastName: lname, ...rest };
+    onPayoutDetailsFormSubmit(params);
+  };
+
   const showForm =
     currentUserLoaded && (payoutDetailsSaveInProgress || payoutDetailsSaved || !stripeConnected);
   const form = showForm ? (
@@ -85,7 +91,7 @@ export const PayoutPreferencesPageComponent = props => {
       submitButtonText={intl.formatMessage({ id: 'PayoutPreferencesPage.submitButtonText' })}
       createStripeAccountError={createStripeAccountError}
       onChange={onPayoutDetailsFormChange}
-      onSubmit={onPayoutDetailsFormSubmit}
+      onSubmit={handlePayoutDetailsSubmit}
     />
   ) : null;
 
