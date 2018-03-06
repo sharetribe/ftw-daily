@@ -12,6 +12,7 @@ import * as FieldCurrencyInput from './components/FieldCurrencyInput/FieldCurren
 import * as FieldDateInput from './components/FieldDateInput/FieldDateInput.example';
 import * as FieldDateRangeInput from './components/FieldDateRangeInput/FieldDateRangeInput.example';
 import * as FieldGroupCheckbox from './components/FieldGroupCheckbox/FieldGroupCheckbox.example';
+import * as FieldPhoneNumberInput from './components/FieldPhoneNumberInput/FieldPhoneNumberInput.example';
 import * as FieldReviewRating from './components/FieldReviewRating/FieldReviewRating.example';
 import * as Footer from './components/Footer/Footer.example';
 import * as IconBannedUser from './components/IconBannedUser/IconBannedUser.example';
@@ -101,6 +102,7 @@ export {
   FieldDateInput,
   FieldDateRangeInput,
   FieldGroupCheckbox,
+  FieldPhoneNumberInput,
   FieldReviewRating,
   Footer,
   IconBannedUser,

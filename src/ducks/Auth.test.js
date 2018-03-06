@@ -346,10 +346,19 @@ describe('Auth duck', () => {
       const state = reducer();
       const email = 'pekka@example.com';
       const password = 'some pass';
-      const params = { email, password, firstName: 'Pekka', lastName: 'Pohjola' };
+      const params = {
+        email,
+        password,
+        firstName: 'Pekka',
+        lastName: 'Pohjola',
+        phoneNumber: '+123 555 1234567',
+      };
+      const { phoneNumber, ...rest } = params;
 
       return signup(params)(dispatch, getState, sdk).then(() => {
-        expect(sdk.currentUser.create.mock.calls).toEqual([[params]]);
+        expect(sdk.currentUser.create.mock.calls).toEqual([
+          [{ ...rest, protectedData: { phoneNumber } }],
+        ]);
         expect(sdk.login.mock.calls).toEqual([[{ username: email, password }]]);
         expect(dispatchedActions(dispatch)).toEqual([
           signupRequest(),
@@ -377,12 +386,22 @@ describe('Auth duck', () => {
       const state = reducer();
       const email = 'pekka@example.com';
       const password = 'some pass';
-      const params = { email, password, firstName: 'Pekka', lastName: 'Pohjola' };
+      const params = {
+        email,
+        password,
+        firstName: 'Pekka',
+        lastName: 'Pohjola',
+        phoneNumber: '+123 555 1234567',
+      };
+      const { phoneNumber, ...rest } = params;
+
       // disable error logging
       log.error = jest.fn();
 
       return signup(params)(dispatch, getState, sdk).then(() => {
-        expect(sdk.currentUser.create.mock.calls).toEqual([[params]]);
+        expect(sdk.currentUser.create.mock.calls).toEqual([
+          [{ ...rest, protectedData: { phoneNumber } }],
+        ]);
         expect(dispatchedActions(dispatch)).toEqual([
           signupRequest(),
           signupError(storableError(error)),
