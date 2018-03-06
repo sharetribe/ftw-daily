@@ -17,7 +17,9 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   scrollingDisabled={false}
   title="SearchPage.schemaTitle"
 >
-  <withRouter(Connect(TopbarContainerComponent)) />
+  <withRouter(Connect(TopbarContainerComponent))
+    currentPage="SearchPage"
+  />
   <div>
     <div>
       <withRouter(InjectIntl(SearchFiltersComponent))
