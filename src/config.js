@@ -16,6 +16,9 @@ const i18n = {
   firstDayOfWeek: 0,
 };
 
+// Should search results be ordered by distance to origin.
+const sortSearchByDistance = true;
+
 // The transaction line item code for the main unit type in bookings.
 //
 // Possible values: ['line-item/night', 'line-item/day', 'line-item/units';]
@@ -280,6 +283,7 @@ const config = {
   bookingUnitType,
   i18n,
   sdk: { clientId: sdkClientId, baseUrl: sdkBaseUrl },
+  sortSearchByDistance,
   currency,
   currencyConfig,
   stripe: { publishableKey: stripePublishableKey, supportedCountries: stripeSupportedCountries },

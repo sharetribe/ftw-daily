@@ -86,9 +86,10 @@ const validURLParamsForExtendedData = params => {
 // extract search parameters, including a custom attribute named category
 const pickSearchParamsOnly = params => {
   const { address, origin, bounds, country, ...rest } = params || {};
+  const originMaybe = config.sortSearchByDistance ? { origin } : {};
   return {
-    origin,
     bounds,
+    ...originMaybe,
     ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest),
     ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest),
   };
@@ -164,10 +165,12 @@ export class SearchPageComponent extends Component {
     // or original location search is rendered once,
     // we start to react to 'bounds_changed' event by generating new searches
     if (viewportBoundsChanged && !this.modalOpenedBoundsChange) {
-      const origin = googleLatLngToSDKLatLng(viewportGMapBounds.getCenter());
+      const originMaybe = config.sortSearchByDistance
+        ? { origin: googleLatLngToSDKLatLng(viewportGMapBounds.getCenter()) }
+        : {};
       const searchParams = {
         address,
-        origin,
+        ...originMaybe,
         bounds: viewportBounds,
         country,
         mapSearch: true,
@@ -193,9 +196,11 @@ export class SearchPageComponent extends Component {
 
     const perPage = MAX_SEARCH_RESULT_PAGE_SIZE_ON_MAP;
     const page = 1;
-    const { address, country, ...rest } = searchInURL;
+    const { address, country, origin, ...rest } = searchInURL;
+    const originMaybe = config.sortSearchByDistance ? { origin } : {};
     const searchParamsForMapResults = {
       ...rest,
+      ...originMaybe,
       include: ['images'],
       page,
       perPage,
@@ -534,9 +539,11 @@ SearchPage.loadData = (params, search) => {
     latlng: ['origin'],
     latlngBounds: ['bounds'],
   });
-  const { page = 1, address, country, ...rest } = queryParams;
+  const { page = 1, address, country, origin, ...rest } = queryParams;
+  const originMaybe = config.sortSearchByDistance ? { origin } : {};
   return searchListings({
     ...rest,
+    ...originMaybe,
     page,
     perPage: RESULT_PAGE_SIZE,
     include: ['author', 'images'],
