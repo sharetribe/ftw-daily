@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 import { clearCurrentUser, fetchCurrentUser } from './user.duck';
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
@@ -172,13 +173,9 @@ export const signup = params => (dispatch, getState, sdk) => {
   dispatch(signupRequest());
   const { email, password, firstName, lastName, ...rest } = params;
 
-  const createUserParams = {
-    email,
-    password,
-    firstName,
-    lastName,
-    protectedData: { ...rest },
-  };
+  const createUserParams = isEmpty(rest)
+    ? { email, password, firstName, lastName }
+    : { email, password, firstName, lastName, protectedData: { ...rest } };
 
   // We must login the user if signup succeeds since the API doesn't
   // do that automatically.
