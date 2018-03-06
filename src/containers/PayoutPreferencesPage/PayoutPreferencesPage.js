@@ -40,7 +40,7 @@ export const PayoutPreferencesPageComponent = props => {
 
   const tabs = [
     {
-      text: <FormattedMessage id="PayoutPreferencesPage.emailTabTitle" />,
+      text: <FormattedMessage id="PayoutPreferencesPage.contactDetailsTabTitle" />,
       selected: false,
       linkProps: {
         name: 'ContactDetailsPage',

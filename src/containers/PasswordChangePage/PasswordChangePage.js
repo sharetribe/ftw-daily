@@ -34,7 +34,7 @@ export const PasswordChangePageComponent = props => {
 
   const tabs = [
     {
-      text: <FormattedMessage id="PasswordChangePage.emailTabTitle" />,
+      text: <FormattedMessage id="PasswordChangePage.contactDetailsTabTitle" />,
       selected: false,
       linkProps: {
         name: 'ContactDetailsPage',

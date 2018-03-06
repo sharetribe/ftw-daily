@@ -39,7 +39,7 @@ export const ContactDetailsPageComponent = props => {
 
   const tabs = [
     {
-      text: <FormattedMessage id="ContactDetailsPage.emailTabTitle" />,
+      text: <FormattedMessage id="ContactDetailsPage.contactDetailsTabTitle" />,
       selected: true,
       linkProps: {
         name: 'ContactDetailsPage',
@@ -63,7 +63,7 @@ export const ContactDetailsPageComponent = props => {
 
   const user = ensureCurrentUser(currentUser);
   const email = user.attributes.email || '';
-  const changeEmailForm = user.id ? (
+  const contactInfoForm = user.id ? (
     <ContactDetailsForm
       className={css.form}
       initialValues={{ email }}
@@ -98,7 +98,7 @@ export const ContactDetailsPageComponent = props => {
             <h1 className={css.title}>
               <FormattedMessage id="ContactDetailsPage.heading" />
             </h1>
-            {changeEmailForm}
+            {contactInfoForm}
           </div>
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
