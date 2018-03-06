@@ -155,8 +155,6 @@ export class SearchPageComponent extends Component {
       BOUNDS_FIXED_PRECISION
     );
 
-    // Bounds from URL differ from bounds currently set to map
-    const receivedBoundsChanged = !hasSameSDKBounds(viewportBounds, bounds);
     // ViewportBounds from (previous) rendering differ from viewportBounds currently set to map
     // I.e. user has changed the map somehow: moved, panned, zoomed, resized
     const viewportBoundsChanged =
@@ -165,7 +163,7 @@ export class SearchPageComponent extends Component {
     // If mapSearch url param is given (and we have not just opened mobile map modal)
     // or original location search is rendered once,
     // we start to react to 'bounds_changed' event by generating new searches
-    if (receivedBoundsChanged && viewportBoundsChanged && !this.modalOpenedBoundsChange) {
+    if (viewportBoundsChanged && !this.modalOpenedBoundsChange) {
       const origin = googleLatLngToSDKLatLng(viewportGMapBounds.getCenter());
       const searchParams = {
         address,
