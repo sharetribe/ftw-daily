@@ -21,9 +21,9 @@ describe('ContactDetailsPage', () => {
         onManageDisableScrolling={noop}
         sendVerificationEmailInProgress={false}
         onResendVerificationEmail={noop}
-        onSubmitChangeEmail={noop}
-        changeEmailInProgress={false}
-        emailChanged={false}
+        onSubmitContactDetails={noop}
+        saveContactDetailsInProgress={false}
+        contactDetailsChanged={false}
         intl={fakeIntl}
       />
     );

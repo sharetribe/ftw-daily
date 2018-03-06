@@ -45,7 +45,7 @@ class ContactDetailsFormComponent extends Component {
     const {
       rootClassName,
       className,
-      changeEmailError,
+      saveContactDetailsError,
       currentUser,
       form,
       handleSubmit,
@@ -86,7 +86,7 @@ class ContactDetailsFormComponent extends Component {
       sendVerificationEmailError
     );
 
-    const emailTakenErrorText = isChangeEmailTakenError(changeEmailError)
+    const emailTakenErrorText = isChangeEmailTakenError(saveContactDetailsError)
       ? intl.formatMessage({ id: 'ContactDetailsForm.emailTakenError' })
       : null;
 
@@ -187,7 +187,7 @@ class ContactDetailsFormComponent extends Component {
     const passwordFailedMessage = intl.formatMessage({
       id: 'ContactDetailsForm.passwordFailed',
     });
-    const passwordErrorText = isChangeEmailWrongPassword(changeEmailError)
+    const passwordErrorText = isChangeEmailWrongPassword(saveContactDetailsError)
       ? passwordFailedMessage
       : null;
 
@@ -196,7 +196,7 @@ class ContactDetailsFormComponent extends Component {
     });
 
     const genericFailure =
-      changeEmailError && !(emailTakenErrorText || passwordErrorText) ? (
+      saveContactDetailsError && !(emailTakenErrorText || passwordErrorText) ? (
         <span className={css.error}>
           <FormattedMessage id="ContactDetailsForm.genericFailure" />
         </span>
@@ -260,7 +260,7 @@ class ContactDetailsFormComponent extends Component {
 ContactDetailsFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
-  changeEmailError: null,
+  saveContactDetailsError: null,
   inProgress: false,
   sendVerificationEmailError: null,
   sendVerificationEmailInProgress: false,
@@ -272,7 +272,7 @@ ContactDetailsFormComponent.propTypes = {
   ...formPropTypes,
   rootClassName: string,
   className: string,
-  changeEmailError: propTypes.error,
+  saveContactDetailsError: propTypes.error,
   inProgress: bool,
   intl: intlShape.isRequired,
   onResendVerificationEmail: func.isRequired,

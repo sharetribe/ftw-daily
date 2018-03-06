@@ -34,7 +34,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
             },
             "selected": true,
             "text": <FormattedMessage
-              id="ContactDetailsPage.emailTabTitle"
+              id="ContactDetailsPage.contactDetailsTabTitle"
               values={Object {}}
         />,
           },

@@ -3,36 +3,41 @@ import { currentUserShowSuccess } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
 
-export const CHANGE_EMAIL_REQUEST = 'app/ContactDetailsPage/CHANGE_EMAIL_REQUEST';
-export const CHANGE_EMAIL_SUCCESS = 'app/ContactDetailsPage/CHANGE_EMAIL_SUCCESS';
-export const CHANGE_EMAIL_ERROR = 'app/ContactDetailsPage/CHANGE_EMAIL_ERROR';
+export const SAVE_CONTACT_DETAILS_REQUEST = 'app/ContactDetailsPage/SAVE_CONTACT_DETAILS_REQUEST';
+export const SAVE_CONTACT_DETAILS_SUCCESS = 'app/ContactDetailsPage/SAVE_CONTACT_DETAILS_SUCCESS';
+export const SAVE_CONTACT_DETAILS_ERROR = 'app/ContactDetailsPage/SAVE_CONTACT_DETAILS_ERROR';
 
-export const CHANGE_EMAIL_CLEAR = 'app/ContactDetailsPage/CHANGE_EMAIL_CLEAR';
+export const SAVE_CONTACT_DETAILS_CLEAR = 'app/ContactDetailsPage/SAVE_CONTACT_DETAILS_CLEAR';
 
 // ================ Reducer ================ //
 
 const initialState = {
-  changeEmailError: null,
-  changeEmailInProgress: false,
-  emailChanged: false,
+  saveContactDetailsError: null,
+  saveContactDetailsInProgress: false,
+  contactDetailsChanged: false,
 };
 
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
-    case CHANGE_EMAIL_REQUEST:
-      return { ...state, changeEmailInProgress: true, changeEmailError: null, emailChanged: false };
-    case CHANGE_EMAIL_SUCCESS:
-      return { ...state, changeEmailInProgress: false, emailChanged: true };
-    case CHANGE_EMAIL_ERROR:
-      return { ...state, changeEmailInProgress: false, changeEmailError: payload };
-
-    case CHANGE_EMAIL_CLEAR:
+    case SAVE_CONTACT_DETAILS_REQUEST:
       return {
         ...state,
-        changeEmailInProgress: false,
-        changeEmailError: null,
-        emailChanged: false,
+        saveContactDetailsInProgress: true,
+        saveContactDetailsError: null,
+        contactDetailsChanged: false,
+      };
+    case SAVE_CONTACT_DETAILS_SUCCESS:
+      return { ...state, saveContactDetailsInProgress: false, contactDetailsChanged: true };
+    case SAVE_CONTACT_DETAILS_ERROR:
+      return { ...state, saveContactDetailsInProgress: false, saveContactDetailsError: payload };
+
+    case SAVE_CONTACT_DETAILS_CLEAR:
+      return {
+        ...state,
+        saveContactDetailsInProgress: false,
+        saveContactDetailsError: null,
+        contactDetailsChanged: false,
       };
 
     default:
@@ -42,28 +47,28 @@ export default function reducer(state = initialState, action = {}) {
 
 // ================ Action creators ================ //
 
-export const changeEmailRequest = () => ({ type: CHANGE_EMAIL_REQUEST });
-export const changeEmailSuccess = () => ({ type: CHANGE_EMAIL_SUCCESS });
-export const changeEmailError = error => ({
-  type: CHANGE_EMAIL_ERROR,
+export const saveContactDetailsRequest = () => ({ type: SAVE_CONTACT_DETAILS_REQUEST });
+export const saveContactDetailsSuccess = () => ({ type: SAVE_CONTACT_DETAILS_SUCCESS });
+export const saveContactDetailsError = error => ({
+  type: SAVE_CONTACT_DETAILS_ERROR,
   payload: error,
   error: true,
 });
 
-export const changeEmailClear = () => ({ type: CHANGE_EMAIL_CLEAR });
+export const saveContactDetailsClear = () => ({ type: SAVE_CONTACT_DETAILS_CLEAR });
 
 // ================ Thunks ================ //
 
-export const changeEmail = params => (dispatch, getState, sdk) => {
-  dispatch(changeEmailRequest());
+export const saveContactDetails = params => (dispatch, getState, sdk) => {
+  dispatch(saveContactDetailsRequest());
   const { email, currentPassword } = params;
 
   return sdk.currentUser
     .changeEmail({ email, currentPassword }, { expand: true })
     .then(response => {
       const currentUser = response.data.data;
-      dispatch(changeEmailSuccess());
+      dispatch(saveContactDetailsSuccess());
       dispatch(currentUserShowSuccess(currentUser));
     })
-    .catch(e => dispatch(changeEmailError(storableError(e))));
+    .catch(e => dispatch(saveContactDetailsError(storableError(e))));
 };
