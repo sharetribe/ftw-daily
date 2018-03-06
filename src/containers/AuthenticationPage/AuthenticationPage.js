@@ -129,6 +129,12 @@ export class AuthenticationPageComponent extends Component {
       },
     ];
 
+    const handleSubmitSignup = values => {
+      const { fname, lname, ...rest } = values;
+      const params = { firstName: fname, lastName: lname, ...rest };
+      submitSignup(params);
+    };
+
     const formContent = (
       <div className={css.content}>
         <LinkTabNavHorizontal className={css.tabs} tabs={tabs} />
@@ -138,7 +144,7 @@ export class AuthenticationPageComponent extends Component {
         ) : (
           <SignupForm
             className={css.form}
-            onSubmit={submitSignup}
+            onSubmit={handleSubmitSignup}
             inProgress={authInProgress}
             onOpenTermsOfService={() => this.setState({ tosModalOpen: true })}
           />

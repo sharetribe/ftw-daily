@@ -140,6 +140,7 @@ const PayoutDetailsFormComponent = props => {
         className={css.field}
         type="text"
         name="streetAddress"
+        autoComplete="street-address"
         id={`${form}.streetAddress`}
         label={streetAddressLabel}
         placeholder={streetAddressPlaceholder}
@@ -152,6 +153,7 @@ const PayoutDetailsFormComponent = props => {
           className={css.postalCode}
           type="text"
           name="postalCode"
+          autoComplete="postal-code"
           id={`${form}.postalCode`}
           label={postalCodeLabel}
           placeholder={postalCodePlaceholder}
@@ -163,6 +165,7 @@ const PayoutDetailsFormComponent = props => {
           className={css.city}
           type="text"
           name="city"
+          autoComplete="address-level2"
           id={`${form}.city`}
           label={cityLabel}
           placeholder={cityPlaceholder}
@@ -227,8 +230,9 @@ const PayoutDetailsFormComponent = props => {
             disabled={disabled}
             className={css.firstName}
             type="text"
-            name="firstName"
-            id={`${form}.firstName`}
+            name="fname"
+            autoComplete="given-name"
+            id={`${form}.fname`}
             label={firstNameLabel}
             placeholder={firstNamePlaceholder}
             validate={firstNameRequired}
@@ -237,8 +241,9 @@ const PayoutDetailsFormComponent = props => {
             disabled={disabled}
             className={css.lastName}
             type="text"
-            name="lastName"
-            id={`${form}.lastName`}
+            name="lname"
+            autoComplete="family-name"
+            id={`${form}.lname`}
             label={lastNameLabel}
             placeholder={lastNamePlaceholder}
             validate={lastNameRequired}
@@ -265,6 +270,7 @@ const PayoutDetailsFormComponent = props => {
           disabled={disabled}
           className={css.selectCountry}
           name="country"
+          autoComplete="country"
           id={`${form}.country`}
           label={countryLabel}
           validate={countryRequired}

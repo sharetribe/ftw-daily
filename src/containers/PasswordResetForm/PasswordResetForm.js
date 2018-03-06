@@ -68,6 +68,7 @@ const PasswordResetFormComponent = props => {
         className={css.password}
         type="password"
         name="password"
+        autoComplete="new-password"
         id={`${form}.password`}
         label={passwordLabel}
         placeholder={passwordPlaceholder}

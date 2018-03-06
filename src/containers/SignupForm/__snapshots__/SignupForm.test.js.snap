@@ -17,6 +17,7 @@ exports[`SignupForm matches snapshot 1`] = `
         SignupForm.emailLabel
       </label>
       <input
+        autoComplete="email"
         className=""
         id="SignupForm.email"
         name="email"
@@ -37,14 +38,15 @@ exports[`SignupForm matches snapshot 1`] = `
         className=""
       >
         <label
-          htmlFor="SignupForm.firstName"
+          htmlFor="SignupForm.fname"
         >
           SignupForm.firstNameLabel
         </label>
         <input
+          autoComplete="given-name"
           className=""
-          id="SignupForm.firstName"
-          name="firstName"
+          id="SignupForm.fname"
+          name="fname"
           onBlur={[Function]}
           onChange={[Function]}
           onDragStart={[Function]}
@@ -59,14 +61,15 @@ exports[`SignupForm matches snapshot 1`] = `
         className=""
       >
         <label
-          htmlFor="SignupForm.lastName"
+          htmlFor="SignupForm.lname"
         >
           SignupForm.lastNameLabel
         </label>
         <input
+          autoComplete="family-name"
           className=""
-          id="SignupForm.lastName"
-          name="lastName"
+          id="SignupForm.lname"
+          name="lname"
           onBlur={[Function]}
           onChange={[Function]}
           onDragStart={[Function]}
@@ -87,6 +90,7 @@ exports[`SignupForm matches snapshot 1`] = `
         SignupForm.passwordLabel
       </label>
       <input
+        autoComplete="new-password"
         className=""
         id="SignupForm.password"
         name="password"

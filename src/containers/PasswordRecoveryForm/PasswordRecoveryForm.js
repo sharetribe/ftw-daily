@@ -68,6 +68,7 @@ const PasswordRecoveryFormComponent = props => {
         className={css.email}
         type="email"
         name="email"
+        autoComplete="email"
         id={`${form}.email`}
         label={emailLabel}
         placeholder={emailPlaceholder}

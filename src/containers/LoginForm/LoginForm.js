@@ -65,6 +65,7 @@ const LoginFormComponent = props => {
         <TextInputField
           type="email"
           name="email"
+          autoComplete="email"
           id={`${form}.email`}
           label={emailLabel}
           placeholder={emailPlaceholder}
@@ -74,6 +75,7 @@ const LoginFormComponent = props => {
           className={css.password}
           type="password"
           name="password"
+          autoComplete="current-password"
           id={`${form}.password`}
           label={passwordLabel}
           placeholder={passwordPlaceholder}

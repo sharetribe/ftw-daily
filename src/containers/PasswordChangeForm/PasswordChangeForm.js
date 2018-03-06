@@ -134,6 +134,7 @@ class PasswordChangeFormComponent extends Component {
           <TextInputField
             type="password"
             name="newPassword"
+            autoComplete="new-password"
             id={`${form}.newPassword`}
             label={newPasswordLabel}
             placeholder={newPasswordPlaceholder}
@@ -153,6 +154,7 @@ class PasswordChangeFormComponent extends Component {
             className={css.password}
             type="password"
             name="currentPassword"
+            autoComplete="current-password"
             id={`${form}.currentPassword`}
             label={passwordLabel}
             placeholder={passwordPlaceholder}
