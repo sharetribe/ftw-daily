@@ -34,7 +34,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe connected 1`] = `
             },
             "selected": false,
             "text": <FormattedMessage
-              id="PayoutPreferencesPage.emailTabTitle"
+              id="PayoutPreferencesPage.contactDetailsTabTitle"
               values={Object {}}
         />,
           },
@@ -124,7 +124,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
             },
             "selected": false,
             "text": <FormattedMessage
-              id="PayoutPreferencesPage.emailTabTitle"
+              id="PayoutPreferencesPage.contactDetailsTabTitle"
               values={Object {}}
         />,
           },
@@ -223,7 +223,7 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
             },
             "selected": false,
             "text": <FormattedMessage
-              id="PayoutPreferencesPage.emailTabTitle"
+              id="PayoutPreferencesPage.contactDetailsTabTitle"
               values={Object {}}
         />,
           },
