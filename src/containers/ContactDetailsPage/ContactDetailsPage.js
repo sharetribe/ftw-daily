@@ -19,21 +19,21 @@ import {
 import { ContactDetailsForm, TopbarContainer } from '../../containers';
 
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { changeEmail, changeEmailClear } from './ContactDetailsPage.duck';
+import { saveContactDetails, saveContactDetailsClear } from './ContactDetailsPage.duck';
 import css from './ContactDetailsPage.css';
 
 export const ContactDetailsPageComponent = props => {
   const {
-    changeEmailError,
-    changeEmailInProgress,
+    saveContactDetailsError,
+    saveContactDetailsInProgress,
     currentUser,
-    emailChanged,
+    contactDetailsChanged,
     onChange,
     scrollingDisabled,
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
     onResendVerificationEmail,
-    onSubmitChangeEmail,
+    onSubmitContactDetails,
     intl,
   } = props;
 
@@ -67,13 +67,13 @@ export const ContactDetailsPageComponent = props => {
     <ContactDetailsForm
       className={css.form}
       initialValues={{ email }}
-      changeEmailError={changeEmailError}
+      saveContactDetailsError={saveContactDetailsError}
       currentUser={currentUser}
       onResendVerificationEmail={onResendVerificationEmail}
-      onSubmit={onSubmitChangeEmail}
+      onSubmit={onSubmitContactDetails}
       onChange={onChange}
-      inProgress={changeEmailInProgress}
-      ready={emailChanged}
+      inProgress={saveContactDetailsInProgress}
+      ready={contactDetailsChanged}
       sendVerificationEmailInProgress={sendVerificationEmailInProgress}
       sendVerificationEmailError={sendVerificationEmailError}
     />
@@ -110,7 +110,7 @@ export const ContactDetailsPageComponent = props => {
 };
 
 ContactDetailsPageComponent.defaultProps = {
-  changeEmailError: null,
+  saveContactDetailsError: null,
   currentUser: null,
   sendVerificationEmailError: null,
 };
@@ -118,12 +118,12 @@ ContactDetailsPageComponent.defaultProps = {
 const { bool, func } = PropTypes;
 
 ContactDetailsPageComponent.propTypes = {
-  changeEmailError: propTypes.error,
-  changeEmailInProgress: bool.isRequired,
+  saveContactDetailsError: propTypes.error,
+  saveContactDetailsInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
-  emailChanged: bool.isRequired,
+  contactDetailsChanged: bool.isRequired,
   onChange: func.isRequired,
-  onSubmitChangeEmail: func.isRequired,
+  onSubmitContactDetails: func.isRequired,
   scrollingDisabled: bool.isRequired,
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: propTypes.error,
@@ -136,12 +136,16 @@ ContactDetailsPageComponent.propTypes = {
 const mapStateToProps = state => {
   // Topbar needs user info.
   const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
-  const { changeEmailError, changeEmailInProgress, emailChanged } = state.ContactDetailsPage;
+  const {
+    saveContactDetailsError,
+    saveContactDetailsInProgress,
+    contactDetailsChanged,
+  } = state.ContactDetailsPage;
   return {
-    changeEmailError,
-    changeEmailInProgress,
+    saveContactDetailsError,
+    saveContactDetailsInProgress,
     currentUser,
-    emailChanged,
+    contactDetailsChanged,
     scrollingDisabled: isScrollingDisabled(state),
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
@@ -149,9 +153,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onChange: () => dispatch(changeEmailClear()),
+  onChange: () => dispatch(saveContactDetailsClear()),
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
-  onSubmitChangeEmail: values => dispatch(changeEmail(values)),
+  onSubmitContactDetails: values => dispatch(saveContactDetails(values)),
 });
 
 const ContactDetailsPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
