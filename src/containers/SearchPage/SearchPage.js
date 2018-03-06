@@ -106,9 +106,10 @@ export class SearchPageComponent extends Component {
 
     // Initiating map creates 'bounds_changes' event
     // we listen to that event to make new searches
-    // So, if the search comes from location search input,
-    // we need to by pass 2nd search created by initial 'bounds_changes' event
-    this.locationInputSearch = true;
+    // So, if the search comes from location search input (this.viewportBounds == null),
+    // we need to by pass extra searches created by Google Map's 'indle' event.
+    // This is done by keeping track of map's viewport bounds (which differ from location bounds)
+    this.viewportBounds = null;
     this.modalOpenedBoundsChange = false;
     this.searchMapListingsInProgress = false;
 
@@ -132,7 +133,7 @@ export class SearchPageComponent extends Component {
         latlngBounds: ['bounds'],
       });
       if (!mapSearch) {
-        this.locationInputSearch = true;
+        this.viewportBounds = null;
       }
     }
   }
@@ -153,13 +154,18 @@ export class SearchPageComponent extends Component {
       googleBoundsToSDKBounds(viewportGMapBounds),
       BOUNDS_FIXED_PRECISION
     );
-    const boundsChanged = !hasSameSDKBounds(viewportBounds, bounds);
-    const isRealMapSearch = mapSearch && !this.modalOpenedBoundsChange;
+
+    // Bounds from URL differ from bounds currently set to map
+    const receivedBoundsChanged = !hasSameSDKBounds(viewportBounds, bounds);
+    // ViewportBounds from (previous) rendering differ from viewportBounds currently set to map
+    // I.e. user has changed the map somehow: moved, panned, zoomed, resized
+    const viewportBoundsChanged =
+      this.viewportBounds && !hasSameSDKBounds(this.viewportBounds, viewportBounds);
 
     // If mapSearch url param is given (and we have not just opened mobile map modal)
     // or original location search is rendered once,
     // we start to react to 'bounds_changed' event by generating new searches
-    if (boundsChanged && (isRealMapSearch || !this.locationInputSearch)) {
+    if (receivedBoundsChanged && viewportBoundsChanged && !this.modalOpenedBoundsChange) {
       const origin = googleLatLngToSDKLatLng(viewportGMapBounds.getCenter());
       const searchParams = {
         address,
@@ -170,11 +176,12 @@ export class SearchPageComponent extends Component {
         ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest),
         ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest),
       };
+      this.viewportBounds = viewportBounds;
       history.push(
         createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
       );
     } else {
-      this.locationInputSearch = false;
+      this.viewportBounds = viewportBounds;
       this.modalOpenedBoundsChange = false;
     }
   }
@@ -281,7 +288,7 @@ export class SearchPageComponent extends Component {
         onCloseAsModal={() => {
           onManageDisableScrolling('SearchPage.map', false);
         }}
-        useLocationSearchBounds={this.locationInputSearch}
+        useLocationSearchBounds={!this.viewportBounds}
       />
     );
     const showSearchMapInMobile = this.state.isSearchMapOpenOnMobile ? searchMap : null;
