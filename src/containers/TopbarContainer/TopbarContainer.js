@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, number, object, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -12,6 +12,7 @@ import { Topbar } from '../../components';
 export const TopbarContainerComponent = props => {
   const {
     authInProgress,
+    currentPage,
     currentUser,
     currentUserHasListings,
     currentUserHasOrders,
@@ -31,6 +32,7 @@ export const TopbarContainerComponent = props => {
   return (
     <Topbar
       authInProgress={authInProgress}
+      currentPage={currentPage}
       currentUser={currentUser}
       currentUserHasListings={currentUserHasListings}
       currentUserHasOrders={currentUserHasOrders}
@@ -50,16 +52,16 @@ export const TopbarContainerComponent = props => {
 };
 
 TopbarContainerComponent.defaultProps = {
+  currentPage: null,
   currentUser: null,
   currentUserHasOrders: null,
   notificationCount: 0,
   sendVerificationEmailError: null,
 };
 
-const { bool, func, number, object, shape } = PropTypes;
-
 TopbarContainerComponent.propTypes = {
   authInProgress: bool.isRequired,
+  currentPage: string,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   currentUserHasOrders: bool,

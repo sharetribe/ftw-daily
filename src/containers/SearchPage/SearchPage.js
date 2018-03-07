@@ -399,7 +399,7 @@ export class SearchPageComponent extends Component {
           mainEntity: [schemaMainEntity],
         }}
       >
-        <TopbarContainer className={topbarClasses} />
+        <TopbarContainer className={topbarClasses} currentPage="SearchPage" />
         <div className={css.container}>
           <div className={css.searchResultContainer}>
             <SearchFilters
