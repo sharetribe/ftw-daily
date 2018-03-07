@@ -260,6 +260,8 @@ export class SearchPageComponent extends Component {
       latlngBounds: ['bounds'],
     });
 
+    // urlQueryParams doesn't contain page specific url params
+    // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
     const urlQueryParams = pickSearchParamsOnly(searchInURL);
 
     // Page transition might initially use values from previous search
@@ -404,7 +406,11 @@ export class SearchPageComponent extends Component {
           mainEntity: [schemaMainEntity],
         }}
       >
-        <TopbarContainer className={topbarClasses} currentPage="SearchPage" />
+        <TopbarContainer
+          className={topbarClasses}
+          currentPage="SearchPage"
+          currentSearchParams={urlQueryParams}
+        />
         <div className={css.container}>
           <div className={css.searchResultContainer}>
             <SearchFilters

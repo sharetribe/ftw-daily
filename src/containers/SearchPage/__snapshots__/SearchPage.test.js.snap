@@ -19,6 +19,12 @@ exports[`SearchPageComponent matches snapshot 1`] = `
 >
   <withRouter(Connect(TopbarContainerComponent))
     currentPage="SearchPage"
+    currentSearchParams={
+      Object {
+        "bounds": undefined,
+        "origin": undefined,
+      }
+    }
   />
   <div>
     <div>

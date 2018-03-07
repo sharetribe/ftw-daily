@@ -13,6 +13,7 @@ export const TopbarContainerComponent = props => {
   const {
     authInProgress,
     currentPage,
+    currentSearchParams,
     currentUser,
     currentUserHasListings,
     currentUserHasOrders,
@@ -33,6 +34,7 @@ export const TopbarContainerComponent = props => {
     <Topbar
       authInProgress={authInProgress}
       currentPage={currentPage}
+      currentSearchParams={currentSearchParams}
       currentUser={currentUser}
       currentUserHasListings={currentUserHasListings}
       currentUserHasOrders={currentUserHasOrders}
@@ -53,6 +55,7 @@ export const TopbarContainerComponent = props => {
 
 TopbarContainerComponent.defaultProps = {
   currentPage: null,
+  currentSearchParams: null,
   currentUser: null,
   currentUserHasOrders: null,
   notificationCount: 0,
@@ -62,6 +65,7 @@ TopbarContainerComponent.defaultProps = {
 TopbarContainerComponent.propTypes = {
   authInProgress: bool.isRequired,
   currentPage: string,
+  currentSearchParams: object,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,
   currentUserHasOrders: bool,

@@ -115,3 +115,12 @@
   white-space: nowrap;
   color: var(--marketplaceColor);
 }
+
+.currentPage {
+  color: var(--matterColorDark);
+
+  /* black left border */
+  border-left: 5px solid black;
+  margin-left: -24px;
+  padding-left: 19px;
+}
