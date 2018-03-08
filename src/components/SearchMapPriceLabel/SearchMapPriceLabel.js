@@ -22,11 +22,13 @@ class SearchMapPriceLabel extends Component {
     const nextListing = ensureListing(nextProps.listing);
     const isSameListing = currentListing.id.uuid === nextListing.id.uuid;
     const hasSamePrice = currentListing.attributes.price === nextListing.attributes.price;
-    return !(isSameListing && hasSamePrice);
+    const hasSameActiveStatus = this.props.isActive === nextProps.isActive;
+
+    return !(isSameListing && hasSamePrice && hasSameActiveStatus);
   }
 
   render() {
-    const { className, rootClassName, intl, listing, onListingClicked } = this.props;
+    const { className, rootClassName, intl, listing, onListingClicked, isActive } = this.props;
     const currentListing = ensureListing(listing);
     const { geolocation, price } = currentListing.attributes;
 
@@ -37,6 +39,8 @@ class SearchMapPriceLabel extends Component {
     // Explicit type change to object literal for Google OverlayViews (geolocation is SDK type)
     const latLngLiteral = { lat: geolocation.lat, lng: geolocation.lng };
     const classes = classNames(rootClassName || css.root, className);
+    const priceLabelClasses = classNames(css.priceLabel, { [css.priceLabelActive]: isActive });
+    const caretClasses = classNames(css.caret, { [css.caretActive]: isActive });
 
     return (
       <OverlayView
@@ -46,8 +50,8 @@ class SearchMapPriceLabel extends Component {
       >
         <button className={classes} onClick={() => onListingClicked(currentListing)}>
           <div className={css.caretShadow} />
-          <div className={css.priceLabel}>{formattedPrice}</div>
-          <div className={css.caret} />
+          <div className={priceLabelClasses}>{formattedPrice}</div>
+          <div className={caretClasses} />
         </button>
       </OverlayView>
     );

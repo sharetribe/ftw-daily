@@ -15,7 +15,10 @@ const getPixelPositionOffset = (width, height) => {
 
 class SearchMapGroupLabel extends Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.listings.length > this.props.listings.length;
+    const hasSameAmountOfListings = nextProps.listings.length === this.props.listings.length;
+    const hasSameActiveStatus = this.props.isActive === nextProps.isActive;
+
+    return !(hasSameAmountOfListings && hasSameActiveStatus);
   }
 
   render() {

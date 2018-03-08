@@ -12,6 +12,8 @@ export const SEARCH_MAP_LISTINGS_REQUEST = 'app/SearchPage/SEARCH_MAP_LISTINGS_R
 export const SEARCH_MAP_LISTINGS_SUCCESS = 'app/SearchPage/SEARCH_MAP_LISTINGS_SUCCESS';
 export const SEARCH_MAP_LISTINGS_ERROR = 'app/SearchPage/SEARCH_MAP_LISTINGS_ERROR';
 
+export const SEARCH_MAP_SET_ACTIVE_LISTING = 'app/SearchPage/SEARCH_MAP_SET_ACTIVE_LISTING';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -70,6 +72,11 @@ const listingPageReducer = (state = initialState, action = {}) => {
       console.error(payload);
       return { ...state, searchMapListingsError: payload };
 
+    case SEARCH_MAP_SET_ACTIVE_LISTING:
+      return {
+        ...state,
+        activeListingId: payload,
+      };
     default:
       return state;
   }
@@ -129,6 +136,11 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
       throw e;
     });
 };
+
+export const setActiveListing = listingId => ({
+  type: SEARCH_MAP_SET_ACTIVE_LISTING,
+  payload: listingId,
+});
 
 export const searchMapListings = searchParams => (dispatch, getState, sdk) => {
   dispatch(searchMapListingsRequest(searchParams));

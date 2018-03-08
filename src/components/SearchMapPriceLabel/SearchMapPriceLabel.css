@@ -49,6 +49,12 @@
   }
 }
 
+.priceLabelActive {
+  background-color: var(--marketplaceColor);
+  border-color: var(--marketplaceColor);
+  color: var(--matterColorLight);
+}
+
 .caretShadow {
   /* Caret / arrow dimensions and position */
   width: 6px;
@@ -81,4 +87,8 @@
   border-bottom-style: solid;
   border-bottom-color: var(--matterColorNegative);
   border-bottom-width: 1px;
+}
+
+.caretActive {
+  background-color: var(--marketplaceColor);
 }
