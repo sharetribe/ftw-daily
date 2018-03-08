@@ -188,6 +188,11 @@ export class SearchPageComponent extends Component {
   }
 
   fetchMoreListingsToMap(location) {
+    // TODO Remove this function.
+    // Temporarily just return immediately to avoid merge conflicts.
+    return;
+
+    // eslint-disable-next-line no-unreachable
     const { onSearchMapListings } = this.props;
     const searchInURL = parse(location.search, {
       latlng: ['origin'],
