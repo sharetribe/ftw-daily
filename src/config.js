@@ -17,7 +17,7 @@ const i18n = {
 };
 
 // Should search results be ordered by distance to origin.
-const sortSearchByDistance = true;
+const sortSearchByDistance = false;
 
 // The transaction line item code for the main unit type in bookings.
 //

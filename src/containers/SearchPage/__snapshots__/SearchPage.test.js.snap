@@ -22,7 +22,6 @@ exports[`SearchPageComponent matches snapshot 1`] = `
     currentSearchParams={
       Object {
         "bounds": undefined,
-        "origin": undefined,
       }
     }
   />
