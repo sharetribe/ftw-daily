@@ -205,6 +205,7 @@ export class SearchPageComponent extends Component {
       page,
       perPage,
       'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+      'limit.images': 1,
     };
     this.searchMapListingsInProgress = true;
 
@@ -554,6 +555,7 @@ SearchPage.loadData = (params, search) => {
     perPage: RESULT_PAGE_SIZE,
     include: ['author', 'images'],
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+    'limit.images': 1,
   });
 };
 
