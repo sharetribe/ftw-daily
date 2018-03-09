@@ -86,9 +86,10 @@ const validURLParamsForExtendedData = params => {
 // extract search parameters, including a custom attribute named category
 const pickSearchParamsOnly = params => {
   const { address, origin, bounds, country, ...rest } = params || {};
-  const originMaybe = config.sortSearchByDistance ? { origin } : {};
+  const boundsMaybe = bounds ? { bounds } : {};
+  const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
   return {
-    bounds,
+    ...boundsMaybe,
     ...originMaybe,
     ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest),
     ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest),
@@ -552,7 +553,7 @@ SearchPage.loadData = (params, search) => {
     latlngBounds: ['bounds'],
   });
   const { page = 1, address, country, origin, ...rest } = queryParams;
-  const originMaybe = config.sortSearchByDistance ? { origin } : {};
+  const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
   return searchListings({
     ...rest,
     ...originMaybe,
