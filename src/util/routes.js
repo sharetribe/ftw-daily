@@ -108,7 +108,9 @@ export const canonicalRoutePath = (routes, location) => {
   if (isListingRoute) {
     // Remove the dynamic slug from the listing page canonical URL
 
-    const parts = pathname.split('/');
+    // Remove possible trailing slash
+    const cleanedPathName = pathname.replace(/\/$/, '');
+    const parts = cleanedPathName.split('/');
 
     if (parts.length !== 4) {
       throw new Error('Expected ListingPage route to have 4 parts');
