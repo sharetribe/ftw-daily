@@ -1,13 +1,14 @@
 import React from 'react';
 
 import { TextInputField } from '../../components';
-import normalizePhone from './fiNormalizer';
+import { format, parse } from './fiFormatter';
 
 const FieldPhoneNumberInput = props => {
   const inputProps = {
     ...props,
     type: 'text',
-    normalize: normalizePhone,
+    format: format,
+    parse: parse,
   };
 
   return <TextInputField {...inputProps} />;

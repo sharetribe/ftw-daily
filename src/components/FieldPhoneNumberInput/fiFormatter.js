@@ -24,7 +24,7 @@ const sliceInternational = numbers => {
 };
 
 /**
- * Normalize a phone number in a Finnish
+ * Format a phone number in a Finnish
  * mobile phone number format.
  *
  * Uses one of the following formats:
@@ -33,9 +33,9 @@ const sliceInternational = numbers => {
  * 00123 55 1234567
  * 555 1234567
  */
-const normalizePhone = value => {
+export const format = value => {
   if (!value) {
-    return value;
+    return '';
   }
 
   const leadingPlus = value.match(/^\+/g);
@@ -58,4 +58,8 @@ const normalizePhone = value => {
   return sliceLocal(numbers);
 };
 
-export default normalizePhone;
+/**
+ * Parser that strips whitespaces away from a phone number
+ * string so that the plain number can be stored.
+ */
+export const parse = value => (value ? value.replace(/\s/g, '') : '');
