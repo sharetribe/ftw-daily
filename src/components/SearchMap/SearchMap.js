@@ -90,6 +90,7 @@ const withCoordinatesObfuscated = listings => {
  */
 const MapWithGoogleMap = withGoogleMap(props => {
   const {
+    activeListingId,
     center,
     infoCardOpen,
     isOpenOnModal,
@@ -103,6 +104,10 @@ const MapWithGoogleMap = withGoogleMap(props => {
 
   const listingArraysInLocations = reducedToArray(groupedByCoordinates(listings));
   const priceLabels = listingArraysInLocations.reverse().map(listingArr => {
+    const isActive = activeListingId
+      ? !!listingArr.find(l => activeListingId.uuid === l.id.uuid)
+      : false;
+
     // If location contains only one listing, print price label
     if (listingArr.length === 1) {
       const listing = listingArr[0];
@@ -114,6 +119,7 @@ const MapWithGoogleMap = withGoogleMap(props => {
       }
       return (
         <SearchMapPriceLabel
+          isActive={isActive}
           key={listing.id.uuid}
           className={LABEL_HANDLE}
           listing={listing}
@@ -123,6 +129,7 @@ const MapWithGoogleMap = withGoogleMap(props => {
     }
     return (
       <SearchMapGroupLabel
+        isActive={isActive}
         key={listingArr[0].id.uuid}
         className={LABEL_HANDLE}
         listings={listingArr}
@@ -237,6 +244,7 @@ export class SearchMapComponent extends Component {
       onIdle,
       zoom,
       coordinatesConfig,
+      activeListingId,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
     const mapClasses = mapRootClassName || css.mapRoot;
@@ -255,6 +263,7 @@ export class SearchMapComponent extends Component {
         center={center}
         isOpenOnModal={isOpenOnModal}
         listings={listings}
+        activeListingId={activeListingId}
         infoCardOpen={this.state.infoCardOpen}
         onListingClicked={this.onListingClicked}
         onMapLoad={this.onMapLoadHandler}
@@ -276,6 +285,7 @@ export class SearchMapComponent extends Component {
 SearchMapComponent.defaultProps = {
   bounds: null,
   center: new sdkTypes.LatLng(0, 0),
+  activeListingId: null,
   className: null,
   isOpenOnModal: false,
   listings: [],
@@ -290,6 +300,7 @@ SearchMapComponent.defaultProps = {
 SearchMapComponent.propTypes = {
   bounds: propTypes.latlngBounds,
   center: propTypes.latlng,
+  activeListingId: propTypes.uuid,
   className: string,
   isOpenOnModal: bool,
   listings: arrayOf(propTypes.listing),

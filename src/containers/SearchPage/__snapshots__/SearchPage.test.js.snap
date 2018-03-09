@@ -119,6 +119,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
     >
       <div>
         <SearchMapComponent
+          activeListingId={null}
           bounds={null}
           center={
             LatLng {

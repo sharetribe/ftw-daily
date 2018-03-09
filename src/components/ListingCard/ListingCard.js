@@ -50,7 +50,7 @@ const formatTitle = (title, maxLength) => {
 };
 
 export const ListingCardComponent = props => {
-  const { className, rootClassName, intl, listing } = props;
+  const { className, rootClassName, intl, listing, setActiveListing } = props;
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
@@ -65,7 +65,11 @@ export const ListingCardComponent = props => {
 
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
-      <div className={css.threeToTwoWrapper}>
+      <div
+        className={css.threeToTwoWrapper}
+        onMouseEnter={() => setActiveListing(currentListing.id)}
+        onMouseLeave={() => setActiveListing(null)}
+      >
         <div className={css.aspectWrapper}>
           <ResponsiveImage
             rootClassName={css.rootForImage}

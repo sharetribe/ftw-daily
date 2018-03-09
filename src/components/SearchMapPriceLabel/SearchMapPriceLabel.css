@@ -6,6 +6,19 @@
   height: auto;
   border: 0;
   padding: 0;
+
+  &:hover {
+    & .priceLabel,
+    & .caret {
+      cursor: pointer;
+
+      /* Same as active */
+      background-color: var(--marketplaceColor);
+      border-color: var(--marketplaceColor);
+      color: var(--matterColorLight);
+      box-shadow: var(--boxShadowPopup);
+    }
+  }
 }
 
 .priceLabel {
@@ -36,17 +49,19 @@
   margin-bottom: 0;
   transition: var(--transitionStyleButton);
 
-  &:hover {
-    color: var(--marketplaceColor);
-    cursor: pointer;
-    box-shadow: var(--boxShadowPopup);
-  }
-
   /* Overwrite dimensions from font styles */
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
   }
+}
+
+.priceLabelActive {
+  /* Same as hover */
+  background-color: var(--marketplaceColor);
+  border-color: var(--marketplaceColor);
+  color: var(--matterColorLight);
+  box-shadow: var(--boxShadowPopup);
 }
 
 .caretShadow {
@@ -73,6 +88,8 @@
   margin-left: -3px;
   transform: rotate(45deg);
 
+  transition: var(--transitionStyleButton);
+
   /* Caret should have same bg-color and border as label */
   background-color: var(--matterColorLight);
   border-right-style: solid;
@@ -81,4 +98,10 @@
   border-bottom-style: solid;
   border-bottom-color: var(--matterColorNegative);
   border-bottom-width: 1px;
+}
+
+.caretActive {
+  /* Same as hover */
+  background-color: var(--marketplaceColor);
+  border-color: var(--marketplaceColor);
 }

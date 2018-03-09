@@ -11,7 +11,10 @@ exports[`ListingCard matches snapshot 1`] = `
     }
   }
 >
-  <div>
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
     <div>
       <ResponsiveImage
         alt="listing1 title"

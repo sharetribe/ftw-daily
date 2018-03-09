@@ -29,7 +29,7 @@ import {
   SearchFiltersPanel,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
-import { searchListings, searchMapListings } from './SearchPage.duck';
+import { searchListings, searchMapListings, setActiveListing } from './SearchPage.duck';
 
 import css from './SearchPage.css';
 
@@ -260,6 +260,8 @@ export class SearchPageComponent extends Component {
       searchParams,
       categories,
       amenities,
+      activeListingId,
+      onActivateListing,
     } = this.props;
     // eslint-disable-next-line no-unused-vars
     const { mapSearch, page, ...searchInURL } = parse(location.search, {
@@ -292,6 +294,7 @@ export class SearchPageComponent extends Component {
 
     const searchMap = (
       <SearchMap
+        activeListingId={activeListingId}
         bounds={bounds}
         center={origin}
         listings={mapListings || []}
@@ -369,6 +372,7 @@ export class SearchPageComponent extends Component {
             listings={listings}
             pagination={listingsAreLoaded ? pagination : null}
             search={searchParamsForPagination}
+            setActiveListing={onActivateListing}
           />
         </div>
       );
@@ -475,6 +479,7 @@ SearchPageComponent.defaultProps = {
   tab: 'listings',
   categories: config.custom.categories,
   amenities: config.custom.amenities,
+  activeListingId: null,
 };
 
 const { array, bool, func, oneOf, object, shape, string } = PropTypes;
@@ -513,6 +518,7 @@ const mapStateToProps = state => {
     searchListingsError,
     searchParams,
     searchMapListingIds,
+    activeListingId,
   } = state.SearchPage;
   const pageListings = getListingsById(state, currentPageResultIds);
   const mapListings = getListingsById(
@@ -528,6 +534,7 @@ const mapStateToProps = state => {
     searchInProgress,
     searchListingsError,
     searchParams,
+    activeListingId,
   };
 };
 
@@ -535,6 +542,7 @@ const mapDispatchToProps = dispatch => ({
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onSearchMapListings: searchParams => dispatch(searchMapListings(searchParams)),
+  onActivateListing: listingId => dispatch(setActiveListing(listingId)),
 });
 
 // Note: it is important that the withRouter HOC is **outside** the

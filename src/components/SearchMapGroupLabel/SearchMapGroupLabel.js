@@ -15,17 +15,22 @@ const getPixelPositionOffset = (width, height) => {
 
 class SearchMapGroupLabel extends Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.listings.length > this.props.listings.length;
+    const hasSameAmountOfListings = nextProps.listings.length === this.props.listings.length;
+    const hasSameActiveStatus = this.props.isActive === nextProps.isActive;
+
+    return !(hasSameAmountOfListings && hasSameActiveStatus);
   }
 
   render() {
-    const { className, rootClassName, listings, onListingClicked } = this.props;
+    const { className, rootClassName, listings, onListingClicked, isActive } = this.props;
     const firstListing = ensureListing(listings[0]);
     const geolocation = firstListing.attributes.geolocation;
 
     // Explicit type change to object literal for Google OverlayViews (geolocation is SDK type)
     const latLngLiteral = { lat: geolocation.lat, lng: geolocation.lng };
     const classes = classNames(rootClassName || css.root, className);
+    const countLabelClasses = classNames(css.details, { [css.detailsActive]: isActive });
+    const caretClasses = classNames(css.caret, { [css.caretActive]: isActive });
 
     return (
       <OverlayView
@@ -35,8 +40,8 @@ class SearchMapGroupLabel extends Component {
       >
         <button className={classes} onClick={() => onListingClicked(listings)}>
           <div className={css.caretShadow} />
-          <div className={css.details}>{listings.length}</div>
-          <div className={css.caret} />
+          <div className={countLabelClasses}>{listings.length}</div>
+          <div className={caretClasses} />
         </button>
       </OverlayView>
     );
