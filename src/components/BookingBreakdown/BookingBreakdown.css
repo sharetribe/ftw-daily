@@ -82,3 +82,20 @@
     margin: 2px 0 0 10px;
   }
 }
+
+.feeInfo {
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColorAnti);
+  margin: 0 0 20px 0;
+  flex-shrink: 0;
+
+  @media (--viewportMedium) {
+    margin-top: auto;
+    margin-bottom: 20px;
+  }
+
+  @media (--viewportLarge) {
+    margin-top: 4px;
+    margin-bottom: 22px;
+  }
+}

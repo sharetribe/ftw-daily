@@ -4,15 +4,20 @@
  */
 import React from 'react';
 import { oneOf, string } from 'prop-types';
-import { intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
-import { propTypes } from '../../util/types';
+import {
+  propTypes,
+  LINE_ITEM_CUSTOMER_COMMISSION,
+  LINE_ITEM_PROVIDER_COMMISSION,
+} from '../../util/types';
 
 import LineItemUnitPrice from './LineItemUnitPrice';
 import LineItemBookingPeriod from './LineItemBookingPeriod';
 import LineItemUnitsMaybe from './LineItemUnitsMaybe';
 import LineItemSubTotalMaybe from './LineItemSubTotalMaybe';
-import LineItemCommissionMaybe from './LineItemCommissionMaybe';
+import LineItemCustomerCommissionMaybe from './LineItemCustomerCommissionMaybe';
+import LineItemProviderCommissionMaybe from './LineItemProviderCommissionMaybe';
 import LineItemRefundMaybe from './LineItemRefundMaybe';
 import LineItemTotalPrice from './LineItemTotalPrice';
 import css from './BookingBreakdown.css';
@@ -20,7 +25,16 @@ import css from './BookingBreakdown.css';
 export const BookingBreakdownComponent = props => {
   const { rootClassName, className, userRole, unitType, transaction, booking, intl } = props;
 
+  const isCustomer = userRole === 'customer';
   const isProvider = userRole === 'provider';
+
+  const commissionLineItem = transaction.attributes.lineItems.find(
+    item =>
+      (item.code === LINE_ITEM_CUSTOMER_COMMISSION ||
+        item.code === LINE_ITEM_PROVIDER_COMMISSION) &&
+      !item.reversal
+  );
+
   const classes = classNames(rootClassName || css.root, className);
 
   return (
@@ -32,14 +46,28 @@ export const BookingBreakdownComponent = props => {
       <LineItemSubTotalMaybe
         transaction={transaction}
         unitType={unitType}
+        userRole={userRole}
+        intl={intl}
+      />
+      <LineItemCustomerCommissionMaybe
+        transaction={transaction}
+        isCustomer={isCustomer}
+        intl={intl}
+      />
+      <LineItemProviderCommissionMaybe
+        transaction={transaction}
         isProvider={isProvider}
         intl={intl}
       />
-      <LineItemCommissionMaybe transaction={transaction} isProvider={isProvider} intl={intl} />
       <LineItemRefundMaybe transaction={transaction} unitType={unitType} intl={intl} />
 
       <hr className={css.totalDivider} />
       <LineItemTotalPrice transaction={transaction} isProvider={isProvider} intl={intl} />
+      {commissionLineItem ? (
+        <span className={css.feeInfo}>
+          <FormattedMessage id="BookingBreakdown.commissionFeeNote" />
+        </span>
+      ) : null}
     </div>
   );
 };
