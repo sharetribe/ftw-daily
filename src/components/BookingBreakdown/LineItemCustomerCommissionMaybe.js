@@ -3,43 +3,39 @@ import { bool } from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { LINE_ITEM_PROVIDER_COMMISSION, propTypes } from '../../util/types';
+import { LINE_ITEM_CUSTOMER_COMMISSION, propTypes } from '../../util/types';
 
 import css from './BookingBreakdown.css';
 
 const { Money } = sdkTypes;
 
 // Validate the assumption that the commission exists and the amount
-// is zero or negative.
+// is zero or positive.
 const isValidCommission = commissionLineItem => {
-  return (
-    commissionLineItem &&
-    commissionLineItem.lineTotal instanceof Money &&
-    commissionLineItem.lineTotal.amount <= 0
-  );
+  return commissionLineItem.lineTotal instanceof Money && commissionLineItem.lineTotal.amount >= 0;
 };
 
-const LineItemCommissionMaybe = props => {
-  const { transaction, isProvider, intl } = props;
+const LineItemStudioTimeCustomerCommissionMaybe = props => {
+  const { transaction, isCustomer, intl } = props;
 
-  const providerCommissionLineItem = transaction.attributes.lineItems.find(
-    item => item.code === LINE_ITEM_PROVIDER_COMMISSION && !item.reversal
+  const customerCommissionLineItem = transaction.attributes.lineItems.find(
+    item => item.code === LINE_ITEM_CUSTOMER_COMMISSION && !item.reversal
   );
   const commissionRefund = transaction.attributes.lineItems.find(
-    item => item.code === LINE_ITEM_PROVIDER_COMMISSION && item.reversal
+    item => item.code === LINE_ITEM_CUSTOMER_COMMISSION && item.reversal
   );
 
   // If commission is passed it will be shown as a fee already reduces from the total price
   let commissionItem = null;
 
-  if (isProvider) {
-    if (!isValidCommission(providerCommissionLineItem)) {
+  if (isCustomer && customerCommissionLineItem) {
+    if (!isValidCommission(customerCommissionLineItem)) {
       // eslint-disable-next-line no-console
-      console.error('invalid commission line item:', providerCommissionLineItem);
-      throw new Error('Commission should be present and the value should be zero or negative');
+      console.error('invalid commission line item:', customerCommissionLineItem);
+      throw new Error('Commission should be present and the value should be zero or positive');
     }
 
-    const commission = providerCommissionLineItem.lineTotal;
+    const commission = customerCommissionLineItem.lineTotal;
     const formattedCommission = commission ? formatMoney(intl, commission) : null;
 
     commissionItem = commissionRefund ? null : (
@@ -55,10 +51,10 @@ const LineItemCommissionMaybe = props => {
   return commissionItem;
 };
 
-LineItemCommissionMaybe.propTypes = {
+LineItemStudioTimeCustomerCommissionMaybe.propTypes = {
   transaction: propTypes.transaction.isRequired,
-  isProvider: bool.isRequired,
+  isCustomer: bool.isRequired,
   intl: intlShape.isRequired,
 };
 
-export default LineItemCommissionMaybe;
+export default LineItemStudioTimeCustomerCommissionMaybe;

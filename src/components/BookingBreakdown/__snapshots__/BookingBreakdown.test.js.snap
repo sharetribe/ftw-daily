@@ -221,6 +221,13 @@ exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`
       0
     </div>
   </div>
+  <span
+    className={undefined}
+  >
+    <span>
+      BookingBreakdown.commissionFeeNote
+    </span>
+  </span>
 </div>
 `;
 
@@ -317,5 +324,12 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
       18
     </div>
   </div>
+  <span
+    className={undefined}
+  >
+    <span>
+      BookingBreakdown.commissionFeeNote
+    </span>
+  </span>
 </div>
 `;
