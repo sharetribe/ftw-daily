@@ -36,7 +36,7 @@ import css from './SearchPage.css';
 // Pagination page size might need to be dynamic on responsive page layouts
 // Current design has max 3 columns 12 is divisible by 2 and 3
 // So, there's enough cards to fill all columns on full pagination pages
-const RESULT_PAGE_SIZE = 12;
+const RESULT_PAGE_SIZE = 24;
 const MAX_SEARCH_RESULT_PAGE_SIZE_ON_MAP = 80; // max page size is 100 in API
 const MAX_SEARCH_RESULT_PAGES_ON_MAP = 1; // page size * n pages = number of listings shown on a map.
 const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
@@ -188,6 +188,11 @@ export class SearchPageComponent extends Component {
   }
 
   fetchMoreListingsToMap(location) {
+    // TODO Remove this function.
+    // Temporarily just return immediately to avoid merge conflicts.
+    return;
+
+    // eslint-disable-next-line no-unreachable
     const { onSearchMapListings } = this.props;
     const searchInURL = parse(location.search, {
       latlng: ['origin'],
