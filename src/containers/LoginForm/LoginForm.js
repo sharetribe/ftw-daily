@@ -47,7 +47,7 @@ const LoginFormComponent = props => {
   const passwordRequiredMessage = intl.formatMessage({
     id: 'LoginForm.passwordRequired',
   });
-  const passwordRequired = validators.required(passwordRequiredMessage);
+  const passwordRequired = validators.requiredStringNoTrim(passwordRequiredMessage);
 
   const classes = classNames(rootClassName || css.root, className);
   const submitInProgress = submitting || inProgress;

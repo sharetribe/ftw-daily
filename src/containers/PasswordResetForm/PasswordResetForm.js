@@ -47,7 +47,7 @@ const PasswordResetFormComponent = props => {
       maxLength: validators.PASSWORD_MAX_LENGTH,
     }
   );
-  const passwordRequired = validators.required(passwordRequiredMessage);
+  const passwordRequired = validators.requiredStringNoTrim(passwordRequiredMessage);
   const passwordMinLength = validators.minLength(
     passwordMinLengthMessage,
     validators.PASSWORD_MIN_LENGTH

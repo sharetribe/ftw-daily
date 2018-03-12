@@ -74,7 +74,7 @@ const SignupFormComponent = props => {
     passwordMaxLengthMessage,
     validators.PASSWORD_MAX_LENGTH
   );
-  const passwordRequired = validators.required(passwordRequiredMessage);
+  const passwordRequired = validators.requiredStringNoTrim(passwordRequiredMessage);
   const passwordValidators = [passwordRequired, passwordMinLength, passwordMaxLength];
 
   // firstName
