@@ -25,9 +25,6 @@ const LineItemProviderCommissionMaybe = props => {
   const providerCommissionLineItem = transaction.attributes.lineItems.find(
     item => item.code === LINE_ITEM_PROVIDER_COMMISSION && !item.reversal
   );
-  const commissionRefund = transaction.attributes.lineItems.find(
-    item => item.code === LINE_ITEM_PROVIDER_COMMISSION && item.reversal
-  );
 
   // If commission is passed it will be shown as a fee already reduces from the total price
   let commissionItem = null;
@@ -42,7 +39,7 @@ const LineItemProviderCommissionMaybe = props => {
     const commission = providerCommissionLineItem.lineTotal;
     const formattedCommission = commission ? formatMoney(intl, commission) : null;
 
-    commissionItem = commissionRefund ? null : (
+    commissionItem = (
       <div className={css.lineItem}>
         <span className={css.itemLabel}>
           <FormattedMessage id="BookingBreakdown.commission" />

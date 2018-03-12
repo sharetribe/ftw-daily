@@ -52,6 +52,8 @@
   "BookingBreakdown.quantity": "{quantity, number} {quantity, plural, one {person} other {persons}}",
   "BookingBreakdown.quantityUnit": "Number of persons",
   "BookingBreakdown.refund": "Refund",
+  "BookingBreakdown.refundCustomerFee": "Refund Saunatime fee",
+  "BookingBreakdown.refundProviderFee": "Refund Saunatime fee",
   "BookingBreakdown.subTotal": "Subtotal",
   "BookingBreakdown.total": "Total price",
   "BookingDatesForm.bookingEndTitle": "End date",
