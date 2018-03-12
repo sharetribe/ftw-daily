@@ -7,6 +7,10 @@ const { LatLng } = types;
 export const PASSWORD_MIN_LENGTH = 8;
 export const PASSWORD_MAX_LENGTH = 256;
 
+const isNonEmptyString = val => {
+  return typeof val === 'string' && val.trim().length > 0;
+};
+
 /**
  * Validator functions and helpers for Redux Forms
  */
@@ -15,15 +19,29 @@ export const PASSWORD_MAX_LENGTH = 256;
 const VALID = undefined;
 
 export const required = message => value => {
-  return value ? VALID : message;
+  if (typeof value === 'undefined' || value === null) {
+    // undefined or null values are invalid
+    return message;
+  }
+  if (typeof value === 'string') {
+    // string must be nonempty when trimmed
+    return isNonEmptyString(value) ? VALID : message;
+  }
+  return VALID;
 };
 
+export const requiredStringNoTrim = message => value => {
+  return typeof value === 'string' && value.length > 0 ? VALID : message;
+};
+
+// DEPRECATED in favor of required
 export const requiredBoolean = message => value => {
   return typeof value === 'boolean' ? VALID : message;
 };
 
+// DEPRECATED in favor of required
 export const requiredAndNonEmptyString = message => value => {
-  return value && typeof value === 'string' && value.trim() ? VALID : message;
+  return isNonEmptyString(value) ? VALID : message;
 };
 
 export const requiredFieldArrayCheckbox = message => value => {
@@ -37,11 +55,16 @@ export const requiredFieldArrayCheckbox = message => value => {
 };
 
 export const minLength = (message, minimumLength) => value => {
-  return value && value.length >= minimumLength ? VALID : message;
+  const hasLength = value && typeof value.length === 'number';
+  return hasLength && value.length >= minimumLength ? VALID : message;
 };
 
 export const maxLength = (message, maximumLength) => value => {
-  return !value || value.length <= maximumLength ? VALID : message;
+  if (!value) {
+    return VALID;
+  }
+  const hasLength = value && typeof value.length === 'number';
+  return hasLength && value.length <= maximumLength ? VALID : message;
 };
 
 export const nonEmptyArray = message => value => {
