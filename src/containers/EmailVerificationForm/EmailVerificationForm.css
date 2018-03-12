@@ -2,6 +2,12 @@
 
 .root {
   @apply --marketplaceModalFormRootStyles;
+
+  justify-content: flex-start;
+
+  @media (--viewportMedium) {
+    justify-content: space-between;
+  }
 }
 
 .bottomWrapper {
