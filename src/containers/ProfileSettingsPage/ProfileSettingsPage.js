@@ -54,7 +54,11 @@ export class ProfileSettingsPageComponent extends Component {
       // Ensure that the optional bio is a string
       const bio = rawBio || '';
 
-      const profile = { firstName, lastName, bio };
+      const profile = {
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        bio: bio.trim(),
+      };
       const uploadedImage = this.props.image;
 
       // Update profileImage only if file system has been accessed
