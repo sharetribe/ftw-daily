@@ -15,7 +15,7 @@ export const PASSWORD_MAX_LENGTH = 256;
 const VALID = undefined;
 
 export const required = message => value => {
-  return value ? VALID : message;
+  return value != null ? VALID : message;
 };
 
 export const requiredBoolean = message => value => {
