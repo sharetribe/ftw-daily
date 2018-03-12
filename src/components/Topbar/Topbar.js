@@ -182,7 +182,7 @@ class TopbarComponent extends Component {
     const pathChanged = newLocation.pathname !== this.props.location.pathname;
     const emailUnverified = !!currentUser.id && !currentUser.attributes.emailVerified;
     const stripeAccountMissing = !!currentUser.id && !currentUser.attributes.stripeConnected;
-    const infoMissing = emailUnverified || stripeAccountMissing;
+    const infoMissing = emailUnverified || (currentUserHasListings && stripeAccountMissing);
     const notRemindedYet =
       !this.state.showMissingInformationReminder && !this.state.hasSeenMissingInformationReminder;
     const showOnPathChange = notRemindedYet || pathChanged;
