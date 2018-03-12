@@ -46,7 +46,7 @@
   "BookingBreakdown.pricePerNight": "Price per night",
   "BookingBreakdown.pricePerQuantity": "Price per person",
   "BookingBreakdown.providerTotalCanceled": "Total price",
-  "BookingBreakdown.providerTotalDeclined": "You would have made",
+  "BookingBreakdown.providerTotalDeclined": "Final sum",
   "BookingBreakdown.providerTotalDefault": "You'll make",
   "BookingBreakdown.providerTotalDelivered": "You made",
   "BookingBreakdown.quantity": "{quantity, number} {quantity, plural, one {person} other {persons}}",
