@@ -10,6 +10,7 @@ import { SendMessageForm } from '../../containers';
 
 // These are internal components that make this file more readable.
 import {
+  AddressLinkMaybe,
   BreakdownMaybe,
   FeedSection,
   OrderActionButtonMaybe,
@@ -18,6 +19,7 @@ import {
   TransactionPageMessage,
   displayNames,
 } from './TransactionPanel.helpers';
+
 import css from './TransactionPanel.css';
 
 export class TransactionPanelComponent extends Component {
@@ -251,7 +253,14 @@ export class TransactionPanelComponent extends Component {
               transactionRole={transactionRole}
             />
 
-            <div className={css.breakdownMobile}>
+            <div className={css.bookingDetailsMobile}>
+              <div className={css.addressMobileWrapper}>
+                <AddressLinkMaybe
+                  transaction={currentTransaction}
+                  transactionRole={transactionRole}
+                  currentListing={currentListing}
+                />
+              </div>
               <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
             </div>
 
@@ -314,8 +323,21 @@ export class TransactionPanelComponent extends Component {
                       values={{ name: authorDisplayName }}
                     />
                   </p>
+                  <AddressLinkMaybe
+                    transaction={currentTransaction}
+                    transactionRole={transactionRole}
+                    currentListing={currentListing}
+                  />
                 </div>
-              ) : null}
+              ) : (
+                <div className={css.detailCardHeadingsProvider}>
+                  <AddressLinkMaybe
+                    transaction={currentTransaction}
+                    transactionRole={transactionRole}
+                    currentListing={currentListing}
+                  />
+                </div>
+              )}
               <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
               {canShowActionButtons ? (
                 <div className={css.desktopActionButtons}>{actionButtons}</div>

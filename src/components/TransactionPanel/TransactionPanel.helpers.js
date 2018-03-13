@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import {
+  txHasBeenAccepted,
   txHasFirstReview,
   txIsAccepted,
   txIsCanceled,
@@ -17,6 +18,7 @@ import { createSlug, stringify } from '../../util/urlHelpers';
 import {
   ActivityFeed,
   BookingBreakdown,
+  ExternalLink,
   NamedLink,
   PrimaryButton,
   SecondaryButton,
@@ -80,6 +82,32 @@ export const FeedSection = props => {
         fetchMessagesInProgress={fetchMessagesInProgress}
       />
     </div>
+  ) : null;
+};
+
+// Functional component as a helper to build AddressLinkMaybe
+export const AddressLinkMaybe = props => {
+  const { transaction, transactionRole, currentListing } = props;
+
+  const isProvider = transactionRole === 'provider';
+  const isCustomer = transactionRole === 'customer';
+  const txIsAcceptedForCustomer = isCustomer && txHasBeenAccepted(transaction);
+
+  const { address, building } = currentListing.attributes.publicData.location || {};
+  const geolocation = currentListing.attributes.geolocation;
+
+  const { lat, lng } = geolocation || {};
+  const hrefToGoogleMaps = geolocation
+    ? `https://maps.google.com/?q=${lat},${lng}`
+    : address ? `https://maps.google.com/?q=${encodeURIComponent(address)}` : null;
+
+  const fullAddress =
+    typeof building === 'string' && building.length > 0 ? `${building}, ${address}` : address;
+
+  return (isProvider || txIsAcceptedForCustomer) && hrefToGoogleMaps ? (
+    <p className={css.address}>
+      <ExternalLink href={hrefToGoogleMaps}>{fullAddress}</ExternalLink>
+    </p>
   ) : null;
 };
 
