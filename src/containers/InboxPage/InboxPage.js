@@ -7,6 +7,7 @@ import moment from 'moment';
 import classNames from 'classnames';
 import {
   LINE_ITEM_DAY,
+  LINE_ITEM_UNITS,
   txHasFirstReview,
   txIsAccepted,
   txIsCanceled,
@@ -127,15 +128,17 @@ const txState = (intl, tx, isOrder) => {
 const bookingData = (unitType, tx, isOrder, intl) => {
   const { start, end } = tx.booking.attributes;
   const isDaily = unitType === LINE_ITEM_DAY;
+  const isUnits = unitType === LINE_ITEM_UNITS;
   const isSingleDay = isDaily && daysBetween(start, end) === 1;
   const bookingStart = formatDate(intl, start);
 
   // Shift the exclusive API end date with daily bookings
-  const endDate = isDaily
-    ? moment(end)
-        .subtract(1, 'days')
-        .toDate()
-    : end;
+  const endDate =
+    isDaily || isUnits
+      ? moment(end)
+          .subtract(1, 'days')
+          .toDate()
+      : end;
   const bookingEnd = formatDate(intl, endDate);
   const bookingPrice = isOrder ? tx.attributes.payinTotal : tx.attributes.payoutTotal;
   const price = formatMoney(intl, bookingPrice);

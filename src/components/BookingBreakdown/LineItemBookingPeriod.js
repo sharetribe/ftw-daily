@@ -52,8 +52,8 @@ const LineItemBookingPeriod = props => {
     item => item.code === unitType && !item.reversal
   );
 
-  const dayCountForLineItemUnits = dayCount + 1;
-  const count = isNightly || isDaily ? unitPurchase.quantity.toFixed() : dayCountForLineItemUnits;
+  const useQuantityForDayCount = isNightly || isDaily;
+  const count = useQuantityForDayCount ? unitPurchase.quantity.toFixed() : dayCount;
 
   const unitCountMessage = (
     <FormattedHTMLMessage
