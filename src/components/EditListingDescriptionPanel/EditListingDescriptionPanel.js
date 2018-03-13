@@ -46,7 +46,7 @@ const EditListingDescriptionPanel = props => {
           const { title, description, category } = values;
           const updateValues = {
             title: title.trim(),
-            description: description.trim(),
+            description,
             publicData: { category },
           };
 
