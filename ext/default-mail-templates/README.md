@@ -1,10 +1,12 @@
 # Mail templates
 
-This directory contains templates for all default mails sent as result of
-activity in the marketplace.
+This directory contains the default templates for all mails sent by default as
+result of activity in the marketplace.
 
-Note that, at present, changes made to the template files here will not take
-effect automatically. Marketplace owner needs to notify the Sharetribe team.
+Before making customizations, copy the templates to another directory (e.g.
+`mail-templates`). Note that, at present, changes made to the template files in
+this repository will not take effect automatically. Marketplace owner needs to
+notify the Sharetribe team.
 
 ## Template parts
 
