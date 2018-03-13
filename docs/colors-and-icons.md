@@ -12,7 +12,9 @@ change the color variables:
 --marketplaceColorLight: #ff4c38;
 --marketplaceColorDark: #8c291e;
 ```
-N.B. search also from files color code `c0392b`. Some icons and background-images with data-URL are using it directly.
+
+N.B. search also from files color code `c0392b`. Some icons and background-images with data-URL are
+using it directly.
 
 ## Icons
 

@@ -24,16 +24,15 @@ the logging logic in general.
 
 ## Source map retrieval
 
-By default Sentry fetches the source maps for minified javascript files. However, this might now work
-in case some sort of authentication, e.g. basic auth, is required to reach your application. To
+By default Sentry fetches the source maps for minified javascript files. However, this might now
+work in case some sort of authentication, e.g. basic auth, is required to reach your application. To
 circumvent this a security token can be configured to Sentry. Sentry then adds this token to the
-source maps request header so that the server hosting Starter App can then be configured to let those
-requests access the source maps.
+source maps request header so that the server hosting Starter App can then be configured to let
+those requests access the source maps.
 
 For basic auth the security token can be configured as follows:
 
-In *Project > Settings > General > Client Security* set the following values
+In _Project > Settings > General > Client Security_ set the following values
 
 * **Security token** - `Basic <your username:password in Base 64>`
 * **Security token header** - `Authorization`
-
