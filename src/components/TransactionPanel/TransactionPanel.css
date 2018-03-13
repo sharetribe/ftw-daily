@@ -146,7 +146,7 @@
   white-space: nowrap;
 }
 
-.breakdownMobile {
+.bookingDetailsMobile {
   margin-top: 47px;
 
   @media (--viewportMedium) {
@@ -199,6 +199,10 @@
     margin-bottom: 37px;
   }
 }
+.detailCardHeadingsProvider {
+  composes: detailCardHeadings;
+  margin-top: 24px;
+}
 
 .detailCardTitle {
   margin-bottom: 10px;
@@ -220,6 +224,16 @@
     margin-top: 1px;
     margin-bottom: 0;
   }
+}
+
+.address {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorAnti);
+  margin: 0;
+}
+
+.addressMobileWrapper {
+  margin: 0 24px 24px 24px;
 }
 
 .bookingBreakdownTitle {

@@ -305,6 +305,21 @@ export const areReviewsCompleted = transition => {
   ].includes(transition);
 };
 
+export const txHasBeenAccepted = tx => {
+  const transition = txLastTransition(tx);
+  return [
+    TRANSITION_ACCEPT,
+    TRANSITION_REVIEW_1_BY_CUSTOMER,
+    TRANSITION_REVIEW_1_BY_PROVIDER,
+    TRANSITION_REVIEW_2_BY_CUSTOMER,
+    TRANSITION_REVIEW_2_BY_PROVIDER,
+    TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD,
+    TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD,
+    TRANSITION_EXPIRE_REVIEW_PERIOD,
+    TRANSITION_COMPLETE,
+  ].includes(transition);
+};
+
 // Possible amount of stars in a review
 export const REVIEW_RATINGS = [1, 2, 3, 4, 5];
 
