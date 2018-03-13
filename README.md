@@ -58,13 +58,6 @@ To start the test watcher, run
 
 See more in the [testing documentation](docs/testing.md).
 
-## Deployment
-
-The `master` branch is automatically deployed to Heroku. If you want to deploy a feature branch,
-setup the `sharetribe-starter-app` Heroku app and push the feature branch:
-
-    git push heroku my-feature-branch:master
-
 ## License
 
 This project is licensed under the terms of the Apache-2.0 license.
