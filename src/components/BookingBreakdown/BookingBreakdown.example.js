@@ -3,6 +3,7 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   LINE_ITEM_DAY,
   LINE_ITEM_NIGHT,
+  LINE_ITEM_UNITS,
   TRANSITION_ACCEPT,
   TRANSITION_CANCEL,
   TRANSITION_COMPLETE,
@@ -469,6 +470,32 @@ export const MultipleDays = {
     booking: exampleBooking({
       start: new Date(Date.UTC(2017, 3, 14)),
       end: new Date(Date.UTC(2017, 3, 16)),
+    }),
+  },
+};
+
+export const UnitsType = {
+  component: BookingBreakdown,
+  props: {
+    userRole: 'customer',
+    unitType: LINE_ITEM_UNITS,
+    transaction: exampleTransaction({
+      payinTotal: new Money(9000, CURRENCY),
+      payoutTotal: new Money(9000, CURRENCY),
+      lineItems: [
+        {
+          code: 'line-item/units',
+          includeFor: ['customer', 'provider'],
+          quantity: new Decimal(2),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(9000, CURRENCY),
+          reversal: false,
+        },
+      ],
+    }),
+    booking: exampleBooking({
+      start: new Date(Date.UTC(2017, 3, 14)),
+      end: new Date(Date.UTC(2017, 3, 18)),
     }),
   },
 };
