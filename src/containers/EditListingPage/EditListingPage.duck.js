@@ -264,21 +264,12 @@ export function requestShowListing(actionPayload) {
   };
 }
 
-const cleanUpListingData = data => {
-  // Since we display the line breaks in the listing description, we
-  // should trim the extra whitespace from the start and the end of
-  // the description.
-  return data.description ? { ...data, description: data.description.trim() } : data;
-};
-
 export function requestCreateListing(data) {
   return (dispatch, getState, sdk) => {
-    const cleanedData = cleanUpListingData(data);
-
-    dispatch(createListing(cleanedData));
+    dispatch(createListing(data));
 
     return sdk.ownListings
-      .create(cleanedData)
+      .create(data)
       .then(response => {
         const id = response.data.data.id.uuid;
         // Modify store to understand that we have created listing and can redirect away
@@ -295,7 +286,7 @@ export function requestCreateListing(data) {
         return response;
       })
       .catch(e => {
-        log.error(e, 'create-listing-failed', { listingData: cleanedData });
+        log.error(e, 'create-listing-failed', { listingData: data });
         return dispatch(createListingError(storableError(e)));
       });
   };
@@ -318,12 +309,11 @@ export function requestImageUpload(actionPayload) {
 // display the state.
 export function requestUpdateListing(tab, data) {
   return (dispatch, getState, sdk) => {
-    const cleanedData = cleanUpListingData(data);
-    dispatch(updateListing(cleanedData));
-    const { id } = cleanedData;
+    dispatch(updateListing(data));
+    const { id } = data;
     let updateResponse;
     return sdk.ownListings
-      .update(cleanedData)
+      .update(data)
       .then(response => {
         updateResponse = response;
         const payload = { id, include: ['author', 'images'] };
@@ -334,7 +324,7 @@ export function requestUpdateListing(tab, data) {
         dispatch(updateListingSuccess(updateResponse));
       })
       .catch(e => {
-        log.error(e, 'update-listing-failed', { listingData: cleanedData });
+        log.error(e, 'update-listing-failed', { listingData: data });
         return dispatch(updateListingError(storableError(e)));
       });
   };

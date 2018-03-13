@@ -168,7 +168,7 @@ class ContactDetailsFormComponent extends Component {
       id: 'ContactDetailsForm.passwordRequired',
     });
 
-    const passwordRequired = validators.required(passwordRequiredMessage);
+    const passwordRequired = validators.requiredStringNoTrim(passwordRequiredMessage);
 
     const passwordMinLengthMessage = intl.formatMessage(
       {

@@ -55,7 +55,7 @@ class PasswordChangeFormComponent extends Component {
     const newPasswordRequiredMessage = intl.formatMessage({
       id: 'PasswordChangeForm.newPasswordRequired',
     });
-    const newPasswordRequired = validators.required(newPasswordRequiredMessage);
+    const newPasswordRequired = validators.requiredStringNoTrim(newPasswordRequiredMessage);
 
     const passwordMinLengthMessage = intl.formatMessage(
       {
@@ -94,7 +94,7 @@ class PasswordChangeFormComponent extends Component {
       id: 'PasswordChangeForm.passwordRequired',
     });
 
-    const passwordRequired = validators.required(passwordRequiredMessage);
+    const passwordRequired = validators.requiredStringNoTrim(passwordRequiredMessage);
 
     const passwordFailedMessage = intl.formatMessage({
       id: 'PasswordChangeForm.passwordFailed',

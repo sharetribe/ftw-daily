@@ -7,7 +7,7 @@ import { isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
-import { noEmptyArray } from '../../util/validators';
+import { nonEmptyArray } from '../../util/validators';
 import { isUploadListingImageOverLimitError } from '../../util/errors';
 import { Form, AddImages, Button, ValidationError } from '../../components';
 
@@ -192,7 +192,7 @@ export class EditListingPhotosFormComponent extends Component {
             }}
             name="images"
             type="hidden"
-            validate={[noEmptyArray(imageRequiredMessage)]}
+            validate={[nonEmptyArray(imageRequiredMessage)]}
           />
         </AddImages>
         {uploadImageFailed}
