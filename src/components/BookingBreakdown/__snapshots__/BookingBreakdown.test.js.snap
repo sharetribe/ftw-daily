@@ -202,6 +202,38 @@ exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`
       -20
     </span>
   </div>
+  <div
+    className={undefined}
+  >
+    <span
+      className={undefined}
+    >
+      <span>
+        BookingBreakdown.commission
+      </span>
+    </span>
+    <span
+      className={undefined}
+    >
+      -2
+    </span>
+  </div>
+  <div
+    className={undefined}
+  >
+    <span
+      className={undefined}
+    >
+      <span>
+        BookingBreakdown.refundProviderFee
+      </span>
+    </span>
+    <span
+      className={undefined}
+    >
+      2
+    </span>
+  </div>
   <hr
     className={undefined}
   />

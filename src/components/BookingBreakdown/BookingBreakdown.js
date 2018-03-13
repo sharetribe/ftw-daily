@@ -17,7 +17,9 @@ import LineItemBookingPeriod from './LineItemBookingPeriod';
 import LineItemUnitsMaybe from './LineItemUnitsMaybe';
 import LineItemSubTotalMaybe from './LineItemSubTotalMaybe';
 import LineItemCustomerCommissionMaybe from './LineItemCustomerCommissionMaybe';
+import LineItemCustomerCommissionRefundMaybe from './LineItemCustomerCommissionRefundMaybe';
 import LineItemProviderCommissionMaybe from './LineItemProviderCommissionMaybe';
+import LineItemProviderCommissionRefundMaybe from './LineItemProviderCommissionRefundMaybe';
 import LineItemRefundMaybe from './LineItemRefundMaybe';
 import LineItemTotalPrice from './LineItemTotalPrice';
 import css from './BookingBreakdown.css';
@@ -49,17 +51,29 @@ export const BookingBreakdownComponent = props => {
         userRole={userRole}
         intl={intl}
       />
+      <LineItemRefundMaybe transaction={transaction} unitType={unitType} intl={intl} />
+
       <LineItemCustomerCommissionMaybe
         transaction={transaction}
         isCustomer={isCustomer}
         intl={intl}
       />
+      <LineItemCustomerCommissionRefundMaybe
+        transaction={transaction}
+        isCustomer={isCustomer}
+        intl={intl}
+      />
+
       <LineItemProviderCommissionMaybe
         transaction={transaction}
         isProvider={isProvider}
         intl={intl}
       />
-      <LineItemRefundMaybe transaction={transaction} unitType={unitType} intl={intl} />
+      <LineItemProviderCommissionRefundMaybe
+        transaction={transaction}
+        isProvider={isProvider}
+        intl={intl}
+      />
 
       <hr className={css.totalDivider} />
       <LineItemTotalPrice transaction={transaction} isProvider={isProvider} intl={intl} />
