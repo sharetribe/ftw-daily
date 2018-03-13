@@ -32,8 +32,7 @@ const bookingUnitType = 'line-item/night';
 // script, react-scripts (and the sharetribe-scripts fork of
 // react-scripts) require using the REACT_APP_ prefix to avoid
 // exposing server secrets to the client side.
-const sdkClientId =
-  process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID || '08ec69f6-d37e-414d-83eb-324e94afddf0';
+const sdkClientId = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID;
 const sdkBaseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'http://localhost:8088';
 
 const currency = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY || 'USD';
@@ -57,8 +56,7 @@ const currencyConfig = {
   maximumFractionDigits: 2,
 };
 
-const stripePublishableKey =
-  process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || 'pk_test_FWtdKPZvtrj37t45dIomssBI';
+const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 
 // Stripe only supports payments in certain countries, see full list
 // at https://stripe.com/global
