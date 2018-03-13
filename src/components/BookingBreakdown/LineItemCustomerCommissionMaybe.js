@@ -15,7 +15,7 @@ const isValidCommission = commissionLineItem => {
   return commissionLineItem.lineTotal instanceof Money && commissionLineItem.lineTotal.amount >= 0;
 };
 
-const LineItemStudioTimeCustomerCommissionMaybe = props => {
+const LineItemCustomerCommissionMaybe = props => {
   const { transaction, isCustomer, intl } = props;
 
   const customerCommissionLineItem = transaction.attributes.lineItems.find(
@@ -51,10 +51,10 @@ const LineItemStudioTimeCustomerCommissionMaybe = props => {
   return commissionItem;
 };
 
-LineItemStudioTimeCustomerCommissionMaybe.propTypes = {
+LineItemCustomerCommissionMaybe.propTypes = {
   transaction: propTypes.transaction.isRequired,
   isCustomer: bool.isRequired,
   intl: intlShape.isRequired,
 };
 
-export default LineItemStudioTimeCustomerCommissionMaybe;
+export default LineItemCustomerCommissionMaybe;
