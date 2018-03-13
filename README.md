@@ -28,7 +28,8 @@ To develop the application and to see changes live, start the frontend developme
 
     yarn run dev
 
-**You also need to [configure Google Maps api key](./docs/google-maps.md)**
+**You need to configure Client Id, Google Maps API key and Stripe
+publishable API key via [environment variables](./docs/env.md).**
 
 **Known issues:**
 
