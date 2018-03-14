@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string, func } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import { NamedLink, ResponsiveImage } from '../../components';
@@ -109,15 +109,15 @@ export const ListingCardComponent = props => {
 ListingCardComponent.defaultProps = {
   className: null,
   rootClassName: null,
+  setActiveListing: () => null,
 };
-
-const { string } = PropTypes;
 
 ListingCardComponent.propTypes = {
   className: string,
   rootClassName: string,
   intl: intlShape.isRequired,
   listing: propTypes.listing.isRequired,
+  setActiveListing: func,
 };
 
 export default injectIntl(ListingCardComponent);
