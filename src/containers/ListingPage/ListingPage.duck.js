@@ -5,7 +5,7 @@ import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { denormalisedResponseEntities } from '../../util/data';
 import { TRANSITION_ENQUIRE } from '../../util/types';
 import { LISTING_PAGE_PENDING_APPROVAL_VARIANT } from '../../util/urlHelpers';
-import { fetchCurrentUser } from '../../ducks/user.duck';
+import { fetchCurrentUser, fetchCurrentUserHasOrdersSuccess } from '../../ducks/user.duck';
 
 const { UUID } = sdkTypes;
 
@@ -167,6 +167,7 @@ export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => 
       // Send the message to the created transaction
       return sdk.messages.send({ transactionId, content: message }).then(() => {
         dispatch(sendEnquirySuccess());
+        dispatch(fetchCurrentUserHasOrdersSuccess(true));
         return transactionId;
       });
     })

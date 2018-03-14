@@ -199,8 +199,10 @@ class TopbarComponent extends Component {
     );
     const isNotWhitelisted = !whitelistedPaths.includes(newLocation.pathname);
 
+    const showReminder = infoMissing && isNotWhitelisted && hasListingsOrOrders && showOnPathChange;
+
     // Show reminder
-    if (infoMissing && isNotWhitelisted && hasListingsOrOrders && showOnPathChange) {
+    if (showReminder) {
       this.setState({ showMissingInformationReminder: true });
     }
   }
