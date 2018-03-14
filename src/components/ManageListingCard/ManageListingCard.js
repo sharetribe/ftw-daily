@@ -8,7 +8,7 @@ import routeConfiguration from '../../routeConfiguration';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { ensureOwnListing } from '../../util/data';
-import { createSlug } from '../../util/urlHelpers';
+import { LISTING_PAGE_PENDING_APPROVAL_VARIANT, createSlug } from '../../util/urlHelpers';
 import { createResourceLocatorString } from '../../util/routes';
 import {
   InlineTextButton,
@@ -16,7 +16,6 @@ import {
   MenuLabel,
   MenuContent,
   MenuItem,
-  ListingLink,
   IconSpinner,
   ResponsiveImage,
 } from '../../components';
@@ -48,12 +47,33 @@ const priceData = (price, intl) => {
   return {};
 };
 
-const createURL = (routes, listing) => {
+const createEditListingURL = (routes, listing) => {
   const id = listing.id.uuid;
   const slug = createSlug(listing.attributes.title);
   const pathParams = { id, slug, type: 'edit', tab: 'description' };
 
   return createResourceLocatorString('EditListingPage', routes, pathParams, {});
+};
+
+const createListingURL = (routes, listing) => {
+  const id = listing.id.uuid;
+  const slug = createSlug(listing.attributes.title);
+  const isPendingApproval = listing.attributes.state === LISTING_STATE_PENDING_APPROVAL;
+  const linkProps = isPendingApproval
+    ? {
+        name: 'ListingPageVariant',
+        params: {
+          id,
+          slug,
+          variant: LISTING_PAGE_PENDING_APPROVAL_VARIANT,
+        },
+      }
+    : {
+        name: 'ListingPage',
+        params: { id, slug },
+      };
+
+  return createResourceLocatorString(linkProps.name, routes, linkProps.params, {});
 };
 
 // Cards are not fixed sizes - So, long words in title make flexboxed items to grow too big.
@@ -196,7 +216,21 @@ export const ManageListingCardComponent = props => {
   });
 
   return (
-    <ListingLink className={classes} listing={listing}>
+    <div
+      className={classes}
+      tabIndex={0}
+      onClick={event => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        // ManageListingCard contains links, buttons and elements that are working with routing.
+        // This card doesn't work if <a> or <button> is used to wrap events that are card 'clicks'.
+        //
+        // NOTE: It might be better to absolute-position those buttons over a card-links.
+        // (So, that they have no parent-child relationship - like '<a>bla<a>blaa</a></a>')
+        history.push(createListingURL(routeConfiguration(), listing));
+      }}
+    >
       <div className={css.threeToTwoWrapper}>
         <div className={css.aspectWrapper}>
           <ResponsiveImage
@@ -275,13 +309,13 @@ export const ManageListingCardComponent = props => {
           onClick={event => {
             event.preventDefault();
             event.stopPropagation();
-            history.push(createURL(routeConfiguration(), listing));
+            history.push(createEditListingURL(routeConfiguration(), listing));
           }}
         >
           <FormattedMessage id="ManageListingCard.edit" />
         </button>
       </div>
-    </ListingLink>
+    </div>
   );
 };
 
