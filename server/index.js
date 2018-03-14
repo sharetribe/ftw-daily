@@ -118,7 +118,13 @@ app.use(cookieParser());
 if (!dev) {
   const USERNAME = process.env.BASIC_AUTH_USERNAME;
   const PASSWORD = process.env.BASIC_AUTH_PASSWORD;
-  app.use(auth.basicAuth(USERNAME, PASSWORD));
+  const hasUsername = typeof USERNAME === 'string' && USERNAME.length > 0;
+  const hasPassword = typeof PASSWORD === 'string' && PASSWORD.length > 0;
+
+  // If BASIC_AUTH_USERNAME and BASIC_AUTH_PASSWORD have been set - let's use them
+  if (hasUsername && hasPassword) {
+    app.use(auth.basicAuth(USERNAME, PASSWORD));
+  }
 }
 
 const noCacheHeaders = {
