@@ -221,7 +221,7 @@ export const TRANSITION_COMPLETE = 'transition/complete';
 // Reviews are given through transaction transitions. Review 1 can be
 // by provider or customer, and review 2 will be the other party of
 // the transaction.
-export const TRANSITION_REVIEW_1_BY_PROVIDER = 'transition/review-1_by-provider';
+export const TRANSITION_REVIEW_1_BY_PROVIDER = 'transition/review-1-by-provider';
 export const TRANSITION_REVIEW_2_BY_PROVIDER = 'transition/review-2-by-provider';
 export const TRANSITION_REVIEW_1_BY_CUSTOMER = 'transition/review-1-by-customer';
 export const TRANSITION_REVIEW_2_BY_CUSTOMER = 'transition/review-2-by-customer';
