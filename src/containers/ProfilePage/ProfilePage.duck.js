@@ -137,7 +137,7 @@ export const queryUserListings = userId => (dispatch, getState, sdk) => {
 
 export const queryUserReviews = userId => (dispatch, getState, sdk) => {
   sdk.reviews
-    .query({ subject_id: userId, state: 'public', include: ['author', 'author_profile_image'] })
+    .query({ subject_id: userId, state: 'public', include: ['author', 'author.profileImage'] })
     .then(response => {
       const reviews = denormalisedResponseEntities(response);
       dispatch(queryReviewsSuccess(reviews));
