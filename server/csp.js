@@ -27,6 +27,7 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
   const loremPixel = 'https://lorempixel.com/';
   const placeholder = 'https://via.placeholder.com/';
   const googleAnalytics = 'https://www.google-analytics.com/';
+  const googleAnalyticsDoubleClick = 'https://stats.g.doubleclick.net/';
   const googleMaps = 'https://maps.googleapis.com/';
   const googleStaticCsi = 'https://csi.gstatic.com/';
   const googleStaticFonts = 'https://fonts.gstatic.com/';
@@ -64,6 +65,8 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
     // enabled.
     scriptSrc.push(googleAnalytics);
     imgSrc.push(googleAnalytics);
+    imgSrc.push(googleAnalyticsDoubleClick);
+    connectSrc.push(googleAnalytics);
   }
   if (sentryClientEnabled) {
     connectSrc.push(sentryApi);
