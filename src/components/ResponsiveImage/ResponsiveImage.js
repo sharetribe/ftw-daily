@@ -40,7 +40,7 @@ import NoImageIcon from './NoImageIcon';
 import css from './ResponsiveImage.css';
 
 const ResponsiveImage = props => {
-  const { className, rootClassName, alt, noImageMessage, image, nameSet, sizes } = props;
+  const { className, rootClassName, alt, noImageMessage, image, nameSet, sizes, ...rest } = props;
   const classes = classNames(rootClassName || css.root, className);
 
   if (image == null || nameSet.length === 0) {
@@ -87,7 +87,7 @@ const ResponsiveImage = props => {
 
   const sizesProp = sizes ? { sizes } : {};
 
-  return <img alt={alt} className={classes} srcSet={srcSet} {...sizesProp} />;
+  return <img alt={alt} className={classes} srcSet={srcSet} {...rest} {...sizesProp} />;
 };
 
 const { arrayOf, shape, string } = PropTypes;

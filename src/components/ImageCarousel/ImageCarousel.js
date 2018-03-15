@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { ResponsiveImage } from '../../components';
+import { ResponsiveImage, IconSpinner } from '../../components';
 import { propTypes } from '../../util/types';
 
 import css from './ImageCarousel.css';
@@ -18,7 +18,7 @@ const imageScaledXLarge = 'scaled-xlarge'; // width 2400
 class ImageCarousel extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedImageIndex: 0 };
+    this.state = { selectedImageIndex: 0, selectedImageLoaded: false };
     this.onKeyUp = this.onKeyUp.bind(this);
     this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
@@ -38,16 +38,22 @@ class ImageCarousel extends Component {
   }
   prev() {
     const count = this.props.images.length;
+    if (count < 2) {
+      return;
+    }
     this.setState(prevState => {
       const newIndex = count > 0 ? (count + prevState.selectedImageIndex - 1) % count : 0;
-      return { selectedImageIndex: newIndex };
+      return { selectedImageIndex: newIndex, selectedImageLoaded: false };
     });
   }
   next() {
     const count = this.props.images.length;
+    if (count < 2) {
+      return;
+    }
     this.setState(prevState => {
       const newIndex = count > 0 ? (count + prevState.selectedImageIndex + 1) % count : 0;
-      return { selectedImageIndex: newIndex };
+      return { selectedImageIndex: newIndex, selectedImageLoaded: false };
     });
   }
   render() {
@@ -76,13 +82,36 @@ class ImageCarousel extends Component {
       }
     );
 
+    const markImageLoaded = index => () => {
+      this.setState(prevState => {
+        if (prevState.selectedImageIndex === index) {
+          // Only mark the image loaded if the current index hasn't
+          // changed, i.e. user hasn't already changed to another
+          // image index.
+          return { selectedImageLoaded: true };
+        }
+        return {};
+      });
+    };
+
+    const currentImageIsLoaded = images.length === 0 || this.state.selectedImageLoaded;
+    const loadingIconClasses = classNames(css.loading, {
+      [css.loadingVisible]: !currentImageIsLoaded,
+    });
+    const imageClasses = classNames(css.image, {
+      [css.imageLoading]: !currentImageIsLoaded,
+    });
+
     return (
       <div className={classes}>
         <div className={css.imageWrapper}>
+          <IconSpinner className={loadingIconClasses} />
           <ResponsiveImage
-            className={css.image}
+            className={imageClasses}
             alt={imageAltText}
             image={images[this.state.selectedImageIndex]}
+            onLoad={markImageLoaded(this.state.selectedImageIndex)}
+            onError={markImageLoaded(this.state.selectedImageIndex)}
             nameSet={[
               { name: imageScaledSmall, size: '320w' },
               { name: imageScaledMedium, size: '750w' },
