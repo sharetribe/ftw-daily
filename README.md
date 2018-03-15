@@ -24,11 +24,15 @@ Clone this repository and install dependencies:
 
 ## Development
 
+**First, you need to configure Client Id, Google Maps API key and
+Stripe publishable API key via [environment
+variables](./docs/env.md).** The quickest way to do this is to copy
+`.env-template` -> `.env`, and edit the file to set the three mandatory
+configuration values.
+
 To develop the application and to see changes live, start the frontend development server:
 
     yarn run dev
-
-**You also need to [configure Google Maps api key](./docs/google-maps.md)**
 
 **Known issues:**
 
@@ -56,13 +60,6 @@ To start the test watcher, run
     yarn test
 
 See more in the [testing documentation](docs/testing.md).
-
-## Deployment
-
-The `master` branch is automatically deployed to Heroku. If you want to deploy a feature branch,
-setup the `sharetribe-starter-app` Heroku app and push the feature branch:
-
-    git push heroku my-feature-branch:master
 
 ## License
 

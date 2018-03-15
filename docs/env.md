@@ -1,0 +1,41 @@
+# Environment configuration variables
+
+The following configuration variables can be set to control the Starter App behaviour. Most of them
+have defaults that work for development environment. For production deploys most should be set.
+
+| Variable                                  | Description                                                                                                       |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| REACT_APP_GOOGLE_MAPS_API_KEY             | See: [Google Maps API key](./google-maps.md)                                                                      |
+| REACT_APP_SHARETRIBE_SDK_CLIENT_ID        | Client ID (API key). You will get this from the Sharetribe team.                                                  |
+| REACT_APP_STRIPE_PUBLISHABLE_KEY          | Stripe publishable API key for generating tokens with Stripe API. Use test key (prefix pk*test*) for development. |
+| REACT_APP_SHARETRIBE_SDK_BASE_URL         | The base url to access the Sharetribe Flex Marketplace API.                                                       |
+| REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY | The currency used in the Marketplace as ISO 4217 currency code. For example: USD, EUR, CAD, AUD, etc.             |
+| REACT_APP_CANONICAL_ROOT_URL              | Canonical root url of the marketplace. Needed for social media sharing and SEO optimization.                      |
+| NODE_ENV                                  | Node env. Use 'development' for development and 'production' for production.                                      |
+| PORT                                      | Port for server to accept connections.                                                                            |
+| REACT_APP_ENV                             | Env for client side. Use the same value as with NODE_ENV.                                                         |
+| REACT_APP_SHARETRIBE_USING_SSL            | Redirect HTTP to HTTPS?                                                                                           |
+| SERVER_SHARETRIBE_TRUST_PROXY             | Set when running the app behind a reverse proxy, e.g. in Heroku.                                                  |
+| REACT_APP_PUBLIC_SENTRY_DSN               | See: [Error logging with Sentry](./sentry.md)                                                                     |
+| SERVER_SENTRY_DSN                         | See: [Error logging with Sentry](./sentry.md)                                                                     |
+| REACT_APP_CSP                             | See: [Content Security Policy (CSP)](./content-security-policy.md)                                                |
+| BASIC_AUTH_USERNAME                       | Set to enable HTTP Basic Auth                                                                                     |
+| BASIC_AUTH_PASSWORD                       | Set to enable HTTP Basic Auth                                                                                     |
+| REACT_APP_GOOGLE_ANALYTICS_ID             | See: [Google Analytics](./analytics.md)                                                                           |
+
+## Defining configuration
+
+When the Starter App is started locally with `yarn run dev` or `yarn run dev-server`, you can set
+environment variables by using the (gitignored) `.env` file. The repository contains a template file
+`.env-template` with default configuration. Just copy that as `.env` and edit as necessary.
+
+In production, it's recommended that you set the configuration via env variables and do not deploy
+an .env file. The client application will only be packaged with env variables that start with
+REACT_APP. This way server secrets don't end up in client bundles.
+
+**With deploys note that the configuration options are bundled in the
+client package at build time.** The configuration of the build
+environment must match run environment for things to work
+consistently. To apply changes to configuration values client bundle
+must be rebuilt. Just restarting the server is not enough.
+

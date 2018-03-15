@@ -13,4 +13,4 @@ build
 .DS_Store
 .env
 npm-debug.log
-/.env.development.local
+yarn-error.log

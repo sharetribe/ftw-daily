@@ -1,5 +1,4 @@
 const helmet = require('helmet');
-const { config } = require('./importer');
 
 const dev = process.env.REACT_APP_ENV === 'development';
 const googleAnalyticsEnabled = !!process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
@@ -21,7 +20,7 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
   const self = "'self'";
   const inline = "'unsafe-inline'";
   const data = 'data:';
-  const sharetribeApi = config.sdk.baseUrl;
+  const sharetribeApi = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
   const sharetribeAssets = 'https://assets-sharetribecom.sharetribe.com/';
   const imgix = '*.imgix.net/';
   const loremPixel = 'https://lorempixel.com/';

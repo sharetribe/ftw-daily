@@ -16,6 +16,9 @@
 // This enables nice stacktraces from the minified production bundle
 require('source-map-support').install();
 
+// Configure process.env with .env.* files
+require('./env').configureEnv();
+
 const express = require('express');
 const helmet = require('helmet');
 const compression = require('compression');
@@ -35,12 +38,11 @@ const { sitemapStructure } = require('./sitemap');
 const csp = require('./csp');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
-const env = process.env.REACT_APP_ENV || 'production';
+const env = process.env.REACT_APP_ENV;
 const dev = process.env.REACT_APP_ENV === 'development';
-const PORT = process.env.PORT || 4000;
-const CLIENT_ID =
-  process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID || '08ec69f6-d37e-414d-83eb-324e94afddf0';
-const BASE_URL = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'http://localhost:8088';
+const PORT = parseInt(process.env.PORT, 10);
+const CLIENT_ID = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID;
+const BASE_URL = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
 const USING_SSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 const TRUST_PROXY = process.env.SERVER_SHARETRIBE_TRUST_PROXY || null;
 const CSP = process.env.REACT_APP_CSP;
