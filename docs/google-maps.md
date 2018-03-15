@@ -20,8 +20,7 @@ section of the Places library documentation to enable using the Google Places AP
 ## Setup the application to use the API key
 
 The application uses the `REACT_APP_GOOGLE_MAPS_API_KEY` environment variable for the key value. For
-local development, you can add the variable in the Gitignored `.env.development.local` file in the
-project root:
+local development, you can add the variable in the Gitignored `.env` file in the project root:
 
 ```
 REACT_APP_GOOGLE_MAPS_API_KEY=my-key-here

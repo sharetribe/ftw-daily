@@ -1,9 +1,8 @@
 const path = require('path');
 const moment = require('moment');
-const { config } = require('./importer');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT;
 const USING_SSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 
 /**
@@ -44,17 +43,17 @@ const port = rootURL => {
 };
 
 /**
- * Return a structure for sitemap.xml and robots.txt to be
- * used by the express-sitemap library. Uses the canonical
- * URL value from config for domain and port information.
+ * Return a structure for sitemap.xml and robots.txt to be used by the
+ * express-sitemap library. Uses the canonical URL value from env
+ * config for domain and port information.
  */
 exports.sitemapStructure = () => {
   const now = moment().format('YYYY-MM-DD');
 
   return {
-    url: domain(config.canonicalRootURL),
+    url: domain(process.env.REACT_APP_CANONICAL_ROOT_URL),
     http: USING_SSL ? 'https' : 'http',
-    port: port(config.canonicalRootURL),
+    port: port(process.env.REACT_APP_CANONICAL_ROOT_URL),
     sitemap: path.join(buildPath, 'static', 'sitemap.xml'),
     robots: path.join(buildPath, 'robots.txt'),
     sitemapSubmission: '/static/sitemap.xml',
