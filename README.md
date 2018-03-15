@@ -27,7 +27,7 @@ Clone this repository and install dependencies:
 **First, you need to configure Client Id, Google Maps API key and
 Stripe publishable API key via [environment
 variables](./docs/env.md).** The quickest way to do this is to copy
-.env-template -> .env, and edit the file to add the three mandatory
+`.env-template` -> `.env`, and edit the file to set the three mandatory
 configuration values.
 
 To develop the application and to see changes live, start the frontend development server:
