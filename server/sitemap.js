@@ -2,7 +2,7 @@ const path = require('path');
 const moment = require('moment');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
-const PORT = process.env.PORT;
+const PORT = parseInt(process.env.PORT, 10);
 const USING_SSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 
 /**

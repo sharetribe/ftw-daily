@@ -40,7 +40,7 @@ const csp = require('./csp');
 const buildPath = path.resolve(__dirname, '..', 'build');
 const env = process.env.REACT_APP_ENV;
 const dev = process.env.REACT_APP_ENV === 'development';
-const PORT = process.env.PORT;
+const PORT = parseInt(process.env.PORT, 10);
 const CLIENT_ID = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID;
 const BASE_URL = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
 const USING_SSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
