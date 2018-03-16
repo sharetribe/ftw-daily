@@ -1,6 +1,6 @@
 import { pick } from 'lodash';
 import { denormalisedResponseEntities } from '../../util/data';
-import { storableError, responseApiErrorInfo } from '../../util/errors';
+import { storableError } from '../../util/errors';
 import { TRANSITION_REQUEST } from '../../util/types';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess } from '../../ducks/user.duck';
@@ -138,7 +138,6 @@ export const initiateOrder = (orderParams, initialMessage) => (dispatch, getStat
         listingId: orderParams.listingId.uuid,
         bookingStart: orderParams.bookingStart,
         bookingEnd: orderParams.bookingEnd,
-        apiErrorInfo: responseApiErrorInfo(e),
       });
       throw e;
     });
@@ -185,7 +184,6 @@ export const speculateTransaction = params => (dispatch, getState, sdk) => {
         listingId: listingId.uuid,
         bookingStart,
         bookingEnd,
-        apiErrorInfo: responseApiErrorInfo(e),
       });
       return dispatch(speculateTransactionError(storableError(e)));
     });
