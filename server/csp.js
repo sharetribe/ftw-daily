@@ -22,23 +22,23 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
   const unsafeEval = "'unsafe-eval'";
   const data = 'data:';
   const sharetribeApi = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
-  const sharetribeAssets = 'https://assets-sharetribecom.sharetribe.com';
+  const sharetribeAssets = 'assets-sharetribecom.sharetribe.com';
   const imgix = '*.imgix.net';
   // Safari 9.1 didn't recognize asterisk rule.
-  const sharetribeImgix = 'https://sharetribe.imgix.net';
-  const loremPixel = 'https://lorempixel.com';
-  const placeholder = 'https://via.placeholder.com';
-  const google = 'https://www.google.com';
-  const googleAnalytics = 'https://www.google-analytics.com';
-  const googleAnalyticsDoubleClick = 'https://stats.g.doubleclick.net';
-  const googleMaps = 'https://maps.googleapis.com';
-  const googleStaticFonts = 'https://fonts.gstatic.com';
+  const sharetribeImgix = 'sharetribe.imgix.net';
+  const loremPixel = 'lorempixel.com';
+  const placeholder = 'via.placeholder.com';
+  const google = 'www.google.com';
+  const googleAnalytics = 'www.google-analytics.com';
+  const googleAnalyticsDoubleClick = 'stats.g.doubleclick.net';
+  const googleMaps = 'maps.googleapis.com';
+  const googleStaticFonts = 'fonts.gstatic.com';
   const googleStatic = '*.gstatic.com';
-  const googleFonts = 'https://fonts.googleapis.com';
-  const stripeJs = 'https://js.stripe.com';
-  const stripeQ = 'https://q.stripe.com';
-  const stripeApi = 'https://api.stripe.com';
-  const sentryApi = 'https://sentry.io/api/';
+  const googleFonts = 'fonts.googleapis.com';
+  const stripeJs = 'js.stripe.com';
+  const stripeQ = 'q.stripe.com';
+  const stripeApi = 'api.stripe.com';
+  const sentryApi = 'sentry.io';
 
   const scriptSrc = [self, unsafeInline, unsafeEval, data, googleMaps, stripeJs];
 
