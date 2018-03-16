@@ -28,6 +28,7 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
   const sharetribeImgix = 'https://sharetribe.imgix.net';
   const loremPixel = 'https://lorempixel.com';
   const placeholder = 'https://via.placeholder.com';
+  const google = 'https://www.google.com';
   const googleAnalytics = 'https://www.google-analytics.com';
   const googleAnalyticsDoubleClick = 'https://stats.g.doubleclick.net';
   const googleMaps = 'https://maps.googleapis.com';
@@ -65,6 +66,7 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
     // Only whitelist Google Analytics URLs when the analytics is
     // enabled.
     scriptSrc.push(googleAnalytics);
+    imgSrc.push(google);
     imgSrc.push(googleAnalytics);
     imgSrc.push(googleAnalyticsDoubleClick);
     connectSrc.push(googleAnalytics);
