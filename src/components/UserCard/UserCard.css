@@ -58,8 +58,8 @@
 }
 
 .showMore {
-  margin-left: 5px;
   @apply --marketplaceH4FontStyles;
+  margin: 0 0 0 5px;
 }
 
 .links {
