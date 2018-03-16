@@ -18,7 +18,8 @@ const sentryClientEnabled = !!process.env.REACT_APP_PUBLIC_SENTRY_DSN;
  */
 module.exports = (reportUri, enforceSsl, reportOnly) => {
   const self = "'self'";
-  const inline = "'unsafe-inline'";
+  const unsafeInline = "'unsafe-inline'";
+  const unsafeEval = "'unsafe-eval'";
   const data = 'data:';
   const sharetribeApi = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
   const sharetribeAssets = 'https://assets-sharetribecom.sharetribe.com';
@@ -38,9 +39,9 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
   const stripeApi = 'https://api.stripe.com';
   const sentryApi = 'https://sentry.io/api/';
 
-  const scriptSrc = [self, inline, data, googleMaps, stripeJs];
+  const scriptSrc = [self, unsafeInline, unsafeEval, data, googleMaps, stripeJs];
 
-  const styleSrc = [self, inline, googleFonts];
+  const styleSrc = [self, unsafeInline, googleFonts];
 
   const imgSrc = [
     self,
