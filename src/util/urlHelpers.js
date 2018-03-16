@@ -21,7 +21,7 @@ export const createSlug = str =>
  * @return {Number|null} number parsed from the string, null if not a number
  */
 export const parseFloatNum = str => {
-  const trimmed = str ? str.trim() : null;
+  const trimmed = str && typeof str.trim === 'function' ? str.trim() : null;
   if (!trimmed) {
     return null;
   }

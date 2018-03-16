@@ -224,6 +224,9 @@
   /* Rendering context to the same lavel as listing image */
   position: relative;
 
+  /* Flex would give too much width by default. */
+  width: 60px;
+
   @media (--viewportMedium) {
     position: absolute;
     left: 60px;

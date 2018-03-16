@@ -8,6 +8,7 @@
 
 import Raven from 'raven-js';
 import config from '../config';
+import { responseApiErrorInfo } from './errors';
 
 /**
  * Set up error handling. If a Sentry DSN is
@@ -53,7 +54,8 @@ export const clearUserId = () => {
  */
 export const error = (e, code, data) => {
   if (Raven.isSetup()) {
-    Raven.captureException(e, { tags: { code }, extra: data });
+    const extra = { ...data, apiErrorData: responseApiErrorInfo(e) };
+    Raven.captureException(e, { tags: { code }, extra });
   } else {
     console.error(e); // eslint-disable-line
     console.error('Error code:', code, 'data:', data);

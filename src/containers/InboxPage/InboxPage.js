@@ -288,8 +288,8 @@ export const InboxPageComponent = props => {
 
   const hasOrderOrSaleTransactions = (tx, isOrdersTab, user) => {
     return isOrdersTab
-      ? tx && tx.length > 0 && tx[0].customer.id.uuid === user.id.uuid
-      : tx && tx.length > 0 && tx[0].provider.id.uuid === user.id.uuid;
+      ? user.id && tx && tx.length > 0 && tx[0].customer.id.uuid === user.id.uuid
+      : user.id && tx && tx.length > 0 && tx[0].provider.id.uuid === user.id.uuid;
   };
   const hasTransactions =
     !fetchInProgress && hasOrderOrSaleTransactions(transactions, isOrders, currentUser);
