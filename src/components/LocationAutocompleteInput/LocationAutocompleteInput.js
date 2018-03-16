@@ -170,12 +170,6 @@ class LocationAutocompleteInput extends Component {
     // when the user is typing fast.
     this.predict = debounce(this.predict.bind(this), DEBOUNCE_WAIT_TIME, { leading: true });
   }
-  componentDidMount() {
-    const mapsLibLoaded = window.google && window.google.maps;
-    if (!mapsLibLoaded) {
-      throw new Error('Google Maps API must be loaded for LocationAutocompleteInput');
-    }
-  }
 
   // Interpret input key event
   onKeyDown(e) {
@@ -302,6 +296,10 @@ class LocationAutocompleteInput extends Component {
     }
   }
   predict(search) {
+    const mapsLibLoaded = window.google && window.google.maps;
+    if (!mapsLibLoaded) {
+      throw new Error('Google Maps API must be loaded for LocationAutocompleteInput');
+    }
     const onChange = this.props.input.onChange;
     getPlacePredictions(search)
       .then(results => {
