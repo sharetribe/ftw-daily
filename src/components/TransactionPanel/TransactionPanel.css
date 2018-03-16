@@ -81,6 +81,9 @@
 }
 
 .avatarMobile {
+  /* Flex would give too much width by default. */
+  width: 60px;
+
   @media (--viewportLarge) {
     display: none;
   }
