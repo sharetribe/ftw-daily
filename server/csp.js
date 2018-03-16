@@ -23,7 +23,7 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
   const sharetribeApi = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
   const sharetribeAssets = 'https://assets-sharetribecom.sharetribe.com';
   const imgix = '*.imgix.net';
-  // Safari 9.1 didn't regocnize asterisk rule.
+  // Safari 9.1 didn't recognize asterisk rule.
   const sharetribeImgix = 'https://sharetribe.imgix.net';
   const loremPixel = 'https://lorempixel.com';
   const placeholder = 'https://via.placeholder.com';
