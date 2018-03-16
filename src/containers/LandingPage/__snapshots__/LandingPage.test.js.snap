@@ -19,7 +19,7 @@ exports[`LandingPage matches snapshot 1`] = `
       "@type": "WebPage",
       "description": "LandingPage.schemaDescription",
       "image": Array [
-        "http://localhost:3000/saunatimeFacebook-1200x630.jpg",
+        "http://localhost:3000saunatimeFacebook-1200x630.jpg",
       ],
       "name": "LandingPage.schemaTitle",
     }
@@ -30,7 +30,7 @@ exports[`LandingPage matches snapshot 1`] = `
     Array [
       Object {
         "height": 314,
-        "url": "saunatimeTwitter-600x314.jpg",
+        "url": "http://localhost:3000saunatimeTwitter-600x314.jpg",
         "width": 600,
       },
     ]
