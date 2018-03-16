@@ -73,9 +73,9 @@ const Footer = props => {
                   <FormattedMessage id="Footer.organizationDescription" />
                 </p>
                 <p className={css.organizationCopyright}>
-                  <ExternalLink href="https://www.sharetribe.com/" className={css.copyrightLink}>
+                  <NamedLink name="LandingPage" className={css.copyrightLink}>
                     <FormattedMessage id="Footer.copyright" />
-                  </ExternalLink>
+                  </NamedLink>
                 </p>
               </div>
             </div>
@@ -255,12 +255,9 @@ const Footer = props => {
             </div>
           </div>
           <div className={css.copyrightAndTermsMobile}>
-            <ExternalLink
-              href="https://www.sharetribe.com/"
-              className={css.organizationCopyrightMobile}
-            >
+            <NamedLink name="LandingPage" className={css.organizationCopyrightMobile}>
               <FormattedMessage id="Footer.copyright" />
-            </ExternalLink>
+            </NamedLink>
             <div className={css.tosAndPrivacyMobile}>
               <NamedLink name="PrivacyPolicyPage" className={css.privacy}>
                 <FormattedMessage id="Footer.privacy" />
