@@ -130,7 +130,7 @@ export const twitterMetaProps = data => {
   if (canonicalRootURL && twitterImages && twitterImages.length > 0) {
     twitterImages.forEach(i => {
       twitterMeta.push({
-        name: 'twitter:image:src',
+        name: 'twitter:image',
         content: i.url,
       });
     });
