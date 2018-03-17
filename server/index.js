@@ -19,6 +19,8 @@ require('source-map-support').install();
 // Configure process.env with .env.* files
 require('./env').configureEnv();
 
+const http = require('http');
+const https = require('https');
 const express = require('express');
 const helmet = require('helmet');
 const compression = require('compression');
@@ -133,6 +135,13 @@ const noCacheHeaders = {
   'Cache-control': 'no-cache, no-store, must-revalidate',
 };
 
+// Instantiate HTTP(S) Agents with keepAlive set to true.
+// This will reduce the request time for consecutive requests by
+// reusing the existing TCP connection, thus eliminating the time used
+// for setting up new TCP connections.
+const httpAgent = new http.Agent({ keepAlive: true });
+const httpsAgent = new https.Agent({ keepAlive: true });
+
 app.get('*', (req, res) => {
   if (req.url.startsWith('/static/')) {
     // The express.static middleware only handles static resources
@@ -160,6 +169,8 @@ app.get('*', (req, res) => {
   const sdk = sharetribeSdk.createInstance({
     clientId: CLIENT_ID,
     baseUrl: BASE_URL,
+    httpAgent: httpAgent,
+    httpsAgent: httpsAgent,
     tokenStore,
     typeHandlers: [
       {
