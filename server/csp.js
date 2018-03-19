@@ -1,8 +1,65 @@
 const helmet = require('helmet');
 
 const dev = process.env.REACT_APP_ENV === 'development';
-const googleAnalyticsEnabled = !!process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
-const sentryClientEnabled = !!process.env.REACT_APP_PUBLIC_SENTRY_DSN;
+const self = "'self'";
+const unsafeInline = "'unsafe-inline'";
+const unsafeEval = "'unsafe-eval'";
+const data = 'data:';
+const devImagesMaybe = dev ? ['*.localhost:8000'] : [];
+
+// Default CSP whitelist.
+//
+// NOTE: Do not change these in the customisations, make custom
+// additions within the exported function in the bottom of this file.
+const defaultDirectives = {
+  baseUri: [self],
+  defaultSrc: [self],
+  connectSrc: [
+    self,
+    process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL,
+    'maps.googleapis.com',
+
+    // Google Analytics
+    'www.google-analytics.com',
+    'stats.g.doubleclick.net',
+
+    'sentry.io',
+    '*.stripe.com',
+  ],
+  fontSrc: [self, data, 'assets-sharetribecom.sharetribe.com', 'fonts.gstatic.com'],
+  frameSrc: [self, '*.stripe.com'],
+  imgSrc: [
+    self,
+    data,
+    ...devImagesMaybe,
+    '*.imgix.net',
+    'sharetribe.imgix.net', // Safari 9.1 didn't recognize asterisk rule.
+
+    // Styleguide placeholder images
+    'lorempixel.com',
+    'via.placeholder.com',
+
+    'maps.googleapis.com',
+    '*.gstatic.com',
+
+    // Google Analytics
+    'www.google.com',
+    'www.google-analytics.com',
+    'stats.g.doubleclick.net',
+
+    '*.stripe.com',
+  ],
+  scriptSrc: [
+    self,
+    unsafeInline,
+    unsafeEval,
+    data,
+    'maps.googleapis.com',
+    '*.google-analytics.com',
+    'js.stripe.com',
+  ],
+  styleSrc: [self, unsafeInline, 'fonts.googleapis.com'],
+};
 
 /**
  * Middleware for creating a Content Security Policy
@@ -17,84 +74,33 @@ const sentryClientEnabled = !!process.env.REACT_APP_PUBLIC_SENTRY_DSN;
  * reported to the report URL instead of blocked
  */
 module.exports = (reportUri, enforceSsl, reportOnly) => {
-  const self = "'self'";
-  const inline = "'unsafe-inline'";
-  const data = 'data:';
-  const sharetribeApi = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
-  const sharetribeAssets = 'https://assets-sharetribecom.sharetribe.com';
-  const imgix = '*.imgix.net';
-  // Safari 9.1 didn't recognize asterisk rule.
-  const sharetribeImgix = 'https://sharetribe.imgix.net';
-  const loremPixel = 'https://lorempixel.com';
-  const placeholder = 'https://via.placeholder.com';
-  const googleAnalytics = 'https://www.google-analytics.com';
-  const googleAnalyticsDoubleClick = 'https://stats.g.doubleclick.net';
-  const googleMaps = 'https://maps.googleapis.com';
-  const googleStaticFonts = 'https://fonts.gstatic.com';
-  const googleStatic = '*.gstatic.com';
-  const googleFonts = 'https://fonts.googleapis.com';
-  const stripeJs = 'https://js.stripe.com';
-  const stripeQ = 'https://q.stripe.com';
-  const stripeApi = 'https://api.stripe.com';
-  const sentryApi = 'https://sentry.io/api/';
+  // ================ START CUSTOM CSP URLs ================ //
 
-  const scriptSrc = [self, inline, data, googleMaps, stripeJs];
+  // Add custom CSP whitelisted URLs here. See commented example
+  // below. For format specs and examples, see:
+  // https://content-security-policy.com/
 
-  const styleSrc = [self, inline, googleFonts];
+  // Example: extend default img directive with custom domain
+  // const { imgSrc = [] } = defaultDirectives;
+  // const exampleImgSrc = imgSrc.concat('my-custom-domain.example.com');
 
-  const imgSrc = [
-    self,
-    data,
-    imgix,
-    sharetribeImgix,
-    loremPixel,
-    placeholder,
-    stripeQ,
-    googleMaps,
-    googleStatic,
-  ];
-
-  const connectSrc = [self, sharetribeApi, googleMaps, stripeApi];
-
-  const fontSrc = [self, data, sharetribeAssets, googleStaticFonts];
-
-  const frameSrc = [self, stripeJs];
-
-  if (googleAnalyticsEnabled) {
-    // Only whitelist Google Analytics URLs when the analytics is
-    // enabled.
-    scriptSrc.push(googleAnalytics);
-    imgSrc.push(googleAnalytics);
-    imgSrc.push(googleAnalyticsDoubleClick);
-    connectSrc.push(googleAnalytics);
-    connectSrc.push(googleAnalyticsDoubleClick);
-  }
-  if (sentryClientEnabled) {
-    connectSrc.push(sentryApi);
-  }
-  if (dev) {
-    // The default Core docker-compose setup server images from this
-    // URL locally.
-    imgSrc.push('*.localhost:8000');
-  }
-
-  const directives = {
-    scriptSrc,
-    styleSrc,
-    imgSrc,
-    connectSrc,
-    fontSrc,
-    frameSrc,
-    formAction: [self],
-    defaultSrc: [self],
-    baseUri: [self],
-    reportUri,
+  const customDirectives = {
+    // Example: Add custom directive override
+    // imgSrc: exampleImgSrc,
   };
 
-  if (enforceSsl) {
-    directives.blockAllMixedContent = true;
-  }
+  // ================ END CUSTOM CSP URLs ================ //
 
+  const directives = Object.assign(
+    {
+      reportUri,
+      blockAllMixedContent: enforceSsl,
+    },
+    defaultDirectives,
+    customDirectives
+  );
+
+  // See: https://helmetjs.github.io/docs/csp/
   return helmet.contentSecurityPolicy({
     directives,
     reportOnly,
