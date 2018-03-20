@@ -81,7 +81,7 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
   // https://content-security-policy.com/
 
   // Example: extend default img directive with custom domain
-  // const { imgSrc = [] } = defaultDirectives;
+  // const { imgSrc = [self] } = defaultDirectives;
   // const exampleImgSrc = imgSrc.concat('my-custom-domain.example.com');
 
   const customDirectives = {
