@@ -239,10 +239,18 @@ app.get('*', (req, res) => {
 app.use(log.errorHandler());
 
 if (cspEnabled) {
+  // Dig out the value of the given CSP report key from the request body.
+  const reportValue = (req, key) => {
+    const report = req.body ? req.body['csp-report'] : null;
+    return report && report[key] ? report[key] : key;
+  };
+
   // Handler for CSP violation reports.
   app.post(cspReportUrl, (req, res) => {
-    const report = req.body ? req.body['csp-report'] : null;
-    log.error(new Error('CSP violation'), 'csp-violation', report);
+    const effectiveDirective = reportValue(req, 'effective-directive');
+    const blockedUri = reportValue(req, 'blocked-uri');
+    const msg = `CSP: ${effectiveDirective} doesn't allow ${blockedUri}`;
+    log.error(new Error(msg), 'csp-violation');
     res.status(204).end();
   });
 }
