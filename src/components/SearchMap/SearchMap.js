@@ -268,9 +268,7 @@ export class SearchMapComponent extends Component {
         onListingClicked={this.onListingClicked}
         onMapLoad={this.onMapLoadHandler}
         onIdle={() => {
-          if (this.googleMap) {
-            onIdle(this.googleMap);
-          }
+          onIdle(this.googleMap);
         }}
         onCloseAsModal={() => {
           if (onCloseAsModal) {
