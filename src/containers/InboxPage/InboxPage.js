@@ -36,6 +36,7 @@ import {
   LayoutWrapperTopbar,
   LayoutWrapperFooter,
   Footer,
+  IconSpinner,
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 import config from '../../config';
@@ -355,7 +356,13 @@ export const InboxPageComponent = props => {
         <LayoutWrapperMain>
           {error}
           <ul className={css.itemList}>
-            {!fetchInProgress ? transactions.map(toTxItem) : null}
+            {!fetchInProgress ? (
+              transactions.map(toTxItem)
+            ) : (
+              <li className={css.listItemsLoading}>
+                <IconSpinner />
+              </li>
+            )}
             {noResults}
           </ul>
           {pagingLinks}
