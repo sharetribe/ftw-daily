@@ -140,6 +140,32 @@
   padding: 0;
 }
 
+@keyframes loadingSpinnerFadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.listItemsLoading {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  opacity: 0;
+
+  /* animation shorthand property doesn't work with local scope of CSS Modules */
+  animation-duration: 1s;
+  animation-name: loadingSpinnerFadeIn;
+  animation-fill-mode: forwards;
+}
+
 .listItem {
   /* Layout */
   margin-bottom: 10px;

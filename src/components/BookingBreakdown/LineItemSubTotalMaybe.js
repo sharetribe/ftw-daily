@@ -43,6 +43,11 @@ const LineItemSubTotalMaybe = props => {
   const unitPurchase = transaction.attributes.lineItems.find(
     item => item.code === unitType && !item.reversal
   );
+
+  if (!unitPurchase) {
+    throw new Error(`LineItemSubTotalMaybe: lineItem (${unitType}) missing`);
+  }
+
   const formattedSubTotal = formatMoney(intl, unitPurchase.lineTotal);
 
   return showSubTotal ? (

@@ -16,6 +16,11 @@ const LineItemUnitPrice = props => {
   const unitPurchase = transaction.attributes.lineItems.find(
     item => item.code === unitType && !item.reversal
   );
+
+  if (!unitPurchase) {
+    throw new Error(`LineItemUnitPrice: lineItem (${unitType}) missing`);
+  }
+
   const formattedUnitPrice = formatMoney(intl, unitPurchase.unitPrice);
 
   return (
