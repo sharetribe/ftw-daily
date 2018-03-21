@@ -30,12 +30,11 @@ export const BookingBreakdownComponent = props => {
   const isCustomer = userRole === 'customer';
   const isProvider = userRole === 'provider';
 
-  const commissionLineItem = transaction.attributes.lineItems.find(
-    item =>
-      (item.code === LINE_ITEM_CUSTOMER_COMMISSION ||
-        item.code === LINE_ITEM_PROVIDER_COMMISSION) &&
-      !item.reversal
-  );
+  const hasCommissionLineItem = transaction.attributes.lineItems.find(item => {
+    const hasCustomerCommission = isCustomer && item.code === LINE_ITEM_CUSTOMER_COMMISSION;
+    const hasProviderCommission = isProvider && item.code === LINE_ITEM_PROVIDER_COMMISSION;
+    return (hasCustomerCommission || hasProviderCommission) && !item.reversal;
+  });
 
   const classes = classNames(rootClassName || css.root, className);
 
@@ -77,7 +76,7 @@ export const BookingBreakdownComponent = props => {
 
       <hr className={css.totalDivider} />
       <LineItemTotalPrice transaction={transaction} isProvider={isProvider} intl={intl} />
-      {commissionLineItem ? (
+      {hasCommissionLineItem ? (
         <span className={css.feeInfo}>
           <FormattedMessage id="BookingBreakdown.commissionFeeNote" />
         </span>
