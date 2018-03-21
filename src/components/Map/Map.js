@@ -55,13 +55,6 @@ const MapWithGoogleMap = withGoogleMap(props => {
 });
 
 export class Map extends Component {
-  componentDidMount() {
-    const mapsLibLoaded = window.google && window.google.maps;
-    if (!mapsLibLoaded) {
-      throw new Error('Google Maps API must be loaded for the Map component');
-    }
-  }
-
   render() {
     const {
       className,
@@ -88,7 +81,9 @@ export class Map extends Component {
     const location = coordinatesConfig.fuzzy ? obfuscatedCenter : center;
     const centerLocationForGoogleMap = { lat: location.lat, lng: location.lng };
 
-    return (
+    const isMapsLibLoaded = window.google && window.google.maps;
+
+    return isMapsLibLoaded ? (
       <MapWithGoogleMap
         containerElement={<div className={classes} onClick={this.onMapClicked} />}
         mapElement={<div className={mapClasses} />}
@@ -97,6 +92,8 @@ export class Map extends Component {
         address={address}
         coordinatesConfig={coordinatesConfig}
       />
+    ) : (
+      <div className={classes} />
     );
   }
 }

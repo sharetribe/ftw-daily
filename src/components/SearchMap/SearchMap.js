@@ -186,13 +186,6 @@ export class SearchMapComponent extends Component {
     this.onMapLoadHandler = this.onMapLoadHandler.bind(this);
   }
 
-  componentDidMount() {
-    const mapsLibLoaded = window.google && window.google.maps;
-    if (!mapsLibLoaded) {
-      throw new Error('Google Maps API must be loaded for the SearchMap component');
-    }
-  }
-
   componentWillReceiveProps(nextProps) {
     if (this.googleMap) {
       const currentBounds = googleBoundsToSDKBounds(this.googleMap.getBounds());
@@ -254,9 +247,11 @@ export class SearchMapComponent extends Component {
       ? withCoordinatesObfuscated(listingsWithLocation)
       : listingsWithLocation;
 
+    const isMapsLibLoaded = window.google && window.google.maps;
+
     // container element listens clicks so that opened SearchMapInfoCard can be closed
     /* eslint-disable jsx-a11y/no-static-element-interactions */
-    return (
+    return isMapsLibLoaded ? (
       <MapWithGoogleMap
         containerElement={<div className={classes} onClick={this.onMapClicked} />}
         mapElement={<div className={mapClasses} />}
@@ -279,6 +274,8 @@ export class SearchMapComponent extends Component {
         }}
         zoom={zoom}
       />
+    ) : (
+      <div className={classes} />
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
