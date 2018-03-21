@@ -134,11 +134,12 @@
 
 .listings {
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .listing {
   width: 100%;
-  float: left;
 
   /* Single column in mobile */
   margin-top: 34px;
