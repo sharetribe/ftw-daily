@@ -478,6 +478,7 @@
   "ProfileSettingsForm.firstNamePlaceholder": "John",
   "ProfileSettingsForm.firstNameRequired": "This field is required",
   "ProfileSettingsForm.imageUploadFailed": "Whoops, something went wrong. Please try again.",
+  "ProfileSettingsForm.imageUploadFailedWasItTooBig": "Whoops, something went wrong. Did you upload too big image?",
   "ProfileSettingsForm.imageUploadFailedFileTooLarge": "Image was too big. Maximum size is 10 MB.",
   "ProfileSettingsForm.lastNameLabel": "Last name",
   "ProfileSettingsForm.lastNamePlaceholder": "Doe",

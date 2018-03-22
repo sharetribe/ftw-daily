@@ -15,50 +15,67 @@ import css from './ProfileSettingsForm.css';
 const ACCEPT_IMAGES = 'image/*';
 const UPLOAD_CHANGE_DELAY = 2000; // Show spinner so that browser has time to load img srcset
 
-const RenderAvatar = props => {
-  const { accept, id, input, label, type, disabled, uploadImageError } = props;
-  const { name, onChange } = input;
+class RenderAvatar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { selectedImage: null };
+  }
 
-  let error = null;
+  render() {
+    const { accept, id, input, label, type, disabled, uploadImageError } = this.props;
+    const { name, onChange } = input;
 
-  if (isUploadProfileImageOverLimitError(uploadImageError)) {
-    error = (
-      <div className={css.error}>
-        <FormattedMessage id="ProfileSettingsForm.imageUploadFailedFileTooLarge" />
-      </div>
-    );
-  } else if (uploadImageError) {
-    error = (
-      <div className={css.error}>
-        <FormattedMessage id="ProfileSettingsForm.imageUploadFailed" />
+    let error = null;
+
+    if (isUploadProfileImageOverLimitError(uploadImageError)) {
+      error = (
+        <div className={css.error}>
+          <FormattedMessage id="ProfileSettingsForm.imageUploadFailedFileTooLarge" />
+        </div>
+      );
+    } else if (uploadImageError) {
+      const selectedImage = this.state.selectedImage;
+      if (selectedImage && selectedImage.size > 10000000) {
+        error = (
+          <div className={css.error}>
+            <FormattedMessage id="ProfileSettingsForm.imageUploadFailedWasItTooBig" />
+          </div>
+        );
+      } else {
+        error = (
+          <div className={css.error}>
+            <FormattedMessage id="ProfileSettingsForm.imageUploadFailed" />
+          </div>
+        );
+      }
+    }
+
+    return (
+      <div className={css.uploadAvatarWrapper}>
+        <label className={css.label} htmlFor={id}>
+          {label}
+        </label>
+        <input
+          accept={accept}
+          className={css.uploadAvatarInput}
+          disabled={disabled}
+          id={id}
+          name={name}
+          onChange={event => {
+            const file = event.target.files[0];
+            if (file != null) {
+              const tempId = `${file.name}_${Date.now()}`;
+              this.setState({ selectedImage: file });
+              onChange({ id: tempId, file });
+            }
+          }}
+          type={type}
+        />
+        {error}
       </div>
     );
   }
-
-  return (
-    <div className={css.uploadAvatarWrapper}>
-      <label className={css.label} htmlFor={id}>
-        {label}
-      </label>
-      <input
-        accept={accept}
-        className={css.uploadAvatarInput}
-        disabled={disabled}
-        id={id}
-        name={name}
-        onChange={event => {
-          const file = event.target.files[0];
-          if (file != null) {
-            const tempId = `${file.name}_${Date.now()}`;
-            onChange({ id: tempId, file });
-          }
-        }}
-        type={type}
-      />
-      {error}
-    </div>
-  );
-};
+}
 
 RenderAvatar.defaultProps = { uploadImageError: null };
 const { bool, func, node, object, shape, string } = PropTypes;
