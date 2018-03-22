@@ -8,9 +8,14 @@
 */
 import React from 'react';
 import { string, oneOfType, node } from 'prop-types';
-import { NamedLink } from '../../components';
+import { richText } from '../../util/richText';
 import { LISTING_STATE_PENDING_APPROVAL, propTypes } from '../../util/types';
 import { LISTING_PAGE_PENDING_APPROVAL_VARIANT, createSlug } from '../../util/urlHelpers';
+import { NamedLink } from '../../components';
+
+import css from './ListingLink.css';
+
+const MIN_LENGTH_FOR_LONG_WORDS = 16;
 
 const ListingLink = props => {
   const { className, listing, children } = props;
@@ -21,6 +26,15 @@ const ListingLink = props => {
   const id = listing.id.uuid;
   const { title, state } = listing.attributes;
   const slug = createSlug(title);
+  const richTitle = (
+    <span>
+      {richText(title, {
+        longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
+        longWordClass: css.longWord,
+      })}
+    </span>
+  );
+
   const isPendingApproval = state === LISTING_STATE_PENDING_APPROVAL;
   const linkProps = isPendingApproval
     ? {
@@ -37,7 +51,7 @@ const ListingLink = props => {
       };
   return (
     <NamedLink className={className} {...linkProps}>
-      {children ? children : listing.attributes.title || ''}
+      {children ? children : richTitle || ''}
     </NamedLink>
   );
 };
