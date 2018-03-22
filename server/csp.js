@@ -41,6 +41,8 @@ const defaultDirectives = {
 
     'maps.googleapis.com',
     '*.gstatic.com',
+    '*.googleapis.com',
+    '*.ggpht.com',
 
     // Google Analytics
     'www.google.com',
