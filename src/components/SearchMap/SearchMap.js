@@ -247,7 +247,7 @@ export class SearchMapComponent extends Component {
       ? withCoordinatesObfuscated(listingsWithLocation)
       : listingsWithLocation;
 
-    const isMapsLibLoaded = window.google && window.google.maps;
+    const isMapsLibLoaded = typeof window !== 'undefined' && window.google && window.google.maps;
 
     // container element listens clicks so that opened SearchMapInfoCard can be closed
     /* eslint-disable jsx-a11y/no-static-element-interactions */

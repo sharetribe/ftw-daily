@@ -81,7 +81,7 @@ export class Map extends Component {
     const location = coordinatesConfig.fuzzy ? obfuscatedCenter : center;
     const centerLocationForGoogleMap = { lat: location.lat, lng: location.lng };
 
-    const isMapsLibLoaded = window.google && window.google.maps;
+    const isMapsLibLoaded = typeof window !== 'undefined' && window.google && window.google.maps;
 
     return isMapsLibLoaded ? (
       <MapWithGoogleMap
