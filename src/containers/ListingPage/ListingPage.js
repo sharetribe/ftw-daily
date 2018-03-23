@@ -14,6 +14,7 @@ import { LISTING_PAGE_PENDING_APPROVAL_VARIANT, createSlug, parse } from '../../
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import { ensureListing, ensureOwnListing, ensureUser, userDisplayName } from '../../util/data';
+import { richText } from '../../util/richText';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import {
@@ -47,6 +48,8 @@ import css from './ListingPage.css';
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;
+const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
+const MIN_LENGTH_FOR_LONG_WORDS_IN_DESCRIPTION = 20;
 
 const { UUID } = sdkTypes;
 
@@ -292,6 +295,15 @@ export class ListingPageComponent extends Component {
       publicData,
     } = currentListing.attributes;
 
+    const richTitle = (
+      <span>
+        {richText(title, {
+          longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE,
+          longWordClass: css.longWord,
+        })}
+      </span>
+    );
+
     const category =
       publicData && publicData.category ? (
         <span>
@@ -393,7 +405,7 @@ export class ListingPageComponent extends Component {
     const bookingHeading = (
       <div className={css.bookingHeading}>
         <h2 className={css.bookingTitle}>
-          <FormattedMessage id="ListingPage.bookingTitle" values={{ title }} />
+          <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
         </h2>
         <div className={css.bookingHelp}>
           <FormattedMessage
@@ -564,7 +576,7 @@ export class ListingPageComponent extends Component {
                       </div>
                     </div>
                     <div className={css.heading}>
-                      <h1 className={css.title}>{title}</h1>
+                      <h1 className={css.title}>{richTitle}</h1>
                       <div className={css.author}>
                         {category}
                         <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />
@@ -587,7 +599,12 @@ export class ListingPageComponent extends Component {
                     <h2 className={css.descriptionTitle}>
                       <FormattedMessage id="ListingPage.descriptionTitle" />
                     </h2>
-                    <p className={css.description}>{description}</p>
+                    <p className={css.description}>
+                      {richText(description, {
+                        longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_DESCRIPTION,
+                        longWordClass: css.longWord,
+                      })}
+                    </p>
                   </div>
 
                   <div className={css.featuresContainer}>
@@ -663,7 +680,7 @@ export class ListingPageComponent extends Component {
                   onManageDisableScrolling={onManageDisableScrolling}
                 >
                   <div className={css.modalHeading}>
-                    <h1 className={css.title}>{title}</h1>
+                    <h1 className={css.title}>{richTitle}</h1>
                     <div className={css.author}>
                       <span className={css.authorName}>
                         <FormattedMessage

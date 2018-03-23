@@ -217,7 +217,11 @@ exports[`ListingPage matches snapshot 1`] = `
               </div>
               <div>
                 <h1>
-                  listing1 title
+                  <span>
+                    listing1
+                     
+                    title
+                  </span>
                 </h1>
                 <div>
                   <FormattedMessage
@@ -267,7 +271,9 @@ exports[`ListingPage matches snapshot 1`] = `
                 />
               </h2>
               <p>
-                listing1 description
+                listing1
+                 
+                description
               </p>
             </div>
             <div>
@@ -431,7 +437,11 @@ exports[`ListingPage matches snapshot 1`] = `
           >
             <div>
               <h1>
-                listing1 title
+                <span>
+                  listing1
+                   
+                  title
+                </span>
               </h1>
               <div>
                 <span>
@@ -452,7 +462,11 @@ exports[`ListingPage matches snapshot 1`] = `
                   id="ListingPage.bookingTitle"
                   values={
                     Object {
-                      "title": "listing1 title",
+                      "title": <span>
+                        listing1
+                         
+                        title
+                    </span>,
                     }
                   }
                 />

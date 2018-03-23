@@ -744,3 +744,11 @@
   padding: 15px 24px 15px 24px;
   text-align: center;
 }
+
+.longWord {
+  /* fallback option */
+  word-break: break-all;
+  /* use break-word if available */
+  word-break: break-word;
+  hyphens: auto;
+}
