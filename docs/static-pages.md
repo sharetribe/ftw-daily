@@ -5,13 +5,13 @@ can create a static page.
 
 Steps for creating a static page:
 
-1. [Create a new folder under `src/containers/`](#1-creating-a-new-folder)
-2. [Create a new JavaScript file using the same name.](#2-creating-a-javascript-file)
-3. [Create a new CSS file using the same name.](#3-creating-a-css-file)
-4. [Write the content to a JavaScript file (i.e. AboutPage.js in our example).](#4-creating-the-component)
-5. [Write the style rules to CSS file (i.e. AboutPage.css in our example).](#5-adding-some-styles-to-the-css-file)
-6. [Add the newly created page component to `src/containers/index.js`](#6-adding-the-component-to-the-component-directory)
-7. [Add the newly created page to `src/routeConfiguration.js`](#7-adding-a-route-to-the-page)
+1.  [Create a new folder under `src/containers/`](#1-creating-a-new-folder)
+2.  [Create a new JavaScript file using the same name.](#2-creating-a-javascript-file)
+3.  [Create a new CSS file using the same name.](#3-creating-a-css-file)
+4.  [Write the content to a JavaScript file (i.e. AboutPage.js in our example).](#4-creating-the-component)
+5.  [Write the style rules to CSS file (i.e. AboutPage.css in our example).](#5-adding-some-styles-to-the-css-file)
+6.  [Add the newly created page component to `src/containers/index.js`](#6-adding-the-component-to-the-component-directory)
+7.  [Add the newly created page to `src/routeConfiguration.js`](#7-adding-a-route-to-the-page)
 
 ## 1. Creating a new folder
 
