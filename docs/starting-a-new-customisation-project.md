@@ -35,18 +35,18 @@ documentation.
 
 In the `master` branch:
 
-1. Fetch the latest changes from the upstream repository:
+1.  Fetch the latest changes from the upstream repository:
 
-   ```sh
-   git fetch upstream
-   ```
+    ```sh
+    git fetch upstream
+    ```
 
-1. Merge the changes to your local branch
+1.  Merge the changes to your local branch
 
-   ```sh
-   git merge upstream/master
-   ```
+    ```sh
+    git merge upstream/master
+    ```
 
-1. Fix possible merge conflicts, commit, and push/deploy.
+1.  Fix possible merge conflicts, commit, and push/deploy.
 
 See also the [Syncing a fork](https://help.github.com/articles/syncing-a-fork/) documentation.

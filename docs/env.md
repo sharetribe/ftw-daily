@@ -33,9 +33,7 @@ In production, it's recommended that you set the configuration via env variables
 an .env file. The client application will only be packaged with env variables that start with
 REACT_APP. This way server secrets don't end up in client bundles.
 
-**With deploys note that the configuration options are bundled in the
-client package at build time.** The configuration of the build
-environment must match run environment for things to work
-consistently. To apply changes to configuration values client bundle
-must be rebuilt. Just restarting the server is not enough.
-
+**With deploys note that the configuration options are bundled in the client package at build
+time.** The configuration of the build environment must match run environment for things to work
+consistently. To apply changes to configuration values client bundle must be rebuilt. Just
+restarting the server is not enough.
