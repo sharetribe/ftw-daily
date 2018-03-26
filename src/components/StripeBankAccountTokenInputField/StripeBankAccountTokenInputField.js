@@ -10,7 +10,6 @@ import config from '../../config';
 import {
   BANK_ACCOUNT_INPUTS,
   cleanedString,
-  createToken,
   formatFieldMessage,
   requiredInputs,
   mapInputsToStripeAccountKeys,
@@ -140,7 +139,17 @@ class TokenInputFieldComponent extends Component {
       accountData = { ...accountData, ...inputValueObj };
     });
 
-    createToken(accountData)
+    // https://stripe.com/docs/stripe-js/reference#collecting-bank-account-details
+    this.stripe
+      .createToken('bank_account', accountData)
+      .then(result => {
+        if (result.error) {
+          const e = new Error(result.error.message);
+          e.stripeError = result.error;
+          throw e;
+        }
+        return result.token.id;
+      })
       .then(token => {
         const changedValues = inputsNeeded.filter(
           inputType => values[inputType] !== cleanedString(this.state[inputType].value)
