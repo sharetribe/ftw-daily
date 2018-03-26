@@ -1,7 +1,6 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { mapValues } from 'lodash';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import toJson from 'enzyme-to-json';
 import { IntlProvider, addLocaleData } from 'react-intl';
@@ -48,6 +47,5 @@ export const renderShallow = component => {
 // Fully render the given component to a JSON structure that can be
 // used in snapshot tests.
 export const renderDeep = component => {
-  const comp = renderer.create(<TestProvider>{component}</TestProvider>);
-  return comp.toJSON();
+  return toJson(mount(<TestProvider>{component}</TestProvider>), { mode: 'deep' });
 };
