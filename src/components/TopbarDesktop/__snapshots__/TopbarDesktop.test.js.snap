@@ -30,14 +30,12 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
         className=""
       >
         <svg
-          className={undefined}
           height="22"
           viewBox="0 0 21 22"
           width="21"
           xmlns="http://www.w3.org/2000/svg"
         >
           <g
-            className={undefined}
             fill="none"
             fillRule="evenodd"
             strokeLinecap="round"
@@ -78,9 +76,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     style={Object {}}
     title={null}
   >
-    <span
-      className={undefined}
-    >
+    <span>
       <span>
         TopbarDesktop.createListing
       </span>
@@ -93,9 +89,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     style={Object {}}
     title={null}
   >
-    <span
-      className={undefined}
-    >
+    <span>
       <span>
         TopbarDesktop.inbox
       </span>
@@ -114,11 +108,8 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     >
       <div
         className=""
-        title={undefined}
       >
-        <span
-          className={undefined}
-        />
+        <span />
       </div>
     </button>
     <div
@@ -139,9 +130,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
             style={Object {}}
             title={null}
           >
-            <span
-              className={undefined}
-            />
+            <span />
             <span>
               TopbarDesktop.yourListingsLink
             </span>
@@ -158,9 +147,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
             style={Object {}}
             title={null}
           >
-            <span
-              className={undefined}
-            />
+            <span />
             <span>
               TopbarDesktop.profileSettingsLink
             </span>
@@ -177,9 +164,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
             style={Object {}}
             title={null}
           >
-            <span
-              className={undefined}
-            />
+            <span />
             <span>
               TopbarDesktop.accountSettingsLink
             </span>
@@ -194,9 +179,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
             disabled={false}
             onClick={[Function]}
           >
-            <span
-              className={undefined}
-            />
+            <span />
             <span>
               TopbarDesktop.logout
             </span>

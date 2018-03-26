@@ -31,9 +31,7 @@ exports[`SignupForm matches snapshot 1`] = `
         value=""
       />
     </div>
-    <div
-      className={undefined}
-    >
+    <div>
       <div
         className=""
       >
@@ -105,15 +103,9 @@ exports[`SignupForm matches snapshot 1`] = `
       />
     </div>
   </div>
-  <div
-    className={undefined}
-  >
-    <p
-      className={undefined}
-    >
-      <span
-        className={undefined}
-      >
+  <div>
+    <p>
+      <span>
         <span>
           SignupForm.termsAndConditionsAcceptText
         </span>

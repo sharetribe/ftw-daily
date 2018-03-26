@@ -4,16 +4,12 @@ exports[`SectionHero matches snapshot 1`] = `
 <div
   className=""
 >
-  <h1
-    className={undefined}
-  >
+  <h1>
     <span>
       SectionHero.title
     </span>
   </h1>
-  <h2
-    className={undefined}
-  >
+  <h2>
     <span>
       SectionHero.subTitle
     </span>
@@ -65,14 +61,12 @@ exports[`SectionHero matches snapshot 1`] = `
         className=""
       >
         <svg
-          className={undefined}
           height="22"
           viewBox="0 0 21 22"
           width="21"
           xmlns="http://www.w3.org/2000/svg"
         >
           <g
-            className={undefined}
             fill="none"
             fillRule="evenodd"
             strokeLinecap="round"
