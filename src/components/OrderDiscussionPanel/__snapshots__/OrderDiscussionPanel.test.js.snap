@@ -6,30 +6,22 @@ exports[`OrderDiscussionPanel matches snapshot 1`] = `
 >
   <ul>
     <li>
-      <span
-        className={undefined}
-      >
+      <span>
         2017-02-26T00:00:00.000Z
       </span>
-      <div
-        className={undefined}
-      >
+      <div>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac tellus ornare, tempor lacus quis, imperdiet lectus. Morbi suscipit semper nisl at lacinia. Vestibulum malesuada mattis nisl, et venenatis enim volutpat sit amet. Nulla laoreet feugiat gravida. Fusce ultricies nisl quis aliquet ullamcorper. Nulla congue risus metus.
       </div>
-      <span
-        className={undefined}
-      >
+      <span>
         John
       </span>
     </li>
   </ul>
   <form
-    className={undefined}
     onSubmit={[Function]}
   >
     <input
       autoFocus={true}
-      className={undefined}
       onChange={[Function]}
       type="text"
       value=""

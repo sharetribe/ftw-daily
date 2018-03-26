@@ -79,11 +79,13 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
         EditListingDescriptionForm.categoryPlaceholder
       </option>
       <option
+        key="cat1"
         value="cat1"
       >
         Cat 1
       </option>
       <option
+        key="cat2"
         value="cat2"
       >
         Cat 2

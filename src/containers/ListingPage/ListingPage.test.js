@@ -216,7 +216,7 @@ describe('ListingPage', () => {
       const actionBar = shallow(
         <ActionBarMaybe isOwnListing={false} listing={listing} editParams={{}} />
       );
-      expect(actionBar.node).toBeNull();
+      expect(actionBar.getElement()).toBeNull();
     });
   });
 });

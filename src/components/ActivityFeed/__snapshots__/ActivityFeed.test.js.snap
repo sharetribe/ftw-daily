@@ -5,62 +5,40 @@ exports[`ActivityFeed matches snapshot 1`] = `
   className=""
 >
   <li
-    className={undefined}
+    key="transition/request"
   >
-    <div
-      className={undefined}
-    >
-      <div
-        className={undefined}
-      >
-        <p
-          className={undefined}
-        >
+    <div>
+      <div>
+        <p>
           •
         </p>
       </div>
       <div>
-        <p
-          className={undefined}
-        />
-        <p
-          className={undefined}
-        />
+        <p />
+        <p />
       </div>
     </div>
   </li>
   <li
-    className={undefined}
+    key="transition/accept"
   >
-    <div
-      className={undefined}
-    >
-      <div
-        className={undefined}
-      >
-        <p
-          className={undefined}
-        >
+    <div>
+      <div>
+        <p>
           •
         </p>
       </div>
       <div>
-        <p
-          className={undefined}
-        />
-        <p
-          className={undefined}
-        />
+        <p />
+        <p />
       </div>
     </div>
   </li>
   <li
-    className={undefined}
     id="msg-msg1"
+    key="msg1"
   >
-    <div
-      className={undefined}
-    >
+    <div>
       <a
         className=""
         href="/u/user1"
@@ -68,49 +46,35 @@ exports[`ActivityFeed matches snapshot 1`] = `
         style={Object {}}
         title="user1 display name"
       >
-        <span
-          className={undefined}
-        >
+        <span>
           TT
         </span>
       </a>
       <div>
-        <p
-          className={undefined}
-        >
+        <p>
           Message msg1
           
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
-        <p
-          className={undefined}
-        >
+        <p>
           2017-11-09, 08:12
         </p>
       </div>
     </div>
   </li>
   <li
-    className={undefined}
     id="msg-msg2"
+    key="msg2"
   >
-    <div
-      className={undefined}
-    >
-      <div
-        className={undefined}
-      >
-        <p
-          className={undefined}
-        >
+    <div>
+      <div>
+        <p>
           Message msg2
           
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
       </div>
-      <p
-        className={undefined}
-      >
+      <p>
         2017-11-09, 08:12
       </p>
     </div>

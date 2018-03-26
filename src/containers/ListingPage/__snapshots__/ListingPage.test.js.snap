@@ -229,6 +229,7 @@ exports[`ListingPage matches snapshot 1`] = `
                     values={
                       Object {
                         "name": <NamedLink
+                          className={undefined}
                           name="ListingPage"
                           params={
                               Object {
@@ -463,9 +464,11 @@ exports[`ListingPage matches snapshot 1`] = `
                   values={
                     Object {
                       "title": <span>
+                        
                         listing1
                          
                         title
+                        
                     </span>,
                     }
                   }

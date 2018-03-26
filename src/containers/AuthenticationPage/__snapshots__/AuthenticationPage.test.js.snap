@@ -48,7 +48,9 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
                     },
                   },
                   "selected": false,
-                  "text": <h1>
+                  "text": <h1
+                    className={undefined}
+              >
                     <FormattedMessage
                           id="AuthenticationPage.signupLinkText"
                           values={Object {}}
@@ -65,7 +67,9 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
                     },
                   },
                   "selected": true,
-                  "text": <h1>
+                  "text": <h1
+                    className={undefined}
+              >
                     <FormattedMessage
                           id="AuthenticationPage.loginLinkText"
                           values={Object {}}

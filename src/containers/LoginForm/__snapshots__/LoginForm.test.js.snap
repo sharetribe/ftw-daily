@@ -55,15 +55,9 @@ exports[`LoginForm matches snapshot 1`] = `
       />
     </div>
   </div>
-  <div
-    className={undefined}
-  >
-    <p
-      className={undefined}
-    >
-      <span
-        className={undefined}
-      >
+  <div>
+    <p>
+      <span>
         <span>
           LoginForm.forgotPasswordInfo
         </span>
