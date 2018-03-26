@@ -16,6 +16,7 @@ exports[`PaginationLinks should match snapshot with both links disabled 1`] = `
   >
     <NamedLink
       className="undefined"
+      key="1"
       name="SomePage"
       params={
         Object {
@@ -69,6 +70,7 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
   >
     <NamedLink
       className=""
+      key="1"
       name="SomePage"
       params={
         Object {
@@ -86,6 +88,7 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
     </NamedLink>
     <NamedLink
       className="undefined"
+      key="2"
       name="SomePage"
       params={
         Object {
@@ -103,6 +106,7 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
     </NamedLink>
     <NamedLink
       className=""
+      key="3"
       name="SomePage"
       params={
         Object {
@@ -156,6 +160,7 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
   >
     <NamedLink
       className="undefined"
+      key="1"
       name="SomePage"
       params={
         Object {
@@ -173,6 +178,7 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
     </NamedLink>
     <NamedLink
       className=""
+      key="2"
       name="SomePage"
       params={
         Object {
@@ -190,6 +196,7 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
     </NamedLink>
     <NamedLink
       className=""
+      key="3"
       name="SomePage"
       params={
         Object {
@@ -254,6 +261,7 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
   >
     <NamedLink
       className=""
+      key="1"
       name="SomePage"
       params={
         Object {
@@ -271,6 +279,7 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
     </NamedLink>
     <NamedLink
       className=""
+      key="2"
       name="SomePage"
       params={
         Object {
@@ -288,6 +297,7 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
     </NamedLink>
     <NamedLink
       className="undefined"
+      key="3"
       name="SomePage"
       params={
         Object {

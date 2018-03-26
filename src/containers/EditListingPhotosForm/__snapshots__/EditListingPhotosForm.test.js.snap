@@ -20,14 +20,20 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
       disabled={false}
       id="EditListingPhotosForm.AddImages"
       label={
-        <span>
-          <span>
+        <span
+          className={undefined}
+        >
+          <span
+            className={undefined}
+          >
             <FormattedMessage
               id="EditListingPhotosForm.chooseImage"
               values={Object {}}
             />
           </span>
-          <span>
+          <span
+            className={undefined}
+          >
             <FormattedMessage
               id="EditListingPhotosForm.imageTypes"
               values={Object {}}

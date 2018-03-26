@@ -75,7 +75,9 @@ exports[`InboxPage matches snapshot 1`] = `
       rootClassName={null}
     >
       <ul>
-        <li>
+        <li
+          key="order-1"
+        >
           <Component
             intl={
               Object {
@@ -198,7 +200,9 @@ exports[`InboxPage matches snapshot 1`] = `
             unitType="line-item/night"
           />
         </li>
-        <li>
+        <li
+          key="order-2"
+        >
           <Component
             intl={
               Object {
@@ -477,7 +481,9 @@ exports[`InboxPage matches snapshot 3`] = `
       rootClassName={null}
     >
       <ul>
-        <li>
+        <li
+          key="sale-1"
+        >
           <Component
             intl={
               Object {
@@ -600,7 +606,9 @@ exports[`InboxPage matches snapshot 3`] = `
             unitType="line-item/night"
           />
         </li>
-        <li>
+        <li
+          key="sale-2"
+        >
           <Component
             intl={
               Object {

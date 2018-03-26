@@ -79,6 +79,7 @@ exports[`ManageListingCard matches snapshot 1`] = `
           >
             <MenuItem
               className={null}
+              key="close-listing"
               rootClassName=""
             >
               <InlineTextButton
@@ -115,6 +116,7 @@ exports[`ManageListingCard matches snapshot 1`] = `
         className=""
       >
         <span
+          key="1"
           style={
             Object {
               "wordBreak": "break-all",
