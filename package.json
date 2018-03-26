@@ -20,7 +20,7 @@
     "lodash": "^4.17.5",
     "moment": "^2.20.1",
     "path-to-regexp": "^2.2.0",
-    "prop-types": "^15.6.0",
+    "prop-types": "^15.6.1",
     "query-string": "^5.1.1",
     "raven": "^2.4.2",
     "raven-js": "^3.24.0",
@@ -46,8 +46,9 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "enzyme": "^2.9.1",
-    "enzyme-to-json": "^1.6.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-15": "^1.0.5",
+    "enzyme-to-json": "^3.3.3",
     "nodemon": "^1.17.2",
     "nsp": "^3.2.1",
     "nsp-preprocessor-yarn": "^1.0.1",
