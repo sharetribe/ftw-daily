@@ -10,13 +10,11 @@ import config from '../../config';
 import {
   BANK_ACCOUNT_INPUTS,
   cleanedString,
-  createToken,
   formatFieldMessage,
   requiredInputs,
   mapInputsToStripeAccountKeys,
   supportedCountries,
   translateStripeError,
-  validateInput,
 } from './StripeBankAccountTokenInputField.util';
 import StripeBankAccountRequiredInput from './StripeBankAccountRequiredInput';
 import css from './StripeBankAccountTokenInputField.css';
@@ -141,7 +139,17 @@ class TokenInputFieldComponent extends Component {
       accountData = { ...accountData, ...inputValueObj };
     });
 
-    createToken(accountData)
+    // https://stripe.com/docs/stripe-js/reference#collecting-bank-account-details
+    this.stripe
+      .createToken('bank_account', accountData)
+      .then(result => {
+        if (result.error) {
+          const e = new Error(result.error.message);
+          e.stripeError = result.error;
+          throw e;
+        }
+        return result.token.id;
+      })
       .then(token => {
         const changedValues = inputsNeeded.filter(
           inputType => values[inputType] !== cleanedString(this.state[inputType].value)
@@ -183,13 +191,6 @@ class TokenInputFieldComponent extends Component {
       inputError = intl.formatMessage({
         id: `StripeBankAccountTokenInputField.${inputType}.required`,
       });
-    } else if (!validateInput(inputType, value, country, window.Stripe)) {
-      inputError = intl.formatMessage(
-        {
-          id: `StripeBankAccountTokenInputField.${inputType}.invalid`,
-        },
-        { country }
-      );
     }
 
     // Save changes to the state

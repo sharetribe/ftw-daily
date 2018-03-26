@@ -20,29 +20,6 @@ export const BANK_ACCOUNT_INPUTS = [BSB, SORT_CODE, ROUTING_NUMBER, ACCOUNT_NUMB
 export const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
 
 /**
- * Create a single-use token from the given bank account data
- *
- * See: https://stripe.com/docs/stripe.js#collecting-bank-account-details
- *
- * @param {Object} data - bank account data sent to Stripe
- *
- * @return {Promise<String>} Promise that resolves with the bank
- * account token or rejects when the token creation fails
- */
-export const createToken = data =>
-  new Promise((resolve, reject) => {
-    window.Stripe.bankAccount.createToken(data, (status, response) => {
-      if (response.error) {
-        const e = new Error(response.error.message);
-        e.stripeError = response.error;
-        reject(e);
-      } else {
-        resolve(response.id);
-      }
-    });
-  });
-
-/**
  * Country specific Stripe configurations
  *
  * @param {String} countryCode - string representing country code (e.g. 'US', 'FI')
@@ -129,33 +106,6 @@ export const translateStripeError = (country, intl, stripeError) => {
       },
       { country, inputs: inputsInString }
     );
-  }
-};
-
-/**
- * Validate input before creating Token
- *
- * @param {String} inputType - input type (e.g. 'routingNumber', 'IBAN')
- * @param {String} value - input value
- * @param {String} country - string representing country code (e.g. 'US', 'FI')
- *
- * @return {Boolean} is valid value.
- */
-export const validateInput = (inputType, value, country, stripe) => {
-  switch (inputType) {
-    case ACCOUNT_NUMBER:
-      return stripe.bankAccount.validateAccountNumber(value, country);
-    case ROUTING_NUMBER:
-      return stripe.bankAccount.validateRoutingNumber(value, country);
-    case BSB:
-    case IBAN:
-    case SORT_CODE:
-      // Unfortunately we don't have validation for these yet
-      // (Stripe errors work as validation)
-      return true;
-
-    default:
-      throw new Error(`Unknown inputType (${inputType}) given to validator`);
   }
 };
 

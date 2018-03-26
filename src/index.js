@@ -46,14 +46,6 @@ const render = store => {
     });
 };
 
-const setupStripe = () => {
-  if (typeof window.Stripe === 'undefined') {
-    throw new Error('Stripe library not loaded');
-  }
-  // https://stripe.com/docs/stripe.js#setting-publishable-key
-  window.Stripe.setPublishableKey(config.stripe.publishableKey);
-};
-
 const setupAnalyticsHandlers = () => {
   let handlers = [];
 
@@ -94,7 +86,6 @@ if (typeof window !== 'undefined') {
   const analyticsHandlers = setupAnalyticsHandlers();
   const store = configureStore(initialState, sdk, analyticsHandlers);
 
-  setupStripe();
   require('./util/polyfills');
   render(store);
 
