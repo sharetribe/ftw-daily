@@ -1,7 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { mapValues } from 'lodash';
-import { shallow } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
 import toJson from 'enzyme-to-json';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
@@ -9,6 +10,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from '../store';
 import messages from '../translations/en.json';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 // Locale should not affect the tests. We ensure this by providing
 // messages with the key as the value of each message.

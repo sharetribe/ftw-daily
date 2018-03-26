@@ -1,4 +1,5 @@
 import React from 'react';
+import './test-helpers';
 import { shallow } from 'enzyme';
 import {
   zwspAroundSpecialCharsSplit,
