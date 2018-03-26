@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { OverlayView } from 'react-google-maps';
+import { OVERLAY_VIEW } from 'react-google-maps/lib/constants';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { injectIntl, intlShape } from 'react-intl';
@@ -15,6 +16,20 @@ import { createSlug } from '../../util/urlHelpers';
 import { ResponsiveImage } from '../../components';
 
 import css from './SearchMapInfoCard.css';
+
+// FIX "TypeError: Cannot read property 'overlayMouseTarget' of null"
+// Override draw function to catch errors with map panes being undefined to prevent console errors
+// https://github.com/tomchentw/react-google-maps/issues/482
+class CustomOverlayView extends OverlayView {
+  draw() {
+    // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapPanes
+    const mapPanes = this.state[OVERLAY_VIEW].getPanes();
+    // Add conditional to ensure panes and container exist before drawing
+    if (mapPanes && this.containerElement) {
+      super.draw();
+    }
+  }
+}
 
 // Center label so that caret is pointing to correct pixel.
 // (vertical positioning: height + arrow) */
@@ -163,7 +178,7 @@ class SearchMapInfoCard extends Component {
     const caretClass = classNames(css.caret, { [css.caretWithCarousel]: hasCarousel });
 
     return (
-      <OverlayView
+      <CustomOverlayView
         position={latLngLiteral}
         mapPaneName={OverlayView.FLOAT_PANE}
         getPixelPositionOffset={getPixelPositionOffset}
@@ -181,7 +196,7 @@ class SearchMapInfoCard extends Component {
           {pagination}
           <div className={caretClass} />
         </div>
-      </OverlayView>
+      </CustomOverlayView>
     );
   }
 }

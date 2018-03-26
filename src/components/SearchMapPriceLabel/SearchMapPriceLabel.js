@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { OverlayView } from 'react-google-maps';
+import { OVERLAY_VIEW } from 'react-google-maps/lib/constants';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
@@ -9,6 +10,20 @@ import { ensureListing } from '../../util/data';
 import config from '../../config';
 
 import css from './SearchMapPriceLabel.css';
+
+// FIX "TypeError: Cannot read property 'overlayMouseTarget' of null"
+// Override draw function to catch errors with map panes being undefined to prevent console errors
+// https://github.com/tomchentw/react-google-maps/issues/482
+class CustomOverlayView extends OverlayView {
+  draw() {
+    // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapPanes
+    const mapPanes = this.state[OVERLAY_VIEW].getPanes();
+    // Add conditional to ensure panes and container exist before drawing
+    if (mapPanes && this.containerElement) {
+      super.draw();
+    }
+  }
+}
 
 // Center label so that caret is pointing to correct pixel.
 // (vertical positioning: height + arrow) */
@@ -43,7 +58,7 @@ class SearchMapPriceLabel extends Component {
     const caretClasses = classNames(css.caret, { [css.caretActive]: isActive });
 
     return (
-      <OverlayView
+      <CustomOverlayView
         position={latLngLiteral}
         mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
         getPixelPositionOffset={getPixelPositionOffset}
@@ -53,7 +68,7 @@ class SearchMapPriceLabel extends Component {
           <div className={priceLabelClasses}>{formattedPrice}</div>
           <div className={caretClasses} />
         </button>
-      </OverlayView>
+      </CustomOverlayView>
     );
   }
 }
