@@ -132,32 +132,6 @@ export const translateStripeError = (country, intl, stripeError) => {
   }
 };
 
-/**
- * Validate input before creating Token
- *
- * @param {String} inputType - input type (e.g. 'routingNumber', 'IBAN')
- * @param {String} value - input value
- * @param {String} country - string representing country code (e.g. 'US', 'FI')
- *
- * @return {Boolean} is valid value.
- */
-export const validateInput = (inputType, value, country, stripe) => {
-  switch (inputType) {
-    case ACCOUNT_NUMBER:
-      return stripe.bankAccount.validateAccountNumber(value, country);
-    case ROUTING_NUMBER:
-      return stripe.bankAccount.validateRoutingNumber(value, country);
-    case BSB:
-    case IBAN:
-    case SORT_CODE:
-      // Unfortunately we don't have validation for these yet
-      // (Stripe errors work as validation)
-      return true;
-
-    default:
-      throw new Error(`Unknown inputType (${inputType}) given to validator`);
-  }
-};
 
 /**
  * Map inputs to correct Stripe keys

@@ -16,7 +16,6 @@ import {
   mapInputsToStripeAccountKeys,
   supportedCountries,
   translateStripeError,
-  validateInput,
 } from './StripeBankAccountTokenInputField.util';
 import StripeBankAccountRequiredInput from './StripeBankAccountRequiredInput';
 import css from './StripeBankAccountTokenInputField.css';
@@ -183,13 +182,6 @@ class TokenInputFieldComponent extends Component {
       inputError = intl.formatMessage({
         id: `StripeBankAccountTokenInputField.${inputType}.required`,
       });
-    } else if (!validateInput(inputType, value, country, window.Stripe)) {
-      inputError = intl.formatMessage(
-        {
-          id: `StripeBankAccountTokenInputField.${inputType}.invalid`,
-        },
-        { country }
-      );
     }
 
     // Save changes to the state
