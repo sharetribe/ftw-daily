@@ -5,6 +5,7 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl, fakeFormProps } from '../../util/test-data';
 import { LINE_ITEM_NIGHT, TRANSITION_REQUEST } from '../../util/types';
+import { dateFromAPIToLocalNoon } from '../../util/dates';
 import { BookingBreakdown } from '../../components';
 import { BookingDatesFormComponent } from './BookingDatesForm';
 
@@ -31,8 +32,9 @@ describe('BookingDatesForm', () => {
   });
   it('matches selected dates', () => {
     const price = new Money(1099, 'USD');
-    const startDate = new Date(Date.UTC(2017, 3, 14));
-    const endDate = new Date(Date.UTC(2017, 3, 16));
+    const startDate = new Date(2017, 3, 14, 12, 0, 0);
+    const endDate = new Date(2017, 3, 16, 12, 0, 0);
+
     const tree = shallow(
       <BookingDatesFormComponent
         {...fakeFormProps}
@@ -49,8 +51,13 @@ describe('BookingDatesForm', () => {
     const breakdown = tree.find(BookingBreakdown);
     const { userRole, transaction, booking } = breakdown.props();
     expect(userRole).toEqual('customer');
-    expect(booking.attributes.start).toEqual(startDate);
-    expect(booking.attributes.end).toEqual(endDate);
+
+    expect(booking.attributes.start).toEqual(new Date(Date.UTC(2017, 3, 14)));
+    expect(booking.attributes.end).toEqual(new Date(Date.UTC(2017, 3, 16)));
+
+    expect(dateFromAPIToLocalNoon(booking.attributes.start)).toEqual(startDate);
+    expect(dateFromAPIToLocalNoon(booking.attributes.end)).toEqual(endDate);
+
     expect(transaction.attributes.lastTransition).toEqual(TRANSITION_REQUEST);
     expect(transaction.attributes.payinTotal).toEqual(new Money(2198, 'USD'));
     expect(transaction.attributes.payoutTotal).toEqual(new Money(2198, 'USD'));
