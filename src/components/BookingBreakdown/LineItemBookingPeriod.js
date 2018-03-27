@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage, FormattedHTMLMessage, FormattedDate } from 'react-intl';
 import moment from 'moment';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
-import { daysBetween } from '../../util/dates';
+import { daysBetween, dateFromAPIToLocalNoon } from '../../util/dates';
 
 import css from './BookingBreakdown.css';
 
@@ -41,12 +41,15 @@ const LineItemBookingPeriod = props => {
   const { transaction, booking, unitType } = props;
 
   const { start: startDate, end: endDateRaw } = booking.attributes;
+  const localStartDate = dateFromAPIToLocalNoon(startDate);
+  const localEndDateRaw = dateFromAPIToLocalNoon(endDateRaw);
+
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
 
-  const dayCount = daysBetween(startDate, endDateRaw);
+  const dayCount = daysBetween(localStartDate, localEndDateRaw);
   const isSingleDay = !isNightly && dayCount === 1;
-  const endDay = isNightly ? endDateRaw : moment(endDateRaw).subtract(1, 'days');
+  const endDay = isNightly ? localEndDateRaw : moment(localEndDateRaw).subtract(1, 'days');
 
   const unitPurchase = transaction.attributes.lineItems.find(
     item => item.code === unitType && !item.reversal
@@ -69,7 +72,7 @@ const LineItemBookingPeriod = props => {
   return (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
-        <BookingPeriod isSingleDay={isSingleDay} startDate={startDate} endDate={endDay} />
+        <BookingPeriod isSingleDay={isSingleDay} startDate={localStartDate} endDate={endDay} />
       </span>
       <span className={css.itemValue}>{unitCountMessage}</span>
     </div>
