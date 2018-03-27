@@ -1,8 +1,9 @@
 @import '../../marketplace.css';
 
 :root {
-  --sectionMarginTop: 94px;
-  --sectionMarginTopMobile: 40px;
+  --sectionMarginTop: 40px;
+  --sectionMarginTopMedium: 60px;
+  --sectionMarginTopLarge: 94px;
 }
 
 .root {
@@ -71,20 +72,20 @@
 }
 
 .sectionContent {
-  margin: var(--sectionMarginTopMobile) 24px 51px 24px;
+  margin: var(--sectionMarginTop) 24px 51px 24px;
 
   @media (--viewportMedium) {
-    margin: 60px 7.5vw 60px 7.5vw;
+    margin: var(--sectionMarginTopMedium) 7.5vw 60px 7.5vw;
   }
 
   @media (--viewportLarge) {
     max-width: calc(1052px + 36px + 36px);
-    margin: var(--sectionMarginTop) auto 93px auto;
+    margin: var(--sectionMarginTopLarge) auto 93px auto;
     padding: 0 36px 0 36px;
   }
 }
 
-/* A red top bar on top of light sections */
+/* A bar on top of light sections */
 .section:nth-of-type(2n) .sectionContent:before {
   background: var(--marketplaceColor);
   content: '';
@@ -94,13 +95,15 @@
 
   /* Place the bar on top of .sectionContent top margin */
   position: relative;
-  top: calc(-1 * var(--sectionMarginTopMobile));
+  top: calc(-1 * var(--sectionMarginTop));
 
   @media (--viewportMedium) {
     width: 192px;
     height: 8px;
+    top: calc(-1 * var(--sectionMarginTopMedium));
+  }
 
-    /* Place the bar on top of .sectionContent top margin */
-    top: calc(-1 * var(--sectionMarginTop));
+  @media (--viewportLarge) {
+    top: calc(-1 * var(--sectionMarginTopLarge));
   }
 }
