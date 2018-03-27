@@ -480,8 +480,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   dispatch,
   sendOrderRequest: (params, initialMessage) => dispatch(initiateOrder(params, initialMessage)),
-  fetchSpeculatedTransaction: (listingId, bookingStart, bookingEnd) =>
-    dispatch(speculateTransaction(listingId, bookingStart, bookingEnd)),
+  fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
 });
 
 const CheckoutPage = compose(withRouter, connect(mapStateToProps, mapDispatchToProps), injectIntl)(
