@@ -45,6 +45,10 @@
 .logoMobile {
   display: block;
 
+  & path {
+    fill: var(--marketplaceColor);
+  }
+
   @media (--viewportLarge) {
     display: none;
   }
