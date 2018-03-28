@@ -20,7 +20,7 @@ import {
 } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { ensureCurrentUser, userDisplayName } from '../../util/data';
-import { daysBetween } from '../../util/dates';
+import { dateFromAPIToLocalNoon, daysBetween } from '../../util/dates';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
@@ -128,18 +128,20 @@ const txState = (intl, tx, isOrder) => {
 
 const bookingData = (unitType, tx, isOrder, intl) => {
   const { start, end } = tx.booking.attributes;
+  const startDate = dateFromAPIToLocalNoon(start);
+  const endDateRaw = dateFromAPIToLocalNoon(end);
   const isDaily = unitType === LINE_ITEM_DAY;
   const isUnits = unitType === LINE_ITEM_UNITS;
-  const isSingleDay = isDaily && daysBetween(start, end) === 1;
-  const bookingStart = formatDate(intl, start);
+  const isSingleDay = isDaily && daysBetween(startDate, endDateRaw) === 1;
+  const bookingStart = formatDate(intl, startDate);
 
   // Shift the exclusive API end date with daily bookings
   const endDate =
     isDaily || isUnits
-      ? moment(end)
+      ? moment(endDateRaw)
           .subtract(1, 'days')
           .toDate()
-      : end;
+      : endDateRaw;
   const bookingEnd = formatDate(intl, endDate);
   const bookingPrice = isOrder ? tx.attributes.payinTotal : tx.attributes.payoutTotal;
   const price = formatMoney(intl, bookingPrice);

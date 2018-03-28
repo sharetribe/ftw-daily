@@ -7,6 +7,57 @@ export const START_DATE = 'startDate';
 export const END_DATE = 'endDate';
 
 /**
+ * Convert date given by API to something meaningful noon on browser's timezone
+ * So, what happens is that date given by client
+ * ("Fri Mar 30 2018 12:00:00 GMT-1100 (SST)" aka "Fri Mar 30 2018 23:00:00 GMT+0000 (UTC)")
+ * will be read as UTC time. Then API normalizes night/day bookings to
+ * start from 00:00 UTC (i.e. discards hours from UTC day).
+ * So Api gives 00:00 UTC which (in our example) would be locally
+ * "Thu Mar 29 2018 13:00:00 GMT-1100 (SST)".
+ *
+ * The resulting timestamp from API is:
+ * localTimestamp.subtract(12h).add(timezoneoffset) (in eg. -23 h)
+ *
+ * So, this function adds those removed hours back.
+ *
+ * @param {Date} date is a local date object
+ *
+ * @returns {Date} date (given by API as UTC 00:00) converted back to local noon.
+ */
+export const dateFromAPIToLocalNoon = date => {
+  const timezoneDiffInMinutes = moment(date).utcOffset();
+  // Example timezone SST:
+  // We get a Fri 00:00 UTC aka "Thu Mar 29 2018 13:00:00 GMT-1100 (SST)"
+  // We need to subtract timezone difference (-11h), effectively adding 11h - to get to correct date
+  const momentInLocalTimezone = moment(date).subtract(timezoneDiffInMinutes, 'minutes');
+  // To be on the safe zone with leap seconds and stuff when using day / night picker
+  // we'll add 12 h to get to the noon of day in local timezone.
+  return momentInLocalTimezone.add(12, 'hours').toDate();
+};
+
+/**
+ * Convert local date for API.
+ * Date given by browser
+ * ("Fri Mar 30 2018 12:00:00 GMT-1100 (SST)" aka "Fri Mar 30 2018 23:00:00 GMT+0000 (UTC)")
+ * must be modified so that API will get correct moment also in UTC.
+ * We achieve this by adding timezone offset to local date / timestamp.
+ *
+ * The resulting timestamp for the API is:
+ * localTimestamp.add(timezoneoffset)
+ * In eg. Fri Mar 30 2018 23:00:00 GMT-1100 (SST) aka "Fri Mar 30 2018 12:00:00 GMT+0000 (UTC)"
+ *
+ * @param {Date} date is a local date object
+ *
+ * @returns {Date} date (given by API as UTC 00:00) converted back to local noon.
+ */
+export const dateFromLocalToAPI = date => {
+  const timezoneDiffInMinutes = moment(date).utcOffset();
+  const momentInLocalTimezone = moment(date).add(timezoneDiffInMinutes, 'minutes');
+
+  return momentInLocalTimezone.toDate();
+};
+
+/**
  * Calculate the number of nights between the given dates
  *
  * @param {Date} startDate start of the time period

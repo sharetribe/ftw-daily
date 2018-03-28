@@ -9,6 +9,7 @@ import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName, findRouteByRouteName } from '../../util/routes';
 import { propTypes } from '../../util/types';
 import { ensureListing, ensureUser, ensureTransaction, ensureBooking } from '../../util/data';
+import { dateFromLocalToAPI } from '../../util/dates';
 import { createSlug } from '../../util/urlHelpers';
 import {
   isTransactionInitiateAmountTooLowError,
@@ -94,10 +95,19 @@ export class CheckoutPageComponent extends Component {
       const listingId = pageData.listing.id;
       const { bookingStart, bookingEnd } = pageData.bookingDates;
 
+      // Convert picked date to date that will be converted on the API as
+      // a noon of correct year-month-date combo in UTC
+      const bookingStartForAPI = dateFromLocalToAPI(bookingStart);
+      const bookingEndForAPI = dateFromLocalToAPI(bookingEnd);
+
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData
-      fetchSpeculatedTransaction({ listingId, bookingStart, bookingEnd });
+      fetchSpeculatedTransaction({
+        listingId,
+        bookingStart: bookingStartForAPI,
+        bookingEnd: bookingEndForAPI,
+      });
     }
 
     this.setState({ pageData: pageData || {}, dataLoaded: true });
@@ -480,8 +490,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   dispatch,
   sendOrderRequest: (params, initialMessage) => dispatch(initiateOrder(params, initialMessage)),
-  fetchSpeculatedTransaction: (listingId, bookingStart, bookingEnd) =>
-    dispatch(speculateTransaction(listingId, bookingStart, bookingEnd)),
+  fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
 });
 
 const CheckoutPage = compose(withRouter, connect(mapStateToProps, mapDispatchToProps), injectIntl)(

@@ -9,7 +9,13 @@ import moment from 'moment';
 import Decimal from 'decimal.js';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { required, bookingDatesRequired } from '../../util/validators';
-import { nightsBetween, daysBetween, START_DATE, END_DATE } from '../../util/dates';
+import {
+  dateFromLocalToAPI,
+  nightsBetween,
+  daysBetween,
+  START_DATE,
+  END_DATE,
+} from '../../util/dates';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import {
   LINE_ITEM_DAY,
@@ -49,6 +55,22 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
 
   const totalPrice = estimatedTotalPrice(unitPrice, unitCount);
 
+  // bookingStart: "Fri Mar 30 2018 12:00:00 GMT-1100 (SST)" aka "Fri Mar 30 2018 23:00:00 GMT+0000 (UTC)"
+  // Server normalizes night/day bookings to start from 00:00 UTC aka "Thu Mar 29 2018 13:00:00 GMT-1100 (SST)"
+  // The result is: local timestamp.subtract(12h).add(timezoneoffset) (in eg. -23 h)
+
+  // local noon -> startOf('day') => 00:00 local => remove timezoneoffset => 00:00 API (UTC)
+  const serverDayStart = dateFromLocalToAPI(
+    moment(bookingStart)
+      .startOf('day')
+      .toDate()
+  );
+  const serverDayEnd = dateFromLocalToAPI(
+    moment(bookingEnd)
+      .startOf('day')
+      .toDate()
+  );
+
   return {
     id: new UUID('estimated-transaction'),
     type: 'transaction',
@@ -80,8 +102,8 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
       id: new UUID('estimated-booking'),
       type: 'booking',
       attributes: {
-        start: bookingStart,
-        end: bookingEnd,
+        start: serverDayStart,
+        end: serverDayEnd,
       },
     },
   };
