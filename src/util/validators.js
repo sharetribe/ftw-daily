@@ -1,8 +1,8 @@
 import moment from 'moment';
-import { types } from 'sharetribe-sdk';
+import { types as sdkTypes } from './sdkLoader';
 import { toPairs } from 'lodash';
 
-const { LatLng } = types;
+const { LatLng, Money } = sdkTypes;
 
 export const PASSWORD_MIN_LENGTH = 8;
 export const PASSWORD_MAX_LENGTH = 256;
@@ -108,6 +108,10 @@ const EMAIL_RE = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 export const emailFormatValid = message => value => {
   return value && EMAIL_RE.test(value) ? VALID : message;
+};
+
+export const moneySubUnitAmountAtLeast = (message, minValue) => value => {
+  return value instanceof Money && value.amount >= minValue ? VALID : message;
 };
 
 export const ageAtLeast = (message, minYears) => value => {

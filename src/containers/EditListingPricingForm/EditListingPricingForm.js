@@ -6,10 +6,14 @@ import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import config from '../../config';
 import { propTypes } from '../../util/types';
-import { required } from '../../util/validators';
+import * as validators from '../../util/validators';
+import { formatMoney } from '../../util/currency';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import { Form, Button, FieldCurrencyInput } from '../../components';
 
 import css from './EditListingPricingForm.css';
+
+const { Money } = sdkTypes;
 
 export const EditListingPricingFormComponent = props => {
   const {
@@ -26,10 +30,30 @@ export const EditListingPricingFormComponent = props => {
   } = props;
 
   const pricePerUnitMessage = intl.formatMessage({ id: 'EditListingPricingForm.pricePerUnit' });
-  const priceRequiredMessage = intl.formatMessage({ id: 'EditListingPricingForm.priceRequired' });
   const pricePlaceholderMessage = intl.formatMessage({
     id: 'EditListingPricingForm.priceInputPlaceholder',
   });
+
+  const priceRequired = validators.required(
+    intl.formatMessage({
+      id: 'EditListingPricingForm.priceRequired',
+    })
+  );
+  const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency);
+  const minPriceRequired = validators.moneySubUnitAmountAtLeast(
+    intl.formatMessage(
+      {
+        id: 'EditListingPricingForm.priceTooLow',
+      },
+      {
+        minPrice: formatMoney(intl, minPrice),
+      }
+    ),
+    config.listingMinimumPriceSubUnits
+  );
+  const priceValidators = config.listingMinimumPriceSubUnits
+    ? [priceRequired, minPriceRequired]
+    : [priceRequired];
 
   const errorMessage = updateError ? (
     <p className={css.error}>
@@ -53,7 +77,7 @@ export const EditListingPricingFormComponent = props => {
         label={pricePerUnitMessage}
         placeholder={pricePlaceholderMessage}
         currencyConfig={config.currencyConfig}
-        validate={[required(priceRequiredMessage)]}
+        validate={priceValidators}
       />
 
       <Button

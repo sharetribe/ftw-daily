@@ -1,4 +1,13 @@
-import { required, requiredStringNoTrim, minLength, maxLength } from './validators';
+import { types as sdkTypes } from './sdkLoader';
+import {
+  required,
+  requiredStringNoTrim,
+  minLength,
+  maxLength,
+  moneySubUnitAmountAtLeast,
+} from './validators';
+
+const { Money } = sdkTypes;
 
 describe('validators', () => {
   describe('required()', () => {
@@ -118,6 +127,25 @@ describe('validators', () => {
     });
     it('should not allow too long array', () => {
       expect(maxLength('fail', 3)([1, 2, 3, 4])).toEqual('fail');
+    });
+  });
+  describe('moneySubUnitAmountAtLeast()', () => {
+    it('should not allow empty or missing value', () => {
+      expect(moneySubUnitAmountAtLeast('fail', 50)(undefined)).toEqual('fail');
+      expect(moneySubUnitAmountAtLeast('fail', 50)(null)).toEqual('fail');
+      expect(moneySubUnitAmountAtLeast('fail', 50)('')).toEqual('fail');
+      expect(moneySubUnitAmountAtLeast('fail', 50)(0)).toEqual('fail');
+      expect(moneySubUnitAmountAtLeast('fail', 50)(50)).toEqual('fail');
+      expect(moneySubUnitAmountAtLeast('fail', 50)(100)).toEqual('fail');
+    });
+    it('should not allow too low values', () => {
+      expect(moneySubUnitAmountAtLeast('fail', 50)(new Money(0, 'USD'))).toEqual('fail');
+      expect(moneySubUnitAmountAtLeast('fail', 50)(new Money(49, 'USD'))).toEqual('fail');
+    });
+    it('should allow large enough values', () => {
+      expect(moneySubUnitAmountAtLeast('fail', 0)(new Money(0, 'USD'))).toBeUndefined();
+      expect(moneySubUnitAmountAtLeast('fail', 50)(new Money(50, 'USD'))).toBeUndefined();
+      expect(moneySubUnitAmountAtLeast('fail', 50)(new Money(100, 'USD'))).toBeUndefined();
     });
   });
 });

@@ -163,6 +163,7 @@
   "EditListingPricingForm.priceInputPlaceholder": "Choose your price…",
   "EditListingPricingForm.pricePerUnit": "Price per night in euros",
   "EditListingPricingForm.priceRequired": "You need to add a valid price.",
+  "EditListingPricingForm.priceTooLow": "Price should be at least {minPrice}.",
   "EditListingPricingForm.updateFailed": "Failed to update listing. Please try again.",
   "EditListingPricingPanel.createListingTitle": "How much does it cost?",
   "EditListingPricingPanel.listingPriceCurrencyInvalid": "Listing currency is different from the marketplace currency. You cannot edit the price.",
