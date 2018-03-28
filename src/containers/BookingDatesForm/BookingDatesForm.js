@@ -59,15 +59,15 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
   // Server normalizes night/day bookings to start from 00:00 UTC aka "Thu Mar 29 2018 13:00:00 GMT-1100 (SST)"
   // The result is: local timestamp.subtract(12h).add(timezoneoffset) (in eg. -23 h)
 
-  // local noon - 12h => 00:00 local => remove timezoneoffset => 00:00 API (UTC)
+  // local noon -> startOf('day') => 00:00 local => remove timezoneoffset => 00:00 API (UTC)
   const serverDayStart = dateFromLocalToAPI(
     moment(bookingStart)
-      .subtract(12, 'hours')
+      .startOf('day')
       .toDate()
   );
   const serverDayEnd = dateFromLocalToAPI(
     moment(bookingEnd)
-      .subtract(12, 'hours')
+      .startOf('day')
       .toDate()
   );
 
