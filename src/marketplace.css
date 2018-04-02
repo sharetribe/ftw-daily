@@ -51,6 +51,9 @@
 
   --matterColorLightTransparent: rgba(255, 255, 255, 0.65);
 
+  /* Used with inline CSS SVGs */
+  --marketplaceColorEncoded: %23c0392b;
+
   /* ================ Spacing unites ================ */
 
   /* Multiples of mobile and desktop spacing units should be used with margins and paddings. */

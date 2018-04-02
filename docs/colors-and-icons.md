@@ -12,9 +12,13 @@ change the color variables:
 --marketplaceColorLight: #ff4c38;
 --marketplaceColorDark: #8c291e;
 ```
+and
+```css
+--marketplaceColorEncoded: %23c0392b;
+```
 
-N.B. search also from files color code `c0392b`. Some icons and background-images with data-URL are
-using it directly.
+N.B. search also from files for the color code `c0392b`. It's used directly in a few places like
+some icons, the 500 error page and map configurations.
 
 ## Icons
 
