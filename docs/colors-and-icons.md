@@ -12,7 +12,9 @@ change the color variables:
 --marketplaceColorLight: #ff4c38;
 --marketplaceColorDark: #8c291e;
 ```
+
 and
+
 ```css
 --marketplaceColorEncoded: %23c0392b;
 ```

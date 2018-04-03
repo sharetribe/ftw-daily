@@ -21,13 +21,13 @@ jobs:
           paths:
             - node_modules/
       - run:
-          name: Audit deps for vulnerabilities
+          name: Audit dependencies
           command: yarn run audit
       - run:
           name: Check code formatting
           command: yarn run format-ci
       - run:
-          name: Build client app
+          name: Build client application
           command: yarn run build
       - run:
           name: Run test suite
