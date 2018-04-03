@@ -78,7 +78,6 @@
     "proseWrap": "always"
   },
   "engines": {
-    "node": "6.11.5",
-    "yarn": "^1.2.1"
+    "node": "8.11"
   }
 }
