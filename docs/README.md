@@ -21,3 +21,4 @@ Documentation for specific topics can be found in the following files:
 * [Starting a new customisation project](starting-a-new-customisation-project.md)
 * [Google Maps](google-maps.md)
 * [Content Security Policy (CSP)](content-security-policy.md)
+* [Search filters](search-filters.md)
