@@ -2,42 +2,33 @@ version: 2
 jobs:
   build:
     docker:
-      - image: node:6.11.5
-        environment:
-          YARN_VERSION: 1.2.1
+      - image: circleci/node:8.11
     steps:
       - checkout
       - restore_cache:
-          key: yarn-cache
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}
+            - yarn-packages-master
+            - yarn-packages-
       - run:
-          name: set PATH
-          command: echo 'export PATH="${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"' >> $BASH_ENV
-      - run:
-          name: install yarn
-          command: |
-            if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
-              echo "Downloading and installing Yarn"
-              curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
-            else
-              echo "The correct version of Yarn is already installed"
-            fi
-      - run:
-          name: yarn
-          command: yarn
+          name: Install Dependencies
+          command: yarn install
       - save_cache:
-          key: yarn-cache
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache/yarn
-            - ~/.yarn
+            - node_modules/
       - run:
-          name: audit
+          name: Audit deps for vulnerabilities
           command: yarn run audit
       - run:
-          name: format-ci
+          name: Check code formatting
           command: yarn run format-ci
       - run:
-          name: build
+          name: Build client app
           command: yarn run build
       - run:
-          name: test
+          name: Run test suite
           command: yarn run test-ci
