@@ -63,10 +63,12 @@ export const ContactDetailsPageComponent = props => {
 
   const user = ensureCurrentUser(currentUser);
   const email = user.attributes.email || '';
+  const protectedData = user.attributes.profile.protectedData || {};
+  const phoneNumber = protectedData.phoneNumber || '';
   const contactInfoForm = user.id ? (
     <ContactDetailsForm
       className={css.form}
-      initialValues={{ email }}
+      initialValues={{ email, phoneNumber }}
       saveContactDetailsError={saveContactDetailsError}
       currentUser={currentUser}
       onResendVerificationEmail={onResendVerificationEmail}
