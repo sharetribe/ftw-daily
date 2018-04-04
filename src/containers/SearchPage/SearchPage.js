@@ -47,21 +47,15 @@ const CATEGORY_URL_PARAM = 'pub_category';
 const AMENITIES_URL_PARAM = 'pub_amenities';
 const USE_SEARCH_FILTER_PANEL = false;
 
-// Find correct extended data key from config.custom
-// e.g. 'pub_category' -> 'categories'.
-const customConfigKey = paramKey => {
-  switch (paramKey) {
-    case CATEGORY_URL_PARAM:
-      return 'categories';
-    case AMENITIES_URL_PARAM:
-      return 'amenities';
-    default:
-      return null;
-  }
+const customURLParamToConfig = {
+  [CATEGORY_URL_PARAM]: 'categories',
+  [AMENITIES_URL_PARAM]: 'amenities',
 };
 
-const validURLParamForExtendedData = (paramKey, urlParams) => {
-  const configKey = customConfigKey(paramKey);
+// customURLParams
+const validURLParamForExtendedData = (paramKey, urlParams, customConfigKeys) => {
+  //const configKey = customConfigKey(paramKey);
+  const configKey = customConfigKeys[paramKey];
   const value = urlParams[paramKey];
   const valueArray = value ? value.split(',') : [];
 
@@ -74,25 +68,32 @@ const validURLParamForExtendedData = (paramKey, urlParams) => {
 };
 
 // validate filter params
-const validURLParamsForExtendedData = params => {
-  const { [CATEGORY_URL_PARAM]: category, [AMENITIES_URL_PARAM]: amenities, ...rest } = params;
-  return {
-    ...rest,
-    ...validURLParamForExtendedData(CATEGORY_URL_PARAM, params),
-    ...validURLParamForExtendedData(AMENITIES_URL_PARAM, params),
-  };
+const validURLParamsForExtendedData = (params, customURLParams, customURLParamToConfig) => {
+  const paramKeys = Object.keys(params);
+  return paramKeys.reduce((validParams, paramKey) => {
+    return customURLParams.includes(paramKey)
+      ? { ...validParams, ...validURLParamForExtendedData(paramKey, params, customURLParamToConfig) }
+      : { ...validParams, [paramKey] : params[paramKey] };
+  }, {});
 };
 
 // extract search parameters, including a custom attribute named category
-const pickSearchParamsOnly = params => {
+const pickSearchParamsOnly = (params, customURLParams, customURLParamToConfig) => {
   const { address, origin, bounds, country, ...rest } = params || {};
   const boundsMaybe = bounds ? { bounds } : {};
   const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
+
+  const customSearchParamKeys = Object.keys(rest);
+  const customSearchParams = customSearchParamKeys.reduce((validParams, paramKey) => {
+    return customURLParams.includes(paramKey)
+      ? { ...validParams, ...validURLParamForExtendedData(paramKey, rest, customURLParamToConfig) }
+      : { ...validParams };
+  }, {});
+
   return {
     ...boundsMaybe,
     ...originMaybe,
-    ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest),
-    ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest),
+    ...customSearchParams,
   };
 };
 
@@ -175,8 +176,8 @@ export class SearchPageComponent extends Component {
         bounds: viewportBounds,
         country,
         mapSearch: true,
-        ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest),
-        ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest),
+        ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest, customURLParamToConfig),
+        ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest, customURLParamToConfig),
       };
       this.viewportBounds = viewportBounds;
       history.push(
@@ -271,11 +272,11 @@ export class SearchPageComponent extends Component {
 
     // urlQueryParams doesn't contain page specific url params
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
-    const urlQueryParams = pickSearchParamsOnly(searchInURL);
+    const urlQueryParams = pickSearchParamsOnly(searchInURL, [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM], customURLParamToConfig);
 
     // Page transition might initially use values from previous search
     const urlQueryString = stringify(urlQueryParams);
-    const paramsQueryString = stringify(pickSearchParamsOnly(searchParams));
+    const paramsQueryString = stringify(pickSearchParamsOnly(searchParams, [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM], customURLParamToConfig));
     const searchParamsMatch = urlQueryString === paramsQueryString;
 
     const { address, bounds, origin } = searchInURL || {};
@@ -284,7 +285,7 @@ export class SearchPageComponent extends Component {
     const totalItems = searchParamsMatch && hasPaginationInfo ? pagination.totalItems : 0;
     const listingsAreLoaded = !searchInProgress && searchParamsMatch && hasPaginationInfo;
 
-    const validQueryParams = validURLParamsForExtendedData(searchInURL);
+    const validQueryParams = validURLParamsForExtendedData(searchInURL, [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM], customURLParamToConfig);
 
     const searchError = (
       <h2 className={css.error}>
