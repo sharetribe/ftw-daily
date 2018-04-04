@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { formValueSelector, reduxForm, propTypes as formPropTypes } from 'redux-form';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import * as validators from '../../util/validators';
@@ -12,7 +13,7 @@ import {
   isChangeEmailWrongPassword,
   isTooManyEmailVerificationRequestsError,
 } from '../../util/errors';
-import { Form, PrimaryButton, TextInputField } from '../../components';
+import { FieldPhoneNumberInput, Form, PrimaryButton, TextInputField } from '../../components';
 
 import css from './ContactDetailsForm.css';
 
@@ -53,10 +54,11 @@ class ContactDetailsFormComponent extends Component {
       inProgress,
       intl,
       invalid,
-      pristine,
       ready,
       sendVerificationEmailError,
       sendVerificationEmailInProgress,
+      email,
+      phoneNumber,
     } = this.props;
 
     const user = ensureCurrentUser(currentUser);
@@ -65,13 +67,18 @@ class ContactDetailsFormComponent extends Component {
       return null;
     }
 
+    const { email: currentEmail, emailVerified, pendingEmail, profile } = user.attributes;
+
     // email
+
+    // has the email changed
+    const emailChanged = currentEmail !== email;
+
     const emailLabel = intl.formatMessage({
       id: 'ContactDetailsForm.emailLabel',
     });
 
-    const { email, emailVerified, pendingEmail } = user.attributes;
-    const emailPlaceholder = email || '';
+    const emailPlaceholder = currentEmail || '';
 
     const emailRequiredMessage = intl.formatMessage({
       id: 'ContactDetailsForm.emailRequired',
@@ -116,7 +123,7 @@ class ContactDetailsFormComponent extends Component {
     // Email status info: unverified, verified and pending email (aka changed unverified email)
     let emailVerifiedInfo = null;
 
-    if (emailVerified && !pendingEmail && pristine) {
+    if (emailVerified && !pendingEmail && !emailChanged) {
       // Current email is verified and there's no pending unverified email
       emailVerifiedInfo = (
         <span className={css.emailVerified}>
@@ -157,6 +164,16 @@ class ContactDetailsFormComponent extends Component {
       );
     }
 
+    // phone
+    const protectedData = profile.protectedData || {};
+    const currentPhoneNumber = protectedData.phoneNumber;
+
+    // has the phone number changed
+    const phoneNumberChanged = currentPhoneNumber !== phoneNumber;
+
+    const phonePlaceholder = intl.formatMessage({ id: 'ContactDetailsForm.phonePlaceholder' });
+    const phoneLabel = intl.formatMessage({ id: 'ContactDetailsForm.phoneLabel' });
+
     // password
     const passwordLabel = intl.formatMessage({
       id: 'ContactDetailsForm.passwordLabel',
@@ -184,6 +201,8 @@ class ContactDetailsFormComponent extends Component {
       validators.PASSWORD_MIN_LENGTH
     );
 
+    const passwordValidators = emailChanged ? [passwordRequired, passwordMinLength] : null;
+
     const passwordFailedMessage = intl.formatMessage({
       id: 'ContactDetailsForm.passwordFailed',
     });
@@ -192,7 +211,7 @@ class ContactDetailsFormComponent extends Component {
       : null;
 
     const confirmClasses = classNames(css.confirmChangesSection, {
-      [css.confirmChangesSectionVisible]: !pristine,
+      [css.confirmChangesSectionVisible]: emailChanged,
     });
 
     const genericFailure =
@@ -203,11 +222,12 @@ class ContactDetailsFormComponent extends Component {
       ) : null;
 
     const classes = classNames(rootClassName || css.root, className);
-    const submitDisabled = invalid || submitting || inProgress;
+    const submitDisabled =
+      invalid || submitting || inProgress || !(emailChanged || phoneNumberChanged);
 
     return (
       <Form className={classes} onSubmit={handleSubmit}>
-        <div className={css.emailSection}>
+        <div className={css.contactDetailsSection}>
           <TextInputField
             type="email"
             name="email"
@@ -218,6 +238,13 @@ class ContactDetailsFormComponent extends Component {
             customErrorText={emailTakenErrorText}
           />
           {emailVerifiedInfo}
+          <FieldPhoneNumberInput
+            className={css.phone}
+            name="phoneNumber"
+            id={`${form}.phoneNumber`}
+            label={phoneLabel}
+            placeholder={phonePlaceholder}
+          />
         </div>
 
         <div className={confirmClasses}>
@@ -236,7 +263,7 @@ class ContactDetailsFormComponent extends Component {
             autoComplete="current-password"
             label={passwordLabel}
             placeholder={passwordPlaceholder}
-            validate={[passwordRequired, passwordMinLength]}
+            validate={passwordValidators}
             customErrorText={passwordErrorText}
           />
         </div>
@@ -264,6 +291,8 @@ ContactDetailsFormComponent.defaultProps = {
   inProgress: false,
   sendVerificationEmailError: null,
   sendVerificationEmailInProgress: false,
+  email: null,
+  phoneNumber: null,
 };
 
 const { bool, func, string } = PropTypes;
@@ -279,12 +308,23 @@ ContactDetailsFormComponent.propTypes = {
   ready: bool.isRequired,
   sendVerificationEmailError: propTypes.error,
   sendVerificationEmailInProgress: bool,
+
+  // from formValueSelector
+  email: string,
+  phoneNumber: string,
 };
 
-const defaultFormName = 'ContactDetailsForm';
+const formName = 'ContactDetailsForm';
+const selector = formValueSelector(formName);
+const mapStateToProps = state => ({
+  email: selector(state, 'email'),
+  phoneNumber: selector(state, 'phoneNumber'),
+});
 
-const ContactDetailsForm = compose(reduxForm({ form: defaultFormName }), injectIntl)(
-  ContactDetailsFormComponent
-);
+const ContactDetailsForm = compose(
+  connect(mapStateToProps),
+  reduxForm({ form: formName }),
+  injectIntl
+)(ContactDetailsFormComponent);
 
 export default ContactDetailsForm;

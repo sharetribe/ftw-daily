@@ -23,7 +23,7 @@
 .root {
 }
 
-.emailSection {
+.contactDetailsSection {
   margin-top: 16px;
   margin-bottom: 46px;
   padding-top: 6px;
@@ -31,6 +31,14 @@
   @media (--viewportMedium) {
     margin-bottom: 56px;
     padding-top: 0;
+  }
+}
+
+.phone {
+  margin-top: 24px;
+
+  @media (--viewportMedium) {
+    margin-top: 32px;
   }
 }
 

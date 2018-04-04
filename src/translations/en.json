@@ -96,6 +96,8 @@
   "ContactDetailsForm.passwordTooShort": "The password should be at least {minLength} characters",
   "ContactDetailsForm.pendingEmailCheckInbox": "Check your inbox to verify {pendingEmail} now.",
   "ContactDetailsForm.pendingEmailUnverified": "You have not verified your new address yet. {pendingEmailCheckInbox} {resendEmailMessage}",
+  "ContactDetailsForm.phoneLabel": "Phone number",
+  "ContactDetailsForm.phonePlaceholder": "Enter your phone number",
   "ContactDetailsForm.resendEmailVerificationText": "Resend verification email.",
   "ContactDetailsForm.saveChanges": "Save changes",
   "ContactDetailsForm.tooManyVerificationRequests": "Too many email verification requests sent.",
