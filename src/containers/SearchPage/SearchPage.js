@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { debounce, intersection, isEqual, unionWith } from 'lodash';
+import { debounce, isEqual, unionWith } from 'lodash';
 import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
@@ -29,8 +29,13 @@ import {
   SearchFiltersPanel,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
-import { searchListings, searchMapListings, setActiveListing } from './SearchPage.duck';
 
+import { searchListings, searchMapListings, setActiveListing } from './SearchPage.duck';
+import {
+  pickSearchParamsOnly,
+  validURLParamForExtendedData,
+  validURLParamsForExtendedData,
+} from './SearchPage.helpers';
 import css from './SearchPage.css';
 
 // Pagination page size might need to be dynamic on responsive page layouts
@@ -50,51 +55,6 @@ const USE_SEARCH_FILTER_PANEL = false;
 const customURLParamToConfig = {
   [CATEGORY_URL_PARAM]: 'categories',
   [AMENITIES_URL_PARAM]: 'amenities',
-};
-
-// customURLParams
-const validURLParamForExtendedData = (paramKey, urlParams, customConfigKeys) => {
-  //const configKey = customConfigKey(paramKey);
-  const configKey = customConfigKeys[paramKey];
-  const value = urlParams[paramKey];
-  const valueArray = value ? value.split(',') : [];
-
-  if (configKey && valueArray.length > 0) {
-    const allowedValues = config.custom[configKey].map(a => a.key);
-    const validValues = intersection(valueArray, allowedValues).join(',');
-    return validValues.length > 0 ? { [paramKey]: validValues } : {};
-  }
-  return {};
-};
-
-// validate filter params
-const validURLParamsForExtendedData = (params, customURLParams, customURLParamToConfig) => {
-  const paramKeys = Object.keys(params);
-  return paramKeys.reduce((validParams, paramKey) => {
-    return customURLParams.includes(paramKey)
-      ? { ...validParams, ...validURLParamForExtendedData(paramKey, params, customURLParamToConfig) }
-      : { ...validParams, [paramKey] : params[paramKey] };
-  }, {});
-};
-
-// extract search parameters, including a custom attribute named category
-const pickSearchParamsOnly = (params, customURLParams, customURLParamToConfig) => {
-  const { address, origin, bounds, country, ...rest } = params || {};
-  const boundsMaybe = bounds ? { bounds } : {};
-  const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
-
-  const customSearchParamKeys = Object.keys(rest);
-  const customSearchParams = customSearchParamKeys.reduce((validParams, paramKey) => {
-    return customURLParams.includes(paramKey)
-      ? { ...validParams, ...validURLParamForExtendedData(paramKey, rest, customURLParamToConfig) }
-      : { ...validParams };
-  }, {});
-
-  return {
-    ...boundsMaybe,
-    ...originMaybe,
-    ...customSearchParams,
-  };
 };
 
 export class SearchPageComponent extends Component {
@@ -272,11 +232,21 @@ export class SearchPageComponent extends Component {
 
     // urlQueryParams doesn't contain page specific url params
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
-    const urlQueryParams = pickSearchParamsOnly(searchInURL, [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM], customURLParamToConfig);
+    const urlQueryParams = pickSearchParamsOnly(
+      searchInURL,
+      [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM],
+      customURLParamToConfig
+    );
 
     // Page transition might initially use values from previous search
     const urlQueryString = stringify(urlQueryParams);
-    const paramsQueryString = stringify(pickSearchParamsOnly(searchParams, [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM], customURLParamToConfig));
+    const paramsQueryString = stringify(
+      pickSearchParamsOnly(
+        searchParams,
+        [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM],
+        customURLParamToConfig
+      )
+    );
     const searchParamsMatch = urlQueryString === paramsQueryString;
 
     const { address, bounds, origin } = searchInURL || {};
@@ -285,7 +255,11 @@ export class SearchPageComponent extends Component {
     const totalItems = searchParamsMatch && hasPaginationInfo ? pagination.totalItems : 0;
     const listingsAreLoaded = !searchInProgress && searchParamsMatch && hasPaginationInfo;
 
-    const validQueryParams = validURLParamsForExtendedData(searchInURL, [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM], customURLParamToConfig);
+    const validQueryParams = validURLParamsForExtendedData(
+      searchInURL,
+      [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM],
+      customURLParamToConfig
+    );
 
     const searchError = (
       <h2 className={css.error}>
