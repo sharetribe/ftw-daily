@@ -1,7 +1,7 @@
 # Search filters
 
 The search experience can be improved by adding search filters to narrow down the results. The
-filters rely on listing's indexed public data.
+filters rely on listing's indexed data.
 
 ## Filter types
 
@@ -23,7 +23,7 @@ bar.
 ## Adding a new search filter
 
 First step for adding a new filter is to make sure that the data being used for filtering is saved
-in the listings `publicData` field. This can be done by modifying the `EditListingWizard`. Another
+in the listing's `publicData` field. This can be done by modifying the `EditListingWizard`. Another
 aspect in search filters is that the public data needs to be indexed in the API. This is currently
 achieved with a manual operation done by the Sharetribe support. Once a public data attribute is
 added to the listings and the data attribute is indexed, the listing searches can be filtered by
@@ -71,11 +71,12 @@ desktop filters:
  - declare the filters param name in the `SearchFilters` file just like in `SearchPage`
  - with the filter param name resolve the current filter value form the `urlQueryParams` prop
  - render the filter by using a `SelectSingleFilter` or `SelectMultipleFilter` component inside the
-   `<div className={css.filters}>` tag
+   `<div className={css.filters}>` element
 
 ### Desktop filter panel
 
-I you require more filters that can fit into the top filter bar, the `SearchFiltersPanel` component
+
+If more filters are required than can fit into the top filter bar, the `SearchFiltersPanel` component
 can be used. It renders as a button in the top filter bar that opens a new panel that can contain a
 set of filters.
 
@@ -89,7 +90,7 @@ To use the `SearchFiltersPanel`, do the following:
  - for each filter resolve the current filter value(s) from the `urlQueryParams` and
    `currentQueryParams` variables
  - use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the `<div
-   className={css.filtersWrapper}>` tag to render the filters
+   className={css.filtersWrapper}>` element to render the filters
 
 ### Mobile filters
 
@@ -102,11 +103,11 @@ following steps are required to add a mobile filter:
  - resolve the current values for each filter from the `urlQueryParams` object passed to
    `SearchFiltersMobile`
  - use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the `<div
-   className={css.filtersWrapper}>` tag to render the filters
+   className={css.filtersWrapper}>` element to render the filters
 
 ## Notes
 
 One good practice with search filters is to pass the filter options from the marketpalce custom
 config as default parameters to the `SearchPage` and then pass them on from there to the filter sub
 components that require them. This way a different set of options can be defined for the
-`SearchPage` tests and the test snapshots will not be affected by changing coniguration.
+`SearchPage` tests and the test snapshots will not be affected when changing configuration.
