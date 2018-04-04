@@ -270,33 +270,7 @@ export class SearchPageComponent extends Component {
       this.setState({ isSearchMapOpenOnMobile: true });
     };
 
-    const extraSearchFiltersPanelOrListings =
-      USE_SEARCH_FILTER_PANEL && this.state.isSearchFiltersPanelOpen ? (
-        <div className={classNames(css.searchFiltersPanel)}>
-          <SearchFiltersPanel
-            urlQueryParams={validQueryParams}
-            listingsAreLoaded={listingsAreLoaded}
-            categories={categories}
-            amenities={amenities}
-            onClosePanel={() => this.setState({ isSearchFiltersPanelOpen: false })}
-          />
-        </div>
-      ) : (
-        <div
-          className={classNames(css.listings, {
-            [css.newSearchInProgress]: !listingsAreLoaded,
-          })}
-        >
-          {searchListingsError ? searchError : null}
-          <SearchResultsPanel
-            className={css.searchListingsPanel}
-            listings={listings}
-            pagination={listingsAreLoaded ? pagination : null}
-            search={searchParamsForPagination}
-            setActiveListing={onActivateListing}
-          />
-        </div>
-      );
+    const isSearchFiltersPanelOpen = USE_SEARCH_FILTER_PANEL && this.state.isSearchFiltersPanelOpen;
 
     // An example how to check how many filters are selected on SearchFilterPanel
     // if it is in use.
@@ -372,7 +346,32 @@ export class SearchPageComponent extends Component {
               categories={categories}
               amenities={amenities}
             />
-            {extraSearchFiltersPanelOrListings}
+            { isSearchFiltersPanelOpen ? (
+              <div className={classNames(css.searchFiltersPanel)}>
+                <SearchFiltersPanel
+                  urlQueryParams={validQueryParams}
+                  listingsAreLoaded={listingsAreLoaded}
+                  categories={categories}
+                  amenities={amenities}
+                  onClosePanel={() => this.setState({ isSearchFiltersPanelOpen: false })}
+                />
+              </div>
+            ) : (
+              <div
+                className={classNames(css.listings, {
+                  [css.newSearchInProgress]: !listingsAreLoaded,
+                })}
+              >
+                {searchListingsError ? searchError : null}
+                <SearchResultsPanel
+                  className={css.searchListingsPanel}
+                  listings={listings}
+                  pagination={listingsAreLoaded ? pagination : null}
+                  search={searchParamsForPagination}
+                  setActiveListing={onActivateListing}
+                />
+              </div>
+            )}
           </div>
           <ModalInMobile
             className={css.mapPanel}
