@@ -42,8 +42,6 @@ import css from './SearchPage.css';
 // Current design has max 3 columns 12 is divisible by 2 and 3
 // So, there's enough cards to fill all columns on full pagination pages
 const RESULT_PAGE_SIZE = 24;
-const MAX_SEARCH_RESULT_PAGE_SIZE_ON_MAP = 80; // max page size is 100 in API
-const MAX_SEARCH_RESULT_PAGES_ON_MAP = 1; // page size * n pages = number of listings shown on a map.
 const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
 const BOUNDS_FIXED_PRECISION = 8;
@@ -77,18 +75,12 @@ export class SearchPageComponent extends Component {
     this.searchMapListingsInProgress = false;
 
     this.onIdle = debounce(this.onIdle.bind(this), SEARCH_WITH_MAP_DEBOUNCE);
-    this.fetchMoreListingsToMap = this.fetchMoreListingsToMap.bind(this);
     this.onOpenMobileModal = this.onOpenMobileModal.bind(this);
     this.onCloseMobileModal = this.onCloseMobileModal.bind(this);
   }
 
-  componentDidMount() {
-    this.fetchMoreListingsToMap(this.props.location);
-  }
-
   componentWillReceiveProps(nextProps) {
     if (!isEqual(this.props.location, nextProps.location)) {
-      this.fetchMoreListingsToMap(nextProps.location);
 
       // If no mapSearch url parameter is given, this is original location search
       const { mapSearch } = parse(nextProps.location.search, {
@@ -147,52 +139,6 @@ export class SearchPageComponent extends Component {
       this.viewportBounds = viewportBounds;
       this.modalOpenedBoundsChange = false;
     }
-  }
-
-  fetchMoreListingsToMap(location) {
-    // TODO Remove this function.
-    // Temporarily just return immediately to avoid merge conflicts.
-    return;
-
-    // eslint-disable-next-line no-unreachable
-    const { onSearchMapListings } = this.props;
-    const searchInURL = parse(location.search, {
-      latlng: ['origin'],
-      latlngBounds: ['bounds'],
-    });
-
-    const perPage = MAX_SEARCH_RESULT_PAGE_SIZE_ON_MAP;
-    const page = 1;
-    const { address, country, origin, ...rest } = searchInURL;
-    const originMaybe = config.sortSearchByDistance ? { origin } : {};
-    const searchParamsForMapResults = {
-      ...rest,
-      ...originMaybe,
-      include: ['images'],
-      page,
-      perPage,
-      'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
-      'limit.images': 1,
-    };
-    this.searchMapListingsInProgress = true;
-
-    // Search more listings for map
-    onSearchMapListings(searchParamsForMapResults)
-      .then(response => {
-        const hasNextPage =
-          page < response.data.meta.totalPages && page < MAX_SEARCH_RESULT_PAGES_ON_MAP;
-        if (hasNextPage) {
-          onSearchMapListings({ ...searchParamsForMapResults, page: page + 1 });
-        } else {
-          this.searchMapListingsInProgress = false;
-        }
-      })
-      .catch(error => {
-        // In case of error, stop recursive loop and report error.
-        // TODO: Show and error in the listings column
-        // eslint-disable-next-line no-console
-        console.error(`An error (${error} occured while trying to retrieve map listings`);
-      });
   }
 
   // Invoked when a modal is opened from a child component,
