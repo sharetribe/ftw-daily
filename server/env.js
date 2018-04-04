@@ -31,7 +31,11 @@ const configureEnv = () => {
   dotenvFiles.forEach(dotenvFile => {
     if (fs.existsSync(dotenvFile)) {
       console.log('Loading env from file:' + dotenvFile);
-      require('dotenv').config({ path: dotenvFile });
+      require('dotenv-expand')(
+        require('dotenv').config({
+          path: dotenvFile,
+        })
+      );
     }
   });
 };
