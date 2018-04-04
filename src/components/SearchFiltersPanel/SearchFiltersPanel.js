@@ -41,10 +41,6 @@ import { createResourceLocatorString } from '../../util/routes';
 import { InlineTextButton } from '../../components';
 import css from './SearchFiltersPanel.css';
 
-// Create constants from url params and uset them in FILTERS array and while adding actual filters
-// e.g. const MULTI_SELECT_URL_PARAM = 'pub_filterX';
-const FILTERS = [];
-
 class SearchFiltersPanelComponent extends Component {
   constructor(props) {
     super(props);
@@ -82,9 +78,9 @@ class SearchFiltersPanelComponent extends Component {
 
   // Reset all filter query parameters
   resetAll(e) {
-    const { urlQueryParams, history, onClosePanel } = this.props;
+    const { urlQueryParams, customURLParamToConfig, history, onClosePanel } = this.props;
 
-    const queryParams = omit(urlQueryParams, FILTERS);
+    const queryParams = omit(urlQueryParams, Object.keys(customURLParamToConfig));
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
 
     // Ensure that panel closes (if now changes have been made)
@@ -161,6 +157,7 @@ SearchFiltersPanelComponent.propTypes = {
   rootClassName: string,
   className: string,
   urlQueryParams: object.isRequired,
+  customURLParamToConfig: object.isRequired,
   onClosePanel: func.isRequired,
 
   // from injectIntl

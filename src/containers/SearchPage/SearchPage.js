@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
@@ -19,15 +19,7 @@ import { createSlug, parse, stringify } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import {
-  SearchMap,
-  ModalInMobile,
-  Page,
-  SearchResultsPanel,
-  SearchFilters,
-  SearchFiltersMobile,
-  SearchFiltersPanel,
-} from '../../components';
+import { SearchMap, ModalInMobile, Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import { searchListings, searchMapListings, setActiveListing } from './SearchPage.duck';
@@ -36,6 +28,7 @@ import {
   validURLParamForExtendedData,
   validURLParamsForExtendedData,
 } from './SearchPage.helpers';
+import MainPanel from './MainPanel';
 import css from './SearchPage.css';
 
 // Pagination page size might need to be dynamic on responsive page layouts
@@ -48,7 +41,6 @@ const BOUNDS_FIXED_PRECISION = 8;
 
 const CATEGORY_URL_PARAM = 'pub_category';
 const AMENITIES_URL_PARAM = 'pub_amenities';
-const USE_SEARCH_FILTER_PANEL = false;
 
 const customURLParamToConfig = {
   [CATEGORY_URL_PARAM]: 'categories',
@@ -62,7 +54,6 @@ export class SearchPageComponent extends Component {
     this.state = {
       isSearchMapOpenOnMobile: props.tab === 'map',
       isMobileModalOpen: false,
-      isSearchFiltersPanelOpen: false,
     };
 
     // Initiating map creates 'bounds_changes' event
@@ -81,7 +72,6 @@ export class SearchPageComponent extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(this.props.location, nextProps.location)) {
-
       // If no mapSearch url parameter is given, this is original location search
       const { mapSearch } = parse(nextProps.location.search, {
         latlng: ['origin'],
@@ -193,24 +183,14 @@ export class SearchPageComponent extends Component {
         customURLParamToConfig
       )
     );
-    const searchParamsMatch = urlQueryString === paramsQueryString;
-
     const { address, bounds, origin } = searchInURL || {};
 
-    const hasPaginationInfo = !!pagination && pagination.totalItems != null;
-    const totalItems = searchParamsMatch && hasPaginationInfo ? pagination.totalItems : 0;
-    const listingsAreLoaded = !searchInProgress && searchParamsMatch && hasPaginationInfo;
+    const searchParamsAreInSync = urlQueryString === paramsQueryString;
 
     const validQueryParams = validURLParamsForExtendedData(
       searchInURL,
       [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM],
       customURLParamToConfig
-    );
-
-    const searchError = (
-      <h2 className={css.error}>
-        <FormattedMessage id="SearchPage.searchError" />
-      </h2>
     );
 
     const searchMap = (
@@ -231,8 +211,6 @@ export class SearchPageComponent extends Component {
     const isWindowDefined = typeof window !== 'undefined';
     const searchMapMaybe =
       isWindowDefined && window.innerWidth < MODAL_BREAKPOINT ? showSearchMapInMobile : searchMap;
-
-    const searchParamsForPagination = parse(location.search);
 
     // Schema for search engines (helps them to understand what this page is about)
     // http://schema.org
@@ -270,26 +248,6 @@ export class SearchPageComponent extends Component {
       this.setState({ isSearchMapOpenOnMobile: true });
     };
 
-    const isSearchFiltersPanelOpen = USE_SEARCH_FILTER_PANEL && this.state.isSearchFiltersPanelOpen;
-
-    // An example how to check how many filters are selected on SearchFilterPanel
-    // if it is in use.
-    //
-    // const searchFiltersPanelSelectedCount = [
-    //   validQueryParams[FILTER_1_URL_PARAM],
-    //   validQueryParams[FILTER_2_URL_PARAM],
-    // ].filter(param => !!param).length
-    const searchFiltersPanelSelectedCount = 0;
-    const searchFiltersPanelProps = USE_SEARCH_FILTER_PANEL
-      ? {
-          isSearchFiltersPanelOpen: this.state.isSearchFiltersPanelOpen,
-          toggleSearchFiltersPanel: isOpen => {
-            this.setState({ isSearchFiltersPanelOpen: isOpen });
-          },
-          searchFiltersPanelSelectedCount,
-        }
-      : {};
-
     // Set topbar class based on if a modal is open in
     // a child component
     const topbarClasses = this.state.isMobileModalOpen
@@ -318,61 +276,22 @@ export class SearchPageComponent extends Component {
           currentSearchParams={urlQueryParams}
         />
         <div className={css.container}>
-          <div className={css.searchResultContainer}>
-            <SearchFilters
-              className={css.searchFilters}
-              urlQueryParams={validQueryParams}
-              listingsAreLoaded={listingsAreLoaded}
-              resultsCount={totalItems}
-              searchInProgress={searchInProgress}
-              searchListingsError={searchListingsError}
-              onManageDisableScrolling={onManageDisableScrolling}
-              categories={categories}
-              amenities={amenities}
-              {...searchFiltersPanelProps}
-            />
-            <SearchFiltersMobile
-              className={css.searchFiltersMobile}
-              urlQueryParams={validQueryParams}
-              listingsAreLoaded={listingsAreLoaded}
-              resultsCount={totalItems}
-              searchInProgress={searchInProgress}
-              searchListingsError={searchListingsError}
-              showAsModalMaxWidth={MODAL_BREAKPOINT}
-              onMapIconClick={onMapIconClick}
-              onManageDisableScrolling={onManageDisableScrolling}
-              onOpenModal={this.onOpenMobileModal}
-              onCloseModal={this.onCloseMobileModal}
-              categories={categories}
-              amenities={amenities}
-            />
-            { isSearchFiltersPanelOpen ? (
-              <div className={classNames(css.searchFiltersPanel)}>
-                <SearchFiltersPanel
-                  urlQueryParams={validQueryParams}
-                  listingsAreLoaded={listingsAreLoaded}
-                  categories={categories}
-                  amenities={amenities}
-                  onClosePanel={() => this.setState({ isSearchFiltersPanelOpen: false })}
-                />
-              </div>
-            ) : (
-              <div
-                className={classNames(css.listings, {
-                  [css.newSearchInProgress]: !listingsAreLoaded,
-                })}
-              >
-                {searchListingsError ? searchError : null}
-                <SearchResultsPanel
-                  className={css.searchListingsPanel}
-                  listings={listings}
-                  pagination={listingsAreLoaded ? pagination : null}
-                  search={searchParamsForPagination}
-                  setActiveListing={onActivateListing}
-                />
-              </div>
-            )}
-          </div>
+          <MainPanel
+            urlQueryParams={validQueryParams}
+            listings={listings}
+            searchInProgress={searchInProgress}
+            searchListingsError={searchListingsError}
+            searchParamsAreInSync={searchParamsAreInSync}
+            onActivateListing={onActivateListing}
+            onManageDisableScrolling={onManageDisableScrolling}
+            onMapIconClick={onMapIconClick}
+            pagination={pagination}
+            searchParamsForPagination={parse(location.search)}
+            showAsModalMaxWidth={MODAL_BREAKPOINT}
+            customURLParamToConfig={customURLParamToConfig}
+            primaryFilters={{ amenities, categories }}
+            secondaryFilters={{ amenities, categories }}
+          />
           <ModalInMobile
             className={css.mapPanel}
             id="SearchPage.map"
