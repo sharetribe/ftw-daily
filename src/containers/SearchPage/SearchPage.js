@@ -183,8 +183,6 @@ export class SearchPageComponent extends Component {
         customURLParamToConfig
       )
     );
-    const { address, bounds, origin } = searchInURL || {};
-
     const searchParamsAreInSync = urlQueryString === paramsQueryString;
 
     const validQueryParams = validURLParamsForExtendedData(
@@ -193,25 +191,7 @@ export class SearchPageComponent extends Component {
       customURLParamToConfig
     );
 
-    const searchMap = (
-      <SearchMap
-        activeListingId={activeListingId}
-        bounds={bounds}
-        center={origin}
-        listings={mapListings || []}
-        onIdle={this.onIdle}
-        isOpenOnModal={this.state.isSearchMapOpenOnMobile}
-        onCloseAsModal={() => {
-          onManageDisableScrolling('SearchPage.map', false);
-        }}
-        useLocationSearchBounds={!this.viewportBounds}
-      />
-    );
-    const showSearchMapInMobile = this.state.isSearchMapOpenOnMobile ? searchMap : null;
     const isWindowDefined = typeof window !== 'undefined';
-    const searchMapMaybe =
-      isWindowDefined && window.innerWidth < MODAL_BREAKPOINT ? showSearchMapInMobile : searchMap;
-
     // Schema for search engines (helps them to understand what this page is about)
     // http://schema.org
     // We are using JSON-LD format
@@ -241,6 +221,9 @@ export class SearchPageComponent extends Component {
       itemListOrder: 'http://schema.org/ItemListOrderAscending',
       itemListElement: schemaListings,
     });
+    const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
+    const shouldShowSearchMap =
+      !isMobileLayout || (isMobileLayout && this.state.isSearchMapOpenOnMobile);
 
     const onMapIconClick = () => {
       this.useLocationSearchBounds = true;
@@ -248,6 +231,7 @@ export class SearchPageComponent extends Component {
       this.setState({ isSearchMapOpenOnMobile: true });
     };
 
+    const { address, bounds, origin } = searchInURL || {};
     // Set topbar class based on if a modal is open in
     // a child component
     const topbarClasses = this.state.isMobileModalOpen
@@ -300,7 +284,22 @@ export class SearchPageComponent extends Component {
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             onManageDisableScrolling={onManageDisableScrolling}
           >
-            <div className={css.map}>{searchMapMaybe}</div>
+            <div className={css.map}>
+              {shouldShowSearchMap ? (
+                <SearchMap
+                  activeListingId={activeListingId}
+                  bounds={bounds}
+                  center={origin}
+                  listings={mapListings || []}
+                  onIdle={this.onIdle}
+                  isOpenOnModal={this.state.isSearchMapOpenOnMobile}
+                  onCloseAsModal={() => {
+                    onManageDisableScrolling('SearchPage.map', false);
+                  }}
+                  useLocationSearchBounds={!this.viewportBounds}
+                />
+              ) : null}
+            </div>
           </ModalInMobile>
         </div>
       </Page>
