@@ -22,10 +22,29 @@ exports[`SearchPageComponent matches snapshot 1`] = `
     currentSearchParams={Object {}}
   />
   <div>
-    <div>
-      <withRouter(InjectIntl(SearchFiltersComponent))
-        amenities={
-          Array [
+    <MainPanel
+      className={null}
+      customURLParamToConfig={
+        Object {
+          "pub_amenities": "amenities",
+          "pub_category": "categories",
+        }
+      }
+      listings={Array []}
+      onActivateListing={[Function]}
+      onManageDisableScrolling={[Function]}
+      onMapIconClick={[Function]}
+      pagination={
+        Object {
+          "page": 1,
+          "perPage": 12,
+          "totalItems": 22,
+          "totalPages": 2,
+        }
+      }
+      primaryFilters={
+        Object {
+          "amenities": Array [
             Object {
               "key": "dog1",
               "label": "Dog 1",
@@ -34,10 +53,8 @@ exports[`SearchPageComponent matches snapshot 1`] = `
               "key": "dog2",
               "label": "Dog 2",
             },
-          ]
-        }
-        categories={
-          Array [
+          ],
+          "categories": Array [
             Object {
               "key": "cat1",
               "label": "Cat 1",
@@ -46,18 +63,18 @@ exports[`SearchPageComponent matches snapshot 1`] = `
               "key": "cat2",
               "label": "Cat 2",
             },
-          ]
+          ],
         }
-        listingsAreLoaded={true}
-        onManageDisableScrolling={[Function]}
-        resultsCount={22}
-        searchInProgress={false}
-        searchListingsError={null}
-        urlQueryParams={Object {}}
-      />
-      <InjectIntl(withRouter(SearchFiltersMobileComponent))
-        amenities={
-          Array [
+      }
+      resultsCount={0}
+      rootClassName={null}
+      searchInProgress={false}
+      searchListingsError={null}
+      searchParamsAreInSync={true}
+      searchParamsForPagination={Object {}}
+      secondaryFilters={
+        Object {
+          "amenities": Array [
             Object {
               "key": "dog1",
               "label": "Dog 1",
@@ -66,10 +83,8 @@ exports[`SearchPageComponent matches snapshot 1`] = `
               "key": "dog2",
               "label": "Dog 2",
             },
-          ]
-        }
-        categories={
-          Array [
+          ],
+          "categories": Array [
             Object {
               "key": "cat1",
               "label": "Cat 1",
@@ -78,38 +93,12 @@ exports[`SearchPageComponent matches snapshot 1`] = `
               "key": "cat2",
               "label": "Cat 2",
             },
-          ]
+          ],
         }
-        listingsAreLoaded={true}
-        onCloseModal={[Function]}
-        onManageDisableScrolling={[Function]}
-        onMapIconClick={[Function]}
-        onOpenModal={[Function]}
-        resultsCount={22}
-        searchInProgress={false}
-        searchListingsError={null}
-        showAsModalMaxWidth={768}
-        urlQueryParams={Object {}}
-      />
-      <div
-        className=""
-      >
-        <SearchResultsPanel
-          className={null}
-          listings={Array []}
-          pagination={
-            Object {
-              "page": 1,
-              "perPage": 12,
-              "totalItems": 22,
-              "totalPages": 2,
-            }
-          }
-          rootClassName={null}
-          search={Object {}}
-        />
-      </div>
-    </div>
+      }
+      showAsModalMaxWidth={768}
+      urlQueryParams={Object {}}
+    />
     <withViewport(ModalInMobileComponent)
       id="SearchPage.map"
       isModalOpenOnMobile={false}

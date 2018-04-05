@@ -293,6 +293,7 @@ const { array, bool, func, oneOf, object, shape, string } = PropTypes;
 SearchPageComponent.propTypes = {
   listings: array,
   mapListings: array,
+  onActivateListing: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   onSearchMapListings: func.isRequired,
   pagination: propTypes.pagination,
