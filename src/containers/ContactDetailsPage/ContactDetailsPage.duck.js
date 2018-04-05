@@ -1,4 +1,5 @@
 import merge from 'lodash/merge';
+import { denormalisedResponseEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
 import { currentUserShowSuccess } from '../../ducks/user.duck';
 
@@ -77,10 +78,15 @@ const requestSavePhoneNumber = params => (dispatch, getState, sdk) => {
   const phoneNumber = params.phoneNumber;
 
   return sdk.currentUser
-    .updateProfile({ protectedData: { phoneNumber } }, { expand: true })
+    .updateProfile({ protectedData: { phoneNumber } }, { expand: true, include: ['profileImage'] })
     .then(response => {
-      // return user
-      return response.data.data;
+      const entities = denormalisedResponseEntities(response);
+      if (entities.length !== 1) {
+        throw new Error('Expected a resource in the sdk.currentUser.updateProfile response');
+      }
+
+      const currentUser = entities[0];
+      return currentUser;
     })
     .catch(e => {
       dispatch(savePhoneNumberError(storableError(e)));
@@ -97,10 +103,15 @@ const requestSaveEmail = params => (dispatch, getState, sdk) => {
   const { email, currentPassword } = params;
 
   return sdk.currentUser
-    .changeEmail({ email, currentPassword }, { expand: true })
+    .changeEmail({ email, currentPassword }, { expand: true, include: ['profileImage'] })
     .then(response => {
-      // return user
-      return response.data.data;
+      const entities = denormalisedResponseEntities(response);
+      if (entities.length !== 1) {
+        throw new Error('Expected a resource in the sdk.currentUser.changeEmail response');
+      }
+
+      const currentUser = entities[0];
+      return currentUser;
     })
     .catch(e => {
       dispatch(saveEmailError(storableError(e)));
