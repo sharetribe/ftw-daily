@@ -72,15 +72,19 @@ export class CheckoutPageComponent extends Component {
    * based on this initial data.
    */
   loadInitialData() {
-    const { bookingData, bookingDates, listing, fetchSpeculatedTransaction } = this.props;
-    const hasDataInProps = !!(bookingData && bookingDates && listing);
-    const pageData = hasDataInProps
-      ? { bookingData, bookingDates, listing }
-      : storedData(STORAGE_KEY);
+    const { bookingData, bookingDates, listing, fetchSpeculatedTransaction, history } = this.props;
+    // Browser's back navigation should not rewrite data in session store.
+    // Action is 'POP' on both history.back() and page refresh cases.
+    const hasNavigatedThroughLink = history.action === 'PUSH';
 
+    const hasDataInProps = !!(bookingData && bookingDates && listing) && hasNavigatedThroughLink;
     if (hasDataInProps) {
       storeData(bookingData, bookingDates, listing, STORAGE_KEY);
     }
+
+    const pageData = hasDataInProps
+      ? { bookingData, bookingDates, listing }
+      : storedData(STORAGE_KEY);
 
     const hasData =
       pageData &&
