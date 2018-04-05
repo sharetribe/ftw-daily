@@ -15,7 +15,7 @@ import {
   hasSameSDKBounds,
 } from '../../util/googleMaps';
 import { createResourceLocatorString } from '../../util/routes';
-import { createSlug, parse, stringify } from '../../util/urlHelpers';
+import { parse, stringify } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
@@ -27,6 +27,7 @@ import {
   pickSearchParamsOnly,
   validURLParamForExtendedData,
   validURLParamsForExtendedData,
+  createSearchResultSchema,
 } from './SearchPage.helpers';
 import MainPanel from './MainPanel';
 import css from './SearchPage.css';
@@ -192,35 +193,6 @@ export class SearchPageComponent extends Component {
     );
 
     const isWindowDefined = typeof window !== 'undefined';
-    // Schema for search engines (helps them to understand what this page is about)
-    // http://schema.org
-    // We are using JSON-LD format
-    const siteTitle = config.siteTitle;
-    const searchAddress = address || intl.formatMessage({ id: 'SearchPage.schemaMapSearch' });
-    const schemaTitle = intl.formatMessage(
-      { id: 'SearchPage.schemaTitle' },
-      { searchAddress, siteTitle }
-    );
-    const schemaDescription = intl.formatMessage({ id: 'SearchPage.schemaDescription' });
-    const schemaListings = listings.map((l, i) => {
-      const title = l.attributes.title;
-      const pathToItem = createResourceLocatorString('ListingPage', routeConfiguration(), {
-        id: l.id.uuid,
-        slug: createSlug(title),
-      });
-      return {
-        '@type': 'ListItem',
-        position: i,
-        url: `${config.canonicalRootURL}${pathToItem}`,
-        name: title,
-      };
-    });
-    const schemaMainEntity = JSON.stringify({
-      '@type': 'ItemList',
-      name: searchAddress,
-      itemListOrder: 'http://schema.org/ItemListOrderAscending',
-      itemListElement: schemaListings,
-    });
     const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
     const shouldShowSearchMap =
       !isMobileLayout || (isMobileLayout && this.state.isSearchMapOpenOnMobile);
@@ -232,6 +204,8 @@ export class SearchPageComponent extends Component {
     };
 
     const { address, bounds, origin } = searchInURL || {};
+    const { title, description, schema } = createSearchResultSchema(listings, address, intl);
+
     // Set topbar class based on if a modal is open in
     // a child component
     const topbarClasses = this.state.isMobileModalOpen
@@ -244,15 +218,9 @@ export class SearchPageComponent extends Component {
     return (
       <Page
         scrollingDisabled={scrollingDisabled}
-        description={schemaDescription}
-        title={schemaTitle}
-        schema={{
-          '@context': 'http://schema.org',
-          '@type': 'SearchResultsPage',
-          description: schemaDescription,
-          name: schemaTitle,
-          mainEntity: [schemaMainEntity],
-        }}
+        description={description}
+        title={title}
+        schema={schema}
       >
         <TopbarContainer
           className={topbarClasses}
