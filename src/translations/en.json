@@ -89,6 +89,8 @@
   "ContactDetailsForm.emailUnverified": "You haven't verified your email address yet. {resendEmailMessage}",
   "ContactDetailsForm.emailVerified": "Your email address is verified.",
   "ContactDetailsForm.genericFailure": "Whoops, something went wrong. Please refresh the page and try again.",
+  "ContactDetailsForm.genericEmailFailure": "Whoops, something went wrong while updating your email. Please refresh the page and try again.",
+  "ContactDetailsForm.genericPhoneNumberFailure": "Whoops, something went wrong while updating your phone number. Please refresh the page and try again.",
   "ContactDetailsForm.passwordFailed": "Please double-check your password",
   "ContactDetailsForm.passwordLabel": "Current password",
   "ContactDetailsForm.passwordPlaceholder": "Enter your current password…",

@@ -46,7 +46,8 @@ class ContactDetailsFormComponent extends Component {
     const {
       rootClassName,
       className,
-      saveContactDetailsError,
+      saveEmailError,
+      savePhoneNumberError,
       currentUser,
       form,
       handleSubmit,
@@ -93,7 +94,7 @@ class ContactDetailsFormComponent extends Component {
       sendVerificationEmailError
     );
 
-    const emailTakenErrorText = isChangeEmailTakenError(saveContactDetailsError)
+    const emailTakenErrorText = isChangeEmailTakenError(saveEmailError)
       ? intl.formatMessage({ id: 'ContactDetailsForm.emailTakenError' })
       : null;
 
@@ -206,7 +207,7 @@ class ContactDetailsFormComponent extends Component {
     const passwordFailedMessage = intl.formatMessage({
       id: 'ContactDetailsForm.passwordFailed',
     });
-    const passwordErrorText = isChangeEmailWrongPassword(saveContactDetailsError)
+    const passwordErrorText = isChangeEmailWrongPassword(saveEmailError)
       ? passwordFailedMessage
       : null;
 
@@ -214,12 +215,30 @@ class ContactDetailsFormComponent extends Component {
       [css.confirmChangesSectionVisible]: emailChanged,
     });
 
-    const genericFailure =
-      saveContactDetailsError && !(emailTakenErrorText || passwordErrorText) ? (
+    // generic error
+    const isGenericEmailError = saveEmailError && !(emailTakenErrorText || passwordErrorText);
+
+    let genericError = null;
+
+    if (isGenericEmailError && savePhoneNumberError) {
+      genericError = (
         <span className={css.error}>
           <FormattedMessage id="ContactDetailsForm.genericFailure" />
         </span>
-      ) : null;
+      );
+    } else if (isGenericEmailError) {
+      genericError = (
+        <span className={css.error}>
+          <FormattedMessage id="ContactDetailsForm.genericEmailFailure" />
+        </span>
+      );
+    } else if (savePhoneNumberError) {
+      genericError = (
+        <span className={css.error}>
+          <FormattedMessage id="ContactDetailsForm.genericPhoneNumberFailure" />
+        </span>
+      );
+    }
 
     const classes = classNames(rootClassName || css.root, className);
     const submitDisabled =
@@ -268,7 +287,7 @@ class ContactDetailsFormComponent extends Component {
           />
         </div>
         <div className={css.bottomWrapper}>
-          {genericFailure}
+          {genericError}
           <PrimaryButton
             className={css.submitButton}
             type="submit"
@@ -287,7 +306,8 @@ class ContactDetailsFormComponent extends Component {
 ContactDetailsFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
-  saveContactDetailsError: null,
+  saveEmailError: null,
+  savePhoneNumberError: null,
   inProgress: false,
   sendVerificationEmailError: null,
   sendVerificationEmailInProgress: false,
@@ -301,7 +321,8 @@ ContactDetailsFormComponent.propTypes = {
   ...formPropTypes,
   rootClassName: string,
   className: string,
-  saveContactDetailsError: propTypes.error,
+  saveEmailError: propTypes.error,
+  savePhoneNumberError: propTypes.error,
   inProgress: bool,
   intl: intlShape.isRequired,
   onResendVerificationEmail: func.isRequired,

@@ -41,7 +41,8 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         saveContactDetailsInProgress: false,
-        saveContactDetailsError: null,
+        saveEmailError: null,
+        savePhoneNumberError: null,
         contactDetailsChanged: false,
       };
 
@@ -115,12 +116,15 @@ const requestSaveEmail = params => (dispatch, getState, sdk) => {
 export const saveEmail = params => (dispatch, getState, sdk) => {
   dispatch(saveContactDetailsRequest());
 
-  return dispatch(requestSaveEmail(params))
-    .then(user => {
-      dispatch(currentUserShowSuccess(user));
-      dispatch(saveContactDetailsSuccess());
-    })
-    .catch(e => null);
+  return (
+    dispatch(requestSaveEmail(params))
+      .then(user => {
+        dispatch(currentUserShowSuccess(user));
+        dispatch(saveContactDetailsSuccess());
+      })
+      // error action dispatched in requestSaveEmail
+      .catch(e => null)
+  );
 };
 
 /**
@@ -129,12 +133,15 @@ export const saveEmail = params => (dispatch, getState, sdk) => {
 export const savePhoneNumber = params => (dispatch, getState, sdk) => {
   dispatch(saveContactDetailsRequest());
 
-  return dispatch(requestSavePhoneNumber(params))
-    .then(user => {
-      dispatch(currentUserShowSuccess(user));
-      dispatch(saveContactDetailsSuccess());
-    })
-    .catch(e => null);
+  return (
+    dispatch(requestSavePhoneNumber(params))
+      .then(user => {
+        dispatch(currentUserShowSuccess(user));
+        dispatch(saveContactDetailsSuccess());
+      })
+      // error action dispatched in requestSavePhoneNumber
+      .catch(e => null)
+  );
 };
 
 /**

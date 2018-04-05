@@ -29,7 +29,8 @@ import css from './ContactDetailsPage.css';
 
 export const ContactDetailsPageComponent = props => {
   const {
-    saveContactDetailsError,
+    saveEmailError,
+    savePhoneNumberError,
     saveContactDetailsInProgress,
     currentUser,
     contactDetailsChanged,
@@ -90,7 +91,8 @@ export const ContactDetailsPageComponent = props => {
     <ContactDetailsForm
       className={css.form}
       initialValues={{ email, phoneNumber }}
-      saveContactDetailsError={saveContactDetailsError}
+      saveEmailError={saveEmailError}
+      savePhoneNumberError={savePhoneNumberError}
       currentUser={currentUser}
       onResendVerificationEmail={onResendVerificationEmail}
       onSubmit={values => handleSubmit(values, email, phoneNumber)}
@@ -133,7 +135,8 @@ export const ContactDetailsPageComponent = props => {
 };
 
 ContactDetailsPageComponent.defaultProps = {
-  saveContactDetailsError: null,
+  saveEmailError: null,
+  savePhoneNumberError: null,
   currentUser: null,
   sendVerificationEmailError: null,
 };
@@ -141,7 +144,8 @@ ContactDetailsPageComponent.defaultProps = {
 const { bool, func } = PropTypes;
 
 ContactDetailsPageComponent.propTypes = {
-  saveContactDetailsError: propTypes.error,
+  saveEmailError: propTypes.error,
+  savePhoneNumberError: propTypes.error,
   saveContactDetailsInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   contactDetailsChanged: bool.isRequired,
@@ -162,12 +166,14 @@ const mapStateToProps = state => {
   // Topbar needs user info.
   const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
   const {
-    saveContactDetailsError,
+    saveEmailError,
+    savePhoneNumberError,
     saveContactDetailsInProgress,
     contactDetailsChanged,
   } = state.ContactDetailsPage;
   return {
-    saveContactDetailsError,
+    saveEmailError,
+    savePhoneNumberError,
     saveContactDetailsInProgress,
     currentUser,
     contactDetailsChanged,
