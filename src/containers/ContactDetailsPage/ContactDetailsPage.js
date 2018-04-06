@@ -24,7 +24,8 @@ import css from './ContactDetailsPage.css';
 
 export const ContactDetailsPageComponent = props => {
   const {
-    saveContactDetailsError,
+    saveEmailError,
+    savePhoneNumberError,
     saveContactDetailsInProgress,
     currentUser,
     contactDetailsChanged,
@@ -62,15 +63,18 @@ export const ContactDetailsPageComponent = props => {
   ];
 
   const user = ensureCurrentUser(currentUser);
-  const email = user.attributes.email || '';
+  const currentEmail = user.attributes.email || '';
+  const protectedData = user.attributes.profile.protectedData || {};
+  const currentPhoneNumber = protectedData.phoneNumber || '';
   const contactInfoForm = user.id ? (
     <ContactDetailsForm
       className={css.form}
-      initialValues={{ email }}
-      saveContactDetailsError={saveContactDetailsError}
+      initialValues={{ email: currentEmail, phoneNumber: currentPhoneNumber }}
+      saveEmailError={saveEmailError}
+      savePhoneNumberError={savePhoneNumberError}
       currentUser={currentUser}
       onResendVerificationEmail={onResendVerificationEmail}
-      onSubmit={onSubmitContactDetails}
+      onSubmit={values => onSubmitContactDetails({ ...values, currentEmail, currentPhoneNumber })}
       onChange={onChange}
       inProgress={saveContactDetailsInProgress}
       ready={contactDetailsChanged}
@@ -110,7 +114,8 @@ export const ContactDetailsPageComponent = props => {
 };
 
 ContactDetailsPageComponent.defaultProps = {
-  saveContactDetailsError: null,
+  saveEmailError: null,
+  savePhoneNumberError: null,
   currentUser: null,
   sendVerificationEmailError: null,
 };
@@ -118,7 +123,8 @@ ContactDetailsPageComponent.defaultProps = {
 const { bool, func } = PropTypes;
 
 ContactDetailsPageComponent.propTypes = {
-  saveContactDetailsError: propTypes.error,
+  saveEmailError: propTypes.error,
+  savePhoneNumberError: propTypes.error,
   saveContactDetailsInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   contactDetailsChanged: bool.isRequired,
@@ -137,12 +143,14 @@ const mapStateToProps = state => {
   // Topbar needs user info.
   const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
   const {
-    saveContactDetailsError,
+    saveEmailError,
+    savePhoneNumberError,
     saveContactDetailsInProgress,
     contactDetailsChanged,
   } = state.ContactDetailsPage;
   return {
-    saveContactDetailsError,
+    saveEmailError,
+    savePhoneNumberError,
     saveContactDetailsInProgress,
     currentUser,
     contactDetailsChanged,
