@@ -15,7 +15,7 @@ describe('CheckoutPage', () => {
         bookingEnd: new Date(Date.UTC(2017, 3, 16)),
       },
       dispatch: noop,
-      history: { push: noop },
+      history: { push: noop, action: 'PUSH' },
       intl: fakeIntl,
       listing,
       currentUser: createCurrentUser('currentUser'),
