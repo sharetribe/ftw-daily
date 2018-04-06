@@ -36,6 +36,7 @@ describe('SearchPageComponent', () => {
       currentUserHasListings: false,
       intl: fakeIntl,
       isAuthenticated: false,
+      onActivateListing: noop,
       onLogout: noop,
       onManageDisableScrolling: noop,
       onSearchMapListings: noop,

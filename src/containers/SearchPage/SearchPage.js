@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { debounce, intersection, isEqual, unionWith } from 'lodash';
+import { debounce, isEqual, unionWith } from 'lodash';
 import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
@@ -15,85 +15,37 @@ import {
   hasSameSDKBounds,
 } from '../../util/googleMaps';
 import { createResourceLocatorString } from '../../util/routes';
-import { createSlug, parse, stringify } from '../../util/urlHelpers';
+import { parse, stringify } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import {
-  SearchMap,
-  ModalInMobile,
-  Page,
-  SearchResultsPanel,
-  SearchFilters,
-  SearchFiltersMobile,
-  SearchFiltersPanel,
-} from '../../components';
+import { SearchMap, ModalInMobile, Page } from '../../components';
 import { TopbarContainer } from '../../containers';
-import { searchListings, searchMapListings, setActiveListing } from './SearchPage.duck';
 
+import { searchListings, searchMapListings, setActiveListing } from './SearchPage.duck';
+import {
+  pickSearchParamsOnly,
+  validURLParamForExtendedData,
+  validURLParamsForExtendedData,
+  createSearchResultSchema,
+} from './SearchPage.helpers';
+import MainPanel from './MainPanel';
 import css from './SearchPage.css';
 
 // Pagination page size might need to be dynamic on responsive page layouts
 // Current design has max 3 columns 12 is divisible by 2 and 3
 // So, there's enough cards to fill all columns on full pagination pages
 const RESULT_PAGE_SIZE = 24;
-const MAX_SEARCH_RESULT_PAGE_SIZE_ON_MAP = 80; // max page size is 100 in API
-const MAX_SEARCH_RESULT_PAGES_ON_MAP = 1; // page size * n pages = number of listings shown on a map.
 const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
 const BOUNDS_FIXED_PRECISION = 8;
 
 const CATEGORY_URL_PARAM = 'pub_category';
 const AMENITIES_URL_PARAM = 'pub_amenities';
-const USE_SEARCH_FILTER_PANEL = false;
 
-// Find correct extended data key from config.custom
-// e.g. 'pub_category' -> 'categories'.
-const customConfigKey = paramKey => {
-  switch (paramKey) {
-    case CATEGORY_URL_PARAM:
-      return 'categories';
-    case AMENITIES_URL_PARAM:
-      return 'amenities';
-    default:
-      return null;
-  }
-};
-
-const validURLParamForExtendedData = (paramKey, urlParams) => {
-  const configKey = customConfigKey(paramKey);
-  const value = urlParams[paramKey];
-  const valueArray = value ? value.split(',') : [];
-
-  if (configKey && valueArray.length > 0) {
-    const allowedValues = config.custom[configKey].map(a => a.key);
-    const validValues = intersection(valueArray, allowedValues).join(',');
-    return validValues.length > 0 ? { [paramKey]: validValues } : {};
-  }
-  return {};
-};
-
-// validate filter params
-const validURLParamsForExtendedData = params => {
-  const { [CATEGORY_URL_PARAM]: category, [AMENITIES_URL_PARAM]: amenities, ...rest } = params;
-  return {
-    ...rest,
-    ...validURLParamForExtendedData(CATEGORY_URL_PARAM, params),
-    ...validURLParamForExtendedData(AMENITIES_URL_PARAM, params),
-  };
-};
-
-// extract search parameters, including a custom attribute named category
-const pickSearchParamsOnly = params => {
-  const { address, origin, bounds, country, ...rest } = params || {};
-  const boundsMaybe = bounds ? { bounds } : {};
-  const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
-  return {
-    ...boundsMaybe,
-    ...originMaybe,
-    ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest),
-    ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest),
-  };
+const customURLParamToConfig = {
+  [CATEGORY_URL_PARAM]: 'categories',
+  [AMENITIES_URL_PARAM]: 'amenities',
 };
 
 export class SearchPageComponent extends Component {
@@ -103,7 +55,6 @@ export class SearchPageComponent extends Component {
     this.state = {
       isSearchMapOpenOnMobile: props.tab === 'map',
       isMobileModalOpen: false,
-      isSearchFiltersPanelOpen: false,
     };
 
     // Initiating map creates 'bounds_changes' event
@@ -116,19 +67,12 @@ export class SearchPageComponent extends Component {
     this.searchMapListingsInProgress = false;
 
     this.onIdle = debounce(this.onIdle.bind(this), SEARCH_WITH_MAP_DEBOUNCE);
-    this.fetchMoreListingsToMap = this.fetchMoreListingsToMap.bind(this);
     this.onOpenMobileModal = this.onOpenMobileModal.bind(this);
     this.onCloseMobileModal = this.onCloseMobileModal.bind(this);
   }
 
-  componentDidMount() {
-    this.fetchMoreListingsToMap(this.props.location);
-  }
-
   componentWillReceiveProps(nextProps) {
     if (!isEqual(this.props.location, nextProps.location)) {
-      this.fetchMoreListingsToMap(nextProps.location);
-
       // If no mapSearch url parameter is given, this is original location search
       const { mapSearch } = parse(nextProps.location.search, {
         latlng: ['origin'],
@@ -175,8 +119,8 @@ export class SearchPageComponent extends Component {
         bounds: viewportBounds,
         country,
         mapSearch: true,
-        ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest),
-        ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest),
+        ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest, customURLParamToConfig),
+        ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest, customURLParamToConfig),
       };
       this.viewportBounds = viewportBounds;
       history.push(
@@ -186,52 +130,6 @@ export class SearchPageComponent extends Component {
       this.viewportBounds = viewportBounds;
       this.modalOpenedBoundsChange = false;
     }
-  }
-
-  fetchMoreListingsToMap(location) {
-    // TODO Remove this function.
-    // Temporarily just return immediately to avoid merge conflicts.
-    return;
-
-    // eslint-disable-next-line no-unreachable
-    const { onSearchMapListings } = this.props;
-    const searchInURL = parse(location.search, {
-      latlng: ['origin'],
-      latlngBounds: ['bounds'],
-    });
-
-    const perPage = MAX_SEARCH_RESULT_PAGE_SIZE_ON_MAP;
-    const page = 1;
-    const { address, country, origin, ...rest } = searchInURL;
-    const originMaybe = config.sortSearchByDistance ? { origin } : {};
-    const searchParamsForMapResults = {
-      ...rest,
-      ...originMaybe,
-      include: ['images'],
-      page,
-      perPage,
-      'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
-      'limit.images': 1,
-    };
-    this.searchMapListingsInProgress = true;
-
-    // Search more listings for map
-    onSearchMapListings(searchParamsForMapResults)
-      .then(response => {
-        const hasNextPage =
-          page < response.data.meta.totalPages && page < MAX_SEARCH_RESULT_PAGES_ON_MAP;
-        if (hasNextPage) {
-          onSearchMapListings({ ...searchParamsForMapResults, page: page + 1 });
-        } else {
-          this.searchMapListingsInProgress = false;
-        }
-      })
-      .catch(error => {
-        // In case of error, stop recursive loop and report error.
-        // TODO: Show and error in the listings column
-        // eslint-disable-next-line no-console
-        console.error(`An error (${error} occured while trying to retrieve map listings`);
-      });
   }
 
   // Invoked when a modal is opened from a child component,
@@ -271,77 +169,33 @@ export class SearchPageComponent extends Component {
 
     // urlQueryParams doesn't contain page specific url params
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
-    const urlQueryParams = pickSearchParamsOnly(searchInURL);
+    const urlQueryParams = pickSearchParamsOnly(
+      searchInURL,
+      [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM],
+      customURLParamToConfig
+    );
 
     // Page transition might initially use values from previous search
     const urlQueryString = stringify(urlQueryParams);
-    const paramsQueryString = stringify(pickSearchParamsOnly(searchParams));
-    const searchParamsMatch = urlQueryString === paramsQueryString;
+    const paramsQueryString = stringify(
+      pickSearchParamsOnly(
+        searchParams,
+        [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM],
+        customURLParamToConfig
+      )
+    );
+    const searchParamsAreInSync = urlQueryString === paramsQueryString;
 
-    const { address, bounds, origin } = searchInURL || {};
-
-    const hasPaginationInfo = !!pagination && pagination.totalItems != null;
-    const totalItems = searchParamsMatch && hasPaginationInfo ? pagination.totalItems : 0;
-    const listingsAreLoaded = !searchInProgress && searchParamsMatch && hasPaginationInfo;
-
-    const validQueryParams = validURLParamsForExtendedData(searchInURL);
-
-    const searchError = (
-      <h2 className={css.error}>
-        <FormattedMessage id="SearchPage.searchError" />
-      </h2>
+    const validQueryParams = validURLParamsForExtendedData(
+      searchInURL,
+      [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM],
+      customURLParamToConfig
     );
 
-    const searchMap = (
-      <SearchMap
-        activeListingId={activeListingId}
-        bounds={bounds}
-        center={origin}
-        listings={mapListings || []}
-        onIdle={this.onIdle}
-        isOpenOnModal={this.state.isSearchMapOpenOnMobile}
-        onCloseAsModal={() => {
-          onManageDisableScrolling('SearchPage.map', false);
-        }}
-        useLocationSearchBounds={!this.viewportBounds}
-      />
-    );
-    const showSearchMapInMobile = this.state.isSearchMapOpenOnMobile ? searchMap : null;
     const isWindowDefined = typeof window !== 'undefined';
-    const searchMapMaybe =
-      isWindowDefined && window.innerWidth < MODAL_BREAKPOINT ? showSearchMapInMobile : searchMap;
-
-    const searchParamsForPagination = parse(location.search);
-
-    // Schema for search engines (helps them to understand what this page is about)
-    // http://schema.org
-    // We are using JSON-LD format
-    const siteTitle = config.siteTitle;
-    const searchAddress = address || intl.formatMessage({ id: 'SearchPage.schemaMapSearch' });
-    const schemaTitle = intl.formatMessage(
-      { id: 'SearchPage.schemaTitle' },
-      { searchAddress, siteTitle }
-    );
-    const schemaDescription = intl.formatMessage({ id: 'SearchPage.schemaDescription' });
-    const schemaListings = listings.map((l, i) => {
-      const title = l.attributes.title;
-      const pathToItem = createResourceLocatorString('ListingPage', routeConfiguration(), {
-        id: l.id.uuid,
-        slug: createSlug(title),
-      });
-      return {
-        '@type': 'ListItem',
-        position: i,
-        url: `${config.canonicalRootURL}${pathToItem}`,
-        name: title,
-      };
-    });
-    const schemaMainEntity = JSON.stringify({
-      '@type': 'ItemList',
-      name: searchAddress,
-      itemListOrder: 'http://schema.org/ItemListOrderAscending',
-      itemListElement: schemaListings,
-    });
+    const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
+    const shouldShowSearchMap =
+      !isMobileLayout || (isMobileLayout && this.state.isSearchMapOpenOnMobile);
 
     const onMapIconClick = () => {
       this.useLocationSearchBounds = true;
@@ -349,51 +203,8 @@ export class SearchPageComponent extends Component {
       this.setState({ isSearchMapOpenOnMobile: true });
     };
 
-    const extraSearchFiltersPanelOrListings =
-      USE_SEARCH_FILTER_PANEL && this.state.isSearchFiltersPanelOpen ? (
-        <div className={classNames(css.searchFiltersPanel)}>
-          <SearchFiltersPanel
-            urlQueryParams={validQueryParams}
-            listingsAreLoaded={listingsAreLoaded}
-            categories={categories}
-            amenities={amenities}
-            onClosePanel={() => this.setState({ isSearchFiltersPanelOpen: false })}
-          />
-        </div>
-      ) : (
-        <div
-          className={classNames(css.listings, {
-            [css.newSearchInProgress]: !listingsAreLoaded,
-          })}
-        >
-          {searchListingsError ? searchError : null}
-          <SearchResultsPanel
-            className={css.searchListingsPanel}
-            listings={listings}
-            pagination={listingsAreLoaded ? pagination : null}
-            search={searchParamsForPagination}
-            setActiveListing={onActivateListing}
-          />
-        </div>
-      );
-
-    // An example how to check how many filters are selected on SearchFilterPanel
-    // if it is in use.
-    //
-    // const searchFiltersPanelSelectedCount = [
-    //   validQueryParams[FILTER_1_URL_PARAM],
-    //   validQueryParams[FILTER_2_URL_PARAM],
-    // ].filter(param => !!param).length
-    const searchFiltersPanelSelectedCount = 0;
-    const searchFiltersPanelProps = USE_SEARCH_FILTER_PANEL
-      ? {
-          isSearchFiltersPanelOpen: this.state.isSearchFiltersPanelOpen,
-          toggleSearchFiltersPanel: isOpen => {
-            this.setState({ isSearchFiltersPanelOpen: isOpen });
-          },
-          searchFiltersPanelSelectedCount,
-        }
-      : {};
+    const { address, bounds, origin } = searchInURL || {};
+    const { title, description, schema } = createSearchResultSchema(listings, address, intl);
 
     // Set topbar class based on if a modal is open in
     // a child component
@@ -407,15 +218,9 @@ export class SearchPageComponent extends Component {
     return (
       <Page
         scrollingDisabled={scrollingDisabled}
-        description={schemaDescription}
-        title={schemaTitle}
-        schema={{
-          '@context': 'http://schema.org',
-          '@type': 'SearchResultsPage',
-          description: schemaDescription,
-          name: schemaTitle,
-          mainEntity: [schemaMainEntity],
-        }}
+        description={description}
+        title={title}
+        schema={schema}
       >
         <TopbarContainer
           className={topbarClasses}
@@ -423,36 +228,22 @@ export class SearchPageComponent extends Component {
           currentSearchParams={urlQueryParams}
         />
         <div className={css.container}>
-          <div className={css.searchResultContainer}>
-            <SearchFilters
-              className={css.searchFilters}
-              urlQueryParams={validQueryParams}
-              listingsAreLoaded={listingsAreLoaded}
-              resultsCount={totalItems}
-              searchInProgress={searchInProgress}
-              searchListingsError={searchListingsError}
-              onManageDisableScrolling={onManageDisableScrolling}
-              categories={categories}
-              amenities={amenities}
-              {...searchFiltersPanelProps}
-            />
-            <SearchFiltersMobile
-              className={css.searchFiltersMobile}
-              urlQueryParams={validQueryParams}
-              listingsAreLoaded={listingsAreLoaded}
-              resultsCount={totalItems}
-              searchInProgress={searchInProgress}
-              searchListingsError={searchListingsError}
-              showAsModalMaxWidth={MODAL_BREAKPOINT}
-              onMapIconClick={onMapIconClick}
-              onManageDisableScrolling={onManageDisableScrolling}
-              onOpenModal={this.onOpenMobileModal}
-              onCloseModal={this.onCloseMobileModal}
-              categories={categories}
-              amenities={amenities}
-            />
-            {extraSearchFiltersPanelOrListings}
-          </div>
+          <MainPanel
+            urlQueryParams={validQueryParams}
+            listings={listings}
+            searchInProgress={searchInProgress}
+            searchListingsError={searchListingsError}
+            searchParamsAreInSync={searchParamsAreInSync}
+            onActivateListing={onActivateListing}
+            onManageDisableScrolling={onManageDisableScrolling}
+            onMapIconClick={onMapIconClick}
+            pagination={pagination}
+            searchParamsForPagination={parse(location.search)}
+            showAsModalMaxWidth={MODAL_BREAKPOINT}
+            customURLParamToConfig={customURLParamToConfig}
+            primaryFilters={{ amenities, categories }}
+            secondaryFilters={{ amenities, categories }}
+          />
           <ModalInMobile
             className={css.mapPanel}
             id="SearchPage.map"
@@ -461,7 +252,22 @@ export class SearchPageComponent extends Component {
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             onManageDisableScrolling={onManageDisableScrolling}
           >
-            <div className={css.map}>{searchMapMaybe}</div>
+            <div className={css.map}>
+              {shouldShowSearchMap ? (
+                <SearchMap
+                  activeListingId={activeListingId}
+                  bounds={bounds}
+                  center={origin}
+                  listings={mapListings || []}
+                  onIdle={this.onIdle}
+                  isOpenOnModal={this.state.isSearchMapOpenOnMobile}
+                  onCloseAsModal={() => {
+                    onManageDisableScrolling('SearchPage.map', false);
+                  }}
+                  useLocationSearchBounds={!this.viewportBounds}
+                />
+              ) : null}
+            </div>
           </ModalInMobile>
         </div>
       </Page>
@@ -487,6 +293,7 @@ const { array, bool, func, oneOf, object, shape, string } = PropTypes;
 SearchPageComponent.propTypes = {
   listings: array,
   mapListings: array,
+  onActivateListing: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   onSearchMapListings: func.isRequired,
   pagination: propTypes.pagination,
