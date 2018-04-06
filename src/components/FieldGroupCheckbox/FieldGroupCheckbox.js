@@ -29,8 +29,7 @@ class FieldCheckboxRenderer extends Component {
   }
 
   render() {
-    const { className, rootClassName, label, twoColumns, id, options, fields, meta } = this.props;
-    const name = fields.name;
+    const { className, rootClassName, label, twoColumns, id, options, meta, name } = this.props;
 
     const touched = this.state.touched;
 
@@ -77,7 +76,11 @@ FieldCheckboxRenderer.propTypes = {
   twoColumns: bool,
 };
 
-const FieldGroupCheckbox = props => <FieldArray component={FieldCheckboxRenderer} {...props} />;
+// Redux Form: the name of FieldArray must be unique
+// https://github.com/erikras/redux-form/issues/2740
+const FieldGroupCheckbox = props => (
+  <FieldArray component={FieldCheckboxRenderer} name={`${props.name}.FieldArray`} props={props} />
+);
 
 // Name and component are required fields for FieldArray.
 // Component-prop we define in this file, name needs to be passed in

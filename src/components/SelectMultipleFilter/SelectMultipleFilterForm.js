@@ -49,12 +49,7 @@ const SelectMultipleFilterFormComponent = props => {
       contentRef={contentRef}
       style={style}
     >
-      <FieldGroupCheckbox
-        className={css.fieldGroup}
-        name={name}
-        id={`${form}.${name}`}
-        options={options}
-      />
+      <FieldGroupCheckbox className={css.fieldGroup} name={name} id={`${form}`} options={options} />
       <div className={css.buttonsWrapper}>
         <button className={css.clearButton} type="button" onClick={handleClear}>
           {clear}
