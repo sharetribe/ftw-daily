@@ -6,7 +6,6 @@ import routeConfiguration from '../../routeConfiguration';
 
 // customURLParams
 export const validURLParamForExtendedData = (paramKey, urlParams, customConfigKeys) => {
-  //const configKey = customConfigKey(paramKey);
   const configKey = customConfigKeys[paramKey];
   const value = urlParams[paramKey];
   const valueArray = value ? value.split(',') : [];
@@ -32,7 +31,8 @@ export const validURLParamsForExtendedData = (params, customURLParams, customURL
   }, {});
 };
 
-// extract search parameters, including a custom attribute named category
+// extract search parameters, including a custom URL params
+// which are validated by mapping the values to marketplace custom config.
 export const pickSearchParamsOnly = (params, customURLParams, customURLParamToConfig) => {
   const { address, origin, bounds, country, ...rest } = params || {};
   const boundsMaybe = bounds ? { bounds } : {};
