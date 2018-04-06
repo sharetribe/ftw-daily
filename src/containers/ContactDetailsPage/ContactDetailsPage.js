@@ -19,12 +19,7 @@ import {
 import { ContactDetailsForm, TopbarContainer } from '../../containers';
 
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import {
-  saveContactDetails,
-  saveContactDetailsClear,
-  saveEmail,
-  savePhoneNumber,
-} from './ContactDetailsPage.duck';
+import { saveContactDetails, saveContactDetailsClear } from './ContactDetailsPage.duck';
 import css from './ContactDetailsPage.css';
 
 export const ContactDetailsPageComponent = props => {
@@ -40,24 +35,8 @@ export const ContactDetailsPageComponent = props => {
     sendVerificationEmailError,
     onResendVerificationEmail,
     onSubmitContactDetails,
-    onSubmitEmail,
-    onSubmitPhoneNumber,
     intl,
   } = props;
-
-  const handleSubmit = (values, currentEmail, currentPhoneNumber) => {
-    const { email, currentPassword, phoneNumber } = values;
-    const emailChanged = email !== currentEmail;
-    const phoneNumberChanged = phoneNumber !== currentPhoneNumber;
-
-    if (emailChanged && phoneNumberChanged) {
-      onSubmitContactDetails({ email, currentPassword, phoneNumber });
-    } else if (emailChanged) {
-      onSubmitEmail({ email, currentPassword });
-    } else if (phoneNumberChanged) {
-      onSubmitPhoneNumber({ phoneNumber });
-    }
-  };
 
   const tabs = [
     {
@@ -84,18 +63,18 @@ export const ContactDetailsPageComponent = props => {
   ];
 
   const user = ensureCurrentUser(currentUser);
-  const email = user.attributes.email || '';
+  const currentEmail = user.attributes.email || '';
   const protectedData = user.attributes.profile.protectedData || {};
-  const phoneNumber = protectedData.phoneNumber || '';
+  const currentPhoneNumber = protectedData.phoneNumber || '';
   const contactInfoForm = user.id ? (
     <ContactDetailsForm
       className={css.form}
-      initialValues={{ email, phoneNumber }}
+      initialValues={{ email: currentEmail, phoneNumber: currentPhoneNumber }}
       saveEmailError={saveEmailError}
       savePhoneNumberError={savePhoneNumberError}
       currentUser={currentUser}
       onResendVerificationEmail={onResendVerificationEmail}
-      onSubmit={values => handleSubmit(values, email, phoneNumber)}
+      onSubmit={values => onSubmitContactDetails({ ...values, currentEmail, currentPhoneNumber })}
       onChange={onChange}
       inProgress={saveContactDetailsInProgress}
       ready={contactDetailsChanged}
@@ -151,8 +130,6 @@ ContactDetailsPageComponent.propTypes = {
   contactDetailsChanged: bool.isRequired,
   onChange: func.isRequired,
   onSubmitContactDetails: func.isRequired,
-  onSubmitEmail: func.isRequired,
-  onSubmitPhoneNumber: func.isRequired,
   scrollingDisabled: bool.isRequired,
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: propTypes.error,
@@ -187,8 +164,6 @@ const mapDispatchToProps = dispatch => ({
   onChange: () => dispatch(saveContactDetailsClear()),
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   onSubmitContactDetails: values => dispatch(saveContactDetails(values)),
-  onSubmitEmail: values => dispatch(saveEmail(values)),
-  onSubmitPhoneNumber: values => dispatch(savePhoneNumber(values)),
 });
 
 const ContactDetailsPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(

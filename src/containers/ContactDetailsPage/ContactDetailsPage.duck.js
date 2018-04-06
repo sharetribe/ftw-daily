@@ -124,9 +124,7 @@ const requestSaveEmail = params => (dispatch, getState, sdk) => {
 /**
  * Save email and update the current user.
  */
-export const saveEmail = params => (dispatch, getState, sdk) => {
-  dispatch(saveContactDetailsRequest());
-
+const saveEmail = params => (dispatch, getState, sdk) => {
   return (
     dispatch(requestSaveEmail(params))
       .then(user => {
@@ -141,9 +139,7 @@ export const saveEmail = params => (dispatch, getState, sdk) => {
 /**
  * Save phone number and update the current user.
  */
-export const savePhoneNumber = params => (dispatch, getState, sdk) => {
-  dispatch(saveContactDetailsRequest());
-
+const savePhoneNumber = params => (dispatch, getState, sdk) => {
   return (
     dispatch(requestSavePhoneNumber(params))
       .then(user => {
@@ -158,8 +154,7 @@ export const savePhoneNumber = params => (dispatch, getState, sdk) => {
 /**
  * Save email and phone number and update the current user.
  */
-export const saveContactDetails = params => (dispatch, getState, sdk) => {
-  dispatch(saveContactDetailsRequest());
+const saveEmailAndPhoneNumber = params => (dispatch, getState, sdk) => {
   const { email, phoneNumber, currentPassword } = params;
 
   // order of promises: 1. email, 2. phone number
@@ -187,4 +182,23 @@ export const saveContactDetails = params => (dispatch, getState, sdk) => {
       dispatch(saveContactDetailsSuccess());
     })
     .catch(e => null);
+};
+
+/**
+ * Update contact details, actions depend on which data has changed
+ */
+export const saveContactDetails = params => (dispatch, getState, sdk) => {
+  dispatch(saveContactDetailsRequest());
+
+  const { email, currentEmail, phoneNumber, currentPhoneNumber, currentPassword } = params;
+  const emailChanged = email !== currentEmail;
+  const phoneNumberChanged = phoneNumber !== currentPhoneNumber;
+
+  if (emailChanged && phoneNumberChanged) {
+    return dispatch(saveEmailAndPhoneNumber({ email, currentPassword, phoneNumber }));
+  } else if (emailChanged) {
+    return dispatch(saveEmail({ email, currentPassword }));
+  } else if (phoneNumberChanged) {
+    return dispatch(savePhoneNumber({ phoneNumber }));
+  }
 };
