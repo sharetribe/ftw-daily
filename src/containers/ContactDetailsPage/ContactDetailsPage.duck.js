@@ -28,7 +28,8 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         saveContactDetailsInProgress: true,
-        saveContactDetailsError: null,
+        saveEmailError: null,
+        savePhoneNumberError: null,
         contactDetailsChanged: false,
       };
     case SAVE_CONTACT_DETAILS_SUCCESS:
