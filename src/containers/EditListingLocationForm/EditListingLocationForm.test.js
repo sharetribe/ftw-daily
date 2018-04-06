@@ -13,7 +13,7 @@ describe('EditListingLocationForm', () => {
         {...fakeFormProps}
         intl={fakeIntl}
         dispatch={noop}
-        onSubmit={v => v}
+        onSubmit={noop}
         saveActionMsg="Save location"
         updated={false}
         updateInProgress={false}
