@@ -1,7 +1,3 @@
-// NOTE: renderdeep doesn't work due to
-// "Invariant Violation: getNodeFromInstance: Invalid argument."
-// refs and findDOMNode are not supported by react-test-renderer
-// (react-sortable-hoc uses them)
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl, fakeFormProps } from '../../util/test-data';

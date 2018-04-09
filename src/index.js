@@ -11,6 +11,12 @@
  * Note that this file is required for the build process.
  */
 
+// React 16 depends on the collection types Map and Set, as well as requestAnimationFrame.
+// https://reactjs.org/docs/javascript-environment-requirements.html
+import 'core-js/es6/map';
+import 'core-js/es6/set';
+import 'raf/polyfill';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Decimal from 'decimal.js';
@@ -30,7 +36,7 @@ import './marketplaceIndex.css';
 
 const { BigDecimal } = sdkTypes;
 
-const render = store => {
+const render = (store, shouldHydrate) => {
   // If the server already loaded the auth information, render the app
   // immediately. Otherwise wait for the flag to be loaded and render
   // when auth information is present.
@@ -39,7 +45,11 @@ const render = store => {
   info
     .then(() => {
       store.dispatch(fetchCurrentUser());
-      ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
+      if (shouldHydrate) {
+        ReactDOM.hydrate(<ClientApp store={store} />, document.getElementById('root'));
+      } else {
+        ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
+      }
     })
     .catch(e => {
       log.error(e, 'browser-side-render-failed');
@@ -88,7 +98,7 @@ if (typeof window !== 'undefined') {
   const store = configureStore(initialState, sdk, analyticsHandlers);
 
   require('./util/polyfills');
-  render(store);
+  render(store, !!window.__PRELOADED_STATE__);
 
   if (config.dev) {
     // Expose stuff for the browser REPL
