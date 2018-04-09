@@ -1,5 +1,5 @@
 import React from 'react';
-import { node, string, object } from 'prop-types';
+import { any, node, string, object, shape } from 'prop-types';
 import classNames from 'classnames';
 import { Field } from 'redux-form';
 import { ValidationError } from '../../components';
@@ -40,7 +40,7 @@ const FieldCheckboxComponent = props => {
   const classes = classNames(rootClassName || css.root, className);
 
   const { value, ...inputProps } = input;
-  const checked = !!value;
+  const checked = value === true;
 
   const checkboxProps = {
     id,
@@ -80,7 +80,7 @@ FieldCheckboxComponent.propTypes = {
   label: node,
 
   // redux-form Field params
-  input: object.isRequired,
+  input: shape({ value: any }).isRequired,
   meta: object.isRequired,
 };
 
