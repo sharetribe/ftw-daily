@@ -7,7 +7,7 @@
  *
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { arrayOf, bool, node, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { FieldArray } from 'redux-form';
@@ -15,33 +15,46 @@ import { FieldCheckbox, ValidationError } from '../../components';
 
 import css from './FieldGroupCheckbox.css';
 
-const FieldCheckboxRenderer = props => {
-  const { className, rootClassName, label, twoColumns, id, options, fields, meta } = props;
-  const name = fields.name;
+class FieldCheckboxRenderer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { touched: false };
+  }
 
-  // FieldArray doesn't have touched prop, so we fake it to ValidationError
-  const touched = !!(meta.dirty || meta.submitFailed);
+  componentWillReceiveProps(nextProps) {
+    // FieldArray doesn't have touched prop, so we'll keep track of it
+    if (!this.state.touched) {
+      this.setState({ touched: nextProps.meta.dirty });
+    }
+  }
 
-  const classes = classNames(rootClassName || css.root, className);
-  const listClasses = twoColumns ? classNames(css.list, css.twoColumns) : css.list;
+  render() {
+    const { className, rootClassName, label, twoColumns, id, options, fields, meta } = this.props;
+    const name = fields.name;
 
-  return (
-    <fieldset className={classes}>
-      {label ? <legend>{label}</legend> : null}
-      <ul className={listClasses}>
-        {options.map(option => {
-          const fieldId = `${id}.${option.key}`;
-          return (
-            <li key={fieldId} className={css.item}>
-              <FieldCheckbox id={fieldId} name={`${name}.${option.key}`} label={option.label} />
-            </li>
-          );
-        })}
+    const touched = this.state.touched;
+
+    const classes = classNames(rootClassName || css.root, className);
+    const listClasses = twoColumns ? classNames(css.list, css.twoColumns) : css.list;
+
+    return (
+      <fieldset className={classes}>
+        {label ? <legend>{label}</legend> : null}
+        <ul className={listClasses}>
+          {options.map(option => {
+            const fieldId = `${id}.${option.key}`;
+            return (
+              <li key={fieldId} className={css.item}>
+                <FieldCheckbox id={fieldId} name={`${name}.${option.key}`} label={option.label} />
+              </li>
+            );
+          })}
+        </ul>
         <ValidationError fieldMeta={{ ...meta, touched }} />
-      </ul>
-    </fieldset>
-  );
-};
+      </fieldset>
+    );
+  }
+}
 
 FieldCheckboxRenderer.defaultProps = {
   rootClassName: null,

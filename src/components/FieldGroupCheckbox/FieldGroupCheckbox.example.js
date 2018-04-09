@@ -2,15 +2,14 @@ import React from 'react';
 import { reduxForm, propTypes as formPropTypes } from 'redux-form';
 import { Button } from '../../components';
 import FieldGroupCheckbox from './FieldGroupCheckbox';
+import { requiredFieldArrayCheckbox } from '../../util/validators';
 
 const formName = 'Styleguide.FieldGroupCheckboxForm';
+const formNameRequired = 'Styleguide.FieldGroupCheckboxFormRequired';
 
 const label = <h3>Amenities</h3>;
-const name = 'amenities';
 
-const componentProps = {
-  id: `${formName}.${name}`,
-  name: name,
+const commonProps = {
   label: label,
   options: [
     {
@@ -49,10 +48,23 @@ const componentProps = {
   twoColumns: true,
 };
 
-const FormComponent = props => {
-  const { handleSubmit, invalid, pristine, submitting } = props;
+const optionalProps = {
+  name: 'amenities-optional',
+  id: `${formName}.amenities-optional`,
+  ...commonProps,
+};
 
-  const submitDisabled = invalid || pristine || submitting;
+const requiredProps = {
+  name: 'amenities-required',
+  id: `${formNameRequired}.amenities-required`,
+  ...commonProps,
+  validate: requiredFieldArrayCheckbox('this is required'),
+};
+
+const FormComponent = props => {
+  const { handleSubmit, invalid, submitting, componentProps } = props;
+
+  const submitDisabled = invalid || submitting;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -67,16 +79,30 @@ const FormComponent = props => {
 
 FormComponent.propTypes = formPropTypes;
 
-const Form = reduxForm({
-  form: formName,
-})(FormComponent);
+const Form = formName => {
+  return reduxForm({
+    form: formName,
+  })(FormComponent);
+};
 
-export const WithTwoColumns = {
-  component: Form,
+export const Optional = {
+  component: Form(formName),
   props: {
     onSubmit: values => {
       console.log('Submit values: ', values);
     },
+    componentProps: optionalProps,
+  },
+  group: 'inputs',
+};
+
+export const Required = {
+  component: Form(formNameRequired),
+  props: {
+    onSubmit: values => {
+      console.log('Submit values: ', values);
+    },
+    componentProps: requiredProps,
   },
   group: 'inputs',
 };

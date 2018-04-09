@@ -1,7 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { any, node, string, object, shape } from 'prop-types';
 import classNames from 'classnames';
 import { Field } from 'redux-form';
+import { ValidationError } from '../../components';
 
 import css from './FieldCheckbox.css';
 
@@ -31,42 +32,60 @@ const IconCheckbox = props => {
 
 IconCheckbox.defaultProps = { className: null };
 
-const { node, string } = PropTypes;
-
 IconCheckbox.propTypes = { className: string };
 
-const FieldCheckbox = props => {
-  const { rootClassName, className, svgClassName, id, name, label } = props;
+const FieldCheckboxComponent = props => {
+  const { rootClassName, className, svgClassName, id, label, input, meta, ...rest } = props;
 
   const classes = classNames(rootClassName || css.root, className);
 
+  const { value, ...inputProps } = input;
+  const checked = value === true;
+
+  const checkboxProps = {
+    id,
+    className: css.input,
+    type: 'checkbox',
+    checked,
+    ...inputProps,
+    ...rest,
+  };
+
   return (
     <span className={classes}>
-      <Field id={id} name={name} className={css.input} type="checkbox" component="input" />
+      <input {...checkboxProps} />
       <label htmlFor={id} className={css.label}>
         <span className={css.checkboxWrapper}>
           <IconCheckbox className={svgClassName} />
         </span>
         <span className={css.text}>{label}</span>
       </label>
+      <ValidationError fieldMeta={meta} />
     </span>
   );
 };
 
-FieldCheckbox.defaultProps = {
+FieldCheckboxComponent.defaultProps = {
   className: null,
   rootClassName: null,
   svgClassName: null,
   label: null,
 };
 
-FieldCheckbox.propTypes = {
+FieldCheckboxComponent.propTypes = {
   className: string,
   rootClassName: string,
   svgClassName: string,
   id: string.isRequired,
-  name: string.isRequired,
   label: node,
+
+  // redux-form Field params
+  input: shape({ value: any }).isRequired,
+  meta: object.isRequired,
+};
+
+const FieldCheckbox = props => {
+  return <Field component={FieldCheckboxComponent} {...props} />;
 };
 
 export default FieldCheckbox;
