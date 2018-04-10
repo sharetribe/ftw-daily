@@ -34,103 +34,59 @@ exports[`ListingPage matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <div>
-          <div
-            onClick={[Function]}
-          >
-            <div
-              onClick={[Function]}
-            >
-              <ActionBarMaybe
-                editParams={
-                  Object {
-                    "id": "listing1",
-                    "slug": "listing1-title",
-                    "tab": "description",
-                    "type": "edit",
-                  }
-                }
-                isOwnListing={false}
-                listing={
-                  Object {
-                    "attributes": Object {
-                      "deleted": false,
-                      "description": "listing1 description",
-                      "geolocation": LatLng {
-                        "lat": 40,
-                        "lng": 60,
-                      },
-                      "price": Money {
-                        "amount": 5500,
-                        "currency": "USD",
-                      },
-                      "publicData": Object {},
-                      "state": "published",
-                      "title": "listing1 title",
-                    },
-                    "author": Object {
-                      "attributes": Object {
-                        "banned": false,
-                        "profile": Object {
-                          "abbreviatedName": "TT",
-                          "displayName": "user-1 display name",
-                        },
-                      },
-                      "id": UUID {
-                        "uuid": "user-1",
-                      },
-                      "type": "user",
-                    },
-                    "id": UUID {
-                      "uuid": "listing1",
-                    },
-                    "images": Array [],
-                    "type": "listing",
-                  }
-                }
-              />
-            </div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
+        <SectionImages
+          editParams={
+            Object {
+              "id": "listing1",
+              "slug": "listing1-title",
+              "tab": "description",
+              "type": "edit",
+            }
+          }
+          handleViewPhotosClick={[Function]}
+          imageCarouselOpen={false}
+          isOwnListing={false}
+          listing={
+            Object {
+              "attributes": Object {
+                "deleted": false,
+                "description": "listing1 description",
+                "geolocation": LatLng {
+                  "lat": 40,
+                  "lng": 60,
+                },
+                "price": Money {
+                  "amount": 5500,
+                  "currency": "USD",
+                },
+                "publicData": Object {},
+                "state": "published",
+                "title": "listing1 title",
+              },
+              "author": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "user-1 display name",
                   },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                  Object {
-                    "name": "landscape-crop4x",
-                    "size": "1600w",
-                  },
-                  Object {
-                    "name": "landscape-crop6x",
-                    "size": "2400w",
-                  },
-                ]
-              }
-              noImageMessage={null}
-              rootClassName={null}
-              sizes="100vw"
-            />
-          </div>
-        </div>
-        <InjectIntl(ModalComponent)
-          id="ListingPage.imageCarousel"
-          isOpen={false}
-          lightCloseButton={true}
-          onClose={[Function]}
+                },
+                "id": UUID {
+                  "uuid": "user-1",
+                },
+                "type": "user",
+              },
+              "id": UUID {
+                "uuid": "listing1",
+              },
+              "images": Array [],
+              "type": "listing",
+            }
+          }
+          onImageCarouselClose={[Function]}
           onManageDisableScrolling={[Function]}
-        >
-          <InjectIntl(ImageCarousel)
-            images={Array []}
-          />
-        </InjectIntl(ModalComponent)>
+          title="listing1 title"
+        />
         <div>
           <div>
             <NamedLink

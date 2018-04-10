@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import { arrayOf, bool, func, object, shape, string, oneOf, oneOfType } from 'prop-types';
+import { arrayOf, bool, func, shape, string, oneOf } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
@@ -23,11 +22,9 @@ import {
   Button,
   ModalInMobile,
   Page,
-  ResponsiveImage,
   NamedLink,
   NamedRedirect,
   Modal,
-  ImageCarousel,
   InlineTextButton,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
@@ -41,7 +38,7 @@ import {
 import { BookingDatesForm, TopbarContainer, EnquiryForm, NotFoundPage } from '../../containers';
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
-import EditIcon from './EditIcon';
+import SectionImages from './SectionImages';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import css from './ListingPage.css';
@@ -65,56 +62,6 @@ const priceData = (price, intl) => {
   }
   return {};
 };
-
-export const ActionBarMaybe = props => {
-  const { isOwnListing, listing, editParams } = props;
-  const state = listing.attributes.state;
-  const isPendingApproval = state === LISTING_STATE_PENDING_APPROVAL;
-  const isClosed = state === LISTING_STATE_CLOSED;
-
-  if (isOwnListing) {
-    let ownListingTextTranslationId = 'ListingPage.ownListing';
-
-    if (isPendingApproval) {
-      ownListingTextTranslationId = 'ListingPage.ownListingPendingApproval';
-    } else if (isClosed) {
-      ownListingTextTranslationId = 'ListingPage.ownClosedListing';
-    }
-
-    const ownListingTextClasses = classNames(css.ownListingText, {
-      [css.ownListingTextPendingApproval]: isPendingApproval,
-    });
-
-    return (
-      <div className={css.actionBar}>
-        <p className={ownListingTextClasses}>
-          <FormattedMessage id={ownListingTextTranslationId} />
-        </p>
-        <NamedLink className={css.editListingLink} name="EditListingPage" params={editParams}>
-          <EditIcon className={css.editIcon} />
-          <FormattedMessage id="ListingPage.editListing" />
-        </NamedLink>
-      </div>
-    );
-  } else if (isClosed) {
-    return (
-      <div className={css.actionBar}>
-        <p className={css.closedListingText}>
-          <FormattedMessage id="ListingPage.closedListing" />
-        </p>
-      </div>
-    );
-  }
-  return null;
-};
-
-ActionBarMaybe.propTypes = {
-  isOwnListing: bool.isRequired,
-  listing: oneOfType([propTypes.listing, propTypes.ownListing]).isRequired,
-  editParams: object.isRequired,
-};
-
-ActionBarMaybe.displayName = 'ActionBarMaybe';
 
 const openBookModal = (history, listing) => {
   if (!listing.id) {
@@ -363,9 +310,6 @@ export class ListingPageComponent extends Component {
       );
     }
 
-    const hasImages = currentListing.images && currentListing.images.length > 0;
-    const firstImage = hasImages ? currentListing.images[0] : null;
-
     const handleViewPhotosClick = e => {
       // Stop event from bubbling up to prevent image click handler
       // trying to open the carousel as well.
@@ -374,15 +318,6 @@ export class ListingPageComponent extends Component {
         imageCarouselOpen: true,
       });
     };
-    const viewPhotosButton = hasImages ? (
-      <button className={css.viewPhotos} onClick={handleViewPhotosClick}>
-        <FormattedMessage
-          id="ListingPage.viewImagesButton"
-          values={{ count: currentListing.images.length }}
-        />
-      </button>
-    ) : null;
-
     const authorAvailable = currentListing && currentListing.author;
     const userAndListingAuthorAvailable = !!(currentUser && authorAvailable);
     const isOwnListing =
@@ -442,18 +377,6 @@ export class ListingPageComponent extends Component {
         openBookModal(history, currentListing);
       }
     };
-
-    // Action bar is wrapped with a div that prevents the click events
-    // to the parent that would otherwise open the image carousel
-    const actionBar = currentListing.id ? (
-      <div onClick={e => e.stopPropagation()}>
-        <ActionBarMaybe
-          isOwnListing={isOwnListing}
-          listing={currentListing}
-          editParams={editParams}
-        />
-      </div>
-    ) : null;
 
     const listingImages = (listing, variantName) =>
       (listing.images || [])
@@ -517,36 +440,16 @@ export class ListingPageComponent extends Component {
           <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
           <LayoutWrapperMain>
             <div>
-              <div className={css.threeToTwoWrapper}>
-                <div className={css.aspectWrapper} onClick={handleViewPhotosClick}>
-                  {actionBar}
-                  <ResponsiveImage
-                    rootClassName={css.rootForImage}
-                    alt={title}
-                    image={firstImage}
-                    nameSet={[
-                      { name: 'landscape-crop', size: '400w' },
-                      { name: 'landscape-crop2x', size: '800w' },
-                      { name: 'landscape-crop4x', size: '1600w' },
-                      { name: 'landscape-crop6x', size: '2400w' },
-                    ]}
-                    sizes="100vw"
-                  />
-                  {viewPhotosButton}
-                </div>
-              </div>
-              <Modal
-                id="ListingPage.imageCarousel"
-                scrollLayerClassName={css.carouselModalScrollLayer}
-                containerClassName={css.carouselModalContainer}
-                lightCloseButton
-                isOpen={this.state.imageCarouselOpen}
-                onClose={() => this.setState({ imageCarouselOpen: false })}
+              <SectionImages
+                title={title}
+                listing={currentListing}
+                isOwnListing={isOwnListing}
+                editParams={editParams}
+                imageCarouselOpen={this.state.imageCarouselOpen}
+                onImageCarouselClose={() => this.setState({ imageCarouselOpen: false })}
+                handleViewPhotosClick={handleViewPhotosClick}
                 onManageDisableScrolling={onManageDisableScrolling}
-              >
-                <ImageCarousel images={currentListing.images} />
-              </Modal>
-
+              />
               <div className={css.contentContainer}>
                 <div className={css.avatarWrapper}>
                   <NamedLink name="ListingPage" params={params} to={{ hash: '#host' }}>

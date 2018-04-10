@@ -24,7 +24,8 @@ import { showListingRequest, showListingError, showListing } from './ListingPage
 // Otherwise, ListingPage itself is not initialized correctly when routeConfiguration is imported
 // (loadData call fails).
 import routeConfiguration from '../../routeConfiguration';
-import { ListingPageComponent, ActionBarMaybe } from './ListingPage';
+import { ListingPageComponent } from './ListingPage';
+import ActionBarMaybe from './ActionBarMaybe';
 
 const { UUID } = sdkTypes;
 const noop = () => null;
