@@ -88,74 +88,29 @@ exports[`ListingPage matches snapshot 1`] = `
           title="listing1 title"
         />
         <div>
-          <div>
-            <NamedLink
-              name="ListingPage"
-              params={
-                Object {
-                  "id": "listing1",
-                  "slug": "listing1-title",
-                }
+          <SectionAvatar
+            params={
+              Object {
+                "id": "listing1",
+                "slug": "listing1-title",
               }
-              to={
-                Object {
-                  "hash": "#host",
-                }
+            }
+            user={
+              Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "user-1 display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "user-1",
+                },
+                "type": "user",
               }
-            >
-              <AvatarLarge
-                disableProfileLink={true}
-                user={
-                  Object {
-                    "attributes": Object {
-                      "banned": false,
-                      "profile": Object {
-                        "abbreviatedName": "TT",
-                        "displayName": "user-1 display name",
-                      },
-                    },
-                    "id": UUID {
-                      "uuid": "user-1",
-                    },
-                    "type": "user",
-                  }
-                }
-              />
-            </NamedLink>
-            <NamedLink
-              name="ListingPage"
-              params={
-                Object {
-                  "id": "listing1",
-                  "slug": "listing1-title",
-                }
-              }
-              to={
-                Object {
-                  "hash": "#host",
-                }
-              }
-            >
-              <AvatarMedium
-                disableProfileLink={true}
-                user={
-                  Object {
-                    "attributes": Object {
-                      "banned": false,
-                      "profile": Object {
-                        "abbreviatedName": "TT",
-                        "displayName": "user-1 display name",
-                      },
-                    },
-                    "id": UUID {
-                      "uuid": "user-1",
-                    },
-                    "type": "user",
-                  }
-                }
-              />
-            </NamedLink>
-          </div>
+            }
+          />
           <div>
             <SectionHeading
               category={null}

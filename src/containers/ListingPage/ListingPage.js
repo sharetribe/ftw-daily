@@ -17,8 +17,6 @@ import { richText } from '../../util/richText';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import {
-  AvatarLarge,
-  AvatarMedium,
   Page,
   NamedLink,
   NamedRedirect,
@@ -32,6 +30,7 @@ import { TopbarContainer, NotFoundPage } from '../../containers';
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
+import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
 import SectionDescription from './SectionDescription';
 import SectionFeatures from './SectionFeatures';
@@ -422,23 +421,7 @@ export class ListingPageComponent extends Component {
                 onManageDisableScrolling={onManageDisableScrolling}
               />
               <div className={css.contentContainer}>
-                <div className={css.avatarWrapper}>
-                  <NamedLink name="ListingPage" params={params} to={{ hash: '#host' }}>
-                    <AvatarLarge
-                      user={currentAuthor}
-                      className={css.avatarDesktop}
-                      disableProfileLink
-                    />
-                  </NamedLink>
-                  <NamedLink name="ListingPage" params={params} to={{ hash: '#host' }}>
-                    <AvatarMedium
-                      user={currentAuthor}
-                      className={css.avatarMobile}
-                      disableProfileLink
-                    />
-                  </NamedLink>
-                </div>
-
+                <SectionAvatar user={currentAuthor} params={params} />
                 <div className={css.mainContent}>
                   <SectionHeading
                     priceTitle={priceTitle}
