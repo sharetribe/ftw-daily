@@ -32,7 +32,6 @@ import {
   Footer,
   UserCard,
   Reviews,
-  PropertyGroup,
 } from '../../components';
 import { BookingDatesForm, TopbarContainer, EnquiryForm, NotFoundPage } from '../../containers';
 
@@ -40,6 +39,7 @@ import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
 import SectionHeading from './SectionHeading';
 import SectionDescription from './SectionDescription';
+import SectionFeatures from './SectionFeatures';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import css from './ListingPage.css';
@@ -479,19 +479,10 @@ export class ListingPageComponent extends Component {
                     onContactUser={this.onContactUser}
                   />
                   <SectionDescription description={description} />
-
-                  <div className={css.featuresContainer}>
-                    <h2 className={css.featuresTitle}>
-                      <FormattedMessage id="ListingPage.featuresTitle" />
-                    </h2>
-                    <PropertyGroup
-                      id="ListingPage.amenities"
-                      options={config.custom.amenities}
-                      selectedOptions={publicData.amenities}
-                      twoColumns={true}
-                    />
-                  </div>
-
+                  <SectionFeatures
+                    options={config.custom.amenities}
+                    selectedOptions={publicData.amenities}
+                  />
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}

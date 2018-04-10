@@ -195,57 +195,44 @@ exports[`ListingPage matches snapshot 1`] = `
             <SectionDescription
               description="listing1 description"
             />
-            <div>
-              <h2>
-                <FormattedMessage
-                  id="ListingPage.featuresTitle"
-                  values={Object {}}
-                />
-              </h2>
-              <PropertyGroup
-                className={null}
-                id="ListingPage.amenities"
-                options={
-                  Array [
-                    Object {
-                      "key": "towels",
-                      "label": "Towels",
-                    },
-                    Object {
-                      "key": "bathroom",
-                      "label": "Bathroom",
-                    },
-                    Object {
-                      "key": "swimming_pool",
-                      "label": "Swimming pool",
-                    },
-                    Object {
-                      "key": "own_drinks",
-                      "label": "Own drinks allowed",
-                    },
-                    Object {
-                      "key": "jacuzzi",
-                      "label": "Jacuzzi",
-                    },
-                    Object {
-                      "key": "audiovisual_entertainment",
-                      "label": "Audiovisual entertainment",
-                    },
-                    Object {
-                      "key": "barbeque",
-                      "label": "Barbeque",
-                    },
-                    Object {
-                      "key": "own_food_allowed",
-                      "label": "Own food allowed",
-                    },
-                  ]
-                }
-                rootClassName={null}
-                selectedOptions={Array []}
-                twoColumns={true}
-              />
-            </div>
+            <SectionFeatures
+              options={
+                Array [
+                  Object {
+                    "key": "towels",
+                    "label": "Towels",
+                  },
+                  Object {
+                    "key": "bathroom",
+                    "label": "Bathroom",
+                  },
+                  Object {
+                    "key": "swimming_pool",
+                    "label": "Swimming pool",
+                  },
+                  Object {
+                    "key": "own_drinks",
+                    "label": "Own drinks allowed",
+                  },
+                  Object {
+                    "key": "jacuzzi",
+                    "label": "Jacuzzi",
+                  },
+                  Object {
+                    "key": "audiovisual_entertainment",
+                    "label": "Audiovisual entertainment",
+                  },
+                  Object {
+                    "key": "barbeque",
+                    "label": "Barbeque",
+                  },
+                  Object {
+                    "key": "own_food_allowed",
+                    "label": "Own food allowed",
+                  },
+                ]
+              }
+            />
             <SectionRulesMaybe
               className={null}
               publicData={Object {}}
