@@ -244,7 +244,6 @@ export class SearchPageComponent extends Component {
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             customURLParamToConfig={customURLParamToConfig}
             primaryFilters={{ amenities, categories }}
-            secondaryFilters={{ amenities, categories }}
           />
           <ModalInMobile
             className={css.mapPanel}

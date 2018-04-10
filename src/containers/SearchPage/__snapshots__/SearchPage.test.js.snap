@@ -74,30 +74,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       searchListingsError={null}
       searchParamsAreInSync={true}
       searchParamsForPagination={Object {}}
-      secondaryFilters={
-        Object {
-          "amenities": Array [
-            Object {
-              "key": "dog1",
-              "label": "Dog 1",
-            },
-            Object {
-              "key": "dog2",
-              "label": "Dog 2",
-            },
-          ],
-          "categories": Array [
-            Object {
-              "key": "cat1",
-              "label": "Cat 1",
-            },
-            Object {
-              "key": "cat2",
-              "label": "Cat 2",
-            },
-          ],
-        }
-      }
+      secondaryFilters={null}
       showAsModalMaxWidth={768}
       urlQueryParams={Object {}}
     />
