@@ -11,6 +11,7 @@ import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import config from '../../config';
 import { Form, PrimaryButton, FieldDateRangeInput } from '../../components';
+import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 
 import css from './BookingDatesForm.css';
 
@@ -91,13 +92,28 @@ export class BookingDatesFormComponent extends Component {
     });
     const endDateErrorMessage = intl.formatMessage({ id: 'FieldDateRangeInput.invalidEndDate' });
 
-    const hasBookingInfo = startDate && endDate;
-    const bookingInfo = hasBookingInfo ? (
+    // This is the place to collect breakdown estimation data. See the
+    // EstimatedBreakdownMaybe component to change the calculations
+    // for customised payment processes.
+    const bookingData =
+      startDate && endDate
+        ? {
+            unitType,
+            unitPrice,
+            startDate,
+            endDate,
+
+            // NOTE: If unitType is `line-item/units`, a new picker
+            // for the quantity should be added to the form.
+            quantity: 1,
+          }
+        : null;
+    const bookingInfo = bookingData ? (
       <div className={css.priceBreakdownContainer}>
         <h3 className={css.priceBreakdownTitle}>
           <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
         </h3>
-        {/*estimatedBreakdown(unitType, startDate, endDate, unitPrice)*/}
+        <EstimatedBreakdownMaybe bookingData={bookingData} />
       </div>
     ) : null;
 

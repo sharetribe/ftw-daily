@@ -1,3 +1,31 @@
+/**
+ * Booking breakdown estimation
+ *
+ * Transactions have payment information that can be shown with the
+ * BookingBreakdown component. However, when selecting booking
+ * details, there is no transaction object present and we have to
+ * estimate the breakdown of the transaction without data from the
+ * API.
+ *
+ * If the payment process of a customised marketplace is something
+ * else that simply daily or nightly bookings, the estimation will
+ * most likely need some changes.
+ *
+ * To customise the estimation, first change the BookingDatesForm to
+ * collect all booking information from the user (in addition to the
+ * default date pickers), and provide that data to the
+ * EstimatedBreakdownMaybe components. You can then make customisation
+ * within this file to create a fake transaction object that
+ * calculates the breakdown information correctly according to the
+ * process.
+ *
+ * In the future, the optimal scenario would be to use the same
+ * transactions.initiateSpeculative API endpoint as the CheckoutPage
+ * is using to get the breakdown information from the API, but
+ * currently the API doesn't support that for logged out users, and we
+ * are forces to estimating the information here.
+ */
+import React from 'react';
 import moment from 'moment';
 import Decimal from 'decimal.js';
 import { types as sdkTypes } from '../../util/sdkLoader';
@@ -93,15 +121,16 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
   };
 };
 
-const estimatedBreakdown = (unitType, bookingStart, bookingEnd, unitPrice, quantity) => {
+const EstimatedBreakdownMaybe = props => {
+  const { unitType, unitPrice, startDate, endDate, quantity } = props.bookingData;
   const isUnits = unitType === LINE_ITEM_UNITS;
   const quantityIfUsingUnits = !isUnits || Number.isInteger(quantity);
-  const canEstimatePrice = bookingStart && bookingEnd && unitPrice && quantityIfUsingUnits;
+  const canEstimatePrice = startDate && endDate && unitPrice && quantityIfUsingUnits;
   if (!canEstimatePrice) {
     return null;
   }
 
-  const tx = estimatedTransaction(unitType, bookingStart, bookingEnd, unitPrice, quantity);
+  const tx = estimatedTransaction(unitType, startDate, endDate, unitPrice, quantity);
 
   return (
     <BookingBreakdown
@@ -113,3 +142,5 @@ const estimatedBreakdown = (unitType, bookingStart, bookingEnd, unitPrice, quant
     />
   );
 };
+
+export default EstimatedBreakdownMaybe;
