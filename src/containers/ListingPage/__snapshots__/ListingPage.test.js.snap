@@ -328,95 +328,71 @@ exports[`ListingPage matches snapshot 1`] = `
               title="listing1 title"
             />
           </div>
-          <withViewport(ModalInMobileComponent)
-            id="BookingDatesFormInModal"
-            isModalOpenOnMobile={false}
-            onClose={[Function]}
-            onManageDisableScrolling={[Function]}
-            showAsModalMaxWidth={1023}
-          >
-            <div>
-              <h1>
-                <span>
-                  listing1
-                   
-                  title
-                </span>
-              </h1>
-              <div>
-                <span>
-                  <FormattedMessage
-                    id="ListingPage.hostedBy"
-                    values={
-                      Object {
-                        "name": "user-1 display name",
-                      }
-                    }
-                  />
-                </span>
-              </div>
-            </div>
-            <div>
-              <h2>
-                <FormattedMessage
-                  id="ListingPage.bookingTitle"
-                  values={
-                    Object {
-                      "title": <span>
-                        
-                        listing1
-                         
-                        title
-                        
-                    </span>,
-                    }
-                  }
-                />
-              </h2>
-              <div>
-                <FormattedMessage
-                  id="ListingPage.bookingHelp"
-                  values={Object {}}
-                />
-              </div>
-            </div>
-            <BookingDatesForm
-              isOwnListing={false}
-              onSubmit={[Function]}
-              price={
-                Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                }
+          <SectionBooking
+            authorDisplayName="user-1 display name"
+            formattedPrice={55}
+            handleBookButtonClick={[Function]}
+            handleBookingSubmit={[Function]}
+            handleMobileBookModalClose={[Function]}
+            isBook={false}
+            isClosed={false}
+            isOwnListing={false}
+            listing={
+              Object {
+                "attributes": Object {
+                  "deleted": false,
+                  "description": "listing1 description",
+                  "geolocation": LatLng {
+                    "lat": 40,
+                    "lng": 60,
+                  },
+                  "price": Money {
+                    "amount": 5500,
+                    "currency": "USD",
+                  },
+                  "publicData": Object {},
+                  "state": "published",
+                  "title": "listing1 title",
+                },
+                "author": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user-1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user-1",
+                  },
+                  "type": "user",
+                },
+                "id": UUID {
+                  "uuid": "listing1",
+                },
+                "images": Array [],
+                "type": "listing",
               }
-              unitType="line-item/night"
-            />
-          </withViewport(ModalInMobileComponent)>
-          <div>
-            <div>
-              <div
-                title={55}
-              >
-                55
-              </div>
-              <div>
-                <FormattedMessage
-                  id="ListingPage.perUnit"
-                  values={Object {}}
-                />
-              </div>
-            </div>
-            <Button
-              className={null}
-              disabled={false}
-              inProgress={false}
-              onClick={[Function]}
-              ready={false}
-              rootClassName={null}
-            >
-              ListingPage.ctaButtonMessage
-            </Button>
-          </div>
+            }
+            onManageDisableScrolling={[Function]}
+            price={
+              Money {
+                "amount": 5500,
+                "currency": "USD",
+              }
+            }
+            priceTitle={55}
+            richTitle={
+              <span>
+                
+                listing1
+                 
+                title
+                
+              </span>
+            }
+            unitType="line-item/night"
+          />
         </div>
       </div>
     </LayoutWrapperMain>

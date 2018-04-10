@@ -19,8 +19,6 @@ import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck
 import {
   AvatarLarge,
   AvatarMedium,
-  Button,
-  ModalInMobile,
   Page,
   NamedLink,
   NamedRedirect,
@@ -30,7 +28,7 @@ import {
   LayoutWrapperFooter,
   Footer,
 } from '../../components';
-import { BookingDatesForm, TopbarContainer, NotFoundPage } from '../../containers';
+import { TopbarContainer, NotFoundPage } from '../../containers';
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
@@ -41,10 +39,9 @@ import SectionReviews from './SectionReviews';
 import SectionHost from './SectionHost';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
+import SectionBooking from './SectionBooking';
 import css from './ListingPage.css';
 
-// This defines when ModalInMobile shows content as Modal
-const MODAL_BREAKPOINT = 1023;
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
 const { UUID } = sdkTypes;
@@ -332,26 +329,7 @@ export class ListingPageComponent extends Component {
     });
     const authorDisplayName = userDisplayName(ensuredAuthor, bannedUserDisplayName);
 
-    const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' });
     const { formattedPrice, priceTitle } = priceData(price, intl);
-
-    const showClosedListingHelpText = currentListing.id && isClosed;
-    const bookingHeading = (
-      <div className={css.bookingHeading}>
-        <h2 className={css.bookingTitle}>
-          <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
-        </h2>
-        <div className={css.bookingHelp}>
-          <FormattedMessage
-            id={
-              showClosedListingHelpText
-                ? 'ListingPage.bookingHelpClosedListing'
-                : 'ListingPage.bookingHelp'
-            }
-          />
-        </div>
-      </div>
-    );
 
     const handleMobileBookModalClose = () => {
       closeBookModal(history, currentListing);
@@ -498,60 +476,22 @@ export class ListingPageComponent extends Component {
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
                 </div>
-
-                <ModalInMobile
-                  className={css.modalInMobile}
-                  containerClassName={css.modalContainer}
-                  id="BookingDatesFormInModal"
-                  isModalOpenOnMobile={isBook}
-                  onClose={handleMobileBookModalClose}
-                  showAsModalMaxWidth={MODAL_BREAKPOINT}
+                <SectionBooking
+                  listing={currentListing}
+                  isOwnListing={isOwnListing}
+                  isClosed={isClosed}
+                  isBook={isBook}
+                  unitType={unitType}
+                  price={price}
+                  formattedPrice={formattedPrice}
+                  priceTitle={priceTitle}
+                  handleBookingSubmit={handleBookingSubmit}
+                  richTitle={richTitle}
+                  authorDisplayName={authorDisplayName}
+                  handleBookButtonClick={handleBookButtonClick}
+                  handleMobileBookModalClose={handleMobileBookModalClose}
                   onManageDisableScrolling={onManageDisableScrolling}
-                >
-                  <div className={css.modalHeading}>
-                    <h1 className={css.title}>{richTitle}</h1>
-                    <div className={css.author}>
-                      <span className={css.authorName}>
-                        <FormattedMessage
-                          id="ListingPage.hostedBy"
-                          values={{ name: authorDisplayName }}
-                        />
-                      </span>
-                    </div>
-                  </div>
-
-                  {bookingHeading}
-                  {!isClosed ? (
-                    <BookingDatesForm
-                      className={css.bookingForm}
-                      submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
-                      unitType={unitType}
-                      onSubmit={handleBookingSubmit}
-                      price={price}
-                      isOwnListing={isOwnListing}
-                    />
-                  ) : null}
-                </ModalInMobile>
-                <div className={css.openBookingForm}>
-                  <div className={css.priceContainer}>
-                    <div className={css.priceValue} title={priceTitle}>
-                      {formattedPrice}
-                    </div>
-                    <div className={css.perUnit}>
-                      <FormattedMessage id="ListingPage.perUnit" />
-                    </div>
-                  </div>
-
-                  {!isClosed ? (
-                    <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
-                      {bookBtnMessage}
-                    </Button>
-                  ) : (
-                    <div className={css.closedListingButton}>
-                      <FormattedMessage id="ListingPage.closedListingButtonText" />
-                    </div>
-                  )}
-                </div>
+                />
               </div>
             </div>
           </LayoutWrapperMain>
