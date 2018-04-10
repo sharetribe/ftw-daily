@@ -95,8 +95,6 @@ const categoryLabel = (categories, key) => {
   return cat ? cat.label : key;
 };
 
-// TODO: price unit (per x), custom fields, contact, reviews
-// N.B. All the presentational content needs to be extracted to their own components
 export class ListingPageComponent extends Component {
   constructor(props) {
     super(props);
@@ -199,6 +197,8 @@ export class ListingPageComponent extends Component {
       fetchReviewsError,
       sendEnquiryInProgress,
       sendEnquiryError,
+      categoriesConfig,
+      amenitiesConfig,
     } = this.props;
 
     const isBook = !!parse(location.search).book;
@@ -249,7 +249,7 @@ export class ListingPageComponent extends Component {
     const category =
       publicData && publicData.category ? (
         <span>
-          {categoryLabel(config.custom.categories, publicData.category)}
+          {categoryLabel(categoriesConfig, publicData.category)}
           <span className={css.separator}>•</span>
         </span>
       ) : null;
@@ -434,7 +434,7 @@ export class ListingPageComponent extends Component {
                   />
                   <SectionDescription description={description} />
                   <SectionFeatures
-                    options={config.custom.amenities}
+                    options={amenitiesConfig}
                     selectedOptions={publicData.amenities}
                   />
                   <SectionRulesMaybe publicData={publicData} />
@@ -495,6 +495,8 @@ ListingPageComponent.defaultProps = {
   reviews: [],
   fetchReviewsError: null,
   sendEnquiryError: null,
+  categoriesConfig: config.custom.categories,
+  amenitiesConfig: config.custom.amenities,
 };
 
 ListingPageComponent.propTypes = {
