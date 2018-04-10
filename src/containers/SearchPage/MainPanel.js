@@ -89,6 +89,7 @@ class MainPanel extends Component {
           onOpenModal={onOpenModal}
           onCloseModal={onCloseModal}
           {...primaryFilters}
+          {...secondaryFilters}
         />
         {isSearchFiltersPanelOpen ? (
           <div className={classNames(css.searchFiltersPanel)}>
