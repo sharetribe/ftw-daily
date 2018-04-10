@@ -34,300 +34,140 @@ exports[`ListingPage matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
+        <SectionImages
+          editParams={
+            Object {
+              "id": "listing1",
+              "slug": "listing1-title",
+              "tab": "description",
+              "type": "edit",
+            }
+          }
+          handleViewPhotosClick={[Function]}
+          imageCarouselOpen={false}
+          isOwnListing={false}
+          listing={
+            Object {
+              "attributes": Object {
+                "deleted": false,
+                "description": "listing1 description",
+                "geolocation": LatLng {
+                  "lat": 40,
+                  "lng": 60,
+                },
+                "price": Money {
+                  "amount": 5500,
+                  "currency": "USD",
+                },
+                "publicData": Object {},
+                "state": "published",
+                "title": "listing1 title",
+              },
+              "author": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "user-1 display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "user-1",
+                },
+                "type": "user",
+              },
+              "id": UUID {
+                "uuid": "listing1",
+              },
+              "images": Array [],
+              "type": "listing",
+            }
+          }
+          onImageCarouselClose={[Function]}
+          onManageDisableScrolling={[Function]}
+          title="listing1 title"
+        />
         <div>
-          <div
-            onClick={[Function]}
-          >
-            <div
-              onClick={[Function]}
-            >
-              <ActionBarMaybe
-                editParams={
-                  Object {
-                    "id": "listing1",
-                    "slug": "listing1-title",
-                    "tab": "description",
-                    "type": "edit",
+          <SectionAvatar
+            params={
+              Object {
+                "id": "listing1",
+                "slug": "listing1-title",
+              }
+            }
+            user={
+              Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "user-1 display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "user-1",
+                },
+                "type": "user",
+              }
+            }
+          />
+          <div>
+            <SectionHeading
+              category={null}
+              formattedPrice={55}
+              hostLink={
+                <NamedLink
+                  className={undefined}
+                  name="ListingPage"
+                  params={
+                    Object {
+                      "id": "listing1",
+                      "slug": "listing1-title",
+                    }
                   }
-                }
-                isOwnListing={false}
-                listing={
-                  Object {
-                    "attributes": Object {
-                      "deleted": false,
-                      "description": "listing1 description",
-                      "geolocation": LatLng {
-                        "lat": 40,
-                        "lng": 60,
-                      },
-                      "price": Money {
-                        "amount": 5500,
-                        "currency": "USD",
-                      },
-                      "publicData": Object {},
-                      "state": "published",
-                      "title": "listing1 title",
-                    },
-                    "author": Object {
-                      "attributes": Object {
-                        "banned": false,
-                        "profile": Object {
-                          "abbreviatedName": "TT",
-                          "displayName": "user-1 display name",
-                        },
-                      },
-                      "id": UUID {
-                        "uuid": "user-1",
-                      },
-                      "type": "user",
-                    },
-                    "id": UUID {
-                      "uuid": "listing1",
-                    },
-                    "images": Array [],
-                    "type": "listing",
+                  to={
+                    Object {
+                      "hash": "#host",
+                    }
                   }
-                }
-              />
-            </div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              nameSet={
+                >
+                  user-1 display name
+                </NamedLink>
+              }
+              onContactUser={[Function]}
+              priceTitle={55}
+              richTitle={
+                <span>
+                  
+                  listing1
+                   
+                  title
+                  
+                </span>
+              }
+              showContactUser={true}
+            />
+            <SectionDescription
+              description="listing1 description"
+            />
+            <SectionFeatures
+              options={
                 Array [
                   Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
+                    "key": "feat1",
+                    "label": "Feat 1",
                   },
                   Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
+                    "key": "feat2",
+                    "label": "Feat 2",
                   },
                   Object {
-                    "name": "landscape-crop4x",
-                    "size": "1600w",
-                  },
-                  Object {
-                    "name": "landscape-crop6x",
-                    "size": "2400w",
+                    "key": "feat3",
+                    "label": "Feat 3",
                   },
                 ]
               }
-              noImageMessage={null}
-              rootClassName={null}
-              sizes="100vw"
             />
-          </div>
-        </div>
-        <InjectIntl(ModalComponent)
-          id="ListingPage.imageCarousel"
-          isOpen={false}
-          lightCloseButton={true}
-          onClose={[Function]}
-          onManageDisableScrolling={[Function]}
-        >
-          <InjectIntl(ImageCarousel)
-            images={Array []}
-          />
-        </InjectIntl(ModalComponent)>
-        <div>
-          <div>
-            <NamedLink
-              name="ListingPage"
-              params={
-                Object {
-                  "id": "listing1",
-                  "slug": "listing1-title",
-                }
-              }
-              to={
-                Object {
-                  "hash": "#host",
-                }
-              }
-            >
-              <AvatarLarge
-                disableProfileLink={true}
-                user={
-                  Object {
-                    "attributes": Object {
-                      "banned": false,
-                      "profile": Object {
-                        "abbreviatedName": "TT",
-                        "displayName": "user-1 display name",
-                      },
-                    },
-                    "id": UUID {
-                      "uuid": "user-1",
-                    },
-                    "type": "user",
-                  }
-                }
-              />
-            </NamedLink>
-            <NamedLink
-              name="ListingPage"
-              params={
-                Object {
-                  "id": "listing1",
-                  "slug": "listing1-title",
-                }
-              }
-              to={
-                Object {
-                  "hash": "#host",
-                }
-              }
-            >
-              <AvatarMedium
-                disableProfileLink={true}
-                user={
-                  Object {
-                    "attributes": Object {
-                      "banned": false,
-                      "profile": Object {
-                        "abbreviatedName": "TT",
-                        "displayName": "user-1 display name",
-                      },
-                    },
-                    "id": UUID {
-                      "uuid": "user-1",
-                    },
-                    "type": "user",
-                  }
-                }
-              />
-            </NamedLink>
-          </div>
-          <div>
-            <div>
-              <div>
-                <div
-                  title={55}
-                >
-                  55
-                </div>
-                <div>
-                  <FormattedMessage
-                    id="ListingPage.perUnit"
-                    values={Object {}}
-                  />
-                </div>
-              </div>
-              <div>
-                <h1>
-                  <span>
-                    listing1
-                     
-                    title
-                  </span>
-                </h1>
-                <div>
-                  <FormattedMessage
-                    id="ListingPage.hostedBy"
-                    values={
-                      Object {
-                        "name": <NamedLink
-                          className={undefined}
-                          name="ListingPage"
-                          params={
-                              Object {
-                                  "id": "listing1",
-                                  "slug": "listing1-title",
-                                }
-                          }
-                          to={
-                              Object {
-                                  "hash": "#host",
-                                }
-                          }
-                      >
-                          user-1 display name
-                      </NamedLink>,
-                      }
-                    }
-                  />
-                  <span>
-                    <span>
-                      •
-                    </span>
-                    <InlineTextButton
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="ListingPage.contactUser"
-                        values={Object {}}
-                      />
-                    </InlineTextButton>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h2>
-                <FormattedMessage
-                  id="ListingPage.descriptionTitle"
-                  values={Object {}}
-                />
-              </h2>
-              <p>
-                listing1
-                 
-                description
-              </p>
-            </div>
-            <div>
-              <h2>
-                <FormattedMessage
-                  id="ListingPage.featuresTitle"
-                  values={Object {}}
-                />
-              </h2>
-              <PropertyGroup
-                className={null}
-                id="ListingPage.amenities"
-                options={
-                  Array [
-                    Object {
-                      "key": "towels",
-                      "label": "Towels",
-                    },
-                    Object {
-                      "key": "bathroom",
-                      "label": "Bathroom",
-                    },
-                    Object {
-                      "key": "swimming_pool",
-                      "label": "Swimming pool",
-                    },
-                    Object {
-                      "key": "own_drinks",
-                      "label": "Own drinks allowed",
-                    },
-                    Object {
-                      "key": "jacuzzi",
-                      "label": "Jacuzzi",
-                    },
-                    Object {
-                      "key": "audiovisual_entertainment",
-                      "label": "Audiovisual entertainment",
-                    },
-                    Object {
-                      "key": "barbeque",
-                      "label": "Barbeque",
-                    },
-                    Object {
-                      "key": "own_food_allowed",
-                      "label": "Own food allowed",
-                    },
-                  ]
-                }
-                rootClassName={null}
-                selectedOptions={Array []}
-                twoColumns={true}
-              />
-            </div>
             <SectionRulesMaybe
               className={null}
               publicData={Object {}}
@@ -349,56 +189,52 @@ exports[`ListingPage matches snapshot 1`] = `
               publicData={Object {}}
               rootClassName={null}
             />
-            <div>
-              <h2>
-                <FormattedMessage
-                  id="ListingPage.reviewsHeading"
-                  values={
-                    Object {
-                      "count": 0,
-                    }
-                  }
-                />
-              </h2>
-              <InjectIntl(ReviewsComponent)
-                reviews={Array []}
-              />
-            </div>
-            <div
-              id="host"
-            >
-              <h2>
-                <FormattedMessage
-                  id="ListingPage.yourHostHeading"
-                  values={Object {}}
-                />
-              </h2>
-              <UserCard
-                className={null}
-                currentUser={
-                  Object {
-                    "attributes": Object {
-                      "banned": false,
-                      "email": "user-2@example.com",
-                      "emailVerified": true,
-                      "profile": Object {
-                        "abbreviatedName": "user-2 abbreviated name",
-                        "displayName": "user-2 display name",
-                        "firstName": "user-2 first name",
-                        "lastName": "user-2 last name",
-                      },
-                      "stripeConnected": true,
+            <SectionReviews
+              fetchReviewsError={null}
+              reviews={Array []}
+            />
+            <SectionHost
+              authorDisplayName="user-1 display name"
+              currentUser={
+                Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "email": "user-2@example.com",
+                    "emailVerified": true,
+                    "profile": Object {
+                      "abbreviatedName": "user-2 abbreviated name",
+                      "displayName": "user-2 display name",
+                      "firstName": "user-2 first name",
+                      "lastName": "user-2 last name",
                     },
-                    "id": UUID {
-                      "uuid": "user-2",
-                    },
-                    "type": "currentUser",
-                  }
+                    "stripeConnected": true,
+                  },
+                  "id": UUID {
+                    "uuid": "user-2",
+                  },
+                  "type": "currentUser",
                 }
-                onContactUser={[Function]}
-                rootClassName={null}
-                user={
-                  Object {
+              }
+              isEnquiryModalOpen={false}
+              isOwnListing={false}
+              listing={
+                Object {
+                  "attributes": Object {
+                    "deleted": false,
+                    "description": "listing1 description",
+                    "geolocation": LatLng {
+                      "lat": 40,
+                      "lng": 60,
+                    },
+                    "price": Money {
+                      "amount": 5500,
+                      "currency": "USD",
+                    },
+                    "publicData": Object {},
+                    "state": "published",
+                    "title": "listing1 title",
+                  },
+                  "author": Object {
                     "attributes": Object {
                       "banned": false,
                       "profile": Object {
@@ -410,114 +246,88 @@ exports[`ListingPage matches snapshot 1`] = `
                       "uuid": "user-1",
                     },
                     "type": "user",
-                  }
-                }
-              />
-              <InjectIntl(ModalComponent)
-                id="ListingPage.enquiry"
-                isOpen={false}
-                onClose={[Function]}
-                onManageDisableScrolling={[Function]}
-              >
-                <ReduxForm
-                  authorDisplayName="user-1 display name"
-                  inProgress={false}
-                  listingTitle="listing1 title"
-                  onSubmit={[Function]}
-                  sendEnquiryError={null}
-                />
-              </InjectIntl(ModalComponent)>
-            </div>
-          </div>
-          <withViewport(ModalInMobileComponent)
-            id="BookingDatesFormInModal"
-            isModalOpenOnMobile={false}
-            onClose={[Function]}
-            onManageDisableScrolling={[Function]}
-            showAsModalMaxWidth={1023}
-          >
-            <div>
-              <h1>
-                <span>
-                  listing1
-                   
-                  title
-                </span>
-              </h1>
-              <div>
-                <span>
-                  <FormattedMessage
-                    id="ListingPage.hostedBy"
-                    values={
-                      Object {
-                        "name": "user-1 display name",
-                      }
-                    }
-                  />
-                </span>
-              </div>
-            </div>
-            <div>
-              <h2>
-                <FormattedMessage
-                  id="ListingPage.bookingTitle"
-                  values={
-                    Object {
-                      "title": <span>
-                        
-                        listing1
-                         
-                        title
-                        
-                    </span>,
-                    }
-                  }
-                />
-              </h2>
-              <div>
-                <FormattedMessage
-                  id="ListingPage.bookingHelp"
-                  values={Object {}}
-                />
-              </div>
-            </div>
-            <BookingDatesForm
-              isOwnListing={false}
-              onSubmit={[Function]}
-              price={
-                Money {
-                  "amount": 5500,
-                  "currency": "USD",
+                  },
+                  "id": UUID {
+                    "uuid": "listing1",
+                  },
+                  "images": Array [],
+                  "type": "listing",
                 }
               }
-              unitType="line-item/night"
+              onCloseEnquiryModal={[Function]}
+              onContactUser={[Function]}
+              onManageDisableScrolling={[Function]}
+              onSubmitEnquiry={[Function]}
+              sendEnquiryError={null}
+              sendEnquiryInProgress={false}
+              title="listing1 title"
             />
-          </withViewport(ModalInMobileComponent)>
-          <div>
-            <div>
-              <div
-                title={55}
-              >
-                55
-              </div>
-              <div>
-                <FormattedMessage
-                  id="ListingPage.perUnit"
-                  values={Object {}}
-                />
-              </div>
-            </div>
-            <Button
-              className={null}
-              disabled={false}
-              inProgress={false}
-              onClick={[Function]}
-              ready={false}
-              rootClassName={null}
-            >
-              ListingPage.ctaButtonMessage
-            </Button>
           </div>
+          <SectionBooking
+            authorDisplayName="user-1 display name"
+            formattedPrice={55}
+            handleBookButtonClick={[Function]}
+            handleBookingSubmit={[Function]}
+            handleMobileBookModalClose={[Function]}
+            isBook={false}
+            isClosed={false}
+            isOwnListing={false}
+            listing={
+              Object {
+                "attributes": Object {
+                  "deleted": false,
+                  "description": "listing1 description",
+                  "geolocation": LatLng {
+                    "lat": 40,
+                    "lng": 60,
+                  },
+                  "price": Money {
+                    "amount": 5500,
+                    "currency": "USD",
+                  },
+                  "publicData": Object {},
+                  "state": "published",
+                  "title": "listing1 title",
+                },
+                "author": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user-1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "user-1",
+                  },
+                  "type": "user",
+                },
+                "id": UUID {
+                  "uuid": "listing1",
+                },
+                "images": Array [],
+                "type": "listing",
+              }
+            }
+            onManageDisableScrolling={[Function]}
+            price={
+              Money {
+                "amount": 5500,
+                "currency": "USD",
+              }
+            }
+            priceTitle={55}
+            richTitle={
+              <span>
+                
+                listing1
+                 
+                title
+                
+              </span>
+            }
+            unitType="line-item/night"
+          />
         </div>
       </div>
     </LayoutWrapperMain>

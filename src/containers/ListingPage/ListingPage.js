@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import { arrayOf, bool, func, object, shape, string, oneOf, oneOfType } from 'prop-types';
+import { array, arrayOf, bool, func, shape, string, oneOf } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
@@ -18,38 +17,31 @@ import { richText } from '../../util/richText';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import {
-  AvatarLarge,
-  AvatarMedium,
-  Button,
-  ModalInMobile,
   Page,
-  ResponsiveImage,
   NamedLink,
   NamedRedirect,
-  Modal,
-  ImageCarousel,
-  InlineTextButton,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-  UserCard,
-  Reviews,
-  PropertyGroup,
 } from '../../components';
-import { BookingDatesForm, TopbarContainer, EnquiryForm, NotFoundPage } from '../../containers';
+import { TopbarContainer, NotFoundPage } from '../../containers';
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
-import EditIcon from './EditIcon';
+import SectionImages from './SectionImages';
+import SectionAvatar from './SectionAvatar';
+import SectionHeading from './SectionHeading';
+import SectionDescription from './SectionDescription';
+import SectionFeatures from './SectionFeatures';
+import SectionReviews from './SectionReviews';
+import SectionHost from './SectionHost';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
+import SectionBooking from './SectionBooking';
 import css from './ListingPage.css';
 
-// This defines when ModalInMobile shows content as Modal
-const MODAL_BREAKPOINT = 1023;
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
-const MIN_LENGTH_FOR_LONG_WORDS_IN_DESCRIPTION = 20;
 
 const { UUID } = sdkTypes;
 
@@ -65,56 +57,6 @@ const priceData = (price, intl) => {
   }
   return {};
 };
-
-export const ActionBarMaybe = props => {
-  const { isOwnListing, listing, editParams } = props;
-  const state = listing.attributes.state;
-  const isPendingApproval = state === LISTING_STATE_PENDING_APPROVAL;
-  const isClosed = state === LISTING_STATE_CLOSED;
-
-  if (isOwnListing) {
-    let ownListingTextTranslationId = 'ListingPage.ownListing';
-
-    if (isPendingApproval) {
-      ownListingTextTranslationId = 'ListingPage.ownListingPendingApproval';
-    } else if (isClosed) {
-      ownListingTextTranslationId = 'ListingPage.ownClosedListing';
-    }
-
-    const ownListingTextClasses = classNames(css.ownListingText, {
-      [css.ownListingTextPendingApproval]: isPendingApproval,
-    });
-
-    return (
-      <div className={css.actionBar}>
-        <p className={ownListingTextClasses}>
-          <FormattedMessage id={ownListingTextTranslationId} />
-        </p>
-        <NamedLink className={css.editListingLink} name="EditListingPage" params={editParams}>
-          <EditIcon className={css.editIcon} />
-          <FormattedMessage id="ListingPage.editListing" />
-        </NamedLink>
-      </div>
-    );
-  } else if (isClosed) {
-    return (
-      <div className={css.actionBar}>
-        <p className={css.closedListingText}>
-          <FormattedMessage id="ListingPage.closedListing" />
-        </p>
-      </div>
-    );
-  }
-  return null;
-};
-
-ActionBarMaybe.propTypes = {
-  isOwnListing: bool.isRequired,
-  listing: oneOfType([propTypes.listing, propTypes.ownListing]).isRequired,
-  editParams: object.isRequired,
-};
-
-ActionBarMaybe.displayName = 'ActionBarMaybe';
 
 const openBookModal = (history, listing) => {
   if (!listing.id) {
@@ -153,8 +95,6 @@ const categoryLabel = (categories, key) => {
   return cat ? cat.label : key;
 };
 
-// TODO: price unit (per x), custom fields, contact, reviews
-// N.B. All the presentational content needs to be extracted to their own components
 export class ListingPageComponent extends Component {
   constructor(props) {
     super(props);
@@ -257,6 +197,8 @@ export class ListingPageComponent extends Component {
       fetchReviewsError,
       sendEnquiryInProgress,
       sendEnquiryError,
+      categoriesConfig,
+      amenitiesConfig,
     } = this.props;
 
     const isBook = !!parse(location.search).book;
@@ -304,22 +246,7 @@ export class ListingPageComponent extends Component {
       </span>
     );
 
-    const category =
-      publicData && publicData.category ? (
-        <span>
-          {categoryLabel(config.custom.categories, publicData.category)}
-          <span className={css.separator}>•</span>
-        </span>
-      ) : null;
-
     const topbar = <TopbarContainer />;
-
-    const loadingTitle = intl.formatMessage({
-      id: 'ListingPage.loadingListingTitle',
-    });
-    const errorTitle = intl.formatMessage({
-      id: 'ListingPage.errorLoadingListingTitle',
-    });
 
     if (showListingError && showListingError.status === 404) {
       // 404 listing not found
@@ -327,6 +254,10 @@ export class ListingPageComponent extends Component {
       return <NotFoundPage />;
     } else if (showListingError) {
       // Other error in fetching listing
+
+      const errorTitle = intl.formatMessage({
+        id: 'ListingPage.errorLoadingListingTitle',
+      });
 
       return (
         <Page title={errorTitle} scrollingDisabled={scrollingDisabled}>
@@ -346,6 +277,10 @@ export class ListingPageComponent extends Component {
     } else if (!currentListing.id) {
       // Still loading the listing
 
+      const loadingTitle = intl.formatMessage({
+        id: 'ListingPage.loadingListingTitle',
+      });
+
       return (
         <Page title={loadingTitle} scrollingDisabled={scrollingDisabled}>
           <LayoutSingleColumn className={css.pageRoot}>
@@ -363,9 +298,6 @@ export class ListingPageComponent extends Component {
       );
     }
 
-    const hasImages = currentListing.images && currentListing.images.length > 0;
-    const firstImage = hasImages ? currentListing.images[0] : null;
-
     const handleViewPhotosClick = e => {
       // Stop event from bubbling up to prevent image click handler
       // trying to open the carousel as well.
@@ -374,15 +306,6 @@ export class ListingPageComponent extends Component {
         imageCarouselOpen: true,
       });
     };
-    const viewPhotosButton = hasImages ? (
-      <button className={css.viewPhotos} onClick={handleViewPhotosClick}>
-        <FormattedMessage
-          id="ListingPage.viewImagesButton"
-          values={{ count: currentListing.images.length }}
-        />
-      </button>
-    ) : null;
-
     const authorAvailable = currentListing && currentListing.author;
     const userAndListingAuthorAvailable = !!(currentUser && authorAvailable);
     const isOwnListing =
@@ -398,26 +321,7 @@ export class ListingPageComponent extends Component {
     });
     const authorDisplayName = userDisplayName(ensuredAuthor, bannedUserDisplayName);
 
-    const bookBtnMessage = intl.formatMessage({ id: 'ListingPage.ctaButtonMessage' });
     const { formattedPrice, priceTitle } = priceData(price, intl);
-
-    const showClosedListingHelpText = currentListing.id && isClosed;
-    const bookingHeading = (
-      <div className={css.bookingHeading}>
-        <h2 className={css.bookingTitle}>
-          <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
-        </h2>
-        <div className={css.bookingHelp}>
-          <FormattedMessage
-            id={
-              showClosedListingHelpText
-                ? 'ListingPage.bookingHelpClosedListing'
-                : 'ListingPage.bookingHelp'
-            }
-          />
-        </div>
-      </div>
-    );
 
     const handleMobileBookModalClose = () => {
       closeBookModal(history, currentListing);
@@ -432,8 +336,6 @@ export class ListingPageComponent extends Component {
       }
     };
 
-    const editParams = { id: listingId.uuid, slug: listingSlug, type: 'edit', tab: 'description' };
-
     const handleBookButtonClick = () => {
       const isCurrentlyClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
       if (isOwnListing || isCurrentlyClosed) {
@@ -442,18 +344,6 @@ export class ListingPageComponent extends Component {
         openBookModal(history, currentListing);
       }
     };
-
-    // Action bar is wrapped with a div that prevents the click events
-    // to the parent that would otherwise open the image carousel
-    const actionBar = currentListing.id ? (
-      <div onClick={e => e.stopPropagation()}>
-        <ActionBarMaybe
-          isOwnListing={isOwnListing}
-          listing={currentListing}
-          editParams={editParams}
-        />
-      </div>
-    ) : null;
 
     const listingImages = (listing, variantName) =>
       (listing.images || [])
@@ -490,11 +380,13 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-    const reviewsError = (
-      <h2 className={css.errorText}>
-        <FormattedMessage id="ListingPage.reviewsError" />
-      </h2>
-    );
+    const category =
+      publicData && publicData.category ? (
+        <span>
+          {categoryLabel(categoriesConfig, publicData.category)}
+          <span className={css.separator}>•</span>
+        </span>
+      ) : null;
 
     return (
       <Page
@@ -517,212 +409,76 @@ export class ListingPageComponent extends Component {
           <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
           <LayoutWrapperMain>
             <div>
-              <div className={css.threeToTwoWrapper}>
-                <div className={css.aspectWrapper} onClick={handleViewPhotosClick}>
-                  {actionBar}
-                  <ResponsiveImage
-                    rootClassName={css.rootForImage}
-                    alt={title}
-                    image={firstImage}
-                    nameSet={[
-                      { name: 'landscape-crop', size: '400w' },
-                      { name: 'landscape-crop2x', size: '800w' },
-                      { name: 'landscape-crop4x', size: '1600w' },
-                      { name: 'landscape-crop6x', size: '2400w' },
-                    ]}
-                    sizes="100vw"
-                  />
-                  {viewPhotosButton}
-                </div>
-              </div>
-              <Modal
-                id="ListingPage.imageCarousel"
-                scrollLayerClassName={css.carouselModalScrollLayer}
-                containerClassName={css.carouselModalContainer}
-                lightCloseButton
-                isOpen={this.state.imageCarouselOpen}
-                onClose={() => this.setState({ imageCarouselOpen: false })}
+              <SectionImages
+                title={title}
+                listing={currentListing}
+                isOwnListing={isOwnListing}
+                editParams={{
+                  id: listingId.uuid,
+                  slug: listingSlug,
+                  type: 'edit',
+                  tab: 'description',
+                }}
+                imageCarouselOpen={this.state.imageCarouselOpen}
+                onImageCarouselClose={() => this.setState({ imageCarouselOpen: false })}
+                handleViewPhotosClick={handleViewPhotosClick}
                 onManageDisableScrolling={onManageDisableScrolling}
-              >
-                <ImageCarousel images={currentListing.images} />
-              </Modal>
-
+              />
               <div className={css.contentContainer}>
-                <div className={css.avatarWrapper}>
-                  <NamedLink name="ListingPage" params={params} to={{ hash: '#host' }}>
-                    <AvatarLarge
-                      user={currentAuthor}
-                      className={css.avatarDesktop}
-                      disableProfileLink
-                    />
-                  </NamedLink>
-                  <NamedLink name="ListingPage" params={params} to={{ hash: '#host' }}>
-                    <AvatarMedium
-                      user={currentAuthor}
-                      className={css.avatarMobile}
-                      disableProfileLink
-                    />
-                  </NamedLink>
-                </div>
-
+                <SectionAvatar user={currentAuthor} params={params} />
                 <div className={css.mainContent}>
-                  <div className={css.headingContainer}>
-                    <div className={css.desktopPriceContainer}>
-                      <div className={css.desktopPriceValue} title={priceTitle}>
-                        {formattedPrice}
-                      </div>
-                      <div className={css.desktopPerUnit}>
-                        <FormattedMessage id="ListingPage.perUnit" />
-                      </div>
-                    </div>
-                    <div className={css.heading}>
-                      <h1 className={css.title}>{richTitle}</h1>
-                      <div className={css.author}>
-                        {category}
-                        <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />
-                        {showContactUser ? (
-                          <span className={css.contactWrapper}>
-                            <span className={css.separator}>•</span>
-                            <InlineTextButton
-                              className={css.contactLink}
-                              onClick={this.onContactUser}
-                            >
-                              <FormattedMessage id="ListingPage.contactUser" />
-                            </InlineTextButton>
-                          </span>
-                        ) : null}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className={css.descriptionContainer}>
-                    <h2 className={css.descriptionTitle}>
-                      <FormattedMessage id="ListingPage.descriptionTitle" />
-                    </h2>
-                    <p className={css.description}>
-                      {richText(description, {
-                        longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_DESCRIPTION,
-                        longWordClass: css.longWord,
-                      })}
-                    </p>
-                  </div>
-
-                  <div className={css.featuresContainer}>
-                    <h2 className={css.featuresTitle}>
-                      <FormattedMessage id="ListingPage.featuresTitle" />
-                    </h2>
-                    <PropertyGroup
-                      id="ListingPage.amenities"
-                      options={config.custom.amenities}
-                      selectedOptions={publicData.amenities}
-                      twoColumns={true}
-                    />
-                  </div>
-
+                  <SectionHeading
+                    priceTitle={priceTitle}
+                    formattedPrice={formattedPrice}
+                    richTitle={richTitle}
+                    category={category}
+                    hostLink={hostLink}
+                    showContactUser={showContactUser}
+                    onContactUser={this.onContactUser}
+                  />
+                  <SectionDescription description={description} />
+                  <SectionFeatures
+                    options={amenitiesConfig}
+                    selectedOptions={publicData.amenities}
+                  />
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
                     listingId={currentListing.id}
                   />
-
-                  <div className={css.reviewsContainer}>
-                    <h2 className={css.reviewsHeading}>
-                      <FormattedMessage
-                        id="ListingPage.reviewsHeading"
-                        values={{ count: reviews.length }}
-                      />
-                    </h2>
-                    {fetchReviewsError ? reviewsError : null}
-                    <Reviews reviews={reviews} />
-                  </div>
-                  <div id="host" className={css.yourHostContainer}>
-                    <h2 className={css.yourHostHeading}>
-                      <FormattedMessage id="ListingPage.yourHostHeading" />
-                    </h2>
-                    {isOwnListing ? (
-                      <NamedLink className={css.editProfileLink} name="ProfileSettingsPage">
-                        <FormattedMessage id="ListingPage.editProfileLink" />
-                      </NamedLink>
-                    ) : null}
-                    <UserCard
-                      user={currentListing.author}
-                      currentUser={currentUser}
-                      onContactUser={this.onContactUser}
-                    />
-                    <Modal
-                      id="ListingPage.enquiry"
-                      contentClassName={css.enquiryModalContent}
-                      isOpen={isAuthenticated && this.state.enquiryModalOpen}
-                      onClose={() => this.setState({ enquiryModalOpen: false })}
-                      onManageDisableScrolling={onManageDisableScrolling}
-                    >
-                      <EnquiryForm
-                        className={css.enquiryForm}
-                        submitButtonWrapperClassName={css.enquirySubmitButtonWrapper}
-                        listingTitle={title}
-                        authorDisplayName={authorDisplayName}
-                        sendEnquiryError={sendEnquiryError}
-                        onSubmit={this.onSubmitEnquiry}
-                        inProgress={sendEnquiryInProgress}
-                      />
-                    </Modal>
-                  </div>
+                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
+                  <SectionHost
+                    title={title}
+                    listing={currentListing}
+                    isOwnListing={isOwnListing}
+                    authorDisplayName={authorDisplayName}
+                    onContactUser={this.onContactUser}
+                    isEnquiryModalOpen={isAuthenticated && this.state.enquiryModalOpen}
+                    onCloseEnquiryModal={() => this.setState({ enquiryModalOpen: false })}
+                    sendEnquiryError={sendEnquiryError}
+                    sendEnquiryInProgress={sendEnquiryInProgress}
+                    onSubmitEnquiry={this.onSubmitEnquiry}
+                    currentUser={currentUser}
+                    onManageDisableScrolling={onManageDisableScrolling}
+                  />
                 </div>
-
-                <ModalInMobile
-                  className={css.modalInMobile}
-                  containerClassName={css.modalContainer}
-                  id="BookingDatesFormInModal"
-                  isModalOpenOnMobile={isBook}
-                  onClose={handleMobileBookModalClose}
-                  showAsModalMaxWidth={MODAL_BREAKPOINT}
+                <SectionBooking
+                  listing={currentListing}
+                  isOwnListing={isOwnListing}
+                  isClosed={isClosed}
+                  isBook={isBook}
+                  unitType={unitType}
+                  price={price}
+                  formattedPrice={formattedPrice}
+                  priceTitle={priceTitle}
+                  handleBookingSubmit={handleBookingSubmit}
+                  richTitle={richTitle}
+                  authorDisplayName={authorDisplayName}
+                  handleBookButtonClick={handleBookButtonClick}
+                  handleMobileBookModalClose={handleMobileBookModalClose}
                   onManageDisableScrolling={onManageDisableScrolling}
-                >
-                  <div className={css.modalHeading}>
-                    <h1 className={css.title}>{richTitle}</h1>
-                    <div className={css.author}>
-                      <span className={css.authorName}>
-                        <FormattedMessage
-                          id="ListingPage.hostedBy"
-                          values={{ name: authorDisplayName }}
-                        />
-                      </span>
-                    </div>
-                  </div>
-
-                  {bookingHeading}
-                  {!isClosed ? (
-                    <BookingDatesForm
-                      className={css.bookingForm}
-                      submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
-                      unitType={unitType}
-                      onSubmit={handleBookingSubmit}
-                      price={price}
-                      isOwnListing={isOwnListing}
-                    />
-                  ) : null}
-                </ModalInMobile>
-                <div className={css.openBookingForm}>
-                  <div className={css.priceContainer}>
-                    <div className={css.priceValue} title={priceTitle}>
-                      {formattedPrice}
-                    </div>
-                    <div className={css.perUnit}>
-                      <FormattedMessage id="ListingPage.perUnit" />
-                    </div>
-                  </div>
-
-                  {!isClosed ? (
-                    <Button rootClassName={css.bookButton} onClick={handleBookButtonClick}>
-                      {bookBtnMessage}
-                    </Button>
-                  ) : (
-                    <div className={css.closedListingButton}>
-                      <FormattedMessage id="ListingPage.closedListingButtonText" />
-                    </div>
-                  )}
-                </div>
+                />
               </div>
             </div>
           </LayoutWrapperMain>
@@ -743,6 +499,8 @@ ListingPageComponent.defaultProps = {
   reviews: [],
   fetchReviewsError: null,
   sendEnquiryError: null,
+  categoriesConfig: config.custom.categories,
+  amenitiesConfig: config.custom.amenities,
 };
 
 ListingPageComponent.propTypes = {
@@ -778,6 +536,9 @@ ListingPageComponent.propTypes = {
   sendEnquiryInProgress: bool.isRequired,
   sendEnquiryError: propTypes.error,
   onSendEnquiry: func.isRequired,
+
+  categoriesConfig: array,
+  amenitiesConfig: array,
 };
 
 const mapStateToProps = state => {

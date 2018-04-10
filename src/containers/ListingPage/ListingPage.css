@@ -17,6 +17,9 @@
   margin: 24px;
 }
 
+.sectionImages {
+}
+
 .threeToTwoWrapper {
   /* Layout */
   display: block;
@@ -216,7 +219,7 @@
   }
 }
 
-.avatarWrapper {
+.sectionAvatar {
   /* Position (over the listing image)*/
   margin-left: 24px;
   margin-top: -31px;
@@ -252,7 +255,7 @@
   }
 }
 
-.headingContainer {
+.sectionHeading {
   margin-top: 22px;
   margin-bottom: 34px;
 
@@ -356,7 +359,7 @@
   margin: 0;
 }
 
-.descriptionContainer {
+.sectionDescription {
   padding: 0 24px;
   margin-bottom: 35px;
 
@@ -379,7 +382,7 @@
   }
 }
 
-.featuresContainer {
+.sectionFeatures {
   padding: 0 24px;
   margin-bottom: 32px;
 
@@ -415,7 +418,7 @@
   }
 }
 
-.locationContainer {
+.sectionMap {
   padding: 0 24px;
   margin-bottom: 35px;
 
@@ -438,7 +441,7 @@
   }
 }
 
-.reviewsContainer {
+.sectionReviews {
   padding: 0 24px;
   margin-bottom: 5px;
 
@@ -464,7 +467,7 @@
   }
 }
 
-.yourHostContainer {
+.sectionHost {
   position: relative;
   padding: 0 24px;
   margin-bottom: 5px;
