@@ -24,15 +24,13 @@ import {
   Page,
   NamedLink,
   NamedRedirect,
-  Modal,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-  UserCard,
 } from '../../components';
-import { BookingDatesForm, TopbarContainer, EnquiryForm, NotFoundPage } from '../../containers';
+import { BookingDatesForm, TopbarContainer, NotFoundPage } from '../../containers';
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
@@ -40,6 +38,7 @@ import SectionHeading from './SectionHeading';
 import SectionDescription from './SectionDescription';
 import SectionFeatures from './SectionFeatures';
 import SectionReviews from './SectionReviews';
+import SectionHost from './SectionHost';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import css from './ListingPage.css';
@@ -484,38 +483,20 @@ export class ListingPageComponent extends Component {
                     listingId={currentListing.id}
                   />
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
-                  <div id="host" className={css.yourHostContainer}>
-                    <h2 className={css.yourHostHeading}>
-                      <FormattedMessage id="ListingPage.yourHostHeading" />
-                    </h2>
-                    {isOwnListing ? (
-                      <NamedLink className={css.editProfileLink} name="ProfileSettingsPage">
-                        <FormattedMessage id="ListingPage.editProfileLink" />
-                      </NamedLink>
-                    ) : null}
-                    <UserCard
-                      user={currentListing.author}
-                      currentUser={currentUser}
-                      onContactUser={this.onContactUser}
-                    />
-                    <Modal
-                      id="ListingPage.enquiry"
-                      contentClassName={css.enquiryModalContent}
-                      isOpen={isAuthenticated && this.state.enquiryModalOpen}
-                      onClose={() => this.setState({ enquiryModalOpen: false })}
-                      onManageDisableScrolling={onManageDisableScrolling}
-                    >
-                      <EnquiryForm
-                        className={css.enquiryForm}
-                        submitButtonWrapperClassName={css.enquirySubmitButtonWrapper}
-                        listingTitle={title}
-                        authorDisplayName={authorDisplayName}
-                        sendEnquiryError={sendEnquiryError}
-                        onSubmit={this.onSubmitEnquiry}
-                        inProgress={sendEnquiryInProgress}
-                      />
-                    </Modal>
-                  </div>
+                  <SectionHost
+                    title={title}
+                    listing={currentListing}
+                    isOwnListing={isOwnListing}
+                    authorDisplayName={authorDisplayName}
+                    onContactUser={this.onContactUser}
+                    isEnquiryModalOpen={isAuthenticated && this.state.enquiryModalOpen}
+                    onCloseEnquiryModal={() => this.setState({ enquiryModalOpen: false })}
+                    sendEnquiryError={sendEnquiryError}
+                    sendEnquiryInProgress={sendEnquiryInProgress}
+                    onSubmitEnquiry={this.onSubmitEnquiry}
+                    currentUser={currentUser}
+                    onManageDisableScrolling={onManageDisableScrolling}
+                  />
                 </div>
 
                 <ModalInMobile

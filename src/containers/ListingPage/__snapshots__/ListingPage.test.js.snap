@@ -258,41 +258,48 @@ exports[`ListingPage matches snapshot 1`] = `
               fetchReviewsError={null}
               reviews={Array []}
             />
-            <div
-              id="host"
-            >
-              <h2>
-                <FormattedMessage
-                  id="ListingPage.yourHostHeading"
-                  values={Object {}}
-                />
-              </h2>
-              <UserCard
-                className={null}
-                currentUser={
-                  Object {
-                    "attributes": Object {
-                      "banned": false,
-                      "email": "user-2@example.com",
-                      "emailVerified": true,
-                      "profile": Object {
-                        "abbreviatedName": "user-2 abbreviated name",
-                        "displayName": "user-2 display name",
-                        "firstName": "user-2 first name",
-                        "lastName": "user-2 last name",
-                      },
-                      "stripeConnected": true,
+            <SectionHost
+              authorDisplayName="user-1 display name"
+              currentUser={
+                Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "email": "user-2@example.com",
+                    "emailVerified": true,
+                    "profile": Object {
+                      "abbreviatedName": "user-2 abbreviated name",
+                      "displayName": "user-2 display name",
+                      "firstName": "user-2 first name",
+                      "lastName": "user-2 last name",
                     },
-                    "id": UUID {
-                      "uuid": "user-2",
-                    },
-                    "type": "currentUser",
-                  }
+                    "stripeConnected": true,
+                  },
+                  "id": UUID {
+                    "uuid": "user-2",
+                  },
+                  "type": "currentUser",
                 }
-                onContactUser={[Function]}
-                rootClassName={null}
-                user={
-                  Object {
+              }
+              isEnquiryModalOpen={false}
+              isOwnListing={false}
+              listing={
+                Object {
+                  "attributes": Object {
+                    "deleted": false,
+                    "description": "listing1 description",
+                    "geolocation": LatLng {
+                      "lat": 40,
+                      "lng": 60,
+                    },
+                    "price": Money {
+                      "amount": 5500,
+                      "currency": "USD",
+                    },
+                    "publicData": Object {},
+                    "state": "published",
+                    "title": "listing1 title",
+                  },
+                  "author": Object {
                     "attributes": Object {
                       "banned": false,
                       "profile": Object {
@@ -304,24 +311,22 @@ exports[`ListingPage matches snapshot 1`] = `
                       "uuid": "user-1",
                     },
                     "type": "user",
-                  }
+                  },
+                  "id": UUID {
+                    "uuid": "listing1",
+                  },
+                  "images": Array [],
+                  "type": "listing",
                 }
-              />
-              <InjectIntl(ModalComponent)
-                id="ListingPage.enquiry"
-                isOpen={false}
-                onClose={[Function]}
-                onManageDisableScrolling={[Function]}
-              >
-                <ReduxForm
-                  authorDisplayName="user-1 display name"
-                  inProgress={false}
-                  listingTitle="listing1 title"
-                  onSubmit={[Function]}
-                  sendEnquiryError={null}
-                />
-              </InjectIntl(ModalComponent)>
-            </div>
+              }
+              onCloseEnquiryModal={[Function]}
+              onContactUser={[Function]}
+              onManageDisableScrolling={[Function]}
+              onSubmitEnquiry={[Function]}
+              sendEnquiryError={null}
+              sendEnquiryInProgress={false}
+              title="listing1 title"
+            />
           </div>
           <withViewport(ModalInMobileComponent)
             id="BookingDatesFormInModal"
