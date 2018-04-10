@@ -31,7 +31,6 @@ import {
   LayoutWrapperFooter,
   Footer,
   UserCard,
-  Reviews,
 } from '../../components';
 import { BookingDatesForm, TopbarContainer, EnquiryForm, NotFoundPage } from '../../containers';
 
@@ -40,6 +39,7 @@ import SectionImages from './SectionImages';
 import SectionHeading from './SectionHeading';
 import SectionDescription from './SectionDescription';
 import SectionFeatures from './SectionFeatures';
+import SectionReviews from './SectionReviews';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import css from './ListingPage.css';
@@ -413,12 +413,6 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-    const reviewsError = (
-      <h2 className={css.errorText}>
-        <FormattedMessage id="ListingPage.reviewsError" />
-      </h2>
-    );
-
     return (
       <Page
         title={schemaTitle}
@@ -489,17 +483,7 @@ export class ListingPageComponent extends Component {
                     publicData={publicData}
                     listingId={currentListing.id}
                   />
-
-                  <div className={css.reviewsContainer}>
-                    <h2 className={css.reviewsHeading}>
-                      <FormattedMessage
-                        id="ListingPage.reviewsHeading"
-                        values={{ count: reviews.length }}
-                      />
-                    </h2>
-                    {fetchReviewsError ? reviewsError : null}
-                    <Reviews reviews={reviews} />
-                  </div>
+                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
                   <div id="host" className={css.yourHostContainer}>
                     <h2 className={css.yourHostHeading}>
                       <FormattedMessage id="ListingPage.yourHostHeading" />

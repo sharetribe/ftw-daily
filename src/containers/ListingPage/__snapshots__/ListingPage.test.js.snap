@@ -254,21 +254,10 @@ exports[`ListingPage matches snapshot 1`] = `
               publicData={Object {}}
               rootClassName={null}
             />
-            <div>
-              <h2>
-                <FormattedMessage
-                  id="ListingPage.reviewsHeading"
-                  values={
-                    Object {
-                      "count": 0,
-                    }
-                  }
-                />
-              </h2>
-              <InjectIntl(ReviewsComponent)
-                reviews={Array []}
-              />
-            </div>
+            <SectionReviews
+              fetchReviewsError={null}
+              reviews={Array []}
+            />
             <div
               id="host"
             >
