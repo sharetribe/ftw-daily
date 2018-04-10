@@ -17,7 +17,7 @@ const SectionMapMaybe = props => {
   }
 
   const address = publicData.location ? publicData.location.address : '';
-  const classes = classNames(rootClassName || css.locationContainer, className);
+  const classes = classNames(rootClassName || css.sectionMap, className);
 
   const mapProps = config.coordinates.fuzzy
     ? { obfuscatedCenter: obfuscatedCoordinates(geolocation, listingId ? listingId.uuid : null) }
