@@ -8,7 +8,7 @@
  * API.
  *
  * If the payment process of a customised marketplace is something
- * else that simply daily or nightly bookings, the estimation will
+ * else than simply daily or nightly bookings, the estimation will
  * most likely need some changes.
  *
  * To customise the estimation, first change the BookingDatesForm to
@@ -23,7 +23,7 @@
  * transactions.initiateSpeculative API endpoint as the CheckoutPage
  * is using to get the breakdown information from the API, but
  * currently the API doesn't support that for logged out users, and we
- * are forces to estimating the information here.
+ * are forced to estimate the information here.
  */
 import React from 'react';
 import moment from 'moment';
