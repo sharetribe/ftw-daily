@@ -231,8 +231,6 @@ SearchFiltersMobileComponent.defaultProps = {
   className: null,
   resultsCount: null,
   searchingInProgress: false,
-  onOpenModal: null,
-  onCloseModal: null,
   categories: null,
   amenities: null,
 };
@@ -247,8 +245,8 @@ SearchFiltersMobileComponent.propTypes = {
   showAsModalMaxWidth: number.isRequired,
   onMapIconClick: func.isRequired,
   onManageDisableScrolling: func.isRequired,
-  onOpenModal: func,
-  onCloseModal: func,
+  onOpenModal: func.isRequired,
+  onCloseModal: func.isRequired,
   categories: array,
   amenities: array,
 

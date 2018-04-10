@@ -236,6 +236,8 @@ export class SearchPageComponent extends Component {
             searchParamsAreInSync={searchParamsAreInSync}
             onActivateListing={onActivateListing}
             onManageDisableScrolling={onManageDisableScrolling}
+            onOpenModal={this.onOpenMobileModal}
+            onCloseModal={this.onCloseMobileModal}
             onMapIconClick={onMapIconClick}
             pagination={pagination}
             searchParamsForPagination={parse(location.search)}

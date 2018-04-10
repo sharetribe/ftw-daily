@@ -29,6 +29,8 @@ class MainPanel extends Component {
       searchParamsAreInSync,
       onActivateListing,
       onManageDisableScrolling,
+      onOpenModal,
+      onCloseModal,
       onMapIconClick,
       pagination,
       searchParamsForPagination,
@@ -84,9 +86,10 @@ class MainPanel extends Component {
           showAsModalMaxWidth={showAsModalMaxWidth}
           onMapIconClick={onMapIconClick}
           onManageDisableScrolling={onManageDisableScrolling}
-          onOpenModal={this.onOpenMobileModal}
-          onCloseModal={this.onCloseMobileModal}
+          onOpenModal={onOpenModal}
+          onCloseModal={onCloseModal}
           {...primaryFilters}
+          {...secondaryFilters}
         />
         {isSearchFiltersPanelOpen ? (
           <div className={classNames(css.searchFiltersPanel)}>
@@ -145,6 +148,8 @@ MainPanel.propTypes = {
   searchParamsAreInSync: bool.isRequired,
   onActivateListing: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  onOpenModal: func.isRequired,
+  onCloseModal: func.isRequired,
   onMapIconClick: func.isRequired,
   pagination: propTypes.pagination,
   searchParamsForPagination: object,

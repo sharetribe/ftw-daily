@@ -32,8 +32,10 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       }
       listings={Array []}
       onActivateListing={[Function]}
+      onCloseModal={[Function]}
       onManageDisableScrolling={[Function]}
       onMapIconClick={[Function]}
+      onOpenModal={[Function]}
       pagination={
         Object {
           "page": 1,
