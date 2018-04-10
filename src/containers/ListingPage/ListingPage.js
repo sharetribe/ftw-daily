@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import { arrayOf, bool, func, shape, string, oneOf } from 'prop-types';
+import { array, arrayOf, bool, func, shape, string, oneOf } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -246,22 +246,7 @@ export class ListingPageComponent extends Component {
       </span>
     );
 
-    const category =
-      publicData && publicData.category ? (
-        <span>
-          {categoryLabel(categoriesConfig, publicData.category)}
-          <span className={css.separator}>•</span>
-        </span>
-      ) : null;
-
     const topbar = <TopbarContainer />;
-
-    const loadingTitle = intl.formatMessage({
-      id: 'ListingPage.loadingListingTitle',
-    });
-    const errorTitle = intl.formatMessage({
-      id: 'ListingPage.errorLoadingListingTitle',
-    });
 
     if (showListingError && showListingError.status === 404) {
       // 404 listing not found
@@ -269,6 +254,10 @@ export class ListingPageComponent extends Component {
       return <NotFoundPage />;
     } else if (showListingError) {
       // Other error in fetching listing
+
+      const errorTitle = intl.formatMessage({
+        id: 'ListingPage.errorLoadingListingTitle',
+      });
 
       return (
         <Page title={errorTitle} scrollingDisabled={scrollingDisabled}>
@@ -287,6 +276,10 @@ export class ListingPageComponent extends Component {
       );
     } else if (!currentListing.id) {
       // Still loading the listing
+
+      const loadingTitle = intl.formatMessage({
+        id: 'ListingPage.loadingListingTitle',
+      });
 
       return (
         <Page title={loadingTitle} scrollingDisabled={scrollingDisabled}>
@@ -343,8 +336,6 @@ export class ListingPageComponent extends Component {
       }
     };
 
-    const editParams = { id: listingId.uuid, slug: listingSlug, type: 'edit', tab: 'description' };
-
     const handleBookButtonClick = () => {
       const isCurrentlyClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
       if (isOwnListing || isCurrentlyClosed) {
@@ -389,6 +380,14 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
+    const category =
+      publicData && publicData.category ? (
+        <span>
+          {categoryLabel(categoriesConfig, publicData.category)}
+          <span className={css.separator}>•</span>
+        </span>
+      ) : null;
+
     return (
       <Page
         title={schemaTitle}
@@ -414,7 +413,12 @@ export class ListingPageComponent extends Component {
                 title={title}
                 listing={currentListing}
                 isOwnListing={isOwnListing}
-                editParams={editParams}
+                editParams={{
+                  id: listingId.uuid,
+                  slug: listingSlug,
+                  type: 'edit',
+                  tab: 'description',
+                }}
                 imageCarouselOpen={this.state.imageCarouselOpen}
                 onImageCarouselClose={() => this.setState({ imageCarouselOpen: false })}
                 handleViewPhotosClick={handleViewPhotosClick}
@@ -532,6 +536,9 @@ ListingPageComponent.propTypes = {
   sendEnquiryInProgress: bool.isRequired,
   sendEnquiryError: propTypes.error,
   onSendEnquiry: func.isRequired,
+
+  categoriesConfig: array,
+  amenitiesConfig: array,
 };
 
 const mapStateToProps = state => {
