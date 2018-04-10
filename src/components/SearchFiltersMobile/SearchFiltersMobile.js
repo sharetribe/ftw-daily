@@ -231,8 +231,6 @@ SearchFiltersMobileComponent.defaultProps = {
   className: null,
   resultsCount: null,
   searchingInProgress: false,
-  onOpenModal: null,
-  onCloseModal: null,
   categories: null,
   amenities: null,
 };
