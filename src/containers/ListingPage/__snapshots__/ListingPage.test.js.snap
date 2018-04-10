@@ -192,19 +192,9 @@ exports[`ListingPage matches snapshot 1`] = `
               }
               showContactUser={true}
             />
-            <div>
-              <h2>
-                <FormattedMessage
-                  id="ListingPage.descriptionTitle"
-                  values={Object {}}
-                />
-              </h2>
-              <p>
-                listing1
-                 
-                description
-              </p>
-            </div>
+            <SectionDescription
+              description="listing1 description"
+            />
             <div>
               <h2>
                 <FormattedMessage

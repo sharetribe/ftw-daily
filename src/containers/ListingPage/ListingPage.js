@@ -39,6 +39,7 @@ import { BookingDatesForm, TopbarContainer, EnquiryForm, NotFoundPage } from '..
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
 import SectionHeading from './SectionHeading';
+import SectionDescription from './SectionDescription';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import css from './ListingPage.css';
@@ -46,7 +47,6 @@ import css from './ListingPage.css';
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
-const MIN_LENGTH_FOR_LONG_WORDS_IN_DESCRIPTION = 20;
 
 const { UUID } = sdkTypes;
 
@@ -478,17 +478,7 @@ export class ListingPageComponent extends Component {
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />
-                  <div className={css.descriptionContainer}>
-                    <h2 className={css.descriptionTitle}>
-                      <FormattedMessage id="ListingPage.descriptionTitle" />
-                    </h2>
-                    <p className={css.description}>
-                      {richText(description, {
-                        longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_DESCRIPTION,
-                        longWordClass: css.longWord,
-                      })}
-                    </p>
-                  </div>
+                  <SectionDescription description={description} />
 
                   <div className={css.featuresContainer}>
                     <h2 className={css.featuresTitle}>
