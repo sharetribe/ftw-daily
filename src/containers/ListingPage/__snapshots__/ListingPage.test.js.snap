@@ -157,69 +157,41 @@ exports[`ListingPage matches snapshot 1`] = `
             </NamedLink>
           </div>
           <div>
-            <div>
-              <div>
-                <div
-                  title={55}
-                >
-                  55
-                </div>
-                <div>
-                  <FormattedMessage
-                    id="ListingPage.perUnit"
-                    values={Object {}}
-                  />
-                </div>
-              </div>
-              <div>
-                <h1>
-                  <span>
-                    listing1
-                     
-                    title
-                  </span>
-                </h1>
-                <div>
-                  <FormattedMessage
-                    id="ListingPage.hostedBy"
-                    values={
-                      Object {
-                        "name": <NamedLink
-                          className={undefined}
-                          name="ListingPage"
-                          params={
-                              Object {
-                                  "id": "listing1",
-                                  "slug": "listing1-title",
-                                }
-                          }
-                          to={
-                              Object {
-                                  "hash": "#host",
-                                }
-                          }
-                      >
-                          user-1 display name
-                      </NamedLink>,
-                      }
+            <SectionHeading
+              category={null}
+              formattedPrice={55}
+              hostLink={
+                <NamedLink
+                  className={undefined}
+                  name="ListingPage"
+                  params={
+                    Object {
+                      "id": "listing1",
+                      "slug": "listing1-title",
                     }
-                  />
-                  <span>
-                    <span>
-                      •
-                    </span>
-                    <InlineTextButton
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="ListingPage.contactUser"
-                        values={Object {}}
-                      />
-                    </InlineTextButton>
-                  </span>
-                </div>
-              </div>
-            </div>
+                  }
+                  to={
+                    Object {
+                      "hash": "#host",
+                    }
+                  }
+                >
+                  user-1 display name
+                </NamedLink>
+              }
+              onContactUser={[Function]}
+              priceTitle={55}
+              richTitle={
+                <span>
+                  
+                  listing1
+                   
+                  title
+                  
+                </span>
+              }
+              showContactUser={true}
+            />
             <div>
               <h2>
                 <FormattedMessage

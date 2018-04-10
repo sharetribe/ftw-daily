@@ -25,7 +25,6 @@ import {
   NamedLink,
   NamedRedirect,
   Modal,
-  InlineTextButton,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
@@ -39,6 +38,7 @@ import { BookingDatesForm, TopbarContainer, EnquiryForm, NotFoundPage } from '..
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
+import SectionHeading from './SectionHeading';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import css from './ListingPage.css';
@@ -469,35 +469,15 @@ export class ListingPageComponent extends Component {
                 </div>
 
                 <div className={css.mainContent}>
-                  <div className={css.headingContainer}>
-                    <div className={css.desktopPriceContainer}>
-                      <div className={css.desktopPriceValue} title={priceTitle}>
-                        {formattedPrice}
-                      </div>
-                      <div className={css.desktopPerUnit}>
-                        <FormattedMessage id="ListingPage.perUnit" />
-                      </div>
-                    </div>
-                    <div className={css.heading}>
-                      <h1 className={css.title}>{richTitle}</h1>
-                      <div className={css.author}>
-                        {category}
-                        <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />
-                        {showContactUser ? (
-                          <span className={css.contactWrapper}>
-                            <span className={css.separator}>•</span>
-                            <InlineTextButton
-                              className={css.contactLink}
-                              onClick={this.onContactUser}
-                            >
-                              <FormattedMessage id="ListingPage.contactUser" />
-                            </InlineTextButton>
-                          </span>
-                        ) : null}
-                      </div>
-                    </div>
-                  </div>
-
+                  <SectionHeading
+                    priceTitle={priceTitle}
+                    formattedPrice={formattedPrice}
+                    richTitle={richTitle}
+                    category={category}
+                    hostLink={hostLink}
+                    showContactUser={showContactUser}
+                    onContactUser={this.onContactUser}
+                  />
                   <div className={css.descriptionContainer}>
                     <h2 className={css.descriptionTitle}>
                       <FormattedMessage id="ListingPage.descriptionTitle" />
