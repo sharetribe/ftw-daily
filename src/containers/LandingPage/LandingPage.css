@@ -1,9 +1,18 @@
 @import '../../marketplace.css';
 
 :root {
-  --sectionMarginTop: 40px;
-  --sectionMarginTopMedium: 60px;
-  --sectionMarginTopLarge: 94px;
+  /*
+    These variables are available in global scope through ":root"
+    element (<html> tag). Variables with the same names are going to
+    overwrite each other if CSS Properties' (PostCSS plugin)
+    configuration "preserve: true" is used - meaning that variables
+    are left to CSS bundle. We are planning to enable it in the future
+    since browsers support CSS Properties already.
+ */
+
+  --LandingPage_sectionMarginTop: 40px;
+  --LandingPage_sectionMarginTopMedium: 60px;
+  --LandingPage_sectionMarginTopLarge: 94px;
 }
 
 .root {
@@ -72,15 +81,15 @@
 }
 
 .sectionContent {
-  margin: var(--sectionMarginTop) 24px 51px 24px;
+  margin: var(--LandingPage_sectionMarginTop) 24px 51px 24px;
 
   @media (--viewportMedium) {
-    margin: var(--sectionMarginTopMedium) 7.5vw 60px 7.5vw;
+    margin: var(--LandingPage_sectionMarginTopMedium) 7.5vw 60px 7.5vw;
   }
 
   @media (--viewportLarge) {
     max-width: calc(1052px + 36px + 36px);
-    margin: var(--sectionMarginTopLarge) auto 93px auto;
+    margin: var(--LandingPage_sectionMarginTopLarge) auto 93px auto;
     padding: 0 36px 0 36px;
   }
 }
@@ -95,15 +104,15 @@
 
   /* Place the bar on top of .sectionContent top margin */
   position: relative;
-  top: calc(-1 * var(--sectionMarginTop));
+  top: calc(-1 * var(--LandingPage_sectionMarginTop));
 
   @media (--viewportMedium) {
     width: 192px;
     height: 8px;
-    top: calc(-1 * var(--sectionMarginTopMedium));
+    top: calc(-1 * var(--LandingPage_sectionMarginTopMedium));
   }
 
   @media (--viewportLarge) {
-    top: calc(-1 * var(--sectionMarginTopLarge));
+    top: calc(-1 * var(--LandingPage_sectionMarginTopLarge));
   }
 }

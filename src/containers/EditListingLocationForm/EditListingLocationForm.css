@@ -1,14 +1,5 @@
 @import '../../marketplace.css';
 
-:root {
-  --formMargins: {
-    margin-bottom: 24px;
-
-    @media (--viewportMedium) {
-      margin-bottom: 32px;
-    }
-  }
-}
 .root {
   /* Dimensions */
   width: 100%;

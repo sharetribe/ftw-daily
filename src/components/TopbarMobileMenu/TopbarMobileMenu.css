@@ -1,7 +1,16 @@
 @import '../../marketplace.css';
 
 :root {
-  --topMarginMobileMenu: 96px;
+  /*
+    These variables are available in global scope through ":root"
+    element (<html> tag). Variables with the same names are going to
+    overwrite each other if CSS Properties' (PostCSS plugin)
+    configuration "preserve: true" is used - meaning that variables
+    are left to CSS bundle. We are planning to enable it in the future
+    since browsers support CSS Properties already.
+ */
+
+  --TopbarMobileMenu_topMargin: 96px;
 }
 
 .root {
@@ -35,7 +44,7 @@
 .avatar {
   /* Layout */
   flex-shrink: 0;
-  margin: var(--topMarginMobileMenu) 0 0 0;
+  margin: var(--TopbarMobileMenu_topMargin) 0 0 0;
 }
 
 .greeting {
@@ -99,7 +108,7 @@
   @apply --marketplaceH1FontStyles;
 
   margin-bottom: 24px;
-  margin-top: var(--topMarginMobileMenu);
+  margin-top: var(--TopbarMobileMenu_topMargin);
 }
 .authenticationLinks {
   white-space: nowrap;

@@ -1,7 +1,16 @@
 @import '../../marketplace.css';
 
 :root {
-  --coverEverything: {
+  /*
+    These variables are available in global scope through ":root"
+    element (<html> tag). Variables with the same names are going to
+    overwrite each other if CSS Properties' (PostCSS plugin)
+    configuration "preserve: true" is used - meaning that variables
+    are left to CSS bundle. We are planning to enable it in the future
+    since browsers support CSS Properties already.
+ */
+
+  --ManageListingCard_coverEverything: {
     position: absolute;
     top: 0;
     right: 0;
@@ -25,12 +34,12 @@
 
 .menuOverlayWrapper {
   /* Positioning */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
 }
 
 .menuOverlay {
   /* Positioning */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
 
   /* Overlay */
   background-color: var(--matterColorAnti);
@@ -41,7 +50,7 @@
 
 .menuOverlayContent {
   /* Positioning */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
   /* Fonts */
   @apply --marketplaceH4FontStyles;
   font-weight: var(--fontWeightSemiBold);
@@ -84,7 +93,7 @@
 
 .rootForImage {
   /* Layout - image will take space defined by aspect ratio wrapper */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
   width: 100%;
   border-radius: 2px;
 }
@@ -287,7 +296,7 @@
 .closedOverlayWrapper,
 .pendingApprovalOverlayWrapper {
   /* Positioning */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
 }
 
 .loadingOverlay,
@@ -295,7 +304,7 @@
 .closedOverlay,
 .pendingApprovalOverlay {
   /* Positioning */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
 
   /* Overlay background style */
   background-color: var(--matterColorLight);
@@ -314,7 +323,7 @@
   color: var(--matterColor);
 
   /* Positioning */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
 
   /* Layout */
   display: flex;

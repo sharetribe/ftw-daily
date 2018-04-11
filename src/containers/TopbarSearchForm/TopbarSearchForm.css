@@ -1,10 +1,22 @@
 @import '../../marketplace.css';
 
 :root {
-  --inputHeight: 53px;
-  --topbarMargin: 94px;
-  --bottomBorder: 3px;
-  --mobilePredictionTop: calc(var(--topbarMargin) + var(--inputHeight) - var(--bottomBorder));
+  /*
+    These variables are available in global scope through ":root"
+    element (<html> tag). Variables with the same names are going to
+    overwrite each other if CSS Properties' (PostCSS plugin)
+    configuration "preserve: true" is used - meaning that variables
+    are left to CSS bundle. We are planning to enable it in the future
+    since browsers support CSS Properties already.
+ */
+
+  --TopbarSearchForm_inputHeight: 53px;
+  --TopbarSearchForm_topbarMargin: 94px;
+  --TopbarSearchForm_bottomBorder: 3px;
+  --TopbarSearchForm_mobilePredictionTop: calc(
+    var(--TopbarSearchForm_topbarMargin) + var(--TopbarSearchForm_inputHeight) -
+      var(--TopbarSearchForm_bottomBorder)
+  );
 }
 
 .mobileInputRoot {
@@ -30,7 +42,7 @@
   /* Layout */
   margin: 0 24px 0 0;
   padding: 1px 13px 13px 13px;
-  height: var(--inputHeight);
+  height: var(--TopbarSearchForm_inputHeight);
 
   /* Borders */
   border-bottom-width: var(--borderRadiusMobileSearch);
@@ -78,12 +90,15 @@
 
 .mobilePredictions {
   position: absolute;
-  top: calc(var(--inputHeight) - var(--bottomBorder));
+  top: calc(var(--TopbarSearchForm_inputHeight) - var(--TopbarSearchForm_bottomBorder));
   left: 0;
-  min-height: calc(100vh - var(--mobilePredictionTop));
+  min-height: calc(100vh - var(--TopbarSearchForm_mobilePredictionTop));
 }
 
 .desktopPredictions {
-  margin-top: calc(var(--topbarHeightDesktop) - var(--inputHeight) + var(--bottomBorder));
+  margin-top: calc(
+    var(--topbarHeightDesktop) - var(--TopbarSearchForm_inputHeight) +
+      var(--TopbarSearchForm_bottomBorder)
+  );
   max-width: 434px;
 }

@@ -1,7 +1,16 @@
 @import '../../marketplace.css';
 
 :root {
-  --logoHeight: 25px;
+  /*
+    These variables are available in global scope through ":root"
+    element (<html> tag). Variables with the same names are going to
+    overwrite each other if CSS Properties' (PostCSS plugin)
+    configuration "preserve: true" is used - meaning that variables
+    are left to CSS bundle. We are planning to enable it in the future
+    since browsers support CSS Properties already.
+ */
+
+  --Topbar_logoHeight: 25px;
 }
 
 .root {
@@ -36,7 +45,7 @@
 
 .home {
   display: flex;
-  padding: calc((var(--topbarHeight) - var(--logoHeight)) / 2) 24px;
+  padding: calc((var(--topbarHeight) - var(--Topbar_logoHeight)) / 2) 24px;
 }
 
 .logoutButton {

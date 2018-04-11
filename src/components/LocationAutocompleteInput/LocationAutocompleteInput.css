@@ -1,10 +1,18 @@
 @import '../../marketplace.css';
 
 :root {
-  --inputHeight: 50px;
-  --sidePadding: 24px;
-  --sidePaddingDesktop: 36px;
-  --poweredImageHeight: 18px;
+  /*
+    These variables are available in global scope through ":root"
+    element (<html> tag). Variables with the same names are going to
+    overwrite each other if CSS Properties' (PostCSS plugin)
+    configuration "preserve: true" is used - meaning that variables
+    are left to CSS bundle. We are planning to enable it in the future
+    since browsers support CSS Properties already.
+ */
+
+  --LocationAutocompleteInput_inputHeight: 50px;
+  --LocationAutocompleteInput_sidePadding: 24px;
+  --LocationAutocompleteInput_sidePaddingDesktop: 36px;
 }
 
 .root {
@@ -35,7 +43,7 @@
 
 .input {
   flex-grow: 1;
-  height: var(--inputHeight);
+  height: var(--LocationAutocompleteInput_inputHeight);
   padding-left: 10px;
   margin: 0;
   line-height: unset;
@@ -61,7 +69,7 @@ size and position, etc.
   position: absolute;
   width: 100%;
   padding-bottom: 72px;
-  top: var(--inputHeight);
+  top: var(--LocationAutocompleteInput_inputHeight);
   left: 0;
   background-color: var(--marketplaceColor);
   border-bottom-left-radius: var(--borderRadius);
@@ -79,13 +87,13 @@ bottom of the container.
   position: absolute;
   bottom: 30px;
   width: 100%;
-  height: var(--poweredImageHeight);
+  height: 18px;
   background-image: url(./images/powered_by_google_on_non_white_hdpi.png);
-  background-size: auto var(--poweredImageHeight);
+  background-size: auto 18px;
   background-position: center;
 
   @media (--viewportMedium) {
-    background-position: center left var(--sidePaddingDesktop);
+    background-position: center left var(--LocationAutocompleteInput_sidePaddingDesktop);
   }
 }
 
@@ -102,11 +110,11 @@ bottom of the container.
     margin: 0; /* Remove the double white space */
 
     /* Assign enough vertical padding to make the element at least 44px high */
-    padding: 9px var(--sidePadding);
+    padding: 9px var(--LocationAutocompleteInput_sidePadding);
 
     @media (--viewportMedium) {
       color: var(--matterColorLightTransparent);
-      padding: 10px var(--sidePaddingDesktop);
+      padding: 10px var(--LocationAutocompleteInput_sidePaddingDesktop);
       margin: 0;
     }
 

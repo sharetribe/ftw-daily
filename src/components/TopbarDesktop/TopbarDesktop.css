@@ -1,11 +1,20 @@
 @import '../../marketplace.css';
 
 :root {
+  /*
+    These variables are available in global scope through ":root"
+    element (<html> tag). Variables with the same names are going to
+    overwrite each other if CSS Properties' (PostCSS plugin)
+    configuration "preserve: true" is used - meaning that variables
+    are left to CSS bundle. We are planning to enable it in the future
+    since browsers support CSS Properties already.
+ */
+
   /* Compose text label items on top of this */
   /* This stretches inline element (link) to take available vertical space (big hover area),
    * and align baselines
    */
-  --topbarDesktopLabelStyles: {
+  --TopbarDesktop_label: {
     display: inline-block;
     margin: 24px 0;
     text-decoration: inherit;
@@ -15,7 +24,7 @@
     }
   }
 
-  --linkHoverState: {
+  --TopbarDesktop_linkHover: {
     border-bottom: 0px solid;
     transition: var(--transitionStyleButton);
 
@@ -53,7 +62,7 @@
 
 /* logo */
 .logoLink {
-  @apply --linkHoverState;
+  @apply --TopbarDesktop_linkHover;
   flex-shrink: 0;
   padding: 21px 24px 21px 24px;
   height: 100%;
@@ -84,7 +93,7 @@
 
 .search {
   @apply --marketplaceH4FontStyles;
-  @apply --topbarDesktopLabelStyles;
+  @apply --TopbarDesktop_label;
   color: var(--matterColor);
 }
 
@@ -99,7 +108,7 @@
 
 /* Create listing (CTA for providers) */
 .createListingLink {
-  @apply --linkHoverState;
+  @apply --TopbarDesktop_linkHover;
   @apply --marketplaceH4FontStyles;
 
   flex-shrink: 0;
@@ -120,12 +129,12 @@
 }
 
 .createListing {
-  @apply --topbarDesktopLabelStyles;
+  @apply --TopbarDesktop_label;
 }
 
 /* Inbox */
 .inboxLink {
-  @apply --linkHoverState;
+  @apply --TopbarDesktop_linkHover;
   @apply --marketplaceH4FontStyles;
   height: 100%;
   padding: 0 12px 0 12px;
@@ -144,7 +153,7 @@
 }
 
 .inbox {
-  @apply --topbarDesktopLabelStyles;
+  @apply --TopbarDesktop_label;
   position: relative;
 }
 
@@ -185,7 +194,7 @@
 
 /* Profile menu */
 .profileMenuLabel {
-  @apply --linkHoverState;
+  @apply --TopbarDesktop_linkHover;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -215,7 +224,7 @@
 
 /* Authentication */
 .signupLink {
-  @apply --linkHoverState;
+  @apply --TopbarDesktop_linkHover;
   flex-shrink: 0;
   height: 100%;
   padding: 0 12px 0 12px;
@@ -228,7 +237,7 @@
 }
 
 .loginLink {
-  @apply --linkHoverState;
+  @apply --TopbarDesktop_linkHover;
   flex-shrink: 0;
   height: 100%;
   padding: 0 12px 0 12px;
@@ -243,7 +252,7 @@
 .signup,
 .login {
   @apply --marketplaceH4FontStyles;
-  @apply --topbarDesktopLabelStyles;
+  @apply --TopbarDesktop_label;
 }
 
 /* left animated "border" like hover element */

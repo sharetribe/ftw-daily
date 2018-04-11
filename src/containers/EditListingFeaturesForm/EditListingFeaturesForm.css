@@ -1,15 +1,5 @@
 @import '../../marketplace.css';
 
-:root {
-  --formMargins: {
-    margin-bottom: 24px;
-
-    @media (--viewportMedium) {
-      margin-bottom: 32px;
-    }
-  }
-}
-
 .root {
   /* Expand to available space */
   flex-grow: 1;
@@ -28,7 +18,11 @@
 }
 
 .features {
-  @apply --formMargins;
+  margin-bottom: 24px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 32px;
+  }
 }
 
 .error {
