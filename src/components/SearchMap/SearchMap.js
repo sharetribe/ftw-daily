@@ -148,6 +148,11 @@ const MapWithGoogleMap = withGoogleMap(props => {
     />
   ) : null;
 
+  const controlPosition =
+    typeof window !== 'undefined' && typeof window.google !== 'undefined'
+      ? window.google.maps.ControlPosition.LEFT_TOP
+      : 5;
+
   return (
     <GoogleMap
       defaultZoom={zoom}
@@ -164,6 +169,10 @@ const MapWithGoogleMap = withGoogleMap(props => {
         clickableIcons: false,
         // When infoCard is open, we can't differentiate double click on top of card vs map.
         disableDoubleClickZoom: !!infoCardOpen,
+        zoomControlOptions: {
+          position: controlPosition,
+        },
+        streetViewControl: false,
       }}
       ref={onMapLoad}
       onIdle={onIdle}
