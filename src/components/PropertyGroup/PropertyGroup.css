@@ -1,11 +1,11 @@
 @import '../../marketplace.css';
 
 :root {
-  --lineHeight: 24px;
-  --lineThroughTop: calc(var(--lineHeight) - 7px);
-  --lineThroughBottom: calc(var(--lineHeight) - 6px);
-  --lineThroughTopMobile: calc(var(--lineHeight) - 9px);
-  --lineThroughBottomMobile: calc(var(--lineHeight) - 8px);
+  --PropertyGroup_lineHeight: 24px;
+  --PropertyGroup_lineThroughTop: calc(var(--PropertyGroup_lineHeight) - 7px);
+  --PropertyGroup_lineThroughBottom: calc(var(--PropertyGroup_lineHeight) - 6px);
+  --PropertyGroup_lineThroughTopMobile: calc(var(--PropertyGroup_lineHeight) - 9px);
+  --PropertyGroup_lineThroughBottomMobile: calc(var(--PropertyGroup_lineHeight) - 8px);
 }
 
 .root {
@@ -44,7 +44,7 @@
   margin-right: 8px;
 
   /* This follows line-height */
-  height: var(--lineHeight);
+  height: var(--PropertyGroup_lineHeight);
 }
 
 .labelWrapper {
@@ -54,7 +54,7 @@
 .selectedLabel,
 .notSelectedLabel {
   @apply --marketplaceBodyFontStyles;
-  line-height: var(--lineHeight);
+  line-height: var(--PropertyGroup_lineHeight);
   margin: 0;
 }
 
@@ -68,18 +68,18 @@
 
   /* line-through */
   background-image: linear-gradient(
-    transparent var(--lineThroughTopMobile),
-    var(--matterColorNegative) var(--lineThroughTopMobile),
-    var(--matterColorNegative) var(--lineThroughBottomMobile),
-    transparent var(--lineThroughBottomMobile)
+    transparent var(--PropertyGroup_lineThroughTopMobile),
+    var(--matterColorNegative) var(--PropertyGroup_lineThroughTopMobile),
+    var(--matterColorNegative) var(--PropertyGroup_lineThroughBottomMobile),
+    transparent var(--PropertyGroup_lineThroughBottomMobile)
   );
 
   @media (--viewportMedium) {
     background-image: linear-gradient(
-      transparent var(--lineThroughTop),
-      var(--matterColorNegative) var(--lineThroughTop),
-      var(--matterColorNegative) var(--lineThroughBottom),
-      transparent var(--lineThroughBottom)
+      transparent var(--PropertyGroup_lineThroughTop),
+      var(--matterColorNegative) var(--PropertyGroup_lineThroughTop),
+      var(--matterColorNegative) var(--PropertyGroup_lineThroughBottom),
+      transparent var(--PropertyGroup_lineThroughBottom)
     );
   }
 }

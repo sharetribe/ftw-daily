@@ -1,8 +1,8 @@
 @import '../../marketplace.css';
 
 :root {
-  --logoHeight: 25px;
-  --logoHeightDesktop: 27px;
+  --CheckoutPage_logoHeight: 25px;
+  --CheckoutPage_logoHeightDesktop: 27px;
 }
 
 .loading {
@@ -35,10 +35,10 @@
 
 .home {
   display: flex;
-  padding: calc((var(--topbarHeight) - var(--logoHeight)) / 2) 24px;
+  padding: calc((var(--topbarHeight) - var(--CheckoutPage_logoHeight)) / 2) 24px;
 
   @media (--viewportLarge) {
-    padding: calc((var(--topbarHeightDesktop) - var(--logoHeightDesktop)) / 2) 36px;
+    padding: calc((var(--topbarHeightDesktop) - var(--CheckoutPage_logoHeightDesktop)) / 2) 36px;
   }
 }
 

@@ -1,7 +1,7 @@
 @import '../../marketplace.css';
 
 :root {
-  --coverEverything: {
+  --ManageListingCard_coverEverything: {
     position: absolute;
     top: 0;
     right: 0;
@@ -25,12 +25,12 @@
 
 .menuOverlayWrapper {
   /* Positioning */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
 }
 
 .menuOverlay {
   /* Positioning */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
 
   /* Overlay */
   background-color: var(--matterColorAnti);
@@ -41,7 +41,7 @@
 
 .menuOverlayContent {
   /* Positioning */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
   /* Fonts */
   @apply --marketplaceH4FontStyles;
   font-weight: var(--fontWeightSemiBold);
@@ -84,7 +84,7 @@
 
 .rootForImage {
   /* Layout - image will take space defined by aspect ratio wrapper */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
   width: 100%;
   border-radius: 2px;
 }
@@ -287,7 +287,7 @@
 .closedOverlayWrapper,
 .pendingApprovalOverlayWrapper {
   /* Positioning */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
 }
 
 .loadingOverlay,
@@ -295,7 +295,7 @@
 .closedOverlay,
 .pendingApprovalOverlay {
   /* Positioning */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
 
   /* Overlay background style */
   background-color: var(--matterColorLight);
@@ -314,7 +314,7 @@
   color: var(--matterColor);
 
   /* Positioning */
-  @apply --coverEverything;
+  @apply --ManageListingCard_coverEverything;
 
   /* Layout */
   display: flex;

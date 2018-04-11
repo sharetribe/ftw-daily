@@ -1,7 +1,7 @@
 @import '../../marketplace.css';
 
 :root {
-  --topMarginMobileMenu: 96px;
+  --TopbarMobileMenu_topMargin: 96px;
 }
 
 .root {
@@ -35,7 +35,7 @@
 .avatar {
   /* Layout */
   flex-shrink: 0;
-  margin: var(--topMarginMobileMenu) 0 0 0;
+  margin: var(--TopbarMobileMenu_topMargin) 0 0 0;
 }
 
 .greeting {
@@ -99,7 +99,7 @@
   @apply --marketplaceH1FontStyles;
 
   margin-bottom: 24px;
-  margin-top: var(--topMarginMobileMenu);
+  margin-top: var(--TopbarMobileMenu_topMargin);
 }
 .authenticationLinks {
   white-space: nowrap;

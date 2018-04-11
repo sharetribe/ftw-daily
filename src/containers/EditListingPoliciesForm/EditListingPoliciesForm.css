@@ -1,7 +1,7 @@
 @import '../../marketplace.css';
 
 :root {
-  --formMargins: {
+  --EditListingPoliciesForm_formMargins: {
     margin-bottom: 24px;
 
     @media (--viewportMedium) {
@@ -28,11 +28,11 @@
 }
 
 .title {
-  @apply --formMargins;
+  @apply --EditListingPoliciesForm_formMargins;
 }
 
 .policy {
-  @apply --formMargins;
+  @apply --EditListingPoliciesForm_formMargins;
   flex-shrink: 0;
 }
 

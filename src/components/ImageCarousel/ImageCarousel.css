@@ -1,9 +1,5 @@
 @import '../../marketplace.css';
 
-:root {
-  --verticalPadding: 100px;
-}
-
 .root {
   position: relative;
   width: 100%;
@@ -11,7 +7,7 @@
   padding: 0;
 
   @media (--viewportMedium) {
-    padding: var(--verticalPadding) 10vw;
+    padding: 100px 10vw;
   }
 }
 

@@ -1,15 +1,12 @@
 @import '../../marketplace.css';
 
 :root {
-  --avatarSize: 40px;
-  --avatarSizeMedium: 60px;
-  --avatarSizeLarge: 96px;
-
-  --bgColorTop: var(--marketplaceColorLight);
-  --bgColorBottom: var(--marketplaceColor);
+  --Avatar_size: 40px;
+  --Avatar_sizeMedium: 60px;
+  --Avatar_sizeLarge: 96px;
 
   /* Base for all avatars */
-  --avatarBase: {
+  --Avatar_base: {
     font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     border-radius: 50%;
 
@@ -19,7 +16,11 @@
     justify-content: center;
 
     /* Colors */
-    background-image: linear-gradient(-180deg, var(--bgColorTop) 0%, var(--bgColorBottom) 100%);
+    background-image: linear-gradient(
+      -180deg,
+      var(--marketplaceColorLight) 0%,
+      var(--marketplaceColor) 100%
+    );
     color: var(--matterColorLight);
 
     &:hover {
@@ -34,11 +35,11 @@
   /* Font is specific to this component, but defining it in marketplace.css makes it easier
    * to change font if brand look-and-feel needs such changes.
    */
-  @apply --avatarBase;
+  @apply --Avatar_base;
 
   /* Layout */
-  width: var(--avatarSize);
-  height: var(--avatarSize);
+  width: var(--Avatar_size);
+  height: var(--Avatar_size);
 }
 
 .initials {
@@ -56,11 +57,11 @@
 /* Medium Avatar */
 
 .mediumAvatar {
-  @apply --avatarBase;
+  @apply --Avatar_base;
 
   /* Fixed dimensions */
-  width: var(--avatarSizeMedium);
-  height: var(--avatarSizeMedium);
+  width: var(--Avatar_sizeMedium);
+  height: var(--Avatar_sizeMedium);
 }
 
 .mediumAvatar .initials {
@@ -72,11 +73,11 @@
 /* Large Avatar */
 
 .largeAvatar {
-  @apply --avatarBase;
+  @apply --Avatar_base;
 
   /* Fixed dimensions */
-  width: var(--avatarSizeLarge);
-  height: var(--avatarSizeLarge);
+  width: var(--Avatar_sizeLarge);
+  height: var(--Avatar_sizeLarge);
 }
 
 .largeAvatar .initials {

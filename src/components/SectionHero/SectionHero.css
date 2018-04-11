@@ -1,9 +1,9 @@
 @import '../../marketplace.css';
 
 :root {
-  --desktopTitleMaxWidth: 625px;
+  --SectionHero_desktopTitleMaxWidth: 625px;
 
-  --animationProperties: {
+  --SectionHero_animation: {
     animation-name: animationTitle;
     animation-duration: 0.5s;
     animation-timing-function: ease-out;
@@ -53,11 +53,11 @@
   @apply --marketplaceHeroTitleFontStyles;
   color: var(--matterColorLight);
 
-  @apply --animationProperties;
+  @apply --SectionHero_animation;
   animation-delay: 0.5s;
 
   @media (--viewportMedium) {
-    max-width: var(--desktopTitleMaxWidth);
+    max-width: var(--SectionHero_desktopTitleMaxWidth);
   }
 }
 
@@ -67,11 +67,11 @@
   color: var(--matterColorLight);
   margin: 0 0 32px 0;
 
-  @apply --animationProperties;
+  @apply --SectionHero_animation;
   animation-delay: 0.65s;
 
   @media (--viewportMedium) {
-    max-width: var(--desktopTitleMaxWidth);
+    max-width: var(--SectionHero_desktopTitleMaxWidth);
     margin: 0 0 63px 0;
   }
 }
@@ -80,7 +80,7 @@
   border-radius: 4px;
   flex-shrink: 0;
 
-  @apply --animationProperties;
+  @apply --SectionHero_animation;
   animation-delay: 0.8s;
 
   @media (--viewportMedium) {
@@ -104,7 +104,7 @@
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
 
-  @apply --animationProperties;
+  @apply --SectionHero_animation;
   animation-delay: 0.8s;
 
   @media (--viewportMedium) {

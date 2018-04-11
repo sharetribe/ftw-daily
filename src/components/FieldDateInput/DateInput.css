@@ -1,9 +1,11 @@
 @import '../../marketplace.css';
 
 :root {
-  --selectionHeight: 36px;
-  --hoveredOverlayColor: rgba(255, 255, 255, 0.2);
-  --datepickerDistanceToTop: 252px;
+  --DateInput_selectionHeight: 36px;
+  --DateInput_hoveredOverlayColor: rgba(255, 255, 255, 0.2);
+
+  /* Distance to top */
+  --DateInput_top: 252px;
 }
 
 .inputRoot {
@@ -20,7 +22,7 @@
     /* Similar problem as in issue: https://github.com/airbnb/react-dates/issues/947 */
     top: 36px !important;
     width: 100%;
-    min-height: calc(100vh - var(--datepickerDistanceToTop));
+    min-height: calc(100vh - var(--DateInput_top));
     background-color: var(--marketplaceColor);
 
     @media (--viewportMedium) {
@@ -118,7 +120,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: var(--selectionHeight);
+    height: var(--DateInput_selectionHeight);
     background-image: url("data:image/svg+xml;utf8,<svg width='14' height='2' viewBox='0 0 14 2' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h14v2H0z' fill='%23FFF' fill-rule='evenodd'/></svg>");
     background-position: center 28px;
   }
@@ -134,15 +136,15 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: var(--selectionHeight);
-    background-color: var(--hoveredOverlayColor);
+    height: var(--DateInput_selectionHeight);
+    background-color: var(--DateInput_hoveredOverlayColor);
   }
   & :global(.CalendarDay__selected_span .renderedDay) {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: var(--selectionHeight);
+    height: var(--DateInput_selectionHeight);
     background-color: var(--successColor);
     transition: all 0.2s ease-out;
   }
@@ -156,9 +158,9 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: var(--selectionHeight);
+    height: var(--DateInput_selectionHeight);
     background-color: var(--successColor);
-    border-radius: calc(var(--selectionHeight) / 2);
+    border-radius: calc(var(--DateInput_selectionHeight) / 2);
   }
   /* Remove default bg-color and use our extra span instead '.renderedDay' */
   & :global(.CalendarDay__after-hovered) {
@@ -169,16 +171,16 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: var(--selectionHeight);
-    background-color: var(--hoveredOverlayColor);
+    height: var(--DateInput_selectionHeight);
+    background-color: var(--DateInput_hoveredOverlayColor);
   }
   & :global(.CalendarDay:hover .renderedDay) {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: var(--selectionHeight);
-    background-color: var(--hoveredOverlayColor);
+    height: var(--DateInput_selectionHeight);
+    background-color: var(--DateInput_hoveredOverlayColor);
   }
   /* Remove default bg-color and use our extra span instead '.renderedDay' */
   & :global(.CalendarDay__blocked_out_of_range),
@@ -219,7 +221,7 @@
     /* Similar problem as in issue: https://github.com/airbnb/react-dates/issues/947 */
     top: 34px !important;
     border-top: 2px solid var(--matterColorDark);
-    min-height: calc(100vh - var(--datepickerDistanceToTop) + 2px);
+    min-height: calc(100vh - var(--DateInput_top) + 2px);
 
     @media (--viewportMedium) {
       /* !important is added to top because react-dates uses inline style for height */
