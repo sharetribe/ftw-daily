@@ -45,6 +45,7 @@ const dev = process.env.REACT_APP_ENV === 'development';
 const PORT = parseInt(process.env.PORT, 10);
 const CLIENT_ID = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID;
 const BASE_URL = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
+const TRANSIT_VERBOSE = process.env.REACT_APP_SHARETRIBE_SDK_TRANSIT_VERBOSE === 'true';
 const USING_SSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 const TRUST_PROXY = process.env.SERVER_SHARETRIBE_TRUST_PROXY || null;
 const CSP = process.env.REACT_APP_CSP;
@@ -167,6 +168,7 @@ app.get('*', (req, res) => {
   });
 
   const sdk = sharetribeSdk.createInstance({
+    transitVerbose: TRANSIT_VERBOSE,
     clientId: CLIENT_ID,
     baseUrl: BASE_URL,
     httpAgent: httpAgent,

@@ -34,6 +34,7 @@ const bookingUnitType = 'line-item/night';
 // exposing server secrets to the client side.
 const sdkClientId = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID;
 const sdkBaseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
+const sdkTransitVerbose = process.env.REACT_APP_SHARETRIBE_SDK_TRANSIT_VERBOSE === 'true';
 
 const currency = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY;
 
@@ -284,7 +285,11 @@ const config = {
   locale,
   bookingUnitType,
   i18n,
-  sdk: { clientId: sdkClientId, baseUrl: sdkBaseUrl },
+  sdk: {
+    clientId: sdkClientId,
+    baseUrl: sdkBaseUrl,
+    transitVerbose: sdkTransitVerbose,
+  },
   sortSearchByDistance,
   currency,
   listingMinimumPriceSubUnits,

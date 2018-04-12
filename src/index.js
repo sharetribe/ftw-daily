@@ -71,6 +71,7 @@ if (typeof window !== 'undefined') {
   const preloadedState = window.__PRELOADED_STATE__ || '{}';
   const initialState = JSON.parse(preloadedState, sdkTypes.reviver);
   const sdk = createInstance({
+    transitVerbose: config.sdk.transitVerbose,
     clientId: config.sdk.clientId,
     baseUrl: config.sdk.baseUrl,
     secure: config.usingSSL,
