@@ -25,7 +25,6 @@ import { TopbarContainer } from '../../containers';
 import { searchListings, searchMapListings, setActiveListing } from './SearchPage.duck';
 import {
   pickSearchParamsOnly,
-  validURLParamForExtendedData,
   validURLParamsForExtendedData,
   createSearchResultSchema,
 } from './SearchPage.helpers';
@@ -119,9 +118,9 @@ export class SearchPageComponent extends Component {
         bounds: viewportBounds,
         country,
         mapSearch: true,
-        ...validURLParamForExtendedData(CATEGORY_URL_PARAM, rest, customURLParamToConfig),
-        ...validURLParamForExtendedData(AMENITIES_URL_PARAM, rest, customURLParamToConfig),
+        ...validURLParamsForExtendedData(rest, customURLParamToConfig),
       };
+
       this.viewportBounds = viewportBounds;
       history.push(
         createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
@@ -169,25 +168,14 @@ export class SearchPageComponent extends Component {
 
     // urlQueryParams doesn't contain page specific url params
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
-    const urlQueryParams = pickSearchParamsOnly(
-      searchInURL,
-      customURLParamToConfig
-    );
+    const urlQueryParams = pickSearchParamsOnly(searchInURL, customURLParamToConfig);
 
     // Page transition might initially use values from previous search
     const urlQueryString = stringify(urlQueryParams);
-    const paramsQueryString = stringify(
-      pickSearchParamsOnly(
-        searchParams,
-        customURLParamToConfig
-      )
-    );
+    const paramsQueryString = stringify(pickSearchParamsOnly(searchParams, customURLParamToConfig));
     const searchParamsAreInSync = urlQueryString === paramsQueryString;
 
-    const validQueryParams = validURLParamsForExtendedData(
-      searchInURL,
-      customURLParamToConfig
-    );
+    const validQueryParams = validURLParamsForExtendedData(searchInURL, customURLParamToConfig);
 
     const isWindowDefined = typeof window !== 'undefined';
     const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
