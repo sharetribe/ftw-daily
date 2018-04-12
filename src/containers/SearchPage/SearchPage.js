@@ -171,7 +171,6 @@ export class SearchPageComponent extends Component {
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
     const urlQueryParams = pickSearchParamsOnly(
       searchInURL,
-      [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM],
       customURLParamToConfig
     );
 
@@ -180,7 +179,6 @@ export class SearchPageComponent extends Component {
     const paramsQueryString = stringify(
       pickSearchParamsOnly(
         searchParams,
-        [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM],
         customURLParamToConfig
       )
     );
@@ -188,7 +186,6 @@ export class SearchPageComponent extends Component {
 
     const validQueryParams = validURLParamsForExtendedData(
       searchInURL,
-      [AMENITIES_URL_PARAM, CATEGORY_URL_PARAM],
       customURLParamToConfig
     );
 

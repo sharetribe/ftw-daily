@@ -19,8 +19,9 @@ export const validURLParamForExtendedData = (paramKey, urlParams, customConfigKe
 };
 
 // validate filter params
-export const validURLParamsForExtendedData = (params, customURLParams, customURLParamToConfig) => {
+export const validURLParamsForExtendedData = (params, customURLParamToConfig) => {
   const paramKeys = Object.keys(params);
+  const customURLParams = Object.keys(customURLParamToConfig);
   return paramKeys.reduce((validParams, paramKey) => {
     return customURLParams.includes(paramKey)
       ? {
@@ -33,8 +34,9 @@ export const validURLParamsForExtendedData = (params, customURLParams, customURL
 
 // extract search parameters, including a custom URL params
 // which are validated by mapping the values to marketplace custom config.
-export const pickSearchParamsOnly = (params, customURLParams, customURLParamToConfig) => {
+export const pickSearchParamsOnly = (params, customURLParamToConfig) => {
   const { address, origin, bounds, country, ...rest } = params || {};
+  const customURLParams = Object.keys(customURLParamToConfig);
   const boundsMaybe = bounds ? { bounds } : {};
   const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
 
