@@ -11,8 +11,8 @@ _select multiple_ filters on the other hand can take multiple values for a singl
 
 These two filter types are implemented with four different components, a standard and a plain one:
 
- - Select single filter: `SelectSingleFilter` and `SelectSingleFilterPlain`
- - Select multiple filter: `SelectMultipleFilter` and `SelectMultipleFilterPlain`
+* Select single filter: `SelectSingleFilter` and `SelectSingleFilterPlain`
+* Select multiple filter: `SelectMultipleFilter` and `SelectMultipleFilterPlain`
 
 The `SelectSingleFilter` and `SelectMultipleFilter` components are rendered as standard dropdowns in
 the search view. The plain filter components `SelectSingleFilterPlain` and
@@ -51,7 +51,8 @@ export const amenities = [
 The filter options need to be stored here, as the search page checks here for the possible filter
 options when validating the search parameters.
 
-Also the search parameter ("pub\_<public-data-field-name>") needs to be added to the `SearchPage` container.
+Also the search parameter ("pub\_<public-data-field-name>") needs to be added to the `SearchPage`
+container.
 
 Save the search params in a constant:
 
@@ -68,29 +69,28 @@ A basic desktop filter that renders as a dropdown button in top of the search re
 achieved using the `SelectSingleFilter` and `SelectMultipleFilter` components. To add standard
 desktop filters:
 
- - declare the filters param name in the `SearchFilters` file just like in `SearchPage`
- - with the filter param name resolve the current filter value form the `urlQueryParams` prop
- - render the filter by using a `SelectSingleFilter` or `SelectMultipleFilter` component inside the
-   `<div className={css.filters}>` element
+* declare the filters param name in the `SearchFilters` file just like in `SearchPage`
+* with the filter param name resolve the current filter value form the `urlQueryParams` prop
+* render the filter by using a `SelectSingleFilter` or `SelectMultipleFilter` component inside the
+  `<div className={css.filters}>` element
 
 ### Desktop filter panel
 
-
-If more filters are required than can fit into the top filter bar, the `SearchFiltersPanel` component
-can be used. It renders as a button in the top filter bar that opens a new panel that can contain a
-set of filters.
+If more filters are required than can fit into the top filter bar, the `SearchFiltersPanel`
+component can be used. It renders as a button in the top filter bar that opens a new panel that can
+contain a set of filters.
 
 To use the `SearchFiltersPanel`, do the following:
 
- - make sure the `USE_SEARCH_FILTER_PANEL` constant in the beginning of `SearchPage` is switched to
-   `true`.
- - in `SearchPage` resolve the number of selected panel filters and store that in the
-   `searchFiltersPanelSelectedCount`
- - list your filter param names in the `FILTERS` array in `SearchFiltersPanel`
- - for each filter resolve the current filter value(s) from the `urlQueryParams` and
-   `currentQueryParams` variables
- - use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the `<div
-   className={css.filtersWrapper}>` element to render the filters
+* make sure the `USE_SEARCH_FILTER_PANEL` constant in the beginning of `SearchPage` is switched to
+  `true`.
+* in `SearchPage` resolve the number of selected panel filters and store that in the
+  `searchFiltersPanelSelectedCount`
+* list your filter param names in the `FILTERS` array in `SearchFiltersPanel`
+* for each filter resolve the current filter value(s) from the `urlQueryParams` and
+  `currentQueryParams` variables
+* use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the
+  `<div className={css.filtersWrapper}>` element to render the filters
 
 ### Mobile filters
 
@@ -98,12 +98,12 @@ The mobile view uses the same `SelectSingleFilterPlain` and `SelectMultipleFilte
 as the filter panel. In this case the filter components are declared in `SearchFiltersMobile`. The
 following steps are required to add a mobile filter:
 
- - store the filter param name in the `allowedParams` array in the `SearchFiltersMobile` component
-   file
- - resolve the current values for each filter from the `urlQueryParams` object passed to
-   `SearchFiltersMobile`
- - use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the `<div
-   className={css.filtersWrapper}>` element to render the filters
+* store the filter param name in the `allowedParams` array in the `SearchFiltersMobile` component
+  file
+* resolve the current values for each filter from the `urlQueryParams` object passed to
+  `SearchFiltersMobile`
+* use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the
+  `<div className={css.filtersWrapper}>` element to render the filters
 
 ## Notes
 
