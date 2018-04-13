@@ -43,7 +43,7 @@
     "redux-thunk": "^2.2.0",
     "sanitize.css": "^5.0.0",
     "sharetribe-scripts": "1.1.2",
-    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#7e4d6258b057a36a1249f9cdde8f3cb4fd208ec6",
+    "sharetribe-sdk": "git+ssh://git@github.com/sharetribe/sharetribe-sdk-js#1c6a0d1c1a794bb2ee6de0e7b0bde1d2fd6f9388",
     "smoothscroll-polyfill": "^0.4.0",
     "source-map-support": "^0.5.4",
     "url": "^0.11.0"
