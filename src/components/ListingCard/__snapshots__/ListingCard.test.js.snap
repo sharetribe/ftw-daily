@@ -20,21 +20,15 @@ exports[`ListingCard matches snapshot 1`] = `
         alt="listing1 title"
         className={null}
         image={null}
-        nameSet={
-          Array [
-            Object {
-              "name": "landscape-crop",
-              "size": "1x",
-            },
-            Object {
-              "name": "landscape-crop2x",
-              "size": "2x",
-            },
-          ]
-        }
         noImageMessage={null}
         rootClassName={null}
         sizes={null}
+        variants={
+          Array [
+            "landscape-crop",
+            "landscape-crop2x",
+          ]
+        }
       />
     </div>
   </div>

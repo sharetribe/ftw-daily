@@ -10,11 +10,6 @@ import css from './ImageCarousel.css';
 const KEY_CODE_LEFT_ARROW = 37;
 const KEY_CODE_RIGHT_ARROW = 39;
 
-const imageScaledSmall = 'scaled-small'; // width 320
-const imageScaledMedium = 'scaled-medium'; // width 750
-const imageScaledLarge = 'scaled-large'; // width 1024
-const imageScaledXLarge = 'scaled-xlarge'; // width 2400
-
 class ImageCarousel extends Component {
   constructor(props) {
     super(props);
@@ -112,12 +107,7 @@ class ImageCarousel extends Component {
             image={images[this.state.selectedImageIndex]}
             onLoad={markImageLoaded(this.state.selectedImageIndex)}
             onError={markImageLoaded(this.state.selectedImageIndex)}
-            nameSet={[
-              { name: imageScaledSmall, size: '320w' },
-              { name: imageScaledMedium, size: '750w' },
-              { name: imageScaledLarge, size: '1024w' },
-              { name: imageScaledXLarge, size: '2400w' },
-            ]}
+            variants={['scaled-small', 'scaled-medium', 'scaled-large', 'scaled-xlarge']}
             sizes="(max-width: 767px) 100vw, 80vw"
           />
         </div>

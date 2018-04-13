@@ -34,7 +34,7 @@ const priceData = (price, intl) => {
 };
 
 export const ListingCardComponent = props => {
-  const { className, rootClassName, intl, listing, setActiveListing } = props;
+  const { className, rootClassName, intl, listing, renderSizes, setActiveListing } = props;
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
@@ -59,10 +59,8 @@ export const ListingCardComponent = props => {
             rootClassName={css.rootForImage}
             alt={title}
             image={firstImage}
-            nameSet={[
-              { name: 'landscape-crop', size: '1x' },
-              { name: 'landscape-crop2x', size: '2x' },
-            ]}
+            variants={['landscape-crop', 'landscape-crop2x']}
+            sizes={renderSizes}
           />
         </div>
       </div>
@@ -98,6 +96,7 @@ export const ListingCardComponent = props => {
 ListingCardComponent.defaultProps = {
   className: null,
   rootClassName: null,
+  renderSizes: null,
   setActiveListing: () => null,
 };
 
@@ -106,6 +105,10 @@ ListingCardComponent.propTypes = {
   rootClassName: string,
   intl: intlShape.isRequired,
   listing: propTypes.listing.isRequired,
+
+  // Responsive image sizes hint
+  renderSizes: string,
+
   setActiveListing: func,
 };
 

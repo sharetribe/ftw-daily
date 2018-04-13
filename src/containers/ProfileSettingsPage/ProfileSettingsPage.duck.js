@@ -115,8 +115,16 @@ export function uploadImage(actionPayload) {
     const id = actionPayload.id;
     dispatch(uploadImageRequest(actionPayload));
 
+    const bodyParams = {
+      image: actionPayload.file,
+    };
+    const queryParams = {
+      expand: true,
+      'fields.image': ['variants.square-small', 'variants.square-small2x'],
+    };
+
     return sdk.images
-      .uploadProfileImage({ image: actionPayload.file }, { expand: true })
+      .uploadProfileImage(bodyParams, queryParams)
       .then(resp => {
         const uploadedImage = resp.data.data;
         dispatch(uploadImageSuccess({ data: { id, uploadedImage } }));
@@ -129,8 +137,14 @@ export const updateProfile = actionPayload => {
   return (dispatch, getState, sdk) => {
     dispatch(updateProfileRequest());
 
+    const queryParams = {
+      expand: true,
+      include: ['profileImage'],
+      'fields.image': ['variants.square-small', 'variants.square-small2x'],
+    };
+
     return sdk.currentUser
-      .updateProfile(actionPayload, { expand: true, include: ['profileImage'] })
+      .updateProfile(actionPayload, queryParams)
       .then(response => {
         dispatch(updateProfileSuccess(response));
 

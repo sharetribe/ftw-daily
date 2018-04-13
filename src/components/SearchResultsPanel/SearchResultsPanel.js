@@ -19,6 +19,16 @@ const SearchResultsPanel = props => {
       />
     ) : null;
 
+  // Panel width relative to the viewport
+  const panelMediumWidth = 50;
+  const panelLargeWidth = 62.5;
+  const cardRenderSizes = [
+    '(max-width: 767px) 100vw',
+    `(max-width: 1023px) ${panelMediumWidth}vw`,
+    `(max-width: 1920px) ${panelLargeWidth / 2}vw`,
+    `${panelLargeWidth / 3}vw`,
+  ].join(', ');
+
   return (
     <div className={classes}>
       <div className={css.listingCards}>
@@ -27,6 +37,7 @@ const SearchResultsPanel = props => {
             className={css.listingCard}
             key={l.id.uuid}
             listing={l}
+            renderSizes={cardRenderSizes}
             setActiveListing={setActiveListing}
           />
         ))}

@@ -33,32 +33,23 @@ export const Image2X = {
       id: new UUID('empty'),
       type: 'image',
       attributes: {
-        sizes: [
-          {
+        variants: {
+          crop: {
             name: 'crop',
             width: 200,
             height: 133,
             url: 'https://via.placeholder.com/200x133',
           },
-          {
+          crop2x: {
             name: 'crop2x',
             width: 400,
             height: 266,
             url: 'https://via.placeholder.com/400x266',
           },
-        ],
+        },
       },
     },
-    nameSet: [
-      {
-        name: 'crop',
-        size: '1x',
-      },
-      {
-        name: 'crop2x',
-        size: '2x',
-      },
-    ],
+    variants: ['crop', 'crop2x'],
   },
 };
 
@@ -71,32 +62,23 @@ export const Image2XAspect = {
       id: new UUID('empty'),
       type: 'image',
       attributes: {
-        sizes: [
-          {
+        variants: {
+          crop: {
             name: 'crop',
             width: 200,
             height: 133,
             url: 'https://via.placeholder.com/200x133',
           },
-          {
+          crop2x: {
             name: 'crop2x',
             width: 400,
             height: 266,
             url: 'https://via.placeholder.com/400x266',
           },
-        ],
+        },
       },
     },
-    nameSet: [
-      {
-        name: 'crop',
-        size: '1x',
-      },
-      {
-        name: 'crop2x',
-        size: '2x',
-      },
-    ],
+    variants: ['crop', 'crop2x'],
   },
 };
 
@@ -109,32 +91,23 @@ export const Image2XWrongAspect = {
       id: new UUID('empty'),
       type: 'image',
       attributes: {
-        sizes: [
-          {
+        variants: {
+          crop: {
             name: 'crop',
             width: 200,
             height: 133,
-            url: 'https://via.placeholder.com/200x200',
+            url: 'https://via.placeholder.com/200x133',
           },
-          {
+          crop2x: {
             name: 'crop2x',
             width: 400,
             height: 266,
-            url: 'https://via.placeholder.com/400x400',
+            url: 'https://via.placeholder.com/400x266',
           },
-        ],
+        },
       },
     },
-    nameSet: [
-      {
-        name: 'crop',
-        size: '1x',
-      },
-      {
-        name: 'crop2x',
-        size: '2x',
-      },
-    ],
+    variants: ['crop', 'crop2x'],
   },
 };
 
@@ -146,32 +119,23 @@ export const Image2XWrongAspectNoWrapper = {
       id: new UUID('empty'),
       type: 'image',
       attributes: {
-        sizes: [
-          {
+        variants: {
+          crop: {
             name: 'crop',
             width: 200,
             height: 133,
-            url: 'https://via.placeholder.com/200x200',
+            url: 'https://via.placeholder.com/200x133',
           },
-          {
+          crop2x: {
             name: 'crop2x',
             width: 400,
             height: 266,
-            url: 'https://via.placeholder.com/400x400',
+            url: 'https://via.placeholder.com/400x266',
           },
-        ],
+        },
       },
     },
-    nameSet: [
-      {
-        name: 'crop',
-        size: '1x',
-      },
-      {
-        name: 'crop2x',
-        size: '2x',
-      },
-    ],
+    variants: ['crop', 'crop2x'],
   },
 };
 
@@ -181,6 +145,7 @@ export const ImageEmpty = {
   props: {
     alt: 'img',
     image: null,
+    variants: ['crop', 'crop2x'],
   },
 };
 
@@ -190,6 +155,7 @@ export const ImageEmptyWithAspect = {
   props: {
     alt: 'img',
     image: null,
+    variants: ['crop', 'crop2x'],
   },
 };
 
@@ -210,32 +176,23 @@ export const ImageWithSizes = {
       id: new UUID('empty'),
       type: 'image',
       attributes: {
-        sizes: [
-          {
+        variants: {
+          crop: {
             name: 'crop',
             width: 200,
             height: 133,
             url: 'https://via.placeholder.com/200x133',
           },
-          {
+          crop2x: {
             name: 'crop2x',
             width: 400,
             height: 266,
             url: 'https://via.placeholder.com/400x266',
           },
-        ],
+        },
       },
     },
-    nameSet: [
-      {
-        name: 'crop',
-        size: '200w',
-      },
-      {
-        name: 'crop2x',
-        size: '400w',
-      },
-    ],
+    variants: ['crop', 'crop2x'],
     sizes: '(max-width: 600px) 200px, 400px',
   },
 };

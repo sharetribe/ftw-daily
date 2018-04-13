@@ -112,6 +112,14 @@ export class ManageListingsPageComponent extends Component {
 
     const title = intl.formatMessage({ id: 'ManageListingsPage.title' });
 
+    const panelWidth = 62.5;
+    // Render hints for responsive image
+    const renderSizes = [
+      `(max-width: 767px) 100vw`,
+      `(max-width: 1920px) ${panelWidth / 2}vw`,
+      `${panelWidth / 3}vw`,
+    ].join(', ');
+
     return (
       <Page title={title} scrollingDisabled={scrollingDisabled}>
         <LayoutSingleColumn>
@@ -137,6 +145,7 @@ export class ManageListingsPageComponent extends Component {
                     onOpenListing={onOpenListing}
                     hasOpeningError={openingErrorListingId.uuid === l.id.uuid}
                     hasClosingError={closingErrorListingId.uuid === l.id.uuid}
+                    renderSizes={renderSizes}
                   />
                 ))}
               </div>
@@ -234,6 +243,8 @@ ManageListingsPage.loadData = (params, search) => {
     page,
     perPage: RESULT_PAGE_SIZE,
     include: ['images'],
+    'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+    'limit.images': 1,
   });
 };
 

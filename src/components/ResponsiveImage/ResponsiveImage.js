@@ -3,19 +3,19 @@
  *   <ResponsiveImage
  *     alt="ListingX"
  *     image={imageDataFromSDK}
- *     nameSet={[{ name: 'landscape-crop', size: '1x'}, { name: 'landscape-crop2x', size: '2x'}]}
+ *     variants={['landscape-crop', 'landscape-crop2x']}
  *   />
  *   // produces:
  *   <img
  *     alt="ListingX"
  *     src="url/to/landscape-crop.jpg"
- *     srcSet="url/to/landscape-crop.jpg 1x, url/to/landscape-crop2x.jpg 2x" />
+ *     srcSet="url/to/landscape-crop.jpg 400w, url/to/landscape-crop2x.jpg 800w" />
  *
  * Usage with sizes:
  *   <ResponsiveImage
  *     alt="ListingX"
  *     image={imageDataFromSDK}
- *     nameSet={[{ name: 'landscape-crop', size: '400w'}, { name: 'landscape-crop2x', size: '800w'}]}
+ *     variants={['landscape-crop', 'landscape-crop2x']}
  *     sizes="(max-width: 600px) 100vw, 50vw"
  *   />
  *   // produces:
@@ -28,10 +28,13 @@
  *   // This means that below 600px image will take as many pixels there are available on current
  *   // viewport width (100vw) - and above that image will only take 50% of the page width.
  *   // Browser decides which image it will fetch based on current screen size.
+ *
+ * NOTE: for all the possible image variant names and their respective
+ * sizes, see the API documentation.
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import { arrayOf, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { propTypes } from '../../util/types';
@@ -40,10 +43,10 @@ import NoImageIcon from './NoImageIcon';
 import css from './ResponsiveImage.css';
 
 const ResponsiveImage = props => {
-  const { className, rootClassName, alt, noImageMessage, image, nameSet, sizes, ...rest } = props;
+  const { className, rootClassName, alt, noImageMessage, image, variants, ...rest } = props;
   const classes = classNames(rootClassName || css.root, className);
 
-  if (image == null || nameSet.length === 0) {
+  if (image == null || variants.length === 0) {
     const noImageClasses = classNames(rootClassName || css.root, css.noImageContainer, className);
 
     // NoImageMessage is needed for listing images on top the map (those component lose context)
@@ -61,43 +64,37 @@ const ResponsiveImage = props => {
     /* eslint-enable jsx-a11y/img-redundant-alt */
   }
 
-  const imageSizes = image.attributes.sizes;
   const imageVariants = image.attributes.variants;
 
-  const srcSet = nameSet
-    .map(v => {
-      const variant = imageVariants ? imageVariants[v.name] : null;
+  const srcSet = variants
+    .map(variantName => {
+      const variant = imageVariants[variantName];
 
-      // deprecated
-      // for backwards compatibility only
-      const size = imageSizes ? imageSizes.find(i => i.name === v.name) : null;
-
-      if (variant || size) {
-        const url = (variant || size).url;
-        return `${url} ${v.size}`;
-      } else {
-        // Handle case where the requested variant doesn't exist, for
-        // example because it hasn't been loaded yet.
-        // Return null, which will be filtered out.
+      if (!variant) {
+        // Variant not available (most like just not loaded yet)
         return null;
       }
+      return `${variant.url} ${variant.width}w`;
     })
     .filter(v => v != null)
     .join(', ');
 
-  const sizesProp = sizes ? { sizes } : {};
+  const imgProps = {
+    className: classes,
+    alt,
+    srcSet,
+    ...rest,
+  };
 
-  return <img alt={alt} className={classes} srcSet={srcSet} {...rest} {...sizesProp} />;
+  // alt prop already defined above
+  // eslint-disable-next-line jsx-a11y/alt-text
+  return <img {...imgProps} />;
 };
-
-const { arrayOf, shape, string } = PropTypes;
 
 ResponsiveImage.defaultProps = {
   className: null,
   rootClassName: null,
   image: null,
-  nameSet: [],
-  sizes: null,
   noImageMessage: null,
 };
 
@@ -106,13 +103,7 @@ ResponsiveImage.propTypes = {
   rootClassName: string,
   alt: string.isRequired,
   image: propTypes.image,
-  nameSet: arrayOf(
-    shape({
-      name: string.isRequired,
-      size: string.isRequired,
-    })
-  ),
-  sizes: string,
+  variants: arrayOf(string).isRequired,
   noImageMessage: string,
 };
 

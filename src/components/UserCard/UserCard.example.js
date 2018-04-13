@@ -50,20 +50,20 @@ export const WithProfileImageAndBio = {
         id: new UUID('profile-image'),
         type: 'image',
         attributes: {
-          sizes: [
-            {
-              name: 'square-xlarge2x',
+          variants: {
+            'square-small': {
+              name: 'square-small',
               width: 240,
               height: 240,
               url: 'https://lorempixel.com/240/240/people/',
             },
-            {
-              name: 'square-xlarge4x',
+            'square-small2x': {
+              name: 'square-small2x',
               width: 480,
               height: 480,
               url: 'https://lorempixel.com/480/480/people/',
             },
-          ],
+          },
         },
       },
     },

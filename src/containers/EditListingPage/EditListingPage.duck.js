@@ -275,7 +275,13 @@ export function requestCreateListing(data) {
         // Modify store to understand that we have created listing and can redirect away
         dispatch(createListingSuccess(response));
         // Fetch listing data so that redirection is smooth
-        dispatch(requestShowListing({ id, include: ['author', 'images'] }));
+        dispatch(
+          requestShowListing({
+            id,
+            include: ['author', 'images'],
+            'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+          })
+        );
         return response;
       })
       .then(response => {
@@ -316,7 +322,11 @@ export function requestUpdateListing(tab, data) {
       .update(data)
       .then(response => {
         updateResponse = response;
-        const payload = { id, include: ['author', 'images'] };
+        const payload = {
+          id,
+          include: ['author', 'images'],
+          'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+        };
         return dispatch(requestShowListing(payload));
       })
       .then(() => {
@@ -343,6 +353,7 @@ export function loadData(params) {
     const payload = {
       id: new UUID(id),
       include: ['author', 'images'],
+      'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
     };
     return dispatch(requestShowListing(payload));
   };

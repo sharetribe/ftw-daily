@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string, oneOfType, bool } from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
@@ -13,8 +13,21 @@ import { ResponsiveImage, IconBannedUser, NamedLink } from '../../components/';
 
 import css from './Avatar.css';
 
+// Responsive image sizes hint
+const AVATAR_SIZES = '40px';
+const AVATAR_SIZES_MEDIUM = '60px';
+const AVATAR_SIZES_LARGE = '96px';
+
+const AVATAR_IMAGE_VARIANTS = [
+  // 240x240
+  'square-small',
+
+  // 480x480
+  'square-small2x',
+];
+
 export const AvatarComponent = props => {
-  const { rootClassName, className, user, disableProfileLink, intl } = props;
+  const { rootClassName, className, user, renderSizes, disableProfileLink, intl } = props;
   const classes = classNames(rootClassName || css.root, className);
 
   const userIsCurrentUser = user && user.type === 'currentUser';
@@ -49,10 +62,8 @@ export const AvatarComponent = props => {
           rootClassName={css.avatarImage}
           alt={displayName}
           image={avatarUser.profileImage}
-          nameSet={[
-            { name: 'square-xlarge2x', size: '1x' },
-            { name: 'square-xlarge4x', size: '2x' },
-          ]}
+          variants={AVATAR_IMAGE_VARIANTS}
+          sizes={renderSizes}
         />
       </NamedLink>
     );
@@ -63,10 +74,8 @@ export const AvatarComponent = props => {
           rootClassName={css.avatarImage}
           alt={displayName}
           image={avatarUser.profileImage}
-          nameSet={[
-            { name: 'square-xlarge2x', size: '1x' },
-            { name: 'square-xlarge4x', size: '2x' },
-          ]}
+          variants={AVATAR_IMAGE_VARIANTS}
+          sizes={renderSizes}
         />
       </div>
     );
@@ -91,16 +100,16 @@ AvatarComponent.defaultProps = {
   className: null,
   rootClassName: null,
   user: null,
+  renderSizes: AVATAR_SIZES,
   disableProfileLink: false,
 };
-
-const { string, oneOfType, bool } = PropTypes;
 
 AvatarComponent.propTypes = {
   rootClassName: string,
   className: string,
   user: oneOfType([propTypes.user, propTypes.currentUser]),
 
+  renderSizes: string,
   disableProfileLink: bool,
 
   // from injectIntl
@@ -111,8 +120,12 @@ const Avatar = injectIntl(AvatarComponent);
 
 export default Avatar;
 
-export const AvatarMedium = props => <Avatar rootClassName={css.mediumAvatar} {...props} />;
+export const AvatarMedium = props => (
+  <Avatar rootClassName={css.mediumAvatar} renderSizes={AVATAR_SIZES_MEDIUM} {...props} />
+);
 AvatarMedium.displayName = 'AvatarMedium';
 
-export const AvatarLarge = props => <Avatar rootClassName={css.largeAvatar} {...props} />;
+export const AvatarLarge = props => (
+  <Avatar rootClassName={css.largeAvatar} renderSizes={AVATAR_SIZES_LARGE} {...props} />
+);
 AvatarLarge.displayName = 'AvatarLarge';

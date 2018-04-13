@@ -91,6 +91,7 @@ export const loadData = (params, search) => (dispatch, getState, sdk) => {
   const apiQueryParams = {
     only: onlyFilter,
     include: ['provider', 'provider.profileImage', 'customer', 'customer.profileImage', 'booking'],
+    'fields.image': ['variants.square-small', 'variants.square-small2x'],
     page,
     per_page: INBOX_PAGE_SIZE,
   };

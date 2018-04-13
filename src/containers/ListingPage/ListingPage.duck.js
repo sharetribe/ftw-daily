@@ -124,8 +124,8 @@ export const showListing = (listingId, isOwn = false) => (dispatch, getState, sd
       'variants.scaled-xlarge',
 
       // Avatars
-      'variants.square-xlarge2x',
-      'variants.square-xlarge4x',
+      'variants.square-small',
+      'variants.square-small2x',
     ],
   };
 
@@ -143,7 +143,12 @@ export const showListing = (listingId, isOwn = false) => (dispatch, getState, sd
 
 export const fetchReviews = listingId => (dispatch, getState, sdk) => {
   return sdk.reviews
-    .query({ listing_id: listingId, state: 'public', include: ['author', 'author.profileImage'] })
+    .query({
+      listing_id: listingId,
+      state: 'public',
+      include: ['author', 'author.profileImage'],
+      'fields.image': ['variants.square-small', 'variants.square-small2x'],
+    })
     .then(response => {
       const reviews = denormalisedResponseEntities(response);
       dispatch(fetchReviewsSuccess(reviews));

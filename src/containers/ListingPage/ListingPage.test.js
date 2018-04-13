@@ -116,8 +116,8 @@ describe('ListingPage', () => {
                 'variants.scaled-xlarge',
 
                 // Avatars
-                'variants.square-xlarge2x',
-                'variants.square-xlarge4x',
+                'variants.square-small',
+                'variants.square-small2x',
               ],
             },
           ],
@@ -163,8 +163,8 @@ describe('ListingPage', () => {
                 'variants.scaled-xlarge',
 
                 // Avatars
-                'variants.square-xlarge2x',
-                'variants.square-xlarge4x',
+                'variants.square-small',
+                'variants.square-small2x',
               ],
             },
           ],

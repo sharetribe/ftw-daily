@@ -332,8 +332,13 @@ export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
     return Promise.resolve({});
   }
 
+  const params = {
+    include: ['profileImage'],
+    'fields.image': ['variants.square-small', 'variants.square-small2x'],
+  };
+
   return sdk.currentUser
-    .show({ include: ['profileImage'] })
+    .show(params)
     .then(response => {
       const entities = denormalisedResponseEntities(response);
       if (entities.length !== 1) {
