@@ -51,6 +51,8 @@ class SearchFiltersPanelComponent extends Component {
     this.resetAll = this.resetAll.bind(this);
     this.handleSelectSingle = this.handleSelectSingle.bind(this);
     this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
+    this.initialSingleValue = this.initialSingleValue.bind(this);
+    this.initialMultiValue = this.initialMultiValue.bind(this);
   }
 
   // Apply the filters by redirecting to SearchPage with new filters.
@@ -123,6 +125,35 @@ class SearchFiltersPanelComponent extends Component {
 
       return { currentQueryParams };
     });
+  }
+
+  // resolve initial value for a single value filter
+  initialSingleValue(paramName) {
+    const currentQueryParams = this.state.currentQueryParams;
+    const urlQueryParams = this.props.urlQueryParams;
+
+
+    // initialValue for a select should come either from state.currentQueryParam or urlQueryParam
+    const currentQueryParam = currentQueryParams[paramName];
+
+    return typeof currentQueryParam !== 'undefined'
+      ? currentQueryParam
+      : urlQueryParams[paramName];
+  }
+
+  // resolve initial values for a multi value filter
+  initialMultiValue(paramName) {
+    const currentQueryParams = this.state.currentQueryParams;
+    const urlQueryParams = this.props.urlQueryParams;
+
+    const splitQueryParam = queryParam => queryParam ? queryParam.split(',') : [];
+
+    // initialValue for a select should come either from state.currentQueryParam or urlQueryParam
+    const hasCurrentQueryParam = typeof currentQueryParams[paramName] !== 'undefined'
+
+    return hasCurrentQueryParam
+      ? splitQueryParam(currentQueryParams[paramName])
+      : splitQueryParam(urlQueryParams[paramName]);
   }
 
   render() {

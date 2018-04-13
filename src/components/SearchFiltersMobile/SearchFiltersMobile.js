@@ -42,6 +42,8 @@ class SearchFiltersMobileComponent extends Component {
     this.resetAll = this.resetAll.bind(this);
     this.handleSelectSingle = this.handleSelectSingle.bind(this);
     this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
+    this.initialSingleValue = this.initialSingleValue.bind(this);
+    this.initialMultiValue = this.initialMultiValue.bind(this);
   }
 
   // Open filters modal, set the initial parameters to current ones
@@ -109,6 +111,19 @@ class SearchFiltersMobileComponent extends Component {
     }
   }
 
+  // resolve initial value for a single value filter
+  initialSingleValue(paramName) {
+    return this.props.urlQueryParams[paramName]
+  }
+
+  // resolve initial values for a multi value filter
+  initialMultiValue(paramName) {
+    const urlQueryParams = this.props.urlQueryParams;
+    return !!urlQueryParams[paramName]
+      ? urlQueryParams[paramName].split(',')
+      : [];
+  }
+
   render() {
     const {
       rootClassName,
@@ -153,7 +168,7 @@ class SearchFiltersMobileComponent extends Component {
     const categoryLabel = intl.formatMessage({
       id: 'SearchFiltersMobile.categoryLabel',
     });
-    const initialCategory = urlQueryParams[CATEGORY_URL_PARAM];
+    const initialCategory = this.initialSingleValue(CATEGORY_URL_PARAM);
 
     const categoryFilter = categories ? (
       <SelectSingleFilterPlain
@@ -168,9 +183,7 @@ class SearchFiltersMobileComponent extends Component {
 
     const amenitiesLabel = intl.formatMessage({ id: 'SearchFiltersMobile.amenitiesLabel' });
 
-    const initialAmenities = !!urlQueryParams[AMENITIES_URL_PARAM]
-      ? urlQueryParams[AMENITIES_URL_PARAM].split(',')
-      : [];
+    const initialAmenities = this.initialMultiValue(AMENITIES_URL_PARAM);
 
     const amenitiesFilter = amenities ? (
       <SelectMultipleFilterPlain
