@@ -41,11 +41,16 @@ class MainPanel extends Component {
     } = this.props;
 
     const isSearchFiltersPanelOpen = !!secondaryFilters && this.state.isSearchFiltersPanelOpen;
+
+    const secondaryFilterKeys = secondaryFilters ? Object.keys(secondaryFilters) : [];
+    // resolve list of secondary filter url params
+    const secondaryFilterParams = Object.entries(customURLParamToConfig)
+      .filter(param => secondaryFilterKeys.includes(param[1]))
+      .map(e => e[0]);
+
     const searchFiltersPanelSelectedCount = !secondaryFilters
       ? 0
-      : Object.keys(customURLParamToConfig)
-          .map(key => urlQueryParams[key])
-          .filter(param => !!param).length;
+      : secondaryFilterParams.map(key => urlQueryParams[key]).filter(param => !!param).length;
 
     const searchFiltersPanelProps = !!secondaryFilters
       ? {
