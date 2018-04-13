@@ -65,7 +65,7 @@
     "build": "sharetribe-scripts build",
     "format": "prettier --write '**/*.{js,css}'",
     "format-ci": "prettier --list-different '**/*.{js,css}'",
-    "format-docs": "prettier --write 'docs/**/*.md'",
+    "format-docs": "prettier --write '**/*.md'",
     "test": "sharetribe-scripts test --env=jsdom",
     "test-ci": "sharetribe-scripts test --env=jsdom --runInBand",
     "eject": "sharetribe-scripts eject",
