@@ -1,11 +1,7 @@
-/**
- * DEPRECATED: this component is part of Redux Form - we are migrating to react-final-form.
- */
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { intlShape, injectIntl } from 'react-intl';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { IconReviewStar, ValidationError } from '../../components';
 
