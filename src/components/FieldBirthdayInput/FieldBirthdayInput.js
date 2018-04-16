@@ -1,6 +1,10 @@
+/**
+ * NOTE this component is part of react-final-form instead of Redux Form.
+ */
+
 import React, { Component } from 'react';
 import { func, instanceOf, object, node, string, bool } from 'prop-types';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { range } from 'lodash';
@@ -8,7 +12,7 @@ import { ValidationError } from '../../components';
 
 import css from './FieldBirthdayInput.css';
 
-// Since redux-form tracks the onBlur event for marking the field as
+// Since final-form tracks the onBlur event for marking the field as
 // touched (which triggers possible error validation rendering), only
 // trigger the event asynchronously when no other input within this
 // component has received focus.
@@ -88,14 +92,14 @@ class BirthdayInputComponent extends Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
   componentWillMount() {
-    const value = this.props.value;
+    const value = this.props.valueFromForm;
     if (value instanceof Date) {
       this.setState({ selected: selectedFromDate(value) });
     }
   }
   componentWillReceiveProps(newProps) {
-    const oldValue = this.props.value;
-    const newValue = newProps.value;
+    const oldValue = this.props.valueFromForm;
+    const newValue = newProps.valueFromForm;
     const valueChanged = oldValue !== newValue;
     if (valueChanged && newValue instanceof Date) {
       this.setState({ selected: selectedFromDate(newValue) });
@@ -219,7 +223,7 @@ BirthdayInputComponent.defaultProps = {
   dateLabel: null,
   monthLabel: null,
   yearLabel: null,
-  value: null,
+  valueFromForm: null,
   disabled: false,
 };
 
@@ -231,7 +235,7 @@ BirthdayInputComponent.propTypes = {
   dateLabel: node,
   monthLabel: node,
   yearLabel: node,
-  value: instanceOf(Date),
+  valueFromForm: instanceOf(Date),
   onChange: func.isRequired,
   onFocus: func.isRequired,
   onBlur: func.isRequired,
