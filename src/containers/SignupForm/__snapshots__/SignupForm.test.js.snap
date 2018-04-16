@@ -12,19 +12,17 @@ exports[`SignupForm matches snapshot 1`] = `
       className=""
     >
       <label
-        htmlFor="SignupForm.email"
+        htmlFor="email"
       >
         SignupForm.emailLabel
       </label>
       <input
         autoComplete="email"
         className=""
-        id="SignupForm.email"
+        id="email"
         name="email"
         onBlur={[Function]}
         onChange={[Function]}
-        onDragStart={[Function]}
-        onDrop={[Function]}
         onFocus={[Function]}
         placeholder="SignupForm.emailPlaceholder"
         type="email"
@@ -36,19 +34,17 @@ exports[`SignupForm matches snapshot 1`] = `
         className=""
       >
         <label
-          htmlFor="SignupForm.fname"
+          htmlFor="fname"
         >
           SignupForm.firstNameLabel
         </label>
         <input
           autoComplete="given-name"
           className=""
-          id="SignupForm.fname"
+          id="fname"
           name="fname"
           onBlur={[Function]}
           onChange={[Function]}
-          onDragStart={[Function]}
-          onDrop={[Function]}
           onFocus={[Function]}
           placeholder="SignupForm.firstNamePlaceholder"
           type="text"
@@ -59,19 +55,17 @@ exports[`SignupForm matches snapshot 1`] = `
         className=""
       >
         <label
-          htmlFor="SignupForm.lname"
+          htmlFor="lname"
         >
           SignupForm.lastNameLabel
         </label>
         <input
           autoComplete="family-name"
           className=""
-          id="SignupForm.lname"
+          id="lname"
           name="lname"
           onBlur={[Function]}
           onChange={[Function]}
-          onDragStart={[Function]}
-          onDrop={[Function]}
           onFocus={[Function]}
           placeholder="SignupForm.lastNamePlaceholder"
           type="text"
@@ -83,19 +77,17 @@ exports[`SignupForm matches snapshot 1`] = `
       className=""
     >
       <label
-        htmlFor="SignupForm.password"
+        htmlFor="password"
       >
         SignupForm.passwordLabel
       </label>
       <input
         autoComplete="new-password"
         className=""
-        id="SignupForm.password"
+        id="password"
         name="password"
         onBlur={[Function]}
         onChange={[Function]}
-        onDragStart={[Function]}
-        onDrop={[Function]}
         onFocus={[Function]}
         placeholder="SignupForm.passwordPlaceholder"
         type="password"
