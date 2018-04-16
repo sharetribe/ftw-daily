@@ -5,6 +5,7 @@ import {
   minLength,
   maxLength,
   moneySubUnitAmountAtLeast,
+  composeValidators,
 } from './validators';
 
 const { Money } = sdkTypes;
@@ -146,6 +147,41 @@ describe('validators', () => {
       expect(moneySubUnitAmountAtLeast('fail', 0)(new Money(0, 'USD'))).toBeUndefined();
       expect(moneySubUnitAmountAtLeast('fail', 50)(new Money(50, 'USD'))).toBeUndefined();
       expect(moneySubUnitAmountAtLeast('fail', 50)(new Money(100, 'USD'))).toBeUndefined();
+    });
+  });
+  describe('composeValidators()', () => {
+    const validateLength = composeValidators(minLength('minLength', 4), maxLength('maxLength', 6));
+
+    it('should fail on composed minLength (4) and maxLength (6): undefined', () => {
+      expect(validateLength(undefined)).toEqual('minLength');
+    });
+    it('should fail on composed minLength (4) and maxLength (6): null', () => {
+      expect(validateLength(null)).toEqual('minLength');
+    });
+
+    it('should fail on composed minLength (4) and maxLength (6): bad', () => {
+      expect(validateLength('bad')).toEqual('minLength');
+    });
+    it('should fail on composed minLength (4) and maxLength (6): longword', () => {
+      expect(validateLength('longword')).toEqual('maxLength');
+    });
+    it('should allow on composed minLength (4) and maxLength (6): good', () => {
+      expect(validateLength('good')).toBeUndefined();
+    });
+
+    it('should fail on composed required and minLength (4): empty string. Error: required', () => {
+      const requiredWithMinLength = composeValidators(
+        required('required'),
+        minLength('minLength', 6)
+      );
+      expect(requiredWithMinLength('')).toEqual('required');
+    });
+    it('should fail on composed minLength (4) and required: empty string. Error: minLength', () => {
+      const requiredWithMinLength = composeValidators(
+        minLength('minLength', 4),
+        required('required')
+      );
+      expect(validateLength('')).toEqual('minLength');
     });
   });
 });

@@ -66,7 +66,6 @@ export const Empty = {
     },
     onSubmit: values => {
       console.log('Submitting a form with values:', values);
-      return false;
     },
   },
   group: 'custom inputs',
