@@ -10,7 +10,7 @@
  */
 import React from 'react';
 
-import { TextInputField } from '../../components';
+import { FieldTextInput } from '../../components';
 import { format, parse } from './fiFormatter';
 
 const FieldPhoneNumberInput = props => {
@@ -21,7 +21,7 @@ const FieldPhoneNumberInput = props => {
     parse: parse,
   };
 
-  return <TextInputField {...inputProps} />;
+  return <FieldTextInput {...inputProps} />;
 };
 
 export default FieldPhoneNumberInput;
