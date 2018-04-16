@@ -32,6 +32,7 @@ export { default as ExternalLink } from './ExternalLink/ExternalLink';
 export { default as FieldBirthdayInput } from './FieldBirthdayInput/FieldBirthdayInput';
 export { default as FieldBoolean } from './FieldBoolean/FieldBoolean';
 export { default as FieldCheckbox } from './FieldCheckbox/FieldCheckbox';
+export { default as FieldCheckboxGroup } from './FieldCheckboxGroup/FieldCheckboxGroup';
 export { default as FieldCurrencyInput } from './FieldCurrencyInput/FieldCurrencyInput';
 export { default as FieldDateInput } from './FieldDateInput/FieldDateInput';
 export { default as FieldDateRangeInput } from './FieldDateRangeInput/FieldDateRangeInput';

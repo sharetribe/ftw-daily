@@ -8,6 +8,7 @@ import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingText
 import * as FieldBirthdayInput from './components/FieldBirthdayInput/FieldBirthdayInput.example';
 import * as FieldBoolean from './components/FieldBoolean/FieldBoolean.example';
 import * as FieldCheckbox from './components/FieldCheckbox/FieldCheckbox.example';
+import * as FieldCheckboxGroup from './components/FieldCheckboxGroup/FieldCheckboxGroup.example';
 import * as FieldCurrencyInput from './components/FieldCurrencyInput/FieldCurrencyInput.example';
 import * as FieldDateInput from './components/FieldDateInput/FieldDateInput.example';
 import * as FieldDateRangeInput from './components/FieldDateRangeInput/FieldDateRangeInput.example';
@@ -100,6 +101,7 @@ export {
   FieldBirthdayInput,
   FieldBoolean,
   FieldCheckbox,
+  FieldCheckboxGroup,
   FieldCurrencyInput,
   FieldDateInput,
   FieldDateRangeInput,
