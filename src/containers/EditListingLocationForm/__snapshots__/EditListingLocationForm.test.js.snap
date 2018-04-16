@@ -1,40 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditListingLocationForm matches snapshot 1`] = `
-<Form
-  className=""
-  contentRef={null}
-  onSubmit={[Function]}
->
-  <Component
-    autoFocus={true}
-    format={null}
-    label="EditListingLocationForm.address"
-    name="location"
-    placeholder="EditListingLocationForm.addressPlaceholder"
-    validate={
-      Array [
-        [Function],
-        [Function],
-      ]
+<ReactFinalForm(4.3.1)(3.1.5)
+  anyTouched={false}
+  asyncValidate={[Function]}
+  asyncValidating={false}
+  autofill={[Function]}
+  blur={[Function]}
+  change={[Function]}
+  clearAsyncError={[Function]}
+  clearFields={[Function]}
+  clearSubmit={[Function]}
+  clearSubmitErrors={[Function]}
+  destroy={[Function]}
+  dirty={false}
+  dispatch={[Function]}
+  form="fakeTestForm"
+  handleSubmit={[Function]}
+  initialize={[Function]}
+  initialized={true}
+  intl={
+    Object {
+      "formatDate": [Function],
+      "formatHTMLMessage": [Function],
+      "formatMessage": [Function],
+      "formatNumber": [Function],
+      "formatPlural": [Function],
+      "formatRelative": [Function],
+      "formatTime": [Function],
+      "now": [Function],
     }
-  />
-  <TextInputField
-    id="fakeTestForm.building"
-    label="EditListingLocationForm.building"
-    name="building"
-    placeholder="EditListingLocationForm.buildingPlaceholder"
-    type="text"
-  />
-  <Button
-    className={null}
-    disabled={false}
-    inProgress={false}
-    ready={false}
-    rootClassName={null}
-    type="submit"
-  >
-    Save location
-  </Button>
-</Form>
+  }
+  invalid={false}
+  onSubmit={[Function]}
+  pristine={true}
+  pure={true}
+  render={[Function]}
+  reset={[Function]}
+  resetSection={[Function]}
+  saveActionMsg="Save location"
+  selectedPlace={null}
+  submit={[Function]}
+  submitFailed={false}
+  submitSucceeded={false}
+  submitting={false}
+  touch={[Function]}
+  untouch={[Function]}
+  updateError={null}
+  updateInProgress={false}
+  updated={false}
+  valid={true}
+/>
 `;
