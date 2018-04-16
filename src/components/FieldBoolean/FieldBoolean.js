@@ -1,6 +1,6 @@
 import React from 'react';
 import { injectIntl, intlShape } from 'react-intl';
-import { SelectField } from '../../components';
+import { FieldSelect } from '../../components';
 
 const FieldBoolean = props => {
   const { placeholder, intl, ...rest } = props;
@@ -30,11 +30,11 @@ const FieldBoolean = props => {
     },
   };
   return (
-    <SelectField {...selectProps}>
+    <FieldSelect {...selectProps}>
       <option value="">{placeholder}</option>
       <option value="true">{trueLabel}</option>
       <option value="false">{falseLabel}</option>
-    </SelectField>
+    </FieldSelect>
   );
 };
 
