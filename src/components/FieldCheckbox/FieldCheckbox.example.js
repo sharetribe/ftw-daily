@@ -1,43 +1,47 @@
 import React from 'react';
-import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Form as FinalForm, FormSpy } from 'react-final-form';
 import { Button } from '../../components';
 import FieldCheckbox from './FieldCheckbox';
-import { required } from '../../util/validators';
 
 const formName = 'Styleguide.FieldCheckbox.Form';
 
-const FormComponent = props => {
-  const { form, handleSubmit, invalid, pristine, submitting } = props;
+const FormComponent = props => (
+  <FinalForm
+    {...props}
+    form={formName}
+    render={fieldRenderProps => {
+      const { form, handleSubmit, onChange, invalid, pristine, submitting } = fieldRenderProps;
 
-  const submitDisabled = invalid || pristine || submitting;
+      const submitDisabled = invalid || pristine || submitting;
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <FieldCheckbox id="checkbox-id" name="checkbox-name" label="Check here, optional" />
+      return (
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            handleSubmit(e);
+          }}
+        >
+          <FormSpy onChange={onChange} />
+          <FieldCheckbox id="checkbox-id1" name="checkbox-group" label="option 1" value="option1" />
+          <FieldCheckbox id="checkbox-id2" name="checkbox-group" label="option 2" value="option2" />
 
-      <FieldCheckbox
-        id="checkbox-required-id"
-        name="checkbox-required-name"
-        label="Check here, required"
-        validate={required('This field is required')}
-      />
-
-      <Button style={{ marginTop: 24 }} type="submit" disabled={submitDisabled}>
-        Submit
-      </Button>
-    </form>
-  );
-};
-
-FormComponent.propTypes = formPropTypes;
-
-const Form = reduxForm({
-  form: formName,
-})(FormComponent);
+          <Button style={{ marginTop: 24 }} type="submit" disabled={submitDisabled}>
+            Submit
+          </Button>
+        </form>
+      );
+    }}
+  />
+);
 
 export const Checkbox = {
-  component: Form,
+  component: FormComponent,
   props: {
+    onChange: formState => {
+      if (Object.keys(formState.values).length > 0) {
+        console.log('form values changed to:', formState.values);
+      }
+    },
     onSubmit: values => {
       console.log('Submit values of FieldCheckbox: ', values);
     },
