@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import Decimal from 'decimal.js';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { renderShallow, renderDeep } from '../../util/test-helpers';
-import { fakeIntl, fakeFormProps } from '../../util/test-data';
+import { fakeIntl } from '../../util/test-data';
 import { LINE_ITEM_NIGHT, TRANSITION_REQUEST } from '../../util/types';
 import { dateFromAPIToLocalNoon } from '../../util/dates';
 import { BookingBreakdown } from '../../components';
@@ -18,7 +18,6 @@ describe('BookingDatesForm', () => {
   it('matches snapshot without selected dates', () => {
     const tree = renderShallow(
       <BookingDatesFormComponent
-        {...fakeFormProps}
         unitType={LINE_ITEM_NIGHT}
         intl={fakeIntl}
         dispatch={noop}

@@ -2,23 +2,7 @@
 
 exports[`EditListingPoliciesForm matches snapshot 1`] = `
 <ReactFinalForm(4.3.1)(3.1.5)
-  anyTouched={false}
-  asyncValidate={[Function]}
-  asyncValidating={false}
-  autofill={[Function]}
-  blur={[Function]}
-  change={[Function]}
-  clearAsyncError={[Function]}
-  clearFields={[Function]}
-  clearSubmit={[Function]}
-  clearSubmitErrors={[Function]}
-  destroy={[Function]}
-  dirty={false}
   dispatch={[Function]}
-  form="fakeTestForm"
-  handleSubmit={[Function]}
-  initialize={[Function]}
-  initialized={true}
   intl={
     Object {
       "formatDate": [Function],
@@ -31,25 +15,13 @@ exports[`EditListingPoliciesForm matches snapshot 1`] = `
       "now": [Function],
     }
   }
-  invalid={false}
   onSubmit={[Function]}
-  pristine={true}
   publicData={Object {}}
-  pure={true}
   render={[Function]}
-  reset={[Function]}
-  resetSection={[Function]}
   saveActionMsg="Save rules"
   selectedPlace={null}
-  submit={[Function]}
-  submitFailed={false}
-  submitSucceeded={false}
-  submitting={false}
-  touch={[Function]}
-  untouch={[Function]}
   updateError={null}
   updateInProgress={false}
   updated={false}
-  valid={true}
 />
 `;

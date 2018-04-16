@@ -2,25 +2,9 @@
 
 exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
 <ReactFinalForm(4.3.1)(3.1.5)
-  anyTouched={false}
-  asyncValidate={[Function]}
-  asyncValidating={false}
-  autofill={[Function]}
-  blur={[Function]}
   bookingDates={Object {}}
-  change={[Function]}
-  clearAsyncError={[Function]}
-  clearFields={[Function]}
-  clearSubmit={[Function]}
-  clearSubmitErrors={[Function]}
-  destroy={[Function]}
-  dirty={false}
   dispatch={[Function]}
   endDatePlaceholder="tomorrow"
-  form="fakeTestForm"
-  handleSubmit={[Function]}
-  initialize={[Function]}
-  initialized={true}
   intl={
     Object {
       "formatDate": [Function],
@@ -33,21 +17,11 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
       "now": [Function],
     }
   }
-  invalid={false}
   isOwnListing={false}
   onSubmit={[Function]}
-  pristine={true}
-  pure={true}
   render={[Function]}
-  reset={[Function]}
-  resetSection={[Function]}
   startDatePlaceholder="today"
-  submit={[Function]}
   submitButtonWrapperClassName={null}
-  submitFailed={false}
-  submitSucceeded={false}
-  submitting={false}
-  touch={[Function]}
   unitPrice={
     Money {
       "amount": 1099,
@@ -55,7 +29,5 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
     }
   }
   unitType="line-item/night"
-  untouch={[Function]}
-  valid={true}
 />
 `;
