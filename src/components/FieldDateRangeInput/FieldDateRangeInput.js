@@ -1,6 +1,13 @@
+/**
+ * Provides a date picker for Final Forms (using https://github.com/airbnb/react-dates)
+ *
+ * NOTE: If you are using this component inside BookingDatesForm,
+ * you should convert value.date to start date and end date before submitting it to API
+ */
+
 import React, { Component } from 'react';
 import { bool, func, object, oneOf, string } from 'prop-types';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
@@ -117,6 +124,8 @@ class FieldDateRangeInputComponent extends Component {
       ...restOfInput,
       ...rest,
       focusedInput: this.state.focusedInput,
+      startDateId,
+      endDateId,
     };
     const classes = classNames(rootClassName || css.fieldRoot, className);
     const errorClasses = classNames({ [css.mobileMargins]: useMobileMargins });
