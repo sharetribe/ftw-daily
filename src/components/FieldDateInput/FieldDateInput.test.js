@@ -16,8 +16,6 @@ describe('DateInput', () => {
       onBlur: noop,
       onChange: noop,
       onFocus: noop,
-      onDragStart: noop,
-      onDrop: noop,
       id: 'bookingDate',
       placeholderText: 'today',
     };
