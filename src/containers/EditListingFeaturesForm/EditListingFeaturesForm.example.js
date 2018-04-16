@@ -3,11 +3,7 @@ import EditListingFeaturesForm from './EditListingFeaturesForm';
 const NAME = 'amenities';
 
 const initialValueArray = ['towels', 'jacuzzi', 'bathroom'];
-const initialValueMap = initialValueArray.reduce((map, value) => {
-  map[value] = true;
-  return map;
-}, {});
-const initialValues = { [NAME]: initialValueMap };
+const initialValues = { [NAME]: initialValueArray };
 
 export const Amenities = {
   component: EditListingFeaturesForm,

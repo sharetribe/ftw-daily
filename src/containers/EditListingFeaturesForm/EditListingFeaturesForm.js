@@ -1,64 +1,71 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, string } from 'prop-types';
 import classNames from 'classnames';
-import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Form as FinalForm } from 'react-final-form';
+import arrayMutators from 'final-form-arrays';
 import { FormattedMessage } from 'react-intl';
 
 import { propTypes } from '../../util/types';
 import config from '../../config';
-import { Button, FieldGroupCheckbox, Form } from '../../components';
+import { Button, FieldCheckboxGroup, Form } from '../../components';
 
 import css from './EditListingFeaturesForm.css';
 
-const EditListingFeaturesFormComponent = props => {
-  const {
-    form,
-    submitting,
-    disabled,
-    rootClassName,
-    className,
-    name,
-    handleSubmit,
-    saveActionMsg,
-    updated,
-    updateError,
-    updateInProgress,
-  } = props;
+const EditListingFeaturesFormComponent = props => (
+  <FinalForm
+    {...props}
+    mutators={{ ...arrayMutators }}
+    render={fieldRenderProps => {
+      const {
+        form,
+        submitting,
+        disabled,
+        rootClassName,
+        className,
+        name,
+        handleSubmit,
+        saveActionMsg,
+        updated,
+        updateError,
+        updateInProgress,
+      } = fieldRenderProps;
 
-  const classes = classNames(rootClassName || css.root, className);
-  const submitReady = updated;
-  const submitInProgress = submitting || updateInProgress;
-  const submitDisabled = disabled || submitInProgress;
+      const classes = classNames(rootClassName || css.root, className);
+      const submitReady = updated;
+      const submitInProgress = submitting || updateInProgress;
+      const submitDisabled = disabled || submitInProgress;
 
-  const errorMessage = updateError ? (
-    <p className={css.error}>
-      <FormattedMessage id="EditListingFeaturesForm.updateFailed" />
-    </p>
-  ) : null;
+      const errorMessage = updateError ? (
+        <p className={css.error}>
+          <FormattedMessage id="EditListingFeaturesForm.updateFailed" />
+        </p>
+      ) : null;
 
-  return (
-    <Form className={classes} onSubmit={handleSubmit}>
-      {errorMessage}
+      return (
+        <Form className={classes} onSubmit={handleSubmit}>
+          {errorMessage}
 
-      <FieldGroupCheckbox
-        className={css.features}
-        id={`${form}.${name}`}
-        name={name}
-        options={config.custom.amenities}
-      />
+          <FieldCheckboxGroup
+            className={css.features}
+            id={`${form}.${name}`}
+            name={name}
+            options={config.custom.amenities}
+          />
 
-      <Button
-        className={css.submitButton}
-        type="submit"
-        inProgress={submitInProgress}
-        disabled={submitDisabled}
-        ready={submitReady}
-      >
-        {saveActionMsg}
-      </Button>
-    </Form>
-  );
-};
+          <Button
+            className={css.submitButton}
+            type="submit"
+            inProgress={submitInProgress}
+            disabled={submitDisabled}
+            ready={submitReady}
+          >
+            {saveActionMsg}
+          </Button>
+        </Form>
+      );
+    }}
+  />
+);
 
 EditListingFeaturesFormComponent.defaultProps = {
   rootClassName: null,
@@ -66,20 +73,17 @@ EditListingFeaturesFormComponent.defaultProps = {
   updateError: null,
 };
 
-const { bool, func, string } = PropTypes;
-
 EditListingFeaturesFormComponent.propTypes = {
-  ...formPropTypes,
   rootClassName: string,
   className: string,
   name: string.isRequired,
-  handleSubmit: func.isRequired,
+  onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   updated: bool.isRequired,
   updateError: propTypes.error,
   updateInProgress: bool.isRequired,
 };
 
-const defaultFormName = 'EditListingFeaturesForm';
+const EditListingFeaturesForm = EditListingFeaturesFormComponent;
 
-export default reduxForm({ form: defaultFormName })(EditListingFeaturesFormComponent);
+export default EditListingFeaturesForm;
