@@ -11,8 +11,9 @@ import React, { Component } from 'react';
 import { arrayOf, bool, node, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { FieldArray } from 'redux-form';
-import { FieldCheckbox, ValidationError } from '../../components';
+import { ValidationError } from '../../components';
 
+import FieldCheckbox from './FieldCheckbox';
 import css from './FieldGroupCheckbox.css';
 
 class FieldCheckboxRenderer extends Component {
