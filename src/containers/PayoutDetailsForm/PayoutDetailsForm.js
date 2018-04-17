@@ -48,6 +48,7 @@ const PayoutDetailsFormComponent = props => (
       const {
         className,
         createStripeAccountError,
+        change,
         disabled,
         handleSubmit,
         inProgress,
@@ -248,7 +249,7 @@ const PayoutDetailsFormComponent = props => (
                   label={streetAddressLabel}
                   placeholder={streetAddressPlaceholder}
                   validate={streetAddressRequired}
-                  clearOnUnmount
+                  onUnmount={() => change('streetAddress', undefined)}
                 />
                 <div className={css.formRow}>
                   <FieldTextInput
@@ -261,7 +262,7 @@ const PayoutDetailsFormComponent = props => (
                     label={postalCodeLabel}
                     placeholder={postalCodePlaceholder}
                     validate={postalCodeRequired}
-                    clearOnUnmount
+                    onUnmount={() => change('postalCode', undefined)}
                   />
                   <FieldTextInput
                     id="city"
@@ -273,7 +274,7 @@ const PayoutDetailsFormComponent = props => (
                     label={cityLabel}
                     placeholder={cityPlaceholder}
                     validate={cityRequired}
-                    clearOnUnmount
+                    onUnmount={() => change('city', undefined)}
                   />
                 </div>
               </div>

@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { func, object, shape, string } from 'prop-types';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { ValidationError, ExpandingTextarea } from '../../components';
@@ -13,24 +13,19 @@ import css from './FieldTextInput.css';
 const CONTENT_MAX_LENGTH = 5000;
 
 class FieldTextInputComponent extends Component {
-  componentWillUnmount() {
-    if (this.props.clearOnUnmount) {
-      this.props.input.onChange('');
-    }
-  }
   render() {
     /* eslint-disable no-unused-vars */
     const {
       rootClassName,
       className,
       inputRootClass,
-      clearOnUnmount,
       customErrorText,
       id,
       label,
       type,
       input,
       meta,
+      onUnmount,
       ...rest
     } = this.props;
     /* eslint-enable no-unused-vars */
@@ -76,20 +71,18 @@ FieldTextInputComponent.defaultProps = {
   rootClassName: null,
   className: null,
   inputRootClass: null,
-  clearOnUnmount: false,
+  onUnmount: null,
   customErrorText: null,
   id: null,
   label: null,
 };
-
-const { string, bool, shape, func, object } = PropTypes;
 
 FieldTextInputComponent.propTypes = {
   rootClassName: string,
   className: string,
   inputRootClass: string,
 
-  clearOnUnmount: bool,
+  onUnmount: func,
 
   // Error message that can be manually passed to input field,
   // overrides default validation message
@@ -110,8 +103,19 @@ FieldTextInputComponent.propTypes = {
   meta: object.isRequired,
 };
 
-const FieldTextInput = props => {
-  return <Field component={FieldTextInputComponent} {...props} />;
+class FieldTextInput extends Component {
+  componentWillUnmount() {
+    // Unmounting happens too late if it is done inside Field component
+    // (Then Form has already registered its (new) fields and
+    // changing the value without corresponding field is prohibited in Final Form
+    if (this.props.onUnmount) {
+      this.props.onUnmount();
+    }
+  }
+
+  render() {
+    return <Field component={FieldTextInputComponent} {...this.props} />;
+  }
 };
 
 export default FieldTextInput;
