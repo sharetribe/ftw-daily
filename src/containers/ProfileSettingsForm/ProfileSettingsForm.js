@@ -20,7 +20,7 @@ class ProfileSettingsFormComponent extends Component {
     super(props);
 
     this.uploadDelayTimeoutId = null;
-    this.state = { uploadDelay: false };
+    this.state = { uploadDelay: false, submittedOnce: false };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,7 +58,6 @@ class ProfileSettingsFormComponent extends Component {
             submitting,
             updateInProgress,
             updateProfileError,
-            updateProfileReady,
             uploadImageError,
             uploadInProgress,
           } = fieldRenderProps;
@@ -170,11 +169,17 @@ class ProfileSettingsFormComponent extends Component {
 
           const classes = classNames(rootClassName || css.root, className);
           const submitInProgress = submitting || updateInProgress;
-          const submitReady = updateProfileReady;
+          const submitReady = pristine && this.state.submittedOnce;
           const submitDisabled = invalid || pristine || uploadInProgress || submitInProgress;
 
           return (
-            <Form className={classes} onSubmit={handleSubmit}>
+            <Form
+              className={classes}
+              onSubmit={e => {
+                this.setState({ submittedOnce: true });
+                handleSubmit(e);
+              }}
+            >
               <div className={css.sectionContainer}>
                 <h3 className={css.sectionTitle}>
                   <FormattedMessage id="ProfileSettingsForm.yourProfilePicture" />

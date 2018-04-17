@@ -18,7 +18,7 @@ import {
 } from '../../components';
 import { ProfileSettingsForm, TopbarContainer } from '../../containers';
 
-import { clearUpdatedForm, updateProfile, uploadImage } from './ProfileSettingsPage.duck';
+import { updateProfile, uploadImage } from './ProfileSettingsPage.duck';
 import css from './ProfileSettingsPage.css';
 
 const onImageUploadHandler = (values, fn) => {
@@ -29,15 +29,10 @@ const onImageUploadHandler = (values, fn) => {
 };
 
 export class ProfileSettingsPageComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { profileUpdated: false };
-  }
   render() {
     const {
       currentUser,
       image,
-      onChange,
       onImageUpload,
       onUpdateProfile,
       scrollingDisabled,
@@ -67,14 +62,7 @@ export class ProfileSettingsPageComponent extends Component {
           ? { ...profile, profileImageId: uploadedImage.imageId }
           : profile;
 
-      onUpdateProfile(updatedValues).then(() => {
-        this.setState({ profileUpdated: true });
-      });
-    };
-
-    const handleChange = () => {
-      this.setState({ profileUpdated: false });
-      onChange();
+      onUpdateProfile(updatedValues);
     };
 
     const user = ensureCurrentUser(currentUser);
@@ -91,11 +79,9 @@ export class ProfileSettingsPageComponent extends Component {
         onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
         uploadInProgress={uploadInProgress}
         updateInProgress={updateInProgress}
-        updateProfileReady={this.state.profileUpdated}
         uploadImageError={uploadImageError}
         updateProfileError={updateProfileError}
         onSubmit={handleSubmit}
-        onChange={handleChange}
       />
     ) : null;
 
@@ -153,7 +139,6 @@ ProfileSettingsPageComponent.propTypes = {
     file: object,
     uploadedImage: propTypes.image,
   }),
-  onChange: func.isRequired,
   onImageUpload: func.isRequired,
   onUpdateProfile: func.isRequired,
   scrollingDisabled: bool.isRequired,
@@ -187,7 +172,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onChange: () => dispatch(clearUpdatedForm()),
   onImageUpload: data => dispatch(uploadImage(data)),
   onUpdateProfile: data => dispatch(updateProfile(data)),
 });
