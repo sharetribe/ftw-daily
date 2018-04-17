@@ -13,12 +13,6 @@ class FieldReviewRatingComponent extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillUnmount() {
-    if (this.props.clearOnUnmount) {
-      this.props.input.onChange('');
-    }
-  }
-
   handleChange(event) {
     this.props.input.onChange(event.target.value);
   }
@@ -29,7 +23,6 @@ class FieldReviewRatingComponent extends Component {
       rootClassName,
       className,
       inputRootClass,
-      clearOnUnmount,
       customErrorText,
       id,
       intl,
@@ -105,17 +98,15 @@ class FieldReviewRatingComponent extends Component {
 FieldReviewRatingComponent.defaultProps = {
   rootClassName: null,
   className: null,
-  clearOnUnmount: false,
   customErrorText: null,
   label: null,
 };
 
-const { string, bool, shape, func, object } = PropTypes;
+const { string, shape, func, object } = PropTypes;
 
 FieldReviewRatingComponent.propTypes = {
   rootClassName: string,
   className: string,
-  clearOnUnmount: bool,
   id: string.isRequired,
   label: string,
 

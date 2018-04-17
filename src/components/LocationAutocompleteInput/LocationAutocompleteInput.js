@@ -494,15 +494,9 @@ LocationAutocompleteInput.propTypes = {
 export default LocationAutocompleteInput;
 
 class LocationAutocompleteInputFieldComponent extends Component {
-  componentWillUnmount() {
-    if (this.props.clearOnUnmount) {
-      this.props.input.onChange('');
-    }
-  }
-
   render() {
     /* eslint-disable no-unused-vars */
-    const { rootClassName, labelClassName, clearOnUnmount, ...restProps } = this.props;
+    const { rootClassName, labelClassName, ...restProps } = this.props;
     const { input, label, meta, valueFromForm, ...otherProps } = restProps;
     /* eslint-enable no-unused-vars */
 
@@ -529,7 +523,6 @@ LocationAutocompleteInputFieldComponent.defaultProps = {
   labelClassName: null,
   type: null,
   label: null,
-  clearOnUnmount: false,
 };
 
 LocationAutocompleteInputFieldComponent.propTypes = {
@@ -541,7 +534,6 @@ LocationAutocompleteInputFieldComponent.propTypes = {
   }).isRequired,
   label: string,
   meta: object.isRequired,
-  clearOnUnmount: bool,
 };
 
 export const LocationAutocompleteInputField = props => {
