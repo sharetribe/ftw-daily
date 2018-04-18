@@ -38,7 +38,7 @@ const exampleTransaction = params => {
       lastTransition: TRANSITION_REQUEST,
       transitions: [
         {
-          at: created,
+          createdAt: created,
           by: TX_TRANSITION_ACTOR_CUSTOMER,
           transition: TRANSITION_REQUEST,
         },

@@ -10,7 +10,7 @@ import css from './Reviews.css';
 const Review = props => {
   const { review, intl } = props;
 
-  const date = review.attributes.at;
+  const date = review.attributes.createdAt;
   const dateString = intl.formatDate(date, { month: 'long', year: 'numeric' });
 
   return (

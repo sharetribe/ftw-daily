@@ -104,7 +104,7 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
       ],
       transitions: [
         {
-          at: now,
+          createdAt: now,
           by: TX_TRANSITION_ACTOR_CUSTOMER,
           transition: TRANSITION_REQUEST,
         },

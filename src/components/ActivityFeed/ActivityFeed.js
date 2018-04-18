@@ -35,7 +35,9 @@ const Message = props => {
       <Avatar className={css.avatar} user={message.sender} />
       <div>
         <p className={css.messageContent}>{message.attributes.content}</p>
-        <p className={css.messageDate}>{formatDate(intl, todayString, message.attributes.at)}</p>
+        <p className={css.messageDate}>
+          {formatDate(intl, todayString, message.attributes.createdAt)}
+        </p>
       </div>
     </div>
   );
@@ -54,7 +56,9 @@ const OwnMessage = props => {
       <div className={css.ownMessageContentWrapper}>
         <p className={css.ownMessageContent}>{message.attributes.content}</p>
       </div>
-      <p className={css.ownMessageDate}>{formatDate(intl, todayString, message.attributes.at)}</p>
+      <p className={css.ownMessageDate}>
+        {formatDate(intl, todayString, message.attributes.createdAt)}
+      </p>
     </div>
   );
 };
@@ -292,7 +296,7 @@ const Transition = props => {
       </div>
       <div>
         <p className={css.transitionContent}>{transitionMessage}</p>
-        <p className={css.transitionDate}>{formatDate(intl, todayString, transition.at)}</p>
+        <p className={css.transitionDate}>{formatDate(intl, todayString, transition.createdAt)}</p>
         {reviewComponent}
       </div>
     </div>
@@ -323,9 +327,9 @@ const EmptyTransition = () => {
 
 const isMessage = item => item && item.type === 'message';
 
-// Compare function for sorting an array containint messages and transitions
+// Compare function for sorting an array containing messages and transitions
 const compareItems = (a, b) => {
-  const itemDate = item => (isMessage(item) ? item.attributes.at : item.at);
+  const itemDate = item => (isMessage(item) ? item.attributes.createdAt : item.createdAt);
   return itemDate(a) - itemDate(b);
 };
 

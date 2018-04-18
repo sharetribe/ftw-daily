@@ -278,7 +278,7 @@ export const txHasFirstReview = tx => firstReviewTransitions.includes(txLastTran
 export const txIsReviewed = tx => areReviewsCompleted(txLastTransition(tx));
 
 propTypes.transition = shape({
-  at: instanceOf(Date).isRequired,
+  createdAt: instanceOf(Date).isRequired,
   by: oneOf(TX_TRANSITION_ACTORS).isRequired,
   transition: oneOf(TRANSITIONS).isRequired,
 });
@@ -323,7 +323,7 @@ export const REVIEW_TYPE_OF_CUSTOMER = 'ofCustomer';
 propTypes.review = shape({
   id: propTypes.uuid.isRequired,
   attributes: shape({
-    at: instanceOf(Date).isRequired,
+    createdAt: instanceOf(Date).isRequired,
     content: string,
     rating: oneOf(REVIEW_RATINGS),
     state: string.isRequired,
@@ -387,7 +387,7 @@ propTypes.message = shape({
   id: propTypes.uuid.isRequired,
   type: propTypes.value('message').isRequired,
   attributes: shape({
-    at: instanceOf(Date).isRequired,
+    createdAt: instanceOf(Date).isRequired,
     content: string.isRequired,
   }).isRequired,
   sender: propTypes.user,
