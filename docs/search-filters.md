@@ -16,9 +16,9 @@ These two filter types are implemented with four different components, a standar
 
 The `SelectSingleFilter` and `SelectMultipleFilter` components are rendered as standard dropdowns in
 the search view. The plain filter components `SelectSingleFilterPlain` and
-`SelectMultipleFilterPlain` are used in mobile view and with the `SearchFilterPanel` component they
-can be used to fit more filters in the search view than just the ones that fit in the top filter
-bar.
+`SelectMultipleFilterPlain` are used with `SearchFiltersMobile` and `SearchFiltersPanel` to provider
+filters in mobile view or to open filters in a distinct panel in order to fit more filters to the
+desktop search view.
 
 ## Adding a new search filter
 
@@ -33,48 +33,107 @@ name, so for a _category_ attribute the parameter would be "pub_category".
 ### Common changes
 
 A few common changes are required to add a select single or a select multiple filter to desktop and
-mobile view.
+mobile views.
 
-The search filter options need to be stored in the `marketplace-custom-config.js` file. The correct
-format is a list of objects with two fields:
+First of all, the value options for the filter need to be defined. One handy place to store these is
+the `marketplace-custom-config.js` file. The correct format is a list of objects with `key` and
+`label` fields:
 
-```
-export const amenities = [
+```js
+export const newFilterOptions = [
   {
     key: 'option-identifier',
     label: 'Label for the UI',
   },
-...
+  ...
 ];
 ```
 
-The filter options need to be stored here, as the search page checks here for the possible filter
-options when validating the search parameters.
+A few changes need to be made to the `SearchPage` container in order to get the filters to
+work.
 
-Also the search parameter ("pub\_<public-data-field-name>") needs to be added to the `SearchPage`
-container.
+`SearchPage` needs the filter options. One handy way is to add the options as a prop to the
+component and then set `defaultProps` value from `config.custom` (contains the
+`marketplace-custom-config.js` exports). This way tests can pass in their own values for the filter
+options and filter option changes won't affect tests.
 
-Save the search params in a constant:
+```js
+SearchPageComponent.defaultProps = {
+  // other default props
+  newFilterOptions: config.custom.amenities,
+};
 
+SearchPageComponent.propTypes = {
+  // other props
+  newFilterOptions: array,
+};
 ```
-const AMENITIES_URL_PARAM = 'pub_amenities';
+
+Also a filter configuration needs to be added to the object returned by the `filters` method. The
+`filters` method combines query param name and options information of each filter so that those can
+be passed on to subcomponents and used for validating the filter values and rendering the filter
+components.
+
+To add a filter configuration, extract the filter options from the props and set the param name as
+the one defined in your extended data indexing configuration:
+
+```js
+filters() {
+  const { newFilterOptions } = this.props;
+
+  return {
+    newFilter: {
+      paramName: 'pub_newFilter',
+      options: newFilterOptions,
+    },
+    ...
+  };
+}
 ```
 
-Then add the filter parameters to the `customConfigKey`, `validURLParamsForExtendedData`,
-`pickSearchParamsOnly` and `onIdle` functions.
+Final thing to do in `SearchPage` is to pass the filters configuration on to the components that
+take care of rendering the filters. This is achieved by `primaryFilters` and `secondaryFilters`
+props that are passed to `MainPanel`. The configurations are passed as an object in the same form
+as the configuration object in `filters`.
 
-### Desktop filter
+```js
+<MainPanel
+  ...
+  primaryFilters={{
+    categoryFilter: filters.categoryFilter,
+    amenitiesFilter: filters.amenitiesFilter,
+  }}
+  secondaryFilters={{
+    newFilter: filters.newFilter,
+  }}
+/>
+```
 
-A basic desktop filter that renders as a dropdown button in top of the search results panel is
+These props are used for resolving filter states and validating the filter values. The contents are
+passed as props to the components that render the filters: `SearchFilters`, `SearchFiltersPanel` and
+`SearchFiltersMobile` .The difference between filters passed as primary and secondary varies in
+mobile and desktop views:
+
+* __Desktop:__ Primary filters are shown in the top of the search view, secondary filters are
+   rendered in a distinct panel that opens on top of search results.
+* __Mobile:__ Both primary and secondary filters are rendered in the same modal.
+
+### Desktop filters
+
+![Desktop filters](./assets/search-filters/desktop-filters.png)
+
+A basic desktop filter that renders as a dropdown button on top of the search results panel is
 achieved using the `SelectSingleFilter` and `SelectMultipleFilter` components. To add standard
-desktop filters:
+desktop filters, perform the following in `SearchFilters` component:
 
-* declare the filters param name in the `SearchFilters` file just like in `SearchPage`
-* with the filter param name resolve the current filter value form the `urlQueryParams` prop
+* declare a prop with the same name that you added the filter config to `primaryFilters`
+* resolve the filters initial value with `initialValue` and `initialValues` functions
 * render the filter by using a `SelectSingleFilter` or `SelectMultipleFilter` component inside the
   `<div className={css.filters}>` element
 
-### Desktop filter panel
+### Desktop filters panel
+
+![Desktop filter panel](./assets/search-filters/filters-panel.png)
 
 If more filters are required than can fit into the top filter bar, the `SearchFiltersPanel`
 component can be used. It renders as a button in the top filter bar that opens a new panel that can
@@ -82,32 +141,20 @@ contain a set of filters.
 
 To use the `SearchFiltersPanel`, do the following:
 
-* make sure the `USE_SEARCH_FILTER_PANEL` constant in the beginning of `SearchPage` is switched to
-  `true`.
-* in `SearchPage` resolve the number of selected panel filters and store that in the
-  `searchFiltersPanelSelectedCount`
-* list your filter param names in the `FILTERS` array in `SearchFiltersPanel`
-* for each filter resolve the current filter value(s) from the `urlQueryParams` and
-  `currentQueryParams` variables
+* declare a prop with the same name that you added the filter config to `secondaryFilters`
+* resolve the filters initial value with `initialValue` and `initialValues` methods
 * use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the
   `<div className={css.filtersWrapper}>` element to render the filters
 
 ### Mobile filters
 
+![Mobile filters](./assets/search-filters/mobile-filters.png)
+
 The mobile view uses the same `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components
 as the filter panel. In this case the filter components are declared in `SearchFiltersMobile`. The
 following steps are required to add a mobile filter:
 
-* store the filter param name in the `allowedParams` array in the `SearchFiltersMobile` component
-  file
-* resolve the current values for each filter from the `urlQueryParams` object passed to
-  `SearchFiltersMobile`
+* declare a prop with the same name that you added the filter config to `primaryFilters` or `secondaryFilters`
+* resolve the filters initial value with `initialValue` and `initialValues` methods
 * use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the
   `<div className={css.filtersWrapper}>` element to render the filters
-
-## Notes
-
-One good practice with search filters is to pass the filter options from the marketpalce custom
-config as default parameters to the `SearchPage` and then pass them on from there to the filter sub
-components that require them. This way a different set of options can be defined for the
-`SearchPage` tests and the test snapshots will not be affected when changing configuration.
