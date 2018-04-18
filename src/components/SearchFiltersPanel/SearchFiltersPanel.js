@@ -7,10 +7,10 @@
  * An example how to render MultiSelectFilter for a filter that has it's config passed in
  * the props as newFilter:
  *
- * initialValue for a filter can be resolved with the initialSingleValue and initialMultiValue
+ * initialValue for a filter can be resolved with the initialValue and initialValues
  * methods.
  *
- * const initialNewFilterValues = this.initialMultiValue(newFilter.paramName);
+ * const initialNewFilterValues = this.initialValues(newFilter.paramName);
  *
  * const newFilterElement = newFilter ? (
  *   <SelectMultipleFilterPlain
@@ -48,8 +48,8 @@ class SearchFiltersPanelComponent extends Component {
     this.resetAll = this.resetAll.bind(this);
     this.handleSelectSingle = this.handleSelectSingle.bind(this);
     this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
-    this.initialSingleValue = this.initialSingleValue.bind(this);
-    this.initialMultiValue = this.initialMultiValue.bind(this);
+    this.initialValue = this.initialValue.bind(this);
+    this.initialValues = this.initialValues.bind(this);
   }
 
   // Apply the filters by redirecting to SearchPage with new filters.
@@ -125,7 +125,7 @@ class SearchFiltersPanelComponent extends Component {
   }
 
   // resolve initial value for a single value filter
-  initialSingleValue(paramName) {
+  initialValue(paramName) {
     const currentQueryParams = this.state.currentQueryParams;
     const urlQueryParams = this.props.urlQueryParams;
 
@@ -136,7 +136,7 @@ class SearchFiltersPanelComponent extends Component {
   }
 
   // resolve initial values for a multi value filter
-  initialMultiValue(paramName) {
+  initialValues(paramName) {
     const currentQueryParams = this.state.currentQueryParams;
     const urlQueryParams = this.props.urlQueryParams;
 

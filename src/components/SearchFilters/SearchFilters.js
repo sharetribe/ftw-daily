@@ -16,12 +16,12 @@ import css from './SearchFilters.css';
 const FILTER_DROPDOWN_OFFSET = -14;
 
 // resolve initial value for a single value filter
-const initialSingleValue = (queryParams, paramName) => {
+const initialValue = (queryParams, paramName) => {
   return queryParams[paramName];
 };
 
 // resolve initial values for a multi value filter
-const initialMultiValue = (queryParams, paramName) => {
+const initialValues = (queryParams, paramName) => {
   return !!queryParams[paramName] ? queryParams[paramName].split(',') : [];
 };
 
@@ -53,9 +53,9 @@ const SearchFiltersComponent = props => {
     id: 'SearchFilters.amenitiesLabel',
   });
 
-  const initialAmenities = initialMultiValue(urlQueryParams, amenitiesFilter.paramName);
+  const initialAmenities = initialValues(urlQueryParams, amenitiesFilter.paramName);
 
-  const initialCategory = initialSingleValue(urlQueryParams, categoryFilter.paramName);
+  const initialCategory = initialValue(urlQueryParams, categoryFilter.paramName);
 
   const handleSelectOptions = (urlParam, options) => {
     const queryParams =
