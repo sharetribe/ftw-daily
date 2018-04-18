@@ -9,6 +9,7 @@ import { omit } from 'lodash';
 import { SelectSingleFilter, SelectMultipleFilter } from '../../components';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
+import { propTypes } from '../../util/types';
 import css from './SearchFilters.css';
 
 // Dropdown container can have a positional offset (in pixels)
@@ -166,8 +167,8 @@ SearchFiltersComponent.propTypes = {
   resultsCount: number,
   searchingInProgress: bool,
   onManageDisableScrolling: func.isRequired,
-  categoriesFilter: object,
-  amenitiesFilter: object,
+  categoriesFilter: propTypes.filterConfig,
+  amenitiesFilter: propTypes.filterConfig,
   isSearchFiltersPanelOpen: bool,
   toggleSearchFiltersPanel: func,
   searchFiltersPanelSelectedCount: number,

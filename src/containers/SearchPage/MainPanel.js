@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { array, bool, func, number, object, objectOf, shape, string } from 'prop-types';
+import { array, bool, func, number, object, objectOf, string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { merge } from 'lodash';
@@ -166,18 +166,8 @@ MainPanel.propTypes = {
   pagination: propTypes.pagination,
   searchParamsForPagination: object,
   showAsModalMaxWidth: number.isRequired,
-  primaryFilters: objectOf(
-    shape({
-      paramName: string.isRequired,
-      options: array.isRequired,
-    })
-  ),
-  secondaryFilters: objectOf(
-    shape({
-      paramName: string.isRequired,
-      options: array.isRequired,
-    })
-  ),
+  primaryFilters: objectOf(propTypes.filterConfig),
+  secondaryFilters: objectOf(propTypes.filterConfig),
 };
 
 export default MainPanel;

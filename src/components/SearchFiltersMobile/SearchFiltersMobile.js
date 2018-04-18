@@ -14,6 +14,7 @@ import {
   SelectSingleFilterPlain,
   SelectMultipleFilterPlain,
 } from '../../components';
+import { propTypes } from '../../util/types';
 import css from './SearchFiltersMobile.css';
 
 class SearchFiltersMobileComponent extends Component {
@@ -248,8 +249,8 @@ SearchFiltersMobileComponent.propTypes = {
   onCloseModal: func.isRequired,
   selectedFiltersCount: number,
   filterParamNames: array,
-  categoriesFilter: object,
-  amenitiesFilter: object,
+  categoriesFilter: propTypes.filterConfig,
+  amenitiesFilter: propTypes.filterConfig,
 
   // from injectIntl
   intl: intlShape.isRequired,
