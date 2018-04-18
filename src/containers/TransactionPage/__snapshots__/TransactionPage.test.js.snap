@@ -109,13 +109,13 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                 },
                 "transitions": Array [
                   Object {
-                    "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
+                    "createdAt": 2017-05-01T00:00:00.000Z,
                     "transition": "transition/request",
                   },
                   Object {
-                    "at": 2017-06-01T00:00:00.000Z,
                     "by": "provider",
+                    "createdAt": 2017-06-01T00:00:00.000Z,
                     "transition": "transition/accept",
                   },
                 ],
@@ -306,13 +306,13 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                 },
                 "transitions": Array [
                   Object {
-                    "at": 2017-05-01T00:00:00.000Z,
                     "by": "customer",
+                    "createdAt": 2017-05-01T00:00:00.000Z,
                     "transition": "transition/request",
                   },
                   Object {
-                    "at": 2017-06-01T00:00:00.000Z,
                     "by": "provider",
+                    "createdAt": 2017-06-01T00:00:00.000Z,
                     "transition": "transition/accept",
                   },
                 ],
