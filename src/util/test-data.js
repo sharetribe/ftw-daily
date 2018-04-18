@@ -114,7 +114,7 @@ export const createOwnListing = (id, attributes = {}, includes = {}) => ({
 
 export const createTxTransition = options => {
   return {
-    at: new Date(Date.UTC(2017, 4, 1)),
+    createdAt: new Date(Date.UTC(2017, 4, 1)),
     by: TX_TRANSITION_ACTOR_CUSTOMER,
     transition: TRANSITION_REQUEST,
     ...options,
@@ -135,12 +135,12 @@ export const createTransaction = options => {
     lastTransitionedAt = new Date(Date.UTC(2017, 5, 1)),
     transitions = [
       createTxTransition({
-        at: new Date(Date.UTC(2017, 4, 1)),
+        createdAt: new Date(Date.UTC(2017, 4, 1)),
         by: TX_TRANSITION_ACTOR_CUSTOMER,
         transition: TRANSITION_REQUEST,
       }),
       createTxTransition({
-        at: new Date(Date.UTC(2017, 5, 1)),
+        createdAt: new Date(Date.UTC(2017, 5, 1)),
         by: TX_TRANSITION_ACTOR_PROVIDER,
         transition: TRANSITION_ACCEPT,
       }),
@@ -188,7 +188,7 @@ export const createMessage = (id, attributes = {}, includes = {}) => {
     id: new UUID(id),
     type: 'message',
     attributes: {
-      at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
+      createdAt: new Date(Date.UTC(2017, 10, 9, 8, 12)),
       content: `Message ${id}\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
       ...attributes,
     },
@@ -200,7 +200,7 @@ export const createReview = (id, attributes = {}, includes = {}) => {
   return {
     id: new UUID(id),
     attributes: {
-      at: new Date(),
+      createdAt: new Date(),
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       rating: 3,

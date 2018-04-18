@@ -81,18 +81,18 @@ export const WithTransitions = {
       listing: createListing('Listing'),
       transitions: [
         createTxTransition({
-          at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
+          createdAt: new Date(Date.UTC(2017, 10, 9, 8, 10)),
           by: TX_TRANSITION_ACTOR_CUSTOMER,
           transition: TRANSITION_REQUEST,
         }),
         createTxTransition({
-          at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
+          createdAt: new Date(Date.UTC(2017, 10, 9, 8, 12)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
           transition: TRANSITION_ACCEPT,
         }),
         // this should not be visible in the feed
         createTxTransition({
-          at: new Date(Date.UTC(2017, 10, 16, 8, 12)),
+          createdAt: new Date(Date.UTC(2017, 10, 16, 8, 12)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
           transition: TRANSITION_EXPIRE_REVIEW_PERIOD,
         }),
@@ -118,32 +118,32 @@ export const WithMessagesTransitionsAndReviews = {
       lastTransition: TRANSITION_REVIEW_2_BY_CUSTOMER,
       transitions: [
         createTxTransition({
-          at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
+          createdAt: new Date(Date.UTC(2017, 10, 9, 8, 10)),
           by: TX_TRANSITION_ACTOR_CUSTOMER,
           transition: TRANSITION_REQUEST,
         }),
         createTxTransition({
-          at: new Date(Date.UTC(2017, 10, 9, 8, 12)),
+          createdAt: new Date(Date.UTC(2017, 10, 9, 8, 12)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
           transition: TRANSITION_ACCEPT,
         }),
         createTxTransition({
-          at: new Date(Date.UTC(2017, 10, 9, 10, 33)),
+          createdAt: new Date(Date.UTC(2017, 10, 9, 10, 33)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
           transition: TRANSITION_DECLINE,
         }),
         createTxTransition({
-          at: new Date(Date.UTC(2017, 10, 9, 10, 34)),
+          createdAt: new Date(Date.UTC(2017, 10, 9, 10, 34)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
           transition: TRANSITION_COMPLETE,
         }),
         createTxTransition({
-          at: new Date(Date.UTC(2017, 10, 9, 11, 34)),
+          createdAt: new Date(Date.UTC(2017, 10, 9, 11, 34)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
           transition: TRANSITION_REVIEW_1_BY_PROVIDER,
         }),
         createTxTransition({
-          at: new Date(Date.UTC(2017, 10, 9, 12, 34)),
+          createdAt: new Date(Date.UTC(2017, 10, 9, 12, 34)),
           by: TX_TRANSITION_ACTOR_CUSTOMER,
           transition: TRANSITION_REVIEW_2_BY_CUSTOMER,
         }),
@@ -151,12 +151,12 @@ export const WithMessagesTransitionsAndReviews = {
       reviews: [
         createReview(
           'review1',
-          { at: new Date(Date.UTC(2017, 10, 9, 11, 34)), rating: 3, type: 'ofCustomer' },
+          { createdAt: new Date(Date.UTC(2017, 10, 9, 11, 34)), rating: 3, type: 'ofCustomer' },
           { author: createUser('user2'), subject: createUser('user1') }
         ),
         createReview(
           'review2',
-          { at: new Date(Date.UTC(2017, 10, 9, 12, 34)), rating: 5, type: 'ofProvider' },
+          { createdAt: new Date(Date.UTC(2017, 10, 9, 12, 34)), rating: 5, type: 'ofProvider' },
           { author: createUser('user1'), subject: createUser('user2') }
         ),
       ],
@@ -164,22 +164,22 @@ export const WithMessagesTransitionsAndReviews = {
     messages: [
       createMessage(
         'msg1',
-        { at: new Date(Date.UTC(2017, 10, 9, 8, 11)) },
+        { createdAt: new Date(Date.UTC(2017, 10, 9, 8, 11)) },
         { sender: createUser('user1') }
       ),
       createMessage(
         'msg2',
-        { at: new Date(Date.UTC(2017, 10, 9, 8, 14)) },
+        { createdAt: new Date(Date.UTC(2017, 10, 9, 8, 14)) },
         { sender: createUser('user1') }
       ),
       createMessage(
         'msg3',
-        { at: new Date(Date.UTC(2017, 10, 9, 8, 17)) },
+        { createdAt: new Date(Date.UTC(2017, 10, 9, 8, 17)) },
         { sender: createUser('user2') }
       ),
       createMessage(
         'msg4',
-        { at: new Date(Date.UTC(2017, 10, 12, 13, 20)) },
+        { createdAt: new Date(Date.UTC(2017, 10, 12, 13, 20)) },
         { sender: createUser('user2') }
       ),
     ],
@@ -202,24 +202,24 @@ export const WithAReviewFromBothUsers = {
       reviews: [
         createReview(
           'review1',
-          { at: new Date(Date.UTC(2017, 10, 9, 8, 10)), rating: 3, type: 'ofProvider' },
+          { createdAt: new Date(Date.UTC(2017, 10, 9, 8, 10)), rating: 3, type: 'ofProvider' },
           { author: createUser('user1'), subject: createUser('user2') }
         ),
         createReview(
           'review2',
-          { at: new Date(Date.UTC(2017, 10, 10, 8, 10)), rating: 5, type: 'ofCustomer' },
+          { createdAt: new Date(Date.UTC(2017, 10, 10, 8, 10)), rating: 5, type: 'ofCustomer' },
           { author: createUser('user2'), subject: createUser('user1') }
         ),
       ],
       lastTransition: TRANSITION_REVIEW_2_BY_PROVIDER,
       transitions: [
         createTxTransition({
-          at: new Date(Date.UTC(2017, 10, 9, 8, 10)),
+          createdAt: new Date(Date.UTC(2017, 10, 9, 8, 10)),
           by: TX_TRANSITION_ACTOR_CUSTOMER,
           transition: TRANSITION_REVIEW_1_BY_CUSTOMER,
         }),
         createTxTransition({
-          at: new Date(Date.UTC(2017, 10, 10, 8, 10)),
+          createdAt: new Date(Date.UTC(2017, 10, 10, 8, 10)),
           by: TX_TRANSITION_ACTOR_PROVIDER,
           transition: TRANSITION_REVIEW_2_BY_PROVIDER,
         }),
@@ -255,12 +255,12 @@ class PagedFeed extends Component {
     const provider = createUser('provider');
 
     const trans1 = createTxTransition({
-      at: dates[0],
+      createdAt: dates[0],
       by: TX_TRANSITION_ACTOR_CUSTOMER,
       transition: TRANSITION_REQUEST,
     });
     const trans2 = createTxTransition({
-      at: dates[2],
+      createdAt: dates[2],
       by: TX_TRANSITION_ACTOR_PROVIDER,
       transition: TRANSITION_ACCEPT,
     });
@@ -268,18 +268,18 @@ class PagedFeed extends Component {
     // Last transition timestamp is interleaved between the last two
     // messages.
     const trans3 = createTxTransition({
-      at: dates[5],
+      createdAt: dates[5],
       by: TX_TRANSITION_ACTOR_CUSTOMER,
       transition: TRANSITION_COMPLETE,
     });
 
     // First message timestamp is interleaved between the first two
     // transitions.
-    const msg1 = createMessage('msg1', { at: dates[1] }, { sender: customer });
+    const msg1 = createMessage('msg1', { createdAt: dates[1] }, { sender: customer });
 
-    const msg2 = createMessage('msg2', { at: dates[3] }, { sender: provider });
-    const msg3 = createMessage('msg3', { at: dates[4] }, { sender: customer });
-    const msg4 = createMessage('msg4', { at: dates[6] }, { sender: customer });
+    const msg2 = createMessage('msg2', { createdAt: dates[3] }, { sender: provider });
+    const msg3 = createMessage('msg3', { createdAt: dates[4] }, { sender: customer });
+    const msg4 = createMessage('msg4', { createdAt: dates[6] }, { sender: customer });
 
     const transaction = createTransaction({
       id: 'tx1',
