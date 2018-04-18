@@ -124,7 +124,11 @@ export const queryReviewsError = e => ({
 export const queryUserListings = userId => (dispatch, getState, sdk) => {
   dispatch(queryListingsRequest(userId));
   return sdk.listings
-    .query({ author_id: userId, include: ['author', 'images'] })
+    .query({
+      author_id: userId,
+      include: ['author', 'images'],
+      'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+    })
     .then(response => {
       // Pick only the id and type properties from the response listings
       const listingRefs = response.data.data.map(({ id, type }) => ({ id, type }));
@@ -137,7 +141,12 @@ export const queryUserListings = userId => (dispatch, getState, sdk) => {
 
 export const queryUserReviews = userId => (dispatch, getState, sdk) => {
   sdk.reviews
-    .query({ subject_id: userId, state: 'public', include: ['author', 'author.profileImage'] })
+    .query({
+      subject_id: userId,
+      state: 'public',
+      include: ['author', 'author.profileImage'],
+      'fields.image': ['variants.square-small', 'variants.square-small2x'],
+    })
     .then(response => {
       const reviews = denormalisedResponseEntities(response);
       dispatch(queryReviewsSuccess(reviews));
@@ -148,7 +157,11 @@ export const queryUserReviews = userId => (dispatch, getState, sdk) => {
 export const showUser = userId => (dispatch, getState, sdk) => {
   dispatch(showUserRequest(userId));
   return sdk.users
-    .show({ id: userId, include: ['profileImage'] })
+    .show({
+      id: userId,
+      include: ['profileImage'],
+      'fields.image': ['variants.square-small', 'variants.square-small2x'],
+    })
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(showUserSuccess());

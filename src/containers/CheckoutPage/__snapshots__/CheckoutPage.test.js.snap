@@ -28,21 +28,14 @@ exports[`CheckoutPage matches snapshot 1`] = `
         alt="listing1 title"
         className={null}
         image={null}
-        nameSet={
-          Array [
-            Object {
-              "name": "landscape-crop",
-              "size": "400w",
-            },
-            Object {
-              "name": "landscape-crop2x",
-              "size": "800w",
-            },
-          ]
-        }
         noImageMessage={null}
         rootClassName={null}
-        sizes="100vw"
+        variants={
+          Array [
+            "landscape-crop",
+            "landscape-crop2x",
+          ]
+        }
       />
     </div>
     <div
@@ -109,21 +102,14 @@ exports[`CheckoutPage matches snapshot 1`] = `
           alt="listing1 title"
           className={null}
           image={null}
-          nameSet={
-            Array [
-              Object {
-                "name": "landscape-crop",
-                "size": "400w",
-              },
-              Object {
-                "name": "landscape-crop2x",
-                "size": "800w",
-              },
-            ]
-          }
           noImageMessage={null}
           rootClassName={null}
-          sizes="100%"
+          variants={
+            Array [
+              "landscape-crop",
+              "landscape-crop2x",
+            ]
+          }
         />
       </div>
       <div>

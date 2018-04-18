@@ -191,7 +191,12 @@ class ProfileSettingsFormComponent extends Component {
     });
     const avatarComponent =
       !fileUploadInProgress && profileImage.imageId ? (
-        <Avatar className={avatarClasses} user={transientUser} disableProfileLink />
+        <Avatar
+          className={avatarClasses}
+          renderSizes="(max-width: 767px) 96px, 240px"
+          user={transientUser}
+          disableProfileLink
+        />
       ) : null;
 
     const chooseAvatarLabel =

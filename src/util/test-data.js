@@ -60,20 +60,21 @@ export const createImage = id => ({
   id: new UUID(id),
   type: 'image',
   attributes: {
-    sizes: [
-      {
+    variants: {
+      // TODO: add all possible variants here
+      square: {
         name: 'square',
         height: 408,
         width: 408,
         url: 'https://via.placeholder.com/408x408',
       },
-      {
+      square2x: {
         name: 'square2x',
         height: 816,
         width: 816,
         url: 'https://via.placeholder.com/816x816',
       },
-    ],
+    },
   },
 });
 

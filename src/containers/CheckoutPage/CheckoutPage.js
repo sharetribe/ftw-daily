@@ -340,11 +340,7 @@ export class CheckoutPageComponent extends Component {
               rootClassName={css.rootForImage}
               alt={listingTitle}
               image={firstImage}
-              nameSet={[
-                { name: 'landscape-crop', size: '400w' },
-                { name: 'landscape-crop2x', size: '800w' },
-              ]}
-              sizes="100vw"
+              variants={['landscape-crop', 'landscape-crop2x']}
             />
           </div>
           <div className={classNames(css.avatarWrapper, css.avatarMobile)}>
@@ -394,11 +390,7 @@ export class CheckoutPageComponent extends Component {
                 rootClassName={css.rootForImage}
                 alt={listingTitle}
                 image={firstImage}
-                nameSet={[
-                  { name: 'landscape-crop', size: '400w' },
-                  { name: 'landscape-crop2x', size: '800w' },
-                ]}
-                sizes="100%"
+                variants={['landscape-crop', 'landscape-crop2x']}
               />
             </div>
             <div className={css.avatarWrapper}>

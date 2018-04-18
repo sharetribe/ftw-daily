@@ -12,21 +12,14 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -845,21 +838,14 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>
@@ -1172,21 +1158,14 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -2005,21 +1984,14 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>
@@ -2332,21 +2304,14 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -3165,21 +3130,14 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>
@@ -3492,21 +3450,14 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -4325,21 +4276,14 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>
@@ -4652,21 +4596,14 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -5485,21 +5422,14 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>
@@ -5812,21 +5742,14 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -6645,21 +6568,14 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>
@@ -6972,21 +6888,14 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -7805,21 +7714,14 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>
@@ -8132,21 +8034,14 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -8898,21 +8793,14 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>
@@ -9200,21 +9088,14 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -9966,21 +9847,14 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>
@@ -10268,21 +10142,14 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -11034,21 +10901,14 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>
@@ -11336,21 +11196,14 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -12102,21 +11955,14 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>
@@ -12404,21 +12250,14 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -13170,21 +13009,14 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>
@@ -13472,21 +13304,14 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -14238,21 +14063,14 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>
@@ -14540,21 +14358,14 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
             alt="listing1 title"
             className={null}
             image={null}
-            nameSet={
-              Array [
-                Object {
-                  "name": "landscape-crop",
-                  "size": "400w",
-                },
-                Object {
-                  "name": "landscape-crop2x",
-                  "size": "800w",
-                },
-              ]
-            }
             noImageMessage={null}
             rootClassName={null}
-            sizes="100vw"
+            variants={
+              Array [
+                "landscape-crop",
+                "landscape-crop2x",
+              ]
+            }
           />
         </div>
       </div>
@@ -15306,21 +15117,14 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
               alt="listing1 title"
               className={null}
               image={null}
-              nameSet={
-                Array [
-                  Object {
-                    "name": "landscape-crop",
-                    "size": "400w",
-                  },
-                  Object {
-                    "name": "landscape-crop2x",
-                    "size": "800w",
-                  },
-                ]
-              }
               noImageMessage={null}
               rootClassName={null}
-              sizes="100%"
+              variants={
+                Array [
+                  "landscape-crop",
+                  "landscape-crop2x",
+                ]
+              }
             />
           </div>
         </div>

@@ -216,10 +216,11 @@ export const queryListingsError = e => ({
 export const queryOwnListings = queryParams => (dispatch, getState, sdk) => {
   dispatch(queryListingsRequest(queryParams));
 
-  const { include = [], page, perPage } = queryParams;
+  const { perPage, ...rest } = queryParams;
+  const params = { ...rest, per_page: perPage };
 
   return sdk.ownListings
-    .query({ include, page, per_page: perPage })
+    .query(params)
     .then(response => {
       dispatch(addOwnEntities(response));
       dispatch(queryListingsSuccess(response));

@@ -107,6 +107,7 @@ export const ManageListingCardComponent = props => {
     onCloseListing,
     onOpenListing,
     onToggleMenu,
+    renderSizes,
   } = props;
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
@@ -237,10 +238,8 @@ export const ManageListingCardComponent = props => {
             rootClassName={css.rootForImage}
             alt={title}
             image={firstImage}
-            nameSet={[
-              { name: 'landscape-crop', size: '1x' },
-              { name: 'landscape-crop2x', size: '2x' },
-            ]}
+            variants={['landscape-crop', 'landscape-crop2x']}
+            sizes={renderSizes}
           />
         </div>
         <div className={classNames(css.menuOverlayWrapper, { [css.menuOverlayOpen]: isMenuOpen })}>
@@ -323,6 +322,7 @@ ManageListingCardComponent.defaultProps = {
   className: null,
   rootClassName: null,
   actionsInProgressListingId: null,
+  renderSizes: null,
 };
 
 const { bool, func, shape, string } = PropTypes;
@@ -339,6 +339,9 @@ ManageListingCardComponent.propTypes = {
   onCloseListing: func.isRequired,
   onOpenListing: func.isRequired,
   onToggleMenu: func.isRequired,
+
+  // Responsive image sizes hint
+  renderSizes: string,
 
   // from withRouter
   history: shape({

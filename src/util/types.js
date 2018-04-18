@@ -80,14 +80,6 @@ propTypes.image = shape({
   id: propTypes.uuid.isRequired,
   type: propTypes.value('image').isRequired,
   attributes: shape({
-    sizes: arrayOf(
-      shape({
-        width: number.isRequired,
-        height: number.isRequired,
-        name: string.isRequired,
-        url: string.isRequired,
-      })
-    ),
     variants: objectOf(
       shape({
         width: number.isRequired,
