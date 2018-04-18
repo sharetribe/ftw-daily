@@ -1,6 +1,6 @@
 import React from 'react';
 import { compose } from 'redux';
-import { object, string, bool, number, func, shape, array } from 'prop-types';
+import { object, string, bool, number, func, shape } from 'prop-types';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
@@ -11,11 +11,18 @@ import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import css from './SearchFilters.css';
 
-const CATEGORY_URL_PARAM = 'pub_category';
-const AMENITIES_URL_PARAM = 'pub_amenities';
-
 // Dropdown container can have a positional offset (in pixels)
 const FILTER_DROPDOWN_OFFSET = -14;
+
+// resolve initial value for a single value filter
+const initialSingleValue = (queryParams, paramName) => {
+  return queryParams[paramName];
+};
+
+// resolve initial values for a multi value filter
+const initialMultiValue = (queryParams, paramName) => {
+  return !!queryParams[paramName] ? queryParams[paramName].split(',') : [];
+};
 
 const SearchFiltersComponent = props => {
   const {
@@ -25,8 +32,8 @@ const SearchFiltersComponent = props => {
     listingsAreLoaded,
     resultsCount,
     searchInProgress,
-    categories,
-    amenities,
+    categoryFilter,
+    amenitiesFilter,
     isSearchFiltersPanelOpen,
     toggleSearchFiltersPanel,
     searchFiltersPanelSelectedCount,
@@ -45,11 +52,9 @@ const SearchFiltersComponent = props => {
     id: 'SearchFilters.amenitiesLabel',
   });
 
-  const initialAmenities = !!urlQueryParams[AMENITIES_URL_PARAM]
-    ? urlQueryParams[AMENITIES_URL_PARAM].split(',')
-    : [];
+  const initialAmenities = initialMultiValue(urlQueryParams, amenitiesFilter.paramName);
 
-  const initialCategory = urlQueryParams[CATEGORY_URL_PARAM];
+  const initialCategory = initialSingleValue(urlQueryParams, categoryFilter.paramName);
 
   const handleSelectOptions = (urlParam, options) => {
     const queryParams =
@@ -70,24 +75,24 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
-  const categoryFilter = categories ? (
+  const categoryFilterElement = categoryFilter ? (
     <SelectSingleFilter
-      urlParam={CATEGORY_URL_PARAM}
+      urlParam={categoryFilter.paramName}
       label={categoryLabel}
       onSelect={handleSelectOption}
-      options={categories}
+      options={categoryFilter.options}
       initialValue={initialCategory}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
 
-  const amenitiesFilter = amenities ? (
+  const amenitiesFilterElement = amenitiesFilter ? (
     <SelectMultipleFilter
       name="amenities"
-      urlParam={AMENITIES_URL_PARAM}
+      urlParam={amenitiesFilter.paramName}
       label={amenitiesLabel}
       onSelect={handleSelectOptions}
-      options={amenities}
+      options={amenitiesFilter.options}
       initialValues={initialAmenities}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
@@ -113,8 +118,8 @@ const SearchFiltersComponent = props => {
   return (
     <div className={classes}>
       <div className={css.filters}>
-        {categoryFilter}
-        {amenitiesFilter}
+        {categoryFilterElement}
+        {amenitiesFilterElement}
         {toggleSearchFiltersPanelButton}
       </div>
 
@@ -146,8 +151,8 @@ SearchFiltersComponent.defaultProps = {
   className: null,
   resultsCount: null,
   searchingInProgress: false,
-  categories: null,
-  amenities: null,
+  categoryFilter: null,
+  amenitiesFilter: null,
   isSearchFiltersPanelOpen: false,
   toggleSearchFiltersPanel: null,
   searchFiltersPanelSelectedCount: 0,
@@ -161,8 +166,8 @@ SearchFiltersComponent.propTypes = {
   resultsCount: number,
   searchingInProgress: bool,
   onManageDisableScrolling: func.isRequired,
-  categories: array,
-  amenities: array,
+  categoriesFilter: object,
+  amenitiesFilter: object,
   isSearchFiltersPanelOpen: bool,
   toggleSearchFiltersPanel: func,
   searchFiltersPanelSelectedCount: number,

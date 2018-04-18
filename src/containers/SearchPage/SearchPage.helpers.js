@@ -4,53 +4,93 @@ import { createResourceLocatorString } from '../../util/routes';
 import { createSlug } from '../../util/urlHelpers';
 import routeConfiguration from '../../routeConfiguration';
 
-// customURLParams
-export const validURLParamForExtendedData = (paramKey, urlParams, customConfigKeys) => {
-  const configKey = customConfigKeys[paramKey];
-  const value = urlParams[paramKey];
-  const valueArray = value ? value.split(',') : [];
+/**
+ * Validates a filter search param agains a filters configuration.
+ *
+ * All invalid param names and values are dropped
+ *
+ * @param {String} paramName Search parameter name
+ * @param {Object} paramValue Search parameter value
+ * @param {Object} filters Filters configuration
+ */
+export const validURLParamForExtendedData = (paramName, paramValue, filters) => {
+  const filtersArray = Object.values(filters);
+  // resolve configuration for this filter
+  const filterConfig = filtersArray.find(f => f.paramName === paramName);
 
-  if (configKey && valueArray.length > 0) {
-    const allowedValues = config.custom[configKey].map(a => a.key);
+  const valueArray = paramValue ? paramValue.split(',') : [];
+
+  if (filterConfig && valueArray.length > 0) {
+    const allowedValues = filterConfig.options.map(o => o.key);
+
     const validValues = intersection(valueArray, allowedValues).join(',');
-    return validValues.length > 0 ? { [paramKey]: validValues } : {};
+    return validValues.length > 0 ? { [paramName]: validValues } : {};
   }
   return {};
 };
 
-// validate filter params
-export const validURLParamsForExtendedData = (params, customURLParamToConfig) => {
-  const paramKeys = Object.keys(params);
-  const customURLParams = Object.keys(customURLParamToConfig);
-  return paramKeys.reduce((validParams, paramKey) => {
-    return customURLParams.includes(paramKey)
+/**
+ * Checks filter param value validity.
+ *
+ * Non-filter params are dropped.
+ *
+ * @param {Object} params Search params
+ * @param {Object} filters Filters configuration
+ */
+export const validFilterParams = (params, filters) => {
+  const filterParamNames = Object.values(filters).map(f => f.paramName);
+  const paramEntries = Object.entries(params);
+
+  return paramEntries.reduce((validParams, entry) => {
+    const paramName = entry[0];
+    const paramValue = entry[1];
+
+    return filterParamNames.includes(paramName)
       ? {
           ...validParams,
-          ...validURLParamForExtendedData(paramKey, params, customURLParamToConfig),
+          ...validURLParamForExtendedData(paramName, paramValue, filters),
         }
-      : { ...validParams, [paramKey]: params[paramKey] };
+      : { ...validParams };
+  }, {});
+};
+
+/**
+ * Checks filter param value validity.
+ *
+ * Non-filter params are returned as they are.
+ *
+ * @param {Object} params Search params
+ * @param {Object} filters Filters configuration
+ */
+export const validURLParamsForExtendedData = (params, filters) => {
+  const filterParamNames = Object.values(filters).map(f => f.paramName);
+  const paramEntries = Object.entries(params);
+
+  return paramEntries.reduce((validParams, entry) => {
+    const paramName = entry[0];
+    const paramValue = entry[1];
+
+    return filterParamNames.includes(paramName)
+      ? {
+          ...validParams,
+          ...validURLParamForExtendedData(paramName, paramValue, filters),
+        }
+      : { ...validParams, [paramName]: paramValue };
   }, {});
 };
 
 // extract search parameters, including a custom URL params
 // which are validated by mapping the values to marketplace custom config.
-export const pickSearchParamsOnly = (params, customURLParamToConfig) => {
+export const pickSearchParamsOnly = (params, filters) => {
   const { address, origin, bounds, country, ...rest } = params || {};
-  const customURLParams = Object.keys(customURLParamToConfig);
   const boundsMaybe = bounds ? { bounds } : {};
   const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
-
-  const customSearchParamKeys = Object.keys(rest);
-  const customSearchParams = customSearchParamKeys.reduce((validParams, paramKey) => {
-    return customURLParams.includes(paramKey)
-      ? { ...validParams, ...validURLParamForExtendedData(paramKey, rest, customURLParamToConfig) }
-      : { ...validParams };
-  }, {});
+  const filterParams = validFilterParams(rest, filters);
 
   return {
     ...boundsMaybe,
     ...originMaybe,
-    ...customSearchParams,
+    ...filterParams,
   };
 };
 

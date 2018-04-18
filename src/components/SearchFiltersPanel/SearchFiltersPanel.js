@@ -4,33 +4,30 @@
  * SearchFilters component (which is the default place for SearchFilters).
  *
  *
- * An example how to render MultiSelectFilter inside render function:
+ * An example how to render MultiSelectFilter for a filter that has it's config passed in
+ * the props as newFilter:
  *
- * const currentQueryParams = this.state.currentQueryParams;
- * const splitQueryParam = queryParam => queryParam ? queryParam.split(',') : [];
+ * initialValue for a filter can be resolved with the initialSingleValue and initialMultiValue
+ * methods.
  *
- * // initialValue for a select should come either from state.currentQueryParam or urlQueryParam
- * const hascurrentQueryParam = typeof currentQueryParams[MULTI_SELECT_URL_PARAM] !== 'undefined'
- * const initialMultiSelectValue = hascurrentQueryParam
- *   ? splitQueryParam(currentQueryParams[MULTI_SELECT_URL_PARAM])
- *   : splitQueryParam(this.props.urlQueryParams[MULTI_SELECT_URL_PARAM]);
+ * const initialNewFilterValues = this.initialMultiValue(newFilter.paramName);
  *
- * const multiSelectFilterX = multiSelectFilterXFromProps ? (
+ * const newFilterElement = newFilter ? (
  *   <SelectMultipleFilterPlain
- *     id="SearchFiltersPanel.multiSelectFilterX"
- *     name="multiSelectFilterX"
- *     urlParam={MULTI_SELECT_URL_PARAM}
- *     label={this.props.intl.formatMessage({ id: 'SearchFiltersPanel.multiSelectFilterXLabel' })}
+ *     id="SearchFiltersPanel.newFilter"
+ *     name="newFilter"
+ *     urlParam={newFilter.paramName}
+ *     label={this.props.intl.formatMessage({ id: 'SearchFiltersPanel.newFilterLabel' })}
  *     onSelect={this.handleSelectMultiple}
  *     options={multiSelectFilterXFromProps}
- *     initialValues={initialMultiSelectValue}
+ *     initialValues={initialNewFilterValues}
  *     twoColumns
  *   />
  * ) : null;
  */
 
 import React, { Component } from 'react';
-import { func, object, shape, string } from 'prop-types';
+import { array, func, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
@@ -80,9 +77,9 @@ class SearchFiltersPanelComponent extends Component {
 
   // Reset all filter query parameters
   resetAll(e) {
-    const { urlQueryParams, customURLParamToConfig, history, onClosePanel } = this.props;
+    const { urlQueryParams, history, onClosePanel, filterParamNames } = this.props;
 
-    const queryParams = omit(urlQueryParams, Object.keys(customURLParamToConfig));
+    const queryParams = omit(urlQueryParams, filterParamNames);
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
 
     // Ensure that panel closes (if now changes have been made)
@@ -132,13 +129,10 @@ class SearchFiltersPanelComponent extends Component {
     const currentQueryParams = this.state.currentQueryParams;
     const urlQueryParams = this.props.urlQueryParams;
 
-
     // initialValue for a select should come either from state.currentQueryParam or urlQueryParam
     const currentQueryParam = currentQueryParams[paramName];
 
-    return typeof currentQueryParam !== 'undefined'
-      ? currentQueryParam
-      : urlQueryParams[paramName];
+    return typeof currentQueryParam !== 'undefined' ? currentQueryParam : urlQueryParams[paramName];
   }
 
   // resolve initial values for a multi value filter
@@ -146,10 +140,10 @@ class SearchFiltersPanelComponent extends Component {
     const currentQueryParams = this.state.currentQueryParams;
     const urlQueryParams = this.props.urlQueryParams;
 
-    const splitQueryParam = queryParam => queryParam ? queryParam.split(',') : [];
+    const splitQueryParam = queryParam => (queryParam ? queryParam.split(',') : []);
 
     // initialValue for a select should come either from state.currentQueryParam or urlQueryParam
-    const hasCurrentQueryParam = typeof currentQueryParams[paramName] !== 'undefined'
+    const hasCurrentQueryParam = typeof currentQueryParams[paramName] !== 'undefined';
 
     return hasCurrentQueryParam
       ? splitQueryParam(currentQueryParams[paramName])
@@ -182,14 +176,15 @@ class SearchFiltersPanelComponent extends Component {
 SearchFiltersPanelComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  filterParamNames: [],
 };
 
 SearchFiltersPanelComponent.propTypes = {
   rootClassName: string,
   className: string,
   urlQueryParams: object.isRequired,
-  customURLParamToConfig: object.isRequired,
   onClosePanel: func.isRequired,
+  filterParamNames: array,
 
   // from injectIntl
   intl: intlShape.isRequired,
