@@ -22,13 +22,15 @@ desktop search view.
 
 ## Adding a new search filter
 
+Next we'll guide you through the steps of adding a _capacity_ filter to the marketplace.
+
 First step for adding a new filter is to make sure that the data being used for filtering is saved
-in the listing's `publicData` field. This can be done by modifying the `EditListingWizard`. Another
+in the listing's `publicData` attribute. This can be done by modifying the `EditListingWizard`. Another
 aspect in search filters is that the public data needs to be indexed in the API. This is currently
 achieved with a manual operation done by the Sharetribe support. Once a public data attribute is
 added to the listings and the data attribute is indexed, the listing searches can be filtered by
 that attribute by adding a query parameter that consists of a preceding "pub\_" and the attribute
-name, so for a _category_ attribute the parameter would be "pub_category".
+name, so for the _capacity_ attribute the parameter would be "pub_capacity".
 
 ### Common changes
 
@@ -40,10 +42,14 @@ the `marketplace-custom-config.js` file. The correct format is a list of objects
 `label` fields:
 
 ```js
-export const newFilterOptions = [
+export const capacityOptions = [
   {
-    key: 'option-identifier',
-    label: 'Label for the UI',
+    key: 'oneToThree',
+    label: '1 to 3',
+  },
+  {
+    key: 'fourToSix',
+    label: '4 to 6',
   },
   ...
 ];
@@ -60,12 +66,12 @@ options and filter option changes won't affect tests.
 ```js
 SearchPageComponent.defaultProps = {
   // other default props
-  newFilterOptions: config.custom.amenities,
+  capacityOptions: config.custom.capacityOptions,
 };
 
 SearchPageComponent.propTypes = {
   // other props
-  newFilterOptions: array,
+  capacityOptions: array,
 };
 ```
 
@@ -79,12 +85,12 @@ the one defined in your extended data indexing configuration:
 
 ```js
 filters() {
-  const { newFilterOptions } = this.props;
+  const { capacityOptions } = this.props;
 
   return {
-    newFilter: {
-      paramName: 'pub_newFilter',
-      options: newFilterOptions,
+    capacityFilter: {
+      paramName: 'pub_capacity',
+      options: capacityOptions,
     },
     ...
   };
@@ -104,7 +110,7 @@ as the configuration object in `filters`.
     amenitiesFilter: filters.amenitiesFilter,
   }}
   secondaryFilters={{
-    newFilter: filters.newFilter,
+    capacityFilter: filters.capacityFilter,
   }}
 />
 ```
