@@ -10,7 +10,7 @@ const formComponent = country => props => (
   <FinalForm
     {...props}
     render={fieldRenderProps => {
-      const { form, handleSubmit, onChange } = fieldRenderProps;
+      const { formName, handleSubmit, onChange } = fieldRenderProps;
       const currency = stripeCountryConfigs(country).currency;
       return (
         <form
@@ -21,11 +21,11 @@ const formComponent = country => props => (
         >
           <FormSpy onChange={onChange} />
           <StripeBankAccountTokenInputField
-            id={`${form}.token`}
+            id={`${formName}.token`}
             name="token"
             country={country}
             currency={currency}
-            formName={form}
+            formName={formName}
             validate={validators.required(' ')}
           />
           <Button style={{ marginTop: 24 }} type="submit">
@@ -41,7 +41,7 @@ const formComponent = country => props => (
 export const DE_EUR = {
   component: formComponent('DE'),
   props: {
-    form: 'DE_EUR',
+    formName: 'DE_EUR',
     onChange: formState => {
       if (formState.dirty) {
         console.log('form values changed to:', formState.values);
@@ -58,7 +58,7 @@ export const DE_EUR = {
 export const US_USD = {
   component: formComponent('US'),
   props: {
-    form: 'US_USD',
+    formName: 'US_USD',
     onChange: formState => {
       if (formState.dirty) {
         console.log('form values changed to:', formState.values);
@@ -75,7 +75,7 @@ export const US_USD = {
 export const GB_GBP = {
   component: formComponent('GB'),
   props: {
-    form: 'GB_GBP',
+    formName: 'GB_GBP',
     onChange: formState => {
       if (formState.dirty) {
         console.log('form values changed to:', formState.values);
@@ -92,7 +92,7 @@ export const GB_GBP = {
 export const AU_AUD = {
   component: formComponent('AU'),
   props: {
-    form: 'AU_AUD',
+    formName: 'AU_AUD',
     onChange: formState => {
       if (formState.dirty) {
         console.log('form values changed to:', formState.values);
