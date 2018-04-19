@@ -30,7 +30,7 @@ repository instead of cloning it. See the following section.
 ## Getting started with your own customisation
 
 If you want to build your own Flex marketplace by customising the template application, see the
-[Getting started with customisation](docs/getting-started-with-customisation.md) documentation.
+[Customisation guide](docs/customisation-guide.md) documentation.
 
 ## Documentation
 

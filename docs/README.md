@@ -9,7 +9,7 @@ Documentation for specific topics can be found in the following files:
 
 * Original
   [create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md)
-* [Getting started with customisation](getting-started-with-customisation.md)
+* [Customisation guide](customisation-guide.md)
 * [Testing](testing.md)
 * [Error logging with Sentry](sentry.md)
 * [CI](ci.md)

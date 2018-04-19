@@ -1,4 +1,4 @@
-# Getting started with customisation
+# Customisation guide
 
 So you've decided to build your own Flex marketplace using the template. That's awesome! This guide
 will help you in setting up your fork and describes the general workflow.
