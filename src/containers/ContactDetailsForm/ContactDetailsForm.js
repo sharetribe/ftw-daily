@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
+import { isEqual } from 'lodash';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import * as validators from '../../util/validators';
@@ -24,6 +25,7 @@ class ContactDetailsFormComponent extends Component {
     this.state = { showVerificationEmailSentMessage: false };
     this.emailSentTimeoutId = null;
     this.handleResendVerificationEmail = this.handleResendVerificationEmail.bind(this);
+    this.submittedValues = {};
   }
 
   componentWillUnmount() {
@@ -54,7 +56,6 @@ class ContactDetailsFormComponent extends Component {
             currentUser,
             formId,
             handleSubmit,
-            submitting,
             inProgress,
             intl,
             invalid,
@@ -97,6 +98,7 @@ class ContactDetailsFormComponent extends Component {
             sendVerificationEmailError
           );
 
+          const emailTouched = this.submittedValues.email !== values.email;
           const emailTakenErrorText = isChangeEmailTakenError(saveEmailError)
             ? intl.formatMessage({ id: 'ContactDetailsForm.emailTakenError' })
             : null;
@@ -221,6 +223,7 @@ class ContactDetailsFormComponent extends Component {
           const passwordFailedMessage = intl.formatMessage({
             id: 'ContactDetailsForm.passwordFailed',
           });
+          const passwordTouched = this.submittedValues.currentPassword !== values.currentPassword;
           const passwordErrorText = isChangeEmailWrongPassword(saveEmailError)
             ? passwordFailedMessage
             : null;
@@ -255,11 +258,22 @@ class ContactDetailsFormComponent extends Component {
           }
 
           const classes = classNames(rootClassName || css.root, className);
+          const submittedOnce = Object.keys(this.submittedValues).length > 0;
+          const pristineSinceLastSubmit = submittedOnce && isEqual(values, this.submittedValues);
           const submitDisabled =
-            invalid || submitting || inProgress || !(emailChanged || phoneNumberChanged);
+            invalid ||
+            pristineSinceLastSubmit ||
+            inProgress ||
+            !(emailChanged || phoneNumberChanged);
 
           return (
-            <Form className={classes} onSubmit={handleSubmit}>
+            <Form
+              className={classes}
+              onSubmit={e => {
+                this.submittedValues = values;
+                handleSubmit(e);
+              }}
+            >
               <div className={css.contactDetailsSection}>
                 <FieldTextInput
                   type="email"
@@ -268,7 +282,7 @@ class ContactDetailsFormComponent extends Component {
                   label={emailLabel}
                   placeholder={emailPlaceholder}
                   validate={validators.composeValidators(emailRequired, emailValid)}
-                  customErrorText={emailTakenErrorText}
+                  customErrorText={emailTouched ? null : emailTakenErrorText}
                 />
                 {emailVerifiedInfo}
                 <FieldPhoneNumberInput
@@ -297,7 +311,7 @@ class ContactDetailsFormComponent extends Component {
                   label={passwordLabel}
                   placeholder={passwordPlaceholder}
                   validate={passwordValidators}
-                  customErrorText={passwordErrorText}
+                  customErrorText={passwordTouched ? null : passwordErrorText}
                 />
               </div>
               <div className={css.bottomWrapper}>

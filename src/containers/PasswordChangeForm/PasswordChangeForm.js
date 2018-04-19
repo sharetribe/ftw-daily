@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
+import { isEqual } from 'lodash';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import * as validators from '../../util/validators';
@@ -18,6 +19,7 @@ class PasswordChangeFormComponent extends Component {
   constructor(props) {
     super(props);
     this.resetTimeoutId = null;
+    this.submittedValues = {};
   }
   componentWillUnmount() {
     window.clearTimeout(this.resetTimeoutId);
@@ -34,13 +36,13 @@ class PasswordChangeFormComponent extends Component {
             changePasswordError,
             currentUser,
             handleSubmit,
-            submitting,
             inProgress,
             intl,
             invalid,
             pristine,
             ready,
-            reset,
+            form,
+            values,
           } = fieldRenderProps;
 
           const user = ensureCurrentUser(currentUser);
@@ -103,6 +105,7 @@ class PasswordChangeFormComponent extends Component {
           const passwordFailedMessage = intl.formatMessage({
             id: 'PasswordChangeForm.passwordFailed',
           });
+          const passwordTouched = this.submittedValues.currentPassword !== values.currentPassword;
           const passwordErrorText = isChangePasswordWrongPassword(changePasswordError)
             ? passwordFailedMessage
             : null;
@@ -118,16 +121,19 @@ class PasswordChangeFormComponent extends Component {
               </span>
             ) : null;
 
+          const submittedOnce = Object.keys(this.submittedValues).length > 0;
+          const pristineSinceLastSubmit = submittedOnce && isEqual(values, this.submittedValues);
           const classes = classNames(rootClassName || css.root, className);
-          const submitDisabled = invalid || submitting || inProgress;
+          const submitDisabled = invalid || pristineSinceLastSubmit || inProgress;
 
           return (
             <Form
               className={classes}
-              onSubmit={values => {
-                handleSubmit(values)
+              onSubmit={e => {
+                this.submittedValues = values;
+                handleSubmit(e)
                   .then(() => {
-                    this.resetTimeoutId = window.setTimeout(reset, RESET_TIMEOUT);
+                    this.resetTimeoutId = window.setTimeout(form.reset, RESET_TIMEOUT);
                   })
                   .catch(() => {
                     // Error is handled in duck file already.
@@ -171,7 +177,7 @@ class PasswordChangeFormComponent extends Component {
                     passwordMinLength,
                     passwordMaxLength
                   )}
-                  customErrorText={passwordErrorText}
+                  customErrorText={passwordTouched ? null : passwordErrorText}
                 />
               </div>
               <div className={css.bottomWrapper}>

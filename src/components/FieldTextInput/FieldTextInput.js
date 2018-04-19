@@ -41,9 +41,9 @@ class FieldTextInputComponent extends Component {
 
     // Error message and input error styles are only shown if the
     // field has been touched and the validation has failed.
-    const hasError = touched && invalid && errorText;
+    const hasError = !!customErrorText || !!(touched && invalid && error);
 
-    const fieldMeta = { touched, error: errorText };
+    const fieldMeta = { touched: hasError, error: errorText };
 
     const inputClasses =
       inputRootClass ||
@@ -116,6 +116,6 @@ class FieldTextInput extends Component {
   render() {
     return <Field component={FieldTextInputComponent} {...this.props} />;
   }
-};
+}
 
 export default FieldTextInput;

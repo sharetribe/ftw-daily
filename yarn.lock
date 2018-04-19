@@ -3193,8 +3193,8 @@ final-form-arrays@^1.0.4:
   resolved "https://registry.yarnpkg.com/final-form-arrays/-/final-form-arrays-1.0.4.tgz#74330cb4d64ce07bb1c4a9084d0b65afdac6bf72"
 
 final-form@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/final-form/-/final-form-4.4.0.tgz#3eaa1305d7b03d1e5698ace5ff361d4d20d44ac0"
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/final-form/-/final-form-4.5.2.tgz#f8a9518784bdc2f72e71548a42b04c640963ca49"
 
 finalhandler@1.1.1:
   version "1.1.1"
@@ -6889,8 +6889,8 @@ react-final-form-arrays@^1.0.4:
   resolved "https://registry.yarnpkg.com/react-final-form-arrays/-/react-final-form-arrays-1.0.4.tgz#888b9b81a806844cf66d73f4e8b60e5f18fa2a11"
 
 react-final-form@^3.1.5:
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/react-final-form/-/react-final-form-3.1.5.tgz#6fa0e4c61e49b691b679ef4c8a5ad3fe92df0956"
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/react-final-form/-/react-final-form-3.3.1.tgz#dbe40eec853a9c451e5a8deb3b02d948a2fb7e3c"
 
 react-google-maps@^9.4.5:
   version "9.4.5"
