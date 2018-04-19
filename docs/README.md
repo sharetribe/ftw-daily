@@ -9,6 +9,7 @@ Documentation for specific topics can be found in the following files:
 
 * Original
   [create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md)
+* [Getting started with customisation](getting-started-with-customisation.md)
 * [Testing](testing.md)
 * [Error logging with Sentry](sentry.md)
 * [CI](ci.md)
@@ -18,7 +19,6 @@ Documentation for specific topics can be found in the following files:
 * [Terms of Service and Privacy Policy](terms-of-service-and-privacy-policy.md)
 * [i18n](i18n.md)
 * [Colors and icons](colors-and-icons.md)
-* [Starting a new customisation project](starting-a-new-customisation-project.md)
 * [Google Maps](google-maps.md)
 * [Content Security Policy (CSP)](content-security-policy.md)
 * [Search filters](search-filters.md)

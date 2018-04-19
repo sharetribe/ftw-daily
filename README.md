@@ -1,63 +1,40 @@
-# Sharetribe Starter App
+# Sharetribe Flex Template for Web
 
-[![CircleCI](https://circleci.com/gh/sharetribe/sharetribe-starter-app.svg?style=shield&circle-token=198451e83e5cecb0d662949260dbc3273ac44a67)](https://circleci.com/gh/sharetribe/sharetribe-starter-app)
+[![CircleCI](https://circleci.com/gh/sharetribe/sharetribe-starter-app.svg?style=svg&circle-token=198451e83e5cecb0d662949260dbc3273ac44a67)](https://circleci.com/gh/sharetribe/sharetribe-starter-app)
 
-This is a template application for a Sharetribe marketplace that can be extended and customised. It
-is based on an application bootstrapped with
+This is a template web application for a Sharetribe Flex marketplace ready to be extended and
+customised. It is based on an application bootstrapped with
 [create-react-app](https://github.com/facebookincubator/create-react-app) with some additions,
 namely server side rendering and a custom CSS setup.
 
+## Quick start
+
+If you just want to get the app running quickly to test it out, first install
+[Node.js](https://nodejs.org/) and [Yarn](https://yarnpkg.com/), and follow along:
+
+```sh
+git clone git@github.com:sharetribe/sharetribe-starter-app.git # clone this repository
+cd sharetribe-starter-app/                                     # change to the cloned directory
+cp .env-template .env                                          # copy the env template file to add your local config
+emacs .env                                                     # in your favorite editor, add the mandatory env vars to the config
+yarn install                                                   # install dependencies
+yarn run dev                                                   # start the dev server, this will open a browser in localhost:3000
+```
+
+See the [Environment configuration variables](docs/env.md) documentation for more information of the
+required configuration variables.
+
+**Note:** If you want to build your own Flex marketplace on top of the template, you should fork the
+repository instead of cloning it. See the following section.
+
+## Getting started with your own customisation
+
+If you want to build your own Flex marketplace by customising the template application, see the
+[Getting started with customisation](docs/getting-started-with-customisation.md) documentation.
+
 ## Documentation
 
-Documentation can be found in the [docs directory](docs/).
-
-## Getting started
-
-Install required tools:
-
-* [Node.js](https://nodejs.org/)
-* [Yarn](https://yarnpkg.com/)
-
-Clone this repository and install dependencies:
-
-    yarn install
-
-## Development
-
-**First, you need to configure Client Id, Google Maps API key and Stripe publishable API key via
-[environment variables](./docs/env.md).** The quickest way to do this is to copy `.env-template` ->
-`.env`, and edit the file to set the three mandatory configuration values.
-
-To develop the application and to see changes live, start the frontend development server:
-
-    yarn run dev
-
-**Known issues:**
-
-* Adding/changing `import`s may not be synced properly with ESLint. You may see an error
-  `Unable to resolve path to module` even though the module existing in right path. Restarting the
-  server doesn't help. To solve the issue, you need to make a change to the file where the error
-  occurs.
-
-## Development Server
-
-To develop the server setup, run:
-
-    yarn run dev-server
-
-This runs the frontend production build and starts the Express.js server in `server/index.js` that
-renders the application routes in the server. The server is automatically restarted when there are
-changes in the `server/` directory.
-
-Not that this server does **not** pick up changes in the frontend application code.
-
-## Tests
-
-To start the test watcher, run
-
-    yarn test
-
-See more in the [testing documentation](docs/testing.md).
+Full documentation can be found in the [docs directory](docs/).
 
 ## License
 

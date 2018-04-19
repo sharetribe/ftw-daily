@@ -1,6 +1,6 @@
-# Customization checklist
+# Customisation checklist
 
-Some generic things to update and check when starting to customize Starter app.
+Some generic things to update and check when starting to customise the template.
 
 * [Marketplace colors](colors-and-icons.md#colors)
 * [Generate app icons](colors-and-icons.md#icons)
