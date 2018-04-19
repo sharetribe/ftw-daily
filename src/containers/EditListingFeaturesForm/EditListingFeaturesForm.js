@@ -17,12 +17,12 @@ const EditListingFeaturesFormComponent = props => (
     mutators={{ ...arrayMutators }}
     render={fieldRenderProps => {
       const {
-        form,
         disabled,
         rootClassName,
         className,
         name,
         handleSubmit,
+        pristine,
         saveActionMsg,
         updated,
         updateError,
@@ -30,7 +30,7 @@ const EditListingFeaturesFormComponent = props => (
       } = fieldRenderProps;
 
       const classes = classNames(rootClassName || css.root, className);
-      const submitReady = updated;
+      const submitReady = updated && pristine;
       const submitInProgress = updateInProgress;
       const submitDisabled = disabled || submitInProgress;
 
@@ -46,7 +46,7 @@ const EditListingFeaturesFormComponent = props => (
 
           <FieldCheckboxGroup
             className={css.features}
-            id={`${form}.${name}`}
+            id={name}
             name={name}
             options={config.custom.amenities}
           />

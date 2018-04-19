@@ -19,6 +19,7 @@ export const EditListingPoliciesFormComponent = props => (
         handleSubmit,
         intl,
         invalid,
+        pristine,
         saveActionMsg,
         updated,
         updateError,
@@ -39,7 +40,7 @@ export const EditListingPoliciesFormComponent = props => (
       ) : null;
 
       const classes = classNames(css.root, className);
-      const submitReady = updated;
+      const submitReady = updated && pristine;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
 

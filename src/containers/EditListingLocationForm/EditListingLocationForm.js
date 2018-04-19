@@ -21,10 +21,10 @@ export const EditListingLocationFormComponent = props => (
       const {
         className,
         disabled,
-        form,
         handleSubmit,
         intl,
         invalid,
+        pristine,
         saveActionMsg,
         updated,
         updateError,
@@ -55,7 +55,7 @@ export const EditListingLocationFormComponent = props => (
       ) : null;
 
       const classes = classNames(css.root, className);
-      const submitReady = updated;
+      const submitReady = updated && pristine;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
 
@@ -84,7 +84,7 @@ export const EditListingLocationFormComponent = props => (
             className={css.building}
             type="text"
             name="building"
-            id={`${form}.building`}
+            id="building"
             label={buildingMessage}
             placeholder={buildingPlaceholderMessage}
           />

@@ -5,9 +5,10 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
   dispatch={[Function]}
   errors={Object {}}
   imageUploadRequested={false}
+  images={Array []}
   initialValues={
     Object {
-      "images": undefined,
+      "images": Array [],
     }
   }
   intl={

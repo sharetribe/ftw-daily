@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { bool, func, object, shape, string } from 'prop-types';
+import { array, bool, func, object, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm, Field } from 'react-final-form';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { arrayMove } from 'react-sortable-hoc';
+import { isEqual } from 'lodash';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { nonEmptyArray, composeValidators } from '../../util/validators';
@@ -20,6 +21,7 @@ export class EditListingPhotosFormComponent extends Component {
     this.state = { imageUploadRequested: false };
     this.onImageUploadHandler = this.onImageUploadHandler.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
+    this.submittedImages = [];
   }
 
   onImageUploadHandler(file) {
@@ -50,8 +52,7 @@ export class EditListingPhotosFormComponent extends Component {
         initialValues={{ images: this.props.images }}
         render={fieldRenderProps => {
           const {
-            blur,
-            change,
+            form,
             className,
             disabled,
             errors,
@@ -117,7 +118,16 @@ export class EditListingPhotosFormComponent extends Component {
             </p>
           ) : null;
 
-          const submitReady = updated || ready;
+          const submittedOnce = this.submittedImages.length > 0;
+          // imgs can contain added images (with temp ids) and submitted images with uniq ids.
+          const arrayOfImgIds = imgs =>
+            imgs.map(i => (typeof i.id === 'string' ? i.imageId : i.id));
+          const imageIdsFromProps = arrayOfImgIds(images);
+          const imageIdsFromPreviousSubmit = arrayOfImgIds(this.submittedImages);
+          const imageArrayHasSameImages = isEqual(imageIdsFromProps, imageIdsFromPreviousSubmit);
+          const pristineSinceLastSubmit = submittedOnce && imageArrayHasSameImages;
+
+          const submitReady = (updated && pristineSinceLastSubmit) || ready;
           const submitInProgress = updateInProgress;
           const submitDisabled =
             invalid || disabled || submitInProgress || imageUploadRequested || ready;
@@ -125,7 +135,13 @@ export class EditListingPhotosFormComponent extends Component {
           const classes = classNames(css.root, className);
 
           return (
-            <Form onSubmit={handleSubmit} className={classes}>
+            <Form
+              className={classes}
+              onSubmit={e => {
+                this.submittedImages = images;
+                handleSubmit(e);
+              }}
+            >
               {updateError ? (
                 <p className={css.error}>
                   <FormattedMessage id="EditListingPhotosForm.updateFailed" />
@@ -155,8 +171,8 @@ export class EditListingPhotosFormComponent extends Component {
                     const { name } = input;
                     const onChange = e => {
                       const file = e.target.files[0];
-                      change(`addImage`, file);
-                      blur(`addImage`);
+                      form.change(`addImage`, file);
+                      form.blur(`addImage`);
                       onImageUploadHandler(file);
                     };
                     const inputProps = { accept, id: name, name, onChange, type };
@@ -215,7 +231,7 @@ export class EditListingPhotosFormComponent extends Component {
   }
 }
 
-EditListingPhotosFormComponent.defaultProps = { errors: {}, updateError: null };
+EditListingPhotosFormComponent.defaultProps = { errors: {}, updateError: null, images: [] };
 
 EditListingPhotosFormComponent.propTypes = {
   errors: shape({
@@ -223,6 +239,7 @@ EditListingPhotosFormComponent.propTypes = {
     showListingsError: object,
     uploadImageError: object,
   }),
+  images: array,
   intl: intlShape.isRequired,
   onImageUpload: func.isRequired,
   onUpdateImageOrder: func.isRequired,
