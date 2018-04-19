@@ -20,7 +20,6 @@ const SignupFormComponent = props => (
         className,
         formId,
         handleSubmit,
-        submitting,
         inProgress,
         invalid,
         intl,
@@ -109,7 +108,7 @@ const SignupFormComponent = props => (
       const lastNameRequired = validators.required(lastNameRequiredMessage);
 
       const classes = classNames(rootClassName || css.root, className);
-      const submitInProgress = submitting || inProgress;
+      const submitInProgress = inProgress;
       const submitDisabled = invalid || submitInProgress;
 
       const handleTermsKeyUp = e => {

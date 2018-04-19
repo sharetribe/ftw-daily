@@ -55,7 +55,6 @@ class ProfileSettingsFormComponent extends Component {
             pristine,
             profileImage,
             rootClassName,
-            submitting,
             updateInProgress,
             updateProfileError,
             uploadImageError,
@@ -168,7 +167,7 @@ class ProfileSettingsFormComponent extends Component {
           ) : null;
 
           const classes = classNames(rootClassName || css.root, className);
-          const submitInProgress = submitting || updateInProgress;
+          const submitInProgress = updateInProgress;
           const submitReady = pristine && this.state.submittedOnce;
           const submitDisabled = invalid || pristine || uploadInProgress || submitInProgress;
 

@@ -64,7 +64,6 @@ export class EditListingPhotosFormComponent extends Component {
             onRemoveImage,
             ready,
             saveActionMsg,
-            submitting,
             updated,
             updateError,
             updateInProgress,
@@ -119,7 +118,7 @@ export class EditListingPhotosFormComponent extends Component {
           ) : null;
 
           const submitReady = updated || ready;
-          const submitInProgress = submitting || updateInProgress;
+          const submitInProgress = updateInProgress;
           const submitDisabled =
             invalid || disabled || submitInProgress || imageUploadRequested || ready;
 

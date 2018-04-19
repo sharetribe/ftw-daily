@@ -18,7 +18,6 @@ const LoginFormComponent = props => (
         className,
         formId,
         handleSubmit,
-        submitting,
         inProgress,
         intl,
         invalid,
@@ -53,7 +52,7 @@ const LoginFormComponent = props => (
       const passwordRequired = validators.requiredStringNoTrim(passwordRequiredMessage);
 
       const classes = classNames(rootClassName || css.root, className);
-      const submitInProgress = submitting || inProgress;
+      const submitInProgress = inProgress;
       const submitDisabled = invalid || submitInProgress;
 
       const passwordRecoveryLink = (

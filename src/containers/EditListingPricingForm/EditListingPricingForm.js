@@ -26,7 +26,6 @@ export const EditListingPricingFormComponent = props => (
         intl,
         invalid,
         saveActionMsg,
-        submitting,
         updated,
         updateError,
         updateInProgress,
@@ -62,7 +61,7 @@ export const EditListingPricingFormComponent = props => (
 
       const classes = classNames(css.root, className);
       const submitReady = updated;
-      const submitInProgress = submitting || updateInProgress;
+      const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
 
       return (

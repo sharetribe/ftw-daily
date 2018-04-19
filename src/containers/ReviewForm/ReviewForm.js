@@ -23,7 +23,6 @@ const ReviewFormComponent = props => (
         intl,
         formId,
         invalid,
-        submitting,
         reviewSent,
         sendReviewError,
         sendReviewInProgress,
@@ -58,7 +57,7 @@ const ReviewFormComponent = props => (
       });
 
       const classes = classNames(rootClassName || css.root, className);
-      const submitInProgress = submitting || sendReviewInProgress;
+      const submitInProgress = sendReviewInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
 
       return (

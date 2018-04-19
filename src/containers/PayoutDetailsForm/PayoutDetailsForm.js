@@ -57,7 +57,6 @@ const PayoutDetailsFormComponent = props => (
         pristine,
         ready,
         submitButtonText,
-        submitting,
         values,
       } = fieldRenderProps;
       const { country } = values;
@@ -154,7 +153,7 @@ const PayoutDetailsFormComponent = props => (
       const classes = classNames(css.root, className, {
         [css.disabled]: disabled,
       });
-      const submitInProgress = submitting || inProgress;
+      const submitInProgress = inProgress;
       const submitDisabled = pristine || invalid || disabled || submitInProgress;
 
       let error = null;

@@ -18,7 +18,6 @@ const EditListingFeaturesFormComponent = props => (
     render={fieldRenderProps => {
       const {
         form,
-        submitting,
         disabled,
         rootClassName,
         className,
@@ -32,7 +31,7 @@ const EditListingFeaturesFormComponent = props => (
 
       const classes = classNames(rootClassName || css.root, className);
       const submitReady = updated;
-      const submitInProgress = submitting || updateInProgress;
+      const submitInProgress = updateInProgress;
       const submitDisabled = disabled || submitInProgress;
 
       const errorMessage = updateError ? (

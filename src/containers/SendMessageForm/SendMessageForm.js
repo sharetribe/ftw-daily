@@ -56,14 +56,13 @@ class SendMessageFormComponent extends Component {
       messagePlaceholder,
       form,
       handleSubmit,
-      submitting,
       inProgress,
       sendMessageError,
       invalid,
     } = this.props;
 
     const classes = classNames(rootClassName || css.root, className);
-    const submitInProgress = submitting || inProgress;
+    const submitInProgress = inProgress;
     const submitDisabled = invalid || submitInProgress;
 
     return (

@@ -20,7 +20,6 @@ const EnquiryFormComponent = props => (
         submitButtonWrapperClassName,
         formId,
         handleSubmit,
-        submitting,
         inProgress,
         intl,
         listingTitle,
@@ -46,7 +45,7 @@ const EnquiryFormComponent = props => (
       const messageRequired = validators.requiredAndNonEmptyString(messageRequiredMessage);
 
       const classes = classNames(rootClassName || css.root, className);
-      const submitInProgress = submitting || inProgress;
+      const submitInProgress = inProgress;
       const submitDisabled = submitInProgress;
 
       return (
