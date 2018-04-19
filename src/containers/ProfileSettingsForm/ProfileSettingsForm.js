@@ -3,6 +3,7 @@ import { bool, string } from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Field, Form as FinalForm } from 'react-final-form';
+import { isEqual } from 'lodash';
 import classNames from 'classnames';
 import { ensureCurrentUser } from '../../util/data';
 import { propTypes } from '../../util/types';
@@ -20,7 +21,8 @@ class ProfileSettingsFormComponent extends Component {
     super(props);
 
     this.uploadDelayTimeoutId = null;
-    this.state = { uploadDelay: false, submittedOnce: false };
+    this.state = { uploadDelay: false };
+    this.submittedValues = {};
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,8 +46,6 @@ class ProfileSettingsFormComponent extends Component {
         {...this.props}
         render={fieldRenderProps => {
           const {
-            blur,
-            change,
             className,
             currentUser,
             handleSubmit,
@@ -59,6 +59,8 @@ class ProfileSettingsFormComponent extends Component {
             updateProfileError,
             uploadImageError,
             uploadInProgress,
+            form,
+            values,
           } = fieldRenderProps;
 
           const user = ensureCurrentUser(currentUser);
@@ -168,14 +170,16 @@ class ProfileSettingsFormComponent extends Component {
 
           const classes = classNames(rootClassName || css.root, className);
           const submitInProgress = updateInProgress;
-          const submitReady = pristine && this.state.submittedOnce;
-          const submitDisabled = invalid || pristine || uploadInProgress || submitInProgress;
+          const submittedOnce = Object.keys(this.submittedValues).length > 0;
+          const pristineSinceLastSubmit = submittedOnce && isEqual(values, this.submittedValues);
+          const submitDisabled =
+            invalid || pristine || pristineSinceLastSubmit || uploadInProgress || submitInProgress;
 
           return (
             <Form
               className={classes}
               onSubmit={e => {
-                this.setState({ submittedOnce: true });
+                this.submittedValues = values;
                 handleSubmit(e);
               }}
             >
@@ -206,8 +210,8 @@ class ProfileSettingsFormComponent extends Component {
                     const { name } = input;
                     const onChange = e => {
                       const file = e.target.files[0];
-                      change(`profileImage`, file);
-                      blur(`profileImage`);
+                      form.change(`profileImage`, file);
+                      form.blur(`profileImage`);
                       if (file != null) {
                         const tempId = `${file.name}_${Date.now()}`;
                         onImageUpload({ id: tempId, file });
@@ -302,7 +306,7 @@ class ProfileSettingsFormComponent extends Component {
                 type="submit"
                 inProgress={submitInProgress}
                 disabled={submitDisabled}
-                ready={submitReady}
+                ready={pristineSinceLastSubmit}
               >
                 <FormattedMessage id="ProfileSettingsForm.saveChanges" />
               </Button>
