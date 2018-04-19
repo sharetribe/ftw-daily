@@ -22,3 +22,4 @@ Documentation for specific topics can be found in the following files:
 * [Google Maps](google-maps.md)
 * [Content Security Policy (CSP)](content-security-policy.md)
 * [Search filters](search-filters.md)
+* [Extended data](extended-data.md)
