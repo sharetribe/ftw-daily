@@ -25,12 +25,15 @@ desktop search view.
 Next we'll guide you through the steps of adding a _capacity_ filter to the marketplace.
 
 First step for adding a new filter is to make sure that the data being used for filtering is saved
-in the listing's `publicData` attribute. This can be done by modifying the `EditListingWizard`. Another
-aspect in search filters is that the public data needs to be indexed in the API. This is currently
-achieved with a manual operation done by the Sharetribe support. Once a public data attribute is
-added to the listings and the data attribute is indexed, the listing searches can be filtered by
-that attribute by adding a query parameter that consists of a preceding "pub\_" and the attribute
-name, so for the _capacity_ attribute the parameter would be "pub_capacity".
+in the listing's `publicData` attribute. On how to achieve this, please refer to the [documentation
+on extending the listing data model](./extend-listing.md). Another aspect in search filters is that
+the public data needs to be indexed in the API. This is currently achieved with a manual operation
+done by the Sharetribe support. Once a public data attribute is added to the listings and the data
+attribute is indexed, the listing searches can be filtered by that attribute by adding a query
+parameter that consists of a preceding "pub\_" and the attribute name, so for the _capacity_
+attribute the parameter would be "pub_capacity".
+
+Further reading on public data can be found in the [extended data documentation](./extended-data.md).
 
 ### Common changes
 
