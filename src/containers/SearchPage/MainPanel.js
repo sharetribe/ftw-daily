@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { array, bool, func, object, number, string } from 'prop-types';
+import { array, bool, func, number, object, objectOf, string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
+import { merge } from 'lodash';
 import { propTypes } from '../../util/types';
 import {
   SearchResultsPanel,
@@ -9,6 +10,7 @@ import {
   SearchFiltersMobile,
   SearchFiltersPanel,
 } from '../../components';
+import { validFilterParams } from './SearchPage.helpers';
 
 import css from './SearchPage.css';
 
@@ -35,17 +37,20 @@ class MainPanel extends Component {
       pagination,
       searchParamsForPagination,
       showAsModalMaxWidth,
-      customURLParamToConfig,
       primaryFilters,
       secondaryFilters,
     } = this.props;
 
     const isSearchFiltersPanelOpen = !!secondaryFilters && this.state.isSearchFiltersPanelOpen;
-    const searchFiltersPanelSelectedCount = !secondaryFilters
-      ? 0
-      : Object.keys(customURLParamToConfig)
-          .map(key => urlQueryParams[key])
-          .filter(param => !!param).length;
+
+    const filters = merge(primaryFilters, secondaryFilters);
+    const selectedFilters = validFilterParams(urlQueryParams, filters);
+    const selectedFiltersCount = Object.keys(selectedFilters).length;
+
+    const selectedSecondaryFilters = secondaryFilters
+      ? validFilterParams(urlQueryParams, secondaryFilters)
+      : {};
+    const searchFiltersPanelSelectedCount = Object.keys(selectedSecondaryFilters).length;
 
     const searchFiltersPanelProps = !!secondaryFilters
       ? {
@@ -62,6 +67,11 @@ class MainPanel extends Component {
     const listingsAreLoaded = !searchInProgress && searchParamsAreInSync && hasPaginationInfo;
 
     const classes = classNames(rootClassName || css.searchResultContainer, className);
+
+    const filterParamNames = Object.values(filters).map(f => f.paramName);
+    const secondaryFilterParamNames = secondaryFilters
+      ? Object.values(secondaryFilters).map(f => f.paramName)
+      : [];
 
     return (
       <div className={classes}>
@@ -88,6 +98,8 @@ class MainPanel extends Component {
           onManageDisableScrolling={onManageDisableScrolling}
           onOpenModal={onOpenModal}
           onCloseModal={onCloseModal}
+          filterParamNames={filterParamNames}
+          selectedFiltersCount={selectedFiltersCount}
           {...primaryFilters}
           {...secondaryFilters}
         />
@@ -95,9 +107,9 @@ class MainPanel extends Component {
           <div className={classNames(css.searchFiltersPanel)}>
             <SearchFiltersPanel
               urlQueryParams={urlQueryParams}
-              customURLParamToConfig={customURLParamToConfig}
               listingsAreLoaded={listingsAreLoaded}
               onClosePanel={() => this.setState({ isSearchFiltersPanelOpen: false })}
+              filterParamNames={secondaryFilterParamNames}
               {...secondaryFilters}
             />
           </div>
@@ -154,9 +166,8 @@ MainPanel.propTypes = {
   pagination: propTypes.pagination,
   searchParamsForPagination: object,
   showAsModalMaxWidth: number.isRequired,
-  customURLParamToConfig: object.isRequired,
-  primaryFilters: object,
-  secondaryFilters: object,
+  primaryFilters: objectOf(propTypes.filterConfig),
+  secondaryFilters: objectOf(propTypes.filterConfig),
 };
 
 export default MainPanel;

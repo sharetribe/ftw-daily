@@ -24,12 +24,6 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   <div>
     <MainPanel
       className={null}
-      customURLParamToConfig={
-        Object {
-          "pub_amenities": "amenities",
-          "pub_category": "categories",
-        }
-      }
       listings={Array []}
       onActivateListing={[Function]}
       onCloseModal={[Function]}
@@ -46,26 +40,32 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       }
       primaryFilters={
         Object {
-          "amenities": Array [
-            Object {
-              "key": "dog1",
-              "label": "Dog 1",
-            },
-            Object {
-              "key": "dog2",
-              "label": "Dog 2",
-            },
-          ],
-          "categories": Array [
-            Object {
-              "key": "cat1",
-              "label": "Cat 1",
-            },
-            Object {
-              "key": "cat2",
-              "label": "Cat 2",
-            },
-          ],
+          "amenitiesFilter": Object {
+            "options": Array [
+              Object {
+                "key": "dog1",
+                "label": "Dog 1",
+              },
+              Object {
+                "key": "dog2",
+                "label": "Dog 2",
+              },
+            ],
+            "paramName": "pub_amenities",
+          },
+          "categoryFilter": Object {
+            "options": Array [
+              Object {
+                "key": "cat1",
+                "label": "Cat 1",
+              },
+              Object {
+                "key": "cat2",
+                "label": "Cat 2",
+              },
+            ],
+            "paramName": "pub_category",
+          },
         }
       }
       resultsCount={0}

@@ -401,6 +401,17 @@ propTypes.pagination = shape({
   totalPages: number.isRequired,
 });
 
+// Search filter definition
+propTypes.filterConfig = shape({
+  paramName: string.isRequired,
+  options: arrayOf(
+    shape({
+      key: oneOfType([string, bool, number]).isRequired,
+      label: string.isRequired,
+    })
+  ).isRequired,
+});
+
 export const ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND = 'transaction-listing-not-found';
 export const ERROR_CODE_TRANSACTION_INVALID_TRANSITION = 'transaction-invalid-transition';
 export const ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_CUSTOMER =

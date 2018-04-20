@@ -49,24 +49,9 @@ if SearchMap's bounds have changed enough.
 
 ## Other things to consider
 
-### URL Params vs marketplace-custom-config.js
+### Search filters
 
-Filter handling needs some mapping between configured extended data. For example,
-_marketplace-custom-config.js_ defines all the categories used by the app, but that data needs to be
-in format `pub_category=selectedCategory` when we talk with the API. (We also use this format in
-URL.)
-
-This mapping is done at the beginning of the file:
-
-```
-const CATEGORY_URL_PARAM = 'pub_category';
-const AMENITIES_URL_PARAM = 'pub_amenities';
-
-const customURLParamToConfig = {
-  [CATEGORY_URL_PARAM]: 'categories',
-  [AMENITIES_URL_PARAM]: 'amenities',
-};
-```
+See the [filters documentation](../../../docs/search-filters.md).
 
 ### SeachPage schema / SEO
 
