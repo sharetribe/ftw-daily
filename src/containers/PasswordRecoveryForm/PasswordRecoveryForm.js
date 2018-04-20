@@ -1,99 +1,132 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Form as FinalForm } from 'react-final-form';
+import { isEqual } from 'lodash';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import * as validators from '../../util/validators';
 import { isPasswordRecoveryEmailNotFoundError } from '../../util/errors';
-import { Form, PrimaryButton, TextInputField, NamedLink } from '../../components';
+import { Form, PrimaryButton, FieldTextInput, NamedLink } from '../../components';
 
 import css from './PasswordRecoveryForm.css';
 
-const PasswordRecoveryFormComponent = props => {
-  const {
-    rootClassName,
-    className,
-    handleSubmit,
-    pristine,
-    submitting,
-    form,
-    initialValues,
-    intl,
-    inProgress,
-    recoveryError,
-  } = props;
+class PasswordRecoveryFormComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.submittedValues = {};
+  }
 
-  // email
-  const emailLabel = intl.formatMessage({
-    id: 'PasswordRecoveryForm.emailLabel',
-  });
-  const emailPlaceholder = intl.formatMessage({
-    id: 'PasswordRecoveryForm.emailPlaceholder',
-  });
-  const emailRequiredMessage = intl.formatMessage({
-    id: 'PasswordRecoveryForm.emailRequired',
-  });
-  const emailNotFoundMessage = intl.formatMessage({
-    id: 'PasswordRecoveryForm.emailNotFound',
-  });
-  const emailInvalidMessage = intl.formatMessage({
-    id: 'PasswordRecoveryForm.emailInvalid',
-  });
+  render() {
+    return (
+      <FinalForm
+        {...this.props}
+        render={fieldRenderProps => {
+          const {
+            rootClassName,
+            className,
+            formId,
+            handleSubmit,
+            pristine,
+            initialValues,
+            intl,
+            inProgress,
+            recoveryError,
+            values,
+          } = fieldRenderProps;
 
-  const emailRequired = validators.required(emailRequiredMessage);
-  const emailValid = validators.emailFormatValid(emailInvalidMessage);
+          // email
+          const emailLabel = intl.formatMessage({
+            id: 'PasswordRecoveryForm.emailLabel',
+          });
+          const emailPlaceholder = intl.formatMessage({
+            id: 'PasswordRecoveryForm.emailPlaceholder',
+          });
+          const emailRequiredMessage = intl.formatMessage({
+            id: 'PasswordRecoveryForm.emailRequired',
+          });
+          const emailNotFoundMessage = intl.formatMessage({
+            id: 'PasswordRecoveryForm.emailNotFound',
+          });
+          const emailInvalidMessage = intl.formatMessage({
+            id: 'PasswordRecoveryForm.emailInvalid',
+          });
 
-  // In case a given email is not found, pass a custom error message
-  // to be rendered with the input component
-  const customErrorText = isPasswordRecoveryEmailNotFoundError(recoveryError)
-    ? emailNotFoundMessage
-    : null;
-  const initialEmail = initialValues ? initialValues.email : null;
+          const emailRequired = validators.required(emailRequiredMessage);
+          const emailValid = validators.emailFormatValid(emailInvalidMessage);
 
-  const classes = classNames(rootClassName || css.root, className);
-  const submitInProgress = submitting || inProgress;
-  const submitDisabled = (pristine && !initialEmail) || submitInProgress;
+          // In case a given email is not found, pass a custom error message
+          // to be rendered with the input component
+          const customErrorText = isPasswordRecoveryEmailNotFoundError(recoveryError)
+            ? emailNotFoundMessage
+            : null;
+          const initialEmail = initialValues ? initialValues.email : null;
+          const emailTouched = values.email !== this.submittedValues.email;
 
-  const loginLink = (
-    <NamedLink name="LoginPage" className={css.modalHelperLink}>
-      <FormattedMessage id="PasswordRecoveryForm.loginLinkText" />
-    </NamedLink>
-  );
+          const classes = classNames(rootClassName || css.root, className);
+          const submitInProgress = inProgress;
+          const submittedOnce = Object.keys(this.submittedValues).length > 0;
+          const pristineSinceLastSubmit = submittedOnce && isEqual(values, this.submittedValues);
+          const submitDisabled =
+            (pristine && !initialEmail) || submitInProgress || pristineSinceLastSubmit;
 
-  return (
-    <Form className={classes} onSubmit={handleSubmit}>
-      <TextInputField
-        className={css.email}
-        type="email"
-        name="email"
-        autoComplete="email"
-        id={`${form}.email`}
-        label={emailLabel}
-        placeholder={emailPlaceholder}
-        validate={[emailRequired, emailValid]}
-        customErrorText={customErrorText}
+          const loginLink = (
+            <NamedLink name="LoginPage" className={css.modalHelperLink}>
+              <FormattedMessage id="PasswordRecoveryForm.loginLinkText" />
+            </NamedLink>
+          );
+
+          return (
+            <Form
+              className={classes}
+              onSubmit={e => {
+                this.submittedValues = values;
+                handleSubmit(e);
+              }}
+            >
+              <FieldTextInput
+                className={css.email}
+                type="email"
+                id={formId ? `${formId}.email` : 'email'}
+                name="email"
+                autoComplete="email"
+                label={emailLabel}
+                placeholder={emailPlaceholder}
+                validate={validators.composeValidators(emailRequired, emailValid)}
+                customErrorText={emailTouched ? null : customErrorText}
+              />
+
+              <div className={css.bottomWrapper}>
+                <p className={css.bottomWrapperText}>
+                  <span className={css.modalHelperText}>
+                    <FormattedMessage
+                      id="PasswordRecoveryForm.loginLinkInfo"
+                      values={{ loginLink }}
+                    />
+                  </span>
+                </p>
+
+                <PrimaryButton
+                  type="submit"
+                  inProgress={submitInProgress}
+                  disabled={submitDisabled}
+                >
+                  <FormattedMessage id="PasswordRecoveryForm.sendInstructions" />
+                </PrimaryButton>
+              </div>
+            </Form>
+          );
+        }}
       />
-
-      <div className={css.bottomWrapper}>
-        <p className={css.bottomWrapperText}>
-          <span className={css.modalHelperText}>
-            <FormattedMessage id="PasswordRecoveryForm.loginLinkInfo" values={{ loginLink }} />
-          </span>
-        </p>
-
-        <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
-          <FormattedMessage id="PasswordRecoveryForm.sendInstructions" />
-        </PrimaryButton>
-      </div>
-    </Form>
-  );
-};
+    );
+  }
+}
 
 PasswordRecoveryFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
+  formId: null,
   inProgress: false,
   recoveryError: null,
 };
@@ -101,9 +134,9 @@ PasswordRecoveryFormComponent.defaultProps = {
 const { bool, string } = PropTypes;
 
 PasswordRecoveryFormComponent.propTypes = {
-  ...formPropTypes,
   rootClassName: string,
   className: string,
+  formId: string,
 
   inProgress: bool,
   recoveryError: propTypes.error,
@@ -112,10 +145,7 @@ PasswordRecoveryFormComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const defaultFormName = 'PasswordRecoveryForm';
-
-const PasswordRecoveryForm = compose(reduxForm({ form: defaultFormName }), injectIntl)(
-  PasswordRecoveryFormComponent
-);
+const PasswordRecoveryForm = compose(injectIntl)(PasswordRecoveryFormComponent);
+PasswordRecoveryForm.displayName = 'PasswordRecoveryForm';
 
 export default PasswordRecoveryForm;

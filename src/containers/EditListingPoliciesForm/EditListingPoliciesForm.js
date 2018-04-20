@@ -1,82 +1,76 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
-import { Form, Button, TextInputField } from '../../components';
+import { Form, Button, FieldTextInput } from '../../components';
 
 import css from './EditListingPoliciesForm.css';
 
-export class EditListingPoliciesFormComponent extends Component {
-  constructor(props) {
-    super(props);
+export const EditListingPoliciesFormComponent = props => (
+  <FinalForm
+    {...props}
+    render={fieldRenderProps => {
+      const {
+        className,
+        disabled,
+        handleSubmit,
+        intl,
+        invalid,
+        pristine,
+        saveActionMsg,
+        updated,
+        updateError,
+        updateInProgress,
+      } = fieldRenderProps;
 
-    // Initialize form inside this component reduces the amount of files that are tied to
-    // marketplace specific content in publicData.
-    const { initialize, publicData } = props;
-    const { rules = '' } = publicData;
-    initialize({ rules });
-  }
+      const rulesLabelMessage = intl.formatMessage({
+        id: 'EditListingPoliciesForm.rulesLabel',
+      });
+      const rulesPlaceholderMessage = intl.formatMessage({
+        id: 'EditListingPoliciesForm.rulesPlaceholder',
+      });
 
-  render() {
-    const {
-      className,
-      disabled,
-      handleSubmit,
-      intl,
-      form,
-      invalid,
-      saveActionMsg,
-      submitting,
-      updated,
-      updateError,
-      updateInProgress,
-    } = this.props;
+      const errorMessage = updateError ? (
+        <p className={css.error}>
+          <FormattedMessage id="EditListingPoliciesForm.updateFailed" />
+        </p>
+      ) : null;
 
-    const rulesLabelMessage = intl.formatMessage({ id: 'EditListingPoliciesForm.rulesLabel' });
-    const rulesPlaceholderMessage = intl.formatMessage({
-      id: 'EditListingPoliciesForm.rulesPlaceholder',
-    });
+      const classes = classNames(css.root, className);
+      const submitReady = updated && pristine;
+      const submitInProgress = updateInProgress;
+      const submitDisabled = invalid || disabled || submitInProgress;
 
-    const errorMessage = updateError ? (
-      <p className={css.error}>
-        <FormattedMessage id="EditListingPoliciesForm.updateFailed" />
-      </p>
-    ) : null;
+      return (
+        <Form className={classes} onSubmit={handleSubmit}>
+          {errorMessage}
 
-    const classes = classNames(css.root, className);
-    const submitReady = updated;
-    const submitInProgress = submitting || updateInProgress;
-    const submitDisabled = invalid || disabled || submitInProgress;
+          <FieldTextInput
+            id="rules"
+            name="rules"
+            className={css.policy}
+            type="textarea"
+            label={rulesLabelMessage}
+            placeholder={rulesPlaceholderMessage}
+          />
 
-    return (
-      <Form className={classes} onSubmit={handleSubmit}>
-        {errorMessage}
-
-        <TextInputField
-          className={css.policy}
-          type="textarea"
-          name="rules"
-          id={`${form}.rules`}
-          label={rulesLabelMessage}
-          placeholder={rulesPlaceholderMessage}
-        />
-
-        <Button
-          className={css.submitButton}
-          type="submit"
-          inProgress={submitInProgress}
-          disabled={submitDisabled}
-          ready={submitReady}
-        >
-          {saveActionMsg}
-        </Button>
-      </Form>
-    );
-  }
-}
+          <Button
+            className={css.submitButton}
+            type="submit"
+            inProgress={submitInProgress}
+            disabled={submitDisabled}
+            ready={submitReady}
+          >
+            {saveActionMsg}
+          </Button>
+        </Form>
+      );
+    }}
+  />
+);
 
 EditListingPoliciesFormComponent.defaultProps = {
   selectedPlace: null,
@@ -86,7 +80,6 @@ EditListingPoliciesFormComponent.defaultProps = {
 const { func, string, bool } = PropTypes;
 
 EditListingPoliciesFormComponent.propTypes = {
-  ...formPropTypes,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
@@ -96,6 +89,4 @@ EditListingPoliciesFormComponent.propTypes = {
   updateInProgress: bool.isRequired,
 };
 
-const formName = 'EditListingPoliciesForm';
-
-export default compose(reduxForm({ form: formName }), injectIntl)(EditListingPoliciesFormComponent);
+export default compose(injectIntl)(EditListingPoliciesFormComponent);

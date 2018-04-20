@@ -15,7 +15,7 @@ import { propTypes } from '../../util/types';
 import css from './EmailVerificationForm.css';
 
 const EmailVerificationFormComponent = props => {
-  const { currentUser, submitting, inProgress, handleSubmit, verificationError } = props;
+  const { currentUser, inProgress, handleSubmit, verificationError } = props;
 
   const { email, emailVerified, pendingEmail, profile } = currentUser.attributes;
   const emailToVerify = <strong>{pendingEmail || email}</strong>;
@@ -27,7 +27,7 @@ const EmailVerificationFormComponent = props => {
     </div>
   );
 
-  const submitInProgress = submitting || inProgress;
+  const submitInProgress = inProgress;
   const submitDisabled = submitInProgress;
 
   const verifyEmail = (
@@ -53,7 +53,7 @@ const EmailVerificationFormComponent = props => {
 
         <div className={css.bottomWrapper}>
           <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
-            {submitting || inProgress ? (
+            {inProgress ? (
               <FormattedMessage id="EmailVerificationForm.verifying" />
             ) : (
               <FormattedMessage id="EmailVerificationForm.verify" />

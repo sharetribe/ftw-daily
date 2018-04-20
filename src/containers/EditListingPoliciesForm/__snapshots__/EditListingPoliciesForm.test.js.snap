@@ -1,27 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditListingPoliciesForm matches snapshot 1`] = `
-<Form
-  className=""
-  contentRef={null}
+<ReactFinalForm
+  dispatch={[Function]}
+  intl={
+    Object {
+      "formatDate": [Function],
+      "formatHTMLMessage": [Function],
+      "formatMessage": [Function],
+      "formatNumber": [Function],
+      "formatPlural": [Function],
+      "formatRelative": [Function],
+      "formatTime": [Function],
+      "now": [Function],
+    }
+  }
   onSubmit={[Function]}
->
-  <TextInputField
-    id="fakeTestForm.rules"
-    label="EditListingPoliciesForm.rulesLabel"
-    name="rules"
-    placeholder="EditListingPoliciesForm.rulesPlaceholder"
-    type="textarea"
-  />
-  <Button
-    className={null}
-    disabled={false}
-    inProgress={false}
-    ready={false}
-    rootClassName={null}
-    type="submit"
-  >
-    Save rules
-  </Button>
-</Form>
+  publicData={Object {}}
+  render={[Function]}
+  saveActionMsg="Save rules"
+  selectedPlace={null}
+  updateError={null}
+  updateInProgress={false}
+  updated={false}
+/>
 `;

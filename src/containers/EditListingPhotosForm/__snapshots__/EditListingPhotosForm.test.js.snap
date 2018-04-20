@@ -1,76 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditListingPhotosForm matches snapshot 1`] = `
-<Form
-  className=""
-  contentRef={null}
+<ReactFinalForm
+  dispatch={[Function]}
+  errors={Object {}}
+  imageUploadRequested={false}
+  images={Array []}
+  initialValues={
+    Object {
+      "images": Array [],
+    }
+  }
+  intl={
+    Object {
+      "formatDate": [Function],
+      "formatHTMLMessage": [Function],
+      "formatMessage": [Function],
+      "formatNumber": [Function],
+      "formatPlural": [Function],
+      "formatRelative": [Function],
+      "formatTime": [Function],
+      "now": [Function],
+    }
+  }
+  onImageUpload={[Function]}
+  onImageUploadHandler={[Function]}
+  onRemoveImage={[Function]}
   onSubmit={[Function]}
->
-  <AddImages
-    className={null}
-    images={Array []}
-    onRemoveImage={[Function]}
-    onSortEnd={[Function]}
-    savedImageAltText="EditListingPhotosForm.savedImageAltText"
-    thumbnailClassName={null}
-  >
-    <Field
-      accept="image/*"
-      component={[Function]}
-      disabled={false}
-      id="EditListingPhotosForm.AddImages"
-      label={
-        <span
-          className={undefined}
-        >
-          <span
-            className={undefined}
-          >
-            <FormattedMessage
-              id="EditListingPhotosForm.chooseImage"
-              values={Object {}}
-            />
-          </span>
-          <span
-            className={undefined}
-          >
-            <FormattedMessage
-              id="EditListingPhotosForm.imageTypes"
-              values={Object {}}
-            />
-          </span>
-        </span>
-      }
-      name="addImage"
-      onChange={[Function]}
-      type="file"
-    />
-    <Field
-      component={[Function]}
-      name="images"
-      type="hidden"
-      validate={
-        Array [
-          [Function],
-        ]
-      }
-    />
-  </AddImages>
-  <p>
-    <FormattedMessage
-      id="EditListingPhotosForm.addImagesTip"
-      values={Object {}}
-    />
-  </p>
-  <Button
-    className={null}
-    disabled={false}
-    inProgress={false}
-    ready={false}
-    rootClassName={null}
-    type="submit"
-  >
-    Save photos
-  </Button>
-</Form>
+  onUpdateImageOrder={[Function]}
+  ready={false}
+  render={[Function]}
+  saveActionMsg="Save photos"
+  stripeConnected={false}
+  updateError={null}
+  updateInProgress={false}
+  updated={false}
+/>
 `;

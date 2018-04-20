@@ -1,40 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditListingLocationForm matches snapshot 1`] = `
-<Form
-  className=""
-  contentRef={null}
-  onSubmit={[Function]}
->
-  <Component
-    autoFocus={true}
-    format={null}
-    label="EditListingLocationForm.address"
-    name="location"
-    placeholder="EditListingLocationForm.addressPlaceholder"
-    validate={
-      Array [
-        [Function],
-        [Function],
-      ]
+<ReactFinalForm
+  dispatch={[Function]}
+  intl={
+    Object {
+      "formatDate": [Function],
+      "formatHTMLMessage": [Function],
+      "formatMessage": [Function],
+      "formatNumber": [Function],
+      "formatPlural": [Function],
+      "formatRelative": [Function],
+      "formatTime": [Function],
+      "now": [Function],
     }
-  />
-  <TextInputField
-    id="fakeTestForm.building"
-    label="EditListingLocationForm.building"
-    name="building"
-    placeholder="EditListingLocationForm.buildingPlaceholder"
-    type="text"
-  />
-  <Button
-    className={null}
-    disabled={false}
-    inProgress={false}
-    ready={false}
-    rootClassName={null}
-    type="submit"
-  >
-    Save location
-  </Button>
-</Form>
+  }
+  onSubmit={[Function]}
+  render={[Function]}
+  saveActionMsg="Save location"
+  selectedPlace={null}
+  updateError={null}
+  updateInProgress={false}
+  updated={false}
+/>
 `;

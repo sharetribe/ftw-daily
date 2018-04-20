@@ -11,14 +11,14 @@ exports[`EditListingPricingForm matches snapshot 1`] = `
     className=""
   >
     <label
-      htmlFor="EditListingPricingForm.FieldCurrencyInput"
+      htmlFor="price"
     >
       EditListingPricingForm.pricePerUnit
     </label>
     <input
       autoFocus={true}
       className=""
-      id="EditListingPricingForm.FieldCurrencyInput"
+      id="price"
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}

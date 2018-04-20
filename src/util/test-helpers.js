@@ -1,7 +1,7 @@
 import React from 'react';
 import { mapValues } from 'lodash';
 import Enzyme, { shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';

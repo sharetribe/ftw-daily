@@ -1,40 +1,52 @@
 import React from 'react';
-import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Form as FinalForm, FormSpy } from 'react-final-form';
 import * as validators from '../../util/validators';
 import { Button } from '../../components';
 import FieldPhoneNumberInput from './FieldPhoneNumberInput';
 
 const formName = 'Styleguide.FieldPhoneNumberInput.Form';
 
-const FormComponent = props => {
-  const { form, handleSubmit, invalid, pristine, submitting } = props;
-  const required = validators.required('This field is required');
-  const submitDisabled = invalid || pristine || submitting;
-  return (
-    <form onSubmit={handleSubmit}>
-      <FieldPhoneNumberInput
-        id={`${form}.phoneNumber`}
-        name="phoneNumber"
-        label="Phone number"
-        placeholder="Phone number"
-        validate={required}
-      />
-      <Button style={{ marginTop: 24 }} type="submit" disabled={submitDisabled}>
-        Submit
-      </Button>
-    </form>
-  );
-};
-
-FormComponent.propTypes = formPropTypes;
-
-const Form = reduxForm({
-  form: formName,
-})(FormComponent);
+const FormComponent = props => (
+  <FinalForm
+    {...props}
+    form={formName}
+    render={fieldRenderProps => {
+      const { formId, handleSubmit, onChange, invalid, pristine, submitting } = fieldRenderProps;
+      const required = validators.required('This field is required');
+      const submitDisabled = invalid || pristine || submitting;
+      return (
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            handleSubmit(e);
+          }}
+        >
+          <FormSpy onChange={onChange} />
+          <FieldPhoneNumberInput
+            id={`${formId}.phoneNumber`}
+            name="phoneNumber"
+            label="Phone number"
+            placeholder="Phone number"
+            validate={required}
+          />
+          <Button style={{ marginTop: 24 }} type="submit" disabled={submitDisabled}>
+            Submit
+          </Button>
+        </form>
+      );
+    }}
+  />
+);
 
 export const PhoneNumber = {
-  component: Form,
+  component: FormComponent,
   props: {
+    formId: 'PhoneNumberExample',
+    onChange: formState => {
+      if (formState.dirty) {
+        console.log('form values changed to:', formState.values);
+      }
+    },
     onSubmit(values) {
       console.log('onSubmit:', values);
     },

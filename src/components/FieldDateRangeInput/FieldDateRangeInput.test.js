@@ -18,8 +18,6 @@ describe('DateRangeInput', () => {
       onBlur: noop,
       onChange: noop,
       onFocus: noop,
-      onDragStart: noop,
-      onDrop: noop,
       startDateId: 'bookingStartDate',
       startDatePlaceholderText: 'today',
       endDateId: 'bookingEndDate',

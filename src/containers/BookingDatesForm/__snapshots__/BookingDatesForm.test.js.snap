@@ -1,48 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
-<Form
-  className={null}
-  contentRef={null}
-  onSubmit={[Function]}
->
-  <FieldDateRangeInput
-    endDateId="fakeTestForm.bookingEndDate"
-    endDateLabel="BookingDatesForm.bookingEndTitle"
-    endDatePlaceholderText="tomorrow"
-    focusedInput={null}
-    format={null}
-    name="bookingDates"
-    onFocusedInputChange={[Function]}
-    startDateId="fakeTestForm.bookingStartDate"
-    startDateLabel="BookingDatesForm.bookingStartTitle"
-    startDatePlaceholderText="today"
-    unitType="line-item/night"
-    useMobileMargins={true}
-    validate={
-      Array [
-        [Function],
-        [Function],
-      ]
+<ReactFinalForm
+  bookingDates={Object {}}
+  dispatch={[Function]}
+  endDatePlaceholder="tomorrow"
+  intl={
+    Object {
+      "formatDate": [Function],
+      "formatHTMLMessage": [Function],
+      "formatMessage": [Function],
+      "formatNumber": [Function],
+      "formatPlural": [Function],
+      "formatRelative": [Function],
+      "formatTime": [Function],
+      "now": [Function],
     }
-  />
-  <p>
-    <FormattedMessage
-      id="BookingDatesForm.youWontBeChargedInfo"
-      values={Object {}}
-    />
-  </p>
-  <div
-    className=""
-  >
-    <PrimaryButton
-      type="submit"
-    >
-      <FormattedMessage
-        id="BookingDatesForm.requestToBook"
-        values={Object {}}
-      />
-    </PrimaryButton>
-  </div>
-</Form>
+  }
+  isOwnListing={false}
+  onSubmit={[Function]}
+  render={[Function]}
+  startDatePlaceholder="today"
+  submitButtonWrapperClassName={null}
+  unitPrice={
+    Money {
+      "amount": 1099,
+      "currency": "USD",
+    }
+  }
+  unitType="line-item/night"
+/>
 `;

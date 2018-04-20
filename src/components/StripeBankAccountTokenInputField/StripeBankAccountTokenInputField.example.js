@@ -1,45 +1,51 @@
 /* eslint-disable no-console */
 import React from 'react';
-import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Form as FinalForm, FormSpy } from 'react-final-form';
 import { Button } from '../../components';
 import { stripeCountryConfigs } from './StripeBankAccountTokenInputField.util';
 import StripeBankAccountTokenInputField from './StripeBankAccountTokenInputField';
 import * as validators from '../../util/validators';
 
-const formComponent = country => {
-  const FormComponent = props => {
-    const { form, handleSubmit } = props;
-    const currency = stripeCountryConfigs(country).currency;
-    return (
-      <form onSubmit={handleSubmit}>
-        <StripeBankAccountTokenInputField
-          id={`${form}.token`}
-          name="token"
-          country={country}
-          currency={currency}
-          formName={form}
-          validate={validators.required(' ')}
-        />
-        <Button style={{ marginTop: 24 }} type="submit">
-          Submit
-        </Button>
-      </form>
-    );
-  };
-  FormComponent.propTypes = formPropTypes;
-  return FormComponent;
-};
+const formComponent = country => props => (
+  <FinalForm
+    {...props}
+    render={fieldRenderProps => {
+      const { formName, handleSubmit, onChange } = fieldRenderProps;
+      const currency = stripeCountryConfigs(country).currency;
+      return (
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            handleSubmit(e);
+          }}
+        >
+          <FormSpy onChange={onChange} />
+          <StripeBankAccountTokenInputField
+            id={`${formName}.token`}
+            name="token"
+            country={country}
+            currency={currency}
+            formName={formName}
+            validate={validators.required(' ')}
+          />
+          <Button style={{ marginTop: 24 }} type="submit">
+            Submit
+          </Button>
+        </form>
+      );
+    }}
+  />
+);
 
 // DE
-const FormComponentEur = formComponent('DE');
-const formNameEur = 'Styleguide.StripeBankAccountTokenInputField.formEur';
-const FormEur = reduxForm({ form: formNameEur })(FormComponentEur);
-
 export const DE_EUR = {
-  component: FormEur,
+  component: formComponent('DE'),
   props: {
-    onChange: values => {
-      console.log('values changed to:', values);
+    formName: 'DE_EUR',
+    onChange: formState => {
+      if (formState.dirty) {
+        console.log('form values changed to:', formState.values);
+      }
     },
     onSubmit: values => {
       console.log('values submitted:', values);
@@ -49,15 +55,14 @@ export const DE_EUR = {
 };
 
 // US
-const FormComponentUsd = formComponent('US');
-const formNameUsd = 'Styleguide.StripeBankAccountTokenInputField.formUsd';
-const FormUsd = reduxForm({ form: formNameUsd })(FormComponentUsd);
-
 export const US_USD = {
-  component: FormUsd,
+  component: formComponent('US'),
   props: {
-    onChange: values => {
-      console.log('values changed to:', values);
+    formName: 'US_USD',
+    onChange: formState => {
+      if (formState.dirty) {
+        console.log('form values changed to:', formState.values);
+      }
     },
     onSubmit: values => {
       console.log('values submitted:', values);
@@ -67,15 +72,14 @@ export const US_USD = {
 };
 
 // GB
-const FormComponentGbGbp = formComponent('GB');
-const formNameGbp = 'Styleguide.StripeBankAccountTokenInputField.formGbGbp';
-const formGbGbp = reduxForm({ form: formNameGbp })(FormComponentGbGbp);
-
 export const GB_GBP = {
-  component: formGbGbp,
+  component: formComponent('GB'),
   props: {
-    onChange: values => {
-      console.log('values changed to:', values);
+    formName: 'GB_GBP',
+    onChange: formState => {
+      if (formState.dirty) {
+        console.log('form values changed to:', formState.values);
+      }
     },
     onSubmit: values => {
       console.log('values submitted:', values);
@@ -85,15 +89,14 @@ export const GB_GBP = {
 };
 
 // AU
-const FormComponentAuAud = formComponent('AU');
-const formNameAuAud = 'Styleguide.StripeBankAccountTokenInputField.formAuAud';
-const formAuAud = reduxForm({ form: formNameAuAud })(FormComponentAuAud);
-
 export const AU_AUD = {
-  component: formAuAud,
+  component: formComponent('AU'),
   props: {
-    onChange: values => {
-      console.log('values changed to:', values);
+    formName: 'AU_AUD',
+    onChange: formState => {
+      if (formState.dirty) {
+        console.log('form values changed to:', formState.values);
+      }
     },
     onSubmit: values => {
       console.log('values submitted:', values);

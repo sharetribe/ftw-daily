@@ -1,8 +1,12 @@
+/**
+ * NOTE this component is part of react-final-form instead of Redux Form.
+ */
+
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { debounce } from 'lodash';
 import config from '../../config';

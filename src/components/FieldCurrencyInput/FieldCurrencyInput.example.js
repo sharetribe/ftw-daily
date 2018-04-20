@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { IntlProvider, addLocaleData } from 'react-intl';
-import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Form as FinalForm, FormSpy } from 'react-final-form';
 import en from 'react-intl/locale-data/en';
 import fi from 'react-intl/locale-data/fi';
 import { currencyConfig } from '../../util/test-data';
@@ -81,36 +81,46 @@ export const defaultValueWithFiEUR = {
   group: 'custom inputs',
 };
 
-const formName = 'Styleguide.FieldCurrencyInput.Form';
+const FormComponent = props => (
+  <FinalForm
+    {...props}
+    render={fieldRenderProps => {
+      const { handleSubmit, onChange } = fieldRenderProps;
+      const required = validators.required('This field is required');
 
-const FormComponent = props => {
-  const { form } = props;
-  const required = validators.required('This field is required');
-  return (
-    <form>
-      <FieldCurrencyInput
-        name="price"
-        id={`${form}.price`}
-        label="Set price:"
-        placeholder="Type in amount in EUR..."
-        currencyConfig={currencyConfigEUR}
-        validate={required}
-      />
-    </form>
-  );
-};
-
-FormComponent.propTypes = formPropTypes;
-
-const Form = reduxForm({
-  form: formName,
-})(FormComponent);
+      return (
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            handleSubmit(e);
+          }}
+        >
+          <FormSpy onChange={onChange} />
+          <FieldCurrencyInput
+            id="FieldCurrencyInput.price"
+            name="price"
+            label="Set price:"
+            placeholder="Type in amount in EUR..."
+            currencyConfig={currencyConfigEUR}
+            validate={required}
+          />
+        </form>
+      );
+    }}
+  />
+);
 
 export const FieldInForm = {
-  component: Form,
+  component: FormComponent,
   props: {
-    onChange: values => {
-      console.log('form values changed to:', values);
+    onChange: formState => {
+      if (formState.values && formState.values.price) {
+        console.log('form values changed to:', formState.values);
+      }
+    },
+    onSubmit: values => {
+      console.log('FieldInForm submitted values:', values);
+      return false;
     },
   },
   group: 'custom inputs',

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import config from '../../config';
@@ -9,96 +9,100 @@ import { propTypes } from '../../util/types';
 import * as validators from '../../util/validators';
 import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { Form, Button, FieldCurrencyInput } from '../../components';
+import { Button, Form, FieldCurrencyInput } from '../../components';
 
 import css from './EditListingPricingForm.css';
 
 const { Money } = sdkTypes;
 
-export const EditListingPricingFormComponent = props => {
-  const {
-    className,
-    disabled,
-    handleSubmit,
-    intl,
-    invalid,
-    saveActionMsg,
-    submitting,
-    updated,
-    updateError,
-    updateInProgress,
-  } = props;
+export const EditListingPricingFormComponent = props => (
+  <FinalForm
+    {...props}
+    render={fieldRenderProps => {
+      const {
+        className,
+        disabled,
+        handleSubmit,
+        intl,
+        invalid,
+        pristine,
+        saveActionMsg,
+        updated,
+        updateError,
+        updateInProgress,
+      } = fieldRenderProps;
 
-  const pricePerUnitMessage = intl.formatMessage({ id: 'EditListingPricingForm.pricePerUnit' });
-  const pricePlaceholderMessage = intl.formatMessage({
-    id: 'EditListingPricingForm.priceInputPlaceholder',
-  });
+      const pricePerUnitMessage = intl.formatMessage({
+        id: 'EditListingPricingForm.pricePerUnit',
+      });
+      const pricePlaceholderMessage = intl.formatMessage({
+        id: 'EditListingPricingForm.priceInputPlaceholder',
+      });
 
-  const priceRequired = validators.required(
-    intl.formatMessage({
-      id: 'EditListingPricingForm.priceRequired',
-    })
-  );
-  const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency);
-  const minPriceRequired = validators.moneySubUnitAmountAtLeast(
-    intl.formatMessage(
-      {
-        id: 'EditListingPricingForm.priceTooLow',
-      },
-      {
-        minPrice: formatMoney(intl, minPrice),
-      }
-    ),
-    config.listingMinimumPriceSubUnits
-  );
-  const priceValidators = config.listingMinimumPriceSubUnits
-    ? [priceRequired, minPriceRequired]
-    : [priceRequired];
+      const priceRequired = validators.required(
+        intl.formatMessage({
+          id: 'EditListingPricingForm.priceRequired',
+        })
+      );
+      const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency);
+      const minPriceRequired = validators.moneySubUnitAmountAtLeast(
+        intl.formatMessage(
+          {
+            id: 'EditListingPricingForm.priceTooLow',
+          },
+          {
+            minPrice: formatMoney(intl, minPrice),
+          }
+        ),
+        config.listingMinimumPriceSubUnits
+      );
+      const priceValidators = config.listingMinimumPriceSubUnits
+        ? validators.composeValidators(priceRequired, minPriceRequired)
+        : priceRequired;
 
-  const errorMessage = updateError ? (
-    <p className={css.error}>
-      <FormattedMessage id="EditListingPricingForm.updateFailed" />
-    </p>
-  ) : null;
+      const classes = classNames(css.root, className);
+      const submitReady = updated && pristine;
+      const submitInProgress = updateInProgress;
+      const submitDisabled = invalid || disabled || submitInProgress;
 
-  const classes = classNames(css.root, className);
-  const submitReady = updated;
-  const submitInProgress = submitting || updateInProgress;
-  const submitDisabled = invalid || disabled || submitInProgress;
+      return (
+        <Form onSubmit={handleSubmit} className={classes}>
+          {updateError ? (
+            <p className={css.error}>
+              <FormattedMessage id="EditListingPricingForm.updateFailed" />
+            </p>
+          ) : null}
+          <FieldCurrencyInput
+            id="price"
+            name="price"
+            className={css.priceInput}
+            autoFocus
+            label={pricePerUnitMessage}
+            placeholder={pricePlaceholderMessage}
+            currencyConfig={config.currencyConfig}
+            validate={priceValidators}
+          />
 
-  return (
-    <Form className={classes} onSubmit={handleSubmit}>
-      {errorMessage}
-      <FieldCurrencyInput
-        id="EditListingPricingForm.FieldCurrencyInput"
-        className={css.priceInput}
-        autoFocus
-        name="price"
-        label={pricePerUnitMessage}
-        placeholder={pricePlaceholderMessage}
-        currencyConfig={config.currencyConfig}
-        validate={priceValidators}
-      />
-
-      <Button
-        className={css.submitButton}
-        type="submit"
-        inProgress={submitInProgress}
-        disabled={submitDisabled}
-        ready={submitReady}
-      >
-        {saveActionMsg}
-      </Button>
-    </Form>
-  );
-};
+          <Button
+            className={css.submitButton}
+            type="submit"
+            inProgress={submitInProgress}
+            disabled={submitDisabled}
+            ready={submitReady}
+          >
+            {saveActionMsg}
+          </Button>
+        </Form>
+      );
+    }}
+  />
+);
 
 EditListingPricingFormComponent.defaultProps = { updateError: null };
 
 const { bool, func, string } = PropTypes;
 
 EditListingPricingFormComponent.propTypes = {
-  ...formPropTypes,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
@@ -107,6 +111,4 @@ EditListingPricingFormComponent.propTypes = {
   updateInProgress: bool.isRequired,
 };
 
-const formName = 'EditListingPricingForm';
-
-export default compose(reduxForm({ form: formName }), injectIntl)(EditListingPricingFormComponent);
+export default compose(injectIntl)(EditListingPricingFormComponent);

@@ -12,19 +12,17 @@ exports[`LoginForm matches snapshot 1`] = `
       className=""
     >
       <label
-        htmlFor="LoginForm.email"
+        htmlFor="email"
       >
         LoginForm.emailLabel
       </label>
       <input
         autoComplete="email"
         className=""
-        id="LoginForm.email"
+        id="email"
         name="email"
         onBlur={[Function]}
         onChange={[Function]}
-        onDragStart={[Function]}
-        onDrop={[Function]}
         onFocus={[Function]}
         placeholder="LoginForm.emailPlaceholder"
         type="email"
@@ -35,19 +33,17 @@ exports[`LoginForm matches snapshot 1`] = `
       className=""
     >
       <label
-        htmlFor="LoginForm.password"
+        htmlFor="password"
       >
         LoginForm.passwordLabel
       </label>
       <input
         autoComplete="current-password"
         className=""
-        id="LoginForm.password"
+        id="password"
         name="password"
         onBlur={[Function]}
         onChange={[Function]}
-        onDragStart={[Function]}
-        onDrop={[Function]}
         onFocus={[Function]}
         placeholder="LoginForm.passwordPlaceholder"
         type="password"

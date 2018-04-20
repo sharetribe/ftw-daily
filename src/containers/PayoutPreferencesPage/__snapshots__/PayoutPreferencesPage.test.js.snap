@@ -168,7 +168,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
             values={Object {}}
           />
         </p>
-        <Connect(ReduxForm)
+        <InjectIntl(PayoutDetailsFormComponent)
           createStripeAccountError={null}
           disabled={false}
           inProgress={false}
@@ -267,7 +267,7 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
             values={Object {}}
           />
         </p>
-        <Connect(ReduxForm)
+        <InjectIntl(PayoutDetailsFormComponent)
           createStripeAccountError={null}
           disabled={true}
           inProgress={false}

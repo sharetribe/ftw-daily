@@ -1,8 +1,11 @@
+/**
+ * NOTE this component is part of react-final-form instead of Redux Form.
+ */
+
 import React from 'react';
-import { any, node, string, object, shape } from 'prop-types';
+import { node, string } from 'prop-types';
 import classNames from 'classnames';
-import { Field } from 'redux-form';
-import { ValidationError } from '../../components';
+import { Field } from 'react-final-form';
 
 import css from './FieldCheckbox.css';
 
@@ -35,32 +38,26 @@ IconCheckbox.defaultProps = { className: null };
 IconCheckbox.propTypes = { className: string };
 
 const FieldCheckboxComponent = props => {
-  const { rootClassName, className, svgClassName, id, label, input, meta, ...rest } = props;
+  const { rootClassName, className, svgClassName, id, label, ...rest } = props;
 
   const classes = classNames(rootClassName || css.root, className);
-
-  const { value, ...inputProps } = input;
-  const checked = value === true;
-
   const checkboxProps = {
     id,
     className: css.input,
+    component: 'input',
     type: 'checkbox',
-    checked,
-    ...inputProps,
     ...rest,
   };
 
   return (
     <span className={classes}>
-      <input {...checkboxProps} />
+      <Field {...checkboxProps} />
       <label htmlFor={id} className={css.label}>
         <span className={css.checkboxWrapper}>
           <IconCheckbox className={svgClassName} />
         </span>
         <span className={css.text}>{label}</span>
       </label>
-      <ValidationError fieldMeta={meta} />
     </span>
   );
 };
@@ -76,16 +73,16 @@ FieldCheckboxComponent.propTypes = {
   className: string,
   rootClassName: string,
   svgClassName: string,
+
+  // Id is needed to connect the label with input.
   id: string.isRequired,
   label: node,
 
-  // redux-form Field params
-  input: shape({ value: any }).isRequired,
-  meta: object.isRequired,
+  // Name groups several checkboxes to an array of selected values
+  name: string.isRequired,
+
+  // Checkbox needs a value that is passed forward when user checks the checkbox
+  value: string.isRequired,
 };
 
-const FieldCheckbox = props => {
-  return <Field component={FieldCheckboxComponent} {...props} />;
-};
-
-export default FieldCheckbox;
+export default FieldCheckboxComponent;

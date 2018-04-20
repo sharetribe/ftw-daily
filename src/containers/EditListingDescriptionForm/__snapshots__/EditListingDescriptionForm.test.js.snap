@@ -11,20 +11,18 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
     className=""
   >
     <label
-      htmlFor="fakeTestForm.title"
+      htmlFor="title"
     >
       EditListingDescriptionForm.title
     </label>
     <input
       autoFocus={true}
       className=""
-      id="fakeTestForm.title"
+      id="title"
       maxLength={60}
       name="title"
       onBlur={[Function]}
       onChange={[Function]}
-      onDragStart={[Function]}
-      onDrop={[Function]}
       onFocus={[Function]}
       placeholder="EditListingDescriptionForm.titlePlaceholder"
       type="text"
@@ -35,19 +33,17 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
     className=""
   >
     <label
-      htmlFor="fakeTestForm.description"
+      htmlFor="description"
     >
       EditListingDescriptionForm.description
     </label>
     <textarea
       className="undefined"
-      id="fakeTestForm.description"
+      id="description"
       maxLength={5000}
       name="description"
       onBlur={[Function]}
       onChange={[Function]}
-      onDragStart={[Function]}
-      onDrop={[Function]}
       onFocus={[Function]}
       placeholder="EditListingDescriptionForm.descriptionPlaceholder"
       rows={1}
@@ -58,18 +54,16 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
     className=""
   >
     <label
-      htmlFor="fakeTestForm.category"
+      htmlFor="category"
     >
       EditListingDescriptionForm.categoryLabel
     </label>
     <select
       className=""
-      id="fakeTestForm.category"
+      id="category"
       name="category"
       onBlur={[Function]}
       onChange={[Function]}
-      onDragStart={[Function]}
-      onDrop={[Function]}
       onFocus={[Function]}
       value=""
     >

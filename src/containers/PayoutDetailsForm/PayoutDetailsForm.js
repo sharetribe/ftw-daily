@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { reduxForm, formValueSelector, propTypes as formPropTypes } from 'redux-form';
+import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
 import config from '../../config';
 import {
-  Form,
   Button,
   StripeBankAccountTokenInputField,
-  SelectField,
+  FieldSelect,
   FieldBirthdayInput,
-  TextInputField,
+  FieldTextInput,
+  Form,
 } from '../../components';
 import * as validators from '../../util/validators';
 import { isStripeInvalidPostalCode } from '../../util/errors';
@@ -42,266 +41,278 @@ const countryCurrency = countryCode => {
   return country.currency;
 };
 
-const PayoutDetailsFormComponent = props => {
-  const {
-    className,
-    country,
-    createStripeAccountError,
-    form,
-    disabled,
-    inProgress,
-    ready,
-    submitButtonText,
-    handleSubmit,
-    pristine,
-    submitting,
-    invalid,
-    intl,
-  } = props;
+const PayoutDetailsFormComponent = props => (
+  <FinalForm
+    {...props}
+    render={fieldRenderProps => {
+      const {
+        className,
+        createStripeAccountError,
+        change,
+        disabled,
+        handleSubmit,
+        inProgress,
+        intl,
+        invalid,
+        pristine,
+        ready,
+        submitButtonText,
+        values,
+      } = fieldRenderProps;
+      const { country } = values;
 
-  const firstNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.firstNameLabel' });
-  const firstNamePlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.firstNamePlaceholder' });
-  const firstNameRequired = validators.required(
-    intl.formatMessage({
-      id: 'PayoutDetailsForm.firstNameRequired',
-    })
-  );
+      const firstNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.firstNameLabel' });
+      const firstNamePlaceholder = intl.formatMessage({
+        id: 'PayoutDetailsForm.firstNamePlaceholder',
+      });
+      const firstNameRequired = validators.required(
+        intl.formatMessage({
+          id: 'PayoutDetailsForm.firstNameRequired',
+        })
+      );
 
-  const lastNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.lastNameLabel' });
-  const lastNamePlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.lastNamePlaceholder' });
-  const lastNameRequired = validators.required(
-    intl.formatMessage({
-      id: 'PayoutDetailsForm.lastNameRequired',
-    })
-  );
+      const lastNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.lastNameLabel' });
+      const lastNamePlaceholder = intl.formatMessage({
+        id: 'PayoutDetailsForm.lastNamePlaceholder',
+      });
+      const lastNameRequired = validators.required(
+        intl.formatMessage({
+          id: 'PayoutDetailsForm.lastNameRequired',
+        })
+      );
 
-  const birthdayId = `${form}.birthday`;
-  const birthdayLabel = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayLabel' });
-  const birthdayLabelMonth = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayLabelMonth' });
-  const birthdayLabelYear = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayLabelYear' });
-  const birthdayRequired = validators.required(
-    intl.formatMessage({
-      id: 'PayoutDetailsForm.birthdayRequired',
-    })
-  );
-  const birthdayMinAge = validators.ageAtLeast(
-    intl.formatMessage(
-      {
-        id: 'PayoutDetailsForm.birthdayMinAge',
-      },
-      {
-        minAge: MIN_STRIPE_ACCOUNT_AGE,
+      const birthdayLabel = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayLabel' });
+      const birthdayLabelMonth = intl.formatMessage({
+        id: 'PayoutDetailsForm.birthdayLabelMonth',
+      });
+      const birthdayLabelYear = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayLabelYear' });
+      const birthdayRequired = validators.required(
+        intl.formatMessage({
+          id: 'PayoutDetailsForm.birthdayRequired',
+        })
+      );
+      const birthdayMinAge = validators.ageAtLeast(
+        intl.formatMessage(
+          {
+            id: 'PayoutDetailsForm.birthdayMinAge',
+          },
+          {
+            minAge: MIN_STRIPE_ACCOUNT_AGE,
+          }
+        ),
+        MIN_STRIPE_ACCOUNT_AGE
+      );
+
+      const countryLabel = intl.formatMessage({ id: 'PayoutDetailsForm.countryLabel' });
+      const countryPlaceholder = intl.formatMessage({
+        id: 'PayoutDetailsForm.countryPlaceholder',
+      });
+      const countryRequired = validators.required(
+        intl.formatMessage({
+          id: 'PayoutDetailsForm.countryRequired',
+        })
+      );
+
+      const streetAddressLabel = intl.formatMessage({
+        id: 'PayoutDetailsForm.streetAddressLabel',
+      });
+      const streetAddressPlaceholder = intl.formatMessage({
+        id: 'PayoutDetailsForm.streetAddressPlaceholder',
+      });
+      const streetAddressRequired = validators.required(
+        intl.formatMessage({
+          id: 'PayoutDetailsForm.streetAddressRequired',
+        })
+      );
+
+      const postalCodeLabel = intl.formatMessage({ id: 'PayoutDetailsForm.postalCodeLabel' });
+      const postalCodePlaceholder = intl.formatMessage({
+        id: 'PayoutDetailsForm.postalCodePlaceholder',
+      });
+      const postalCodeRequired = validators.required(
+        intl.formatMessage({
+          id: 'PayoutDetailsForm.postalCodeRequired',
+        })
+      );
+
+      const cityLabel = intl.formatMessage({ id: 'PayoutDetailsForm.cityLabel' });
+      const cityPlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.cityPlaceholder' });
+      const cityRequired = validators.required(
+        intl.formatMessage({
+          id: 'PayoutDetailsForm.cityRequired',
+        })
+      );
+
+      const showAddressFields = country && requiresAddress(country);
+
+      // StripeBankAccountTokenInputField handles the error messages
+      // internally, we just have to make sure we require a valid token
+      // out of the field. Therefore the empty validation message.
+      const bankAccountRequired = validators.required(' ');
+
+      const classes = classNames(css.root, className, {
+        [css.disabled]: disabled,
+      });
+      const submitInProgress = inProgress;
+      const submitDisabled = pristine || invalid || disabled || submitInProgress;
+
+      let error = null;
+
+      if (isStripeInvalidPostalCode(createStripeAccountError)) {
+        error = (
+          <div className={css.error}>
+            <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailedInvalidPostalCode" />
+          </div>
+        );
+      } else if (createStripeAccountError) {
+        error = (
+          <div className={css.error}>
+            <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailed" />
+          </div>
+        );
       }
-    ),
-    MIN_STRIPE_ACCOUNT_AGE
-  );
 
-  const countryLabel = intl.formatMessage({ id: 'PayoutDetailsForm.countryLabel' });
-  const countryPlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.countryPlaceholder' });
-  const countryRequired = validators.required(
-    intl.formatMessage({
-      id: 'PayoutDetailsForm.countryRequired',
-    })
-  );
+      return (
+        <Form className={classes} onSubmit={handleSubmit}>
+          <div className={css.sectionContainer}>
+            <h3 className={css.subTitle}>
+              <FormattedMessage id="PayoutDetailsForm.personalDetailsTitle" />
+            </h3>
+            <div className={css.formRow}>
+              <FieldTextInput
+                id="fname"
+                name="fname"
+                disabled={disabled}
+                className={css.firstName}
+                type="text"
+                autoComplete="given-name"
+                label={firstNameLabel}
+                placeholder={firstNamePlaceholder}
+                validate={firstNameRequired}
+              />
+              <FieldTextInput
+                id="lname"
+                name="lname"
+                disabled={disabled}
+                className={css.lastName}
+                type="text"
+                autoComplete="family-name"
+                label={lastNameLabel}
+                placeholder={lastNamePlaceholder}
+                validate={lastNameRequired}
+              />
+            </div>
+            <FieldBirthdayInput
+              id="birthDate"
+              name="birthDate"
+              disabled={disabled}
+              className={css.field}
+              label={birthdayLabel}
+              labelForMonth={birthdayLabelMonth}
+              labelForYear={birthdayLabelYear}
+              format={null}
+              valueFromForm={values.birthDate}
+              validate={validators.composeValidators(birthdayRequired, birthdayMinAge)}
+            />
+          </div>
 
-  const streetAddressLabel = intl.formatMessage({ id: 'PayoutDetailsForm.streetAddressLabel' });
-  const streetAddressPlaceholder = intl.formatMessage({
-    id: 'PayoutDetailsForm.streetAddressPlaceholder',
-  });
-  const streetAddressRequired = validators.required(
-    intl.formatMessage({
-      id: 'PayoutDetailsForm.streetAddressRequired',
-    })
-  );
-
-  const postalCodeLabel = intl.formatMessage({ id: 'PayoutDetailsForm.postalCodeLabel' });
-  const postalCodePlaceholder = intl.formatMessage({
-    id: 'PayoutDetailsForm.postalCodePlaceholder',
-  });
-  const postalCodeRequired = validators.required(
-    intl.formatMessage({
-      id: 'PayoutDetailsForm.postalCodeRequired',
-    })
-  );
-
-  const cityLabel = intl.formatMessage({ id: 'PayoutDetailsForm.cityLabel' });
-  const cityPlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.cityPlaceholder' });
-  const cityRequired = validators.required(
-    intl.formatMessage({
-      id: 'PayoutDetailsForm.cityRequired',
-    })
-  );
-
-  const showAddressFields = country && requiresAddress(country);
-  const addressSection = showAddressFields ? (
-    <div>
-      <TextInputField
-        disabled={disabled}
-        className={css.field}
-        type="text"
-        name="streetAddress"
-        autoComplete="street-address"
-        id={`${form}.streetAddress`}
-        label={streetAddressLabel}
-        placeholder={streetAddressPlaceholder}
-        validate={streetAddressRequired}
-        clearOnUnmount
-      />
-      <div className={css.formRow}>
-        <TextInputField
-          disabled={disabled}
-          className={css.postalCode}
-          type="text"
-          name="postalCode"
-          autoComplete="postal-code"
-          id={`${form}.postalCode`}
-          label={postalCodeLabel}
-          placeholder={postalCodePlaceholder}
-          validate={postalCodeRequired}
-          clearOnUnmount
-        />
-        <TextInputField
-          disabled={disabled}
-          className={css.city}
-          type="text"
-          name="city"
-          autoComplete="address-level2"
-          id={`${form}.city`}
-          label={cityLabel}
-          placeholder={cityPlaceholder}
-          validate={cityRequired}
-          clearOnUnmount
-        />
-      </div>
-    </div>
-  ) : null;
-
-  // StripeBankAccountTokenInputField handles the error messages
-  // internally, we just have to make sure we require a valid token
-  // out of the field. Therefore the empty validation message.
-  const bankAccountRequired = validators.required(' ');
-
-  const bankAccountSection = country ? (
-    <div className={css.sectionContainer}>
-      <h3 className={css.subTitle}>
-        <FormattedMessage id="PayoutDetailsForm.bankDetails" />
-      </h3>
-      <StripeBankAccountTokenInputField
-        disabled={disabled}
-        name="bankAccountToken"
-        formName={form}
-        country={country}
-        currency={countryCurrency(country)}
-        validate={bankAccountRequired}
-      />
-    </div>
-  ) : null;
-
-  const classes = classNames(css.root, className, {
-    [css.disabled]: disabled,
-  });
-  const submitInProgress = submitting || inProgress;
-  const submitDisabled = pristine || invalid || disabled || submitInProgress;
-
-  let error = null;
-
-  if (isStripeInvalidPostalCode(createStripeAccountError)) {
-    error = (
-      <div className={css.error}>
-        <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailedInvalidPostalCode" />
-      </div>
-    );
-  } else if (createStripeAccountError) {
-    error = (
-      <div className={css.error}>
-        <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailed" />
-      </div>
-    );
-  }
-
-  return (
-    <Form className={classes} onSubmit={handleSubmit}>
-      <div className={css.sectionContainer}>
-        <h3 className={css.subTitle}>
-          <FormattedMessage id="PayoutDetailsForm.personalDetailsTitle" />
-        </h3>
-        <div className={css.formRow}>
-          <TextInputField
-            disabled={disabled}
-            className={css.firstName}
-            type="text"
-            name="fname"
-            autoComplete="given-name"
-            id={`${form}.fname`}
-            label={firstNameLabel}
-            placeholder={firstNamePlaceholder}
-            validate={firstNameRequired}
-          />
-          <TextInputField
-            disabled={disabled}
-            className={css.lastName}
-            type="text"
-            name="lname"
-            autoComplete="family-name"
-            id={`${form}.lname`}
-            label={lastNameLabel}
-            placeholder={lastNamePlaceholder}
-            validate={lastNameRequired}
-          />
-        </div>
-        <FieldBirthdayInput
-          disabled={disabled}
-          className={css.field}
-          id={birthdayId}
-          name="birthDate"
-          label={birthdayLabel}
-          labelForMonth={birthdayLabelMonth}
-          labelForYear={birthdayLabelYear}
-          format={null}
-          validate={[birthdayRequired, birthdayMinAge]}
-        />
-      </div>
-
-      <div className={css.sectionContainer}>
-        <h3 className={css.subTitle}>
-          <FormattedMessage id="PayoutDetailsForm.addressTitle" />
-        </h3>
-        <SelectField
-          disabled={disabled}
-          className={css.selectCountry}
-          name="country"
-          autoComplete="country"
-          id={`${form}.country`}
-          label={countryLabel}
-          validate={countryRequired}
-        >
-          <option value="">{countryPlaceholder}</option>
-          {supportedCountries.map(c => (
-            <option key={c} value={c}>
-              {intl.formatMessage({ id: `PayoutDetailsForm.countryNames.${c}` })}
-            </option>
-          ))}
-        </SelectField>
-        {addressSection}
-      </div>
-      {bankAccountSection}
-      {error}
-      <Button
-        className={css.submitButton}
-        type="submit"
-        inProgress={submitInProgress}
-        disabled={submitDisabled}
-        ready={ready}
-      >
-        {submitButtonText ? (
-          submitButtonText
-        ) : (
-          <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
-        )}
-      </Button>
-    </Form>
-  );
-};
+          <div className={css.sectionContainer}>
+            <h3 className={css.subTitle}>
+              <FormattedMessage id="PayoutDetailsForm.addressTitle" />
+            </h3>
+            <FieldSelect
+              id="country"
+              name="country"
+              disabled={disabled}
+              className={css.selectCountry}
+              autoComplete="country"
+              label={countryLabel}
+              validate={countryRequired}
+            >
+              <option value="">{countryPlaceholder}</option>
+              {supportedCountries.map(c => (
+                <option key={c} value={c}>
+                  {intl.formatMessage({ id: `PayoutDetailsForm.countryNames.${c}` })}
+                </option>
+              ))}
+            </FieldSelect>
+            {showAddressFields ? (
+              <div>
+                <FieldTextInput
+                  id="streetAddress"
+                  name="streetAddress"
+                  disabled={disabled}
+                  className={css.field}
+                  type="text"
+                  autoComplete="street-address"
+                  label={streetAddressLabel}
+                  placeholder={streetAddressPlaceholder}
+                  validate={streetAddressRequired}
+                  onUnmount={() => change('streetAddress', undefined)}
+                />
+                <div className={css.formRow}>
+                  <FieldTextInput
+                    id="postalCode"
+                    name="postalCode"
+                    disabled={disabled}
+                    className={css.postalCode}
+                    type="text"
+                    autoComplete="postal-code"
+                    label={postalCodeLabel}
+                    placeholder={postalCodePlaceholder}
+                    validate={postalCodeRequired}
+                    onUnmount={() => change('postalCode', undefined)}
+                  />
+                  <FieldTextInput
+                    id="city"
+                    name="city"
+                    disabled={disabled}
+                    className={css.city}
+                    type="text"
+                    autoComplete="address-level2"
+                    label={cityLabel}
+                    placeholder={cityPlaceholder}
+                    validate={cityRequired}
+                    onUnmount={() => change('city', undefined)}
+                  />
+                </div>
+              </div>
+            ) : null}
+          </div>
+          {country ? (
+            <div className={css.sectionContainer}>
+              <h3 className={css.subTitle}>
+                <FormattedMessage id="PayoutDetailsForm.bankDetails" />
+              </h3>
+              <StripeBankAccountTokenInputField
+                disabled={disabled}
+                name="bankAccountToken"
+                formName="PayoutDetailsForm"
+                country={country}
+                currency={countryCurrency(country)}
+                validate={bankAccountRequired}
+              />
+            </div>
+          ) : null}
+          {error}
+          <Button
+            className={css.submitButton}
+            type="submit"
+            inProgress={submitInProgress}
+            disabled={submitDisabled}
+            ready={ready}
+          >
+            {submitButtonText ? (
+              submitButtonText
+            ) : (
+              <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
+            )}
+          </Button>
+        </Form>
+      );
+    }}
+  />
+);
 
 PayoutDetailsFormComponent.defaultProps = {
   className: null,
@@ -316,7 +327,6 @@ PayoutDetailsFormComponent.defaultProps = {
 const { bool, object, string } = PropTypes;
 
 PayoutDetailsFormComponent.propTypes = {
-  ...formPropTypes,
   className: string,
   createStripeAccountError: object,
   disabled: bool,
@@ -324,27 +334,10 @@ PayoutDetailsFormComponent.propTypes = {
   ready: bool,
   submitButtonText: string,
 
-  // from mapStateToProps
-  country: string,
-
   // from injectIntl
   intl: intlShape.isRequired,
 };
 
-const formName = 'PayoutDetailsForm';
-
-const selector = formValueSelector(formName);
-const mapStateToProps = state => {
-  const country = selector(state, 'country');
-  return { country };
-};
-
-const formOptions = {
-  form: formName,
-};
-
-const PayoutDetailsForm = compose(connect(mapStateToProps), reduxForm(formOptions), injectIntl)(
-  PayoutDetailsFormComponent
-);
+const PayoutDetailsForm = compose(injectIntl)(PayoutDetailsFormComponent);
 
 export default PayoutDetailsForm;

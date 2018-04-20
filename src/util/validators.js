@@ -119,3 +119,6 @@ export const ageAtLeast = (message, minYears) => value => {
   const ageInYears = now.diff(moment(value), 'years', true);
   return value && value instanceof Date && ageInYears >= minYears ? VALID : message;
 };
+
+export const composeValidators = (...validators) => value =>
+  validators.reduce((error, validator) => error || validator(value), VALID);

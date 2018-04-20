@@ -8,12 +8,15 @@ import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingText
 import * as FieldBirthdayInput from './components/FieldBirthdayInput/FieldBirthdayInput.example';
 import * as FieldBoolean from './components/FieldBoolean/FieldBoolean.example';
 import * as FieldCheckbox from './components/FieldCheckbox/FieldCheckbox.example';
+import * as FieldCheckboxGroup from './components/FieldCheckboxGroup/FieldCheckboxGroup.example';
 import * as FieldCurrencyInput from './components/FieldCurrencyInput/FieldCurrencyInput.example';
 import * as FieldDateInput from './components/FieldDateInput/FieldDateInput.example';
 import * as FieldDateRangeInput from './components/FieldDateRangeInput/FieldDateRangeInput.example';
 import * as FieldGroupCheckbox from './components/FieldGroupCheckbox/FieldGroupCheckbox.example';
 import * as FieldPhoneNumberInput from './components/FieldPhoneNumberInput/FieldPhoneNumberInput.example';
 import * as FieldReviewRating from './components/FieldReviewRating/FieldReviewRating.example';
+import * as FieldSelect from './components/FieldSelect/FieldSelect.example';
+import * as FieldTextInput from './components/FieldTextInput/FieldTextInput.example';
 import * as Footer from './components/Footer/Footer.example';
 import * as IconBannedUser from './components/IconBannedUser/IconBannedUser.example';
 import * as IconCheckmark from './components/IconCheckmark/IconCheckmark.example';
@@ -98,12 +101,15 @@ export {
   FieldBirthdayInput,
   FieldBoolean,
   FieldCheckbox,
+  FieldCheckboxGroup,
   FieldCurrencyInput,
   FieldDateInput,
   FieldDateRangeInput,
   FieldGroupCheckbox,
   FieldPhoneNumberInput,
   FieldReviewRating,
+  FieldSelect,
+  FieldTextInput,
   Footer,
   IconBannedUser,
   IconCheckmark,

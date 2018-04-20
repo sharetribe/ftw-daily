@@ -46,6 +46,8 @@ const defaultProps = {
   horizontalMargin: 0,
   withPortal: false,
   withFullScreenPortal: false,
+  appendToBody: false,
+  disableScroll: false,
   initialVisibleMonth: null,
   firstDayOfWeek: config.i18n.firstDayOfWeek,
   numberOfMonths: 1,
@@ -137,12 +139,12 @@ class DateInputComponent extends Component {
       onBlur,
       onChange,
       onFocus,
-      onDragStart,
-      onDrop,
       phrases,
       screenReaderInputMessage,
       useMobileMargins,
       value,
+      children,
+      render,
       ...datePickerProps
     } = this.props;
     /* eslint-enable no-unused-vars */
@@ -194,6 +196,7 @@ DateInputComponent.defaultProps = {
 
 DateInputComponent.propTypes = {
   className: string,
+  id: string,
   focused: bool,
   initialDate: instanceOf(Date),
   intl: intlShape.isRequired,
@@ -202,8 +205,6 @@ DateInputComponent.propTypes = {
   onChange: func.isRequired,
   onBlur: func.isRequired,
   onFocus: func.isRequired,
-  onDragStart: func.isRequired,
-  onDrop: func.isRequired,
   phrases: shape({
     closeDatePicker: string,
     clearDate: string,

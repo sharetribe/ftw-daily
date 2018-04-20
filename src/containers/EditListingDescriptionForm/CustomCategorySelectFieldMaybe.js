@@ -1,6 +1,6 @@
 import React from 'react';
 import { required } from '../../util/validators';
-import { SelectField } from '../../components';
+import { FieldSelect } from '../../components';
 
 import css from './EditListingDescriptionForm.css';
 
@@ -18,7 +18,7 @@ const CustomCategorySelectFieldMaybe = props => {
     })
   );
   return categories ? (
-    <SelectField
+    <FieldSelect
       className={css.category}
       name={name}
       id={id}
@@ -31,7 +31,7 @@ const CustomCategorySelectFieldMaybe = props => {
           {c.label}
         </option>
       ))}
-    </SelectField>
+    </FieldSelect>
   ) : null;
 };
 
