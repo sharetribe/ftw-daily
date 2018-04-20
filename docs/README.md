@@ -1,4 +1,4 @@
-# Sharetribe Starter App Documentation
+# Flex Template for Web: Documentation
 
 The application was bootstrapped with a forked version of
 [create-react-app](https://github.com/facebookincubator/create-react-app). While most of the
