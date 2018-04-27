@@ -23,3 +23,4 @@ Documentation for specific topics can be found in the following files:
 * [Content Security Policy (CSP)](content-security-policy.md)
 * [Search filters](search-filters.md)
 * [Extended data](extended-data.md)
+* [Extend the listing data model](extend-listing.md)
