@@ -1,38 +1,38 @@
 # Extend listing data
 
-This guide walks you the different steps required to expand the listing datamodel in your
+This guide walks you through the different steps required to expand the listing data model in your
 marketplace. We'll have a look on how the data is added, how it can be presented and finally how it
 can be used to filter searches.
 
-Adding new attributes to the data model on a Flex concept called [extended data](./extended-data.md).
+Adding new attributes to the data model relies on a Flex concept called
+[extended data](./extended-data.md).
 
 Three main areas in extending the listing data model are:
 
- - [Declare the attribute and it's possible values](#declare-the-attribute-and-it's-possible-values)
- - [Edit the listing wizard](#edit-the-listing-wizard)
- - [Show the attribute on listing page](#show-the-attribute-on-listing-page)
- - [Use the attribute as a search filter](#use-the-attribute-as-a-search-filter)
+* [Declare the attribute and it's possible values](#declare-the-attribute-and-it-s-possible-values)
+* [Edit the listing wizard](#edit-the-listing-wizard)
+* [Show the attribute on listing page](#show-the-attribute-on-listing-page)
+* [Use the attribute as a search filter](#use-the-attribute-as-a-search-filter)
 
-In this guide we will extend the listing data model by adding a _capacity_ attribute and using it as
-a search filter.
+In this guide we will extend the listing data model by adding a _capacity_ attribute.
 
 ## Add a new attribute
 
 ### Declare the attribute and it's possible values
 
 So, you have come up with a great new extension to the listing data model, fantastic! Depending of
-the type of data the new attribute is going to be used for it might make sense to define and store the
-possible values for the attribute. In case the data will be free form text there might not be use
-for this but in our case we wan't to fix the possible values that can be used for the capacity. Also
-if the attribute will be used as a search filter it helps to keep track of the possible values
+the type of data the new attribute is going to be used for it might make sense to define and store
+the possible values for the attribute. In case the data will be free form text there might not be
+use for this but in our case we wan't to fix the possible values that can be used for the capacity.
+Also if the attribute will be used as a search filter it helps to keep track of the possible values
 somewhere.
 
 A commonly used way of storing the possible values for a listing attribute is to declare them in the
 [marketplace-custom-config.js](../src/marketplace-custom-config.js) file. Place the values in an
 array and export the variable containing the array. The exports from that file are included in the
-`config` and are available as properties in `config.custom`. Search filters and some components used
-to edit and present the data rely on a data model of an object that contains `key` and `label`
-properties.
+`src/config.js` file and are available as properties in `config.custom`. Search filters and some
+components used to edit and present the data rely on a data model of an array of objects that
+contain `key` and `label` properties.
 
 For the capacity attribute we'll define a set of values that describe the capacity in a few ranges
 of how many people can fit into a given sauna:
@@ -52,8 +52,7 @@ Next step is to add means for modifying the attribute data in listings. This is 
 proper inputs to the `EditListingWizard`. It could probably make sense to add the input to the
 _description_ tab or modify the _amenities_ tab to also include capacity but for the sake of clarity
 let's add a new tab to the wizard. The new tab will be placed between the _amenities_ and _policy_
-tabs. 
-
+tabs.
 
 First lets declare the tab in `EditListingWizardTab`:
 
@@ -67,10 +66,10 @@ export const PRICING = 'pricing';
 export const PHOTOS = 'photos';
 
 // EditListingWizardTab component supports these tabs
-export const SUPPORTED_TABS = [DESCRIPTION, FEATURES, CAPACITY , POLICY, LOCATION, PRICING, PHOTOS];
+export const SUPPORTED_TABS = [DESCRIPTION, FEATURES, CAPACITY, POLICY, LOCATION, PRICING, PHOTOS];
 ```
 
-Now in` EditListingWizard` we can take that tab declaration into use. Add the tab name to the `TABS`
+Now in`EditListingWizard` we can take that tab declaration into use. Add the tab name to the `TABS`
 array and add a correct label for the tab.
 
 ```js
@@ -102,10 +101,11 @@ const tabLabel = (intl, tab) => {
 };
 ```
 
-The `tabCompleted` function keeps track of which data the user has already provided in order to
-tell which tabs are completed. We will be using listing's _public data_ property (see the [extended
-data](./extended-data.md) documentation for more info on different extended data types) for storing
-the capacity data so based on that information we can add a check for capacity in `tabCompleted`:
+The `tabCompleted` function keeps track of which data the user has already provided in order to tell
+which tabs are completed. As we will be storing the capacity information in the listing's _public
+data_ property (see the [extended data](./extended-data.md) documentation for more info on different
+extended data types) we shall look into that property when when resolving whether the capacity tab
+has alerady been completed or not:
 
 ```js
 /**
@@ -175,7 +175,7 @@ export const EditListingCapacityFormComponent = props => (
         capacityOptions,
       } = fieldRenderProps;
 
-      const capacityPlaceholder= intl.formatMessage({
+      const capacityPlaceholder = intl.formatMessage({
         id: 'EditListingCapacityForm.capacityPlaceholder',
       });
 
@@ -255,8 +255,8 @@ export default compose(injectIntl)(EditListingCapacityFormComponent);
 The form component receives `capacityOptions` as a prop which are used to populate a `FieldSelect`
 component for selecting the capacity. The `EditListingCapacityForm` is also added to the
 `src/containers/index.js` file so that it can easilly be referenced from other components. To use
-the capacity editing form we'll add a panel components which is then used in `EditListingWizardTab`
-to render the wizard phase. This component we'll call `EditListingCapacityPanel`
+the capacity editing form we'll add a panel component which is then used in `EditListingWizardTab`
+to render the wizard phase. This component we'll call `EditListingCapacityPanel`:
 
 ```js
 import React from 'react';
@@ -349,8 +349,10 @@ export default EditListingCapacityPanel;
 ```
 
 In the panel component we check for an initial capacity value from the `public_data` property of the
-listing. In the submit handler the new capacity value is stored in the same property. Respectively
-`EditListingCapacityPanel` is need to be exported from `src/components/index.js` for easier access
+listing. In the submit handler the new capacity value is stored in the same property. The updated
+listing object is eventually passed to the `updateListingDraft` and `requestUpdateListing` functions
+in the `EditListingDetails.duck.js` file where the data updates are handled. Respectively
+`EditListingCapacityPanel` needs to be exported from `src/components/index.js` for easier access
 from other files.
 
 Now that we have the panel and the form all ready we can add the panel to the `EditListingWizardTab`
@@ -377,7 +379,7 @@ case CAPACITY: {
 There! Now we've extended the listing data model with capacity information.
 
 ![Edit the capacity](./assets/extend-listing/edit_capacity.png)
-  
+
 The capacity data can now be added to new and existing listings. Next chapter describes how that
 data can be presented in the listing page.
 
@@ -403,7 +405,7 @@ import { FormattedMessage } from 'react-intl';
 import css from './ListingPage.css';
 
 const SectionCapacity = props => {
-  const { publicData, options, } = props;
+  const { publicData, options } = props;
 
   const capacity = publicData.capacity;
   const capacityOption = options.find(option => option.key === capacity);
@@ -429,22 +431,23 @@ export default SectionCapacity;
 ```
 
 Remember to add corresponding css definitions to `ListingPage.css` to get the styling right. Import
-that into `ListingPage` and place it inside the `<div className={css.mainContent}>` element: 
-
+the component into `ListingPage` and place it inside the `<div className={css.mainContent}>`
+element:
 
 ```js
 import SectionCapacity from './SectionCapacity';
 ```
+
 ```js
-  <div className={css.mainContent}>
-    // other sections
+<div className={css.mainContent}>
+  {/* other sections */}
 
-    <SectionCapacity publicData={publicData} options={capacityOptions} />
-    
-    // other sections
-  </div>
+  <SectionCapacity publicData={publicData} options={capacityOptions} />
 
+  {/* other sections */}
+</div>
 ```
+
 ```js
 ListingPageComponent.defaultProps = {
   // other default props
@@ -454,7 +457,7 @@ ListingPageComponent.defaultProps = {
 ListingPageComponent.propTypes = {
   // other props
   capacityOptions: array,
-}
+};
 ```
 
 In the snippet above, the capacity options are passed to the `ListingPage` as a property, with the
@@ -468,5 +471,5 @@ And voilà, we have listing capacity presented in the listing page!
 
 ## Use the attribute as a search filter
 
-To see how the capacity attribute can be used to filter search results, please refer to the [search
-filters documentation](./search-filters.md).
+To see how the capacity attribute can be used to filter search results, please refer to the
+[search filters documentation](./search-filters.md).
