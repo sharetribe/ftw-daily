@@ -6,7 +6,7 @@ import { stringify } from '../../util/urlHelpers';
 import { createResourceLocatorString } from '../../util/routes';
 import routeConfiguration from '../../routeConfiguration';
 import { IconSearch, Button } from '../../components';
-import { LocationSearchForm } from '../../containers';
+import { LocationSearchForm } from '../../forms';
 
 import css from './SectionHero.css';
 

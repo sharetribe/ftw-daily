@@ -17,7 +17,8 @@ import {
   Page,
   UserNav,
 } from '../../components';
-import { TopbarContainer, PayoutDetailsForm } from '../../containers';
+import { PayoutDetailsForm } from '../../forms';
+import { TopbarContainer } from '../../containers';
 import { savePayoutDetails, loadData } from './PayoutPreferencesPage.duck';
 
 import css from './PayoutPreferencesPage.css';

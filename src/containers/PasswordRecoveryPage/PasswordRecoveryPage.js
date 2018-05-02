@@ -19,7 +19,8 @@ import {
   LayoutWrapperFooter,
   Footer,
 } from '../../components';
-import { PasswordRecoveryForm, TopbarContainer } from '../../containers';
+import { PasswordRecoveryForm } from '../../forms';
+import { TopbarContainer } from '../../containers';
 
 import {
   recoverPassword,

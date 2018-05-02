@@ -31,7 +31,7 @@ Some generic things to update and check when starting to customise the template.
   all of them: .html, subject.txt, and text.txt
 * Update [config: bookingUnitType](../src/config.js) if needed
 * If `line-item/units` is used, add quantity handling to
-  [BookingDatesForm](../src/containers/BookingDatesForm/BookingDatesForm.js),
+  [BookingDatesForm](../src/forms/BookingDatesForm/BookingDatesForm.js),
   [ListingPage](../src/containers/ListingPage/ListingPage.js),
   [CheckoutPage](../src/containers/CheckoutPage/CheckoutPage.js)
 

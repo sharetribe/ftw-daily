@@ -14,7 +14,7 @@ import {
   MenuItem,
   NamedLink,
 } from '../../components';
-import { TopbarSearchForm } from '../../containers';
+import { TopbarSearchForm } from '../../forms';
 
 import css from './TopbarDesktop.css';
 

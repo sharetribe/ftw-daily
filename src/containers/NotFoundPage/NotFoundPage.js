@@ -15,7 +15,8 @@ import {
   LayoutWrapperFooter,
   Footer,
 } from '../../components';
-import { LocationSearchForm, TopbarContainer } from '../../containers';
+import { LocationSearchForm } from '../../forms';
+import { TopbarContainer } from '../../containers';
 
 import css from './NotFoundPage.css';
 

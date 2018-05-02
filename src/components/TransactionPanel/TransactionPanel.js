@@ -6,7 +6,7 @@ import { txIsEnquired, txIsRequested, propTypes } from '../../util/types';
 import { ensureListing, ensureTransaction, ensureUser } from '../../util/data';
 import { isMobileSafari } from '../../util/userAgent';
 import { AvatarMedium, AvatarLarge, ResponsiveImage, ReviewModal } from '../../components';
-import { SendMessageForm } from '../../containers';
+import { SendMessageForm } from '../../forms';
 
 // These are internal components that make this file more readable.
 import {

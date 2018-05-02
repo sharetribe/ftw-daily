@@ -16,7 +16,8 @@ import {
   LayoutWrapperFooter,
   Footer,
 } from '../../components';
-import { EmailVerificationForm, TopbarContainer } from '../../containers';
+import { EmailVerificationForm } from '../../forms';
+import { TopbarContainer } from '../../containers';
 
 import css from './EmailVerificationPage.css';
 

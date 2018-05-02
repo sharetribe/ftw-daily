@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { omitBy, isUndefined } from 'lodash';
 import { withViewport } from '../../util/contextHelpers';
 import { ensureListing } from '../../util/data';
-import { PayoutDetailsForm } from '../../containers';
+import { PayoutDetailsForm } from '../../forms';
 import { Modal, NamedRedirect, Tabs } from '../../components';
 
 import EditListingWizardTab, {

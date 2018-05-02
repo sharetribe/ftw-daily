@@ -16,7 +16,8 @@ import {
   Footer,
   NamedLink,
 } from '../../components';
-import { ProfileSettingsForm, TopbarContainer } from '../../containers';
+import { ProfileSettingsForm } from '../../forms';
+import { TopbarContainer } from '../../containers';
 
 import { updateProfile, uploadImage } from './ProfileSettingsPage.duck';
 import css from './ProfileSettingsPage.css';

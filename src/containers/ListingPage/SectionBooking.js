@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ModalInMobile, Button } from '../../components';
-import { BookingDatesForm } from '../../containers';
+import { BookingDatesForm } from '../../forms';
 
 import css from './ListingPage.css';
 

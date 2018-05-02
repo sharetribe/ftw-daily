@@ -18,7 +18,8 @@ import {
   LayoutWrapperFooter,
   Footer,
 } from '../../components';
-import { PasswordResetForm, TopbarContainer } from '../../containers';
+import { PasswordResetForm } from '../../forms';
+import { TopbarContainer } from '../../containers';
 
 import { resetPassword } from './PasswordResetPage.duck';
 import css from './PasswordResetPage.css';

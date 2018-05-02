@@ -4,7 +4,7 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { IconReviewUser, Modal } from '../../components';
-import { ReviewForm } from '../../containers';
+import { ReviewForm } from '../../forms';
 
 import css from './ReviewModal.css';
 

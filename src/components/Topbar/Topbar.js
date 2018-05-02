@@ -22,7 +22,7 @@ import {
   TopbarDesktop,
   TopbarMobileMenu,
 } from '../../components';
-import { TopbarSearchForm } from '../../containers';
+import { TopbarSearchForm } from '../../forms';
 
 import MenuIcon from './MenuIcon';
 import SearchIcon from './SearchIcon';
