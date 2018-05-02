@@ -723,11 +723,16 @@
   }
 }
 .bookingDatesSubmitButtonWrapper {
+  flex-shrink: 0;
+  padding: 0 24px 24px 24px;
+  width: 100%;
   position: fixed;
   bottom: 0;
   background-color: var(--matterColorLight);
 
   @media (--viewportMedium) {
+    padding: 0;
+    width: 100%;
     position: static;
     bottom: unset;
     background-color: transparent;

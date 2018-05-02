@@ -20,14 +20,22 @@
 }
 
 .locationAutocompleteInput {
+  flex-grow: 1;
   height: 36px;
+  line-height: unset;
   padding-left: 0;
+  margin: 0;
   border-bottom: 2px solid var(--attentionColor);
 
   &:hover,
   &:focus {
     border-bottom-color: var(--matterColorDark);
     outline: none;
+  }
+
+  /* Safari bugfix: without this Safari will print placeholder to a wrong place */
+  &::-webkit-input-placeholder {
+    line-height: normal;
   }
 
   @media (--viewportMedium) {

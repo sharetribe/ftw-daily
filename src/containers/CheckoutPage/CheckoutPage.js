@@ -24,7 +24,7 @@ import {
   Page,
   ResponsiveImage,
 } from '../../components';
-import { StripePaymentForm } from '../../containers';
+import { StripePaymentForm } from '../../forms';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { initiateOrder, setInitialValues, speculateTransaction } from './CheckoutPage.duck';
 import config from '../../config';

@@ -156,7 +156,7 @@ class BirthdayInputComponent extends Component {
             disabled={disabled}
             id={dateId}
             value={selectedValue(this.state.selected.day)}
-            className={classNames(css.select, selectClassName, {
+            className={classNames(selectClassName || css.select, {
               [css.notSet]: !parseNum(this.state.selected.day),
             })}
             onFocus={() => this.handleSelectFocus()}
@@ -177,7 +177,7 @@ class BirthdayInputComponent extends Component {
             disabled={disabled}
             id={monthId}
             value={selectedValue(this.state.selected.month)}
-            className={classNames(css.select, selectClassName, {
+            className={classNames(selectClassName || css.select, {
               [css.notSet]: !parseNum(this.state.selected.month),
             })}
             onFocus={() => this.handleSelectFocus()}
@@ -198,7 +198,7 @@ class BirthdayInputComponent extends Component {
             disabled={disabled}
             id={yearId}
             value={selectedValue(this.state.selected.year)}
-            className={classNames(css.select, selectClassName, {
+            className={classNames(selectClassName || css.select, {
               [css.notSet]: !parseNum(this.state.selected.year),
             })}
             onFocus={() => this.handleSelectFocus()}

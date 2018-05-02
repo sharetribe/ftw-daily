@@ -60,25 +60,27 @@ import * as TextInputField from './components/TextInputField/TextInputField.exam
 import * as TopbarDesktop from './components/TopbarDesktop/TopbarDesktop.example';
 import * as UserCard from './components/UserCard/UserCard.example';
 
+// forms
+import * as BookingDatesForm from './forms/BookingDatesForm/BookingDatesForm.example';
+import * as EditListingDescriptionForm from './forms/EditListingDescriptionForm/EditListingDescriptionForm.example';
+import * as EditListingFeaturesForm from './forms/EditListingFeaturesForm/EditListingFeaturesForm.example';
+import * as EditListingLocationForm from './forms/EditListingLocationForm/EditListingLocationForm.example';
+import * as EditListingPhotosForm from './forms/EditListingPhotosForm/EditListingPhotosForm.example';
+import * as EditListingPoliciesForm from './forms/EditListingPoliciesForm/EditListingPoliciesForm.example';
+import * as EditListingPricingForm from './forms/EditListingPricingForm/EditListingPricingForm.example';
+import * as EmailVerificationForm from './forms/EmailVerificationForm/EmailVerificationForm.example';
+import * as EnquiryForm from './forms/EnquiryForm/EnquiryForm.example';
+import * as LoginForm from './forms/LoginForm/LoginForm.example';
+import * as PasswordRecoveryForm from './forms/PasswordRecoveryForm/PasswordRecoveryForm.example';
+import * as PasswordResetForm from './forms/PasswordResetForm/PasswordResetForm.example';
+import * as PayoutDetailsForm from './forms/PayoutDetailsForm/PayoutDetailsForm.example';
+import * as ReviewForm from './forms/ReviewForm/ReviewForm.example';
+import * as SendMessageForm from './forms/SendMessageForm/SendMessageForm.example';
+import * as SignupForm from './forms/SignupForm/SignupForm.example';
+import * as StripePaymentForm from './forms/StripePaymentForm/StripePaymentForm.example';
+
 // containers
-import * as BookingDatesForm from './containers/BookingDatesForm/BookingDatesForm.example';
 import * as Colors from './containers/StyleguidePage/Colors.example';
-import * as EditListingDescriptionForm from './containers/EditListingDescriptionForm/EditListingDescriptionForm.example';
-import * as EditListingFeaturesForm from './containers/EditListingFeaturesForm/EditListingFeaturesForm.example';
-import * as EditListingLocationForm from './containers/EditListingLocationForm/EditListingLocationForm.example';
-import * as EditListingPhotosForm from './containers/EditListingPhotosForm/EditListingPhotosForm.example';
-import * as EditListingPoliciesForm from './containers/EditListingPoliciesForm/EditListingPoliciesForm.example';
-import * as EditListingPricingForm from './containers/EditListingPricingForm/EditListingPricingForm.example';
-import * as EmailVerificationForm from './containers/EmailVerificationForm/EmailVerificationForm.example';
-import * as EnquiryForm from './containers/EnquiryForm/EnquiryForm.example';
-import * as LoginForm from './containers/LoginForm/LoginForm.example';
-import * as PasswordRecoveryForm from './containers/PasswordRecoveryForm/PasswordRecoveryForm.example';
-import * as PasswordResetForm from './containers/PasswordResetForm/PasswordResetForm.example';
-import * as PayoutDetailsForm from './containers/PayoutDetailsForm/PayoutDetailsForm.example';
-import * as ReviewForm from './containers/ReviewForm/ReviewForm.example';
-import * as SendMessageForm from './containers/SendMessageForm/SendMessageForm.example';
-import * as SignupForm from './containers/SignupForm/SignupForm.example';
-import * as StripePaymentForm from './containers/StripePaymentForm/StripePaymentForm.example';
 import * as Typography from './containers/StyleguidePage/Typography.example';
 
 export {

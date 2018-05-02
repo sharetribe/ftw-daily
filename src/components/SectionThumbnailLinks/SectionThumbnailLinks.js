@@ -21,7 +21,7 @@ const ThumbnailLink = props => {
     [css.link2Columns]: linksPerRow === 2,
     [css.link3Columns]: linksPerRow === 3,
   });
-  const imageWrapperClasses = classNames(css.imageWrapper, imageWrapperClassName);
+  const imageWrapperClasses = classNames(imageWrapperClassName || css.imageWrapper);
 
   const LinkComponentProps = type === 'NamedLink' ? { name, params, to } : { href };
   const LinkComponent = type === 'NamedLink' ? NamedLink : ExternalLink;

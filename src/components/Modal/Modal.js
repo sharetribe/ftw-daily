@@ -101,7 +101,7 @@ export class ModalComponent extends Component {
         <div className={scrollLayerClasses}>
           <div className={containerClasses}>
             {closeBtn}
-            <div className={classNames(css.content, contentClassName)}>{children}</div>
+            <div className={classNames(contentClassName || css.content)}>{children}</div>
           </div>
         </div>
       </div>

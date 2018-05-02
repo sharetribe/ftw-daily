@@ -15,7 +15,8 @@ import {
   Page,
   UserNav,
 } from '../../components';
-import { PasswordChangeForm, TopbarContainer } from '../../containers';
+import { PasswordChangeForm } from '../../forms';
+import { TopbarContainer } from '../../containers';
 
 import { changePassword, changePasswordClear } from './PasswordChangePage.duck';
 import css from './PasswordChangePage.css';

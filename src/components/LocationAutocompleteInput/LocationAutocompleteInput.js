@@ -400,8 +400,8 @@ class LocationAutocompleteInput extends Component {
     };
 
     const rootClass = classNames(rootClassName || css.root, className);
-    const iconClass = classNames(css.icon, iconClassName);
-    const inputClass = classNames(css.input, inputClassName, { [validClassName]: isValid });
+    const iconClass = classNames(iconClassName || css.icon);
+    const inputClass = classNames(inputClassName || css.input, { [validClassName]: isValid });
     const predictionsClass = classNames(predictionsClassName);
 
     // Only render predictions when the input has focus. For
@@ -436,7 +436,7 @@ class LocationAutocompleteInput extends Component {
         />
         {renderPredictions ? (
           <LocationPredictionsList
-            className={predictionsClass}
+            rootClassName={predictionsClass}
             predictions={predictions}
             highlightedIndex={this.state.highlightedIndex}
             onSelectStart={this.handlePredictionsSelectStart}

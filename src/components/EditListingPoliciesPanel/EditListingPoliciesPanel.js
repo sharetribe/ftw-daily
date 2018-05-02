@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
-import { EditListingPoliciesForm } from '../../containers';
+import { EditListingPoliciesForm } from '../../forms';
 
 import css from './EditListingPoliciesPanel.css';
 

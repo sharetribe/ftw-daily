@@ -16,7 +16,8 @@ import {
   Page,
   UserNav,
 } from '../../components';
-import { ContactDetailsForm, TopbarContainer } from '../../containers';
+import { ContactDetailsForm } from '../../forms';
+import { TopbarContainer } from '../../containers';
 
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { saveContactDetails, saveContactDetailsClear } from './ContactDetailsPage.duck';

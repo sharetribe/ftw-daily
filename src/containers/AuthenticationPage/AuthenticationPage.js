@@ -28,7 +28,8 @@ import {
   Modal,
   TermsOfService,
 } from '../../components';
-import { LoginForm, SignupForm, TopbarContainer } from '../../containers';
+import { LoginForm, SignupForm } from '../../forms';
+import { TopbarContainer } from '../../containers';
 import { login, authenticationInProgress, signup } from '../../ducks/Auth.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { sendVerificationEmail } from '../../ducks/user.duck';
