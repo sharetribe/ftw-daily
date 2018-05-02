@@ -50,7 +50,6 @@ Documentation for specific topics can be found in the following files:
 * [Original create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md)
 * [Customization checklist](customization-checklist.md)
 * [Google Maps](google-maps.md)
-* [i18n](i18n.md)
 * [Icons](icons.md)
 
 The application was bootstrapped with a forked version of
