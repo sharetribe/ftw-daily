@@ -19,6 +19,14 @@ const i18n = {
 // Should search results be ordered by distance to origin.
 const sortSearchByDistance = false;
 
+// API supports custom processes to be used in booking process.
+// We need to specify it when we are initiating a new order
+// (or fetching price information by calling 'initiateSpeculative' endpoint).
+//
+// In a way, 'processAlias' defines which transaction process (or processes)
+// this particular web application is able to handle.
+const bookingProcessAlias = 'preauth-nightly-booking/release-1';
+
 // The transaction line item code for the main unit type in bookings.
 //
 // Possible values: ['line-item/night', 'line-item/day', 'line-item/units';]
@@ -283,6 +291,7 @@ const config = {
   env,
   dev,
   locale,
+  bookingProcessAlias,
   bookingUnitType,
   i18n,
   sdk: {
