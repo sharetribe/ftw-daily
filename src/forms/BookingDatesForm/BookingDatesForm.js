@@ -142,8 +142,7 @@ export class BookingDatesFormComponent extends Component {
           const endDatePlaceholderText =
             endDatePlaceholder || intl.formatDate(tomorrow, dateFormatOptions);
           const submitButtonClasses = classNames(
-            css.submitButtonWrapper,
-            submitButtonWrapperClassName
+            submitButtonWrapperClassName || css.submitButtonWrapper
           );
 
           return (

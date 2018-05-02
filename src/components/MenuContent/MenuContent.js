@@ -23,7 +23,7 @@ const MenuContent = props => {
 
   const rootClass = rootClassName || css.root;
   const classes = classNames(rootClass, className, { [css.isOpen]: isOpen });
-  const contentClasses = classNames(contentClassName, css.content);
+  const contentClasses = classNames(contentClassName || css.content);
 
   const arrowPositionStyle =
     arrowPosition && style.right != null
