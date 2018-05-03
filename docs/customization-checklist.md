@@ -2,8 +2,8 @@
 
 Some generic things to update and check when starting to customise the template.
 
-* [Marketplace colors](colors-and-icons.md#colors)
-* [Generate app icons](colors-and-icons.md#icons)
+* [Marketplace colors](styling.md)
+* [Generate app icons](icons.md)
 * [Update translations](../src/translations/en.json) or [change the language](i18n.md)
 * [LandingPage](../src/containers/LandingPage/LandingPage.js): update and create branded sections
 * [Footer](../src/components/Footer/Footer.js)
