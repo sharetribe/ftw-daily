@@ -25,15 +25,16 @@ desktop search view.
 Next we'll guide you through the steps of adding a _capacity_ filter to the marketplace.
 
 First step for adding a new filter is to make sure that the data being used for filtering is saved
-in the listing's `publicData` attribute. On how to achieve this, please refer to the [documentation
-on extending the listing data model](./extend-listing.md). Another aspect in search filters is that
-the public data needs to be indexed in the API. This is currently achieved with a manual operation
-done by the Sharetribe support. Once a public data attribute is added to the listings and the data
-attribute is indexed, the listing searches can be filtered by that attribute by adding a query
-parameter that consists of a preceding "pub\_" and the attribute name, so for the _capacity_
-attribute the parameter would be "pub_capacity".
+in the listing's `publicData` attribute. On how to achieve this, please refer to the
+[documentation on extending the listing data model](./extend-listing.md). Another aspect in search
+filters is that the public data needs to be indexed in the API. This is currently achieved with a
+manual operation done by the Sharetribe support. Once a public data attribute is added to the
+listings and the data attribute is indexed, the listing searches can be filtered by that attribute
+by adding a query parameter that consists of a preceding "pub\_" and the attribute name, so for the
+_capacity_ attribute the parameter would be "pub_capacity".
 
-Further reading on public data can be found in the [extended data documentation](./extended-data.md).
+Further reading on public data can be found in the
+[extended data documentation](./extended-data.md).
 
 ### Common changes
 
@@ -58,8 +59,7 @@ export const capacityOptions = [
 ];
 ```
 
-A few changes need to be made to the `SearchPage` container in order to get the filters to
-work.
+A few changes need to be made to the `SearchPage` container in order to get the filters to work.
 
 `SearchPage` needs the filter options. One handy way is to add the options as a prop to the
 component and then set `defaultProps` value from `config.custom` (contains the
@@ -102,8 +102,8 @@ filters() {
 
 Final thing to do in `SearchPage` is to pass the filters configuration on to the components that
 take care of rendering the filters. This is achieved by `primaryFilters` and `secondaryFilters`
-props that are passed to `MainPanel`. The configurations are passed as an object in the same form
-as the configuration object in `filters`.
+props that are passed to `MainPanel`. The configurations are passed as an object in the same form as
+the configuration object in `filters`.
 
 ```js
 <MainPanel
@@ -123,9 +123,9 @@ passed as props to the components that render the filters: `SearchFilters`, `Sea
 `SearchFiltersMobile` .The difference between filters passed as primary and secondary varies in
 mobile and desktop views:
 
-* __Desktop:__ Primary filters are shown in the top of the search view, secondary filters are
-   rendered in a distinct panel that opens on top of search results.
-* __Mobile:__ Both primary and secondary filters are rendered in the same modal.
+* **Desktop:** Primary filters are shown in the top of the search view, secondary filters are
+  rendered in a distinct panel that opens on top of search results.
+* **Mobile:** Both primary and secondary filters are rendered in the same modal.
 
 ### Desktop filters
 
@@ -163,7 +163,8 @@ The mobile view uses the same `SelectSingleFilterPlain` and `SelectMultipleFilte
 as the filter panel. In this case the filter components are declared in `SearchFiltersMobile`. The
 following steps are required to add a mobile filter:
 
-* declare a prop with the same name that you added the filter config to `primaryFilters` or `secondaryFilters`
+* declare a prop with the same name that you added the filter config to `primaryFilters` or
+  `secondaryFilters`
 * resolve the filters initial value with `initialValue` and `initialValues` methods
 * use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the
   `<div className={css.filtersWrapper}>` element to render the filters
