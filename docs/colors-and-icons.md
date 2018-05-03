@@ -1,28 +1,4 @@
-# Colors and icons
-
-One of the first customisations is to change the marketplace colors and icons.
-
-## Colors
-
-To change the marketplace colors, open the [src/marketplace.css](../src/marketplace.css) file and
-change the color variables:
-
-```css
---marketplaceColor: #c0392b;
---marketplaceColorLight: #ff4c38;
---marketplaceColorDark: #8c291e;
-```
-
-and
-
-```css
---marketplaceColorEncoded: %23c0392b;
-```
-
-N.B. search also from files for the color code `c0392b`. It's used directly in a few places like
-some icons, the 500 error page and map configurations.
-
-## Icons
+# Icons
 
 The default icons are generated with [RealFaviconGenerator](https://realfavicongenerator.net/). You
 can upload your original icon to the tool, customise the colors and themes, and download a generated
