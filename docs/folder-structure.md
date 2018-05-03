@@ -67,7 +67,7 @@ behind path `src/components/ComponentName/ComponentName.js`, but you can import 
 `import { NamedLink } from 'path/to/components';`
 
 When creating new components, remember to import marketplace.css file to component's own CSS file -
-that way you can use CSS Property variables defined in **marketplace.css**.
+that way you can use CSS Property variables defined in `src/marketplace.css`.
 
 ### `src/containers/`
 
@@ -77,7 +77,7 @@ this folder contains only page-level components and one common component: Topbar
 ### `src/forms/`
 
 Forms are in their own folder since they are using a special library to handle validations, errors,
-etc. - and we have had forms that have been connected to Redux store.
+internal state, etc.
 
 _**NOTE:** Currently, we are migrating to
 [🏁 Final Form](https://github.com/final-form/react-final-form) (away from
@@ -85,10 +85,10 @@ _**NOTE:** Currently, we are migrating to
 
 ## server/
 
-* `server/index.js` handles server-side rendering (SSR). Build with [Express](http://expressjs.com)
+* `server/index.js` handles server-side rendering (SSR). Built with [Express](http://expressjs.com)
   (Node.js framework)
-* `server/csp.js` [content security policy](https://content-security-policy.com) (a whitelist of
-  domains that external scripts are allowed to access)
+* `server/csp.js` [content security policy](https://content-security-policy.com) A whitelist of
+  domains that the application and loaded scripts are allowed to access from the browser.
 * `server/sitemap.js` generates a minimal sitemap.xml for SEO purposes
 
 ## ext/default-mail-templates/
