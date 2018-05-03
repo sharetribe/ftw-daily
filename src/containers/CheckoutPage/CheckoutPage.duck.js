@@ -1,4 +1,5 @@
 import { pick } from 'lodash';
+import config from '../../config';
 import { denormalisedResponseEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
 import { TRANSITION_REQUEST } from '../../util/types';
@@ -109,6 +110,7 @@ export const initiateOrder = (orderParams, initialMessage) => (dispatch, getStat
   dispatch(initiateOrderRequest());
   const bodyParams = {
     transition: TRANSITION_REQUEST,
+    processAlias: config.bookingProcessAlias,
     params: orderParams,
   };
   return sdk.transactions
@@ -159,6 +161,7 @@ export const speculateTransaction = params => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
   const bodyParams = {
     transition: TRANSITION_REQUEST,
+    processAlias: config.bookingProcessAlias,
     params: {
       ...params,
       cardToken: 'CheckoutPage_speculative_card_token',
