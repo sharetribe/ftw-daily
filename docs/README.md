@@ -51,7 +51,7 @@ Documentation for specific topics can be found in the following files:
 * [Customization checklist](customization-checklist.md)
 * [Google Maps](google-maps.md)
 * [i18n](i18n.md)
-* [Icons](colors-and-icons.md)
+* [Icons](icons.md)
 
 The application was bootstrapped with a forked version of
 [create-react-app](https://github.com/facebookincubator/create-react-app). While most of the
