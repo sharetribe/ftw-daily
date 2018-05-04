@@ -6,8 +6,8 @@ According to [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP):
 > certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These
 > attacks are used for everything from data theft to site defacement or distribution of malware.
 
-This document describes how to use a CSP with the Starter App. By default the CSP is disabled. By
-turning it on, the default whitelist in [server/csp.js](../server/csp.js) works with the all the
+This document describes how to use a CSP with the Flex template app. By default the CSP is disabled.
+By turning it on, the default whitelist in [server/csp.js](../server/csp.js) works with the all the
 URLs and tools that come with the application.
 
 ## Setup

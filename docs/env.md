@@ -1,7 +1,7 @@
 # Environment configuration variables
 
-The following configuration variables can be set to control the Starter App behaviour. Most of them
-have defaults that work for development environment. For production deploys most should be set.
+The following configuration variables can be set to control the Flex template app behaviour. Most of
+them have defaults that work for development environment. For production deploys most should be set.
 
 | Variable                                  | Description                                                                                                       |
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
@@ -25,7 +25,7 @@ have defaults that work for development environment. For production deploys most
 
 ## Defining configuration
 
-When the Starter App is started locally with `yarn run dev` or `yarn run dev-server`, you can set
+When the app is started locally with `yarn run dev` or `yarn run dev-server`, you can set
 environment variables by using the (gitignored) `.env` file. The repository contains a template file
 `.env-template` with default configuration. Just copy that as `.env` and edit as necessary.
 

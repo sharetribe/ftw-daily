@@ -104,8 +104,8 @@ After that we need to import some components:
 
 * `LayoutSingleColumn` and wrappers that it needs to position content
 * `Footer` component (to be added inside LayoutWrapperFooter)
-* `NamedLink` makes it easier to point to different pages inside Starter app
-* `ExternalLink` can be used to link outside of Starter app. It creates a normal `<a>`link with
+* `NamedLink` makes it easier to point to different pages inside the application
+* `ExternalLink` can be used to link outside the application. It creates a normal `<a>`link with
   extra attributes `target="_blank" rel="noopener noreferrer"` that add some security to these
   outbound links.
 
@@ -219,8 +219,8 @@ to import new components easily with `import { AboutPage } from '../../component
 
 ## 7. Adding a route to the page
 
-As a last step you need to add the newly created static page to Starter apps routing. This can be
-done in `src/routeConfiguration.js`.
+As a last step you need to add the newly created static page to the routing. This can be done in
+`src/routeConfiguration.js`.
 
 Inside routeConfiguration function you should add a URL path, a page name (it should not conflicting
 with other pages), and the component itself.
@@ -254,5 +254,5 @@ We are using several libraries in this example. If you want to read more, here's
 * [JSX](https://reactjs.org/docs/introducing-jsx.html): for getting HTML-like markup syntax for own
   components
 * [CSS Modules](https://github.com/css-modules/css-modules)
-* [React Router](https://reacttraining.com/react-router/web/guides/philosophy): routing inside
-  Starter app pages.
+* [React Router](https://reacttraining.com/react-router/web/guides/philosophy): routing inside the
+  application.
