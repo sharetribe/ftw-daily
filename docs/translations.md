@@ -27,8 +27,8 @@ For example:
 The keys are namespaced to the corresponding component. This is aligned with the component driven
 paradigm that the application follows. It might introduce duplication with same translation texts
 occurring multiple times in the translation file but it also emphasizes how all the components are
-independent, how a component can be used anywhere and how modifications to a single component do not affect
-other components.
+independent, how a component can be used anywhere and how modifications to a single component do not
+affect other components.
 
 ## Using the translations
 
@@ -70,8 +70,8 @@ Other functions and componets can be explored in the
 
 ## Formatting
 
-React Intl uses the [FormatJS](https://formatjs.io/) formatters for shaping the translation
-texts based on given arguments. Here are a few examples on how to use FormatJS.
+React Intl uses the [FormatJS](https://formatjs.io/) formatters for shaping the translation texts
+based on given arguments. Here are a few examples on how to use FormatJS.
 
 ### Arguments
 
@@ -120,10 +120,13 @@ More formatting examples can be found from the
 
 ## Texts outside the translation file
 
-The `AboutPage` component is the only one that contains text content that can not be found from the
-`en.json` file. It only has static content and consists of one component so the text content can
-easily be added and maintained in that one file. For instructions on creating static pages like the
-About page, refer to the [Static pages documentation](./static-pages.md).
+A few components in the template app contain texts that are not included in the `en.json` file,
+namely `AboutPage`, `PrivacyPolicy`, and `TermsOfService`. The reason behind this is that these
+components only contain static content that is laid out in more of a document format so the
+translations for these texts can easily be changed and maintained in the component files themselves.
+
+More information about adding static content to the application can be found from [the static pages
+documentation](./static-pages.md).
 
 ## Changing the language
 

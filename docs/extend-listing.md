@@ -18,7 +18,7 @@ In this guide we will extend the listing data model by adding a _capacity_ attri
 
 ## Add a new attribute
 
-### Declare the attribute and it's possible values
+### Declare the attribute and its possible values
 
 So, you have come up with a great new extension to the listing data model, fantastic! Depending of
 the type of data the new attribute is going to be used for it might make sense to define and store
