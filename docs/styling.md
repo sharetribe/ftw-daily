@@ -15,8 +15,9 @@ To tackle this goal, we have split the styling into two levels in this template 
 
 On top of functionalities provided by Create React App, we have
 [added a couple of extra libraries](https://www.npmjs.com/package/sharetribe-scripts#differences-to-react-scripts)
-to help to design consistent UI faster. CSS Properties and CSS Property Sets are very useful for all
-kind of style sharing purposes, and we have created marketplace-level styling variables with them.
+to help to design consistent UIs faster. CSS Properties and CSS Property Sets are very useful for
+all kind of style sharing purposes, and we have created marketplace-level styling variables with
+them.
 
 The concept behind CSS Properties is quite straightforward - they are variables that can be defined
 in root-element level and then used inside some CSS rule.
@@ -48,6 +49,9 @@ scheme here using CSS Property variables:
 --marketplaceColorLight: #ff4c38;
 --marketplaceColorDark: #8c291e;
 
+/* Used with inline CSS SVGs */
+--marketplaceColorEncoded: %23c0392b;
+
 --successColor: #2ecc71;
 --successColorDark: #239954;
 --failColor: #ff0000;
@@ -63,6 +67,9 @@ scheme here using CSS Property variables:
 
 Changing `--marketplaceColor: #c0392b;` to `--marketplaceColor: tomato;` will change the default
 marketplace color to tomato color. (It's a certain kind of red color.)
+
+The `--marketplaceColorEncoded` variable holds the same value as `--marketplaceColor` but with the
+_#_ URL encoded. This value can be used to maintain a consistent color scheme with inline SVG icons.
 
 `--successColor` (green) is used on form inputs for showing that the input value is valid.
 Sometimes, submit buttons (`<PrimaryButton>`) are also using that color to highlight the fact that
@@ -120,14 +127,14 @@ p {
 ```
 
 _marketplaceFonts.css_ are included to _marketplace.css_, so you don't need to import this file on
-new components (_marketplace.css_ is enough).
+new components (importing _marketplace.css_ is enough).
 
 ⚠️ NOTE: template app is following a pattern where the height of an element should be divisible by
 `6px` on mobile layout and `8px` on bigger layouts. This affects to line-heights of font styles too.
 
 ⚠️ NOTE: the `@apply` rule and custom property sets most likely won't get any more support from
 browser vendors as the spec is yet considered deprecated and alternative solutions are being
-discussed. However, template app will use these until good enough alternative is available.
+discussed. However, template app will use these until a good enough alternative is available.
 
 ### marketplaceIndex.css
 
@@ -136,18 +143,19 @@ This file provides default styles for plain elements like `<body>`, `<a>`, `<p>`
 
 ## Styling components
 
-Styling web UI is traditionally a messy business due to global nature of stylesheets and especially
-its cascading specificity rule. `.card {/*...*/}` will affect every element on a web page that has a
-class `card` - even if the different UI context would like to use a different set of rules.
+Styling a web UI is traditionally quite a messy business due to global nature of stylesheets and
+especially their cascading specificity rule. `.card {/*...*/}` will affect every element on a web
+page that has a class `card` - even if the different UI context would like to use a different set of
+rules.
 
 Our goal has been to create independent components that can be reused in the UI without paying too
 much attention to the global CSS context. To achieve this, we have used
 [CSS Modules](https://github.com/css-modules/css-modules), which keeps the syntax close to plain
-CSS, but it actually creates unique class names to remove the problems of global nature of CSS. In
-practice, this means that a class with name `card` is actually renamed as
+CSS, but it actually creates unique class names to remove the problems caused by the global nature
+of CSS. In practice, this means that a class with name `card` is actually renamed as
 `ComponentName__card__3kj4h5`.
 
-To use styles defined in Component.css, we need to import .css file into the component:
+To use styles defined in SectionHero.css, we need to import the .css file into the component:
 
 ```jsx
 import css from './SectionHero.css';
@@ -161,9 +169,10 @@ and then select the correct class from imported style object (in this case `hero
 
 ### Find the component to change its styles
 
-Quite often the one needs to find a component that is responsible for certain UI partial - to change
-the styles. In this case, the easiest way to pinpoint a component is to open Inspector. (Right-click
-on top of the correct element, and select Inspector from the context menu.)
+Quite often one needs to find a component that is responsible for certain UI partial in order to
+change the styles. In this case, the easiest way to pinpoint a component is to open the inspector
+from browser's dev tools. (Right-click on top of the correct element, and select _Inspector_, or
+something of the sort depending on the browser, from the context menu.)
 
 ![Mobile LandingPage hero title](./assets/styling/styling-find-component.png)
 
@@ -171,7 +180,7 @@ Here we have opened title on LandingPage and the styles for
 `<h1 class="SectionHero__heroMainTitle__3mVNg"><span>Book saunas everywhere.</span></h1>` are
 defined in a "class" called `SectionHero__heroMainTitle__3mVNg`. As stated before, the first part of
 a class name is actually giving us a hint about what component is defining that style - in this
-case, it's _SectionHero_ and its styles can be found from file:
+case, it's _SectionHero_ and its styles can be found from the file:
 `src/components/SectionHero/SectionHero.css`.
 
 There's only two groups of components that break that rule:
@@ -181,7 +190,7 @@ There's only two groups of components that break that rule:
 
 ### Styling guidelines and good practices
 
-We have the practice to name the outermost class of a component as `.root { /* styles */ }`. So, if
+We have a practice of naming the outermost class of a component as `.root { /* styles */ }`. So, if
 the component is just rendering single element it only has `.root` class, and if there's more
 complex inner DOM structure needed, additional classes are named semantically.
 
@@ -208,19 +217,19 @@ Some guidelines we have tried to follow:
 
 ### Styling responsibility: parent component and its children
 
-One important aspect in component-based UI is the fact that a component is on usually only
-responsible for what happens inside its outermost element boundary. In parent-child context, this
+One important aspect of a component-based UI is the fact that a component is usually only
+responsible for what happens inside its outermost element boundary. In parent-child context this
 means that the parent component is responsible for its own layout and therefore it usually needs to
 be able to give some dimensions to its child components (and naturally margins between them).
 
 This creates a need for the parent to have means to pass `className` to its child as props. One
 example could be a component that shows a circle component inside itself and makes it 50px wide.
 
-Child component (`<Circle />`) with own styles:
+Style definitions of the (`<Circle />`) child component:
 
 ```css
 .root {
-  backgroundColor: tomato;
+  backgroundcolor: tomato;
   border-radius: 50%;
 }
 ```
