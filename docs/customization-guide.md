@@ -1,10 +1,10 @@
-# Customisation guide
+# Customization guide
 
 So you've decided to build your own Flex marketplace using the template. That's awesome! This guide
 will help you in setting up your fork and describes the general workflow.
 
 **Note:** if you cloned the repository like described in the Quick start section of the project
-README file, you probably don't want to make the customisations in that project. Forking the
+README file, you probably don't want to make the customizations in that project. Forking the
 repository is the recommended way to proceed. Follow this guide for instructions.
 
 ## Requirements
@@ -17,7 +17,7 @@ Install required tools:
 ## Technologies
 
 Depending on what you want to change in the template, various skills help in achieving your goal.
-Some of the basic customisations don't require specific coding skills, but many customisations
+Some of the basic customizations don't require specific coding skills, but many customisations
 become technically involved. We've tried to keep the technology setup as simple as possible, and
 frontend developers with experience in widely used tooling should feel comfortable right from the
 get-go.
@@ -35,7 +35,7 @@ Here are some main technologies that the template uses:
 
 ## Setup
 
-To start a new customisation project, you should create a separate Git repository and setup the Git
+To start a new customization project, you should create a separate Git repository and setup the Git
 remotes so that you can pull in changes from the main (upstream) repository to your custom
 repository.
 
@@ -56,12 +56,12 @@ documentation.
 
 ### Pull in latest upstream changes
 
-If you want to update your local customisation project with changes in the template, you should pull
+If you want to update your local customization project with changes in the template, you should pull
 in changes from the upstream remote.
 
 **Note:** Depending on the changes you've made to the template, this might be hard/impossible
 depending on what has changed in the template. You should mainly think of the template being the
-starting point of your customisation, not something that is constantly updated.
+starting point of your customization, not something that is constantly updated.
 
 In the `master` branch (or in the branch you want to merge in the upstream changes):
 
@@ -138,8 +138,8 @@ To start the test watcher, run
 
 See more in the [testing documentation](docs/testing.md).
 
-## Customisation
+## Customization
 
 There are many things that you should change in the default template, and many more that you can
-change. See the [Customisation checklist](customisation-checklist.md) documentation for more
+change. See the [Customization checklist](customization-checklist.md) documentation for more
 information.

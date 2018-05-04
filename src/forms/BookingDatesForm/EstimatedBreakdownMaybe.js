@@ -7,14 +7,14 @@
  * estimate the breakdown of the transaction without data from the
  * API.
  *
- * If the payment process of a customised marketplace is something
+ * If the payment process of a customized marketplace is something
  * else than simply daily or nightly bookings, the estimation will
  * most likely need some changes.
  *
- * To customise the estimation, first change the BookingDatesForm to
+ * To customize the estimation, first change the BookingDatesForm to
  * collect all booking information from the user (in addition to the
  * default date pickers), and provide that data to the
- * EstimatedBreakdownMaybe components. You can then make customisation
+ * EstimatedBreakdownMaybe components. You can then make customization
  * within this file to create a fake transaction object that
  * calculates the breakdown information correctly according to the
  * process.

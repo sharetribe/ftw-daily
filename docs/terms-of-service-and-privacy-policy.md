@@ -7,10 +7,10 @@ suit the marketplace.
 
 Edit
 [src/components/TermsOfService/TermsOfService.js](../src/components/TermsOfService/TermsOfService.js)
-file to customise the default dummy content.
+file to customize the default dummy content.
 
 ## Privacy Policy
 
 Edit
 [src/components/PrivacyPolicy/PrivacyPolicy.js](../src/components/PrivacyPolicy/PrivacyPolicy.js)
-file to customise the default dummy content.
+file to customize the default dummy content.
