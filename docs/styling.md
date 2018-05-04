@@ -1,8 +1,8 @@
 # Flex Template for Web: styling
 
 The goal for creating styling for Flex template app was to keep styling as close as possible to
-plain CSS writing while still trying to avoid the mess that comes along with globally defined
-cascading behavior that CSS is all about.
+plain CSS while still trying to avoid the mess that comes along with globally defined cascading
+behavior that CSS is all about.
 
 To tackle this goal, we have split the styling into two levels in this template application:
 
@@ -71,7 +71,7 @@ marketplace color to tomato color. (It's a certain kind of red color.)
 The `--marketplaceColorEncoded` variable holds the same value as `--marketplaceColor` but with the
 _#_ URL encoded. This value can be used to maintain a consistent color scheme with inline SVG icons.
 
-`--successColor` (green) is used on form inputs for showing that the input value is valid.
+`--successColor` (green) is used in form inputs for showing that the input value is valid.
 Sometimes, submit buttons (`<PrimaryButton>`) are also using that color to highlight the fact that
 user has entered valid information to the form at hand.
 
@@ -130,7 +130,7 @@ _marketplaceFonts.css_ are included to _marketplace.css_, so you don't need to i
 new components (importing _marketplace.css_ is enough).
 
 ⚠️ NOTE: template app is following a pattern where the height of an element should be divisible by
-`6px` on mobile layout and `8px` on bigger layouts. This affects to line-heights of font styles too.
+`6px` on mobile layout and `8px` on bigger layouts. This affects line-heights of font styles too.
 
 ⚠️ NOTE: the `@apply` rule and custom property sets most likely won't get any more support from
 browser vendors as the spec is yet considered deprecated and alternative solutions are being
@@ -143,7 +143,7 @@ This file provides default styles for plain elements like `<body>`, `<a>`, `<p>`
 
 ## Styling components
 
-Styling a web UI is traditionally quite a messy business due to global nature of stylesheets and
+Styling a web UI is traditionally quite a messy business due to the global nature of stylesheets and
 especially their cascading specificity rule. `.card {/*...*/}` will affect every element on a web
 page that has a class `card` - even if the different UI context would like to use a different set of
 rules.

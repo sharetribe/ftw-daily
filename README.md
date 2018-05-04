@@ -25,7 +25,7 @@ See the [Environment configuration variables](docs/env.md) documentation for mor
 required configuration variables.
 
 **Note:** If you want to build your own Flex marketplace on top of the template, you should fork the
-repository instead of cloning it. See the following section.
+repository instead of cloning it. See the [Customization guide](./docs/customization-guide.md).
 
 ## Getting started with your own customization
 

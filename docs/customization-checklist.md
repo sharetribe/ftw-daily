@@ -4,7 +4,7 @@ Some generic things to update and check when starting to customize the template.
 
 * [Marketplace colors](styling.md)
 * [Generate app icons](icons.md)
-* [Update translations](../src/translations/en.json) or [change the language](i18n.md)
+* [Update translations](../src/translations/en.json) or [change the language](translations.md)
 * [LandingPage](../src/containers/LandingPage/LandingPage.js): update and create branded sections
 * [Footer](../src/components/Footer/Footer.js)
 * [AboutPage](../src/containers/AboutPage/AboutPage.js)
@@ -14,7 +14,7 @@ Some generic things to update and check when starting to customize the template.
 * [Logo](../src/components/Logo/Logo.js) Change and check that it works on Topbar and Footer
 * [Logo in CheckoutPage](../src/containers/CheckoutPage/LogoIcon.js)
 * [Default background image](../src/assets/background-1440.jpg)
-* [Maps Marker icon](../src/components/Map/Map/images/marker-32x32.png)
+* [Maps Marker icon](../src/components/Map/images/marker-32x32.png)
 * [Config: update environment variables](../src/config.js)
 * [Config: siteTitle](../src/config.js) for page schema (SEO)
 * [Config: marketplace address](../src/config.js): contact details also improve SEO
@@ -25,10 +25,9 @@ Some generic things to update and check when starting to customize the template.
 * Update [EditListingWizard](../src/components/EditListingWizard/EditListingWizard.js) and panels to
   add extended data
 * Update [SearchPage](../src/containers/SearchPage/SearchPage.js) to filter with extended data
-* Update [routeConfiguration](../src/routeConfiguration) if needed
-* Update
-  [Email templates](https://github.com/sharetribe/sharetribe-starter-app/tree/master/ext/mail-templates),
-  all of them: .html, subject.txt, and text.txt
+* Update [routeConfiguration](../src/routeConfiguration.js) if needed
+* Update [Email templates](../ext/default-mail-templates), all of them: .html, subject.txt, and
+  text.txt
 * Update [config: bookingUnitType](../src/config.js) if needed
 * If `line-item/units` is used, add quantity handling to
   [BookingDatesForm](../src/forms/BookingDatesForm/BookingDatesForm.js),

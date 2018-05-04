@@ -125,8 +125,8 @@ namely `AboutPage`, `PrivacyPolicy`, and `TermsOfService`. The reason behind thi
 components only contain static content that is laid out in more of a document format so the
 translations for these texts can easily be changed and maintained in the component files themselves.
 
-More information about adding static content to the application can be found from [the static pages
-documentation](./static-pages.md).
+More information about adding static content to the application can be found from
+[the static pages documentation](./static-pages.md).
 
 ## Changing the language
 

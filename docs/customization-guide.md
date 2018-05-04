@@ -3,7 +3,7 @@
 So you've decided to build your own Flex marketplace using the template. That's awesome! This guide
 will help you in setting up your fork and describes the general workflow.
 
-**Note:** if you cloned the repository like described in the Quick start section of the project
+**Note:** If you cloned the repository like described in the Quick start section of the project
 README file, you probably don't want to make the customizations in that project. Forking the
 repository is the recommended way to proceed. Follow this guide for instructions.
 

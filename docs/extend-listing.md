@@ -9,7 +9,7 @@ Adding new attributes to the data model relies on a Flex concept called
 
 Three main areas in extending the listing data model are:
 
-* [Declare the attribute and it's possible values](#declare-the-attribute-and-it-s-possible-values)
+* [Declare the attribute and it's possible values](#declare-the-attribute-and-its-possible-values)
 * [Edit the listing wizard](#edit-the-listing-wizard)
 * [Show the attribute on listing page](#show-the-attribute-on-listing-page)
 * [Use the attribute as a search filter](#use-the-attribute-as-a-search-filter)
@@ -69,8 +69,8 @@ export const PHOTOS = 'photos';
 export const SUPPORTED_TABS = [DESCRIPTION, FEATURES, CAPACITY, POLICY, LOCATION, PRICING, PHOTOS];
 ```
 
-Now in`EditListingWizard` we can take that tab declaration into use. Add the tab name to the `TABS`
-array and add a correct label for the tab.
+Now in `EditListingWizard` we can take that tab declaration into use. Import the tab name variable
+from `EditListingWizardTab` and add it to the `TABS` array.
 
 ```js
 export const TABS = [DESCRIPTION, FEATURES, CAPACITY, POLICY, LOCATION, PRICING, PHOTOS];
@@ -104,8 +104,8 @@ const tabLabel = (intl, tab) => {
 The `tabCompleted` function keeps track of which data the user has already provided in order to tell
 which tabs are completed. As we will be storing the capacity information in the listing's _public
 data_ property (see the [extended data](./extended-data.md) documentation for more info on different
-extended data types) we shall look into that property when when resolving whether the capacity tab
-has alerady been completed or not:
+extended data types) we shall look into that property when resolving whether the capacity tab has
+alerady been completed or not:
 
 ```js
 /**
@@ -391,7 +391,7 @@ in our case with the capacity information we want to show the added attribute in
 for potential customers.
 
 To show the capacity attribute in the listing page, let's create a specific component for it and
-place it in the `ListingPage` container. Desired outcome could be achieved just by editing the
+place it in the `ListingPage` container. Desired outcome could also be achieved just by editing the
 `ListingPage` but extracting the capacity UI parts into a separate component will simplify the
 `ListingPage` and make possible upstream updates from the Flex web template repo easier as there's
 less chances for merge conflicts. So, let's create a `SectionCapacity` component in the
@@ -461,7 +461,7 @@ ListingPageComponent.propTypes = {
 ```
 
 In the snippet above, the capacity options are passed to the `ListingPage` as a property, with the
-default proprty value pulling the options from the custom config (`marketplace-custom-config.js`).
+default property value pulling the options from the custom config (`marketplace-custom-config.js`).
 This way the listing page test can define it's own capacity options that are in line with test data
 used in the test and custom config changes will not affect test results.
 
