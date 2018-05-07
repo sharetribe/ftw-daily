@@ -1,7 +1,7 @@
 # Icons
 
 The default icons are generated with [RealFaviconGenerator](https://realfavicongenerator.net/). You
-can upload your original icon to the tool, customise the colors and themes, and download a generated
+can upload your original icon to the tool, customize the colors and themes, and download a generated
 set if icons and an HTML snippet to point to those images.
 
 1.  Open https://realfavicongenerator.net/

@@ -12,7 +12,7 @@ Listing page consists of the generic Topbar and of different page sections:
 * **Main content**: the left column under images
 * **SectionBooking**: Contains the form and breakdown estimation for booking the listing
 
-In the main content, there are several sections that are likely to be customised, e.g. when adding
+In the main content, there are several sections that are likely to be customized, e.g. when adding
 new extended data to the listing creation.
 
 ## Server rendering
@@ -25,4 +25,4 @@ metadata properly.
 ## SEO
 
 As mentioned above, the listing page is important for search engines and other bots. Therefore it is
-important to ensure that the schema metadata is up to date when making customisations to the page.
+important to ensure that the schema metadata is up to date when making customizations to the page.

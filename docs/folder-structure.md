@@ -86,10 +86,10 @@ _**NOTE:** Currently, we are migrating to
 ## server/
 
 * `server/index.js` handles server-side rendering (SSR). Built with [Express](http://expressjs.com)
-  (Node.js framework)
-* `server/csp.js` [content security policy](https://content-security-policy.com) A whitelist of
+  (Node.js framework).
+* `server/csp.js` [Content Security Policy](https://content-security-policy.com), whitelist of
   domains that the application and loaded scripts are allowed to access from the browser.
-* `server/sitemap.js` generates a minimal sitemap.xml for SEO purposes
+* `server/sitemap.js` generates a minimal sitemap.xml for SEO purposes.
 
 ## ext/default-mail-templates/
 
@@ -98,4 +98,4 @@ _verify-your-email_). You should customize all the different files (\*-html.html
 and \*-text.txt).
 
 _**NOTE:** Changing these doesn't change actual email templates - you need to send customized
-templates to your FLEX contact person._
+templates to your Flex contact person._

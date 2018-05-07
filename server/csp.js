@@ -9,7 +9,7 @@ const devImagesMaybe = dev ? ['*.localhost:8000'] : [];
 
 // Default CSP whitelist.
 //
-// NOTE: Do not change these in the customisations, make custom
+// NOTE: Do not change these in the customizations, make custom
 // additions within the exported function in the bottom of this file.
 const defaultDirectives = {
   baseUri: [self],

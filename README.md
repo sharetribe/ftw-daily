@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/sharetribe/flex-template-web.svg?style=svg&circle-token=198451e83e5cecb0d662949260dbc3273ac44a67)](https://circleci.com/gh/sharetribe/flex-template-web)
 
 This is a template web application for a Sharetribe Flex marketplace ready to be extended and
-customised. It is based on an application bootstrapped with
+customized. It is based on an application bootstrapped with
 [create-react-app](https://github.com/facebookincubator/create-react-app) with some additions,
 namely server side rendering and a custom CSS setup.
 
@@ -25,11 +25,11 @@ See the [Environment configuration variables](docs/env.md) documentation for mor
 required configuration variables.
 
 **Note:** If you want to build your own Flex marketplace on top of the template, you should fork the
-repository instead of cloning it. See the following section.
+repository instead of cloning it. See the [Customization guide](./docs/customization-guide.md).
 
-## Getting started with your own customisation
+## Getting started with your own customization
 
-If you want to build your own Flex marketplace by customising the template application, see the
+If you want to build your own Flex marketplace by customizing the template application, see the
 [Customization guide](docs/customization-guide.md) documentation.
 
 ## Documentation
