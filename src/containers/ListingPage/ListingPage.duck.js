@@ -1,4 +1,5 @@
 import { pick } from 'lodash';
+import config from '../../config';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
@@ -162,6 +163,7 @@ export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => 
   dispatch(sendEnquiryRequest());
   const bodyParams = {
     transition: TRANSITION_ENQUIRE,
+    processAlias: config.bookingProcessAlias,
     params: { listingId },
   };
   return sdk.transactions
