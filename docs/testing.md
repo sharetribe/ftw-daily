@@ -1,4 +1,4 @@
-# Sharetribe Starter App Testing
+# Testing Flex template for the web
 
 The test setup is based on the `create-react-app` test setup and is using the
 [Jest testing framework](https://facebook.github.io/jest/). See the

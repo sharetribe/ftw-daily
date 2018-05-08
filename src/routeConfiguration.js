@@ -292,7 +292,7 @@ const routeConfiguration = () => {
 
     // Do not change this path!
     //
-    // The API expects that the Starter App implements /reset-password endpoint
+    // The API expects that the application implements /reset-password endpoint
     {
       path: '/reset-password',
       name: 'PasswordResetPage',
@@ -301,7 +301,7 @@ const routeConfiguration = () => {
 
     // Do not change this path!
     //
-    // The API expects that the Starter App implements /verify-email endpoint
+    // The API expects that the application implements /verify-email endpoint
     {
       path: '/verify-email',
       name: 'EmailVerificationPage',

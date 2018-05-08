@@ -5,9 +5,10 @@ filters rely on listing's indexed data.
 
 ## Filter types
 
-The Starter App has two different filter types: _select single_ and _select multiple_. The _select
-single_ one can be used to filter out search result with only one value per search parameter. The
-_select multiple_ filters on the other hand can take multiple values for a single search parameter.
+The Flex template for web has two different filter types: _select single_ and _select multiple_. The
+_select single_ one can be used to filter out search result with only one value per search
+parameter. The _select multiple_ filters on the other hand can take multiple values for a single
+search parameter.
 
 These two filter types are implemented with four different components, a standard and a plain one:
 

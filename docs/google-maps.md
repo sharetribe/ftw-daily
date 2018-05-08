@@ -1,8 +1,8 @@
 # Google Maps
 
-Starter App uses the Google Maps API for showing a map and in searching locations in the search
-autocompletion. This document describes how to setup the API key for the API requests to work
-properly.
+The Flex template for web uses the Google Maps API for showing a map and in searching locations in
+the search autocompletion. This document describes how to setup the API key for the API requests to
+work properly.
 
 ## Generate a Google Maps API key
 

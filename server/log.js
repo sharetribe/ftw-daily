@@ -1,5 +1,5 @@
 /**
- * Error logging for the Starter App server. Can be used to
+ * Error logging for the Flex template server. Can be used to
  * strap on an external error logging service like Sentry
  * or just plain printing errors to the log.
  */
