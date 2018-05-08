@@ -343,7 +343,7 @@ export class TransactionPanelComponent extends Component {
           onCloseModal={() => this.setState({ isReviewModalOpen: false })}
           onManageDisableScrolling={onManageDisableScrolling}
           onSubmitReview={this.onSubmitReview}
-          revieweeName={authorDisplayName}
+          revieweeName={otherUserDisplayName}
           reviewSent={this.state.reviewSubmitted}
           sendReviewInProgress={sendReviewInProgress}
           sendReviewError={sendReviewError}
