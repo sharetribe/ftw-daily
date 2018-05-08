@@ -740,18 +740,18 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user2@example.com",
+              "email": "customer@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user2 abbreviated name",
-                "displayName": "user2 display name",
-                "firstName": "user2 first name",
-                "lastName": "user2 last name",
+                "abbreviatedName": "customer abbreviated name",
+                "displayName": "customer display name",
+                "firstName": "customer first name",
+                "lastName": "customer last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user2",
+              "uuid": "customer",
             },
             "type": "currentUser",
           }
@@ -776,11 +776,11 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -801,11 +801,11 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -1886,18 +1886,18 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user2@example.com",
+              "email": "customer@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user2 abbreviated name",
-                "displayName": "user2 display name",
-                "firstName": "user2 first name",
-                "lastName": "user2 last name",
+                "abbreviatedName": "customer abbreviated name",
+                "displayName": "customer display name",
+                "firstName": "customer first name",
+                "lastName": "customer last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user2",
+              "uuid": "customer",
             },
             "type": "currentUser",
           }
@@ -1922,11 +1922,11 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -1947,11 +1947,11 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -3032,18 +3032,18 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user2@example.com",
+              "email": "customer@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user2 abbreviated name",
-                "displayName": "user2 display name",
-                "firstName": "user2 first name",
-                "lastName": "user2 last name",
+                "abbreviatedName": "customer abbreviated name",
+                "displayName": "customer display name",
+                "firstName": "customer first name",
+                "lastName": "customer last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user2",
+              "uuid": "customer",
             },
             "type": "currentUser",
           }
@@ -3068,11 +3068,11 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -3093,11 +3093,11 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -4178,18 +4178,18 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user2@example.com",
+              "email": "customer@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user2 abbreviated name",
-                "displayName": "user2 display name",
-                "firstName": "user2 first name",
-                "lastName": "user2 last name",
+                "abbreviatedName": "customer abbreviated name",
+                "displayName": "customer display name",
+                "firstName": "customer first name",
+                "lastName": "customer last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user2",
+              "uuid": "customer",
             },
             "type": "currentUser",
           }
@@ -4214,11 +4214,11 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -4239,11 +4239,11 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -5324,18 +5324,18 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user2@example.com",
+              "email": "customer@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user2 abbreviated name",
-                "displayName": "user2 display name",
-                "firstName": "user2 first name",
-                "lastName": "user2 last name",
+                "abbreviatedName": "customer abbreviated name",
+                "displayName": "customer display name",
+                "firstName": "customer first name",
+                "lastName": "customer last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user2",
+              "uuid": "customer",
             },
             "type": "currentUser",
           }
@@ -5360,11 +5360,11 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -5385,11 +5385,11 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -6470,18 +6470,18 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user2@example.com",
+              "email": "customer@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user2 abbreviated name",
-                "displayName": "user2 display name",
-                "firstName": "user2 first name",
-                "lastName": "user2 last name",
+                "abbreviatedName": "customer abbreviated name",
+                "displayName": "customer display name",
+                "firstName": "customer first name",
+                "lastName": "customer last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user2",
+              "uuid": "customer",
             },
             "type": "currentUser",
           }
@@ -6506,11 +6506,11 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -6531,11 +6531,11 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -7616,18 +7616,18 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user2@example.com",
+              "email": "customer@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user2 abbreviated name",
-                "displayName": "user2 display name",
-                "firstName": "user2 first name",
-                "lastName": "user2 last name",
+                "abbreviatedName": "customer abbreviated name",
+                "displayName": "customer display name",
+                "firstName": "customer first name",
+                "lastName": "customer last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user2",
+              "uuid": "customer",
             },
             "type": "currentUser",
           }
@@ -7652,11 +7652,11 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -7677,11 +7677,11 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -8052,9 +8052,15 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
           user={
             Object {
               "attributes": Object {
-                "profile": Object {},
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
               },
-              "id": null,
+              "id": UUID {
+                "uuid": "provider",
+              },
               "type": "user",
             }
           }
@@ -8085,7 +8091,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
             "type": "listing",
           }
         }
-        customerDisplayName="customer1 display name"
+        customerDisplayName="customer display name"
         listingTitle="listing1 title"
         transaction={
           Object {
@@ -8163,11 +8169,11 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -8195,14 +8201,27 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
         }
       />
       <Component
-        customerDisplayName="customer1 display name"
+        authorDisplayName="provider display name"
+        customerDisplayName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         transaction={
@@ -8281,11 +8300,11 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -8313,7 +8332,19 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -8422,11 +8453,11 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -8454,7 +8485,19 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -8538,11 +8581,11 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -8570,7 +8613,19 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -8654,11 +8709,11 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -8686,7 +8741,19 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -8695,18 +8762,18 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user1@example.com",
+              "email": "provider@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user1 abbreviated name",
-                "displayName": "user1 display name",
-                "firstName": "user1 first name",
-                "lastName": "user1 last name",
+                "abbreviatedName": "provider abbreviated name",
+                "displayName": "provider display name",
+                "firstName": "provider first name",
+                "lastName": "provider last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user1",
+              "uuid": "provider",
             },
             "type": "currentUser",
           }
@@ -8731,11 +8798,11 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -8756,11 +8823,11 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -8906,11 +8973,11 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -8938,7 +9005,19 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -9022,11 +9101,11 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -9054,7 +9133,19 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -9070,6 +9161,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
     onManageDisableScrolling={[Function]}
     onSubmitReview={[Function]}
     reviewSent={false}
+    revieweeName="customer display name"
     sendReviewError={null}
     sendReviewInProgress={false}
   />
@@ -9106,9 +9198,15 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
           user={
             Object {
               "attributes": Object {
-                "profile": Object {},
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
               },
-              "id": null,
+              "id": UUID {
+                "uuid": "provider",
+              },
               "type": "user",
             }
           }
@@ -9139,7 +9237,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
             "type": "listing",
           }
         }
-        customerDisplayName="customer1 display name"
+        customerDisplayName="customer display name"
         listingTitle="listing1 title"
         transaction={
           Object {
@@ -9217,11 +9315,11 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -9249,14 +9347,27 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
         }
       />
       <Component
-        customerDisplayName="customer1 display name"
+        authorDisplayName="provider display name"
+        customerDisplayName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         transaction={
@@ -9335,11 +9446,11 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -9367,7 +9478,19 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -9476,11 +9599,11 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -9508,7 +9631,19 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -9592,11 +9727,11 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -9624,7 +9759,19 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -9708,11 +9855,11 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -9740,7 +9887,19 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -9749,18 +9908,18 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user1@example.com",
+              "email": "provider@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user1 abbreviated name",
-                "displayName": "user1 display name",
-                "firstName": "user1 first name",
-                "lastName": "user1 last name",
+                "abbreviatedName": "provider abbreviated name",
+                "displayName": "provider display name",
+                "firstName": "provider first name",
+                "lastName": "provider last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user1",
+              "uuid": "provider",
             },
             "type": "currentUser",
           }
@@ -9785,11 +9944,11 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -9810,11 +9969,11 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -9960,11 +10119,11 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -9992,7 +10151,19 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -10076,11 +10247,11 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -10108,7 +10279,19 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -10124,6 +10307,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
     onManageDisableScrolling={[Function]}
     onSubmitReview={[Function]}
     reviewSent={false}
+    revieweeName="customer display name"
     sendReviewError={null}
     sendReviewInProgress={false}
   />
@@ -10160,9 +10344,15 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
           user={
             Object {
               "attributes": Object {
-                "profile": Object {},
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
               },
-              "id": null,
+              "id": UUID {
+                "uuid": "provider",
+              },
               "type": "user",
             }
           }
@@ -10193,7 +10383,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
             "type": "listing",
           }
         }
-        customerDisplayName="customer1 display name"
+        customerDisplayName="customer display name"
         listingTitle="listing1 title"
         transaction={
           Object {
@@ -10271,11 +10461,11 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -10303,14 +10493,27 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
         }
       />
       <Component
-        customerDisplayName="customer1 display name"
+        authorDisplayName="provider display name"
+        customerDisplayName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         transaction={
@@ -10389,11 +10592,11 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -10421,7 +10624,19 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -10530,11 +10745,11 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -10562,7 +10777,19 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -10646,11 +10873,11 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -10678,7 +10905,19 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -10762,11 +11001,11 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -10794,7 +11033,19 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -10803,18 +11054,18 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user1@example.com",
+              "email": "provider@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user1 abbreviated name",
-                "displayName": "user1 display name",
-                "firstName": "user1 first name",
-                "lastName": "user1 last name",
+                "abbreviatedName": "provider abbreviated name",
+                "displayName": "provider display name",
+                "firstName": "provider first name",
+                "lastName": "provider last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user1",
+              "uuid": "provider",
             },
             "type": "currentUser",
           }
@@ -10839,11 +11090,11 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -10864,11 +11115,11 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -11014,11 +11265,11 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -11046,7 +11297,19 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -11130,11 +11393,11 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -11162,7 +11425,19 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -11178,6 +11453,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
     onManageDisableScrolling={[Function]}
     onSubmitReview={[Function]}
     reviewSent={false}
+    revieweeName="customer display name"
     sendReviewError={null}
     sendReviewInProgress={false}
   />
@@ -11214,9 +11490,15 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
           user={
             Object {
               "attributes": Object {
-                "profile": Object {},
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
               },
-              "id": null,
+              "id": UUID {
+                "uuid": "provider",
+              },
               "type": "user",
             }
           }
@@ -11247,7 +11529,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
             "type": "listing",
           }
         }
-        customerDisplayName="customer1 display name"
+        customerDisplayName="customer display name"
         listingTitle="listing1 title"
         transaction={
           Object {
@@ -11325,11 +11607,11 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -11357,14 +11639,27 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
         }
       />
       <Component
-        customerDisplayName="customer1 display name"
+        authorDisplayName="provider display name"
+        customerDisplayName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         transaction={
@@ -11443,11 +11738,11 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -11475,7 +11770,19 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -11584,11 +11891,11 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -11616,7 +11923,19 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -11700,11 +12019,11 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -11732,7 +12051,19 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -11816,11 +12147,11 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -11848,7 +12179,19 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -11857,18 +12200,18 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user1@example.com",
+              "email": "provider@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user1 abbreviated name",
-                "displayName": "user1 display name",
-                "firstName": "user1 first name",
-                "lastName": "user1 last name",
+                "abbreviatedName": "provider abbreviated name",
+                "displayName": "provider display name",
+                "firstName": "provider first name",
+                "lastName": "provider last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user1",
+              "uuid": "provider",
             },
             "type": "currentUser",
           }
@@ -11893,11 +12236,11 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -11918,11 +12261,11 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -12068,11 +12411,11 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -12100,7 +12443,19 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -12184,11 +12539,11 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -12216,7 +12571,19 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -12232,6 +12599,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
     onManageDisableScrolling={[Function]}
     onSubmitReview={[Function]}
     reviewSent={false}
+    revieweeName="customer display name"
     sendReviewError={null}
     sendReviewInProgress={false}
   />
@@ -12268,9 +12636,15 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
           user={
             Object {
               "attributes": Object {
-                "profile": Object {},
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
               },
-              "id": null,
+              "id": UUID {
+                "uuid": "provider",
+              },
               "type": "user",
             }
           }
@@ -12301,7 +12675,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
             "type": "listing",
           }
         }
-        customerDisplayName="customer1 display name"
+        customerDisplayName="customer display name"
         listingTitle="listing1 title"
         transaction={
           Object {
@@ -12379,11 +12753,11 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -12411,14 +12785,27 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
         }
       />
       <Component
-        customerDisplayName="customer1 display name"
+        authorDisplayName="provider display name"
+        customerDisplayName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         transaction={
@@ -12497,11 +12884,11 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -12529,7 +12916,19 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -12638,11 +13037,11 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -12670,7 +13069,19 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -12754,11 +13165,11 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -12786,7 +13197,19 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -12870,11 +13293,11 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -12902,7 +13325,19 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -12911,18 +13346,18 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user1@example.com",
+              "email": "provider@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user1 abbreviated name",
-                "displayName": "user1 display name",
-                "firstName": "user1 first name",
-                "lastName": "user1 last name",
+                "abbreviatedName": "provider abbreviated name",
+                "displayName": "provider display name",
+                "firstName": "provider first name",
+                "lastName": "provider last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user1",
+              "uuid": "provider",
             },
             "type": "currentUser",
           }
@@ -12947,11 +13382,11 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -12972,11 +13407,11 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -13122,11 +13557,11 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -13154,7 +13589,19 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -13238,11 +13685,11 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -13270,7 +13717,19 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -13286,6 +13745,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
     onManageDisableScrolling={[Function]}
     onSubmitReview={[Function]}
     reviewSent={false}
+    revieweeName="customer display name"
     sendReviewError={null}
     sendReviewInProgress={false}
   />
@@ -13322,9 +13782,15 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
           user={
             Object {
               "attributes": Object {
-                "profile": Object {},
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
               },
-              "id": null,
+              "id": UUID {
+                "uuid": "provider",
+              },
               "type": "user",
             }
           }
@@ -13355,7 +13821,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
             "type": "listing",
           }
         }
-        customerDisplayName="customer1 display name"
+        customerDisplayName="customer display name"
         listingTitle="listing1 title"
         transaction={
           Object {
@@ -13433,11 +13899,11 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -13465,14 +13931,27 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
         }
       />
       <Component
-        customerDisplayName="customer1 display name"
+        authorDisplayName="provider display name"
+        customerDisplayName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         transaction={
@@ -13551,11 +14030,11 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -13583,7 +14062,19 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -13692,11 +14183,11 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -13724,7 +14215,19 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -13808,11 +14311,11 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -13840,7 +14343,19 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -13924,11 +14439,11 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -13956,7 +14471,19 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -13965,18 +14492,18 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user1@example.com",
+              "email": "provider@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user1 abbreviated name",
-                "displayName": "user1 display name",
-                "firstName": "user1 first name",
-                "lastName": "user1 last name",
+                "abbreviatedName": "provider abbreviated name",
+                "displayName": "provider display name",
+                "firstName": "provider first name",
+                "lastName": "provider last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user1",
+              "uuid": "provider",
             },
             "type": "currentUser",
           }
@@ -14001,11 +14528,11 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -14026,11 +14553,11 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -14176,11 +14703,11 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -14208,7 +14735,19 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -14292,11 +14831,11 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -14324,7 +14863,19 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -14340,6 +14891,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
     onManageDisableScrolling={[Function]}
     onSubmitReview={[Function]}
     reviewSent={false}
+    revieweeName="customer display name"
     sendReviewError={null}
     sendReviewInProgress={false}
   />
@@ -14376,9 +14928,15 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
           user={
             Object {
               "attributes": Object {
-                "profile": Object {},
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
               },
-              "id": null,
+              "id": UUID {
+                "uuid": "provider",
+              },
               "type": "user",
             }
           }
@@ -14409,7 +14967,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
             "type": "listing",
           }
         }
-        customerDisplayName="customer1 display name"
+        customerDisplayName="customer display name"
         listingTitle="listing1 title"
         transaction={
           Object {
@@ -14487,11 +15045,11 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -14519,14 +15077,27 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
         }
       />
       <Component
-        customerDisplayName="customer1 display name"
+        authorDisplayName="provider display name"
+        customerDisplayName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         transaction={
@@ -14605,11 +15176,11 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -14637,7 +15208,19 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -14746,11 +15329,11 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -14778,7 +15361,19 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -14862,11 +15457,11 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -14894,7 +15489,19 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -14978,11 +15585,11 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                 "banned": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
-                  "displayName": "customer1 display name",
+                  "displayName": "customer display name",
                 },
               },
               "id": UUID {
-                "uuid": "customer1",
+                "uuid": "customer",
               },
               "type": "user",
             },
@@ -15010,7 +15617,19 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
               },
               "type": "listing",
             },
-            "provider": null,
+            "provider": Object {
+              "attributes": Object {
+                "banned": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "provider display name",
+                },
+              },
+              "id": UUID {
+                "uuid": "provider",
+              },
+              "type": "user",
+            },
             "reviews": Array [],
             "type": "transaction",
           }
@@ -15019,18 +15638,18 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
-              "email": "user1@example.com",
+              "email": "provider@example.com",
               "emailVerified": true,
               "profile": Object {
-                "abbreviatedName": "user1 abbreviated name",
-                "displayName": "user1 display name",
-                "firstName": "user1 first name",
-                "lastName": "user1 last name",
+                "abbreviatedName": "provider abbreviated name",
+                "displayName": "provider display name",
+                "firstName": "provider first name",
+                "lastName": "provider last name",
               },
               "stripeConnected": true,
             },
             "id": UUID {
-              "uuid": "user1",
+              "uuid": "provider",
             },
             "type": "currentUser",
           }
@@ -15055,11 +15674,11 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -15080,11 +15699,11 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "user2 display name",
+                    "displayName": "provider display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "user2",
+                  "uuid": "provider",
                 },
                 "type": "user",
               },
@@ -15230,11 +15849,11 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                     "banned": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
-                      "displayName": "customer1 display name",
+                      "displayName": "customer display name",
                     },
                   },
                   "id": UUID {
-                    "uuid": "customer1",
+                    "uuid": "customer",
                   },
                   "type": "user",
                 },
@@ -15262,7 +15881,19 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                   },
                   "type": "listing",
                 },
-                "provider": null,
+                "provider": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "provider display name",
+                    },
+                  },
+                  "id": UUID {
+                    "uuid": "provider",
+                  },
+                  "type": "user",
+                },
                 "reviews": Array [],
                 "type": "transaction",
               }
@@ -15346,11 +15977,11 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                   "banned": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
-                    "displayName": "customer1 display name",
+                    "displayName": "customer display name",
                   },
                 },
                 "id": UUID {
-                  "uuid": "customer1",
+                  "uuid": "customer",
                 },
                 "type": "user",
               },
@@ -15378,7 +16009,19 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                 },
                 "type": "listing",
               },
-              "provider": null,
+              "provider": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "provider display name",
+                  },
+                },
+                "id": UUID {
+                  "uuid": "provider",
+                },
+                "type": "user",
+              },
               "reviews": Array [],
               "type": "transaction",
             }
@@ -15394,6 +16037,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
     onManageDisableScrolling={[Function]}
     onSubmitReview={[Function]}
     reviewSent={false}
+    revieweeName="customer display name"
     sendReviewError={null}
     sendReviewInProgress={false}
   />

@@ -28,6 +28,8 @@ const noop = () => null;
 const { Money } = sdkTypes;
 
 describe('TransactionPanel - Sale', () => {
+  const providerId = 'provider';
+  const customerId = 'customer';
   const baseTxAttrs = {
     total: new Money(16500, 'USD'),
     commission: new Money(1000, 'USD'),
@@ -36,7 +38,8 @@ describe('TransactionPanel - Sale', () => {
       end: new Date(Date.UTC(2017, 5, 13)),
     }),
     listing: createListing('listing1'),
-    customer: createUser('customer1'),
+    customer: createUser(customerId),
+    provider: createUser(providerId),
     lastTransitionedAt: new Date(Date.UTC(2017, 5, 10)),
   };
 
@@ -87,13 +90,13 @@ describe('TransactionPanel - Sale', () => {
     onDeclineSale: noop,
     acceptInProgress: false,
     declineInProgress: false,
-    currentUser: createCurrentUser('user1'),
+    currentUser: createCurrentUser(providerId),
     totalMessages: 2,
     totalMessagePages: 1,
     oldestMessagePageFetched: 1,
     messages: [
-      createMessage('msg1', {}, { sender: createUser('user1') }),
-      createMessage('msg2', {}, { sender: createUser('user2') }),
+      createMessage('msg1', {}, { sender: createUser(customerId) }),
+      createMessage('msg2', {}, { sender: createUser(providerId) }),
     ],
     initialMessageFailed: false,
     fetchMessagesInProgress: false,
@@ -194,6 +197,8 @@ describe('TransactionPanel - Sale', () => {
 });
 
 describe('TransactionPanel - Order', () => {
+  const providerId = 'provider';
+  const customerId = 'customer';
   const baseTxAttrs = {
     total: new Money(16500, 'USD'),
     booking: createBooking('booking1', {
@@ -201,8 +206,8 @@ describe('TransactionPanel - Order', () => {
       end: new Date(Date.UTC(2017, 5, 13)),
     }),
     listing: createListing('listing1'),
-    provider: createUser('provider'),
-    customer: createUser('customer'),
+    provider: createUser(providerId),
+    customer: createUser(customerId),
   };
 
   const txEnquired = createTransaction({
@@ -249,13 +254,13 @@ describe('TransactionPanel - Order', () => {
 
   const panelBaseProps = {
     intl: fakeIntl,
-    currentUser: createCurrentUser('user2'),
+    currentUser: createCurrentUser(customerId),
     totalMessages: 2,
     totalMessagePages: 1,
     oldestMessagePageFetched: 1,
     messages: [
-      createMessage('msg1', {}, { sender: createUser('user1') }),
-      createMessage('msg2', {}, { sender: createUser('user2') }),
+      createMessage('msg1', {}, { sender: createUser(customerId) }),
+      createMessage('msg2', {}, { sender: createUser(providerId) }),
     ],
     initialMessageFailed: false,
     fetchMessagesInProgress: false,
@@ -341,8 +346,8 @@ describe('TransactionPanel - Order', () => {
         end: new Date(Date.UTC(2017, 5, 13)),
       }),
       listing: createListing('listing1'),
-      provider: createUser('provider'),
-      customer: createUser('customer'),
+      provider: createUser(providerId),
+      customer: createUser(customerId),
     });
     const props = {
       ...panelBaseProps,
