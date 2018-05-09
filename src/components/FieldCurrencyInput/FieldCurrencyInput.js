@@ -118,7 +118,10 @@ class CurrencyInputComponent extends Component {
   onInputBlur(event) {
     event.preventDefault();
     event.stopPropagation();
-    const { currencyConfig, input: { onBlur } } = this.props;
+    const {
+      currencyConfig,
+      input: { onBlur },
+    } = this.props;
     this.setState(prevState => {
       if (onBlur) {
         // If parent component has provided onBlur function, call it with current price.
@@ -134,7 +137,10 @@ class CurrencyInputComponent extends Component {
   onInputFocus(event) {
     event.preventDefault();
     event.stopPropagation();
-    const { currencyConfig, input: { onFocus } } = this.props;
+    const {
+      currencyConfig,
+      input: { onFocus },
+    } = this.props;
     this.setState(prevState => {
       if (onFocus) {
         // If parent component has provided onFocus function, call it with current price.
