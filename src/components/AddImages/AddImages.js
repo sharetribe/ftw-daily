@@ -9,7 +9,6 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SortableContainer } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { ImageFromFile, ResponsiveImage, IconSpinner } from '../../components';
 
@@ -76,21 +75,7 @@ ThumbnailWrapper.propTypes = {
   onRemoveImage: func.isRequired,
 };
 
-// Sorting is disabled temporarily.
-//
-// The issue with sorting is that in touch devices it makes
-// scrolling the page really hard. The image takes 100% of the width
-// of the device (minus margin) and thus the whole screen is filled
-// up with the sortable images. When the user tries to scroll by dragging
-// the finger on the device, it actually start to sort the images and
-// not scroll.
-//
-// TODO Think what to do with the scrolling issue when sorting is in use
-//
-const SortableImage = ThumbnailWrapper;
-
-// Create container where there are sortable images and passed children like "Add image" input etc.
-const SortableImages = SortableContainer(props => {
+const AddImages = props => {
   const {
     children,
     className,
@@ -104,7 +89,7 @@ const SortableImages = SortableContainer(props => {
     <div className={classes}>
       {images.map((image, index) => {
         return (
-          <SortableImage
+          <ThumbnailWrapper
             image={image}
             index={index}
             key={image.id.uuid || image.id}
@@ -117,13 +102,6 @@ const SortableImages = SortableContainer(props => {
       {children}
     </div>
   );
-});
-
-// Configure sortable container see. https://github.com/clauderic/react-sortable-hoc
-// Items can be sorted horizontally, vertically or in a grid.
-// axis="xy" means grid like sorting
-const AddImages = props => {
-  return <SortableImages axis="xy" {...props} />;
 };
 
 AddImages.defaultProps = { className: null, thumbnailClassName: null, images: [] };
@@ -133,7 +111,6 @@ AddImages.propTypes = {
   children: node.isRequired,
   className: string,
   thumbnailClassName: string,
-  onSortEnd: func.isRequired,
   savedImageAltText: string.isRequired,
   onRemoveImage: func.isRequired,
 };
