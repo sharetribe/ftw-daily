@@ -3,7 +3,6 @@ import { array, bool, func, object, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm, Field } from 'react-final-form';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
-import { arrayMove } from 'react-sortable-hoc';
 import { isEqual } from 'lodash';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
@@ -20,7 +19,6 @@ export class EditListingPhotosFormComponent extends Component {
     super(props);
     this.state = { imageUploadRequested: false };
     this.onImageUploadHandler = this.onImageUploadHandler.bind(this);
-    this.onSortEnd = this.onSortEnd.bind(this);
     this.submittedImages = [];
   }
 
@@ -36,11 +34,6 @@ export class EditListingPhotosFormComponent extends Component {
           this.setState({ imageUploadRequested: false });
         });
     }
-  }
-
-  onSortEnd({ oldIndex, newIndex }) {
-    const images = arrayMove(this.props.images, oldIndex, newIndex);
-    this.props.onUpdateImageOrder(images.map(i => i.id));
   }
 
   render() {
@@ -150,7 +143,6 @@ export class EditListingPhotosFormComponent extends Component {
               <AddImages
                 className={css.imagesField}
                 images={images}
-                onSortEnd={this.onSortEnd}
                 thumbnailClassName={css.thumbnail}
                 savedImageAltText={intl.formatMessage({
                   id: 'EditListingPhotosForm.savedImageAltText',

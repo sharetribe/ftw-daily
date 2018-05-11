@@ -59,7 +59,9 @@ const EditListingLocationPanel = props => {
         initialValues={initialSearchFormValues}
         onSubmit={values => {
           const { building = '', location } = values;
-          const { selectedPlace: { address, origin } } = location;
+          const {
+            selectedPlace: { address, origin },
+          } = location;
           const updateValues = {
             geolocation: origin,
             publicData: {

@@ -108,7 +108,12 @@ class TokenInputFieldComponent extends Component {
    * @param {Object} values - values from different input types
    */
   requestToken(values) {
-    const { country, currency, input: { onChange }, intl } = this.props;
+    const {
+      country,
+      currency,
+      input: { onChange },
+      intl,
+    } = this.props;
 
     // First we have to clear the current token value so the parent
     // form doesn't submit with an old value.

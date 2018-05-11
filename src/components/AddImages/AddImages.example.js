@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import React, { Component } from 'react';
 import { findIndex, uniqueId } from 'lodash';
-import { arrayMove } from 'react-sortable-hoc';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import AddImages from './AddImages';
 import css from './AddImages.example.css';
@@ -19,7 +18,6 @@ class AddImagesTest extends Component {
       images: [],
     };
     this.onChange = this.onChange.bind(this);
-    this.onSortEnd = this.onSortEnd.bind(this);
   }
 
   onChange(event) {
@@ -50,19 +48,11 @@ class AddImagesTest extends Component {
     }, 1000);
   }
 
-  onSortEnd({ oldIndex, newIndex }) {
-    const { images } = this.state;
-    this.setState({
-      images: arrayMove(images, oldIndex, newIndex),
-    });
-  }
-
   render() {
     return (
       <div>
         <AddImages
           images={this.state.images}
-          onSortEnd={this.onSortEnd}
           savedImageAltText="Saved image"
           onRemoveImage={imageId => console.log('remove image:', imageId)}
         >
