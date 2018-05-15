@@ -83,7 +83,7 @@ export const clearUpdatedForm = () => ({
   type: CLEAR_UPDATED_FORM,
 });
 
-// SDK method: images.uploadListingImage
+// SDK method: images.upload
 export const uploadImageRequest = params => ({ type: UPLOAD_IMAGE_REQUEST, payload: { params } });
 export const uploadImageSuccess = result => ({ type: UPLOAD_IMAGE_SUCCESS, payload: result.data });
 export const uploadImageError = error => ({
@@ -124,7 +124,7 @@ export function uploadImage(actionPayload) {
     };
 
     return sdk.images
-      .uploadProfileImage(bodyParams, queryParams)
+      .upload(bodyParams, queryParams)
       .then(resp => {
         const uploadedImage = resp.data.data;
         dispatch(uploadImageSuccess({ data: { id, uploadedImage } }));
