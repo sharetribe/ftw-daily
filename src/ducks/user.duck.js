@@ -388,7 +388,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
       dispatch(stripeAccountCreateError(e));
       const stripeMessage =
         e.apiErrors && e.apiErrors.length > 0 && e.apiErrors[0].meta
-          ? e.apiErrors[0].meta.stripe_message
+          ? e.apiErrors[0].meta.stripeMessage
           : null;
       log.error(err, 'create-stripe-account-failed', { stripeMessage });
       throw e;
