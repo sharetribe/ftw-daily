@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import { ensureCurrentUser } from '../../util/data';
 import { propTypes } from '../../util/types';
 import * as validators from '../../util/validators';
-import { isUploadProfileImageOverLimitError } from '../../util/errors';
+import { isUploadImageOverLimitError } from '../../util/errors';
 import { Form, Avatar, Button, ImageFromFile, IconSpinner, FieldTextInput } from '../../components';
 
 import css from './ProfileSettingsForm.css';
@@ -220,7 +220,7 @@ class ProfileSettingsFormComponent extends Component {
 
                     let error = null;
 
-                    if (isUploadProfileImageOverLimitError(uploadImageError)) {
+                    if (isUploadImageOverLimitError(uploadImageError)) {
                       error = (
                         <div className={css.error}>
                           <FormattedMessage id="ProfileSettingsForm.imageUploadFailedFileTooLarge" />
