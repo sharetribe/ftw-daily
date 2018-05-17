@@ -29,8 +29,8 @@ const pad = num => {
 };
 
 const parseNum = str => {
-  const num = parseInt(str, 10);
-  return isNaN(num) ? null : num;
+  const num = Number.parseInt(str, 10);
+  return Number.isNaN(num) ? null : num;
 };
 
 // Validate that the given date has the same info as the selected
@@ -54,7 +54,7 @@ const dateFromSelected = ({ day, month, year }) => {
   const yearNum = parseNum(year);
   if (dayNum !== null && monthNum !== null && yearNum !== null) {
     const d = new Date(Date.UTC(yearNum, monthNum - 1, dayNum));
-    return isValidDate(d, yearNum, monthNum, dayNum) ? d : null;
+    return isValidDate(d, yearNum, monthNum, dayNum) ? { year, month, day } : null;
   }
   return null;
 };
