@@ -1,6 +1,4 @@
-import { omitBy, isUndefined } from 'lodash';
 import { fetchCurrentUser, createStripeAccount } from '../../ducks/user.duck';
-import config from '../../config';
 
 // ================ Action types ================ //
 
@@ -53,49 +51,11 @@ export const savePayoutDetailsSuccess = () => ({
 // ================ Thunks ================ //
 
 export const savePayoutDetails = values => (dispatch, getState, sdk) => {
-  if (typeof window === 'undefined' || !window.Stripe) {
-    throw new Error('Stripe must be loaded for submitting PayoutPreferences');
-  }
-
-  const stripe = window.Stripe(config.stripe.publishableKey);
-
   dispatch(savePayoutDetailsRequest());
-  const {
-    firstName,
-    lastName,
-    birthDate,
-    country,
-    streetAddress,
-    postalCode,
-    city,
-    bankAccountToken,
-  } = values;
 
-  const address = {
-    city,
-    line1: streetAddress,
-    postal_code: postalCode,
-  };
-
-  // Params for Stripe SDK
-  const params = {
-    legal_entity: {
-      first_name: firstName,
-      last_name: lastName,
-      address: omitBy(address, isUndefined),
-      dob: birthDate,
-    },
-    tos_shown_and_accepted: true,
-  };
-
-  return stripe
-    .createToken('account', params)
-    .then(response => {
-      const accountToken = response.token.id;
-      return dispatch(createStripeAccount({ accountToken, bankAccountToken, country }));
-    })
+  return dispatch(createStripeAccount(values))
     .then(() => dispatch(savePayoutDetailsSuccess()))
-    .catch(e => dispatch(savePayoutDetailsError()));
+    .catch(() => dispatch(savePayoutDetailsError()));
 };
 
 export const loadData = () => (dispatch, getState, sdk) => {

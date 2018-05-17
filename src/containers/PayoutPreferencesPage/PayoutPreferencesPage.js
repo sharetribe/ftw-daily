@@ -77,9 +77,8 @@ export const PayoutPreferencesPageComponent = props => {
   }
 
   const handlePayoutDetailsSubmit = values => {
-    const { fname, lname, ...rest } = values;
-    const params = { firstName: fname, lastName: lname, ...rest };
-    onPayoutDetailsFormSubmit(params);
+    const { fname: firstName, lname: lastName, ...rest } = values;
+    onPayoutDetailsFormSubmit({ firstName, lastName, ...rest });
   };
 
   const showForm =
