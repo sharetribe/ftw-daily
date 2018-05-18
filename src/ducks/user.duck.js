@@ -1,3 +1,5 @@
+import { omitBy, isUndefined } from 'lodash';
+import config from '../config';
 import { denormalisedResponseEntities } from '../util/data';
 import { storableError } from '../util/errors';
 import { TRANSITION_REQUEST, TRANSITION_REQUEST_AFTER_ENQUIRY } from '../util/types';
@@ -370,12 +372,51 @@ export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
 };
 
 export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) => {
+  if (typeof window === 'undefined' || !window.Stripe) {
+    throw new Error('Stripe must be loaded for submitting PayoutPreferences');
+  }
+
+  const stripe = window.Stripe(config.stripe.publishableKey);
+
   dispatch(stripeAccountCreateRequest());
+
+  const {
+    firstName,
+    lastName,
+    birthDate,
+    country,
+    streetAddress,
+    postalCode,
+    city,
+    bankAccountToken,
+  } = payoutDetails;
+
+  const address = {
+    city,
+    line1: streetAddress,
+    postal_code: postalCode,
+  };
+
+  // Params for Stripe SDK
+  const params = {
+    legal_entity: {
+      first_name: firstName,
+      last_name: lastName,
+      address: omitBy(address, isUndefined),
+      dob: birthDate,
+      type: 'individual',
+    },
+    tos_shown_and_accepted: true,
+  };
 
   let accountResponse;
 
-  return sdk.currentUser
-    .createStripeAccount(payoutDetails)
+  return stripe
+    .createToken('account', params)
+    .then(response => {
+      const accountToken = response.token.id;
+      return sdk.currentUser.createStripeAccount({ accountToken, bankAccountToken, country });
+    })
     .then(response => {
       accountResponse = response;
       return dispatch(fetchCurrentUser());

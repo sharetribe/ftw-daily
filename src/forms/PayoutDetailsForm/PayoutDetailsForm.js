@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, object, string } from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import config from '../../config';
 import {
   Button,
+  ExternalLink,
   StripeBankAccountTokenInputField,
   FieldSelect,
   FieldBirthdayInput,
@@ -48,8 +49,8 @@ const PayoutDetailsFormComponent = props => (
       const {
         className,
         createStripeAccountError,
-        change,
         disabled,
+        form,
         handleSubmit,
         inProgress,
         intl,
@@ -172,6 +173,12 @@ const PayoutDetailsFormComponent = props => (
         );
       }
 
+      const stripeConnectedAccountTermsLink = (
+        <ExternalLink href="https://stripe.com/connect-account/legal" className={css.termsLink}>
+          <FormattedMessage id="PayoutDetailsForm.stripeConnectedAccountTermsLink" />
+        </ExternalLink>
+      );
+
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           <div className={css.sectionContainer}>
@@ -248,7 +255,7 @@ const PayoutDetailsFormComponent = props => (
                   label={streetAddressLabel}
                   placeholder={streetAddressPlaceholder}
                   validate={streetAddressRequired}
-                  onUnmount={() => change('streetAddress', undefined)}
+                  onUnmount={() => form.change('streetAddress', undefined)}
                 />
                 <div className={css.formRow}>
                   <FieldTextInput
@@ -261,7 +268,7 @@ const PayoutDetailsFormComponent = props => (
                     label={postalCodeLabel}
                     placeholder={postalCodePlaceholder}
                     validate={postalCodeRequired}
-                    onUnmount={() => change('postalCode', undefined)}
+                    onUnmount={() => form.change('postalCode', undefined)}
                   />
                   <FieldTextInput
                     id="city"
@@ -273,7 +280,7 @@ const PayoutDetailsFormComponent = props => (
                     label={cityLabel}
                     placeholder={cityPlaceholder}
                     validate={cityRequired}
-                    onUnmount={() => change('city', undefined)}
+                    onUnmount={() => form.change('city', undefined)}
                   />
                 </div>
               </div>
@@ -295,6 +302,12 @@ const PayoutDetailsFormComponent = props => (
             </div>
           ) : null}
           {error}
+          <p className={css.termsText}>
+            <FormattedMessage
+              id="PayoutDetailsForm.stripeToSText"
+              values={{ stripeConnectedAccountTermsLink }}
+            />
+          </p>
           <Button
             className={css.submitButton}
             type="submit"
@@ -323,8 +336,6 @@ PayoutDetailsFormComponent.defaultProps = {
   ready: false,
   submitButtonText: null,
 };
-
-const { bool, object, string } = PropTypes;
 
 PayoutDetailsFormComponent.propTypes = {
   className: string,

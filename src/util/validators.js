@@ -114,10 +114,26 @@ export const moneySubUnitAmountAtLeast = (message, minValue) => value => {
   return value instanceof Money && value.amount >= minValue ? VALID : message;
 };
 
+const parseNum = str => {
+  const num = Number.parseInt(str, 10);
+  return Number.isNaN(num) ? null : num;
+};
+
 export const ageAtLeast = (message, minYears) => value => {
-  const now = moment();
-  const ageInYears = now.diff(moment(value), 'years', true);
-  return value && value instanceof Date && ageInYears >= minYears ? VALID : message;
+  const { year, month, day } = value;
+  const dayNum = parseNum(day);
+  const monthNum = parseNum(month);
+  const yearNum = parseNum(year);
+
+  // day, month, and year needs to be numbers
+  if (dayNum !== null && monthNum !== null && yearNum !== null) {
+    const now = moment();
+    const age = new Date(yearNum, monthNum - 1, dayNum);
+    const ageInYears = now.diff(moment(age), 'years', true);
+
+    return age && age instanceof Date && ageInYears >= minYears ? VALID : message;
+  }
+  return message;
 };
 
 export const composeValidators = (...validators) => value =>

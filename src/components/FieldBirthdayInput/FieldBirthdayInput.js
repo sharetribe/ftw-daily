@@ -29,42 +29,38 @@ const pad = num => {
 };
 
 const parseNum = str => {
-  const num = parseInt(str, 10);
-  return isNaN(num) ? null : num;
+  const num = Number.parseInt(str, 10);
+  return Number.isNaN(num) ? null : num;
 };
 
 // Validate that the given date has the same info as the selected
 // value, i.e. it has not e.g. rolled over to the next month if the
 // selected month doesn't have as many days as selected.
-//
-// Note the UTC handling, we want to deal with UTC date info even
-// though the date object itself is in the user's local timezone.
 const isValidDate = (date, year, month, day) => {
-  const yearsMatch = date.getUTCFullYear() === year;
-  const monthsMatch = date.getUTCMonth() + 1 === month;
-  const daysMatch = date.getUTCDate() === day;
+  const yearsMatch = date.getFullYear() === year;
+  const monthsMatch = date.getMonth() + 1 === month;
+  const daysMatch = date.getDate() === day;
   return yearsMatch && monthsMatch && daysMatch;
 };
 
-// Create a UTC Date from the selected values. Return null if the date
+// Create a Date from the selected values. Return null if the date
 // is invalid.
 const dateFromSelected = ({ day, month, year }) => {
   const dayNum = parseNum(day);
   const monthNum = parseNum(month);
   const yearNum = parseNum(year);
   if (dayNum !== null && monthNum !== null && yearNum !== null) {
-    const d = new Date(Date.UTC(yearNum, monthNum - 1, dayNum));
-    return isValidDate(d, yearNum, monthNum, dayNum) ? d : null;
+    const d = new Date(yearNum, monthNum - 1, dayNum);
+    return isValidDate(d, yearNum, monthNum, dayNum) ? { year, month, day } : null;
   }
   return null;
 };
 
-// Get the UTC year/month/day info from the date object in local
-// timezone.
+// Get the year/month/day info from the date object in local timezone.
 const selectedFromDate = date => ({
-  day: date.getUTCDate(),
-  month: date.getUTCMonth() + 1,
-  year: date.getUTCFullYear(),
+  day: date.getDate(),
+  month: date.getMonth() + 1,
+  year: date.getFullYear(),
 });
 
 // Always show 31 days per month

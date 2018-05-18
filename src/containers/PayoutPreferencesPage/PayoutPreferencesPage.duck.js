@@ -1,4 +1,3 @@
-import { omitBy, isUndefined } from 'lodash';
 import { fetchCurrentUser, createStripeAccount } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
@@ -53,30 +52,8 @@ export const savePayoutDetailsSuccess = () => ({
 
 export const savePayoutDetails = values => (dispatch, getState, sdk) => {
   dispatch(savePayoutDetailsRequest());
-  const {
-    firstName,
-    lastName,
-    birthDate,
-    country,
-    streetAddress,
-    postalCode,
-    city,
-    bankAccountToken,
-  } = values;
-  const address = {
-    country,
-    city,
-    addressLine: streetAddress,
-    postalCode,
-  };
-  const params = {
-    firstName,
-    lastName,
-    birthDate,
-    bankAccountToken,
-    address: omitBy(address, isUndefined),
-  };
-  return dispatch(createStripeAccount(params))
+
+  return dispatch(createStripeAccount(values))
     .then(() => dispatch(savePayoutDetailsSuccess()))
     .catch(() => dispatch(savePayoutDetailsError()));
 };

@@ -67,3 +67,22 @@
 .error {
   @apply --marketplaceModalErrorStyles;
 }
+
+.termsText {
+  @apply --marketplaceModalHelperText;
+  margin-bottom: 12px;
+  text-align: center;
+
+  @media (--viewportMedium) {
+    margin-bottom: 16px;
+  }
+}
+
+.termsLink {
+  @apply --marketplaceModalHelperLink;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

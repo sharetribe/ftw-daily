@@ -3,7 +3,6 @@ import { array, bool, func, number, object, oneOf, shape, string } from 'prop-ty
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { omitBy, isUndefined } from 'lodash';
 import { withViewport } from '../../util/contextHelpers';
 import { ensureListing } from '../../util/data';
 import { PayoutDetailsForm } from '../../forms';
@@ -144,31 +143,9 @@ class EditListingWizard extends Component {
   }
 
   handlePayoutSubmit(values) {
-    const {
-      fname: firstName,
-      lname: lastName,
-      birthDate,
-      country,
-      streetAddress,
-      postalCode,
-      city,
-      bankAccountToken,
-    } = values;
-    const address = {
-      country,
-      city,
-      addressLine: streetAddress,
-      postalCode,
-    };
-    const params = {
-      firstName,
-      lastName,
-      birthDate,
-      bankAccountToken,
-      address: omitBy(address, isUndefined),
-    };
+    const { fname: firstName, lname: lastName, ...rest } = values;
     this.props
-      .onPayoutDetailsSubmit(params)
+      .onPayoutDetailsSubmit({ firstName, lastName, ...rest })
       .then(() => {
         this.setState({ showPayoutDetails: false });
         this.props.onManageDisableScrolling('EditListingWizard.payoutModal', false);
