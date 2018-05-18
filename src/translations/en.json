@@ -445,6 +445,8 @@
   "PayoutDetailsForm.streetAddressLabel": "Street address",
   "PayoutDetailsForm.streetAddressPlaceholder": "Enter your street address…",
   "PayoutDetailsForm.streetAddressRequired": "This field is required",
+  "PayoutDetailsForm.stripeConnectedAccountTermsLink": "Stripe Connected Account Agreement",
+  "PayoutDetailsForm.stripeToSText": "By saving details, you agree to the {stripeConnectedAccountTermsLink}",
   "PayoutDetailsForm.submitButtonText": "Save details & publish listing",
   "PayoutDetailsForm.title": "One more thing: payout preferences",
   "PayoutPreferencesPage.contactDetailsTabTitle": "Contact details",

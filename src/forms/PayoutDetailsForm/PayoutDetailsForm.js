@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, object, string } from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import config from '../../config';
 import {
   Button,
+  ExternalLink,
   StripeBankAccountTokenInputField,
   FieldSelect,
   FieldBirthdayInput,
@@ -172,6 +173,12 @@ const PayoutDetailsFormComponent = props => (
         );
       }
 
+      const stripeConnectedAccountTermsLink = (
+        <ExternalLink href="https://stripe.com/connect-account/legal" className={css.termsLink}>
+          <FormattedMessage id="PayoutDetailsForm.stripeConnectedAccountTermsLink" />
+        </ExternalLink>
+      );
+
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           <div className={css.sectionContainer}>
@@ -295,6 +302,12 @@ const PayoutDetailsFormComponent = props => (
             </div>
           ) : null}
           {error}
+          <p className={css.termsText}>
+            <FormattedMessage
+              id="PayoutDetailsForm.stripeToSText"
+              values={{ stripeConnectedAccountTermsLink }}
+            />
+          </p>
           <Button
             className={css.submitButton}
             type="submit"
@@ -323,8 +336,6 @@ PayoutDetailsFormComponent.defaultProps = {
   ready: false,
   submitButtonText: null,
 };
-
-const { bool, object, string } = PropTypes;
 
 PayoutDetailsFormComponent.propTypes = {
   className: string,
