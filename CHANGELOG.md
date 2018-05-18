@@ -12,7 +12,7 @@ way to update this template, but currently, we follow a pattern:
 
 ----
 
-## Upcoming version
+## v0.3.0
 
 * Remove custom touched handling from `FieldCheckboxGroup` as it has has become obsolete now that
   Final Form is replacing Redux Form. [#837](https://github.com/sharetribe/flex-template-web/pull/837)
