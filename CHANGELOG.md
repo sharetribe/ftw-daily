@@ -15,7 +15,9 @@ way to update this template, but currently, we follow a pattern:
 ## Upcoming version
 
 * Remove custom touched handling from `FieldCheckboxGroup` as it has has become obsolete now that
-  Final Form is replacing Redux Form. [#837](https://github.com/sharetribe/flex-template-web/pull/837) 
+  Final Form is replacing Redux Form. [#837](https://github.com/sharetribe/flex-template-web/pull/837)
+* Create Stripe account directly instead of passing payout details to Flex API (deprecated way).
+  [#836](https://github.com/sharetribe/flex-template-web/pull/836)
 
 ## v0.2.0
 
