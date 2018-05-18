@@ -1,4 +1,5 @@
-import { reverse, sortBy } from 'lodash';
+import reverse from 'lodash/reverse';
+import sortBy from 'lodash/sortBy';
 import { storableError } from '../../util/errors';
 import { parse } from '../../util/urlHelpers';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';

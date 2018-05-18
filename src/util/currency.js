@@ -1,4 +1,5 @@
-import { has, trimEnd } from 'lodash';
+import has from 'lodash/has';
+import trimEnd from 'lodash/trimEnd';
 import Decimal from 'decimal.js';
 import { types as sdkTypes } from './sdkLoader';
 import { subUnitDivisors } from './currencyConfig';

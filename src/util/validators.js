@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { types as sdkTypes } from './sdkLoader';
-import { toPairs } from 'lodash';
+import toPairs from 'lodash/toPairs';
 
 const { LatLng, Money } = sdkTypes;
 

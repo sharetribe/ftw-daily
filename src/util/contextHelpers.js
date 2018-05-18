@@ -1,6 +1,6 @@
 import React, { Component as ReactComponent } from 'react';
 import PropTypes from 'prop-types';
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 
 /**
  * A higher order component (HOC) to take the togglePageClassNames function from

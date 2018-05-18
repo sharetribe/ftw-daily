@@ -1,4 +1,7 @@
-import { omit, omitBy, isUndefined, mergeWith } from 'lodash';
+import omit from 'lodash/omit';
+import omitBy from 'lodash/omitBy';
+import isUndefined from 'lodash/isUndefined';
+import mergeWith from 'lodash/mergeWith';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';

@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import config from '../../config';
 
 import {

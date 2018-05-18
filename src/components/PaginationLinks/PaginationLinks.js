@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { range } from 'lodash';
+import range from 'lodash/range';
 import { NamedLink } from '../../components';
 import { stringify } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';

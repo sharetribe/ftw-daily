@@ -1,4 +1,4 @@
-import { find } from 'lodash';
+import find from 'lodash/find';
 import { matchPath } from 'react-router-dom';
 import pathToRegexp from 'path-to-regexp';
 import { stringify } from './urlHelpers';

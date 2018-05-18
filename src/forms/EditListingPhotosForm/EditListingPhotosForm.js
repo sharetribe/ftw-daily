@@ -3,7 +3,7 @@ import { array, bool, func, object, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm, Field } from 'react-final-form';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { nonEmptyArray, composeValidators } from '../../util/validators';

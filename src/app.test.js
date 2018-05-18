@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
-import { forEach } from 'lodash';
+import forEach from 'lodash/forEach';
 import { ClientApp, ServerApp } from './app';
 import configureStore from './store';
 

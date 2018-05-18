@@ -7,7 +7,7 @@ import { func, instanceOf, object, node, string, bool } from 'prop-types';
 import { Field } from 'react-final-form';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { range } from 'lodash';
+import range from 'lodash/range';
 import { ValidationError } from '../../components';
 
 import css from './FieldBirthdayInput.css';

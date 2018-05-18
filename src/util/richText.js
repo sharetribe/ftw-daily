@@ -1,5 +1,7 @@
 import React from 'react';
-import { chain } from 'lodash';
+import flow from 'lodash/flow';
+import flatMap from 'lodash/flatMap';
+import map from 'lodash/map';
 import { ExternalLink } from '../components';
 
 /**
@@ -125,11 +127,12 @@ export const richText = (text, options) => {
   const nonWhiteSpaceSequence = /([^\s]+)/gi;
 
   return text.split(nonWhiteSpaceSequence).reduce((acc, nextChild, i) => {
-    const parts = chain([nextChild])
-      .flatMap(w => linkifyOrWrapLinkSplit(w, i, { linkify, linkClass: linkOrLongWordClass }))
-      .flatMap(w => zwspAroundSpecialCharsSplit(w, '/,'))
-      .map((w, j) => wrapLongWord(w, `${i}${j}`, { longWordMinLength, longWordClass }))
-      .value();
+    const parts = flow([
+      v =>
+        flatMap(v, w => linkifyOrWrapLinkSplit(w, i, { linkify, linkClass: linkOrLongWordClass })),
+      v => flatMap(v, w => zwspAroundSpecialCharsSplit(w, '/,')),
+      v => map(v, (w, j) => wrapLongWord(w, `${i}${j}`, { longWordMinLength, longWordClass })),
+    ])([nextChild]);
     return acc.concat(parts);
   }, []);
 };

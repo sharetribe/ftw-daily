@@ -1,4 +1,4 @@
-import { pick } from 'lodash';
+import pick from 'lodash/pick';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
 import {
