@@ -404,6 +404,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
       last_name: lastName,
       address: omitBy(address, isUndefined),
       dob: birthDate,
+      type: 'individual',
     },
     tos_shown_and_accepted: true,
   };
