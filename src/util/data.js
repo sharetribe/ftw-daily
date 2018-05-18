@@ -1,4 +1,6 @@
-import { isArray, reduce, toPairs } from 'lodash';
+import isArray from 'lodash/isArray';
+import reduce from 'lodash/reduce';
+import toPairs from 'lodash/toPairs';
 
 /**
  * Combine the given relationships objects

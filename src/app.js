@@ -9,7 +9,7 @@ import 'react-dates/initialize';
 import Helmet from 'react-helmet';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { mapValues } from 'lodash';
+import mapValues from 'lodash/mapValues';
 import moment from 'moment';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import configureStore from './store';

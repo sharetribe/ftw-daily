@@ -1,4 +1,4 @@
-import { pick } from 'lodash';
+import pick from 'lodash/pick';
 import config from '../../config';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';

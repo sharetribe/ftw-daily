@@ -1,4 +1,4 @@
-import { memoize } from 'lodash';
+import memoize from 'lodash/memoize';
 import { types as sdkTypes } from './sdkLoader';
 import config from '../config';
 

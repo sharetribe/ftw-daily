@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';

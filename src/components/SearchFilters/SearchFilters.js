@@ -4,7 +4,7 @@ import { object, string, bool, number, func, shape } from 'prop-types';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 
 import { SelectSingleFilter, SelectMultipleFilter } from '../../components';
 import routeConfiguration from '../../routeConfiguration';

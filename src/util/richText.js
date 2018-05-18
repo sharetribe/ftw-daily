@@ -1,5 +1,5 @@
 import React from 'react';
-import { chain } from 'lodash';
+import chain from 'lodash/chain';
 import { ExternalLink } from '../components';
 
 /**

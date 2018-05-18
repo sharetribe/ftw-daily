@@ -5,7 +5,7 @@
  * e.g. tab is open. (Session Store is not related to session cookies.)
  */
 import moment from 'moment';
-import { reduce } from 'lodash';
+import reduce from 'lodash/reduce';
 import { types as sdkTypes } from '../../util/sdkLoader';
 
 const { UUID, Money } = sdkTypes;

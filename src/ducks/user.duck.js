@@ -1,4 +1,5 @@
-import { omitBy, isUndefined } from 'lodash';
+import omitBy from 'lodash/omitBy';
+import isUndefined from 'lodash/isUndefined';
 import config from '../config';
 import { denormalisedResponseEntities } from '../util/data';
 import { storableError } from '../util/errors';

@@ -1,4 +1,4 @@
-import { unionWith } from 'lodash';
+import unionWith from 'lodash/unionWith';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 

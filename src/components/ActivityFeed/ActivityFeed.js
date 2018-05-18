@@ -1,7 +1,7 @@
 import React from 'react';
 import { string, arrayOf, bool, func, number } from 'prop-types';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
-import { dropWhile } from 'lodash';
+import dropWhile from 'lodash/dropWhile';
 import classNames from 'classnames';
 import { Avatar, InlineTextButton, ReviewRating } from '../../components';
 import { formatDate } from '../../util/dates';

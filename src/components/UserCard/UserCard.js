@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { string, func, oneOfType } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { truncate } from 'lodash';
+import truncate from 'lodash/truncate';
 import classNames from 'classnames';
 import { AvatarLarge, NamedLink, InlineTextButton } from '../../components';
 import { ensureUser, ensureCurrentUser } from '../../util/data';

@@ -1,4 +1,4 @@
-import { intersection } from 'lodash';
+import intersection from 'lodash/intersection';
 import config from '../../config';
 import { createResourceLocatorString } from '../../util/routes';
 import { createSlug } from '../../util/urlHelpers';
