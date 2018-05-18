@@ -12,6 +12,11 @@ way to update this template, but currently, we follow a pattern:
 
 ----
 
+## Upcoming version
+
+* Change lodash import syntax to reduce bundle size (-15.14 KB)
+  [839](https://github.com/sharetribe/flex-template-web/pull/839)
+
 ## v0.3.0
 
 * Remove custom touched handling from `FieldCheckboxGroup` as it has has become obsolete now that
