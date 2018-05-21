@@ -12,7 +12,7 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## Upcoming version
+## v0.3.1
 
 * Change lodash import syntax to reduce bundle size (-15.14 KB)
   [#839](https://github.com/sharetribe/flex-template-web/pull/839)
