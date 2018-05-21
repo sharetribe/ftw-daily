@@ -19,6 +19,8 @@ way to update this template, but currently, we follow a pattern:
 * [fix] Use https instead of git to access SDK repo for Heroku build (now that the repo is public).
   TODO: create SDK releases instead of using direct refs to single commit.
   [#841](https://github.com/sharetribe/flex-template-web/pull/841)
+* [fix] Typo fix for background-color
+  [#842](https://github.com/sharetribe/flex-template-web/pull/842)
 
 ## v0.3.0
 

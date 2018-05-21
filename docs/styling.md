@@ -229,7 +229,7 @@ Style definitions of the (`<Circle />`) child component:
 
 ```css
 .root {
-  backgroundcolor: tomato;
+  background-color: tomato;
   border-radius: 50%;
 }
 ```
