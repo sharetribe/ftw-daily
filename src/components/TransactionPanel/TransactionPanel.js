@@ -73,9 +73,9 @@ export class TransactionPanelComponent extends Component {
     this.setState({ sendMessageFormFocused: false });
   }
 
-  onMessageSubmit(values) {
+  onMessageSubmit(values, form) {
     const message = values.message ? values.message.trim() : null;
-    const { transaction, onResetForm, onSendMessage } = this.props;
+    const { transaction, onSendMessage } = this.props;
     const ensuredTransaction = ensureTransaction(transaction);
 
     if (!message) {
@@ -83,7 +83,7 @@ export class TransactionPanelComponent extends Component {
     }
     onSendMessage(ensuredTransaction.id, message)
       .then(messageId => {
-        onResetForm(this.sendMessageFormName);
+        form.reset();
         this.scrollToMessage(messageId);
       })
       .catch(e => {
@@ -387,7 +387,6 @@ TransactionPanelComponent.propTypes = {
   onShowMoreMessages: func.isRequired,
   onSendMessage: func.isRequired,
   onSendReview: func.isRequired,
-  onResetForm: func.isRequired,
 
   // Sale related props
   onAcceptSale: func.isRequired,

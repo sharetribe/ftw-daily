@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { string, bool, func } from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
-import { Form, TextInputField, SecondaryButton } from '../../components';
+import { Form, FieldTextInput, SecondaryButton } from '../../components';
 import { propTypes } from '../../util/types';
 
 import css from './SendMessageForm.css';
@@ -36,10 +36,12 @@ class SendMessageFormComponent extends Component {
     this.handleBlur = this.handleBlur.bind(this);
     this.blurTimeoutId = null;
   }
+
   handleFocus() {
     this.props.onFocus();
     window.clearTimeout(this.blurTimeoutId);
   }
+
   handleBlur() {
     // We only trigger a blur if another focus event doesn't come
     // within a timeout. This enables keeping the focus synced when
@@ -49,53 +51,60 @@ class SendMessageFormComponent extends Component {
       this.props.onBlur();
     }, BLUR_TIMEOUT_MS);
   }
+
   render() {
-    const {
-      rootClassName,
-      className,
-      messagePlaceholder,
-      form,
-      handleSubmit,
-      inProgress,
-      sendMessageError,
-      invalid,
-    } = this.props;
-
-    const classes = classNames(rootClassName || css.root, className);
-    const submitInProgress = inProgress;
-    const submitDisabled = invalid || submitInProgress;
-
     return (
-      <Form className={classes} onSubmit={handleSubmit}>
-        <TextInputField
-          inputRootClass={css.textarea}
-          type="textarea"
-          id={`${form}.message`}
-          name="message"
-          placeholder={messagePlaceholder}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-        />
-        <div className={css.submitContainer}>
-          <div className={css.errorContainer}>
-            {sendMessageError ? (
-              <p className={css.error}>
-                <FormattedMessage id="SendMessageForm.sendFailed" />
-              </p>
-            ) : null}
-          </div>
-          <SecondaryButton
-            className={css.submitButton}
-            inProgress={submitInProgress}
-            disabled={submitDisabled}
-            onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
-          >
-            <IconSendMessage />
-            <FormattedMessage id="SendMessageForm.sendMessage" />
-          </SecondaryButton>
-        </div>
-      </Form>
+      <FinalForm
+        {...this.props}
+        render={fieldRenderProps => {
+          const {
+            rootClassName,
+            className,
+            messagePlaceholder,
+            handleSubmit,
+            inProgress,
+            sendMessageError,
+            invalid,
+            form,
+          } = fieldRenderProps;
+
+          const classes = classNames(rootClassName || css.root, className);
+          const submitInProgress = inProgress;
+          const submitDisabled = invalid || submitInProgress;
+          return (
+            <Form className={classes} onSubmit={values => handleSubmit(values, form)}>
+              <FieldTextInput
+                inputRootClass={css.textarea}
+                type="textarea"
+                id="message"
+                name="message"
+                placeholder={messagePlaceholder}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
+              />
+              <div className={css.submitContainer}>
+                <div className={css.errorContainer}>
+                  {sendMessageError ? (
+                    <p className={css.error}>
+                      <FormattedMessage id="SendMessageForm.sendFailed" />
+                    </p>
+                  ) : null}
+                </div>
+                <SecondaryButton
+                  className={css.submitButton}
+                  inProgress={submitInProgress}
+                  disabled={submitDisabled}
+                  onFocus={this.handleFocus}
+                  onBlur={this.handleBlur}
+                >
+                  <IconSendMessage />
+                  <FormattedMessage id="SendMessageForm.sendMessage" />
+                </SecondaryButton>
+              </div>
+            </Form>
+          );
+        }}
+      />
     );
   }
 }
@@ -111,12 +120,12 @@ SendMessageFormComponent.defaultProps = {
 };
 
 SendMessageFormComponent.propTypes = {
-  ...formPropTypes,
   rootClassName: string,
   className: string,
   inProgress: bool,
 
   messagePlaceholder: string,
+  onSubmit: func.isRequired,
   onFocus: func,
   onBlur: func,
   sendMessageError: propTypes.error,
@@ -125,11 +134,7 @@ SendMessageFormComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const defaultFormName = 'SendMessageForm';
-
-const SendMessageForm = compose(reduxForm({ form: defaultFormName }), injectIntl)(
-  SendMessageFormComponent
-);
+const SendMessageForm = compose(injectIntl)(SendMessageFormComponent);
 
 SendMessageForm.displayName = 'SendMessageForm';
 

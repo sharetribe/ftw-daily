@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
-import { reset as resetForm } from 'redux-form';
 import { propTypes } from '../../util/types';
 import { ensureListing, ensureTransaction } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
@@ -48,7 +47,6 @@ export const TransactionPageComponent = props => {
     intl,
     messages,
     onManageDisableScrolling,
-    onResetForm,
     onSendMessage,
     onSendReview,
     onShowMoreMessages,
@@ -153,7 +151,6 @@ export const TransactionPageComponent = props => {
       onShowMoreMessages={onShowMoreMessages}
       onSendMessage={onSendMessage}
       onSendReview={onSendReview}
-      onResetForm={onResetForm}
       transactionRole={transactionRole}
       onAcceptSale={onAcceptSale}
       onDeclineSale={onDeclineSale}
@@ -221,7 +218,6 @@ TransactionPageComponent.propTypes = {
   sendMessageError: propTypes.error,
   onShowMoreMessages: func.isRequired,
   onSendMessage: func.isRequired,
-  onResetForm: func.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
@@ -279,7 +275,6 @@ const mapDispatchToProps = dispatch => {
     onDeclineSale: transactionId => dispatch(declineSale(transactionId)),
     onShowMoreMessages: txId => dispatch(fetchMoreMessages(txId)),
     onSendMessage: (txId, message) => dispatch(sendMessage(txId, message)),
-    onResetForm: formName => dispatch(resetForm(formName)),
     onManageDisableScrolling: (componentId, disableScrolling) =>
       dispatch(manageDisableScrolling(componentId, disableScrolling)),
     onSendReview: (role, tx, reviewRating, reviewContent) =>
