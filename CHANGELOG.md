@@ -10,17 +10,21 @@ way to update this template, but currently, we follow a pattern:
   cause conflicts.
 * Patch (v0.0.**X**): Bug fixes and small changes to components.
 
-----
+---
 
 ## Upcoming version
 
 * Change lodash import syntax to reduce bundle size (-15.14 KB)
-  [839](https://github.com/sharetribe/flex-template-web/pull/839)
+  [#839](https://github.com/sharetribe/flex-template-web/pull/839)
+* [fix] Use https instead of git to access SDK repo for Heroku build (now that the repo is public).
+  TODO: create SDK releases instead of using direct refs to single commit.
+  [#841](https://github.com/sharetribe/flex-template-web/pull/841)
 
 ## v0.3.0
 
 * Remove custom touched handling from `FieldCheckboxGroup` as it has has become obsolete now that
-  Final Form is replacing Redux Form. [#837](https://github.com/sharetribe/flex-template-web/pull/837)
+  Final Form is replacing Redux Form.
+  [#837](https://github.com/sharetribe/flex-template-web/pull/837)
 * Create Stripe account directly instead of passing payout details to Flex API (deprecated way).
   [#836](https://github.com/sharetribe/flex-template-web/pull/836)
 
