@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { any, arrayOf, bool, func, number, object, shape, string, oneOfType } from 'prop-types';
 import { Field } from 'react-final-form';
 import debounce from 'lodash/debounce';
 import classNames from 'classnames';
@@ -92,8 +92,6 @@ const LocationPredictionsList = props => {
     </div>
   );
 };
-
-const { any, arrayOf, bool, func, number, object, shape, string } = PropTypes;
 
 LocationPredictionsList.defaultProps = {
   rootClassName: null,
@@ -475,11 +473,14 @@ LocationAutocompleteInput.propTypes = {
   placeholder: string,
   input: shape({
     name: string.isRequired,
-    value: shape({
-      search: string,
-      predictions: any,
-      selectedPlace: propTypes.place,
-    }),
+    value: oneOfType([
+      shape({
+        search: string,
+        predictions: any,
+        selectedPlace: propTypes.place,
+      }),
+      string,
+    ]),
     onChange: func.isRequired,
     onFocus: func.isRequired,
     onBlur: func.isRequired,
