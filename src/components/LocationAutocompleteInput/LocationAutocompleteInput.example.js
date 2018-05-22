@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
-import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Form as FinalForm, Field } from 'react-final-form';
 import { propTypes } from '../../util/types';
 import { Button } from '../../components';
 import LocationAutocompleteInput from './LocationAutocompleteInput';
 
-const FormComponent = props => {
-  const { handleSubmit, pristine, submitting } = props;
+const Form = props => {
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="location">Select location:</label>
-      <Field name="location" format={null} component={LocationAutocompleteInput} />
-      <Button type="submit" style={{ marginTop: '24px' }} disabled={pristine || submitting}>
-        Submit
-      </Button>
-    </form>
+    <FinalForm
+      {...props}
+      render={({ handleSubmit, pristine }) => {
+        return (
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="location">Select location:</label>
+            <Field name="location" format={null} component={LocationAutocompleteInput} />
+            <Button type="submit" style={{ marginTop: '24px' }} disabled={pristine}>
+              Submit
+            </Button>
+          </form>
+        );
+      }}
+    />
   );
 };
-
-FormComponent.propTypes = formPropTypes;
-
-const defaultFormName = 'Styleguide.LocationAutocompleteInput.Form';
-
-const Form = reduxForm({
-  form: defaultFormName,
-})(FormComponent);
 
 const PlaceInfo = props => {
   const { place } = props;
