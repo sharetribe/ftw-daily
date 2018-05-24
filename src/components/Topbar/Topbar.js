@@ -6,18 +6,15 @@ import pickBy from 'lodash/pickBy';
 import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
-import { ensureCurrentUser } from '../../util/data';
 import { withViewport } from '../../util/contextHelpers';
 import { parse, stringify } from '../../util/urlHelpers';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import { propTypes } from '../../util/types';
-import { isTooManyEmailVerificationRequestsError } from '../../util/errors';
 import {
   Button,
-  IconEmailAttention,
-  InlineTextButton,
   Logo,
   Modal,
+  ModalMissingInformation,
   NamedLink,
   TopbarDesktop,
   TopbarMobileMenu,
@@ -29,14 +26,6 @@ import SearchIcon from './SearchIcon';
 import css from './Topbar.css';
 
 const MAX_MOBILE_SCREEN_WIDTH = 768;
-const MISSING_INFORMATION_MODAL_WHITELIST = [
-  'LoginPage',
-  'SignupPage',
-  'ContactDetailsPage',
-  'EmailVerificationPage',
-  'PasswordResetPage',
-  'PayoutPreferencesPage',
-];
 
 const redirectToURLWithModalState = (props, modalStateParam) => {
   const { history, location } = props;
@@ -78,133 +67,15 @@ GenericError.propTypes = {
   show: bool.isRequired,
 };
 
-const ReminderModalContent = props => {
-  const {
-    currentUser,
-    email,
-    resendErrorMessage,
-    sendVerificationEmailInProgress,
-    resendEmailLink,
-    fixEmailLink,
-  } = props;
-  const emailVerificationMissingContent = (
-    <div>
-      <IconEmailAttention className={css.modalIcon} />
-      <p className={css.modalTitle}>
-        <FormattedMessage id="Topbar.verifyEmailTitle" />
-      </p>
-      <p className={css.modalMessage}>
-        <FormattedMessage id="Topbar.verifyEmailText" />
-      </p>
-      <p className={css.modalMessage}>
-        <FormattedMessage id="Topbar.checkInbox" values={{ email }} />
-      </p>
-      {resendErrorMessage}
-
-      <div className={css.bottomWrapper}>
-        <p className={css.helperText}>
-          {sendVerificationEmailInProgress ? (
-            <FormattedMessage id="Topbar.sendingEmail" />
-          ) : (
-            <FormattedMessage id="Topbar.resendEmail" values={{ resendEmailLink }} />
-          )}
-        </p>
-        <p className={css.helperText}>
-          <FormattedMessage id="Topbar.fixEmail" values={{ fixEmailLink }} />
-        </p>
-      </div>
-    </div>
-  );
-
-  const stripeAccountMissingContent = (
-    <div>
-      <p className={css.modalTitle}>
-        <FormattedMessage id="Topbar.missingStripeAccountTitle" />
-      </p>
-      <p className={css.modalMessage}>
-        <FormattedMessage id="Topbar.missingStripeAccountText" />
-      </p>
-      <div className={css.bottomWrapper}>
-        <NamedLink className={css.reminderModalLinkButton} name="PayoutPreferencesPage">
-          <FormattedMessage id="Topbar.gotoPaymentSettings" />
-        </NamedLink>
-      </div>
-    </div>
-  );
-
-  const currentUserLoaded = currentUser && currentUser.id;
-  let content = null;
-
-  if (currentUserLoaded && !currentUser.attributes.emailVerified) {
-    content = emailVerificationMissingContent;
-  } else if (currentUserLoaded && !currentUser.attributes.stripeConnected) {
-    content = stripeAccountMissingContent;
-  }
-
-  return content;
-};
-
 class TopbarComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showMissingInformationReminder: false,
-      hasSeenMissingInformationReminder: false,
-    };
-
-    this.onHistoryChanged = this.handleMissingInformationReminder.bind(this);
     this.handleMobileMenuOpen = this.handleMobileMenuOpen.bind(this);
     this.handleMobileMenuClose = this.handleMobileMenuClose.bind(this);
     this.handleMobileSearchOpen = this.handleMobileSearchOpen.bind(this);
     this.handleMobileSearchClose = this.handleMobileSearchClose.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { currentUser, currentUserHasListings, currentUserHasOrders, location } = nextProps;
-    const user = ensureCurrentUser(currentUser);
-    this.handleMissingInformationReminder(
-      user,
-      currentUserHasListings,
-      currentUserHasOrders,
-      location
-    );
-  }
-
-  handleMissingInformationReminder(
-    currentUser,
-    currentUserHasListings,
-    currentUserHasOrders,
-    newLocation
-  ) {
-    // Track if path changes inside Page level component
-    const pathChanged = newLocation.pathname !== this.props.location.pathname;
-    const emailUnverified = !!currentUser.id && !currentUser.attributes.emailVerified;
-    const stripeAccountMissing = !!currentUser.id && !currentUser.attributes.stripeConnected;
-    const infoMissing = emailUnverified || (currentUserHasListings && stripeAccountMissing);
-    const notRemindedYet =
-      !this.state.showMissingInformationReminder && !this.state.hasSeenMissingInformationReminder;
-    const showOnPathChange = notRemindedYet || pathChanged;
-
-    // Emails are sent when order is initiated
-    // Customer is likely to get email soon when she books something
-    // Provider email should work - she should get an email when someone books a listing
-    const hasOrders = currentUserHasOrders === true;
-    const hasListingsOrOrders = currentUserHasListings || hasOrders;
-
-    const routes = routeConfiguration();
-    const whitelistedPaths = MISSING_INFORMATION_MODAL_WHITELIST.map(page =>
-      pathByRouteName(page, routes)
-    );
-    const isNotWhitelisted = !whitelistedPaths.includes(newLocation.pathname);
-
-    const showReminder = infoMissing && isNotWhitelisted && hasListingsOrOrders && showOnPathChange;
-
-    // Show reminder
-    if (showReminder) {
-      this.setState({ showMissingInformationReminder: true });
-    }
   }
 
   handleMobileMenuOpen() {
@@ -267,6 +138,7 @@ class TopbarComponent extends Component {
       authInProgress,
       currentUser,
       currentUserHasListings,
+      currentUserHasOrders,
       currentPage,
       notificationCount,
       viewport,
@@ -311,32 +183,6 @@ class TopbarComponent extends Component {
           }
         : null,
     };
-
-    const user = ensureCurrentUser(currentUser);
-    const email = user.id ? <span className={css.email}>{user.attributes.email}</span> : '';
-
-    const resendEmailLink = (
-      <InlineTextButton className={css.helperLink} onClick={onResendVerificationEmail}>
-        <FormattedMessage id="Topbar.resendEmailLinkText" />
-      </InlineTextButton>
-    );
-    const fixEmailLink = (
-      <NamedLink className={css.helperLink} name="ContactDetailsPage">
-        <FormattedMessage id="Topbar.fixEmailLinkText" />
-      </NamedLink>
-    );
-
-    const resendErrorTranslationId = isTooManyEmailVerificationRequestsError(
-      sendVerificationEmailError
-    )
-      ? 'Topbar.resendFailedTooManyRequests'
-      : 'Topbar.resendFailed';
-    const resendErrorMessage = sendVerificationEmailError ? (
-      <p className={css.error}>
-        <FormattedMessage id={resendErrorTranslationId} />
-      </p>
-    ) : null;
-    const closeButtonMessage = <FormattedMessage id="Topbar.closeVerifyEmailReminder" />;
 
     const classes = classNames(rootClassName || css.root, className);
 
@@ -407,29 +253,19 @@ class TopbarComponent extends Component {
             </p>
           </div>
         </Modal>
-
-        <Modal
+        <ModalMissingInformation
           id="MissingInformationReminder"
           containerClassName={css.missingInformationModal}
-          isOpen={this.state.showMissingInformationReminder}
-          onClose={() => {
-            this.setState({
-              showMissingInformationReminder: false,
-              hasSeenMissingInformationReminder: true,
-            });
-          }}
+          currentUser={currentUser}
+          currentUserHasListings={currentUserHasListings}
+          currentUserHasOrders={currentUserHasOrders}
+          location={location}
           onManageDisableScrolling={onManageDisableScrolling}
-          closeButtonMessage={closeButtonMessage}
-        >
-          <ReminderModalContent
-            currentUser={currentUser}
-            email={email}
-            resendErrorMessage={resendErrorMessage}
-            sendVerificationEmailInProgress={sendVerificationEmailInProgress}
-            resendEmailLink={resendEmailLink}
-            fixEmailLink={fixEmailLink}
-          />
-        </Modal>
+          onResendVerificationEmail={onResendVerificationEmail}
+          sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+          sendVerificationEmailError={sendVerificationEmailError}
+        />
+
         <GenericError show={showGenericError} />
       </div>
     );

@@ -87,6 +87,9 @@ export { default as MenuItem } from './MenuItem/MenuItem';
 export { default as MenuLabel } from './MenuLabel/MenuLabel';
 export { default as Modal } from './Modal/Modal';
 export { default as ModalInMobile } from './ModalInMobile/ModalInMobile';
+export {
+  default as ModalMissingInformation,
+} from './ModalMissingInformation/ModalMissingInformation';
 export { default as NamedLink } from './NamedLink/NamedLink';
 export { default as NamedRedirect } from './NamedRedirect/NamedRedirect';
 export { default as NotificationBadge } from './NotificationBadge/NotificationBadge';
