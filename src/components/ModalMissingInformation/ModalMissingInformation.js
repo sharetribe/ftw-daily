@@ -20,12 +20,15 @@ const MISSING_INFORMATION_MODAL_WHITELIST = [
   'PayoutPreferencesPage',
 ];
 
+const EMAIL_VERIFICATION = 'EMAIL_VERIFICATION';
+const STRIPE_ACCOUNT = 'STRIPE_ACCOUNT';
+
 class ModalMissingInformation extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      showMissingInformationReminder: false,
+      showMissingInformationReminder: null,
       hasSeenMissingInformationReminder: false,
     };
     this.handleMissingInformationReminder = this.handleMissingInformationReminder.bind(this);
@@ -48,32 +51,41 @@ class ModalMissingInformation extends Component {
     currentUserHasOrders,
     newLocation
   ) {
-    // Track if path changes inside Page level component
-    const pathChanged = newLocation.pathname !== this.props.location.pathname;
-    const emailUnverified = !!currentUser.id && !currentUser.attributes.emailVerified;
-    const stripeAccountMissing = !!currentUser.id && !currentUser.attributes.stripeConnected;
-    const infoMissing = emailUnverified || (currentUserHasListings && stripeAccountMissing);
-    const notRemindedYet =
-      !this.state.showMissingInformationReminder && !this.state.hasSeenMissingInformationReminder;
-    const showOnPathChange = notRemindedYet || pathChanged;
-
-    // Emails are sent when order is initiated
-    // Customer is likely to get email soon when she books something
-    // Provider email should work - she should get an email when someone books a listing
-    const hasOrders = currentUserHasOrders === true;
-    const hasListingsOrOrders = currentUserHasListings || hasOrders;
-
     const routes = routeConfiguration();
     const whitelistedPaths = MISSING_INFORMATION_MODAL_WHITELIST.map(page =>
       pathByRouteName(page, routes)
     );
-    const isNotWhitelisted = !whitelistedPaths.includes(newLocation.pathname);
 
-    const showReminder = infoMissing && isNotWhitelisted && hasListingsOrOrders && showOnPathChange;
+    // Is the current page whitelisted?
+    const isPageWhitelisted = whitelistedPaths.includes(newLocation.pathname);
 
-    // Show reminder
-    if (showReminder) {
-      this.setState({ showMissingInformationReminder: true });
+    // Track if path changes inside Page level component
+    const pathChanged = newLocation.pathname !== this.props.location.pathname;
+    const notRemindedYet =
+      !this.state.showMissingInformationReminder && !this.state.hasSeenMissingInformationReminder;
+
+    // Is the reminder already shown on current page
+    const showOnPathChange = notRemindedYet || pathChanged;
+
+    if (!isPageWhitelisted && showOnPathChange) {
+      // Emails are sent when order is initiated
+      // Customer is likely to get email soon when she books something
+      // Provider email should work - she should get an email when someone books a listing
+      const hasOrders = currentUserHasOrders === true;
+      const hasListingsOrOrders = currentUserHasListings || hasOrders;
+
+      const emailUnverified = !!currentUser.id && !currentUser.attributes.emailVerified;
+      const emailVerificationNeeded = hasListingsOrOrders && emailUnverified;
+
+      const stripeAccountMissing = !!currentUser.id && !currentUser.attributes.stripeConnected;
+      const stripeAccountNeeded = currentUserHasListings && stripeAccountMissing;
+
+      // Show reminder
+      if (emailVerificationNeeded) {
+        this.setState({ showMissingInformationReminder: EMAIL_VERIFICATION });
+      } else if (stripeAccountNeeded) {
+        this.setState({ showMissingInformationReminder: STRIPE_ACCOUNT });
+      }
     }
   }
 
@@ -172,9 +184,9 @@ class ModalMissingInformation extends Component {
     const currentUserLoaded = user && user.id;
     let content = null;
 
-    if (currentUserLoaded && !user.attributes.emailVerified) {
+    if (currentUserLoaded && this.state.showMissingInformationReminder === EMAIL_VERIFICATION) {
       content = emailVerificationMissingContent;
-    } else if (currentUserLoaded && !user.attributes.stripeConnected) {
+    } else if (currentUserLoaded && this.state.showMissingInformationReminder === STRIPE) {
       content = stripeAccountMissingContent;
     }
 
@@ -182,10 +194,10 @@ class ModalMissingInformation extends Component {
       <Modal
         id="MissingInformationReminder"
         containerClassName={containerClassName}
-        isOpen={this.state.showMissingInformationReminder}
+        isOpen={!!this.state.showMissingInformationReminder}
         onClose={() => {
           this.setState({
-            showMissingInformationReminder: false,
+            showMissingInformationReminder: null,
             hasSeenMissingInformationReminder: true,
           });
         }}
