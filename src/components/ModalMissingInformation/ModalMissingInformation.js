@@ -6,9 +6,10 @@ import routeConfiguration from '../../routeConfiguration';
 import { ensureCurrentUser } from '../../util/data';
 import { propTypes } from '../../util/types';
 import { pathByRouteName } from '../../util/routes';
-import { isTooManyEmailVerificationRequestsError } from '../../util/errors';
-import { IconEmailAttention, InlineTextButton, Modal, NamedLink } from '../../components';
+import { Modal } from '../../components';
 
+import EmailReminder from './EmailReminder';
+import StripeAccountReminder from './StripeAccountReminder';
 import css from './ModalMissingInformation.css';
 
 const MISSING_INFORMATION_MODAL_WHITELIST = [
@@ -104,91 +105,28 @@ class ModalMissingInformation extends Component {
     const user = ensureCurrentUser(currentUser);
     const classes = classNames(rootClassName || css.root, className);
 
-    const email = user.id ? <span className={css.email}>{user.attributes.email}</span> : '';
+    let content = null;
 
-    const resendEmailLink = (
-      <InlineTextButton className={css.helperLink} onClick={onResendVerificationEmail}>
-        <FormattedMessage id="ModalMissingInformation.resendEmailLinkText" />
-      </InlineTextButton>
-    );
-
-    const fixEmailLink = (
-      <NamedLink className={css.helperLink} name="ContactDetailsPage">
-        <FormattedMessage id="ModalMissingInformation.fixEmailLinkText" />
-      </NamedLink>
-    );
-
-    const resendErrorTranslationId = isTooManyEmailVerificationRequestsError(
-      sendVerificationEmailError
-    )
-      ? 'ModalMissingInformation.resendFailedTooManyRequests'
-      : 'ModalMissingInformation.resendFailed';
-    const resendErrorMessage = sendVerificationEmailError ? (
-      <p className={css.error}>
-        <FormattedMessage id={resendErrorTranslationId} />
-      </p>
-    ) : null;
+    const currentUserLoaded = user && user.id;
+    if (currentUserLoaded) {
+      if (this.state.showMissingInformationReminder === EMAIL_VERIFICATION) {
+        content = (
+          <EmailReminder
+            className={classes}
+            user={user}
+            onResendVerificationEmail={onResendVerificationEmail}
+            sendVerificationEmailInProgress={sendVerificationEmailInProgress}
+            sendVerificationEmailError={sendVerificationEmailError}
+          />
+        );
+      } else if (this.state.showMissingInformationReminder === STRIPE_ACCOUNT) {
+        content = <StripeAccountReminder className={classes} />;
+      }
+    }
 
     const closeButtonMessage = (
       <FormattedMessage id="ModalMissingInformation.closeVerifyEmailReminder" />
     );
-
-    const emailVerificationMissingContent = (
-      <div className={classes}>
-        <IconEmailAttention className={css.modalIcon} />
-        <p className={css.modalTitle}>
-          <FormattedMessage id="ModalMissingInformation.verifyEmailTitle" />
-        </p>
-        <p className={css.modalMessage}>
-          <FormattedMessage id="ModalMissingInformation.verifyEmailText" />
-        </p>
-        <p className={css.modalMessage}>
-          <FormattedMessage id="ModalMissingInformation.checkInbox" values={{ email }} />
-        </p>
-        {resendErrorMessage}
-
-        <div className={css.bottomWrapper}>
-          <p className={css.helperText}>
-            {sendVerificationEmailInProgress ? (
-              <FormattedMessage id="ModalMissingInformation.sendingEmail" />
-            ) : (
-              <FormattedMessage
-                id="ModalMissingInformation.resendEmail"
-                values={{ resendEmailLink }}
-              />
-            )}
-          </p>
-          <p className={css.helperText}>
-            <FormattedMessage id="ModalMissingInformation.fixEmail" values={{ fixEmailLink }} />
-          </p>
-        </div>
-      </div>
-    );
-
-    const stripeAccountMissingContent = (
-      <div className={classes}>
-        <p className={css.modalTitle}>
-          <FormattedMessage id="ModalMissingInformation.missingStripeAccountTitle" />
-        </p>
-        <p className={css.modalMessage}>
-          <FormattedMessage id="ModalMissingInformation.missingStripeAccountText" />
-        </p>
-        <div className={css.bottomWrapper}>
-          <NamedLink className={css.reminderModalLinkButton} name="PayoutPreferencesPage">
-            <FormattedMessage id="ModalMissingInformation.gotoPaymentSettings" />
-          </NamedLink>
-        </div>
-      </div>
-    );
-
-    const currentUserLoaded = user && user.id;
-    let content = null;
-
-    if (currentUserLoaded && this.state.showMissingInformationReminder === EMAIL_VERIFICATION) {
-      content = emailVerificationMissingContent;
-    } else if (currentUserLoaded && this.state.showMissingInformationReminder === STRIPE) {
-      content = stripeAccountMissingContent;
-    }
 
     return (
       <Modal
