@@ -12,9 +12,14 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
+## Upcoming version
+
+* [fix] Extract and fix missing information reminder modal from Topbar
+  [#846](https://github.com/sharetribe/flex-template-web/pull/846)
+
 ## v0.3.1
 
-* Change lodash import syntax to reduce bundle size (-15.14 KB)
+* [change] Change lodash import syntax to reduce bundle size (-15.14 KB)
   [#839](https://github.com/sharetribe/flex-template-web/pull/839)
 * [fix] Use https instead of git to access SDK repo for Heroku build (now that the repo is public).
   TODO: create SDK releases instead of using direct refs to single commit.
