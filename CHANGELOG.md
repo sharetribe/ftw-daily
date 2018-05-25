@@ -16,6 +16,8 @@ way to update this template, but currently, we follow a pattern:
 
 * [fix] Extract and fix missing information reminder modal from Topbar
   [#846](https://github.com/sharetribe/flex-template-web/pull/846)
+* [fix] Add missing styles for ModalMissingInformation from Topbar
+  [#847](https://github.com/sharetribe/flex-template-web/pull/847)
 
 ## v0.3.1
 
