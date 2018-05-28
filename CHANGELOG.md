@@ -18,6 +18,9 @@ way to update this template, but currently, we follow a pattern:
   [#846](https://github.com/sharetribe/flex-template-web/pull/846)
 * [fix] Add missing styles for ModalMissingInformation from Topbar
   [#847](https://github.com/sharetribe/flex-template-web/pull/847)
+* [fix] API does not return all image variants anymore, this adds correct variants to update
+  contact details call.
+  [#848](https://github.com/sharetribe/flex-template-web/pull/848)
 
 ## v0.3.1
 
