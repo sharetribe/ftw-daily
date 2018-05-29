@@ -79,7 +79,14 @@ const requestSavePhoneNumber = params => (dispatch, getState, sdk) => {
   const phoneNumber = params.phoneNumber;
 
   return sdk.currentUser
-    .updateProfile({ protectedData: { phoneNumber } }, { expand: true, include: ['profileImage'] })
+    .updateProfile(
+      { protectedData: { phoneNumber } },
+      {
+        expand: true,
+        include: ['profileImage'],
+        'fields.image': ['variants.square-small', 'variants.square-small2x'],
+      }
+    )
     .then(response => {
       const entities = denormalisedResponseEntities(response);
       if (entities.length !== 1) {
@@ -104,7 +111,14 @@ const requestSaveEmail = params => (dispatch, getState, sdk) => {
   const { email, currentPassword } = params;
 
   return sdk.currentUser
-    .changeEmail({ email, currentPassword }, { expand: true, include: ['profileImage'] })
+    .changeEmail(
+      { email, currentPassword },
+      {
+        expand: true,
+        include: ['profileImage'],
+        'fields.image': ['variants.square-small', 'variants.square-small2x'],
+      }
+    )
     .then(response => {
       const entities = denormalisedResponseEntities(response);
       if (entities.length !== 1) {
