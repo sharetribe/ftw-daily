@@ -4,7 +4,6 @@
  * https://github.com/erikras/ducks-modular-redux
  */
 
-import { reducer as form } from 'redux-form';
 import Auth from './Auth.duck';
 import EmailVerification from './EmailVerification.duck';
 import FlashNotification from './FlashNotification.duck';
@@ -21,7 +20,6 @@ export {
   LocationFilter,
   Routing,
   UI,
-  form,
   marketplaceData,
   user,
 };

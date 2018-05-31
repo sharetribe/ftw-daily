@@ -1,6 +1,5 @@
 import isArray from 'lodash/isArray';
 import reduce from 'lodash/reduce';
-import toPairs from 'lodash/toPairs';
 
 /**
  * Combine the given relationships objects
@@ -282,40 +281,4 @@ export const overrideArrays = (objValue, srcValue, key, object, source, stack) =
   if (isArray(objValue)) {
     return srcValue;
   }
-};
-
-/**
- * Converts an array of strings into an object where the array items
- * are keys and values in all fields are true. This kind of object
- * can be passed as initialValues parameter to a ReduxForm that contains
- * checkbox inputs.
- *
- * @param {Array} array An array of strings
- *
- * @return {Object} An object containing the array items as keys and all
- * the values set to true
- *
- * A complementary function to formValuesToArray.
- *
- */
-export const arrayToFormValues = array => {
-  return array.reduce((map, key) => {
-    map[key] = true;
-    return map;
-  }, {});
-};
-
-/**
- * Converts a values object received form a Redux Form containing
- * checkboxes into an array that contains only the values.
- *
- * @param {Object} formValues A values object received from a Redux Form
- *
- * @return {Array} An array containing the keys of the formValues parameter
- *
- * A complementary function to arrayToFormValues.
- */
-export const formValuesToArray = formValues => {
-  const entries = toPairs(formValues);
-  return entries.filter(entry => entry[1] === true).map(entry => entry[0]);
 };
