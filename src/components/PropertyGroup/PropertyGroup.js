@@ -2,7 +2,7 @@
  * Renders a set of options with selected and non-selected values.
  *
  * The corresponding component when selecting the values is
- * FieldGroupCheckbox.
+ * FieldCheckboxGroup.
  *
  */
 

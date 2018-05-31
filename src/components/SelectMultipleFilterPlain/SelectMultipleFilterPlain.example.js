@@ -41,6 +41,7 @@ const options = [
 ];
 
 const handleSelect = (urlParam, values, history) => {
+  console.log(`handle select`, values);
   const queryParams = values ? `?${stringify({ [urlParam]: values.join(',') })}` : '';
   history.push(`${window.location.pathname}${queryParams}`);
 };

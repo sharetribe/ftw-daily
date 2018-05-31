@@ -1,7 +1,7 @@
 import React from 'react';
 import { any, node, string, object, shape } from 'prop-types';
 import classNames from 'classnames';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import { ValidationError } from '../../components';
 
 import css from './FieldCheckbox.css';
@@ -79,7 +79,7 @@ FieldCheckboxComponent.propTypes = {
   id: string.isRequired,
   label: node,
 
-  // redux-form Field params
+  // FieldRenderProps
   input: shape({ value: any }).isRequired,
   meta: object.isRequired,
 };

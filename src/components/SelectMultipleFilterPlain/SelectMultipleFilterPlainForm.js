@@ -1,31 +1,46 @@
 import React from 'react';
-import { arrayOf, bool, node, shape, string } from 'prop-types';
-import { reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { arrayOf, bool, node, shape, string, func } from 'prop-types';
+import { Form as FinalForm, FormSpy } from 'react-final-form';
+import arrayMutators from 'final-form-arrays';
 
-import { FieldGroupCheckbox, Form } from '../../components';
+import { FieldCheckboxGroup, Form } from '../../components';
 
-const SelectMultipleFilterPlainFormComponent = props => {
-  const { form, className, name, options, twoColumns } = props;
+const SelectMultipleFilterPlainForm = props => {
+  const { onChange, ...rest } = props;
+
+  const handleChange = formState => {
+    if (formState.dirty) {
+      onChange(formState.values);
+    }
+  }
 
   return (
-    <Form className={className}>
-      <FieldGroupCheckbox
-        name={name}
-        id={`${form}.${name}`}
-        options={options}
-        twoColumns={twoColumns}
-      />
-    </Form>
+    <FinalForm
+      {...rest}
+      mutators={{ ...arrayMutators }}
+      onSubmit={vals => console.log('SelectMultipleFilterPlainForm', vals)}
+      render={({ className, name, options, twoColumns, onChange }) =>
+        <Form className={className}>
+        <FormSpy onChange={handleChange} subscription={{ values: true, dirty: true }} />
+          <FieldCheckboxGroup
+            name={name}
+            id={`${name}-filter`}
+            options={options}
+            twoColumns={twoColumns}
+          />
+        </Form>
+      }
+    />
   );
 };
 
-SelectMultipleFilterPlainFormComponent.defaultProps = {
+SelectMultipleFilterPlainForm.defaultProps = {
   className: null,
   twoColumns: false,
+  onChange: () => null,
 };
 
-SelectMultipleFilterPlainFormComponent.propTypes = {
-  ...formPropTypes,
+SelectMultipleFilterPlainForm.propTypes = {
   className: string,
   name: string.isRequired,
   options: arrayOf(
@@ -35,8 +50,7 @@ SelectMultipleFilterPlainFormComponent.propTypes = {
     })
   ).isRequired,
   twoColumns: bool,
+  onChange: func,
 };
-
-const SelectMultipleFilterPlainForm = reduxForm({})(SelectMultipleFilterPlainFormComponent);
 
 export default SelectMultipleFilterPlainForm;
