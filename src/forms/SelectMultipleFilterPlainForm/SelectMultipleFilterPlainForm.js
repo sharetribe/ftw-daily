@@ -17,17 +17,12 @@ const SelectMultipleFilterPlainForm = props => {
   return (
     <FinalForm
       {...rest}
+      onSubmit={() => null}
       mutators={{ ...arrayMutators }}
-      onSubmit={vals => console.log('SelectMultipleFilterPlainForm', vals)}
       render={({ className, name, options, twoColumns, onChange }) => (
         <Form className={className}>
           <FormSpy onChange={handleChange} subscription={{ values: true, dirty: true }} />
-          <FieldCheckboxGroup
-            name={name}
-            id={`${name}-filter`}
-            options={options}
-            twoColumns={twoColumns}
-          />
+          <FieldCheckboxGroup name={name} id={name} options={options} twoColumns={twoColumns} />
         </Form>
       )}
     />
