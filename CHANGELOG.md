@@ -12,8 +12,11 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## Upcoming version
+## v1.0.0
 
+* [change] Migrate remaining Redux Forms to Final Form. Also now all the form components can be
+  found in the src/forms folder. Remove redux-form from the dependencies.
+  [#845](https://github.com/sharetribe/flex-template-web/pull/845)
 * [fix] Extract and fix missing information reminder modal from Topbar
   [#846](https://github.com/sharetribe/flex-template-web/pull/846)
 * [fix] Add missing styles for ModalMissingInformation from Topbar
