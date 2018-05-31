@@ -3,7 +3,7 @@ import { array, arrayOf, func, number, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
 
-import SelectMultipleFilterForm from './SelectMultipleFilterForm';
+import { SelectMultipleFilterForm } from '../../forms';
 import css from './SelectMultipleFilter.css';
 
 const KEY_CODE_ESCAPE = 27;

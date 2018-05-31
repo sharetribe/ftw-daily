@@ -3,7 +3,7 @@ import { array, bool, func, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
-import SelectMultipleFilterPlainForm from './SelectMultipleFilterPlainForm';
+import { SelectMultipleFilterPlainForm } from '../../forms';
 
 import css from './SelectMultipleFilterPlain.css';
 
