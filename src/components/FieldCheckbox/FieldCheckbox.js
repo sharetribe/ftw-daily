@@ -1,7 +1,3 @@
-/**
- * NOTE this component is part of react-final-form instead of Redux Form.
- */
-
 import React from 'react';
 import { node, string } from 'prop-types';
 import classNames from 'classnames';

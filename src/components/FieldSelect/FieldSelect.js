@@ -1,7 +1,3 @@
-/**
- * NOTE this component is part of react-final-form instead of Redux Form.
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';

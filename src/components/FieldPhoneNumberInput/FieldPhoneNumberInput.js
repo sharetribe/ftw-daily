@@ -1,8 +1,4 @@
 /**
- * DEPRECATED: this component is part of Redux Form - we are migrating to react-final-form.
- */
-
-/**
  * A text field with phone number formatting. By default uses formatting
  * rules defined in the fiFormatter.js file. To change the formatting
  * provide alternative implementations for the format and parse functions

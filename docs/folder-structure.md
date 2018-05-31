@@ -79,10 +79,6 @@ this folder contains only page-level components and one common component: Topbar
 Forms are in their own folder since they are using a special library to handle validations, errors,
 internal state, etc.
 
-_**NOTE:** Currently, we are migrating to
-[🏁 Final Form](https://github.com/final-form/react-final-form) (away from
-[Redux Form](http://redux-form.com/))._
-
 ## server/
 
 * `server/index.js` handles server-side rendering (SSR). Built with [Express](http://expressjs.com)

@@ -6,7 +6,7 @@ import css from './ValidationError.css';
 
 /**
  * This component can be used to show validation errors next to form
- * input fields. The component takes the redux-form Field component
+ * input fields. The component takes the final-form Field component
  * `meta` object as a prop and infers if an error message should be
  * shown.
  */

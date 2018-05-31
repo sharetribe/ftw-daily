@@ -1,8 +1,4 @@
 /**
- * NOTE this component is part of react-final-form instead of Redux Form.
- */
-
-/**
  * CurrencyInput renders an input field that format it's value according to currency formatting rules
  * onFocus: renders given value in unformatted manner: "9999,99"
  * onBlur: formats the given input: "9 999,99 €"

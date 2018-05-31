@@ -126,14 +126,13 @@ const currentValue = props => {
 /*
   Location auto completion input component
 
-  This component can work as the `component` prop to Redux Form's
-  <Field /> component. it takes a custom input value shape, and
-  controls the onChanged callback that is called with the value to
-  syncronise to the form's Redux store.
+  This component can work as the `component` prop to Final Form's
+  <Field /> component. It takes a custom input value shape, and
+  controls the onChange callback that is called with the input value.
 
   The component works by listening to the underlying input component
   and calling the Google Maps Places API for predictions. When the
-  predictions arrive, those are passed to Redux Form in the onChange
+  predictions arrive, those are passed to Final Form in the onChange
   callback.
 
   See the LocationAutocompleteInput.example.js file for a usage
