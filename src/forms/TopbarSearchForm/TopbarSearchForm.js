@@ -32,7 +32,9 @@ class TopbarSearchFormComponent extends Component {
     return (
       <FinalForm
         {...this.props}
-        render={({ rootClassName, className, desktopInputRoot, intl, isMobile }) => {
+        render={formRenderProps => {
+          const { rootClassName, className, desktopInputRoot, intl, isMobile } = formRenderProps;
+
           const classes = classNames(rootClassName, className);
           const desktopInputRootClass = desktopInputRoot || css.desktopInputRoot;
 

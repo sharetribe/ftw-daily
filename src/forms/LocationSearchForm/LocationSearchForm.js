@@ -21,7 +21,8 @@ const LocationSearchFormComponent = props => {
   return (
     <FinalForm
       {...props}
-      render={({ rootClassName, className, intl, handleSubmit }) => {
+      render={formRenderProps => {
+        const { rootClassName, className, intl } = formRenderProps;
         const classes = classNames(rootClassName || css.root, className);
 
         // Allow form submit only when the place has changed

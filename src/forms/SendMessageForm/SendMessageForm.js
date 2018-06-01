@@ -56,7 +56,7 @@ class SendMessageFormComponent extends Component {
     return (
       <FinalForm
         {...this.props}
-        render={fieldRenderProps => {
+        render={formRenderProps => {
           const {
             rootClassName,
             className,
@@ -66,7 +66,7 @@ class SendMessageFormComponent extends Component {
             sendMessageError,
             invalid,
             form,
-          } = fieldRenderProps;
+          } = formRenderProps;
 
           const classes = classNames(rootClassName || css.root, className);
           const submitInProgress = inProgress;

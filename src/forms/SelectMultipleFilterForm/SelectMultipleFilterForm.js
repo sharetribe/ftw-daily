@@ -13,7 +13,7 @@ const SelectMultipleFilterFormComponent = props => {
     <FinalForm
       {...props}
       mutators={{ ...arrayMutators }}
-      render={formProps => {
+      render={formRenderProps => {
         const {
           form,
           handleSubmit,
@@ -25,7 +25,7 @@ const SelectMultipleFilterFormComponent = props => {
           contentRef,
           style,
           intl,
-        } = formProps;
+        } = formRenderProps;
         const classes = classNames(css.root, { [css.isOpen]: isOpen });
 
         const handleCancel = () => {

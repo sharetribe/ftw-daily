@@ -17,8 +17,8 @@ import css from './EmailVerificationForm.css';
 const EmailVerificationFormComponent = props => (
   <FinalForm
     {...props}
-    render={fieldRenderProps => {
-      const { currentUser, inProgress, handleSubmit, verificationError } = fieldRenderProps;
+    render={formRenderProps => {
+      const { currentUser, inProgress, handleSubmit, verificationError } = formRenderProps;
 
       const { email, emailVerified, pendingEmail, profile } = currentUser.attributes;
       const emailToVerify = <strong>{pendingEmail || email}</strong>;
