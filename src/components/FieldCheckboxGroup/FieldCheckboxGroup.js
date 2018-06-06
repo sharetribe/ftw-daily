@@ -1,7 +1,3 @@
-/**
- * NOTE this component is part of react-final-form instead of Redux Form.
- */
-
 /*
  * Renders a group of checkboxes that can be used to select
  * multiple values from a set of options.

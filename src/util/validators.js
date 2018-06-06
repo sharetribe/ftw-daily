@@ -12,10 +12,10 @@ const isNonEmptyString = val => {
 };
 
 /**
- * Validator functions and helpers for Redux Forms
+ * Validator functions and helpers for Final Forms
  */
 
-// Redux Form expects and undefined value for a successful validation
+// Final Form expects and undefined value for a successful validation
 const VALID = undefined;
 
 export const required = message => value => {

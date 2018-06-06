@@ -1,7 +1,3 @@
-/**
- * NOTE this component is part of react-final-form instead of Redux Form.
- */
-
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -23,7 +19,7 @@ import {
 import StripeBankAccountRequiredInput from './StripeBankAccountRequiredInput';
 import css from './StripeBankAccountTokenInputField.css';
 
-// Since redux-form tracks the onBlur event for marking the field as
+// Since final-form tracks the onBlur event for marking the field as
 // touched (which triggers possible error validation rendering), only
 // trigger the event asynchronously when no other input within this
 // component has received focus.

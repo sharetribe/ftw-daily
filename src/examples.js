@@ -12,7 +12,6 @@ import * as FieldCheckboxGroup from './components/FieldCheckboxGroup/FieldCheckb
 import * as FieldCurrencyInput from './components/FieldCurrencyInput/FieldCurrencyInput.example';
 import * as FieldDateInput from './components/FieldDateInput/FieldDateInput.example';
 import * as FieldDateRangeInput from './components/FieldDateRangeInput/FieldDateRangeInput.example';
-import * as FieldGroupCheckbox from './components/FieldGroupCheckbox/FieldGroupCheckbox.example';
 import * as FieldPhoneNumberInput from './components/FieldPhoneNumberInput/FieldPhoneNumberInput.example';
 import * as FieldReviewRating from './components/FieldReviewRating/FieldReviewRating.example';
 import * as FieldSelect from './components/FieldSelect/FieldSelect.example';
@@ -49,14 +48,12 @@ import * as ResponsiveImage from './components/ResponsiveImage/ResponsiveImage.e
 import * as ReviewRating from './components/ReviewRating/ReviewRating.example';
 import * as Reviews from './components/Reviews/Reviews.example';
 import * as SectionThumbnailLinks from './components/SectionThumbnailLinks/SectionThumbnailLinks.example';
-import * as SelectField from './components/SelectField/SelectField.example';
 import * as SelectMultipleFilter from './components/SelectMultipleFilter/SelectMultipleFilter.example';
 import * as SelectMultipleFilterPlain from './components/SelectMultipleFilterPlain/SelectMultipleFilterPlain.example';
 import * as StripeBankAccountTokenInputField from './components/StripeBankAccountTokenInputField/StripeBankAccountTokenInputField.example';
 import * as TabNav from './components/TabNav/TabNav.example';
 import * as TabNavHorizontal from './components/TabNavHorizontal/TabNavHorizontal.example';
 import * as Tabs from './components/Tabs/Tabs.example';
-import * as TextInputField from './components/TextInputField/TextInputField.example';
 import * as TopbarDesktop from './components/TopbarDesktop/TopbarDesktop.example';
 import * as UserCard from './components/UserCard/UserCard.example';
 
@@ -107,7 +104,6 @@ export {
   FieldCurrencyInput,
   FieldDateInput,
   FieldDateRangeInput,
-  FieldGroupCheckbox,
   FieldPhoneNumberInput,
   FieldReviewRating,
   FieldSelect,
@@ -149,7 +145,6 @@ export {
   ReviewRating,
   Reviews,
   SectionThumbnailLinks,
-  SelectField,
   SelectMultipleFilter,
   SelectMultipleFilterPlain,
   SendMessageForm,
@@ -159,7 +154,6 @@ export {
   TabNav,
   TabNavHorizontal,
   Tabs,
-  TextInputField,
   TopbarDesktop,
   Typography,
   UserCard,

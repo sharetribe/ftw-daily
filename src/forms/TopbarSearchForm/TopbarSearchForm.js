@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { Field, reduxForm, propTypes as formPropTypes } from 'redux-form';
+import { Form as FinalForm, Field } from 'react-final-form';
 import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import { Form, LocationAutocompleteInput } from '../../components';
@@ -30,33 +29,59 @@ class TopbarSearchFormComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className, desktopInputRoot, intl, isMobile } = this.props;
-
-    const classes = classNames(rootClassName, className);
-    const desktopInputRootClass = desktopInputRoot || css.desktopInputRoot;
-
-    // Allow form submit only when the place has changed
-    const preventFormSubmit = e => e.preventDefault();
-
     return (
-      <Form className={classes} onSubmit={preventFormSubmit}>
-        <Field
-          name="location"
-          label="Location"
-          className={isMobile ? css.mobileInputRoot : desktopInputRootClass}
-          iconClassName={isMobile ? css.mobileIcon : css.desktopIcon}
-          inputClassName={isMobile ? css.mobileInput : css.desktopInput}
-          predictionsClassName={isMobile ? css.mobilePredictions : css.desktopPredictions}
-          placeholder={intl.formatMessage({ id: 'TopbarSearchForm.placeholder' })}
-          format={null}
-          component={LocationAutocompleteInput}
-          closeOnBlur={!isMobile}
-          onChange={this.onChange}
-          inputRef={node => {
-            this.searchInput = node;
-          }}
-        />
-      </Form>
+      <FinalForm
+        {...this.props}
+        render={formRenderProps => {
+          const { rootClassName, className, desktopInputRoot, intl, isMobile } = formRenderProps;
+
+          const classes = classNames(rootClassName, className);
+          const desktopInputRootClass = desktopInputRoot || css.desktopInputRoot;
+
+          // Allow form submit only when the place has changed
+          const preventFormSubmit = e => e.preventDefault();
+
+          return (
+            <Form className={classes} onSubmit={preventFormSubmit}>
+              <Field
+                name="location"
+                format={null}
+                render={({ input, meta }) => {
+                  const { onChange, ...restInput } = input;
+
+                  // Merge the standard onChange function with custom behaviur. A better solution would
+                  // be to use the FormSpy component from Final Form and pass this.onChange to the
+                  // onChange prop but that breaks due to insufficient subscription handling.
+                  // See: https://github.com/final-form/react-final-form/issues/159
+                  const searchOnChange = value => {
+                    onChange(value);
+                    this.onChange(value);
+                  };
+
+                  const searchInput = { ...restInput, onChange: searchOnChange };
+                  return (
+                    <LocationAutocompleteInput
+                      className={isMobile ? css.mobileInputRoot : desktopInputRootClass}
+                      iconClassName={isMobile ? css.mobileIcon : css.desktopIcon}
+                      inputClassName={isMobile ? css.mobileInput : css.desktopInput}
+                      predictionsClassName={
+                        isMobile ? css.mobilePredictions : css.desktopPredictions
+                      }
+                      placeholder={intl.formatMessage({ id: 'TopbarSearchForm.placeholder' })}
+                      closeOnBlur={!isMobile}
+                      inputRef={node => {
+                        this.searchInput = node;
+                      }}
+                      input={searchInput}
+                      meta={meta}
+                    />
+                  );
+                }}
+              />
+            </Form>
+          );
+        }}
+      />
     );
   }
 }
@@ -71,8 +96,6 @@ TopbarSearchFormComponent.defaultProps = {
 };
 
 TopbarSearchFormComponent.propTypes = {
-  ...formPropTypes,
-
   rootClassName: string,
   className: string,
   desktopInputRoot: string,
@@ -83,10 +106,6 @@ TopbarSearchFormComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const defaultFormName = 'TopbarSearchForm';
-
-const TopbarSearchForm = compose(reduxForm({ form: defaultFormName }), injectIntl)(
-  TopbarSearchFormComponent
-);
+const TopbarSearchForm = injectIntl(TopbarSearchFormComponent);
 
 export default TopbarSearchForm;

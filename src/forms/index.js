@@ -17,6 +17,8 @@ export { default as PayoutDetailsForm } from './PayoutDetailsForm/PayoutDetailsF
 export { default as ProfileSettingsForm } from './ProfileSettingsForm/ProfileSettingsForm';
 export { default as ReviewForm } from './ReviewForm/ReviewForm';
 export { default as SendMessageForm } from './SendMessageForm/SendMessageForm';
+export { default as SelectMultipleFilterForm } from './SelectMultipleFilterForm/SelectMultipleFilterForm';
+export { default as SelectMultipleFilterPlainForm } from './SelectMultipleFilterPlainForm/SelectMultipleFilterPlainForm';
 export { default as SignupForm } from './SignupForm/SignupForm';
 export { default as StripePaymentForm } from './StripePaymentForm/StripePaymentForm';
 export { default as TopbarSearchForm } from './TopbarSearchForm/TopbarSearchForm';

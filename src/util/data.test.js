@@ -328,38 +328,4 @@ describe('data utils', () => {
       ]);
     });
   });
-
-  describe('arrayToFormValues()', () => {
-    it('converts an empty array', () => {
-      expect(arrayToFormValues([])).toEqual({});
-    });
-    it('converts multiple values', () => {
-      const array = ['one', 'two', 'three'];
-      const formValues = { one: true, two: true, three: true };
-      expect(arrayToFormValues(array)).toEqual(formValues);
-    });
-  });
-
-  describe('formValuesToArray()', () => {
-    it('converts an empty object', () => {
-      expect(formValuesToArray({})).toEqual([]);
-    });
-    it('converts multiple values', () => {
-      const formValues = { one: true, two: true, three: true };
-      const array = ['one', 'two', 'three'];
-      expect(formValuesToArray(formValues)).toEqual(array);
-    });
-    it('it skips non-true values form input object', () => {
-      const formValues = {
-        one: true,
-        two: null,
-        three: 'true',
-        four: false,
-        five: '',
-        six: true,
-      };
-      const array = ['one', 'six'];
-      expect(formValuesToArray(formValues)).toEqual(array);
-    });
-  });
 });

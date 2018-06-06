@@ -3,8 +3,7 @@ import { array, arrayOf, func, number, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
 
-import { arrayToFormValues, formValuesToArray } from '../../util/data';
-import SelectMultipleFilterForm from './SelectMultipleFilterForm';
+import { SelectMultipleFilterForm } from '../../forms';
 import css from './SelectMultipleFilter.css';
 
 const KEY_CODE_ESCAPE = 27;
@@ -28,9 +27,9 @@ class SelectMultipleFilter extends Component {
 
   handleSubmit(values) {
     const { name, onSelect, urlParam } = this.props;
-    const selectedKeys = formValuesToArray(values[name]);
+    const paramValues = values[name];
     this.setState({ isOpen: false });
-    onSelect(urlParam, selectedKeys);
+    onSelect(urlParam, paramValues);
   }
 
   handleClear() {
@@ -107,13 +106,9 @@ class SelectMultipleFilter extends Component {
 
     const contentStyle = this.positionStyleForContent();
 
-    // turn a list of values into a map that can be passed to
-    // a redux form
-    const initialValuesObj = arrayToFormValues(initialValues);
-
     // pass the initial values with the name key so that
     // they can be passed to the correct field
-    const namedInitialValues = { [name]: initialValuesObj };
+    const namedInitialValues = { [name]: initialValues };
 
     return (
       <div

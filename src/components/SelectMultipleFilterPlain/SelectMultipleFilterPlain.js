@@ -3,8 +3,7 @@ import { array, bool, func, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
-import SelectMultipleFilterPlainForm from './SelectMultipleFilterPlainForm';
-import { arrayToFormValues, formValuesToArray } from '../../util/data';
+import { SelectMultipleFilterPlainForm } from '../../forms';
 
 import css from './SelectMultipleFilterPlain.css';
 
@@ -20,8 +19,8 @@ class SelectMultipleFilterPlainComponent extends Component {
 
   handleSelect(values) {
     const { urlParam, name, onSelect } = this.props;
-    const selectedKeys = formValuesToArray(values[name]);
-    onSelect(urlParam, selectedKeys);
+    const paramValues = values[name];
+    onSelect(urlParam, paramValues);
   }
 
   handleClear() {
@@ -64,8 +63,7 @@ class SelectMultipleFilterPlainComponent extends Component {
       [css.columnLayout]: twoColumns,
     });
 
-    const initialValuesObj = arrayToFormValues(initialValues);
-    const namedInitialValues = { [name]: initialValuesObj };
+    const namedInitialValues = { [name]: initialValues };
 
     return (
       <div className={classes}>
