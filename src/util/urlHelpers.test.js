@@ -1,5 +1,6 @@
 import { types as sdkTypes } from './sdkLoader';
 import {
+  createSlug,
   parseFloatNum,
   encodeLatLng,
   decodeLatLng,
@@ -15,6 +16,32 @@ const SPACE = encodeURIComponent(' ');
 const COMMA = encodeURIComponent(',');
 
 describe('urlHelpers', () => {
+  describe('parseFloatNum()', () => {
+    it('handles empty string (returns "")', () => {
+      expect(createSlug('')).toEqual('');
+    });
+
+    it('handles space characters', () => {
+      expect(createSlug('ice hockey    tournament')).toEqual('ice-hockey-tournament');
+    });
+
+    it('handles special characters', () => {
+      expect(createSlug('ice hockey!%/@$€ for the win')).toEqual('ice-hockey-for-the-win');
+    });
+
+    it('handles multiple "-"', () => {
+      expect(createSlug('testing ---- dashes')).toEqual('testing-dashes');
+    });
+
+    it('handles umlauts', () => {
+      expect(createSlug('jääkiekko / pesäpallo')).toEqual('jaakiekko-pesapallo');
+    });
+
+    it('handles Emojis', () => {
+      expect(createSlug('smiling 💩 emoji')).toEqual('smiling-emoji');
+    });
+  });
+
   describe('parseFloatNum()', () => {
     it('handles empty value', () => {
       expect(parseFloatNum('')).toBeNull();

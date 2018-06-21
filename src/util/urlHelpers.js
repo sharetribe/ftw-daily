@@ -5,13 +5,55 @@ const { LatLng, LatLngBounds } = sdkTypes;
 
 export const LISTING_PAGE_PENDING_APPROVAL_VARIANT = 'pending-approval';
 
-export const createSlug = str =>
-  encodeURIComponent(
-    str
-      .toLowerCase()
-      .split(' ')
-      .join('-')
+// Create slug from random texts
+// From Gist thread: https://gist.github.com/mathewbyrne/1280286
+export const createSlug = str => {
+  let text = str
+    .toString()
+    .toLowerCase()
+    .trim();
+
+  const sets = [
+    { to: 'a', from: 'ÀÁÂÃÄÅÆĀĂĄẠẢẤẦẨẪẬẮẰẲẴẶ' },
+    { to: 'c', from: 'ÇĆĈČ' },
+    { to: 'd', from: 'ÐĎĐÞ' },
+    { to: 'e', from: 'ÈÉÊËĒĔĖĘĚẸẺẼẾỀỂỄỆ' },
+    { to: 'g', from: 'ĜĞĢǴ' },
+    { to: 'h', from: 'ĤḦ' },
+    { to: 'i', from: 'ÌÍÎÏĨĪĮİỈỊ' },
+    { to: 'j', from: 'Ĵ' },
+    { to: 'ij', from: 'Ĳ' },
+    { to: 'k', from: 'Ķ' },
+    { to: 'l', from: 'ĹĻĽŁ' },
+    { to: 'm', from: 'Ḿ' },
+    { to: 'n', from: 'ÑŃŅŇ' },
+    { to: 'o', from: 'ÒÓÔÕÖØŌŎŐỌỎỐỒỔỖỘỚỜỞỠỢǪǬƠ' },
+    { to: 'oe', from: 'Œ' },
+    { to: 'p', from: 'ṕ' },
+    { to: 'r', from: 'ŔŖŘ' },
+    { to: 's', from: 'ßŚŜŞŠ' },
+    { to: 't', from: 'ŢŤ' },
+    { to: 'u', from: 'ÙÚÛÜŨŪŬŮŰŲỤỦỨỪỬỮỰƯ' },
+    { to: 'w', from: 'ẂŴẀẄ' },
+    { to: 'x', from: 'ẍ' },
+    { to: 'y', from: 'ÝŶŸỲỴỶỸ' },
+    { to: 'z', from: 'ŹŻŽ' },
+    { to: '-', from: "·/_,:;'" },
+  ];
+
+  sets.forEach(set => {
+    text = text.replace(new RegExp(`[${set.from}]`, 'gi'), set.to);
+  });
+
+  return encodeURIComponent(
+    text
+      .replace(/\s+/g, '-') // Replace spaces with -
+      .replace(/[^\w-]+/g, '') // Remove all non-word chars
+      .replace(/--+/g, '-') // Replace multiple - with single -
+      .replace(/^-+/, '') // Trim - from start of text
+      .replace(/-+$/, '') // Trim - from end of text
   );
+};
 
 /**
  * Parse float from a string
