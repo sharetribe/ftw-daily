@@ -12,6 +12,10 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
+## Upcoming version
+* [fix] Improve slug creation (slashes were breaking rendering in some environments)
+ [#850](https://github.com/sharetribe/flex-template-web/pull/850)
+
 ## v1.0.0
 
 * [change] Migrate remaining Redux Forms to Final Form. Also now all the form components can be
