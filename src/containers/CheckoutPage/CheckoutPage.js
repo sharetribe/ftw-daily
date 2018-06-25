@@ -75,13 +75,17 @@ export class CheckoutPageComponent extends Component {
     const { bookingData, bookingDates, listing, fetchSpeculatedTransaction, history } = this.props;
     // Browser's back navigation should not rewrite data in session store.
     // Action is 'POP' on both history.back() and page refresh cases.
-    const hasNavigatedThroughLink = history.action === 'PUSH';
+    // Action is 'PUSH' when user has directed through a link
+    // Action is 'REPLACE' when user has directed through login/signup process
+    const hasNavigatedThroughLink = history.action === 'PUSH' || history.action === 'REPLACE';
 
     const hasDataInProps = !!(bookingData && bookingDates && listing) && hasNavigatedThroughLink;
     if (hasDataInProps) {
+      // Store data only if data is passed through props and user has navigated through a link.
       storeData(bookingData, bookingDates, listing, STORAGE_KEY);
     }
 
+    // NOTE: stored data can be empty if user has already successfully completed transaction.
     const pageData = hasDataInProps
       ? { bookingData, bookingDates, listing }
       : storedData(STORAGE_KEY);

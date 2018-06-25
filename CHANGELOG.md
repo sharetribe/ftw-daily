@@ -14,9 +14,11 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version
 * [fix] Improve slug creation (slashes were breaking rendering in some environments)
- [#850](https://github.com/sharetribe/flex-template-web/pull/850)
+  [#850](https://github.com/sharetribe/flex-template-web/pull/850)
 * [fix] Anonymous user should see contact link on UserCard
- [#851](https://github.com/sharetribe/flex-template-web/pull/851)
+  [#851](https://github.com/sharetribe/flex-template-web/pull/851)
+* [fix] Persisting booking request details across authentication
+  [#852](https://github.com/sharetribe/flex-template-web/pull/852)
 
 ## v1.0.0
 
