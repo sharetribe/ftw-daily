@@ -19,6 +19,9 @@ way to update this template, but currently, we follow a pattern:
   [#851](https://github.com/sharetribe/flex-template-web/pull/851)
 * [fix] Persisting booking request details across authentication
   [#852](https://github.com/sharetribe/flex-template-web/pull/852)
+* [change] Footer styles changed to more generic (no disappearing columns etc.)
+  If you have made changes to Footer, consider extracting it to different component before update.
+  [#853](https://github.com/sharetribe/flex-template-web/pull/853)
 
 ## v1.0.0
 
