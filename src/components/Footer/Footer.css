@@ -44,6 +44,10 @@
     max-width: 1056px;
     margin: 0 auto;
   }
+
+  @media (--viewportLarge) {
+    padding: 0 24px;
+  }
 }
 
 /* Mobile only social media links */
@@ -67,25 +71,30 @@
 .links {
   /* Layout */
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   width: 100%;
-  margin-bottom: 42px;
+  margin-bottom: 18px;
 
   @media (--viewportMedium) {
+    flex-wrap: nowrap;
+    justify-content: space-between;
     margin-bottom: 0;
   }
 }
 
 /* Desktop: logo and organization stuff */
 .organization {
+  flex-shrink: 0;
   flex-basis: 220px;
   display: none;
   margin-right: 24px;
+  margin-bottom: 24px;
 
   @media (--viewportMedium) {
     display: block;
     order: 1;
+    margin-right: 12px;
   }
 }
 
@@ -127,9 +136,12 @@
 .infoLinks {
   order: 2;
   flex-basis: 165px;
+  margin-right: 24px;
+  margin-bottom: 24px;
 
   @media (--viewportMedium) {
     padding-top: 2px;
+    margin-right: 12px;
   }
 }
 
@@ -139,8 +151,9 @@
 }
 
 .listItem {
-  height: 24px;
+  min-height: 24px;
   margin-bottom: 6px;
+
   @media (--viewportMedium) {
     margin-bottom: 0;
   }
@@ -149,6 +162,7 @@
 .link {
   /* Font */
   @apply --marketplaceH4FontStyles;
+  line-height: 20px;
   color: var(--matterColor);
   transition: var(--transitionStyleButton);
 
@@ -170,8 +184,12 @@
 .searches {
   order: 3;
   flex-basis: 165px;
+  margin-right: 24px;
+  margin-bottom: 24px;
+
   @media (--viewportMedium) {
     padding-top: 2px;
+    margin-right: 12px;
   }
 }
 
@@ -179,32 +197,29 @@
 /* This is not always visible */
 .searchesExtra {
   order: 4;
-  display: none;
   flex-basis: 165px;
-
-  @media (min-width: 550px) {
-    display: block;
-  }
+  margin-right: 24px;
+  margin-bottom: 24px;
 
   @media (--viewportMedium) {
-    display: none;
-  }
-
-  @media (--viewportLarge) {
-    display: block;
     padding-top: 2px;
+    margin-right: 12px;
   }
 }
 
 /* Desktop: extra links (social media links and legal links) */
 .extraLinks {
+  flex-shrink: 0;
   order: 5;
   display: none;
   flex-basis: 109px;
+  margin-right: 24px;
+  margin-bottom: 24px;
 
   @media (--viewportMedium) {
     display: flex;
     flex-direction: column;
+    margin-right: 12px;
   }
 }
 
