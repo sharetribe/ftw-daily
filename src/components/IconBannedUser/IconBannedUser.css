@@ -1,7 +1,11 @@
 @import '../../marketplace.css';
 
-.backgroundFill {
-  fill: var(--failColor);
+.backgroundLight {
+  stop-color: var(--marketplaceColorLight);
+}
+
+.backgroundDark {
+  stop-color: var(--marketplaceColor);
 }
 
 .foregroundFill {
