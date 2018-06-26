@@ -9,16 +9,15 @@ exports[`CheckoutPage matches snapshot 1`] = `
     <NamedLink
       name="LandingPage"
     >
-      <LogoIcon
-        alt="Logo"
+      <Logo
         className={null}
-        isMobile={true}
+        format="mobile"
         title="CheckoutPage.goToLandingPage"
       />
-      <LogoIcon
+      <Logo
         alt="CheckoutPage.goToLandingPage"
         className={null}
-        isMobile={false}
+        format="desktop"
       />
     </NamedLink>
   </div>

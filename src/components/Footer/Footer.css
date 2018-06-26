@@ -100,14 +100,14 @@
 
 .logoLink {
   display: block;
-  width: 156px;
-  height: 27px;
   margin-bottom: 14px;
 }
 
 .logo {
+  object-fit: contain;
+  object-position: left center;
   width: 100%;
-  height: 100%;
+  height: 27px;
 }
 
 .organizationInfo {

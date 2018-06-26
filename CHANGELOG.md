@@ -22,6 +22,9 @@ way to update this template, but currently, we follow a pattern:
 * [change] Footer styles changed to more generic (no disappearing columns etc.)
   If you have made changes to Footer, consider extracting it to different component before update.
   [#853](https://github.com/sharetribe/flex-template-web/pull/853)
+* [change] Logo customization refactored to be easier. Check CheckoutPage, TopbarDesktop and Footer
+  after update.
+  [#854](https://github.com/sharetribe/flex-template-web/pull/854)
 
 ## v1.0.0
 
