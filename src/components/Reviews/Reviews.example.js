@@ -18,3 +18,16 @@ export const WithThreeReviews = {
     ],
   },
 };
+
+export const WithBannedUser = {
+  component: Reviews,
+  props: {
+    reviews: [
+      createReview(
+        'review_1',
+        { rating: 1 },
+        { author: createUser('author_1', { banned: true, profile: null }) }
+      ),
+    ],
+  },
+};
