@@ -7,6 +7,12 @@ import { propTypes } from '../../util/types';
 
 import css from './Reviews.css';
 
+const authorDisplayName = (review, intl) => {
+  return review.author.attributes.banned
+    ? intl.formatMessage({ id: 'Reviews.bannedUserDisplayName' })
+    : review.author.attributes.profile.displayName;
+};
+
 const Review = props => {
   const { review, intl } = props;
 
@@ -24,7 +30,7 @@ const Review = props => {
         />
         <p className={css.reviewContent}>{review.attributes.content}</p>
         <p className={css.reviewInfo}>
-          {review.author.attributes.profile.displayName}
+          {authorDisplayName(review, intl)}
           <span className={css.separator}>•</span>
           {dateString}
           <span className={css.desktopSeparator}>•</span>
