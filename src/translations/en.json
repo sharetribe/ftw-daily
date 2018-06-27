@@ -523,6 +523,7 @@
   "ReviewModal.description": "Reviews are an important part of the Saunatime community. Please share what went well and what could have been improved.",
   "ReviewModal.later": "Later",
   "ReviewModal.title": "Leave a review for {revieweeName}",
+  "Reviews.bannedUserDisplayName": "Banned user",
   "SearchFilters.amenitiesLabel": "Amenities",
   "SearchFilters.categoryLabel": "Category",
   "SearchFilters.filtersButtonLabel": "Filters",

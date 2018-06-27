@@ -25,6 +25,8 @@ way to update this template, but currently, we follow a pattern:
 * [change] Logo customization refactored to be easier. Check CheckoutPage, TopbarDesktop and Footer
   after update.
   [#854](https://github.com/sharetribe/flex-template-web/pull/854)
+* [fix] Fix showing reviews from banned users.
+  [#855](https://github.com/sharetribe/flex-template-web/pull/855)
 
 ## v1.0.0
 
