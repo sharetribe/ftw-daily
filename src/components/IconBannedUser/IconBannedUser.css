@@ -1,11 +1,11 @@
 @import '../../marketplace.css';
 
 .backgroundLight {
-  stop-color: var(--marketplaceColorLight);
+  stop-color: var(--bannedColorLight);
 }
 
 .backgroundDark {
-  stop-color: var(--marketplaceColor);
+  stop-color: var(--bannedColorDark);
 }
 
 .foregroundFill {
