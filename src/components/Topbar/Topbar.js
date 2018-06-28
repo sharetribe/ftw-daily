@@ -174,7 +174,7 @@ class TopbarComponent extends Component {
     );
 
     // Only render current search if full place object is available in the URL params
-    const locationFieldsPresent = address && origin && bounds && country;
+    const locationFieldsPresent = address && bounds && country;
     const initialSearchFormValues = {
       location: locationFieldsPresent
         ? {
