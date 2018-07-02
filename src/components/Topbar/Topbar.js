@@ -174,7 +174,9 @@ class TopbarComponent extends Component {
     );
 
     // Only render current search if full place object is available in the URL params
-    const locationFieldsPresent = address && bounds && country;
+    const locationFieldsPresent = config.sortSearchByDistance
+      ? address && origin && bounds && country
+      : address && bounds && country;
     const initialSearchFormValues = {
       location: locationFieldsPresent
         ? {
