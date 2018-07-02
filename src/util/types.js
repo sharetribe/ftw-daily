@@ -70,7 +70,7 @@ propTypes.route = shape({
 // Place object from LocationAutocompleteInput
 propTypes.place = shape({
   address: string.isRequired,
-  origin: propTypes.latlng.isRequired,
+  origin: propTypes.latlng,
   bounds: propTypes.latlngBounds, // optional viewport bounds
   country: string, // country code, e.g. FI, US
 });
