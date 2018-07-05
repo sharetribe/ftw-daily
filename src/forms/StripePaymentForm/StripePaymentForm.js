@@ -113,9 +113,6 @@ class StripePaymentForm extends Component {
       }
     });
   }
-  componentWillReceiveProps() {
-    this.setState(initialState);
-  }
   componentWillUnmount() {
     if (this.card) {
       this.card.removeEventListener('change', this.handleCardValueChange);
