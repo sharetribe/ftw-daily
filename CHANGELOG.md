@@ -12,6 +12,11 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
+## Upcoming version
+
+* [fix] Fix setting Topbar search input initial value.
+  [#857](https://github.com/sharetribe/flex-template-web/pull/857)
+
 ## v1.1.0
 * [fix] Improve slug creation (slashes were breaking rendering in some environments)
   [#850](https://github.com/sharetribe/flex-template-web/pull/850)
