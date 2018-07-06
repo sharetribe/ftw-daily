@@ -99,8 +99,7 @@
   @apply --marketplaceH4FontStyles;
   display: none;
   margin-bottom: 0;
-
-  /* Align to same baseline as the "Your host" heading */
+  white-space: nowrap;
 
   @media (--viewportMedium) {
     display: inline;
@@ -110,8 +109,6 @@
 .editProfileMobile {
   @apply --marketplaceH4FontStyles;
   display: inline;
-
-  /* Align to same baseline as the "Your host" heading */
 
   @media (--viewportMedium) {
     display: none;
