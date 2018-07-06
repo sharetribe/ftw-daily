@@ -451,7 +451,6 @@ export class ListingPageComponent extends Component {
                   <SectionHost
                     title={title}
                     listing={currentListing}
-                    isOwnListing={isOwnListing}
                     authorDisplayName={authorDisplayName}
                     onContactUser={this.onContactUser}
                     isEnquiryModalOpen={isAuthenticated && this.state.enquiryModalOpen}

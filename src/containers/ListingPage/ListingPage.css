@@ -526,24 +526,6 @@
   }
 }
 
-.editProfileLink {
-  @apply --marketplaceH4FontStyles;
-  position: absolute;
-  margin: 0;
-
-  /* Align to same baseline as the "Your host" heading */
-  top: 2px;
-  right: 24px;
-
-  @media (--viewportMedium) {
-    margin: 0;
-
-    /* Align to same baseline as the "Hello, ..." heading */
-    top: 74px;
-    right: 0;
-  }
-}
-
 .map {
   /* Dimensions: Map takes all available space from viewport (excludes action button and section title) */
   height: calc(100vh - 193px);
