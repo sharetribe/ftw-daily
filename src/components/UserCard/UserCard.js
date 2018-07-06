@@ -83,13 +83,29 @@ const UserCard = props => {
     [css.withBioMissingAbove]: !hasBio,
   });
 
-  const hideContact = currentUser && isCurrentUser;
-  const separator = hideContact ? null : <span className={css.linkSeparator}>•</span>;
-  const contact = hideContact ? null : (
+  const separator = isCurrentUser ? null : <span className={css.linkSeparator}>•</span>;
+
+  const contact = isCurrentUser ? null : (
     <InlineTextButton onClick={handleContactUserClick}>
       <FormattedMessage id="UserCard.contactUser" />
     </InlineTextButton>
   );
+
+  const editProfileMobile = isCurrentUser ? (
+    <span className={css.editProfileMobile}>
+      <span className={css.linkSeparator}>•</span>
+      <NamedLink name="ProfileSettingsPage">
+        <FormattedMessage id="ListingPage.editProfileLink" />
+      </NamedLink>
+    </span>
+  ) : null;
+
+  const editProfileDesktop = isCurrentUser ? (
+    <NamedLink className={css.editProfileDesktop} name="ProfileSettingsPage">
+      <FormattedMessage id="ListingPage.editProfileLink" />
+    </NamedLink>
+  ) : null;
+
   const links = ensuredUser.id ? (
     <p className={linkClasses}>
       <NamedLink className={css.link} name="ProfilePage" params={{ id: ensuredUser.id.uuid }}>
@@ -97,6 +113,7 @@ const UserCard = props => {
       </NamedLink>
       {separator}
       {contact}
+      {editProfileMobile}
     </p>
   ) : null;
 
@@ -105,9 +122,12 @@ const UserCard = props => {
       <div className={css.content}>
         <AvatarLarge className={css.avatar} user={user} />
         <div className={css.info}>
-          <h3 className={css.heading}>
-            <FormattedMessage id="UserCard.heading" values={{ name: displayName }} />
-          </h3>
+          <div className={css.headingRow}>
+            <h3 className={css.heading}>
+              <FormattedMessage id="UserCard.heading" values={{ name: displayName }} />
+            </h3>
+            {editProfileDesktop}
+          </div>
           {hasBio ? <ExpandableBio className={css.desktopBio} bio={bio} /> : null}
           {links}
         </div>
