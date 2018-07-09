@@ -27,6 +27,8 @@ const CUSTOMER = 'customer';
 
 export const SET_INITAL_VALUES = 'app/TransactionPage/SET_INITIAL_VALUES';
 
+export const CLEAR_ERRORS = 'app/TransactionPage/CLEAR_ERRORS';
+
 export const FETCH_TRANSACTION_REQUEST = 'app/TransactionPage/FETCH_TRANSACTION_REQUEST';
 export const FETCH_TRANSACTION_SUCCESS = 'app/TransactionPage/FETCH_TRANSACTION_SUCCESS';
 export const FETCH_TRANSACTION_ERROR = 'app/TransactionPage/FETCH_TRANSACTION_ERROR';
@@ -89,6 +91,9 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case SET_INITAL_VALUES:
       return { ...initialState, ...payload };
 
+    case CLEAR_ERRORS:
+      return { ...state, sendMessageError: null, sendReviewError: null };
+
     case FETCH_TRANSACTION_REQUEST:
       return { ...state, fetchTransactionInProgress: true, fetchTransactionError: null };
     case FETCH_TRANSACTION_SUCCESS: {
@@ -133,7 +138,12 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
       return { ...state, fetchMessagesInProgress: false, fetchMessagesError: payload };
 
     case SEND_MESSAGE_REQUEST:
-      return { ...state, sendMessageInProgress: true, sendMessageError: null };
+      return {
+        ...state,
+        sendMessageInProgress: true,
+        sendMessageError: null,
+        initialMessageFailedToTransaction: null,
+      };
     case SEND_MESSAGE_SUCCESS:
       return { ...state, sendMessageInProgress: false };
     case SEND_MESSAGE_ERROR:
@@ -162,6 +172,9 @@ export const setInitialValues = initialValues => ({
   type: SET_INITAL_VALUES,
   payload: pick(initialValues, Object.keys(initialState)),
 });
+
+// clears tx page message and review sending errors
+const clearErrors = () => ({ type: CLEAR_ERRORS });
 
 const fetchTransactionRequest = () => ({ type: FETCH_TRANSACTION_REQUEST });
 const fetchTransactionSuccess = response => ({
@@ -470,7 +483,7 @@ export const loadData = params => dispatch => {
   const txId = new UUID(params.id);
 
   // Clear the send error since the message form is emptied as well.
-  dispatch(setInitialValues({ sendMessageError: null, sendReviewError: null }));
+  dispatch(clearErrors());
 
   // Sale / order (i.e. transaction entity in API)
   return Promise.all([dispatch(fetchTransaction(txId)), dispatch(fetchMessages(txId, 1))]);
