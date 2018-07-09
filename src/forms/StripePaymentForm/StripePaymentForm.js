@@ -199,7 +199,7 @@ class StripePaymentForm extends Component {
     const classes = classNames(rootClassName || css.root, className);
     const cardClasses = classNames(css.card, {
       [css.cardSuccess]: this.state.cardValueValid,
-      [css.cardError]: this.state.error,
+      [css.cardError]: this.state.error && !submitInProgress,
     });
 
     const messagePlaceholder = intl.formatMessage(
@@ -240,7 +240,9 @@ class StripePaymentForm extends Component {
             this.cardContainer = el;
           }}
         />
-        {this.state.error ? <span style={{ color: 'red' }}>{this.state.error}</span> : null}
+        {this.state.error && !submitInProgress ? (
+          <span style={{ color: 'red' }}>{this.state.error}</span>
+        ) : null}
         <h3 className={css.messageHeading}>
           <FormattedMessage id="StripePaymentForm.messageHeading" />
         </h3>
