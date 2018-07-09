@@ -85,20 +85,20 @@ const UserCard = props => {
 
   const separator = isCurrentUser ? null : <span className={css.linkSeparator}>•</span>;
 
-  const contact = isCurrentUser ? null : (
+  const contact = (
     <InlineTextButton onClick={handleContactUserClick}>
       <FormattedMessage id="UserCard.contactUser" />
     </InlineTextButton>
   );
 
-  const editProfileMobile = isCurrentUser ? (
+  const editProfileMobile = (
     <span className={css.editProfileMobile}>
       <span className={css.linkSeparator}>•</span>
       <NamedLink name="ProfileSettingsPage">
         <FormattedMessage id="ListingPage.editProfileLink" />
       </NamedLink>
     </span>
-  ) : null;
+  );
 
   const editProfileDesktop = isCurrentUser ? (
     <NamedLink className={css.editProfileDesktop} name="ProfileSettingsPage">
@@ -112,8 +112,7 @@ const UserCard = props => {
         <FormattedMessage id="UserCard.viewProfileLink" />
       </NamedLink>
       {separator}
-      {contact}
-      {editProfileMobile}
+      {isCurrentUser ? editProfileMobile : contact}
     </p>
   ) : null;
 
