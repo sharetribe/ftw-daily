@@ -59,7 +59,6 @@ class ContactDetailsFormComponent extends Component {
             inProgress,
             intl,
             invalid,
-            ready,
             sendVerificationEmailError,
             sendVerificationEmailInProgress,
             values,
@@ -320,7 +319,7 @@ class ContactDetailsFormComponent extends Component {
                   className={css.submitButton}
                   type="submit"
                   inProgress={inProgress}
-                  ready={ready}
+                  ready={pristineSinceLastSubmit}
                   disabled={submitDisabled}
                 >
                   <FormattedMessage id="ContactDetailsForm.saveChanges" />
