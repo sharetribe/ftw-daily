@@ -114,3 +114,8 @@
     display: none;
   }
 }
+
+.contact {
+  @apply --marketplaceH4FontStyles;
+  margin: 0;
+}
