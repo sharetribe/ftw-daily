@@ -14,7 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version
 
-* [fix] Fix submit button state on contact details page
+* [fix] Fix TransactionPage state management in loadData.
+  [#863](https://github.com/sharetribe/flex-template-web/pull/863) & [#865](https://github.com/sharetribe/flex-template-web/pull/865)
+* [fix] Fix submit button state on contact details page.
   [#864](https://github.com/sharetribe/flex-template-web/pull/864)
 * [fix] Fix passing initial message sending error to transaction page.
   [#863](https://github.com/sharetribe/flex-template-web/pull/863)
