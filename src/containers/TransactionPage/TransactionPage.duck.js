@@ -27,7 +27,7 @@ const CUSTOMER = 'customer';
 
 export const SET_INITAL_VALUES = 'app/TransactionPage/SET_INITIAL_VALUES';
 
-export const CLEAR_ERRORS = 'app/TransactionPage/CLEAR_ERRORS';
+export const RESET_STATE = 'app/TransactionPage/RESET_STATE';
 
 export const FETCH_TRANSACTION_REQUEST = 'app/TransactionPage/FETCH_TRANSACTION_REQUEST';
 export const FETCH_TRANSACTION_SUCCESS = 'app/TransactionPage/FETCH_TRANSACTION_SUCCESS';
@@ -91,8 +91,8 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case SET_INITAL_VALUES:
       return { ...initialState, ...payload };
 
-    case CLEAR_ERRORS:
-      return { ...state, sendMessageError: null, sendReviewError: null };
+    case RESET_STATE:
+      return { ...state, sendMessageError: null, sendReviewError: null, messages: [] };
 
     case FETCH_TRANSACTION_REQUEST:
       return { ...state, fetchTransactionInProgress: true, fetchTransactionError: null };
@@ -174,7 +174,7 @@ export const setInitialValues = initialValues => ({
 });
 
 // clears tx page message and review sending errors
-const clearErrors = () => ({ type: CLEAR_ERRORS });
+const resetState = () => ({ type: RESET_STATE });
 
 const fetchTransactionRequest = () => ({ type: FETCH_TRANSACTION_REQUEST });
 const fetchTransactionSuccess = response => ({
@@ -483,7 +483,7 @@ export const loadData = params => dispatch => {
   const txId = new UUID(params.id);
 
   // Clear the send error since the message form is emptied as well.
-  dispatch(clearErrors());
+  dispatch(resetState());
 
   // Sale / order (i.e. transaction entity in API)
   return Promise.all([dispatch(fetchTransaction(txId)), dispatch(fetchMessages(txId, 1))]);
