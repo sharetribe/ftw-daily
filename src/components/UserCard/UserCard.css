@@ -53,6 +53,7 @@
   display: none;
 
   @media (--viewportMedium) {
+    margin-top: 16px;
     display: block;
   }
 }
@@ -64,16 +65,57 @@
 
 .links {
   @apply --marketplaceH4FontStyles;
+  margin-top: 13px;
+
+  @media (--viewportMedium) {
+    margin: 16px 0 0 0;
+  }
 }
 
 .withBioMissingAbove {
   @media (--viewportMedium) {
     /* Fix baseline alignment if bio is missing from above */
-    margin-top: 18px;
+    margin-top: 16px;
   }
 }
 
 .linkSeparator {
   margin: 0 10px;
   color: var(--marketplaceColor);
+}
+
+.headingRow {
+  display: flex;
+  flex-direction: column;
+
+  @media (--viewportMedium) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}
+
+.editProfileDesktop {
+  @apply --marketplaceH4FontStyles;
+  display: none;
+  margin-bottom: 0;
+  white-space: nowrap;
+
+  @media (--viewportMedium) {
+    display: inline;
+  }
+}
+
+.editProfileMobile {
+  @apply --marketplaceH4FontStyles;
+  display: inline;
+
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.contact {
+  @apply --marketplaceH4FontStyles;
+  margin: 0;
 }

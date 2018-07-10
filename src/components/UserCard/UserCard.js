@@ -83,20 +83,36 @@ const UserCard = props => {
     [css.withBioMissingAbove]: !hasBio,
   });
 
-  const hideContact = currentUser && isCurrentUser;
-  const separator = hideContact ? null : <span className={css.linkSeparator}>•</span>;
-  const contact = hideContact ? null : (
-    <InlineTextButton onClick={handleContactUserClick}>
+  const separator = isCurrentUser ? null : <span className={css.linkSeparator}>•</span>;
+
+  const contact = (
+    <InlineTextButton className={css.contact} onClick={handleContactUserClick}>
       <FormattedMessage id="UserCard.contactUser" />
     </InlineTextButton>
   );
+
+  const editProfileMobile = (
+    <span className={css.editProfileMobile}>
+      <span className={css.linkSeparator}>•</span>
+      <NamedLink name="ProfileSettingsPage">
+        <FormattedMessage id="ListingPage.editProfileLink" />
+      </NamedLink>
+    </span>
+  );
+
+  const editProfileDesktop = isCurrentUser ? (
+    <NamedLink className={css.editProfileDesktop} name="ProfileSettingsPage">
+      <FormattedMessage id="ListingPage.editProfileLink" />
+    </NamedLink>
+  ) : null;
+
   const links = ensuredUser.id ? (
     <p className={linkClasses}>
       <NamedLink className={css.link} name="ProfilePage" params={{ id: ensuredUser.id.uuid }}>
         <FormattedMessage id="UserCard.viewProfileLink" />
       </NamedLink>
       {separator}
-      {contact}
+      {isCurrentUser ? editProfileMobile : contact}
     </p>
   ) : null;
 
@@ -105,9 +121,12 @@ const UserCard = props => {
       <div className={css.content}>
         <AvatarLarge className={css.avatar} user={user} />
         <div className={css.info}>
-          <h3 className={css.heading}>
-            <FormattedMessage id="UserCard.heading" values={{ name: displayName }} />
-          </h3>
+          <div className={css.headingRow}>
+            <h3 className={css.heading}>
+              <FormattedMessage id="UserCard.heading" values={{ name: displayName }} />
+            </h3>
+            {editProfileDesktop}
+          </div>
           {hasBio ? <ExpandableBio className={css.desktopBio} bio={bio} /> : null}
           {links}
         </div>
