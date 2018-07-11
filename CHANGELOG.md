@@ -23,6 +23,9 @@ way to update this template, but currently, we follow a pattern:
 * [fix] Fix initial message input clearing too early in checkout page.
   [#861](https://github.com/sharetribe/flex-template-web/pull/861)
 * [fix] Fix setting Topbar search input initial value.
+* [change] Update Redux to v4
+  [#859](https://github.com/sharetribe/flex-template-web/pull/859)
+* [fix] Fix setting Topbar search input initial value
   [#857](https://github.com/sharetribe/flex-template-web/pull/857)
 
 ## v1.1.0
