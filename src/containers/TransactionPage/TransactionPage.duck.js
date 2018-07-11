@@ -1,5 +1,6 @@
 import pick from 'lodash/pick';
 import pickBy from 'lodash/pickBy';
+import isEmpty from 'lodash/isEmpty';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
 import {
@@ -470,6 +471,10 @@ export const sendReview = (role, tx, reviewRating, reviewContent) => (dispatch, 
     : sendReviewAsFirst(tx.id, params, role, dispatch, sdk);
 };
 
+const isNonEmpty = value => {
+  return typeof value === 'object' || Array.isArray(value) ? !isEmpty(value) : !!value;
+};
+
 // loadData is a collection of async calls that need to be made
 // before page has all the info it needs to render itself
 export const loadData = params => (dispatch, getState) => {
@@ -479,8 +484,8 @@ export const loadData = params => (dispatch, getState) => {
 
   // In case a transaction reference is found from a previous
   // data load -> clear the state. Otherwise keep the non-null
-  // values which may have been set from a previous page.
-  const initialValues = txRef ? {} : pickBy(state, v => !!v);
+  // and non-empty values which may have been set from a previous page.
+  const initialValues = txRef ? {} : pickBy(state, isNonEmpty);
   dispatch(setInitialValues(initialValues));
 
   // Sale / order (i.e. transaction entity in API)
