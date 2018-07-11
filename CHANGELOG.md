@@ -14,12 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version
 
-* [fix] Fix TransactionPage state management in loadData.
-  [#863](https://github.com/sharetribe/flex-template-web/pull/863) & [#865](https://github.com/sharetribe/flex-template-web/pull/865)
+* [change] Change TransactionPage state management in loadData.
+  [#863](https://github.com/sharetribe/flex-template-web/pull/863), [#865](https://github.com/sharetribe/flex-template-web/pull/865) & [#866](https://github.com/sharetribe/flex-template-web/pull/866)
 * [fix] Fix submit button state on contact details page.
   [#864](https://github.com/sharetribe/flex-template-web/pull/864)
-* [fix] Fix passing initial message sending error to transaction page.
-  [#863](https://github.com/sharetribe/flex-template-web/pull/863)
 * [fix] Fix listing page host section layout bug.
   [#862](https://github.com/sharetribe/flex-template-web/pull/862)
 * [fix] Fix initial message input clearing too early in checkout page.
