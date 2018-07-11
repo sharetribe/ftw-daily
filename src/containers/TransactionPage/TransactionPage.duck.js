@@ -1,4 +1,6 @@
 import pick from 'lodash/pick';
+import pickBy from 'lodash/pickBy';
+import isEmpty from 'lodash/isEmpty';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
 import {
@@ -26,8 +28,6 @@ const CUSTOMER = 'customer';
 // ================ Action types ================ //
 
 export const SET_INITAL_VALUES = 'app/TransactionPage/SET_INITIAL_VALUES';
-
-export const RESET_STATE = 'app/TransactionPage/RESET_STATE';
 
 export const FETCH_TRANSACTION_REQUEST = 'app/TransactionPage/FETCH_TRANSACTION_REQUEST';
 export const FETCH_TRANSACTION_SUCCESS = 'app/TransactionPage/FETCH_TRANSACTION_SUCCESS';
@@ -90,9 +90,6 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
   switch (type) {
     case SET_INITAL_VALUES:
       return { ...initialState, ...payload };
-
-    case RESET_STATE:
-      return { ...state, sendMessageError: null, sendReviewError: null, messages: [] };
 
     case FETCH_TRANSACTION_REQUEST:
       return { ...state, fetchTransactionInProgress: true, fetchTransactionError: null };
@@ -172,9 +169,6 @@ export const setInitialValues = initialValues => ({
   type: SET_INITAL_VALUES,
   payload: pick(initialValues, Object.keys(initialState)),
 });
-
-// clears tx page message and review sending errors
-const resetState = () => ({ type: RESET_STATE });
 
 const fetchTransactionRequest = () => ({ type: FETCH_TRANSACTION_REQUEST });
 const fetchTransactionSuccess = response => ({
@@ -477,13 +471,22 @@ export const sendReview = (role, tx, reviewRating, reviewContent) => (dispatch, 
     : sendReviewAsFirst(tx.id, params, role, dispatch, sdk);
 };
 
+const isNonEmpty = value => {
+  return typeof value === 'object' || Array.isArray(value) ? !isEmpty(value) : !!value;
+};
+
 // loadData is a collection of async calls that need to be made
 // before page has all the info it needs to render itself
-export const loadData = params => dispatch => {
+export const loadData = params => (dispatch, getState) => {
   const txId = new UUID(params.id);
+  const state = getState().TransactionPage;
+  const txRef = state.transactionRef;
 
-  // Clear the send error since the message form is emptied as well.
-  dispatch(resetState());
+  // In case a transaction reference is found from a previous
+  // data load -> clear the state. Otherwise keep the non-null
+  // and non-empty values which may have been set from a previous page.
+  const initialValues = txRef ? {} : pickBy(state, isNonEmpty);
+  dispatch(setInitialValues(initialValues));
 
   // Sale / order (i.e. transaction entity in API)
   return Promise.all([dispatch(fetchTransaction(txId)), dispatch(fetchMessages(txId, 1))]);
