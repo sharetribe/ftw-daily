@@ -47,9 +47,10 @@ export const getPlaceDetails = (placeId, sessionToken) =>
     const serviceStatus = window.google.maps.places.PlacesServiceStatus;
     const el = document.createElement('div');
     const service = new window.google.maps.places.PlacesService(el);
+    const fields = ['address_component', 'formatted_address', 'geometry', 'place_id'];
     const sessionTokenMaybe = sessionToken ? { sessionToken } : {};
 
-    service.getDetails({ placeId, ...sessionTokenMaybe }, (place, status) => {
+    service.getDetails({ placeId, fields, ...sessionTokenMaybe }, (place, status) => {
       if (status !== serviceStatus.OK) {
         reject(
           new Error(`Could not get details for place id "${placeId}", error status was "${status}"`)
