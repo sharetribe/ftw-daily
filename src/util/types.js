@@ -187,6 +187,16 @@ propTypes.booking = shape({
   }),
 });
 
+// Denormalised time slot object
+propTypes.timeSlot = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('timeSlot').isRequired,
+  attributes: shape({
+    end: instanceOf(Date).isRequired,
+    start: instanceOf(Date).isRequired,
+  }),
+});
+
 // When a customer makes a booking to a listing, a transaction is
 // created with the initial request transition.
 export const TRANSITION_REQUEST = 'transition/request';
@@ -425,6 +435,7 @@ export const ERROR_CODE_EMAIL_NOT_VERIFIED = 'email-unverified';
 export const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'email-too-many-verification-requests';
 export const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit';
 export const ERROR_CODE_VALIDATION_INVALID_PARAMS = 'validation-invalid-params';
+export const ERROR_CODE_VALIDATION_INVALID_VALUE = 'validation-invalid-value';
 export const ERROR_CODE_NOT_FOUND = 'not-found';
 export const ERROR_CODE_FORBIDDEN = 'forbidden';
 export const ERROR_CODE_MISSING_STRIPE_ACCOUNT = 'transaction-missing-stripe-account';
@@ -441,6 +452,7 @@ const ERROR_CODES = [
   ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS,
   ERROR_CODE_UPLOAD_OVER_LIMIT,
   ERROR_CODE_VALIDATION_INVALID_PARAMS,
+  ERROR_CODE_VALIDATION_INVALID_VALUE,
   ERROR_CODE_NOT_FOUND,
   ERROR_CODE_FORBIDDEN,
   ERROR_CODE_MISSING_STRIPE_ACCOUNT,
