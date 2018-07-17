@@ -235,7 +235,7 @@ export const loadData = (params, search) => dispatch => {
   // in the future due to Stripe limitations
   const start = moment().toDate();
   const end = moment()
-  .add(90, 'days')
+    .add(config.dayCountAvailableForBooking, 'days')
     .toDate();
   const timeSlotsParams = { listingId, start, end };
 

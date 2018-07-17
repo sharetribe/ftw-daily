@@ -36,6 +36,11 @@ const bookingProcessAlias = 'preauth-with-nightly-booking/release-1';
 // translations when the unit is changed.
 const bookingUnitType = 'line-item/night';
 
+// A maximum number of days forwards during which a booking can be made.
+// This is limited due to Stripe holding funds up to 90 days from the
+// moment they are charged.
+const dayCountAvailableForBooking = 90;
+
 // To pass environment variables to the client app in the build
 // script, react-scripts (and the sharetribe-scripts fork of
 // react-scripts) require using the REACT_APP_ prefix to avoid
@@ -313,6 +318,7 @@ const config = {
   locale,
   bookingProcessAlias,
   bookingUnitType,
+  dayCountAvailableForBooking,
   i18n,
   sdk: {
     clientId: sdkClientId,
