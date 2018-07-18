@@ -29,7 +29,7 @@ const SectionMapMaybe = props => {
         <FormattedMessage id="ListingPage.locationTitle" />
       </h2>
       <div className={css.map}>
-        <Map {...mapProps} />
+        <Map {...mapProps} useStaticMap />
       </div>
     </div>
   );
