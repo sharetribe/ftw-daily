@@ -217,7 +217,6 @@ class LocationAutocompleteInput extends Component {
     this.setState({ highlightedIndex: -1 });
 
     if (!newValue) {
-      this.autocompleteSessionToken = null;
       // No need to fetch predictions on empty input
       return;
     }
