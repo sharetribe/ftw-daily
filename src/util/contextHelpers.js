@@ -99,9 +99,9 @@ export const lazyLoadWithDimensions = (Component, options) => {
 
       this.state = { width: 0, height: 0 };
 
-      this.handleWindowResize = this.handleWindowResize.bind(this);
-      this.setDimensions = throttle(this.setDimensions.bind(this), THROTTLE_WAIT_MS);
+      this.handleWindowResize = throttle(this.handleWindowResize.bind(this), THROTTLE_WAIT_MS);
       this.isElementNearViewport = this.isElementNearViewport.bind(this);
+      this.setDimensions = this.setDimensions.bind(this);
     }
 
     componentDidMount() {
