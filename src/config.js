@@ -252,6 +252,9 @@ const siteFacebookPage = 'https://www.facebook.com/Sharetribe/';
 // You should create one to track social sharing in Facebook
 const facebookAppId = null;
 
+// Google Maps API key is needed for static map images.
+const googleMapsAPIKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
 const coordinates = {
   // If true, obfuscate the coordinates of the listings that are shown
   // on a map.
@@ -280,9 +283,26 @@ const coordinates = {
     fillColor: '#c0392b',
     fillOpacity: 0.2,
     strokeColor: '#c0392b',
-    strokeWeight: 0.5,
+    strokeOpacity: 0.5,
+    strokeWeight: 1,
     clickable: false,
   },
+
+  // An option to use custom marker on static maps. Uncomment to enable it.
+  // https://developers.google.com/maps/documentation/maps-static/dev-guide#Markers
+  //
+  // Note 1: fuzzy coordinate circle overwrites these custom marker settings)
+  // Note 2: markerURI needs to be a public URI accessible by Google Maps API servers.
+  // The easiest place is /public/static/icons/ folder, but then the marker image is not available
+  // while developing through localhost.
+
+  // customMarker: {
+  //   markerURI: encodeURI(`${canonicalRootURL}/static/icons/map-marker-32x32.png`),
+  //   anchorX: 16,
+  //   anchorY: 32,
+  //   width: 32,
+  //   height: 32,
+  // },
 };
 
 // NOTE: only expose configuration that should be visible in the
@@ -318,6 +338,7 @@ const config = {
   facebookAppId,
   sentryDsn,
   usingSSL,
+  googleMapsAPIKey,
   coordinates,
   custom,
 };

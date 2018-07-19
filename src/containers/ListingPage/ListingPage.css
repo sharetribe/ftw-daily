@@ -530,6 +530,9 @@
   /* Dimensions: Map takes all available space from viewport (excludes action button and section title) */
   height: calc(100vh - 193px);
   width: 100%;
+
+  /* Static map: max-width is 640px */
+  max-width: 640px;
   background-color: #eee;
 
   @media (--viewportMedium) {
