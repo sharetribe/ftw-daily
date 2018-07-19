@@ -12,8 +12,9 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## Upcoming version
+## v1.2.0
 * [change] Use Google's static map on ListingPage.
+  This is a reaction to pricing change of Google Maps APIs.
   [#869](https://github.com/sharetribe/flex-template-web/pull/869)
 * [change] Use sessionTokens and fields for Autocomplete calls to Google Maps.
   This is a reaction to pricing change of Google Maps APIs.
