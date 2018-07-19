@@ -152,6 +152,10 @@ class LocationAutocompleteInput extends Component {
     // Ref to the input element.
     this.input = null;
 
+    // Current sessionToken used to combine autocomplete calls with place details call
+    // This reduces Google Maps pricing.
+    this.autocompleteSessionToken = null;
+
     this.changeHighlight = this.changeHighlight.bind(this);
     this.selectItem = this.selectItem.bind(this);
     this.selectItemIfNoneSelected = this.selectItemIfNoneSelected.bind(this);
@@ -266,7 +270,11 @@ class LocationAutocompleteInput extends Component {
       selectedPlace: null,
     });
 
-    getPlaceDetails(placeId)
+    this.autocompleteSessionToken =
+      this.autocompleteSessionToken || new window.google.maps.places.AutocompleteSessionToken();
+    const sessionToken = this.autocompleteSessionToken;
+
+    getPlaceDetails(placeId, sessionToken)
       .then(place => {
         this.props.input.onChange({
           search: prediction.description,
@@ -274,6 +282,7 @@ class LocationAutocompleteInput extends Component {
           selectedPlaceId: placeId,
           selectedPlace: place,
         });
+        this.autocompleteSessionToken = null;
       })
       .catch(e => {
         // eslint-disable-next-line no-console
@@ -298,7 +307,12 @@ class LocationAutocompleteInput extends Component {
       throw new Error('Google Maps API must be loaded for LocationAutocompleteInput');
     }
     const onChange = this.props.input.onChange;
-    getPlacePredictions(search)
+
+    this.autocompleteSessionToken =
+      this.autocompleteSessionToken || new window.google.maps.places.AutocompleteSessionToken();
+    const sessionToken = this.autocompleteSessionToken;
+
+    getPlacePredictions(search, sessionToken)
       .then(results => {
         const { search: currentSearch } = currentValue(this.props);
 
