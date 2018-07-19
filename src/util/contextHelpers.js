@@ -87,6 +87,10 @@ export const lazyLoadWithDimensions = (Component, options) => {
   // First render default wait after mounting (small wait for styled paint)
   const RENDER_WAIT_MS = 100;
 
+  // Scrolling and other events that affect to viewport location have this safety margin
+  // for lazy loading
+  const NEAR_VIEWPORT_MARGIN = 50;
+
   class LazyLoadWithDimensionsComponent extends ReactComponent {
     constructor(props) {
       super(props);
@@ -96,8 +100,8 @@ export const lazyLoadWithDimensions = (Component, options) => {
       this.state = { width: 0, height: 0 };
 
       this.handleWindowResize = this.handleWindowResize.bind(this);
-      this.isElementInViewport = this.isElementInViewport.bind(this);
       this.setDimensions = throttle(this.setDimensions.bind(this), THROTTLE_WAIT_MS);
+      this.isElementNearViewport = this.isElementNearViewport.bind(this);
     }
 
     componentDidMount() {
@@ -106,8 +110,8 @@ export const lazyLoadWithDimensions = (Component, options) => {
       window.addEventListener('orientationchange', this.handleWindowResize);
 
       this.defaultRenderTimeout = window.setTimeout(() => {
-        if (this.isElementInViewport()) {
-          this.handleWindowResize();
+        if (this.isElementNearViewport(0)) {
+          this.setDimensions();
         }
       }, RENDER_WAIT_MS);
     }
@@ -120,7 +124,9 @@ export const lazyLoadWithDimensions = (Component, options) => {
     }
 
     handleWindowResize() {
-      this.setDimensions();
+      if (this.isElementNearViewport(NEAR_VIEWPORT_MARGIN)) {
+        this.setDimensions();
+      }
     }
 
     setDimensions() {
@@ -130,15 +136,14 @@ export const lazyLoadWithDimensions = (Component, options) => {
       });
     }
 
-    isElementInViewport() {
+    isElementNearViewport(safetyBoundary) {
       if (this.element) {
         const rect = this.element.getBoundingClientRect();
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 
         return (
-          rect.top >= 0 &&
-          rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+          (rect.top >= 0 && rect.top <= viewportHeight + safetyBoundary) ||
+          (rect.bottom >= -1 * safetyBoundary && rect.bottom <= viewportHeight)
         );
       }
       return false;
