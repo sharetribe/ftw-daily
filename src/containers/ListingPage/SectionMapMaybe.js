@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
@@ -9,31 +9,43 @@ import config from '../../config';
 
 import css from './ListingPage.css';
 
-const SectionMapMaybe = props => {
-  const { className, rootClassName, geolocation, publicData, listingId } = props;
-
-  if (!geolocation) {
-    return null;
+class SectionMapMaybe extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isStatic: true };
   }
 
-  const address = publicData.location ? publicData.location.address : '';
-  const classes = classNames(rootClassName || css.sectionMap, className);
+  render() {
+    const { className, rootClassName, geolocation, publicData, listingId } = this.props;
 
-  const mapProps = config.coordinates.fuzzy
-    ? { obfuscatedCenter: obfuscatedCoordinates(geolocation, listingId ? listingId.uuid : null) }
-    : { address, center: geolocation };
+    if (!geolocation) {
+      return null;
+    }
 
-  return (
-    <div className={classes}>
-      <h2 className={css.locationTitle}>
-        <FormattedMessage id="ListingPage.locationTitle" />
-      </h2>
-      <div className={css.map}>
-        <Map {...mapProps} useStaticMap />
+    const address = publicData.location ? publicData.location.address : '';
+    const classes = classNames(rootClassName || css.sectionMap, className);
+
+    const mapProps = config.coordinates.fuzzy
+      ? { obfuscatedCenter: obfuscatedCoordinates(geolocation, listingId ? listingId.uuid : null) }
+      : { address, center: geolocation };
+
+    return (
+      <div className={classes}>
+        <h2 className={css.locationTitle}>
+          <FormattedMessage id="ListingPage.locationTitle" />
+        </h2>
+        <button
+          className={css.map}
+          onClick={() => {
+            this.setState({ isStatic: false });
+          }}
+        >
+          <Map {...mapProps} useStaticMap={this.state.isStatic} />
+        </button>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 SectionMapMaybe.defaultProps = {
   rootClassName: null,

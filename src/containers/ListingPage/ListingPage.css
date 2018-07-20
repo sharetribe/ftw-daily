@@ -535,6 +535,9 @@
   max-width: 640px;
   max-height: 640px;
   background-color: #eee;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
 
   @media (--viewportMedium) {
     height: 75vh;

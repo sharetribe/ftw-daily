@@ -12,6 +12,10 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
+## v1.2.2
+* [change] Change static map to dynamic map when clicked.
+  [#871](https://github.com/sharetribe/flex-template-web/pull/871)
+
 ## v1.2.1
 * [fix] Lazy load map only if the map is near current viewport.
   [#871](https://github.com/sharetribe/flex-template-web/pull/871)
