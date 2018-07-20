@@ -531,8 +531,9 @@
   height: calc(100vh - 193px);
   width: 100%;
 
-  /* Static map: max-width is 640px */
+  /* Static map: dimensions are 640px */
   max-width: 640px;
+  max-height: 640px;
   background-color: #eee;
 
   @media (--viewportMedium) {
