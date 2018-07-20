@@ -10,17 +10,21 @@ import config from '../../config';
 const DynamicMap = withGoogleMap(props => {
   const { center, zoom, address, coordinatesConfig } = props;
 
-  const { markerURI, anchorX, anchorY, width, height } = coordinatesConfig.customMarker;
-  const markerIcon = {
-    url: markerURI,
+  const { markerURI, anchorX, anchorY, width, height } = coordinatesConfig.customMarker || {};
+  const markerIcon = coordinatesConfig.customMarker
+    ? {
+        icon: {
+          url: markerURI,
 
-    // The origin for this image is (0, 0).
-    origin: new window.google.maps.Point(0, 0),
-    size: new window.google.maps.Size(width, height),
-    anchor: new window.google.maps.Point(anchorX, anchorY),
-  };
+          // The origin for this image is (0, 0).
+          origin: new window.google.maps.Point(0, 0),
+          size: new window.google.maps.Size(width, height),
+          anchor: new window.google.maps.Point(anchorX, anchorY),
+        },
+      }
+    : {};
 
-  const marker = <Marker position={center} icon={markerIcon} title={address} />;
+  const marker = <Marker position={center} {...markerIcon} title={address} />;
 
   const circleProps = {
     options: coordinatesConfig.circleOptions,
