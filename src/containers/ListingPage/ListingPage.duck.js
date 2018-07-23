@@ -230,18 +230,22 @@ export const loadData = (params, search) => dispatch => {
     return dispatch(showListing(listingId, true));
   }
 
-  // fetch time slots for 90 days starting today
-  // as the booking can only be done for 90 days
-  // in the future due to Stripe limitations
-  const start = moment().toDate();
-  const end = moment()
-    .add(config.dayCountAvailableForBooking, 'days')
-    .toDate();
-  const timeSlotsParams = { listingId, start, end };
+  if (config.fetchAvailableTimeSlots) {
+    // fetch time slots for 90 days starting today
+    // as the booking can only be done for 90 days
+    // in the future due to Stripe limitations
+    const start = moment().toDate();
+    const end = moment()
+      .add(config.dayCountAvailableForBooking, 'days')
+      .toDate();
+    const timeSlotsParams = { listingId, start, end };
 
-  return Promise.all([
-    dispatch(showListing(listingId)),
-    dispatch(fetchTimeSlots(timeSlotsParams)),
-    dispatch(fetchReviews(listingId)),
-  ]);
+    return Promise.all([
+      dispatch(showListing(listingId)),
+      dispatch(fetchTimeSlots(timeSlotsParams)),
+      dispatch(fetchReviews(listingId)),
+    ]);
+  } else {
+    return Promise.all([dispatch(showListing(listingId)), dispatch(fetchReviews(listingId))]);
+  }
 };
