@@ -1,4 +1,5 @@
 import pick from 'lodash/pick';
+import moment from 'moment';
 import config from '../../config';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
@@ -21,6 +22,10 @@ export const FETCH_REVIEWS_REQUEST = 'app/ListingPage/FETCH_REVIEWS_REQUEST';
 export const FETCH_REVIEWS_SUCCESS = 'app/ListingPage/FETCH_REVIEWS_SUCCESS';
 export const FETCH_REVIEWS_ERROR = 'app/ListingPage/FETCH_REVIEWS_ERROR';
 
+export const FETCH_TIME_SLOTS_REQUEST = 'app/ListingPage/FETCH_TIME_SLOTS_REQUEST';
+export const FETCH_TIME_SLOTS_SUCCESS = 'app/ListingPage/FETCH_TIME_SLOTS_SUCCESS';
+export const FETCH_TIME_SLOTS_ERROR = 'app/ListingPage/FETCH_TIME_SLOTS_ERROR';
+
 export const SEND_ENQUIRY_REQUEST = 'app/ListingPage/SEND_ENQUIRY_REQUEST';
 export const SEND_ENQUIRY_SUCCESS = 'app/ListingPage/SEND_ENQUIRY_SUCCESS';
 export const SEND_ENQUIRY_ERROR = 'app/ListingPage/SEND_ENQUIRY_ERROR';
@@ -32,6 +37,8 @@ const initialState = {
   showListingError: null,
   reviews: [],
   fetchReviewsError: null,
+  timeSlots: [],
+  fetchTimesLotsError: null,
   sendEnquiryInProgress: false,
   sendEnquiryError: null,
   enquiryModalOpenForListingId: null,
@@ -54,6 +61,13 @@ const listingPageReducer = (state = initialState, action = {}) => {
       return { ...state, reviews: payload };
     case FETCH_REVIEWS_ERROR:
       return { ...state, fetchReviewsError: payload };
+
+    case FETCH_TIME_SLOTS_REQUEST:
+      return { ...state, fetchTimeSlotsError: null };
+    case FETCH_TIME_SLOTS_SUCCESS:
+      return { ...state, timeSlots: payload };
+    case FETCH_TIME_SLOTS_ERROR:
+      return { ...state, fetchTimeSlotsError: payload };
 
     case SEND_ENQUIRY_REQUEST:
       return { ...state, sendEnquiryInProgress: true, sendEnquiryError: null };
@@ -91,6 +105,17 @@ export const fetchReviewsRequest = () => ({ type: FETCH_REVIEWS_REQUEST });
 export const fetchReviewsSuccess = reviews => ({ type: FETCH_REVIEWS_SUCCESS, payload: reviews });
 export const fetchReviewsError = error => ({
   type: FETCH_REVIEWS_ERROR,
+  error: true,
+  payload: error,
+});
+
+export const fetchTimeSlotsRequest = () => ({ type: FETCH_TIME_SLOTS_REQUEST });
+export const fetchTimeSlotsSuccess = timeSlots => ({
+  type: FETCH_TIME_SLOTS_SUCCESS,
+  payload: timeSlots,
+});
+export const fetchTimeSlotsError = error => ({
+  type: FETCH_TIME_SLOTS_ERROR,
   error: true,
   payload: error,
 });
@@ -143,6 +168,7 @@ export const showListing = (listingId, isOwn = false) => (dispatch, getState, sd
 };
 
 export const fetchReviews = listingId => (dispatch, getState, sdk) => {
+  dispatch(fetchReviewsRequest);
   return sdk.reviews
     .query({
       listing_id: listingId,
@@ -156,6 +182,19 @@ export const fetchReviews = listingId => (dispatch, getState, sdk) => {
     })
     .catch(e => {
       dispatch(fetchReviewsError(storableError(e)));
+    });
+};
+
+export const fetchTimeSlots = params => (dispatch, getState, sdk) => {
+  dispatch(fetchTimeSlotsRequest);
+  return sdk.timeslots
+    .query(params)
+    .then(response => {
+      const timeSlots = denormalisedResponseEntities(response);
+      dispatch(fetchTimeSlotsSuccess(timeSlots));
+    })
+    .catch(e => {
+      dispatch(fetchTimeSlotsError(storableError(e)));
     });
 };
 
@@ -190,5 +229,23 @@ export const loadData = (params, search) => dispatch => {
   if (params.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT) {
     return dispatch(showListing(listingId, true));
   }
-  return Promise.all([dispatch(showListing(listingId)), dispatch(fetchReviews(listingId))]);
+
+  if (config.fetchAvailableTimeSlots) {
+    // fetch time slots for 90 days starting today
+    // as the booking can only be done for 90 days
+    // in the future due to Stripe limitations
+    const start = moment().toDate();
+    const end = moment()
+      .add(config.dayCountAvailableForBooking, 'days')
+      .toDate();
+    const timeSlotsParams = { listingId, start, end };
+
+    return Promise.all([
+      dispatch(showListing(listingId)),
+      dispatch(fetchTimeSlots(timeSlotsParams)),
+      dispatch(fetchReviews(listingId)),
+    ]);
+  } else {
+    return Promise.all([dispatch(showListing(listingId)), dispatch(fetchReviews(listingId))]);
+  }
 };

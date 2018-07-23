@@ -36,6 +36,15 @@ const bookingProcessAlias = 'preauth-with-nightly-booking/release-1';
 // translations when the unit is changed.
 const bookingUnitType = 'line-item/night';
 
+// Should the application fetch available time slots (currently defined as
+// start and end dates) to be shown on listing page.
+const fetchAvailableTimeSlots = false;
+
+// A maximum number of days forwards during which a booking can be made.
+// This is limited due to Stripe holding funds up to 90 days from the
+// moment they are charged.
+const dayCountAvailableForBooking = 90;
+
 // To pass environment variables to the client app in the build
 // script, react-scripts (and the sharetribe-scripts fork of
 // react-scripts) require using the REACT_APP_ prefix to avoid
@@ -313,6 +322,8 @@ const config = {
   locale,
   bookingProcessAlias,
   bookingUnitType,
+  fetchAvailableTimeSlots,
+  dayCountAvailableForBooking,
   i18n,
   sdk: {
     clientId: sdkClientId,
