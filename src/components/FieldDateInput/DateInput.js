@@ -6,7 +6,12 @@
  */
 import React, { Component } from 'react';
 import { bool, func, instanceOf, shape, string } from 'prop-types';
-import { SingleDatePicker, isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
+import {
+  SingleDatePicker,
+  isInclusivelyAfterDay,
+  isInclusivelyBeforeDay,
+  isSameDay,
+} from 'react-dates';
 import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import moment from 'moment';
@@ -143,6 +148,7 @@ class DateInputComponent extends Component {
       value,
       children,
       render,
+      timeSlots,
       ...datePickerProps
     } = this.props;
     /* eslint-enable no-unused-vars */
@@ -150,6 +156,12 @@ class DateInputComponent extends Component {
     const initialMoment = initialDate ? moment(initialDate) : null;
 
     const date = value && value.date instanceof Date ? moment(value.date) : initialMoment;
+
+    const isDayBlocked = timeSlots
+      ? day => {
+          return !timeSlots.find(timeSlot => isSameDay(day, moment(timeSlot.attributes.start)));
+        }
+      : null;
 
     const placeholder = placeholderText || intl.formatMessage({ id: 'FieldDateInput.placeholder' });
 
@@ -180,6 +192,7 @@ class DateInputComponent extends Component {
           placeholder={placeholder}
           screenReaderInputMessage={screenReaderInputText}
           phrases={{ closeDatePicker: closeDatePickerText, clearDate: clearDateText }}
+          isDayBlocked={isDayBlocked}
         />
       </div>
     );

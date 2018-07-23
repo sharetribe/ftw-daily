@@ -4,7 +4,17 @@ import { Form as FinalForm, FormSpy } from 'react-final-form';
 import moment from 'moment';
 import { Button } from '../../components';
 import { required, bookingDateRequired, composeValidators } from '../../util/validators';
+import { createTimeSlots } from '../../util/test-data';
 import FieldDateInput from './FieldDateInput';
+
+const createAvailableTimeSlots = (dayCount, availableDayCount) => {
+  const slots = createTimeSlots(new Date(), dayCount);
+  const availableSlotIndices = Array.from({ length: availableDayCount }, () =>
+    Math.floor(Math.random() * dayCount)
+  );
+
+  return availableSlotIndices.sort().map(i => slots[i]);
+};
 
 const FormComponent = props => (
   <FinalForm
@@ -54,6 +64,7 @@ export const Empty = {
       label: 'Date',
       placeholderText: moment().format('ddd, MMMM D'),
       format: null,
+      timeSlots: createAvailableTimeSlots(90, 60),
       validate: composeValidators(required('Required'), bookingDateRequired('Date is not valid')),
       onBlur: () => console.log('onBlur called from DateInput props.'),
       onFocus: () => console.log('onFocus called from DateInput props.'),
