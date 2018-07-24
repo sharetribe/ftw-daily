@@ -5,7 +5,7 @@
  * N.B. *isOutsideRange* in defaultProps is defining what dates are available to booking.
  */
 import React, { Component } from 'react';
-import { bool, func, instanceOf, shape, string } from 'prop-types';
+import { bool, func, instanceOf, shape, string, arrayOf } from 'prop-types';
 import {
   SingleDatePicker,
   isInclusivelyAfterDay,
@@ -16,6 +16,7 @@ import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import moment from 'moment';
 import config from '../../config';
+import { propTypes } from '../../util/types';
 
 import NextMonthIcon from './NextMonthIcon';
 import PreviousMonthIcon from './PreviousMonthIcon';
@@ -161,7 +162,7 @@ class DateInputComponent extends Component {
       ? day => {
           return !timeSlots.find(timeSlot => isSameDay(day, moment(timeSlot.attributes.start)));
         }
-      : null;
+      : () => false;
 
     const placeholder = placeholderText || intl.formatMessage({ id: 'FieldDateInput.placeholder' });
 
@@ -203,6 +204,7 @@ DateInputComponent.defaultProps = {
   className: null,
   useMobileMargins: false,
   ...defaultProps,
+  timeSlots: null,
 };
 
 DateInputComponent.propTypes = {
@@ -226,6 +228,7 @@ DateInputComponent.propTypes = {
   value: shape({
     date: instanceOf(Date),
   }),
+  timeSlots: arrayOf(propTypes.timeSlot),
 };
 
 export default injectIntl(DateInputComponent);

@@ -78,7 +78,7 @@ FieldDateInputComponent.defaultProps = {
   id: null,
   label: null,
   placeholderText: null,
-  timeSlots: [],
+  timeSlots: null,
 };
 
 FieldDateInputComponent.propTypes = {

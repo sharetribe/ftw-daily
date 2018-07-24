@@ -21,6 +21,7 @@ const FormComponent = props => (
     {...props}
     render={fieldRenderProps => {
       const {
+        style,
         form,
         handleSubmit,
         onChange,
@@ -36,6 +37,7 @@ const FormComponent = props => (
 
       return (
         <form
+          style={style}
           onSubmit={e => {
             e.preventDefault();
             handleSubmit(e);
@@ -52,15 +54,41 @@ const FormComponent = props => (
   />
 );
 
-const defaultFormName = 'FieldDateInputExampleForm';
-
 export const Empty = {
+  component: FormComponent,
+  props: {
+    style: { marginBottom: '140px' },
+    dateInputProps: {
+      name: 'bookingDate',
+      useMobileMargins: false,
+      id: `EmptyDateInputForm.bookingDate`,
+      label: 'Date',
+      placeholderText: moment().format('ddd, MMMM D'),
+      format: null,
+      validate: composeValidators(required('Required'), bookingDateRequired('Date is not valid')),
+      onBlur: () => console.log('onBlur called from DateInput props.'),
+      onFocus: () => console.log('onFocus called from DateInput props.'),
+    },
+    onChange: formState => {
+      const { date } = formState.values;
+      if (date) {
+        console.log('Changed to', moment(date).format('L'));
+      }
+    },
+    onSubmit: values => {
+      console.log('Submitting a form with values:', values);
+    },
+  },
+  group: 'custom inputs',
+};
+
+export const WithAvailableTimeSlots = {
   component: FormComponent,
   props: {
     dateInputProps: {
       name: 'bookingDate',
       useMobileMargins: false,
-      id: `${defaultFormName}.bookingDate`,
+      id: `AvailableTimeSlotsDateInputForm.bookingDate`,
       label: 'Date',
       placeholderText: moment().format('ddd, MMMM D'),
       format: null,
