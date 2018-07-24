@@ -17,6 +17,7 @@ import classNames from 'classnames';
 import moment from 'moment';
 import config from '../../config';
 import { propTypes } from '../../util/types';
+import { dateFromAPIToLocalNoon } from '../../util/dates';
 
 import NextMonthIcon from './NextMonthIcon';
 import PreviousMonthIcon from './PreviousMonthIcon';
@@ -103,6 +104,16 @@ const defaultProps = {
   },
 };
 
+// Checks if time slot (propTypes.timeSlot) start time equals a day (moment)
+const timeSlotEqualsDay = (timeSlot, day) => {
+  // Time slots describe available dates by providing a start and
+  // an end date which is the following day. In the single date picker
+  // the start date is used to represent available dates.
+  const localStartDate = dateFromAPIToLocalNoon(timeSlot.attributes.start);
+
+  return isSameDay(day, moment(localStartDate));
+};
+
 class DateInputComponent extends Component {
   constructor(props) {
     super(props);
@@ -159,12 +170,7 @@ class DateInputComponent extends Component {
     const date = value && value.date instanceof Date ? moment(value.date) : initialMoment;
 
     const isDayBlocked = timeSlots
-      ? day => {
-          // Time slots describe available dates by providing a start and
-          // an end date which is the following day. In the single date picker
-          // the start date is used to represent available dates.
-          return !timeSlots.find(timeSlot => isSameDay(day, moment(timeSlot.attributes.start)));
-        }
+      ? day => !timeSlots.find(timeSlot => timeSlotEqualsDay(timeSlot, day))
       : () => false;
 
     const placeholder = placeholderText || intl.formatMessage({ id: 'FieldDateInput.placeholder' });
