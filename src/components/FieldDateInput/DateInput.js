@@ -160,6 +160,9 @@ class DateInputComponent extends Component {
 
     const isDayBlocked = timeSlots
       ? day => {
+          // Time slots describe available dates by providing a start and
+          // an end date which is the following day. In the single date picker
+          // the start date is used to represent available dates.
           return !timeSlots.find(timeSlot => isSameDay(day, moment(timeSlot.attributes.start)));
         }
       : () => false;
