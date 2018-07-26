@@ -497,7 +497,7 @@ ListingPageComponent.defaultProps = {
   showListingError: null,
   reviews: [],
   fetchReviewsError: null,
-  timeSlots: [],
+  timeSlots: null,
   fetchTimeSlotsError: null,
   sendEnquiryError: null,
   categoriesConfig: config.custom.categories,

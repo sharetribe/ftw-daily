@@ -1,4 +1,5 @@
 import Decimal from 'decimal.js';
+import moment from 'moment';
 import { types as sdkTypes } from './sdkLoader';
 import { nightsBetween } from '../util/dates';
 import {
@@ -7,6 +8,7 @@ import {
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
   LISTING_STATE_PUBLISHED,
+  TIME_SLOT_DAY,
 } from '../util/types';
 
 const { UUID, LatLng, Money } = sdkTypes;
@@ -210,6 +212,34 @@ export const createReview = (id, attributes = {}, includes = {}) => {
     },
     ...includes,
   };
+};
+
+/**
+ * Creates an array of time slot objects.
+ *
+ * @param {Date} startDate date when the time slots start
+ * @param {Number} numberOfDays number of time slots to create
+ *
+ * @return {Array} array of time slots
+ */
+export const createTimeSlots = (startDate, numberOfDays) => {
+  const startTime = moment.utc(startDate).startOf('day');
+
+  return Array.from({ length: numberOfDays }, (v, i) => i).map(i => {
+    return {
+      id: new UUID(i),
+      type: 'timeSlot',
+      attributes: {
+        start: moment(startTime)
+          .add(i, 'days')
+          .toDate(),
+        end: moment(startTime)
+          .add(i + 1, 'days')
+          .toDate(),
+        type: TIME_SLOT_DAY,
+      },
+    };
+  });
 };
 
 // Default config for currency formatting in tests and examples.

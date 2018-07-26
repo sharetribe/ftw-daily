@@ -199,7 +199,15 @@
     color: var(--marketplaceColorDark);
     border: 0;
   }
-  & :global(.CalendarDay__blocked_out_of_range .renderedDay) {
+  /* Remove default bg-color and use our extra span instead '.renderedDay' */
+  & :global(.CalendarDay__blocked_calendar),
+  & :global(.CalendarDay__blocked_calendar:active),
+  & :global(.CalendarDay__blocked_calendar:hover) {
+    background-color: transparent;
+    color: var(--marketplaceColorDark);
+    border: 0;
+  }
+  & :global(.CalendarDay__blocked_out_of_range .CalendarDay__blocked_calendar .renderedDay) {
     background-color: transparent;
   }
   & :global(.DateInput_fang) {
