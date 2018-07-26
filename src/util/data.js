@@ -133,7 +133,7 @@ export const denormalisedResponseEntities = sdkResponse => {
 /**
  * Create shell objects to ensure that attributes etc. exists.
  *
- * @param {Object} transaction entity object, which is to be ensured agains null values
+ * @param {Object} transaction entity object, which is to be ensured against null values
  */
 export const ensureTransaction = (transaction, booking = null, listing = null, provider = null) => {
   const empty = {
@@ -150,7 +150,7 @@ export const ensureTransaction = (transaction, booking = null, listing = null, p
 /**
  * Create shell objects to ensure that attributes etc. exists.
  *
- * @param {Object} booking entity object, which is to be ensured agains null values
+ * @param {Object} booking entity object, which is to be ensured against null values
  */
 export const ensureBooking = booking => {
   const empty = { id: null, type: 'booking', attributes: {} };
@@ -160,7 +160,7 @@ export const ensureBooking = booking => {
 /**
  * Create shell objects to ensure that attributes etc. exists.
  *
- * @param {Object} listing entity object, which is to be ensured agains null values
+ * @param {Object} listing entity object, which is to be ensured against null values
  */
 export const ensureListing = listing => {
   const empty = {
@@ -175,7 +175,7 @@ export const ensureListing = listing => {
 /**
  * Create shell objects to ensure that attributes etc. exists.
  *
- * @param {Object} listing entity object, which is to be ensured agains null values
+ * @param {Object} listing entity object, which is to be ensured against null values
  */
 export const ensureOwnListing = listing => {
   const empty = {
@@ -190,7 +190,7 @@ export const ensureOwnListing = listing => {
 /**
  * Create shell objects to ensure that attributes etc. exists.
  *
- * @param {Object} user entity object, which is to be ensured agains null values
+ * @param {Object} user entity object, which is to be ensured against null values
  */
 export const ensureUser = user => {
   const empty = { id: null, type: 'user', attributes: { profile: {} } };
@@ -200,11 +200,21 @@ export const ensureUser = user => {
 /**
  * Create shell objects to ensure that attributes etc. exists.
  *
- * @param {Object} current user entity object, which is to be ensured agains null values
+ * @param {Object} current user entity object, which is to be ensured against null values
  */
 export const ensureCurrentUser = user => {
   const empty = { id: null, type: 'currentUser', attributes: { profile: {} }, profileImage: {} };
   return { ...empty, ...user };
+};
+
+/**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} time slot entity object, which is to be ensured against null values
+ */
+export const ensureTimeSlot = timeSlot => {
+  const empty = { id: null, type: 'timeSlot', attributes: {} };
+  return { ...empty, ...timeSlot };
 };
 
 /**

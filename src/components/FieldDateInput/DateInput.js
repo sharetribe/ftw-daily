@@ -16,8 +16,9 @@ import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import moment from 'moment';
 import config from '../../config';
-import { propTypes } from '../../util/types';
+import { propTypes, TIME_SLOT_DAY } from '../../util/types';
 import { dateFromAPIToLocalNoon } from '../../util/dates';
+import { ensureTimeSlot } from '../../util/data';
 
 import NextMonthIcon from './NextMonthIcon';
 import PreviousMonthIcon from './PreviousMonthIcon';
@@ -106,12 +107,16 @@ const defaultProps = {
 
 // Checks if time slot (propTypes.timeSlot) start time equals a day (moment)
 const timeSlotEqualsDay = (timeSlot, day) => {
-  // Time slots describe available dates by providing a start and
-  // an end date which is the following day. In the single date picker
-  // the start date is used to represent available dates.
-  const localStartDate = dateFromAPIToLocalNoon(timeSlot.attributes.start);
+  if (ensureTimeSlot(timeSlot).attributes.type === TIME_SLOT_DAY) {
+    // Time slots describe available dates by providing a start and
+    // an end date which is the following day. In the single date picker
+    // the start date is used to represent available dates.
+    const localStartDate = dateFromAPIToLocalNoon(timeSlot.attributes.start);
 
-  return isSameDay(day, moment(localStartDate));
+    return isSameDay(day, moment(localStartDate));
+  } else {
+    return false;
+  }
 };
 
 class DateInputComponent extends Component {

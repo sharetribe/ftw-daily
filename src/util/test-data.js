@@ -8,6 +8,7 @@ import {
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
   LISTING_STATE_PUBLISHED,
+  TIME_SLOT_DAY,
 } from '../util/types';
 
 const { UUID, LatLng, Money } = sdkTypes;
@@ -222,7 +223,7 @@ export const createReview = (id, attributes = {}, includes = {}) => {
  * @return {Array} array of time slots
  */
 export const createTimeSlots = (startDate, numberOfDays) => {
-  const startTime = moment(startDate).startOf('day');
+  const startTime = moment.utc(startDate).startOf('day');
 
   return Array.from({ length: numberOfDays }, (v, i) => i).map(i => {
     return {
@@ -235,6 +236,7 @@ export const createTimeSlots = (startDate, numberOfDays) => {
         end: moment(startTime)
           .add(i + 1, 'days')
           .toDate(),
+        type: TIME_SLOT_DAY,
       },
     };
   });
