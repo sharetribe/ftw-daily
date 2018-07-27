@@ -12,6 +12,10 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
+## Upcoming version
+* [change] Use seeded random for client side coordinate obfuscation
+  [#874](https://github.com/sharetribe/flex-template-web/pull/874)
+
 ## v1.2.2
 * [change] Change static map to dynamic map when clicked.
   [#871](https://github.com/sharetribe/flex-template-web/pull/871)

@@ -1,10 +1,16 @@
 import memoize from 'lodash/memoize';
+import seedrandom from 'seedrandom';
 import { types as sdkTypes } from './sdkLoader';
 import config from '../config';
 
 const { LatLng } = sdkTypes;
 
-const obfuscatedCoordinatesImpl = latlng => {
+/**
+ * This obfuscatedCoordinatesImpl function is a temporary solution for the coordinate obfuscation.
+ * In the future, improved version needs to have protectedData working and
+ * available in accepted transaction.
+ */
+const obfuscatedCoordinatesImpl = (latlng, cacheKey) => {
   const { lat, lng } = latlng;
   const offset = config.coordinates.coordinateOffset;
 
@@ -12,8 +18,19 @@ const obfuscatedCoordinatesImpl = latlng => {
   const r = offset / 111300;
   const y0 = lat;
   const x0 = lng;
-  const u = Math.random();
-  const v = Math.random();
+
+  // Two seeded random numbers to be used to calculate new location
+  // We need seeded so that the static map URL doesn't change between requests
+  // (i.e. URL is cacheable)
+  const u = cacheKey ? seedrandom(cacheKey)() : Math.random();
+  const v = cacheKey
+    ? seedrandom(
+        cacheKey
+          .split('')
+          .reverse()
+          .join('')
+      )()
+    : Math.random();
   const w = r * Math.sqrt(u);
   const t = 2 * Math.PI * v;
   const x = w * Math.cos(t);
