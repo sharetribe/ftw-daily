@@ -15,6 +15,9 @@ way to update this template, but currently, we follow a pattern:
 ## Upcoming version
 * [change] Reusable SearchMap.
   [#877](https://github.com/sharetribe/flex-template-web/pull/877)
+* [fix] Fix a search filters panel bug where selecting an option in a multi select filter ends up
+  invoking a mobile filter callback function.
+  [#876](https://github.com/sharetribe/flex-template-web/pull/876)
 * [change] Use seeded random for client side coordinate obfuscation
   [#874](https://github.com/sharetribe/flex-template-web/pull/874)
 
