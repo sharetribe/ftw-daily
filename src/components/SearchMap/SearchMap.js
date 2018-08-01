@@ -297,31 +297,33 @@ export class SearchMapComponent extends Component {
 }
 
 SearchMapComponent.defaultProps = {
+  className: null,
+  rootClassName: null,
+  mapRootClassName: null,
+  reuseableContainerClassName: null,
   bounds: null,
   center: new sdkTypes.LatLng(0, 0),
   activeListingId: null,
-  className: null,
   isOpenOnModal: false,
   listings: [],
-  mapRootClassName: null,
   onCloseAsModal: null,
-  rootClassName: null,
   useLocationSearchBounds: true,
   zoom: 11,
   coordinatesConfig: config.coordinates,
 };
 
 SearchMapComponent.propTypes = {
+  className: string,
+  rootClassName: string,
+  mapRootClassName: string,
+  reuseableContainerClassName: string,
   bounds: propTypes.latlngBounds,
   center: propTypes.latlng,
   activeListingId: propTypes.uuid,
-  className: string,
   isOpenOnModal: bool,
   listings: arrayOf(propTypes.listing),
-  mapRootClassName: string,
   onCloseAsModal: func,
   onIdle: func.isRequired,
-  rootClassName: string,
   useLocationSearchBounds: bool, // eslint-disable-line react/no-unused-prop-types
   zoom: number,
   coordinatesConfig: shape({
