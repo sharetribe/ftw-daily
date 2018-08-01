@@ -93,6 +93,7 @@ const SearchFiltersComponent = props => {
 
   const amenitiesFilterElement = amenitiesFilter ? (
     <SelectMultipleFilter
+      id={'SearchFilters.amenitiesFilter'}
       name="amenities"
       urlParam={amenitiesFilter.paramName}
       label={amenitiesLabel}

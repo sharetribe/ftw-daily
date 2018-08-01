@@ -17,6 +17,7 @@ const SelectMultipleFilterFormComponent = props => {
         const {
           form,
           handleSubmit,
+          id,
           name,
           onClear,
           onCancel,
@@ -48,7 +49,7 @@ const SelectMultipleFilterFormComponent = props => {
             <FieldCheckboxGroup
               className={css.fieldGroup}
               name={name}
-              id={`${name}-checkbox-group`}
+              id={`${id}-checkbox-group`}
               options={options}
             />
             <div className={css.buttonsWrapper}>
@@ -75,6 +76,7 @@ SelectMultipleFilterFormComponent.defaultProps = {
 };
 
 SelectMultipleFilterFormComponent.propTypes = {
+  id: string.isRequired,
   name: string.isRequired,
   onClear: func.isRequired,
   onCancel: func.isRequired,

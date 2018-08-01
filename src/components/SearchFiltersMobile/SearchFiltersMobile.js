@@ -172,6 +172,7 @@ class SearchFiltersMobileComponent extends Component {
 
     const amenitiesFilterElement = amenitiesFilter ? (
       <SelectMultipleFilterPlain
+        id="SearchFiltersMobile.amenitiesFilter"
         name="amenities"
         urlParam={amenitiesFilter.paramName}
         label={amenitiesLabel}
