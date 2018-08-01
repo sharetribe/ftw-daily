@@ -55,6 +55,7 @@ const AmenitiesFilterComponent = props => {
 
   return (
     <SelectMultipleFilterPlain
+      id="SelectMultipleFilterPlainExample"
       name="amenities"
       urlParam={URL_PARAM}
       label="Amenities"

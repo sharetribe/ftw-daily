@@ -76,7 +76,7 @@ class SelectMultipleFilterPlainComponent extends Component {
           </button>
         </div>
         <SelectMultipleFilterPlainForm
-          form={`SelectMultipleFilterPlainForm.${id ? id : name}`}
+          id={id}
           className={optionsContainerClass}
           name={name}
           options={options}
@@ -94,7 +94,6 @@ class SelectMultipleFilterPlainComponent extends Component {
 SelectMultipleFilterPlainComponent.defaultProps = {
   rootClassName: null,
   className: null,
-  id: undefined,
   initialValues: [],
   twoColumns: false,
 };
@@ -102,7 +101,7 @@ SelectMultipleFilterPlainComponent.defaultProps = {
 SelectMultipleFilterPlainComponent.propTypes = {
   rootClassName: string,
   className: string,
-  id: string,
+  id: string.isRequired,
   name: string.isRequired,
   urlParam: string.isRequired,
   label: string.isRequired,

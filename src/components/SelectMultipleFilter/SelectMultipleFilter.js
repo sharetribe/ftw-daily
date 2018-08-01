@@ -91,7 +91,7 @@ class SelectMultipleFilter extends Component {
   }
 
   render() {
-    const { rootClassName, className, name, label, options, initialValues, intl } = this.props;
+    const { rootClassName, className, id, name, label, options, initialValues, intl } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
     const hasInitialValues = initialValues.length > 0;
@@ -123,7 +123,7 @@ class SelectMultipleFilter extends Component {
           {buttonLabel}
         </button>
         <SelectMultipleFilterForm
-          form={`SelectMultipleFilterForm.${name}`}
+          id={id}
           onSubmit={this.handleSubmit}
           initialValues={namedInitialValues}
           enableReinitialize={true}
@@ -153,6 +153,7 @@ SelectMultipleFilter.defaultProps = {
 SelectMultipleFilter.propTypes = {
   rootClassName: string,
   className: string,
+  id: string.isRequired,
   name: string.isRequired,
   urlParam: string.isRequired,
   label: string.isRequired,

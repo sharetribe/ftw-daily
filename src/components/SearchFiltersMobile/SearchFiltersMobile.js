@@ -153,7 +153,7 @@ class SearchFiltersMobileComponent extends Component {
     const categoryLabel = intl.formatMessage({
       id: 'SearchFiltersMobile.categoryLabel',
     });
-    const initialCategory = this.initialValue(categoryFilter.paramName);
+    const initialCategory = categoryFilter ? this.initialValue(categoryFilter.paramName) : null;
 
     const categoryFilterElement = categoryFilter ? (
       <SelectSingleFilterPlain
@@ -172,6 +172,7 @@ class SearchFiltersMobileComponent extends Component {
 
     const amenitiesFilterElement = amenitiesFilter ? (
       <SelectMultipleFilterPlain
+        id="SearchFiltersMobile.amenitiesFilter"
         name="amenities"
         urlParam={amenitiesFilter.paramName}
         label={amenitiesLabel}
