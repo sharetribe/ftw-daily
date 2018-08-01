@@ -1,7 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { node, string } from 'prop-types';
+import { IntlProvider } from 'react-intl';
+import mapValues from 'lodash/mapValues';
+import config from '../../config';
+import messages from '../../translations/en.json';
+
 import css from './SearchMap.css';
+
+// Locale should not affect the tests. We ensure this by providing
+// messages with the key as the value of each message.
+const testMessages = mapValues(messages, (val, key) => key);
+const isTestEnv = process.env.NODE_ENV === 'test';
+const localeMessages = isTestEnv ? testMessages : messages;
 
 class ReusableMapContainer extends React.Component {
   constructor(props) {
@@ -42,6 +53,7 @@ class ReusableMapContainer extends React.Component {
 
   renderSearchMap() {
     const targetDomNode = document.getElementById(this.el.id);
+    let renderContent = this.props.children;
 
     // Check if we have already added map somewhere on the DOM
     if (!targetDomNode) {
@@ -51,6 +63,11 @@ class ReusableMapContainer extends React.Component {
       } else if (!this.mountNode) {
         // if no mountNode is found, append this outside SPA rendering tree (to document body)
         document.body.appendChild(this.el);
+        renderContent = (
+          <IntlProvider locale={config.locale} messages={localeMessages}>
+            {this.props.children}
+          </IntlProvider>
+        );
       }
     } else {
       this.el.classList.remove(css.reusableMapHidden);
@@ -62,8 +79,7 @@ class ReusableMapContainer extends React.Component {
         this.mountNode.appendChild(this.el);
       }
     }
-
-    ReactDOM.render(this.props.children, this.el);
+    ReactDOM.render(renderContent, this.el);
   }
 
   render() {
