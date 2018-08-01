@@ -12,7 +12,7 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## Upcoming version
+## v1.3.0
 * [change] Reusable SearchMap.
   [#877](https://github.com/sharetribe/flex-template-web/pull/877)
 * [fix] Fix a search filters panel bug where selecting an option in a multi select filter ends up
