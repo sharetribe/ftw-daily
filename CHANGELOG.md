@@ -11,6 +11,10 @@ way to update this template, but currently, we follow a pattern:
 * Patch (v0.0.**X**): Bug fixes and small changes to components.
 
 ---
+## v1.3.1
+* [fix] Hotfix: reverting the usage of ReusableMapContainer due to
+  production build error.
+  [#881](https://github.com/sharetribe/flex-template-web/pull/881)
 
 ## v1.3.0
 * [change] Reusable SearchMap.
