@@ -11,9 +11,6 @@ way to update this template, but currently, we follow a pattern:
 * Patch (v0.0.**X**): Bug fixes and small changes to components.
 
 ---
-## v1.3.1
-* [fix] Add Intl to off-SPA rendering
-  [#879](https://github.com/sharetribe/flex-template-web/pull/879)
 
 ## v1.3.0
 * [change] Reusable SearchMap.
