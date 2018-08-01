@@ -12,6 +12,7 @@ import { googleBoundsToSDKBounds } from '../../util/googleMaps';
 import { SearchMapInfoCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
 import config from '../../config';
 
+import ReusableMapContainer from './ReusableMapContainer';
 import css from './SearchMap.css';
 
 const LABEL_HANDLE = 'SearchMapLabel';
@@ -240,6 +241,7 @@ export class SearchMapComponent extends Component {
     const {
       className,
       rootClassName,
+      reuseableContainerClassName,
       center,
       isOpenOnModal,
       listings: originalListings,
@@ -263,28 +265,30 @@ export class SearchMapComponent extends Component {
     // container element listens clicks so that opened SearchMapInfoCard can be closed
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return isMapsLibLoaded ? (
-      <MapWithGoogleMap
-        containerElement={<div className={classes} onClick={this.onMapClicked} />}
-        mapElement={<div className={mapClasses} />}
-        center={center}
-        isOpenOnModal={isOpenOnModal}
-        listings={listings}
-        activeListingId={activeListingId}
-        infoCardOpen={this.state.infoCardOpen}
-        onListingClicked={this.onListingClicked}
-        onMapLoad={this.onMapLoadHandler}
-        onIdle={() => {
-          if (this.googleMap) {
-            onIdle(this.googleMap);
-          }
-        }}
-        onCloseAsModal={() => {
-          if (onCloseAsModal) {
-            onCloseAsModal();
-          }
-        }}
-        zoom={zoom}
-      />
+      <ReusableMapContainer className={reuseableContainerClassName}>
+        <MapWithGoogleMap
+          containerElement={<div className={classes} onClick={this.onMapClicked} />}
+          mapElement={<div className={mapClasses} />}
+          center={center}
+          isOpenOnModal={isOpenOnModal}
+          listings={listings}
+          activeListingId={activeListingId}
+          infoCardOpen={this.state.infoCardOpen}
+          onListingClicked={this.onListingClicked}
+          onMapLoad={this.onMapLoadHandler}
+          onIdle={() => {
+            if (this.googleMap) {
+              onIdle(this.googleMap);
+            }
+          }}
+          onCloseAsModal={() => {
+            if (onCloseAsModal) {
+              onCloseAsModal();
+            }
+          }}
+          zoom={zoom}
+        />
+      </ReusableMapContainer>
     ) : (
       <div className={classes} />
     );
@@ -293,31 +297,33 @@ export class SearchMapComponent extends Component {
 }
 
 SearchMapComponent.defaultProps = {
+  className: null,
+  rootClassName: null,
+  mapRootClassName: null,
+  reuseableContainerClassName: null,
   bounds: null,
   center: new sdkTypes.LatLng(0, 0),
   activeListingId: null,
-  className: null,
   isOpenOnModal: false,
   listings: [],
-  mapRootClassName: null,
   onCloseAsModal: null,
-  rootClassName: null,
   useLocationSearchBounds: true,
   zoom: 11,
   coordinatesConfig: config.coordinates,
 };
 
 SearchMapComponent.propTypes = {
+  className: string,
+  rootClassName: string,
+  mapRootClassName: string,
+  reuseableContainerClassName: string,
   bounds: propTypes.latlngBounds,
   center: propTypes.latlng,
   activeListingId: propTypes.uuid,
-  className: string,
   isOpenOnModal: bool,
   listings: arrayOf(propTypes.listing),
-  mapRootClassName: string,
   onCloseAsModal: func,
   onIdle: func.isRequired,
-  rootClassName: string,
   useLocationSearchBounds: bool, // eslint-disable-line react/no-unused-prop-types
   zoom: number,
   coordinatesConfig: shape({

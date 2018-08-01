@@ -13,6 +13,8 @@ way to update this template, but currently, we follow a pattern:
 ---
 
 ## Upcoming version
+* [change] Reusable SearchMap.
+  [#877](https://github.com/sharetribe/flex-template-web/pull/877)
 * [change] Use seeded random for client side coordinate obfuscation
   [#874](https://github.com/sharetribe/flex-template-web/pull/874)
 
