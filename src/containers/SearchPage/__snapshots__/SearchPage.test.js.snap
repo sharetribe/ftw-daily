@@ -116,6 +116,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           mapRootClassName={null}
           onCloseAsModal={[Function]}
           onIdle={[Function]}
+          reuseableContainerClassName={null}
           rootClassName={null}
           useLocationSearchBounds={true}
           zoom={11}
