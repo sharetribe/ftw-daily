@@ -1,8 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { node, string } from 'prop-types';
+import mapValues from 'lodash/mapValues';
+import { IntlProvider } from 'react-intl';
+import messages from '../../translations/en.json';
+import config from '../../config';
+
 import css from './SearchMap.css';
 
+/**
+ * ReusableMapContainer makes Google Map usage more effective. This improves:
+ * - Performance: no need to load dynamic map every time user enters the search page view on SPA.
+ * - Efficient Google Maps usage: less unnecessary calls to instantiate a dynamic map.
+ * - Reaction to a bug when removing Google Map instance
+ *   https://issuetracker.google.com/issues/35821412
+ */
 class ReusableMapContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -41,6 +53,29 @@ class ReusableMapContainer extends React.Component {
   }
 
   renderSearchMap() {
+    // Prepare rendering child (MapWithGoogleMap component) to new location
+    // We need to add translations (IntlProvider) for map overlay components
+    //
+    // NOTICE: Children rendered with ReactDOM.render doesn't have Router access
+    // You need to provide onClick functions and URLs as props.
+    const renderChildren = () => {
+      const isTestEnv = process.env.NODE_ENV === 'test';
+
+      // Locale should not affect the tests. We ensure this by providing
+      // messages with the key as the value of each message.
+      const testMessages = mapValues(messages, (val, key) => key);
+      const localeMessages = isTestEnv ? testMessages : messages;
+
+      const children = (
+        <IntlProvider locale={config.locale} messages={localeMessages}>
+          {this.props.children}
+        </IntlProvider>
+      );
+
+      // Render children to created element
+      ReactDOM.render(children, this.el);
+    };
+
     const targetDomNode = document.getElementById(this.el.id);
 
     // Check if we have already added map somewhere on the DOM
@@ -52,6 +87,7 @@ class ReusableMapContainer extends React.Component {
         // if no mountNode is found, append this outside SPA rendering tree (to document body)
         document.body.appendChild(this.el);
       }
+      renderChildren();
     } else {
       this.el.classList.remove(css.reusableMapHidden);
 
@@ -60,10 +96,14 @@ class ReusableMapContainer extends React.Component {
         // (but it's not yet moved to correct location of rendering tree).
         document.body.removeChild(this.el);
         this.mountNode.appendChild(this.el);
+
+        // render children and call reattach
+        renderChildren();
+        this.props.onReattach();
+      } else {
+        renderChildren();
       }
     }
-
-    ReactDOM.render(this.props.children, this.el);
   }
 
   render() {
