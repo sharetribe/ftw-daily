@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { arrayOf, bool, func, number, string, shape } from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { withGoogleMap, GoogleMap } from 'react-google-maps';
 import classNames from 'classnames';
 import groupBy from 'lodash/groupBy';
 import isEqual from 'lodash/isEqual';
 import reduce from 'lodash/reduce';
+import routeConfiguration from '../../routeConfiguration';
+import { createResourceLocatorString } from '../../util/routes';
+import { createSlug } from '../../util/urlHelpers';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { propTypes } from '../../util/types';
 import { obfuscatedCoordinates } from '../../util/maps';
@@ -12,6 +16,7 @@ import { googleBoundsToSDKBounds } from '../../util/googleMaps';
 import { SearchMapInfoCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
 import config from '../../config';
 
+import ReusableMapContainer from './ReusableMapContainer';
 import css from './SearchMap.css';
 
 const LABEL_HANDLE = 'SearchMapLabel';
@@ -97,11 +102,13 @@ const MapWithGoogleMap = withGoogleMap(props => {
     infoCardOpen,
     isOpenOnModal,
     listings,
-    onCloseAsModal,
     onIdle,
     onListingClicked,
+    onListingInfoCardClicked,
+    createURLToListing,
     onMapLoad,
     zoom,
+    mapComponentRefreshToken,
   } = props;
 
   const listingArraysInLocations = reducedToArray(groupedByCoordinates(listings));
@@ -126,6 +133,7 @@ const MapWithGoogleMap = withGoogleMap(props => {
           className={LABEL_HANDLE}
           listing={listing}
           onListingClicked={onListingClicked}
+          mapComponentRefreshToken={mapComponentRefreshToken}
         />
       );
     }
@@ -136,6 +144,7 @@ const MapWithGoogleMap = withGoogleMap(props => {
         className={LABEL_HANDLE}
         listings={listingArr}
         onListingClicked={onListingClicked}
+        mapComponentRefreshToken={mapComponentRefreshToken}
       />
     );
   });
@@ -144,9 +153,11 @@ const MapWithGoogleMap = withGoogleMap(props => {
   const openedCard = infoCardOpen ? (
     <SearchMapInfoCard
       key={listingsArray[0].id.uuid}
+      mapComponentRefreshToken={mapComponentRefreshToken}
       className={INFO_CARD_HANDLE}
       listings={listingsArray}
-      onClickCallback={onCloseAsModal}
+      onListingInfoCardClicked={onListingInfoCardClicked}
+      createURLToListing={createURLToListing}
     />
   ) : null;
 
@@ -191,7 +202,11 @@ export class SearchMapComponent extends Component {
 
     this.listings = [];
     this.googleMap = null;
+    this.mapReattachmentCount = 0;
     this.state = { infoCardOpen: null };
+
+    this.createURLToListing = this.createURLToListing.bind(this);
+    this.onListingInfoCardClicked = this.onListingInfoCardClicked.bind(this);
     this.onListingClicked = this.onListingClicked.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
     this.onMapLoadHandler = this.onMapLoadHandler.bind(this);
@@ -214,8 +229,28 @@ export class SearchMapComponent extends Component {
     this.listings = [];
   }
 
+  createURLToListing(listing) {
+    const routes = routeConfiguration();
+
+    const id = listing.id.uuid;
+    const slug = createSlug(listing.attributes.title);
+    const pathParams = { id, slug };
+
+    return createResourceLocatorString('ListingPage', routes, pathParams, {});
+  }
+
   onListingClicked(listings) {
     this.setState({ infoCardOpen: listings });
+  }
+
+  onListingInfoCardClicked(listing) {
+    if (this.props.onCloseAsModal) {
+      this.props.onCloseAsModal();
+    }
+
+    // To avoid full page refresh we need to use internal router
+    const history = this.props.history;
+    history.push(this.createURLToListing(listing));
   }
 
   onMapClicked(e) {
@@ -240,6 +275,7 @@ export class SearchMapComponent extends Component {
     const {
       className,
       rootClassName,
+      reusableContainerClassName,
       center,
       isOpenOnModal,
       listings: originalListings,
@@ -257,34 +293,44 @@ export class SearchMapComponent extends Component {
     const listings = coordinatesConfig.fuzzy
       ? withCoordinatesObfuscated(listingsWithLocation)
       : listingsWithLocation;
+    const infoCardOpen = this.state.infoCardOpen;
 
     const isMapsLibLoaded = typeof window !== 'undefined' && window.google && window.google.maps;
+
+    const forceUpdateHandler = () => {
+      this.mapReattachmentCount += 1;
+    };
 
     // container element listens clicks so that opened SearchMapInfoCard can be closed
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return isMapsLibLoaded ? (
-      <MapWithGoogleMap
-        containerElement={<div className={classes} onClick={this.onMapClicked} />}
-        mapElement={<div className={mapClasses} />}
-        center={center}
-        isOpenOnModal={isOpenOnModal}
-        listings={listings}
-        activeListingId={activeListingId}
-        infoCardOpen={this.state.infoCardOpen}
-        onListingClicked={this.onListingClicked}
-        onMapLoad={this.onMapLoadHandler}
-        onIdle={() => {
-          if (this.googleMap) {
-            onIdle(this.googleMap);
-          }
-        }}
-        onCloseAsModal={() => {
-          if (onCloseAsModal) {
-            onCloseAsModal();
-          }
-        }}
-        zoom={zoom}
-      />
+      <ReusableMapContainer className={reusableContainerClassName} onReattach={forceUpdateHandler}>
+        <MapWithGoogleMap
+          containerElement={<div className={classes} onClick={this.onMapClicked} />}
+          mapElement={<div className={mapClasses} />}
+          center={center}
+          isOpenOnModal={isOpenOnModal}
+          listings={listings}
+          activeListingId={activeListingId}
+          infoCardOpen={infoCardOpen}
+          onListingClicked={this.onListingClicked}
+          onListingInfoCardClicked={this.onListingInfoCardClicked}
+          createURLToListing={this.createURLToListing}
+          onMapLoad={this.onMapLoadHandler}
+          onIdle={() => {
+            if (this.googleMap) {
+              onIdle(this.googleMap);
+            }
+          }}
+          onCloseAsModal={() => {
+            if (onCloseAsModal) {
+              onCloseAsModal();
+            }
+          }}
+          zoom={zoom}
+          mapComponentRefreshToken={this.mapReattachmentCount}
+        />
+      </ReusableMapContainer>
     ) : (
       <div className={classes} />
     );
@@ -296,6 +342,7 @@ SearchMapComponent.defaultProps = {
   className: null,
   rootClassName: null,
   mapRootClassName: null,
+  reusableContainerClassName: null,
   bounds: null,
   center: new sdkTypes.LatLng(0, 0),
   activeListingId: null,
@@ -311,6 +358,7 @@ SearchMapComponent.propTypes = {
   className: string,
   rootClassName: string,
   mapRootClassName: string,
+  reusableContainerClassName: string,
   bounds: propTypes.latlngBounds,
   center: propTypes.latlng,
   activeListingId: propTypes.uuid,
@@ -323,8 +371,13 @@ SearchMapComponent.propTypes = {
   coordinatesConfig: shape({
     fuzzy: bool.isRequired,
   }),
+
+  // from withRouter
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
 };
 
-const SearchMap = SearchMapComponent;
+const SearchMap = withRouter(SearchMapComponent);
 
 export default SearchMap;

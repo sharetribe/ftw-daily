@@ -86,39 +86,13 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       showAsModalMaxWidth={768}
     >
       <div>
-        <SearchMapComponent
+        <withRouter(SearchMapComponent)
           activeListingId={null}
-          bounds={null}
-          center={
-            LatLng {
-              "lat": 0,
-              "lng": 0,
-            }
-          }
-          className={null}
-          coordinatesConfig={
-            Object {
-              "circleOptions": Object {
-                "clickable": false,
-                "fillColor": "#c0392b",
-                "fillOpacity": 0.2,
-                "strokeColor": "#c0392b",
-                "strokeOpacity": 0.5,
-                "strokeWeight": 1,
-              },
-              "coordinateOffset": 500,
-              "fuzzy": false,
-              "fuzzyDefaultZoomLevel": 14,
-            }
-          }
           isOpenOnModal={false}
           listings={Array []}
-          mapRootClassName={null}
           onCloseAsModal={[Function]}
           onIdle={[Function]}
-          rootClassName={null}
           useLocationSearchBounds={true}
-          zoom={11}
         />
       </div>
     </withViewport(ModalInMobileComponent)>
