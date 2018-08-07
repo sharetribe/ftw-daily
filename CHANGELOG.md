@@ -12,6 +12,10 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 ## Upcoming version 2018-08-XX
+* [change] Update the Sharetribe Flex SDK to the 1.0.0 version in NPM.
+  All the `sharetribe-sdk` imports are now using the new package name
+  `sharetribe-flex-sdk`.
+  [#884](https://github.com/sharetribe/flex-template-web/pull/884)
 * [change] Reusable SearchMap. Fixed the original reverted version. (Includes audit exception 678)
   [#882](https://github.com/sharetribe/flex-template-web/pull/882)
 

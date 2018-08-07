@@ -48,8 +48,8 @@
     "redux-thunk": "^2.2.0",
     "sanitize.css": "^5.0.0",
     "seedrandom": "^2.4.3",
+    "sharetribe-flex-sdk": "^1.0.0",
     "sharetribe-scripts": "1.1.2",
-    "sharetribe-sdk": "https://github.com/sharetribe/sharetribe-sdk-js.git#b7ffe0fe0a5bdb0a1471e2ff36cdd25b997fb39b",
     "smoothscroll-polyfill": "^0.4.0",
     "source-map-support": "^0.5.4",
     "url": "^0.11.0"
