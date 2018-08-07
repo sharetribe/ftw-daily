@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
-const { types } = require('sharetribe-sdk');
+const { types } = require('sharetribe-flex-sdk');
 const { renderApp } = require('./importer');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
