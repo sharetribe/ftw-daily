@@ -9,8 +9,8 @@ import { createSlug } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
 import { obfuscatedCoordinates } from '../../util/maps';
 import config from '../../config';
-import { hasParentWithClassName } from './SearchMap.helpers.js';
 
+import { hasParentWithClassName } from './SearchMap.helpers.js';
 import SearchMapWithMapbox, {
   LABEL_HANDLE,
   INFO_CARD_HANDLE,
