@@ -5,7 +5,7 @@ import debounce from 'lodash/debounce';
 import { propTypes } from '../../util/types';
 import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
 
-import css from './LocationAutocompleteInputGoogleMaps.css';
+import css from './LocationAutocompleteInputMapbox.css';
 
 const DEBOUNCE_WAIT_TIME = 200;
 const KEY_CODE_ARROW_UP = 38;
@@ -136,7 +136,7 @@ const currentValue = props => {
   See the LocationAutocompleteInput.example.js file for a usage
   example within a form.
 */
-class LocationAutocompleteInputGoogleMaps extends Component {
+class LocationAutocompleteInputMapbox extends Component {
   constructor(props) {
     super(props);
 
@@ -466,7 +466,7 @@ class LocationAutocompleteInputGoogleMaps extends Component {
   }
 }
 
-LocationAutocompleteInputGoogleMaps.defaultProps = {
+LocationAutocompleteInputMapbox.defaultProps = {
   autoFocus: false,
   closeOnBlur: true,
   rootClassName: null,
@@ -480,7 +480,7 @@ LocationAutocompleteInputGoogleMaps.defaultProps = {
   inputRef: null,
 };
 
-LocationAutocompleteInputGoogleMaps.propTypes = {
+LocationAutocompleteInputMapbox.propTypes = {
   autoFocus: bool,
   rootClassName: string,
   className: string,
@@ -511,4 +511,4 @@ LocationAutocompleteInputGoogleMaps.propTypes = {
   inputRef: func,
 };
 
-export default LocationAutocompleteInputGoogleMaps;
+export default LocationAutocompleteInputMapbox;
