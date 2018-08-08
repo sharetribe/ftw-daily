@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string, bool } from 'prop-types';
+import { string, bool, arrayOf } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
@@ -85,6 +85,7 @@ export class BookingDatesFormComponent extends Component {
             unitPrice,
             unitType,
             values,
+            timeSlots,
           } = fieldRenderProps;
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
@@ -160,6 +161,7 @@ export class BookingDatesFormComponent extends Component {
                 focusedInput={this.state.focusedInput}
                 onFocusedInputChange={this.onFocusedInputChange}
                 format={null}
+                timeSlots={timeSlots}
                 useMobileMargins
                 validate={composeValidators(
                   required(requiredMessage),
@@ -197,6 +199,7 @@ BookingDatesFormComponent.defaultProps = {
   isOwnListing: false,
   startDatePlaceholder: null,
   endDatePlaceholder: null,
+  timeSlots: null,
 };
 
 BookingDatesFormComponent.propTypes = {
@@ -207,6 +210,7 @@ BookingDatesFormComponent.propTypes = {
   unitType: propTypes.bookingUnitType.isRequired,
   price: propTypes.money,
   isOwnListing: bool,
+  timeSlots: arrayOf(propTypes.timeSlot),
 
   // from injectIntl
   intl: intlShape.isRequired,

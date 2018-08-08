@@ -24,6 +24,7 @@ const SectionBooking = props => {
     handleBookButtonClick,
     handleMobileBookModalClose,
     onManageDisableScrolling,
+    timeSlots,
   } = props;
   const showClosedListingHelpText = listing.id && isClosed;
   return (
@@ -68,6 +69,7 @@ const SectionBooking = props => {
             onSubmit={handleBookingSubmit}
             price={price}
             isOwnListing={isOwnListing}
+            timeSlots={timeSlots}
           />
         ) : null}
       </ModalInMobile>
