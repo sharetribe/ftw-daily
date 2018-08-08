@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import { bool, func, object, oneOf, string } from 'prop-types';
+import { bool, func, object, oneOf, string, arrayOf } from 'prop-types';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { START_DATE, END_DATE } from '../../util/dates';
@@ -160,6 +160,7 @@ FieldDateRangeInputComponent.defaultProps = {
   startDatePlaceholderText: null,
   focusedInput: null,
   onFocusedInputChange: null,
+  timeSlots: null,
 };
 
 FieldDateRangeInputComponent.propTypes = {
@@ -173,6 +174,7 @@ FieldDateRangeInputComponent.propTypes = {
   startDateId: string,
   startDateLabel: string,
   startDatePlaceholderText: string,
+  timeSlots: arrayOf(propTypes.timeSlot),
   input: object.isRequired,
   meta: object.isRequired,
   focusedInput: oneOf([START_DATE, END_DATE]),
