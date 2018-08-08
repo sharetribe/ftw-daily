@@ -66,6 +66,7 @@
   "BookingDatesForm.requestToBook": "Request to book",
   "BookingDatesForm.requiredDate": "Oops, make sure your date is correct!",
   "BookingDatesForm.youWontBeChargedInfo": "You won't be charged yet",
+  "CheckoutPage.bookingTimeNotAvailableMessage": "Unfortunately, the requested time is already booked.",
   "CheckoutPage.errorlistingLinkText": "the sauna page",
   "CheckoutPage.goToLandingPage": "Go to homepage",
   "CheckoutPage.hostedBy": "Hosted by {name}",

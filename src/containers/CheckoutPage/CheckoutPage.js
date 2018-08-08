@@ -15,6 +15,7 @@ import {
   isTransactionInitiateAmountTooLowError,
   isTransactionInitiateListingNotFoundError,
   isTransactionInitiateMissingStripeAccountError,
+  isTransactionInitiateBookingTimeNotAvailableError,
 } from '../../util/errors';
 import {
   AvatarMedium,
@@ -296,6 +297,12 @@ export class CheckoutPageComponent extends Component {
       speculateErrorMessage = (
         <p className={css.orderError}>
           <FormattedMessage id="CheckoutPage.providerStripeAccountMissingError" />
+        </p>
+      );
+    } else if (isTransactionInitiateBookingTimeNotAvailableError(speculateTransactionError)) {
+      speculateErrorMessage = (
+        <p className={css.orderError}>
+          <FormattedMessage id="CheckoutPage.bookingTimeNotAvailableMessage" />
         </p>
       );
     } else if (speculateTransactionError) {

@@ -432,6 +432,8 @@ export const ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_CUSTOMER =
   'transaction-already-reviewed-by-customer';
 export const ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_PROVIDER =
   'transaction-already-reviewed-by-provider';
+export const ERROR_CODE_TRANSACTION_BOOKING_TIME_NOT_AVAILABLE =
+  'transaction-booking-time-not-available';
 export const ERROR_CODE_PAYMENT_FAILED = 'transaction-payment-failed';
 export const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
 export const ERROR_CODE_EMAIL_NOT_FOUND = 'email-not-found';
