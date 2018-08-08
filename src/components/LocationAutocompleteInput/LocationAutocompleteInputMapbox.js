@@ -3,7 +3,6 @@ import { any, arrayOf, bool, func, number, shape, string, oneOfType } from 'prop
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import { propTypes } from '../../util/types';
-import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
 
 import css from './LocationAutocompleteInputMapbox.css';
 
@@ -64,6 +63,8 @@ const LocationPredictionsList = props => {
   /* eslint-disable jsx-a11y/no-static-element-interactions */
   const item = (prediction, index) => {
     const isHighlighted = index === highlightedIndex;
+
+    // TODO: use Mapbox feature object
 
     return (
       <li
@@ -260,37 +261,8 @@ class LocationAutocompleteInputMapbox extends Component {
       return;
     }
     const prediction = predictions[index];
-    const placeId = prediction.place_id;
-
-    this.props.input.onChange({
-      ...this.props.input,
-      selectedPlaceId: placeId,
-      selectedPlace: null,
-    });
-
-    this.autocompleteSessionToken =
-      this.autocompleteSessionToken || new window.google.maps.places.AutocompleteSessionToken();
-    const sessionToken = this.autocompleteSessionToken;
-
-    getPlaceDetails(placeId, sessionToken)
-      .then(place => {
-        this.props.input.onChange({
-          search: prediction.description,
-          predictions: [],
-          selectedPlaceId: placeId,
-          selectedPlace: place,
-        });
-        this.autocompleteSessionToken = null;
-      })
-      .catch(e => {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        this.props.input.onChange({
-          ...this.props.input.value,
-          selectedPlaceId: null,
-          selectedPlace: null,
-        });
-      });
+    console.log('select prediction:', index, prediction);
+    // TODO: implement
   }
   selectItemIfNoneSelected() {
     const { search, selectedPlaceId } = currentValue(this.props);
@@ -300,47 +272,8 @@ class LocationAutocompleteInputMapbox extends Component {
     }
   }
   predict(search) {
-    const mapsLibLoaded = window.google && window.google.maps;
-    if (!mapsLibLoaded) {
-      throw new Error('Google Maps API must be loaded for LocationAutocompleteInput');
-    }
-    const onChange = this.props.input.onChange;
-
-    this.autocompleteSessionToken =
-      this.autocompleteSessionToken || new window.google.maps.places.AutocompleteSessionToken();
-    const sessionToken = this.autocompleteSessionToken;
-
-    getPlacePredictions(search, sessionToken)
-      .then(results => {
-        const { search: currentSearch } = currentValue(this.props);
-
-        // If the earlier predictions arrive when the user has already
-        // changed the search term, ignore and wait until the latest
-        // predictions arrive. Without this logic, results for earlier
-        // requests would override whatever the user had typed since.
-        //
-        // This is essentially the same as switchLatest in RxJS or
-        // takeLatest in Redux Saga, without canceling the earlier
-        // requests.
-        if (results.search === currentSearch) {
-          onChange({
-            search: results.search,
-            predictions: results.predictions,
-            selectedPlaceId: null,
-            selectedPlace: null,
-          });
-        }
-      })
-      .catch(e => {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        const value = currentValue(this.props);
-        onChange({
-          ...value,
-          selectedPlaceId: null,
-          selectedPlace: null,
-        });
-      });
+    console.log('predict():', search);
+    // TODO: call Mapbox geocoding API
   }
 
   finalizeSelection() {
