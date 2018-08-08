@@ -507,7 +507,7 @@ LocationAutocompleteInput.propTypes = {
 
 export default LocationAutocompleteInput;
 
-class LocationAutocompleteInputFieldComponent extends Component {
+class LocationAutocompleteInputComponent extends Component {
   render() {
     /* eslint-disable no-unused-vars */
     const { rootClassName, labelClassName, ...restProps } = this.props;
@@ -532,14 +532,14 @@ class LocationAutocompleteInputFieldComponent extends Component {
   }
 }
 
-LocationAutocompleteInputFieldComponent.defaultProps = {
+LocationAutocompleteInputComponent.defaultProps = {
   rootClassName: null,
   labelClassName: null,
   type: null,
   label: null,
 };
 
-LocationAutocompleteInputFieldComponent.propTypes = {
+LocationAutocompleteInputComponent.propTypes = {
   rootClassName: string,
   labelClassName: string,
   input: shape({
@@ -551,5 +551,5 @@ LocationAutocompleteInputFieldComponent.propTypes = {
 };
 
 export const LocationAutocompleteInputField = props => {
-  return <Field component={LocationAutocompleteInputFieldComponent} {...props} />;
+  return <Field component={LocationAutocompleteInputComponent} {...props} />;
 };
