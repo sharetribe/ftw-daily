@@ -375,13 +375,21 @@ class LocationAutocompleteInputGoogleMaps extends Component {
   }
 
   handlePredictionsSelectEnd(index) {
-    this.setState(prevState => {
-      if (!prevState.isSwipe) {
-        this.selectItem(index);
-        this.finalizeSelection();
+    let selectAndFinalize = false;
+    this.setState(
+      prevState => {
+        if (!prevState.isSwipe) {
+          selectAndFinalize = true;
+        }
+        return { selectionInProgress: false, touchStartedFrom: null, isSwipe: false };
+      },
+      () => {
+        if (selectAndFinalize) {
+          this.selectItem(index);
+          this.finalizeSelection();
+        }
       }
-      return { selectionInProgress: false, touchStartedFrom: null, isSwipe: false };
-    });
+    );
   }
 
   render() {
@@ -502,6 +510,5 @@ LocationAutocompleteInputGoogleMaps.propTypes = {
   }),
   inputRef: func,
 };
-
 
 export default LocationAutocompleteInputGoogleMaps;
