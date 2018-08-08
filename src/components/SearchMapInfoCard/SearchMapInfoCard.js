@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { arrayOf, bool, func, string } from 'prop-types';
-import { OverlayView } from 'react-google-maps';
-import { OVERLAY_VIEW } from 'react-google-maps/lib/constants';
 import { compose } from 'redux';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
@@ -12,26 +10,6 @@ import { ensureListing } from '../../util/data';
 import { ResponsiveImage } from '../../components';
 
 import css from './SearchMapInfoCard.css';
-
-// FIX "TypeError: Cannot read property 'overlayMouseTarget' of null"
-// Override draw function to catch errors with map panes being undefined to prevent console errors
-// https://github.com/tomchentw/react-google-maps/issues/482
-class CustomOverlayView extends OverlayView {
-  draw() {
-    // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapPanes
-    const mapPanes = this.state[OVERLAY_VIEW].getPanes();
-    // Add conditional to ensure panes and container exist before drawing
-    if (mapPanes && this.containerElement) {
-      super.draw();
-    }
-  }
-}
-
-// Center label so that caret is pointing to correct pixel.
-// (vertical positioning: height + arrow) */
-const getPixelPositionOffset = (width, height) => {
-  return { x: -1 * (width / 2), y: -1 * (height + 3) };
-};
 
 // ListingCard is the listing info without overlayview or carousel controls
 const ListingCard = props => {
@@ -116,10 +94,6 @@ class SearchMapInfoCard extends Component {
       onListingInfoCardClicked,
     } = this.props;
     const currentListing = ensureListing(listings[this.state.currentListingIndex]);
-    const geolocation = currentListing.attributes.geolocation;
-
-    // Explicit type change to object literal for Google OverlayViews (geolocation is SDK type)
-    const latLngLiteral = { lat: geolocation.lat, lng: geolocation.lng };
     const hasCarousel = listings.length > 1;
     const pagination = hasCarousel ? (
       <div className={classNames(css.paginationInfo, css.borderRadiusInheritBottom)}>
@@ -155,25 +129,18 @@ class SearchMapInfoCard extends Component {
     const caretClass = classNames(css.caret, { [css.caretWithCarousel]: hasCarousel });
 
     return (
-      <CustomOverlayView
-        position={latLngLiteral}
-        mapPaneName={OverlayView.FLOAT_PANE}
-        getPixelPositionOffset={getPixelPositionOffset}
-        styles={{ zIndex: 1 }}
-      >
-        <div className={classes}>
-          <div className={css.caretShadow} />
-          <ListingCard
-            clickHandler={onListingInfoCardClicked}
-            urlToListing={createURLToListing(currentListing)}
-            listing={currentListing}
-            intl={intl}
-            isInCarousel={hasCarousel}
-          />
-          {pagination}
-          <div className={caretClass} />
-        </div>
-      </CustomOverlayView>
+      <div className={classes}>
+        <div className={css.caretShadow} />
+        <ListingCard
+          clickHandler={onListingInfoCardClicked}
+          urlToListing={createURLToListing(currentListing)}
+          listing={currentListing}
+          intl={intl}
+          isInCarousel={hasCarousel}
+        />
+        {pagination}
+        <div className={caretClass} />
+      </div>
     );
   }
 }
