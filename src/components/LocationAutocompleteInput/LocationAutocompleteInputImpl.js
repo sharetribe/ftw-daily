@@ -73,8 +73,8 @@ const LocationPredictionsList = props => {
         onTouchStart={e => onSelectStart(getTouchCoordinates(e.nativeEvent))}
         onMouseDown={() => onSelectStart()}
         onTouchMove={e => onSelectMove(getTouchCoordinates(e.nativeEvent))}
-        onTouchEnd={() => onSelectEnd(index)}
-        onMouseUp={() => onSelectEnd(index)}
+        onTouchEnd={() => onSelectEnd(prediction)}
+        onMouseUp={() => onSelectEnd(prediction)}
       >
         {geocoder.getPredictionAddress(prediction)}
       </li>
@@ -149,7 +149,7 @@ class LocationAutocompleteInputImpl extends Component {
     this.geocoder = new Geocoder();
 
     this.changeHighlight = this.changeHighlight.bind(this);
-    this.selectItem = this.selectItem.bind(this);
+    this.selectPrediction = this.selectPrediction.bind(this);
     this.selectItemIfNoneSelected = this.selectItemIfNoneSelected.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -244,16 +244,7 @@ class LocationAutocompleteInputImpl extends Component {
 
   // Select the prediction in the given item. This will fetch/read the
   // place details and set it as the selected place.
-  selectItem(index) {
-    if (index < 0) {
-      return;
-    }
-    const { predictions } = currentValue(this.props);
-    if (index >= predictions.length) {
-      return;
-    }
-    const prediction = predictions[index];
-
+  selectPrediction(prediction) {
     this.props.input.onChange({
       ...this.props.input,
       selectedPlace: null,
@@ -278,10 +269,13 @@ class LocationAutocompleteInputImpl extends Component {
       });
   }
   selectItemIfNoneSelected() {
-    const { search, selectedPlace } = currentValue(this.props);
+    const { search, selectedPlace, predictions } = currentValue(this.props);
     if (search && !selectedPlace) {
       const index = this.state.highlightedIndex !== -1 ? this.state.highlightedIndex : 0;
-      this.selectItem(index);
+
+      if (index >= 0 && index < predictions.length) {
+        this.selectPrediction(predictions[index]);
+      }
     }
   }
   predict(search) {
@@ -350,7 +344,7 @@ class LocationAutocompleteInputImpl extends Component {
     });
   }
 
-  handlePredictionsSelectEnd(index) {
+  handlePredictionsSelectEnd(prediction) {
     let selectAndFinalize = false;
     this.setState(
       prevState => {
@@ -361,7 +355,7 @@ class LocationAutocompleteInputImpl extends Component {
       },
       () => {
         if (selectAndFinalize) {
-          this.selectItem(index);
+          this.selectPrediction(prediction);
           this.finalizeSelection();
         }
       }
