@@ -1,4 +1,12 @@
+import React from 'react';
 import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
+
+import css from './LocationAutocompleteInput.css';
+
+// When displaying data from the Google Maps Places API, and
+// attribution is required next to the results.
+// See: https://developers.google.com/places/web-service/policies#powered
+export const GeocoderAttribution = () => <div className={css.poweredByGoogle} />;
 
 /**
  * A forward geocoding (place name -> coordinates) implementation

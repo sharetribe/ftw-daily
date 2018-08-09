@@ -3,16 +3,9 @@ import { any, arrayOf, bool, func, number, shape, string, oneOfType, object } fr
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import { propTypes } from '../../util/types';
-import Geocoder from './GeocoderGoogleMaps';
+import Geocoder, { GeocoderAttribution } from './GeocoderGoogleMaps';
 
 import css from './LocationAutocompleteInput.css';
-
-// When using the Google Maps Places API for geocoding, a "Powered by
-// Google" logo should be shown next to the results. Turn this to
-// `false` when using some other Geocoding API. Autocomplete
-// predictions dropdown bottom padding might need adjusting as well to
-// hide the space left for the logo.
-const SHOW_POWERED_BY_GOOGLE = true;
 
 const DEBOUNCE_WAIT_TIME = 200;
 const KEY_CODE_ARROW_UP = 38;
@@ -94,7 +87,7 @@ const LocationPredictionsList = props => {
   return (
     <div className={classes}>
       <ul className={css.predictions}>{predictions.map(item)}</ul>
-      {SHOW_POWERED_BY_GOOGLE ? <div className={css.poweredByGoogle} /> : null}
+      <GeocoderAttribution />
     </div>
   );
 };

@@ -24,6 +24,8 @@ const placeBounds = prediction => {
   return null;
 };
 
+export const GeocoderAttribution = () => null;
+
 /**
  * A forward geocoding (place name -> coordinates) implementation
  * using the Mapbox Geocoding API.
