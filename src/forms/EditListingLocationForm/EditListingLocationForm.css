@@ -50,7 +50,7 @@
 .predictionsRoot {
   position: absolute;
   width: 100%;
-  padding-bottom: 98px;
+  padding-bottom: var(--locationAutocompleteBottomPadding);
   top: 36px;
   left: 0;
   background-color: var(--marketplaceColor);

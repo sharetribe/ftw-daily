@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { any, arrayOf, bool, func, number, shape, string, oneOfType } from 'prop-types';
+import { any, arrayOf, bool, func, number, shape, string, oneOfType, object } from 'prop-types';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import { propTypes } from '../../util/types';
-import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
+import Geocoder, { GeocoderAttribution } from './GeocoderGoogleMaps';
 
-import css from './LocationAutocompleteInputGoogleMaps.css';
+import css from './LocationAutocompleteInput.css';
 
 const DEBOUNCE_WAIT_TIME = 200;
 const KEY_CODE_ARROW_UP = 38;
@@ -52,6 +52,7 @@ const LocationPredictionsList = props => {
     rootClassName,
     className,
     predictions,
+    geocoder,
     highlightedIndex,
     onSelectStart,
     onSelectMove,
@@ -75,7 +76,7 @@ const LocationPredictionsList = props => {
         onTouchEnd={() => onSelectEnd(index)}
         onMouseUp={() => onSelectEnd(index)}
       >
-        {prediction.description}
+        {geocoder.getPredictionAddress(prediction)}
       </li>
     );
   };
@@ -86,7 +87,7 @@ const LocationPredictionsList = props => {
   return (
     <div className={classes}>
       <ul className={css.predictions}>{predictions.map(item)}</ul>
-      <div className={css.poweredByGoogle} />
+      <GeocoderAttribution />
     </div>
   );
 };
@@ -100,13 +101,8 @@ LocationPredictionsList.defaultProps = {
 LocationPredictionsList.propTypes = {
   rootClassName: string,
   className: string,
-  predictions: arrayOf(
-    shape({
-      id: string.isRequired,
-      description: string.isRequired,
-      place_id: string.isRequired,
-    })
-  ).isRequired,
+  predictions: arrayOf(object).isRequired,
+  geocoder: object.isRequired,
   highlightedIndex: number,
   onSelectStart: func.isRequired,
   onSelectMove: func.isRequired,
@@ -117,8 +113,8 @@ LocationPredictionsList.propTypes = {
 // LocationAutocompleteInput props.
 const currentValue = props => {
   const value = props.input.value || {};
-  const { search = '', predictions = [], selectedPlaceId = null, selectedPlace = null } = value;
-  return { search, predictions, selectedPlaceId, selectedPlace };
+  const { search = '', predictions = [], selectedPlace = null } = value;
+  return { search, predictions, selectedPlace };
 };
 
 /*
@@ -129,14 +125,14 @@ const currentValue = props => {
   controls the onChange callback that is called with the input value.
 
   The component works by listening to the underlying input component
-  and calling the Google Maps Places API for predictions. When the
+  and calling a Geocoder implementation for predictions. When the
   predictions arrive, those are passed to Final Form in the onChange
   callback.
 
   See the LocationAutocompleteInput.example.js file for a usage
   example within a form.
 */
-class LocationAutocompleteInputGoogleMaps extends Component {
+class LocationAutocompleteInputImpl extends Component {
   constructor(props) {
     super(props);
 
@@ -150,9 +146,7 @@ class LocationAutocompleteInputGoogleMaps extends Component {
     // Ref to the input element.
     this.input = null;
 
-    // Current sessionToken used to combine autocomplete calls with place details call
-    // This reduces Google Maps pricing.
-    this.autocompleteSessionToken = null;
+    this.geocoder = new Geocoder();
 
     this.changeHighlight = this.changeHighlight.bind(this);
     this.selectItem = this.selectItem.bind(this);
@@ -206,7 +200,6 @@ class LocationAutocompleteInputGoogleMaps extends Component {
     onChange({
       search: newValue,
       predictions: newValue ? predictions : [],
-      selectedPlaceId: null,
       selectedPlace: null,
     });
 
@@ -249,7 +242,7 @@ class LocationAutocompleteInputGoogleMaps extends Component {
     });
   }
 
-  // Select the prediction in the given item. This will fetch the
+  // Select the prediction in the given item. This will fetch/read the
   // place details and set it as the selected place.
   selectItem(index) {
     if (index < 0) {
@@ -260,57 +253,42 @@ class LocationAutocompleteInputGoogleMaps extends Component {
       return;
     }
     const prediction = predictions[index];
-    const placeId = prediction.place_id;
 
     this.props.input.onChange({
       ...this.props.input,
-      selectedPlaceId: placeId,
       selectedPlace: null,
     });
 
-    this.autocompleteSessionToken =
-      this.autocompleteSessionToken || new window.google.maps.places.AutocompleteSessionToken();
-    const sessionToken = this.autocompleteSessionToken;
-
-    getPlaceDetails(placeId, sessionToken)
+    this.geocoder
+      .getPlaceDetails(prediction)
       .then(place => {
         this.props.input.onChange({
-          search: prediction.description,
+          search: place.address,
           predictions: [],
-          selectedPlaceId: placeId,
           selectedPlace: place,
         });
-        this.autocompleteSessionToken = null;
       })
       .catch(e => {
         // eslint-disable-next-line no-console
         console.error(e);
         this.props.input.onChange({
           ...this.props.input.value,
-          selectedPlaceId: null,
           selectedPlace: null,
         });
       });
   }
   selectItemIfNoneSelected() {
-    const { search, selectedPlaceId } = currentValue(this.props);
-    if (search && !selectedPlaceId) {
+    const { search, selectedPlace } = currentValue(this.props);
+    if (search && !selectedPlace) {
       const index = this.state.highlightedIndex !== -1 ? this.state.highlightedIndex : 0;
       this.selectItem(index);
     }
   }
   predict(search) {
-    const mapsLibLoaded = window.google && window.google.maps;
-    if (!mapsLibLoaded) {
-      throw new Error('Google Maps API must be loaded for LocationAutocompleteInput');
-    }
     const onChange = this.props.input.onChange;
 
-    this.autocompleteSessionToken =
-      this.autocompleteSessionToken || new window.google.maps.places.AutocompleteSessionToken();
-    const sessionToken = this.autocompleteSessionToken;
-
-    getPlacePredictions(search, sessionToken)
+    this.geocoder
+      .getPlacePredictions(search)
       .then(results => {
         const { search: currentSearch } = currentValue(this.props);
 
@@ -326,7 +304,6 @@ class LocationAutocompleteInputGoogleMaps extends Component {
           onChange({
             search: results.search,
             predictions: results.predictions,
-            selectedPlaceId: null,
             selectedPlace: null,
           });
         }
@@ -337,7 +314,6 @@ class LocationAutocompleteInputGoogleMaps extends Component {
         const value = currentValue(this.props);
         onChange({
           ...value,
-          selectedPlaceId: null,
           selectedPlace: null,
         });
       });
@@ -455,6 +431,7 @@ class LocationAutocompleteInputGoogleMaps extends Component {
           <LocationPredictionsList
             rootClassName={predictionsClass}
             predictions={predictions}
+            geocoder={this.geocoder}
             highlightedIndex={this.state.highlightedIndex}
             onSelectStart={this.handlePredictionsSelectStart}
             onSelectMove={this.handlePredictionsSelectMove}
@@ -466,7 +443,7 @@ class LocationAutocompleteInputGoogleMaps extends Component {
   }
 }
 
-LocationAutocompleteInputGoogleMaps.defaultProps = {
+LocationAutocompleteInputImpl.defaultProps = {
   autoFocus: false,
   closeOnBlur: true,
   rootClassName: null,
@@ -480,7 +457,7 @@ LocationAutocompleteInputGoogleMaps.defaultProps = {
   inputRef: null,
 };
 
-LocationAutocompleteInputGoogleMaps.propTypes = {
+LocationAutocompleteInputImpl.propTypes = {
   autoFocus: bool,
   rootClassName: string,
   className: string,
@@ -511,4 +488,4 @@ LocationAutocompleteInputGoogleMaps.propTypes = {
   inputRef: func,
 };
 
-export default LocationAutocompleteInputGoogleMaps;
+export default LocationAutocompleteInputImpl;

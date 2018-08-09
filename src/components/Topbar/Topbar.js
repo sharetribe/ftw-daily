@@ -98,14 +98,13 @@ class TopbarComponent extends Component {
     const { currentSearchParams } = this.props;
     const { search, selectedPlace } = values.location;
     const { history } = this.props;
-    const { origin, bounds, country } = selectedPlace;
+    const { origin, bounds } = selectedPlace;
     const originMaybe = config.sortSearchByDistance ? { origin } : {};
     const searchParams = {
       ...currentSearchParams,
       ...originMaybe,
       address: search,
       bounds,
-      country,
     };
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams));
   }
@@ -151,7 +150,7 @@ class TopbarComponent extends Component {
       showGenericError,
     } = this.props;
 
-    const { mobilemenu, mobilesearch, address, origin, bounds, country } = parse(location.search, {
+    const { mobilemenu, mobilesearch, address, origin, bounds } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
@@ -175,13 +174,13 @@ class TopbarComponent extends Component {
 
     // Only render current search if full place object is available in the URL params
     const locationFieldsPresent = config.sortSearchByDistance
-      ? address && origin && bounds && country
-      : address && bounds && country;
+      ? address && origin && bounds
+      : address && bounds;
     const initialSearchFormValues = {
       location: locationFieldsPresent
         ? {
             search: address,
-            selectedPlace: { address, origin, bounds, country },
+            selectedPlace: { address, origin, bounds },
           }
         : null,
     };

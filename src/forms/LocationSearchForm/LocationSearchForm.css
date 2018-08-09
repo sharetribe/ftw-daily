@@ -51,7 +51,7 @@
 .searchPredictions {
   position: absolute;
   width: 100%;
-  padding-bottom: 72px;
+  padding-bottom: var(--locationAutocompleteBottomPadding);
   top: 50px;
   left: 0;
   background-color: var(--marketplaceColor);

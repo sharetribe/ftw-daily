@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { func, object, shape, string } from 'prop-types';
 import { Field } from 'react-final-form';
 import { ValidationError } from '../../components';
-import LocationAutocompleteInputGoogleMaps from './LocationAutocompleteInputGoogleMaps.js';
+import LocationAutocompleteInputImpl from './LocationAutocompleteInputImpl.js';
 
 class LocationAutocompleteInputComponent extends Component {
   render() {
@@ -22,7 +22,7 @@ class LocationAutocompleteInputComponent extends Component {
     return (
       <div className={rootClassName}>
         {labelInfo}
-        <LocationAutocompleteInputGoogleMaps {...locationAutocompleteProps} />
+        <LocationAutocompleteInputImpl {...locationAutocompleteProps} />
         <ValidationError fieldMeta={meta} />
       </div>
     );
@@ -47,7 +47,7 @@ LocationAutocompleteInputComponent.propTypes = {
   meta: object.isRequired,
 };
 
-export default LocationAutocompleteInputGoogleMaps;
+export default LocationAutocompleteInputImpl;
 
 export const LocationAutocompleteInputField = props => {
   return <Field component={LocationAutocompleteInputComponent} {...props} />;

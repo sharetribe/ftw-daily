@@ -132,7 +132,7 @@
   left: 0;
   min-height: calc(100vh - var(--TopbarSearchForm_mobilePredictionTop));
   width: 100%;
-  padding-bottom: 72px;
+  padding-bottom: var(--locationAutocompleteBottomPadding);
   background-color: var(--marketplaceColor);
   border-bottom-left-radius: var(--borderRadius);
   border-bottom-right-radius: var(--borderRadius);
@@ -143,7 +143,7 @@
 .desktopPredictions {
   position: absolute;
   width: 100%;
-  padding-bottom: 72px;
+  padding-bottom: var(--locationAutocompleteBottomPadding);
   top: 50px;
   left: 0;
   background-color: var(--marketplaceColor);

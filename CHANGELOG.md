@@ -13,6 +13,10 @@ way to update this template, but currently, we follow a pattern:
 ---
 ## Upcoming version 2018-08-XX
 
+* [change] Removed the `country` parameter from the search page as it
+  was not used anywhere.
+  [#893](https://github.com/sharetribe/flex-template-web/pull/893)
+
 ## v1.3.2 2018-08-07
 * [change] Update the Sharetribe Flex SDK to the 1.0.0 version in NPM.
   All the `sharetribe-sdk` imports are now using the new package name

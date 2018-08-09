@@ -25,17 +25,16 @@ const Form = props => {
 
 const PlaceInfo = props => {
   const { place } = props;
-  const { address, country, origin, bounds } = place;
+  const { address, origin, bounds } = place;
   return (
     <div>
       <p>Submitted place:</p>
       <ul>
         <li>Address: {address}</li>
-        <li>Country: {country || '[no country]'}</li>
         <li>
           Coordinates: {origin.lat}, {origin.lng}
         </li>
-        <li>Bounds: {bounds ? 'yes' : 'no'}</li>
+        <li>Bounds?: {bounds ? 'yes' : 'no'}</li>
       </ul>
     </div>
   );

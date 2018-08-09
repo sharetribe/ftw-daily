@@ -68,7 +68,7 @@ size and position, etc.
 .predictionsRoot {
   position: absolute;
   width: 100%;
-  padding-bottom: 72px;
+  padding-bottom: var(--locationAutocompleteBottomPadding);
   top: var(--LocationAutocompleteInput_inputHeight);
   left: 0;
   background-color: var(--marketplaceColor);
