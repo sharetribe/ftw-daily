@@ -98,7 +98,6 @@ describe('SearchPage.helpers', () => {
         address: 'address value',
         origin: 'origin value',
         bounds: 'bounds value',
-        country: 'country value',
       };
       const validParams = pickSearchParamsOnly(params, filters);
       expect(validParams).toEqual({ bounds: 'bounds value' });

@@ -38,8 +38,8 @@ export class NotFoundPageComponent extends Component {
 
     const handleSearchSubmit = values => {
       const { search, selectedPlace } = values.location;
-      const { origin, bounds, country } = selectedPlace;
-      const searchParams = { address: search, origin, bounds, country };
+      const { origin, bounds } = selectedPlace;
+      const searchParams = { address: search, origin, bounds };
       history.push(
         createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
       );

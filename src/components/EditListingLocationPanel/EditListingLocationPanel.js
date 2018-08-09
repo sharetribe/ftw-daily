@@ -25,7 +25,7 @@ class EditListingLocationPanel extends Component {
     const { geolocation, publicData } = currentListing.attributes;
 
     // Only render current search if full place object is available in the URL params
-    // TODO bounds and country are missing - those need to be queried directly from Google Places
+    // TODO bounds are missing - those need to be queried directly from Google Places
     const locationFieldsPresent =
       publicData && publicData.location && publicData.location.address && geolocation;
     const location = publicData && publicData.location ? publicData.location : {};

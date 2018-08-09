@@ -22,9 +22,9 @@ const SectionHero = props => {
 
   const handleSearchSubmit = values => {
     const { search, selectedPlace } = values.location;
-    const { origin, bounds, country } = selectedPlace;
+    const { origin, bounds } = selectedPlace;
     const originMaybe = config.sortSearchByDistance ? { origin } : {};
-    const searchParams = { ...originMaybe, address: search, bounds, country };
+    const searchParams = { ...originMaybe, address: search, bounds };
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams));
   };
 
