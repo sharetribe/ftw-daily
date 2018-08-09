@@ -30,7 +30,7 @@ const timeSlotsContain = (timeSlots, date) => {
 
 const lastBlockedBetweenExclusive = (timeSlots, startDate, endDate) => {
   if (startDate.isSame(endDate, 'date')) {
-    return undefined;
+    return null;
   }
 
   return timeSlotsContain(timeSlots, endDate)
@@ -40,7 +40,7 @@ const lastBlockedBetweenExclusive = (timeSlots, startDate, endDate) => {
 
 /**
  * Find first blocked date between two dates.
- * If none is found, undefined is returned.
+ * If none is found, null is returned.
  *
  * @param {Array} timeSlots propTypes.timeSlot objects
  * @param {Moment} startDate start date, exclusive
@@ -49,7 +49,7 @@ const lastBlockedBetweenExclusive = (timeSlots, startDate, endDate) => {
 const firstBlockedBetween = (timeSlots, startDate, endDate) => {
   const firstDate = moment(startDate).add(1, 'days');
   if (firstDate.isSame(endDate, 'date')) {
-    return undefined;
+    return null;
   }
 
   return timeSlotsContain(timeSlots, firstDate)
@@ -59,7 +59,7 @@ const firstBlockedBetween = (timeSlots, startDate, endDate) => {
 
 /**
  * Find last blocked date between two dates.
- * If none is found, undefined is returned.
+ * If none is found, null is returned.
  *
  * @param {Array} timeSlots propTypes.timeSlot objects
  * @param {Moment} startDate start date, exclusive
@@ -68,7 +68,7 @@ const firstBlockedBetween = (timeSlots, startDate, endDate) => {
 const lastBlockedBetween = (timeSlots, startDate, endDate) => {
   const previousDate = moment(endDate).subtract(1, 'days');
   if (previousDate.isSame(startDate, 'date')) {
-    return undefined;
+    return null;
   }
 
   return timeSlotsContain(timeSlots, previousDate)
