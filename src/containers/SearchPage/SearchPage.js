@@ -100,7 +100,7 @@ export class SearchPageComponent extends Component {
     const { history, location } = this.props;
 
     // parse query parameters, including a custom attribute named category
-    const { address, country, bounds, mapSearch, ...rest } = parse(location.search, {
+    const { address, bounds, mapSearch, ...rest } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
@@ -127,7 +127,6 @@ export class SearchPageComponent extends Component {
         address,
         ...originMaybe,
         bounds: viewportBounds,
-        country,
         mapSearch: true,
         ...validFilterParams(rest, this.filters()),
       };
@@ -367,7 +366,7 @@ SearchPage.loadData = (params, search) => {
     latlng: ['origin'],
     latlngBounds: ['bounds'],
   });
-  const { page = 1, address, country, origin, ...rest } = queryParams;
+  const { page = 1, address, origin, ...rest } = queryParams;
   const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
   return searchListings({
     ...rest,
