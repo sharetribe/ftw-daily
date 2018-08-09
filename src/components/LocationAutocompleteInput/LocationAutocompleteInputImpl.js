@@ -253,7 +253,7 @@ class LocationAutocompleteInputImpl extends Component {
     });
   }
 
-  // Select the prediction in the given item. This will fetch the
+  // Select the prediction in the given item. This will fetch/read the
   // place details and set it as the selected place.
   selectItem(index) {
     if (index < 0) {
@@ -274,7 +274,7 @@ class LocationAutocompleteInputImpl extends Component {
       .getPlaceDetails(prediction)
       .then(place => {
         this.props.input.onChange({
-          search: prediction.description,
+          search: place.address,
           predictions: [],
           selectedPlace: place,
         });
