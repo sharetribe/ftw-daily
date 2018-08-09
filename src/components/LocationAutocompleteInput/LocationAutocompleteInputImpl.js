@@ -3,9 +3,16 @@ import { any, arrayOf, bool, func, number, shape, string, oneOfType } from 'prop
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import { propTypes } from '../../util/types';
-import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
+import Geocoder from './GeocoderGoogleMaps';
 
-import css from './LocationAutocompleteInputGoogleMaps.css';
+import css from './LocationAutocompleteInput.css';
+
+// When using the Google Maps Place API for geocoding, a "Powered by
+// Google" logo should be shown next to the results. Turn this to
+// `false` when using some other Geocoding API. Autocomplete
+// predictions dropdown bottom padding might need adjusting as well to
+// hide the space left for the logo.
+const SHOW_POWERED_BY_GOOGLE = true;
 
 const DEBOUNCE_WAIT_TIME = 200;
 const KEY_CODE_ARROW_UP = 38;
@@ -86,7 +93,7 @@ const LocationPredictionsList = props => {
   return (
     <div className={classes}>
       <ul className={css.predictions}>{predictions.map(item)}</ul>
-      <div className={css.poweredByGoogle} />
+      {SHOW_POWERED_BY_GOOGLE ? <div className={css.poweredByGoogle} /> : null}
     </div>
   );
 };
@@ -129,14 +136,14 @@ const currentValue = props => {
   controls the onChange callback that is called with the input value.
 
   The component works by listening to the underlying input component
-  and calling the Google Maps Places API for predictions. When the
+  and calling a Geocoder implementation for predictions. When the
   predictions arrive, those are passed to Final Form in the onChange
   callback.
 
   See the LocationAutocompleteInput.example.js file for a usage
   example within a form.
 */
-class LocationAutocompleteInputGoogleMaps extends Component {
+class LocationAutocompleteInputImpl extends Component {
   constructor(props) {
     super(props);
 
@@ -150,9 +157,7 @@ class LocationAutocompleteInputGoogleMaps extends Component {
     // Ref to the input element.
     this.input = null;
 
-    // Current sessionToken used to combine autocomplete calls with place details call
-    // This reduces Google Maps pricing.
-    this.autocompleteSessionToken = null;
+    this.geocoder = new Geocoder();
 
     this.changeHighlight = this.changeHighlight.bind(this);
     this.selectItem = this.selectItem.bind(this);
@@ -268,11 +273,8 @@ class LocationAutocompleteInputGoogleMaps extends Component {
       selectedPlace: null,
     });
 
-    this.autocompleteSessionToken =
-      this.autocompleteSessionToken || new window.google.maps.places.AutocompleteSessionToken();
-    const sessionToken = this.autocompleteSessionToken;
-
-    getPlaceDetails(placeId, sessionToken)
+    this.geocoder
+      .getPlaceDetails(prediction)
       .then(place => {
         this.props.input.onChange({
           search: prediction.description,
@@ -280,7 +282,6 @@ class LocationAutocompleteInputGoogleMaps extends Component {
           selectedPlaceId: placeId,
           selectedPlace: place,
         });
-        this.autocompleteSessionToken = null;
       })
       .catch(e => {
         // eslint-disable-next-line no-console
@@ -300,17 +301,10 @@ class LocationAutocompleteInputGoogleMaps extends Component {
     }
   }
   predict(search) {
-    const mapsLibLoaded = window.google && window.google.maps;
-    if (!mapsLibLoaded) {
-      throw new Error('Google Maps API must be loaded for LocationAutocompleteInput');
-    }
     const onChange = this.props.input.onChange;
 
-    this.autocompleteSessionToken =
-      this.autocompleteSessionToken || new window.google.maps.places.AutocompleteSessionToken();
-    const sessionToken = this.autocompleteSessionToken;
-
-    getPlacePredictions(search, sessionToken)
+    this.geocoder
+      .getPlacePredictions(search)
       .then(results => {
         const { search: currentSearch } = currentValue(this.props);
 
@@ -466,7 +460,7 @@ class LocationAutocompleteInputGoogleMaps extends Component {
   }
 }
 
-LocationAutocompleteInputGoogleMaps.defaultProps = {
+LocationAutocompleteInputImpl.defaultProps = {
   autoFocus: false,
   closeOnBlur: true,
   rootClassName: null,
@@ -480,7 +474,7 @@ LocationAutocompleteInputGoogleMaps.defaultProps = {
   inputRef: null,
 };
 
-LocationAutocompleteInputGoogleMaps.propTypes = {
+LocationAutocompleteInputImpl.propTypes = {
   autoFocus: bool,
   rootClassName: string,
   className: string,
@@ -511,4 +505,4 @@ LocationAutocompleteInputGoogleMaps.propTypes = {
   inputRef: func,
 };
 
-export default LocationAutocompleteInputGoogleMaps;
+export default LocationAutocompleteInputImpl;
