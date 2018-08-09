@@ -37,6 +37,13 @@ class GeocoderGoogleMaps {
   }
 
   /**
+   * Get the address text of the given prediction.
+   */
+  getPredictionAddress(prediction) {
+    return prediction.description;
+  }
+
+  /**
    * Fetch or read place details from the selected prediction.
    *
    * @param {Object} prediction selected prediction object

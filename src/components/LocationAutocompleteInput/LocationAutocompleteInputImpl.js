@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { any, arrayOf, bool, func, number, shape, string, oneOfType } from 'prop-types';
+import { any, arrayOf, bool, func, number, shape, string, oneOfType, object } from 'prop-types';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import { propTypes } from '../../util/types';
@@ -59,6 +59,7 @@ const LocationPredictionsList = props => {
     rootClassName,
     className,
     predictions,
+    geocoder,
     highlightedIndex,
     onSelectStart,
     onSelectMove,
@@ -82,7 +83,7 @@ const LocationPredictionsList = props => {
         onTouchEnd={() => onSelectEnd(index)}
         onMouseUp={() => onSelectEnd(index)}
       >
-        {prediction.description}
+        {geocoder.getPredictionAddress(prediction)}
       </li>
     );
   };
@@ -107,13 +108,8 @@ LocationPredictionsList.defaultProps = {
 LocationPredictionsList.propTypes = {
   rootClassName: string,
   className: string,
-  predictions: arrayOf(
-    shape({
-      id: string.isRequired,
-      description: string.isRequired,
-      place_id: string.isRequired,
-    })
-  ).isRequired,
+  predictions: arrayOf(object).isRequired,
+  geocoder: object.isRequired,
   highlightedIndex: number,
   onSelectStart: func.isRequired,
   onSelectMove: func.isRequired,
@@ -442,6 +438,7 @@ class LocationAutocompleteInputImpl extends Component {
           <LocationPredictionsList
             rootClassName={predictionsClass}
             predictions={predictions}
+            geocoder={this.geocoder}
             highlightedIndex={this.state.highlightedIndex}
             onSelectStart={this.handlePredictionsSelectStart}
             onSelectMove={this.handlePredictionsSelectMove}
