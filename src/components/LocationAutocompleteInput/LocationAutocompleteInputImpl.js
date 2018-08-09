@@ -7,7 +7,7 @@ import Geocoder from './GeocoderGoogleMaps';
 
 import css from './LocationAutocompleteInput.css';
 
-// When using the Google Maps Place API for geocoding, a "Powered by
+// When using the Google Maps Places API for geocoding, a "Powered by
 // Google" logo should be shown next to the results. Turn this to
 // `false` when using some other Geocoding API. Autocomplete
 // predictions dropdown bottom padding might need adjusting as well to
