@@ -124,8 +124,8 @@ LocationPredictionsList.propTypes = {
 // LocationAutocompleteInput props.
 const currentValue = props => {
   const value = props.input.value || {};
-  const { search = '', predictions = [], selectedPlaceId = null, selectedPlace = null } = value;
-  return { search, predictions, selectedPlaceId, selectedPlace };
+  const { search = '', predictions = [], selectedPlace = null } = value;
+  return { search, predictions, selectedPlace };
 };
 
 /*
@@ -211,7 +211,6 @@ class LocationAutocompleteInputImpl extends Component {
     onChange({
       search: newValue,
       predictions: newValue ? predictions : [],
-      selectedPlaceId: null,
       selectedPlace: null,
     });
 
@@ -265,11 +264,9 @@ class LocationAutocompleteInputImpl extends Component {
       return;
     }
     const prediction = predictions[index];
-    const placeId = prediction.place_id;
 
     this.props.input.onChange({
       ...this.props.input,
-      selectedPlaceId: placeId,
       selectedPlace: null,
     });
 
@@ -279,7 +276,6 @@ class LocationAutocompleteInputImpl extends Component {
         this.props.input.onChange({
           search: prediction.description,
           predictions: [],
-          selectedPlaceId: placeId,
           selectedPlace: place,
         });
       })
@@ -288,14 +284,13 @@ class LocationAutocompleteInputImpl extends Component {
         console.error(e);
         this.props.input.onChange({
           ...this.props.input.value,
-          selectedPlaceId: null,
           selectedPlace: null,
         });
       });
   }
   selectItemIfNoneSelected() {
-    const { search, selectedPlaceId } = currentValue(this.props);
-    if (search && !selectedPlaceId) {
+    const { search, selectedPlace } = currentValue(this.props);
+    if (search && !selectedPlace) {
       const index = this.state.highlightedIndex !== -1 ? this.state.highlightedIndex : 0;
       this.selectItem(index);
     }
@@ -320,7 +315,6 @@ class LocationAutocompleteInputImpl extends Component {
           onChange({
             search: results.search,
             predictions: results.predictions,
-            selectedPlaceId: null,
             selectedPlace: null,
           });
         }
@@ -331,7 +325,6 @@ class LocationAutocompleteInputImpl extends Component {
         const value = currentValue(this.props);
         onChange({
           ...value,
-          selectedPlaceId: null,
           selectedPlace: null,
         });
       });
