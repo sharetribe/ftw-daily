@@ -3,6 +3,8 @@ import config from '../../config';
 
 const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
 
+const placeId = prediction => prediction.id;
+
 const placeAddress = prediction => prediction.place_name;
 
 const placeOrigin = prediction => {
@@ -64,6 +66,13 @@ class GeocoderMapbox {
           predictions: response.body.features,
         };
       });
+  }
+
+  /**
+   * Get the ID of the given prediction.
+   */
+  getPredictionId(prediction) {
+    return placeId(prediction);
   }
 
   /**

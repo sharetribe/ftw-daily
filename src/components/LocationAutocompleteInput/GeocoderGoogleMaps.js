@@ -45,6 +45,13 @@ class GeocoderGoogleMaps {
   }
 
   /**
+   * Get the ID of the given prediction.
+   */
+  getPredictionId(prediction) {
+    return prediction.place_id;
+  }
+
+  /**
    * Get the address text of the given prediction.
    */
   getPredictionAddress(prediction) {

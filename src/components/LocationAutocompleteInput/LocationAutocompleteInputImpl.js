@@ -69,7 +69,7 @@ const LocationPredictionsList = props => {
     return (
       <li
         className={isHighlighted ? css.highlighted : null}
-        key={prediction.id}
+        key={geocoder.getPredictionId(prediction)}
         onTouchStart={e => onSelectStart(getTouchCoordinates(e.nativeEvent))}
         onMouseDown={() => onSelectStart()}
         onTouchMove={e => onSelectMove(getTouchCoordinates(e.nativeEvent))}
