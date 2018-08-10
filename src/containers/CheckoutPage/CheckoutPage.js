@@ -270,12 +270,22 @@ export class CheckoutPageComponent extends Component {
     );
 
     const isAmountTooLowError = isTransactionInitiateAmountTooLowError(initiateOrderError);
+    const isBookingTimeNotAvailableError = isTransactionInitiateBookingTimeNotAvailableError(
+      initiateOrderError
+    );
+
     let initiateOrderErrorMessage = null;
 
     if (!listingNotFound && isAmountTooLowError) {
       initiateOrderErrorMessage = (
         <p className={css.orderError}>
           <FormattedMessage id="CheckoutPage.initiateOrderAmountTooLow" />
+        </p>
+      );
+    } else if (!listingNotFound && isBookingTimeNotAvailableError) {
+      initiateOrderErrorMessage = (
+        <p className={css.orderError}>
+          <FormattedMessage id="CheckoutPage.bookingTimeNotAvailableMessage" />
         </p>
       );
     } else if (!listingNotFound && initiateOrderError) {
