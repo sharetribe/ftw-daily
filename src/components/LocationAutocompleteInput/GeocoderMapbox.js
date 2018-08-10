@@ -26,6 +26,34 @@ const placeBounds = prediction => {
   return null;
 };
 
+// A list of default predictions that can be shown when the user
+// focuses on the autocomplete input without typing a search. This can
+// be used to reduce typing and Geocoding API calls for common
+// searches.
+//
+// Example:
+//
+// [
+//   {
+//     id: 'any unique id',
+//     place_name: 'Place name to show in the autocomplete dropdown',
+//     center: [longitude, latitude],
+//     bbox: [minX, minY, maxX, maxY],
+//   },
+// ]
+//
+// To know which values to set as defaults, log a real prediction
+// object from the Geocoding API call and check the values from the
+// response.
+export const defaultPredictions = [
+  // {
+  //   id: 'default-helsinki',
+  //   place_name: 'Helsinki, Finland',
+  //   center: [24.94861, 60.17333],
+  //   bbox: [24.82617, 60.075361, 25.313112, 60.297839],
+  // },
+];
+
 export const GeocoderAttribution = () => null;
 
 /**

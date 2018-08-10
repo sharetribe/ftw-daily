@@ -3,7 +3,8 @@ import { any, arrayOf, bool, func, number, shape, string, oneOfType, object } fr
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import { propTypes } from '../../util/types';
-import Geocoder, { GeocoderAttribution } from './GeocoderGoogleMaps';
+import Geocoder, { GeocoderAttribution, defaultPredictions } from './GeocoderGoogleMaps';
+// import Geocoder, { GeocoderAttribution, defaultPredictions } from './GeocoderMapbox';
 
 import css from './LocationAutocompleteInput.css';
 
@@ -148,6 +149,7 @@ class LocationAutocompleteInputImpl extends Component {
 
     this.geocoder = new Geocoder();
 
+    this.currentPredictions = this.currentPredictions.bind(this);
     this.changeHighlight = this.changeHighlight.bind(this);
     this.selectPrediction = this.selectPrediction.bind(this);
     this.selectItemIfNoneSelected = this.selectItemIfNoneSelected.bind(this);
@@ -164,6 +166,13 @@ class LocationAutocompleteInputImpl extends Component {
     this.predict = debounce(this.predict.bind(this), DEBOUNCE_WAIT_TIME, { leading: true });
   }
 
+  currentPredictions() {
+    const { search, predictions: fetchedPredictions } = currentValue(this.props);
+    const hasFetchedPredictions = fetchedPredictions && fetchedPredictions.length > 0;
+
+    return !search && !hasFetchedPredictions ? defaultPredictions : fetchedPredictions;
+  }
+
   // Interpret input key event
   onKeyDown(e) {
     if (e.keyCode === KEY_CODE_ARROW_UP) {
@@ -175,9 +184,9 @@ class LocationAutocompleteInputImpl extends Component {
       e.preventDefault();
       this.changeHighlight(DIRECTION_DOWN);
     } else if (e.keyCode === KEY_CODE_ENTER) {
-      const { search, selectedPlace } = currentValue(this.props);
+      const { selectedPlace } = currentValue(this.props);
 
-      if (search && !selectedPlace) {
+      if (!selectedPlace) {
         // Prevent form submit, try to select value instead.
         e.preventDefault();
         e.stopPropagation();
@@ -193,7 +202,7 @@ class LocationAutocompleteInputImpl extends Component {
   // Handle input text change, fetch predictions if the value isn't empty
   onChange(e) {
     const onChange = this.props.input.onChange;
-    const { predictions } = currentValue(this.props);
+    const predictions = this.currentPredictions();
     const newValue = e.target.value;
 
     // Clear the current values since the input content is changed
@@ -220,7 +229,7 @@ class LocationAutocompleteInputImpl extends Component {
   // (DIRECTION_UP or DIRECTION_DOWN)
   changeHighlight(direction) {
     this.setState((prevState, props) => {
-      const { predictions } = currentValue(props);
+      const predictions = this.currentPredictions();
       const currentIndex = prevState.highlightedIndex;
       let index = currentIndex;
 
@@ -269,8 +278,9 @@ class LocationAutocompleteInputImpl extends Component {
       });
   }
   selectItemIfNoneSelected() {
-    const { search, selectedPlace, predictions } = currentValue(this.props);
-    if (search && !selectedPlace) {
+    const { selectedPlace } = currentValue(this.props);
+    const predictions = this.currentPredictions();
+    if (!selectedPlace) {
       const index = this.state.highlightedIndex !== -1 ? this.state.highlightedIndex : 0;
 
       if (index >= 0 && index < predictions.length) {
@@ -377,9 +387,10 @@ class LocationAutocompleteInputImpl extends Component {
       inputRef,
     } = this.props;
     const { name, onFocus } = input;
-    const { search, predictions } = currentValue(this.props);
+    const { search } = currentValue(this.props);
     const { touched, valid } = meta || {};
     const isValid = valid && touched;
+    const predictions = this.currentPredictions();
 
     const handleOnFocus = e => {
       this.setState({ inputHasFocus: true });

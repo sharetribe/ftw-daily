@@ -3,6 +3,30 @@ import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
 
 import css from './LocationAutocompleteInput.css';
 
+// A list of default predictions that can be shown when the user
+// focuses on the autocomplete input without typing a search. This can
+// be used to reduce typing and Geocoding API calls for common
+// searches.
+//
+// Example:
+//
+// [
+//   {
+//     place_id: 'Place ID from Google Maps Places API',
+//     description: 'Place name to show in the autocomplete dropdown',
+//   },
+// ]
+//
+// To know which values to set as defaults, log a real prediction
+// object from the Places API call and copy the Place ID from the
+// response.
+export const defaultPredictions = [
+  // {
+  //   place_id: 'ChIJkQYhlscLkkYRY_fiO4S9Ts0',
+  //   description: 'Helsinki, Finland',
+  // },
+];
+
 // When displaying data from the Google Maps Places API, and
 // attribution is required next to the results.
 // See: https://developers.google.com/places/web-service/policies#powered
