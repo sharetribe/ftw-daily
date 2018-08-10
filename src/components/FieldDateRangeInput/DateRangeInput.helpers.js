@@ -28,16 +28,6 @@ const timeSlotsContain = (timeSlots, date) => {
   return timeSlots.findIndex(slot => timeSlotEqualsDay(slot, date)) > -1;
 };
 
-const lastBlockedBetweenExclusive = (timeSlots, startDate, endDate) => {
-  if (startDate.isSame(endDate, 'date')) {
-    return null;
-  }
-
-  return timeSlotsContain(timeSlots, endDate)
-    ? lastBlockedBetweenExclusive(timeSlots, startDate, moment(endDate).subtract(1, 'days'))
-    : endDate;
-};
-
 /**
  * Find first blocked date between two dates.
  * If none is found, null is returned.
