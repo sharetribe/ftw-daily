@@ -111,6 +111,7 @@ export const pickerEndDateToApiDate = (unitType, endDate) => {
     return endDate.toDate();
   }
 };
+
 /**
  * Returns an isDayBlocked function that can be passed to
  * a react-dates DateRangePicker component.
@@ -137,8 +138,8 @@ export const isDayBlockedFn = (timeSlots, startDate, endDate, focusedInput, unit
   );
 
   if (selectingEndDate) {
-    // if end date is being selected first, block the day after a
-    // booked date as a booking can end on the day the following booking starts
+    // if end date is being selected first, block the day after a booked date
+    // (as a booking can end on the day the following booking starts)
     return day =>
       !timeSlots.find(timeSlot => timeSlotEqualsDay(timeSlot, moment(day).subtract(1, 'days')));
   } else if (nextBookingStarts || !timeSlots) {
