@@ -220,7 +220,13 @@ class DateRangeInputComponent extends Component {
     const endDate =
       apiEndDateToPickerDate(unitType, value ? value.endDate : null) || initialEndMoment;
 
-    let isDayBlocked = isDayBlockedFn(timeSlots, startDate, endDate, this.state.focusedInput);
+    let isDayBlocked = isDayBlockedFn(
+      timeSlots,
+      startDate,
+      endDate,
+      this.state.focusedInput,
+      unitType
+    );
 
     let isOutsideRange = isOutsideRangeFn(
       timeSlots,
