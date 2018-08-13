@@ -25,3 +25,14 @@ local development, you can add the variable in the Gitignored `.env` file in the
 ```
 REACT_APP_GOOGLE_MAPS_API_KEY=my-key-here
 ```
+
+## Setup common locations to reduce typing
+
+The location autocomplete input in the landing page and the topbar can
+be configured to have specific locations shown by default when the
+user focuses on the input and hasn't yet typed in any searches. This
+reduces the typing required for common searches, and also reduces the
+need to use the Google Places geolocation API that much.
+
+The default locations can be configured in
+[src/components/LocationAutocompleteInput/GeocoderGoogleMaps.js](../src/components/LocationAutocompleteInput/GeocoderGoogleMaps.js).

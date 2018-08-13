@@ -13,6 +13,12 @@ way to update this template, but currently, we follow a pattern:
 ---
 ## Upcoming version 2018-08-XX
 
+* [change] Add support for default locations in the
+  LocationAutocompleteInput component. Common searches can be
+  configured to show when the input has focus. This reduces typing and
+  Google Places geolocation API usage. The defaults can be configured
+  in `src/components/LocationAutocompleteInput/GeocoderGoogleMaps.js`.
+  [#894](https://github.com/sharetribe/flex-template-web/pull/894)
 * [change] Removed the `country` parameter from the search page as it
   was not used anywhere.
   [#893](https://github.com/sharetribe/flex-template-web/pull/893)
