@@ -4,10 +4,10 @@ import { withGoogleMap, GoogleMap, Marker, Circle } from 'react-google-maps';
 import config from '../../config';
 
 /**
- * DynamicMap uses withGoogleMap HOC.
+ * DynamicGoogleMap uses withGoogleMap HOC.
  * It handles some of the google map initialization states.
  */
-const DynamicMap = withGoogleMap(props => {
+const DynamicGoogleMap = withGoogleMap(props => {
   const { center, zoom, address, coordinatesConfig } = props;
 
   const { markerURI, anchorX, anchorY, width, height } = coordinatesConfig.customMarker || {};
@@ -53,14 +53,14 @@ const DynamicMap = withGoogleMap(props => {
   );
 });
 
-DynamicMap.defaultProps = {
+DynamicGoogleMap.defaultProps = {
   address: '',
   center: null,
   zoom: config.coordinates.fuzzy ? config.coordinates.fuzzyDefaultZoomLevel : 11,
   coordinatesConfig: config.coordinates,
 };
 
-DynamicMap.propTypes = {
+DynamicGoogleMap.propTypes = {
   address: string,
   center: shape({
     lat: number.isRequired,
@@ -70,4 +70,4 @@ DynamicMap.propTypes = {
   coordinatesConfig: object,
 };
 
-export default DynamicMap;
+export default DynamicGoogleMap;

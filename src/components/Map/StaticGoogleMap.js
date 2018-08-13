@@ -108,7 +108,7 @@ const customMarker = (options, lat, lng) => {
   return [`anchor:${anchorX},${anchorY}`, `icon:${markerURI}`, `${lat},${lng}`].join('|');
 };
 
-class StaticMap extends Component {
+class StaticGoogleMap extends Component {
   shouldComponentUpdate(nextProps, prevState) {
     // Do not draw the map unless center, zoom or dimensions change
     // We want to prevent unnecessary calls to Google Maps APIs due
@@ -147,7 +147,7 @@ class StaticMap extends Component {
   }
 }
 
-StaticMap.defaultProps = {
+StaticGoogleMap.defaultProps = {
   className: null,
   rootClassName: null,
   address: '',
@@ -156,7 +156,7 @@ StaticMap.defaultProps = {
   coordinatesConfig: config.coordinates,
 };
 
-StaticMap.propTypes = {
+StaticGoogleMap.propTypes = {
   className: string,
   rootClassName: string,
   address: string,
@@ -174,4 +174,4 @@ StaticMap.propTypes = {
   }).isRequired,
 };
 
-export default lazyLoadWithDimensions(StaticMap, { maxWidth: '640px' });
+export default lazyLoadWithDimensions(StaticGoogleMap, { maxWidth: '640px' });
