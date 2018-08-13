@@ -152,3 +152,25 @@ export const hasSameSDKBounds = (sdkBounds1, sdkBounds2) => {
     sdkBounds1.sw.lng === sdkBounds2.sw.lng
   );
 };
+
+/**
+ * Calculate a bounding box in the given location
+ *
+ * @param {latlng} center - center of the bounding box
+ * @param {distance} distance - distance in meters from the center to
+ * the sides of the bounding box
+ *
+ * @return {LatLngBounds} bounding box around the given location
+ *
+ */
+export const locationBounds = (latlng, distance) => {
+  const bounds = new window.google.maps.Circle({
+    center: new window.google.maps.LatLng(latlng.lat, latlng.lng),
+    radius: distance,
+  }).getBounds();
+
+  const ne = bounds.getNorthEast();
+  const sw = bounds.getSouthWest();
+
+  return new SDKLatLngBounds(new SDKLatLng(ne.lat(), ne.lng()), new SDKLatLng(sw.lat(), sw.lng()));
+};
