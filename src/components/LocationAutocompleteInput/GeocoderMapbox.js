@@ -1,9 +1,19 @@
 import { types as sdkTypes } from '../../util/sdkLoader';
+import { userLocation } from '../../util/maps';
 import config from '../../config';
 
 const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
 
 export const CURRENT_LOCATION_ID = 'current-location';
+const CURRENT_LOCATION_BOUNDS_DISTANCE = 1000; // meters
+
+const locationBounds = (latlng, distance) => {
+  const bounds = new window.mapboxgl.LngLat(latlng.lng, latlng.lat).toBounds(distance);
+  return new SDKLatLngBounds(
+    new SDKLatLng(bounds.getNorth(), bounds.getEast()),
+    new SDKLatLng(bounds.getSouth(), bounds.getWest())
+  );
+};
 
 const placeId = prediction => prediction.id;
 
@@ -48,6 +58,12 @@ const placeBounds = prediction => {
 // object from the Geocoding API call and check the values from the
 // response.
 export const defaultPredictions = [
+  // // Current user location
+  // {
+  //   id: CURRENT_LOCATION_ID,
+  //   // LocationAutocompleteInputImpl adds the text from the translations
+  //   place_name: '',
+  // },
   // {
   //   id: 'default-helsinki',
   //   place_name: 'Helsinki, Finland',
@@ -120,6 +136,16 @@ class GeocoderMapbox {
    * @return {Promise<util.propTypes.place>} a place object
    */
   getPlaceDetails(prediction) {
+    if (this.getPredictionId(prediction) === CURRENT_LOCATION_ID) {
+      return userLocation().then(latlng => {
+        return {
+          address: '',
+          origin: latlng,
+          bounds: locationBounds(latlng, CURRENT_LOCATION_BOUNDS_DISTANCE),
+        };
+      });
+    }
+
     return Promise.resolve({
       address: placeAddress(prediction),
       origin: placeOrigin(prediction),
