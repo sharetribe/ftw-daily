@@ -64,3 +64,25 @@ export const obfuscatedCoordinates = (latlng, cacheKey = null) => {
     ? memoizedObfuscatedCoordinatesImpl(latlng, cacheKey)
     : obfuscatedCoordinatesImpl(latlng);
 };
+
+/**
+ * Query the user's current location from the browser API
+ *
+ * @return {Promise<LatLng>} user's current location
+ */
+export const userLocation = () =>
+  new Promise((resolve, reject) => {
+    const geolocationAvailable = 'geolocation' in navigator;
+
+    if (!geolocationAvailable) {
+      reject(new Error('Geolocation not available in browser'));
+      return;
+    }
+
+    const onSuccess = position =>
+      resolve(new LatLng(position.coords.latitude, position.coords.longitude));
+
+    const onError = error => reject(error);
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  });
