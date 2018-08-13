@@ -13,6 +13,9 @@ way to update this template, but currently, we follow a pattern:
 ---
 ## Upcoming version 2018-08-XX
 
+* [change] Add support for user's current location as a default
+  suggestion in the location autocomplete search.
+  [#895](https://github.com/sharetribe/flex-template-web/pull/895)
 * [change] Add support for default locations in the
   LocationAutocompleteInput component. Common searches can be
   configured to show when the input has focus. This reduces typing and

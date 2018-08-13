@@ -3,6 +3,8 @@ import config from '../../config';
 
 const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
 
+export const CURRENT_LOCATION_ID = 'current-location';
+
 const placeId = prediction => prediction.id;
 
 const placeAddress = prediction => prediction.place_name;

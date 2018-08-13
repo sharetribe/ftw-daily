@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { any, arrayOf, bool, func, number, shape, string, oneOfType, object } from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
+import { IconSpinner } from '../../components';
 import { propTypes } from '../../util/types';
-import Geocoder, { GeocoderAttribution, defaultPredictions } from './GeocoderGoogleMaps';
-// import Geocoder, { GeocoderAttribution, defaultPredictions } from './GeocoderMapbox';
+import IconHourGlass from './IconHourGlass';
+import IconCurrentLocation from './IconCurrentLocation';
+import Geocoder, {
+  GeocoderAttribution,
+  defaultPredictions,
+  CURRENT_LOCATION_ID,
+} from './GeocoderGoogleMaps';
+// import Geocoder, { GeocoderAttribution, defaultPredictions, CURRENT_LOCATION_ID } from './GeocoderMapbox';
 
 import css from './LocationAutocompleteInput.css';
 
@@ -17,29 +25,6 @@ const KEY_CODE_ESC = 27;
 const DIRECTION_UP = 'up';
 const DIRECTION_DOWN = 'down';
 const TOUCH_TAP_RADIUS = 5; // Movement within 5px from touch start is considered a tap
-
-const Icon = () => (
-  <svg
-    className={css.iconSvg}
-    width="21"
-    height="22"
-    viewBox="0 0 21 22"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g
-      className={css.iconSvgGroup}
-      transform="matrix(-1 0 0 1 20 1)"
-      strokeWidth="2"
-      fill="none"
-      fillRule="evenodd"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M13 14l5.241 5.241" />
-      <circle cx="7.5" cy="7.5" r="7.5" />
-    </g>
-  </svg>
-);
 
 // Touch devices need to be able to distinguish touches for scrolling and touches to tap
 const getTouchCoordinates = nativeEvent => {
@@ -66,18 +51,26 @@ const LocationPredictionsList = props => {
   /* eslint-disable jsx-a11y/no-static-element-interactions */
   const item = (prediction, index) => {
     const isHighlighted = index === highlightedIndex;
+    const predictionId = geocoder.getPredictionId(prediction);
 
     return (
       <li
         className={isHighlighted ? css.highlighted : null}
-        key={geocoder.getPredictionId(prediction)}
+        key={predictionId}
         onTouchStart={e => onSelectStart(getTouchCoordinates(e.nativeEvent))}
         onMouseDown={() => onSelectStart()}
         onTouchMove={e => onSelectMove(getTouchCoordinates(e.nativeEvent))}
         onTouchEnd={() => onSelectEnd(prediction)}
         onMouseUp={() => onSelectEnd(prediction)}
       >
-        {geocoder.getPredictionAddress(prediction)}
+        {predictionId === CURRENT_LOCATION_ID ? (
+          <span className={css.currentLocation}>
+            <IconCurrentLocation />
+            <FormattedMessage id="LocationAutocompleteInput.currentLocation" />
+          </span>
+        ) : (
+          geocoder.getPredictionAddress(prediction)
+        )}
       </li>
     );
   };
@@ -137,11 +130,14 @@ class LocationAutocompleteInputImpl extends Component {
   constructor(props) {
     super(props);
 
+    this._isMounted = false;
+
     this.state = {
       inputHasFocus: false,
       selectionInProgress: false,
       touchStartedFrom: null,
       highlightedIndex: -1, // -1 means no highlight
+      fetchingPlaceDetails: false,
     };
 
     // Ref to the input element.
@@ -164,6 +160,13 @@ class LocationAutocompleteInputImpl extends Component {
     // Debounce the method to avoid calling the API too many times
     // when the user is typing fast.
     this.predict = debounce(this.predict.bind(this), DEBOUNCE_WAIT_TIME, { leading: true });
+  }
+
+  componentDidMount() {
+    this._isMounted = true;
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   currentPredictions() {
@@ -259,9 +262,16 @@ class LocationAutocompleteInputImpl extends Component {
       selectedPlace: null,
     });
 
+    this.setState({ fetchingPlaceDetails: true });
+
     this.geocoder
       .getPlaceDetails(prediction)
       .then(place => {
+        if (!this._isMounted) {
+          // Ignore if component already unmounted
+          return;
+        }
+        this.setState({ fetchingPlaceDetails: false });
         this.props.input.onChange({
           search: place.address,
           predictions: [],
@@ -269,6 +279,7 @@ class LocationAutocompleteInputImpl extends Component {
         });
       })
       .catch(e => {
+        this.setState({ fetchingPlaceDetails: false });
         // eslint-disable-next-line no-console
         console.error(e);
         this.props.input.onChange({
@@ -411,7 +422,11 @@ class LocationAutocompleteInputImpl extends Component {
     return (
       <div className={rootClass}>
         <div className={iconClass}>
-          <Icon />
+          {this.state.fetchingPlaceDetails ? (
+            <IconSpinner className={css.iconSpinner} />
+          ) : (
+            <IconHourGlass />
+          )}
         </div>
         <input
           className={inputClass}
@@ -421,6 +436,7 @@ class LocationAutocompleteInputImpl extends Component {
           placeholder={placeholder}
           name={name}
           value={search}
+          disabled={this.state.fetchingPlaceDetails}
           onFocus={handleOnFocus}
           onBlur={this.handleOnBlur}
           onChange={this.onChange}
