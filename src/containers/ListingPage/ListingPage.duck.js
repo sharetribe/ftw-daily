@@ -37,7 +37,7 @@ const initialState = {
   showListingError: null,
   reviews: [],
   fetchReviewsError: null,
-  timeSlots: [],
+  timeSlots: null,
   fetchTimesLotsError: null,
   sendEnquiryInProgress: false,
   sendEnquiryError: null,

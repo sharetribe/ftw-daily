@@ -21,6 +21,7 @@ import {
   ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS,
   ERROR_CODE_UPLOAD_OVER_LIMIT,
   ERROR_CODE_MISSING_STRIPE_ACCOUNT,
+  ERROR_CODE_TRANSACTION_BOOKING_TIME_NOT_AVAILABLE,
 } from './types';
 
 const errorAPIErrors = error => {
@@ -101,6 +102,14 @@ export const isTransactionInitiateListingNotFoundError = error =>
  */
 export const isTransactionInitiateMissingStripeAccountError = error =>
   hasErrorWithCode(error, ERROR_CODE_MISSING_STRIPE_ACCOUNT);
+
+/**
+ * Check if the given API error (from `sdk.transaction.initiate()` or
+ * `sdk.transaction.initiateSpeculative()`) is due to selected booking
+ * time already being booked.
+ */
+export const isTransactionInitiateBookingTimeNotAvailableError = error =>
+  hasErrorWithCode(error, ERROR_CODE_TRANSACTION_BOOKING_TIME_NOT_AVAILABLE);
 
 /**
  * Check if the given API error (from `sdk.transaction.initiate()`) is

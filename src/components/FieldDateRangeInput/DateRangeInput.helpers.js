@@ -3,7 +3,7 @@ import { isSameDay, isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-
 
 import { ensureTimeSlot } from '../../util/data';
 import { START_DATE, END_DATE, dateFromAPIToLocalNoon } from '../../util/dates';
-import { LINE_ITEM_DAY, TIME_SLOT_DAY } from '../../util/types';
+import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, TIME_SLOT_DAY } from '../../util/types';
 import config from '../../config';
 
 // Checks if time slot (propTypes.timeSlot) start time equals a day (moment)
@@ -26,16 +26,6 @@ const timeSlotEqualsDay = (timeSlot, day) => {
  */
 const timeSlotsContain = (timeSlots, date) => {
   return timeSlots.findIndex(slot => timeSlotEqualsDay(slot, date)) > -1;
-};
-
-const lastBlockedBetweenExclusive = (timeSlots, startDate, endDate) => {
-  if (startDate.isSame(endDate, 'date')) {
-    return null;
-  }
-
-  return timeSlotsContain(timeSlots, endDate)
-    ? lastBlockedBetweenExclusive(timeSlots, startDate, moment(endDate).subtract(1, 'days'))
-    : endDate;
 };
 
 /**
@@ -89,6 +79,9 @@ export const isBlockedBetween = (timeSlots, startDate, endDate) =>
 export const isStartDateSelected = (timeSlots, startDate, endDate, focusedInput) =>
   timeSlots && startDate && (!endDate || focusedInput === END_DATE) && focusedInput !== START_DATE;
 
+export const isSelectingEndDateNightly = (timeSlots, startDate, endDate, focusedInput, unitType) =>
+  timeSlots && !startDate && !endDate && focusedInput === END_DATE && unitType === LINE_ITEM_NIGHT;
+
 export const apiEndDateToPickerDate = (unitType, endDate) => {
   const isValid = endDate instanceof Date;
   const isDaily = unitType === LINE_ITEM_DAY;
@@ -118,38 +111,52 @@ export const pickerEndDateToApiDate = (unitType, endDate) => {
     return endDate.toDate();
   }
 };
+
 /**
  * Returns an isDayBlocked function that can be passed to
  * a react-dates DateRangePicker component.
  */
-export const isDayBlockedFn = (timeSlots, startDate, endDate, focusedInput) => {
+export const isDayBlockedFn = (timeSlots, startDate, endDate, focusedInput, unitType) => {
   const endOfRange = config.dayCountAvailableForBooking - 1;
   const lastBookableDate = moment().add(endOfRange, 'days');
 
   // start date selected, end date missing
   const startDateSelected = isStartDateSelected(timeSlots, startDate, endDate, focusedInput);
 
+  // find the next booking after a start date
   const nextBookingStarts = startDateSelected
     ? firstBlockedBetween(timeSlots, startDate, moment(lastBookableDate).add(1, 'days'))
     : null;
 
-  return nextBookingStarts || !timeSlots
-    ? () => false
-    : day => !timeSlots.find(timeSlot => timeSlotEqualsDay(timeSlot, day));
+  // end date is focused but no dates are selected
+  const selectingEndDate = isSelectingEndDateNightly(
+    timeSlots,
+    startDate,
+    endDate,
+    focusedInput,
+    unitType
+  );
+
+  if (selectingEndDate) {
+    // if end date is being selected first, block the day after a booked date
+    // (as a booking can end on the day the following booking starts)
+    return day =>
+      !timeSlots.find(timeSlot => timeSlotEqualsDay(timeSlot, moment(day).subtract(1, 'days')));
+  } else if (nextBookingStarts || !timeSlots) {
+    // a next booking is found or time slots are not provided
+    // -> booking range handles blocking dates
+    return () => false;
+  } else {
+    // otherwise return standard timeslots check
+    return day => !timeSlots.find(timeSlot => timeSlotEqualsDay(timeSlot, day));
+  }
 };
 
 /**
  * Returns an isOutsideRange function that can be passed to
  * a react-dates DateRangePicker component.
  */
-export const isOutsideRangeFn = (
-  timeSlots,
-  startDate,
-  endDate,
-  previousStartDate,
-  focusedInput,
-  unitType
-) => {
+export const isOutsideRangeFn = (timeSlots, startDate, endDate, focusedInput, unitType) => {
   const endOfRange = config.dayCountAvailableForBooking - 1;
   const lastBookableDate = moment().add(endOfRange, 'days');
 
