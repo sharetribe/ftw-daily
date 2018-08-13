@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import config from '../../config';
 
-import DynamicMap from './DynamicMap';
-import StaticMap from './StaticMap';
+import DynamicMap from './DynamicGoogleMap';
+import StaticMap from './StaticGoogleMap';
 import css from './Map.css';
 
 export class Map extends Component {
