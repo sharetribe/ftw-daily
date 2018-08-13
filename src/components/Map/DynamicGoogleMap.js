@@ -34,6 +34,11 @@ const DynamicGoogleMap = withGoogleMap(props => {
 
   const circle = <Circle {...circleProps} />;
 
+  const controlPosition =
+    typeof window !== 'undefined' && typeof window.google !== 'undefined'
+      ? window.google.maps.ControlPosition.LEFT_TOP
+      : 5;
+
   return (
     <GoogleMap
       defaultZoom={zoom}
@@ -45,7 +50,13 @@ const DynamicGoogleMap = withGoogleMap(props => {
         // Disable zooming by scrolling
         scrollwheel: false,
         // Fullscreen control toggle
-        fullscreenControl: true,
+        fullscreenControl: false,
+        // Street View control
+        streetViewControl: false,
+        // Zoom control position
+        zoomControlOptions: {
+          position: controlPosition,
+        },
       }}
     >
       {coordinatesConfig.fuzzy ? circle : marker}
