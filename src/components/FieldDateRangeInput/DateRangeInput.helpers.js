@@ -132,14 +132,7 @@ export const isDayBlockedFn = (timeSlots, startDate, endDate, focusedInput) => {
  * Returns an isOutsideRange function that can be passed to
  * a react-dates DateRangePicker component.
  */
-export const isOutsideRangeFn = (
-  timeSlots,
-  startDate,
-  endDate,
-  previousStartDate,
-  focusedInput,
-  unitType
-) => {
+export const isOutsideRangeFn = (timeSlots, startDate, endDate, focusedInput, unitType) => {
   const endOfRange = config.dayCountAvailableForBooking - 1;
   const lastBookableDate = moment().add(endOfRange, 'days');
 

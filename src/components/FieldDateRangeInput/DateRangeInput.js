@@ -123,7 +123,6 @@ class DateRangeInputComponent extends Component {
     this.state = {
       focusedInput: null,
       currentStartDate: null,
-      previousStartDate: null,
     };
 
     this.blurTimeoutId = null;
@@ -145,14 +144,29 @@ class DateRangeInputComponent extends Component {
   }
 
   onDatesChange(dates) {
-    const { unitType } = this.props;
+    const { unitType, timeSlots } = this.props;
     const { startDate, endDate } = dates;
-    const startDateAsDate = startDate instanceof moment ? startDate.toDate() : null;
-    const endDateAsDate = pickerEndDateToApiDate(unitType, endDate);
 
-    this.setState(prevState => ({
+    // both dates are selected, a new start date before the previous start
+    // date is selected
+    const startDateUpdated =
+      timeSlots &&
+      startDate &&
+      endDate &&
+      this.state.currentStartDate &&
+      startDate.isBefore(this.state.currentStartDate);
+
+    // clear the end date in case a blocked date can be found
+    // between previous start date and new start date
+    const clearEndDate = startDateUpdated
+      ? isBlockedBetween(timeSlots, startDate, moment(this.state.currentStartDate).add(1, 'days'))
+      : false;
+
+    const startDateAsDate = startDate instanceof moment ? startDate.toDate() : null;
+    const endDateAsDate = clearEndDate ? null : pickerEndDateToApiDate(unitType, endDate);
+
+    this.setState(() => ({
       currentStartDate: startDateAsDate,
-      previousStartDate: prevState.currentStartDate,
     }));
 
     this.props.onChange({ startDate: startDateAsDate, endDate: endDateAsDate });
@@ -206,30 +220,12 @@ class DateRangeInputComponent extends Component {
     const endDate =
       apiEndDateToPickerDate(unitType, value ? value.endDate : null) || initialEndMoment;
 
-    // both dates are selected, a new start date before the previous start
-    // date is selected
-    const startDateUpdated =
-      timeSlots &&
-      startDate &&
-      endDate &&
-      this.state.previousStartDate &&
-      startDate.isBefore(this.state.previousStartDate);
-
-    // clear the end date in case a blocked date can be found
-    // between previous start date and new start date
-    const clearEndDate = startDateUpdated
-      ? isBlockedBetween(timeSlots, startDate, moment(this.state.previousStartDate).add(1, 'days'))
-      : false;
-
-    const endDateMaybe = clearEndDate ? null : endDate;
-
     let isDayBlocked = isDayBlockedFn(timeSlots, startDate, endDate, this.state.focusedInput);
 
     let isOutsideRange = isOutsideRangeFn(
       timeSlots,
       startDate,
-      endDateMaybe,
-      this.state.previousStartDate,
+      endDate,
       this.state.focusedInput,
       unitType
     );
@@ -261,7 +257,7 @@ class DateRangeInputComponent extends Component {
           focusedInput={this.state.focusedInput}
           onFocusChange={this.onFocusChange}
           startDate={startDate}
-          endDate={endDateMaybe}
+          endDate={endDate}
           minimumNights={isDaily ? 0 : 1}
           onDatesChange={this.onDatesChange}
           startDatePlaceholderText={startDatePlaceholderTxt}
