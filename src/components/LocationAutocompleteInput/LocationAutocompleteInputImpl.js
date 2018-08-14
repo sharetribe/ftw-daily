@@ -7,8 +7,10 @@ import { IconSpinner } from '../../components';
 import { propTypes } from '../../util/types';
 import IconHourGlass from './IconHourGlass';
 import IconCurrentLocation from './IconCurrentLocation';
-import Geocoder, { GeocoderAttribution, CURRENT_LOCATION_ID } from './GeocoderGoogleMaps';
-// import Geocoder, { GeocoderAttribution, CURRENT_LOCATION_ID } from './GeocoderMapbox';
+import Geocoder, {
+  GeocoderAttribution,
+  CURRENT_LOCATION_ID,
+} from './GeocoderMapbox';
 import config from '../../config';
 
 import css from './LocationAutocompleteInput.css';
