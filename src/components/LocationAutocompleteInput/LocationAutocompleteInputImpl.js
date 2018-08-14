@@ -11,8 +11,7 @@ import Geocoder, {
   GeocoderAttribution,
   defaultPredictions,
   CURRENT_LOCATION_ID,
-} from './GeocoderGoogleMaps';
-// import Geocoder, { GeocoderAttribution, defaultPredictions, CURRENT_LOCATION_ID } from './GeocoderMapbox';
+} from './GeocoderMapbox';
 
 import css from './LocationAutocompleteInput.css';
 
