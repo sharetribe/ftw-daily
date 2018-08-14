@@ -1,0 +1,25 @@
+.fullArea {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.activeLabel {
+  z-index: 1;
+}
+
+.labelContainer {
+  &:hover {
+    z-index: 1;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.infoCardContainer {
+  z-index: 1;
+}
