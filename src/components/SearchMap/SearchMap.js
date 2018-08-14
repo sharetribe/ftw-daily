@@ -14,8 +14,9 @@ import { hasParentWithClassName } from './SearchMap.helpers.js';
 import SearchMapWithGoogleMap, {
   LABEL_HANDLE,
   INFO_CARD_HANDLE,
+  getMapBounds,
+  getMapCenter,
   fitMapToBounds,
-  mapBoundsToSDKBounds,
   isMapsLibLoaded,
 } from './SearchMapWithGoogleMap';
 import ReusableMapContainer from './ReusableMapContainer';
@@ -56,7 +57,7 @@ export class SearchMapComponent extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.mapRef) {
-      const currentBounds = mapBoundsToSDKBounds(this.mapRef);
+      const currentBounds = getMapBounds(this.mapRef);
 
       // Do not call fitMapToBounds if bounds are the same.
       // Our bounds are viewport bounds, and fitBounds will try to add margins around those bounds
@@ -207,5 +208,8 @@ SearchMapComponent.propTypes = {
 };
 
 const SearchMap = withRouter(SearchMapComponent);
+
+SearchMap.getMapBounds = getMapBounds;
+SearchMap.getMapCenter = getMapCenter;
 
 export default SearchMap;
