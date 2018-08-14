@@ -28,20 +28,25 @@ class SectionMapMaybe extends Component {
     const mapProps = config.coordinates.fuzzy
       ? { obfuscatedCenter: obfuscatedCoordinates(geolocation, listingId ? listingId.uuid : null) }
       : { address, center: geolocation };
+    const map = <Map {...mapProps} useStaticMap={this.state.isStatic} />;
 
     return (
       <div className={classes}>
         <h2 className={css.locationTitle}>
           <FormattedMessage id="ListingPage.locationTitle" />
         </h2>
-        <button
-          className={css.map}
-          onClick={() => {
-            this.setState({ isStatic: false });
-          }}
-        >
-          <Map {...mapProps} useStaticMap={this.state.isStatic} />
-        </button>
+        {this.state.isStatic ? (
+          <button
+            className={css.map}
+            onClick={() => {
+              this.setState({ isStatic: false });
+            }}
+          >
+            {map}
+          </button>
+        ) : (
+          <div className={css.map}>{map}</div>
+        )}
       </div>
     );
   }
