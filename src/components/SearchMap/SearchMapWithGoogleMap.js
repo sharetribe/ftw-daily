@@ -2,7 +2,6 @@ import React from 'react';
 import { arrayOf, bool, func, number, oneOfType } from 'prop-types';
 import { withGoogleMap, GoogleMap, OverlayView } from 'react-google-maps';
 import { OVERLAY_VIEW } from 'react-google-maps/lib/constants';
-import { googleBoundsToSDKBounds } from '../../util/googleMaps';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { propTypes } from '../../util/types';
 import { ensureListing } from '../../util/data';
@@ -35,11 +34,34 @@ export const fitMapToBounds = (map, bounds, padding) => {
 };
 
 /**
- * Convert current map's bounds object to Flex SDK bounds
+ * Convert Google formatted LatLng object to Sharetribe SDK's LatLng coordinate format
+ *
+ * @param {LatLng} googleLatLng - Google Maps LatLng
+ *
+ * @return {SDKLatLng} - Converted latLng coordinate
  */
-export const mapBoundsToSDKBounds = map => {
-  return googleBoundsToSDKBounds(map.getBounds());
+export const googleLatLngToSDKLatLng = googleLatLng => {
+  return new SDKLatLng(googleLatLng.lat(), googleLatLng.lng());
 };
+
+/**
+ * Convert Google formatted bounds object to Sharetribe SDK's bounds format
+ *
+ * @param {LatLngBounds} googleBounds - Google Maps LatLngBounds
+ *
+ * @return {SDKLatLngBounds} - Converted bounds
+ */
+export const googleBoundsToSDKBounds = googleBounds => {
+  if (!googleBounds) {
+    return null;
+  }
+  const ne = googleBounds.getNorthEast();
+  const sw = googleBounds.getSouthWest();
+  return new SDKLatLngBounds(new SDKLatLng(ne.lat(), ne.lng()), new SDKLatLng(sw.lat(), sw.lng()));
+};
+
+export const getMapBounds = map => googleBoundsToSDKBounds(map.getBounds());
+export const getMapCenter = map => googleLatLngToSDKLatLng(map.getCenter());
 
 /**
  * Check if map library is loaded
@@ -176,7 +198,6 @@ const infoCardComponent = (
   );
 };
 
-
 /**
  * MapWithGoogleMap uses withGoogleMap HOC.
  * It handles some of the google map initialization states.
@@ -207,7 +228,7 @@ const MapWithGoogleMap = withGoogleMap(props => {
     activeListingId,
     infoCardOpen,
     onListingClicked,
-    mapComponentRefreshToken,
+    mapComponentRefreshToken
   );
   const infoCard = infoCardComponent(
     infoCardOpen,

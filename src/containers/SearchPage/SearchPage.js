@@ -10,12 +10,7 @@ import unionWith from 'lodash/unionWith';
 import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
-import {
-  googleLatLngToSDKLatLng,
-  googleBoundsToSDKBounds,
-  sdkBoundsToFixedCoordinates,
-  hasSameSDKBounds,
-} from '../../util/googleMaps';
+import { sdkBoundsToFixedCoordinates, hasSameSDKBounds } from '../../util/googleMaps';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import { parse, stringify } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
@@ -96,7 +91,7 @@ export class SearchPageComponent extends Component {
 
   // We are using Google Maps idle event instead of bounds_changed, since it will not be fired
   // too often (in the middle of map's pan or zoom activity)
-  onIdle(googleMap) {
+  onIdle(map) {
     const { history, location } = this.props;
 
     // parse query parameters, including a custom attribute named category
@@ -105,11 +100,9 @@ export class SearchPageComponent extends Component {
       latlngBounds: ['bounds'],
     });
 
-    const viewportGMapBounds = googleMap.getBounds();
-    const viewportBounds = sdkBoundsToFixedCoordinates(
-      googleBoundsToSDKBounds(viewportGMapBounds),
-      BOUNDS_FIXED_PRECISION
-    );
+    const viewportMapBounds = SearchMap.getMapBounds(map);
+    const viewportMapCenter = SearchMap.getMapCenter(map);
+    const viewportBounds = sdkBoundsToFixedCoordinates(viewportMapBounds, BOUNDS_FIXED_PRECISION);
 
     // ViewportBounds from (previous) rendering differ from viewportBounds currently set to map
     // I.e. user has changed the map somehow: moved, panned, zoomed, resized
@@ -128,9 +121,7 @@ export class SearchPageComponent extends Component {
     // or original location search is rendered once,
     // we start to react to 'bounds_changed' event by generating new searches
     if (viewportBoundsChanged && !this.modalOpenedBoundsChange && isSearchPage) {
-      const originMaybe = config.sortSearchByDistance
-        ? { origin: googleLatLngToSDKLatLng(viewportGMapBounds.getCenter()) }
-        : {};
+      const originMaybe = config.sortSearchByDistance ? { origin: viewportMapCenter } : {};
       const searchParams = {
         address,
         ...originMaybe,
