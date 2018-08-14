@@ -45,8 +45,10 @@ export class Map extends Component {
       />
     ) : (
       <DynamicMap
-        containerElement={<div className={classes} onClick={this.onMapClicked} />}
+        containerElement={<div className={classes} />}
         mapElement={<div className={mapClasses} />}
+        containerClassName={classes}
+        mapClassName={mapClasses}
         center={location}
         zoom={zoom}
         address={address}
