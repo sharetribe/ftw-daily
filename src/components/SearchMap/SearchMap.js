@@ -11,14 +11,14 @@ import { obfuscatedCoordinates } from '../../util/maps';
 import config from '../../config';
 import { hasParentWithClassName } from './SearchMap.helpers.js';
 
-import SearchMapWithGoogleMap, {
+import SearchMapWithMapbox, {
   LABEL_HANDLE,
   INFO_CARD_HANDLE,
   getMapBounds,
   getMapCenter,
   fitMapToBounds,
   isMapsLibLoaded,
-} from './SearchMapWithGoogleMap';
+} from './SearchMapWithMapbox';
 import ReusableMapContainer from './ReusableMapContainer';
 import css from './SearchMap.css';
 
@@ -121,7 +121,6 @@ export class SearchMapComponent extends Component {
       reusableContainerClassName,
       center,
       listings: originalListings,
-      mapRootClassName,
       onIdle,
       zoom,
       mapsConfig,
@@ -139,13 +138,34 @@ export class SearchMapComponent extends Component {
       this.mapReattachmentCount += 1;
     };
 
-    // container element listens clicks so that opened SearchMapInfoCard can be closed
-    /* eslint-disable jsx-a11y/no-static-element-interactions */
+    // Using Google Maps as map provider should use following component
+    // instead of SearchMapWithMapbox:
+    //
+    // <SearchMapWithGoogleMap
+    //   containerElement={<div className={classes} onClick={this.onMapClicked} />}
+    //   mapElement={<div className={mapRootClassName || css.mapRoot} />}
+    //   center={center}
+    //   isOpenOnModal={isOpenOnModal}
+    //   infoCardOpen={infoCardOpen}
+    //   listings={listings}
+    //   activeListingId={activeListingId}
+    //   mapComponentRefreshToken={this.state.mapReattachmentCount}
+    //   createURLToListing={this.createURLToListing}
+    //   onListingClicked={this.onListingClicked}
+    //   onListingInfoCardClicked={this.onListingInfoCardClicked}
+    //   onMapLoad={this.onMapLoadHandler}
+    //   onIdle={() => {
+    //     if (this.mapRef) {
+    //       onIdle(this.mapRef);
+    //     }
+    //   }}
+    //   zoom={zoom}
+    // />
+
     return isMapsLibLoaded() ? (
       <ReusableMapContainer className={reusableContainerClassName} onReattach={forceUpdateHandler}>
-        <SearchMapWithGoogleMap
-          containerElement={<div className={classes} onClick={this.onMapClicked} />}
-          mapElement={<div className={mapRootClassName || css.mapRoot} />}
+        <SearchMapWithMapbox
+          className={classes}
           center={center}
           isOpenOnModal={isOpenOnModal}
           infoCardOpen={infoCardOpen}
@@ -156,6 +176,7 @@ export class SearchMapComponent extends Component {
           onListingClicked={this.onListingClicked}
           onListingInfoCardClicked={this.onListingInfoCardClicked}
           onMapLoad={this.onMapLoadHandler}
+          onClick={this.onMapClicked}
           onIdle={() => {
             if (this.mapRef) {
               onIdle(this.mapRef);
@@ -167,7 +188,6 @@ export class SearchMapComponent extends Component {
     ) : (
       <div className={classes} />
     );
-    /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
 
