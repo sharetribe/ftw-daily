@@ -67,9 +67,11 @@ export const GeocoderAttribution = () => null;
  */
 class GeocoderMapbox {
   constructor() {
-    this.client = window.mapboxSdk({
-      accessToken: window.mapboxgl.accessToken,
-    });
+    if (typeof window !== 'undefined') {
+      this.client = window.mapboxSdk({
+        accessToken: window.mapboxgl.accessToken,
+      });
+    }
   }
 
   // Public API
