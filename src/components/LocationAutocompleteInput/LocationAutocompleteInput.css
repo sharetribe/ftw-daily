@@ -41,6 +41,11 @@
   }
 }
 
+.iconSpinner {
+  margin: auto;
+  width: 23px;
+}
+
 .input {
   flex-grow: 1;
   height: var(--LocationAutocompleteInput_inputHeight);
@@ -127,4 +132,12 @@ bottom of the container.
       color: var(--matterColorLight);
     }
   }
+}
+
+.currentLocation {
+  @apply --marketplaceH4FontStyles;
+}
+
+.currentLocationIcon {
+  margin-right: 10px;
 }

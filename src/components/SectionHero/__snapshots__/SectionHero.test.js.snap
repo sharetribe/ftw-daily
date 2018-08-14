@@ -89,6 +89,7 @@ exports[`SectionHero matches snapshot 1`] = `
         autoComplete="off"
         autoFocus={false}
         className=""
+        disabled={false}
         name="location"
         onBlur={[Function]}
         onChange={[Function]}

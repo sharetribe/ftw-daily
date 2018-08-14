@@ -1,7 +1,10 @@
 import React from 'react';
-import { getPlacePredictions, getPlaceDetails } from '../../util/googleMaps';
-
+import { getPlacePredictions, getPlaceDetails, locationBounds } from '../../util/googleMaps';
+import { userLocation } from '../../util/maps';
 import css from './LocationAutocompleteInput.css';
+
+export const CURRENT_LOCATION_ID = 'current-location';
+const CURRENT_LOCATION_BOUNDS_DISTANCE = 1000; // meters
 
 // A list of default predictions that can be shown when the user
 // focuses on the autocomplete input without typing a search. This can
@@ -21,6 +24,12 @@ import css from './LocationAutocompleteInput.css';
 // object from the Places API call and copy the Place ID from the
 // response.
 export const defaultPredictions = [
+  // // Current user location
+  // {
+  //   place_id: CURRENT_LOCATION_ID,
+  //   // LocationAutocompleteInputImpl adds the text from the translations
+  //   description: '',
+  // },
   // {
   //   place_id: 'ChIJkQYhlscLkkYRY_fiO4S9Ts0',
   //   description: 'Helsinki, Finland',
@@ -90,6 +99,16 @@ class GeocoderGoogleMaps {
    * @return {Promise<util.propTypes.place>} a place object
    */
   getPlaceDetails(prediction) {
+    if (this.getPredictionId(prediction) === CURRENT_LOCATION_ID) {
+      return userLocation().then(latlng => {
+        return {
+          address: '',
+          origin: latlng,
+          bounds: locationBounds(latlng, CURRENT_LOCATION_BOUNDS_DISTANCE),
+        };
+      });
+    }
+
     return getPlaceDetails(prediction.place_id, this.getSessionToken()).then(place => {
       this.sessionToken = null;
       return place;

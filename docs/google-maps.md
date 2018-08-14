@@ -36,3 +36,7 @@ need to use the Google Places geolocation API that much.
 
 The default locations can be configured in
 [src/components/LocationAutocompleteInput/GeocoderGoogleMaps.js](../src/components/LocationAutocompleteInput/GeocoderGoogleMaps.js).
+
+You can also setup a default location that asks the user's current
+location. This will enable e.g. searching listings near the user. The
+current location is configured in the same file.

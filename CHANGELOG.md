@@ -16,7 +16,10 @@ way to update this template, but currently, we follow a pattern:
   [#868](https://github.com/sharetribe/flex-template-web/pull/868), [#873](https://github.com/sharetribe/flex-template-web/pull/873), [#891](https://github.com/sharetribe/flex-template-web/pull/891) & [#892](https://github.com/sharetribe/flex-template-web/pull/892)
 
 
-* [change] Add support for default locations in the
+* [add] Add support for user's current location as a default
+  suggestion in the location autocomplete search.
+  [#895](https://github.com/sharetribe/flex-template-web/pull/895)
+* [add] Add support for default locations in the
   LocationAutocompleteInput component. Common searches can be
   configured to show when the input has focus. This reduces typing and
   Google Places geolocation API usage. The defaults can be configured
