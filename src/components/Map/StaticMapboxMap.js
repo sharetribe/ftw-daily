@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { string, shape, number, object } from 'prop-types';
 import polyline from '@mapbox/polyline';
 import { lazyLoadWithDimensions } from '../../util/contextHelpers';
@@ -43,27 +43,26 @@ const mapOverlay = (center, coordinatesConfig) => {
   return markerOverlay(center);
 };
 
-class StaticMapboxMap extends Component {
-  render() {
-    const { address, center, zoom, coordinatesConfig, dimensions } = this.props;
-    const { width, height } = dimensions;
+const StaticMapboxMap = props => {
+  const { address, center, zoom, coordinatesConfig, dimensions } = props;
+  const { width, height } = dimensions;
 
-    const libLoaded = typeof window !== 'undefined' && window.mapboxgl;
-    if (!libLoaded) {
-      return null;
-    }
-
-    const overlay = mapOverlay(center, coordinatesConfig);
-    const src =
-      'https://api.mapbox.com/styles/v1/mapbox/streets-v10/static' +
-      (overlay ? `/${overlay}` : '') +
-      `/${center.lng},${center.lat},${zoom}` +
-      `/${width}x${height}` +
-      `?access_token=${window.mapboxgl.accessToken}`;
-
-    return <img src={src} alt={address} />;
+  const libLoaded = typeof window !== 'undefined' && window.mapboxgl;
+  if (!libLoaded) {
+    return null;
   }
-}
+
+  const overlay = mapOverlay(center, coordinatesConfig);
+  const src =
+    'https://api.mapbox.com/styles/v1/mapbox/streets-v10/static' +
+    (overlay ? `/${overlay}` : '') +
+    `/${center.lng},${center.lat},${zoom}` +
+    `/${width}x${height}` +
+    `?access_token=${window.mapboxgl.accessToken}`;
+
+  return <img src={src} alt={address} />;
+};
+
 StaticMapboxMap.defaultProps = {
   address: '',
   center: null,
