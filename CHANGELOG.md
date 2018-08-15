@@ -12,6 +12,8 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 ## Upcoming version 2018-08-XX
+* [add] Map component (used in ListingPage) using Mapbox instead of Google Maps
+  [#896](https://github.com/sharetribe/flex-template-web/pull/896)
 * [add] Listing availability
   [#868](https://github.com/sharetribe/flex-template-web/pull/868), [#873](https://github.com/sharetribe/flex-template-web/pull/873), [#891](https://github.com/sharetribe/flex-template-web/pull/891) & [#892](https://github.com/sharetribe/flex-template-web/pull/892)
 
