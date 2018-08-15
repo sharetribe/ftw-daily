@@ -86,3 +86,47 @@ export const userLocation = () =>
 
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
   });
+
+/**
+ * Calculate a circular polyline around the given point
+ *
+ * See: https://stackoverflow.com/questions/7316963/drawing-a-circle-google-static-maps
+ *
+ * @param {LatLng} latlng - center of the circle
+ * @param {Number} radius - radius of the circle
+ *
+ * @return {Array<Array<Number>>} array of `[lat, lng]` coordinate
+ * pairs forming the circle
+ */
+export const circlePolyline = (latlng, radius) => {
+  const { lat, lng } = latlng;
+  const detail = 8;
+  const R = 6371;
+  const pi = Math.PI;
+
+  const _lat = lat * pi / 180;
+  const _lng = lng * pi / 180;
+  const d = radius / 1000 / R;
+
+  let points = [];
+  for (let i = 0; i <= 360; i += detail) {
+    const brng = i * pi / 180;
+
+    let pLat = Math.asin(
+      Math.sin(_lat) * Math.cos(d) + Math.cos(_lat) * Math.sin(d) * Math.cos(brng)
+    );
+    const pLng =
+      (_lng +
+        Math.atan2(
+          Math.sin(brng) * Math.sin(d) * Math.cos(_lat),
+          Math.cos(d) - Math.sin(_lat) * Math.sin(pLat)
+        )) *
+      180 /
+      pi;
+    pLat = pLat * 180 / pi;
+
+    points.push([pLat, pLng]);
+  }
+
+  return points;
+};

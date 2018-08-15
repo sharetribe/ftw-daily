@@ -3,9 +3,9 @@ import { bool, number, object, string } from 'prop-types';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import config from '../../config';
+import { StaticMap, DynamicMap, isMapsLibLoaded } from './GoogleMap';
+// import { StaticMap, DynamicMap, isMapsLibLoaded } from './MapboxMap';
 
-import DynamicMap from './DynamicMap';
-import StaticMap from './StaticMap';
 import css from './Map.css';
 
 export class Map extends Component {
@@ -34,24 +34,23 @@ export class Map extends Component {
     }
 
     const location = coordinatesConfig.fuzzy ? obfuscatedCenter : center;
-    const centerLocationForGoogleMap = { lat: location.lat, lng: location.lng };
 
-    const isMapsLibLoaded = typeof window !== 'undefined' && window.google && window.google.maps;
-
-    return !isMapsLibLoaded ? (
+    return !isMapsLibLoaded() ? (
       <div className={classes} />
     ) : useStaticMap ? (
       <StaticMap
-        center={centerLocationForGoogleMap}
+        center={location}
         zoom={zoom}
         address={address}
         coordinatesConfig={coordinatesConfig}
       />
     ) : (
       <DynamicMap
-        containerElement={<div className={classes} onClick={this.onMapClicked} />}
+        containerElement={<div className={classes} />}
         mapElement={<div className={mapClasses} />}
-        center={centerLocationForGoogleMap}
+        containerClassName={classes}
+        mapClassName={mapClasses}
+        center={location}
         zoom={zoom}
         address={address}
         coordinatesConfig={coordinatesConfig}
