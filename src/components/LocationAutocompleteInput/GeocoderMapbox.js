@@ -64,6 +64,15 @@ const placeBounds = prediction => {
   return null;
 };
 
+// A list of default predictions that can be shown when the user
+// focuses on the autocomplete input without typing a search. This can
+// be used to reduce typing and Geocoding API calls for common
+// searches.
+export const defaultPredictions = (config.maps.search.suggestCurrentLocation
+  ? [{ id: CURRENT_LOCATION_ID, predictionPlace: {} }]
+  : []
+).concat(config.maps.search.defaults);
+
 export const GeocoderAttribution = () => null;
 
 /**

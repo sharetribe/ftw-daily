@@ -8,6 +8,15 @@ import css from './LocationAutocompleteInput.css';
 
 export const CURRENT_LOCATION_ID = 'current-location';
 
+// A list of default predictions that can be shown when the user
+// focuses on the autocomplete input without typing a search. This can
+// be used to reduce typing and Geocoding API calls for common
+// searches.
+export const defaultPredictions = (config.maps.search.suggestCurrentLocation
+  ? [{ id: CURRENT_LOCATION_ID, predictionPlace: {} }]
+  : []
+).concat(config.maps.search.defaults);
+
 // When displaying data from the Google Maps Places API, and
 // attribution is required next to the results.
 // See: https://developers.google.com/places/web-service/policies#powered
