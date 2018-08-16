@@ -203,8 +203,13 @@ export const fetchTimeSlots = listingId => (dispatch, getState, sdk) => {
   const bookingRange = config.dayCountAvailableForBooking - 1;
   const timeSlotsRange = Math.min(bookingRange, maxTimeSlots);
 
-  const start = moment().toDate();
+  const start = moment
+    .utc()
+    .startOf('day')
+    .toDate();
   const end = moment()
+    .utc()
+    .startOf('day')
     .add(timeSlotsRange, 'days')
     .toDate();
   const params = { listingId, start, end };
@@ -213,11 +218,8 @@ export const fetchTimeSlots = listingId => (dispatch, getState, sdk) => {
     .then(timeSlots => {
       const secondRequest = bookingRange > maxTimeSlots;
 
-      // time slots request end can be at most 179 days from now
-      const secondMaxTimeSlots = maxTimeSlots - 1;
-
       if (secondRequest) {
-        const secondRange = Math.min(secondMaxTimeSlots, bookingRange - maxTimeSlots);
+        const secondRange = Math.min(maxTimeSlots, bookingRange - maxTimeSlots);
         const secondParams = {
           listingId,
           start: end,
