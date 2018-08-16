@@ -34,21 +34,17 @@ const convertOpacity = opacity => {
 };
 
 // Draw a circle polyline for fuzzy location.
-const drawFuzzyCircle = (coordinatesConfig, center) => {
-  if (
-    !(
-      coordinatesConfig &&
-      typeof coordinatesConfig === 'object' &&
-      center &&
-      typeof center === 'object'
-    )
-  ) {
+const drawFuzzyCircle = (mapsConfig, center) => {
+  if (!(mapsConfig && typeof mapsConfig === 'object' && center && typeof center === 'object')) {
     return '';
   }
 
-  const { fillColor, fillOpacity, strokeColor, strokeWeight } = coordinatesConfig.circleOptions;
+  const fillColor = mapsConfig.fuzzy.circleColor;
+  const fillOpacity = 0.2;
+  const strokeColor = mapsConfig.fuzzy.circleColor;
+  const strokeWeight = 1;
 
-  const circleRadius = coordinatesConfig.coordinateOffset || 500;
+  const circleRadius = mapsConfig.fuzzy.offset || 500;
   const circleStrokeWeight = strokeWeight || 1;
   const circleStrokeColor = formatColorFromString(strokeColor);
   const circleStrokeOpacity = convertOpacity(DEFAULT_STROKE_OPACITY);
@@ -70,8 +66,8 @@ const drawFuzzyCircle = (coordinatesConfig, center) => {
 
 // Get custom marker data for static map URI
 const customMarker = (options, lat, lng) => {
-  const { anchorX, anchorY, markerURI } = options;
-  return [`anchor:${anchorX},${anchorY}`, `icon:${markerURI}`, `${lat},${lng}`].join('|');
+  const { anchorX, anchorY, url } = options;
+  return [`anchor:${anchorX},${anchorY}`, `icon:${url}`, `${lat},${lng}`].join('|');
 };
 
 class StaticGoogleMap extends Component {
@@ -84,7 +80,7 @@ class StaticGoogleMap extends Component {
   }
 
   render() {
-    const { center, zoom, address, coordinatesConfig, dimensions } = this.props;
+    const { center, zoom, address, mapsConfig, dimensions } = this.props;
     const { lat, lng } = center || {};
     const { width, height } = dimensions;
 
@@ -92,10 +88,10 @@ class StaticGoogleMap extends Component {
     // 1. if fuzzy coordinates are used, return circle path
     // 2. if customMarker is defined in config.js, use that
     // 3. else return default marker
-    const targetMaybe = coordinatesConfig.fuzzy
-      ? { path: drawFuzzyCircle(coordinatesConfig, center) }
-      : coordinatesConfig.customMarker
-        ? { markers: customMarker(coordinatesConfig.customMarker, lat, lng) }
+    const targetMaybe = mapsConfig.fuzzy.enabled
+      ? { path: drawFuzzyCircle(mapsConfig, center) }
+      : mapsConfig.customMarker.enabled
+        ? { markers: customMarker(mapsConfig.customMarker, lat, lng) }
         : { markers: `${lat},${lng}` };
 
     const srcParams = stringify({
@@ -103,7 +99,7 @@ class StaticGoogleMap extends Component {
       zoom,
       size: `${width}x${height}`,
       maptype: 'roadmap',
-      key: config.googleMapsAPIKey,
+      key: config.maps.googleMapsAPIKey,
       ...targetMaybe,
     });
 
@@ -118,8 +114,8 @@ StaticGoogleMap.defaultProps = {
   rootClassName: null,
   address: '',
   center: null,
-  zoom: config.coordinates.fuzzy ? config.coordinates.fuzzyDefaultZoomLevel : 11,
-  coordinatesConfig: config.coordinates,
+  zoom: config.maps.fuzzy.enabled ? config.maps.fuzzy.defaultZoomLevel : 11,
+  mapsConfig: config.maps,
 };
 
 StaticGoogleMap.propTypes = {
@@ -131,7 +127,7 @@ StaticGoogleMap.propTypes = {
     lng: number.isRequired,
   }).isRequired,
   zoom: number,
-  coordinatesConfig: object,
+  mapsConfig: object,
 
   // from withDimensions
   dimensions: shape({
