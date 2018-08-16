@@ -31,9 +31,12 @@ export const WithObfuscatedLocation = {
     obfuscatedCenter: new LatLng(60.16502999999999, 24.940064399999983),
     address: 'Sharetribe',
     zoom: 14,
-    coordinatesConfig: {
-      ...config.coordinates,
-      fuzzy: true,
+    mapsConfig: {
+      ...config.maps,
+      fuzzy: {
+        ...config.maps.fuzzy,
+        enabled: true,
+      },
     },
   },
 };
@@ -48,9 +51,12 @@ export const WithCircleLocation = {
     center: new LatLng(60.16502999999999, 24.940064399999983),
     obfuscatedCenter: obfuscatedCoordinates(new LatLng(60.16502999999999, 24.940064399999983)),
     address: 'Sharetribe',
-    coordinatesConfig: {
-      ...config.coordinates,
-      fuzzy: true,
+    mapsConfig: {
+      ...config.maps,
+      fuzzy: {
+        ...config.maps.fuzzy,
+        enabled: true,
+      },
     },
   },
 };

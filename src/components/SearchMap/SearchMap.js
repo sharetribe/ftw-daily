@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { arrayOf, bool, func, number, string, shape } from 'prop-types';
+import { arrayOf, bool, func, number, string, shape, object } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { withGoogleMap, GoogleMap } from 'react-google-maps';
 import classNames from 'classnames';
@@ -279,14 +279,14 @@ export class SearchMapComponent extends Component {
       onCloseAsModal,
       onIdle,
       zoom,
-      coordinatesConfig,
+      mapsConfig,
       activeListingId,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
     const mapClasses = mapRootClassName || css.mapRoot;
 
     const listingsWithLocation = originalListings.filter(l => !!l.attributes.geolocation);
-    const listings = coordinatesConfig.fuzzy
+    const listings = mapsConfig.fuzzy.enabled
       ? withCoordinatesObfuscated(listingsWithLocation)
       : listingsWithLocation;
     const infoCardOpen = this.state.infoCardOpen;
@@ -345,7 +345,7 @@ SearchMapComponent.defaultProps = {
   onCloseAsModal: null,
   useLocationSearchBounds: true,
   zoom: 11,
-  coordinatesConfig: config.coordinates,
+  mapsConfig: config.maps,
 };
 
 SearchMapComponent.propTypes = {
@@ -361,9 +361,7 @@ SearchMapComponent.propTypes = {
   onIdle: func.isRequired,
   useLocationSearchBounds: bool, // eslint-disable-line react/no-unused-prop-types
   zoom: number,
-  coordinatesConfig: shape({
-    fuzzy: bool.isRequired,
-  }),
+  mapsConfig: object,
 
   // from withRouter
   history: shape({

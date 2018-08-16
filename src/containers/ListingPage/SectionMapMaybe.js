@@ -25,7 +25,7 @@ class SectionMapMaybe extends Component {
     const address = publicData.location ? publicData.location.address : '';
     const classes = classNames(rootClassName || css.sectionMap, className);
 
-    const mapProps = config.coordinates.fuzzy
+    const mapProps = config.maps.fuzzy.enabled
       ? { obfuscatedCenter: obfuscatedCoordinates(geolocation, listingId ? listingId.uuid : null) }
       : { address, center: geolocation };
     const map = <Map {...mapProps} useStaticMap={this.state.isStatic} />;
