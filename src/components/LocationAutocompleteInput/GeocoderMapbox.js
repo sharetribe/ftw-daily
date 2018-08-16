@@ -15,10 +15,6 @@ const locationBounds = (latlng, distance) => {
   );
 };
 
-const placeId = prediction => prediction.id;
-
-const placeAddress = prediction => prediction.place_name;
-
 const placeOrigin = prediction => {
   if (prediction && Array.isArray(prediction.center) && prediction.center.length === 2) {
     // Coordinates in Mapbox features are represented as [longitude, latitude].
@@ -42,33 +38,24 @@ const placeBounds = prediction => {
 // focuses on the autocomplete input without typing a search. This can
 // be used to reduce typing and Geocoding API calls for common
 // searches.
-//
-// Example:
-//
-// [
-//   {
-//     id: 'any unique id',
-//     place_name: 'Place name to show in the autocomplete dropdown',
-//     center: [longitude, latitude],
-//     bbox: [minX, minY, maxX, maxY],
-//   },
-// ]
-//
-// To know which values to set as defaults, log a real prediction
-// object from the Geocoding API call and check the values from the
-// response.
 export const defaultPredictions = [
-  // // Current user location
+  // Examples:
+  // Current user location from the browser geolocation API
   // {
   //   id: CURRENT_LOCATION_ID,
-  //   // LocationAutocompleteInputImpl adds the text from the translations
-  //   place_name: '',
+  //   predictionPlace: {},
   // },
+  // Helsinki
   // {
   //   id: 'default-helsinki',
-  //   place_name: 'Helsinki, Finland',
-  //   center: [24.94861, 60.17333],
-  //   bbox: [24.82617, 60.075361, 25.313112, 60.297839],
+  //   predictionPlace: {
+  //     address: 'Helsinki, Finland',
+  //     origin: new SDKLatLng(60.16985, 24.93837),
+  //     bounds: new SDKLatLngBounds(
+  //       new SDKLatLng(60.29783, 25.25448),
+  //       new SDKLatLng(59.92248, 24.78287)
+  //     ),
+  //   },
   // },
 ];
 
@@ -118,14 +105,19 @@ class GeocoderMapbox {
    * Get the ID of the given prediction.
    */
   getPredictionId(prediction) {
-    return placeId(prediction);
+    return prediction.id;
   }
 
   /**
    * Get the address text of the given prediction.
    */
   getPredictionAddress(prediction) {
-    return placeAddress(prediction);
+    if (prediction.predictionPlace) {
+      // default prediction defined above
+      return prediction.predictionPlace.address;
+    }
+    // prediction from Mapbox geocoding API
+    return prediction.place_name;
   }
 
   /**
@@ -146,8 +138,12 @@ class GeocoderMapbox {
       });
     }
 
+    if (prediction.predictionPlace) {
+      return Promise.resolve(prediction.predictionPlace);
+    }
+
     return Promise.resolve({
-      address: placeAddress(prediction),
+      address: this.getPredictionAddress(prediction),
       origin: placeOrigin(prediction),
       bounds: placeBounds(prediction),
     });
