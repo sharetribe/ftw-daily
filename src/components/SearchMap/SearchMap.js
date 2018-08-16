@@ -100,7 +100,6 @@ const MapWithGoogleMap = withGoogleMap(props => {
     activeListingId,
     center,
     infoCardOpen,
-    isOpenOnModal,
     listings,
     onIdle,
     onListingClicked,
@@ -171,21 +170,19 @@ const MapWithGoogleMap = withGoogleMap(props => {
       defaultZoom={zoom}
       defaultCenter={center}
       options={{
-        // Disable map type (ie. Satellite etc.)
+        // Disable all controls except zoom
         mapTypeControl: false,
-        // Disable zooming by scrolling
         scrollwheel: false,
-        // Disable fullscreen control: this won't work with mobile close-modal button
-        // since they are on top of each others.
-        fullscreenControl: !isOpenOnModal,
-        // Click disabled for point-of-interests
+        fullscreenControl: false,
         clickableIcons: false,
+        streetViewControl: false,
+
         // When infoCard is open, we can't differentiate double click on top of card vs map.
         disableDoubleClickZoom: !!infoCardOpen,
+
         zoomControlOptions: {
           position: controlPosition,
         },
-        streetViewControl: false,
       }}
       ref={onMapLoad}
       onIdle={onIdle}
@@ -277,7 +274,6 @@ export class SearchMapComponent extends Component {
       rootClassName,
       reusableContainerClassName,
       center,
-      isOpenOnModal,
       listings: originalListings,
       mapRootClassName,
       onCloseAsModal,
@@ -309,7 +305,6 @@ export class SearchMapComponent extends Component {
           containerElement={<div className={classes} onClick={this.onMapClicked} />}
           mapElement={<div className={mapClasses} />}
           center={center}
-          isOpenOnModal={isOpenOnModal}
           listings={listings}
           activeListingId={activeListingId}
           infoCardOpen={infoCardOpen}
@@ -346,7 +341,6 @@ SearchMapComponent.defaultProps = {
   bounds: null,
   center: new sdkTypes.LatLng(0, 0),
   activeListingId: null,
-  isOpenOnModal: false,
   listings: [],
   onCloseAsModal: null,
   useLocationSearchBounds: true,
@@ -362,7 +356,6 @@ SearchMapComponent.propTypes = {
   bounds: propTypes.latlngBounds,
   center: propTypes.latlng,
   activeListingId: propTypes.uuid,
-  isOpenOnModal: bool,
   listings: arrayOf(propTypes.listing),
   onCloseAsModal: func,
   onIdle: func.isRequired,
