@@ -1,5 +1,6 @@
 import React from 'react';
 // import { types as sdkTypes } from '../../util/sdkLoader';
+import classNames from 'classnames';
 import { getPlacePredictions, getPlaceDetails, locationBounds } from '../../util/googleMaps';
 import { userLocation } from '../../util/maps';
 import css from './LocationAutocompleteInput.css';
@@ -37,7 +38,11 @@ export const defaultPredictions = [
 // When displaying data from the Google Maps Places API, and
 // attribution is required next to the results.
 // See: https://developers.google.com/places/web-service/policies#powered
-export const GeocoderAttribution = () => <div className={css.poweredByGoogle} />;
+export const GeocoderAttribution = props => {
+  const { rootClassName, className } = props;
+  const classes = classNames(rootClassName || css.poweredByGoogle, className);
+  return <div className={classes} />;
+};
 
 /**
  * A forward geocoding (place name -> coordinates) implementation

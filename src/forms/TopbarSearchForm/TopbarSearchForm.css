@@ -140,6 +140,13 @@
   z-index: var(--zIndexPopup + 1);
 }
 
+.mobilePredictionsAttribution {
+  /* When using the Google Maps Places geocoder, the "Powered by Google"
+   text is hidden in Mobile Safari without giving some extra space to
+   it. */
+  margin-bottom: 100px;
+}
+
 .desktopPredictions {
   position: absolute;
   width: 100%;

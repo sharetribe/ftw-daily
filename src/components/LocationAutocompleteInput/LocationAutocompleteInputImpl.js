@@ -37,6 +37,7 @@ const LocationPredictionsList = props => {
   const {
     rootClassName,
     className,
+    attributionClassName,
     predictions,
     geocoder,
     highlightedIndex,
@@ -81,7 +82,7 @@ const LocationPredictionsList = props => {
   return (
     <div className={classes}>
       <ul className={css.predictions}>{predictions.map(item)}</ul>
-      <GeocoderAttribution />
+      <GeocoderAttribution className={attributionClassName} />
     </div>
   );
 };
@@ -89,12 +90,14 @@ const LocationPredictionsList = props => {
 LocationPredictionsList.defaultProps = {
   rootClassName: null,
   className: null,
+  attributionClassName: null,
   highlightedIndex: null,
 };
 
 LocationPredictionsList.propTypes = {
   rootClassName: string,
   className: string,
+  attributionClassName: string,
   predictions: arrayOf(object).isRequired,
   geocoder: object.isRequired,
   highlightedIndex: number,
@@ -391,6 +394,7 @@ class LocationAutocompleteInputImpl extends Component {
       iconClassName,
       inputClassName,
       predictionsClassName,
+      predictionsAttributionClassName,
       validClassName,
       placeholder,
       input,
@@ -451,6 +455,7 @@ class LocationAutocompleteInputImpl extends Component {
         {renderPredictions ? (
           <LocationPredictionsList
             rootClassName={predictionsClass}
+            attributionClassName={predictionsAttributionClassName}
             predictions={predictions}
             geocoder={this.geocoder}
             highlightedIndex={this.state.highlightedIndex}
@@ -472,6 +477,7 @@ LocationAutocompleteInputImpl.defaultProps = {
   iconClassName: null,
   inputClassName: null,
   predictionsClassName: null,
+  predictionsAttributionClassName: null,
   validClassName: null,
   placeholder: '',
   meta: null,
@@ -486,6 +492,7 @@ LocationAutocompleteInputImpl.propTypes = {
   iconClassName: string,
   inputClassName: string,
   predictionsClassName: string,
+  predictionsAttributionClassName: string,
   validClassName: string,
   placeholder: string,
   input: shape({
