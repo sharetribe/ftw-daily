@@ -283,7 +283,8 @@ const maps = {
 
     // Example location can be edited in the
     // `default-location-searches.js` file.
-    defaults: defaultLocationSearches,
+    defaults:
+      process.env.REACT_APP_DEFAULT_SEARCHES_ENABLED === 'true' ? defaultLocationSearches : [],
   },
 
   // When fuzzy locations are enabled, coordinates on maps are
