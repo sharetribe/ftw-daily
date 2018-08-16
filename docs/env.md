@@ -22,6 +22,7 @@ them have defaults that work for development environment. For production deploys
 | BASIC_AUTH_USERNAME                       | Set to enable HTTP Basic Auth                                                                                     |
 | BASIC_AUTH_PASSWORD                       | Set to enable HTTP Basic Auth                                                                                     |
 | REACT_APP_GOOGLE_ANALYTICS_ID             | See: [Google Analytics](./analytics.md)                                                                           |
+| REACT_APP_AVAILABILITY_ENABLED            | Enables availability calendar for listings.                                                                       |
 
 ## Defining configuration
 
