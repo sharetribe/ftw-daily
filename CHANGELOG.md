@@ -12,6 +12,8 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 ## Upcoming version 2018-08-XX
+
+## v1.4.0 2018-08-17
 * [fix] Drop date time from time slots request query params
   [#901](https://github.com/sharetribe/flex-template-web/pull/901)
 * [fix] Make a second time slots request when required
