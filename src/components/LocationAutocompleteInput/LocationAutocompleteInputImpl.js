@@ -5,10 +5,12 @@ import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import { IconSpinner } from '../../components';
 import { propTypes } from '../../util/types';
+import config from '../../config';
+
 import IconHourGlass from './IconHourGlass';
 import IconCurrentLocation from './IconCurrentLocation';
 import Geocoder, { GeocoderAttribution, CURRENT_LOCATION_ID } from './GeocoderMapbox';
-import config from '../../config';
+// import Geocoder, { GeocoderAttribution, CURRENT_LOCATION_ID } from './GeocoderGoogleMaps';
 
 import css from './LocationAutocompleteInput.css';
 
