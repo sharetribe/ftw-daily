@@ -7,14 +7,20 @@ import { IconSpinner } from '../../components';
 import { propTypes } from '../../util/types';
 import IconHourGlass from './IconHourGlass';
 import IconCurrentLocation from './IconCurrentLocation';
-import Geocoder, {
-  GeocoderAttribution,
-  defaultPredictions,
-  CURRENT_LOCATION_ID,
-} from './GeocoderGoogleMaps';
-// import Geocoder, { GeocoderAttribution, defaultPredictions, CURRENT_LOCATION_ID } from './GeocoderMapbox';
+import Geocoder, { GeocoderAttribution, CURRENT_LOCATION_ID } from './GeocoderGoogleMaps';
+// import Geocoder, { GeocoderAttribution, CURRENT_LOCATION_ID } from './GeocoderMapbox';
+import config from '../../config';
 
 import css from './LocationAutocompleteInput.css';
+
+// A list of default predictions that can be shown when the user
+// focuses on the autocomplete input without typing a search. This can
+// be used to reduce typing and Geocoding API calls for common
+// searches.
+export const defaultPredictions = (config.maps.search.suggestCurrentLocation
+  ? [{ id: CURRENT_LOCATION_ID, predictionPlace: {} }]
+  : []
+).concat(config.maps.search.defaults);
 
 const DEBOUNCE_WAIT_TIME = 200;
 const KEY_CODE_ARROW_UP = 38;
