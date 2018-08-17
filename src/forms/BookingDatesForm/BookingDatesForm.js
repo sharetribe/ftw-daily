@@ -86,6 +86,7 @@ export class BookingDatesFormComponent extends Component {
             unitType,
             values,
             timeSlots,
+            fetchTimeSlotsError,
           } = fieldRenderProps;
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
@@ -100,6 +101,11 @@ export class BookingDatesFormComponent extends Component {
           const endDateErrorMessage = intl.formatMessage({
             id: 'FieldDateRangeInput.invalidEndDate',
           });
+          const timeSlotsError = fetchTimeSlotsError ? (
+            <p className={css.timeSlotsError}>
+              <FormattedMessage id="BookingDatesForm.timeSlotsError" />
+            </p>
+          ) : null;
 
           // This is the place to collect breakdown estimation data. See the
           // EstimatedBreakdownMaybe component to change the calculations
@@ -148,6 +154,7 @@ export class BookingDatesFormComponent extends Component {
 
           return (
             <Form onSubmit={handleSubmit} className={classes}>
+              {timeSlotsError}
               <FieldDateRangeInput
                 className={css.bookingDates}
                 name="bookingDates"
