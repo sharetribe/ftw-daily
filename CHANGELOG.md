@@ -19,6 +19,22 @@ way to update this template, but currently, we follow a pattern:
 * [fix] Fix window resize redirecting to search page with reusable map component
   [#905](https://github.com/sharetribe/flex-template-web/pull/905)
 
+* [change] Maps configuration has been restructured. The new
+  configuration is agnostic of the maps provider in use and works with
+  both Google Maps as well as Mapbox.
+
+  The fuzzy location circle has less configuration, but otherwise all
+  the previous settings can be set also in the new configuration. See
+  `config.js` for details.
+
+  The default location searches are now enabled in the
+  `.env-template`. For old installations, the
+  `REACT_APP_DEFAULT_SEARCHES_ENABLED` env var should be set to
+  `true`. The default searches can then be configured in
+  `src/default-location-searches.js`.
+
+  [#900](https://github.com/sharetribe/flex-template-web/pull/900)
+
 ## v1.4.0 2018-08-17
 * [change] Put availability calendar behind a feature flag
   [#902](https://github.com/sharetribe/flex-template-web/pull/902)
