@@ -12,12 +12,14 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 ## Upcoming version 2018-08-XX
+* [fix] Drop date time from time slots request query params
+  [#901](https://github.com/sharetribe/flex-template-web/pull/901)
+* [fix] Make a second time slots request when required
+  [#901](https://github.com/sharetribe/flex-template-web/pull/901)
 * [add] Map component (used in ListingPage) using Mapbox instead of Google Maps
   [#896](https://github.com/sharetribe/flex-template-web/pull/896)
 * [add] Listing availability
   [#868](https://github.com/sharetribe/flex-template-web/pull/868), [#873](https://github.com/sharetribe/flex-template-web/pull/873), [#891](https://github.com/sharetribe/flex-template-web/pull/891) & [#892](https://github.com/sharetribe/flex-template-web/pull/892)
-
-
 * [add] Add support for user's current location as a default
   suggestion in the location autocomplete search.
   [#895](https://github.com/sharetribe/flex-template-web/pull/895)

@@ -47,6 +47,16 @@
   display: inline-block;
 }
 
+.timeSlotsError {
+  @apply --marketplaceH4FontStyles;
+  color: var(--failColor);
+  margin: 0 24px 12px 24px;
+
+  @media (--viewportMedium) {
+    margin: 0 0 12px 0;
+  }
+}
+
 .smallPrint {
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColorAnti);
