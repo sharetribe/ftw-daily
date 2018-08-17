@@ -228,7 +228,7 @@ export const fetchTimeSlots = listingId => (dispatch, getState, sdk) => {
             .toDate(),
         };
 
-        dispatch(timeSlotsRequest(secondParams)).then(secondBatch => {
+        return dispatch(timeSlotsRequest(secondParams)).then(secondBatch => {
           const combined = timeSlots.concat(secondBatch);
           dispatch(fetchTimeSlotsSuccess(combined));
         });
