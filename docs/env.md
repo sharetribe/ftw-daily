@@ -13,7 +13,7 @@ them have defaults that work for development environment. For production deploys
 | REACT_APP_CANONICAL_ROOT_URL              | Canonical root url of the marketplace. Needed for social media sharing and SEO optimization.                      |
 | NODE_ENV                                  | Node env. Use 'development' for development and 'production' for production.                                      |
 | PORT                                      | Port for server to accept connections.                                                                            |
-| REACT_APP_ENV                             | Env for client side. Use the same value as with NODE_ENV.                                                         |
+| REACT_APP_ENV                             | A more fine grained env definition than NODE_ENV. Is used for example to differentiate envs in logging.           |
 | REACT_APP_SHARETRIBE_USING_SSL            | Redirect HTTP to HTTPS?                                                                                           |
 | SERVER_SHARETRIBE_TRUST_PROXY             | Set when running the app behind a reverse proxy, e.g. in Heroku.                                                  |
 | REACT_APP_PUBLIC_SENTRY_DSN               | See: [Error logging with Sentry](./sentry.md)                                                                     |
@@ -22,6 +22,7 @@ them have defaults that work for development environment. For production deploys
 | BASIC_AUTH_USERNAME                       | Set to enable HTTP Basic Auth                                                                                     |
 | BASIC_AUTH_PASSWORD                       | Set to enable HTTP Basic Auth                                                                                     |
 | REACT_APP_GOOGLE_ANALYTICS_ID             | See: [Google Analytics](./analytics.md)                                                                           |
+| REACT_APP_AVAILABILITY_ENABLED            | Enables availability calendar for listings.                                                                       |
 
 ## Defining configuration
 
