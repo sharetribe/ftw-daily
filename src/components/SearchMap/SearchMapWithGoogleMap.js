@@ -242,21 +242,19 @@ const MapWithGoogleMap = withGoogleMap(props => {
       defaultZoom={zoom}
       defaultCenter={center}
       options={{
-        // Disable map type (ie. Satellite etc.)
+        // Disable all controls except zoom
         mapTypeControl: false,
-        // Disable zooming by scrolling
         scrollwheel: false,
-        // Disable fullscreen control: this won't work with mobile close-modal button
-        // since they are on top of each others.
-        fullscreenControl: !isOpenOnModal,
-        // Click disabled for point-of-interests
+        fullscreenControl: false,
         clickableIcons: false,
+        streetViewControl: false,
+
         // When infoCard is open, we can't differentiate double click on top of card vs map.
         disableDoubleClickZoom: !!infoCardOpen,
+
         zoomControlOptions: {
           position: controlPosition,
         },
-        streetViewControl: false,
       }}
       ref={onMapLoad}
       onIdle={onIdle}
@@ -269,7 +267,6 @@ const MapWithGoogleMap = withGoogleMap(props => {
 
 MapWithGoogleMap.defaultProps = {
   center: new sdkTypes.LatLng(0, 0),
-  isOpenOnModal: false,
   infoCardOpen: null,
   // priceLabels: [],
   // infoCard: null,
@@ -281,7 +278,6 @@ MapWithGoogleMap.defaultProps = {
 MapWithGoogleMap.propTypes = {
   center: propTypes.latlng,
   infoCardOpen: oneOfType([propTypes.listing, arrayOf(propTypes.listing)]),
-  isOpenOnModal: bool,
   // priceLabels: arrayOf(node),
   // infoCard: node,
   listings: arrayOf(propTypes.listing),
