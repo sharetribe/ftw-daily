@@ -66,10 +66,17 @@ export const GeocoderAttribution = () => null;
  * using the Mapbox Geocoding API.
  */
 class GeocoderMapbox {
-  constructor() {
-    this.client = window.mapboxSdk({
-      accessToken: window.mapboxgl.accessToken,
-    });
+  getClient() {
+    const libLoaded = typeof window !== 'undefined' && window.mapboxgl && window.mapboxSdk;
+    if (!libLoaded) {
+      throw new Error('Mapbox libraries are required for GeocoderMapbox');
+    }
+    if (!this._client) {
+      this._client = window.mapboxSdk({
+        accessToken: window.mapboxgl.accessToken,
+      });
+    }
+    return this._client;
   }
 
   // Public API
@@ -86,8 +93,8 @@ class GeocoderMapbox {
    * only relevant for the `getPlaceDetails` function below.
    */
   getPlacePredictions(search) {
-    return this.client.geocoding
-      .forwardGeocode({
+    return this.getClient()
+      .geocoding.forwardGeocode({
         query: search,
         limit: 5,
         language: [config.locale],
