@@ -67,7 +67,7 @@ export const GeocoderAttribution = () => null;
  */
 class GeocoderMapbox {
   constructor() {
-    if (typeof window !== 'undefined') {
+    if (window && window.mapboxSdk && window.mapboxgl) {
       this.client = window.mapboxSdk({
         accessToken: window.mapboxgl.accessToken,
       });
