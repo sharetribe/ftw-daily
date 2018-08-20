@@ -39,13 +39,22 @@ export const fitMapToBounds = (map, bounds, padding) => {
 
 /**
  * Convert Mapbox formatted LatLng object to Sharetribe SDK's LatLng coordinate format
+ * Longitudes > 180 and < -180 are converted to the correct corresponding value
+ * between -180 and 180.
  *
  * @param {LngLat} mapboxLngLat - Mapbox LngLat
  *
  * @return {SDKLatLng} - Converted latLng coordinate
  */
 export const mapboxLngLatToSDKLatLng = lngLat => {
-  return new SDKLatLng(lngLat.lat, lngLat.lng);
+  const mapboxLng = lngLat.lng;
+
+  // For bounding boxes that overlap the antimeridian Mapbox sometimes gives
+  // longitude values outside -180 and 180 degrees.Those values are converted
+  // so that longitude is always between -180 and 180.
+  const lng = mapboxLng > 180 ? mapboxLng - 360 : mapboxLng < -180 ? mapboxLng + 360 : mapboxLng;
+
+  return new SDKLatLng(lngLat.lat, lng);
 };
 
 /**
