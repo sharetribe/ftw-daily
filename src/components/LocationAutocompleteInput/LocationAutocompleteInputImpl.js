@@ -146,8 +146,7 @@ class LocationAutocompleteInputImpl extends Component {
     // Ref to the input element.
     this.input = null;
 
-    this.geocoder = new Geocoder();
-
+    this.getGeocoder = this.getGeocoder.bind(this);
     this.currentPredictions = this.currentPredictions.bind(this);
     this.changeHighlight = this.changeHighlight.bind(this);
     this.selectPrediction = this.selectPrediction.bind(this);
@@ -170,6 +169,14 @@ class LocationAutocompleteInputImpl extends Component {
   }
   componentWillUnmount() {
     this._isMounted = false;
+  }
+
+  getGeocoder() {
+    // Create the Geocoder as late as possible only when it is needed.
+    if (!this._geocoder) {
+      this._geocoder = new Geocoder();
+    }
+    return this._geocoder;
   }
 
   currentPredictions() {
@@ -267,7 +274,7 @@ class LocationAutocompleteInputImpl extends Component {
 
     this.setState({ fetchingPlaceDetails: true });
 
-    this.geocoder
+    this.getGeocoder()
       .getPlaceDetails(prediction)
       .then(place => {
         if (!this._isMounted) {
@@ -305,7 +312,7 @@ class LocationAutocompleteInputImpl extends Component {
   predict(search) {
     const onChange = this.props.input.onChange;
 
-    this.geocoder
+    this.getGeocoder()
       .getPlacePredictions(search)
       .then(results => {
         const { search: currentSearch } = currentValue(this.props);
@@ -457,7 +464,7 @@ class LocationAutocompleteInputImpl extends Component {
             rootClassName={predictionsClass}
             attributionClassName={predictionsAttributionClassName}
             predictions={predictions}
-            geocoder={this.geocoder}
+            geocoder={this.getGeocoder()}
             highlightedIndex={this.state.highlightedIndex}
             onSelectStart={this.handlePredictionsSelectStart}
             onSelectMove={this.handlePredictionsSelectMove}
