@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { arrayOf, bool, func, node, number } from 'prop-types';
+import { arrayOf, func, node, number } from 'prop-types';
 import differenceBy from 'lodash/differenceBy';
 import classNames from 'classnames';
 import { types as sdkTypes } from '../../util/sdkLoader';
@@ -352,7 +352,6 @@ class SearchMapWithMapbox extends Component {
 
 SearchMapWithMapbox.defaultProps = {
   center: null,
-  isOpenOnModal: false,
   priceLabels: [],
   infoCard: null,
   zoom: 11,
@@ -360,7 +359,6 @@ SearchMapWithMapbox.defaultProps = {
 
 SearchMapWithMapbox.propTypes = {
   center: propTypes.latlng,
-  isOpenOnModal: bool,
   priceLabels: arrayOf(node),
   infoCard: node,
   onClick: func.isRequired,
