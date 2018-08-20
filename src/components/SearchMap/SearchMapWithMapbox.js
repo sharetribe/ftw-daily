@@ -227,6 +227,9 @@ class SearchMapWithMapbox extends Component {
       scrollZoom: false,
     });
 
+    var nav = new window.mapboxgl.NavigationControl({ showCompass: false });
+    this.map.addControl(nav, 'top-left');
+
     this.map.on('moveend', this.props.onIdle);
   }
 
