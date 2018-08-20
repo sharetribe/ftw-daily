@@ -143,7 +143,6 @@ export class SearchMapComponent extends Component {
     //   containerElement={<div className={classes} onClick={this.onMapClicked} />}
     //   mapElement={<div className={mapRootClassName || css.mapRoot} />}
     //   center={center}
-    //   isOpenOnModal={isOpenOnModal}
     //   infoCardOpen={infoCardOpen}
     //   listings={listings}
     //   activeListingId={activeListingId}
@@ -165,7 +164,6 @@ export class SearchMapComponent extends Component {
         <SearchMapWithMapbox
           className={classes}
           center={center}
-          isOpenOnModal={isOpenOnModal}
           infoCardOpen={infoCardOpen}
           listings={listings}
           activeListingId={activeListingId}
