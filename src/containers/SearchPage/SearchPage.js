@@ -118,7 +118,8 @@ export class SearchPageComponent extends Component {
 
     const routes = routeConfiguration();
     const searchPagePath = pathByRouteName('SearchPage', routes);
-    const currentPath = window && window.location && window.location.pathname;
+    const currentPath =
+      typeof window !== 'undefined' && window.location && window.location.pathname;
 
     // When using the ReusableMapContainer onIdle can fire from other pages than SearchPage too
     const isSearchPage = currentPath === searchPagePath;
