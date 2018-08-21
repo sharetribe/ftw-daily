@@ -13,6 +13,10 @@ way to update this template, but currently, we follow a pattern:
 ---
 ## Upcoming version 2018-08-XX
 
+## v1.4.1 2018-08-21
+* [fix] Fix window resize redirecting to search page with reusable map component
+  [#905](https://github.com/sharetribe/flex-template-web/pull/905)
+
 ## v1.4.0 2018-08-17
 * [change] Put availability calendar behind a feature flag
   [#902](https://github.com/sharetribe/flex-template-web/pull/902)
