@@ -16,7 +16,7 @@ import {
   sdkBoundsToFixedCoordinates,
   hasSameSDKBounds,
 } from '../../util/googleMaps';
-import { createResourceLocatorString } from '../../util/routes';
+import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import { parse, stringify } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
@@ -116,10 +116,18 @@ export class SearchPageComponent extends Component {
     const viewportBoundsChanged =
       this.viewportBounds && !hasSameSDKBounds(this.viewportBounds, viewportBounds);
 
+    const routes = routeConfiguration();
+    const searchPagePath = pathByRouteName('SearchPage', routes);
+    const currentPath =
+      typeof window !== 'undefined' && window.location && window.location.pathname;
+
+    // When using the ReusableMapContainer onIdle can fire from other pages than SearchPage too
+    const isSearchPage = currentPath === searchPagePath;
+
     // If mapSearch url param is given (and we have not just opened mobile map modal)
     // or original location search is rendered once,
     // we start to react to 'bounds_changed' event by generating new searches
-    if (viewportBoundsChanged && !this.modalOpenedBoundsChange) {
+    if (viewportBoundsChanged && !this.modalOpenedBoundsChange && isSearchPage) {
       const originMaybe = config.sortSearchByDistance
         ? { origin: googleLatLngToSDKLatLng(viewportGMapBounds.getCenter()) }
         : {};
@@ -132,9 +140,7 @@ export class SearchPageComponent extends Component {
       };
 
       this.viewportBounds = viewportBounds;
-      history.push(
-        createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
-      );
+      history.push(createResourceLocatorString('SearchPage', routes, {}, searchParams));
     } else {
       this.viewportBounds = viewportBounds;
       this.modalOpenedBoundsChange = false;
