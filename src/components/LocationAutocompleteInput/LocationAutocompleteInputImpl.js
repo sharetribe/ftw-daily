@@ -181,9 +181,11 @@ class LocationAutocompleteInputImpl extends Component {
 
   currentPredictions() {
     const { search, predictions: fetchedPredictions } = currentValue(this.props);
+    const { useDefaultPredictions } = this.props;
     const hasFetchedPredictions = fetchedPredictions && fetchedPredictions.length > 0;
+    const showDefaultPredictions = !search && !hasFetchedPredictions && useDefaultPredictions;
 
-    return !search && !hasFetchedPredictions ? defaultPredictions : fetchedPredictions;
+    return showDefaultPredictions ? defaultPredictions : fetchedPredictions;
   }
 
   // Interpret input key event
@@ -487,6 +489,7 @@ LocationAutocompleteInputImpl.defaultProps = {
   predictionsAttributionClassName: null,
   validClassName: null,
   placeholder: '',
+  useDefaultPredictions: true,
   meta: null,
   inputRef: null,
 };
@@ -502,6 +505,7 @@ LocationAutocompleteInputImpl.propTypes = {
   predictionsAttributionClassName: string,
   validClassName: string,
   placeholder: string,
+  useDefaultPredictions: bool,
   input: shape({
     name: string.isRequired,
     value: oneOfType([
