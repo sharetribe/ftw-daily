@@ -23,9 +23,8 @@ const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
  * @param {SDK.LatLngBounds} bounds - the area that needs to be visible when map loads.
  */
 export const fitMapToBounds = (map, bounds, padding) => {
-  const { ne, sw } = bounds || {};
   // map bounds as string literal for google.maps
-  const mapBounds = bounds ? [[sw.lng, sw.lat], [ne.lng, ne.lat]] : null;
+  const mapBounds = sdkBoundsToMapboxBounds(bounds);
 
   // If bounds are given, use it (defaults to center & zoom).
   if (map && mapBounds) {
@@ -72,6 +71,29 @@ export const mapboxBoundsToSDKBounds = mapboxBounds => {
   const ne = mapboxBounds.getNorthEast();
   const sw = mapboxBounds.getSouthWest();
   return new SDKLatLngBounds(mapboxLngLatToSDKLatLng(ne), mapboxLngLatToSDKLatLng(sw));
+};
+
+/**
+ * Convert sdk bounds that overlap the antimeridian into values that can
+ * be passed to Mapbox. This is achieved by converting the SW longitude into
+ * a value less than -180 that flows over the antimeridian.
+ *
+ * @param {SDKLatLng} bounds - bounds passed to the map
+ *
+ * @return {LngLatBoundsLike} a bounding box that is compatible with Mapbox
+ */
+const sdkBoundsToMapboxBounds = bounds => {
+  if (!bounds) {
+    return null;
+  }
+  const { ne, sw } = bounds;
+
+  // if sw lng is > ne lng => the bounds overlap antimeridian
+  // => flip the nw lng to the negative side so that the value
+  // is less than -180
+  const swLng = sw.lng > ne.lng ? -360 + sw.lng : sw.lng;
+
+  return [[swLng, sw.lat], [ne.lng, ne.lat]];
 };
 
 /**
