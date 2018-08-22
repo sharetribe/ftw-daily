@@ -12,6 +12,8 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 ## Upcoming version 2018-08-XX
+* [change] Disable default predictions in listing wizard
+  [#906](https://github.com/sharetribe/flex-template-web/pull/906)
 
 ## v1.4.1 2018-08-21
 * [fix] Fix window resize redirecting to search page with reusable map component
