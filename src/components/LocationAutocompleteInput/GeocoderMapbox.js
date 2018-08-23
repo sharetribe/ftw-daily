@@ -5,7 +5,21 @@ import config from '../../config';
 const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
 
 export const CURRENT_LOCATION_ID = 'current-location';
-const GENERATED_BOUNDS_DISTANCE = 500; // meters
+
+const GENERATED_BOUNDS_DEFAULT_DISTANCE = 500; // meters
+// Distances for generated bounding boxes for different Mapbox place types
+const PLACE_TYPE_BOUNDS_DISTANCES = {
+  address: 500,
+  country: 2000,
+  region: 2000,
+  postcode: 2000,
+  district: 2000,
+  place: 2000,
+  locality: 2000,
+  neighborhood: 2000,
+  poi: 2000,
+  'poi.landmark': 2000,
+};
 
 const locationBounds = (latlng, distance) => {
   if (!latlng) {
@@ -35,10 +49,16 @@ const placeBounds = prediction => {
         new SDKLatLng(prediction.bbox[3], prediction.bbox[2]),
         new SDKLatLng(prediction.bbox[1], prediction.bbox[0])
       );
-    }
-    else {
+    } else {
       // If bounds are not available, generate them around the origin
-      return locationBounds(placeOrigin(prediction), GENERATED_BOUNDS_DISTANCE);
+
+      // Resolve bounds distance based on place type
+      const placeType = Array.isArray(prediction.place_type) && prediction.place_type[0];
+
+      const distance =
+        (placeType && PLACE_TYPE_BOUNDS_DISTANCES[placeType]) || GENERATED_BOUNDS_DEFAULT_DISTANCE;
+
+      return locationBounds(placeOrigin(prediction), distance);
     }
   }
   return null;
