@@ -5,8 +5,13 @@ import config from '../../config';
 const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
 
 export const CURRENT_LOCATION_ID = 'current-location';
+const GENERATED_BOUNDS_DISTANCE = 500; // meters
 
 const locationBounds = (latlng, distance) => {
+  if (!latlng) {
+    return null;
+  }
+
   const bounds = new window.mapboxgl.LngLat(latlng.lng, latlng.lat).toBounds(distance);
   return new SDKLatLngBounds(
     new SDKLatLng(bounds.getNorth(), bounds.getEast()),
@@ -23,12 +28,18 @@ const placeOrigin = prediction => {
 };
 
 const placeBounds = prediction => {
-  if (prediction && Array.isArray(prediction.bbox) && prediction.bbox.length === 4) {
-    // Bounds in Mapbox features are represented as [minX, minY, maxX, maxY]
-    return new SDKLatLngBounds(
-      new SDKLatLng(prediction.bbox[3], prediction.bbox[2]),
-      new SDKLatLng(prediction.bbox[1], prediction.bbox[0])
-    );
+  if (prediction) {
+    if (Array.isArray(prediction.bbox) && prediction.bbox.length === 4) {
+      // Bounds in Mapbox features are represented as [minX, minY, maxX, maxY]
+      return new SDKLatLngBounds(
+        new SDKLatLng(prediction.bbox[3], prediction.bbox[2]),
+        new SDKLatLng(prediction.bbox[1], prediction.bbox[0])
+      );
+    }
+    else {
+      // If bounds are not available, generate them around the origin
+      return locationBounds(placeOrigin(prediction), GENERATED_BOUNDS_DISTANCE);
+    }
   }
   return null;
 };
