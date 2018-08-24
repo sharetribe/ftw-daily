@@ -16,8 +16,10 @@ class SearchMapPriceLabel extends Component {
     const isSameListing = currentListing.id.uuid === nextListing.id.uuid;
     const hasSamePrice = currentListing.attributes.price === nextListing.attributes.price;
     const hasSameActiveStatus = this.props.isActive === nextProps.isActive;
+    const hasSameRefreshToken =
+      this.props.mapComponentRefreshToken === nextProps.mapComponentRefreshToken;
 
-    return !(isSameListing && hasSamePrice && hasSameActiveStatus);
+    return !(isSameListing && hasSamePrice && hasSameActiveStatus && hasSameRefreshToken);
   }
 
   render() {
