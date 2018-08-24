@@ -45,8 +45,12 @@ export class SearchMapComponent extends Component {
 
     this.listings = [];
     this.mapRef = null;
-    this.mapReattachmentCount = 0;
-    this.state = { infoCardOpen: null };
+
+    if (typeof window !== 'undefined' && !window.mapReattachmentCount) {
+      window.mapReattachmentCount = 0;
+    }
+    const mapReattachmentCount = window.mapReattachmentCount || 0;
+    this.state = { infoCardOpen: null, mapReattachmentCount };
 
     this.createURLToListing = this.createURLToListing.bind(this);
     this.onListingInfoCardClicked = this.onListingInfoCardClicked.bind(this);
@@ -135,7 +139,10 @@ export class SearchMapComponent extends Component {
     const infoCardOpen = this.state.infoCardOpen;
 
     const forceUpdateHandler = () => {
-      this.mapReattachmentCount += 1;
+      // Update global reattachement count
+      window.mapReattachmentCount += 1;
+      // Initiate rerendering
+      this.setState({ mapReattachmentCount: window.mapReattachmentCount });
     };
 
     // Using Google Maps as map provider should use following component
