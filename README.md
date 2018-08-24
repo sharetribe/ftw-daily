@@ -13,8 +13,8 @@ If you just want to get the app running quickly to test it out, first install
 [Node.js](https://nodejs.org/) and [Yarn](https://yarnpkg.com/), and follow along:
 
 ```sh
-git clone git@github.com:sharetribe/sharetribe-starter-app.git # clone this repository
-cd sharetribe-starter-app/                                     # change to the cloned directory
+git clone git@github.com:sharetribe/flex-template-web.git      # clone this repository
+cd flex-template-web/                                          # change to the cloned directory
 cp .env-template .env                                          # copy the env template file to add your local config
 emacs .env                                                     # in your favorite editor, add the mandatory env vars to the config
 yarn install                                                   # install dependencies
