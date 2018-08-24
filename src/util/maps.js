@@ -12,10 +12,9 @@ const { LatLng } = sdkTypes;
  */
 const obfuscatedCoordinatesImpl = (latlng, cacheKey) => {
   const { lat, lng } = latlng;
-  const offset = config.coordinates.coordinateOffset;
 
   // https://gis.stackexchange.com/questions/25877/generating-random-locations-nearby
-  const r = offset / 111300;
+  const r = config.maps.fuzzy.offset / 111300;
   const y0 = lat;
   const x0 = lng;
 

@@ -5,7 +5,6 @@ import config from '../../config';
 const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
 
 export const CURRENT_LOCATION_ID = 'current-location';
-const CURRENT_LOCATION_BOUNDS_DISTANCE = 1000; // meters
 
 const locationBounds = (latlng, distance) => {
   const bounds = new window.mapboxgl.LngLat(latlng.lng, latlng.lat).toBounds(distance);
@@ -33,31 +32,6 @@ const placeBounds = prediction => {
   }
   return null;
 };
-
-// A list of default predictions that can be shown when the user
-// focuses on the autocomplete input without typing a search. This can
-// be used to reduce typing and Geocoding API calls for common
-// searches.
-export const defaultPredictions = [
-  // Examples:
-  // Current user location from the browser geolocation API
-  // {
-  //   id: CURRENT_LOCATION_ID,
-  //   predictionPlace: {},
-  // },
-  // Helsinki
-  // {
-  //   id: 'default-helsinki',
-  //   predictionPlace: {
-  //     address: 'Helsinki, Finland',
-  //     origin: new SDKLatLng(60.16985, 24.93837),
-  //     bounds: new SDKLatLngBounds(
-  //       new SDKLatLng(60.29783, 25.25448),
-  //       new SDKLatLng(59.92248, 24.78287)
-  //     ),
-  //   },
-  // },
-];
 
 export const GeocoderAttribution = () => null;
 
@@ -140,7 +114,7 @@ class GeocoderMapbox {
         return {
           address: '',
           origin: latlng,
-          bounds: locationBounds(latlng, CURRENT_LOCATION_BOUNDS_DISTANCE),
+          bounds: locationBounds(latlng, config.maps.search.currentLocationBoundsDistance),
         };
       });
     }

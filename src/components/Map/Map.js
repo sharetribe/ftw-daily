@@ -18,32 +18,27 @@ export class Map extends Component {
       center,
       obfuscatedCenter,
       zoom,
-      coordinatesConfig,
+      mapsConfig,
       useStaticMap,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
     const mapClasses = mapRootClassName || css.mapRoot;
 
-    if (coordinatesConfig.fuzzy && !obfuscatedCenter) {
+    if (mapsConfig.fuzzy.enabled && !obfuscatedCenter) {
       throw new Error(
-        'Map: obfuscatedCenter prop is required when config.coordinates.fuzzy === true'
+        'Map: obfuscatedCenter prop is required when config.maps.fuzzy.enabled === true'
       );
     }
-    if (!coordinatesConfig.fuzzy && !center) {
-      throw new Error('Map: center prop is required when config.coordinates.fuzzy === false');
+    if (!mapsConfig.fuzzy.enabled && !center) {
+      throw new Error('Map: center prop is required when config.maps.fuzzy.enabled === false');
     }
 
-    const location = coordinatesConfig.fuzzy ? obfuscatedCenter : center;
+    const location = mapsConfig.fuzzy.enabled ? obfuscatedCenter : center;
 
     return !isMapsLibLoaded() ? (
       <div className={classes} />
     ) : useStaticMap ? (
-      <StaticMap
-        center={location}
-        zoom={zoom}
-        address={address}
-        coordinatesConfig={coordinatesConfig}
-      />
+      <StaticMap center={location} zoom={zoom} address={address} mapsConfig={mapsConfig} />
     ) : (
       <DynamicMap
         containerElement={<div className={classes} />}
@@ -53,7 +48,7 @@ export class Map extends Component {
         center={location}
         zoom={zoom}
         address={address}
-        coordinatesConfig={coordinatesConfig}
+        mapsConfig={mapsConfig}
       />
     );
   }
@@ -64,8 +59,8 @@ Map.defaultProps = {
   rootClassName: null,
   mapRootClassName: null,
   address: '',
-  zoom: config.coordinates.fuzzy ? config.coordinates.fuzzyDefaultZoomLevel : 11,
-  coordinatesConfig: config.coordinates,
+  zoom: config.maps.fuzzy.enabled ? config.maps.fuzzy.defaultZoomLevel : 11,
+  mapsConfig: config.maps,
   useStaticMap: false,
 };
 
@@ -77,7 +72,7 @@ Map.propTypes = {
   center: propTypes.latlng,
   obfuscatedCenter: propTypes.latlng,
   zoom: number,
-  coordinatesConfig: object,
+  mapsConfig: object,
   useStaticMap: bool,
 };
 

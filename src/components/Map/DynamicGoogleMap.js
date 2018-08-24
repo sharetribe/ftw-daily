@@ -8,13 +8,13 @@ import config from '../../config';
  * It handles some of the google map initialization states.
  */
 const DynamicGoogleMap = withGoogleMap(props => {
-  const { center, zoom, address, coordinatesConfig } = props;
+  const { center, zoom, address, mapsConfig } = props;
 
-  const { markerURI, anchorX, anchorY, width, height } = coordinatesConfig.customMarker || {};
-  const markerIcon = coordinatesConfig.customMarker
+  const { enabled, url, anchorX, anchorY, width, height } = mapsConfig.customMarker;
+  const markerIcon = enabled
     ? {
         icon: {
-          url: markerURI,
+          url,
 
           // The origin for this image is (0, 0).
           origin: new window.google.maps.Point(0, 0),
@@ -27,8 +27,15 @@ const DynamicGoogleMap = withGoogleMap(props => {
   const marker = <Marker position={center} {...markerIcon} title={address} />;
 
   const circleProps = {
-    options: coordinatesConfig.circleOptions,
-    radius: coordinatesConfig.coordinateOffset,
+    options: {
+      fillColor: mapsConfig.fuzzy.circleColor,
+      fillOpacity: 0.2,
+      strokeColor: mapsConfig.fuzzy.circleColor,
+      strokeOpacity: 0.5,
+      strokeWeight: 1,
+      clickable: false,
+    },
+    radius: mapsConfig.fuzzy.offset,
     center,
   };
 
@@ -59,7 +66,7 @@ const DynamicGoogleMap = withGoogleMap(props => {
         },
       }}
     >
-      {coordinatesConfig.fuzzy ? circle : marker}
+      {mapsConfig.fuzzy.enabled ? circle : marker}
     </GoogleMap>
   );
 });
@@ -67,8 +74,8 @@ const DynamicGoogleMap = withGoogleMap(props => {
 DynamicGoogleMap.defaultProps = {
   address: '',
   center: null,
-  zoom: config.coordinates.fuzzy ? config.coordinates.fuzzyDefaultZoomLevel : 11,
-  coordinatesConfig: config.coordinates,
+  zoom: config.maps.fuzzy.enabled ? config.maps.fuzzy.defaultZoomLevel : 11,
+  mapsConfig: config.maps,
 };
 
 DynamicGoogleMap.propTypes = {
@@ -78,7 +85,7 @@ DynamicGoogleMap.propTypes = {
     lng: number.isRequired,
   }).isRequired,
   zoom: number,
-  coordinatesConfig: object,
+  mapsConfig: object,
 };
 
 export default DynamicGoogleMap;

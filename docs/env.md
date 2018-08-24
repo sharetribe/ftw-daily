@@ -23,6 +23,7 @@ them have defaults that work for development environment. For production deploys
 | BASIC_AUTH_PASSWORD                       | Set to enable HTTP Basic Auth                                                                                     |
 | REACT_APP_GOOGLE_ANALYTICS_ID             | See: [Google Analytics](./analytics.md)                                                                           |
 | REACT_APP_AVAILABILITY_ENABLED            | Enables availability calendar for listings.                                                                       |
+| REACT_APP_DEFAULT_SEARCHES_ENABLED        | Enables default search suggestions in location autocomplete search input.                                         |
 
 ## Defining configuration
 

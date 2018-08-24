@@ -4,25 +4,21 @@ import uniqueId from 'lodash/uniqueId';
 import { circlePolyline } from '../../util/maps';
 import config from '../../config';
 
-const mapMarker = coordinatesConfig => {
-  const { customMarker } = coordinatesConfig;
-  if (customMarker) {
+const mapMarker = mapsConfig => {
+  const { enabled, url, width, height } = mapsConfig.customMarker;
+  if (enabled) {
     const element = document.createElement('div');
-    element.style.backgroundImage = `url(${customMarker.markerURI})`;
-    element.style.width = `${customMarker.width}px`;
-    element.style.height = `${customMarker.height}px`;
+    element.style.backgroundImage = `url(${url})`;
+    element.style.width = `${width}px`;
+    element.style.height = `${height}px`;
     return new window.mapboxgl.Marker({ element });
   } else {
     return new window.mapboxgl.Marker();
   }
 };
 
-const circleLayer = (center, coordinatesConfig, layerId) => {
-  const { fillColor, fillOpacity } = coordinatesConfig.circleOptions;
-  const path = circlePolyline(center, coordinatesConfig.coordinateOffset).map(([lat, lng]) => [
-    lng,
-    lat,
-  ]);
+const circleLayer = (center, mapsConfig, layerId) => {
+  const path = circlePolyline(center, mapsConfig.fuzzy.offset).map(([lat, lng]) => [lng, lat]);
   return {
     id: layerId,
     type: 'fill',
@@ -37,8 +33,8 @@ const circleLayer = (center, coordinatesConfig, layerId) => {
       },
     },
     paint: {
-      'fill-color': fillColor,
-      'fill-opacity': fillOpacity,
+      'fill-color': mapsConfig.fuzzy.circleColor,
+      'fill-opacity': 0.2,
     },
   };
 };
@@ -59,7 +55,7 @@ class DynamicMapboxMap extends Component {
     this.updateFuzzyCirclelayer = this.updateFuzzyCirclelayer.bind(this);
   }
   componentDidMount() {
-    const { center, zoom, coordinatesConfig } = this.props;
+    const { center, zoom, mapsConfig } = this.props;
     const position = [center.lng, center.lat];
 
     this.map = new window.mapboxgl.Map({
@@ -71,12 +67,12 @@ class DynamicMapboxMap extends Component {
     });
     this.map.addControl(new window.mapboxgl.NavigationControl(), 'top-left');
 
-    if (coordinatesConfig.fuzzy) {
+    if (mapsConfig.fuzzy.enabled) {
       this.map.on('load', () => {
-        this.map.addLayer(circleLayer(center, coordinatesConfig, this.fuzzyLayerId));
+        this.map.addLayer(circleLayer(center, mapsConfig, this.fuzzyLayerId));
       });
     } else {
-      this.centerMarker = mapMarker(coordinatesConfig);
+      this.centerMarker = mapMarker(mapsConfig);
       this.centerMarker.setLngLat(position).addTo(this.map);
     }
   }
@@ -92,7 +88,7 @@ class DynamicMapboxMap extends Component {
       return;
     }
 
-    const { center, zoom, coordinatesConfig } = this.props;
+    const { center, zoom, mapsConfig } = this.props;
     const { lat, lng } = center;
     const position = [lng, lat];
 
@@ -110,7 +106,7 @@ class DynamicMapboxMap extends Component {
     }
 
     // fuzzy circle change
-    if (coordinatesConfig.fuzzy && centerChanged) {
+    if (mapsConfig.fuzzy.enabled && centerChanged) {
       if (this.map.loaded()) {
         this.updateFuzzyCirclelayer();
       } else {
@@ -118,14 +114,14 @@ class DynamicMapboxMap extends Component {
       }
     }
 
-    // NOTE: coordinatesConfig changes are not handled
+    // NOTE: mapsConfig changes are not handled
   }
   updateFuzzyCirclelayer() {
     if (!this.map) {
       // map already removed
       return;
     }
-    const { center, coordinatesConfig } = this.props;
+    const { center, mapsConfig } = this.props;
     const { lat, lng } = center;
     const position = [lng, lat];
 
@@ -133,7 +129,7 @@ class DynamicMapboxMap extends Component {
 
     // We have to use a different layer id to avoid Mapbox errors
     this.fuzzyLayerId = generateFuzzyLayerId();
-    this.map.addLayer(circleLayer(center, coordinatesConfig, this.fuzzyLayerId));
+    this.map.addLayer(circleLayer(center, mapsConfig, this.fuzzyLayerId));
 
     this.map.setCenter(position);
   }
@@ -150,8 +146,8 @@ class DynamicMapboxMap extends Component {
 DynamicMapboxMap.defaultProps = {
   address: '',
   center: null,
-  zoom: config.coordinates.fuzzy ? config.coordinates.fuzzyDefaultZoomLevel : 11,
-  coordinatesConfig: config.coordinates,
+  zoom: config.maps.fuzzy.enabled ? config.maps.fuzzy.defaultZoomLevel : 11,
+  mapsConfig: config.maps,
 };
 
 DynamicMapboxMap.propTypes = {
@@ -161,7 +157,7 @@ DynamicMapboxMap.propTypes = {
     lng: number.isRequired,
   }).isRequired,
   zoom: number,
-  coordinatesConfig: object,
+  mapsConfig: object,
 };
 
 export default DynamicMapboxMap;
