@@ -1,5 +1,5 @@
 import React from 'react';
-import { arrayOf, bool, func, number, oneOfType } from 'prop-types';
+import { arrayOf, func, number, oneOfType } from 'prop-types';
 import { withGoogleMap, GoogleMap, OverlayView } from 'react-google-maps';
 import { OVERLAY_VIEW } from 'react-google-maps/lib/constants';
 import { types as sdkTypes } from '../../util/sdkLoader';
@@ -11,6 +11,8 @@ import { groupedByCoordinates, reducedToArray } from './SearchMap.helpers.js';
 
 export const LABEL_HANDLE = 'SearchMapLabel';
 export const INFO_CARD_HANDLE = 'SearchMapInfoCard';
+
+const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
 
 /**
  * Fit part of map (descriped with bounds) to visible map-viewport
@@ -206,7 +208,6 @@ const MapWithGoogleMap = withGoogleMap(props => {
   const {
     center,
     infoCardOpen,
-    isOpenOnModal,
     listings,
     activeListingId,
     createURLToListing,
@@ -268,8 +269,6 @@ const MapWithGoogleMap = withGoogleMap(props => {
 MapWithGoogleMap.defaultProps = {
   center: new sdkTypes.LatLng(0, 0),
   infoCardOpen: null,
-  // priceLabels: [],
-  // infoCard: null,
   listings: [],
   activeListingId: null,
   zoom: 11,
@@ -278,8 +277,6 @@ MapWithGoogleMap.defaultProps = {
 MapWithGoogleMap.propTypes = {
   center: propTypes.latlng,
   infoCardOpen: oneOfType([propTypes.listing, arrayOf(propTypes.listing)]),
-  // priceLabels: arrayOf(node),
-  // infoCard: node,
   listings: arrayOf(propTypes.listing),
   activeListingId: propTypes.uuid,
 
