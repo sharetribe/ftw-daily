@@ -9,8 +9,10 @@ class SearchMapGroupLabel extends Component {
   shouldComponentUpdate(nextProps) {
     const hasSameAmountOfListings = nextProps.listings.length === this.props.listings.length;
     const hasSameActiveStatus = this.props.isActive === nextProps.isActive;
+    const hasSameRefreshToken =
+      this.props.mapComponentRefreshToken === nextProps.mapComponentRefreshToken;
 
-    return !(hasSameAmountOfListings && hasSameActiveStatus);
+    return !(hasSameAmountOfListings && hasSameActiveStatus && hasSameRefreshToken);
   }
 
   render() {
