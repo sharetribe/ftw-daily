@@ -241,10 +241,10 @@ class SearchMapWithMapbox extends Component {
   componentDidUpdate(prevProps) {
     if (!this.map) {
       this.initializeMap();
-
-      /* Notify parent component that Mapbox map is loaded */
-      this.props.onMapLoad(this.map);
     }
+
+    /* Notify parent component that Mapbox map is loaded */
+    this.props.onMapLoad(this.map);
   }
 
   onMount(element) {
