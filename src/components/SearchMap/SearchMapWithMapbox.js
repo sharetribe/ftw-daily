@@ -233,13 +233,14 @@ class SearchMapWithMapbox extends Component {
     super(props);
     this.map = null;
     this.currentMarkers = [];
+    this.state = { mapContainer: null, isMapReady: false };
 
     this.onMount = this.onMount.bind(this);
     this.initializeMap = this.initializeMap.bind(this);
   }
 
   componentDidUpdate(prevProps) {
-    if (!this.map) {
+    if (!this.map && this.state.mapContainer) {
       this.initializeMap();
 
       /* Notify parent component that Mapbox map is loaded */
@@ -248,20 +249,28 @@ class SearchMapWithMapbox extends Component {
   }
 
   onMount(element) {
-    this.mapContainer = element;
+    this.setState({ mapContainer: element });
   }
 
   initializeMap() {
-    this.map = new window.mapboxgl.Map({
-      container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v10',
-      scrollZoom: false,
-    });
+    const { offsetHeight, offsetWidth } = this.state.mapContainer;
+    const hasDimensions = offsetHeight > 0 && offsetWidth > 0;
+    if (hasDimensions) {
+      this.map = new window.mapboxgl.Map({
+        container: this.state.mapContainer,
+        style: 'mapbox://styles/mapbox/streets-v10',
+        scrollZoom: false,
+      });
 
-    var nav = new window.mapboxgl.NavigationControl({ showCompass: false });
-    this.map.addControl(nav, 'top-left');
+      var nav = new window.mapboxgl.NavigationControl({ showCompass: false });
+      this.map.addControl(nav, 'top-left');
 
-    this.map.on('moveend', this.props.onIdle);
+      this.map.on('moveend', this.props.onIdle);
+
+      // Introduce rerendering after map is ready (to include labels),
+      // but keep the map out of state life cycle.
+      this.setState({ isMapReady: true });
+    }
   }
 
   render() {
@@ -373,7 +382,7 @@ class SearchMapWithMapbox extends Component {
           }
           return null;
         })}
-        {this.mapContainer && this.currentInfoCard
+        {this.state.mapContainer && this.currentInfoCard
           ? ReactDOM.createPortal(
               <SearchMapInfoCard {...this.currentInfoCard.componentProps} />,
               this.currentInfoCard.markerContainer
