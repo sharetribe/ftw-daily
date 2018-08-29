@@ -233,10 +233,12 @@ class SearchMapWithMapbox extends Component {
     super(props);
     this.map = null;
     this.currentMarkers = [];
+    this.currentInfoCard = null;
     this.state = { mapContainer: null, isMapReady: false };
 
     this.onMount = this.onMount.bind(this);
     this.initializeMap = this.initializeMap.bind(this);
+    this.handleDoubleClickOnInfoCard = this.handleDoubleClickOnInfoCard.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -246,6 +248,13 @@ class SearchMapWithMapbox extends Component {
       /* Notify parent component that Mapbox map is loaded */
       this.props.onMapLoad(this.map);
     }
+  }
+
+  componentWillUnmount() {
+    this.currentInfoCard.markerContainer.removeEventListener(
+      'dblclick',
+      this.handleDoubleClickOnInfoCard
+    );
   }
 
   onMount(element) {
@@ -271,6 +280,10 @@ class SearchMapWithMapbox extends Component {
       // but keep the map out of state life cycle.
       this.setState({ isMapReady: true });
     }
+  }
+
+  handleDoubleClickOnInfoCard(e) {
+    e.stopPropagation();
   }
 
   render() {
@@ -337,6 +350,7 @@ class SearchMapWithMapbox extends Component {
         const infoCardContainer = document.createElement('div');
         infoCardContainer.setAttribute('id', infoCard.markerId);
         infoCardContainer.classList.add(css.infoCardContainer);
+        infoCardContainer.addEventListener('dblclick', this.handleDoubleClickOnInfoCard, false);
 
         this.currentInfoCard = {
           ...infoCard,
@@ -344,6 +358,12 @@ class SearchMapWithMapbox extends Component {
           marker: infoCard ? createMarker(infoCard, infoCardContainer) : null,
         };
       } else {
+        if (this.currentInfoCard) {
+          this.currentInfoCard.markerContainer.removeEventListener(
+            'dblclick',
+            this.handleDoubleClickOnInfoCard
+          );
+        }
         this.currentInfoCard = null;
       }
     }
