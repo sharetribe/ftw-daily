@@ -90,6 +90,7 @@ export const getPlacePredictions = (search, sessionToken) =>
   });
 
 /**
+ * Deprecation: use function from src/util/maps.js
  * Cut some precision from bounds coordinates to tackle subtle map movements
  * when map is moved manually
  *
@@ -107,6 +108,7 @@ export const sdkBoundsToFixedCoordinates = (sdkBounds, fixedPrecision) => {
 };
 
 /**
+ * Deprecation: use function from src/util/maps.js
  * Check if given bounds object have the same coordinates
  *
  * @param {LatLngBounds} sdkBounds1 - bounds #1 to be compared

@@ -3,7 +3,7 @@ import seedrandom from 'seedrandom';
 import { types as sdkTypes } from './sdkLoader';
 import config from '../config';
 
-const { LatLng } = sdkTypes;
+const { LatLng, LatLngBounds } = sdkTypes;
 
 const EARTH_RADIUS = 6371000; /* meters  */
 const DEG_TO_RAD = Math.PI / 180.0;
@@ -154,4 +154,41 @@ export const circlePolyline = (latlng, radius) => {
   }
 
   return points;
+};
+
+/**
+ * Cut some precision from bounds coordinates to tackle subtle map movements
+ * when map is moved manually
+ *
+ * @param {LatLngBounds} sdkBounds - bounds to be changed to fixed precision
+ * @param {Number} fixedPrecision - integer to be used on tofixed() change.
+ *
+ * @return {LatLngBounds} - bounds cut to given fixed precision
+ */
+export const sdkBoundsToFixedCoordinates = (sdkBounds, fixedPrecision) => {
+  const fixed = n => Number.parseFloat(n.toFixed(fixedPrecision));
+  const ne = new LatLng(fixed(sdkBounds.ne.lat), fixed(sdkBounds.ne.lng));
+  const sw = new LatLng(fixed(sdkBounds.sw.lat), fixed(sdkBounds.sw.lng));
+
+  return new LatLngBounds(ne, sw);
+};
+
+/**
+ * Check if given bounds object have the same coordinates
+ *
+ * @param {LatLngBounds} sdkBounds1 - bounds #1 to be compared
+ * @param {LatLngBounds} sdkBounds2 - bounds #2 to be compared
+ *
+ * @return {boolean} - true if bounds are the same
+ */
+export const hasSameSDKBounds = (sdkBounds1, sdkBounds2) => {
+  if (!(sdkBounds1 instanceof LatLngBounds) || !(sdkBounds2 instanceof LatLngBounds)) {
+    return false;
+  }
+  return (
+    sdkBounds1.ne.lat === sdkBounds2.ne.lat &&
+    sdkBounds1.ne.lng === sdkBounds2.ne.lng &&
+    sdkBounds1.sw.lat === sdkBounds2.sw.lat &&
+    sdkBounds1.sw.lng === sdkBounds2.sw.lng
+  );
 };
