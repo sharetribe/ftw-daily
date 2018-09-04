@@ -45,10 +45,16 @@ export class SearchMapComponent extends Component {
     this.listings = [];
     this.mapRef = null;
 
-    if (typeof window !== 'undefined' && !window.mapReattachmentCount) {
-      window.mapReattachmentCount = 0;
+    let mapReattachmentCount = 0;
+
+    if (typeof window !== 'undefined') {
+      if (window.mapReattachmentCount) {
+        mapReattachmentCount = window.mapReattachmentCount;
+      } else {
+        window.mapReattachmentCount = 0;
+      }
     }
-    const mapReattachmentCount = window.mapReattachmentCount || 0;
+
     this.state = { infoCardOpen: null, mapReattachmentCount };
 
     this.createURLToListing = this.createURLToListing.bind(this);
