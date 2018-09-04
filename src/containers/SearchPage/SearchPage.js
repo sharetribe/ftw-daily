@@ -5,12 +5,10 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import debounce from 'lodash/debounce';
-import isEqual from 'lodash/isEqual';
 import unionWith from 'lodash/unionWith';
 import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
-import { sdkBoundsToFixedCoordinates, hasSameSDKBounds } from '../../util/googleMaps';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import { parse, stringify } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
@@ -35,7 +33,6 @@ import css from './SearchPage.css';
 const RESULT_PAGE_SIZE = 24;
 const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
-const BOUNDS_FIXED_PRECISION = 8;
 
 export class SearchPageComponent extends Component {
   constructor(props) {
@@ -51,7 +48,6 @@ export class SearchPageComponent extends Component {
     // So, if the search comes from location search input (this.viewportBounds == null),
     // we need to by pass extra searches created by Google Map's 'indle' event.
     // This is done by keeping track of map's viewport bounds (which differ from location bounds)
-    this.viewportBounds = null;
     this.modalOpenedBoundsChange = false;
     this.searchMapListingsInProgress = false;
 
@@ -76,38 +72,10 @@ export class SearchPageComponent extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!isEqual(this.props.location, nextProps.location)) {
-      // If no mapSearch url parameter is given, this is original location search
-      const { mapSearch } = parse(nextProps.location.search, {
-        latlng: ['origin'],
-        latlngBounds: ['bounds'],
-      });
-      if (!mapSearch) {
-        this.viewportBounds = null;
-      }
-    }
-  }
-
   // We are using Google Maps idle event instead of bounds_changed, since it will not be fired
   // too often (in the middle of map's pan or zoom activity)
-  onIdle(map) {
-    const { history, location } = this.props;
-
-    // parse query parameters, including a custom attribute named category
-    const { address, bounds, mapSearch, ...rest } = parse(location.search, {
-      latlng: ['origin'],
-      latlngBounds: ['bounds'],
-    });
-
-    const viewportMapBounds = SearchMap.getMapBounds(map);
-    const viewportMapCenter = SearchMap.getMapCenter(map);
-    const viewportBounds = sdkBoundsToFixedCoordinates(viewportMapBounds, BOUNDS_FIXED_PRECISION);
-
-    // ViewportBounds from (previous) rendering differ from viewportBounds currently set to map
-    // I.e. user has changed the map somehow: moved, panned, zoomed, resized
-    const viewportBoundsChanged =
-      this.viewportBounds && !hasSameSDKBounds(this.viewportBounds, viewportBounds);
+  onIdle(viewportBoundsChanged, data) {
+    const { viewportBounds, viewportCenter } = data;
 
     const routes = routeConfiguration();
     const searchPagePath = pathByRouteName('SearchPage', routes);
@@ -121,7 +89,17 @@ export class SearchPageComponent extends Component {
     // or original location search is rendered once,
     // we start to react to 'bounds_changed' event by generating new searches
     if (viewportBoundsChanged && !this.modalOpenedBoundsChange && isSearchPage) {
-      const originMaybe = config.sortSearchByDistance ? { origin: viewportMapCenter } : {};
+      const { history, location } = this.props;
+
+      // parse query parameters, including a custom attribute named category
+      const { address, bounds, mapSearch, ...rest } = parse(location.search, {
+        latlng: ['origin'],
+        latlngBounds: ['bounds'],
+      });
+
+      //const viewportMapCenter = SearchMap.getMapCenter(map);
+      const originMaybe = config.sortSearchByDistance ? { origin: viewportCenter } : {};
+
       const searchParams = {
         address,
         ...originMaybe,
@@ -130,10 +108,8 @@ export class SearchPageComponent extends Component {
         ...validFilterParams(rest, this.filters()),
       };
 
-      this.viewportBounds = viewportBounds;
       history.push(createResourceLocatorString('SearchPage', routes, {}, searchParams));
     } else {
-      this.viewportBounds = viewportBounds;
       this.modalOpenedBoundsChange = false;
     }
   }
@@ -254,12 +230,13 @@ export class SearchPageComponent extends Component {
                   activeListingId={activeListingId}
                   bounds={bounds}
                   center={origin}
+                  isSearchMapOpenOnMobile={this.state.isSearchMapOpenOnMobile}
+                  location={location}
                   listings={mapListings || []}
                   onIdle={this.onIdle}
                   onCloseAsModal={() => {
                     onManageDisableScrolling('SearchPage.map', false);
                   }}
-                  useLocationSearchBounds={!this.viewportBounds}
                 />
               ) : null}
             </div>

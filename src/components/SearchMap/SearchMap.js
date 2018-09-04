@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { arrayOf, bool, func, number, string, shape, object } from 'prop-types';
+import { arrayOf, func, number, string, shape, object } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
-import isEqual from 'lodash/isEqual';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import { createSlug } from '../../util/urlHelpers';
@@ -59,19 +58,6 @@ export class SearchMapComponent extends Component {
     this.onMapLoadHandler = this.onMapLoadHandler.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.mapRef) {
-      const currentBounds = getMapBounds(this.mapRef);
-
-      // Do not call fitMapToBounds if bounds are the same.
-      // Our bounds are viewport bounds, and fitBounds will try to add margins around those bounds
-      // that would result to zoom-loop (bound change -> fitmap -> bounds change -> ...)
-      if (!isEqual(nextProps.bounds, currentBounds) && nextProps.useLocationSearchBounds) {
-        fitMapToBounds(this.mapRef, nextProps.bounds, 0);
-      }
-    }
-  }
-
   componentWillUnmount() {
     this.listings = [];
   }
@@ -112,9 +98,9 @@ export class SearchMapComponent extends Component {
   onMapLoadHandler(map) {
     this.mapRef = map;
 
-    if (this.mapRef) {
+    if (this.mapRef && this.state.mapReattachmentCount === 0) {
       // map is ready, let's fit search area's bounds to map's viewport
-      fitMapToBounds(this.mapRef, this.props.bounds, 0);
+      fitMapToBounds(this.mapRef, this.props.bounds, { padding: 0, isAutocompleteSearch: true });
     }
   }
 
@@ -123,7 +109,9 @@ export class SearchMapComponent extends Component {
       className,
       rootClassName,
       reusableContainerClassName,
+      bounds,
       center,
+      location,
       listings: originalListings,
       onIdle,
       zoom,
@@ -151,7 +139,9 @@ export class SearchMapComponent extends Component {
     // <SearchMapWithGoogleMap
     //   containerElement={<div className={classes} onClick={this.onMapClicked} />}
     //   mapElement={<div className={mapRootClassName || css.mapRoot} />}
+    //   bounds={bounds}
     //   center={center}
+    //   location={location}
     //   infoCardOpen={infoCardOpen}
     //   listings={listings}
     //   activeListingId={activeListingId}
@@ -160,11 +150,7 @@ export class SearchMapComponent extends Component {
     //   onListingClicked={this.onListingClicked}
     //   onListingInfoCardClicked={this.onListingInfoCardClicked}
     //   onMapLoad={this.onMapLoadHandler}
-    //   onIdle={() => {
-    //     if (this.mapRef) {
-    //       onIdle(this.mapRef);
-    //     }
-    //   }}
+    //   onIdle={onIdle}
     //   zoom={zoom}
     // />
 
@@ -172,7 +158,9 @@ export class SearchMapComponent extends Component {
       <ReusableMapContainer className={reusableContainerClassName} onReattach={forceUpdateHandler}>
         <SearchMapWithMapbox
           className={classes}
+          bounds={bounds}
           center={center}
+          location={location}
           infoCardOpen={infoCardOpen}
           listings={listings}
           activeListingId={activeListingId}
@@ -182,11 +170,7 @@ export class SearchMapComponent extends Component {
           onListingInfoCardClicked={this.onListingInfoCardClicked}
           onMapLoad={this.onMapLoadHandler}
           onClick={this.onMapClicked}
-          onIdle={() => {
-            if (this.mapRef) {
-              onIdle(this.mapRef);
-            }
-          }}
+          onIdle={onIdle}
           zoom={zoom}
         />
       </ReusableMapContainer>
@@ -206,7 +190,6 @@ SearchMapComponent.defaultProps = {
   activeListingId: null,
   listings: [],
   onCloseAsModal: null,
-  useLocationSearchBounds: true,
   zoom: 11,
   mapsConfig: config.maps,
 };
@@ -218,11 +201,13 @@ SearchMapComponent.propTypes = {
   reusableContainerClassName: string,
   bounds: propTypes.latlngBounds,
   center: propTypes.latlng,
+  location: shape({
+    search: string.isRequired,
+  }).isRequired,
   activeListingId: propTypes.uuid,
   listings: arrayOf(propTypes.listing),
   onCloseAsModal: func,
   onIdle: func.isRequired,
-  useLocationSearchBounds: bool, // eslint-disable-line react/no-unused-prop-types
   zoom: number,
   mapsConfig: object,
 
