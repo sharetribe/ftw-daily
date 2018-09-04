@@ -1,16 +1,20 @@
-import React from 'react';
-import { arrayOf, func, number, oneOfType } from 'prop-types';
+import React, { Component } from 'react';
+import { arrayOf, func, number, oneOfType, shape, string } from 'prop-types';
+import isEqual from 'lodash/isEqual';
 import { withGoogleMap, GoogleMap, OverlayView } from 'react-google-maps';
 import { OVERLAY_VIEW } from 'react-google-maps/lib/constants';
 import { types as sdkTypes } from '../../util/sdkLoader';
+import { parse } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
 import { ensureListing } from '../../util/data';
+import { sdkBoundsToFixedCoordinates, hasSameSDKBounds } from '../../util/maps';
 import { SearchMapInfoCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
 
 import { groupedByCoordinates, reducedToArray } from './SearchMap.helpers.js';
 
 export const LABEL_HANDLE = 'SearchMapLabel';
 export const INFO_CARD_HANDLE = 'SearchMapInfoCard';
+const BOUNDS_FIXED_PRECISION = 8;
 
 const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
 
@@ -20,7 +24,9 @@ const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
  * @param {Object} map - map that needs to be centered with given bounds
  * @param {SDK.LatLngBounds} bounds - the area that needs to be visible when map loads.
  */
-export const fitMapToBounds = (map, bounds, padding) => {
+export const fitMapToBounds = (map, bounds, options) => {
+  const { padding } = options;
+
   const { ne, sw } = bounds || {};
   // map bounds as string literal for google.maps
   const mapBounds = bounds ? { north: ne.lat, east: ne.lng, south: sw.lat, west: sw.lng } : null;
@@ -266,7 +272,68 @@ const MapWithGoogleMap = withGoogleMap(props => {
   );
 });
 
-MapWithGoogleMap.defaultProps = {
+class SearchMapWithGoogleMap extends Component {
+  constructor(props) {
+    super(props);
+    this.map = null;
+    this.viewportBounds = null;
+
+    this.onMapLoad = this.onMapLoad.bind(this);
+    this.onIdle = this.onIdle.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!isEqual(this.props.location, nextProps.location)) {
+      // If no mapSearch url parameter is given, this is original location search
+      const { mapSearch } = parse(nextProps.location.search, {
+        latlng: ['origin'],
+        latlngBounds: ['bounds'],
+      });
+      if (!mapSearch) {
+        this.viewportBounds = null;
+      }
+    }
+
+    if (this.map) {
+      const currentBounds = getMapBounds(this.map);
+
+      // Do not call fitMapToBounds if bounds are the same.
+      // Our bounds are viewport bounds, and fitBounds will try to add margins around those bounds
+      // that would result to zoom-loop (bound change -> fitmap -> bounds change -> ...)
+      if (!isEqual(nextProps.bounds, currentBounds) && !this.viewportBounds) {
+        fitMapToBounds(this.map, nextProps.bounds, { padding: 0 });
+      }
+    }
+  }
+
+  onMapLoad(map) {
+    this.map = map;
+    this.props.onMapLoad(map);
+  }
+
+  onIdle(e) {
+    if (this.map) {
+      const viewportMapBounds = getMapBounds(this.map);
+      const viewportMapCenter = getMapCenter(this.map);
+      const viewportBounds = sdkBoundsToFixedCoordinates(viewportMapBounds, BOUNDS_FIXED_PRECISION);
+
+      // ViewportBounds from (previous) rendering differ from viewportBounds currently set to map
+      // I.e. user has changed the map somehow: moved, panned, zoomed, resized
+      const viewportBoundsChanged =
+        this.viewportBounds && !hasSameSDKBounds(this.viewportBounds, viewportBounds);
+
+      this.props.onIdle(viewportBoundsChanged, { viewportBounds, viewportMapCenter });
+      this.viewportBounds = viewportBounds;
+    }
+  }
+
+  render() {
+    const { onMapLoad, onIdle, ...rest } = this.props;
+    return <MapWithGoogleMap onMapLoad={this.onMapLoad} onIdle={this.onIdle} {...rest} />;
+  }
+}
+
+SearchMapWithGoogleMap.defaultProps = {
   center: new sdkTypes.LatLng(0, 0),
   infoCardOpen: null,
   listings: [],
@@ -274,8 +341,11 @@ MapWithGoogleMap.defaultProps = {
   zoom: 11,
 };
 
-MapWithGoogleMap.propTypes = {
+SearchMapWithGoogleMap.propTypes = {
   center: propTypes.latlng,
+  location: shape({
+    search: string.isRequired,
+  }).isRequired,
   infoCardOpen: oneOfType([propTypes.listing, arrayOf(propTypes.listing)]),
   listings: arrayOf(propTypes.listing),
   activeListingId: propTypes.uuid,
@@ -285,4 +355,4 @@ MapWithGoogleMap.propTypes = {
   zoom: number,
 };
 
-export default MapWithGoogleMap;
+export default SearchMapWithGoogleMap;
