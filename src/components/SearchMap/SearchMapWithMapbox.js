@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { arrayOf, func, node, number } from 'prop-types';
+import { arrayOf, func, node, number, shape, string } from 'prop-types';
 import differenceBy from 'lodash/differenceBy';
+import isEqual from 'lodash/isEqual';
 import classNames from 'classnames';
 import { types as sdkTypes } from '../../util/sdkLoader';
+import { parse } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
 import { ensureListing } from '../../util/data';
+import { sdkBoundsToFixedCoordinates, hasSameSDKBounds } from '../../util/maps';
 import { SearchMapInfoCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
 
 import { groupedByCoordinates, reducedToArray } from './SearchMap.helpers.js';
@@ -13,6 +16,8 @@ import css from './SearchMapWithMapbox.css';
 
 export const LABEL_HANDLE = 'SearchMapLabel';
 export const INFO_CARD_HANDLE = 'SearchMapInfoCard';
+export const SOURCE_AUTOCOMPLETE = 'autocomplete';
+const BOUNDS_FIXED_PRECISION = 8;
 
 const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
 
@@ -22,17 +27,17 @@ const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
  * @param {Object} map - map that needs to be centered with given bounds
  * @param {SDK.LatLngBounds} bounds - the area that needs to be visible when map loads.
  */
-export const fitMapToBounds = (map, bounds, padding) => {
+export const fitMapToBounds = (map, bounds, options) => {
+  const { padding = 0, isAutocompleteSearch = false } = options;
+
   // map bounds as string literal for google.maps
   const mapBounds = sdkBoundsToMapboxBounds(bounds);
+  const paddingOptionMaybe = padding == null ? { padding } : {};
+  const eventData = isAutocompleteSearch ? { searchSource: SOURCE_AUTOCOMPLETE } : {};
 
   // If bounds are given, use it (defaults to center & zoom).
   if (map && mapBounds) {
-    if (padding == null) {
-      map.fitBounds(mapBounds);
-    } else {
-      map.fitBounds(mapBounds, { padding, linear: true });
-    }
+    map.fitBounds(mapBounds, { ...paddingOptionMaybe, linear: true, duration: 0 }, eventData);
   }
 };
 
@@ -231,20 +236,49 @@ const infoCardComponent = (
 class SearchMapWithMapbox extends Component {
   constructor(props) {
     super(props);
-    this.map = null;
+    this.map = typeof window !== 'undefined' && window.mapboxMap ? window.mapboxMap : null;
     this.currentMarkers = [];
     this.currentInfoCard = null;
     this.state = { mapContainer: null, isMapReady: false };
+    this.viewportBounds = null;
 
     this.onMount = this.onMount.bind(this);
+    this.onMoveend = this.onMoveend.bind(this);
     this.initializeMap = this.initializeMap.bind(this);
     this.handleDoubleClickOnInfoCard = this.handleDoubleClickOnInfoCard.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!isEqual(this.props.location, nextProps.location)) {
+      // If no mapSearch url parameter is given, this is original location search
+      const { mapSearch } = parse(nextProps.location.search, {
+        latlng: ['origin'],
+        latlngBounds: ['bounds'],
+      });
+      if (!mapSearch) {
+        this.viewportBounds = null;
+      }
+    }
+
+    if (this.map) {
+      const currentBounds = getMapBounds(this.map);
+
+      // Do not call fitMapToBounds if bounds are the same.
+      // Our bounds are viewport bounds, and fitBounds will try to add margins around those bounds
+      // that would result to zoom-loop (bound change -> fitmap -> bounds change -> ...)
+      if (!isEqual(nextProps.bounds, currentBounds) && !this.viewportBounds) {
+        fitMapToBounds(this.map, nextProps.bounds, { padding: 0, isAutocompleteSearch: true });
+      }
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (!this.map && this.state.mapContainer) {
       this.initializeMap();
 
+      /* Notify parent component that Mapbox map is loaded */
+      this.props.onMapLoad(this.map);
+    } else if (prevProps.mapComponentRefreshToken !== this.props.mapComponentRefreshToken) {
       /* Notify parent component that Mapbox map is loaded */
       this.props.onMapLoad(this.map);
     }
@@ -261,6 +295,22 @@ class SearchMapWithMapbox extends Component {
     this.setState({ mapContainer: element });
   }
 
+  onMoveend(e) {
+    if (this.map) {
+      const viewportMapBounds = getMapBounds(this.map);
+      const viewportMapCenter = getMapCenter(this.map);
+      const viewportBounds = sdkBoundsToFixedCoordinates(viewportMapBounds, BOUNDS_FIXED_PRECISION);
+
+      // ViewportBounds from (previous) rendering differ from viewportBounds currently set to map
+      // I.e. user has changed the map somehow: moved, panned, zoomed, resized
+      const viewportBoundsChanged =
+        this.viewportBounds && !hasSameSDKBounds(this.viewportBounds, viewportBounds);
+
+      this.props.onIdle(viewportBoundsChanged, { viewportBounds, viewportMapCenter });
+      this.viewportBounds = viewportBounds;
+    }
+  }
+
   initializeMap() {
     const { offsetHeight, offsetWidth } = this.state.mapContainer;
     const hasDimensions = offsetHeight > 0 && offsetWidth > 0;
@@ -270,11 +320,12 @@ class SearchMapWithMapbox extends Component {
         style: 'mapbox://styles/mapbox/streets-v10',
         scrollZoom: false,
       });
+      window.mapboxMap = this.map;
 
       var nav = new window.mapboxgl.NavigationControl({ showCompass: false });
       this.map.addControl(nav, 'top-left');
 
-      this.map.on('moveend', this.props.onIdle);
+      this.map.on('moveend', this.onMoveend);
 
       // Introduce rerendering after map is ready (to include labels),
       // but keep the map out of state life cycle.
@@ -422,6 +473,9 @@ SearchMapWithMapbox.defaultProps = {
 
 SearchMapWithMapbox.propTypes = {
   center: propTypes.latlng,
+  location: shape({
+    search: string.isRequired,
+  }).isRequired,
   priceLabels: arrayOf(node),
   infoCard: node,
   onClick: func.isRequired,
