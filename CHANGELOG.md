@@ -11,7 +11,9 @@ way to update this template, but currently, we follow a pattern:
 * Patch (v0.0.**X**): Bug fixes and small changes to components.
 
 ---
-## Upcoming version 2018-08-XX
+## Upcoming version 2018-09-XX
+* [fix] Touch event from location autocomplete prediction list ended up causing clicks.
+  [#917](https://github.com/sharetribe/flex-template-web/pull/917)
 * [change] Disable default predictions in listing wizard
   [#906](https://github.com/sharetribe/flex-template-web/pull/906)
 

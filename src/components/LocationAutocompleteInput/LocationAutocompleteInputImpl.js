@@ -64,11 +64,26 @@ const LocationPredictionsList = props => {
       <li
         className={isHighlighted ? css.highlighted : null}
         key={predictionId}
-        onTouchStart={e => onSelectStart(getTouchCoordinates(e.nativeEvent))}
-        onMouseDown={() => onSelectStart()}
-        onTouchMove={e => onSelectMove(getTouchCoordinates(e.nativeEvent))}
-        onTouchEnd={() => onSelectEnd(prediction)}
-        onMouseUp={() => onSelectEnd(prediction)}
+        onTouchStart={e => {
+          e.preventDefault();
+          onSelectStart(getTouchCoordinates(e.nativeEvent));
+        }}
+        onMouseDown={e => {
+          e.preventDefault();
+          onSelectStart();
+        }}
+        onTouchMove={e => {
+          e.preventDefault();
+          onSelectMove(getTouchCoordinates(e.nativeEvent));
+        }}
+        onTouchEnd={e => {
+          e.preventDefault();
+          onSelectEnd(prediction);
+        }}
+        onMouseUp={e => {
+          e.preventDefault();
+          onSelectEnd(prediction);
+        }}
       >
         {predictionId === CURRENT_LOCATION_ID ? (
           <span className={css.currentLocation}>
