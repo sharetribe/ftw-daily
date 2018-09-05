@@ -322,13 +322,13 @@ class SearchMapWithGoogleMap extends Component {
       const viewportBoundsChanged =
         this.viewportBounds && !hasSameSDKBounds(this.viewportBounds, viewportBounds);
 
-      this.props.onIdle(viewportBoundsChanged, { viewportBounds, viewportMapCenter });
+      this.props.onMapMoveEnd(viewportBoundsChanged, { viewportBounds, viewportMapCenter });
       this.viewportBounds = viewportBounds;
     }
   }
 
   render() {
-    const { onMapLoad, onIdle, ...rest } = this.props;
+    const { onMapLoad, onMapMoveEnd, ...rest } = this.props;
     return <MapWithGoogleMap onMapLoad={this.onMapLoad} onIdle={this.onIdle} {...rest} />;
   }
 }
@@ -350,7 +350,7 @@ SearchMapWithGoogleMap.propTypes = {
   listings: arrayOf(propTypes.listing),
   activeListingId: propTypes.uuid,
 
-  onIdle: func.isRequired,
+  onMapMoveEnd: func.isRequired,
   onMapLoad: func.isRequired,
   zoom: number,
 };

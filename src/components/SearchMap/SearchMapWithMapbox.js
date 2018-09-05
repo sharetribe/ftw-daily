@@ -306,7 +306,7 @@ class SearchMapWithMapbox extends Component {
       const viewportBoundsChanged =
         this.viewportBounds && !hasSameSDKBounds(this.viewportBounds, viewportBounds);
 
-      this.props.onIdle(viewportBoundsChanged, { viewportBounds, viewportMapCenter });
+      this.props.onMapMoveEnd(viewportBoundsChanged, { viewportBounds, viewportMapCenter });
       this.viewportBounds = viewportBounds;
     }
   }
@@ -479,7 +479,7 @@ SearchMapWithMapbox.propTypes = {
   priceLabels: arrayOf(node),
   infoCard: node,
   onClick: func.isRequired,
-  onIdle: func.isRequired,
+  onMapMoveEnd: func.isRequired,
   onMapLoad: func.isRequired,
   zoom: number,
 };

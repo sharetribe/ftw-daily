@@ -96,7 +96,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             }
           }
           onCloseAsModal={[Function]}
-          onIdle={[Function]}
+          onMapMoveEnd={[Function]}
         />
       </div>
     </withViewport(ModalInMobileComponent)>
