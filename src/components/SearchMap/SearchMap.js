@@ -119,7 +119,7 @@ export class SearchMapComponent extends Component {
       center,
       location,
       listings: originalListings,
-      onIdle,
+      onMapMoveEnd,
       zoom,
       mapsConfig,
       activeListingId,
@@ -156,7 +156,7 @@ export class SearchMapComponent extends Component {
     //   onListingClicked={this.onListingClicked}
     //   onListingInfoCardClicked={this.onListingInfoCardClicked}
     //   onMapLoad={this.onMapLoadHandler}
-    //   onIdle={onIdle}
+    //   onMapMoveEnd={onMapMoveEnd}
     //   zoom={zoom}
     // />
 
@@ -176,7 +176,7 @@ export class SearchMapComponent extends Component {
           onListingInfoCardClicked={this.onListingInfoCardClicked}
           onMapLoad={this.onMapLoadHandler}
           onClick={this.onMapClicked}
-          onIdle={onIdle}
+          onMapMoveEnd={onMapMoveEnd}
           zoom={zoom}
         />
       </ReusableMapContainer>
@@ -213,7 +213,7 @@ SearchMapComponent.propTypes = {
   activeListingId: propTypes.uuid,
   listings: arrayOf(propTypes.listing),
   onCloseAsModal: func,
-  onIdle: func.isRequired,
+  onMapMoveEnd: func.isRequired,
   zoom: number,
   mapsConfig: object,
 
