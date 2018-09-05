@@ -22,7 +22,8 @@ export const defaultPredictions = (config.maps.search.suggestCurrentLocation
   : []
 ).concat(config.maps.search.defaults);
 
-const DEBOUNCE_WAIT_TIME = 200;
+const DEBOUNCE_WAIT_TIME = 300;
+const DEBOUNCE_WAIT_TIME_FOR_SHORT_QUERIES = 1000;
 const KEY_CODE_ARROW_UP = 38;
 const KEY_CODE_ARROW_DOWN = 40;
 const KEY_CODE_ENTER = 13;
@@ -166,6 +167,7 @@ class LocationAutocompleteInputImpl extends Component {
 
     // Ref to the input element.
     this.input = null;
+    this.shortQueryTimeout = null;
 
     this.getGeocoder = this.getGeocoder.bind(this);
     this.currentPredictions = this.currentPredictions.bind(this);
@@ -188,7 +190,9 @@ class LocationAutocompleteInputImpl extends Component {
   componentDidMount() {
     this._isMounted = true;
   }
+
   componentWillUnmount() {
+    window.clearTimeout(this.shortQueryTimeout);
     this._isMounted = false;
   }
 
@@ -257,7 +261,16 @@ class LocationAutocompleteInputImpl extends Component {
       return;
     }
 
-    this.predict(newValue);
+    if (newValue.length >= 3) {
+      if (this.shortQueryTimeout) {
+        window.clearTimeout(this.shortQueryTimeout);
+      }
+      this.predict(newValue);
+    } else {
+      this.shortQueryTimeout = window.setTimeout(() => {
+        this.predict(newValue);
+      }, DEBOUNCE_WAIT_TIME_FOR_SHORT_QUERIES);
+    }
   }
 
   // Change the currently highlighted item by calculating the new
@@ -322,20 +335,23 @@ class LocationAutocompleteInputImpl extends Component {
       });
   }
   selectItemIfNoneSelected() {
-    const { selectedPlace } = currentValue(this.props);
+    const { search, selectedPlace } = currentValue(this.props);
     const predictions = this.currentPredictions();
     if (!selectedPlace) {
-      const index = this.state.highlightedIndex !== -1 ? this.state.highlightedIndex : 0;
-
-      if (index >= 0 && index < predictions.length) {
+      if (predictions && predictions.length > 0) {
+        const index = this.state.highlightedIndex !== -1 ? this.state.highlightedIndex : 0;
         this.selectPrediction(predictions[index]);
+      } else {
+        this.predict(search).then(() => {
+          this.selectPrediction(predictions[0]);
+        });
       }
     }
   }
   predict(search) {
     const onChange = this.props.input.onChange;
 
-    this.getGeocoder()
+    return this.getGeocoder()
       .getPlacePredictions(search)
       .then(results => {
         const { search: currentSearch } = currentValue(this.props);
