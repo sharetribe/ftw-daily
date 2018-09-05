@@ -43,16 +43,10 @@ export class SearchPageComponent extends Component {
       isMobileModalOpen: false,
     };
 
-    // Initiating map creates 'bounds_changes' event
-    // we listen to that event to make new searches
-    // So, if the search comes from location search input (this.viewportBounds == null),
-    // we need to by pass extra searches created by Google Map's 'indle' event.
-    // This is done by keeping track of map's viewport bounds (which differ from location bounds)
-    this.modalOpenedBoundsChange = false;
     this.searchMapListingsInProgress = false;
 
     this.filters = this.filters.bind(this);
-    this.onIdle = debounce(this.onIdle.bind(this), SEARCH_WITH_MAP_DEBOUNCE);
+    this.onMapMoveEnd = debounce(this.onMapMoveEnd.bind(this), SEARCH_WITH_MAP_DEBOUNCE);
     this.onOpenMobileModal = this.onOpenMobileModal.bind(this);
     this.onCloseMobileModal = this.onCloseMobileModal.bind(this);
   }
@@ -72,9 +66,9 @@ export class SearchPageComponent extends Component {
     };
   }
 
-  // We are using Google Maps idle event instead of bounds_changed, since it will not be fired
-  // too often (in the middle of map's pan or zoom activity)
-  onIdle(viewportBoundsChanged, data) {
+  // Callback to determine if new search is needed
+  // when map is moved by user or viewport has changed
+  onMapMoveEnd(viewportBoundsChanged, data) {
     const { viewportBounds, viewportCenter } = data;
 
     const routes = routeConfiguration();
@@ -82,13 +76,14 @@ export class SearchPageComponent extends Component {
     const currentPath =
       typeof window !== 'undefined' && window.location && window.location.pathname;
 
-    // When using the ReusableMapContainer onIdle can fire from other pages than SearchPage too
+    // When using the ReusableMapContainer onMapMoveEnd can fire from other pages than SearchPage too
     const isSearchPage = currentPath === searchPagePath;
 
-    // If mapSearch url param is given (and we have not just opened mobile map modal)
+    // If mapSearch url param is given
     // or original location search is rendered once,
-    // we start to react to 'bounds_changed' event by generating new searches
-    if (viewportBoundsChanged && !this.modalOpenedBoundsChange && isSearchPage) {
+    // we start to react to "mapmoveend" events by generating new searches
+    // (i.e. 'moveend' event in Mapbox and 'bounds_changed' in Google Maps)
+    if (viewportBoundsChanged && isSearchPage) {
       const { history, location } = this.props;
 
       // parse query parameters, including a custom attribute named category
@@ -109,8 +104,6 @@ export class SearchPageComponent extends Component {
       };
 
       history.push(createResourceLocatorString('SearchPage', routes, {}, searchParams));
-    } else {
-      this.modalOpenedBoundsChange = false;
     }
   }
 
@@ -167,7 +160,6 @@ export class SearchPageComponent extends Component {
 
     const onMapIconClick = () => {
       this.useLocationSearchBounds = true;
-      this.modalOpenedBoundsChange = true;
       this.setState({ isSearchMapOpenOnMobile: true });
     };
 
@@ -233,7 +225,7 @@ export class SearchPageComponent extends Component {
                   isSearchMapOpenOnMobile={this.state.isSearchMapOpenOnMobile}
                   location={location}
                   listings={mapListings || []}
-                  onIdle={this.onIdle}
+                  onMapMoveEnd={this.onMapMoveEnd}
                   onCloseAsModal={() => {
                     onManageDisableScrolling('SearchPage.map', false);
                   }}
