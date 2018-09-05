@@ -12,6 +12,8 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 ## Upcoming version 2018-09-XX
+* [change] Update git links and improve documentation
+  [#911](https://github.com/sharetribe/flex-template-web/pull/911)
 * [change] improve env-template to better defaults.
   [#912](https://github.com/sharetribe/flex-template-web/pull/912)
 * [fix] Touch event from location autocomplete prediction list ended up causing clicks.

@@ -37,6 +37,9 @@ _capacity_ attribute the parameter would be "pub_capacity".
 Further reading on public data can be found in the
 [extended data documentation](./extended-data.md).
 
+**NOTE:** Please contact the Sharetribe support in order to update your listing index schema when
+planning to use new listing fields as search filters.
+
 ### Common changes
 
 A few common changes are required to add a select single or a select multiple filter to desktop and

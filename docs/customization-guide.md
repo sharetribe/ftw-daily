@@ -48,7 +48,7 @@ In the directory you want to create the project in:
 
     git clone git@github.com:YOUR_USERNAME/YOUR_FORK.git                         # clone your fork
     cd YOUR_FORK                                                                 # changed to the cloned directory
-    git remote add upstream git@github.com:sharetribe/sharetribe-starter-app.git # add the template as the upstream remote
+    git remote add upstream git@github.com:sharetribe/flex-template-web.git      # add the template as the upstream remote
 
 See also the
 [Configuring a remote for a fork](https://help.github.com/articles/configuring-a-remote-for-a-fork/)
