@@ -11,7 +11,7 @@ way to update this template, but currently, we follow a pattern:
 * Patch (v0.0.**X**): Bug fixes and small changes to components.
 
 ---
-## Upcoming version 2018-09-XX
+## v1.4.2 2018-09-06
 * [add] Reduce character queries on LocationAutocompleteInput to reduce geocoding costs.
   [#883](https://github.com/sharetribe/flex-template-web/pull/883)
 * [change] Update git links and improve documentation
