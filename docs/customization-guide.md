@@ -136,7 +136,7 @@ To start the test watcher, run
 
     yarn test
 
-See more in the [testing documentation](docs/testing.md).
+See more in the [testing documentation](testing.md).
 
 ## Customization
 
