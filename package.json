@@ -24,6 +24,7 @@
     "final-form-arrays": "^1.0.4",
     "helmet": "^3.12.0",
     "lodash": "^4.17.5",
+    "mapbox-gl-multitouch": "^1.0.3",
     "moment": "^2.20.1",
     "object.entries": "^1.0.4",
     "object.values": "^1.0.4",
