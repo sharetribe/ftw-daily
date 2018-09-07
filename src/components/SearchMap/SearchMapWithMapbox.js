@@ -246,6 +246,7 @@ class SearchMapWithMapbox extends Component {
     this.onMoveend = this.onMoveend.bind(this);
     this.initializeMap = this.initializeMap.bind(this);
     this.handleDoubleClickOnInfoCard = this.handleDoubleClickOnInfoCard.bind(this);
+    this.handleMobilePinchZoom = this.handleMobilePinchZoom.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -289,9 +290,17 @@ class SearchMapWithMapbox extends Component {
       'dblclick',
       this.handleDoubleClickOnInfoCard
     );
+    document.removeEventListener('gesturestart', this.handleMobilePinchZoom, false);
+    document.removeEventListener('gesturechange', this.handleMobilePinchZoom, false);
+    document.removeEventListener('gestureend', this.handleMobilePinchZoom, false);
   }
 
   onMount(element) {
+    // This prevents pinch zoom to affect whole page on mobile Safari.
+    document.addEventListener('gesturestart', this.handleMobilePinchZoom, false);
+    document.addEventListener('gesturechange', this.handleMobilePinchZoom, false);
+    document.addEventListener('gestureend', this.handleMobilePinchZoom, false);
+
     this.setState({ mapContainer: element });
   }
 
@@ -331,6 +340,13 @@ class SearchMapWithMapbox extends Component {
       // but keep the map out of state life cycle.
       this.setState({ isMapReady: true });
     }
+  }
+
+  handleMobilePinchZoom(e) {
+    e.preventDefault();
+    // A hack to prevent pinch zoom gesture in mobile Safari
+    // Otherwise, pinch zoom would zoom both map and the document.
+    document.body.style.zoom = 0.99;
   }
 
   handleDoubleClickOnInfoCard(e) {
