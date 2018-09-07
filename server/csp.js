@@ -44,6 +44,7 @@ const defaultDirectives = {
     'lorempixel.com',
     'via.placeholder.com',
 
+    'api.mapbox.com',
     'maps.googleapis.com',
     '*.gstatic.com',
     '*.googleapis.com',
