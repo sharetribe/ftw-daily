@@ -31,13 +31,14 @@
 
   @media (--viewportMedium) {
     min-height: 500px;
-    height: 80vh;
+    height: 70vh;
     max-height: none;
   }
 
   @media (--viewportLarge) {
+	  max-height: 800px;
     min-height: 600px;
-    height: calc(100vh - var(--topbarHeightDesktop));
+    height: calc(70vh - var(--topbarHeightDesktop));
   }
 }
 
@@ -92,6 +93,11 @@
     margin: var(--LandingPage_sectionMarginTopLarge) auto 93px auto;
     padding: 0 36px 0 36px;
   }
+}
+
+.sectionContentFirstChild {
+	composes: sectionContent;
+	margin-top: 3vh;
 }
 
 /* A bar on top of light sections */

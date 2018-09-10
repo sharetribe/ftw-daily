@@ -177,8 +177,8 @@
     margin: 0;
 
     /* Padding is only for <a> elements where button styles are applied,
-   buttons elements should have zero padding */
-    padding: 20px 0 0 0;
+		buttons elements should have zero padding */
+    padding: 16px 0 0 0;
 
     /* Borders */
     border: none;
@@ -212,6 +212,7 @@
 
     @media (--viewportMedium) {
       min-height: 65px;
+      padding: 20px 0 0 0;
     }
   }
   --marketplaceButtonStylesPrimary {

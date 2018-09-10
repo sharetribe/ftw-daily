@@ -47,15 +47,27 @@
   height: 100%;
 
   /* Text positioning is done with paddings */
-  padding: 0 24px 0 24px;
+}
 
-  @media (--viewportMedium) {
-    padding: 0 0 0 7.5vw;
-  }
+.heroContent {
+  margin: 0 24px 0 24px;
 
-  @media (--viewportLarge) {
-    padding: 0 0 0 15vw;
-  }
+	@media (--viewportMedium) {
+		margin: 0 7.5vw 0 7.5vw;
+	}
+
+	/* Special viewport for adjusting the heroContent's placement */
+
+	@media only screen and (min-width: 1025px) and (max-width: 1366px) {
+		padding: 0 36px 0 36px;
+	}
+
+	@media only screen and (min-width: 1367px) {
+		margin: 0 auto;
+		max-width: calc(1052px + 36px + 36px);
+		width: 100%;
+		padding: 0 36px 0 36px;
+	}
 }
 
 .heroMainTitle {
@@ -85,39 +97,14 @@
   }
 }
 
-.mobileSearchButton {
-  border-radius: 4px;
-  flex-shrink: 0;
-
+.heroButton {
+	@apply --marketplaceButtonStyles;
   @apply --SectionHero_animation;
-  animation-delay: 0.8s;
 
-  @media (--viewportMedium) {
-    display: none;
-  }
-}
-
-.searchIcon {
-  vertical-align: top;
-  stroke: var(--matterColorLight);
-  width: 16px;
-  height: 16px;
-  margin-top: 5px;
-  margin-right: 10px;
-}
-
-.desktopSearchForm {
-  display: none;
-  background-color: var(--matterColorLight);
-  border-bottom: 4px solid var(--marketplaceColor);
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
-
-  @apply --SectionHero_animation;
   animation-delay: 0.8s;
 
   @media (--viewportMedium) {
     display: block;
-    width: 400px;
+    width: 260px;
   }
 }
