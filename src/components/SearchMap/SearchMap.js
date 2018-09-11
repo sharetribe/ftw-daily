@@ -21,6 +21,8 @@ import SearchMapWithMapbox, {
 import ReusableMapContainer from './ReusableMapContainer';
 import css from './SearchMap.css';
 
+const REUSABLE_MAP_HIDDEN_HANDLE = 'reusableMapHidden';
+
 const withCoordinatesObfuscated = listings => {
   return listings.map(listing => {
     const { id, attributes, ...rest } = listing;
@@ -161,7 +163,11 @@ export class SearchMapComponent extends Component {
     // />
 
     return isMapsLibLoaded() ? (
-      <ReusableMapContainer className={reusableContainerClassName} onReattach={forceUpdateHandler}>
+      <ReusableMapContainer
+        className={reusableContainerClassName}
+        reusableMapHiddenHandle={REUSABLE_MAP_HIDDEN_HANDLE}
+        onReattach={forceUpdateHandler}
+      >
         <SearchMapWithMapbox
           className={classes}
           bounds={bounds}
@@ -178,6 +184,7 @@ export class SearchMapComponent extends Component {
           onClick={this.onMapClicked}
           onMapMoveEnd={onMapMoveEnd}
           zoom={zoom}
+          reusableMapHiddenHandle={REUSABLE_MAP_HIDDEN_HANDLE}
         />
       </ReusableMapContainer>
     ) : (
