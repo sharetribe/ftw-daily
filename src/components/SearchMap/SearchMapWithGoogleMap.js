@@ -313,17 +313,30 @@ class SearchMapWithGoogleMap extends Component {
 
   onIdle(e) {
     if (this.map) {
-      const viewportMapBounds = getMapBounds(this.map);
-      const viewportMapCenter = getMapCenter(this.map);
-      const viewportBounds = sdkBoundsToFixedCoordinates(viewportMapBounds, BOUNDS_FIXED_PRECISION);
+      // If reusableMapHiddenHandle is given and parent element has that class,
+      // we don't listen moveend events.
+      // This fixes mobile Chrome bug that sends map events to invisible map components.
+      const isHiddenByReusableMap =
+        this.props.reusableMapHiddenHandle &&
+        this.state.mapContainer.parentElement.classList.contains(
+          this.props.reusableMapHiddenHandle
+        );
+      if (!isHiddenByReusableMap) {
+        const viewportMapBounds = getMapBounds(this.map);
+        const viewportMapCenter = getMapCenter(this.map);
+        const viewportBounds = sdkBoundsToFixedCoordinates(
+          viewportMapBounds,
+          BOUNDS_FIXED_PRECISION
+        );
 
-      // ViewportBounds from (previous) rendering differ from viewportBounds currently set to map
-      // I.e. user has changed the map somehow: moved, panned, zoomed, resized
-      const viewportBoundsChanged =
-        this.viewportBounds && !hasSameSDKBounds(this.viewportBounds, viewportBounds);
+        // ViewportBounds from (previous) rendering differ from viewportBounds currently set to map
+        // I.e. user has changed the map somehow: moved, panned, zoomed, resized
+        const viewportBoundsChanged =
+          this.viewportBounds && !hasSameSDKBounds(this.viewportBounds, viewportBounds);
 
-      this.props.onMapMoveEnd(viewportBoundsChanged, { viewportBounds, viewportMapCenter });
-      this.viewportBounds = viewportBounds;
+        this.props.onMapMoveEnd(viewportBoundsChanged, { viewportBounds, viewportMapCenter });
+        this.viewportBounds = viewportBounds;
+      }
     }
   }
 
@@ -339,6 +352,7 @@ SearchMapWithGoogleMap.defaultProps = {
   listings: [],
   activeListingId: null,
   zoom: 11,
+  reusableMapHiddenHandle: null,
 };
 
 SearchMapWithGoogleMap.propTypes = {
@@ -353,6 +367,7 @@ SearchMapWithGoogleMap.propTypes = {
   onMapMoveEnd: func.isRequired,
   onMapLoad: func.isRequired,
   zoom: number,
+  reusableMapHiddenHandle: string,
 };
 
 export default SearchMapWithGoogleMap;

@@ -48,6 +48,7 @@ class ReusableMapContainer extends React.Component {
 
   componentWillUnmount() {
     this.el.classList.add(css.reusableMapHidden);
+    this.el.classList.add(this.props.reusableMapHiddenHandle);
     this.mountNode.removeChild(this.el);
     document.body.appendChild(this.el);
   }
@@ -90,6 +91,7 @@ class ReusableMapContainer extends React.Component {
       renderChildren();
     } else {
       this.el.classList.remove(css.reusableMapHidden);
+      this.el.classList.remove(this.props.reusableMapHiddenHandle);
 
       if (this.mountNode && !this.mountNode.firstChild) {
         // Move the map to correct location if we have rendered the map before
@@ -125,6 +127,7 @@ ReusableMapContainer.defaultProps = {
 ReusableMapContainer.propTypes = {
   children: node.isRequired,
   className: string,
+  reusableMapHiddenHandle: string.isRequired,
 };
 
 export default ReusableMapContainer;
