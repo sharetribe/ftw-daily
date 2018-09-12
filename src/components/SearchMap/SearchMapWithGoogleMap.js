@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { arrayOf, func, number, oneOfType, shape, string } from 'prop-types';
+import { arrayOf, func, node, number, oneOfType, shape, string } from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import { withGoogleMap, GoogleMap, OverlayView } from 'react-google-maps';
 import { OVERLAY_VIEW } from 'react-google-maps/lib/constants';
@@ -313,14 +313,19 @@ class SearchMapWithGoogleMap extends Component {
 
   onIdle(e) {
     if (this.map) {
+      // Let's try to find the map container element
+      const mapContainer = this.props.containerElement.props.id
+        ? document.getElementById(this.props.containerElement.props.id)
+        : null;
+
       // If reusableMapHiddenHandle is given and parent element has that class,
       // we don't listen moveend events.
       // This fixes mobile Chrome bug that sends map events to invisible map components.
       const isHiddenByReusableMap =
         this.props.reusableMapHiddenHandle &&
-        this.state.mapContainer.parentElement.classList.contains(
-          this.props.reusableMapHiddenHandle
-        );
+        mapContainer &&
+        mapContainer.parentElement.classList.contains(this.props.reusableMapHiddenHandle);
+
       if (!isHiddenByReusableMap) {
         const viewportMapBounds = getMapBounds(this.map);
         const viewportMapCenter = getMapCenter(this.map);
@@ -356,6 +361,7 @@ SearchMapWithGoogleMap.defaultProps = {
 };
 
 SearchMapWithGoogleMap.propTypes = {
+  containerElement: node.isRequired,
   center: propTypes.latlng,
   location: shape({
     search: string.isRequired,
