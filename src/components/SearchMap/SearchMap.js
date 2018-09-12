@@ -143,7 +143,9 @@ export class SearchMapComponent extends Component {
     // instead of SearchMapWithMapbox:
     //
     // <SearchMapWithGoogleMap
-    //   containerElement={<div className={classes} onClick={this.onMapClicked} />}
+    //   containerElement={
+    //     <div id="search-map-container" className={classes} onClick={this.onMapClicked} />
+    //   }
     //   mapElement={<div className={mapRootClassName || css.mapRoot} />}
     //   bounds={bounds}
     //   center={center}
