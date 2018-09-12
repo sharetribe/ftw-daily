@@ -49,6 +49,9 @@ export const fitMapToBounds = (map, bounds, options) => {
  * @return {SDKLatLng} - Converted latLng coordinate
  */
 export const googleLatLngToSDKLatLng = googleLatLng => {
+  if (!googleLatLng) {
+    return null;
+  }
   return new SDKLatLng(googleLatLng.lat(), googleLatLng.lng());
 };
 
@@ -329,15 +332,16 @@ class SearchMapWithGoogleMap extends Component {
       if (!isHiddenByReusableMap) {
         const viewportMapBounds = getMapBounds(this.map);
         const viewportMapCenter = getMapCenter(this.map);
-        const viewportBounds = sdkBoundsToFixedCoordinates(
-          viewportMapBounds,
-          BOUNDS_FIXED_PRECISION
-        );
+        const viewportBounds = viewportMapBounds
+          ? sdkBoundsToFixedCoordinates(viewportMapBounds, BOUNDS_FIXED_PRECISION)
+          : null;
 
         // ViewportBounds from (previous) rendering differ from viewportBounds currently set to map
         // I.e. user has changed the map somehow: moved, panned, zoomed, resized
         const viewportBoundsChanged =
-          this.viewportBounds && !hasSameSDKBounds(this.viewportBounds, viewportBounds);
+          this.viewportBounds &&
+          viewportBounds &&
+          !hasSameSDKBounds(this.viewportBounds, viewportBounds);
 
         this.props.onMapMoveEnd(viewportBoundsChanged, { viewportBounds, viewportMapCenter });
         this.viewportBounds = viewportBounds;
