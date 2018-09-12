@@ -104,6 +104,94 @@ const getPixelPositionOffset = (width, height) => {
   return { x: -1 * (width / 2), y: -1 * (height + 3) };
 };
 
+/**
+ * GoogleMaps need to use Google specific OverlayView components and therefore we need to
+ * reduce flickering / rerendering of these overlays through 'shouldComponentUpdate'
+ */
+class SearchMapPriceLabelWithOverlay extends Component {
+  shouldComponentUpdate(nextProps) {
+    const currentListing = ensureListing(this.props.listing);
+    const nextListing = ensureListing(nextProps.listing);
+    const isSameListing = currentListing.id.uuid === nextListing.id.uuid;
+    const hasSamePrice = currentListing.attributes.price === nextListing.attributes.price;
+    const hasSameActiveStatus = this.props.isActive === nextProps.isActive;
+    const hasSameRefreshToken =
+      this.props.mapComponentRefreshToken === nextProps.mapComponentRefreshToken;
+
+    return !(isSameListing && hasSamePrice && hasSameActiveStatus && hasSameRefreshToken);
+  }
+
+  render() {
+    const {
+      position,
+      mapPaneName,
+      isActive,
+      className,
+      listing,
+      onListingClicked,
+      mapComponentRefreshToken,
+    } = this.props;
+
+    return (
+      <CustomOverlayView
+        position={position}
+        mapPaneName={mapPaneName}
+        getPixelPositionOffset={getPixelPositionOffset}
+      >
+        <SearchMapPriceLabel
+          isActive={isActive}
+          className={className}
+          listing={listing}
+          onListingClicked={onListingClicked}
+          mapComponentRefreshToken={mapComponentRefreshToken}
+        />
+      </CustomOverlayView>
+    );
+  }
+}
+
+/**
+ * GoogleMaps need to use Google specific OverlayView components and therefore we need to
+ * reduce flickering / rerendering of these overlays through 'shouldComponentUpdate'
+ */
+class SearchMapGroupLabelWithOverlay extends Component {
+  shouldComponentUpdate(nextProps) {
+    const hasSameAmountOfListings = nextProps.listings.length === this.props.listings.length;
+    const hasSameActiveStatus = this.props.isActive === nextProps.isActive;
+    const hasSameRefreshToken =
+      this.props.mapComponentRefreshToken === nextProps.mapComponentRefreshToken;
+
+    return !(hasSameAmountOfListings && hasSameActiveStatus && hasSameRefreshToken);
+  }
+
+  render() {
+    const {
+      position,
+      mapPaneName,
+      isActive,
+      className,
+      listings,
+      onListingClicked,
+      mapComponentRefreshToken,
+    } = this.props;
+    return (
+      <CustomOverlayView
+        position={position}
+        mapPaneName={mapPaneName}
+        getPixelPositionOffset={getPixelPositionOffset}
+      >
+        <SearchMapGroupLabel
+          isActive={isActive}
+          className={className}
+          listings={listings}
+          onListingClicked={onListingClicked}
+          mapComponentRefreshToken={mapComponentRefreshToken}
+        />
+      </CustomOverlayView>
+    );
+  }
+}
+
 const priceLabelsInLocations = (
   listings,
   activeListingId,
@@ -132,43 +220,35 @@ const priceLabelsInLocations = (
       const latLngLiteral = { lat: geolocation.lat, lng: geolocation.lng };
 
       return (
-        <CustomOverlayView
+        <SearchMapPriceLabelWithOverlay
           key={listing.id.uuid}
           position={latLngLiteral}
           mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-          getPixelPositionOffset={getPixelPositionOffset}
-        >
-          <SearchMapPriceLabel
-            isActive={isActive}
-            className={LABEL_HANDLE}
-            listing={listing}
-            onListingClicked={onListingClicked}
-            mapComponentRefreshToken={mapComponentRefreshToken}
-          />
-        </CustomOverlayView>
+          isActive={isActive}
+          className={LABEL_HANDLE}
+          listing={listing}
+          onListingClicked={onListingClicked}
+          mapComponentRefreshToken={mapComponentRefreshToken}
+        />
       );
     }
 
     // Explicit type change to object literal for Google OverlayViews (geolocation is SDK type)
-    const firstListing = ensureListing(listings[0]);
+    const firstListing = ensureListing(listingArr[0]);
     const geolocation = firstListing.attributes.geolocation;
     const latLngLiteral = { lat: geolocation.lat, lng: geolocation.lng };
 
     return (
-      <CustomOverlayView
+      <SearchMapGroupLabelWithOverlay
         key={listingArr[0].id.uuid}
         position={latLngLiteral}
         mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-        getPixelPositionOffset={getPixelPositionOffset}
-      >
-        <SearchMapGroupLabel
-          isActive={isActive}
-          className={LABEL_HANDLE}
-          listings={listingArr}
-          onListingClicked={onListingClicked}
-          mapComponentRefreshToken={mapComponentRefreshToken}
-        />
-      </CustomOverlayView>
+        isActive={isActive}
+        className={LABEL_HANDLE}
+        listings={listingArr}
+        onListingClicked={onListingClicked}
+        mapComponentRefreshToken={mapComponentRefreshToken}
+      />
     );
   });
   return priceLabels;
