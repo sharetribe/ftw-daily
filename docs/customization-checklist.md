@@ -11,7 +11,8 @@ Some generic things to update and check when starting to customize the template.
 * [Terms of Service](terms-of-service-and-privacy-policy.md#terms-of-service)
 * [Privacy Policy](terms-of-service-and-privacy-policy.md#privacy-policy)
 * [Social media sharing graphics](../src/components/Page/Page.js);
-* [Logo](../src/components/Logo/Logo.js) Change and check that it works on Topbar, Footer, and CheckoutPage
+* [Logo](../src/components/Logo/Logo.js) Change and check that it works on Topbar, Footer, and
+  CheckoutPage
 * [Default background image](../src/assets/background-1440.jpg)
 * [Maps Marker icon](../src/components/Map/images/marker-32x32.png)
 * [Config: update environment variables](../src/config.js)

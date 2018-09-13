@@ -11,20 +11,20 @@ way to update this template, but currently, we follow a pattern:
 * Patch (v0.0.**X**): Bug fixes and small changes to components.
 
 ---
+
 ## v1.4.3 2018-09-15
+
 * [fix] fuzzy location didn't change when listing location changed.
   [#931](https://github.com/sharetribe/flex-template-web/pull/931)
-* [fix] obfuscatedCoordinatesImpl didn't always return coordinates within given
-  offset radius.
+* [fix] obfuscatedCoordinatesImpl didn't always return coordinates within given offset radius.
   [#930](https://github.com/sharetribe/flex-template-web/pull/930)
-* [fix] LocationAutocompleteInput: blur input when selecting by enter
-  to prevent flash of default predictions.
-  [#928](https://github.com/sharetribe/flex-template-web/pull/928)
-* [fix] LocationAutocompleteInput: selecting with enter key prevented
-  while fetching predictions.
+* [fix] LocationAutocompleteInput: blur input when selecting by enter to prevent flash of default
+  predictions. [#928](https://github.com/sharetribe/flex-template-web/pull/928)
+* [fix] LocationAutocompleteInput: selecting with enter key prevented while fetching predictions.
   [#923](https://github.com/sharetribe/flex-template-web/pull/923)
 
 ## v1.4.2 2018-09-06
+
 * [add] Reduce character queries on LocationAutocompleteInput to reduce geocoding costs.
   [#883](https://github.com/sharetribe/flex-template-web/pull/883)
 * [change] Update git links and improve documentation
@@ -37,26 +37,24 @@ way to update this template, but currently, we follow a pattern:
   [#906](https://github.com/sharetribe/flex-template-web/pull/906)
 
 ## v1.4.1 2018-08-21
+
 * [fix] Fix window resize redirecting to search page with reusable map component
   [#905](https://github.com/sharetribe/flex-template-web/pull/905)
 
-* [change] Maps configuration has been restructured. The new
-  configuration is agnostic of the maps provider in use and works with
-  both Google Maps as well as Mapbox.
+* [change] Maps configuration has been restructured. The new configuration is agnostic of the maps
+  provider in use and works with both Google Maps as well as Mapbox.
 
-  The fuzzy location circle has less configuration, but otherwise all
-  the previous settings can be set also in the new configuration. See
-  `config.js` for details.
+  The fuzzy location circle has less configuration, but otherwise all the previous settings can be
+  set also in the new configuration. See `config.js` for details.
 
-  The default location searches are now enabled in the
-  `.env-template`. For old installations, the
-  `REACT_APP_DEFAULT_SEARCHES_ENABLED` env var should be set to
-  `true`. The default searches can then be configured in
-  `src/default-location-searches.js`.
+  The default location searches are now enabled in the `.env-template`. For old installations, the
+  `REACT_APP_DEFAULT_SEARCHES_ENABLED` env var should be set to `true`. The default searches can
+  then be configured in `src/default-location-searches.js`.
 
   [#900](https://github.com/sharetribe/flex-template-web/pull/900)
 
 ## v1.4.0 2018-08-17
+
 * [change] Put availability calendar behind a feature flag
   [#902](https://github.com/sharetribe/flex-template-web/pull/902)
 * [fix] Drop date time from time slots request query params
@@ -65,37 +63,36 @@ way to update this template, but currently, we follow a pattern:
   [#901](https://github.com/sharetribe/flex-template-web/pull/901)
 * [add] Map component (used in ListingPage) using Mapbox instead of Google Maps
   [#896](https://github.com/sharetribe/flex-template-web/pull/896)
-* [add] Listing availability
-  [#868](https://github.com/sharetribe/flex-template-web/pull/868), [#873](https://github.com/sharetribe/flex-template-web/pull/873), [#891](https://github.com/sharetribe/flex-template-web/pull/891) & [#892](https://github.com/sharetribe/flex-template-web/pull/892)
-* [add] Add support for user's current location as a default
-  suggestion in the location autocomplete search.
-  [#895](https://github.com/sharetribe/flex-template-web/pull/895)
-* [add] Add support for default locations in the
-  LocationAutocompleteInput component. Common searches can be
-  configured to show when the input has focus. This reduces typing and
-  Google Places geolocation API usage. The defaults can be configured
-  in `src/components/LocationAutocompleteInput/GeocoderGoogleMaps.js`.
+* [add] Listing availability [#868](https://github.com/sharetribe/flex-template-web/pull/868),
+  [#873](https://github.com/sharetribe/flex-template-web/pull/873),
+  [#891](https://github.com/sharetribe/flex-template-web/pull/891) &
+  [#892](https://github.com/sharetribe/flex-template-web/pull/892)
+* [add] Add support for user's current location as a default suggestion in the location autocomplete
+  search. [#895](https://github.com/sharetribe/flex-template-web/pull/895)
+* [add] Add support for default locations in the LocationAutocompleteInput component. Common
+  searches can be configured to show when the input has focus. This reduces typing and Google Places
+  geolocation API usage. The defaults can be configured in
+  `src/components/LocationAutocompleteInput/GeocoderGoogleMaps.js`.
   [#894](https://github.com/sharetribe/flex-template-web/pull/894)
-* [change] Removed the `country` parameter from the search page as it
-  was not used anywhere.
+* [change] Removed the `country` parameter from the search page as it was not used anywhere.
   [#893](https://github.com/sharetribe/flex-template-web/pull/893)
 
 ## v1.3.2 2018-08-07
-* [change] Update the Sharetribe Flex SDK to the 1.0.0 version in NPM.
-  All the `sharetribe-sdk` imports are now using the new package name
-  `sharetribe-flex-sdk`.
+
+* [change] Update the Sharetribe Flex SDK to the 1.0.0 version in NPM. All the `sharetribe-sdk`
+  imports are now using the new package name `sharetribe-flex-sdk`.
   [#884](https://github.com/sharetribe/flex-template-web/pull/884)
 * [change] Reusable SearchMap. Fixed the original reverted version. (Includes audit exception 678)
   [#882](https://github.com/sharetribe/flex-template-web/pull/882)
 
 ## v1.3.1
-* [fix] Hotfix: reverting the usage of ReusableMapContainer due to
-  production build error.
+
+* [fix] Hotfix: reverting the usage of ReusableMapContainer due to production build error.
   [#881](https://github.com/sharetribe/flex-template-web/pull/881)
 
 ## v1.3.0
-* [change] Reusable SearchMap.
-  [#877](https://github.com/sharetribe/flex-template-web/pull/877)
+
+* [change] Reusable SearchMap. [#877](https://github.com/sharetribe/flex-template-web/pull/877)
 * [fix] Fix a search filters panel bug where selecting an option in a multi select filter ends up
   invoking a mobile filter callback function.
   [#876](https://github.com/sharetribe/flex-template-web/pull/876)
@@ -103,22 +100,26 @@ way to update this template, but currently, we follow a pattern:
   [#874](https://github.com/sharetribe/flex-template-web/pull/874)
 
 ## v1.2.2
+
 * [change] Change static map to dynamic map when clicked.
   [#871](https://github.com/sharetribe/flex-template-web/pull/871)
 
 ## v1.2.1
+
 * [fix] Lazy load map only if the map is near current viewport.
   [#871](https://github.com/sharetribe/flex-template-web/pull/871)
 
 ## v1.2.0
-* [change] Use Google's static map on ListingPage.
-  This is a reaction to pricing change of Google Maps APIs.
-  [#869](https://github.com/sharetribe/flex-template-web/pull/869)
-* [change] Use sessionTokens and fields for Autocomplete calls to Google Maps.
-  This is a reaction to pricing change of Google Maps APIs.
+
+* [change] Use Google's static map on ListingPage. This is a reaction to pricing change of Google
+  Maps APIs. [#869](https://github.com/sharetribe/flex-template-web/pull/869)
+* [change] Use sessionTokens and fields for Autocomplete calls to Google Maps. This is a reaction to
+  pricing change of Google Maps APIs.
   [#867](https://github.com/sharetribe/flex-template-web/pull/867)
 * [change] Change TransactionPage state management in loadData.
-  [#863](https://github.com/sharetribe/flex-template-web/pull/863), [#865](https://github.com/sharetribe/flex-template-web/pull/865) & [#866](https://github.com/sharetribe/flex-template-web/pull/866)
+  [#863](https://github.com/sharetribe/flex-template-web/pull/863),
+  [#865](https://github.com/sharetribe/flex-template-web/pull/865) &
+  [#866](https://github.com/sharetribe/flex-template-web/pull/866)
 * [fix] Fix submit button state on contact details page.
   [#864](https://github.com/sharetribe/flex-template-web/pull/864)
 * [fix] Fix listing page host section layout bug.
@@ -126,24 +127,23 @@ way to update this template, but currently, we follow a pattern:
 * [fix] Fix initial message input clearing too early in checkout page.
   [#861](https://github.com/sharetribe/flex-template-web/pull/861)
 * [fix] Fix setting Topbar search input initial value.
-* [change] Update Redux to v4
-  [#859](https://github.com/sharetribe/flex-template-web/pull/859)
+* [change] Update Redux to v4 [#859](https://github.com/sharetribe/flex-template-web/pull/859)
 * [fix] Fix setting Topbar search input initial value
   [#857](https://github.com/sharetribe/flex-template-web/pull/857)
 
 ## v1.1.0
+
 * [fix] Improve slug creation (slashes were breaking rendering in some environments)
   [#850](https://github.com/sharetribe/flex-template-web/pull/850)
 * [fix] Anonymous user should see contact link on UserCard
   [#851](https://github.com/sharetribe/flex-template-web/pull/851)
 * [fix] Persisting booking request details across authentication
   [#852](https://github.com/sharetribe/flex-template-web/pull/852)
-* [change] Footer styles changed to more generic (no disappearing columns etc.)
-  If you have made changes to Footer, consider extracting it to different component before update.
+* [change] Footer styles changed to more generic (no disappearing columns etc.) If you have made
+  changes to Footer, consider extracting it to different component before update.
   [#853](https://github.com/sharetribe/flex-template-web/pull/853)
 * [change] Logo customization refactored to be easier. Check CheckoutPage, TopbarDesktop and Footer
-  after update.
-  [#854](https://github.com/sharetribe/flex-template-web/pull/854)
+  after update. [#854](https://github.com/sharetribe/flex-template-web/pull/854)
 * [fix] Fix showing reviews from banned users.
   [#855](https://github.com/sharetribe/flex-template-web/pull/855)
 
@@ -156,9 +156,8 @@ way to update this template, but currently, we follow a pattern:
   [#846](https://github.com/sharetribe/flex-template-web/pull/846)
 * [fix] Add missing styles for ModalMissingInformation from Topbar
   [#847](https://github.com/sharetribe/flex-template-web/pull/847)
-* [fix] API does not return all image variants anymore, this adds correct variants to update
-  contact details call.
-  [#848](https://github.com/sharetribe/flex-template-web/pull/848)
+* [fix] API does not return all image variants anymore, this adds correct variants to update contact
+  details call. [#848](https://github.com/sharetribe/flex-template-web/pull/848)
 
 ## v0.3.1
 
