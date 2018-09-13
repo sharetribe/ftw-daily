@@ -3,8 +3,8 @@ import { bool, number, object, string } from 'prop-types';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import config from '../../config';
-import { StaticMap, DynamicMap, isMapsLibLoaded } from './MapboxMap';
-// import { StaticMap, DynamicMap, isMapsLibLoaded } from './GoogleMap';
+// import { StaticMap, DynamicMap, isMapsLibLoaded } from './MapboxMap';
+import { StaticMap, DynamicMap, isMapsLibLoaded } from './GoogleMap';
 
 import css from './Map.css';
 
