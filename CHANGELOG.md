@@ -12,7 +12,11 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 ## Upcoming version 2018-09-XX
-* [fix] Selecting with enter key prevented while fetching predictions.
+* [fix] LocationAutocompleteInput: blur input when selecting by enter
+  to prevent flash of default predictions.
+  [#928](https://github.com/sharetribe/flex-template-web/pull/928)
+* [fix] LocationAutocompleteInput: selecting with enter key prevented
+  while fetching predictions.
   [#923](https://github.com/sharetribe/flex-template-web/pull/923)
 
 ## v1.4.2 2018-09-06
