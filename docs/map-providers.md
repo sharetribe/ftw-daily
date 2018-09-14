@@ -1,9 +1,6 @@
 # Integrating to map providers
 
-> After Google made significant pricing changes to their Google Map APIs, we pushed hard to reduce
-> the number of calls to the Google Maps API. After careful consideration, we also decided that
-> there needs to be an alternative map provider available for users of Flex Template for Web. We
-> ended up to choose Mapbox since they have been a major innovator in the field.
+Choice of map provider can significantly impact your costs. Flex Template for Web (FTW) originally supported only [Google Maps](./google-maps.md) out of the box, but after Google increased the pricing of its APIs a lot, the default provider was changed to Mapbox. The template now supports both Mapbox and Google Maps, and the map library used by Mapbox is used also by several other map providers, so integrating new providers that support this is rather easy (see instructions at the end of this doc).
 
 ## Setting up the Mapbox integration (the default map provider)
 
@@ -37,7 +34,7 @@ To use default searches, another environment variable needs to be set:
 REACT_APP_DEFAULT_SEARCHES_ENABLED=true
 ```
 
-The default locations have been described in file:
+The default locations are described in
 [src/default-location-searches.js](../src/default-location-searches.js).
 
 The same environment variable also shows "current location" suggestion, which will make the browser
@@ -52,16 +49,14 @@ SearchMap component can't adjust zoom level right for that particular place. The
 default bounding boxes defined to different place types in
 [Mapbox specific geocoder](../src/components/LocationAutocompleteInput/GeocoderMapbox.js).
 
-## Changing to other map providers
+## Changing the map providers
 
-### How to change from Mapbox to Google Map
+### How to change from Mapbox to Google Maps
 
 It is possible to use Google Map instead of the default map provider. Read more from
 [Google Map setup guide](./google-maps.md)
 
 ### How to use other map providers
 
-Our default map setup uses library called `mapbox-gl-js`. It is supported by quite many other map
-providers too. So, as a first step, check if the map provider you are considering is supporting it -
-if so, the change might be quite easy. However, if you change the map tile provider you should also
-change geocoding API too (i.e. the API endpoint for `LocationAutocompleteInput` component).
+The default map setup of FTW uses library called `mapbox-gl-js`. It is supported by quite many other map
+providers too. Thus, if you wish to use a map provider other than Google Maps or Mapbox, first check if the map provider you are considering is supporting this library. If they are, the change might be quite easy. Note: if you change the map tile provider you should also change geocoding API too (i.e. the API endpoint for `LocationAutocompleteInput` component).
