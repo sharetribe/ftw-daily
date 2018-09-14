@@ -12,6 +12,9 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 ## Upcoming version 2018-09-XX
+* [fix] obfuscatedCoordinatesImpl didn't always return coordinates within given
+  offset radius.
+  [#930](https://github.com/sharetribe/flex-template-web/pull/930)
 * [fix] LocationAutocompleteInput: blur input when selecting by enter
   to prevent flash of default predictions.
   [#928](https://github.com/sharetribe/flex-template-web/pull/928)

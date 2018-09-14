@@ -5,24 +5,41 @@ import config from '../config';
 
 const { LatLng } = sdkTypes;
 
+const EARTH_RADIUS = 6371000; /* meters  */
+const DEG_TO_RAD = Math.PI / 180.0;
+const THREE_PI = Math.PI * 3;
+const TWO_PI = Math.PI * 2;
+
+const degToRadians = latlng => {
+  const { lat, lng } = latlng;
+  const latR = lat * DEG_TO_RAD;
+  const lngR = lng * DEG_TO_RAD;
+  return { lat: latR, lng: lngR };
+};
+
+const radToDegrees = latlngInRadians => {
+  const { lat: latR, lng: lngR } = latlngInRadians;
+  const lat = latR / DEG_TO_RAD;
+  const lng = lngR / DEG_TO_RAD;
+  return { lat, lng };
+};
+
 /**
  * This obfuscatedCoordinatesImpl function is a temporary solution for the coordinate obfuscation.
  * In the future, improved version needs to have protectedData working and
  * available in accepted transaction.
+ *
+ * Based on:
+ * https://gis.stackexchange.com/questions/25877/generating-random-locations-nearby#answer-213898
  */
+
 const obfuscatedCoordinatesImpl = (latlng, cacheKey) => {
-  const { lat, lng } = latlng;
+  const { lat, lng } = degToRadians(latlng);
+  const sinLat = Math.sin(lat);
+  const cosLat = Math.cos(lat);
 
-  // https://gis.stackexchange.com/questions/25877/generating-random-locations-nearby
-  const r = config.maps.fuzzy.offset / 111300;
-  const y0 = lat;
-  const x0 = lng;
-
-  // Two seeded random numbers to be used to calculate new location
-  // We need seeded so that the static map URL doesn't change between requests
-  // (i.e. URL is cacheable)
-  const u = cacheKey ? seedrandom(cacheKey)() : Math.random();
-  const v = cacheKey
+  const randomizeBearing = cacheKey ? seedrandom(cacheKey)() : Math.random();
+  const randomizeDistance = cacheKey
     ? seedrandom(
         cacheKey
           .split('')
@@ -30,16 +47,25 @@ const obfuscatedCoordinatesImpl = (latlng, cacheKey) => {
           .join('')
       )()
     : Math.random();
-  const w = r * Math.sqrt(u);
-  const t = 2 * Math.PI * v;
-  const x = w * Math.cos(t);
-  const y1 = w * Math.sin(t);
-  const x1 = x / Math.cos(y0);
 
-  const newLat = y0 + y1;
-  const newLng = x0 + x1;
+  // Randomize distance and bearing
+  const distance = randomizeDistance * config.maps.fuzzy.offset;
+  const bearing = randomizeBearing * TWO_PI;
+  const theta = distance / EARTH_RADIUS;
+  const sinBearing = Math.sin(bearing);
+  const cosBearing = Math.cos(bearing);
+  const sinTheta = Math.sin(theta);
+  const cosTheta = Math.cos(theta);
 
-  return new LatLng(newLat, newLng);
+  const newLat = Math.asin(sinLat * cosTheta + cosLat * sinTheta * cosBearing);
+  const newLng =
+    lng + Math.atan2(sinBearing * sinTheta * cosLat, cosTheta - sinLat * Math.sin(newLat));
+
+  // Normalize -PI -> +PI radians
+  const newLngNormalized = (newLng + THREE_PI) % TWO_PI - Math.PI;
+
+  const result = radToDegrees({ lat: newLat, lng: newLngNormalized });
+  return new LatLng(result.lat, result.lng);
 };
 
 const obfuscationKeyGetter = (latlng, cacheKey) => cacheKey;
