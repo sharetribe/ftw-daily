@@ -12,6 +12,8 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 ## Upcoming version 2018-09-XX
+* [fix] fuzzy location didn't change when listing location changed.
+  [#931](https://github.com/sharetribe/flex-template-web/pull/931)
 * [fix] obfuscatedCoordinatesImpl didn't always return coordinates within given
   offset radius.
   [#930](https://github.com/sharetribe/flex-template-web/pull/930)
