@@ -1,12 +1,12 @@
 # Google Maps
 
-The Flex template for web can use the Google Maps API for showing a map and in searching locations
-in the search autocompletion. This document describes how to set up the API key for the API requests
+Flex Template for Web (FTW) offers out of the box support for Google Maps API for showing a map and searching locations
+with search autocompletion. This document describes how to set up the API key for the API requests
 to work properly.
 
-> Note: before making the change to Google Map, you should consider if you are OK with their current
+> Note: before making the change to Google Maps, you should consider if you are OK with their current
 > pricing. There's a pricing calculator available in their
-> [pricing page](https://cloud.google.com/maps-platform/pricing/)
+> [pricing page](https://cloud.google.com/maps-platform/pricing/). FTW's default map provider is Mapbox, which is often cheaper. [Learn more about how to use Mapbox or some other map provider instead of Google Maps](https://github.com/sharetribe/flex-template-web/blob/e6034c7690c095553f44092b032689cd6b6f7546/docs/map-providers.md).
 
 ## Generate a Google Maps API key
 
@@ -52,6 +52,8 @@ whether to use the current location from [config.js](../src/config.js). Search f
 `suggestCurrentLocation` and `currentLocationBoundsDistance`.
 
 ## Change components: use Google Map versions instead of Mapbox
+
+If you wish to use Google Maps instead of Mapbox, you need to make some changes to FTW default setup.
 
 ### 1. Include Google Map script instead of Mapbox scripts
 
