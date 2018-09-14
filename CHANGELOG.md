@@ -12,6 +12,26 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
+## v2.0.0 2018-09-XX
+
+* [add] New default map provider (Mapbox) and complete refactoring to all map and geocoding
+  components. [#888](https://github.com/sharetribe/flex-template-web/pull/888)
+
+  **Note:** Before updating to version 2.0.0, you should very carefully track customizations that
+  you have made to following components:
+
+  * **LocationAutocompleteInput**
+  * **Map**
+  * **SearchPage** (especially previous `onIdle` function)
+  * **SearchMap**
+  * **SearchMapPriceLabel**
+  * **SearchMapGroupLabel**
+  * **SearchMapInfoCard**
+
+  To get a better understanding of what has changed, you should read documents about how to
+  [integrate to map providers](./docs/map-providers.md) and especially
+  [changing map provider to Google Maps](./docs/google-maps.md)
+
 ## v1.4.3 2018-09-15
 
 * [fix] fuzzy location didn't change when listing location changed.
