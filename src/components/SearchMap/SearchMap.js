@@ -141,8 +141,8 @@ export class SearchMapComponent extends Component {
       this.setState({ mapReattachmentCount: window.mapReattachmentCount });
     };
 
-    // Using Google Maps as map provider should use following component
-    // instead of SearchMapWithMapbox:
+    // When changing from default map provider to Google Maps, you should use the following
+    // component instead of SearchMapWithMapbox:
     //
     // <SearchMapWithGoogleMap
     //   containerElement={

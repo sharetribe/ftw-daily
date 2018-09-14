@@ -152,8 +152,8 @@ Then, in `render` method, you need to put `SearchMapWithGoogleMap` component int
 props is already there in the comments:
 
 ```js
-// Using Google Maps as map provider should use following component
-// instead of SearchMapWithMapbox:
+// When changing from default map provider to Google Maps, you should use the following
+// component instead of SearchMapWithMapbox:
 //
 // <SearchMapWithGoogleMap
 //   containerElement={
