@@ -79,7 +79,9 @@ const reducedToArray = mapListings => {
 const withCoordinatesObfuscated = listings => {
   return listings.map(listing => {
     const { id, attributes, ...rest } = listing;
-    const geolocation = obfuscatedCoordinates(attributes.geolocation, id ? id.uuid : null);
+    const origGeolocation = attributes.geolocation;
+    const cacheKey = id ? `${id.uuid}_${origGeolocation.lat}_${origGeolocation.lng}` : null;
+    const geolocation = obfuscatedCoordinates(origGeolocation, cacheKey);
     return {
       id,
       ...rest,
