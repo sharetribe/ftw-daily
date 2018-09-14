@@ -1,6 +1,11 @@
 # Integrating to map providers
 
-Choice of map provider can significantly impact your costs. Flex Template for Web (FTW) originally supported only [Google Maps](./google-maps.md) out of the box, but after Google increased the pricing of its APIs a lot, the default provider was changed to Mapbox. The template now supports both Mapbox and Google Maps, and the map library used by Mapbox is used also by several other map providers, so integrating new providers that support this is rather easy (see instructions at the end of this doc).
+Choice of map provider can significantly impact your costs. Flex Template for Web (FTW) originally
+supported only [Google Maps](./google-maps.md) out of the box, but after Google increased the
+pricing of its APIs a lot, the default provider was changed to Mapbox. The template now supports
+both Mapbox and Google Maps, and the map library used by Mapbox is used also by several other map
+providers, so integrating new providers that support this is rather easy (see instructions at the
+end of this doc).
 
 ## Setting up the Mapbox integration (the default map provider)
 
@@ -58,5 +63,8 @@ It is possible to use Google Map instead of the default map provider. Read more 
 
 ### How to use other map providers
 
-The default map setup of FTW uses library called `mapbox-gl-js`. It is supported by quite many other map
-providers too. Thus, if you wish to use a map provider other than Google Maps or Mapbox, first check if the map provider you are considering is supporting this library. If they are, the change might be quite easy. Note: if you change the map tile provider you should also change geocoding API too (i.e. the API endpoint for `LocationAutocompleteInput` component).
+The default map setup of FTW uses library called `mapbox-gl-js`. It is supported by quite many other
+map providers too. Thus, if you wish to use a map provider other than Google Maps or Mapbox, first
+check if the map provider you are considering is supporting this library. If they are, the change
+might be quite easy. Note: if you change the map tile provider you should also change geocoding API
+too (i.e. the API endpoint for `LocationAutocompleteInput` component).
