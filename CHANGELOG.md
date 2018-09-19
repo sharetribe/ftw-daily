@@ -12,7 +12,7 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## v2.0.0 2018-09-XX
+## v2.0.0 2018-09-19
 
 * [add] New default map provider (Mapbox) and complete refactoring to all map and geocoding
   components. [#888](https://github.com/sharetribe/flex-template-web/pull/888)
