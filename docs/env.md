@@ -5,7 +5,8 @@ them have defaults that work for development environment. For production deploys
 
 | Variable                                  | Description                                                                                                       |
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| REACT_APP_GOOGLE_MAPS_API_KEY             | See: [Google Maps API key](./google-maps.md)                                                                      |
+| REACT_APP_MAPBOX_ACCESS_TOKEN             | See: [Integrating to map providers](./map-providers.md)                                                           |
+| REACT_APP_GOOGLE_MAPS_API_KEY             | See: [Google Maps API key](./google-maps.md) (Alternative map provider)                                           |
 | REACT_APP_SHARETRIBE_SDK_CLIENT_ID        | Client ID (API key). You will get this from the Sharetribe team.                                                  |
 | REACT_APP_STRIPE_PUBLISHABLE_KEY          | Stripe publishable API key for generating tokens with Stripe API. Use test key (prefix pk*test*) for development. |
 | REACT_APP_SHARETRIBE_SDK_BASE_URL         | The base url to access the Sharetribe Flex Marketplace API.                                                       |

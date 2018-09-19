@@ -35,6 +35,7 @@ Documentation for specific topics can be found in the following files:
 
 * [Customization guide](customization-guide.md)
 * [Folder structure](folder-structure.md)
+* [Integration to map providers](map-providers.md)
 * [Translations](translations.md)
 * [Styling a marketplace](styling.md)
 * [Static pages](static-pages.md)
@@ -49,7 +50,6 @@ Documentation for specific topics can be found in the following files:
 * [Content Security Policy (CSP)](content-security-policy.md)
 * [Original create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md)
 * [Customization checklist](customization-checklist.md)
-* [Google Maps](google-maps.md)
 * [Icons](icons.md)
 
 The application was bootstrapped with a forked version of

@@ -5,6 +5,7 @@ const self = "'self'";
 const unsafeInline = "'unsafe-inline'";
 const unsafeEval = "'unsafe-eval'";
 const data = 'data:';
+const blob = 'blob:';
 const devImagesMaybe = dev ? ['*.localhost:8000'] : [];
 
 // Default CSP whitelist.
@@ -14,10 +15,13 @@ const devImagesMaybe = dev ? ['*.localhost:8000'] : [];
 const defaultDirectives = {
   baseUri: [self],
   defaultSrc: [self],
+  childSrc: [blob],
   connectSrc: [
     self,
     process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL,
     'maps.googleapis.com',
+    '*.tiles.mapbox.com',
+    'api.mapbox.com',
 
     // Google Analytics
     'www.google-analytics.com',
@@ -31,6 +35,7 @@ const defaultDirectives = {
   imgSrc: [
     self,
     data,
+    blob,
     ...devImagesMaybe,
     '*.imgix.net',
     'sharetribe.imgix.net', // Safari 9.1 didn't recognize asterisk rule.
@@ -39,6 +44,7 @@ const defaultDirectives = {
     'lorempixel.com',
     'via.placeholder.com',
 
+    'api.mapbox.com',
     'maps.googleapis.com',
     '*.gstatic.com',
     '*.googleapis.com',
@@ -57,10 +63,11 @@ const defaultDirectives = {
     unsafeEval,
     data,
     'maps.googleapis.com',
+    'api.mapbox.com',
     '*.google-analytics.com',
     'js.stripe.com',
   ],
-  styleSrc: [self, unsafeInline, 'fonts.googleapis.com'],
+  styleSrc: [self, unsafeInline, 'fonts.googleapis.com', 'api.mapbox.com'],
 };
 
 /**
