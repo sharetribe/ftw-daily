@@ -12,6 +12,14 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
+## Upcoming version 2018-09-XX
+
+* [add] New default design for the landing page's hero section. Now the CTA button's default
+  behavior is 'Browse'.
+  * marketplaceH1FontStyles: changed letter spacing to be more tight.
+  * SectionHero has now a search page link that should be customized to point to your marketplace
+    primary area [#933](https://github.com/sharetribe/flex-template-web/pull/933)
+
 ## v2.0.0 2018-09-19
 
 * [add] New default map provider (Mapbox) and complete refactoring to all map and geocoding
