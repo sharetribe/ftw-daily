@@ -36,7 +36,7 @@
   }
 
   @media (--viewportLarge) {
-	  max-height: 800px;
+    max-height: 800px;
     min-height: 600px;
     height: calc(70vh - var(--topbarHeightDesktop));
   }
@@ -96,8 +96,8 @@
 }
 
 .sectionContentFirstChild {
-	composes: sectionContent;
-	margin-top: 3vh;
+  composes: sectionContent;
+  margin-top: 3vh;
 }
 
 /* A bar on top of light sections */

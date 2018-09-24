@@ -13,14 +13,14 @@ const SectionHero = props => {
 
   return (
     <div className={classes}>
-	<div className={css.heroContent}>
-	      <h1 className={css.heroMainTitle}>
-	        <FormattedMessage id="SectionHero.title" />
-	      </h1>
-	      <h2 className={css.heroSubTitle}>
-	        <FormattedMessage id="SectionHero.subTitle" />
-	      </h2>
-	      <NamedLink
+      <div className={css.heroContent}>
+        <h1 className={css.heroMainTitle}>
+          <FormattedMessage id="SectionHero.title" />
+        </h1>
+        <h2 className={css.heroSubTitle}>
+          <FormattedMessage id="SectionHero.subTitle" />
+        </h2>
+        <NamedLink
           name="SearchPage"
           to={{
             search:
@@ -30,7 +30,7 @@ const SectionHero = props => {
         >
           <FormattedMessage id="SectionHero.browseButton" />
         </NamedLink>
-	     </div>
+      </div>
     </div>
   );
 };

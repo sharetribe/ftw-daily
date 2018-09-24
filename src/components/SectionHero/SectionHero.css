@@ -52,22 +52,22 @@
 .heroContent {
   margin: 0 24px 0 24px;
 
-	@media (--viewportMedium) {
-		margin: 0 7.5vw 0 7.5vw;
-	}
+  @media (--viewportMedium) {
+    margin: 0 7.5vw 0 7.5vw;
+  }
 
-	/* Special viewport for adjusting the heroContent's placement */
+  /* Special viewport for adjusting the heroContent's placement */
 
-	@media only screen and (min-width: 1025px) and (max-width: 1366px) {
-		padding: 0 36px 0 36px;
-	}
+  @media only screen and (min-width: 1025px) and (max-width: 1366px) {
+    padding: 0 36px 0 36px;
+  }
 
-	@media only screen and (min-width: 1367px) {
-		margin: 0 auto;
-		max-width: calc(1052px + 36px + 36px);
-		width: 100%;
-		padding: 0 36px 0 36px;
-	}
+  @media only screen and (min-width: 1367px) {
+    margin: 0 auto;
+    max-width: calc(1052px + 36px + 36px);
+    width: 100%;
+    padding: 0 36px 0 36px;
+  }
 }
 
 .heroMainTitle {
@@ -98,7 +98,7 @@
 }
 
 .heroButton {
-	@apply --marketplaceButtonStyles;
+  @apply --marketplaceButtonStyles;
   @apply --SectionHero_animation;
 
   animation-delay: 0.8s;
