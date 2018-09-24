@@ -11,10 +11,6 @@
   }
 }
 
-.paragraph {
-  max-width: 672px;
-}
-
 .locations {
   display: flex;
   flex-direction: column;

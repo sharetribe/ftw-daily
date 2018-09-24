@@ -177,7 +177,7 @@
     margin: 0;
 
     /* Padding is only for <a> elements where button styles are applied,
-   buttons elements should have zero padding */
+		buttons elements should have zero padding */
     padding: 20px 0 0 0;
 
     /* Borders */

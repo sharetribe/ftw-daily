@@ -73,7 +73,7 @@
       margin-bottom: 31px;
     }
 
-    @media (min-width: 1441px) {
+    @media (min-width: 1681px) {
       font-size: 90px;
       line-height: 96px;
       letter-spacing: -2px;
@@ -104,7 +104,7 @@
     font-weight: var(--fontWeightBold);
     font-size: 30px;
     line-height: 36px;
-    letter-spacing: -0.5px;
+    letter-spacing: -1px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 18px;
     margin-bottom: 18px;
@@ -113,7 +113,7 @@
       font-size: 48px;
       font-weight: var(--fontWeightSemiBold);
       line-height: 56px;
-      letter-spacing: -1px;
+      letter-spacing: -2px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 24px;
       margin-bottom: 24px;
