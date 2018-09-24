@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-09-XX
 
+* [change] Change Mapbox's default font to marketplace font.
+  [#934](https://github.com/sharetribe/flex-template-web/pull/934)
+
 * [add] New default design for the landing page's hero section. Now the CTA button's default
   behavior is 'Browse'.
   * marketplaceH1FontStyles: changed letter spacing to be more tight.

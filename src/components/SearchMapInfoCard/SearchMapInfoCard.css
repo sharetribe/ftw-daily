@@ -56,6 +56,12 @@
   }
 }
 
+/* Overwrite Mapbox's specific font rules */
+.root .card {
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  font-weight: var(--fontWeightSemiBold);
+}
+
 .threeToTwoWrapper {
   /* Layout */
   display: block;
