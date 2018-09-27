@@ -21,8 +21,8 @@ key to your application now.
 
 Follow the instructions in the
 [Getting started](https://developers.google.com/maps/documentation/javascript/places#GetStarted)
-section of the Places library documentation to enable using the Google Places API Web Service.
-Also Maps Static API and Maps Javascript API need to be enabled.
+section of the Places library documentation to enable using the Google Places API Web Service. Also
+Maps Static API and Maps Javascript API need to be enabled.
 
 ## Setup the application to use the API key
 

@@ -14,13 +14,18 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-09-XX
 
+* [change] Update sharetribe-scripts. **cssnext** (used previously in sharetribe-scripts) has been
+  deprecated. Now **postcss-preset-env** is used instead with stage 3 + custom media queries and
+  nesting-rules. If this change breaks your styling, you could still use v1.1.2. The next version of
+  [postcss-nesting](https://github.com/jonathantneal/postcss-nesting) (v7.0.0) will no longer
+  support nested at-rules (like media queries) - therefore, we didn't update to that version yet.
+  [#935](https://github.com/sharetribe/flex-template-web/pull/935)
 * [change] Change Mapbox's default font to marketplace font.
   [#934](https://github.com/sharetribe/flex-template-web/pull/934)
-
 * [add] New default design for the landing page's hero section. Now the CTA button's default
   behavior is 'Browse'.
-  * marketplaceH1FontStyles: changed letter spacing to be more tight.
-  * SectionHero has now a search page link that should be customized to point to your marketplace
+  * `marketplaceH1FontStyles`: changed letter spacing to be more tight.
+  * `SectionHero` has now a search page link that should be customized to point to your marketplace
     primary area [#933](https://github.com/sharetribe/flex-template-web/pull/933)
 
 ## v2.0.0 2018-09-19
