@@ -51,6 +51,7 @@ Documentation for specific topics can be found in the following files:
 * [Original create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md)
 * [Customization checklist](customization-checklist.md)
 * [Icons](icons.md)
+* [Improving performance](improving-performance.md)
 
 The application was bootstrapped with a forked version of
 [create-react-app](https://github.com/facebookincubator/create-react-app). While most of the
