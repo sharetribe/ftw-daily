@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
+import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 
 import { NamedLink } from '../../components';
 
@@ -11,13 +12,21 @@ import helsinkiImage from './images/location_helsinki.jpg';
 import rovaniemiImage from './images/location_rovaniemi.jpg';
 import rukaImage from './images/location_ruka.jpg';
 
+class LocationImage extends Component {
+  render() {
+    const { alt, ...rest } = this.props;
+    return <img alt={alt} {...rest} />;
+  }
+}
+const LazyImage = lazyLoadWithDimensions(LocationImage);
+
 const locationLink = (name, image, searchQuery) => {
   const nameText = <span className={css.locationName}>{name}</span>;
   return (
     <NamedLink name="SearchPage" to={{ search: searchQuery }} className={css.location}>
       <div className={css.imageWrapper}>
         <div className={css.aspectWrapper}>
-          <img src={image} alt={name} className={css.locationImage} />
+          <LazyImage src={image} alt={name} className={css.locationImage} />
         </div>
       </div>
       <div className={css.linkText}>
