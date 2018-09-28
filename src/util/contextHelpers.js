@@ -79,7 +79,7 @@ export const withViewport = Component => {
  *
  * @return {Object} HOC component which knows its dimensions
  */
-export const lazyLoadWithDimensions = (Component, options) => {
+export const lazyLoadWithDimensions = (Component, options = {}) => {
   // The resize event is flooded when the browser is resized. We'll
   // use a small timeout to throttle changing the viewport since it
   // will trigger rerendering.
@@ -159,7 +159,10 @@ export const lazyLoadWithDimensions = (Component, options) => {
       const { maxWidth, maxHeight } = options;
       const maxWidthMaybe = maxWidth ? { maxWidth } : {};
       const maxHeightMaybe = maxHeight ? { maxHeight } : {};
-      const style = { width: '100%', height: '100%', ...maxWidthMaybe, ...maxHeightMaybe };
+      const style =
+        maxWidth || maxHeight
+          ? { width: '100%', height: '100%', ...maxWidthMaybe, ...maxHeightMaybe }
+          : { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 };
 
       return (
         <div
