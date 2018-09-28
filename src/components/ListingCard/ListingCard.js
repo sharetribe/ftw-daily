@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { string, func } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
-import { NamedLink, ResponsiveImage } from '../../components';
+import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 import { propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { ensureListing, ensureUser } from '../../util/data';
 import { richText } from '../../util/richText';
 import { createSlug } from '../../util/urlHelpers';
 import config from '../../config';
+import { NamedLink, ResponsiveImage } from '../../components';
 
 import css from './ListingCard.css';
 
@@ -33,6 +34,13 @@ const priceData = (price, intl) => {
   return {};
 };
 
+class ListingImage extends Component {
+  render() {
+    return <ResponsiveImage {...this.props} />;
+  }
+}
+const LazyImage = lazyLoadWithDimensions(ListingImage, { loadAfterInitialRendering: 3000 });
+
 export const ListingCardComponent = props => {
   const { className, rootClassName, intl, listing, renderSizes, setActiveListing } = props;
   const classes = classNames(rootClassName || css.root, className);
@@ -55,7 +63,7 @@ export const ListingCardComponent = props => {
         onMouseLeave={() => setActiveListing(null)}
       >
         <div className={css.aspectWrapper}>
-          <ResponsiveImage
+          <LazyImage
             rootClassName={css.rootForImage}
             alt={title}
             image={firstImage}

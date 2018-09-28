@@ -16,12 +16,9 @@ exports[`ListingCard matches snapshot 1`] = `
     onMouseLeave={[Function]}
   >
     <div>
-      <ResponsiveImage
+      <lazyLoadWithDimensions(ListingImage)
         alt="listing1 title"
-        className={null}
         image={null}
-        noImageMessage={null}
-        rootClassName={null}
         sizes={null}
         variants={
           Array [
