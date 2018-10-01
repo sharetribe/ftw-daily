@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-09-XX
 
+* [change] Improve performance of public pages. Image assets are optimized and lazy loading is
+  applied to images in SectionLocation and ListingCard. Read
+  [documentation](./docs/improving-performance.md) for implementation details.
+  [#936](https://github.com/sharetribe/flex-template-web/pull/936)
 * [change] Update sharetribe-scripts. **cssnext** (used previously in sharetribe-scripts) has been
   deprecated. Now **postcss-preset-env** is used instead with stage 3 + custom media queries and
   nesting-rules. If this change breaks your styling, you could still use v1.1.2. The next version of
