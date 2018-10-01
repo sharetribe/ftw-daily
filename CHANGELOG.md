@@ -12,7 +12,7 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## Upcoming version 2018-09-XX
+## v2.1.0 2018-10-01
 
 * [change] Improve performance of public pages. Image assets are optimized and lazy loading is
   applied to images in SectionLocation and ListingCard. Read
