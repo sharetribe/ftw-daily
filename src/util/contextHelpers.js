@@ -75,11 +75,13 @@ export const withViewport = Component => {
  * the shape `{ width: 600, height: 400}`.
  *
  * @param {React.Component} Component to be wrapped by this HOC
- * @param {Object} options pass in options like maxWidth and maxHeight.
+ * @param {Object} options pass in options like maxWidth and maxHeight. To load component after
+ * initial rendering has passed or after user has interacted with the window (e.g. scrolled),
+ * use`loadAfterInitialRendering: 1500` (value should be milliseconds).
  *
  * @return {Object} HOC component which knows its dimensions
  */
-export const lazyLoadWithDimensions = (Component, options) => {
+export const lazyLoadWithDimensions = (Component, options = {}) => {
   // The resize event is flooded when the browser is resized. We'll
   // use a small timeout to throttle changing the viewport since it
   // will trigger rerendering.
@@ -96,6 +98,7 @@ export const lazyLoadWithDimensions = (Component, options) => {
       super(props);
       this.element = null;
       this.defaultRenderTimeout = null;
+      this.afterRenderTimeout = null;
 
       this.state = { width: 0, height: 0 };
 
@@ -112,6 +115,15 @@ export const lazyLoadWithDimensions = (Component, options) => {
       this.defaultRenderTimeout = window.setTimeout(() => {
         if (this.isElementNearViewport(0)) {
           this.setDimensions();
+        } else {
+          const loadAfterInitialRendering = options.loadAfterInitialRendering;
+          if (typeof loadAfterInitialRendering === 'number') {
+            this.afterRenderTimeout = window.setTimeout(() => {
+              window.requestAnimationFrame(() => {
+                this.setDimensions();
+              });
+            }, loadAfterInitialRendering);
+          }
         }
       }, RENDER_WAIT_MS);
     }
@@ -121,11 +133,18 @@ export const lazyLoadWithDimensions = (Component, options) => {
       window.removeEventListener('resize', this.handleWindowResize);
       window.removeEventListener('orientationchange', this.handleWindowResize);
       window.clearTimeout(this.defaultRenderTimeout);
+
+      if (this.afterRenderTimeout) {
+        window.clearTimeout(this.afterRenderTimeout);
+      }
     }
 
     handleWindowResize() {
-      if (this.isElementNearViewport(NEAR_VIEWPORT_MARGIN)) {
-        this.setDimensions();
+      const shouldLoadToImproveScrolling = typeof options.loadAfterInitialRendering === 'number';
+      if (this.isElementNearViewport(NEAR_VIEWPORT_MARGIN) || shouldLoadToImproveScrolling) {
+        window.requestAnimationFrame(() => {
+          this.setDimensions();
+        });
       }
     }
 
@@ -159,7 +178,10 @@ export const lazyLoadWithDimensions = (Component, options) => {
       const { maxWidth, maxHeight } = options;
       const maxWidthMaybe = maxWidth ? { maxWidth } : {};
       const maxHeightMaybe = maxHeight ? { maxHeight } : {};
-      const style = { width: '100%', height: '100%', ...maxWidthMaybe, ...maxHeightMaybe };
+      const style =
+        maxWidth || maxHeight
+          ? { width: '100%', height: '100%', ...maxWidthMaybe, ...maxHeightMaybe }
+          : { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 };
 
       return (
         <div
