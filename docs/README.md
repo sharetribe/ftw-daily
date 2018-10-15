@@ -40,6 +40,7 @@ Documentation for specific topics can be found in the following files:
 * [Styling a marketplace](styling.md)
 * [Static pages](static-pages.md)
 * [Terms of Service and Privacy Policy](terms-of-service-and-privacy-policy.md)
+* [Redux and duck files](redux.md)
 * [Extended data](extended-data.md)
 * [Extend the listing data model](extend-listing.md)
 * [Search filters](search-filters.md)
