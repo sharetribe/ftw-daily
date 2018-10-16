@@ -13,7 +13,8 @@ way to update this template, but currently, we follow a pattern:
 ---
 
 ## Upcoming version 2018-10-XX
-
+* [add] Add referrer policy due tokens in URL on PasswordResetPage and EmailVerificationPage.
+  [#940](https://github.com/sharetribe/flex-template-web/pull/940)
 * [add] Added initial documentation about our Redux setup.
   [#939](https://github.com/sharetribe/flex-template-web/pull/939)
 * [add] Added a small comment to documentation about the current state of code-splitting.
