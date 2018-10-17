@@ -99,7 +99,7 @@ export const findRouteByRouteName = (nameToFind, routes) => {
  * @return {String} Canonical URL of the given location
  *
  */
-export const canonicalRoutePath = (routes, location) => {
+export const canonicalRoutePath = (routes, location, pathOnly = false) => {
   const { pathname, search, hash } = location;
 
   const matches = matchPathname(pathname, routes);
@@ -116,8 +116,8 @@ export const canonicalRoutePath = (routes, location) => {
       throw new Error('Expected ListingPage route to have 4 parts');
     }
     const canonicalListingPathname = `/${parts[1]}/${parts[3]}`;
-    return `${canonicalListingPathname}${search}${hash}`;
+    return pathOnly ? canonicalListingPathname : `${canonicalListingPathname}${search}${hash}`;
   }
 
-  return `${pathname}${search}${hash}`;
+  return pathOnly ? pathname : `${pathname}${search}${hash}`;
 };
