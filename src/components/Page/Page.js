@@ -67,6 +67,7 @@ class PageComponent extends Component {
       location,
       intl,
       scrollingDisabled,
+      referrer,
       author,
       contentType,
       description,
@@ -84,8 +85,11 @@ class PageComponent extends Component {
       [css.scrollingDisabled]: scrollingDisabled,
     });
 
+    const referrerMeta = referrer ? <meta name="referrer" content={referrer} /> : null;
+
     const canonicalRootURL = config.canonicalRootURL;
-    const canonicalPath = canonicalRoutePath(routeConfiguration(), location);
+    const shouldReturnPathOnly = referrer && referrer !== 'unsafe-url';
+    const canonicalPath = canonicalRoutePath(routeConfiguration(), location, shouldReturnPathOnly);
     const canonicalUrl = `${canonicalRootURL}${canonicalPath}`;
 
     const siteTitle = config.siteTitle;
@@ -186,6 +190,7 @@ class PageComponent extends Component {
           }}
         >
           <title>{title}</title>
+          {referrerMeta}
           <link rel="canonical" href={canonicalUrl} />
           <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
           <meta httpEquiv="Content-Language" content={intl.locale} />
@@ -219,6 +224,7 @@ PageComponent.defaultProps = {
   facebookImages: null,
   twitterImages: null,
   published: null,
+  referrer: null,
   schema: null,
   tags: null,
   twitterHandle: null,
@@ -230,6 +236,9 @@ PageComponent.propTypes = {
   rootClassName: string,
   children: any,
   scrollingDisabled: bool.isRequired,
+
+  // Handle referrer policy
+  referrer: string,
 
   // SEO related props
   author: string,

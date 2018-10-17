@@ -121,7 +121,7 @@ export class PasswordResetPageComponent extends Component {
     }
 
     return (
-      <Page title={title} scrollingDisabled={scrollingDisabled}>
+      <Page title={title} scrollingDisabled={scrollingDisabled} referrer="origin">
         <LayoutSingleColumn>
           <LayoutWrapperTopbar>
             <TopbarContainer />
