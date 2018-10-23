@@ -1,8 +1,0 @@
-Hello {{recipient.first-name}},
-
-Your {{marketplace.name}} account's email address was changed.
-
-If you didn't make this change, please contact us.
-
-Best regards,
-The {{marketplace.name}} team

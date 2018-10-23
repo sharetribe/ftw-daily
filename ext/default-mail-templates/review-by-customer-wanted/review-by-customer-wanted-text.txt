@@ -1,9 +1,0 @@
-
-{{~#with transaction~}}
-
-How was your experience with {{listing.title}}? Write a review!
-
-You recently booked {{listing.title}} from {{provider.display-name}}. Please write a review to describe your experience. Reviews are important part of the {{marketplace.name}} community.
-
-Leave a review: {{marketplace.url}}/order/{{url-encode id}}/details
-{{~/with~}}
