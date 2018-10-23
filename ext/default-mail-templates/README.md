@@ -9,15 +9,14 @@ automatically. Marketplace owner needs to notify the Sharetribe team.
 
 ## Template parts
 
-A template consists of three files:
+A template consists of two files:
 
 * `TEMPLATE_NAME-subject.txt` - holds the mail Subject line template
-* `TEMPLATE_NAME-text.txt` - holds the template for the plain text version of the mail
 * `TEMPLATE_NAME-html.html` - contains the template for the HTML version of the mail
 
-All the parts are mandatory. All emails that are sent from the marketplace contain both the plain
-text and HTML variants and the recipient's mail client is free to choose which one to visualize and
-how.
+Both parts are mandatory. All emails that are sent from the marketplace contain both the HTML and plain
+text variants and the recipient's mail client is free to choose which one to visualize and
+how. The text version is automatically generated from the HTML template.
 
 ## Template syntax
 
@@ -37,19 +36,6 @@ Example html:
     <p>Best regards,<br />The {{marketplace.name}} team</p>
   </body>
 </html>
-```
-
-Example text version:
-
-```
-Hello {{recipient.first-name}},
-
-Your {{marketplace.name}} account's email address was changed.
-
-If you didn't make this change, please contact us.
-
-Best regards,
-The {{marketplace.name}} team
 ```
 
 Variables within `{{ }}` are expanded and escaped, so that they are safe to place inside HTML
