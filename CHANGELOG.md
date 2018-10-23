@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-10-XX
 
+* [add] Added initial documentation about routing and loading data.
+  [#941](https://github.com/sharetribe/flex-template-web/pull/941)
 * [remove] Removed plain text parts of email templates.
   [#942](https://github.com/sharetribe/flex-template-web/pull/942)
 * [add] Add referrer policy due tokens in URL on PasswordResetPage and EmailVerificationPage.
