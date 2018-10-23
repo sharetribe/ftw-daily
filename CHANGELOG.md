@@ -12,7 +12,7 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## Upcoming version 2018-10-XX
+## v.2.1.1 2018-10-23
 
 * [add] Added initial documentation about routing and loading data.
   [#941](https://github.com/sharetribe/flex-template-web/pull/941)
