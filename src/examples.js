@@ -54,7 +54,6 @@ import * as StripeBankAccountTokenInputField from './components/StripeBankAccoun
 import * as TabNav from './components/TabNav/TabNav.example';
 import * as TabNavHorizontal from './components/TabNavHorizontal/TabNavHorizontal.example';
 import * as Tabs from './components/Tabs/Tabs.example';
-import * as TopbarDesktop from './components/TopbarDesktop/TopbarDesktop.example';
 import * as UserCard from './components/UserCard/UserCard.example';
 
 // forms
@@ -140,6 +139,7 @@ export {
   PasswordResetForm,
   PayoutDetailsForm,
   PropertyGroup,
+  RangeSlider,
   ResponsiveImage,
   ReviewForm,
   ReviewRating,
@@ -154,7 +154,6 @@ export {
   TabNav,
   TabNavHorizontal,
   Tabs,
-  TopbarDesktop,
   Typography,
   UserCard,
 };
