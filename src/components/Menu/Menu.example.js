@@ -44,7 +44,7 @@ export const MenuBasic = {
 
 const MenuOnRight = () => {
   return (
-    <div style={{ width: '50px', marginLeft: 'auto', marginRight: '36px' }}>
+    <div style={{ width: '68px', marginLeft: 'auto', marginRight: '36x' }}>
       <MenuWrapper />
     </div>
   );
