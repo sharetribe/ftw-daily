@@ -1,6 +1,8 @@
 import unionWith from 'lodash/unionWith';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { convertUnitToSubUnit, unitDivisor } from '../../util/currency';
+import config from '../../config';
 
 // ================ Action types ================ //
 
@@ -118,9 +120,22 @@ export const searchMapListingsError = e => ({
 export const searchListings = searchParams => (dispatch, getState, sdk) => {
   dispatch(searchListingsRequest(searchParams));
 
-  const { perPage, ...rest } = searchParams;
+  const priceSearchParams = priceParam => {
+    const inSubunits = value =>
+      convertUnitToSubUnit(value, unitDivisor(config.currencyConfig.currency));
+    const values = priceParam ? priceParam.split(',') : [];
+    return priceParam && values.length === 2
+      ? {
+          price: [inSubunits(values[0]), inSubunits(values[1]) + 1].join(','),
+        }
+      : {};
+  };
+
+  const { perPage, price, ...rest } = searchParams;
+  const priceMaybe = priceSearchParams(price);
   const params = {
     ...rest,
+    ...priceMaybe,
     per_page: perPage,
   };
 
