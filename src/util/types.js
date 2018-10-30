@@ -415,7 +415,7 @@ propTypes.pagination = shape({
 });
 
 // Search filter definition
-propTypes.filterConfig = shape({
+const filterWithOptions = shape({
   paramName: string.isRequired,
   options: arrayOf(
     shape({
@@ -424,6 +424,16 @@ propTypes.filterConfig = shape({
     })
   ).isRequired,
 });
+const filterWithPriceConfig = shape({
+  paramName: string.isRequired,
+  config: shape({
+    min: number.isRequired,
+    max: number.isRequired,
+    step: number.isRequired,
+  }).isRequired,
+});
+
+propTypes.filterConfig = oneOfType([filterWithOptions, filterWithPriceConfig]);
 
 export const ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND = 'transaction-listing-not-found';
 export const ERROR_CODE_TRANSACTION_INVALID_TRANSITION = 'transaction-invalid-transition';

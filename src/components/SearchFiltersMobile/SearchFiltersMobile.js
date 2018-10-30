@@ -11,11 +11,14 @@ import {
   SecondaryButton,
   ModalInMobile,
   Button,
+  PriceFilter,
   SelectSingleFilterPlain,
   SelectMultipleFilterPlain,
 } from '../../components';
 import { propTypes } from '../../util/types';
 import css from './SearchFiltersMobile.css';
+
+const RADIX = 10;
 
 class SearchFiltersMobileComponent extends Component {
   constructor(props) {
@@ -28,8 +31,10 @@ class SearchFiltersMobileComponent extends Component {
     this.resetAll = this.resetAll.bind(this);
     this.handleSelectSingle = this.handleSelectSingle.bind(this);
     this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
+    this.handlePrice = this.handlePrice.bind(this);
     this.initialValue = this.initialValue.bind(this);
     this.initialValues = this.initialValues.bind(this);
+    this.initialPriceRangeValue = this.initialPriceRangeValue.bind(this);
   }
 
   // Open filters modal, set the initial parameters to current ones
@@ -84,6 +89,17 @@ class SearchFiltersMobileComponent extends Component {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   }
 
+  handlePrice(urlParam, range) {
+    const { urlQueryParams, history } = this.props;
+    const { minPrice, maxPrice } = range || {};
+    const queryParams =
+      minPrice != null && maxPrice != null
+        ? { ...urlQueryParams, [urlParam]: `${minPrice},${maxPrice}` }
+        : omit(urlQueryParams, urlParam);
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  }
+
   // Reset all filter query parameters
   resetAll(e) {
     const { urlQueryParams, history, filterParamNames } = this.props;
@@ -108,6 +124,19 @@ class SearchFiltersMobileComponent extends Component {
     return !!urlQueryParams[paramName] ? urlQueryParams[paramName].split(',') : [];
   }
 
+  initialPriceRangeValue(paramName) {
+    const urlQueryParams = this.props.urlQueryParams;
+    const price = urlQueryParams[paramName];
+    const valuesFromParams = !!price ? price.split(',').map(v => Number.parseInt(v, RADIX)) : [];
+
+    return !!price && valuesFromParams.length === 2
+      ? {
+          minPrice: valuesFromParams[0],
+          maxPrice: valuesFromParams[1],
+        }
+      : null;
+  }
+
   render() {
     const {
       rootClassName,
@@ -121,6 +150,7 @@ class SearchFiltersMobileComponent extends Component {
       selectedFiltersCount,
       categoryFilter,
       amenitiesFilter,
+      priceFilter,
       intl,
     } = this.props;
 
@@ -182,6 +212,19 @@ class SearchFiltersMobileComponent extends Component {
       />
     ) : null;
 
+    const initialPriceRange = this.initialPriceRangeValue(priceFilter.paramName);
+
+    const priceFilterElement = priceFilter ? (
+      <PriceFilter
+        id="SearchFiltersMobile.priceFilter"
+        urlParam={priceFilter.paramName}
+        onSubmit={this.handlePrice}
+        liveEdit
+        {...priceFilter.config}
+        initialValues={initialPriceRange}
+      />
+    ) : null;
+
     return (
       <div className={classes}>
         <div className={css.searchResultSummary}>
@@ -213,6 +256,7 @@ class SearchFiltersMobileComponent extends Component {
           <div className={css.filtersWrapper}>
             {categoryFilterElement}
             {amenitiesFilterElement}
+            {priceFilterElement}
           </div>
           <div className={css.showListingsContainer}>
             <Button className={css.showListingsButton} onClick={this.closeFilters}>
