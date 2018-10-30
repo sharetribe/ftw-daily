@@ -66,6 +66,14 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             ],
             "paramName": "pub_category",
           },
+          "priceFilter": Object {
+            "config": Object {
+              "max": 1000,
+              "min": 0,
+              "step": 5,
+            },
+            "paramName": "price",
+          },
         }
       }
       resultsCount={0}
