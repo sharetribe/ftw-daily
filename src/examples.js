@@ -44,6 +44,7 @@ import * as Modal from './components/Modal/Modal.example';
 import * as ModalInMobile from './components/ModalInMobile/ModalInMobile.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
 import * as PaginationLinks from './components/PaginationLinks/PaginationLinks.example';
+import * as PriceFilter from './components/PriceFilter/PriceFilter.example';
 import * as PropertyGroup from './components/PropertyGroup/PropertyGroup.example';
 import * as RangeSlider from './components/RangeSlider/RangeSlider.example';
 import * as ResponsiveImage from './components/ResponsiveImage/ResponsiveImage.example';
@@ -141,6 +142,7 @@ export {
   PasswordRecoveryForm,
   PasswordResetForm,
   PayoutDetailsForm,
+  PriceFilter,
   PropertyGroup,
   RangeSlider,
   ResponsiveImage,
