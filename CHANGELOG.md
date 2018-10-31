@@ -12,7 +12,7 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## v2.2.0 2018-11-XX
+## v2.2.0 2018-10-31
 
 * [add] SearchPage: adds PriceFilter (and RangeSlider, FieldRangeSlider, PriceFilterForm).
 
