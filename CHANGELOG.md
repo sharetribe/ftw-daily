@@ -12,7 +12,17 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## v.2.1.1 2018-10-23
+## v2.2.0 2018-11-XX
+
+* [add] SearchPage: adds PriceFilter (and RangeSlider, FieldRangeSlider, PriceFilterForm).
+
+  **Note:** You must define min and max for the filter in `src/marketplace-custom-config.js`.
+  Current maximum value for the range is set to 1000 (USD/EUR/currency units). In addition, this
+  fixes or removes component examples that don't work in StyleguidePage.
+
+  [#944](https://github.com/sharetribe/flex-template-web/pull/944)
+
+## v2.1.1 2018-10-23
 
 * [add] Added initial documentation about routing and loading data.
   [#941](https://github.com/sharetribe/flex-template-web/pull/941)

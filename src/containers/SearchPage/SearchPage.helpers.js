@@ -21,10 +21,19 @@ export const validURLParamForExtendedData = (paramName, paramValue, filters) => 
   const valueArray = paramValue ? paramValue.split(',') : [];
 
   if (filterConfig && valueArray.length > 0) {
-    const allowedValues = filterConfig.options.map(o => o.key);
+    const { min, max } = filterConfig.config || {};
 
-    const validValues = intersection(valueArray, allowedValues).join(',');
-    return validValues.length > 0 ? { [paramName]: validValues } : {};
+    if (filterConfig.options) {
+      const allowedValues = filterConfig.options.map(o => o.key);
+
+      const validValues = intersection(valueArray, allowedValues).join(',');
+      return validValues.length > 0 ? { [paramName]: validValues } : {};
+    } else if (filterConfig.config && min != null && max != null) {
+      const validValues = valueArray.map(v => {
+        return v < min ? min : v > max ? max : v;
+      });
+      return validValues.length === 2 ? { [paramName]: validValues.join(',') } : {};
+    }
   }
   return {};
 };

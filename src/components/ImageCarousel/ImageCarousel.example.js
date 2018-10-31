@@ -1,6 +1,7 @@
 import React from 'react';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import ImageCarousel from './ImageCarousel';
+import css from './ImageCarousel.example.css';
 
 const { UUID } = sdkTypes;
 
@@ -122,15 +123,15 @@ const ImageCarouselWrapper = props => {
 
 export const NoImages = {
   component: ImageCarouselWrapper,
-  props: { images: [] },
+  props: { images: [], rootClassName: css.root },
 };
 
 export const SingleImage = {
   component: ImageCarouselWrapper,
-  props: { images: [imageSquare] },
+  props: { images: [imageSquare], rootClassName: css.root },
 };
 
 export const MultipleImages = {
   component: ImageCarouselWrapper,
-  props: { images: [imageLandscape, imagePortrait, imageSquare] },
+  props: { images: [imageLandscape, imagePortrait, imageSquare], rootClassName: css.root },
 };

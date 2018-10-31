@@ -95,9 +95,11 @@ export { default as NotificationBadge } from './NotificationBadge/NotificationBa
 export { default as OrderDiscussionPanel } from './OrderDiscussionPanel/OrderDiscussionPanel';
 export { default as Page } from './Page/Page';
 export { default as PaginationLinks } from './PaginationLinks/PaginationLinks';
+export { default as PriceFilter } from './PriceFilter/PriceFilter';
 export { default as PrivacyPolicy } from './PrivacyPolicy/PrivacyPolicy';
 export { default as Promised } from './Promised/Promised';
 export { default as PropertyGroup } from './PropertyGroup/PropertyGroup';
+export { default as RangeSlider } from './RangeSlider/RangeSlider';
 export { default as ResponsiveImage } from './ResponsiveImage/ResponsiveImage';
 export { default as ReviewModal } from './ReviewModal/ReviewModal';
 export { default as ReviewRating } from './ReviewRating/ReviewRating';

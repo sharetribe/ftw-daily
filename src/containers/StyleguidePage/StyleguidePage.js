@@ -30,8 +30,8 @@ const Example = props => {
           className={css.link}
         >
           {componentName}
-        </NamedLink>
-        /
+        </NamedLink>{' '}
+        /{' '}
         <NamedLink
           name="StyleguideComponentExample"
           params={{ component: componentName, example: exampleName }}

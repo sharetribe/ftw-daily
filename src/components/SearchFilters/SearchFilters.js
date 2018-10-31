@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import omit from 'lodash/omit';
 
-import { SelectSingleFilter, SelectMultipleFilter } from '../../components';
+import { SelectSingleFilter, SelectMultipleFilter, PriceFilter } from '../../components';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import { propTypes } from '../../util/types';
@@ -14,6 +14,7 @@ import css from './SearchFilters.css';
 
 // Dropdown container can have a positional offset (in pixels)
 const FILTER_DROPDOWN_OFFSET = -14;
+const RADIX = 10;
 
 // resolve initial value for a single value filter
 const initialValue = (queryParams, paramName) => {
@@ -23,6 +24,18 @@ const initialValue = (queryParams, paramName) => {
 // resolve initial values for a multi value filter
 const initialValues = (queryParams, paramName) => {
   return !!queryParams[paramName] ? queryParams[paramName].split(',') : [];
+};
+
+const initialPriceRangeValue = (queryParams, paramName) => {
+  const price = queryParams[paramName];
+  const valuesFromParams = !!price ? price.split(',').map(v => Number.parseInt(v, RADIX)) : [];
+
+  return !!price && valuesFromParams.length === 2
+    ? {
+        minPrice: valuesFromParams[0],
+        maxPrice: valuesFromParams[1],
+      }
+    : null;
 };
 
 const SearchFiltersComponent = props => {
@@ -35,6 +48,7 @@ const SearchFiltersComponent = props => {
     searchInProgress,
     categoryFilter,
     amenitiesFilter,
+    priceFilter,
     isSearchFiltersPanelOpen,
     toggleSearchFiltersPanel,
     searchFiltersPanelSelectedCount,
@@ -61,6 +75,10 @@ const SearchFiltersComponent = props => {
     ? initialValue(urlQueryParams, categoryFilter.paramName)
     : null;
 
+  const initialPriceRange = priceFilter
+    ? initialPriceRangeValue(urlQueryParams, priceFilter.paramName)
+    : null;
+
   const handleSelectOptions = (urlParam, options) => {
     const queryParams =
       options && options.length > 0
@@ -76,6 +94,16 @@ const SearchFiltersComponent = props => {
     const queryParams = option
       ? { ...urlQueryParams, [urlParam]: option }
       : omit(urlQueryParams, urlParam);
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  };
+
+  const handlePrice = (urlParam, range) => {
+    const { minPrice, maxPrice } = range || {};
+    const queryParams =
+      minPrice != null && maxPrice != null
+        ? { ...urlQueryParams, [urlParam]: `${minPrice},${maxPrice}` }
+        : omit(urlQueryParams, urlParam);
 
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
@@ -104,6 +132,18 @@ const SearchFiltersComponent = props => {
     />
   ) : null;
 
+  const priceFilterElement = priceFilter ? (
+    <PriceFilter
+      id="SearchFilters.priceFilter"
+      urlParam={priceFilter.paramName}
+      onSubmit={handlePrice}
+      showAsPopup
+      {...priceFilter.config}
+      initialValues={initialPriceRange}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) : null;
+
   const toggleSearchFiltersPanelButtonClasses =
     isSearchFiltersPanelOpen || searchFiltersPanelSelectedCount > 0
       ? css.searchFiltersPanelOpen
@@ -126,6 +166,7 @@ const SearchFiltersComponent = props => {
       <div className={css.filters}>
         {categoryFilterElement}
         {amenitiesFilterElement}
+        {priceFilterElement}
         {toggleSearchFiltersPanelButton}
       </div>
 
@@ -174,6 +215,7 @@ SearchFiltersComponent.propTypes = {
   onManageDisableScrolling: func.isRequired,
   categoriesFilter: propTypes.filterConfig,
   amenitiesFilter: propTypes.filterConfig,
+  priceFilter: propTypes.filterConfig,
   isSearchFiltersPanelOpen: bool,
   toggleSearchFiltersPanel: func,
   searchFiltersPanelSelectedCount: number,

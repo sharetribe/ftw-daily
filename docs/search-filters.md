@@ -5,12 +5,17 @@ filters rely on listing's indexed data.
 
 ## Filter types
 
-The Flex template for web has two different filter types: _select single_ and _select multiple_. The
-_select single_ one can be used to filter out search result with only one value per search
-parameter. The _select multiple_ filters on the other hand can take multiple values for a single
-search parameter.
+The Flex template for web has three different filter types: _price filter_, _select single_ and
+_select multiple_. The _price filter_ is for the specific case of filtering listings with a price
+range.
 
-These two filter types are implemented with four different components, a standard and a plain one:
+> NOTE: price filter should be configured from `src/marketplace-custom-config.js`. Current maximum
+> value for the range is set to 1000 (USD/EUR).
+
+Other two filter types can be used with extended data. The _select single_ one can be used to filter
+out search result with only one value per search parameter. The _select multiple_ filters on the
+other hand can take multiple values for a single search parameter. These two filter types for
+extended data are implemented with four different components, a standard and a plain one:
 
 * Select single filter: `SelectSingleFilter` and `SelectSingleFilterPlain`
 * Select multiple filter: `SelectMultipleFilter` and `SelectMultipleFilterPlain`

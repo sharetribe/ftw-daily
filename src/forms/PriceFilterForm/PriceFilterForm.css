@@ -1,7 +1,15 @@
 @import '../../marketplace.css';
 
 .root {
+  display: none;
+
+  /* Borders */
+  outline: none;
+}
+
+.popup {
   /* By default hide the content */
+  display: block;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -11,27 +19,104 @@
   z-index: var(--zIndexPopup);
 
   /* Layout */
-  margin-top: 7px;
   padding: 15px 30px 20px 30px;
+  margin-top: 7px;
+  background-color: var(--matterColorLight);
 
   /* Borders */
-  background-color: var(--matterColorLight);
   border-top: 1px solid var(--matterColorNegative);
   box-shadow: var(--boxShadowPopup);
   border-radius: 4px;
   transition: var(--transitionStyleButton);
-  outline: none;
 }
 
-.isOpen {
+.isOpenAsPopup {
+  display: block;
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
 
-.fieldGroup {
-  margin-bottom: 35px;
-  white-space: nowrap;
+.plain {
+  width: 100%;
+}
+
+.isOpen {
+  display: block;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 300px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 0px;
+}
+@media (--viewportMedium) {
+  .contentWrapper {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-top: 0px;
+  }
+}
+
+.label {
+  @apply --marketplaceSearchFilterSublabelFontStyles;
+  padding: 8px 0 12px 0;
+  margin-right: 18px;
+}
+@media (--viewportMedium) {
+  .label {
+    padding: 8px 0 16px 0;
+  }
+}
+
+.inputsWrapper {
+  display: flex;
+}
+
+.minPrice {
+  @apply --marketplaceSearchFilterSublabelFontStyles;
+  width: 48px;
+  text-align: center;
+  border-bottom-color: var(--attentionColor);
+  border-bottom-width: 3px;
+
+  -moz-appearance: textfield;
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+.maxPrice {
+  @apply --marketplaceSearchFilterSublabelFontStyles;
+  width: 48px;
+  text-align: center;
+  border-bottom-color: var(--attentionColor);
+  border-bottom-width: 3px;
+
+  -moz-appearance: textfield;
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.priceSeparator {
+  margin: 0 8px;
+}
+
+.sliderWrapper {
+  display: flex;
+  padding: 17px 0 25px 0;
+}
+@media (--viewportMedium) {
+  .sliderWrapper {
+    padding: 16px 0 24px 0;
+  }
 }
 
 .buttonsWrapper {

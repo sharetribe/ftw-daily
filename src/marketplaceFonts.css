@@ -271,6 +271,13 @@
     }
   }
 
+  --marketplaceSearchFilterSublabelFontStyles {
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-weight: var(--fontWeightMedium);
+    font-size: 18px;
+    line-height: 18px;
+  }
+
   --marketplaceListingAttributeFontStyles {
     font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
