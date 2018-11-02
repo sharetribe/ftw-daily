@@ -25,9 +25,8 @@ get-go.
 Here are some main technologies that the template uses:
 
 * JavaScript: programming language for the whole application
-* [React](https://reactjs.org/): library for creating user interfaces with components
 * CSS: styling the user interface using [CSS Modules](https://github.com/css-modules/css-modules)
-  and [cssnext](http://cssnext.io/)
+* [React](https://reactjs.org/): library for creating user interfaces with components
 * [Redux](https://redux.js.org/): state and data flow handling
 * [Final Form](https://github.com/final-form/final-form): forms
 * [React Router](https://reacttraining.com/react-router/): routing
@@ -141,5 +140,4 @@ See more in the [testing documentation](testing.md).
 ## Customization
 
 There are many things that you should change in the default template, and many more that you can
-change. See the [Customization checklist](customization-checklist.md) documentation for more
-information.
+change. Read [more about FTW](README.md) and check the [Customization checklist](customization-checklist.md) documentation too before publishing your site.
