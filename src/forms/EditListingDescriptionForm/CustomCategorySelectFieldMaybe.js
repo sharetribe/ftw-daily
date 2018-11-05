@@ -25,7 +25,9 @@ const CustomCategorySelectFieldMaybe = props => {
       label={categoryLabel}
       validate={categoryRequired}
     >
-      <option value="">{categoryPlaceholder}</option>
+      <option disabled value="">
+        {categoryPlaceholder}
+      </option>
       {categories.map(c => (
         <option key={c.key} value={c.key}>
           {c.label}

@@ -6,6 +6,13 @@
 .select {
   color: var(--matterColorAnti);
   border-bottom-color: var(--attentionColor);
+
+  & > option {
+    color: var(--matterColor);
+  }
+  & > option:disabled {
+    color: var(--matterColorAnti);
+  }
 }
 
 .selectSuccess {

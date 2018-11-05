@@ -68,6 +68,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
       value=""
     >
       <option
+        disabled={true}
         value=""
       >
         EditListingDescriptionForm.categoryPlaceholder
