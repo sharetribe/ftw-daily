@@ -140,4 +140,5 @@ See more in the [testing documentation](testing.md).
 ## Customization
 
 There are many things that you should change in the default template, and many more that you can
-change. Read [more about FTW](README.md) and check the [Customization checklist](customization-checklist.md) documentation too before publishing your site.
+change. Read [more about FTW](README.md) and check the
+[Customization checklist](customization-checklist.md) documentation too before publishing your site.
