@@ -12,6 +12,12 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
+## Upcoming version 2018-11-XX
+
+* [fix] Firefox showed select options with the same color as select itself. Now options have their
+  own color set and *placeholder option needs to be disabled*.
+  [#946](https://github.com/sharetribe/flex-template-web/pull/946)
+
 ## v2.2.0 2018-10-31
 
 * [add] SearchPage: adds PriceFilter (and RangeSlider, FieldRangeSlider, PriceFilterForm).

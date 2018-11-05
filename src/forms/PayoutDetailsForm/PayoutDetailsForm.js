@@ -236,7 +236,9 @@ const PayoutDetailsFormComponent = props => (
               label={countryLabel}
               validate={countryRequired}
             >
-              <option value="">{countryPlaceholder}</option>
+              <option disabled value="">
+                {countryPlaceholder}
+              </option>
               {supportedCountries.map(c => (
                 <option key={c} value={c}>
                   {intl.formatMessage({ id: `PayoutDetailsForm.countryNames.${c}` })}

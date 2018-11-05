@@ -14,8 +14,8 @@ A template consists of two files:
 * `TEMPLATE_NAME-subject.txt` - holds the mail Subject line template
 * `TEMPLATE_NAME-html.html` - contains the template for the HTML version of the mail
 
-Both parts are mandatory. All emails that are sent from the marketplace contain both the HTML and plain
-text variants and the recipient's mail client is free to choose which one to visualize and
+Both parts are mandatory. All emails that are sent from the marketplace contain both the HTML and
+plain text variants and the recipient's mail client is free to choose which one to visualize and
 how. The text version is automatically generated from the HTML template.
 
 ## Template syntax
