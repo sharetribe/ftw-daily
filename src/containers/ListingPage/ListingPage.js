@@ -32,7 +32,7 @@ import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
-import SectionDescription from './SectionDescription';
+import SectionDescriptionMaybe from './SectionDescriptionMaybe';
 import SectionFeatures from './SectionFeatures';
 import SectionReviews from './SectionReviews';
 import SectionHost from './SectionHost';
@@ -438,7 +438,7 @@ export class ListingPageComponent extends Component {
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />
-                  <SectionDescription description={description} />
+                  <SectionDescriptionMaybe description={description} />
                   <SectionFeatures
                     options={amenitiesConfig}
                     selectedOptions={publicData.amenities}

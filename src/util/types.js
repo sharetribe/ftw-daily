@@ -146,7 +146,7 @@ const listingAttributes = shape({
 
 const ownListingAttributes = shape({
   title: string.isRequired,
-  description: string.isRequired,
+  description: string,
   geolocation: propTypes.latlng,
   deleted: propTypes.value(false).isRequired,
   state: oneOf(LISTING_STATES).isRequired,
