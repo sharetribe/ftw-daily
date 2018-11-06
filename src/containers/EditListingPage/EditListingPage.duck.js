@@ -1,13 +1,9 @@
 import omit from 'lodash/omit';
-import omitBy from 'lodash/omitBy';
-import isUndefined from 'lodash/isUndefined';
-import mergeWith from 'lodash/mergeWith';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasListingsSuccess } from '../../ducks/user.duck';
-import { overrideArrays } from '../../util/data';
 
 const { UUID } = sdkTypes;
 
@@ -22,9 +18,13 @@ const errorAction = actionType => error => ({ type: actionType, payload: error, 
 export const MARK_TAB_UPDATED = 'app/EditListingPage/MARK_TAB_UPDATED';
 export const CLEAR_UPDATED_TAB = 'app/EditListingPage/CLEAR_UPDATED_TAB';
 
-export const CREATE_LISTING_REQUEST = 'app/EditListingPage/CREATE_LISTING_REQUEST';
-export const CREATE_LISTING_SUCCESS = 'app/EditListingPage/CREATE_LISTING_SUCCESS';
-export const CREATE_LISTING_ERROR = 'app/EditListingPage/CREATE_LISTING_ERROR';
+export const CREATE_LISTING_DRAFT_REQUEST = 'app/EditListingPage/CREATE_LISTING_DRAFT_REQUEST';
+export const CREATE_LISTING_DRAFT_SUCCESS = 'app/EditListingPage/CREATE_LISTING_DRAFT_SUCCESS';
+export const CREATE_LISTING_DRAFT_ERROR = 'app/EditListingPage/CREATE_LISTING_DRAFT_ERROR';
+
+export const PUBLISH_LISTING_REQUEST = 'app/EditListingPage/PUBLISH_LISTING_REQUEST';
+export const PUBLISH_LISTING_SUCCESS = 'app/EditListingPage/PUBLISH_LISTING_SUCCESS';
+export const PUBLISH_LISTING_ERROR = 'app/EditListingPage/PUBLISH_LISTING_ERROR';
 
 export const UPDATE_LISTING_REQUEST = 'app/EditListingPage/UPDATE_LISTING_REQUEST';
 export const UPDATE_LISTING_SUCCESS = 'app/EditListingPage/UPDATE_LISTING_SUCCESS';
@@ -40,20 +40,19 @@ export const UPLOAD_IMAGE_ERROR = 'app/EditListingPage/UPLOAD_IMAGE_ERROR';
 
 export const UPDATE_IMAGE_ORDER = 'app/EditListingPage/UPDATE_IMAGE_ORDER';
 
-export const CREATE_LISTING_DRAFT = 'app/EditListingPage/CREATE_LISTING_DRAFT';
-export const UPDATE_LISTING_DRAFT = 'app/EditListingPage/UPDATE_LISTING_DRAFT';
-
 export const REMOVE_LISTING_IMAGE = 'app/EditListingPage/REMOVE_LISTING_IMAGE';
 
 // ================ Reducer ================ //
 
 const initialState = {
   // Error instance placeholders for each endpoint
-  createListingsError: null,
+  createListingDraftError: null,
+  publishingListing: null,
+  publishListingError: null,
   updateListingError: null,
   showListingsError: null,
   uploadImageError: null,
-  createListingInProgress: false,
+  createListingDraftInProgress: false,
   submittedListingId: null,
   redirectToListing: false,
   images: {},
@@ -72,28 +71,52 @@ export default function reducer(state = initialState, action = {}) {
     case CLEAR_UPDATED_TAB:
       return { ...state, updatedTab: null, updateListingError: null };
 
-    case CREATE_LISTING_REQUEST:
+    case CREATE_LISTING_DRAFT_REQUEST:
       return {
         ...state,
-        createListingInProgress: true,
-        createListingsError: null,
+        createListingDraftInProgress: true,
+        createListingDraftError: null,
         submittedListingId: null,
-        redirectToListing: false,
+        listingDraft: null,
       };
-    case CREATE_LISTING_SUCCESS:
+
+    case CREATE_LISTING_DRAFT_SUCCESS:
       return {
         ...state,
-        createListingInProgress: false,
+        createListingDraftInProgress: false,
         submittedListingId: payload.data.id,
-        redirectToListing: true,
+        listingDraft: payload.data,
       };
-    case CREATE_LISTING_ERROR:
+    case CREATE_LISTING_DRAFT_ERROR:
       return {
         ...state,
-        createListingInProgress: false,
-        createListingsError: payload,
-        redirectToListing: false,
+        createListingDraftInProgress: false,
+        createListingDraftError: payload,
       };
+
+    case PUBLISH_LISTING_REQUEST:
+      return {
+        ...state,
+        publishingListing: payload.listingId,
+        publishListingError: null,
+      };
+    case PUBLISH_LISTING_SUCCESS:
+      return {
+        redirectToListing: true,
+        publishingListing: null,
+      };
+    case PUBLISH_LISTING_ERROR: {
+      // eslint-disable-next-line no-console
+      console.error(payload);
+      return {
+        ...state,
+        publishingListing: null,
+        publishListingError: {
+          listingId: state.publishingListing,
+          error: payload,
+        },
+      };
+    }
 
     case UPDATE_LISTING_REQUEST:
       return { ...state, updateInProgress: true, updateListingError: null };
@@ -141,23 +164,6 @@ export default function reducer(state = initialState, action = {}) {
     case UPDATE_IMAGE_ORDER:
       return { ...state, imageOrder: payload.imageOrder };
 
-    case CREATE_LISTING_DRAFT:
-    case UPDATE_LISTING_DRAFT: {
-      const { attributes, images } = state.listingDraft || {};
-      const updatedImages = payload.images || images;
-      return {
-        ...state,
-        listingDraft: {
-          attributes: mergeWith(
-            attributes,
-            omitBy(payload.attributes, isUndefined),
-            overrideArrays
-          ),
-          images: updatedImages,
-        },
-      };
-    }
-
     case REMOVE_LISTING_IMAGE: {
       const id = payload.imageId;
 
@@ -198,28 +204,6 @@ export const updateImageOrder = imageOrder => ({
   payload: { imageOrder },
 });
 
-export const createListingDraft = listingData => {
-  const { images, ...attributes } = listingData;
-  return {
-    type: CREATE_LISTING_DRAFT,
-    payload: {
-      attributes,
-      images,
-    },
-  };
-};
-
-export const updateListingDraft = listingData => {
-  const { images, ...attributes } = listingData;
-  return {
-    type: UPDATE_LISTING_DRAFT,
-    payload: {
-      attributes,
-      images,
-    },
-  };
-};
-
 export const removeListingImage = imageId => ({
   type: REMOVE_LISTING_IMAGE,
   payload: { imageId },
@@ -230,9 +214,14 @@ export const removeListingImage = imageId => ({
 // expects.
 
 // SDK method: ownListings.create
-export const createListing = requestAction(CREATE_LISTING_REQUEST);
-export const createListingSuccess = successAction(CREATE_LISTING_SUCCESS);
-export const createListingError = errorAction(CREATE_LISTING_ERROR);
+export const createListingDraft = requestAction(CREATE_LISTING_DRAFT_REQUEST);
+export const createListingDraftSuccess = successAction(CREATE_LISTING_DRAFT_SUCCESS);
+export const createListingDraftError = errorAction(CREATE_LISTING_DRAFT_ERROR);
+
+// SDK method: ownListings.publish
+export const publishListing = requestAction(PUBLISH_LISTING_REQUEST);
+export const publishListingSuccess = successAction(PUBLISH_LISTING_SUCCESS);
+export const publishListingError = errorAction(PUBLISH_LISTING_ERROR);
 
 // SDK method: ownListings.update
 export const updateListing = requestAction(UPDATE_LISTING_REQUEST);
@@ -267,39 +256,55 @@ export function requestShowListing(actionPayload) {
   };
 }
 
-export function requestCreateListing(data) {
+export function requestCreateListingDraft(data) {
   return (dispatch, getState, sdk) => {
-    dispatch(createListing(data));
+    dispatch(createListingDraft(data));
+
+    const queryParams = {
+      expand: true,
+      include: ['author', 'images'],
+      'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+    };
 
     return sdk.ownListings
-      .create(data)
+      .createDraft(data, queryParams)
       .then(response => {
-        const id = response.data.data.id.uuid;
-        // Modify store to understand that we have created listing and can redirect away
-        dispatch(createListingSuccess(response));
-        // Fetch listing data so that redirection is smooth
-        dispatch(
-          requestShowListing({
-            id,
-            include: ['author', 'images'],
-            'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
-          })
-        );
-        return response;
-      })
-      .then(response => {
+        //const id = response.data.data.id.uuid;
+
+        // Add the created listing to the marketplace data
+        dispatch(addMarketplaceEntities(response));
+
         // We must update the user duck since this might be the first
         // listing for the user, therefore changing the
         // currentUserHasListings flag in the store.
         dispatch(fetchCurrentUserHasListingsSuccess(true));
+
+        // Modify store to understand that we have created listing and can redirect away
+        dispatch(createListingDraftSuccess(response));
         return response;
       })
       .catch(e => {
-        log.error(e, 'create-listing-failed', { listingData: data });
-        return dispatch(createListingError(storableError(e)));
+        log.error(e, 'create-listing-draft-failed', { listingData: data });
+        return dispatch(createListingDraftError(storableError(e)));
       });
   };
 }
+
+export const requestPublishListingDraft = listingId => (dispatch, getState, sdk) => {
+  dispatch(publishListing(listingId));
+
+  return sdk.ownListings
+    .publishDraft({ id: listingId }, { expand: true })
+    .then(response => {
+      // Add the created listing to the marketplace data
+      dispatch(addMarketplaceEntities(response));
+      dispatch(publishListingSuccess(response));
+      return response;
+    })
+    .catch(e => {
+      dispatch(publishListingError(storableError(e)));
+    });
+};
 
 // Images return imageId which we need to map with previously generated temporary id
 export function requestImageUpload(actionPayload) {
@@ -335,6 +340,7 @@ export function requestUpdateListing(tab, data) {
       .then(() => {
         dispatch(markTabUpdated(tab));
         dispatch(updateListingSuccess(updateResponse));
+        return updateResponse;
       })
       .catch(e => {
         log.error(e, 'update-listing-failed', { listingData: data });
