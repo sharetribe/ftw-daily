@@ -147,7 +147,7 @@ exports[`ListingPage matches snapshot 1`] = `
               }
               showContactUser={true}
             />
-            <SectionDescription
+            <SectionDescriptionMaybe
               description="listing1 description"
             />
             <SectionFeatures

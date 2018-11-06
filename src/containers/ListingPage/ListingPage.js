@@ -9,7 +9,12 @@ import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { LISTING_PAGE_PENDING_APPROVAL_VARIANT, createSlug, parse } from '../../util/urlHelpers';
+import {
+  LISTING_PAGE_DRAFT_VARIANT,
+  LISTING_PAGE_PENDING_APPROVAL_VARIANT,
+  createSlug,
+  parse,
+} from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import { ensureListing, ensureOwnListing, ensureUser, userDisplayName } from '../../util/data';
@@ -206,9 +211,11 @@ export class ListingPageComponent extends Component {
     const isBook = !!parse(location.search).book;
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
-    const currentListing = isPendingApprovalVariant
-      ? ensureOwnListing(getOwnListing(listingId))
-      : ensureListing(getListing(listingId));
+    const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
+    const currentListing =
+      isPendingApprovalVariant || isDraftVariant
+        ? ensureOwnListing(getOwnListing(listingId))
+        : ensureListing(getListing(listingId));
 
     const listingSlug = rawParams.slug || createSlug(currentListing.attributes.title || '');
     const params = { slug: listingSlug, ...rawParams };
@@ -224,7 +231,9 @@ export class ListingPageComponent extends Component {
     // another user. We use this information to try to fetch the
     // public listing.
     const pendingOtherUsersListing =
-      isPendingApprovalVariant && showListingError && showListingError.status === 403;
+      (isPendingApprovalVariant || isDraftVariant) &&
+      showListingError &&
+      showListingError.status === 403;
     const shouldShowPublicListingPage = pendingIsApproved || pendingOtherUsersListing;
 
     if (shouldShowPublicListingPage) {
@@ -524,7 +533,7 @@ ListingPageComponent.propTypes = {
   params: shape({
     id: string.isRequired,
     slug: string,
-    variant: oneOf([LISTING_PAGE_PENDING_APPROVAL_VARIANT]),
+    variant: oneOf([LISTING_PAGE_DRAFT_VARIANT, LISTING_PAGE_PENDING_APPROVAL_VARIANT]),
   }).isRequired,
 
   isAuthenticated: bool.isRequired,
