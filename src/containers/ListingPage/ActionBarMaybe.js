@@ -2,7 +2,12 @@ import React from 'react';
 import { bool, oneOfType, object } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
+import {
+  LISTING_STATE_PENDING_APPROVAL,
+  LISTING_STATE_CLOSED,
+  LISTING_STATE_DRAFT,
+  propTypes,
+} from '../../util/types';
 import { NamedLink } from '../../components';
 import EditIcon from './EditIcon';
 
@@ -13,6 +18,7 @@ export const ActionBarMaybe = props => {
   const state = listing.attributes.state;
   const isPendingApproval = state === LISTING_STATE_PENDING_APPROVAL;
   const isClosed = state === LISTING_STATE_CLOSED;
+  const isDraft = state === LISTING_STATE_DRAFT;
 
   if (isOwnListing) {
     let ownListingTextTranslationId = 'ListingPage.ownListing';
@@ -21,7 +27,11 @@ export const ActionBarMaybe = props => {
       ownListingTextTranslationId = 'ListingPage.ownListingPendingApproval';
     } else if (isClosed) {
       ownListingTextTranslationId = 'ListingPage.ownClosedListing';
+    } else if (isDraft) {
+      ownListingTextTranslationId = 'ListingPage.ownListingDraft';
     }
+
+    const message = isDraft ? 'ListingPage.finishListing' : 'ListingPage.editListing';
 
     const ownListingTextClasses = classNames(css.ownListingText, {
       [css.ownListingTextPendingApproval]: isPendingApproval,
@@ -34,7 +44,7 @@ export const ActionBarMaybe = props => {
         </p>
         <NamedLink className={css.editListingLink} name="EditListingPage" params={editParams}>
           <EditIcon className={css.editIcon} />
-          <FormattedMessage id="ListingPage.editListing" />
+          <FormattedMessage id={message} />
         </NamedLink>
       </div>
     );

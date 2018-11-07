@@ -12,6 +12,8 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   LISTING_PAGE_DRAFT_VARIANT,
   LISTING_PAGE_PENDING_APPROVAL_VARIANT,
+  LISTING_PAGE_PARAM_TYPE_DRAFT,
+  LISTING_PAGE_PARAM_TYPE_EDIT,
   createSlug,
   parse,
 } from '../../util/urlHelpers';
@@ -220,6 +222,11 @@ export class ListingPageComponent extends Component {
     const listingSlug = rawParams.slug || createSlug(currentListing.attributes.title || '');
     const params = { slug: listingSlug, ...rawParams };
 
+    const listingType = isDraftVariant
+      ? LISTING_PAGE_PARAM_TYPE_DRAFT
+      : LISTING_PAGE_PARAM_TYPE_EDIT;
+    const listingTab = isDraftVariant ? 'photos' : 'description';
+
     const isApproved =
       currentListing.id && currentListing.attributes.state !== LISTING_STATE_PENDING_APPROVAL;
 
@@ -427,8 +434,8 @@ export class ListingPageComponent extends Component {
                 editParams={{
                   id: listingId.uuid,
                   slug: listingSlug,
-                  type: 'edit',
-                  tab: 'description',
+                  type: listingType,
+                  tab: listingTab,
                 }}
                 imageCarouselOpen={this.state.imageCarouselOpen}
                 onImageCarouselClose={() => this.setState({ imageCarouselOpen: false })}
