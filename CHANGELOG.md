@@ -14,6 +14,11 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-11-XX
 
+## v2.3.0 2018-11-13
+
+* [add] Draft listing is used in EditListingWizard, ManageListingCard and ListingPage.
+  From now on description panel creates a draft listing and photos panel publishes it. You can also view your current draft listings from 'your listings' page.
+  [#947](https://github.com/sharetribe/flex-template-web/pull/947)
 * [fix] Firefox showed select options with the same color as select itself. Now options have their
   own color set and *placeholder option needs to be disabled*.
   [#946](https://github.com/sharetribe/flex-template-web/pull/946)
