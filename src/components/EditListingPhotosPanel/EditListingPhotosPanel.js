@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
+import { LISTING_STATE_DRAFT } from '../../util/types';
 import { EditListingPhotosForm } from '../../forms';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
@@ -32,7 +33,9 @@ class EditListingPhotosPanel extends Component {
     const classes = classNames(rootClass, className);
     const currentListing = ensureOwnListing(listing);
 
-    const panelTitle = currentListing.id ? (
+    const isPublished =
+      currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+    const panelTitle = isPublished ? (
       <FormattedMessage
         id="EditListingPhotosPanel.title"
         values={{ listingTitle: <ListingLink listing={listing} /> }}
@@ -48,7 +51,7 @@ class EditListingPhotosPanel extends Component {
           className={css.form}
           disabled={fetchInProgress}
           ready={newListingCreated}
-          errors={errors}
+          fetchErrors={errors}
           initialValues={{ images }}
           images={images}
           onImageUpload={onImageUpload}
@@ -61,7 +64,6 @@ class EditListingPhotosPanel extends Component {
           onRemoveImage={onRemoveImage}
           saveActionMsg={submitButtonText}
           updated={panelUpdated}
-          updateError={errors.updateListingError}
           updateInProgress={updateInProgress}
         />
       </div>
@@ -82,13 +84,7 @@ EditListingPhotosPanel.defaultProps = {
 EditListingPhotosPanel.propTypes = {
   className: string,
   rootClassName: string,
-  errors: shape({
-    createListingsError: object,
-    updateListingError: object,
-    showListingsError: object,
-    uploadImageError: object,
-    createStripeAccountError: object,
-  }),
+  errors: object,
   fetchInProgress: bool.isRequired,
   newListingCreated: bool.isRequired,
   images: array,
