@@ -3,7 +3,7 @@
 exports[`EditListingPhotosForm matches snapshot 1`] = `
 <ReactFinalForm
   dispatch={[Function]}
-  errors={Object {}}
+  fetchErrors={null}
   imageUploadRequested={false}
   images={Array []}
   initialValues={
@@ -32,7 +32,6 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
   render={[Function]}
   saveActionMsg="Save photos"
   stripeConnected={false}
-  updateError={null}
   updateInProgress={false}
   updated={false}
 />

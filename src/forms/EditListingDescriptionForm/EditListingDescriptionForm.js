@@ -1,5 +1,5 @@
 import React from 'react';
-import { bool, func, string, arrayOf, shape } from 'prop-types';
+import { arrayOf, bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
@@ -27,8 +27,8 @@ const EditListingDescriptionFormComponent = props => (
         pristine,
         saveActionMsg,
         updated,
-        updateError,
         updateInProgress,
+        fetchErrors,
       } = fieldRenderProps;
 
       const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
@@ -56,9 +56,23 @@ const EditListingDescriptionFormComponent = props => (
         id: 'EditListingDescriptionForm.descriptionRequired',
       });
 
-      const errorMessage = updateError ? (
+      const { updateListingError, createListingDraftError, showListingsError } = fetchErrors || {};
+      const errorMessageUpdateListing = updateListingError ? (
         <p className={css.error}>
           <FormattedMessage id="EditListingDescriptionForm.updateFailed" />
+        </p>
+      ) : null;
+
+      // This error happens only on first tab (of EditListingWizard)
+      const errorMessageCreateListingDraft = createListingDraftError ? (
+        <p className={css.error}>
+          <FormattedMessage id="EditListingDescriptionForm.createListingDraftError" />
+        </p>
+      ) : null;
+
+      const errorMessageShowListing = showListingsError ? (
+        <p className={css.error}>
+          <FormattedMessage id="EditListingDescriptionForm.showListingFailed" />
         </p>
       ) : null;
 
@@ -69,7 +83,9 @@ const EditListingDescriptionFormComponent = props => (
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
-          {errorMessage}
+          {errorMessageCreateListingDraft}
+          {errorMessageUpdateListing}
+          {errorMessageShowListing}
           <FieldTextInput
             id="title"
             name="title"
@@ -114,7 +130,7 @@ const EditListingDescriptionFormComponent = props => (
   />
 );
 
-EditListingDescriptionFormComponent.defaultProps = { className: null, updateError: null };
+EditListingDescriptionFormComponent.defaultProps = { className: null, fetchErrors: null };
 
 EditListingDescriptionFormComponent.propTypes = {
   className: string,
@@ -122,8 +138,12 @@ EditListingDescriptionFormComponent.propTypes = {
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   updated: bool.isRequired,
-  updateError: propTypes.error,
   updateInProgress: bool.isRequired,
+  fetchErrors: shape({
+    createListingDraftError: propTypes.error,
+    showListingsError: propTypes.error,
+    updateListingError: propTypes.error,
+  }),
   categories: arrayOf(
     shape({
       key: string.isRequired,

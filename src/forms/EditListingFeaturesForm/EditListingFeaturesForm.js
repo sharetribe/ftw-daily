@@ -1,5 +1,5 @@
 import React from 'react';
-import { bool, func, string } from 'prop-types';
+import { bool, func, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
@@ -25,8 +25,8 @@ const EditListingFeaturesFormComponent = props => (
         pristine,
         saveActionMsg,
         updated,
-        updateError,
         updateInProgress,
+        fetchErrors,
       } = fieldRenderProps;
 
       const classes = classNames(rootClassName || css.root, className);
@@ -34,15 +34,23 @@ const EditListingFeaturesFormComponent = props => (
       const submitInProgress = updateInProgress;
       const submitDisabled = disabled || submitInProgress;
 
-      const errorMessage = updateError ? (
+      const { updateListingError, showListingsError } = fetchErrors || {};
+      const errorMessage = updateListingError ? (
         <p className={css.error}>
           <FormattedMessage id="EditListingFeaturesForm.updateFailed" />
+        </p>
+      ) : null;
+
+      const errorMessageShowListing = showListingsError ? (
+        <p className={css.error}>
+          <FormattedMessage id="EditListingFeaturesForm.showListingFailed" />
         </p>
       ) : null;
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
+          {errorMessageShowListing}
 
           <FieldCheckboxGroup
             className={css.features}
@@ -69,7 +77,7 @@ const EditListingFeaturesFormComponent = props => (
 EditListingFeaturesFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
-  updateError: null,
+  fetchErrors: null,
 };
 
 EditListingFeaturesFormComponent.propTypes = {
@@ -79,8 +87,11 @@ EditListingFeaturesFormComponent.propTypes = {
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   updated: bool.isRequired,
-  updateError: propTypes.error,
   updateInProgress: bool.isRequired,
+  fetchErrors: shape({
+    showListingsError: propTypes.error,
+    updateListingError: propTypes.error,
+  }),
 };
 
 const EditListingFeaturesForm = EditListingFeaturesFormComponent;
