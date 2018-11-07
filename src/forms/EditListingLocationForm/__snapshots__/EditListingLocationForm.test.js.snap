@@ -3,6 +3,7 @@
 exports[`EditListingLocationForm matches snapshot 1`] = `
 <ReactFinalForm
   dispatch={[Function]}
+  fetchErrors={null}
   intl={
     Object {
       "formatDate": [Function],
@@ -19,7 +20,6 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
   render={[Function]}
   saveActionMsg="Save location"
   selectedPlace={null}
-  updateError={null}
   updateInProgress={false}
   updated={false}
 />

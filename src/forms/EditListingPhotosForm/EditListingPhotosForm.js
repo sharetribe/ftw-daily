@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { array, bool, func, object, shape, string } from 'prop-types';
+import { array, bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm, Field } from 'react-final-form';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
@@ -48,7 +48,7 @@ export class EditListingPhotosFormComponent extends Component {
             form,
             className,
             disabled,
-            errors,
+            fetchErrors,
             handleSubmit,
             images,
             imageUploadRequested,
@@ -59,7 +59,6 @@ export class EditListingPhotosFormComponent extends Component {
             ready,
             saveActionMsg,
             updated,
-            updateError,
             updateInProgress,
           } = fieldRenderProps;
 
@@ -78,7 +77,8 @@ export class EditListingPhotosFormComponent extends Component {
             id: 'EditListingPhotosForm.imageRequired',
           });
 
-          const { createListingsError, showListingsError, uploadImageError } = errors;
+          const { publishListingError, showListingsError, updateListingError, uploadImageError } =
+            fetchErrors || {};
           const uploadOverLimit = isUploadImageOverLimitError(uploadImageError);
 
           let uploadImageFailed = null;
@@ -100,9 +100,9 @@ export class EditListingPhotosFormComponent extends Component {
           // NOTE: These error messages are here since Photos panel is the last visible panel
           // before creating a new listing. If that order is changed, these should be changed too.
           // Create and show listing errors are shown above submit button
-          const createListingFailed = createListingsError ? (
+          const publishListingFailed = publishListingError ? (
             <p className={css.error}>
-              <FormattedMessage id="EditListingPhotosForm.createListingFailed" />
+              <FormattedMessage id="EditListingPhotosForm.publishListingFailed" />
             </p>
           ) : null;
           const showListingFailed = showListingsError ? (
@@ -135,7 +135,7 @@ export class EditListingPhotosFormComponent extends Component {
                 handleSubmit(e);
               }}
             >
-              {updateError ? (
+              {updateListingError ? (
                 <p className={css.error}>
                   <FormattedMessage id="EditListingPhotosForm.updateFailed" />
                 </p>
@@ -203,7 +203,7 @@ export class EditListingPhotosFormComponent extends Component {
               <p className={css.tip}>
                 <FormattedMessage id="EditListingPhotosForm.addImagesTip" />
               </p>
-              {createListingFailed}
+              {publishListingFailed}
               {showListingFailed}
 
               <Button
@@ -223,13 +223,14 @@ export class EditListingPhotosFormComponent extends Component {
   }
 }
 
-EditListingPhotosFormComponent.defaultProps = { errors: {}, updateError: null, images: [] };
+EditListingPhotosFormComponent.defaultProps = { fetchErrors: null, images: [] };
 
 EditListingPhotosFormComponent.propTypes = {
-  errors: shape({
-    createListingsError: object,
-    showListingsError: object,
-    uploadImageError: object,
+  fetchErrors: shape({
+    publishListingError: propTypes.error,
+    showListingsError: propTypes.error,
+    uploadImageError: propTypes.error,
+    updateListingError: propTypes.error,
   }),
   images: array,
   intl: intlShape.isRequired,
@@ -239,7 +240,6 @@ EditListingPhotosFormComponent.propTypes = {
   saveActionMsg: string.isRequired,
   updated: bool.isRequired,
   ready: bool.isRequired,
-  updateError: propTypes.error,
   updateInProgress: bool.isRequired,
   onRemoveImage: func.isRequired,
 };

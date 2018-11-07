@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
@@ -22,8 +22,8 @@ export const EditListingPoliciesFormComponent = props => (
         pristine,
         saveActionMsg,
         updated,
-        updateError,
         updateInProgress,
+        fetchErrors,
       } = fieldRenderProps;
 
       const rulesLabelMessage = intl.formatMessage({
@@ -33,9 +33,15 @@ export const EditListingPoliciesFormComponent = props => (
         id: 'EditListingPoliciesForm.rulesPlaceholder',
       });
 
-      const errorMessage = updateError ? (
+      const { updateListingError, showListingsError } = fetchErrors || {};
+      const errorMessage = updateListingError ? (
         <p className={css.error}>
           <FormattedMessage id="EditListingPoliciesForm.updateFailed" />
+        </p>
+      ) : null;
+      const errorMessageShowListing = showListingsError ? (
+        <p className={css.error}>
+          <FormattedMessage id="EditListingPoliciesForm.showListingFailed" />
         </p>
       ) : null;
 
@@ -47,6 +53,7 @@ export const EditListingPoliciesFormComponent = props => (
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
+          {errorMessageShowListing}
 
           <FieldTextInput
             id="rules"
@@ -77,16 +84,17 @@ EditListingPoliciesFormComponent.defaultProps = {
   updateError: null,
 };
 
-const { func, string, bool } = PropTypes;
-
 EditListingPoliciesFormComponent.propTypes = {
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   selectedPlace: propTypes.place,
   updated: bool.isRequired,
-  updateError: propTypes.error,
   updateInProgress: bool.isRequired,
+  fetchErrors: shape({
+    showListingsError: propTypes.error,
+    updateListingError: propTypes.error,
+  }),
 };
 
 export default compose(injectIntl)(EditListingPoliciesFormComponent);
