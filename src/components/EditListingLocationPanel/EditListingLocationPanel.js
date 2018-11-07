@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
+import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
 import { EditListingLocationForm } from '../../forms';
@@ -58,7 +59,9 @@ class EditListingLocationPanel extends Component {
     const classes = classNames(rootClassName || css.root, className);
     const currentListing = ensureOwnListing(listing);
 
-    const panelTitle = currentListing.id ? (
+    const isPublished =
+      currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+    const panelTitle = isPublished ? (
       <FormattedMessage
         id="EditListingLocationPanel.title"
         values={{ listingTitle: <ListingLink listing={listing} /> }}
@@ -95,8 +98,8 @@ class EditListingLocationPanel extends Component {
           onChange={onChange}
           saveActionMsg={submitButtonText}
           updated={panelUpdated}
-          updateError={errors.updateListingError}
           updateInProgress={updateInProgress}
+          fetchErrors={errors}
         />
       </div>
     );
