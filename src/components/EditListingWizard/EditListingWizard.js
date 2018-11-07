@@ -4,6 +4,11 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { withViewport } from '../../util/contextHelpers';
+import {
+  LISTING_PAGE_PARAM_TYPE_DRAFT,
+  LISTING_PAGE_PARAM_TYPE_NEW,
+  LISTING_PAGE_PARAM_TYPES,
+} from '../../util/urlHelpers';
 import { ensureListing } from '../../util/data';
 import { PayoutDetailsForm } from '../../forms';
 import { Modal, NamedRedirect, Tabs } from '../../components';
@@ -111,11 +116,11 @@ class EditListingWizard extends Component {
     this.hasScrolledToTab = false;
 
     this.state = {
-      submittedValues: null,
+      draftId: null,
       showPayoutDetails: false,
     };
     this.handleCreateFlowTabScrolling = this.handleCreateFlowTabScrolling.bind(this);
-    this.handleCreateListing = this.handleCreateListing.bind(this);
+    this.handlePublishListing = this.handlePublishListing.bind(this);
     this.handlePayoutModalClose = this.handlePayoutModalClose.bind(this);
     this.handlePayoutSubmit = this.handlePayoutSubmit.bind(this);
   }
@@ -124,15 +129,15 @@ class EditListingWizard extends Component {
     this.hasScrolledToTab = shouldScroll;
   }
 
-  handleCreateListing(values) {
-    const { onCreateListing, currentUser } = this.props;
+  handlePublishListing(id) {
+    const { onPublishListingDraft, currentUser } = this.props;
     const stripeConnected =
       currentUser && currentUser.attributes && currentUser.attributes.stripeConnected;
     if (stripeConnected) {
-      onCreateListing(values);
+      onPublishListingDraft(id);
     } else {
       this.setState({
-        submittedValues: values,
+        draftId: id,
         showPayoutDetails: true,
       });
     }
@@ -149,7 +154,7 @@ class EditListingWizard extends Component {
       .then(() => {
         this.setState({ showPayoutDetails: false });
         this.props.onManageDisableScrolling('EditListingWizard.payoutModal', false);
-        this.props.onCreateListing(this.state.submittedValues);
+        this.props.onPublishListingDraft(this.state.draftId);
       })
       .catch(() => {
         // do nothing
@@ -173,15 +178,22 @@ class EditListingWizard extends Component {
     } = this.props;
 
     const selectedTab = params.tab;
-    const isNew = params.type === 'new';
+    const isNewListingFlow = [LISTING_PAGE_PARAM_TYPE_NEW, LISTING_PAGE_PARAM_TYPE_DRAFT].includes(
+      params.type
+    );
     const rootClasses = rootClassName || css.root;
     const classes = classNames(rootClasses, className);
     const currentListing = ensureListing(listing);
-    const tabsStatus = tabsActive(isNew, currentListing);
+    const tabsStatus = tabsActive(isNewListingFlow, currentListing);
 
     // If selectedTab is not active, redirect to the beginning of wizard
     if (!tabsStatus[selectedTab]) {
-      return <NamedRedirect name="EditListingPage" params={{ ...params, tab: TABS[0] }} />;
+      const currentTabIndex = TABS.indexOf(selectedTab);
+      const nearestActiveTab = TABS.slice(0, currentTabIndex)
+        .reverse()
+        .find(t => tabsStatus[t]);
+
+      return <NamedRedirect name="EditListingPage" params={{ ...params, tab: nearestActiveTab }} />;
     }
 
     const { width } = viewport;
@@ -220,7 +232,7 @@ class EditListingWizard extends Component {
                 tabLabel={tabLabel(intl, tab)}
                 tabLinkProps={tabLink(tab)}
                 selected={selectedTab === tab}
-                disabled={isNew && !tabsStatus[tab]}
+                disabled={isNewListingFlow && !tabsStatus[tab]}
                 tab={tab}
                 intl={intl}
                 params={params}
@@ -228,7 +240,7 @@ class EditListingWizard extends Component {
                 marketplaceTabs={TABS}
                 errors={errors}
                 handleCreateFlowTabScrolling={this.handleCreateFlowTabScrolling}
-                handleCreateListing={this.handleCreateListing}
+                handlePublishListing={this.handlePublishListing}
                 fetchInProgress={fetchInProgress}
               />
             );
@@ -276,7 +288,7 @@ EditListingWizard.propTypes = {
   params: shape({
     id: string.isRequired,
     slug: string.isRequired,
-    type: oneOf(['new', 'edit']).isRequired,
+    type: oneOf(LISTING_PAGE_PARAM_TYPES).isRequired,
     tab: oneOf(TABS).isRequired,
   }).isRequired,
 
@@ -293,14 +305,14 @@ EditListingWizard.propTypes = {
   }),
 
   errors: shape({
-    createListingsError: object,
+    createListingDraftError: object,
     updateListingError: object,
+    publishListingError: object,
     showListingsError: object,
     uploadImageError: object,
     createStripeAccountError: object,
-  }),
+  }).isRequired,
   fetchInProgress: bool.isRequired,
-  onCreateListing: func.isRequired,
   onPayoutDetailsFormChange: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
   onManageDisableScrolling: func.isRequired,
