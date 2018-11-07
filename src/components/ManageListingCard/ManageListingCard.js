@@ -5,23 +5,36 @@ import { withRouter } from 'react-router-dom';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
-import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
+import {
+  LISTING_STATE_PENDING_APPROVAL,
+  LISTING_STATE_CLOSED,
+  LISTING_STATE_DRAFT,
+  propTypes,
+} from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { ensureOwnListing } from '../../util/data';
-import { LISTING_PAGE_PENDING_APPROVAL_VARIANT, createSlug } from '../../util/urlHelpers';
+import {
+  LISTING_PAGE_PENDING_APPROVAL_VARIANT,
+  LISTING_PAGE_DRAFT_VARIANT,
+  LISTING_PAGE_PARAM_TYPE_DRAFT,
+  LISTING_PAGE_PARAM_TYPE_EDIT,
+  createSlug,
+} from '../../util/urlHelpers';
 import { createResourceLocatorString } from '../../util/routes';
+import config from '../../config';
 import {
   InlineTextButton,
   Menu,
   MenuLabel,
   MenuContent,
   MenuItem,
+  NamedLink,
   IconSpinner,
   ResponsiveImage,
 } from '../../components';
-import config from '../../config';
 
 import MenuIcon from './MenuIcon';
+import Overlay from './Overlay';
 import css from './ManageListingCard.css';
 
 // Menu content needs the same padding
@@ -47,31 +60,31 @@ const priceData = (price, intl) => {
   return {};
 };
 
-const createEditListingURL = (routes, listing) => {
-  const id = listing.id.uuid;
-  const slug = createSlug(listing.attributes.title);
-  const pathParams = { id, slug, type: 'edit', tab: 'description' };
-
-  return createResourceLocatorString('EditListingPage', routes, pathParams, {});
-};
-
 const createListingURL = (routes, listing) => {
   const id = listing.id.uuid;
   const slug = createSlug(listing.attributes.title);
   const isPendingApproval = listing.attributes.state === LISTING_STATE_PENDING_APPROVAL;
-  const linkProps = isPendingApproval
-    ? {
-        name: 'ListingPageVariant',
-        params: {
-          id,
-          slug,
-          variant: LISTING_PAGE_PENDING_APPROVAL_VARIANT,
-        },
-      }
-    : {
-        name: 'ListingPage',
-        params: { id, slug },
-      };
+  const isDraft = listing.attributes.state === LISTING_STATE_DRAFT;
+  const variant = isDraft
+    ? LISTING_PAGE_DRAFT_VARIANT
+    : isPendingApproval
+      ? LISTING_PAGE_PENDING_APPROVAL_VARIANT
+      : null;
+
+  const linkProps =
+    isPendingApproval || isDraft
+      ? {
+          name: 'ListingPageVariant',
+          params: {
+            id,
+            slug,
+            variant,
+          },
+        }
+      : {
+          name: 'ListingPage',
+          params: { id, slug },
+        };
 
   return createResourceLocatorString(linkProps.name, routes, linkProps.params, {});
 };
@@ -113,8 +126,10 @@ export const ManageListingCardComponent = props => {
   const currentListing = ensureOwnListing(listing);
   const id = currentListing.id.uuid;
   const { title = '', price, state } = currentListing.attributes;
+  const slug = createSlug(title);
   const isPendingApproval = state === LISTING_STATE_PENDING_APPROVAL;
   const isClosed = state === LISTING_STATE_CLOSED;
+  const isDraft = state === LISTING_STATE_DRAFT;
   const firstImage =
     currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
@@ -124,115 +139,36 @@ export const ManageListingCardComponent = props => {
 
   const { formattedPrice, priceTitle } = priceData(price, intl);
 
-  /* eslint-disable jsx-a11y/no-static-element-interactions */
-  const closedOverlay = !isClosed ? null : (
-    <div
-      className={css.closedOverlayWrapper}
-      onClick={event => {
-        event.preventDefault();
-        event.stopPropagation();
-      }}
-    >
-      <div className={css.closedOverlay} />
-      <div className={css.closedOverlayContent}>
-        <div className={css.closedMessage}>
-          <FormattedMessage id="ManageListingCard.closedListing" />
-        </div>
-        <button
-          className={css.openListingButton}
-          disabled={!!actionsInProgressListingId}
-          onClick={event => {
-            event.preventDefault();
-            event.stopPropagation();
-            if (!actionsInProgressListingId) {
-              onOpenListing(currentListing.id);
-            }
-          }}
-        >
-          <FormattedMessage id="ManageListingCard.openListing" />
-        </button>
-      </div>
-    </div>
-  );
-
-  const errorOverlay =
-    hasOpeningError || hasClosingError ? (
-      <div
-        className={css.errorOverlayWrapper}
-        onClick={event => {
-          event.preventDefault();
-          event.stopPropagation();
-        }}
-      >
-        <div className={css.errorOverlay} />
-        <div className={css.errorOverlayContent}>
-          <div className={css.closedMessage}>
-            <FormattedMessage id="ManageListingCard.actionFailed" />
-          </div>
-        </div>
-      </div>
-    ) : null;
-
-  const pendingApprovalOverlay = isPendingApproval ? (
-    <div
-      className={css.pendingApprovalOverlayWrapper}
-      onClick={event => {
-        event.preventDefault();
-        event.stopPropagation();
-      }}
-    >
-      <div className={css.pendingApprovalOverlay} />
-      <div className={css.pendingApprovalOverlayContent}>
-        <div className={css.pendingMessage}>
-          <FormattedMessage
-            id="ManageListingCard.pendingApproval"
-            values={{ listingTitle: title }}
-          />
-        </div>
-      </div>
-    </div>
-  ) : null;
-
-  const thisInProgress = actionsInProgressListingId && actionsInProgressListingId.uuid === id;
-  const loadingOrErrorOverlay = thisInProgress ? (
-    <div
-      className={css.loadingOverlayWrapper}
-      onClick={event => {
-        event.preventDefault();
-        event.stopPropagation();
-      }}
-    >
-      <div className={css.loadingOverlay} />
-      <div className={css.loadingOverlayContent}>
-        <IconSpinner />
-      </div>
-    </div>
-  ) : (
-    errorOverlay
-  );
-  /* eslint-enable jsx-a11y/no-static-element-interactions */
+  const hasError = hasOpeningError || hasClosingError;
+  const thisListingInProgress =
+    actionsInProgressListingId && actionsInProgressListingId.uuid === id;
 
   const titleClasses = classNames(css.title, {
     [css.titlePending]: isPendingApproval,
+    [css.titleDraft]: isDraft,
   });
 
-  return (
-    <div
-      className={classes}
-      tabIndex={0}
-      onClick={event => {
-        event.preventDefault();
-        event.stopPropagation();
+  const editListingLinkType = isDraft
+    ? LISTING_PAGE_PARAM_TYPE_DRAFT
+    : LISTING_PAGE_PARAM_TYPE_EDIT;
 
-        // ManageListingCard contains links, buttons and elements that are working with routing.
-        // This card doesn't work if <a> or <button> is used to wrap events that are card 'clicks'.
-        //
-        // NOTE: It might be better to absolute-position those buttons over a card-links.
-        // (So, that they have no parent-child relationship - like '<a>bla<a>blaa</a></a>')
-        history.push(createListingURL(routeConfiguration(), listing));
-      }}
-    >
-      <div className={css.threeToTwoWrapper}>
+  return (
+    <div className={classes}>
+      <div
+        className={css.threeToTwoWrapper}
+        tabIndex={0}
+        onClick={event => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          // ManageListingCard contains links, buttons and elements that are working with routing.
+          // This card doesn't work if <a> or <button> is used to wrap events that are card 'clicks'.
+          //
+          // NOTE: It might be better to absolute-position those buttons over a card-links.
+          // (So, that they have no parent-child relationship - like '<a>bla<a>blaa</a></a>')
+          history.push(createListingURL(routeConfiguration(), listing));
+        }}
+      >
         <div className={css.aspectWrapper}>
           <ResponsiveImage
             rootClassName={css.rootForImage}
@@ -287,32 +223,106 @@ export const ManageListingCardComponent = props => {
             </Menu>
           </div>
         </div>
-        {closedOverlay}
-        {pendingApprovalOverlay}
-        {loadingOrErrorOverlay}
+        {isDraft ? (
+          <React.Fragment>
+            <div className={classNames({ [css.draftNoImage]: !firstImage })} />
+            <Overlay
+              message={intl.formatMessage(
+                { id: 'ManageListingCard.draftOverlayText' },
+                { listingTitle: title }
+              )}
+            >
+              <NamedLink
+                className={css.finishListingDraftLink}
+                name="EditListingPage"
+                params={{ id, slug, type: LISTING_PAGE_PARAM_TYPE_DRAFT, tab: 'photos' }}
+              >
+                <FormattedMessage id="ManageListingCard.finishListingDraft" />
+              </NamedLink>
+            </Overlay>
+          </React.Fragment>
+        ) : null}
+        {isClosed ? (
+          <Overlay
+            message={intl.formatMessage(
+              { id: 'ManageListingCard.closedListing' },
+              { listingTitle: title }
+            )}
+          >
+            <button
+              className={css.openListingButton}
+              disabled={!!actionsInProgressListingId}
+              onClick={event => {
+                event.preventDefault();
+                event.stopPropagation();
+                if (!actionsInProgressListingId) {
+                  onOpenListing(currentListing.id);
+                }
+              }}
+            >
+              <FormattedMessage id="ManageListingCard.openListing" />
+            </button>
+          </Overlay>
+        ) : null}
+        {isPendingApproval ? (
+          <Overlay
+            message={intl.formatMessage(
+              { id: 'ManageListingCard.pendingApproval' },
+              { listingTitle: title }
+            )}
+          />
+        ) : null}
+        {thisListingInProgress ? (
+          <Overlay>
+            <IconSpinner />
+          </Overlay>
+        ) : hasError ? (
+          <Overlay errorMessage={intl.formatMessage({ id: 'ManageListingCard.actionFailed' })} />
+        ) : null}
       </div>
+
       <div className={css.info}>
         <div className={css.price}>
-          <div className={css.priceValue} title={priceTitle}>
-            {formattedPrice}
-          </div>
-          <div className={css.perUnit}>
-            <FormattedMessage id="ManageListingCard.perUnit" />
-          </div>
+          {formattedPrice ? (
+            <React.Fragment>
+              <div className={css.priceValue} title={priceTitle}>
+                {formattedPrice}
+              </div>
+              <div className={css.perUnit}>
+                <FormattedMessage id="ManageListingCard.perUnit" />
+              </div>
+            </React.Fragment>
+          ) : (
+            <div className={css.noPrice}>
+              <FormattedMessage id="ManageListingCard.priceNotSet" />
+            </div>
+          )}
         </div>
+
         <div className={css.mainInfo}>
-          <div className={titleClasses}>{formatTitle(title, MAX_LENGTH_FOR_WORDS_IN_TITLE)}</div>
+          <div className={css.titleWrapper}>
+            <InlineTextButton
+              className={titleClasses}
+              onClick={event => {
+                event.preventDefault();
+                event.stopPropagation();
+                history.push(createListingURL(routeConfiguration(), listing));
+              }}
+            >
+              {formatTitle(title, MAX_LENGTH_FOR_WORDS_IN_TITLE)}
+            </InlineTextButton>
+          </div>
         </div>
-        <button
-          className={css.edit}
-          onClick={event => {
-            event.preventDefault();
-            event.stopPropagation();
-            history.push(createEditListingURL(routeConfiguration(), listing));
-          }}
-        >
-          <FormattedMessage id="ManageListingCard.edit" />
-        </button>
+
+        <div className={css.manageLinks}>
+          <NamedLink
+            className={css.manageLink}
+            name="EditListingPage"
+            params={{ id, slug, type: editListingLinkType, tab: 'description' }}
+          >
+            <FormattedMessage id="ManageListingCard.editListing" />
+          </NamedLink>
+        </div>
       </div>
     </div>
   );
