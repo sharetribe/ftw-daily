@@ -7486,9 +7486,9 @@ shallowequal@^0.2.2:
   dependencies:
     lodash.keys "^3.1.2"
 
-sharetribe-flex-sdk@^1.0.0:
+"sharetribe-flex-sdk@https://github.com/sharetribe/sharetribe-sdk-js.git#e773401e36ca4d9f6129f26b517bc5adc3fef4a4":
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/sharetribe-flex-sdk/-/sharetribe-flex-sdk-1.0.0.tgz#ed3a6199e4755917fcd97355e5d7633a490f4ba6"
+  resolved "https://github.com/sharetribe/sharetribe-sdk-js.git#e773401e36ca4d9f6129f26b517bc5adc3fef4a4"
   dependencies:
     axios "^0.18.0"
     js-cookie "^2.1.3"
