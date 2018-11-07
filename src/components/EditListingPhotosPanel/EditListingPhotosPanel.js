@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { array, bool, func, object, string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { LISTING_STATE_DRAFT } from '../../util/types';
@@ -16,7 +16,7 @@ class EditListingPhotosPanel extends Component {
       rootClassName,
       errors,
       fetchInProgress,
-      newListingCreated,
+      newListingPublished,
       images,
       listing,
       onImageUpload,
@@ -50,7 +50,7 @@ class EditListingPhotosPanel extends Component {
         <EditListingPhotosForm
           className={css.form}
           disabled={fetchInProgress}
-          ready={newListingCreated}
+          ready={newListingPublished}
           fetchErrors={errors}
           initialValues={{ images }}
           images={images}
@@ -71,8 +71,6 @@ class EditListingPhotosPanel extends Component {
   }
 }
 
-const { array, bool, func, object, shape, string } = PropTypes;
-
 EditListingPhotosPanel.defaultProps = {
   className: null,
   rootClassName: null,
@@ -86,7 +84,7 @@ EditListingPhotosPanel.propTypes = {
   rootClassName: string,
   errors: object,
   fetchInProgress: bool.isRequired,
-  newListingCreated: bool.isRequired,
+  newListingPublished: bool.isRequired,
   images: array,
 
   // We cannot use propTypes.listing since the listing might be a draft.
