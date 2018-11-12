@@ -28,6 +28,7 @@ export { default as FieldPhoneNumberInput } from './FieldPhoneNumberInput/FieldP
 export { default as FieldReviewRating } from './FieldReviewRating/FieldReviewRating';
 export { default as FieldSelect } from './FieldSelect/FieldSelect';
 export { default as FieldTextInput } from './FieldTextInput/FieldTextInput';
+export { default as FilterPlain } from './FilterPlain/FilterPlain';
 export { default as Footer } from './Footer/Footer';
 export { default as Form } from './Form/Form';
 export { default as IconAdd } from './IconAdd/IconAdd';
