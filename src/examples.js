@@ -69,6 +69,7 @@ import * as EditListingPoliciesForm from './forms/EditListingPoliciesForm/EditLi
 import * as EditListingPricingForm from './forms/EditListingPricingForm/EditListingPricingForm.example';
 import * as EmailVerificationForm from './forms/EmailVerificationForm/EmailVerificationForm.example';
 import * as EnquiryForm from './forms/EnquiryForm/EnquiryForm.example';
+import * as FilterForm from './forms/FilterForm/FilterForm.example';
 import * as LoginForm from './forms/LoginForm/LoginForm.example';
 import * as PasswordRecoveryForm from './forms/PasswordRecoveryForm/PasswordRecoveryForm.example';
 import * as PasswordResetForm from './forms/PasswordResetForm/PasswordResetForm.example';
@@ -111,6 +112,7 @@ export {
   FieldReviewRating,
   FieldSelect,
   FieldTextInput,
+  FilterForm,
   Footer,
   IconBannedUser,
   IconCheckmark,
