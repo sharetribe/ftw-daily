@@ -29,6 +29,7 @@ export { default as FieldReviewRating } from './FieldReviewRating/FieldReviewRat
 export { default as FieldSelect } from './FieldSelect/FieldSelect';
 export { default as FieldTextInput } from './FieldTextInput/FieldTextInput';
 export { default as FilterPlain } from './FilterPlain/FilterPlain';
+export { default as FilterPopup } from './FilterPopup/FilterPopup';
 export { default as Footer } from './Footer/Footer';
 export { default as Form } from './Form/Form';
 export { default as IconAdd } from './IconAdd/IconAdd';
