@@ -4,6 +4,7 @@ import * as AddImages from './components/AddImages/AddImages.example';
 import * as Avatar from './components/Avatar/Avatar.example';
 import * as BookingBreakdown from './components/BookingBreakdown/BookingBreakdown.example';
 import * as BookingPanel from './components/BookingPanel/BookingPanel.example';
+import * as BookingDateRangeFilter from './components/BookingDateRangeFilter/BookingDateRangeFilter.example';
 import * as Button from './components/Button/Button.example';
 import * as ExpandingTextarea from './components/ExpandingTextarea/ExpandingTextarea.example';
 import * as FieldBirthdayInput from './components/FieldBirthdayInput/FieldBirthdayInput.example';
@@ -94,6 +95,7 @@ export {
   AddImages,
   Avatar,
   BookingBreakdown,
+  BookingDateRangeFilter,
   BookingDatesForm,
   BookingPanel,
   Button,
