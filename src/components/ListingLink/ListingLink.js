@@ -9,8 +9,12 @@
 import React from 'react';
 import { string, oneOfType, node } from 'prop-types';
 import { richText } from '../../util/richText';
-import { LISTING_STATE_PENDING_APPROVAL, propTypes } from '../../util/types';
-import { LISTING_PAGE_PENDING_APPROVAL_VARIANT, createSlug } from '../../util/urlHelpers';
+import { LISTING_STATE_DRAFT, LISTING_STATE_PENDING_APPROVAL, propTypes } from '../../util/types';
+import {
+  LISTING_PAGE_DRAFT_VARIANT,
+  LISTING_PAGE_PENDING_APPROVAL_VARIANT,
+  createSlug,
+} from '../../util/urlHelpers';
 import { NamedLink } from '../../components';
 
 import css from './ListingLink.css';
@@ -36,13 +40,19 @@ const ListingLink = props => {
   );
 
   const isPendingApproval = state === LISTING_STATE_PENDING_APPROVAL;
-  const linkProps = isPendingApproval
+  const isDraft = state === LISTING_STATE_DRAFT;
+  const variant = isPendingApproval
+    ? LISTING_PAGE_PENDING_APPROVAL_VARIANT
+    : isDraft
+      ? LISTING_PAGE_DRAFT_VARIANT
+      : null;
+  const linkProps = !!variant
     ? {
         name: 'ListingPageVariant',
         params: {
           id,
           slug,
-          variant: LISTING_PAGE_PENDING_APPROVAL_VARIANT,
+          variant,
         },
       }
     : {

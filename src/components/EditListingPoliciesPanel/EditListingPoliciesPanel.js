@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
+import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
 import { EditListingPoliciesForm } from '../../forms';
@@ -25,7 +26,8 @@ const EditListingPoliciesPanel = props => {
   const currentListing = ensureOwnListing(listing);
   const { publicData } = currentListing.attributes;
 
-  const panelTitle = currentListing.id ? (
+  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+  const panelTitle = isPublished ? (
     <FormattedMessage
       id="EditListingPoliciesPanel.title"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
@@ -53,8 +55,8 @@ const EditListingPoliciesPanel = props => {
         onChange={onChange}
         saveActionMsg={submitButtonText}
         updated={panelUpdated}
-        updateError={errors.updateListingError}
         updateInProgress={updateInProgress}
+        fetchErrors={errors}
       />
     </div>
   );

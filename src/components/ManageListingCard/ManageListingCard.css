@@ -24,7 +24,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  cursor: pointer;
 
   /* Remove link's hover effect */
   &:hover {
@@ -77,6 +76,7 @@
   width: 100%;
   position: relative;
   transition: var(--transitionStyleButton);
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.02);
@@ -203,22 +203,33 @@
 .info {
   /* Layout */
   display: flex;
-  flex-direction: row;
-  padding: 16px 0 2px 0;
+  flex-direction: column;
+  padding: 8px 0 2px 0;
 }
 
 .price {
   /* Layout */
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  align-items: baseline;
   flex-shrink: 0;
-  margin-right: 18px;
+
+  padding-top: 4px;
+  padding-bottom: 2px;
+
+  @media (--viewportMedium) {
+    padding-top: 5px;
+    padding-bottom: 3px;
+  }
 }
 
 .priceValue {
   /* Font */
-  @apply --marketplaceH3FontStyles;
+  @apply --marketplaceH4FontStyles;
+  color: var(--marketplaceColor);
+  font-weight: var(--fontWeightSemiBold);
+
+  margin-right: 4px;
 
   /* Remove default margins from font */
   margin-top: 0;
@@ -238,11 +249,18 @@
   /* Remove default margins from font */
   margin-top: 0;
   margin-bottom: 0;
+}
 
-  @media (--viewportMedium) {
+@media (--viewportMedium) {
+  .perUnit {
     margin-top: 0;
     margin-bottom: 0;
   }
+}
+
+.noPrice {
+  composes: perUnit;
+  padding: 5px 0 3px 0;
 }
 
 .mainInfo {
@@ -251,16 +269,26 @@
   flex-grow: 1;
 }
 
+.titleWrapper {
+}
+
 .title {
   /* Font */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColor);
+  text-align: left;
+
+  padding-top: 3px;
+  padding-bottom: 3px;
 
   /* Remove default margins from font */
   margin-top: 0;
   margin-bottom: 0;
 
   @media (--viewportMedium) {
+    padding-top: 4px;
+    padding-bottom: 4px;
+
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -268,6 +296,20 @@
 
 .titlePending {
   color: var(--attentionColor);
+}
+
+.titleDraft {
+  margin-right: 8px;
+}
+
+/* Solid gray background for draft listings without image */
+.draftNoImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--matterColor);
 }
 
 .edit {
@@ -291,79 +333,8 @@
   background-position: 15px center;
 }
 
-.loadingOverlayWrapper,
-.errorOverlayWrapper,
-.closedOverlayWrapper,
-.pendingApprovalOverlayWrapper {
-  /* Positioning */
-  @apply --ManageListingCard_coverEverything;
-}
-
-.loadingOverlay,
-.errorOverlay,
-.closedOverlay,
-.pendingApprovalOverlay {
-  /* Positioning */
-  @apply --ManageListingCard_coverEverything;
-
-  /* Overlay background style */
-  background-color: var(--matterColorLight);
-  opacity: 0.9;
-}
-
-.pendingApprovalOverlay {
-  cursor: default;
-}
-
-.loadingOverlayContent,
-.errorOverlayContent,
-.closedOverlayContent,
-.pendingApprovalOverlayContent {
-  @apply --marketplaceH4FontStyles;
-  color: var(--matterColor);
-
-  /* Positioning */
-  @apply --ManageListingCard_coverEverything;
-
-  /* Layout */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: default;
-
-  /* Remove default margins from font */
-  margin-top: 0;
-  margin-bottom: 0;
-
-  @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-}
-
-.errorOverlayContent {
-  color: var(--failColor);
-  justify-content: flex-start;
-  margin-top: 90px;
-}
-
-.pendingApprovalOverlayContent {
-  justify-content: flex-start;
-  margin-top: 90px;
-}
-
-.closedMessage {
-  max-width: 220px;
-  text-align: center;
-}
-
-.pendingMessage {
-  max-width: 300px;
-  text-align: center;
-}
-
-.openListingButton {
+.openListingButton,
+.finishListingDraftLink {
   @apply --marketplaceButtonStylesPrimary;
   @apply --marketplaceH5FontStyles;
 
@@ -371,8 +342,7 @@
   min-height: 0;
 
   width: 114px;
-  height: 41px;
-  padding: 6px 0 8px;
+  padding: 8px;
   border-radius: 4px;
 }
 
@@ -382,4 +352,39 @@
 
 .cardIsOpen {
   display: block;
+}
+
+.manageLinks {
+  @apply --marketplaceH5FontStyles;
+  line-height: 18px;
+  padding-top: 2px;
+  padding-bottom: 4px;
+
+  /* Remove default margins from font */
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    line-height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.manageLink {
+  text-decoration: none;
+  color: var(--matterColor);
+  white-space: pre;
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--matterColorDark);
+  }
+}
+
+.manageLinksSeparator {
+  margin: 0 3px 0 3px;
 }

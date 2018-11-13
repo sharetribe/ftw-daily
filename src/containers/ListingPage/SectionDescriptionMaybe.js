@@ -6,9 +6,9 @@ import css from './ListingPage.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_DESCRIPTION = 20;
 
-const SectionDescription = props => {
+const SectionDescriptionMaybe = props => {
   const { description } = props;
-  return (
+  return description ? (
     <div className={css.sectionDescription}>
       <h2 className={css.descriptionTitle}>
         <FormattedMessage id="ListingPage.descriptionTitle" />
@@ -20,7 +20,7 @@ const SectionDescription = props => {
         })}
       </p>
     </div>
-  );
+  ) : null;
 };
 
-export default SectionDescription;
+export default SectionDescriptionMaybe;

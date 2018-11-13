@@ -9,7 +9,14 @@ import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { LISTING_PAGE_PENDING_APPROVAL_VARIANT, createSlug, parse } from '../../util/urlHelpers';
+import {
+  LISTING_PAGE_DRAFT_VARIANT,
+  LISTING_PAGE_PENDING_APPROVAL_VARIANT,
+  LISTING_PAGE_PARAM_TYPE_DRAFT,
+  LISTING_PAGE_PARAM_TYPE_EDIT,
+  createSlug,
+  parse,
+} from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import { ensureListing, ensureOwnListing, ensureUser, userDisplayName } from '../../util/data';
@@ -32,7 +39,7 @@ import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
-import SectionDescription from './SectionDescription';
+import SectionDescriptionMaybe from './SectionDescriptionMaybe';
 import SectionFeatures from './SectionFeatures';
 import SectionReviews from './SectionReviews';
 import SectionHost from './SectionHost';
@@ -206,12 +213,19 @@ export class ListingPageComponent extends Component {
     const isBook = !!parse(location.search).book;
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
-    const currentListing = isPendingApprovalVariant
-      ? ensureOwnListing(getOwnListing(listingId))
-      : ensureListing(getListing(listingId));
+    const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
+    const currentListing =
+      isPendingApprovalVariant || isDraftVariant
+        ? ensureOwnListing(getOwnListing(listingId))
+        : ensureListing(getListing(listingId));
 
     const listingSlug = rawParams.slug || createSlug(currentListing.attributes.title || '');
     const params = { slug: listingSlug, ...rawParams };
+
+    const listingType = isDraftVariant
+      ? LISTING_PAGE_PARAM_TYPE_DRAFT
+      : LISTING_PAGE_PARAM_TYPE_EDIT;
+    const listingTab = isDraftVariant ? 'photos' : 'description';
 
     const isApproved =
       currentListing.id && currentListing.attributes.state !== LISTING_STATE_PENDING_APPROVAL;
@@ -224,7 +238,9 @@ export class ListingPageComponent extends Component {
     // another user. We use this information to try to fetch the
     // public listing.
     const pendingOtherUsersListing =
-      isPendingApprovalVariant && showListingError && showListingError.status === 403;
+      (isPendingApprovalVariant || isDraftVariant) &&
+      showListingError &&
+      showListingError.status === 403;
     const shouldShowPublicListingPage = pendingIsApproved || pendingOtherUsersListing;
 
     if (shouldShowPublicListingPage) {
@@ -418,8 +434,8 @@ export class ListingPageComponent extends Component {
                 editParams={{
                   id: listingId.uuid,
                   slug: listingSlug,
-                  type: 'edit',
-                  tab: 'description',
+                  type: listingType,
+                  tab: listingTab,
                 }}
                 imageCarouselOpen={this.state.imageCarouselOpen}
                 onImageCarouselClose={() => this.setState({ imageCarouselOpen: false })}
@@ -438,7 +454,7 @@ export class ListingPageComponent extends Component {
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />
-                  <SectionDescription description={description} />
+                  <SectionDescriptionMaybe description={description} />
                   <SectionFeatures
                     options={amenitiesConfig}
                     selectedOptions={publicData.amenities}
@@ -524,7 +540,7 @@ ListingPageComponent.propTypes = {
   params: shape({
     id: string.isRequired,
     slug: string,
-    variant: oneOf([LISTING_PAGE_PENDING_APPROVAL_VARIANT]),
+    variant: oneOf([LISTING_PAGE_DRAFT_VARIANT, LISTING_PAGE_PENDING_APPROVAL_VARIANT]),
   }).isRequired,
 
   isAuthenticated: bool.isRequired,

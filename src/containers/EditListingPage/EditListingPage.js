@@ -5,8 +5,15 @@ import { withRouter } from 'react-router-dom';
 import { intlShape, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { LISTING_PAGE_PENDING_APPROVAL_VARIANT, createSlug } from '../../util/urlHelpers';
-import { LISTING_STATE_PENDING_APPROVAL, propTypes } from '../../util/types';
+import {
+  LISTING_PAGE_PARAM_TYPE_DRAFT,
+  LISTING_PAGE_PARAM_TYPE_NEW,
+  LISTING_PAGE_PARAM_TYPES,
+  LISTING_PAGE_PENDING_APPROVAL_VARIANT,
+  createSlug,
+} from '../../util/urlHelpers';
+import { LISTING_STATE_DRAFT, LISTING_STATE_PENDING_APPROVAL, propTypes } from '../../util/types';
+import { ensureOwnListing } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { stripeAccountClearError, createStripeAccount } from '../../ducks/user.duck';
@@ -14,9 +21,8 @@ import { EditListingWizard, NamedRedirect, Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import {
-  createListingDraft,
-  updateListingDraft,
-  requestCreateListing,
+  requestCreateListingDraft,
+  requestPublishListingDraft,
   requestUpdateListing,
   requestImageUpload,
   updateImageOrder,
@@ -38,16 +44,15 @@ export const EditListingPageComponent = props => {
     getOwnListing,
     history,
     intl,
-    onCreateListing,
-    onUpdateListing,
     onCreateListingDraft,
+    onPublishListingDraft,
+    onUpdateListing,
     onImageUpload,
     onRemoveListingImage,
     onManageDisableScrolling,
     onPayoutDetailsSubmit,
     onPayoutDetailsFormChange,
     onUpdateImageOrder,
-    onUpdateListingDraft,
     onChange,
     page,
     params,
@@ -55,18 +60,21 @@ export const EditListingPageComponent = props => {
   } = props;
 
   const { id, type } = params;
+  const isNewURI = type === LISTING_PAGE_PARAM_TYPE_NEW;
+  const isDraftURI = type === LISTING_PAGE_PARAM_TYPE_DRAFT;
 
-  const isNew = type === 'new';
-  const newListingCreated = isNew && !!page.submittedListingId;
   const listingId = page.submittedListingId || (id ? new UUID(id) : null);
-  const currentListing = getOwnListing(listingId);
-  const isPendingApproval =
-    currentListing && currentListing.attributes.state === LISTING_STATE_PENDING_APPROVAL;
+  const currentListing = ensureOwnListing(getOwnListing(listingId));
+  const { state: currentListingState } = currentListing.attributes;
 
-  const shouldRedirect = page.submittedListingId && currentListing;
-  const showForm = isNew || currentListing;
+  const isPastDraft = currentListingState && currentListingState !== LISTING_STATE_DRAFT;
+  const shouldRedirect = (isNewURI || isDraftURI) && listingId && isPastDraft;
+  const showForm = isNewURI || currentListing.id;
 
   if (shouldRedirect) {
+    const isPendingApproval =
+      currentListing && currentListingState === LISTING_STATE_PENDING_APPROVAL;
+
     // If page has already listingId (after submit) and current listings exist
     // redirect to listing page
     const listingSlug = currentListing ? createSlug(currentListing.attributes.title) : null;
@@ -91,36 +99,44 @@ export const EditListingPageComponent = props => {
     return <NamedRedirect {...redirectProps} />;
   } else if (showForm) {
     const {
-      createListingsError = null,
+      createListingDraftError = null,
+      publishListingError = null,
       updateListingError = null,
       showListingsError = null,
       uploadImageError = null,
     } = page;
     const errors = {
-      createListingsError,
+      createListingDraftError,
+      publishListingError,
       updateListingError,
       showListingsError,
       uploadImageError,
       createStripeAccountError,
     };
+    const newListingPublished =
+      isDraftURI && currentListing && currentListingState !== LISTING_STATE_DRAFT;
 
     // Show form if user is posting a new listing or editing existing one
     const disableForm = page.redirectToListing && !showListingsError;
 
     // Images are passed to EditListingForm so that it can generate thumbnails out of them
-    const currentListingImages = currentListing ? currentListing.images : [];
+    const currentListingImages =
+      currentListing && currentListing.images ? currentListing.images : [];
 
     // Images not yet connected to the listing
-    const unattachedImages = page.imageOrder.map(i => page.images[i]);
+    const imageOrder = page.imageOrder || [];
+    const unattachedImages = imageOrder.map(i => page.images[i]);
 
     const allImages = currentListingImages.concat(unattachedImages);
+    const removedImageIds = page.removedImageIds || [];
     const images = allImages.filter(img => {
-      return !page.removedImageIds.includes(img.id);
+      return !removedImageIds.includes(img.id);
     });
 
-    const title = isNew
-      ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
-      : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
+    const title =
+      isNewURI || isDraftURI
+        ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
+        : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
 
     return (
       <Page title={title} scrollingDisabled={scrollingDisabled}>
@@ -137,14 +153,13 @@ export const EditListingPageComponent = props => {
           disabled={disableForm}
           errors={errors}
           fetchInProgress={fetchInProgress}
-          newListingCreated={newListingCreated}
+          newListingPublished={newListingPublished}
           history={history}
           images={images}
-          listing={isNew ? page.listingDraft : currentListing}
-          onCreateListing={onCreateListing}
+          listing={currentListing}
           onUpdateListing={onUpdateListing}
           onCreateListingDraft={onCreateListingDraft}
-          onUpdateListingDraft={onUpdateListingDraft}
+          onPublishListingDraft={onPublishListingDraft}
           onPayoutDetailsFormChange={onPayoutDetailsFormChange}
           onPayoutDetailsSubmit={onPayoutDetailsSubmit}
           onImageUpload={onImageUpload}
@@ -154,7 +169,7 @@ export const EditListingPageComponent = props => {
           currentUser={currentUser}
           onManageDisableScrolling={onManageDisableScrolling}
           updatedTab={page.updatedTab}
-          updateInProgress={page.updateInProgress || page.createListingInProgress}
+          updateInProgress={page.updateInProgress || page.createListingDraftInProgress}
         />
       </Page>
     );
@@ -187,22 +202,21 @@ EditListingPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
   getOwnListing: func.isRequired,
-  onCreateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
+  onPublishListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   onPayoutDetailsFormChange: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onRemoveListingImage: func.isRequired,
-  onUpdateListingDraft: func.isRequired,
   onUpdateListing: func.isRequired,
   onChange: func.isRequired,
   page: object.isRequired,
   params: shape({
     id: string.isRequired,
     slug: string.isRequired,
-    type: oneOf(['new', 'edit']).isRequired,
+    type: oneOf(LISTING_PAGE_PARAM_TYPES).isRequired,
     tab: string.isRequired,
   }).isRequired,
   scrollingDisabled: bool.isRequired,
@@ -238,9 +252,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onCreateListing: values => dispatch(requestCreateListing(values)),
   onUpdateListing: (tab, values) => dispatch(requestUpdateListing(tab, values)),
-  onCreateListingDraft: values => dispatch(createListingDraft(values)),
+  onCreateListingDraft: values => dispatch(requestCreateListingDraft(values)),
+  onPublishListingDraft: listingId => dispatch(requestPublishListingDraft(listingId)),
   onImageUpload: data => dispatch(requestImageUpload(data)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
@@ -248,7 +262,6 @@ const mapDispatchToProps = dispatch => ({
   onPayoutDetailsSubmit: values => dispatch(createStripeAccount(values)),
   onUpdateImageOrder: imageOrder => dispatch(updateImageOrder(imageOrder)),
   onRemoveListingImage: imageId => dispatch(removeListingImage(imageId)),
-  onUpdateListingDraft: values => dispatch(updateListingDraft(values)),
   onChange: () => dispatch(clearUpdatedTab()),
 });
 

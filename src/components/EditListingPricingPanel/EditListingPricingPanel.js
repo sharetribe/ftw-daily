@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
+import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '../../components';
 import { EditListingPricingForm } from '../../forms';
 import { ensureOwnListing } from '../../util/data';
@@ -29,7 +30,8 @@ const EditListingPricingPanel = props => {
   const currentListing = ensureOwnListing(listing);
   const { price } = currentListing.attributes;
 
-  const panelTitle = currentListing.id ? (
+  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+  const panelTitle = isPublished ? (
     <FormattedMessage
       id="EditListingPricingPanel.title"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
@@ -47,8 +49,8 @@ const EditListingPricingPanel = props => {
       onChange={onChange}
       saveActionMsg={submitButtonText}
       updated={panelUpdated}
-      updateError={errors.updateListingError}
       updateInProgress={updateInProgress}
+      fetchErrors={errors}
     />
   ) : (
     <div className={css.priceCurrencyInvalid}>

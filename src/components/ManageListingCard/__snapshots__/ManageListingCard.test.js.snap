@@ -3,10 +3,11 @@
 exports[`ManageListingCard matches snapshot 1`] = `
 <div
   className=""
-  onClick={[Function]}
-  tabIndex={0}
 >
-  <div>
+  <div
+    onClick={[Function]}
+    tabIndex={0}
+  >
     <div>
       <ResponsiveImage
         alt="listing1 title"
@@ -93,44 +94,59 @@ exports[`ManageListingCard matches snapshot 1`] = `
   </div>
   <div>
     <div>
-      <div
-        title={55}
-      >
-        55
-      </div>
+      <React.Fragment>
+        <div
+          title={55}
+        >
+          55
+        </div>
+        <div>
+          <FormattedMessage
+            id="ManageListingCard.perUnit"
+            values={Object {}}
+          />
+        </div>
+      </React.Fragment>
+    </div>
+    <div>
       <div>
-        <FormattedMessage
-          id="ManageListingCard.perUnit"
-          values={Object {}}
-        />
+        <InlineTextButton
+          className=""
+          onClick={[Function]}
+        >
+          <span
+            key="1"
+            style={
+              Object {
+                "wordBreak": "break-all",
+              }
+            }
+          >
+            listing1
+          </span>
+           
+          title
+        </InlineTextButton>
       </div>
     </div>
     <div>
-      <div
-        className=""
-      >
-        <span
-          key="1"
-          style={
-            Object {
-              "wordBreak": "break-all",
-            }
+      <NamedLink
+        name="EditListingPage"
+        params={
+          Object {
+            "id": "listing1",
+            "slug": "listing1-title",
+            "tab": "description",
+            "type": "edit",
           }
-        >
-          listing1
-        </span>
-         
-        title
-      </div>
+        }
+      >
+        <FormattedMessage
+          id="ManageListingCard.editListing"
+          values={Object {}}
+        />
+      </NamedLink>
     </div>
-    <button
-      onClick={[Function]}
-    >
-      <FormattedMessage
-        id="ManageListingCard.edit"
-        values={Object {}}
-      />
-    </button>
   </div>
 </div>
 `;

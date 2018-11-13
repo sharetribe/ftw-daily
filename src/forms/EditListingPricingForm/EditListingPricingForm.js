@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
@@ -28,8 +28,8 @@ export const EditListingPricingFormComponent = props => (
         pristine,
         saveActionMsg,
         updated,
-        updateError,
         updateInProgress,
+        fetchErrors,
       } = fieldRenderProps;
 
       const pricePerUnitMessage = intl.formatMessage({
@@ -64,12 +64,18 @@ export const EditListingPricingFormComponent = props => (
       const submitReady = updated && pristine;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
+      const { updateListingError, showListingsError } = fetchErrors || {};
 
       return (
         <Form onSubmit={handleSubmit} className={classes}>
-          {updateError ? (
+          {updateListingError ? (
             <p className={css.error}>
               <FormattedMessage id="EditListingPricingForm.updateFailed" />
+            </p>
+          ) : null}
+          {showListingsError ? (
+            <p className={css.error}>
+              <FormattedMessage id="EditListingPricingForm.showListingFailed" />
             </p>
           ) : null}
           <FieldCurrencyInput
@@ -98,17 +104,18 @@ export const EditListingPricingFormComponent = props => (
   />
 );
 
-EditListingPricingFormComponent.defaultProps = { updateError: null };
-
-const { bool, func, string } = PropTypes;
+EditListingPricingFormComponent.defaultProps = { fetchErrors: null };
 
 EditListingPricingFormComponent.propTypes = {
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   updated: bool.isRequired,
-  updateError: propTypes.error,
   updateInProgress: bool.isRequired,
+  fetchErrors: shape({
+    showListingsError: propTypes.error,
+    updateListingError: propTypes.error,
+  }),
 };
 
 export default compose(injectIntl)(EditListingPricingFormComponent);

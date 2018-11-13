@@ -6,7 +6,10 @@ import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { denormalisedResponseEntities } from '../../util/data';
 import { TRANSITION_ENQUIRE } from '../../util/types';
-import { LISTING_PAGE_PENDING_APPROVAL_VARIANT } from '../../util/urlHelpers';
+import {
+  LISTING_PAGE_DRAFT_VARIANT,
+  LISTING_PAGE_PENDING_APPROVAL_VARIANT,
+} from '../../util/urlHelpers';
 import { fetchCurrentUser, fetchCurrentUserHasOrdersSuccess } from '../../ducks/user.duck';
 
 const { UUID } = sdkTypes;
@@ -269,7 +272,8 @@ export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => 
 export const loadData = (params, search) => dispatch => {
   const listingId = new UUID(params.id);
 
-  if (params.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT) {
+  const ownListingVariants = [LISTING_PAGE_DRAFT_VARIANT, LISTING_PAGE_PENDING_APPROVAL_VARIANT];
+  if (ownListingVariants.includes(params.variant)) {
     return dispatch(showListing(listingId, true));
   }
 

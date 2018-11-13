@@ -1,9 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
+import { LISTING_STATE_DRAFT } from '../../util/types';
 import { EditListingDescriptionForm } from '../../forms';
 import config from '../../config';
 
@@ -26,7 +27,8 @@ const EditListingDescriptionPanel = props => {
   const currentListing = ensureOwnListing(listing);
   const { description, title, publicData } = currentListing.attributes;
 
-  const panelTitle = currentListing.id ? (
+  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+  const panelTitle = isPublished ? (
     <FormattedMessage
       id="EditListingDescriptionPanel.title"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
@@ -54,19 +56,18 @@ const EditListingDescriptionPanel = props => {
         }}
         onChange={onChange}
         updated={panelUpdated}
-        updateError={errors.updateListingError}
         updateInProgress={updateInProgress}
+        fetchErrors={errors}
         categories={config.custom.categories}
       />
     </div>
   );
 };
 
-const { func, object, string, bool } = PropTypes;
-
 EditListingDescriptionPanel.defaultProps = {
   className: null,
   rootClassName: null,
+  errors: null,
   listing: null,
 };
 

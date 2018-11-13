@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "private": true,
   "license": "Apache-2.0",
   "dependencies": {
@@ -49,7 +49,7 @@
     "redux-thunk": "^2.2.0",
     "sanitize.css": "^5.0.0",
     "seedrandom": "^2.4.3",
-    "sharetribe-flex-sdk": "^1.0.0",
+    "sharetribe-flex-sdk": "^1.1.0",
     "sharetribe-scripts": "1.1.5",
     "smoothscroll-polyfill": "^0.4.0",
     "source-map-support": "^0.5.4",
