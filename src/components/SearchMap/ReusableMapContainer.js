@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { node, string, object } from 'prop-types';
-import mapValues from 'lodash/mapValues';
 import { IntlProvider } from 'react-intl';
 import config from '../../config';
 
@@ -59,16 +58,8 @@ class ReusableMapContainer extends React.Component {
     // NOTICE: Children rendered with ReactDOM.render doesn't have Router access
     // You need to provide onClick functions and URLs as props.
     const renderChildren = () => {
-      const isTestEnv = process.env.NODE_ENV === 'test';
-
-      const messages = this.props.messages;
-      // Locale should not affect the tests. We ensure this by providing
-      // messages with the key as the value of each message.
-      const testMessages = mapValues(messages, (val, key) => key);
-      const localeMessages = isTestEnv ? testMessages : messages;
-
       const children = (
-        <IntlProvider locale={config.locale} messages={localeMessages}>
+        <IntlProvider locale={config.locale} messages={this.props.messages}>
           {this.props.children}
         </IntlProvider>
       );
