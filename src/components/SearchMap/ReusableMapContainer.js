@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { node, string } from 'prop-types';
+import { node, string, object } from 'prop-types';
 import mapValues from 'lodash/mapValues';
 import { IntlProvider } from 'react-intl';
-import messages from '../../translations/en.json';
 import config from '../../config';
 
 import css from './SearchMap.css';
@@ -62,6 +61,7 @@ class ReusableMapContainer extends React.Component {
     const renderChildren = () => {
       const isTestEnv = process.env.NODE_ENV === 'test';
 
+      const messages = this.props.messages;
       // Locale should not affect the tests. We ensure this by providing
       // messages with the key as the value of each message.
       const testMessages = mapValues(messages, (val, key) => key);
@@ -128,6 +128,7 @@ ReusableMapContainer.propTypes = {
   children: node.isRequired,
   className: string,
   reusableMapHiddenHandle: string.isRequired,
+  messages: object.isRequired,
 };
 
 export default ReusableMapContainer;

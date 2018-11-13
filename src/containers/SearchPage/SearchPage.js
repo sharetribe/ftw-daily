@@ -234,6 +234,7 @@ export class SearchPageComponent extends Component {
                   onCloseAsModal={() => {
                     onManageDisableScrolling('SearchPage.map', false);
                   }}
+                  messages={intl.messages}
                 />
               ) : null}
             </div>

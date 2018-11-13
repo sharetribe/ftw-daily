@@ -125,6 +125,7 @@ export class SearchMapComponent extends Component {
       zoom,
       mapsConfig,
       activeListingId,
+      messages,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
@@ -169,6 +170,7 @@ export class SearchMapComponent extends Component {
         className={reusableContainerClassName}
         reusableMapHiddenHandle={REUSABLE_MAP_HIDDEN_HANDLE}
         onReattach={forceUpdateHandler}
+        messages={messages}
       >
         <SearchMapWithMapbox
           className={classes}
@@ -225,6 +227,7 @@ SearchMapComponent.propTypes = {
   onMapMoveEnd: func.isRequired,
   zoom: number,
   mapsConfig: object,
+  messages: object.isRequired,
 
   // from withRouter
   history: shape({
