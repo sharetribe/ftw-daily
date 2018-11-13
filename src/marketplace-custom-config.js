@@ -51,3 +51,8 @@ export const priceFilterConfig = {
   max: 1000,
   step: 5,
 };
+
+// Activate booking dates filter on search page
+export const dateRangeFilterConfig = {
+  active: true,
+};

@@ -52,7 +52,7 @@ export class SearchPageComponent extends Component {
   }
 
   filters() {
-    const { categories, amenities, priceFilterConfig } = this.props;
+    const { categories, amenities, priceFilterConfig, dateRangeFilterConfig } = this.props;
 
     return {
       categoryFilter: {
@@ -66,6 +66,10 @@ export class SearchPageComponent extends Component {
       priceFilter: {
         paramName: 'price',
         config: priceFilterConfig,
+      },
+      dateRangeFilter: {
+        paramName: 'dates',
+        config: dateRangeFilterConfig,
       },
     };
   }
@@ -210,6 +214,7 @@ export class SearchPageComponent extends Component {
               categoryFilter: filters.categoryFilter,
               amenitiesFilter: filters.amenitiesFilter,
               priceFilter: filters.priceFilter,
+              dateRangeFilter: filters.dateRangeFilter,
             }}
           />
           <ModalInMobile
@@ -256,6 +261,7 @@ SearchPageComponent.defaultProps = {
   categories: config.custom.categories,
   amenities: config.custom.amenities,
   priceFilterConfig: config.custom.priceFilterConfig,
+  dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
   activeListingId: null,
 };
 
@@ -278,6 +284,7 @@ SearchPageComponent.propTypes = {
     max: number.isRequired,
     step: number.isRequired,
   }),
+  dateRangeFilterConfig: shape({ active: bool.isRequired }),
 
   // from withRouter
   history: shape({

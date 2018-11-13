@@ -66,6 +66,12 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             ],
             "paramName": "pub_category",
           },
+          "dateRangeFilter": Object {
+            "config": Object {
+              "active": true,
+            },
+            "paramName": "dates",
+          },
           "priceFilter": Object {
             "config": Object {
               "max": 1000,
