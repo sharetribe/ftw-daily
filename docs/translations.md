@@ -140,14 +140,14 @@ For changing the language of the template application:
 * In [src/config.js](../src/config.js), change the `locale` variable value to match the new locale
   (the name of the new translations file, without the extension), for example:
 
-```
+```js
 const locale = 'es';
 ```
 
 * In [src/app.js](../src/app.js), change the translation imports to point to the correct
   `react-intl` locale and the new translations file you created, for example:
 
-```
+```js
 import localeData from 'react-intl/locale-data/es';
 import messages from './translations/es.json';
 ```
@@ -158,6 +158,6 @@ keys as values. However, when adding new translations you can end up with missin
 in tests. To change the translation file used in tests change the `messages` variable in
 [src/util/test-helpers.js](../src/util/test-helpers.js) to match your language in use, for example:
 
-```
+```js
 import messages from '../translations/es.json';
 ```
