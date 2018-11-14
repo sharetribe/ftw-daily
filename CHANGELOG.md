@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-11-XX
 
+* [fix] the alignment of arrows in FieldDateRangeInput and refactoring arrow icon code. 
+  [#951](https://github.com/sharetribe/flex-template-web/pull/951)
+
 ## v2.3.0 2018-11-13
 
 * [add] Draft listing is used in EditListingWizard, ManageListingCard and ListingPage.
