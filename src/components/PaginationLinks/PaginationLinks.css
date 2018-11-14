@@ -17,15 +17,6 @@
   /* Reset <a> tag sizing */
   line-height: 0;
   font-size: 0;
-
-  /* Color for svg icons */
-  fill: var(--marketplaceColor);
-  stroke: var(--marketplaceColor);
-
-  &:hover {
-    fill: var(--marketplaceColorDark);
-    stroke: var(--marketplaceColorDark);
-  }
 }
 
 .prev {
@@ -35,6 +26,17 @@
 .next {
   /* Minimum touch size 44px (svg width + padding) */
   padding-left: 33px;
+}
+
+.arrowIcon {
+  /* Color for svg icons */
+  fill: var(--marketplaceColor);
+  stroke: var(--marketplaceColor);
+
+  &:hover {
+    fill: var(--marketplaceColorDark);
+    stroke: var(--marketplaceColorDark);
+  }
 }
 
 .disabled,

@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import range from 'lodash/range';
-import { NamedLink } from '../../components';
+import { IconArrowHead, NamedLink } from '../../components';
 import { stringify } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
 
-import NextPageIcon from './NextPageIcon';
-import PrevPageIcon from './PrevPageIcon';
 import css from './PaginationLinks.css';
 
 const { string, object } = PropTypes;
@@ -77,13 +75,17 @@ export const PaginationLinksComponent = props => {
       to={{ search: stringify(prevSearchParams) }}
       title={intl.formatMessage({ id: 'PaginationLinks.previous' })}
     >
-      <PrevPageIcon className={css.icon} />
+      <IconArrowHead direction="left" size="big" rootClassName={css.arrowIcon} />
     </NamedLink>
   );
 
   const prevLinkDisabled = (
-    <div className={classNames(css.disabled, css.prev)}>
-      <PrevPageIcon className={css.icon} />
+    <div className={css.prev}>
+      <IconArrowHead
+        direction="left"
+        size="big"
+        rootClassName={classNames(css.arrowIcon, css.disabled)}
+      />
     </div>
   );
 
@@ -96,13 +98,17 @@ export const PaginationLinksComponent = props => {
       to={{ search: stringify(nextSearchParams) }}
       title={intl.formatMessage({ id: 'PaginationLinks.next' })}
     >
-      <NextPageIcon className={css.icon} />
+      <IconArrowHead direction="right" size="big" rootClassName={css.arrowIcon} />
     </NamedLink>
   );
 
   const nextLinkDisabled = (
-    <div className={classNames(css.disabled, css.next)}>
-      <NextPageIcon className={css.icon} />
+    <div className={css.next}>
+      <IconArrowHead
+        direction="right"
+        size="big"
+        rootClassName={classNames(css.arrowIcon, css.disabled)}
+      />
     </div>
   );
 
