@@ -97,6 +97,7 @@
   & :global(.DayPickerNavigation_button) {
     color: var(--matterColorLight);
     border: 0;
+    top: 24px;
   }
   & :global(.CalendarDay__default) {
     background-color: var(--marketplaceColor);
