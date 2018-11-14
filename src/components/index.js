@@ -42,6 +42,7 @@ export { default as FieldSelect } from './FieldSelect/FieldSelect';
 export { default as FieldTextInput } from './FieldTextInput/FieldTextInput';
 export { default as Footer } from './Footer/Footer';
 export { default as Form } from './Form/Form';
+export { default as IconArrowHead } from './IconArrowHead/IconArrowHead';
 export { default as IconBannedUser } from './IconBannedUser/IconBannedUser';
 export { default as IconCheckmark } from './IconCheckmark/IconCheckmark';
 export { default as IconClose } from './IconClose/IconClose';

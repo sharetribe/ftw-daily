@@ -4,11 +4,12 @@ exports[`PaginationLinks should match snapshot with both links disabled 1`] = `
 <nav
   className=""
 >
-  <div
-    className=""
-  >
-    <PrevPageIcon
+  <div>
+    <IconArrowHead
       className={null}
+      direction="left"
+      rootClassName=""
+      size="big"
     />
   </div>
   <div
@@ -33,11 +34,12 @@ exports[`PaginationLinks should match snapshot with both links disabled 1`] = `
       1
     </NamedLink>
   </div>
-  <div
-    className=""
-  >
-    <NextPageIcon
+  <div>
+    <IconArrowHead
       className={null}
+      direction="right"
+      rootClassName=""
+      size="big"
     />
   </div>
 </nav>
@@ -61,8 +63,11 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
       }
     }
   >
-    <PrevPageIcon
+    <IconArrowHead
       className={null}
+      direction="left"
+      rootClassName={null}
+      size="big"
     />
   </NamedLink>
   <div
@@ -137,8 +142,11 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
       }
     }
   >
-    <NextPageIcon
+    <IconArrowHead
       className={null}
+      direction="right"
+      rootClassName={null}
+      size="big"
     />
   </NamedLink>
 </nav>
@@ -148,11 +156,12 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
 <nav
   className=""
 >
-  <div
-    className=""
-  >
-    <PrevPageIcon
+  <div>
+    <IconArrowHead
       className={null}
+      direction="left"
+      rootClassName=""
+      size="big"
     />
   </div>
   <div
@@ -227,8 +236,11 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
       }
     }
   >
-    <NextPageIcon
+    <IconArrowHead
       className={null}
+      direction="right"
+      rootClassName={null}
+      size="big"
     />
   </NamedLink>
 </nav>
@@ -252,8 +264,11 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
       }
     }
   >
-    <PrevPageIcon
+    <IconArrowHead
       className={null}
+      direction="left"
+      rootClassName={null}
+      size="big"
     />
   </NamedLink>
   <div
@@ -314,11 +329,12 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
       3
     </NamedLink>
   </div>
-  <div
-    className=""
-  >
-    <NextPageIcon
+  <div>
+    <IconArrowHead
       className={null}
+      direction="right"
+      rootClassName=""
+      size="big"
     />
   </div>
 </nav>
