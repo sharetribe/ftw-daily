@@ -21,8 +21,7 @@ import {
   pickerEndDateToApiDate,
 } from './DateRangeInput.helpers';
 
-import NextMonthIcon from './NextMonthIcon';
-import PreviousMonthIcon from './PreviousMonthIcon';
+import { IconArrowHead } from '../../components';
 import css from './DateRangeInput.css';
 
 export const HORIZONTAL_ORIENTATION = 'horizontal';
@@ -36,6 +35,15 @@ export const ANCHOR_LEFT = 'left';
 // This prevents showing the validation error when the user selects a
 // value and moves on to another input within this component.
 const BLUR_TIMEOUT = 100;
+
+// IconArrowHead component might not be defined if exposed directly to the file.
+// This component is called before IconArrowHead component in components/index.js
+const PrevIcon = props => (
+  <IconArrowHead {...props} direction="left" rootClassName={css.arrowIcon} />
+);
+const NextIcon = props => (
+  <IconArrowHead {...props} direction="right" rootClassName={css.arrowIcon} />
+);
 
 // Possible configuration options of React-dates
 const defaultProps = {
@@ -79,8 +87,8 @@ const defaultProps = {
   hideKeyboardShortcutsPanel: true,
 
   // navigation related props
-  navPrev: <PreviousMonthIcon />,
-  navNext: <NextMonthIcon />,
+  navPrev: <PrevIcon />,
+  navNext: <NextIcon />,
   onPrevMonthClick() {},
   onNextMonthClick() {},
   transitionDuration: 200, // milliseconds between next month changes etc.

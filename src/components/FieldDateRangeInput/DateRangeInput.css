@@ -263,8 +263,7 @@
   }
 }
 
-.rootNextMonthIcon,
-.rootPreviousMonthIcon {
+.arrowIcon {
   stroke: var(--matterColorLight);
   fill: var(--matterColorLight);
 }
