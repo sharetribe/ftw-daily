@@ -16,6 +16,8 @@ way to update this template, but currently, we follow a pattern:
 
 * [fix] the alignment of arrows in FieldDateRangeInput and refactoring arrow icon code. 
   [#951](https://github.com/sharetribe/flex-template-web/pull/951)
+* [change] Remove unnecessary language configuration and improve translations documentation.
+  [#950](https://github.com/sharetribe/flex-template-web/pull/950)
 
 ## v2.3.0 2018-11-13
 

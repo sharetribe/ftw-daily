@@ -132,13 +132,32 @@ More information about adding static content to the application can be found fro
 
 For changing the language of the template application:
 
-1.  Copy the default [src/translations/en.json](../src/translations/en.json) English translations
-    file into some other file like `es.json`.
+* Copy the default [src/translations/en.json](../src/translations/en.json) English translations file
+  into some other file like `es.json`.
 
-1.  Change the messages in the new translations file to the desired language.
+* Change the messages in the new translations file to the desired language.
 
-1.  In [src/config.js](../src/config.js), change the `locale` variable value to match the new locale
-    (the name of the new translations file, without the extension).
+* In [src/config.js](../src/config.js), change the `locale` variable value to match the new locale
+  (the name of the new translations file, without the extension), for example:
 
-1.  In [src/app.js](../src/app.js), change the translation imports to point to the correct
-    `react-intl` locale and the new translations file you created.
+```js
+const locale = 'es';
+```
+
+* In [src/app.js](../src/app.js), change the translation imports to point to the correct
+  `react-intl` locale and the new translations file you created, for example:
+
+```js
+import localeData from 'react-intl/locale-data/es';
+import messages from './translations/es.json';
+```
+
+Also, in case you will translate the application and develop it forward it is wise to change the
+translations file that the tests use. Normally tests are language agnostic as they use translation
+keys as values. However, when adding new translations you can end up with missing translation keys
+in tests. To change the translation file used in tests change the `messages` variable in
+[src/util/test-helpers.js](../src/util/test-helpers.js) to match your language in use, for example:
+
+```js
+import messages from '../translations/es.json';
+```
