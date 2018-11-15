@@ -14,7 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-11-XX
 
-* [fix] the alignment of arrows in FieldDateRangeInput and refactoring arrow icon code. 
+* [change] Add index files of components and containers folder to .prettierignore
+  [#952](https://github.com/sharetribe/flex-template-web/pull/952)
+* [fix] the alignment of arrows in FieldDateRangeInput and refactoring arrow icon code.
   [#951](https://github.com/sharetribe/flex-template-web/pull/951)
 * [change] Remove unnecessary language configuration and improve translations documentation.
   [#950](https://github.com/sharetribe/flex-template-web/pull/950)
