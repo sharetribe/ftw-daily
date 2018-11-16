@@ -14,6 +14,11 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-11-XX
 
+## v2.3.1 2018-11-16
+
+* [fix] Don't set currentUserHasListings if fetched listing is in draft state.
+  ModalMissingInformation was shown too early for users creating their first listing.
+  [#953](https://github.com/sharetribe/flex-template-web/pull/953)
 * [change] Add index files of components and containers folder to .prettierignore
   [#952](https://github.com/sharetribe/flex-template-web/pull/952)
 * [fix] the alignment of arrows in FieldDateRangeInput and refactoring arrow icon code.
@@ -23,11 +28,12 @@ way to update this template, but currently, we follow a pattern:
 
 ## v2.3.0 2018-11-13
 
-* [add] Draft listing is used in EditListingWizard, ManageListingCard and ListingPage.
-  From now on description panel creates a draft listing and photos panel publishes it. You can also view your current draft listings from 'your listings' page.
+* [add] Draft listing is used in EditListingWizard, ManageListingCard and ListingPage. From now on
+  description panel creates a draft listing and photos panel publishes it. You can also view your
+  current draft listings from 'your listings' page.
   [#947](https://github.com/sharetribe/flex-template-web/pull/947)
 * [fix] Firefox showed select options with the same color as select itself. Now options have their
-  own color set and *placeholder option needs to be disabled*.
+  own color set and _placeholder option needs to be disabled_.
   [#946](https://github.com/sharetribe/flex-template-web/pull/946)
 
 ## v2.2.0 2018-10-31
