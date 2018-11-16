@@ -1,9 +1,13 @@
 import omitBy from 'lodash/omitBy';
 import isUndefined from 'lodash/isUndefined';
 import config from '../config';
-import { denormalisedResponseEntities } from '../util/data';
+import { denormalisedResponseEntities, ensureOwnListing } from '../util/data';
 import { storableError } from '../util/errors';
-import { TRANSITION_REQUEST, TRANSITION_REQUEST_AFTER_ENQUIRY } from '../util/types';
+import {
+  LISTING_STATE_DRAFT,
+  TRANSITION_REQUEST,
+  TRANSITION_REQUEST_AFTER_ENQUIRY,
+} from '../util/types';
 import * as log from '../util/log';
 import { authInfo } from './Auth.duck';
 
@@ -275,7 +279,11 @@ export const fetchCurrentUserHasListings = () => (dispatch, getState, sdk) => {
     .query(params)
     .then(response => {
       const hasListings = response.data.data && response.data.data.length > 0;
-      dispatch(fetchCurrentUserHasListingsSuccess(!!hasListings));
+
+      const hasPublishedListings =
+        hasListings &&
+        ensureOwnListing(response.data.data[0]).attributes.state !== LISTING_STATE_DRAFT;
+      dispatch(fetchCurrentUserHasListingsSuccess(!!hasPublishedListings));
     })
     .catch(e => dispatch(fetchCurrentUserHasListingsError(storableError(e))));
 };
