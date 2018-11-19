@@ -73,20 +73,22 @@ class PriceFilterPlainComponent extends Component {
             <FormattedMessage id={'PriceFilter.clear'} />
           </button>
         </div>
-        <PriceFilterForm
-          id={id}
-          initialValues={hasInitialValues ? initialValues : { minPrice: min, maxPrice: max }}
-          onChange={this.handleChange}
-          intl={intl}
-          contentRef={node => {
-            this.filterContent = node;
-          }}
-          min={min}
-          max={max}
-          step={step}
-          liveEdit
-          isOpen={this.state.isOpen}
-        />
+        <div className={css.formWrapper}>
+          <PriceFilterForm
+            id={id}
+            initialValues={hasInitialValues ? initialValues : { minPrice: min, maxPrice: max }}
+            onChange={this.handleChange}
+            intl={intl}
+            contentRef={node => {
+              this.filterContent = node;
+            }}
+            min={min}
+            max={max}
+            step={step}
+            liveEdit
+            isOpen={this.state.isOpen}
+          />
+        </div>
       </div>
     );
   }

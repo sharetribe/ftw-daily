@@ -106,7 +106,13 @@
 }
 
 .priceSeparator {
-  margin: 0 8px;
+  margin: 4px 8px 0 8px;
+}
+
+@media (--viewportMedium) {
+  .priceSeparator {
+    margin: 2px 8px 0 8px;
+  }
 }
 
 .sliderWrapper {
