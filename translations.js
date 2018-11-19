@@ -5,6 +5,7 @@
 const inquirer = require('inquirer');
 const difference = require('lodash/difference');
 const fs = require('fs');
+const chalk = require('chalk');
 
 const PATH = './src/translations/';
 
@@ -64,7 +65,7 @@ const run = () => {
         if (err) {
           throw err;
         }
-        console.log('The translation file is updated');
+        console.log(chalk.bold('The translation file is updated'));
         run();
       });
     })
@@ -73,7 +74,7 @@ const run = () => {
         // break out of Promise chain, start from start
         run();
       } else {
-        console.log(`An error occurred due to: ${err.message}`);
+        console.log(chalk.red(`An error occurred due to: ${err.message}`));
       }
     });
 };
@@ -162,7 +163,7 @@ const addTranslation = (targetLang, key, source) => {
       name: 'value',
       message: `Please provide a translation in ${targetLangName(
         targetLang
-      )} for the key "${key}". The current ${SOURCE_LANG.name} translation is "${source[key]}"`,
+      )} for the key ${chalk.blueBright(key)}. The current ${SOURCE_LANG.name} translation is ${chalk.green(source[key])}`,
     },
   ]);
 };
