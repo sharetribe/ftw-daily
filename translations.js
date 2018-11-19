@@ -144,7 +144,9 @@ const selectKey = (targetLang, diff, source, target) => {
     {
       type: 'list',
       name: 'key',
-      message: `The following translation keys (${diff.length}) are missing from the ${targetLangName(
+      message: `The following translation keys (${
+        diff.length
+      }) are missing from the ${targetLangName(
         targetLang
       )} translations. Select a key to add a translation.`,
       choices: choices,
@@ -169,7 +171,9 @@ const addTranslation = (targetLang, key, source) => {
       name: 'value',
       message: `Please provide a translation in ${targetLangName(
         targetLang
-      )} for the key ${chalk.blueBright(key)}. The current ${SOURCE_LANG.name} translation is ${chalk.green(source[key])}`,
+      )} for the key ${chalk.blueBright(key)}. The current ${
+        SOURCE_LANG.name
+      } translation is ${chalk.green(source[key])}`,
     },
   ]);
 };
