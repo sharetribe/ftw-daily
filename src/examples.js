@@ -13,6 +13,7 @@ import * as FieldCheckbox from './components/FieldCheckbox/FieldCheckbox.example
 import * as FieldCheckboxGroup from './components/FieldCheckboxGroup/FieldCheckboxGroup.example';
 import * as FieldCurrencyInput from './components/FieldCurrencyInput/FieldCurrencyInput.example';
 import * as FieldDateInput from './components/FieldDateInput/FieldDateInput.example';
+import * as FieldDateRangeController from './components/FieldDateRangeController/FieldDateRangeController.example';
 import * as FieldDateRangeInput from './components/FieldDateRangeInput/FieldDateRangeInput.example';
 import * as FieldPhoneNumberInput from './components/FieldPhoneNumberInput/FieldPhoneNumberInput.example';
 import * as FieldRadioButton from './components/FieldRadioButton/FieldRadioButton.example';
@@ -115,6 +116,7 @@ export {
   FieldCheckbox,
   FieldCheckboxGroup,
   FieldCurrencyInput,
+  FieldDateRangeController,
   FieldDateInput,
   FieldDateRangeInput,
   FieldPhoneNumberInput,

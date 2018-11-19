@@ -35,6 +35,28 @@
     background-color: transparent;
   }
 
+  & :global(.DayPickerNavigation__horizontal) {
+    position: relative;
+    width: 100%;
+  }
+  & :global(.DayPickerNavigation_button__horizontal) {
+    padding: 6px 9px;
+    top: 21px;
+    position: absolute;
+    cursor: pointer;
+    display: inline;
+    &:first-of-type {
+      left: 24px;
+    }
+    &:last-of-type {
+      right: 24px;
+    }
+  }
+  & :global(.DayPickerNavigation_button) {
+    color: var(--matterColor);
+    border: 0;
+  }
+
   & :global(.CalendarMonth),
   & :global(.CalendarMonthGrid) {
     background-color: transparent;
@@ -74,12 +96,6 @@
       margin-top: 0;
       margin-bottom: 0;
     }
-  }
-
-  & :global(.DayPickerNavigation_button) {
-    color: var(--matterColor);
-    border: 0;
-    top: 26px;
   }
 
   & :global(.CalendarDay__default) {
