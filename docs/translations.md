@@ -161,3 +161,17 @@ in tests. To change the translation file used in tests change the `messages` var
 ```js
 import messages from '../translations/es.json';
 ```
+
+## Managing translations
+
+In case you have added a new language translation file and are pulling translation updates to
+`en.json` from the upstream repo there is a command line tool to help keeping the translation files in
+sync. Running the following command in the project root
+
+```
+node translations.js
+
+```
+will start a command line application that can be used to match a translation file agains the
+English translations. Just modify the `translations.js` file and add you language to the
+`TARGET_LANGS` array and it will be available in the tool.
