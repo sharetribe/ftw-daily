@@ -1,7 +1,12 @@
 /**
  * A translations too that can be used to keep a translation file(s)
  * up to date with one source language file.
+ *
+ * To track new languages add a desired language to the TARGET_LANGS array.
+ * By default the translations are matched agains English translations
+ * but that can be changed by modifying the SOURCE_LANG.
  */
+
 const inquirer = require('inquirer');
 const difference = require('lodash/difference');
 const fs = require('fs');
@@ -139,10 +144,11 @@ const selectKey = (targetLang, diff, source, target) => {
     {
       type: 'list',
       name: 'key',
-      message: `The following translation keys are missing from the ${targetLangName(
+      message: `The following translation keys (${diff.length}) are missing from the ${targetLangName(
         targetLang
       )} translations. Select a key to add a translation.`,
       choices: choices,
+      pageSize: 30,
     },
   ]);
 };
