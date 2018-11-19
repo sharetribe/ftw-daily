@@ -169,3 +169,28 @@ export const formatDate = (intl, todayString, d) => {
 
   return `${formattedDate}, ${formattedTime}`;
 };
+
+/**
+ * Converts string given in ISO8601 format to date object.
+ * This is used e.g. when when dates are parsed form urlParams
+ *
+ * @param {String} dateString in 'YYYY-MM-DD'format
+ *
+ * @returns {Date} parsed date object
+ */
+export const parseDateFromISO8601 = dateString => {
+  return moment(dateString, 'YYYY-MM-DD').toDate();
+};
+
+/**
+ * Converts date to string ISO8601 format ('YYYY-MM-DD').
+ * This string is used e.g. in urlParam.
+ *
+ * @param {Date} date
+ *
+ * @returns {String} string in 'YYYY-MM-DD'format
+ */
+
+export const stringifyDateToISO8601 = date => {
+  return moment(date).format('YYYY-MM-DD');
+};
