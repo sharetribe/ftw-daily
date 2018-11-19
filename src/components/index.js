@@ -21,6 +21,7 @@ export { default as FieldCheckbox } from './FieldCheckbox/FieldCheckbox';
 export { default as FieldCheckboxGroup } from './FieldCheckboxGroup/FieldCheckboxGroup';
 export { default as FieldCurrencyInput } from './FieldCurrencyInput/FieldCurrencyInput';
 export { default as FieldDateInput } from './FieldDateInput/FieldDateInput';
+export { default as FieldDateRangeController } from './FieldDateRangeController/FieldDateRangeController';
 export { default as FieldDateRangeInput } from './FieldDateRangeInput/FieldDateRangeInput';
 export { default as FieldPhoneNumberInput } from './FieldPhoneNumberInput/FieldPhoneNumberInput';
 export { default as FieldReviewRating } from './FieldReviewRating/FieldReviewRating';
