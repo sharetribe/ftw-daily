@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-11-XX
 
+* [fix] PriceFilter styles
+  [#954](https://github.com/sharetribe/flex-template-web/pull/954)
+
 ## v2.3.1 2018-11-16
 
 * [fix] Don't set currentUserHasListings if fetched listing is in draft state.
