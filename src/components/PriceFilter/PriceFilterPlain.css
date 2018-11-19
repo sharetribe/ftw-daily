@@ -34,6 +34,10 @@
   cursor: pointer;
 }
 
+.formWrapper {
+  padding-left: 20px;
+}
+
 .clearButton {
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightMedium);
