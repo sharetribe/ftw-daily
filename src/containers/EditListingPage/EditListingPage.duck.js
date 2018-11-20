@@ -3,7 +3,6 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import * as log from '../../util/log';
-import { fetchCurrentUserHasListingsSuccess } from '../../ducks/user.duck';
 
 const { UUID } = sdkTypes;
 
@@ -273,11 +272,6 @@ export function requestCreateListingDraft(data) {
 
         // Add the created listing to the marketplace data
         dispatch(addMarketplaceEntities(response));
-
-        // We must update the user duck since this might be the first
-        // listing for the user, therefore changing the
-        // currentUserHasListings flag in the store.
-        dispatch(fetchCurrentUserHasListingsSuccess(true));
 
         // Modify store to understand that we have created listing and can redirect away
         dispatch(createListingDraftSuccess(response));
