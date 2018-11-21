@@ -164,7 +164,8 @@ const SearchFiltersComponent = props => {
       name="amenities"
       urlParam={amenitiesFilter.paramName}
       label={amenitiesLabel}
-      onSelect={handleSelectOptions}
+      onSubmit={handleSelectOptions}
+      showAsPopup
       options={amenitiesFilter.options}
       initialValues={initialAmenities}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}

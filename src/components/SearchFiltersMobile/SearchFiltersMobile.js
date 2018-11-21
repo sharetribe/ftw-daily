@@ -14,7 +14,7 @@ import {
   Button,
   PriceFilter,
   SelectSingleFilterPlain,
-  SelectMultipleFilterPlain,
+  SelectMultipleFilter,
   BookingDateRangeFilter,
 } from '../../components';
 import { propTypes } from '../../util/types';
@@ -236,12 +236,13 @@ class SearchFiltersMobileComponent extends Component {
     const initialAmenities = this.initialValues(amenitiesFilter.paramName);
 
     const amenitiesFilterElement = amenitiesFilter ? (
-      <SelectMultipleFilterPlain
+      <SelectMultipleFilter
         id="SearchFiltersMobile.amenitiesFilter"
         name="amenities"
         urlParam={amenitiesFilter.paramName}
         label={amenitiesLabel}
-        onSelect={this.handleSelectMultiple}
+        onSubmit={this.handleSelectMultiple}
+        liveEdit
         options={amenitiesFilter.options}
         initialValues={initialAmenities}
       />

@@ -41,3 +41,8 @@
     border: 1px solid var(--marketplaceColorDark);
   }
 }
+
+.fieldGroupPlain {
+  padding-left: 20px;
+  padding-bottom: 30px;
+}

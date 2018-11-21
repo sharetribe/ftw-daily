@@ -13,16 +13,16 @@
  * const initialNewFilterValues = this.initialValues(newFilter.paramName);
  *
  * const newFilterElement = newFilter ? (
- *   <SelectMultipleFilterPlain
+ * <SelectMultipleFilter
  *     id="SearchFiltersPanel.newFilter"
  *     name="newFilter"
  *     urlParam={newFilter.paramName}
  *     label={this.props.intl.formatMessage({ id: 'SearchFiltersPanel.newFilterLabel' })}
- *     onSelect={this.handleSelectMultiple}
+ *     onSubmit={this.handleSelectMultiple}
+ *     liveEdit
  *     options={multiSelectFilterXFromProps}
  *     initialValues={initialNewFilterValues}
- *     twoColumns
- *   />
+ *  />
  * ) : null;
  */
 
