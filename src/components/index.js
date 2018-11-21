@@ -103,7 +103,6 @@ export { default as SectionLocations } from './SectionLocations/SectionLocations
 export { default as SectionThumbnailLinks } from './SectionThumbnailLinks/SectionThumbnailLinks';
 export { default as SelectMultipleFilter } from './SelectMultipleFilter/SelectMultipleFilter';
 export { default as SelectSingleFilter } from './SelectSingleFilter/SelectSingleFilter';
-export { default as SelectSingleFilterPlain } from './SelectSingleFilterPlain/SelectSingleFilterPlain';
 export { default as StripeBankAccountTokenInputField } from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';
 export { default as TabNav } from './TabNav/TabNav';
 export { LinkTabNavHorizontal, ButtonTabNavHorizontal } from './TabNavHorizontal/TabNavHorizontal';
