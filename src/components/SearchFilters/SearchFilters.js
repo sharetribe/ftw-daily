@@ -152,6 +152,7 @@ const SearchFiltersComponent = props => {
       urlParam={categoryFilter.paramName}
       label={categoryLabel}
       onSelect={handleSelectOption}
+      showAsPopup
       options={categoryFilter.options}
       initialValue={initialCategory}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
