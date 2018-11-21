@@ -59,7 +59,6 @@ import * as ReviewRating from './components/ReviewRating/ReviewRating.example';
 import * as Reviews from './components/Reviews/Reviews.example';
 import * as SectionThumbnailLinks from './components/SectionThumbnailLinks/SectionThumbnailLinks.example';
 import * as SelectMultipleFilter from './components/SelectMultipleFilter/SelectMultipleFilter.example';
-import * as SelectMultipleFilterPlain from './components/SelectMultipleFilterPlain/SelectMultipleFilterPlain.example';
 import * as StripeBankAccountTokenInputField from './components/StripeBankAccountTokenInputField/StripeBankAccountTokenInputField.example';
 import * as TabNav from './components/TabNav/TabNav.example';
 import * as TabNavHorizontal from './components/TabNavHorizontal/TabNavHorizontal.example';
@@ -169,7 +168,6 @@ export {
   Reviews,
   SectionThumbnailLinks,
   SelectMultipleFilter,
-  SelectMultipleFilterPlain,
   SendMessageForm,
   SignupForm,
   StripeBankAccountTokenInputField,
