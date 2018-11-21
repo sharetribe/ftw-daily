@@ -41,11 +41,12 @@ const options = [
 ];
 
 const handleSubmit = (urlParam, values, history) => {
+  console.log('Submitting values', values);
   const queryParams = values ? `?${stringify({ [urlParam]: values.join(',') })}` : '';
   history.push(`${window.location.pathname}${queryParams}`);
 };
 
-const AmenitiesFilterComponent = withRouter(props => {
+const AmenitiesFilterPopup = withRouter(props => {
   const { history, location } = props;
 
   const params = parse(location.search);
@@ -54,11 +55,13 @@ const AmenitiesFilterComponent = withRouter(props => {
 
   return (
     <SelectMultipleFilter
-      id="SelectMultipleFilterExample"
+      id="SelectMultipleFilterPopupExample"
       name="amenities"
       urlParam={URL_PARAM}
       label="Amenities"
-      onSelect={(urlParam, values) => handleSubmit(urlParam, values, history)}
+      onSubmit={(urlParam, values) => handleSubmit(urlParam, values, history)}
+      showAsPopup={true}
+      liveEdit={false}
       options={options}
       initialValues={initialValues}
       contentPlacementOffset={-14}
@@ -66,8 +69,38 @@ const AmenitiesFilterComponent = withRouter(props => {
   );
 });
 
-export const AmenitiesFilter = {
-  component: AmenitiesFilterComponent,
+export const AmenitiesFilterPopupExample = {
+  component: AmenitiesFilterPopup,
   props: {},
-  group: 'misc',
+  group: 'filters',
+};
+
+const AmenitiesFilterPlain = withRouter(props => {
+  const { history, location } = props;
+
+  const params = parse(location.search);
+  const amenities = params[URL_PARAM];
+  const initialValues = !!amenities ? amenities.split(',') : [];
+
+  return (
+    <SelectMultipleFilter
+      id="SelectMultipleFilterPlainExample"
+      name="amenities"
+      urlParam={URL_PARAM}
+      label="Amenities"
+      onSubmit={(urlParam, values) => {
+        handleSubmit(urlParam, values, history);
+      }}
+      showAsPopup={false}
+      liveEdit={true}
+      options={options}
+      initialValues={initialValues}
+    />
+  );
+});
+
+export const AmenitiesFilterPlainExample = {
+  component: AmenitiesFilterPlain,
+  props: {},
+  group: 'filters',
 };
