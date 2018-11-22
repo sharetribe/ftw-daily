@@ -137,6 +137,24 @@ export const isTransactionInitiateAmountTooLowError = error => {
 };
 
 /**
+ * Check if the given API error (from `sdk.transaction.initiate()`) is
+ * due to other error in Stripe.
+ */
+export const transactionInitiateOrderStripeErrors = error => {
+  if (error) {
+    return errorAPIErrors(error).reduce((messages, apiError) => {
+      const isPaymentFailedError =
+        apiError.status === 402 && apiError.code === ERROR_CODE_PAYMENT_FAILED;
+      const hasStripeError = apiError && apiError.meta && apiError.meta.stripeMessage;
+      const stripeMessageMaybe =
+        isPaymentFailedError && hasStripeError ? [apiError.meta.stripeMessage] : [];
+      return [...messages, ...stripeMessageMaybe];
+    }, []);
+  }
+  return null;
+};
+
+/**
  * Check if the given API error (from `sdk.transactions.transition(id, transition, params)`)
  * is due to invalid transition attempt.
  */
