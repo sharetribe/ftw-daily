@@ -44,7 +44,6 @@ const run = () => {
       targetKeys = Object.keys(target);
 
       const diff = difference(sourceKeys, targetKeys);
-      console.log(`target: ${target}`);
 
       if (diff.length > 0) {
         return selectKey(targetLang, diff, source, target);
