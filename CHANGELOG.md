@@ -14,14 +14,19 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-11-XX
 
-## v2.3.2 2018-11-20
+* [fix] Remove unused translation keys and update PasswordChangePage title
+  [#959](https://github.com/sharetribe/flex-template-web/pull/959)
+
+## [v2.3.2] 2018-11-20
 
 * [fix] Take 2: don't set currentUserHasListings if fetched listing is in draft state.
   [#956](https://github.com/sharetribe/flex-template-web/pull/956)
 * [fix] PriceFilter styles
   [#954](https://github.com/sharetribe/flex-template-web/pull/954)
 
-## v2.3.1 2018-11-16
+[v2.3.2]: https://github.com/sharetribe/flex-template-web/compare/v2.3.1...v2.3.2
+
+## [v2.3.1] 2018-11-16
 
 * [fix] Don't set currentUserHasListings if fetched listing is in draft state.
   ModalMissingInformation was shown too early for users creating their first listing.
@@ -33,7 +38,9 @@ way to update this template, but currently, we follow a pattern:
 * [change] Remove unnecessary language configuration and improve translations documentation.
   [#950](https://github.com/sharetribe/flex-template-web/pull/950)
 
-## v2.3.0 2018-11-13
+[v2.3.1]: https://github.com/sharetribe/flex-template-web/compare/v2.3.0...v2.3.1
+
+## [v2.3.0] 2018-11-13
 
 * [add] Draft listing is used in EditListingWizard, ManageListingCard and ListingPage. From now on
   description panel creates a draft listing and photos panel publishes it. You can also view your
@@ -43,7 +50,9 @@ way to update this template, but currently, we follow a pattern:
   own color set and _placeholder option needs to be disabled_.
   [#946](https://github.com/sharetribe/flex-template-web/pull/946)
 
-## v2.2.0 2018-10-31
+[v2.3.0]: https://github.com/sharetribe/flex-template-web/compare/v2.2.0...v2.3.0
+
+## [v2.2.0] 2018-10-31
 
 * [add] SearchPage: adds PriceFilter (and RangeSlider, FieldRangeSlider, PriceFilterForm).
 
@@ -53,7 +62,9 @@ way to update this template, but currently, we follow a pattern:
 
   [#944](https://github.com/sharetribe/flex-template-web/pull/944)
 
-## v2.1.1 2018-10-23
+  [v2.2.0]: https://github.com/sharetribe/flex-template-web/compare/v2.1.1...v2.2.0
+
+## [v2.1.1] 2018-10-23
 
 * [add] Added initial documentation about routing and loading data.
   [#941](https://github.com/sharetribe/flex-template-web/pull/941)
@@ -66,7 +77,9 @@ way to update this template, but currently, we follow a pattern:
 * [add] Added a small comment to documentation about the current state of code-splitting.
   [#938](https://github.com/sharetribe/flex-template-web/pull/938)
 
-## v2.1.0 2018-10-01
+[v2.1.1]: https://github.com/sharetribe/flex-template-web/compare/v2.1.0...v2.1.1
+
+## [v2.1.0] 2018-10-01
 
 * [change] Improve performance of public pages. Image assets are optimized and lazy loading is
   applied to images in SectionLocation and ListingCard. Read
@@ -86,7 +99,9 @@ way to update this template, but currently, we follow a pattern:
   * `SectionHero` has now a search page link that should be customized to point to your marketplace
     primary area [#933](https://github.com/sharetribe/flex-template-web/pull/933)
 
-## v2.0.0 2018-09-19
+[v2.1.0]: https://github.com/sharetribe/flex-template-web/compare/v2.0.0...v2.1.0
+
+## [v2.0.0] 2018-09-19
 
 * [add] New default map provider (Mapbox) and complete refactoring to all map and geocoding
   components. [#888](https://github.com/sharetribe/flex-template-web/pull/888)
@@ -106,7 +121,9 @@ way to update this template, but currently, we follow a pattern:
   [integrate to map providers](./docs/map-providers.md) and especially
   [changing map provider to Google Maps](./docs/google-maps.md)
 
-## v1.4.3 2018-09-15
+[v2.0.0]: https://github.com/sharetribe/flex-template-web/compare/v1.4.3...v2.0.0
+
+## [v1.4.3] 2018-09-15
 
 * [fix] fuzzy location didn't change when listing location changed.
   [#931](https://github.com/sharetribe/flex-template-web/pull/931)
@@ -117,7 +134,9 @@ way to update this template, but currently, we follow a pattern:
 * [fix] LocationAutocompleteInput: selecting with enter key prevented while fetching predictions.
   [#923](https://github.com/sharetribe/flex-template-web/pull/923)
 
-## v1.4.2 2018-09-06
+[v1.4.3]: https://github.com/sharetribe/flex-template-web/compare/v1.4.2...v1.4.3
+
+## [v1.4.2] 2018-09-06
 
 * [add] Reduce character queries on LocationAutocompleteInput to reduce geocoding costs.
   [#883](https://github.com/sharetribe/flex-template-web/pull/883)
@@ -130,7 +149,9 @@ way to update this template, but currently, we follow a pattern:
 * [change] Disable default predictions in listing wizard
   [#906](https://github.com/sharetribe/flex-template-web/pull/906)
 
-## v1.4.1 2018-08-21
+[v1.4.2]: https://github.com/sharetribe/flex-template-web/compare/v1.4.1...v1.4.2
+
+## [v1.4.1] 2018-08-21
 
 * [fix] Fix window resize redirecting to search page with reusable map component
   [#905](https://github.com/sharetribe/flex-template-web/pull/905)
@@ -147,7 +168,9 @@ way to update this template, but currently, we follow a pattern:
 
   [#900](https://github.com/sharetribe/flex-template-web/pull/900)
 
-## v1.4.0 2018-08-17
+[v1.4.1]: https://github.com/sharetribe/flex-template-web/compare/v1.4.0...v1.4.1
+
+## [v1.4.0] 2018-08-17
 
 * [change] Put availability calendar behind a feature flag
   [#902](https://github.com/sharetribe/flex-template-web/pull/902)
@@ -171,7 +194,9 @@ way to update this template, but currently, we follow a pattern:
 * [change] Removed the `country` parameter from the search page as it was not used anywhere.
   [#893](https://github.com/sharetribe/flex-template-web/pull/893)
 
-## v1.3.2 2018-08-07
+[v1.4.0]: https://github.com/sharetribe/flex-template-web/compare/v1.3.2...v1.4.0
+
+## [v1.3.2] 2018-08-07
 
 * [change] Update the Sharetribe Flex SDK to the 1.0.0 version in NPM. All the `sharetribe-sdk`
   imports are now using the new package name `sharetribe-flex-sdk`.
@@ -179,12 +204,16 @@ way to update this template, but currently, we follow a pattern:
 * [change] Reusable SearchMap. Fixed the original reverted version. (Includes audit exception 678)
   [#882](https://github.com/sharetribe/flex-template-web/pull/882)
 
-## v1.3.1
+[v1.3.2]: https://github.com/sharetribe/flex-template-web/compare/v1.3.1...v1.3.2
+
+## [v1.3.1]
 
 * [fix] Hotfix: reverting the usage of ReusableMapContainer due to production build error.
   [#881](https://github.com/sharetribe/flex-template-web/pull/881)
 
-## v1.3.0
+[v1.3.1]: https://github.com/sharetribe/flex-template-web/compare/v1.3.0...v1.3.1
+
+## [v1.3.0]
 
 * [change] Reusable SearchMap. [#877](https://github.com/sharetribe/flex-template-web/pull/877)
 * [fix] Fix a search filters panel bug where selecting an option in a multi select filter ends up
@@ -193,17 +222,23 @@ way to update this template, but currently, we follow a pattern:
 * [change] Use seeded random for client side coordinate obfuscation
   [#874](https://github.com/sharetribe/flex-template-web/pull/874)
 
-## v1.2.2
+[v1.3.0]: https://github.com/sharetribe/flex-template-web/compare/v1.2.2...v1.3.0
+
+## [v1.2.2]
 
 * [change] Change static map to dynamic map when clicked.
   [#871](https://github.com/sharetribe/flex-template-web/pull/871)
 
-## v1.2.1
+[v1.2.2]: https://github.com/sharetribe/flex-template-web/compare/v1.2.1...v1.2.2
+
+## [v1.2.1]
 
 * [fix] Lazy load map only if the map is near current viewport.
   [#871](https://github.com/sharetribe/flex-template-web/pull/871)
 
-## v1.2.0
+[v1.2.1]: https://github.com/sharetribe/flex-template-web/compare/v1.2.0...v1.2.1
+
+## [v1.2.0]
 
 * [change] Use Google's static map on ListingPage. This is a reaction to pricing change of Google
   Maps APIs. [#869](https://github.com/sharetribe/flex-template-web/pull/869)
@@ -225,7 +260,9 @@ way to update this template, but currently, we follow a pattern:
 * [fix] Fix setting Topbar search input initial value
   [#857](https://github.com/sharetribe/flex-template-web/pull/857)
 
-## v1.1.0
+[v1.2.0]: https://github.com/sharetribe/flex-template-web/compare/v1.1.0...v1.2.0
+
+## [v1.1.0]
 
 * [fix] Improve slug creation (slashes were breaking rendering in some environments)
   [#850](https://github.com/sharetribe/flex-template-web/pull/850)
@@ -241,7 +278,9 @@ way to update this template, but currently, we follow a pattern:
 * [fix] Fix showing reviews from banned users.
   [#855](https://github.com/sharetribe/flex-template-web/pull/855)
 
-## v1.0.0
+[v1.1.0]: https://github.com/sharetribe/flex-template-web/compare/v1.0.0...v1.1.0
+
+## [v1.0.0]
 
 * [change] Migrate remaining Redux Forms to Final Form. Also now all the form components can be
   found in the src/forms folder. Remove redux-form from the dependencies.
@@ -253,7 +292,9 @@ way to update this template, but currently, we follow a pattern:
 * [fix] API does not return all image variants anymore, this adds correct variants to update contact
   details call. [#848](https://github.com/sharetribe/flex-template-web/pull/848)
 
-## v0.3.1
+[v1.0.0]: https://github.com/sharetribe/flex-template-web/compare/v0.3.1...v1.0.0
+
+## [v0.3.1]
 
 * [change] Change lodash import syntax to reduce bundle size (-15.14 KB)
   [#839](https://github.com/sharetribe/flex-template-web/pull/839)
@@ -263,7 +304,9 @@ way to update this template, but currently, we follow a pattern:
 * [fix] Typo fix for background-color
   [#842](https://github.com/sharetribe/flex-template-web/pull/842)
 
-## v0.3.0
+[v0.3.1]: https://github.com/sharetribe/flex-template-web/compare/v0.3.0...v0.3.1
+
+## [v0.3.0]
 
 * Remove custom touched handling from `FieldCheckboxGroup` as it has has become obsolete now that
   Final Form is replacing Redux Form.
@@ -271,6 +314,9 @@ way to update this template, but currently, we follow a pattern:
 * Create Stripe account directly instead of passing payout details to Flex API (deprecated way).
   [#836](https://github.com/sharetribe/flex-template-web/pull/836)
 
+[v0.3.0]: https://github.com/sharetribe/flex-template-web/compare/v0.2.0...v0.3.0
+
 ## v0.2.0
 
 * Starting a change log for Flex Template for Web.
+
