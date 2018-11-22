@@ -387,7 +387,7 @@
   "PasswordChangePage.heading": "Password settings",
   "PasswordChangePage.passwordTabTitle": "Password",
   "PasswordChangePage.paymentsTabTitle": "Payments",
-  "PasswordChangePage.title": "Contact details",
+  "PasswordChangePage.title": "Password",
   "PasswordRecoveryForm.emailInvalid": "A valid email address is required",
   "PasswordRecoveryForm.emailLabel": "Email",
   "PasswordRecoveryForm.emailNotFound": "Hmm. We didn't find an account with that email address. Please double-check the address and try again.",
