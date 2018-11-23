@@ -32,6 +32,16 @@ repository instead of cloning it. See the [Customization guide](./docs/customiza
 If you want to build your own Flex marketplace by customizing the template application, see the
 [Customization guide](docs/customization-guide.md) documentation.
 
+## Deploying to Heroku
+
+**Note:** Remember to fork the repository before deploying the application. Connecting your own
+Github repository to Heroku will make manual deploys easier.
+
+See [documentation about deploying to Heroku](./docs/deploying-to-production.md#deploying-to-Heroku)
+for more information.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Documentation
 
 Full documentation can be found in the [docs directory](docs/).
