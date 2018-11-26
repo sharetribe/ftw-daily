@@ -16,7 +16,7 @@ const chalk = require('chalk');
 
 const PATH = './src/translations/';
 
-const SOURCE_LANG = { name: 'English', value: 'en' };
+const SOURCE_LANG = { name: 'English', code: 'en' };
 const TARGET_LANG_NAMES = {
   es: 'Spanish',
   de: 'German',
@@ -56,7 +56,7 @@ const targetLangChoices = () => {
   const choices = filenames
     .filter(name => name.endsWith('.json'))
     .map(name => name.split('.')[0])
-    .filter(code => code !== SOURCE_LANG.value)
+    .filter(code => code !== SOURCE_LANG.code)
     .map(code => {
       return {
         name: targetLangName(code),
@@ -107,7 +107,7 @@ const run = () => {
 
   selectLanguage(choices)
     .then(answers => {
-      sourceLang = SOURCE_LANG.value;
+      sourceLang = SOURCE_LANG.code;
       targetLang = answers.lang;
       source = readFileToJSON(filePath(sourceLang));
       target = readFileToJSON(filePath(targetLang));
