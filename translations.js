@@ -137,10 +137,10 @@ const run = () => {
       return confirmTranslation(targetLang, key, translation);
     })
     .then(answers => {
-      // a bool value if translation addition is confirmed
+      // 'y' or 'N'
       const confirmation = answers.value;
 
-      if (!confirmation) {
+      if (confirmation === 'N') {
         console.log('Discarding new translation');
         throw new BreakSignal();
       }
@@ -237,7 +237,7 @@ const addTranslation = (targetLang, key, source) => {
  * @param {String} key Key for the new translation
  * @param {Object} source Source language translations
  *
- * @return a Promise with the answers hash containing a boolean value field
+ * @return a Promise with with answers.value being 'y' or 'N'
  */
 const confirmTranslation = (targetLang, key, translation) => {
   return inquirer.prompt([
@@ -247,8 +247,7 @@ const confirmTranslation = (targetLang, key, translation) => {
       message: `Do you want to add the ${targetLangName(targetLang)} translation ${chalk.green(
         translation
       )} for the key ${chalk.blueBright(key)}? (y/N)`,
-      filter: value => (value === 'y' ? true : value === 'N' ? false : value),
-      validate: value => value === true || value === false,
+      validate: value => value === 'y' || value === 'N',
     },
   ]);
 };
