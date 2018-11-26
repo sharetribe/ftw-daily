@@ -4,7 +4,9 @@
  * A translations too that can be used to keep a translation file(s)
  * up to date with one source language file.
  *
- * To track new languages add a desired language to the TARGET_LANGS array.
+ * Possible target languages are resolved from the translation files
+ * available. When adding a new tranlation file, the language name can
+ * be added to the TARGET_LANG_NAMES map for clearer prompt messages.
  * By default the translations are matched agains English translations
  * but that can be changed by modifying the SOURCE_LANG.
  */
@@ -17,11 +19,11 @@ const chalk = require('chalk');
 const PATH = './src/translations/';
 
 const SOURCE_LANG = { name: 'English', value: 'en' };
-const TARGET_LANGS = [
-  { name: 'Spanish', value: 'es' },
-  { name: 'German', value: 'de' },
-  { name: 'French', value: 'fr' },
-];
+const TARGET_LANG_NAMES = {
+  es: 'Spanish',
+  de: 'German',
+  fr: 'French',
+};
 
 class BreakSignal {}
 
@@ -33,10 +35,37 @@ const filePath = lang => `${PATH}${lang}.json`;
 /**
  * Resolves name of a target language based on
  * a language code: en, es, de, etc.
+ *
+ * If a lang name is not found, language code is returned.
  */
-const targetLangName = lang => {
-  const targetLang = TARGET_LANGS.filter(l => l.value === lang)[0];
-  return targetLang.name;
+const targetLangName = code => {
+  const name = TARGET_LANG_NAMES[code];
+
+  return name || code;
+};
+
+/**
+ * Resolve a list of target language choices by finding all possible
+ * translation files and filtering out the SOURCE_LANG. Provides a list
+ * of objects that can be passed to inquirer.
+ *
+ * Relies on translation file naming: <lang code>.json
+ */
+const targetLangChoices = () => {
+  const folder = './src/translations/';
+  const filenames = fs.readdirSync(folder);
+
+  const choices = filenames
+    .map(name => name.split('.')[0])
+    .filter(code => code !== SOURCE_LANG.value)
+    .map(code => {
+      return {
+        name: targetLangName(code),
+        value: code,
+      };
+    });
+
+  return choices;
 };
 
 /**
@@ -75,7 +104,9 @@ const run = () => {
   let key;
   let translation;
 
-  selectLanguage()
+  const choices = targetLangChoices();
+
+  selectLanguage(choices)
     .then(answers => {
       sourceLang = SOURCE_LANG.value;
       targetLang = answers.lang;
@@ -144,13 +175,13 @@ const run = () => {
  *
  * @return a Promise
  */
-const selectLanguage = () => {
+const selectLanguage = choices => {
   return inquirer.prompt([
     {
       type: 'list',
       name: 'lang',
       message: 'Which language would you like to inspect? (Or hit Ctrl+C to quit)',
-      choices: TARGET_LANGS,
+      choices: choices,
     },
   ]);
 };
