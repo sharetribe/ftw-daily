@@ -25,6 +25,46 @@ const TARGET_LANGS = [
 
 class BreakSignal {}
 
+/**
+ * Resolves translation file path for a lang code: en, es, de, etc.
+ */
+const filePath = lang => `${PATH}${lang}.json`;
+
+/**
+ * Resolves name of a target language based on
+ * a language code: en, es, de, etc.
+ */
+const targetLangName = lang => {
+  const targetLang = TARGET_LANGS.filter(l => l.value === lang)[0];
+  return targetLang.name;
+};
+
+/**
+ * Sorts an object by key.
+ *
+ * Relies on an object keeping the order in which entries are added for string keys.
+ * See: http://exploringjs.com/es6/ch_oop-besides-classes.html#_traversal-order-of-properties
+ */
+const sort = obj => {
+  const sorted = {};
+  Object.keys(obj)
+    .sort()
+    .forEach(key => (sorted[key] = obj[key]));
+
+  return sorted;
+};
+
+/**
+ * Reads a file with JSON content and returns
+ * a JS object.
+ *
+ * @param filepath
+ */
+const readFileToJSON = filepath => {
+  const rawdata = fs.readFileSync(filepath);
+  return JSON.parse(rawdata);
+};
+
 const run = () => {
   let sourceLang;
   let targetLang;
@@ -39,8 +79,8 @@ const run = () => {
     .then(answers => {
       sourceLang = SOURCE_LANG.value;
       targetLang = answers.lang;
-      source = require(filePath(sourceLang));
-      target = require(filePath(targetLang));
+      source = readFileToJSON(filePath(sourceLang));
+      target = readFileToJSON(filePath(targetLang));
       sourceKeys = Object.keys(source);
       targetKeys = Object.keys(target);
 
@@ -96,35 +136,6 @@ const run = () => {
         console.log(chalk.red(`An error occurred due to: ${err.message}`));
       }
     });
-};
-
-/**
- * Resolves translation file path for a lang code: en, es, de, etc.
- */
-const filePath = lang => `${PATH}${lang}.json`;
-
-/**
- * Resolves name of a target language based on
- * a language code: en, es, de, etc.
- */
-const targetLangName = lang => {
-  const targetLang = TARGET_LANGS.filter(l => l.value === lang)[0];
-  return targetLang.name;
-};
-
-/**
- * Sorts an object by key.
- *
- * Relies on an object keeping the order in which entries are added for string keys.
- * See: http://exploringjs.com/es6/ch_oop-besides-classes.html#_traversal-order-of-properties
- */
-const sort = obj => {
-  const sorted = {};
-  Object.keys(obj)
-    .sort()
-    .forEach(key => (sorted[key] = obj[key]));
-
-  return sorted;
 };
 
 /**
