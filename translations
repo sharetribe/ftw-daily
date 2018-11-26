@@ -151,13 +151,10 @@ const run = () => {
       const sorted = sort(target);
       const data = JSON.stringify(sorted, null, 2);
 
-      fs.writeFile(filePath(targetLang), data, err => {
-        if (err) {
-          throw err;
-        }
-        console.log(chalk.bold('The translation file is updated'));
-        run();
-      });
+      return updateTranslationsFile(data, targetLang);
+    })
+    .then(() => {
+      run();
     })
     .catch(err => {
       if (err instanceof BreakSignal) {
@@ -255,6 +252,26 @@ const confirmTranslation = (targetLang, key, translation) => {
       validate: value => value === true || value === false,
     },
   ]);
+};
+
+/**
+ * Update translations file.
+ *
+ * @param {String} data String data to be written to file
+ * @param {String} targetLang Language code of the translation file
+ *
+ * @return a Promise that resolves when file is written
+ */
+const updateTranslationsFile = (data, targetLang) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(filePath(targetLang), data, err => {
+      if (err) {
+        reject(err);
+      }
+      console.log(chalk.bold('The translation file is updated'));
+      resolve();
+    });
+  });
 };
 
 run();
