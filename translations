@@ -33,6 +33,7 @@ const run = () => {
   let sourceKeys;
   let targetKeys;
   let key;
+  let translation;
 
   selectLanguage()
     .then(answers => {
@@ -62,7 +63,19 @@ const run = () => {
       }
     })
     .then(answers => {
-      target[key] = answers.value;
+      translation = answers.value;
+      return confirmTranslation(targetLang, key, translation);
+    })
+    .then(answers => {
+      // a bool value if translation addition is confirmed
+      const confirmation = answers.value;
+
+      if (!confirmation) {
+        console.log('Discarding new translation');
+        throw new BreakSignal();
+      }
+
+      target[key] = translation;
 
       const sorted = sort(target);
       const data = JSON.stringify(sorted, null, 2);
@@ -175,6 +188,29 @@ const addTranslation = (targetLang, key, source) => {
       )} for the key ${chalk.blueBright(key)}. The current ${
         SOURCE_LANG.name
       } translation is ${chalk.green(source[key])}`,
+    },
+  ]);
+};
+
+/**
+ * Prompt for a confirming a new translation with 'y' or 'N'.
+ *
+ * @param {String} targetLang The language that is being translated
+ * @param {String} key Key for the new translation
+ * @param {Object} source Source language translations
+ *
+ * @return a Promise with the answers hash containing a boolean value field
+ */
+const confirmTranslation = (targetLang, key, translation) => {
+  return inquirer.prompt([
+    {
+      type: 'input',
+      name: 'value',
+      message: `Do you want to add the ${targetLangName(targetLang)} translation ${chalk.green(
+        translation
+      )} for the key ${chalk.blueBright(key)}? (y/N)`,
+      filter: value => (value === 'y' ? true : value === 'N' ? false : value),
+      validate: value => value === true || value === false,
     },
   ]);
 };
