@@ -56,6 +56,7 @@ const targetLangChoices = () => {
   const filenames = fs.readdirSync(folder);
 
   const choices = filenames
+    .filter(name => name.endsWith('.json'))
     .map(name => name.split('.')[0])
     .filter(code => code !== SOURCE_LANG.value)
     .map(code => {
