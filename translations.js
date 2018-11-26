@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /**
  * A translations too that can be used to keep a translation file(s)
  * up to date with one source language file.
