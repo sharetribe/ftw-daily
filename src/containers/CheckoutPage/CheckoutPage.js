@@ -16,6 +16,8 @@ import {
   isTransactionInitiateListingNotFoundError,
   isTransactionInitiateMissingStripeAccountError,
   isTransactionInitiateBookingTimeNotAvailableError,
+  isTransactionZeroPaymentError,
+  transactionInitiateOrderStripeErrors,
 } from '../../util/errors';
 import {
   AvatarMedium,
@@ -273,6 +275,7 @@ export class CheckoutPageComponent extends Component {
     const isBookingTimeNotAvailableError = isTransactionInitiateBookingTimeNotAvailableError(
       initiateOrderError
     );
+    const stripeErrors = transactionInitiateOrderStripeErrors(initiateOrderError);
 
     let initiateOrderErrorMessage = null;
 
@@ -286,6 +289,18 @@ export class CheckoutPageComponent extends Component {
       initiateOrderErrorMessage = (
         <p className={css.orderError}>
           <FormattedMessage id="CheckoutPage.bookingTimeNotAvailableMessage" />
+        </p>
+      );
+    } else if (!listingNotFound && stripeErrors && stripeErrors.length > 0) {
+      // NOTE: Error messages from Stripes are not part of translations.
+      // By default they are in English.
+      const stripeErrorsAsString = stripeErrors.join(', ');
+      initiateOrderErrorMessage = (
+        <p className={css.orderError}>
+          <FormattedMessage
+            id="CheckoutPage.initiateOrderStripeError"
+            values={{ stripeErrors: stripeErrorsAsString }}
+          />
         </p>
       );
     } else if (!listingNotFound && initiateOrderError) {
@@ -313,6 +328,12 @@ export class CheckoutPageComponent extends Component {
       speculateErrorMessage = (
         <p className={css.orderError}>
           <FormattedMessage id="CheckoutPage.bookingTimeNotAvailableMessage" />
+        </p>
+      );
+    } else if (isTransactionZeroPaymentError(speculateTransactionError)) {
+      speculateErrorMessage = (
+        <p className={css.orderError}>
+          <FormattedMessage id="CheckoutPage.initiateOrderAmountTooLow" />
         </p>
       );
     } else if (speculateTransactionError) {
