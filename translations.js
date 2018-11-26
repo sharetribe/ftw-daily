@@ -225,7 +225,7 @@ const addTranslation = (targetLang, key, source) => {
         targetLang
       )} for the key ${chalk.blueBright(key)}. The current ${
         SOURCE_LANG.name
-      } translation is ${chalk.green(source[key])}`,
+      } translation is ${chalk.green(source[key])} \n`,
     },
   ]);
 };
