@@ -165,13 +165,22 @@ import messages from '../translations/es.json';
 ## Managing translations
 
 In case you have added a new language translation file and are pulling translation updates to
-`en.json` from the upstream repo there is a command line tool to help keeping the translation files in
-sync. Running the following command in the project root
+`en.json` from the upstream repo there is a command line tool to help keeping the translation files
+in sync. Running the following command in the project root
 
 ```
 node translations.js
-
 ```
-will start a command line application that can be used to match a translation file agains the
-English translations. Just modify the `translations.js` file and add you language to the
-`TARGET_LANGS` array and it will be available in the tool.
+
+will start a command line application:
+
+![Translations CLI](./assets/translations/translations_cli.gif)
+
+The command line application can be used to match a translation file against the English
+translations. If your new translations file follows the `<LANG CODE>.json` naming, the CLI will pick
+it up automatically. In order to improve readability, you can add the language name to the
+`TARGET_LANG_NAMES` map in `translations.js` if it is not yet in there and the CLI will use the
+correct name for your language instead of the language code when prompting about translations.
+
+In case you wish to use something else than English as the source language, modify the `SOURCE_LANG`
+object in `translations.js` to match your needs.
