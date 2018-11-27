@@ -159,10 +159,10 @@ const translateLanguage = (targetLang, source, target, diff) => {
       return confirmTranslation(targetLang, key, translation);
     })
     .then(answers => {
-      // 'y' or 'N'
+      // y|Y|n|N
       const confirmation = answers.value;
 
-      if (confirmation === 'N') {
+      if (/n/i.test(confirmation)) {
         console.log('Discarding new translation');
         throw new BreakToRunWithTarget();
       }
@@ -271,8 +271,8 @@ const confirmTranslation = (targetLang, key, translation) => {
       name: 'value',
       message: `Do you want to add the ${targetLangName(targetLang)} translation ${chalk.green(
         translation
-      )} for the key ${chalk.blueBright(key)}? (y/N)`,
-      validate: value => value === 'y' || value === 'N',
+      )} for the key ${chalk.blueBright(key)}? (y/n)`,
+      validate: value => /y/i.test(value) || /n/i.test(value),
     },
   ]);
 };
