@@ -135,7 +135,7 @@ If you want the template to use a language that is not supported by default a ne
 needs to be added and the messages in it need to be translated:
 
 * Copy the default [src/translations/en.json](../src/translations/en.json) English translations file
-  into some other file like `es.json`.
+  into some other file, for example `it.json` for Italian.
 
 * Change the messages in the new translations file to the desired language.
 
@@ -145,15 +145,15 @@ Once you have the translations file in place:
   (the name of the new translations file, without the extension), for example:
 
 ```js
-const locale = 'es';
+const locale = 'it';
 ```
 
 * In [src/app.js](../src/app.js), change the translation imports to point to the correct
   `react-intl` locale and the new translations file you created, for example:
 
 ```js
-import localeData from 'react-intl/locale-data/es';
-import messages from './translations/es.json';
+import localeData from 'react-intl/locale-data/it';
+import messages from './translations/it.json';
 ```
 
 Also, in case you will translate the application and develop it forward it is wise to change the
@@ -163,7 +163,7 @@ in tests. To change the translation file used in tests change the `messages` var
 [src/util/test-helpers.js](../src/util/test-helpers.js) to match your language in use, for example:
 
 ```js
-import messages from '../translations/es.json';
+import messages from '../translations/it.json';
 ```
 
 ## Managing translations
