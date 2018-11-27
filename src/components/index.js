@@ -78,6 +78,7 @@ export { default as NamedLink } from './NamedLink/NamedLink';
 export { default as NamedRedirect } from './NamedRedirect/NamedRedirect';
 export { default as NotificationBadge } from './NotificationBadge/NotificationBadge';
 export { default as OrderDiscussionPanel } from './OrderDiscussionPanel/OrderDiscussionPanel';
+export { default as OutsideClickHandler } from './OutsideClickHandler/OutsideClickHandler';
 export { default as Page } from './Page/Page';
 export { default as PaginationLinks } from './PaginationLinks/PaginationLinks';
 export { default as PriceFilter } from './PriceFilter/PriceFilter';

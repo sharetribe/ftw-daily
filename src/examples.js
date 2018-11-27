@@ -50,6 +50,7 @@ import * as Menu from './components/Menu/Menu.example';
 import * as Modal from './components/Modal/Modal.example';
 import * as ModalInMobile from './components/ModalInMobile/ModalInMobile.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
+import * as OutsideClickHandler from './components/OutsideClickHandler/OutsideClickHandler.example';
 import * as PaginationLinks from './components/PaginationLinks/PaginationLinks.example';
 import * as PriceFilter from './components/PriceFilter/PriceFilter.example';
 import * as PropertyGroup from './components/PropertyGroup/PropertyGroup.example';
@@ -155,6 +156,7 @@ export {
   Modal,
   ModalInMobile,
   NamedLink,
+  OutsideClickHandler,
   PaginationLinks,
   PasswordRecoveryForm,
   PasswordResetForm,
