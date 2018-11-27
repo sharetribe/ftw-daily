@@ -23,7 +23,8 @@ const TARGET_LANG_NAMES = {
   fr: 'French',
 };
 
-class BreakSignal {}
+class BreakToRun {}
+class BreakToRunWithTarget {}
 
 /**
  * Resolves translation file path for a lang code: en, es, de, etc.
@@ -93,40 +94,61 @@ const readFileToJSON = filepath => {
   return JSON.parse(rawdata);
 };
 
+/**
+ * Run the application.
+ *
+ */
 const run = () => {
-  let sourceLang;
-  let targetLang;
-  let source;
-  let target;
-  let sourceKeys;
-  let targetKeys;
-  let key;
-  let translation;
-
   const choices = targetLangChoices();
 
   selectLanguage(choices)
     .then(answers => {
-      sourceLang = SOURCE_LANG.code;
-      targetLang = answers.lang;
-      source = readFileToJSON(filePath(sourceLang));
-      target = readFileToJSON(filePath(targetLang));
-      sourceKeys = Object.keys(source);
-      targetKeys = Object.keys(target);
-
-      const diff = difference(sourceKeys, targetKeys);
-
-      if (diff.length > 0) {
-        return selectKey(targetLang, diff, source, target);
-      } else {
-        console.log(`No translations missing from the ${targetLangName(targetLang)} translations`);
-        throw new BreakSignal();
-      }
+      runWithTarget(answers.lang);
     })
+    .catch(err => {
+      console.log(chalk.red(`An error occurred due to: ${err.message}`));
+    });
+};
+
+/**
+ * When a language is selected this will prompt
+ * the user about adding translations to that language.
+ *
+ * @param {String} targetLang Target language code
+ */
+const runWithTarget = targetLang => {
+  let key;
+  let translation;
+
+  const sourceLang = SOURCE_LANG.code;
+  const source = readFileToJSON(filePath(sourceLang));
+  const target = readFileToJSON(filePath(targetLang));
+  const sourceKeys = Object.keys(source);
+  const targetKeys = Object.keys(target);
+  const diff = difference(sourceKeys, targetKeys);
+
+  if (diff.length === 0) {
+    console.log(`No translations missing from the ${targetLangName(targetLang)} translations`);
+    run();
+  } else {
+    translateLanguage(targetLang, source, target, diff);
+  }
+};
+
+/**
+ * Does the actual prompting for translations.
+ *
+ * @param {String} targetLang Target language code
+ * @param {Object} source Source translations
+ * @param {Object} target Target translations
+ * @param {Array} diff Missing keys in target
+ */
+const translateLanguage = (targetLang, source, target, diff) => {
+  selectKey(targetLang, diff, source, target)
     .then(answers => {
       key = answers.key;
       if (key === null) {
-        throw new BreakSignal();
+        throw new BreakToRun();
       }
       if (key != null) {
         return addTranslation(targetLang, key, source);
@@ -142,7 +164,7 @@ const run = () => {
 
       if (confirmation === 'N') {
         console.log('Discarding new translation');
-        throw new BreakSignal();
+        throw new BreakToRunWithTarget();
       }
 
       target[key] = translation;
@@ -153,12 +175,15 @@ const run = () => {
       return updateTranslationsFile(data, targetLang);
     })
     .then(() => {
-      run();
+      runWithTarget(targetLang);
     })
     .catch(err => {
-      if (err instanceof BreakSignal) {
-        // break out of Promise chain, start from start
+      if (err instanceof BreakToRun) {
+        // break out of Promise chain, start over
         run();
+      } else if (err instanceof BreakToRunWithTarget) {
+        // break out of Promise chain, continue with this language
+        runWithTarget(targetLang);
       } else {
         console.log(chalk.red(`An error occurred due to: ${err.message}`));
       }
@@ -191,7 +216,7 @@ const selectLanguage = choices => {
  * @return a Promise
  */
 const selectKey = (targetLang, diff, source, target) => {
-  const choices = [{ name: 'I prefer not to', value: null }, ...diff];
+  const choices = [{ name: 'Back to languages', value: null }, ...diff];
   return inquirer.prompt([
     {
       type: 'list',
