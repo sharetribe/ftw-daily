@@ -14,8 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-11-XX
 
+* [add] Add French as a default language in addition to English.
+  [#962](https://github.com/sharetribe/flex-template-web/pull/962)
 * [fix] Show Stripe error message on CheckoutPage if payment request fails because of Stripe error.
-  Also show error if payment amount is zero. 
+  Also show error if payment amount is zero.
   [#960](https://github.com/sharetribe/flex-template-web/pull/960)
 * [fix] Remove unused translation keys and update PasswordChangePage title
   [#959](https://github.com/sharetribe/flex-template-web/pull/959)
