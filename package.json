@@ -56,9 +56,11 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "chalk": "^2.4.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.3",
+    "inquirer": "^6.2.0",
     "nodemon": "^1.17.2",
     "nsp": "^3.2.1",
     "nsp-preprocessor-yarn": "^1.0.1",

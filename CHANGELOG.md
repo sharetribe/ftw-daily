@@ -19,13 +19,13 @@ way to update this template, but currently, we follow a pattern:
   [#960](https://github.com/sharetribe/flex-template-web/pull/960)
 * [fix] Remove unused translation keys and update PasswordChangePage title
   [#959](https://github.com/sharetribe/flex-template-web/pull/959)
+* [fix] Add translations CLI tool [#955](https://github.com/sharetribe/flex-template-web/pull/955)
 
 ## [v2.3.2] 2018-11-20
 
 * [fix] Take 2: don't set currentUserHasListings if fetched listing is in draft state.
   [#956](https://github.com/sharetribe/flex-template-web/pull/956)
-* [fix] PriceFilter styles
-  [#954](https://github.com/sharetribe/flex-template-web/pull/954)
+* [fix] PriceFilter styles [#954](https://github.com/sharetribe/flex-template-web/pull/954)
 
 [v2.3.2]: https://github.com/sharetribe/flex-template-web/compare/v2.3.1...v2.3.2
 
@@ -322,4 +322,3 @@ way to update this template, but currently, we follow a pattern:
 ## v0.2.0
 
 * Starting a change log for Flex Template for Web.
-
