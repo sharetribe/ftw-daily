@@ -1,7 +1,8 @@
 # Translations
 
-The Flex template for web supports having a single language for the UI. By default the language is
-English.
+The Flex Template for Web supports having a single language for the UI. Supported languages are
+English and French, English being used by default. For information about changing the language, see
+[here](#changing-the-language).
 
 We are using the [React Intl](https://github.com/yahoo/react-intl) library to translate UI texts and
 to format dates, numbers, and money values.
@@ -130,12 +131,15 @@ More information about adding static content to the application can be found fro
 
 ## Changing the language
 
-For changing the language of the template application:
+If you want the template to use a language that is not supported by default a new translation file
+needs to be added and the messages in it need to be translated:
 
 * Copy the default [src/translations/en.json](../src/translations/en.json) English translations file
   into some other file like `es.json`.
 
 * Change the messages in the new translations file to the desired language.
+
+Once you have the translations file in place:
 
 * In [src/config.js](../src/config.js), change the `locale` variable value to match the new locale
   (the name of the new translations file, without the extension), for example:
