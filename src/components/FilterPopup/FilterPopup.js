@@ -3,6 +3,7 @@ import { bool, func, node, number, object, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
 
+import { OutsideClickHandler } from '../../components';
 import { FilterForm } from '../../forms';
 import css from './FilterPopup.css';
 
@@ -53,12 +54,8 @@ class FilterPopup extends Component {
     onSubmit(urlParam, initialValues);
   }
 
-  handleBlur(event) {
-    // FocusEvent is fired faster than the link elements native click handler
-    // gets its own event. Therefore, we need to check the origin of this FocusEvent.
-    if (event.relatedTarget && !this.filter.contains(event.relatedTarget)) {
-      this.setState({ isOpen: false });
-    }
+  handleBlur() {
+    this.setState({ isOpen: false });
   }
 
   handleKeyDown(e) {
@@ -119,41 +116,42 @@ class FilterPopup extends Component {
     const contentStyle = this.positionStyleForContent();
 
     return (
-      <div
-        className={classes}
-        onBlur={this.handleBlur}
-        onKeyDown={this.handleKeyDown}
-        ref={node => {
-          this.filter = node;
-        }}
-      >
-        <button className={labelStyles} onClick={() => this.toggleOpen()}>
-          {label}
-        </button>
+      <OutsideClickHandler onOutsideClick={this.handleBlur}>
         <div
-          id={id}
-          className={popupClasses}
+          className={classes}
+          onKeyDown={this.handleKeyDown}
           ref={node => {
-            this.filterContent = node;
+            this.filter = node;
           }}
-          style={contentStyle}
         >
-          {this.state.isOpen ? (
-            <FilterForm
-              id={`${id}.form`}
-              paddingClasses={popupSizeClasses}
-              showAsPopup
-              contentPlacementOffset={contentPlacementOffset}
-              initialValues={initialValues}
-              onSubmit={this.handleSubmit}
-              onCancel={this.handleCancel}
-              onClear={this.handleClear}
-            >
-              {children}
-            </FilterForm>
-          ) : null}
+          <button className={labelStyles} onClick={() => this.toggleOpen()}>
+            {label}
+          </button>
+          <div
+            id={id}
+            className={popupClasses}
+            ref={node => {
+              this.filterContent = node;
+            }}
+            style={contentStyle}
+          >
+            {this.state.isOpen ? (
+              <FilterForm
+                id={`${id}.form`}
+                paddingClasses={popupSizeClasses}
+                showAsPopup
+                contentPlacementOffset={contentPlacementOffset}
+                initialValues={initialValues}
+                onSubmit={this.handleSubmit}
+                onCancel={this.handleCancel}
+                onClear={this.handleClear}
+              >
+                {children}
+              </FilterForm>
+            ) : null}
+          </div>
         </div>
-      </div>
+      </OutsideClickHandler>
     );
   }
 }
