@@ -47,6 +47,7 @@ import * as Menu from './components/Menu/Menu.example';
 import * as Modal from './components/Modal/Modal.example';
 import * as ModalInMobile from './components/ModalInMobile/ModalInMobile.example';
 import * as NamedLink from './components/NamedLink/NamedLink.example';
+import * as OutsideClickHandler from './components/OutsideClickHandler/OutsideClickHandler.example';
 import * as PaginationLinks from './components/PaginationLinks/PaginationLinks.example';
 import * as PriceFilter from './components/PriceFilter/PriceFilter.example';
 import * as PropertyGroup from './components/PropertyGroup/PropertyGroup.example';
@@ -56,7 +57,6 @@ import * as ReviewRating from './components/ReviewRating/ReviewRating.example';
 import * as Reviews from './components/Reviews/Reviews.example';
 import * as SectionThumbnailLinks from './components/SectionThumbnailLinks/SectionThumbnailLinks.example';
 import * as SelectMultipleFilter from './components/SelectMultipleFilter/SelectMultipleFilter.example';
-import * as SelectMultipleFilterPlain from './components/SelectMultipleFilterPlain/SelectMultipleFilterPlain.example';
 import * as StripeBankAccountTokenInputField from './components/StripeBankAccountTokenInputField/StripeBankAccountTokenInputField.example';
 import * as TabNav from './components/TabNav/TabNav.example';
 import * as TabNavHorizontal from './components/TabNavHorizontal/TabNavHorizontal.example';
@@ -148,6 +148,7 @@ export {
   Modal,
   ModalInMobile,
   NamedLink,
+  OutsideClickHandler,
   PaginationLinks,
   PasswordRecoveryForm,
   PasswordResetForm,
@@ -161,7 +162,6 @@ export {
   Reviews,
   SectionThumbnailLinks,
   SelectMultipleFilter,
-  SelectMultipleFilterPlain,
   SendMessageForm,
   SignupForm,
   StripeBankAccountTokenInputField,

@@ -13,8 +13,8 @@ import {
   ModalInMobile,
   Button,
   PriceFilter,
-  SelectSingleFilterPlain,
-  SelectMultipleFilterPlain,
+  SelectSingleFilter,
+  SelectMultipleFilter,
   BookingDateRangeFilter,
 } from '../../components';
 import { propTypes } from '../../util/types';
@@ -221,10 +221,11 @@ class SearchFiltersMobileComponent extends Component {
     const initialCategory = categoryFilter ? this.initialValue(categoryFilter.paramName) : null;
 
     const categoryFilterElement = categoryFilter ? (
-      <SelectSingleFilterPlain
+      <SelectSingleFilter
         urlParam={categoryFilter.paramName}
         label={categoryLabel}
         onSelect={this.handleSelectSingle}
+        liveEdit
         options={categoryFilter.options}
         initialValue={initialCategory}
         intl={intl}
@@ -236,12 +237,13 @@ class SearchFiltersMobileComponent extends Component {
     const initialAmenities = this.initialValues(amenitiesFilter.paramName);
 
     const amenitiesFilterElement = amenitiesFilter ? (
-      <SelectMultipleFilterPlain
+      <SelectMultipleFilter
         id="SearchFiltersMobile.amenitiesFilter"
         name="amenities"
         urlParam={amenitiesFilter.paramName}
         label={amenitiesLabel}
-        onSelect={this.handleSelectMultiple}
+        onSubmit={this.handleSelectMultiple}
+        liveEdit
         options={amenitiesFilter.options}
         initialValues={initialAmenities}
       />

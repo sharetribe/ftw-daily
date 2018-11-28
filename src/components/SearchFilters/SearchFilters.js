@@ -152,6 +152,7 @@ const SearchFiltersComponent = props => {
       urlParam={categoryFilter.paramName}
       label={categoryLabel}
       onSelect={handleSelectOption}
+      showAsPopup
       options={categoryFilter.options}
       initialValue={initialCategory}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
@@ -164,7 +165,8 @@ const SearchFiltersComponent = props => {
       name="amenities"
       urlParam={amenitiesFilter.paramName}
       label={amenitiesLabel}
-      onSelect={handleSelectOptions}
+      onSubmit={handleSelectOptions}
+      showAsPopup
       options={amenitiesFilter.options}
       initialValues={initialAmenities}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
