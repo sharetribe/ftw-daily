@@ -7,6 +7,7 @@ const unsafeEval = "'unsafe-eval'";
 const data = 'data:';
 const blob = 'blob:';
 const devImagesMaybe = dev ? ['*.localhost:8000'] : [];
+const baseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'https://flex-api.sharetribe.com';
 
 // Default CSP whitelist.
 //
@@ -18,7 +19,7 @@ const defaultDirectives = {
   childSrc: [blob],
   connectSrc: [
     self,
-    process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL,
+    baseUrl,
     'maps.googleapis.com',
     '*.tiles.mapbox.com',
     'api.mapbox.com',

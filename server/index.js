@@ -167,10 +167,11 @@ app.get('*', (req, res) => {
     secure: USING_SSL,
   });
 
+  const baseUrl = BASE_URL ? { baseUrl: BASE_URL } : {};
+
   const sdk = sharetribeSdk.createInstance({
     transitVerbose: TRANSIT_VERBOSE,
     clientId: CLIENT_ID,
-    baseUrl: BASE_URL,
     httpAgent: httpAgent,
     httpsAgent: httpsAgent,
     tokenStore,
@@ -182,6 +183,7 @@ app.get('*', (req, res) => {
         reader: v => new Decimal(v.value),
       },
     ],
+    ...baseUrl,
   });
 
   // Until we have a better plan for caching dynamic content and we

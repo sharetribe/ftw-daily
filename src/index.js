@@ -77,13 +77,14 @@ if (typeof window !== 'undefined') {
   // set up logger with Sentry DSN client key and environment
   log.setup();
 
+  const baseUrl = config.sdk.baseUrl ? { baseUrl: config.sdk.baseUrl } : {};
+
   // eslint-disable-next-line no-underscore-dangle
   const preloadedState = window.__PRELOADED_STATE__ || '{}';
   const initialState = JSON.parse(preloadedState, sdkTypes.reviver);
   const sdk = createInstance({
     transitVerbose: config.sdk.transitVerbose,
     clientId: config.sdk.clientId,
-    baseUrl: config.sdk.baseUrl,
     secure: config.usingSSL,
     typeHandlers: [
       {
@@ -93,6 +94,7 @@ if (typeof window !== 'undefined') {
         reader: v => new Decimal(v.value),
       },
     ],
+    ...baseUrl,
   });
   const analyticsHandlers = setupAnalyticsHandlers();
   const store = configureStore(initialState, sdk, analyticsHandlers);

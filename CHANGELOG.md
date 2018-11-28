@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-11-XX
 
+* [change] Update Flex JS SDK to 1.2.
+  [#963](https://github.com/sharetribe/flex-template-web/pull/963)
 * [add] Add French as a default language in addition to English.
   [#962](https://github.com/sharetribe/flex-template-web/pull/962)
 * [fix] Show Stripe error message on CheckoutPage if payment request fails because of Stripe error.
