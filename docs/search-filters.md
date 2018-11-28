@@ -13,23 +13,21 @@ filters rely on listing's indexed data.
 
 ## Filter types
 
-The Flex template for web has different filter types: _price filter_, _date range filter_, _select
-single_ and _select multiple_. The _price filter_ is for the specific case of filtering listings
-with a price range.
+The Flex template for web has different filter types: _price_, _date range_, _select single_ and
+_select multiple_. Select single and select multiple filters are generic in a way that they can be
+used to filter search results using different kinds of data. The price and date range filters on the
+other hand are only used for filtering by price and date range.
 
 > NOTE: price filter should be configured from `src/marketplace-custom-config.js`. Current maximum
 > value for the range is set to 1000 (USD/EUR).
 
 Filters _select single_ and _select multiple_ can be used with extended data. The _select single_
-one can be used to filter out search result with only one value per search parameter. The _select
+one can be used to filter out search results with only one value per search parameter. The _select
 multiple_ filters on the other hand can take multiple values for a single search parameter. These
 two filter types for extended data are implemented with two different components:
 
 * Select single filter: `SelectSingleFilter`
 * Select multiple filter: `SelectMultipleFilter`
-
-The `SelectSingleFilter` and `SelectMultipleFilter` components are rendered as dropdowns in the
-search view. They are used in `SearchFilters`, `SearchFiltersMobile`, `SearchFiltersPanel`.
 
 ## Adding a new search filter
 
@@ -188,9 +186,9 @@ following steps are required to add a mobile filter:
 If you are creating new filter types note that we are using two different types of components: popup
 and plain. Popup components are rendered as primary dropdowns in the search view in `SearchFilters`.
 Plain components are used with `SearchFiltersMobile` and `SearchFiltersPanel`. `SearchFiltersPanel`
-opens sacondary filters in a distinct panel in order to fit additional filters to the desktop search
+opens secondary filters in a distinct panel in order to fit additional filters to the desktop search
 view.
 
 To make creating new filters easier, there are two generic components: `FilterPoup` and
-`FilterPlain`. These components expect that you give form fields as child component. Check
+`FilterPlain`. These components expect that you give form fields as child components. Check
 `SelectMultipleFilter` to see how these components work.
