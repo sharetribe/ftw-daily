@@ -44,8 +44,8 @@ const ListingLink = props => {
   const variant = isPendingApproval
     ? LISTING_PAGE_PENDING_APPROVAL_VARIANT
     : isDraft
-      ? LISTING_PAGE_DRAFT_VARIANT
-      : null;
+    ? LISTING_PAGE_DRAFT_VARIANT
+    : null;
   const linkProps = !!variant
     ? {
         name: 'ListingPageVariant',

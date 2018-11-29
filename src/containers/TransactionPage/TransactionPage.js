@@ -282,9 +282,13 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const TransactionPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
-  TransactionPageComponent
-);
+const TransactionPage = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  injectIntl
+)(TransactionPageComponent);
 
 TransactionPage.loadData = loadData;
 TransactionPage.setInitialValues = setInitialValues;

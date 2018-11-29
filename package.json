@@ -64,7 +64,7 @@
     "nodemon": "^1.17.2",
     "nsp": "^3.2.1",
     "nsp-preprocessor-yarn": "^1.0.1",
-    "prettier": "^1.11.1"
+    "prettier": "^1.15.3"
   },
   "scripts": {
     "clean": "rm -rf build/*",

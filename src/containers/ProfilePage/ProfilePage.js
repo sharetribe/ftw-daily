@@ -313,9 +313,11 @@ const mapStateToProps = state => {
   };
 };
 
-const ProfilePage = compose(connect(mapStateToProps), withViewport, injectIntl)(
-  ProfilePageComponent
-);
+const ProfilePage = compose(
+  connect(mapStateToProps),
+  withViewport,
+  injectIntl
+)(ProfilePageComponent);
 
 ProfilePage.loadData = params => {
   const id = new UUID(params.id);

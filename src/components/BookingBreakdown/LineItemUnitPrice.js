@@ -12,8 +12,8 @@ const LineItemUnitPrice = props => {
   const translationKey = isNightly
     ? 'BookingBreakdown.pricePerNight'
     : isDaily
-      ? 'BookingBreakdown.pricePerDay'
-      : 'BookingBreakdown.pricePerQuantity';
+    ? 'BookingBreakdown.pricePerDay'
+    : 'BookingBreakdown.pricePerQuantity';
 
   const unitPurchase = transaction.attributes.lineItems.find(
     item => item.code === unitType && !item.reversal

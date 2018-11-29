@@ -142,8 +142,12 @@ const mapDispatchToProps = dispatch => ({
   onSubmitChangePassword: values => dispatch(changePassword(values)),
 });
 
-const PasswordChangePage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
-  PasswordChangePageComponent
-);
+const PasswordChangePage = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  injectIntl
+)(PasswordChangePageComponent);
 
 export default PasswordChangePage;

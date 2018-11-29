@@ -187,4 +187,7 @@ const mapStateToProps = state => {
 // lifecycle hook.
 //
 // See: https://github.com/ReactTraining/react-router/issues/4671
-export default compose(withRouter, connect(mapStateToProps))(Routes);
+export default compose(
+  withRouter,
+  connect(mapStateToProps)
+)(Routes);

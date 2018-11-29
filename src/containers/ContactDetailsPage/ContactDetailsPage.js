@@ -167,9 +167,13 @@ const mapDispatchToProps = dispatch => ({
   onSubmitContactDetails: values => dispatch(saveContactDetails(values)),
 });
 
-const ContactDetailsPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
-  ContactDetailsPageComponent
-);
+const ContactDetailsPage = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  injectIntl
+)(ContactDetailsPageComponent);
 
 ContactDetailsPage.loadData = () => {
   // Since verify email happens in separate tab, current user's data might be updated

@@ -196,7 +196,9 @@ const StyleguidePage = props => {
   const html =
     examples.length > 0 ? (
       <ul className={css.examplesList}>
-        {examples.map(ex => <Example key={`${ex.componentName}/${ex.exampleName}`} {...ex} />)}
+        {examples.map(ex => (
+          <Example key={`${ex.componentName}/${ex.exampleName}`} {...ex} />
+        ))}
       </ul>
     ) : (
       <p>

@@ -83,8 +83,9 @@ const mapStateToProps = state => {
   };
 };
 
-const TermsOfServicePage = compose(connect(mapStateToProps), injectIntl)(
-  TermsOfServicePageComponent
-);
+const TermsOfServicePage = compose(
+  connect(mapStateToProps),
+  injectIntl
+)(TermsOfServicePageComponent);
 
 export default TermsOfServicePage;

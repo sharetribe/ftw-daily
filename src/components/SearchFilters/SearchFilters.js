@@ -229,6 +229,9 @@ SearchFiltersComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const SearchFilters = compose(withRouter, injectIntl)(SearchFiltersComponent);
+const SearchFilters = compose(
+  withRouter,
+  injectIntl
+)(SearchFiltersComponent);
 
 export default SearchFilters;

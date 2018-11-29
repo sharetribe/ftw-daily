@@ -33,14 +33,14 @@ class RangeSliderComponent extends Component {
     const width = dimensions.width;
     const valueOffset = value - min;
     const scale = max - min;
-    return Math.round(valueOffset / scale * width);
+    return Math.round((valueOffset / scale) * width);
   }
 
   toValue(position) {
     const { dimensions, min, max, step } = this.props;
     const width = dimensions.width;
     const scale = max - min;
-    const value = Math.round(position / width * scale) + min;
+    const value = Math.round((position / width) * scale) + min;
     return Math.ceil(value / step) * step;
   }
 

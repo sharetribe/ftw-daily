@@ -231,9 +231,13 @@ const mapDispatchToProps = dispatch => ({
   onOpenListing: listingId => dispatch(openListing(listingId)),
 });
 
-const ManageListingsPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
-  ManageListingsPageComponent
-);
+const ManageListingsPage = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  injectIntl
+)(ManageListingsPageComponent);
 
 ManageListingsPage.loadData = (params, search) => {
   const queryParams = parse(search);

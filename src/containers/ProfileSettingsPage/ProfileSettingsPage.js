@@ -177,8 +177,12 @@ const mapDispatchToProps = dispatch => ({
   onUpdateProfile: data => dispatch(updateProfile(data)),
 });
 
-const ProfileSettingsPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
-  ProfileSettingsPageComponent
-);
+const ProfileSettingsPage = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  injectIntl
+)(ProfileSettingsPageComponent);
 
 export default ProfileSettingsPage;

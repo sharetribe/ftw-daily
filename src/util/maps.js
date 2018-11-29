@@ -62,7 +62,7 @@ const obfuscatedCoordinatesImpl = (latlng, cacheKey) => {
     lng + Math.atan2(sinBearing * sinTheta * cosLat, cosTheta - sinLat * Math.sin(newLat));
 
   // Normalize -PI -> +PI radians
-  const newLngNormalized = (newLng + THREE_PI) % TWO_PI - Math.PI;
+  const newLngNormalized = ((newLng + THREE_PI) % TWO_PI) - Math.PI;
 
   const result = radToDegrees({ lat: newLat, lng: newLngNormalized });
   return new LatLng(result.lat, result.lng);
@@ -129,26 +129,26 @@ export const circlePolyline = (latlng, radius) => {
   const R = 6371;
   const pi = Math.PI;
 
-  const _lat = lat * pi / 180;
-  const _lng = lng * pi / 180;
+  const _lat = (lat * pi) / 180;
+  const _lng = (lng * pi) / 180;
   const d = radius / 1000 / R;
 
   let points = [];
   for (let i = 0; i <= 360; i += detail) {
-    const brng = i * pi / 180;
+    const brng = (i * pi) / 180;
 
     let pLat = Math.asin(
       Math.sin(_lat) * Math.cos(d) + Math.cos(_lat) * Math.sin(d) * Math.cos(brng)
     );
     const pLng =
-      (_lng +
+      ((_lng +
         Math.atan2(
           Math.sin(brng) * Math.sin(d) * Math.cos(_lat),
           Math.cos(d) - Math.sin(_lat) * Math.sin(pLat)
         )) *
-      180 /
+        180) /
       pi;
-    pLat = pLat * 180 / pi;
+    pLat = (pLat * 180) / pi;
 
     points.push([pLat, pLng]);
   }

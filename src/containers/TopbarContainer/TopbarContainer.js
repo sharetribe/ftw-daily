@@ -124,8 +124,12 @@ const mapDispatchToProps = dispatch => ({
 // lifecycle hook.
 //
 // See: https://github.com/ReactTraining/react-router/issues/4671
-const TopbarContainer = compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(
-  TopbarContainerComponent
-);
+const TopbarContainer = compose(
+  withRouter,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(TopbarContainerComponent);
 
 export default TopbarContainer;

@@ -148,8 +148,8 @@ const priceLabelsInLocations = (
       const infoCardOpenIds = Array.isArray(infoCardOpen)
         ? infoCardOpen.map(l => l.id.uuid)
         : infoCardOpen
-          ? [infoCardOpen.id.uuid]
-          : [];
+        ? [infoCardOpen.id.uuid]
+        : [];
 
       // if the listing is open, don't print price label
       if (infoCardOpen != null && infoCardOpenIds.includes(listing.id.uuid)) {
@@ -400,22 +400,24 @@ class SearchMapWithMapbox extends Component {
 
       // SearchMapPriceLabel and SearchMapGroupLabel:
       // create a new marker or use existing one if markerId is among previously rendered markers
-      this.currentMarkers = labels.filter(v => v != null).map(m => {
-        const existingMarkerId = this.currentMarkers.findIndex(
-          marker => m.markerId === marker.markerId && marker.marker
-        );
+      this.currentMarkers = labels
+        .filter(v => v != null)
+        .map(m => {
+          const existingMarkerId = this.currentMarkers.findIndex(
+            marker => m.markerId === marker.markerId && marker.marker
+          );
 
-        if (existingMarkerId >= 0) {
-          const { marker, markerContainer, ...rest } = this.currentMarkers[existingMarkerId];
-          return { ...rest, ...m, markerContainer, marker };
-        } else {
-          const markerContainer = document.createElement('div');
-          markerContainer.setAttribute('id', m.markerId);
-          markerContainer.classList.add(css.labelContainer);
-          const marker = createMarker(m, markerContainer);
-          return { ...m, markerContainer, marker };
-        }
-      });
+          if (existingMarkerId >= 0) {
+            const { marker, markerContainer, ...rest } = this.currentMarkers[existingMarkerId];
+            return { ...rest, ...m, markerContainer, marker };
+          } else {
+            const markerContainer = document.createElement('div');
+            markerContainer.setAttribute('id', m.markerId);
+            markerContainer.classList.add(css.labelContainer);
+            const marker = createMarker(m, markerContainer);
+            return { ...m, markerContainer, marker };
+          }
+        });
 
       /* Create marker for SearchMapInfoCard component */
       if (infoCardOpen) {
