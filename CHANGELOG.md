@@ -14,6 +14,13 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-XX-XX
 
+## [v2.4.1] 2018-11-29
+
+* [fix] Add missing French translation.
+  [#966](https://github.com/sharetribe/flex-template-web/pull/966)
+
+[v2.4.1]: https://github.com/sharetribe/flex-template-web/compare/v2.4.0...v2.4.1
+
 ## [v2.4.0] 2018-11-28
 
 * [change] Update Flex JS SDK to 1.2.
