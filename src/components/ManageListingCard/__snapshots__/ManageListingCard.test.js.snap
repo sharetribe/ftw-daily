@@ -94,19 +94,17 @@ exports[`ManageListingCard matches snapshot 1`] = `
   </div>
   <div>
     <div>
-      <React.Fragment>
-        <div
-          title={55}
-        >
-          55
-        </div>
-        <div>
-          <FormattedMessage
-            id="ManageListingCard.perUnit"
-            values={Object {}}
-          />
-        </div>
-      </React.Fragment>
+      <div
+        title={55}
+      >
+        55
+      </div>
+      <div>
+        <FormattedMessage
+          id="ManageListingCard.perUnit"
+          values={Object {}}
+        />
+      </div>
     </div>
     <div>
       <div>
