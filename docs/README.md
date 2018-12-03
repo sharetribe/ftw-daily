@@ -54,6 +54,7 @@ Documentation for specific topics can be found in the following files:
 * [Customization checklist](customization-checklist.md)
 * [Icons](icons.md)
 * [Improving performance](improving-performance.md)
+* [Deploying to production](deploying-to-production.md)
 
 The application was bootstrapped with a forked version of
 [create-react-app](https://github.com/facebookincubator/create-react-app). While most of the

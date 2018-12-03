@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-XX-XX
 
+* [add] Add documentation about deploying to production. Also add _deploy to Heroku_ button.
+  [#961](https://github.com/sharetribe/flex-template-web/pull/961)
+
 ## [v2.4.1] 2018-11-29
 
 * [fix] Add missing French translation.
