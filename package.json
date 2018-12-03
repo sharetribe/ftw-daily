@@ -17,7 +17,7 @@
     "decimal.js": "10.0.1",
     "dotenv": "4.0.0",
     "dotenv-expand": "4.0.1",
-    "express": "^4.16.3",
+    "express": "^4.16.4",
     "express-enforces-ssl": "^1.1.0",
     "express-sitemap": "^1.8.0",
     "final-form": "^4.11.0",
