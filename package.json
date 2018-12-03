@@ -52,7 +52,7 @@
     "sharetribe-flex-sdk": "^1.2.0",
     "sharetribe-scripts": "1.1.5",
     "smoothscroll-polyfill": "^0.4.0",
-    "source-map-support": "^0.5.4",
+    "source-map-support": "^0.5.9",
     "url": "^0.11.0"
   },
   "devDependencies": {
