@@ -45,7 +45,7 @@
     "react-moment-proptypes": "^1.6.0",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.0",
-    "redux": "^4.0.0",
+    "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "sanitize.css": "^5.0.0",
     "seedrandom": "^2.4.3",
