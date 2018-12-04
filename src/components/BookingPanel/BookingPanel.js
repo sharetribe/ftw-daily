@@ -91,21 +91,21 @@ const BookingPanel = props => {
               // TOOD: check is class is required
             }
             <span className={css.authorName}>
-              <FormattedMessage id="ListingPage.hostedBy" values={{ name: authorDisplayName }} />
+              <FormattedMessage id="BookingPanel.hostedBy" values={{ name: authorDisplayName }} />
             </span>
           </div>
         </div>
 
         <div className={css.bookingHeading}>
           <h2 className={css.bookingTitle}>
-            <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
+            <FormattedMessage id="BookingPanel.bookingTitle" values={{ title: richTitle }} />
           </h2>
           <div className={css.bookingHelp}>
             <FormattedMessage
               id={
                 showClosedListingHelpText
-                  ? 'ListingPage.bookingHelpClosedListing'
-                  : 'ListingPage.bookingHelp'
+                  ? 'BookingPanel.bookingHelpClosedListing'
+                  : 'BookingPanel.bookingHelp'
               }
             />
           </div>
@@ -129,7 +129,7 @@ const BookingPanel = props => {
             {formattedPrice}
           </div>
           <div className={css.perUnit}>
-            <FormattedMessage id="ListingPage.perUnit" />
+            <FormattedMessage id="BookingPanel.perUnit" />
           </div>
         </div>
 
@@ -142,7 +142,7 @@ const BookingPanel = props => {
           </Button>
         ) : (
           <div className={css.closedListingButton}>
-            <FormattedMessage id="ListingPage.closedListingButtonText" />
+            <FormattedMessage id="BookingPanel.closedListingButtonText" />
           </div>
         )}
       </div>
