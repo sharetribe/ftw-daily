@@ -16,6 +16,8 @@ import { ValidationError } from '../../components';
 import DateRangeInput from './DateRangeInput';
 import css from './FieldDateRangeInput.css';
 
+const MAX_MOBILE_SCREEN_WIDTH = 768;
+
 class FieldDateRangeInputComponent extends Component {
   constructor(props) {
     super(props);
@@ -121,6 +123,7 @@ class FieldDateRangeInputComponent extends Component {
       onBlur: this.handleBlur,
       onFocus: this.handleFocus,
       useMobileMargins,
+      readOnly: typeof window !== 'undefined' && window.innerWidth < MAX_MOBILE_SCREEN_WIDTH,
       ...restOfInput,
       ...rest,
       focusedInput: this.state.focusedInput,
