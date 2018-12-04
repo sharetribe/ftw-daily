@@ -262,14 +262,11 @@ exports[`ListingPage matches snapshot 1`] = `
               title="listing1 title"
             />
           </div>
-          <SectionBooking
+          <withRouter(InjectIntl(BookingPanel))
             authorDisplayName="user-1 display name"
             fetchTimeSlotsError={null}
             formattedPrice={55}
-            handleBookButtonClick={[Function]}
             handleBookingSubmit={[Function]}
-            handleMobileBookModalClose={[Function]}
-            isBook={false}
             isClosed={false}
             isOwnListing={false}
             listing={

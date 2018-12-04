@@ -15,7 +15,6 @@ import {
   LISTING_PAGE_PARAM_TYPE_DRAFT,
   LISTING_PAGE_PARAM_TYPE_EDIT,
   createSlug,
-  parse,
 } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
@@ -32,6 +31,7 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
+  BookingPanel,
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
@@ -45,7 +45,6 @@ import SectionReviews from './SectionReviews';
 import SectionHost from './SectionHost';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
-import SectionBooking from './SectionBooking';
 import css from './ListingPage.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
@@ -63,38 +62,6 @@ const priceData = (price, intl) => {
     };
   }
   return {};
-};
-
-const openBookModal = (history, listing) => {
-  if (!listing.id) {
-    // Listing not fully loaded yet
-    return;
-  }
-  const routes = routeConfiguration();
-  history.push(
-    createResourceLocatorString(
-      'ListingPage',
-      routes,
-      { id: listing.id.uuid, slug: createSlug(listing.attributes.title) },
-      { book: true }
-    )
-  );
-};
-
-const closeBookModal = (history, listing) => {
-  if (!listing.id) {
-    // Listing not fully loaded yet
-    return;
-  }
-  const routes = routeConfiguration();
-  history.push(
-    createResourceLocatorString(
-      'ListingPage',
-      routes,
-      { id: listing.id.uuid, slug: createSlug(listing.attributes.title) },
-      {}
-    )
-  );
 };
 
 const categoryLabel = (categories, key) => {
@@ -199,7 +166,6 @@ export class ListingPageComponent extends Component {
       location,
       scrollingDisabled,
       showListingError,
-      history,
       reviews,
       fetchReviewsError,
       sendEnquiryInProgress,
@@ -210,7 +176,6 @@ export class ListingPageComponent extends Component {
       amenitiesConfig,
     } = this.props;
 
-    const isBook = !!parse(location.search).book;
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
     const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
@@ -341,25 +306,12 @@ export class ListingPageComponent extends Component {
 
     const { formattedPrice, priceTitle } = priceData(price, intl);
 
-    const handleMobileBookModalClose = () => {
-      closeBookModal(history, currentListing);
-    };
-
     const handleBookingSubmit = values => {
       const isCurrentlyClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
       if (isOwnListing || isCurrentlyClosed) {
         window.scrollTo(0, 0);
       } else {
         this.handleSubmit(values);
-      }
-    };
-
-    const handleBookButtonClick = () => {
-      const isCurrentlyClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
-      if (isOwnListing || isCurrentlyClosed) {
-        window.scrollTo(0, 0);
-      } else {
-        openBookModal(history, currentListing);
       }
     };
 
@@ -480,11 +432,11 @@ export class ListingPageComponent extends Component {
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
                 </div>
-                <SectionBooking
+                <BookingPanel
+                  className={css.bookingPanel}
                   listing={currentListing}
                   isOwnListing={isOwnListing}
                   isClosed={isClosed}
-                  isBook={isBook}
                   unitType={unitType}
                   price={price}
                   formattedPrice={formattedPrice}
@@ -492,8 +444,6 @@ export class ListingPageComponent extends Component {
                   handleBookingSubmit={handleBookingSubmit}
                   richTitle={richTitle}
                   authorDisplayName={authorDisplayName}
-                  handleBookButtonClick={handleBookButtonClick}
-                  handleMobileBookModalClose={handleMobileBookModalClose}
                   onManageDisableScrolling={onManageDisableScrolling}
                   timeSlots={timeSlots}
                   fetchTimeSlotsError={fetchTimeSlotsError}
