@@ -67,7 +67,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
         <div>
           <span>
             <FormattedMessage
-              id="ListingPage.hostedBy"
+              id="CheckoutPage.hostedBy"
               values={
                 Object {
                   "name": "author display name",

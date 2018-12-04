@@ -395,7 +395,7 @@ export class CheckoutPageComponent extends Component {
               <div className={css.author}>
                 <span className={css.authorName}>
                   <FormattedMessage
-                    id="ListingPage.hostedBy"
+                    id="CheckoutPage.hostedBy"
                     values={{ name: currentAuthor.attributes.profile.displayName }}
                   />
                 </span>
