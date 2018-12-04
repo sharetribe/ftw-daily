@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-XX-XX
 
+* [change] Update supported Node version to the latest LTS (10.14).
+  [#964](https://github.com/sharetribe/flex-template-web/pull/964)
 * [add] Add documentation about deploying to production. Also add _deploy to Heroku_ button.
   [#961](https://github.com/sharetribe/flex-template-web/pull/961)
 
