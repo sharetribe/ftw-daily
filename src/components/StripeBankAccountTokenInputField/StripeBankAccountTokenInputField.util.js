@@ -117,7 +117,7 @@ export const translateStripeError = (country, intl, stripeError) => {
  *
  * @return {Object} key - value in Object literal.
  */
-export const mapInputsToStripeAccountKeys = (inputType, value) => {
+export const mapInputsToStripeAccountKeys = (country, inputsNeeded, values) => {
   // Stripe documentation speaks about actual bank account terms of different countries
   // (like BSB, sort code, routing number), but all of those get mapped to one of
   // the two different request keys: routing_number or account_number
@@ -126,17 +126,42 @@ export const mapInputsToStripeAccountKeys = (inputType, value) => {
   // We use those country specific terms since we want to show correct labels and errors for users,
   // so this mapping is needed before sending data to Stripe.
 
-  switch (inputType) {
-    case IBAN:
-    case ACCOUNT_NUMBER:
-      return { account_number: value };
-    case BSB:
-    case SORT_CODE:
-    case ROUTING_NUMBER:
-      return { routing_number: value };
+  // Stripe fails if there are spaces within the number, this is
+  // why we have to clean value up first.
+
+  switch (country) {
+    case 'AT':
+    case 'BE':
+    case 'DK':
+    case 'FI':
+    case 'FR':
+    case 'DE':
+    case 'IE':
+    case 'IT':
+    case 'LU':
+    case 'NL':
+    case 'PT':
+    case 'ES':
+    case 'SE':
+      return { account_number: cleanedString(values[IBAN]) };
+    case 'AU':
+      return {
+        routing_number: cleanedString(values[BSB]),
+        account_number: cleanedString(values[ACCOUNT_NUMBER]),
+      };
+    case 'GB':
+      return {
+        routing_number: cleanedString(values[SORT_CODE]),
+        account_number: cleanedString(values[ACCOUNT_NUMBER]),
+      };
+    case 'US':
+      return {
+        routing_number: cleanedString(values[ROUTING_NUMBER]),
+        account_number: cleanedString(values[ACCOUNT_NUMBER]),
+      };
 
     default:
-      throw new Error(`Unknown inputType (${inputType}) given to validator`);
+      throw new Error(`Not supported country (${country}) given to validator`);
   }
 };
 
