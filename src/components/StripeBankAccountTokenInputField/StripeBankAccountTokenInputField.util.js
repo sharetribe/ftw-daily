@@ -156,6 +156,10 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
     case 'ES':
     case 'SE':
       return { account_number: cleanedString(values[IBAN]) };
+    case 'NZ':
+      // NZ account number is typically presented in the format xx-xxxx-xxxxxxx-xxx
+      // '-' separators must be removed before sending value to Stripe API
+      return { account_number: cleanedString(values[ACCOUNT_NUMBER]).replace(/-/g, '') };
     case 'AU':
       return {
         routing_number: cleanedString(values[BSB]),

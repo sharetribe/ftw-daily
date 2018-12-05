@@ -248,6 +248,19 @@ const stripeSupportedCountries = [
     },
   },
   {
+    // New Zealand
+    code: 'NZ',
+    currency: 'NZD',
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
+    accountConfig: {
+      accountNumber: true,
+    },
+  },
+  {
     // Portugal
     code: 'PT',
     currency: 'EUR',
