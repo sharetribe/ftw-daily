@@ -399,6 +399,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
     city,
     state,
     bankAccountToken,
+    personalIdNumber,
   } = payoutDetails;
 
   const address = {
@@ -415,6 +416,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
       address: omitBy(address, isUndefined),
       dob: birthDate,
       type: 'individual',
+      personal_id_number: personalIdNumber,
     },
     tos_shown_and_accepted: true,
   };

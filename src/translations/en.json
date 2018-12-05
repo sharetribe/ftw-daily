@@ -477,6 +477,8 @@
   "PayoutDetailsForm.lastNamePlaceholder": "Doe",
   "PayoutDetailsForm.lastNameRequired": "This field is required",
   "PayoutDetailsForm.personalDetailsTitle": "Personal details",
+  "PayoutDetailsForm.personalIdNumberTitle": "Personal id number",
+  "PayoutDetailsForm.personalIdNumberRequired": "This field is required",
   "PayoutDetailsForm.postalCodeLabel": "Postal code",
   "PayoutDetailsForm.postalCodePlaceholder": "00100",
   "PayoutDetailsForm.postalCodeRequired": "This field is required",

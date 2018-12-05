@@ -115,6 +115,27 @@ const PayoutDetailsFormComponent = props => (
       // out of the field. Therefore the empty validation message.
       const bankAccountRequired = validators.required(' ');
 
+      const showPersonalIdNumber =
+        country && stripeCountryConfigs(country).personalIdNumberRequired;
+
+      const personalIdNumberLabel = showPersonalIdNumber
+        ? intl.formatMessage({
+            id: `PayoutDetailsForm.personalIdNumberLabel.${country}`,
+          })
+        : null;
+      const personalIdNumberPlaceholder = showPersonalIdNumber
+        ? intl.formatMessage({
+            id: `PayoutDetailsForm.personalIdNumberPlaceholder.${country}`,
+          })
+        : null;
+      const personalIdNumberRequired = showPersonalIdNumber
+        ? validators.required(
+            intl.formatMessage({
+              id: `PayoutDetailsForm.personalIdNumberRequired`,
+            })
+          )
+        : null;
+
       const classes = classNames(css.root, className, {
         [css.disabled]: disabled,
       });
@@ -142,7 +163,6 @@ const PayoutDetailsFormComponent = props => (
           <FormattedMessage id="PayoutDetailsForm.stripeConnectedAccountTermsLink" />
         </ExternalLink>
       );
-
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           <div className={css.sectionContainer}>
@@ -227,7 +247,27 @@ const PayoutDetailsFormComponent = props => (
               />
             </div>
           ) : null}
+
+          {showPersonalIdNumber ? (
+            <div className={css.sectionContainer}>
+              <h3 className={css.subTitle}>
+                <FormattedMessage id="PayoutDetailsForm.personalIdNumberTitle" />
+              </h3>
+              <FieldTextInput
+                id="personalIdNumber"
+                name="personalIdNumber"
+                disabled={disabled}
+                className={css.personalIdNumber}
+                type="text"
+                label={personalIdNumberLabel}
+                placeholder={personalIdNumberPlaceholder}
+                validate={personalIdNumberRequired}
+              />
+            </div>
+          ) : null}
+
           {error}
+
           <p className={css.termsText}>
             <FormattedMessage
               id="PayoutDetailsForm.stripeToSText"
