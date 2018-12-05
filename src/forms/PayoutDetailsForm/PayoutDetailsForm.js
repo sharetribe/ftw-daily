@@ -17,6 +17,7 @@ import {
 import * as validators from '../../util/validators';
 import { isStripeInvalidPostalCode } from '../../util/errors';
 
+import PayoutDetailsAddress from './PayoutDetailsAddress';
 import css from './PayoutDetailsForm.css';
 
 const MIN_STRIPE_ACCOUNT_AGE = 18;
@@ -30,11 +31,6 @@ export const stripeCountryConfigs = countryCode => {
     throw new Error(`Country code not found in Stripe config ${countryCode}`);
   }
   return country;
-};
-
-const requiresAddress = countryCode => {
-  const country = stripeCountryConfigs(countryCode);
-  return country.payoutAddressRequired;
 };
 
 const countryCurrency = countryCode => {
@@ -113,38 +109,6 @@ const PayoutDetailsFormComponent = props => (
           id: 'PayoutDetailsForm.countryRequired',
         })
       );
-
-      const streetAddressLabel = intl.formatMessage({
-        id: 'PayoutDetailsForm.streetAddressLabel',
-      });
-      const streetAddressPlaceholder = intl.formatMessage({
-        id: 'PayoutDetailsForm.streetAddressPlaceholder',
-      });
-      const streetAddressRequired = validators.required(
-        intl.formatMessage({
-          id: 'PayoutDetailsForm.streetAddressRequired',
-        })
-      );
-
-      const postalCodeLabel = intl.formatMessage({ id: 'PayoutDetailsForm.postalCodeLabel' });
-      const postalCodePlaceholder = intl.formatMessage({
-        id: 'PayoutDetailsForm.postalCodePlaceholder',
-      });
-      const postalCodeRequired = validators.required(
-        intl.formatMessage({
-          id: 'PayoutDetailsForm.postalCodeRequired',
-        })
-      );
-
-      const cityLabel = intl.formatMessage({ id: 'PayoutDetailsForm.cityLabel' });
-      const cityPlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.cityPlaceholder' });
-      const cityRequired = validators.required(
-        intl.formatMessage({
-          id: 'PayoutDetailsForm.cityRequired',
-        })
-      );
-
-      const showAddressFields = country && requiresAddress(country);
 
       // StripeBankAccountTokenInputField handles the error messages
       // internally, we just have to make sure we require a valid token
@@ -245,48 +209,8 @@ const PayoutDetailsFormComponent = props => (
                 </option>
               ))}
             </FieldSelect>
-            {showAddressFields ? (
-              <div>
-                <FieldTextInput
-                  id="streetAddress"
-                  name="streetAddress"
-                  disabled={disabled}
-                  className={css.field}
-                  type="text"
-                  autoComplete="street-address"
-                  label={streetAddressLabel}
-                  placeholder={streetAddressPlaceholder}
-                  validate={streetAddressRequired}
-                  onUnmount={() => form.change('streetAddress', undefined)}
-                />
-                <div className={css.formRow}>
-                  <FieldTextInput
-                    id="postalCode"
-                    name="postalCode"
-                    disabled={disabled}
-                    className={css.postalCode}
-                    type="text"
-                    autoComplete="postal-code"
-                    label={postalCodeLabel}
-                    placeholder={postalCodePlaceholder}
-                    validate={postalCodeRequired}
-                    onUnmount={() => form.change('postalCode', undefined)}
-                  />
-                  <FieldTextInput
-                    id="city"
-                    name="city"
-                    disabled={disabled}
-                    className={css.city}
-                    type="text"
-                    autoComplete="address-level2"
-                    label={cityLabel}
-                    placeholder={cityPlaceholder}
-                    validate={cityRequired}
-                    onUnmount={() => form.change('city', undefined)}
-                  />
-                </div>
-              </div>
-            ) : null}
+
+            <PayoutDetailsAddress country={country} intl={intl} disabled={disabled} form={form} />
           </div>
           {country ? (
             <div className={css.sectionContainer}>

@@ -134,7 +134,7 @@ class TokenInputFieldComponent extends Component {
     };
 
     // Include input values with correct stripe keys
-    const inputValueObj = mapInputsToStripeAccountKeys(country, inputsNeeded, values);
+    const inputValueObj = mapInputsToStripeAccountKeys(country, values);
     accountData = { ...accountData, ...inputValueObj };
 
     // https://stripe.com/docs/stripe-js/reference#collecting-bank-account-details

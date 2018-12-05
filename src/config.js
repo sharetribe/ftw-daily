@@ -90,7 +90,12 @@ const stripeSupportedCountries = [
     // Australia
     code: 'AU',
     currency: 'AUD',
-    payoutAddressRequired: false,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+      state: true,
+    },
     accountConfig: {
       bsb: true,
       accountNumber: true,
@@ -100,7 +105,11 @@ const stripeSupportedCountries = [
     // Austria
     code: 'AT',
     currency: 'EUR',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       iban: true,
     },
@@ -109,7 +118,11 @@ const stripeSupportedCountries = [
     // Belgium
     code: 'BE',
     currency: 'EUR',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       iban: true,
     },
@@ -118,7 +131,11 @@ const stripeSupportedCountries = [
     // Denmark
     code: 'DK',
     currency: 'DKK',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       iban: true,
     },
@@ -127,7 +144,11 @@ const stripeSupportedCountries = [
     // Finland
     code: 'FI',
     currency: 'EUR',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       iban: true,
     },
@@ -136,7 +157,11 @@ const stripeSupportedCountries = [
     // France
     code: 'FR',
     currency: 'EUR',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       iban: true,
     },
@@ -145,7 +170,11 @@ const stripeSupportedCountries = [
     // Germany
     code: 'DE',
     currency: 'EUR',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       iban: true,
     },
@@ -154,7 +183,11 @@ const stripeSupportedCountries = [
     // Ireland
     code: 'IE',
     currency: 'EUR',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       iban: true,
     },
@@ -163,7 +196,11 @@ const stripeSupportedCountries = [
     // Italy
     code: 'IT',
     currency: 'EUR',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       iban: true,
     },
@@ -172,7 +209,11 @@ const stripeSupportedCountries = [
     // Luxembourg
     code: 'LU',
     currency: 'EUR',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       iban: true,
     },
@@ -181,7 +222,11 @@ const stripeSupportedCountries = [
     // Netherlands
     code: 'NL',
     currency: 'EUR',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       iban: true,
     },
@@ -190,7 +235,11 @@ const stripeSupportedCountries = [
     // Portugal
     code: 'PT',
     currency: 'EUR',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       iban: true,
     },
@@ -199,7 +248,11 @@ const stripeSupportedCountries = [
     // Spain
     code: 'ES',
     currency: 'EUR',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       iban: true,
     },
@@ -208,7 +261,11 @@ const stripeSupportedCountries = [
     // Sweden
     code: 'SE',
     currency: 'SEK',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       iban: true,
     },
@@ -217,7 +274,11 @@ const stripeSupportedCountries = [
     // United Kingdom
     code: 'GB',
     currency: 'GBP',
-    payoutAddressRequired: true,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
     accountConfig: {
       sortCode: true,
       accountNumber: true,
@@ -227,7 +288,12 @@ const stripeSupportedCountries = [
     // United States
     code: 'US',
     currency: 'USD',
-    payoutAddressRequired: false,
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+      state: true,
+    },
     accountConfig: {
       routingNumber: true,
       accountNumber: true,

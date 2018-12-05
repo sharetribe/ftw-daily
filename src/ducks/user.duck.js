@@ -397,6 +397,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
     streetAddress,
     postalCode,
     city,
+    state,
     bankAccountToken,
   } = payoutDetails;
 
