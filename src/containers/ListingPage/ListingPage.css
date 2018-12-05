@@ -216,8 +216,8 @@
   @media (--viewportLarge) {
     margin-top: 50px;
     margin-bottom: 0px;
-    /* contentContainer's full width - (bookingColumn + gutters) */
-    flex-basis: calc(100% - 491px);
+    /* contentContainer's full width - (bookingColumn + two paddings + margin + border) */
+    flex-basis: calc(100% - 493px);
     flex-shrink: 0;
   }
 }
@@ -231,10 +231,11 @@
     border-left-width: 1px;
     border-left-color: var(--matterColorNegative);
 
-    /* Calendar needs 311px width and therefore padding can't be wider than 58px */
     padding-left: 60px;
     padding-right: 60px;
-    flex-basis: 311px;
+
+    /* The calendar needs 312px */
+    flex-basis: 312px;
     flex-shrink: 0;
   }
 }

@@ -110,6 +110,10 @@
     font-weight: 400;
   }
 
+  & :global(.DayPicker__withBorder) {
+    border-radius: 0;
+  }
+
   & :global(.CalendarMonth_caption) {
     color: var(--matterColorLight);
     @apply --marketplaceH2FontStyles;

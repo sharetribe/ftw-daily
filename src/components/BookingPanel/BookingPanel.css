@@ -109,7 +109,7 @@
   }
 
   @media (--viewportLarge) {
-    min-width: 311px;
+    min-width: 312px;
     min-height: auto;
   }
 }
