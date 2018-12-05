@@ -128,6 +128,22 @@ const stripeSupportedCountries = [
     },
   },
   {
+    // Canada
+    code: 'CA',
+    currency: 'CAD',
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+      province: true,
+    },
+    accountConfig: {
+      transitNumber: true,
+      institutionNumber: true,
+      accountNumber: true,
+    },
+  },
+  {
     // Denmark
     code: 'DK',
     currency: 'DKK',

@@ -1,10 +1,26 @@
 import React from 'react';
 import { bool, object, string } from 'prop-types';
-import { FieldTextInput } from '../../components';
+import { FieldSelect, FieldTextInput } from '../../components';
 import * as validators from '../../util/validators';
 
 import { stripeCountryConfigs } from './PayoutDetailsForm';
 import css from './PayoutDetailsForm.css';
+
+const CANADIAN_PROVINCES = [
+  'AB',
+  'BC',
+  'MB',
+  'NB',
+  'NL',
+  'NS',
+  'NT',
+  'NU',
+  'ON',
+  'PE',
+  'QC',
+  'SK',
+  'YT',
+];
 
 const PayoutDetailsAddress = props => {
   const { country, intl, disabled, form } = props;
@@ -57,6 +73,18 @@ const PayoutDetailsAddress = props => {
   const stateRequired = validators.required(
     intl.formatMessage({
       id: 'PayoutDetailsForm.stateRequired',
+    })
+  );
+
+  const showProvince = country && isRequired(countryConfig, 'province');
+
+  const provinceLabel = intl.formatMessage({ id: 'PayoutDetailsForm.canadianProvinceLabel' });
+  const provincePlaceholder = intl.formatMessage({
+    id: 'PayoutDetailsForm.canadianProvincePlaceholder',
+  });
+  const provinceRequired = validators.required(
+    intl.formatMessage({
+      id: 'PayoutDetailsForm.canadianProvinceRequired',
     })
   );
 
@@ -119,6 +147,27 @@ const PayoutDetailsAddress = props => {
           validate={stateRequired}
           onUnmount={() => form.change('state', undefined)}
         />
+      ) : null}
+
+      {showProvince ? (
+        <FieldSelect
+          id="province"
+          name="province"
+          disabled={disabled}
+          className={css.selectCountry}
+          autoComplete="province"
+          label={provinceLabel}
+          validate={provinceRequired}
+        >
+          <option disabled value="">
+            {provincePlaceholder}
+          </option>
+          {CANADIAN_PROVINCES.map(p => (
+            <option key={p} value={p}>
+              {intl.formatMessage({ id: `PayoutDetailsForm.canadianProvinceNames.${p}` })}
+            </option>
+          ))}
+        </FieldSelect>
       ) : null}
     </div>
   );

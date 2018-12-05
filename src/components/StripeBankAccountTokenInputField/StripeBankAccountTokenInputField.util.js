@@ -6,6 +6,10 @@ import config from '../../config';
 export const ACCOUNT_NUMBER = 'accountNumber';
 // Australian equivalent for routing number
 export const BSB = 'bsb';
+// Needed for creating full routing number in Canada
+export const INSTITUTION_NUMBER = 'institutionNumber';
+// Needed for creating full routing number in Canada
+export const TRANSIT_NUMBER = 'transitNumber';
 // International bank account number (e.g. EU countries use this)
 export const IBAN = 'iban';
 // Routing number to separate bank account in different areas
@@ -15,7 +19,15 @@ export const SORT_CODE = 'sortCode';
 
 // Currently supported bank account inputs
 // the order here matters: account number input is asked after routing number and its equivalents
-export const BANK_ACCOUNT_INPUTS = [BSB, SORT_CODE, ROUTING_NUMBER, ACCOUNT_NUMBER, IBAN];
+export const BANK_ACCOUNT_INPUTS = [
+  BSB,
+  TRANSIT_NUMBER,
+  INSTITUTION_NUMBER,
+  SORT_CODE,
+  ROUTING_NUMBER,
+  ACCOUNT_NUMBER,
+  IBAN,
+];
 
 export const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
 
@@ -117,7 +129,7 @@ export const translateStripeError = (country, intl, stripeError) => {
  *
  * @return {Object} key - value in Object literal.
  */
-export const mapInputsToStripeAccountKeys = (country, inputsNeeded, values) => {
+export const mapInputsToStripeAccountKeys = (country, values) => {
   // Stripe documentation speaks about actual bank account terms of different countries
   // (like BSB, sort code, routing number), but all of those get mapped to one of
   // the two different request keys: routing_number or account_number
@@ -147,6 +159,13 @@ export const mapInputsToStripeAccountKeys = (country, inputsNeeded, values) => {
     case 'AU':
       return {
         routing_number: cleanedString(values[BSB]),
+        account_number: cleanedString(values[ACCOUNT_NUMBER]),
+      };
+    case 'CA':
+      return {
+        routing_number: cleanedString(values[TRANSIT_NUMBER]).concat(
+          cleanedString(values[INSTITUTION_NUMBER])
+        ),
         account_number: cleanedString(values[ACCOUNT_NUMBER]),
       };
     case 'GB':
