@@ -91,8 +91,8 @@ class StaticGoogleMap extends Component {
     const targetMaybe = mapsConfig.fuzzy.enabled
       ? { path: drawFuzzyCircle(mapsConfig, center) }
       : mapsConfig.customMarker.enabled
-        ? { markers: customMarker(mapsConfig.customMarker, lat, lng) }
-        : { markers: `${lat},${lng}` };
+      ? { markers: customMarker(mapsConfig.customMarker, lat, lng) }
+      : { markers: `${lat},${lng}` };
 
     const srcParams = stringify({
       center: encodeLatLng(center),

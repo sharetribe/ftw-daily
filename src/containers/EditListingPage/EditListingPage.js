@@ -271,9 +271,13 @@ const mapDispatchToProps = dispatch => ({
 // lifecycle hook.
 //
 // See: https://github.com/ReactTraining/react-router/issues/4671
-const EditListingPage = compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(
-  injectIntl(EditListingPageComponent)
-);
+const EditListingPage = compose(
+  withRouter,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(injectIntl(EditListingPageComponent));
 
 EditListingPage.loadData = loadData;
 

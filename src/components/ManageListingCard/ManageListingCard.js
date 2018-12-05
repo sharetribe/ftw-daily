@@ -68,8 +68,8 @@ const createListingURL = (routes, listing) => {
   const variant = isDraft
     ? LISTING_PAGE_DRAFT_VARIANT
     : isPendingApproval
-      ? LISTING_PAGE_PENDING_APPROVAL_VARIANT
-      : null;
+    ? LISTING_PAGE_PENDING_APPROVAL_VARIANT
+    : null;
 
   const linkProps =
     isPendingApproval || isDraft
@@ -359,4 +359,7 @@ ManageListingCardComponent.propTypes = {
   }).isRequired,
 };
 
-export default compose(withRouter, injectIntl)(ManageListingCardComponent);
+export default compose(
+  withRouter,
+  injectIntl
+)(ManageListingCardComponent);

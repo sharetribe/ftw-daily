@@ -28,15 +28,15 @@ set if icons and an HTML snippet to point to those images.
     **Example HTML snippet:**
 
     ```html
-     <!-- Start Favicons from https://realfavicongenerator.net/ -->
-     <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
-     <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png">
-     <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png">
-     <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg" color="#c0392b">
-     <link rel="shortcut icon" href="/static/icons/favicon.ico">
-     <meta name="msapplication-config" content="/static/icons/browserconfig.xml">
-     <meta name="theme-color" content="#c0392b">
-     <!-- End Favicons -->
+    <!-- Start Favicons from https://realfavicongenerator.net/ -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png" />
+    <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg" color="#c0392b" />
+    <link rel="shortcut icon" href="/static/icons/favicon.ico" />
+    <meta name="msapplication-config" content="/static/icons/browserconfig.xml" />
+    <meta name="theme-color" content="#c0392b" />
+    <!-- End Favicons -->
     ```
 
 ## Map marker icon

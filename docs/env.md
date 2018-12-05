@@ -3,7 +3,7 @@
 The following configuration variables can be set to control the Flex template app behaviour. Most of
 them have defaults that work for development environment. For production deploys most should be set.
 
-| Variable                                  | Description                                                                                                                                        |
+| Variable                                  | Description                                                                                                             |
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | REACT_APP_MAPBOX_ACCESS_TOKEN             | See: [Integrating to map providers](./map-providers.md)                                                                 |
 | REACT_APP_GOOGLE_MAPS_API_KEY             | See: [Google Maps API key](./google-maps.md) (Alternative map provider)                                                 |
@@ -24,7 +24,7 @@ them have defaults that work for development environment. For production deploys
 | REACT_APP_GOOGLE_ANALYTICS_ID             | See: [Google Analytics](./analytics.md)                                                                                 |
 | REACT_APP_AVAILABILITY_ENABLED            | Enables availability calendar for listings.                                                                             |
 | REACT_APP_DEFAULT_SEARCHES_ENABLED        | Enables default search suggestions in location autocomplete search input.                                               |
-| REACT_APP_SHARETRIBE_SDK_BASE_URL         | The base url to access the Sharetribe Flex Marketplace API. FTW uses the correct one by default so no need to set this. | 
+| REACT_APP_SHARETRIBE_SDK_BASE_URL         | The base url to access the Sharetribe Flex Marketplace API. FTW uses the correct one by default so no need to set this. |
 
 ## Defining configuration
 

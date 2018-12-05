@@ -419,7 +419,10 @@ const mapStateToProps = state => {
   };
 };
 
-const InboxPage = compose(connect(mapStateToProps), injectIntl)(InboxPageComponent);
+const InboxPage = compose(
+  connect(mapStateToProps),
+  injectIntl
+)(InboxPageComponent);
 
 InboxPage.loadData = loadData;
 

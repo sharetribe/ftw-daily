@@ -43,7 +43,11 @@ class Discussion extends Component {
   render() {
     return (
       <div className={this.props.className}>
-        <ul>{this.props.messages.map(msg => <Message key={msg.id} {...msg} />)}</ul>
+        <ul>
+          {this.props.messages.map(msg => (
+            <Message key={msg.id} {...msg} />
+          ))}
+        </ul>
         <form className={css.sendMessageForm} onSubmit={this.handleNewMessage}>
           <input
             className={css.sendMessageInput}

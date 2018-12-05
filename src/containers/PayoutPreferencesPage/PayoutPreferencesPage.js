@@ -160,9 +160,13 @@ const mapDispatchToProps = dispatch => ({
   onPayoutDetailsFormSubmit: values => dispatch(savePayoutDetails(values)),
 });
 
-const PayoutPreferencesPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
-  PayoutPreferencesPageComponent
-);
+const PayoutPreferencesPage = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  injectIntl
+)(PayoutPreferencesPageComponent);
 
 PayoutPreferencesPage.loadData = loadData;
 

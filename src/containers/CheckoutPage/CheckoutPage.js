@@ -532,9 +532,14 @@ const mapDispatchToProps = dispatch => ({
   fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
 });
 
-const CheckoutPage = compose(withRouter, connect(mapStateToProps, mapDispatchToProps), injectIntl)(
-  CheckoutPageComponent
-);
+const CheckoutPage = compose(
+  withRouter,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  injectIntl
+)(CheckoutPageComponent);
 
 CheckoutPage.setInitialValues = initialValues => setInitialValues(initialValues);
 

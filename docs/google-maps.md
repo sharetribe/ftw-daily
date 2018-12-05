@@ -67,16 +67,16 @@ comments.
 _public/index.html:_
 
 ```html
-    <script src="%PUBLIC_URL%/static/scripts/mapbox/mapbox-sdk.min.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css" rel="stylesheet" />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js"></script>
-    <script>
-      window.mapboxgl.accessToken = '%REACT_APP_MAPBOX_ACCESS_TOKEN%';
-    </script>
-    <!--
-      If Google Maps is used instead of Mapbox, you need to include Google's script instead:
-      <script src="https://maps.googleapis.com/maps/api/js?key=%REACT_APP_GOOGLE_MAPS_API_KEY%&libraries=places"></script>
-    -->
+<script src="%PUBLIC_URL%/static/scripts/mapbox/mapbox-sdk.min.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css" rel="stylesheet" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js"></script>
+<script>
+  window.mapboxgl.accessToken = '%REACT_APP_MAPBOX_ACCESS_TOKEN%';
+</script>
+<!--
+  If Google Maps is used instead of Mapbox, you need to include Google's script instead:
+  <script src="https://maps.googleapis.com/maps/api/js?key=%REACT_APP_GOOGLE_MAPS_API_KEY%&libraries=places"></script>
+-->
 ```
 
 ### 2. Searching with Google's geocoding API

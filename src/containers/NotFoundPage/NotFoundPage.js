@@ -107,8 +107,10 @@ const mapStateToProps = state => {
 // lifecycle hook.
 //
 // See: https://github.com/ReactTraining/react-router/issues/4671
-const NotFoundPage = compose(withRouter, connect(mapStateToProps), injectIntl)(
-  NotFoundPageComponent
-);
+const NotFoundPage = compose(
+  withRouter,
+  connect(mapStateToProps),
+  injectIntl
+)(NotFoundPageComponent);
 
 export default NotFoundPage;

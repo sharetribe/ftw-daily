@@ -100,8 +100,8 @@ export const AddressLinkMaybe = props => {
   const hrefToGoogleMaps = geolocation
     ? `https://maps.google.com/?q=${lat},${lng}`
     : address
-      ? `https://maps.google.com/?q=${encodeURIComponent(address)}`
-      : null;
+    ? `https://maps.google.com/?q=${encodeURIComponent(address)}`
+    : null;
 
   const fullAddress =
     typeof building === 'string' && building.length > 0 ? `${building}, ${address}` : address;
