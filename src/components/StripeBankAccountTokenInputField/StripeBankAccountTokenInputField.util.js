@@ -156,6 +156,7 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
     case 'ES':
     case 'SE':
     case 'CH':
+    case 'NO':
       return { account_number: cleanedString(values[IBAN]) };
     case 'NZ':
       // NZ account number is typically presented in the format xx-xxxx-xxxxxxx-xxx

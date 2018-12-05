@@ -261,6 +261,19 @@ const stripeSupportedCountries = [
     },
   },
   {
+    // Norway
+    code: 'NO',
+    currency: 'EUR',
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
+    accountConfig: {
+      iban: true,
+    },
+  },
+  {
     // Portugal
     code: 'PT',
     currency: 'EUR',
