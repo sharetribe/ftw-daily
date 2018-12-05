@@ -300,6 +300,19 @@ const stripeSupportedCountries = [
     },
   },
   {
+    // Switzerland
+    code: 'CH',
+    currency: 'CHF',
+    addressConfig: {
+      addressLine: true,
+      city: true,
+      postalCode: true,
+    },
+    accountConfig: {
+      iban: true,
+    },
+  },
+  {
     // United Kingdom
     code: 'GB',
     currency: 'GBP',
