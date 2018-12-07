@@ -1,6 +1,8 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { InlineTextButton } from '../../components';
+import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
+import config from '../../config';
 
 import css from './ListingPage.css';
 
@@ -14,6 +16,17 @@ const SectionHeading = props => {
     showContactUser,
     onContactUser,
   } = props;
+
+  const unitType = config.bookingUnitType;
+  const isNightly = unitType === LINE_ITEM_NIGHT;
+  const isDaily = unitType === LINE_ITEM_DAY;
+
+  const unitTranslationKey = isNightly
+    ? 'ListingPage.perNight'
+    : isDaily
+    ? 'ListingPage.perDay'
+    : 'ListingPage.perUnit';
+
   return (
     <div className={css.sectionHeading}>
       <div className={css.desktopPriceContainer}>
@@ -21,7 +34,7 @@ const SectionHeading = props => {
           {formattedPrice}
         </div>
         <div className={css.desktopPerUnit}>
-          <FormattedMessage id="ListingPage.perUnit" />
+          <FormattedMessage id={unitTranslationKey} />
         </div>
       </div>
       <div className={css.heading}>

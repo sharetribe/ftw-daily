@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ModalInMobile, Button } from '../../components';
 import { BookingDatesForm } from '../../forms';
+import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
 
 import css from './ListingPage.css';
 
@@ -28,6 +29,15 @@ const SectionBooking = props => {
     fetchTimeSlotsError,
   } = props;
   const showClosedListingHelpText = listing.id && isClosed;
+
+  const isNightly = unitType === LINE_ITEM_NIGHT;
+  const isDaily = unitType === LINE_ITEM_DAY;
+
+  const unitTranslationKey = isNightly
+    ? 'ListingPage.perNight'
+    : isDaily
+    ? 'ListingPage.perDay'
+    : 'ListingPage.perUnit';
 
   return (
     <div>
@@ -82,7 +92,7 @@ const SectionBooking = props => {
             {formattedPrice}
           </div>
           <div className={css.perUnit}>
-            <FormattedMessage id="ListingPage.perUnit" />
+            <FormattedMessage id={unitTranslationKey} />
           </div>
         </div>
 
