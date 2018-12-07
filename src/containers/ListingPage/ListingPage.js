@@ -436,8 +436,6 @@ export class ListingPageComponent extends Component {
                   listing={currentListing}
                   isOwnListing={isOwnListing}
                   unitType={unitType}
-                  formattedPrice={formattedPrice}
-                  priceTitle={priceTitle}
                   handleBookingSubmit={handleBookingSubmit}
                   richTitle={richTitle}
                   authorDisplayName={authorDisplayName}
