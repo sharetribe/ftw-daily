@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-XX-XX
 
+- [change] Remove generic perUnit translations and replace them with specific night, day and unit
+  translations depending on booking unit chosen in config.
+  [#970](https://github.com/sharetribe/flex-template-web/pull/970)
+
 - [fix] Formatting docs with newest Prettier - related commit was lost in #967 at some point.
   [#975](https://github.com/sharetribe/flex-template-web/pull/975)
 - [change] Improved documents related to onboarding: env.md, deploying-to-production.md,

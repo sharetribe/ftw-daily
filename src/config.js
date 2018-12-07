@@ -32,9 +32,8 @@ const bookingProcessAlias = 'preauth-with-nightly-booking/release-1';
 //
 // Possible values: ['line-item/night', 'line-item/day', 'line-item/units';]
 //
-// Note: if you change this, many of the generic translations will
-// still show information about nights. Make sure to go through the
-// translations when the unit is changed.
+// Note: translations will use different translation keys for night, day or unit
+// depending on the value chosen.
 const bookingUnitType = 'line-item/night';
 
 // Should the application fetch available time slots (currently defined as
