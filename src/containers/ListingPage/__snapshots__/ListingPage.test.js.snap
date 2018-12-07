@@ -267,7 +267,6 @@ exports[`ListingPage matches snapshot 1`] = `
             fetchTimeSlotsError={null}
             formattedPrice={55}
             handleBookingSubmit={[Function]}
-            isClosed={false}
             isOwnListing={false}
             listing={
               Object {
@@ -307,12 +306,6 @@ exports[`ListingPage matches snapshot 1`] = `
               }
             }
             onManageDisableScrolling={[Function]}
-            price={
-              Money {
-                "amount": 5500,
-                "currency": "USD",
-              }
-            }
             priceTitle={55}
             richTitle={
               <span>

@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import omit from 'lodash/omit';
 import { ModalInMobile, Button } from '../../components';
 import { BookingDatesForm } from '../../forms';
-import { propTypes } from '../../util/types';
+import { propTypes, LISTING_STATE_CLOSED } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { parse, stringify } from '../../util/urlHelpers';
 import config from '../../config';
@@ -54,9 +54,7 @@ const BookingPanel = props => {
     className,
     listing,
     isOwnListing,
-    isClosed,
     unitType,
-    price,
     handleBookingSubmit,
     richTitle,
     authorDisplayName,
@@ -68,6 +66,8 @@ const BookingPanel = props => {
     intl,
   } = props;
 
+  const price = listing.attributes.price;
+  const isClosed = listing.attributes.state === LISTING_STATE_CLOSED;
   const showClosedListingHelpText = listing.id && isClosed;
   const { formattedPrice, priceTitle } = priceData(price, intl);
   const isBook = !!parse(location.search).book;
@@ -159,9 +159,7 @@ BookingPanel.propTypes = {
   className: string,
   listing: propTypes.listing.isRequired,
   isOwnListing: bool,
-  isClosed: bool.isRequired,
   unitType: propTypes.bookingUnitType,
-  price: propTypes.money.isRequired,
   handleBookingSubmit: func.isRequired,
   richTitle: object,
   authorDisplayName: string.isRequired,

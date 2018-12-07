@@ -293,7 +293,6 @@ export class ListingPageComponent extends Component {
     const userAndListingAuthorAvailable = !!(currentUser && authorAvailable);
     const isOwnListing =
       userAndListingAuthorAvailable && currentListing.author.id.uuid === currentUser.id.uuid;
-    const isClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
     const showContactUser = !currentUser || (currentUser && !isOwnListing);
 
     const currentAuthor = authorAvailable ? currentListing.author : null;
@@ -436,9 +435,7 @@ export class ListingPageComponent extends Component {
                   className={css.bookingPanel}
                   listing={currentListing}
                   isOwnListing={isOwnListing}
-                  isClosed={isClosed}
                   unitType={unitType}
-                  price={price}
                   formattedPrice={formattedPrice}
                   priceTitle={priceTitle}
                   handleBookingSubmit={handleBookingSubmit}
