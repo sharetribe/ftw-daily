@@ -87,12 +87,7 @@ const BookingPanel = props => {
         <div className={css.modalHeading}>
           <h1 className={css.title}>{richTitle}</h1>
           <div className={css.author}>
-            {
-              // TOOD: check is class is required
-            }
-            <span className={css.authorName}>
-              <FormattedMessage id="BookingPanel.hostedBy" values={{ name: authorDisplayName }} />
-            </span>
+            <FormattedMessage id="BookingPanel.hostedBy" values={{ name: authorDisplayName }} />
           </div>
         </div>
 
