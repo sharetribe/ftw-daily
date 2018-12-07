@@ -6,6 +6,8 @@ import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
 import {
+  LINE_ITEM_NIGHT,
+  LINE_ITEM_DAY,
   LISTING_STATE_PENDING_APPROVAL,
   LISTING_STATE_CLOSED,
   LISTING_STATE_DRAFT,
@@ -152,6 +154,16 @@ export const ManageListingCardComponent = props => {
     ? LISTING_PAGE_PARAM_TYPE_DRAFT
     : LISTING_PAGE_PARAM_TYPE_EDIT;
 
+  const unitType = config.bookingUnitType;
+  const isNightly = unitType === LINE_ITEM_NIGHT;
+  const isDaily = unitType === LINE_ITEM_DAY;
+
+  const unitTranslationKey = isNightly
+    ? 'ManageListingCard.perNight'
+    : isDaily
+    ? 'ManageListingCard.perDay'
+    : 'ManageListingCard.perUnit';
+
   return (
     <div className={classes}>
       <div
@@ -289,7 +301,7 @@ export const ManageListingCardComponent = props => {
                 {formattedPrice}
               </div>
               <div className={css.perUnit}>
-                <FormattedMessage id="ManageListingCard.perUnit" />
+                <FormattedMessage id={unitTranslationKey} />
               </div>
             </React.Fragment>
           ) : (
