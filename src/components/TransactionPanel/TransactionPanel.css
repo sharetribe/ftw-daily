@@ -202,10 +202,6 @@
     margin-bottom: 37px;
   }
 }
-.detailCardHeadingsProvider {
-  composes: detailCardHeadings;
-  margin-top: 24px;
-}
 
 .detailCardTitle {
   margin-bottom: 10px;

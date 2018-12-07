@@ -89,7 +89,6 @@ export const FeedSection = props => {
 export const AddressLinkMaybe = props => {
   const { transaction, transactionRole, currentListing } = props;
 
-  const isProvider = transactionRole === 'provider';
   const isCustomer = transactionRole === 'customer';
   const txIsAcceptedForCustomer = isCustomer && txHasBeenAccepted(transaction);
 
@@ -106,7 +105,7 @@ export const AddressLinkMaybe = props => {
   const fullAddress =
     typeof building === 'string' && building.length > 0 ? `${building}, ${address}` : address;
 
-  return (isProvider || txIsAcceptedForCustomer) && hrefToGoogleMaps ? (
+  return txIsAcceptedForCustomer && hrefToGoogleMaps ? (
     <p className={css.address}>
       <ExternalLink href={hrefToGoogleMaps}>{fullAddress}</ExternalLink>
     </p>

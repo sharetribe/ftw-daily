@@ -321,14 +321,6 @@ export class TransactionPanelComponent extends Component {
                     currentListing={currentListing}
                   />
                 </div>
-              ) : (
-                <div className={css.detailCardHeadingsProvider}>
-                  <AddressLinkMaybe
-                    transaction={currentTransaction}
-                    transactionRole={transactionRole}
-                    currentListing={currentListing}
-                  />
-                </div>
               )}
               <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
               {canShowActionButtons ? (
