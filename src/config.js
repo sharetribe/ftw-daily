@@ -196,6 +196,21 @@ const stripeSupportedCountries = [
     },
   },
   {
+    // Hong Kong
+    code: 'HK',
+    currency: 'HKD',
+    addressConfig: {
+      addressLine: true,
+      city: true,
+    },
+    accountConfig: {
+      clearingCode: true,
+      branchCode: true,
+      accountNumber: true,
+    },
+    personalIdNumberRequired: true,
+  },
+  {
     // Ireland
     code: 'IE',
     currency: 'EUR',
