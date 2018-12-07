@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { txIsEnquired, txIsRequested, propTypes } from '../../util/types';
+import { txIsRequested, propTypes } from '../../util/types';
 import { ensureListing, ensureTransaction, ensureUser } from '../../util/data';
 import { isMobileSafari } from '../../util/userAgent';
 import { AvatarMedium, AvatarLarge, ResponsiveImage, ReviewModal } from '../../components';
@@ -11,9 +11,10 @@ import { SendMessageForm } from '../../forms';
 // These are internal components that make this file more readable.
 import {
   AddressLinkMaybe,
+  BookingPanelMaybe,
   BreakdownMaybe,
+  DetailCardHeadingsMaybe,
   FeedSection,
-  OrderActionButtonMaybe,
   SaleActionButtonsMaybe,
   TransactionPageTitle,
   TransactionPageMessage,
@@ -142,9 +143,6 @@ export class TransactionPanelComponent extends Component {
     const customerLoaded = !!currentCustomer.id;
     const isCustomerBanned = customerLoaded && currentCustomer.attributes.banned;
     const canShowSaleButtons = isProvider && txIsRequested(currentTransaction) && !isCustomerBanned;
-    const isProviderLoaded = !!currentProvider.id;
-    const isProviderBanned = isProviderLoaded && currentProvider.attributes.banned;
-    const canShowBookButton = isCustomer && txIsEnquired(currentTransaction) && !isProviderBanned;
 
     const bannedUserDisplayName = intl.formatMessage({
       id: 'TransactionPanel.bannedUserDisplayName',
@@ -168,7 +166,7 @@ export class TransactionPanelComponent extends Component {
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
     const actionButtonClasses = classNames(css.actionButtons);
-    const canShowActionButtons = canShowBookButton || canShowSaleButtons;
+    const canShowActionButtons = canShowSaleButtons;
 
     let actionButtons = null;
     if (canShowSaleButtons) {
@@ -183,14 +181,6 @@ export class TransactionPanelComponent extends Component {
           declineSaleError={declineSaleError}
           onAcceptSale={onAcceptSale}
           onDeclineSale={onDeclineSale}
-        />
-      );
-    } else if (canShowBookButton) {
-      actionButtons = (
-        <OrderActionButtonMaybe
-          rootClassName={actionButtonClasses}
-          canShowButtons={canShowBookButton}
-          listing={currentListing}
         />
       );
     }
@@ -306,23 +296,24 @@ export class TransactionPanelComponent extends Component {
                   <AvatarMedium user={currentProvider} />
                 </div>
               ) : null}
-              {isCustomer ? (
-                <div className={css.detailCardHeadings}>
-                  <h2 className={css.detailCardTitle}>{listingTitle}</h2>
-                  <p className={css.detailCardSubtitle}>
-                    <FormattedMessage
-                      id="TransactionPanel.hostedBy"
-                      values={{ name: authorDisplayName }}
-                    />
-                  </p>
-                  <AddressLinkMaybe
-                    transaction={currentTransaction}
-                    transactionRole={transactionRole}
-                    currentListing={currentListing}
-                  />
-                </div>
-              )}
+
+              <DetailCardHeadingsMaybe
+                authorDisplayName={authorDisplayName}
+                transaction={currentTransaction}
+                transactionRole={transactionRole}
+                listing={currentListing}
+                listingTitle={listingTitle}
+              />
+              <BookingPanelMaybe
+                authorDisplayName={authorDisplayName}
+                transaction={currentTransaction}
+                transactionRole={transactionRole}
+                listing={currentListing}
+                listingTitle={listingTitle}
+                provider={currentProvider}
+              />
               <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
+
               {canShowActionButtons ? (
                 <div className={css.desktopActionButtons}>{actionButtons}</div>
               ) : null}

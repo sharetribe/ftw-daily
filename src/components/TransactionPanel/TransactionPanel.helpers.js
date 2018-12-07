@@ -18,6 +18,7 @@ import { createSlug, stringify } from '../../util/urlHelpers';
 import {
   ActivityFeed,
   BookingBreakdown,
+  BookingPanel,
   ExternalLink,
   NamedLink,
   PrimaryButton,
@@ -151,16 +152,57 @@ const createListingLink = (listing, label, searchParams = {}, className = '') =>
   }
 };
 
-// Functional component as a helper to build ActionButtons for
-// provider when state is preauthorized
-export const OrderActionButtonMaybe = props => {
-  const { className, rootClassName, canShowButtons, listing } = props;
+// Functional component as a helper to build detail card headings
+export const DetailCardHeadingsMaybe = props => {
+  const { authorDisplayName, transaction, transactionRole, listing, listingTitle } = props;
 
-  const title = <FormattedMessage id="TransactionPanel.requestToBook" />;
-  const listingLink = createListingLink(listing, title, { book: true }, css.requestToBookButton);
-  const classes = classNames(rootClassName || css.actionButtons, className);
+  const isCustomer = transactionRole === 'customer';
+  const canShowDetailCardHeadings = isCustomer && !txIsEnquired(transaction);
 
-  return canShowButtons ? <div className={classes}>{listingLink}</div> : null;
+  return canShowDetailCardHeadings ? (
+    <div className={css.detailCardHeadings}>
+      <h2 className={css.detailCardTitle}>{listingTitle}</h2>
+      <p className={css.detailCardSubtitle}>
+        <FormattedMessage id="TransactionPanel.hostedBy" values={{ name: authorDisplayName }} />
+      </p>
+      <AddressLinkMaybe
+        transaction={transaction}
+        transactionRole={transactionRole}
+        currentListing={listing}
+      />
+    </div>
+  ) : null;
+};
+
+// Functional component as a helper to build a BookingPanel
+export const BookingPanelMaybe = props => {
+  const {
+    authorDisplayName,
+    transaction,
+    transactionRole,
+    listing,
+    listingTitle,
+    provider,
+  } = props;
+
+  const isProviderLoaded = !!provider.id;
+  const isProviderBanned = isProviderLoaded && provider.attributes.banned;
+  const isCustomer = transactionRole === 'customer';
+  const canShowBookingPanel = isCustomer && txIsEnquired(transaction) && !isProviderBanned;
+
+  return canShowBookingPanel ? (
+    <BookingPanel
+      className={css.bookingPanel}
+      listing={listing}
+      isOwnListing={false}
+      handleBookingSubmit={() => console.log('submit')}
+      richTitle={listingTitle}
+      authorDisplayName={authorDisplayName}
+      onManageDisableScrolling={() => null}
+      timeSlots={null}
+      fetchTimeSlotsError={null}
+    />
+  ) : null;
 };
 
 // Functional component as a helper to build ActionButtons for
