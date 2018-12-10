@@ -9,18 +9,21 @@ end of this doc).
 
 ## Setting up the Mapbox integration (the default map provider)
 
-### 1. Generate a Mapbox access key
+### 1. Generate a Mapbox access token
 
-Sign up for a Mapbox and go to [account page](https://www.mapbox.com/account/). Then click
-`Create access token`.
+[Sign up for a Mapbox](https://www.mapbox.com/signup/) and go to the
+[account page](https://www.mapbox.com/account/). Then copy the `Default public token`.
+
+If you prefer to create a new one, click `+ Create a token`, give it a name and make sure all Public
+scopes are selected. Create the token and copy its value.
 
 > Read more about
 > [access tokens and consider rotating them](https://www.mapbox.com/help/how-access-tokens-work/).
 
-### 2. Setup the application to use the access key
+### 2. Setup the application to use the access token
 
-The application uses the `REACT_APP_MAPBOX_ACCESS_TOKEN` environment variable for the key value. For
-local development, you can add the variable in the Gitignored `.env` file in the project root:
+The application uses the `REACT_APP_MAPBOX_ACCESS_TOKEN` environment variable for the token value.
+For local development, you can add the variable in the Gitignored `.env` file in the project root:
 
 ```
 REACT_APP_MAPBOX_ACCESS_TOKEN=my-access-token-here
@@ -33,7 +36,7 @@ specific locations shown by default when the user focuses on the input and hasn'
 searches. This reduces the typing required for common searches and also reduces the need to use
 Mapbox geolocation API that much.
 
-To use default searches, another environment variable needs to be set:
+This is enabled by default but it can be changed via the environment variable:
 
 ```
 REACT_APP_DEFAULT_SEARCHES_ENABLED=true
