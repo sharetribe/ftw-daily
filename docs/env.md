@@ -8,7 +8,7 @@ them have defaults that work for development environment. For production deploys
 | REACT_APP_MAPBOX_ACCESS_TOKEN             | See: [Integrating to map providers](./map-providers.md)                                                                 |
 | REACT_APP_GOOGLE_MAPS_API_KEY             | See: [Google Maps API key](./google-maps.md) (Alternative map provider)                                                 |
 | REACT_APP_SHARETRIBE_SDK_CLIENT_ID        | Client ID (API key). You will get this from the Sharetribe team.                                                        |
-| REACT_APP_STRIPE_PUBLISHABLE_KEY          | Stripe publishable API key for generating tokens with Stripe API. Use test key (prefix pk*test*) for development.       |
+| REACT_APP_STRIPE_PUBLISHABLE_KEY          | Stripe publishable API key for generating tokens with Stripe API. Use test key (prefix `pk_test_`) for development.       |
 | REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY | The currency used in the Marketplace as ISO 4217 currency code. For example: USD, EUR, CAD, AUD, etc.                   |
 | REACT_APP_CANONICAL_ROOT_URL              | Canonical root url of the marketplace. Needed for social media sharing and SEO optimization.                            |
 | NODE_ENV                                  | Node env. Use 'development' for development and 'production' for production.                                            |
