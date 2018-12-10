@@ -14,10 +14,10 @@ level elements (unless you are modifying [a static page](static-pages.md)).
 In the following subtopics, we assume that you know the
 [basics of Redux](https://redux.js.org/basics) already.
 
-* [Containers: Pages + TopbarContainer](#containers-pages--topbarcontainer)
-* [Duck files](#duck-files)
-* [Setting up Redux](#setting-up-redux)
-* [Advanced Redux concepts: thunks](#advanced-redux-concepts-thunks)
+- [Containers: Pages + TopbarContainer](#containers-pages--topbarcontainer)
+- [Duck files](#duck-files)
+- [Setting up Redux](#setting-up-redux)
+- [Advanced Redux concepts: thunks](#advanced-redux-concepts-thunks)
 
 ## Containers: Pages + TopbarContainer
 
@@ -42,9 +42,13 @@ file. For example, `src/containers/TransactionPage/TransactionPage.js` connects 
 store with `mapStateToProps` and `mapDispatchToProps` functions:
 
 ```js
-const TransactionPage = compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(
-  TransactionPageComponent
-);
+const TransactionPage = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  injectIntl
+)(TransactionPageComponent);
 ```
 
 ## Duck files
@@ -85,8 +89,8 @@ function (in `src/store.js`).
 This setup creates a store structure that separates container specific state as well as global data
 by their reducer names. Together with Ducks module naming schema, this means that:
 
-* the state of the `ListingPage` can be found from `state.ListingPage` and
-* the state of the global `user` object can be found from `state.user`.
+- the state of the `ListingPage` can be found from `state.ListingPage` and
+- the state of the global `user` object can be found from `state.user`.
 
 ## Advanced Redux concepts: thunks
 

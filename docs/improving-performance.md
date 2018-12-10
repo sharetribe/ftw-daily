@@ -2,8 +2,8 @@
 
 When we think about page speed there are actually two different scenarios that we need to address:
 
-* The speed of initial page load and possible reloads after that
-* The speed of changing the page within Single page application (SPA)
+- The speed of initial page load and possible reloads after that
+- The speed of changing the page within Single page application (SPA)
 
 The first one is usually a slower process. A browser needs to load all the HTML, CSS, JavaScript,
 and images - and then it needs to understand and execute those files, calculate layout, paint
@@ -27,11 +27,11 @@ Read more about
 We haven't yet implemented code splitting to reduce initial page rendering time, but there're other
 improvements that could be done to improve both cases of page rendering.
 
-* [Check page performance](#check-page-performance)
-* [Optimize image sizes](#optimize-image-sizes)
-* [Lazy load off-screen images and other components](#lazy-load-off-screen-images-and-other-components)
-* [Use sparse fields](#use-sparse-fields)
-* [About code-splitting](#about-code-splitting)
+- [Check page performance](#check-page-performance)
+- [Optimize image sizes](#optimize-image-sizes)
+- [Lazy load off-screen images and other components](#lazy-load-off-screen-images-and-other-components)
+- [Use sparse fields](#use-sparse-fields)
+- [About code-splitting](#about-code-splitting)
 
 ## Check page performance
 
@@ -52,17 +52,17 @@ within your web app.
 
 Quick checklist:
 
-* Check that the actual dimensions of an image match with DOM element's dimensions.
-* Lighthouse suggests that image compression level should be 85% or lower.
+- Check that the actual dimensions of an image match with DOM element's dimensions.
+- Lighthouse suggests that image compression level should be 85% or lower.
   [Read more](https://developers.google.com/web/tools/lighthouse/audits/optimize-images)
-* Good rule-of-thumb is that use JPEG for images and photos, where PNG is better for graphics, such
+- Good rule-of-thumb is that use JPEG for images and photos, where PNG is better for graphics, such
   as logos, graphs and illustrations.
-* If you are using JPEG images, think about saving them as progressive JPEGs.
+- If you are using JPEG images, think about saving them as progressive JPEGs.
   [Read more](https://cloudinary.com/blog/progressive_jpegs_and_green_martians) +
   [Photoshop guide](https://helpx.adobe.com/photoshop-elements/using/optimizing-images-jpeg-format.html)
-* If you are using PNG images, consider running them through PNG optimizers to reduce file size.
+- If you are using PNG images, consider running them through PNG optimizers to reduce file size.
   Plenty of options available, one example is [TinyPNG.com](https://tinypng.com)
-* Think about serving images and other static assets from some CDN.
+- Think about serving images and other static assets from some CDN.
   [Read more.](https://www.smashingmagazine.com/2017/04/content-delivery-network-optimize-images/)
 
 ## Lazy load off-screen images and other components

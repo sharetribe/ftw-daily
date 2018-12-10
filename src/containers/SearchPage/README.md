@@ -15,9 +15,9 @@ So, rough JSX presentation is something like:
 
 Searches can be made by each of these components.
 
-* Topbar contains location search (LocationAutocompleteInput)
-* MainPanel has Filters that can fine-tune current location search
-* SearchMap can create new location searches when the map's bounding box changes (i.e. moving,
+- Topbar contains location search (LocationAutocompleteInput)
+- MainPanel has Filters that can fine-tune current location search
+- SearchMap can create new location searches when the map's bounding box changes (i.e. moving,
   zooming, etc.)
 
 ## Topbar

@@ -6,9 +6,9 @@ behavior that CSS is all about.
 
 To tackle this goal, we have split the styling into two levels in this template application:
 
-* [Marketplace level styling](#marketplace-level-styling) through _marketplace.css_ (a kind of
+- [Marketplace level styling](#marketplace-level-styling) through _marketplace.css_ (a kind of
   global theme)
-* [Component level styling](#styling-components) using
+- [Component level styling](#styling-components) using
   [CSS Modules](https://github.com/css-modules/css-modules)
 
 ## Marketplace level styling
@@ -185,8 +185,8 @@ case, it's _SectionHero_ and its styles can be found from the file:
 
 There's only two groups of components that break that rule:
 
-* _src/containers_ (These components are connected to Redux store: Pages and TopbarContainer)
-* _src/forms_
+- _src/containers_ (These components are connected to Redux store: Pages and TopbarContainer)
+- _src/forms_
 
 ### Styling guidelines and good practices
 
@@ -198,20 +198,20 @@ complex inner DOM structure needed, additional classes are named semantically.
 
 Some guidelines we have tried to follow:
 
-* **Use semantic class names** (They improve readability and decouples style changes from DOM
+- **Use semantic class names** (They improve readability and decouples style changes from DOM
   changes.)
-* **Use CSS Properties defined in marketplace.css** and create new ones when it makes sense.
-* **Use classes**, don't style DOM elements directly. (Element styles are global even with CSS
+- **Use CSS Properties defined in marketplace.css** and create new ones when it makes sense.
+- **Use classes**, don't style DOM elements directly. (Element styles are global even with CSS
   Modules.)
-* **Avoid nesting styles**. (CSS Modules makes specificity rules unnecessary.)
-* **Group and comment style rules** inside declaration block if that improves readability.
-* **Parent component is responsible for allocating space** for a child component (i.e. dimensions
+- **Avoid nesting styles**. (CSS Modules makes specificity rules unnecessary.)
+- **Group and comment style rules** inside declaration block if that improves readability.
+- **Parent component is responsible for allocating space** for a child component (i.e. dimensions
   and margins).
-* **Define `@apply` rules early enough** inside declaration block (since rules inside those property
+- **Define `@apply` rules early enough** inside declaration block (since rules inside those property
   sets might overwrite rules written above the line where the set is applied).
-* **Align text and components** to horizontal baselines. I.e. they should be a multiple of `6px` on
+- **Align text and components** to horizontal baselines. I.e. they should be a multiple of `6px` on
   mobile layout and `8px` on bigger screens.
-* **Component height should follow baselines too**. I.e. they should be a multiple of `6px` on
+- **Component height should follow baselines too**. I.e. they should be a multiple of `6px` on
   mobile layout and `8px` on bigger screens. _(Unfortunately, we haven't been strict with this
   one.)_
 
@@ -258,8 +258,8 @@ Sometimes the child component needs to be styled even further than just allocati
 the parent component wants to change the theme of child component there are generally two concepts
 available:
 
-* Create themed components (e.g. `<PrimaryButton>`, `<SecondaryButton>`, `<InlineButton>`)
-* Pass in a `class` property that is able to overwrite original styling rules.
+- Create themed components (e.g. `<PrimaryButton>`, `<SecondaryButton>`, `<InlineButton>`)
+- Pass in a `class` property that is able to overwrite original styling rules.
 
 For the latter option, we have created a prop type concept called `rootClassName`. If you pass
 `rootClassName` through props to a component, it will use that instead of component's own style

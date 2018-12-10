@@ -93,8 +93,8 @@ import React from 'react';
 
 In the second line we are importing two containers:
 
-* `StaticPage`: helps in creating static pages
-* `TopbarContainer`: creates our Topbar component and fetches the data it needs.
+- `StaticPage`: helps in creating static pages
+- `TopbarContainer`: creates our Topbar component and fetches the data it needs.
 
 ```jsx
 import { StaticPage, TopbarContainer } from '../../containers';
@@ -102,10 +102,10 @@ import { StaticPage, TopbarContainer } from '../../containers';
 
 After that we need to import some components:
 
-* `LayoutSingleColumn` and wrappers that it needs to position content
-* `Footer` component (to be added inside LayoutWrapperFooter)
-* `NamedLink` makes it easier to point to different pages inside the application
-* `ExternalLink` can be used to link outside the application. It creates a normal `<a>`link with
+- `LayoutSingleColumn` and wrappers that it needs to position content
+- `Footer` component (to be added inside LayoutWrapperFooter)
+- `NamedLink` makes it easier to point to different pages inside the application
+- `ExternalLink` can be used to link outside the application. It creates a normal `<a>`link with
   extra attributes `target="_blank" rel="noopener noreferrer"` that add some security to these
   outbound links.
 
@@ -159,11 +159,11 @@ In the template above we are using StaticPage component with some attributes:
     >
 ```
 
-* `className` is JSX name for `class` attribute used in plain HTML.
-* `title="About"` creates `<title>About</title>` element to `<head>` section of the page. (That
+- `className` is JSX name for `class` attribute used in plain HTML.
+- `title="About"` creates `<title>About</title>` element to `<head>` section of the page. (That
   title is also used in OpenGraph meta tags). You could also add
   `description="This is about page description"`
-* Then we have `schema` tag that defines some data for search engines in JSON-LD format. Check
+- Then we have `schema` tag that defines some data for search engines in JSON-LD format. Check
   [schema.org](http://schema.org/docs/full.html) for more information.
 
 Inside `StaticPage` component we define layout (`LayoutSingleColumn`) and add other components
@@ -249,10 +249,10 @@ about page so '/about' would work well as a path.)
 
 We are using several libraries in this example. If you want to read more, here's some pointers:
 
-* [ES2015](https://babeljs.io/learn-es2015/): imports, exports, arrow functions
-* [React](https://reactjs.org/): for creating components
-* [JSX](https://reactjs.org/docs/introducing-jsx.html): for getting HTML-like markup syntax for own
+- [ES2015](https://babeljs.io/learn-es2015/): imports, exports, arrow functions
+- [React](https://reactjs.org/): for creating components
+- [JSX](https://reactjs.org/docs/introducing-jsx.html): for getting HTML-like markup syntax for own
   components
-* [CSS Modules](https://github.com/css-modules/css-modules)
-* [React Router](https://reacttraining.com/react-router/web/guides/philosophy): routing inside the
+- [CSS Modules](https://github.com/css-modules/css-modules)
+- [React Router](https://reacttraining.com/react-router/web/guides/philosophy): routing inside the
   application.
