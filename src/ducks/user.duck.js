@@ -412,6 +412,9 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
     state: hasProvince ? province : state,
   };
 
+  const idNumber =
+    country === 'US' ? { ssn_last_4: personalIdNumber } : { personal_id_number: personalIdNumber };
+
   // Params for Stripe SDK
   const params = {
     legal_entity: {
@@ -420,7 +423,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
       address: omitBy(address, isUndefined),
       dob: birthDate,
       type: 'individual',
-      personal_id_number: personalIdNumber,
+      ...idNumber,
     },
     tos_shown_and_accepted: true,
   };

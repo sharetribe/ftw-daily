@@ -503,6 +503,7 @@
   "PayoutDetailsForm.personalIdNumberLabel.US": "Last 4 digits of social security number (SSN)",
   "PayoutDetailsForm.personalIdNumberPlaceholder.HK": "XY123456",
   "PayoutDetailsForm.personalIdNumberRequired": "This field is required",
+  "PayoutDetailsForm.personalIdNumberValid": "Invalid value",
   "PayoutDetailsForm.postalCodeLabel": "Postal code",
   "PayoutDetailsForm.postalCodePlaceholder": "00100",
   "PayoutDetailsForm.postalCodeRequired": "This field is required",

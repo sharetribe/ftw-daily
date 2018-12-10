@@ -116,25 +116,47 @@ const PayoutDetailsFormComponent = props => (
       const bankAccountRequired = validators.required(' ');
 
       const showPersonalIdNumber =
-        country && stripeCountryConfigs(country).personalIdNumberRequired;
+        (country && stripeCountryConfigs(country).personalIdNumberRequired) ||
+        (country && stripeCountryConfigs(country).ssnLast4Required);
 
-      const personalIdNumberLabel = showPersonalIdNumber
-        ? intl.formatMessage({
-            id: `PayoutDetailsForm.personalIdNumberLabel.${country}`,
+      const personalIdNumberRequired = validators.required(
+        intl.formatMessage({
+          id: `PayoutDetailsForm.personalIdNumberRequired`,
+        })
+      );
+
+      let personalIdNumberLabel = null;
+      let personalIdNumberPlaceholder = null;
+      let personalIdNumberValid = personalIdNumberRequired;
+
+      if (country === 'US') {
+        personalIdNumberLabel = intl.formatMessage({
+          id: `PayoutDetailsForm.personalIdNumberLabel.US`,
+        });
+        personalIdNumberPlaceholder = intl.formatMessage({
+          id: `PayoutDetailsForm.personalIdNumberPlaceholder.US`,
+        });
+
+        const validSSN = validators.validSsnLast4(
+          intl.formatMessage({
+            id: `PayoutDetailsForm.personalIdNumberValid`,
           })
-        : null;
-      const personalIdNumberPlaceholder = showPersonalIdNumber
-        ? intl.formatMessage({
-            id: `PayoutDetailsForm.personalIdNumberPlaceholder.${country}`,
+        );
+        personalIdNumberValid = validators.composeValidators(personalIdNumberRequired, validSSN);
+      } else if (country === 'HK') {
+        personalIdNumberLabel = intl.formatMessage({
+          id: `PayoutDetailsForm.personalIdNumberLabel.HK`,
+        });
+        personalIdNumberPlaceholder = intl.formatMessage({
+          id: `PayoutDetailsForm.personalIdNumberPlaceholder.HK`,
+        });
+        const validHKID = validators.validHKID(
+          intl.formatMessage({
+            id: `PayoutDetailsForm.personalIdNumberValid`,
           })
-        : null;
-      const personalIdNumberRequired = showPersonalIdNumber
-        ? validators.required(
-            intl.formatMessage({
-              id: `PayoutDetailsForm.personalIdNumberRequired`,
-            })
-          )
-        : null;
+        );
+        personalIdNumberValid = validators.composeValidators(personalIdNumberRequired, validHKID);
+      }
 
       const classes = classNames(css.root, className, {
         [css.disabled]: disabled,
@@ -261,7 +283,7 @@ const PayoutDetailsFormComponent = props => (
                 type="text"
                 label={personalIdNumberLabel}
                 placeholder={personalIdNumberPlaceholder}
-                validate={personalIdNumberRequired}
+                validate={personalIdNumberValid}
               />
             </div>
           ) : null}
