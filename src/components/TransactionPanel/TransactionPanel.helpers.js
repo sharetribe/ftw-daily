@@ -183,6 +183,8 @@ export const BookingPanelMaybe = props => {
     listing,
     listingTitle,
     provider,
+    timeSlots,
+    fetchTimeSlotsError,
   } = props;
 
   const isProviderLoaded = !!provider.id;
@@ -193,14 +195,14 @@ export const BookingPanelMaybe = props => {
   return canShowBookingPanel ? (
     <BookingPanel
       className={css.bookingPanel}
-      listing={listing}
       isOwnListing={false}
+      listing={listing}
       handleBookingSubmit={() => console.log('submit')}
-      richTitle={listingTitle}
+      title={listingTitle}
       authorDisplayName={authorDisplayName}
       onManageDisableScrolling={() => null}
-      timeSlots={null}
-      fetchTimeSlotsError={null}
+      timeSlots={timeSlots}
+      fetchTimeSlotsError={fetchTimeSlotsError}
     />
   ) : null;
 };

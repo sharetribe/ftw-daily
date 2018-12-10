@@ -64,6 +64,8 @@ export const TransactionPageComponent = props => {
     declineSaleError,
     onAcceptSale,
     onDeclineSale,
+    timeSlots,
+    fetchTimeSlotsError,
   } = props;
 
   const currentTransaction = ensureTransaction(transaction);
@@ -158,6 +160,8 @@ export const TransactionPageComponent = props => {
       declineInProgress={declineInProgress}
       acceptSaleError={acceptSaleError}
       declineSaleError={declineSaleError}
+      timeSlots={timeSlots}
+      fetchTimeSlotsError={fetchTimeSlotsError}
     />
   ) : (
     loadingOrFailedFetching
@@ -192,6 +196,8 @@ TransactionPageComponent.defaultProps = {
   fetchMessagesError: null,
   initialMessageFailedToTransaction: null,
   sendMessageError: null,
+  timeSlots: null,
+  fetchTimeSlotsError: null,
 };
 
 const { bool, func, oneOf, shape, string, arrayOf, number } = PropTypes;
@@ -218,6 +224,8 @@ TransactionPageComponent.propTypes = {
   sendMessageError: propTypes.error,
   onShowMoreMessages: func.isRequired,
   onSendMessage: func.isRequired,
+  timeSlots: arrayOf(propTypes.timeSlot),
+  fetchTimeSlotsError: propTypes.error,
 
   // from injectIntl
   intl: intlShape.isRequired,
@@ -241,6 +249,8 @@ const mapStateToProps = state => {
     sendMessageError,
     sendReviewInProgress,
     sendReviewError,
+    timeSlots,
+    fetchTimeSlotsError,
   } = state.TransactionPage;
   const { currentUser } = state.user;
 
@@ -266,6 +276,8 @@ const mapStateToProps = state => {
     sendMessageError,
     sendReviewInProgress,
     sendReviewError,
+    timeSlots,
+    fetchTimeSlotsError,
   };
 };
 

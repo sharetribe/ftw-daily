@@ -129,6 +129,8 @@ export class TransactionPanelComponent extends Component {
       declineInProgress,
       acceptSaleError,
       declineSaleError,
+      timeSlots,
+      fetchTimeSlotsError,
     } = this.props;
 
     const currentTransaction = ensureTransaction(transaction);
@@ -311,6 +313,8 @@ export class TransactionPanelComponent extends Component {
                 listing={currentListing}
                 listingTitle={listingTitle}
                 provider={currentProvider}
+                timeSlots={timeSlots}
+                fetchTimeSlotsError={fetchTimeSlotsError}
               />
               <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
 
@@ -346,6 +350,8 @@ TransactionPanelComponent.defaultProps = {
   initialMessageFailed: null,
   sendMessageError: null,
   sendReviewError: null,
+  timeSlots: null,
+  fetchTimeSlotsError: null,
 };
 
 const { arrayOf, bool, func, number, string } = PropTypes;
@@ -370,6 +376,8 @@ TransactionPanelComponent.propTypes = {
   onShowMoreMessages: func.isRequired,
   onSendMessage: func.isRequired,
   onSendReview: func.isRequired,
+  timeSlots: arrayOf(propTypes.timeSlot),
+  fetchTimeSlotsError: propTypes.error,
 
   // Sale related props
   onAcceptSale: func.isRequired,
