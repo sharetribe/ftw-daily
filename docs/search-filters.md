@@ -3,28 +3,31 @@
 The search experience can be improved by adding search filters to narrow down the results. The
 filters rely on listing's indexed data.
 
+- [Filter types](#filter-types)
+- [Adding a new search filter](#adding-a-new-search-filter)
+  - [Common changes](#common-changes)
+  - [Desktop filters](#desktop-filters)
+  - [Desktop filters panel](#desktop-filters-panel)
+  - [Mobile filters](#mobile-filters)
+- [Creating your own filter types](#creating-your-own-filter-types)
+
 ## Filter types
 
-The Flex template for web has three different filter types: _price filter_, _select single_ and
-_select multiple_. The _price filter_ is for the specific case of filtering listings with a price
-range.
+The Flex template for web has different filter types: _price_, _date range_, _select single_ and
+_select multiple_. Select single and select multiple filters are generic in a way that they can be
+used to filter search results using different kinds of data. The price and date range filters on the
+other hand are only used for filtering by price and date range.
 
 > NOTE: price filter should be configured from `src/marketplace-custom-config.js`. Current maximum
 > value for the range is set to 1000 (USD/EUR).
 
-Other two filter types can be used with extended data. The _select single_ one can be used to filter
-out search result with only one value per search parameter. The _select multiple_ filters on the
-other hand can take multiple values for a single search parameter. These two filter types for
-extended data are implemented with four different components, a standard and a plain one:
+Filters _select single_ and _select multiple_ can be used with extended data. The _select single_
+one can be used to filter out search results with only one value per search parameter. The _select
+multiple_ filters on the other hand can take multiple values for a single search parameter. These
+two filter types for extended data are implemented with two different components:
 
-- Select single filter: `SelectSingleFilter` and `SelectSingleFilterPlain`
-- Select multiple filter: `SelectMultipleFilter` and `SelectMultipleFilterPlain`
-
-The `SelectSingleFilter` and `SelectMultipleFilter` components are rendered as standard dropdowns in
-the search view. The plain filter components `SelectSingleFilterPlain` and
-`SelectMultipleFilterPlain` are used with `SearchFiltersMobile` and `SearchFiltersPanel` to provider
-filters in mobile view or to open filters in a distinct panel in order to fit more filters to the
-desktop search view.
+- Select single filter: `SelectSingleFilter`
+- Select multiple filter: `SelectMultipleFilter`
 
 ## Adding a new search filter
 
@@ -147,7 +150,7 @@ desktop filters, perform the following in `SearchFilters` component:
 - declare a prop with the same name that you added the filter config to `primaryFilters`
 - resolve the filters initial value with `initialValue` and `initialValues` functions
 - render the filter by using a `SelectSingleFilter` or `SelectMultipleFilter` component inside the
-  `<div className={css.filters}>` element
+  `<div className={css.filters}>` element.
 
 ### Desktop filters panel
 
@@ -161,19 +164,31 @@ To use the `SearchFiltersPanel`, do the following:
 
 - declare a prop with the same name that you added the filter config to `secondaryFilters`
 - resolve the filters initial value with `initialValue` and `initialValues` methods
-- use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the
-  `<div className={css.filtersWrapper}>` element to render the filters
+- use the `SelectSingleFilter` and `SelectMultipleFilter` components inside the
+  `<div className={css.filtersWrapper}>` element to render the filters.
 
 ### Mobile filters
 
 ![Mobile filters](./assets/search-filters/mobile-filters.png)
 
-The mobile view uses the same `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components
-as the filter panel. In this case the filter components are declared in `SearchFiltersMobile`. The
+The mobile view uses the same `SelectSingleFilter` and `SelectMultipleFilter` components as the
+filter panel. In this case the filter components are declared in `SearchFiltersMobile`. The
 following steps are required to add a mobile filter:
 
 - declare a prop with the same name that you added the filter config to `primaryFilters` or
   `secondaryFilters`
 - resolve the filters initial value with `initialValue` and `initialValues` methods
-- use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the
-  `<div className={css.filtersWrapper}>` element to render the filters
+- use the `SelectSingleFilter` and `SelectMultipleFilter` components inside the
+  `<div className={css.filtersWrapper}>` element to render the filters.
+
+## Creating your own filter types
+
+If you are creating new filter types note that we are using two different types of components: popup
+and plain. Popup components are rendered as primary dropdowns in the search view in `SearchFilters`.
+Plain components are used with `SearchFiltersMobile` and `SearchFiltersPanel`. `SearchFiltersPanel`
+opens sacondary filters in a distinct panel in order to fit additional filters to the desktop search
+view.
+
+To make creating new filters easier, there are two generic components: `FilterPoup` and
+`FilterPlain`. These components expect that you give form fields as child component. Check
+`SelectMultipleFilter` to see how these components work.
