@@ -194,7 +194,8 @@ export const validHKID = message => value => {
 
   // Verify the check digit
   const remaining = checkSum % 11;
-  const verify = remaining === 0 ? 0 : 11 - remaining;
+  let verify = remaining === 0 ? 0 : 11 - remaining;
+  verify = verify.toString();
   const isValid = verify === checkDigit || (verify === 10 && checkDigit === 'A');
 
   return isValid ? VALID : message;

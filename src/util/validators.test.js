@@ -6,6 +6,7 @@ import {
   maxLength,
   moneySubUnitAmountAtLeast,
   composeValidators,
+  validHKID,
 } from './validators';
 
 const { Money } = sdkTypes;
@@ -182,6 +183,35 @@ describe('validators', () => {
         required('required')
       );
       expect(validateLength('')).toEqual('minLength');
+    });
+  });
+  describe('validHKID()', () => {
+    it('should fail on too short HKID', () => {
+      expect(validHKID('fail')('AB987')).toEqual('fail');
+    });
+    it('should fail if value is in wrong format: no letters', () => {
+      expect(validHKID('fail')('13278240')).toEqual('fail');
+    });
+    it('should fail if value is in wrong format: too many letters', () => {
+      expect(validHKID('fail')('ABE9876543')).toEqual('fail');
+    });
+    it('should fail if value is in wrong format: too many numbers', () => {
+      expect(validHKID('fail')('E13278240')).toEqual('fail');
+    });
+    it('should fail if check digit is wrong', () => {
+      expect(validHKID('fail')('E327824(3)')).toEqual('fail');
+    });
+    it('should allow string of nine digits with all zeros', () => {
+      expect(validHKID('pass')('000000000')).toBeUndefined();
+    });
+    it('should allow string with valid HKID using two letters', () => {
+      expect(validHKID('pass')('AB9876543')).toBeUndefined();
+    });
+    it('should allow string with valid HKID using one letter', () => {
+      expect(validHKID('pass')('E3278240')).toBeUndefined();
+    });
+    it('should allow string with valid HKID using brackets in check digit', () => {
+      expect(validHKID('pass')('E327824(0)')).toBeUndefined();
     });
   });
 });
