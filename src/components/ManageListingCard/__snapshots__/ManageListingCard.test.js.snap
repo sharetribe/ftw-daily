@@ -101,7 +101,7 @@ exports[`ManageListingCard matches snapshot 1`] = `
       </div>
       <div>
         <FormattedMessage
-          id="ManageListingCard.perUnit"
+          id="ManageListingCard.perNight"
           values={Object {}}
         />
       </div>

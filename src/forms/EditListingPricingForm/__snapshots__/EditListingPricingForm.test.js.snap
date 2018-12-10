@@ -13,7 +13,7 @@ exports[`EditListingPricingForm matches snapshot 1`] = `
     <label
       htmlFor="price"
     >
-      EditListingPricingForm.pricePerUnit
+      EditListingPricingForm.pricePerNight
     </label>
     <input
       autoFocus={true}
