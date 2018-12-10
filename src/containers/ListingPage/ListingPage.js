@@ -437,7 +437,7 @@ export class ListingPageComponent extends Component {
                   isOwnListing={isOwnListing}
                   unitType={unitType}
                   handleBookingSubmit={handleBookingSubmit}
-                  richTitle={richTitle}
+                  title={richTitle}
                   authorDisplayName={authorDisplayName}
                   onManageDisableScrolling={onManageDisableScrolling}
                   timeSlots={timeSlots}

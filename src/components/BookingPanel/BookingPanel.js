@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { intlShape, injectIntl } from 'react-intl';
-import { arrayOf, bool, func, object, shape, string } from 'prop-types';
+import { arrayOf, bool, func, object, oneOfType, shape, string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
@@ -56,7 +56,7 @@ const BookingPanel = props => {
     isOwnListing,
     unitType,
     handleBookingSubmit,
-    richTitle,
+    title,
     authorDisplayName,
     onManageDisableScrolling,
     timeSlots,
@@ -85,7 +85,7 @@ const BookingPanel = props => {
         onManageDisableScrolling={onManageDisableScrolling}
       >
         <div className={css.modalHeading}>
-          <h1 className={css.title}>{richTitle}</h1>
+          <h1 className={css.title}>{title}</h1>
           <div className={css.author}>
             <FormattedMessage id="BookingPanel.hostedBy" values={{ name: authorDisplayName }} />
           </div>
@@ -93,7 +93,7 @@ const BookingPanel = props => {
 
         <div className={css.bookingHeading}>
           <h2 className={css.bookingTitle}>
-            <FormattedMessage id="BookingPanel.bookingTitle" values={{ title: richTitle }} />
+            <FormattedMessage id="BookingPanel.bookingTitle" values={{ title }} />
           </h2>
           <div className={css.bookingHelp}>
             <FormattedMessage
@@ -161,7 +161,7 @@ BookingPanel.propTypes = {
   isOwnListing: bool,
   unitType: propTypes.bookingUnitType,
   handleBookingSubmit: func.isRequired,
-  richTitle: object,
+  title: oneOfType([object, string]),
   authorDisplayName: string.isRequired,
   onManageDisableScrolling: func.isRequired,
   timeSlots: arrayOf(propTypes.timeSlot),

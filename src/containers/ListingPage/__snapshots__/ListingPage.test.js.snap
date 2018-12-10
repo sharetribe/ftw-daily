@@ -305,7 +305,8 @@ exports[`ListingPage matches snapshot 1`] = `
               }
             }
             onManageDisableScrolling={[Function]}
-            richTitle={
+            timeSlots={null}
+            title={
               <span>
                 
                 listing1
@@ -314,7 +315,6 @@ exports[`ListingPage matches snapshot 1`] = `
                 
               </span>
             }
-            timeSlots={null}
             unitType="line-item/night"
           />
         </div>
