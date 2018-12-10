@@ -7,11 +7,11 @@ instead of defining on server-side what gets rendered when user goes to URL
 `somemarketplace.com/about`, we just catch all the path combinations and let the app to define what
 page gets rendered.
 
-* [React Router setup](#react-router-setup)
-* [Linking](#linking)
-* [Loading data](#loading-data)
-* [Analytics](#analytics)
-* [A brief introduction to server-side rendering](#a-brief-introduction-to-ssr)
+- [React Router setup](#react-router-setup)
+- [Linking](#linking)
+- [Loading data](#loading-data)
+- [Analytics](#analytics)
+- [A brief introduction to server-side rendering](#a-brief-introduction-to-ssr)
 
 ## React Router setup
 
@@ -144,10 +144,10 @@ const Routes = (props, context) => {
 Inside `src/Routes.js`, we also have a component called `RouteComponentRenderer`, which has three
 important jobs:
 
-* Calling loadData function, if those have been defined in `src/routeConfiguration.js`. This is an
+- Calling loadData function, if those have been defined in `src/routeConfiguration.js`. This is an
   asynchronous call, a page needs to define what gets rendered before data is complete.
-* Reset scroll position after location change.
-* Dispatch location changed actions to Redux store. This makes it possible for
+- Reset scroll position after location change.
+- Dispatch location changed actions to Redux store. This makes it possible for
   [analytics Redux middleware](analytics.md) to listen location changes.
 
 ## Linking

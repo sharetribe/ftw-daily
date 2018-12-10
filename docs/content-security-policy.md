@@ -16,9 +16,9 @@ The CSP is configured using the `REACT_APP_CSP` environment variable.
 
 Possible values:
 
-* not set: disabled
-* `REACT_APP_CSP=report`: Enabled, but policy violations are only reported
-* `REACT_APP_CSP=block`: Enabled. Policy violations are reported and requests that violate the
+- not set: disabled
+- `REACT_APP_CSP=report`: Enabled, but policy violations are only reported
+- `REACT_APP_CSP=block`: Enabled. Policy violations are reported and requests that violate the
   policy are blocked
 
 If error logging with Sentry is enabled (See [Error logging with Sentry](sentry.md)), the reports
@@ -37,7 +37,7 @@ URL.
 
 To understand what CSP is and how browsers work, here are some resources:
 
-* https://content-security-policy.com/
-* https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
-* https://ponyfoo.com/articles/content-security-policy-in-express-apps
-* https://helmetjs.github.io/docs/csp/
+- https://content-security-policy.com/
+- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+- https://ponyfoo.com/articles/content-security-policy-in-express-apps
+- https://helmetjs.github.io/docs/csp/

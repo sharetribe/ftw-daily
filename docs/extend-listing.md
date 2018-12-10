@@ -9,10 +9,10 @@ Adding new attributes to the data model relies on a Flex concept called
 
 Three main areas in extending the listing data model are:
 
-* [Declare the attribute and it's possible values](#declare-the-attribute-and-its-possible-values)
-* [Edit the listing wizard](#edit-the-listing-wizard)
-* [Show the attribute on listing page](#show-the-attribute-on-listing-page)
-* [Use the attribute as a search filter](#use-the-attribute-as-a-search-filter)
+- [Declare the attribute and it's possible values](#declare-the-attribute-and-its-possible-values)
+- [Edit the listing wizard](#edit-the-listing-wizard)
+- [Show the attribute on listing page](#show-the-attribute-on-listing-page)
+- [Use the attribute as a search filter](#use-the-attribute-as-a-search-filter)
 
 In this guide we will extend the listing data model by adding a _capacity_ attribute.
 

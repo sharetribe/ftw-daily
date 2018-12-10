@@ -17,8 +17,8 @@ out search result with only one value per search parameter. The _select multiple
 other hand can take multiple values for a single search parameter. These two filter types for
 extended data are implemented with four different components, a standard and a plain one:
 
-* Select single filter: `SelectSingleFilter` and `SelectSingleFilterPlain`
-* Select multiple filter: `SelectMultipleFilter` and `SelectMultipleFilterPlain`
+- Select single filter: `SelectSingleFilter` and `SelectSingleFilterPlain`
+- Select multiple filter: `SelectMultipleFilter` and `SelectMultipleFilterPlain`
 
 The `SelectSingleFilter` and `SelectMultipleFilter` components are rendered as standard dropdowns in
 the search view. The plain filter components `SelectSingleFilterPlain` and
@@ -132,9 +132,9 @@ passed as props to the components that render the filters: `SearchFilters`, `Sea
 `SearchFiltersMobile` .The difference between filters passed as primary and secondary varies in
 mobile and desktop views:
 
-* **Desktop:** Primary filters are shown in the top of the search view, secondary filters are
+- **Desktop:** Primary filters are shown in the top of the search view, secondary filters are
   rendered in a distinct panel that opens on top of search results.
-* **Mobile:** Both primary and secondary filters are rendered in the same modal.
+- **Mobile:** Both primary and secondary filters are rendered in the same modal.
 
 ### Desktop filters
 
@@ -144,9 +144,9 @@ A basic desktop filter that renders as a dropdown button on top of the search re
 achieved using the `SelectSingleFilter` and `SelectMultipleFilter` components. To add standard
 desktop filters, perform the following in `SearchFilters` component:
 
-* declare a prop with the same name that you added the filter config to `primaryFilters`
-* resolve the filters initial value with `initialValue` and `initialValues` functions
-* render the filter by using a `SelectSingleFilter` or `SelectMultipleFilter` component inside the
+- declare a prop with the same name that you added the filter config to `primaryFilters`
+- resolve the filters initial value with `initialValue` and `initialValues` functions
+- render the filter by using a `SelectSingleFilter` or `SelectMultipleFilter` component inside the
   `<div className={css.filters}>` element
 
 ### Desktop filters panel
@@ -159,9 +159,9 @@ contain a set of filters.
 
 To use the `SearchFiltersPanel`, do the following:
 
-* declare a prop with the same name that you added the filter config to `secondaryFilters`
-* resolve the filters initial value with `initialValue` and `initialValues` methods
-* use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the
+- declare a prop with the same name that you added the filter config to `secondaryFilters`
+- resolve the filters initial value with `initialValue` and `initialValues` methods
+- use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the
   `<div className={css.filtersWrapper}>` element to render the filters
 
 ### Mobile filters
@@ -172,8 +172,8 @@ The mobile view uses the same `SelectSingleFilterPlain` and `SelectMultipleFilte
 as the filter panel. In this case the filter components are declared in `SearchFiltersMobile`. The
 following steps are required to add a mobile filter:
 
-* declare a prop with the same name that you added the filter config to `primaryFilters` or
+- declare a prop with the same name that you added the filter config to `primaryFilters` or
   `secondaryFilters`
-* resolve the filters initial value with `initialValue` and `initialValues` methods
-* use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the
+- resolve the filters initial value with `initialValue` and `initialValues` methods
+- use the `SelectSingleFilterPlain` and `SelectMultipleFilterPlain` components inside the
   `<div className={css.filtersWrapper}>` element to render the filters

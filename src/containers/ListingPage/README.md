@@ -7,10 +7,10 @@ starts.
 
 Listing page consists of the generic Topbar and of different page sections:
 
-* **SectionImages**: contains the listing image and the image carousel
-* **SectionAvatar**: the listing author image
-* **Main content**: the left column under images
-* **SectionBooking**: Contains the form and breakdown estimation for booking the listing
+- **SectionImages**: contains the listing image and the image carousel
+- **SectionAvatar**: the listing author image
+- **Main content**: the left column under images
+- **SectionBooking**: Contains the form and breakdown estimation for booking the listing
 
 In the main content, there are several sections that are likely to be customized, e.g. when adding
 new extended data to the listing creation.
