@@ -1030,6 +1030,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -2346,6 +2347,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -3662,6 +3664,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -4978,6 +4981,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -6294,6 +6298,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -7610,6 +7615,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -8926,6 +8932,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -10242,6 +10249,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -11558,6 +11566,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -12874,6 +12883,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -14190,6 +14200,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -15506,6 +15517,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -16822,6 +16834,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -18138,6 +18151,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
             }
           }
           listingTitle="listing1 title"
+          onManageDisableScrolling={[Function]}
           provider={
             Object {
               "attributes": Object {

@@ -313,6 +313,7 @@ export class TransactionPanelComponent extends Component {
                 listing={currentListing}
                 listingTitle={listingTitle}
                 provider={currentProvider}
+                onManageDisableScrolling={onManageDisableScrolling}
                 timeSlots={timeSlots}
                 fetchTimeSlotsError={fetchTimeSlotsError}
               />

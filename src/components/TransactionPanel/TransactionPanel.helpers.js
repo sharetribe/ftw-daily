@@ -183,6 +183,7 @@ export const BookingPanelMaybe = props => {
     listing,
     listingTitle,
     provider,
+    onManageDisableScrolling,
     timeSlots,
     fetchTimeSlotsError,
   } = props;
@@ -200,7 +201,7 @@ export const BookingPanelMaybe = props => {
       handleBookingSubmit={() => console.log('submit')}
       title={listingTitle}
       authorDisplayName={authorDisplayName}
-      onManageDisableScrolling={() => null}
+      onManageDisableScrolling={onManageDisableScrolling}
       timeSlots={timeSlots}
       fetchTimeSlotsError={fetchTimeSlotsError}
     />
