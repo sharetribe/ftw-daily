@@ -71,8 +71,8 @@
 
   @media (--viewportLarge) {
     display: block;
-    margin-top: 6px;
-    margin-bottom: 47px;
+    margin-top: -2px;
+    margin-bottom: 49px;
   }
 }
 
