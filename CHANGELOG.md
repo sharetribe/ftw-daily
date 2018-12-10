@@ -14,12 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-XX-XX
 
-* [change] Improved documents related to onboarding: env.md, deploying-to-production.md,
-  map-providers.md [#971](https://github.com/sharetribe/flex-template-web/pull/971)
-* [change] Update outdated dependencies.
+* [change] Update outdated dependencies. 
+    
+    **Note:** Updating Prettier caused multiple file changes mostly to .md files and compose setup. 
   [#967](https://github.com/sharetribe/flex-template-web/pull/967)
-  * **Note:** Updating Prettier caused multiple file changes mostly to `.md` files and `compose`
-    setup.
 * [change] Update supported Node version to the latest LTS (10.14).
   [#964](https://github.com/sharetribe/flex-template-web/pull/964)
 * [add] Add documentation about deploying to production. Also add _deploy to Heroku_ button.

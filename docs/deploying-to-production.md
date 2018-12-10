@@ -3,7 +3,7 @@
 ## Getting started
 
 The easiest way to get started is deploying the application to Heroku. Before creating the app you
-need three accounts: [Heroku](https://heroku.com/), [Stripe](https://stripe.com/) and
+need three accounts: [Heroku](https://heroku.com/), [Stripe](https://stripe.com/fi) and
 [MapBox](https://www.mapbox.com/). Creating the accounts is free unless you start heavily using
 them.
 
