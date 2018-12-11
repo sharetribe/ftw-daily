@@ -305,15 +305,23 @@ exports[`ListingPage matches snapshot 1`] = `
               }
             }
             onManageDisableScrolling={[Function]}
+            subTitle="ListingPage.bookingSubTitle"
             timeSlots={null}
             title={
-              <span>
-                
-                listing1
-                 
-                title
-                
-              </span>
+              <FormattedMessage
+                id="ListingPage.bookingTitle"
+                values={
+                  Object {
+                    "title": <span>
+                      
+                      listing1
+                       
+                      title
+                      
+                  </span>,
+                  }
+                }
+              />
             }
             unitType="line-item/night"
           />

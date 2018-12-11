@@ -57,6 +57,7 @@ const BookingPanel = props => {
     unitType,
     handleBookingSubmit,
     title,
+    subTitle,
     authorDisplayName,
     onManageDisableScrolling,
     timeSlots,
@@ -71,6 +72,12 @@ const BookingPanel = props => {
   const showClosedListingHelpText = listing.id && isClosed;
   const { formattedPrice, priceTitle } = priceData(price, intl);
   const isBook = !!parse(location.search).book;
+
+  const subTitleText = !!subTitle
+    ? subTitle
+    : showClosedListingHelpText
+    ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
+    : null;
 
   const classes = classNames(rootClassName || css.root, className);
 
@@ -92,18 +99,8 @@ const BookingPanel = props => {
         </div>
 
         <div className={css.bookingHeading}>
-          <h2 className={css.bookingTitle}>
-            <FormattedMessage id="BookingPanel.bookingTitle" values={{ title }} />
-          </h2>
-          <div className={css.bookingHelp}>
-            <FormattedMessage
-              id={
-                showClosedListingHelpText
-                  ? 'BookingPanel.bookingHelpClosedListing'
-                  : 'BookingPanel.bookingHelp'
-              }
-            />
-          </div>
+          <h2 className={css.bookingTitle}>{title}</h2>
+          {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
         </div>
         {!isClosed ? (
           <BookingDatesForm
@@ -149,6 +146,7 @@ BookingPanel.defaultProps = {
   rootClassName: null,
   className: null,
   isOwnListing: false,
+  subTitle: null,
   unitType: config.bookingUnitType,
   timeSlots: null,
   fetchTimeSlotsError: null,
@@ -161,7 +159,8 @@ BookingPanel.propTypes = {
   isOwnListing: bool,
   unitType: propTypes.bookingUnitType,
   handleBookingSubmit: func.isRequired,
-  title: oneOfType([object, string]),
+  title: oneOfType([object, string]).isRequired,
+  subTitle: oneOfType([object, string]),
   authorDisplayName: string.isRequired,
   onManageDisableScrolling: func.isRequired,
   timeSlots: arrayOf(propTypes.timeSlot),

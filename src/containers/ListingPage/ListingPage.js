@@ -229,6 +229,11 @@ export class ListingPageComponent extends Component {
       </span>
     );
 
+    const bookingTitle = (
+      <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
+    );
+    const bookingSubTitle = intl.formatMessage({ id: 'ListingPage.bookingSubTitle' });
+
     const topbar = <TopbarContainer />;
 
     if (showListingError && showListingError.status === 404) {
@@ -437,7 +442,8 @@ export class ListingPageComponent extends Component {
                   isOwnListing={isOwnListing}
                   unitType={unitType}
                   handleBookingSubmit={handleBookingSubmit}
-                  title={richTitle}
+                  title={bookingTitle}
+                  subTitle={bookingSubTitle}
                   authorDisplayName={authorDisplayName}
                   onManageDisableScrolling={onManageDisableScrolling}
                   timeSlots={timeSlots}
