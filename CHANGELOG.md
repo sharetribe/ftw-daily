@@ -14,10 +14,16 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-XX-XX
 
+- [add] Add Stripe support for new countries: Canada, New Zealand, Switzerland, Norway, and Hong
+  Kong. Also add more required fields for US and Australia.
+  - StripeBankAccountTokenInputField component and PayoutDetailsForm have some changes
+  - Stripe related configuration is separated to new stripe-config.js file.
+  - Multiple new translation keys were added and they might not be translated into French yet. If
+    you use French translation check PR for the changed keys.
+    [#968](https://github.com/sharetribe/flex-template-web/pull/968)
 - [change] Remove generic perUnit translations and replace them with specific night, day and unit
   translations depending on booking unit chosen in config.
   [#970](https://github.com/sharetribe/flex-template-web/pull/970)
-
 - [fix] Formatting docs with newest Prettier - related commit was lost in #967 at some point.
   [#975](https://github.com/sharetribe/flex-template-web/pull/975)
 - [change] Improved documents related to onboarding: env.md, deploying-to-production.md,

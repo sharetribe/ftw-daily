@@ -136,5 +136,70 @@ export const ageAtLeast = (message, minYears) => value => {
   return message;
 };
 
+export const validSsnLast4 = message => value => {
+  return value.length === 4 ? VALID : message;
+};
+
+export const validHKID = message => value => {
+  // Accept value 000000000 for testing Stripe
+  if (value.length === 9 && value.match(/([0]{9})/)) {
+    return VALID;
+  }
+
+  // HKID format example: AB364912(5)
+  // ID can start with one or two letters and the check digit in the end can be in brackets or not
+  if (value.length < 8) {
+    return message;
+  }
+
+  // Handle possible brackets in value
+  if (value.charAt(value.length - 3) === '(' && value.charAt(value.length - 1) === ')') {
+    value = value.substring(0, value.length - 3) + value.charAt(value.length - 2);
+  }
+  value = value.toUpperCase();
+
+  // Check that pattern is correct and split value to array
+  const hkidPattern = /^([A-Z]{1,2})([0-9]{6})([A0-9])$/;
+  const matchArray = value.match(hkidPattern);
+
+  if (!matchArray) {
+    return message;
+  }
+
+  const charPart = matchArray[1];
+  const numPart = matchArray[2];
+  const checkDigit = matchArray[3];
+
+  // Calculate the checksum for character part.
+  // Transfer letters to numbers so that A=10, B=11, C=12 etc.
+  // If there is only one letter in the ID use 36 as the first value
+  // Total calculation is weighted so that 1st digit is x9, 2nd digit x8, 3rd digit x7 etc.
+
+  const strValidChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let checkSum = 0;
+
+  if (charPart.length === 2) {
+    checkSum += 9 * (10 + strValidChars.indexOf(charPart.charAt(0)));
+    checkSum += 8 * (10 + strValidChars.indexOf(charPart.charAt(1)));
+  } else {
+    checkSum += 9 * 36;
+    checkSum += 8 * (10 + strValidChars.indexOf(charPart));
+  }
+
+  // Calculate the checksum for numeric part
+
+  for (let i = 0, j = 7; i < numPart.length; i++, j--) {
+    checkSum += j * numPart.charAt(i);
+  }
+
+  // Verify the check digit
+  const remaining = checkSum % 11;
+  let verify = remaining === 0 ? 0 : 11 - remaining;
+  verify = verify.toString();
+  const isValid = verify === checkDigit || (verify === 10 && checkDigit === 'A');
+
+  return isValid ? VALID : message;
+};
+
 export const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), VALID);

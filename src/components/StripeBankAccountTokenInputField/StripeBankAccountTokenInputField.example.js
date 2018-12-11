@@ -104,3 +104,20 @@ export const AU_AUD = {
   },
   group: 'custom inputs',
 };
+
+// CA
+export const CA_CAD = {
+  component: formComponent('CA'),
+  props: {
+    formName: 'CA_CAD',
+    onChange: formState => {
+      if (formState.dirty) {
+        console.log('form values changed to:', formState.values);
+      }
+    },
+    onSubmit: values => {
+      console.log('values submitted:', values);
+    },
+  },
+  group: 'custom inputs',
+};

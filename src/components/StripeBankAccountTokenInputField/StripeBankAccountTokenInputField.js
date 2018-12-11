@@ -134,15 +134,8 @@ class TokenInputFieldComponent extends Component {
     };
 
     // Include input values with correct stripe keys
-    inputsNeeded.forEach(inputType => {
-      // Stripe fails if there are spaces within the number, this is
-      // why we have to clean value up first.
-      const inputValueObj = mapInputsToStripeAccountKeys(
-        inputType,
-        cleanedString(values[inputType])
-      );
-      accountData = { ...accountData, ...inputValueObj };
-    });
+    const inputValueObj = mapInputsToStripeAccountKeys(country, values);
+    accountData = { ...accountData, ...inputValueObj };
 
     // https://stripe.com/docs/stripe-js/reference#collecting-bank-account-details
     this.stripe

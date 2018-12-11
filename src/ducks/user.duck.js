@@ -397,14 +397,23 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
     streetAddress,
     postalCode,
     city,
+    state,
+    province,
     bankAccountToken,
+    personalIdNumber,
   } = payoutDetails;
+
+  const hasProvince = province && !state;
 
   const address = {
     city,
     line1: streetAddress,
     postal_code: postalCode,
+    state: hasProvince ? province : state,
   };
+
+  const idNumber =
+    country === 'US' ? { ssn_last_4: personalIdNumber } : { personal_id_number: personalIdNumber };
 
   // Params for Stripe SDK
   const params = {
@@ -414,6 +423,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
       address: omitBy(address, isUndefined),
       dob: birthDate,
       type: 'individual',
+      ...idNumber,
     },
     tos_shown_and_accepted: true,
   };
