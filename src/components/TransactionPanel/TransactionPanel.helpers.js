@@ -154,7 +154,7 @@ const createListingLink = (listing, label, searchParams = {}, className = '') =>
 
 // Functional component as a helper to build detail card headings
 export const DetailCardHeadingsMaybe = props => {
-  const { authorDisplayName, transaction, transactionRole, listing, listingTitle } = props;
+  const { transaction, transactionRole, listing, listingTitle, subTitle } = props;
 
   const isCustomer = transactionRole === 'customer';
   const canShowDetailCardHeadings = isCustomer && !txIsEnquired(transaction);
@@ -162,9 +162,7 @@ export const DetailCardHeadingsMaybe = props => {
   return canShowDetailCardHeadings ? (
     <div className={css.detailCardHeadings}>
       <h2 className={css.detailCardTitle}>{listingTitle}</h2>
-      <p className={css.detailCardSubtitle}>
-        <FormattedMessage id="TransactionPanel.hostedBy" values={{ name: authorDisplayName }} />
-      </p>
+      <p className={css.detailCardSubtitle}>{subTitle}</p>
       <AddressLinkMaybe
         transaction={transaction}
         transactionRole={transactionRole}
@@ -182,6 +180,7 @@ export const BookingPanelMaybe = props => {
     transactionRole,
     listing,
     listingTitle,
+    subTitle,
     provider,
     onManageDisableScrolling,
     timeSlots,
@@ -200,6 +199,7 @@ export const BookingPanelMaybe = props => {
       listing={listing}
       handleBookingSubmit={() => console.log('submit')}
       title={listingTitle}
+      subTitle={subTitle}
       authorDisplayName={authorDisplayName}
       onManageDisableScrolling={onManageDisableScrolling}
       timeSlots={timeSlots}

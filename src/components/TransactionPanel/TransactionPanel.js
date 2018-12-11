@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { txIsRequested, propTypes } from '../../util/types';
+import { txIsRequested, LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import { ensureListing, ensureTransaction, ensureUser } from '../../util/data';
 import { isMobileSafari } from '../../util/userAgent';
+import { formatMoney } from '../../util/currency';
 import { AvatarMedium, AvatarLarge, ResponsiveImage, ReviewModal } from '../../components';
 import { SendMessageForm } from '../../forms';
+import config from '../../config';
 
 // These are internal components that make this file more readable.
 import {
@@ -164,6 +166,20 @@ export class TransactionPanelComponent extends Component {
       ? deletedListingTitle
       : currentListing.attributes.title;
 
+    const unitType = config.bookingUnitType;
+    const isNightly = unitType === LINE_ITEM_NIGHT;
+    const isDaily = unitType === LINE_ITEM_DAY;
+
+    const unitTranslationKey = isNightly
+      ? 'TransactionPanel.perNight'
+      : isDaily
+      ? 'TransactionPanel.perDay'
+      : 'TransactionPanel.perUnit';
+
+    const price = currentListing.attributes.price;
+    const formattedPrice = formatMoney(intl, price);
+    const bookingSubTitle = `${formattedPrice} ${intl.formatMessage({ id: unitTranslationKey })}`;
+
     const firstImage =
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
@@ -300,11 +316,11 @@ export class TransactionPanelComponent extends Component {
               ) : null}
 
               <DetailCardHeadingsMaybe
-                authorDisplayName={authorDisplayName}
                 transaction={currentTransaction}
                 transactionRole={transactionRole}
                 listing={currentListing}
                 listingTitle={listingTitle}
+                subTitle={bookingSubTitle}
               />
               <BookingPanelMaybe
                 authorDisplayName={authorDisplayName}
@@ -312,6 +328,7 @@ export class TransactionPanelComponent extends Component {
                 transactionRole={transactionRole}
                 listing={currentListing}
                 listingTitle={listingTitle}
+                subTitle={bookingSubTitle}
                 provider={currentProvider}
                 onManageDisableScrolling={onManageDisableScrolling}
                 timeSlots={timeSlots}

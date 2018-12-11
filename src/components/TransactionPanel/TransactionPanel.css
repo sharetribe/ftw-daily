@@ -214,13 +214,12 @@
 
 .detailCardSubtitle {
   @apply --marketplaceH5FontStyles;
-  color: var(--matterColorAnti);
 
   margin-top: 0;
   margin-bottom: 0;
 
   @media (--viewportLarge) {
-    margin-top: 1px;
+    margin-top: 9px;
     margin-bottom: 0;
   }
 }
