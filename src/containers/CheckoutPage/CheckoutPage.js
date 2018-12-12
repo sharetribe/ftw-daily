@@ -75,7 +75,14 @@ export class CheckoutPageComponent extends Component {
    * based on this initial data.
    */
   loadInitialData() {
-    const { bookingData, bookingDates, listing, fetchSpeculatedTransaction, history } = this.props;
+    const {
+      bookingData,
+      bookingDates,
+      listing,
+      enquiredTransaction,
+      fetchSpeculatedTransaction,
+      history,
+    } = this.props;
     // Browser's back navigation should not rewrite data in session store.
     // Action is 'POP' on both history.back() and page refresh cases.
     // Action is 'PUSH' when user has directed through a link
@@ -85,12 +92,12 @@ export class CheckoutPageComponent extends Component {
     const hasDataInProps = !!(bookingData && bookingDates && listing) && hasNavigatedThroughLink;
     if (hasDataInProps) {
       // Store data only if data is passed through props and user has navigated through a link.
-      storeData(bookingData, bookingDates, listing, STORAGE_KEY);
+      storeData(bookingData, bookingDates, listing, enquiredTransaction, STORAGE_KEY);
     }
 
     // NOTE: stored data can be empty if user has already successfully completed transaction.
     const pageData = hasDataInProps
-      ? { bookingData, bookingDates, listing }
+      ? { bookingData, bookingDates, listing, enquiredTransaction }
       : storedData(STORAGE_KEY);
 
     const hasData =
@@ -465,6 +472,7 @@ CheckoutPageComponent.defaultProps = {
   bookingDates: null,
   speculateTransactionError: null,
   speculatedTransaction: null,
+  enquiredTransaction: null,
   currentUser: null,
 };
 
@@ -480,6 +488,7 @@ CheckoutPageComponent.propTypes = {
   speculateTransactionInProgress: bool.isRequired,
   speculateTransactionError: propTypes.error,
   speculatedTransaction: propTypes.transaction,
+  enquiredTransaction: propTypes.transaction,
   initiateOrderError: propTypes.error,
   currentUser: propTypes.currentUser,
   params: shape({
@@ -508,6 +517,7 @@ const mapStateToProps = state => {
     speculateTransactionInProgress,
     speculateTransactionError,
     speculatedTransaction,
+    enquiredTransaction,
     initiateOrderError,
   } = state.CheckoutPage;
   const { currentUser } = state.user;
@@ -519,6 +529,7 @@ const mapStateToProps = state => {
     speculateTransactionInProgress,
     speculateTransactionError,
     speculatedTransaction,
+    enquiredTransaction,
     listing,
     initiateOrderError,
   };

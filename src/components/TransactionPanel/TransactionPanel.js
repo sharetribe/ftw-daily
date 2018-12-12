@@ -131,6 +131,7 @@ export class TransactionPanelComponent extends Component {
       declineInProgress,
       acceptSaleError,
       declineSaleError,
+      onSubmitBookingRequest,
       timeSlots,
       fetchTimeSlotsError,
     } = this.props;
@@ -330,6 +331,7 @@ export class TransactionPanelComponent extends Component {
                 listingTitle={listingTitle}
                 subTitle={bookingSubTitle}
                 provider={currentProvider}
+                onSubmit={onSubmitBookingRequest}
                 onManageDisableScrolling={onManageDisableScrolling}
                 timeSlots={timeSlots}
                 fetchTimeSlotsError={fetchTimeSlotsError}
@@ -394,6 +396,7 @@ TransactionPanelComponent.propTypes = {
   onShowMoreMessages: func.isRequired,
   onSendMessage: func.isRequired,
   onSendReview: func.isRequired,
+  onSubmitBookingRequest: func.isRequired,
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
 

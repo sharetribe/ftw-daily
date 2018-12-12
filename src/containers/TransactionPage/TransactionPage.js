@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
+import routeConfiguration from '../../routeConfiguration';
 import { propTypes } from '../../util/types';
 import { ensureListing, ensureTransaction } from '../../util/data';
+import { createSlug } from '../../util/urlHelpers';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled, manageDisableScrolling } from '../../ducks/UI.duck';
 import {
@@ -44,6 +48,7 @@ export const TransactionPageComponent = props => {
     totalMessagePages,
     oldestMessagePageFetched,
     fetchTransactionError,
+    history,
     intl,
     messages,
     onManageDisableScrolling,
@@ -66,10 +71,41 @@ export const TransactionPageComponent = props => {
     onDeclineSale,
     timeSlots,
     fetchTimeSlotsError,
+    useInitialValues,
   } = props;
 
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
+
+  const handleSubmitBookingRequest = values => {
+    const { bookingDates, ...bookingData } = values;
+
+    const initialValues = {
+      listing: currentListing,
+      enquiredTransaction: currentTransaction,
+      bookingData,
+      bookingDates: {
+        bookingStart: bookingDates.startDate,
+        bookingEnd: bookingDates.endDate,
+      },
+    };
+
+    const routes = routeConfiguration();
+    // Customize checkout page state with current listing and selected bookingDates
+    const { setInitialValues } = findRouteByRouteName('CheckoutPage', routes);
+    useInitialValues(setInitialValues, initialValues);
+
+    // Redirect to CheckoutPage
+    history.push(
+      createResourceLocatorString(
+        'CheckoutPage',
+        routes,
+        { id: currentListing.id.uuid, slug: createSlug(currentListing.attributes.title) },
+        {}
+      )
+    );
+  };
+
   const deletedListingTitle = intl.formatMessage({
     id: 'TransactionPage.deletedListing',
   });
@@ -160,6 +196,7 @@ export const TransactionPageComponent = props => {
       declineInProgress={declineInProgress}
       acceptSaleError={acceptSaleError}
       declineSaleError={declineSaleError}
+      onSubmitBookingRequest={handleSubmitBookingRequest}
       timeSlots={timeSlots}
       fetchTimeSlotsError={fetchTimeSlotsError}
     />
@@ -226,6 +263,15 @@ TransactionPageComponent.propTypes = {
   onSendMessage: func.isRequired,
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
+  useInitialValues: func.isRequired,
+
+  // from withRouter
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
+  location: shape({
+    search: string,
+  }).isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
@@ -291,10 +337,12 @@ const mapDispatchToProps = dispatch => {
       dispatch(manageDisableScrolling(componentId, disableScrolling)),
     onSendReview: (role, tx, reviewRating, reviewContent) =>
       dispatch(sendReview(role, tx, reviewRating, reviewContent)),
+    useInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
   };
 };
 
 const TransactionPage = compose(
+  withRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps

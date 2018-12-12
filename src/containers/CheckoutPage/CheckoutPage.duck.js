@@ -27,6 +27,7 @@ const initialState = {
   speculateTransactionInProgress: false,
   speculateTransactionError: null,
   speculatedTransaction: null,
+  enquiredTransaction: null,
   initiateOrderError: null,
 };
 

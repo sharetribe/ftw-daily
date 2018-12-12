@@ -9,7 +9,7 @@ export const Default = {
   props: {
     className: css.example,
     listing: createListing('listing_1'),
-    handleBookingSubmit: values => console.log('Submit:', values),
+    onSubmit: values => console.log('Submit:', values),
     title: <span>Booking title</span>,
     subTitle: 'Hosted by Author N',
     authorDisplayName: 'Author Name',
@@ -22,7 +22,7 @@ export const WithClosedListing = {
   props: {
     className: css.example,
     listing: createListing('listing_1', { state: LISTING_STATE_CLOSED }),
-    handleBookingSubmit: values => console.log('Submit:', values),
+    onSubmit: values => console.log('Submit:', values),
     title: <span>Booking title</span>,
     subTitle: 'Hosted by Author N',
     authorDisplayName: 'Author Name',

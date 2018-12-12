@@ -182,6 +182,7 @@ export const BookingPanelMaybe = props => {
     listingTitle,
     subTitle,
     provider,
+    onSubmit,
     onManageDisableScrolling,
     timeSlots,
     fetchTimeSlotsError,
@@ -201,6 +202,7 @@ export const BookingPanelMaybe = props => {
       title={listingTitle}
       subTitle={subTitle}
       authorDisplayName={authorDisplayName}
+      onSubmit={onSubmit}
       onManageDisableScrolling={onManageDisableScrolling}
       timeSlots={timeSlots}
       fetchTimeSlotsError={fetchTimeSlotsError}
