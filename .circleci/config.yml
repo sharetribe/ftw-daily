@@ -91,7 +91,7 @@ jobs:
             - node_modules/
       - run:
           name: Audit dependencies
-          command: yarn run audit
+          command: yarn audit
 workflows:
   version: 2
   format_test_build_audit:
