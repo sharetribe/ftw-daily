@@ -30,7 +30,12 @@ import {
 } from '../../components';
 import { StripePaymentForm } from '../../forms';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { initiateOrder, setInitialValues, speculateTransaction } from './CheckoutPage.duck';
+import {
+  initiateOrder,
+  initiateOrderAfterEnquiry,
+  setInitialValues,
+  speculateTransaction,
+} from './CheckoutPage.duck';
 import config from '../../config';
 
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
@@ -139,7 +144,14 @@ export class CheckoutPageComponent extends Component {
 
     const cardToken = values.token;
     const initialMessage = values.message;
-    const { history, sendOrderRequest, speculatedTransaction, dispatch } = this.props;
+    const {
+      history,
+      sendOrderRequest,
+      sendOrderRequestAfterEnquiry,
+      speculatedTransaction,
+      enquiredTransaction,
+      dispatch,
+    } = this.props;
 
     // Create order aka transaction
     // NOTE: if unit type is line-item/units, quantity needs to be added.
@@ -151,7 +163,11 @@ export class CheckoutPageComponent extends Component {
       bookingEnd: speculatedTransaction.booking.attributes.end,
     };
 
-    sendOrderRequest(requestParams, initialMessage)
+    const initiateRequest = enquiredTransaction
+      ? sendOrderRequestAfterEnquiry(enquiredTransaction.id, requestParams)
+      : sendOrderRequest(requestParams, initialMessage);
+
+    initiateRequest
       .then(values => {
         const { orderId, initialMessageSuccess } = values;
         this.setState({ submitting: false });
@@ -538,6 +554,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   dispatch,
   sendOrderRequest: (params, initialMessage) => dispatch(initiateOrder(params, initialMessage)),
+  sendOrderRequestAfterEnquiry: (transactionId, params) =>
+    dispatch(initiateOrderAfterEnquiry(transactionId, params)),
   fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
 });
 
