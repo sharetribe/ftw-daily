@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-XX-XX
 
+- [add] Add French translations to recently added translation keys. Also few minor changes to
+  English translations for consistency.
+  [#981](https://github.com/sharetribe/flex-template-web/pull/981)
 - [add] Create FieldRadioButton component.
   [#977](https://github.com/sharetribe/flex-template-web/pull/977)
 - [fix] Temporarily remove audit step from CI because of the Node Security Platform shutting down.
