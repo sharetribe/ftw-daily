@@ -11,6 +11,7 @@ import {
   StripeBankAccountTokenInputField,
   FieldSelect,
   FieldBirthdayInput,
+  FieldRadioButton,
   FieldTextInput,
   Form,
 } from '../../components';
@@ -56,7 +57,12 @@ const PayoutDetailsFormComponent = props => (
         submitButtonText,
         values,
       } = fieldRenderProps;
-      const { country } = values;
+
+      const { country, accountType } = values;
+
+      const individualAccountLabel = intl.formatMessage({
+        id: 'PayoutDetailsForm.individualAccount',
+      });
 
       const firstNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.firstNameLabel' });
       const firstNamePlaceholder = intl.formatMessage({
@@ -99,6 +105,8 @@ const PayoutDetailsFormComponent = props => (
         ),
         MIN_STRIPE_ACCOUNT_AGE
       );
+
+      const companyAccountLabel = intl.formatMessage({ id: 'PayoutDetailsForm.companyAccount' });
 
       const companyNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.companyNameLabel' });
       const companyNamePlaceholder = intl.formatMessage({
@@ -182,6 +190,10 @@ const PayoutDetailsFormComponent = props => (
       });
       const submitInProgress = inProgress;
       const submitDisabled = pristine || invalid || disabled || submitInProgress;
+      const showAsRequired = pristine;
+
+      const showIndividual = country && accountType && accountType === 'individual';
+      const showCompany = country && accountType && accountType === 'company';
 
       let error = null;
 
@@ -204,107 +216,165 @@ const PayoutDetailsFormComponent = props => (
           <FormattedMessage id="PayoutDetailsForm.stripeConnectedAccountTermsLink" />
         </ExternalLink>
       );
+
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           <div className={css.sectionContainer}>
             <h3 className={css.subTitle}>
-              <FormattedMessage id="PayoutDetailsForm.personalDetailsTitle" />
+              <FormattedMessage id="PayoutDetailsForm.accountTypeTitle" />
             </h3>
-            <div className={css.formRow}>
-              <FieldTextInput
-                id="fname"
-                name="fname"
-                disabled={disabled}
-                className={css.firstName}
-                type="text"
-                autoComplete="given-name"
-                label={firstNameLabel}
-                placeholder={firstNamePlaceholder}
-                validate={firstNameRequired}
+            <div className={css.radioButtonRow}>
+              <FieldRadioButton
+                id="individual"
+                name="accountType"
+                label={individualAccountLabel}
+                value="individual"
+                showAsRequired={showAsRequired}
               />
-              <FieldTextInput
-                id="lname"
-                name="lname"
-                disabled={disabled}
-                className={css.lastName}
-                type="text"
-                autoComplete="family-name"
-                label={lastNameLabel}
-                placeholder={lastNamePlaceholder}
-                validate={lastNameRequired}
+              <FieldRadioButton
+                id="company"
+                name="accountType"
+                label={companyAccountLabel}
+                value="company"
+                showAsRequired={showAsRequired}
               />
             </div>
-            <FieldBirthdayInput
-              id="birthDate"
-              name="birthDate"
-              disabled={disabled}
-              className={css.field}
-              label={birthdayLabel}
-              labelForMonth={birthdayLabelMonth}
-              labelForYear={birthdayLabelYear}
-              format={null}
-              valueFromForm={values.birthDate}
-              validate={validators.composeValidators(birthdayRequired, birthdayMinAge)}
-            />
           </div>
 
-          <div className={css.sectionContainer}>
-            <h3 className={css.subTitle}>
-              <FormattedMessage id="PayoutDetailsForm.addressTitle" />
-            </h3>
-            <FieldSelect
-              id="country"
-              name="country"
-              disabled={disabled}
-              className={css.selectCountry}
-              autoComplete="country"
-              label={countryLabel}
-              validate={countryRequired}
-            >
-              <option disabled value="">
-                {countryPlaceholder}
-              </option>
-              {supportedCountries.map(c => (
-                <option key={c} value={c}>
-                  {intl.formatMessage({ id: `PayoutDetailsForm.countryNames.${c}` })}
-                </option>
-              ))}
-            </FieldSelect>
+          {showIndividual ? (
+            <React.Fragment>
+              <div className={css.sectionContainer}>
+                <h3 className={css.subTitle}>
+                  <FormattedMessage id="PayoutDetailsForm.personalDetailsTitle" />
+                </h3>
+                <div className={css.formRow}>
+                  <FieldTextInput
+                    id="fname"
+                    name="fname"
+                    disabled={disabled}
+                    className={css.firstName}
+                    type="text"
+                    autoComplete="given-name"
+                    label={firstNameLabel}
+                    placeholder={firstNamePlaceholder}
+                    validate={firstNameRequired}
+                  />
+                  <FieldTextInput
+                    id="lname"
+                    name="lname"
+                    disabled={disabled}
+                    className={css.lastName}
+                    type="text"
+                    autoComplete="family-name"
+                    label={lastNameLabel}
+                    placeholder={lastNamePlaceholder}
+                    validate={lastNameRequired}
+                  />
+                </div>
+                <FieldBirthdayInput
+                  id="birthDate"
+                  name="birthDate"
+                  disabled={disabled}
+                  className={css.field}
+                  label={birthdayLabel}
+                  labelForMonth={birthdayLabelMonth}
+                  labelForYear={birthdayLabelYear}
+                  format={null}
+                  valueFromForm={values.birthDate}
+                  validate={validators.composeValidators(birthdayRequired, birthdayMinAge)}
+                />
+              </div>
 
-            <PayoutDetailsAddress country={country} intl={intl} disabled={disabled} form={form} />
-          </div>
-          {country ? (
-            <div className={css.sectionContainer}>
-              <h3 className={css.subTitle}>
-                <FormattedMessage id="PayoutDetailsForm.bankDetails" />
-              </h3>
-              <StripeBankAccountTokenInputField
-                disabled={disabled}
-                name="bankAccountToken"
-                formName="PayoutDetailsForm"
-                country={country}
-                currency={countryCurrency(country)}
-                validate={bankAccountRequired}
-              />
-            </div>
+              <div className={css.sectionContainer}>
+                <h3 className={css.subTitle}>
+                  <FormattedMessage id="PayoutDetailsForm.addressTitle" />
+                </h3>
+                <FieldSelect
+                  id="country"
+                  name="country"
+                  disabled={disabled}
+                  className={css.selectCountry}
+                  autoComplete="country"
+                  label={countryLabel}
+                  validate={countryRequired}
+                >
+                  <option disabled value="">
+                    {countryPlaceholder}
+                  </option>
+                  {supportedCountries.map(c => (
+                    <option key={c} value={c}>
+                      {intl.formatMessage({ id: `PayoutDetailsForm.countryNames.${c}` })}
+                    </option>
+                  ))}
+                </FieldSelect>
+
+                <PayoutDetailsAddress
+                  country={country}
+                  intl={intl}
+                  disabled={disabled}
+                  form={form}
+                />
+              </div>
+              {country ? (
+                <div className={css.sectionContainer}>
+                  <h3 className={css.subTitle}>
+                    <FormattedMessage id="PayoutDetailsForm.bankDetails" />
+                  </h3>
+                  <StripeBankAccountTokenInputField
+                    disabled={disabled}
+                    name="bankAccountToken"
+                    formName="PayoutDetailsForm"
+                    country={country}
+                    currency={countryCurrency(country)}
+                    validate={bankAccountRequired}
+                  />
+                </div>
+              ) : null}
+
+              {showPersonalIdNumber ? (
+                <div className={css.sectionContainer}>
+                  <h3 className={css.subTitle}>
+                    <FormattedMessage id="PayoutDetailsForm.personalIdNumberTitle" />
+                  </h3>
+                  <FieldTextInput
+                    id="personalIdNumber"
+                    name="personalIdNumber"
+                    disabled={disabled}
+                    className={css.personalIdNumber}
+                    type="text"
+                    label={personalIdNumberLabel}
+                    placeholder={personalIdNumberPlaceholder}
+                    validate={personalIdNumberValid}
+                  />
+                </div>
+              ) : null}
+
+              {error}
+
+              <p className={css.termsText}>
+                <FormattedMessage
+                  id="PayoutDetailsForm.stripeToSText"
+                  values={{ stripeConnectedAccountTermsLink }}
+                />
+              </p>
+              <Button
+                className={css.submitButton}
+                type="submit"
+                inProgress={submitInProgress}
+                disabled={submitDisabled}
+                ready={ready}
+              >
+                {submitButtonText ? (
+                  submitButtonText
+                ) : (
+                  <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
+                )}
+              </Button>
+            </React.Fragment>
           ) : null}
 
-          {showPersonalIdNumber ? (
-            <div className={css.sectionContainer}>
-              <h3 className={css.subTitle}>
-                <FormattedMessage id="PayoutDetailsForm.personalIdNumberTitle" />
-              </h3>
-              <FieldTextInput
-                id="personalIdNumber"
-                name="personalIdNumber"
-                disabled={disabled}
-                className={css.personalIdNumber}
-                type="text"
-                label={personalIdNumberLabel}
-                placeholder={personalIdNumberPlaceholder}
-                validate={personalIdNumberValid}
-              />
-            </div>
+          {showCompany === 'company' ? (
+            <React.Fragment>
               <div className={css.sectionContainer}>
                 <h3 className={css.subTitle}>
                   <FormattedMessage id="PayoutDetailsForm.companyDetailsTitle" />
@@ -333,29 +403,96 @@ const PayoutDetailsFormComponent = props => (
                   />
                 </div>
               </div>
+              <div className={css.sectionContainer}>
+                <h3 className={css.subTitle}>
+                  <FormattedMessage id="PayoutDetailsForm.companyAddressTitle" />
+                </h3>
+
+                <FieldSelect
+                  id="country"
+                  name="country"
+                  disabled={disabled}
+                  className={css.selectCountry}
+                  autoComplete="country"
+                  label={countryLabel}
+                  validate={countryRequired}
+                >
+                  <option disabled value="">
+                    {countryPlaceholder}
+                  </option>
+                  {supportedCountries.map(c => (
+                    <option key={c} value={c}>
+                      {intl.formatMessage({ id: `PayoutDetailsForm.countryNames.${c}` })}
+                    </option>
+                  ))}
+                </FieldSelect>
+
+                <PayoutDetailsAddress
+                  country={country}
+                  intl={intl}
+                  disabled={disabled}
+                  form={form}
+                />
+              </div>
+              {country ? (
+                <React.Fragment>
+                  <div className={css.sectionContainer}>
+                    <h3 className={css.subTitle}>
+                      <FormattedMessage id="PayoutDetailsForm.bankDetails" />
+                    </h3>
+                    <StripeBankAccountTokenInputField
+                      disabled={disabled}
+                      name="bankAccountToken"
+                      formName="PayoutDetailsForm"
+                      country={country}
+                      currency={countryCurrency(country)}
+                      validate={bankAccountRequired}
+                    />
+                  </div>
+                </React.Fragment>
+              ) : null}
+
+              {showPersonalIdNumber ? (
+                <div className={css.sectionContainer}>
+                  <h3 className={css.subTitle}>
+                    <FormattedMessage id="PayoutDetailsForm.personalIdNumberTitle" />
+                  </h3>
+                  <FieldTextInput
+                    id="personalIdNumber"
+                    name="personalIdNumber"
+                    disabled={disabled}
+                    className={css.personalIdNumber}
+                    type="text"
+                    label={personalIdNumberLabel}
+                    placeholder={personalIdNumberPlaceholder}
+                    validate={personalIdNumberValid}
+                  />
+                </div>
+              ) : null}
+
+              {error}
+
+              <p className={css.termsText}>
+                <FormattedMessage
+                  id="PayoutDetailsForm.stripeToSText"
+                  values={{ stripeConnectedAccountTermsLink }}
+                />
+              </p>
+              <Button
+                className={css.submitButton}
+                type="submit"
+                inProgress={submitInProgress}
+                disabled={submitDisabled}
+                ready={ready}
+              >
+                {submitButtonText ? (
+                  submitButtonText
+                ) : (
+                  <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
+                )}
+              </Button>
+            </React.Fragment>
           ) : null}
-
-          {error}
-
-          <p className={css.termsText}>
-            <FormattedMessage
-              id="PayoutDetailsForm.stripeToSText"
-              values={{ stripeConnectedAccountTermsLink }}
-            />
-          </p>
-          <Button
-            className={css.submitButton}
-            type="submit"
-            inProgress={submitInProgress}
-            disabled={submitDisabled}
-            ready={ready}
-          >
-            {submitButtonText ? (
-              submitButtonText
-            ) : (
-              <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
-            )}
-          </Button>
         </Form>
       );
     }}

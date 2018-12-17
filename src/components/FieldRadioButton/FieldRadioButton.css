@@ -15,6 +15,16 @@
     display: inline;
   }
 
+  /* Highlight the borders if the checkbox is hovered, focused or checked */
+  &:hover + label .notChecked,
+  &:hover + label .required,
+  &:focus + label .notChecked,
+  &:focus + label .required,
+  &:checked + label .notChecked,
+  &:checked + label .required {
+    stroke: var(--matterColorDark);
+  }
+
   /* Hightlight the text on checked, hover and focus */
   &:focus + label .text,
   &:hover + label .text,
@@ -26,13 +36,13 @@
 .label {
   display: flex;
   align-items: center;
-  padding: 0;
+  padding-top: 6px;
 }
 
 .radioButtonWrapper {
   /* This should follow line-height */
   height: 32px;
-  margin-top: -1px;
+  margin-top: -2px;
   margin-right: 12px;
   align-self: baseline;
 
@@ -49,10 +59,16 @@
 
 .notChecked {
   stroke: var(--matterColorAnti);
+  &:hover {
+    stroke: pink;
+  }
 }
 
 .required {
   stroke: var(--attentionColor);
+  &:hover {
+    stroke: pink;
+  }
 }
 
 .text {
