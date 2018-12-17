@@ -102,3 +102,7 @@
     margin-bottom: 0;
   }
 }
+
+.modalTitle {
+  @apply --marketplaceModalTitleStyles;
+}

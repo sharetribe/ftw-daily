@@ -100,6 +100,25 @@ const PayoutDetailsFormComponent = props => (
         MIN_STRIPE_ACCOUNT_AGE
       );
 
+      const companyNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.companyNameLabel' });
+      const companyNamePlaceholder = intl.formatMessage({
+        id: 'PayoutDetailsForm.companyNamePlaceholder',
+      });
+      const companyNameRequired = validators.required(
+        intl.formatMessage({
+          id: 'PayoutDetailsForm.companyNameRequired',
+        })
+      );
+
+      const companyTaxIdLabel = intl.formatMessage({ id: 'PayoutDetailsForm.companyTaxIdLabel' });
+      const companyTaxIdPlaceholder = intl.formatMessage({
+        id: 'PayoutDetailsForm.companyTaxIdPlaceholder',
+      });
+      const companyTaxIdRequired = validators.required(
+        intl.formatMessage({
+          id: 'PayoutDetailsForm.companyTaxIdRequired',
+        })
+      );
       const countryLabel = intl.formatMessage({ id: 'PayoutDetailsForm.countryLabel' });
       const countryPlaceholder = intl.formatMessage({
         id: 'PayoutDetailsForm.countryPlaceholder',
@@ -286,6 +305,34 @@ const PayoutDetailsFormComponent = props => (
                 validate={personalIdNumberValid}
               />
             </div>
+              <div className={css.sectionContainer}>
+                <h3 className={css.subTitle}>
+                  <FormattedMessage id="PayoutDetailsForm.companyDetailsTitle" />
+                </h3>
+                <div className={css.formRow}>
+                  <FieldTextInput
+                    id="companyName"
+                    name="companyName"
+                    disabled={disabled}
+                    type="text"
+                    autoComplete="company-name"
+                    label={companyNameLabel}
+                    placeholder={companyNamePlaceholder}
+                    validate={companyNameRequired}
+                  />
+                  <FieldTextInput
+                    id="companyTaxId"
+                    name="companyTaxId"
+                    disabled={disabled}
+                    className={css.taxId}
+                    type="text"
+                    autoComplete="company-tax-id"
+                    label={companyTaxIdLabel}
+                    placeholder={companyTaxIdPlaceholder}
+                    validate={companyTaxIdRequired}
+                  />
+                </div>
+              </div>
           ) : null}
 
           {error}

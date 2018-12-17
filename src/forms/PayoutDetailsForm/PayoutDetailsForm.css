@@ -1,6 +1,7 @@
 @import '../../marketplace.css';
 
 .root {
+  margin-top: 48px;
 }
 
 .disabled {
@@ -62,6 +63,10 @@
 .city {
   margin-top: 24px;
   width: calc(60% - 9px);
+}
+
+.taxId {
+  margin-top: 24px;
 }
 
 .error {
