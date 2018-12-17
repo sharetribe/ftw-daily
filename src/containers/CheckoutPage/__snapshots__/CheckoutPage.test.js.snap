@@ -90,6 +90,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
           inProgress={false}
           onSubmit={[Function]}
           paymentInfo="CheckoutPage.paymentInfo"
+          showInitialMessageInput={true}
         />
       </section>
     </div>

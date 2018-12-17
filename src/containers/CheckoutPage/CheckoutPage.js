@@ -198,6 +198,7 @@ export class CheckoutPageComponent extends Component {
       speculateTransactionInProgress,
       speculateTransactionError,
       speculatedTransaction,
+      enquiredTransaction,
       initiateOrderError,
       intl,
       params,
@@ -384,6 +385,8 @@ export class CheckoutPageComponent extends Component {
       </div>
     );
 
+    const showInitialMessageInput = !enquiredTransaction;
+
     const pageProps = { title, scrollingDisabled };
 
     if (isLoading) {
@@ -443,6 +446,7 @@ export class CheckoutPageComponent extends Component {
                   formId="CheckoutPagePaymentForm"
                   paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo' })}
                   authorDisplayName={currentAuthor.attributes.profile.displayName}
+                  showInitialMessageInput={showInitialMessageInput}
                 />
               ) : null}
             </section>
