@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-XX-XX
 
+- [fix] Temporarily remove audit step from CI because of the Node Security Platform shutting down.
+  [#979](https://github.com/sharetribe/flex-template-web/pull/979)
 - [add] Add Stripe support for new countries: Canada, New Zealand, Switzerland, Norway, and Hong
   Kong. Also add more required fields for US and Australia.
   - StripeBankAccountTokenInputField component and PayoutDetailsForm have some changes

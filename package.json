@@ -62,8 +62,6 @@
     "enzyme-to-json": "^3.3.4",
     "inquirer": "^6.2.0",
     "nodemon": "^1.17.2",
-    "nsp": "^3.2.1",
-    "nsp-preprocessor-yarn": "^1.0.1",
     "prettier": "^1.15.3"
   },
   "scripts": {
@@ -78,8 +76,7 @@
     "eject": "sharetribe-scripts eject",
     "start": "node server/index.js",
     "dev-server": "export NODE_ENV=development PORT=4000 REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000&&yarn run build&&nodemon --watch server server/index.js",
-    "heroku-postbuild": "yarn run build",
-    "audit": "nsp check --preprocessor yarn"
+    "heroku-postbuild": "yarn run build"
   },
   "prettier": {
     "singleQuote": true,
