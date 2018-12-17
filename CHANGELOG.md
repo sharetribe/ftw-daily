@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-XX-XX
 
+## [v2.5.0] 2018-12-17
+
 - [add] Add French translations to recently added translation keys. Also few minor changes to
   English translations for consistency.
   [#981](https://github.com/sharetribe/flex-template-web/pull/981)
@@ -43,6 +45,8 @@ way to update this template, but currently, we follow a pattern:
   [#964](https://github.com/sharetribe/flex-template-web/pull/964)
 - [add] Add documentation about deploying to production. Also add _deploy to Heroku_ button.
   [#961](https://github.com/sharetribe/flex-template-web/pull/961)
+
+  [v2.5.0]: https://github.com/sharetribe/flex-template-web/compare/v2.4.1...v2.5.0
 
 ## [v2.4.1] 2018-11-29
 
