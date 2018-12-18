@@ -115,17 +115,19 @@ export const AddressLinkMaybe = props => {
 
 // Functional component as a helper to build BookingBreakdown
 export const BreakdownMaybe = props => {
-  const { className, rootClassName, transaction, transactionRole } = props;
+  const { className, rootClassName, breakdownClassName, transaction, transactionRole } = props;
   const loaded = transaction && transaction.id && transaction.booking && transaction.booking.id;
 
-  const classes = classNames(rootClassName || css.breakdown, className);
+  const classes = classNames(rootClassName || className);
+  const breakdownClasses = classNames(css.breakdown, breakdownClassName);
+
   return loaded ? (
-    <div>
+    <div className={classes}>
       <h3 className={css.bookingBreakdownTitle}>
         <FormattedMessage id="TransactionPanel.bookingBreakdownTitle" />
       </h3>
       <BookingBreakdown
-        className={classes}
+        className={breakdownClasses}
         userRole={transactionRole}
         unitType={config.bookingUnitType}
         transaction={transaction}

@@ -336,7 +336,11 @@ export class TransactionPanelComponent extends Component {
                 timeSlots={timeSlots}
                 fetchTimeSlotsError={fetchTimeSlotsError}
               />
-              <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
+              <BreakdownMaybe
+                className={css.breakdownContainer}
+                transaction={currentTransaction}
+                transactionRole={transactionRole}
+              />
 
               {canShowActionButtons ? (
                 <div className={css.desktopActionButtons}>{actionButtons}</div>

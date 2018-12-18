@@ -249,6 +249,14 @@
   }
 }
 
+.breakdownContainer {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+  }
+}
+
 .breakdown {
   margin: 14px 24px 0 24px;
 
