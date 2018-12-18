@@ -5,12 +5,15 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
 import config from '../../config';
-import { Button, ExternalLink, FieldRadioButton, Form } from '../../components';
+import { Button, ExternalLink, FieldRadioButton, FieldSelect, Form } from '../../components';
 import { isStripeInvalidPostalCode } from '../../util/errors';
+import * as validators from '../../util/validators';
 
 import PayoutDetailsFormCompany from './PayoutDetailsFormCompany';
 import PayoutDetailsFormIndividual from './PayoutDetailsFormIndividual';
 import css from './PayoutDetailsForm.css';
+
+const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
 
 export const stripeCountryConfigs = countryCode => {
   const country = config.stripe.supportedCountries.find(c => c.code === countryCode);
@@ -46,6 +49,16 @@ const PayoutDetailsFormComponent = props => (
       });
 
       const companyAccountLabel = intl.formatMessage({ id: 'PayoutDetailsForm.companyAccount' });
+
+      const countryLabel = intl.formatMessage({ id: 'PayoutDetailsForm.countryLabel' });
+      const countryPlaceholder = intl.formatMessage({
+        id: 'PayoutDetailsForm.countryPlaceholder',
+      });
+      const countryRequired = validators.required(
+        intl.formatMessage({
+          id: 'PayoutDetailsForm.countryRequired',
+        })
+      );
 
       const classes = classNames(css.root, className, {
         [css.disabled]: disabled,
@@ -104,33 +117,59 @@ const PayoutDetailsFormComponent = props => (
             </div>
           </div>
 
-          {showIndividual ? (
-            <PayoutDetailsFormIndividual fieldRenderProps={fieldRenderProps} />
-          ) : showCompany ? (
-            <PayoutDetailsFormCompany fieldRenderProps={fieldRenderProps} />
+          {accountType ? (
+            <React.Fragment>
+              <div className={css.sectionContainer}>
+                <h3 className={css.subTitle}>Country</h3>
+                <FieldSelect
+                  id="country"
+                  name="country"
+                  disabled={disabled}
+                  className={css.selectCountry}
+                  autoComplete="country"
+                  label={countryLabel}
+                  validate={countryRequired}
+                >
+                  <option disabled value="">
+                    {countryPlaceholder}
+                  </option>
+                  {supportedCountries.map(c => (
+                    <option key={c} value={c}>
+                      {intl.formatMessage({ id: `PayoutDetailsForm.countryNames.${c}` })}
+                    </option>
+                  ))}
+                </FieldSelect>
+              </div>
+
+              {showIndividual ? (
+                <PayoutDetailsFormIndividual fieldRenderProps={fieldRenderProps} />
+              ) : showCompany ? (
+                <PayoutDetailsFormCompany fieldRenderProps={fieldRenderProps} />
+              ) : null}
+
+              {error}
+
+              <p className={css.termsText}>
+                <FormattedMessage
+                  id="PayoutDetailsForm.stripeToSText"
+                  values={{ stripeConnectedAccountTermsLink }}
+                />
+              </p>
+              <Button
+                className={css.submitButton}
+                type="submit"
+                inProgress={submitInProgress}
+                disabled={submitDisabled}
+                ready={ready}
+              >
+                {submitButtonText ? (
+                  submitButtonText
+                ) : (
+                  <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
+                )}
+              </Button>
+            </React.Fragment>
           ) : null}
-
-          {error}
-
-          <p className={css.termsText}>
-            <FormattedMessage
-              id="PayoutDetailsForm.stripeToSText"
-              values={{ stripeConnectedAccountTermsLink }}
-            />
-          </p>
-          <Button
-            className={css.submitButton}
-            type="submit"
-            inProgress={submitInProgress}
-            disabled={submitDisabled}
-            ready={ready}
-          >
-            {submitButtonText ? (
-              submitButtonText
-            ) : (
-              <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
-            )}
-          </Button>
         </Form>
       );
     }}
