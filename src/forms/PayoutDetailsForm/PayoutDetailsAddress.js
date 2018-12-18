@@ -23,12 +23,18 @@ const CANADIAN_PROVINCES = [
 ];
 
 const PayoutDetailsAddress = props => {
-  const { country, intl, disabled, form } = props;
+  const { country, intl, disabled, form, companyAddress } = props;
   const countryConfig = country ? stripeCountryConfigs(country).addressConfig : null;
 
   const isRequired = (countryConfig, field) => {
     return countryConfig[field];
   };
+
+  const addressTitle = intl.formatMessage({
+    id: companyAddress
+      ? 'PayoutDetailsForm.companyAddressTitle'
+      : 'PayoutDetailsForm.streetAddressLabel',
+  });
 
   const showAddressLine = country && isRequired(countryConfig, 'addressLine');
 
@@ -89,7 +95,9 @@ const PayoutDetailsAddress = props => {
   );
 
   return (
-    <div>
+    <div className={css.sectionContainer}>
+      <h3 className={css.subTitle}>{addressTitle}</h3>
+
       {showAddressLine ? (
         <FieldTextInput
           id="streetAddress"

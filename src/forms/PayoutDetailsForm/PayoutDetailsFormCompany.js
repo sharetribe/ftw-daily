@@ -78,13 +78,13 @@ const PayoutDetailsFormCompanyComponent = ({ fieldRenderProps }) => {
             </div>
           </div>
 
-          <div className={css.sectionContainer}>
-            <h3 className={css.subTitle}>
-              <FormattedMessage id="PayoutDetailsForm.companyAddressTitle" />
-            </h3>
-
-            <PayoutDetailsAddress country={country} intl={intl} disabled={disabled} form={form} />
-          </div>
+          <PayoutDetailsAddress
+            country={country}
+            intl={intl}
+            disabled={disabled}
+            form={form}
+            companyAddress
+          />
 
           <div className={css.sectionContainer}>
             <h3 className={css.subTitle}>
