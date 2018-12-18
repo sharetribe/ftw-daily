@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName, findRouteByRouteName } from '../../util/routes';
-import { propTypes } from '../../util/types';
+import { propTypes, LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
 import { ensureListing, ensureUser, ensureTransaction, ensureBooking } from '../../util/data';
 import { dateFromLocalToAPI } from '../../util/dates';
 import { createSlug } from '../../util/urlHelpers';
@@ -19,6 +19,7 @@ import {
   isTransactionZeroPaymentError,
   transactionInitiateOrderStripeErrors,
 } from '../../util/errors';
+import { formatMoney } from '../../util/currency';
 import {
   AvatarMedium,
   BookingBreakdown,
@@ -163,6 +164,8 @@ export class CheckoutPageComponent extends Component {
       bookingEnd: speculatedTransaction.booking.attributes.end,
     };
 
+    // if an enquired transactioni is available, use that as basis
+    // otherwise initiate a new transaction
     const initiateRequest = enquiredTransaction
       ? sendOrderRequestAfterEnquiry(enquiredTransaction.id, requestParams)
       : sendOrderRequest(requestParams, initialMessage);
@@ -385,6 +388,20 @@ export class CheckoutPageComponent extends Component {
       </div>
     );
 
+    const unitType = config.bookingUnitType;
+    const isNightly = unitType === LINE_ITEM_NIGHT;
+    const isDaily = unitType === LINE_ITEM_DAY;
+
+    const unitTranslationKey = isNightly
+      ? 'CheckoutPage.perNight'
+      : isDaily
+      ? 'CheckoutPage.perDay'
+      : 'CheckoutPage.perUnit';
+
+    const price = currentListing.attributes.price;
+    const formattedPrice = formatMoney(intl, price);
+    const detailsSubTitle = `${formattedPrice} ${intl.formatMessage({ id: unitTranslationKey })}`;
+
     const showInitialMessageInput = !enquiredTransaction;
 
     const pageProps = { title, scrollingDisabled };
@@ -466,12 +483,7 @@ export class CheckoutPageComponent extends Component {
             </div>
             <div className={css.detailsHeadings}>
               <h2 className={css.detailsTitle}>{listingTitle}</h2>
-              <p className={css.detailsSubtitle}>
-                <FormattedMessage
-                  id="CheckoutPage.hostedBy"
-                  values={{ name: currentAuthor.attributes.profile.displayName }}
-                />
-              </p>
+              <p className={css.detailsSubtitle}>{detailsSubTitle}</p>
             </div>
             <h3 className={css.bookingBreakdownTitle}>
               <FormattedMessage id="CheckoutPage.priceBreakdownTitle" />
