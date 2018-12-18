@@ -18,6 +18,8 @@ way to update this template, but currently, we follow a pattern:
   [#985](https://github.com/sharetribe/flex-template-web/pull/985)
 - [remove] Remove the default built-in email templates. Built-in email templates can be edited in
   Console. [#983](https://github.com/sharetribe/flex-template-web/pull/983)
+- [add] Enable booking a listing straight from an enquiry
+  [#976](https://github.com/sharetribe/flex-template-web/pull/976)
 - [change] Extract SectionBooking to a distinct component from ListingPage.
   [#969](https://github.com/sharetribe/flex-template-web/pull/969)
 
