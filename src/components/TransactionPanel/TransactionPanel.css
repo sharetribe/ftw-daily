@@ -73,9 +73,11 @@
 }
 
 .avatarWrapperCustomerDesktop {
+  display: none;
   composes: avatarWrapperMobile;
 
   @media (--viewportLarge) {
+    display: block;
     margin-left: 48px;
   }
 }
@@ -171,25 +173,26 @@
 }
 
 .detailCard {
-  display: none;
-
-  position: sticky;
-  top: -200px; /* This is a hack to showcase how the component would look when the image isn't sticky */
-  width: 409px;
-  background-color: var(--matterColorLight);
-  border: 1px solid var(--matterColorNegative);
-  border-radius: 2px;
-
   @media (--viewportLarge) {
-    display: block;
+    position: sticky;
+    top: -200px; /* This is a hack to showcase how the component would look when the image isn't sticky */
+    width: 409px;
+    background-color: var(--matterColorLight);
+    border: 1px solid var(--matterColorNegative);
+    border-radius: 2px;
   }
 }
 
 .detailCardImageWrapper {
+  display: none;
+
   /* Layout */
-  display: block;
   width: 100%;
   position: relative;
+
+  @media (--viewportLarge) {
+    display: block;
+  }
 }
 
 .detailCardHeadings {
