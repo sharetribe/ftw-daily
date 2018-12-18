@@ -185,24 +185,20 @@ export class TransactionPanelComponent extends Component {
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
     const actionButtonClasses = classNames(css.actionButtons);
-    const canShowActionButtons = canShowSaleButtons;
 
-    let actionButtons = null;
-    if (canShowSaleButtons) {
-      actionButtons = (
-        <SaleActionButtonsMaybe
-          rootClassName={actionButtonClasses}
-          canShowButtons={canShowSaleButtons}
-          transaction={currentTransaction}
-          acceptInProgress={acceptInProgress}
-          declineInProgress={declineInProgress}
-          acceptSaleError={acceptSaleError}
-          declineSaleError={declineSaleError}
-          onAcceptSale={onAcceptSale}
-          onDeclineSale={onDeclineSale}
-        />
-      );
-    }
+    const saleButtons = (
+      <SaleActionButtonsMaybe
+        rootClassName={actionButtonClasses}
+        canShowButtons={canShowSaleButtons}
+        transaction={currentTransaction}
+        acceptInProgress={acceptInProgress}
+        declineInProgress={declineInProgress}
+        acceptSaleError={acceptSaleError}
+        declineSaleError={declineSaleError}
+        onAcceptSale={onAcceptSale}
+        onDeclineSale={onDeclineSale}
+      />
+    );
 
     const sendMessagePlaceholder = intl.formatMessage(
       { id: 'TransactionPanel.sendMessagePlaceholder' },
@@ -293,8 +289,8 @@ export class TransactionPanelComponent extends Component {
               onBlur={this.onSendMessageFormBlur}
               onSubmit={this.onMessageSubmit}
             />
-            {canShowActionButtons ? (
-              <div className={css.mobileActionButtons}>{actionButtons}</div>
+            {canShowSaleButtons ? (
+              <div className={css.mobileActionButtons}>{saleButtons}</div>
             ) : null}
           </div>
 
@@ -342,8 +338,8 @@ export class TransactionPanelComponent extends Component {
                 transactionRole={transactionRole}
               />
 
-              {canShowActionButtons ? (
-                <div className={css.desktopActionButtons}>{actionButtons}</div>
+              {canShowSaleButtons ? (
+                <div className={css.desktopActionButtons}>{saleButtons}</div>
               ) : null}
             </div>
           </div>
