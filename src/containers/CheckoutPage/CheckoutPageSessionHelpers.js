@@ -53,7 +53,7 @@ export const isValidEnquiredTransaction = transaction => {
   const props = {
     id: id => id instanceof UUID,
     attributes: v => {
-      return typeof v === 'string' && v.lastTransition === TRANSITION_ENQUIRE;
+      return typeof v === 'object' && v.lastTransition === TRANSITION_ENQUIRE;
     },
   };
   return validateProperties(transaction, props);

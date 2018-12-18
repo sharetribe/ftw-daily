@@ -150,7 +150,6 @@ export class CheckoutPageComponent extends Component {
       sendOrderRequest,
       sendOrderRequestAfterEnquiry,
       speculatedTransaction,
-      enquiredTransaction,
       dispatch,
     } = this.props;
 
@@ -164,7 +163,9 @@ export class CheckoutPageComponent extends Component {
       bookingEnd: speculatedTransaction.booking.attributes.end,
     };
 
-    // if an enquired transactioni is available, use that as basis
+    const enquiredTransaction = this.state.pageData.enquiredTransaction;
+
+    // if an enquired transaction is available, use that as basis
     // otherwise initiate a new transaction
     const initiateRequest = enquiredTransaction
       ? sendOrderRequestAfterEnquiry(enquiredTransaction.id, requestParams)
@@ -201,7 +202,6 @@ export class CheckoutPageComponent extends Component {
       speculateTransactionInProgress,
       speculateTransactionError,
       speculatedTransaction,
-      enquiredTransaction,
       initiateOrderError,
       intl,
       params,
@@ -220,7 +220,7 @@ export class CheckoutPageComponent extends Component {
 
     const isLoading = !this.state.dataLoaded || speculateTransactionInProgress;
 
-    const { listing, bookingDates } = this.state.pageData;
+    const { listing, bookingDates, enquiredTransaction } = this.state.pageData;
     const currentTransaction = ensureTransaction(speculatedTransaction, {}, null);
     const currentBooking = ensureBooking(currentTransaction.booking);
     const currentListing = ensureListing(listing);
