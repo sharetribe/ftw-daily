@@ -38,6 +38,9 @@ export const stripeSupportedCountries = [
     accountConfig: {
       iban: true,
     },
+    companyConfig: {
+      personalAddress: true,
+    },
   },
   {
     // Belgium
@@ -50,6 +53,9 @@ export const stripeSupportedCountries = [
     },
     accountConfig: {
       iban: true,
+    },
+    companyConfig: {
+      personalAddress: true,
     },
   },
   {
@@ -80,6 +86,9 @@ export const stripeSupportedCountries = [
     accountConfig: {
       iban: true,
     },
+    companyConfig: {
+      personalAddress: true,
+    },
   },
   {
     // Finland
@@ -92,6 +101,9 @@ export const stripeSupportedCountries = [
     },
     accountConfig: {
       iban: true,
+    },
+    companyConfig: {
+      personalAddress: true,
     },
   },
   {
@@ -106,6 +118,9 @@ export const stripeSupportedCountries = [
     accountConfig: {
       iban: true,
     },
+    companyConfig: {
+      personalAddress: true,
+    },
   },
   {
     // Germany
@@ -118,6 +133,9 @@ export const stripeSupportedCountries = [
     },
     accountConfig: {
       iban: true,
+    },
+    companyConfig: {
+      personalAddress: true,
     },
   },
   {
@@ -134,6 +152,9 @@ export const stripeSupportedCountries = [
       accountNumber: true,
     },
     personalIdNumberRequired: true,
+    companyConfig: {
+      personalAddress: true,
+    },
   },
   {
     // Ireland
@@ -146,6 +167,9 @@ export const stripeSupportedCountries = [
     },
     accountConfig: {
       iban: true,
+    },
+    companyConfig: {
+      personalAddress: true,
     },
   },
   {
@@ -160,6 +184,9 @@ export const stripeSupportedCountries = [
     accountConfig: {
       iban: true,
     },
+    companyConfig: {
+      personalAddress: true,
+    },
   },
   {
     // Luxembourg
@@ -173,6 +200,9 @@ export const stripeSupportedCountries = [
     accountConfig: {
       iban: true,
     },
+    companyConfig: {
+      personalAddress: true,
+    },
   },
   {
     // Netherlands
@@ -185,6 +215,9 @@ export const stripeSupportedCountries = [
     },
     accountConfig: {
       iban: true,
+    },
+    companyConfig: {
+      personalAddress: true,
     },
   },
   {
@@ -212,6 +245,9 @@ export const stripeSupportedCountries = [
     accountConfig: {
       iban: true,
     },
+    companyConfig: {
+      personalAddress: true,
+    },
   },
   {
     // Portugal
@@ -224,6 +260,9 @@ export const stripeSupportedCountries = [
     },
     accountConfig: {
       iban: true,
+    },
+    companyConfig: {
+      personalAddress: true,
     },
   },
   {
@@ -238,6 +277,9 @@ export const stripeSupportedCountries = [
     accountConfig: {
       iban: true,
     },
+    companyConfig: {
+      personalAddress: true,
+    },
   },
   {
     // Sweden
@@ -250,6 +292,9 @@ export const stripeSupportedCountries = [
     },
     accountConfig: {
       iban: true,
+    },
+    companyConfig: {
+      personalAddress: true,
     },
   },
   {
@@ -264,6 +309,9 @@ export const stripeSupportedCountries = [
     accountConfig: {
       iban: true,
     },
+    companyConfig: {
+      personalAddress: true,
+    },
   },
   {
     // United Kingdom
@@ -277,6 +325,9 @@ export const stripeSupportedCountries = [
     accountConfig: {
       sortCode: true,
       accountNumber: true,
+    },
+    companyConfig: {
+      personalAddress: true,
     },
   },
   {

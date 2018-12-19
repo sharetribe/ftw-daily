@@ -2,6 +2,7 @@ import React from 'react';
 import { bool, object, string } from 'prop-types';
 import { FieldSelect, FieldTextInput } from '../../components';
 import * as validators from '../../util/validators';
+import { intlShape } from 'react-intl';
 
 import { stripeCountryConfigs } from './PayoutDetailsForm';
 import css from './PayoutDetailsForm.css';
@@ -23,7 +24,7 @@ const CANADIAN_PROVINCES = [
 ];
 
 const PayoutDetailsAddress = props => {
-  const { country, intl, disabled, form, companyAddress } = props;
+  const { country, intl, disabled, form, fieldId } = props;
   const countryConfig = country ? stripeCountryConfigs(country).addressConfig : null;
 
   const isRequired = (countryConfig, field) => {
@@ -31,9 +32,10 @@ const PayoutDetailsAddress = props => {
   };
 
   const addressTitle = intl.formatMessage({
-    id: companyAddress
-      ? 'PayoutDetailsForm.companyAddressTitle'
-      : 'PayoutDetailsForm.streetAddressLabel',
+    id:
+      fieldId === 'company'
+        ? 'PayoutDetailsForm.companyAddressTitle'
+        : 'PayoutDetailsForm.streetAddressLabel',
   });
 
   const showAddressLine = country && isRequired(countryConfig, 'addressLine');
@@ -100,8 +102,8 @@ const PayoutDetailsAddress = props => {
 
       {showAddressLine ? (
         <FieldTextInput
-          id="streetAddress"
-          name="streetAddress"
+          id={`${fieldId}.streetAddress`}
+          name={`${fieldId}.streetAddress`}
           disabled={disabled}
           className={css.field}
           type="text"
@@ -109,14 +111,14 @@ const PayoutDetailsAddress = props => {
           label={streetAddressLabel}
           placeholder={streetAddressPlaceholder}
           validate={streetAddressRequired}
-          onUnmount={() => form.change('streetAddress', undefined)}
+          onUnmount={() => form.change(`${fieldId}.streetAddress`, undefined)}
         />
       ) : null}
       <div className={css.formRow}>
         {showPostalCode ? (
           <FieldTextInput
-            id="postalCode"
-            name="postalCode"
+            id={`${fieldId}.postalCode`}
+            name={`${fieldId}.postalCode`}
             disabled={disabled}
             className={css.postalCode}
             type="text"
@@ -124,13 +126,13 @@ const PayoutDetailsAddress = props => {
             label={postalCodeLabel}
             placeholder={postalCodePlaceholder}
             validate={postalCodeRequired}
-            onUnmount={() => form.change('postalCode', undefined)}
+            onUnmount={() => form.change(`${fieldId}.postalCode`, undefined)}
           />
         ) : null}
         {showCity ? (
           <FieldTextInput
-            id="city"
-            name="city"
+            id={`${fieldId}.city`}
+            name={`${fieldId}.city`}
             disabled={disabled}
             className={css.city}
             type="text"
@@ -138,14 +140,14 @@ const PayoutDetailsAddress = props => {
             label={cityLabel}
             placeholder={cityPlaceholder}
             validate={cityRequired}
-            onUnmount={() => form.change('city', undefined)}
+            onUnmount={() => form.change(`${fieldId}.city`, undefined)}
           />
         ) : null}
       </div>
       {showState ? (
         <FieldTextInput
-          id="state"
-          name="state"
+          id={`${fieldId}.state`}
+          name={`${fieldId}.state`}
           disabled={disabled}
           className={css.state}
           type="text"
@@ -153,14 +155,14 @@ const PayoutDetailsAddress = props => {
           label={stateLabel}
           placeholder={statePlaceholder}
           validate={stateRequired}
-          onUnmount={() => form.change('state', undefined)}
+          onUnmount={() => form.change(`${fieldId}.state`, undefined)}
         />
       ) : null}
 
       {showProvince ? (
         <FieldSelect
-          id="province"
-          name="province"
+          id={`${fieldId}.province`}
+          name={`${fieldId}.province`}
           disabled={disabled}
           className={css.selectCountry}
           autoComplete="province"
@@ -183,12 +185,17 @@ const PayoutDetailsAddress = props => {
 PayoutDetailsAddress.defaultProps = {
   country: null,
   disabled: false,
+  fieldId: null,
 };
 
 PayoutDetailsAddress.propTypes = {
   country: string,
   disabled: bool,
   form: object.isRequired,
+  fieldId: string,
+
+  // from injectIntl
+  intl: intlShape.isRequired,
 };
 
 export default PayoutDetailsAddress;

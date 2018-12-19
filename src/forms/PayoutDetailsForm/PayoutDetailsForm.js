@@ -93,6 +93,8 @@ const PayoutDetailsFormComponent = props => (
         </ExternalLink>
       );
 
+      console.log('Values', JSON.stringify(values, null, ' '));
+
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           <div className={css.sectionContainer}>
@@ -142,9 +144,12 @@ const PayoutDetailsFormComponent = props => (
               </div>
 
               {showIndividual ? (
-                <PayoutDetailsFormIndividual fieldRenderProps={fieldRenderProps} />
+                <PayoutDetailsFormIndividual
+                  fieldRenderProps={fieldRenderProps}
+                  country={country}
+                />
               ) : showCompany ? (
-                <PayoutDetailsFormCompany fieldRenderProps={fieldRenderProps} />
+                <PayoutDetailsFormCompany fieldRenderProps={fieldRenderProps} country={country} />
               ) : null}
 
               {error}

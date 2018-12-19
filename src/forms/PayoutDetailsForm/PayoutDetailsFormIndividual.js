@@ -19,7 +19,13 @@ const PayoutDetailsFormIndividualComponent = ({ fieldRenderProps }) => {
         values={values}
         country={country}
       />
-      <PayoutDetailsAddress country={country} intl={intl} disabled={disabled} form={form} />
+      <PayoutDetailsAddress
+        country={country}
+        intl={intl}
+        disabled={disabled}
+        form={form}
+        fieldId="individual"
+      />
       <PayoutDetailsBankDetails country={country} disabled={disabled} />
     </React.Fragment>
   );

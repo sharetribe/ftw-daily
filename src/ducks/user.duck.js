@@ -389,31 +389,49 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
 
   dispatch(stripeAccountCreateRequest());
 
+  const { accountType, country } = payoutDetails;
+
+  let payoutDetailValues;
+  if (accountType === 'company') {
+    payoutDetailValues = payoutDetails['company'];
+  } else if (accountType === 'individual') {
+    payoutDetailValues = payoutDetails['individual'];
+  }
+
   const {
     firstName,
     lastName,
     birthDate,
-    country,
-    streetAddress,
-    postalCode,
-    city,
-    state,
-    province,
+    address,
     bankAccountToken,
     personalIdNumber,
-    accountType,
     companyName,
     companyTaxId,
-  } = payoutDetails;
+    personalAddress,
+  } = payoutDetailValues;
 
-  const hasProvince = province && !state;
+  const hasProvince = address.province && !address.state;
 
-  const address = {
-    city,
-    line1: streetAddress,
-    postal_code: postalCode,
-    state: hasProvince ? province : state,
+  const addressValue = {
+    city: address.city,
+    line1: address.streetAddress,
+    postal_code: address.postalCode,
+    state: hasProvince ? address.province : address.state ? address.state : '',
   };
+
+  let personalAddressValue;
+  if (personalAddress) {
+    personalAddressValue = {
+      city: personalAddress.city,
+      line1: personalAddress.streetAddress,
+      postal_code: personalAddress.postalCode,
+      state: hasProvince
+        ? personalAddress.province
+        : personalAddress.state
+        ? personalAddress.state
+        : '',
+    };
+  }
 
   const idNumber =
     country === 'US' ? { ssn_last_4: personalIdNumber } : { personal_id_number: personalIdNumber };
@@ -423,18 +441,19 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
     legal_entity: {
       first_name: firstName,
       last_name: lastName,
-      address: omitBy(address, isUndefined),
+      address: omitBy(addressValue, isUndefined),
       dob: birthDate,
       type: accountType,
       business_name: companyName,
       business_tax_id: companyTaxId,
+      personal_address: personalAddressValue,
       ...idNumber,
     },
     tos_shown_and_accepted: true,
   };
 
   let accountResponse;
-
+  
   return stripe
     .createToken('account', params)
     .then(response => {

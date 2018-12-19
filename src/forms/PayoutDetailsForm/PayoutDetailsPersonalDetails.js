@@ -3,6 +3,7 @@ import { bool, string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { FieldBirthdayInput, FieldTextInput } from '../../components';
 import * as validators from '../../util/validators';
+import { intlShape } from 'react-intl';
 
 import { stripeCountryConfigs } from './PayoutDetailsForm';
 import css from './PayoutDetailsForm.css';
@@ -10,7 +11,7 @@ import css from './PayoutDetailsForm.css';
 const MIN_STRIPE_ACCOUNT_AGE = 18;
 
 const PayoutDetailsPersonalDetails = props => {
-  const { intl, disabled, values, country } = props;
+  const { intl, disabled, values, country, fieldId } = props;
 
   const firstNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.firstNameLabel' });
   const firstNamePlaceholder = intl.formatMessage({
@@ -104,8 +105,8 @@ const PayoutDetailsPersonalDetails = props => {
       </h3>
       <div className={css.formRow}>
         <FieldTextInput
-          id="fname"
-          name="fname"
+          id={`${fieldId}.firstName`}
+          name={`${fieldId}.firstName`}
           disabled={disabled}
           className={css.firstName}
           type="text"
@@ -115,8 +116,8 @@ const PayoutDetailsPersonalDetails = props => {
           validate={firstNameRequired}
         />
         <FieldTextInput
-          id="lname"
-          name="lname"
+          id={`${fieldId}.lastName`}
+          name={`${fieldId}.lastName`}
           disabled={disabled}
           className={css.lastName}
           type="text"
@@ -128,8 +129,8 @@ const PayoutDetailsPersonalDetails = props => {
       </div>
       <div className={css.formRow}>
         <FieldBirthdayInput
-          id="birthDate"
-          name="birthDate"
+          id={`${fieldId}.birthDate`}
+          name={`${fieldId}.birthDate`}
           disabled={disabled}
           className={css.field}
           label={birthdayLabel}
@@ -143,8 +144,8 @@ const PayoutDetailsPersonalDetails = props => {
 
       {showPersonalIdNumber ? (
         <FieldTextInput
-          id="personalIdNumber"
-          name="personalIdNumber"
+          id={`${fieldId}.personalIdNumber`}
+          name={`${fieldId}.personalIdNumber`}
           disabled={disabled}
           className={css.personalIdNumber}
           type="text"
@@ -159,11 +160,14 @@ const PayoutDetailsPersonalDetails = props => {
 PayoutDetailsPersonalDetails.defaultProps = {
   country: null,
   disabled: false,
+  fieldId: null,
 };
 
 PayoutDetailsPersonalDetails.propTypes = {
   country: string,
   disabled: bool,
+  fieldId: string,
+  intl: intlShape.isRequired,
 };
 
 export default PayoutDetailsPersonalDetails;
