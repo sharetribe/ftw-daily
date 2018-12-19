@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { intlShape, injectIntl } from 'react-intl';
-import { arrayOf, bool, func, object, oneOfType, shape, string } from 'prop-types';
+import { arrayOf, bool, func, node, oneOfType, shape, string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
@@ -168,8 +168,8 @@ BookingPanel.propTypes = {
   isOwnListing: bool,
   unitType: propTypes.bookingUnitType,
   handleBookingSubmit: func.isRequired,
-  title: oneOfType([object, string]).isRequired,
-  subTitle: oneOfType([object, string]),
+  title: oneOfType([node, string]).isRequired,
+  subTitle: oneOfType([node, string]),
   authorDisplayName: string.isRequired,
   onManageDisableScrolling: func.isRequired,
   timeSlots: arrayOf(propTypes.timeSlot),
