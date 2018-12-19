@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import omit from 'lodash/omit';
 import { ModalInMobile, Button } from '../../components';
 import { BookingDatesForm } from '../../forms';
-import { propTypes, LISTING_STATE_CLOSED } from '../../util/types';
+import { propTypes, LISTING_STATE_CLOSED, LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { parse, stringify } from '../../util/urlHelpers';
 import config from '../../config';
@@ -79,6 +79,15 @@ const BookingPanel = props => {
     ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
     : null;
 
+  const isNightly = unitType === LINE_ITEM_NIGHT;
+  const isDaily = unitType === LINE_ITEM_DAY;
+
+  const unitTranslationKey = isNightly
+    ? 'BookingPanel.perNight'
+    : isDaily
+    ? 'BookingPanel.perDay'
+    : 'BookingPanel.perUnit';
+
   const classes = classNames(rootClassName || css.root, className);
 
   return (
@@ -121,7 +130,7 @@ const BookingPanel = props => {
             {formattedPrice}
           </div>
           <div className={css.perUnit}>
-            <FormattedMessage id="BookingPanel.perUnit" />
+            <FormattedMessage id={unitTranslationKey} />
           </div>
         </div>
 
