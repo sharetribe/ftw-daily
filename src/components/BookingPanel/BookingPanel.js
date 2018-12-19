@@ -6,12 +6,12 @@ import { arrayOf, bool, func, node, oneOfType, shape, string } from 'prop-types'
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
-import { ModalInMobile, Button } from '../../components';
-import { BookingDatesForm } from '../../forms';
 import { propTypes, LISTING_STATE_CLOSED, LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { parse, stringify } from '../../util/urlHelpers';
 import config from '../../config';
+import { ModalInMobile, Button } from '../../components';
+import { BookingDatesForm } from '../../forms';
 
 import css from './BookingPanel.css';
 
