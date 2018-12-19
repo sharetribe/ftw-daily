@@ -1,7 +1,7 @@
 # Mail templates
 
-This directory contains the default templates for all mails sent by default as result of activity in
-the marketplace.
+This directory contains the default templates for transaction emails.
+Built-in email templates can be edited in Console.
 
 Before making customizations, copy the templates to another directory (e.g. `mail-templates`). Note
 that, at present, changes made to the template files in this repository will not take effect
@@ -34,6 +34,11 @@ Example html:
     <p>If you didn&#x27;t make this change, please contact us.</p>
 
     <p>Best regards,<br />The {{marketplace.name}} team</p>
+
+    <hr />
+
+    <p>You have received this email notification because you are a member of {{marketplace.name}}.
+     If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
   </body>
 </html>
 ```
@@ -47,40 +52,6 @@ The template syntax supports conditionals, loops, helpers and other constructs. 
 
 ## List of templates
 
-### Built-in event mails
-
-#### email-changed
-
-Sent to a user when their registered email address has been successfully changed.
-
-#### new-message
-
-Sent to a user when the other party in a transaction has sent them a new message.
-
-#### password-changed
-
-Sent to a user when their account's password was successfully changed.
-
-#### reset-password
-
-Sent to a user when a request for resetting their password is received. The mail contains a link
-with password reset token and instructs the user to complete the password reset.
-
-#### verify-changed-email-address
-
-Sent to a user when they have requested to change their registered email address. The mail contains
-an email verification link and instructs the user how to verify their email address.
-
-#### verify-email-address
-
-Sent to a user after they sign up for an account in the marketplace and instructs them to verify
-their email address.
-
-#### user-joined
-
-Sent to a new marketplace user after they verify their email address.
-
-### Transaction engine mails
 
 The templates in the list below correspond to mails defined in the default transaction process.
 Customized transaction processes can have different set of mail templates.

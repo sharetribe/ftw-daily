@@ -21,20 +21,20 @@
         </tr>
       </thead>
       <tbody>
-      {{#each line-items}}
+      {{#each tx-line-items}}
         {{#contains include-for "provider"}}
           <tr>
-            {{#eq "day" code}}
+            {{#eq "line-item/day" code}}
             <td>{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "day" "days"}}</td>
             <td style="text-align: right; padding-left: 20px">{{> format-money money=line-total}}</td>
             {{/eq}}
 
-            {{#eq "night" code}}
+            {{#eq "line-item/night" code}}
             <td>{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "night" "nights"}}</td>
             <td style="text-align: right; padding-left: 20px">{{> format-money money=line-total}}</td>
             {{/eq}}
 
-            {{#eq "provider-commission" code}}
+            {{#eq "line-item/provider-commission" code}}
             <td>{{marketplace.name}} fee:</td>
             <td style="text-align: right; padding-left: 20px;">{{> format-money money=line-total}}</td>
             {{/eq}}
@@ -55,5 +55,9 @@
     <p><a href="{{marketplace.url}}/sale/{{url-encode id}}/details">Accept or decline the booking</a></p>
 
     {{/with}}
+
+    <hr />
+
+    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
   </body>
 </html>
