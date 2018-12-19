@@ -401,6 +401,9 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
     province,
     bankAccountToken,
     personalIdNumber,
+    accountType,
+    companyName,
+    companyTaxId,
   } = payoutDetails;
 
   const hasProvince = province && !state;
@@ -422,7 +425,9 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
       last_name: lastName,
       address: omitBy(address, isUndefined),
       dob: birthDate,
-      type: 'individual',
+      type: accountType,
+      business_name: companyName,
+      business_tax_id: companyTaxId,
       ...idNumber,
     },
     tos_shown_and_accepted: true,
