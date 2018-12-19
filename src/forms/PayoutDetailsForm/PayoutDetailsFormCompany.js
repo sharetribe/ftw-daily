@@ -24,14 +24,26 @@ const PayoutDetailsFormCompanyComponent = ({ fieldRenderProps }) => {
     })
   );
 
-  const companyTaxIdLabel = intl.formatMessage({ id: 'PayoutDetailsForm.companyTaxIdLabel' });
-  const companyTaxIdPlaceholder = intl.formatMessage({
-    id: 'PayoutDetailsForm.companyTaxIdPlaceholder',
+  const companyTaxIdLabel = intl.formatMessage({
+    id: `PayoutDetailsForm.companyTaxIdLabel.${country}`,
   });
+  const companyTaxIdPlaceholder = intl.formatMessage(
+    {
+      id: 'PayoutDetailsForm.companyTaxIdPlaceholder',
+    },
+    {
+      idName: companyTaxIdLabel,
+    }
+  );
   const companyTaxIdRequired = validators.required(
-    intl.formatMessage({
-      id: 'PayoutDetailsForm.companyTaxIdRequired',
-    })
+    intl.formatMessage(
+      {
+        id: 'PayoutDetailsForm.companyTaxIdRequired',
+      },
+      {
+        idName: companyTaxIdLabel,
+      }
+    )
   );
 
   return (
@@ -41,31 +53,29 @@ const PayoutDetailsFormCompanyComponent = ({ fieldRenderProps }) => {
           <div className={css.sectionContainer}>
             <h3 className={css.subTitle}>
               <FormattedMessage id="PayoutDetailsForm.companyDetailsTitle" />
-            </h3>
-            <div className={css.formRow}>
+            </h3>     
               <FieldTextInput
                 id="companyName"
                 name="companyName"
                 disabled={disabled}
-                className={css.firstName}
                 type="text"
                 autoComplete="company-name"
                 label={companyNameLabel}
                 placeholder={companyNamePlaceholder}
                 validate={companyNameRequired}
               />
+
               <FieldTextInput
                 id="companyTaxId"
                 name="companyTaxId"
+                className={css.taxId}
                 disabled={disabled}
-                className={css.lastName}
                 type="text"
                 autoComplete="company-tax-id"
                 label={companyTaxIdLabel}
                 placeholder={companyTaxIdPlaceholder}
                 validate={companyTaxIdRequired}
               />
-            </div>
           </div>
 
           <PayoutDetailsAddress
