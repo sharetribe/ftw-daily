@@ -69,8 +69,11 @@ When deploying to Heroku you should use a forked repository. This makes it possi
 [manual deploys](https://devcenter.heroku.com/articles/github-integration#manual-deploys) after
 changes to environment variables.
 
-If you haven't done this already see
-[Customization guide](./customization-guide.md#fork-the-repository) for more instructions.
+If you haven't done this already, you just need to click the "Fork" button on the top-right corner
+of the page: <img width="300" src="./assets/deploying-to-production/fork_button.png" />
+
+Read more from [Customization guide](./customization-guide.md#fork-the-repository) for more
+instructions.
 
 ### Creating a new app
 
