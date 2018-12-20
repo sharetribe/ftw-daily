@@ -310,13 +310,12 @@
 
   @media (--viewportLarge) {
     margin-top: 17px;
-    margin-bottom: 0;
+    margin-bottom: 9px;
   }
 }
 
 .detailsSubtitle {
   @apply --marketplaceH5FontStyles;
-  color: var(--matterColorAnti);
 
   /* Reset margins from font styles */
   margin-top: 0;
@@ -336,7 +335,7 @@
   margin: 5px 24px 25px 24px;
 
   @media (--viewportLarge) {
-    margin: 38px 48px 26px 48px;
+    margin: 37px 48px 26px 48px;
   }
 }
 

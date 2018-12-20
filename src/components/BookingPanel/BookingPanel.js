@@ -55,7 +55,7 @@ const BookingPanel = props => {
     listing,
     isOwnListing,
     unitType,
-    handleBookingSubmit,
+    onSubmit,
     title,
     subTitle,
     authorDisplayName,
@@ -116,7 +116,7 @@ const BookingPanel = props => {
             className={css.bookingForm}
             submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
             unitType={unitType}
-            onSubmit={handleBookingSubmit}
+            onSubmit={onSubmit}
             price={price}
             isOwnListing={isOwnListing}
             timeSlots={timeSlots}
@@ -167,7 +167,7 @@ BookingPanel.propTypes = {
   listing: propTypes.listing.isRequired,
   isOwnListing: bool,
   unitType: propTypes.bookingUnitType,
-  handleBookingSubmit: func.isRequired,
+  onSubmit: func.isRequired,
   title: oneOfType([node, string]).isRequired,
   subTitle: oneOfType([node, string]),
   authorDisplayName: string.isRequired,

@@ -90,6 +90,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
           inProgress={false}
           onSubmit={[Function]}
           paymentInfo="CheckoutPage.paymentInfo"
+          showInitialMessageInput={true}
         />
       </section>
     </div>
@@ -134,14 +135,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
           listing1 title
         </h2>
         <p>
-          <FormattedMessage
-            id="CheckoutPage.hostedBy"
-            values={
-              Object {
-                "name": "author display name",
-              }
-            }
-          />
+          55 CheckoutPage.perNight
         </p>
       </div>
       <h3>

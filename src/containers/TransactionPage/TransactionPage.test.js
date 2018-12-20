@@ -38,6 +38,7 @@ describe('TransactionPage - Sale', () => {
       onAcceptSale: noop,
       onDeclineSale: noop,
       scrollingDisabled: false,
+      useInitialValues: noop,
       transaction,
       totalMessages: 0,
       totalMessagePages: 0,
@@ -48,6 +49,15 @@ describe('TransactionPage - Sale', () => {
       onSendMessage: noop,
       onResetForm: noop,
       intl: fakeIntl,
+
+      location: {
+        pathname: `/sale/${txId}/details`,
+        search: '',
+        hash: '',
+      },
+      history: {
+        push: () => console.log('HistoryPush called'),
+      },
     };
 
     const tree = renderShallow(<TransactionPageComponent {...props} />);
@@ -82,6 +92,7 @@ describe('TransactionPage - Order', () => {
       fetchMessagesInProgress: false,
       sendMessageInProgress: false,
       scrollingDisabled: false,
+      useInitialValues: noop,
       transaction,
       onShowMoreMessages: noop,
       onSendMessage: noop,
@@ -92,6 +103,15 @@ describe('TransactionPage - Order', () => {
       declineInProgress: false,
       onAcceptSale: noop,
       onDeclineSale: noop,
+
+      location: {
+        pathname: `/order/${txId}/details`,
+        search: '',
+        hash: '',
+      },
+      history: {
+        push: () => console.log('HistoryPush called'),
+      },
     };
 
     const tree = renderShallow(<TransactionPageComponent {...props} />);

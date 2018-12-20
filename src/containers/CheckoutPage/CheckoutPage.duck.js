@@ -2,7 +2,7 @@ import pick from 'lodash/pick';
 import config from '../../config';
 import { denormalisedResponseEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
-import { TRANSITION_REQUEST } from '../../util/types';
+import { TRANSITION_REQUEST, TRANSITION_REQUEST_AFTER_ENQUIRY } from '../../util/types';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess } from '../../ducks/user.duck';
 
@@ -27,6 +27,7 @@ const initialState = {
   speculateTransactionInProgress: false,
   speculateTransactionError: null,
   speculatedTransaction: null,
+  enquiredTransaction: null,
   initiateOrderError: null,
 };
 
@@ -137,6 +138,43 @@ export const initiateOrder = (orderParams, initialMessage) => (dispatch, getStat
     .catch(e => {
       dispatch(initiateOrderError(storableError(e)));
       log.error(e, 'initiate-order-failed', {
+        listingId: orderParams.listingId.uuid,
+        bookingStart: orderParams.bookingStart,
+        bookingEnd: orderParams.bookingEnd,
+      });
+      throw e;
+    });
+};
+
+/**
+ * Initiate an order after an enquiry. Transitions previously created transaction.
+ */
+export const initiateOrderAfterEnquiry = (transactionId, orderParams) => (
+  dispatch,
+  getState,
+  sdk
+) => {
+  dispatch(initiateOrderRequest());
+
+  const bodyParams = {
+    id: transactionId,
+    transition: TRANSITION_REQUEST_AFTER_ENQUIRY,
+    params: orderParams,
+  };
+
+  return sdk.transactions
+    .transition(bodyParams)
+    .then(response => {
+      const orderId = response.data.data.id;
+      dispatch(initiateOrderSuccess(orderId));
+      dispatch(fetchCurrentUserHasOrdersSuccess(true));
+      // set initialMessageSuccess to true to unify promise handling with initiateOrder
+      return Promise.resolve({ orderId, initialMessageSuccess: true });
+    })
+    .catch(e => {
+      dispatch(initiateOrderError(storableError(e)));
+      log.error(e, 'initiate-order-failed', {
+        transactionId: transactionId.uuid,
         listingId: orderParams.listingId.uuid,
         bookingStart: orderParams.bookingStart,
         bookingEnd: orderParams.bookingEnd,

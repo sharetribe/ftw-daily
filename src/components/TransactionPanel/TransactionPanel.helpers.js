@@ -18,6 +18,7 @@ import { createSlug, stringify } from '../../util/urlHelpers';
 import {
   ActivityFeed,
   BookingBreakdown,
+  BookingPanel,
   ExternalLink,
   NamedLink,
   PrimaryButton,
@@ -89,7 +90,6 @@ export const FeedSection = props => {
 export const AddressLinkMaybe = props => {
   const { transaction, transactionRole, currentListing } = props;
 
-  const isProvider = transactionRole === 'provider';
   const isCustomer = transactionRole === 'customer';
   const txIsAcceptedForCustomer = isCustomer && txHasBeenAccepted(transaction);
 
@@ -106,7 +106,7 @@ export const AddressLinkMaybe = props => {
   const fullAddress =
     typeof building === 'string' && building.length > 0 ? `${building}, ${address}` : address;
 
-  return (isProvider || txIsAcceptedForCustomer) && hrefToGoogleMaps ? (
+  return txIsAcceptedForCustomer && hrefToGoogleMaps ? (
     <p className={css.address}>
       <ExternalLink href={hrefToGoogleMaps}>{fullAddress}</ExternalLink>
     </p>
@@ -115,17 +115,19 @@ export const AddressLinkMaybe = props => {
 
 // Functional component as a helper to build BookingBreakdown
 export const BreakdownMaybe = props => {
-  const { className, rootClassName, transaction, transactionRole } = props;
+  const { className, rootClassName, breakdownClassName, transaction, transactionRole } = props;
   const loaded = transaction && transaction.id && transaction.booking && transaction.booking.id;
 
-  const classes = classNames(rootClassName || css.breakdown, className);
+  const classes = classNames(rootClassName || className);
+  const breakdownClasses = classNames(css.breakdown, breakdownClassName);
+
   return loaded ? (
-    <div>
+    <div className={classes}>
       <h3 className={css.bookingBreakdownTitle}>
         <FormattedMessage id="TransactionPanel.bookingBreakdownTitle" />
       </h3>
       <BookingBreakdown
-        className={classes}
+        className={breakdownClasses}
         userRole={transactionRole}
         unitType={config.bookingUnitType}
         transaction={transaction}
@@ -152,16 +154,62 @@ const createListingLink = (listing, label, searchParams = {}, className = '') =>
   }
 };
 
-// Functional component as a helper to build ActionButtons for
-// provider when state is preauthorized
-export const OrderActionButtonMaybe = props => {
-  const { className, rootClassName, canShowButtons, listing } = props;
+// Functional component as a helper to build detail card headings
+export const DetailCardHeadingsMaybe = props => {
+  const { transaction, transactionRole, listing, listingTitle, subTitle } = props;
 
-  const title = <FormattedMessage id="TransactionPanel.requestToBook" />;
-  const listingLink = createListingLink(listing, title, { book: true }, css.requestToBookButton);
-  const classes = classNames(rootClassName || css.actionButtons, className);
+  const isCustomer = transactionRole === 'customer';
+  const canShowDetailCardHeadings = isCustomer && !txIsEnquired(transaction);
 
-  return canShowButtons ? <div className={classes}>{listingLink}</div> : null;
+  return canShowDetailCardHeadings ? (
+    <div className={css.detailCardHeadings}>
+      <h2 className={css.detailCardTitle}>{listingTitle}</h2>
+      <p className={css.detailCardSubtitle}>{subTitle}</p>
+      <AddressLinkMaybe
+        transaction={transaction}
+        transactionRole={transactionRole}
+        currentListing={listing}
+      />
+    </div>
+  ) : null;
+};
+
+// Functional component as a helper to build a BookingPanel
+export const BookingPanelMaybe = props => {
+  const {
+    authorDisplayName,
+    transaction,
+    transactionRole,
+    listing,
+    listingTitle,
+    subTitle,
+    provider,
+    onSubmit,
+    onManageDisableScrolling,
+    timeSlots,
+    fetchTimeSlotsError,
+  } = props;
+
+  const isProviderLoaded = !!provider.id;
+  const isProviderBanned = isProviderLoaded && provider.attributes.banned;
+  const isCustomer = transactionRole === 'customer';
+  const canShowBookingPanel = isCustomer && txIsEnquired(transaction) && !isProviderBanned;
+
+  return canShowBookingPanel ? (
+    <BookingPanel
+      className={css.bookingPanel}
+      isOwnListing={false}
+      listing={listing}
+      handleBookingSubmit={() => console.log('submit')}
+      title={listingTitle}
+      subTitle={subTitle}
+      authorDisplayName={authorDisplayName}
+      onSubmit={onSubmit}
+      onManageDisableScrolling={onManageDisableScrolling}
+      timeSlots={timeSlots}
+      fetchTimeSlotsError={fetchTimeSlotsError}
+    />
+  ) : null;
 };
 
 // Functional component as a helper to build ActionButtons for

@@ -108,6 +108,7 @@ describe('TransactionPanel - Sale', () => {
     onSendMessage: noop,
     onSendReview: noop,
     onResetForm: noop,
+    onSubmitBookingRequest: noop,
     intl: fakeIntl,
   };
 
@@ -276,6 +277,7 @@ describe('TransactionPanel - Order', () => {
     onDeclineSale: noop,
     acceptInProgress: false,
     declineInProgress: false,
+    onSubmitBookingRequest: noop,
   };
 
   it('enquired matches snapshot', () => {

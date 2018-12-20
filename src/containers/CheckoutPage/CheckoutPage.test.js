@@ -59,6 +59,7 @@ describe('CheckoutPage', () => {
         speculateTransactionError: null,
         speculateTransactionInProgress: false,
         speculatedTransaction: null,
+        enquiredTransaction: null,
       };
 
       it('should return the initial state', () => {

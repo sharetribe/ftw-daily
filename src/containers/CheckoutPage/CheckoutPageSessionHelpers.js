@@ -7,6 +7,7 @@
 import moment from 'moment';
 import reduce from 'lodash/reduce';
 import { types as sdkTypes } from '../../util/sdkLoader';
+import { TRANSITION_ENQUIRE } from '../../util/types';
 
 const { UUID, Money } = sdkTypes;
 
@@ -46,8 +47,20 @@ export const isValidListing = listing => {
   return validateProperties(listing, props);
 };
 
+// Validate content of an enquired transaction received from SessionStore.
+// An id is required and the last transition needs to be the enquire transition.
+export const isValidEnquiredTransaction = transaction => {
+  const props = {
+    id: id => id instanceof UUID,
+    attributes: v => {
+      return typeof v === 'object' && v.lastTransition === TRANSITION_ENQUIRE;
+    },
+  };
+  return validateProperties(transaction, props);
+};
+
 // Stores given bookingDates and listing to sessionStorage
-export const storeData = (bookingData, bookingDates, listing, storageKey) => {
+export const storeData = (bookingData, bookingDates, listing, enquiredTransaction, storageKey) => {
   if (window && window.sessionStorage && listing && bookingDates && bookingData) {
     // TODO: How should we deal with Dates when data is serialized?
     // Hard coded serializable date objects atm.
@@ -59,6 +72,7 @@ export const storeData = (bookingData, bookingDates, listing, storageKey) => {
         bookingEnd: { date: bookingDates.bookingEnd, _serializedType: 'SerializableDate' },
       },
       listing,
+      enquiredTransaction,
       storedAt: { date: new Date(), _serializedType: 'SerializableDate' },
     };
     /* eslint-enable no-underscore-dangle */
@@ -83,7 +97,7 @@ export const storedData = storageKey => {
       return sdkTypes.reviver(k, v);
     };
 
-    const { bookingData, bookingDates, listing, storedAt } = checkoutPageData
+    const { bookingData, bookingDates, listing, enquiredTransaction, storedAt } = checkoutPageData
       ? JSON.parse(checkoutPageData, reviver)
       : {};
 
@@ -92,8 +106,19 @@ export const storedData = storageKey => {
       ? moment(storedAt).isAfter(moment().subtract(1, 'days'))
       : false;
 
-    if (isFreshlySaved && isValidBookingDates(bookingDates) && isValidListing(listing)) {
-      return { bookingData, bookingDates, listing };
+    // resolve enquired transaction as valid if it is missing
+    const isEnquiredTransactionValid = !!enquiredTransaction
+      ? isValidEnquiredTransaction(enquiredTransaction)
+      : true;
+
+    const isStoredDataValid =
+      isFreshlySaved &&
+      isValidBookingDates(bookingDates) &&
+      isValidListing(listing) &&
+      isEnquiredTransactionValid;
+
+    if (isStoredDataValid) {
+      return { bookingData, bookingDates, listing, enquiredTransaction };
     }
   }
   return {};

@@ -442,7 +442,7 @@ export class ListingPageComponent extends Component {
                   listing={currentListing}
                   isOwnListing={isOwnListing}
                   unitType={unitType}
-                  handleBookingSubmit={handleBookingSubmit}
+                  onSubmit={handleBookingSubmit}
                   title={bookingTitle}
                   subTitle={bookingSubTitle}
                   authorDisplayName={authorDisplayName}

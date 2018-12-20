@@ -73,9 +73,11 @@
 }
 
 .avatarWrapperCustomerDesktop {
+  display: none;
   composes: avatarWrapperMobile;
 
   @media (--viewportLarge) {
+    display: block;
     margin-left: 48px;
   }
 }
@@ -171,25 +173,27 @@
 }
 
 .detailCard {
-  display: none;
-
-  position: sticky;
-  top: -200px; /* This is a hack to showcase how the component would look when the image isn't sticky */
-  width: 409px;
-  background-color: var(--matterColorLight);
-  border: 1px solid var(--matterColorNegative);
-  border-radius: 2px;
-
   @media (--viewportLarge) {
-    display: block;
+    position: sticky;
+    top: -200px; /* This is a hack to showcase how the component would look when the image isn't sticky */
+    width: 409px;
+    background-color: var(--matterColorLight);
+    border: 1px solid var(--matterColorNegative);
+    border-radius: 2px;
+    z-index: 1;
   }
 }
 
 .detailCardImageWrapper {
+  display: none;
+
   /* Layout */
-  display: block;
   width: 100%;
   position: relative;
+
+  @media (--viewportLarge) {
+    display: block;
+  }
 }
 
 .detailCardHeadings {
@@ -201,10 +205,6 @@
     margin-right: 48px;
     margin-bottom: 37px;
   }
-}
-.detailCardHeadingsProvider {
-  composes: detailCardHeadings;
-  margin-top: 24px;
 }
 
 .detailCardTitle {
@@ -218,13 +218,12 @@
 
 .detailCardSubtitle {
   @apply --marketplaceH5FontStyles;
-  color: var(--matterColorAnti);
 
   margin-top: 0;
   margin-bottom: 0;
 
   @media (--viewportLarge) {
-    margin-top: 1px;
+    margin-top: 9px;
     margin-bottom: 0;
   }
 }
@@ -247,6 +246,14 @@
 
   @media (--viewportLarge) {
     margin: 37px 48px 26px 48px;
+  }
+}
+
+.breakdownContainer {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
   }
 }
 
@@ -407,4 +414,8 @@
     position: absolute;
     top: 151px;
   }
+}
+
+.bookingPanel {
+  margin: 16px 48px 48px 48px;
 }

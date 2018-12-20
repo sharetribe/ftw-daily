@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { txIsEnquired, txIsRequested, propTypes } from '../../util/types';
+import { txIsRequested, LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import { ensureListing, ensureTransaction, ensureUser } from '../../util/data';
 import { isMobileSafari } from '../../util/userAgent';
+import { formatMoney } from '../../util/currency';
 import { AvatarMedium, AvatarLarge, ResponsiveImage, ReviewModal } from '../../components';
 import { SendMessageForm } from '../../forms';
+import config from '../../config';
 
 // These are internal components that make this file more readable.
 import {
   AddressLinkMaybe,
+  BookingPanelMaybe,
   BreakdownMaybe,
+  DetailCardHeadingsMaybe,
   FeedSection,
-  OrderActionButtonMaybe,
   SaleActionButtonsMaybe,
   TransactionPageTitle,
   TransactionPageMessage,
@@ -128,6 +131,9 @@ export class TransactionPanelComponent extends Component {
       declineInProgress,
       acceptSaleError,
       declineSaleError,
+      onSubmitBookingRequest,
+      timeSlots,
+      fetchTimeSlotsError,
     } = this.props;
 
     const currentTransaction = ensureTransaction(transaction);
@@ -142,9 +148,6 @@ export class TransactionPanelComponent extends Component {
     const customerLoaded = !!currentCustomer.id;
     const isCustomerBanned = customerLoaded && currentCustomer.attributes.banned;
     const canShowSaleButtons = isProvider && txIsRequested(currentTransaction) && !isCustomerBanned;
-    const isProviderLoaded = !!currentProvider.id;
-    const isProviderBanned = isProviderLoaded && currentProvider.attributes.banned;
-    const canShowBookButton = isCustomer && txIsEnquired(currentTransaction) && !isProviderBanned;
 
     const bannedUserDisplayName = intl.formatMessage({
       id: 'TransactionPanel.bannedUserDisplayName',
@@ -164,36 +167,38 @@ export class TransactionPanelComponent extends Component {
       ? deletedListingTitle
       : currentListing.attributes.title;
 
+    const unitType = config.bookingUnitType;
+    const isNightly = unitType === LINE_ITEM_NIGHT;
+    const isDaily = unitType === LINE_ITEM_DAY;
+
+    const unitTranslationKey = isNightly
+      ? 'TransactionPanel.perNight'
+      : isDaily
+      ? 'TransactionPanel.perDay'
+      : 'TransactionPanel.perUnit';
+
+    const price = currentListing.attributes.price;
+    const formattedPrice = formatMoney(intl, price);
+    const bookingSubTitle = `${formattedPrice} ${intl.formatMessage({ id: unitTranslationKey })}`;
+
     const firstImage =
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
     const actionButtonClasses = classNames(css.actionButtons);
-    const canShowActionButtons = canShowBookButton || canShowSaleButtons;
 
-    let actionButtons = null;
-    if (canShowSaleButtons) {
-      actionButtons = (
-        <SaleActionButtonsMaybe
-          rootClassName={actionButtonClasses}
-          canShowButtons={canShowSaleButtons}
-          transaction={currentTransaction}
-          acceptInProgress={acceptInProgress}
-          declineInProgress={declineInProgress}
-          acceptSaleError={acceptSaleError}
-          declineSaleError={declineSaleError}
-          onAcceptSale={onAcceptSale}
-          onDeclineSale={onDeclineSale}
-        />
-      );
-    } else if (canShowBookButton) {
-      actionButtons = (
-        <OrderActionButtonMaybe
-          rootClassName={actionButtonClasses}
-          canShowButtons={canShowBookButton}
-          listing={currentListing}
-        />
-      );
-    }
+    const saleButtons = (
+      <SaleActionButtonsMaybe
+        rootClassName={actionButtonClasses}
+        canShowButtons={canShowSaleButtons}
+        transaction={currentTransaction}
+        acceptInProgress={acceptInProgress}
+        declineInProgress={declineInProgress}
+        acceptSaleError={acceptSaleError}
+        declineSaleError={declineSaleError}
+        onAcceptSale={onAcceptSale}
+        onDeclineSale={onDeclineSale}
+      />
+    );
 
     const sendMessagePlaceholder = intl.formatMessage(
       { id: 'TransactionPanel.sendMessagePlaceholder' },
@@ -284,8 +289,8 @@ export class TransactionPanelComponent extends Component {
               onBlur={this.onSendMessageFormBlur}
               onSubmit={this.onMessageSubmit}
             />
-            {canShowActionButtons ? (
-              <div className={css.mobileActionButtons}>{actionButtons}</div>
+            {canShowSaleButtons ? (
+              <div className={css.mobileActionButtons}>{saleButtons}</div>
             ) : null}
           </div>
 
@@ -306,33 +311,35 @@ export class TransactionPanelComponent extends Component {
                   <AvatarMedium user={currentProvider} />
                 </div>
               ) : null}
-              {isCustomer ? (
-                <div className={css.detailCardHeadings}>
-                  <h2 className={css.detailCardTitle}>{listingTitle}</h2>
-                  <p className={css.detailCardSubtitle}>
-                    <FormattedMessage
-                      id="TransactionPanel.hostedBy"
-                      values={{ name: authorDisplayName }}
-                    />
-                  </p>
-                  <AddressLinkMaybe
-                    transaction={currentTransaction}
-                    transactionRole={transactionRole}
-                    currentListing={currentListing}
-                  />
-                </div>
-              ) : (
-                <div className={css.detailCardHeadingsProvider}>
-                  <AddressLinkMaybe
-                    transaction={currentTransaction}
-                    transactionRole={transactionRole}
-                    currentListing={currentListing}
-                  />
-                </div>
-              )}
-              <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
-              {canShowActionButtons ? (
-                <div className={css.desktopActionButtons}>{actionButtons}</div>
+
+              <DetailCardHeadingsMaybe
+                transaction={currentTransaction}
+                transactionRole={transactionRole}
+                listing={currentListing}
+                listingTitle={listingTitle}
+                subTitle={bookingSubTitle}
+              />
+              <BookingPanelMaybe
+                authorDisplayName={authorDisplayName}
+                transaction={currentTransaction}
+                transactionRole={transactionRole}
+                listing={currentListing}
+                listingTitle={listingTitle}
+                subTitle={bookingSubTitle}
+                provider={currentProvider}
+                onSubmit={onSubmitBookingRequest}
+                onManageDisableScrolling={onManageDisableScrolling}
+                timeSlots={timeSlots}
+                fetchTimeSlotsError={fetchTimeSlotsError}
+              />
+              <BreakdownMaybe
+                className={css.breakdownContainer}
+                transaction={currentTransaction}
+                transactionRole={transactionRole}
+              />
+
+              {canShowSaleButtons ? (
+                <div className={css.desktopActionButtons}>{saleButtons}</div>
               ) : null}
             </div>
           </div>
@@ -363,6 +370,8 @@ TransactionPanelComponent.defaultProps = {
   initialMessageFailed: null,
   sendMessageError: null,
   sendReviewError: null,
+  timeSlots: null,
+  fetchTimeSlotsError: null,
 };
 
 const { arrayOf, bool, func, number, string } = PropTypes;
@@ -387,6 +396,9 @@ TransactionPanelComponent.propTypes = {
   onShowMoreMessages: func.isRequired,
   onSendMessage: func.isRequired,
   onSendReview: func.isRequired,
+  onSubmitBookingRequest: func.isRequired,
+  timeSlots: arrayOf(propTypes.timeSlot),
+  fetchTimeSlotsError: propTypes.error,
 
   // Sale related props
   onAcceptSale: func.isRequired,
