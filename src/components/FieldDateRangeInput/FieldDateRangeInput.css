@@ -23,6 +23,10 @@
     margin-bottom: 0;
     font-weight: 600;
   }
+
+  @media (--viewportMedium) {
+    padding-bottom: 1px;
+  }
 }
 
 .labelSuccess {

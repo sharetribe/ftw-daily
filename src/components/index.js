@@ -3,6 +3,7 @@ export { default as AddImages } from './AddImages/AddImages';
 export { default as Avatar, AvatarMedium, AvatarLarge } from './Avatar/Avatar';
 export { default as BookingBreakdown } from './BookingBreakdown/BookingBreakdown';
 export { default as Button, PrimaryButton, SecondaryButton, InlineTextButton } from './Button/Button';
+export { default as BookingPanel } from './BookingPanel/BookingPanel';
 export { default as CookieConsent } from './CookieConsent/CookieConsent';
 export { default as Discussion } from './Discussion/Discussion';
 export { default as EditListingDescriptionPanel } from './EditListingDescriptionPanel/EditListingDescriptionPanel';

@@ -393,12 +393,10 @@ export class CheckoutPageComponent extends Component {
             <div className={css.heading}>
               <h1 className={css.title}>{title}</h1>
               <div className={css.author}>
-                <span className={css.authorName}>
-                  <FormattedMessage
-                    id="ListingPage.hostedBy"
-                    values={{ name: currentAuthor.attributes.profile.displayName }}
-                  />
-                </span>
+                <FormattedMessage
+                  id="CheckoutPage.hostedBy"
+                  values={{ name: currentAuthor.attributes.profile.displayName }}
+                />
               </div>
             </div>
 

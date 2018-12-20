@@ -99,11 +99,7 @@ export const ListingCardComponent = props => {
             })}
           </div>
           <div className={css.authorInfo}>
-            <FormattedMessage
-              className={css.authorName}
-              id="ListingCard.hostedBy"
-              values={{ authorName }}
-            />
+            <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />
           </div>
         </div>
       </div>
