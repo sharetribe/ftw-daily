@@ -1,6 +1,5 @@
 import React from 'react';
 import { bool, string } from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import { FieldBirthdayInput, FieldTextInput } from '../../components';
 import * as validators from '../../util/validators';
 import { intlShape } from 'react-intl';
@@ -12,6 +11,13 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
 
 const PayoutDetailsPersonalDetails = props => {
   const { intl, disabled, values, country, fieldId } = props;
+
+  const personalDetailsTitle = intl.formatMessage({
+    id:
+      fieldId === 'company' || fieldId === 'individual'
+        ? 'PayoutDetailsForm.personalDetailsTitle'
+        : 'PayoutDetailsForm.personalDetailsAdditionalOwnerTitle',
+  });
 
   const firstNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.firstNameLabel' });
   const firstNamePlaceholder = intl.formatMessage({
@@ -100,9 +106,7 @@ const PayoutDetailsPersonalDetails = props => {
 
   return (
     <div className={css.sectionContainer}>
-      <h3 className={css.subTitle}>
-        <FormattedMessage id="PayoutDetailsForm.personalDetailsTitle" />
-      </h3>
+      <h3 className={css.subTitle}>{personalDetailsTitle}</h3>
       <div className={css.formRow}>
         <FieldTextInput
           id={`${fieldId}.firstName`}

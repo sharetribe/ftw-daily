@@ -40,6 +40,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -56,6 +57,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -88,6 +90,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -104,6 +107,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -120,6 +124,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -136,6 +141,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -170,6 +176,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -186,6 +193,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -202,6 +210,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -218,6 +227,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -247,6 +257,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -263,6 +274,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -279,6 +291,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -295,6 +308,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -311,6 +325,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {
@@ -328,6 +343,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
+      additionalOwners: true,
     },
   },
   {

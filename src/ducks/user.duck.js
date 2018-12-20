@@ -408,6 +408,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
     companyName,
     companyTaxId,
     personalAddress,
+    additionalOwners,
   } = payoutDetailValues;
 
   const hasProvince = address.province && !address.state;
@@ -433,6 +434,22 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
     };
   }
 
+  const additionalOwnersValue = additionalOwners
+    ? additionalOwners.map(owner => {
+        return {
+          first_name: owner.firstName,
+          last_name: owner.lastName,
+          dob: owner.birthDate,
+          address: {
+            city: owner.city,
+            line1: owner.streetAddress,
+            postal_code: owner.postalCode,
+            state: hasProvince ? owner.province : owner.state ? owner.state : '',
+          },
+        };
+      })
+    : [];
+
   const idNumber =
     country === 'US' ? { ssn_last_4: personalIdNumber } : { personal_id_number: personalIdNumber };
 
@@ -447,13 +464,14 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
       business_name: companyName,
       business_tax_id: companyTaxId,
       personal_address: personalAddressValue,
+      additional_owners: additionalOwnersValue,
       ...idNumber,
     },
     tos_shown_and_accepted: true,
   };
 
   let accountResponse;
-  
+
   return stripe
     .createToken('account', params)
     .then(response => {

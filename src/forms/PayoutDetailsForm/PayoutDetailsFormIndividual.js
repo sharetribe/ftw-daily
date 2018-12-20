@@ -1,5 +1,5 @@
 import React from 'react';
-import { bool, object } from 'prop-types';
+import { bool } from 'prop-types';
 import { compose } from 'redux';
 import { injectIntl, intlShape } from 'react-intl';
 
@@ -18,15 +18,16 @@ const PayoutDetailsFormIndividualComponent = ({ fieldRenderProps }) => {
         disabled={disabled}
         values={values}
         country={country}
+        fieldId="individual"
       />
       <PayoutDetailsAddress
         country={country}
         intl={intl}
         disabled={disabled}
         form={form}
-        fieldId="individual"
+        fieldId="individual.address"
       />
-      <PayoutDetailsBankDetails country={country} disabled={disabled} />
+      <PayoutDetailsBankDetails country={country} disabled={disabled} fieldId="individual" />
     </React.Fragment>
   );
 };
@@ -37,7 +38,6 @@ PayoutDetailsFormIndividualComponent.defaultProps = {
 
 PayoutDetailsFormIndividualComponent.propTypes = {
   disabled: bool,
-  form: object.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,

@@ -3,6 +3,7 @@ import { bool, object, string } from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
+import arrayMutators from 'final-form-arrays';
 import classNames from 'classnames';
 import config from '../../config';
 import { Button, ExternalLink, FieldRadioButton, FieldSelect, Form } from '../../components';
@@ -27,6 +28,9 @@ export const stripeCountryConfigs = countryCode => {
 const PayoutDetailsFormComponent = props => (
   <FinalForm
     {...props}
+    mutators={{
+      ...arrayMutators,
+    }}
     render={fieldRenderProps => {
       const {
         className,
@@ -92,8 +96,6 @@ const PayoutDetailsFormComponent = props => (
           <FormattedMessage id="PayoutDetailsForm.stripeConnectedAccountTermsLink" />
         </ExternalLink>
       );
-
-      console.log('Values', JSON.stringify(values, null, ' '));
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
