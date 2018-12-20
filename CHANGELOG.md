@@ -14,7 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-XX-XX
 
-- [remove] Remove the default built-in email templates. Built-in email templates can be edited in Console. [#983](https://github.com/sharetribe/flex-template-web/pull/983)
+- [add] Add an image of fork button to the deploy to production guide.
+  [#985](https://github.com/sharetribe/flex-template-web/pull/985)
+- [remove] Remove the default built-in email templates. Built-in email templates can be edited in
+  Console. [#983](https://github.com/sharetribe/flex-template-web/pull/983)
 
 ## [v2.5.0] 2018-12-17
 
