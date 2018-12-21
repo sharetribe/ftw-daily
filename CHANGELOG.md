@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Support for Stripe company accounts. `PayoutDetailsForm` was separated into smaller
+  subcomponents. Multiple new translation keys were added and they might not be translated into
+  French yet. [#980](https://github.com/sharetribe/flex-template-web/pull/980)
 - Manage availability of listings. This works for listings that have booking unit type:
   'line-item/night', or 'line-item/day'. There's also 'manage availability' link in the
   ManageListingCards of "your listings" page.
