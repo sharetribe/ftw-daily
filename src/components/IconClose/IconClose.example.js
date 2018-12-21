@@ -5,3 +5,11 @@ export const Icon = {
   props: {},
   group: 'icons',
 };
+
+export const IconSmall = {
+  component: IconClose,
+  props: {
+    size: 'small',
+  },
+  group: 'icons',
+};
