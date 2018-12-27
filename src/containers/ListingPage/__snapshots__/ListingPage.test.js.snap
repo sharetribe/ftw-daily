@@ -307,7 +307,22 @@ exports[`ListingPage matches snapshot 1`] = `
             onSubmit={[Function]}
             subTitle="ListingPage.bookingSubTitle"
             timeSlots={null}
-            title="ListingPage.bookingSubTitle"
+            title={
+              <FormattedMessage
+                id="ListingPage.bookingTitle"
+                values={
+                  Object {
+                    "title": <span>
+                      
+                      listing1
+                       
+                      title
+                      
+                  </span>,
+                  }
+                }
+              />
+            }
             unitType="line-item/night"
           />
         </div>
