@@ -225,7 +225,7 @@
 .bookingPanel {
   @media (--viewportLarge) {
     display: block;
-    margin-top: 87px;
+    margin-top: 95px;
     margin-left: 60px;
     border-left-style: solid;
     border-left-width: 1px;
