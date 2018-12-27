@@ -198,6 +198,7 @@ export const BookingPanelMaybe = props => {
   return canShowBookingPanel ? (
     <BookingPanel
       className={css.bookingPanel}
+      titleClassName={css.bookingTitle}
       isOwnListing={false}
       listing={listing}
       handleBookingSubmit={() => console.log('submit')}

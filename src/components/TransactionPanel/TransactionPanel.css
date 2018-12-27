@@ -419,3 +419,7 @@
 .bookingPanel {
   margin: 16px 48px 48px 48px;
 }
+
+.bookingTitle {
+  margin-bottom: 1px;
+}
