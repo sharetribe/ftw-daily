@@ -229,9 +229,8 @@ export class ListingPageComponent extends Component {
       </span>
     );
 
-    const bookingTitle = intl.formatMessage(
-      { id: 'ListingPage.bookingSubTitle' },
-      { title: richTitle }
+    const bookingTitle = (
+      <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
     );
     const bookingSubTitle = intl.formatMessage({ id: 'ListingPage.bookingSubTitle' });
 
