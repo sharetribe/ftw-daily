@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2018-XX-XX
 
+- [change] Layout changes to BookingPanel on listing and transaction pages.
+  [#988](https://github.com/sharetribe/flex-template-web/pull/988)
 - [fix] Fix wrong booking title on listing page that has been introduced in #969.
   [#987](https://github.com/sharetribe/flex-template-web/pull/987)
 - [fix] yarn.lock file was not up to date

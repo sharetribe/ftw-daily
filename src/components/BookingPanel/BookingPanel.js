@@ -52,6 +52,7 @@ const BookingPanel = props => {
   const {
     rootClassName,
     className,
+    titleClassName,
     listing,
     isOwnListing,
     unitType,
@@ -89,6 +90,7 @@ const BookingPanel = props => {
     : 'BookingPanel.perUnit';
 
   const classes = classNames(rootClassName || css.root, className);
+  const titleClasses = classNames(titleClassName || css.bookingTitle);
 
   return (
     <div className={classes}>
@@ -108,7 +110,7 @@ const BookingPanel = props => {
         </div>
 
         <div className={css.bookingHeading}>
-          <h2 className={css.bookingTitle}>{title}</h2>
+          <h2 className={titleClasses}>{title}</h2>
           {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
         </div>
         {!isClosed ? (
@@ -154,6 +156,7 @@ const BookingPanel = props => {
 BookingPanel.defaultProps = {
   rootClassName: null,
   className: null,
+  titleClassName: null,
   isOwnListing: false,
   subTitle: null,
   unitType: config.bookingUnitType,
@@ -164,6 +167,7 @@ BookingPanel.defaultProps = {
 BookingPanel.propTypes = {
   rootClassName: string,
   className: string,
+  titleClassName: string,
   listing: propTypes.listing.isRequired,
   isOwnListing: bool,
   unitType: propTypes.bookingUnitType,
