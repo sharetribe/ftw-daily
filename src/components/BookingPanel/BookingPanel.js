@@ -90,7 +90,7 @@ const BookingPanel = props => {
     : 'BookingPanel.perUnit';
 
   const classes = classNames(rootClassName || css.root, className);
-  const titleClasses = classNames(css.bookingTitle, titleClassName);
+  const titleClasses = classNames(titleClassName || css.bookingTitle);
 
   return (
     <div className={classes}>
