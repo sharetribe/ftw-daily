@@ -218,6 +218,26 @@ export const ensureTimeSlot = timeSlot => {
 };
 
 /**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} availability exception entity object, which is to be ensured against null values
+ */
+export const ensureDayAvailabilityPlan = availabilityPlan => {
+  const empty = { type: 'availability-plan/day', entries: [] };
+  return { ...empty, ...availabilityPlan };
+};
+
+/**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} availability exception entity object, which is to be ensured against null values
+ */
+export const ensureAvailabilityException = availabilityException => {
+  const empty = { id: null, type: 'availabilityException', attributes: {} };
+  return { ...empty, ...availabilityException };
+};
+
+/**
  * Get the display name of the given user. This function handles
  * missing data (e.g. when the user object is still being downloaded),
  * fully loaded users, as well as banned users.
