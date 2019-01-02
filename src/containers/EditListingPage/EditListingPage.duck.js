@@ -1,10 +1,88 @@
 import omit from 'lodash/omit';
 import { types as sdkTypes } from '../../util/sdkLoader';
+import { denormalisedResponseEntities, ensureAvailabilityException } from '../../util/data';
+import { isSameDate, monthIdString } from '../../util/dates';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import * as log from '../../util/log';
 
 const { UUID } = sdkTypes;
+
+// A helper function to filter away exception that matches start and end timestamps
+const removeException = (exception, calendar) => {
+  const availabilityException = ensureAvailabilityException(exception.availabilityException);
+  const { start, end } = availabilityException.attributes;
+  const monthId = monthIdString(start);
+  const monthData = calendar[monthId] || { exceptions: [] };
+
+  const exceptions = monthData.exceptions.filter(e => {
+    const anException = ensureAvailabilityException(e.availabilityException);
+    const exceptionStart = anException.attributes.start;
+    const exceptionEnd = anException.attributes.end;
+
+    return !(isSameDate(exceptionStart, start) && isSameDate(exceptionEnd, end));
+  });
+
+  return {
+    ...calendar,
+    [monthId]: { ...monthData, exceptions },
+  };
+};
+
+// A helper function to add a new exception and remove previous one if there's a matching exception
+const addException = (exception, calendar) => {
+  const { start } = ensureAvailabilityException(exception.availabilityException).attributes;
+  const monthId = monthIdString(start);
+
+  // TODO: API doesn't support "availability_exceptions/update" yet
+  // So, when user wants to create an exception we need to ensure
+  // that possible existing exception is removed first.
+  const cleanCalendar = removeException(exception, calendar);
+  const monthData = cleanCalendar[monthId] || { exceptions: [] };
+
+  return {
+    ...cleanCalendar,
+    [monthId]: { ...monthData, exceptions: [...monthData.exceptions, exception] },
+  };
+};
+
+// A helper function to update exception that matches start and end timestamps
+const updateException = (exception, calendar) => {
+  const newAvailabilityException = ensureAvailabilityException(exception.availabilityException);
+  const { start, end } = newAvailabilityException.attributes;
+  const monthId = monthIdString(start);
+  const monthData = calendar[monthId] || { exceptions: [] };
+
+  const exceptions = monthData.exceptions.map(e => {
+    const availabilityException = ensureAvailabilityException(e.availabilityException);
+    const exceptionStart = availabilityException.attributes.start;
+    const exceptionEnd = availabilityException.attributes.end;
+
+    return isSameDate(exceptionStart, start) && isSameDate(exceptionEnd, end) ? exception : e;
+  });
+
+  return {
+    ...calendar,
+    [monthId]: { ...monthData, exceptions },
+  };
+};
+
+// Update calendar data of given month
+const updateCalendarMonth = (state, monthId, data) => {
+  // Ensure that every month has array for bookings and exceptions
+  const defaultMonthData = { bookings: [], exceptions: [] };
+  return {
+    ...state,
+    availabilityCalendar: {
+      ...state.availabilityCalendar,
+      [monthId]: {
+        ...defaultMonthData,
+        ...state.availabilityCalendar[monthId],
+        ...data,
+      },
+    },
+  };
+};
 
 const requestAction = actionType => params => ({ type: actionType, payload: { params } });
 
@@ -33,6 +111,22 @@ export const SHOW_LISTINGS_REQUEST = 'app/EditListingPage/SHOW_LISTINGS_REQUEST'
 export const SHOW_LISTINGS_SUCCESS = 'app/EditListingPage/SHOW_LISTINGS_SUCCESS';
 export const SHOW_LISTINGS_ERROR = 'app/EditListingPage/SHOW_LISTINGS_ERROR';
 
+export const FETCH_BOOKINGS_REQUEST = 'app/EditListingPage/FETCH_BOOKINGS_REQUEST';
+export const FETCH_BOOKINGS_SUCCESS = 'app/EditListingPage/FETCH_BOOKINGS_SUCCESS';
+export const FETCH_BOOKINGS_ERROR = 'app/EditListingPage/FETCH_BOOKINGS_ERROR';
+
+export const FETCH_EXCEPTIONS_REQUEST = 'app/EditListingPage/FETCH_AVAILABILITY_EXCEPTIONS_REQUEST';
+export const FETCH_EXCEPTIONS_SUCCESS = 'app/EditListingPage/FETCH_AVAILABILITY_EXCEPTIONS_SUCCESS';
+export const FETCH_EXCEPTIONS_ERROR = 'app/EditListingPage/FETCH_AVAILABILITY_EXCEPTIONS_ERROR';
+
+export const CREATE_EXCEPTION_REQUEST = 'app/EditListingPage/CREATE_AVAILABILITY_EXCEPTION_REQUEST';
+export const CREATE_EXCEPTION_SUCCESS = 'app/EditListingPage/CREATE_AVAILABILITY_EXCEPTION_SUCCESS';
+export const CREATE_EXCEPTION_ERROR = 'app/EditListingPage/CREATE_AVAILABILITY_EXCEPTION_ERROR';
+
+export const DELETE_EXCEPTION_REQUEST = 'app/EditListingPage/DELETE_AVAILABILITY_EXCEPTION_REQUEST';
+export const DELETE_EXCEPTION_SUCCESS = 'app/EditListingPage/DELETE_AVAILABILITY_EXCEPTION_SUCCESS';
+export const DELETE_EXCEPTION_ERROR = 'app/EditListingPage/DELETE_AVAILABILITY_EXCEPTION_ERROR';
+
 export const UPLOAD_IMAGE_REQUEST = 'app/EditListingPage/UPLOAD_IMAGE_REQUEST';
 export const UPLOAD_IMAGE_SUCCESS = 'app/EditListingPage/UPLOAD_IMAGE_SUCCESS';
 export const UPLOAD_IMAGE_ERROR = 'app/EditListingPage/UPLOAD_IMAGE_ERROR';
@@ -54,6 +148,16 @@ const initialState = {
   createListingDraftInProgress: false,
   submittedListingId: null,
   redirectToListing: false,
+  availabilityCalendar: {
+    // '2018-12': {
+    //   bookings: [],
+    //   exceptions: [],
+    //   fetchExceptionsError: null,
+    //   fetchExceptionsInProgress: false,
+    //   fetchBookingsError: null,
+    //   fetchBookingsInProgress: false,
+    // },
+  },
   images: {},
   imageOrder: [],
   removedImageIds: [],
@@ -127,11 +231,91 @@ export default function reducer(state = initialState, action = {}) {
     case SHOW_LISTINGS_REQUEST:
       return { ...state, showListingsError: null };
     case SHOW_LISTINGS_SUCCESS:
-      return initialState;
+      return { ...initialState, availabilityCalendar: { ...state.availabilityCalendar } };
+
     case SHOW_LISTINGS_ERROR:
       // eslint-disable-next-line no-console
       console.error(payload);
       return { ...state, showListingsError: payload, redirectToListing: false };
+
+    case FETCH_BOOKINGS_REQUEST:
+      return updateCalendarMonth(state, payload.params.monthId, {
+        fetchBookingsError: null,
+        fetchBookingsInProgress: true,
+      });
+    case FETCH_BOOKINGS_SUCCESS:
+      return updateCalendarMonth(state, payload.monthId, {
+        bookings: payload.bookings,
+        fetchBookingsInProgress: false,
+      });
+    case FETCH_BOOKINGS_ERROR:
+      return updateCalendarMonth(state, payload.monthId, {
+        fetchBookingsError: payload.error,
+        fetchBookingsInProgress: false,
+      });
+
+    case FETCH_EXCEPTIONS_REQUEST:
+      return updateCalendarMonth(state, payload.params.monthId, {
+        fetchExceptionsError: null,
+        fetchExceptionsInProgress: true,
+      });
+    case FETCH_EXCEPTIONS_SUCCESS:
+      return updateCalendarMonth(state, payload.monthId, {
+        exceptions: payload.exceptions,
+        fetchExceptionsInProgress: false,
+      });
+    case FETCH_EXCEPTIONS_ERROR:
+      return updateCalendarMonth(state, payload.monthId, {
+        fetchExceptionsError: payload.error,
+        fetchExceptionsInProgress: false,
+      });
+
+    case CREATE_EXCEPTION_REQUEST: {
+      const { start, end, seats } = payload.params;
+      const draft = ensureAvailabilityException({ attributes: { start, end, seats } });
+      const exception = { availabilityException: draft, inProgress: true };
+      const availabilityCalendar = addException(exception, state.availabilityCalendar);
+      return { ...state, availabilityCalendar };
+    }
+    case CREATE_EXCEPTION_SUCCESS: {
+      const availabilityCalendar = updateException(payload.exception, state.availabilityCalendar);
+      return { ...state, availabilityCalendar };
+    }
+    case CREATE_EXCEPTION_ERROR: {
+      const { availabilityException, error } = payload;
+      const failedException = { availabilityException, error };
+      const availabilityCalendar = updateException(failedException, state.availabilityCalendar);
+      return { ...state, availabilityCalendar };
+    }
+
+    case DELETE_EXCEPTION_REQUEST: {
+      const { id, seats, currentException } = payload.params;
+
+      // We first create temporary exception with given 'seats' count (the default after deletion).
+      // This makes it possible to show the UI element immediately with default color that matches
+      // with the availability plan.
+      const exception = {
+        id,
+        inProgress: true,
+        availabilityException: {
+          ...currentException.availabilityException,
+          attributes: { ...currentException.availabilityException.attributes, seats },
+        },
+      };
+
+      const availabilityCalendar = updateException(exception, state.availabilityCalendar);
+      return { ...state, availabilityCalendar };
+    }
+    case DELETE_EXCEPTION_SUCCESS: {
+      const availabilityCalendar = removeException(payload.exception, state.availabilityCalendar);
+      return { ...state, availabilityCalendar };
+    }
+    case DELETE_EXCEPTION_ERROR: {
+      const { availabilityException, error } = payload;
+      const failedException = { availabilityException, error };
+      const availabilityCalendar = updateException(failedException, state.availabilityCalendar);
+      return { ...state, availabilityCalendar };
+    }
 
     case UPLOAD_IMAGE_REQUEST: {
       // payload.params: { id: 'tempId', file }
@@ -237,6 +421,26 @@ export const uploadImage = requestAction(UPLOAD_IMAGE_REQUEST);
 export const uploadImageSuccess = successAction(UPLOAD_IMAGE_SUCCESS);
 export const uploadImageError = errorAction(UPLOAD_IMAGE_ERROR);
 
+// SDK method: bookings.query
+export const fetchBookingsRequest = requestAction(FETCH_BOOKINGS_REQUEST);
+export const fetchBookingsSuccess = successAction(FETCH_BOOKINGS_SUCCESS);
+export const fetchBookingsError = errorAction(FETCH_BOOKINGS_ERROR);
+
+// SDK method: availabilityExceptions.query
+export const fetchAvailabilityExceptionsRequest = requestAction(FETCH_EXCEPTIONS_REQUEST);
+export const fetchAvailabilityExceptionsSuccess = successAction(FETCH_EXCEPTIONS_SUCCESS);
+export const fetchAvailabilityExceptionsError = errorAction(FETCH_EXCEPTIONS_ERROR);
+
+// SDK method: availabilityExceptions.create
+export const createAvailabilityExceptionRequest = requestAction(CREATE_EXCEPTION_REQUEST);
+export const createAvailabilityExceptionSuccess = successAction(CREATE_EXCEPTION_SUCCESS);
+export const createAvailabilityExceptionError = errorAction(CREATE_EXCEPTION_ERROR);
+
+// SDK method: availabilityExceptions.delete
+export const deleteAvailabilityExceptionRequest = requestAction(DELETE_EXCEPTION_REQUEST);
+export const deleteAvailabilityExceptionSuccess = successAction(DELETE_EXCEPTION_SUCCESS);
+export const deleteAvailabilityExceptionError = errorAction(DELETE_EXCEPTION_ERROR);
+
 // ================ Thunk ================ //
 
 export function requestShowListing(actionPayload) {
@@ -311,6 +515,100 @@ export function requestImageUpload(actionPayload) {
       .catch(e => dispatch(uploadImageError({ id, error: storableError(e) })));
   };
 }
+
+export const requestFetchBookings = fetchParams => (dispatch, getState, sdk) => {
+  const { listingId, start, end } = fetchParams;
+  const monthId = monthIdString(start);
+
+  dispatch(fetchBookingsRequest({ ...fetchParams, monthId }));
+
+  return sdk.bookings
+    .query({ listingId, start, end }, { expand: true })
+    .then(response => {
+      const bookings = denormalisedResponseEntities(response);
+      return dispatch(fetchBookingsSuccess({ data: { monthId, bookings } }));
+    })
+    .catch(e => {
+      return dispatch(fetchBookingsError({ monthId, error: storableError(e) }));
+    });
+};
+
+export const requestFetchAvailabilityExceptions = fetchParams => (dispatch, getState, sdk) => {
+  const { listingId, start, end } = fetchParams;
+  const monthId = monthIdString(start);
+
+  dispatch(fetchAvailabilityExceptionsRequest({ ...fetchParams, monthId }));
+
+  return sdk.availabilityExceptions
+    .query({ listingId, start, end }, { expand: true })
+    .then(response => {
+      const exceptions = denormalisedResponseEntities(response).map(availabilityException => ({
+        availabilityException,
+      }));
+      return dispatch(fetchAvailabilityExceptionsSuccess({ data: { monthId, exceptions } }));
+    })
+    .catch(e => {
+      return dispatch(fetchAvailabilityExceptionsError({ monthId, error: storableError(e) }));
+    });
+};
+
+export const requestCreateAvailabilityException = params => (dispatch, getState, sdk) => {
+  const { currentException, ...createParams } = params;
+
+  dispatch(createAvailabilityExceptionRequest(createParams));
+
+  return sdk.availabilityExceptions
+    .create(createParams, { expand: true })
+    .then(response => {
+      dispatch(
+        createAvailabilityExceptionSuccess({
+          data: {
+            exception: {
+              availabilityException: response.data.data,
+            },
+          },
+        })
+      );
+      return response;
+    })
+    .catch(error => {
+      const availabilityException = currentException && currentException.availabilityException;
+      return dispatch(
+        createAvailabilityExceptionError({
+          error: storableError(error),
+          availabilityException,
+        })
+      );
+    });
+};
+
+export const requestDeleteAvailabilityException = params => (dispatch, getState, sdk) => {
+  const { currentException, seats, ...deleteParams } = params;
+
+  dispatch(deleteAvailabilityExceptionRequest(params));
+
+  return sdk.availabilityExceptions
+    .delete(deleteParams, { expand: true })
+    .then(response => {
+      dispatch(
+        deleteAvailabilityExceptionSuccess({
+          data: {
+            exception: currentException,
+          },
+        })
+      );
+      return response;
+    })
+    .catch(error => {
+      const availabilityException = currentException && currentException.availabilityException;
+      return dispatch(
+        deleteAvailabilityExceptionError({
+          error: storableError(error),
+          availabilityException,
+        })
+      );
+    });
+};
 
 // Update the given tab of the wizard with the given data. This saves
 // the data to the listing, and marks the tab updated so the UI can
