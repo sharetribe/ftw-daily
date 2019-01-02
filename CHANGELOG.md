@@ -12,7 +12,9 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## Upcoming version 2018-XX-XX
+## Upcoming version 2019-XX-XX
+
+## [v2.6.0] 2019-01-02
 
 - [fix] Wrong translations for perUnit in fr.json.
   [#989](https://github.com/sharetribe/flex-template-web/pull/989)
@@ -30,6 +32,8 @@ way to update this template, but currently, we follow a pattern:
   [#976](https://github.com/sharetribe/flex-template-web/pull/976)
 - [change] Extract SectionBooking to a distinct component from ListingPage.
   [#969](https://github.com/sharetribe/flex-template-web/pull/969)
+
+  [v2.6.0]: https://github.com/sharetribe/flex-template-web/compare/v2.5.0...v2.6.0
 
 ## [v2.5.0] 2018-12-17
 
