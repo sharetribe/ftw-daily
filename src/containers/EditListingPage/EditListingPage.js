@@ -21,6 +21,10 @@ import { EditListingWizard, NamedRedirect, Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import {
+  requestFetchBookings,
+  requestFetchAvailabilityExceptions,
+  requestCreateAvailabilityException,
+  requestDeleteAvailabilityException,
   requestCreateListingDraft,
   requestPublishListingDraft,
   requestUpdateListing,
@@ -44,6 +48,10 @@ export const EditListingPageComponent = props => {
     getOwnListing,
     history,
     intl,
+    onFetchAvailabilityExceptions,
+    onCreateAvailabilityException,
+    onDeleteAvailabilityException,
+    onFetchBookings,
     onCreateListingDraft,
     onPublishListingDraft,
     onUpdateListing,
@@ -157,6 +165,13 @@ export const EditListingPageComponent = props => {
           history={history}
           images={images}
           listing={currentListing}
+          availability={{
+            calendar: page.availabilityCalendar,
+            onFetchAvailabilityExceptions,
+            onCreateAvailabilityException,
+            onDeleteAvailabilityException,
+            onFetchBookings,
+          }}
           onUpdateListing={onUpdateListing}
           onCreateListingDraft={onCreateListingDraft}
           onPublishListingDraft={onPublishListingDraft}
@@ -202,6 +217,8 @@ EditListingPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
   getOwnListing: func.isRequired,
+  onFetchAvailabilityExceptions: func.isRequired,
+  onCreateAvailabilityException: func.isRequired,
   onCreateListingDraft: func.isRequired,
   onPublishListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
@@ -253,6 +270,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onUpdateListing: (tab, values) => dispatch(requestUpdateListing(tab, values)),
+  onFetchBookings: params => dispatch(requestFetchBookings(params)),
+  onFetchAvailabilityExceptions: params => dispatch(requestFetchAvailabilityExceptions(params)),
+  onCreateAvailabilityException: params => dispatch(requestCreateAvailabilityException(params)),
+  onDeleteAvailabilityException: params => dispatch(requestDeleteAvailabilityException(params)),
   onCreateListingDraft: values => dispatch(requestCreateListingDraft(values)),
   onPublishListingDraft: listingId => dispatch(requestPublishListingDraft(listingId)),
   onImageUpload: data => dispatch(requestImageUpload(data)),
