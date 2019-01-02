@@ -133,6 +133,8 @@
   "EditListingAvailabilityForm.blockedDay": "Not available",
   "EditListingAvailabilityForm.bookedDay": "Booked",
   "EditListingAvailabilityForm.updateFailed": "Failed to update listing. Please try again.",
+  "EditListingAvailabilityPanel.title": "Edit the availability of {listingTitle}",
+  "EditListingAvailabilityPanel.createListingTitle": "When is it available?",
   "EditListingDescriptionForm.categoryLabel": "Sauna type",
   "EditListingDescriptionForm.categoryPlaceholder": "Choose the type of your sauna…",
   "EditListingDescriptionForm.categoryRequired": "You need to select a category for your sauna.",
