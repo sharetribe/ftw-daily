@@ -334,6 +334,16 @@ export const ManageListingCardComponent = props => {
           >
             <FormattedMessage id="ManageListingCard.editListing" />
           </NamedLink>
+
+          <span className={css.manageLinksSeparator}>{' • '}</span>
+
+          <NamedLink
+            className={css.manageLink}
+            name="EditListingPage"
+            params={{ id, slug, type: 'edit', tab: 'availability' }}
+          >
+            <FormattedMessage id="ManageListingCard.manageAvailability" />
+          </NamedLink>
         </div>
       </div>
     </div>

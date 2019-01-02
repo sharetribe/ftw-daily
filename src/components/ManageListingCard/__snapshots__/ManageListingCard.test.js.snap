@@ -144,6 +144,25 @@ exports[`ManageListingCard matches snapshot 1`] = `
           values={Object {}}
         />
       </NamedLink>
+      <span>
+         • 
+      </span>
+      <NamedLink
+        name="EditListingPage"
+        params={
+          Object {
+            "id": "listing1",
+            "slug": "listing1-title",
+            "tab": "availability",
+            "type": "edit",
+          }
+        }
+      >
+        <FormattedMessage
+          id="ManageListingCard.manageAvailability"
+          values={Object {}}
+        />
+      </NamedLink>
     </div>
   </div>
 </div>
