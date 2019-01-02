@@ -1,7 +1,33 @@
 import { fakeIntl } from './test-data';
-import { nightsBetween, daysBetween, formatDate } from './dates';
+import { isDate, isSameDate, nightsBetween, daysBetween, formatDate } from './dates';
 
 describe('date utils', () => {
+  describe('isDate()', () => {
+    it('should return false if parameters is string', () => {
+      expect(isDate('Monday')).toBeFalsy();
+    });
+    it('should return false if parameters is number', () => {
+      expect(isDate('1546293600000')).toBeFalsy();
+    });
+    it('should return false if parameters is incorrect Date', () => {
+      expect(isDate(new Date('random string'))).toBeFalsy();
+    });
+    it('should return true if parameters is Date', () => {
+      expect(isDate(new Date(1546293600000))).toBeTruthy();
+    });
+  });
+
+  describe('isSameDate()', () => {
+    it('should return falsy if parameters do not match', () => {
+      const a = new Date(1546293600000);
+      const b = new Date(1546293600001);
+      expect(isSameDate(a, b)).toBeFalsy();
+    });
+    it('should be truthy if parameters match', () => {
+      expect(isSameDate(new Date(2019, 0, 1), new Date(2019, 0, 1))).toBeTruthy();
+    });
+  });
+
   describe('nightsBetween()', () => {
     it('should fail if end date is before start date', () => {
       const start = new Date(2017, 0, 2);
