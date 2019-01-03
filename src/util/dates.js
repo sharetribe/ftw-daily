@@ -194,3 +194,34 @@ export const parseDateFromISO8601 = dateString => {
 export const stringifyDateToISO8601 = date => {
   return moment(date).format('YYYY-MM-DD');
 };
+
+/**
+ * Formats string ('YYYY-MM-DD') to UTC format ('0000-00-00T00:00:00.000Z').
+ * This is used in search query.
+ *
+ * @param {String} string in 'YYYY-MM-DD'format
+ *
+ * @returns {String} string in '0000-00-00T00:00:00.000Z' format
+ */
+
+export const formatDateStringToUTC = dateString => {
+  return moment.utc(dateString).toDate();
+};
+
+/**
+ * Formats string ('YYYY-MM-DD') to UTC format ('0000-00-00T00:00:00.000Z') and adds one day.
+ * This is used as end date of the search query.
+ * One day must be added because end of the availability is exclusive in API.
+ *
+ * @param {String} string in 'YYYY-MM-DD'format
+ *
+ * @returns {String} string in '0000-00-00T00:00:00.000Z' format
+ */
+
+export const getExclusiveEndDate = dateString => {
+  return moment
+    .utc(dateString)
+    .add(1, 'days')
+    .startOf('day')
+    .toDate();
+};
