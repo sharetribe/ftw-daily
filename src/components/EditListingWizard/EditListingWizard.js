@@ -264,7 +264,7 @@ class EditListingWizard extends Component {
           onClose={this.handlePayoutModalClose}
           onManageDisableScrolling={onManageDisableScrolling}
         >
-          <div className={css.modalHeaderWrapper}>
+          <div className={css.modalPayoutDetailsWrapper}>
             <h1 className={css.modalTitle}>
               <FormattedMessage id="EditListingPhotosPanel.payoutModalTitleOneMoreThing" />
               <br />
@@ -273,14 +273,14 @@ class EditListingWizard extends Component {
             <p className={css.modalMessage}>
               <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
             </p>
+            <PayoutDetailsForm
+              className={css.payoutDetails}
+              inProgress={fetchInProgress}
+              createStripeAccountError={errors ? errors.createStripeAccountError : null}
+              onChange={onPayoutDetailsFormChange}
+              onSubmit={this.handlePayoutSubmit}
+            />
           </div>
-          <PayoutDetailsForm
-            className={css.payoutDetails}
-            inProgress={fetchInProgress}
-            createStripeAccountError={errors ? errors.createStripeAccountError : null}
-            onChange={onPayoutDetailsFormChange}
-            onSubmit={this.handlePayoutSubmit}
-          />
         </Modal>
       </div>
     );
