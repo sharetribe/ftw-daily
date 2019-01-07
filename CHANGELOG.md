@@ -14,6 +14,11 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- Manage availability of listings. This works for listings that have booking unit type:
+  'line-item/night', or 'line-item/day'. There's also 'manage availability' link in the
+  ManageListingCards of "your listings" page.
+  [#972](https://github.com/sharetribe/flex-template-web/pull/972)
+
 ## [v2.6.0] 2019-01-02
 
 - [fix] Wrong translations for perUnit in fr.json.
