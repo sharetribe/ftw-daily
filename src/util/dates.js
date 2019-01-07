@@ -7,6 +7,26 @@ export const START_DATE = 'startDate';
 export const END_DATE = 'endDate';
 
 /**
+ * Check that the given parameter is a Date object.
+ *
+ * @param {Date} object that should be a Date.
+ *
+ * @returns {boolean} true if given parameter is a Date object.
+ */
+export const isDate = d =>
+  d && Object.prototype.toString.call(d) === '[object Date]' && !Number.isNaN(d.getTime());
+
+/**
+ * Check if the given parameters represent the same Date value (timestamps are compared)
+ *
+ * @param {Date} first param that should be a Date and it should have same timestamp as second param.
+ * @param {Date} second param that should be a Date and it should have same timestamp as second param.
+ *
+ * @returns {boolean} true if given parameters have the same timestamp.
+ */
+export const isSameDate = (a, b) => a && isDate(a) && b && isDate(b) && a.getTime() === b.getTime();
+
+/**
  * Convert date given by API to something meaningful noon on browser's timezone
  * So, what happens is that date given by client
  * ("Fri Mar 30 2018 12:00:00 GMT-1100 (SST)" aka "Fri Mar 30 2018 23:00:00 GMT+0000 (UTC)")
@@ -93,6 +113,15 @@ export const daysBetween = (startDate, endDate) => {
   }
   return days;
 };
+
+/**
+ * Format the given date
+ *
+ * @param {Date} date to be formatted
+ *
+ * @returns {String} formatted month string
+ */
+export const monthIdString = date => moment(date).format('YYYY-MM');
 
 /**
  * Format the given date

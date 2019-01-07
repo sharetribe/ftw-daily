@@ -44,9 +44,11 @@ export const withViewport = Component => {
     componentDidMount() {
       this.setViewport();
       window.addEventListener('resize', this.handleWindowResize);
+      window.addEventListener('orientationchange', this.handleWindowResize);
     }
     componentWillUnmount() {
       window.removeEventListener('resize', this.handleWindowResize);
+      window.removeEventListener('orientationchange', this.handleWindowResize);
     }
     handleWindowResize() {
       this.setViewport();
