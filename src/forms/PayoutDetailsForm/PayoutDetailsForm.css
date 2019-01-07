@@ -1,6 +1,7 @@
 @import '../../marketplace.css';
 
 .root {
+  margin-top: 48px;
 }
 
 .disabled {
@@ -38,6 +39,20 @@
   margin-bottom: 24px;
 }
 
+.radioButtonRow {
+  display: flex;
+  justify-content: left;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 24px;
+  white-space: nowrap;
+}
+
+.radioButtonRow > :first-child {
+  margin-right: 36px;
+}
+
 .field {
   width: 100%;
 }
@@ -64,6 +79,10 @@
   width: calc(60% - 9px);
 }
 
+.taxId {
+  margin-top: 24px;
+}
+
 .error {
   @apply --marketplaceModalErrorStyles;
 }
@@ -85,4 +104,61 @@
     text-decoration: underline;
     cursor: pointer;
   }
+}
+
+.bankDetailsStripeField p {
+  @apply --marketplaceH4FontStyles;
+}
+
+.personalAddressContainer {
+  margin-bottom: 28px;
+}
+
+.fieldArrayAdd {
+  @apply --marketplaceLinkStyles;
+  @apply --marketplaceSearchFilterSublabelFontStyles;
+  font-weight: var(--fontWeightMedium);
+  margin-bottom: 2px;
+}
+
+.fieldArrayRemove {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorAnti);
+  float: right;
+  line-height: 20px;
+
+  &:hover {
+    color: var(--matterColor);
+  }
+}
+
+.closeIcon {
+  @apply --marketplaceModalCloseIcon;
+}
+
+.additionalOwnerWrapper {
+  margin-bottom: 35px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 56px;
+  }
+}
+
+.additionalOwnerWrapper .sectionContainer {
+  margin-bottom: 24px;
+}
+
+.additionalOwnerLabel {
+  display: inline-block;
+}
+
+.closeIcon {
+  margin-right: 5px;
+}
+
+.addIcon {
+  margin-right: 7px;
+  display: inline-block;
+  height: 18px;
+  padding-top: 1px;
 }

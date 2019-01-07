@@ -102,3 +102,14 @@
     margin-bottom: 0;
   }
 }
+
+.modalTitle {
+  @apply --marketplaceModalTitleStyles;
+}
+
+.modalPayoutDetailsWrapper {
+  @media (--viewportMedium) {
+    width: 604px;
+    padding-top: 11px;
+  }
+}
