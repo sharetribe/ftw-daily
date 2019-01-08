@@ -140,7 +140,7 @@ needs to be added and the messages in it need to be translated:
 2. Change the messages in the new translations file to the desired language.
 
 > Note: we already have a few other language files available in
-> [translations directory](src/translations/) for you to start customizing translations.
+> [translations directory](../src/translations/) for you to start customizing translations.
 
 Once you have the translations file in place:
 
