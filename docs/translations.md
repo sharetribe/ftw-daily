@@ -134,26 +134,32 @@ More information about adding static content to the application can be found fro
 If you want the template to use a language that is not supported by default a new translation file
 needs to be added and the messages in it need to be translated:
 
-- Copy the default [src/translations/en.json](../src/translations/en.json) English translations file
-  into some other file, for example `it.json` for Italian.
+1. Copy the default [src/translations/en.json](../src/translations/en.json) English translations
+   file into some other file, for example `it.json` for Italian.
 
-- Change the messages in the new translations file to the desired language.
+2. Change the messages in the new translations file to the desired language.
+
+> Note: we already have a few other language files available in
+> [translations directory](src/translations/) for you to start customizing translations.
 
 Once you have the translations file in place:
 
-- In [src/config.js](../src/config.js), change the `locale` variable value to match the new locale
-  (the name of the new translations file, without the extension), for example:
+3. In [src/config.js](../src/config.js), change the `locale` variable value to match the new locale
+   (the name of the new translations file, without the extension), for example:
 
 ```js
 const locale = 'it';
 ```
 
-- In [src/app.js](../src/app.js), change the translation imports to point to the correct
-  `react-intl` locale and the new translations file you created, for example:
+4. In [src/app.js](../src/app.js), change the translation imports to point to the correct
+   `react-intl` locale and the new translations file you created, for example:
 
 ```js
 import localeData from 'react-intl/locale-data/it';
 import messages from './translations/it.json';
+// If you are using a non-english locale with moment library,
+// you should also import time specific formatting rules for that locale
+import 'moment/locale/it';
 ```
 
 Also, in case you will translate the application and develop it forward it is wise to change the

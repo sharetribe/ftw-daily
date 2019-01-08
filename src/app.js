@@ -23,6 +23,9 @@ import config from './config';
 // Remember to also change the language in the config.js file.
 import localeData from 'react-intl/locale-data/en';
 import messages from './translations/en.json';
+// If you are using a non-english locale with moment library,
+// you should also import time specific formatting rules for that locale
+// e.g. for French: import 'moment/locale/fr';
 
 const isTestEnv = process.env.NODE_ENV === 'test';
 
