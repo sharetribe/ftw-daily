@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v2.7.0] 2019-01-08
+
 - [add] Add Spanish translations file: es.json and update docs/translations.md
   [#992](https://github.com/sharetribe/flex-template-web/pull/992)
 - [add] Add French translations to new translations keys. Few minor updates to English translations
@@ -25,6 +27,8 @@ way to update this template, but currently, we follow a pattern:
   'line-item/night', or 'line-item/day'. There's also 'manage availability' link in the
   ManageListingCards of "your listings" page.
   [#972](https://github.com/sharetribe/flex-template-web/pull/972)
+
+  [v2.7.0]: https://github.com/sharetribe/flex-template-web/compare/v2.6.0...v2.7.0
 
 ## [v2.6.0] 2019-01-02
 
