@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Add Spanish translations file: es.json and update docs/translations.md
+  [#992](https://github.com/sharetribe/flex-template-web/pull/992)
 - [add] Add French translations to new translations keys. Few minor updates to English translations
   for consistency. [#991](https://github.com/sharetribe/flex-template-web/pull/991)
 - [add] Support for Stripe company accounts. `PayoutDetailsForm` was separated into smaller
