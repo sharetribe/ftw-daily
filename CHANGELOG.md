@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Fixed a small typo. [#995](https://github.com/sharetribe/flex-template-web/pull/995)
+
 ## [v2.7.0] 2019-01-08
 
 - [add] Add Spanish translations file: es.json and update docs/translations.md
