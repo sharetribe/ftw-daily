@@ -77,7 +77,8 @@
     "start": "node server/index.js",
     "dev-server": "export NODE_ENV=development PORT=4000 REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000&&yarn run build&&nodemon --watch server server/index.js",
     "heroku-postbuild": "yarn run build",
-    "translate": "node scripts/translations.js"
+    "translate": "node scripts/translations.js",
+    "config": "node scripts/config.js"
   },
   "prettier": {
     "singleQuote": true,
