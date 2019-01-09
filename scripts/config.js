@@ -21,6 +21,44 @@ const mandatoryVariables = [
   },
 ];
 
+const defaultVariables = [
+  {
+    type: 'input',
+    name: 'REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY',
+    message: `What is your marketplace currency?`,
+    default: function() {
+      return 'USD';
+    },
+  },
+  {
+    type: 'input',
+    name: 'REACT_APP_CANONICAL_ROOT_URL',
+    message: `Canonical root url if used e.g. for SEO`,
+    default: function() {
+      return 'http://localhost:3000';
+    },
+  },
+  {
+    type: 'confirm',
+    name: 'REACT_APP_AVAILABILITY_ENABLED',
+    message: `Do you want to enable availability calendar?
+${chalk.dim(
+      'This setting enables the Availability Calendar for listings. The default value for this setting is true.'
+    )}
+`,
+    default: true,
+  },
+  {
+    type: 'confirm',
+    name: 'REACT_APP_DEFAULT_SEARCHES_ENABLED',
+    message: `Do you want to enable default search suggestions?
+${chalk.dim(
+      'This setting enables the Default Search Suggestions in location autocomplete search input. The default value for this setting is true.'
+    )}
+`,
+    default: true,
+  },
+];
 
 const updateEnvFile = data => {
   let content = '';
@@ -46,11 +84,11 @@ const checkIfSameLine = (answers, line) => {
 const readLines = answers => {
   return new Promise((resolve, reject) => {
     const rl = readline.createInterface({
-      input: require('fs').createReadStream('./.env')
+      input: require('fs').createReadStream('./.env'),
     });
-    
+
     const data = [];
-    rl.on('line', function (line) {
+    rl.on('line', function(line) {
       const key = checkIfSameLine(answers, line);
       if (key) {
         data.push(`${key}=${answers[key]}\n`);
@@ -58,7 +96,7 @@ const readLines = answers => {
         data.push(`${line}\n`);
       }
     });
-    
+
     rl.on('close', () => {
       resolve(data);
     });
@@ -72,7 +110,7 @@ const createEnvFile = () => {
 };
 
 const run = () => {
-if (fs.existsSync(`./.env`)) {
+  if (fs.existsSync(`./.env`)) {
     console.log(
       `.env file already exists. You can edit the variables directly in that file. Remember to restart the application after editing the environment variables!`
     );
@@ -89,8 +127,19 @@ if (fs.existsSync(`./.env`)) {
       .then(answers => {
         return readLines(answers);
       })
-      .then(data => {        
+      .then(data => {
         updateEnvFile(data);
+
+        console.log(chalk.bold('Default variables'));
+        inquirer
+          .prompt(defaultVariables)
+          .then(answers => {
+            return readLines(answers);
+          })
+          .then(data => {
+            updateEnvFile(data);
+            console.log(`Start the application by running ${chalk.cyan('yarn run dev')}`);
+          });
       })
       .catch(err => {
         console.log(chalk.red(`An error occurred due to: ${err.message}`));
