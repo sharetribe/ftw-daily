@@ -178,8 +178,9 @@ export class TransactionPanelComponent extends Component {
       : 'TransactionPanel.perUnit';
 
     const price = currentListing.attributes.price;
-    const formattedPrice = formatMoney(intl, price);
-    const bookingSubTitle = `${formattedPrice} ${intl.formatMessage({ id: unitTranslationKey })}`;
+    const bookingSubTitle = price
+      ? `${formatMoney(intl, price)} ${intl.formatMessage({ id: unitTranslationKey })}`
+      : '';
 
     const firstImage =
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
