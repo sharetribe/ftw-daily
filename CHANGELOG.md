@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Separate date ranges when fetching availability exceptions and bookings on availability
+  calendar. After this change, providers can block dates 365 days in advance instead of just 180
+  days. [#997](https://github.com/sharetribe/flex-template-web/pull/997)
 - [fix] Fixed a small typo. [#995](https://github.com/sharetribe/flex-template-web/pull/995)
 
 ## [v2.7.0] 2019-01-08
