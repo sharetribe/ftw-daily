@@ -24,10 +24,14 @@ import css from './ManageAvailabilityCalendar.css';
 // Constants
 
 const HORIZONTAL_ORIENTATION = 'horizontal';
-const MAX_AVAILABILITY_EXCEPTIONS_RANGE = 180;
+const MAX_AVAILABILITY_EXCEPTIONS_RANGE = 365;
+const MAX_BOOKINGS_RANGE = 180;
 const TODAY_MOMENT = moment().startOf('day');
 const END_OF_RANGE_MOMENT = TODAY_MOMENT.clone()
   .add(MAX_AVAILABILITY_EXCEPTIONS_RANGE - 1, 'days')
+  .startOf('day');
+const END_OF_BOOKING_RANGE_MOMENT = TODAY_MOMENT.clone()
+  .add(MAX_BOOKINGS_RANGE - 1, 'days')
   .startOf('day');
 
 // Constants for calculating day width (aka table cell dimensions)
@@ -100,14 +104,15 @@ const isDateOutsideRange = date => {
 };
 const isOutsideRange = memoize(isDateOutsideRange);
 
-const isMonthInRange = monthMoment => {
-  const isAfterThisMonth = monthMoment.isSameOrAfter(TODAY_MOMENT, 'month');
-  const isBeforeEndOfRange = monthMoment.isSameOrBefore(END_OF_RANGE_MOMENT, 'month');
+const isMonthInRange = (monthMoment, startOfRange, endOfRange) => {
+  const isAfterThisMonth = monthMoment.isSameOrAfter(startOfRange, 'month');
+  const isBeforeEndOfRange = monthMoment.isSameOrBefore(endOfRange, 'month');
   return isAfterThisMonth && isBeforeEndOfRange;
 };
 
 const isPast = date => !isInclusivelyAfterDay(date, TODAY_MOMENT);
 const isAfterEndOfRange = date => !isInclusivelyBeforeDay(date, END_OF_RANGE_MOMENT);
+const isAfterEndOfBookingRange = date => !isInclusivelyBeforeDay(date, END_OF_BOOKING_RANGE_MOMENT);
 
 const isBooked = (bookings, day) => {
   return !!bookings.find(b => {
@@ -226,7 +231,7 @@ class ManageAvailabilityCalendar extends Component {
     const { availability, listingId } = this.props;
 
     // Don't fetch exceptions for past months or too far in the future
-    if (isMonthInRange(monthMoment)) {
+    if (isMonthInRange(monthMoment, TODAY_MOMENT, END_OF_RANGE_MOMENT)) {
       // Use "today", if the first day of given month is in the past
       const startMoment = isPast(monthMoment) ? TODAY_MOMENT : monthMoment;
       const start = momentToUTCDate(startMoment);
@@ -241,9 +246,17 @@ class ManageAvailabilityCalendar extends Component {
       // Fetch AvailabilityExceptions for this month
       availability.onFetchAvailabilityExceptions({ listingId, start, end });
 
-      // Fetch Bookings for this month (if they are in pending or accepted state)
-      const state = ['pending', 'accepted'].join(',');
-      availability.onFetchBookings({ listingId, start, end, state });
+      // Fetch Bookings if the month is within bookable range (180 days)
+      if (isMonthInRange(startMoment, TODAY_MOMENT, END_OF_BOOKING_RANGE_MOMENT)) {
+        const endMomentForBookings = isAfterEndOfBookingRange(nextMonthMoment)
+          ? END_OF_BOOKING_RANGE_MOMENT.clone().add(1, 'days')
+          : nextMonthMoment;
+        const endForBookings = momentToUTCDate(endMomentForBookings);
+
+        // Fetch Bookings for this month (if they are in pending or accepted state)
+        const state = ['pending', 'accepted'].join(',');
+        availability.onFetchBookings({ listingId, start, end: endForBookings, state });
+      }
     }
   }
 
@@ -374,7 +387,7 @@ class ManageAvailabilityCalendar extends Component {
       fetchBookingsError,
     } = currentMonthData || {};
     const isMonthDataFetched =
-      !isMonthInRange(currentMonth) ||
+      !isMonthInRange(currentMonth, TODAY_MOMENT, END_OF_RANGE_MOMENT) ||
       (!!currentMonthData && !fetchExceptionsInProgress && !fetchBookingsInProgress);
 
     const monthName = currentMonth.format('MMMM');
