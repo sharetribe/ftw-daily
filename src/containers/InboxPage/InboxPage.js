@@ -6,8 +6,6 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import moment from 'moment';
 import classNames from 'classnames';
 import {
-  LINE_ITEM_DAY,
-  LINE_ITEM_UNITS,
   txHasFirstReview,
   txIsAccepted,
   txIsCanceled,
@@ -16,8 +14,8 @@ import {
   txIsEnquired,
   txIsRequested,
   txIsReviewed,
-  propTypes,
-} from '../../util/types';
+} from '../../util/transaction';
+import { LINE_ITEM_DAY, LINE_ITEM_UNITS, propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { ensureCurrentUser, userDisplayName } from '../../util/data';
 import { dateFromAPIToLocalNoon, daysBetween } from '../../util/dates';

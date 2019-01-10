@@ -7,7 +7,7 @@
 import moment from 'moment';
 import reduce from 'lodash/reduce';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { TRANSITION_ENQUIRE } from '../../util/types';
+import { TRANSITION_ENQUIRE } from '../../util/transaction';
 
 const { UUID, Money } = sdkTypes;
 

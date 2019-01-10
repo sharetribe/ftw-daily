@@ -10,7 +10,8 @@ import {
 } from '../../util/test-data';
 import { InboxPageComponent, InboxItem } from './InboxPage';
 import routeConfiguration from '../../routeConfiguration';
-import { LINE_ITEM_NIGHT, TRANSITION_REQUEST } from '../../util/types';
+import { TRANSITION_REQUEST } from '../../util/transaction';
+import { LINE_ITEM_NIGHT } from '../../util/types';
 
 const noop = () => null;
 

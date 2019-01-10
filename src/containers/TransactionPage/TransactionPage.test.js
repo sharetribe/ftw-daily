@@ -8,7 +8,7 @@ import {
   fakeIntl,
 } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
-import { TRANSITION_REQUEST } from '../../util/types';
+import { TRANSITION_REQUEST } from '../../util/transaction';
 import { TransactionPageComponent } from './TransactionPage';
 
 const noop = () => null;
