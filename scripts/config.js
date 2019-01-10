@@ -132,15 +132,28 @@ const createEnvFile = () => {
 };
 
 const run = () => {
-  if (fs.existsSync(`./.env`)) {
-    console.log(
-      `.env file already exists. You can edit the variables directly in that file. Remember to restart the application after editing the environment variables!`
-    );
-  } else {
-    console.log(
-      `You don't have .env file yet. With this tool you can configure required enviroment variables and create .env file automatically.`
-    );
+  if (process.argv[2] && process.argv[2] === '--check') {
+    if (!fs.existsSync(`./.env`)) {
+      process.on('exit', code => {
+        console.log(`
 
+${chalk.bold.red(`You don't have required .env file!`)} 
+
+Some environment variables are required before starting the app. You can create the .env file and configure the variables by running ${chalk.cyan.bold(
+          'yarn run config'
+        )}
+
+  `);
+      });
+
+      process.exit(1);
+    }
+  } else if (fs.existsSync(`./.env`)) {
+    console.log(`
+.env file already exists. You can edit the variables directly from the file. Remember to restart the application after editing the environment variables!
+
+    `);
+  } else {
     createEnvFile();
 
     console.log(chalk.yellow.bold(`Required variables:`));
@@ -166,7 +179,7 @@ ${chalk.green.bold('Environment variables saved succesfully!')}
   
 Note that the .env file is a hidden file so it might not be visible directly in directory listing. If you want to update the environment variables you need to edit the file. Remember to restart the application after editing the environment variables! 
   
-Start the Flex template application by running ${chalk.cyan('yarn run dev')}
+Start the Flex template application by running ${chalk.bold.cyan('yarn run dev')}
           `);
           });
       })

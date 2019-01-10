@@ -66,7 +66,8 @@
   },
   "scripts": {
     "clean": "rm -rf build/*",
-    "dev": "sharetribe-scripts start",
+    "config": "node scripts/config.js",
+    "dev": "node scripts/config.js --check && sharetribe-scripts start",
     "build": "sharetribe-scripts build",
     "format": "prettier --write '**/*.{js,css}'",
     "format-ci": "prettier --list-different '**/*.{js,css}'",
@@ -77,8 +78,7 @@
     "start": "node server/index.js",
     "dev-server": "export NODE_ENV=development PORT=4000 REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000&&yarn run build&&nodemon --watch server server/index.js",
     "heroku-postbuild": "yarn run build",
-    "translate": "node scripts/translations.js",
-    "config": "node scripts/config.js"
+    "translate": "node scripts/translations.js"
   },
   "prettier": {
     "singleQuote": true,
