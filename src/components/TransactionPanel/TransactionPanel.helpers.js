@@ -93,7 +93,8 @@ export const AddressLinkMaybe = props => {
   const isCustomer = transactionRole === 'customer';
   const txIsAcceptedForCustomer = isCustomer && txHasBeenAccepted(transaction);
 
-  const { address, building } = currentListing.attributes.publicData.location || {};
+  const publicData = currentListing.attributes.publicData || {};
+  const { address, building } = publicData.location || {};
   const geolocation = currentListing.attributes.geolocation;
 
   const { lat, lng } = geolocation || {};

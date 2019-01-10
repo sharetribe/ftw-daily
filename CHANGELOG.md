@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] UI was broken for banned user after transaction enquiry changes.
+  [#996](https://github.com/sharetribe/flex-template-web/pull/996)
+
 ## [v2.7.1] 2019-01-09
 
 - [add] Separate date ranges when fetching availability exceptions and bookings on availability
