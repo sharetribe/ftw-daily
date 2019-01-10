@@ -3,11 +3,8 @@ import isUndefined from 'lodash/isUndefined';
 import config from '../config';
 import { denormalisedResponseEntities, ensureOwnListing } from '../util/data';
 import { storableError } from '../util/errors';
-import {
-  LISTING_STATE_DRAFT,
-  TRANSITION_REQUEST,
-  TRANSITION_REQUEST_AFTER_ENQUIRY,
-} from '../util/types';
+import { TRANSITION_REQUEST, TRANSITION_REQUEST_AFTER_ENQUIRY } from '../util/transaction';
+import { LISTING_STATE_DRAFT } from '../util/types';
 import * as log from '../util/log';
 import { authInfo } from './Auth.duck';
 

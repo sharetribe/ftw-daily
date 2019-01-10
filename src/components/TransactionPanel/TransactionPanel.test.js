@@ -19,8 +19,8 @@ import {
   TRANSITION_ENQUIRE,
   TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
-} from '../../util/types';
-import { BreakdownMaybe } from './TransactionPanel.helpers';
+} from '../../util/transaction';
+import BreakdownMaybe from './BreakdownMaybe';
 import { TransactionPanelComponent } from './TransactionPanel';
 
 const noop = () => null;

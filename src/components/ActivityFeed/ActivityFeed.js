@@ -21,8 +21,8 @@ import {
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
   areReviewsCompleted,
-  propTypes,
-} from '../../util/types';
+} from '../../util/transaction';
+import { propTypes } from '../../util/types';
 import * as log from '../../util/log';
 
 import css from './ActivityFeed.css';

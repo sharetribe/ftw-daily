@@ -2,7 +2,8 @@ import React from 'react';
 import { bool } from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { formatMoney } from '../../util/currency';
-import { txIsCanceled, txIsCompleted, txIsDeclinedOrExpired, propTypes } from '../../util/types';
+import { txIsCanceled, txIsCompleted, txIsDeclinedOrExpired } from '../../util/transaction';
+import { propTypes } from '../../util/types';
 
 import css from './BookingBreakdown.css';
 

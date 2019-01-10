@@ -1,9 +1,6 @@
 import Decimal from 'decimal.js';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import {
-  LINE_ITEM_DAY,
-  LINE_ITEM_NIGHT,
-  LINE_ITEM_UNITS,
   TRANSITION_ACCEPT,
   TRANSITION_CANCEL,
   TRANSITION_COMPLETE,
@@ -11,7 +8,8 @@ import {
   TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
   TX_TRANSITION_ACTOR_CUSTOMER,
-} from '../../util/types';
+} from '../../util/transaction';
+import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS } from '../../util/types';
 import config from '../../config';
 import BookingBreakdown from './BookingBreakdown';
 

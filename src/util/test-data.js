@@ -7,9 +7,8 @@ import {
   TRANSITION_REQUEST,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
-  LISTING_STATE_PUBLISHED,
-  TIME_SLOT_DAY,
-} from '../util/types';
+} from '../util/transaction';
+import { LISTING_STATE_PUBLISHED, TIME_SLOT_DAY } from '../util/types';
 
 const { UUID, LatLng, Money } = sdkTypes;
 
