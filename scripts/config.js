@@ -7,17 +7,29 @@ const mandatoryVariables = [
   {
     type: 'input',
     name: 'REACT_APP_SHARETRIBE_SDK_CLIENT_ID',
-    message: `What is your Flex client id?`,
+    message: `What is your Flex client ID?
+${chalk.dim(
+      'Client ID is needed for connecting with Flex API. You can find your client ID from Flex Console.'
+    )} 
+`,
   },
   {
     type: 'input',
     name: 'REACT_APP_STRIPE_PUBLISHABLE_KEY',
-    message: `What is your Stripe publishable key?`,
+    message: `What is your Stripe publishable key?
+${chalk.dim(
+      'Stripe publishable API key is for generating tokens with Stripe API. Use test key (prefix pk_test_) for development. The secret key needs to be added to Flex Console.'
+    )}
+`,
   },
   {
     type: 'input',
     name: 'REACT_APP_MAPBOX_ACCESS_TOKEN',
-    message: `What is your Mapbox access token?`,
+    message: `What is your Mapbox access token?
+${chalk.dim(
+      'Mapbox is the default map provider of the application. Sign up for Mapbox and go the to account page. Then click Create access token. For more information see the: Integrating to map providers documentation.'
+    )}
+`,
   },
 ];
 
@@ -25,7 +37,11 @@ const defaultVariables = [
   {
     type: 'input',
     name: 'REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY',
-    message: `What is your marketplace currency?`,
+    message: `What is your marketplace currency?
+${chalk.dim(
+      'The currency used in the Marketplace must be in ISO 4217 currency code. For example USD, EUR, CAD, AUD, etc. The default value is USD.'
+    )} 
+`,
     default: function() {
       return 'USD';
     },
@@ -33,7 +49,11 @@ const defaultVariables = [
   {
     type: 'input',
     name: 'REACT_APP_CANONICAL_ROOT_URL',
-    message: `Canonical root url if used e.g. for SEO`,
+    message: `What is your canonical root URL? 
+${chalk.dim(
+      'Canonical root URL of the marketplace is needed for social media sharing and SEO optimization. When developing the template application locally URL is usually http://localhost:3000'
+    )}
+`,
     default: function() {
       return 'http://localhost:3000';
     },
@@ -81,6 +101,7 @@ const checkIfSameLine = (answers, line) => {
   return foundKey;
 };
 
+// Read all lines from existing .env file to array. If line matches one of the keys in user's answers update add value to that line. Otherwise keep the original line.
 const readLines = answers => {
   return new Promise((resolve, reject) => {
     const rl = readline.createInterface({
@@ -103,6 +124,7 @@ const readLines = answers => {
   });
 };
 
+// Create new .env file using .env-template
 const createEnvFile = () => {
   fs.copyFileSync('./.env-template', './.env', err => {
     if (err) throw err;
@@ -121,7 +143,8 @@ const run = () => {
 
     createEnvFile();
 
-    console.log(chalk.bold('Mandatory variables'));
+    console.log(chalk.yellow.bold(`Required variables:`));
+
     inquirer
       .prompt(mandatoryVariables)
       .then(answers => {
@@ -130,7 +153,7 @@ const run = () => {
       .then(data => {
         updateEnvFile(data);
 
-        console.log(chalk.bold('Default variables'));
+        console.log(chalk.yellow.bold(`Variables with default values:`));
         inquirer
           .prompt(defaultVariables)
           .then(answers => {
@@ -138,7 +161,13 @@ const run = () => {
           })
           .then(data => {
             updateEnvFile(data);
-            console.log(`Start the application by running ${chalk.cyan('yarn run dev')}`);
+            console.log(`
+${chalk.green.bold('Environment variables saved succesfully!')} 
+  
+Note that the .env file is a hidden file so it might not be visible directly in directory listing. If you want to update the environment variables you need to edit the file. Remember to restart the application after editing the environment variables! 
+  
+Start the Flex template application by running ${chalk.cyan('yarn run dev')}
+          `);
           });
       })
       .catch(err => {
