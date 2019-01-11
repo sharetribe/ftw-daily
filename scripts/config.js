@@ -10,24 +10,38 @@ const mandatoryVariables = [
     message: `What is your Flex client ID?
 ${chalk.dim(
       'Client ID is needed for connecting with Flex API. You can find your client ID from Flex Console.'
-    )} 
+    )}
 `,
+    validate: function(value) {
+      if (value.match(/^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/i)) {
+        return true;
+      }
+      return 'Please enter valid Flex Client ID. You can check it form Flex Console!';
+    },
   },
   {
     type: 'input',
     name: 'REACT_APP_STRIPE_PUBLISHABLE_KEY',
     message: `What is your Stripe publishable key?
 ${chalk.dim(
-      'Stripe publishable API key is for generating tokens with Stripe API. Use test key (prefix pk_test_) for development. The secret key needs to be added to Flex Console.'
+      `Stripe publishable API key is for generating tokens with Stripe API. Use test key (prefix pk_test_) for development. The secret key needs to be added to Flex Console. 
+If you don't set the Stripe key, payment's won't work in the application.`
     )}
 `,
+    validate: function(value) {
+      if (value.match(/^pk_/)) {
+        return true;
+      }
+      return 'Please enter Stripe publishable key with prefix pk_!';
+    },
   },
   {
     type: 'input',
     name: 'REACT_APP_MAPBOX_ACCESS_TOKEN',
     message: `What is your Mapbox access token?
 ${chalk.dim(
-      'Mapbox is the default map provider of the application. Sign up for Mapbox and go the to account page. Then click Create access token. For more information see the: Integrating to map providers documentation.'
+      `Mapbox is the default map provider of the application. Sign up for Mapbox and go the to account page. Then click Create access token. For more information see the: Integrating to map providers documentation.
+If you don't set the Mapbox key, the map components won't work in the application.`
     )}
 `,
   },
@@ -44,6 +58,12 @@ ${chalk.dim(
 `,
     default: function() {
       return 'USD';
+    },
+    validate: function(value) {
+      if (value.match(/^[a-zA-Z]{3}$/)) {
+        return true;
+      }
+      return 'Please enter currency in ISO 4217 format (e.g. USD, EUR, CAD...)';
     },
   },
   {
@@ -112,7 +132,9 @@ const readLines = answers => {
     rl.on('line', function(line) {
       const key = checkIfSameLine(answers, line);
       if (key) {
-        data.push(`${key}=${answers[key]}\n`);
+        const value = `${answers[key]}`;
+
+        data.push(`${key}=${value.trim()}\n`);
       } else {
         data.push(`${line}\n`);
       }
