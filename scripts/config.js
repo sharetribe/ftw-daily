@@ -53,6 +53,9 @@ Remember to restart the application after editing the environment variables! You
           const settings = findSavedValues();
           askQuestions(settings);
         }
+      })
+      .catch(err => {
+        console.log(chalk.red(`An error occurred due to: ${err.message}`));
       });
   } else {
     inquirer
@@ -84,8 +87,12 @@ We recommend setting up the required variables before starting the application!`
 
 /**
  * Questions for mandatory variables.
+ * If some values already exist in the .env file use them as a default.
+ * Otherwise don't use default value in the questions.
  *
- * @param {*} settings - list of values used as default if user is editing the .env file
+ * @param {array} settings - array of values used as default if user is editing the .env file
+ *
+ * @returns array of questions passed to Inquirer
  *
  */
 const mandatoryVariables = settings => {
@@ -176,8 +183,12 @@ ${chalk.dim(
 
 /**
  * Questions for advances variables. User can choose to edit these or not.
+ * If some values already exist in the .env file use them as a default.
+ * Otherwise don't use default value in the questions.
  *
- * @param {*} settings - list of values used as default if user is editing the .env file
+ * @param {array} settings - array of values used as default if user is editing the .env file
+ *
+ * @returns array of questions passed to Inquirer
  *
  */
 
@@ -241,6 +252,14 @@ ${chalk.dim(
   ];
 };
 
+/**
+ * First ask mandatory variables and then check if user also wants to edit the advanced settings.
+ * Update the .env file with user input.
+ *
+ * @param {array} settings - array of values used as default if user is editing the .env file
+ *
+ */
+
 const askQuestions = settings => {
   inquirer
     .prompt(mandatoryVariables(settings))
@@ -268,6 +287,9 @@ const askQuestions = settings => {
     });
 };
 
+/**
+ * Show succes message used after creating the .env file
+ */
 const showSuccessMessage = () => {
   console.log(`
 ${chalk.green.bold('.env file saved succesfully!')} 
@@ -289,6 +311,11 @@ const createEnvFile = () => {
   });
 };
 
+/**
+ * Get the saved values from .env file so they can be used as a default values
+ *
+ * @return array containing all keys and values saved to .env file
+ */
 const findSavedValues = () => {
   const savedEnvFile = fs.readFileSync('./.env').toString();
 
@@ -335,6 +362,14 @@ const readLines = answers => {
   });
 };
 
+/**
+ *
+ * Creates array of data that is saved to .env file
+ *
+ * @param {object} values contais lines read from .env file and answers from the user
+ *
+ * @returns array containing the data that needs to be saved to .env file
+ */
 const getData = values => {
   const { lines, answers } = values;
 
@@ -351,6 +386,11 @@ const getData = values => {
   return data;
 };
 
+/**
+ * Joins lines to create content that is written to .env file. This will overwrite the previous content.
+ *
+ * @param {array} data arry of lines to be written into .env file
+ */
 const updateEnvFile = data => {
   fs.writeFileSync('./.env', data.join(''));
 };
