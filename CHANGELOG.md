@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Use environment variable `REACT_APP_AVAILABILITY_ENABLED` to enable or disable availability
+  calendar. In the config.js file variable fetchAvailableTimeSlots is now renamed to more general
+  enableAvailability because it affects both fetching availability data and enabling the
+  availability calendar. [#1000](https://github.com/sharetribe/flex-template-web/pull/1000)
 - [fix] UI was broken for banned user after transaction enquiry changes.
   [#996](https://github.com/sharetribe/flex-template-web/pull/996)
 
