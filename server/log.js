@@ -7,7 +7,7 @@
 const Sentry = require('@sentry/node');
 
 const ENV = process.env.REACT_APP_ENV;
-const SENTRY_DSN = process.env.SERVER_SENTRY_DSN;
+const SENTRY_DSN = process.env.REACT_APP_SENTRY_DSN;
 
 /**
  * Set up error loggin. If a Sentry DSN is defined
