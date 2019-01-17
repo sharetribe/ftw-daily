@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v2.8.0] 2019-01-17
+
 - [add] Add CLI tool for creating .env file and setting up the environment variables.
   [#994](https://github.com/sharetribe/flex-template-web/pull/994)
 - [change] Change from Raven to Sentry SDKs for browser and Node.js to version 4.5.1. With the new
@@ -25,6 +27,8 @@ way to update this template, but currently, we follow a pattern:
   availability calendar. [#1000](https://github.com/sharetribe/flex-template-web/pull/1000)
 - [fix] UI was broken for banned user after transaction enquiry changes.
   [#996](https://github.com/sharetribe/flex-template-web/pull/996)
+
+  [v2.8.0]: https://github.com/sharetribe/flex-template-web/compare/v2.7.1...v2.8.0
 
 ## [v2.7.1] 2019-01-09
 
