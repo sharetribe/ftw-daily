@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Change from Raven to Sentry SDKs for browser and Node.js to version 4.5.1. With the new
+  SDKs only one DSN needs to be configured so update also environment variables and documentation
+  related to Sentry. [#999](https://github.com/sharetribe/flex-template-web/pull/999)
 - [fix] Use environment variable `REACT_APP_AVAILABILITY_ENABLED` to enable or disable availability
   calendar. In the config.js file variable fetchAvailableTimeSlots is now renamed to more general
   enableAvailability because it affects both fetching availability data and enabling the

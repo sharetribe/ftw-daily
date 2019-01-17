@@ -6,7 +6,7 @@
  *
  */
 
-import Raven from 'raven-js';
+import * as Sentry from '@sentry/browser';
 import config from '../config';
 import { responseApiErrorInfo } from './errors';
 
@@ -18,7 +18,10 @@ export const setup = () => {
   if (config.sentryDsn) {
     // Configures the Sentry client. Adds a handler for
     // any uncaught exception.
-    Raven.config(config.sentryDsn, { environment: config.env }).install();
+    Sentry.init({
+      dsn: config.sentryDsn,
+      environment: config.env,
+    });
   }
 };
 
@@ -29,18 +32,19 @@ export const setup = () => {
  * @param {String} userId ID of current user
  */
 export const setUserId = userId => {
-  if (Raven.isSetup()) {
-    Raven.setUserContext({ id: userId });
-  }
+  Sentry.configureScope(scope => {
+    scope.setUser({ id: userId });
+  });
 };
 
 /**
  * Clears the user ID.
  */
+
 export const clearUserId = () => {
-  if (Raven.isSetup()) {
-    Raven.setUserContext();
-  }
+  Sentry.configureScope(scope => {
+    scope.remove_user();
+  });
 };
 
 /**
@@ -53,9 +57,16 @@ export const clearUserId = () => {
  * @param {Object} data Additional data to be sent to Sentry
  */
 export const error = (e, code, data) => {
-  if (Raven.isSetup()) {
+  if (config.sentryDsn) {
     const extra = { ...data, apiErrorData: responseApiErrorInfo(e) };
-    Raven.captureException(e, { tags: { code }, extra });
+
+    Sentry.withScope(scope => {
+      scope.setTag('code', code);
+      Object.keys(extra).forEach(key => {
+        scope.setExtra(key, extra[key]);
+      });
+      Sentry.captureException(e);
+    });
   } else {
     console.error(e); // eslint-disable-line
     console.error('Error code:', code, 'data:', data);

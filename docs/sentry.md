@@ -7,17 +7,16 @@ be used but the Sentry client comes already strapped into application.
 ## Setting up Sentry keys
 
 To enable the Sentry error logging a DSN, _Data Source Name_ has to be provided as an environment
-variable. Browser and Node environments both require their own keys. The key names are as follows:
+variable. Browser and Node environments use both the same key:
 
-- **SERVER_SENTRY_DSN** - the private Sentry DSN, used on the server side
-- **REACT_APP_PUBLIC_SENTRY_DSN** - the public Sentry DSN, used in the browser
+- **REACT_APP_SENTRY_DSN**
 
-The DSN keys can be aquired from the Sentry project settings. To test them in your local environment
-they can be passed for example to the `yarn run dev-server` command:
+The DSN key can be aquired from the Sentry project settings. To test it in your local environment it
+can be passed for example to the `yarn run dev-server` command:
 
-    REACT_APP_PUBLIC_SENTRY_DSN='<public-sentry-dsn>' SERVER_SENTRY_DSN='<private-sentry-dsn>' yarn run dev-server
+    REACT_APP_SENTRY_DSN='<sentry-dsn>'  yarn run dev-server
 
-If the Sentry DSN keys are not provided the template app will log errors to the console. The logging
+If the Sentry DSN key is not provided the template app will log errors to the console. The logging
 and Sentry setup is implemented in [util/log.js](../src/util/log.js) and
 [server/log.js](../server/log.js) so refer to those files to change the external logging service or
 the logging logic in general.
