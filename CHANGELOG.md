@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Limit location autocomplete by adding an optional country parameter to geocoding call in
+  both Mapbox and Google Maps integrations. Also updated Mapbox SDK to version 0.5.0.
+  [#1002](https://github.com/sharetribe/flex-template-web/pull/1002)
+
 ## [v2.8.0] 2019-01-17
 
 - [add] Add CLI tool for creating .env file and setting up the environment variables.
