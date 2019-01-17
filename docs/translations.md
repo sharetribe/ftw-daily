@@ -179,7 +179,7 @@ In case you have added a new language translation file and are pulling translati
 in sync. Running the following command in the project root
 
 ```
-node translations.js
+yarn run translate
 ```
 
 will start a command line application:
@@ -189,8 +189,8 @@ will start a command line application:
 The command line application can be used to match a translation file against the English
 translations. If your new translations file follows the `<LANG CODE>.json` naming, the CLI will pick
 it up automatically. In order to improve readability, you can add the language name to the
-`TARGET_LANG_NAMES` map in `translations.js` if it is not yet in there and the CLI will use the
-correct name for your language instead of the language code when prompting about translations.
+`TARGET_LANG_NAMES` map in `scripts/translations.js` if it is not yet in there and the CLI will use
+the correct name for your language instead of the language code when prompting about translations.
 
 In case you wish to use something else than English as the source language, modify the `SOURCE_LANG`
-object in `translations.js` to match your needs.
+object in `scripts/translations.js` to match your needs.

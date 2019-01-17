@@ -28,8 +28,9 @@ them have defaults that work for development environment. For production deploys
 ## Defining configuration
 
 When the app is started locally with `yarn run dev` or `yarn run dev-server`, you can set
-environment variables by using the (gitignored) `.env` file. The repository contains a template file
-`.env-template` with default configuration. Just copy that as `.env` and edit as necessary.
+environment variables by using the (gitignored) `.env` file. You can edit the basic variables via
+`yarn run config` or by editing directly the .env file. Some variables can be edited only in the
+.env file. The repository contains a template file `.env-template` with default configuration.
 
 In production, it's recommended that you set the configuration via env variables and do not deploy
 an .env file. The client application will only be packaged with env variables that start with

@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Add CLI tool for creating .env file and setting up the environment variables.
+  [#994](https://github.com/sharetribe/flex-template-web/pull/994)
 - [change] Change from Raven to Sentry SDKs for browser and Node.js to version 4.5.1. With the new
   SDKs only one DSN needs to be configured so update also environment variables and documentation
   related to Sentry. [#999](https://github.com/sharetribe/flex-template-web/pull/999)

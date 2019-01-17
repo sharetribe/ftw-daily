@@ -80,17 +80,24 @@ In the `master` branch (or in the branch you want to merge in the upstream chang
 
 See also the [Syncing a fork](https://help.github.com/articles/syncing-a-fork/) documentation.
 
+## Installing dependecies
+
+In your project root, install dependencies:
+
+    yarn install
+
 ## Configuration
 
 There are some mandatory configuration, and some configuration that you most likely want to at least
 go through.
 
-To get started, first copy the config template:
+To get started, run:
 
-    cp .env-template .env
+    yarn run config
 
-The `.env` file is the place to add your local configuration. It is ignored in Git, so you'll have
-to add the corresponding configuration also to your server environment.
+This command will create `.env` file and guide you trough setting up the required environment
+variables. The `.env` file is the place to add your local configuration. It is ignored in Git, so
+you'll have to add the corresponding configuration also to your server environment.
 
 There are some mandatory configuration variables that are defined in the template. See the
 [Environment configuration variables](env.md) documentation for more information.
@@ -98,10 +105,6 @@ There are some mandatory configuration variables that are defined in the templat
 See also the [src/config.js](../src/config.js) file for more configuration options.
 
 ## Development
-
-In your project root, install dependencies:
-
-    yarn install
 
 To develop the application and to see changes live, start the frontend development server:
 
