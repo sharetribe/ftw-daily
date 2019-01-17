@@ -123,6 +123,7 @@ export const ManageListingCardComponent = props => {
     onOpenListing,
     onToggleMenu,
     renderSizes,
+    availabilityEnabled,
   } = props;
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
@@ -335,15 +336,19 @@ export const ManageListingCardComponent = props => {
             <FormattedMessage id="ManageListingCard.editListing" />
           </NamedLink>
 
-          <span className={css.manageLinksSeparator}>{' • '}</span>
+          {availabilityEnabled ? (
+            <React.Fragment>
+              <span className={css.manageLinksSeparator}>{' • '}</span>
 
-          <NamedLink
-            className={css.manageLink}
-            name="EditListingPage"
-            params={{ id, slug, type: 'edit', tab: 'availability' }}
-          >
-            <FormattedMessage id="ManageListingCard.manageAvailability" />
-          </NamedLink>
+              <NamedLink
+                className={css.manageLink}
+                name="EditListingPage"
+                params={{ id, slug, type: editListingLinkType, tab: 'availability' }}
+              >
+                <FormattedMessage id="ManageListingCard.manageAvailability" />
+              </NamedLink>
+            </React.Fragment>
+          ) : null}
         </div>
       </div>
     </div>
@@ -355,6 +360,7 @@ ManageListingCardComponent.defaultProps = {
   rootClassName: null,
   actionsInProgressListingId: null,
   renderSizes: null,
+  availabilityEnabled: config.enableAvailability,
 };
 
 const { bool, func, shape, string } = PropTypes;
@@ -371,6 +377,7 @@ ManageListingCardComponent.propTypes = {
   onCloseListing: func.isRequired,
   onOpenListing: func.isRequired,
   onToggleMenu: func.isRequired,
+  availabilityEnabled: bool,
 
   // Responsive image sizes hint
   renderSizes: string,

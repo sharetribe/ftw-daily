@@ -277,7 +277,7 @@ export const loadData = (params, search) => dispatch => {
     return dispatch(showListing(listingId, true));
   }
 
-  if (config.fetchAvailableTimeSlots) {
+  if (config.enableAvailability) {
     return Promise.all([
       dispatch(showListing(listingId)),
       dispatch(fetchTimeSlots(listingId)),
