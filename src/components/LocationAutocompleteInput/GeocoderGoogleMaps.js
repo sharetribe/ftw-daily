@@ -45,12 +45,22 @@ class GeocoderGoogleMaps {
    * only relevant for the `getPlaceDetails` function below.
    */
   getPlacePredictions(search) {
-    return getPlacePredictions(search, this.getSessionToken()).then(results => {
-      return {
-        search,
-        predictions: results.predictions,
-      };
-    });
+    const limitCountriesMaybe = config.maps.search.countryLimit
+      ? {
+          componentRestrictions: {
+            country: config.maps.search.countryLimit,
+          },
+        }
+      : {};
+
+    return getPlacePredictions(search, this.getSessionToken(), limitCountriesMaybe).then(
+      results => {
+        return {
+          search,
+          predictions: results.predictions,
+        };
+      }
+    );
   }
 
   /**

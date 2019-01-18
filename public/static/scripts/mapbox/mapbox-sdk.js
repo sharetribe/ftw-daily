@@ -1,3 +1,4 @@
+// version 0.5.0
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -347,11 +348,9 @@
     var url = request.url(accessToken);
     var xhr = new window.XMLHttpRequest();
     xhr.open(request.method, url);
-    if (request.headers) {
-      Object.keys(request.headers).forEach(function(key) {
-        xhr.setRequestHeader(key, request.headers[key]);
-      });
-    }
+    Object.keys(request.headers).forEach(function(key) {
+      xhr.setRequestHeader(key, request.headers[key]);
+    });
     return xhr;
   }
 
@@ -372,163 +371,163 @@
   var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
   function createCommonjsModule(fn, module) {
-    return module = { exports: {} }, fn(module, module.exports), module.exports;
+  	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
 
   var base64 = createCommonjsModule(function (module, exports) {
   (function(root) {
 
-    // Detect free variables `exports`.
-    var freeExports = exports;
+  	// Detect free variables `exports`.
+  	var freeExports = exports;
 
-    // Detect free variable `module`.
-    var freeModule = module &&
-      module.exports == freeExports && module;
+  	// Detect free variable `module`.
+  	var freeModule = module &&
+  		module.exports == freeExports && module;
 
-    // Detect free variable `global`, from Node.js or Browserified code, and use
-    // it as `root`.
-    var freeGlobal = typeof commonjsGlobal == 'object' && commonjsGlobal;
-    if (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal) {
-      root = freeGlobal;
-    }
+  	// Detect free variable `global`, from Node.js or Browserified code, and use
+  	// it as `root`.
+  	var freeGlobal = typeof commonjsGlobal == 'object' && commonjsGlobal;
+  	if (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal) {
+  		root = freeGlobal;
+  	}
 
-    /*--------------------------------------------------------------------------*/
+  	/*--------------------------------------------------------------------------*/
 
-    var InvalidCharacterError = function(message) {
-      this.message = message;
-    };
-    InvalidCharacterError.prototype = new Error;
-    InvalidCharacterError.prototype.name = 'InvalidCharacterError';
+  	var InvalidCharacterError = function(message) {
+  		this.message = message;
+  	};
+  	InvalidCharacterError.prototype = new Error;
+  	InvalidCharacterError.prototype.name = 'InvalidCharacterError';
 
-    var error = function(message) {
-      // Note: the error messages used throughout this file match those used by
-      // the native `atob`/`btoa` implementation in Chromium.
-      throw new InvalidCharacterError(message);
-    };
+  	var error = function(message) {
+  		// Note: the error messages used throughout this file match those used by
+  		// the native `atob`/`btoa` implementation in Chromium.
+  		throw new InvalidCharacterError(message);
+  	};
 
-    var TABLE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-    // http://whatwg.org/html/common-microsyntaxes.html#space-character
-    var REGEX_SPACE_CHARACTERS = /[\t\n\f\r ]/g;
+  	var TABLE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+  	// http://whatwg.org/html/common-microsyntaxes.html#space-character
+  	var REGEX_SPACE_CHARACTERS = /[\t\n\f\r ]/g;
 
-    // `decode` is designed to be fully compatible with `atob` as described in the
-    // HTML Standard. http://whatwg.org/html/webappapis.html#dom-windowbase64-atob
-    // The optimized base64-decoding algorithm used is based on @atk’s excellent
-    // implementation. https://gist.github.com/atk/1020396
-    var decode = function(input) {
-      input = String(input)
-        .replace(REGEX_SPACE_CHARACTERS, '');
-      var length = input.length;
-      if (length % 4 == 0) {
-        input = input.replace(/==?$/, '');
-        length = input.length;
-      }
-      if (
-        length % 4 == 1 ||
-        // http://whatwg.org/C#alphanumeric-ascii-characters
-        /[^+a-zA-Z0-9/]/.test(input)
-      ) {
-        error(
-          'Invalid character: the string to be decoded is not correctly encoded.'
-        );
-      }
-      var bitCounter = 0;
-      var bitStorage;
-      var buffer;
-      var output = '';
-      var position = -1;
-      while (++position < length) {
-        buffer = TABLE.indexOf(input.charAt(position));
-        bitStorage = bitCounter % 4 ? bitStorage * 64 + buffer : buffer;
-        // Unless this is the first of a group of 4 characters…
-        if (bitCounter++ % 4) {
-          // …convert the first 8 bits to a single ASCII character.
-          output += String.fromCharCode(
-            0xFF & bitStorage >> (-2 * bitCounter & 6)
-          );
-        }
-      }
-      return output;
-    };
+  	// `decode` is designed to be fully compatible with `atob` as described in the
+  	// HTML Standard. http://whatwg.org/html/webappapis.html#dom-windowbase64-atob
+  	// The optimized base64-decoding algorithm used is based on @atk’s excellent
+  	// implementation. https://gist.github.com/atk/1020396
+  	var decode = function(input) {
+  		input = String(input)
+  			.replace(REGEX_SPACE_CHARACTERS, '');
+  		var length = input.length;
+  		if (length % 4 == 0) {
+  			input = input.replace(/==?$/, '');
+  			length = input.length;
+  		}
+  		if (
+  			length % 4 == 1 ||
+  			// http://whatwg.org/C#alphanumeric-ascii-characters
+  			/[^+a-zA-Z0-9/]/.test(input)
+  		) {
+  			error(
+  				'Invalid character: the string to be decoded is not correctly encoded.'
+  			);
+  		}
+  		var bitCounter = 0;
+  		var bitStorage;
+  		var buffer;
+  		var output = '';
+  		var position = -1;
+  		while (++position < length) {
+  			buffer = TABLE.indexOf(input.charAt(position));
+  			bitStorage = bitCounter % 4 ? bitStorage * 64 + buffer : buffer;
+  			// Unless this is the first of a group of 4 characters…
+  			if (bitCounter++ % 4) {
+  				// …convert the first 8 bits to a single ASCII character.
+  				output += String.fromCharCode(
+  					0xFF & bitStorage >> (-2 * bitCounter & 6)
+  				);
+  			}
+  		}
+  		return output;
+  	};
 
-    // `encode` is designed to be fully compatible with `btoa` as described in the
-    // HTML Standard: http://whatwg.org/html/webappapis.html#dom-windowbase64-btoa
-    var encode = function(input) {
-      input = String(input);
-      if (/[^\0-\xFF]/.test(input)) {
-        // Note: no need to special-case astral symbols here, as surrogates are
-        // matched, and the input is supposed to only contain ASCII anyway.
-        error(
-          'The string to be encoded contains characters outside of the ' +
-          'Latin1 range.'
-        );
-      }
-      var padding = input.length % 3;
-      var output = '';
-      var position = -1;
-      var a;
-      var b;
-      var c;
-      var buffer;
-      // Make sure any padding is handled outside of the loop.
-      var length = input.length - padding;
+  	// `encode` is designed to be fully compatible with `btoa` as described in the
+  	// HTML Standard: http://whatwg.org/html/webappapis.html#dom-windowbase64-btoa
+  	var encode = function(input) {
+  		input = String(input);
+  		if (/[^\0-\xFF]/.test(input)) {
+  			// Note: no need to special-case astral symbols here, as surrogates are
+  			// matched, and the input is supposed to only contain ASCII anyway.
+  			error(
+  				'The string to be encoded contains characters outside of the ' +
+  				'Latin1 range.'
+  			);
+  		}
+  		var padding = input.length % 3;
+  		var output = '';
+  		var position = -1;
+  		var a;
+  		var b;
+  		var c;
+  		var buffer;
+  		// Make sure any padding is handled outside of the loop.
+  		var length = input.length - padding;
 
-      while (++position < length) {
-        // Read three bytes, i.e. 24 bits.
-        a = input.charCodeAt(position) << 16;
-        b = input.charCodeAt(++position) << 8;
-        c = input.charCodeAt(++position);
-        buffer = a + b + c;
-        // Turn the 24 bits into four chunks of 6 bits each, and append the
-        // matching character for each of them to the output.
-        output += (
-          TABLE.charAt(buffer >> 18 & 0x3F) +
-          TABLE.charAt(buffer >> 12 & 0x3F) +
-          TABLE.charAt(buffer >> 6 & 0x3F) +
-          TABLE.charAt(buffer & 0x3F)
-        );
-      }
+  		while (++position < length) {
+  			// Read three bytes, i.e. 24 bits.
+  			a = input.charCodeAt(position) << 16;
+  			b = input.charCodeAt(++position) << 8;
+  			c = input.charCodeAt(++position);
+  			buffer = a + b + c;
+  			// Turn the 24 bits into four chunks of 6 bits each, and append the
+  			// matching character for each of them to the output.
+  			output += (
+  				TABLE.charAt(buffer >> 18 & 0x3F) +
+  				TABLE.charAt(buffer >> 12 & 0x3F) +
+  				TABLE.charAt(buffer >> 6 & 0x3F) +
+  				TABLE.charAt(buffer & 0x3F)
+  			);
+  		}
 
-      if (padding == 2) {
-        a = input.charCodeAt(position) << 8;
-        b = input.charCodeAt(++position);
-        buffer = a + b;
-        output += (
-          TABLE.charAt(buffer >> 10) +
-          TABLE.charAt((buffer >> 4) & 0x3F) +
-          TABLE.charAt((buffer << 2) & 0x3F) +
-          '='
-        );
-      } else if (padding == 1) {
-        buffer = input.charCodeAt(position);
-        output += (
-          TABLE.charAt(buffer >> 2) +
-          TABLE.charAt((buffer << 4) & 0x3F) +
-          '=='
-        );
-      }
+  		if (padding == 2) {
+  			a = input.charCodeAt(position) << 8;
+  			b = input.charCodeAt(++position);
+  			buffer = a + b;
+  			output += (
+  				TABLE.charAt(buffer >> 10) +
+  				TABLE.charAt((buffer >> 4) & 0x3F) +
+  				TABLE.charAt((buffer << 2) & 0x3F) +
+  				'='
+  			);
+  		} else if (padding == 1) {
+  			buffer = input.charCodeAt(position);
+  			output += (
+  				TABLE.charAt(buffer >> 2) +
+  				TABLE.charAt((buffer << 4) & 0x3F) +
+  				'=='
+  			);
+  		}
 
-      return output;
-    };
+  		return output;
+  	};
 
-    var base64 = {
-      'encode': encode,
-      'decode': decode,
-      'version': '0.1.0'
-    };
+  	var base64 = {
+  		'encode': encode,
+  		'decode': decode,
+  		'version': '0.1.0'
+  	};
 
-    // Some AMD build optimizers, like r.js, check for specific condition patterns
-    // like the following:
-    if (freeExports && !freeExports.nodeType) {
-      if (freeModule) { // in Node.js or RingoJS v0.8.0+
-        freeModule.exports = base64;
-      } else { // in Narwhal or RingoJS v0.7.0-
-        for (var key in base64) {
-          base64.hasOwnProperty(key) && (freeExports[key] = base64[key]);
-        }
-      }
-    } else { // in Rhino or a web browser
-      root.base64 = base64;
-    }
+  	// Some AMD build optimizers, like r.js, check for specific condition patterns
+  	// like the following:
+  	if (freeExports && !freeExports.nodeType) {
+  		if (freeModule) { // in Node.js or RingoJS v0.8.0+
+  			freeModule.exports = base64;
+  		} else { // in Narwhal or RingoJS v0.7.0-
+  			for (var key in base64) {
+  				base64.hasOwnProperty(key) && (freeExports[key] = base64[key]);
+  			}
+  		}
+  	} else { // in Rhino or a web browser
+  		root.base64 = base64;
+  	}
 
   }(commonjsGlobal));
   });
@@ -1093,7 +1092,7 @@
    *   a URL query string.
    * @property {Object} params - A route parameters object, whose values will
    *   be interpolated the path.
-   * @property {Object} headers - The request's headers,
+   * @property {Object} headers - The request's headers.
    * @property {Object|string|null} body - Data to send with the request.
    *   If the request has a body, it will also be sent with the header
    *   `'Content-Type: application/json'`.
@@ -1315,6 +1314,8 @@
    * @class MapiClient
    * @property {string} accessToken - The Mapbox access token assigned
    *   to this client.
+   * @property {string} [origin] - The origin
+   *   to use for API requests. Defaults to https://api.mapbox.com.
    */
 
   function MapiClient(options) {
@@ -1360,8 +1361,8 @@
   var toString = Object.prototype.toString;
 
   var isPlainObj = function (x) {
-    var prototype;
-    return toString.call(x) === '[object Object]' && (prototype = Object.getPrototypeOf(x), prototype === null || prototype === Object.getPrototypeOf({}));
+  	var prototype;
+  	return toString.call(x) === '[object Object]' && (prototype = Object.getPrototypeOf(x), prototype === null || prototype === Object.getPrototypeOf({}));
   };
 
   /**
@@ -2662,7 +2663,7 @@
    * @param {Array<OptimizationWaypoint>} config.waypoints - An ordered array of [`OptimizationWaypoint`](#optimizationwaypoint) objects, between 2 and 12 (inclusive).
    * @param {Array<'duration'|'distance'|'speed'>} [config.annotations] - Specify additional metadata that should be returned.
    * @param {'any'|'last'} [config.destination="any"] - Returned route ends at `any` or `last` coordinate.
-   * @param {[object, object]} [config.distributions] - Array of objects, each of which includes a `pickup` and `dropoff` property. `pickup` and `dropoff` properties correspond to an index in the coordinates array.
+   * @param {Array<Distribution>} [config.distributions] - An ordered array of [`Distribution`](#distribution) objects, each of which includes a `pickup` and `dropoff` property. `pickup` and `dropoff` properties correspond to an index in the OptimizationWaypoint array.
    * @param {'geojson'|'polyline'|'polyline6'} [config.geometries="polyline"] - Format of the returned geometries.
    * @param {string} [config.language="en"] - Language of returned turn-by-turn text instructions.
    *   See options listed in [the HTTP service documentation](https://www.mapbox.com/api-documentation/#instructions-languages).
@@ -2746,6 +2747,11 @@
       });
     });
 
+    /**
+     * @typedef {Object} Distribution
+     * @property {number} pickup - Array index of the item containing coordinates for the pick-up location in the OptimizationWaypoint array.
+     * @property {number} dropoff - Array index of the item containing coordinates for the drop-off location in the OptimizationWaypoint array.
+     */
     // distributions aren't a property of OptimizationWaypoint, so join them separately
     if (config.distributions) {
       config.distributions.forEach(function(dist) {
@@ -2978,7 +2984,7 @@
    * @param {'auto'|Object} config.position - If `"auto"`, the viewport will fit the
    *   bounds of the overlay(s). Otherwise, the maps' position is described by an object
    *   with the following properties:
-   *   `coordinates` (required): `[longitude, latitude]` for the center of image.
+   *   `coordinates` (required): [`coordinates`](#coordinates) for the center of image.
    *   `zoom` (required): Between 0 and 20.
    *   `bearing` (optional): Between 0 and 360.
    *   `pitch` (optional): Between 0 and 60.
@@ -3608,6 +3614,7 @@
    * @param {string} [config.note]
    * @param {Array<string>} [config.scopes]
    * @param {Array<string>} [config.resources]
+   * @param {Array<string>} [config.referrers]
    * @return {MapiRequest}
    */
   Tokens.createToken = function(config) {
@@ -3615,7 +3622,8 @@
     validator.assertShape({
       note: validator.string,
       scopes: validator.arrayOf(validator.string),
-      resources: validator.arrayOf(validator.string)
+      resources: validator.arrayOf(validator.string),
+      referrers: validator.arrayOf(validator.string)
     })(config);
 
     var body = {};
@@ -3625,6 +3633,9 @@
     }
     if (config.resources) {
       body.resources = config.resources;
+    }
+    if (config.referrers) {
+      body.referrers = config.referrers;
     }
 
     return this.client.createRequest({
@@ -3640,13 +3651,12 @@
    *
    * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#create-temporary-token).
    *
-   * @param {Object} [config]
-   * @param {string} [config.expires]
-   * @param {Array<string>} [config.scopes]
+   * @param {Object} config
+   * @param {string} config.expires
+   * @param {Array<string>} config.scopes
    * @return {MapiRequest}
    */
   Tokens.createTemporaryToken = function(config) {
-    config = config || {};
     validator.assertShape({
       expires: validator.required(validator.date),
       scopes: validator.required(validator.arrayOf(validator.string))
@@ -3673,6 +3683,7 @@
    * @param {string} [config.note]
    * @param {Array<string>} [config.scopes]
    * @param {Array<string>} [config.resources]
+   * @param {Array<string>} [config.referrers]
    * @return {MapiRequest}
    */
   Tokens.updateToken = function(config) {
@@ -3680,7 +3691,8 @@
       tokenId: validator.required(validator.string),
       note: validator.string,
       scopes: validator.arrayOf(validator.string),
-      resources: validator.arrayOf(validator.string)
+      resources: validator.arrayOf(validator.string),
+      referrers: validator.arrayOf(validator.string)
     })(config);
 
     var body = {};
@@ -3692,6 +3704,9 @@
     }
     if (config.resources) {
       body.resources = config.resources;
+    }
+    if (config.referrers) {
+      body.referrers = config.referrers;
     }
 
     return this.client.createRequest({

@@ -129,6 +129,11 @@ const maps = {
     // `default-location-searches.js` file.
     defaults:
       process.env.REACT_APP_DEFAULT_SEARCHES_ENABLED === 'true' ? defaultLocationSearches : [],
+
+    // Limit location autocomplete to a one or more countries
+    // using ISO 3166 alpha 2 country codes separated by commas.
+    // If you want to limit the autocomplete, uncomment this value:
+    // countryLimit: ['AU'],
   },
 
   // When fuzzy locations are enabled, coordinates on maps are

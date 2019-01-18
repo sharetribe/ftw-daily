@@ -66,27 +66,32 @@ const predictionSuccessful = status => {
  * @param {String} search - place name or address to search
  * @param {String} sessionToken - token to tie different autocomplete character searches together
  * with getPlaceDetails call
+ * @param {Object} searchConfigurations - defines the search configurations that can be used with
+ * the autocomplete service. Used to restrict search to specific country (or countries).
  *
  * @return {Promise<{ search, predictions[] }>} - Promise of an object
  * with the original search query and an array of
  * `google.maps.places.AutocompletePrediction` objects
  */
-export const getPlacePredictions = (search, sessionToken) =>
+export const getPlacePredictions = (search, sessionToken, searchConfigurations) =>
   new Promise((resolve, reject) => {
     const service = new window.google.maps.places.AutocompleteService();
     const sessionTokenMaybe = sessionToken ? { sessionToken } : {};
 
-    service.getPlacePredictions({ input: search, ...sessionTokenMaybe }, (predictions, status) => {
-      if (!predictionSuccessful(status)) {
-        reject(new Error(`Prediction service status not OK: ${status}`));
-      } else {
-        const results = {
-          search,
-          predictions: predictions || [],
-        };
-        resolve(results);
+    service.getPlacePredictions(
+      { input: search, ...sessionTokenMaybe, ...searchConfigurations },
+      (predictions, status) => {
+        if (!predictionSuccessful(status)) {
+          reject(new Error(`Prediction service status not OK: ${status}`));
+        } else {
+          const results = {
+            search,
+            predictions: predictions || [],
+          };
+          resolve(results);
+        }
       }
-    });
+    );
   });
 
 /**

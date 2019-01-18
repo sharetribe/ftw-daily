@@ -98,10 +98,15 @@ class GeocoderMapbox {
    * only relevant for the `getPlaceDetails` function below.
    */
   getPlacePredictions(search) {
+    const limitCountriesMaybe = config.maps.search.countryLimit
+      ? { countries: config.maps.search.countryLimit }
+      : {};
+
     return this.getClient()
       .geocoding.forwardGeocode({
         query: search,
         limit: 5,
+        ...limitCountriesMaybe,
         language: [config.locale],
       })
       .send()
