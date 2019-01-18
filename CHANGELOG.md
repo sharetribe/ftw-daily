@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Remove `origin` parameter from `default-location-searches.js`
+  [#1003](https://github.com/sharetribe/flex-template-web/pull/1003)
 - [add] Limit location autocomplete by adding an optional country parameter to geocoding call in
   both Mapbox and Google Maps integrations. Also updated Mapbox SDK to version 0.5.0.
   [#1002](https://github.com/sharetribe/flex-template-web/pull/1002)
