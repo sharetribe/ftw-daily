@@ -57,6 +57,15 @@ SearchMap component can't adjust zoom level right for that particular place. The
 default bounding boxes defined to different place types in
 [Mapbox specific geocoder](../src/components/LocationAutocompleteInput/GeocoderMapbox.js).
 
+### Optional: Restrict location autocomplete to specific country or countries
+
+If your marketplace works only in a specific country or countries it might be a good idea to limit
+the location autocomplete to those countries. You can specify whether to use the limitation from
+[config.js](../src/config.js). Search for variable `countryLimit` and uncomment the line to make it
+active. Provide the country or countries in an array using
+[ISO 3166 alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (eg. GB, US, FI). If
+there are multiple values, separate them with commas.
+
 ## Changing the map providers
 
 ### How to change from Mapbox to Google Maps
