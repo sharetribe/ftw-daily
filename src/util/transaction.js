@@ -105,6 +105,10 @@ export const txHasBeenAccepted = tx => {
   ].includes(transition);
 };
 
+export const txHasBeenDelivered = tx => {
+  return txHasFirstReview(tx) || txIsReviewed(tx) || txIsCompleted(tx);
+};
+
 // Roles of actors that perform transaction transitions
 export const TX_TRANSITION_ACTOR_CUSTOMER = 'customer';
 export const TX_TRANSITION_ACTOR_PROVIDER = 'provider';
