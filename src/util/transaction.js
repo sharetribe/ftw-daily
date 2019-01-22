@@ -56,10 +56,8 @@ const txLastTransition = tx => ensureTransaction(tx).attributes.lastTransition;
 
 export const txIsEnquired = tx => txLastTransition(tx) === TRANSITION_ENQUIRE;
 
-export const txIsRequested = tx => {
-  const transition = txLastTransition(tx);
-  return transition === TRANSITION_REQUEST || transition === TRANSITION_REQUEST_AFTER_ENQUIRY;
-};
+export const transitionsToRequested = [TRANSITION_REQUEST, TRANSITION_REQUEST_AFTER_ENQUIRY];
+export const txIsRequested = tx => transitionsToRequested.includes(txLastTransition(tx));
 
 export const txIsAccepted = tx => txLastTransition(tx) === TRANSITION_ACCEPT;
 
