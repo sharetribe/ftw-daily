@@ -29,14 +29,17 @@
   }
 }
 
-.imageWrapperMobile {
+/* DetailCardImage subcomponent */
+.detailCardImageWrapper {
   /* Layout */
-  display: block;
+  display: none;
   width: 100%;
   position: relative;
 
   @media (--viewportLarge) {
-    display: none;
+    display: block;
+    max-height: 268px;
+    overflow-y: hidden;
   }
 }
 
@@ -60,34 +63,48 @@
   }
 }
 
-.avatarWrapperMobile {
+.avatarWrapper {
   /* Position (over the listing image)*/
   margin-left: 24px;
-  margin-top: -31px;
+  margin-top: -30px;
 
   /* Rendering context to the same lavel as listing image */
   position: relative;
-
-  /* Layout */
-  display: block;
-}
-
-.avatarWrapperCustomerDesktop {
-  display: none;
-  composes: avatarWrapperMobile;
-
-  @media (--viewportLarge) {
-    display: block;
-    margin-left: 48px;
-  }
-}
-
-.avatarMobile {
   /* Flex would give too much width by default. */
   width: 60px;
 
+  @media (--viewportMedium) {
+    margin-top: -32px;
+    padding: 2px 0;
+  }
+  @media (--viewportLarge) {
+    margin-left: 48px;
+    width: unset;
+    padding: 2px 0;
+  }
+}
+
+/* Passed-in props for DetailCardImage subcomponent */
+.imageWrapperMobile {
   @media (--viewportLarge) {
     display: none;
+  }
+}
+
+.avatarWrapperMobile {
+  composes: avatarWrapper;
+
+  @media (--viewportLarge) {
+    display: none;
+  }
+}
+
+.avatarWrapperDesktop {
+  composes: avatarWrapper;
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
   }
 }
 
@@ -105,30 +122,37 @@
   }
 }
 
+/* PanelHeadings subcomponent */
 .headingOrder {
   margin: 29px 24px 0 24px;
 
   @media (--viewportMedium) {
-    margin: 25px 24px 0 24px;
     max-width: 80%;
+    margin: 24px 24px 0 24px;
+    padding: 1px 0 7px 0;
   }
 
   @media (--viewportLarge) {
     max-width: 100%;
     margin: 152px 0 0 0;
+    padding: 0;
   }
 }
 
 .headingSale {
-  margin: 22px 24px 0 24px;
+  margin: 18px 24px 0 24px;
+  padding: 5px 0 1px 0;
 
   @media (--viewportMedium) {
     max-width: 80%;
+    margin: 24px 24px 0 24px;
+    padding: 1px 0 7px 0;
   }
 
   @media (--viewportLarge) {
     max-width: 100%;
     margin: 42px 0 0 0;
+    padding: 0;
   }
 }
 
@@ -147,28 +171,30 @@
   }
 }
 
-.transitionDate {
-  white-space: nowrap;
-}
-
+/* Container for booking details in mobile layout */
 .bookingDetailsMobile {
   margin-top: 47px;
 
   @media (--viewportMedium) {
-    margin-top: 43px;
+    margin-top: 40px;
+    padding: 4px 0 0px 0;
   }
   @media (--viewportLarge) {
     display: none;
   }
 }
 
+/* "aside" section in desktop layout */
 .asideDesktop {
   margin: 1px 0 0 0;
 
+  /**
+   * Aside is visible on mobile layout too, since it includes BookingPanel component.
+   * It might get rendered as a Modal in mobile layout.
+   */
+
   @media (--viewportLarge) {
-    margin-top: 123px;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 123px 0 0 0;
   }
 }
 
@@ -184,26 +210,13 @@
   }
 }
 
-.detailCardImageWrapper {
-  display: none;
-
-  /* Layout */
-  width: 100%;
-  position: relative;
-
-  @media (--viewportLarge) {
-    display: block;
-  }
-}
-
+/* DetailCardHeadingsMaybe subcomponent */
 .detailCardHeadings {
   display: none;
 
   @media (--viewportLarge) {
     display: block;
-    margin-left: 48px;
-    margin-right: 48px;
-    margin-bottom: 37px;
+    margin: 0 48px 33px 48px;
   }
 }
 
@@ -228,14 +241,23 @@
   }
 }
 
+/* AddressLinkMaybe subcomponent */
 .address {
   @apply --marketplaceH5FontStyles;
   color: var(--matterColorAnti);
   margin: 0;
 }
 
-.addressMobileWrapper {
+/* Passed-in props for AddressLinkMaybe subcomponent */
+.addressMobile {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorAnti);
   margin: 0 24px 24px 24px;
+}
+
+/* BreakdownMaybe subcomponent */
+.breakdownMaybe {
+  /* default "root" class for breakdown container */
 }
 
 .bookingBreakdownTitle {
@@ -246,14 +268,8 @@
 
   @media (--viewportLarge) {
     margin: 37px 48px 26px 48px;
-  }
-}
-
-.breakdownContainer {
-  display: none;
-
-  @media (--viewportLarge) {
-    display: block;
+    margin: 32px 48px 24px 48px;
+    padding: 4px 0 4px 0;
   }
 }
 
@@ -264,27 +280,12 @@
     margin: 18px 24px 0 24px;
   }
   @media (--viewportLarge) {
-    margin: 14px 48px 47px 48px;
+    margin: 24px 48px 47px 48px;
+    padding: 6px 0 2px 0;
   }
 }
 
-.feedContainer {
-  margin: 46px 24px 0 24px;
-
-  @media (--viewportMedium) {
-    margin: 46px 24px 0 24px;
-  }
-  @media (--viewportLarge) {
-    margin: 43px 0 0 0;
-  }
-}
-
-.feedContainerWithInfoAbove {
-  @media (--viewportLarge) {
-    margin: 38px 0 0 0;
-  }
-}
-
+/* FeedSection subcomponent */
 .feedHeading {
   color: var(--matterColorAnti);
   margin: 0;
@@ -298,6 +299,32 @@
   margin-top: 20px;
 }
 
+.messageError {
+  color: var(--failColor);
+  margin: 13px 0 22px 0;
+
+  @media (--viewportMedium) {
+    margin: 13px 0 23px 0;
+  }
+
+  @media (--viewportLarge) {
+    margin: 12px 0 23px 0;
+  }
+}
+
+/* Passed-in props for FeedSection subcomponent */
+.feedContainer {
+  margin: 46px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 40px 24px 0 24px;
+  }
+  @media (--viewportLarge) {
+    margin: 43px 0 0 0;
+  }
+}
+
+/* Prop to be passed to SendMessageForm component */
 .sendMessageForm {
   position: relative;
   margin: 46px 24px 0 24px;
@@ -311,12 +338,7 @@
   }
 }
 
-.requestToBookButton {
-  @apply --marketplaceButtonStylesPrimary;
-
-  text-decoration: none;
-}
-
+/* SaleActionButtonsMaybe subcomponent */
 .actionButtons {
   /* Position action button row above the footer */
   z-index: 9;
@@ -342,23 +364,6 @@
   }
 }
 
-.mobileActionButtons {
-  display: block;
-
-  @media (--viewportLarge) {
-    display: none;
-  }
-}
-
-.desktopActionButtons {
-  display: none;
-
-  @media (--viewportLarge) {
-    display: block;
-    margin-bottom: 48px;
-  }
-}
-
 .actionButtonWrapper {
   width: 100%;
   display: flex;
@@ -377,19 +382,6 @@
       /* Switch order in desktop layout with accept button being on the top */
       order: 1;
     }
-  }
-}
-
-.messageError {
-  color: var(--failColor);
-  margin: 13px 0 22px 0;
-
-  @media (--viewportMedium) {
-    margin: 13px 0 23px 0;
-  }
-
-  @media (--viewportLarge) {
-    margin: 12px 0 23px 0;
   }
 }
 
@@ -416,6 +408,25 @@
   }
 }
 
+/* Container for SaleActionButtonsMaybe subcomponent */
+.mobileActionButtons {
+  display: block;
+
+  @media (--viewportLarge) {
+    display: none;
+  }
+}
+
+.desktopActionButtons {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+    margin-bottom: 48px;
+  }
+}
+
+/* BookingPanel subcompnent */
 .bookingPanel {
   margin: 16px 48px 48px 48px;
 }

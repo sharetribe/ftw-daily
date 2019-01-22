@@ -6,75 +6,46 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": true,
-            "isCanceled": false,
-            "isDeclined": false,
-            "isDelivered": false,
-            "isEnquired": false,
-            "isRequested": false,
-          }
-        }
+        panelHeadingState="accepted"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+          showAddress={false}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -409,7 +380,6 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName=""
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -419,73 +389,15 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={false}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -501,8 +413,19 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
+          showAddress={false}
+          showDetailCardHeadings={false}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
@@ -654,75 +577,46 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": false,
-            "isCanceled": false,
-            "isDeclined": true,
-            "isDelivered": false,
-            "isEnquired": false,
-            "isRequested": false,
-          }
-        }
+        panelHeadingState="declined"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+          showAddress={false}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -1057,7 +951,6 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName=""
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -1067,73 +960,15 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={false}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -1149,8 +984,19 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
+          showAddress={false}
+          showDetailCardHeadings={false}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
@@ -1302,75 +1148,46 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": true,
-            "isCanceled": false,
-            "isDeclined": false,
-            "isDelivered": false,
-            "isEnquired": false,
-            "isRequested": false,
-          }
-        }
+        panelHeadingState="accepted"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+          showAddress={false}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -1705,7 +1522,6 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName=""
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -1715,73 +1531,15 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={false}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -1797,8 +1555,19 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
+          showAddress={false}
+          showDetailCardHeadings={false}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
@@ -1950,75 +1719,46 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": false,
-            "isCanceled": false,
-            "isDeclined": true,
-            "isDelivered": false,
-            "isEnquired": false,
-            "isRequested": false,
-          }
-        }
+        panelHeadingState="declined"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+          showAddress={false}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -2353,7 +2093,6 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName=""
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -2363,73 +2102,15 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={false}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -2445,8 +2126,19 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
+          showAddress={false}
+          showDetailCardHeadings={false}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
@@ -2598,75 +2290,46 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": false,
-            "isCanceled": false,
-            "isDeclined": false,
-            "isDelivered": true,
-            "isEnquired": false,
-            "isRequested": false,
-          }
-        }
+        panelHeadingState="deliveded"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+          showAddress={false}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -3001,7 +2664,6 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName=""
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -3011,73 +2673,15 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={false}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -3093,8 +2697,19 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
+          showAddress={false}
+          showDetailCardHeadings={false}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
@@ -3246,75 +2861,45 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": false,
-            "isCanceled": false,
-            "isDeclined": false,
-            "isDelivered": false,
-            "isEnquired": true,
-            "isRequested": false,
-          }
-        }
+        panelHeadingState="enquired"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -3649,7 +3234,6 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName=""
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -3659,73 +3243,15 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={true}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -3741,8 +3267,17 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
@@ -3894,75 +3429,45 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": false,
-            "isCanceled": false,
-            "isDeclined": false,
-            "isDelivered": false,
-            "isEnquired": false,
-            "isRequested": true,
-          }
-        }
+        panelHeadingState="requested"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -4297,7 +3802,6 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName="undefined"
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -4307,73 +3811,15 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={false}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -4389,8 +3835,18 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
+          showDetailCardHeadings={false}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
@@ -4542,75 +3998,46 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": true,
-            "isCanceled": false,
-            "isDeclined": false,
-            "isDelivered": false,
-            "isEnquired": false,
-            "isRequested": false,
-          }
-        }
+        panelHeadingState="accepted"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+          showAddress={false}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -4945,7 +4372,6 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName=""
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -4955,73 +4381,15 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={false}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -5037,8 +4405,19 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
+          showAddress={false}
+          showDetailCardHeadings={false}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
@@ -5190,75 +4569,46 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": false,
-            "isCanceled": false,
-            "isDeclined": true,
-            "isDelivered": false,
-            "isEnquired": false,
-            "isRequested": false,
-          }
-        }
+        panelHeadingState="declined"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+          showAddress={false}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -5593,7 +4943,6 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName=""
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -5603,73 +4952,15 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={false}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -5685,8 +4976,19 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
+          showAddress={false}
+          showDetailCardHeadings={false}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
@@ -5838,75 +5140,46 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": true,
-            "isCanceled": false,
-            "isDeclined": false,
-            "isDelivered": false,
-            "isEnquired": false,
-            "isRequested": false,
-          }
-        }
+        panelHeadingState="accepted"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+          showAddress={false}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -6241,7 +5514,6 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName=""
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -6251,73 +5523,15 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={false}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -6333,8 +5547,19 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
+          showAddress={false}
+          showDetailCardHeadings={false}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
@@ -6486,75 +5711,46 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": false,
-            "isCanceled": false,
-            "isDeclined": true,
-            "isDelivered": false,
-            "isEnquired": false,
-            "isRequested": false,
-          }
-        }
+        panelHeadingState="declined"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+          showAddress={false}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -6889,7 +6085,6 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName=""
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -6899,73 +6094,15 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={false}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -6981,8 +6118,19 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
+          showAddress={false}
+          showDetailCardHeadings={false}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
@@ -7134,75 +6282,46 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": false,
-            "isCanceled": false,
-            "isDeclined": false,
-            "isDelivered": true,
-            "isEnquired": false,
-            "isRequested": false,
-          }
-        }
+        panelHeadingState="deliveded"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+          showAddress={false}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -7537,7 +6656,6 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName=""
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -7547,73 +6665,15 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={false}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -7629,8 +6689,19 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
+          showAddress={false}
+          showDetailCardHeadings={false}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
@@ -7782,75 +6853,45 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": false,
-            "isCanceled": false,
-            "isDeclined": false,
-            "isDelivered": false,
-            "isEnquired": true,
-            "isRequested": false,
-          }
-        }
+        panelHeadingState="enquired"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -8185,7 +7226,6 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName=""
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -8195,73 +7235,15 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={true}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -8277,8 +7259,17 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
@@ -8430,75 +7421,45 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
 >
   <div>
     <div>
-      <div>
-        <div>
-          <ResponsiveImage
-            alt="listing1 title"
-            className={null}
-            image={null}
-            noImageMessage={null}
-            rootClassName={null}
-            variants={
-              Array [
-                "landscape-crop",
-                "landscape-crop2x",
-              ]
-            }
-          />
-        </div>
-      </div>
-      <div
-        className=""
-      >
-        <AvatarMedium
-          user={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "profile": Object {
-                  "abbreviatedName": "TT",
-                  "displayName": "provider display name",
-                },
+      <DetailCardImage
+        image={null}
+        isCustomer={false}
+        listingTitle="listing1 title"
+        provider={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "provider display name",
               },
-              "id": UUID {
-                "uuid": "provider",
-              },
-              "type": "user",
-            }
+            },
+            "id": UUID {
+              "uuid": "provider",
+            },
+            "type": "user",
           }
-        />
-      </div>
+        }
+      />
       <PanelHeading
         customerName="customer display name"
         isCustomerBanned={false}
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingInfo={
-          Object {
-            "isAccepted": false,
-            "isCanceled": false,
-            "isDeclined": false,
-            "isDelivered": false,
-            "isEnquired": false,
-            "isRequested": true,
-          }
-        }
+        panelHeadingState="requested"
         providerName="provider display name"
       />
       <div>
-        <div>
-          <AddressLinkMaybe
-            geolocation={
-              LatLng {
-                "lat": 40,
-                "lng": 60,
-              }
+        <AddressLinkMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
             }
-            location={Object {}}
-            showAddress={false}
-          />
-        </div>
+          }
+          location={Object {}}
+        />
         <BreakdownMaybe
           transaction={
             Object {
@@ -8833,7 +7794,6 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
         oldestMessagePageFetched={1}
         onOpenReviewModal={[Function]}
         onShowMoreMessages={[Function]}
-        rootClassName="undefined"
         totalMessagePages={1}
       />
       <SendMessageForm
@@ -8843,73 +7803,15 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
         onSubmit={[Function]}
-        rootClassName=""
         sendMessageError={null}
       />
     </div>
     <div>
       <div>
-        <div>
-          <div>
-            <ResponsiveImage
-              alt="listing1 title"
-              className={null}
-              image={null}
-              noImageMessage={null}
-              rootClassName={null}
-              variants={
-                Array [
-                  "landscape-crop",
-                  "landscape-crop2x",
-                ]
-              }
-            />
-          </div>
-        </div>
-        <DetailCardHeadingsMaybe
-          geolocation={
-            LatLng {
-              "lat": 40,
-              "lng": 60,
-            }
-          }
+        <DetailCardImage
+          image={null}
+          isCustomer={false}
           listingTitle="listing1 title"
-          location={Object {}}
-          showAddress={false}
-          showDetailCardHeadings={false}
-          subTitle="55 TransactionPanel.perNight"
-        />
-        <BookingPanelMaybe
-          authorDisplayName="provider display name"
-          fetchTimeSlotsError={null}
-          isEnquiry={false}
-          listing={
-            Object {
-              "attributes": Object {
-                "deleted": false,
-                "description": "listing1 description",
-                "geolocation": LatLng {
-                  "lat": 40,
-                  "lng": 60,
-                },
-                "price": Money {
-                  "amount": 5500,
-                  "currency": "USD",
-                },
-                "publicData": Object {},
-                "state": "published",
-                "title": "listing1 title",
-              },
-              "id": UUID {
-                "uuid": "listing1",
-              },
-              "images": Array [],
-              "type": "listing",
-            }
-          }
-          listingTitle="listing1 title"
-          onManageDisableScrolling={[Function]}
-          onSubmit={[Function]}
           provider={
             Object {
               "attributes": Object {
@@ -8925,8 +7827,18 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
               "type": "user",
             }
           }
+        />
+        <DetailCardHeadingsMaybe
+          geolocation={
+            LatLng {
+              "lat": 40,
+              "lng": 60,
+            }
+          }
+          listingTitle="listing1 title"
+          location={Object {}}
+          showDetailCardHeadings={false}
           subTitle="55 TransactionPanel.perNight"
-          timeSlots={null}
         />
         <BreakdownMaybe
           transaction={
