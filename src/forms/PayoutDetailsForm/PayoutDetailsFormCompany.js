@@ -74,6 +74,7 @@ const PayoutDetailsFormCompanyComponent = ({ fieldRenderProps }) => {
   const hasMaxNumberOfAdditionalOwners =
     hasAdditionalOwners &&
     values.company.additionalOwners.length >= MAX_NUMBER_OF_ADDITIONAL_OWNERS;
+
   return (
     <React.Fragment>
       {country ? (
@@ -174,16 +175,21 @@ const PayoutDetailsFormCompanyComponent = ({ fieldRenderProps }) => {
               </FieldArray>
 
               {!hasAdditionalOwners || !hasMaxNumberOfAdditionalOwners ? (
-                <InlineTextButton
-                  type="button"
-                  className={css.fieldArrayAdd}
-                  onClick={() => push('company.additionalOwners', undefined)}
-                >
-                  <span className={css.additionalOwnerLabel}>
-                    <IconAdd rootClassName={css.addIcon} />
-                    <FormattedMessage id="PayoutDetailsForm.additionalOwnerLabel" />
-                  </span>
-                </InlineTextButton>
+                <React.Fragment>
+                  <InlineTextButton
+                    type="button"
+                    className={css.fieldArrayAdd}
+                    onClick={() => push('company.additionalOwners', undefined)}
+                  >
+                    <span className={css.additionalOwnerLabel}>
+                      <IconAdd rootClassName={css.addIcon} />
+                      <FormattedMessage id="PayoutDetailsForm.additionalOwnerLabel" />
+                    </span>
+                  </InlineTextButton>
+                  <p className={css.additionalOwnerInfo}>
+                    <FormattedMessage id="PayoutDetailsForm.additionalOwnerInfoText" />
+                  </p>
+                </React.Fragment>
               ) : null}
             </div>
           ) : null}
