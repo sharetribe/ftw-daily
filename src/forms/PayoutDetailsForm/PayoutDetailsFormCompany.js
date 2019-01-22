@@ -3,7 +3,13 @@ import { bool, string } from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { FieldArray } from 'react-final-form-arrays';
-import { FieldTextInput, IconAdd, IconClose, InlineTextButton } from '../../components';
+import {
+  ExternalLink,
+  FieldTextInput,
+  IconAdd,
+  IconClose,
+  InlineTextButton,
+} from '../../components';
 import * as validators from '../../util/validators';
 
 import PayoutDetailsAddress from './PayoutDetailsAddress';
@@ -74,6 +80,16 @@ const PayoutDetailsFormCompanyComponent = ({ fieldRenderProps }) => {
   const hasMaxNumberOfAdditionalOwners =
     hasAdditionalOwners &&
     values.company.additionalOwners.length >= MAX_NUMBER_OF_ADDITIONAL_OWNERS;
+
+  const additionalOwnersInfoLink = (
+    <ExternalLink
+      href="https://support.stripe.com/questions/owners-and-directors"
+      className={css.termsLink}
+    >
+      <FormattedMessage id="PayoutDetailsForm.additionalOwnersInfoLink" />
+    </ExternalLink>
+  );
+
   return (
     <React.Fragment>
       {country ? (
@@ -174,16 +190,24 @@ const PayoutDetailsFormCompanyComponent = ({ fieldRenderProps }) => {
               </FieldArray>
 
               {!hasAdditionalOwners || !hasMaxNumberOfAdditionalOwners ? (
-                <InlineTextButton
-                  type="button"
-                  className={css.fieldArrayAdd}
-                  onClick={() => push('company.additionalOwners', undefined)}
-                >
-                  <span className={css.additionalOwnerLabel}>
-                    <IconAdd rootClassName={css.addIcon} />
-                    <FormattedMessage id="PayoutDetailsForm.additionalOwnerLabel" />
-                  </span>
-                </InlineTextButton>
+                <React.Fragment>
+                  <InlineTextButton
+                    type="button"
+                    className={css.fieldArrayAdd}
+                    onClick={() => push('company.additionalOwners', undefined)}
+                  >
+                    <span className={css.additionalOwnerLabel}>
+                      <IconAdd rootClassName={css.addIcon} />
+                      <FormattedMessage id="PayoutDetailsForm.additionalOwnerLabel" />
+                    </span>
+                  </InlineTextButton>
+                  <p className={css.additionalOwnerInfo}>
+                    <FormattedMessage
+                      id="PayoutDetailsForm.additionalOwnerInfoText"
+                      values={{ additionalOwnersInfoLink }}
+                    />
+                  </p>
+                </React.Fragment>
               ) : null}
             </div>
           ) : null}
