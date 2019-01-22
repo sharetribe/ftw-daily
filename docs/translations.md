@@ -1,8 +1,8 @@
 # Translations
 
 The Flex Template for Web supports having a single language for the UI. Supported languages are
-English and French, English being used by default. For information about changing the language, see
-[here](#changing-the-language).
+English, French and Spanish, English being used by default. For information about changing the
+language, see [here](#changing-the-language).
 
 We are using the [React Intl](https://github.com/yahoo/react-intl) library to translate UI texts and
 to format dates, numbers, and money values.
@@ -134,6 +134,8 @@ More information about adding static content to the application can be found fro
 If you want the template to use a language that is not supported by default a new translation file
 needs to be added and the messages in it need to be translated:
 
+### Creating a new translation file
+
 1. Copy the default [src/translations/en.json](../src/translations/en.json) English translations
    file into some other file, for example `it.json` for Italian.
 
@@ -142,25 +144,38 @@ needs to be added and the messages in it need to be translated:
 > Note: we already have a few other language files available in
 > [translations directory](../src/translations/) for you to start customizing translations.
 
+### Changing the translations used in FTW
+
 Once you have the translations file in place:
 
-3. In [src/config.js](../src/config.js), change the `locale` variable value to match the new locale
+1. In [src/config.js](../src/config.js), change the `locale` variable value to match the new locale
    (the name of the new translations file, without the extension), for example:
 
 ```js
 const locale = 'it';
 ```
 
-4. In [src/app.js](../src/app.js), change the translation imports to point to the correct
-   `react-intl` locale and the new translations file you created, for example:
+2. In [src/app.js](../src/app.js), change the React Intl import to point to the correct `react-intl`
+   locale, for example:
 
 ```js
 import localeData from 'react-intl/locale-data/it';
-import messages from './translations/it.json';
-// If you are using a non-english locale with moment library,
-// you should also import time specific formatting rules for that locale
+```
+
+3. If you are using a non-english locale with moment library, you should also import time specific
+   formatting rules for that locale:
+
+```js
 import 'moment/locale/it';
 ```
+
+4.  Point `messagesInLocale` to correct .json file, for example:
+
+```js
+import messagesInLocale from './translations/it.json';
+```
+
+### Changing the translation used in tests
 
 Also, in case you will translate the application and develop it forward it is wise to change the
 translations file that the tests use. Normally tests are language agnostic as they use translation

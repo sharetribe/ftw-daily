@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Default to English translation if the translation key is missing. After this update, new translation keys will not be added to other translation files with English default texts. We keep providing translations in our supported languages but they might not be up to date all the time. This means if you want to update your translations beforehand or use your own translations file, you can use [translation CLI]((https://github.com/sharetribe/flex-template-web/blob/master/docs/translations.md#managing-translations)) to check if there are translations missing.
+  [#1005](https://github.com/sharetribe/flex-template-web/pull/1005)
 - [change] Remove `origin` parameter from `default-location-searches.js`
   [#1003](https://github.com/sharetribe/flex-template-web/pull/1003)
 - [add] Limit location autocomplete by adding an optional country parameter to geocoding call in
