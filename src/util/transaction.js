@@ -74,7 +74,18 @@ export const txIsCompleted = tx => txLastTransition(tx) === TRANSITION_COMPLETE;
 const firstReviewTransitions = [TRANSITION_REVIEW_1_BY_CUSTOMER, TRANSITION_REVIEW_1_BY_PROVIDER];
 export const txHasFirstReview = tx => firstReviewTransitions.includes(txLastTransition(tx));
 
+export const txHasFirstReviewBy = (tx, isCustomer) =>
+  isCustomer
+    ? txLastTransition(tx) === TRANSITION_REVIEW_1_BY_CUSTOMER
+    : txLastTransition(tx) === TRANSITION_REVIEW_1_BY_PROVIDER;
+
 export const txIsReviewed = tx => areReviewsCompleted(txLastTransition(tx));
+
+export const getReview1Transition = isCustomer =>
+  isCustomer ? TRANSITION_REVIEW_1_BY_CUSTOMER : TRANSITION_REVIEW_1_BY_PROVIDER;
+
+export const getReview2Transition = isCustomer =>
+  isCustomer ? TRANSITION_REVIEW_2_BY_CUSTOMER : TRANSITION_REVIEW_2_BY_PROVIDER;
 
 // Check if tx transition is followed by a state where
 // reviews are completed
