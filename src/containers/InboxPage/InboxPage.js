@@ -86,7 +86,7 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateCanceled',
       }),
     };
-  } else if (txIsCompleted(tx) || txHasFirstReview(tx) || txIsReviewed(tx)) {
+  } else if (txHasBeenDelivered(tx)) {
     return {
       nameClassName: css.nameDelivered,
       bookingClassName: css.bookingDelivered,
