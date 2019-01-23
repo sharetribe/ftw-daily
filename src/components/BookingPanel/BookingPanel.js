@@ -168,7 +168,7 @@ BookingPanel.propTypes = {
   rootClassName: string,
   className: string,
   titleClassName: string,
-  listing: propTypes.listing.isRequired,
+  listing: oneOfType([propTypes.listing, propTypes.ownListing]),
   isOwnListing: bool,
   unitType: propTypes.bookingUnitType,
   onSubmit: func.isRequired,
