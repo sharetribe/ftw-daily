@@ -91,6 +91,15 @@ exports[`InboxPage matches snapshot 1`] = `
                 "now": [Function],
               }
             }
+            stateData={
+              Object {
+                "bookingClassName": undefined,
+                "lastTransitionedAtClassName": undefined,
+                "nameClassName": undefined,
+                "state": "InboxPage.stateRequested",
+                "stateClassName": undefined,
+              }
+            }
             tx={
               Object {
                 "attributes": Object {
@@ -214,6 +223,15 @@ exports[`InboxPage matches snapshot 1`] = `
                 "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
+              }
+            }
+            stateData={
+              Object {
+                "bookingClassName": undefined,
+                "lastTransitionedAtClassName": undefined,
+                "nameClassName": undefined,
+                "state": "InboxPage.stateRequested",
+                "stateClassName": undefined,
               }
             }
             tx={
@@ -483,6 +501,15 @@ exports[`InboxPage matches snapshot 3`] = `
                 "now": [Function],
               }
             }
+            stateData={
+              Object {
+                "bookingClassName": undefined,
+                "lastTransitionedAtClassName": undefined,
+                "nameClassName": undefined,
+                "state": "InboxPage.statePending",
+                "stateClassName": undefined,
+              }
+            }
             tx={
               Object {
                 "attributes": Object {
@@ -606,6 +633,15 @@ exports[`InboxPage matches snapshot 3`] = `
                 "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
+              }
+            }
+            stateData={
+              Object {
+                "bookingClassName": undefined,
+                "lastTransitionedAtClassName": undefined,
+                "nameClassName": undefined,
+                "state": "InboxPage.statePending",
+                "stateClassName": undefined,
               }
             }
             tx={

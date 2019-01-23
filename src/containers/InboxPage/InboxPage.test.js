@@ -8,7 +8,7 @@ import {
   createTransaction,
   createBooking,
 } from '../../util/test-data';
-import { InboxPageComponent, InboxItem } from './InboxPage';
+import { InboxPageComponent, InboxItem, txState } from './InboxPage';
 import routeConfiguration from '../../routeConfiguration';
 import { TRANSITION_REQUEST } from '../../util/transaction';
 import { LINE_ITEM_NIGHT } from '../../util/types';
@@ -74,6 +74,8 @@ describe('InboxPage', () => {
     const ordersTree = renderShallow(<InboxPageComponent {...ordersProps} />);
     expect(ordersTree).toMatchSnapshot();
 
+    const stateDataOrder = txState(fakeIntl, ordersProps.transactions[0], 'order');
+
     // Deeply render one InboxItem
     const orderItem = renderDeep(
       <InboxItem
@@ -81,6 +83,7 @@ describe('InboxPage', () => {
         type="order"
         tx={ordersProps.transactions[0]}
         intl={fakeIntl}
+        stateData={stateDataOrder}
       />
     );
     expect(orderItem).toMatchSnapshot();
@@ -128,6 +131,8 @@ describe('InboxPage', () => {
     const salesTree = renderShallow(<InboxPageComponent {...salesProps} />);
     expect(salesTree).toMatchSnapshot();
 
+    const stateDataSale = txState(fakeIntl, salesProps.transactions[0], 'sale');
+
     // Deeply render one InboxItem
     const saleItem = renderDeep(
       <InboxItem
@@ -135,6 +140,7 @@ describe('InboxPage', () => {
         type="sale"
         tx={salesProps.transactions[0]}
         intl={fakeIntl}
+        stateData={stateDataSale}
       />
     );
     expect(saleItem).toMatchSnapshot();
