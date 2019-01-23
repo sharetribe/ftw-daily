@@ -54,16 +54,38 @@ const formatDate = (intl, date) => {
 
 // Translated name of the state of the given transaction
 const txState = (intl, tx, isOrder) => {
-  if (txIsAccepted(tx)) {
+  if (txIsEnquired(tx)) {
     return {
-      nameClassName: css.nameNotEmphasized,
-      bookingClassName: css.bookingNoActionNeeded,
-      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
-      stateClassName: css.stateSucces,
+      nameClassName: isOrder ? css.nameNotEmphasized : css.nameEmphasized,
+      bookingClassName: css.bookingActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
+      stateClassName: css.stateActionNeeded,
       state: intl.formatMessage({
-        id: 'InboxPage.stateAccepted',
+        id: 'InboxPage.stateEnquiry',
       }),
     };
+  } else if (txIsRequested(tx)) {
+    const requested = isOrder
+      ? {
+          nameClassName: css.nameNotEmphasized,
+          bookingClassName: css.bookingNoActionNeeded,
+          lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
+          stateClassName: css.stateActionNeeded,
+          state: intl.formatMessage({
+            id: 'InboxPage.stateRequested',
+          }),
+        }
+      : {
+          nameClassName: css.nameEmphasized,
+          bookingClassName: css.bookingActionNeeded,
+          lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
+          stateClassName: css.stateActionNeeded,
+          state: intl.formatMessage({
+            id: 'InboxPage.statePending',
+          }),
+        };
+
+    return requested;
   } else if (txIsDeclinedOrExpired(tx)) {
     return {
       nameClassName: css.nameNotEmphasized,
@@ -72,6 +94,16 @@ const txState = (intl, tx, isOrder) => {
       stateClassName: css.stateNoActionNeeded,
       state: intl.formatMessage({
         id: 'InboxPage.stateDeclined',
+      }),
+    };
+  } else if (txIsAccepted(tx)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateSucces,
+      state: intl.formatMessage({
+        id: 'InboxPage.stateAccepted',
       }),
     };
   } else if (txIsCanceled(tx)) {
@@ -94,30 +126,10 @@ const txState = (intl, tx, isOrder) => {
         id: 'InboxPage.stateDelivered',
       }),
     };
-  } else if (txIsEnquired(tx)) {
-    return {
-      nameClassName: isOrder ? css.nameNotEmphasized : css.nameEmphasized,
-      bookingClassName: css.bookingActionNeeded,
-      lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
-      stateClassName: css.stateActionNeeded,
-      state: intl.formatMessage({
-        id: 'InboxPage.stateEnquiry',
-      }),
-    };
+  } else {
+    console.warn('This transition is unknown:', tx.attributes.lastTransition);
+    return null;
   }
-  return {
-    nameClassName: isOrder ? css.nameNotEmphasized : css.nameEmphasized,
-    bookingClassName: isOrder ? css.bookingNoActionNeeded : css.bookingActionNeeded,
-    lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
-    stateClassName: css.stateActionNeeded,
-    state: isOrder
-      ? intl.formatMessage({
-          id: 'InboxPage.stateRequested',
-        })
-      : intl.formatMessage({
-          id: 'InboxPage.statePending',
-        }),
-  };
 };
 
 const bookingData = (unitType, tx, isOrder, intl) => {
