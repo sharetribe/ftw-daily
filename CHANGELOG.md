@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Allow ownListing as listing proptype in BookingPanel component.
+  [#1007](https://github.com/sharetribe/flex-template-web/pull/1007)
 - [add] Add info text about additional owners to `PayoutDetailsForm`.
   [#1006](https://github.com/sharetribe/flex-template-web/pull/1006)
 - [change] Default to English translation if the translation key is missing. After this update, new
