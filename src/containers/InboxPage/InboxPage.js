@@ -6,14 +6,12 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import moment from 'moment';
 import classNames from 'classnames';
 import {
-  txHasFirstReview,
   txIsAccepted,
   txIsCanceled,
-  txIsCompleted,
   txIsDeclinedOrExpired,
   txIsEnquired,
   txIsRequested,
-  txIsReviewed,
+  txHasBeenDelivered,
 } from '../../util/transaction';
 import { LINE_ITEM_DAY, LINE_ITEM_UNITS, propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
@@ -58,62 +56,60 @@ const formatDate = (intl, date) => {
 const txState = (intl, tx, isOrder) => {
   if (txIsAccepted(tx)) {
     return {
-      nameClassName: css.nameAccepted,
-      bookingClassName: css.bookingAccepted,
-      lastTransitionedAtClassName: css.lastTransitionedAtAccepted,
-      stateClassName: css.stateAccepted,
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateSucces,
       state: intl.formatMessage({
         id: 'InboxPage.stateAccepted',
       }),
     };
   } else if (txIsDeclinedOrExpired(tx)) {
     return {
-      nameClassName: css.nameDeclined,
-      bookingClassName: css.bookingDeclined,
-      lastTransitionedAtClassName: css.lastTransitionedAtDeclined,
-      stateClassName: css.stateDeclined,
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
       state: intl.formatMessage({
         id: 'InboxPage.stateDeclined',
       }),
     };
   } else if (txIsCanceled(tx)) {
     return {
-      nameClassName: css.nameCanceled,
-      bookingClassName: css.bookingCanceled,
-      lastTransitionedAtClassName: css.lastTransitionedAtCanceled,
-      stateClassName: css.stateCanceled,
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
       state: intl.formatMessage({
         id: 'InboxPage.stateCanceled',
       }),
     };
   } else if (txHasBeenDelivered(tx)) {
     return {
-      nameClassName: css.nameDelivered,
-      bookingClassName: css.bookingDelivered,
-      lastTransitionedAtClassName: css.lastTransitionedAtDelivered,
-      stateClassName: css.stateDelivered,
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
       state: intl.formatMessage({
         id: 'InboxPage.stateDelivered',
       }),
     };
   } else if (txIsEnquired(tx)) {
     return {
-      nameClassName: isOrder ? css.nameEnquiredOrder : css.nameEnquired,
-      bookingClassName: css.bookingEnquired,
-      lastTransitionedAtClassName: css.lastTransitionedAtEnquired,
-      stateClassName: css.stateEnquired,
+      nameClassName: isOrder ? css.nameNotEmphasized : css.nameEmphasized,
+      bookingClassName: css.bookingActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
+      stateClassName: css.stateActionNeeded,
       state: intl.formatMessage({
         id: 'InboxPage.stateEnquiry',
       }),
     };
   }
   return {
-    nameClassName: isOrder ? css.nameRequested : css.namePending,
-    bookingClassName: isOrder ? css.bookingRequested : css.bookingPending,
-    lastTransitionedAtClassName: isOrder
-      ? css.lastTransitionedAtRequested
-      : css.lastTransitionedAtPending,
-    stateClassName: isOrder ? css.stateRequested : css.statePending,
+    nameClassName: isOrder ? css.nameNotEmphasized : css.nameEmphasized,
+    bookingClassName: isOrder ? css.bookingNoActionNeeded : css.bookingActionNeeded,
+    lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
+    stateClassName: css.stateActionNeeded,
     state: isOrder
       ? intl.formatMessage({
           id: 'InboxPage.stateRequested',
