@@ -53,7 +53,9 @@ const formatDate = (intl, date) => {
 };
 
 // Translated name of the state of the given transaction
-const txState = (intl, tx, isOrder) => {
+export const txState = (intl, tx, type) => {
+  const isOrder = type === 'order';
+
   if (txIsEnquired(tx)) {
     return {
       nameClassName: isOrder ? css.nameNotEmphasized : css.nameEmphasized,
