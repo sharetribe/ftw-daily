@@ -21,12 +21,21 @@ import {
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
   transitionIsReviewed,
+  txIsInFirstReviewBy,
 } from '../../util/transaction';
 import { propTypes } from '../../util/types';
 import * as log from '../../util/log';
 
 import css from './ActivityFeed.css';
 
+const isCustomerReview = transition => {
+  return [TRANSITION_REVIEW_1_BY_CUSTOMER, TRANSITION_REVIEW_2_BY_CUSTOMER].includes(transition);
+};
+
+const isProviderReview = transition => {
+  return [TRANSITION_REVIEW_1_BY_PROVIDER, TRANSITION_REVIEW_2_BY_PROVIDER].includes(transition);
+};
+const txRoleIsProvider = userRole => userRole === TX_TRANSITION_ACTOR_PROVIDER;
 const Message = props => {
   const { message, intl } = props;
   const todayString = intl.formatMessage({ id: 'ActivityFeed.today' });
@@ -116,19 +125,18 @@ const isReviewTransition = transition => {
   ].includes(transition);
 };
 
-const hasUserLeftAReviewFirst = (userRole, lastTransition) => {
+const hasUserLeftAReviewFirst = (userRole, transaction, lastTransition) => {
+  const isProvider = txRoleIsProvider(userRole);
   return (
-    (lastTransition === TRANSITION_REVIEW_1_BY_CUSTOMER &&
-      userRole === TX_TRANSITION_ACTOR_CUSTOMER) ||
-    (lastTransition === TRANSITION_REVIEW_1_BY_PROVIDER &&
-      userRole === TX_TRANSITION_ACTOR_PROVIDER) ||
+    (isProvider && txIsInFirstReviewBy(transaction, isProvider)) ||
+    (!isProvider && txIsInFirstReviewBy(transaction, !isProvider)) ||
     transitionIsReviewed(lastTransition)
   );
 };
 
 const resolveTransitionMessage = (
+  transaction,
   transition,
-  lastTransition,
   listingTitle,
   ownRole,
   otherUsersName,
@@ -138,7 +146,6 @@ const resolveTransitionMessage = (
   const isOwnTransition = transition.by === ownRole;
   const currentTransition = transition.transition;
   const displayName = otherUsersName;
-  const deliveredState = lastTransition === TRANSITION_COMPLETE;
 
   switch (currentTransition) {
     case TRANSITION_REQUEST:
@@ -164,7 +171,7 @@ const resolveTransitionMessage = (
         <FormattedMessage id="ActivityFeed.transitionDecline" values={{ displayName }} />
       );
     case TRANSITION_EXPIRE:
-      return ownRole === TX_TRANSITION_ACTOR_PROVIDER ? (
+      return txRoleIsProvider(ownRole) ? (
         <FormattedMessage id="ActivityFeed.ownTransitionExpire" />
       ) : (
         <FormattedMessage id="ActivityFeed.transitionExpire" values={{ displayName }} />
@@ -175,7 +182,7 @@ const resolveTransitionMessage = (
       // Show the leave a review link if the state is delivered or
       // if current user is not the first to leave a review
       const reviewLink =
-        deliveredState || !hasUserLeftAReviewFirst(ownRole, lastTransition) ? (
+        deliveredState || !hasUserLeftAReviewFirst(ownRole, transaction, lastTransition) ? (
           <InlineTextButton onClick={onOpenReviewModal}>
             <FormattedMessage id="ActivityFeed.leaveAReview" values={{ displayName }} />
           </InlineTextButton>
@@ -189,7 +196,7 @@ const resolveTransitionMessage = (
       } else {
         // show the leave a review link if current user is not the first
         // one to leave a review
-        const reviewLink = !hasUserLeftAReviewFirst(ownRole, lastTransition) ? (
+        const reviewLink = !hasUserLeftAReviewFirst(ownRole, transaction) ? (
           <InlineTextButton onClick={onOpenReviewModal}>
             <FormattedMessage id="ActivityFeed.leaveAReviewSecond" values={{ displayName }} />
           </InlineTextButton>
@@ -249,14 +256,13 @@ const Transition = props => {
   const bannedUserDisplayName = intl.formatMessage({
     id: 'ActivityFeed.bannedUserDisplayName',
   });
-  const otherUsersName =
-    ownRole === TX_TRANSITION_ACTOR_CUSTOMER
-      ? userDisplayName(provider, bannedUserDisplayName)
-      : userDisplayName(customer, bannedUserDisplayName);
+  const otherUsersName = txRoleIsProvider(ownRole)
+    ? userDisplayName(customer, bannedUserDisplayName)
+    : userDisplayName(provider, bannedUserDisplayName);
 
   const transitionMessage = resolveTransitionMessage(
+    transaction,
     transition,
-    lastTransition,
     listingTitle,
     ownRole,
     otherUsersName,
@@ -268,18 +274,12 @@ const Transition = props => {
   let reviewComponent = null;
 
   if (isReviewTransition(currentTransition) && transitionIsReviewed(lastTransition)) {
-    const customerReview =
-      currentTransition === TRANSITION_REVIEW_1_BY_CUSTOMER ||
-      currentTransition === TRANSITION_REVIEW_2_BY_CUSTOMER;
-    const providerReview =
-      currentTransition === TRANSITION_REVIEW_1_BY_PROVIDER ||
-      currentTransition === TRANSITION_REVIEW_2_BY_PROVIDER;
-    if (customerReview) {
+    if (isCustomerReview(currentTransition)) {
       const review = reviewByAuthorId(currentTransaction, customer.id);
       reviewComponent = (
         <Review content={review.attributes.content} rating={review.attributes.rating} />
       );
-    } else if (providerReview) {
+    } else if (isProviderReview(currentTransition)) {
       const review = reviewByAuthorId(currentTransaction, provider.id);
       reviewComponent = (
         <Review content={review.attributes.content} rating={review.attributes.rating} />
