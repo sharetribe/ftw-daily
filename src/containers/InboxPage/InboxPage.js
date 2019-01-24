@@ -182,7 +182,7 @@ BookingInfoMaybe.propTypes = {
 };
 
 export const InboxItem = props => {
-  const { unitType, type, tx, intl } = props;
+  const { unitType, type, tx, intl, stateData } = props;
   const { customer, provider } = tx;
   const isOrder = type === 'order';
 
@@ -193,7 +193,6 @@ export const InboxItem = props => {
   const isOtherUserBanned = otherUser.attributes.banned;
   const otherUserDisplayName = userDisplayName(otherUser, bannedUserDisplayName);
 
-  const stateData = txState(intl, tx, isOrder);
   const isSaleNotification = !isOrder && txIsRequested(tx);
   const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
   const lastTransitionedAt = formatDate(intl, tx.attributes.lastTransitionedAt);
@@ -276,11 +275,15 @@ export const InboxPageComponent = props => {
   const title = isOrders ? ordersTitle : salesTitle;
 
   const toTxItem = tx => {
-    return (
+    const type = isOrders ? 'order' : 'sale';
+    const stateData = txState(intl, tx, type);
+
+    // Render InboxItem only if the latest transition of the transaction is handled in the `txState` function.
+    return stateData ? (
       <li key={tx.id.uuid} className={css.listItem}>
-        <InboxItem unitType={unitType} type={isOrders ? 'order' : 'sale'} tx={tx} intl={intl} />
+        <InboxItem unitType={unitType} type={type} tx={tx} intl={intl} stateData={stateData} />
       </li>
-    );
+    ) : null;
   };
 
   const error = fetchOrdersOrSalesError ? (
