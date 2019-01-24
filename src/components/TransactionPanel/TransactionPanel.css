@@ -285,6 +285,14 @@
   }
 }
 
+.breakdownContainer {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+  }
+}
+
 /* FeedSection subcomponent */
 .feedHeading {
   color: var(--matterColorAnti);

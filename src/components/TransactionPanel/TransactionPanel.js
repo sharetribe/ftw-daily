@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import {
   txIsAccepted,
   txIsCanceled,
-  txIsDeclinedOrExpired,
+  txIsDeclined,
   txIsEnquired,
   txIsRequested,
   txHasBeenDelivered,
@@ -203,7 +203,7 @@ export class TransactionPanelComponent extends Component {
           showDetailCardHeadings: isCustomer,
           showAddress: isCustomer,
         };
-      } else if (txIsDeclinedOrExpired(tx)) {
+      } else if (txIsDeclined(tx)) {
         return {
           headingState: HEADING_DECLINED,
           showDetailCardHeadings: isCustomer,

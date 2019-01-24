@@ -9,7 +9,7 @@ import {
   txIsEnquired,
   getReview1Transition,
   getReview2Transition,
-  txHasFirstReviewBy,
+  txIsInFirstReviewBy,
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
 } from '../../util/transaction';
@@ -495,7 +495,7 @@ const sendReviewAsFirst = (id, params, role, dispatch, sdk) => {
 export const sendReview = (role, tx, reviewRating, reviewContent) => (dispatch, getState, sdk) => {
   const params = { reviewRating, reviewContent };
 
-  const txStateOtherPartyFirst = txHasFirstReviewBy(tx, role !== CUSTOMER);
+  const txStateOtherPartyFirst = txIsInFirstReviewBy(tx, role !== CUSTOMER);
 
   dispatch(sendReviewRequest());
 
