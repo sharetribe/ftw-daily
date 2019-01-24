@@ -18,24 +18,21 @@ import {
   TRANSITION_REVIEW_1_BY_PROVIDER,
   TRANSITION_REVIEW_2_BY_CUSTOMER,
   TRANSITION_REVIEW_2_BY_PROVIDER,
-  TX_TRANSITION_ACTOR_CUSTOMER,
-  TX_TRANSITION_ACTOR_PROVIDER,
   transitionIsReviewed,
+  txIsDelivered,
   txIsInFirstReviewBy,
+  txIsReviewed,
+  isCustomerReview,
+  isProviderReview,
+  txRoleIsProvider,
+  getUserTxRole,
+  isRelevantPastTransition,
 } from '../../util/transaction';
 import { propTypes } from '../../util/types';
 import * as log from '../../util/log';
 
 import css from './ActivityFeed.css';
 
-const isCustomerReview = transition => {
-  return [TRANSITION_REVIEW_1_BY_CUSTOMER, TRANSITION_REVIEW_2_BY_CUSTOMER].includes(transition);
-};
-
-const isProviderReview = transition => {
-  return [TRANSITION_REVIEW_1_BY_PROVIDER, TRANSITION_REVIEW_2_BY_PROVIDER].includes(transition);
-};
-const txRoleIsProvider = userRole => userRole === TX_TRANSITION_ACTOR_PROVIDER;
 const Message = props => {
   const { message, intl } = props;
   const todayString = intl.formatMessage({ id: 'ActivityFeed.today' });
@@ -96,42 +93,11 @@ Review.propTypes = {
   rating: number.isRequired,
 };
 
-// Check if a transition is the kind that
-// should be rendered in he ActivityFeed
-const shouldRenderTransition = transition => {
-  return [
-    TRANSITION_ACCEPT,
-    TRANSITION_CANCEL,
-    TRANSITION_COMPLETE,
-    TRANSITION_DECLINE,
-    TRANSITION_EXPIRE,
-    TRANSITION_REQUEST,
-    TRANSITION_REQUEST_AFTER_ENQUIRY,
-    TRANSITION_REVIEW_1_BY_CUSTOMER,
-    TRANSITION_REVIEW_1_BY_PROVIDER,
-    TRANSITION_REVIEW_2_BY_CUSTOMER,
-    TRANSITION_REVIEW_2_BY_PROVIDER,
-  ].includes(transition);
-};
-
-// Check if a user giving a review is related to
-// given tx transition.
-const isReviewTransition = transition => {
-  return [
-    TRANSITION_REVIEW_1_BY_CUSTOMER,
-    TRANSITION_REVIEW_1_BY_PROVIDER,
-    TRANSITION_REVIEW_2_BY_CUSTOMER,
-    TRANSITION_REVIEW_2_BY_PROVIDER,
-  ].includes(transition);
-};
-
-const hasUserLeftAReviewFirst = (userRole, transaction, lastTransition) => {
+const hasUserLeftAReviewFirst = (userRole, transaction) => {
   const isProvider = txRoleIsProvider(userRole);
-  return (
-    (isProvider && txIsInFirstReviewBy(transaction, isProvider)) ||
-    (!isProvider && txIsInFirstReviewBy(transaction, !isProvider)) ||
-    transitionIsReviewed(lastTransition)
-  );
+  return isProvider
+    ? txIsInFirstReviewBy(transaction, isProvider)
+    : txIsInFirstReviewBy(transaction, !isProvider);
 };
 
 const resolveTransitionMessage = (
@@ -181,14 +147,19 @@ const resolveTransitionMessage = (
     case TRANSITION_COMPLETE:
       // Show the leave a review link if the state is delivered or
       // if current user is not the first to leave a review
+      const reviewPeriodJustStarted = txIsDelivered(transaction);
+      const reviewPeriodIsOver = txIsReviewed(transaction);
+      const userHasLeftAReview = hasUserLeftAReviewFirst(ownRole, transaction);
+
       const reviewLink =
-        deliveredState || !hasUserLeftAReviewFirst(ownRole, transaction, lastTransition) ? (
+        reviewPeriodJustStarted || !(reviewPeriodIsOver || userHasLeftAReview) ? (
           <InlineTextButton onClick={onOpenReviewModal}>
             <FormattedMessage id="ActivityFeed.leaveAReview" values={{ displayName }} />
           </InlineTextButton>
         ) : null;
 
       return <FormattedMessage id="ActivityFeed.transitionComplete" values={{ reviewLink }} />;
+
     case TRANSITION_REVIEW_1_BY_PROVIDER:
     case TRANSITION_REVIEW_1_BY_CUSTOMER:
       if (isOwnTransition) {
@@ -196,7 +167,9 @@ const resolveTransitionMessage = (
       } else {
         // show the leave a review link if current user is not the first
         // one to leave a review
-        const reviewLink = !hasUserLeftAReviewFirst(ownRole, transaction) ? (
+        const reviewPeriodIsOver = txIsReviewed(transaction);
+        const userHasLeftAReview = hasUserLeftAReviewFirst(ownRole, transaction);
+        const reviewLink = !(reviewPeriodIsOver || userHasLeftAReview) ? (
           <InlineTextButton onClick={onOpenReviewModal}>
             <FormattedMessage id="ActivityFeed.leaveAReviewSecond" values={{ displayName }} />
           </InlineTextButton>
@@ -248,10 +221,7 @@ const Transition = props => {
     : currentTransaction.listing.attributes.title;
   const lastTransition = currentTransaction.attributes.lastTransition;
 
-  const ownRole =
-    currentUser.id.uuid === customer.id.uuid
-      ? TX_TRANSITION_ACTOR_CUSTOMER
-      : TX_TRANSITION_ACTOR_PROVIDER;
+  const ownRole = getUserTxRole(currentUser.id, currentTransaction);
 
   const bannedUserDisplayName = intl.formatMessage({
     id: 'ActivityFeed.bannedUserDisplayName',
@@ -273,7 +243,7 @@ const Transition = props => {
 
   let reviewComponent = null;
 
-  if (isReviewTransition(currentTransition) && transitionIsReviewed(lastTransition)) {
+  if (transitionIsReviewed(lastTransition)) {
     if (isCustomerReview(currentTransition)) {
       const review = reviewByAuthorId(currentTransaction, customer.id);
       reviewComponent = (
@@ -417,7 +387,7 @@ export const ActivityFeedComponent = props => {
   };
 
   const transitionListItem = transition => {
-    if (shouldRenderTransition(transition.transition)) {
+    if (isRelevantPastTransition(transition.transition)) {
       return (
         <li key={transition.transition} className={css.transitionItem}>
           {transitionComponent(transition)}

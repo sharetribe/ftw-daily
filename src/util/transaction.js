@@ -268,3 +268,47 @@ export const getReview1Transition = isCustomer =>
 
 export const getReview2Transition = isCustomer =>
   isCustomer ? TRANSITION_REVIEW_2_BY_CUSTOMER : TRANSITION_REVIEW_2_BY_PROVIDER;
+
+// Check if a transition is the kind that should be rendered
+// when showing transition history (e.g. ActivityFeed)
+// The first transition and most of the expiration transitions made by system are not relevant
+export const isRelevantPastTransition = transition => {
+  return [
+    TRANSITION_ACCEPT,
+    TRANSITION_CANCEL,
+    TRANSITION_COMPLETE,
+    TRANSITION_DECLINE,
+    TRANSITION_EXPIRE,
+    TRANSITION_REQUEST,
+    TRANSITION_REQUEST_AFTER_ENQUIRY,
+    TRANSITION_REVIEW_1_BY_CUSTOMER,
+    TRANSITION_REVIEW_1_BY_PROVIDER,
+    TRANSITION_REVIEW_2_BY_CUSTOMER,
+    TRANSITION_REVIEW_2_BY_PROVIDER,
+  ].includes(transition);
+};
+
+export const isCustomerReview = transition => {
+  return [TRANSITION_REVIEW_1_BY_CUSTOMER, TRANSITION_REVIEW_2_BY_CUSTOMER].includes(transition);
+};
+
+export const isProviderReview = transition => {
+  return [TRANSITION_REVIEW_1_BY_PROVIDER, TRANSITION_REVIEW_2_BY_PROVIDER].includes(transition);
+};
+
+export const getUserTxRole = (currentUserId, transaction) => {
+  const tx = ensureTransaction(transaction);
+  const customer = tx.customer;
+  if (currentUserId && currentUserId.uuid && tx.id && customer.id) {
+    // user can be either customer or provider
+    return currentUserId.uuid === customer.id.uuid
+      ? TX_TRANSITION_ACTOR_CUSTOMER
+      : TX_TRANSITION_ACTOR_PROVIDER;
+  } else {
+    throw new Error(`Parameters for "userIsCustomer" function were wrong.
+      currentUserId: ${currentUserId}, transaction: ${transaction}`);
+  }
+};
+
+export const txRoleIsProvider = userRole => userRole === TX_TRANSITION_ACTOR_PROVIDER;
+export const txRoleIsCustomer = userRole => userRole === TX_TRANSITION_ACTOR_CUSTOMER;
