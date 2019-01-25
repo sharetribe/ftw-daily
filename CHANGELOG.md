@@ -14,7 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
-- [#1012] Some of the documentation moved to Flex Docs: https://www.sharetribe.com/docs/
+- [change] Some of the documentation moved to Flex Docs: https://www.sharetribe.com/docs/
+  [#1012](https://github.com/sharetribe/flex-template-web/pull/1012)
 - [fix] Allow ownListing as listing proptype in BookingPanel component.
   [#1007](https://github.com/sharetribe/flex-template-web/pull/1007)
 - [add] Add info text about additional owners to `PayoutDetailsForm`.
