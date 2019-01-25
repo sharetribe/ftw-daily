@@ -52,13 +52,13 @@ Start the server:
 
 ## Deploying to Heroku
 
-* [Forking the repository](#forking-the-repository)
-* [Creating new app](#creating-new-app)
-* [Connect GitHub to Heroku](#connect-github-to-heroku)
-* [Heroku settings](#heroku-settings)
-  * [Updating enviroment variables](#updating-enviroment-variables)
-  * [Domains and certificates](#domains-and-certificates)
-* [Heroku logs](#heroku-logs)
+- [Forking the repository](#forking-the-repository)
+- [Creating new app](#creating-new-app)
+- [Connect GitHub to Heroku](#connect-github-to-heroku)
+- [Heroku settings](#heroku-settings)
+  - [Updating enviroment variables](#updating-enviroment-variables)
+  - [Domains and certificates](#domains-and-certificates)
+- [Heroku logs](#heroku-logs)
 
 Before creating the app you need three accounts: [Heroku](https://heroku.com/),
 [Stripe](https://stripe.com/fi) and [MapBox](https://www.mapbox.com/). Creating the accounts is free
@@ -104,7 +104,7 @@ from any branch in the repository.
 
 Read more from Heroku docs:
 
-* [GitHub Integration](https://devcenter.heroku.com/articles/github-integration)
+- [GitHub Integration](https://devcenter.heroku.com/articles/github-integration)
 
 ### Heroku settings
 
@@ -127,8 +127,8 @@ SSH settings in the _Settings tab_.
 
 Read more from Heroku docs:
 
-* [Custom Domain Names for Apps](https://devcenter.heroku.com/articles/custom-domains)
-* [Manually Acquiring an SSL/TLS Certificate](https://devcenter.heroku.com/articles/acquiring-an-ssl-certificate)
+- [Custom Domain Names for Apps](https://devcenter.heroku.com/articles/custom-domains)
+- [Manually Acquiring an SSL/TLS Certificate](https://devcenter.heroku.com/articles/acquiring-an-ssl-certificate)
 
 ![Heroku settings](./assets/deploying-to-production/heroku-domains.png)
 
