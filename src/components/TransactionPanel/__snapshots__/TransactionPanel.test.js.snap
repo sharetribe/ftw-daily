@@ -2390,6 +2390,11 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                     "createdAt": 2017-06-01T00:00:00.000Z,
                     "transition": "transition/accept",
                   },
+                  Object {
+                    "by": "system",
+                    "createdAt": 2017-07-01T00:00:00.000Z,
+                    "transition": "transition/complete",
+                  },
                 ],
               },
               "booking": Object {
@@ -2517,6 +2522,11 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                   "by": "provider",
                   "createdAt": 2017-06-01T00:00:00.000Z,
                   "transition": "transition/accept",
+                },
+                Object {
+                  "by": "system",
+                  "createdAt": 2017-07-01T00:00:00.000Z,
+                  "transition": "transition/complete",
                 },
               ],
             },
@@ -2770,6 +2780,11 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                     "by": "provider",
                     "createdAt": 2017-06-01T00:00:00.000Z,
                     "transition": "transition/accept",
+                  },
+                  Object {
+                    "by": "system",
+                    "createdAt": 2017-07-01T00:00:00.000Z,
+                    "transition": "transition/complete",
                   },
                 ],
               },
@@ -6382,6 +6397,11 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                     "createdAt": 2017-06-01T00:00:00.000Z,
                     "transition": "transition/accept",
                   },
+                  Object {
+                    "by": "system",
+                    "createdAt": 2017-07-01T00:00:00.000Z,
+                    "transition": "transition/complete",
+                  },
                 ],
               },
               "booking": Object {
@@ -6509,6 +6529,11 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                   "by": "provider",
                   "createdAt": 2017-06-01T00:00:00.000Z,
                   "transition": "transition/accept",
+                },
+                Object {
+                  "by": "system",
+                  "createdAt": 2017-07-01T00:00:00.000Z,
+                  "transition": "transition/complete",
                 },
               ],
             },
@@ -6762,6 +6787,11 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                     "by": "provider",
                     "createdAt": 2017-06-01T00:00:00.000Z,
                     "transition": "transition/accept",
+                  },
+                  Object {
+                    "by": "system",
+                    "createdAt": 2017-07-01T00:00:00.000Z,
+                    "transition": "transition/complete",
                   },
                 ],
               },

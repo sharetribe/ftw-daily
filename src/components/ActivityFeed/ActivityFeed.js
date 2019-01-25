@@ -20,7 +20,7 @@ import {
   TRANSITION_REVIEW_2_BY_PROVIDER,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
-  areReviewsCompleted,
+  transitionIsReviewed,
 } from '../../util/transaction';
 import { propTypes } from '../../util/types';
 import * as log from '../../util/log';
@@ -122,7 +122,7 @@ const hasUserLeftAReviewFirst = (userRole, lastTransition) => {
       userRole === TX_TRANSITION_ACTOR_CUSTOMER) ||
     (lastTransition === TRANSITION_REVIEW_1_BY_PROVIDER &&
       userRole === TX_TRANSITION_ACTOR_PROVIDER) ||
-    areReviewsCompleted(lastTransition)
+    transitionIsReviewed(lastTransition)
   );
 };
 
@@ -267,7 +267,7 @@ const Transition = props => {
 
   let reviewComponent = null;
 
-  if (isReviewTransition(currentTransition) && areReviewsCompleted(lastTransition)) {
+  if (isReviewTransition(currentTransition) && transitionIsReviewed(lastTransition)) {
     const customerReview =
       currentTransition === TRANSITION_REVIEW_1_BY_CUSTOMER ||
       currentTransition === TRANSITION_REVIEW_2_BY_CUSTOMER;
