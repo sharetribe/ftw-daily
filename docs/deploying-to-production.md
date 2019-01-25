@@ -28,11 +28,12 @@ To deploy the application add at least the following variables:
 | `PORT`                               | Must be set if the production environment doesn't set it by default. Not needed in Heroku.                                                                                                                                                                                                        |
 | `REACT_APP_SHARETRIBE_SDK_CLIENT_ID` | Client ID (API key) you can check from [Flex Console](https://flex-console.sharetribe.com/login/). You will get this from the Sharetribe team.                                                                                                                                                    |
 | `REACT_APP_STRIPE_PUBLISHABLE_KEY`   | Stripe publishable API key for generating tokens with Stripe API. It can be found from Stripe [API keys](https://dashboard.stripe.com/account/apikeys) page. Make sure to toggle _"View test data"_ on if you don't want to use real money yet. The secret key needs to be added to Flex Console. |
-| `REACT_APP_MAPBOX_ACCESS_TOKEN`      | Sign up for Mapbox and go to [account page](https://www.mapbox.com/account/access-tokens). Then click `Create access token`. For more information see the [Integrating to map providers](./map-providers.md) documentation.                                                                       |
+| `REACT_APP_MAPBOX_ACCESS_TOKEN`      | Sign up for Mapbox and go to [account page](https://www.mapbox.com/account/access-tokens). Then click `Create access token`. See the Flex Docs [How to set up Mapbox for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-mapbox-for-ftw/) guide for more information.                   |
 | `REACT_APP_CANONICAL_ROOT_URL`       | Canonical root URL of the marketplace. E.g. https://the-name-of-your-app.herokuapp.com or your actual domain. This is needed for social media sharing and SEO optimization.                                                                                                                       |
 
-There are also some other variables that can be used. See the
-[Enviroment configuration variables](./env.md) documentation for more information.
+There are also some other variables that can be used. See the Flex Docs
+[FTW Environment configuration variables](https://www.sharetribe.com/docs/references/ftw-env/)
+reference for more information.
 
 ### Building the app
 
@@ -51,13 +52,13 @@ Start the server:
 
 ## Deploying to Heroku
 
-- [Forking the repository](#forking-the-repository)
-- [Creating new app](#creating-new-app)
-- [Connect GitHub to Heroku](#connect-github-to-heroku)
-- [Heroku settings](#heroku-settings)
-  - [Updating enviroment variables](#updating-enviroment-variables)
-  - [Domains and certificates](#domains-and-certificates)
-- [Heroku logs](#heroku-logs)
+* [Forking the repository](#forking-the-repository)
+* [Creating new app](#creating-new-app)
+* [Connect GitHub to Heroku](#connect-github-to-heroku)
+* [Heroku settings](#heroku-settings)
+  * [Updating enviroment variables](#updating-enviroment-variables)
+  * [Domains and certificates](#domains-and-certificates)
+* [Heroku logs](#heroku-logs)
 
 Before creating the app you need three accounts: [Heroku](https://heroku.com/),
 [Stripe](https://stripe.com/fi) and [MapBox](https://www.mapbox.com/). Creating the accounts is free
@@ -103,7 +104,7 @@ from any branch in the repository.
 
 Read more from Heroku docs:
 
-- [GitHub Integration](https://devcenter.heroku.com/articles/github-integration)
+* [GitHub Integration](https://devcenter.heroku.com/articles/github-integration)
 
 ### Heroku settings
 
@@ -126,8 +127,8 @@ SSH settings in the _Settings tab_.
 
 Read more from Heroku docs:
 
-- [Custom Domain Names for Apps](https://devcenter.heroku.com/articles/custom-domains)
-- [Manually Acquiring an SSL/TLS Certificate](https://devcenter.heroku.com/articles/acquiring-an-ssl-certificate)
+* [Custom Domain Names for Apps](https://devcenter.heroku.com/articles/custom-domains)
+* [Manually Acquiring an SSL/TLS Certificate](https://devcenter.heroku.com/articles/acquiring-an-ssl-certificate)
 
 ![Heroku settings](./assets/deploying-to-production/heroku-domains.png)
 

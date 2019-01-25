@@ -20,8 +20,13 @@ yarn run config                                                # add the mandato
 yarn run dev                                                   # start the dev server, this will open a browser in localhost:3000
 ```
 
-See the [Environment configuration variables](docs/env.md) documentation for more information of the
-required configuration variables.
+You can also follow along the
+[Getting started with FTW](https://www.sharetribe.com/docs/tutorials/getting-started-with-ftw/)
+tutorial in the [Flex Docs website](https://www.sharetribe.com/docs/).
+
+For more information of the configuration, see the
+[FTW Environment configuration variables](https://www.sharetribe.com/docs/references/ftw-env/)
+reference in Flex Docs.
 
 **Note:** If you want to build your own Flex marketplace on top of the template, you should fork the
 repository instead of cloning it. See the [Customization guide](./docs/customization-guide.md).
