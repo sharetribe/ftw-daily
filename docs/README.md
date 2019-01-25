@@ -23,6 +23,24 @@ Marketplace features included in Saunatime:
 - **User profiles** provide detailed information about a given user.
 - **Extended data:** The listing and user data models are modified using extended data.
 
+## Flex Docs website
+
+We are currently moving documentation to the Flex Docs site, so at the moment part of the
+documentation is in this repository and part is in the Flex Docs site.
+
+See the Flex Docs site: https://www.sharetribe.com/docs/
+
+## Getting started
+
+We recommend going through the
+[Getting started articles](https://www.sharetribe.com/docs/background/getting-started/) in the Flex
+Docs:
+
+- [Introducing Flex](https://www.sharetribe.com/docs/background/introducing-flex/)
+- [What development skills are needed?](https://www.sharetribe.com/docs/background/development-skills/)
+- [Getting started with FTW](https://www.sharetribe.com/docs/tutorials/getting-started-with-ftw/)
+  tutorial.
+
 ## How to customize this template
 
 The easiest way to start a customization project is to read through the
@@ -35,7 +53,6 @@ Documentation for specific topics can be found in the following files:
 
 - [Customization guide](customization-guide.md)
 - [Folder structure](folder-structure.md)
-- [Integration to map providers](map-providers.md)
 - [Translations](translations.md)
 - [Styling a marketplace](styling.md)
 - [Static pages](static-pages.md)
@@ -43,18 +60,25 @@ Documentation for specific topics can be found in the following files:
 - [Routing](routing.md)
 - [Redux and duck files](redux.md)
 - [Extended data](extended-data.md)
+  - See also the
+    [Extended data reference](https://www.sharetribe.com/docs/references/extended-data/) in Flex
+    Docs
 - [Extend the listing data model](extend-listing.md)
 - [Search filters](search-filters.md)
 - [Testing](testing.md)
-- [Error logging with Sentry](sentry.md)
-- [Analytics](analytics.md)
 - [Continuous Integration (CI)](ci.md)
-- [Content Security Policy (CSP)](content-security-policy.md)
 - [Original create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md)
 - [Customization checklist](customization-checklist.md)
 - [Icons](icons.md)
 - [Improving performance](improving-performance.md)
 - [Deploying to production](deploying-to-production.md)
+
+See also the following articles in the [Flex Docs](https://www.sharetribe.com/docs/) website:
+
+- [How to set up Mapbox for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-mapbox-for-ftw/)
+- [How to set up Sentry to log errors in FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-sentry-to-log-errors-in-ftw/)
+- [How to set up Analytics for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-analytics-for-ftw/)
+- [How to set up Content Security Policy (CSP) for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-csp-for-ftw/)
 
 The application was bootstrapped with a forked version of
 [create-react-app](https://github.com/facebookincubator/create-react-app). While most of the

@@ -7,6 +7,17 @@ will help you in setting up your fork and describes the general workflow.
 README file, you probably don't want to make the customizations in that project. Forking the
 repository is the recommended way to proceed. Follow this guide for instructions.
 
+## Getting started
+
+We recommend going through the
+[Getting started articles](https://www.sharetribe.com/docs/background/getting-started/) in the Flex
+Docs:
+
+- [Introducing Flex](https://www.sharetribe.com/docs/background/introducing-flex/)
+- [What development skills are needed?](https://www.sharetribe.com/docs/background/development-skills/)
+- [Getting started with FTW](https://www.sharetribe.com/docs/tutorials/getting-started-with-ftw/)
+  tutorial.
+
 ## Requirements
 
 Install required tools:
@@ -99,8 +110,9 @@ This command will create `.env` file and guide you trough setting up the require
 variables. The `.env` file is the place to add your local configuration. It is ignored in Git, so
 you'll have to add the corresponding configuration also to your server environment.
 
-There are some mandatory configuration variables that are defined in the template. See the
-[Environment configuration variables](env.md) documentation for more information.
+There are some mandatory configuration variables that are defined in the template. See the Flex Docs
+[FTW Environment configuration variables](https://www.sharetribe.com/docs/references/ftw-env/)
+reference for more information.
 
 See also the [src/config.js](../src/config.js) file for more configuration options.
 

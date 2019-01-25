@@ -147,8 +147,10 @@ important jobs:
 - Calling loadData function, if those have been defined in `src/routeConfiguration.js`. This is an
   asynchronous call, a page needs to define what gets rendered before data is complete.
 - Reset scroll position after location change.
-- Dispatch location changed actions to Redux store. This makes it possible for
-  [analytics Redux middleware](analytics.md) to listen location changes.
+- Dispatch location changed actions to Redux store. This makes it possible for analytics Redux
+  middleware to listen location changes. For more information, see the
+  [How to set up Analytics for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-analytics-for-ftw/)
+  guide in Flex Docs.
 
 ## Linking
 
@@ -227,7 +229,9 @@ It is possible to track page views to gather information about navigation behavi
 tied to routing through `src/Routes.js` where `RouteRendererComponent` dispatches `LOCATION_CHANGED`
 actions. These actions are handled by a global reducer (`src/ducks/Routing.duck.js`), but more
 importantly, `src/analytics/analytics.js` (a Redux middleware) listens to these changes and sends
-tracking events to configured services. [Read more.](analytics.md)
+tracking events to configured services. For more information, see the
+[How to set up Analytics for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-analytics-for-ftw/)
+guide in Flex Docs.
 
 ## A brief introduction to SSR
 

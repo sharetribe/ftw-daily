@@ -28,6 +28,8 @@ Some generic things to update and check when starting to customize the template.
 - Update [routeConfiguration](../src/routeConfiguration.js) if needed
 - Update [Email templates](../ext/default-mail-templates), all of them: .html, subject.txt, and
   text.txt
+  - See the [Email template reference](https://www.sharetribe.com/docs/references/email-templates/)
+    in Flex Docs for more information.
 - Update [config: bookingUnitType](../src/config.js) if needed
 - If `line-item/units` is used, add quantity handling to
   [BookingDatesForm](../src/forms/BookingDatesForm/BookingDatesForm.js),
