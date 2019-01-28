@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import {
   txIsAccepted,
   txIsCanceled,
-  txIsDeclinedOrExpired,
+  txIsDeclined,
   txIsEnquired,
   txIsRequested,
   txHasBeenDelivered,
@@ -88,7 +88,7 @@ export const txState = (intl, tx, type) => {
         };
 
     return requested;
-  } else if (txIsDeclinedOrExpired(tx)) {
+  } else if (txIsDeclined(tx)) {
     return {
       nameClassName: css.nameNotEmphasized,
       bookingClassName: css.bookingNoActionNeeded,
