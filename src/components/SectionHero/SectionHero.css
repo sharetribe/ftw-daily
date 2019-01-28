@@ -10,7 +10,7 @@
     since browsers support CSS Properties already.
  */
 
-  --SectionHero_desktopTitleMaxWidth: 625px;
+  --SectionHero_desktopTitleMaxWidth: 500px;
 
   --SectionHero_animation: {
     animation-name: animationTitle;
