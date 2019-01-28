@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Fixed copy-text in ReviewForm: Rating is required.
+  [#1011](https://github.com/sharetribe/flex-template-web/pull/1011)
 - [change] Some of the documentation moved to Flex Docs: https://www.sharetribe.com/docs/
   [#1012](https://github.com/sharetribe/flex-template-web/pull/1012) and
   [#1014](https://github.com/sharetribe/flex-template-web/pull/1014)

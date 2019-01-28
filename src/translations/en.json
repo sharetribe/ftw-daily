@@ -632,7 +632,7 @@
   "ReviewForm.reviewContentPlaceholder": "Describe your experience…",
   "ReviewForm.reviewContentRequired": "You need to add a message to leave a review.",
   "ReviewForm.reviewRatingLabel": "Rate your experience",
-  "ReviewForm.reviewRatingRequired": "Review message is required",
+  "ReviewForm.reviewRatingRequired": "Rating is required.",
   "ReviewForm.reviewSubmit": "Publish review",
   "ReviewForm.reviewSubmitAlreadySent": "Review already sent. Please refresh the page.",
   "ReviewForm.reviewSubmitFailed": "Failed to sent a review. Please try again.",
