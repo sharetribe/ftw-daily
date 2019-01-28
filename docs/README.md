@@ -39,7 +39,6 @@ Docs:
 - [Introducing Flex](https://www.sharetribe.com/docs/background/introducing-flex/)
 - [What development skills are needed?](https://www.sharetribe.com/docs/background/development-skills/)
 - [Getting started with FTW](https://www.sharetribe.com/docs/tutorials/getting-started-with-ftw/)
-  tutorial.
 
 ## Customization guide
 
@@ -49,18 +48,27 @@ Docs.
 
 ## How to customize this template
 
-After going through the customization guide, you probably should start with changing
-[translations](translations.md), [common styles](styling.md) in marketplace.css, and then create
-[static pages](static-pages.md) and modify
-[Terms of Service and Privacy Policy pages](terms-of-service-and-privacy-policy.md).
+After going through the customization guide, you should probably start with the following guides in
+Flex Docs:
 
-Documentation for specific topics can be found in the following files:
+- [How to set up Mapbox for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-mapbox-for-ftw/)
+- [How to change FTW UI texts and translations](https://www.sharetribe.com/docs/guides/how-to-change-ftw-ui-texts-and-translations/)
+- [How to customize FTW styles](https://www.sharetribe.com/docs/guides/how-to-customize-ftw-styles/)
+- [How to change Terms of Service and Privacy Policy in FTW](https://www.sharetribe.com/docs/guides/how-to-change-tos-and-privacy-policy-in-ftw/)
+- [How to change FTW icons](https://www.sharetribe.com/docs/guides/how-to-change-ftw-icons/)
+- [FTW customization checklist](https://www.sharetribe.com/docs/guides/ftw-customization-checklist/)
+
+See also the following articles:
+
+- [How to add static pages in FTW](https://www.sharetribe.com/docs/guides/how-to-add-static-pages-in-ftw/)
+- [How to test FTW](https://www.sharetribe.com/docs/guides/how-to-test-ftw/)
+- [How to set up Sentry to log errors in FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-sentry-to-log-errors-in-ftw/)
+- [How to set up Analytics for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-analytics-for-ftw/)
+- [How to set up Content Security Policy (CSP) for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-csp-for-ftw/)
+
+Extra documentation for specific topics can be found in the following files:
 
 - [Folder structure](folder-structure.md)
-- [Translations](translations.md)
-- [Styling a marketplace](styling.md)
-- [Static pages](static-pages.md)
-- [Terms of Service and Privacy Policy](terms-of-service-and-privacy-policy.md)
 - [Routing](routing.md)
 - [Redux and duck files](redux.md)
 - [Extended data](extended-data.md)
@@ -70,19 +78,9 @@ Documentation for specific topics can be found in the following files:
 - [Extend the listing data model](extend-listing.md)
 - [Search filters](search-filters.md)
 - [Continuous Integration (CI)](ci.md)
-- [Original create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md)
-- [Customization checklist](customization-checklist.md)
-- [Icons](icons.md)
 - [Improving performance](improving-performance.md)
 - [Deploying to production](deploying-to-production.md)
-
-See also the following articles in the [Flex Docs](https://www.sharetribe.com/docs/) website:
-
-- [How to set up Mapbox for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-mapbox-for-ftw/)
-- [How to test FTW](https://www.sharetribe.com/docs/guides/how-to-test-ftw/)
-- [How to set up Sentry to log errors in FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-sentry-to-log-errors-in-ftw/)
-- [How to set up Analytics for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-analytics-for-ftw/)
-- [How to set up Content Security Policy (CSP) for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-csp-for-ftw/)
+- [Original create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md)
 
 The application was bootstrapped with a forked version of
 [create-react-app](https://github.com/facebookincubator/create-react-app). While most of the
