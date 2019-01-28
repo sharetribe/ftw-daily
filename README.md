@@ -29,12 +29,15 @@ For more information of the configuration, see the
 reference in Flex Docs.
 
 **Note:** If you want to build your own Flex marketplace on top of the template, you should fork the
-repository instead of cloning it. See the [Customization guide](./docs/customization-guide.md).
+repository instead of cloning it. See the
+[How to Customize FTW](https://www.sharetribe.com/docs/guides/how-to-customize-ftw/) guide in Flex
+Docs.
 
 ## Getting started with your own customization
 
 If you want to build your own Flex marketplace by customizing the template application, see the
-[Customization guide](docs/customization-guide.md) documentation.
+[How to Customize FTW](https://www.sharetribe.com/docs/guides/how-to-customize-ftw/) guide in Flex
+Docs.
 
 ## Deploying to Heroku
 
@@ -48,7 +51,12 @@ for more information.
 
 ## Documentation
 
-Full documentation can be found in the [docs directory](docs/).
+We are currently moving documentation to the Flex Docs site, so at the moment part of the
+documentation is in this repository and part is in the Flex Docs site.
+
+See the Flex Docs site: https://www.sharetribe.com/docs/
+
+Rest of the documentation can be found in the [docs directory](docs/).
 
 ## License
 

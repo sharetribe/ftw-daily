@@ -41,17 +41,21 @@ Docs:
 - [Getting started with FTW](https://www.sharetribe.com/docs/tutorials/getting-started-with-ftw/)
   tutorial.
 
-## How to customize this template
+## Customization guide
 
 The easiest way to start a customization project is to read through the
-[customization guide](customization-guide.md). After that, you probably should start with changing
+[How to Customize FTW](https://www.sharetribe.com/docs/guides/how-to-customize-ftw/) guide in Flex
+Docs.
+
+## How to customize this template
+
+After going through the customization guide, you probably should start with changing
 [translations](translations.md), [common styles](styling.md) in marketplace.css, and then create
 [static pages](static-pages.md) and modify
 [Terms of Service and Privacy Policy pages](terms-of-service-and-privacy-policy.md).
 
 Documentation for specific topics can be found in the following files:
 
-- [Customization guide](customization-guide.md)
 - [Folder structure](folder-structure.md)
 - [Translations](translations.md)
 - [Styling a marketplace](styling.md)
@@ -65,7 +69,6 @@ Documentation for specific topics can be found in the following files:
     Docs
 - [Extend the listing data model](extend-listing.md)
 - [Search filters](search-filters.md)
-- [Testing](testing.md)
 - [Continuous Integration (CI)](ci.md)
 - [Original create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md)
 - [Customization checklist](customization-checklist.md)
@@ -76,6 +79,7 @@ Documentation for specific topics can be found in the following files:
 See also the following articles in the [Flex Docs](https://www.sharetribe.com/docs/) website:
 
 - [How to set up Mapbox for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-mapbox-for-ftw/)
+- [How to test FTW](https://www.sharetribe.com/docs/guides/how-to-test-ftw/)
 - [How to set up Sentry to log errors in FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-sentry-to-log-errors-in-ftw/)
 - [How to set up Analytics for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-analytics-for-ftw/)
 - [How to set up Content Security Policy (CSP) for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-csp-for-ftw/)

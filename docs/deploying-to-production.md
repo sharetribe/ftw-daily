@@ -73,8 +73,9 @@ changes to environment variables.
 If you haven't done this already, you just need to click the "Fork" button on the top-right corner
 of the page: <img width="300" src="./assets/deploying-to-production/fork_button.png" />
 
-Read more from [Customization guide](./customization-guide.md#fork-the-repository) for more
-instructions.
+For more information, see the
+[How to Customize FTW](https://www.sharetribe.com/docs/guides/how-to-customize-ftw/) guide in Flex
+Docs.
 
 ### Creating a new app
 
