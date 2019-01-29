@@ -28,31 +28,33 @@ Marketplace features included in Saunatime:
 After cloning the repo, your project should look like this:
 
 ```
-├── ext
-│   └── default-mail-templates
+├── ext/
+│   └── default-mail-templates/
 ├── package.json
-├── docs
-├── public
-│   ├── 500.html
-│   ├── index.html
-│   ├── robots.txt
-│   └── static
-├── server
-│   ├── index.js
-│   ├── csp.js
-│   ├── sitemap.js
-│   └   ...
-└── src
+├── docs/
+├── public/
+│   ├── static/
+│   ├── 500.html
+│   ├── index.html
+│   └── robots.txt
+├── server/
+│   ├── csp.js
+│   ├── index.js
+│   ├── sitemap.js
+│   └   ...
+└── src/
+    ├── analytics/
+    ├── assets/
+    ├── components/
+    ├── containers/
+    ├── ducks/
+    ├── forms/
+    ├── translations/
+    ├── util/
     ├── Routes.js
-    ├── analytics
     ├── app.js
-    ├── assets
-    ├── components
     ├── config.js
-    ├── containers
-    ├── ducks
     ├── examples.js
-    ├── forms
     ├── index.js
     ├── marketplace-custom-config.js
     ├── marketplace.css
@@ -60,9 +62,7 @@ After cloning the repo, your project should look like this:
     ├── marketplaceIndex.css
     ├── reducers.js
     ├── routeConfiguration.js
-    ├── store.js
-    ├── translations
-    └── util
+    └── store.js
 ```
 
 ### public/index.html
