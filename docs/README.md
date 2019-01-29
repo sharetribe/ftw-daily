@@ -57,29 +57,25 @@ Flex Docs:
 - [How to change Terms of Service and Privacy Policy in FTW](https://www.sharetribe.com/docs/guides/how-to-change-tos-and-privacy-policy-in-ftw/)
 - [How to change FTW icons](https://www.sharetribe.com/docs/guides/how-to-change-ftw-icons/)
 - [FTW customization checklist](https://www.sharetribe.com/docs/guides/ftw-customization-checklist/)
+- [How to deploy FTW to production](https://www.sharetribe.com/docs/guides/how-to-deploy-ftw-to-production/)
 
 See also the following articles:
 
+- [How to extend listing data in FTW](https://www.sharetribe.com/docs/guides/how-to-extend-listing-data-in-ftw/)
+- [How to change search filters in FTW](https://www.sharetribe.com/docs/guides/how-to-change-search-filters-in-ftw/)
 - [How to add static pages in FTW](https://www.sharetribe.com/docs/guides/how-to-add-static-pages-in-ftw/)
 - [How to test FTW](https://www.sharetribe.com/docs/guides/how-to-test-ftw/)
 - [How to set up Sentry to log errors in FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-sentry-to-log-errors-in-ftw/)
 - [How to set up Analytics for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-analytics-for-ftw/)
 - [How to set up Content Security Policy (CSP) for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-csp-for-ftw/)
+- [How to use CI with FTW](https://www.sharetribe.com/docs/guides/how-to-use-ci-with-ftw/)
 
 Extra documentation for specific topics can be found in the following files:
 
 - [Folder structure](folder-structure.md)
 - [Routing](routing.md)
 - [Redux and duck files](redux.md)
-- [Extended data](extended-data.md)
-  - See also the
-    [Extended data reference](https://www.sharetribe.com/docs/references/extended-data/) in Flex
-    Docs
-- [Extend the listing data model](extend-listing.md)
-- [Search filters](search-filters.md)
-- [Continuous Integration (CI)](ci.md)
 - [Improving performance](improving-performance.md)
-- [Deploying to production](deploying-to-production.md)
 - [Original create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md)
 
 The application was bootstrapped with a forked version of

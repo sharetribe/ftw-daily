@@ -44,8 +44,9 @@ Docs.
 **Note:** Remember to fork the repository before deploying the application. Connecting your own
 Github repository to Heroku will make manual deploys easier.
 
-See [documentation about deploying to Heroku](./docs/deploying-to-production.md#deploying-to-Heroku)
-for more information.
+See the
+[How to deploy FTW to production](https://www.sharetribe.com/docs/guides/how-to-deploy-ftw-to-production/)
+guide in Flex Docs for more information.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
