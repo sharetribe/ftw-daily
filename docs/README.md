@@ -121,13 +121,6 @@ and \*-text.txt).
 _**NOTE:** Changing these doesn't change actual email templates - you need to send customized
 templates to your Flex contact person._
 
-## Flex Docs website
-
-We are currently moving documentation to the Flex Docs site, so at the moment part of the
-documentation is in this repository and part is in the Flex Docs site.
-
-See the Flex Docs site: https://www.sharetribe.com/docs/
-
 ## Getting started
 
 We recommend going through the

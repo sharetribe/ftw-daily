@@ -52,12 +52,9 @@ guide in Flex Docs for more information.
 
 ## Documentation
 
-We are currently moving documentation to the Flex Docs site, so at the moment part of the
-documentation is in this repository and part is in the Flex Docs site.
-
 See the Flex Docs site: https://www.sharetribe.com/docs/
 
-Rest of the documentation can be found in the [docs directory](docs/).
+See also the [docs/](docs/) directory for some additional internal documentation.
 
 ## License
 
