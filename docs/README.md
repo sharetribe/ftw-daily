@@ -114,9 +114,9 @@ internal state, etc.
 
 ### ext/default-mail-templates/
 
-This file contains default email templates for various needs (e.g. _booking-request-accepted_, or
-_verify-your-email_). You should customize all the different files (\*-html.html, \*-subject.txt,
-and \*-text.txt).
+This directory contains default email templates for transaction-specific needs (e.g.
+_booking-request-accepted_). However, there are some built-in email templates that you can change in
+[Flex Console](http://flex-console.sharetribe.com/email-templates/email-changed).
 
 _**NOTE:** Changing these doesn't change actual email templates - you need to send customized
 templates to your Flex contact person._
