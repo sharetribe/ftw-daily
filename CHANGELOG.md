@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v2.9.0] 2019-01-29
+
 - [fix] day boundaries for date filter and pass booking state to bookings.query
   - SearchPage.duck.js: endDate should not be expanded for night bookings
   - DateRangeController: bookingUnitType: day should allow 0 night
@@ -43,6 +45,8 @@ way to update this template, but currently, we follow a pattern:
 - [add] Limit location autocomplete by adding an optional country parameter to geocoding call in
   both Mapbox and Google Maps integrations. Also updated Mapbox SDK to version 0.5.0.
   [#1002](https://github.com/sharetribe/flex-template-web/pull/1002)
+
+  [v2.9.0]: https://github.com/sharetribe/flex-template-web/compare/v2.8.0...v2.9.0
 
 ## [v2.8.0] 2019-01-17
 
