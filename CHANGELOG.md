@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Rest of the documentation moved to Flex Docs: https://www.sharetribe.com/docs/
+  [#1015](https://github.com/sharetribe/flex-template-web/pull/1015)
+
 ## [v2.9.0] 2019-01-29
 
 - [fix] day boundaries for date filter and pass booking state to bookings.query
