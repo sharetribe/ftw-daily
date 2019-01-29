@@ -92,6 +92,10 @@
     padding-top: 31px;
     padding-bottom: 37px;
 
+    &::first-letter {
+      text-transform: capitalize;
+    }
+
     @media (--viewportMedium) {
       margin-top: 0;
       margin-bottom: 0;
