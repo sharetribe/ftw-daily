@@ -57,7 +57,7 @@ class SelectSingleFilterPlain extends Component {
             <span className={labelClass}>{label}</span>
           </button>
           <button className={css.clearButton} onClick={e => this.selectOption(null, e)}>
-            <FormattedMessage id={'SelectSingleFilterPlain.clear'} />
+            <FormattedMessage id={'SelectSingleFilter.plainClear'} />
           </button>
         </div>
         <div className={optionsContainerClass}>

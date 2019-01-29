@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Date filter added and filter components (single and multiselect) are refactored to use
+  shared subcomponents. [#949](https://github.com/sharetribe/flex-template-web/pull/949)
 - [fix] Fixed copy-text in ReviewForm: Rating is required.
   [#1011](https://github.com/sharetribe/flex-template-web/pull/1011)
 - [change] Some of the documentation moved to Flex Docs: https://www.sharetribe.com/docs/

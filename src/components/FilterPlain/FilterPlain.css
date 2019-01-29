@@ -1,6 +1,7 @@
 @import '../../marketplace.css';
 
 .root {
+  position: relative;
   padding-top: 24px;
   padding-bottom: 17px;
   border-bottom: 1px solid var(--matterColorNegative);
@@ -33,20 +34,6 @@
   cursor: pointer;
 }
 
-.optionsContainerOpen {
-  height: auto;
-  padding-left: 20px;
-  padding-bottom: 30px;
-}
-
-.optionsContainerClosed {
-  height: 0;
-  overflow: hidden;
-}
-
-.columnLayout {
-}
-
 .clearButton {
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightMedium);
@@ -67,4 +54,13 @@
   &:hover {
     color: var(--matterColor);
   }
+}
+
+.plain {
+  width: 100%;
+  display: none;
+}
+
+.isOpen {
+  display: block;
 }

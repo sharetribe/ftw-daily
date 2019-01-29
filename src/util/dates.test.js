@@ -1,5 +1,13 @@
 import { fakeIntl } from './test-data';
-import { isDate, isSameDate, nightsBetween, daysBetween, formatDate } from './dates';
+import {
+  isDate,
+  isSameDate,
+  nightsBetween,
+  daysBetween,
+  formatDate,
+  parseDateFromISO8601,
+  stringifyDateToISO8601,
+} from './dates';
 
 describe('date utils', () => {
   describe('isDate()', () => {
@@ -85,6 +93,21 @@ describe('date utils', () => {
     it('formats a date', () => {
       const d = new Date(Date.UTC(2017, 10, 22, 13, 51));
       expect(formatDate(fakeIntl, 'Today', d)).toEqual('2017-11-22, 13:51');
+    });
+  });
+
+  describe('parseDateFromISO8601()', () => {
+    it('should return date', () => {
+      const dateString = '2018-11-23';
+      const date = new Date(2018, 10, 23);
+      expect(parseDateFromISO8601(dateString)).toEqual(date);
+    });
+  });
+
+  describe('stringifyDateToISO8601()', () => {
+    it('should return string in YYYY-MM-DD format', () => {
+      const date = new Date(2018, 10, 23);
+      expect(stringifyDateToISO8601(date)).toEqual('2018-11-23');
     });
   });
 });
