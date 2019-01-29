@@ -14,6 +14,11 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] day boundaries for date filter and pass booking state to bookings.query
+  - SearchPage.duck.js: endDate should not be expanded for night bookings
+  - DateRangeController: bookingUnitType: day should allow 0 night
+  - EditListingPage.duck.js booking state should be passed to query
+    [#1016](https://github.com/sharetribe/flex-template-web/pull/1016)
 - [add] Date filter added and filter components (single and multiselect) are refactored to use
   shared subcomponents. [#949](https://github.com/sharetribe/flex-template-web/pull/949)
 - [fix] Fixed copy-text in ReviewForm: Rating is required.
