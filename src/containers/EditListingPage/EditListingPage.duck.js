@@ -517,13 +517,13 @@ export function requestImageUpload(actionPayload) {
 }
 
 export const requestFetchBookings = fetchParams => (dispatch, getState, sdk) => {
-  const { listingId, start, end } = fetchParams;
+  const { listingId, start, end, state } = fetchParams;
   const monthId = monthIdString(start);
 
   dispatch(fetchBookingsRequest({ ...fetchParams, monthId }));
 
   return sdk.bookings
-    .query({ listingId, start, end }, { expand: true })
+    .query({ listingId, start, end, state }, { expand: true })
     .then(response => {
       const bookings = denormalisedResponseEntities(response);
       return dispatch(fetchBookingsSuccess({ data: { monthId, bookings } }));

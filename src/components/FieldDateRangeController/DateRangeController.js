@@ -55,7 +55,7 @@ const defaultProps = {
   renderDayContents: day => {
     return <span className="renderedDay">{day.format('D')}</span>;
   },
-  minimumNights: 1,
+  minimumNights: config.bookingUnitType === 'line-item/night' ? 1 : 0,
   enableOutsideDays: false,
   isDayBlocked: () => false,
 
