@@ -156,6 +156,8 @@ Flex Docs:
 - [How to change FTW icons](https://www.sharetribe.com/docs/guides/how-to-change-ftw-icons/)
 - [FTW customization checklist](https://www.sharetribe.com/docs/guides/ftw-customization-checklist/)
 - [How to deploy FTW to production](https://www.sharetribe.com/docs/guides/how-to-deploy-ftw-to-production/)
+- [How routing works in FTW](https://www.sharetribe.com/docs/background/ftw-routing/)
+- [How the Redux setup works in FTW](https://www.sharetribe.com/docs/background/ftw-redux/)
 
 See also the following articles:
 
@@ -169,11 +171,8 @@ See also the following articles:
 - [How to use CI with FTW](https://www.sharetribe.com/docs/guides/how-to-use-ci-with-ftw/)
 - [How to improve performance](https://www.sharetribe.com/docs/guides/how-to-improve-performance/)
 
-Extra documentation for specific topics can be found in the following files:
-
-- [Routing](routing.md)
-- [Redux and duck files](redux.md)
-- [Original create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md)
+See also the
+[original create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 The application was bootstrapped with a forked version of
 [create-react-app](https://github.com/facebookincubator/create-react-app). While most of the
