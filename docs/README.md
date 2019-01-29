@@ -167,13 +167,12 @@ See also the following articles:
 - [How to set up Analytics for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-analytics-for-ftw/)
 - [How to set up Content Security Policy (CSP) for FTW](https://www.sharetribe.com/docs/guides/how-to-set-up-csp-for-ftw/)
 - [How to use CI with FTW](https://www.sharetribe.com/docs/guides/how-to-use-ci-with-ftw/)
+- [How to improve performance](https://www.sharetribe.com/docs/guides/how-to-improve-performance/)
 
 Extra documentation for specific topics can be found in the following files:
 
-- [Folder structure](folder-structure.md)
 - [Routing](routing.md)
 - [Redux and duck files](redux.md)
-- [Improving performance](improving-performance.md)
 - [Original create-react-app documentation](https://github.com/sharetribe/create-react-app/blob/master/packages/react-scripts/template/README.md)
 
 The application was bootstrapped with a forked version of
