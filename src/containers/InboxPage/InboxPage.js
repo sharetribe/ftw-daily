@@ -6,18 +6,14 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import moment from 'moment';
 import classNames from 'classnames';
 import {
-  LINE_ITEM_DAY,
-  LINE_ITEM_UNITS,
-  txHasFirstReview,
   txIsAccepted,
   txIsCanceled,
-  txIsCompleted,
-  txIsDeclinedOrExpired,
+  txIsDeclined,
   txIsEnquired,
   txIsRequested,
-  txIsReviewed,
-  propTypes,
-} from '../../util/types';
+  txHasBeenDelivered,
+} from '../../util/transaction';
+import { LINE_ITEM_DAY, LINE_ITEM_UNITS, propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { ensureCurrentUser, userDisplayName } from '../../util/data';
 import { dateFromAPIToLocalNoon, daysBetween } from '../../util/dates';
@@ -57,73 +53,85 @@ const formatDate = (intl, date) => {
 };
 
 // Translated name of the state of the given transaction
-const txState = (intl, tx, isOrder) => {
-  if (txIsAccepted(tx)) {
+export const txState = (intl, tx, type) => {
+  const isOrder = type === 'order';
+
+  if (txIsEnquired(tx)) {
     return {
-      nameClassName: css.nameAccepted,
-      bookingClassName: css.bookingAccepted,
-      lastTransitionedAtClassName: css.lastTransitionedAtAccepted,
-      stateClassName: css.stateAccepted,
-      state: intl.formatMessage({
-        id: 'InboxPage.stateAccepted',
-      }),
-    };
-  } else if (txIsDeclinedOrExpired(tx)) {
-    return {
-      nameClassName: css.nameDeclined,
-      bookingClassName: css.bookingDeclined,
-      lastTransitionedAtClassName: css.lastTransitionedAtDeclined,
-      stateClassName: css.stateDeclined,
-      state: intl.formatMessage({
-        id: 'InboxPage.stateDeclined',
-      }),
-    };
-  } else if (txIsCanceled(tx)) {
-    return {
-      nameClassName: css.nameCanceled,
-      bookingClassName: css.bookingCanceled,
-      lastTransitionedAtClassName: css.lastTransitionedAtCanceled,
-      stateClassName: css.stateCanceled,
-      state: intl.formatMessage({
-        id: 'InboxPage.stateCanceled',
-      }),
-    };
-  } else if (txIsCompleted(tx) || txHasFirstReview(tx) || txIsReviewed(tx)) {
-    return {
-      nameClassName: css.nameDelivered,
-      bookingClassName: css.bookingDelivered,
-      lastTransitionedAtClassName: css.lastTransitionedAtDelivered,
-      stateClassName: css.stateDelivered,
-      state: intl.formatMessage({
-        id: 'InboxPage.stateDelivered',
-      }),
-    };
-  } else if (txIsEnquired(tx)) {
-    return {
-      nameClassName: isOrder ? css.nameEnquiredOrder : css.nameEnquired,
-      bookingClassName: css.bookingEnquired,
-      lastTransitionedAtClassName: css.lastTransitionedAtEnquired,
-      stateClassName: css.stateEnquired,
+      nameClassName: isOrder ? css.nameNotEmphasized : css.nameEmphasized,
+      bookingClassName: css.bookingActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
+      stateClassName: css.stateActionNeeded,
       state: intl.formatMessage({
         id: 'InboxPage.stateEnquiry',
       }),
     };
+  } else if (txIsRequested(tx)) {
+    const requested = isOrder
+      ? {
+          nameClassName: css.nameNotEmphasized,
+          bookingClassName: css.bookingNoActionNeeded,
+          lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
+          stateClassName: css.stateActionNeeded,
+          state: intl.formatMessage({
+            id: 'InboxPage.stateRequested',
+          }),
+        }
+      : {
+          nameClassName: css.nameEmphasized,
+          bookingClassName: css.bookingActionNeeded,
+          lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
+          stateClassName: css.stateActionNeeded,
+          state: intl.formatMessage({
+            id: 'InboxPage.statePending',
+          }),
+        };
+
+    return requested;
+  } else if (txIsDeclined(tx)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
+      state: intl.formatMessage({
+        id: 'InboxPage.stateDeclined',
+      }),
+    };
+  } else if (txIsAccepted(tx)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateSucces,
+      state: intl.formatMessage({
+        id: 'InboxPage.stateAccepted',
+      }),
+    };
+  } else if (txIsCanceled(tx)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
+      state: intl.formatMessage({
+        id: 'InboxPage.stateCanceled',
+      }),
+    };
+  } else if (txHasBeenDelivered(tx)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
+      state: intl.formatMessage({
+        id: 'InboxPage.stateDelivered',
+      }),
+    };
+  } else {
+    console.warn('This transition is unknown:', tx.attributes.lastTransition);
+    return null;
   }
-  return {
-    nameClassName: isOrder ? css.nameRequested : css.namePending,
-    bookingClassName: isOrder ? css.bookingRequested : css.bookingPending,
-    lastTransitionedAtClassName: isOrder
-      ? css.lastTransitionedAtRequested
-      : css.lastTransitionedAtPending,
-    stateClassName: isOrder ? css.stateRequested : css.statePending,
-    state: isOrder
-      ? intl.formatMessage({
-          id: 'InboxPage.stateRequested',
-        })
-      : intl.formatMessage({
-          id: 'InboxPage.statePending',
-        }),
-  };
 };
 
 const bookingData = (unitType, tx, isOrder, intl) => {
@@ -176,7 +184,7 @@ BookingInfoMaybe.propTypes = {
 };
 
 export const InboxItem = props => {
-  const { unitType, type, tx, intl } = props;
+  const { unitType, type, tx, intl, stateData } = props;
   const { customer, provider } = tx;
   const isOrder = type === 'order';
 
@@ -187,7 +195,6 @@ export const InboxItem = props => {
   const isOtherUserBanned = otherUser.attributes.banned;
   const otherUserDisplayName = userDisplayName(otherUser, bannedUserDisplayName);
 
-  const stateData = txState(intl, tx, isOrder);
   const isSaleNotification = !isOrder && txIsRequested(tx);
   const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
   const lastTransitionedAt = formatDate(intl, tx.attributes.lastTransitionedAt);
@@ -270,11 +277,15 @@ export const InboxPageComponent = props => {
   const title = isOrders ? ordersTitle : salesTitle;
 
   const toTxItem = tx => {
-    return (
+    const type = isOrders ? 'order' : 'sale';
+    const stateData = txState(intl, tx, type);
+
+    // Render InboxItem only if the latest transition of the transaction is handled in the `txState` function.
+    return stateData ? (
       <li key={tx.id.uuid} className={css.listItem}>
-        <InboxItem unitType={unitType} type={isOrders ? 'order' : 'sale'} tx={tx} intl={intl} />
+        <InboxItem unitType={unitType} type={type} tx={tx} intl={intl} stateData={stateData} />
       </li>
-    );
+    ) : null;
   };
 
   const error = fetchOrdersOrSalesError ? (

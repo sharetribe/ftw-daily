@@ -331,8 +331,25 @@
 
 /* Transaction status affects to certain font colors and weights */
 
-.nameEnquired,
-.namePending {
+.stateName {
+  /* This class is empty on purpose, it is used below for banned users */
+}
+
+.stateActionNeeded {
+  font-weight: var(--fontWeightSemiBold);
+  color: var(--attentionColor);
+}
+
+.stateNoActionNeeded {
+  color: var(--matterColorAnti);
+}
+
+.stateSucces {
+  font-weight: var(--fontWeightSemiBold);
+  color: var(--successColor);
+}
+
+.nameEmphasized {
   font-weight: var(--fontWeightBold);
 
   /* baseline alignment fixes */
@@ -340,39 +357,11 @@
   margin-bottom: 1px;
 }
 
-.stateName {
-  /* This class is empty on purpose, it is used below for banned users */
-}
-
-.stateEnquired,
-.stateRequested,
-.statePending {
-  font-weight: var(--fontWeightSemiBold);
-  color: var(--attentionColor);
-}
-
-.stateAccepted {
-  font-weight: var(--fontWeightSemiBold);
-  color: var(--successColor);
-}
-
-.stateCanceled,
-.stateDeclined,
-.stateDelivered {
-  color: var(--matterColorAnti);
-}
-
-.nameEnquiredOrder,
-.nameRequested,
-.nameDeclined,
-.nameCanceled,
-.nameAccepted,
-.nameDelivered {
+.nameNotEmphasized {
   font-weight: var(--fontWeightMedium);
 }
 
-.bookingEnquired,
-.bookingPending {
+.bookingActionNeeded {
   color: var(--matterColor);
   margin-top: 4px;
 
@@ -381,25 +370,16 @@
   }
 }
 
-.bookingRequested,
-.bookingCanceled,
-.bookingDeclined,
-.bookingAccepted,
-.bookingDelivered {
+.bookingNoActionNeeded {
   color: var(--matterColorAnti);
 }
 
-.lastTransitionedAtEnquired,
-.lastTransitionedAtPending,
-.lastTransitionedAtRequested {
+.lastTransitionedAtEmphasized {
   color: var(--matterColor);
   font-weight: var(--fontWeightMedium);
 }
 
-.lastTransitionedAtCanceled,
-.lastTransitionedAtAccepted,
-.lastTransitionedAtDeclined,
-.lastTransitionedAtDelivered {
+.lastTransitionedAtNotEmphasized {
   color: var(--matterColorAnti);
 }
 

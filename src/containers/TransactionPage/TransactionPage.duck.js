@@ -7,13 +7,12 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
 import {
   txIsEnquired,
+  getReview1Transition,
+  getReview2Transition,
+  txIsInFirstReviewBy,
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
-  TRANSITION_REVIEW_1_BY_CUSTOMER,
-  TRANSITION_REVIEW_1_BY_PROVIDER,
-  TRANSITION_REVIEW_2_BY_CUSTOMER,
-  TRANSITION_REVIEW_2_BY_PROVIDER,
-} from '../../util/types';
+} from '../../util/transaction';
 import * as log from '../../util/log';
 import {
   updatedEntities,
@@ -443,8 +442,7 @@ const IMAGE_VARIANTS = {
 // If other party has already sent a review, we need to make transition to
 // TRANSITION_REVIEW_2_BY_<CUSTOMER/PROVIDER>
 const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
-  const transition =
-    role === CUSTOMER ? TRANSITION_REVIEW_2_BY_CUSTOMER : TRANSITION_REVIEW_2_BY_PROVIDER;
+  const transition = getReview2Transition(role === CUSTOMER);
 
   const include = REVIEW_TX_INCLUDES;
 
@@ -470,8 +468,7 @@ const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
 // So, error is likely to happen and then we must try another state transition
 // by calling sendReviewAsSecond().
 const sendReviewAsFirst = (id, params, role, dispatch, sdk) => {
-  const transition =
-    role === CUSTOMER ? TRANSITION_REVIEW_1_BY_CUSTOMER : TRANSITION_REVIEW_1_BY_PROVIDER;
+  const transition = getReview1Transition(role === CUSTOMER);
   const include = REVIEW_TX_INCLUDES;
 
   return sdk.transactions
@@ -498,10 +495,7 @@ const sendReviewAsFirst = (id, params, role, dispatch, sdk) => {
 export const sendReview = (role, tx, reviewRating, reviewContent) => (dispatch, getState, sdk) => {
   const params = { reviewRating, reviewContent };
 
-  const txStateOtherPartyFirst =
-    role === CUSTOMER
-      ? tx.attributes.lastTransition === TRANSITION_REVIEW_1_BY_PROVIDER
-      : tx.attributes.lastTransition === TRANSITION_REVIEW_1_BY_CUSTOMER;
+  const txStateOtherPartyFirst = txIsInFirstReviewBy(tx, role !== CUSTOMER);
 
   dispatch(sendReviewRequest());
 

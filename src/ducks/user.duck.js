@@ -3,11 +3,8 @@ import isUndefined from 'lodash/isUndefined';
 import config from '../config';
 import { denormalisedResponseEntities, ensureOwnListing } from '../util/data';
 import { storableError } from '../util/errors';
-import {
-  LISTING_STATE_DRAFT,
-  TRANSITION_REQUEST,
-  TRANSITION_REQUEST_AFTER_ENQUIRY,
-} from '../util/types';
+import { transitionsToRequested } from '../util/transaction';
+import { LISTING_STATE_DRAFT } from '../util/types';
 import * as log from '../util/log';
 import { authInfo } from './Auth.duck';
 
@@ -319,7 +316,7 @@ export const fetchCurrentUserNotifications = () => (dispatch, getState, sdk) => 
 
   const apiQueryParams = {
     only: 'sale',
-    last_transitions: [TRANSITION_REQUEST, TRANSITION_REQUEST_AFTER_ENQUIRY],
+    last_transitions: transitionsToRequested,
     page: 1,
     per_page: NOTIFICATION_PAGE_SIZE,
   };

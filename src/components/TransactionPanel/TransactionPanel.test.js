@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import {
+  createTxTransition,
   createTransaction,
   createBooking,
   createListing,
@@ -19,8 +20,8 @@ import {
   TRANSITION_ENQUIRE,
   TRANSITION_EXPIRE,
   TRANSITION_REQUEST,
-} from '../../util/types';
-import { BreakdownMaybe } from './TransactionPanel.helpers';
+} from '../../util/transaction';
+import BreakdownMaybe from './BreakdownMaybe';
 import { TransactionPanelComponent } from './TransactionPanel';
 
 const noop = () => null;
@@ -82,6 +83,23 @@ describe('TransactionPanel - Sale', () => {
   const txDelivered = createTransaction({
     id: 'sale-delivered',
     lastTransition: TRANSITION_COMPLETE,
+    transitions: [
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 4, 1)),
+        by: 'customer',
+        transition: TRANSITION_REQUEST,
+      }),
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 5, 1)),
+        by: 'provider',
+        transition: TRANSITION_ACCEPT,
+      }),
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 6, 1)),
+        by: 'system',
+        transition: TRANSITION_COMPLETE,
+      }),
+    ],
     ...baseTxAttrs,
   });
 
@@ -250,6 +268,23 @@ describe('TransactionPanel - Order', () => {
   const txDelivered = createTransaction({
     id: 'order-delivered',
     lastTransition: TRANSITION_COMPLETE,
+    transitions: [
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 4, 1)),
+        by: 'customer',
+        transition: TRANSITION_REQUEST,
+      }),
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 5, 1)),
+        by: 'provider',
+        transition: TRANSITION_ACCEPT,
+      }),
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 6, 1)),
+        by: 'system',
+        transition: TRANSITION_COMPLETE,
+      }),
+    ],
     ...baseTxAttrs,
   });
 

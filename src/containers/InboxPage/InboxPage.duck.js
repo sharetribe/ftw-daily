@@ -2,6 +2,7 @@ import reverse from 'lodash/reverse';
 import sortBy from 'lodash/sortBy';
 import { storableError } from '../../util/errors';
 import { parse } from '../../util/urlHelpers';
+import { TRANSITIONS } from '../../util/transaction';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 
 const sortedTransactions = txs =>
@@ -91,6 +92,7 @@ export const loadData = (params, search) => (dispatch, getState, sdk) => {
 
   const apiQueryParams = {
     only: onlyFilter,
+    lastTransitions: TRANSITIONS,
     include: ['provider', 'provider.profileImage', 'customer', 'customer.profileImage', 'booking'],
     'fields.image': ['variants.square-small', 'variants.square-small2x'],
     page,
