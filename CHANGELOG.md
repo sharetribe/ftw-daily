@@ -14,12 +14,16 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v2.10.0] 2019-01-31
+
 - [change] Extracted and refactored utility functions related to transaction and refactored several
   components that show transaction data (incl. InboxPage, TransactionPanel, ActivityFeed). Before
   updating your customization project, you should read more about what has changed from the pull
   request. [#1004](https://github.com/sharetribe/flex-template-web/pull/1004)
 - [change] Rest of the documentation moved to Flex Docs: https://www.sharetribe.com/docs/
   [#1015](https://github.com/sharetribe/flex-template-web/pull/1015)
+
+  [v2.10.0]: https://github.com/sharetribe/flex-template-web/compare/v2.9.0...v2.10.0
 
 ## [v2.9.0] 2019-01-29
 
