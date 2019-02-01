@@ -191,15 +191,22 @@
 
 .contentContainer {
   @media (--viewportMedium) {
-    max-width: 1280px;
+    max-width: 1056px;
     margin: 0 auto;
-    padding: 0 60px;
+    padding: 0 24px;
     display: flex;
     position: relative;
   }
 
   @media (--viewportLarge) {
+    max-width: 1128px;
+    padding: 0 36px;
     margin: 0 auto 117px;
+  }
+
+  @media (--viewportXLarge) {
+    max-width: 1056px;
+    padding: 0;
   }
 }
 
@@ -219,6 +226,7 @@
     /* contentContainer's full width - (bookingColumn + two paddings + margin + border) */
     flex-basis: calc(100% - 493px);
     flex-shrink: 0;
+    flex-grow: 1;
   }
 }
 
@@ -232,7 +240,6 @@
     border-left-color: var(--matterColorNegative);
 
     padding-left: 60px;
-    padding-right: 60px;
 
     /* The calendar needs 312px */
     flex-basis: 312px;
