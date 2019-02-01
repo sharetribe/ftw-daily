@@ -14,16 +14,12 @@
   box-shadow: var(--boxShadow);
 
   @media (--viewportLarge) {
-    padding: 112px 0 82px 15vw;
+    padding: 112px 0 82px calc((100% - 1056px) / 2 + 74px);
     flex-direction: column;
     justify-content: flex-start;
     border: none;
     box-shadow: none;
     background-color: transparent;
-  }
-
-  @media (--viewportXLarge) {
-    padding-left: 25vw;
   }
 }
 
@@ -42,7 +38,7 @@
   @media (--viewportLarge) {
     min-height: auto;
     flex-direction: column;
-    margin-top: 28px;
+    margin-top: 24px;
     padding-top: 0;
   }
 }

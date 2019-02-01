@@ -17,15 +17,10 @@
 }
 
 .title {
-  margin-top: 4px;
+  margin-top: 8px;
   margin-bottom: 19px;
 
   @media (--viewportMedium) {
-    margin-top: 2px;
     margin-bottom: 47px;
-  }
-
-  @media (--viewportLarge) {
-    margin-top: 4px;
   }
 }

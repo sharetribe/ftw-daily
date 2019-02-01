@@ -38,17 +38,12 @@
   overflow-x: scroll;
 
   @media (--viewportLarge) {
-    padding: 126px 0 82px 15vw;
+    padding: 128px 0 82px calc((100% - 1056px) / 2 + 74px);
     flex-direction: column;
     overflow-x: auto;
-
     background-color: var(--matterColorBright);
     box-shadow: none;
     border-top: none;
-  }
-
-  @media (--viewportXLarge) {
-    padding-left: 25vw;
   }
 }
 
@@ -85,13 +80,9 @@
   flex-grow: 1;
 
   @media (--viewportLarge) {
-    padding: 82px 15vw 82px 82px;
+    padding: 88px calc((100% - 1056px) / 2 + 36px) 82px 82px;
     border-left: 1px solid var(--matterColorNegative);
     background-color: var(--matterColorLight);
-  }
-
-  @media (--viewportXLarge) {
-    padding-right: 25vw;
   }
 }
 
