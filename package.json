@@ -66,6 +66,7 @@
     "prettier": "^1.15.3"
   },
   "scripts": {
+    "audit": "yarn audit --json | node scripts/audit.js",
     "clean": "rm -rf build/*",
     "config": "node scripts/config.js",
     "dev": "node scripts/config.js --check && sharetribe-scripts start",

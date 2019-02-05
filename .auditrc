@@ -1,0 +1,14 @@
+exports.exceptions = [
+  // Severity: low, moment (< 2.19.3), currently used by react-dates
+  "https://npmjs.com/advisories/532",
+
+  // Severity: low, lodash (< 4.17.5), used heavily in our CRA fork
+  "https://npmjs.com/advisories/577",
+
+  // Severity: low, merge (< 1.2.1), used by Jest (CRA fork)
+  "https://npmjs.com/advisories/722",
+
+  // Severity: high, webpack-dev-server (< 3.1.10), (CRA fork)
+  // Note: don't run webpack-dev-server on public web.
+  "https://npmjs.com/advisories/725",
+];
