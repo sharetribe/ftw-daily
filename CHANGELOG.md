@@ -16,6 +16,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## [v2.10.0] 2019-01-31
 
+- [add] Add audit script and include it as a CI job. We had security audit job previously on top of
+  node security platform (nsp), but that service was closed on December 2018.
+  [#1020](https://github.com/sharetribe/flex-template-web/pull/1020)
 - [change] Extracted and refactored utility functions related to transaction and refactored several
   components that show transaction data (incl. InboxPage, TransactionPanel, ActivityFeed). Before
   updating your customization project, you should read more about what has changed from the pull
