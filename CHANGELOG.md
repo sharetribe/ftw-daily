@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Small changes in CSS files in order to match content width with the footer in pages where
+  the footer is visible. Also, make side layout (used e.g. in `TermsOfServicePage`, `InboxPage`,
+  `ContactDetailsPage`) align width footer better. Check responsive layouts carefulle after taking
+  update from upstream. [#1090](https://github.com/sharetribe/flex-template-web/pull/1019)
 - [add] This adds an example how user-generated content could be sanitized. If you have extended
   data you should consider if sanitization is needed for that.
   [#1023](https://github.com/sharetribe/flex-template-web/pull/1023)
