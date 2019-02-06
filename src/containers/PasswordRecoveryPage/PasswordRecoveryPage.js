@@ -4,10 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { propTypes } from '../../util/types';
-import {
-  isPasswordRecoveryEmailNotFoundError,
-  isPasswordRecoveryEmailNotVerifiedError,
-} from '../../util/errors';
+import { isPasswordRecoveryEmailNotFoundError } from '../../util/errors';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
   Page,
@@ -27,7 +24,6 @@ import {
   retypePasswordRecoveryEmail,
   clearPasswordRecoveryError,
 } from './PasswordRecoveryPage.duck';
-import DoorIcon from './DoorIcon';
 import css from './PasswordRecoveryPage.css';
 
 export const PasswordRecoveryPageComponent = props => {
@@ -115,25 +111,6 @@ export const PasswordRecoveryPageComponent = props => {
     </div>
   );
 
-  const initialEmailText = <span className={css.email}>{initialEmail}</span>;
-  const emailNotVerifiedContent = (
-    <div className={css.emailNotVerifiedContent}>
-      <DoorIcon className={css.modalIcon} />
-      <h1 className={css.modalTitle}>
-        <FormattedMessage id="PasswordRecoveryPage.emailNotVerifiedTitle" />
-      </h1>
-      <p className={css.modalMessage}>
-        <FormattedMessage
-          id="PasswordRecoveryPage.emailNotVerifiedMessage"
-          values={{ initialEmailText }}
-        />
-      </p>
-      <p className={css.modalMessage}>
-        <FormattedMessage id="PasswordRecoveryPage.emailNotVerifiedContactAdmin" />
-      </p>
-    </div>
-  );
-
   const genericErrorContent = (
     <div className={css.genericErrorContent}>
       <IconKeys className={css.modalIcon} />
@@ -147,9 +124,7 @@ export const PasswordRecoveryPageComponent = props => {
   );
 
   let content;
-  if (isPasswordRecoveryEmailNotVerifiedError(recoveryError)) {
-    content = emailNotVerifiedContent;
-  } else if (isPasswordRecoveryEmailNotFoundError(recoveryError)) {
+  if (isPasswordRecoveryEmailNotFoundError(recoveryError)) {
     content = submitEmailContent;
   } else if (recoveryError) {
     content = genericErrorContent;
