@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Remove error handling for unverified email from PasswordRecoveryPage and translations
+  related to that. [#1021](https://github.com/sharetribe/flex-template-web/pull/1021)
+
 ## [v2.10.0] 2019-01-31
 
 - [add] Add audit script and include it as a CI job. We had security audit job previously on top of
