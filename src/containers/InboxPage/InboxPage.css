@@ -53,12 +53,15 @@
   }
 
   @media (--viewportLarge) {
-    padding: 113px 0 82px calc((100% - 1056px) / 2 + 74px);
+    padding: 113px 0 82px 36px;
     flex-direction: column;
     justify-content: flex-start;
     border: none;
     box-shadow: none;
     background-color: transparent;
+  }
+  @media (--viewportLargeWithPaddings) {
+    padding: 113px 0 82px calc((100% - 1056px) / 2);
   }
 }
 
